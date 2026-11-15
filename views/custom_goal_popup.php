@@ -1,6 +1,6 @@
 <?php
 include_once('../includes/session.php');
-//print_r($_SESSION); exit;	
+//print_r($_SESSION); exit;
 include_once('../dbconfig.php');
 include_once('../comm.php');
 ?>
@@ -9,15 +9,15 @@ include_once('../comm.php');
 		 var count = $(".itemRow123").length;
          count++;
         var htmlRows = '';
-        htmlRows += '<tr class="itemRow123">'; 
+        htmlRows += '<tr class="itemRow123">';
         htmlRows += '<td><input type="text" name="name[]" class="form-control" value="" id="name_'+count+'" aria-label="<?php echo __('Name'); ?>"></td> ';
-        htmlRows += '<td><textarea class="form-control" name="descrption[]" id="descrption_'+count+'" aria-label="<?php echo __('Description'); ?>"></textarea></td>';   
+        htmlRows += '<td><textarea class="form-control" name="descrption[]" id="descrption_'+count+'" aria-label="<?php echo __('Description'); ?>"></textarea></td>';
 
-        htmlRows += '<td><input type="text" name="short_code[]" class="form-control" value="" id="short_code_'+count+'" aria-label="<?php echo __('Short Code'); ?>"></td>';    
+        htmlRows += '<td><input type="text" name="short_code[]" class="form-control" value="" id="short_code_'+count+'" aria-label="<?php echo __('Short Code'); ?>"></td>';
         htmlRows += '<td><input type="text" name="frequency[]" class="form-control" value="" id="frequency_'+count+'" aria-label="<?php echo __('Frequency'); ?>"></td>';
         htmlRows += '<td><select class="form-control" name="mandatory[]" id="mandatory_'+count+'" aria-label="<?php echo __('Mandatory'); ?>"><option value="0"> <?php echo __('NO'); ?></option><option value="1"> <?php echo __('Yes'); ?></option></select></td>';
-        htmlRows += '<td><input type="hidden" value="0" id="delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)"><?php echo __('Delete'); ?></button></td>'; 
-        
+        htmlRows += '<td><input type="hidden" value="0" id="delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)"><?php echo __('Delete'); ?></button></td>';
+
         htmlRows += '</tr>';
         $('#invoiceItem123').append(htmlRows);
 	}
@@ -56,21 +56,21 @@ include_once('../comm.php');
 	        success: function(response) {
 	        	console.log(response);
 	            //$('.success').html(response);
-	            swal.fire({              
-							title: "<?php echo __('Record has been saved successfully'); ?> ",              
-							text: "<?php echo __('Do you want to close ?'); ?> ",              
-							type: "success",           
+	            swal.fire({
+							title: "<?php echo __('Record has been saved successfully'); ?> ",
+							text: "<?php echo __('Do you want to close ?'); ?> ",
+							type: "success",
 							buttonsStyling: false,
-							confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, close!'); ?>",    
+							confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, close!'); ?>",
 							confirmButtonClass: "btn btn-danger",
-							showCancelButton: true,     
-							cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, continue'); ?>",      
-							cancelButtonClass: "btn btn-default"        
+							showCancelButton: true,
+							cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, continue'); ?>",
+							cancelButtonClass: "btn btn-default"
 						}).then(function(result) {
 							if (result.value) {
 								$('#kt_modal_KTDatatable_remote').modal('hide');
 							}
-						}); 
+						});
 
 	        }
 	    });
@@ -79,17 +79,17 @@ include_once('../comm.php');
 
 <div class="modal-header">
 						<h5 class="modal-title">
-							<?php echo __('Goals'); ?>		
+							<?php echo __('Goals'); ?>
 							<small>&nbsp;&nbsp; <b><?php echo __('Table'); ?>: </b>&nbsp; <?php echo $table; ?> <b> &nbsp;&nbsp; <?php echo __('Field'); ?>: </b>&nbsp; <?php echo $field; ?> </small>
 						</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body" > 
+					<div class="modal-body" >
 						<div class="row align-items-center" style="margin-top: 10px;padding: 3px;">
 								<div class="col-lg-12">
-									<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem123">	
+									<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem123">
 											<tr>
 												<th scope="col" class="" width="25%"><?php echo __('Indicator Name'); ?></th>
 												<th scope="col" class="thheader" width="30%"><?php echo __('Weightage'); ?></th>
@@ -100,8 +100,8 @@ include_once('../comm.php');
 											</tr>
 											<?php /*if(count((array)$tr)>0){
 												$count = 1;
-												foreach ($tr as $td) {*/ //print_r($td); ?> 
-												
+												foreach ($tr as $td) {*/ //print_r($td); ?>
+
 
 												<tr class="itemRow123" id="qur_div_<?php echo $count; ?>"  >
 													<td>
@@ -127,12 +127,12 @@ include_once('../comm.php');
 														<button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)"><?php echo __('Delete'); ?></button>
 													</td>
 												</tr>
-											<?php/* $count++;  } }*/ ?>		
+											<?php/* $count++;  } }*/ ?>
 									</table>
 									<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
 								<!-- <button class="btn btn-danger delete" id="removeRows" type="button">- Delete</button>&nbsp;&nbsp; -->
 								<button class="btn btn-success" id="addRows" type="button" onclick="addmoreRows()">+ <?php echo __('Add More'); ?></button>&nbsp;&nbsp;
-						
+
 							</div>
 								</div>
 				<!--end: Search Form -->

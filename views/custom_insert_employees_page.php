@@ -498,7 +498,7 @@
                               </div>
                               <div class="col-xl-4">
                                  <div class="mt-2" style="display: <?php echo $display_div_ln; ?>" >
-                                    <span class="col-form-label"><?php echo __('Last Name'); ?> 
+                                    <span class="col-form-label"><?php echo __('Last Name'); ?>
                                     <?php if($text_color_ln!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['last_name']==''?__('No Data'):$empdata['last_name'] ;?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
                                     <div class="input-group input-icon-right">
@@ -554,7 +554,7 @@
                               </div>
                               <div class="col-xl-6">
                                  <div class="mt-2" style="display: <?php echo $display_div_pc; ?>" >
-                                    <span><?php echo __('Post code'); ?> 
+                                    <span><?php echo __('Post code'); ?>
                                     <?php if($text_color_pc!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['post_code']==''?__('No Data'):$empdata['post_code'] ;?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?>
                                     </span>
@@ -583,7 +583,7 @@
                            <div class="row">
                               <div class="col-lg-6">
                                  <div  class="mt-2" style="display: <?php echo $display_div_dep; ?>" >
-                                    <span class="col-form-label"><?php echo __('Department'); ?> 
+                                    <span class="col-form-label"><?php echo __('Department'); ?>
                                     <?php if($text_color_dep!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['department_name']==''?__('No Data'):$empdata['department_name'] ;?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
                                     <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['DEPARTMENT']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_dep; ?>" name="department_id">
@@ -654,7 +654,7 @@
                               <div class="col-lg-6">
                                  <div  class="mt-2" style="display: <?php echo $display_div_hs; ?>">
                                     <span class="col-form-label">
-                                    <?php echo __('Hiring Source'); ?> 
+                                    <?php echo __('Hiring Source'); ?>
                                     <?php if($text_color_hs!="") { ?>
                                     <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['hiring_source']==''?__('No Data'):$empdata['hiring_source'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span>
                                     <?php } ?>
@@ -818,7 +818,7 @@
                               </div>
                               <div class="col-lg-6">
                                  <div  class="mt-2" style="display: <?php echo $display_div_lv; ?>" >
-                                    <span class="col-form-label"><?php echo __('Level'); ?> 
+                                    <span class="col-form-label"><?php echo __('Level'); ?>
                                     <?php if($text_color_lv!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['levels_name']==''?__('No Data'):$empdata['levels_name'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
                                     <select aria-label="<?php echo __('Select option'); ?>" <?php echo $field_set['LEVEL']['readonly']!=0?'disabled="true"':'';?> class ="form-control form-control-lg  <?php echo $text_color_lv; ?>" name="level_id">
@@ -876,7 +876,7 @@
                                  ?>
                               <div class="col-lg-6">
                                  <div  class="mt-2" style="display: <?php echo $display_div_ety; ?>" >
-                                    <span class="col-form-label"><?php echo __('Employement Type'); ?> 
+                                    <span class="col-form-label"><?php echo __('Employement Type'); ?>
                                     <?php if($text_color_ety!="") { ?> <span data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['employee_type']==''?__('No Data'): $exist_emptypes; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </span> <?php
 } ?></span>
                                     <div class="radio-inline mt-5">
@@ -908,7 +908,7 @@
                               <div class="col-lg-6">
                                  <div  class="mt-2" style="display: <?php echo $display_div_ofph; ?>" >
                                     <span class="col-form-label">
-                                       <?php echo __('Office Phone'); ?> 
+                                       <?php echo __('Office Phone'); ?>
                                        <?php if($text_color_ofph!="") { ?>
                                        <div data-toggle="tooltip" data-theme="dark" title="<?php echo $empdata['office_phone']==''?__('No Data'):$empdata['office_phone'] ; ?>"><i class="fa fa-comment-alt text-success mr-2 icon-nm"></i>   </div>
                                        <?php } ?>

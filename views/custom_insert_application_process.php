@@ -1,7 +1,7 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = "1";
 if (isset($_POST['submit'])) {
-    
+
     // Process form submission
     $selected_module = $_POST['module_id'] ?? '';
     $processes = $_POST['processes'] ?? [];
@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
             'name' => $process['name'],
             'module_id' => $process['module_id'],
             'pages' => []
-        ];  
+        ];
         // Add process ID if it exists (for existing processes)
         if (isset($process['id'])) {
             $processData['id'] = $process['id'];
@@ -29,15 +29,15 @@ if (isset($_POST['submit'])) {
             $pageTypes = isset($process_pages[$idx]['type']) ? $process_pages[$idx]['type'] : [];
             $pageCustoms = isset($process_pages[$idx]['custom']) ? $process_pages[$idx]['custom'] : [];
             $pageIds = isset($process_page_ids[$idx]) ? $process_page_ids[$idx] : [];
-            
+
             for ($i = 0; $i < count($pageNames); $i++) {
                 $pageName = $pageNames[$i];
                 $pageType = isset($pageTypes[$i]) ? $pageTypes[$i] : '';
-                
+
                 // If type is 'other', use the custom name
                 // if ($pageType == 'other') {
                 //     $pageName = $pageCustoms[$i];
-                // }       
+                // }
                 $pageData = [
                     'name' => $pageName,
                     'type' => $pageType,
@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
                 if (isset($pageIds[$i]) && !empty($pageIds[$i])) {
                     $pageData['id'] = $pageIds[$i];
                 }
-                
+
                 $processData['pages'][] = $pageData;
             }
         }
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
     $url = API . "?mode=insertmoduleprocess&method=post";
     $response = file_post_contents($url, $postData, 'insert');
     $response = json_decode($response, 1);
-    //echo "<pre>"; print_r($response); echo "</pre>"; 
+    //echo "<pre>"; print_r($response); echo "</pre>";
     ?>
     <script type="text/javascript">
         window.addEventListener("load", function() {

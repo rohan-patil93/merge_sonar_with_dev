@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(isset($_POST['emp_id'])){
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
@@ -12,7 +12,7 @@ if(isset($_GET['Rid']) AND $_GET['Rid']!=""){
 }else{
   	$employee_id = $_SESSION['emp_id'];
 }
-$url = API."?mode=getemployees&employee_id=".$employee_id."&working_role_short_code=".$_SESSION['working_role_short_code']; 
+$url = API."?mode=getemployees&employee_id=".$employee_id."&working_role_short_code=".$_SESSION['working_role_short_code'];
 $response = callAPI($url);
 $result = json_decode($response,1);
 //echo "<pre>"; print_r($result['emp_contacts']); echo "</pre>";
@@ -56,7 +56,7 @@ $leavetype_detrails  = $emp_leave_balances['leavetype_detrails'];
 function replaceNetTabAndsinglequote($string){
 	$search = ["\t", "'"]; // Characters to search for: tab and single quote
 	$replace = ''; // Empty string to remove the characters
-	$result = str_replace($search, $replace, $string); 
+	$result = str_replace($search, $replace, $string);
 	return $result;
 }
 
@@ -74,15 +74,15 @@ $bank_work_flow = "Y";
 	var functionformname = "'"+formname+"'";
 	var functiontransactiontable = "'"+transaction_table+"'";
 	if(pagetype =='experience_details'){
-       $("#experience_details_div").addClass("div-covert-popup"); 
+       $("#experience_details_div").addClass("div-covert-popup");
     }else if(pagetype =='employee_qualifications'){
-       $("#employee_qualifications_div").addClass("div-covert-popup"); 
+       $("#employee_qualifications_div").addClass("div-covert-popup");
     }else if(pagetype =='employee_dependents'){
-       $("#employee_dependents_div").addClass("div-covert-popup"); 
+       $("#employee_dependents_div").addClass("div-covert-popup");
     }else if(pagetype =='employee_contacts'){
-       $("#employee_contacts_div").addClass("div-covert-popup"); 
+       $("#employee_contacts_div").addClass("div-covert-popup");
     }else if(pagetype =='emp_visa'){
-       $("#visa_detail_div").addClass("div-covert-popup"); 
+       $("#visa_detail_div").addClass("div-covert-popup");
     }
 
 
@@ -99,20 +99,20 @@ $bank_work_flow = "Y";
 	    		var functionedittype = "'INSERT'";
 	    		$("#"+loadpagebtn).html('<button class="btn btn-primary" onclick="editEmployeeProfile('+functionpagetype+','+functionedittype+','+functionloadpage+','+functionloadpagebtn+','+functionformname+','+functiontransactiontable+')"><i class="ti-pencil text-white"></i> <?php echo htmlspecialchars(__('Edit'), ENT_QUOTES); ?></button>');
 	    		if(pagetype =='experience_details'){
-			       $("#experience_details_div").removeClass("div-covert-popup"); 
+			       $("#experience_details_div").removeClass("div-covert-popup");
 			    }else if(pagetype =='employee_qualifications'){
-			       $("#employee_qualifications_div").removeClass("div-covert-popup"); 
+			       $("#employee_qualifications_div").removeClass("div-covert-popup");
 			    }else if(pagetype =='employee_dependents'){
-			       $("#employee_dependents_div").removeClass("div-covert-popup"); 
+			       $("#employee_dependents_div").removeClass("div-covert-popup");
 			    }else if(pagetype =='employee_contacts'){
-			       $("#employee_contacts_div").removeClass("div-covert-popup"); 
+			       $("#employee_contacts_div").removeClass("div-covert-popup");
 			    }else if(pagetype =='emp_visa'){
-			       $("#visa_detail_div").removeClass("div-covert-popup"); 
+			       $("#visa_detail_div").removeClass("div-covert-popup");
 			    }
 	    	}else{
 				var functionedittype = "'VIEW'";
 				var htmlbutton = "";
-				htmlbutton += '<button class="btn btn-primary m-r-20" onclick="insertEmployeeProfile('+functionpagetype+','+functionedittype+','+functionloadpage+','+functionloadpagebtn+','+functionformname+','+functiontransactiontable+')"><i class="ti-check text-white"></i> <?php echo htmlspecialchars(__('Save'), ENT_QUOTES); ?></button>'; 
+				htmlbutton += '<button class="btn btn-primary m-r-20" onclick="insertEmployeeProfile('+functionpagetype+','+functionedittype+','+functionloadpage+','+functionloadpagebtn+','+functionformname+','+functiontransactiontable+')"><i class="ti-check text-white"></i> <?php echo htmlspecialchars(__('Save'), ENT_QUOTES); ?></button>';
 
 				htmlbutton += '<button class="btn btn-danger" onclick="editEmployeeProfile('+functionpagetype+','+functionedittype+','+functionloadpage+','+functionloadpagebtn+','+functionformname+','+functiontransactiontable+')"><i class="ti-close text-white"></i> <?php echo htmlspecialchars(__('Cancel'), ENT_QUOTES); ?></button>'
 
@@ -129,7 +129,7 @@ $bank_work_flow = "Y";
 			//var elem = Array.prototype.slice.call(document.querySelectorAll('.js-switch-vendor'));
 			//elem.forEach(function(html) {
 				//var switchery = new Switchery(html, { color: '#4099ff', jackColor: '#fff' });
-			//});	
+			//});
 	    },
 	    error:function (){}
   	});
@@ -153,7 +153,7 @@ function reloadEmployeeSkills(emp_id){
 }
 function insertEmployeeProfile(pagetype="",edittype="",loadpage="",loadpagebtn="",formname="",transaction_table){
 	$("#"+loadpage).css('opacity','0.2');
-	
+
 	var employee_id = '<?php echo $employee_id; ?>'
 	var functionpagetype = "'"+pagetype+"'";
 	var functionloadpage = "'"+loadpage+"'";
@@ -162,13 +162,13 @@ function insertEmployeeProfile(pagetype="",edittype="",loadpage="",loadpagebtn="
 	var functiontransactiontable = "'"+transaction_table+"'";
 
 	var formData = new FormData();
-	formData.append("page", "updateemployees"); 
+	formData.append("page", "updateemployees");
 	formData.append("employee_id",employee_id);
 	formData.append("transaction_table", transaction_table);
 
 	var dataArray = $("#"+formname).serializeArray()
     $(dataArray).each(function(i, field){
-        formData.append(field.name, field.value); 
+        formData.append(field.name, field.value);
     });
     if(transaction_table =='emp_work_experiences'){
 	    $.each($("input[name=work_experience_attachment]"), function(i, obj) {
@@ -242,7 +242,7 @@ function showmarriagedate(value){
  	}
 }
 function selectDisability(){
-	
+
 	var disability = $('#disability:checked').val();
 	console.log(disability);
 	if(disability=='0') {
@@ -267,12 +267,12 @@ function addexpreencerows(){
 	maxexpr+=1;
 	 var htmlRows = '';
 	 var rowid = 'exp_details_'+maxexpr;
-	 htmlRows += '<tr id="'+rowid+'">'; 
-	 
-	 htmlRows += '<td class="p-2"><input type="text" name="company_name[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Company Name'); ?>">  </td>'; 
-	 htmlRows += '<td class="p-2"><input type="text" name="job_descrption[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Job Descrption'); ?>">  </td>'; 
-	 htmlRows += '<td class="p-2"><input type="text" name="work_from[]"  class="form-control datepicker"   autocomplete="off" placeholder="<?php echo __('Enter From Date'); ?>"> </td>'; 
-	 htmlRows += '<td class="p-2"><input type="txet" name="work_to[]"  class="form-control datepicker"  autocomplete="off" placeholder="<?php echo __('Enter To Date'); ?>">  </td>'; 
+	 htmlRows += '<tr id="'+rowid+'">';
+
+	 htmlRows += '<td class="p-2"><input type="text" name="company_name[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Company Name'); ?>">  </td>';
+	 htmlRows += '<td class="p-2"><input type="text" name="job_descrption[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Job Descrption'); ?>">  </td>';
+	 htmlRows += '<td class="p-2"><input type="text" name="work_from[]"  class="form-control datepicker"   autocomplete="off" placeholder="<?php echo __('Enter From Date'); ?>"> </td>';
+	 htmlRows += '<td class="p-2"><input type="txet" name="work_to[]"  class="form-control datepicker"  autocomplete="off" placeholder="<?php echo __('Enter To Date'); ?>">  </td>';
 
 	 var onchval = "'workexperiencefilename_"+maxexpr+"'";
 	 htmlRows += '<td class="p-2 w-b-w-s"><div class="row"><div class="col-lg-6"><div class="image-input image-input-empty image-input-outline" id="kt_image_5"><label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Upload'); ?>"><span><i class="fa fa-upload"></i></span><input type="file" name="work_experience_attachment" class="form-control" onchange="getAttachedFileName(this,'+onchval+')"><input type="hidden" name="old_work_experience_attachment[]" value=""></label></div></div><div class="col-lg-6 p-0"></div></div><span id="workexperiencefilename_'+maxexpr+'" class="cursor-pointer custom-limit-text" style="--linehide: 1;"></span></td>';
@@ -284,7 +284,7 @@ function addexpreencerows(){
 	 $(".js-example-basic-single").select2();
 	 $(".js-example-disabled-results").select2();
 	 $( ".datepicker" ).datepicker({
-	  showOn: "both", 
+	  showOn: "both",
 	  buttonText: "<i class='ti-calendar'></i>",
 	  dateFormat: "<?php echo $_SESSION['system_date_formate'] ?>",
 	  changeMonth: true,
@@ -297,16 +297,16 @@ function addEmpEducationsRows(){
 	maxedurow+=1;
 	 var htmlRows = '';
 	 var rowid = 'emp_educations_'+maxedurow;
-	 htmlRows += '<tr id="'+rowid+'">';  
+	 htmlRows += '<tr id="'+rowid+'">';
 
-	 htmlRows += '<td class="p-2"><input type="text" name="institute_name[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Institute Name'); ?>">  </td>'; 
-	 htmlRows += '<td class="w-full p-2"><select class="form-control form-select js-example-basic-single" name="education_type[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($education_type as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo $edutype['genc_detail_name']; ?></option> <?php } ?></select> </td>'; 
-	 htmlRows += '<td  class="p-2"><input type="text" name="start_date[]"  class="form-control datepicker"  autocomplete="off" placeholder="<?php echo __('Enter Start date'); ?>"> </td>'; 
-	 htmlRows += '<td  class="p-2"><input type="txet" name="end_date[]"  class="form-control datepicker"   autocomplete="off" placeholder="<?php echo __('Enter End Date'); ?>">  </td>'; 
-	 htmlRows += '<td  class="p-2"><input type="text" name="score[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Score'); ?>">  </td>'; 
+	 htmlRows += '<td class="p-2"><input type="text" name="institute_name[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Institute Name'); ?>">  </td>';
+	 htmlRows += '<td class="w-full p-2"><select class="form-control form-select js-example-basic-single" name="education_type[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($education_type as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo $edutype['genc_detail_name']; ?></option> <?php } ?></select> </td>';
+	 htmlRows += '<td  class="p-2"><input type="text" name="start_date[]"  class="form-control datepicker"  autocomplete="off" placeholder="<?php echo __('Enter Start date'); ?>"> </td>';
+	 htmlRows += '<td  class="p-2"><input type="txet" name="end_date[]"  class="form-control datepicker"   autocomplete="off" placeholder="<?php echo __('Enter End Date'); ?>">  </td>';
+	 htmlRows += '<td  class="p-2"><input type="text" name="score[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Score'); ?>">  </td>';
 
 	 var onchval = "'educationsfilename_"+maxedurow+"'";
-	 
+
 	 htmlRows += '<td class="p-2 w-b-w-s"><div class="row"><div class="col-lg-6"><div class="image-input image-input-empty image-input-outline" id="kt_image_5"><label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Upload'); ?>"><span><i class="fa fa-upload"></i></span><input type="file" name="educations_attachment" class="form-control" onchange="getAttachedFileName(this,'+onchval+')"><input type="hidden" name="old_educations_attachment[]" value=""></label></div></div><div class="col-lg-6 p-0"></div></div><span id="educationsfilename_'+maxedurow+'" class="cursor-pointer custom-limit-text" style="--linehide: 1;"></span></td>';
 
 	htmlRows += '<td class="p-2"><span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="" onclick="removedRow(\''+rowid+'\')" data-bs-original-title="<?php echo __('Remove'); ?>"><i class="ti-trash"></i></span></td>';
@@ -316,7 +316,7 @@ function addEmpEducationsRows(){
 	 $(".js-example-basic-single").select2();
 	 $(".js-example-disabled-results").select2();
 	 $( ".datepicker" ).datepicker({
-	  showOn: "both", 
+	  showOn: "both",
 	  buttonText: "<i class='ti-calendar'></i>",
 	  dateFormat: "<?php echo $_SESSION['system_date_formate'] ?>",
 	  changeMonth: true,
@@ -328,10 +328,10 @@ function adddeprows(){
 	maxdependrow+=1;
 	var rowid = 'employee_dependents_'+maxdependrow;
 	 var htmlRows = '';
-	  htmlRows += '<tr id="'+rowid+'">'; 
-	 htmlRows += '<td><input type="text" name="dependent_name[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Dependent Name'); ?>">  </td>'; 
-	 htmlRows += '<td class="w-full"><select class="form-control form-select js-example-basic-single" name="dependent_relationship_type[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($relations as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo replaceNetTabAndsinglequote($reladata['relation_name']); ?></option> <?php   } ?></select>  </td>'; 
-	 htmlRows += '<td><input type="text" name="dependent_date_of_birth[]"  class="form-control datepicker" autocomplete="off" placeholder="<?php echo __('Enter Date Of Birth'); ?>">  </td>';  
+	  htmlRows += '<tr id="'+rowid+'">';
+	 htmlRows += '<td><input type="text" name="dependent_name[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Dependent Name'); ?>">  </td>';
+	 htmlRows += '<td class="w-full"><select class="form-control form-select js-example-basic-single" name="dependent_relationship_type[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($relations as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo replaceNetTabAndsinglequote($reladata['relation_name']); ?></option> <?php   } ?></select>  </td>';
+	 htmlRows += '<td><input type="text" name="dependent_date_of_birth[]"  class="form-control datepicker" autocomplete="off" placeholder="<?php echo __('Enter Date Of Birth'); ?>">  </td>';
 
 	htmlRows += '<td class="p-2"><span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="" onclick="removedRow(\''+rowid+'\')" data-bs-original-title="<?php echo __('Remove'); ?>"><i class="ti-trash"></i></span></td>';
 	 htmlRows += '</tr>';
@@ -339,7 +339,7 @@ function adddeprows(){
 	 $(".js-example-basic-single").select2();
 	 $(".js-example-disabled-results").select2();
 	 $( ".datepicker" ).datepicker({
-	  showOn: "both", 
+	  showOn: "both",
 	  buttonText: "<i class='ti-calendar'></i>",
 	  dateFormat: "<?php echo $_SESSION['system_date_formate'] ?>",
 	  changeMonth: true,
@@ -352,18 +352,18 @@ function addEmployeeContactsRows(){
 	maxempcontactrow+=1;
 	var rowid = 'emp_contacts_'+maxempcontactrow;
 	 var htmlRows = '';
-	htmlRows += '<tr id="'+rowid+'">';  
-	 htmlRows += '<td class="p-2"><input type="text" name="contact_name[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Contact Name'); ?>"> </td>'; 
-	 htmlRows += '<td class="w-full p-2"><select class="form-control form-select js-example-basic-single" name="contact_relationship[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($relations as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo replaceNetTabAndsinglequote($reladata['relation_name']); ?></option> <?php   } ?></select>    </td>'; 
-	 htmlRows += '<td class="p-2"><input type="text" name="contact_home_no[]"  class="form-control "  autocomplete="off" placeholder="<?php echo __('Enter Contact Home No'); ?>">  </td>';   
-	 htmlRows += '<td class="p-2"><input type="text" name="contact_mobile_no[]"  class="form-control "  autocomplete="off" placeholder="<?php echo __('Enter Contact Mobile No'); ?>">  </td>'; 
+	htmlRows += '<tr id="'+rowid+'">';
+	 htmlRows += '<td class="p-2"><input type="text" name="contact_name[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Contact Name'); ?>"> </td>';
+	 htmlRows += '<td class="w-full p-2"><select class="form-control form-select js-example-basic-single" name="contact_relationship[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($relations as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo replaceNetTabAndsinglequote($reladata['relation_name']); ?></option> <?php   } ?></select>    </td>';
+	 htmlRows += '<td class="p-2"><input type="text" name="contact_home_no[]"  class="form-control "  autocomplete="off" placeholder="<?php echo __('Enter Contact Home No'); ?>">  </td>';
+	 htmlRows += '<td class="p-2"><input type="text" name="contact_mobile_no[]"  class="form-control "  autocomplete="off" placeholder="<?php echo __('Enter Contact Mobile No'); ?>">  </td>';
 	 htmlRows += '<td class="p-2"><span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="" onclick="removedRow(\''+rowid+'\')" data-bs-original-title="<?php echo __('Remove'); ?>"><i class="ti-trash"></i></span></td>';
 	 htmlRows += '</tr>';
 	 $('#emergetable').append(htmlRows);
 	 $(".js-example-basic-single").select2();
 	 $(".js-example-disabled-results").select2();
 	 $( ".datepicker" ).datepicker({
-	  showOn: "both", 
+	  showOn: "both",
 	  buttonText: "<i class='ti-calendar'></i>",
 	  dateFormat: "<?php echo $_SESSION['system_date_formate'] ?>",
 	  changeMonth: true,
@@ -375,18 +375,18 @@ function addEmpVisatableRows(){
 	maxempvisarow+=1;
 	var rowid = 'emp_visa_'+maxempvisarow;
 	 var htmlRows = '';
-	htmlRows += '<tr id="'+rowid+'">';  
-	 htmlRows += '<td class="p-2"><input type="hidden" name="visa_rowid[]" class="form-control " autocomplete="off" value=""><input type="text" name="visa_number[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Visa Number'); ?>"> </td>'; 
-	 htmlRows += '<td class="w-full p-2"><select class="form-control form-select js-example-basic-single" name="country_id[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($countries as  $countrys) {   ?> <option   value="<?php echo $countrys['id']; ?>"> <?php echo replaceNetTabAndsinglequote($countrys['country_name']); ?></option> <?php   } ?></select>    </td>';  
-	 htmlRows += '<td class="p-2"><input type="text" name="visa_issue_date[]" class="form-control datepicker" value="" autocomplete="off" placeholder="<?php echo __('Enter Visa Issue Date'); ?>"> </td>';   
-	 htmlRows += '<td class="p-2"><input type="text" name="visa_expiry_date[]" class="form-control datepicker" value="" autocomplete="off" placeholder="<?php echo __('Enter Visa Expiry Date'); ?>"></td>'; 
+	htmlRows += '<tr id="'+rowid+'">';
+	 htmlRows += '<td class="p-2"><input type="hidden" name="visa_rowid[]" class="form-control " autocomplete="off" value=""><input type="text" name="visa_number[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Visa Number'); ?>"> </td>';
+	 htmlRows += '<td class="w-full p-2"><select class="form-control form-select js-example-basic-single" name="country_id[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($countries as  $countrys) {   ?> <option   value="<?php echo $countrys['id']; ?>"> <?php echo replaceNetTabAndsinglequote($countrys['country_name']); ?></option> <?php   } ?></select>    </td>';
+	 htmlRows += '<td class="p-2"><input type="text" name="visa_issue_date[]" class="form-control datepicker" value="" autocomplete="off" placeholder="<?php echo __('Enter Visa Issue Date'); ?>"> </td>';
+	 htmlRows += '<td class="p-2"><input type="text" name="visa_expiry_date[]" class="form-control datepicker" value="" autocomplete="off" placeholder="<?php echo __('Enter Visa Expiry Date'); ?>"></td>';
 	 htmlRows += '<td class="p-2"><span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="" onclick="removedRow(\''+rowid+'\')" data-bs-original-title="<?php echo __('Remove'); ?>"><i class="ti-trash"></i></span></td>';
 	 htmlRows += '</tr>';
 	 $('#emp_visatable').append(htmlRows);
 	 $(".js-example-basic-single").select2();
 	 $(".js-example-disabled-results").select2();
 	 $( ".datepicker" ).datepicker({
-	  showOn: "both", 
+	  showOn: "both",
 	  buttonText: "<i class='ti-calendar'></i>",
 	  dateFormat: "<?php echo $_SESSION['system_date_formate'] ?>",
 	  changeMonth: true,
@@ -396,7 +396,7 @@ function addEmpVisatableRows(){
 function selectdateOfBirth(valu){
 	var selected_dates = getDateMonthYear(valu,'<?php echo $_SESSION['system_date_formate'] ?>');
 	var this_year = new Date().getFullYear()
-	var this_month = new Date().getMonth();  
+	var this_month = new Date().getMonth();
 	var ageyear = parseInt(this_year)-parseInt(selected_dates['year']);
 	var agemonth = parseInt(this_month)-parseInt(selected_dates['month']-1);
 	if (agemonth < 0) {
@@ -441,8 +441,8 @@ function getDateMonthYear(dateString, format) {
 		    // Construct the Date object
 		   // var date = new Date(year, month, day);
 		   	var dateary = [];
-		   	dateary['year'] = year; 
-		   	dateary['month'] = month; 
+		   	dateary['year'] = year;
+		   	dateary['month'] = month;
 		   	dateary['day'] = day;
 		    return dateary;
 		}
@@ -476,7 +476,7 @@ function changeonsite(id,name){
   	$('#modal_status').modal('show');
   	$("#onsite_"+id).val(onsite);
 	$(".onsite_lable"+id).text(status);
-  	$(".onsite_lable"+id).css("color",color);  
+  	$(".onsite_lable"+id).css("color",color);
 
 }
 function changebillable(id,name){
@@ -523,20 +523,20 @@ function cancelAddBankRequest(rid=""){
 	    type: "POST",
 	    success:function(data){
 	    	$("#ajaxemployeebankdetailstab").html(data);
-	    	
+
 	    	var htmlbutton = '<button class="btn btn-success " onclick="addBankRequest()"><i class="icofont icofont-plus icon-white "></i> <?php echo htmlspecialchars(__('Add Bank Request'), ENT_QUOTES); ?></button>'
 			$("#bank_details_employee_btn").html(htmlbutton);
 
 	    	$(".js-example-basic-single").select2();
 	    	$('[data-bs-toggle="tooltip"]').tooltip();
 	    }
-	}); 
+	});
 }
 function addBankRequest(rid=""){
 	var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
 	$('#ajaxemployeebankdetailstab').html(htmloader);
 	var htmlbutton = "";
-	htmlbutton += '<button class="btn btn-primary m-r-20" onclick="insertEMPBank('+rid+')"><i class="ti-check text-white"></i> <?php echo htmlspecialchars(__('Save'), ENT_QUOTES); ?></button>'; 
+	htmlbutton += '<button class="btn btn-primary m-r-20" onclick="insertEMPBank('+rid+')"><i class="ti-check text-white"></i> <?php echo htmlspecialchars(__('Save'), ENT_QUOTES); ?></button>';
 	htmlbutton += '<button class="btn btn-danger" onclick="cancelAddBankRequest('+rid+')"><i class="ti-close text-white"></i> <?php echo htmlspecialchars(__('Cancel'), ENT_QUOTES); ?></button>'
 	$("#bank_details_employee_btn").html(htmlbutton);
 	jQuery.ajax({
@@ -553,11 +553,11 @@ function addBankRequest(rid=""){
 function insertEMPBank(rid=""){
 	$("#ajaxemployeebankdetailstab").css('opacity','0.2');
 	var formData = new FormData();
-	formData.append("page", "insertempbanks"); 
+	formData.append("page", "insertempbanks");
 	formData.append("employee_id",'<?php echo $employee_id; ?>');
 	var dataArray = $("#bank_details_form").serializeArray()
     $(dataArray).each(function(i, field){
-        formData.append(field.name, field.value); 
+        formData.append(field.name, field.value);
     });
 	jQuery.ajax({
 	    url: "ajax.php",
@@ -571,19 +571,19 @@ function insertEMPBank(rid=""){
             if(result.emp_banks['status'] == "fail"){
                 swal("<?php echo ucwords($_SESSION['config']['name']); ?>", result.emp_banks['message'], "error");
             }else{
-              if(result.emp_banks['LASTID'] == "0"){    
+              if(result.emp_banks['LASTID'] == "0"){
                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
                 }else{
                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3000']; ?>','');
                 }
                cancelAddBankRequest(rid);
-            }   
+            }
 
 	    }
 	});
 }
 function insertReleive(){
-	
+
 	var rev=  $("#releive_date").val();
 	if(rev!=''){
 		$("#releive_date_error").hide();
@@ -613,17 +613,17 @@ function insertReleive(){
 	<h5 class="modal-title">
 		<?php echo __('Employee Information'); ?>
 	</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>			
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 <?php } ?>
 <div class="<?php echo $_POST['emp_id']!="" || $_POST['ajaxpage'] =="Y"?"p-3":""; ?>">
-	<?php 
+	<?php
 	$accessbtnclass = "btn-primary";
 			$accessbtnclasssuccess = "btn-success";
-			if($data['date_of_leaving']!=""){ 
+			if($data['date_of_leaving']!=""){
             $is_was = 'is';
             $is_was_color = 'warning';
-            
+
             if(strtotime($data['date_of_leaving']) < strtotime(date('Y-m-d'))){
                $is_was = 'was';
                $is_was_color = 'danger';
@@ -635,7 +635,7 @@ function insertReleive(){
            <p class="text-white"><strong> <?php echo $data['display_name']." ( ".$data['emp_code']." )"; ?> <?php echo __('is resigned,'); ?></strong> <small> <?php echo __('The last working day'); ?>  <?php echo $is_was." ".fromDate($data['date_of_leaving']); ?> </small></p>
          <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
       </div>
-   <?php } ?>	
+   <?php } ?>
 
 
 	<?php  /**
@@ -646,7 +646,7 @@ function insertReleive(){
 		<p class="text-white"><strong> <?php echo $data['display_name']." ( ".$data['emp_code']." )"; ?> <?php echo __('is resigned,'); ?></strong> <small> <?php echo __('The last working day is'); ?> <?php echo fromDate($data['date_of_leaving']); ?> </small></p>
 		<button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
 		</div>
-	<?php 
+	<?php
 	$accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 	 } **/ ?>
 	<div class="mb-3">
@@ -665,12 +665,12 @@ function insertReleive(){
 	          <a class="nav-link besic-info-txt-start" id="home-tab-7" data-bs-toggle="tab" href="#home-7"  role="tab">
 	            <span class="nav-text"><?php echo __('Calendar'); ?></span>
 	            </a>
-	        </li> 
+	        </li>
 	         <li class="nav-item">
 	          <a class="nav-link besic-info-txt-start" id="home-tab-att" data-bs-toggle="tab" href="#home-att"  role="tab">
 	            <span class="nav-text"><?php echo __('Attendance'); ?></span>
 	            </a>
-	        </li>    
+	        </li>
 	        <?php if(in_array('8',(array)$_SESSION['module_list']) || $data['employee_type'] == '1'){ ?>
 				<li class="nav-item">
 	                <a class="nav-link besic-info-txt-start" id="home-tab-70" data-bs-toggle="tab" href="#home-70" role="tab">
@@ -707,17 +707,17 @@ function insertReleive(){
 					</div>
 				</div>
 				<div class="card-body">
-			 		<div class="row col-lg-12">  
-			 		
+			 		<div class="row col-lg-12">
+
 			 		<div class="form-group col-lg-6">
 			 				<span class="form-label d-inline-block fw-bold"><?php echo __('Relieve Reason'); ?> </span>
-			 				<select aria-label="<?= htmlspecialchars(__('Termination type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" id="termination_type" name="termination_type"> 
+			 				<select aria-label="<?= htmlspecialchars(__('Termination type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" id="termination_type" name="termination_type">
 			 					<option value="0"><?php echo __('Select Any One'); ?></option>
 			 					<?php foreach($result['termination_type'] as $termination_types){ ?>
 			 						<option <?php if($data_termination['termination_type']==$termination_types['genc_detail_code']){ echo __('selected'); } ?> value="<?php echo $termination_types['genc_detail_code']; ?>"><?php echo $termination_types['genc_detail_name']; ?></option>
 			 					<?php } ?>
 			 				</select>
-			 			</div> 
+			 			</div>
 			 			<div class="form-group col-lg-6">
 			 				<span class="form-label d-inline-block fw-bold"><?php echo __('Resignation Date'); ?> </span>
 			 				<span class="d-block error-message text-danger"></span>
@@ -736,18 +736,18 @@ function insertReleive(){
 			 			<div id="releive_date_error" style="display: none;"> <?php echo __('Please Fill The Releive Date'); ?></div>
 			 			<div class="form-group col-lg-6 ">
 			 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Comments'); ?></span>
-			 				<textarea aria-label="<?= htmlspecialchars(__('Releive comments'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " id="releive_comments" name="releive_comments"><?php echo $data_termination['remarks_by_admin']; ?> </textarea> 
-			 			</div> 
+			 				<textarea aria-label="<?= htmlspecialchars(__('Releive comments'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " id="releive_comments" name="releive_comments"><?php echo $data_termination['remarks_by_admin']; ?> </textarea>
+			 			</div>
 			 		</div>
 			 	</div>
 	 		</div>
 	 	</div>
-	 	<div class="tab-pane fade" id="leave_balance_tab" role="tabpanel" > 
+	 	<div class="tab-pane fade" id="leave_balance_tab" role="tabpanel" >
 	 		<div class="row p-4">
-				<?php 
+				<?php
 				$mk=0; if(count((array)$emp_leave_balances['available_category']) !='0'){ ?>
-				<?php 
-				foreach($emp_leave_balances['available_category'] as $key=>$values){ 
+				<?php
+				foreach($emp_leave_balances['available_category'] as $key=>$values){
 					$leave_details  = $leavetype_detrails[$key]['leavedetails']; ?>
 					<div class="col-lg-2">
 						<div class="card card-custom gutter-b mb-0" >
@@ -773,21 +773,21 @@ function insertReleive(){
 					</div>
 				<?php $mk++; } }else{  ?>
 					<div class="card-px text-center py-20 mt-2">
-			            <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No Leaves'); ?> </p>   
+			            <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No Leaves'); ?> </p>
 			            <div class="text-center px-4">
 			                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-			            </div>   
+			            </div>
 			        </div>
 
 				<?php } ?>
 			</div>
 	 	</div>
-	     <div class="tab-pane fade active show" id="employee_basic_information" role="tabpanel" > 
+	     <div class="tab-pane fade active show" id="employee_basic_information" role="tabpanel" >
 			<div class="row">
 				<div class="col-lg-7">
-					<?php  
-			            $fieldaccesright = $vafield['basic_information']; 
-			            if($fieldaccesright['access'] !="NA"){ 
+					<?php
+			            $fieldaccesright = $vafield['basic_information'];
+			            if($fieldaccesright['access'] !="NA"){
 			        ?>
 					<div class="card">
 						<div class="card-header">
@@ -802,7 +802,7 @@ function insertReleive(){
 							<form method="post" id="basic_information_form" >
 								<input type="hidden" name="sadsfc" value="sdfedrfv">
 								<div id="ajaxemployeebasicinformationtab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "basic_information";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -811,16 +811,16 @@ function insertReleive(){
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
 			  					//include('views/custom_insert_onboarding_employees_ajax.php');
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
 			  			</div>
 			   		</div>
-			   		<?php  
+			   		<?php
 			   			}
-			            $fieldaccesright = $vafield['work']; 
-			            if($fieldaccesright['access'] !="NA"){ 
+			            $fieldaccesright = $vafield['work'];
+			            if($fieldaccesright['access'] !="NA"){
 			        ?>
 					<div class="card">
 						<div class="card-header">
@@ -834,7 +834,7 @@ function insertReleive(){
 						<div class="card-body" >
 							<form method="post" id="work_detail_form" >
 					  			<div id="ajaxemployeeworkdetailstab">
-									<?php 
+									<?php
 					  					$_POST['edittype'] = "VIEW";
 					  					$_POST['showpagetype'] = "work_details";
 					  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -842,16 +842,16 @@ function insertReleive(){
 										}else{
 											include("custom_insert_onboarding_employees_ajax.php");
 										}
-					  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+					  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 					  				?>
 				  				</div>
 				  			</form>
 				  		</div>
 			   		</div>
 			   		<?php } ?>
-			   		<?php  
-			            $fieldaccesright = $vafield['personal_details']; 
-			            if($fieldaccesright['access'] !="NA"){ 
+			   		<?php
+			            $fieldaccesright = $vafield['personal_details'];
+			            if($fieldaccesright['access'] !="NA"){
 			        ?>
 					<div class="card">
 						<div class="card-header">
@@ -865,7 +865,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="personal_detail_form" >
 			  					<div id="ajaxemployeepersonaldetailstab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "personal_details";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -873,7 +873,7 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
@@ -881,8 +881,8 @@ function insertReleive(){
 			   		</div>
 			   		<?php } ?>
 			   		<?php if($bank_work_flow == 'Y'){
-			            $fieldaccesright = $vafield['bank_details']; 
-			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['bank_details']!="NA"){ 
+			            $fieldaccesright = $vafield['bank_details'];
+			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['bank_details']!="NA"){
 			        ?>
 					<div class="card">
 						<div class="card-header">
@@ -895,7 +895,7 @@ function insertReleive(){
 						</div>
 						<div class="card-body">
 		  					<div id="ajaxemployeebankdetailstab">
-						<?php 
+						<?php
 		  					$_POST['edittype'] = "VIEW";
 		  					$_POST['showpagetype'] = "bank_details";
 		  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -903,15 +903,15 @@ function insertReleive(){
 							}else{
 								include("custom_insert_onboarding_employees_ajax.php");
 							}
-		  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+		  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 		  				?>
 				  			</div>
 					  	</div>
 				   	</div>
 				   	<?php } ?>
 			   		<?php }else{
-			            $fieldaccesright = $vafield['bank_details']; 
-			            if($fieldaccesright['access'] !="NA"){ 
+			            $fieldaccesright = $vafield['bank_details'];
+			            if($fieldaccesright['access'] !="NA"){
 			        ?>
 					<div class="card">
 						<div class="card-header">
@@ -925,7 +925,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="bank_details_form" >
 			  					<div id="ajaxemployeebankdetailstab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "bank_details";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -933,15 +933,15 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
 					  	</div>
 				   	</div>
 				   	<?php } } ?>
-			   		<?php  
-			            $fieldaccesright = $vafield['employee_buddies']; 
+			   		<?php
+			            $fieldaccesright = $vafield['employee_buddies'];
 			            if($fieldaccesright['access'] !="NA"){
 			        	?>
 				   	<div class="card">
@@ -956,7 +956,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="employee_buddies_form" >
 			  					<div id="ajaxemployeeemployeebuddiestab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "employee_buddies";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -964,7 +964,7 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
@@ -972,8 +972,8 @@ function insertReleive(){
 				   	</div>
 				   	<?php } ?>
 
-<?php  
-   $fieldaccesright = $vafield['employee_access']; 
+<?php
+   $fieldaccesright = $vafield['employee_access'];
    if($fieldaccesright['access'] !="NA"){
 	?>
 <div class="card">
@@ -988,7 +988,7 @@ function insertReleive(){
 <div class="card-body">
 	<form method="post" id="employee_access_form" >
 			<div id="ajaxemployeeemployeeaccesstab">
-	<?php 
+	<?php
 			$_POST['edittype'] = "VIEW";
 			$_POST['showpagetype'] = "employee_access";
 			if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -996,7 +996,7 @@ function insertReleive(){
 		}else{
 			include("custom_insert_onboarding_employees_ajax.php");
 		}
-			unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			unset($_POST['edittype']); unset($_POST['showpagetype']);
 		?>
 			</div>
 		</form>
@@ -1005,9 +1005,9 @@ function insertReleive(){
 <?php } ?>
 
 
-<?php  
-   $fieldaccesright = $vafield['employee_other_access']; 
-   if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_other_access']!="NA"){ 
+<?php
+   $fieldaccesright = $vafield['employee_other_access'];
+   if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_other_access']!="NA"){
 	?>
 <div class="card">
 <div class="card-header">
@@ -1021,7 +1021,7 @@ function insertReleive(){
 <div class="card-body">
 	<form method="post" id="employee_other_access_form" >
 			<div id="ajaxemployeeemployeeotheraccesstab">
-	<?php 
+	<?php
 			$_POST['edittype'] = "VIEW";
 			$_POST['showpagetype'] = "employee_other_access";
 			if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -1029,7 +1029,7 @@ function insertReleive(){
 		}else{
 			include("custom_insert_onboarding_employees_ajax.php");
 		}
-			unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			unset($_POST['edittype']); unset($_POST['showpagetype']);
 		?>
 			</div>
 		</form>
@@ -1038,9 +1038,9 @@ function insertReleive(){
 <?php } ?>
 				</div>
 				<div class="col-lg-5">
-					<?php  
-			            $fieldaccesright = $vafield['proof_details']; 
-			            if($fieldaccesright['access'] !="NA"){ 
+					<?php
+			            $fieldaccesright = $vafield['proof_details'];
+			            if($fieldaccesright['access'] !="NA"){
 			        ?>
 					<div class="card">
 						<div class="card-header">
@@ -1054,7 +1054,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="proof_details_form" >
 			  					<div id="ajaxemployeeproofdetailstab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "proof_details";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -1062,16 +1062,16 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
 						</div>
 					</div>
 					<?php } ?>
-			   		<?php  
-			            $fieldaccesright = $vafield['experience_details']; 
-			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_experiances']!="NA"){ 
+			   		<?php
+			            $fieldaccesright = $vafield['experience_details'];
+			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_experiances']!="NA"){
 			        ?>
 					<div class="card latest-update-card" id="experience_details_div">
 						<div class="card-header">
@@ -1085,7 +1085,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="employment_history_form" >
 			  					<div id="ajaxemployeeexperiencedetailstab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "experience_details";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -1093,16 +1093,16 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
 						</div>
 					</div>
 					<?php } ?>
-			   		<?php  
-			            $fieldaccesright = $vafield['employee_qualifications']; 
-			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_qualifications']!="NA"){ 
+			   		<?php
+			            $fieldaccesright = $vafield['employee_qualifications'];
+			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_qualifications']!="NA"){
 			        ?>
 					<div class="card latest-update-card" id="employee_qualifications_div">
 						<div class="card-header">
@@ -1116,7 +1116,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="employee_qualifications_form" >
 			  					<div id="ajaxemployeeemployeequalificationstab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "employee_qualifications";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -1124,16 +1124,16 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
 						</div>
 					</div>
 					<?php } ?>
-					<?php  
-			            $fieldaccesright = $vafield['employee_dependents']; 
-			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_dependents']!="NA"){ 
+					<?php
+			            $fieldaccesright = $vafield['employee_dependents'];
+			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_dependents']!="NA"){
 			        ?>
 					<div class="card" id="employee_dependents_div">
 						<div class="card-header">
@@ -1147,7 +1147,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="employee_dependents_form" >
 			  					<div id="ajaxemployeeemployeedependentstab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "employee_dependents";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -1155,16 +1155,16 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
 						</div>
 					</div>
 					<?php } ?>
-					<?php  
-			            $fieldaccesright = $vafield['employee_contacts']; 
-			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_contacts']!="NA"){ 
+					<?php
+			            $fieldaccesright = $vafield['employee_contacts'];
+			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['employee_contacts']!="NA"){
 			        ?>
 					<div class="card" id="employee_contacts_div">
 						<div class="card-header">
@@ -1178,7 +1178,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="employee_contacts_form" >
 			  					<div id="ajaxemployeeemployeecontactstab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "employee_contacts";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -1186,16 +1186,16 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
 						</div>
 					</div>
 					<?php } ?>
-					<?php  
-			            $fieldaccesright = $vafield['emp_visa']; 
-			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['emp_visa']!="NA"){ 
+					<?php
+			            $fieldaccesright = $vafield['emp_visa'];
+			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['emp_visa']!="NA"){
 			        ?>
 					<div class="card" id="visa_detail_div">
 						<div class="card-header">
@@ -1209,7 +1209,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="emp_visa_form" >
 			  					<div id="ajaxemployeeempvisatab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "emp_visa";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -1217,16 +1217,16 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
 						</div>
 					</div>
 					<?php } ?>
-					<?php  
-			            $fieldaccesright = $vafield['emp_skills']; 
-			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['emp_skills']!="NA"){ 
+					<?php
+			            $fieldaccesright = $vafield['emp_skills'];
+			            if($fieldaccesright['access'] !="NA" AND $fieldaccesright['field']['emp_skills']!="NA"){
 			        ?>
 					<div class="card" >
 						<div class="card-header">
@@ -1240,7 +1240,7 @@ function insertReleive(){
 						<div class="card-body">
 							<form method="post" id="emp_skills_form" >
 			  					<div id="ajaxemployeempskillstab">
-							<?php 
+							<?php
 			  					$_POST['edittype'] = "VIEW";
 			  					$_POST['showpagetype'] = "emp_skills";
 			  					if(file_exists('views/custom_insert_onboarding_employees_ajax.php')){
@@ -1248,7 +1248,7 @@ function insertReleive(){
 								}else{
 									include("custom_insert_onboarding_employees_ajax.php");
 								}
-			  					unset($_POST['edittype']); unset($_POST['showpagetype']); 
+			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>
 					  		</form>
@@ -1283,7 +1283,7 @@ function insertReleive(){
 										<?php } ?>
 										<?php if($reporting_manager['user_mobile'] !=""){?>
 											<span class="text-muted font-weight-bold f-12"><?php echo '<i class="fa fa-phone"></i> '.$reporting_manager['user_mobile'];?></span>
-										<?php } ?>      
+										<?php } ?>
 									</div>
 								</div>
 							</div>
@@ -1297,7 +1297,7 @@ function insertReleive(){
 				    <h5><?php echo __('Teams'); ?></h5>
 				</div>
 			    <div class="card-body">
-					<div class="row"> 
+					<div class="row">
 						<?php foreach ($teams as $team) {  ?>
 							<div class="col-xl-3 col-md-6">
 								<div class="card sale-card ">
@@ -1318,16 +1318,16 @@ function insertReleive(){
 										</div>
 										<div class="row">
 											<div class="col-6">
-												<div class="s-cont d-inline-block">       
+												<div class="s-cont d-inline-block">
 													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-success-sm" <?php if($team['on_off_site']==0){ echo __('checked'); } ?> onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;<span style="font-size: 12px; <?php if($team['on_off_site']==1){ echo __('color: red'); } ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?> d-inline-block fw-bold"><?php if($team['on_off_site']==1){ echo __('Off-Site'); }else{ echo __('On-Site'); } ?> </span>
-													<input type="hidden" id="onsite_<?php echo $team['id']; ?>" value="<?php echo $team['on_off_site']; ?>">  
+													<input type="hidden" id="onsite_<?php echo $team['id']; ?>" value="<?php echo $team['on_off_site']; ?>">
 												</div>
 											</div>
 											<div class="col-6 b-l-default">
-												<div class="s-cont d-inline-block">      
-													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-primary-sm" <?php if($team['billable']=='0'){ echo __('checked'); } ?> onchange="changebillable(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp; 
+												<div class="s-cont d-inline-block">
+													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-primary-sm" <?php if($team['billable']=='0'){ echo __('checked'); } ?> onchange="changebillable(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;
 													<label style="font-size: 12px; <?php if($team['billable']=='1'){ echo __('color: red'); } ?>" class="col-form-label billable_lable<?php echo $team['id']; ?>" > <?php if($team['billable']=='1'){ echo __('Non Billable'); }else{ echo __('Billable'); } ?> </label>
-													<input type="hidden" id="billable_<?php echo $team['id']; ?>" value="<?php echo $team['billable']; ?>">  
+													<input type="hidden" id="billable_<?php echo $team['id']; ?>" value="<?php echo $team['billable']; ?>">
 												</div>
 											</div>
 										</div>
@@ -1343,7 +1343,7 @@ function insertReleive(){
 				<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?php echo __('No Team'); ?></p>
 				<div class="text-center px-4">
 					<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-				</div>   
+				</div>
 			</div>
 		<?php } ?>
 		</div>
@@ -1369,7 +1369,7 @@ function insertReleive(){
 					<h4 class="modal-title modallabel" id="exampleModalLabel"><?php echo __('Effort Share Status'); ?></h4>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>" onclick="reloadPage()"></button>
 				</div>
-				<form class="form" id="insertemphistries">  
+				<form class="form" id="insertemphistries">
 					<input type="hidden" name="emp_id" id="emp_id">
 					<input type="hidden" name="field_name" id="field_name">
 					<input type="hidden" name="field_value" id="field_value">
@@ -1404,4 +1404,4 @@ function insertReleive(){
 			</div>
 		</div>
 	</div>
-</div>	
+</div>

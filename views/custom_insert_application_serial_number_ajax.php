@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(isset($_POST['process_name']) AND $_POST['process_name'] !=""){
 	include_once('../includes/session.php');
 	include_once('../dbconfig.php');
@@ -70,7 +70,7 @@ function serialNumberPreview($data) {
 
 ?>
 <script>
-	
+
 // function preFixTypeChange(){
 // 	var pre_fix_type = $("#pre_fix_type").val();
 // 	if(pre_fix_type == "STATIC"){
@@ -93,7 +93,7 @@ function selectDisplayType(seq){
 	if(display_type == "STATIC"){
 		$("#static_value_div_"+seq).show();
 		$("#dynamic_value_div_"+seq).hide();
-		
+
 	}else{
 		$("#static_value_div_"+seq).hide();
 		$("#dynamic_value_div_"+seq).show();
@@ -110,7 +110,7 @@ var seqrow = 1000;
 function addMoreAdditionalSettings(){
 	seqrow = seqrow+1;
 	var htmlview = "";
-	
+
 	let selected = [];
 
 	$(".position_dropdown option:selected").each(function() {
@@ -139,7 +139,7 @@ function addMoreAdditionalSettings(){
 							<option value="DYNAMIC" <?php echo $asettings['display_type'] =="DYNAMIC"?"selected":""; ?>><?= __('Dynamic') ?></option>
 				        </select>
 				    </div>`;
-				    
+
 				    htmlview +=`<div class="form-group col-lg-3" id="static_value_div_`+seqrow+`" >
 				    <span class="text-danger empty_error" id="error_static_value_`+seqrow+`"></span>
 
@@ -192,12 +192,12 @@ function addMoreAdditionalSettings(){
 					<?php foreach($application_serial_numbers_list as $lst){ ?>
 					<tr class="">
 						<th scope="col" class="p-2 w-b-w-s">
-						<a href="#!" class="text-primary" data-bs-toggle="tooltip" data-placement="bottom" title="" d;ata-bs-original-title="Please Click To Open Owner Details" onclick="selectProcessName('<?php echo $process_name; ?>','<?php echo $lst['id']; ?>')"><?php echo date("M-Y", strtotime($lst['from_date']))."-".date("M-Y", strtotime($lst['to_date'])); ?></a> 
+						<a href="#!" class="text-primary" data-bs-toggle="tooltip" data-placement="bottom" title="" d;ata-bs-original-title="Please Click To Open Owner Details" onclick="selectProcessName('<?php echo $process_name; ?>','<?php echo $lst['id']; ?>')"><?php echo date("M-Y", strtotime($lst['from_date']))."-".date("M-Y", strtotime($lst['to_date'])); ?></a>
 						</th>
 						<th scope="col" class="p-2 w-b-w-s"></th>
 					</tr>
 					<?php } ?>
-				</tbody>	
+				</tbody>
 			</table>
 		</div>
 	</div>
@@ -226,7 +226,7 @@ function addMoreAdditionalSettings(){
 					</div>
 					<div class="form-group col-lg-3">
 						<label for="separator_symbols" class="form-label d-block"><?= __('separator symbols') ?></label>
-						<select class ="form-control form-control-lg form-select js-example-basic-single" id="separator_symbols" name="separator_symbols"  onchange="serialNumberPreview()"> 
+						<select class ="form-control form-control-lg form-select js-example-basic-single" id="separator_symbols" name="separator_symbols"  onchange="serialNumberPreview()">
 							<option value="-" <?php echo $asnres['separator_symbols'] =="-"?"selected":""; ?>>-</option>
 							<option value="/" <?php echo $asnres['separator_symbols'] =="/"?"selected":""; ?>>/</option>
 							<option value="_" <?php echo $asnres['separator_symbols'] =="_"?"selected":""; ?>>_</option>
@@ -239,12 +239,12 @@ function addMoreAdditionalSettings(){
 						<input type="text" class="form-control  mt-2" name="serial_number" id="serial_number"  value="<?php echo $asnres['serial_number']!=""?$asnres['serial_number']:1; ?>" onblur="serialNumberPreview()" readonly>
 
 						<div class="form-group  mt-2">
-							<select aria-label="<?= htmlspecialchars(__('Serial number position'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="serial_number_position"  id="serial_number_position" onmousedown="storeOld(this)" onchange="positionChange(this)" > 
+							<select aria-label="<?= htmlspecialchars(__('Serial number position'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="serial_number_position"  id="serial_number_position" onmousedown="storeOld(this)" onchange="positionChange(this)" >
 								<?php foreach($staticpoint as $i){ ?>
 					                <option value="<?php echo $i; ?>" <?php if($asnres['serial_number_position'] ==$i){ echo "selected"; }elseif($asnres['serial_number_position'] == "" AND $i=='1'){ echo "selected"; } ?>>
 					                <?php echo $i."- Position"; ?>
 					                </option>
-					          <?php } ?> 
+					          <?php } ?>
 					        </select>
 						</div>
 
@@ -254,12 +254,12 @@ function addMoreAdditionalSettings(){
 						<input type="checkbox" class="js-switch-finanaceyear" value="Y" name="financial_year_check" id="financial_year_check"  onchange="financeYearonChange()" <?php echo ($asnres['financial_year_check'] =="" || $asnres['financial_year_check'] =="Y")?"checked":""; ?> readonly>
 
 						<div class="form-group mt-2 financial_year_check_css <?php echo $asnres['financial_year_check'] =="N"?"event_disabled":""; ?>">
-							<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="financial_year_position"  id="financial_year_position" onchange="positionChange(this)"> 
+							<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="financial_year_position"  id="financial_year_position" onchange="positionChange(this)">
 								<?php foreach($staticpoint as $i){ ?>
 					                <option value="<?php echo $i; ?>" <?php if($asnres['financial_year_position'] ==$i){ echo "selected"; }elseif($asnres['financial_year_position'] == "" AND  $i=='2'){ echo "selected"; } ?>>
 					                <?php echo $i."- Position"; ?>
 					                </option>
-					          <?php } ?> 
+					          <?php } ?>
 					        </select>
 						</div>
 
@@ -269,19 +269,19 @@ function addMoreAdditionalSettings(){
 				<div class="row">
 					<div class="form-group col-lg-3">
 						<label for="reset_type" class="form-label d-block"><?= __('Reset Serial Number Type') ?></label>
-						<select id="reset_type" class ="form-control form-control-lg form-select js-example-basic-single" name="reset_type"  > 
+						<select id="reset_type" class ="form-control form-control-lg form-select js-example-basic-single" name="reset_type"  >
 							<option value="MT" <?php echo $asnres['reset_type'] =="MT"?"selected":""; ?>><?= __('Monthly Reset') ?></option>
 							<option value="YR" <?php echo $asnres['reset_type'] =="YR"?"selected":""; ?>><?= __('Yearly Reset') ?></option>
 							<option value="LT" <?php echo $asnres['reset_type'] =="LT"?"selected":""; ?>><?= __('Life Time Same Serial Number') ?></option>
 						</select>
 					</div>
 				</div>
-					
+
 				<div class="card">
 					<div class="card-header">
 				        <h5><?= __('Additional Settings') ?></h5>
 				        <div class="card-header-right"></div>
-				    </div>	
+				    </div>
 				    <div class="card-body">
 				    		<div class="row">
 								<div class="col-lg-3">
@@ -294,27 +294,27 @@ function addMoreAdditionalSettings(){
 									<span class="form-label d-block">Position</span>
 								</div>
 								<div class="col-lg-3">
-								
+
 								</div>
 							</div>
 							<div id="addmorerow">
-						<?php 
+						<?php
 						$additional_settings = json_decode($asnres['additional_settings'],1);
 						if(count((array)$additional_settings) ==0){
 							$additional_settings[] = array();
 						}
 						$seq = 1;
 						//echo "<pre>"; print_r($additional_settings); echo "</pre>";
-						foreach($additional_settings as $asettings){ ?>	
+						foreach($additional_settings as $asettings){ ?>
 							<div class="row" id="additional_rowid_<?php echo $seq; ?>">
 								<div class="col-lg-3 " >
 									<input type="hidden" class="form-control columns_sequince"  value="<?php echo $seq; ?>" >
-									<select class ="form-control form-control-lg form-select js-example-basic-single " name="additional_settings[display_type][]" id="display_type_<?php echo $seq; ?>" onchange="selectDisplayType('<?php echo $seq; ?>')"> 
+									<select class ="form-control form-control-lg form-select js-example-basic-single " name="additional_settings[display_type][]" id="display_type_<?php echo $seq; ?>" onchange="selectDisplayType('<?php echo $seq; ?>')">
 										<option value="STATIC" <?php echo $asettings['display_type'] =="STATIC"?"selected":""; ?>><?= __('Static') ?></option>
 										<option value="DYNAMIC" <?php echo $asettings['display_type'] =="DYNAMIC"?"selected":""; ?>><?= __('Dynamic') ?></option>
 							        </select>
 							    </div>
-							    
+
 							    <div class="form-group col-lg-3" id="static_value_div_<?php echo $seq; ?>" <?php if($asettings['display_type']=="DYNAMIC"){ ?>style="display: none;" <?php } ?>>
 							    	<span class="text-danger empty_error" id="error_static_value_<?php echo $seq; ?>"></span>
 									<input type="text" class="form-control" name="additional_settings[static_value][]" id="static_value_<?php echo $seq; ?>" value="<?php echo $asettings['static_value']; ?>" onblur="serialNumberPreview()">
@@ -322,7 +322,7 @@ function addMoreAdditionalSettings(){
 
 								<div class="form-group col-lg-3 w-full" id="dynamic_value_div_<?php echo $seq; ?>" <?php if($asettings['display_type']=="STATIC" OR $asettings['display_type']==""){ ?>style="display: none;" <?php } ?>>
 									<span class="text-danger empty_error" id="error_dynamic_value_<?php echo $seq; ?>"></span>
-									<select class ="form-control form-control-lg form-select js-example-basic-single" id="dynamic_value_<?php echo $seq; ?>" name="additional_settings[dynamic_value][]" onchange="serialNumberPreview()"> 
+									<select class ="form-control form-control-lg form-select js-example-basic-single" id="dynamic_value_<?php echo $seq; ?>" name="additional_settings[dynamic_value][]" onchange="serialNumberPreview()">
 										<option value="PARTY_NAME" <?php echo $asettings['dynamic_value'] =="PARTY_NAME"?"selected":""; ?>><?= __('Party') ?></option>
 										<option value="TRANSACTION_TYPE" <?php echo $asettings['dynamic_value'] =="TRANSACTION_TYPE"?"selected":""; ?>><?= __('Document Type') ?></option>
 										<option value="TRANSACTION_LOCATION" <?php echo $asettings['dynamic_value'] =="TRANSACTION_LOCATION"?"selected":""; ?>><?= __('Location') ?></option>
@@ -330,12 +330,12 @@ function addMoreAdditionalSettings(){
 									</select>
 								</div>
 								<div class="form-group col-lg-3 ">
-									<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="additional_settings[positions][]" id="positions_<?php echo $seq; ?>"  onchange="positionChange(this)"> 
+									<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="additional_settings[positions][]" id="positions_<?php echo $seq; ?>"  onchange="positionChange(this)">
 										<?php foreach($staticpoint as $i){ ?>
 							                <option value="<?php echo $i; ?>" <?php if($asettings['positions'] ==$i){ echo "selected"; }elseif($asettings['positions'] == "" AND  $i=='3'){ echo "selected"; } ?> >
 							                <?php echo $i."- Position"; ?>
 							                </option>
-							          <?php } ?> 
+							          <?php } ?>
 							        </select>
 								</div>
 
@@ -355,11 +355,11 @@ function addMoreAdditionalSettings(){
 						</div>
 					</div>
 				</div>
-					
-					
 
 
-					<?php /** ?> 
+
+
+					<?php /** ?>
 					<div class="form-group col-lg-3">
 						<label class="form-label d-block"><?= __('Post Fix') ?></label>
 						<div class="row">
@@ -367,32 +367,32 @@ function addMoreAdditionalSettings(){
 								<input type="checkbox" class="js-switch-finanaceyear" value="Y" name="post_fix_check" id="post_fix_check" onchange="postFixonChange()" <?php echo ($asnres['post_fix_check'] =="Y" || $asnres['post_fix_check'] =="")?"checked":""; ?>>
 							</div>
 							<div class="col-lg-8 post_fix_check_css <?php echo $asnres['post_fix_check'] =="N"?"event_disabled":""; ?>" >
-								<select class ="form-control form-control-lg form-select js-example-basic-single " name="post_fix_type" id="post_fix_type" onchange="postFixTypeChange()"> 
+								<select class ="form-control form-control-lg form-select js-example-basic-single " name="post_fix_type" id="post_fix_type" onchange="postFixTypeChange()">
 									<option value="STATIC" <?php echo $asnres['post_fix_type'] =="STATIC"?"selected":""; ?>><?= __('Static') ?></option>
 									<option value="DYNAMIC" <?php echo $asnres['post_fix_type'] =="DYNAMIC"?"selected":""; ?>><?= __('Dynamic') ?></option>
 						        </select>
 						    </div>
-						</div> 
+						</div>
 					</div>
 					<div class="form-group col-lg-3 pre_fix_check_css <?php echo $asnres['pre_fix_check'] =="N"?"event_disabled":""; ?>" id="pre_fix_type_static" <?php if($asnres['pre_fix_type']=="DYNAMIC"){ ?>style="display: none;" <?php } ?>>
 						<input type="text" class="form-control" name="pre_fix" id="pre_fix" value="<?php echo $asnres['pre_fix']; ?>" onblur="serialNumberPreview()">
 					</div>
 					<div class="form-group col-lg-3 w-full pre_fix_check_css <?php echo $asnres['pre_fix_check'] =="N"?"event_disabled":""; ?>" id="pre_fix_type_dynamic" <?php if($asnres['pre_fix_type'] =="" || $asnres['pre_fix_type']=="STATIC"){ ?>style="display: none;" <?php } ?>>
-						<select class ="form-control form-control-lg form-select js-example-basic-single" id="pre_fix_field" name="pre_fix_field" > 
+						<select class ="form-control form-control-lg form-select js-example-basic-single" id="pre_fix_field" name="pre_fix_field" >
 							<option value="party" <?php echo $asnres['pre_fix_field'] =="party"?"selected":""; ?>><?= __('Party') ?></option>
 							<option value="type" <?php echo $asnres['pre_fix_field'] =="type"?"selected":""; ?>><?= __('Document Type') ?></option>
 							<option value="location" <?php echo $asnres['pre_fix_field'] =="location"?"selected":""; ?>><?= __('Location') ?></option>
 							<option value="cost_center" <?php echo $asnres['pre_fix_field'] =="cost_center_id"?"selected":""; ?>><?= __('Cost Center') ?></option>
 						</select>
 					</div>
-					
+
 
 					<div class="form-group col-lg-3 post_fix_check_css <?php echo $asnres['post_fix_check'] =="N"?"event_disabled":""; ?>" id="post_fix_type_static"  <?php if($asnres['post_fix_type']=="DYNAMIC"){ ?>style="display: none;" <?php } ?>>
 						<input type="text" class="form-control"  name="post_fix" id="post_fix" value="<?php echo $asnres['post_fix']; ?>" onblur="serialNumberPreview()">
 					</div>
 					<div class="form-group col-lg-3 w-full post_fix_check_css <?php echo $asnres['post_fix_check'] =="N"?"event_disabled":""; ?>" id="post_fix_type_dynamic" <?php if($asnres['post_fix_type'] =="" || $asnres['post_fix_type']=="STATIC"){ ?>style="display: none;" <?php } ?>>
-						
-						<select class ="form-control form-control-lg form-select js-example-basic-single" id="post_fix_field" name="post_fix_field" > 
+
+						<select class ="form-control form-control-lg form-select js-example-basic-single" id="post_fix_field" name="post_fix_field" >
 							<option value="party" <?php echo $asnres['post_fix_field'] =="party"?"selected":""; ?>><?= __('Party') ?></option>
 							<option value="type" <?php echo $asnres['post_fix_field'] =="type"?"selected":""; ?>><?= __('Document Type') ?></option>
 							<option value="location" <?php echo $asnres['post_fix_field'] =="location"?"selected":""; ?>><?= __('Location') ?></option>
@@ -400,41 +400,41 @@ function addMoreAdditionalSettings(){
 						</select>
 
 					</div>
-					
 
 
-					
+
+
 
 					<div class="form-group col-lg-3 pre_fix_check_css <?php echo $asnres['pre_fix_check'] =="N"?"event_disabled":""; ?>">
-						<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="pre_fix_position" id="pre_fix_position" onchange="positionChange(this)" > 
+						<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="pre_fix_position" id="pre_fix_position" onchange="positionChange(this)" >
 							<?php foreach($staticpoint as $i){ ?>
 				                <option value="<?php echo $i; ?>" <?php if($asnres['pre_fix_position'] ==$i){ echo "selected"; }elseif($asnres['pre_fix_position'] == "" AND $i=='1'){ echo "selected"; } ?>>
 				                <?php echo $i."- Position"; ?>
 				                </option>
-				          <?php } ?> 
+				          <?php } ?>
 				        </select>
 					</div>
 					<div class="form-group col-lg-3 post_fix_check_css <?php echo $asnres['post_fix_check'] =="N"?"event_disabled":""; ?>" >
-						<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="post_fix_position" id="post_fix_position" onchange="positionChange(this)" > 
+						<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="post_fix_position" id="post_fix_position" onchange="positionChange(this)" >
 							<?php foreach($staticpoint as $i){ ?>
 				                <option value="<?php echo $i; ?>" <?php if($asnres['post_fix_position'] == $i){ echo "selected"; }elseif($asnres['post_fix_position'] == "" AND $i=='2'){ echo "selected"; } ?>>
 				                <?php echo $i."- Position"; ?>
 				                </option>
-				          <?php } ?> 
+				          <?php } ?>
 				        </select>
-					</div> 
+					</div>
 					<?php **/ ?>
-					
 
-		
+
+
 			</form>
-			
+
 		</div>
 		<div class="card-footer">
 		    <div class="row">
 		        <div class="col-lg-12">
 		            <button class="btn btn-primary" onclick="formSubmitBTN()"><?php echo $rid ==""?__("Submit"):__("Update"); ?></button>
-		        </div> 
+		        </div>
 		    </div>
 		</div>
 	</div>

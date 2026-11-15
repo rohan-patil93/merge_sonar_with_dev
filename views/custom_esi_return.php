@@ -12,13 +12,13 @@ $company_name = "Infisuite";
 $basic_pay_component_id =1;
 $company_id=$_SESSION['company_id'];
 
-$pay_year = date('Y',strtotime($pay_month_year)); 
- $pay_month = date('m',strtotime($pay_month_year)); 
+$pay_year = date('Y',strtotime($pay_month_year));
+ $pay_month = date('m',strtotime($pay_month_year));
 
 
 $whrcon["where"] = array('company_id'=> $company_id,'is_active'=>0,'pay_year'=>$pay_year,'pay_month'=>$pay_month);
 $vdata = urlencode(json_encode($whrcon));
-$url = API."?mode=gettabledetailswithconditions&table=pay_run_summary&data=".$vdata; 
+$url = API."?mode=gettabledetailswithconditions&table=pay_run_summary&data=".$vdata;
 $response = callAPI($url);
 $empdata = json_decode($response,1);
 
@@ -32,7 +32,7 @@ $whrcon1["where"] = array('company_id'=> $company_id,'is_active'=>0,'id'=>$emplo
 $vdata1 = urlencode(json_encode($whrcon1));
 //print_r($whrcon1);
 
-$url = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata1; 
+$url = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata1;
 $response = callAPI($url);
 $employee_data = json_decode($response,1);
 $emp_details = $employee_data[0];
@@ -62,11 +62,11 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 			<span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"><i class="fa fa-user-plus text-info f-40"></i></span>
 		<span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $company_name; ?></span>
 
-															
+
 														</div>
-												
+
 		</div>
-		
+
 
 
 	<div class="col-md-5">
@@ -80,8 +80,8 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 					<button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light"><?php echo __('Submit'); ?></button>
 				</div>
 				</div>
-				
-			
+
+
 		</form>
 		</div>
 
@@ -101,11 +101,11 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 				</button>
 				<!--end::Mobile Toggle-->
 				<!--begin::Page Heading-->
-				
+
 				<!--end::Page Heading-->
 			</div>
 			<!--end::Info-->
-			
+
 		</div>
 	</div>
 
@@ -155,5 +155,5 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 			</div>
 			<!--end: Datatable-->
 		</div>
-	</div>	
+	</div>
 </div></div></div>

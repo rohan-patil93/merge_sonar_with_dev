@@ -1,4 +1,4 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = "1";
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
@@ -22,7 +22,7 @@ $chartofaccounts = array();
 
 foreach($chart_of_accounts as $finanacerepogrp){
      $financereportgroupsreport[$finanacerepogrp['parent_account_code']][] = $finanacerepogrp;
-       
+
    // $financereportgroupsreport[$finanacerepogrp['parent_account_code']][$finanacerepogrp['account_code']] = $finanacerepogrp;
     $financereportgroups[$finanacerepogrp['account_code']] = $finanacerepogrp;
 }
@@ -78,8 +78,8 @@ foreach($chart_of_accounts as $finanacerepogrp){
                              GetViewReport();
                          editFinanaceGrp(0);
                           tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?= __('Record Inserted Successfully') ?>','');
-                        }   
-                        
+                        }
+
                     }
                 }
             });
@@ -161,12 +161,12 @@ foreach($chart_of_accounts as $finanacerepogrp){
         $(".custom-popup-open").hide();
     }
 
-    
+
 function getfilterSearch(){
     var location_filter = $("#location_filter").val();
     var department_filter = $("#department_filter").val();
     var cost_center_filter = $("#cost_center_filter").val();
-    
+
 
     var classname= "";
     if(location_filter !="0"){
@@ -234,7 +234,7 @@ function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
             });
         }
     });
-  
+
 }
 
 </script>
@@ -257,29 +257,29 @@ function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
                 <div class="card-body">
                   <div class="row">
                     <div class="col-lg-4" id="insertform" >
-                    <?php 
+                    <?php
                         $pageurl = 'custom_insert_chart_of_accounts_ajax.php';
-                         if(file_exists("views/".$pageurl)){ 
+                         if(file_exists("views/".$pageurl)){
                              include_once "views/".$pageurl;
                          }else{
                             //echo $pageurl;
                              include_once $pageurl;
                             //include_once('custom_insert_chart_of_accounts_ajax.php');
                          }
-                        ?>  
+                        ?>
                     </div>
                     <div class="col-lg-8" id="viewtable">
-                    <?php 
+                    <?php
                         $pageurl = 'custom_insert_chart_of_accounts_table.php';
-                        if(file_exists("views/".$pageurl)){ 
+                        if(file_exists("views/".$pageurl)){
                             include_once "views/".$pageurl;
                         }else{
                             include_once $pageurl;
-                        } 
-                    ?> 
+                        }
+                    ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>          
+</div>

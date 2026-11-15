@@ -15,12 +15,12 @@ if (isset($_POST['submit'])){
 	$data['help_text'] = $_POST['content'];
 	if($_POST['id'] !=''){
 			$url = API."?mode=updaterowtabledata&method=post&rid=".$_POST['id']."&table=".TBL_REPORT_ATTRIBUTES;
-	} 	
+	}
 	//echo $url; exit;
 	$response = file_post_contents($url, $data);
 	if ($response) {
 		header("location:index.php?option=COM_LIST_REPORT_ATTRIBUTES&error=3001");
-		
+
 	}
 
 }
@@ -46,7 +46,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
 	$showtablesdata = callAPI($url);
 	$showtables = json_decode($showtablesdata,1);
 	//echo"<pre>"; print_r($showtables); exit;
-	
+
 }
 
 $title = viewTitle($_GET['option']);
@@ -75,7 +75,7 @@ $res_data = json_decode($res_data, 1);
 					$('#kt_modal_KTDatatable_remote').modal({ show: true});
 				},
 				error:function (){}
-			});			
+			});
 		}
 	}
 </script>
@@ -108,10 +108,10 @@ $res_data = json_decode($res_data, 1);
 							   			<?php foreach ($res_data as $key => $ress) {  ?>
 							   				<option  <?php if($ress['id'] == $report_id){ ?> selected  <?php } ?> value = <?php echo $ress['id']; ?>   > <?php echo htmlspecialchars(__(ucwords(str_replace('_',' ',$ress['report_name'] ?? '')))); ?> </option>
 							   		<?php	} ?>
-										
-										
+
+
 								</select>
-							  </div>	
+							  </div>
 						</h3>
 					</div>
 				</div>
@@ -141,7 +141,7 @@ $res_data = json_decode($res_data, 1);
 						</div>
 						<input type="hidden" name="report_id" id='report_id'  value="<?php echo $report_id; ?>">
 						<?php $i=10;
-							foreach ($showtables as $key => $value) { 
+							foreach ($showtables as $key => $value) {
 								foreach ($value as  $field) {
 									$keyf= $key.".".$field;
 							 ?>
@@ -204,11 +204,11 @@ $res_data = json_decode($res_data, 1);
 											<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
 											<button id="kt_login_signin_submit_continue" class="btn btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
 											<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
-									
+
 								</div>
 								<div class="col-lg-6 kt-align-right">
 									<button type="reset" disabled="disabled" class="btn btn-danger float-right "><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
-								</div> 
+								</div>
 							</div>
 						</div>
 					</div>
@@ -224,7 +224,7 @@ $res_data = json_decode($res_data, 1);
 		<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-xl">
 				<div class="modal-content" style="min-height: 590px;" id="popup1">
-					
+
 				</div>
 			</div>
 

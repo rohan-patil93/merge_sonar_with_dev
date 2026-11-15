@@ -115,9 +115,9 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
             <div class="card-header">
                 <div class="card-title">
                     <h3 class="card-label">
-                    <?php 
-                    $title = isset($_GET['option']) ? ucwords(str_replace('_', ' ', str_replace('view_', '', str_replace('com_', '', $_GET['option'])))) : ''; 
-                    echo $title; 
+                    <?php
+                    $title = isset($_GET['option']) ? ucwords(str_replace('_', ' ', str_replace('view_', '', str_replace('com_', '', $_GET['option'])))) : '';
+                    echo $title;
                     ?>
                     </h3>
                 </div>

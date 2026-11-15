@@ -20,7 +20,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
         $vist_ids[$value['field_work_daily_plan_id']] = $value['current_status'];
     }else{
         $list_extra[] = $value;
-    }    
+    }
 }
 ?>
 <!-- Include CSS and JS files -->
@@ -29,8 +29,8 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
 <div class="card-header">
     <h5><?php echo __('Visit'); ?></h5>
     <div class="card-header-right">
-        <div class="input-group input-group-button"> 
-            <input aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="from_date" id="att_month_year" class="form-control form-control-sm width1" value="<?php echo $year_month; ?>">  
+        <div class="input-group input-group-button">
+            <input aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="from_date" id="att_month_year" class="form-control form-control-sm width1" value="<?php echo $year_month; ?>">
         </div>
     </div>
 </div>
@@ -68,7 +68,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
+                    <?php
                         if(count((array)$field_tabs['user_all_daily_plan'])>0){
                         foreach ((array)$field_tabs['user_all_daily_plan'] as $key => $value) { ?>
                         <tr>
@@ -78,24 +78,24 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                             <td>
                                 <?php if(isset($vist_ids[$value['id']])  ){ ?>
                                 <span class="label label-success"><?php echo __('Visited'); ?></span>
-                                 <?php }else{ ?> 
+                                 <?php }else{ ?>
                                     <span class="label label-warning"><?php echo __('Pending'); ?></span>
                                  <?php } ?>
                             </td>
                         </tr>
                     <?php }
-                    }else{ ?> 
+                    }else{ ?>
                         <tr>
                             <td colspan="4">
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><?php echo __('No Data'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><?php echo __('No Data'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png">
-                                    </div>   
+                                    </div>
                                 </div>
                             </td>
                         </tr>
-                    <?php } ?>                    
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -112,7 +112,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
+                    <?php
                         if(count((array)$list_vist)>0){
                         foreach ((array)$list_vist as $key => $value) { ?>
                         <tr>
@@ -122,14 +122,14 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                             <td><span class="label label-success"><?php echo __('Visited'); ?></span></td>
                         </tr>
                     <?php }
-                    }else{ ?> 
+                    }else{ ?>
                         <tr>
                             <td colspan="4">
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><?php echo __('No Data'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><?php echo __('No Data'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                                    </div>   
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -150,7 +150,7 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                     </tr>
                 </thead>
                <tbody>
-                    <?php 
+                    <?php
                         if(count((array)$list_extra)>0){
                         foreach ((array)$list_extra as $key => $value) { ?>
                         <tr>
@@ -160,14 +160,14 @@ foreach ($field_tabs['all_user_map_detail'] as $key => $value) {
                             <td><span class="label label-success"><?php echo __('Visited'); ?></span></td>
                         </tr>
                     <?php }
-                    }else{ ?> 
+                    }else{ ?>
                         <tr>
                             <td colspan="4">
                                 <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><?php echo __('No Data'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><?php echo __('No Data'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png">
-                                    </div>   
+                                    </div>
                                 </div>
                             </td>
                         </tr>

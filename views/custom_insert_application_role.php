@@ -1,4 +1,4 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = 1;
 $_SESSION['apply_js']['role'] = '1';
 $apiurl = API."?mode=getapplicationroles";
@@ -15,7 +15,7 @@ $module_setup = $result['module_setup'];
     var data  = JSON.parse(usedemailids);
     var emailid = $.trim(email_id);
     if ($.inArray(emailid, data) != -1)
-    {      
+    {
       $("#iduser_email").show();
     }else{
       $("#iduser_email").hide();
@@ -38,7 +38,7 @@ $module_setup = $result['module_setup'];
       </a>
     </div>
   </div>
-  <div class="card-body"> 
+  <div class="card-body">
   	<div class="row mb-3">
   		<div class="col-lg-4">
   			<span class="form-label d-inline-block fw-bold"><?= __('Module') ?></span>
@@ -52,20 +52,20 @@ $module_setup = $result['module_setup'];
   		<div class="col-lg-4"></div>
   		<div class="col-lg-4">
   			<!-- <div class="input-group input-group-button mb-0" >
-		        <input type="text" id="dynamicfilterhideshow" data-id='applicationrolesid' data-type="div" class="form-control form-control-sm width1"  placeholder="<?= __('Search') ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Search"> 
+		        <input type="text" id="dynamicfilterhideshow" data-id='applicationrolesid' data-type="div" class="form-control form-control-sm width1"  placeholder="<?= __('Search') ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Search">
 		        <span class="input-group-text addon-style">
 		            <label class=""><span class="ti-search text-white mt-2"></span></label>
 		        </span>
-		    </div> --> 
+		    </div> -->
   		</div>
-  		
+
   	</div>
     <div class="row mt-2">
       <?php
       $i= 1; $jj=0;
-      foreach($resultlist as $resultlist){ 
+      foreach($resultlist as $resultlist){
         if($jj == '0'){  $i= 2;  ?>
-          <div class="col-lg-3 col-md-6 col-sm-6 col-12 hideall addmore" style="display: none"> 
+          <div class="col-lg-3 col-md-6 col-sm-6 col-12 hideall addmore" style="display: none">
             <div class="card card-custom cursor-pointer card-stretch" onclick="addrolemodal()">
               <div class="card-header">
                 <div class="card-title">
@@ -77,8 +77,8 @@ $module_setup = $result['module_setup'];
               </div>
             </div>
           </div>
-        <?php } ?>    
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 hideall modulegrpid_<?php echo $resultlist['application_module']; ?> " id="applicationrolesid" style="display: none"> 
+        <?php } ?>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12 hideall modulegrpid_<?php echo $resultlist['application_module']; ?> " id="applicationrolesid" style="display: none">
           <div class="card card-custom  card-stretch">
             <div class="card-header">
               <div class="card-title">
@@ -107,12 +107,12 @@ $module_setup = $result['module_setup'];
             </ul>
               <button type="submit" name="submit" class="btn btn-primary w-100" style="background-color: #f5f8fa; color: #7e8299;" data-toggle="modal" onclick="addrolemodal('<?php echo $resultlist['id']; ?>')"><b><i class="fa fa-edit"></i> <?= __('Edit Role') ?></b></button>
               <a href="index.php?option=COM_VIEW_APPLICATION_ROLE&Rid=<?php echo deocdeId("id:".$resultlist['id']); ?>&name=<?php echo $resultlist['display_name']; ?>" class="btn btn-success  mt-2 w-100" target="_blank"><i class="icofont icofont-plus icon-white "></i> Assign User</a>
-            
+
         </div>
       </div>
     </div>
     <?php $i++; $jj++; /*if($i==5){ echo '</div><div class="row mt-4">'; $i=1; }*/  } ?>
-  </div>          
+  </div>
   </div>
 </div>
 

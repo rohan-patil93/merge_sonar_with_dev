@@ -25,7 +25,7 @@ $summary = $projectMonitoringData['summary'] ?? array();
 $financialYears = $projectMonitoringData['financial_years'] ?? array();
 $out_rows = $projectMonitoringData['out_rows'] ?? array();
 $p_spent = 0;
-foreach((array)$out_rows as $out_row){ 
+foreach((array)$out_rows as $out_row){
   $p_spent = $p_spent+$out_row['total_spent'];
 }
 $selectedFinancialYear = $projectMonitoringData['selected_financial_year'] ?? '';
@@ -206,7 +206,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-start">
           <h4 class="f-w-600 f-20 mb-0 d-flex align-items-center flex-wrap">
-            <?= __('Previous Project Spent'); ?> 
+            <?= __('Previous Project Spent'); ?>
           </h4>
         </div>
         <div class="table-responsive mt-3 custom-scroll" style="height:450px;">
@@ -216,7 +216,7 @@ function csrProjectMonitoringFyLabel($financialYear) {
               <th scope="col"><?= __('Project Name'); ?></th>
               <th scope="col"><?= __('Spant'); ?></th>
             </tr>
-            <?php $ik=1; foreach($out_rows as $out_row){ ?> 
+            <?php $ik=1; foreach($out_rows as $out_row){ ?>
               <tr>
                 <td><?php echo $ik; ?></td>
                 <td><?php echo $out_row['subject']; ?></td>

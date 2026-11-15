@@ -72,7 +72,7 @@ $details = $result['api_masters'];
         margin: 20px 0;
     }
 
-    
+
     th {
         background-color: #4099ff;
         color: white;

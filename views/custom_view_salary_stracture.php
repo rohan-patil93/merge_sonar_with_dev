@@ -1,6 +1,6 @@
-<?php 
+<?php
 $_SESSION['apply_js']['SORTABLE']=1;
-$_SESSION['apply_js']['multiselest']=1; 
+$_SESSION['apply_js']['multiselest']=1;
 if(isset($_POST['submit'])){
         $data['page_title'] = $_POST['page_title'];
     $data['company_name'] = $_POST['company_name'];
@@ -30,7 +30,7 @@ foreach((array)$earnings as $ern){
     }
 }
 
-?> 
+?>
 <script type="text/javascript">
     function addpayshilpdetails(){
         var count = $(".pd_row").length;
@@ -66,12 +66,12 @@ foreach((array)$earnings as $ern){
             count = count+1;
             var ids = 'er_'+count;
         }
-        
+
         htmlRows+='<div class="row align-items-end" id="'+ids+'">';
         htmlRows+=' <div class="col-lg-5"><div class="form-group"> <input type="text" class="form-control" id="er_name_'+count+'" aria-label="Input"></div> </div>';
         htmlRows+='<div class="col-lg-5"><div class="form-group"><input type="text" readonly class="form-control" id="er_code_'+count+'" aria-label="Input"> </div></div>';
         htmlRows+='<div class="col-lg-2 text-end mb-3"> <span onclick="deleterow(\'' + ids + '\',\'paydetails\')" > <i class="fa fa-trash"></i><button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button></div>';
-        htmlRows+='</div>';        
+        htmlRows+='</div>';
         if(type=='deduction'){
             $('.deductionclass').append(htmlRows);
             earningdata('','dd',count);
@@ -79,7 +79,7 @@ foreach((array)$earnings as $ern){
             $('.eraningclass').append(htmlRows);
              earningdata('','er',count);
         }
-        
+
     }
     function deleterow(divId,type,hid=""){
         console.log("ID:"+divId+"/ Type"+type);
@@ -169,7 +169,7 @@ foreach((array)$earnings as $ern){
                                     <div class="col-lg-2 text-end mb-3">
                                         <span onclick="deleterow('pd_1', 'paydetails')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i></span>
                                         <button type="button" class="btn p-0 m-l-10"><i class="fa fa-pause-circle"></i></button>
-                                       
+
                                     </div>
                                 </div>
                                 <div class="row align-items-end pd_row" id="pd_2">
@@ -187,7 +187,7 @@ foreach((array)$earnings as $ern){
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
                                         <span onclick="deleterow('pd_2', 'paydetails')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i></span>
-                                        <button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>                                        
+                                        <button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -218,7 +218,7 @@ foreach((array)$earnings as $ern){
                                     <div class="col-lg-2 text-end mb-3">
                                         <span onclick="deleterow('emp_1','empdetails')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i></span>
                                         <button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="row align-items-end emp_row" id="emp_2">
@@ -236,7 +236,7 @@ foreach((array)$earnings as $ern){
                                     </div>
                                     <div class="col-lg-2 text-end mb-3">
                                         <span onclick="deleterow('emp_2','empdetails')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="fa fa-trash"></i> </span>
-                                        <button type="button" class="btn p-0 m-l-10"><i class="fa fa-pause-circle"></i></button>                                        
+                                        <button type="button" class="btn p-0 m-l-10"><i class="fa fa-pause-circle"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -244,7 +244,7 @@ foreach((array)$earnings as $ern){
                                 <button class="btn btn-primary" type="button" onclick="addemloyedetails()" ><i class="fa fa-plus"></i> <?= __('Add More'); ?></button>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </div>
         </div>
@@ -253,7 +253,7 @@ foreach((array)$earnings as $ern){
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            
+
                             <div id="draggablePanelList_3" class="draggablepaylList draggablePanelList">
                                 <div class="row align-items-end" id="pd_ctc_row">
                                     <div class="col-lg-5">
@@ -272,7 +272,7 @@ foreach((array)$earnings as $ern){
                                                 </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-lg-5">
                                         <div class="form-group">
                                             <span class="form-label f-w-600 f-14"><?= __('Lable'); ?></span>
@@ -291,11 +291,11 @@ foreach((array)$earnings as $ern){
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <h6 class="f-w-500 m-l-5 m-r-5 bg-gray"><?= __('Salary Details'); ?></h6>
@@ -317,14 +317,14 @@ foreach((array)$earnings as $ern){
                                     </div>
                                 </div>
                                 <div class="col-lg-2 text-end mb-3">
-                                    
+
                                 </div>
                             </div>
                             <div id="draggablePanelList_4" class="eraningclass draggablePanelList">
                                 <?php $e=1; foreach((array)$earnings as $ern){
                                     if($ern['calculation_mode_type']==1 && !in_array($ern['code'],$noshow)){
                                         $show_select = 'N'; $show_text = 'Y';
-                                ?> 
+                                ?>
                                 <div class="row align-items-end er_row" id="er_<?php echo $e; ?>">
                                     <div class="col-lg-5">
                                         <div class="form-group mt-3">
@@ -395,15 +395,15 @@ foreach((array)$earnings as $ern){
                                     </div>
                                 </div>
                                 <div class="col-lg-2 text-end mb-3">
-                                    
+
                                 </div>
                             </div>
                             <div id="draggablePanelList_6" class="deductionclass draggablePanelList">
-                                
+
                                 <?php $e=1; foreach((array)$earnings as $ern){
                                     if($ern['calculation_mode_type']==2 && !in_array($ern['code'],$noshow)){
                                        $show_select = 'N'; $show_text = 'Y';
-                                ?> 
+                                ?>
                                 <div class="row align-items-end dd_row" id="dd_<?php echo $e; ?>">
                                     <div class="col-lg-5">
                                         <div class="form-group mt-3">
@@ -412,7 +412,7 @@ foreach((array)$earnings as $ern){
                                     </div>
                                     <div class="col-lg-5">
                                         <div class="form-group mt-3">
-                                           
+
                                             <div id="code_text" <?php if($show_text == 'N'){ ?> style="display: none;" <?php } ?>>
                                                 <input class="form-control" id="dd_name_<?php echo $e; ?>" <?php if(in_array($ern['code'],(array)$fixedcd)){ echo "readonly"; } ?> type="text" name="code"  value="<?php echo $ern['code']; ?>" aria-label="<?= htmlspecialchars(__('Code'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>

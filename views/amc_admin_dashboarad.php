@@ -9,7 +9,7 @@
                                                                 <i class="fa fa-check-square-o"></i>
                                                                 <i class="fa fa-filter"></i>
                                                             </div>
-                                                        </div> 
+                                                        </div>
                                                         <div class="card-body">
                                                             <button class="btn bg-gray waves-effect waves-light btn-sm w-100 text-start f-w-600"><?= __('High') ?></button>
                                                             <button class="btn bg-gray waves-effect waves-light btn-sm w-100 text-start f-w-600"><?= __('Low') ?></button>
@@ -20,9 +20,9 @@
                                                     <div class="col-lg-8">
                                                         <div class="card-header">
                                                             <h5><?= __('Order Status') ?></h5>
-                                                        </div> 
+                                                        </div>
                                                         <div class="card-body">
-                                                            <div id="chart_bar" style="width: 100%; height: 300px;"></div>     
+                                                            <div id="chart_bar" style="width: 100%; height: 300px;"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -32,21 +32,21 @@
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5><?= __('Top 10 Reqiured Skills') ?></h5>
-                                                </div> 
+                                                </div>
                                                 <div class="card-block">
                                                     <div id="chart_Donut" style="width: 100%; height: 300px;"></div>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5><?= __('Work Maintenance Manager') ?></h5>
-                                                </div> 
+                                                </div>
                                                 <div class="card-block">
                                                     <img src="../files/assets/images/msg.png" class="w-100" alt="">
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -54,7 +54,7 @@
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5><?= __('Job Priorities By') ?></h5>
-                                                </div> 
+                                                </div>
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-lg-3">

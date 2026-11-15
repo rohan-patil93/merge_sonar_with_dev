@@ -1,9 +1,9 @@
 <?php
-$vurl = API."?mode=togetVendorAgreementexpirelist"; 
+$vurl = API."?mode=togetVendorAgreementexpirelist";
     $configesponse = callAPI($vurl);
 	$vendor_agreement = json_decode($configesponse,1);
 	//print_r($vendor_agreement); exit;
-	 $vurl = API."?mode=customadmdashboardmodule3"; 
+	 $vurl = API."?mode=customadmdashboardmodule3";
     $configesponse = callAPI($vurl);
 	$mcats = json_decode($configesponse,1);
 	//echo "<pre>"; print_r($mcats); exit;
@@ -62,7 +62,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	$cctdetail['noemp'] = implode(',',(array)$cdatasemp);
 	foreach($vendor_admin as $vnkey=>$vn_admins){
 		$ym =array();
-		
+
 		foreach($vn_admins as $yymm=>$vn_adminsq){
 			$vnbillable[$vnkey][$yymm]['noemp']=0;
 			foreach($vn_adminsq as $vn_adm){
@@ -89,7 +89,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 //echo "<pre>"; print_r($vnbillable); print_r($vntdetail); exit;
 /*
 	//echo "<pre>"; print_r($ccbillable); print_r($cctdetail); exit;
-    $vurl = API."?mode=togetverticaldata"; 
+    $vurl = API."?mode=togetverticaldata";
     $configesponse = callAPI($vurl);
 	$vcats = json_decode($configesponse,1);
 	//print_r($vcats);
@@ -98,10 +98,10 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
         $vvalue[] = $vcat['charg'];
     }
 
-    $vurl = API."?mode=togetcoscentergraphdata"; 
+    $vurl = API."?mode=togetcoscentergraphdata";
     $configesponse = callAPI($vurl);
 	$cdatas = json_decode($configesponse,1);
-	$vurl = API."?mode=togetvendorgraphdata"; 
+	$vurl = API."?mode=togetvendorgraphdata";
     $configesponse = callAPI($vurl);
 	$vendordatas= json_decode($configesponse,1);
 	foreach($cdatas as $cdata){
@@ -122,7 +122,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	if($fmont >3){ $fdate = date('Y')."-04"; }else{ $fdate = date("Y", strtotime("-1 years"))."-04"; }
 	for($i=1; $i<13 ;$i++){
 	   $cyx[] = $fdate;
-	   
+
 	   foreach($ccosval as $key=>$ccos){
 	       $ccosval[$key][$fdate] = $ccos[$fdate]!="" ? $ccos[$fdate] : 0;
 	   }
@@ -141,7 +141,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	$ccosvaldatas = implode(",",$ccosvaldata);
 	$vendorvaldatas = implode(",",$vendorvaldata);
 	//echo "ravi".$ccosvaldatas; exit;*/
-    
+
 ?>
 <div class="row p-5">
 	<!--<div class="col-lg-6 col-xxl-6">
@@ -150,7 +150,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 
 <div class="col-lg-8  draggable-zone">
 	<?php include_once('custom_view_vms_budget.php'); ?>
-</div>	  
+</div>
 <div class="col-lg-4">
 	<!--begin::Card-->
 	<input type="hidden" name="vname" id="vname" value="<?php echo implode("|",(array)$vtdetail['name']);?>">
@@ -235,7 +235,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 			<div class="card-title">
 				<h3 class="card-label"><?= __("CostCenter Wise Employee Count") ?></h3>
 			</div>
-			
+
 		</div>
 		<div class="card-body">
 			<!--begin::Chart-->
@@ -256,7 +256,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 			<div class="card-title">
 				<h3 class="card-label"><?= __("Vendor Wise Employee Count") ?></h3>
 			</div>
-			
+
 		</div>
 		<div class="card-body">
 			<!--begin::Chart-->
@@ -288,9 +288,9 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	<!--end::Card-->
 </div>
 	<div class="col-lg-6 order-2 order-xxl-1">
-		
+
 		<div class="card card-custom card-stretch gutter-b">
-			
+
 			<div class="card-header border-0 pt-5">
 				<h3 class="card-title align-items-start flex-column">
 					<span class="card-label font-weight-bolder text-dark"><?= __("Vendor Agreements") ?></span>
@@ -309,10 +309,10 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 					</ul>
 				</div>
 			</div>
-			
+
 			<div class="card-body pt-2 pb-0 mt-n3" style="max-height: 410px;overflow: auto;">
-				<div class="tab-content mt-5" id="myTabTables11">	
-					<div class="tab-pane fade show active" id="kt_tab_pane_11_3" role="tabpanel" aria-labelledby="kt_tab_pane_11_1">				
+				<div class="tab-content mt-5" id="myTabTables11">
+					<div class="tab-pane fade show active" id="kt_tab_pane_11_3" role="tabpanel" aria-labelledby="kt_tab_pane_11_1">
 						<div class="table-responsive">
 							<table class="table table-borderless table-vertical-center">
 								<thead>
@@ -330,7 +330,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										<td class="pl-0 py-4">
 											<?php if($agreement['image']!=""){ ?>
 												<div class="d-flex align-items-center">
-													<div class="symbol symbol-40">														
+													<div class="symbol symbol-40">
 															<img src="uploads/customer/<?php echo $agreement['image']; ?>" class="h-50 align-self-center" alt="" />
 													</div>
 												</div>
@@ -340,11 +340,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										</td>
 										<td class="pl-0">
 											<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">&nbsp;
-												<?php echo $agreement['display_name']; ?></a>											
+												<?php echo $agreement['display_name']; ?></a>
 										</td>
 										<td class="text-center">
 											<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo $agreement['agreement_name']; ?></span>
-											
+
 										</td>
 										<td class="text-center">
 											<span class="text-muted font-weight-500"><?php echo date('d M, Y',strtotime($agreement['signed_date'])); ?></span>
@@ -358,7 +358,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 							</table>
 						</div>
 					</div>
-					<div class="tab-pane" id="kt_tab_pane_11_2" role="tabpanel" aria-labelledby="kt_tab_pane_11_2">				
+					<div class="tab-pane" id="kt_tab_pane_11_2" role="tabpanel" aria-labelledby="kt_tab_pane_11_2">
 						<div class="table-responsive">
 							<table class="table table-borderless table-vertical-center">
 								<thead>
@@ -376,7 +376,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										<td class="pl-0 py-4">
 												<?php if($agreement['image']!=""){ ?>
 												<div class="d-flex align-items-center">
-													<div class="symbol symbol-40">														
+													<div class="symbol symbol-40">
 															<img src="uploads/customer/<?php echo $agreement['image']; ?>" class="h-50 align-self-center" alt="" />
 													</div>
 												</div>
@@ -386,11 +386,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										</td>
 										<td class="pl-0">
 											<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">&nbsp;
-												<?php echo $agreement['display_name']; ?></a>											
+												<?php echo $agreement['display_name']; ?></a>
 										</td>
 										<td class="text-center">
 											<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo $agreement['agreement_name']; ?></span>
-											
+
 										</td>
 										<td class="text-center">
 											<span class="text-muted font-weight-500"><?php echo date('d M, Y',strtotime($agreement['signed_date'])); ?></span>
@@ -404,7 +404,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 							</table>
 						</div>
 					</div>
-					<div class="tab-pane" id="kt_tab_pane_11_1" role="tabpanel" aria-labelledby="kt_tab_pane_11_1">				
+					<div class="tab-pane" id="kt_tab_pane_11_1" role="tabpanel" aria-labelledby="kt_tab_pane_11_1">
 						<div class="table-responsive">
 							<table class="table table-borderless table-vertical-center">
 								<thead>
@@ -422,7 +422,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										<td class="pl-0 py-4">
 										<?php if($agreement['image']!=""){ ?>
 												<div class="d-flex align-items-center">
-													<div class="symbol symbol-40">														
+													<div class="symbol symbol-40">
 															<img src="uploads/customer/<?php echo $agreement['image']; ?>" class="h-50 align-self-center" alt="" />
 													</div>
 												</div>
@@ -432,11 +432,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										</td>
 										<td class="pl-0">
 											<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">&nbsp;
-												<?php echo $agreement['display_name']; ?></a>											
+												<?php echo $agreement['display_name']; ?></a>
 										</td>
 										<td class="text-center">
 											<span class="text-dark-75 font-weight-bolder d-block font-size-lg"><?php echo $agreement['agreement_name']; ?></span>
-											
+
 										</td>
 										<td class="text-center">
 											<span class="text-muted font-weight-500"><?php echo date('d M, Y',strtotime($agreement['signed_date'])); ?></span>
@@ -449,15 +449,15 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 								</tbody>
 							</table>
 						</div>
-					</div>	
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- <div class="col-lg-6 order-2 order-xxl-1">
-		
+
 		<div class="card card-custom card-stretch gutter-b">
-			
+
 			<div class="card-header border-0 pt-5">
 				<h3 class="card-title align-items-start flex-column">
 					<span class="card-label font-weight-bolder text-dark">All Vendors</span>
@@ -477,12 +477,12 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 					</ul>
 				</div>
 			</div>
-			
+
 			<div class="card-body pt-2 pb-0 mt-n3">
 				<div class="tab-content mt-5" id="myTabTables11">
-					
+
 					<div class="tab-pane fade show active" id="kt_tab_pane_11_3" role="tabpanel" aria-labelledby="kt_tab_pane_11_1">
-						
+
 						<div class="table-responsive">
 							<table class="table table-borderless table-vertical-center">
 								<thead>
@@ -505,11 +505,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										</td>
 										<td class="pl-0">
 											<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Payrol Application</a>
-											
+
 										</td>
 										<td class="text-center">
 											<span class="text-dark-75 font-weight-bolder d-block font-size-lg">15</span>
-											
+
 										</td>
 										<td class="text-center">
 											<span class="text-muted font-weight-500">1200</span>
@@ -517,25 +517,25 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										<td class="text-center">
 											<span class="label label-lg label-light-success label-inline">10</span>
 										</td>
-										
+
 									</tr>
-									
+
 								</tbody>
 							</table>
 						</div>
-						
+
 					</div>
-					
-							
+
+
 				</div>
 			</div>
-		
+
 		</div>
 	</div>
 	<div class="col-lg-6 order-2 order-xxl-1">
-		
+
 		<div class="card card-custom card-stretch gutter-b">
-			
+
 			<div class="card-header border-0 pt-5">
 				<h3 class="card-title align-items-start flex-column">
 					<span class="card-label font-weight-bolder text-dark">All Jobs</span>
@@ -555,12 +555,12 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 					</ul>
 				</div>
 			</div>
-			
+
 			<div class="card-body pt-2 pb-0 mt-n3">
 				<div class="tab-content mt-5" id="myTabTables11">
-					
+
 					<div class="tab-pane fade show active" id="kt_tab_pane_111_1" role="tabpanel" aria-labelledby="kt_tab_pane_11_1">
-						
+
 						<div class="table-responsive">
 							<table class="table table-borderless table-vertical-center">
 								<thead>
@@ -570,7 +570,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										<th scope="col" class="p-0 min-w-100px"> All Vendors</th>
 										<th scope="col" class="p-0 min-w-125px"> Apply Candidates</th>
 										<th scope="col" class="p-0 min-w-110px">Approved Candidates</th>
-										
+
 									</tr>
 								</thead>
 								<tbody>
@@ -584,11 +584,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										</td>
 										<td class="pl-0">
 											<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">Payrol Application</a>
-											
+
 										</td>
 										<td class="text-center">
 											<span class="text-dark-75 font-weight-bolder d-block font-size-lg">15</span>
-											
+
 										</td>
 										<td class="text-center">
 											<span class="text-muted font-weight-500">1200</span>
@@ -596,26 +596,25 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 										<td class="text-center">
 											<span class="label label-lg label-light-success label-inline">10</span>
 										</td>
-										
+
 									</tr>
-									
+
 								</tbody>
 							</table>
 						</div>
-						
+
 					</div>
-					
-					
+
+
 				</div>
 			</div>
-			
+
 		</div>
-	
+
 	</div>	 -->
 </div>
 	<!-- <div class="col-lg-8 draggable-zone">
          <?php //include_once('custom_view_admin_dashboard_report.php'); ?>
-      </div> -->	
-					
+      </div> -->
 
-													
+

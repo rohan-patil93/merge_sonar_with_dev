@@ -24,11 +24,11 @@ $approved_arr = $response['approved'];
 $tracking_pending_arr = $tracking_inprogress_arr = $tracking_completed_arr = array();
 $tracking_pending_arr = $response['tracking_pending'];
 $tracking_inprogress_arr = $response['tracking_inprogress'];
-$tracking_completed_arr = $response['tracking_completed']; 
+$tracking_completed_arr = $response['tracking_completed'];
 $tracking_percentage_arr = $response['tracking_percentage'];
 // echo '<pre>';
 // print_r($tracking_percentage_arr);
-// echo '</pre>'; 
+// echo '</pre>';
 
 // echo " competed rows: </br>";
 // print_r($tracking_completed_arr);
@@ -134,7 +134,7 @@ foreach ($tracking_inprogress_arr as $row) {
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-red"><?php echo $total_amount; ?></h3>
 						<p class="m-b-0 d-inline-block"><?php echo $csr_amount_unit; ?></p>
-						
+
 					</div>
 				</div>
 			</div>
@@ -153,7 +153,7 @@ foreach ($tracking_inprogress_arr as $row) {
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-blue"><?php echo $active_amount; ?></h3>
 						<p class="m-b-0 d-inline-block"><?php echo $csr_amount_unit; ?></p>
-						
+
 					</div>
 				</div>
 			</div>
@@ -171,7 +171,7 @@ foreach ($tracking_inprogress_arr as $row) {
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-purple"><?php echo $inprogress_amount; ?></h3>
 						<p class="m-b-0 d-inline-block"><?php echo $csr_amount_unit; ?></p>
-						
+
 					</div>
 				</div>
 			</div>
@@ -191,7 +191,7 @@ foreach ($tracking_inprogress_arr as $row) {
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-lite-green"><?php echo $approved_amount; ?></h3>
 						<p class="m-b-0 d-inline-block"><?php echo $csr_amount_unit; ?></p>
-						
+
 					</div>
 				</div>
 			</div>
@@ -210,7 +210,7 @@ foreach ($tracking_inprogress_arr as $row) {
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-yellow"><?php echo $tracking_amount; ?></h3>
 						<p class="m-b-0 d-inline-block"><?php echo $csr_amount_unit; ?></p>
-						
+
 					</div>
 				</div>
 			</div>
@@ -230,7 +230,7 @@ foreach ($tracking_inprogress_arr as $row) {
 						<h3 class="m-b-0 d-inline-block text-c-green"><?php echo $completed_amount; ?></h3>
 						<p class="m-b-0 d-inline-block"><?php echo $csr_amount_unit; ?></p>
 
-						
+
 					</div>
 				</div>
 			</div>
@@ -652,7 +652,7 @@ foreach ($tracking_inprogress_arr as $row) {
 												} else {
 													$labelClass = 'label-success';
 												}
-										
+
 										?>
 												<tr>
 													<td>

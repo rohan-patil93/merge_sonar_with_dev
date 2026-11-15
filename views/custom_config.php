@@ -1,7 +1,7 @@
 <?php
 //print_r($_POST); exit;
 if (isset($_POST['submit'])){
-	// print_r($_POST); 
+	// print_r($_POST);
 	$data = $_POST;
 	unset($data['submit']);
 	unset($data['hid']);
@@ -18,10 +18,10 @@ if (isset($_POST['submit'])){
 
  exit;
 }
-if(isset($_GET['Rid']) && $_GET['Rid'] !=''){ 
-	$rid =  base64_decode(base64_decode($_GET['Rid'])); 
+if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
+	$rid =  base64_decode(base64_decode($_GET['Rid']));
 	$url = API."?mode=singlerowtabledata&rid=".$rid."&table=".TPREFIX.TBL_CONFIG;
-	//echo $url; 
+	//echo $url;
 	$response = file_get_contents($url, false, $context);
 	//echo $response;
 	$data = json_decode($response,1);
@@ -29,23 +29,23 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
 $time_zones = timezoan();
 $typeurl = API."?mode=gettabledetails&fid=genc_code&rid=INVOICEPREFIX&table=".TBL_GENRAL_CODE_DETAILS;
 //echo $typeurl; exit;
-$typeresponse = file_get_contents($typeurl, false, $context);	
+$typeresponse = file_get_contents($typeurl, false, $context);
 $perfixresponse = json_decode($typeresponse,1);
 $taxurl = API."?mode=gettabledetails&fid=company_id&rid=".$_SESSION['company_id']."&table=".TPREFIX.TBL_TAXES;
 //echo $taxurl."|||".$_SESSION['company_id']; exit;
-$taxres = file_get_contents($taxurl, false, $context);	
+$taxres = file_get_contents($taxurl, false, $context);
 $taxres = json_decode($taxres,1);
 $currencyurl = API."?mode=gettabledetails&table=".TBL_CURRENCIES;
 //echo $currencyurl; exit;
-$currencyres = file_get_contents($currencyurl, false, $context);	
+$currencyres = file_get_contents($currencyurl, false, $context);
 $currencyres = json_decode($currencyres,1);
 $languurl = API."?mode=gettabledetails&fid=genc_code&rid=LANGUAGE&table=".TBL_GENRAL_CODE_DETAILS;
 //echo $typeurl; exit;
-$languagedata = file_get_contents($languurl, false, $context);	
+$languagedata = file_get_contents($languurl, false, $context);
 $languagedata = json_decode($languagedata,1);
 $payurl = API."?mode=gettabledetails&fid=genc_code&rid=PAYMETHOD&table=".TBL_GENRAL_CODE_DETAILS;
 //echo $typeurl; exit;
-$paydata = file_get_contents($payurl, false, $context);	
+$paydata = file_get_contents($payurl, false, $context);
 $paydata = json_decode($paydata,1);
 //print_r($languagedata); exit;
 ?>
@@ -216,7 +216,7 @@ $paydata = json_decode($paydata,1);
 									<div class="form-group">
 										<label for="fld_subscription_info"><?= __('Subscription Info') ?></label>
 										<input id="fld_subscription_info" type="text" class="form-control" name="subscription_info" placeholder="<?= __('Subscription Info') ?>" value="<?php echo $data['subscription_info']; ?>">
-									</div>	
+									</div>
 								</div>
 							</div>
 						</div>
@@ -255,7 +255,7 @@ $paydata = json_decode($paydata,1);
 									</div>
 									<div class="form-group">
 										<label for="percentage_position"><?= __('Percentage Position') ?></label>
-										
+
 										<select class="form-control" id="percentage_position"   name= "percentage_position">
 											<option <?php if($data['percentage_position'] == 'R'){?> selected <?php } ?>  value = 'r'  > <?= __('Right') ?></option>
 											<option <?php if($data['percentage_position'] == 'L'){?> selected <?php } ?>  value = 'r'  > <?= __('Left') ?></option>
@@ -263,15 +263,15 @@ $paydata = json_decode($paydata,1);
 									</div>
 									<div class="form-group">
 										<label for="number_format"><?= __('Decimal places') ?></label>
-										
+
 										<select class="form-control" id="number_format"   name= "number_format">
 											<?php for($i=1; $i<5; $i++){?>
-											<option <?php if($data['number_format'] == $i){?> selected <?php } ?>  value = <?php echo $i; ?>  > 
+											<option <?php if($data['number_format'] == $i){?> selected <?php } ?>  value = <?php echo $i; ?>  >
 												<?php echo substr('999.999999', 0,4+$i); ?></option>
 											<?php } ?>
 										</select>
 									</div>
-									
+
 									<div class="form-group">
 										<label for="invoice_perfix"><?= __('Invoice PreFix') ?></label>
 										<select class="form-control" id="invoice_perfix"   name= "invoice_perfix">
@@ -303,7 +303,7 @@ $paydata = json_decode($paydata,1);
 														<?php foreach ($currencyres as $currenc) {?>
 
 														<option <?php if($data['default_currency_id'] == $currenc['id']){?> selected <?php } ?>  value = <?php echo $currenc['id']; ?>  >
-														 <?php echo $currenc['currency']." [ ". $currenc['currency_short_code']." - ". $currenc['Symbol']." ]"; ?> 
+														 <?php echo $currenc['currency']." [ ". $currenc['currency_short_code']." - ". $currenc['Symbol']." ]"; ?>
 													</option>
 											<?php } ?>
 										</select>
@@ -315,9 +315,9 @@ $paydata = json_decode($paydata,1);
 										<div class="col-lg-12">
 											<div class="kt-radio-inline">
 													<?php $currency_formate  = array('99,99,99,99,999','99,999,999,999' );
-														foreach ($currency_formate as  $cu_formate) {  ?> 
+														foreach ($currency_formate as  $cu_formate) {  ?>
 														<label class="kt-radio">
-															<input type="radio"  <?php if($data['currency_formate'] == $cu_formate){ ?>checked <?php } ?> name="currency_formate" value='<?php echo $cu_formate; ?>'><?php echo $cu_formate; ?>	
+															<input type="radio"  <?php if($data['currency_formate'] == $cu_formate){ ?>checked <?php } ?> name="currency_formate" value='<?php echo $cu_formate; ?>'><?php echo $cu_formate; ?>
 															 <span></span>
 														</label>
 													<?php } ?>
@@ -342,7 +342,7 @@ $paydata = json_decode($paydata,1);
 														<option <?php if($data['default_tax_rate'] == $tax['id']){?> selected <?php } ?>  value = <?php echo $tax['id']; ?>  ><?php echo __($tax['name']); ?></option>
 											<?php } ?>
 										</select>
-										
+
 									</div>
 									<div class="form-group">
 										<label for="default_payment_mode"><?= __('Default Payment Mode') ?></label>
@@ -352,11 +352,11 @@ $paydata = json_decode($paydata,1);
 														<option <?php if($data['default_payment_mode'] == $lan['genc_detail_code']){?> selected <?php } ?>  value = <?php echo $lan['genc_detail_code']; ?>  ><?php echo __($lan['description']); ?></option>
 											<?php } ?>
 										</select>
-									</div>	
+									</div>
 									<div class="form-group">
 										<label for="fld_copy_right"><?= __('Copy Rights') ?></label>
 										<input id="fld_copy_right" type="text" class="form-control" name="copy_right" placeholder="<?= __('Copy Rights') ?>" value="<?php echo $data['copy_right']; ?>">
-									</div>					
+									</div>
 								</div>
 							</div>
 						</div>

@@ -15,7 +15,7 @@ if (isset($_POST['submitinvoice'])) {
   if ($response['status'] == 'sucess') {
     if ($response['LASTID'] == 0) {
       $msgcode = 3001;
-    } else { 
+    } else {
       $msgcode = 3000;
       $_SESSION['insert_msg'] = $msgcode;
      // header("location:index?option=COM_LIST_APPLICATION_DYNAMIC_INVOICE_SETTINGS");
@@ -2738,7 +2738,7 @@ if ($userData['user_photo'] != '') {
                     <!-- om new -->
                     <p class="name" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Name</span></p>
                     <p class="email" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Email</span></p>
-                    <p class="phone" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Phone</span></p>    
+                    <p class="phone" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Phone</span></p>
                   </div>
                 </div>
               </div>
@@ -3196,7 +3196,7 @@ if ($userData['user_photo'] != '') {
       firstAddressValue: document.getElementById('address1Select').value,
       firstAddressHeading: document.getElementById('inputheading1').value,
       firstAddressPosition: document.getElementById('address1position').value,
-      // om address part 
+      // om address part
       showFirstAddressField: document.getElementById('showFirstAddressField').checked,
       showFirstPincodeField: document.getElementById('showFirstPincodeField').checked,
       showFirstGstField: document.getElementById('showFirstGstField').checked,
@@ -3206,7 +3206,7 @@ if ($userData['user_photo'] != '') {
       secondAddressValue: document.getElementById('address2Select').value,
       secondAddressHeading: document.getElementById('inputheading2').value,
       secondAddressPosition: document.getElementById('address2position').value,
-      // om address part 
+      // om address part
       showSecondAddressField: document.getElementById('showSecondAddressField').checked,
       showSecondPincodeField: document.getElementById('showSecondPincodeField').checked,
       showSecondGstField: document.getElementById('showSecondGstField').checked,
@@ -3216,7 +3216,7 @@ if ($userData['user_photo'] != '') {
       thirdAddressValue: document.getElementById('address3Select').value,
       thirdAddressHeading: document.getElementById('inputheading3').value,
       thirdAddressPosition: document.getElementById('address3position').value,
-      // om address part 
+      // om address part
       showThirdAddressField: document.getElementById('showThirdAddressField').checked,
       showThirdPincodeField: document.getElementById('showThirdPincodeField').checked,
       showThirdGstField: document.getElementById('showThirdGstField').checked,
@@ -3297,19 +3297,19 @@ if ($userData['user_photo'] != '') {
   document.getElementById('address2position').addEventListener('change', updateAddressPreview);
   document.getElementById('address3position').addEventListener('change', updateAddressPreview);
 
-   // om address part 
+   // om address part
   document.getElementById('showFirstAddressField').addEventListener('change', saveAddressSettings);
   document.getElementById('showFirstPincodeField').addEventListener('change', saveAddressSettings);
   document.getElementById('showFirstGstField').addEventListener('change', saveAddressSettings);
   document.getElementById('showFirstPanField').addEventListener('change', saveAddressSettings);
 
-  // om address part 
+  // om address part
   document.getElementById('showSecondAddressField').addEventListener('change', saveAddressSettings);
   document.getElementById('showSecondPincodeField').addEventListener('change', saveAddressSettings);
   document.getElementById('showSecondGstField').addEventListener('change', saveAddressSettings);
   document.getElementById('showSecondPanField').addEventListener('change', saveAddressSettings);
 
-  // om address part 
+  // om address part
   document.getElementById('showThirdAddressField').addEventListener('change', saveAddressSettings);
   document.getElementById('showThirdPincodeField').addEventListener('change', saveAddressSettings);
   document.getElementById('showThirdGstField').addEventListener('change', saveAddressSettings);
@@ -3812,13 +3812,13 @@ if ($userData['user_photo'] != '') {
             const checkbox = document.getElementById(fields[key]?.checkbox);
             const headingInput = document.getElementById(fields[key]?.headingInput);
             const valueSelect = document.getElementById(fields[key]?.valueSelect);
-            
+
             if (checkbox && fieldSettings.visible !== undefined) {
               checkbox.checked = fieldSettings.visible;
               toggleFieldVisibility(key, fieldSettings.visible);
             }
             if (headingInput && fieldSettings.heading) {
-              headingInput.value = fieldSettings.heading; 
+              headingInput.value = fieldSettings.heading;
               updatePreview(key);
             }
             if (valueSelect && fieldSettings.value) {
@@ -3892,14 +3892,14 @@ if ($userData['user_photo'] != '') {
     const updatePreview = (key) => {
       const field = fields[key];
       const headingValue = document.getElementById(field.headingInput).value;
-      
+
       field.elements.forEach((el) => {
         const headingClass = Array.from(el.classList).find((cls) => cls.startsWith('heading'));
         if (headingClass) {
           el.textContent = headingValue + ':';
         }
       });
-      
+
       saveFooterSettings();
     };
 
@@ -3946,7 +3946,7 @@ if ($userData['user_photo'] != '') {
       const headingInput = document.getElementById(field.headingInput);
       const valueSelect = document.getElementById(field.valueSelect);
       const checkbox = document.getElementById(field.checkbox);
-      
+
       if (headingInput) {
         headingInput.addEventListener('input', () => updatePreview(key));
       }
@@ -3960,15 +3960,15 @@ if ($userData['user_photo'] != '') {
         });
       }
     });
- 
+
     Object.keys(positions).forEach((key) => {
       const position = positions[key];
       document.getElementById(position.positionSelect).addEventListener('change', () => updatePosition(key));
     });
   });
- 
-  document.addEventListener('DOMContentLoaded', () => { 
-    setTimeout(() => { 
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
       Object.keys(fields).forEach((key) => {
         const checkbox = document.getElementById(fields[key].checkbox);
         if (checkbox && checkbox.checked) {
@@ -3982,26 +3982,26 @@ if ($userData['user_photo'] != '') {
   const validateTemplateName = () => {
     const templateNameInput = document.getElementById('template_name');
     const currentValue = templateNameInput.value.trim();
-    
+
     if (!currentValue) {
       showValidationError('Please fill the template name before submit');
       return false;
     }
-    
+
     hideValidationError();
     return true;
   };
 
   const validateShowLogo = (showError = true) => {
     const showLogoToggle = document.getElementById('showLogo');
-    
+
     if (!showLogoToggle.checked) {
       if (showError) {
         showValidationError('Show Logo must be Show');
       }
       return false;
     }
-    
+
     return true;
   };
 
@@ -4017,9 +4017,9 @@ if ($userData['user_photo'] != '') {
       document.getElementById('showemail'),
       document.getElementById('showphone'),
     ];
-    
+
     const checkedCount = topHeaderToggles.filter(toggle => toggle && toggle.checked).length;
-    
+
     if (checkedCount < 2) {
       if (showError) {
         showValidationError('Any two options must have to be Show in header details');
@@ -4031,14 +4031,14 @@ if ($userData['user_photo'] != '') {
 
   const validateHeaderOptions = (showError = true) => {
     const showHeaderToggle = document.getElementById('showAddress');
-    
+
     if (!showHeaderToggle.checked) {
       if (showError) {
         showValidationError('Show Header must be enabled in Header Options');
       }
       return false;
     }
-    
+
     return true;
   };
 
@@ -4048,9 +4048,9 @@ if ($userData['user_photo'] != '') {
       document.getElementById('showSecondAddress'),
       document.getElementById('showThirdAddress')
     ];
-    
+
     const checkedCount = addressToggles.filter(toggle => toggle && toggle.checked).length;
-    
+
     if (checkedCount < 1) {
       if (showError) {
         showValidationError('At least one address must be selected from Billing Address, Shipping Address, or Company Address');
@@ -4074,9 +4074,9 @@ if ($userData['user_photo'] != '') {
       document.getElementById('showamountcol'),
       document.getElementById('showtaxsumcol')
     ];
-    
+
     const checkedCount = tableColumnToggles.filter(toggle => toggle && toggle.checked).length;
-    
+
     if (checkedCount < 4) {
       if (showError) {
         showValidationError('At least 4 table column options must be selected from the available table options');
@@ -4189,7 +4189,7 @@ if ($userData['user_photo'] != '') {
       const showHeaderValid = validateHeaderOptions(false);
       const addressValid = validateAddressOptions(false);
       const tableValid = validateTableOptions(false);
-      
+
       if (templateValid && logoValid && headerValid && showHeaderValid && addressValid && tableValid) {
         hideValidationError();
       }
@@ -4205,27 +4205,27 @@ if ($userData['user_photo'] != '') {
         e.preventDefault();
         return false;
       }
-      
+
       if (!validateShowLogo()) {
         e.preventDefault();
         return false;
       }
-      
+
       if (!validateTopHeaderOptions()) {
         e.preventDefault();
         return false;
       }
-      
+
       if (!validateHeaderOptions()) {
         e.preventDefault();
         return false;
       }
-      
+
       if (!validateAddressOptions()) {
         e.preventDefault();
         return false;
       }
-      
+
       if (!validateTableOptions()) {
         e.preventDefault();
         return false;
@@ -4354,7 +4354,7 @@ if ($userData['user_photo'] != '') {
         showSecondPincodeField: addressSettings.showSecondPincodeField,
         showSecondGstField: addressSettings.showSecondGstField,
         showSecondPanField: addressSettings.showSecondPanField,
-        // om address part 
+        // om address part
         showThirdAddressField: addressSettings.showThirdAddressField,
         showThirdPincodeField: addressSettings.showThirdPincodeField,
         showThirdGstField: addressSettings.showThirdGstField,

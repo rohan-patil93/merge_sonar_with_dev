@@ -1,9 +1,9 @@
-<?php 
+<?php
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
 $transaction_id = $_POST['transaction_id'];
-$url1 = API."?mode=getpropertytenantdetails&rid=".$transaction_id;  
+$url1 = API."?mode=getpropertytenantdetails&rid=".$transaction_id;
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);
 $property_owners = $result['property_owners'];
@@ -15,25 +15,25 @@ $billtoberaisedtype = $result['bill_to_be_raise_type'];
 $rental_bill_types = $result['rental_bill_types'];
 $property_tenant_billings = $result['property_tenant_billings'];
 $property_tenant_details_extends = $result['property_tenant_details_extends'];
-// /echo "<pre>"; print_r($property_tenant_details_extends);echo "</pre>"; 
+// /echo "<pre>"; print_r($property_tenant_details_extends);echo "</pre>";
 ?>
 <script type="text/javascript">
     function submitExtendAgreement(){
         $("#extend_agreement_month_error").text('');
         var extend_agreement_month =$("#extend_agreement_month").val();
-        if(extend_agreement_month != ""){ 
+        if(extend_agreement_month != ""){
             var formvalue =  $("#employee_popup_form").serialize();
             jQuery.ajax({
                 url: "ajax.php",
                 data: "page=submitextendagreement&"+formvalue,
                 type: "POST",
                 success:function(response){
-                    console.log(response); 
+                    console.log(response);
 
-                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>',''); 
+                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
                      //window.location.href=window.location.href;
                      $('#popupm').html("");
-                     $('#kt_modal_KTDatatable_remotem').modal("hide");        
+                     $('#kt_modal_KTDatatable_remotem').modal("hide");
 
                 }
             });
@@ -77,20 +77,20 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
         <input type="hidden" name="rid" value='<?php echo $transaction_id; ?>'>
         <div class="row">
           <div class="col-lg-8">
-            <?php 
+            <?php
               $aryseq = array();
               $billingdetails = $property_tenant_billings[0]['bill_detail'];
               $billingdetail = json_decode($billingdetails,1);
-              foreach($billingdetail as $bd1){ 
+              foreach($billingdetail as $bd1){
                 $aryseq[] = $bd1['name'];
               }
               $utilitydetails = $property_tenant_billings[0]['utility_details'];
               $utilitydetail = json_decode($utilitydetails,1);
-              foreach($utilitydetail as $bd1){ 
+              foreach($utilitydetail as $bd1){
                 $aryseq[] = $bd1['name'];
               }
               $datearray = array();
-              foreach($property_tenant_billings as $ptb){ 
+              foreach($property_tenant_billings as $ptb){
                 $aryval = array();
                 $billingdetail = json_decode($ptb['bill_detail'],1);
                 foreach($billingdetail as $bd1){
@@ -111,18 +111,18 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
                     <?php foreach($property_tenant_billings as $ptb){ ?>
                     <th class="text-right"><?php echo fromDate($ptb['month_start_date']); ?></th>
                     <?php } ?>
-                
+
                   </tr>
                 </thead>
                 <tbody>
-                  <?php 
+                  <?php
                   $totalary = array();
                   foreach($aryseq as $keyid =>$bd1){ ?>
                     <tr>
                       <th class="p-2">
                         <?php echo $bd1; ?>
                       </th>
-                      <?php foreach($datearray as $datekey=>$ptb){ 
+                      <?php foreach($datearray as $datekey=>$ptb){
                           $billingdetails1 = $ptb[$keyid];
                           $totalary[$datekey] += $billingdetails1['rent'];
                       ?>
@@ -130,7 +130,7 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
                         <?php }  ?>
                     </tr>
                   <?php } ?>
-                    <tr>    
+                    <tr>
                       <th class="p-2">
                         <?php echo __('Total'); ?>
                       </th>
@@ -145,7 +145,7 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
           <div class="col-xl-4 form-group" >
                 <span class="form-label d-inline-block fw-bold"><?php echo __('Extend Month Year'); ?> <span class="text-danger">*</span></span>
                 <span class="d-block error-message text-danger" id="extend_agreement_month_error"></span>
-                <input aria-label="<?= htmlspecialchars(__('Extend agreement month'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="extend_agreement_month" id="extend_agreement_month" min="<?php echo date("Y-m", strtotime('+1 months', strtotime($property_tenant_details['lease_period_end_date']))); ?>" value="<?php echo date("Y-m", strtotime('+1 months', strtotime($property_tenant_details['lease_period_end_date']))); ?>"/>  
+                <input aria-label="<?= htmlspecialchars(__('Extend agreement month'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="extend_agreement_month" id="extend_agreement_month" min="<?php echo date("Y-m", strtotime('+1 months', strtotime($property_tenant_details['lease_period_end_date']))); ?>" value="<?php echo date("Y-m", strtotime('+1 months', strtotime($property_tenant_details['lease_period_end_date']))); ?>"/>
                 <div>
                     <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                       <thead>
@@ -155,8 +155,8 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
                         </tr>
                       </thead>
                       <tbody>
-                        <?php 
-                        if(count((array)$property_tenant_details_extends) !="0"){ 
+                        <?php
+                        if(count((array)$property_tenant_details_extends) !="0"){
                           foreach($property_tenant_details_extends as $ptde){ ?>
                           <tr>
                             <td><?php echo $ptde['extend_agreement_month_year']; ?></td>
@@ -165,7 +165,7 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
                         <?php } }else{ echo "<tr><td colspan='2' class='text-center'>No Data</td></tr>"; } ?>
                       </tbody>
                     </table>
-                  
+
                 </div>
           </div>
         </div>

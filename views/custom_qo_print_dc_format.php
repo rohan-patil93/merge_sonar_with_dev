@@ -17,7 +17,7 @@
                 </th>
             </tr>
             <tr>
-                <th scope="col" colspan="2" style="padding: 0px;"> 
+                <th scope="col" colspan="2" style="padding: 0px;">
                     <table style="width:100%;">
                         <tr>
                             <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Customer Name</th>
@@ -42,7 +42,7 @@
                 </th>
             </tr>
             <tr>
-                <th scope="col" colspan="2" style="padding: 0px;"> 
+                <th scope="col" colspan="2" style="padding: 0px;">
                     <table style="width:100%;">
                         <tr>
                             <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Supply Type Code</th>
@@ -130,7 +130,7 @@
             </tr>
         </tfoot>
     </table>
-</div> 
+</div>
 
 
 

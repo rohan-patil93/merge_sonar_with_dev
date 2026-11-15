@@ -51,7 +51,7 @@ foreach ($qustion_types as $key => $value) {
 if($row_id!='') {
 //print_r($assessment_qustion_details);
    foreach ($assessment_qustion_details as $qkey => $qvalue) {
-      $qid = $qvalue['id']; 
+      $qid = $qvalue['id'];
       //print_r($answer[$qid]);
       $checkedstatus = array();
       foreach($answer[$qid] as $anslist){
@@ -129,12 +129,12 @@ if(isset($_POST['create'])){
   $retunn_assessment_id = file_post_contents($url,$data,'insert');
   $return_response=json_decode($retunn_assessment_id,1);
  // exit;
-  header("location:index.php?option=COM_LIST_ASSESSMENT_SETUP&CAT=".$_GET['CAT']); 
- // header("location:index.php?option=".$_GET['option']."&CAT=".$_GET['CAT']."&Rid=".$return_response);  
+  header("location:index.php?option=COM_LIST_ASSESSMENT_SETUP&CAT=".$_GET['CAT']);
+ // header("location:index.php?option=".$_GET['option']."&CAT=".$_GET['CAT']."&Rid=".$return_response);
 }
 
 ?>
-<script src="assets/js/pages/myscrpit/bootstrap-daterangepicker.js"></script> 
+<script src="assets/js/pages/myscrpit/bootstrap-daterangepicker.js"></script>
 <script type="text/javascript">
 
    function deletequestion(qid){
@@ -216,7 +216,7 @@ function displaystausdrop(id,table,status_id){
      },
      error:function (){}
   });
-   
+
 }
 
 function showpopup(){
@@ -236,7 +236,7 @@ function showpopup(){
 function getnamelist(){
 
    var selectednames = document.getElementById('filter').value;
-   
+
    $.ajax({
       url: "ajax.php",
       data:'page=selectednames&names='+selectednames,
@@ -254,12 +254,12 @@ function getnamelist(){
 <div class="d-flex flex-column-fluid">
    <div class="container-fluid">
          <div class="alert alert-warning alert-dismissible">
-            <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong> 
+            <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
          </div>
           <div class="row">
       <div class="col-lg-12">
-         <div class="card">            
+         <div class="card">
             <div class="card-header table-card-header">
                <h5><?= __($display_tag) ?> <?= __('Setup') ?></h5>
          <div class="card-header-right table-card-header">
@@ -268,7 +268,7 @@ function getnamelist(){
                   Back
                </a>
             </div>
-         
+
    </div>
 
    <div class="card card-custom">
@@ -313,15 +313,15 @@ function getnamelist(){
 										<input type='text' class="form-control datepicker" id="assessment_end_date" name="assessment_end_date" value="<?php echo $assessment_details['assessment_end_date']; ?>" aria-label="Assessment End Date">
 									</div>
 								 <!--  <input type='date' class="form-control"  name="assessment_date" placeholder="Select date &amp; time range" value="<?php echo $assessment_date; ?> " / aria-label="Select date &amp;amp; time range"> -->
-								   
+
 								</div>
 								<!-- <div class='input-group' id='kt_daterangepicker_assessment'>
-                                    
+
                                      <div class="input-group-append">
                                        <span class="input-group-text">
                                           <i class="la la-calendar-check-o"></i>
                                        </span>
-                                    </div> 
+                                    </div>
                                  </div>-->
                               </div>
                               <div class="form-group mt-3">
@@ -360,7 +360,7 @@ function getnamelist(){
                         <div class="card-footer d-flex row">
 
                            <div class="col-lg-3">
-                              <button type="submit" name="create" class="btn btn-primary font-weight-bold float-left"><?php echo $_GET['Rid']!='' ? __('Update') : __('Save'); ?></button>                       
+                              <button type="submit" name="create" class="btn btn-primary font-weight-bold float-left"><?php echo $_GET['Rid']!='' ? __('Update') : __('Save'); ?></button>
                            </div>
 
                            <div class="col-lg-6 text-right">
@@ -383,18 +383,18 @@ function getnamelist(){
          </div>
       </div>
       <div class="col-lg-6 p-10" id="assessment_questions">
-        <?php if($_GET['Rid']!='') { 
+        <?php if($_GET['Rid']!='') {
          $value_id = 0;
          $display_question = "";
          foreach ($_SESSION['questions_list'] as $qkey => $qvalue) {
             $value = json_decode($qvalue,1);
             $options = $value['option_data'];
         $checkedstatus = $value['checkedstatus'];
-            $marks = $value['marks'];           
+            $marks = $value['marks'];
             $title = $value['title'];
             $deleteqid = $value['uniq_qid'];
-            $question_id = $value['question_id'];          
-           $rid = $value['rid'];   
+            $question_id = $value['question_id'];
+           $rid = $value['rid'];
             $display_question .= ' <div class="mt-5" id="'.$qkey.'"> <div class="col-lg-12 table-bordered">
             <input type="hidden" name="question_id'.$value_id.'" value="'.$question_id.'">
             <input type="hidden" name="rid" value="'.$rid.'">
@@ -416,17 +416,17 @@ function getnamelist(){
             $display_question .= '<div class="col-lg-4">
             <label for="markfield'.$value_id.'">'.__('Marks').' <span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="markfield'.$value_id.'" name="marks'.$value_id.'" value="'.$marks.'" aria-label="Marks">
-            </div>'; 
-            
+            </div>';
+
             $display_question .= '</div>';
-            if($value['type']== $typeofquestion['1'] || $value['type']== $typeofquestion['2']) { 
+            if($value['type']== $typeofquestion['1'] || $value['type']== $typeofquestion['2']) {
                $display_question .= '<div class="col-lg-12 mt-4 mb-4">  '.__('Mark the Correct Answer').' </div>';
                $display_question .= '<div id="options'.$value_id.'">';
-               foreach ($options as $opkey => $opvalue) { 
+               foreach ($options as $opkey => $opvalue) {
                    $checkstatus = $checkedstatus[$opkey];
                   $display_question .= '<div id="optionlist'.$value_id.$opkey.'">
                   <div class="form-group row" id="'.$opkey.'">
-                  <div class="col-lg-12  row ml-5"> <div class="">'; 
+                  <div class="col-lg-12  row ml-5"> <div class="">';
                   if($value['type']== $typeofquestion['1'] ) {
                      $display_question .= '<label class="radio radio-primary mt-4">
                      <input type="radio"  name="assessment_correct_option'.$value_id.'['.$opkey.']" id="singlechoice'.$value_id.$opkey.'" '.$checkstatus.' aria-label="Assessment Correct Option&#039;.$value Id.&#039;[&#039;.$opkey.&#039;]">"
@@ -439,7 +439,7 @@ function getnamelist(){
                      <span></span>
                      </label>
                      <input type="hidden" name="allow_multiple_selections'.$value_id.'" id="allow_multiple_selections'.$value_id.'" value="1" />';
-                  } 
+                  }
                   $copvalue = $checkstatus=='checked'? $opvalue : '';
                   $display_question .= '
                                   
@@ -452,7 +452,7 @@ function getnamelist(){
     </div>
 	 </div>';
                   $display_question .= '</div>';
-                  
+
                }
                $display_question .= '</div>';
                $op = count((array)$options)+1;
@@ -460,15 +460,15 @@ function getnamelist(){
                <input type="hidden" value="'.$opkey.'" id="option_row"/>
                <button class="btn btn-success"  onclick="addnewoptionrows('."'".$value_id."'".",'".$value['type']."'".')" id="addNewRows" type="button">+ '.__('Add More Options').'</button>
                </div>';
-            }  
-            if($value['type']==$typeofquestion['3'])  {  
+            }
+            if($value['type']==$typeofquestion['3'])  {
                $display_question .= '  <input type="hidden" name="assessment_question_option'.$value_id.'[]"  class="form-control" value=""> ';
-            } 
+            }
             $display_question .= '</div> </div>  ';
             $value_id ++;
 
          }
-         echo $display_question;    
+         echo $display_question;
       }
       ?>
 </div>

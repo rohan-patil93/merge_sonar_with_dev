@@ -23,7 +23,7 @@ if(ST_INVOICE_GENERATED == $field){
 }
 
 $vurl = API."?mode=singlerowtabledata&table=".TBL_ITEMS."&rid=".$item_id;
-//echo $vurl; 
+//echo $vurl;
 $item_daata = callAPI($vurl);
 $item_daata = json_decode($item_daata,1);
 
@@ -35,11 +35,11 @@ if($item_daata['tracking_type'] == 1){
 		$vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'transaction_table'=>$table,'random_no'=>$_POST['random'],'item_id'=>$item_id,'is_active'=>'0');
 	}
 	$vdata = urlencode(json_encode($vdata1));
-	$vurl = API."?mode=gettabledetailswithconditions&table=item_serial_nos&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=item_serial_nos&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$res_data = json_decode($configesponse,1);
 	foreach($res_data as $res){
-		$serialnos[] = $res['serial_no']; 
+		$serialnos[] = $res['serial_no'];
 	}
 }
 if($item_daata['tracking_type'] == 2){
@@ -48,13 +48,13 @@ if($item_daata['tracking_type'] == 2){
 	}else{
 		$vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'transaction_table'=>$table,'random_no'=>$_POST['random'],'item_id'=>$item_id,'is_active'=>'0');
 	}
-	
+
 	$vdata = urlencode(json_encode($vdata1));
-	$vurl = API."?mode=gettabledetailswithconditions&table=item_lot_nos&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=item_lot_nos&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$res_data = json_decode($configesponse,1);
 	foreach($res_data as $res){
-		$serialnos[] = array('lot'=>$res['lot_no'], 'lot_value'=>$res['lot_quantity']); 
+		$serialnos[] = array('lot'=>$res['lot_no'], 'lot_value'=>$res['lot_quantity']);
 	}
 }
 ////$status = ViewStatusValue($field);
@@ -66,7 +66,7 @@ if($item_daata['tracking_type'] == 2){
 		var count = $(".sfitemRow").length;
 		//alert('la-hand-o-right'+count);
 		count++;
-		var htmlRows = '';		
+		var htmlRows = '';
 		htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;">';
 		htmlRows += '<div class="col-lg-3">';
 		htmlRows += '<input type="text" class="form-control"  id="static_value_'+count+'"  value=""  name="type">';
@@ -74,9 +74,9 @@ if($item_daata['tracking_type'] == 2){
 		htmlRows += '<div class="col-lg-3">';
 		htmlRows += '<input type="text"class="form-control"  id="qty_val_'+count+'"  value=""  name="type"> ';
 		htmlRows += '</div>';
-		
-		htmlRows += '<div class="col-lg-3">';								
-		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)"><?php echo __('Delete'); ?></button>';						
+
+		htmlRows += '<div class="col-lg-3">';
+		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)"><?php echo __('Delete'); ?></button>';
 		htmlRows += '</div>';
 		htmlRows += '</div>';
 		$('#append_statick').append(htmlRows);
@@ -120,7 +120,7 @@ if($item_daata['tracking_type'] == 2){
 		if(type == 2){
 			var count = 0; var lot=""; var value="";
 			var loopcount = $(".sfitemRow").length;
-			for(var k=1; k < loopcount+1 ; k++){				
+			for(var k=1; k < loopcount+1 ; k++){
 				lot = $('#static_value_'+k).val();
 				value = $('#qty_val_'+k).val();
 				if( value == "" && lot ==""){
@@ -142,7 +142,7 @@ if($item_daata['tracking_type'] == 2){
 		if(check == 'P'){
 		  	var  str = '';
 	 		str = 'table='+$('#table').val()+'&new_table='+$('#field').val()+'&vender_id='+$('#kt_select2_41').val()+'&tranid='+$('#tranid').val()+'&hid='+$('#tranid').val()+'&tranid='+$('#tranid').val()+'&item_id='+$('#item_id').val()+'&user_id='+$('#user_id').val()+'&count='+data_count+data+'&type='+type+'&random='+$('#random').val();
-	 		
+
 	  		console.log(str);
 	  		//alert(str);
 		    $.ajax({
@@ -152,7 +152,7 @@ if($item_daata['tracking_type'] == 2){
 		        success: function(response) {
 		        	console.log(response);
 		        	$('#kt_modal_KTDatatable_remote').modal('hide');
-		            
+
 		        	swal({
 						title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
 						text: '<?php echo __('Comments Updated'); ?>',
@@ -171,32 +171,32 @@ if($item_daata['tracking_type'] == 2){
 					});
 
 
-		   //          Swal.fire({              
-					// 	title: "Comments Updated ",              
-					// 	type: "success",           
+		   //          Swal.fire({
+					// 	title: "Comments Updated ",
+					// 	type: "success",
 					// 	buttonsStyling: false,
-					// 	confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",    
+					// 	confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
 					// 	confirmButtonClass: "btn btn-danger",
-					// 	showCancelButton: true,     
-					// 	cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
-					// 	cancelButtonClass: "btn btn-default"        
+					// 	showCancelButton: true,
+					// 	cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+					// 	cancelButtonClass: "btn btn-default"
 					// }).then(function(result) {
 					// 	if (result.value) {
 					// 		$('#kt_modal_KTDatatable_remote').modal('hide');
 					// 	}
-					// }); 
+					// });
 		        }
 		    });
 	    }else{
 	    	swal("<?php echo ucwords($_SESSION['config']['name']); ?>",message, "warning");
-	  //   	 Swal.fire({              
-			// 	title: message,              
-			// 	text: "",              
-			// 	type: "warning"       
+	  //   	 Swal.fire({
+			// 	title: message,
+			// 	text: "",
+			// 	type: "warning"
 			// });
 	    }
 	}
-	
+
 </script>
 
 <!-- remote datatable modal -->
@@ -211,11 +211,11 @@ if($item_daata['tracking_type'] == 2){
 							<!-- <span aria-hidden="true">&times;</span> -->
 						</button>
 					</div>
-					<div class="modal-body" style="overflow-y: scroll;" > 
-				
+					<div class="modal-body" style="overflow-y: scroll;" >
+
 			<form class="" action="" method="post">
 			<div class="col-lg-12" style="max-height: 400px;float: left;">
-				<?php if($item_daata['tracking_type'] == 1){ ?> 
+				<?php if($item_daata['tracking_type'] == 1){ ?>
 				<div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
 					<?php for($i=1; $i<$qty+1; $i++){?>
 						<div class="form-group row">
@@ -223,7 +223,7 @@ if($item_daata['tracking_type'] == 2){
 							<div class="col-6">
 								<input type="text" class="form-control"  id="serial_no_<?php echo $i; ?>" name="serial_no" value="<?php echo $serialnos[$i-1]; ?>">
 							</div>
-			
+
 						</div>
 					<?php } ?>
 				</div>
@@ -244,10 +244,10 @@ if($item_daata['tracking_type'] == 2){
 					<?php for($i=1; $i<count((array)$serialnos)+1; $i++){ ?>
 					<div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
 						<div class="col-lg-3">
-							<input type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot']; ?>"  name="type"> 
+							<input type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot']; ?>"  name="type">
 						</div>
 						<div class="col-lg-3">
-							<input type="text"class="form-control"  id="qty_val_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot_value']; ?>"  name="type"> 
+							<input type="text"class="form-control"  id="qty_val_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot_value']; ?>"  name="type">
 						</div>
 						<div class="col-lg-3">
 							<input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >

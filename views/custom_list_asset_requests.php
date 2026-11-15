@@ -1,5 +1,5 @@
-<?php 
-	$url1 = API."?mode=getassettransferrequests&admin_type=".$_SESSION['admin_type']; 
+<?php
+	$url1 = API."?mode=getassettransferrequests&admin_type=".$_SESSION['admin_type'];
 	$data_details1 = callAPI($url1);
 	$result = json_decode($data_details1,1);
 	//echo "<pre>"; print_r($result); echo "</pre>";
@@ -56,7 +56,7 @@
 					<div class="card-body">
 						<?php if(count((array)$asset_requests) !=0){ ?>
 						<div class="dt-responsive table-responsive">
-							<table id="basic-btn" class="table table-striped table-bordered nowrap"> 
+							<table id="basic-btn" class="table table-striped table-bordered nowrap">
 								<thead>
 									<tr>
 										<th scope="col">User</th>
@@ -79,14 +79,14 @@
 											<td><?php echo $requestdeatil['request_datetime'] !=""?fromDate($requestdeatil['request_datetime']):"-"; ?></td>
 											<td><?php echo $requestdeatil['description']; ?></td>
 											<td><?php echo $locations[$requestdeatil['location_id']]['location_name']; ?></td>
-											
+
 											<td><?php echo $requestdeatil['asset_required_start_date'] !=""?fromDate($requestdeatil['asset_required_start_date']):"-"; ?></td>
 											<td><?php echo $requestdeatil['asset_required_end_date'] !=""?fromDate($requestdeatil['asset_required_end_date']):"-"; ?></td>
 											<td class="text-right"><?php echo $requestdeatil['quantity'] !=""?$requestdeatil['quantity']:"0"; ?></td>
 											<td class="text-right"><?php echo $requestdeatil['asset_request_transfers_cnt'] !=""?$requestdeatil['asset_request_transfers_cnt']:"0"; ?></td>
-											
 
-											<td class="text-center"> 
+
+											<td class="text-center">
 												<i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Request assets'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="fa fa-eye" onclick="requestAssets('<?php echo $requestdeatil['id']; ?>')"></i>
                                     		</td>
 										</tr>
@@ -97,15 +97,15 @@
 						</div>
 						<?php }else{ ?>
 							<div class="card-px text-center ">
-								<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Asset Requists</p>   
+								<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Asset Requists</p>
 								<div class="text-center px-4">
 									<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-								</div>   
+								</div>
 							</div>
 						<?php } ?>
-						 
+
 					</div>
-						
+
 
 				</div>
 			</div>

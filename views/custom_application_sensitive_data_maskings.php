@@ -255,22 +255,22 @@ if ($isPolicyActive) {
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <span class="form-label fw-bold d-inline-block"><?= __("Policy Name *") ?></span>
-                                    <input aria-label="<?= htmlspecialchars(__('Policy name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="policy_name" 
-                                           value="<?php echo htmlspecialchars($currentPolicy['policy_name'] ?: 'Corporate Sensitive Data Policy'); ?>" 
+                                    <input aria-label="<?= htmlspecialchars(__('Policy name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="policy_name"
+                                           value="<?php echo htmlspecialchars($currentPolicy['policy_name'] ?: 'Corporate Sensitive Data Policy'); ?>"
                                            required <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                     <input type="hidden" class="form-control" name="is_active" value="0">
-                                    
+
                                 </div>
                                 <div class="col-md-2">
                                     <span class="form-label fw-bold d-inline-block"><?= __("From Date") ?></span>
-                                    <input aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="from_date" id="from_date" 
-                                           value="<?php echo htmlspecialchars($currentPolicy['from_date'] ?? date('Y-01-01')); ?>" 
+                                    <input aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="from_date" id="from_date"
+                                           value="<?php echo htmlspecialchars($currentPolicy['from_date'] ?? date('Y-01-01')); ?>"
                                            <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                 </div>
                                 <div class="col-md-2">
                                     <span class="form-label fw-bold d-inline-block"><?= __("To Date") ?></span>
-                                    <input aria-label="<?= htmlspecialchars(__('To date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="to_date" id="to_date" 
-                                           value="<?php echo htmlspecialchars($currentPolicy['to_date'] ?? date('Y-12-31', strtotime('+4 years'))); ?>" 
+                                    <input aria-label="<?= htmlspecialchars(__('To date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="to_date" id="to_date"
+                                           value="<?php echo htmlspecialchars($currentPolicy['to_date'] ?? date('Y-12-31', strtotime('+4 years'))); ?>"
                                            <?php echo !$isAdmin ? 'disabled' : ''; ?>>
                                 </div>
                                 <div class="col-md-4 mt-2">
@@ -311,7 +311,7 @@ if ($isPolicyActive) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                        <?php
                                         foreach ($supportedTypes as $typeKey => $meta):
                                             $isRestricted = true;
                                             $showFirst = $meta['show_first'];
@@ -359,7 +359,7 @@ if ($isPolicyActive) {
                                                 </div>
                                             </td>
                                             <td>
-                                                <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first" 
+                                                <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first"
                                                        name="restrictions[<?php echo $typeKey; ?>][show_first]"
                                                        id="show_first_<?php echo $typeKey; ?>"
                                                        value="<?php echo htmlspecialchars($showFirst); ?>"
@@ -367,7 +367,7 @@ if ($isPolicyActive) {
                                                        oninput="updateRowPreview('<?php echo $typeKey; ?>')">
                                             </td>
                                             <td>
-                                                <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last" 
+                                                <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last"
                                                        name="restrictions[<?php echo $typeKey; ?>][show_last]"
                                                        id="show_last_<?php echo $typeKey; ?>"
                                                        value="<?php echo htmlspecialchars($showLast); ?>"
@@ -458,12 +458,12 @@ if ($isPolicyActive) {
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <input aria-label="Show start characters" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first" 
+                                                            <input aria-label="Show start characters" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first"
                                                                    name="custom_type_show_first[]" value="<?php echo htmlspecialchars($cFirst); ?>"
                                                                    oninput="updateRowPreview('<?php echo $cKey; ?>')">
                                                         </td>
                                                         <td>
-                                                            <input aria-label="Show end characters" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last" 
+                                                            <input aria-label="Show end characters" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last"
                                                                    name="custom_type_show_last[]" value="<?php echo htmlspecialchars($cLast); ?>"
                                                                    oninput="updateRowPreview('<?php echo $cKey; ?>')">
                                                         </td>
@@ -505,7 +505,7 @@ if ($isPolicyActive) {
                                     </small>
                                 </div>
                                 <div>
-                                   
+
                                     <button type="submit" class="btn btn-primary px-4 fw-bold" id="btnSavePolicy">
                                         <i class="feather icon-save me-1"></i> <?= __("Save & Apply Policy") ?>
                                     </button>

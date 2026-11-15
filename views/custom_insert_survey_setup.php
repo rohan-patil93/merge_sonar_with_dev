@@ -392,7 +392,7 @@ function addnewoptionrows(qid) {
   });
  });
  </script>
-<div class="card">          
+<div class="card">
   <div class="card-header table-card-header">
     <h5><?php echo $display_tag; ?> <?php echo __('Setup'); ?></h5>
     <div class="card-header-right table-card-header ">
@@ -415,7 +415,7 @@ function addnewoptionrows(qid) {
       <form method="post" class="<?php echo $disabled; ?>" action="" id="survey_setup_form">
         <div class="row">
           <div class="col-lg-6 px-4">
-            <input type="hidden" id="filterby" name="filterby"> 
+            <input type="hidden" id="filterby" name="filterby">
             <input type="hidden" name="survey_assigned_to" id="filtertbl_rowid" value="<?php echo $filtertbl_rowid;?>">
             <div class="card card-custom gutter-b">
               <div class="card-body">
@@ -472,23 +472,23 @@ function addnewoptionrows(qid) {
                     <div id="tsk_fortable"></div>
                     <div class="col-xl-12">
                       <i class="flaticon2-group text-success"></i>
-                      
+
                     </div>
-                  </div> 
+                  </div>
                   <div class="form-group">
                     <?php //print_r($who_can_see_id); ?>
-                    <label for="kt_select2_43" class="form-label"><?php echo __('Who can see the results'); ?></label> 
+                    <label for="kt_select2_43" class="form-label"><?php echo __('Who can see the results'); ?></label>
                     <select class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple" aria-label="<?php echo __('Who Can See The Results'); ?>">
-                      <?php foreach ($employee_list as $value) { 
+                      <?php foreach ($employee_list as $value) {
                       $key=$value['id']; ?>
                       <option <?php if(count((array)$who_can_see_id) != 0 && in_array($key,$who_can_see_id)){ ?> selected <?php } ?> value="<?php echo $key;?>"><?php echo $value['display_name']; ?></option>
                       <?php } ?>
                     </select>
-                  </div>  
+                  </div>
                 </div>
                 <div class="card-footer d-flex row p-1">
                   <div class="col-lg-6">
-                    <button type="submit" name="create" class="btn btn-primary font-weight-bold float-left"><?php echo $_GET['Rid']!='' ? 'Update' : 'Save'; ?></button>                       
+                    <button type="submit" name="create" class="btn btn-primary font-weight-bold float-left"><?php echo $_GET['Rid']!='' ? 'Update' : 'Save'; ?></button>
                   </div>
 
                   <div class="col-lg-6 text-right">
@@ -509,10 +509,10 @@ function addnewoptionrows(qid) {
               <div class="col-lg-3"></div>
               <div class="col-lg-3"></div>
             </div>
-          </div> 
+          </div>
           <div class="col-lg-6 px-4" id="survey_questions">
             <div class="card card-custom" style="min-height:631px;">
-              <?php if($_GET['Rid']!='') { 
+              <?php if($_GET['Rid']!='') {
                 $value_id = 0;
                 $display_question = "";
                 $totalquestion = count((array)$_SESSION['questions_list']);
@@ -544,7 +544,7 @@ function addnewoptionrows(qid) {
                 </div>
                 <div class="form-group text-left">
                 <div class="checkbox-inline">';
-                if($value['type']==1 || $value['type']==3)   { 
+                if($value['type']==1 || $value['type']==3)   {
                   $display_question .='
                   <label for="allow_multiple_selections'.$qkey.'" class="checkbox checkbox-primary">
                     <input class="border" type="checkbox" name="allow_multiple_selections'.$qkey.'" id="allow_multiple_selections'.$qkey.'" '.$allow_multiple_selections_status.' aria-label="'.htmlspecialchars(__('Allow multiple selections'), ENT_QUOTES).'">
@@ -563,9 +563,9 @@ function addnewoptionrows(qid) {
                 </label>
                 </div>
                 </div>' ;
-                if($value['type']==1 || $value['type']==3)   { 
+                if($value['type']==1 || $value['type']==3)   {
                   $display_question .= '<div id="options'.$qkey.'">';
-                  foreach ($options as $opkey => $opvalue) { 
+                  foreach ($options as $opkey => $opvalue) {
                   $display_question .= ' <div id="optionlist'.$qkey.$opkey.'">
                   <div class="form-group row" id="'.$opkey.'">
                   <div class="col-lg-1"></div>
@@ -587,22 +587,22 @@ function addnewoptionrows(qid) {
                 <input type="hidden" value="'.$opkey.'" id="option_row"/>
                 <button class="btn btn-success" onclick="addnewoptionrows('."'".$qkey."'".')" id="addNewRows" type="button">'.__('+ Add More Options').'</button>
                 </div>';
-              }  
-              if($value['type']==2)   { 
+              }
+              if($value['type']==2)   {
                 $display_question .= ' <div class="form-group text-left mt-10">
                 <label for="survey_question_scale_'.$qkey.'">'.__('Scale from 1 to:').' <span class="text-danger">*</span></label>
                 <input type="number" id="survey_question_scale_'.$qkey.'" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value="'.$options[0].'" aria-label="'.htmlspecialchars(__('Scale Option'), ENT_QUOTES).'"> 
                 </div>';
-              }  
-              if($value['type']==4)   { 
+              }
+              if($value['type']==4)   {
                 $display_question .= ' <input type="hidden" name="survey_question_option'.$qkey.'[]" class="form-control border" value=""> ';
-              } 
+              }
 
               $display_question .= '</div> </div>  </div>';
 
               }
                 echo $display_question;
-              } ?> 
+              } ?>
             </div>
           </div>
         </div>

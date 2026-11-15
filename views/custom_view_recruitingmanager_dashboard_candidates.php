@@ -163,7 +163,7 @@ function SynchCandidateFolder(){
 			<div class="card-header">
 				<h5><?= __('Candidates'); ?></h5>
 				<div class="card-header-right table-card-header ">
-				<div class="input-group input-icon-right input-group-button datepickershow_hr_detailT" style=""> 
+				<div class="input-group input-icon-right input-group-button datepickershow_hr_detailT" style="">
               		<input class="form-control width1" type="file" id="resumes_files" name="resumes_files[]" accept="image/*" multiple aria-label="<?= htmlspecialchars(__('Resume files'), ENT_QUOTES, 'UTF-8'); ?>">
                 	<span class="input-group-text addon-style" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Upload resumes'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="submitResumeFiles()">
                     	<i class="ti-upload"></i>
@@ -174,7 +174,7 @@ function SynchCandidateFolder(){
 
 			<div class="card-body" >
 				<div class=" custom-scroll" style=" height: 150px;">
-				<?php 
+				<?php
 				$folder = "uploads/candidate_resume_with_rm/resume_rm_" . $_SESSION['userid'] . "/";
 				if (is_dir($folder)) {
 				    $files = glob($folder . "*");
@@ -202,8 +202,8 @@ function SynchCandidateFolder(){
 				$im++; }
 				?>
 				</table>
-				<?php 
-				} else { 
+				<?php
+				} else {
 				?>
 				<div class="card-block text-center">
 				    <p><i class="fa-alert text-danger"></i> <?= __('Folder Not Created Please Create'); ?></p>
@@ -220,7 +220,7 @@ function SynchCandidateFolder(){
 
 				<?php } ?>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -286,7 +286,7 @@ function SynchCandidateFolder(){
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate" data-id="candidatefilter" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate" data-id="candidatefilter" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -306,10 +306,10 @@ function SynchCandidateFolder(){
 					<?php } ?>
 					<?php }else{ ?>
 					<div class="card-px text-center ">
-						<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>   
+						<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
 						<div class="text-center px-4">
 							<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-						</div>   
+						</div>
 					</div>
 					<?php } ?>
 				</div>
@@ -325,7 +325,7 @@ function SynchCandidateFolder(){
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate1" data-id="candidatefilter1" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate1" data-id="candidatefilter1" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -340,16 +340,16 @@ function SynchCandidateFolder(){
               			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
               			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
               			<p class="text-muted m-b-0"><?php echo $canres['screening_start_datetime']; ?></p>
-              		
+
               		</div>
               	</div>
 				<?php } ?>
 				<?php }else{ ?>
 				<div class="card-px text-center ">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>   
+					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
 					<div class="text-center px-4">
 						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-					</div>   
+					</div>
 				</div>
 				<?php } ?>
 			</div>
@@ -364,7 +364,7 @@ function SynchCandidateFolder(){
 			</div>
 			<div class="card-body">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate2" data-id="candidatefilter2" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate2" data-id="candidatefilter2" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -379,16 +379,16 @@ function SynchCandidateFolder(){
               			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class=" text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
               			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
               			<p class="text-muted m-b-0"><?php echo $canres['screening_end_datetime']; ?></p>
-              		
+
               		</div>
               	</div>
 				<?php } ?>
 				<?php }else{ ?>
 				<div class="card-px text-center ">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>   
+					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
 					<div class="text-center px-4">
 						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-					</div>   
+					</div>
 				</div>
 				<?php } ?>
 			</div>
@@ -403,7 +403,7 @@ function SynchCandidateFolder(){
 			</div>
 			<div class="card-body ">
 				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate3" data-id="candidatefilter3" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
+		            <input type="text" id="dynamicfilterhideshow_candidate3" data-id="candidatefilter3" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
 		            <span class="input-group-text addon-style">
 		                <span class=""><span class="ti-search text-white mt-2"></span></span>
 		            </span>
@@ -418,16 +418,16 @@ function SynchCandidateFolder(){
               			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
               			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
               			<p class="text-muted m-b-0"><?php echo $canres['ai_summary']!=""?$canres['ai_summary']:"-"; ?></p>
-              	
+
               		</div>
               	</div>
 				<?php } ?>
 				<?php }else{ ?>
 				<div class="card-px text-center ">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>   
+					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
 					<div class="text-center px-4">
 						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-					</div>   
+					</div>
 				</div>
 				<?php } ?>
 			</div>

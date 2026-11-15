@@ -130,7 +130,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                                 $show = 'A';
                             }
                         }
-    
+
 
                         // 2️⃣ Weekend
                         elseif (!in_array($day, $weak_off_arr)) {
@@ -178,7 +178,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                             <?php /* ?> <td > <?php echo isset($calculated_hours[$date]) ? $calculated_hours[$date]['ot_string'].' Hrs' : '-'; ?> </td>
                             <td> <?php echo isset($calculated_hours[$date]) ? $calculated_hours[$date]['ut_string'].' Hrs' : '-'; ?> </td> <?php */ ?>
                             <td><?= $show; ?>
-                            
+
                             </td>
                             <td>
                                 <?php if ($has_attendance): ?>
@@ -198,7 +198,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
 
                         <?php endforeach; ?>
                     </tbody>
-					
+
 				</table>
 			</div>
 

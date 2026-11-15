@@ -175,9 +175,9 @@
                                             <th scope="col" align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">Discount</th>
                                             <td align="right" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo currencyFormat($transaction['discount_amount'],$config); ?></td>
                                         </tr>
-                                        
+
                                         <?php  $additional_charges = json_decode($transaction['additional_charges'], 1);
-                                         if(count((array)$additional_charges) !="0"){ 
+                                         if(count((array)$additional_charges) !="0"){
                                             foreach($additional_charges as $adcharge){ ?>
                                         <tr>
                                             <th scope="col" align="left" style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;"><?php echo $adcharge['charge_name']; ?></th>
@@ -215,7 +215,7 @@
                         <span style="font-size: 11px;">NA</span>
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;">
                         <span style="font-size: 11px; font-weight: 600;">Payment Terms:</span>
@@ -254,7 +254,7 @@
                         <p style="font-size: 11px; margin: 5px 0;"><?php echo emptyCheck($bill_by['user_email']); ?></p>
                         <p style="font-size:11px;margin: 5px 0;">This is a system generated document</p>
                         <p style="font-size:11px;margin: 5px 0;">
-                            <span>Date:</span> 
+                            <span>Date:</span>
                             <span><?php echo date("d M Y"); ?></span>
                         </p>
                         <p style="font-size: 11px; margin: 5px 0;">
@@ -269,7 +269,7 @@
                         <p style="font-size: 11px; margin: 0;">Authorized Signature</p>
                     </td>
                 </tr>
-                
+
                 <tr style="page-break-before: always; break-before: always;">
                     <td colspan="3" style="border: 1px solid #cccccc; padding: 5px;">
                         <h6 style="font-size: 12px; margin: 0; font-weight: 600;">Additional Item Information</h6>

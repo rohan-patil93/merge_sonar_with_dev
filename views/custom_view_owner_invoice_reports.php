@@ -1,10 +1,10 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = "1";
 $start_month = $_POST['start_month'] !=""?$_POST['start_month']:date('Y-01');
 $end_month = $_POST['end_month'] !=""?$_POST['end_month']:date('Y-12');
 $url = API."?mode=getownerinvoicereports&start_month=".$start_month."&end_month=".$end_month."&property_owner_id=".$_POST['property_owner_id']."&property_owner_detail_id=".$_POST['property_owner_detail_id'];
 $api = callAPI($url);
-$result = json_decode($api,1);  
+$result = json_decode($api,1);
 $property_owners = $result['property_owners'];
 $property_owner_details = $result['property_owner_details'];
 //$rental_invoices = $result['rental_invoices'];
@@ -62,7 +62,7 @@ function getOwnerProperty(valu){
 		                	<?php } ?>
 		                </select>
 		            </div>
-		        </div> 
+		        </div>
 		        <div class="col-lg-3">
 		            <div class=" form-group">
 		                <label for="property_owner_detail_id" class="form-label"> <?= __('Property Name'); ?></label>
@@ -74,7 +74,7 @@ function getOwnerProperty(valu){
 		                </select>
 		            </div>
 		        </div>
-			    <div class="col-lg-2">    
+			    <div class="col-lg-2">
 		            <div class="form-group w-full table-card-header">
 		                <label for="fld_start_month" class="form-label "><?= __('Start Month'); ?><span class="text-danger">*</span></label>
 						<input id="fld_start_month" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
@@ -119,9 +119,9 @@ function getOwnerProperty(valu){
 	    			<?php echo ucwords($powner['owner_name']); ?>
 	    			<span class="f-14 d-block text-dark mt-1 text-center description"><?php echo $powner['address']; ?></span>
 	    			<span class="f-14 d-block text-dark mt-1 text-center description"><?= __('GST'); ?> : <?php echo $powner['gst_no']; ?></span>
-	    			<span class="f-14 d-block text-dark mt-1 text-center description"><?php echo "From - ".date("Y M",strtotime($start_month))." To - ".date("Y M",strtotime($end_month)); ?></span>		
+	    			<span class="f-14 d-block text-dark mt-1 text-center description"><?php echo "From - ".date("Y M",strtotime($start_month))." To - ".date("Y M",strtotime($end_month)); ?></span>
 	    		</h3>
-	    		<?php 
+	    		<?php
 	    			$podetails = $property_owner_details[$powner['id']];
 	    			foreach($podetails as $podetail){
 	    		?>
@@ -129,22 +129,22 @@ function getOwnerProperty(valu){
 	    			<?php echo ucwords($podetail['property_name']); ?>
 	    			<span class="f-14 d-block text-dark mt-1"><?php echo $podetail['property_address']; ?></span>
 	    		</h4>
-	    		<table class="table m-b-0" style="font-size:13px;"> 
+	    		<table class="table m-b-0" style="font-size:13px;">
 		            <thead>
-		                <tr> 
-		                    <th rowspan="2">#</th>      
-		                    <th rowspan="2"><?= __('Tenant Name'); ?></th> 
+		                <tr>
+		                    <th rowspan="2">#</th>
+		                    <th rowspan="2"><?= __('Tenant Name'); ?></th>
 		                    <th colspan="4" class="text-center"><?= __('Rent'); ?></th>
-		                    <th colspan="4" class="text-center"><?= __('Utility'); ?></th> 
+		                    <th colspan="4" class="text-center"><?= __('Utility'); ?></th>
 		     			    <th colspan="4" class="text-center"><?= __('Total'); ?></th>
 		                </tr>
 		                <tr>
-		                	<th scope="col" class="text-right"><?= __('Invoice Amt'); ?></th> 
-		                    <th scope="col" class="text-right"><?= __('DN/CN'); ?></th> 
+		                	<th scope="col" class="text-right"><?= __('Invoice Amt'); ?></th>
+		                    <th scope="col" class="text-right"><?= __('DN/CN'); ?></th>
 		                    <th scope="col" class="text-right"><?= __('Payments'); ?></th>
 		                    <th scope="col" class="text-right"><?= __('Due Amt'); ?></th>
-		                    <th scope="col" class="text-right"><?= __('Invoice Amt'); ?></th> 
-		                    <th scope="col" class="text-right"><?= __('DN/CN'); ?></th> 
+		                    <th scope="col" class="text-right"><?= __('Invoice Amt'); ?></th>
+		                    <th scope="col" class="text-right"><?= __('DN/CN'); ?></th>
 		                    <th scope="col" class="text-right"><?= __('Payments'); ?></th>
 		                    <th scope="col" class="text-right"><?= __('Due Amt'); ?></th>
 		                    <th scope="col" class="text-right"><?= __('Invoice'); ?></th>
@@ -157,7 +157,7 @@ function getOwnerProperty(valu){
 		            	<?php
 		            		$t_rent_total_amount = $t_rent_payment =$t_rent_pending_amount =$t_utility_total_amoun = $t_utility_payment = $t_utility_pending_amount = $t_both_total = $t_both_payment = $t_both_due =$t_both_rent_dr=$t_both_rent_cr=$t_both_utility_dr=$t_both_utility_cr=$t_both_dr=$t_both_cr = 0;
 		                	$rentinvoices = $invoices[$powner['id']][$podetail['id']]; // $rental_invoices[oenwerid][detailsid];
-		                	$i=1;	
+		                	$i=1;
 		                	foreach($rentinvoices as $custid =>$rentinvoice){
 		                		$customer_detail = $customers[$custid];
 		                		$rentpayment = $rentinvoice['rent']['total_amount']-$rentinvoice['rent']['pending_amount'];
@@ -178,9 +178,9 @@ function getOwnerProperty(valu){
 		                		$t_both_total += $total_amount;
 		                		$t_both_payment += $total_payment;
 		                		$t_both_due += $total_due;
-		                		$t_both_rent_dr += $rentinvoice['rent']['debit_total_amount']; 
+		                		$t_both_rent_dr += $rentinvoice['rent']['debit_total_amount'];
 		                		$t_both_rent_cr += $rentinvoice['rent']['credit_total_amount'];
-		                		$t_both_utility_dr += $rentinvoice['utility']['debit_total_amount']; 
+		                		$t_both_utility_dr += $rentinvoice['utility']['debit_total_amount'];
 		                		$t_both_utility_cr += $rentinvoice['utility']['credit_total_amount'];
 		                		$t_both_dr += $total_dr;
 		                		$t_both_cr += $total_cr;
@@ -195,7 +195,7 @@ function getOwnerProperty(valu){
 		                        <span class="m-l-5" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Due Amount">D : <?php echo customeummarmonyformateifine($rentinvoice['rent']['ob_pending_amount']); ?></span></p> -->
 
 		                	</td>
-		                	
+
 		                	<td class="p-2 text-right"><?php echo customeummarmonyformateifine($rentinvoice['rent']['total_amount']); ?></td>
 		                	<td class="p-2 text-right">
 		                		<span class="d-block"><?php echo customeummarmonyformateifine($rentinvoice['rent']['debit_total_amount']-$rentinvoice['rent']['credit_total_amount']); ?></span>
@@ -250,5 +250,5 @@ function getOwnerProperty(valu){
 	  		<button class="btn waves-effect waves-light btn-grd-success col-lg-2" onclick="printReport('print_report_div');"><i class="fa fa-print"></i> &nbsp <?= __('Print Report'); ?></button>
 	  	</div>
     </div>
-    
+
 </div>

@@ -1,9 +1,9 @@
 <?php
-   
+
 $wher["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0','user_type'=>'2');
 $wher["field"] = "id,first_name,display_name,user_email,user_mobile,created_date,user_id,role_id,company_name";
 $encodeurl = urlencode(json_encode($wher));
-$urlcat = API."?mode=gettabledetailswithconditions&table=application_user_invitations&data=".$encodeurl;  
+$urlcat = API."?mode=gettabledetailswithconditions&table=application_user_invitations&data=".$encodeurl;
 $invitationres = callAPI($urlcat);
 $invitationlis = json_decode($invitationres,1);
 $invitationlists =  $invitationlis;
@@ -11,7 +11,7 @@ $invitationlists =  $invitationlis;
 $wher["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0');
 $wher["field"] = "id,image,display_name,first_name,user_id,company,image";
 $userencodeurl = urlencode(json_encode($wher));
-$userurlcat = API."?mode=gettabledetailswithconditions&table=customers&data=".$userencodeurl;  
+$userurlcat = API."?mode=gettabledetailswithconditions&table=customers&data=".$userencodeurl;
 $userures = callAPI($userurlcat);
 $useruresponse = json_decode($userures,1);
 $applicationusers = array();
@@ -74,13 +74,13 @@ foreach($useruresponse as $useruresponse1){
 	        },
 	        error:function (){}
     	});
-    	
+
 	}
 function listUserType(){
 	var reg_invoit = $('input[name="reg_invoit"]:checked').val();
-        if(reg_invoit=='1'){ 
+        if(reg_invoit=='1'){
             $(".register").show();
-			      $(".invited").hide();			
+			      $(".invited").hide();
         }else if(reg_invoit=='2'){
             $(".invited").show();
 			      $(".register").hide();
@@ -118,27 +118,27 @@ function listUserType(){
 						<input type="radio" name="reg_invoit" value="2" onchange="listUserType()">
 						Invited
 					  </span>
-					</div> 
+					</div>
           <a href="index.php?option=COM_INSERT_INVITE_CUSTOMERS" class="btn btn-success mb-2 desktop-view">
             <i class="icofont icofont-plus icon-white text-white"></i>
-            Invite Customer           
+            Invite Customer
           </a>
         </div>
       </div>
-  
+
         <div class="row p-4">
-          <?php 
-           $bg_color_array = array('bg-warning','bg-info','bg-success');  
-            if(count((array)$invitationlists) !="0"){   
+          <?php
+           $bg_color_array = array('bg-warning','bg-info','bg-success');
+            if(count((array)$invitationlists) !="0"){
             foreach ($invitationlists as $vendorslist){
               $tven = 1;
-              $ribbon =  "Register"; 
+              $ribbon =  "Register";
                   $classadded = "register";
                   $url = "";
               if($vendorslist['user_id'] != $_SESSION['userid']){
                   $displayname =$vendorslist['display_name'];
-                  $first_name = $vendorslist['first_name']; 
-                  $company_name = $vendorslist['company'];  
+                  $first_name = $vendorslist['first_name'];
+                  $company_name = $vendorslist['company'];
                   $image = $vendorslist['image'];
                 if($vendorslist['user_id'] && isset($applicationusers[$vendorslist['user_id']])){
                   $tven = 2;
@@ -149,23 +149,23 @@ function listUserType(){
                   $stausresult = $_SESSION['status'][$vendorslist['current_status']];
                   $url = "index?option=COM_INSERT_CUSTOMERS&VTYPE=V&Rid=".deocdeId('id:'.$applicationuser['id']);
                   $displayname =$applicationuser['display_name'];
-                  $first_name = $applicationuser['first_name']; 
-                  $company_name = $applicationuser['company'];  
-                  $image = $applicationuser['image'];  
+                  $first_name = $applicationuser['first_name'];
+                  $company_name = $applicationuser['company'];
+                  $image = $applicationuser['image'];
                 }
-                 
-			?>  
+
+			?>
 
       <div class="col-lg-3 custom-ribbon-accordian cursor-pointer  position-relative <?php echo $classadded; ?>" >
-         
+
               <div class="ribbon ribbon-clip ribbon-right" style= "right: 0;">
                 <div class="ribbon-target" style= "right: 3px;">
-                  <span class="ribbon-inner" ></span> <?php echo $ribbon; ?> 
+                  <span class="ribbon-inner" ></span> <?php echo $ribbon; ?>
                 </div>
               </div>
               <?php if($tven == '1' || $tven == '2'){ ?>
        <a  href="<?php echo $url; ?>">
-       <?php }?> 
+       <?php }?>
               <div class="card <?php echo $bg_color_array[$tven]; ?>" style="/*background-image:url('assets/images/student-courses/bg-1.png');  */ /** rohan min-height:170px">
                 <div class="p-3">
                   <div class="row m-b-10 align-items-center ">
@@ -175,7 +175,7 @@ function listUserType(){
                         <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-30 m-r-15" alt="Customer" data-onerror-src="uploads/all/no-image.jpg">
                       <?php } else { ?>
                        <span class="img-radius img-50 custom_txt_round  p-2 f-14 m-r-15 text-center bg-white text-mute"><?php echo initials($displayname); ?></span>
-                      <?php } ?> 
+                      <?php } ?>
                       <div class="d-inline-block width73" >
                         <h6 class="mb-1"><?php echo $company_name !=""?$company_name:$displayname; ?></h6>
                         <p class="text-white m-b-0  f-12"></p>
@@ -199,20 +199,20 @@ function listUserType(){
 </a>
 <?php } ?>
         </div>
-        <?php $tven++; 
+        <?php $tven++;
         if($tven ==2){ $tven=0; }
-          } 
-        }  
+          }
+        }
     }else{   ?>
 
  <div class="card-px text-center py-20 m-t-30">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Customers Invitation Available</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Customers Invitation Available</p>
                                     <div class="text-center px-4">
                                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                                  </div>   
+                                  </div>
                               </div>
-                    
-            <?php    } ?> 
+
+            <?php    } ?>
       </div>
     </div>
   </div>

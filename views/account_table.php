@@ -179,8 +179,8 @@ foreach ($cusresponse_dump as $custt) {
 
             htmlRows += '<td> <textarea  name="description[]"  class="form-control" autocomplete="off"></textarea></textarea></td> ';
             htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "name[]"  >option value="0"> <?= __('Select Any Name') ?>  </option> <?php foreach ($name_li as $nam) { ?><option  value ="<?php echo $nam['id'] . "#" . $nam['type']; ?>" > <?php echo $nam['display_name']; ?> </option> <?php } ?>  </select></td> ';
-            <?php /** ?> 
-   htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "taxes[]" onchange="calucateaccountsum()" id="taxes_'+count+'"><option value="0"> Select Any Tax Rate </option>   <?php foreach ($taxres as $key => $tax) {  ?> <option  value = "<?php echo $key ?>"   > <?php echo $tax; ?> </option> <?php } ?> </select><input type="hidden" name="taxes_amount[]" value="0" id="taxes_amount_'+count+'">   <input type="hidden" name="taxes_type[]" value="i" id="taxes_type_'+count+'"></td>';  
+            <?php /** ?>
+   htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "taxes[]" onchange="calucateaccountsum()" id="taxes_'+count+'"><option value="0"> Select Any Tax Rate </option>   <?php foreach ($taxres as $key => $tax) {  ?> <option  value = "<?php echo $key ?>"   > <?php echo $tax; ?> </option> <?php } ?> </select><input type="hidden" name="taxes_amount[]" value="0" id="taxes_amount_'+count+'">   <input type="hidden" name="taxes_type[]" value="i" id="taxes_type_'+count+'"></td>';
   <?php **/ ?>
             htmlRows += '<td><select class="form-control form-select js-example-basic-single"  name= "location[]"> <option value="0"> <?= __('Select Any location') ?>  </option> <?php foreach ($locations_data as $locationn) { ?><option value ="<?php echo $locationn['id']; ?>" ><?php echo htmlspecialchars(__($locationn['location_name'] ?? '')); ?></option><?php } ?></select></td>';
             htmlRows += '<td><input type="text" name="debit[]" onblur="checkdebitandcredit(' + count + ',  ' + debit + ')" id="debit_' + count + '" class="form-control price amount" value="' + debit_send + '" autocomplete="off"></td>';
@@ -341,7 +341,7 @@ foreach ($cusresponse_dump as $custt) {
                    <input type="hidden" name="taxes_amount[]" value="0" id="taxes_amount_<?php echo $i; ?>">
                    <input type="hidden" name="taxes_type[]" value="i" id="taxes_type_<?php echo $i; ?>">
                    <div style="display: none;color: red;" id="<?php echo 'tax_err_'.$i; ?>"> Enter Tax</div>
-               </td> 
+               </td>
                <?php **/ ?>
                     <td class="mob_location">
                         <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="location[]">

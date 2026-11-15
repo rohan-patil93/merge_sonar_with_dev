@@ -119,7 +119,7 @@ foreach ($gc_details as $row) {
                                 <?= __('Vendor') ?></label>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="row g-2">
                     <!-- Product -->
@@ -260,7 +260,7 @@ foreach ($gc_details as $row) {
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                     <!-- No of Services -->
                     <div class="col-md-4">
@@ -282,11 +282,11 @@ foreach ($gc_details as $row) {
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="form-label"><?= __('Building Name') ?> <span class="text-danger">*</span></label>
-                                <select name="building_id" class="form-control js-example-basic-single" 
+                                <select name="building_id" class="form-control js-example-basic-single"
                                         id="selectBuilding" onchange="updateFloors(this)" required aria-label="Building Id">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach ($buildings as $row){ ?>
-                                        <option value="<?php echo $row['id']; ?>" 
+                                        <option value="<?php echo $row['id']; ?>"
                                             <?php echo $isEdit && $editData['building_id']==$row['id']?'selected':''; ?>>
                                             <?php echo $row['building_name']; ?>
                                         </option>
@@ -320,7 +320,7 @@ foreach ($gc_details as $row) {
                     </div>
 
                     <!-- Checklist Toggle -->
-                
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="checklistToggle" class="form-label d-block"><?= __('Is there Checklist?') ?></label>
@@ -329,7 +329,7 @@ foreach ($gc_details as $row) {
                                     <?php echo (!empty($checklist_items))?'checked':''; ?> onchange="toggleChecklistSection()" aria-label="Check List">
                             </div>
                         </div>
-                    
+
                         <!-- Checklist -->
                         <div class="col-md-12 mt-2" id="checklistSection" style="display:<?php echo !empty($checklist_items)?'block':'none'; ?>;">
                             <div id="checklistContainer" class="row g-2">

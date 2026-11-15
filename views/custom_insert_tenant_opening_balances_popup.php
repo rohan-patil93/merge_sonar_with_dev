@@ -3,7 +3,7 @@ include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
 $rid = $_POST['rid'];
-$url1 = API."?mode=getpropertytenantdetails&rid=".$rid."&openingbalance=Y";  
+$url1 = API."?mode=getpropertytenantdetails&rid=".$rid."&openingbalance=Y";
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);
 
@@ -31,7 +31,7 @@ function submitTenantOpeningbalance(){
 	$('.checkempty').each(function(index, element) {
      	if($(element).val() == ''){
      		error = 1;
-     	}  	
+     	}
     });
     if(error == 0){
 		 swal({
@@ -55,14 +55,14 @@ function submitTenantOpeningbalance(){
 					success: function(response) {
 						console.log(response);
 						tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3000']; ?>','');
-						$('#kt_modal_dynamic_popup2').modal('hide');		
+						$('#kt_modal_dynamic_popup2').modal('hide');
 					}
 				});
 	        }
     	});
 	}else{
 		$("#popupshowerror").show();
-	}	
+	}
 }
 function deletRow(id){
     $("#"+id).remove();
@@ -77,7 +77,7 @@ function addMoreOpeningBalance(){
 	var systestrmdate = getDateMonthYear(system_start_date,'<?php echo $_SESSION['system_date_formate'] ?>');
 	var sys_start_date = new Date(systestrmdate['year'], systestrmdate['month']-1, systestrmdate['day']);
 
-	var system_start_date_check =$('#system_start_date').val(); 
+	var system_start_date_check =$('#system_start_date').val();
 	var startDateObjectss = "";
 	if(system_start_date_check !=""){
 		var maxDate = start_date > sys_start_date ? start_date : sys_start_date;
@@ -115,7 +115,7 @@ function calculateRent(rowid){
 	$('.sumrent_'+rowid).each(function(index, element) {
      	if($(element).val() != ''){
      		total_rent = parseFloat(total_rent)+ parseFloat($(element).val());
-     	}  	
+     	}
     });
 	$("#total_rent_"+rowid).val(total_rent);
 }
@@ -142,17 +142,17 @@ function calculateRent(rowid){
 							<tr>
 								<th class="p-1"><?php echo __('Transaction Date'); ?></th>
 								<td class="p-1 text-right"><?php echo fromDate($renti['transaction_date']); ?></td>
-							</tr>	
+							</tr>
 							<?php foreach($rentalinvoiceitems[$renti['id']] as $rntitem){ ?>
 								<tr>
 									<th class="p-1"><?php echo $rntitem['item_name']; ?></th>
 									<td class="p-1 text-right"><?php echo customeummarmonyformateifine($rntitem['total_amount']); ?></td>
-								</tr>	
+								</tr>
 							<?php }  ?>
 							<tr>
 								<th class="p-1"><?php echo __('Total'); ?></th>
 								<th scope="col" class="p-1 text-right"><?php echo customeummarmonyformateifine($renti['total_amount']); ?></th>
-							</tr>											
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -200,9 +200,9 @@ function calculateRent(rowid){
 				</tr>
 			</tbody>
 		</table>
-		<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">  
+		<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">
 		<button class="btn btn-success m-t-20" id="addRows" type="button" onclick="addMoreOpeningBalance()"><i class="fa fa-plus m-r-5"></i><?php echo __('Add More'); ?></button>
-		
+
 	</form>
 
 </div>

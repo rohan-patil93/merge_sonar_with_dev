@@ -1,11 +1,11 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = 1;
 $File_Uploads_Path = "uploads/all/";
 if(isset($_POST['submit'])){
 	$_POST['company_id']=$_SESSION['company_id'];
 	$_POST['user_id']=$_SESSION['userid'];
 	$_POST['data_name']=$_SESSION['DB_NAME'];
-	
+
 	if($_FILES['image']['error'] != "4"){
 		$temp = explode(".", $_FILES['image']['name']);
 		$Filename=  "file_".time()."_".uniqid();
@@ -56,7 +56,7 @@ document.onreadystatechange = function(){
   if (document.readyState == "complete") {
     var mesg = "Verified User Successfully";
     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',mesg,'');
-  } 
+  }
 }
 </script>
 <?php	}
@@ -77,30 +77,30 @@ if(isset($_POST['skip_compliance'])){
 // 	$rid = explode(':', $rid);
 // 	$rid = $rid['1'];
 // }else{
-	$rid = $_SESSION['userid'];	
+	$rid = $_SESSION['userid'];
 //}
 $wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'id'=>$rid);
 $data1 = urlencode(json_encode($wh1));
-$url1 = API."?mode=gettabledetailswithconditions&table=application_users&data=".$data1; 
+$url1 = API."?mode=gettabledetailswithconditions&table=application_users&data=".$data1;
 $data_details1 = callAPI($url1);
 $application_users = json_decode($data_details1,1);
 $application_users = $application_users[0];
 
 
 
-$wh2["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id']);  
+$wh2["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id']);
 $wh2["field"] = "id,module_id,module_name";
 $data2 = urlencode(json_encode($wh2));
-$url2 = API."?mode=gettabledetailswithconditions&table=module_setup&data=".$data2; 
+$url2 = API."?mode=gettabledetailswithconditions&table=module_setup&data=".$data2;
 $moduleres = callAPI($url2);
 $moduleres = json_decode($moduleres,1);
 foreach($moduleres as $moduleres){
   $module[$moduleres['module_id']] = $moduleres['module_name'];
 }
-$wh2["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id']);  
+$wh2["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id']);
 $wh2["field"] = "id,name,application_module,role_short_code";
 $data2 = urlencode(json_encode($wh2));
-$url2 = API."?mode=gettabledetailswithconditions&table=application_roles&data=".$data2; 
+$url2 = API."?mode=gettabledetailswithconditions&table=application_roles&data=".$data2;
 $rolesres = callAPI($url2);
 $rolesres = json_decode($rolesres,1);
 $role_idd  =array(SUPERADMIN_ROLE);
@@ -116,7 +116,7 @@ foreach($rolesres as $rolesre){
 $wher1["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=> '0');
 $wher1["field"] = "id,location_name";
 $encodeurl = urlencode(json_encode($wher1));
-$urlcat = API."?mode=gettabledetailswithconditions&table=locations&data=".$encodeurl; 
+$urlcat = API."?mode=gettabledetailswithconditions&table=locations&data=".$encodeurl;
 $locationsress = callAPI($urlcat);
 $locations   = json_decode($locationsress,1);
 
@@ -124,7 +124,7 @@ $locations   = json_decode($locationsress,1);
 $countrieswher1["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=> '0');
 $countrieswher1["field"] = "id,country_name";
 $countriesencodeurl = urlencode(json_encode($countrieswher1));
-$countriesurlcat = API."?mode=gettabledetailswithconditions&table=countries&data=".$countriesencodeurl; 
+$countriesurlcat = API."?mode=gettabledetailswithconditions&table=countries&data=".$countriesencodeurl;
 $countriesres = callAPI($countriesurlcat);
 $countriesres   = json_decode($countriesres,1);
 ?>
@@ -133,7 +133,7 @@ $countriesres   = json_decode($countriesres,1);
 		<div class="alert alert-danger background-danger alert-dismissible">
 			<strong><?php echo $error_message; ?></strong>
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>	
+		</div>
 	<?php } ?>
 	<div class="card-header table-card-header">
 		<h5><?= __('Application User') ?></h5>
@@ -166,17 +166,17 @@ $countriesres   = json_decode($countriesres,1);
 							<div class="form-group col-lg-4">
 								<label for="user_email" class=""><?= __('User Email') ?></label>
 								<input class="form-control" type="text" id="user_email" name="user_email" value="<?php echo $application_users['user_email']; ?>"  <?php echo $rid!=""?"readonly":""; ?> required>
-								<div style="display: none;color: red;" id="user_email_err"> Please enter User Email </div> 
+								<div style="display: none;color: red;" id="user_email_err"> Please enter User Email </div>
 							</div>
 							<div class="form-group col-lg-4">
 								<label for="user_mobile" class=""><?= __('User Mobile') ?></label>
 								<input class="form-control" type="text" id="user_mobile" name="user_mobile" value="<?php echo $application_users['user_mobile']; ?>">
-								<div style="display: none;color: red;" id="user_mobile_err"> Please enter User Mobile </div> 
+								<div style="display: none;color: red;" id="user_mobile_err"> Please enter User Mobile </div>
 							</div>
-							<?php $disablerole= ""; 
-							if($application_users['id'] == $_SESSION['userid']){  
-								$disablerole ="pointer-events: none; opacity: 0.6;"; 
-							} 
+							<?php $disablerole= "";
+							if($application_users['id'] == $_SESSION['userid']){
+								$disablerole ="pointer-events: none; opacity: 0.6;";
+							}
 							/**$role_idd = json_decode($application_users['role_id']);
 							?>
 							<div class="form-group col-lg-4" style="<?php echo $disablerole; ?>">
@@ -233,7 +233,7 @@ $countriesres   = json_decode($countriesres,1);
 			    <?php foreach($dateformatlist as $valuedates) { ?>
 			      <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
 			    <?php } ?>
-			  </select> 
+			  </select>
 			</div>
 			<div class="form-group col-lg-4">
 				<span class="form-label d-inline-block fw-bold">Logo </span>
@@ -243,7 +243,7 @@ $countriesres   = json_decode($countriesres,1);
 									<span><i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
 								</label>
 								<input type="file" name="image1" id="image1" accept=".png, .jpg, .jpeg"  onchange="loadFile(event,this.id)">
-								
+
 								<input type="hidden" name="hidimage" value="<?php echo $application_users['user_photo']; ?>">
 								<img src="<?php echo $File_Uploads_Path.$application_users['display_logo'] ; ?>" id="outputimage1" width="200" data-onerror-src="uploads/all/no-image.jpg" alt="" />
 							</div>
@@ -258,9 +258,9 @@ $countriesres   = json_decode($countriesres,1);
 								</span>
 							</div>
 						</div>
-				
+
 			</div>
-			
+
 
 <?php } ?>
 
@@ -297,14 +297,14 @@ $countriesres   = json_decode($countriesres,1);
 				<div class="form-group mt-5">
 					<input type="hidden" name="Rid" value="<?php echo $rid; ?>">
 					<input type="hidden" name="tab" value="<?php echo $tab; ?>">
-					
+
 					<button type="submit" name="submit" class="btn btn-info btn-round waves-effect waves-lighttext-uppercase  mt-15 ml-3"><?= __('Update') ?></button>
 				</div>
 				<?php// } ?>
 		</form>
 		 <?php /**if($application_users['user_activated'] == 'Y' AND  $_SESSION['user_activated'] == 'N'){ ?>
                     <form method="post">
-                        <button class="btn btn-info btn-round waves-effect waves-light" name="skip_compliance" type="submit"> <?= __('Skip/Go Dashborad') ?></button>   
+                        <button class="btn btn-info btn-round waves-effect waves-light" name="skip_compliance" type="submit"> <?= __('Skip/Go Dashborad') ?></button>
                     </form>
                 <?php } **/?>
                 	</div>

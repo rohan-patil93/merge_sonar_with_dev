@@ -13,7 +13,7 @@ if (isset($_POST['submit'])){
     $jsp = array();
     if(isset($_POST['desc']) && is_array($_POST['desc'])){
         foreach($_POST['desc'] as $jskey=>$jspid){
-            $jsp[$jskey]['id'] = $jskey; 
+            $jsp[$jskey]['id'] = $jskey;
             $jsp[$jskey]['mand'] = $_POST['mand'][$jskey] ?? '';
             $jsp[$jskey]['res'] = $_POST['descpass'][$jskey] ?? '';
         }
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])){
         $url = API."?mode=adddata&table=".$table_name."&method=post";
         $response = file_post_contents($url, $data, 'insert');
     }
-    if($_POST['submit'] == 'Update'){    
+    if($_POST['submit'] == 'Update'){
         $_SESSION['check'] = 1;
         $data['updated_date'] = nowDate();
         $data['updated_by'] = $_SESSION['userid'] ?? '';
@@ -67,7 +67,7 @@ $process = array(
     'manufacturing_product_notes' => 'Manufacturing Product Notes',
     'subcontract_work_order_receipts' => 'Subcontract Work Order Receipts'
 );
-$vurl = API."?mode=togetqualitychecmappingindetails"; 
+$vurl = API."?mode=togetqualitychecmappingindetails";
 $vdata_details = callAPI($vurl);
 $detail = json_decode($vdata_details, 1);
 $qcparameters = $detail['parameter'] ?? array();
@@ -78,7 +78,7 @@ $role_des = array();
 $rid = "";
 $status_res = "0";
 
-if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GET['ITEMID']!="")){ 
+if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GET['ITEMID']!="")){
     if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $rid = encodeId($_GET['Rid']);
         $rid = urldecode($rid);
@@ -94,7 +94,7 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
             'process' => $_GET['PROCESS'] ?? ''
         );
         $vdata = urlencode(json_encode($vdata1));
-        $url = API."?mode=gettabledetailswithconditions&table=".$table_name."&data=".$vdata; 
+        $url = API."?mode=gettabledetailswithconditions&table=".$table_name."&data=".$vdata;
         $response = callAPI($url);
         $roles = json_decode($response, 1);
         $role = $roles['0'] ?? array();
@@ -104,7 +104,7 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
             $role['process'] = $_GET['PROCESS'] ?? '';
         }
     }
-    
+
     if(!empty($rid)){ $rid = "id:".($role['id'] ?? ''); }
     $jsdata = json_decode($role['specifications'] ?? '{}', 1);
     $role_cat = $jsdata['group'] ?? array();
@@ -123,7 +123,7 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
-        </div>    
+        </div>
     <?php } ?>
     <div class="card-header">
         <h5><?php echo __('Quality Parameters Mapping'); ?></h5>
@@ -139,7 +139,7 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
             <form method="post" action="">
                 <div class="row p-4">
                     <div class="form-group col-lg-4">
-                        <span class="form-label"><?php echo __('Item Categories'); ?></span>        
+                        <span class="form-label"><?php echo __('Item Categories'); ?></span>
                         <div class="w-full">
                             <select aria-label="<?php echo __('Item Categories'); ?>" class="form-select js-example-basic-single" name="item_cat_id" id="item_cat_id" data-selected-item="<?php echo $role['item_id'] ?? '0'; ?>">
                                 <option <?php echo (isset($role['item_cat_id']) && $role['item_cat_id']=='0')?'selected':''; ?> value="0"><?php echo __('All'); ?></option>
@@ -152,7 +152,7 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                         </div>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label"><?php echo __('Process'); ?></span>        
+                        <span class="form-label"><?php echo __('Process'); ?></span>
                         <div class="w-full">
                             <select aria-label="<?php echo __('Process'); ?>" class="form-select js-example-basic-single" name="process" id="process">
                                 <?php foreach($process as $key => $value){ ?>
@@ -162,7 +162,7 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                         </div>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label"><?php echo __('Item'); ?></span>        
+                        <span class="form-label"><?php echo __('Item'); ?></span>
                         <div class="w-full">
                             <select aria-label="<?php echo __('Item'); ?>" class="form-select js-example-basic-single item-select" name="item_id" id="item_id">
                                 <option value="0"><?php echo __('All'); ?></option>
@@ -179,18 +179,18 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                         : date('Y-m-d', strtotime('+5 years'));
                     ?>
                     <div class="form-group col-lg-4">
-                        <span class="form-label"><?php echo __('From Date'); ?></span>    
+                        <span class="form-label"><?php echo __('From Date'); ?></span>
                         <input aria-label="<?php echo __('From Date'); ?>" type="date" class="form-control" name="from_date" id="from_date" value="<?php echo $from_date; ?>">
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <span class="form-label"><?php echo __('To Date'); ?></span>    
+                        <span class="form-label"><?php echo __('To Date'); ?></span>
                         <input aria-label="<?php echo __('To Date'); ?>" type="date" class="form-control" name="to_date" id="to_date" value="<?php echo $to_date; ?>">
                     </div>
                     <div class="col-lg-12 row">
                         <div class="col-lg-7 f-w-600"> <?php echo __('Quality Parameters'); ?></div>
                         <div class="col-lg-3 f-w-600">
-                            <?php echo __('Reference Interval with Quality'); ?> 
+                            <?php echo __('Reference Interval with Quality'); ?>
                         </div>
                         <div class="col-lg-2 f-w-600">
                             <?php echo __('Mandatory'); ?>
@@ -202,18 +202,18 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                 ?>
                                 <div class="col-lg-12 row">
                                     <div class="col-lg-7 mt-3">
-                                        <div class="checkbox-fade fade-in-primary">    
+                                        <div class="checkbox-fade fade-in-primary">
                                             <label class="form-label line-height24">
-                                                <input type="checkbox" <?php if(in_array($group['id'],(array)$role_cat)){ echo __('checked'); } ?> name="cat[<?php echo $group['id']; ?>]" id="cat_<?php echo $group['id']; ?>" 
+                                                <input type="checkbox" <?php if(in_array($group['id'],(array)$role_cat)){ echo __('checked'); } ?> name="cat[<?php echo $group['id']; ?>]" id="cat_<?php echo $group['id']; ?>"
                                                 class="job-category-checkbox"
-                                                data-catid="<?php echo $group['id']; ?>" 
+                                                data-catid="<?php echo $group['id']; ?>"
                                                 aria-label="<?php echo htmlspecialchars($group['group_name'], ENT_QUOTES); ?>" />
                                                 <span class="cr float-left">
                                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                 </span>
                                                 <?php echo htmlspecialchars($group['group_name'], ENT_QUOTES); ?>
                                             </label>
-                                        </div> 
+                                        </div>
                                     </div>
                                     <div class="col-lg-5"></div>
                                 </div>
@@ -232,15 +232,15 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
-                                                <?php 
-                                                if($par['display_type']==1 || $par['display_type']==2){ 
+                                                <?php
+                                                if($par['display_type']==1 || $par['display_type']==2){
                                                     $selectdata = json_decode($par['quality_parameters'] ?? '[]', 1);
                                                     $check = (isset($jsdata['parameters'][$par['id']]['res']) && $jsdata['parameters'][$par['id']]['res']!="") ? $jsdata['parameters'][$par['id']]['res'] : 0;
                                                 ?>
                                                 <div class="toggle">
                                                     <?php $mn=1; foreach((array)$selectdata as $selectkey => $selectvalue){
                                                         $id = "check_".$par['id']."_".$mn;
-                                                    ?> 
+                                                    ?>
                                                     <input aria-label="<?php echo htmlspecialchars($selectvalue, ENT_QUOTES); ?>" type="radio" <?php if($check==$selectkey){ echo __('checked'); } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
                                                     <label for="<?php echo $id; ?>"><?php echo htmlspecialchars($selectvalue, ENT_QUOTES); ?></label>
                                                     <?php $mn++; } ?>
@@ -251,22 +251,22 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                                     $check = (isset($jsdata['parameters'][$par['id']]['res']) && $jsdata['parameters'][$par['id']]['res']!="") ? $jsdata['parameters'][$par['id']]['res'] : 3;
                                                 ?>
                                                 <div class="toggle">
-                                                    <?php $mn=1; for($i=1;$i<=5;$i++){     
+                                                    <?php $mn=1; for($i=1;$i<=5;$i++){
                                                         $id = "check_".$par['id']."_".$mn;
-                                                    ?> 
+                                                    ?>
                                                     <input aria-label="Rating <?php echo $i; ?>" type="radio" <?php if($check==$i){ echo __('checked'); } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $i; ?>' id='<?php echo $id; ?>' />
                                                     <label for="<?php echo $id; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo htmlspecialchars($selectdata[$i-1] ?? '', ENT_QUOTES); ?>"><?php echo $i; ?></label>
                                                     <?php $mn++; } ?>
                                                 </div>
                                                 <?php } ?>
-                                                <?php if($par['display_type']==5){ 
+                                                <?php if($par['display_type']==5){
                                                     $selectdata = array('Yes','No');
                                                     $check = (isset($jsdata['parameters'][$par['id']]['res']) && $jsdata['parameters'][$par['id']]['res']!="") ? $jsdata['parameters'][$par['id']]['res'] : 0;
                                                 ?>
                                                 <div class="toggle">
                                                     <?php $mn=1; foreach($selectdata as $selectkey => $selectvalue){
                                                         $id = "check_".$par['id']."_".$mn;
-                                                    ?> 
+                                                    ?>
                                                     <input aria-label="<?php echo $selectvalue; ?>" type="radio" <?php if($check ==$selectkey){ echo __('checked'); } ?> name="descpass[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
                                                     <label for="<?php echo $id; ?>"><?php echo $selectvalue; ?></label>
                                                     <?php $mn++; } ?>
@@ -274,14 +274,14 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                                 <div class="f-12 text-muted"> <?php echo __('With in range ?'); ?></div>
                                                 <?php } ?>
                                             </div>
-                                            
+
                                             <div class="col-lg-2">
                                                 <div class="toggle">
                                                     <?php $selectdata = array('Yes','No'); $mn=1;
                                                      foreach($selectdata as $selectkey => $selectvalue){
                                                         $id = "mand_".$par['id']."_".$mn;
                                                         $mcheck = (isset($jsdata['parameters'][$par['id']]['mand']) && $jsdata['parameters'][$par['id']]['mand']!="") ? $jsdata['parameters'][$par['id']]['mand'] : 1;
-                                                        ?> 
+                                                        ?>
                                                         <input aria-label="<?php echo $selectvalue; ?>" type="radio" <?php if($mcheck==$selectkey){ echo __('checked'); } ?> name="mand[<?php echo $par['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' />
                                                         <label for="<?php echo $id; ?>"><?php echo $selectvalue; ?></label>
                                                     <?php $mn++; } ?>
@@ -306,10 +306,10 @@ if((isset($_GET['Rid']) && $_GET['Rid'] !='') || (isset($_GET['ITEMID']) && $_GE
                                     <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10" name="submit_value_exit" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
                                     <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2"><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
                                 </div>
-                            <?php } ?>    
+                            <?php } ?>
                             <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
                                 <button type="button" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>

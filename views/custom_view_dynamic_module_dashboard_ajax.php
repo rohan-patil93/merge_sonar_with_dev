@@ -1,4 +1,4 @@
-<?php 
+<?php
 if($_POST['ajaxcall'] != 'Y'){
     include_once('includes/session.php');
     include_once('dbconfig.php');
@@ -80,14 +80,14 @@ foreach($result['transaction_approval_logs'] as $transactionlog){
     //if($transactionlog['response_type'] =='0' AND $transactionlog['send_back_flag'] == '0'){
     if($transactionlog['response_type'] =='0' AND $transactionlog['send_back_flag'] == '0' AND $transactionlog['call_back'] == '1'){
         $createtransactioncnt++;
-        $pendinglog[$transactionlog['transaction_id']] = $transactionlog;   
+        $pendinglog[$transactionlog['transaction_id']] = $transactionlog;
     }elseif($transactionlog['response_type'] == ST_SEND_BACK){
         $sendbacklogcheck[$transactionlog['transaction_id']] = $transactionlog;
     }elseif($transactionlog['response_type'] == ST_REJECTED){
         $rejectlogcheck[$transactionlog['transaction_id']] = $transactionlog;
     }else{
         $createtransactionapprovedcnt++;
-        $aprovedlog[$transactionlog['transaction_id']] = $transactionlog;   
+        $aprovedlog[$transactionlog['transaction_id']] = $transactionlog;
     }
 }
 foreach($sendbacklogcheck as $transid => $transactionlog){
@@ -144,7 +144,7 @@ function changestatus(val,tranid,allowitemid,table_name){
                 success:function(data){
                     $('#popupm').html(data);
                     $('#kt_modal_KTDatatable_remotem').modal("show");
-                    $(".js-example-basic-multiple").select2(); 
+                    $(".js-example-basic-multiple").select2();
                 },
                 error:function (){}
             });
@@ -158,7 +158,7 @@ function changestatus(val,tranid,allowitemid,table_name){
                 type: "POST",
                 success:function(data){
                     $('#tabsopen').html(data);
-                    $(".js-example-basic-single").select2(); 
+                    $(".js-example-basic-single").select2();
                     $( ".datepicker" ).datepicker({
                         showOn: "both",
                         buttonText: "<i class='ti-calendar text-dark f-20 f-w-800 m-r-10'></i>",
@@ -171,7 +171,7 @@ function changestatus(val,tranid,allowitemid,table_name){
                 },
                 error:function (){}
             });
-        } 
+        }
         function updateApplicationFavourites(application_table_name,transaction_id,type){
     if(type == 'F'){
         var msg = '<?php echo $_SESSION['error_message']['9133']; ?>';
@@ -184,7 +184,7 @@ function changestatus(val,tranid,allowitemid,table_name){
         type: "POST",
         success:function(data){
             console.log(data);
-            
+
             swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
                 text: msg,
@@ -232,7 +232,7 @@ function getEnquiryVendororCustomer(valu){
             success:function(data){
                 $("#search_result_employee").html(data);
             }
-        });   
+        });
     }else{
         $("#search_result_employee").hide();
     }
@@ -247,7 +247,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=''){
                 $('#dynamic_popup1').html(data);
                 $('#kt_modal_dynamic_popup').modal("show");
             }
-        });    
+        });
     }
 </script>
 <div class="row">
@@ -266,11 +266,11 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=''){
                         </div>
                     </div>
                     <div class="card-block text-center">
-                         
-<?php 
+
+<?php
 $approvedresamt = $approvedresamt !=""?$approvedresamt:0;
 $totaldocsamt = $totaldocsamt !=""?$totaldocsamt:0;
-$totaldoc = $totaldocsamt+$approvedresamt; 
+$totaldoc = $totaldocsamt+$approvedresamt;
 if($totaldoc != 0 AND $totaldoc !=""){
 
     $approvedocs = 100-round((($totaldocsamt-$approvedresamt)/$totaldoc)*100);
@@ -280,7 +280,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
  ?>
                         <div class="m-b-10" style="text-align: -webkit-center;">
                             <div class="circle_gradiant" style="--p1: <?php echo customNanAndEmptyValidation((($approvedocs)*3.6)); ?>deg; --p2_color: #ff5370;--p1_color: #2ed8b6;">
-                                <?php 
+                                <?php
                         $disname = $_SESSION['user']['display_name']!=""?$_SESSION['user']['display_name']:$_SESSION['display_name'];
                         if($_SESSION['user']['user_photo']!=""){ ?>
                           <img src="<?php echo "uploads/all/".$_SESSION['user']['user_photo']; ?>" class="percentag-img-radius img-90" alt="<?= htmlspecialchars(__('User profile'), ENT_QUOTES, 'UTF-8'); ?>" style="border-radius: 50%;border: 8px solid #ffffff;" >
@@ -295,7 +295,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                             <div class="col-6">
                                 <div class="s-caption bg-c-red m-0"></div>
                                 <div class="s-cont d-inline-block">
-                                    <h5 class="f-w-700 m-b-0  f-12"><?php 
+                                    <h5 class="f-w-700 m-b-0  f-12"><?php
                                     //echo number_format($totaldocsamt)."</br>";
                                     echo convert_Rupee_Number($totaldocsamt !=''?$totaldocsamt:"0"); ?></h5>
                                     <p class="m-b-0 f-10"><?= __('Total Value'); ?></p>
@@ -304,7 +304,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                             <div class="col-6 b-l-default">
                                 <div class="s-caption bg-c-green m-0"></div>
                                 <div class="s-cont d-inline-block">
-                                    <h5 class="f-w-700 m-b-0 f-12"><?php 
+                                    <h5 class="f-w-700 m-b-0 f-12"><?php
                                     //echo number_format($approvedresamt)."</br>";
                                     echo convert_Rupee_Number($approvedresamt !=''?$approvedresamt:"0"); ?></h5>
                                     <p class="m-b-0 f-10"><?= __('Approved'); ?> </p>
@@ -320,11 +320,11 @@ if($totaldoc != 0 AND $totaldoc !=""){
                     <div class="card-block text-center">
                         <h2 class="text-facebook m-b-20" aria-label="<?= htmlspecialchars(__('Announcement'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-announcement " aria-hidden="true"></i><span class="visually-hidden"><?= __('Announcement'); ?></span></h2>
                         <div class="row mt-2">
-                            <?php 
+                            <?php
                             $anouncement =  API."?mode=togetlatestannouncement";
-                            $anouncement_list = callAPI($anouncement);  
+                            $anouncement_list = callAPI($anouncement);
                             $anouncement_list = json_decode($anouncement_list,1);
-                                                //print_r($anouncement_list);           
+                                                //print_r($anouncement_list);
                             ?>
                             <p><?php echo substr($anouncement_list['announcement_message'],0,250);?></p>
                             <p class="m-b-0 m-t-15"><a  href="index.php?option=COM_VIEW_ANNOUNCEMENTS" class="btn btn-info waves-effect waves-light btn_mobile"><?php echo $anouncement_list['button_label']; ?></a></p>
@@ -337,11 +337,11 @@ if($totaldoc != 0 AND $totaldoc !=""){
                         <div class="card-header-right table-card-header ">
                             <span class="text-dark f-w-600"><?php echo date('Y');?></span>
                         </div>
-                        
+
                     </div>
                     <div class="card-block custom-scroll" style=" height: 300px;">
-                        <?php 
-                        if(!empty($holidays)) {   
+                        <?php
+                        if(!empty($holidays)) {
                             foreach ($holidays as  $holiday) {
 
                                 $Notification_Message = $holiday['holiday_name'];
@@ -353,7 +353,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                         <p class="text-muted m-b-5 f-12"><?php echo $Notification_Message; ?>  <span class="float-right"><?php echo $Notification_DateTime; ?></span></p>
                                     </div>
                                 </div>
-                            <?php } }else{ 
+                            <?php } }else{
                                 echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
                             } ?>
                         </div>
@@ -383,14 +383,14 @@ if($totaldoc != 0 AND $totaldoc !=""){
 
                             <div class="col-lg-12">
                                 <div class="input-group input-group-button mb-0">
-                                    <input type="text" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Enter Minimum 3 Characters'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" onkeyup="getEnquiryVendororCustomer(this.value)"> 
+                                    <input type="text" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Enter Minimum 3 Characters'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" onkeyup="getEnquiryVendororCustomer(this.value)">
                                     <div class="input-group-text addon-style">
                                         <span class=""><i class="ti-search text-white mt-2"></i></span>
                                     </div>
                                 </div>
                             </div>
                             <div id="search_result_employee" class="mt-2 custom-scroll" style=" min-height: 160px; max-height: 160px; display: none">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -424,39 +424,39 @@ if($totaldoc != 0 AND $totaldoc !=""){
                     </ul>
                     <div class="tab-content tabs">
                         <?php /** if($table_name == 'work_orders'){ ?>
-                        <div class="tab-pane card-body p-0" id="partysummary" role="tabpanel">  
-                            <?php 
+                        <div class="tab-pane card-body p-0" id="partysummary" role="tabpanel">
+                            <?php
                             $_GET['company_id'] = 1;
                             $_GET['data_name'] = "infistaqin_infisuite_2";
                             $_GET['user_id'] = 459;
                             include_once("../apis/custom_vendor_customer_finance_summary.php"); ?>
                         </div>
-                        <div class="tab-pane card-body p-0" id="itemssummary" role="tabpanel">  
-                            <?php 
+                        <div class="tab-pane card-body p-0" id="itemssummary" role="tabpanel">
+                            <?php
                             $_GET['company_id'] = 1;
                             $_GET['data_name'] = "infistaqin_infisuite_2";
                             $_GET['user_id'] = 459;
                             include_once("../apis/custom_items_summary.php"); ?>
                         </div>
                         <?php } **/ ?>
-                        <div class="tab-pane card-body p-0" id="schedules_tab" role="tabpanel"> 
+                        <div class="tab-pane card-body p-0" id="schedules_tab" role="tabpanel">
                         </div>
-                        <div class="tab-pane card-body active p-0" id="selfdocuments" role="tabpanel">  
+                        <div class="tab-pane card-body active p-0" id="selfdocuments" role="tabpanel">
                     <div class="card mb-2">
                         <ul class="nav md-tabs infisuite_tab mt-2 ml-2">
                             <li class="nav-item">
                                 <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#itemcategory" role="tab" aria-selected="true">
-                                    <?php 
+                                    <?php
                                     $itemcatname = "Item Categories";
-                                    if($_SESSION['work_module_setup_id'] == PETTY_CASH_MODULE){ 
-                                        $itemcatname =  "Petty Cash"; 
+                                    if($_SESSION['work_module_setup_id'] == PETTY_CASH_MODULE){
+                                        $itemcatname =  "Petty Cash";
                                     //}elseif($_SESSION['work_module_setup_id'] == ACCOUNT_MODULE || $table_name == "debit_notes" || $table_name == "credit_notes"){
-                                    //}elseif($_SESSION['work_module_setup_id'] == ACCOUNT_MODULE){ 
+                                    //}elseif($_SESSION['work_module_setup_id'] == ACCOUNT_MODULE){
                                     }elseif($table_name == "debit_notes" || $table_name == "credit_notes" || $table_name == "journal_vouchers" || $table_name =="bank_vouchers" || $table_name =="cash_vouchers"){
-                                        $itemcatname =  "Transaction Type"; 
+                                        $itemcatname =  "Transaction Type";
                                         $item_categories = array(array('id'=>'purchase_invoices','category_description'=>'Purchase Invoices'),array('id'=>'supplier_bills','category_description'=>'Supplier Bills'),array('id'=>'supplier_bill_cancellations','category_description'=>'Supplier Bill Cancellations'),array('id'=>'payments','category_description'=>'Payments'),array('id'=>'receipts','category_description'=>'Receipts'),array('id'=>'sales_invoices','category_description'=>'Sales Invoices'),array('id'=>'sales_returns','category_description'=>'Sales Returns'),array('id'=>'sales_invoice_cancellations','category_description'=>'Sales Invoice Cancellations'),array('id'=>'goods_receipt_notes','category_description'=>'Goods Receipt Notes'),array('id'=>'grn_return','category_description'=>'GRN Return'),array('id'=>'delivery_orders','category_description'=>'Delivery Orders'),array('id'=>'debit_notes','category_description'=>'Debit Notes'),array('id'=>'credit_notes','category_description'=>'Credit Notes'),array('id'=>'stock_transfers','category_description'=>'Stock Transfers'),array('id'=>'stock_transfer_receipts','category_description'=>'Stock Transfer Receipts'),array('id'=>'stock_transfer_returns','category_description'=>'Stock Transfer Returns'),array('id'=>'stock_adjustments','category_description'=>'Stock Adjustments'),array('id'=>'manual','category_description'=>'Manual'));
                                     }
-                                      ?> 
+                                      ?>
                                     <?php echo $itemcatname; ?><span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $categorydatalist)); ?></span></a>
 
                             </li>
@@ -480,7 +480,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                     <h5><?php echo $itemcatname; ?></h5>
                                     <div class="card-header-right table-card-header">
                       <div class="input-group input-group-button mb-0" >
-                                    <input type="text" id="dynamicfilterhideshow_category" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
+                                    <input type="text" id="dynamicfilterhideshow_category" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text addon-style">
                                         <span class=""><span class="ti-search text-white mt-2"></span></span>
                                     </span>
@@ -489,9 +489,9 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                 </div>
                                 <div class="card-block accordion-block color-accordion-block itemcategory_sec">
                                     <div class="color-accordion" id="color-accordion">
-                                        <?php 
+                                        <?php
                                         // $recordaray = $norecordaray = array();
-                                        // foreach($item_categories as $item_categorielist){ 
+                                        // foreach($item_categories as $item_categorielist){
                                         //  $list = $categorydatalist[$item_categorielist['id']];
                                         //  if(count((array)$list)){
                                         //      $recordaray[] = $item_categorielist;
@@ -500,14 +500,14 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                         //  }
                                         // }
                                         // $margeitemcat = array_merge((array)$recordaray,(array)$norecordaray);
-                                        if(count((array)$item_categories) !=0){     
-                                        foreach($item_categories as $item_categorie){ 
+                                        if(count((array)$item_categories) !=0){
+                                        foreach($item_categories as $item_categorie){
                                             $list = $categorydatalist[$item_categorie['id']]; ?>
-                                            <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20"> 
+                                            <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20">
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
                                                     <i class="ti ti-star" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i> 
+                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('<?php echo $result['item_table_name']; ?>','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['category_description']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -516,7 +516,7 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                             <div class="row" style="position: sticky;top: 0px;">
                                                 <div class="col-lg-8">&nbsp;</div>
                                                 <div class="col-lg-4 " >
-                                                    
+
                                                 </div>
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
@@ -532,16 +532,16 @@ if($totaldoc != 0 AND $totaldoc !=""){
                                                             <?php foreach($list as $list){ ?>
                                                                 <tr>
                                                                     <td><a class="d-block" href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$list['id']); ?>" <?php echo $edit_permissionbtn; ?>><?php echo $list['transaction_number']; ?></a>
-<?php 
+<?php
 if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR $table_name =="sales_invoices")){
     $badgeclass = "";
-    if($list['pending_amount'] == $list['total_amount']){ 
+    if($list['pending_amount'] == $list['total_amount']){
         $badgeclass ="label-danger";
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
-    }elseif($list['pending_amount'] == 0){ 
+    }elseif($list['pending_amount'] == 0){
         $badgeclass ="label-success";
         $badgetext = "PAID";
-    }elseif($list['pending_amount'] != $list['total_amount']){ 
+    }elseif($list['pending_amount'] != $list['total_amount']){
         $badgeclass ="label-warning";
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
     }
@@ -565,10 +565,10 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>   
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                                        </div>   
+                                                        </div>
                                                     </div>
                                                 <?php   } ?>
                                             </div>
@@ -576,10 +576,10 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                         <?php } ?>
                                         <?php  }else{ ?>
                                             <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $itemcatname; ?></p>   
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $itemcatname; ?></p>
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                                        </div>   
+                                                        </div>
                                                     </div>
                                             <?php } ?>
                                     </div>
@@ -590,7 +590,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     <h5><?= __('Locations'); ?></h5>
                                     <div class="card-header-right table-card-header">
                                         <div class="input-group input-group-button mb-0" >
-                                            <input type="text" id="dynamicfilterhideshow_location" data-id='locationfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
+                                            <input type="text" id="dynamicfilterhideshow_location" data-id='locationfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -599,9 +599,9 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                 </div>
                                 <div class="card-block accordion-block color-accordion-block itemcategory_sec">
                                     <div class="color-accordion" id="color-accordion-location">
-                                        <?php 
+                                        <?php
                                         // $recordaray = $norecordaray = array();
-                                        // foreach($locations as $item_categorielist){ 
+                                        // foreach($locations as $item_categorielist){
                                         //  $list = $locationlist[$item_categorielist['id']];
                                         //  if(count((array)$list)){
                                         //      $recordaray[] = $item_categorielist;
@@ -610,13 +610,13 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                         //  }
                                         // }
                                         // $margeitemloc = array_merge((array)$recordaray,(array)$norecordaray);
-                                        foreach($locations as $item_categorie){ 
+                                        foreach($locations as $item_categorie){
                                             $list = $locationlist[$item_categorie['id']]; ?>
-                                            <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20"> 
+                                            <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20">
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
                                                     <i class="ti ti-star" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i> 
+                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('locations','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['location_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -625,7 +625,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                             <div class="row" style="position: sticky;top: 0px;">
                                                 <div class="col-lg-8">&nbsp;</div>
                                                 <div class="col-lg-4 ">
-                                                
+
                                                 </div>
                                             </div>
                                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="locationfilter">
@@ -641,16 +641,16 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                             <?php foreach($list as $list){?>
                                                                 <tr>
                                                                     <td><a class="d-block" href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$list['id']); ?>" <?php echo $edit_permissionbtn; ?>><?php echo $list['transaction_number']; ?></a>
-<?php 
+<?php
 if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR $table_name =="sales_invoices")){
     $badgeclass = "";
-    if($list['pending_amount'] == $list['total_amount']){ 
+    if($list['pending_amount'] == $list['total_amount']){
         $badgeclass ="label-danger";
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
-    }elseif($list['pending_amount'] == 0){ 
+    }elseif($list['pending_amount'] == 0){
         $badgeclass ="label-success";
         $badgetext = "PAID";
-    }elseif($list['pending_amount'] != $list['total_amount']){ 
+    }elseif($list['pending_amount'] != $list['total_amount']){
         $badgeclass ="label-warning";
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
     }
@@ -671,10 +671,10 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>   
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                                        </div>   
+                                                        </div>
                                                     </div>
                                                 <?php   } ?>
                                             </div>
@@ -688,7 +688,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     <h5><?= __('Cost Centers'); ?></h5>
                                     <div class="card-header-right table-card-header">
                                         <div class="input-group input-group-button mb-0" >
-                                            <input type="text" id="dynamicfilterhideshow_costcenter" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> 
+                                            <input type="text" id="dynamicfilterhideshow_costcenter" data-id='costcenterfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -697,10 +697,10 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                 </div>
                                 <div class="card-block accordion-block color-accordion-block itemcategory_sec">
                                     <div class="color-accordion" id="color-accordion-costcenter">
-                                        
-                                        <?php 
+
+                                        <?php
                                         // $recordaray = $norecordaray = array();
-                                        // foreach($cost_center_datalist as $item_categorielist){ 
+                                        // foreach($cost_center_datalist as $item_categorielist){
                                         //  $list = $costcenterlist[$item_categorielist['id']];
                                         //  if(count((array)$list)){
                                         //      $recordaray[] = $item_categorielist;
@@ -709,13 +709,13 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                         //  }
                                         // }
                                         // $margeitemcostcenter = array_merge((array)$recordaray,(array)$norecordaray);
-                                        foreach($cost_center_datalist as $item_categorie){ 
+                                        foreach($cost_center_datalist as $item_categorie){
                                             $list = $costcenterlist[$item_categorie['id']]; ?>
-                                            <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray" ><span class="m-r-20"> 
+                                            <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray" ><span class="m-r-20">
                                                     <?php if($item_categorie['favourite_id'] ==""){ ?>
                                                     <i class="ti ti-star" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','F')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Add To Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                     <?php }else{ ?>
-                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i> 
+                                                    <i class="fa fa-star text-danger" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>" onclick="updateApplicationFavourites('cost_centers','<?php echo $item_categorie['id']; ?>','U')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Remove From Favourite'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                     <?php } ?>
                                                 </span>
                                                 <?php echo $item_categorie['cost_center_name']; ?> <span class="label label-md label-warning float-right"><?php echo count((array)$list); ?> </span></a>
@@ -739,16 +739,16 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                             <?php foreach($list as $list){?>
                                                                 <tr>
                                                                     <td><a class="d-block" href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$list['id']); ?>" <?php echo $edit_permissionbtn; ?>><?php echo $list['transaction_number']; ?></a>
-                                                                    <?php 
+                                                                    <?php
 if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR $table_name =="sales_invoices")){
     $badgeclass = "";
-    if($list['pending_amount'] == $list['total_amount']){ 
+    if($list['pending_amount'] == $list['total_amount']){
         $badgeclass ="label-danger";
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
-    }elseif($list['pending_amount'] == 0){ 
+    }elseif($list['pending_amount'] == 0){
         $badgeclass ="label-success";
         $badgetext = "PAID";
-    }elseif($list['pending_amount'] != $list['total_amount']){ 
+    }elseif($list['pending_amount'] != $list['total_amount']){
         $badgeclass ="label-warning";
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
     }
@@ -768,10 +768,10 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center ">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>   
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No'); ?> <?php echo $_POST['menu_label']; ?></p>
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                                        </div>   
+                                                        </div>
                                                     </div>
                                                 <?php   } ?>
                                             </div>
@@ -780,16 +780,16 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                     </div>
                                 </div>
                             </div>
-                            
 
-                    <?php /** foreach($generatedocs as $trnstabkey=>$gdocs){ 
-                            $viewpageotion = getPagenametotable($table_name,'insert_page_name'); ?> 
+
+                    <?php /** foreach($generatedocs as $trnstabkey=>$gdocs){
+                            $viewpageotion = getPagenametotable($table_name,'insert_page_name'); ?>
                                     <div class="tab-pane card-body p-0" id="tabs_<?php echo $trnstabkey; ?>" role="tabpanel">
                                 <div class="card-header">
                                     <h5><?php echo $trnstabkey; ?></h5>
                                     <div class="card-header-right table-card-header">
                                         <div class="input-group input-group-button mb-0" >
-                                            <input type="text" id="dynamicfilterhideshow_generatedocs" data-id='costcenterfilter_2' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search" aria-label="Search"> 
+                                            <input type="text" id="dynamicfilterhideshow_generatedocs" data-id='costcenterfilter_2' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="Search" aria-label="Search">
                                             <span class="input-group-text addon-style">
                                                 <span class=""><span class="ti-search text-white mt-2"></span></span>
                                             </span>
@@ -815,7 +815,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                 <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                 <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                 <td>
-                                <?php if($trnstabkey == "requisitions"){ 
+                                <?php if($trnstabkey == "requisitions"){
                                         if(!isset($purchase_orders[$row['id']])){ ?>
                                     <button class="btn btn-primary btn-brand--icon" id="kt_search" onclick="changestatus('<?php echo $table_name; ?>','<?php echo $list['id']; ?>','<?php echo $list['itemtb_id']; ?>','<?php echo $trnstabkey; ?>')"><span><?php echo $_POST['menu_label']; ?></span></button>
                                 <?php   }   } ?>
@@ -826,15 +826,15 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                 </table>
             <?php }else{ ?>
                 <div class="card-px text-center ">
-                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $trnstabkey; ?></p>   
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No <?php echo $trnstabkey; ?></p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                    </div>   
+                    </div>
                 </div>
             <?php   } ?>
-        
+
         </div>
-<?php } **/  ?> 
+<?php } **/  ?>
 
 
 
@@ -850,7 +850,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
 <div class="tab-pane card-body p-0" id="tabsopen" role="tabpanel">
 
 </div>
-</div>        
+</div>
 
 <div class="card mt-3">
     <div class="card-header">
@@ -871,16 +871,16 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                             <?php foreach($result['latest_table_list'] as $list){?>
                                                                 <tr>
                                                                     <td><a class="d-block" href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$list['id']); ?>" <?php echo $edit_permissionbtn; ?>><?php echo $list['transaction_number']; ?></a>
-                                                                                                                <?php 
+                                                                                                                <?php
 if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR $table_name =="sales_invoices")){
     $badgeclass = "";
-    if($list['pending_amount'] == $list['total_amount']){ 
+    if($list['pending_amount'] == $list['total_amount']){
         $badgeclass ="label-danger";
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
-    }elseif($list['pending_amount'] == 0){ 
+    }elseif($list['pending_amount'] == 0){
         $badgeclass ="label-success";
         $badgetext = "PAID";
-    }elseif($list['pending_amount'] != $list['total_amount']){ 
+    }elseif($list['pending_amount'] != $list['total_amount']){
         $badgeclass ="label-warning";
         $badgetext = customeummarmonyformateifine($list['pending_amount']);
     }
@@ -900,37 +900,37 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                                     </table>
                                                     <?php  }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Update'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Update'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                    </div>   
+                                    </div>
                                 </div>
                         <?php } ?>
     </div>
-</div>  
+</div>
 </div>
 
 </div>
 
-                
+
         </div>
         <div class="col-lg-3">
             <ul class="nav md-tabs infisuite_tab mt-2 mb-2">
                 <li class="nav-item">
                     <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfcreated" role="tab" aria-selected="true"><?= __('Self'); ?><span class="label label-xs label-success m-l-10"><?php echo $transactionlogcnt; ?></span></a>
-                </li> 
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#selfaction" role="tab" aria-selected="true"><?= __('Action'); ?><span class="label label-xs label-danger m-l-10"><?php echo $createtransactioncnt; ?></span>
                     <span class="label label-xs label-success m-l-10"><?php echo $createtransactionapprovedcnt !=""?$createtransactionapprovedcnt:"0" ; ?></span>
                     <span class="label label-xs label-warning m-l-10"><?php echo count((array)$sendbacklog) !=""?count((array)$sendbacklog):"0" ; ?></span></a>
                 </li>
-            </ul>   
+            </ul>
             <div class="tab-content tabs ">
                 <div class="tab-pane card-body active p-0" id="selfcreated" role="tabpanel">
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5><?= __('Draft'); ?> 
+                            <h5><?= __('Draft'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_DRAFT]['color']; ?>; background-color:<?php echo $statuse[ST_DRAFT]['background_color']; ?>;"><?php echo count((array)$draftres); ?></span>
                             </h5>
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
@@ -942,28 +942,28 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                                 <div class="col-auto">
                                     <!-- <div class="p-1 b-radius-25 text-center left-icon-width" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;"> -->
                                         <!-- <i class=" ti-briefcase f-w-600"></i> -->
-                
+
                 <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
                     <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
-                </div>  
+                </div>
                                 <!--    </div> -->
                                 </div>
                                 <div class="col p-0 m-l-10">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$activeres1['id']); ?>" <?php echo $edit_permissionbtn; ?>>
-                                        <h6 class="f-w-600 mb-1 f-14"><?php echo $_SESSION['users'][$activeres1['originator']]; ?>                                          <?php 
+                                        <h6 class="f-w-600 mb-1 f-14"><?php echo $_SESSION['users'][$activeres1['originator']]; ?>                                          <?php
 if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR $table_name =="sales_invoices")){
     $badgeclass = "";
-    if($activeres1['pending_amount'] == $activeres1['total_amount']){ 
+    if($activeres1['pending_amount'] == $activeres1['total_amount']){
         $badgeclass ="label-danger";
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
-    }elseif($activeres1['pending_amount'] == 0){ 
+    }elseif($activeres1['pending_amount'] == 0){
         $badgeclass ="label-success";
         $badgetext = "PAID";
-    }elseif($activeres1['pending_amount'] != $activeres1['total_amount']){ 
+    }elseif($activeres1['pending_amount'] != $activeres1['total_amount']){
         $badgeclass ="label-warning";
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
     }
@@ -976,17 +976,17 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Draft Records'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Draft Records'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                    </div>   
+                                    </div>
                                 </div>
-                        <?php } ?>  
+                        <?php } ?>
                         </div>
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5><?= __('Active'); ?> 
+                            <h5><?= __('Active'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_ACTIVE]['color']; ?>; background-color:<?php echo $statuse[ST_ACTIVE]['background_color']; ?>;"><?php echo count((array)$activeres); ?></span>
                             </h5>
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_ACTIVE; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
@@ -1004,20 +1004,20 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
-                </div>  
+                </div>
                                 </div>
                                 <div class="col p-0">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$activeres1['id']); ?>" <?php echo $edit_permissionbtn; ?>>
-                                        <h6 class="f-w-600 mb-1 f-14"><?php echo $activeres1['party_name']; ?>                                          <?php 
+                                        <h6 class="f-w-600 mb-1 f-14"><?php echo $activeres1['party_name']; ?>                                          <?php
 if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR $table_name =="sales_invoices")){
     $badgeclass = "";
-    if($activeres1['pending_amount'] == $activeres1['total_amount']){ 
+    if($activeres1['pending_amount'] == $activeres1['total_amount']){
         $badgeclass ="label-danger";
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
-    }elseif($activeres1['pending_amount'] == 0){ 
+    }elseif($activeres1['pending_amount'] == 0){
         $badgeclass ="label-success";
         $badgetext = "PAID";
-    }elseif($activeres1['pending_amount'] != $activeres1['total_amount']){ 
+    }elseif($activeres1['pending_amount'] != $activeres1['total_amount']){
         $badgeclass ="label-warning";
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
     }
@@ -1030,17 +1030,17 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Active Records'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Active Records'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                    </div>   
+                                    </div>
                                 </div>
-                        <?php } ?>  
+                        <?php } ?>
                         </div>
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5><?= __('In Process'); ?> 
+                            <h5><?= __('In Process'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED1]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED1]['background_color']; ?>;"><?php echo count((array)$inprocessres); ?></span>
                             </h5>
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','inprocess')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
@@ -1058,20 +1058,20 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
-                </div>  
+                </div>
                                 </div>
                                 <div class="col p-0">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$activeres1['id']); ?>" <?php echo $edit_permissionbtn; ?>>
-                                        <h6 class="f-w-600 mb-1 f-14"><?php echo $_SESSION['users'][$activeres1['originator']]; ?>                                          <?php 
+                                        <h6 class="f-w-600 mb-1 f-14"><?php echo $_SESSION['users'][$activeres1['originator']]; ?>                                          <?php
 if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR $table_name =="sales_invoices")){
     $badgeclass = "";
-    if($activeres1['pending_amount'] == $activeres1['total_amount']){ 
+    if($activeres1['pending_amount'] == $activeres1['total_amount']){
         $badgeclass ="label-danger";
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
-    }elseif($activeres1['pending_amount'] == 0){ 
+    }elseif($activeres1['pending_amount'] == 0){
         $badgeclass ="label-success";
         $badgetext = "PAID";
-    }elseif($activeres1['pending_amount'] != $activeres1['total_amount']){ 
+    }elseif($activeres1['pending_amount'] != $activeres1['total_amount']){
         $badgeclass ="label-warning";
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
     }
@@ -1086,17 +1086,17 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No In-Process Records'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No In-Process Records'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                    </div>   
+                                    </div>
                                 </div>
                         <?php } ?>
                         </div>
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5><?= __('Approved'); ?> 
+                            <h5><?= __('Approved'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$approvedres); ?></span>
                             </h5>
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','<?php echo ST_APPROVED; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
@@ -1114,21 +1114,21 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
-                </div>  
+                </div>
                                 </div>
                                 <div class="col p-0">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$activeres1['id']); ?>" <?php echo $edit_permissionbtn; ?>>
                                         <h6 class="f-w-600 mb-1 f-14"><?php echo $_SESSION['users'][$activeres1['originator']]; ?>
-                                            <?php 
+                                            <?php
 if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR $table_name =="sales_invoices")){
     $badgeclass = "";
-    if($activeres1['pending_amount'] == $activeres1['total_amount']){ 
+    if($activeres1['pending_amount'] == $activeres1['total_amount']){
         $badgeclass ="label-danger";
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
-    }elseif($activeres1['pending_amount'] == 0){ 
+    }elseif($activeres1['pending_amount'] == 0){
         $badgeclass ="label-success";
         $badgetext = "PAID";
-    }elseif($activeres1['pending_amount'] != $activeres1['total_amount']){ 
+    }elseif($activeres1['pending_amount'] != $activeres1['total_amount']){
         $badgeclass ="label-warning";
         $badgetext = customeummarmonyformateifine($activeres1['pending_amount']);
     }
@@ -1142,10 +1142,10 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approved Records'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approved Records'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                    </div>   
+                                    </div>
                                 </div>
                         <?php } ?>
                         </div>
@@ -1154,13 +1154,13 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                 <div class="tab-pane card-body p-0" id="selfaction" role="tabpanel">
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5><?= __('Approval Pending'); ?> 
+                            <h5><?= __('Approval Pending'); ?>
                                 <span class="label label-xs label-danger m-l-10" ><?php echo count((array)$pendinglog); ?></span>
                             </h5>
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVEPENDING')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
-                            <?php $mm = 1; if(count((array)$pendinglog) !=0){ foreach($pendinglog as $logdetails){ 
+                            <?php $mm = 1; if(count((array)$pendinglog) !=0){ foreach($pendinglog as $logdetails){
                                 //$activeres1 = $alltransaction[$logdetails['transaction_id']];
                                 if($mm == 4){ break; } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
@@ -1174,7 +1174,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
-                </div>  
+                </div>
                                 </div>
                                 <div class="col p-0">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$logdetails['transaction_id']); ?>" <?php echo $approval_permissionbtn; ?>>
@@ -1185,24 +1185,24 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approval Pending'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approval Pending'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                    </div>   
+                                    </div>
                                 </div>
-                        <?php } ?>  
+                        <?php } ?>
                         </div>
                     </div>
-                    
+
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5><?= __('Approved'); ?> 
+                            <h5><?= __('Approved'); ?>
                                 <span class="label label-xs label-success m-l-10" style="color:<?php echo $statuse[ST_APPROVED]['color']; ?>; background-color:<?php echo $statuse[ST_APPROVED]['background_color']; ?>;"><?php echo count((array)$aprovedlog); ?></span>
                             </h5>
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','APPROVELOG')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
-                            <?php $mm = 1; if(count((array)$aprovedlog) !=0){ foreach($aprovedlog as $logdetails){ 
+                            <?php $mm = 1; if(count((array)$aprovedlog) !=0){ foreach($aprovedlog as $logdetails){
                                 //$activeres1 = $alltransaction[$logdetails['transaction_id']];
                                 if($mm == 4){ break; } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
@@ -1216,7 +1216,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
-                </div>  
+                </div>
                                 </div>
                                 <div class="col p-0">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$logdetails['transaction_id']); ?>" <?php echo $approval_permissionbtn; ?>>
@@ -1227,23 +1227,23 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approved'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Approved'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                    </div>   
+                                    </div>
                                 </div>
-                        <?php } ?>  
+                        <?php } ?>
                         </div>
                     </div>
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h5><?= __('Send Back'); ?> 
+                            <h5><?= __('Send Back'); ?>
                                 <span class="label label-xs label-warning m-l-10" ><?php echo count((array)$sendbacklog); ?></span>
                             </h5>
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','SENDBACK')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
-                            <?php $mm = 1; if(count((array)$sendbacklog) !=0){ foreach($sendbacklog as $logdetails){ 
+                            <?php $mm = 1; if(count((array)$sendbacklog) !=0){ foreach($sendbacklog as $logdetails){
                                 //$activeres1 = $alltransaction[$logdetails['transaction_id']];
                                 if($mm == 4){ break; } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
@@ -1257,7 +1257,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
-                </div>  
+                </div>
                                 </div>
                                 <div class="col p-0">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$logdetails['transaction_id']); ?>" <?php echo $approval_permissionbtn; ?>>
@@ -1268,12 +1268,12 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Send back'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Send back'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                    </div>   
+                                    </div>
                                 </div>
-                        <?php } ?>  
+                        <?php } ?>
                         </div>
                     </div>
                     <div class="card mb-2">
@@ -1284,7 +1284,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>','REJECTED')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
-                            <?php $mm = 1; if(count((array)$rejectlog) !=0){ foreach($rejectlog as $logdetails){ 
+                            <?php $mm = 1; if(count((array)$rejectlog) !=0){ foreach($rejectlog as $logdetails){
                                 //$activeres1 = $alltransaction[$logdetails['transaction_id']];
                                 if($mm == 4){ break; } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
@@ -1298,7 +1298,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
-                </div>  
+                </div>
                                 </div>
                                 <div class="col p-0">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$logdetails['transaction_id']); ?>" <?php echo $approval_permissionbtn; ?>>
@@ -1309,12 +1309,12 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                             </div>
                         <?php $mm++; } }else{ ?>
                         <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Rejected'); ?></p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Rejected'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;" >
-                                    </div>   
+                                    </div>
                                 </div>
-                        <?php } ?>  
+                        <?php } ?>
                         </div>
                     </div>
                 </div>

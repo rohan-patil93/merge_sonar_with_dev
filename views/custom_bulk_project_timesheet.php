@@ -42,7 +42,7 @@ foreach((array)$team_count_data['data'] as $sbb ){
 }
 	$from_date = $_GET['PAY_YEAR']."-".$_GET['PAY_MONTH']."-01";
 	$todate = date('Y-m-d', strtotime('last day of this month', strtotime($from_date)));
-	$vurl = API."?mode=toretriveminhorsandweksanddayebasedondates&from_date=".$from_date."&to_date=".$todate; 
+	$vurl = API."?mode=toretriveminhorsandweksanddayebasedondates&from_date=".$from_date."&to_date=".$todate;
 	$attdenace_data = callAPI($vurl);
 	//$attdenace_data = json_decode($attdenace_data,1);
 	$attdenace_data_location  = json_decode($attdenace_data,1);
@@ -63,7 +63,7 @@ if($app_data['purchase_uom']=='PD'){
 
 $vdata1["where"] = array('table_name'=> "project_timesheets",'is_active'=>'0');
 $vdata = urlencode(json_encode($vdata1));
-$vurl = API."?mode=gettabledetailswithconditions&table=status_progress&data=".$vdata; 
+$vurl = API."?mode=gettabledetailswithconditions&table=status_progress&data=".$vdata;
 $vdatas = callAPI($vurl);
 $status_progresss = json_decode($vdatas,1);
 foreach((array)$status_progresss as $status_progress){
@@ -74,7 +74,7 @@ foreach((array)$status_progresss as $status_progress){
 	//print_r($team_count_data);
 $la_billable_amount = 0;
 	$la_budgeted_amount = 0;
-	$la_employee = 0; 
+	$la_employee = 0;
 	$last_pre_list = array();
 foreach((array)$last_data  as $lastt){
 	$la_billable_amount = $la_billable_amount+$lastt['billable_amount'];
@@ -96,8 +96,8 @@ $total_billabe_hrs =0;
 $total_budget_hrs =0;
 $total_leave_days =0;
 $btncheck =0;
-$totalleaveallowvrc = 0; 
-$totalleaveadaysemployee = 0; 
+$totalleaveallowvrc = 0;
+$totalleaveadaysemployee = 0;
 foreach((array)$app_data as $apps){
 	$emp_sub[$apps['employee_id']] = $apps;
 	$mulval=1;
@@ -147,8 +147,8 @@ foreach((array)$app_data as $apps){
 	if($apps['vendor_id'] !="0"){
 		$billables_employee[$apps['employee_id']]= $apps['employee_id'];
 	}
-	$totalleaveallowvrc += $apps['vrc_max_leave']; 
-	$totalleaveadaysemployee += $apps['leave_days']; 
+	$totalleaveallowvrc += $apps['vrc_max_leave'];
+	$totalleaveadaysemployee += $apps['leave_days'];
 
 }
 $billables_count = count((array)$billables_employee);
@@ -162,7 +162,7 @@ $stausresult = ViewStatusData();
 $ttcount =  $apv_billable_amount+$sba_billable_amount;
 $vdata1["where"] = array('table_name'=> $table,'is_active'=>0);
 	$vdata = urlencode(json_encode($vdata1));
-	$vurl = API."?mode=gettabledetailswithconditions&table=status_progress&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=status_progress&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$statusprogress = json_decode($configesponse,1);
 //print_r($statusprogress);
@@ -172,7 +172,7 @@ foreach((array)$statusprogress as $statusprog){
 //print_r($st_prog);
 $vdata1["where"] = array('is_active'=>0);
 	$vdata = urlencode(json_encode($vdata1));
-	$vurl = API."?mode=gettabledetailswithconditions&table=vendors&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=vendors&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$allvendors_list = json_decode($configesponse,1);
 //print_r($statusprogress);
@@ -191,7 +191,7 @@ $erp = json_decode($erp_data,1);
 		//alert('Good');
 		var favorite = [];
 		var ick=0;
-		$.each($("input[name='checkbox1']:not(:checked)"), function(){            
+		$.each($("input[name='checkbox1']:not(:checked)"), function(){
 			favorite.push($(this).val());
 			ick=ick+1;
 		});
@@ -211,27 +211,27 @@ $erp = json_decode($erp_data,1);
           },
           function(isConfirm) {
             if (isConfirm) {
-               projecttimesheetsubmittohrs();	
-            } 
+               projecttimesheetsubmittohrs();
+            }
           });
 
 
-		// swal.fire({              
-		// 	title: msg,   
-		// 	type: "success",           
+		// swal.fire({
+		// 	title: msg,
+		// 	type: "success",
 		// 	buttonsStyling: false,
-		// 	confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, Submit!",    
-		// 	confirmButtonClass: "btn btn-success", 
-		// 	showCancelButton: true,     
-		// 	cancelButtonText: "<i class='la la-hand-o-right'></i> No, Stop",      
-		// 	cancelButtonClass: "btn btn-danger"        
+		// 	confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, Submit!",
+		// 	confirmButtonClass: "btn btn-success",
+		// 	showCancelButton: true,
+		// 	cancelButtonText: "<i class='la la-hand-o-right'></i> No, Stop",
+		// 	cancelButtonClass: "btn btn-danger"
 		// }).then(function(result) {
 		// 	if (result.value) {
-		// 		projecttimesheetsubmittohrs();	
+		// 		projecttimesheetsubmittohrs();
 		// 	}
 		// });
 	}else{
-		projecttimesheetsubmittohrs();	
+		projecttimesheetsubmittohrs();
 	}
 
         //alert(favorite);
@@ -266,19 +266,19 @@ $erp = json_decode($erp_data,1);
 	                if (isConfirm) {
 	                   $('#kt_modal_KTDatatable_remote').modal('hide');
 						window.location.href=window.location.href;
-	                } 
+	                }
 	              });
 
 
-				// swal.fire({              
-				// 	title: msg,              
-				// 	type: "success",           
+				// swal.fire({
+				// 	title: msg,
+				// 	type: "success",
 				// 	buttonsStyling: false,
-				// 	confirmButtonText: "<i class='la la-hand-o-up'></i>OK",    
-				// 	confirmButtonClass: "btn btn-info", 
-				// 	showCancelButton: false,     
-				// 	cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
-				// 	cancelButtonClass: "btn btn-default"        
+				// 	confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+				// 	confirmButtonClass: "btn btn-info",
+				// 	showCancelButton: false,
+				// 	cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+				// 	cancelButtonClass: "btn btn-default"
 				// }).then(function(result) {
 				// 	if (result.value) {
 				// 		$('#kt_modal_KTDatatable_remote').modal('hide');
@@ -291,7 +291,7 @@ $erp = json_decode($erp_data,1);
 	}
 	function statuspopup(status,id){
 		var favorite = [];
-		$.each($("input[name='checkbox1']:checked"), function(){            
+		$.each($("input[name='checkbox1']:checked"), function(){
 			favorite.push($(this).val());
 		});
 		var table_name = 'project_timesheets';
@@ -309,21 +309,21 @@ $erp = json_decode($erp_data,1);
 						success:function(data){
 							$('#popup1').html(data);
 							$('#kt_modal_KTDatatable_remote').modal("show");
-							
+
 						},
 						error:function (){}
 					});
 				}else{
 					var msg = <?php echo "'".$_SESSION['error_message']['9026']."'" ?>;
-					swal.fire({              
-						title: msg,              
-						type: "success",           
+					swal.fire({
+						title: msg,
+						type: "success",
 						buttonsStyling: false,
-						confirmButtonText: "<i class='la la-hand-o-up'></i>OK",    
-						confirmButtonClass: "btn btn-info", 
-						showCancelButton: false,     
-						cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
-						cancelButtonClass: "btn btn-default"  
+						confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+						confirmButtonClass: "btn btn-info",
+						showCancelButton: false,
+						cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+						cancelButtonClass: "btn btn-default"
 					});
 				}
 			},
@@ -345,11 +345,11 @@ $erp = json_decode($erp_data,1);
 				$("#dropdownlist_"+id).html(data);
 			},
 			error:function (){}
-		});    	
+		});
 	}
 	/*$(document).ready(function(){
 		$('#select_all').on('click',function(){
-			
+
 	        if(this.checked){
 	            $('.checkbox1').each(function(){
 	                this.checked = true;
@@ -382,7 +382,7 @@ $erp = json_decode($erp_data,1);
 
 	  	console.log("Data");
 	  	var len=0;
-	  	$.each($("input[name='checkbox1']:checked"), function(){            
+	  	$.each($("input[name='checkbox1']:checked"), function(){
 	  		len=len+1;
 	  	});
 	  	if(len>0){
@@ -413,7 +413,7 @@ $erp = json_decode($erp_data,1);
     function checkboxwisecheck(){
     	//console.log("ravi");
     	var favorite = [];
-    	$.each($("input[name='checkbox1']:checked"), function(){            
+    	$.each($("input[name='checkbox1']:checked"), function(){
     		favorite.push($(this).val());
     	});
     	console.log(favorite);
@@ -426,15 +426,15 @@ $erp = json_decode($erp_data,1);
     			console.log("man"+data);
     			if(data==1){
     				var msg = <?php echo "'".$_SESSION['error_message']['9026']."'" ?>;
-    				swal.fire({              
-    					title: msg,              
-    					type: "success",           
+    				swal.fire({
+    					title: msg,
+    					type: "success",
     					buttonsStyling: false,
-    					confirmButtonText: "<i class='la la-hand-o-up'></i>OK",    
-    					confirmButtonClass: "btn btn-info", 
-    					showCancelButton: false,     
-    					cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
-    					cancelButtonClass: "btn btn-default"  
+    					confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+    					confirmButtonClass: "btn btn-info",
+    					showCancelButton: false,
+    					cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+    					cancelButtonClass: "btn btn-default"
     				});
     			}
     		},
@@ -455,7 +455,7 @@ $erp = json_decode($erp_data,1);
 	        //$('#kt_modal_KTDatatable_remote123').modal({ show: true});
 	      },
 	      error:function (){}
-	    }); 
+	    });
     }
  </script>
  <div class="d-flex flex-column-fluid">
@@ -463,7 +463,7 @@ $erp = json_decode($erp_data,1);
 		<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
-				
+
             	<div class="card-header table-card-header">
               		<h5><?= __("Bulk Time Sheet Approval") ?></h5>
         		  	<div class="card-header-right table-card-header ">
@@ -495,7 +495,7 @@ $erp = json_decode($erp_data,1);
 		                                //echo $dis_year."_".$dis_month.",";
   											if($_GET['PAY_YEAR'] == $dis_year && $_GET['PAY_MONTH'] == $dis_month ){
   												$class = 'nav-link bg-primary me-6 active';
-  											}else{                  
+  											}else{
 		                                    //$class = 'text-dark text-hover-primary'; btn-light
   												$class = 'btn btn-light';
   											}
@@ -504,11 +504,11 @@ $erp = json_decode($erp_data,1);
   											<div class="float-left m-r-5 b-radius-5 nav-item ">
   												<a class="<?php echo $class; ?> nav-link  me-6 active " style="font-size: 12px !important;" href="index.php?option=COM_BULK_PROJECT_TIMESHEET&PAY_YEAR=<?php echo $dis_year; ?>&PAY_MONTH=<?php echo $dis_month; ?>"> <?php echo $disss; ?></a>
   											</div>
-  										<?php  } ?>                            
+  										<?php  } ?>
   									</div>
   								</div>
   								<input type="hidden" name="extra" id="extra" value="<?php echo $_GET['PAY_YEAR']."-".$_GET['PAY_MONTH']."-01" ?>">
-  								
+
   							</div>
   						</div>
   					</div>
@@ -541,7 +541,7 @@ $erp = json_decode($erp_data,1);
                 <div class="col-auto">
                     <p class="m-b-0 text-muted">Utilization</p>
                 </div>
-                
+
             </div>
             <div class="progress" style="height:6px;">
                 <div class="progress-bar bg-c-blue" style="width:<?php echo $total_vs_p; ?>%"></div>
@@ -563,12 +563,12 @@ $erp = json_decode($erp_data,1);
 			<h6 class="m-b-0 text-c-green">
 			<a onclick="cvppopup('Budget',<?php echo "'".$total_budget_hrs." Hrs'"; ?>,'bg_hr_list')" >
 				<?php echo $total_budget_hrs; ?> H </a>
-			 Vs <a onclick="cvppopup('Actuals',<?php echo "'".$total_billabe_hrs." Hrs'"; ?>,'bg_hr_list')" > 
+			 Vs <a onclick="cvppopup('Actuals',<?php echo "'".$total_billabe_hrs." Hrs'"; ?>,'bg_hr_list')" >
 				<?php echo $total_billabe_hrs; ?> H </a>
 			</h6>
 			<input type="hidden" name="bg_hr_list" id="bg_hr_list" value='<?php echo json_encode($emp_sub); ?>' >
-			<input type="hidden"  id="bg_hr_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','budget_hrs'=>'budget_hrs','billable_hrs'=>'billable_hrs')); ?>' >                  
- 
+			<input type="hidden"  id="bg_hr_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','budget_hrs'=>'budget_hrs','billable_hrs'=>'billable_hrs')); ?>' >
+
                 </div>
             </div>
 <?php
@@ -585,7 +585,7 @@ if ($total_budget_hrs > 0) {
                 <div class="col-auto">
                     <p class="m-b-0 text-muted">Current Month Efforts</p>
                 </div>
-                
+
             </div>
             <div class="progress" style="height:6px;">
                 <div class="progress-bar bg-c-green" style="width:<?php echo $total_hors_p; ?>%"></div>
@@ -607,7 +607,7 @@ if ($total_budget_hrs > 0) {
                 <div class="col p-l-0">
                     <h6 class="m-b-5 f-14">Budget Vs Utilization</h6>
                     <h6 class="m-b-0 text-c-red">
-			 <a onclick="cvppopup('Budget',<?php echo "'".customeummarmonyformate($total_budget_amount/100000)." Lac'"; ?>,'bg_ut_list')" > 
+			 <a onclick="cvppopup('Budget',<?php echo "'".customeummarmonyformate($total_budget_amount/100000)." Lac'"; ?>,'bg_ut_list')" >
 			<?php echo customeummarmonyformate($total_budget_amount/100000); ?> L</a> Vs  <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'bg_ut_list')" >  <?php echo customeummarmonyformate($ttcount/100000); ?> L </a></h6>
 			<input type="hidden" name="bg_hr_list" id="bg_ut_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="bg_ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','budgeted_amount'=>'budgeted_amount','billable_amount'=>'billable_amount')); ?>' >
@@ -618,7 +618,7 @@ if ($total_budget_hrs > 0) {
                 <div class="col-auto">
                     <p class="m-b-0 text-muted">Current Month Utilized</p>
                 </div>
-                
+
             </div>
             <div class="progress" style="height:6px;">
                 <div class="progress-bar bg-c-red" style="width:<?php echo $total_p; ?>%"></div>
@@ -638,7 +638,7 @@ if ($total_budget_hrs > 0) {
                 <div class="col p-l-0">
                     <h6 class="m-b-5 f-14">Utilization Vs Approved</h6>
                     <h6 class="m-b-0 text-c-yellow">
-				 <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'ut_list')" > 
+				 <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'ut_list')" >
 				<?php echo customeummarmonyformate($ttcount/100000); ?> L </a> Vs<a onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000)." Lac'"; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </a></h6>
 			<input type="hidden" name="bg_hr_list" id="ut_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_amount'=>'billable_amount','utilize'=>'Status')); ?>' >
@@ -648,7 +648,7 @@ if ($total_budget_hrs > 0) {
                 <div class="col-auto">
                     <p class="m-b-0 text-muted">Current Month Approved</p>
                 </div>
-                
+
             </div>
 		<?php $total_apv_p = ($ttcount > 0) ? number_format((($apv_billable_amount / $ttcount) * 100), 0) : 0; ?>
             <div class="progress" style="height:6px;">
@@ -663,8 +663,8 @@ if ($total_budget_hrs > 0) {
 
 
 
-  				
-  				
+
+
   			</div>
   		</div>
   		<!--end::Row-->
@@ -678,19 +678,19 @@ if ($total_budget_hrs > 0) {
   						<h5 class="card-title align-items-start flex-column float-left">
   							<?= __("Billing Info Detail -") ?> <?php if($gtnvk==2){ echo __("All"); }elseif($gtnvk==1){ echo __("Billable"); }elseif($gtnvk==0){ echo __("Non-billable"); } ?>
   							<span		class="text-muted mt-3 font-weight-bold
-  							font-size-sm"><?= __("Billable :") ?> <?php echo $count_billable; ?> <?= __("Members, Nonbillable :") ?> <?php echo $count_nonbillable; ?> <?= __("Members") ?></span> 
+  							font-size-sm"><?= __("Billable :") ?> <?php echo $count_billable; ?> <?= __("Members, Nonbillable :") ?> <?php echo $count_nonbillable; ?> <?= __("Members") ?></span>
   						</h5>
   						<div class="radio-inline float-right infisuite_tab">
   							<?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH']; } ?>
   							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active'; } ?>">
   								<?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
-								<?= __("All") ?></a> </span> 
+								<?= __("All") ?></a> </span>
   							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-success waves-effect waves-light <?php if($gtnvk==1){ echo 'active'; } ?>">
   								<?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
-  								<?php echo "Billable"; ?></a> </span> 
+  								<?php echo "Billable"; ?></a> </span>
   							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-disabled  waves-effect waves-light <?php if($gtnvk==0){ echo 'active'; } ?>" style="cursor: pointer;">
   									<?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
-  								<?php echo "Non-billable"; ?></a> </span> 
+  								<?php echo "Non-billable"; ?></a> </span>
   						</div>
   					</div>
 
@@ -726,19 +726,19 @@ if ($total_budget_hrs > 0) {
 											<input id="fld_emp_name" type="text" class="form-control " name="emp_name" value="<?php echo $emp_name=='0' ? '' : $emp_name; ?>">
 										</div>
 									</div>
-									
+
 									<div class="col-lg-2 ">
 										<button class="btn btn-primary px-6 font-weight-bold" name="search" value="search"><?= __("Search") ?></button>
 									</div>
 								</form>
 							</div>
-					
+
 
   					<div class="card-toolbar">
   						<div class="card-block">
-                                                       
-                <div class="col-lg-12 row">  
-                	<div class="col-lg-7">                  
+
+                <div class="col-lg-12 row">
+                	<div class="col-lg-7">
                     <ul class="nav  md-tabs infisuite_tab">
                         <li class="nav-item">
                             <a class="nav-link active" data-bs-toggle="tab" href="#home3" role="tab">Approved
@@ -749,12 +749,12 @@ if ($total_budget_hrs > 0) {
                             <a class="nav-link" data-bs-toggle="tab" href="#profile3" role="tab">Approvals Pending
                             	&nbsp;	<span class="badge badge-warning"><?php echo $sba_count; ?></span>
                             </a>
-                           
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#messages3" role="tab">Yet to Submit
-                            	&nbsp;<span class="badge badge-warning"><?php $yy=count((array)$team_count_data_sb)-($sba_count+$apv_count); 
-			echo $yy>0?$yy:0;?></span></a>                        
+                            	&nbsp;<span class="badge badge-warning"><?php $yy=count((array)$team_count_data_sb)-($sba_count+$apv_count);
+			echo $yy>0?$yy:0;?></span></a>
                         </li>
                     </ul>
                 	</div>
@@ -770,14 +770,14 @@ if ($total_budget_hrs > 0) {
 							</div>
 						</div>
 					</div>
-  								
+
                     <!-- Tab panes -->
                     <div class="tab-content card-block">
                         <div class="tab-pane active" id="home3" role="tabpanel">
-				
+
 				<?php if($apv_count>0 ){?><div class="col-lg-12">
   									<div class="col-lg-2 float-right"  >
-  									     <?php /* ?>	<button <?php $btnch=1;  if($btncheck!=1 ){?> onclick="projecttimesheetsubmittohr()" <?php }else{ echo "disabled"; } ?> class="btn btn-primary font-size-sm float-right <?php if($btncheck==1){ echo "disabled"; } ?>" ><?php echo $statu_progress['102']['name']; ?></button> <?php */ ?> 
+  									     <?php /* ?>	<button <?php $btnch=1;  if($btncheck!=1 ){?> onclick="projecttimesheetsubmittohr()" <?php }else{ echo "disabled"; } ?> class="btn btn-primary font-size-sm float-right <?php if($btncheck==1){ echo "disabled"; } ?>" ><?php echo $statu_progress['102']['name']; ?></button> <?php */ ?>
 								  <button  onclick="projecttimesheetsubmittohr()"  class="btn btn-primary font-size-sm float-right" ><?php echo $statu_progress['103']['name']; ?></button>
 
   									</div>
@@ -810,8 +810,8 @@ if ($total_budget_hrs > 0) {
 																<tbody>
 																	<?php $k=3; $td_bilable=0; $vrctd_bilable=0; $td_hrs=0;
 
-		if(count((array)$apv)>0){																
-																	 foreach((array)$apv as $sb ){ 
+		if(count((array)$apv)>0){
+																	 foreach((array)$apv as $sb ){
 																		$mulval=1;
 																		$attdenace_data = $attdenace_data_location[$sb['location_id']];
 if($sb['purchase_uom']=='PH'){
@@ -833,12 +833,12 @@ if($sb['vrc_purchase_uom']=='PW'){
 if($sb['vrc_purchase_uom']=='PD'){
 	$vrcmulval = $attdenace_data['count_working_days'];
 }
-																		$sb_bp = number_format((($sb['billable_amount']/($sb['budgeted_amount']*$mulval))*100),2); 			
+																		$sb_bp = number_format((($sb['billable_amount']/($sb['budgeted_amount']*$mulval))*100),2);
 																		$sb['vrc_budgeted_amount'] = $sb['vrc_budgeted_amount']*$vrcmulval;
 																		$bbg_color= lableandbgcolor($sb_bp);
 																		//echo $sb['vrc_billable_amount']."___".$sb['vrc_budgeted_amount'];
-																		$vrcsb_bp = number_format((($sb['vrc_billable_amount']/$sb['vrc_budgeted_amount'])*100),2);  
-														$vrcbbg_color= lableandbgcolor($vrcsb_bp);		
+																		$vrcsb_bp = number_format((($sb['vrc_billable_amount']/$sb['vrc_budgeted_amount'])*100),2);
+														$vrcbbg_color= lableandbgcolor($vrcsb_bp);
 																		$llablecolor = lableandleave($k);
 																		if($sb['emp_billable']!=$gtnvk){
 																			?>
@@ -846,7 +846,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 																				<td class="pl-0 py-4">
 																					<?php if($sb['emp_image']!=""){ ?>
 																						<div class="d-flex align-items-center w-40px">
-																							<div class="symbol symbol-40">								
+																							<div class="symbol symbol-40">
 																								<img src="uploads/all/<?php echo $sb['emp_image']; ?>" class="img-radius img-50" alt=""  />
 																							</div>
 																						</div>
@@ -894,7 +894,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 																	<span class="text-dark-75 font-weight-500 d-block font-size-sm">
 																		<?php echo customeummarmonyformate($sb['billable_amount']); ?>
 																	</span>
-																	
+
 																</td> -->
 																<td class="text-center">
 																	<span class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
@@ -903,7 +903,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 																	<span class="form-label label label-lg label-warning"  style="color: <?php echo "#".$stausresult[$sb['pt_status_id']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$sb['pt_status_id']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$sb['pt_status_id']]['background_color']); ?> "><?php echo $st_prog[$sb['pt_status_id']]; ?></span>
 															</td>
 <td class="text-center pr-0">
-	<?php if($sb['pt_status_id'] != "104"){ ?>	
+	<?php if($sb['pt_status_id'] != "104"){ ?>
 	<div class="checkbox-fade fade-in-primary">
 		<label class="checkbox checkbox-success">
 			<input type="checkbox" aria-label="Select row" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>">
@@ -912,27 +912,27 @@ if($sb['vrc_purchase_uom']=='PD'){
 			</span>
 		</label>
 	</div>
-	<?php } ?>	
+	<?php } ?>
 </td>
 																</tr>
 																<?php $td_ra_budget = $td_ra_budget+$sb['vrc_budgeted_amount'];
 												$td_ra_bilable = $td_ra_bilable+$sb['vrc_billable_amount'];
-												
+
 												$td_bilable = $td_bilable+$sb['billable_amount'];
 												$td_budget = $td_budget+($sb['budgeted_amount']*$mulval);
-												$td_hrs =$td_hrs+$sb['billable_hrs']; 
-												$td_nonhrs =$td_nonhrs+$sb['nonbillable_hrs']; 
-												$k= $k-1;} } 
+												$td_hrs =$td_hrs+$sb['billable_hrs'];
+												$td_nonhrs =$td_nonhrs+$sb['nonbillable_hrs'];
+												$k= $k-1;} }
 												$td_ra_pre = number_format((($td_ra_bilable/$td_ra_budget)*100),2);
-												$td_pre = number_format((($td_bilable/$td_budget)*100),2); 
+												$td_pre = number_format((($td_bilable/$td_budget)*100),2);
 												$vrcbbg_color = lableandbgcolor($td_ra_pre);
 												$bbg_color = lableandbgcolor($td_pre); ?>
 												<?php if(count((array)$apv)>0){ ?>
 																	<tr>
 														<td></td>
 														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> Total </span></td>
-														
-														<td class="text-right"> 
+
+														<td class="text-right">
 <div class="d-flex flex-column w-100 mr-2">
 	<div class="d-flex align-items-center justify-content-between mb-2">
 		<span class="text-muted mr-2 font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_ra_bilable)); ?></span>
@@ -992,8 +992,8 @@ if($sb['vrc_purchase_uom']=='PD'){
 												<tbody>
 													<?php $k=3;$td_bilable=0; $vrctd_bilable=0; $td_hrs=0;
 													if(count((array)$sba)>0){
-													 foreach((array)$sba as $sb ){  
-													
+													 foreach((array)$sba as $sb ){
+
 	//print_r($sb);
 														$mulval=1;
 														$attdenace_data = $attdenace_data_location[$sb['location_id']];
@@ -1020,7 +1020,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 														$sb['vrc_budgeted_amount'] = $sb['vrc_budgeted_amount']*$vrcmulval;
 														//echo $sb['vrc_budgeted_amount']."----".$sb['vrc_billable_amount'];
 $bbg_color= lableandbgcolor($sb_bp);
-$vrcsb_bp = number_format((($sb['vrc_billable_amount']/$sb['vrc_budgeted_amount'])*100),2);  
+$vrcsb_bp = number_format((($sb['vrc_billable_amount']/$sb['vrc_budgeted_amount'])*100),2);
 $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 														$llablecolor = lableandleave($k);
 														if($sb['emp_billable']!=$gtnvk){
@@ -1029,7 +1029,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 																<td class="pl-0 py-4 w-50px">
 																	<?php if($sb['emp_image']!=""){ ?>
 																		<div class="d-flex align-items-center w-40px">
-																			<div class="symbol symbol-40">								
+																			<div class="symbol symbol-40">
 																				<img src="uploads/all/<?php echo $sb['emp_image']; ?>" class="img-radius img-50" alt="" />
 																			</div>
 																		</div>
@@ -1077,7 +1077,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 													<span class="text-dark-75 font-weight-500 d-block font-size-sm">
 														<?php echo customeummarmonyformate(round($sb['billable_amount'])); ?>
 													</span>
-													
+
 												</td> -->
 												<td class="text-center">
 													<span class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
@@ -1096,27 +1096,27 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 														</div>
 													</td>
 												</tr>
-												<?php 
+												<?php
 
 												$k= $k-1;
 												$td_ra_budget = $td_ra_budget+$sb['vrc_budgeted_amount'];
 												$td_ra_bilable = $td_ra_bilable+$sb['vrc_billable_amount'];
-												
+
 												$td_bilable = $td_bilable+$sb['billable_amount'];
 												$td_budget = $td_budget+($sb['budgeted_amount']*$mulval);
-												$td_hrs =$td_hrs+$sb['billable_hrs']; 
-												$td_nonhrs =$td_nonhrs+$sb['nonbillable_hrs']; 
-												$k= $k-1;} } 
+												$td_hrs =$td_hrs+$sb['billable_hrs'];
+												$td_nonhrs =$td_nonhrs+$sb['nonbillable_hrs'];
+												$k= $k-1;} }
 												$td_ra_pre = number_format((($td_ra_bilable/$td_ra_budget)*100),2);
-												$td_pre = number_format((($td_bilable/$td_budget)*100),2); 
+												$td_pre = number_format((($td_bilable/$td_budget)*100),2);
 												$vrcbbg_color = lableandbgcolor($td_ra_pre);
 												$bbg_color = lableandbgcolor($td_pre); ?>
 												<?php if(count((array)$sba)>0){ ?>
 													<tr>
 														<td></td>
 														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> Total </span></td>
-														
-														<td class="text-right"> 
+
+														<td class="text-right">
 <div class="d-flex flex-column w-100 mr-2">
 	<div class="d-flex align-items-center justify-content-between mb-2">
 		<span class="text-muted mr-2 font-size-sm font-weight-bold"><?php echo customeummarmonyformate(round($td_ra_bilable)); ?></span>
@@ -1166,8 +1166,8 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 												</tr>
 											</thead>
 											<tbody>
-												<?php $k=3; 
-												foreach((array)$team_count_data_sb as $sb ){ 
+												<?php $k=3;
+												foreach((array)$team_count_data_sb as $sb ){
 													if(!in_array($sb['id'],(array)$employees)){
 														//print_r($sb);
 														//$sb['budgeted_amount']= "65320";
@@ -1196,7 +1196,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 														$sb['budgeted_amount'] = $sb['budgeted_amount']*$mulval;
 														// step 2 -- $sb_bp = number_format((((array)$sb['billable_amount']/(array)$sb['budgeted_amount'])*100),2);
 														$sb_bp = is_numeric($sb_bp) ? $sb_bp : '0.00';
-														
+
 														$sb['vrc_budgeted_amount'] = $sb['vrc_budgeted_amount']*$vrcmulval;
 														$bbg_color= lableandbgcolor($sb_bp);
 														// step 3 $vrcsb_bp = number_format((($sb['vrc_billable_amount']/$sb['vrc_budgeted_amount'])*100),2);
@@ -1208,7 +1208,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 															<td class="pl-0 py-4">
 																<?php if($sb['image']!=""){ ?>
 																	<div class="d-flex align-items-center w-40px">
-																		<div class="symbol symbol-40">								
+																		<div class="symbol symbol-40">
 																			<img src="uploads/all/<?php echo $sb['image']; ?>" class="img-radius img-50" alt="" />
 																		</div>
 																	</div>
@@ -1218,7 +1218,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 															</td>
 															<td class="pl-0">
 																<a href="index.php?option=COM_VIEW_EMP_TIMESHEETS&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>&EMP=<?php echo $sb['id']; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-sm"><?php echo $sb['display_name']; ?></a> <?php //echo $sb['emp_billable']; ?>
-																<div>														
+																<div>
 <a class="text-muted font-weight-bold text-hover-primary" href="#"><?php echo $_SESSION['users'][$sb['approval_manager']]; ?></a>							</br>										<a class="text-muted font-weight-bold text-hover-primary" href="#"><?php echo $sb['job_title']; ?></a>
 <?php echo custombuttonserp($erp,$sb['id']); ?>
 																</div>
@@ -1234,7 +1234,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 	</div>
 	<div class="text-center"><?php echo $vrcsb_bp; ?>%</div>
 </div>
-</td>															
+</td>
 															<td>
 																<div class="d-flex flex-column w-100 mr-2">
 																	<div class="d-flex align-items-center justify-content-between mb-2">
@@ -1251,11 +1251,11 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 													<span class="text-dark-75 font-weight-500 d-block font-size-sm">
 														<?php //echo customeummarmonyformate('65320'); ?>
 													</span>
-													
+
 												</td> -->
 												<td class="text-center">
 													<span class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
-												</td> 
+												</td>
 												<td class="text-center">
 													<span class="form-label label label-lg label-warning"><?php echo "Yet to Submit"; ?></span>
 												</td>
@@ -1273,7 +1273,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 								</div>
                         </div>
                     </div>
-                </div>                                  
+                </div>
   					</div>
   				</div>
   				<!--end::Body-->
@@ -1285,7 +1285,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 			</div>
 		<div class="col-lg-4 col-md-12">
 		<div class="row col-lg-12">
-			
+
 			<div class="col-lg-4 card social-card">
     <div class="card-body text-center">
         <h2 class="text-facebook m-b-20">
@@ -1302,7 +1302,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 	</h2>
 <?php $total_apv_p = (!empty($team_count_data['team']) && $team_count_data['team'] > 0) ? number_format(((count((array)$employees) / $team_count_data['team']) * 100), 2) : '0.00'; ?>
         <h3 class="text-facebook f-w-700"><?php echo $team_count_data['team']; ?></h3>
-        
+
         <p class="m-b-0 m-t-15">Resources</p>
     </div>
 </div>
@@ -1312,14 +1312,14 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 		<i class="fa fa-bed text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Leaves</span>
 	</h2>
         <h3 class="text-facebook f-w-700"><?php echo $totalleaveallowvrc."/".$totalleaveadaysemployee; ?></h3>
-        
+
         <p class="m-b-0 m-t-15">Leaves</p>
     </div>
 </div>
-  					
+
   		</div>
 		</div>
-			
-		</div>		
+
+		</div>
 	</div>
 </div>

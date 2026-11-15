@@ -1,8 +1,8 @@
-<?php //print_r($_POST); 
+<?php //print_r($_POST);
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
-//$url = API."?mode=getassetallocation&list=Y&assetid=".$_POST['assetid']; 
+//$url = API."?mode=getassetallocation&list=Y&assetid=".$_POST['assetid'];
 $url = API."?mode=getassetallocation&admin_type=".$_SESSION['admin_type']."&resultgettype=DISCARDASSET&assetid=".$_POST['assetid'];
 $data_details = callAPI($url);
 $details = json_decode($data_details,1);
@@ -44,12 +44,12 @@ function submitdetails(){
 	var validations = ajaxFormSubmitValidation();
     if(validations == 0){
 	  	var formData = new FormData();
-	    formData.append("page", "insertassetallocation"); 
-	    formData.append("discardasset", "Y"); 
+	    formData.append("page", "insertassetallocation");
+	    formData.append("discardasset", "Y");
 	    var dataArray = $("#assetsallocationform").serializeArray(),
 	    dataObj = {};
 	    $(dataArray).each(function(i, field){
-	      formData.append(field.name, field.value); 
+	      formData.append(field.name, field.value);
 	    });
 	  //  var popattachment = document.getElementById('popattachment').files[0];
 	  // formData.append("file",popattachment);
@@ -65,7 +65,7 @@ function submitdetails(){
 				location.reload();
             }
         });
-	}        
+	}
 }
 
 </script>
@@ -76,10 +76,10 @@ function submitdetails(){
 </div>
 <div class="modal-body j-pro">
 	<div class="j-content">
-	<form id="assetsallocationform" method="post" >	
+	<form id="assetsallocationform" method="post" >
 		<div class="row ">
 			<div class="dt-responsive table-responsive">
-	<table  class="table table-striped table-bordered nowrap"> 
+	<table  class="table table-striped table-bordered nowrap">
 		<thead>
 			<tr>
 				<th scope="col"><?= __('Asset Code') ?></th>
@@ -90,7 +90,7 @@ function submitdetails(){
 				<!-- <th scope="col">Location </th> -->
 				<!-- <th scope="col"><?= __('Status') ?></th> -->
 				<!-- <th scope="col"><?= __('Condition') ?></th> -->
-				<!-- <th scope="col"><?= __('Asset Value') ?> <span class="requried text-danger">*</span></th> --> 
+				<!-- <th scope="col"><?= __('Asset Value') ?> <span class="requried text-danger">*</span></th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -107,7 +107,7 @@ function submitdetails(){
 						<!-- <td>
 							<select  class="form-select js-example-basic-single " name="asset_location[]">
 								<option value=""><?= __('Select Any One') ?></option>
-								<?php foreach ($locations as $location) { ?>					
+								<?php foreach ($locations as $location) { ?>
 									<option location value="<?php echo $location['id']; ?>" <?php echo $location['id'] == $list_asset['asset_location']?"selected":""; ?>><?php echo ucwords($location['location_name']); ?></option>
 								<?php } ?>
 							</select>
@@ -115,32 +115,32 @@ function submitdetails(){
 						<!-- <td><?php //echo $ass_status[$list_asset['status']]; ?>
 							<select  class="form-select js-example-basic-single" name="asset_status[]">
 								<option value=""><?= __('Select Any One') ?></option>
-								<?php foreach ($ass_status as $ass_statuskey=>$ass_statuss){ ?>					
+								<?php foreach ($ass_status as $ass_statuskey=>$ass_statuss){ ?>
 									<option  value="<?php echo $ass_statuskey; ?>" <?php echo $ass_statuskey == $list_asset['status']?"selected":""; ?>><?php echo ucwords($ass_statuss); ?></option>
 								<?php }  ?>
-							</select> 
+							</select>
 						</td> -->
 						<!-- <td>
 							<select  class="form-select js-example-basic-single " name="conditions[]">
 								<option value=""><?= __('Select Any One') ?></option>
-								<?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>					
+								<?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>
 									<option  value="<?php echo $ass_conditiokey; ?>" <?php echo $ass_conditiokey == $list_asset['conditions']?"selected":""; ?>><?php echo ucwords($ass_conditio); ?></option>
 								<?php } ?>
-							</select> 
+							</select>
 						</td> -->
 						<!-- <td>
 							<input type="text" class="form-control text-right" name="asset_value[]" value="">
 						</td> -->
 				</tr>
 			<?php } ?>
-				
+
 			</tbody>
 		</table>
-	</div> 
+	</div>
 		</div>
-	<div class="card p-2 mt-2">	
+	<div class="card p-2 mt-2">
 		<div class="row">
-			
+
 			<div class="form-group col-lg-4">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Discard/ Sales date') ?> <span class="requried text-danger">*</span></span>
 				<span class="d-block error-message text-danger"></span>
@@ -150,7 +150,7 @@ function submitdetails(){
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Reason') ?> <span class="requried text-danger">*</span></span>
 				<span class="d-block error-message text-danger"></span>
 				<textarea aria-label="<?= htmlspecialchars(__('Discard and sales remarks'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control requried_field" id="remarks" rows="4" cols="50" name="discard_and_sales_remarks" ></textarea>
-			</div> 
+			</div>
 		</div>
 	</div>
 
@@ -169,12 +169,12 @@ function submitdetails(){
 	$(".js-example-basic-single").select2();
 	$(".js-example-disabled-results").select2();
 	$( ".datepicker" ).datepicker({
-		showOn: "both", 
+		showOn: "both",
 		buttonText: "<i class='ti-calendar'></i>",
 		dateFormat: date_format,
 		changeMonth: true,
 		changeYear: true
 	});
 </script>
-<!-- 
+<!--
 <script src="assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js"></script> -->

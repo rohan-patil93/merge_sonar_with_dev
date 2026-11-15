@@ -1,9 +1,9 @@
-<?php 
+<?php
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
 $page =  $_GET['pagename'];
-if($_GET['tablename'] == "hsn_and_sac_codes"){ 
+if($_GET['tablename'] == "hsn_and_sac_codes"){
     $selectfiledextra = $_GET['fieldsname1'].",".$_GET['fieldsname2'].",".$_GET['fieldsname3'];
     $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$selectfiledextra;
     $data_details1 = callAPI($url1);
@@ -12,9 +12,9 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
     foreach($values as $row){
       $arraybdbd[] = array('id'=>$row['id'],'full_name'=>$row[$_GET['fieldsname1']]." - ".$row[$_GET['fieldsname2']]."(".$row[$_GET['fieldsname3']]."%)");
     }
-    $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd); 
+    $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd);
     echo json_encode($arrara);
-}elseif($_GET['tablename'] == "chart_of_accounts"){ 
+}elseif($_GET['tablename'] == "chart_of_accounts"){
     $selectfiledextra = "account_code,account_name";
     $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$selectfiledextra;
     $data_details1 = callAPI($url1);
@@ -22,12 +22,12 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
     foreach($values as $row){
       $arraybdbd[] = array('id'=>$row['account_code'],'full_name'=>$row['account_code']." (".$row['account_name'].")");
     }
-    $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd); 
+    $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd);
     echo json_encode($arrara);
 }else{
   if($page=="comman_form"){
     $arraybdbd = dyanamicselectAutoSelect($_GET['tablename'],$_GET['fieldsname'],$_GET['q']);
-    $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd); 
+    $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd);
     echo json_encode($arrara);
 
   }else{
@@ -38,16 +38,16 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
         $tringselect = 0;
     }
     if(($tringselect=="" OR $tringselect=="0")){
-       	$url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];  
+       	$url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
     }else{
-      $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&selectvalue=".$tringselect."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];    
+      $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&selectvalue=".$tringselect."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
     }
       $data_details1 = callAPI($url1);
       $values =  json_decode($data_details1,1);
       //print_r($values);
       if($_GET['extracat1'] !=""){
           $explode2 = explode(',',$_GET['extracat1']);
-      } 
+      }
       if($_GET['refitemid'] !=""){
           $refitemid = explode(',',$_GET['refitemid']);
       }
@@ -75,7 +75,7 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
       if($_GET['ref_id'] !='' AND  $_GET['amendment'] =='N'){
         $arraybdbd[] = array('id'=>'-0','full_name'=>__('Amendment'));
       }
-      $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd); 
+      $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd);
       echo json_encode($arrara);
   }
 }

@@ -43,14 +43,14 @@ $who_can_see_the_results = json_decode($survey_details['who_can_see_the_results'
 </script>
 <input type="hidden" id="employee_idlist" value="<?php echo $employee_idlist;?>">
 <div class="d-flex flex-column-fluid">
-	<div class="container-fluid">		
+	<div class="container-fluid">
 		<!--begin::Navbar-->
 		<div class="card mb-5 mb-xl-10">
 			<div class="card-body pt-9 pb-0">
 				<!--begin::Details-->
 				<div class="d-flex flex-wrap flex-sm-nowrap mb-3">
 					<div class="flex-shrink-0 mr-7 mt-lg-0 mt-3  mr-10">
-						<div class="symbol symbol-danger symbol-70  symbollogo p-15 text-center">  
+						<div class="symbol symbol-danger symbol-70  symbollogo p-15 text-center">
 							<span class="font-size-h4 f-18"><?php echo initials($survey_details['survey_name']); ?></span>
 						</div>
 					</div>
@@ -70,17 +70,17 @@ $who_can_see_the_results = json_decode($survey_details['who_can_see_the_results'
 										<i class="flaticon-network icon-2x text-muted font-weight-bold" data-toggle="tooltip" title="<?php echo $tag1;?>"></i>
 									</span>
 									<div class="symbol-group symbol-hover"  >
-											<?php $k=1; 
+											<?php $k=1;
 										foreach ($assigntonames as $res) {
-											if($k<6){ 
+											if($k<6){
 												?>
 												<div class="symbol symbol-35 symbol-circle" data-toggle="tooltip" title="<?php echo $employees[$res]; ?>">
 													<span class="symbol-label font-weight-bold"><?php echo initials($employees[$res]); ?></span>
 												</div>
-												<?php 
+												<?php
 
-											} $k++; 
-											}  ?> 
+											} $k++;
+											}  ?>
 											<?php if(count((array)$assigntonames) > 5){ ?>
 												<div class="symbol symbol-35 symbol-circle symbol-light">
 													<a onclick="moreemployees()" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><span class="symbol-label font-weight-bold">5+</span>
@@ -144,7 +144,7 @@ $who_can_see_the_results = json_decode($survey_details['who_can_see_the_results'
 												</div>
 											</div>
 										</div>
-										
+
 									</div>
 									<!--end::Content-->
 								</div>
@@ -166,27 +166,27 @@ $who_can_see_the_results = json_decode($survey_details['who_can_see_the_results'
 												<a class="nav-link text-active-primary me-6 <?php if($display_id== 3){ echo "active"; } ?>"  href="index.php?option=COM_VIEW_SURVEY_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=3">
 													<?php echo $display_tag." Report"; ?></a>
 												</li>
-												
+
 											</ul>
 										</div>
 									</div>
 								</div>
-								<!--end::Navbar-->						
+								<!--end::Navbar-->
 								<!--begin::Sign-in Method-->
 
 								<div class="card mb-5 p-5 ">
-									<?php 
-									if($display_id==1){ 
+									<?php
+									if($display_id==1){
 										include_once "views/custom_view_survey_response_details.php";
 
-									}elseif($display_id==2){ 
+									}elseif($display_id==2){
 										include_once "views/custom_insert_survey_setup.php";
 
-									}elseif($display_id==3){ 
+									}elseif($display_id==3){
 										include_once "views/custom_view_survey_report.php";
 
 									} ?>
-								</div>													
+								</div>
 							</div>
 						</div>
 

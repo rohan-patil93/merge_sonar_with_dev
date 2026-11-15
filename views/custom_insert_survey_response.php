@@ -41,9 +41,9 @@ foreach ($qustion_types as $qtype) {
 }
 
 if(isset($_POST['clear'])) {
-  $data['Qid'] = $_GET['Qid']; 
+  $data['Qid'] = $_GET['Qid'];
   unset($_SESSION['answered_question'][$questionid]);
-  header("location:index.php?option=".$_GET['option']."&Qid=".$questionid);   
+  header("location:index.php?option=".$_GET['option']."&Qid=".$questionid);
 }
 if(isset($_POST['submit'])){
   // print_r($_POST); exit;
@@ -61,15 +61,15 @@ if(isset($_POST['submit'])){
   if ($unanswer > 0) {
     $partial_complete = 0;
   }
-  
+
   $diff = (strtotime(date('H:i:s'))-strtotime($_SESSION['response_start_time'])) > 0 ? (strtotime(date('H:i:s'))-strtotime($_SESSION['response_start_time']) ) : 3600;
-  
+
   $duration_taken = round(abs($diff)/3600,2);
 
   $commondata = array('duration_taken'=>$duration_taken,'partial_complete'=>$partial_complete,'category'=>$_POST['category'],'employee_id'=>$_POST['emp_id'],'survey_id'=>$_POST['survey_id'],'response_start_date'=>date('Y-m-d'),'response_start_time'=>$_SESSION['response_start_time'],'response_end_date'=>date('Y-m-d'),'response_end_time'=>date('H:i:s'),'created_date'=>date('Y-m-d'),'created_by'=>$_SESSION['user_id'],'is_active'=>'0','company_id'=>$_SESSION['company_id']);
   // print_r($commondata); exit;
   if($_POST['submit']=='Submit '.$display_tag) {
-    $commondata['current_status'] = ST_COMPLETE; 
+    $commondata['current_status'] = ST_COMPLETE;
   }else{
     $commondata['current_status'] = ST_INPROGRESS;
    }
@@ -86,7 +86,7 @@ if(isset($_POST['submit'])){
    $data['survey_response_details'][] = $commondata;
  }
  $url = API."?mode=savesurveyreponses&table=survey_responses&method=post";
- $retunn_inserted_qid = file_post_contents($url,$data,'insert'); 
+ $retunn_inserted_qid = file_post_contents($url,$data,'insert');
   //  echo "<pre>"; print_r($data); //exit;
   header("location:index.php");exit;
   // if($_SESSION['working_role_short_code'] == "SURVEY_ADMIN"){
@@ -115,7 +115,7 @@ if(isset($_POST['submit'])){
     document.getElementById("start").style.display = "none";
     }
 
-var obj = {}; 
+var obj = {};
 function callnext(qno,currentqno,qtype) {
   var x;
   var totalquestions= document.getElementById('total_q').value;
@@ -130,18 +130,18 @@ function callnext(qno,currentqno,qtype) {
   }
   var checkedval=[];
   if(qtype==1 || qtype==3){
-    var inputs = document.querySelectorAll('.response_option'+currentqno); 
-    for (var i = 0; i < inputs.length; i++) { 
+    var inputs = document.querySelectorAll('.response_option'+currentqno);
+    for (var i = 0; i < inputs.length; i++) {
       if(inputs[i].checked){
         //document.getElementById('summary'+currentqno).style.backgroundColor = '#0BB783' ;
         //document.getElementById('summarytext'+currentqno).style.Color = '#000000' ;
 		  //$('#summarytext'+currentqno).css("color","#000000");
       $('#summarytext'+currentqno).addClass("active");
         checkedval.push(inputs[i].value);
-        
+
        // break;
      }
-   } 
+   }
    if(checkedval.length>0){
      obj[currentqno] = checkedval;
    }else{
@@ -162,14 +162,14 @@ function callnext(qno,currentqno,qtype) {
   $('#summarytext'+currentqno).addClass("active");
     checkedval.push(textval);
 
-    obj[currentqno] = checkedval; 
+    obj[currentqno] = checkedval;
   }else{
     delete obj[currentqno];
 
     document.getElementById('summary'+currentqno).style.backgroundColor = '#FFFFFF' ;
    // document.getElementById('summarytext'+currentqno).style.Color = '#000000';
-$('#summarytext'+currentqno).css("color","#000000");	
-  } 
+$('#summarytext'+currentqno).css("color","#000000");
+  }
 }
 console.log(obj);
 
@@ -180,16 +180,16 @@ document.getElementById('answered').value = Object.keys(obj).length;
 
 function callclear(qno,qtype){
   if(qtype==1 || qtype==3){
-    var inputs = document.querySelectorAll('.response_option'+qno); 
-    for (var i = 0; i < inputs.length; i++) { 
-      inputs[i].checked = false; 
-    } 
+    var inputs = document.querySelectorAll('.response_option'+qno);
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].checked = false;
+    }
   }else{
     var respEl = document.getElementById('response_option'+qno) || document.getElementById('response_option_scale_'+qno);
     if (respEl) { respEl.value = ""; }
   }
   document.getElementById('summary'+qno).style.backgroundColor = '#FFFFFF' ;
-  //document.getElementById('summarytext'+qno).style.Color = '#000000' ; 
+  //document.getElementById('summarytext'+qno).style.Color = '#000000' ;
   $('summarytext'+qno).css("color","#000000");
   delete obj[qno];
   document.getElementById('anscount').innerHTML = Object.keys(obj).length;
@@ -229,7 +229,7 @@ function submitsurvey(){
    if (document.getElementById('previous')) {
      document.getElementById('previous').style.display = 'none';
    }
-   
+
    console.log("form submission before");
   //submitform();
  // document.getElementById("surveyform").submit();
@@ -246,11 +246,11 @@ function submitsurvey(){
 <div class="d-flex flex-column-fluid">
   <div class="container-fluid">
       <div class="card card-custom card-sticky" id="kt_page_sticky_card">
-		
+
 		<div class="card-header mb-3">
 						<h5> <?php echo $survey_details['survey_name']; ?></h5>
 						<div class="card-header-right">
-							
+
 					  <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 								<i class="icofont icofont-reply"></i>
 								<?php echo __('Back'); ?>
@@ -259,37 +259,37 @@ function submitsurvey(){
 					</div>
     <form method="post"  class="p-4" id="myform" name="myform" action="">
       <div class="row">
-        
+
        <!--  <div class="col-md-6">
           <div class="countdown float-right">
-            <span class="fas fa-stopwatch"><b>Timing Remaining </b></span> 
+            <span class="fas fa-stopwatch"><b>Timing Remaining </b></span>
             <div id="duration"> </div>
             <div id="timerdisplay" class="font-weight-bold font-size-h3 text-danger"> Not Yet Start</div>
-          </div>   
+          </div>
         </div> -->
       </div>
-      <div class="row q-sec">  
+      <div class="row q-sec">
         <div class="col-md-5">
           <div class="q-img">
             <img alt="" src="assets/media/books/img-72.jpg" class="w-100">
-          </div>    
-        </div>  
+          </div>
+        </div>
         <input type="hidden" name="emp_id" value="<?php echo $_SESSION['emp_id'];?>">
         <input type="hidden" id="category" name="category" value="<?php echo $survey_details['category'];?>">
         <input type="hidden" id="allocatedtime" value="<?php echo ST_SURVEY_DURATION_IN_MINUTES;?>">
         <input type="hidden" id="total_q" value="<?php echo $total_q;?>" name="total_q" >
         <input type="hidden" id="survey_id" value="<?php echo $survey_id;?>" name="survey_id">
         <input type="hidden" id="answered" name="answered">
-        <?php 
+        <?php
         $value_id = 0;
 
-        foreach ($display_questions as $questionid=>$val) { 
+        foreach ($display_questions as $questionid=>$val) {
           $value_id++;
           $selectedoption = json_decode($markedanswer[$display_questions[$questionid]['queid']],1);
           $addcss = "";
           $dispnext = "";
-          if($questionid!=1) {  $addcss = "style='display:none'"; } 
-          if($questionid==1) {  $dispnext = "style='display:none'"; } 
+          if($questionid!=1) {  $addcss = "style='display:none'"; }
+          if($questionid==1) {  $dispnext = "style='display:none'"; }
 
           ?>
           <input type="hidden" name="value_id[]" value="<?php echo $questionid;?>">
@@ -300,8 +300,8 @@ function submitsurvey(){
 
               <span><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span>
               <h4><?php echo $display_questions[$questionid]['survey_question']; ?> <?php if($display_questions[$questionid]['require_response']=="0") echo "*"; ?></h4>
-              <?php 
-              if($display_questions[$questionid]['options_display_type']==1 || $display_questions[$questionid]['options_display_type']==3 ){ 
+              <?php
+              if($display_questions[$questionid]['options_display_type']==1 || $display_questions[$questionid]['options_display_type']==3 ){
                 $optionlist= json_decode($display_questions[$questionid]['survey_question_option'],1);
                 foreach ($optionlist as $option) {
                   if($display_questions[$questionid]['allow_multiple_selections']==1) {
@@ -315,26 +315,26 @@ function submitsurvey(){
                     <label for="q1"><?php echo $option; ?> </label> </div>
                   </b>
                 <?php }
-              }else if($display_questions[$questionid]['options_display_type']==2){ 
+              }else if($display_questions[$questionid]['options_display_type']==2){
                 $selectedoption =json_decode($markedanswer[$display_questions[$questionid]['queid']],1)[0];
                 ?>
 
                 <span class="mt-10 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Scale from 1 to:'); ?> <?php echo $option;?></span>
-                <input type="number" <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> id="response_option_scale_<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>"> 
-                <?php             
+                <input type="number" <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> id="response_option_scale_<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>">
+                <?php
               }
               else if($display_questions[$questionid]['options_display_type']==4){
                 $selectedoption =json_decode($markedanswer[$display_questions[$questionid]['queid']],1)[0];
 
                 ?>
-                <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $selectedoption;?></textarea> 
-                <?php             
+                <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $selectedoption;?></textarea>
+                <?php
               }
 
               ?>
               <div class="card-footer mt-5">
 
-                <?php if ($total_q!=$questionid){ ?> 
+                <?php if ($total_q!=$questionid){ ?>
                   <a href="#top" id="save" <?php echo $dispnext; ?> onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?php echo __('Next'); ?> <i class="fas fa-chevron-right"> </i></a>
                   <?php if($questionid==1) { ?>
                     <a href="#top" id="start" style="display: block"   onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?php echo __('Next'); ?> <i class="fas fa-chevron-right"> </i></a>
@@ -344,10 +344,10 @@ function submitsurvey(){
                 <?php } ?>
 
                 <!-- <a href="#" id="clear" onclick="callclear('<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-light-success font-weight-bold float-left">Clear Response</a> -->
-                <?php if ($questionid!=1 && $total_q!=$questionid){ ?> 
+                <?php if ($questionid!=1 && $total_q!=$questionid){ ?>
                   <a href="#top" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i><?php echo __('Previous'); ?> </a>
                 <?php } ?>
-                
+
 
                 <div id="expiry_submit_<?php echo $questionid;?>" class="expiry_submit" style="display:<?php echo ($total_q == $questionid) ? 'block' : 'none'; ?>">
                   <input class="btn btn-success font-weight-bold float-right" type="submit" name="submit" value="Submit <?php echo $display_tag;?>">
@@ -355,7 +355,7 @@ function submitsurvey(){
 
               </div>
 
-            </div>  
+            </div>
           </div>
         <?php } ?>
         <div class="col-md-2">
@@ -367,18 +367,18 @@ function submitsurvey(){
             </ul>
             <div class="row">
               <ul> <li><a href="#"><h5> <span id="anscount">0 </span>  <?php echo __('&nbsp;Answered'); ?> </h5></a></li> </ul>
-              
+
             </div>
             <div class="row">
               <ul> <li><a href="#"><h5> <span id="unanscount"><?php echo $total_q;?></span> <?php echo __('&nbsp;Unanswered'); ?> </h5></a></li> </ul>
-              
-            </div> 
-            <div class="row mt-2">
-              <input type="submit" name="submit" class="btn btn-success font-weight-bold " value="Save & Pause" /> 
-            </div> 
 
-          </div>    
-        </div> 
-      </div>   
+            </div>
+            <div class="row mt-2">
+              <input type="submit" name="submit" class="btn btn-success font-weight-bold " value="Save & Pause" />
+            </div>
+
+          </div>
+        </div>
+      </div>
     </form>
   </div></div></div>

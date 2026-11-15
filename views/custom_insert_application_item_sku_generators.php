@@ -6,13 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sku_generator_name'])
     $serial_number_length   = $_POST['serial_number_length'] ?? '';
     $separation_symbol      = $_POST['separation_symbol'] ?? '';
     $sku_generator_detail_json = $_POST['sku_generator_detail'] ?? '{}';
-    $rid                    = $_POST['rid'] ?? ''; 
+    $rid                    = $_POST['rid'] ?? '';
 
-    $sku_generator_detail = json_decode($sku_generator_detail_json, true);  
-    $postData = [ 'sku_generator_name' => $sku_generator_name, 'serial_number' => $serial_number, 'serial_number_length' => $serial_number_length, 'separation_symbol' => $separation_symbol, 'sku_generator_detail' => $sku_generator_detail, 'rid' => $rid ];  
+    $sku_generator_detail = json_decode($sku_generator_detail_json, true);
+    $postData = [ 'sku_generator_name' => $sku_generator_name, 'serial_number' => $serial_number, 'serial_number_length' => $serial_number_length, 'separation_symbol' => $separation_symbol, 'sku_generator_detail' => $sku_generator_detail, 'rid' => $rid ];
    echo  $url = API . "?mode=insertskucode&method=post";
     $response = file_post_contents($url, $postData, 'insert');
-    $response = json_decode($response, 1); 
+    $response = json_decode($response, 1);
     print_r($response);
     if (strtolower(trim($response['status'])) === 'success') {
         $_SESSION['sku_msg_type'] = 'success';
@@ -30,21 +30,21 @@ $rid = explode(":", $Rid);
 $rid = $rid['1'];
 $url = API . "?mode=getskudetails&method=get&rid=$rid";
 $response = callAPI($url);
-$res = json_decode($response, true); 
+$res = json_decode($response, true);
 // echo"<pre>";
 // print_r($url);
-// echo"</pre>"; 
+// echo"</pre>";
 $sku = $res['sku'][0] ?? [];
 $sku_detail = [];
 if (!empty($sku['sku_generator_detail'])) {
     $sku_detail = json_decode($sku['sku_generator_detail'], true);
-} 
+}
 
 
 if (!empty($_SESSION['sku_msg'])) {
     $msgType = $_SESSION['sku_msg_type'];
     $msg = addslashes($_SESSION['sku_msg']);
- 
+
     $_SESSION['sku_msg'] = '';
     $_SESSION['sku_msg_type'] = '';
     ?>
@@ -83,8 +83,8 @@ if (!empty($_SESSION['sku_msg'])) {
                         <div class="col-lg-6 mb-3">
                             <label for="sku_generator_name" class="form-label"><?= __('SKU Generator Name') ?> <span class="text-danger">*</span></label>
                             <input type="text" name="sku_generator_name" id="sku_generator_name"
-                                class="form-control form-control-lg shadow-sm" 
-                                value="<?= htmlspecialchars($sku['sku_generator_name'] ?? '') ?>" 
+                                class="form-control form-control-lg shadow-sm"
+                                value="<?= htmlspecialchars($sku['sku_generator_name'] ?? '') ?>"
                                 placeholder="<?= __('Enter name') ?>" required aria-label="SKU Generator Name">
                         </div>
                         <div class=" col-lg-6 mb-3">
@@ -96,7 +96,7 @@ if (!empty($_SESSION['sku_msg'])) {
                         <div class="col-lg-6 mb-3">
                             <label for="serial_number_length" class="form-label"><?= __('Serial Number Length') ?> <span class="text-danger">*</span></label>
                             <input type="number" name="serial_number_length" id="serial_number_length"
-                                class="form-control form-control-lg shadow-sm" 
+                                class="form-control form-control-lg shadow-sm"
                                 value="<?= htmlspecialchars($sku['serial_number_length'] ?? '') ?>" min="1" required aria-label="Serial Number Length">
                         </div>
                         <div class="col-lg-6 mb-3">
@@ -133,7 +133,7 @@ if (!empty($_SESSION['sku_msg'])) {
                         'warehouse_name' => 'Warehouse',
                         'location_name' => 'Location'
                     ];
-                    foreach ($components as $key => $label): 
+                    foreach ($components as $key => $label):
                         $enabled = $sku_detail[$key]['enabled'] ?? 0;
                         $sequence = $sku_detail[$key]['sequence'] ?? '';
                         ?>
@@ -148,8 +148,8 @@ if (!empty($_SESSION['sku_msg'])) {
                                         </div>
                                     </div>
                                     <label for="<?= $key ?>_seq" class="form-label small"><?= __('Sequence') ?></label>
-                                    <select class="form-select sequence-select js-example-basic-single" 
-                                            id="<?= $key ?>_seq" data-key="<?= $key ?>" 
+                                    <select class="form-select sequence-select js-example-basic-single"
+                                            id="<?= $key ?>_seq" data-key="<?= $key ?>"
                                             onchange="handleSequenceChange(this)" aria-label="<?= $label ?> Sequence">
                                         <option value=""><?= __('Select') ?></option>
                                         <?php for($i=1; $i<=4; $i++): ?>
@@ -174,11 +174,11 @@ if (!empty($_SESSION['sku_msg'])) {
     </div>
 </div>
 <script>
-    const componentMap = { 
-        'category_name': 'CATEGORY', 
-        'item_type': 'ITEM', 
-        'warehouse_name': 'WAREHOUSE', 
-        'location_name': 'LOCATION' 
+    const componentMap = {
+        'category_name': 'CATEGORY',
+        'item_type': 'ITEM',
+        'warehouse_name': 'WAREHOUSE',
+        'location_name': 'LOCATION'
     };
 
     function getComponentState() {
@@ -243,9 +243,9 @@ if (!empty($_SESSION['sku_msg'])) {
         if (!newValue) return;
 
         const selects = document.querySelectorAll('.sequence-select');
- 
+
         selects.forEach(sel => {
-            if (sel !== changedSelect && sel.value === newValue) { 
+            if (sel !== changedSelect && sel.value === newValue) {
                 let freeValue = "";
                 for (let i = 1; i <= 4; i++) {
                     const taken = Array.from(selects).some(s => s.value === String(i));
@@ -258,9 +258,9 @@ if (!empty($_SESSION['sku_msg'])) {
             }
         });
 
-        updateDemoAndJson(); 
+        updateDemoAndJson();
         $(".js-example-basic-single").select2();
-    } 
+    }
 
     function prepareAndSubmit(e) {
         const compState = getComponentState();

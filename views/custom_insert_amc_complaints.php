@@ -202,7 +202,7 @@ $contracts = $result['contracts'] ?? array();
 						<div class="col-lg-3 col-xs-6 form-group">
 							<label for="complaint_images"><?= __('Complaint Image') ?></label>
 							<input class="form-control mb-1" type="file" name="complaint_images[]" id="complaint_images" multiple />
-							<?php 
+							<?php
 							if(!empty($rid)){
 								$application_table_name  = 'complaints';
 								$url = API."?mode=getImagesData&method=get&table=$application_table_name&id=$rid";

@@ -965,7 +965,7 @@ function showNotificationIcon($status)
             </button> -->
         </div>
     </div>
-</div> 
+</div>
 <script type="text/javascript">
     var vendor_id = '<?php echo $vendor_id; ?>';
     var transaction_table = '<?php echo $transaction_table; ?>';
@@ -973,7 +973,7 @@ function showNotificationIcon($status)
     var requiredVerifications = <?php echo json_encode($required_document_verifications); ?>;
     var visibleVerifications = <?php echo json_encode($visible_document_verifications); ?>;
     var vendorVerifications = <?php echo json_encode($vendor_verifications); ?>;
-    
+
     console.log("vendor_id -",vendor_id,"   transaction_table -",transaction_table,"   requiredVerifications -",requiredVerifications,"   visibleVerifications -",visibleVerifications,"   vendorVerifications -",vendorVerifications);
 
     var verificationSteps = {};
@@ -1209,7 +1209,7 @@ function showNotificationIcon($status)
 
         var currentSectionKey = getSectionForStep(currentStep);
         var currentVerificationStep = verificationSteps[currentSectionKey];
- 
+
         if (currentVerificationStep && hasDataInCurrentStep() && !currentVerificationStep.completed && !currentVerificationStep.skipped) {
             var sectionName = currentSectionKey.toUpperCase();
             showNotification("Please complete " + sectionName + " verification before proceeding to the next step. If you don't want to verify now, please skip this step.", "warning");
@@ -1237,14 +1237,14 @@ function showNotificationIcon($status)
         }
     }
 
-    function goToStep(step) { 
+    function goToStep(step) {
         if (step < currentStep) {
             currentStep = step;
             showStep(currentStep);
             updateStepIndicator();
             return;
         }
- 
+
         for (let i = 1; i < step; i++) {
             if (!validateStep(i)) {
                 var sectionName = getSectionForStep(i).toUpperCase();
@@ -1303,11 +1303,11 @@ function showNotificationIcon($status)
                 $('#tan_number').val('');
                 break;
         }
- 
+
         var stepDiv = $('#step-' + currentStep);
         stepDiv.find('.input-group .status-icon').html('<i class="fa fa-clock-o text-muted"></i>');
         stepDiv.find('.input-group').removeClass('has-success has-error');
- 
+
         resetCurrentStepVerification();
     }
 
@@ -1318,7 +1318,7 @@ function showNotificationIcon($status)
         if (!verificationStep) {
             return true;
         }
- 
+
         if (!verificationStep.completed && !verificationStep.skipped) {
             var sectionName = sectionKey.toUpperCase();
             showNotification("Please complete " + sectionName + " verification or skip this step before proceeding", "warning");
@@ -1376,14 +1376,14 @@ function showNotificationIcon($status)
         });
     }
 
-    function skipStep(stepType) { 
+    function skipStep(stepType) {
         if (hasDataInCurrentStep()) {
             clearCurrentStepData();
         }
- 
+
         verificationSteps[stepType].skipped = true;
         verificationSteps[stepType].completed = false;
- 
+
         var stepName = stepType.toUpperCase();
         var stepDiv = $('#step-' + currentStep);
         stepDiv.find('.verification-fields').hide();
@@ -1397,9 +1397,9 @@ function showNotificationIcon($status)
 
         stepDiv.find(`#${stepType}_skip_message`).remove();
         stepDiv.find('.step-header').after(skipMessage);
- 
+
         showNotification(stepName + " verification skipped automatically", "info");
- 
+
         if (currentStep === totalSteps) {
             // finishVerification();
         } else {
@@ -1573,7 +1573,7 @@ function showNotificationIcon($status)
                 console.log('Enabling field:', $(this).attr('id') || $(this).attr('name'));
                 $(this).prop('readonly', false).prop('disabled', false);
             });
- 
+
             resetCurrentStepVerificationStatus();
 
             button.text('Change Info').removeClass('btn-success').addClass('btn-warning');
@@ -1605,7 +1605,7 @@ function showNotificationIcon($status)
             $('#' + stepType + '_skip_message').remove();
         }
 
-        if (stepType === 'pan') { 
+        if (stepType === 'pan') {
             $('#pan_confirmation_section').hide();
             $('#verify_pan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify PAN').prop('disabled', false);
             $('#pan_verified_name').val('');
@@ -1614,7 +1614,7 @@ function showNotificationIcon($status)
             $('#pan_number').closest('.input-group').find('.status-icon').html('<i class="fa fa-clock-o text-muted"></i>');
             $('#pan_number').closest('.input-group').removeClass('has-success has-error');
             console.log('PAN verification status reset');
-        } else if (stepType === 'gstin') { 
+        } else if (stepType === 'gstin') {
             $('#gst_confirmation_section').hide();
             $('#gst_address_options').hide();
             $('#verify_gst_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify GST').prop('disabled', false);
@@ -1628,7 +1628,7 @@ function showNotificationIcon($status)
             $('#gstin').closest('.input-group').find('.status-icon').html('<i class="fa fa-clock-o text-muted"></i>');
             $('#gstin').closest('.input-group').removeClass('has-success has-error');
             console.log('GST verification status reset');
-        } else if (stepType === 'bank') { 
+        } else if (stepType === 'bank') {
             $('#bank_confirmation_section').hide();
             $('#verify_bank_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify Bank Account').prop('disabled', false);
             $('#bank_verified_ifsc').val('');
@@ -1640,7 +1640,7 @@ function showNotificationIcon($status)
             $('#bank_account_no').closest('.input-group').find('.status-icon').html('<i class="fa fa-clock-o text-muted"></i>');
             $('#bank_account_no').closest('.input-group').removeClass('has-success has-error');
             console.log('Bank verification status reset');
-        } else if (stepType === 'msme') { 
+        } else if (stepType === 'msme') {
             $('#msme_confirmation_section').hide();
             $('#verify_msme_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify MSME').prop('disabled', false);
             $('#msme_verified_enterprise_name').val('');
@@ -1652,7 +1652,7 @@ function showNotificationIcon($status)
             $('#msme_verified_registration_date').val('');
             $('#msme_verified_status').val('');
             console.log('MSME verification status reset');
-        } else if (stepType === 'tan') { 
+        } else if (stepType === 'tan') {
             $('#tan_confirmation_section').hide();
             $('#verify_tan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify TAN').prop('disabled', false);
             $('#tan_verified_company').val('');
@@ -1925,13 +1925,13 @@ function showNotificationIcon($status)
 
                         var address = "N/A";
                         if (result.result.primary_business_address) {
-                            var addr = result.result.primary_business_address; 
+                            var addr = result.result.primary_business_address;
                             var addressParts = [];
 
-                            var full_address = addr.full_address; 
-                            var state = addr.state_code; 
-                            var city = addr.district; 
-                            var pincode = addr.pincode; 
+                            var full_address = addr.full_address;
+                            var state = addr.state_code;
+                            var city = addr.district;
+                            var pincode = addr.pincode;
 
                             if (addr.building_name) addressParts.push(addr.building_name);
                             if (addr.building_number) addressParts.push(addr.building_number);
@@ -2454,7 +2454,7 @@ function showNotificationIcon($status)
             showNotification('GST address saved for ' + type + ' address', 'success');
         }
     }
- 
+
 
     function showNotification(message, type) {
         var iconClass = '';

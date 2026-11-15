@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(isset($_POST['submitbellcurves'])){
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['user_id'] = $_SESSION['userid'];
@@ -6,7 +6,7 @@ if(isset($_POST['submitbellcurves'])){
     $response1 = file_post_contents($url, $_POST, 'update');
     $response2 = json_decode($response1,1);
     $response =$response2['insert'];
-    if($response['status'] == 'sucess'){ 
+    if($response['status'] == 'sucess'){
         if($response['LASTID'] == 0){
             $msgcode = 3001; //update
             //$_SESSION['insert_msg'] = $msgcode;
@@ -16,13 +16,13 @@ if(isset($_POST['submitbellcurves'])){
             $getid = $response["LASTID"];
             $Rrid = deocdeId("id:".$getid);
             header("location:index.php?option=COM_LIST_APPRAISAL_BELL_CURVES&Rid=".$Rrid); exit;
-        }        
+        }
         ?>
         <script type="text/javascript">
             document.onreadystatechange = function(){
                 if(document.readyState == "complete") {
                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][$msgcode]; ?>','');
-                } 
+                }
             }
         </script>
         <?php
@@ -42,8 +42,8 @@ if(isset($_POST['submitbellcurves'])){
 
 $drid = encodeId($_GET['Rid']);
 $erid = explode(":",$drid);
-$rid = $erid['1']; 
-$apiurl = API."?mode=getappraisalbellcurves&rid=".$rid; 
+$rid = $erid['1'];
+$apiurl = API."?mode=getappraisalbellcurves&rid=".$rid;
 $apicallss = callAPI($apiurl);
 $result = json_decode($apicallss,1);
 $appraisal_rating_slabs = $result['appraisal_rating_slabs'];
@@ -71,7 +71,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
 		<div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>	
+        </div>
 <?php } ?>
 <div class="card custom_card">
 	<div class="card-header">
@@ -99,8 +99,8 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
 		                	 <span class="fw-bold font-weight-bold">Percentage (%)<span class="text-danger">*</span></span>
 		                </div>
 		            </div>
-                	<?php $sum = 0; foreach($appraisal_rating_slabs as $aprslab){ 
-                		$slab11 = $slabsval[$aprslab['id']]; 
+                	<?php $sum = 0; foreach($appraisal_rating_slabs as $aprslab){
+                		$slab11 = $slabsval[$aprslab['id']];
                 		$sum += $slab11['percentage'];
                 		$slab_id = $aprslab['id'];
                 		?>
@@ -110,7 +110,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
 		                    <input type="text" class="form-control" id="slab_name_<?php echo $slab_id; ?>" value="<?php echo $aprslab['slabs_name']; ?>" style="background-color:<?php echo $aprslab['background_color']; ?>; color: <?php echo $aprslab['font_color']; ?> " readonly aria-label="<?php echo htmlspecialchars($aprslab['slabs_name']); ?>">
 			            </div>
 			            <div class="form-group col-lg-6">
-			            	<div class="input-group input-group-button"> 
+			            	<div class="input-group input-group-button">
 		                    	<input type="number" id="slab_percentage_<?php echo $slab_id; ?>" name="slabs[<?php echo $slab_id; ?>][percentage]" class="form-control bell_curve_sum text-right width1" value="<?php echo $slab11['percentage']; ?>" onblur="getTotalBellCurve()" required aria-label="Percentage for <?php echo htmlspecialchars($aprslab['slabs_name']); ?>">
 			                    <span class="input-group-text addon-style">
 								    <span class="">%</span>
@@ -130,7 +130,7 @@ $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
                  </div>
             </div>
             <input type="hidden" name="rid" value="<?php echo $rid; ?>">
-            <button type="submit" class="btn btn-primary waves-effect waves-light mt-5" id="bell_curve_btn" name="submitbellcurves" <?php echo $sum ==100?"":"disabled";?>><i class="fa fa-check m-r-10" aria-hidden="true"></i> <?php echo $rid ==""?__("Submit"):__("Update"); ?></button>   
+            <button type="submit" class="btn btn-primary waves-effect waves-light mt-5" id="bell_curve_btn" name="submitbellcurves" <?php echo $sum ==100?"":"disabled";?>><i class="fa fa-check m-r-10" aria-hidden="true"></i> <?php echo $rid ==""?__("Submit"):__("Update"); ?></button>
         </form>
 	</div>
 

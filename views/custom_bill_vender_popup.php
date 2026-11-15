@@ -1,10 +1,10 @@
-<?php //print_r($_POST); 
+<?php //print_r($_POST);
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
 //print_r($_POST);
 $url = API."?mode=togetreportvillbaseidvendors&val=".$_POST['val'];
-$apires = callAPI($url); 
+$apires = callAPI($url);
 $datas = json_decode($apires,1);
 
 ?>
@@ -15,10 +15,10 @@ $datas = json_decode($apires,1);
 </div>
 <div class="modal-body j-pro">
 	<div class="j-content">
-		<form id="assetsallocationform" method="post" >	
+		<form id="assetsallocationform" method="post" >
 			<div class="row ">
 				<div class="dt-responsive table-responsive">
-					<table  class="table table-striped table-bordered nowrap"> 
+					<table  class="table table-striped table-bordered nowrap">
 						<thead>
 							<tr>
 								<th scope="col"><?= __("Sl No") ?></th>
@@ -31,7 +31,7 @@ $datas = json_decode($apires,1);
 							</tr>
 						</thead>
 						<tbody>
-							<?php $i=1; foreach($datas['bills'] as $bill){ 
+							<?php $i=1; foreach($datas['bills'] as $bill){
 								$pam = $bill['pending_amount']!="" ? $bill['pending_amount'] : $bill['total_amount'];
 
 							?>
@@ -43,7 +43,7 @@ $datas = json_decode($apires,1);
 								<td ><?php echo  fromDate(date("Y-m-d", strtotime($bill['transaction_date'] . ' + ' . $bill['payment_terms'] . 'day'))); ?></td>
 								<td class="text-"><?php echo customeummarmonyformate($bill['total_amount']); ?></td>
 								<td><?php echo customeummarmonyformate($pam); ?></td><td><?php echo customeummarmonyformate($value); ?></td>
-                <td><?php echo customeummarmonyformate($returnvendorind[$vendor_id]['15']); ?></td>  
+                <td><?php echo customeummarmonyformate($returnvendorind[$vendor_id]['15']); ?></td>
                 <td class="text-right"><?php echo customeummarmonyformate($returnvendorind[$vendor_id]['30']); ?></td>
                 <td class="text-right"><?php echo customeummarmonyformate($returnvendorind[$vendor_id]['45']); ?></td>
                 <td class="text-right"><?php echo customeummarmonyformate($returnvendorind[$vendor_id]['60']); ?></td>

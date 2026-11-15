@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(isset($_POST['id']) && $_POST['id'] !=""){
   include_once '../includes/session.php';
   include_once '../dbconfig.php';
@@ -24,7 +24,7 @@ foreach($chart_of_accounts as $finanacerepogrp){
     $financereportgroups[$finanacerepogrp['account_code']] = $finanacerepogrp;
 }
  $reportgroupid = ($_POST['pargrp'] !="0" && $_POST['pargrp'] !="")?$_POST['pargrp']:$chartofaccountssingle['parent_account_code'];
- 
+
 
   // $vurl = API."?mode=getfinanacereportgroups&Rid=".$_POST['id'];
   // $resultapi = callAPI($vurl);
@@ -42,7 +42,7 @@ foreach($chart_of_accounts as $finanacerepogrp){
   // }
   // $frgres =$result['finance_report_groups_edit'];
   // $reportgroupid = ($_POST['pargrp'] !="0" && $_POST['pargrp'] !="")?$_POST['pargrp']:$frgres['parent_group_id'];
-  // $cudata = $result['selectedaccountlist'];  
+  // $cudata = $result['selectedaccountlist'];
   // $selectedode = json_decode($frgres['chart_of_account_codes'],1);
 }
 $account_groups = $result['account_groups'];
@@ -51,11 +51,11 @@ $account_groups = $result['account_groups'];
 ?>
 <?php if($chartofaccountssingle['id']!=""){ ?>
 <div >
-  <?php 
+  <?php
     if($chartofaccountssingle['lock_and_unlock_status'] =="" || $chartofaccountssingle['lock_and_unlock_status'] =="N"){  ?>
       <span class="pcoded-badge label label-danger  cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="clickChartOfAccountLockAndUnlock('Y','<?php echo $chartofaccountssingle['id']; ?>')"><i class="ti-lock"></i> <?= __('Click To lock') ?></span>
   <?php }else{  $evendisable = 'event_disabled';
-        if($chartofaccountssingle['lock_and_unlock_user_id'] == $_SESSION['userid']){   
+        if($chartofaccountssingle['lock_and_unlock_user_id'] == $_SESSION['userid']){
    ?>
       <span class="pcoded-badge label label-primary  cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="clickChartOfAccountLockAndUnlock('N','<?php echo $chartofaccountssingle['id']; ?>')"><i class="ti-unlock"></i> <?= __('Click To Unlock') ?></span>
   <?php }else{ echo "<span class='text-danger'>Chart Of Account is locked. ".$_SESSION['error_message']['9002']."</span>"; } } ?>
@@ -74,7 +74,7 @@ $account_groups = $result['account_groups'];
          <span class="d-block error-message text-danger"></span>
         <input id="fld_account_short_name" type="text"  class="form-control requried_field"  name="account_short_name" value="<?php echo $chartofaccountssingle['account_short_name']; ?>" />
       </div>
-      
+
       <div class="form-group col-lg-6">
         <label for="fld_account_code" class="form-label"><?= __('Account Code') ?></label>
         <input id="fld_account_code" type="text"  class="form-control"  name="account_code" value="<?php echo $chartofaccountssingle['account_code']; ?>" readonly>
@@ -85,10 +85,10 @@ $account_groups = $result['account_groups'];
       </div>
       <div class="form-group col-lg-6">
         <label for="fld_parent_account_code" class="form-label"><?= __('Parent Account Code') ?></label>
- 
+
         <select id="fld_parent_account_code" class="form-control border js-example-basic-single" name="parent_account_code" style="-webkit-appearance:auto;">
             <option  value="0"><?= __('Parent Account') ?></option>
-          <?php 
+          <?php
           foreach($chart_of_accounts as $chartofaccount){ ?>
            <option <?php if($chartofaccount['account_code']== $reportgroupid){ echo "selected"; } ?> value="<?php echo $chartofaccount['account_code']; ?>"><?php echo $chartofaccount['account_name'].'-'.$chartofaccount['account_code']; ?></option>
          <?php } ?>
@@ -98,7 +98,7 @@ $account_groups = $result['account_groups'];
         <label for="fld_currency_id" class="form-label"><?= __('Account Currency') ?></label>
         <select id="fld_currency_id" class="form-control border js-example-basic-single" name="currency_id" style="-webkit-appearance:auto;">
           <option  value=""><?= __('Select Any One') ?></option>
-          <?php 
+          <?php
           foreach($currencies as $currencie){ ?>
 
            <option <?php if($currencie['id']== $chartofaccountssingle['currency_id']){ echo "selected"; } ?> value="<?php echo $currencie['id']; ?>"><?php echo $currencie['currency_name']." - ".$currencie['currency_symbol']; ?></option>
@@ -126,7 +126,7 @@ $account_groups = $result['account_groups'];
         <span class="d-block error-message text-danger"></span>
         <select id="fld_account_type" class="form-control border js-example-basic-single requried_field" name="account_type" style="-webkit-appearance:auto;">
           <option  value=""><?= __('Select Any One') ?></option>
-          <?php 
+          <?php
           foreach($account_type as $accounttype){ ?>
 
            <option <?php if($accounttype['id']==$chartofaccountssingle['account_type']){ echo "selected"; } ?> value="<?php echo $accounttype['id']; ?>"><?php echo htmlspecialchars(__($accounttype['account_type_name'] ?? '')); ?></option>
@@ -138,7 +138,7 @@ $account_groups = $result['account_groups'];
         <label for="fld_tax_id" class="form-label"><?= __('Default Tax') ?></label>
         <select id="fld_tax_id" class="form-control border js-example-basic-single" name="tax_id" style="-webkit-appearance:auto;">
           <option  value=""><?= __('Select Any One') ?></option>
-          <?php 
+          <?php
           foreach($taxes as $tax){ ?>
 
            <option <?php if($tax['id']== $chartofaccountssingle['tax_id']){ echo "selected"; } ?> value="<?php echo $tax['id']; ?>"><?php echo $tax['tax_name']; ?></option>
@@ -146,13 +146,13 @@ $account_groups = $result['account_groups'];
        </select>
      </div>
      <?php **/ ?>
-     
+
      <?php /** ?>
      <div class="form-group col-lg-6">
         <label for="fld_journal_id" class="form-label"><?= __('Allowed Journals') ?></label>
         <select id="fld_journal_id" class="form-control border js-example-basic-single" name="journal_id" style="-webkit-appearance:auto;">
           <option  value=""><?= __('Select Any One') ?></option>
-          <?php 
+          <?php
           foreach($journals as $journal){ ?>
 
            <option <?php if($journal['id']== $chartofaccountssingle['journal_id']){ echo "selected"; } ?> value="<?php echo $journal['id']; ?>"><?php echo $journal['journal_name']; ?></option>
@@ -190,7 +190,7 @@ $account_groups = $result['account_groups'];
                   <i class="ti-close" onclick="closeAccountBalances()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= __('Closed') ?>"></i>
                 </div>
               </div>
-              <div class="card-body"> 
+              <div class="card-body">
                 <dic class="row">
                 <div class="form-group col-lg-3">
                   <label for="location_filter" class="form-label"><?= __('Location') ?></label>
@@ -200,7 +200,7 @@ $account_groups = $result['account_groups'];
                       <option   value="<?php echo $applicationquery['id']; ?>"><?php echo $applicationquery['location_name'];  ?></option>
                     <?php } ?>
                   </select>
-                </div> 
+                </div>
 
 
                 <div class="form-group  col-lg-3">
@@ -221,7 +221,7 @@ $account_groups = $result['account_groups'];
                     <?php } ?>
                   </select>
                 </div>
-                <div class="col-lg-3 text-center">  
+                <div class="col-lg-3 text-center">
                   <span class="form-label d-block"><?= __('Balance') ?></span>
                   <span class="form-label d-block" id="balance_cnt_label"><?= __('Total') ?> : 0</span>
                 </div>
@@ -255,7 +255,7 @@ $account_groups = $result['account_groups'];
               </div>
               </div>
               <div class="card-footer pt-0">
-                
+
               </div>
             </div>
         </div>
@@ -269,5 +269,5 @@ $account_groups = $result['account_groups'];
     <input type="hidden" name="Rid" id="Rid" value="<?php echo $chartofaccountssingle['id']; ?>">
     <button type="button" class="btn btn-primary mt-2" onclick="addFinaanceAccGrp()" >  <?php if($chartofaccountssingle['id'] !="" AND $chartofaccountssingle['id'] !="0"){ echo __("Update Chart Of Accounts"); }else{ echo "<i class='fa fa-plus'></i> " . __("Chart Of Accounts"); } ?></button></div>
   </div>
-</div> 
+</div>
 </form>

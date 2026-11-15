@@ -2016,8 +2016,8 @@ if (!empty($percent)) {
     hidden>
 </div>
 
-       <?php 
-echo $todisplaythree = todisplaythree(array('table'=>$table_name,'originator'=>$return['created_by'],'encode'=>'no','id'=>$return['id'],'dis_query'=>'no','dis_timeline'=>'yes','dis_comments'=>'no','dis_track'=>'no'));  
-        ?> 
+       <?php
+echo $todisplaythree = todisplaythree(array('table'=>$table_name,'originator'=>$return['created_by'],'encode'=>'no','id'=>$return['id'],'dis_query'=>'no','dis_timeline'=>'yes','dis_comments'=>'no','dis_track'=>'no'));
+        ?>
 <script src="assets/js/custom_view_csr_proposal_details.js"></script>
 <script src="assets/js/custom_insert_csr_proposal_details.js"></script>

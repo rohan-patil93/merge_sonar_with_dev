@@ -9,27 +9,27 @@
         $hsn_and_sac_codes[$hsnn['id']] = $hsnn['code'];
     }
 ?>
-<table class=" table table-hover " id="invoiceItem"> 
+<table class=" table table-hover " id="invoiceItem">
 <tr>
     <th width="30%" class="p-1"><?= __('Items/Service'); ?> <span class="requried"></span></th>
     <th class="thheader p-1" width="10%"><?= __('HSN/Tax'); ?> <span class="requried">*</span></th>
     <th class="thheader p-1 text-right" width="15%"><?= __('Qty'); ?> <span class="requried">*</span></th>
     <th class="thheader p-1 text-right" width="15%"><?= __('UOM'); ?> <span class="requried">*</span></th>
     <th class="thheader p-1 text-right" width="15%"><?= __('Rate'); ?> <span class="requried">*</span></th>
-    <th class="thheader p-1 text-right" width="20%"><?= __('Amount'); ?></th>   
-</tr>    
+    <th class="thheader p-1 text-right" width="20%"><?= __('Amount'); ?></th>
+</tr>
 <?php if(count((array)$table2)>0){ $i=1;  ///echo "<pre>"; print_r($table2); echo "</pre>";
- foreach ($table2 as $tab2) {  
+ foreach ($table2 as $tab2) {
 
     $taxabled_amount = $tab2['taxabled_amount'] !=""?$tab2['taxabled_amount']:$tab2['total_amount'];
   ?>
 <tr>
-    <td class="p-1" id='other_<?php echo $i; ?>' style="width: 150px;"> 
+    <td class="p-1" id='other_<?php echo $i; ?>' style="width: 150px;">
         <input type="hidden" class="itemRow">
-        <input type="hidden" name="productCode[]" id="productCode_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_id']; ?>"> 
-        <input type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off" readonly> 
+        <input type="hidden" name="productCode[]" id="productCode_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_id']; ?>">
+        <input type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off" readonly>
         <textarea  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control mt-2 " autocomplete="off"><?php echo $tab2['description']; ?></textarea>
-    </td> 
+    </td>
         <td class="p-1 w-full text-center" id="hsn_and_sac_code_id_<?php echo $i; ?>">
         <?php if($tab2['tax_value'] != "" AND $tab2['tax_value'] != "0"){ ?>
             <span class="d-block"><?= __('HSN'); ?> - <?php echo $hsn_and_sac_codes[$tab2['tax_id']]; ?></span>
@@ -38,40 +38,40 @@
     </td>
 
     <td class="p-1">
-        <input type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  class="form-control amount" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off" readonly> 
+        <input type="text" name="quantity[]" id="quantity_<?php echo $i; ?>"  class="form-control amount" value="<?php echo $tab2['quantity']; ?>"  autocomplete="off" readonly>
         <input type="hidden" name="quantity_old[]" id="quantity_old_<?php echo $i; ?>"  class="form-control" value="<?php echo $tab2['quantity']; ?>">
-    </td> 
-    <td class="p-1"><input type="text" name= "uom[]"  id="uom_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['uom']; ?>" autocomplete="off" readonly></td> 
+    </td>
+    <td class="p-1"><input type="text" name= "uom[]"  id="uom_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['uom']; ?>" autocomplete="off" readonly></td>
     <td class="p-1">
         <input type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off" readonly>
 
         <div style="display: none;color: red;" id="<?php echo 'price_err_'.$i; ?>"> <?= __('Enter Rate'); ?></div>
     </td>
-    
+
     <td class="p-1">
         <input type="hidden" name="tax[]" id="tax_<?php echo $i; ?>" value="<?php echo $tab2['tax_value']; ?>">
-        <input type="hidden" name="taxid[]" id="taxid_<?php echo $i; ?>" value="<?php echo $tab2['tax_id']; ?>"> 
+        <input type="hidden" name="taxid[]" id="taxid_<?php echo $i; ?>" value="<?php echo $tab2['tax_id']; ?>">
          <input type="hidden" name="tax_name[]" id="tax_name_<?php echo $i; ?>" value="<?php echo $tab2['tax_name']; ?>">
          <?php if($tab2['total_amount'] > 0){ $data_content = '<div class="dropdown-item"><i class="flaticon-coins"></i>&nbsp;&nbsp; A :'.customeummarmonyformate($response_code[$tab2['purchase_account']]['a']).'</div> <div class="dropdown-item" ><i class="flaticon-coins"></i>&nbsp;&nbsp; B :'.customeummarmonyformate($response_code[$tab2['purchase_account']]['b']).'</div> <div class="dropdown-item" href="#"><i class="flaticon-coins"></i>&nbsp;&nbsp; C :'.customeummarmonyformate($response_code[$tab2['purchase_account']]['c']).'</div>'; if($tab2['total_amount'] > $response_code[$tab2['purchase_account']]['a']){ $sty = "style='color:#F00'";} }else{ $data_content = '<div class="dropdown-item">'.__('No Item Selected').'</div>'; }
              ?>
         <div> <div style="float: left;width: 90%;">
-        
+
         <input type="hidden" name="dis_ptax_amount[]" value="<?php echo customeummarmonyformate($tab2['tax_amount']); ?>" readonly class="form-control price amount" id="dis_ptax_amount_<?php echo $i; ?>">
-        
+
         <input type="hidden" name="pdiscount_amount[]" value="<?php echo customeummarmonyformate($tab2['tax_amount']); ?>" readonly class="form-control price amount" id="pdiscount_amount_<?php echo $i; ?>">
-        
+
         <input type="hidden" name="ptax_amount[]" value="<?php echo $tab2['tax_amount']; ?>" readonly class="form-control price amount" id="ptax_amount_<?php echo $i; ?>">
-        
+
         <input type="hidden" name="p_amount[]" value="<?php echo $tab2['item_price']; ?>" readonly class="form-control price amount" id="p_amount_<?php echo $i; ?>">
-        
+
         <input type="text" name="dis_amount[]" readonly <?php echo $sty; ?> id="dis_amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo customeummarmonyformate($taxabled_amount); ?>" autocomplete="off">
         <input type="hidden" name="amount[]" readonly id="amount_<?php echo $i; ?>" class="form-control amount" value="<?php echo $tab2['item_price']; ?>">
     </div>
     </div>
     <input type="hidden" class="form-control"  value="<?php echo reqDate($tab2['req_date']); ?>"  name="req_date[]"  id="kt_datepicker_3<?php echo $dateid; ?>" />
 </td>
-    
+
 </tr>
 
-<?php $i++; } } ?>                      
+<?php $i++; } } ?>
     </table>

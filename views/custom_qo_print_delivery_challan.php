@@ -5,8 +5,8 @@
       window.print();
     }
 </script>
-<div id="printDiv" style="width: 800px; display: block; margin: 0 auto !important; background: #ffffff;"> 
-    
+<div id="printDiv" style="width: 800px; display: block; margin: 0 auto !important; background: #ffffff;">
+
     <!-- <link rel="stylesheet" type="text/css" href="../assets/css/custom_qo_print_aditya_industries.css"> -->
 
 
@@ -109,7 +109,7 @@
                             <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">Billed by (Supplier)</div>
                             <div style="font-weight: bold; font-size: 12px;">Suresh Enterprises</div>
                             <div style="font-size: 12px;">Suresh Enterprises</div>
-                            
+
                             <table role="presentation" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
                                 <tr>
                                     <td width="30%" style="font-weight: bold;">GSTIN</td>
@@ -131,7 +131,7 @@
                             <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">Billed to (Consignee)</div>
                             <div style="font-weight: bold; font-size: 12px;">National Rubber Industries</div>
                             <div style="font-size: 12px;">NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063</div>
-                
+
                             <table role="presentation" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
                                 <tr>
                                     <td width="30%" style="font-weight: bold;">GSTIN</td>
@@ -153,7 +153,7 @@
                             <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">Shipped to (Delivery Address)</div>
                             <div style="font-weight: bold; font-size: 12px;">National Rubber Industries</div>
                             <div style="font-size: 12px;">NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063</div>
-                
+
                             <table role="presentation" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
                                 <tr>
                                     <td width="30%" style="font-weight: bold;">GSTIN</td>
@@ -351,7 +351,7 @@
         </tr>
 
     </table>
- 
+
 </div>
 
 <button class="print-btn" style="margin: 15px 0; padding: 8px 16px; cursor: pointer;" onclick="printDiv('printableArea')">Print Invoice</button>

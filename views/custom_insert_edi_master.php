@@ -41,7 +41,7 @@ if (isset($_POST['submit'])){
 		}
 	}
 }
-if(isset($_GET['Rid']) && $_GET['Rid'] !=''){ 
+if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
 	$rid =  encodeId($_GET['Rid']);
 	$url = API."?mode=singlerowtabledata&rid=$rid&table=".TBL_EDIMASTER;
 	$response = file_get_contents($url, false, $context);
@@ -63,13 +63,13 @@ $stausresult = statusData(TBL_EDIMASTER);
   		if (y == "") {
    			 alert(error[1402]);
    			 return false;
-  		}	
+  		}
   		var z = document.forms["myForm"]["EDI_File_Type"].value;
   		if (z == "") {
    			alert(error[1403]);
    			 return false;
   		}
-  				
+
 	}
 
 </script>
@@ -92,7 +92,7 @@ $stausresult = statusData(TBL_EDIMASTER);
 	<!-- end:: Content Head -->
 
 	<!-- begin:: Content -->
-	
+
 	<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 		<div class="kt-portlet kt-portlet--tabs card card-custom gutter-b card-stretch">
 			<div class="card-body">

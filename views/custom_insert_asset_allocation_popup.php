@@ -1,8 +1,8 @@
-<?php //print_r($_POST); 
+<?php //print_r($_POST);
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
-//$url = API."?mode=getassetallocation&list=Y&assetid=".$_POST['assetid']; 
+//$url = API."?mode=getassetallocation&list=Y&assetid=".$_POST['assetid'];
 $url = API."?mode=getassetallocation&admin_type=".$_SESSION['admin_type']."&resultgettype=DIRECTASSETALLOCATE&assetid=".$_POST['assetid'];
 $data_details = callAPI($url);
 $details = json_decode($data_details,1);
@@ -11,7 +11,7 @@ $details = json_decode($data_details,1);
 
 
 
-//$url = API."?mode=getassetallocation&list=Y&assetid=".$_POST['assetid']; 
+//$url = API."?mode=getassetallocation&list=Y&assetid=".$_POST['assetid'];
 //$data_details = callAPI($url);
 //$details = json_decode($data_details,1);
 //$assetcategory = $details['asset_categories'];
@@ -36,9 +36,9 @@ if($repeateasset=="1"){ ?>
 	<script>
 	tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',"Oops Asset Already Alocated Please Unselect And re-Allocate Asset",'');
     setTimeout(function() { $('#kt_modal_dynamic_popup2').modal('hide'); }, 1000);
-	
+
 	</script>
-<?php } 
+<?php }
 
 
 //$employees = $details['employees'];
@@ -73,11 +73,11 @@ function submitdetails(){
 	var validations = ajaxFormSubmitValidation();
     if(validations == 0){
 	  	var formData = new FormData();
-	    formData.append("page", "insertassetallocation"); 
+	    formData.append("page", "insertassetallocation");
 	    var dataArray = $("#assetsallocationform1").serializeArray(),
 	    dataObj = {};
 	    $(dataArray).each(function(i, field){
-	      formData.append(field.name, field.value); 
+	      formData.append(field.name, field.value);
 	    });
 	  //  var popattachment = document.getElementById('popattachment').files[0];
 	  // formData.append("file",popattachment);
@@ -111,10 +111,10 @@ function submitdetails(){
 </div>
 <div class="modal-body">
 	<div class="">
-	<form id="assetsallocationform1" method="post" >	
+	<form id="assetsallocationform1" method="post" >
 		<div class="row ">
 			<div class="dt-responsive table-responsive">
-	<table  class="table table-striped table-bordered nowrap"> 
+	<table  class="table table-striped table-bordered nowrap">
 		<thead>
 			<tr>
 				<th scope="col"><?= __('Asset Code') ?></th>
@@ -142,7 +142,7 @@ function submitdetails(){
 						<!-- <td class="w-full">
 							<select  class="form-select js-example-basic-single " name="asset_location[]" aria-label="Asset Location">
 								<option value=""><?= __('Select Any One') ?></option>
-								<?php foreach ($locations as $location) { ?>					
+								<?php foreach ($locations as $location) { ?>
 									<option location value="<?php echo $location['id']; ?>" <?php echo $location['id'] == $list_asset['asset_location']?"selected":""; ?>><?php echo ucwords($location['location_name']); ?></option>
 								<?php } ?>
 							</select>
@@ -150,28 +150,28 @@ function submitdetails(){
 						<td class="w-full"><?php //echo $ass_status[$list_asset['asset_status']]; ?>
 							<select  class="form-select js-example-basic-single" name="asset_status[]" aria-label="Asset Status">
 								<option value=""><?= __('Select Any One') ?></option>
-								<?php foreach ($ass_status as $ass_statuskey=>$ass_statuss){ ?>					
+								<?php foreach ($ass_status as $ass_statuskey=>$ass_statuss){ ?>
 									<option  value="<?php echo $ass_statuskey; ?>" <?php echo $ass_statuskey == $list_asset['asset_status']?"selected":""; ?>><?php echo ucwords($ass_statuss); ?></option>
 								<?php }  ?>
-							</select> 
+							</select>
 						</td>
 						<td class="w-full">
 							<select  class="form-select js-example-basic-single " name="conditions[]" aria-label="Conditions">
 								<option value=""><?= __('Select Any One') ?></option>
-								<?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>					
+								<?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>
 									<option  value="<?php echo $ass_conditiokey; ?>" <?php echo $ass_conditiokey == $list_asset['conditions']?"selected":""; ?>><?php echo ucwords($ass_conditio); ?></option>
 								<?php } ?>
-							</select> 
-							
+							</select>
+
 						</td> -->
 				</tr>
 			<?php } ?>
-				
+
 			</tbody>
 		</table>
-	</div> 
+	</div>
 		</div>
-	<div class="card p-2 mt-2">	
+	<div class="card p-2 mt-2">
 		<div class="row">
 			<div class="col-lg-6">
 				<span class="f-w-700 d-inline-block" style="margin-bottom:5px"><?= __('Allocation Type') ?> <span class="requried text-danger">*</span></span>
@@ -201,29 +201,29 @@ function submitdetails(){
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Cost Center') ?> <span class="requried">*</span></span>
 				<select class="form-select js-example-basic-single " name="coast_center_id" aria-label="Coast Center Id">
 						<option value=""><?= __('Select Any One') ?></option>
-				<?php foreach ($costcenters as $costcenter){ ?>					
+				<?php foreach ($costcenters as $costcenter){ ?>
 					<option  value="<?php echo $costcenter['id']; ?>" ><?php echo ucwords($costcenter['cost_center_name']); ?></option>
 				<?php } ?>
-				</select> 
+				</select>
 			</div>
 			<div class="form-group col-lg-4 select_dept w-full" style="display:none">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Department') ?> <span class="requried">*</span></span>
 				<select class="form-select js-example-basic-single " name="departent_id" aria-label="Departent Id">
 						<option value=""><?= __('Select Any One') ?></option>
-				<?php foreach ($departments as $departments){ ?>					
+				<?php foreach ($departments as $departments){ ?>
 					<option  value="<?php echo $departments['id']; ?>"><?php echo ucwords($departments['department_name']); ?></option>
 				<?php } ?>
-				</select> 
+				</select>
 			</div>
 			<div class="form-group col-lg-4 w-full" >
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('User') ?> <span class="requried">*</span></span>
 				<span class="d-block error-message text-danger"></span>
 				<select class="form-select js-example-basic-single requried_field" name="select_user_id" aria-label="Select User Id">
 						<option value=""><?= __('Select Any One') ?></option>
-				<?php foreach ($application_users as $ausr){ ?>					
+				<?php foreach ($application_users as $ausr){ ?>
 					<option  value="<?php echo $ausr['id']; ?>" ><?php echo ucwords($ausr['display_name']); ?></option>
 				<?php } ?>
-				</select> 
+				</select>
 			</div>
 			<div class="form-group col-lg-4">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Start date') ?> <span class="requried text-danger">*</span></span>
@@ -250,12 +250,12 @@ function submitdetails(){
                         <i class="helper"></i><?= __('Deliver Through Logistics Partner') ?>
                       </label>
                     </div>
-                 </div>   
+                 </div>
 			</div>
 			<div class="form-group col-lg-7">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Remarks') ?> </span>
 				<textarea type="text" class="form-control" id="remarks" rows="4" cols="50" name="remarks" aria-label="Remarks"></textarea>
-			</div> 
+			</div>
 		</div>
 	</div>
 
@@ -273,12 +273,12 @@ function submitdetails(){
 	// $(".js-example-basic-single").select2();
 	// $(".js-example-disabled-results").select2();
 	// $( ".datepicker" ).datepicker({
-	// 	showOn: "both", 
+	// 	showOn: "both",
 	// 	buttonText: "<i class='ti-calendar'></i>",
 	// 	dateFormat: date_format,
 	// 	changeMonth: true,
 	// 	changeYear: true
 	// });
 </script>
-<!-- 
+<!--
 <script src="assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js"></script> -->

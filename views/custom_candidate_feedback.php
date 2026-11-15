@@ -47,25 +47,25 @@ foreach ($qustion_types as $qtype) {
     </script>
     <div class="modal-header">
       <h5 class="modal-title">
-        <?= __("Candidate Feed Back") ?> 
+        <?= __("Candidate Feed Back") ?>
       </h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
-    <div class="modal-body1" > 
+    <div class="modal-body1" >
       <form method="post" id="myform" name="myform" action="">
-        <div class="row q-sec m-10 m-l-50 m-r-50">  
+        <div class="row q-sec m-10 m-l-50 m-r-50">
            <input type="hidden" name="job_candidate_interview_schedule_id" value="<?php echo $_POST['job_candidate_interview_schedule_id'];?>">
           <input type="hidden" name="job_posing_candidate_id" value="<?php echo $_POST['job_candidate_id'];?>">
           <input type="hidden" name="job_selection_process_step_id" value="<?php echo $_POST['job_selection_process_step_id'];?>">
-          <?php 
+          <?php
           foreach($survey_details as $datail){
           $value_id = 0; $display_questions = $surveyData['question'][$datail['id']];
           //print_r($display_questions);
           ?>
-          <div class="row col-lg-12 font-weight-bolder h6 mb-2"> 
-            <?= htmlspecialchars(__($datail['name'] ?? '')) ?>              
+          <div class="row col-lg-12 font-weight-bolder h6 mb-2">
+            <?= htmlspecialchars(__($datail['name'] ?? '')) ?>
             </div>
-          <?php foreach ($display_questions as $questionid=>$val) { 
+          <?php foreach ($display_questions as $questionid=>$val) {
             $value_id++;
             $selectedoption = $answer[$questionid];
 
@@ -77,10 +77,10 @@ foreach ($qustion_types as $qtype) {
                 <input type="hidden" name="job_feedback_setup_id<?php echo $questionid;?>" value="<?php echo $display_questions[$questionid]['job_feedback_setup_id'];?>">
                 <!-- <span class="mt-5"><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span> -->
                 <h6><?php echo $value_id . ". " . htmlspecialchars(__($display_questions[$questionid]['survey_question'] ?? '')); ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h6>
-                <?php 
+                <?php
                 $optionlist= json_decode($display_questions[$questionid]['survey_question_option'],1);
                 $option=$optionlist['0'];
-                if($display_questions[$questionid]['options_display_type']==1 || $display_questions[$questionid]['options_display_type']==3 ){ 
+                if($display_questions[$questionid]['options_display_type']==1 || $display_questions[$questionid]['options_display_type']==3 ){
 
                   foreach ($optionlist as $option) {
                     if($display_questions[$questionid]['allow_multiple_selections']==1) {
@@ -94,28 +94,28 @@ foreach ($qustion_types as $qtype) {
                       <label for="q1"><?= htmlspecialchars(__($option ?? '')) ?> </label> </div>
                     </b>
                   <?php }
-                }else if($display_questions[$questionid]['options_display_type']==2){ 
-                  
+                }else if($display_questions[$questionid]['options_display_type']==2){
+
                   ?>
-                        
+
                  <span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Scale from 1 to:") ?> <?php echo $option;?></span>
-                  <input type="number"  class="form-control col-md-5" name="response_option<?php echo $questionid;?>"   id="response_option_scale_<?php echo $questionid;?>" value=<?php echo $selectedoption;?> > 
-                  <?php             
+                  <input type="number"  class="form-control col-md-5" name="response_option<?php echo $questionid;?>"   id="response_option_scale_<?php echo $questionid;?>" value=<?php echo $selectedoption;?> >
+                  <?php
                 }else if($display_questions[$questionid]['options_display_type']==4){
-                 
+
                  ?>
                  <textarea id="response_option<?php echo $questionid;?>"  name="response_option<?php echo $questionid;?>" class="form-control mb-2 col-lg-8" placeholder=""><?php echo $selectedoption;?></textarea>
-                  
+
                <?php }  ?>
                <div class="col-lg-12 row">
                 <!-- <textarea id="comments<?php echo $questionid;?>"  name="comments<?php echo $questionid;?>" class="form-control mb-2 col-lg-8" placeholder="Comments"><?php echo $selectedoption;?></textarea> -->
                 <!-- <input type="text" class="form-control col-lg-3 ml-2" name="" placeholder="Ratting"> -->
 
               </div>
-             </div>  
+             </div>
            </div>
          <?php } } ?>
-       </div>     
+       </div>
      </form>
    </div>
    <div class="modal-footer">

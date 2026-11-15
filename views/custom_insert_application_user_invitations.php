@@ -1,6 +1,6 @@
-<?php 
+<?php
 $table_name = "application_users";
-if(isset($_POST['submit'])){   
+if(isset($_POST['submit'])){
    $_POST['company_id'] = $_SESSION['company_id'];
    $_POST['current_status'] = 0;
    $_POST['is_active'] = 0;
@@ -8,16 +8,16 @@ if(isset($_POST['submit'])){
    $_POST['from_date'] = date('Y-m-d');
    $_POST['to_date'] = date('Y-m-d');
    $_POST['display_name'] = $_POST['first_name']." ".$_POST['last_name'];
-  
+
    if($_POST['submit']=='Add'){
       unset($_POST['submit']);unset($_POST['submit_value']);
       $_POST['status_date'] = nowDate();
       $_POST['created_date'] = nowDate();
-      $_POST['created_by'] = $_SESSION['userid'];   
+      $_POST['created_by'] = $_SESSION['userid'];
       $url = API."?mode=adddata&table=".$table_name."&method=post";
       $response = file_post_contents($url, $_POST, 'insert');
       $res = json_decode($response,1);
-      $_POST['user_id'] = $res['LASTID'];  
+      $_POST['user_id'] = $res['LASTID'];
       $url = API."?mode=adddata&table=application_user_invitations&method=post";
       $response = file_post_contents($url, $_POST, 'insert');
    }
@@ -44,41 +44,41 @@ if(isset($_POST['submit'])){
     						<div class="form-group col-lg-6">
     							<label for="user_name"><?= __('User Name') ?>&nbsp;<span class="requried">*</span></label>
     								<input class="form-control"  type="text"  id="user_name" name="user_name"  value="" aria-label="User Name">
-    								
-    							<div style="display: none;color: red;" id="user_name_err"> Please enter User Name </div> 
+
+    							<div style="display: none;color: red;" id="user_name_err"> Please enter User Name </div>
     						</div>
 
     						<div class="form-group col-lg-6">
     							<label for="first_name"><?= __('First Name') ?>&nbsp;<span class="requried">*</span></label>
-    							
+
     								<input class="form-control"  type="text"  id="first_name" name="first_name"  value="" aria-label="First Name">
-    								
-    							<div style="display: none;color: red;" id="first_name_err"> Please enter First Name </div> 
+
+    							<div style="display: none;color: red;" id="first_name_err"> Please enter First Name </div>
     						</div>
 
     						<div class="form-group col-lg-6">
     							<label for="last_name"><?= __('Last Name') ?></label>
-    							
+
     								<input class="form-control"  type="text"  id="last_name" name="last_name"  value="" aria-label="Last Name">
-    								
-    							<div style="display: none;color: red;" id="last_name_err"> Please enter Last Name </div> 
+
+    							<div style="display: none;color: red;" id="last_name_err"> Please enter Last Name </div>
     						</div>
 
     						<div class="form-group col-lg-6">
     							<label for="user_email"><?= __('Email') ?></label>
-    							
+
     								<input class="form-control"  type="text"  id="user_email" name="user_email"  value="" aria-label="User Email">
-    								
-    							<div style="display: none;color: red;" id="user_email_err"> Please enter Email </div> 
+
+    							<div style="display: none;color: red;" id="user_email_err"> Please enter Email </div>
     						</div>
 
     						<div class="form-group col-lg-6">
     							<label for="user_mobile"><?= __('Mobile') ?></label>
-    							
+
     								<input class="form-control"  type="text"  id="user_mobile" name="user_mobile"  value="" aria-label="User Mobile">
-    								
-    							<div style="display: none;color: red;" id="user_mobile_err"> Please enter Mobile </div> 
-    						</div> 
+
+    							<div style="display: none;color: red;" id="user_mobile_err"> Please enter Mobile </div>
+    						</div>
     						<input type="hidden" name="user_type" value="3">
     					</div>
     					<div class="card-footer">
@@ -91,7 +91,7 @@ if(isset($_POST['submit'])){
     							</div>
     							<div class="col-lg-3 text-right">
     								<button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash" aria-hidden="true"></i><?= __('Delete') ?></button>
-    							</div> 
+    							</div>
     						</div>
     					</div>
     				</div>

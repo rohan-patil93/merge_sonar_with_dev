@@ -177,7 +177,7 @@ $fyRows = $return ?? array();
 <div
     id="csr_config"
     data-po-row-count="<?= max(1, count((array)$poData)) ?>"
-    data-fy-rows='<?php echo json_encode($fyRows); ?>' 
+    data-fy-rows='<?php echo json_encode($fyRows); ?>'
     hidden>
 </div>
 

@@ -1,5 +1,5 @@
  <style type="text/css">
- 
+
  @import url('https://fonts.googleapis.com/css?family=Open+Sans|Nova+Mono');
 :root {
   --font-header: 'Nova Mono', monospace;
@@ -264,7 +264,7 @@ const grantAccess = () => {
 <?php  //echo "<pre>"; print_r($_SESSION['error_message']);
     if(!isset($_GET['error'])){
         $_GET['error'] = "403";
-      } 
+      }
 ?>
 <div class="container">
   <h1><?php echo $_GET['error']; ?></h1>

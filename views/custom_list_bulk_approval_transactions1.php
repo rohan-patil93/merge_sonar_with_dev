@@ -1,10 +1,10 @@
-<?php 
+<?php
 	$approval_url = API."?mode=toGetBluckApprovaldata";
 	$approval_data = callAPI($approval_url);
 	$approval_data = json_decode($approval_data,1);
 	$gen_code = $approval_data['genc_code'];
 	$count = $approval_data['count'];
-	$users = $approval_data['user']; 	
+	$users = $approval_data['user'];
 	$status = $_GET['status'] != '' ? $_GET['status'] : '2';
 	$transaction_type = $_GET['transaction_type'] != '' ? $_GET['transaction_type'] : 'requisitions';
 	$list_url = API."?mode=togetbluckstatusdata&status=".$status."&transaction_type=".$transaction_type;
@@ -36,7 +36,7 @@
 		});
 	}
 	function submitstatus(table, status){
-			
+
 		var row =$('#row').val();
 		var str ='';
 		var sing ='';
@@ -50,7 +50,7 @@
 				var check = $('#check_'+i).val();
 				str+= check+',';
 			}
-			//alert(check); 
+			//alert(check);
 		}
 		alert(str);
 		if(str !=''){
@@ -62,21 +62,21 @@
 					console.log(data);
 						//$("#ajaxdisplay").html(data);
 					if(data){
-						swal.fire({              
-							title: "Record has been Updated successfully ",              
-							text: "Do you want to close ? ",              
-							type: "success",           
+						swal.fire({
+							title: "Record has been Updated successfully ",
+							text: "Do you want to close ? ",
+							type: "success",
 							buttonsStyling: false,
-							confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",    
+							confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
 							confirmButtonClass: "btn btn-danger",
-							showCancelButton: false,     
-							cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",      
-							cancelButtonClass: "btn btn-default"        
+							showCancelButton: false,
+							cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+							cancelButtonClass: "btn btn-default"
 						}).then(function(result) {
 							if (result.value) {
 								location.reload(true);
 							}
-						}); 
+						});
 
 					}
 				},
@@ -89,11 +89,11 @@
 	function checkall(){
 		var checkall =$('#checkall').val();
 		var row =$('#row').val();
-		if(checkall == 0){ 
-			checkall =1; 
+		if(checkall == 0){
+			checkall =1;
 			$("#uns").text(0);
 			$("#sel").text(row-1);
-		}else{ 
+		}else{
 			checkall =0;
 			$("#uns").text(row-1);
 			$("#sel").text(0);
@@ -101,7 +101,7 @@
 		$('#checkall').val(checkall);
 		for(var j=1; j<row;j++){
 			if(checkall == 1){
-				$("#check_"+j).prop("checked", true);				
+				$("#check_"+j).prop("checked", true);
 			}else{
 				$("#check_"+j).prop("checked", false);
 			}
@@ -113,11 +113,11 @@
 		var checkall =$('#checked_'+val).val();
 		var uns = parseFloat($('#uns').text());
 		var sel = parseFloat($('#sel').text());
-		if(checkall == 0){ 
-			checkall =1; 
+		if(checkall == 0){
+			checkall =1;
 			$("#uns").text(uns-1);
 			$("#sel").text(sel+1);
-		}else{ 
+		}else{
 			checkall =0;
 			$("#uns").text(uns+1);
 			$("#sel").text(sel-1);
@@ -192,7 +192,7 @@
 					<?php $sutittle = array();$sutittle2 = array();
 						$i=0; foreach ($approval_data['data'] as $approval) {
 							$sutittle[$approval['table']] = $approval['description']; ?>
-						
+
 					<li class="kt-nav__item kt-margin-t-20 kt-margin-b-20 card-header" id="requisitions">
 						<div class="card-title collapsed" data-toggle="collapse" data-target="<?php echo '#'.$approval['table']; ?>" aria-expanded="true" aria-controls="<?php echo '#'.$approval['table']; ?>">
 							<span class="kt-nav__link-title"><?php echo  $approval['description']; ?></span>
@@ -202,9 +202,9 @@
 						</div>
 					</li>
 						<div class="collapse" aria-labelledby="<?php echo $approval['table']; ?>" data-parent="<?php echo '#'.$approval['table'] ?>" id="<?php echo $approval['table']; ?>">
-							<?php  foreach ($approval_data['status'][$approval['table']] as $status_progress) {  
+							<?php  foreach ($approval_data['status'][$approval['table']] as $status_progress) {
 								$sutittle2[$approval['table']][$status_progress['status_status_id']] = $status_progress['status_action_label']
-								?>							
+								?>
 								<li class="kt-nav__item">
 									<a href="index.php?option=COM_LIST_BULK_APPROVAL_TRANSACTIONS&transaction_type=<?php echo $approval['table']; ?>&status=<?php echo $status_progress['status_status_id']; ?>" class="kt-nav__link">
 										<i class="kt-nav__link-icon fa fa-genderless kt-font-warning"></i>
@@ -214,8 +214,8 @@
 									</a>
 								</li>
 							<?php } ?>
-							
-						</div>	
+
+						</div>
 					<?php $i++; } ?>
 				</ul>
 			</div>
@@ -289,7 +289,7 @@
 												<?php foreach($lists_status as $list_status){?>
 												 <button class="btn btn-label-success btn-upper btn-sm btn-bold" onclick="submitstatus(<?php echo "'".$transaction_type."'"; ?> , <?php echo "'".$list_status['status']."'"; ?>)" name="status" id="status" value="<?php echo $list_status['status']; ?>"><?php echo $list_status['action_label']; ?></button>
 												<?php } ?>
-												
+
 											</div>
 										</div>
 										<!-- <button type="button" class="btn btn-label-success btn-upper btn-sm btn-bold">new task</button> -->
@@ -328,14 +328,14 @@
 													else if($days < 7){ echo $days ." days ago"; }
 													else{ echo date('M d, Y',strtotime($list['request_date'])); }
 												 ?>
-												
+
 											</div>
 											<div class="kt-todo__sender" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="<?php echo $users[$list['originator']]['name']; ?>">
 												<?php if($users[$list['originator']]['photo'] != ''){ ?>
 												<span class="kt-media kt-media--sm kt-media--danger" style="background-image: url('uploads/all/<?php echo $users[$list['originator']]['photo']; ?>')">
 													<span></span>
 												</span>
-												<?php }else{ ?> 
+												<?php }else{ ?>
 													<span class="kt-media kt-media--sm kt-media--danger">
 														<span><?php echo strtoupper(substr($users[$list['originator']]['name'],0,1));?></span>
 													</span>
@@ -345,7 +345,7 @@
 										</div>
 									<?php $j++; } ?>
 										<input type="hidden" name="row" id="row" value="<?php echo $j; ?>">
-										
+
 									</div>
 								</div>
 								<!-- <div class="kt-todo__foot">

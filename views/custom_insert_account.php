@@ -46,7 +46,7 @@ if($_POST['submit1'] == 'Update'){
         if(!in_array($_POST['table_name'], (array)$originator_tab)){
              $checkurl.="&opex_cpex=".$_POST['opex_cpex']."&category_type=".$_POST['type'];
         }
-       // echo $checkurl; exit; 
+       // echo $checkurl; exit;
         $check_data = callAPI($checkurl);
         //echo $check_data; exit;
         //echo $checkurl; exit;
@@ -82,8 +82,8 @@ $stausresult = statusData($table_name);
 //print_r($stausresult); exit;
 $table2 = array(array('item_id'=>'0'));
 $copy = 0;
-$cusurl = API."?mode=gettabledetails&fid=company_id&rid=".$_SESSION['company_id']."&table=".TBL_USERS; 
-$cusresponse = callAPI($cusurl); 
+$cusurl = API."?mode=gettabledetails&fid=company_id&rid=".$_SESSION['company_id']."&table=".TBL_USERS;
+$cusresponse = callAPI($cusurl);
 $cusresponse = json_decode($cusresponse,1);
 /*echo $_SESSION['userid'];
 echo "<pre>";print_r($cusresponse);*/
@@ -97,25 +97,25 @@ foreach ($cusresponse as  $cust) {
     //echo "<pre>".$_SESSION['userid']."ravi"; print_r($cusdata); exit;
     $res = json_decode($response,1);
     $locurl = API."?mode=singlerowtabledata&table=".TBL_LOCATIONS."&fid=id&rid=".$cusdata['location_id'];
-    $locares = callAPI($locurl); 
+    $locares = callAPI($locurl);
     $locares = json_decode($locares,1);
     $location_state = $locares['location_state'];
     $table1['location_id'] =  $cusdata['location_id'];
     $table1['cost_center'] =  $cusdata['cost_center'];
-if(in_array($table_name, (array)$originator_table_withbill)){ 
+if(in_array($table_name, (array)$originator_table_withbill)){
     //echo $locares;
-    
+
     $table1['party_id'] = $_SESSION['userid'];
     $table1['party_name'] = $cusdata['first_name'].' '.$cusdata['middle_name'].' '.$cusdata['last_name'];
     $table1['party_email'] = $cusdata['user_email'];
     $table1['party_phone'] =  $cusdata['user_mobile'];
-    
+
     $table1['party_tax_number'] = $locares['tax_ref'];
     $table1['party_address'] = $locares['location_address'] ." ".$locares['location_city']." ".$locares['location_state']." ".$locares['location_post_code'];
     $table1['party_ship_adderss'] = $locares['location_address'] ." ".$locares['location_city']." ".$locares['location_state']." ".$locares['location_post_code'];
 } else{
-    $cusurl = API."?mode=gettabledetails&table=".TBL_VENDOR; 
-    $cusresponse = callAPI($cusurl); 
+    $cusurl = API."?mode=gettabledetails&table=".TBL_VENDOR;
+    $cusresponse = callAPI($cusurl);
     $cusresponse = json_decode($cusresponse,1);
 }
 $taxres =  toGetTaxrates();
@@ -138,7 +138,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $vdata1["field"] = "id,transaction_type,user_id,action_log,action_date,status_value";
         $vdata1['order'] = "id DESC";
         $vdata = urlencode(json_encode($vdata1));
-        $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_ACTION_LOG."&data=".$vdata; 
+        $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_ACTION_LOG."&data=".$vdata;
         $vdata_details = callAPI($vurl);
         $vdata_details = json_decode($vdata_details,1);
         //echo "<pre>"; print_r($vdata_details); exit;
@@ -147,7 +147,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $rtable = $rtable_name!='' ? $rtable_name : $table_name;
     $table2 = array(''); $i=0;
     $rpurl =  API."?mode=getInvoicesData&in_id=$rid&table=$rtable";
-    
+
     //echo $rpurl; exit;
     $rp_data = callAPI($rpurl);
     $rpres = json_decode($rp_data, 1);
@@ -163,7 +163,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     }
     //echo"<pre>"; print_r($taxes_ship); //exit;
     $dutax = array();
-    
+
     //echo"<pre>"; print_r($distax); exit;
     //echo $rtable;
     if($rtable_name != ''){
@@ -173,9 +173,9 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
        $table1['ref_no'] = $rpdata['transaction_number'];
        $table1['ref_date'] = $rpdata['transaction_date'];
        $table1['ref_type'] = $rtable_name;
-    }else{ 
+    }else{
        $table1['qo_number'] = $rpdata['transaction_number'];
-       $table1['qo_date'] =  $rpdata['transaction_date']; 
+       $table1['qo_date'] =  $rpdata['transaction_date'];
        $table1['ref_id'] = $rpdata['ref_id'] ;
        $table1['ref_no'] = $rpdata['ref_no'] ;
        $table1['ref_date'] = $rpdata['ref_date'];
@@ -195,7 +195,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $table1['originator'] = $rpdata['originator'];
     $table1['currency_id'] = $rpdata['currency_id'];
     $table1['cost_center'] = $rpdata['cost_center_id'];
-    $table1['currency_rate'] = $rpdata['currency_rate'];    
+    $table1['currency_rate'] = $rpdata['currency_rate'];
     $table1['payment_terms'] = $rpdata['payment_terms'];
     $table1['place_of_supply'] = $rpdata['place_of_supply'];
     $table1['sub_total'] = $rpdata['amount'];
@@ -221,16 +221,16 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
    // print_r($taxes);
     foreach($items as $item){
         $itemid[] = $item['item_id'];
-        $itemda['item_id']= $item['item_id']; 
-        $itemda['item_name']= $item['item_name'];       
+        $itemda['item_id']= $item['item_id'];
+        $itemda['item_name']= $item['item_name'];
         $itemda['description']= trim($item['description']);
         $itemda['uom']= $item['purchase_uom'];
-        $itemda['quantity']= $item['item_quantity']; 
-        $itemda['item_price']= $item['item_price']; 
+        $itemda['quantity']= $item['item_quantity'];
+        $itemda['item_price']= $item['item_price'];
         $itemda['tax_id']= $tax_array[$item['item_id']];
-        $itemda['tax_amount']= $item['tax_amount']; 
-        $itemda['total_amount']= $item['total_amount']; 
-        $itemda['purchase_account']= $item['account_code']; 
+        $itemda['tax_amount']= $item['tax_amount'];
+        $itemda['total_amount']= $item['total_amount'];
+        $itemda['purchase_account']= $item['account_code'];
         $itemda['req_date']= $item['req_date'];
         $account_code[] = $item['account_code'];
 
@@ -248,14 +248,14 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
 
         if($table_name == 'quotations' && $rtable_name !=''){
             $tax_val = $tax_array[$item['item_id']] !='' ?$tax_array[$item['item_id']] :0;
-            $itemda['quantity']= $item['pending_qty'];  
-            $itemda['tax_amount']= ($item['item_price'] * $item['pending_qty'])*($tax_val/100); 
+            $itemda['quantity']= $item['pending_qty'];
+            $itemda['tax_amount']= ($item['item_price'] * $item['pending_qty'])*($tax_val/100);
             $itemda['total_amount']=  $item['item_price'] * $item['pending_qty'];
             $subt_amount+=$item['item_price'] * $item['pending_qty'];
             $stax_amount+=($item['item_price'] * $item['pending_qty'])*($tax_val/100);
         }
-        $table2[$i] = $itemda; 
-        $i++;  
+        $table2[$i] = $itemda;
+        $i++;
     }
     if($subt_amount != ""){
         $table1['sub_total'] = $subt_amount;
@@ -273,7 +273,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     //echo "<pre>";print_r($item_ids);exit;
     $acode['account_code']=$account_code;
     $acode['cost_center_id']=$table1['cost_center'];
-    $acode['company_id']=$_SESSION['company_id']; 
+    $acode['company_id']=$_SESSION['company_id'];
     $acode['fiscal_year']=$table1['qo_date'];
     //echo "<pre>"; print_r($acode); exit;
     $acurl = API."?mode=budgetcheckreftadledata&method=post";
@@ -291,19 +291,19 @@ foreach ($taxes_ship as  $taxvalue) {
          $distax[$taxvalue['tax_id']] ['debit_amount'] =  $distax[$taxvalue['tax_id']] ['debit_amount'] + 0;
      }else{
         $distax[$taxvalue['tax_id']] ['credit_amount'] = $distax[$taxvalue['tax_id']] ['credit_amount'] + 0;
-        $distax[$taxvalue['tax_id']] ['debit_amount'] =  $distax[$taxvalue['tax_id']] ['debit_amount'] + $taxvalue['tax_amount'];  
+        $distax[$taxvalue['tax_id']] ['debit_amount'] =  $distax[$taxvalue['tax_id']] ['debit_amount'] + $taxvalue['tax_amount'];
      }
 }
 //echo "<pre>";print_r($taxes_ship); exit;
 $typeurl = API."?mode=getplaceofsuppl";
-$typeresponse = callAPI($typeurl);   
+$typeresponse = callAPI($typeurl);
 $posresponse = json_decode($typeresponse,1);
 $data1["field"] = "id,item_name,item_description,purchase_price,purchase_uom,tracking_type";
 $data = urlencode(json_encode($data1));
 
 
 $typeurl = API."?mode=gettabledetails&fid=genc_code&rid=PAYMETERM&table=".TBL_GENRAL_CODE_DETAILS;
-$typeresponsept = callAPI($typeurl);   
+$typeresponsept = callAPI($typeurl);
 $posresponsept = json_decode($typeresponsept,1);
 
 $uomurl =  API."?mode=gettabledetails&fid=genc_code&rid=UOM&table=".TBL_GENRAL_CODE_DETAILS;
@@ -325,7 +325,7 @@ $departmentslist = json_decode($departmentslist,1);
 
 $crdata["field"] = "id,currency_list";
 $crdata = urlencode(json_encode($crdata));
-$crurl = API."?mode=gettabledetailswithconditions&table=".TBL_CURRENCIES."&data=".$crdata; 
+$crurl = API."?mode=gettabledetailswithconditions&table=".TBL_CURRENCIES."&data=".$crdata;
 //echo $crurl; exit;
 $cr_data = callAPI($crurl);
 $cr_data = json_decode($cr_data, 1);
@@ -335,7 +335,7 @@ $_SESSION['transaction_id'] = $rid;
 $_SESSION['file_add'][$table_name][$rid]= array();
 
     $costcenterurl = API."?mode=gettabledetails&table=".TBL_COST_CENTERS;
-    
+
     //print_r($table1); exit;
     $cost = callAPI($costcenterurl);
     $cost = json_decode($cost,1);
@@ -371,10 +371,10 @@ $petty_cash_style = "";
 if($table_name == 'petty_cash' || $table_name == 'bills') {
     $petty_cash_style = "style='display:none;'";
 }
-if(in_array($table_name, (array)$stock_table)){ 
+if(in_array($table_name, (array)$stock_table)){
     $locations_url = API."?mode=gettabledetails&table=".TBL_LOCATIONS;
     $locations_data = callAPI($locations_url);
-    $locations_data = json_decode($locations_data, 1); 
+    $locations_data = json_decode($locations_data, 1);
    // print_r($locations_data);
 }
 
@@ -383,16 +383,16 @@ $small_sub = 111;
 
 ?>
 <style type="text/css">
-    input[type="text"]::placeholder {  
-                text-align: center; 
-            } 
+    input[type="text"]::placeholder {
+                text-align: center;
+            }
     .amount {
         text-align: right;
     }
     .thheader {
         text-align: center;
     }
-    
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha384-E7gp+UYBLS2XewcxoJbfi0UpGMHSvt9XyI9bH4YIw5GDGW8AlC+2J7bVBBlMFC6p" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha384-pPttEvTHTuUJ9L2kCoMnNqCRcaMPMVMsWVO+RLaaaYDmfSP5//dP6eKRusbPcqhZ" crossorigin="anonymous"></script>
@@ -406,14 +406,14 @@ function duedate(){
     //alert(date);
     var newdate = new Date(date);
     //alert(newdate);
-    newdate.setDate(newdate.getDate() + parseInt(payment_terms));       
+    newdate.setDate(newdate.getDate() + parseInt(payment_terms));
     var dd = newdate.getDate();
     var mm = newdate.getMonth() + 1;
     var y = newdate.getFullYear();
     var due = mm + '/' + dd + '/' + y;
     //alert(someFormattedDate);
     $('#due_date').val(due);
-    
+
 }
 function removefile(val){
     //alert(val);
@@ -441,16 +441,16 @@ function removefile(val){
              document.getElementById('exchange').style.display = "block";
              exchangerate();
             }else{
-                swal.fire({              
-                            title: "6010 : <?php echo __('Please Define Exchange Rate'); ?>",                            
-                            type: "warning",           
+                swal.fire({
+                            title: "6010 : <?php echo __('Please Define Exchange Rate'); ?>",
+                            type: "warning",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('OK'); ?>",    
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('OK'); ?>",
                             confirmButtonClass: "btn btn-danger"
                         })
-            }  
-             //id="" onchange="exchangerate()" 
-            
+            }
+             //id="" onchange="exchangerate()"
+
         },
         error:function (){}
     });
@@ -460,16 +460,16 @@ function removefile(val){
         window.location.href = 'index.php?option='+url_option+'&Rid='+id+'&table='+table;
     }
     function validateForm(){
-        var res = 'Y';   
+        var res = 'Y';
         var csub = $('#subtotal_credit').val();
         var dsub = $('#subtotal_debit').val();
         var cgrand = $('#grandtotal_credit').val();
-        var dgrand = $('#grandtotal_debit').val(); 
+        var dgrand = $('#grandtotal_debit').val();
         alert("csub"+csub+"dsub"+dsub+"ctax"+ctax+"dtax"+dtax+"cgrand"+cgrand+"grand"+dgrand);
         alert("Hi");
         if(csub != dsub){
             alert("Debit amont Credit amount is not equal");
-            return false; 
+            return false;
         }
         var ctax = cgrand-csub; var dtax = dgrand-dsub;
         if(ctax != dtax){
@@ -552,7 +552,7 @@ function removefile(val){
         });
         }
     }
-   
+
     function invoicePrefixchange(val){
        // alert(val);
     }
@@ -562,17 +562,17 @@ function removefile(val){
         //alert(ord);
     }
    $(document).ready(function(){
-    $(document).on('click', '#checkAll', function() {           
+    $(document).on('click', '#checkAll', function() {
         $(".itemRow").prop("checked", this.checked);
-    }); 
+    });
     $(document).on('click', '.itemRow', function() {
         if ($('.itemRow:checked').length == $('.itemRow').length) {
             $('#checkAll').prop('checked', true);
         } else {
             $('#checkAll').prop('checked', false);
         }
-    });  
-    
+    });
+
     $(document).on('click', '#removeRows', function(){
 
         $(".itemRow:checked").each(function() {
@@ -589,20 +589,20 @@ function removefile(val){
         var ids = $('#price_'+id).val();
 
         });
-        
+
     });*/
     $(document).on('blur', "[id^=quantity_]", function(){
         //quantityCheck();
         calculateTotal();
-        
-    }); 
+
+    });
     $(document).on('blur', "[id^=price_]", function(){
         calculateTotal();
     });
     $(document).on('change', "[id^=tax_]", function(){
         calculateTotal();
-    });     
-    /*$(document).on('blur', "#taxRate", function(){        
+    });
+    /*$(document).on('blur', "#taxRate", function(){
         calculateTotal();
     });*/
     $(document).on('blur', "#disValue", function(){
@@ -614,8 +614,8 @@ function removefile(val){
             calculateTotal();
     });
     $(document).on('blur', "#amountPaid", function(){
-        amountpaid();   
-    }); 
+        amountpaid();
+    });
     $(document).on('click', '.deleteInvoice', function(){
         var id = $(this).attr("id");
         if(confirm("Are you sure you want to remove this?")){
@@ -623,7 +623,7 @@ function removefile(val){
                 url:"action.php",
                 method:"POST",
                 dataType: "json",
-                data:{id:id, action:'delete_invoice'},              
+                data:{id:id, action:'delete_invoice'},
                 success:function(response) {
                     if(response.status == 1) {
                         $('#'+id).closest("tr").remove();
@@ -634,12 +634,12 @@ function removefile(val){
             return false;
         }
     });
-}); 
+});
 function exchangerate(){
     calculateTotal();
 }
 function calculateTotal(){
-    var totalAmount = 0; 
+    var totalAmount = 0;
     var totaltaxrate = 0;
     var subamount = 0;
     var formatter = new Intl.NumberFormat('en-IN', {
@@ -662,9 +662,9 @@ function calculateTotal(){
         $('#amount_'+id).val(amount);
         var aval_budget = $('#purchase_account_aval_'+id).val();
         if(aval_budget < amount){
-                $('#dis_amount_'+id).css('color', '#f00'); 
+                $('#dis_amount_'+id).css('color', '#f00');
         }else{
-             $('#dis_amount_'+id).css('color', '#000'); 
+             $('#dis_amount_'+id).css('color', '#000');
         }
         $('#dis_amount_'+id).val(formatter.format(amount));
         var ptaxRate = 0;
@@ -677,27 +677,27 @@ function calculateTotal(){
             //console.log("tax:"+tax+"tax_cal"+tax_cal);
             var tax_cal1 = tax/tax_cal;
             //console.log("taxcal:"+tax_cal1);
-            ptaxRate = tax_cal1*amount; 
+            ptaxRate = tax_cal1*amount;
            // console.log("Ravi1"+ptaxRate);
         }
         $('#ptax_amount_'+id).val(ptaxRate);
-        $('#p_amount_'+id).val(amount); 
-        
-        $('#dis_ptax_amount_'+id).val(formatter.format(ptaxRate)); 
+        $('#p_amount_'+id).val(amount);
+
+        $('#dis_ptax_amount_'+id).val(formatter.format(ptaxRate));
         console.log('amount'+amount +'tax'+ptaxRate);
         var total = ptaxRate+amount;
 
          //console.log('ptaxRate'+  ptaxRate +':amount'+amount+'sub'+total);
         //$('#total_'+id).val(parseFloat(total));
         subamount += amount ;
-        totalAmount += total;           
+        totalAmount += total;
         totaltaxrate += ptaxRate;
     });
-    $('#subTotal').val(parseFloat(subamount).toFixed(2)); 
-    $('#dis_subTotal').val(formatter.format(subamount)); 
+    $('#subTotal').val(parseFloat(subamount).toFixed(2));
+    $('#dis_subTotal').val(formatter.format(subamount));
     var taxRate = $("#taxRate").val();
-    var subTotal = $('#subTotal').val();    
-   // console.log( 'tax'+  totaltaxrate +':grand'+totalAmount+'sub'+subamount ); 
+    var subTotal = $('#subTotal').val();
+   // console.log( 'tax'+  totaltaxrate +':grand'+totalAmount+'sub'+subamount );
    displaytaxes();
     if(subTotal) {
         //var taxAmount = subTotal*taxRate/100;
@@ -719,8 +719,8 @@ function calculateTotal(){
         var div_amount_total = $('#div_amount_total').val();
         var table_name = $('#table_name').val();
         if(disType && disValue) {
-            //discounts(); 
-            if(disType && disValue) {      
+            //discounts();
+            if(disType && disValue) {
 
                 var disValue1 = 0; var disValue2 = 0;
                 if(disType=='P'){
@@ -738,8 +738,8 @@ function calculateTotal(){
                 $('#dis_discount').val(formatter.format(disValue1));
                 $('#dis_grandtotal').val(formatter.format(grandtotal));
                 //amountpaid();
-            } 
-        }  
+            }
+        }
         var shipping_amount = $('#shipping_amount').val();
         console.log('123'+grandtotal+"&&&&"+shipping_amount+'&&&&&'+shipping_tax_amount);
         if(shipping_amount != '' && shipping_tax_amount !='0'){
@@ -761,22 +761,22 @@ function calculateTotal(){
         $('#grandtotal').val(grandtotal);
         //$('#dis_grandtotal').val(Intl.NumberFormat().format(grandtotal));
         $('#dis_grandtotal').val(formatter.format(grandtotal));
-         
-         //changeexchange();  
-              
-       // amountpaid(); 
+
+         //changeexchange();
+
+       // amountpaid();
     }
  }
 /* function discounts1(){
-    if(disType && disValue && totalAftertax) {      
+    if(disType && disValue && totalAftertax) {
         var disValue1 = 0;
         if(disType=='P'){
             disValue1 = (disValue/100)*totalAftertax;
         }else if(disType=='A'){
             disValue1 = disValue;
         }
-        var subTotal = $('#subTotal').val(); 
-        for(var i=1; i< count+1; i++) { 
+        var subTotal = $('#subTotal').val();
+        for(var i=1; i< count+1; i++) {
             var id = i;
             var tax = $('#tax_'+id).val();
             //var tax_amount = $('#ptax_amount_'+id).val();
@@ -796,7 +796,7 @@ function calculateTotal(){
     var check_arr = [];
     var arr2 = [];
     //console.log(old_state+"sjjs"+change_state);
-    for(var i=1; i< count+1; i++) { 
+    for(var i=1; i< count+1; i++) {
         //console.log("1");
         var id = i;
         //var tax = $('#tax_'+id).val();
@@ -825,19 +825,19 @@ function calculateTotal(){
                 }*/
                 ptaxRate = tax_cal1*amount;
                 //ptaxRate =(parseFloat(tax)/(100+tax))*amount;
-                //ptaxRate =((parseFloat(tax)/(100+inclusive_tax)))*amount; 
+                //ptaxRate =((parseFloat(tax)/(100+inclusive_tax)))*amount;
                 //console.log("Ravi2"+ptaxRate);
             }
             $('#ptax_amount_'+id).val(ptaxRate);
             $('#p_amount_'+id).val(amount);
             $('#pdiscount_amount_'+id).val(ptaxRate);
-            var tax_amount = ptaxRate; 
+            var tax_amount = ptaxRate;
         }else{
             var tax_amount = $('#ptax_amount_'+id).val();
             tax_amount = parseFloat(tax_amount);
             div_amount_total=+amount;
         }
-        
+
         if(taxtype == 'I'){
             amount = parseFloat(amount)-parseFloat(tax_amount);
             amount = parseFloat(amount).toFixed(2);
@@ -846,7 +846,7 @@ function calculateTotal(){
             console.log("RAVi");
             if(check_arr.indexOf(tax)!=-1){
                 console.log("RAVi123");
-               
+
                 for(j=0; j< arr2.length ; j++){
                    // console.log("RAVi789");
                    // console.log(JSON.stringify(arr2[j]));
@@ -856,7 +856,7 @@ function calculateTotal(){
                         arr2[j]['amount'] =  parseFloat(arr2[j]['amount']) + parseFloat(amount);
                         arr2[j]['tax_amount'] =  parseFloat(arr2[j]['tax_amount']) + parseFloat(tax_amount);
                         break;
-                   }     
+                   }
                 }
             }else{
                 var  arr = {};
@@ -868,9 +868,9 @@ function calculateTotal(){
                 arr2.push(arr);
             }
         }
-       
+
     }
-    
+
      $('#div_amount_total').val(div_amount_total);
     var shipping_tax = $('#shipping_tax').val();
     var shipping_amount = $('#shipping_amount').val();
@@ -884,7 +884,7 @@ function calculateTotal(){
                         arr2[j]['amount'] =  parseFloat(arr2[j]['amount']) + parseFloat(shipping_amount);
                         arr2[j]['tax_amount'] =  parseFloat(arr2[j]['tax_amount']) + parseFloat(sss);
                         break;
-                   }     
+                   }
                 }
         }else{
             var  arr = {};
@@ -901,7 +901,7 @@ function calculateTotal(){
     }
     var totaltax = 0;
     for( var k =0 ; k < arr2.length; k++){
-            
+
             if(old_state != change_state){
                 str+= "<tr><td style='width: 67%;text-align:right;'> IGST @ "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
                 str+= "<td>  <input  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"'' aria-label="Input"> </td></tr>";
@@ -936,10 +936,10 @@ function calculateTotal(){
     var totalAftertax = $('#subTotal').val();
     var gdam = $('#gdam').val();
     var div_amount_total = $('#div_amount_total').val();
-    console.log(totalAftertax);  
+    console.log(totalAftertax);
     totalAftertax =  parseFloat(totalAftertax);
     console.log(totalAftertax);
-    if(disType && disValue && totalAftertax) {      
+    if(disType && disValue && totalAftertax) {
             var disValue1 = 0; var disValue2 = 0;
             if(disType=='P'){
                 disValue1 = (disValue/100)*totalAftertax;
@@ -954,7 +954,7 @@ function calculateTotal(){
             $('#dis_grandtotal').val(formatter.format(totalAftertax));
             $('#grandtotal').val(parseFloat(totalAftertax).toFixed(2));
             //amountpaid();
-    } 
+    }
  }
  function changeexchange(){
      var formatter = new Intl.NumberFormat('en-IN', {
@@ -978,13 +978,13 @@ function calculateTotal(){
  }
  function amountpaid(){
     var amountPaid = $('#amountPaid').val();
-        var totalAftertax = $('#grandtotal').val(); 
+        var totalAftertax = $('#grandtotal').val();
         if(amountPaid && totalAftertax) {
-            totalAftertax = totalAftertax-amountPaid;           
+            totalAftertax = totalAftertax-amountPaid;
             $('#amountDue').val(totalAftertax);
         } else {
             $('#amountDue').val(totalAftertax);
-        }   
+        }
  }
  function quantityCheckold(fid){
     var table_name = $('#table_name').val();
@@ -997,19 +997,19 @@ function calculateTotal(){
     //alert(quantity+'|||||'+quantity_old);
     if (parseFloat(quantity_old) < parseFloat(quantity)){
         //alert('data');
-        swal.fire({              
-            title: "<?php echo __('Quantity alert'); ?> ",              
-            text: "6030 : <?php echo __('Quantity cannot be more than'); ?> "+quantity_old,              
-            type: "warning",           
+        swal.fire({
+            title: "<?php echo __('Quantity alert'); ?> ",
+            text: "6030 : <?php echo __('Quantity cannot be more than'); ?> "+quantity_old,
+            type: "warning",
             buttonsStyling: false,
-            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('OK'); ?>",    
-            confirmButtonClass: "btn btn-danger",   
+            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('OK'); ?>",
+            confirmButtonClass: "btn btn-danger",
         }).then(function(result) {
-            
+
                 $('#quantity_'+id).val(quantity_old);
-               
+
                 calculateTotal();
-        });                             
+        });
     }
     }
 
@@ -1030,24 +1030,24 @@ function calculateTotal(){
                     console.log(data);
                     console.log(quantity);
                     if (parseFloat(data) < quantity){
-                        swal.fire({              
-                            title: "<?php echo __('Quantity on hand'); ?> "+parseFloat(data),              
+                        swal.fire({
+                            title: "<?php echo __('Quantity on hand'); ?> "+parseFloat(data),
                             text: "6020 : <?php echo __('Do you want to change the quantity to'); ?> "+parseFloat(data)+" ?",
-              
-                            type: "warning",           
+
+                            type: "warning",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, change!'); ?>",    
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, change!'); ?>",
                             confirmButtonClass: "btn btn-danger",
-                            showCancelButton: true,     
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, proceed'); ?>",      
-                            cancelButtonClass: "btn btn-default"        
+                            showCancelButton: true,
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, proceed'); ?>",
+                            cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {
                                 $('#quantity_'+id).val(parseFloat(data));
                                 /*document.getElementById('quantity_1').focus();*/
                                 calculateTotal();
                             }
-                        });                             
+                        });
                     }
                 },
                 error:function (){}
@@ -1069,7 +1069,7 @@ function calculateTotal(){
         var val_sub = "234";
     if(val2 == 2){
         //alert("shankar");
-        
+
         console.log('table:'+table_name+'field:'+x+'tranid:'+tranid);
        // alert("hai quotations");
         jQuery.ajax({
@@ -1081,7 +1081,7 @@ function calculateTotal(){
                 $('#kt_modal_KTDatatable_remote').modal({ show: true});
                 $("#kt_modal_KTDatatable_remote").on("hidden.bs.modal", function () {
                    submit();
-                });  
+                });
             },
             error:function (){}
         });
@@ -1096,7 +1096,7 @@ function calculateTotal(){
                 $('#kt_modal_KTDatatable_remote').modal({ show: true});
                 $("#kt_modal_KTDatatable_remote").on("hidden.bs.modal", function () {
                    submit();
-                });           
+                });
              },
             error:function (){}
         });
@@ -1116,9 +1116,9 @@ function calculateTotal(){
         });
 
     }else{
-        submit(); 
+        submit();
     }
-      
+
      //alert("man");
     // document.getElementById("form_id").submit();
         //submit('22');
@@ -1156,11 +1156,11 @@ function calculateTotal(){
      <?php if($rid != "" && $copy == 1){?>
         <a target="_blank" href="index.php?option=COM_QO_PRINT&rid=<?php echo $rid; ?>&table=<?php echo $table_name; ?>&title=<?php echo urlencode($title); ?>" class="btn btn-clean kt-margin-r-10">
                 <i class="flaticon2-print"></i>
-                
+
          </a>
          <?php //$table1['originator'] =1;
-            $nmm= ViewStatusValue($table1['current_status']); 
-            $lists = toGetStatusProgressAction($table_name, $table1['current_status']); 
+            $nmm= ViewStatusValue($table1['current_status']);
+            $lists = toGetStatusProgressAction($table_name, $table1['current_status']);
             $lists1 = $lists;
             //print_r($lists); exit;
               $appruser_list_data = togetaprovaluserlist($table_name, $rid);
@@ -1171,7 +1171,7 @@ function calculateTotal(){
             if($_SESSION['userid'] != $table1['originator']){
                 //echo "ravi"; exit;
                 $small_sub = 0;
-               
+
                // print_r($appruser_list_data); exit;
                 if(!in_array($_SESSION['userid'], (array)$appruser_list)){
                     $lists = array();
@@ -1180,15 +1180,15 @@ function calculateTotal(){
                    $aptlv = $appruser_data[$_SESSION['userid']]['response_type'];
                     if( $aptlv !=0){
                         $sss =  ViewStatusValue($aptlv);
-                       
+
                         $nmm['name'] = $sss['name'];
                         $lists = array();
                         $small_sub = 2;
                          $commentss[] = $appruser_data[$_SESSION['userid']];
                     }
-                   
+
                 }
-            }else{ 
+            }else{
                 //echo "man"; exit;
                  //$commentss[] = $appruser_data[$_SESSION['userid']];
                 $commentss = $appruser_data;
@@ -1208,8 +1208,8 @@ function calculateTotal(){
             <?php if(count((array)$lists)>0){ ?>
             <div class="dropdown-menu">
 
-                <?php foreach ($lists as $list) {  
-                    if($list['status'] == ST_QUOTATION_GENERATED ){ ?> 
+                <?php foreach ($lists as $list) {
+                    if($list['status'] == ST_QUOTATION_GENERATED ){ ?>
                     <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'2')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?> </div>
                 <?php }elseif( $list['status'] ==  ST_PURCHASE_ORDER_GENRATED || $list['status'] == ST_INVOICE_GENERATED){ ?>
                     <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'3')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?></div>
@@ -1219,13 +1219,13 @@ function calculateTotal(){
                     <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'4')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?></div>
 
             <?php } }?>
-                <!-- <a class="dropdown-item" href="#">Invoice</a> --> 
+                <!-- <a class="dropdown-item" href="#">Invoice</a> -->
             </div>
            <?php  } ?>
         </div>
        <!--  <div class="btn-group" style="padding: 15px;">
             <select class="form-control kt-select2" id="status" name="status" aria-label="Status">
-                <?php foreach ($lists as $list) {  ?> 
+                <?php foreach ($lists as $list) {  ?>
                     <option  value="<?php echo $selectvalue['name_value']; ?>"><?php echo $list['action_label']; ?></option>
                 <?php  } ?>
             </select>
@@ -1243,8 +1243,8 @@ function calculateTotal(){
 
 <!--begin::Page frist part-->
 <div class="kt-portlet__body">
-<div class="form-group row">    
-<?php 
+<div class="form-group row">
+<?php
 //if($table1['qo_number'] !=''){
    $tran_no =  $table1['qo_number'];
 //}
@@ -1255,30 +1255,30 @@ function calculateTotal(){
         <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValueEmployee(this.value)" aria-label="Party Id">
             <option value="0"> <?php echo __('Select Any EMployee'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
-            <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['first_name']," ".$cus['middle_name']."".$cus['last_name']; ?> 
+            <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['first_name']," ".$cus['middle_name']."".$cus['last_name']; ?>
             </option>
             <?php } ?>
         </select>
     </div>
-<?php } elseif(in_array($table_name, (array)$stock_table)){ ?> 
+<?php } elseif(in_array($table_name, (array)$stock_table)){ ?>
     <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Location'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="transfer_location_id" name= "transfer_location_id" aria-label="Transfer Location Id">
             <option value="0"> <?php echo __('Select Any Location'); ?> </option>
             <?php foreach ($locations_data as $locatdata) {  ?>
-            <option  <?php if($table1['transfer_location_id'] == $locatdata['id']){ ?> selected  <?php } ?> value = <?php echo $locatdata['id'] ?>   >      <?php echo $locatdata['location_description']; ?> 
+            <option  <?php if($table1['transfer_location_id'] == $locatdata['id']){ ?> selected  <?php } ?> value = <?php echo $locatdata['id'] ?>   >      <?php echo $locatdata['location_description']; ?>
             </option>
         <?php } ?>
         </select>
-    </div>    
+    </div>
 
-<?php }else{ ?> 
+<?php }else{ ?>
     <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Vendor'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
         <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValue(this.value)" aria-label="Party Id">
             <option value="0"> <?php echo __('Select Any Vendor'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
-            <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?> 
+            <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?>
             </option>
         <?php } ?>
         </select>
@@ -1298,7 +1298,7 @@ function calculateTotal(){
             <option value="0"> <?php echo __('Select any'); ?>  </option>
             <?php foreach ($costs as  $k1 =>$pos) {  ?>
                 <optgroup label="<?php echo $k1; ?>">
-                
+
                 <?php foreach ($pos as $k2=> $pos1) {  ?>
                 <option  <?php if($table1['cost_center'] == $k2){ ?> selected  <?php } ?>  value ="<?php echo $k2; ?>"> <?php echo $pos1; ?> </option>
             <?php } ?>
@@ -1341,7 +1341,7 @@ function calculateTotal(){
     </div>
 </div>
 <div class="form-group row">
-<?php if($table_name != 'petty_cash'){ 
+<?php if($table_name != 'petty_cash'){
         if($table_name != 'bills'){
     ?>
 <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Category'); ?>:</span>
@@ -1373,7 +1373,7 @@ function calculateTotal(){
 <div class="form-group row"  <?php echo $petty_cash_style; ?>>
     <div class="col-md-6 col-12 mrgn-btm">
         <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
-            
+
             <div class="card">
                 <div class="card-header" id="headingTwo6">
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo6" aria-expanded="false" aria-controls="collapseTwo6">
@@ -1404,7 +1404,7 @@ function calculateTotal(){
                                     </div>
                                 </div>
                             </div>
-                                
+
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Email Address'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
@@ -1421,12 +1421,12 @@ function calculateTotal(){
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
    <div class="col-md-6 col-12 mrgn-btm-2" >
         <div class="accordion accordion-solid accordion-toggle-plus" id="accordionTax">
-            
+
             <div class="card">
                 <div class="card-header" id="headingTax">
                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTax" aria-expanded="false" aria-controls="collapseTax">
@@ -1435,7 +1435,7 @@ function calculateTotal(){
                     <input type="hidden" name="location_id" value="<?php echo $table1['location_id']; ?>">
                 </div>
                 <div id="collapseTax" class="collapse" aria-labelledby="headingTax" data-parent="#accordionTax">
-                    <div class="card-body">                                 
+                    <div class="card-body">
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Tax Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
@@ -1451,7 +1451,7 @@ function calculateTotal(){
                                             <option   <?php if($table1['payment_terms'] == $pos['genc_detail_code']){ ?>selected <?php } ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo $pos['genc_detail_name']; ?> </option>
                                         <?php } ?>
                                     </select>
-                                    <?php 
+                                    <?php
                                     $originator = $table1['originator'] !="" ? $table1['originator']  : $_SESSION['userid']; ?>
                                     <input type="hidden" name="originator" value="<?php echo $originator;  ?>">
                                 </div>
@@ -1483,7 +1483,7 @@ function calculateTotal(){
                                 <input type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly / aria-label="Due Date">
                             </div>
                             </div>
-                            <?php if(!in_array($table_name, (array)$originator_table_withbill)){ 
+                            <?php if(!in_array($table_name, (array)$originator_table_withbill)){
                                   $req_list = toGetPendingRequisitionQty($rtable_name);?>
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Number'); ?></span>
@@ -1505,14 +1505,14 @@ function calculateTotal(){
                                     <div class="kt-input-icon kt-input-icon--right" >
                                         <input type='text' class="form-control" readonly id="ref_date"  name="ref_date"  value="<?php echo $table1['ref_date']; ?>"/ aria-label="Ref Date">
                                         <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-calendar"></i></span></span>
-                                    </div>   
+                                    </div>
                                 </div>
                             </div>
-                            <?php } if($table_name == 'bills'){?>       
+                            <?php } if($table_name == 'bills'){?>
                              <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                    
+
                                     <input type='text' class="form-control"  name="doc_ref_no"  value="<?php echo $table1['doc_ref_no']; ?>"/ aria-label="Doc Ref No">
                                 </div>
 
@@ -1523,17 +1523,17 @@ function calculateTotal(){
                                     <div class="kt-input-icon kt-input-icon--right" >
                                         <input type='text' class="form-control"  id="kt_datepicker_32"  name="doc_ref_date"  value="<?php echo $table1['doc_ref_date']; ?>"/ aria-label="Doc Ref Date">
                                         <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-calendar"></i></span></span>
-                                    </div>   
+                                    </div>
                                 </div>
-                            </div> 
-                            <?php } ?>                          
+                            </div>
+                            <?php } ?>
                     </div>
                 </div>
             </div>
-            
+
         </div>
-    </div>  
-</div>  
+    </div>
+</div>
 
 <!--End::Page frist part-->
 
@@ -1556,7 +1556,7 @@ function calculateTotal(){
 <div class="col-lg-12">
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<?php  
+<?php
     include_once('account_table.php');
 ?>
 </div>
@@ -1589,13 +1589,13 @@ function calculateTotal(){
                      <button id="kt_llogin_signup_submit"  class="btn btn-brand" >Submit1</button>
             </div>
         <?php }  ?>
-    
-         
-      
-    
-            
+
+
+
+
+
 <?php if(count((array)$commentss) > 0){ ?>
-<div class="col-lg-12" style="margin-top: 10px;clear:both;">  
+<div class="col-lg-12" style="margin-top: 10px;clear:both;">
     <div class="accordion accordion-light  accordion-toggle-arrow" id="accordionComments">
         <div class="card">
             <div class="card-header" id="headingTwo21">
@@ -1607,7 +1607,7 @@ function calculateTotal(){
                 <div class="card-body">
                     <div class="kt-timeline-v2">
                         <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
-                            <?php 
+                            <?php
                             $stausresult = ViewStatusData();
                             foreach ($commentss as  $lists) { //print_r($lists); ?>
                             <div class="kt-timeline-v2__item">
@@ -1624,8 +1624,8 @@ function calculateTotal(){
                                     <b> <?php echo date("M d, Y g:i A", strtotime($list_date)); ?></b>
                                     <?php echo " ".$_SESSION['users'][$lists['user_id']]." with Status "; ?><span style="color: <?php echo "#".$stausresult[$lists['response_type']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$lists['response_type']]['background_color']); ?>;" class="kt-badge  kt-badge--inline kt-badge--pill"><?php if($lists['response_type'] == 0){ echo "Yet to respond"; }else{ echo $stausresult[$lists['response_type']]['name']; }?></span>
                                    <?php echo "</br>".$lists['comments']; ?>
-                                    
-                                    
+
+
                                 </div>
                             </div>
                             <?php  } ?>
@@ -1671,16 +1671,16 @@ function calculateTotal(){
                             <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
                             <td>  <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount" aria-label="Tax Amount">            </td>
                         </tr>
-                    <?php } else{?> 
-                        
+                    <?php } else{?>
+
                         <tr><td style='text-align:right;'> IGST @ <?php echo $takey; ?>% </td>
-                            <td  width='18%'> 
-                             <input  type='text' class='form-control amount'   readonly  value="<?php echo $ktax['debit_amount']; ?>" aria-label="Input"> 
+                            <td  width='18%'>
+                             <input  type='text' class='form-control amount'   readonly  value="<?php echo $ktax['debit_amount']; ?>" aria-label="Input">
                          </td>
                          <td  width='18%'>
-                           <input  type='text' class='form-control amount' readonly  value="<?php echo $ktax['credit_amount']; ?>" aria-label="Input"> 
+                           <input  type='text' class='form-control amount' readonly  value="<?php echo $ktax['credit_amount']; ?>" aria-label="Input">
                        </td></tr>
-                            
+
                     <?php }?>
                         <?php } } ?>
                     </tbody>
@@ -1695,7 +1695,7 @@ function calculateTotal(){
             <td><input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal_debit" id="dis_grandtotal_debit" readonly placeholder="<?php echo __('Grand Total'); ?>" aria-label="<?php echo __('Grand Total'); ?>"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal_debit" id="grandtotal_debit" readonly placeholder="<?php echo __('Grand Total'); ?>"></td>
             <td><input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal_credit" id="dis_grandtotal_credit" readonly placeholder="<?php echo __('Grand Total'); ?>" aria-label="<?php echo __('Grand Total'); ?>"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal_credit" id="grandtotal_credit" readonly placeholder="<?php echo __('Grand Total'); ?>"></td>
         </tr>
-        
+
         </tr>
     </table>
 </div>
@@ -1713,26 +1713,26 @@ function calculateTotal(){
         <div class="dropzone dropzone-default dropzone-brand" id="kt_dropzone_2" >
 
 <?php if(count((array)$files)>0){  $n=1; foreach ($files as $file_value) { ?>
-<div class="dz-preview dz-processing dz-image-preview dz-success dz-complete" id="removefile_<?php echo $file_value['id']; ?>">  
+<div class="dz-preview dz-processing dz-image-preview dz-success dz-complete" id="removefile_<?php echo $file_value['id']; ?>">
     <div class="dz-image">
         <img data-dz-thumbnail="" alt="<?php echo $file_value['actual_file_name']; ?>" src="uploads/121/files/<?php echo $file_value['file_name']; ?>" style="height: 120px;background-color: #ccc;">
-    </div>  
-    <div class="dz-details">  
+    </div>
+    <div class="dz-details">
         <div class="dz-size">
             <span data-dz-size="">
                 <strong><?php echo $file_value['file_size_mb']; ?></strong> MB
             </span>
-        </div>    
+        </div>
         <div class="dz-filename">
             <span data-dz-name=""><?php echo $file_value['actual_file_name']; ?></span>
-        </div>  
-    </div>  
+        </div>
+    </div>
     <div class="dz-progress">
         <span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span>
-    </div>  
-    <div class="dz-error-message"><span data-dz-errormessage=""></span></div> 
-    <div class="dz-success-mark">    
-        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Check</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>      </g>    </svg>  </div>  <div class="dz-error-mark">    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Error</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">          <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>        </g>      </g>    </svg> 
+    </div>
+    <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
+    <div class="dz-success-mark">
+        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Check</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>      </g>    </svg>  </div>  <div class="dz-error-mark">    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Error</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">          <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>        </g>      </g>    </svg>
     </div>
     <a class="dz-remove" href="javascript:undefined;" data-dz-remove="" onclick="removefile(<?php echo $file_value['id']; ?>)"><?php echo __('Remove'); ?></a>
     <a class="dz-remove" target="_blank" href="uploads/121/files/<?php echo $file_value['file_name']; ?>" ><?php echo __('Download'); ?></a>
@@ -1741,7 +1741,7 @@ function calculateTotal(){
 
             <div class="dropzone-msg dz-message needsclick">
                 <h3 class="dropzone-msg-title"><?php echo __('Drop files here or click to upload.'); ?></h3>
-               
+
                 <span class="dropzone-msg-desc"><?php echo __('Upload up to 10 files'); ?></span>
             </div>
             <?php } ?>
@@ -1751,7 +1751,7 @@ function calculateTotal(){
 <?php } ?>
 <!--END::Page third part -->
 <!--begin::Submit part -->
-<?php 
+<?php
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK);
 $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $disable = "disabled" ;} ?>
 <div class="kt-portlet__foot">
@@ -1773,12 +1773,12 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                         <button id="kt_login_signin_submit" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i><?php echo __('Save & exit'); ?></button>
                         <button id="kt_login_signin_submit_continue" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
                         <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?php echo __('Cancel'); ?></button>
-                <?php } ?>  
+                <?php } ?>
             </div>
-            <div class="col-lg-6">   
+            <div class="col-lg-6">
             <?php if(count((array)$vdata_details) > 0){ ?>
                 <div class="accordion accordion-light  accordion-toggle-arrow" id="accordionExample2">
-                    
+
                     <div class="card">
                         <div class="card-header" id="headingTwo2">
                             <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
@@ -1803,7 +1803,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                                             <div class="kt-timeline-v2__item-text  kt-padding-top-5">
                                                 <b> <?php echo date("M d, Y g:i A", strtotime($vdvalue['action_date'])); ?></b>
                                                 <?php echo " ".$vdvalue['action_log']. " ".$_SESSION['users'][$vdvalue['user_id']]." with Status ".$_SESSION['status'][$vdvalue['status_value']]['name']; ?>
-                                                
+
                                             </div>
                                         </div>
                                         <?php  } ?>
@@ -1817,7 +1817,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
             </div>
             <div class="col-lg-2 kt-align-right">
                 <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?php echo __('Delete'); ?></button>
-            </div> 
+            </div>
         </div>
     </div>
 </div>
@@ -1832,18 +1832,18 @@ if($rid != ''){
         $question_display ='N';
         $replay_display = 'Y';
     }
-    include_once("queries.php"); 
+    include_once("queries.php");
 }?>
  </div> </div>
 </div>
- 
+
 
 </div></div></div></div>
 
 <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-xl" style="max-width: 800px;">
                 <div class="modal-content" style="min-height: 50px;width: 800px;" id="popup1">
-                    
+
                 </div>
             </div>
 

@@ -1,11 +1,11 @@
-<?php 
+<?php
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
 $vdata1["where"] = array('is_active'=> '0', 'assessment_year'=>$_REQUEST['assement_year'], 'document_list_id'=> $_REQUEST['list_id']);
 $vdata1["field"] = "id, emp_id";
 $vdata = urlencode(json_encode($vdata1));
-$vurl = API."?mode=gettabledetailswithconditions&table=emp_assign_release_documents&data=".$vdata; 
+$vurl = API."?mode=gettabledetailswithconditions&table=emp_assign_release_documents&data=".$vdata;
 $configesponse = callAPI($vurl);
 $data = json_decode($configesponse,1);
 
@@ -20,7 +20,7 @@ $vdata = urlencode(json_encode($vdata1));
 $vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata;
 $configesponse = callAPI($vurl);
 $empdata = json_decode($configesponse,1);
-//echo "<pre> -----------------------"; 
+//echo "<pre> -----------------------";
 	//print_r($_REQUEST);print_r($vdata1); print_r($empdata); echo "</pre>";
 //print_r($aemp); echo "</pre>";
 $month_type = 'N';
@@ -34,7 +34,7 @@ if(isset($_REQUEST['month'])){
     var assement = $("#assement").val();
     var month_type = $("#month_type").val();
     var cc = "";
-    if(month_type != 'N'){ 
+    if(month_type != 'N'){
        cc ="&month="+month_type;
     }
     console.log("type:"+type+",assement:"+assement);
@@ -46,7 +46,7 @@ if(isset($_REQUEST['month'])){
         console.log(data);
         //$("#dropdownlist_"+id).html(data);
         $("#row_"+empid).hide();
-        
+
       },
       error:function (){}
     });
@@ -103,7 +103,7 @@ if(isset($_REQUEST['month'])){
 			</tr>
 		</thead>
 		<tbody >
-			<?php  $i=1; foreach ($empdata as $row){ ?> 
+			<?php  $i=1; foreach ($empdata as $row){ ?>
 				<tr id="row_<?php echo $row['id']; ?>" >
 					<td class="p-2"><?php echo $i; ?></td>
 					<td class="p-2">
@@ -122,7 +122,7 @@ if(isset($_REQUEST['month'])){
 					<td class="p-2"><p><?php echo $row['email_id']; ?></p></td>
 					<td class="p-2">
 						<p>
-							<?php if(isset($aemp[$row['id']])){ ?> 
+							<?php if(isset($aemp[$row['id']])){ ?>
 								<span class="f-14 f-w-600 text-danger"><?= __('Un-Assign') ?></span>
 							<?php }else{ ?>
 								<span class="f-14 f-w-600  text-success"><?= __('Assign') ?></span>
@@ -153,7 +153,7 @@ if(isset($_REQUEST['month'])){
 		$(".js-example-basic-multiple").select2();
 		$(".js-example-disabled-results").select2();
 		$( ".datepicker" ).datepicker({
-			showOn: "both", 
+			showOn: "both",
 			buttonText: "<i class='ti-calendar'></i>",
 			dateFormat: date_format,
 			changeMonth: true,

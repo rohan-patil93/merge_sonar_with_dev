@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
@@ -40,7 +40,7 @@ $emp_id = $_POST['emp_id'] ?? ($_SESSION['emp_id'] ?? 0);
 	</h5>
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
-<div class="modal-body" style="overflow: unset;"> 
+<div class="modal-body" style="overflow: unset;">
 	<form class="kt-form kt-form--label-right" action="" method="post">
 		<div class="alert alert-info">
 			<strong>Week Period:</strong> <?php echo date('d M Y', strtotime($start_date)); ?> to <?php echo date('d M Y', strtotime($end_date)); ?>
@@ -50,13 +50,13 @@ $emp_id = $_POST['emp_id'] ?? ($_SESSION['emp_id'] ?? 0);
 				<div class="col-lg-12">
 					<span class="form-label f-w-600 d-inline-block">Comment / Note</span>
 					<textarea aria-label="<?= htmlspecialchars(__('Add any comments for the manager (optional)'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="comment" id="comment" rows="3" placeholder="Add any comments for the manager (optional)"></textarea>
-				</div>								
+				</div>
 			</div>
 		</div>
-		<div class="modal-footer"> 
+		<div class="modal-footer">
 			<input type="hidden" name="status" id='status_value' value="<?php echo $_POST['status'] ?? 10; ?>">
 			<input type="hidden" name="table" id='table' value="<?php echo $_POST['table'] ?? 'project_timesheets'; ?>">
-			<input type="hidden" name="start_date" id='start_date' value="<?php echo $start_date; ?>"> 
+			<input type="hidden" name="start_date" id='start_date' value="<?php echo $start_date; ?>">
 			<input type="hidden" name="end_date" id='end_date' value="<?php echo $end_date; ?>">
 			<input type="hidden" name="emp_id" id='emp_id' value="<?php echo $emp_id; ?>">
 			<button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Cancel</button>

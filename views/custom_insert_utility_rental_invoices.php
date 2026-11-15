@@ -1,4 +1,4 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = 1;
 
 if (isset($_POST['submitrentalinvoice'])) {
@@ -9,23 +9,23 @@ if (isset($_POST['submitrentalinvoice'])) {
     $response1 = json_decode($response1, 1);
     $response = $response1['res'];
   // echo "<pre>"; print_r($response1); echo "</pre>";
-    if($response['status'] == 'sucess'){ 
+    if($response['status'] == 'sucess'){
         if($response['LASTID'] == 0){
             $msgcode = 3001; //update
         }else{
             $msgcode = 3000; //insert
             $_SESSION['insert_msg'] = $msgcode;
             header("location:index?option=COM_LIST_RENTAL_INVOICES");
-        }   
+        }
         ?>
           <script type="text/javascript">
             document.onreadystatechange = function(){
               if(document.readyState == "complete") {
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][$msgcode]; ?>','');
-              } 
+              }
             }
           </script>
-          <?php    
+          <?php
     }else{
         if($response['status'] == 'fail'){
             $dis_err = explode(",", $response['other']);
@@ -68,7 +68,7 @@ $operation_symbol = array('+','/','*','%','=');
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
 if(in_array($transaction_data['current_status'], (array)$check_array) OR ($transaction_data['current_status'] == ST_CALLBACK AND $transaction_data['originator'] == $_SESSION['userid'])){
         $disable = "" ;
-}else{ 
+}else{
     $disable = "event_disabled" ;
 }
 
@@ -76,7 +76,7 @@ if(in_array($transaction_data['current_status'], (array)$check_array) OR ($trans
 
 <script>
 <?php if($transaction_data['current_status'] != ST_APPROVED){ ?>
-window.addEventListener("load", function() {	
+window.addEventListener("load", function() {
 	$('.allitemsid').each(function(index) {
 	    var item_id = $(this).val();
 	    var parent_id = $('.allparenid').eq(index).val();
@@ -88,7 +88,7 @@ window.addEventListener("load", function() {
 
 
 function rentalInvoicePopupCalculattion(ruid,parent_id){
-	
+
 	var originator_state_id = $("#originator_state_id").val();
 	var supplier_state_id = $("#supplier_state_id").val();
 	var rentinvpopup_qty = $("#rentinvpopup_qty_"+ruid).val();
@@ -113,19 +113,19 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 	});
 	$("#rentinvpopup_parent_rent_"+parent_id).val(totalamt.toFixed(2));
 	$("#rentinvpopup_parent_rent_item_price_"+parent_id).val(totalamt.toFixed(2));
-	
+
 	var total_percentage = percentage = 0
-	
+
 	if ($('#utility_gst_'+parent_id).is(':checked')){
 		$("#utility_gst_utility_text_"+parent_id).text(totalamt.toFixed(2));
 		$("#utility_gst_utility_"+parent_id).val(totalamt.toFixed(2));
-		
+
 		var percentage = $('#utility_gst_percentage_'+parent_id).val();
 		total_percentage = ((totalamt * percentage) / 100);
 		totalamt = totalamt+total_percentage;
-	    
+
 	   // $("#utility_gst_total_tax_text_"+parent_id).text(total_percentage.toFixed(2)+" ("+percentage+"%)");
-	    
+
 	   $("#utility_gst_total_tax_text_"+parent_id).text(total_percentage.toFixed(2));
 	    $("#utility_gst_total_tax_"+parent_id).val(total_percentage.toFixed(2));
 	    console.log('gst -',total_percentage);
@@ -139,7 +139,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 	    console.log('gst 8888-',0);
 	}
 	$("#rentinvpopup_parent_rent_with_tax_"+parent_id).val(totalamt.toFixed(2));
-	
+
 	calculatetotals();
 
 }
@@ -232,13 +232,13 @@ function calculatetotals(){
                 </th>
             </tr>`;
 	}
-	
+
 	$("#tax_html_table").html(html);
 }
 
 function roundingOffVal(grandtotal){
     var rounding_off = Math.round(parseFloat(grandtotal)) - parseFloat(grandtotal);
-    if(isNaN(grandtotal)){ 
+    if(isNaN(grandtotal)){
         $(".rounding_off").val(0)
     }else{
         grandtotal = parseFloat(grandtotal) + parseFloat(rounding_off);
@@ -315,7 +315,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     },
                     error:function (){}
                 });
-            }); 
+            });
     }
 }
 
@@ -350,34 +350,34 @@ function cancelInvoices(transaction_table,transaction_id){
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>  
+        </div>
 <?php } ?>
 <div class="card">
 	 <?php if($transaction_data['cancel_invoice'] =="Y"){ ?>
 <div id="dynamiccanceldiv"><span>Cancelled Invoice</span></div>
 <?php } ?>
-	 <?php 
+	 <?php
         $workflowsteps = getWorkflowStatus('utility_rental_invoices',$transaction_data['id'],$transaction_data['current_status']);
             ?>
 	<div class="card-header table-card-header">
         <h5> Rental Invoice</h5>
         <div class="card-header-right table-card-header ">
-		    <?php  
+		    <?php
                 if($transaction_data['current_status'] == ST_APPROVED AND $transaction_data['cancel_invoice'] !="Y" && $transaction_data['originator'] ==$_SESSION['userid']){ ?>
                         <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('utility_rental_invoices','<?php echo $transaction_id; ?>')">
                             <i class="text-white fa fa-times-circle"></i> &nbsp;Cancel Invoice
                         </button>
-                <?php  }  
-                	echo $workflowsteps['workflow_btn']; 
+                <?php  }
+                	echo $workflowsteps['workflow_btn'];
                  	//$printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$rid."&table=utility_rental_invoices&title=".urlencode('Rental Invoices');
 
-                    $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$transaction_id."&table=utility_rental_invoices&title=".urlencode('Utility Invoices'); 
-                	 ?> 
-             	<a target="_blank" href="<?php echo $printurl; ?>" class="btn btn-clean kt-margin-r-10"><i class="ti-printer"></i> </a> 
+                    $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$transaction_id."&table=utility_rental_invoices&title=".urlencode('Utility Invoices');
+                	 ?>
+             	<a target="_blank" href="<?php echo $printurl; ?>" class="btn btn-clean kt-margin-r-10"><i class="ti-printer"></i> </a>
 
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light m-r-50">
                 <i class="icofont icofont-reply"></i>
-                Back 
+                Back
             </a>
         </div>
     </div>
@@ -387,10 +387,10 @@ function cancelInvoices(transaction_table,transaction_id){
 		<form method="post" class="<?php echo $disable; ?>">
 		<div class="row">
 			<input type="hidden" name="rid" value="<?php echo $transaction_id; ?>">
-			
+
 			<div class="col-lg-3 form-group">
 	            <label for="transaction_number" class="inline-block mb-1 f-w-600">Transaction Number</label>
-	            
+
 	            <input type="text" id="transaction_number" name="transaction_number" class="form-control" placeholder="Enter Transaction no." value="<?= htmlspecialchars($transaction_data['transaction_number'] ?? '') ?>" readonly>
             </div>
             <div class="col-lg-3 form-group">
@@ -408,7 +408,7 @@ function cancelInvoices(transaction_table,transaction_id){
             <div class="col-lg-3 form-group">
                 <label for="parent_ref_id" class="inline-block mb-1 f-w-600">Property Owner</label>
                  <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?php echo  $owner_additional_details['owner_company_name']; ?>"  readonly>
-                
+
             </div>
             <div class="col-lg-3 form-group">
                 <label for="ref_no" class="inline-block mb-1 f-w-600">Refrence No.</label>
@@ -451,7 +451,7 @@ function cancelInvoices(transaction_table,transaction_id){
                     	<option value="<?php echo $stn['id']; ?>" <?php echo $transaction_data['originator_state_id'] == $stn['id']?"SELECTED":"";?> ><?php echo $stn['state_name']; ?></option>
                     <?php } ?>
                 </select>
-            
+
             </div>
             <div class="col-lg-3 form-group">
                 <label for="party_address" class="inline-block mb-1 f-w-600">Party/Tenant State</label>
@@ -479,13 +479,13 @@ function cancelInvoices(transaction_table,transaction_id){
 							<th width="10%">Formula</th>
 							<th width="10%">Rate</th>
 							<th width="10%" class="text-right" colspan="5">Amount</th>
-							
+
 						</tr>
 					</thead>
 					<tbody>
-					<?php 	
+					<?php
 						$i=1;
-						foreach($utility_rental_invoice_items as $bd){ 
+						foreach($utility_rental_invoice_items as $bd){
 							$utility_rental_invoice_items_id = $utilitytaxtable[$bd['item_id']];
 						?>
 						<tr>
@@ -501,27 +501,27 @@ function cancelInvoices(transaction_table,transaction_id){
 
 
 								<input type="hidden" name="utility_rental_invoice_item_taxes_id[]" value="<?php echo $utility_rental_invoice_items_id['id']; ?>">
-								
+
 								<input type="hidden" name="tax_name[]" value="<?php echo $utility_rental_invoice_items_id['tax_name']!=""?$utility_rental_invoice_items_id['tax_name']:'997212'; ?>"  >
-								
+
 								<input type="hidden" name="tax_id[]" value="<?php echo $utility_rental_invoice_items_id['tax_id']!=""?$utility_rental_invoice_items_id['tax_id']:'9015'; ?>"  >
-								
+
 								<input type="hidden" name="utility_gst_switch[]" value="<?php echo $bd['item_id']; ?>">
-								
+
 								<input type="hidden" name="utility_gst_percentage[]" value="<?php echo $utility_rental_invoice_items_id['tax_value']!=""?$utility_rental_invoice_items_id['tax_value']:18; ?>" id="utility_gst_percentage_<?php echo $bd['item_id']; ?>" >
 
-								<?php if($bd['parent_id'] == 0){ 
+								<?php if($bd['parent_id'] == 0){
 									$checkedswitch = ""; $onetimecheck = "0";
 									if($bd['tax_amount'] !="" AND $bd['tax_amount'] !="0"){
 										$checkedswitch = "checked"; $onetimecheck = "1";
 									}
 									?>
 								<input type="checkbox" class="js-switch" name="utility_gst[<?php echo $bd['item_id']; ?>]" value="Y" id="utility_gst_<?php echo $bd['item_id']; ?>" onchange="rentalInvoicePopupCalculattion('<?php echo $bd['item_id']; ?>','<?php echo $bd['item_id']; ?>')" <?php echo $checkedswitch; ?>>
-								
+
 								<input type="hidden" name="utility_gst_total_tax[]" class="utility_gst_total_tax" value="<?php echo $bd['tax_amount']; ?>" id="utility_gst_total_tax_<?php echo $bd['item_id']; ?>" >
 								<input type="hidden" name="utility_gst_without_tax[]" value="<?php echo $bd['item_amount']; ?>" id="utility_gst_utility_<?php echo $bd['item_id']; ?>" class="utility_gst_without_tax">
-								<?php } ?>	
-								
+								<?php } ?>
+
 							</td>
 							<?php if($bd['parent_id'] != 0){ ?>
 							<td class="p-1">
@@ -568,8 +568,8 @@ function cancelInvoices(transaction_table,transaction_id){
 
 							</td>
 						<?php } ?>
-						</tr> 
-						<?php } ?>	
+						</tr>
+						<?php } ?>
 			 		</tbody>
 			 	</table>
 
@@ -592,7 +592,7 @@ function cancelInvoices(transaction_table,transaction_id){
                         <tr>
                             <td colspan="2" class="border p-2">
                                 <table class="w-100" id="tax_html_table" <?php echo $onetimecheck == "0"?"style='display:none'":""; ?>>
-                                 <?php     
+                                 <?php
                                  if($transaction_data['originator_state_id'] == $transaction_data['supplier_state_id']){ ?>
                                	 	<tr>
                                         <th class="text-start p-2 border">
@@ -654,7 +654,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                     </tr>
                                 <?php } ?>
                                 </table>
-                               <table class="w-100" > 
+                               <table class="w-100" >
                                     <tr>
                                         <th class="text-start p-2 border">
                                             <span>Total Tax</span>
@@ -694,7 +694,7 @@ function cancelInvoices(transaction_table,transaction_id){
                 </table>
 			</div>
 		</div>
-			
+
 
 		<div class="col-lg-12 m-t-40">
             <div class="row">

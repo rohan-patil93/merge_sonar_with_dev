@@ -33,7 +33,7 @@ if($_SESSION['insert_msg'] !=""){
 	    if(document.readyState == "complete") {
 		$("#hide_current_page").val(1);
 		getContractList();
-	} 
+	}
 	}
 <?php } ?>
 </script>

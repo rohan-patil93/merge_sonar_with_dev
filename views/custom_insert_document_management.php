@@ -253,7 +253,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
             <?php } ?>
 
             <?php $disabled = '';
-            $arr = array(ST_DRAFT,ST_ACTIVE,ST_SEND_BACK,ST_CALLBACK,""); 
+            $arr = array(ST_DRAFT,ST_ACTIVE,ST_SEND_BACK,ST_CALLBACK,"");
              if($rid>0 && !in_array($currentStatus, $arr)){
                 $disabled = 'event_disabled';
             } ?>
@@ -335,13 +335,13 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
 
             <div class="row mt-4">
 
-                        
-                            
-                            <?php 
-                            echo $todisplaythree = todisplaythree(array('table'=>TBL_DOCUMENT_MANAGEMENT,'originator'=>$documentData['created_by'],'encode'=>'no','id'=>$rid,'dis_query'=>'yes','dis_timeline'=>'yes','dis_comments'=>'no','dis_track'=>'no'));  
- 
+
+
+                            <?php
+                            echo $todisplaythree = todisplaythree(array('table'=>TBL_DOCUMENT_MANAGEMENT,'originator'=>$documentData['created_by'],'encode'=>'no','id'=>$rid,'dis_query'=>'yes','dis_timeline'=>'yes','dis_comments'=>'no','dis_track'=>'no'));
+
                              ?>
-                        
+
 
             </div>
         </div>

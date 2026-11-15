@@ -13,7 +13,7 @@ $table_name = (isset($_POST['table_name_txt']))?$_POST['table_name_txt']:$_GET['
 $wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'application_table_name'=>$table_name);
 $wh1['order'] = "sequence ASC";
 $data1 = urlencode(json_encode($wh1));
-$url1 = API."?mode=gettabledetailswithconditions&table=application_tours&data=".$data1; 
+$url1 = API."?mode=gettabledetailswithconditions&table=application_tours&data=".$data1;
 $data_details1 = callAPI($url1);
 $resarray = json_decode($data_details1,1);
 
@@ -32,7 +32,7 @@ $resarray = json_decode($data_details1,1);
 $showtableswh["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id']);
 $showtableswh["field"] = "DISTINCT application_table_name";
 $showtableswhdecid = urlencode(json_encode($showtableswh));
-$showtablesurl = API."?mode=gettabledetailswithconditions&table=application_tours&data=".$showtableswhdecid; 
+$showtablesurl = API."?mode=gettabledetailswithconditions&table=application_tours&data=".$showtableswhdecid;
 $showtables = callAPI($showtablesurl);
 $showtables = json_decode($showtables,1);
 //print_r($showtables);
@@ -42,17 +42,17 @@ $filed_array = array('text' => 'Simple Text', 'touchspin' => 'Touch Spin', 'date
 $wh5["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0');
 $wh5["field"] = "id,module_id,module_name";
 $data5 = urlencode(json_encode($wh5));
-$url5 = API."?mode=gettabledetailswithconditions&table=module_setup&data=".$data5; 
+$url5 = API."?mode=gettabledetailswithconditions&table=module_setup&data=".$data5;
 $mopdule_setup = callAPI($url5);
 $mopdulesetup = json_decode($mopdule_setup,1);
 
 ?>
 <script>
-	
+
 	function addmorerow(){
      	var count = $(".itemRow").length;
      	var htmlRows = '';
-        htmlRows += '<tr class="itemRow cardid'+count+'">';  
+        htmlRows += '<tr class="itemRow cardid'+count+'">';
         htmlRows += '<td><div class="row"><div class="col-lg-2"><span class="deleteiconcustom text-danger f-22" onclick="deleteitem('+count+')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span></div><div class="col-lg-10"><input type="hidden" name="rid[]" ><input type="text" name="field_name[]"  class="form-control"  required aria-label="Field Name"></div></div></td>';
         htmlRows += '<td><input type="text" name="menu_path[]"  class="form-control" aria-label="Menu Path"></td>';
         htmlRows += '<td><input type="text" name="reference_field_name[]" class="form-control"  required aria-label="Reference Field Name"></td>';
@@ -87,7 +87,7 @@ function deleteitem(cardid){
 	<div class="container-fluid ">
 		<div class="card card-custom card-sticky " id="kt_page_sticky_card">
 			<div class="card-header">
-				<h5><?= __('Take A Tours') ?></h5><i role="button" tabindex="0" aria-label="Go Toure" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Toure"></i> 
+				<h5><?= __('Take A Tours') ?></h5><i role="button" tabindex="0" aria-label="Go Toure" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Toure"></i>
 				<div class="card-header-right">
 				       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                      <i class="icofont icofont-reply"></i> <?= __('Back') ?></a>
@@ -110,7 +110,7 @@ function deleteitem(cardid){
 		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="Enter Table/Page Name"> <?php } ?>
 
 	</div>
-	
+
 
 
 </div>
@@ -118,36 +118,36 @@ function deleteitem(cardid){
 <hr>
 
 <?php if($table_name !=""){ ?>
-<table class="table table-hover table-custom-responsive"  id="toureaddmore"> 
+<table class="table table-hover table-custom-responsive"  id="toureaddmore">
     <thead>
-	  <tr>	
+	  <tr>
 		  <th scope="col" width="15%"><?= __('Field Name') ?></th>
 		  <th scope="col" width="15%"><?= __('Menu Path') ?></th>
 		  <th scope="col" width="15%"><?= __('Ref Field Name') ?></th>
 		  <th scope="col" width="30%"><?= __('Help Text') ?></th>
 		  <th scope="col" width="15%"><?= __('Field Type') ?></th>
 		  <th scope="col" width="5%"><?= __('Sequence') ?></th>
-		  <th scope="col" width="5%"><?= __('Display') ?></th> 
+		  <th scope="col" width="5%"><?= __('Display') ?></th>
 	  </tr>
 	 </thead>
 	 <tbody>
 	  <?php $i=0; foreach($resarray as $respons){ ?>
 	  <tr class="itemRow">
-		<td> 
+		<td>
 			<input type="hidden" name="rid[]" value="<?php echo $respons['id']; ?>">
 	  		<input type="text" name="field_name[]" id="field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['field_name']; ?>"  readonly aria-label="Field Name">
 	  	</td>
-	  	<td> 
+	  	<td>
 	  		<input type="text" name="menu_path[]" id="menu_path<?php echo $i; ?>" class="form-control" value="<?php echo $respons['menu_path']; ?>" aria-label="Menu Path">
 	  	</td>
-		<td> 
+		<td>
 	  		<input type="text" name="reference_field_name[]" id="reference_field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['reference_field_name']; ?>" aria-label="Reference Field Name">
 	  	</td>
 		<td><textarea  name="help_text[]" class="form-control" aria-label="Help Text"><?php echo $respons['help_text']; ?></textarea></td>
-		<td> 
+		<td>
 
  <select class="form-select js-example-basic-single" id="" name="field_type[]"  id="field_type<?php echo $i; ?>" aria-label="Field Type">
-               
+
                <?php foreach($filed_array as $key=>$value){ ?>
 <option value="<?php echo $key; ?>"  <?php echo $respons['field_type']==$key?"selected":""; ?>><?php echo $value; ?></option>
 
@@ -155,7 +155,7 @@ function deleteitem(cardid){
             </select>
 
 	  	</td>
-	  	<td> 
+	  	<td>
 	  		<input type="text" name="sequence[]" id="sequence<?php echo $i; ?>" class="form-control" value="<?php echo $respons['sequence']; ?>" aria-label="Sequence">
 	  	</td>
 	  	<td>
@@ -163,7 +163,7 @@ function deleteitem(cardid){
 
 	  	</td>
 
-	  	
+
 	  </tr>
 	<?php  $i++; } ?>
 	 </tbody>
@@ -185,6 +185,6 @@ function deleteitem(cardid){
 			</div>
 		</div>
 	</div>
-</div>	
-						
+</div>
+
 

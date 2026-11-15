@@ -35,7 +35,7 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
             <div class="card-header-right">
                 <a href="index.php?option=COM_INSERT_DOCUMENT_MANAGEMENT" class="btn btn-success mb-2 desktop-view">
                 <i class="icofont icofont-plus icon-white" aria-hidden="true"></i>
-                    <?= __('Documents') ?>            
+                    <?= __('Documents') ?>
                 </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply" aria-hidden="true"></i> <?= __('Back') ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
@@ -21,12 +21,12 @@ $job  = $data['job'];
   		var mpc_id = $("#mpc_id").val();
  		var mpc_item_id = $("#mpc_item_id").val();
 		if(vrc_id == "" || vrc_item_id == "" || mpc_id == "" || mpc_item_id == ""){
-			swal.fire({                   
-				text: "Please fill in required fields",              
-				type: "danger",           
+			swal.fire({
+				text: "Please fill in required fields",
+				type: "danger",
 				buttonsStyling: false,
-				confirmButtonText: "<i class='la la-hand-o-down'></i>Yes, close!",    
-				confirmButtonClass: "btn btn-danger"				        
+				confirmButtonText: "<i class='la la-hand-o-down'></i>Yes, close!",
+				confirmButtonClass: "btn btn-danger"
 			});
 
 		}else{
@@ -39,16 +39,16 @@ $job  = $data['job'];
 				$('#kt_modal_KTDatatable_remote').modal('hide');
 		 	//var msg = <?php echo "'".$_SESSION['error_message']['9025']."'" ?>;
 				//window.location.reload();
-			swal.fire({              
-	title: "Record has been saved successfully ",              
-	text: "Do you want to reload? ",              
-	type: "success",           
+			swal.fire({
+	title: "Record has been saved successfully ",
+	text: "Do you want to reload? ",
+	type: "success",
 	buttonsStyling: false,
-	confirmButtonText: "Yes, Reload! ",    
+	confirmButtonText: "Yes, Reload! ",
 	confirmButtonClass: "btn btn-success",
-	showCancelButton: true,     
-	cancelButtonText: " No, continue",      
-	cancelButtonClass: "btn btn-warning"        
+	showCancelButton: true,
+	cancelButtonText: " No, continue",
+	cancelButtonClass: "btn btn-warning"
 }).then(function(result) {
 	if (result.value) {
 		//$('#kt_modal_KTDatatable_remote').modal('hide');
@@ -64,7 +64,7 @@ $job  = $data['job'];
 	<h5 class="modal-title"> Assign Employee</h5>
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>" onclick="closebutnfunction()"></button>
 	</div>
-	<div class="modal-body" > 
+	<div class="modal-body" >
 		<form class="kt-form kt-form--label-right" action="" method="post" id="insertstatsuform">
 			<div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
 				<div class="form-group row">
@@ -74,7 +74,7 @@ $job  = $data['job'];
 							<input type="text" name="vrc_name" id="vrc_name" readonly value="<?php echo $data['vrcmain']['transaction_number']; ?>" class="form-control vcs" aria-label="Vendor Rate Card">
 							<input type="hidden" name="vrc_id" id="vrc_id"  value="<?php echo $data['vrcmain']['id']; ?>" class="form-control vcs">
 						</div>
-						
+
 						 <div class="col-lg-6 form-group">
 							<?php if($_POST['type'] == 'vrc'){ ?>
 								<label for="vrc_item_name">Rate Card job Title</label>
@@ -88,7 +88,7 @@ $job  = $data['job'];
 									<option value="<?php echo $mpc_item['id']; ?>"> <?php echo $job[$mpc_item['item_id']]." ( ".$mpc_item['min_exp']." - ".$mpc_item['max_exp']." ) - ".customeummarmonyformate($mpc_item['item_price']); ?></option>
 								<?php } ?>
 							</select>
-							<?php } ?>		
+							<?php } ?>
 						</div>
 						<div class="col-lg-6 form-group">
 							<label for="mpc_name">Purchase order</label>
@@ -113,13 +113,13 @@ $job  = $data['job'];
 						<div class="col-lg-6 form-group">
 							<label for="valid_from">Valid From</label>
 							<input type="text" name="valid_from" id="valid_from"  value="<?php echo $data['mpcmain']['effective_from_date'];; ?>" class="form-control datepicker vcs" aria-label="Valid From">
-							
-						</div>	
+
+						</div>
 						<div class="col-lg-6 form-group">
 							<label for="valid_to">Valid To</label>
 							<input type="text" name="valid_to" id="valid_to"  value="<?php echo $data['mpcmain']['effective_to_date']; ?>" class="form-control datepicker vcs" aria-label="Valid To">
 						</div>
-					</div>								
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">

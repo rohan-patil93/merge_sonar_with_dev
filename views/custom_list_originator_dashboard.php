@@ -32,7 +32,7 @@ foreach ($csr_proposal_arr as $row) {
 	if (isset($row['current_status']) && ($row['current_status'] == 30)) {
 		$rejected_data[] = $row['id'];
 	}
- 
+
 	if (isset($row['current_status']) && ($row['current_status'] > 0 && $row['current_status'] < 199) && $row['current_status'] != 20 && $row['current_status'] != 30) {
 		$progressCount++;
 		$inprogress_data[] = $row['id'];
@@ -217,7 +217,7 @@ $progress_var =  gettableStatusArray($table_name1);
 									</thead>
 
 									<tbody class="custom-scroll" >
-										<?php if (!empty($active_data)): 
+										<?php if (!empty($active_data)):
 											$i = 1;
 										 foreach ($active_data as $value): ?>
 												<tr class="csr-row-10">
@@ -311,7 +311,7 @@ $progress_var =  gettableStatusArray($table_name1);
 										</tr>
 									</thead>
 									<tbody class="custom-scroll" >
-										<?php if (!empty($inprogress_data)): 
+										<?php if (!empty($inprogress_data)):
 											$i=1;
 										 foreach ($inprogress_data as $value): ?>
 												<tr class="csr-row-10">
@@ -400,7 +400,7 @@ $progress_var =  gettableStatusArray($table_name1);
 										</tr>
 									</thead>
 									<tbody class="custom-scroll" >
-										<?php if (!empty($approved_data)): 
+										<?php if (!empty($approved_data)):
 											$i=1;
 											foreach ($approved_data as $value): ?>
 												<tr class="csr-row-10">
@@ -488,7 +488,7 @@ $progress_var =  gettableStatusArray($table_name1);
 									</thead>
 
 									<tbody class="custom-scroll" >
-										<?php if (count((array)$rejected_data)>0): 
+										<?php if (count((array)$rejected_data)>0):
 											$i = 1;
 										 foreach ($rejected_data as $value): ?>
 												<tr class="csr-row-10">
@@ -611,7 +611,7 @@ $progress_var =  gettableStatusArray($table_name1);
 										</tr>
 									</thead>
 									<tbody class="custom-scroll" >
-										<?php if (!empty($tracking_pending)): 
+										<?php if (!empty($tracking_pending)):
 											$i=1;
 										 foreach ($tracking_pending as $value): ?>
 												<tr class="csr-row-10">
@@ -707,7 +707,7 @@ $progress_var =  gettableStatusArray($table_name1);
 										</tr>
 									</thead>
 									<tbody class="custom-scroll" >
-										<?php if (!empty($tracking_inprogress)): 
+										<?php if (!empty($tracking_inprogress)):
 											$i=1;
 										foreach ($tracking_inprogress as $value): ?>
 												<tr class="csr-row-10">
@@ -802,7 +802,7 @@ $progress_var =  gettableStatusArray($table_name1);
 										</tr>
 									</thead>
 									<tbody class="custom-scroll" >
-										<?php if (!empty($completed_data)): 
+										<?php if (!empty($completed_data)):
 											$i=1;
 										foreach ($completed_data as $value): ?>
 												<tr class="csr-row-10">

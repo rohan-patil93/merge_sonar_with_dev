@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (isset($_POST['submit'])){
 	//echo "<pre>"; print_r($_POST); exit;
 	$tables = array_unique($_POST['table']);
@@ -19,26 +19,26 @@ if (isset($_POST['submit'])){
 		header("location:index.php?option=".$_GET['option']."&error=3010");
 	}
 }
-$role_id = $_GET['Rid']!=''? $_GET['Rid'] : 1 ; 
+$role_id = $_GET['Rid']!=''? $_GET['Rid'] : 1 ;
 $navlisturl = API."?mode=gettabledetails&fid=genc_code&rid=MENULOCATION&table=".TBL_GENRAL_CODE_DETAILS;
-$navelistdata = callAPI($navlisturl); //file_get_contents($navlisturl, false, $context);	
+$navelistdata = callAPI($navlisturl); //file_get_contents($navlisturl, false, $context);
 $navelistdata = json_decode($navelistdata,1);
 
 $data1["where"] = array('is_active'=> 0);
 $data = urlencode(json_encode($data1));
-$curl = API."?mode=gettabledetailswithconditions&table=".TBL_ROLES."&data=".$data; 
+$curl = API."?mode=gettabledetailswithconditions&table=".TBL_ROLES."&data=".$data;
 //$tdurl = API."?mode=gettabledetails&table=".TBL_ROLES;
 $showtablesdata = callAPI($curl); // file_get_contents($tdurl, false, $context);
 $show = json_decode($showtablesdata,1);
 $roleurl = API."?mode=gettabledetails&fid=role_id&rid=$role_id&table=".TBL_ROLE_PERMISSIONS;
 //echo $roleurl;
-$roledata = callAPI($roleurl);//file_get_contents($roleurl, false, $context);	
+$roledata = callAPI($roleurl);//file_get_contents($roleurl, false, $context);
 $roledata = json_decode($roledata,1);
 foreach ($roledata as $roles) {
-	$role[$roles['table_name']]['view'] = $roles['permission_view']; 
-	$role[$roles['table_name']]['insert'] = $roles['permission_insert']; 
-	$role[$roles['table_name']]['update'] = $roles['permission_update']; 
-	$role[$roles['table_name']]['delete'] = $roles['permission_delete']; 
+	$role[$roles['table_name']]['view'] = $roles['permission_view'];
+	$role[$roles['table_name']]['insert'] = $roles['permission_insert'];
+	$role[$roles['table_name']]['update'] = $roles['permission_update'];
+	$role[$roles['table_name']]['delete'] = $roles['permission_delete'];
 
 }
 //echo "<pre>";print_r($role); exit;
@@ -58,7 +58,7 @@ foreach ($roledata as $roles) {
 <div class="d-flex flex-column-fluid">
     <div class="container-fluid">
     	<div class="alert alert-warning alert-dismissible">
-		            <strong><?= __("This function is used to provide access") ?></strong> 
+		            <strong><?= __("This function is used to provide access") ?></strong>
 		            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		        </div>
 
@@ -68,15 +68,15 @@ foreach ($roledata as $roles) {
 	<div class="col-lg-6 mt-5">
 		<label for="kt_select2_1"><?= __("Role") ?> </label>
 		<select class="form-select js-example-basic-single" id="kt_select2_1" name="role" onchange="GetSelectedTextValue(this.value)">
-			
-		<?php foreach ($show as  $selectvalue) {  ?> 
+
+		<?php foreach ($show as  $selectvalue) {  ?>
 				<option <?php if($selectvalue['id'] == $role_id){ ?> selected <?php } ?> value="<?php echo $selectvalue['id']; ?>"><?= htmlspecialchars(__($selectvalue['name'] ?? '')) ?></option>
 			</optgroup>
 		<?php  } ?>
 		</select>
 	</div>
 	<ul class="nav md-tabs" style="margin-top: 20px ;">
-			<?php 
+			<?php
 				$i=1;
 				foreach ($navelistdata as  $navdata) { ?>
 				<li class="nav-item">
@@ -85,19 +85,19 @@ foreach ($roledata as $roles) {
 					</a>
 				</li>
 			<?php $i++;  }	?>
-			<li class="nav-item"> 
+			<li class="nav-item">
 				<a class="nav-link" data-toggle="tab" onclick="redirectpage('COM_INSERT_ROLE_PERMISSIONS')" href=""> <?= __("All") ?> </a>
 			</li>
 
 		</ul>
 		<div class="tab-content">
-			<?php 
+			<?php
 				$j=1;
 				foreach ($navelistdata as  $navdata) { ?>
 			<div class="tab-pane <?php if ($j==1){ ?> active <?php } ?>" id="kt_tabs_1_<?php echo $navdata['genc_detail_code']; ?>" role="tabpanel">
 				<?php $menunava = toGETNavDetails($navdata['genc_detail_code']);?>
 				<div class="row" id="kt_sortable_portlets">
-					<?php foreach ($menunava as  $menu) { 
+					<?php foreach ($menunava as  $menu) {
 							//if(count((array)$menu['child']) < 1 && $menu['page_name'] == ''){ continue; }
 						?>
 
@@ -109,7 +109,7 @@ foreach ($roledata as $roles) {
 										<?= htmlspecialchars(__($menu['Label'] ?? '')) ?>
 									</h3>
 								</div>
-								
+
 							</div>
 							<?php if(count((array)$menu['child']) < 1){  ?>
 								<?php $table_name = toGetTableNameUsingPageName($menu['page_name']); $value['display_list'] =1; ?>
@@ -130,7 +130,7 @@ foreach ($roledata as $roles) {
 										<div class="col-lg-2">
 											<span class="d-inline-block fw-bold" style="margin-bottom:5px">   <?= __("Delete") ?></span>
 										</div>
-									
+
 
 												<div class="col-lg-3 p-1">
 													<?php if($table_name != ''){ ?>
@@ -171,7 +171,7 @@ foreach ($roledata as $roles) {
 													</span>
 												</div>
 									</div>
-								
+
 								</div>
 							<?php }else{ ?>
 							<div class="card-body">
@@ -204,7 +204,7 @@ foreach ($roledata as $roles) {
 												<div class="col-lg-2">
 													<span class="d-inline-block fw-bold" style="margin-bottom:5px">   <?= __("Delete") ?></span>
 												</div>
-												<?php 
+												<?php
 												if(count((array)$child['child']) < 1){  $child['child'] = $arrayName = array($child);  }
 												foreach ($child['child'] as  $value) { ?>
 												<?php $table_name = toGetTableNameUsingPageName($value['Page_Name']); $value['display_list']=1; ?>
@@ -217,7 +217,7 @@ foreach ($roledata as $roles) {
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
 														<label>
-															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_view"; ?>"  <?php if($role[$table_name]['view'] == 1){ ?> checked <?php } ?> aria-label="View <?php echo htmlspecialchars($value['Label']); ?>"> 
+															<input type="checkbox" class="js-switch" name="<?php echo $table_name."_view"; ?>"  <?php if($role[$table_name]['view'] == 1){ ?> checked <?php } ?> aria-label="View <?php echo htmlspecialchars($value['Label']); ?>">
 															<span></span>
 														</label>
 													</span>
@@ -256,13 +256,13 @@ foreach ($roledata as $roles) {
 						<?php } ?>
 						</div>
 					</div>
-					
+
 				    <?php  }	?>
 				</div>
 			</div>
 			<?php $j++;  }	?>
 		</div>
-		
+
 	</div>
 
 </div>
@@ -281,11 +281,11 @@ foreach ($roledata as $roles) {
 						<button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?= __("Save & exit") ?></button>
 						<button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?= __("Save & continue") ?></button>
 						<button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?= __("Cancel") ?></button>
-				<?php } ?>	
+				<?php } ?>
 			</div>
 			<div class="col-lg-6 kt-align-right">
 				<button type="reset" disabled="disabled" class="btn btn-danger float-right mt-5"><i class="la la-trash"></i><?= __("Delete") ?></button>
-			</div> 
+			</div>
 		</div>
 	</div>
 </div>

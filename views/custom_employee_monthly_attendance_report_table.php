@@ -74,7 +74,7 @@ foreach($attendance as $attend){
 }
 $atdata = array('P'=>0, 'A'=>0, 'T'=>0);
 
-for ($fdate = strtotime($from_date); $fdate <= strtotime($lto_date); $fdate = strtotime('+1 day', $fdate)) { 
+for ($fdate = strtotime($from_date); $fdate <= strtotime($lto_date); $fdate = strtotime('+1 day', $fdate)) {
     $current_date = date('Y-m-d', $fdate);
     if(isset($cha[$current_date])){
         $chk = $cha[$current_date];
@@ -89,7 +89,7 @@ for ($fdate = strtotime($from_date); $fdate <= strtotime($lto_date); $fdate = st
              $atdata['P'] = $atdata['P']+0.5;
         }
     }else{
-         $atdata['A'] = $atdata['A']+1;   
+         $atdata['A'] = $atdata['A']+1;
     }
 }
 $cnt_holiday = count((array)$holidays);
@@ -102,7 +102,7 @@ foreach($app_leave_day as $app_day){
     }
 }
 $emp_work_days = $emp_work_days +$addoff;
-$ymn = explode("-", $month); 
+$ymn = explode("-", $month);
 $year = $ymn['0'];
 $mon = $ymn['1'];
 
@@ -126,8 +126,8 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
 			<h5><?= __('Employee Attendance Report') ?> (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
 			<?php if (!empty($shift_info)): ?>
 				<span class="text-muted m-l-5">
-                    <i class="fa fa-clock-o"></i> 
-                    <?= $shift_info['shift_name'] ?? 'N/A'; ?> 
+                    <i class="fa fa-clock-o"></i>
+                    <?= $shift_info['shift_name'] ?? 'N/A'; ?>
                     (<?= $shift_info['clock_in'] ?? '00:00:00'; ?> - <?= $shift_info['clock_out'] ?? '00:00:00'; ?>)
                 </span>
 			<?php endif; ?>
@@ -148,7 +148,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
              <span class=" m-l-5"> <?= __('Absent Days') ?> : </span>
             <span class="text-muted m-l-5"><?php echo  $atdata['A']; ?></span>
               <span class=" m-l-5"><?= __('Total Payable Days') ?> : </span>
-            <span class="text-muted m-l-5"><?php echo  $emp_work_days; ?></span> 
+            <span class="text-muted m-l-5"><?php echo  $emp_work_days; ?></span>
         </div>
 
 		<div class="card-body">
@@ -221,7 +221,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                                 $show = 'A';
                             }
                         }
-    
+
 
                         // 2️⃣ Weekend
                         elseif (!in_array($day, $weak_off_arr)) {
@@ -261,7 +261,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                             $current_key = (int)$attendance_map[$date]['leave_type_id'];
                         } else {
                             // Map attendance_key_short_code to leave_type_id
-                            
+
                             if ($status == 'P') {
                                 $current_key = '1';
                             } elseif ($status == 'A') {
@@ -289,7 +289,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                             <td > <?php echo isset($calculated_hours[$date]) && $show != 'A' ? $calculated_hours[$date]['ot_string'].' Hrs' : '-'; ?> </td>
                             <td> <?php echo isset($calculated_hours[$date]) && $show != 'A' ? $calculated_hours[$date]['ut_string'].' Hrs' : '-'; ?> </td>
                             <td><?= $show; ?>
-                            
+
                             </td>
                             <td style="width:150px">
                                 <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" style="width:150px" class="form-select"
@@ -333,13 +333,13 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td> 
+                            <td>
                                 <?php
                                 $finalHours = floor($over_time / 60);
                                 $finalMinutes = $over_time % 60;
                                 echo sprintf("%02d:%02d", $finalHours, $finalMinutes);
                                 ?>
-                                
+
                             </td>
                             <td>
                                  <?php
@@ -352,7 +352,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                             <td></td>
                         </tr>
                     </tbody>
-					
+
 				</table>
 			</div>
 
@@ -387,7 +387,7 @@ window.addEventListener("load", function() {
             }
         });
     });
-    
+
 
     $(document).on('click', '.edit-timesheet', function () {
 
@@ -420,7 +420,7 @@ window.addEventListener("load", function() {
 });
 
 function leavemonthapply(id, timesheet_date, main_clock_in, main_clock_out, leave_type_id) {
- 
+
     Swal.fire({
         title: <?= json_encode(__('Are you sure?')) ?>,
         text: <?= json_encode(__('Are you sure to change this?')) ?>,
@@ -431,12 +431,12 @@ function leavemonthapply(id, timesheet_date, main_clock_in, main_clock_out, leav
         confirmButtonText: <?= json_encode(__('Yes, Change it!')) ?>,
         cancelButtonText: <?= json_encode(__('Cancel')) ?>
     }).then((result) => {
- 
+
         if (!result.isConfirmed) {
             return; // STOP if cancelled
         }
 
-   
+
     // Get hidden field values
     var company_id = $('#company_id').val();
     var user_id    = $('#user_id').val();
@@ -461,13 +461,13 @@ function leavemonthapply(id, timesheet_date, main_clock_in, main_clock_out, leav
         timesheet_date: timesheet_date,
         company_id: company_id,
         user_id: user_id,
-        emp_id: emp_id, 
+        emp_id: emp_id,
         shift_clock_in: clock_in,
         shift_clock_out: clock_out,
         clock_in: clock_in,
-        clock_out: clock_out, 
+        clock_out: clock_out,
         main_clock_in: main_clock_in,
-        main_clock_out: main_clock_out, 
+        main_clock_out: main_clock_out,
         absent_date: timesheet_date,
         leave_date: timesheet_date,
         leave_type_id: leave_type_id,
@@ -498,6 +498,6 @@ function leavemonthapply(id, timesheet_date, main_clock_in, main_clock_out, leav
     });
      });
 }
- 
+
 </script>
 

@@ -12,7 +12,7 @@ $reviewdata = json_decode($reviewdata, 1);
 			<a class="nav-link active" data-bs-toggle="tab" href="#home7pending" role="tab"><i class="fa fa-hourglass-2"></i>  <?= __('Pending') ?>  <span class="badge bg-danger"><?php echo count((array)$reviewdata['pending']); ?></span></a>
 			<div class="slide"></div>
 		</li>
-		
+
 		<li class="nav-item">
 			<a class="nav-link" data-bs-toggle="tab" href="#profile7approve" role="tab"><i class="fa fa-thumbs-up"></i> <?= __('Approve') ?>  <span class="badge bg-warning ml-2"><?php echo count((array)$reviewdata['approve']); ?></span></a>
 			<div class="slide"></div>
@@ -31,7 +31,7 @@ $reviewdata = json_decode($reviewdata, 1);
 					</tr>
 				</thead>
 				<tbody>
-					<?php 
+					<?php
 					if(!empty($reviewdata['pending'])){ 	foreach ($reviewdata['pending'] as  $reviewda){
 						$Notification_DateTime = notificationdatesdiff($reviewda['request_date']) . " " . __('ago');
 						$Notification_Table = $reviewda['table'];
@@ -46,14 +46,14 @@ $reviewdata = json_decode($reviewdata, 1);
 							$pagename = $getpagename;
 						}else{
 							$pagename = "COM_INSERT_".ucwords($reviewda['table']);
-						}			
+						}
 						$nrid = deocdeId("id:".$reviewda['transaction_id']);
 						$link = "index.php?option=".$pagename."&Rid=".$nrid;
-						$icon_initials = initials($_SESSION['users'][$reviewda['created_by']]); 
+						$icon_initials = initials($_SESSION['users'][$reviewda['created_by']]);
 						$icon_initials_name = $_SESSION['users'][$reviewda['created_by']];
 						$current_status = $reviewda['current_status'];
 						$Notification_Message = ucwords(str_replace("_"," ",($reviewda['table'])))." - ".$icon_initials_name;
-						?>		
+						?>
 						<tr>
 							<td>
 								<span  alt="<?= __('user image') ?>" class="img-radius img-50 align-top m-r-15 custom_txt_round p-2 f-12 text-center" ><?php echo $icon_initials; ?></span>
@@ -76,7 +76,7 @@ $reviewdata = json_decode($reviewdata, 1);
 								</div>
 							</td>
 						</tr>
-						<?php  $k++; } } else{ 
+						<?php  $k++; } } else{
 							echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> " . __('No Reviews Available') . "</h4></td></tr>";
 						} ?>
 					</tbody>
@@ -93,7 +93,7 @@ $reviewdata = json_decode($reviewdata, 1);
 						</tr>
 					</thead>
 					<tbody>
-						<?php 
+						<?php
 						if(!empty($reviewdata['approve'])){  foreach ($reviewdata['approve'] as $reviewda){
 							$Notification_DateTime = notificationdatesdiff($reviewda['request_date']) . " " . __('ago');
 							$Notification_Table = $reviewda['table'];
@@ -111,11 +111,11 @@ $reviewdata = json_decode($reviewdata, 1);
 							}
 							$nrid = deocdeId("id:".$reviewda['transaction_id']);
 							$link = "index.php?option=".$pagename."&Rid=".$nrid;
-							$icon_initials = initials($_SESSION['users'][$reviewda['created_by']]); 
+							$icon_initials = initials($_SESSION['users'][$reviewda['created_by']]);
 							$icon_initials_name = $_SESSION['users'][$reviewda['created_by']];
 							$current_status = $reviewda['current_status'];
 							$Notification_Message = ucwords(str_replace("_"," ",($reviewda['table'])))." - ".$icon_initials_name;
-							?>		
+							?>
 							<tr>
 								<td>
 									<span  alt="<?= __('user image') ?>" class="img-radius img-50 align-top m-r-15 custom_txt_round p-2 f-12 text-center" ><?php echo $icon_initials; ?></span>
@@ -135,7 +135,7 @@ $reviewdata = json_decode($reviewdata, 1);
 									</div>
 								</td>
 							</tr>
-							<?php  $k++; } } else{ 
+							<?php  $k++; } } else{
 								echo "<tr><td colspan='3'><h4 class='p-40 text-center'><i class='fa fa-warning'></i> " . __('No Reviews Available') . "</h4></td></tr>";
 							} ?>
 						</tbody>
@@ -162,4 +162,3 @@ $reviewdata = json_decode($reviewdata, 1);
 
 
 
-		

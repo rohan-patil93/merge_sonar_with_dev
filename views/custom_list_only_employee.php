@@ -113,7 +113,7 @@ if($i !=0 && $i!=""){
                                                     </div>
                                                     <div class="my-lg-0 my-3">
 
-                                        <?php 
+                                        <?php
                                         $check_in_display = $clock_data['clock_in'] !="" ? $clock_data['clock_in'] : "00:00:00" ;
                                             $check_out_display = $clock_data['clock_out'] !="" ? $clock_data['clock_out'] : "00:00:00" ;
                                             if($clock_data['clock_out'] !='' || count((array)$clock_data) == 0){

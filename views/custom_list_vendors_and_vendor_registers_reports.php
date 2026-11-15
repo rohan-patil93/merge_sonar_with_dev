@@ -12,7 +12,7 @@ $vendor_types = $result['vendor_types'];
 $states = $result['states'];
 $countries = $result['countries'];
 $cities = $result['cities'];
-//echo "<pre>"; print_r($states); echo "</pre>"; 
+//echo "<pre>"; print_r($states); echo "</pre>";
 $_SESSION['download_data'] = array();
 ?>
 
@@ -56,7 +56,7 @@ $_SESSION['download_data'] = array();
 	            		<?php foreach($locations as $loc){ ?>
 	              		<option value="<?php echo $loc['id']; ?>" <?php echo ($_POST['location_id'] == $loc['id']) ? 'selected' : ''; ?>><?php echo $loc['location_name']; ?></option>
 	              		<?php } ?>
-	              		
+
 	            	</select>
 	          	</div>
 	          	<div class="col-lg-2 mb-2 w-full">
@@ -137,9 +137,9 @@ $_SESSION['download_data'] = array();
 	          		</tr>
 	          	</thead>
 	          	<tbody>
-	          		<?php 
+	          		<?php
 	          		$cssdata = array();
-	          		if(count((array)$vendorlist) != 0){ 
+	          		if(count((array)$vendorlist) != 0){
 	          			$seq=1;
 	          			foreach($vendorlist as $venddetails){
 	          				$cssdata[] = array('First Name'=>emptytextdashShow($venddetails['first_name']) ,'middle_name'=>emptytextdashShow($venddetails['middle_name']),'last_name'=>emptytextdashShow($venddetails['last_name']),'email'=>emptytextdashShow($venddetails['email']),'phone'=>emptytextdashShow($venddetails['phone']),'mobile'=>emptytextdashShow($venddetails['mobile']),'company'=>emptytextdashShow($venddetails['company']),'location_name'=>emptytextdashShow($locations[$venddetails['location_id']]['location_name']),'business_size'=>emptytextdashShow($venddetails['business_size']),'tin_number'=>emptytextdashShow($venddetails['tin_number']),'vat_number'=>emptytextdashShow($venddetails['vat_number']),'display_name'=>emptytextdashShow($venddetails['display_name']),'billing_address'=>emptytextdashShow($venddetails['billing_address']),'billing_city_name'=>emptytextdashShow($cities[$venddetails['billing_city']]['city_name']),'billing_state_name'=>emptytextdashShow($states[$venddetails['billing_state']]['state_name']),'billing_post_code'=>emptytextdashShow($venddetails['billing_post_code']),'billing_country_name'=>emptytextdashShow($countries[$venddetails['billing_country']]['country_name']),'shipping_address'=>emptytextdashShow($venddetails['shipping_address']),'shipping_city_name'=>emptytextdashShow($cities[$venddetails['shipping_city']]['city_name']),'shipping_state_name'=>emptytextdashShow($states[$venddetails['shipping_state']]['state_name']),'shipping_post_code'=>emptytextdashShow($venddetails['shipping_post_code']),'shipping_country_name'=>emptytextdashShow($countries[$venddetails['shipping_country']]['country_name']),'bank_account_name'=>emptytextdashShow($venddetails['bank_account_name']),'bank_name'=>emptytextdashShow($venddetails['bank_name']),'bank_account_no'=>emptytextdashShow($venddetails['bank_account_no']),'ifsc_code'=>emptytextdashShow($venddetails['ifsc_code']) ,'bank_address'=>emptytextdashShow($venddetails['bank_address']),'website_url'=>emptytextdashShow($venddetails['website_url']),'vendor_po_notes'=>emptytextdashShow($venddetails['vendor_po_notes']) ,'vendor_other_notes'=>emptytextdashShow($venddetails['vendor_other_notes']),'pan_no'=>emptytextdashShow($venddetails['pan_no']),'gstin'=>emptytextdashShow($venddetails['gstin']),'hr_connect'=>emptytextdashShow($application_users[$venddetails['hr_connect']]['display_name']),'finance_connect'=>emptytextdashShow($application_users[$venddetails['finance_connect']]['display_name']),'purchase_connect'=>emptytextdashShow($application_users[$venddetails['purchase_connect']]['display_name']),'admin_connect'=>emptytextdashShow($application_users[$venddetails['admin_connect']]['display_name']),'project_connect'=>emptytextdashShow($application_users[$venddetails['project_connect']]['display_name']),'location_connect'=>emptytextdashShow($application_users[$venddetails['location_connect']]['display_name']),'legal_connect'=>emptytextdashShow($application_users[$venddetails['legal_connect']]['display_name']),'bank_country_name'=>emptytextdashShow($countries[$venddetails['bank_country']]['country_name']),'bank_state'=>emptytextdashShow($states[$venddetails['bank_state']]['state_name']),'bank_city'=>emptytextdashShow($cities[$venddetails['bank_city']]['city_name']),'bank_post_code'=>emptytextdashShow($venddetails['bank_post_code']),'bank_beneficiary_name'=>emptytextdashShow($venddetails['bank_beneficiary_name']),'tan_number'=>emptytextdashShow($venddetails['tan_number']),'msme_number'=>emptytextdashShow($venddetails['msme_number']),'reference_vendor_code'=>emptytextdashShow($venddetails['reference_vendor_code']) ,'short_name'=>emptytextdashShow($venddetails['short_name']),'bp_code'=>emptytextdashShow($venddetails['bp_code']));
@@ -196,20 +196,20 @@ $_SESSION['download_data'] = array();
 						<td class="p-2"><?php echo emptytextdashShow($venddetails['reference_vendor_code']); ?> </td>
 						<td class="p-2"><?php echo emptytextdashShow($venddetails['short_name']); ?> </td>
 						<td class="p-2"><?php echo emptytextdashShow($venddetails['bp_code']); ?> </td>
-	          		</tr>	
+	          		</tr>
 	          		<?php $seq++; } $_SESSION['download_data'] = $cssdata; }else{ ?>
 	  				<tr>
 			            <td colspan="50">
 			              	<div class="card-px text-center py-20 m-t-30">
-			                	<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>   
+			                	<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
 			                	<div class="text-center px-4">
 			                  		<img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
-			                	</div>   
+			                	</div>
 			              	</div>
 			            </td>
 			        </tr>
 		  			<?php } ?>
-	          		
+
 	          	</tbody>
       		</table>
   		</div>

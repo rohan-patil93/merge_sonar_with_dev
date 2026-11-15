@@ -585,7 +585,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         <div class="form-group col-md-6">
                                             <span class="vl-label"><i class="fa fa-bullseye text-muted me-1"></i> Purpose</span><br>
                                             <div id="purpose-radios-container" class="d-inline-flex flex-wrap align-items-center gap-2 w-100">
-                                                <?php 
+                                                <?php
                                                 $visit_purpose_res = $result['visit_purpose_res'] ?? [];
                                                 if (count((array)$visit_purpose_res) > 0) {
                                                     foreach ($visit_purpose_res as $vp) {
@@ -721,7 +721,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     <select class="form-select js-example-basic-single flex-grow-1"
                                                         id="expected_duration" name="expected_duration" title="Expected Duration" aria-label="Expected Duration">
                                                         <option value="">Select Duration</option>
-                                                        <?php 
+                                                        <?php
                                                          $expected_duration_res = $result['expected_duration_res'] ?? [];
                                                          if (count((array) $expected_duration_res) > 0) {
                                                              foreach ($expected_duration_res as $value) {
@@ -749,7 +749,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     <select class="form-select js-example-basic-single flex-grow-1" id="vehicle_type"
                                                         name="vehicle_type" title="Vehicle Type" aria-label="Vehicle Type">
                                                         <option value="">None / Walk-in</option>
-                                                        <?php 
+                                                        <?php
                                                         $vehicle_type_res = $result['vehicle_type_res'] ?? [];
                                                         if (count((array) $vehicle_type_res) > 0) {
                                                             foreach ($vehicle_type_res as $value) {
@@ -836,7 +836,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 <select class="form-select js-example-basic-single flex-grow-1" id="delivery_type"
                                                     name="delivery_type" title="Delivery Type" aria-label="Delivery Type">
                                                     <option value="">Select Delivery Type</option>
-                                                    <?php 
+                                                    <?php
                                                     $delivery_type_res = $result['delivery_type_res'] ?? [];
                                                     if (count((array) $delivery_type_res) > 0) {
                                                         foreach ($delivery_type_res as $value) {
@@ -1030,7 +1030,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     <select class="form-select js-example-basic-single flex-grow-1"
                                                         id="service_classification" name="service_classification" title="Service Classification" aria-label="Service Classification">
                                                         <option value="">Select Classification</option>
-                                                        <?php 
+                                                        <?php
                                                         $service_classification_res = $result['service_classification_res'] ?? [];
                                                         if (count((array) $service_classification_res) > 0) {
                                                             foreach ($service_classification_res as $value) {
@@ -1422,7 +1422,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                             <div class="d-flex align-items-center gap-1">
                                                 <select class="form-select js-example-basic-single flex-grow-1"
                                                     name="vendor_supplier_entry_type" id="vendor_supplier_entry_type" title="Vendor Supplier Entry Type" aria-label="Vendor Supplier Entry Type">
-                                                    <?php 
+                                                    <?php
                                                     $vendor_supplier_entry_type_res = $result['vendor_supplier_entry_type_res'] ?? [];
                                                     if (count((array) $vendor_supplier_entry_type_res) > 0) {
                                                         foreach ($vendor_supplier_entry_type_res as $value) {
@@ -1896,7 +1896,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     <option value="">Select brand</option>
                                                     <?php if (!empty($luggage_brands)): ?>
                                                         <?php foreach ($luggage_brands as $brand): ?>
-                                                            <?php 
+                                                            <?php
                                                                 $val = is_object($brand) ? $brand->genc_detail_name : $brand['genc_detail_name'];
                                                                 $code = is_object($brand) ? $brand->genc_detail_code : $brand['genc_detail_code'];
                                                                 $icon = is_object($brand) ? ($brand->option_icon ?? '') : ($brand['option_icon'] ?? '');

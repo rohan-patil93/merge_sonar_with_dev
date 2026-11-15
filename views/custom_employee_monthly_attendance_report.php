@@ -67,13 +67,13 @@ $employees = $result['table'] ?? array();
             </div>
              </form>
             <!-- Result -->
-            
+
         </div>
     </div>
     <div class="mt-4" id="TableContent">
         <?php
     if (isset($_GET['employee_id']) && isset($_GET['month'])) {
-        include_once('custom_employee_monthly_attendance_report_table.php'); 
+        include_once('custom_employee_monthly_attendance_report_table.php');
     }
     ?>
     </div>

@@ -26,7 +26,7 @@ if (empty($selectedlist)) {
             document.getElementById('filtershow').style.display = 'block';
         }
     </script>
-    <?php 
+    <?php
 }
 
 $emp_count = $selectedlist['matches_count'] ?? 0;
@@ -38,7 +38,7 @@ $emp_list_names = json_encode($emp_list_names_raw);
 <script type="text/javascript">
 function populatenamelist() {
     if (typeof jQuery !== 'undefined' && typeof KTBootstrapDatepicker !== 'undefined') {
-        jQuery(document).ready(function() {    
+        jQuery(document).ready(function() {
             KTBootstrapDatepicker.init();
         });
     }
@@ -64,9 +64,9 @@ function populatenamelist() {
 if (!empty($emp_list_names_raw)) {
     echo '<script type="text/JavaScript">  
     populatenamelist(); 
-    </script>'; 
+    </script>';
 }
-?>   
+?>
 <div class="modal-header">
     <h5 class="modal-title">Filter Options</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
@@ -173,7 +173,7 @@ function selectemployee() {
     var tableElem = document.getElementById('tablename');
     var application_table = tableElem ? tableElem.value : '';
     var str = "";
-    var obj = {}; 
+    var obj = {};
 
     for (var key in select_value) {
         if (Object.prototype.hasOwnProperty.call(select_value, key)) {
@@ -222,7 +222,7 @@ function selectemployee() {
                     }
                 }
 
-                var jsonresponse = JSON.stringify(obj); 
+                var jsonresponse = JSON.stringify(obj);
                 selectedemp = jsonresponse;
 
                 var filterlistElem = document.getElementById('filterlist');

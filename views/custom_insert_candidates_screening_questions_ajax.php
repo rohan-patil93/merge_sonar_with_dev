@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
@@ -7,9 +7,9 @@ $gettype = $_POST['gettype'];
 $candidate_id = $_POST['candidate_id'];
 $job_posting_id = $_POST['job_posting_id'];
 
-$url = API."?mode=getcandidatescreeningquestions&job_posting_candidate_id=".$job_posting_candidate_id."&candidate_id=".$candidate_id."&job_posting_id=".$job_posting_id."&gettype=".$gettype; 
+$url = API."?mode=getcandidatescreeningquestions&job_posting_candidate_id=".$job_posting_candidate_id."&candidate_id=".$candidate_id."&job_posting_id=".$job_posting_id."&gettype=".$gettype;
 $api = callAPI($url);
-$result = json_decode($api,1); 
+$result = json_decode($api,1);
  //echo "<pre>"; print_r($result); echo "</pre>";
 if($gettype =="QuestionsAnswers"){
 
@@ -38,21 +38,21 @@ if($gettype =="QuestionsAnswers"){
 }elseif($gettype =="ManualQuestions"){
     $job_postings = $result['job_postings'];
     $question = $job_postings['question'];
-    $questions = json_decode($question,1); 
+    $questions = json_decode($question,1);
     //echo "<pre>"; print_r($questions); echo "</pre>";
     ?>
-   <form id="questionform"> 
-        <div class="col-lg-12" id="videoquestiontextfileds"> 
+   <form id="questionform">
+        <div class="col-lg-12" id="videoquestiontextfileds">
         <?php  $seq=1; foreach($questions as $que){ ?>
-            <div class="row rows<?php echo $ij; ?> mt-2"> 
+            <div class="row rows<?php echo $ij; ?> mt-2">
                 <div class="col-lg-10">
                     <input class="form-control" type="hidden" name="screening_key[]" value="<?php echo bin2hex(random_bytes(16)); ?>" placeholder="<?= __('Eg. Tell me about yourself') ?>">
                     <input aria-label="<?= htmlspecialchars(__('Screening question'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="screening_question[]" value="<?php echo $que['question']; ?>" placeholder="<?= __('Eg. Tell me about yourself') ?>">
                 </div>
                 <div class="col-lg-2">
-                    <i role="button" tabindex="0" aria-label="<?= __('Delete Question') ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" title="<?= __('Delete Question') ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i> 
+                    <i role="button" tabindex="0" aria-label="<?= __('Delete Question') ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" title="<?= __('Delete Question') ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i>
                 </div>
-            </div>   
+            </div>
         <?php $seq++; } ?>
         </div>
     </form>

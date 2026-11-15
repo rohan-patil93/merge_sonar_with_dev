@@ -1,4 +1,4 @@
-<?php 
+<?php
 $_SESSION['apply_js']['calender'] = '1';
 	//echo "Ravi".$_GET['Rid']."%%%";
 	if($_GET['Rid']!=""){
@@ -12,20 +12,20 @@ $_SESSION['apply_js']['calender'] = '1';
 	$table ="employee_leaves";
 	$vdata1["where"] = array('is_active'=> 0);
     $vdata = urlencode(json_encode($vdata1));
-    $vurl = API."?mode=gettabledetailswithconditions&table=leave_categories&data=".$vdata; 
+    $vurl = API."?mode=gettabledetailswithconditions&table=leave_categories&data=".$vdata;
     $configesponse = callAPI($vurl);
 	$cate = json_decode($configesponse,1);
 
 	$vdata1["where"] = array('is_active'=> 0,'id'=>$id);
     $vdata = urlencode(json_encode($vdata1));
-    $vurl = API."?mode=gettabledetailswithconditions&table=employee_leaves&data=".$vdata; 
+    $vurl = API."?mode=gettabledetailswithconditions&table=employee_leaves&data=".$vdata;
     $configesponse = callAPI($vurl);
 	$empl = json_decode($configesponse,1);
 	$empl = $empl['0'];
 	//print_r($empl);
 	$vdata1["where"] = array('is_active'=> 0,);
     $vdata = urlencode(json_encode($vdata1));
-    $vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata; 
+    $vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata;
     $configesponse = callAPI($vurl);
 	$emplos = json_decode($configesponse,1);
 	foreach ($emplos as  $value) {
@@ -35,11 +35,11 @@ $_SESSION['apply_js']['calender'] = '1';
 	$otstdate = date('Y-m-d', strtotime('-90 day', strtotime($empl['leave_from'])));
 	$ottodate = date('Y-m-d', strtotime('+90 day', strtotime($empl['leave_to'])));
 	//echo $otstdate."&".$ottodate;
-	$evurl = API."?mode=tosearchempleavesbydate&start=".$otstdate."&end=".$ottodate."&type=REPORTTO"; 
-	//echo $evurl; 
+	$evurl = API."?mode=tosearchempleavesbydate&start=".$otstdate."&end=".$ottodate."&type=REPORTTO";
+	//echo $evurl;
 	$otherempurl = callAPI($evurl);
 	$searchresult = json_decode($otherempurl,1);
-	$all_leave_categories =  $searchresult['all_leave_categories'];	
+	$all_leave_categories =  $searchresult['all_leave_categories'];
 	$otheremp =  $searchresult['employee_leaves'];	$stausresult = ViewStatusData();
 	//print_r($otheremp); exit;
 ?>
@@ -71,9 +71,9 @@ $_SESSION['apply_js']['calender'] = '1';
 	        },
 	        error:function (){}
     	});
-    	
+
 	}
-	
+
 	function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,next_status){
 	jQuery.ajax({
 		url: "views/custom_insert_dynamic_status_popup.php",
@@ -136,9 +136,9 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 },
                 error:function (){}
             });
-	}); 
+	});
 }
- 
+
 </script>
 
 <?php //echo "<pre>"; print_r(getPagenametotable('accounts','edit_page_name'));  //approval_page_name,edit_page_name,insert_page_name?>
@@ -148,8 +148,8 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 			<div class="col-lg-12">
 				<div class="card">
 					<?php
-				if($empl['id']!=""){ 
-					$table = 'employee_leaves';	
+				if($empl['id']!=""){
+					$table = 'employee_leaves';
 					$workflowsteps = getWorkflowStatus($table,$empl['id'],$empl['current_status']);
 					echo $workflowsteps['current_status_ribbon'];
 				}
@@ -157,7 +157,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 		            <div class="card-header table-card-header">
 		              <h5><?= __('Leave Request Approval') ?></h5>
 		              <div class="card-header-right table-card-header ">
-							
+
 									<?php  echo $workflowsteps['workflow_btn']; ?>
 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 					              <i class="icofont icofont-reply"></i>
@@ -169,36 +169,36 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 						</div>
 						<div class="card-body">
 							<form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
-							
-							
+
+
 							<div class="col-lg-12 mb-4">
 								<div class="col-lg-12">
-								    <div class="d-flex align-items-center">				
-								    		<?php /** if($emps['image'] !=''){ ?>			
-								    	<div class="symbol symbol-60 symbol-sm flex-shrink-0">								
-								    		<img class="userimageround" src="uploads/all/<?php echo $emps['image']; ?>" alt="">				
-										</div>	
+								    <div class="d-flex align-items-center">
+								    		<?php /** if($emps['image'] !=''){ ?>
+								    	<div class="symbol symbol-60 symbol-sm flex-shrink-0">
+								    		<img class="userimageround" src="uploads/all/<?php echo $emps['image']; ?>" alt="">
+										</div>
 									<?php }else{ ?>
 										<div class="img-radius img-50 align-top m-r-15 text-center userimageround">
 									        <span class="symbol-label font-size-h5"><?php echo initials($emps['display_name']); ?></span>
-									    </div>		 
-									    <?php }  **/?>	
- <?php if($emps['image'] !=''){ ?>	
+									    </div>
+									    <?php }  **/?>
+ <?php if($emps['image'] !=''){ ?>
    <div class=" m-r-15 text-center">
       <img alt="" src="uploads/all/<?php echo $emps['image']; ?>"   class="img-radius img-50 align-top m-r-15 mt-4" >
    </div>
    <?php }else{ ?>
    <span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($emps['display_name']); ?></span>
    <?php } ?>
-   
-   
 
-										
-										<div class="mt-4">		
-											<div class="text-dark-75 font-weight-bolder font-size-lg mb-0 f-16"><?php echo  viewTitle($emps['display_name']); ?></div>				
+
+
+
+										<div class="mt-4">
+											<div class="text-dark-75 font-weight-bolder font-size-lg mb-0 f-16"><?php echo  viewTitle($emps['display_name']); ?></div>
 											<a href="#" class="sub-title text-muted font-weight-bold text-hover-primary f-14">
 												<?php echo date('dS M Y',strtotime($empl['leave_from']))." To ".date('dS M Y',strtotime($empl['leave_to']))." (". $all_leave_categories[$empl['leave_type_id']]['name'].") Total Day(s) - ".number_format($empl['leave_days'],2); ?></a>
-										</div>					
+										</div>
 									</div>
 								</div>
 
@@ -212,7 +212,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 									      </div>
 									    </div>
 									  </div>
-								
+
 								<div class="col-lg-5 p-3" style="float: left;">
 									<div class="card card-custom card-stretch gutter-b p-3">
 										<div class="card-header table-card-header">
@@ -223,26 +223,26 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 										 ?>
 										<div class="card mt-2">
 											<div class="card-body p-2">
-												<div class="d-flex align-items-center">	
-												<?php if($empdata[$othemp['employee_id']]['image'] !=''){ ?>			
-												<div class="symbol symbol-60 symbol-sm flex-shrink-0">								
-													<img class="img-radius img-50" src="uploads/all/<?php echo $empdata[$othemp['employee_id']]['image']; ?>" alt="">				
-												</div>	
+												<div class="d-flex align-items-center">
+												<?php if($empdata[$othemp['employee_id']]['image'] !=''){ ?>
+												<div class="symbol symbol-60 symbol-sm flex-shrink-0">
+													<img class="img-radius img-50" src="uploads/all/<?php echo $empdata[$othemp['employee_id']]['image']; ?>" alt="">
+												</div>
 											<?php }else{ ?>
 												<div class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center">
 													<span class="symbol-label font-size-h5"><?php echo initials($empdata[$othemp['employee_id']]['display_name']); ?></span>
-												</div>		
-												<?php } ?>			
-												<div class="ml-4">		
+												</div>
+												<?php } ?>
+												<div class="ml-4">
 													<div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?php echo $empdata[$othemp['employee_id']]['display_name']; ?> <?php $statusVal = $stausresult[$othemp['current_status']];?>
-											<span class="badge m-l-50 " style="background-color: <?php echo $statusVal['background_color'] ?>; color: <?php echo $statusVal['color'] ?>; "><?php echo $statusVal['name']; ?></span></div>				
+											<span class="badge m-l-50 " style="background-color: <?php echo $statusVal['background_color'] ?>; color: <?php echo $statusVal['color'] ?>; "><?php echo $statusVal['name']; ?></span></div>
 													<a href="index.php?option=COM_INSERT_APPROVAL_LEAVE&Rid=<?php  echo deocdeId("id:".$othemp['id']); ?>" class="text-muted font-weight-bold text-hover-primary"> <?php echo date('dS M Y',strtotime($othemp['leave_from']))." To ".date('dS M Y',strtotime($othemp['leave_to']))." (". $all_leave_categories[$othemp['leave_type_id']]['name'].")"; ?> </a>
-												</div>					
+												</div>
 											</div>
-											
+
 											</div>
 										</div>
-										<?php  } 
+										<?php  }
 										} ?>
 									</div>
 								</div>
@@ -251,14 +251,14 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 					</div>
 				</form>
 			<div class="row">
-	<?php 
+	<?php
 
-echo $todisplaythree = todisplaythree(array('table'=>'employee_leaves','originator'=>$empl['created_by'],'encode'=>'no','id'=>$id,'dis_query'=>'yes','dis_timeline'=>'yes','dis_comments'=>'yes'));  
+echo $todisplaythree = todisplaythree(array('table'=>'employee_leaves','originator'=>$empl['created_by'],'encode'=>'no','id'=>$id,'dis_query'=>'yes','dis_timeline'=>'yes','dis_comments'=>'yes'));
 ?>
 
-</div>	
-				
-				
+</div>
+
+
 			</div>
 		</div>
 	</div>

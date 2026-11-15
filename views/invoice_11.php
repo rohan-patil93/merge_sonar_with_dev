@@ -1,4 +1,4 @@
-<?php 
+<?php
 if($_GET['print'] =="Y"){
     include_once('../includes/session.php');
     include_once('../dbconfig.php');
@@ -17,8 +17,8 @@ if($_POST['callapi'] =='Y'){
     $callapi = "Y";
 }else{
     $rid = $_GET['rid'];
-    $table = $_GET['table'];    
-    $api = API."?mode=getdynamicinvoiceprint&transaction_id=".$rid."&transaction_table=".$table; 
+    $table = $_GET['table'];
+    $api = API."?mode=getdynamicinvoiceprint&transaction_id=".$rid."&transaction_table=".$table;
     $apicall = callAPI($api);
     $result = json_decode($apicall, 1);
     $config = $result['config'];
@@ -110,7 +110,7 @@ function emptyCheck($valu){
 //  }else{
 //      $from = date($dateformat);
 //  }
-//  return $from; 
+//  return $from;
 // }
 ?>
 <script>
@@ -127,7 +127,7 @@ function emptyCheck($valu){
    }
 </script>
 <!-- [ navigation menu ] end -->
- 
+
 
 
 <div class="card" style="width: 793px; margin: 0 auto;">
@@ -343,10 +343,10 @@ function emptyCheck($valu){
                 </tr>
             </table>
         </div>
-    </div> 
+    </div>
     <div class="card-body">
         <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" ><?= __('Print Invoice'); ?></button>
     </div>
-</div>   
+</div>
 
 <!-- [ style Customizer ] start -->

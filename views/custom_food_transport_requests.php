@@ -5,13 +5,13 @@ $current_to_date = date('Y-m-d');
 
 $data12["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0');
 $datw12 = urlencode(json_encode($data12));
-$curl12 = API."?mode=gettabledetailswithconditions&table=food_options&data=".$datw12; 
+$curl12 = API."?mode=gettabledetailswithconditions&table=food_options&data=".$datw12;
 $cudata12 = callAPI($curl12);
 $foodoptions = json_decode($cudata12,1);
 
 $data12["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0');
 $datw12 = urlencode(json_encode($data12));
-$curl12 = API."?mode=gettabledetailswithconditions&table=locations&data=".$datw12; 
+$curl12 = API."?mode=gettabledetailswithconditions&table=locations&data=".$datw12;
 $cudata12 = callAPI($curl12);
 $locations = json_decode($cudata12,1);
 
@@ -39,7 +39,7 @@ if(isset($_POST['datefilter'])){
 	$locfooddata = $requestData['locfooddata'];
 	$transport = $requestData['transport'];
 	$transport_req = $requestData['transport_req'];
-	
+
 //echo "<pre>"; print_r($transport[5]);
 
 }
@@ -56,37 +56,37 @@ if(isset($_POST['datefilter'])){
 							<div class="card-title">
 								<h3 class="card-label">&nbsp; <?php echo __('EMPLOYEE FOOD AND TRANSPORT REQUESTS'); ?> </h3>
 							</div>
-							
+
 						</div>
-						<div class="card-body">		
-							<div class=" card-custom gutter-b card-stretch">		
+						<div class="card-body">
+							<div class=" card-custom gutter-b card-stretch">
 								<div class=" d-flex flex-column">
 									<div class="row col-lg-12">
 										<div class="col-lg-9">
 											<div class="row col-lg-12">
 
-												<?php 
+												<?php
 												$colorindex = 0;
 												if(count((array)$total_requests)>0) {
-													
-												foreach($total_requests as $rkey=>$request) { 
+
+												foreach($total_requests as $rkey=>$request) {
 													$req_types_count_list[] = count((array)$request)==''?'0':count((array)$request);
 													$req_types_names_list[] = $foodoptiondata[$rkey];
 													?>
 													<button type="button" class="btn circle-circle-xl border-<?php echo $bgcolorlist[$colorindex]; ?> m-l-5 "><div class="text-center font-size-h3"><?php echo count((array)$request) == '' ? '0' : count((array)$request); ?></div> <div class="text-center font-size-h6"><?php echo htmlspecialchars(__($foodoptiondata[$rkey] ?? ''));?></div></button>
 													<?php $colorindex++; }
-												}else{ 
-														foreach($foodoptions as $rkey) { 
+												}else{
+														foreach($foodoptions as $rkey) {
 													$req_types_names_list[] = $rkey['food_option'];
 													$req_types_count_list[] = "0";
 															?>
 													<button type="button" class="btn circle-circle-xl border-<?php echo $bgcolorlist[$colorindex]; ?> m-l-5 "><div class="text-center font-size-h3"><?php echo "0"; ?></div> <div class="text-center font-size-h6"><?php echo htmlspecialchars(__($rkey['food_option'] ?? ''));?></div></button>
 													<?php $colorindex++; }
-												}  
+												}
 
 												array_push($req_types_count_list,$transport_req);
 												array_push($req_types_names_list,__("Transport"));
-											
+
 
 												?>
 												<button type="button" class="btn circle-circle-xl border-<?php echo $bgcolorlist[$colorindex]; ?> m-l-5 "><div class="text-center font-size-h3"><?php echo $transport_req; ?></div> <div class="text-center font-size-h6"><?php echo __("Transport");?></div></button>
@@ -117,7 +117,7 @@ if(isset($_POST['datefilter'])){
 
 								<table class="table table-separate table-head-custom table-checkable bordered dataTable px-6 " id="kt_datatable1">
 									<!-- <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1"> -->
-										<thead>  
+										<thead>
 											<tr>
 												<th scope="col">#</th>
 												<th scope="col"><?php echo __('Location'); ?> </th>
@@ -127,7 +127,7 @@ if(isset($_POST['datefilter'])){
 												<th scope="col"><?php echo __('Transport'); ?> </th>
 											</tr>
 										</thead>
-										<tbody> 
+										<tbody>
 											<?php $sno= 0;
 											foreach($locations as $loc) {  $sno++;   ?>
 												<tr>
@@ -137,7 +137,7 @@ if(isset($_POST['datefilter'])){
 													<td>  <a href="index.php?option=COM_LIST_EMP_REPORT&EID=<?php echo $decode_emplist;?>" target="_blank"> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?php echo __('Number of Requests'); ?>" style="vertical-align: middle;">  <?php echo count((array)$locfooddata[$foodoptionval][$locval]); ?> </span></a>  </td>
 												<?php } ?>
 
-												<?php  //foreach($transport as $trans){ 
+												<?php  //foreach($transport as $trans){
 
 													$locval = $loc['id']; $emplist = json_encode(array_keys($transport[$locval]),1); $decode_emplist = deocdeId(urlencode($emplist));  ?>
 													<td>  <a href="index.php?option=COM_LIST_EMP_REPORT&EID=<?php echo $decode_emplist;?>" target="_blank"> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?php echo __('Number of Requests'); ?>" style="vertical-align: middle;">  <?php echo count((array)$transport[$locval]); ?> </span></a>  </td>
@@ -155,7 +155,7 @@ if(isset($_POST['datefilter'])){
 									?>
 
 
-								<div class="form-group col-lg-4" >	
+								<div class="form-group col-lg-4" >
 										<input type="hidden" id="survey_qtypes" value="<?php echo $req_types_count; ?>">
 										<input type="hidden" id="survey_qtype_names" value="<?php echo $req_types_names; ?>">
 										<div id="survey_overview_chart" class="d-flex justify-content-center"></div>
@@ -165,7 +165,7 @@ if(isset($_POST['datefilter'])){
 									</div>
 
 
-							
+
 						</div>
 					</form>
 				</div>

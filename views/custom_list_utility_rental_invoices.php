@@ -1,13 +1,13 @@
-<?php 
-$apiurl = API."?mode=getrentalinvoices&bill_type=U"; 
+<?php
+$apiurl = API."?mode=getrentalinvoices&bill_type=U";
 $apires = callAPI($apiurl);
 $result = json_decode($apires, 1);
 $rental_invoices = $result['rental_invoices'];
 $credit_notes_sum = $result['credit_notes_sum'];
 $debit_notes_sum = $result['debit_notes_sum'];
 $property_tenant_billings_shared_datetime = $result['property_tenant_billings_shared_datetime'];
-// echo "<pre>"; print_r($property_tenant_billings_shared_datetime); echo "</pre>"; 
-// echo "<pre>"; print_r($result['property_tenant_billings_shared_datetime_sql']); echo "</pre>"; 
+// echo "<pre>"; print_r($property_tenant_billings_shared_datetime); echo "</pre>";
+// echo "<pre>"; print_r($result['property_tenant_billings_shared_datetime_sql']); echo "</pre>";
 // echo "<pre>"; print_r($rental_invoices); echo "</pre>";
 $stausresult = ViewStatusData();
 ?>
@@ -132,13 +132,13 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
           <div class="row">
             <div class="col-lg-5">
               <div class="input-group input-group-button mb-0">
-                  <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search"> 
+                  <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="div" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
                   <span class="input-group-text addon-style">
                       <span class=" d-inline-block fw-bold" style="margin-bottom:5px"><span class="ti-search text-white mt-2"></span></span>
                   </span>
               </div>
             </div>
-          
+
               <?php //if(RENTAL_INVOICE_SPLIT =="Y"){ ?>
                 <a href='#!' class="btn btn-success mb-2 desktop-view col-lg-4 ml-2" onclick="OpenInsertRentalInvoicePopUp('U')"><i class="icofont icofont-plus icon-white "></i> Utility Invoice</a>
               <?php /** }else{ ?>
@@ -153,7 +153,7 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
         </div>
       </div>
       <div class="card-body m-t-20">
-     
+
           <div class="row">
             <?php if(count((array)$rental_invoices) !=0){ foreach($rental_invoices as $ri){ ?>
               <div class="col-lg-3" id="categoryfilter">
@@ -167,19 +167,19 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
                             <i role="button" tabindex="0" aria-label="Print" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-printer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Print" onclick="goToAnotherPageAndPrint('<?php echo $ri['id']; ?>','utility_rental_invoices')"></i>
 
                              <i role="button" tabindex="0" aria-label="Download" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-cloud-down" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download" onclick="DownloadPDF('<?php echo $ri['id']; ?>','utility_rental_invoices')"></i>
-                             
 
-                            <?php /**if($property_tenant_billings_shared_datetime[$ri['id']]['pdf_name'] !=""){  ?>       
+
+                            <?php /**if($property_tenant_billings_shared_datetime[$ri['id']]['pdf_name'] !=""){  ?>
                                <a href="/uploads/rental_invoices/<?php echo $property_tenant_billings_shared_datetime[$ri['id']]['pdf_name']; ?>" download><i class="ti-cloud-down" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download"></i>
                             <?php } **/ ?>
-                            <?php if($ri['party_email'] !="" AND $property_tenant_billings_shared_datetime[$ri['id']]['id'] !=""){  ?>       
+                            <?php if($ri['party_email'] !="" AND $property_tenant_billings_shared_datetime[$ri['id']]['id'] !=""){  ?>
                               <i role="button" tabindex="0" aria-label="Send Email" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-email" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Send Email" onclick="renatalInvoiceSend('<?php echo $property_tenant_billings_shared_datetime[$ri['id']]['id']; ?>','<?php echo $ri['ref_bill_type'];?>')"></i>
                             <?php } ?>
                           </div>
                       </div>
                       <div class="card-body">
                           <table class="table table-hover m-b-0" style="font-size:13px;">
-                            <tbody> 
+                            <tbody>
                                   <tr>
                                     <th class="p-2">Number</th>
                                     <td class="text-right p-2 "> <a href="index?option=COM_INSERT_UTILITY_RENTAL_INVOICES&Rid=<?php echo deocdeId("id:".$ri['id']);?>" class="text-primary"><i class="fa fa-edit"></i>  <?php echo $ri['transaction_number']; ?></a></td>
@@ -240,7 +240,7 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
                       <div class="col-lg-7"></div>
                       <div class="col-lg-1">
                               <a target="_blank" href="index.php?option=COM_QO_PRINT&amp;rid=2&amp;table=rental_invoices&amp;title=Rental+Invoices" class="btn btn-clean"><i class="ti-printer"></i>
-                              </a> 
+                              </a>
                             </div>
                             <div class="col-lg-1">
                               <a target="_blank" href="index.php?option=COM_QO_PRINT&amp;rid=2&amp;table=rental_invoices&amp;title=Rental+Invoices" class="btn btn-clean">
@@ -262,12 +262,12 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
               </div>
             <?php } }else{ ?>
               <div class="card-px text-center ">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Utility Invices</p>   
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Utility Invices</p>
                   <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                  </div>   
+                  </div>
                 </div>
-            <?php } ?>             
+            <?php } ?>
           </div>
       </div>
 </div>

@@ -1,10 +1,10 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = "1";
 $start_month = $_POST['start_month'] !=""?$_POST['start_month']:date('Y-01');
 $end_month = $_POST['end_month'] !=""?$_POST['end_month']:date('Y-12');
 $url = API."?mode=getownerinvoicereports&start_month=".$start_month."&end_month=".$end_month."&property_owner_id=".$_POST['property_owner_id']."&property_owner_detail_id=".$_POST['property_owner_detail_id']."&type=INVOICES";
 $api = callAPI($url);
-$result = json_decode($api,1);  
+$result = json_decode($api,1);
 $property_owners = $result['property_owners'];
 $property_owner_details = $result['property_owner_details'];
 //$rental_invoices = $result['rental_invoices'];
@@ -62,7 +62,7 @@ function getOwnerProperty(valu){
 		                	<?php } ?>
 		                </select>
 		            </div>
-		        </div> 
+		        </div>
 		        <div class="col-lg-3">
 		            <div class=" form-group">
 		                <span class="form-label d-inline-block fw-bold"> <?= __('Property Name'); ?></span>
@@ -74,7 +74,7 @@ function getOwnerProperty(valu){
 		                </select>
 		            </div>
 		        </div>
-			    <div class="col-lg-2">    
+			    <div class="col-lg-2">
 		            <div class="form-group w-full table-card-header">
 		                <span class="form-label  d-inline-block fw-bold"><?= __('Start Month'); ?><span class="text-danger">*</span></span>
 						<input aria-label="<?= htmlspecialchars(__('Start month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
@@ -102,9 +102,9 @@ function getOwnerProperty(valu){
 	    			<?php echo ucwords($powner['owner_name']); ?>
 	    			<span class="f-14 d-block text-dark mt-1 text-center description"><?php echo $powner['address']; ?></span>
 	    			<span class="f-14 d-block text-dark mt-1 text-center description"><?= __('GST'); ?> : <?php echo $powner['gst_no']; ?></span>
-	    			<span class="f-14 d-block text-dark mt-1 text-center description"><?php echo "From - ".date("Y M",strtotime($start_month))." To - ".date("Y M",strtotime($end_month)); ?></span>		
+	    			<span class="f-14 d-block text-dark mt-1 text-center description"><?php echo "From - ".date("Y M",strtotime($start_month))." To - ".date("Y M",strtotime($end_month)); ?></span>
 	    		</h3>
-	    		<?php 
+	    		<?php
 	    			$podetails = $property_owner_details[$powner['id']];
 	    			foreach($podetails as $podetail){
 	    		?>
@@ -112,23 +112,23 @@ function getOwnerProperty(valu){
 	    			<?php echo ucwords($podetail['property_name']); ?>
 	    			<span class="f-14 d-block text-dark mt-1"><?php echo $podetail['property_address']; ?></span>
 	    		</h4>
-	    		<?php 
+	    		<?php
 	    			$rentinvoices = $invoices[$powner['id']][$podetail['id']]; // $rental_invoices[oenwerid][detailsid];
 	    			//print_r($rentinvoices);
 	    			foreach($rentinvoices as $custid =>$rentinvoice){
 		            	$customer_detail = $customers[$custid];
 
 		        ?>
-		        	<h6 class="text-center text-primary heading"> 
+		        	<h6 class="text-center text-primary heading">
 		        		<?php echo $customer_detail['company']; ?>
-	    			<span class="f-12 d-block text-dark mt-1 text-center description"><?php echo ucwords($customer_detail['display_name']); ?></span>	
+	    			<span class="f-12 d-block text-dark mt-1 text-center description"><?php echo ucwords($customer_detail['display_name']); ?></span>
 	    			</h6>
 	    			<div class="row">
 	    				<div class="col-lg-6">
-			    			<table class="table m-b-0" style="font-size:13px;"> 
+			    			<table class="table m-b-0" style="font-size:13px;">
 					            <thead>
-					                <tr> 
-					                    <th><?= __('Rent Inv.'); ?></th> 
+					                <tr>
+					                    <th><?= __('Rent Inv.'); ?></th>
 					                    <th class="text-right"><?= __('Amount'); ?></th>
 					                    <th class="text-right"><?= __('Tax'); ?></th>
 					                    <th class="text-right"><?= __('Total'); ?></th>
@@ -140,11 +140,11 @@ function getOwnerProperty(valu){
 					            </thead>
 					            <tbody>
 			    			<?php $mk=1; foreach($rentinvoice['rent'] as $inv){ ?>
-			    					<tr class="<?php echo $inv['ref_bill_type'] == "OB"?"bg-success":"";?>" <?php echo $inv['ref_bill_type'] == "OB"?'data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Opening Balance"':'';?> > 
+			    					<tr class="<?php echo $inv['ref_bill_type'] == "OB"?"bg-success":"";?>" <?php echo $inv['ref_bill_type'] == "OB"?'data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Opening Balance"':'';?> >
 					                    <td class="p-2">
 					                    	<?php echo $inv['transaction_number']; ?>
 					                    	<span class="d-block"><?php echo $inv['transaction_date']; ?></span>
-					                    </td> 
+					                    </td>
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['amount']); ?></td>
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['tax_amount']); ?></td>
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['total_amount']); ?></td>
@@ -158,10 +158,10 @@ function getOwnerProperty(valu){
 				        </table>
 				    </div>
 				    <div class="col-lg-6">
-		    			<table class="table m-b-0" style="font-size:13px;"> 
+		    			<table class="table m-b-0" style="font-size:13px;">
 				            <thead>
-				                <tr> 
-				                    <th><?= __('Utility Inv.'); ?></th> 
+				                <tr>
+				                    <th><?= __('Utility Inv.'); ?></th>
 				                    <th class="text-right"><?= __('Amount'); ?></th>
 				                    <th class="text-right"><?= __('Tax'); ?></th>
 				                    <th class="text-right"><?= __('Total'); ?></th>
@@ -173,11 +173,11 @@ function getOwnerProperty(valu){
 				            </thead>
 				            <tbody>
 				            <?php $mk=1; foreach($rentinvoice['utility'] as $inv){ ?>
-			    					<tr> 
+			    					<tr>
 					                    <td class="p-2">
 					                    	<?php echo $inv['transaction_number']; ?>
 					                    	<span class="d-block"><?php echo $inv['transaction_date']; ?></span>
-					                    </td> 
+					                    </td>
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['amount']); ?></td>
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['tax_amount']); ?></td>
 					                    <td class="p-2 text-right"><?php echo customeummarmonyformateifine($inv['total_amount']); ?></td>

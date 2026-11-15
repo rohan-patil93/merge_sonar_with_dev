@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['monthyear'])){ 
+if(isset($_POST['monthyear'])){
 	include_once('../includes/session.php');
 	include_once('../dbconfig.php');
 	include_once('../comm.php');
@@ -10,7 +10,7 @@ if(isset($_POST['monthyear'])){
 	$admindashboardres = callAPI($admindashboardurl);
 	$admindashboardd = json_decode($admindashboardres,1);
 	/**$rental_invoices_transnumber = array();
-	foreach($admindashboardd['rental_invoices_list'] as $pending_list){ 
+	foreach($admindashboardd['rental_invoices_list'] as $pending_list){
 		if($pending_list['pending_amount'] <='0'){
 			$paidinvoicse[] = $pending_list;
 		}elseif($pending_list['shared']=='0'){
@@ -20,14 +20,14 @@ if(isset($_POST['monthyear'])){
 		}
 		$rental_invoices_transnumber[$pending_list['id']] = $pending_list['transaction_number'];
 	} **/
-	foreach($admindashboardd['all_rental_invoices_list'] as $pending_list){ 
+	foreach($admindashboardd['all_rental_invoices_list'] as $pending_list){
 		$rental_invoices_transnumber[$pending_list['id']] = $pending_list['transaction_number'];
 	}
-	$tenant_billings  =$admindashboardd['tenant_billings']; 
+	$tenant_billings  =$admindashboardd['tenant_billings'];
 
 	//echo "<pre>"; print_r($rental_invoices_transnumber); echo "</pre>";
 	echo "<div style='display:none' id='hide_result'><pre>"; print_r($admindashboardd); echo "</pre></div>";
-	
+
 }
 /**
 if(isset($_POST['submittenantbills'])){
@@ -41,7 +41,7 @@ if(isset($_POST['submittenantbills'])){
         document.onreadystatechange = function(){
             if(document.readyState == "complete") {
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][$msgcode]; ?>','');
-            } 
+            }
         }
     </script>
     <?php
@@ -56,7 +56,7 @@ if(isset($_POST['submittenantbills'])){
 	}
 	$year = 2023;
 	$month = 11;
-	$url1 = API."?mode=getpropertytenantbillings&year=$year&month=$month";  
+	$url1 = API."?mode=getpropertytenantbillings&year=$year&month=$month";
 	$data_details1 = callAPI($url1);
 	$result =  json_decode($data_details1,1);
 
@@ -77,7 +77,7 @@ if(isset($_POST['submittenantbills'])){
 			$invoicetobeemailed[] = $ptb;
 		}else{
 			$invoicetobegenerated[] = $ptb;
-		}		
+		}
 	}
 	foreach($property_tenant_billings as $ptb){
 		if($ptb['utility_shared'] == '0'){
@@ -86,7 +86,7 @@ if(isset($_POST['submittenantbills'])){
 			$utility_invoicetobeemailed[] = $ptb;
 		}else{
 			$utility_invoicetobegenerated[] = $ptb;
-		}		
+		}
 	}
 
 	$property_owners = $tenant_billings['property_owners'];
@@ -113,7 +113,7 @@ if(isset($_POST['submittenantbills'])){
 			$(".open_popup_tenant_billing_utility_"+rowid).show('slow');
 		}
 
-		
+
 
 		function submitTenantBill(property_tenant_billing_id,type,extrform="",billtype=""){
 			console.log("#form_id_"+extrform+property_tenant_billing_id);
@@ -142,7 +142,7 @@ if(isset($_POST['submittenantbills'])){
 							}else{
 								console.log("rental_invoice_id === "+data.rental_invoice_id);
 								console.log("rental_invoice_id === "+data.decode_rental_invoice_id);
-								if(data.rental_invoice_id !=""){ 								
+								if(data.rental_invoice_id !=""){
 									swal({
 										title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
 										text: '<?php echo $_SESSION['error_message']['9080']; ?>',
@@ -159,7 +159,7 @@ if(isset($_POST['submittenantbills'])){
 											window.location.href = "index?option=COM_INSERT_RENTAL_INVOICES&Rid="+data.decode_rental_invoice_id;
 										}else{
 											location.reload();
-										} 
+										}
 									});
 								}else{
 									swal("<?php echo ucwords($_SESSION['config']['name']); ?>",'<?php echo $_SESSION['error_message']['3001']; ?>', "success");
@@ -217,7 +217,7 @@ if(isset($_POST['submittenantbills'])){
 			</li>
 		</ul>
 		<div class="tab-content tabs " >
-			<div class="tab-pane card-body active p-0 custom-scroll" id="invoicetobegenerated" role="tabpanel" style=" height: 400px;"> 
+			<div class="tab-pane card-body active p-0 custom-scroll" id="invoicetobegenerated" role="tabpanel" style=" height: 400px;">
 				<?php if(count((array)$invoicetobegenerated) !=0){ ?>
 					<table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
 						<thead>
@@ -234,7 +234,7 @@ if(isset($_POST['submittenantbills'])){
 							</tr>
 						</thead>
 						<tbody>
-							<?php $m=1; foreach($invoicetobegenerated as $ptb){  
+							<?php $m=1; foreach($invoicetobegenerated as $ptb){
 								$bill_detail = json_decode($ptb['bill_detail'],1);
 								$utility_details = json_decode($ptb['utility_details'],1);
 								$totalamt = $utilitytotalamt =  0;
@@ -267,7 +267,7 @@ if(isset($_POST['submittenantbills'])){
 															</tr>
 														</thead>
 														<tbody>
-															<?php $i=1;foreach($bill_detail as $bd){ 
+															<?php $i=1;foreach($bill_detail as $bd){
 																$redonlytext = $extrlebl = '';
 																if($bd['transaction_table']=='property_owner_detail_areas' OR $bd['utility_bill_auto_and_fix']=='F'){
 																	$redonlytext = 'readonly';
@@ -294,20 +294,20 @@ if(isset($_POST['submittenantbills'])){
 												</form>
 											</div>
 										</div>
-										
+
 										</td>
 										<td class="p-2 text-center"><i class="fa fa-cog  f-16" role="button" tabindex="0" aria-label="<?php echo __('Utility Bill'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityPopUp('<?php echo $ptb['id']; ?>')" ></i>
 										</td>
 									</tr>
-									<?php  $m++; } ?> 
+									<?php  $m++; } ?>
 								</tbody>
 							</table>
 						<?php }else{?>
 							<div class="card-px text-center py-20 m-t-30">
-								<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
+								<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>
 								<div class="text-center px-4">
 									<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-								</div>   
+								</div>
 							</div>
 						<?php } ?>
 					</div>
@@ -331,11 +331,11 @@ if(isset($_POST['submittenantbills'])){
 									</tr>
 								</thead>
 								<tbody>
-									<?php $m=1; foreach($invoicetobeemailed as $ptb){  
+									<?php $m=1; foreach($invoicetobeemailed as $ptb){
 										$bill_detail = json_decode($ptb['bill_detail'],1);
 										$totalamt = $utilitytotalamt =  0;
 										foreach($bill_detail as $bd){
-											if($bd['transaction_table']=="property_owner_detail_areas"){ 
+											if($bd['transaction_table']=="property_owner_detail_areas"){
 												$totalamt += $bd['rent'];
 											}else{
 												$utilitytotalamt += $bd['rent'];
@@ -361,15 +361,15 @@ if(isset($_POST['submittenantbills'])){
 												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>')"> <?php echo __('Send'); ?></button>
 											</td>
 										</tr>
-										<?php  $m++; } ?> 
+										<?php  $m++; } ?>
 									</tbody>
 								</table>
 							<?php }else{ ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php } ?>
 						</div>
@@ -392,7 +392,7 @@ if(isset($_POST['submittenantbills'])){
 										</tr>
 									</thead>
 									<tbody>
-										<?php $m=1; foreach($invoicesharedwithtenant as $ptb){  
+										<?php $m=1; foreach($invoicesharedwithtenant as $ptb){
 											$bill_detail = json_decode($ptb['bill_detail'],1);
 											$totalamt = $utilitytotalamt =  0;
 											foreach($bill_detail as $bd){
@@ -422,15 +422,15 @@ if(isset($_POST['submittenantbills'])){
 											</td>
 
 										</tr>
-										<?php  $m++; } ?> 
+										<?php  $m++; } ?>
 									</tbody>
 								</table>
 							<?php }else{ ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php } ?>
 						</div>
@@ -478,7 +478,7 @@ if(isset($_POST['submittenantbills'])){
 			</li>
 		</ul>
 		<div class="tab-content tabs " >
-			<div class="tab-pane card-body active p-0 custom-scroll" id="utility_invoicetobegenerated" role="tabpanel" style=" height: 400px;"> 
+			<div class="tab-pane card-body active p-0 custom-scroll" id="utility_invoicetobegenerated" role="tabpanel" style=" height: 400px;">
 				<?php if(count((array)$utility_invoicetobegenerated) !=0){ ?>
 					<table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
 						<thead>
@@ -492,7 +492,7 @@ if(isset($_POST['submittenantbills'])){
 							</tr>
 						</thead>
 						<tbody>
-							<?php $m=1; foreach($utility_invoicetobegenerated as $ptb){  
+							<?php $m=1; foreach($utility_invoicetobegenerated as $ptb){
 								//$bill_detail = json_decode($ptb['bill_detail'],1);
 								$utility_details = json_decode($ptb['utility_details'],1);
 								$totalamt = $utilitytotalamt =  0;
@@ -502,7 +502,7 @@ if(isset($_POST['submittenantbills'])){
 									<td class="p-2"><?php echo $ptb['tenant_name']; ?></td>
 									<td class="p-2"><?php echo $property_owner_details[$ptb['property_owner_detail_id']]['property_name']; ?></td>
 									<td class="p-2 text-right"><?php echo customeummarmonyformate($ptb['utility_amount']); ?></td>
-			
+
 									<td class="p-2" id="custom-popup"><?php echo fromDate($ptb['month_start_date']); ?>
 										<div class="custom-popup-open open_popup_tenant_billing_utility_<?php echo $ptb['id']; ?> text-start" style="display: none; width: 650px; right: 0px;">
 											<div class="card">
@@ -524,7 +524,7 @@ if(isset($_POST['submittenantbills'])){
 																</tr>
 															</thead>
 															<tbody>
-																<?php $i=1;foreach($utility_details as $bd){ 
+																<?php $i=1;foreach($utility_details as $bd){
 																	$redonlytext = $extrlebl = '';
 																	if($bd['transaction_table']=='property_owner_detail_areas' OR $bd['utility_bill_auto_and_fix']=='F'){
 																		$redonlytext = 'readonly';
@@ -555,15 +555,15 @@ if(isset($_POST['submittenantbills'])){
 										<td class="p-2 text-center"><i class="fa fa-cog  f-16" role="button" tabindex="0" aria-label="<?php echo __('Utility Bill'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityonlyPopUp('<?php echo $ptb['id']; ?>')" ></i>
 										</td>
 									</tr>
-									<?php  $m++; } ?> 
+									<?php  $m++; } ?>
 								</tbody>
 							</table>
 						<?php }else{?>
 							<div class="card-px text-center py-20 m-t-30">
-								<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
+								<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>
 								<div class="text-center px-4">
 									<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-								</div>   
+								</div>
 							</div>
 						<?php } ?>
 					</div>
@@ -585,7 +585,7 @@ if(isset($_POST['submittenantbills'])){
 									</tr>
 								</thead>
 								<tbody>
-									<?php $m=1; foreach($utility_invoicetobeemailed as $ptb){  
+									<?php $m=1; foreach($utility_invoicetobeemailed as $ptb){
 										$utility_details = json_decode($ptb['utility_details'],1);
 										?>
 										<tr>
@@ -605,15 +605,15 @@ if(isset($_POST['submittenantbills'])){
 												<button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-l-5" onclick="renatalInvoiceSend('<?php echo $ptb['id']; ?>','U')"> <?php echo __('Send'); ?></button>
 											</td>
 										</tr>
-										<?php  $m++; } ?> 
+										<?php  $m++; } ?>
 									</tbody>
 								</table>
 							<?php }else{ ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php } ?>
 						</div>
@@ -634,9 +634,9 @@ if(isset($_POST['submittenantbills'])){
 										</tr>
 									</thead>
 									<tbody>
-										<?php $m=1; foreach($utility_invoicesharedwithtenant as $ptb){  
+										<?php $m=1; foreach($utility_invoicesharedwithtenant as $ptb){
 											$utility_details = json_decode($ptb['utility_details'],1);
-									
+
 										?>
 										<tr>
 											<td  class="p-2"><?php echo $m; ?></td>
@@ -656,15 +656,15 @@ if(isset($_POST['submittenantbills'])){
 											</td>
 
 										</tr>
-										<?php  $m++; } ?> 
+										<?php  $m++; } ?>
 									</tbody>
 								</table>
 							<?php }else{ ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?php echo __('No Invoice'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php } ?>
 						</div>

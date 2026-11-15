@@ -11,10 +11,10 @@ if(isset($_POST['get_epf_summary'])) {
 
 }
 $company_name = "Infisuite";
-$pay_year_from = date('Y',strtotime($from_date)); 
-$pay_month_from = date('m',strtotime($from_date)); 
-$pay_year_to = date('Y',strtotime($to_date)); 
-$pay_month_to = date('m',strtotime($to_date)); 
+$pay_year_from = date('Y',strtotime($from_date));
+$pay_month_from = date('m',strtotime($from_date));
+$pay_year_to = date('Y',strtotime($to_date));
+$pay_month_to = date('m',strtotime($to_date));
 
 $vurl = API."?mode=togetpayslipctcreports&company_id=".$_SESSION['company_id']."&pay_year_from=".$pay_year_from."&pay_month_from=".$pay_month_from."&pay_year_to=".$pay_year_to."&pay_month_to=".$pay_month_to."&from_date=".$from_date."&to_date=".$to_date;
 echo $vurl;
@@ -41,9 +41,9 @@ $payslip_data = $payslip_list['payslip_data'];
 															</span>
 														<span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $company_name; ?></span>
 
-															
+
 														</div>
-												
+
 		</div>
 		<div class="col-md-4">
 			<form method="post" action="#">
@@ -87,7 +87,7 @@ $payslip_data = $payslip_list['payslip_data'];
 <div<div class="card card-custom">
 		<div class="card-header flex-wrap border-0 pt-4 pb-0 pl-5 mx-auto">
 			<div class="card-title">
-				<h3 class="card-label text-center">Employee's CTC Details 
+				<h3 class="card-label text-center">Employee's CTC Details
 				<span class="d-block text-muted pt-2 font-size-sm">Contribution period from <?php echo date("d/m/Y", strtotime($from_date)); ?> to <?php echo date("d/m/Y", strtotime($to_date)); ?></span></h3>
 				</div>
 			</div>
@@ -102,20 +102,20 @@ $payslip_data = $payslip_list['payslip_data'];
 									<tr role="row" bgcolor="#f7f7f7">
 										<th scope="col">Employee ID</th>
 									<th scope="col">Employee Name</th>
-									<?php 
+									<?php
 									foreach ($category_list as $cat_value) {
 										?>
 										<th scope="col" colspan="<?php echo $cat_value['total_components'];?>" rowspan="1"><?php echo $cat_value['category_name']; ?> </th>
 										<?php
 									} ?>
-									
+
 								</tr>
 
 								<tr role="row">
 									<th scope="col"></th>
 									<th scope="col"></th>
 
-									<?php 
+									<?php
 									foreach ($component_list as $component_value) { ?>
 										<th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 47px;" aria-label="Record ID: activate to sort column ascending"><?php echo $component_value['component_name']; ?></th>
 										<?php
@@ -125,7 +125,7 @@ $payslip_data = $payslip_list['payslip_data'];
 							</thead>
 							<tbody>
 								<tr role="row" class="odd">
-									<?php 
+									<?php
 									foreach ($payslip_data as $values) { ?>
 
 										<th scope="col"><?php echo $values['employee_id']; ?></th>
@@ -136,11 +136,11 @@ $payslip_data = $payslip_list['payslip_data'];
 												$amount = 0;
 											}
 										 ?>
-									
+
 										<th scope="col"><?php echo $amount; ?></th>
-										<?php 
+										<?php
 									} ?>
-										
+
 									</tr>
 									<?php
 								}
@@ -185,6 +185,6 @@ $payslip_data = $payslip_list['payslip_data'];
 				</div>
 				<!--end: Datatable-->
 			</div>
-		</div>	
+		</div>
 
 

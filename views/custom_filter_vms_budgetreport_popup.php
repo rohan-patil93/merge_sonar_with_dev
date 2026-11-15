@@ -17,7 +17,7 @@ $filter_category = $tasks_details['filter_option'];
 //echo "<pre>";print_r($filter_list); //exit;
 
 ?>
-<?php 
+<?php
 
 
 ?>
@@ -25,7 +25,7 @@ $filter_category = $tasks_details['filter_option'];
 <script type="text/javascript">
  function populatenamelist(){
    console.log("******************");
-   jQuery(document).ready(function() {    
+   jQuery(document).ready(function() {
      KTBootstrapDatepicker.init();
    });
 
@@ -50,14 +50,14 @@ $filter_category = $tasks_details['filter_option'];
 if($emp_list_names!="") {
   echo '<script type="text/JavaScript">  
   populatenamelist(); 
-  </script>' 
-  ; 
+  </script>'
+  ;
 }
 
-?>   
+?>
 <div class="modal-header">
  <h5 class="modal-title">
-  <?php echo __('Filter Options'); ?> 
+  <?php echo __('Filter Options'); ?>
 </h5>
 <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
  <i aria-hidden="true" class="ki ki-close"></i>
@@ -108,10 +108,10 @@ if($emp_list_names!="") {
 
                                  //print_r($targettable,$targettable_field);
           $table_details = dyanamicselectdata($targettable, $targettable_field);
-                                 // print_r($table_details); 
+                                 // print_r($table_details);
           ?>
           <select onchange="selectemployee()" class="form-control mt-5" id="kt_select2_4<?php echo $index;?>" name="empstatus[]" multiple="multiple">
-           <?php 
+           <?php
            foreach ($table_details as $key => $value) { ?>
              <option value="<?php echo $key;?>" <?php if(in_array($key, array_keys((array)$selectedlist[$targettable_field]))) { ?> selected <?php  } ?> ><?php echo htmlspecialchars(__($value ?? ''));?></option>
              <?php
@@ -154,7 +154,7 @@ if($emp_list_names!="") {
 
    console.log("Values:"+application_table);
    var str = "";
-   var obj = {}; 
+   var obj = {};
    for(var key in select_value) {
 
      console.log("Key: " + key + " value: " + select_value[key]);
@@ -173,12 +173,12 @@ if($emp_list_names!="") {
 
   }
   console.log('sha'+str);
-   var jsonresponse = JSON.stringify(obj); 
+   var jsonresponse = JSON.stringify(obj);
     console.log ('inserted to filtertable'+jsonresponse);
     selectedemp  =jsonresponse;
 
     document.getElementById('filterlist').value = jsonresponse;
-  
+
 }
 
 
@@ -186,7 +186,7 @@ if($emp_list_names!="") {
 function submitrom(){
   var application_table = document.getElementById('tablename').value;
   var sendjsoncontent = document.getElementById('filterlist').value;
-  var sendjsoncontent = JSON.stringify(sendjsoncontent); 
+  var sendjsoncontent = JSON.stringify(sendjsoncontent);
 
   console.log(sendjsoncontent+application_table);
      $.ajax({

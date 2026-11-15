@@ -1,4 +1,4 @@
-<?php 
+<?php
 if($_GET['print'] =="Y"){
     include_once('../includes/session.php');
     include_once('../dbconfig.php');
@@ -20,8 +20,8 @@ if($_POST['callapi'] =='Y'){
     $callapi = "Y";
 }else{
     $rid = $_GET['rid'];
-    $table = $_GET['table'];    
-    $api = API."?mode=getdynamicinvoiceprint&transaction_id=".$rid."&transaction_table=".$table; 
+    $table = $_GET['table'];
+    $api = API."?mode=getdynamicinvoiceprint&transaction_id=".$rid."&transaction_table=".$table;
     $apicall = callAPI($api);
     $result = json_decode($apicall, 1);
     $config = $result['config'];
@@ -35,8 +35,8 @@ if($_POST['callapi'] =='Y'){
     $transaction_table = $result['transaction_table'];
     $unit_of_measurements = $result['unit_of_measurements'];
     $transaction_table_config = $result['transaction_table_config'];
-   
-   
+
+
 }
 $printuom = array();
 foreach($unit_of_measurements as $uoom){
@@ -82,7 +82,7 @@ foreach ((array)$rental_invoice_item_taxes as  $taxvalue) {
 
 //print_r($transaction);
 // Split Should Come for Tax Autharities split part
-if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ 
+if($transaction['originator_state_id'] == $transaction['supplier_state_id']){
     $split_1_name = $tax_authorities_rates_split[0]['split_name'];
     $split_2_name = $tax_authorities_rates_split[1]['split_name'];
     $split_1 = $tax_authorities_rates_split[0]['tax_rate'];
@@ -178,7 +178,7 @@ function emptyCheck($valu){
 //  }else{
 //      $from = date($dateformat);
 //  }
-//  return $from; 
+//  return $from;
 // }
 ?>
 <?php if($callapi !='Y'){ ?>
@@ -188,7 +188,7 @@ function emptyCheck($valu){
     <title>InfiSuite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    
+
     <script type="text/javascript">
         function printDiv(divId) {
            var printContents = document.getElementById(divId).innerHTML;
@@ -198,7 +198,7 @@ function emptyCheck($valu){
            document.body.innerHTML = originalContents;
         }
         function convertHTMLToPDF() {
-            var  title ='<?php echo urldecode($_GET['title']); ?>'; 
+            var  title ='<?php echo urldecode($_GET['title']); ?>';
             var htmlContent = $('#printDiv').html();
             $.ajax({
                 url: 'convert_html_to_pdf.php',
@@ -265,7 +265,7 @@ function emptyCheck($valu){
                     <td colspan="4">
                         <span class="f-14 d-block">Bill To:</span>
                         <span class="d-block f-16"><?php echo emptyCheck($config['billing_address']); ?></span>
-                        <span class="d-block f-14"><?php echo emptyCheck($config['gst_number']); ?></span>   
+                        <span class="d-block f-14"><?php echo emptyCheck($config['gst_number']); ?></span>
                     </td>
                     <td colspan="3" class="p-0">
                         <table class="w-100 border-collapse">
@@ -278,7 +278,7 @@ function emptyCheck($valu){
                                 <th scope="col" class="f-14 text-start"><?php echo date("d M Y",strtotime($transaction['transaction_date'])); ?></th>
                             </tr>
                             <tr>
-                                <?php 
+                                <?php
                                 $transaction['doc_ref_date'] = ($transaction['doc_ref_date']!='0000-00-00' AND $transaction['doc_ref_date']!='1970-01-01')?date("d M Y",strtotime($transaction['doc_ref_date'])):"";
                                 ?>
                                 <th scope="col" class="f-14 text-end">Buyer's Order No.</th>
@@ -295,7 +295,7 @@ function emptyCheck($valu){
                     <td colspan="4">
                         <span class="f-14 d-block">Ship To:</span>
                         <span class="d-block f-16"><?php echo $transaction['party_name']; ?></span>
-                        <span class="d-block f-14"><?php echo $transaction['party_address']; ?></span>   
+                        <span class="d-block f-14"><?php echo $transaction['party_address']; ?></span>
                     </td>
                     <td colspan="3" class="p-0">
                         <table class="w-100 border-collapse">
@@ -337,7 +337,7 @@ function emptyCheck($valu){
                 <?php $seq++; } ?>
                 <tr>
                     <th scope="col" colspan="4" class="text-start">
-                        Amount In words(Rupees):- <?php echo numberToWordFormate($transaction['total_amount']);?> 
+                        Amount In words(Rupees):- <?php echo numberToWordFormate($transaction['total_amount']);?>
                     </th>
                     <td class="p-0" colspan="3">
                         <table class="w-100 border-collapse">
@@ -384,14 +384,14 @@ function emptyCheck($valu){
                             </tr>
                             <tr>
                                 <th scope="col" colspan="6">
-                                    <span class="f-14 d-block"><?php echo emptyCheck($bank_accounts['bank_name']); ?>, <?php echo emptyCheck($bank_accounts['bank_address']); ?>, CODE No. : -</span> 
+                                    <span class="f-14 d-block"><?php echo emptyCheck($bank_accounts['bank_name']); ?>, <?php echo emptyCheck($bank_accounts['bank_address']); ?>, CODE No. : -</span>
                                     <span class="f-14 d-block m-b-20">A/C. No. :<?php echo emptyCheck($bank_accounts['bank_account_number']); ?> IFSC CODE: <?php echo emptyCheck($bank_accounts['ifsc_code']); ?></span>
                                 </th>
                                 <th scope="col" colspan="2">
                                     <?php if($bank_accounts['upi_qr_code_image'] != ''){ ?>
-                                    
+
                                         <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight: 500;">Scan to pay via UPI</h3>
-                                         <img alt="" src="uploads/all/<?php echo $bank_accounts['upi_qr_code_image']; ?>" style="width:80px;margin: 10px 0 0 0;"> 
+                                         <img alt="" src="uploads/all/<?php echo $bank_accounts['upi_qr_code_image']; ?>" style="width:80px;margin: 10px 0 0 0;">
                                         <?php if($bank_accounts['upi_id'] !=""){ ?>
                                         <p style="font-size: 12px;color:#333333;font-weight: bold;"><?php echo emptyCheck($bank_accounts['upi_id']); ?></p>
                                     <?php } ?>
@@ -408,7 +408,7 @@ function emptyCheck($valu){
                             <?php  if(count((array)$distax)){
                                     $tattax = 0;
                                     foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
-                                    <?php //if($table1['tax_state'] == 'S'){ 
+                                    <?php //if($table1['tax_state'] == 'S'){
                                         if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>
                                     <tr>
                                         <th scope="col" class="f-14 text-start"><?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?>%</th>
@@ -418,8 +418,8 @@ function emptyCheck($valu){
                                         <th scope="col" class="f-14 text-start"><?php echo $split_2_name; ?> @ <?php echo currencyFormat($ktax['percentage']*$split_2,$config); ?>%</th>
                                         <th scope="col" class="f-14 text-end"><?php echo currencyFormat($ktax['tax_amount']*$split_2,$config); ?></th>
                                     </tr>
-                            
-                                <?php } else{  ?> 
+
+                                <?php } else{  ?>
 
                                     <tr>
                                         <th scope="col" class="f-14 text-start"><?php echo $split_1_name; ?> @ <?php echo currencyFormat($ktax['percentage'],$config); ?></th>
@@ -456,15 +456,15 @@ function emptyCheck($valu){
 
 
 
-        </div> 
-        <?php if($callapi !='Y'){ ?> 
+        </div>
+        <?php if($callapi !='Y'){ ?>
     </div>
     <div class="invoice-btn-section clearfix d-print-none" style="margin-top:5px;">
         <button class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printDiv');">
-            <i class="fa fa-print"></i>  Print 
+            <i class="fa fa-print"></i>  Print
         </button>
         <button class="btn waves-effect waves-light btn-grd-info"  onclick="convertHTMLToPDF();">
-            <i class="fa fa-download"></i>  Download 
+            <i class="fa fa-download"></i>  Download
         </button>
     </div>
 </body>

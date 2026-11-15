@@ -108,14 +108,14 @@
 															Current Ratio
 														</h4>
 														<span class="kt-widget24__desc">
-															
+
 														</span>
 													</div>
 													<span class="kt-widget24__stats kt-font-success">
 														33%
 													</span>
 												</div>
-												
+
 											</div>
 
 											<!--end::New Feedbacks-->
@@ -533,7 +533,7 @@
 															YTD
 														</a>
 													</li>
-													
+
 													<li class="nav-item">
 														<a class="nav-link" data-toggle="tab" href="#kt_widget11_tab2_content" role="tab">
 															QTD
@@ -590,11 +590,11 @@
 							</div>
 							<!--- END Row  -->
 							<!--- Begin Row-->
-							
+
 
 							<!--End::Row-->
 							<div class="row">
-								
+
 								<div class="col-xl-12">
 
 									<!--begin:: Widgets/Sale Reports-->
@@ -613,7 +613,7 @@
 															YTD
 														</a>
 													</li>
-													
+
 													<li class="nav-item">
 														<a class="nav-link" data-toggle="tab" href="#kt_widget11_tab2_content" role="tab">
 															QTD
@@ -673,15 +673,15 @@
 							</div>
 
 							<!--Begin::Row-->
-						
+
 
 							<!--End::Row-->
 
 							<!--Begin::Row-->
 							<div class="row">
-								
-								
-								
+
+
+
 								<div class="col-xl-6 col-lg-6 order-lg-1 order-xl-1">
 
 									<!--Begin::Portlet-->
@@ -1109,4 +1109,3 @@
 						<!-- end:: Content -->
 					</div>
 
-					

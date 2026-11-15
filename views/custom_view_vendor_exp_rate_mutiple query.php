@@ -1,6 +1,6 @@
 <?php
 $url = API."?mode=togetjobtitleexploc";
-$apires = callAPI($url); 
+$apires = callAPI($url);
 $result = json_decode($apires,1);
 //echo "<pre>"; print_r($result); echo "</pre>";
 $_SESSION['download_data'] = array();
@@ -15,7 +15,7 @@ $_SESSION['download_data'] = array();
   <div class="card-header">
     <h5 class="f-30"><?= __('Vendor'); ?></h5>
     <div class="card-header-right">
-    
+
     </div>
     <div class="card-body">
       <div class="table-responsive mt-3">
@@ -31,12 +31,12 @@ $_SESSION['download_data'] = array();
             <th scope="col">#</th>
             <th scope="col"><?= __('Job Title'); ?></th>
             <th scope="col"><?= __('Exp'); ?></th>
-            <?php foreach ($result['vendor_data'] as $locdata) { 
-              foreach ($locdata as $vendata) { 
+            <?php foreach ($result['vendor_data'] as $locdata) {
+              foreach ($locdata as $vendata) {
                 $listvendors[] = $vendata['id'];
             ?>
              <th scope="col"><?php echo $vendata['display_name']; ?></th>
-            <?php 
+            <?php
               }
             } ?>
           </tr>
@@ -45,13 +45,13 @@ $_SESSION['download_data'] = array();
           ?>
             <td><?php echo $sl; ?></td>
             <td></td>
-          <?php $sl++; } 
+          <?php $sl++; }
             $_SESSION['download_data'] = $cssdata;
-            ?> 
+            ?>
             </table>
-            <?php 
+            <?php
           } ?>
         </table>
-      </div> 
+      </div>
   </div>
 </div>

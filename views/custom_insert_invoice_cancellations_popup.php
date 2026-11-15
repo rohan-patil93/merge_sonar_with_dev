@@ -8,7 +8,7 @@ $transaction_id = $_POST['transaction_id'] ?? '';
 $party_debit = array('sales_invoices','purchase_invoice_cancellations','supplier_bill_cancellations','rental_invoices','utility_rental_invoices');
 $party_credit = array('supplier_bills','purchase_invoices','sales_invoice_cancellations');
 
-$vurl = API."?mode=getcancelinvoicepopup&transaction_table=".$transaction_table."&transaction_id=".$transaction_id; 
+$vurl = API."?mode=getcancelinvoicepopup&transaction_table=".$transaction_table."&transaction_id=".$transaction_id;
 $vdata_details = callAPI($vurl);
 $vdata_detail = json_decode($vdata_details,1);
 $transaction = $vdata_detail['transaction'] ?? array();
@@ -19,7 +19,7 @@ $shownoterequired  = "style='display:none'";
 $checked = "";
 $debitcreditlable = "";
 $debitcredittable = "";
-if(($transaction['total_amount'] ?? 0) != ($transaction['pending_amount'] ?? 0)){ 
+if(($transaction['total_amount'] ?? 0) != ($transaction['pending_amount'] ?? 0)){
     $shownoterequired  = "style='display:block'";
     $checked = "checked";
     if(in_array($transaction_table, (array)$party_credit)){
@@ -35,16 +35,16 @@ $disabledbtn = "";
 <script type="text/javascript">
     function submitCancelInvoice(){
         $("#popupshowerror").hide();
-        var error = 0; 
+        var error = 0;
         var cancel_invoice_date = $("#cancel_invoice_date").val();
         var cancel_pending_amount = $("#cancel_pending_amount").val();
         var cancel_invoice_reason = $("#cancel_invoice_reason").val();
         if(cancel_invoice_date =="" || cancel_invoice_reason ==""){
-            error = 1; 
+            error = 1;
         }
         if($("#debit_credit_note").is(":checked")){
             if(cancel_pending_amount ==""){
-                error = 1; 
+                error = 1;
             }
         }
         if(error =="0"){
@@ -113,7 +113,7 @@ $disabledbtn = "";
         <div class="form-group col-lg-9 text-center">
             <span class="form-label d-block"><?php echo __('Message'); ?></span>
             <span class="text-danger">
-                <?php     
+                <?php
                     echo "This transaction cannot be cancelled because it has a reference.</br>";
                     foreach($ref_transaction as $transa => $trans){
                         echo htmlspecialchars($transa, ENT_QUOTES)." - ".htmlspecialchars($trans['transaction_number'] ?? '', ENT_QUOTES)."(".(isset($trans['transaction_date']) ? fromDate($trans['transaction_date']) : '').")</br>";
@@ -126,8 +126,8 @@ $disabledbtn = "";
     <form id="creatdebitcreaditnotesubmitform">
         <div <?php echo $shownoterequired; ?>>
             <label class="text-danger text-capitalize event_disabled" style="cursor: pointer;">
-                <?php echo __('Invoice amount not settled please create'); ?> 
-                <?php echo in_array($transaction_table, CREDIT_TRANSACTION_WITH_PARTY)?__('Debit note'):__('Credit note'); ?>? 
+                <?php echo __('Invoice amount not settled please create'); ?>
+                <?php echo in_array($transaction_table, CREDIT_TRANSACTION_WITH_PARTY)?__('Debit note'):__('Credit note'); ?>?
                 <input aria-label="<?php echo __('Debit Credit Note'); ?>" class="js-primary-sm-popup" type="checkbox" name="debit_credit_note" value="Y" id="debit_credit_note" <?php echo $checked; ?> onchange="creatDebitCreaditNote()">
             </label>
         </div>
@@ -147,9 +147,9 @@ $disabledbtn = "";
                 <textarea aria-label="<?php echo __('Reasons'); ?>" class="form-control" name="cancel_invoice_reason" id="cancel_invoice_reason"></textarea>
             </div>
         </div>
-        <input type="hidden" name="debitcreditnotetable" id="debitcreditnotetable" value="<?php echo $debitcredittable; ?>"> 
-        <input type="hidden" name="transaction_table" value="<?php echo htmlspecialchars($transaction_table, ENT_QUOTES); ?>"> 
-        <input type="hidden" name="transaction_id" value="<?php echo htmlspecialchars($transaction_id, ENT_QUOTES); ?>"> 
+        <input type="hidden" name="debitcreditnotetable" id="debitcreditnotetable" value="<?php echo $debitcredittable; ?>">
+        <input type="hidden" name="transaction_table" value="<?php echo htmlspecialchars($transaction_table, ENT_QUOTES); ?>">
+        <input type="hidden" name="transaction_id" value="<?php echo htmlspecialchars($transaction_id, ENT_QUOTES); ?>">
     </form>
 </div>
 <div class="modal-footer">

@@ -2,7 +2,7 @@
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
-$url1 = API."?mode=gettenantproperty&type=".$_POST['type']."&valu=".$_POST['valu'];  
+$url1 = API."?mode=gettenantproperty&type=".$_POST['type']."&valu=".$_POST['valu'];
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);
 $customers = $result['customers'];
@@ -103,7 +103,7 @@ function submitTenantBillss(property_tenant_billing_id,type,extrform="",billtype
 						$('#kt_modal_dynamic_popup2').modal("hide");
 						console.log("rental_invoice_id === "+data.rental_invoice_id);
 						console.log("rental_invoice_id === "+data.decode_rental_invoice_id);
-						if(data.rental_invoice_id !=""){ 								
+						if(data.rental_invoice_id !=""){
 							swal({
 								title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
 								text: '<?php echo $_SESSION['error_message']['9080']; ?>',
@@ -117,19 +117,19 @@ function submitTenantBillss(property_tenant_billing_id,type,extrform="",billtype
 							},
 							function(isConfirm) {
 								<?php if($_POST['bill_type']=='U'){ ?>
-									if(isConfirm){ 
+									if(isConfirm){
 										//window.location.href = "index?option=COM_INSERT_UTILITY_RENTAL_INVOICES&Rid="+data.decode_rental_invoice_id;
 										window.location.href = "index?option=COM_VIEW_RENTAL_INVOICES&rid="+data.rental_invoice_id+"&table=utility_rental_invoices&title=Utility Invoice";
 									}else{
 										window.location.href = "index?option=COM_LIST_UTILITY_RENTAL_INVOICES";
-									} 
+									}
 								<?php }elseif($_POST['bill_type']=='AMC'){ ?>
-									if(isConfirm){ 
+									if(isConfirm){
 										//window.location.href = "index?option=COM_INSERT_UTILITY_RENTAL_INVOICES&Rid="+data.decode_rental_invoice_id;
 										window.location.href = "index?option=COM_VIEW_RENTAL_INVOICES&rid="+data.rental_invoice_id+"&table=utility_amc_rental_invoices&title=Utility AMC Invoice";
 									}else{
 										window.location.href = "index?option=COM_LIST_UTILITY_AMC_RENTAL_INVOICES";
-									} 
+									}
 								<?php }else{ ?>
 									if(isConfirm){
 										window.location.href = "index?option=COM_VIEW_RENTAL_INVOICES&rid="+data.rental_invoice_id+"&table=rental_invoices&title=Rental Invoice";
@@ -181,11 +181,11 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 	if ($('#utility_gst_'+parent_id).is(':checked')) {
 		$("#utility_gst_utility_text_"+parent_id).text(totalamt);
 		$("#utility_gst_utility_"+parent_id).val(totalamt);
-		
+
 		var percentage = $('#utility_gst_percentage_'+parent_id).val();
 		total_percentage = ((totalamt * percentage) / 100);
 		totalamt = totalamt+total_percentage;
-	    
+
 	    $("#utility_gst_total_tax_text_"+parent_id).text(total_percentage+" ("+percentage+"%)");
 	    $("#utility_gst_total_tax_"+parent_id).val(total_percentage.toFixed(2));
 	} else {
@@ -200,7 +200,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 </script>
 <div class="modal-header">
 	<h4 class="modal-title">
-		<?php  
+		<?php
 			if($_POST['bill_type'] =="U"){
 				echo __('Utility Invoice');
 			}elseif($_POST['bill_type'] =="AMC"){
@@ -209,7 +209,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 				echo __('Rental Invoice');
 			}
 		?>
-			
+
 	</h4>
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
@@ -220,28 +220,28 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 			<span class="col-lg-4 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Tenant'); ?></span>
 			<select aria-label="<?= htmlspecialchars(__('Cust id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single" name="cust_id" id="cust_id" onchange="getTenantDetails('getcustid',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
-				<?php foreach ($customers as $cust) { ?>					
+				<?php foreach ($customers as $cust) { ?>
 					<option  value="<?php echo $cust['id']; ?>" <?php echo ($_SESSION['userid']!=$cust['created_by'] AND $_SESSION['admin_type'] != 1)?"disabled":""; ?>><?php echo ucwords($cust['display_name']); ?></option>
 				<?php } ?>
-			</select> 
+			</select>
 		</div>
 		<div class="form-group col-lg-4">
 			<span class="col-lg-4 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Property'); ?></span>
 			<select aria-label="<?= htmlspecialchars(__('Property tenant detail id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="property_tenant_detail_id" id="property_tenant_detail_id" onchange="getTenantDetails('getproperty_tenant_detail_id',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
-				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>					
+				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>
 					<option  value="<?php echo $ass_statukey; ?>"><?php echo ucwords($ass_statu); ?></option>
 				<?php } ?>
-			</select> 
+			</select>
 		</div>
 		<div class="form-group col-lg-4">
 			<span class="col-lg-4 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Bills'); ?></span>
 			<select aria-label="<?= htmlspecialchars(__('Property tenant billings id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="property_tenant_billings_id" id="property_tenant_billings_id" onchange="getTenantDetails('getproperty_tenant_billings_id',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
-				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>					
+				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>
 					<option  value="<?php echo $ass_statukey; ?>"><?php echo ucwords($ass_statu); ?></option>
 				<?php } ?>
-			</select> 
+			</select>
 		</div>
 	</div>
 	<div id="ajaxbillingtable">

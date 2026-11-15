@@ -28,7 +28,7 @@ $data = $response['data'] ?? array();
 
 <div class="col-12">
 	<div class="card">
-		
+
 
 		<div class="card-body">
 			<div class="table-responsive">
@@ -58,11 +58,11 @@ $data = $response['data'] ?? array();
 
                             </td>
                         </tr>
-                            
+
                         <?php } ?>
-                       
+
                     </tbody>
-					
+
 				</table>
 			</div>
 

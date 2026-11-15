@@ -51,7 +51,7 @@ $work_array = array(
 $weekdays = $data['working_days'] ?? array('monday','tuesday','wednesday','thursday','friday');
 
 // Filter timesheets into active draft vs above-active (submitted / approved)
-$listactive = array(); 
+$listactive = array();
 $aboveactive = array();
 $approved_count = 0;
 foreach((array)($data['timesheet'] ?? array()) as $listtime){
@@ -75,7 +75,7 @@ $sprogress = $statusprogress['full'] ?? array();
 ?>
 
 <style type="text/css">
-.week_table tr th { 
+.week_table tr th {
     position: sticky; top: 0; color: #FFFFFF; border-width: 2px; border-color: #333333; text-align: center;
 }
 .week_table tr td {
@@ -140,8 +140,8 @@ $sprogress = $statusprogress['full'] ?? array();
                         }
                         return;
                     }
-                    $("#td_" + num).removeClass('week_p week_a week_z week_h week_l week_o');  
-                    $("#td_" + num).addClass("week_" + type);                
+                    $("#td_" + num).removeClass('week_p week_a week_z week_h week_l week_o');
+                    $("#td_" + num).addClass("week_" + type);
                     $("#pp_val").html(obj.present_days);
                     $("#ab_val").html(obj.absent_day);
                     $("#half_val").html(obj.half_days);
@@ -158,7 +158,7 @@ $sprogress = $statusprogress['full'] ?? array();
 
                     var total_work_days = parseInt(obj.work_days);
                     var total_fill_days = parseInt(obj.leave_days) + parseInt(obj.present_days) + parseInt(obj.half_days) + parseInt(obj.absent_day);
-                    
+
                     if(obj.can_submit == 1 || (total_work_days > 0 && total_fill_days >= total_work_days)){
                         $("#status_id").show();
                     } else {
@@ -174,7 +174,7 @@ $sprogress = $statusprogress['full'] ?? array();
             error: function (){
                 alert(<?php echo json_encode(__('Failed to update timesheet.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
-        });   
+        });
     }
 
     function changeselectweek(targetDate){
@@ -185,7 +185,7 @@ $sprogress = $statusprogress['full'] ?? array();
             alert(<?php echo json_encode(__('Please select a date/week.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return;
         }
-        window.location = "index.php?option=" + option + "&EMP=" + emp_id + "&CHANGE_DATE=" + dateVal; 
+        window.location = "index.php?option=" + option + "&EMP=" + emp_id + "&CHANGE_DATE=" + dateVal;
     }
 
     function alradysubmitedmanager(){
@@ -301,14 +301,14 @@ $sprogress = $statusprogress['full'] ?? array();
                         alert(<?php echo json_encode(__('Failed to submit leave request. Please check network connection.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                     }
                 });
-            } 
+            }
         });
     }
 </script>
 
 <div class="card">
     <div class="card-header table-card-header">
-        <h5><?= __('Weekly Attendance (Without Work Order)'); ?></h5> 
+        <h5><?= __('Weekly Attendance (Without Work Order)'); ?></h5>
         <span class="badge bg-primary p-2 m-l-5 text-white">
             <i class='ti-user'></i> <?php echo htmlspecialchars($_SESSION['users'][$_SESSION['userid']] ?? 'Employee'); ?>
         </span>
@@ -318,7 +318,7 @@ $sprogress = $statusprogress['full'] ?? array();
           </a>
         </div>
     </div>
-    
+
     <div class="card-body">
       <div class="p-4 pt-2">
         <!-- Week Selection and Navigation -->
@@ -338,35 +338,35 @@ $sprogress = $statusprogress['full'] ?? array();
 
             <div class="col-lg-3 col-md-6 text-center text-md-start">
                 <span class="badge bg-light text-dark border p-2 f-14">
-                    <i class="ti-calendar text-primary" aria-hidden="true"></i> 
+                    <i class="ti-calendar text-primary" aria-hidden="true"></i>
                     <b><?php echo date('d M Y', strtotime($start_date)); ?></b> &ndash; <b><?php echo date('d M Y', strtotime($end_date)); ?></b>
                 </span>
             </div>
 
             <div class="col-lg-4 text-end d-flex justify-content-end align-items-center gap-2">
-                <?php 
+                <?php
                 $can_submit = $data['all_data']['can_submit'] ?? 0;
                 $has_above_active = count((array)$aboveactive) > 0;
                 $has_active = count((array)$listactive) > 0;
                 ?>
                 <div class="btn-group workflow-btn" id="status_id" <?php if($can_submit != 1 || $has_above_active){ ?> style="display:none;" <?php } ?>>
-                    <button type="button" class="btn btn-info btn-md waves-effect waves-light" onclick="submitWeeklyWorkflowPopUp(<?php echo $cur_status; ?>, '<?php echo $start_date; ?>', '<?php echo $end_date; ?>')"> 
+                    <button type="button" class="btn btn-info btn-md waves-effect waves-light" onclick="submitWeeklyWorkflowPopUp(<?php echo $cur_status; ?>, '<?php echo $start_date; ?>', '<?php echo $end_date; ?>')">
                         <span class="fa fa-thumbs-up text-white"></span> &nbsp; <?= __('Submit For Approval'); ?>
-                    </button>   
-                </div> 
+                    </button>
+                </div>
 
                 <?php if($has_above_active && $approved_count < count((array)$aboveactive)){ ?>
                 <div class="btn-group workflow-btn" id="status_procee_id">
-                    <button type="button" class="btn btn-warning text-white btn-md waves-effect waves-light" style="pointer-events: none;"> 
+                    <button type="button" class="btn btn-warning text-white btn-md waves-effect waves-light" style="pointer-events: none;">
                         <span class="fa fa-clock-o text-white"></span> &nbsp; <?= __('APPROVAL PENDING'); ?>
-                    </button>   
-                </div>  
+                    </button>
+                </div>
                 <?php } elseif($has_above_active && $approved_count == count((array)$aboveactive)){ ?>
                 <div class="btn-group workflow-btn">
-                    <button type="button" class="btn btn-success btn-md waves-effect waves-light" style="pointer-events: none;"> 
+                    <button type="button" class="btn btn-success btn-md waves-effect waves-light" style="pointer-events: none;">
                         <span class="fa fa-check text-white"></span> &nbsp; <?= __('APPROVED'); ?>
-                    </button>   
-                </div>  
+                    </button>
+                </div>
                 <?php } ?>
             </div>
         </div>
@@ -390,28 +390,28 @@ $sprogress = $statusprogress['full'] ?? array();
                     <table class="table table-bordered mb-0">
                         <thead>
                             <tr bgcolor="#1b1b1b">
-                                <?php 
+                                <?php
                                 for($i = 0; $i < 7; $i++){
                                     $col_date = date('Y-m-d', strtotime("+$i days", strtotime($start_date)));
                                     $col_day_name = date('l', strtotime($col_date));
-                                ?> 
+                                ?>
                                     <th scope="col" width="14.28%" class="p-2">
                                         <div><?php echo $col_day_name; ?></div>
                                         <small class="text-white-50"><?php echo date('d M', strtotime($col_date)); ?></small>
                                     </th>
-                                <?php } ?> 
+                                <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <?php 
+                                <?php
                                 for($k = 0; $k < 7; $k++){
                                     $predate = date('Y-m-d', strtotime("+$k days", strtotime($start_date)));
                                     $num = date('j', strtotime($predate));
                                     $day = strtolower(date('l', strtotime($predate)));
                                     $is_future = strtotime($predate) > strtotime(date('Y-m-d'));
 
-                                    $ccww = ""; 
+                                    $ccww = "";
                                     $ccedit = 0;
                                     $view_data = "";
                                     $checkcurrent_status = 0;
@@ -508,7 +508,7 @@ $sprogress = $statusprogress['full'] ?? array();
                         </tbody>
                     </table>
                 </div>
-            </div> 
+            </div>
 
             <!-- Right Side KPI & Status Buckets -->
             <div class="col-lg-4">
@@ -550,10 +550,10 @@ $sprogress = $statusprogress['full'] ?? array();
                         <h6 class="mb-0 f-w-600"><?= __('With Me (Drafts)'); ?></h6>
                     </div>
                     <div class="card-body custom-scroll text-center p-2" style="max-height:140px; overflow-y:auto;">
-                        <?php 
+                        <?php
                         $avbl_with_me = 0;
-                        foreach((array)($data['timesheet'] ?? array()) as $submited){ 
-                            if(($submited['current_status'] ?? 0) < 10){ 
+                        foreach((array)($data['timesheet'] ?? array()) as $submited){
+                            if(($submited['current_status'] ?? 0) < 10){
                                 $avbl_with_me++;
                         ?>
                             <div class="row align-items-center py-1 border-bottom">
@@ -562,7 +562,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                 </div>
                                 <div class="col-5 text-start">
                                     <small class="f-w-600">
-                                        <?php 
+                                        <?php
                                         $hrs = floatval($submited['billable_hrs'] ?? 0);
                                         echo $hrs == 8 ? 'Present (8h)' : ($hrs == 4 ? 'Half Day (4h)' : 'Absent');
                                         ?>
@@ -572,7 +572,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <span class="badge bg-info"><?= __('Draft'); ?></span>
                                 </div>
                             </div>
-                        <?php } } 
+                        <?php } }
                         if($avbl_with_me == 0){ ?>
                             <p class="text-muted small my-2"><?= __('No unsubmitted draft entries for this week.'); ?></p>
                         <?php } ?>
@@ -585,11 +585,11 @@ $sprogress = $statusprogress['full'] ?? array();
                         <h6 class="mb-0 f-w-600"><?= __('With Manager (Pending)'); ?></h6>
                     </div>
                     <div class="card-body custom-scroll text-center p-2" style="max-height:140px; overflow-y:auto;">
-                        <?php 
+                        <?php
                         $avbl_with_mgr = 0;
-                        foreach((array)($data['timesheet'] ?? array()) as $submited){ 
+                        foreach((array)($data['timesheet'] ?? array()) as $submited){
                             $cst = intval($submited['current_status'] ?? 0);
-                            if($cst >= 10 && $cst < 199){ 
+                            if($cst >= 10 && $cst < 199){
                                 $avbl_with_mgr++;
                         ?>
                             <div class="row align-items-center py-1 border-bottom">
@@ -598,7 +598,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                 </div>
                                 <div class="col-5 text-start">
                                     <small class="f-w-600">
-                                        <?php 
+                                        <?php
                                         $hrs = floatval($submited['billable_hrs'] ?? 0);
                                         echo $hrs == 8 ? 'Present (8h)' : ($hrs == 4 ? 'Half Day (4h)' : 'Absent');
                                         ?>
@@ -608,7 +608,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <span class="badge bg-warning text-white"><?= __('Pending'); ?></span>
                                 </div>
                             </div>
-                        <?php } } 
+                        <?php } }
                         if($avbl_with_mgr == 0){ ?>
                             <p class="text-muted small my-2"><?= __('No pending approval records for this week.'); ?></p>
                         <?php } ?>
@@ -621,10 +621,10 @@ $sprogress = $statusprogress['full'] ?? array();
                         <h6 class="mb-0 f-w-600"><?= __('Approved'); ?></h6>
                     </div>
                     <div class="card-body custom-scroll text-center p-2" style="max-height:140px; overflow-y:auto;">
-                        <?php 
+                        <?php
                         $avbl_appr = 0;
-                        foreach((array)($data['timesheet'] ?? array()) as $submited){ 
-                            if(intval($submited['current_status'] ?? 0) == 199){ 
+                        foreach((array)($data['timesheet'] ?? array()) as $submited){
+                            if(intval($submited['current_status'] ?? 0) == 199){
                                 $avbl_appr++;
                         ?>
                             <div class="row align-items-center py-1 border-bottom">
@@ -633,7 +633,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                 </div>
                                 <div class="col-5 text-start">
                                     <small class="f-w-600">
-                                        <?php 
+                                        <?php
                                         $hrs = floatval($submited['billable_hrs'] ?? 0);
                                         echo $hrs == 8 ? 'Present (8h)' : ($hrs == 4 ? 'Half Day (4h)' : 'Absent');
                                         ?>
@@ -643,7 +643,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <span class="badge bg-success"><?= __('Approved'); ?></span>
                                 </div>
                             </div>
-                        <?php } } 
+                        <?php } }
                         if($avbl_appr == 0){ ?>
                             <p class="text-muted small my-2"><?= __('No approved records for this week.'); ?></p>
                         <?php } ?>

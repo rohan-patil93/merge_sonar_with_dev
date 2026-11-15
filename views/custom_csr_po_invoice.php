@@ -64,7 +64,7 @@ $projects = $result['table'] ?? array();
 
             </div>
 
-            
+
         </div>
     </div>
     <!-- Result Table -->

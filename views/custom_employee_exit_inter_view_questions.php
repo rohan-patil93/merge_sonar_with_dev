@@ -7,7 +7,7 @@ $category = array('1' =>'Survey','2'=> 'Poll' );
 $table_list = array(TBL_SURVEY_SETUP,TBL_SURVEY_SETUP_QUESTIONS,TBL_SURVEY_SETUP_QUESTION_OPTIONS);
 $company_id = $_SESSION['company_id'];
 $survey_id =EXITE_INTERVIEW_SURVEY_ID;
-$employeeid = $_POST['emp_id']; 
+$employeeid = $_POST['emp_id'];
 $vurl = API."?mode=getsurveyresult&company_id=".$company_id."&survey_emp_id=".$employeeid."&is_active=0"."&survey_id=".$survey_id;
 $configesponse = callAPI($vurl);
 $surveyData = json_decode($configesponse,1);
@@ -22,7 +22,7 @@ $allocated_time =  $survey_details['allocated_time'] == '0'? ST_SURVEY_DURATION_
 $allocated_time = $allocated_time * 60;
 $display_questions = $surveyData['questions'];
 $answer = $surveyData['resultdata'];
-  //echo "<pre>";print_r($answer); 
+  //echo "<pre>";print_r($answer);
 $display_tag = $category[$survey_details['category']];
 
 $qustion_types = $surveyData['qustion_types'];
@@ -52,13 +52,13 @@ function formsubmit(){
 </script>
 <div class="modal-header">
   <h5 class="modal-title">
-    <?= __('Exit Interview') ?> 
+    <?= __('Exit Interview') ?>
   </h5>
   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
-<div class="modal-body1" > 
+<div class="modal-body1" >
   <form method="post" id="myform" name="myform" action="">
-    <div class="row q-sec m-10">  
+    <div class="row q-sec m-10">
       <input type="hidden" name="emp_id" value="<?php echo $_POST['emp_id'];//$_SESSION['emp_id'];?>">
       <input type="hidden" name="category" value="<?php echo '1';?>">
       <input type="hidden" id="allocatedtime" value="<?php echo ST_SURVEY_DURATION_IN_MINUTES;?>">
@@ -66,10 +66,10 @@ function formsubmit(){
       <input type="hidden" id="survey_id" value="<?php echo EXITE_INTERVIEW_SURVEY_ID;?>" name="survey_id">
       <input type="hidden" id="answered" name="answered">
       <input type="hidden" id="response_start_time" name="response_start_time" value="<?php echo date('H:i:s'); ?>">
-      <?php 
+      <?php
       $value_id = 0;
 	if(count((array)$display_questions)>0){
-      foreach ($display_questions as $questionid=>$val) { 
+      foreach ($display_questions as $questionid=>$val) {
         $value_id++;
         $selectedoption = json_decode($answer[$questionid],1);
         //print_r($selectedoption);
@@ -81,8 +81,8 @@ function formsubmit(){
             <input type="hidden" name="questionid<?php echo $questionid;?>" value="<?php echo $questionid;?>">
             <!-- <span class="mt-5"><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span> -->
             <h6><?php echo $value_id.". ".__($display_questions[$questionid]['survey_question']); ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h6>
-            <?php 
-            if($display_questions[$questionid]['options_display_type']==1 || $display_questions[$questionid]['options_display_type']==3 ){ 
+            <?php
+            if($display_questions[$questionid]['options_display_type']==1 || $display_questions[$questionid]['options_display_type']==3 ){
               $optionlist= json_decode($display_questions[$questionid]['survey_question_option'],1);
               foreach ($optionlist as $option) {
                 if($display_questions[$questionid]['allow_multiple_selections']==1) {
@@ -96,29 +96,29 @@ function formsubmit(){
                   <label for="q1"><?php echo __($option); ?> </label> </div>
                 </b>
               <?php }
-            }else if($display_questions[$questionid]['options_display_type']==2){ 
+            }else if($display_questions[$questionid]['options_display_type']==2){
               $selectedoption =$answer[$questionid];
               ?>
 
               <span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Scale from 1 to:') ?> <?php echo $option;?></span>
               <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="number"  class="form-control col-md-5" value=<?php echo $selectedoption;?> >
-              <?php             
+              <?php
             }else if($display_questions[$questionid]['options_display_type']==4){
              //$selectedoption =$answer[$questionid];
 
              ?>
-             <textarea id="response_option<?php echo $questionid;?>"  name="response_option<?php echo $questionid;?>" class="form-control mb-2" placeholder=""><?php echo $selectedoption;?></textarea> 
-             <?php             
+             <textarea id="response_option<?php echo $questionid;?>"  name="response_option<?php echo $questionid;?>" class="form-control mb-2" placeholder=""><?php echo $selectedoption;?></textarea>
+             <?php
            }
- 
+
            ?>
 
-         </div>  
+         </div>
        </div>
      <?php } }else{ ?>
 		<div class="f-24 text-danger text-center"><?php echo $_SESSION['error_message']['8009']; ?> </div>
 	<?php } ?>
-   </div>     
+   </div>
   </form>
 </div>
 <div class="modal-footer">

@@ -1,4 +1,4 @@
-<?php  $_SESSION['apply_js']['multiselest'] = "1"; 
+<?php  $_SESSION['apply_js']['multiselest'] = "1";
 
 $_SESSION['apply_js']['from-validation'] = "1";
 ?>
@@ -10,7 +10,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 				<h5><?php echo __('Goods Receipt Notes'); ?></h5>
 				<div class="card-header-right table-card-header m-r-50">
 
-					&nbsp;  &nbsp; 
+					&nbsp;  &nbsp;
 					<!-- <input type="hidden" name="status_values" id="status_values" value=""> -->
 					<input type="hidden" name="status_values" id="status_values" value="2">
 					<input type="hidden" name="status_old_value" id="status_old_value" value="">
@@ -24,7 +24,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 				<script type="text/javascript">
 					function selectchange(field, key, table){
 						var option = 'COM_INSERT_GOODS_RECEIPT_NOTES';
-						var main_table = document.getElementById("status_values").value;	
+						var main_table = document.getElementById("status_values").value;
 						if(field == 'party_id'){
 				if(table == 'application_users'){ //alert("T");
 				if(key == '0'){
@@ -79,7 +79,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 						document.getElementById("party_payment_terms").value = obj.payment_terms;
 					},
 					error:function (){}
-				});	
+				});
 			}
 				if(table == 'customers'){ //alert("V");
 				$.ajax({
@@ -106,9 +106,9 @@ $_SESSION['apply_js']['from-validation'] = "1";
 				            }
 				        },
 				        error:function (){}
-				    });	
+				    });
 			}
-			if(main_table == 'sales_invoices'){ 
+			if(main_table == 'sales_invoices'){
 				$.ajax({
 					url: "ajax.php",
 					data:'page=dynmictabledata&table=sales_orders&field=id&value=transaction_number&rid=party_id&fid='+key,
@@ -118,11 +118,11 @@ $_SESSION['apply_js']['from-validation'] = "1";
 						$("#grade").html("<select class='form-control' name='pay_template' aria-label='<?php echo __('Select'); ?>'>"+data+"</select>");
 					},
 					error:function (){}
-				});	
+				});
 			}
 		}
 		if(field == 'ref_id'){
-				//if(table == 'application_users'){ 
+				//if(table == 'application_users'){
 					if($("#ref_type").val() !=""){
 						table = $("#ref_type").val();
 					}
@@ -141,7 +141,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 					$(".refkey_ref_no").html("<select class='form-control' name='ref_id' data-tablename='ref_id'  data-fieldsname='ref_id' data-pagename='comman_form' name='ref_id' id='ref_id' onchange="+fun+" aria-label='<?php echo __('Select'); ?>'>"+data+"</select>");
 					window.location.href = 'index.php?option='+option+'&table='+key+'&Rid=0&TD='+trandate;
 				}
-			}); 
+			});
 		}
 		if(field =="currency_id"){
 			var originator_currency_id = $("#originator_currency_id").val();
@@ -156,7 +156,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 					$("#currency_rate").val(currncyrate.rate)
 					changeexchange();
 				}
-			}); 
+			});
 
 		}
 		if(field =="payment_terms"){
@@ -168,7 +168,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 				success:function(date){
 					$("#due_date").val(date);
 				}
-			}); 
+			});
 		}
 		if(field =="place_of_supply"){
 			$.ajax({
@@ -179,7 +179,7 @@ $_SESSION['apply_js']['from-validation'] = "1";
 					var statedetails = JSON.parse(data);
 					$("#supplier_state_id").val(statedetails[0].state_id);
 				}
-			}); 
+			});
 		}
 		if(field =="transaction_location_id"){
 			$.ajax({
@@ -190,12 +190,12 @@ $_SESSION['apply_js']['from-validation'] = "1";
 			        	//var statedetails = JSON.parse(data);
 			        	$("#transaction_warehouse_id").html(data);
 			        }
-			    }); 
+			    });
 		}
 		if(field =="originator"){
 			onchangedate();
 			}
-		}	
+		}
 		function amountLimitCheck(grandtotal){
 		//$(".btndisableck").removeAttr('disabled');
 		  	//$(".btndisableck").attr('disabled','disabled');
@@ -215,13 +215,13 @@ $_SESSION['apply_js']['from-validation'] = "1";
 		</script>
 		<div class="card-body">
 			<input type="hidden" name="" value="goods_receipt_notes " id="ajax_table_name">
-			 <div class="form-group row"> 
+			 <div class="form-group row">
 				<label id="label_transaction_number" for="transaction_number" class="col-lg-2 col-form-label text-lg-right "><?php echo __('Transaction Number'); ?></label>
 				<div class="col-lg-3 " style="">
 					<input class="form-control" type="text" readonly="" autocomplete="off" value="" id="transaction_number" name="transaction_number" aria-label="<?php echo __('Transaction Number'); ?>">
 					<span class="messages"></span>
 				</div>
-		<div class="col-lg-1"></div>  
+		<div class="col-lg-1"></div>
 				<label id="label_transaction_date" for="transaction_date" class="col-lg-2 col-form-label text-lg-right "><?php echo __('Transaction Date'); ?>&nbsp;<span class="text-danger">*</span></label>
 				<div class="col-lg-3" style="">
 					<div class="">
@@ -229,12 +229,12 @@ $_SESSION['apply_js']['from-validation'] = "1";
 				</div>
 				<span class="messages"></span>
 			</div>
-		</div> 
-		<div class="form-group row"> 
+		</div>
+		<div class="form-group row">
 			<label id="label_party_id" for="party_id" class="col-lg-2 col-form-label text-lg-right "><?php echo __('Party'); ?>&nbsp;<span class="text-danger">*</span></label>
 			<div class="col-lg-3 " style="">
 				<div class="w-full refkey_party_id form-validation-class">
-					
+
 					<select class="form-select js-example-basic-single" onchange="selectchange('party_id',this.value,'vendors')" name="party_id" id="party_id" aria-label="<?php echo __('Party'); ?>">
 						<option value="" data-select2-id="2"> <?php echo __('Select Any one'); ?> </option>
 						<option value="4"><?php echo __('Infisuite Hospitals'); ?></option>
@@ -246,9 +246,9 @@ $_SESSION['apply_js']['from-validation'] = "1";
 
 
 				</div>
-				
+
 			</div>
-			<div class="col-lg-1"></div>  
+			<div class="col-lg-1"></div>
 			<label id="label_ref_id" for="ref_id" class="col-lg-2 col-form-label text-lg-right "><?php echo __('Reference Number'); ?>&nbsp;<span class="text-danger">*</span></label>
 			<div class="col-lg-3 form-validation-class" style="">
 				<div class="w-full refkey_ref_id">
@@ -259,8 +259,8 @@ $_SESSION['apply_js']['from-validation'] = "1";
 					</select>
 				</div>
 				<span class="messages"></span>
-			</div> 
-		</div> 
+			</div>
+		</div>
 </div>
 </div>
 </div>

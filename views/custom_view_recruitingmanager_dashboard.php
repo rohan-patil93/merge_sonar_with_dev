@@ -1,4 +1,4 @@
-<?php 
+<?php
 $_SESSION['apply_js']['recruitingmanager_dashboard']="1";
 $reportstartdate = date("Y-m-d",strtotime("-5 month"));
 $reportenddate = date("Y-m-d",strtotime("+2 month"));
@@ -48,7 +48,7 @@ foreach($result['tabsdata'] as $tabsdata){
 		$tabsdata['view_status'] = "Applied";
 		$tabdata['apshort'][] = $tabsdata;
 	}
-		
+
 	if($tabsdata['current_status']==ST_RMSHORTLISTED){
 		$tabsdata['view_status'] = "RM Short Listed";
 		$tabdata['rhshort'][] = $tabsdata;
@@ -73,7 +73,7 @@ foreach($result['tabsdata'] as $tabsdata){
 $stausresult = ViewStatusData();
 $statuslist  = getstatusprogresslist('job_postings');
 foreach($statuslist as $statuslist){
-	$statusnamelist[$statuslist['status']] = $statuslist['name'];	
+	$statusnamelist[$statuslist['status']] = $statuslist['name'];
 }
 
 $candidate_dashboard = $result['candidate_dashboard'];
@@ -184,9 +184,9 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 <button type="button" class="btn btn-success alert-success-msg m-b-10" onclick="sweetalertf2();">click2</button>
  -->
  <div class="row">
- 	<?php 
+ 	<?php
  	$transactiontableary = array("job_categories"=>array("application_messages"=>"9097","option"=>"COM_LIST_JOB_CATEGORIES"),"job_descrption_categories"=>array("application_messages"=>"9105","option"=>"COM_LIST_JOB_DESCRPTION_CATEGORIES"),"job_descrptions"=>array("application_messages"=>"9098","option"=>"COM_LIST_JOB_DESCRPTIONS"),"job_descrption_categories"=>array("application_messages"=>"9099","option"=>"COM_LIST_JOB_DESCRPTION_CATEGORIES"),"job_selection_process"=>array("application_messages"=>"9100","option"=>"COM_LIST_JOB_SELECTION_PROCESS"),"job_selection_process_steps"=>array("application_messages"=>"9101","option"=>"COM_LIST_JOB_SELECTION_PROCESS_STEPS"),"candidates"=>array("application_messages"=>"9102","option"=>"COM_LIST_CANDIDATES"),"locations"=>array("application_messages"=>"9103","option"=>"COM_LIST_LOCATIONS"));
- 	foreach($empty_table_alert as $eatfield=>$eta){ 
+ 	foreach($empty_table_alert as $eatfield=>$eta){
  		if($eta =='0'){
  		?>
 		<div class="p-l-10 p-r-10 col-lg-6">
@@ -204,12 +204,12 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 	</li>
 	<li class="nav-item">
 		<a class="nav-link f-w-600 f-12 <?php echo ($_GET['TAB'] =="Cand")?"active":"";?>" onclick=" updateUrlParameter('TAB','Cand')" data-bs-toggle="tab" href="#Candidates-tab" role="tab" aria-selected="true"><?= __('Candidates'); ?> </a>
-	</li>	
+	</li>
 </ul>
 
 <div class="tab-content tabs">
 	<div class="tab-pane card-body <?php echo (!isset($_GET['TAB']) || $_GET['TAB'] =="JP")?"active":"";?>" id="jobposting-tab" role="tabpanel">
-		
+
 
 
 		<div class="row">
@@ -281,7 +281,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									</div>
 									<div class="col-lg-6 p-0">
 										<a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATES" class="btn btn-warning "> <i class="ti ti-timer icon-white"></i><?= __('History'); ?></a>
-									</div>	
+									</div>
 								</div>
 							</div>
 						</div>
@@ -290,8 +290,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								<h5><?= __('Holidays'); ?></h5>
 							</div>
 							<div class="card-block custom-scroll" style=" height: 300px;">
-							<?php 
-							if(!empty($holidays)) {   
+							<?php
+							if(!empty($holidays)) {
 								foreach ($holidays as  $holiday) {
 
 									$Notification_Message = $holiday['holiday_name'];
@@ -304,7 +304,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 											<p class="text-muted m-b-0"><?php echo $Notification_DateTime; ?></p>
 										</div>
 									</div>
-								<?php } }else{ 
+								<?php } }else{
 									echo "<h4><i class='fa fa-warning'></i> ".__('No Holidays Available')."</h4>";
 								} ?>
 							</div>
@@ -332,10 +332,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								</table>
 							<?php  }else{  ?>
 									<div class="card-px text-center py-20 m-t-30">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Schedule Interview'); ?> </p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Schedule Interview'); ?> </p>
 										<div class="text-center px-4">
 											<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-										</div>   
+										</div>
 									</div>
 							<?php } ?>
 							</div>
@@ -363,10 +363,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								</table>
 							<?php  }else{  ?>
 									<div class="card-px text-center py-20 m-t-30">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Schedule Interview'); ?> </p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Schedule Interview'); ?> </p>
 										<div class="text-center px-4">
 											<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-										</div>   
+										</div>
 									</div>
 							<?php } ?>
 							</div>
@@ -387,11 +387,11 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								</ul>
 							</div>
 								<div class="tab-content tabs">
-									<?php $mm = 1; foreach($montharray as $key1=>$datev){ 
+									<?php $mm = 1; foreach($montharray as $key1=>$datev){
 										$jobpostingcandidates = $job_posting_candidates[$key1];
 										?>
 										<div class="tab-pane <?php echo $mm == count((array)$montharray)?"active":""; ?> card-body" id="month<?php echo date("M",strtotime($datev));?>" role="tabpanel">
-											<?php if(count((array)$jobpostingcandidates)  !=0){ //print_r($jobpostingcandidates); ?>	
+											<?php if(count((array)$jobpostingcandidates)  !=0){ //print_r($jobpostingcandidates); ?>
 												<table class="table table-hover m-b-0" style="font-size:13px;">
 													<thead>
 														<tr style="border-bottom-style: hidden;">
@@ -415,10 +415,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIACCEPTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Accepted'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Acc'); ?></span></th>
 															<th scope="col" class="text-center"><span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[ST_LOIREJECTED]['background_color']);?> !important" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('LoI Rejected'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Rej'); ?></span></th>
 														</tr>
-											
+
 										</thead>
 										<body>
-											<?php foreach($jobpostingcandidates as $jobpostingcandidate){ 
+											<?php foreach($jobpostingcandidates as $jobpostingcandidate){
 												$statucolorname = $stausresult[$jobpostingcandidate['current_status']];
 												?>
 												<tr>
@@ -443,13 +443,13 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								</table>
 							<?php }else{  ?>
 								<div class="card-px text-center py-20 m-t-30">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-									</div>   
+									</div>
 								</div>
 
-							<?php } ?>	
+							<?php } ?>
 						</div>
 						<?php $mm++; } ?>
 					</div>
@@ -518,7 +518,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 														</tr>
                                                         </thead>
 													<tbody>
-														<?php if(count((array)$tabdata[$las])>0){ 
+														<?php if(count((array)$tabdata[$las])>0){
 															foreach ($tabdata[$las] as $tabval){
 																?>
 																<tr>
@@ -528,7 +528,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 																	<td><?php echo $_SESSION['login_details']['allusers']['name'][$tabval['requested_by']] ; ?></td>
 																	<td>
 																		<span class="label label-warning label-lg" style="background-color: <?php echo strval($stausresult[$tabval['current_status']]['background_color']);?> !important"><?php echo $tabval['view_status']; ?> </span>
-																	</td> 
+																	</td>
 																	<td class="text-center">
 																		<div class="btn-group">
 																			<span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Displaystausdrop'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="cursor-pointer" onclick="displaystausdrop(<?php echo $tabval['candidate_id']; ?>,<?php echo "'candidates'"; ?>,<?php echo $tabval['current_status']; ?>,'tab_<?php echo $k;?>')" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > <i class="ti-target"></i> </span>
@@ -541,10 +541,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 																<tr>
 																	<td colspan="5">
 																		<div class="card-px text-center ">
-																			<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates Applied'); ?> </p>   
+																			<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates Applied'); ?> </p>
 																			<div class="text-center px-4">
 																				<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-																			</div>   
+																			</div>
 																		</div>
 																	</td>
 																</tr>
@@ -585,21 +585,21 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								<div class="tab-pane active" id="current-quater" role="tabpanel">
 									<div class="row border-bottom pb-3 mb-3">
 										<div class="col-lg-5">
-											<?php 
+											<?php
 											$dateloop = 0; $donutchartary = array();	foreach($montharray2 as $key2=>$date2){
 												$jobpostingcandidates2 = $job_posting_candidates[$key2];
 												//print_r($jobpostingcandidates2);
 												if($dateloop > 2){
 												//echo $jobpostingcandidates2['current_status']." ==ST_ACTIVE</br>";
 													$donutchartlist = $donutchart[$key2];
-													//print_r($donutchartlist);	
+													//print_r($donutchartlist);
 													$donutchartary[ST_ACTIVE] += $donutchartlist[ST_ACTIVE];
 													$donutchartary[ST_INPROGRESS] += $donutchartlist[ST_INPROGRESS];
 													$donutchartary[ST_HOLD] += $donutchartlist[ST_HOLD];
 													$donutchartary[ST_COMPLETE] += $donutchartlist[ST_COMPLETE];
 
-													$candidatecnt = $countcandidatenmonth[$key2] !=""?$countcandidatenmonth[$key2]:"0";	
-													?>	
+													$candidatecnt = $countcandidatenmonth[$key2] !=""?$countcandidatenmonth[$key2]:"0";
+													?>
 													<div class="p-3 b-radius-10 mb-3" style="border: 1px dashed #cccccc;">
 														<div class="row align-items-center">
 															<div class="col-lg-2">
@@ -633,7 +633,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									<div class="tab-pane " id="previous-quater" role="tabpanel">
 										<div class="row border-bottom pb-3 mb-3">
 											<div class="col-lg-5">
-												<?php 
+												<?php
 												$dateloop = 0;	$donutchartary = array(); foreach($montharray2 as $key2=>$date2){
 													$jobpostingcandidates2 = $job_posting_candidates[$key2];
 													if($dateloop == 3){
@@ -645,10 +645,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 													$donutchartary[ST_HOLD] += $donutchartlist[ST_HOLD];
 													$donutchartary[ST_COMPLETE] += $donutchartlist[ST_COMPLETE];
 
-													$candidatecnt = $countcandidatenmonth[$key2] !=""?$countcandidatenmonth[$key2]:"0";	
+													$candidatecnt = $countcandidatenmonth[$key2] !=""?$countcandidatenmonth[$key2]:"0";
 
 
-													?>	
+													?>
 													<div class="p-3 b-radius-10 mb-3" style="border: 1px dashed #cccccc;">
 														<div class="row align-items-center">
 															<div class="col-lg-2">
@@ -681,17 +681,17 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												</div>
 											</div>
 										</div>
-										
-									</div>   
+
+									</div>
 								</div>
-							</div>        
+							</div>
 						</div>
 					</div>
 					<div class="col-lg-3">
 						<?php if($_SESSION['role_ids'][0]==HIRINGMANAGER_ROLE){ ?>
 							<div class="card mb-2">
 								<div class="card-header">
-									<h5><?= __('Active Jobs'); ?> 
+									<h5><?= __('Active Jobs'); ?>
 										<span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[$job_postings['0']['current_status']]['background_color']);?> !important" ><?php echo $result['job_postings_count']; ?></span>
 									</h5>
 									<?php // if($result['job_postings_count']>3){ ?>
@@ -707,7 +707,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												<div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
 
 													<div class="col-auto">
-														<div class="p-2 bg-primary b-radius-10 text-center left-icon-width" 
+														<div class="p-2 bg-primary b-radius-10 text-center left-icon-width"
 														style="background-color: <?php echo strval($stausresult[$jobpostings['current_status']]['background_color']);?> !important">
 														<i class="ti-briefcase f-w-600"></i>
 													</div>
@@ -728,10 +728,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 												</div>
 											<?php } }else{?>
 												<div class="card-px text-center ">
-													<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
+													<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
 													<div class="text-center px-4">
 														<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-													</div>   
+													</div>
 												</div>
 											<?php } ?>
 										</div>
@@ -770,7 +770,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 														<?php echo  notificationdatesdiff($jobpostings['updated_date']);?>
 													</span>
 												</div>
-											<?php }else{?> 
+											<?php }else{?>
 												<div class="col-lg-3 text-right">
 													<div class="btn-group">
 														<span  class="btn "  type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="ti-target"></i> </span>
@@ -785,10 +785,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 										</div>
 									<?php } }else{?>
 										<div class="card-px text-center ">
-											<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
+											<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
 											<div class="text-center px-4">
 												<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-											</div>   
+											</div>
 										</div>
 									<?php } ?>
 								</div>
@@ -824,7 +824,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 													<?php echo  notificationdatesdiff($jobpostings['updated_date']);?>
 												</span>
 											</div>
-										<?php }else{?> 
+										<?php }else{?>
 											<div class="col-lg-3 text-right">
 												<div class="btn-group">
 													<span  class="btn "  type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="ti-target"></i> </span>
@@ -838,10 +838,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									</div>
 								<?php }  }else{?>
 									<div class="card-px text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
 										<div class="text-center px-4">
 											<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-										</div>   
+										</div>
 									</div>
 								<?php } ?>
 							</div>
@@ -881,10 +881,10 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 								</div>
 							<?php } }else{?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php } ?>
 						</div>

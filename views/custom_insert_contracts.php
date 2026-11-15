@@ -3353,7 +3353,7 @@ if (count((array) $milestones) > 0) {
                         <div id="hidden_milestones_container"></div>
 
                         <div class="row">
-                            <?php 
+                            <?php
                             foreach($document_parent as $parent){
                                 $parent_id  = $parent['id']; ?>
                             <div class="col-lg-12 mb-3">
@@ -3416,7 +3416,7 @@ if (count((array) $milestones) > 0) {
 
                                     </div>
                                 </div>
-                            <?php } endforeach; 
+                            <?php } endforeach;
                               }
                             ?>
                             <div class="col-lg-12">

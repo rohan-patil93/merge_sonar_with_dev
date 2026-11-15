@@ -24,7 +24,7 @@ $dynamic_mapping_tables = $result['dynamic_mapping_tables'];
 				});
 			},
 			error:function (){}
-		});	
+		});
 	}
 
 
@@ -124,7 +124,7 @@ function serialNumberPreview() {
     // Basic order: Prefix → Serial → Postfix → Financial Year
     let parts = [];
     for($m=1; $m<=4; $m++){
-        if (pre_fix_check && pre_fix_position == $m){ 
+        if (pre_fix_check && pre_fix_position == $m){
             if(pre_fix_type == "STATIC" && preFix){
                 parts.push(preFix);
             }else if(pre_fix_type == "DYNAMIC"){
@@ -132,7 +132,7 @@ function serialNumberPreview() {
             }
         }
         if (serial  && serial_number_position == $m) parts.push(serial);
-        if (post_fix_check && post_fix_position == $m){ 
+        if (post_fix_check && post_fix_position == $m){
             if(post_fix_type == "STATIC" && postFix){
                 parts.push(postFix);
             }else if(post_fix_type == "DYNAMIC"){
@@ -140,9 +140,9 @@ function serialNumberPreview() {
             }
         }
         if (fy && financial_year_check && financial_year_position == $m) parts.push(fy);
-	} 
+	}
     **/
-    
+
 }
 
 
@@ -158,7 +158,7 @@ function postFixonChange(){
 	if ($('#post_fix_check').is(':checked')) {
 	   	$(".post_fix_check_css").removeClass("event_disabled");
 	}else{
-	    $(".post_fix_check_css").addClass("event_disabled");	
+	    $(".post_fix_check_css").addClass("event_disabled");
 	}
 	serialNumberPreview();
 }
@@ -205,17 +205,17 @@ function formSubmitBTN(){
         }
 
     });
-    
+
     if(error_seq =='0'){
        // console.log("okkkkkkkkkkkkkkkk");
 
 	var process_name = $("#process_name").val();
 	var rid = $("#application_serial_numbers_id").val();
 	var formData = new FormData();
-    formData.append("page", "insertapplicationserialnumbers"); 
+    formData.append("page", "insertapplicationserialnumbers");
     var dataArray = $("#serial_number_form").serializeArray();
     $(dataArray).each(function(i, field){
-        formData.append(field.name, field.value); 
+        formData.append(field.name, field.value);
 
     });
     $.ajax({
@@ -234,7 +234,7 @@ function formSubmitBTN(){
                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][3001]; ?>','');
                 }else{
                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][3000]; ?>','');
-                }  
+                }
                 selectProcessName(process_name, rid);
             }
         },
@@ -260,7 +260,7 @@ function formSubmitBTN(){
 				<?php foreach($dynamic_mapping_tables as $process){ ?>
 					<option value="<?php echo $process['application_table_name']; ?>" <?php echo $workflowconfiguration['process_name']==$process['application_table_name']?"selected":"" ?> ><?php echo ucwords(str_replace("_"," ",($process['application_table_name']))); ?></option>
 				<?php } ?>
-			</select>    
+			</select>
 		</div>
 	</div>
 </div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 if($_GET['print'] =="Y"){
     include_once('../includes/session.php');
     include_once('../dbconfig.php');
@@ -17,8 +17,8 @@ if($_POST['callapi'] =='Y'){
     $callapi = "Y";
 }else{
     $rid = $_GET['rid'];
-    $table = $_GET['table'];    
-    $api = API."?mode=getdynamicinvoiceprint&transaction_id=".$rid."&transaction_table=".$table; 
+    $table = $_GET['table'];
+    $api = API."?mode=getdynamicinvoiceprint&transaction_id=".$rid."&transaction_table=".$table;
     $apicall = callAPI($api);
     $result = json_decode($apicall, 1);
     $config = $result['config'];
@@ -110,7 +110,7 @@ function emptyCheck($valu){
 //  }else{
 //      $from = date($dateformat);
 //  }
-//  return $from; 
+//  return $from;
 // }
 ?>
 <script>
@@ -127,7 +127,7 @@ function emptyCheck($valu){
    }
 </script>
 <!-- [ navigation menu ] end -->
- 
+
 
 
 <div class="card" style="width: 793px; margin: 0 auto;">
@@ -165,18 +165,18 @@ function emptyCheck($valu){
                         <table>
                             <tr>
                                 <th scope="col" class="f-12 p-0">
-                                    <?= __('Invoice#'); ?>:      
+                                    <?= __('Invoice#'); ?>:
                                 </th>
                                 <th scope="col" class="f-12 p-0">
-                                   &nbsp <?php echo $transaction['transaction_number']; ?>           
+                                   &nbsp <?php echo $transaction['transaction_number']; ?>
                                 </th>
                             </tr>
                             <tr>
                                 <th scope="col" class="f-12 p-0">
-                                    <?= __('Date'); ?>:            
+                                    <?= __('Date'); ?>:
                                 </th>
                                 <th scope="col" class="f-12 p-0">
-                                    &nbsp <?php echo date("d M Y",strtotime($transaction['transaction_date'])); ?>           
+                                    &nbsp <?php echo date("d M Y",strtotime($transaction['transaction_date'])); ?>
                                 </th>
                             </tr>
                         </table>
@@ -193,7 +193,7 @@ function emptyCheck($valu){
                         <p class="m-0 f-w-600 f-14"><?= __('INR'); ?>: <?php echo currencyFormat($transaction['total_amount'],$config); ?></p>
                     </td>
                 </tr>
-          
+
                 <tr style="border-bottom: 1px solid #000000;">
                     <th scope="col" class="f-12"><?= __('ITEM DESCRIPTION'); ?></th>
                     <th scope="col" class="f-12 text-center"><?= __('PRICE'); ?></th>
@@ -300,11 +300,11 @@ function emptyCheck($valu){
                     </td>
                 </tr>
             </table>
-        
-    </div> 
+
+    </div>
     <div class="card-body">
         <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" ><?= __('Print Payslip'); ?></button>
     </div>
-</div> 
+</div>
 
 <!-- [ style Customizer ] start -->

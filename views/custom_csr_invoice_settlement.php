@@ -121,7 +121,7 @@ $fyRows = $return['fyRows'] ?? array();
                         <label for="fld_tds_deducted_<?php echo $index; ?>"><?= __('TDS Deducted') ?></label>
                         <input id="fld_tds_deducted_<?php echo $index; ?>" class="form-control tds_deducted" type="number" step="any" name="tds_deducted[]" value="<?php echo htmlspecialchars($row['tds_deducted']); ?>">
                     </div>
-                    
+
                     <div class="col-lg-2 form-group">
                         <label for="fld_net_payable_<?php echo $index; ?>"><?= __('Net Payable') ?> <span class="text-danger">*</span></label>
                         <input id="fld_net_payable_<?php echo $index; ?>" class="form-control net_payable" type="number" step="any" name="net_payable[]" value="<?php echo htmlspecialchars($row['net_payable']); ?>">

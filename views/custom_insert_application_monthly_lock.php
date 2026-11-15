@@ -1,4 +1,4 @@
-<?php 
+<?php
     if(isset($_POST['submit'])){
         $data = $_POST;
         //echo "<pre>"; print_r($_POST); //exit;
@@ -10,7 +10,7 @@
         if($_POST['submit'] == 'Add'){
             unset($data['submit_value']);
             unset($data['submit_value_exit']);
-            unset($data['submit']); 
+            unset($data['submit']);
             unset($data['lock_list']);
             $data['current_status'] = $data['current_status']!="" ? $data['current_status'] : '0';
             $data['created_date'] = nowDate();
@@ -23,7 +23,7 @@
             unset($data['submit_value']);
             unset($data['submit_value_exit']);
             unset($data['submit']);
-            unset($data['lock_list']); 
+            unset($data['lock_list']);
             unset($data['hid']);
             $_SESSION['check'] = 1;
             $data['updated_date'] = nowDate();
@@ -33,9 +33,9 @@
         }
         if ($response) {
                 header("location:index.php?option=COM_LIST_APPLICATION_MONTHLY_LOCK");
-        }    
+        }
     }
-    if(isset($_GET['Rid']) && $_GET['Rid'] !=''){ 
+    if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $vdata_details = array();
         $rid =  encodeId($_GET['Rid']);
         $rid = urldecode($rid);
@@ -44,7 +44,7 @@
         $response = callAPI($url);
         //echo $response; exit;
         $role = json_decode($response,1);
-        
+
         $checkven = json_decode($role['lock_type_list'],1);
         //print_r($checkven);
     }
@@ -83,7 +83,7 @@ function checkAll(ele) {
 
     function validateForm(){
         //alert('hai');
-        var res = 'N'; 
+        var res = 'N';
         var z ='';
         var z = document.forms["myForm"]["lock_type"].value;
         z = z.trim();
@@ -111,7 +111,7 @@ function checkAll(ele) {
 </script>
 <div class="d-flex flex-column-fluid ">
     <div class="container-fluid ">
-        <div class="card card-custom card-sticky j-content" id="kt_page_sticky_card">           
+        <div class="card card-custom card-sticky j-content" id="kt_page_sticky_card">
             <div class="card-header">
                 <h5><?php echo "Application Monthly Lock";  ?></h5>
                 <div class="header-right card-header-right">
@@ -128,26 +128,26 @@ function checkAll(ele) {
                                     <select class="form-control form-select js-example-basic-single" id="lock_type" onchange="vendorsshow(this.value)" name="lock_type" aria-label="Lock Type">
                                         <option value=""> Select Any one </option>
                                         <?php $listtype = array('0'=>"Month Wise Lock", '1'=>"Vendor Wise Lock");
-                                         foreach ($listtype as  $lkey=>$listlock) {  ?> 
+                                         foreach ($listtype as  $lkey=>$listlock) {  ?>
                                             <option <?php if($lkey == $role['lock_type'] ){ ?> selected <?php } ?> value="<?php echo $lkey; ?>"><?php echo htmlspecialchars(__($listlock)); ?></option>
                                         <?php  } ?>
                                     </select>
                                 </div>
-                                <div style="display: none;color: red;" id="lock_type_err"> Please Select Lock Type </div> 
+                                <div style="display: none;color: red;" id="lock_type_err"> Please Select Lock Type </div>
                             </div>
                             <?php $lom =""; if($role['year']!="" && $role['month']!=""){
-                                $lom = date("Y-m",strtotime($role['year']."-".$role['month']."-01")); 
+                                $lom = date("Y-m",strtotime($role['year']."-".$role['month']."-01"));
                             }   ?>
                             <div class="form-group col-lg-6">
                                 <label class="form-label" for="month"><?= __('Month Lock') ?>&nbsp;<span class="requried">*</span></label>
                                 <input type="month" name="month" value="<?php echo $lom; ?>" id="month" class="form-control mt-2" aria-label="Month Lock">
-                                <div style="display: none;color: red;" id="month_err"> Please Enter Month Lock</div> 
-                            </div> 
-                            
-                            
+                                <div style="display: none;color: red;" id="month_err"> Please Enter Month Lock</div>
+                            </div>
+
+
                             <input type="hidden" name="company_id" id="company_id" value="<?php echo $_SESSION['company_id']; ?>">
                             <div class="form-group row col-lg-12" id="locktype" <?php if(count((array)$checkven)>0){ echo ""; }else{ ?>  style="display:none;" <?php } ?>>
-                                
+
                                 <div class="col-lg-9 mb-3"> <span class="form-label fw-bold font-weight-bold"> Vendors </span> </div>
                                 <div class="col-lg-3 mb-3">
                                     <div class="checkbox-zoom zoom-primary mt-1">
@@ -159,10 +159,10 @@ function checkAll(ele) {
                                          </label>
                                     </div>
                                 </div>
-                                
+
                                 <?php foreach($vendordata as $vkey=>$vendor){ ?>
                                  <div class="form-group col-lg-3">
-                                   <?php /**?> <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo $vendor['company']; ?></span>  
+                                   <?php /**?> <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo $vendor['company']; ?></span>
                                     <input type="checkbox"  class="js-switch" value="<?php echo $vendor['id']; ?>"  name="lock_list[<?php echo $vendor['id']; ?>]" / aria-label="Input">
                                     </div> <?php **/ ?>
                                     <div class="checkbox-zoom zoom-primary mt-1">
@@ -183,7 +183,7 @@ function checkAll(ele) {
                                 <div class="col-lg-9 col-md-6 col-sm-6 col-6">
                                     <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                                     <input type="hidden" name="submit" value="Update" />
-                                    <button id="kt_llogin_signup_submit" <?php if($status_res == '1'){ ?> disabled="disabled" <?php } ?> class="btn btn-primary mr-2" ><i class="la la-check" aria-hidden="true"></i><?= __('Update') ?></button>                       
+                                    <button id="kt_llogin_signup_submit" <?php if($status_res == '1'){ ?> disabled="disabled" <?php } ?> class="btn btn-primary mr-2" ><i class="la la-check" aria-hidden="true"></i><?= __('Update') ?></button>
                             <?php } else{ ?>
                                 <div class="col-lg-9">
                                     <input type="hidden" name="submit" value="Add" />
@@ -192,11 +192,11 @@ function checkAll(ele) {
                                     <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10"   name="submit_value" value="continue"><i class="la la-check-circle" aria-hidden="true"></i><?= __('Save & continue') ?></button>
                                     <?php } ?>
                                     <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close" aria-hidden="true"></i><?= __('Cancel') ?></button>
-                            <?php } ?>  
-                                </div>            
+                            <?php } ?>
+                                </div>
                                 <div class="col-lg-3 col-md-6 col-sm-6 col-6 text-right">
                                     <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash" aria-hidden="true"></i><?= __('Delete') ?></button>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                     </form>

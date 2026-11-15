@@ -1,10 +1,10 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = 1;
 $_SESSION['apply_js']['dropzone'] = 1;
 // $page_details= toGetTableNameBaseApplicationPagesList('insert_page_name', $_GET['option']);
 // print_r($page_details);
 $File_Uploads_Path = "uploads/customer/";
-// $content = "Help Text"; 
+// $content = "Help Text";
 // $add_url = $page_details['list_page_name'];
 // $view_url = $page_details['list_page_name'];
 // $table_name = $page_details['application_table_name'];
@@ -28,15 +28,15 @@ if(isset($_POST['submit'])){
     if($response['status'] == 'sucess'){
     if($response['LASTID'] == 0){
             $msgcode = 3001; //update
-            $_SESSION['insert_msg'] = $msgcode; 
+            $_SESSION['insert_msg'] = $msgcode;
         }else{
             $msgcode = 3000; //insert
-            $_SESSION['insert_msg'] = $msgcode; 
-            $rid = deocdeId("id:".$response['LASTID']);	
+            $_SESSION['insert_msg'] = $msgcode;
+            $rid = deocdeId("id:".$response['LASTID']);
         	header("location:index?option=COM_INSERT_CUSTOMERS&Rid=".$rid);
-        }   
+        }
     }else{
-    	
+
 
         //($response['status'] == 'fail'){
         if(isset($_SESSION['error'][$response['error_no']])){
@@ -52,7 +52,7 @@ if(isset($_POST['submit'])){
 }
 //else{
 	//echo "insert_msg"; print_r($_SESSION['insert_msg']);
-    if($_SESSION['insert_msg'] !=""){ 
+    if($_SESSION['insert_msg'] !=""){
         $msgcode = $_SESSION['insert_msg'];
         $_SESSION['insert_msg'] = "";
         ?>
@@ -60,11 +60,11 @@ if(isset($_POST['submit'])){
             document.onreadystatechange = function(){
                 if(document.readyState == "complete") {
                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][$msgcode]." ".$additional_notice; ?>','');
-                } 
+                }
             }
         </script>
         <?php
-      
+
     }
 //}
 
@@ -115,7 +115,7 @@ if (isset($_POST['submit'])){
 			$data_agreements['file_url'][$f] = $newfilename;
 			move_uploaded_file($_FILES["agreement_file"]["tmp_name"][$f], $File_Uploads_Path.$newfilename);
 		}
-		foreach ($data_agreements['ag_type'] as $agkey => $ag) { 
+		foreach ($data_agreements['ag_type'] as $agkey => $ag) {
 			$postdata['agreement_name'] = $data_agreements['ag_type'][$agkey];
 			$postdata['agreement_ref_no'] = $data_agreements['ag_number'][$agkey];
 			$postdata['signed_date'] = date('Y-m-d', strtotime($data_agreements['ag_sin_date'][$agkey]));
@@ -150,7 +150,7 @@ if (isset($_POST['submit'])){
 			//header("location:index.php?option=$view_url&error=3000");
 		}
 	}
-	if($_POST['submit'] == 'Update'){	
+	if($_POST['submit'] == 'Update'){
 		//$_SESSION['check'] = 1;
 		$data_agreements = $_POST;
 		$data_agreements['created_date'] = nowDate();
@@ -162,7 +162,7 @@ if (isset($_POST['submit'])){
 		$data_agreements['vendor_id'] = $vendor_id1;
 		//print_r($_POST); exit;
 		// print_r($_FILES["agreement_file"]["name"]);
-		
+
 		$url = API."?mode=updaterowbasepimarydata&rid=".$_POST['hid']."&table=".$table_name."&method=post";
 		$response = file_post_contents($url, $data, 'update');
 		$postdata['company_id'] = $_SESSION['company_id'];
@@ -180,13 +180,13 @@ if (isset($_POST['submit'])){
 		}
 		//print_r($postdata['file_url']);
 
-		foreach ($data_agreements['ag_type'] as $agkey => $ag) { 
+		foreach ($data_agreements['ag_type'] as $agkey => $ag) {
 			$postdata['agreement_name'] = $data_agreements['ag_type'][$agkey];
 			$postdata['agreement_ref_no'] = $data_agreements['ag_number'][$agkey];
 			$postdata['signed_date'] = date('Y-m-d', strtotime($data_agreements['ag_sin_date'][$agkey]));
 			$postdata['expiry_date'] = date('Y-m-d', strtotime($data_agreements['ag_ex_date'][$agkey]));
 			$postdata['file_url'] = $data_agreements['file_url'][$agkey];
-			
+
 			if(!empty($data_agreements['ag_rowid'][$agkey]))
 			{
 	    		// update
@@ -211,10 +211,10 @@ if (isset($_POST['submit'])){
 			  //header("location:index.php?option=$view_url");
 		}
 	}
-}  
+}
 
 **/
-//if(isset($_GET['Rid']) && $_GET['Rid'] !=''){ 
+//if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
 	//$rid =  encodeId($_GET['Rid']);
 $rid =  encodeId($_GET['Rid']);
 $rid = urldecode($rid);
@@ -248,15 +248,15 @@ foreach($states as $states_list){
 foreach($cities as $cities_list){
 	$citieslist[$cities_list['id']] = $cities_list['city_name'];
 }
-//echo "<pre>";print_r($cities); //print_r($property_details); print_r($property_owners); 
+//echo "<pre>";print_r($cities); //print_r($property_details); print_r($property_owners);
 //echo "</pre>";
 
 //print_r($['customer_vendor_gst_billing_details_sql']);
 if($customers['image'] !=''){
-	$image = $File_Uploads_Path.$customers['image']; 
+	$image = $File_Uploads_Path.$customers['image'];
 }else{
 	$image = $File_Uploads_Path."no-image.jpg";
-} 
+}
 ?>
 
 
@@ -265,24 +265,24 @@ if($customers['image'] !=''){
 		var date_format = "yy-mm-dd";
 		var count = $(".itemRow").length;
 		count = count + 1;
-		jQuery(document).ready(function() {    
+		jQuery(document).ready(function() {
 			KTBootstrapDatepicker.init();
 		});
 		var htmlRows = '';
-		htmlRows += '<tr class="">'; 
+		htmlRows += '<tr class="">';
 
-		htmlRows += '<td>'+count+'</td>'; 
-		htmlRows += '<td><input type="text" name="ag_type[]"  class="form-control rowcount itemRow " autocomplete="off" title="<?= __('Ag Type') ?>" aria-label="Ag Type">  </td>'; 
-		htmlRows += '<td><input type="text" name="ag_number[]"  class="form-control " autocomplete="off" title="<?= __('Ag Number') ?>" aria-label="Ag Number"> </td>'; 
-		htmlRows += '<td><input type="text" name="ag_sin_date[]"  class="form-control datepicker" id="kt_datepicker_sin_'+count+'" autocomplete="off" title="<?= __('Ag Sin Date') ?>" aria-label="Ag Sin Date">  </td>'; 
-		htmlRows += '<td><input type="text" name="ag_ex_date[]"  class="form-control datepicker"  id="kt_datepicker_ex_'+count+'" autocomplete="off" title="<?= __('Ag Ex Date') ?>" aria-label="Ag Ex Date">  </td>'; 
+		htmlRows += '<td>'+count+'</td>';
+		htmlRows += '<td><input type="text" name="ag_type[]"  class="form-control rowcount itemRow " autocomplete="off" title="<?= __('Ag Type') ?>" aria-label="Ag Type">  </td>';
+		htmlRows += '<td><input type="text" name="ag_number[]"  class="form-control " autocomplete="off" title="<?= __('Ag Number') ?>" aria-label="Ag Number"> </td>';
+		htmlRows += '<td><input type="text" name="ag_sin_date[]"  class="form-control datepicker" id="kt_datepicker_sin_'+count+'" autocomplete="off" title="<?= __('Ag Sin Date') ?>" aria-label="Ag Sin Date">  </td>';
+		htmlRows += '<td><input type="text" name="ag_ex_date[]"  class="form-control datepicker"  id="kt_datepicker_ex_'+count+'" autocomplete="off" title="<?= __('Ag Ex Date') ?>" aria-label="Ag Ex Date">  </td>';
 
-       //htmlRows += '<td><input type="text" name="score[]"  class="form-control " autocomplete="off" title="<?= __('Score') ?>" aria-label="Score">  </td>';   
+       //htmlRows += '<td><input type="text" name="score[]"  class="form-control " autocomplete="off" title="<?= __('Score') ?>" aria-label="Score">  </td>';
        htmlRows +='<td><div class="image-input image-input-empty image-input-outline" id="kt_image_5_'+count+'" ><span class="btn-hover-text-primary mt-2" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= __('Change avatar') ?>" > <i class="ti-cloud-up f-20 text-primary f-30 f-w-800" data-toggle="tooltip" title="<?= __('Upload') ?>"></i></div></td>'
 
        htmlRows += '</tr>';
 	//datepickercall();
-	
+
 	$('#edutable').append(htmlRows);
 	$( ".datepicker" ).datepicker({
 		showOn: "both",
@@ -307,9 +307,9 @@ function selectedcategory(selected_id,element_id,table_name,field_name,targetele
                 			var response = JSON.parse(response);
                 			console.log(response.length);
                 			console.log(response);
-                			var select = document.getElementById(element_id); 
+                			var select = document.getElementById(element_id);
                 			document.getElementById(element_id).innerHTML = "";
-                			for (var i = 0; i < response.length; i++) 
+                			for (var i = 0; i < response.length; i++)
                 			{
                 				var el = document.createElement("option");
                 				if(table_name=='states'){
@@ -332,7 +332,7 @@ function selectedcategory(selected_id,element_id,table_name,field_name,targetele
         </script>
         <script>
         	function checkboxclick(){
-	//$('input[name="hiring_cluse"]').click(function() { 
+	//$('input[name="hiring_cluse"]').click(function() {
 		if ($('input[name="hiring_clause"]').is(':checked')) {
 			$(".coolingmonth").show();
 		} else {
@@ -370,7 +370,7 @@ function selectItemsWithParty(item_id,type,party_item_id=""){
 				});
 			}
 		});
-	
+
 	}else{
 		jQuery.ajax({
 		    url: "views/custom_insert_vendor_customer_item_popup.php",
@@ -380,7 +380,7 @@ function selectItemsWithParty(item_id,type,party_item_id=""){
 		    	$('#dynamic_popup1').html(data);
 	    		$('#kt_modal_dynamic_popup').modal("show");
 		    }
-		});	
+		});
 	}
 
 }
@@ -398,7 +398,7 @@ function getVendorCustomerItems(){
 	    	$(".js-example-basic-single").select2();
 			$('[data-bs-toggle="tooltip"]').tooltip();
       	}
-	});	
+	});
 }
 function getCustomerContracts(){
 	var loader = '<div class="text-center" id="loader-show-customer-contracts"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
@@ -427,7 +427,7 @@ function addTaxRow() {
 	var lutNoInput = lastRow.find("input[name='lut_no[]']");
 	var bondNoInput = lastRow.find("input[name='bond_no[]']");
 	var finYearSelect = lastRow.find("select[name='finance_year[]']");
-	
+
 	// Check if last row is locked
 	var lockButton = lastRow.find(".lock-btn");
 	var isLocked = lockButton.hasClass('locked');
@@ -435,15 +435,15 @@ function addTaxRow() {
 		tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', 'Please lock the current row before adding a new one', '');
 		return false;
 	}
-	
+
 	var lutNo = lutNoInput.val();
 	var bondNo = bondNoInput.val();
 	var finYear = finYearSelect.val();
-	
+
 	lutNoInput.removeClass('is-invalid');
 	bondNoInput.removeClass('is-invalid');
 	finYearSelect.removeClass('is-invalid');
-	
+
 	var hasError = false;
 	if (!lutNo) {
 		lutNoInput.addClass('is-invalid');
@@ -457,12 +457,12 @@ function addTaxRow() {
 		finYearSelect.addClass('is-invalid');
 		hasError = true;
 	}
-	
+
 	if (hasError) {
 		tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'Please fill all fields in the current row before adding a new one', '');
 		return false;
 	}
-	
+
 	var selectedYears = [];
 	$(".tax-row").each(function() {
 		var year = $(this).find("select[name='finance_year[]']").val();
@@ -470,7 +470,7 @@ function addTaxRow() {
 			selectedYears.push(year);
 		}
 	});
-	
+
 	var maxRowId = 1;
 	$(".tax-row").each(function() {
 		var rowId = parseInt($(this).attr("data-row-id")) || 0;
@@ -479,35 +479,35 @@ function addTaxRow() {
 		}
 	});
 	var newRowId = maxRowId + 1;
-	
+
 	var clonedRow = $(".tax-row:first").clone(false, false);
-	
+
 	clonedRow.attr("data-row-id", newRowId);
 	clonedRow.attr("data-added", "true");
-	
+
 	clonedRow.find("input").val("");
 	clonedRow.find("input").removeClass('is-invalid');
-	
+
 	clonedRow.find("input[name='lutbond_id[]']").val("");
-	
+
 	clonedRow.find("select").prop('selectedIndex', 0);
 	clonedRow.find("select").removeClass('is-invalid');
-	
+
 	// Reset lock button state
 	clonedRow.find(".lock-btn").removeClass('locked permanently-locked').addClass('btn-warning').html('<i class="fa fa-unlock"></i> Lock');
 	clonedRow.find("input[name='lock_status[]']").val(1);
 
 	clonedRow.removeAttr('style');
 	clonedRow.removeClass('locked-row');
-	
+
 	clonedRow.find('input:not([name="lock_status[]"])').attr('readonly', false);
 	clonedRow.find('select').prop('disabled', false);
-	
+
 	clonedRow.find('.select2-container').remove();
-	
+
 	$(".tax-row:last").after(clonedRow);
 	clonedRow.find(".remove-btn").removeClass("d-none");
-	
+
 	var newSelect = clonedRow.find(".js-example-basic-single");
 	newSelect.select2();
 	newSelect.find("option").each(function () {
@@ -562,27 +562,27 @@ function validateAllTaxRows() {
 
 function removeTaxRow(button) {
 	var rowToRemove = $(button).closest(".tax-row");
-	
+
 	var lockButton = rowToRemove.find(".lock-btn");
 	var isLocked = lockButton.hasClass('locked');
 	var isPermanentlyLocked = lockButton.hasClass('permanently-locked');
-	
+
 	if (isLocked || isPermanentlyLocked) {
 		tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', 'Locked rows cannot be removed', '');
 		return false;
 	}
-	
+
 	if ($(".tax-row").length > 1) {
 		rowToRemove.remove();
 		chnageFinanceTaxYear();
 	} else {
 		rowToRemove.find("input:not([name='lock_status[]'])").val("");
 		rowToRemove.find("select").prop('selectedIndex', 0);
-		
+
 		// Clear date fields
 		rowToRemove.find(".start-date-field").val("");
 		rowToRemove.find(".end-date-field").val("");
-		
+
 		chnageFinanceTaxYear();
 	}
 }
@@ -599,19 +599,19 @@ function chnageFinanceTaxYear() {
             });
         }
     });
-    
+
     $(".tax-row").each(function() {
         var currentSelect = $(this).find("select[name='finance_year[]']");
         var currentValue = currentSelect.val();
-        
+
         currentSelect.find("option").attr('disabled', false);
-        
+
         selectedYears.forEach(function(item) {
             if (item.element[0] !== currentSelect[0] && item.value) {
                 currentSelect.find("option[value='" + item.value + "']").attr('disabled', true);
             }
         });
-        
+
         currentSelect.select2('destroy').select2();
     });
 }
@@ -619,15 +619,15 @@ function chnageFinanceTaxYear() {
 function validateTaxRows() {
     var isValid = true;
     var hasUnlockedRows = false;
-    
+
     $(".tax-row").find("input:not([name='lock_status[]']), select").removeClass('is-invalid');
-    
+
     $(".tax-row").each(function(index) {
         var row = $(this);
         var lockButton = row.find(".lock-btn");
         var isLocked = lockButton.hasClass('locked');
         var isPermanentlyLocked = lockButton.hasClass('permanently-locked');
-        
+
         var lutNoInput = row.find("input[name='lut_no[]']");
         var bondNoInput = row.find("input[name='bond_no[]']");
         var finYearSelect = row.find("select[name='finance_year[]']");
@@ -638,15 +638,15 @@ function validateTaxRows() {
         // If row is not locked, mark as invalid
         if (!isLocked && !isPermanentlyLocked && (lutNo !="" || bondNo !="" || finYear !="")) {
             hasUnlockedRows = true;
-            
+
             // var lutNoInput = row.find("input[name='lut_no[]']");
             // var bondNoInput = row.find("input[name='bond_no[]']");
             // var finYearSelect = row.find("select[name='finance_year[]']");
-            
+
             // var lutNo = lutNoInput.val();
             // var bondNo = bondNoInput.val();
             // var finYear = finYearSelect.val();
-            
+
             // If fields are filled but not locked, require locking
             if (lutNo || bondNo || finYear) {
                 tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'Please lock row ' + (index + 1) + ' before submitting', '');
@@ -655,13 +655,13 @@ function validateTaxRows() {
             }
         }
     });
-    
+
     // If there are unlocked rows, prevent submission
     if (hasUnlockedRows && isValid) {
         tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'All rows must be locked before submission', '');
         return false;
     }
-    
+
     return isValid;
 }
 
@@ -671,23 +671,23 @@ function validateTaxRows() {
 				e.preventDefault();
 			}
 		});
-		
+
 		chnageFinanceTaxYear();
-		
+
 		// Initialize row lock buttons correctly
 		$(".lock-btn").each(function() {
 			var lockStatusValue = $(this).closest('.tax-row').find("input[name='lock_status[]']").val();
 			var lutbondId = $(this).closest('.tax-row').find("input[name='lutbond_id[]']").val();
-			
+
 			// If database value is 0, it means the row is locked
 			if (lockStatusValue == 0) {
 				$(this).addClass('locked btn-success').removeClass('btn-warning').html('<i class="fa fa-lock"></i> Locked');
-				
+
 				// If it has an ID, make it permanently locked
 				if (lutbondId) {
 					$(this).addClass('permanently-locked').html('<i class="fa fa-lock"></i> Permanent');
 				}
-				
+
 				var row = $(this).closest('.tax-row');
 				row.addClass('locked-row');
 				row.find('input:not([name="lock_status[]"])').attr('readonly', true);
@@ -698,7 +698,7 @@ function validateTaxRows() {
 				$(this).removeClass('locked btn-success').addClass('btn-warning').html('<i class="fa fa-unlock"></i> Lock');
 			}
 		});
-		
+
 		// Initialize financial dates for existing rows
 		$(".tax-row").each(function() {
 			var select = $(this).find("select[name='finance_year[]']");
@@ -712,15 +712,15 @@ function updateFinancialDates(selectElement) {
     // Get the selected year
     var year = $(selectElement).val();
     var row = $(selectElement).closest('.tax-row');
-    
+
     if (year) {
         // Calculate start date (April 1st of selected year)
         var startDate = year + '-04-01';
-        
+
         // Calculate end date (March 31st of next year)
         var nextYear = parseInt(year) + 1;
         var endDate = nextYear + '-03-31';
-        
+
         // Set the hidden field values
         row.find('.start-date-field').val(startDate);
         row.find('.end-date-field').val(endDate);
@@ -729,7 +729,7 @@ function updateFinancialDates(selectElement) {
         row.find('.start-date-field').val('');
         row.find('.end-date-field').val('');
     }
-    
+
     // Also call the original function to maintain duplicate year prevention
     chnageFinanceTaxYear();
 }
@@ -739,27 +739,27 @@ function toggleRowLock(button) {
     var lockButton = $(button);
     var isLocked = lockButton.hasClass('locked');
     var isPermanentlyLocked = lockButton.hasClass('permanently-locked');
-    
+
     // Prevent unlocking permanently locked rows
     if (isPermanentlyLocked) {
         tostarnotify('top', 'right', 'fa fa-lock', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', 'This row is permanently locked and cannot be unlocked', '');
         return false;
     }
-    
+
     var inputs = row.find('input:not([name="lock_status[]"])');
     var selects = row.find('select');
     var lockStatusInput = row.find("input[name='lock_status[]']");
-    
+
     if (!isLocked) {
         // Locking the row - validate all fields are filled
         var lutNoInput = row.find("input[name='lut_no[]']");
         var bondNoInput = row.find("input[name='bond_no[]']");
         var finYearSelect = row.find("select[name='finance_year[]']");
-        
+
         var lutNo = lutNoInput.val();
         var bondNo = bondNoInput.val();
         var finYear = finYearSelect.val();
-        
+
         var hasError = false;
         if (!lutNo) {
             lutNoInput.addClass('is-invalid');
@@ -773,15 +773,15 @@ function toggleRowLock(button) {
             finYearSelect.addClass('is-invalid');
             hasError = true;
         }
-        
+
         if (hasError) {
             tostarnotify('top', 'right', 'fa fa-warning', 'form-label label label-warning', 'animated flipInX', 'animated flipOutX', 'Please fill all fields before locking the row', '');
             return false;
         }
-        
+
         // Set lock status to 0 (locked)
         lockStatusInput.val(0);
-        
+
         // Check if this is an existing record with id
         var lutbondId = row.find("input[name='lutbond_id[]']").val();
         if (lutbondId) {
@@ -790,30 +790,30 @@ function toggleRowLock(button) {
         } else {
             lockButton.html('<i class="fa fa-lock"></i> Locked');
         }
-        
+
         // Update button state
         lockButton.addClass('locked btn-success').removeClass('btn-warning');
-        
+
         // Lock all fields in the row
         inputs.attr('readonly', true);
         selects.prop('disabled', true);
         row.addClass('locked-row');
         selects.select2('destroy').select2();
-        
+
         tostarnotify('top', 'right', 'fa fa-lock', 'form-label label label-success', 'animated flipInX', 'animated flipOutX', 'Row has been locked', '');
     } else {
         // Unlocking the row (only for new rows without IDs)
         lockStatusInput.val(1);
-        
+
         // Update button state
         lockButton.removeClass('locked btn-success').addClass('btn-warning').html('<i class="fa fa-unlock"></i> Lock');
-        
+
         // Unlock all fields in the row
         inputs.attr('readonly', false);
         selects.prop('disabled', false);
         row.removeClass('locked-row');
         selects.select2('destroy').select2();
-        
+
         tostarnotify('top', 'right', 'fa fa-unlock', 'form-label label label-info', 'animated flipInX', 'animated flipOutX', 'Row has been unlocked', '');
     }
 }
@@ -823,7 +823,7 @@ function toggleRowLock(button) {
 </script>
 <?php if($content !=''){ ?>
 	<div class="alert alert-warning alert-dismissible">
-		<strong><?php echo $content; ?></strong> 
+		<strong><?php echo $content; ?></strong>
 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
 <?php } ?>
@@ -831,7 +831,7 @@ function toggleRowLock(button) {
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>  
+        </div>
 <?php } ?>
 <form class="" id="kt_form" method="post" action=""  name="myForm" enctype="multipart/form-data">
 	<div class="card card-custom card-sticky">
@@ -851,7 +851,7 @@ function toggleRowLock(button) {
 									<h4 class="text-white"><?php echo ucwords($customers['display_name'])." (".ucwords($customers['company']).")"; ?></h4>
 									<span class="text-white"><?php echo $customers['email']; ?></span>
 								</div>
-								<?php /** if($customers['hiring_clause']==0){?> 
+								<?php /** if($customers['hiring_clause']==0){?>
 									<div>No Hiring Clause Applicable, Cooling off Period of <?php echo $customers['cooling_months'];?> Months </div>
 								<?php }else{ ?>
 									<div>No Hiring Clause Not Applicable	</div>
@@ -863,10 +863,10 @@ function toggleRowLock(button) {
 									<button  type="submit" name="submit" class="btn btn-primary m-r-20 m-b-20">
 										<?php if($customers['id'] !=""){ ?><i class="fa fa-check-square"></i>
 									Update <?php }else{  ?><i class="icofont icofont-plus"></i>
-									Submit<?php } ?> </button> 
+									Submit<?php } ?> </button>
 									<!-- <button type="button" class="btn btn-primary m-b-20"><i class="icofont icofont-ui-messaging"></i>
 									Message</button> -->
-									<input type="hidden" name="rid" value="<?php echo $rid; ?>"> 
+									<input type="hidden" name="rid" value="<?php echo $rid; ?>">
 								</div>
 							</div>
 						</div>
@@ -935,7 +935,7 @@ function toggleRowLock(button) {
 						<a class="nav-link" data-bs-toggle="tab" href="#reantal_properties_2" role="tab">Rental Properties - 2</a>
 						<div class="slide"></div>
 					</li> -->
-					
+
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content card-block">
@@ -945,9 +945,9 @@ function toggleRowLock(button) {
 					<div class="tab-pane" id="customer_contracts" role="tabpanel">
 
 		</div>
-		
+
 					<div class="tab-pane <?php echo $customers['id']!=""?"active":""; ?>"  id="overview" role="tabpanel">
-						<div class="row">   
+						<div class="row">
 							<div class="col-lg-12 col-xl-6">
 								<div class="table-responsive">
 									<div class="card-header"><h5 class="text-primary"><?= __('Basic Info') ?></h5></div>
@@ -994,7 +994,7 @@ function toggleRowLock(button) {
 														</tr>
 													</thead>
 													<tbody>
-														<?php $k=0;  
+														<?php $k=0;
 														foreach ($property_tenant_details as $inst) { $k++;?>
 															<tr>
 																<td><?php echo $property_details[$inst['property_owner_detail_id']]['property_name']; ?></td>
@@ -1008,10 +1008,10 @@ function toggleRowLock(button) {
 												</table>
 											<?php }else{ ?>
 												<div class="card-px text-center ">
-													<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Rental Properties</p>   
+													<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Rental Properties</p>
 													<div class="text-center px-4">
 														<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-													</div>   
+													</div>
 												</div>
 											<?php } ?>
 										</div>
@@ -1034,7 +1034,7 @@ function toggleRowLock(button) {
 														</tr>
 													</thead>
 													<tbody>
-														<?php $k=0;  
+														<?php $k=0;
 														foreach ($aggrements as $inst) { $k++;?>
 															<tr>
 																<td><?php echo $inst['agreement_name']; ?></td>
@@ -1048,10 +1048,10 @@ function toggleRowLock(button) {
 												</table>
 											<?php }else{ ?>
 												<div class="card-px text-center ">
-													<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Aggrements</p>   
+													<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Aggrements</p>
 													<div class="text-center px-4">
 														<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-													</div>   
+													</div>
 												</div>
 											<?php } ?>
 										</div>
@@ -1083,7 +1083,7 @@ function toggleRowLock(button) {
 											<tr>
 												<th scope="row"><?= __('Pincode') ?></th>
 												<td><?php echo emptytextdashShow($customers['shipping_post_code']); ?></td>
-											</tr>                                 
+											</tr>
 										</tbody>
 									</table>
 								</div>
@@ -1112,7 +1112,7 @@ function toggleRowLock(button) {
 											<tr>
 												<th scope="row"><?= __('PAN') ?></th>
 												<td><?php echo emptytextdashShow($customers['pan_no']); ?></td>
-											</tr>                                 
+											</tr>
 										</tbody>
 									</table>
 								</div>
@@ -1144,7 +1144,7 @@ function toggleRowLock(button) {
 											</tr>
 											<tr>
 												<th scope="row"><?= __('Contact Person') ?></th>
-												<td><?php echo emptytextdashShow($customers['contact_person']); ?></td> 
+												<td><?php echo emptytextdashShow($customers['contact_person']); ?></td>
 											</tr>
 											<tr>
 												<th scope="row"><?= __('Contact Person Mobile') ?></th>
@@ -1179,7 +1179,7 @@ function toggleRowLock(button) {
 											<tr>
 												<th scope="row"><?= __('The Customer Pays Me With') ?></th>
 												<td class="text-right"><?php echo emptytextdashShow(customeummarmonyformate($customers['pay_with_me'])); ?></td>
-											</tr>                                 
+											</tr>
 											<tr>
 												<th scope="row"><?= __('Credit Limit') ?></th>
 												<td class="text-right"><?php echo emptytextdashShow(customeummarmonyformate($customers['credit_limit'])); ?></td>
@@ -1205,7 +1205,7 @@ function toggleRowLock(button) {
 											<!-- <tr>
 												<th scope="row"><?= __('Sales Type') ?></th>
 												<td><?php echo emptytextdashShow($customers['sales_type']); ?></td>
-											</tr>  -->                             
+											</tr>  -->
 										</tbody>
 									</table>
 								</div>
@@ -1219,30 +1219,30 @@ function toggleRowLock(button) {
 								<!-- <div class="col-lg-3 p-r-5" style="float: left;">
 									<span class="form-label"><?= __('Title') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="title" name="title" value="<?php echo $customers['title']; ?>" title="<?= __('Title') ?>" aria-label="Title">	
+										<input class="form-control" type="text" id="title" name="title" value="<?php echo $customers['title']; ?>" title="<?= __('Title') ?>" aria-label="Title">
 									</div>
-									<div style="display: none;color: red;" id="title_err"> Please enter title </div> 
+									<div style="display: none;color: red;" id="title_err"> Please enter title </div>
 								</div> -->
 								<div class="form-group col-lg-3 p-r-5" style="float: left;">
 									<span class="form-label">First Name <span class="text-danger">*</span></span>
 									<div class="kt-input-icon">
 										<input class="form-control" type="text" id="first_name" name="first_name" value="<?php echo $customers['first_name']; ?>" required title="<?= __('First Name') ?>" aria-label="First Name">
 									</div>
-									<div style="display: none;color: red;" id="first_name_err"> Please enter first_name </div> 
+									<div style="display: none;color: red;" id="first_name_err"> Please enter first_name </div>
 								</div>
 								<div class="form-group col-lg-3 p-r-5" style="float: left;">
 									<span class="form-label"><?= __('Middle Name') ?></span>
 									<div class="kt-input-icon">
 										<input class="form-control" type="text" id="middle_name" name="middle_name" value="<?php echo $customers['middle_name']; ?>" title="<?= __('Middle Name') ?>" aria-label="Middle Name">
 									</div>
-									<div style="display: none;color: red;" id="middle_name_err"> Please enter middle name </div> 
+									<div style="display: none;color: red;" id="middle_name_err"> Please enter middle name </div>
 								</div>
 								<div class="form-group col-lg-3 p-r-5" style="float: left;">
 									<span class="form-label">Last Name <span class="text-danger">*</span></span>
 									<div class="kt-input-icon">
 										<input class="form-control" type="text" id="last_name" name="last_name" value="<?php echo $customers['last_name']; ?>" required title="<?= __('Last Name') ?>" aria-label="Last Name">
 									</div>
-									<div style="display: none;color: red;" id="last_name_err"> Please enter last name </div> 
+									<div style="display: none;color: red;" id="last_name_err"> Please enter last name </div>
 								</div>
 								<div class="form-group col-lg-3">
 									<span class="form-label">Email <span class="text-danger">*</span></span>
@@ -1250,33 +1250,33 @@ function toggleRowLock(button) {
 										<input class="form-control" id="email" name="email" type="email" onblur="checkalreadyavailableornotcustomerorvendordetails('EMAIL')" value="<?php echo $customers['email']; ?>" required title="<?= __('Email') ?>" aria-label="Email">
 									</div>
 									<span class="text-danger f-14" id="emailerror"  style="display:none"></span>
-									<div style="display: none;color: red;" id="email_err"> Please enter email </div> 
+									<div style="display: none;color: red;" id="email_err"> Please enter email </div>
 								</div>
 								<div class="form-group col-lg-3">
 									<span class="form-label"><?= __('Phone') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="number" id="phone" name="phone" value="<?php echo $customers['phone']; ?>" title="<?= __('Phone') ?>" aria-label="Phone">	
+										<input class="form-control" type="number" id="phone" name="phone" value="<?php echo $customers['phone']; ?>" title="<?= __('Phone') ?>" aria-label="Phone">
 									</div>
-									<div style="display: none;color: red;" id="phone_err"> Please enter phone </div>  
+									<div style="display: none;color: red;" id="phone_err"> Please enter phone </div>
 								</div>
 								<div class="form-group col-lg-3 p-r-5" style="float: left;">
 									<span class="form-label"><?= __('Suffix') ?></span>
 									<div class="kt-input-icon">
 										<input class="form-control" type="text" id="suffix" name="suffix" value="<?php echo $customers['suffix']; ?>" title="<?= __('Suffix') ?>" aria-label="Suffix">
 									</div>
-									<div style="display: none;color: red;" id="suffix_err"> Please enter suffix name </div> 
+									<div style="display: none;color: red;" id="suffix_err"> Please enter suffix name </div>
 								</div>
 								<div class="form-group col-lg-3 ">
 									<span class="form-label">Company <span class="text-danger">*</span></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="company" name="company" value="<?php echo $customers['company']!=""?$customers['company']:$_GET['COMPNAME']; ?>" required title="<?= __('Company') ?>" aria-label="Company">	
+										<input class="form-control" type="text" id="company" name="company" value="<?php echo $customers['company']!=""?$customers['company']:$_GET['COMPNAME']; ?>" required title="<?= __('Company') ?>" aria-label="Company">
 									</div>
-									<div style="display: none;color: red;" id="company_err"> Please enter company </div>  
+									<div style="display: none;color: red;" id="company_err"> Please enter company </div>
 								</div>
 								<div class="form-group col-lg-3 ">
 									<span class="form-label"><?= __('Display Name As') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="display_name" name="display_name" value="<?php echo $customers['display_name']; ?>" title="<?= __('Display Name') ?>" aria-label="Display Name">	
+										<input class="form-control" type="text" id="display_name" name="display_name" value="<?php echo $customers['display_name']; ?>" title="<?= __('Display Name') ?>" aria-label="Display Name">
 									</div>
 									<div style="display: none;color: red;" id="display_name_err"> Please enter display name </div>
 								</div>
@@ -1289,21 +1289,21 @@ function toggleRowLock(button) {
 										<?php } ?>
 									</select>
 
-									<div style="display: none;color: red;" id="email_err1"> Please enter parent_customer </div> 
+									<div style="display: none;color: red;" id="email_err1"> Please enter parent_customer </div>
 								</div>
 								<!-- <div class="form-group col-lg-3">
 									<span class="form-label"><?= __('Bill With Parent') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="number" id="bill_with_parent" name="bill_with_parent" value="<?php echo $customers['bill_with_parent']; ?>" title="<?= __('Bill With Parent') ?>" aria-label="Bill With Parent">	
+										<input class="form-control" type="number" id="bill_with_parent" name="bill_with_parent" value="<?php echo $customers['bill_with_parent']; ?>" title="<?= __('Bill With Parent') ?>" aria-label="Bill With Parent">
 									</div>
-									<div style="display: none;color: red;" id="bill_with_parent_err"> Please enter bill_with_parent </div>  
+									<div style="display: none;color: red;" id="bill_with_parent_err"> Please enter bill_with_parent </div>
 								</div> -->
 								<!-- <div class="form-group col-lg-3">
 									<span class="form-label"><?= __('Language') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="text" id="language_id" name="language_id" value="<?php echo $customers['language_id']; ?>" title="<?= __('Language Id') ?>" aria-label="Language Id">	
+										<input class="form-control" type="text" id="language_id" name="language_id" value="<?php echo $customers['language_id']; ?>" title="<?= __('Language Id') ?>" aria-label="Language Id">
 									</div>
-									<div style="display: none;color: red;" id="language_id_err"> Please enter language </div>  
+									<div style="display: none;color: red;" id="language_id_err"> Please enter language </div>
 								</div>
 								<div class="col-lg-3" style="float: left;">
 									<span class="form-label"><?= __('Hold Reason') ?></span>
@@ -1316,14 +1316,14 @@ function toggleRowLock(button) {
 										<div class="kt-input-icon">
 											<input class="form-control" type="text" id="website_url" name="website_url" value="<?php echo $customers['website_url']; ?>" title="<?= __('Website Url') ?>" aria-label="Website Url">
 										</div>
-										<div style="display: none;color: red;" id="website_url_err"> Please enter Website </div>  
+										<div style="display: none;color: red;" id="website_url_err"> Please enter Website </div>
 									</div>
 									<div class="form-group col-lg-3 p-r-5" style="float: right;">
 										<span class="form-label"><?= __('Short Code') ?></span>
 										<div class="kt-input-icon">
 											<input class="form-control" type="text" id="short_name" name="short_name" value="<?php echo $customers['short_name']; ?>" title="<?= __('Short Name') ?>" aria-label="Short Name">
 										</div>
-										<div style="display: none;color: red;" id="short_name_err"> Please enter Short Code </div>  
+										<div style="display: none;color: red;" id="short_name_err"> Please enter Short Code </div>
 									</div>
 								<div class="col-lg-3" style="float: left;">
 									<span class="form-label"><?= __('Photo') ?></span>
@@ -1344,7 +1344,7 @@ function toggleRowLock(button) {
 					</div>
 					<div class="tab-pane" id="contact-details" role="tabpanel">
 						<div id="gst-tab-details">
-							<?php 
+							<?php
 							if(count((array)$customer_vendor_gst_billing_details) =='0'){
 								$customer_vendor_gst_billing_details[] = array();
 							}
@@ -1367,16 +1367,16 @@ function toggleRowLock(button) {
 											<span class="form-label"><?= __('GST No.') ?></span>
 											<div class="kt-input-icon">
 												<input class="form-control" type="text" id="gstin" name="gstin[]" onblur="checkalreadyavailableornotcustomerorvendordetails('GSTIN', this)"  value="<?php echo $cvgst['gstin']; ?>" title="<?= __('Gstin') ?>" aria-label="Gstin">
-											<span class="text-danger f-14 gstinerror" style="display:none"></span>	
-											
+											<span class="text-danger f-14 gstinerror" style="display:none"></span>
+
 											</div>
-											<div style="display: none;color: red;" id="gstin_err"> Please enter GST IN </div> 
+											<div style="display: none;color: red;" id="gstin_err"> Please enter GST IN </div>
 										</div>
 										<div class="form-group col-lg-12">
 											<span class="form-label"><?= __('Billing Adderss') ?></span>
 											<div class="kt-input-icon">
 												<textarea type="text" class="form-control" placeholder="<?= __('Billing Adderss') ?>" name="billing_address[]" id="billing_address_<?php echo $mkseq; ?>" title="<?= __('Billing Adderss') ?>" aria-label="Billing Adderss"><?php echo $cvgst['billing_address']; ?></textarea>
-											</div> 
+											</div>
 										</div>
 										<div class="form-group col-lg-3 w-full" >
 											<span class="form-label"><?= __('Country') ?></span>
@@ -1419,7 +1419,7 @@ function toggleRowLock(button) {
 										<div class="form-group col-lg-3 p-r-5" style="float: left;">
 											<span class="form-label"><?= __('Mobile') ?></span>
 											<div class="kt-input-icon">
-												<input class="form-control" type="number" id="mobile_<?php echo $gstkey; ?>" name="mobile[]" value="<?php echo $cvgst['mobile']; ?>" title="<?= __('Mobile') ?>" aria-label="Mobile">	
+												<input class="form-control" type="number" id="mobile_<?php echo $gstkey; ?>" name="mobile[]" value="<?php echo $cvgst['mobile']; ?>" title="<?= __('Mobile') ?>" aria-label="Mobile">
 											</div>
 										</div>
 										<div class="form-group col-lg-3 p-r-5" style="float: right;">
@@ -1429,7 +1429,7 @@ function toggleRowLock(button) {
 											</div>
 										</div>
 									</div>
-								</div>	
+								</div>
 								<div class="col-lg-6" style="float: left;">
 
 									<div class="row">
@@ -1447,7 +1447,7 @@ function toggleRowLock(button) {
 												<i class="ti-trash text-danger"></i> Remove
 											</span>
 											<div class="form-group ">
-                                            <input type="radio" id="is_default"  name="is_default" value="<?php echo $mkseq-1; ?>" <?php 
+                                            <input type="radio" id="is_default"  name="is_default" value="<?php echo $mkseq-1; ?>" <?php
                                                 echo ($cvgst['is_default'] == 'Y' || ($mkseq-1==0) ) ? 'checked' : '';?> title="<?= __('Is Default') ?>" aria-label="Is Default"><span>Make Default</span></div>
 										</div>
 										<!-- <div class="col-lg-3 text-right">
@@ -1459,7 +1459,7 @@ function toggleRowLock(button) {
 											<span class="form-label"><?= __('Shipping Adderss') ?></span>
 											<div class="kt-input-icon">
 												<textarea type="text" class="form-control" placeholder="<?= __('Street') ?>" name="shipping_address[]" id="shipping_address_<?php echo $mkseq; ?>" title="<?= __('Street') ?>" aria-label="Street"><?php echo $cvgst['shipping_address']; ?></textarea>
-											</div> 
+											</div>
 										</div>
 										<div class="form-group col-lg-3  w-full" >
 											<span class="form-label"><?= __('Country') ?></span>
@@ -1492,7 +1492,7 @@ function toggleRowLock(button) {
 										<div class="form-group col-lg-3" >
 											<span class="form-label"><?= __('Pincode') ?></span>
 											<input class="form-control" placeholder="<?= __('Pincode') ?>" type="number" id="shipping_post_code_<?php echo $mkseq; ?>" name="shipping_post_code[]" value="<?php echo $cvgst['shipping_post_code']; ?>" title="<?= __('Pincode') ?>" aria-label="Pincode">
-										</div>									
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1524,13 +1524,13 @@ function toggleRowLock(button) {
 										<span class="form-label"><?= __('Tax Reg. No.') ?></span>
 										<div class="kt-input-icon">
 											<input class="form-control" type="text" id="customer_tax_reg_no" name="customer_tax_reg_no" value="<?php echo $customers['customer_tax_reg_no']; ?>" title="<?= __('Customer Tax Reg No') ?>" aria-label="Customer Tax Reg No">
-										</div> 
+										</div>
 									</div>
 									<div class="col-lg-6" style="margin-bottom: 2rem;">
 										<span class="form-label"><?= __('VAT/CST Reg. No.') ?></span>
 										<div class="kt-input-icon">
 											<input class="form-control" type="text" id="cst_reg_no" name="cst_reg_no" value="<?php echo $customers['cst_reg_no']; ?>" title="<?= __('Cst Reg No') ?>" aria-label="Cst Reg No">
-										</div> 
+										</div>
 									</div>
 									<div class="col-lg-6" style="margin-bottom: 2rem;">
 										<span class="form-label"><?= __('PAN No.') ?></span>
@@ -1538,7 +1538,7 @@ function toggleRowLock(button) {
 											<input class="form-control" type="text" id="pan_no" name="pan_no" onblur="checkalreadyavailableornotcustomerorvendordetails('PAN_NO')" value="<?php echo $customers['pan_no']; ?>" title="<?= __('Pan No') ?>" aria-label="Pan No">
 										</div>
 										<span class="text-danger f-14" id="pannoerror"  style="display:none"></span>
-										<div style="display: none;color: red;" id="pan_no_err"> Please Enter PAN No. </div> 
+										<div style="display: none;color: red;" id="pan_no_err"> Please Enter PAN No. </div>
 									</div>
 									<div class="col-lg-6" style="margin-bottom: 2rem;">
 										<span class="form-label">  </span>
@@ -1553,7 +1553,7 @@ function toggleRowLock(button) {
 							</div>
 <?php /**/ ?>
 							<div class="col-lg-12">
-							
+
 								<div class="row">
 									<div class="col-lg-4">
 										<span class="form-label"><?= __('LUT No.') ?></span>
@@ -1565,7 +1565,7 @@ function toggleRowLock(button) {
 										<span class="form-label"><?= __('Finance Year') ?></span>
 									</div>
 								</div>
-								<?php 
+								<?php
 								// Check if lutbond has data
 								if (is_array($lutbond) && !empty($lutbond)) {
 									// Loop through lutbond records
@@ -1574,7 +1574,7 @@ function toggleRowLock(button) {
 								<div class="row mb-2 tax-row" data-row-id="<?php echo $index + 1; ?>" <?php echo ($bond['lock_status'] == 0) ? "style='pointer-events: none; opacity: 0.7;' " : ""; ?>>
 									<div class="col-lg-4 ">
 										<input type="hidden" name="alreadyupdated[<?php echo $bond['id']; ?>]" value="<?php echo $bond['lock_status']; ?>">
-										<input  class="form-control" type="text" 
+										<input  class="form-control" type="text"
 											name="lut_no[]"
 											value="<?php echo $bond['lut_no']; ?>" title="<?= __('Lut No') ?>" aria-label="Lut No">
 										<input type="hidden" name="lutbond_id[]" value="<?php echo $bond['id']; ?>">
@@ -1586,7 +1586,7 @@ function toggleRowLock(button) {
 										<select  class="form-select js-example-basic-single"
 											name="finance_year[]" onchange="updateFinancialDates(this)" title="<?= __('Finance Year') ?>" aria-label="Finance Year">
 											<option value=""><?= __('Select Any One') ?></option>
-											<?php for ($i = date("Y") - 10; $i <= date("Y"); $i++) { 
+											<?php for ($i = date("Y") - 10; $i <= date("Y"); $i++) {
 												// Extract year from Start_date if available
 												$financeYear = '';
 												if (!empty($bond['start_date'])) {
@@ -1619,20 +1619,20 @@ function toggleRowLock(button) {
 										</button>
 									</div>
 								</div>
-								<?php 
+								<?php
 									} // End foreach
 								} else {
 									// Create one empty row if no data
 								?>
 								<div class="row mb-2 tax-row" data-row-id="1">
 									<div class="col-lg-4 ">
-										<input  class="form-control" type="text" 
+										<input  class="form-control" type="text"
 											name="lut_no[]"
 											value="" title="<?= __('Lut No') ?>" aria-label="Lut No">
 										<input type="hidden" name="lutbond_id[]" value="">
 									</div>
 									<div class="col-lg-4">
-										<input  class="form-control" type="text" 
+										<input  class="form-control" type="text"
 											name="bond_no[]"
 											value="" title="<?= __('Bond No') ?>" aria-label="Bond No">
 									</div>
@@ -1661,7 +1661,7 @@ function toggleRowLock(button) {
 								<div class="col-12 text-start">
 									<button type="button" class="btn btn-success btn-sm" onclick="addTaxRow()"><i class="fa fa-plus"></i> Add New Row</button>
 								</div>
-							
+
 
 
 
@@ -1749,13 +1749,13 @@ function toggleRowLock(button) {
 								<span class="form-label"><?= __('Default Discount Percentage (%)') ?></span>
 								<div class="kt-input-icon">
 									<input class="form-control text-right" type="number" id="default_discount_perc" name="default_discount_perc" value="<?php echo $customers['default_discount_perc']; ?>" title="<?= __('Default Discount Perc') ?>" aria-label="Default Discount Perc">
-								</div> 
+								</div>
 							</div>
 							<div class="col-lg-6" style="margin-bottom: 2rem;">
 								<span class="form-label"><?= __('Payment Discount Percentage (%)') ?></span>
 								<div class="kt-input-icon">
 									<input class="form-control text-right" type="number" id="payment_discount_perc" name="payment_discount_perc" value="<?php echo $customers['payment_discount_perc']; ?>" title="<?= __('Payment Discount Perc') ?>" aria-label="Payment Discount Perc">
-								</div> 
+								</div>
 							</div>
 							<!-- <div class="col-lg-6 w-full" style="margin-bottom: 2rem;">
 								<span class="form-label"><?= __('Sales Type') ?></span>
@@ -1855,17 +1855,17 @@ function toggleRowLock(button) {
 										</tr>
 									</thead>
 									<tbody>
-										<?php $k=0;  
-										foreach ($property_tenant_details as $inst) { 
+										<?php $k=0;
+										foreach ($property_tenant_details as $inst) {
 											$k++;
 											 $areaary = json_decode($inst['property_owner_detail_areas'],1);
 											 $totalamt = 0;
 											 foreach($areaary as $rentar){
-											 	$totalamt +=$rentar['rent']; 
+											 	$totalamt +=$rentar['rent'];
 											 }
 											 ?>
 											<tr onclick="getProperty('<?php echo deocdeId("id:".$inst['id']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-												
+
 												<td><?php echo ucwords($property_owners[$inst['property_owner_id']]['owner_name']); ?></td>
 												<td><?php echo ucwords($property_details[$inst['property_owner_detail_id']]['property_name']); ?></td>
 												<td><?php echo emptytextdashShow($property_details[$inst['property_owner_detail_id']]['property_address']); ?></td>
@@ -1882,10 +1882,10 @@ function toggleRowLock(button) {
 								</table>
 							<?php }else{ ?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Rental Properties</p>   
+									<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Rental Properties</p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php } ?>
 						</div>
@@ -1896,7 +1896,7 @@ function toggleRowLock(button) {
 				</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -2162,7 +2162,7 @@ function toggleRowLock(button) {
                     data:`page=checkalreadyavailableornotcustomerorvendordetails&table_name=customers&field_name=${fieldName}&field_value=${fieldValue}`,
                     type: "POST",
                     async: false,
-                    success:function(data){                        
+                    success:function(data){
                     var res = JSON.parse(data);
 					if(res.result != ''  &&  res.result != null){
 						console.log(res.result);
@@ -2186,7 +2186,7 @@ function toggleRowLock(button) {
                     },
                     error:function (){}
                 });
-        
+
         }
 		console.log('end');
     }

@@ -1,15 +1,15 @@
 <?php
-if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids']) || in_array(VMS_ADMIN_ROLE,(array)$_SESSION['role_ids'])){    
+if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids']) || in_array(VMS_ADMIN_ROLE,(array)$_SESSION['role_ids'])){
   $wher["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0','user_type'=>'3');
 }else{
   $wher["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0','user_type'=>'3','created_by'=>$_SESSION['userid']);
 }
 $wher["field"] = "id,first_name,display_name,user_email,user_mobile,created_date,user_id,role_id,company_name";
 $encodeurl = urlencode(json_encode($wher));
-$urlcat = API."?mode=gettabledetailswithconditions&table=application_user_invitations&data=".$encodeurl;  
+$urlcat = API."?mode=gettabledetailswithconditions&table=application_user_invitations&data=".$encodeurl;
 $invitationres = callAPI($urlcat);
 $invitationlis = json_decode($invitationres,1);
-if(!in_array(SUPERADMIN_ROLE,(array)$_SESSION['roles'])){ 
+if(!in_array(SUPERADMIN_ROLE,(array)$_SESSION['roles'])){
   foreach($invitationlis as $invitationlis){
     if($invitationlis['role_id'] != ADMIN_ROLES){
       $invitationlists[] =  $invitationlis;
@@ -21,7 +21,7 @@ if(!in_array(SUPERADMIN_ROLE,(array)$_SESSION['roles'])){
 $wher["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0');
 $wher["field"] = "id,image,display_name,first_name,user_id,company,image";
 $userencodeurl = urlencode(json_encode($wher));
-$userurlcat = API."?mode=gettabledetailswithconditions&table=vendors&data=".$userencodeurl;  
+$userurlcat = API."?mode=gettabledetailswithconditions&table=vendors&data=".$userencodeurl;
 $userures = callAPI($userurlcat);
 $useruresponse = json_decode($userures,1);
 $applicationusers = array();
@@ -29,7 +29,7 @@ foreach($useruresponse as $useruresponse1){
   $applicationusers[$useruresponse1['user_id']] = $useruresponse1;
 }
 
-$userurlcat = API."?mode=gettabledetailswithconditions&table=vendor_registers&data=".$userencodeurl;  
+$userurlcat = API."?mode=gettabledetailswithconditions&table=vendor_registers&data=".$userencodeurl;
 $userures = callAPI($userurlcat);
 $useruresponse = json_decode($userures,1);
 $vendorregisters = array();
@@ -49,7 +49,7 @@ if(isset($_SESSION['message']) && $_SESSION['message'] !=""){
         document.onreadystatechange = function(){
             if(document.readyState == "complete") {
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
-            } 
+            }
         }
     </script><?php
 }
@@ -109,13 +109,13 @@ if(isset($_SESSION['message']) && $_SESSION['message'] !=""){
 	        },
 	        error:function (){}
     	});
-    	
+
 	}
 function listUserType(){
 	var reg_invoit = $('input[name="reg_invoit"]:checked').val();
-        if(reg_invoit=='1'){ 
+        if(reg_invoit=='1'){
             $(".register").show();
-			      $(".invited").hide();			
+			      $(".invited").hide();
         }else if(reg_invoit=='2'){
             $(".invited").show();
 			      $(".register").hide();
@@ -153,18 +153,18 @@ function listUserType(){
 						<input type="radio" name="reg_invoit" value="2" onchange="listUserType()">
 						Invited
 					  </span>
-					</div>                           
-			 
+					</div>
+
       <?php /*if(in_array(SUPERADMIN,$_SESSION['roles'])){  ?>
   				<a  href="<?php echo string_to_ascii('PAGE=CUSTOM_INSERT_APPLICATION_USER_INVITATIONS'); ?>" class="btn btn-primary mb-2 desktop-view">
   				  <i class="icofont icofont-plus icon-white text-white"></i>
-  					Invite User           
+  					Invite User
   				</a>
         <?php }else{ */?>
-    
+
 <a href="index.php?option=COM_INSERT_INVITE_VENDOR" class="btn btn-success mb-2 desktop-view">
             <i class="icofont icofont-plus icon-white text-white"></i>
-            Invite Vendor           
+            Invite Vendor
           </a>
       <?php  // } ?>
 	</div>
@@ -172,17 +172,17 @@ function listUserType(){
 				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i>Back</a>
 				</div> -->
 			</div>
-  
+
         <div class="row p-4">
           <?php
-         /* $bg_color_array = array('bg-primary','bg-success','bg-info','bg-danger');  
+         /* $bg_color_array = array('bg-primary','bg-success','bg-info','bg-danger');
           $tven = 0;
-          foreach($admindashboardd as $vendorslist){ 
+          foreach($admindashboardd as $vendorslist){
             $stausresult = $_SESSION['status'][$vendorslist['current_Status']];
-        */    ?>  
-          <?php 
-           $bg_color_array = array('bg-warning','bg-info','bg-success');  
-            if(count((array)$invitationlists) !="0"){   
+        */    ?>
+          <?php
+           $bg_color_array = array('bg-warning','bg-info','bg-success');
+            if(count((array)$invitationlists) !="0"){
             foreach ($invitationlists as $vendorslist){
               if($vendorslist['user_id'] != $_SESSION['userid']){
                 //$send = implode(",", $send);
@@ -191,56 +191,56 @@ function listUserType(){
                 $vendorregisters11 = $vendorregisters[$vendorslist['user_id']];
                // print_r($applicationuser);
                 $stausresult = $_SESSION['status'][$vendorslist['current_status']];
-        				if(count((array)$applicationuser) != 0){ 
-        					$ribbon =  "Active"; 
+        				if(count((array)$applicationuser) != 0){
+        					$ribbon =  "Active";
         					$classadded = "register";
                   $tven =2;
                   $url = "index?option=COM_INSERT_VENDORS&VTYPE=V&Rid=".deocdeId('id:'.$applicationuser['id']);
                   $displayname =$applicationuser['display_name'];
-                  $first_name = $applicationuser['first_name']; 
-                  $company_name = $applicationuser['company'];  
+                  $first_name = $applicationuser['first_name'];
+                  $company_name = $applicationuser['company'];
                   $image = $applicationuser['image'];
-        				}elseif(count((array)$vendorregisters11) != 0){ 
-                  $ribbon =  "Register"; 
+        				}elseif(count((array)$vendorregisters11) != 0){
+                  $ribbon =  "Register";
                   $classadded = "register";
                   $url = "index?option=COM_INSERT_VENDORS&VTYPE=VR&Rid=".deocdeId('id:'.$vendorregisters11['id']);
                   $tven =1;
                   $displayname =$vendorregisters11['display_name'];
                   $first_name = $vendorregisters11['first_name'];
-                  $company_name = $vendorregisters11['company']; 
-                  $image = $applicationuser['image'];   
-                }else{ 
+                  $company_name = $vendorregisters11['company'];
+                  $image = $applicationuser['image'];
+                }else{
         					$ribbon = "Invited";
         					$classadded = "invited";
-                  $tven =0; 
-                  $displayname =$vendorslist['display_name']; 
+                  $tven =0;
+                  $displayname =$vendorslist['display_name'];
                   $first_name = $vendorslist['first_name'];
-                  $company_name = $vendorregisters11['company_name']; 
-        				}     
-			?>  
+                  $company_name = $vendorregisters11['company_name'];
+        				}
+			?>
 
       <div class="col-lg-3 custom-ribbon-accordian cursor-pointer  position-relative <?php echo $classadded; ?>" >
-         
+
               <div class="ribbon ribbon-clip ribbon-right" style= "right: 0;">
                 <div class="ribbon-target" style= "right: 3px;">
-                  <span class="ribbon-inner" ></span> <?php echo $ribbon; ?> 
+                  <span class="ribbon-inner" ></span> <?php echo $ribbon; ?>
                 </div>
               </div>
               <?php if($tven == '1' || $tven == '2'){ ?>
        <a  href="<?php echo $url; ?>">
-       <?php }?> 
+       <?php }?>
               <div class="card <?php echo $bg_color_array[$tven]; ?>" style="/*background-image:url('assets/images/student-courses/bg-1.png');  */ /** rohan min-height:170px">
                 <div class="p-3">
                   <div class="row m-b-10 align-items-center ">
                     <div class="col-auto col-lg-10">
                       <div class="align-middle">
                         <!-- <span class="img-radius img-50 align-top custom_txt_round custom_txt_round-2 p-2 f-14 text-center bg-white text-mute"><?php echo initials($vendorslist['display_name']); ?></span> -->
-                      
+
                        <?php if($applicationuser['user_photo'] != "" && $applicationuser['user_activated'] == "Y"){ ?>
     <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-30 m-r-15" alt="User" data-onerror-src="uploads/all/no-image.jpg">
   <?php } else { ?>
    <span class="img-radius img-50 custom_txt_round  p-2 f-14 m-r-15 text-center bg-white text-mute"><?php echo initials($displayname); ?></span>
-  <?php } ?> 
+  <?php } ?>
                       <div class="d-inline-block width73" >
                         <h6 class="mb-1"><?php echo $company_name !=""?$company_name:$displayname; ?></h6>
                         <p class="text-white m-b-0  f-12"></p>
@@ -267,20 +267,20 @@ function listUserType(){
 </a>
 <?php } ?>
         </div>
-        <?php $tven++; 
+        <?php $tven++;
         if($tven ==2){ $tven=0; }
-          } 
-        }  
+          }
+        }
     }else{   ?>
 
  <div class="card-px text-center py-20 m-t-30">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Vendor Invitation Available</p>   
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Vendor Invitation Available</p>
                                     <div class="text-center px-4">
                                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                                  </div>   
+                                  </div>
                               </div>
-                    
-            <?php    } ?> 
+
+            <?php    } ?>
       </div>
     </div>
   </div>

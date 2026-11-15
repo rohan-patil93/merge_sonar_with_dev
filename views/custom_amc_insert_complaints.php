@@ -248,7 +248,7 @@ $contracts = $result['contracts'] ?? array();
 						<div class="col-lg-3 col-xs-6 form-group">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Complaint Image") ?> </span>
 							<input class="form-control mb-1" type="file" name="complaint_images[]" id="complaint_images" multiple / aria-label="Complaint Images">
-							<?php 
+							<?php
 							if(!empty($rid)){
 								$application_table_name  = 'complaints';
 								$url = API."?mode=getImagesData&method=get&table=$application_table_name&id=$rid";
@@ -263,7 +263,7 @@ $contracts = $result['contracts'] ?? array();
 							}
 							?>
 						</div>
-						
+
 					</div>
 					<div class="border-top">
 						<?php if ($view != '1'):
@@ -352,7 +352,7 @@ $contracts = $result['contracts'] ?? array();
 	                    field: 'location_id',
 	                    table_name: 'buildings'
 	                },
-	            success: function (d) { 
+	            success: function (d) {
 	                // console.log("d", d);
 	                try {
 	                    if (d) {
@@ -368,10 +368,10 @@ $contracts = $result['contracts'] ?? array();
 	                } catch (e) {
 	                    console.error("Invalid JSON from server", e, d);
 	                }
-	            } 
-	        }); 
+	            }
+	        });
 	        document.getElementById('building_floor_id').innerHTML = '<option value="">' + <?= json_encode(__('Select Floor')) ?> + '</option>';
-	        document.getElementById('building_floor_space_id').innerHTML = '<option value="">' + <?= json_encode(__('Select Space')) ?> + '</option>'; 
+	        document.getElementById('building_floor_space_id').innerHTML = '<option value="">' + <?= json_encode(__('Select Space')) ?> + '</option>';
 
 
 	    }
@@ -484,7 +484,7 @@ $contracts = $result['contracts'] ?? array();
 				$("#item_id_err").text(<?= json_encode(__("Please select an item")) ?>).show();
 				isValid = false;
 			}
-			
+
 		} else if (complaintType === "Asset") {
 			const assetId = $("#asset_id").val();
 			if (!assetId || assetId === "0") {
@@ -514,8 +514,8 @@ $contracts = $result['contracts'] ?? array();
             $("#building_floor_space_id_err").text(<?= json_encode(__("Please select a Building Floor Space")) ?>).show();
             isValid = false;
         }
-			
-		
+
+
 
 		return isValid;
 	}

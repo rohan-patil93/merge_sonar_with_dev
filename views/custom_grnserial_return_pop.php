@@ -15,7 +15,7 @@ $tranid = '4';
 //print_r($_POST);
 
 $vurl = API."?mode=singlerowtabledata&table=".TBL_ITEMS."&rid=".$item_id;
-//echo $vurl; 
+//echo $vurl;
 $item_daata = callAPI($vurl);
 $item_daata = json_decode($item_daata,1);
 
@@ -23,22 +23,22 @@ $item_daata = json_decode($item_daata,1);
 if($item_daata['tracking_type'] == 1){
 	$vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'transaction_table'=>$table,'transaction_id'=>$tranid,'item_id'=>$item_id,'is_active'=>'0');
 	$vdata = urlencode(json_encode($vdata1));
-	$vurl = API."?mode=gettabledetailswithconditions&table=item_serial_nos&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=item_serial_nos&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$res_data = json_decode($configesponse,1);
 	foreach($res_data as $res){
-		$serialnos[] = $res['serial_no']; 
+		$serialnos[] = $res['serial_no'];
 	}
 }
 if($item_daata['tracking_type'] == 2){
 	$vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'transaction_table'=>$table,'transaction_id'=>$tranid,'item_id'=>$item_id,'is_active'=>'0');
-	
+
 	$vdata = urlencode(json_encode($vdata1));
-	$vurl = API."?mode=gettabledetailswithconditions&table=item_lot_nos&data=".$vdata; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=item_lot_nos&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$res_data = json_decode($configesponse,1);
 	foreach($res_data as $res){
-		$serialnos[] = array('lot'=>$res['lot_no'], 'lot_value'=>$res['lot_quantity']); 
+		$serialnos[] = array('lot'=>$res['lot_no'], 'lot_value'=>$res['lot_quantity']);
 	}
 }
 ////$status = ViewStatusValue($field);
@@ -58,11 +58,11 @@ if($item_daata['tracking_type'] == 2){
 			///$('#cck_'+id).attr('checked', false);
 			$("#cck_"+id).prop("checked", false);
 			//document.getElementById("#cck_"+id).checked = false;
-			swal({              
-                    title: "<?php echo __('Quantity cannot be more than check list'); ?>",                            
-                    type: "warning",           
+			swal({
+                    title: "<?php echo __('Quantity cannot be more than check list'); ?>",
+                    type: "warning",
                     buttonsStyling: false,
-                    confirmButtonText: "<?php echo __('OK'); ?>",    
+                    confirmButtonText: "<?php echo __('OK'); ?>",
                     confirmButtonClass: "btn btn-danger"
                 })
 		}
@@ -90,7 +90,7 @@ if($item_daata['tracking_type'] == 2){
 		var count = $(".sfitemRow").length;
 		//alert('la-hand-o-right'+count);
 		count++;
-		var htmlRows = '';		
+		var htmlRows = '';
 		htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;">';
 		htmlRows += '<div class="col-lg-3">';
 		htmlRows += '<input type="text" class="form-control" id="static_value_'+count+'" value="" name="type" aria-label="<?php echo __('Lot Number'); ?> '+count+'">';
@@ -98,9 +98,9 @@ if($item_daata['tracking_type'] == 2){
 		htmlRows += '<div class="col-lg-3">';
 		htmlRows += '<input type="text" class="form-control" id="qty_val_'+count+'" value="" name="type" aria-label="<?php echo __('Qty'); ?> '+count+'">';
 		htmlRows += '</div>';
-		
-		htmlRows += '<div class="col-lg-3">';								
-		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)" aria-label="<?php echo __('Delete row'); ?> '+count+'"><?php echo __('Delete'); ?></button>';						
+
+		htmlRows += '<div class="col-lg-3">';
+		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)" aria-label="<?php echo __('Delete row'); ?> '+count+'"><?php echo __('Delete'); ?></button>';
 		htmlRows += '</div>';
 		htmlRows += '</div>';
 		$('#append_statick').append(htmlRows);
@@ -144,7 +144,7 @@ if($item_daata['tracking_type'] == 2){
 		if(type == 2){
 			var count = 0; var lot=""; var value="";
 			var loopcount = $(".sfitemRow").length;
-			for(var k=1; k < loopcount+1 ; k++){				
+			for(var k=1; k < loopcount+1 ; k++){
 				lot = $('#static_value_'+k).val();
 				value = $('#qty_val_'+k).val();
 				if( value == "" && lot ==""){
@@ -166,7 +166,7 @@ if($item_daata['tracking_type'] == 2){
 		if(check == 'P'){
 		  	var  str = '';
 	 		str = 'table='+$('#table').val()+'&new_table='+$('#field').val()+'&vender_id='+$('#kt_select2_41').val()+'&tranid='+$('#tranid').val()+'&hid='+$('#tranid').val()+'&tranid='+$('#tranid').val()+'&item_id='+$('#item_id').val()+'&user_id='+$('#user_id').val()+'&count='+data_count+data+'&type='+type+'&random='+$('#random').val();
-	 		
+
 	  		console.log(str);
 	  		//alert(str);
 		    $.ajax({
@@ -176,31 +176,31 @@ if($item_daata['tracking_type'] == 2){
 		        success: function(response) {
 		        	console.log(response);
 		        	$('#kt_modal_KTDatatable_remote').modal('hide');
-		            Swal.fire({              
-						title: "<?php echo __('Comments Updated'); ?> ",              
-						type: "success",           
+		            Swal.fire({
+						title: "<?php echo __('Comments Updated'); ?> ",
+						type: "success",
 						buttonsStyling: false,
-						confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, close!'); ?>",    
+						confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, close!'); ?>",
 						confirmButtonClass: "btn btn-danger",
-						showCancelButton: true,     
-						cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, continue'); ?>",      
-						cancelButtonClass: "btn btn-default"        
+						showCancelButton: true,
+						cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, continue'); ?>",
+						cancelButtonClass: "btn btn-default"
 					}).then(function(result) {
 						if (result.value) {
 							$('#kt_modal_KTDatatable_remote').modal('hide');
 						}
-					}); 
+					});
 		        }
 		    });
 	    }else{
-	    	 Swal.fire({              
-				title: message,              
-				text: "",              
-				type: "warning"       
+	    	 Swal.fire({
+				title: message,
+				text: "",
+				type: "warning"
 			});
 	    }
 	}
-	
+
 </script>
 
 <!-- remote datatable modal -->
@@ -215,29 +215,29 @@ if($item_daata['tracking_type'] == 2){
 							<!-- <span aria-hidden="true">&times;</span> -->
 						</button>
 					</div>
-					<div class="modal-body" style="overflow-y: scroll;" > 
-				
+					<div class="modal-body" style="overflow-y: scroll;" >
+
 			<form class="" action="" method="post">
 			<div class="col-lg-12" style="max-height: 400px;float: left;">
-				<?php if($item_daata['tracking_type'] == 1){ ?> 
+				<?php if($item_daata['tracking_type'] == 1){ ?>
 				<div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
 					<?php $i=1; foreach($res_data as $ser){ ?>
 						<div class="form-group row col-lg-12">
 							<div class="col-1" >
 								 <label class="kt-checkbox" for="cck_<?php echo $ser['id']; ?>" aria-label="<?php echo __('Select Serial Number'); ?> <?php echo $i; ?>">
 								 	<span class="sr-only visually-hidden"><?php echo __('Select Serial Number'); ?> <?php echo $i; ?></span>
-								 	<input class="mt-3" id="cck_<?php echo $ser['id']; ?>" type="checkbox" <?php if($ser['check_return']==1){ echo "checked"; } ?>  onclick="updategrnretunsbyid(<?php echo $ser['id'].",'item_serial_nos'"; ?>)" onkeydown="if(event.key==='Enter'){this.click();}" aria-label="<?php echo __('Select Serial Number'); ?> <?php echo $i; ?>"> <span></span> 
+								 	<input class="mt-3" id="cck_<?php echo $ser['id']; ?>" type="checkbox" <?php if($ser['check_return']==1){ echo "checked"; } ?>  onclick="updategrnretunsbyid(<?php echo $ser['id'].",'item_serial_nos'"; ?>)" onkeydown="if(event.key==='Enter'){this.click();}" aria-label="<?php echo __('Select Serial Number'); ?> <?php echo $i; ?>"> <span></span>
 								 	<input type="hidden" name="" id="sl_<?php echo $ser['id']; ?>" value="<?php echo $ser['check_return']; ?>">
 								 </label>
 							</div>
 							<div class="col-3">
 								<label for="serial_no_<?php echo $i; ?>" class="col-form-label"><?php echo __('Serial Number'); ?> <?php echo $i; ?></label>
 							</div>
-							
+
 							<div class="col-6">
 								<input type="text" class="form-control" readonly id="serial_no_<?php echo $i; ?>" name="serial_no" value="<?php echo $ser['serial_no']; ?>" aria-label="<?php echo __('Serial Number'); ?> <?php echo $i; ?>">
 							</div>
-			
+
 						</div>
 					<?php $i++; } ?>
 				</div>
@@ -258,10 +258,10 @@ if($item_daata['tracking_type'] == 2){
 					<?php for($i=1; $i<count((array)$serialnos)+1; $i++){ ?>
 					<div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
 						<div class="col-lg-3">
-							<input type="text" class="form-control" id="static_value_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot']; ?>" name="type" aria-label="<?php echo __('Lot Number'); ?> <?php echo $i; ?>"> 
+							<input type="text" class="form-control" id="static_value_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot']; ?>" name="type" aria-label="<?php echo __('Lot Number'); ?> <?php echo $i; ?>">
 						</div>
 						<div class="col-lg-3">
-							<input type="text" class="form-control" id="qty_val_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot_value']; ?>" name="type" aria-label="<?php echo __('Qty'); ?> <?php echo $i; ?>"> 
+							<input type="text" class="form-control" id="qty_val_<?php echo $i; ?>" value="<?php echo $serialnos[$i-1]['lot_value']; ?>" name="type" aria-label="<?php echo __('Qty'); ?> <?php echo $i; ?>">
 						</div>
 						<div class="col-lg-3">
 							<input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
@@ -286,11 +286,11 @@ if($item_daata['tracking_type'] == 2){
 				<input type="hidden" name="rid" id='rid' value="<?php echo $rid; ?>">
 				<input type="hidden" name="tranid" id='tranid' value="<?php echo $tranid; ?>">
 				<input type="hidden" name="user_id" id='user_id' value="<?php echo $_SESSION['userid']; ?>">
-				
+
 				<input type="hidden" name="item_id" id='item_id' value="<?php echo $item_id; ?>">
 				<input type="hidden" name="type" id='type' value="<?php echo $item_daata['tracking_type']; ?>">
 				<input type="hidden" name="random" id='random' value="<?php echo $_POST['random']; ?>">
-				
+
 				<!-- <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-primary btn-bold btn-upper btn-font-sm" onclick="submitrom()" >Submit</button> -->
 			</div>

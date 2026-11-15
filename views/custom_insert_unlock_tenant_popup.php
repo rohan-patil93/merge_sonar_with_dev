@@ -3,11 +3,11 @@ include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
 $rid = $_POST['rid'];
-$url1 = API."?mode=getpropertytenantdetails&rid=".$rid;  
+$url1 = API."?mode=getpropertytenantdetails&rid=".$rid;
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);
 $property_tenant_details = $result['property_tenant_details'];
-$un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log'],1); 
+$un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log'],1);
 //print_r($un_lock_tenant_log);
 ?>
 <script type="text/javascript">
@@ -58,14 +58,14 @@ $un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log']
 										window.location.href = "index?option=COM_INSERT_PROPERTY_TENANT_DETAILS&Rid="+res.rid;
 									}else{
 										location.reload();
-									} 
-								});	
+									}
+								});
 							}else{
 								tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',res.result.message,'');
 							}
 						}
 					});
-				} 
+				}
 			});
 		}
 	}
@@ -86,7 +86,7 @@ $un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log']
 					}else{
 						$("#affectedinvoice").html('');
 						$('#popupsubmtbtn').removeClass('disabled');
-					}	
+					}
 				}
 			});
 		}
@@ -125,15 +125,15 @@ $un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log']
 							<td class="p-1"><?php echo $unlock['remarks']?></td>
 						</tr>
 					<?php $mk++; } ?>
-					
+
 				</tbody>
 			</table>
 		<?php }else{  ?>
 			<div class="card-px text-center py-20 m-t-30">
-				<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Un-lock Tenant Log</p>   
+				<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Un-lock Tenant Log</p>
 				<div class="text-center px-4">
 					<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-				</div>   
+				</div>
 			</div>
 		<?php } ?>
 		</div>
@@ -150,7 +150,7 @@ $un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log']
 						<textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="remarks" id="remarks"></textarea>
 					</div>
 				</div>
-				<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>"> 
+				<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">
 			</form>
 			<div id="affectedinvoice"></div>
 		</div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] =1;
 if(isset($_POST['submit_value'])){
 	foreach ($_POST['filed'] as $key=>$filed) {
@@ -20,9 +20,9 @@ if(isset($_POST['submit_value'])){
 		header("location:index.php?option=COM_LIST_API_MASTER_MAPPINGS");
 	}
 	//echo $response ; exit;
-}	 
+}
 $rid = 10;
-$vurl = API."?mode=togetapiidbasemapdetail&api_master_id=".$rid; 
+$vurl = API."?mode=togetapiidbasemapdetail&api_master_id=".$rid;
 $configesponse = callAPI($vurl);
 $result = json_decode($configesponse,1);
 echo "<pre>"; print_r($result); echo "</pre>";
@@ -30,7 +30,7 @@ $all_api_masters = $result['all_api_masters'];
 $amt = $result['api_masters'];
 $edidumpsdata = json_decode($amt['api_response_details'],1);
 
-// $vurl = API."?mode=togetapiidbasemapdetail&api_master_id=".$rid; 
+// $vurl = API."?mode=togetapiidbasemapdetail&api_master_id=".$rid;
 // $configesponse = callAPI($vurl);
 // $data = json_decode($configesponse,1);
 // echo "<pre>"; print_r($data); echo "</pre>";
@@ -53,7 +53,7 @@ $selectdata = $data['table_filed'];
 				</a>
 		</div>
 	</div>
-	<div class="card-body">	
+	<div class="card-body">
 		<div class="row">
 			<div class="col-lg-3">
 				<label class="form-label" for="transaction_table"><?= __('Transaction') ?></label>
@@ -70,8 +70,8 @@ $selectdata = $data['table_filed'];
 					<i class="ti-search m-r-2" aria-hidden="true"></i><?= __('View') ?>
 				</button>
 			</div>
-		</div> 
-		<?php 
+		</div>
+		<?php
 		$idx = 0;
 		if (is_array($edidumpsdata) || is_object($edidumpsdata)) {
 		foreach ($edidumpsdata as $filed=>$edidumps) {
@@ -88,7 +88,7 @@ $selectdata = $data['table_filed'];
 				<div class="col-4">
 					<select class="form-select js-example-basic-single" name="select[]" id="select_field_<?php echo $idx; ?>" aria-label="Mapping for <?php echo htmlspecialchars($edidump); ?>">
 						<option value="0">Select Any one</option>
-						<?php foreach ($selectdata as  $fstt=>$select_list) { 
+						<?php foreach ($selectdata as  $fstt=>$select_list) {
 							$select = strtolower(str_replace("_"," ",$select_list['Field']));
 							if($select != 'id'){
 								?>
@@ -111,7 +111,7 @@ $selectdata = $data['table_filed'];
 				<div class="col-lg-3">		</div>
 				<div class="col-lg-3 text-right">
 					<button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?= __('Delete') ?></button>
-				</div> 
+				</div>
 			</div>
 		</div>
 		<input type="hidden" name="table" value="<?php echo $amt['application_table']; ?>">

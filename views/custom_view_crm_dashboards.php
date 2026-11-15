@@ -1,9 +1,9 @@
-<?php $_SESSION['apply_js']['multiselest'] = 1; 
+<?php $_SESSION['apply_js']['multiselest'] = 1;
 //$_SESSION['apply_js']['ratting'] = 1;
 $_SESSION['apply_js']['CRM_DASHBOARDS'] = 1;
-$from_date = fromDate($_REQUEST['from_date'] !=""?$_REQUEST['from_date']:date("Y-01-01")); 
+$from_date = fromDate($_REQUEST['from_date'] !=""?$_REQUEST['from_date']:date("Y-01-01"));
 $to_date =fromDate($_REQUEST['to_date'] !=""?$_REQUEST['to_date']:date("Y-12-t"));
-$menu = API."?mode=getcrmleads&dashboard=Y&admin_type=".$_SESSION['admin_type']; 
+$menu = API."?mode=getcrmleads&dashboard=Y&admin_type=".$_SESSION['admin_type'];
 $page_list = callAPI($menu);
 $result = json_decode($page_list,1);
 //echo "<pre>"; print_r($result);echo "</pre>";
@@ -21,15 +21,15 @@ $feasibility_requirements = $result['feasibility_requirements'];
 $crm_source_types = array();
 foreach($crm_general_codes as $key=>$crmsource1){
     foreach($crmsource1 as $crmsource){
-        $crm_source_types[$key][$crmsource['value']] = $crmsource['label']; 
+        $crm_source_types[$key][$crmsource['value']] = $crmsource['label'];
     }
 }
-$crm_activity_typesres =$result['crm_activity_types']; 
+$crm_activity_typesres =$result['crm_activity_types'];
 $crm_activity_types = array();
 foreach($crm_activity_typesres as $crmlt){
     //if($crmlt['type'] == 2){
         $crm_activity_types[$crmlt['id']] =$crmlt;
-    //} 
+    //}
 }
 
 //Start graph crm leads
@@ -65,20 +65,20 @@ foreach($crm_deals_graph as $crmstat){
 // $crm_source_types = array();
 // foreach($crm_general_codes as $key=>$crmsource1){
 //     foreach($crmsource1 as $crmsource){
-// 	   $crm_source_types[$key][$crmsource['value']] = $crmsource['label']; 
+// 	   $crm_source_types[$key][$crmsource['value']] = $crmsource['label'];
 //     }
 // }
 // $crm_companies_id_name = $result['crm_companies_id_name'];
 // $leadcode = array();
 // foreach($crm_leadslist as $crm_leads){
-// 	$leadcode[$crm_leads['id']] = $crm_leads['lead_code']; 
+// 	$leadcode[$crm_leads['id']] = $crm_leads['lead_code'];
 // }
-// $crm_lead_types =$res['crm_lead_types']; 
+// $crm_lead_types =$res['crm_lead_types'];
 // $crmleaddetailstypes = array();
 // foreach($crm_lead_types as $crmlt){
 //     if($crmlt['type'] == 2){
 //         $crmleaddetailstypes[$crmlt['id']] =$crmlt;
-//     } 
+//     }
 // }
 //LEAD CHART
 // $crm_leads_graph = $result['crm_leads_graph'];
@@ -126,7 +126,7 @@ $days45 = array();
 foreach ($feasibility_requirements_expiry_days as $item) {
     $expiryDate = new DateTime($item['evaluation_end_date']);
     $diffDays = $expiryDate->diff($currentDate)->days;  // Difference in days
-    
+
     // Determine category based on difference in days
     if ($expiryDate < $currentDate ) {
         // Expired
@@ -158,9 +158,9 @@ foreach ($feasibility_requirements_expiry_days as $item) {
             $(".datepickerselection").hide();
         }else{
             $(".datepickerselection").show();
-            $("#home-tab").removeClass("active");  
-            $(".active_all_class").removeClass("active");  
-            
+            $("#home-tab").removeClass("active");
+            $(".active_all_class").removeClass("active");
+
             $(".active_"+crm_tab_type).addClass("active");
             $(".dynamictabviews").addClass("active");
             getCRMListDashboard(crm_tab_type);
@@ -278,7 +278,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
     }
 
     function getCRMListDashboard(transaction_table=""){
-        
+
         if(transaction_table ==""){
             var urlParams = new URLSearchParams(window.location.search);
             if(urlParams.has('TRANST')){
@@ -286,7 +286,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 transaction_table = (param_value !=null || param_value !="")?param_value:"";
             }else{
                 location.reload();
-            } 
+            }
         }
         $(".datepickerselection").show();
         updateUrlParameter('TRANST',transaction_table);
@@ -324,7 +324,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 }else{
                     $('.active_'+transaction_table).addClass('active');
                     $('.dynamictabviews').addClass('active');
-                }    
+                }
             }
         });
     }
@@ -375,7 +375,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
 
 
 
-        
+
     }
 
 
@@ -390,7 +390,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
             data:{'feasibility_id': feasibility_id},
             type: "GET",
             success:function(data){
-                
+
                 $('#dynamic_popupxxl').html(data);
                 $('#kt_modal_dynamic_popupxxl').modal("show");
             },
@@ -467,7 +467,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
 
 
 
- 
+
 <div class="card product-progress-card mb-3">
     <div class="card-block">
         <div class="row ">
@@ -527,7 +527,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                     </div>
                 </div>
               </div>
-            </div> 
+            </div>
             <div class="col-lg-7" >
             <div class="col-lg-12" >
                 <div class="row">
@@ -558,7 +558,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="col-lg-12">
                 <div class="row mt-4">
@@ -607,7 +607,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 </div>
             </div>
         </div>
-        </div>  
+        </div>
     </div>
 </div>
 <div class="row">
@@ -621,7 +621,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
 			</li>
 			<li class="nav-item">
 				<a class="nav-link f-w-600 f-12 active_crm_contacts active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_contacts')"><?= __('Contacts'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php //echo $dashboard_cnt['crm_contacts_cnt']!=""?$dashboard_cnt['crm_contacts_cnt']:0; ?></label> --></a>
-			</li> 
+			</li>
 			<li class="nav-item">
 				<a class="nav-link f-w-600 f-12 active_crm_companies active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_companies')"><?= __('Companies'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php //echo $dashboard_cnt['crm_companies_cnt']!=""?$dashboard_cnt['crm_companies_cnt']:0; ?></label> --></a>
 			</li>
@@ -637,7 +637,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
             <li class="nav-item">
                 <a class="nav-link f-w-600 f-12 active_crm_feasibilities active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_feasibilities')"><?= __('Feasibility'); ?></a>
             </li>
-            
+
 		</ul>
     </div>
    <div class="col-lg-3">
@@ -660,7 +660,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
             <div class="btn-group dropdown-split-primary" style="width: 100%;">
                 <button type="button" class="btn btn-primary" style="width: 80%;height: 40px;"><i class="ti-calendar"></i>
                     <span id="btn_date"><?= __('This Year'); ?></span>
-                </button> 
+                </button>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 20%;height: 40px;">
                     <span class="visually-hidden"><?= __('Toggle primary'); ?></span>
                 </button>
@@ -678,9 +678,9 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                     <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="CD"?"active":""; ?> empty_active" id="CD" href="#!" onclick="dynamicSelectDateRange('CD',<?php echo htmlspecialchars(json_encode(__('Custom Date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP), ENT_QUOTES, 'UTF-8'); ?>)"><?= __('Custom Date'); ?></a>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
-    <div class="col-lg-3 text-right"> 
+    <div class="col-lg-3 text-right">
         <?php if($_SESSION['admin_type'] == 1){ ?>
         <a href="index.php?option=COM_VIEW_CRM_LEAD_AND_CONTACT_ASSIGNINGS" class="btn btn-success mb-2 desktop-view"> <i class="icofont icofont-plus icon-white "></i> <?= __('Lead/Contact Assignings'); ?></a>
     <?php } ?>
@@ -692,26 +692,26 @@ foreach ($feasibility_requirements_expiry_days as $item) {
             </div>
 			<div class="tab-pane card-body p-0 dynamictabviews active_all_class" id="lead-tab" role="tabpanel" >
                  <?php //include("views/custom_list_crm_leads.php"); ?>
-           
+
         	</div>
-	<!-- 
-			<div class="tab-pane card-body p-0" id="contact-tab" role="tabpanel">	
-            	
+	<!--
+			<div class="tab-pane card-body p-0" id="contact-tab" role="tabpanel">
+
 			</div>
-			<div class="tab-pane card-body p-0" id="company-tab" role="tabpanel">	
-				
+			<div class="tab-pane card-body p-0" id="company-tab" role="tabpanel">
+
 			</div>
-			<div class="tab-pane card-body p-0" id="deal-tab" role="tabpanel">	
-               
+			<div class="tab-pane card-body p-0" id="deal-tab" role="tabpanel">
+
 			</div>
             <div class="tab-pane card-body p-0" id="campaigns-tab" role="tabpanel">
-               
+
             </div>
-            <div class="tab-pane card-body p-0" id="project-tab" role="tabpanel">   
-               
+            <div class="tab-pane card-body p-0" id="project-tab" role="tabpanel">
+
             </div> --></div>
 
-	
+
 
 <?php /** ?>
     <div class="col-lg-3 text-right">
@@ -730,7 +730,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach($today_crm_lead_details as $crmld){ 
+						<?php foreach($today_crm_lead_details as $crmld){
 							$meg = "";
 		                    if($crmld['lead_type'] == '2' || $crmld['lead_type'] == '3'){
 		                        $meg .= "<span class='d-block'>".$crmld['date']." ".$crmld['time']."</span>".$crmld['comment'];
@@ -761,7 +761,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
 					<?php } ?>
 					</tbody>
 				</table>
-		        
+
 			</div>
 		</div>
 	</div>
@@ -771,7 +771,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
 <div id="sidebar111" class="users p-chat-user leadsidebar-form text-left" style="display:none">
     <div class="had-container">
         <div class="p-fixed users-main " id="htmlsetpage" >
-            
+
         </div>
     </div>
 </div>

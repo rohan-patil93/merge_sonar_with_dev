@@ -70,7 +70,7 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
             </form>
 
             <!-- Result -->
-            
+
         </div>
     </div>
     <div class="mt-4" id="TableContent">

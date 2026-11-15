@@ -1,13 +1,13 @@
-<?php 
+<?php
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
-$url = API."?mode=getapplicationtickets&page_type=".$_POST['page_type']; 
+$url = API."?mode=getapplicationtickets&page_type=".$_POST['page_type'];
 $response = callAPI($url);
-$result = json_decode($response,1); 
+$result = json_decode($response,1);
 $priority = $result['priority'];
 $application_tickets = $result['application_tickets'];
-$stausresult = ViewStatusData(); 
+$stausresult = ViewStatusData();
 $status = array("0"=>"In Progress","1"=>"In Working","40"=>"Cancel","199"=>"Completed");
 //echo "<pre>"; print_r($result); echo "</pre>";
 //phpinfo();
@@ -17,11 +17,11 @@ function insertApplicationTickets(){
 	var validations = ajaxFormSubmitValidation();
     if(validations == 0){
 	  	var formData = new FormData();
-	    formData.append("page", "insertapplicationtickets"); 
+	    formData.append("page", "insertapplicationtickets");
 	    var dataArray = $("#applicationtickets_form").serializeArray(),
 	    dataObj = {};
 	    $(dataArray).each(function(i, field){
-	      formData.append(field.name, field.value); 
+	      formData.append(field.name, field.value);
 	    });
 	    var popattachment = document.getElementById('popattickettachment').files[0];
 	    formData.append("file",popattachment);
@@ -98,7 +98,7 @@ function updateApplicationTickets(rid,status){
 			            	<?php if($at['current_status'] =='0'){ ?>
 			                <a class="dropdown-item waves-light waves-effect"  onclick="updateApplicationTickets('<?php echo $at['id']; ?>','1')">Start To Wrok</a>
 			            <?php }else{ ?>
-			                
+
 			            <?php } ?>
 			                <a class="dropdown-item waves-light waves-effect"  onclick="updateApplicationTickets('<?php echo $at['id']; ?>','<?php echo ST_CANCEL; ?>')">Cancel</a>
 			            </div>
@@ -110,10 +110,10 @@ function updateApplicationTickets(rid,status){
 	</table>
 <?php }else{ ?>
 	<div class="card-px text-center ">
-		<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Tickets</p>   
+		<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Tickets</p>
 		<div class="text-center px-4">
 			<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-		</div>   
+		</div>
 	</div>
 <?php } ?>
 </div>
@@ -153,19 +153,19 @@ function updateApplicationTickets(rid,status){
 				</td>
 				<td class="p-2">
 					<span class="label label-md label-primary"><?php echo $status[$at['current_status']]; ?></span>
-					
+
 				</td>
-				
+
 			</tr>
 			<?php } ?>
 		</tbody>
 	</table>
 	<?php }else{ ?>
 	<div class="card-px text-center ">
-		<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Tickets</p>   
+		<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Tickets</p>
 		<div class="text-center px-4">
 			<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-		</div>   
+		</div>
 	</div>
 <?php } ?>
 </div>
@@ -219,7 +219,7 @@ function updateApplicationTickets(rid,status){
      <script src="assets/pages/data-table/extensions/buttons/js/vfs_fonts.js"></script>
     <script src="assets/pages/data-table/extensions/responsive/js/dataTables.responsive.min.js"></script>
     <script src="assets/pages/data-table/extensions/buttons/js/buttons.colVis.min.js"></script>
-    <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script> 
+    <script src="assets/pages/data-table/extensions/responsive/js/responsive-custom.js"></script>
     <script src="assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="assets/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
     <script src="assets/pages/data-table/extensions/responsive/js/dataTables.responsive.min.js"></script>

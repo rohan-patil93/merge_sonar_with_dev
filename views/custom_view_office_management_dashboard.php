@@ -13,7 +13,7 @@
             type: "POST",
             success:function(data){
                 $('#popup1').html(data);
-                $('#kt_modal_KTDatatable_remote').modal("show");                
+                $('#kt_modal_KTDatatable_remote').modal("show");
             },
             error:function (){}
         });
@@ -25,7 +25,7 @@
             type: "POST",
             success:function(data){
                 $('#popup1').html(data);
-                $('#kt_modal_KTDatatable_remote').modal("show");                
+                $('#kt_modal_KTDatatable_remote').modal("show");
             },
             error:function (){}
         });
@@ -37,7 +37,7 @@
             type: "POST",
             success:function(data){
                 $('#popup1').html(data);
-                $('#kt_modal_KTDatatable_remote').modal("show");                
+                $('#kt_modal_KTDatatable_remote').modal("show");
             },
             error:function (){}
         });
@@ -50,8 +50,8 @@
                 type: "POST",
                 success:function(data){
                     $('#popup1').html(data);
-                    $('#kt_modal_KTDatatable_remote').modal("show"); 
-                                   
+                    $('#kt_modal_KTDatatable_remote').modal("show");
+
                 },
                 error:function (){}
             });
@@ -65,8 +65,8 @@
             type: "POST",
             success:function(data){
                 $('#popup1').html(data);
-                $('#kt_modal_KTDatatable_remote').modal("show"); 
-                             
+                $('#kt_modal_KTDatatable_remote').modal("show");
+
             },
             error:function (){}
         });
@@ -78,8 +78,8 @@
             type: "POST",
             success:function(data){
                 $('#popup1').html(data);
-                $('#kt_modal_KTDatatable_remote').modal("show"); 
-                               
+                $('#kt_modal_KTDatatable_remote').modal("show");
+
             },
             error:function (){}
         });
@@ -88,9 +88,9 @@
 <div class="row col-lg-12">
 	<div class="col-lg-12">
 		<div class="text-right">
-			<a href="index.php?option=COM_VIEW_OFFICE_MANAGEMENT" class="btn btn-primary m-b-10">  
-				<?= __('View Details'); ?> 
-			</a> 
+			<a href="index.php?option=COM_VIEW_OFFICE_MANAGEMENT" class="btn btn-primary m-b-10">
+				<?= __('View Details'); ?>
+			</a>
 		</div>
 	</div>
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
@@ -98,7 +98,7 @@
 			<div class="card-header">
 				<h5><?= __('In Couriers'); ?></h5>
 			</div>
-			<div class="card-body" style="padding:20px !important;">				
+			<div class="card-body" style="padding:20px !important;">
 				<div class="row ">
 					<div class="col-4 text-center">
 						<div class="s-caption text-primary">
@@ -132,7 +132,7 @@
 			<div class="card-header">
 				<h5><?= __('Out Couriers'); ?></h5>
 			</div>
-			<div class="card-body mb-2" style="padding: 20px !important;">				
+			<div class="card-body mb-2" style="padding: 20px !important;">
 				<div class="row ">
 					<div class="col-4  text-center">
 						<div class="s-caption text-primary">
@@ -257,7 +257,7 @@
 						</div>
 						<div class="col text-right">
 							<p class="m-b-0 text-c-blue"><i class="fas fa-long-arrow-alt-up m-r-10"></i>
-								<?php 
+								<?php
 									$pr = 0;
 									if($data['employee_food']['total_empfr']>0 && $data['employee_food']['total_empfr']!=""){
 										$pr = round(($data['employee_food']['emptr_pending']/ $data['employee_food']['total_empfr'])*100);
@@ -334,15 +334,15 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checka ==0){?>
 								<div class="card-px text-center">
 									<p class="text-muted f-16 fw-bold">
 										<i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?>
-									</p>   
+									</p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height:250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -370,13 +370,13 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -426,13 +426,13 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checka ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -460,13 +460,13 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -516,13 +516,13 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checka ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -550,13 +550,13 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -568,7 +568,7 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card new-cust-card">
 			<div class="card-header">
-				<h5><?= __('Stationery Below Minmum Qty'); ?></h5>				
+				<h5><?= __('Stationery Below Minmum Qty'); ?></h5>
 			</div>
 			<div class="tab-content table-border-style custom-scroll" style="height: 280px;">
 				<div class="card-block">
@@ -576,29 +576,29 @@
 							$checkb =1;
 					 ?>
 					<div class="align-middle mb-2 bg-gray b-radius-5">
-						
+
 						<div class="d-inline-block cursor-pointer" onclick="addandupdatestationery(<?php echo $down['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 							<a href="#!"><h6>
 								<?php echo $down['item_name']; ?>
 							</h6></a>
 							<span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
 							<p class="text-muted m-b-0">
-								<?= __('Available Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['available_qty']; ?></span> 
-								<?= __('Minmum Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['minmum_qty']; ?> </span> 
+								<?= __('Available Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['available_qty']; ?></span>
+								<?= __('Minmum Qty'); ?>: <span class="mt-16 f-w-600"><?php echo $down['minmum_qty']; ?> </span>
 							</p>
 						</div>
 					</div>
-					<?php } 
+					<?php }
 						if($checkb ==0){?>
 							<div class="card-px text-center ">
-								<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+								<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 								<div class="text-center px-4">
 									<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-								</div>   
+								</div>
 							</div>
 						<?php }
 					?>
-				</div>				
+				</div>
 			</div>
 		</div>
 	</div>
@@ -641,13 +641,13 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checka ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -675,13 +675,13 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -729,13 +729,13 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checka ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -755,7 +755,7 @@
 							<?php } ?>
 							<div class="d-inline-block cursor-pointer" onclick="viewfoodinsert(<?php echo $down['id']; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 								<a href="#!"><h6>
-									
+
 									<?php echo $food[$down['food_option_id']]['food_option']; ?>
 								</h6></a>
 								<span class="status active" style="margin-top:-15px;background-color:<?php echo $_SESSION['status'][$down['current_status']]['background_color']; ?>" ></span>
@@ -764,13 +764,13 @@
 							</div>
 						</div>
 						<?php } ?>
-						<?php } 
+						<?php }
 							if($checkb ==0){?>
 								<div class="card-px text-center ">
-									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+									<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 									<div class="text-center px-4">
 										<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-									</div>   
+									</div>
 								</div>
 							<?php }
 						?>
@@ -782,7 +782,7 @@
 	<div class="col-lg-3 col-md-6 col-sm-12 col-12">
 		<div class="card new-cust-card">
 			<div class="card-header">
-				<h5><?= __('This Month Employee Food Requests'); ?></h5>				
+				<h5><?= __('This Month Employee Food Requests'); ?></h5>
 			</div>
 			<div class="tab-content card-block table-border-style custom-scroll" style="height: 280px;">
 				<div class="card-block">
@@ -804,17 +804,17 @@
 					 		<span class="status deactive text-muted"><i class="far fa-clock m-r-10"></i><?php echo notificationdatesdiff($down['created_date'], 'N'); ?></span>
 					 	</div>
 					 </div>
-					<?php } 
+					<?php }
 						if($checkb ==0){?>
 							<div class="card-px text-center ">
-								<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>   
+								<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Couriers'); ?></p>
 								<div class="text-center px-4">
 									<img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-								</div>   
+								</div>
 							</div>
 						<?php }
 					?>
-				</div>				
+				</div>
 			</div>
 		</div>
 	</div>

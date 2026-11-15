@@ -6,10 +6,10 @@ $rid = $_POST['rid'];
 $apiurl = API."?mode=getprojecttaskdetailsfolloups&rid=".$rid;
 $apicall = callAPI($apiurl);
 $result = json_decode($apicall, 1);
-$application_task_logs = $result['project_task_details']; 
+$application_task_logs = $result['project_task_details'];
 $email_logs = $result['email_logs'];
 $statuse = ViewStatusData();
-//echo "<pre>"; print_r($result); echo "</pre>"; 
+//echo "<pre>"; print_r($result); echo "</pre>";
 ?>
 <script type="text/javascript">
 	function SubmitTaskDetails(){
@@ -68,10 +68,10 @@ $statuse = ViewStatusData();
 				<embed  src="uploads/email/<?php echo $email_logs['content']; ?>" style="border: none; width: -webkit-fill-available; height: 300px;"></embed>
 			<?php } ?>
 		</div>
-		
+
 	</div>
 
-	<?php }else{ ?>	
+	<?php }else{ ?>
 		<form id="tasksubmitform">
 			<div class="row">
 				<div class="form-group">
@@ -79,7 +79,7 @@ $statuse = ViewStatusData();
 					<textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" name="comment" id="popup_comment" ><?php echo $application_task_logs['description'];?></textarea>
 				</div>
 			</div>
-			<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>"> 
+			<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">
 		</form>
 	<?php } ?>
 </div>

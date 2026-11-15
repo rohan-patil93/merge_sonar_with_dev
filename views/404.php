@@ -3,7 +3,7 @@
 <?php  //echo "<pre>"; print_r($_SESSION['error_message']);
     if(!isset($_GET['error'])){
         $_GET['error'] = "403";
-      } 
+      }
 ?>
 <div class="image"></div>
 

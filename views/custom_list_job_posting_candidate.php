@@ -29,7 +29,7 @@ if(isset($_POST['post_job'])){
             $questionlist['mandatory_question'] = $_POST['screening_mandatory_question'][$quekey] =="Y"?"Y":"N";
             $questionlist['question_answer'] = $_POST['screening_question_answer'][$quekey];
         }
-        $screen_question[] =$questionlist; 
+        $screen_question[] =$questionlist;
     }
     $_POST['question'] = json_encode($screen_question);
     $_POST['candidate_mandatory_field'] = json_encode($_POST['candidate_mandatory_field']);

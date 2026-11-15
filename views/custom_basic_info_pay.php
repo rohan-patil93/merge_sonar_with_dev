@@ -1,8 +1,8 @@
- <?php 
+ <?php
  $employee_id = $employee_id!=""?$employee_id: $_SESSION['emp_id'];
  $whrcon["where"] = array('company_id'=> $_SESSION['company_id'],'employee_id'=>$employee_id, 'is_active'=>0);
   $vdata = urlencode(json_encode($whrcon));
-  $url = API."?mode=gettabledetailswithconditions&table=pay_run_summary_components&data=".$vdata; 
+  $url = API."?mode=gettabledetailswithconditions&table=pay_run_summary_components&data=".$vdata;
   $response = callAPI($url);
   $data1 = json_decode($response,1);
   $speical_allowance_component_id = OA;
@@ -14,16 +14,16 @@
       $total_earnings_in_current_year[$value['pay_year']] = $total_earnings_in_current_year['pay_year'] + $value['salary_component_actual'];
     }
     if($value['salary_component_type']==1){
-      $total_monthly_deductions[$value['pay_year']][$value['pay_month']] = $total_monthly_deductions['pay_year']['pay_month'] + $value['salary_component_actual']; 
+      $total_monthly_deductions[$value['pay_year']][$value['pay_month']] = $total_monthly_deductions['pay_year']['pay_month'] + $value['salary_component_actual'];
       $total_deductions_in_current_year[$value['pay_year']] = $total_deductions_in_current_year['pay_year'] + $value['salary_component_actual'];
 
     }
     if($value['component_id']== $itd_component_id){
-      $total_tax_paid_in_current_year[$value['pay_year']] = $total_tax_paid_in_current_year['pay_year']+$value['salary_component_actual']; 
+      $total_tax_paid_in_current_year[$value['pay_year']] = $total_tax_paid_in_current_year['pay_year']+$value['salary_component_actual'];
 
     }
     if($value['component_id'] == $speical_allowance_component_id){
-      $total_perks_in_current_year[$value['pay_year']] = $total_perks_in_current_year['pay_year'] + $value['salary_component_actual']; 
+      $total_perks_in_current_year[$value['pay_year']] = $total_perks_in_current_year['pay_year'] + $value['salary_component_actual'];
     }
   }
   $m=1; //echo "-----------------------"; print_r($total_monthly_earnings);
@@ -88,8 +88,8 @@
         <div class="col-lg-10">
           <div id="payslipview">
              <?php $_GET['month']=$monthkey;$_GET['year']=$keyyear; $_GET['employe_id']=$employee_id;
-             include_once("custom_list_payslip_template3.php"); ?>  
-          </div>        
+             include_once("custom_list_payslip_template3.php"); ?>
+          </div>
         </div>
       </div>
     </div>

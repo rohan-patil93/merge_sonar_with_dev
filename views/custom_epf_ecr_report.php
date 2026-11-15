@@ -8,15 +8,15 @@ if(isset($_POST['get_ecr_summary'])) {
 
 $dataorg["where"] = array('company_id'=> $_SESSION['company_id'], 'is_active'=>'0');
 $datw = urlencode(json_encode($dataorg));
-$curl1 = API."?mode=gettabledetailswithconditions&table=config&data=".$datw; 
+$curl1 = API."?mode=gettabledetailswithconditions&table=config&data=".$datw;
 $cudata1 = callAPI($curl1);
 $org_details = json_decode($cudata1,1);
 $company_name = $org_details[0]['name'];
 $epf_remitted_component_id = 2;
 $eps_remitted_component_id = 3;
 $company_id=1;
-$pay_year = date('Y',strtotime($pay_month_year)); 
-$pay_month = date('m',strtotime($pay_month_year)); 
+$pay_year = date('Y',strtotime($pay_month_year));
+$pay_month = date('m',strtotime($pay_month_year));
 
  $vurl1 = API."?mode=togetepfecrsummary&company_id=".$company_id."&pay_year=".$pay_year."&pay_month=".$pay_month."&epf_remitted_component_id=".$epf_remitted_component_id."&eps_remitted_component_id=".$eps_remitted_component_id;
 //print($vurl1); exit;
@@ -36,9 +36,9 @@ $ecr_list = json_decode($configesponse,1);
 															</span>
 														<span class="text-dark-75 font-weight-bolder  font-size-h2 "><?php echo $company_name; ?></span>
 
-															
+
 														</div>
-												
+
 		</div>
 		<div class="col-md-5">
 			<form method="post" action="#">
@@ -51,7 +51,7 @@ $ecr_list = json_decode($configesponse,1);
 					<button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light"><?php echo __('Submit'); ?></button>
 				</div>
 				</div>
-				
+
 			</div>
 		</form>
 	</div>
@@ -69,11 +69,11 @@ $ecr_list = json_decode($configesponse,1);
 				</button>
 				<!--end::Mobile Toggle-->
 				<!--begin::Page Heading-->
-				
+
 				<!--end::Page Heading-->
 			</div>
 			<!--end::Info-->
-			
+
 		</div>
 	</div>
 

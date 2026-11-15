@@ -1,4 +1,4 @@
-<?php 
+<?php
 //$data = array();
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
@@ -67,7 +67,7 @@ $status_progress = $result['status_progress'];
 // $resvendor = callAPI($tablevendor);
 // $datavendor = json_decode($resvendor,1);
 
-$content = $data['help_text']!='' ? $data['help_text'] : "Help Test"; 
+$content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
 $rr_data = toGetpageOptionName($table_name,$_REQUEST['option']);
 //echo "<pre>";print_r($rr_data);echo "</pre>";
 $nextlevelsteptable = $_REQUEST['clone'] !=""?$_REQUEST['clone']:$rr_data['genrate_next_level'];
@@ -76,7 +76,7 @@ $pr_data = toGetpageOptionName($nextlevelsteptable);
 
 // $pageurl = API."?mode=displayattributesview&fid=application_table_name&view=".$table_name;
 // $page_response = callAPI($pageurl);
-// $dis_list = json_decode($page_response,1); 
+// $dis_list = json_decode($page_response,1);
 $lists = json_decode($dis_list['list_attributes'],1);
 
 $cus_list = $lists['party_id'];
@@ -85,7 +85,7 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
 
 $vdata1["where"] = array('application_table_name'=> $table_name,'field_name'=>'party_id');
 $vdata = urlencode(json_encode($vdata1));
-$vurl = API."?mode=gettabledetailswithconditions&table=display_attribute_types&data=".$vdata; 
+$vurl = API."?mode=gettabledetailswithconditions&table=display_attribute_types&data=".$vdata;
 $configesponse = callAPI($vurl);
 $return = json_decode($configesponse,1);
 
@@ -101,21 +101,21 @@ $get_option = $_REQUEST['option'];
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){
-		filterSubmitForm();	
+		filterSubmitForm();
 	});
 </script>
 <script type="text/javascript">
 	//$(document).ready(function(){
 		$(document).on('click', '#checkall1', function() {
 			alert('haii');
-	  // $(".itemRow").prop("checked", this.checked);           
+	  // $(".itemRow").prop("checked", this.checked);
 
 	});
 		function chackd(e){
-			alert(check);  
+			alert(check);
 			var checkboxes = document.getelementbyid('check');
 			if (e.checked) {
-				for (var i = 0; i < checkboxes.length; i++) { 
+				for (var i = 0; i < checkboxes.length; i++) {
 					checkboxes[i].checked = true;
 				}
 			} else {
@@ -136,11 +136,11 @@ $get_option = $_REQUEST['option'];
 				success:function(data){
 					$('#dynamic_popup1').html(data);
 					$('#kt_modal_dynamic_popup').modal("show");
-					$(".js-example-basic-multiple").select2(); 
+					$(".js-example-basic-multiple").select2();
 				},
 				error:function (){}
 			});
-		} 
+		}
 		function filterSubmitForm(){
 			var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
     		$("#filterpageshow").html(loader);
@@ -164,7 +164,7 @@ $get_option = $_REQUEST['option'];
 				},
 				error:function (){}
 			});
-			
+
 		}
 
 		function dynamicSelectDateRange(type,name,start="",end=""){
@@ -175,13 +175,13 @@ $get_option = $_REQUEST['option'];
 		$("#"+type).addClass("active");
 		if(name == "Custom Date"){
 			$("#custome_date").show('slow');
-			
+
 		}else{
 			$("#custome_date").hide();
 			$("#from_date").val(start);
 			$("#to_date").val(end);
 		}
-	}	
+	}
 
 
 	</script>
@@ -194,7 +194,7 @@ $get_option = $_REQUEST['option'];
 			</div>
 		<?php } **/?>
 <div class="card" >
-	
+
 	<div class="card-header">
 		<h5>Approved <?php echo $rr_data['page_title']!="" ? $rr_data['page_title'] : ucwords($_REQUEST['table']); ?></h5>
 		<?php if($_POST['ajaxpage'] != 'Y'){ ?>
@@ -215,7 +215,7 @@ $get_option = $_REQUEST['option'];
 						<!-- <label  class="form-label"><?php echo $cus_list['lable']; ?>:</label> -->
 						<select class="form-control form-select js-example-basic-single"  name="vendor_id" aria-label="Vendor Id">
 							<option value=""> All <?php echo $cus_list['lable']; ?> </option>
-							<?php foreach ($selectdata as $selectkey => $selectvalue) {  ?> 
+							<?php foreach ($selectdata as $selectkey => $selectvalue) {  ?>
 								<option  <?php if($ress['vendor_id'] == $selectkey  ){ ?> selected <?php } ?> value="<?php echo $selectkey; ?>"><?php echo $selectvalue; ?></option>
 							<?php  } ?>
 						</select>
@@ -237,7 +237,7 @@ $get_option = $_REQUEST['option'];
 							<?php } ?>
 						</select>
 					</div> -->
-				<?php /** ?>	
+				<?php /** ?>
 					<div class="col-lg-2">
 						<span class="form-label d-inline-block fw-bold">Start Date <span class="text-danger">*</span></span>
 						<input type="text" class="form-control datepicker" name="from" placeholder="From" data-col-index="5" value="<?php echo $ress['from']; ?>" required/ aria-label="From">
@@ -245,7 +245,7 @@ $get_option = $_REQUEST['option'];
 					<div class="col-lg-2">
 						<span class="form-label d-inline-block fw-bold">End Date <span class="text-danger">*</span></span>
 						<input type="text" class="form-control datepicker" name="to" placeholder="To" data-col-index="5" value="<?php echo $ress['to']; ?>" required="" / aria-label="To">
-					</div> 
+					</div>
 <?php **/ ?>
 
 
@@ -283,18 +283,18 @@ $get_option = $_REQUEST['option'];
 								<div class="col-lg-6">
 									<input type="text" class="form-control filterdynamic datepicker" name="to" id="to_date" value="<?php echo $to_date; ?>" aria-label="To">
 								</div>
-							</div>				            
-						</div> 
+							</div>
+						</div>
 
 <?php /**/ ?>
 
 
 
-				
+
 				<input type="hidden" name="table" value="<?php echo $table_name; ?>">
 				<input type="hidden" name="get_table" value="<?php echo $table_name; ?>">
 				<input type="hidden" name="clone" value="<?php echo $nextlevelsteptable; ?>">
-				
+
 
 				<?php $csheck = $cus_list['lable']=="vendor" ?"vendors":"application_users"; ?>
 				<input type="hidden" name="get_display_table" value="<?php echo $get_table; ?>">
@@ -314,13 +314,13 @@ $get_option = $_REQUEST['option'];
 			</form>
 			<!--begin: Datatable -->
 			<div class="card card-custom mt-4">
-				<div class="card-body" id="filterpageshow">		
+				<div class="card-body" id="filterpageshow">
 					<?php 	//include_once "views/custom_list_approved_table_ajax.php"; ?>
 					<div class="card-px text-center ">
-							<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Please Apply Filter</p>   
+							<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Please Apply Filter</p>
 							<div class="text-center px-4">
 								<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-							</div>   
+							</div>
 						</div>
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 $row= array('id'=>$_SESSION['userid'],'user_name'=>$_SESSION['us_name'],'company_id'=>$_SESSION['company_id'],'email'=>$_SESSION['user_email'],'lastlogin'=>$_SESSION['lastlogin'],'role_id'=>$_SESSION['role_id'],'db'=>$_SESSION['DB_NAME'],'reset_password'=>$_SESSION['reset_password'],'confirmed_basic_ino'=>$_SESSION['confirmed_basic_ino'],'admin_access_employee'=>$_SESSION['admin_access_employee'],'user_token'=>$_SESSION['user_token'],'HTTP_INFI_TOKEN'=>$_SESSION['HTTP_INFI_TOKEN']);
 

@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 if(isset($_POST['submit'])){
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['user_id'] = $_SESSION['userid'];
@@ -42,8 +42,8 @@ $company_subscription_plan_licenses = $subscriptusers['company_subscription_plan
                 $('#kt_modal_KTDatatable_remotem').modal("show");
             },
             error:function (){}
-        });         
-    } 
+        });
+    }
     function checkUsageTreshold(){
         if($("#usagetreshold").is(':checked')){
             $("#usagetresholddays").show('slow');
@@ -55,7 +55,7 @@ $company_subscription_plan_licenses = $subscriptusers['company_subscription_plan
  function addMoreField(){
     var htmlRows = '';
     var cnt = $(".fieldnamecnt").length+1;
-    htmlRows += '<tr id="deleterow'+cnt+'"><td><input class="form-control fieldnamecnt" type="text" name="fieldname[]" aria-label="<?= __('Field Name') ?>"></td><td><input class="form-control" type="text" name="fieldvalue[]" aria-label="<?= __('Field Value') ?>"></td><td><i class="ti-trash" onclick="deleteRow('+cnt+')"></i> </td></tr>';  
+    htmlRows += '<tr id="deleterow'+cnt+'"><td><input class="form-control fieldnamecnt" type="text" name="fieldname[]" aria-label="<?= __('Field Name') ?>"></td><td><input class="form-control" type="text" name="fieldvalue[]" aria-label="<?= __('Field Value') ?>"></td><td><i class="ti-trash" onclick="deleteRow('+cnt+')"></i> </td></tr>';
     $('#appendfield').append(htmlRows);
 }
 function deleteRow(row){
@@ -68,7 +68,7 @@ function deleteRow(row){
   }).then((result) => {
       if (result.isConfirmed) {
        $('#deleterow'+row).remove();
-       tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3002']; ?>','');       
+       tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3002']; ?>','');
    }
 })
 
@@ -92,7 +92,7 @@ function doftDeleteRow(id){
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3002']; ?>','');
             },
             error:function (){}
-        }); 
+        });
     }
 })
 
@@ -107,15 +107,15 @@ function chekTotalAmount(id=""){
     var standard_price = $("#standard_price_"+id).val();
     var discount_price = $("#discount_price_"+id).val();
     var aggredpricetotal = parseInt(standard_price)-parseInt(discount_price);
-    $("#agreed_price_"+id).val(isNaN(aggredpricetotal)?standard_price:aggredpricetotal);    
+    $("#agreed_price_"+id).val(isNaN(aggredpricetotal)?standard_price:aggredpricetotal);
     $(".discount_prices").each(function(index) {
-        discount_prices =discount_prices+ parseFloat($(this).val()); 
+        discount_prices =discount_prices+ parseFloat($(this).val());
     });
     // $(".agreeduserlimit").each(function(index) {
-    //     agreeduserlimit =agreeduserlimit+ parseFloat($(this).val()); 
+    //     agreeduserlimit =agreeduserlimit+ parseFloat($(this).val());
     // });
     $(".agreedprice").each(function(index) {
-        agreedprice = agreedprice+parseFloat($(this).val()); 
+        agreedprice = agreedprice+parseFloat($(this).val());
     });
     //$("#totalactualuser").text(agreeduserlimit);
     console.log(discount_prices);
@@ -133,10 +133,10 @@ function AdditionalSubscription(company_subscr_id){
       confirmButtonText: <?= json_encode(__('Yes')) ?>,
       denyButtonText: <?= json_encode(__('No')) ?>,
   }).then((result) => {
-      if (result.isConfirmed){  
-        var agreed_price= $("#agreed_price_"+company_subscr_id).val(); 
-        var discount_price= $("#discount_price_"+company_subscr_id).val(); 
-        $('#discount_price_'+company_subscr_id).attr('readonly', true); 
+      if (result.isConfirmed){
+        var agreed_price= $("#agreed_price_"+company_subscr_id).val();
+        var discount_price= $("#discount_price_"+company_subscr_id).val();
+        $('#discount_price_'+company_subscr_id).attr('readonly', true);
         jQuery.ajax({
             url: "views/custom_insert_additional_subscription_popup.php",
             data: 'company_subscr_id='+company_subscr_id+"&agreed_price="+agreed_price+"&discount_price="+discount_price,
@@ -145,7 +145,7 @@ function AdditionalSubscription(company_subscr_id){
                 $('#popupm').html(data);
                 $('#kt_modal_KTDatatable_remotem').modal("show");
             }
-        });    
+        });
     }else{
         addSubscriptionPlans();
     }
@@ -163,10 +163,10 @@ function insertPaymentSubScription(company_subscr_id){
             console.log(data);
             $("#popup_users").text('');
             $("#popup_price").text('');
-            $("#payment_id_popup").val('');   
+            $("#payment_id_popup").val('');
             $('#modal_payment_details').modal("hide");
         }
-    });   
+    });
 }
 
 function acceptPaymentSubscription(id,userd,price){
@@ -202,7 +202,7 @@ function refrashpage(){
 			<div class="card-block">
                 <form method="post">
                     <div class="card-body">
-                       <div class="card">	
+                       <div class="card">
                          <div class="row">
                             <div class="col-lg-8">
                                 <div class="card">
@@ -277,10 +277,10 @@ function refrashpage(){
                                                         <tr>
                                                             <td><?php echo $i; ?></td>
                                                             <td><?php echo fromDate($subscriptuser['request_date']); ?></td>
-                                                            <td><?php echo $subscriptuser['added_license_users']!='0'?'<span class="label label-md label-success">'.$subscriptuser['added_license_users'].'</span>':'<span class="label label-md label-danger">'.$subscriptuser['deletd_license_users'].'</span>'; ?></td> 
+                                                            <td><?php echo $subscriptuser['added_license_users']!='0'?'<span class="label label-md label-success">'.$subscriptuser['added_license_users'].'</span>':'<span class="label label-md label-danger">'.$subscriptuser['deletd_license_users'].'</span>'; ?></td>
                                                             <td><?php echo $subscriptuser['price']; ?></td>
                                                             <td><?php echo $subscriptuser['payment_date'] !=""?fromDate($subscriptuser['payment_date']):"- "; ?></td>
-                                                           
+
 
 
                                                             <td>
@@ -292,10 +292,10 @@ function refrashpage(){
                                             <?php }else{ ?>
 
                                                 <div class="card-px text-center py-20 m-t-30">
-                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> <?= __('No Invoice') ?> </p>   
+                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> <?= __('No Invoice') ?> </p>
                                                     <div class="text-center px-4">
                                                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                                                  </div>   
+                                                  </div>
                                               </div>
                                           <?php } ?>
 
@@ -308,7 +308,7 @@ function refrashpage(){
                                   <div class="card">
                                     <div class="card-header">
                                         <h5><?= __('Advanced Options') ?></h5>
-                                        <h6 class="mt-5"><?= __('Custom fields') ?> 
+                                        <h6 class="mt-5"><?= __('Custom fields') ?>
                                             <i class="ti-info ms-1 fs-7 color-default text-white border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Add custom field to the billing invoice') ?>"></i>
                                         </h6>
                                     </div>
@@ -325,7 +325,7 @@ function refrashpage(){
                                                 <tbody>
                                                    <?php $custom_fields = json_decode($applicationuser['custom_fields'],1);// print_r($custom_fields);
                                                    foreach($custom_fields as $kk=>$custoval){
-                                                     ?> 
+                                                     ?>
                                                      <tr id="deleterow1">
                                                         <td>
                                                             <input class="form-control fieldnamecnt" type="text" name="fieldname[]" value="<?php echo $kk; ?>" aria-label="<?= __('Field Name') ?>">
@@ -345,7 +345,7 @@ function refrashpage(){
                                     </div>
                                 </div>
                                 <div class="card-header">
-                                    <h6 class="mt-2"><?= __('Invoice footer') ?> 
+                                    <h6 class="mt-2"><?= __('Invoice footer') ?>
                                         <i class="ti-info ms-1 fs-7 color-default text-white border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Add custom field to the billing invoice') ?>"></i>
                                     </h6>
                                     <textarea class="form-control" name="invoice_footer" style="height:80px" aria-label="<?= __('Invoice Footer') ?>"><?php echo $applicationuser['invoice_footer']; ?></textarea>
@@ -361,7 +361,7 @@ function refrashpage(){
                                                       <p class="mb-0"> <?= __('Usage Trash Holder') ?> <i class="ti-info ms-1 fs-7 bg-white text-primary border-radius p-1" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Add custom field to the billing invoice') ?>"></i>
                                                       </p>
                                                   </label>
-                                              </div> 
+                                              </div>
                                           </div>
                                           <div class="col-lg-5" id="usagetresholddays" <?php echo $applicationuser['usage_trash_holder_type']=='N'?"style='display:none'":"";?>>
                                             <div class="row align-items-center">
@@ -428,7 +428,7 @@ function refrashpage(){
                 </div>
             </div>
             <!-- Pradeep code end here -->
-        </div>	
+        </div>
     </div>
 </form>
 </div>
@@ -438,7 +438,7 @@ function refrashpage(){
 </div>
 
 
-<!-- 
+<!--
 
 <div id="kt_modal_dynamic_popupxxl" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl"  style="max-width: 98% !important;" >
@@ -456,15 +456,15 @@ function refrashpage(){
       <div class="modal-header">
         <h5 class="modal-title"><?= __('Payment Details') ?></h5>
         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-      </div>   
-        <form class="form" id="insertpaymentsubscrifrm">  
+      </div>
+        <form class="form" id="insertpaymentsubscrifrm">
             <div class="card-body">
                 <div class="row" >
                     <div class="col-lg-3 form-group text-center">
                         <span class="col-form-label d-block f-w-700"><?= __('Users') ?></span>
                         <span id="popup_users"></span>
                     </div>
-                    <div class="col-lg-3 form-group text-center"> 
+                    <div class="col-lg-3 form-group text-center">
                             <span class="col-form-label d-block f-w-700"><?= __('Price') ?></span>
                             <span id="popup_price"></span>
                     </div>

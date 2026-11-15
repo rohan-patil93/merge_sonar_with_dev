@@ -83,8 +83,8 @@ $select_value_json = json_encode($select_value);
   }
 
   /* Accordion body ya card container se overflow hidden ko hatayein agar koi ho */
-  .filter-employees .card-border, 
-  .filter-employees .card-header, 
+  .filter-employees .card-border,
+  .filter-employees .card-header,
   .filter-employees .collapse {
       overflow: visible !important;
   }
@@ -122,7 +122,7 @@ $select_value_json = json_encode($select_value);
           </select>
         </div>
         <div class="col-lg-6">
-          <div id="empimages"> 
+          <div id="empimages">
 
           </div>
         </div>

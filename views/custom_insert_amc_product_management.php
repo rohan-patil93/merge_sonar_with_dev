@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
         $response = file_post_contents($url, $_POST, 'update');
     }
     if ($response != ''){
-         header("location:index.php?option=COM_LIST_AMC_PRODUCT_MANAGEMENT"); exit; 
+         header("location:index.php?option=COM_LIST_AMC_PRODUCT_MANAGEMENT"); exit;
     }
     // echo "<pre>"; print_r($response);
 }

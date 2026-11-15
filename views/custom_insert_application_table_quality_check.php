@@ -30,7 +30,7 @@ $copy = 0;
 $cusdata = $_SESSION['user'];
 
 $geturl = API."?mode=getdynamicquotationdetails&location_id=".$cusdata['location_id'];
-$getesponse = callAPI($geturl); 
+$getesponse = callAPI($geturl);
 $result = json_decode($getesponse,1);
 $cusresponse = $result['application_users'];
 $locares = $result['location'];
@@ -48,7 +48,7 @@ $locations_data =  $result['location'];
     $table1['location_id'] =  $cusdata['location_id'];
     $table1['cost_center_id'] =  $cusdata['cost_center'];
     $table1['originator'] = $_SESSION['userid'];
-if(in_array($table_name, (array)$originator_table_withbill)){     
+if(in_array($table_name, (array)$originator_table_withbill)){
     $table1['party_id'] = $_SESSION['userid'];
     $table1['originator'] = $_SESSION['userid'];
     $table1['party_name'] = $cusdata['first_name'].' '.$cusdata['middle_name'].' '.$cusdata['last_name'];
@@ -78,7 +78,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $rtable = $rtable_name!='' ? $rtable_name : $table_name;
     $table2 = array(''); $i=0;
     $rpurl =  API."?mode=getInvoicesData&in_id=$rid&table=$rtable";
-    
+
     //echo $rpurl; exit;
     $rp_data = callAPI($rpurl);
     $rpres = json_decode($rp_data, 1);
@@ -119,7 +119,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $dutax = array();
     $distax = array();
     foreach ($taxes_ship as  $taxvalue) {
-        //print_r($dutax);    
+        //print_r($dutax);
         //$taxvalue['tax_value'] = number_format($taxvalue['tax_id'],2) ;
        if(in_array(number_format($taxvalue['tax_value'],2), (array)$dutax)){
         //echo "ravi"; exit;
@@ -141,11 +141,11 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
        $table1['ref_no'] = $rpdata['transaction_number'];
        $table1['ref_date'] = $rpdata['transaction_date'];
        $table1['ref_type'] = $rtable_name;
-    }else{ 
+    }else{
        $table1['qo_number'] = $rpdata['transaction_number'];
-       $table1['qo_date'] =  $rpdata['transaction_date']; 
+       $table1['qo_date'] =  $rpdata['transaction_date'];
        $table1['transaction_number'] = $rpdata['transaction_number'];
-       $table1['transaction_date'] =  $rpdata['transaction_date']; 
+       $table1['transaction_date'] =  $rpdata['transaction_date'];
        $table1['ref_id'] = $rpdata['ref_id'] ;
        $table1['ref_no'] = $rpdata['ref_no'] ;
        $table1['ref_date'] = $rpdata['ref_date'];
@@ -166,11 +166,11 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $table1['originator'] = $rpdata['originator'];
     }
     $table1['transaction_number'] = $rpdata['transaction_number'];
-       $table1['transaction_date'] =  $rpdata['transaction_date']; 
+       $table1['transaction_date'] =  $rpdata['transaction_date'];
     $table1['currency_id'] = $rpdata['currency_id'];
     $table1['cost_center'] = $rpdata['cost_center_id'];
     $table1['cost_center_id'] = $rpdata['cost_center_id'];
-    $table1['currency_rate'] = $rpdata['currency_rate'];    
+    $table1['currency_rate'] = $rpdata['currency_rate'];
     $table1['payment_terms'] = $rpdata['payment_terms'];
     $table1['place_of_supply'] = $rpdata['place_of_supply'];
     $table1['sub_total'] = $rpdata['amount'];
@@ -201,26 +201,26 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
        $tax_array[$taxs['transaction_item_id']] = $taxs['tax_id'];
        $tax_valuearray[$taxs['transaction_item_id']] = $taxs['tax_value'];
        $tax_valueamountarray[$taxs['transaction_item_id']] = $taxs['amount'];
-       
+
     }
     //echo "<pre>";print_r($items);echo "</pre>";
  //echo "<pre>";print_r($table1);echo "</pre>";
-      
+
 /*
     foreach($items as $item){
         $itemid[] = $item['item_id'];
-        $itemda['item_id']= $item['item_id']; 
-        $itemda['item_name']= $item['item_name'];       
+        $itemda['item_id']= $item['item_id'];
+        $itemda['item_name']= $item['item_name'];
         $itemda['description']= trim($item['description']);
         $itemda['uom']= $item['purchase_uom'];
-        $itemda['quantity']= $item['item_quantity']; 
-        $itemda['item_price']= $item['item_price']; 
+        $itemda['quantity']= $item['item_quantity'];
+        $itemda['item_price']= $item['item_price'];
         $itemda['tax_id']= $tax_array[$item['item_id']];
         $itemda['tax_value']= $tax_valuearray[$item['item_id']];
         $itemda['taxabled_amount']=$tax_valueamountarray[$item['item_id']];
-        $itemda['tax_amount']= $item['tax_amount']; 
-        $itemda['total_amount']= $item['total_amount']; 
-        $itemda['purchase_account']= $item['account_code']; 
+        $itemda['tax_amount']= $item['tax_amount'];
+        $itemda['total_amount']= $item['total_amount'];
+        $itemda['purchase_account']= $item['account_code'];
         $itemda['req_date']= $item['req_date'];
         $itemda['reason_id']= $item['reason_id'];
         $account_code[] = $item['account_code'];
@@ -228,15 +228,15 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $itemda['damaged_quantity'] = $item['damaged_quantity'] !='' ?$item['damaged_quantity'] : 0;
         if(($table_name == 'quotations' || $table_name == 'purchase_orders') && $rtable_name !=''){
             $tax_val = $tax_valuearray[$item['item_id']] !=''?$tax_valuearray[$item['item_id']] :0;
-            $itemda['quantity']= $item['pending_qty'];  
-            $itemda['tax_amount']= ($item['item_price'] * $item['pending_qty'])*($tax_val/100); 
+            $itemda['quantity']= $item['pending_qty'];
+            $itemda['tax_amount']= ($item['item_price'] * $item['pending_qty'])*($tax_val/100);
             $itemda['total_amount']=  $item['item_price'] * $item['pending_qty'];
             $subt_amount+=$item['item_price'] * $item['pending_qty'];
             $stax_amount+=($item['item_price'] * $item['pending_qty'])*($tax_val/100);
         }
         $meantableitemlist[$itemda['item_id']] = $itemda['quantity'];
-        $table2[$i] = $itemda; 
-        $i++;  
+        $table2[$i] = $itemda;
+        $i++;
     }
 */
 $subt_amount = 0;
@@ -254,33 +254,33 @@ foreach($items as $item){
 }
 foreach($items as $item){
         $itemid[] = $item['item_id'];
-        $itemda['item_id']= $item['item_id']; 
-        $itemda['item_name']= $item['item_name'];       
+        $itemda['item_id']= $item['item_id'];
+        $itemda['item_name']= $item['item_name'];
         $itemda['description']= trim($item['description']);
         $itemda['uom']= $item['purchase_uom'];
-        $itemda['quantity']= $item['item_quantity']; 
-        $itemda['item_price']= $item['item_price']; 
+        $itemda['quantity']= $item['item_quantity'];
+        $itemda['item_price']= $item['item_price'];
         $itemda['tax_id']= $tax_array[$item['item_id']];
         $itemda['tax_value']= $tax_valuearray[$item['item_id']];
         $itemda['taxabled_amount']=$tax_valueamountarray[$item['item_id']];
-        $itemda['tax_amount']= $item['tax_amount']; 
-        $itemda['total_amount']= $item['total_amount']; 
-        $itemda['purchase_account']= $item['account_code']; 
+        $itemda['tax_amount']= $item['tax_amount'];
+        $itemda['total_amount']= $item['total_amount'];
+        $itemda['purchase_account']= $item['account_code'];
         $itemda['req_date']= $item['req_date'];
         $itemda['reason_id']= $item['reason_id'];
         $account_code[] = $item['account_code'];
         $itemda['invoiced_quantity'] = $item['invoice_item_quantity'] !='' ?$item['invoice_item_quantity'] : $item['item_quantity'];
-        
+
         $itemda['damaged_quantity'] = ($item['invoice_item_quantity']-$item['item_quantity']) !='' ? ($item['invoice_item_quantity']-$item['item_quantity']) : 0;
         if(($table_name == 'quotations' || $table_name == 'purchase_orders') && $rtable_name !=''){
             $tax_val = $tax_valuearray[$item['item_id']] !=''?$tax_valuearray[$item['item_id']] :0;
-            
+
             if(count((array)$reftableitemlist) !=0){
                 $itemda['quantity']= $reftableitemlist[$item['item_id']]['pending_qty'];
-                $item['pending_qty'] = $reftableitemlist[$item['item_id']]['pending_qty']; 
+                $item['pending_qty'] = $reftableitemlist[$item['item_id']]['pending_qty'];
             }else{
-                $itemda['quantity']= $item['pending_qty']; 
-            } 
+                $itemda['quantity']= $item['pending_qty'];
+            }
             $productamount = ($item['item_price'] * $item['pending_qty']);
             if($rpdata['discount_type'] == 'P'){
                 $newproductamount = $productamount * ($rpdata['discount_value'] /100);
@@ -289,10 +289,10 @@ foreach($items as $item){
                 $newproductamount = ($productamount / $subt_amount) * $rpdata['discount_amount'];
             }
 			$totaldiscountamt +=$newproductamount;
-            $productamount = $productamount-$newproductamount; 
+            $productamount = $productamount-$newproductamount;
             if(isset($distax[$tax_val]['amount'])){
                 $distax[$tax_val]['amount'] =  $productamount;
-                $distax[$tax_val]['tax_amount'] = ($productamount)*($tax_val/100);  
+                $distax[$tax_val]['tax_amount'] = ($productamount)*($tax_val/100);
             }
             $itemda['taxabled_amount'] = $productamount;
             $itemda['tax_amount']= ($productamount)*($tax_val/100);
@@ -303,8 +303,8 @@ foreach($items as $item){
 
         }
         $meantableitemlist[$itemda['item_id']] = $itemda['quantity'];
-        $table2[$i] = $itemda; 
-        $i++;  
+        $table2[$i] = $itemda;
+        $i++;
     }
 
 
@@ -316,10 +316,10 @@ foreach($items as $item){
             $discount_amt += $subt_amount * ($rpdata['discount_value'] /100);
             $table1['discount_amount'] = $discount_amt;
         }
-        
+
         $table1['sub_total'] = $subt_amount;
         $table1['tax_amount'] = $stax_amount;
-        
+
         // if($rpdata['discount_type'] == 'P'){
         //     $table1['discount_amount'] = $subt_amount * ($rpdata['discount_value'] /100);
         // }
@@ -334,14 +334,14 @@ foreach($items as $item){
         //$table1['grand_total'] = $subt_amount + $stax_amount - $table1['discount_amount'];
         //$table1['grand_total'] = $subt_amount + $shipping_amountt - $stax_amount;
         $table1['grand_total'] = $subt_amount + $shipping_amountt + $stax_amount-$totaldiscountamt;
-    } 
-   
+    }
+
     $item_ids = "";
     $item_ids = implode(',', (array)$itemid);
     //echo "<pre>";print_r($item_ids);exit;
     $acode['account_code']=$account_code;
     $acode['cost_center_id']=$table1['cost_center'];
-    $acode['company_id']=$_SESSION['company_id']; 
+    $acode['company_id']=$_SESSION['company_id'];
     $acode['fiscal_year']=$table1['qo_date'];
     //echo "<pre>"; print_r($acode); exit;
    /* $acurl = API."?mode=budgetcheckreftadledata&method=post";
@@ -393,25 +393,25 @@ $petty_cash_style = "";
 if($table_name == 'petty_cash' || $table_name == 'bills') {
     $petty_cash_style = "style='display:none;'";
 }
-// if(in_array($table_name, $stock_table)){ 
+// if(in_array($table_name, $stock_table)){
 //     $locations_url = API."?mode=gettabledetails&table=".TBL_LOCATIONS;
 //     $locations_data = callAPI($locations_url);
-//     $locations_data = json_decode($locations_data, 1); 
+//     $locations_data = json_decode($locations_data, 1);
 // }
 $small_sub = 111;
 $table1['currency_id'] = $table1['currency_id']!="" ? $table1['currency_id'] : $_SESSION['config']['default_currency_id'];
 ?>
 <style type="text/css">
-    input[type="text"]::placeholder {  
-                text-align: center; 
-            } 
+    input[type="text"]::placeholder {
+                text-align: center;
+            }
     .amount {
         text-align: right;
     }
     .thheader {
         text-align: center;
     }
-    
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha384-E7gp+UYBLS2XewcxoJbfi0UpGMHSvt9XyI9bH4YIw5GDGW8AlC+2J7bVBBlMFC6p" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha384-pPttEvTHTuUJ9L2kCoMnNqCRcaMPMVMsWVO+RLaaaYDmfSP5//dP6eKRusbPcqhZ" crossorigin="anonymous"></script>
@@ -425,7 +425,7 @@ function duedate(){
     //alert(date);
     var newdate = new Date(date);
     //alert(newdate);
-    newdate.setDate(newdate.getDate() + parseInt(payment_terms));       
+    newdate.setDate(newdate.getDate() + parseInt(payment_terms));
     var dd = newdate.getDate();
     var mm = newdate.getMonth() + 1;
     var y = newdate.getFullYear();
@@ -456,14 +456,14 @@ function currencychange(val,old_val){
              document.getElementById('exchange').style.display = "block";
              exchangerate();
             }else{
-                swal({              
-                    title: "6010 : Please Define Exchange Rate",                            
-                    type: "warning",           
+                swal({
+                    title: "6010 : Please Define Exchange Rate",
+                    type: "warning",
                     buttonsStyling: false,
-                    confirmButtonText: "OK",    
+                    confirmButtonText: "OK",
                     confirmButtonClass: "btn btn-danger"
                 })
-            }  
+            }
         },
         error:function (){}
     });
@@ -480,7 +480,7 @@ function validateForm(){
     if(x == 20 ||  x == 30 || 100 < x < 110 || x == 199 ){
         //alert("hai");
         var comments = document.forms["myForm"]['comments'].value;
-        
+
         if(comments == ''){
             document.forms["myForm"]['comments'].focus();
             return false;
@@ -499,7 +499,7 @@ function validateForm(){
         });*/
     }else{
      if( x != 2 ){
-        
+
         if( table_name == 'requisitions'){
             var cost_center = document.forms["myForm"]['cost_center'].value;
             if(cost_center == 0){
@@ -526,7 +526,7 @@ function validateForm(){
              document.getElementById('party_place_of_supply_err').style.display = "none";
         }
         var count = $(".itemRow").length;
-        for(var i=1; i< count+1; i++){                
+        for(var i=1; i< count+1; i++){
             var uom = document.forms["myForm"]['uom_'+i].value;
             if(uom == 0){
                  res = 'Y';
@@ -565,7 +565,7 @@ function validateForm(){
     }
     }
     /*var data = <?php echo $mandatory_json; ?>;
-    var res = 'N'; 
+    var res = 'N';
 //  alert(data);
     if(typeof(data) == 'object'){
         for(var item in data) {
@@ -667,16 +667,16 @@ function changeinvoicenumber(value){
     //alert(ord);
 }
 $(document).ready(function(){
-    $(document).on('click', '#checkAll', function() {           
+    $(document).on('click', '#checkAll', function() {
         $(".itemRow").prop("checked", this.checked);
-    }); 
+    });
     $(document).on('click', '.itemRow', function() {
         if ($('.itemRow:checked').length == $('.itemRow').length) {
             $('#checkAll').prop('checked', true);
         } else {
             $('#checkAll').prop('checked', false);
         }
-    });  
+    });
     $(document).on('click', '#removeRows', function(){
 
         $(".itemRow:checked").each(function() {
@@ -693,19 +693,19 @@ $(document).ready(function(){
     var ids = $('#price_'+id).val();
 
     });
-    
+
 });*/
 $(document).on('blur', "[id^=quantity_]", function(){
     //quantityCheck();
-    calculateTotal();  
-}); 
+    calculateTotal();
+});
 $(document).on('blur', "[id^=price_]", function(){
     calculateTotal();
 });
 $(document).on('change', "[id^=tax_]", function(){
     calculateTotal();
-});     
-/*$(document).on('blur', "#taxRate", function(){        
+});
+/*$(document).on('blur', "#taxRate", function(){
     calculateTotal();
 });*/
 $(document).on('blur', "#disValue", function(){
@@ -717,8 +717,8 @@ $(document).on('blur', "#disValue", function(){
 //         calculateTotal();
 // });
 $(document).on('blur', "#amountPaid", function(){
-    amountpaid();   
-}); 
+    amountpaid();
+});
 $(document).on('click', '.deleteInvoice', function(){
     var id = $(this).attr("id");
     if(confirm("Are you sure you want to remove this?")){
@@ -726,7 +726,7 @@ $(document).on('click', '.deleteInvoice', function(){
             url:"action.php",
             method:"POST",
             dataType: "json",
-            data:{id:id, action:'delete_invoice'},              
+            data:{id:id, action:'delete_invoice'},
             success:function(response) {
                 if(response.status == 1) {
                     $('#'+id).closest("tr").remove();
@@ -737,12 +737,12 @@ $(document).on('click', '.deleteInvoice', function(){
         return false;
     }
 });
-}); 
+});
 function exchangerate(){
     calculateTotal();
 }
 function calculateTotal(){
-    var totalAmount = 0; 
+    var totalAmount = 0;
     var totaltaxrate = 0;
     var subamount = 0;
     var formatter = new Intl.NumberFormat('en-IN', {
@@ -766,9 +766,9 @@ function calculateTotal(){
         $('#amount_'+id).val(amount);
         var aval_budget = $('#purchase_account_aval_'+id).val();
         if(aval_budget < amount){
-                $('#dis_amount_'+id).css('color', '#f00'); 
+                $('#dis_amount_'+id).css('color', '#f00');
         }else{
-             $('#dis_amount_'+id).css('color', '#000'); 
+             $('#dis_amount_'+id).css('color', '#000');
         }
         $('#dis_amount_'+id).val(formatter.format(amount));
         var ptaxRate = 0;
@@ -781,29 +781,29 @@ function calculateTotal(){
             //console.log("tax:"+tax+"tax_cal"+tax_cal);
             var tax_cal1 = tax/tax_cal;
             //console.log("taxcal:"+tax_cal1);
-            ptaxRate = tax_cal1*amount; 
+            ptaxRate = tax_cal1*amount;
            // console.log("Ravi1"+ptaxRate);
         }
         $('#ptax_amount_'+id).val(ptaxRate);
-        $('#p_amount_'+id).val(amount); 
-        
-        $('#dis_ptax_amount_'+id).val(formatter.format(ptaxRate)); 
+        $('#p_amount_'+id).val(amount);
+
+        $('#dis_ptax_amount_'+id).val(formatter.format(ptaxRate));
        // console.log('amount'+amount +'tax'+ptaxRate);
         var total = ptaxRate+amount;
 
          //console.log('ptaxRate'+  ptaxRate +':amount'+amount+'sub'+total);
         //$('#total_'+id).val(parseFloat(total));
         subamount += amount ;
-        totalAmount += total;           
+        totalAmount += total;
         totaltaxrate += ptaxRate;
     });
-    $('#subTotal').val(parseFloat(subamount).toFixed(2)); 
-    $('#dis_subTotal').val(formatter.format(subamount)); 
-    $('#dis_subTotalid').text(formatter.format(subamount)); 
-    
+    $('#subTotal').val(parseFloat(subamount).toFixed(2));
+    $('#dis_subTotal').val(formatter.format(subamount));
+    $('#dis_subTotalid').text(formatter.format(subamount));
+
     var taxRate = $("#taxRate").val();
-    var subTotal = $('#subTotal').val();    
-   // console.log( 'tax'+  totaltaxrate +':grand'+totalAmount+'sub'+subamount ); 
+    var subTotal = $('#subTotal').val();
+   // console.log( 'tax'+  totaltaxrate +':grand'+totalAmount+'sub'+subamount );
    displaytaxes();
     if(subTotal) {
         //var taxAmount = subTotal*taxRate/100;
@@ -827,8 +827,8 @@ function calculateTotal(){
         var div_amount_total = $('#div_amount_total').val();
         var table_name = $('#table_name').val();
         if(disType && disValue) {
-            //discounts(); 
-            if(disType && disValue) {      
+            //discounts();
+            if(disType && disValue) {
 
                 var disValue1 = 0; var disValue2 = 0;
                 if(disType=='P'){
@@ -845,15 +845,15 @@ function calculateTotal(){
                 //$('#dis_discount').val(formatter.format(disvalue2));
                 $('#dis_discount').val(formatter.format(disValue1));
                 $('#dis_discountid').text(formatter.format(disValue1));
-            
+
                 $('#dis_grandtotal').val(formatter.format(grandtotal));
                 $('#grndtotalid').text(formatter.format(grandtotal));
                 console.log('grandtotal55 - '+formatter.format(grandtotal));
         amountLimitCheck(formatter.format(grandtotal));
 
                 //amountpaid();
-            } 
-        }  
+            }
+        }
         var shipping_amount = $('#shipping_amount').val();
        // console.log('123'+grandtotal+"&&&&"+shipping_amount+'&&&&&'+shipping_tax_amount);
         //if(shipping_amount != '' && shipping_tax_amount !='0'){
@@ -879,22 +879,22 @@ function calculateTotal(){
         $('#grndtotalid').text(formatter.format(grandtotal));
         console.log('grandtotal33 - '+grandtotal);
         amountLimitCheck(grandtotal);
-         
-         //changeexchange();  
-              
-       // amountpaid(); 
+
+         //changeexchange();
+
+       // amountpaid();
     }
  }
 /* function discounts1(){
-    if(disType && disValue && totalAftertax) {      
+    if(disType && disValue && totalAftertax) {
         var disValue1 = 0;
         if(disType=='P'){
             disValue1 = (disValue/100)*totalAftertax;
         }else if(disType=='A'){
             disValue1 = disValue;
         }
-        var subTotal = $('#subTotal').val(); 
-        for(var i=1; i< count+1; i++) { 
+        var subTotal = $('#subTotal').val();
+        for(var i=1; i< count+1; i++) {
             var id = i;
             var tax = $('#tax_'+id).val();
             //var tax_amount = $('#ptax_amount_'+id).val();
@@ -910,12 +910,12 @@ function calculateTotal(){
     totalAftertax =  parseFloat(totalAftertax);
    // var disType = $('#disType').val();
     var disType  = $("#disType:checked").val();
-        
+
     var disValue = $('#disValue').val();
     var subTotal = $('#subTotal').val();
      var div_amount_total = 0;
     var disValue1 = 0;
-    if(disValue > 0 ) {      
+    if(disValue > 0 ) {
         //console.log('Dicount check1');
         if(disType=='P'){
             //console.log('Dicount check2');
@@ -935,7 +935,7 @@ function calculateTotal(){
     var check_arr = [];
     var arr2 = [];
     //console.log(old_state+"sjjs"+change_state);
-    for(var i=1; i< count+1; i++) { 
+    for(var i=1; i< count+1; i++) {
         //console.log("1");
         var id = i;
         //var tax = $('#tax_'+id).val();
@@ -964,19 +964,19 @@ function calculateTotal(){
                 }*/
                 ptaxRate = tax_cal1*amount;
                 //ptaxRate =(parseFloat(tax)/(100+tax))*amount;
-                //ptaxRate =((parseFloat(tax)/(100+inclusive_tax)))*amount; 
+                //ptaxRate =((parseFloat(tax)/(100+inclusive_tax)))*amount;
                 //console.log("Ravi2"+ptaxRate);
             }
             $('#ptax_amount_'+id).val(ptaxRate);
             $('#p_amount_'+id).val(amount);
             $('#pdiscount_amount_'+id).val(ptaxRate);
-            var tax_amount = ptaxRate; 
+            var tax_amount = ptaxRate;
         }else{
             var tax_amount = $('#ptax_amount_'+id).val();
             tax_amount = parseFloat(tax_amount);
             div_amount_total=+amount;
         }
-        
+
         if(taxtype == 'I'){
             amount = parseFloat(amount)-parseFloat(tax_amount);
             amount = parseFloat(amount).toFixed(2);
@@ -985,7 +985,7 @@ function calculateTotal(){
             //console.log("RAVi");
             if(check_arr.indexOf(tax)!=-1){
                 //console.log("RAVi123");
-               
+
                 for(j=0; j< arr2.length ; j++){
                    // console.log("RAVi789");
                    // console.log(JSON.stringify(arr2[j]));
@@ -995,7 +995,7 @@ function calculateTotal(){
                         arr2[j]['amount'] =  parseFloat(arr2[j]['amount']) + parseFloat(amount);
                         arr2[j]['tax_amount'] =  parseFloat(arr2[j]['tax_amount']) + parseFloat(tax_amount);
                         break;
-                   }     
+                   }
                 }
             }else{
                 var  arr = {};
@@ -1007,9 +1007,9 @@ function calculateTotal(){
                 arr2.push(arr);
             }
         }
-       
+
     }
-    
+
      $('#div_amount_total').val(div_amount_total);
     var shipping_tax = $('#shipping_tax').val();
     var shipping_amount = $('#shipping_amount').val();
@@ -1023,7 +1023,7 @@ function calculateTotal(){
                         arr2[j]['amount'] =  parseFloat(arr2[j]['amount']) + parseFloat(shipping_amount);
                         arr2[j]['tax_amount'] =  parseFloat(arr2[j]['tax_amount']) + parseFloat(sss);
                         break;
-                   }     
+                   }
                 }
         }else{
             var  arr = {};
@@ -1069,17 +1069,17 @@ function calculateTotal(){
 });
     //var disType = $('#disType').val();
     var disType  = $("#disType:checked").val();
-        
+
     var disValue = $('#disValue').val();
     // console.log(disType);
     // console.log(disValue);
     var totalAftertax = $('#subTotal').val();
     var gdam = $('#gdam').val();
     var div_amount_total = $('#div_amount_total').val();
-    //console.log(totalAftertax);  
+    //console.log(totalAftertax);
     totalAftertax =  parseFloat(totalAftertax);
    // console.log(totalAftertax);
-    if(disType && disValue && totalAftertax) {      
+    if(disType && disValue && totalAftertax) {
             var disValue1 = 0; var disValue2 = 0;
             if(disType=='P'){
                 disValue1 = (disValue/100)*totalAftertax;
@@ -1098,7 +1098,7 @@ function calculateTotal(){
         amountLimitCheck(formatter.format(totalAftertax));
             $('#grandtotal').val(parseFloat(totalAftertax).toFixed(2));
             //amountpaid();
-    } 
+    }
  }
  function changeexchange(){
      var formatter = new Intl.NumberFormat('en-IN', {
@@ -1122,13 +1122,13 @@ function calculateTotal(){
  }
  function amountpaid(){
     var amountPaid = $('#amountPaid').val();
-        var totalAftertax = $('#grandtotal').val(); 
+        var totalAftertax = $('#grandtotal').val();
         if(amountPaid && totalAftertax) {
-            totalAftertax = totalAftertax-amountPaid;           
+            totalAftertax = totalAftertax-amountPaid;
             $('#amountDue').val(totalAftertax);
         } else {
             $('#amountDue').val(totalAftertax);
-        }   
+        }
  }
  function quantityCheckold(fid){
     var table_name = $('#table_name').val();
@@ -1138,17 +1138,17 @@ function calculateTotal(){
     var quantity  = $('#quantity_'+id).val();
     var quantity_old = $('#quantity_old_'+id).val();
     if (parseFloat(quantity_old) < parseFloat(quantity)){
-        // swal({              
-        //     title: "Quantity alert ",              
-        //     text: "6030 : Quantity cannot be more than "+quantity_old,              
-        //     type: "warning",           
+        // swal({
+        //     title: "Quantity alert ",
+        //     text: "6030 : Quantity cannot be more than "+quantity_old,
+        //     type: "warning",
         //     buttonsStyling: false,
-        //     confirmButtonText: "OK",    
-        //     confirmButtonClass: "btn btn-danger", 
+        //     confirmButtonText: "OK",
+        //     confirmButtonClass: "btn btn-danger",
         //     }, function () {
         //         $('#quantity_'+id).val(quantity_old);
         //         calculateTotal();
-        //     });                            
+        //     });
         }
     }
     checkqtyvalidation(fid);
@@ -1158,7 +1158,7 @@ function checkqtyvalidation(fid){
     var ref_id = $('#ref_id').val();
     var id = fid.split('_');
     id = id[1];
-    var quantity  = $('#quantity_'+id).val(); 
+    var quantity  = $('#quantity_'+id).val();
     var item_id = $('#productCode_'+id).val();
     //console.log(ref_table+" -- "+ref_id+" - "+quantity+" -- "+item_id);
     jQuery.ajax({
@@ -1169,17 +1169,17 @@ function checkqtyvalidation(fid){
             console.log(data);
             var decoderes = JSON.parse(data);
             if(parseInt(decoderes.pending_qty) < parseInt(quantity)){
-                swal({              
-                    title: "Quantity alert ",              
+                swal({
+                    title: "Quantity alert ",
                     text: "6030 : Quantity cannot be more than "+decoderes.pending_qty,
-                    type: "warning",           
+                    type: "warning",
                     buttonsStyling: false,
-                    confirmButtonText: "OK",    
-                    confirmButtonClass: "btn btn-danger", 
+                    confirmButtonText: "OK",
+                    confirmButtonClass: "btn btn-danger",
                     }, function () {
                         $('#quantity_'+id).val(decoderes.pending_qty);
                         calculateTotal();
-                });   
+                });
             }
         }
     });
@@ -1199,23 +1199,23 @@ function quantityCheck(fid){
               //  console.log(data);
                 //console.log(quantity);
                 if (parseFloat(data) < quantity){
-                    swal({              
-                        title: "Quantity on hand "+parseFloat(data),              
-                        text: "6020 : Do you want to change the quantity to "+parseFloat(data)+" ?",              
-                        type: "warning",           
+                    swal({
+                        title: "Quantity on hand "+parseFloat(data),
+                        text: "6020 : Do you want to change the quantity to "+parseFloat(data)+" ?",
+                        type: "warning",
                         buttonsStyling: false,
-                        confirmButtonText: "Yes, change!",    
+                        confirmButtonText: "Yes, change!",
                         confirmButtonClass: "btn btn-danger",
-                        showCancelButton: true,     
-                        cancelButtonText: " No, proceed",      
-                        cancelButtonClass: "btn btn-default"        
+                        showCancelButton: true,
+                        cancelButtonText: " No, proceed",
+                        cancelButtonClass: "btn btn-default"
                     }).then(function(result) {
                         if (result.value) {
                             $('#quantity_'+id).val(parseFloat(data));
                             /*document.getElementById('quantity_1').focus();*/
                             calculateTotal();
                         }
-                    });                             
+                    });
                 }
             },
             error:function (){}
@@ -1244,8 +1244,8 @@ function changestatus(val,val2){
                 $('#kt_modal_KTDatatable_remote').modal("show");
                 $("#kt_modal_KTDatatable_remote").on("hidden.bs.modal", function () {
                    //submit();
-                }); 
-                $(".js-example-basic-multiple").select2(); 
+                });
+                $(".js-example-basic-multiple").select2();
             },
             error:function (){}
         });
@@ -1260,7 +1260,7 @@ function changestatus(val,val2){
                 $('#kt_modal_KTDatatable_remote').modal("show");
                 $("#kt_modal_KTDatatable_remote").on("hidden.bs.modal", function () {
                    submit();
-                });           
+                });
              },
             error:function (){}
         });
@@ -1278,9 +1278,9 @@ function changestatus(val,val2){
         });
 
     }else{
-        submit(); 
+        submit();
     }
-      
+
      //alert("man");
     // document.getElementById("form_id").submit();
         //submit('22');
@@ -1346,7 +1346,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 },
                 error:function (){}
             });
-        }); 
+        });
 }
 function viewApprovalAllUsers(id){
    $("."+id).show();
@@ -1358,13 +1358,13 @@ function viewApprovalAllUsers(id){
     <div class="container-fluid">
     <?php if($_GET['error'] !=''){ ?>
         <div class="alert alert-warning alert-dismissible">
-            <strong><?php echo $_GET['error']." : ".$_SESSION['error_message'][$_GET['error']]; ?> </strong> 
+            <strong><?php echo $_GET['error']." : ".$_SESSION['error_message'][$_GET['error']]; ?> </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 <?php } ?>
 <?php if($_GET['error_messages'] !="" AND ($table1['current_status'] == ST_DRAFT OR $table1['current_status'] == ST_ACTIVE OR $copy == 0)){  $disable = "disabled"; ?>
      <div class="alert alert-danger alert-dismissible">
-            <strong><?php echo $_GET['error_messages']; ?> </strong> 
+            <strong><?php echo $_GET['error_messages']; ?> </strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 <?php } ?>
@@ -1374,7 +1374,7 @@ function viewApprovalAllUsers(id){
         $workflowsteps = getWorkflowStatus('application_table_quality_check', $checkdata['id'], $checkdata['current_status']);
             //echo "<pre>"; print_r($workflowsteps); echo "</pre>";
             ?>
-         
+
             <form class="kt-form kt-form--label-right" name="myForm" id="myForm" action="" method="post" enctype="multipart/form-data"  >
             <div class="kt-portlet">
                          <div class="card">
@@ -1382,14 +1382,14 @@ function viewApprovalAllUsers(id){
                         <div class="card-header table-card-header">
                           <h5><?php echo $title;  ?></h5>
                           <div class="card-header-right table-card-header m-r-50">
-                 
+
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i> <?= __('Back') ?></a>
                     <a target="_blank" href="index.php?option=COM_QO_PRINT&rid=<?php echo $rid; ?>&table=<?php echo $table_name; ?>&title=<?php echo urlencode($title); ?>" class="btn btn-clean kt-margin-r-10">
                                 <i class="ti-printer"></i>
-                    </a>   
-                         
+                    </a>
+
                     <?php echo $rtable_name ==""?$workflowsteps['workflow_btn']:""; ?>
-                 &nbsp;  &nbsp; 
+                 &nbsp;  &nbsp;
                     <!-- <input type="hidden" name="status_values" id="status_values" value="<?php //echo  $table1['current_status']!=""?$table1['current_status']:2; ?>"> -->
                 <input type="hidden" name="status_values" id="status_values" value="<?php echo  ($table1['current_status']!="" AND $rtable_name =="")?$table1['current_status']:ST_DRAFT; ?>">
                 <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
@@ -1401,15 +1401,15 @@ function viewApprovalAllUsers(id){
             </div>
             <?php $submitbtnnptshow = array(ST_REJECTED,ST_APPROVED); ?>
             <div>
-            
-            <?php 
+
+            <?php
             //if($table1['qo_number'] !=''){
                $tran_no =  $table1['qo_number'];
             //}
 
                include_once("custom_insert_quotation_topup.php");
              ?>
-      
+
                     <div class="kt-portlet__head ">
                         <div class="card-header table-card-header">
                             <div class="row">
@@ -1429,7 +1429,7 @@ function viewApprovalAllUsers(id){
                             <h3 class="kt-portlet__head-title"> Items/Services </h3>
                         </div>
                         <div style="float: right;">
-                             
+
                          </div> -->
                     </div>
                     <div class="kt-portlet__body1" style="padding: 10px;">
@@ -1437,7 +1437,7 @@ function viewApprovalAllUsers(id){
                     </div>
                     <div class="row">
                         <div class="col-lg-9">
-                            <?php 
+                            <?php
                             $array_table = array('requisition'=>'quotation_table_new','petty_cash'=>'petty_cash_table','bills'=>'bill_table','goods_receipt_notes'=>'grn_table','stock_receipts'=>'stock_receive_table','stock_adjust_table'=>'stock_adjust_table','genral'=>'genral_table','account'=>'account_table','esgin_table'=>'esgin_table','vrc_table'=>'vrc_table','mpc_table'=>'mpc_table','glod_table'=>'glod_table');
                             $display_table =$array_table[$table_list[$option]['display_table']].'.php';
                             include_once($display_table);
@@ -1448,7 +1448,7 @@ function viewApprovalAllUsers(id){
                                     <button class="btn btn-success" id="addRows" type="button">+ <?= __('Add More') ?></button>
                                 </div>
                             </div>
-                            
+
                            <div>
                                 <div style="float: left;width: 48%;padding: 1%;">
                                     <label for="notes" class=""><?= __('Internal Note(s)') ?> </label>
@@ -1467,8 +1467,8 @@ function viewApprovalAllUsers(id){
                             <div class="btn-group" style="margin-top: 10px;float: right;">
                                      <button id="kt_llogin_signup_submit"  class="btn btn-brand" ><?= __('Submit1') ?></button>
                             </div>
-                            <?php }  ?>           
-                            
+                            <?php }  ?>
+
                         </div>
                         <div class="col-lg-3 p-r-0">
                         <div style="position: sticky;top: 20px;">
@@ -1501,13 +1501,13 @@ function viewApprovalAllUsers(id){
                                 </div>
 
 
-                                    <!-- <div  class="w-full">  
+                                    <!-- <div  class="w-full">
                                         <select class="form-select js-example-basic-single" id="disType" name="discount_type" onchange="calculateTotal()" aria-label="Discount Type">
                                             <option value="P"><?= __('Percentage') ?></option>
                                             <option <?php if($table1['discount_type'] == 'A'){ ?> selected <?php } ?> value="A"><?= __('Amount') ?></option>
                                         </select>
                                     </div> -->
-                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right" placeholder="<?= __('Enter value') ?>" name="discount_value" id="disValue" aria-label="Enter value"> 
+                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right" placeholder="<?= __('Enter value') ?>" name="discount_value" id="disValue" aria-label="Enter value">
                                 </th>
                                 <td class="p-2 align-middle text-right">
                                     <span id="dis_discountid">
@@ -1521,7 +1521,7 @@ function viewApprovalAllUsers(id){
                             <tr>
                                 <th scope="col" class="amount text-start p-2">
                                     <span >Shipping</span>
-                                    <div class="">  
+                                    <div class="">
                                         <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" aria-label="Shipping Tax">
                                             <option value="0"><?= __('Tax') ?></option>
                                             <?php foreach ($taxres as $key => $tax) {  ?>
@@ -1547,28 +1547,28 @@ function viewApprovalAllUsers(id){
                                     foreach ($distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
                                     <?php if($table1['tax_state'] == 'S'){ ?>
                                     <tr>
-                                        <td class="p-2">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>                
+                                        <td class="p-2">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>
                                         </td>
-                                        <td class="text-end p-2"> 
-                                            <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']/2); ?></span> 
+                                        <td class="text-end p-2">
+                                            <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']/2); ?></span>
                                             <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2">  SGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>               
+                                        <td class="p-2">  SGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>
                                         </td>
-                                        <td class="text-end p-2"> 
-                                            <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']/2); ?></span> 
-                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">           
+                                        <td class="text-end p-2">
+                                            <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']/2); ?></span>
+                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">
                                         </td>
                                     </tr>
-                                <?php } else{  ?> 
+                                <?php } else{  ?>
                                     <tr>
-                                        <td class="p-2">  IGST @ <?php echo customeummarmonyformate($ktax['percentage']); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>         
+                                        <td class="p-2">  IGST @ <?php echo customeummarmonyformate($ktax['percentage']); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>
                                         </td>
-                                        <td class="text-end p-2">  
+                                        <td class="text-end p-2">
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']); ?></span>
-                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            
+                                            <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">
                                         </td>
                                     </tr>
                                 <?php }?>
@@ -1584,11 +1584,11 @@ function viewApprovalAllUsers(id){
                             <?php if($table_name == 'bills'){ ?>
                             <tr>
                                 <th scope="col" class="amount p-2">
-                                    <div> 
+                                    <div>
                                         <div style="float: left;width: 50%;padding: 10px;">
                                             <span >TDS</span>
                                         </div>
-                                        <div style="float: left;width: 50%;padding: 3px;">  
+                                        <div style="float: left;width: 50%;padding: 3px;">
                                             <select class="form-control"  name="shipping_tax" id="tds_tax" onchange="calculateTotal()" aria-label="Shipping Tax">
                                                 <option value="0"> Select Any Tax Rate </option>
                                                 <?php foreach ($tdstaxres as $key => $tax) {  ?>
@@ -1596,7 +1596,7 @@ function viewApprovalAllUsers(id){
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                    </div>  
+                                    </div>
                                 </th>
                                 <td>
                                     <input type="hidden" name="shipping_tax_amount" id="tds_tax_amount" value="0">
@@ -1630,7 +1630,7 @@ function viewApprovalAllUsers(id){
                                 <td colspan="2" >
                                     <table  id='exchange'  class=" table table-bordered " style="float: right;">
                                         <tr>
-                                            <!-- <th scope="col" class="amount">Exchange Rate</th> -->  
+                                            <!-- <th scope="col" class="amount">Exchange Rate</th> -->
                                             <th scope="col" class="amount"><?= __('Sub total') ?></th>
                                             <th scope="col" class="amount"><?= __('Tax') ?></th>
                                             <th scope="col" class="amount"><?= __('Discount') ?></th>
@@ -1647,23 +1647,23 @@ function viewApprovalAllUsers(id){
                                 </td>
                             </tr>
                         </table>
-                       </div> 
-                </div> 
-            </div>      
+                       </div>
+                </div>
+            </div>
         </div>
     </div>
-    <input type="hidden" name="table_name"  id="table_name" value="<?php echo $_GET['table']; ?>"> 
-    <input type="hidden" name="hid"  id="hid" value="<?php echo $_GET['Rid']; ?>"> 
+    <input type="hidden" name="table_name"  id="table_name" value="<?php echo $_GET['table']; ?>">
+    <input type="hidden" name="hid"  id="hid" value="<?php echo $_GET['Rid']; ?>">
 </div>        </form>
-    </div> 
+    </div>
     </div>
 </div>
- 
+
 </div>
 <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl" style="max-width: 800px;">
         <div class="modal-content" style="min-height: 50px;width: 800px;" id="popup1">
-            
+
         </div>
     </div>
 </div>

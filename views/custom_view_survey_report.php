@@ -26,7 +26,7 @@ $maxoptions = isset($surveyData['maxoptions']) ? (int)$surveyData['maxoptions'] 
 					<?php } ?>
 				</tr>
 			</thead>
-			<tbody> 
+			<tbody>
 				<?php if(count((array)$surveyData['survey_question']) > 0){
 					$id = 0;
 					foreach($surveyData['survey_question'] as $qkey=>$que) { $id++; ?>
@@ -34,7 +34,7 @@ $maxoptions = isset($surveyData['maxoptions']) ? (int)$surveyData['maxoptions'] 
 					<td><?php echo $id; ?> </td>
 					<td><?php echo $que; ?> </td>
 					<?php if(count((array)$surveyData['option'][$qkey]['option']) > 0){
-						foreach($surveyData['option'][$qkey]['option'] as $optionvalue) { 
+						foreach($surveyData['option'][$qkey]['option'] as $optionvalue) {
 						?>
 					<td ><span class="text-muted font-size-h6"><?php echo $optionvalue; ?></span>  </td>
 					<?php }
@@ -45,7 +45,7 @@ $maxoptions = isset($surveyData['maxoptions']) ? (int)$surveyData['maxoptions'] 
 					<td></td>
 					<td><span class="text-success"><?= __('Number of Responded'); ?> </span></td>
 					<?php if(count((array)$surveyData['option'][$qkey]['answer']) > 0){
-						foreach($surveyData['option'][$qkey]['answer'] as $optionans) { 
+						foreach($surveyData['option'][$qkey]['answer'] as $optionans) {
 						?>
 					<td> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?= htmlspecialchars(__('Number Of Responded'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;"><?php echo $optionans; ?> </span> </td>
 					<?php }

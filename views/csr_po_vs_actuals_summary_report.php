@@ -145,7 +145,7 @@ $_SESSION['download_data'] = [];
                                     <?php } ?>
 
                                     <td class="csr-sticky-col csr-sticky-partner"><?php echo $row['business_partner_name'] ?? '-'; ?></td>
-                                    <?php foreach ($normalizedFyList as $fy) { 
+                                    <?php foreach ($normalizedFyList as $fy) {
                                         $fyText = $fy['text'];
                                         $fyKey  = $fy['key'];
                                         $poValue = $row["po_value_$fyKey"] ?? 0;

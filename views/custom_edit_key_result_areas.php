@@ -6,7 +6,7 @@ include_once('../comm.php');
 	$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'id'=>$_POST['id']);
 	$wh1['field'] = "id,area_name,description,weightage,kra_type";
 	$data1 = urlencode(json_encode($wh1));
-	$url1 = API."?mode=gettabledetailswithconditions&table=".$kratable."&data=".$data1; 
+	$url1 = API."?mode=gettabledetailswithconditions&table=".$kratable."&data=".$data1;
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$json = $json[0];
@@ -16,7 +16,7 @@ include_once('../comm.php');
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 	</div>
 	<input type="hidden" name="pop_kra_id" id="pop_kra_id" value="<?php echo $_POST['id']; ?>">
-	<div class="modal-body" > 
+	<div class="modal-body" >
 		<div class="row align-items-center" >
 			<div class="row">
 				<div class="col-lg-4 form-group">
@@ -36,7 +36,7 @@ include_once('../comm.php');
 					<select class="form-control form-select js-example-basic-single" id="pop_kra_type" name="pop_kra_type" aria-label="<?= __('Type') ?>"><option value="1" <?php echo $json['kra_type'] == '1'?'selected':''; ?>><?= __('Professional') ?></option><option value="2" <?php echo $json['kra_type'] == '2'?'selected':''; ?>><?= __('Personal') ?></option></select>
 				</div>
 
-			</div>		
+			</div>
 		</div>
 	</div>
 	<div class="modal-footer">

@@ -13,7 +13,7 @@ $additional_license_lot =$subscription_plans['additional_license_lot'];
 $standard_price = $_POST['agreed_price'];
 
 if($company_subscription_plans['standard_user_limit'] !=0 AND $company_subscription_plans['standard_user_limit'] !=""){
-	$additional_license_lot_price=round($standard_price/$company_subscription_plans['standard_user_limit']); 
+	$additional_license_lot_price=round($standard_price/$company_subscription_plans['standard_user_limit']);
 }else{
 	$additional_license_lot_price = round($standard_price);
 }
@@ -25,7 +25,7 @@ if($company_subscription_plans['standard_user_limit'] !=0 AND $company_subscript
 		var additional_license_lot_price_popup= $("#additional_license_lot_price_popup").val();
 		var standard_user_limit_popup= $("#standard_user_limit_popup").val();
 		var standard_price_popup= $("#standard_price_popup").val();
-		
+
 		var thislicenstotal = parseInt(additional_license_lot_popup) + parseInt(standard_user_limit_popup);
 		console.log(thislicenstotal);
 		if(thislicenstotal % additional_license_lot_limit_popup){
@@ -40,7 +40,7 @@ if($company_subscription_plans['standard_user_limit'] !=0 AND $company_subscript
 			//console.log("ok - "+thislicenstotal);
 			var aditional_ll_price = parseInt(additional_license_lot_price_popup)*parseInt(additional_license_lot_popup);
 			//var total_aditional_ll_price = parseInt(aditional_ll_price)+parseInt(standard_price_popup);
-			
+
 
 			$("#additional_license_lot_price").val(isNaN(aditional_ll_price)?'0':aditional_ll_price);
 			$("#total_license_lot_price").val(isNaN(aditional_ll_price)?'0':aditional_ll_price);
@@ -66,11 +66,11 @@ if($company_subscription_plans['standard_user_limit'] !=0 AND $company_subscript
 			    //     type: "POST",
 			    //     data: 'ajaxsub=Y&subscription_group_id='+subscription_group_id,
 			    //     success: function(response) {
-			    //     	$("#productajax").html(response);	
+			    //     	$("#productajax").html(response);
 			    //     	console.log(response);
-			             	
+
 			    //     }
-			    // }); 	
+			    // });
 	        }
 	    });
 	}
@@ -113,20 +113,20 @@ function popDiscount(){
 				</div>
 				<div class="col-lg-3 form-group">
 					<span class="form-label  d-inline-block fw-bold"><?php echo __('Additi License Users'); ?></span>
-				 	<input class="form-control text-right" type="text" name="additional_license_lot_popup" id="additional_license_lot_popup" value="" onblur="additionalLicenseValidation()" aria-label="<?php echo __('Additional License Lot Popup'); ?>"> 
+				 	<input class="form-control text-right" type="text" name="additional_license_lot_popup" id="additional_license_lot_popup" value="" onblur="additionalLicenseValidation()" aria-label="<?php echo __('Additional License Lot Popup'); ?>">
 				</div>
 				<div class="col-lg-3 form-group">
 					<span class="form-label d-inline-block fw-bold"><?php echo __('Additi License Price'); ?></span>
-				 	<input class="form-control text-right" type="text" name="additional_license_lot_price" id="additional_license_lot_price" value="0" readonly="" aria-label="<?php echo __('Additional License Lot Price'); ?>"> 
+				 	<input class="form-control text-right" type="text" name="additional_license_lot_price" id="additional_license_lot_price" value="0" readonly="" aria-label="<?php echo __('Additional License Lot Price'); ?>">
 				</div>
 				<div class="col-lg-3 form-group">
 					<span class="form-label d-inline-block fw-bold"><?php echo __('Discount'); ?></span>
-				 	<input class="form-control text-right" type="text" name="additional_license_lot_discount" id="additional_license_lot_discount" value="0" onblur="popDiscount()" aria-label="<?php echo __('Additional License Lot Discount'); ?>"> 
+				 	<input class="form-control text-right" type="text" name="additional_license_lot_discount" id="additional_license_lot_discount" value="0" onblur="popDiscount()" aria-label="<?php echo __('Additional License Lot Discount'); ?>">
 				</div>
 				<div class="col-lg-3 form-group">
 					<span class="form-label d-inline-block fw-bold"><?php echo __('Total Price'); ?></span>
 
-				 	<input class="form-control text-right" type="text" name="total_license_lot_price" id="total_license_lot_price" value="0" readonly="" aria-label="<?php echo __('Total License Lot Price'); ?>"> 
+				 	<input class="form-control text-right" type="text" name="total_license_lot_price" id="total_license_lot_price" value="0" readonly="" aria-label="<?php echo __('Total License Lot Price'); ?>">
 				</div>
 			</div>
 
@@ -135,7 +135,7 @@ function popDiscount(){
 	<input type="hidden" name="subscription_type"  class="form-control" value="<?php echo $company_subscription_plans['subscription_type']; ?>" >
 	<input type="hidden" name="discount_price"  class="form-control" value="<?php echo $_POST['discount_price']; ?>" >
 
-	<input class="form-control text-right" type="hidden" name="total_advancetotalprice" id="total_advancetotalprice" value="0" readonly=""> 
+	<input class="form-control text-right" type="hidden" name="total_advancetotalprice" id="total_advancetotalprice" value="0" readonly="">
 	<input type="hidden" name="company_subscr_id_popup" id="company_subscr_id_popup" value="<?php echo $_POST['company_subscr_id'];?>" >
 	<input type="hidden" name="standard_price_popup" id="standard_price_popup" value="<?php echo $standard_price;?>" >
 	<input type="hidden" name="additional_license_lot_limit_popup" id="additional_license_lot_limit_popup" value="<?php echo $additional_license_lot; ?>" >
@@ -144,4 +144,4 @@ function popDiscount(){
 	<button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>
 	<button type="button" class="btn btn-primary mr-2" onclick="submitFormSubscribdditionserv()" ><?php echo __('Submit'); ?></button>
 </div>
-	</form> 
+	</form>

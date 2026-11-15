@@ -1,4 +1,4 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = "1";
 
 if(isset($_POST['submitemptytransactions'])){
@@ -8,23 +8,23 @@ if(isset($_POST['submitemptytransactions'])){
 	$response1 = file_post_contents($url, $_POST, 'insert');
 	$res = json_decode($response1,1);
 	$response = $res['result'];
-	//echo "<pre>"; print_r($res); echo "</pre>"; 
-	if($response['status'] == 'sucess'){ 
+	//echo "<pre>"; print_r($res); echo "</pre>";
+	if($response['status'] == 'sucess'){
 		if($response['LASTID'] == 0){
             $msgcode = 3001; //update
         }else{
             $msgcode = 3000; //insert
            	header("location:index?option=COM_LIST_APPLICATION_EMPTY_TRANSACTIONS");
-        }   
+        }
         ?>
         <script type="text/javascript">
         	document.onreadystatechange = function(){
         		if(document.readyState == "complete") {
         			tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][$msgcode]; ?>','');
-        		} 
+        		}
         	}
         </script>
-        <?php    
+        <?php
     }else{
         //($response['status'] == 'fail'){
     	if(isset($_SESSION['error'][$response['error_no']])){
@@ -46,7 +46,7 @@ $rid =  encodeId($_GET['Rid']);
 $rid = urldecode($rid);
 $rid = explode(':', $rid);
 $rid = $rid['1'];
-$url1 = API."?mode=getapplicationemptytransactions&rid=".$rid;  
+$url1 = API."?mode=getapplicationemptytransactions&rid=".$rid;
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);
 
@@ -57,20 +57,20 @@ $transaction_table = $result['transaction_table'];
 $application_messages = $result['application_messages'];
 $transaction_tables_json =  json_decode($application_empty_transactions['transaction_tables'],1);
 $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert Option');
-//echo "<pre>"; print_r($application_empty_transactions);echo "</pre>"; 
+//echo "<pre>"; print_r($application_empty_transactions);echo "</pre>";
 ?>
 <script type="text/javascript">
 	var maxsar = 100;
 	function addMoreApplicationEmptyTransactions(){
 		maxsar = maxsar+1;
-		var id = 'rowapplicationemptytransactions_'+maxsar; 
+		var id = 'rowapplicationemptytransactions_'+maxsar;
 	    var html ="";
 	    html += '<div class="row mt-3" id="'+id+'">';
 	    html += '<div class="col-lg-3"><select name="transaction_table[]" class="form-control form-select js-example-basic-single" aria-label="Transaction Table"><option value="">Select Any One </option><?php foreach($transaction_table as $tableval) {  ?><option value="<?php echo $tableval; ?>"><?php echo $tableval;?></option><?php } ?></select></div>';
 	    html += '<div class="col-lg-2"><select name="option_type[]" class="form-control form-select js-example-basic-single" aria-label="Option Type"> <?php foreach($option_type as $optkey=>$optype) {  ?><option value="<?php echo $optkey; ?>" <?php echo $optkey ==$ttj['transaction_table']?"selected":""; ?>><?php echo $optype;?></option><?php } ?></select></div>';
 
 	    html += '<div class="col-lg-3"><select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="Application Message Code"><option value="">Select Any One </option><?php foreach($application_messages as $amessage) {  ?><option value="<?php echo $amessage['message_number']; ?>" ><?php echo preg_replace("/\s+/", " ", $amessage['message_number']." - ".$amessage['message_description']);?></option><?php } ?></select></div>';
-	    
+
 	    html += '<div class="col-lg-3"><textarea type="text" class="form-control" name="extra_message[]" aria-label="Extra Message"></textarea> </div>';
 
 	    html += '<div class="col-lg-1"><i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow(\''+id+ '')"></i></div>';
@@ -86,7 +86,7 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 		var transaction_table = $("#transaction_table_"+rowseq).val();
 		$("#extra_message_"+rowseq).val(transaction_table);
 	}
-	
+
 
 
 </script>
@@ -94,7 +94,7 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
     <div class="card-header">
         <h5> Empty Transactions </h5>
         <div class="card-header-right table-card-header">
-          <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back') ?></a>                  
+          <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back') ?></a>
         </div>
     </div>
     <div class="card-body">
@@ -107,7 +107,7 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 		            <?php foreach($module_setup as $mods) {  ?>
 		              <option value="<?php echo $mods['module_id']; ?>" <?php echo $mods['module_id'] ==$application_empty_transactions['module_setup_id']?"selected":""; ?>><?php echo $mods['display_name'];?></option>
 		            <?php } ?>
-		        </select>  
+		        </select>
 	        </div>
 	        <div class="form-group col-lg-2 text-center ">
 	        	<span class="form-label  mt-4 d-inline-block fw-bold"> <?= __('OR') ?> </span>
@@ -119,7 +119,7 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 		            <?php foreach($application_pages as $optionkey=>$val) {  ?>
 		              <option value="<?php echo $optionkey; ?>" <?php echo $optionkey ==$application_empty_transactions['page_option']?"selected":""; ?>><?php echo $val;?></option>
 		            <?php } ?>
-		        </select>  
+		        </select>
 	        </div>
 	    </div>
 	    <div class="row">
@@ -137,10 +137,10 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 	    	</div>
 	    </div>
 	    <div id="newaddmoreapplicationemptytransactions">
-	    	<?php 
-	    		$im = 1; 
-	    		foreach($transaction_tables_json as $ttj){ 
-	    			$rowid = 'rowapplicationemptytransactions_'.$im; 
+	    	<?php
+	    		$im = 1;
+	    		foreach($transaction_tables_json as $ttj){
+	    			$rowid = 'rowapplicationemptytransactions_'.$im;
 	    	?>
 			    <div class="row mt-2" id="<?php echo $rowid; ?>">
 			    	<div class="col-lg-3">
@@ -149,14 +149,14 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 				            <?php foreach($transaction_table as $tableval) {  ?>
 				              <option value="<?php echo $tableval; ?>" <?php echo $tableval ==$ttj['transaction_table']?"selected":""; ?>><?php echo $tableval;?></option>
 				            <?php } ?>
-				        </select>  
+				        </select>
 			    	</div>
 			    	<div class="col-lg-2">
 			    		<select name="option_type[]" class="form-control form-select js-example-basic-single" aria-label="Option Type">
 				            <?php foreach($option_type as $optkey=>$optype) {  ?>
 				              <option value="<?php echo $optkey; ?>" <?php echo $optkey ==$ttj['option_type']?"selected":""; ?>><?php echo $optype;?></option>
 				            <?php } ?>
-				        </select>  
+				        </select>
 			    	</div>
 			    	<div class="col-lg-3">
 			    		<select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="Application Message Code">
@@ -164,10 +164,10 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 				            <?php foreach($application_messages as $amessage) {  ?>
 				              <option value="<?php echo $amessage['message_number']; ?>" <?php echo $amessage['message_number'] ==$ttj['application_message_code']?"selected":""; ?>><?php echo $amessage['message_number']." - ".$amessage['message_description'];?></option>
 				            <?php } ?>
-				        </select>  
+				        </select>
 			    	</div>
 			    	<div class="col-lg-3">
-			    		<textarea type="text" class="form-control" name="extra_message[]" id="extra_message_<?php echo $im; ?>" aria-label="Extra Message"><?php echo $ttj['extra_message']; ?></textarea> 
+			    		<textarea type="text" class="form-control" name="extra_message[]" id="extra_message_<?php echo $im; ?>" aria-label="Extra Message"><?php echo $ttj['extra_message']; ?></textarea>
 			    	</div>
 			    	<div class="col-lg-1">
 			    		<i role="button" tabindex="0" aria-label="Remove" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow('<?php echo $rowid; ?>')"></i>
@@ -179,8 +179,8 @@ $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert
 			<button type="button"  class="btn btn-success" onclick="addMoreApplicationEmptyTransactions()"><i class="ti-plus"></i>  <?= __('Add More Transaction') ?></button>
 		</div>
 		<div>
-			<input type="hidden" name="rid" value="<?php echo $rid; ?>">  
-			<button type="submit" class="btn btn-primary waves-effect waves-light" name="submitemptytransactions"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?__("Submit"):__("Update"); ?></button> 
+			<input type="hidden" name="rid" value="<?php echo $rid; ?>">
+			<button type="submit" class="btn btn-primary waves-effect waves-light" name="submitemptytransactions"><i class="fa fa-check m-r-10"></i> <?php echo $rid ==""?__("Submit"):__("Update"); ?></button>
 		</div>
 	</form>
     </div>

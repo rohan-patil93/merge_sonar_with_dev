@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 if($_GET['print'] =="Y"){
 	include_once('../includes/session.php');
@@ -21,11 +21,11 @@ if($_POST['callapi'] =='Y'){
 	$rental_invoice_item_taxes = $_POST['rental_invoice_item_taxes'];
 }else{
 	$rid = $_GET['rid'];
-	$table = $_GET['table'];    
-	$api = API."?mode=getrentalinvoiceprint&rid=".$rid."&transaction_table=".$transaction_table; 
+	$table = $_GET['table'];
+	$api = API."?mode=getrentalinvoiceprint&rid=".$rid."&transaction_table=".$transaction_table;
 	$apicall = callAPI($api);
 	$result = json_decode($apicall, 1);
-	
+
 	$config = $result['config'];
 	$transaction = $result['rental_invoices'];
 	$transaction_items = $result['rental_invoice_items'];
@@ -65,8 +65,8 @@ foreach ((array)$rental_invoice_item_taxes as  $taxvalue) {
 
 // function currencyFormat($number,$config){
 // 	$num = $config['number_format'] !='' ? $config['number_format'] :2;
-// 	$return = number_format($number, $num, '.', ','); 
-// 	return $return!='0.00' ?$return : '-'; 
+// 	$return = number_format($number, $num, '.', ',');
+// 	return $return!='0.00' ?$return : '-';
 // }
 $rental_invoice_item_taxes = array();
 $totaltax = 0;
@@ -130,7 +130,7 @@ function numberToWordFormate($number){
 	$str = array_reverse((array)$str);
 	$result = implode('', (array)$str);
 	$points = ($point) ?
-	". " . $words[$point / 10] . " " . 
+	". " . $words[$point / 10] . " " .
 	$words[$point = $point % 10] : '';
 	if($result !=''){
 		$result = $result . "Rupees  ";
@@ -159,7 +159,7 @@ function emptyCheck($valu){
 // 	}else{
 // 		$from = date($dateformat);
 // 	}
-// 	return $from; 
+// 	return $from;
 // }
 ?>
 <?php if($callapi !='Y'){ ?>
@@ -196,7 +196,7 @@ function emptyCheck($valu){
 	       document.body.innerHTML = originalContents;
 	   	}
 	function convertHTMLToPDF() {
-		var  title ='<?php echo urldecode($transaction_table); ?>'; 
+		var  title ='<?php echo urldecode($transaction_table); ?>';
 	        var htmlContent = $('#printDiv').html();
 	        $.ajax({
 	            url: 'convert_html_to_pdf.php',
@@ -232,7 +232,7 @@ function emptyCheck($valu){
 	<div class="" style="width: 793px;margin: 0 auto;"> <?php } ?>
 		<div id="printDiv">
 			<h1 style="font-size:30px;color: #000000;margin: 30px 0 50px 0;text-align: left;text-transform: uppercase;">
-				<?php 
+				<?php
 				if($transaction_table == "utility_rental_invoices"){
 					echo __('Reimbursement Bill');
 				}elseif($transaction_table == "credit_notes"){
@@ -276,7 +276,7 @@ function emptyCheck($valu){
 	                    <td style="padding-top: 5px;text-align: left;font-size: 12px;"><?php echo $owner_additional_details['contact_no']!=""?$owner_additional_details['contact_no']:$bill_by['user_mobile']; ?></td>
 	                </tr>
 	            </table>
-	        </div> 
+	        </div>
 	        <div class="" style="width:50%;display: inline-block;vertical-align: middle;">
 	            <div class="" style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;margin-left: 5px;">
 		            <span style="color: #333333;font-size: 12px;font-weight: 500;"><?= __('Billed by'); ?>:</span>
@@ -285,7 +285,7 @@ function emptyCheck($valu){
 		            <table style="width: 100%;">
 		                <tr>
 		                    <th style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('GSTIN'); ?>:</th>
-		                    <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php //echo emptyCheck($owner_additional_details['gst_no']!=""?$owner_additional_details['gst_no']:$config['gst_number']); 
+		                    <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php //echo emptyCheck($owner_additional_details['gst_no']!=""?$owner_additional_details['gst_no']:$config['gst_number']);
 		                   echo $owner_additional_details['gst_no']!=""?$owner_additional_details['gst_no']:"-"; ?></td>
 		                </tr>
 		                <tr>
@@ -318,7 +318,7 @@ function emptyCheck($valu){
 			        	<div class="" style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
 				            <span style="color: #333333;font-size: 12px;font-weight: 500;"><?= __('Shipped to'); ?></span>
 				            <p style="font-size: 12px;margin:5px 0 0 0;"><?php echo $transaction['party_name']; ?></p>
-				            <p style="font-size: 12px;color:#333333;margin:5px 0 0 0;white-space:initial;min-height: 30px;"><?php echo emptyCheck($transaction['party_ship_adderss']); ?></p> 
+				            <p style="font-size: 12px;color:#333333;margin:5px 0 0 0;white-space:initial;min-height: 30px;"><?php echo emptyCheck($transaction['party_ship_adderss']); ?></p>
 				            <table style="width: 100%;">
 				                <tr>
 				                    <th style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('GSTIN'); ?>:</th>
@@ -333,16 +333,16 @@ function emptyCheck($valu){
 			        </td>
 		        <tr>
 		    </table>
-	       
+
 
 	        <table style="width:99%;margin:10px 0 0 0;">
-	        	<?php if($transaction['ref_bill_type'] == "U"){	 
+	        	<?php if($transaction['ref_bill_type'] == "U"){
 		        		$childary = array();
 						foreach($transaction_items as $ta){
 							if($ta['parent_id'] == '0'){
-								$childary[$ta['item_id']] = $ta; 
-							}else{ 
-								$childary[$ta['parent_id']]['CHILD'][] = $ta; 
+								$childary[$ta['item_id']] = $ta;
+							}else{
+								$childary[$ta['parent_id']]['CHILD'][] = $ta;
 							}
 						}
 	        			?>
@@ -351,13 +351,13 @@ function emptyCheck($valu){
 		                <th style="padding:5px;text-align: left;font-size: 12px;"><?= __('Note'); ?></th>
 						<th style="padding:5px;text-align: right;font-size: 12px;"><?= __('Total'); ?></th>
 		            </tr>
-		            <?php foreach($childary as $parentkey=>$valu){  
+		            <?php foreach($childary as $parentkey=>$valu){
 		            		if(isset($valu['CHILD'])){
 			            		$totalamt = 0;
 			            		foreach($valu['CHILD'] as $vl){
-			            			if($vl['total_amount'] !=""){ 
+			            			if($vl['total_amount'] !=""){
 			            				$totalamt += $vl['total_amount'];
-			            			} 
+			            			}
 			            		}
 			            	?>
 			            	<tr style="border: 1px solid #cccccc;">
@@ -393,8 +393,8 @@ function emptyCheck($valu){
 	                <th style="padding:5px;text-align: left;font-size: 12px;"><?= __('Particular'); ?></th>
 	                <th scope="col" style="padding:5px;text-align: left;font-size: 12px;"><?= __('Note'); ?></th>
 					<th scope="col" style="padding:5px;font-size: 12px;"><?= __('HSN/SAC'); ?></th>
-	                <th scope="col" style="padding:5px;font-size: 12px;"><?= __('Qty'); ?></th> 
-	                <th scope="col" style="padding:5px;font-size: 12px;"><?= __('UOM'); ?></th> 
+	                <th scope="col" style="padding:5px;font-size: 12px;"><?= __('Qty'); ?></th>
+	                <th scope="col" style="padding:5px;font-size: 12px;"><?= __('UOM'); ?></th>
 	                <th scope="col" style="padding:5px;text-align: right;font-size: 12px;"><?= __('Rate'); ?></th>
 	              	<th scope="col" style="padding:5px;text-align: right;font-size: 12px;"><?= __('Total'); ?></th>
 	            </tr>
@@ -410,7 +410,7 @@ function emptyCheck($valu){
 	            </tr>
 	        	<?php } } ?>
 	        </table>
-	        
+
 
 	        <table style="width:99%;margin-top:5px;">
 	        	<tr>
@@ -438,7 +438,7 @@ function emptyCheck($valu){
 		                            <th style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('Account Type'); ?>:</th>
 		                            <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;">
 		                            	<?php  echo $owner_additional_details['account_type']!=""?$account_types[$owner_additional_details['account_type']]:$account_types[$bank_accounts['account_type']]; ?>
-		                            	
+
 		                            </td>
 		                        </tr>
 		                    </table>
@@ -453,38 +453,38 @@ function emptyCheck($valu){
 			                </tr>
                             <?php  if(count((array)$distax)){
                                     foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
-                                    <?php 
+                                    <?php
                                         if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>
                                     <tr>
-                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?= __('CGST @'); ?> <?php echo $ktax['percentage']/2; ?>%                
+                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?= __('CGST @'); ?> <?php echo $ktax['percentage']/2; ?>%
                                         </td>
-                                        <td style="padding-top: 5px;text-align: right;font-size: 12px;"> 
-                                            <span id="dis_taxRateid"><?php echo currencyFormat($ktax['tax_amount']/2,$config); ?></span> 
-                                            
+                                        <td style="padding-top: 5px;text-align: right;font-size: 12px;">
+                                            <span id="dis_taxRateid"><?php echo currencyFormat($ktax['tax_amount']/2,$config); ?></span>
+
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?= __('SGST @'); ?> <?php echo $ktax['percentage']/2; ?>%               
+                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?= __('SGST @'); ?> <?php echo $ktax['percentage']/2; ?>%
                                         </td>
-                                        <td style="padding-top: 5px;text-align: right;font-size: 12px;"> 
-                                            <span id="dis_taxRateid"><?php echo currencyFormat($ktax['tax_amount']/2,$config); ?></span> 
-                                                     
+                                        <td style="padding-top: 5px;text-align: right;font-size: 12px;">
+                                            <span id="dis_taxRateid"><?php echo currencyFormat($ktax['tax_amount']/2,$config); ?></span>
+
                                         </td>
                                     </tr>
-                                <?php } else{  ?> 
+                                <?php } else{  ?>
                                     <tr>
-                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?= __('IGST @'); ?> <?php echo currencyFormat($ktax['percentage'],$config); ?><?= __('% on'); ?> <?php echo currencyFormat($ktax['amount'],$config); ?>         
+                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;">  <?= __('IGST @'); ?> <?php echo currencyFormat($ktax['percentage'],$config); ?><?= __('% on'); ?> <?php echo currencyFormat($ktax['amount'],$config); ?>
                                         </td>
-                                        <td style="padding-top: 5px;text-align: right;font-size: 12px;">  
+                                        <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                             <span id="dis_taxRateid"><?php echo currencyFormat($ktax['tax_amount'],$config); ?></span>
-                                           
+
                                         </td>
                                     </tr>
                                 <?php }?>
                             <?php } //}  ?>
 			                <tr>
 			                    <th style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('Round Off'); ?></th>
-			                    <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php 
+			                    <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php
 			                    echo $transaction['rounding_off'];
 			                    //echo round(round($transaction['total_amount'])-$transaction['total_amount'],2); ?></td>
 			                </tr>
@@ -517,8 +517,8 @@ function emptyCheck($valu){
 			    	</td>
 			    </tr>
 			</table>
-	    </div> 
-	    <?php if($callapi !='Y'){ ?> 
+	    </div>
+	    <?php if($callapi !='Y'){ ?>
 	</div>
 	<div class="invoice-btn-section clearfix d-print-none">
         <button class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printDiv');">

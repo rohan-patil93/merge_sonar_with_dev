@@ -12,8 +12,8 @@ if(isset($_POST['submit_sh'])){
 	$response = file_post_contents($url, $data, 'insert');
 }
 $vdata1["where"] = array('is_active'=> 0);
-	$vdata = urlencode(json_encode($vdata1)); 
-	$vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata; 
+	$vdata = urlencode(json_encode($vdata1));
+	$vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$emp = json_decode($configesponse,1);
 	$response = $emp;
@@ -24,24 +24,24 @@ if(isset($_POST['submit_shift'])){
 	$response = json_decode($response,1);
 	//print_r($response); exit;
 	$sfwr["where"] = array('is_active'=> 0);
-	$sfwre = urlencode(json_encode($sfwr)); 
+	$sfwre = urlencode(json_encode($sfwr));
 
 }
 
-	$vurl = API."?mode=gettabledetailswithconditions&table=shifts&data=".$sfwre; 
+	$vurl = API."?mode=gettabledetailswithconditions&table=shifts&data=".$sfwre;
 	//echo $vurl;
 	$Shifts = callAPI($vurl);
 	$Shifts = json_decode($Shifts,1);
 	//print_r($Shifts);
-	
+
 $dpwr["where"] = array('is_active'=> 0);
-$dpwr = urlencode(json_encode($dpwr)); 
-$vurl = API."?mode=gettabledetailswithconditions&table=departments&data=".$dpwr; 
+$dpwr = urlencode(json_encode($dpwr));
+$vurl = API."?mode=gettabledetailswithconditions&table=departments&data=".$dpwr;
 $departments = callAPI($vurl);
 $departments = json_decode($departments,1);
 
 
-$vurl = API."?mode=gettabledetailswithconditions&table=designations&data=".$dpwr; 
+$vurl = API."?mode=gettabledetailswithconditions&table=designations&data=".$dpwr;
 $designations = callAPI($vurl);
 $designations = json_decode($designations,1);
 
@@ -53,7 +53,7 @@ $designations = json_decode($designations,1);
 
 			<div class="row">
       <div class="col-lg-12">
-         <div class="card">            
+         <div class="card">
             <div class="card-header table-card-header">
                <h5><?= __("Employee shift Assign") ?></h5>
          <div class="card-header-right table-card-header">
@@ -110,7 +110,7 @@ $designations = json_decode($designations,1);
 						</div>
 					</div>
 					<!--begin: Datatable-->
-				</form> 
+				</form>
 				<form method="post" action="" enctype="multipart/form-data">
 				<div class="row align-items-center mt-3">
 					<div class="col-lg-12">
@@ -141,7 +141,7 @@ $designations = json_decode($designations,1);
 									<label class="mr-3 mb-0 d-none d-md-block" for="kt_datepicker_to"><?= __("To:") ?>&nbsp;</label>
 									<div class="input-group date mt-3">
 										<?php $date_pic = fromDate($role[$key]); ?>
-										<input type="date" class="form-control" style="height: 45px;" value="<?php echo  $date_pic; ?>"  name="to"  id="kt_datepicker_to" />										
+										<input type="date" class="form-control" style="height: 45px;" value="<?php echo  $date_pic; ?>"  name="to"  id="kt_datepicker_to" />
 									</div>
 								</div>
 							</div>
@@ -165,16 +165,16 @@ $designations = json_decode($designations,1);
 							<th scope="col"><?= __("Date of birth") ?></th>
 							<th scope="col"><?= __("Actions") ?></th>
 						</tr>
-					</thead>	
-					<?php foreach ($response as $empp) { ?>		
+					</thead>
+					<?php foreach ($response as $empp) { ?>
 						<tr>
 							<td>
 								<div class="checkbox-inline">
 					                <label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="checkbox checkbox-primary">
 					                    <input type="checkbox" value="<?php echo $empp['id'];  ?>"  name="check_employee[]"/>
 					                    <span></span>
-					                    
-					                </label>	
+
+					                </label>
 					            </div>
 							</td>
 							<!-- <td><?php echo $empp['emp_code']; ?></td> -->
@@ -189,7 +189,7 @@ $designations = json_decode($designations,1);
 					</tbody>
 				</table>
 				<!--end: Datatable-->
-				</form> 
+				</form>
 			</div>
 		</div>
 	</div>

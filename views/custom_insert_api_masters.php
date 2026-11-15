@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     $_POST['api_request_post_parameters'] = json_encode($post_parameters_arry);
 
     $response_arry = array();
-    foreach ((array)$_POST['get_response_details_name'] as $key => $name) { 
+    foreach ((array)$_POST['get_response_details_name'] as $key => $name) {
         $response_arry[$name]['response_field'] = $_POST['get_response_details_name'][$key];
         $response_arry[$name]['application_table_field'] = $_POST['get_response_details_value'][$key];
         $response_arry[$name]['uniqueness'] = $_POST['uniqueness'][$key] =="Y"?"Y":"N";
@@ -39,8 +39,8 @@ if (isset($_POST['submit'])) {
     unset($_POST['get_response_details_value']);
     unset($_POST['application_table_field']);
     unset($_POST['uniqueness']);
-    
-    
+
+
     if ($_POST['submit'] == 'insert') {
         unset($_POST['submit']);
         $_POST['current_status'] = '0';
@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
     }
     $res = json_decode($response, 1);
   // echo "<pre>"; print_r($res); echo "</pre>";
-    if($res['status'] == 'sucess'){ 
+    if($res['status'] == 'sucess'){
         if($res['LASTID'] == 0){
             $msgcode = 3001; //update
            // $_SESSION['insert_msg'] = $msgcode;
@@ -77,9 +77,9 @@ if (isset($_POST['submit'])) {
             // document.onreadystatechange = function(){
             //     if(document.readyState == "complete") {
             //         tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
-            //     } 
+            //     }
             // }
-        </script> 
+        </script>
     <?php  }else{
             if(isset($_SESSION['error'][$res['error_no']])){
               $dis_err = explode(",", $res['other']);
@@ -93,7 +93,7 @@ if (isset($_POST['submit'])) {
             }
         }
     // if($result11['LASTID'] != '0' AND $result11['LASTID']){
-    //      //header("location:index.php?option=COM_LIST_API_MASTERS"); exit; 
+    //      //header("location:index.php?option=COM_LIST_API_MASTERS"); exit;
     // }
     //echo $response;
     // print_r($response);
@@ -162,7 +162,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
             data:'page=getdisplayattributesfieldslist&table_name='+api_application_table,
             type: "POST",
             success:function(data){
-                var options = "<option value=''>Select Any One</option>"; 
+                var options = "<option value=''>Select Any One</option>";
                 var response = JSON.parse(data);
                 options += response.option;
                 $(".application_table_fields").html(options);
@@ -200,7 +200,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
     <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>  
+        </div>
 <?php } ?>
 <div class="card">
     <div class="card-header">
@@ -214,7 +214,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
     </div>
     <div class="card-block m-r-50 m-l-50">
         <form method="post" action="">
-            <div class="row"> 
+            <div class="row">
                 <div class="col-md-6 form-group">
                     <label for="api-service-provider" class="form-label"><?= __('Service Provider') ?></label>
                     <input name="api_service_provider" type="text" class="form-control" id="api-service-provider" value="<?php echo $details['api_service_provider']; ?>" placeholder="">
@@ -364,7 +364,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                      <option value="" ><?= __('Select Any One') ?></option>
                                     <?php foreach($display_attributes as $datr){ ?>
                                         <option value="<?php echo $datr['application_table_name']; ?>" <?php echo $datr['application_table_name'] == $details['application_table']? 'selected' : ''; ?>> <?php echo ucwords(str_replace('_',' ',$datr['application_table_name'])); ?> </option>
-                                    <?php } ?> 
+                                    <?php } ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -396,12 +396,12 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                                     <?php foreach($list_attributes as $feild=>$datr){ ?>
                                                         <option value="<?php echo $feild; ?>" <?php echo $feild == $value['application_table_field']? 'selected' : ''; ?>> <?php echo htmlspecialchars(__(ucwords(str_replace('_',' ',$datr['lable'])))); ?> </option>
                                                     <?php } ?>
-                                                </select> 
+                                                </select>
                                             </td>
                                             <td>
                                                 <input class="js-primary-sm" type="checkbox" name="uniqueness[<?php echo $sqo; ?>]" <?php echo ($value['uniqueness']=='Y')?"checked":"";?> value="Y"  id="api_response_uniqueness_<?php echo $sqo; ?>" aria-label="Input">
                                             </td>
-                                                
+
                                         </tr>
                                     <?php $sqo++; endforeach; ?>
                                 </table>
@@ -409,7 +409,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                             <div class="mt-2 ">
                                 <button type="button" class="btn btn-success" onclick="addrowresponsedetailsstring()"> <?= __('Add Rows') ?></button>
                                 <button type="button" class="btn btn-danger " onclick="deleteLastRow('responseDetails')"> <?= __('Delete Row') ?></button>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -509,7 +509,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
             url: "ajax.php",
             data:'page=getdisplayattributesfieldslist&table_name='+api_application_table,
             type: "POST",
-            async: false, 
+            async: false,
             success:function(data){
                 var response = JSON.parse(data);
                 htmlRows += response.option;
@@ -520,7 +520,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
         htmlRows += '</select></td>';
 
         htmlRows += '<td><input class="js-primary-sm-'+sqo+'" type="checkbox" name="uniqueness['+sqo+']" value="Y"  id="api_response_uniqueness_'+sqo+'" aria-label="Uniqueness[&#039;+sqo+&#039;]"></td>';
-    
+
         htmlRows += '</tr>';
         $('#responseDetails').append(htmlRows);
         $(".js-example-basic-single").select2();

@@ -1,14 +1,14 @@
-<?php 
+<?php
 $emailurl = API."?mode=togetmastertablesdetais";
 //echo $emailurl; exit; togetmastertablesdetais
 $emailgroupdata = callAPI($emailurl); //file_get_contents($emailurl, false, $context);
 $datas = json_decode($emailgroupdata,1);
-//echo"<pre>"; print_r($datas); exit;		
+//echo"<pre>"; print_r($datas); exit;
 ?>
 <div class="d-flex flex-column-fluid">
     <div class="container-fluid">
         <div class="alert alert-warning alert-dismissible">
-            <strong><?= __("This function is used for maintaining") ?> <strong><?= __("Display Attributes") ?></strong>. <?= __("* represents mandatory fields.") ?></strong> 
+            <strong><?= __("This function is used for maintaining") ?> <strong><?= __("Display Attributes") ?></strong>. <?= __("* represents mandatory fields.") ?></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <div class="row">
@@ -44,7 +44,7 @@ $datas = json_decode($emailgroupdata,1);
                                       </g>
                                   </svg>
 
-                                 
+
                               </span>
                           </span>
                       </div>
@@ -104,7 +104,7 @@ $datas = json_decode($emailgroupdata,1);
 
    <!--Begin::Section-->
    <div class="row">
-      <?php foreach ($datas as $data) { 
+      <?php foreach ($datas as $data) {
          $page = toGetTableNameBaseApplicationPagesList('application_table_name', $data['application_table_name'],'normal');
          $display ['1'] = "Dynamic";
          $display ['2'] = "Custom";
@@ -136,7 +136,7 @@ $datas = json_decode($emailgroupdata,1);
                                 <i class="kt-nav__link-icon flaticon-add-circular-button"></i>
                                 <span class="kt-nav__link-text"><?= __("Insert") ?></span>
                             </a>
-                        </li>		
+                        </li>
                         <li class="kt-nav__item">
                          <a target="_blank" href="index.php?option=COM_INSERT_DISPLAY_ATTRIBUTES&table=<?php echo $data['application_table_name']; ?>"  class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-settings"></i>
@@ -153,7 +153,7 @@ $datas = json_decode($emailgroupdata,1);
             <div class="flex-shrink-0 mr-4 symbol symbol-60 symbol-circle">
                <span class="kt-media kt-media--lg kt-media--circle">
                   <!-- <img src="assets/media/project-logos/3.png" alt="image"> -->
-                  <div style="background: #fbce44;width: 50px;height: 50px; border-radius: 50%;text-align: center;"> 
+                  <div style="background: #fbce44;width: 50px;height: 50px; border-radius: 50%;text-align: center;">
                     <span style="color: #FFF;font-size: 25px;margin: 8px; font-weight: bold;"><?php echo initials(ucwords($data['application_table_name'])); ?></span>
                 </div>
             </span>
@@ -178,7 +178,7 @@ $datas = json_decode($emailgroupdata,1);
 </span>
 <div class="kt-widget__content mt-2">
     <?php ksort($data['status']); foreach ($data['status'] as  $value) {
-        if($value['status_name'] != 'total' && $value['status_name'] != '' ){ 
+        if($value['status_name'] != 'total' && $value['status_name'] != '' ){
            $count_value = $value['count']!='' ? $value['count'] : '0'; ?>
 
            <div class="kt-widget__details" style="margin-right: 2.7rem;">
@@ -207,7 +207,7 @@ $datas = json_decode($emailgroupdata,1);
     										<a href="#" class="kt-widget__value kt-font-brand">648 Comments</a>
     									</div> -->
     								</div>
-    								
+
     								<div class="kt-widget__section float-right ml-5">
     									<a href="index.php?option=<?php echo $page['list_page_name']; ?>"><button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold"><?= __("Details") ?></button></a>
     								</div>

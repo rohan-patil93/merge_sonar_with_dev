@@ -1,9 +1,9 @@
-<?php 
+<?php
 $_SESSION['apply_js']['multiselest'] = "1";
 
-$url = API."?mode=getownerreports&property_owner_id=".$_POST['property_owner_id']; 
+$url = API."?mode=getownerreports&property_owner_id=".$_POST['property_owner_id'];
 $api = callAPI($url);
-$result = json_decode($api,1);	
+$result = json_decode($api,1);
 //echo "<pre>";print_r($result); echo "</pre>";
 $property_owners = $result['property_owners'];
 $property_owners_all = $result['property_owners_all'];
@@ -47,7 +47,7 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 	             <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> <?= __('Search'); ?></button>
 	        </div>
 	        <div class="col-lg-1">
-	         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?></a>  
+	         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?></a>
 	         </div>
 	    </div>
 	</form>
@@ -70,31 +70,31 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
             </div>
         </div>
          <div class="col-lg-1">
-         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>  
+         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>
          </div>
     </div> -->
 <!-- 	<div class="card-header">
 
 		<h5>Owner Reports</h5>
 		<div class="card-header-right table-card-header">
-			<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>  
+			<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</a>
 		</div>
 	</div> -->
 	<div class="card-body">
 		<?php if(count((array)$property_owners) !=0){  ?>
-			<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" >	
-				<tr> 
-					<th></th>	
-					<th>#</th>		
-					<th><?= __('Owner Name'); ?></th>	
-					<th><?= __('Address'); ?></th>					
-					<th><?= __('GST No'); ?></th>	
-					<th><?= __('Bank Nam'); ?></th>	
+			<table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" >
+				<tr>
+					<th></th>
+					<th>#</th>
+					<th><?= __('Owner Name'); ?></th>
+					<th><?= __('Address'); ?></th>
+					<th><?= __('GST No'); ?></th>
+					<th><?= __('Bank Nam'); ?></th>
 					<th><?= __('Bank Account No'); ?></th>
-					<th><?= __('No. Property'); ?></th>	
+					<th><?= __('No. Property'); ?></th>
 					<th></th>
 				</tr>
-				<?php $parenttb = 1; foreach($property_owners as $po){ 
+				<?php $parenttb = 1; foreach($property_owners as $po){
 					?>
 					<tr class="main" onclick="openSubTable('<?php echo $parenttb; ?>','firstlevelchildcheck','firstlevelchildhideshow')">
 						<td class="cursor-pointer">
@@ -118,61 +118,61 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 						<td colspan="10" class="p-0">
 							<table class="table table-separate">
 								<thead>
-									<tr> 
-										<th></th>	
-										<th>#</th>	
-										<th><?= __('Property Name'); ?></th>	
-										<th><?= __('Property Address'); ?></th>					
-										<th><?= __('Property Type'); ?></th>	
-										<th><?= __('Property Sub Type'); ?></th>	
+									<tr>
+										<th></th>
+										<th>#</th>
+										<th><?= __('Property Name'); ?></th>
+										<th><?= __('Property Address'); ?></th>
+										<th><?= __('Property Type'); ?></th>
+										<th><?= __('Property Sub Type'); ?></th>
 										<th><?= __('No. Area'); ?></th>
 									</tr>
 								</thead>
 								<tbody>
-								<?php $pods = $property_owner_details[$po['id']]; 
+								<?php $pods = $property_owner_details[$po['id']];
 								$parentchildtb = 1;
 									foreach($pods as $pod){
 								?>
-									<tr onclick="openSubTable('<?php echo $parentchildtb; ?>','secondlevelchildcheck','secondlevelchildhideshow')"> 
+									<tr onclick="openSubTable('<?php echo $parentchildtb; ?>','secondlevelchildcheck','secondlevelchildhideshow')">
 										<td class="cursor-pointer">
 											<i class="ti-angle-double-down" ></i>
 											<input type="hidden" id="secondlevelchildcheck_<?php echo $parentchildtb; ?>" value="0">
 										</td>
-										<td><?php echo $parentchildtb; ?></td>		
-										<td><?php echo $pod['property_name']; ?></td>	
-										<td class="w-b-w-s"><?php echo emptytextdashShow($pod['property_address']); ?></td>	
-										<td><?php echo $property_types[$pod['property_type']]; ?></td>	
-										<td><?php echo $property_types[$pod['property_sub_type']]; ?></td>	
+										<td><?php echo $parentchildtb; ?></td>
+										<td><?php echo $pod['property_name']; ?></td>
+										<td class="w-b-w-s"><?php echo emptytextdashShow($pod['property_address']); ?></td>
+										<td><?php echo $property_types[$pod['property_type']]; ?></td>
+										<td><?php echo $property_types[$pod['property_sub_type']]; ?></td>
 										<td><span class="form-label label label-md label-primary d-inline-block fw-bold"><?php echo count((array)$property_owner_detail_areas[$pod['id']]); ?></span></td>
-										
+
 									</tr>
 									<tr class="data secondlevelchildhideshow_<?php echo $parentchildtb; ?>">
 										<td></td>
 										<td colspan="10" class="p-0">
 										<table class="table table-separate">
 											<thead>
-												<tr> 
-													<th></th>	
-													<th>#</th>	
-													<th><?= __('Area Name'); ?></th>	
-													<th class="text-right"><?= __('Area'); ?></th>					
-													<th class="text-right"><?= __('Per Sq. Ft. Rate'); ?></th>	
+												<tr>
+													<th></th>
+													<th>#</th>
+													<th><?= __('Area Name'); ?></th>
+													<th class="text-right"><?= __('Area'); ?></th>
+													<th class="text-right"><?= __('Per Sq. Ft. Rate'); ?></th>
 													<th><?= __('Status'); ?></th>
 												</tr>
 											</thead>
 											<tbody>
 												<?php
-												$parentchildtb_2 = 1; 
+												$parentchildtb_2 = 1;
 												$podas = $property_owner_detail_areas[$pod['id']];
 												foreach($podas as $poda){ ?>
-												<tr> 
-													<td></td>	
-													<td><?php echo $parentchildtb_2; ?></td>			
-													<td><?php echo $poda['property_area_name']; ?></td>	
-													<td class="text-right"><?php echo $poda['property_area']; ?></td>	
-													<td class="text-right"><?php echo $poda['per_sq_ft_rate']; ?></td>	
+												<tr>
+													<td></td>
+													<td><?php echo $parentchildtb_2; ?></td>
+													<td><?php echo $poda['property_area_name']; ?></td>
+													<td class="text-right"><?php echo $poda['property_area']; ?></td>
+													<td class="text-right"><?php echo $poda['per_sq_ft_rate']; ?></td>
 													<td> - </td>
-													
+
 												</tr>
 											<?php $parentchildtb_2++; } ?>
 											</tbody>
@@ -189,10 +189,10 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 			</table>
 		<?php  }else{ ?>
               <div class="card-px text-center ">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Owner Reports'); ?></p>   
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Owner Reports'); ?></p>
                   <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                  </div>   
+                  </div>
                 </div>
             <?php } ?>
 

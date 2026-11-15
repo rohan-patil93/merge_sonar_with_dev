@@ -3,11 +3,11 @@ include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
 $rid = $_POST['rid'];
-$url1 = API."?mode=getpropertytenantdetails&rid=".$rid;  
+$url1 = API."?mode=getpropertytenantdetails&rid=".$rid;
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);
 $property_tenant_details = $result['property_tenant_details'];
-//$un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log'],1); 
+//$un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log'],1);
 //print_r($un_lock_tenant_log);
 ?>
 <script type="text/javascript">
@@ -63,14 +63,14 @@ $property_tenant_details = $result['property_tenant_details'];
 										location.reload();
 									}else{
 										location.reload();
-									} 
-								});	
+									}
+								});
 							}else{
 								tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',res.result.message,'');
 							}
 						}
 					});
-				} 
+				}
 			});
 		}
 	}
@@ -91,7 +91,7 @@ $property_tenant_details = $result['property_tenant_details'];
 					}else{
 						$("#affectedinvoice").html('');
 						$('#popupsubmtbtn').removeClass('disabled');
-					}	
+					}
 				}
 			});
 		}
@@ -123,7 +123,7 @@ $property_tenant_details = $result['property_tenant_details'];
 						<textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="remarks" id="remarks"></textarea>
 					</div>
 				</div>
-				<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>"> 
+				<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">
 			</form>
 			<div id="affectedinvoice"></div>
 		</div>

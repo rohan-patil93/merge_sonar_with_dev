@@ -41,7 +41,7 @@ $row = $data['rowdata'];
 		</div>
 		<div class="form-group">
 			<label><?php echo __('Address'); ?></label>
-			<textarea class="form-control" name="courier_adderss" id="courier_adderss" ><?php echo $row['courier_adderss']; ?></textarea> 
+			<textarea class="form-control" name="courier_adderss" id="courier_adderss" ><?php echo $row['courier_adderss']; ?></textarea>
 		</div>
 			<div class="form-group">
 			<label><?php echo __('Date'); ?></label>
@@ -51,7 +51,7 @@ $row = $data['rowdata'];
 			<label for="requested_by" class="d-block"><?php echo __('Requested By'); ?> </label>
 			<select  name="requested_by" id="requested_by" class="form-select js-example-basic-single">
 				<option value=""><?php echo __('Select Any One'); ?></option>
-				<?php foreach($emps as $emp){ ?> 
+				<?php foreach($emps as $emp){ ?>
 					<option <?php if($row['requested_by']== $emp['id']){ echo __('selected'); } ?>  value="<?php echo $emp['id']; ?>"><?php echo $emp['display_name']; ?></option>
 				<?php } ?>
 			</select>
@@ -60,15 +60,15 @@ $row = $data['rowdata'];
 				<label for="deliver_type" class="d-block"><?php echo __('Delivey Type'); ?> </label>
 				<select  name="deliver_type" id="deliver_type" class="form-select js-example-basic-single">
 					<option value=""><?php echo __('Select Any One'); ?></option>
-					<?php foreach($data['deliver_type'] as $deliver_type){ ?> 
+					<?php foreach($data['deliver_type'] as $deliver_type){ ?>
 						<option <?php if($row['deliver_type']== $deliver_type['genc_detail_code']){ echo __('selected'); } ?> value="<?php echo $deliver_type['genc_detail_code']; ?>"><?php echo $deliver_type['genc_detail_name']; ?></option>
 					<?php } ?>
 				</select>
 		</div>
 	</div>
-	<?php //if($row['deliver_type']!="" && $row['requested_by'] != $_SESSION['userid']){ 
-		if($row['id'] !=""){?> 
-	 
+	<?php //if($row['deliver_type']!="" && $row['requested_by'] != $_SESSION['userid']){
+		if($row['id'] !=""){?>
+
 		<div class="form-group">
 				<label><?php echo __('Courier Company'); ?></label>
 				<input type="text" name="courier_company" id="courier_company" class="form-control" value="<?php echo $row['courier_company']; ?>">
@@ -80,13 +80,13 @@ $row = $data['rowdata'];
 		<div class="form-group">
 				<label><?php echo __('Status'); ?> </label>
 				<div class="radio radio-outline  mt-1">
-					<?php foreach ($data['status'] as $selectkey => $selectvalue) {   ?> 
+					<?php foreach ($data['status'] as $selectkey => $selectvalue) {   ?>
 						<label class="radio radio-inline"> <input type="radio"  <?php if($selectkey == $row['current_status']){ ?> checked <?php } ?> name="current_status" value='<?php echo $selectkey; ?>'>	<span></span><?php echo $selectvalue; ?> </label>
 						<?php $sch++; } ?>
 					</div>
 				</div>
 	<?php } ?>
-		
+
 		<div class="modal-footer">
 			<input type="hidden" name="location_id" id="location_id" value="<?php echo $_SESSION['location_id']; ?>">
 			<input type="hidden" name="courier_type" id="courier_type" value="1">
@@ -109,7 +109,7 @@ $row = $data['rowdata'];
   $(".js-example-basic-multiple").select2();
   $(".js-example-disabled-results").select2();
   $( ".datepicker" ).datepicker({
-    showOn: "both", 
+    showOn: "both",
     buttonText: "<i class='ti-calendar'></i>",
     dateFormat: date_format,
     changeMonth: true,

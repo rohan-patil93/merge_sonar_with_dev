@@ -3,7 +3,7 @@
 // ini_set('display_errors', 1);
 $_SESSION['apply_js']['multiselest'] = 1;
 if (isset($_POST['submit'])) {
-    // echo "<pre>"; print_r($_POST);  
+    // echo "<pre>"; print_r($_POST);
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['user_id'] = $_SESSION['userid'];
     $dob = str_replace('/"', '-', $_POST['dob']);
@@ -110,7 +110,7 @@ foreach ($account_groups as $ag) {
                                 <input name="account_name" class="form-control" type="text" placeholder="<?php echo __('Enter Service Company Name'); ?>" value="<?php echo $details['account_name'] ?? ""; ?>" title="<?php echo __('Enter Service Company Name'); ?>" aria-label="<?php echo __('Enter Service Company Name'); ?>">
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <span class="form-label d-inline-block fw-bold"><?php echo __('Payable/Reciveable'); ?></span>
@@ -463,6 +463,6 @@ foreach ($account_groups as $ag) {
     //         error:function (){
     //             console.error("Error occurred while fetching data.");
     //         }
-    //     });        
+    //     });
     // }
 </script>

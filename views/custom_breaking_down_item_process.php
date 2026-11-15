@@ -6,23 +6,23 @@ if(isset($_POST['submititem'])){
     $res = json_decode($response1,1);
     //print_r($res);
     $response = isset($res['result']) ? $res['result'] : array();
-    if(isset($response['status']) && $response['status'] == 'sucess'){ 
+    if(isset($response['status']) && $response['status'] == 'sucess'){
         if(isset($response['LASTID']) && $response['LASTID'] == 0){
             $msgcode = 3001; //update
         }else{
             $msgcode = 3000; //insert
             $_SESSION['insert_msg'] = $msgcode;
             header("location:index?option=COM_LIST_ITEMS");
-        }   
+        }
         ?>
           <script type="text/javascript">
             document.onreadystatechange = function(){
               if(document.readyState == "complete") {
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo isset($_SESSION['error_message'][$msgcode]) ? $_SESSION['error_message'][$msgcode] : ''; ?>','');
-              } 
+              }
             }
           </script>
-          <?php    
+          <?php
     }else{
         if(isset($response['status']) && $response['status'] == 'fail'){
             $dis_err = isset($response['other']) ? explode(",", $response['other']) : array();
@@ -49,7 +49,7 @@ $url = API."?mode=getbreakingdownitemprocess&rid=".$rid;
 $apires = callAPI($url);
 $result = !empty($apires) ? json_decode($apires, 1) : array();
 //print_r($result);
-$items = isset($result['items']) && is_array($result['items']) ? $result['items'] : array(); 
+$items = isset($result['items']) && is_array($result['items']) ? $result['items'] : array();
 $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($result['unit_of_measurements']) ? $result['unit_of_measurements'] : array();
 ?>
 <div class="card">
@@ -73,12 +73,12 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
 	                <select class="form-select border js-example-basic-single requried_field" id="breaking_down_item_id" name="breaking_down_item_id" aria-label="Breaking Down Item Id">
 	                    <option value="0"><?= __("Select Any one") ?> </option>
 	                    <?php if (!empty($items) && is_array($items)) {
-	                        foreach ($items as $itm) { 
+	                        foreach ($items as $itm) {
 	                            if (!is_array($itm)) continue;
 	                            $selected = (isset($items['breaking_down_item_id']) && isset($itm['id']) && $items['breaking_down_item_id'] == $itm['id']) ? 'selected="selected"' : '';
 	                    ?>
 	                        <option value="<?php echo htmlspecialchars((string)($itm['id'] ?? ''), ENT_QUOTES); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars(($itm['sku'] ?? '') . " - " . __($itm['item_name'] ?? ''), ENT_QUOTES); ?></option>
-	                    <?php   } 
+	                    <?php   }
 	                    } ?>
 	                </select>
 	            </div>
@@ -110,12 +110,12 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
 		                <select class="form-select border js-example-basic-single" id="child_item_id" name="purchase_uom" aria-label="Item Name">
 		                    <option value="0"><?= __("Select Any one") ?> </option>
 		                    <?php if (!empty($items) && is_array($items)) {
-		                        foreach ($items as $itm) { 
+		                        foreach ($items as $itm) {
 		                            if (!is_array($itm)) continue;
 		                            $selected = (isset($items['purchase_uom']) && isset($itm['id']) && $items['purchase_uom'] == $itm['id']) ? 'selected="selected"' : '';
 		                    ?>
 		                        <option value="<?php echo htmlspecialchars((string)($itm['id'] ?? ''), ENT_QUOTES); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars(($itm['sku'] ?? '') . " - " . __($itm['item_name'] ?? ''), ENT_QUOTES); ?></option>
-		                    <?php   } 
+		                    <?php   }
 		                    } ?>
 		                </select>
 		            </div>
@@ -123,18 +123,18 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
 		            	<select class="form-select border js-example-basic-single" id="child_purchase_uom" name="purchase_uom" aria-label="UOM">
 		                    <option value="0"><?= __("Select Any one") ?></option>
 		                    <?php if (!empty($unit_of_measurements) && is_array($unit_of_measurements)) {
-		                        foreach ($unit_of_measurements as $uomr) { 
+		                        foreach ($unit_of_measurements as $uomr) {
 		                            if (!is_array($uomr)) continue;
 		                            $selected = (isset($items['purchase_uom']) && isset($uomr['id']) && $items['purchase_uom'] == $uomr['id']) ? 'selected="selected"' : '';
 		                    ?>
 		                        <option value="<?php echo htmlspecialchars((string)($uomr['id'] ?? ''), ENT_QUOTES); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars(__($uomr['uom_name'] ?? '') . " - " . ($uomr['uom_short_code'] ?? ''), ENT_QUOTES); ?></option>
-		                    <?php   } 
+		                    <?php   }
 		                    } ?>
 		                </select>
 		            </div>
 		            <div class="form-group col-lg-2">
 		                <input class="form-control" type="text" id="item_quantity" name="quantity" value="<?php echo !empty($items['quantity']) ? htmlspecialchars($items['quantity'], ENT_QUOTES) : 1; ?>" aria-label="Quantity">
-		            </div>	
+		            </div>
 		            <div class="form-group col-lg-1">
 		            	<i class="ti ti-trash" aria-hidden="true"></i>
 		            </div>

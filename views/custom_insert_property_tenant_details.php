@@ -1,4 +1,4 @@
-<?php 
+<?php
 if($_GET['ajaxcall'] =='Y'){
 	include_once('../includes/session.php');
 	include_once('../dbconfig.php');
@@ -6,7 +6,7 @@ if($_GET['ajaxcall'] =='Y'){
 	$dyncss = 'style="pointer-events: none; opacity: 0.6;"';
 }
 $_SESSION['apply_js']['multiselest'] = "1";
-$_SESSION['apply_js']['textediter'] = '1'; 
+$_SESSION['apply_js']['textediter'] = '1';
 $_SESSION['apply_js']['table'] = '1';
 //echo "<pre>";print_r($_POST); echo "</pre>";
 if(isset($_POST['submittenantdetails'])){
@@ -17,7 +17,7 @@ if(isset($_POST['submittenantdetails'])){
     $res = json_decode($response1,1);
 //echo "<pre>";print_r($res); echo "</pre>";
     $response = $res['res'];
-    if($response['status'] == 'sucess'){ 
+    if($response['status'] == 'sucess'){
         if($response['LASTID'] == 0){
             $msgcode = 3001; //update
                ?>
@@ -25,7 +25,7 @@ if(isset($_POST['submittenantdetails'])){
             document.onreadystatechange = function(){
                 if(document.readyState == "complete") {
                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][$msgcode]; ?>','');
-                } 
+                }
             }
         </script>
         <?php
@@ -33,7 +33,7 @@ if(isset($_POST['submittenantdetails'])){
             $msgcode = 3000; //insert
          	$_SESSION['insert_msg'] = $msgcode;
        		header("location:index?option=COM_LIST_PROPERTY_TENANT_DETAILS");
-        }         
+        }
     }else{
         //($response['status'] == 'fail'){
         if(isset($_SESSION['error'][$response['error_no']])){
@@ -51,7 +51,7 @@ $rid =  encodeId($_GET['Rid']);
 $rid = urldecode($rid);
 $rid = explode(':', $rid);
 $rid = $rid['1'];
-$url1 = API."?mode=getpropertytenantdetails&rid=".$rid;  
+$url1 = API."?mode=getpropertytenantdetails&rid=".$rid;
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);
 $property_owners = $result['property_owners'];
@@ -71,12 +71,12 @@ foreach($podareas as $podarea){
 	$property_owner_detail_areas[$podarea['id']] = $podarea;
 }
 $podaajax = json_decode($property_tenant_details['property_owner_detail_areas'],1);
-foreach($podaajax as $poda){	
+foreach($podaajax as $poda){
 	//$detail = $property_owner_detail_areas[$poda['property_area_id']];
 	$totaldis +=$poda['rent'];
 }
 $owners = array();
-foreach($property_owners as $coa) { 
+foreach($property_owners as $coa) {
 	$owners[$coa['id']] =$coa['owner_name'];
 }
 // echo "<pre>";
@@ -117,7 +117,7 @@ foreach($property_owners as $coa) {
 //     	$remainingdays = $totaldays->days + $daysCount;
 // 	} elseif ($totaldayaddornot == '-') {
 // 	    $remainingdays = $totaldays->days - $daysCount;
-// 	} 
+// 	}
 // 	echo $timestamp1." -- ".$timestamp2." - ".$remainingdays."</br>";
 // }
 //$rentbilltoberaise = array('Next','Same');
@@ -142,7 +142,7 @@ foreach($property_owners as $coa) {
 		html += '<div class="form-group col-lg-4"><textarea class="form-control" name="following_address[]" style="height: 91px;"></textarea></div>';
 		html += '<div class="form-group col-lg-4"><input type="text" class="form-control" name="following_email[]" value="" placeholder="<?php echo __('Email Id'); ?>"><input type="text" class="form-control mt-2" name="following_mobile[]" value="" placeholder="<?php echo __('Contact Number'); ?>"></div>';
 		//html += '<div class="form-group col-lg-2"></div>';
-		
+
 		//html += '<div class="form-group col-lg-1"><i class="ti-trash"  onclick="deletRow('+maxrowid+')"></i> </div>';
 		html += '</div>';
 		$("#addmorerow").append(html);
@@ -150,7 +150,7 @@ foreach($property_owners as $coa) {
 	function deletRow(id,rowid){
 	    $("#deleterowid_"+id).remove();
 	   // calculateVestingPercentage(rowid);
-	} 
+	}
 	function getPropertyOwner(ownerid){
 		console.log(ownerid);
 		jQuery.ajax({
@@ -163,7 +163,7 @@ foreach($property_owners as $coa) {
 	          setAggrementDetails();
 	        },
 	        error:function (){}
-	    }); 
+	    });
 	}
 	function getPropertyOwnerDetail(ownerdetailid){
 		console.log(ownerdetailid);
@@ -180,9 +180,9 @@ foreach($property_owners as $coa) {
 	          calculateRent();
 	        },
 	        error:function (){}
-	    }); 
+	    });
 	}
-	function getPropertyOwnerDetailAreas(){	
+	function getPropertyOwnerDetailAreas(){
 		var rid = $("#rid").val();
 		var ownerdetailareaid = [];
 		$('.podalist').each(function(){
@@ -204,18 +204,18 @@ foreach($property_owners as $coa) {
 	          calculateRent();
 	        },
 	        error:function (){}
-	    }); 
+	    });
 		console.log(ownerdetailareaid);
 	}
 	function calculateRent(id=""){
-		if(id !=""){ 
+		if(id !=""){
 			var property_area = $("#property_area_"+id).val();
 			var per_sq_ft_rate = $("#per_sq_ft_rate_"+id).val();
 			var per_sq_ft_discount = $("#per_sq_ft_discount_"+id).val();
 			//console.log("property_area - "+property_area+" - per_sq_ft_rate - "+per_sq_ft_rate+" - per_sq_ft_discount - "+per_sq_ft_discount+" - persqrate - "+persqrate);
 			//var manually_rent = $("#manually_rent_id_"+id).is(':checked')
 			if(parseFloat(per_sq_ft_discount) > parseFloat(per_sq_ft_rate)){
-	           swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Discount cannot be more than "+per_sq_ft_rate+", Please Check", "error");	
+	           swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Discount cannot be more than "+per_sq_ft_rate+", Please Check", "error");
 	           $("#per_sq_ft_discount_"+id).val(per_sq_ft_rate);
 	           per_sq_ft_discount = per_sq_ft_rate;
 	        }
@@ -226,15 +226,15 @@ foreach($property_owners as $coa) {
 			}
 		}
 		//console.log("property_area - "+property_area+" - per_sq_ft_rate - "+per_sq_ft_rate+" - per_sq_ft_discount - "+per_sq_ft_discount+" - persqrate - "+persqrate);
-		
+
 		if($('#manually_rent_id_'+id).is(":checked")){ //check not check this cheked
 		 	var totalrate = $("#rent_"+id).val();
 			$("#rent_"+id).val(totalrate);
-		
+
 		}else{
 		 	var totalrate = parseFloat(property_area)*parseFloat(persqrate);
 			$("#rent_"+id).val(totalrate);
-		}	
+		}
 		var calcrent = 0;
 		$('.calcrent').each(function(){
 			if($(this).val() !=""){
@@ -244,8 +244,8 @@ foreach($property_owners as $coa) {
 		calcrent= calcrent.toFixed(2)
 		$("#totalrent").text(calcrent);
 		$("#monthly_rent").val(calcrent);
-	 
-		
+
+
 		setAggrementDetails();
 	}
 	function setAggrementDetails(){
@@ -267,7 +267,7 @@ foreach($property_owners as $coa) {
 		$("#rent_per_month_aggrement").text(totalrent);
 		$("#rent_per_year_aggrement").text(parseFloat(totalrent)*12);
 	}
-	
+
 	function rentFreePeriodDays(){
 		console.log('working');
 		var lease_period_start_date = $("#lease_period_start_date").val();
@@ -329,8 +329,8 @@ foreach($property_owners as $coa) {
 		    // Construct the Date object
 		   // var date = new Date(year, month, day);
 		   	var dateary = [];
-		   	dateary['year'] = year; 
-		   	dateary['month'] = month; 
+		   	dateary['year'] = year;
+		   	dateary['month'] = month;
 		   	dateary['day'] = day;
 		    return dateary;
 		}
@@ -359,17 +359,17 @@ foreach($property_owners as $coa) {
 					        	swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "<?php echo $_SESSION['error_message']['9079']; ?>", "success");
 					        	location.reload();
 					        }
-					    }); 
+					    });
 					}
 				});
 
 
-				
+
 			}
 			function getCustomerId(custid){
 				if(custid != 0 && custid !=""){
 					$("#insertfrmopen").css({"pointer-events":"none","opacity":"0.8"});
-					
+
 					jQuery.ajax({
 		              url: "ajax.php",
 		              data:'page=getcustomerdetails&custid='+custid,
@@ -382,11 +382,11 @@ foreach($property_owners as $coa) {
 		                $("#tenant_email").val(result.email);
 		                $("#tenant_mobile").val(result.phone);
 		                $("#tenant_address").val(result.billing_address);
-		                $("#tenant_pin_code").val(result.billing_post_code);	
+		                $("#tenant_pin_code").val(result.billing_post_code);
 		               }
-		            }); 
+		            });
 				}else{
-					
+
 					$("#company_name").val('');
 					$("#tenant_name").val('');
 	                $("#tenant_email").val('');
@@ -404,20 +404,20 @@ foreach($property_owners as $coa) {
 		}else{
 			$("#divhideshow_"+utility_id).hide();
 		}
-	}	
+	}
 	function getUtilityBillAutoAndFix(utility_id,valu){
 		console.log(utility_id+" - "+valu);
 		if(valu == 'A'){
-			$("#utility_bill_amount_"+utility_id).attr("readonly", true); 
+			$("#utility_bill_amount_"+utility_id).attr("readonly", true);
 			$("#utility_bill_amount_"+utility_id).show("slow");
 			$("#utility_bill_manual_amount_"+utility_id).hide("slow");
 		}else if(valu == 'F'){
-			$("#utility_bill_amount_"+utility_id).attr("readonly", false); 
+			$("#utility_bill_amount_"+utility_id).attr("readonly", false);
 			$("#utility_bill_amount_"+utility_id).show("slow");
 			$("#utility_bill_manual_amount_"+utility_id).hide("slow");
 		}else if(valu == 'M'){
 			$("#utility_bill_manual_amount_"+utility_id).show("slow");
-			$("#utility_bill_amount_"+utility_id).attr("readonly", true); 
+			$("#utility_bill_amount_"+utility_id).attr("readonly", true);
 			$("#utility_bill_amount_"+utility_id).hide("slow");
 		}
 	}
@@ -430,7 +430,7 @@ foreach($property_owners as $coa) {
 		var systestrmdate = getDateMonthYear(system_start_date,'<?php echo $_SESSION['system_date_formate'] ?>');
 		var sys_start_date = new Date(systestrmdate['year'], systestrmdate['month']-1, systestrmdate['day']);
 
-		var system_start_date_check =$('#system_start_date').val(); 
+		var system_start_date_check =$('#system_start_date').val();
 		var startDateObjectss = "";
 		if(system_start_date_check !=""){
 			var maxDate = start_date > sys_start_date ? start_date : sys_start_date;
@@ -471,7 +471,7 @@ changeYear: true,
 				// });
 	        },
 	        error:function (){}
-	    }); 
+	    });
 	}
 	function unlockTenant(rid){
 		var startdate = $('#rent_commencement_date').val(); // Assuming this gets the selected date from your date picker
@@ -494,7 +494,7 @@ changeYear: true,
 				});
 	        },
 	        error:function (){}
-	    }); 
+	    });
 	}
 
 	function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,next_status){
@@ -558,7 +558,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 },
                 error:function (){}
             });
-        }); 
+        });
 }
 function checkGSTAdded(valu){
 	if(valu =="0"){
@@ -619,7 +619,7 @@ function expireTenantAgreement(rid){
 				});
 	        },
 	        error:function (){}
-	    }); 
+	    });
 }
 function manuallyRentSwitch(id){
 	$('#per_sq_ft_discount_'+id).val(0);
@@ -646,22 +646,22 @@ function extendAgreement(){
         	$('#kt_modal_KTDatatable_remotem').modal("show");
         },
         error:function (){}
-    }); 
+    });
 }
 </script>
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
-        </div>  
+        </div>
 <?php } ?>
-<?php 
+<?php
 // if($property_tenant_details['lock_tenant']=='0' || $property_tenant_details['current_status'] !=0){
 // 	$dyncss = 'style="pointer-events: none; opacity: 0.6;"';
 // }
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,ST_CALLBACK,'');
 if(in_array($property_tenant_details['current_status'], (array)$check_array) AND $property_tenant_details['originator'] == $_SESSION['userid'] OR $property_tenant_details['originator'] ==""){
-	
+
 }else{
 	$dyncss = 'style="pointer-events: none; opacity: 0.6;"';
 }
@@ -673,8 +673,8 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 	<div class="col-lg-8" >
 		<form method="post" id="tenantdetailform">
 		<div class="card">
-		<?php 
-			if($property_tenant_details['id'] !=""){ 
+		<?php
+			if($property_tenant_details['id'] !=""){
 			    $workflowsteps = getWorkflowStatus('property_tenant_details',$property_tenant_details['id'],$property_tenant_details['current_status']);
 			}
 			echo $workflowsteps['current_status_ribbon'];
@@ -693,7 +693,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 			</div>
 			<div class="card-body" <?php echo $dyncss; ?>>
 				<?php echo $workflowsteps['breadcrumb']; ?>
-				<div class="row">	
+				<div class="row">
 					<div class="form-group col-lg-6" <?php echo $un_lockdyncss; ?>>
 						<span class="form-label  d-inline-block fw-bold"><?php echo __('Property Owner Name'); ?> <span class="text-danger">*</span></span>
 						<span class="d-block error-message text-danger"></span>
@@ -718,7 +718,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 						<div class="row" id="ownerproperties">
 						<?php
 						$pownerareids =json_decode($property_tenant_details['property_owner_area_ids'],1);
-						 foreach($property_owner_detail_areas as $poda){	 ?>		
+						 foreach($property_owner_detail_areas as $poda){	 ?>
 							<div class="col-lg-4"><div class="checkbox-fade fade-in-primary">
 		              		<label class="form-label">
 			                    <input type="checkbox" class="podalist" onchange="getPropertyOwnerDetailAreas()" name="property_owner_area_ids[]" value="<?php echo $poda['id']; ?>" <?php echo in_array($poda['id'],$pownerareids)?"checked":""; ?>>
@@ -745,14 +745,14 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 								</tr>
 							</thead>
 							<tbody>
-						<?php 
+						<?php
 						$totaldis = 0;
-						foreach($podaajax as $poda){	
+						foreach($podaajax as $poda){
 						 	$detail = $property_owner_detail_areas[$poda['property_area_id']];
 							$totaldis +=$poda['rent'];
 						?>
 							<tr> <?php //print_r($detail); ?>
-								
+
 								<td class="p-2">
 									<input type="hidden" name="property_area_id[]" value="<?php echo $poda['property_area_id']; ?>"><input type="hidden" name="property_area_name[]" value="<?php echo $detail['property_area_name']; ?>">
 									<input type="hidden" class="form-control text-right" name="property_area[]" id="property_area_<?php echo $poda['property_area_id']; ?>" value="<?php echo $poda['property_area']; ?>" >
@@ -767,11 +767,11 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 								</td>
 								<td class="p-2 text-center">
 									<input type="checkbox" class="js-switch" name="manually_rent[<?php echo $poda['property_area_id']; ?>]" value="0" id="manually_rent_id_<?php echo $poda['property_area_id']; ?>" onchange="manuallyRentSwitch('<?php echo $poda['property_area_id']; ?>')" <?php echo $poda['manually_rent'] =='0'?"checked":""; ?>/>
-								</td>								
+								</td>
 								<td class="p-2">
 									<input type="number" class="form-control text-right" name="per_sq_ft_discount[]" id="per_sq_ft_discount_<?php echo $poda['property_area_id']; ?>" value="<?php echo $poda['per_sq_ft_discount']; ?>" onblur="calculateRent('<?php echo $poda['property_area_id']; ?>')" <?php echo $poda['manually_rent'] =='0'?"readonly":""; ?>>
 								</td>
-								
+
 								<td class="p-2"><input type="text" class="form-control text-right calcrent " name="rent[]" value="<?php echo $poda['rent']; ?>" id="rent_<?php echo $poda['property_area_id']; ?>" onblur="calculateRent('<?php echo $poda['property_area_id']; ?>')" <?php echo $poda['manually_rent'] =='0'?"":"readonly"; ?>></td>
 							</tr>
 						<?php } ?>
@@ -787,7 +787,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 					<div class="form-group col-lg-12 mt-2" >
 						<label class="form-label"><?php echo __('Lease Period'); ?> <span class="text-danger">*</span></label>
 						<div class="row">
-							<div class="col-lg-5" <?php echo $un_lockdyncss; ?>> 
+							<div class="col-lg-5" <?php echo $un_lockdyncss; ?>>
 								<span class="d-block error-message text-danger"></span>
 								<input type="text" class="form-control startdatepicker_1 rangedatepicker requried_field" data-id="1" name="lease_period_start_date" id="lease_period_start_date" value="<?php echo fromDate($property_tenant_details['lease_period_start_date']); ?>" onchange="rentFreePeriodDays()" <?php echo $property_tenant_details['un_lock_tenant_date'] !=""?"readonly":""; ?>>
 							</div>
@@ -847,9 +847,9 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 						<label class="form-label "><?php echo __('Security Deposit'); ?></label>
 						<input type="number" class="form-control text-right " name="security_deposit" value="<?php echo $property_tenant_details['security_deposit']; ?>" >
 					</div>
-					
+
 					<!-- <div class="col-lg-12"> </div> -->
-					
+
 
 					<div class="form-group col-lg-5">
 						<label class="form-label"><?php echo __('Locking Period Tenant'); ?></label>
@@ -918,8 +918,8 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 									<?php } ?>
 								</select>
 							</div>
-							
-							
+
+
 						</div>
 					</div>
 					<div class="form-group col-lg-5">
@@ -949,10 +949,10 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 							<?php } ?>
 						</select>
 					</div>
-					
-					
+
+
 					<div class="form-group col-lg-5" >
-						
+
 					</div>
 					<div class="col-lg-2 text-center"> </div>
 					<div class="form-group col-lg-5">
@@ -968,11 +968,11 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 			            <?php } ?>
 						</div> -->
 					</div>
-					
-					<div class="col-lg-12 mb-3"> </div> 
 
-					
-					
+					<div class="col-lg-12 mb-3"> </div>
+
+
+
 					<div class="form-group col-lg-5">
 						<label class="form-label d-block"><?php echo __('Rental Invoice To Be Raised'); ?> </label>
 						<div class="form-radio">
@@ -995,12 +995,12 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 						<label class="form-label d-block"><?php echo __('Rental Invoice Stoped From'); ?> </label>
 						<input type="month" class="form-control" name="rental_invoice_stoped_from" value="<?php echo $property_tenant_details['rental_invoice_stoped_from'] !=""?$property_tenant_details['rental_invoice_stoped_from']:date('Y-m'); ?>" id="rental_invoice_stoped_from">
 					</div>
-					<div class="col-lg-12 mb-3"> </div> 
-					<?php 
+					<div class="col-lg-12 mb-3"> </div>
+					<?php
 					$mc = 1;
-					$rbtype = json_decode($property_tenant_details['rental_bill_types'],1);	
+					$rbtype = json_decode($property_tenant_details['rental_bill_types'],1);
 					//echo "<pre>"; print_r($rbtype); echo "</pre>";
-					foreach($rental_bill_types as $rbt){ 
+					foreach($rental_bill_types as $rbt){
 						$rbtyp =$rbtype[$rbt['id']];
 						?>
 						<div class="form-group col-lg-4">
@@ -1027,7 +1027,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 									<div class="radio radio-inline">
 			                          <label class="form-label">
 			                            <input type="radio" name="utility_bill_auto_and_fix[<?php echo $rbt['id'];?>]" value="A" <?php echo ($rbtyp['utility_bill_auto_and_fix'] == 'A' OR $rbtyp['utility_bill_auto_and_fix'] == '')?"checked":""; ?> onchange="getUtilityBillAutoAndFix(<?php echo $rbt['id'];?>,this.value)">
-			                            <i class="helper"></i><?php echo __('Actual'); ?> 
+			                            <i class="helper"></i><?php echo __('Actual'); ?>
 			                          </label>
 			                        </div>
 			                        <div class="radio radio-inline">
@@ -1081,7 +1081,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 			                    		<td class="p-2 child_utility_class_<?php echo $rudetail['id']; ?> <?php echo $rbtyp['child_utility'][$rudetail['id']]['check'] =="Y"?"":"event_disabled"; ?>"><input type="number" name="utility_bill_manual_amount[<?php echo $rbt['id'];?>][<?php echo $rudetail['id'];?>][rate]" class="form-control text-right" value="<?php echo $rbtyp['child_utility'][$rudetail['id']]['rate']; ?>"></td>
 			                    		<td class="p-2">
 			                    			<select name="utility_bill_manual_amount[<?php echo $rbt['id'];?>][<?php echo $rudetail['id'];?>][uom]" class="form-control js-example-basic-single" >
-			                    				
+
 			                    				<?php foreach($utilityuom as $uuomkey=>$uuomval){ ?>
 			                    						<option value="<?php echo $uuomkey; ?>" <?php echo $rbtyp['child_utility'][$rudetail['id']]['uom']==$uuomkey?"selected":""; ?>><?php echo $uuomval; ?></option>
 			                    				<?php } ?>
@@ -1107,7 +1107,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 									<label class="form-label "><?php echo __('Tenant List'); ?> <span class="text-danger">*</span></label>
 									<span class="d-block error-message text-danger"></span>
 									<select name="customer_id" id="customer_id" class="form-control form-select js-example-basic-single requried_field" onchange="getCustomerId(this.value)" >
-										
+
 										<?php foreach($customers as $cust) {  ?>
 											<option value="<?php echo $cust['id']; ?>" <?php echo $property_tenant_details['customer_id'] ==$cust['id']?"selected":""; ?> <?php echo $_SESSION['userid']!=$cust['created_by']?"disabled":""; ?>><?php echo $cust['display_name'];?></option>
 										<?php } ?>
@@ -1166,7 +1166,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 								<div class="form-group col-lg-4">
 									<label class="form-label "><?php echo __('Details'); ?></label>
 								</div>
-								
+
 							</div>
 							<div id="addmorerow">
 								<?php $i = 0;
@@ -1180,7 +1180,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 								<div class="row" id="deleterowid_<?php echo $i; ?>">
 									<div class="form-group col-lg-4  p-1">
 									    <input type="text" name="following_name[]" class="form-control form-control-sm" value="<?php echo $fa['following_name']; ?>" placeholder="<?php echo __('Name'); ?>">
-						            
+
 									</div>
 									<div class="form-group col-lg-4  p-1">
 										<textarea class="form-control" name="following_address[]" style="height: 91px;"><?php echo $fa['following_address']; ?></textarea></div>
@@ -1210,8 +1210,8 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 				</div>
 
 				<div class="card-footer pt-0 mt-3">
-				     <input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">  
-				     <input type="hidden" name="submittenantdetails">  
+				     <input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>">
+				     <input type="hidden" name="submittenantdetails">
 				     <button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary"  onclick="formSubmitTenantDetails()"> <?php echo $rid !=""?"Update":"Submit";?></button>
 				   <!--  <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" name="submittenantdetails"  onclick="submitdetails()"> <?php echo $rid !=""?"Update":"Submit";?></button> -->
 				</div>
@@ -1223,20 +1223,20 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 
 
 	<div class="col-lg-4">
-		<?php 
+		<?php
 			$aryseq = array();
 			$billingdetails = $property_tenant_billings[0]['bill_detail'];
 			$billingdetail = json_decode($billingdetails,1);
-			foreach($billingdetail as $bd1){ 
+			foreach($billingdetail as $bd1){
 				$aryseq[] = $bd1['name'];
 			}
 			$utilitydetails = $property_tenant_billings[0]['utility_details'];
 			$utilitydetail = json_decode($utilitydetails,1);
-			foreach($utilitydetail as $bd1){ 
+			foreach($utilitydetail as $bd1){
 				$aryseq[] = $bd1['name'];
 			}
 			$datearray = array();
-			foreach($property_tenant_billings as $ptb){ 
+			foreach($property_tenant_billings as $ptb){
 				$aryval = array();
 				$billingdetail = json_decode($ptb['bill_detail'],1);
 				foreach($billingdetail as $bd1){
@@ -1249,13 +1249,13 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 				$datearray[$ptb['month_start_date']] = $aryval;
 			}
 		?>
-		<?php if(count((array)$property_tenant_billings) !=0){ ?>				
+		<?php if(count((array)$property_tenant_billings) !=0){ ?>
 		<div class="card">
 			<div class="card-header">
 				<h5><?php echo __('Rental Chart'); ?></h5>
 				<div class="card-header-right table-card-header">
-					<?php 
-					if($property_tenant_details['lock_tenant']=='0' AND $property_tenant_details['originator']==$_SESSION['userid'] AND $property_tenant_details['agreement_expiry_date']==''){ ?> 
+					<?php
+					if($property_tenant_details['lock_tenant']=='0' AND $property_tenant_details['originator']==$_SESSION['userid'] AND $property_tenant_details['agreement_expiry_date']==''){ ?>
 						<button type="button" class="cursor-pointer float-left btn btn-info m-l-10" onclick="extendAgreement()"><i class="ti-reload
  text-white"></i> <?php echo __('Extend Agreement'); ?></button>
 					<?php } ?>
@@ -1267,11 +1267,11 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 			</div>
 			<div class="card-body ">
 				<div class="text-right">
-					<?php 
-					if($property_tenant_details['lock_tenant']=='0' AND $property_tenant_details['originator']==$_SESSION['userid'] AND $property_tenant_details['agreement_expiry_date']==''){ ?> 
+					<?php
+					if($property_tenant_details['lock_tenant']=='0' AND $property_tenant_details['originator']==$_SESSION['userid'] AND $property_tenant_details['agreement_expiry_date']==''){ ?>
 					<button type="button" class="btn btn-danger m-l-10" onclick="expireTenantAgreement('<?php echo $rid; ?>')"><i class="ti-unlock text-white"></i>  <?php echo __('Expire Agreement'); ?></button>
 				<?php }  ?>
-				<?php  
+				<?php
 					 if($property_tenant_details['lock_tenant']=='0' AND $property_tenant_details['originator']==$_SESSION['userid'] AND $property_tenant_details['agreement_expiry_date']==''){ ?>
 					<button type="button" class="cursor-pointer float-left btn btn-primary" onclick="addOpeningBalances('<?php echo $rid; ?>')"><i class="ti-plus text-white"></i> <?php echo __('Opening Balance'); ?></button>
 				<?php } ?>
@@ -1284,18 +1284,18 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 							<?php foreach($property_tenant_billings as $ptb){ ?>
 							<th class="text-right"><?php echo fromDate($ptb['month_start_date']); ?></th>
 							<?php } ?>
-					
+
 						</tr>
 					</thead>
 					<tbody>
-						<?php 
+						<?php
 						$totalary = array();
 						foreach($aryseq as $keyid =>$bd1){ ?>
 							<tr>
 								<th class="p-2">
 									<?php echo $bd1; ?>
 								</th>
-								<?php foreach($datearray as $datekey=>$ptb){ 
+								<?php foreach($datearray as $datekey=>$ptb){
 									$billingdetails1 = $ptb[$keyid];
 									$totalary[$datekey] += $billingdetails1['rent'];
 							?>
@@ -1303,7 +1303,7 @@ if($property_tenant_details['parent_id'] !="0" AND $property_tenant_details['ori
 								<?php }  ?>
 							</tr>
 								<?php } ?>
-						<tr>		
+						<tr>
 							<th class="p-2">
 								<?php echo __('Total'); ?>
 							</th>

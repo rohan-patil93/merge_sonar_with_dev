@@ -20,7 +20,7 @@ else{
 		var quetype= document.getElementById('settype').value;
 		if(quetype==1){
 			var appenddiv = '<label class="radio radio-primary" for="singlechoice'+i+'"><input type="radio"  name="singlechoicestatus" id="singlechoice'+i+'" aria-label="Singlechoicestatus"><span></span></label>';
-			
+
 		}else{
 			var appenddiv = '<label class="checkbox checkbox-primary" for="multiplechoice'+i+'"><input type="checkbox" name="multiplechoicestatus" id="multiplechoice'+i+'" aria-label="Multiplechoicestatus"><span></span></label>';
 		}
@@ -46,7 +46,7 @@ else{
 		var question_id = document.getElementById('question_id').value;
 		var marksdata = document.getElementById('markfieldvalue').value;
 		//alert(marksdata+title);
-		
+
 		var assessment_question_option_array = [];
 		var assessment_question_option = [];
 		var checkedstatus =[];
@@ -56,11 +56,11 @@ else{
 		singlechoicestatus = document.getElementsByName('singlechoicestatus');
 		multiplechoicestatus = document.getElementsByName('multiplechoicestatus');
 
-		
-		console.log("----"+assessment_question_option_array.length);
-		for (var i = 0; i < assessment_question_option_array.length; i++) { 
 
-			var assessment_question_option_value = assessment_question_option_array[i].value; 
+		console.log("----"+assessment_question_option_array.length);
+		for (var i = 0; i < assessment_question_option_array.length; i++) {
+
+			var assessment_question_option_value = assessment_question_option_array[i].value;
 			console.log(assessment_question_option_value);
 			assessment_question_option.push(assessment_question_option_value);
 			var k = i+1;
@@ -70,10 +70,10 @@ else{
 				choicestatus = document.getElementById('multiplechoice'+k).checked== true ? "checked" : "";
 			}
 			checkedstatus.push(choicestatus);
-		} 
+		}
 
 		var pass_data = "&title="+title+"&type="+qtype+"&question="+assessment_question+"&option_data="+assessment_question_option+"&marks="+marksdata+"&checkedstatus="+checkedstatus+"&question_id="+question_id+"&rid=";
-		console.log(pass_data); 
+		console.log(pass_data);
 		$.ajax({
 			url: "ajax.php",
 			data:'page=formassessmentquestions'+pass_data,
@@ -98,7 +98,7 @@ else{
 	<div class="modal-header">
 		<h5 class="modal-title" id="exampleModalLabel"><?php echo $_GET['question_title']; ?></h5>
 		   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-   
+
 	</div>
 	<div class="custom-icon p-4">
 		<div class="form-group text-left row">
@@ -111,7 +111,7 @@ else{
 				<input type="text" class="form-control" id="markfieldvalue" name="marks"  placeholder="<?= __('Enter Marks') ?>" aria-label="Enter Marks">
 			</div>
 		</div>
-		
+
 		<?php if($_GET['type']== $typeofquestion['1'] || $_GET['type']== $typeofquestion['2'])	{ ?>
 			<div class="col-lg-12 mt-2 mb-4">	Mark the Correct Answer
 		</div>
@@ -129,7 +129,7 @@ else{
 						</label>
 					<?php } ?>
 				</div>
-				<div class="col-lg-8">  
+				<div class="col-lg-8">
 					<div class="input-group input-icon-right">
 					<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"  placeholder="<?= __('Option') ?>" aria-label="Option">
 					<span class="input-group-text addon-style">
@@ -154,11 +154,11 @@ else{
 			<div class="col-lg-8">
 				<div class="input-group input-icon-right">
 				<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"   placeholder="<?= __('Option') ?>" aria-label="Option">
-				
+
 						<span class="input-group-text addon-style">
     <span class=""><i class="fa fa-trash" role="button" tabindex="0" aria-label="Delete option" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deloptionrows('s1rowid2')"></i>	</span>
 </span>
-				
+
 				</div>
 			</div>
 		</div>
@@ -166,12 +166,12 @@ else{
 	<div class="form-group">
 		<button class="btn btn-success"  onclick="addoptionrows()" id="addRows" type="button">+ <?= __('Add More Options') ?></button>
 	</div>
-<?php } 
+<?php }
 else { ?>
 
-	<input type="hidden" name="assessment_question_option[]"  class="form-control" value=""> 
+	<input type="hidden" name="assessment_question_option[]"  class="form-control" value="">
 
-<?php } ?>	
+<?php } ?>
 	<div class="modal-footer">
 	    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?= __('Close') ?></button>
 		<button type="button" class="btn btn-primary mr-2" onclick="questionsubmit()" ><?= __('Save') ?></button>

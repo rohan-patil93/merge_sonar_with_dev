@@ -51,7 +51,7 @@ function fyLabel($year) {
             <select aria-label="<?= htmlspecialchars(__('Year'), ENT_QUOTES, 'UTF-8'); ?>" name="year"
         class="form-control js-example-basic-single"
         id="csrYearSelect">
-              <?php foreach($financial_years as $row){ 
+              <?php foreach($financial_years as $row){
                 $selected = (isset($selectedYear) && $selectedYear == $row['genc_detail_code']) ? 'selected' : '';
                 ?>
                 <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $selected; ?>> <?= htmlspecialchars(__($row['genc_detail_name'] ?? '')) ?></option>

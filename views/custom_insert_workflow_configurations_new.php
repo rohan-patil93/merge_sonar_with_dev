@@ -368,7 +368,7 @@ $stausresult = ViewStatusData();
 	// 		// $('#kt_modal_dynamic_popup2').modal("show");
 	// 	},
 	// 	error:function (){}
-	// });	
+	// });
 	// }
 	var criterianum = 1;
 	function addMoreCriteria() {
@@ -455,7 +455,7 @@ $stausresult = ViewStatusData();
 
 				$("#pendingcriteria_" + vertocle_no + i).prop("disabled", true);
 				// $("#pendingcriteria_"+vertocle_no+i).css({
-				// 	"pointer-events": "none", 
+				// 	"pointer-events": "none",
 				// 	"opacity"     : "0.6",
 				// 	"background-color":"#a7fff6"
 				// });
@@ -698,7 +698,7 @@ $stausresult = ViewStatusData();
 								<?php foreach ($email_content as $emailcontent) { ?>
 									<option value="<?php echo $emailcontent['template_reference_id']; ?>" <?php echo $workflowconfiguration['email_content_ref_id'] == $emailcontent['template_reference_id'] ? "selected" : "" ?> ><?php echo $emailcontent['template_name']; ?>  </option>
 								<?php } ?>
-							</select>    
+							</select>
 						</div> -->
 								<div class="form-group col-lg-12">
 									<span class="form-label d-block">Follow Up</span>
@@ -792,7 +792,7 @@ $stausresult = ViewStatusData();
 
 						</div>
 					</div>
-					<!-- <div class="card">	
+					<!-- <div class="card">
 					<div class="card-header">
 						<h5>WorkFlow Levels</h5>
 					</div>
@@ -894,7 +894,7 @@ $stausresult = ViewStatusData();
 											<span class="label label-inverse-primary d-inline-block">
 												<?php $mk = 1;
 												foreach ($dynamicdoacriterias as $fieldkey => $dynamicselection) {
-													//0 = table name , 1 = lable , 2 : value 
+													//0 = table name , 1 = lable , 2 : value
 													$tablevalue = explode("=", $dynamicselection);
 													$uniquetablevalue[$tablevalue[0]] = $tablevalue[2];
 													$uniquetablevaluefield[$incnumber] .= $tablevalue[0] . "_" . $tablevalue[2];

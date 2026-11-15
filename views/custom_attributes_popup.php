@@ -37,7 +37,7 @@ if($attribute_type == 'custom_sql'){
 	$table_data = explode('WHERE', $table_data);
 	//print_r($table_data);
 	$trs = explode(' ', trim($table_data[1]));
-	//print_r($trs); 
+	//print_r($trs);
 	//exit;
 	if(count((array)$trs) >1){
 		for ($i=0; $i < count((array)$trs) ; $i=$i+3) {
@@ -88,7 +88,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 	}
 	function deleteAllRows(){
 		var count = $(".fitemRow").length;
-		
+
 		for(var i=1; i < count+1; i++){
 			//alert(i);
 			$("#qur_div_"+i).css("display", "none");
@@ -121,17 +121,17 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 		});
 	}
 	function radiofrom(){
-		var ele = document.getElementsByName('type'); 
-		for(i = 0; i < ele.length; i++) { 
-			if(ele[i].checked) 
-				var type =ele[i].value; 
-		} 
+		var ele = document.getElementsByName('type');
+		for(i = 0; i < ele.length; i++) {
+			if(ele[i].checked)
+				var type =ele[i].value;
+		}
 		return type;
 	}
 	function submitrom(){
 	//	var that = $(this),
 	  //  data = that.serialize(); //This will capture all form input values, no need to reinvent the wheel
-	 
+
 	  var  str = '';
 	  var arr = [];
 	  var type = $("#type_value").val();
@@ -183,7 +183,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 	  	success: function(response) {
 	        	console.log(response);
 	            //$('.success').html(response);
-	            
+
 
 
 // Swal.fire({
@@ -192,7 +192,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 //   icon: 'success',
 //   showCancelButton: true,
 //  confirmButtonClass: "btn btn-success",
-//   cancelButtonClass: "btn btn-warning" 
+//   cancelButtonClass: "btn btn-warning"
 //   confirmButtonText: 'Yes, close!'
 // }).then((result) => {
 //   if (result.isConfirmed) {
@@ -202,21 +202,21 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 
 
 
-// swal({              
-// 	title: <?= json_encode(__("Record has been saved successfully")) ?>,              
-// 	text: "Do you want to close ? ",              
-// 	type: "success",           
+// swal({
+// 	title: <?= json_encode(__("Record has been saved successfully")) ?>,
+// 	text: "Do you want to close ? ",
+// 	type: "success",
 // 	buttonsStyling: false,
-// 	confirmButtonText: "Yes, close! ",    
+// 	confirmButtonText: "Yes, close! ",
 // 	confirmButtonClass: "btn btn-success",
-// 	showCancelButton: true,     
-// 	cancelButtonText: " No, continue",      
-// 	cancelButtonClass: "btn btn-warning"        
+// 	showCancelButton: true,
+// 	cancelButtonText: " No, continue",
+// 	cancelButtonClass: "btn btn-warning"
 // }).then(function(result) {
 // 	if (result.value) {
 // 		$('#kt_modal_KTDatatable_remote').modal('hide');
 // 	}
-// }); 
+// });
 
 	swal({
 	        title: <?= json_encode(__("Record has been saved successfully")) ?>,
@@ -247,7 +247,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 		//var rrr = checkName(val);
 	}else{
 		var val = "Please Choose Table name and Field names .. ";
-		
+
 	}
 	var count = $(".fitemRow").length;
 	if(count > 0){
@@ -274,7 +274,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 
 		order += " ORDER BY "+ $('#order_by').val() +" "+$('#sort').val();
 
-  		//console.log(whr); 
+  		//console.log(whr);
   		val = val+whr+order;
   		$('#dis_custom_sql').val(val);
   	}
@@ -292,7 +292,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 		var count = $(".sfitemRow").length;
 		//alert('la-hand-o-right'+count);
 		count++;
-		var htmlRows = '';		
+		var htmlRows = '';
 		htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;">';
 		htmlRows += '<div class="col-lg-3">';
 		htmlRows += '<input type="text" class="form-control"  id="static_value_'+count+'"  value=""  name="type" aria-label="Type">';
@@ -300,9 +300,9 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 		htmlRows += '<div class="col-lg-3">';
 		htmlRows += '<input type="text"class="form-control"  id="static_lable_'+count+'"  value=""  name="type" aria-label="Type"> ';
 		htmlRows += '</div>';
-		
-		htmlRows += '<div class="col-lg-3">';								
-		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">' + <?= json_encode(__('Delete')) ?> + '</button>';						
+
+		htmlRows += '<div class="col-lg-3">';
+		htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">' + <?= json_encode(__('Delete')) ?> + '</button>';
 		htmlRows += '</div>';
 		htmlRows += '</div>';
 		$('#append_statick').append(htmlRows);
@@ -317,14 +317,14 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 		//alert(count);
 		count++;
 		var htmlRows = '';
-		htmlRows += '<tr id="qur_div_'+count+'" >';  
-		htmlRows += '<td><select class="form-control fitemRow js-example-basic-single" id="whrfield_'+count+'" name= "whrfield[]" aria-label="Whrfield">'+selectdata+'</select></td>';        
-		htmlRows += '<td><select class="form-control form-select js-example-basic-single" id="comparator_'+count+'" name= "comparator[]" aria-label="Comparator"><?php foreach ($comparator_array as $dd) {  ?><option  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?> </select></td>';   		
-		htmlRows += '<td><input type="text" id="whrvalue_'+count+'" name="whrvalue[]"  class="form-control amount" aria-label="Whrvalue"></td>';	
-		htmlRows += '<td><select class="form-control form-select js-example-basic-single "  id="operand_'+count+'"  name= "operand[]" id="" aria-label="Operand">	<option value="AND"> AND </option><option  value = "OR"> OR </option>	</select></td>';	
-		htmlRows += '<td><input type="hidden" id="delete_value_'+count+'" value="0"><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">' + <?= json_encode(__('Delete')) ?> + '</button></td>';   
+		htmlRows += '<tr id="qur_div_'+count+'" >';
+		htmlRows += '<td><select class="form-control fitemRow js-example-basic-single" id="whrfield_'+count+'" name= "whrfield[]" aria-label="Whrfield">'+selectdata+'</select></td>';
+		htmlRows += '<td><select class="form-control form-select js-example-basic-single" id="comparator_'+count+'" name= "comparator[]" aria-label="Comparator"><?php foreach ($comparator_array as $dd) {  ?><option  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?> </select></td>';
+		htmlRows += '<td><input type="text" id="whrvalue_'+count+'" name="whrvalue[]"  class="form-control amount" aria-label="Whrvalue"></td>';
+		htmlRows += '<td><select class="form-control form-select js-example-basic-single "  id="operand_'+count+'"  name= "operand[]" id="" aria-label="Operand">	<option value="AND"> AND </option><option  value = "OR"> OR </option>	</select></td>';
+		htmlRows += '<td><input type="hidden" id="delete_value_'+count+'" value="0"><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">' + <?= json_encode(__('Delete')) ?> + '</button></td>';
 		htmlRows += '</tr>';
-		$('#invoiceItem').append(htmlRows); 
+		$('#invoiceItem').append(htmlRows);
 		$(".js-example-basic-single").select2();
 		$(".js-example-disabled-results").select2();
 	}
@@ -353,7 +353,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 			$("#type_value").val(type);
 		}else{
 			$("#radio_switch").css("display", "block");
-			$("#radio_switch2").css("display", "none");	
+			$("#radio_switch2").css("display", "none");
 			$("#type_value").val(type);
 		}
 	}
@@ -361,7 +361,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 //new code added in Rohan
 function swictchrefer_by1(){
 	if($('#refer_by_action').prop("checked") == true){
-		$(".referbyfieldname").show();	
+		$(".referbyfieldname").show();
 	}else{
 		$(".referbyfieldname").hide();
 	}
@@ -369,7 +369,7 @@ function swictchrefer_by1(){
 function swictchrefer1(){
 	console.log("dsdc");
 	if($('#refer_action').prop("checked") == true){
-		$(".referfieldname").show();	
+		$(".referfieldname").show();
 	}else{
 		$(".referfieldname").hide();
 	}
@@ -405,10 +405,10 @@ elem.forEach(function(html) {
 
 
 		</div>
-		<div class="modal-body" > 
+		<div class="modal-body" >
 
 			<form class="kt-form kt-form--label-right" action="" method="post">
-				<?php if($_POST['type']=='rating'){ 
+				<?php if($_POST['type']=='rating'){
 					$attribute_type = 'rating';
 				} ?>
 				<input type="hidden"  id='type_value' value="<?php echo $attribute_type; ?>"  name="type_value">
@@ -448,7 +448,7 @@ elem.forEach(function(html) {
 											</div>
 										</div>
 								</div>
-								
+
 							</div>
 							<div id="radio_switch"  <?php if($attribute_type == 'static') { ?> style='display: none;' <?php } ?> >
 								<div class="row align-items-center" style="margin-top: 10px;">
@@ -458,15 +458,15 @@ elem.forEach(function(html) {
 											<option value=""><?= __("Select Table Name") ?></option>
 											<?php foreach ($showtables1 as $key => $data) {  ?>
 												<option   value = <?php echo $data ?> <?php if($table_name_field == $data){ echo "selected";  } ?>   > <?php echo ucwords(str_replace('_',' ',$data)); ?> </option>
-											<?php	} ?>	
+											<?php	} ?>
 										</select>
 									</div>
 									<div class="col-lg-2 w-full">
 										<label for="field_name" class="d-block"><?= __("Value Field") ?></label>
 										<div id='field_id'>
 											<select class="form-control js-example-basic-single" id='field_name' name="field_name" aria-label="Field Name">
-												<option value="-1"><?= __("Select Filed") ?></option>	
-												<?php foreach ($view['list'] as  $list) { ?> 
+												<option value="-1"><?= __("Select Filed") ?></option>
+												<?php foreach ($view['list'] as  $list) { ?>
 													<option value="<?php echo $list; ?>" <?php if($view['value_field'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
 												<?php } ?>
 											</select>
@@ -477,7 +477,7 @@ elem.forEach(function(html) {
 										<div id='label_id'>
 											<select class="form-control js-example-basic-single" id="value" name="value" aria-label="Value">
 												<option value="-1"><?= __("Select Filed") ?></option>
-												<?php foreach ($view['list'] as  $list) { ?> 
+												<?php foreach ($view['list'] as  $list) { ?>
 													<option value="<?php echo $list; ?>" <?php if($view['display_field'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
 												<?php } ?>
 
@@ -490,7 +490,7 @@ elem.forEach(function(html) {
 											<input type="hidden" name="drop" id="drop" value="<?php echo $duplicate; ?>">
 											<select class="form-control form-select js-example-basic-single" id="order_by" name="order_by" aria-label="Order By">
 												<option value="-1"><?= __("Select Filed") ?></option>
-												<?php foreach ($view['list'] as  $list) { ?> 
+												<?php foreach ($view['list'] as  $list) { ?>
 													<option value="<?php echo $list; ?>" <?php if($view_details['order_by'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
 												<?php } ?>
 
@@ -517,9 +517,9 @@ elem.forEach(function(html) {
 										<div class="referfieldname col-lg-12" style="display: <?php if($view_details['refer_action'] == '1' || $view_details['refer_action'] == ''){ echo 'none'; } ?>">
 										<select class="form-control js-example-basic-single" id="refer_field" name= "refer_field" aria-label="Refer Field">
 											<option value="-1"><?= __("Select Filed") ?></option>
-											<?php foreach ($fieldlists as  $fieldlist) { ?> 
+											<?php foreach ($fieldlists as  $fieldlist) { ?>
 												<option value="<?php echo $fieldlist['Field']; ?>" <?php if($view_details['refer_field'] == $fieldlist['Field']){ echo "selected";  } ?>><?php echo $fieldlist['Field']; ?></option>
-											<?php } ?>	
+											<?php } ?>
 										</select>
 									</div>
 									</div>
@@ -531,9 +531,9 @@ elem.forEach(function(html) {
 										<div class="referbyfieldname" style="display: <?php if($view_details['refer_by_action'] == '1' || $view_details['refer_by_action'] == ''){ echo 'none'; } ?>">
 										<select class="form-control js-example-basic-single" id="refer_by_field" name= "refer_by_field" aria-label="Refer By Field">
 											<option value="-1"><?= __("Select Filed") ?></option>
-											<?php foreach ($view['list'] as  $list) { ?> 
+											<?php foreach ($view['list'] as  $list) { ?>
 												<option value="<?php echo $list; ?>"  <?php if($view_details['refer_by_field'] == $list){ echo "selected";  } ?>><?php echo $list; ?></option>
-											<?php } ?>	
+											<?php } ?>
 										</select>
 									</div>
 									</div>
@@ -550,7 +550,7 @@ elem.forEach(function(html) {
 
 								<div class="row align-items-center" style="margin-top: 10px;padding: 3px;">
 									<div class="col-lg-7">
-										<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem">	
+										<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem">
 											<tr>
 												<th scope="col" class="" width="15%"><?= __("Field") ?></th>
 												<th scope="col" class="thheader" width="5%"><?= __("Operator") ?></th>
@@ -560,13 +560,13 @@ elem.forEach(function(html) {
 											</tr>
 											<?php if(count((array)$tr)>0){
 												$count = 1;
-												foreach ($tr as $td) { //print_r($td); ?> 
+												foreach ($tr as $td) { //print_r($td); ?>
 
 
 													<tr id="qur_div_<?php echo $count; ?>" >
 														<td>
 															<select class="form-control fitemRow form-select js-example-basic-single" id="whrfield_<?php echo $count; ?>" name= "whrfield[]" aria-label="Whrfield">
-																<?php foreach ($view['list'] as  $list) { ?> 
+																<?php foreach ($view['list'] as  $list) { ?>
 																	<option value="<?php echo $list; ?>" <?php if($td['drop_field'] == $list){ echo "selected";  } ?> ><?php echo $list; ?></option>
 																<?php } ?>
 															</select>
@@ -574,16 +574,16 @@ elem.forEach(function(html) {
 														<td>
 															<select class="form-control form-select js-example-basic-single" id="comparator_<?php echo $count; ?>" name= "comparator[]" aria-label="Comparator">
 																<?php foreach ($comparator_array as $dd) {  ?>
-																	<option  <?php if($td['drop_condition'] == $dd){ echo "selected";  } ?>  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?> 
+																	<option  <?php if($td['drop_condition'] == $dd){ echo "selected";  } ?>  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?>
 																</select>
 															</td>
 															<td>
 																<input type="text" value="<?php echo $td['drop_value']?>" id="whrvalue_<?php echo $count; ?>" name="whrvalue[]"  class="form-control amount" aria-label="Whrvalue">
 															</td>
 															<td>
-																<select class="form-control form-select js-example-basic-single"  id="operand_<?php echo $count; ?>"  name= "operand[]" id="" aria-label="Operand">	
+																<select class="form-control form-select js-example-basic-single"  id="operand_<?php echo $count; ?>"  name= "operand[]" id="" aria-label="Operand">
 																	<option value="AND"> AND </option>
-																	<option <?php if($td['drop_condition'] == $dd){ echo "selected";  } ?>  value = "OR"> OR </option>	
+																	<option <?php if($td['drop_condition'] == $dd){ echo "selected";  } ?>  value = "OR"> OR </option>
 																</select>
 															</td>
 															<td>
@@ -591,7 +591,7 @@ elem.forEach(function(html) {
 																<button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)"><?= __("Delete") ?></button>
 															</td>
 														</tr>
-														<?php $count++;  } } ?>		
+														<?php $count++;  } } ?>
 													</table>
 												</div>
 												<div class="col-lg-5">
@@ -625,28 +625,28 @@ elem.forEach(function(html) {
 														<label><b></b></label>
 													</div>
 												</div>
-												<?php if(count((array)$static_str)>0){ 
+												<?php if(count((array)$static_str)>0){
 													$i=1;
 													foreach($static_str as $key => $sstr){ ?>
 														<div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
 															<div class="col-lg-3">
-																<input type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $key; ?>"  name="type" aria-label="Type"> 
+																<input type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $key; ?>"  name="type" aria-label="Type">
 															</div>
 															<div class="col-lg-3">
-																<input type="text"class="form-control"  id="static_lable_<?php echo $i; ?>"  value="<?php echo $sstr; ?>"  name="type" aria-label="Type"> 
+																<input type="text"class="form-control"  id="static_lable_<?php echo $i; ?>"  value="<?php echo $sstr; ?>"  name="type" aria-label="Type">
 															</div>
 															<div class="col-lg-3">
 																<input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
 																<button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)"><?= __("Delete") ?></button>
 															</div>
 														</div>
-														<?php $i++; } } else{ ?> 
+														<?php $i++; } } else{ ?>
 															<div class="row align-items-center sfitemRow" id="static_div_1" style="margin-top: 10px;">
 																<div class="col-lg-3">
-																	<input type="text" class="form-control"  id="static_value_1"  value=""  name="type" aria-label="Type"> 
+																	<input type="text" class="form-control"  id="static_value_1"  value=""  name="type" aria-label="Type">
 																</div>
 																<div class="col-lg-3">
-																	<input type="text"class="form-control"  id="static_lable_1"  value=""  name="type" aria-label="Type"> 
+																	<input type="text"class="form-control"  id="static_lable_1"  value=""  name="type" aria-label="Type">
 																</div>
 																<div class="col-lg-3">
 																	<input type="hidden" value="0" id="static_delete_value_1" >
@@ -681,9 +681,9 @@ elem.forEach(function(html) {
 					<!-- local datatable modal -->
 					<!-- <script src="assets/js/pages/crud/forms/widgets/bootstrap-select.js"></script> -->
 					<!-- Select 2 js -->
-				
 
-<!-- 
+
+<!--
 					<script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>
 					<script type="text/javascript" src="assets/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js">
 					</script>

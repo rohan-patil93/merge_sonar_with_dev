@@ -32,7 +32,7 @@
 	$total_billabe_hrs = 0;
 	$total_budget_hrs = 0;
 	$total_leave_days = 0;
-	
+
 	if (is_array($app_data)) {
 		foreach($app_data as $apps){
 			if(isset($apps['pt_status_id']) && $apps['pt_status_id']=="199"){
@@ -65,7 +65,7 @@
 	$apv_count = count((array)$apv);
 	$table = "project_timesheets";
 	$stausresult = ViewStatusData();
-	$k=1; $ltotal=0; 
+	$k=1; $ltotal=0;
 	if (is_array($last_data)) {
 		foreach($last_data as $key=>$last){
 			$dismonth[] = date('M-Y',strtotime($key));
@@ -102,12 +102,12 @@
 <script type="text/javascript">
 	function statuspopup(status,id){
 		var favorite = [];
-        $.each($("input[name='checkbox1']:checked"), function(){            
+        $.each($("input[name='checkbox1']:checked"), function(){
             favorite.push($(this).val());
         });
         alert(favorite);
         alert("My favourite sports are: " + favorite.join(", "));
-		
+
       //alert("data");
      var table_name = 'project_timesheets';
       jQuery.ajax({
@@ -132,11 +132,11 @@
 	            $("#dropdownlist_"+id).html(data);
 	        },
 	        error:function (){}
-    	});    	
+    	});
 	}
 	/*$(document).ready(function(){
 		$('#select_all').on('click',function(){
-			
+
 	        if(this.checked){
 	            $('.checkbox1').each(function(){
 	                this.checked = true;
@@ -168,7 +168,7 @@
 	function tocheckdrodown(){
 		console.log("Data");
 		var len=0;
-		$.each($("input[name='checkbox1']:checked"), function(){            
+		$.each($("input[name='checkbox1']:checked"), function(){
             len=len+1;
         });
         if(len>0){
@@ -200,7 +200,7 @@
 		                                //echo $dis_year."_".$dis_month.",";
 		                                if(isset($_GET['PAY_YEAR']) && isset($_GET['PAY_MONTH']) && $_GET['PAY_YEAR'] == $dis_year && $_GET['PAY_MONTH'] == $dis_month ){
 		                                     $class = 'btn btn-primary';
-		                                 }else{                  
+		                                 }else{
 		                                    //$class = 'text-dark text-hover-primary'; btn-light
 		                                    $class = 'btn btn-light';
 		                                }
@@ -209,7 +209,7 @@
 		                            <div class="float-left mr-1 ">
 		                               <a class="<?php echo $class; ?>" href="index.php?option=COM_BLUK_HR_PROJECT_TIMESHEET&PAY_YEAR=<?php echo $dis_year; ?>&PAY_MONTH=<?php echo $dis_month; ?>"> <?php echo $disss; ?></a>
 		                            </div>
-		                            <?php  } ?>                            
+		                            <?php  } ?>
 		                        	</div>
 								</div>
 								<div class="col-lg-2">
@@ -229,9 +229,9 @@
 			</div>
 			<div class="row col-lg-12 mb-4" >
 <!-- 				<div class="card card-custom">
-					<div class="card-body">					
+					<div class="card-body">
 						<div class="d-flex align-items-center flex-wrap">
-							
+
 							<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
 								<span class="mr-4">
 									<i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
@@ -240,7 +240,7 @@
 									<span class="font-weight-bolder font-size-sm">Total</span>
 									<span class="font-weight-bolder font-size-h5">
 									<span class="text-dark-50 font-weight-bold">
-										<?php 
+										<?php
 										if($ttcount > $lmonth['billable_amount']){ ?>
 										<i class="icon-md fas fa-arrow-up text-success "></i>
 										<?php }else{?>
@@ -251,7 +251,7 @@
 									</span>
 								</div>
 							</div>
-							
+
 							<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
 								<span class="mr-4">
 									<i class="flaticon-like display-4 text-muted font-weight-bold"></i>
@@ -260,11 +260,11 @@
 									<span class="font-weight-bolder font-size-sm">Approved</span>
 									<span class="font-weight-bolder font-size-h5">
 									<span class="text-dark-50 font-weight-bold">
-										
+
 									</span><?php echo customeummarmonyformate($apv_billable_amount); ?></span>
 								</div>
 							</div>
-							
+
 							<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
 								<span class="mr-4">
 									<i class="flaticon2-hourglass display-4 text-muted font-weight-bold"></i>
@@ -275,7 +275,7 @@
 									<span class="text-dark-50 font-weight-bold"></span><?php echo customeummarmonyformate($sba_billable_amount); ?></span>
 								</div>
 							</div>
-							
+
 							<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
 								<span class="mr-4">
 									<i class="flaticon-file-2 display-4 text-muted font-weight-bold"></i>
@@ -285,7 +285,7 @@
 									<a href="#" class="text-primary font-weight-bolder">View</a>
 								</div>
 							</div>
-							
+
 							<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
 								<span class="mr-4">
 									<i class="flaticon-chat-1 display-4 text-muted font-weight-bold"></i>
@@ -295,7 +295,7 @@
 									<a href="#" class="text-primary font-weight-bolder">View</a>
 								</div>
 							</div>
-							
+
 							<div class="d-flex align-items-center flex-lg-fill mb-2 float-left">
 								<div class="btn-group" id="status_dropdown_commented" style="display:none;">
                                      <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".($stausresult['10']['color'] ?? 'ffffff'); ?>;    background:  <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>; border-color: <?php echo "#".strval($stausresult['10']['background_color'] ?? '007bff'); ?>;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $stausresult['10']['name'] ?? 'Approved'; ?> </button>
@@ -304,7 +304,7 @@
                                     </div>
                                 </div>
 							</div>
-							
+
 						</div>
 					</div>
 				</div> -->
@@ -356,7 +356,7 @@
 						<!--end::Body-->
 					</div>
 				</div>
-				
+
 				<div class="col-lg-2">
 					<div class="card card-custom gutter-b" style="height: 130px">
 						<!--begin::Body-->
@@ -479,10 +479,10 @@
 					class="text-muted mt-3 font-weight-bold
 					font-size-sm"><?= __("Billable :") ?> <?php echo $billables_count; ?> <?= __("Members, Nonbillable :") ?> <?php echo $employee_count-$billables_count; ?> <?= __("Members") ?></span> </h3>
 					<div class="card-toolbar">
-					 <ul class="nav nav-pills nav-pills-sm nav-dark-75"> 
+					 <ul class="nav nav-pills nav-pills-sm nav-dark-75">
 					<li class="nav-item"> <a class="nav-link py-2 px-4"
 					data-toggle="tab" href="#kt_tab_pane_11_2"><?= __("Approved") ?> <span class="label label-lg font-size-sm label-white ml-2"><?php echo $apv_count; ?></span></a>
-					</li> 
+					</li>
 					<li class="nav-item"> <a class="nav-link py-2
 					px-4 active" data-toggle="tab"
 					href="#kt_tab_pane_11_3"><?= __("Approvals Pending") ?> <span class="label label-lg font-size-sm label-white ml-2"><?php echo $sba_count; ?></span></a> </li> </ul> </div> </div>
@@ -512,16 +512,16 @@
 											</tr>
 										</thead>
 										<tbody>
-											<?php $k=3; foreach($apv as $sb ){ 
-												$sb_bp = (!empty($sb['budgeted_amount']) && $sb['budgeted_amount'] > 0) ? number_format((($sb['billable_amount']/$sb['budgeted_amount'])*100),2) : '0.00'; 
-												$bbg_color= lableandbgcolor($sb_bp);	
+											<?php $k=3; foreach($apv as $sb ){
+												$sb_bp = (!empty($sb['budgeted_amount']) && $sb['budgeted_amount'] > 0) ? number_format((($sb['billable_amount']/$sb['budgeted_amount'])*100),2) : '0.00';
+												$bbg_color= lableandbgcolor($sb_bp);
 												$llablecolor = lableandleave($k);
 												?>
 											<tr>
 												<td class="pl-0 py-4">
 													<?php if($sb['emp_image']!=""){ ?>
 														<div class="d-flex align-items-center">
-															<div class="symbol symbol-40">								
+															<div class="symbol symbol-40">
 																	<img src="uploads/all/<?php echo $sb['emp_image']; ?>" class="h-50 align-self-center" alt="" />
 															</div>
 														</div>
@@ -531,9 +531,9 @@
 												</td>
 												<td class="pl-0">
 													<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $sb['reporting_manger']; ?></a>
-													
+
 													<div>
-														
+
 														<a class="text-muted font-weight-bold text-hover-primary" href="#"><?php echo $sb['job_title']; ?></a>
 													</div>
 												</td>
@@ -552,7 +552,7 @@
 													<span class="text-dark-75 font-weight-500 d-block font-size-lg">
 														<?php echo customeummarmonyformate($sb['billable_amount']); ?>
 													</span>
-													
+
 												</td> -->
 												<td class="text-right">
 													<span class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
@@ -599,16 +599,16 @@
 											</tr>
 										</thead>
 										<tbody>
-											<?php $k=3; foreach($sba as $sb ){ 
+											<?php $k=3; foreach($sba as $sb ){
 													$sb_bp = (!empty($sb['budgeted_amount']) && $sb['budgeted_amount'] > 0) ? number_format((($sb['billable_amount']/$sb['budgeted_amount'])*100),2) : '0.00';
-													$bbg_color= lableandbgcolor($sb_bp);	
+													$bbg_color= lableandbgcolor($sb_bp);
 														$llablecolor = lableandleave($k);
 												?>
 											<tr>
 												<td class="pl-0 py-4">
 													<?php if($sb['emp_image']!=""){ ?>
 														<div class="d-flex align-items-center">
-															<div class="symbol symbol-40">								
+															<div class="symbol symbol-40">
 																	<img src="uploads/all/<?php echo $sb['emp_image']; ?>" class="h-50 align-self-center" alt="" />
 															</div>
 														</div>
@@ -618,9 +618,9 @@
 												</td>
 												<td class="pl-0">
 													<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $sb['reporting_manger']; ?></a>
-													
+
 													<div>
-														
+
 														<a class="text-muted font-weight-bold text-hover-primary" href="#"><?php echo $sb['job_title']; ?></a>
 													</div>
 												</td>
@@ -640,7 +640,7 @@
 													<span class="text-dark-75 font-weight-500 d-block font-size-lg">
 														<?php echo customeummarmonyformate($sb['billable_amount']); ?>
 													</span>
-													
+
 												</td> -->
 												<td class="text-right">
 													<span class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
@@ -664,7 +664,7 @@
 								<!--end::Table-->
 							</div>
 							<!--end::Tap pane-->
-							
+
 						</div>
 					</div>
 					<!--end::Body-->
@@ -682,7 +682,7 @@
 								<div class="font-size-sm text-muted mt-2"><?php echo customeummarmonyformate($ltotal); ?></div>
 							</div>
 						</div>
-						
+
 					</div>
 					<!--end::Header-->
 					<!--begin::Body-->
@@ -731,7 +731,7 @@
 							<!--begin::Item-->
 							<div class="d-flex align-items-center justify-content-between">
 								<!-- <div class="d-flex align-items-center mr-2">
-									
+
 									<div>
 										<a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Vendor - Resoureces</a>
 										<div class="font-size-sm text-muted font-weight-bold mt-1"><?php echo $lmonth['vendor_ids']."-".$lmonth['employee_ids']; ?> </div>
@@ -752,9 +752,9 @@
 		<!--begin::Row-->
 		<!-- <div class="row">
 			<div class="col-lg-6">
-				
+
 				<div class="card card-custom card-stretch gutter-b">
-					
+
 					<div class="card-header h-auto border-0">
 						<div class="card-title py-5">
 							<h3 class="card-label">
@@ -782,16 +782,16 @@
 							</ul>
 						</div>
 					</div>
-					
+
 					<div class="card-body">
 						<div id="kt_charts_widget_4_chart"></div>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-6">
-				
+
 				<div class="card card-custom card-stretch gutter-b">
-					
+
 					<div class="card-header border-0">
 						<h3 class="card-title font-weight-bolder text-dark"><?= __("Trends") ?></h3>
 						<div class="card-toolbar">
@@ -800,7 +800,7 @@
 									<i class="ki ki-bold-more-ver"></i>
 								</a>
 								<div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-									
+
 									<ul class="navi navi-hover py-5">
 										<li class="navi-item">
 											<a href="#" class="navi-link">
@@ -866,18 +866,18 @@
 											</a>
 										</li>
 									</ul>
-									
+
 								</div>
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="card-body pt-0">
 												<div class="d-flex align-items-center mb-9 bg-light-warning rounded p-5">
-						
+
 							<span class="svg-icon svg-icon-warning mr-5">
 								<span class="svg-icon svg-icon-lg">
-									
+
 									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 											<rect x="0" y="0" width="24" height="24" />
@@ -887,21 +887,21 @@
 									</svg>
 								</span>
 							</span>
-							
+
 							<div class="d-flex flex-column flex-grow-1 mr-2">
 								<a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Group lunch celebration</a>
 								<span class="text-muted font-weight-bold">Due in 2 Days</span>
 							</div>
-							
+
 							<span class="font-weight-bolder text-warning py-1 font-size-lg">+28%</span>
-							
+
 						</div>
-						
+
 						<div class="d-flex align-items-center bg-light-success rounded p-5 mb-9">
-							
+
 							<span class="svg-icon svg-icon-success mr-5">
 								<span class="svg-icon svg-icon-lg">
-									
+
 									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 											<rect x="0" y="0" width="24" height="24" />
@@ -909,19 +909,19 @@
 											<path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
 										</g>
 									</svg>
-									
+
 								</span>
 							</span>
-							
+
 							<div class="d-flex flex-column flex-grow-1 mr-2">
 								<a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Home navigation optimization</a>
 								<span class="text-muted font-weight-bold">Due in 2 Days</span>
 							</div>
-							
+
 							<span class="font-weight-bolder text-success py-1 font-size-lg">+50%</span>
-							
+
 						</div>
-						
+
 						<div class="d-flex align-items-center bg-light-danger rounded p-5 mb-9">
 							<span class="svg-icon svg-icon-danger mr-5">
 								<span class="svg-icon svg-icon-lg">
@@ -932,7 +932,7 @@
 											<path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3" />
 										</g>
 									</svg>
-									
+
 								</span>
 							</span>
 							<div class="d-flex flex-column flex-grow-1 mr-2">
@@ -953,24 +953,24 @@
 											<path d="M17.9142136,15.4497475 C18.4664983,15.4497475 18.9142136,15.8974627 18.9142136,16.4497475 L18.9142136,18.4497475 C18.9142136,19.0020322 18.4664983,19.4497475 17.9142136,19.4497475 C17.3619288,19.4497475 16.9142136,19.0020322 16.9142136,18.4497475 L16.9142136,16.4497475 C16.9142136,15.8974627 17.3619288,15.4497475 17.9142136,15.4497475 Z M23.4497475,17.1568542 C23.8402718,17.5473785 23.8402718,18.1805435 23.4497475,18.5710678 L22.0355339,19.9852814 C21.6450096,20.3758057 21.0118446,20.3758057 20.6213203,19.9852814 C20.2307961,19.5947571 20.2307961,18.9615921 20.6213203,18.5710678 L22.0355339,17.1568542 C22.4260582,16.76633 23.0592232,16.76633 23.4497475,17.1568542 Z M12.6213203,17.1568542 C13.0118446,16.76633 13.6450096,16.76633 14.0355339,17.1568542 L15.4497475,18.5710678 C15.8402718,18.9615921 15.8402718,19.5947571 15.4497475,19.9852814 C15.0592232,20.3758057 14.4260582,20.3758057 14.0355339,19.9852814 L12.6213203,18.5710678 C12.2307961,18.1805435 12.2307961,17.5473785 12.6213203,17.1568542 Z" fill="#000000" opacity="0.3" transform="translate(18.035534, 17.863961) scale(1, -1) rotate(45.000000) translate(-18.035534, -17.863961)" />
 										</g>
 									</svg>
-									
+
 								</span>
 							</span>
 							<div class="d-flex flex-column flex-grow-1 mr-2">
 								<a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">Product goals strategy meet-up</a>
 								<span class="text-muted font-weight-bold">Due in 2 Days</span>
 							</div>
-							
+
 							<span class="font-weight-bolder text-info py-1 font-size-lg">+8%</span>
-							
+
 						</div>
-						
+
 					</div>
-					
+
 				</div>
-				
+
 			</div>
 		</div> -->
-		
+
 	</div>
 </div>

@@ -6,7 +6,7 @@ include_once '../comm.php';
 ?>
 
 <script type="text/javascript">
-	
+
 	var i = 2;
  function addoptionrows() {
         i++;
@@ -35,8 +35,8 @@ include_once '../comm.php';
 		var survey_question_option_array = [];
 		var survey_question_option = [];
 		survey_question_option_array = document.getElementsByName('survey_question_option[]');
-		for (var i = 0; i < survey_question_option_array.length; i++) { 
-			var survey_question_option_value = survey_question_option_array[i].value; 
+		for (var i = 0; i < survey_question_option_array.length; i++) {
+			var survey_question_option_value = survey_question_option_array[i].value;
 			survey_question_option.push(survey_question_option_value);
 		}
 		if(qtype == '1' || qtype == '3'){
@@ -134,12 +134,12 @@ include_once '../comm.php';
 		<?php if($_GET['type']==2)	{ ?>
 			<div class="form-group text-left mt-10">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Scale from 1 to:'); ?> <span class="text-danger">*</span></span>
-				<input type="number" name="survey_question_option[]"  class="form-control" placeholder="10" aria-label="10"> 
+				<input type="number" name="survey_question_option[]"  class="form-control" placeholder="10" aria-label="10">
 			</div>
-		<?php } ?>	
+		<?php } ?>
 		<?php if($_GET['type']==4)	{ ?>
-			<input type="hidden" name="survey_question_option[]"  class="form-control" value=""> 
-		<?php } ?>	
+			<input type="hidden" name="survey_question_option[]"  class="form-control" value="">
+		<?php } ?>
 	</div>
 	<div class="modal-footer">
 	    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?php echo __('Close'); ?></button>

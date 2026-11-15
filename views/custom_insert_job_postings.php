@@ -1,8 +1,8 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = '1';
-$_SESSION['apply_js']['textediter'] = '1'; 
+$_SESSION['apply_js']['textediter'] = '1';
 $_SESSION['apply_js']['inputmask'] = '1';
-//$_SESSION['apply_js']['jobposting'] = '1'; 
+//$_SESSION['apply_js']['jobposting'] = '1';
 //echo "<pre>"; print_r($_POST); echo "</pre>";
 $mandetorycandidatevalue = array('first_name'=>'First Name','middle_name'=>'Middle Name','last_name'=>'Last Name','address'=>'Address','post_code'=>'Post Code','email_id'=>'Email','gender'=>'Gender','disability'=>'Disability','marital_status'=>'Marital Status','date_of_birth'=>'Date Of Birth','blood_group'=>'Blood Group','adhar_no'=>'Aadhar No','pan_number'=>'Pan Number','total_experiance'=>'Total Experiance','notice_period'=>'Notice Period','excepted_doj'=>'Expected Date Of Join','current_location'=>'Current Location','current_ctc'=>'Current CTC','expected_ctc'=>'Expected CTC');
 if(isset($_POST['post_job']) && $alreadypost_job != '1'){
@@ -17,7 +17,7 @@ if(isset($_POST['post_job']) && $alreadypost_job != '1'){
             $questionlist['mandatory_question'] = $_POST['screening_mandatory_question'][$quekey] =="Y"?"Y":"N";
             $questionlist['question_answer'] = $_POST['screening_question_answer'][$quekey];
         }
-        $screen_question[] =$questionlist; 
+        $screen_question[] =$questionlist;
     }
     $_POST['question'] = json_encode($screen_question);
     $_POST['candidate_mandatory_field'] = json_encode($_POST['candidate_mandatory_field']);
@@ -51,7 +51,7 @@ if(isset($_POST['post_job']) && $alreadypost_job != '1'){
                 if (document.readyState == "complete") {
                   tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][3000]; ?>','');
                  //location.reload();
-              } 
+              }
           }
         </script>
     <?php
@@ -61,7 +61,7 @@ if(isset($_POST['post_job']) && $alreadypost_job != '1'){
 $rid = encodeId($_GET['Rid']);
 $rid = explode(":", $rid);
 $rid = $rid[1];
-$url = API."?mode=getjobpostings&rid=".$rid; 
+$url = API."?mode=getjobpostings&rid=".$rid;
 $resret = callAPI($url);
 $results  = json_decode($resret,1);
 //echo "<pre>"; print_r($results); echo "</pre>";
@@ -120,7 +120,7 @@ $joblevel_list = $results['job_grade'];
 
                 var screening_questions = datas.screening_questions;
                 screening_questions.forEach(function(sque){
-                       addQuestionsTextFileds(sque); 
+                       addQuestionsTextFileds(sque);
                 });
 
                 var tags = datas.tags;
@@ -147,12 +147,12 @@ $joblevel_list = $results['job_grade'];
         });
     }
     function selectoptions(tablename,filedname,value,name){
-        if(value == "-0"){  
+        if(value == "-0"){
             $.post("views/addoption.php",{"tablename":tablename,"filedname":filedname,"value":value,"name":name},function(result){
                 $('.optionvalue').html(result);
                 $('#exampleModalSizeSm').modal('show');
             })
-        }      
+        }
     }
     function coursetypefun(id){
           $(".coursetypeemty").addClass("btn-outline-info");
@@ -213,8 +213,8 @@ $joblevel_list = $results['job_grade'];
             $("#summa_ifr").contents().find("#tinymce").html(datas[0]['job_description']);
             $("#textediters").html(datas[0]['job_description']);
             $("#noteguidelines").html(datas[0]['job_description']);
-        }); 
-    } 
+        });
+    }
     function maxamountemplye(value){
         value = value.split("<?php echo $_SESSION['config']['currency_symbol']; ?>");
         value = value[1].replaceAll(",", '');
@@ -242,7 +242,7 @@ $joblevel_list = $results['job_grade'];
         }else{
             $("."+divclass).hide('slow');
             $("."+divclass+"-input").prop('disabled', true);
-        }   
+        }
     }
 </script>
 
@@ -254,12 +254,12 @@ $joblevel_list = $results['job_grade'];
               <div class="alert alert-danger background-danger alert-dismissible">
                 <strong><?php echo $error_message; ?></strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
-            </div>	
+            </div>
         <?php } ?>
         <div class="row post">
 
          <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-            <form method="post" id="jobpostongform"> 
+            <form method="post" id="jobpostongform">
                 <input class="form-control" type="hidden" name="company_id" value="<?php echo $_SESSION['company_id']; ?>" >
                 <input class="form-control" type="hidden" name="data_name" value="<?php echo $_SESSION['DB_NAME']; ?>" >
                 <input class="form-control" type="hidden" name="user_id" value="<?php echo $_SESSION['userid']; ?>" >
@@ -267,7 +267,7 @@ $joblevel_list = $results['job_grade'];
                 <input type="hidden" name="id" value="<?php echo $rid; ?>">
 
                 <div class="card-header ">
-                 <h5><?php echo __('Job Posting'); ?></h5>      
+                 <h5><?php echo __('Job Posting'); ?></h5>
              </div>
              <div class="card-body">
                  <div class="">
@@ -385,7 +385,7 @@ $joblevel_list = $results['job_grade'];
 </div>
 
 </div>
-</div> 
+</div>
 <div class="row mt-2">
   <label for="video_url" class="col-lg-8 col-md-8 col-sm-12 col-12 form-label mt-1"><?php echo __('Showcase Your Brand'); ?></label>
   <span class="col-lg-8 col-md-8 col-sm-12 col-12 mb-4"><?php echo __('Add a video to tell your brand\'s story and show candidates what it is like to work at your company'); ?></span>
@@ -454,7 +454,7 @@ $joblevel_list = $results['job_grade'];
               <option value="-1"><?php echo __('Select job Level'); ?></option>
               <?php foreach($joblevel_list as $joblevel_list){ ?>
 
-                  <option value="<?php echo $joblevel_list['id']; ?>" <?php echo $jobpostlist['job_level_id']==$joblevel_list['id']?"selected":""; ?>><?php echo $joblevel_list['job_grade_name']; ?></option>   
+                  <option value="<?php echo $joblevel_list['id']; ?>" <?php echo $jobpostlist['job_level_id']==$joblevel_list['id']?"selected":""; ?>><?php echo $joblevel_list['job_grade_name']; ?></option>
               <?php   }?>
 
           </select>
@@ -462,7 +462,7 @@ $joblevel_list = $results['job_grade'];
       <div class="col-lg-4 col-md-4 col-sm-12 col-12 m-b-10">
        <label for="job_selection_process" class="form-label mt-1"><?php echo __('Job Selection Process'); ?> <span class="requried text-danger">*</span></label>
        <span class="d-block error-message text-danger"></span>
-       <select class="form-select js-example-basic-single form-control requried_field" id="job_selection_process" name="job_selection_process" required> 
+       <select class="form-select js-example-basic-single form-control requried_field" id="job_selection_process" name="job_selection_process" required>
           <option value=""><?php echo __('Select Job Selection process'); ?></option>
           <?php foreach($jobselection_process_list as $jobselection_process_listroe){ ?>
               <option value="<?php echo $jobselection_process_listroe['id']; ?>" <?php echo $jobpostlist['job_selection_process']==$jobselection_process_listroe['id']?"selected":""; ?>><?php echo $jobselection_process_listroe['process_name']; ?></option>
@@ -475,7 +475,7 @@ $joblevel_list = $results['job_grade'];
     <div class="">
        <input class="form-control" type="text" value="<?php echo $jobpostlist['no_of_resources']; ?>" name="number_of_employee" id="number_of_employee" placeholder="<?php echo __('Eg: 4'); ?>" />
    </div>
-</div>  
+</div>
 
 
 </div>
@@ -514,7 +514,7 @@ $joblevel_list = $results['job_grade'];
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-8">  
+                            <div class="col-lg-8">
                                <div class="row">
                                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10">
                                         <label class="form-label mt-1"> <?php echo __('Esgin Budget'); ?></label>
@@ -543,7 +543,7 @@ $joblevel_list = $results['job_grade'];
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-b-10">
                                         <label class="form-label mt-1"> <?php echo __('Candidate Mandatory Field Value'); ?> </label>
-                                        <?php  
+                                        <?php
                                         $candidate_mandatory_field = json_decode($jobpostlist['candidate_mandatory_field'],1);
                                         ?>
                                         <select class="form-select js-example-basic-multiple" id="" name="candidate_mandatory_field[]" multiple aria-label="<?php echo __('Candidate Mandatory Field'); ?>">
@@ -607,14 +607,14 @@ $joblevel_list = $results['job_grade'];
 </div>
 
 <div class="row mt-2">
-    <label for="job_responsibility" class="col-4 form-label mt-1"><?php echo __('Job Responsibility'); ?></label> 
+    <label for="job_responsibility" class="col-4 form-label mt-1"><?php echo __('Job Responsibility'); ?></label>
     <div class="col-8 mt-1">
        <button type="button" class="btn btn-primary float-right mb-1" type="button" id="ai_generate_job_description" onclick="aIGenerateJobDescription()" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Click here to generate AI - Responsibilities, Screening Questions, Job Description & Tags'); ?>" ><i class="ti-light-bulb"></i> <?php echo __('AI Generate'); ?></button>
    </div>
    <div class="col-12">
     <textarea class="form-control" placeholder="" name="job_responsibility" id = "job_responsibility" style="height: 80px;"><?php echo $jobpostlist['job_responsibility'];?></textarea>
 </div>
-</div> 
+</div>
 
 
 <h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5"><?php echo __('Applications'); ?></h3>
@@ -622,28 +622,28 @@ $joblevel_list = $results['job_grade'];
 
 <h4 class="mt-2"><?php echo __('Screening Questions'); ?></h4>
 <h6 class="font-weight-normal mb-4"><?php echo __('You can ask some questions before the candidates apply to your job!'); ?></h6>
-<div class="col-lg-12"> 
-    <div class="row rows<?php echo $ij; ?> mt-2"> 
+<div class="col-lg-12">
+    <div class="row rows<?php echo $ij; ?> mt-2">
         <div class="col-lg-5">
-            <label class="form-label"><?php echo __('Questions'); ?></label> 
+            <label class="form-label"><?php echo __('Questions'); ?></label>
         </div>
         <div class="col-lg-1">
-            <label class="form-label"><?php echo __('Mandatory'); ?></label> 
+            <label class="form-label"><?php echo __('Mandatory'); ?></label>
         </div>
         <div class="col-lg-4">
-            <label class="form-label"><?php echo __('Accepted Answer'); ?></label> 
+            <label class="form-label"><?php echo __('Accepted Answer'); ?></label>
         </div>
         <div class="col-lg-2">
 
-        </div>   
-    </div> 
+        </div>
+    </div>
 </div>
-<div class="col-lg-12" id="videoquestiontextfileds"> 
-    <?php $ij=1; 
+<div class="col-lg-12" id="videoquestiontextfileds">
+    <?php $ij=1;
     $questiona = json_decode($jobpostlist['question'],1);
-    if(count((array)$questiona) == '0'){  $questiona[] =  array(); } 
+    if(count((array)$questiona) == '0'){  $questiona[] =  array(); }
         foreach($questiona as $question){ ?>
-             <div class="row rows<?php echo $ij; ?> mt-2"> 
+             <div class="row rows<?php echo $ij; ?> mt-2">
                 <input type="hidden" name="screening_question_seq[<?php echo $ij; ?>]" name="<?php echo $ij; ?>">
                 <div class="col-lg-5">
                     <input class="form-control" type="text" name="screening_question[<?php echo $ij; ?>]" value="<?php echo $question['question']; ?>" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>">
@@ -657,11 +657,11 @@ $joblevel_list = $results['job_grade'];
                     <input class="form-control" type="text" name="screening_question_answer[<?php echo $ij; ?>]" value="<?php echo $question['question_answer']; ?>" placeholder="<?php echo __('Eg. Yes,No'); ?>" aria-label="<?php echo __('Eg. Yes,No'); ?>">
                 </div>
                 <div class="col-lg-2">
-                    <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i> 
+                    <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="fa fa-trash text-danger cursor-pointer"></i>
                 </div>
-            </div>     
-        <?php 
-            $ij++; } 
+            </div>
+        <?php
+            $ij++; }
         ?>
 </div>
 <div class="col-lg-3">
@@ -669,7 +669,7 @@ $joblevel_list = $results['job_grade'];
    <i class="fas fa-plus"></i> <?php echo __('Add Question'); ?>
 </button>
 </div>
- <?php /** ?> 
+ <?php /** ?>
 <div class="col-lg-12">
     <div class="checkbox-fade fade-in-primary">
       <label class="form-label">
@@ -681,36 +681,36 @@ $joblevel_list = $results['job_grade'];
   </label>
 </div>
 
-</div> 
+</div>
 
-<div class="col-lg-8"> 
-  
-    <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>> 
+<div class="col-lg-8">
+
+    <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>>
       <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Do you have any disability or accessibility requirements?" aria-label="<?php echo __('Question1'); ?>">
-  </div> 
-  <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>> 
+  </div>
+  <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>>
       <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Gender" aria-label="<?php echo __('Question1'); ?>">
-  </div> 
-  <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>> 
-      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Ethnicity" aria-label="<?php echo __('Question1'); ?>"> 
-  </div> 
-  <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>> 
+  </div>
+  <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>>
+      <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Ethnicity" aria-label="<?php echo __('Question1'); ?>">
+  </div>
+  <div class="row rows aa_eeo" <?php echo $jobpostlist['aa_eeo'] == '0'?'':'style="display: none"';?>>
       <input class="form-control mt-2 col-lg-10 aa_eeo-input" type="text" name="question1[]" value="Veteran Status" aria-label="<?php echo __('Question1'); ?>">
-  </div> 
-  <?php $ij=4; 
-    if(isset($jobpostlist['question'])){ 
-        $question = json_decode($jobpostlist['question'],1); 
+  </div>
+  <?php $ij=4;
+    if(isset($jobpostlist['question'])){
+        $question = json_decode($jobpostlist['question'],1);
         foreach($question as $question){ ?>
-             <div class="row rows<?php echo $ij; ?>"> 
+             <div class="row rows<?php echo $ij; ?>">
 
               <input class="form-control mt-2 col-lg-10" type="text" name="question[]" value="<?php echo $question; ?>" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>">
-              <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="text-dark-50 flaticon-delete col-lg-2 mt-4"></i> 
-          </div>     
+              <i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(<?php echo $ij; ?>)" class="text-dark-50 flaticon-delete col-lg-2 mt-4"></i>
+          </div>
           <?php $ij++; }
-        }else{ ?> 
-          <div class="row rows7"> 
-              <input class="form-control mt-2 col-lg-10" type="text" name="question[]" value="" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>"><i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(4)" class="text-dark-50 fa fa-trash col-lg-2 mt-4"></i> 
-          </div> 
+        }else{ ?>
+          <div class="row rows7">
+              <input class="form-control mt-2 col-lg-10" type="text" name="question[]" value="" placeholder="<?php echo __('Eg. Tell me about yourself'); ?>" aria-label="<?php echo __('Eg. Tell me about yourself'); ?>"><i title="<?php echo __('Delete Question'); ?>" onclick="deleteQuestion(4)" class="text-dark-50 fa fa-trash col-lg-2 mt-4"></i>
+          </div>
 <?php } ?>
 
 <!-- <div id="videoquestiontextfileds" >
@@ -720,7 +720,7 @@ $joblevel_list = $results['job_grade'];
    <i class="fas fa-plus"></i> <?php echo __('Add Question'); ?>
 </button>
 </div>
- <?php **/ ?> 
+ <?php **/ ?>
 <div class="col-12">
    <h3 class="text-dark font-weight-bold mt-5 mt-3 mr-5"><?php echo __('Job Tags'); ?></h3>
    <hr>
@@ -758,9 +758,9 @@ $joblevel_list = $results['job_grade'];
 <div class="mt-5">
    <input type="hidden" name="post_job"  value="save">
    <input type="hidden" name="submit_value" id="submit_form_type"   value="exit">
-							 
 
-                        <?php 
+
+                        <?php
                         $enablebutton = array(ST_ACTIVE,'');
                         $disabledbtn = "";
                         if(!in_array($jobpostlist['current_status'], $enablebutton)){
@@ -830,7 +830,7 @@ $joblevel_list = $results['job_grade'];
 
 
 
-<?php 
+<?php
 
 $text = array("Job Title"=>"Job title list please select any one","Job Number"=>"Job bumber auto generate eg.JB00062 ","Job Name"=>"Enter job post name ","Location"=>"Select Office Location");
 

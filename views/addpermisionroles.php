@@ -2,9 +2,9 @@
   include_once('../includes/session.php');
   include_once('../dbconfig.php');
   include_once('../comm.php');
-if($_POST['action']=="pagelist"){ 
+if($_POST['action']=="pagelist"){
    $id = json_encode($_POST['permision']);
-   $url = API."?mode=applicationprocesspages&id=".$id; 
+   $url = API."?mode=applicationprocesspages&id=".$id;
    $collfunction = callAPI($url);
    $resutlvalue = json_decode($collfunction,1);
 ?>
@@ -12,7 +12,7 @@ if($_POST['action']=="pagelist"){
         <div class="form-group col-lg-4">
        <h4 class="modal-title col-md-7" id="myModalLabel2" ><b><?= __('Page Permissions') ?></b></h4>
      </div>
-    <?php if(!empty($resutlvalue)){ ?> 
+    <?php if(!empty($resutlvalue)){ ?>
      <div class="form-group col-lg-6">
        <div class="checkbox-fade fade-in-primary">
       <label class="form-label">
@@ -25,16 +25,16 @@ if($_POST['action']=="pagelist"){
   </div><?php } ?>
 </div>
      </div>
-   <?php 
+   <?php
 
    $i = 0;
 //print_r($resutlvalue);
 $vdata1["where"] = array('role_short_code'=> $_POST['role_short_code'],'is_active'=>'0');
 $vdata = urlencode(json_encode($vdata1));
-$vurl = API."?mode=gettabledetailswithconditions&table=role_permissions&data=".$vdata; 
+$vurl = API."?mode=gettabledetailswithconditions&table=role_permissions&data=".$vdata;
 $respons = callAPI($vurl);
 $responsarry = json_decode($respons,1);
-foreach($resutlvalue as $resultlist){ 
+foreach($resutlvalue as $resultlist){
  $valueg = filterArrayValue($responsarry,"application_process_page_id",$resultlist['id']);
  $valuegs = $valueg[0];
     ?>
@@ -52,7 +52,7 @@ foreach($resutlvalue as $resultlist){
             </span>
             <span><?= __('View') ?></span>
           </label>
-        </div>  
+        </div>
         <div class="checkbox-fade fade-in-primary">
           <label class="form-label">
             <input type="checkbox" class="pagecheckboxsss" id="checkboxWrite<?php echo $i; ?>" name="pageslistwrite[<?php echo $i; ?>]" <?php echo $valuegs['permission_insert'] == '0'?"checked":"";?> value="<?php echo $resultlist['id']; ?>">
@@ -61,7 +61,7 @@ foreach($resutlvalue as $resultlist){
             </span>
             <span><?= __('Insert') ?></span>
           </label>
-        </div>  
+        </div>
         <div class="checkbox-fade fade-in-primary">
           <label class="form-label">
             <input type="checkbox" class="pagecheckboxsss" id="checkboxCreate<?php echo $i; ?>" name="pageslistcreate[<?php echo $i; ?>]" <?php echo $valuegs['permission_update'] == '0'?"checked":"";?> value="<?php echo $resultlist['id']; ?>">
@@ -70,7 +70,7 @@ foreach($resutlvalue as $resultlist){
             </span>
             <span><?= __('Update') ?></span>
           </label>
-        </div>  
+        </div>
         <div class="checkbox-fade fade-in-primary">
           <label class="form-label">
            <input type="checkbox" <?php echo $valuegs['permission_delete'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxdelete<?php echo $i; ?>"  name="pageslistdelete[<?php echo $i; ?>]"  >
@@ -79,18 +79,18 @@ foreach($resutlvalue as $resultlist){
           </span>
           <span><?= __('Delete') ?></span>
         </label>
-      </div>  
+      </div>
       <div class="checkbox-fade fade-in-primary">
-        <label class="form-label"> 
+        <label class="form-label">
          <input type="checkbox" <?php echo $valuegs['permission_print'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxprint<?php echo $i; ?>"  name="pageslistprint[<?php echo $i; ?>]"  >
          <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
         <span><?= __('Print') ?></span>
       </label>
-    </div>  
+    </div>
     <div class="checkbox-fade fade-in-primary">
-      <label class="form-label"> 
+      <label class="form-label">
         <input type="checkbox" <?php echo $valuegs['permission_import'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboximport<?php echo $i; ?>"  name="pageslistimport[<?php echo $i; ?>]"  >
 
         <span class="cr">
@@ -100,16 +100,16 @@ foreach($resutlvalue as $resultlist){
       </label>
     </div>
   <!--   <div class="checkbox-fade fade-in-primary">
-      <label class="form-label"> 
+      <label class="form-label">
        <input type="checkbox" <?php echo $valuegs['permission_export'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxexport<?php echo $i; ?>"  name="pageslistexport[<?php echo $i; ?>]"  >
        <span class="cr">
         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
       </span>
       <span>Export</span>
     </label>
-  </div>  --> 
+  </div>  -->
   <div class="checkbox-fade fade-in-primary">
-    <label class="form-label"> 
+    <label class="form-label">
       <input type="checkbox" <?php echo $valuegs['permission_download'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxdownload<?php echo $i; ?>"  name="pageslistdownload[<?php echo $i; ?>]"  >
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -118,7 +118,7 @@ foreach($resutlvalue as $resultlist){
     </label>
   </div>
   <div class="checkbox-fade fade-in-primary">
-    <label class="form-label"> 
+    <label class="form-label">
       <input type="checkbox" <?php echo $valuegs['permission_approval'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxapproval<?php echo $i; ?>"  name="pageslistapproval[<?php echo $i; ?>]"  >
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -127,17 +127,17 @@ foreach($resutlvalue as $resultlist){
     </label>
   </div>
   <div class="checkbox-fade fade-in-primary">
-    <label class="form-label"> 
+    <label class="form-label">
       <input type="checkbox" <?php echo $valuegs['permission_analytic'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxanalytic<?php echo $i; ?>"  name="pageslistanalytic[<?php echo $i; ?>]"  >
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
       <span><?= __('Analytic') ?></span>
     </label>
-  </div>  
+  </div>
 </div>
-</div> 
-<?php $i++; }  
+</div>
+<?php $i++; }
 
 
 
@@ -147,17 +147,7 @@ foreach($resutlvalue as $resultlist){
 
 
 
-}else{  
-
-
-
-
-
-
-
-
-
-
+}else{
 
 
 
@@ -182,13 +172,23 @@ foreach($resutlvalue as $resultlist){
 
 
 
-    $applicatroleapi = API."?mode=getapplicationrole&application_roles=".$_POST['role_id']."&selectmodule_id=".$_POST['module_id']; 
+
+
+
+
+
+
+
+
+
+
+    $applicatroleapi = API."?mode=getapplicationrole&application_roles=".$_POST['role_id']."&selectmodule_id=".$_POST['module_id'];
     $applicatrolecall = callAPI($applicatroleapi);
     $result = json_decode($applicatrolecall,1);
     //echo "<pre>";print_r($result['module_setup']);echo "</pre>";
     $aruserdetails  = $result['application_roles'];
     $menulocation  = $result['menulocation'];
-    
+
     $modulelist = $result['module_setup'];
     $menulocationse  =json_decode($aruserdetails['view_nav'],1);
     $resutlvalue  = $result['application_process_role'];
@@ -214,7 +214,7 @@ foreach($resutlvalue as $resultlist){
 
 
   ?>
-  <input type="hidden" id="usedemailids" value='<?php echo json_encode($roleshortcodes); ?>'>    
+  <input type="hidden" id="usedemailids" value='<?php echo json_encode($roleshortcodes); ?>'>
   <form id="addroleform">
    <input type="hidden" name="role_id" value="<?php echo $_POST['role_id']; ?>">
    <div class="row">
@@ -232,8 +232,8 @@ foreach($resutlvalue as $resultlist){
     <input type="hidden" name="application_module" id="application_module" value="<?php echo $modulelist['module_id']; ?>">
     <input type="text" class="form-control" value="<?php echo htmlspecialchars(__($modulelist['display_name'] ?? '')); ?>" readonly>
 
-    
- 
+
+
   </div>
   <div class="form-group col-lg-3 col-md-12 col-sm-12 col-12">
       <label class="font-weight-bolder"><?= __('Menu Location') ?></label></br>
@@ -247,7 +247,7 @@ foreach($resutlvalue as $resultlist){
             <span><?php echo htmlspecialchars(__($menulocations['genc_detail_name'] ?? ''));?></span>
           </label>
         </div>
-        <?php } ?> 
+        <?php } ?>
 
   </div>
 </div>
@@ -266,12 +266,12 @@ foreach($resutlvalue as $resultlist){
         </span> <?= __('Select All') ?>
       </label>
     </div></div>
-  </div> 
+  </div>
   <div class="form-group row">
     <?php
   $i= 0;
-  foreach($resultlist as $resultlist){ 
-    ?>               
+  foreach($resultlist as $resultlist){
+    ?>
     <div class="col-lg-4 col-md-6 col-sm-6 col-12 mt-3">
     <div class="checkbox-fade fade-in-primary">
       <label class="form-label">
@@ -288,7 +288,7 @@ foreach($resutlvalue as $resultlist){
         <div class="form-group col-lg-4">
        <h4 class="modal-title col-md-7" id="myModalLabel2" ><b><?= __('Page Permissions') ?></b></h4>
      </div>
-    <?php if(!empty($resutlvalue22)){ ?> 
+    <?php if(!empty($resutlvalue22)){ ?>
      <div class="form-group col-lg-6">
        <div class="checkbox-fade fade-in-primary">
       <label class="form-label">
@@ -303,7 +303,7 @@ foreach($resutlvalue as $resultlist){
 </div>
 <?php
    $i = 0;
-foreach($resutlvalue22 as $resultlist){ 
+foreach($resutlvalue22 as $resultlist){
  $valueg = filterArrayValue($responsarry,"application_process_page_id",$resultlist['id']);
  $valuegs = $valueg[0];
     ?>
@@ -324,7 +324,7 @@ foreach($resutlvalue22 as $resultlist){
             </span>
             <span><?= __('View') ?></span>
           </label>
-        </div>  
+        </div>
         <div class="checkbox-fade fade-in-primary mt-2">
           <label class="form-label">
             <input type="checkbox" class="pagecheckboxsss" id="checkboxWrite<?php echo $i; ?>" name="pageslistwrite[<?php echo $i; ?>]" <?php echo $valuegs['permission_insert'] == '0'?"checked":"";?> value="<?php echo $resultlist['id']; ?>">
@@ -333,7 +333,7 @@ foreach($resutlvalue22 as $resultlist){
             </span>
             <span><?= __('Insert') ?></span>
           </label>
-        </div>  
+        </div>
         <div class="checkbox-fade fade-in-primary mt-2">
           <label class="form-label">
             <input type="checkbox" class="pagecheckboxsss" id="checkboxCreate<?php echo $i; ?>" name="pageslistcreate[<?php echo $i; ?>]" <?php echo $valuegs['permission_update'] == '0'?"checked":"";?> value="<?php echo $resultlist['id']; ?>">
@@ -342,7 +342,7 @@ foreach($resutlvalue22 as $resultlist){
             </span>
             <span><?= __('Update') ?></span>
           </label>
-        </div>  
+        </div>
         <div class="checkbox-fade fade-in-primary mt-2">
           <label class="form-label">
            <input type="checkbox" <?php echo $valuegs['permission_delete'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxdelete<?php echo $i; ?>"  name="pageslistdelete[<?php echo $i; ?>]"  >
@@ -351,18 +351,18 @@ foreach($resutlvalue22 as $resultlist){
           </span>
           <span><?= __('Delete') ?></span>
         </label>
-      </div>  
+      </div>
       <div class="checkbox-fade fade-in-primary mt-2">
-        <label class="form-label"> 
+        <label class="form-label">
          <input type="checkbox" <?php echo $valuegs['permission_print'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxprint<?php echo $i; ?>"  name="pageslistprint[<?php echo $i; ?>]"  >
          <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
         <span><?= __('Print') ?></span>
       </label>
-    </div>  
+    </div>
     <div class="checkbox-fade fade-in-primary mt-2">
-      <label class="form-label"> 
+      <label class="form-label">
         <input type="checkbox" <?php echo $valuegs['permission_import'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboximport<?php echo $i; ?>"  name="pageslistimport[<?php echo $i; ?>]"  >
 
         <span class="cr">
@@ -372,25 +372,25 @@ foreach($resutlvalue22 as $resultlist){
       </label>
     </div>
 <!--     <div class="checkbox-fade fade-in-primary mt-2">
-      <label class="form-label"> 
+      <label class="form-label">
        <input type="checkbox" <?php echo $valuegs['permission_export'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxexport<?php echo $i; ?>"  name="pageslistexport[<?php echo $i; ?>]"  >
        <span class="cr">
         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
       </span>
       <span>Export</span>
     </label>
-  </div>  --> 
+  </div>  -->
   <div class="checkbox-fade fade-in-primary mt-2">
-    <label class="form-label"> 
+    <label class="form-label">
      <input type="checkbox" <?php echo $valuegs['permission_download'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxdownload<?php echo $i; ?>"  name="pageslistdownload[<?php echo $i; ?>]"  >
      <span class="cr">
       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
     </span>
     <span><?= __('Download') ?></span>
   </label>
-</div> 
+</div>
 <div class="checkbox-fade fade-in-primary">
-    <label class="form-label"> 
+    <label class="form-label">
       <input type="checkbox" <?php echo $valuegs['permission_approval'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxapproval<?php echo $i; ?>"  name="pageslistapproval[<?php echo $i; ?>]"  >
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -399,22 +399,22 @@ foreach($resutlvalue22 as $resultlist){
     </label>
   </div>
   <div class="checkbox-fade fade-in-primary">
-    <label class="form-label"> 
+    <label class="form-label">
       <input type="checkbox" <?php echo $valuegs['permission_analytic'] == '0'?"checked":"";?> class="pagecheckboxsss" id="checkboxanalytic<?php echo $i; ?>"  name="pageslistanalytic[<?php echo $i; ?>]"  >
         <span class="cr">
           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
         </span>
       <span><?= __('Analytic') ?></span>
     </label>
-  </div>   
+  </div>
 </div>
-</div> 
+</div>
 <?php $i++; }  ?>
 
-</div>  
+</div>
     <div class="modal-footer">
      <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel') ?></button>
      <button type="button" class="btn btn-primary font-weight-bold" onclick="addRole()"><?= __('Save changes') ?></button>
    </div>
  </form>
- <?php }  ?>  
+ <?php }  ?>

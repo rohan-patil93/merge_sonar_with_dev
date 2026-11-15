@@ -2,13 +2,13 @@
 include_once('../includes/session.php');
 include_once('../dbconfig.php');
 include_once('../comm.php');
- $page = $_POST['page']; 
+ $page = $_POST['page'];
  //print_r($_POST);
 if($page == "elementordesign"){
 	$filedTypes ="";
 	foreach($filed_array as $key => $value){
 		$filedTypes .='<option value="'.$key.'" >'.$value.'</option>';
-	} 
+	}
 	$message ='<div class="card card_count deleterow'.$_POST['id'].'">
 	<div class="card-header p-2 f-w-600" id="headingOne'.$_POST['id'].'">
 	<div class="card-title collapsed textboxclass'.$_POST['id'].'" data-bs-toggle="collapse" data-bs-target="#collapseOnee'.$_POST['id'].'">
@@ -269,7 +269,7 @@ if($page== "elementordesignbutton"){
 	$button = '<div class="col-lg-6" id="buttondiv'.$_POST['id'].'">
 
 	<button type="button" class="btn btn-primary mr-2 textcapital" id="buttonid'.$_POST['id'].'"><i class="la la-check"></i>' . __('Save') . '</button>
-	</div>';		
+	</div>';
 	echo json_encode(array('setting'=>$message,'textfileds'=>$button));
 
 }
@@ -287,10 +287,10 @@ if($page == "fileuploadingstatusdisplay"){
 	<div class="col-lg-12 col-md-12 col-sm-12">
 	<div class="dropzone dropzone-default dropzone-primary digits" id="kt_dropzone_2">
 	</div></div></div>';
-	echo $message;			
+	echo $message;
 }
 if ($page == 'elementortype'){
-	textboxes($_POST['id'],$_POST['type'],""); 
+	textboxes($_POST['id'],$_POST['type'],"");
 	exit;
 }
 ?>
