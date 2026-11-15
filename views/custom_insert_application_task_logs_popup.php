@@ -75,7 +75,7 @@ $statuse = ViewStatusData();
 		<form id="tasksubmitform">
 			<div class="row">
 				<div class="form-group">
-					<label class="form-label"><?= __('Comment') ?><span class="text-danger">*</span></label>
+					<span class="form-label d-inline-block fw-bold"><?= __('Comment') ?><span class="text-danger">*</span></span>
 					<textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" name="comment" id="popup_comment" ><?php echo $application_task_logs['description'];?></textarea>
 				</div>
 			</div>
