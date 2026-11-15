@@ -120,7 +120,6 @@ $financeshowtabmodule = array(4);
             aria-selected="false">
             <h3 class="f-w-600 f-30 mb-0"><?php echo COUNT((array) $customer_payment_ratings['ratings']); ?></h3>
             <p class="m-0 f-w-600">Customer Ratings</p>
-            <!-- <p class="m-0">---- Rated</p> -->
           </a>
         </li>
       <?php }
@@ -138,7 +137,6 @@ $financeshowtabmodule = array(4);
             aria-selected="false">
             <h3 class="f-w-600 f-30 mb-0"><?php echo $vendor_payment_ratings['total_vendors']; ?></h3>
             <p class="m-0 f-w-600">Vendor Ratings</p>
-            <!-- <p class="m-0">---- Rated</p> -->
           </a>
         </li>
       <?php }
@@ -639,7 +637,6 @@ $financeshowtabmodule = array(4);
                           <th scope="col">DUE AMOUNT</th>
                           <th scope="col">PENDING</th>
                           <th scope="col">STATUS</th>
-                          <!--   <th scope="col">PAYMENTS MADE</th>-->
                         </tr>
                         <?php foreach ($invoices_detail['terms'] as $termsval) { ?>
                           <tr>
@@ -671,11 +668,6 @@ $financeshowtabmodule = array(4);
                         </td>
                       </tr>
 
-                      <!--  <tr class="data-row">
-                          <td>Date</td>
-                          <td>Description</td>
-                          <td align="right">Balance</td>
-                        </tr> -->
 
                       <tr class="data-row">
                         <td class="text-white">Closing Balance</td>
@@ -832,7 +824,6 @@ $financeshowtabmodule = array(4);
                             <th scope="col">DUE AMOUNT</th>
                             <th scope="col">PENDING</th>
                             <th scope="col">STATUS</th>
-                            <!-- <th scope="col">PAYMENTS RECEIVED</th> -->
                           </tr>
                           <?php foreach ($invoicesdetail['terms'] as $termsval) { ?>
                             <tr>
@@ -887,7 +878,6 @@ $financeshowtabmodule = array(4);
                 <th scope="col" class="text-white">Category</th>
                 <th scope="col" class="text-white">Metric</th>
                 <th scope="col" class="text-white">Value</th>
-                <!-- <th scope="col" class="text-white">Trend</th> -->
                 <th scope="col" class="text-white">Status</th>
               </tr>
               <?php foreach ($finance['metrics_snapshot'] as $metrics_snapshot) { ?>
@@ -1024,7 +1014,6 @@ $financeshowtabmodule = array(4);
             <div class="card green-light mb-0">
               <div class="card-title">TRADE PAYABLES</div>
               <div class="card-value"><?php echo $finance['balance_sheet']['trade_payables']; ?></div>
-              <!-- <p class="f-10 m-0">N/A</p> -->
             </div>
             <div class="card blue-light mb-0">
               <div class="card-title">DEBT-TO-EQUITY</div>
