@@ -67,7 +67,7 @@
                         <label for="chrPassword" class="visually-hidden">Password</label>
                         <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="chrPassword" id="chrPassword" required="" placeholder="password" aria-label="Password">
                     </div>
-                    <a href="#" class="float-right f-w-600 text-primary forgot-pwd-open" onclick="fergotpassworddisplay()">Forgot Password?</a>
+                    <a href="#top" class="float-right f-w-600 text-primary forgot-pwd-open" onclick="fergotpassworddisplay()">Forgot Password?</a>
                     <div class="form-group mt-4">
 					<input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                       <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
@@ -116,7 +116,7 @@
                                       <input type="hidden" name="submit" value="signup" />
                         <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-3" >Sign Up</button>
                     </div>
-                    <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <a class="text-primary" href="#" onclick="loginpagedisplay()">Sign In</a></p>
+                    <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <a class="text-primary" href="#top" onclick="loginpagedisplay()">Sign In</a></p>
                 </div>
 				</form>
             </div>
