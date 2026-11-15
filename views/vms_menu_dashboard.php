@@ -77,7 +77,7 @@ if(in_array($rr_vv,$permesion_v)){
                                                         <i class="<?php echo $step1['icon']; ?> text-white"></i>
                                                     </div>
                                                     <div class="col mt-2">
-                                                        <a href="#" onclick="dynamiclistpopup(<?php echo "'".$step1['url']."'"; ?>,<?php echo "'".$step1['name']."'"; ?>)">
+                                                        <a href="#top" onclick="dynamiclistpopup(<?php echo "'".$step1['url']."'"; ?>,<?php echo "'".$step1['name']."'"; ?>)">
                                                             <h6 class="m-b-5 text-white">
                                                                 <?php echo ucwords(strtolower($step1['name'])); ?>
                                                             </h6>
@@ -104,7 +104,7 @@ if(in_array($rr_vv,$permesion_v)){
                                                         <div class="text-facebook m-b-20">
                                                             <img class="img-100" src="assets\images\4.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         </div>
-                                                        <a href="#" onclick="dynamiclistpopup(<?php echo "'".$step2['url']."'"; ?>,<?php echo "'".$step2['name']."'"; ?>)">
+                                                        <a href="#top" onclick="dynamiclistpopup(<?php echo "'".$step2['url']."'"; ?>,<?php echo "'".$step2['name']."'"; ?>)">
                                                             <h3 class="text-facebook f-16 text-white f-w-700">
                                                                 <?php echo ucwords(strtolower($step2['name'])); ?>
                                                             </h3>
@@ -193,7 +193,7 @@ if(in_array($rr_vv,$permesion_v)){
                                                         <div class="text-facebook m-b-20">
                                                             <img class="img-50" src="assets\images\4.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         </div>
-                                                        <a href="#" onclick="dynamiclistpopup(<?php echo "'".$step2['url']."'"; ?>,<?php echo "'".$step2['name']."'"; ?>)">
+                                                        <a href="#top" onclick="dynamiclistpopup(<?php echo "'".$step2['url']."'"; ?>,<?php echo "'".$step2['name']."'"; ?>)">
                                                         <h3 class="text-facebook f-14 text-white f-w-700">
                                                             <?php echo ucwords(strtolower($step2['name'])); ?>
                                                         </h3>
