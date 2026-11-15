@@ -147,7 +147,7 @@ $property_tenant_details_extends = $result['property_tenant_details_extends'];
                 <span class="d-block error-message text-danger" id="extend_agreement_month_error"></span>
                 <input aria-label="<?= htmlspecialchars(__('Extend agreement month'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="extend_agreement_month" id="extend_agreement_month" min="<?php echo date("Y-m", strtotime('+1 months', strtotime($property_tenant_details['lease_period_end_date']))); ?>" value="<?php echo date("Y-m", strtotime('+1 months', strtotime($property_tenant_details['lease_period_end_date']))); ?>"/>  
                 <div>
-                    <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
+                    <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                       <thead>
                         <tr>
                           <th><?php echo __('Extend Date'); ?></th>
