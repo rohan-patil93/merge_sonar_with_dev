@@ -222,7 +222,7 @@ $arslabs  = $result['arslabs'];
                                         <td class="p-2 w-b-w-s">
                                             <div class="align-middle">
                                             <?php if($empdetail['image'] !=""){?>
-                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
+                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg">
                                             <?php } else { ?>
                                                 <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-middle m-r-0 custom_txt_round p-1 f-12 text-center img-40"><?php echo initials($empdetail['display_name']); ?></span>
                                             <?php } ?>
@@ -331,7 +331,7 @@ $arslabs  = $result['arslabs'];
                                                     <a href="index.php?option=COM_INSERT_EMPLOYEE_PERFORMANCE_APPRAISALS&Rid=<?php echo deocdeId('id:'.$epadeatail['id']); ?>" target="_blank">
                                                     <div class="align-middle">
                                                     <?php if($empdetail['image'] !=""){?>
-                                                        <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
+                                                        <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg">
                                                     <?php } else { ?>
                                                         <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                                                     <?php } ?>
@@ -429,7 +429,7 @@ $arslabs  = $result['arslabs'];
                                                         <td class="p-2 w-b-w-s">
                                                             <div class="align-middle">
                                                             <?php if($empdetail['image'] !=""){?>
-                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
+                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg">
                                                             <?php } else { ?>
                                                                 <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                                                             <?php } ?>
@@ -521,7 +521,7 @@ $arslabs  = $result['arslabs'];
                                                         <td class="p-2 w-b-w-s">
                                                             <div class="align-middle">
                                                             <?php if($empdetail['image'] !=""){?>
-                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='uploads/all/no-image.jpg';">
+                                                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="uploads/all/no-image.jpg">
                                                             <?php } else { ?>
                                                                 <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                                                             <?php } ?>
