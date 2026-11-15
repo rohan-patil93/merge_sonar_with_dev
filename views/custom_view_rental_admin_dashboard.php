@@ -894,7 +894,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                                                     <div class="col-auto">
                                                         <?php 
                                                         if($vendorslist['image']!=""){ ?>
-                                                           <img src="<?php echo "uploads/customer/".$vendorslist['image']; ?>" class="img-radius img-50" alt="" onerror="this.src='uploads/all/no-image.jpg';">
+                                                           <img src="<?php echo "uploads/customer/".$vendorslist['image']; ?>" class="img-radius img-50" alt="" data-onerror-src="uploads/all/no-image.jpg">
                                                        <?php }else{ ?>
                                                         <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round p-2 f-1 text-center bg-white text-mute"><?php echo initials($vendorslist['display_name']); ?></span>
                                                     <?php } ?>
@@ -968,7 +968,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
                                             <div class="col-auto">
                                                <?php 
                                                if($vendorsrecentjoin['image']!=""){ ?>
-                                                   <img src="<?php echo "uploads/customer/".$vendorsrecentjoin['image']; ?>" class="img-radius img-50" alt="" onerror="this.src='uploads/all/no-image.jpg';">
+                                                   <img src="<?php echo "uploads/customer/".$vendorsrecentjoin['image']; ?>" class="img-radius img-50" alt="" data-onerror-src="uploads/all/no-image.jpg">
                                                <?php }else{ ?>
                                                 <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round p-2 f-1 text-center bg-white text-mute"><?php echo initials($vendorsrecentjoin['display_name']); ?></span>
                                                 <?php } ?></div>
