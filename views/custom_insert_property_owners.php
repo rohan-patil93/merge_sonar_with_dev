@@ -270,35 +270,35 @@ function addMoreAttachment(rowid){
 			<div class="card-body">	
 				<div class="form-group">
 					<label class="form-label"><?php echo __('Owner Name'); ?> <span class="text-danger">*</span></label>
-					<input type="text" class="form-control text-capitalize" name="owner_name" value="<?php echo $property_owners['owner_name']; ?>" required>
+					<input aria-label="<?= htmlspecialchars(__('Owner name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-capitalize" name="owner_name" value="<?php echo $property_owners['owner_name']; ?>" required>
 				</div>
         <div class="form-group">
           <label class="form-label"><?php echo __('Company Name'); ?> <span class="text-danger">*</span></label>
-          <input type="text" class="form-control text-capitalize" name="owner_company_name" value="<?php echo $property_owners['owner_company_name']; ?>" required>
+          <input aria-label="<?= htmlspecialchars(__('Owner company name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-capitalize" name="owner_company_name" value="<?php echo $property_owners['owner_company_name']; ?>" required>
         </div>
 				<div class="form-group">
 					<label class="form-label"><?php echo __('Address'); ?></label>
-					<textarea type="text" class="form-control" name="address" required><?php echo $property_owners['address']; ?></textarea>
+					<textarea aria-label="<?= htmlspecialchars(__('Address'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="address" required><?php echo $property_owners['address']; ?></textarea>
 				</div>
         <div class="form-group">
           <label class="form-label"><?php echo __('Contact Number'); ?></label>
-          <input type="text" class="form-control" name="contact_no" value="<?php echo $property_owners['contact_no']; ?>" >
+          <input aria-label="<?= htmlspecialchars(__('Contact no'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="contact_no" value="<?php echo $property_owners['contact_no']; ?>" >
         </div>
         <div class="form-group">
           <label class="form-label"><?php echo __('Email Id'); ?></label>
-          <input type="text" class="form-control" name="email_id" value="<?php echo $property_owners['email_id']; ?>" >
+          <input aria-label="<?= htmlspecialchars(__('Email id'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="email_id" value="<?php echo $property_owners['email_id']; ?>" >
         </div>
 				<div class="form-group">
 					<label class="form-label"><?php echo __('GST No'); ?></label>
-					<input type="text" class="form-control" name="gst_no" value="<?php echo $property_owners['gst_no']; ?>" >
+					<input aria-label="<?= htmlspecialchars(__('Gst no'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="gst_no" value="<?php echo $property_owners['gst_no']; ?>" >
 				</div>
         <div class="form-group">
           <label class="form-label"><?php echo __('PAN No'); ?></label>
-          <input type="text" class="form-control" name="pan_no" value="<?php echo $property_owners['pan_no']; ?>" >
+          <input aria-label="<?= htmlspecialchars(__('Pan no'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="pan_no" value="<?php echo $property_owners['pan_no']; ?>" >
         </div>
 				<div class="form-group">
 					<label class="form-label"><?php echo __('Bank Name'); ?></label>
-					<select name="bank_id" class="form-control form-select js-example-basic-single">
+					<select aria-label="<?= htmlspecialchars(__('Bank id'), ENT_QUOTES, 'UTF-8'); ?>" name="bank_id" class="form-control form-select js-example-basic-single">
 						<option value=""><?php echo __('Select Any One'); ?> </option>
 						<?php foreach($banks as $bnk) {  ?>
 							<option value="<?php echo $bnk['id']; ?>" <?php echo $property_owners['bank_id'] ==$bnk['id']?"selected":""; ?>><?php echo $bnk['bank_name'];?></option>
@@ -307,15 +307,15 @@ function addMoreAttachment(rowid){
 				</div>
         <div class="form-group">
           <label class="form-label"><?php echo __('IFSC Code'); ?></label>
-          <input type="text" class="form-control" name="ifsc_code" value="<?php echo $property_owners['ifsc_code']; ?>">
+          <input aria-label="<?= htmlspecialchars(__('Ifsc code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="ifsc_code" value="<?php echo $property_owners['ifsc_code']; ?>">
         </div>
 				<div class="form-group">
 					<label class="form-label"><?php echo __('Bank Account No'); ?></label>
-					<input type="text" class="form-control" name="bank_account_no" value="<?php echo $property_owners['bank_account_no']; ?>">
+					<input aria-label="<?= htmlspecialchars(__('Bank account no'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="bank_account_no" value="<?php echo $property_owners['bank_account_no']; ?>">
 				</div>
         <div class="form-group">
           <label class="form-label"><?php echo __('Account Type'); ?></label>
-          <select name="account_type" class="form-control form-select js-example-basic-single">
+          <select aria-label="<?= htmlspecialchars(__('Account type'), ENT_QUOTES, 'UTF-8'); ?>" name="account_type" class="form-control form-select js-example-basic-single">
             <?php foreach($account_types as $bnktkey=>$bnkval) {  ?>
               <option value="<?php echo $bnktkey; ?>" <?php echo $property_owners['account_type'] ==$bnktkey?"selected":""; ?>><?php echo $bnkval;?></option>
             <?php } ?>
@@ -350,7 +350,7 @@ function addMoreAttachment(rowid){
 						<a class="accordion-msg waves-effect waves-dark card_id_<?php echo $i; ?>" >
 							<div class="row">
 								<div class="col-lg-11"><span class="text-capitalize"><?php echo $pod['property_name']; ?></span></div>
-								<div class="col-lg-1"><i class="ti-trash text-danger"  onclick="deletCard('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Delete Details'); ?>"></i></div>
+								<div class="col-lg-1"><i role="button" tabindex="0" aria-label="<?php echo __('Delete Details'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger"  onclick="deletCard('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Delete Details'); ?>"></i></div>
 							</div>
 						</a>
                         <div class="accordion-desc p-0 card_id_<?php echo $i; ?>">
@@ -389,26 +389,26 @@ function addMoreAttachment(rowid){
 													</div>
 													<div class="form-group col-lg-12">
 														<label class="form-label"><?php echo __('Property Name'); ?><span class="text-danger">*</span></label>
-														<input type="text" class="form-control text-capitalize" name="property_name[<?php echo $i; ?>]" value="<?php echo $pod['property_name']; ?>" required>
+														<input aria-label="<?= htmlspecialchars(__('Property name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-capitalize" name="property_name[<?php echo $i; ?>]" value="<?php echo $pod['property_name']; ?>" required>
 													</div>
 													<div class="form-group col-lg-12">
 														<label class="form-label"><?php echo __('Address'); ?><span class="text-danger">*</span></label>
-														<textarea class="form-control" name="property_address[<?php echo $i; ?>]" ><?php echo $pod['property_address']; ?></textarea>
+														<textarea aria-label="<?= htmlspecialchars(__('Property address'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="property_address[<?php echo $i; ?>]" ><?php echo $pod['property_address']; ?></textarea>
 													</div>
 													<div class="form-group col-lg-6">
 														<label class="form-label"><?php echo __('Longitude'); ?> </label>
-														<input type="text" class="form-control" name="longitude[<?php echo $i; ?>]" value="<?php echo $pod['longitude']; ?>">
+														<input aria-label="<?= htmlspecialchars(__('Longitude'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="longitude[<?php echo $i; ?>]" value="<?php echo $pod['longitude']; ?>">
 													</div>
 													<div class="form-group col-lg-6">
 														<label class="form-label"><?php echo __('Latitude'); ?></label>
-														<input type="text" class="form-control" name="latitude[<?php echo $i; ?>]" value="<?php echo $pod['latitude']; ?>">
+														<input aria-label="<?= htmlspecialchars(__('Latitude'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="latitude[<?php echo $i; ?>]" value="<?php echo $pod['latitude']; ?>">
 													</div>
 													<div class="form-group col-lg-12">
 													<?php
 														$attachments = json_decode($pod['attachment'],1); 
 														foreach($attachments as $attachment){ ?>
 															<div class="label-main d-block" id="remove_attache_<?php echo $attchmentseq; ?>">
-                                	<a href="uploads/all/<?php echo $attachment['attachment']; ?>" target="_blank"><label class="form-label label label-success cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Download'); ?>"><i class="ti-cloud-down"></i> &nbsp; <?php echo $attachment['attachment_name'] !=""?$attachment['attachment_name']:$attachment['attachment']; ?></label></a> <i class="ti-trash float-end text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="removeFile('remove_attache_<?php echo $attchmentseq; ?>')"></i>
+                                	<a href="uploads/all/<?php echo $attachment['attachment']; ?>" target="_blank"><label class="form-label label label-success cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Download'); ?>"><i class="ti-cloud-down"></i> &nbsp; <?php echo $attachment['attachment_name'] !=""?$attachment['attachment_name']:$attachment['attachment']; ?></label></a> <i role="button" tabindex="0" aria-label="<?php echo __('Remove'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash float-end text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="removeFile('remove_attache_<?php echo $attchmentseq; ?>')"></i>
                                 	 <input type="hidden" name="old_attachment[<?php echo $i; ?>][]" class="form-control" value="<?php echo $attachment['attachment']; ?>"> 
                                 	 <input type="hidden" name="old_attachment_name[<?php echo $i; ?>][]" class="form-control" value="<?php echo $attachment['attachment_name']; ?>"> 
                               </div>
@@ -456,14 +456,14 @@ function addMoreAttachment(rowid){
 							               	?>
 								            <div class="row" id="<?php echo $deleteid; ?>">
 								                <div class="form-group col-lg-8">
-								                    <input type="text" class="form-control" name="joint_owner_names[<?php echo $i; ?>][]" value="<?php echo $pjo['joint_owner_names']; ?>"<?php if($mck == 1){ echo __('readonly'); } ?> >
+								                    <input aria-label="<?= htmlspecialchars(__('Joint owner names'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="joint_owner_names[<?php echo $i; ?>][]" value="<?php echo $pjo['joint_owner_names']; ?>"<?php if($mck == 1){ echo __('readonly'); } ?> >
 								                </div>
 								                <div class="form-group col-lg-3">
 								                   <input aria-label="Owner percentage" type="text" class="form-control text-right" name="owner_percentage[<?php echo $i; ?>][]" value="<?php echo $pjo['owner_percentage']; ?>">
 								                </div>
 								                <div class="form-group col-lg-1">
 								                	<?php if($mck != 1){ ?>
-								                	 <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRowjoinOwner('<?php echo $deleteid; ?>')"></i>
+								                	 <i role="button" tabindex="0" aria-label="<?php echo __('Remove'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRowjoinOwner('<?php echo $deleteid; ?>')"></i>
 								                	<?php } ?>
 								                </div>
 								            </div>
@@ -519,7 +519,7 @@ function addMoreAttachment(rowid){
 							                    </div>
 							                    <div class="form-group col-lg-1 p-1">
                                     <?php if($vd['property_tenant_detail_id'] ==""){ ?>
-							                       <i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRow('<?php echo $mk; ?>','<?php echo $i; ?>')"></i> 
+							                       <i role="button" tabindex="0" aria-label="<?php echo __('Remove'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>" onclick="deletRow('<?php echo $mk; ?>','<?php echo $i; ?>')"></i> 
                                    <?php }else{ echo "<i class='ti ti-alert text-danger' data-bs-toggle='tooltip' data-placement='bottom' title='' data-bs-original-title='Already Area Available In Rent'></i>"; } ?>
 							                    </div>
 							                </div>
