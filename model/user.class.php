@@ -5925,7 +5925,7 @@ class userClass{
 		$smtp = $callConfig->getRow("SELECT * FROM ".DUMPTABLE.".smtp_details where is_active= 0");
 		//echo "smtp"; print_r($smtp); echo "smtpdetail -------------"; exit;
 		if($smtp->id!=""){
-			require_once("SMTP/class.phpmailer.php");
+			require_once "SMTP/class.phpmailer.php";
 			$mail = new PHPMailer;
 			$mail->IsSMTP();                                      // Set mailer to use SMTP
 			$mail->Host = $smtp->host;                 // Specify main and backup server
@@ -30075,18 +30075,18 @@ public function submitStatusDynamicWorkFlow($get){
 					$rentalObj->generateTenantInvoicePDF($get,$get['transaction_no']);
 				}
 				if($get['transaction_table']=="manufacturing_work_orders"){
-					include_once("manufacturing.class.php");
+					include_once "manufacturing.class.php";
 					$manufacturingObj = new manufacturingUserClass();
 					$manufacturingObj->autoInsertManufacturingWorkOrders($get['transaction_no'],$get);
 					$return['StockRequestOrder'] = $this->saveStockRequestOrder($get['transaction_no'],$get);
 				}
 				if($get['transaction_table']=="manufacturing_forecast"){
-					include_once("manufacturing.class.php");
+					include_once "manufacturing.class.php";
 					$manufacturingObj = new manufacturingUserClass();
 					$manufacturingObj->toafterapprovaltoupdatemanuforecast($get['transaction_no'],$get);
 				}
 				if($get['transaction_table']=="manufacturing_firm_orders"){
-					include_once("manufacturing.class.php");
+					include_once "manufacturing.class.php";
 					$manufacturingObj = new manufacturingUserClass();
 					//$manufacturingObj->autoInsertManufacturingWorkOrders($get['transaction_no'],$get);
 					$manufacturingObj->toafterapprovaltoupdatemanufirmorder($get['transaction_no'],$get);
@@ -30095,7 +30095,7 @@ public function submitStatusDynamicWorkFlow($get){
 					$this->toupdatestationerydetails($get['transaction_no'],$get);
 				}
 				if($get['transaction_table']=="sub_contract_work_order_issues"){
-					include_once("purchasing_user.class.php");
+					include_once "purchasing_user.class.php";
 					$purchObj = new purchasingUserClass();
 					$get['transaction_id'] = $get['transaction_no'];
 					$purchObj->updateSubcontractWorkOrderPendingQty($get);
@@ -30115,7 +30115,7 @@ public function submitStatusDynamicWorkFlow($get){
 					$rentalObj->insertRentalInvoices($get);
 				}
 				if($get['transaction_table']=="kittings" || $get['transaction_table']=="dekittings"){
-					include_once("erp_user.class.php");
+					include_once "erp_user.class.php";
 					$erpObj=new erpUserClass();
 					$erpObj->insertKittingAndDekkitingStockUpdate($get);
 				}

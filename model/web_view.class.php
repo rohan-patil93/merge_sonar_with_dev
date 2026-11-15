@@ -782,7 +782,7 @@ class webViewClass extends userClass{
 			return $push_sent;
 		}
 
-		include_once("model/mobile_user.class.php");
+		include_once "model/mobile_user.class.php";
 		$mobObj = new mobileUserClass();
 
 		$title = 'Approval Discussion';

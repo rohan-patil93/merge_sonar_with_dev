@@ -814,7 +814,7 @@ class surveyPollUserClass extends userClass
 			return $responseRow->current_status == ST_INPROGRESS;
 		}
 		if($statusFilter == 'pending'){
-			return ($responseRow->current_status != ST_COMPLETE && $responseRow->current_status != ST_INPROGRESS && $isExpired);
+			return $responseRow->current_status != ST_COMPLETE && $responseRow->current_status != ST_INPROGRESS && $isExpired;
 		}
 		return true;
 	}

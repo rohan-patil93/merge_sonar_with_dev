@@ -4823,7 +4823,7 @@ public function GETProcurementModulesDashboardSummaryProfitLoass($get){
     $get['prev_start_date'] = date('Y-m-d', strtotime('-1 year', strtotime($get['start_date'])));
     $get['prev_end_date']   = date('Y-m-d', strtotime('-1 year', strtotime($get['end_date'])));
 
-    include_once("account_user.class.php");
+    include_once "account_user.class.php";
 	$accountUserClassonobj = new accountUserClass();
 
 	$result1 = $accountUserClassonobj->getProfitAndLossReports($get);
@@ -4885,7 +4885,7 @@ public function GETProcurementModulesDashboardSummaryBalanceSheets($get){
 	$get['balance_date'] = date('Y-m-d',strtotime($get['start_date']));
     $get['prev_balance_date']   = date('Y-m-d',strtotime($get['end_date']));
 
-	include_once("account_user.class.php");
+	include_once "account_user.class.php";
 	$accountUserClassonobj = new accountUserClass();
     $result1 = $accountUserClassonobj->getBalanceSheetReport($get);
  	$result = json_decode(json_encode($result1), true);
@@ -5382,7 +5382,7 @@ $prev_balances = json_decode(json_encode($result['prev_balances']), true);
 
 public function GETProcurementModulesDashboardSummaryCashFlow($get){
 
-    include_once("account_user.class.php");
+    include_once "account_user.class.php";
     $obj = new accountUserClass();
 
     $get['start_date'] = $get['start_date'] !=""?$get['start_date']:date('Y-m-01');
@@ -5772,7 +5772,7 @@ public function GETProcurementModulesDashboardSummaryCashFlow($get){
 //Start customer ledegr
 public function GETProcurementCustomerLedger($get){
 
-	include_once("account_user.class.php");
+	include_once "account_user.class.php";
     $obj = new accountUserClass();
 
     $get['from_date'] = $get['start_date'] !=""?$get['start_date']:date('Y-m-01');
@@ -5870,7 +5870,7 @@ public function GETProcurementCustomerLedger($get){
 
 public function GETProcurementVendorLedger($get){
 
-	include_once("account_user.class.php");
+	include_once "account_user.class.php";
     $obj = new accountUserClass();
 
     $get['from_date'] = $get['start_date'] !=""?$get['start_date']:date('Y-m-01');

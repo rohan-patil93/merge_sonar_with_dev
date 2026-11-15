@@ -7996,7 +7996,7 @@ class reactClass extends userClass{
 			$assigneeId = (int) ($r['technician_id'] ?? 0);
 			$defaultAssigneeId = (int) ($r['default_technician_id'] ?? 0);
 		}
-		return ($assigneeId > 0 || $defaultAssigneeId > 0);
+		return $assigneeId > 0 || $defaultAssigneeId > 0;
 	}
 
 	private function amcAdminLandingVisitLocWhere($locId)

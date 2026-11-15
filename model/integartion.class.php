@@ -6468,7 +6468,7 @@ public function toimportthedataintotablesemployeessalary($get){
 		), 'id', $context['header']->id);
 		$inventory_posting = array();
 		if($complete && $context['process'] == 'manufacturing_product_notes' && $head_quality_check == 1){
-			include_once("model/manfacturing_forecast.class.php");
+			include_once "model/manfacturing_forecast.class.php";
 			if(class_exists('manfacturingForecastUserClass')){
 				$manufacturingObj = new manfacturingForecastUserClass();
 				$inventory_posting = $manufacturingObj->postManufacturingProductNoteInventoryById($company_id, $user_id, intval($context['tranid']));

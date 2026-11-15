@@ -856,7 +856,7 @@ public function getVisitorsDataBasedOnDate($get)
             }
             // No host selected: Generate serial number immediately
             if (!class_exists('userClass')) {
-                include_once("model/user.class.php");
+                include_once "model/user.class.php";
             }
             $userObj = new userClass();
             $generatedCode = $userObj->toGetApplicationSerialNumber('visitor_logs',$post);
@@ -1066,7 +1066,7 @@ public function getVisitorsDataBasedOnDate($get)
                         </html>';
 
                     if (!class_exists('userClass')) {
-                        include_once("model/user.class.php");
+                        include_once "model/user.class.php";
                     }
                     $userObj = new userClass();
                     $emailResult = $userObj->sendmailwithsmtp($hostEmail, $subject, $emailBody, '', '');
@@ -2021,7 +2021,7 @@ public function getVisitorsDataBasedOnDate($get)
 </html>';
 
         if (!class_exists('userClass')) {
-            include_once("model/user.class.php");
+            include_once "model/user.class.php";
         }
         $userObj = new userClass();
         $sent = $userObj->sendmailwithsmtp($hostEmail, $subject, $emailBody, '', '');
@@ -2063,7 +2063,7 @@ public function getVisitorsDataBasedOnDate($get)
         }
 
         if (!class_exists('userClass')) {
-            include_once("model/user.class.php");
+            include_once "model/user.class.php";
         }
 
         $userObj = new userClass();

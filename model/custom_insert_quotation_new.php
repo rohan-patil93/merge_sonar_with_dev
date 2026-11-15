@@ -1521,7 +1521,7 @@ function viewApprovalAllUsers(id= ""){
                $tran_no =  $table1['qo_number'];
             //}
 
-               include_once("custom_insert_quotation_topup.php");
+               include_once "custom_insert_quotation_topup.php";
              ?>
 
                     <div class="kt-portlet__head ">
@@ -1554,7 +1554,7 @@ function viewApprovalAllUsers(id= ""){
                             <?php
                             $array_table = array('requisition'=>'quotation_table_new','petty_cash'=>'petty_cash_table','bills'=>'bill_table','goods_receipt_notes'=>'grn_table','stock_receipts'=>'stock_receive_table','stock_adjust_table'=>'stock_adjust_table','genral'=>'genral_table','account'=>'account_table','esgin_table'=>'esgin_table','vrc_table'=>'vrc_table','mpc_table'=>'mpc_table','glod_table'=>'glod_table');
                             $display_table =$array_table[$table_list[$option]['display_table']].'.php';
-                            include_once($display_table);
+                            include_once $display_table;
                             ?>
                             <div class="row">
                                 <div class="col-xs-12">
