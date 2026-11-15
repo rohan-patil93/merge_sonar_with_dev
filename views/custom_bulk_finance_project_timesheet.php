@@ -686,7 +686,7 @@ $erp = json_decode($erp_data,1);
 										<div class="btn-group" id="status_dropdown" style="display:none;" name="submit_for_fin_approval">
 		                                     <button class="btn btn-primary dropdown-toggle font-size-sm" style="color: <?php echo "#".$stausresult[ST_APPROVED4]['color']; ?>;    background:  <?php echo "#".strval($stausresult[ST_APPROVED4]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[ST_APPROVED4]['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $statu_progress[ST_APPROVED4]['name']; ?> </button>
 		                                    <div class="dropdown-menu" id="dropdownlist_<?php echo $fid; ?>">
-		                            			<div class="dropdown-item cursor-pointer" onclick="updateprojecttimesheetsblukapprovefinace(<?php echo ST_APPROVED ?>)" name="status" id="status" value="<?php echo ST_APPROVED ?>"><?php echo $statu_progress[ST_APPROVED]['action_label']; ?> </div>
+		                            			<div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item cursor-pointer" onclick="updateprojecttimesheetsblukapprovefinace(<?php echo ST_APPROVED ?>)" name="status" id="status" value="<?php echo ST_APPROVED ?>"><?php echo $statu_progress[ST_APPROVED]['action_label']; ?> </div>
 		                                    </div>
 		                                    
 		                                </div>
