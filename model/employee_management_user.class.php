@@ -1,7 +1,7 @@
 <?php
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
-use Dompdf\Options; 
+use Dompdf\Options;
 class employeeManagementUserClass extends userClass{
 	public function getEMAminDashboard($get){
         global $callConfig;
@@ -19,7 +19,7 @@ class employeeManagementUserClass extends userClass{
             $empidwithuserid[$empres0->id] = $empres0->user_id;
         }
         $return['empidwithuserid'] = $empidwithuserid;
-       
+
         $employee_id = $get['employee_id'];
         $empsql = "SELECT id, image, emp_code, display_name, email_id, user_id, joining_date, date_of_leaving, finance_buddy FROM employees WHERE company_id = '".$get['company_id']."' AND joining_date <='".$startdate."' AND is_active = 0 AND (date_of_leaving >= '".$startdate."' OR date_of_leaving IS NULL) AND (('1' = '".$get['admin_type']."') OR (reporting_manager_id = '".$get['user_id']."') OR (hr_buddy = '".$employee_id."') OR (finance_buddy  = '".$employee_id."') OR (admin_buddy = '".$employee_id."') OR (project_buddy = '".$employee_id."') OR (loc_buddy = '".$employee_id."')) ORDER BY display_name ASC";
         $empres = $callConfig->getAllRows($empsql);
@@ -31,7 +31,7 @@ class employeeManagementUserClass extends userClass{
             $onboardempid[$empres->id] = $empres->id;
         }
         $reviewtask[$get['user_id']] = $get['user_id'];
-        //AND tas.assigned_to IN(".implode(',', (array)$reviewtask).")        
+        //AND tas.assigned_to IN(".implode(',', (array)$reviewtask).")
         $tasks_cntssql = "SELECT assigned_to, transaction_id, count(*) as total_task_cnt, sum(if((current_status=".ST_APPROVED." OR current_status=".ST_APPROVED1." OR current_status=4),1,0)) as approve_requist_cnt, sum(if(current_status=".ST_APPROVED.",1,0)) as approve_cnt, sum(if(current_status=".ST_COMPLETE.",1,0)) as review_cnt, sum(if(current_status=".ST_INPROGRESS.",1,0)) as inprogress_cnt, sum(if(current_status=".ST_ACTIVE.",1,0)) as yet_to_start_cnt, sum(if(action_date < completion_date,1,0)) as delayed_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '".$get['company_id']."' AND tas.transaction_table = 'employees'  AND transaction_id IN(".implode(',', (array)$onboardempid).") AND tas.is_active = 0 AND action_date >='".$startdate." 00:00:00' AND action_date <='".$enddate." 23:59:59' GROUP BY tas.transaction_id";
         $tasks_cntsres = $callConfig->getAllRows($tasks_cntssql);
         $return['tasks_cntssql'] = $tasks_cntssql;
@@ -44,7 +44,7 @@ class employeeManagementUserClass extends userClass{
 
 
         return $return;
-    }   
+    }
     public function getEMTaskAssigneList($get){
         global $callConfig;
         $return = array();
@@ -60,18 +60,18 @@ class employeeManagementUserClass extends userClass{
             $employeesquery = $callConfig->selectQuery('employees','*','id='.$get['employee_id'],'','','');
             $employees = $callConfig->getRow($employeesquery);
             $return['employees'] =  $employees;
-            
+
             $connectdetails = $this->getempconnectwithempid(array('employee_id'=>$get['employee_id'],'company_id'=>$get['company_id']));
-            $return['connectdetails'] = $connectdetails; 
+            $return['connectdetails'] = $connectdetails;
             $whr1 = "company_id = '".$get['company_id']."' AND assigned_to = 'EMP' AND process_type='ET' AND is_active = 0";
             $task_query = $callConfig->selectQuery('process_task_settings','*',$whr1,'','','');
-            $task_data = $callConfig->getAllRows($task_query);  
-            $return['process_task_settings'] = $task_data; 
+            $task_data = $callConfig->getAllRows($task_query);
+            $return['process_task_settings'] = $task_data;
             foreach($task_data as $tasks1){
                 $taskid[$tasks1->id] = $tasks1->id;
             }
             $taskfilterary = array();
-            if(count((array)$taskid) != 0){ 
+            if(count((array)$taskid) != 0){
                 $taskfiltersql = "SELECT * FROM filter_tables WHERE company_id = '".$get['company_id']."' AND transaction_id IN(".implode(',',$taskid).") AND is_active = 0";
                 $taskfilterres = $callConfig->getAllRows($taskfiltersql);
                 foreach($taskfilterres as $tasks2){
@@ -112,7 +112,7 @@ class employeeManagementUserClass extends userClass{
                     $task = null;
                     if($tasks->approval_type == 'AB'){
                         $approval_id = $connectdetails['admin_connect'];
-                    }elseif($tasks->approval_type == 'FB'){ 
+                    }elseif($tasks->approval_type == 'FB'){
                         $approval_id = $connectdetails['finance_connect'];
                     }elseif($tasks->approval_type == 'PB'){
                         $approval_id = $connectdetails['project_connect'];
@@ -134,7 +134,7 @@ class employeeManagementUserClass extends userClass{
                     $task_array = array('company_id'=>$get['company_id'],'transaction_table'=>'employees','transaction_id'=>$get['employee_id'],'task_id'=>$tasks->id,'assigned_to'=>$employees->user_id,'action_date'=>$days_ago,'action_flag'=>'0', 'check_list'=>$tasks->check_list,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'approval_user_id'=>$approval_id,'task_name'=>$tasks->task_name,'process_id'=>$tasks->process_id);
 
                     // if($get['submit'] != 'Y'){
-                    //     $task_array['process_id'] = $tasks->process_id; ///extrea 
+                    //     $task_array['process_id'] = $tasks->process_id; ///extrea
                     // }
                     $taslarraylist[] = $task_array;
                     if($get['submit'] == 'Y'){
@@ -158,14 +158,14 @@ class employeeManagementUserClass extends userClass{
             $return['sql'] = $taskactivitysql;
             $return['transaction_activity_schedule'] = $taskactivityres;
             $tasks_cntssql = "SELECT count(*) as total_task_cnt, sum(if(current_status=".ST_APPROVED.",1,0)) as approve_cnt, sum(if(current_status=".ST_COMPLETE.",1,0)) as review_cnt, sum(if(current_status=".ST_INPROGRESS.",1,0)) as inprogress_cnt, sum(if(current_status=".ST_ACTIVE.",1,0)) as yet_to_start_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '".$get['company_id']."' AND tas.transaction_table = 'employees'  AND transaction_id= '".$get['employee_id']."' ".$comdition." AND tas.is_active = 0";
-            $tasks_cntsres = $callConfig->getRow($tasks_cntssql);   
+            $tasks_cntsres = $callConfig->getRow($tasks_cntssql);
             $return['task_cnt'] = $tasks_cntsres;
             $employeesql = "SELECT * FROM employees WHERE company_id = '".$get['company_id']."' AND id= '".$get['employee_id']."' AND is_active = 0";
-            $employeeres = $callConfig->getRow($employeesql);   
+            $employeeres = $callConfig->getRow($employeesql);
             $return['employees'] = $employeeres;
-        }else{  
+        }else{
             $employeesql = "SELECT emp.id, au.id as user_id, emp.emp_code,  emp.display_name, emp.email_id, emp.joining_date FROM application_users au, employees emp WHERE au.company_id = emp.company_id AND au.company_id = '".$get['company_id']."' AND au.role_id LIKE '".'%"'.EMPLOYEE_ONBOARDING.'"%'."' AND au.id = emp.user_id AND au.is_active = emp.is_active AND au.is_active = 0";
-            $employeeres = $callConfig->getAllRows($employeesql);   
+            $employeeres = $callConfig->getAllRows($employeesql);
             $onboarduserid = array();
             $onboardempid = array();
             foreach($employeeres as $empres){
@@ -187,10 +187,10 @@ class employeeManagementUserClass extends userClass{
 
         }
         $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '".$get['company_id']."' AND is_active = 0";
-        $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);   
-        $return['tasks_categories'] = $tasks_categoriesres; 
+        $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
+        $return['tasks_categories'] = $tasks_categoriesres;
         //print_r($return);
-        return $return;  
+        return $return;
     }
     public function assigntasktoemployeesmanagement($get, $post){
         global $callConfig;
@@ -203,11 +203,11 @@ class employeeManagementUserClass extends userClass{
         $get['finance_tax_year'] = $post['finance_tax_year'];
         $check_emp_id = explode(",",$post['check_emp_id']);
         //$check_emp_id = $post['check_emp_id'];
-        foreach($check_emp_id as $empid){ 
+        foreach($check_emp_id as $empid){
             $get['employee_id'] = $empid;
             $return['res'][] = $this->getEMTaskAssigneList($get);
         }
-        return $return;  
+        return $return;
     }
     public function getEMTaskSendForApprove($get){
         global $callConfig;
@@ -223,7 +223,7 @@ class employeeManagementUserClass extends userClass{
         $taskactivityres = $callConfig->getAllRows($taskactivitysql);
         $return['sql'] = $taskactivitysql;
         $return['transaction_activity_schedule'] = $taskactivityres;
-        return $return;   
+        return $return;
     }
     public function updateSendVerificationDocuments($get,$post){
         global $callConfig;
@@ -267,19 +267,19 @@ class employeeManagementUserClass extends userClass{
         }
         $notiarray = array('notification_message'=>$approvalmsg,'notification_users'=>array('0'=>$taskactivityres->approval_user_id),'id'=>$taskactivityres->transaction_id,'application_table_name'=>'transaction_activity_schedule','company_id'=>$post['company_id'],'option'=>'COM_VIEW_ONBOARDING_EMPLOYEE_DASHBOARDS','notification_datetime'=>date('Y-m-d H:i'),'type'=>'INFORMATION');
         if($taskactivityres->transaction_table == "vendor_registers"){
-            $notiarray['option'] = 'COM_INSERT_VENDORS&VTYPE=VR'; 
+            $notiarray['option'] = 'COM_INSERT_VENDORS&VTYPE=VR';
         }
         $return['notiarray'] = $notiarray;
         $this->tosendnotifiations($notiarray);
-        
+
         if(isset($taskactivityres->assigned_to)){
             $notiarray['notification_users'] = array("0"=>$taskactivityres->assigned_to);
             $notiarray['type'] = "ACTION";
             $this->tosendnotifiations($notiarray);
         }
-        
+
         return $return;
-    }       
+    }
 //End marge user class -- 2023-08-25
     public function getVendorsDetails($get){
         global $callConfig;
@@ -303,7 +303,7 @@ class employeeManagementUserClass extends userClass{
 
             $vendorssql = "SELECT id FROM vendors WHERE company_id = '".$get['company_id']."' AND email = '".$vendorres->email."' AND is_active = 0";
             $venid = $callConfig->getRow($vendorssql);
-            $vendorres->created_vendor_id  =$venid->id; 
+            $vendorres->created_vendor_id  =$venid->id;
             $return['vendor_registers'] = $vendorres;
             $return['vendor_registers_sql'] = $vendor_registerssql;
 
@@ -314,9 +314,9 @@ class employeeManagementUserClass extends userClass{
             $taskactivityres = $callConfig->getAllRows($taskactivitysql);
             $return['sql'] = $taskactivitysql;
             $return['transaction_activity_schedule'] = $taskactivityres;
-            
+
             $tasks_cntssql = "SELECT count(*) as total_task_cnt, sum(if(current_status=".ST_APPROVED.",1,0)) as approve_cnt, sum(if(current_status=".ST_COMPLETE.",1,0)) as review_cnt, sum(if(current_status=".ST_INPROGRESS.",1,0)) as inprogress_cnt, sum(if(current_status=".ST_ACTIVE.",1,0)) as yet_to_start_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '".$get['company_id']."' AND tas.transaction_table = 'vendor_registers'  AND transaction_id= '".$vendor_registersres->id."'  ".$comdition." AND tas.is_active = 0";
-            $tasks_cntsres = $callConfig->getRow($tasks_cntssql);   
+            $tasks_cntsres = $callConfig->getRow($tasks_cntssql);
             $return['task_cnt'] = $tasks_cntsres;
         }
         $vendor_agreementssql = "SELECT * FROM vendor_agreements WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$vendorres->id."' AND is_active = 0";
@@ -362,8 +362,8 @@ class employeeManagementUserClass extends userClass{
         $return['cities'] = $citiesres;
 
         $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '".$get['company_id']."' AND is_active = 0";
-        $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);   
-        $return['tasks_categories'] = $tasks_categoriesres; 
+        $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
+        $return['tasks_categories'] = $tasks_categoriesres;
 
         $vendortypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORTYPE' AND company_id = '".$get['company_id']."' AND is_active = 0";
         $vendortyperes=$callConfig->getAllRows($vendortypesql);
@@ -379,15 +379,15 @@ class employeeManagementUserClass extends userClass{
         }
         $return['vendor_contact_info_type'] = $vendorcontactinfotype;
 
-        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."' AND is_active = 0";
         $company_typesres = $callConfig->getAllRows($company_typessql);
-        $return['company_types'] = $company_typesres;   
+        $return['company_types'] = $company_typesres;
 
-        $incotermssql = "select id,incoterm_name FROM incoterms WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+        $incotermssql = "select id,incoterm_name FROM incoterms WHERE company_id = '".$get['company_id']."' AND is_active = 0";
         $incotermsres = $callConfig->getAllRows($incotermssql);
-        $return['incoterms'] = $incotermsres;   
+        $return['incoterms'] = $incotermsres;
 
-        $payment_termssql = "SELECT id, payment_term_name FROM payment_terms WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+        $payment_termssql = "SELECT id, payment_term_name FROM payment_terms WHERE company_id='".$get['company_id']."' AND is_active=0";
         $payment_termsres = $callConfig->getAllRows($payment_termssql);
         $return['payment_terms'] = $payment_termsres;
 
@@ -419,7 +419,7 @@ class employeeManagementUserClass extends userClass{
         $vendor_display_fieldssql = "SELECT id, field_list FROM vendor_display_fields WHERE company_id = '".$get['company_id']."' AND role_short_code = '".$get['working_role_short_code']."' AND is_active = 0";
         $vendor_display_fieldsres=$callConfig->getRow($vendor_display_fieldssql);
         $return['vendor_display_fields'] = $vendor_display_fieldsres;
-        
+
 
         return $return;
     }
@@ -446,7 +446,7 @@ class employeeManagementUserClass extends userClass{
 
             $vendorssql = "SELECT id FROM vendors WHERE company_id = '".$get['company_id']."' AND email = '".$vendorres->email."' AND is_active = 0";
             $venid = $callConfig->getRow($vendorssql);
-            $vendorres->created_vendor_id  =$venid->id; 
+            $vendorres->created_vendor_id  =$venid->id;
             $return['vendor_registers'] = $vendorres;
             $return['vendor_registers_sql'] = $vendor_registerssql;
 
@@ -457,9 +457,9 @@ class employeeManagementUserClass extends userClass{
             $taskactivityres = $callConfig->getAllRows($taskactivitysql);
             $return['sql'] = $taskactivitysql;
             $return['transaction_activity_schedule'] = $taskactivityres;
-            
+
             $tasks_cntssql = "SELECT count(*) as total_task_cnt, sum(if(current_status=".ST_APPROVED.",1,0)) as approve_cnt, sum(if(current_status=".ST_COMPLETE.",1,0)) as review_cnt, sum(if(current_status=".ST_INPROGRESS.",1,0)) as inprogress_cnt, sum(if(current_status=".ST_ACTIVE.",1,0)) as yet_to_start_cnt FROM transaction_activity_schedule tas WHERE  tas.company_id = '".$get['company_id']."' AND tas.transaction_table = 'vendor_registers'  AND transaction_id= '".$vendor_registersres->id."'  ".$comdition." AND tas.is_active = 0";
-            $tasks_cntsres = $callConfig->getRow($tasks_cntssql);   
+            $tasks_cntsres = $callConfig->getRow($tasks_cntssql);
             $return['task_cnt'] = $tasks_cntsres;
         }
         $vendor_agreementssql = "SELECT * FROM vendor_agreements WHERE company_id = '".$get['company_id']."' AND vendor_id = '".$vendorres->id."' AND is_active = 0";
@@ -505,8 +505,8 @@ class employeeManagementUserClass extends userClass{
         $return['cities'] = $citiesres;
 
         $tasks_categoriessql = "SELECT id,category_name FROM tasks_categories where company_id = '".$get['company_id']."' AND is_active = 0";
-        $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);   
-        $return['tasks_categories'] = $tasks_categoriesres; 
+        $tasks_categoriesres = $callConfig->getAllRows($tasks_categoriessql);
+        $return['tasks_categories'] = $tasks_categoriesres;
 
         $vendortypesql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'VENDORTYPE' AND company_id = '".$get['company_id']."' AND is_active = 0";
         $vendortyperes=$callConfig->getAllRows($vendortypesql);
@@ -522,15 +522,15 @@ class employeeManagementUserClass extends userClass{
         }
         $return['vendor_contact_info_type'] = $vendorcontactinfotype;
 
-        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+        $company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."' AND is_active = 0";
         $company_typesres = $callConfig->getAllRows($company_typessql);
-        $return['company_types'] = $company_typesres;   
+        $return['company_types'] = $company_typesres;
 
-        $incotermssql = "select id,incoterm_name FROM incoterms WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+        $incotermssql = "select id,incoterm_name FROM incoterms WHERE company_id = '".$get['company_id']."' AND is_active = 0";
         $incotermsres = $callConfig->getAllRows($incotermssql);
-        $return['incoterms'] = $incotermsres;   
+        $return['incoterms'] = $incotermsres;
 
-        $payment_termssql = "SELECT id, payment_term_name FROM payment_terms WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+        $payment_termssql = "SELECT id, payment_term_name FROM payment_terms WHERE company_id='".$get['company_id']."' AND is_active=0";
         $payment_termsres = $callConfig->getAllRows($payment_termssql);
         $return['payment_terms'] = $payment_termsres;
 
@@ -562,7 +562,7 @@ class employeeManagementUserClass extends userClass{
         $vendor_display_fieldssql = "SELECT id, field_list FROM vendor_display_fields WHERE company_id = '".$get['company_id']."' AND role_short_code = '".$get['working_role_short_code']."' AND is_active = 0";
         $vendor_display_fieldsres=$callConfig->getRow($vendor_display_fieldssql);
         $return['vendor_display_fields'] = $vendor_display_fieldsres;
-        
+
 
         return $return;
     } **/

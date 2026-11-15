@@ -14,11 +14,11 @@ class reportUserClass extends userClass{
         }
         $transactionssql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND is_active =0".$condition;
         $transactionsres=$callConfig->getAllRows($transactionssql);
-        
+
         $return['transactions'] = $transactionsres;
         $return['transactionssql'] = $transactionssql;
 
-    	$display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$transaction_table."' AND field_name = 'party_id'";	
+    	$display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$transaction_table."' AND field_name = 'party_id'";
 		$parttable_name = $callConfig->getRow($display_attribute_typessql);
 		$qquery = urldecode($parttable_name->content);
 		$explosql = explode("FROM", $qquery); // splite from to get table name and other part get
@@ -26,7 +26,7 @@ class reportUserClass extends userClass{
 			$explosql = explode(" ", trim($explosql[1])); //splite to space only get table name
 		}
 		$partytable = trim($explosql[0]); //get Table name
-		$partysql = "SELECT id, company, display_name FROM ".$partytable." WHERE company_id = '".$get['company_id']."' AND is_active = 0";	
+		$partysql = "SELECT id, company, display_name FROM ".$partytable." WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$partyres = $callConfig->getAllRows($partysql);
 		$return['party'] = $partyres;
         return $return;
@@ -36,15 +36,15 @@ class reportUserClass extends userClass{
 	global $callConfig;
 	$return = array();
 	$return['get'] = $get;
-	$company_id = $get['company_id']; 
+	$company_id = $get['company_id'];
 	$whr = "";
 	if (!empty($get['from_date']) && !empty($get['to_date'])) {
 		$from = $get['from_date'];
 		$to   = $get['to_date'];
 		$whr .= " AND am.transaction_date BETWEEN '".$from."' AND '".$to."' ";
-	} 
-	$listsql = "SELECT CONCAT('AMND-', am.transaction_number) AS transaction_number, am.transaction_date, am.ref_type, am.ref_no FROM amendments am WHERE am.company_id = '".$company_id."' AND am.is_active = 0 $whr ORDER BY am.transaction_date DESC "; 
-	$rows = $callConfig->getAllRows($listsql); 
+	}
+	$listsql = "SELECT CONCAT('AMND-', am.transaction_number) AS transaction_number, am.transaction_date, am.ref_type, am.ref_no FROM amendments am WHERE am.company_id = '".$company_id."' AND am.is_active = 0 $whr ORDER BY am.transaction_date DESC ";
+	$rows = $callConfig->getAllRows($listsql);
 	$return['amended_orders_list'] = $rows;
 	$return['sql'] = $listsql;
 
@@ -77,38 +77,38 @@ function getSalesRegisterReport($get)
 		if ($get['refrance_res'] == "Y") {
 			$condition = " AND transa.ref_type = '" . $get['ref_table'] . "' AND transa.ref_id = '" . $get['ref_id'] . "'";
 		}
- 
+
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$condition .= " AND transa.transaction_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'";
 		}
- 
+
 		if (!empty($get['party_id'])) {
 			$condition .= " AND transa.party_id = '" . $get['party_id'] . "'";
 		}
- 
+
 		if (!empty($get['status_filter'])) {
 			$condition .= " AND transa.current_status = '" . $get['status_filter'] . "'";
 		}
- 
+
 		$listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.doc_ref_no, transa.doc_ref_date, transa.party_id, transa.party_name, transa.party_tax_number as gstin, transa.current_status, itemtb.id as item_row_id, itemtb.item_id, itemtb.account_code, itemtb.item_name, itemtb.description as item_description, itemtb.purchase_uom, itemtb.item_quantity, itemtb.item_price, itemtb.item_amount as taxable_amount, itemtb.discount_amount, itemtb.total_amount as net_amount, itemtb.item_details FROM " . $dmtres->application_table_name . " transa, " . $dmtres->item_table . " itemtb  WHERE transa.company_id = '" . $get['company_id'] . "' AND transa.company_id = itemtb.company_id AND transa.id = itemtb.transaction_id AND transa.is_active = itemtb.is_active AND transa.is_active = 0 " . $condition . " ORDER BY transa.transaction_date DESC, transa.transaction_number DESC";
-		
-		$listres = $callConfig->getAllRows($listsql); 
+
+		$listres = $callConfig->getAllRows($listsql);
 
 		$list = array();
-		foreach ($listres as $listre) { 
+		foreach ($listres as $listre) {
 			if (!empty($listre->item_details)) {
 				$item_details = json_decode($listre->item_details, true);
 				$listre->cgst = 0;
 				$listre->sgst = 0;
 				$listre->igst = 0;
 				$listre->hsn_sac = '';
-				
+
 				if (isset($item_details['tax_details']) && is_array($item_details['tax_details'])) {
 					foreach ($item_details['tax_details'] as $tax) {
 						if (isset($tax['tax_name'])) {
 							$tax_name_upper = strtoupper($tax['tax_name']);
 							$tax_amount = isset($tax['tax_amount']) ? floatval($tax['tax_amount']) : 0;
-							
+
 							if (strpos($tax_name_upper, 'CGST') !== false) {
 								$listre->cgst += $tax_amount;
 							} elseif (strpos($tax_name_upper, 'SGST') !== false) {
@@ -119,7 +119,7 @@ function getSalesRegisterReport($get)
 						}
 					}
 				}
-				 
+
 				if (isset($item_details['hsn_sac_code'])) {
 					$listre->hsn_sac = $item_details['hsn_sac_code'];
 				}
@@ -129,13 +129,13 @@ function getSalesRegisterReport($get)
 				$listre->igst = 0;
 				$listre->hsn_sac = '';
 			}
-			 
+
 			$listre->gross_amount = $listre->taxable_amount + $listre->cgst + $listre->sgst + $listre->igst;
-			$listre->taxable_value = $listre->taxable_amount; 
-			
+			$listre->taxable_value = $listre->taxable_amount;
+
 			$list[] = $listre;
 		}
-		
+
 		$return['transaction_list'] = $list;
 		$return['sql'] = $listsql;
 		return $return;
@@ -168,37 +168,37 @@ function getSalesRegisterReport($get)
 		if ($get['refrance_res'] == "Y") {
 			$condition = " AND transa.ref_type = '" . $get['ref_table'] . "' AND transa.ref_id = '" . $get['ref_id'] . "'";
 		}
- 
+
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$condition .= " AND transa.transaction_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'";
 		}
- 
+
 		if (!empty($get['party_id'])) {
 			$condition .= " AND transa.party_id = '" . $get['party_id'] . "'";
 		}
- 
+
 		if (!empty($get['status_filter'])) {
 			$condition .= " AND transa.current_status = '" . $get['status_filter'] . "'";
 		}
- 
+
 		$listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.doc_ref_no, transa.doc_ref_date, transa.party_id, transa.party_name, transa.party_tax_number as gstin, transa.current_status, itemtb.id as item_row_id, itemtb.item_id, itemtb.account_code, itemtb.item_name, itemtb.description as item_description, itemtb.purchase_uom, itemtb.item_quantity, itemtb.item_price, itemtb.item_amount as taxable_amount, itemtb.discount_amount, itemtb.total_amount as net_amount, itemtb.item_details FROM " . $dmtres->application_table_name . " transa, " . $dmtres->item_table . " itemtb  WHERE transa.company_id = '" . $get['company_id'] . "' AND transa.company_id = itemtb.company_id AND transa.id = itemtb.transaction_id AND transa.is_active = itemtb.is_active AND transa.is_active = 0 " . $condition . " ORDER BY transa.transaction_date DESC, transa.transaction_number DESC";
 
-		$listres = $callConfig->getAllRows($listsql); 
+		$listres = $callConfig->getAllRows($listsql);
 		$list = array();
-		foreach ($listres as $listre) { 
+		foreach ($listres as $listre) {
 			if (!empty($listre->item_details)) {
 				$item_details = json_decode($listre->item_details, true);
 				$listre->cgst = 0;
 				$listre->sgst = 0;
 				$listre->igst = 0;
 				$listre->hsn_sac = '';
-				
+
 				if (isset($item_details['tax_details']) && is_array($item_details['tax_details'])) {
 					foreach ($item_details['tax_details'] as $tax) {
 						if (isset($tax['tax_name'])) {
 							$tax_name_upper = strtoupper($tax['tax_name']);
 							$tax_amount = isset($tax['tax_amount']) ? floatval($tax['tax_amount']) : 0;
-							
+
 							if (strpos($tax_name_upper, 'CGST') !== false) {
 								$listre->cgst += $tax_amount;
 							} elseif (strpos($tax_name_upper, 'SGST') !== false) {
@@ -209,7 +209,7 @@ function getSalesRegisterReport($get)
 						}
 					}
 				}
-				 
+
 				if (isset($item_details['hsn_sac_code'])) {
 					$listre->hsn_sac = $item_details['hsn_sac_code'];
 				}
@@ -218,12 +218,12 @@ function getSalesRegisterReport($get)
 				$listre->sgst = 0;
 				$listre->igst = 0;
 				$listre->hsn_sac = '';
-			} 
+			}
 			$listre->gross_amount = $listre->taxable_amount + $listre->cgst + $listre->sgst + $listre->igst;
-			$listre->taxable_value = $listre->taxable_amount;  
+			$listre->taxable_value = $listre->taxable_amount;
 			$list[] = $listre;
 		}
-		
+
 		$return['transaction_list'] = $list;
 		$return['sql'] = $listsql;
 		return $return;
@@ -241,7 +241,7 @@ function getSalesRegisterReport($get)
 		if ($get['admin_type'] != 1) {
 			$condition = " AND transa." . $originator . " = '" . $checkuserid . "'";
 		}
- 
+
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$condition .= " AND transa.transaction_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'";
 		}
@@ -298,26 +298,26 @@ function getSalesRegisterReport($get)
 		if ($get['refrance_res'] == "Y") {
 			$condition = " AND transa.ref_type = '" . $get['ref_table'] . "' AND transa.ref_id = '" . $get['ref_id'] . "'";
 		}
- 
+
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$condition .= " AND transa.transaction_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'";
 		}
- 
+
 		if (!empty($get['party_id'])) {
 			$condition .= " AND transa.party_id = '" . $get['party_id'] . "'";
 		}
- 
+
 		if (!empty($get['status_filter'])) {
 			$condition .= " AND transa.current_status = '" . $get['status_filter'] . "'";
 		}
- 
+
 		$listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.party_id, transa.party_name, transa.party_additional_details, transa.tax_state, transa.ref_id, transa.current_status FROM " . $dmtres->application_table_name . " transa WHERE transa.company_id = '" . $get['company_id'] . "' AND transa.is_active = 0 " . $condition . " ORDER BY transa.transaction_date DESC, transa.transaction_number DESC";
-		
+
 		$listres = $callConfig->getAllRows($listsql);
 		$return['listres'] = $listsql;
 
 		$list = array();
-		foreach ($listres as $listre) { 
+		foreach ($listres as $listre) {
 			$listre->gstin = '';
 			if (!empty($listre->party_additional_details)) {
 				$party_details = json_decode($listre->party_additional_details, true);
@@ -325,7 +325,7 @@ function getSalesRegisterReport($get)
 					$listre->gstin = $party_details['gstin'];
 				}
 			}
-			 
+
 			$listre->po_number = '';
 			$listre->po_date = '';
 			if (!empty($listre->ref_id)) {
@@ -336,49 +336,49 @@ function getSalesRegisterReport($get)
 					$listre->po_date = $pores->transaction_date;
 				}
 			}
-			 
+
 			$itemsql = "SELECT id as item_row_id, item_id, item_name, description as item_description, purchase_uom, item_quantity, item_price, item_amount, discount_amount, tax_amount, total_amount as net_amount FROM " . $dmtres->item_table . " WHERE company_id = '" . $get['company_id'] . "' AND transaction_id = '" . $listre->id . "' AND is_active = 0";
 			$itemres = $callConfig->getAllRows($itemsql);
-			
+
 			$listre->items = array();
-			
-			foreach ($itemres as $item) { 
+
+			foreach ($itemres as $item) {
 				$taxsql = "SELECT tax_name, tax_amount FROM " . $dmtres->tax_table . " WHERE company_id = '" . $get['company_id'] . "' AND transaction_id = '" . $listre->id . "' AND transaction_item_id = '" . $item->item_row_id . "' AND is_active = 0";
 				$taxres = $callConfig->getAllRows($taxsql);
-				
+
 				$item->hsn_sac = '';
 				$item->cgst = 0;
 				$item->sgst = 0;
 				$item->igst = 0;
 				$total_tax = 0;
-				 
+
 				if (!empty($taxres)) {
 					$item->hsn_sac = $taxres[0]->tax_name;
-					 
+
 					foreach ($taxres as $tax) {
 						$total_tax += floatval($tax->tax_amount);
 					}
 				}
-				 
-				if (!empty($listre->tax_state) && strtolower($listre->tax_state) == 's') { 
+
+				if (!empty($listre->tax_state) && strtolower($listre->tax_state) == 's') {
 					$item->cgst = 0;
 					$item->sgst = $total_tax;
 					$item->igst = 0;
-				} else { 
+				} else {
 					$item->cgst = $total_tax / 2;
 					$item->sgst = $total_tax / 2;
 					$item->igst = 0;
 				}
-				 
+
 				$item->taxable_amount = $item->item_amount;
 				$item->gross_amount = $item->item_amount + $item->discount_amount;
-				
+
 				$listre->items[] = $item;
 			}
-			
+
 			$list[] = $listre;
 		}
-		
+
 		$return['transaction_list'] = $list;
 		$return['sql'] = $listsql;
 		return $return;
@@ -398,7 +398,7 @@ function getSalesRegisterReport($get)
 		if ($get['admin_type'] != 1) {
 			$condition = " AND transa." . $originator . " = '" . $checkuserid . "'";
 		}
- 
+
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$condition .= " AND transa.transaction_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'";
 		}
@@ -416,21 +416,21 @@ function getSalesRegisterReport($get)
 		if ($get['refrance_res'] == "Y") {
 			$condition = " AND transa.ref_type = '" . $get['ref_table'] . "' AND transa.ref_id = '" . $get['ref_id'] . "'";
 		}
- 
+
 		$uomsql = "SELECT id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0";
 		$uomres = $callConfig->getAllRows($uomsql);
 		$uom_list = array();
 		foreach ($uomres as $uom) {
 			$uom_list[$uom->id] = $uom->uom_name;
 		}
- 
+
 		$listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.doc_ref_no, transa.doc_ref_date, transa.originator, transa.party_id, transa.party_name, transa.party_phone, transa.party_address, transa.party_additional_details, transa.tax_state, transa.ref_id, transa.amount, transa.discount_amount, transa.tax_amount, transa.total_amount, transa.additional_charges, transa.type, transa.current_status FROM " . $dmtres->application_table_name . " transa WHERE transa.company_id = '" . $get['company_id'] . "' AND transa.is_active = 0 " . $condition . " ORDER BY transa.transaction_date DESC, transa.transaction_number DESC";
-		
+
 		$listres = $callConfig->getAllRows($listsql);
 		$return['listres'] = $listsql;
 
 		$list = array();
-		foreach ($listres as $listre) { 
+		foreach ($listres as $listre) {
 			$listre->gstin = '';
 			if (!empty($listre->party_additional_details)) {
 				$party_details = json_decode($listre->party_additional_details, true);
@@ -438,7 +438,7 @@ function getSalesRegisterReport($get)
 					$listre->gstin = $party_details['gstin'];
 				}
 			}
-			 
+
 			$listre->po_number = '';
 			$listre->po_date = '';
 			if (!empty($listre->ref_id)) {
@@ -449,51 +449,51 @@ function getSalesRegisterReport($get)
 					$listre->po_date = $pores->transaction_date;
 				}
 			}
-			 
+
 			$itemsql = "SELECT id as item_row_id, item_id, account_code, item_name, description, item_quantity, purchase_uom, item_price, pending_qty, item_amount, tax_amount, discount_amount, total_amount FROM " . $dmtres->item_table . " WHERE company_id = '" . $get['company_id'] . "' AND transaction_id = '" . $listre->id . "' AND is_active = 0";
 			$itemres = $callConfig->getAllRows($itemsql);
-			
+
 			$listre->items = array();
-			
-			foreach ($itemres as $item) { 
+
+			foreach ($itemres as $item) {
 				$item->uom_name = isset($uom_list[$item->purchase_uom]) ? $uom_list[$item->purchase_uom] : $item->purchase_uom;
-				 
+
 				$taxsql = "SELECT tax_name, tax_amount FROM " . $dmtres->tax_table . " WHERE company_id = '" . $get['company_id'] . "' AND transaction_id = '" . $listre->id . "' AND transaction_item_id = '" . $item->item_row_id . "'  AND is_active = 0";
 				$taxres = $callConfig->getAllRows($taxsql);
-				
+
 				$item->hsn_sac = '';
 				$item->cgst = 0;
 				$item->sgst = 0;
 				$item->igst = 0;
 				$total_tax = 0;
-				 
+
 				if (!empty($taxres)) {
 					$item->hsn_sac = $taxres[0]->tax_name;
-					 
+
 					foreach ($taxres as $tax) {
 						$total_tax += floatval($tax->tax_amount);
 					}
 				}
-				 
-				if (!empty($listre->tax_state) && strtolower($listre->tax_state) == 's') { 
+
+				if (!empty($listre->tax_state) && strtolower($listre->tax_state) == 's') {
 					$item->cgst = 0;
 					$item->sgst = $total_tax;
 					$item->igst = 0;
-				} else { 
+				} else {
 					$item->cgst = $total_tax / 2;
 					$item->sgst = 0;
 					$item->igst = $total_tax / 2;
 				}
-				 
+
 				$item->taxable_value = $item->item_amount;
 				$item->gross_value = $item->item_amount + $item->tax_amount;
-				
+
 				$listre->items[] = $item;
 			}
-			
+
 			$list[] = $listre;
 		}
-		
+
 		$return['transaction_list'] = $list;
 		$return['sql'] = $listsql;
 		return $return;
@@ -527,21 +527,21 @@ function getSalesRegisterReport($get)
 		if ($get['refrance_res'] == "Y") {
 			$condition = " AND transa.ref_type = '" . $get['ref_table'] . "' AND transa.ref_id = '" . $get['ref_id'] . "'";
 		}
-  
+
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$condition .= " AND transa.transaction_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'";
 		}
- 
+
 		if (!empty($get['party_id'])) {
 			$condition .= " AND transa.party_id = '" . $get['party_id'] . "'";
 		}
- 
+
 		if (!empty($get['status_filter'])) {
 			$condition .= " AND transa.current_status = '" . $get['status_filter'] . "'";
 		}
- 
+
 		$listsql = "SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.doc_ref_no, transa.doc_ref_date, transa.party_id, transa.party_name, transa.party_additional_details, transa.tax_state, transa.ref_id, transa.current_status FROM " . $dmtres->application_table_name . " transa WHERE transa.company_id = '" . $get['company_id'] . "' AND transa.is_active = 0 " . $condition . " ORDER BY transa.transaction_date DESC, transa.transaction_number DESC";
-		
+
 		$listres = $callConfig->getAllRows($listsql);
 		$return['listres'] = $listsql;
 
@@ -555,7 +555,7 @@ function getSalesRegisterReport($get)
 					$listre->gstin = $party_details['gstin'];
 				}
 			}
-			
+
 			// Get PO details from purchase_orders table if ref_id exists
 			$listre->po_number = '';
 			$listre->po_date = '';
@@ -571,51 +571,51 @@ function getSalesRegisterReport($get)
 					$listre->po_date = $pores->transaction_date;
 				}
 			}
-			 
+
 			$itemsql = "SELECT itemtb.id as item_row_id, itemtb.item_id, itemtb.item_name, itemtb.description as item_description, itemtb.purchase_uom, itemtb.item_quantity, itemtb.item_price, itemtb.item_amount, itemtb.discount_amount, itemtb.tax_amount, itemtb.total_amount as net_amount, items.sku as sku_code FROM " . $dmtres->item_table . " itemtb LEFT JOIN items ON itemtb.item_id = items.id AND itemtb.company_id = items.company_id WHERE itemtb.company_id = '" . $get['company_id'] . "'  AND itemtb.transaction_id = '" . $listre->id . "' AND itemtb.is_active = 0";
 			$itemres = $callConfig->getAllRows($itemsql);
-			
+
 			$listre->items = array();
-			
-			foreach ($itemres as $item) { 
+
+			foreach ($itemres as $item) {
 				$taxsql = "SELECT tax_name, tax_amount FROM " . $dmtres->tax_table . " WHERE company_id = '" . $get['company_id'] . "' AND transaction_id = '" . $listre->id . "' AND transaction_item_id = '" . $item->item_row_id . "'  AND is_active = 0";
 				$taxres = $callConfig->getAllRows($taxsql);
-				
+
 				$item->hsn_sac = '';
 				$item->cgst = 0;
 				$item->sgst = 0;
 				$item->igst = 0;
 				$total_tax = 0;
-				 
+
 				if (!empty($taxres)) {
 					$item->hsn_sac = $taxres[0]->tax_name;
-					 
+
 					foreach ($taxres as $tax) {
 						$total_tax += floatval($tax->tax_amount);
 					}
 				}
-				 
+
 				if (!empty($listre->tax_state) && strtolower($listre->tax_state) == 's') {
 					$item->cgst = 0;
 					$item->sgst = $total_tax;
 					$item->igst = 0;
-				} else { 
+				} else {
 					$item->cgst = $total_tax / 2;
 					$item->sgst = $total_tax / 2;
 					$item->igst = 0;
 				}
-				
+
 				// Calculate taxable amount, gross amount and taxable value
 				$item->taxable_amount = $item->item_amount;
 				$item->gross_amount = $item->item_amount + $item->discount_amount;
 				$item->taxable_value = $item->item_amount; // Same as taxable_amount for this report
-				
+
 				$listre->items[] = $item;
 			}
-			
+
 			$list[] = $listre;
 		}
-		
+
 		$return['transaction_list'] = $list;
 		$return['sql'] = $listsql;
 		return $return;
@@ -642,15 +642,15 @@ function getSalesRegisterReport($get)
 			$items[$iteml->id] = $iteml;
 		}
 		$return['items'] = $items;
-		
-		
+
+
 		$unit_of_measurementssql = "SELECT id, uom_name FROM unit_of_measurements WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$unit_of_measurementsres = $callConfig->getAllRows($unit_of_measurementssql);
 		foreach($unit_of_measurementsres as $uoml){
 			$unit_of_measurements[$uoml->id] = $uoml->uom_name;
 		}
 		$return['unit_of_measurements'] = $unit_of_measurements;
-			
+
 
 		$listsql = "SELECT  par.id, par.transaction_number, par.transaction_date, par.originator, party_id, par.party_name, par.payment_terms, par.amount,  par.type, par.tax_type,  par.shipping_tax, par.shipping_amount, par.shipping_tax_amount, par.doc_ref_no, par.doc_ref_date, par.due_date, par.ref_type, par.ref_id, par.ref_no, par.ref_date, par.old_ref_no, par.old_ref_date, par.cancel_invoice, par.cancel_invoice_date, par.cancel_invoice_reason, par.additional_charges, par.additional_attributes, par.total_tds_amount, par.advance_payment, par.pending_advance_payment,  par.rounding_off, par.discount_mode, par.multi_reference, par.originator_state_id, par.supplier_state_id, par.total_amount as par_total_amount, par.current_status, soi.id as childtabid ,soi.item_id, soi.item_name, soi.description, soi.purchase_uom, soi.item_quantity, soi.item_price, soi.item_amount, soi.tax_amount, soi.discount_amount, soi.total_amount, soi.tds_amount, soi.pending_qty, soi.ref_transaction_table_id FROM ".$dmtres->application_table_name." par, ".$dmtres->item_table." soi WHERE par.company_id = '" . $get['company_id'] . "' ".$condition." AND par.company_id = soi.company_id AND par.id = soi.transaction_id AND par.is_active = soi.is_active  AND par.current_status = 199 AND par.is_active = 0 AND (par.cancel_invoice = 'N' OR par.cancel_invoice IS NULL)  ORDER BY par.id Asc";
 		$listres = $callConfig->getAllRows($listsql);
@@ -666,7 +666,7 @@ function getSalesRegisterReport($get)
 			foreach($reftransres as $reftra){
 				$refrancetransactions[$reftra->id] = $reftra;
 			}
-			$return['refrance_transactions'] = $refrancetransactions;	
+			$return['refrance_transactions'] = $refrancetransactions;
 		}elseif($transaction_table == "sales_invoices" OR $transaction_table == "purchase_orders"){
 			$reftranssql = "SELECT id, transaction_number, transaction_date FROM sales_orders WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 			$reftransres = $callConfig->getAllRows($reftranssql);
@@ -697,7 +697,7 @@ function getSalesRegisterReport($get)
 		$dmtsql = "SELECT id, display_name, user_email FROM application_users WHERE company_id = '".$get['company_id']."' AND  user_type = 1 AND is_active = 0";
 		$dmtres = $callConfig->getallRows($dmtsql);
 		$return['application_users'] = $dmtres;
-		
+
 
 		$dmtsql = "SELECT id, task_name FROM project_task_details WHERE company_id = 1 AND is_active = 0";
 		$project_task_detailsres = $callConfig->getAllRows($dmtsql);
@@ -715,7 +715,7 @@ function getSalesRegisterReport($get)
 	    while ($start <= $end) {
 	        $dates[] = $start->format('Y-m-d');
 	        $start->modify('+1 day');
-	    }	
+	    }
 	    $return['project_task_dates'] = $dates;
 	    if($application_user_id != ""){
 	    	$whrcond = " AND  p.user_id =".$application_user_id;
@@ -734,7 +734,7 @@ function getSalesRegisterReport($get)
 		}
 		$return['project_task_time_log_Sql'] = $dmtsql;
 		$return['project_task_time_log'] = $project_task_time_log;
-		
+
 
 
 		return $return;
@@ -1332,7 +1332,7 @@ function getSalesRegisterReport($get)
     }
 
 // added by koti 24-07-2026
-	
+
 
 
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 class claimUserClass extends userClass{
 		public function getReimbursementDashboard($get){
 			global $callConfig;
@@ -6,17 +6,17 @@ class claimUserClass extends userClass{
 			$employee_id = $get['emp_id'];
 			$user_id = $get['user_id'];
 			//$exploderole = explode(',', $get['roleshortcode']);
-			
+
 			//if(!in_array(CLAIM_EXECUTIVE_ROLE, $exploderole)){
 				if($get['admin_type']!='1'){
 					$condition = " AND user_id = ".$user_id;
 					$tripcondition = " AND tri.user_id = ".$user_id;
 					$empexpcondition = " AND empexp.user_id = ".$user_id;
-					
+
 					$employeecondition = " AND user_id = ".$user_id;
 				}
 			//}
-			
+
 			$holidayssql = "SELECT holiday_name, holiday_date FROM holidays WHERE company_id = '".$get['company_id']."' AND YEAR(holiday_date) = ".date('Y')." AND is_active = 0";
 			$holidaysres = $callConfig->getAllRows($holidayssql);
 			$returnarray['holidays'] = $holidaysres;
@@ -27,7 +27,7 @@ class claimUserClass extends userClass{
 
 
 $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=".ST_ACTIVE." OR current_status=".ST_DRAFT.",1,0)) as yettosubmit_cnt, sum(if(current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT." AND current_status!=".ST_APPROVED.",1,0)) as inprocess_cnt,sum(if(current_status=".ST_APPROVED.",1,0)) as approved_cnt ,sum(if(current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT.",total_amount,0)) as total_amount, sum(if(current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT.",pending_amount,0)) as pending_amount ,sum(if(current_status =".ST_APPROVED." AND pending_amount > 0,1,0)) as clearbill_cnt FROM emp_expenses WHERE company_id = '".$get['company_id']."' ".$condition." AND is_active = 0";
-			
+
 
 			//$emp_expensescntsql = "SELECT count(*) as total_cnt, sum(total_amount) as total_amount	 , sum(pending_amount) as pending_amount ,(sum(total_amount)- sum(pending_amount)) as paid_amount,sum(if(current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT." AND current_status!=".ST_APPROVED.",1,0)) as inprocess_cnt, sum(if(current_status =".ST_APPROVED.",1,0)) as total_approved_cnt FROM emp_expenses WHERE company_id = '".$get['company_id']."' ".$condition." AND is_active = 0";
 			$emp_expensescntres = $callConfig->getRow($emp_expensescntsql);
@@ -36,7 +36,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			$returnarray['emp_expenses_cnt'] = $emp_expensescntres;
 
 			$self_emp_expensessql = "SELECT empexp.id, empexp.expense_code, empexp.emp_id, empexp.expense_date, empexp.total_amount, empexp.pending_amount, empexp.current_status, empexp.user_id, tri.id as tri, tri.transaction_no FROM emp_expenses empexp LEFT JOIN  trips tri ON empexp.trip_id = tri.id AND tri.company_id = empexp.company_id AND tri.is_active = empexp.is_active WHERE empexp.company_id = '".$get['company_id']."'  ".$empexpcondition." AND empexp.is_active = 0";
-			
+
 			$self_emp_expensesres = $callConfig->getAllRows($self_emp_expensessql);
 			$returnarray['self_emp_expenses'] = $self_emp_expensesres;
 
@@ -46,8 +46,8 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			$returnarray['self_trips'] = $self_tripsres;
 
 
-			//$teamsql = "SELECT emp.id, emp.display_name, (SELECT sum(total_amount) FROM emp_expenses emp_e WHERE emp_e.company_id = emp.company_id AND emp.id = emp_e.emp_id AND current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT." AND is_active = 0) as total_expenses, (SELECT sum(pending_amount) FROM emp_expenses emp_e WHERE emp_e.company_id = emp.company_id AND emp.id = emp_e.emp_id AND current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT." AND is_active = 0) as pending_amount FROM employees emp, application_users au WHERE emp.company_id = 1 AND emp.company_id = au.company_id AND emp.user_id = au.id AND (au.reports_to = '".$get['user_id']."' OR emp.hr_buddy = '".$employee_id."' OR emp.finance_buddy  = '".$employee_id."' OR emp.admin_buddy = '".$employee_id."' OR emp.project_buddy = '".$employee_id."' OR emp.loc_buddy = '".$employee_id."') AND emp.is_active = au.is_active AND emp.is_active = 0"; 
-			$teamsql = "SELECT au.id, au.display_name, (SELECT sum(total_amount) FROM emp_expenses emp_e WHERE emp_e.company_id = au.company_id AND au.id = emp_e.user_id AND emp_e.current_status!=".ST_ACTIVE." AND emp_e.current_status!=".ST_DRAFT." AND emp_e.is_active = 0) as total_expenses, (SELECT sum(emp_e.pending_amount) FROM emp_expenses emp_e WHERE emp_e.company_id = au.company_id AND au.id = emp_e.emp_id AND emp_e.current_status!=".ST_ACTIVE." AND emp_e.current_status!=".ST_DRAFT." AND emp_e.is_active = 0) as pending_amount FROM application_users au WHERE au.company_id = '".$get['company_id']."' AND (au.reports_to = '".$get['user_id']."' OR au.hr_connect = '".$employee_id."' OR au.finance_connect  = '".$employee_id."' OR au.admin_connect = '".$employee_id."' OR au.project_connect = '".$employee_id."' OR au.location_connect = '".$employee_id."' OR au.esop_connect = '".$employee_id."' OR au.legal_connect = '".$employee_id."' OR au.approval_manager = '".$employee_id."') AND au.is_active = 0"; 
+			//$teamsql = "SELECT emp.id, emp.display_name, (SELECT sum(total_amount) FROM emp_expenses emp_e WHERE emp_e.company_id = emp.company_id AND emp.id = emp_e.emp_id AND current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT." AND is_active = 0) as total_expenses, (SELECT sum(pending_amount) FROM emp_expenses emp_e WHERE emp_e.company_id = emp.company_id AND emp.id = emp_e.emp_id AND current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT." AND is_active = 0) as pending_amount FROM employees emp, application_users au WHERE emp.company_id = 1 AND emp.company_id = au.company_id AND emp.user_id = au.id AND (au.reports_to = '".$get['user_id']."' OR emp.hr_buddy = '".$employee_id."' OR emp.finance_buddy  = '".$employee_id."' OR emp.admin_buddy = '".$employee_id."' OR emp.project_buddy = '".$employee_id."' OR emp.loc_buddy = '".$employee_id."') AND emp.is_active = au.is_active AND emp.is_active = 0";
+			$teamsql = "SELECT au.id, au.display_name, (SELECT sum(total_amount) FROM emp_expenses emp_e WHERE emp_e.company_id = au.company_id AND au.id = emp_e.user_id AND emp_e.current_status!=".ST_ACTIVE." AND emp_e.current_status!=".ST_DRAFT." AND emp_e.is_active = 0) as total_expenses, (SELECT sum(emp_e.pending_amount) FROM emp_expenses emp_e WHERE emp_e.company_id = au.company_id AND au.id = emp_e.emp_id AND emp_e.current_status!=".ST_ACTIVE." AND emp_e.current_status!=".ST_DRAFT." AND emp_e.is_active = 0) as pending_amount FROM application_users au WHERE au.company_id = '".$get['company_id']."' AND (au.reports_to = '".$get['user_id']."' OR au.hr_connect = '".$employee_id."' OR au.finance_connect  = '".$employee_id."' OR au.admin_connect = '".$employee_id."' OR au.project_connect = '".$employee_id."' OR au.location_connect = '".$employee_id."' OR au.esop_connect = '".$employee_id."' OR au.legal_connect = '".$employee_id."' OR au.approval_manager = '".$employee_id."') AND au.is_active = 0";
 			$team_emp_expensesres = $callConfig->getAllRows($teamsql);
 			$returnarray['team_emp_expenses'] = $team_emp_expensesres;
 
@@ -109,7 +109,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			global $callConfig;
 			$exploderole = explode(',', $get['roleshortcode']);
 			//if(!in_array(CLAIM_EXECUTIVE_ROLE, $exploderole)){
-				
+
 			//}
 			if($get['paymentsdashboard'] == 'Y'){
 				$employeessql = "SELECT emp.id, emp.user_id FROM employees emp WHERE emp.company_id = '".$get['company_id']."' AND emp.finance_buddy = '".$get['emp_id']."' AND emp.is_active = 0 ";
@@ -153,8 +153,8 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			global $callConfig;
 			$returnarray = array();
 			$employee_id = $get['emp_id'];
-			
-			$employeecondition = " AND emp.finance_buddy = '".$employee_id."'";	
+
+			$employeecondition = " AND emp.finance_buddy = '".$employee_id."'";
 
 			$holidayssql = "SELECT holiday_name, holiday_date FROM holidays WHERE company_id = '".$get['company_id']."' AND YEAR(holiday_date) = ".date('Y')." AND is_active = 0";
 			$holidaysres = $callConfig->getAllRows($holidayssql);
@@ -168,7 +168,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			foreach($employeesres as $empdetails){
 				$empidlist[$empdetails->id] = $empdetails->id;
 			}
-			$expempid = implode(',', (array)$empidlist); 
+			$expempid = implode(',', (array)$empidlist);
 
 			//$emp_expensescntsql = "SELECT sum(if(current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT.",1,0)) as total_cnt , sum(if(current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT.",total_amount,0)) as total_amount,sum(if(current_status=".ST_APPROVED.",pending_amount,0)) as pending_amount ,sum(if(current_status!=".ST_ACTIVE." AND current_status!=".ST_DRAFT." AND current_status!=".ST_APPROVED.",1,0)) as inprocess_cnt, sum(if(current_status =".ST_APPROVED.",1,0)) as total_approved_cnt FROM emp_expenses WHERE company_id = '".$get['company_id']."' AND emp_id IN(".$expempid.") AND is_active = 0";
 			$emp_expensescntsql = "SELECT sum(if(current_status=".ST_APPROVED.",1,0)) as total_cnt , sum(if(current_status=".ST_APPROVED.",total_amount,0)) as total_amount,sum(if(current_status=".ST_APPROVED.",pending_amount,0)) as pending_amount ,sum(if(current_status=".ST_APPROVED." AND pending_amount <= 0,1,0)) as inprocess_cnt, 
@@ -181,7 +181,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			$self_emp_expensesres = $callConfig->getAllRows($self_emp_expensessql);
 			$returnarray['all_emp_expenses'] = $self_emp_expensesres;
 
-			$selftranssql = "SELECT id, transaction_no, payment_date, payment_type, amount, current_status FROM `payments` WHERE company_id = '".$get['company_id']."' AND transaction_type = 'employees' AND originator = '".$get['user_id']."' AND is_active = 0"; 
+			$selftranssql = "SELECT id, transaction_no, payment_date, payment_type, amount, current_status FROM `payments` WHERE company_id = '".$get['company_id']."' AND transaction_type = 'employees' AND originator = '".$get['user_id']."' AND is_active = 0";
 			$selftransres = $callConfig->getAllRows($selftranssql);
 			$returnarray['self_payments'] = $selftransres;
 
@@ -260,7 +260,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			}
 			if($res->trip_id !="" OR $get['trip_id'] !=""){
 				$get['trip_id'] = $get['trip_id'] !=""?$get['trip_id']:$res->trip_id;
-				$citiesid =$cities= array(); 
+				$citiesid =$cities= array();
 				$tripssql = "SELECT * FROM trips WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND id='".$get['trip_id']."'";
 			 	$tripsres = $callConfig->getRow($tripssql);
 			 	$return['tripssql'] = $tripssql;
@@ -321,15 +321,15 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 		 	$res = $callConfig->getAllRows($sql);
 		 	$return['expense_categories_sql'] = $sql;
 		 	$return['expense_categories'] = $res;
-		 	
+
 		 	$sql = "SELECT emp.id, emp.expense_type, emp.name, emp.amount,emp.start_date, emp.end_date FROM expenses_mileages_perdiem emp, user_reimbursement_policies urp WHERE urp.company_id = '".$get['company_id']."' AND urp.is_active = emp.is_active AND urp.company_id = emp.company_id AND urp.is_active = 0 AND emp.policy_id= urp.policy_id AND urp.user_id = '".$get['user_id']."'";
 		 	$res = $callConfig->getAllRows($sql);
 		 	$return['expenses_mileages_perdiem'] = $res;
-		 	
+
 		 	$sql = "SELECT id,genc_detail_code,genc_detail_name,genc_code FROM general_code_details WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND genc_code IN('PAYMETHOD','EXPENSTYPE')";
 		 	$res = $callConfig->getAllRows($sql);
 		 	$return['general_code_details'] = $res;
-		 	
+
 		 	$sql = "SELECT id,name FROM projects WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		 	$res = $callConfig->getAllRows($sql);
 		 	$return['projects'] = $res;
@@ -352,18 +352,18 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
         //echo $query;
         $ress = $callConfig->getAllRows($query);
         $return['trips'] = $ress;
- 
+
         $get['table'] ="trips";
         $status_progress = $this->getStatusProgressList($get);
         $return['status_progress'] = $status_progress;
- 
+
         $transapprlogsql = "SELECT tal.request_date,tal.response_date, tal.response_type, trp.transaction_no, trp.transaction_date, trp.budget_amount, trp.trip_name, trp.id
         FROM transaction_approval_logs tal, trips trp WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = trp.company_id AND  tal.transaction_table = 'trips' AND tal.user_id = '".$get['user_id']."' AND tal.transaction_id = trp.id AND trp.is_active = 0";
         $transapprlogres = $callConfig->getAllRows($transapprlogsql);
         $return['transaction_approval_logs'] = $transapprlogres;
- 
+
         return $return;
-    }	
+    }
 
     public function togetinprocesstripdetails($get){
         global $callConfig;
@@ -373,7 +373,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             $query = "SELECT id,  `trip_name`, transaction_no,  transaction_date, `trip_type`, `trip_purpose`, `project_id`, `customer_id`, `budget_amount`, `final_amount`, user_id, `is_active`, `current_status` FROM trips  WHERE  id={$get['trip_id']} AND  company_id={$get['company_id']} AND is_active=0";
             $data = $callConfig->getRow($query);
             $return['trip'] = $data;
- 
+
             $query ="SELECT id, `trip_id`, `journey_type`, `user_id`, `trip_purpose`, `origin_location`, `destination_location`, `departure_date`, departure_time,`return_date`, return_time,`travel_mode`, `estimated_cost` FROM domestic_round_trips WHERE company_id={$get['company_id']} AND  trip_id={$get['trip_id']} AND is_active =0";
             $data = $callConfig->getAllRows($query);
             foreach ($data as $row) {
@@ -381,14 +381,14 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
                     if (!empty($row->destination_location)) $cities_arr[] = (int)$row->destination_location;
                 }
             $return['domestic_round_trips'] = $data;
- 
+
             $query ="SELECT id,`trip_id`, `hotel_name`, `check_in`, `check_out`, `location`, `room_type`, `booking_reference`, `cost` , description FROM trip_hotels WHERE company_id={$get['company_id']} AND  trip_id={$get['trip_id']} AND is_active =0";
             $data = $callConfig->getAllRows($query);
             foreach ($data as $row) {
                 if (!empty($row->location)) $cities_arr[] = (int)$row->location;
             }
             $return['trip_hotels'] = $data;
- 
+
             $query ="SELECT id, `trip_id`, `user_id`, `trip_purpose`, `trip_date`, `from_location`, `to_location`, `travel_mode`, `estimated_cost`, `pickup_at`, `dropoff_at`, `car_type`, `driver_needed` FROM local_trips WHERE company_id={$get['company_id']} AND  trip_id={$get['trip_id']} AND is_active =0";
             $data = $callConfig->getAllRows($query);
             foreach ($data as $row) {
@@ -410,9 +410,9 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             } else {
                 $return['cities'] = [];
             }
- 
+
         }
- 
+
         $query ="SELECT id, project_name FROM projects WHERE company_id =  {$get['company_id']} AND is_active =0";
         $data = $callConfig->getAllRows($query);
         $res = array();
@@ -420,7 +420,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             $res[$row->id] = $row->project_name;
         }
         $return['projects'] = $res;
- 
+
         $query ="SELECT id, display_name FROM customers WHERE company_id =  {$get['company_id']} AND is_active =0";
         $data = $callConfig->getAllRows($query);
         $res = array();
@@ -428,7 +428,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             $res[$row->id] = $row->display_name;
         }
         $return['clients'] = $res;
- 
+
         $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id =  {$get['company_id']} AND  genc_code='TRIP_LOCAL_VEHICLE' AND is_active =0";
         $data = $callConfig->getAllRows($query);
         $res = array();
@@ -436,7 +436,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             $res[$row->genc_detail_code] = $row->genc_detail_name;
         }
         $return['local_modes'] = $res;
- 
+
         $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id =  {$get['company_id']} AND  genc_code='TRIP_DOMESTIC_VEHICL' AND is_active =0";
         $data = $callConfig->getAllRows($query);
         $res = array();
@@ -444,7 +444,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             $res[$row->genc_detail_code] = $row->genc_detail_name;
         }
         $return['domestic_modes'] = $res;
- 
+
         $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id =  {$get['company_id']} AND  genc_code='TRIP_DOMESTIC_TYPE' AND is_active =0 ORDER BY genc_detail_code ASC ";
         $data = $callConfig->getAllRows($query);
         $res = array();
@@ -452,7 +452,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
             $res[$row->genc_detail_code] = $row->genc_detail_name;
         }
         $return['journey_types'] = $res;
- 
+
         $query ="SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id =  {$get['company_id']} AND  genc_code='TRIP_TYPE' AND is_active =0";
         $data = $callConfig->getAllRows($query);
         $res = array();
@@ -461,7 +461,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
         }
         $return['trip_types'] = $res;
         return $return;
-    }  
+    }
     public function insertEMPExpenses($get,$post){
     	global $callConfig;
     	$return = array();
@@ -485,7 +485,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 	 		$return['res'] = $insert_data;
 	 		$insert_id = $insert_data['LASTID'];
 	 	}
-	 
+
 	 	if($insert_id!=""){
 
 	 		$upary = array();
@@ -499,15 +499,15 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 		 		$bill_date =  $this->dateconvertdbformat($post['expense_date'][$key]);
 		 		$expense_type = $post['expense_type_'.$rowsequince];
 			 	if($expense_type=='1'){
-			 		$category = $post['category_mileage'][$key]; 
+			 		$category = $post['category_mileage'][$key];
 			 		$qty  = $post['qty_mileage'][$key];
 			 		$rate  = $post['rate_mileage'][$key];
 			 	}elseif($expense_type=='2'){
-			 		$category = $post['category_perd'][$key]; 
+			 		$category = $post['category_perd'][$key];
 			 		$qty  = $post['qty_perd'][$key];
 			 		$rate  = $post['rate_perd'][$key];
-			 	}else{	
-			 		$category = $post['category_exp'][$key]; 
+			 	}else{
+			 		$category = $post['category_exp'][$key];
 			 		$qty  = $post['qty_exp'][$key];
 			 		$rate  = $post['rate_exp'][$key];
 			 	}
@@ -517,8 +517,8 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			 		$trip_transaction_table= $trip_transaction_tabled[0];
 			 		$trip_transaction_id= $trip_transaction_tabled[1];
 			 	}
-			 	
-			 	$itemfieldnames=array('company_id'=>$post['company_id'],'emp_id'=>$post['emp_id'],'emp_expenses_id'=>$insert_id,'category_id'=>$category,'expense_type'=>$expense_type,'bill_no'=>$post['bill_no'][$key],'description'=>$post['description'][$key],'bill_date'=>$bill_date,'qty'=>$qty,'rate'=>$rate,'tax_amount'=>$post['tax'][$key],'expense_amount'=>$post['amount'][$key],'merchant_name'=>$post['merchant_name'][$key],'project_id'=>$post['project_id'],'payment_mode'=>$post['payment_mode'][$key],'location'=>$post['location'][$key],'bill_file'=>$post['bill_file'][$key],'is_active'=>'0','trip_transaction_table'=>$trip_transaction_table,'trip_transaction_id'=>$trip_transaction_id);	
+
+			 	$itemfieldnames=array('company_id'=>$post['company_id'],'emp_id'=>$post['emp_id'],'emp_expenses_id'=>$insert_id,'category_id'=>$category,'expense_type'=>$expense_type,'bill_no'=>$post['bill_no'][$key],'description'=>$post['description'][$key],'bill_date'=>$bill_date,'qty'=>$qty,'rate'=>$rate,'tax_amount'=>$post['tax'][$key],'expense_amount'=>$post['amount'][$key],'merchant_name'=>$post['merchant_name'][$key],'project_id'=>$post['project_id'],'payment_mode'=>$post['payment_mode'][$key],'location'=>$post['location'][$key],'bill_file'=>$post['bill_file'][$key],'is_active'=>'0','trip_transaction_table'=>$trip_transaction_table,'trip_transaction_id'=>$trip_transaction_id);
 			 	$returnarray['subarray'] = $itemfieldnames;
 			 	if($post['emp_expenses_detail_id'][$key] != ''){
 			 		$itemfieldnames['updated_date'] = date('Y-m-d h:i:s');
@@ -534,7 +534,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 			 	}
 
 			}
-		}		
+		}
 	 	return $return;
     }
     public function getReimbursementPolicies($get){
@@ -546,7 +546,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 	        $policiessql = "SELECT * FROM reimbursement_policies WHERE id = '".$get['rid']."' AND company_id = '".$get['company_id']."' AND is_active = 0";
 		 	$policiesres = $callConfig->getRow($policiessql);
 		 	$return['policies'] = $policiesres;
-		 	
+
 		 	$policy_catsql = "SELECT id,policy_id,category_id,max_expense_limit,receipt_required_limit,description_mandatory,start_date,policy_time_period FROM reimbursement_policy_categories WHERE policy_id = '".$get['rid']."' AND company_id = '".$get['company_id']."' AND is_active = 0";
 		 	$policy_catres = $callConfig->getAllRows($policy_catsql);
 		 	$return['policy_categories'] = $policy_catres;
@@ -585,12 +585,12 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 		if($data['location_id']!=""){ $condition .=  " AND location_id = '".$data['location_id']."'"; }
 		if($data['cost_center_id']!=""){ $condition .=  " AND cost_center = '".$data['cost_center_id']."'"; }
 		if($data['emp_name_code']!=""){ $condition .=  " AND  (display_name like '%".$data['emp_name_code']."%' OR  user_email like '%".$data['emp_name_code']."%') "; }
-		
+
 		$query2 = "SELECT id, display_name, user_email, user_mobile, user_photo, cost_center, location_id FROM application_users WHERE is_active=0 AND company_id = '".$data['company_id']."'".$condition;
 		$datas = $callConfig->getAllRows($query2);
 		//$return['users_list_sql'] = $query2;
 		$return['users_list'] = $datas;
-		
+
 		$location_name = "SELECT id, location_name FROM locations WHERE is_active=0 AND company_id = '".$data['company_id']."'";
 		$location_namedetails = $callConfig->getAllRows($location_name);
 		$return['locations'] = $location_namedetails;
@@ -613,19 +613,19 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
         $cities_arr = array();
          if($get['journyid'] != '' AND ($get['trip_type'] =="journy" OR $get['trip_type'] =="hotel")){
 
-        	$sql = "SELECT rpc.category_id, rpc.max_expense_limit, rpc.receipt_required_limit, rpc.description_mandatory  FROM reimbursement_policy_categories rpc, user_reimbursement_policies urp WHERE urp.company_id = '".$get['company_id']."' AND urp.company_id = rpc.company_id AND urp.is_active = 0 AND urp.is_active = rpc.is_active AND urp.user_id = '".$get['user_id']."' AND urp.start_date <= '".$this->dateconvertdbformat($get['transaction_date'])."' AND urp.end_date >= '".$this->dateconvertdbformat($get['transaction_date'])."' AND rpc.category_id = '".$get['journyid']."' AND rpc.policy_id = urp.policy_id"; 
+        	$sql = "SELECT rpc.category_id, rpc.max_expense_limit, rpc.receipt_required_limit, rpc.description_mandatory  FROM reimbursement_policy_categories rpc, user_reimbursement_policies urp WHERE urp.company_id = '".$get['company_id']."' AND urp.company_id = rpc.company_id AND urp.is_active = 0 AND urp.is_active = rpc.is_active AND urp.user_id = '".$get['user_id']."' AND urp.start_date <= '".$this->dateconvertdbformat($get['transaction_date'])."' AND urp.end_date >= '".$this->dateconvertdbformat($get['transaction_date'])."' AND rpc.category_id = '".$get['journyid']."' AND rpc.policy_id = urp.policy_id";
 		 	$res = $callConfig->getRow($sql);
 		 	//$return['expense_categories_sql'] = $sql;
 		 	$return['res'] = $res;
 
-		}elseif($get['journyid'] != '' AND $get['trip_type'] =="localtrip"){ 	
+		}elseif($get['journyid'] != '' AND $get['trip_type'] =="localtrip"){
 		 	$sql = "SELECT emp.id, emp.expense_type, emp.name, emp.amount as max_expense_limit, emp.start_date, emp.end_date FROM expenses_mileages_perdiem emp, user_reimbursement_policies urp WHERE urp.company_id = '".$get['company_id']."' AND urp.is_active = emp.is_active AND urp.company_id = emp.company_id AND urp.is_active = 0 AND emp.policy_id= urp.policy_id AND urp.user_id = '".$get['user_id']."' AND emp.name = '".$get['journyid']."'";
 		 	$res = $callConfig->getRow($sql);
 		 	//$return['sql'] = $sql;
 		 	$return['res'] = $res;
-		}else{ 
+		}else{
 	        if(isset($get['id']) && $get['id'] != ''){
-	            $query = "SELECT * FROM trips  WHERE  id={$get['id']} AND  company_id={$get['company_id']} AND is_active=0"; 
+	            $query = "SELECT * FROM trips  WHERE  id={$get['id']} AND  company_id={$get['company_id']} AND is_active=0";
 	            $data = $callConfig->getRow($query);
 	            $return['trip'] = $data;
 
@@ -816,9 +816,9 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 
             $trip = [
                 'company_id'     => $company_id,
-                'user_id'    	 => $user_id,                
-                'transaction_no' => $serial,                
-                'transaction_date'=> date('Y-m-d'),                
+                'user_id'    	 => $user_id,
+                'transaction_no' => $serial,
+                'transaction_date'=> date('Y-m-d'),
 				'trip_name'      => trim($post['trip_name'] ?? ''),
 			    'trip_type'      => trim($post['trip_type'] ?? ''),
 			    'trip_purpose'   => trim($post['trip_purpose'] ?? ''),

@@ -4,7 +4,7 @@ class uniformClass extends userClass{
 	public function getUniformStockData($get) {
 	    global $callConfig;
 	    $company_id  = $get['company_id'];
-	    $location_id = isset($get['location_id']) && $get['location_id'] != "" 
+	    $location_id = isset($get['location_id']) && $get['location_id'] != ""
 	                    ? $get['location_id']
 	                    : 1; // Default location
 	    $query1 = "SELECT id, name
@@ -85,7 +85,7 @@ class uniformClass extends userClass{
 	    global $callConfig;
 	    $company_id = $get['company_id'];
 	    $user_id    = $get['user_id'];
-	    $cfg_jobgrade = $get['config_jobgrade']; // pass from API call 
+	    $cfg_jobgrade = $get['config_jobgrade']; // pass from API call
 
 	    // get all employees
 	    $q1 = "SELECT id, first_name, last_name, display_name, location_id, job_grade_id,user_id 
@@ -302,7 +302,7 @@ class uniformClass extends userClass{
 			$res = $callConfig->insertRecord('stationery_items', $insertary);
 			$return['res'] = $res;
 			$item_id = $res['LASTID'];
-			if($item_id){ 
+			if($item_id){
 				// insert ledger
 				$ledger = array(
 				  'company_id'    => $get['company_id'],

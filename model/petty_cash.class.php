@@ -1,10 +1,10 @@
-<?php 
+<?php
 class pettyCashUserClass extends userClass{
 	public function pettyCashDashboard($get){
 		global $callConfig;
 		$return = array();
 		$condition = "";
-		$todaydate = date("Y-m-d"); 
+		$todaydate = date("Y-m-d");
 		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 			$condition .= " AND pcbo.owner_id = '".$get['user_id']."'";
 		}
@@ -28,7 +28,7 @@ class pettyCashUserClass extends userClass{
 		// $return['projection_report'] = $callConfig->getAllRows($query);
 
 
-		//$frequencysql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='TASKFREQUENCY' AND is_active=0"; 
+		//$frequencysql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='TASKFREQUENCY' AND is_active=0";
 		// $frequencyres = $callConfig->getAllRows($frequencysql);
 		// $topup_frequency = array();
 		// foreach($frequencyres as $frq){
@@ -59,7 +59,7 @@ class pettyCashUserClass extends userClass{
 		foreach($status_progress as $statusprogress){
 			$return['status_progress'][$statusprogress->status] = $statusprogress;
 		}
-		return $return;	
+		return $return;
 	}
 	public function getExpensePettyCash($get){
 		global $callConfig;
@@ -82,7 +82,7 @@ class pettyCashUserClass extends userClass{
 		foreach($status_progress as $statusprogress){
 			$return['status_progress'][$statusprogress->status] = $statusprogress;
 		}
-		return $return;	
+		return $return;
 	}
 	public function insertPettyCashRequests($get, $post){
 		global $callConfig;
@@ -122,7 +122,7 @@ class pettyCashUserClass extends userClass{
 		$ptcbsql = "SELECT pcbo.id, pcbo.pc_box_id, pcbo.pc_limit, pcbo.pc_type_id, pcb.pc_box_code, pcb.pc_box_description, pcb.topup_frequency, pcb.topup_amount FROM petty_cash_box_owner pcbo, petty_cash_boxes pcb WHERE pcbo.company_id = '".$get['company_id']."' AND pcbo.company_id = pcb.company_id AND pcbo.pc_box_id = pcb.id  AND pcbo.is_active = pcb.is_active ".$condition." AND pcbo.is_active = 0";
 		$ptcbres=$callConfig->getAllRows($ptcbsql);
 		$return['petty_cash_boxes'] = $ptcbres;
-		
+
 		return $return;
 	}
 	public function getPettyCashTopUpDashboardChart($get){
@@ -180,7 +180,7 @@ class pettyCashUserClass extends userClass{
 			$pc_box_id =  $petty_cash->ref_id;
 			$pt_owner_id = $petty_cash->party_id;
 		}else{
-			$petty_cashsql = "SELECT id, transaction_number, transaction_date, amount, notes, party_id, ref_id, current_status FROM petty_cash WHERE company_id='".$get['company_id']."' AND id = '".$get['rid']."' AND is_active=0"; 
+			$petty_cashsql = "SELECT id, transaction_number, transaction_date, amount, notes, party_id, ref_id, current_status FROM petty_cash WHERE company_id='".$get['company_id']."' AND id = '".$get['rid']."' AND is_active=0";
 			$petty_cashres = $callConfig->getRow($petty_cashsql);
 			$pc_box_id =  $petty_cashres->ref_id;
 			$pt_owner_id = $petty_cashres->party_id;
@@ -193,24 +193,24 @@ class pettyCashUserClass extends userClass{
 		global $callConfig;
 		$return = array();
 		if($get['type'] == "add"){
-			$petty_cash_itemssql = "SELECT id, item_name, description FROM petty_cash_items WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+			$petty_cash_itemssql = "SELECT id, item_name, description FROM petty_cash_items WHERE company_id='".$get['company_id']."' AND is_active=0";
 			$petty_cash_itemsres = $callConfig->getAllRows($petty_cash_itemssql);
 			$return['petty_cash_items'] = $petty_cash_itemsres;
 
 			if($get['rid'] !=""){
-				$petty_cashsql = "SELECT id, transaction_number, transaction_date, amount, notes, party_id, ref_id, current_status FROM petty_cash WHERE company_id='".$get['company_id']."' AND id = '".$get['rid']."' AND is_active=0"; 
+				$petty_cashsql = "SELECT id, transaction_number, transaction_date, amount, notes, party_id, ref_id, current_status FROM petty_cash WHERE company_id='".$get['company_id']."' AND id = '".$get['rid']."' AND is_active=0";
 				$petty_cashres = $callConfig->getRow($petty_cashsql);
 				$return['petty_cash'] = $petty_cashres;
 
-				$pc_itemssql = "SELECT id, transaction_id, item_id, item_name, description, total_amount FROM pc_items WHERE company_id='".$get['company_id']."' AND transaction_id = '".$get['rid']."' AND is_active=0"; 
+				$pc_itemssql = "SELECT id, transaction_id, item_id, item_name, description, total_amount FROM pc_items WHERE company_id='".$get['company_id']."' AND transaction_id = '".$get['rid']."' AND is_active=0";
 				$pc_itemsres = $callConfig->getAllRows($pc_itemssql);
 				$return['pc_items'] = $pc_itemsres;
 
 				$return['petty_cash_balances'] = $this->getPettyCashBalances($get,$petty_cashres);
 			}
 
-		}else{ 
-			$frequencysql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='TASKFREQUENCY' AND is_active=0"; 
+		}else{
+			$frequencysql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='TASKFREQUENCY' AND is_active=0";
 			$frequencyres = $callConfig->getAllRows($frequencysql);
 			$topup_frequency = array();
 			foreach($frequencyres as $frq){
@@ -269,7 +269,7 @@ class pettyCashUserClass extends userClass{
 				$pc_itemsres = $callConfig->insertRecord('pc_items',$insertcust);
 			}
 			$return['pc_items'][] = $pc_itemsres;
-			
+
 		}
 		return $return;
 	}
@@ -280,12 +280,12 @@ class pettyCashUserClass extends userClass{
 		$transaction_no = $post['transaction_no']; // workflow field used
 		$transaction_table = $post['transaction_table'];
 		if($transaction_table=="petty_cash_box_topup_requests"){
-			$pcbrsql = "SELECT id, originator, petty_cash_boxe_id, final_amount, transaction_date FROM petty_cash_box_topup_requests WHERE company_id='".$post['company_id']."' AND id='".$transaction_no."' AND is_active=0"; 
+			$pcbrsql = "SELECT id, originator, petty_cash_boxe_id, final_amount, transaction_date FROM petty_cash_box_topup_requests WHERE company_id='".$post['company_id']."' AND id='".$transaction_no."' AND is_active=0";
 			$pcbrres = $callConfig->getRow($pcbrsql);
 			$return['pcbrsql'] = $pcbrsql;
 			$return['pcbrsqlres'] = $pcbrres;
 			if($pcbrres->id !=""){
-				$pcbsql = "SELECT id, pc_box_id, pt_owner_id, balance_date, debit_amount, credit_amount, opening_balance, closing_balance FROM petty_cash_balances WHERE company_id='".$post['company_id']."' AND pc_box_id='".$pcbrres->petty_cash_boxe_id."' AND pt_owner_id='".$pcbrres->originator."' AND is_active=0 ORDER BY balance_date DESC limit 1"; 
+				$pcbsql = "SELECT id, pc_box_id, pt_owner_id, balance_date, debit_amount, credit_amount, opening_balance, closing_balance FROM petty_cash_balances WHERE company_id='".$post['company_id']."' AND pc_box_id='".$pcbrres->petty_cash_boxe_id."' AND pt_owner_id='".$pcbrres->originator."' AND is_active=0 ORDER BY balance_date DESC limit 1";
 				$pcbres = $callConfig->getRow($pcbsql);
 				$return['pcbsqlres'] = $pcbsql;
 				$return['pcbres'] = $pcbres;
@@ -320,12 +320,12 @@ class pettyCashUserClass extends userClass{
 		$transaction_no = $post['transaction_no']; // workflow field used
 		$transaction_table = $post['transaction_table'];
 		if($transaction_table=="petty_cash"){
-			$pcbrsql = "SELECT id, party_id, ref_id, total_amount, transaction_date FROM petty_cash WHERE company_id='".$post['company_id']."' AND id='".$transaction_no."' AND is_active=0"; 
+			$pcbrsql = "SELECT id, party_id, ref_id, total_amount, transaction_date FROM petty_cash WHERE company_id='".$post['company_id']."' AND id='".$transaction_no."' AND is_active=0";
 			$pcbrres = $callConfig->getRow($pcbrsql);
 			$return['pcbrsql'] = $pcbrsql;
 			$return['pcbrsqlres'] = $pcbrres;
 			if($pcbrres->id !=""){
-				$pcbsql = "SELECT id, pc_box_id, pt_owner_id, balance_date, debit_amount, credit_amount, opening_balance, closing_balance FROM petty_cash_balances WHERE company_id='".$post['company_id']."' AND pc_box_id='".$pcbrres->ref_id."' AND pt_owner_id='".$pcbrres->party_id."' AND is_active=0 ORDER BY balance_date DESC limit 1"; 
+				$pcbsql = "SELECT id, pc_box_id, pt_owner_id, balance_date, debit_amount, credit_amount, opening_balance, closing_balance FROM petty_cash_balances WHERE company_id='".$post['company_id']."' AND pc_box_id='".$pcbrres->ref_id."' AND pt_owner_id='".$pcbrres->party_id."' AND is_active=0 ORDER BY balance_date DESC limit 1";
 				$pcbres = $callConfig->getRow($pcbsql);
 				$return['pcbsqlres'] = $pcbsql;
 				$return['pcbres'] = $pcbres;
@@ -335,45 +335,45 @@ class pettyCashUserClass extends userClass{
 
 					$balance_date_str = new DateTime($pcbres->balance_date);
      				$transaction_date_str    = new DateTime($pcbrres->transaction_date);
-    
-   
+
+
 
 
 					if($pcbres->balance_date == $pcbrres->transaction_date){
-						
+
 						$updatequery =  "UPDATE petty_cash_balances SET debit_amount = debit_amount".$balancetype.$pcbrres->total_amount.",closing_balance= closing_balance".$balancetype.$pcbrres->total_amount." WHERE id = '".$pcbres->id."'";
 						$samedate = $callConfig->executeQuery($updatequery);
 						$return['samedate'] = $samedate;
-					
+
 					}elseif($balance_date_str > $transaction_date_str){  // back date entry
 
 
-						$beforepcbsql = "SELECT id, pc_box_id, pt_owner_id, balance_date, debit_amount, credit_amount, opening_balance, closing_balance FROM petty_cash_balances WHERE company_id='".$post['company_id']."' AND pc_box_id='".$pcbrres->ref_id."' AND pt_owner_id='".$pcbrres->party_id."' AND balance_date >= '".$pcbrres->transaction_date."' AND is_active=0 ORDER BY balance_date ASC"; 
+						$beforepcbsql = "SELECT id, pc_box_id, pt_owner_id, balance_date, debit_amount, credit_amount, opening_balance, closing_balance FROM petty_cash_balances WHERE company_id='".$post['company_id']."' AND pc_box_id='".$pcbrres->ref_id."' AND pt_owner_id='".$pcbrres->party_id."' AND balance_date >= '".$pcbrres->transaction_date."' AND is_active=0 ORDER BY balance_date ASC";
 						$beforepcbres = $callConfig->getAllRows($beforepcbsql);
 						$seq=1;
 						foreach($beforepcbres as $bres){
-							if($seq ==1){ 
+							if($seq ==1){
 								if($bres->balance_date != $pcbrres->transaction_date){
-						
+
 									$closing_balance = ($balancetype === '-')
 										? (float)$bres->opening_balance - (float)$pcbrres->total_amount
 										: (float)$bres->opening_balance + (float)$pcbrres->total_amount;
 									$insertcust = array('company_id'=>$post['company_id'],'pt_owner_id'=>$pcbrres->party_id,'pc_box_id'=>$pcbrres->ref_id,'balance_date'=>$pcbrres->transaction_date,'debit_amount'=>$pcbrres->total_amount,'credit_amount'=>0,'opening_balance'=>$bres->opening_balance,'closing_balance'=>$closing_balance,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
 									$pc_balance = $callConfig->insertRecord('petty_cash_balances',$insertcust);
-									$return['beforsamedate'][] = $samedate;	
+									$return['beforsamedate'][] = $samedate;
 								}
 							}
 							$updatequery =  "UPDATE petty_cash_balances SET opening_balance= opening_balance".$balancetype.$pcbrres->total_amount.", closing_balance= closing_balance".$balancetype.$pcbrres->total_amount." WHERE id = '".$bres->id."'";
 							$samedate = $callConfig->executeQuery($updatequery);
-							$return['beforanotherdate'][] = $samedate;	
-						$seq++;	
-						} 
-						
+							$return['beforanotherdate'][] = $samedate;
+						$seq++;
+						}
+
 						$return['pc_balance_already_beffor_date'] = $beforepcbres;
-						
+
 
 					}else{
-						
+
 						$balancetype = (filter_input(INPUT_POST, 'balancetype') === '-') ? '-' : '+';
 						$closing_balance = ($balancetype === '-')
 							? (float)$pcbres->closing_balance - (float)$pcbrres->total_amount
@@ -383,7 +383,7 @@ class pettyCashUserClass extends userClass{
 						$return['pc_balance_already_after_date'] = $pc_balance;
 						$return['pc_balance_already_after_date_insert_ary'] = $insertcust;
 						$return['pc_balance_already_after_date_insert_symb'] = $balancetype;
-					
+
 					}
 				}else{
 					//$insertcust = array('company_id'=>$post['company_id'],'pt_owner_id'=>$pcbrres->party_id,'pc_box_id'=>$pcbrres->ref_id,'balance_date'=>$pcbrres->transaction_date,'debit_amount'=>$pcbrres->total_amount,'credit_amount'=>0,'opening_balance'=>0,'closing_balance'=>$pcbrres->total_amount,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));

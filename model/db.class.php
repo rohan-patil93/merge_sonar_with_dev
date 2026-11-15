@@ -1,4 +1,4 @@
-<?php 
+<?php
 class configClass
 {
 		public $hostname = "";
@@ -48,7 +48,7 @@ class configClass
 		}
 		public function selectQuery_two($tablename1,$tablename2,$fields1,$fields2,$where,$order,$start,$limit)
 		{
-		
+
 		if(count($fields1)>1)
 		$fields1=implode(",",$fields1);
 		else
@@ -71,7 +71,7 @@ class configClass
 		//echo $query;exit;
 		return $query;
 		}
-		
+
 		public function configConnection($db="",$extra="")
 		{
 			// $con=mysqli_connect($this->hostname,$this->username,$this->password);
@@ -86,7 +86,7 @@ class configClass
 				}
 			}
 			$str=rtrim(implode($val),',');
-			$query=DBIN.'application_logs'.DBSET.$str; 
+			$query=DBIN.'application_logs'.DBSET.$str;
 			//echo $query; exit;
 			return mysqli_query($this->con, $query);
 		}
@@ -101,7 +101,7 @@ class configClass
 				}
 			}
 			$str=rtrim(implode($val),',');
-			$query=DBIN.'action_log'.DBSET.$str; 
+			$query=DBIN.'action_log'.DBSET.$str;
 			//echo $query; //exit;
 			return mysqli_query($this->con, $query);
 			//return $query;
@@ -149,16 +149,16 @@ class configClass
 			$cdsc = array();
 			if($type == "INSERT" || $type == "UPDATE"){
 				if($type == "INSERT"){
-					$query1 = "SELECT * FROM ".$table." WHERE id ='".$id."'";	
+					$query1 = "SELECT * FROM ".$table." WHERE id ='".$id."'";
 				}elseif($type == "UPDATE"){
 					if(str_contains($where, 'WHERE')){
-						$query1 = "SELECT * FROM ".$table." ".$where;	
+						$query1 = "SELECT * FROM ".$table." ".$where;
 					}else{
-						$query1 = "SELECT * FROM ".$table." WHERE ".$where;	
+						$query1 = "SELECT * FROM ".$table." WHERE ".$where;
 					}
 				}
 				$cdsc['query1'] = $query1;
-				$exicutesql= mysqli_query($this->con,$query1); 
+				$exicutesql= mysqli_query($this->con,$query1);
 				$valuessql=mysqli_fetch_object($exicutesql);
 				if($id==''){ $id = $valuessql->id; }
 				$remarks = urlencode(json_encode($valuessql));
@@ -167,13 +167,13 @@ class configClass
 					preg_match("/FROM\s+([\w\d_]`+)/i", $query, $matches1);
 					preg_match("/FROM\s+([\w\d_]+)/i", $query, $matches2);
 					if(!empty($matches1[1])){
-						$table = $matches1[1];	
+						$table = $matches1[1];
 					}else{
-						$table = $matches2[1];	
+						$table = $matches2[1];
 					}
 					$wherecondition = explode("WHERE",$query);
-					$wherecondition1 = explode("where",$query);	
-					if(!empty($wherecondition[1])){ 
+					$wherecondition1 = explode("where",$query);
+					if(!empty($wherecondition[1])){
 						$where = $wherecondition[1];
 					}else{
 						$where = $wherecondition1[1];
@@ -181,7 +181,7 @@ class configClass
 				}
 			}
 			if($lastid !="" AND $type == "UPDATE"){
-				$query = "UPDATE `audit_trails` SET after_transaction_details='".$remarks."' WHERE id = '".$lastid ."'";	
+				$query = "UPDATE `audit_trails` SET after_transaction_details='".$remarks."' WHERE id = '".$lastid ."'";
 			}elseif($type == "UPDATE"){
 				$query = "INSERT INTO `audit_trails`(`company_id`,`module_setup_id`, `user_id`, `type`, `page_option`,`extra_paramiter`, `transaction_table`, `transaction_id`, `log_query`, `where_condition`, `before_transaction_details`, `is_active`, `current_status`, `created_date`, `created_by`) VALUES ('".$this->company_id."','".$this->module_id."','".$this->user_id."','".$type."','".$this->option."','".$this->extra_paramiter."','".$table."','".$id."','".urlencode($query)."','".urlencode($where)."','".$remarks."','0','0','".date("Y-m-d H:i:s")."','".$this->user_id."')";
 			}else{
@@ -189,12 +189,12 @@ class configClass
 			}
 			$res =configClass::executeQuery($query);
 			//$res =configClass::executeQueryString($query);
-			return $res;	
+			return $res;
 		}
 		public function toGetcannotbenull($error_message){
-			$subtring_start = strpos($error_message, "'"); 
-   			$subtring_start += strlen("'");   
-   			$size = strpos($error_message, "'", $subtring_start) - $subtring_start;   
+			$subtring_start = strpos($error_message, "'");
+   			$subtring_start += strlen("'");
+   			$size = strpos($error_message, "'", $subtring_start) - $subtring_start;
     		return substr($error_message, $subtring_start, $size) ;
 		}
 		public function toGetUbiquekeyFields($error_message){
@@ -216,7 +216,7 @@ class configClass
 			mysqli_begin_transaction($this->con);
 			$result = mysqli_query($this->con, $query);
 			if ($result) {
-		        $retrun['status'] = 200; 
+		        $retrun['status'] = 200;
 		        $retrun['query'] = $query;
 		        $retrun['error'] = '';
 		        mysqli_rollback($this->con);
@@ -229,13 +229,13 @@ class configClass
 		}
 		public function insertRecord($tablename,$fieldnames)
 		{
-			
+
 			$status = "";
 			$tablename = trim($tablename);
 			$val=array();
 		$status = "";
 			foreach($fieldnames as $k=>$values)
-			{  
+			{
 				$values = mysqli_real_escape_string($this->con,$values);
 				if(is_numeric($values) && preg_match('/^[1-9][0-9]*$/', $values)){
 
@@ -252,21 +252,21 @@ class configClass
 				if($k == 'current_status'){
 					$status = mysqli_real_escape_string($this->con,$values);
 				}
-			} 
+			}
 
 			 $str=rtrim(implode($val),',');
 
-			 $query=DBIN.$tablename.DBSET.$str; 
+			 $query=DBIN.$tablename.DBSET.$str;
 			// $res =array($query);   /**
 			//echo $query."<br>";//exit;
-			 
+
 			$res =configClass::executeQuery($query);
 
 			if($res['status'] == 'sucess'){
 				$data_arraay = array('company_id'=> $this->company_id,'module_setup_id'=>$this->module_id,'transaction_table' => $tablename, 'transaction_type'=> "INSERT" , 'transaction_primary_1' => $res['LASTID'] ,'action_log'=> "Record Created by ", 'user_id'=> $this->user_id, 'status_value'=> $status );
 				$this->insertActionLog($data_arraay);
 				//$this->insertAuditTrail('INSERT',$tablename,$res['LASTID'],'',$query);
-			}   
+			}
 			return $res;
 		}
 		public function real_escape_string($value) {
@@ -279,7 +279,7 @@ class configClass
 			}else{
 				$field_ids=$ids;
 			}
-			
+
 			if(count($fields)>1){
 				$fields=implode(",",$fields);
 			}
@@ -289,11 +289,11 @@ class configClass
 
 			$query=DBSELECT.$fields.DBFROM.$tablename;
 			if($where!="")
-			$query.=' '.DBWHR.$where." IN(".$field_ids.")"; 
+			$query.=' '.DBWHR.$where." IN(".$field_ids.")";
 			if($order!="")
 			$query.=DB_ORDER.$order;
 			return $query;
-			
+
 		}
 		public function updateRecord($tablename,$fieldnames,$where,$ids,$where_con = '')
 		{
@@ -307,7 +307,7 @@ class configClass
 		$val=array();
 		$status = "";
 		foreach($fieldnames as $k=>$values)
-		{  	
+		{
 			$values = mysqli_real_escape_string($this->con,$values);
 			if(is_numeric($values)){
 
@@ -327,15 +327,15 @@ class configClass
 		}
 		$str=rtrim(implode($val),',');
 		$query=DBUP.$tablename.DBSET.$str;
-		
+
 		$whereparamiter = "";
 		if($where!="" AND $field_ids !=""){
 			$query.=' '.DBWHR.$where." IN('".$field_ids."')";
-			$whereparamiter .= $where." IN('".$field_ids."')"; 
+			$whereparamiter .= $where." IN('".$field_ids."')";
 		}
 		if($where_con !=''){
-			$query.=' '.DBWHR.$where_con; 
-			$whereparamiter .= DBWHR.$where_con; 
+			$query.=' '.DBWHR.$where_con;
+			$whereparamiter .= DBWHR.$where_con;
 		}
 		$data_arraay = array('company_id'=>  $this->company_id,'module_setup_id'=>$this->module_id,'transaction_table' => $tablename, 'transaction_type'=> "UPDATE"  ,'action_log'=> "Record updated by", 'user_id'=> $this->user_id, 'status_value'=> $status);
 		if($where_con == ''){
@@ -345,7 +345,7 @@ class configClass
 			$data_arraay['transaction_primary_1'] = $ex;
 		}
 		$this->insertActionLog($data_arraay);
-		
+
 		$insertauditrails = $this->insertAuditTrail('UPDATE',$tablename,$ids,$whereparamiter,$query);
 		$res = configClass::executeQuery($query);
 		//$res['audit_trail'] = $insertauditrails;
@@ -357,7 +357,7 @@ class configClass
 		$res['query'] = $query;
 		return $res;
 		}
-		
+
 		public function deleteRecord($tablename,$where){
 		$query=DBDEL.DBFROM.$tablename;
 		if($where!="")
@@ -366,13 +366,13 @@ class configClass
 		$res = configClass::executeQuery($query);
 		return $res['UpdatedRes'];
 		}
-		
+
 		public function headerRedirect($con)
 		{
 			//echo HEAD_LTN.$con;exit;
 		  header(HEAD_LTN.$con);
 		}
-		
+
 		public function selectQuery($tablename,$fields,$where,$order,$start,$limit)
 		{
 		//echo "---------------------"; print_r($fields); //exit;
@@ -399,11 +399,11 @@ class configClass
 		return $query;
 		}
 		public function selectQueryNew($tablename, $fields, $whereConData = "", $order = "", $start = "", $limit = "") {
-		    $params = [];		 
+		    $params = [];
 		    if(is_array($fields)) {
 		        $fields = implode(",", $fields);
-		    }		 
-		    $query = DBSELECT . $fields . DBFROM . $tablename;		 
+		    }
+		    $query = DBSELECT . $fields . DBFROM . $tablename;
 		    // Secure WHERE clause
 		    $whereData = [];
 		    if (!empty($whereConData)){
@@ -422,7 +422,7 @@ class configClass
 		    }
 		    if (!empty($order)) {
 		        $query .= DB_ORDER . $order;
-		    }		 
+		    }
 		    if (!empty($limit)) {
 		        if ($start === "") {
 		            $start = 0;
@@ -432,23 +432,23 @@ class configClass
 		    // Return both query and params
 		    return ['query' => $query, 'params' => $params];
 		}
-		
+
 		public function create_image_byoriginal($srcpath,$dir,$width,$height)
 	   {
 		if(!is_dir($dir)) { mkdir($dir); }
-	
+
 		if(!empty($srcpath))
 		{
 			$target_path = $srcpath;
 
 			$slashpos = strrpos($target_path,"/");
-			
+
 			$filename = substr($target_path,$slashpos+1);
 
 			$extension = substr($filename,strrpos($filename,".") +1);
-		
+
 			$imgdir = $dir."/";
-			
+
 			if($extension == 'jpg' || $extension == 'JPG')
 			{
 				$src_img = imagecreatefromjpeg($target_path);
@@ -469,11 +469,11 @@ class configClass
 			$size = getimagesize($target_path);
 			$old_x = $size[0];
 			$old_y = $size[1];
-	
+
 			$dst_img = imagecreatetruecolor($width,$height);
-		
+
 			imagecopyresampled($dst_img,$src_img,0,0,0,0,$width,$height,$old_x,$old_y);
-			
+
 			if(($extension == 'jpg') || ($extension == 'JPG')){
 					$upimg = imagejpeg($dst_img, $imgdir.$filename,90);
 			}else if(($extension == 'gif') || ($extension == 'GIF')){
@@ -491,29 +491,29 @@ class configClass
 		 }
 		return $imageparameter;
 	}
-		
+
 		/*function freeimageUploadcomncode($jnt,$imagename,$path,$hdnimage)
 		{
 		if($_FILES[$imagename]['name']!="") {
 		$ext=explode(".",$_FILES[$imagename]['name']);
 		$name=$jnt.'_'.time().uniqid().'.'.$ext[1];
 		move_uploaded_file($_FILES[$imagename]['tmp_name'],$path.$name);
-		if(file_exists($path.$hdnimage)) @unlink($path.$hdnimage);	
+		if(file_exists($path.$hdnimage)) @unlink($path.$hdnimage);
 		}
 		else {
 		$name = $hdnimage;
 		}
 		return $name;
 		}
-		
+
 		public function imageCommonUnlink($path,$imagename)
 		{
 			if(file_exists($path.$imagename))@unlink($path.$imagename);
 		}*/
-		
+
 		public function freeimageUploadcomncode($jnt,$imagename,$path,$thumb_path,$hdnimage,$width,$height)
 		{
-			if($_FILES[$imagename]['name']!="") 
+			if($_FILES[$imagename]['name']!="")
 			{// print_r($_FILES);exit;
 				if($width!="")
 				$thumb_newwidth=$width;
@@ -527,55 +527,55 @@ class configClass
 				$name=$jnt.'_'.time().uniqid().'.'.$ext[1];
 				move_uploaded_file($_FILES[$imagename]['tmp_name'],$path.$name);
 				configClass::create_image_byoriginal($path.$name,$thumb_path, $thumb_newwidth, $thumb_newheight);
-				if(file_exists($thumb_path.$hdnimage) && file_exists($path.$hdnimage)){ 
+				if(file_exists($thumb_path.$hdnimage) && file_exists($path.$hdnimage)){
 					configClass::imageCommonUnlink($path,$thumb_path,$hdnimage);
 				}
-				if(file_exists($thumb_path.$hdnimage) && !file_exists($path.$hdnimage)){ 
+				if(file_exists($thumb_path.$hdnimage) && !file_exists($path.$hdnimage)){
 					configClass::imageCommonUnlink('',$thumb_path,$hdnimage);
 				}
-				if(!file_exists($thumb_path.$hdnimage) && file_exists($path.$hdnimage)){ 
+				if(!file_exists($thumb_path.$hdnimage) && file_exists($path.$hdnimage)){
 					configClass::imageCommonUnlink($path,'',$hdnimage);
 				}
 			}
-			else 
+			else
 			{
 				$name = $hdnimage;
 			}
 		return $name;
 		}
-		
+
 		public function imageCommonUnlink($path,$thumb_path,$imagename)
 		{
 				if(file_exists($path.$imagename)) @unlink($path.$imagename);
 				if(file_exists($thumb_path.$imagename)) @unlink($thumb_path.$imagename);
 		}
-		
+
 
 		/*function queryUid($query) {
 			$result = @mysqli_query($query);
 			$insert_id = mysqli_insert_id();
 			$update_id = mysqli_affected_rows();
 			$queryresult = array(ID=>$insert_id, Result=>$result, UpdateRes=>$update_id);
-			return $queryresult;		
+			return $queryresult;
 		}*/
 		public function getRow($query)
 		{
 		/**
-			$res= mysqli_query($this->con,$query); 
-			$values=mysqli_fetch_object($res); 
-			//$this->insertAuditTrail('SELECT','','','',$query); 
+			$res= mysqli_query($this->con,$query);
+			$values=mysqli_fetch_object($res);
+			//$this->insertAuditTrail('SELECT','','','',$query);
 			return $values;
  		*/
 			$values = (object)array();
-			$res= mysqli_query($this->con,$query); 
+			$res= mysqli_query($this->con,$query);
 			if (!$res) {
 				//$values->error = mysqli_error($this->con);
 			}else{
-			   $values=mysqli_fetch_object($res); 
+			   $values=mysqli_fetch_object($res);
 			}
-			return $values;		
+			return $values;
 		}
-		
+
 		public function getAllRows($query)
 		{
 			/**
@@ -587,7 +587,7 @@ class configClass
 			//mysqli_close($this->con);
 			//$this->insertAuditTrail('SELECT','','','',$query);
 			return $values; **/
-			
+
 			$values = array();
 			$res=mysqli_query($this->con, $query);
 			if (!$res) {
@@ -601,10 +601,10 @@ class configClass
 				}
 			}
 			return $values;
-		} 
+		}
 		// Fetch a single row
 	    public function getRowNew($sql, $params = []) {
-	    	
+
 	    	if (!empty($sql) && is_array($sql)) {
 	    		$asql = $sql;
 		        $sql = $asql['query'];
@@ -617,7 +617,7 @@ class configClass
 	        $return = $result->fetch_assoc();
 	        return (object)$return;
 	    }
-	 
+
 	    // Fetch multiple rows
 	    public function getAllRowsNew($sql, $params = []) {
 	    	if (!empty($sql) && is_array($sql)) {
@@ -635,10 +635,10 @@ class configClass
 	        $stmt = $this->con->prepare($sql);
 	        //echo "++++ ".$sql; print_r($params); //exit;
 	        if (!$stmt) {
-	        	
+
 	            die("Prepare failed: " . $this->con->error);
 	        }
-	 
+
 	        if (!empty($params)) {
 	        	//echo "-----s------";
 	            $types = $this->getParamTypes($params);
@@ -646,7 +646,7 @@ class configClass
 	            $stmt->bind_param($types, ...$params);
 	            //echo "-----tt------";
 	        }
-	 
+
 	        if (!$stmt->execute()) {
 	        	//echo "----d-------";
 	            die("Execution failed: " . $stmt->error);
@@ -676,7 +676,7 @@ class configClass
 			if (!$res) {
 				$return['status'] = 404;
 				$return['respons'] = mysqli_error($this->con);
-				
+
 				// $objectary = (object)array();
 				// $objectary->error = mysqli_error($this->con);
 				// $objectary->query = $query;
@@ -689,15 +689,15 @@ class configClass
 				$return['respons'] = $values;
 			}
 			return $return;
-		} 
+		}
 		public function getCount($query)
 		{
-			$res=@mysqli_query($this->con, $query); 
-			$cnt=@mysqli_num_rows($res);  
+			$res=@mysqli_query($this->con, $query);
+			$cnt=@mysqli_num_rows($res);
 			return $cnt;
 		}
-		
-		
+
+
 		public function passwordEncrypt($str)
 		{
 			$algo = implode('', ['m', 'd', '5']);
@@ -707,7 +707,7 @@ class configClass
 			return hash($algo, (string)$str);
 		}
 
-		
+
 public function generateRandomString($length)
   {
     $password = "";
@@ -716,23 +716,23 @@ public function generateRandomString($length)
     if ($length > $maxlength) {
       $length = $maxlength;
     }
-    $i = 0; 
-    while ($i < $length) { 
+    $i = 0;
+    while ($i < $length) {
       $char = substr($possible, random_int(0, $maxlength-1), 1);
-      if (!strstr($password, $char)) { 
+      if (!strstr($password, $char)) {
         $password .= $char;
         $i++;
       }
     }
 	return $password;
     //return $password.time();
-  }	
-		
+  }
+
 public function random_code()
 {
 	$string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
 	$rand = '';
-	
+
 	$rand = '';
 	for($i = 0;$i <= 10;$i++) {
 		$num = random_int(0, 60);
@@ -743,146 +743,146 @@ public function random_code()
 	return time().random_int(1, time()).$rand.$salt;
 }
 
-		
-		public function paginavigation($start,$limit,$total,$filePath,$otherParams) 
+
+		public function paginavigation($start,$limit,$total,$filePath,$otherParams)
 		{
 			$allPages = ceil($total/$limit);
-			
+
 			$currentPage = floor($start/$limit) + 1;
 			$hrefclass="infocus";
 			$pagination = "";
-			
+
 			if ($allPages>10)
 			{
 				$maxPages = ($allPages>9) ? 9 : $allPages;
-				
-				if ($allPages>9) 
+
+				if ($allPages>9)
 				{
-					if ($currentPage>=1&&$currentPage<=$allPages) 
+					if ($currentPage>=1&&$currentPage<=$allPages)
 					{
 						$pagination .= ($currentPage>4) ? " ... " : " ";
-			
+
 						$minPages = ($currentPage>4) ? $currentPage : 5;
 						$maxPages = ($currentPage<$allPages-4) ? $currentPage : $allPages - 4;
-			
-						for($i=$minPages-4; $i<$maxPages+5; $i++) 
+
+						for($i=$minPages-4; $i<$maxPages+5; $i++)
 						{
 						   $pagination .= ($i == $currentPage) 	? "<a href=\"".$filePath."&start=".(($i-1)*$limit).$otherParams."\" class='focus'>&nbsp;&nbsp;".$i."&nbsp;</a>" : "<a href=\"".$filePath."&start=".(($i-1)*$limit).$otherParams."\" class='".$hrefclass."'>&nbsp;".$i."&nbsp;</a>";
 						}
 						$pagination .= ($currentPage<$allPages-4) ? " ... " : " ";
-					} 
+					}
 					else
 					{
-			
+
 						$pagination .= " ... ";
 					}
 				}
-			} 
-			else 
+			}
+			else
 			{
 				for($i=1; $i<$allPages+1; $i++)
 				{
 					$pagination .= ($i==$currentPage) ? "<a href=\"".$filePath."&start=".(($i-1)*$limit).$otherParams."\" class='focus'>&nbsp;".$i."&nbsp;</a>" : "&nbsp;<a href=\"".$filePath."&start=".(($i-1)*$limit).$otherParams."\" class='".$hrefclass."'>".$i."</a>";
 				}
 			}
-			if ($currentPage>1) 
+			if ($currentPage>1)
 				$previous = "<a href=\"".$filePath."&start=".(($currentPage-2)*$limit).$otherParams."\" class='".$hrefclass."'>&nbsp;&lt;&lt;</a>";
-			
+
 			echo $previous;
-				
+
 			echo $pagination;
-			
-			if ($currentPage<$allPages) 
+
+			if ($currentPage<$allPages)
 				$next = "<a href=\"".$filePath."&start=".($currentPage*$limit).$otherParams."\" class='".$hrefclass."'>&nbsp;&gt;&gt;</a>";
-			
+
 			echo $next;
 		}
-		
-		public function paginavigation_FrontEnd($start,$limit,$total,$filePath,$otherParams) 
+
+		public function paginavigation_FrontEnd($start,$limit,$total,$filePath,$otherParams)
 		{
 			$allPages = ceil($total/$limit);
-			
+
 			$currentPage = floor($start/$limit) + 1;
 			$hrefclass="infocus";
 			$pagination = "";
-			
+
 			if ($allPages>10)
 			{
 				$maxPages = ($allPages>9) ? 9 : $allPages;
-				
-				if ($allPages>9) 
+
+				if ($allPages>9)
 				{
-					if ($currentPage>=1&&$currentPage<=$allPages) 
+					if ($currentPage>=1&&$currentPage<=$allPages)
 					{
 						$pagination .= ($currentPage>4) ? " ... " : " ";
-			
+
 						$minPages = ($currentPage>4) ? $currentPage : 5;
 						$maxPages = ($currentPage<$allPages-4) ? $currentPage : $allPages - 4;
-			
-						for($i=$minPages-4; $i<$maxPages+5; $i++) 
+
+						for($i=$minPages-4; $i<$maxPages+5; $i++)
 						{
 						   $pagination .= ($i == $currentPage) 	? "<span class='focus'>&nbsp;&nbsp;".$i."&nbsp;</span>" : "<a href=\"".$filePath."".(($i-1)*$limit).$otherParams."\" class='".$hrefclass."'>&nbsp;".$i."&nbsp;</a>";
 						}
 						$pagination .= ($currentPage<$allPages-4) ? " ... " : " ";
-					} 
+					}
 					else
 					{
-			
+
 						$pagination .= " ... ";
 					}
 				}
-			} 
-			else 
+			}
+			else
 			{
 				for($i=1; $i<$allPages+1; $i++)
 				{
 					$pagination .= ($i==$currentPage) ? "<span class='focus'>&nbsp;".$i."&nbsp;</span>" : "&nbsp;<a href=\"".$filePath."".(($i-1)*$limit).$otherParams."\" class='".$hrefclass."'>".$i."</a>";
 				}
 			}
-			if ($currentPage>1) 
+			if ($currentPage>1)
 				$previous = "<a href=\"".$filePath."/".(($currentPage-2)*$limit).$otherParams."\" class='".$hrefclass."'>&nbsp;&lt;&lt;</a>";
-			
+
 			echo $previous;
-				
+
 			echo $pagination;
-			
-			if ($currentPage<$allPages) 
+
+			if ($currentPage<$allPages)
 				$next = "<a href=\"".$filePath."/".($currentPage*$limit).$otherParams."\" class='".$hrefclass."'>&nbsp;&gt;&gt;</a>";
-			
+
 			echo $next;
 		}
-		
+
 		public function url_EncodingStr($str){
 		return urlencode($str);
 		}
 		public function url_DecodingStr($str){
 		return urldecode($str);
 		}
-		
+
 		public function remove_special_symbols($string)
 		{
 		//Array of special charecters you want to replace
 		//$special = array('^','>','<','`','~','\'','"','\\','_','!','@','#','$','%','&','*','(',')','=','+','{','}','[',']','.',',','/','?','|','-',':',';',' '); //here you can add as many char. you want
 		$special = array('^','>','<','`','~','\'','"','\\','_','!','@','#','$','%','&','*','(',')','=','+','{','}','[',']','.',',','/','?','|',':',';',' '); //here you can add as many char. you want
-		
+
 		return strtolower(str_replace($special,'-',$string));
 		}
-		
+
 		public function remove_special_symbols2($string)
 		{
 		//Array of special charecters you want to replace
 		//$special = array('^','>','<','`','~','\'','"','\\','_','!','@','#','$','%','&','*','(',')','=','+','{','}','[',']','.',',','/','?','|','-',':',';',' '); //here you can add as many char. you want
 		$special = array('^','>','<','`','~','\'','"','\\','_','!','@','#','$','%','&','*','(',')','=','-','{','}','[',']','.',',','/','?','|',':',';',' '); //here you can add as many char. you want
-		
+
 		return strtolower(str_replace($special,'+',$string));
 		}
-		
+
 		public function replace_str($string)
 		{
 		//Array of special charecters you want to replace
 		//$special = array('^','>','<','`','~','\'','"','\\','_','!','@','#','$','%','&','*','(',')','=','+','{','}','[',']','.',',','/','?','|','-',':',';',' '); //here you can add as many char. you want
 		$special = array('+',' '); //here you can add as many char. you want
-		
+
 		return strtolower(str_replace(' ','+',$string));
 		}
 }

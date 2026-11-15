@@ -1,4 +1,4 @@
-<?php 
+<?php
 class webViewClass extends userClass{
 	public function dynamicdatashowbasedontable($get){
 		global $callConfig;
@@ -14,11 +14,11 @@ class webViewClass extends userClass{
         //echo $query;
         $ress = $callConfig->getAllRows($query);
         $return['data'] = $ress;
- 
+
         $get['table'] =$table_name;
         $status_progress = $this->getStatusProgressList($get);
         $return['status_progress'] = $status_progress;
- 
+
         $transapprlogsql = "SELECT tal.request_date,tal.response_date, tal.response_type, t1.transaction_number, t1.transaction_date, t1.total_amount, t1.party_name, t1.id
         FROM transaction_approval_logs tal, $table_name t1 WHERE tal.company_id = ".$get['company_id']." AND tal.company_id = t1.company_id AND  tal.transaction_table = '$table_name' AND tal.user_id = '".$get['user_id']."' AND tal.transaction_id = t1.id AND t1.is_active = 0";
         $transapprlogres = $callConfig->getAllRows($transapprlogsql);
@@ -78,11 +78,11 @@ class webViewClass extends userClass{
 		$sql = "SELECT id, page_title FROM dynamic_mapping_tables WHERE company_id = $company_id AND application_table_name= 'attendenace_regularization_requests' AND is_active = 0 ";
 	    $res = $callConfig->getRow($sql);
 	   	$return['main_data'] = $res;
- 
+
         $get['table'] ='attendenace_regularization_requests';
         $status_progress = $this->getStatusProgressList($get);
         $return['status_progress'] = $status_progress;
- 
+
         $transapprlogsql = "SELECT tal.request_date,tal.response_date, tal.response_type, t1.request_date, t1.regularization_date, t1.regularization_of_checkout, t1.remarks, t1.id, emp.display_name
         FROM transaction_approval_logs tal, attendenace_regularization_requests t1
         LEFT JOIN employees emp ON emp.id = t1.employee_id AND emp.company_id = {$get['company_id']} AND emp.is_active=0
@@ -156,9 +156,9 @@ class webViewClass extends userClass{
 		    	$attendanceData["created_by"]   = $user_id;
 		        $attendanceData["created_date"] = date("Y-m-d H:i:s");
 		        $res = $callConfig->insertRecord("employee_daily_attendances",$attendanceData);
-            	$return['res'] = $res;		        
+            	$return['res'] = $res;
 		    }
-		    
+
 		    $detailData = array(
 		        "company_id"     => $company_id,
 		        "employee_id"    => $data->employee_id ?? null,
@@ -242,7 +242,7 @@ class webViewClass extends userClass{
 	        $get['table'] ='transport_gateway';
 	        $status_progress = $this->getStatusProgressList($get);
 	        $return['status_progress'] = $status_progress;
-	 
+
 	        $transapprlogsql = "SELECT tal.request_date,tal.response_date, tal.response_type, t1.vehicle_number, t1.vehicle_type, t1.driver_name, t1.id, t1.driver_contact, t1.gate_pass, au.display_name, au.email_id as email, GROUP_CONCAT(emp.display_name) as emp_names
 	        FROM transaction_approval_logs tal, transport_gateway t1
 	        LEFT JOIN employees au ON au.id = t1.driver_name AND au.company_id = {$get['company_id']} AND au.is_active=0
@@ -373,7 +373,7 @@ class webViewClass extends userClass{
 	}
 	public function togetAssetRequestWebview($get){
 		global $callConfig;
-		
+
 		$return = array();
 		$company_id = $get['company_id'];
 		$user_id = $get['user_id'];
@@ -617,7 +617,7 @@ class webViewClass extends userClass{
 		}
 		$sql .= " ORDER BY adm.id ASC";
 		// $return['sql'] = $sql;
-		
+
 		$rows = $callConfig->getAllRows($sql);
 		$messages = array();
 		if (count((array)$rows) > 0) {

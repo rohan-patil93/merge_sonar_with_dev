@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -56,7 +56,7 @@ class rentalUserClass extends userClass{
 	public function insertPropertyOwners($get,$post){
 		global $callConfig;
 		$return['post']= $post;
-		$insertary=array('company_id'=>$post['company_id'],'owner_name'=>$post['owner_name'],'address'=>$post['address'],'gst_no'=>$post['gst_no'],'bank_id'=>$post['bank_id'],'bank_account_no'=>$post['bank_account_no'],'owner_company_name'=>$post['owner_company_name'],'pan_no'=>$post['pan_no'],'ifsc_code'=>$post['ifsc_code'],'account_type'=>$post['account_type'],'contact_no'=>$post['contact_no'],'email_id'=>$post['email_id']); 
+		$insertary=array('company_id'=>$post['company_id'],'owner_name'=>$post['owner_name'],'address'=>$post['address'],'gst_no'=>$post['gst_no'],'bank_id'=>$post['bank_id'],'bank_account_no'=>$post['bank_account_no'],'owner_company_name'=>$post['owner_company_name'],'pan_no'=>$post['pan_no'],'ifsc_code'=>$post['ifsc_code'],'account_type'=>$post['account_type'],'contact_no'=>$post['contact_no'],'email_id'=>$post['email_id']);
 		if($post['rid'] !=""){
 			$insertary['updated_date']=date('Y-m-d h:i:s');
 			$insertary['updated_by']=$post['user_id'];
@@ -81,14 +81,14 @@ class rentalUserClass extends userClass{
 		foreach($post['property_name'] as $keyid=>$keyvalue){
 			if($post['property_owner_detail_id'][$keyid] !=""){
 				$callConfig->updateRecord('property_owner_detail_areas',$updateary,'property_owner_detail_id',$post['property_owner_detail_id'][$keyid]);
-			} 
+			}
 			$property_joint_owner = array();
 			foreach($post['joint_owner_names'][$keyid] as $keyyid=>$keyvalue){
 				if($post['joint_owner_names'][$keyid][$keyyid] !="" AND $post['owner_percentage'][$keyid][$keyyid] !=""){
 					$property_joint_owner[] = array('joint_owner_names'=>$post['joint_owner_names'][$keyid][$keyyid],'owner_percentage'=>$post['owner_percentage'][$keyid][$keyyid]);
 				}
 			}
-			
+
 			$property_joint_owner_encode = json_encode($property_joint_owner);
 			$attachment = json_encode($_POST['all_attachment'][$keyid]);
 			$insertary=array('company_id'=>$post['company_id'],'property_owner_id'=>$property_owner_id,'property_name'=>$post['property_name'][$keyid],'property_type'=>$post['property_type'][$keyid],'property_sub_type'=>$post['property_sub_type'][$keyid],'property_address'=>$post['property_address'][$keyid],'property_joint_owner'=>$property_joint_owner_encode,'longitude'=>$post['longitude'][$keyid],'latitude'=>$post['latitude'][$keyid],'attachment'=>$attachment);
@@ -109,7 +109,7 @@ class rentalUserClass extends userClass{
 					$return['item'][] = $res1;
 					$property_owner_detail_id = $res1['LASTID'];
 				}
-				
+
 				foreach($post['property_area_name'][$keyid] as $keyyid=>$keyvalue){
 					if($keyvalue !="" AND $post['property_area'][$keyid][$keyyid] !=""){
 						$insertary=array('company_id'=>$post['company_id'],'property_owner_detail_id'=>$property_owner_detail_id,'property_area_name'=>$post['property_area_name'][$keyid][$keyyid],'property_area'=>$post['property_area'][$keyid][$keyyid],'per_sq_ft_rate'=>$post['per_sq_ft_rate'][$keyid][$keyyid],'uom'=>$post['uom'][$keyid][$keyyid]);
@@ -129,7 +129,7 @@ class rentalUserClass extends userClass{
 					}
 				}
 
-			}	
+			}
 		}
 		return $return;
 	}
@@ -137,12 +137,12 @@ class rentalUserClass extends userClass{
 		global $callConfig;
 		if($get['un_lock_date'] != ''){
 			$un_lock_date = $this->dateconvertdbformat($get['un_lock_date']);
-			$rental_invoice_id = $utility_rental_invoice_id = array(); 
+			$rental_invoice_id = $utility_rental_invoice_id = array();
 			$ptbsql = "SELECT id, month_start_date, rental_invoice_id, utility_rental_invoice_id FROM `property_tenant_billings` WHERE company_id = '".$get['company_id']."' AND property_tenant_detail_id = '".$get['rid']."' AND  month_start_date >= '".$un_lock_date."' AND is_active = 0";
 			$ptbres=$callConfig->getAllRows($ptbsql); //how meny effected row/and invice number
 			foreach($ptbres as $ptbress){
 				if($ptbress->rental_invoice_id !=""){
-					$rental_invoice_id[$ptbress->rental_invoice_id] = $ptbress->rental_invoice_id; 
+					$rental_invoice_id[$ptbress->rental_invoice_id] = $ptbress->rental_invoice_id;
 				}
 				if($ptbress->utility_rental_invoice_id !=""){
 					$utility_rental_invoice_id[$ptbress->utility_rental_invoice_id] = $ptbress->utility_rental_invoice_id;
@@ -155,16 +155,16 @@ class rentalUserClass extends userClass{
 			$rentalinvid = implode(',', $utility_rental_invoice_id);
 			$ptbsql = "SELECT id, transaction_number, transaction_date, total_amount FROM `utility_rental_invoices` WHERE company_id = '".$get['company_id']."' AND id IN(".$rentalinvid.") AND is_active = 0";
 			$utility_rental_invoices=$callConfig->getAllRows($ptbsql); //how meny effected row/and invice number
-			
+
 			$return['rental_invoices'] =array_merge((array)$rental_invoices,(array)$utility_rental_invoices);
-		
-		}else{ 
+
+		}else{
 
 
 		$property_ownerssql = "SELECT id, owner_name FROM property_owners WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_ownersres=$callConfig->getAllRows($property_ownerssql);
 		$return['property_owners'] = $property_ownersres;
-		
+
 		$rent_bill_to_be_raise_typesql = "SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = '".$get['company_id']."' AND genc_code = 'RENTBILLTOBERAISETYP' AND is_active =0";
 		$rent_bill_to_be_raise_typeres=$callConfig->getAllRows($rent_bill_to_be_raise_typesql);
 		$return['rent_bill_to_be_raise_type'] = $rent_bill_to_be_raise_typeres;
@@ -206,7 +206,7 @@ class rentalUserClass extends userClass{
 			$property_owner_detail_areassql = "SELECT id, property_owner_detail_id, property_area_name, property_area, per_sq_ft_rate ,uom FROM property_owner_detail_areas WHERE company_id = '".$get['company_id']."' AND property_owner_detail_id = '".$property_tenant_detailsres->property_owner_detail_id."' AND is_active =0";
 			$property_owner_detail_areasres=$callConfig->getAllRows($property_owner_detail_areassql);
 			$return['property_owner_detail_areas'] = $property_owner_detail_areasres;
-			
+
 
 			$property_tenant_billingssql = "SELECT id, month_start_date, total_amount, bill_detail,utility_details FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND property_tenant_detail_id = '".$property_tenant_detailsres->id."'  AND is_active =0";
 			$property_tenant_billingsresa=$callConfig->getAllRows($property_tenant_billingssql);
@@ -238,7 +238,7 @@ class rentalUserClass extends userClass{
 			$property_owner_detailssql = "SELECT owd.id, owd.property_name, owd.property_type, owd.property_sub_type, IFNULL((SELECT SUM(poda.id) as cnt FROM property_owner_detail_areas poda WHERE poda.company_id = owd.company_id AND poda.property_owner_detail_id = owd.id AND poda.property_tenant_detail_id IS NULL AND poda.is_active =0),0) as available_area_cnt FROM property_owner_details owd WHERE owd.company_id = '".$get['company_id']."' AND owd.property_owner_id = '".$get['ownerid']."' AND owd.is_active =0";
 			$property_owner_detailsres=$callConfig->getAllRows($property_owner_detailssql);
 			$return['property_owner_details'] = $property_owner_detailsres;
-		
+
 
 			// $podid =  array();
 	  //   	foreach($property_owner_detailsres as $pwd){
@@ -327,7 +327,7 @@ class rentalUserClass extends userClass{
 		$update_query = "UPDATE property_owner_detail_areas SET property_tenant_detail_id = null WHERE property_tenant_detail_id = '".$property_owner_id."'";
 		$res2 = $callConfig->executeQuery($update_query);
 
-		
+
 		$implodeids = implode(",",(array)$post['property_owner_area_ids']);
 		$update_query = "UPDATE property_owner_detail_areas SET property_tenant_detail_id = '".$property_owner_id."' WHERE id IN(".$implodeids.")";
 		$res3 = $callConfig->executeQuery($update_query);
@@ -342,7 +342,7 @@ class rentalUserClass extends userClass{
 		//echo "<pre>";
 		$property_tenant_detailssql = "SELECT * FROM property_tenant_details WHERE company_id = '".$get['company_id']."' AND id = '".$get['rid']."'  AND is_active =0";
 		$property_tenant_detailsres=$callConfig->getRow($property_tenant_detailssql);
-		if($property_tenant_detailsres->lock_tenant != '0' OR $get['extend_agreement_month'] !=""){ 
+		if($property_tenant_detailsres->lock_tenant != '0' OR $get['extend_agreement_month'] !=""){
 
 			$sqlq = "SELECT month_start_date FROM property_tenant_billings WHERE  company_id = '".$get['company_id']."' AND property_tenant_detail_id = '".$get['rid']."'  AND is_active =0";
 			$property_tenant_billingsres=$callConfig->getAllRows($sqlq);
@@ -374,7 +374,7 @@ class rentalUserClass extends userClass{
 			$return['rentastartdate'] =$rentastartdate;
 			$return['rentenddate'] =$rentenddate;
 			$return['billinggeneratedate'] =$billinggeneratedate;
-			
+
 	// if(strtotime($rentastartdate) >= strtotime($billinggeneratedate)){
 	// 	//$finalapproveddate = date('Y-m-d', strtotime($rentastartdate));
 	// 	$finalapproveddate = date('Y-m-d', strtotime($billinggeneratedate));
@@ -382,7 +382,7 @@ class rentalUserClass extends userClass{
 	// }else{
 	// 	$finalapproveddate = date('Y-m-d', strtotime($billinggeneratedate));
 	// 	$totaldayaddornot = '+';
-	// }	
+	// }
 			//$return['finalapproveddate'] =$finalapproveddate;
 			//$return['symbol'] =$totaldayaddornot;
 			//echo $finalapproveddate." -- ".$rentastartdate;
@@ -496,7 +496,7 @@ class rentalUserClass extends userClass{
 								$increase_ret = $per_sq_ft_with_discount[$keyyy]*($update_rent_escalation_percentage/100);
 								$per_sq_ft_with_discount[$keyyy] = $per_sq_ft_with_discount[$keyyy]+$increase_ret;
 							}
-							
+
 						/**
 							if(in_array($monthincreas, (array)$rent_escalation_after_every_month)){
 								$update_rent_escalation_percentage = $update_rent_escalation_percentage+$rent_escalation_percentage;
@@ -504,7 +504,7 @@ class rentalUserClass extends userClass{
 							echo $monthlyrant." - update_rent_escalation_percentage - ".$update_rent_escalation_percentage."</br>";
 							$increase_rent = $monthlyrant*($update_rent_escalation_percentage/100);
 							$monthlyrant = $monthlyrant+$increase_rent;
-							//rate also increase 
+							//rate also increase
 							$increase_ret = $per_sq_ft_with_discount*($update_rent_escalation_percentage/100);
 							$per_sq_ft_with_discount = $per_sq_ft_with_discount+$increase_ret;
 						**/
@@ -535,7 +535,7 @@ class rentalUserClass extends userClass{
 						$total_utility_amount = $total_utility_amount+$utility_bill_amount;
 						$utilityinvary= array('poda_and_rbt_id'=>$poda['rental_bill_type_id'],'name'=>$poda['rental_bill_type_name'],'monthly_rent'=>$utility_bill_amount,'rent_tax'=>0,'rent'=>$utility_bill_amount,'transaction_table'=>'rental_utilities','utility_bill_auto_and_fix'=>$poda['utility_bill_auto_and_fix'],'property_area'=>'0','per_sq_ft_with_discount'=>'0','uom'=>$poda['uom'],'utility_bill_auto_and_fix'=>$poda['utility_bill_auto_and_fix'],'parent_id'=>0);
 
-						
+
 						if(RENTAL_INVOICE_SPLIT == "Y"){
 							$utility_details[] = $utilityinvary;
 						}else{
@@ -563,8 +563,8 @@ class rentalUserClass extends userClass{
 				$utility_detail = json_encode((array)$utility_details);
 
 				if(strlen($property_tenant_detailsres->due_bill_to_be_raise) ==1){
-				 $due_bill_to_be_raise = '0'.$property_tenant_detailsres->due_bill_to_be_raise; 
-				}else{ 
+				 $due_bill_to_be_raise = '0'.$property_tenant_detailsres->due_bill_to_be_raise;
+				}else{
 					$due_bill_to_be_raise = $property_tenant_detailsres->due_bill_to_be_raise;
 				}
 				if($property_tenant_detailsres->due_bill_to_be_raise_type=='DY'){
@@ -587,9 +587,9 @@ class rentalUserClass extends userClass{
 					$property_tenant_billings = $callConfig->insertRecord('property_tenant_billings',$insertcust);
 					//$return['property_tenant_billings'][] = $property_tenant_billings;
 				}
-				
+
 				$i++;
-				$monthincreas++; 
+				$monthincreas++;
 			}
 			if($get['extend_agreement_month'] !=""){
 				$imploderenew= explode('-', $get['extend_agreement_month']);
@@ -624,7 +624,7 @@ class rentalUserClass extends userClass{
 		$podaajax = json_decode($property_tenant_detailsres->property_owner_detail_areas,1);
 		$amount = 0;
 		foreach($podaajax as $poda){
-			$amount += $poda['rent'];	
+			$amount += $poda['rent'];
 		}
 		$transaction_number = $this->toGetApplicationSerialNumber('rental_invoices');
 		$transaction_date = date("Y-m-d");
@@ -645,17 +645,17 @@ class rentalUserClass extends userClass{
 		global $callConfig;
 		$returnarray = array();
 		$vendor_id = array();
-		$todaydate = date("Y-m-d"); 
+		$todaydate = date("Y-m-d");
 		$after45date = date('Y-m-d', strtotime($todaydate .' -45 day'));
 		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 			$condition = " AND created_by = '".$get['user_id']."'";
 			$originatorcondition = " AND originator = '".$get['user_id']."'";
 			$originatorcondition_join = " AND ptd.originator = '".$get['user_id']."'";
 		}
-		$vendorssql = "SELECT id, display_name FROM customers WHERE company_id = '".$get['company_id']."' ".$condition." AND is_active = 0"; 
+		$vendorssql = "SELECT id, display_name FROM customers WHERE company_id = '".$get['company_id']."' ".$condition." AND is_active = 0";
 		$vendorsres = $callConfig->getAllRows($vendorssql);
 		foreach($vendorsres as $vendors1){
-			$vendorsary[$vendors1->id] =$vendors1; 
+			$vendorsary[$vendors1->id] =$vendors1;
 			$vendor_id[$vendors1->id] = $vendors1->id;
 		}
 		$returnarray['customers'] = $vendorsary;
@@ -701,7 +701,7 @@ class rentalUserClass extends userClass{
 		$query = "SELECT id, payment_terms, total_amount, party_id, due_date FROM rental_invoices WHERE company_id = ".$get['company_id']." AND (pending_amount IS NULL OR  pending_amount !=0) AND is_active = 0 ".$originatorcondition;
 		$returnarray['bills_sql'] = $query;
 		$returnarray['bills'] = $callConfig->getAllRows($query);
-		
+
 		// $query = "SELECT id, display_name FROM customers WHERE company_id = ".$get['company_id'];
 		// $returnarray['customers_sql'] = $query;
 		// $vendors  = $callConfig->getAllRows($query);
@@ -721,7 +721,7 @@ class rentalUserClass extends userClass{
 		$returnarray['rental_invoices_list_sql'] = $rentalinvoiceslistsql;
 		$returnarray['rental_invoices_list'] = $rentalinvoiceslistres;
 
-		//alltenat invoice 
+		//alltenat invoice
 		$rentalinvoiceslistsql ="SELECT ri.id, ri.transaction_number, ri.transaction_date FROM rental_invoices ri WHERE ri.company_id = '".$get['company_id']."' AND ri.current_status NOT IN(".ST_DRAFT.") AND ri.is_active = 0";
 		$rentalinvoiceslistres = $callConfig->getAllRows($rentalinvoiceslistsql);
 		$returnarray['all_rental_invoices_list'] = $rentalinvoiceslistres;
@@ -767,7 +767,7 @@ class rentalUserClass extends userClass{
 		if($get['admin_type'] != 1 OR $get['admin_access_employee'] == 'Y'){
 			$custcondition = " AND created_by = '".$get['user_id']."'";
 		}
-		$vendorssql = "SELECT id, display_name FROM customers WHERE company_id = '".$get['company_id']."' ".$custcondition." AND is_active = 0"; 
+		$vendorssql = "SELECT id, display_name FROM customers WHERE company_id = '".$get['company_id']."' ".$custcondition." AND is_active = 0";
 		$vendorsres = $callConfig->getAllRows($vendorssql);
 		foreach($vendorsres as $vendors1){
 			$customer_id[$vendors1->id] = $vendors1->id;
@@ -836,11 +836,11 @@ class rentalUserClass extends userClass{
 		$ptbres = $callConfig->getRow($ptbsql);
 		$get['bill_type'] = $post['bill_type'];
 		if($post['bill_type'] == 'U'){
-			
+
 			$utility_details = json_decode($ptbres->utility_details,1);
 			$return['utility_detail'] = $utility_details;
 			foreach($post['rent'] as $seq =>$rent){
-				$utility_details[$seq]['rent'] =$rent; 
+				$utility_details[$seq]['rent'] =$rent;
 				$utility_details[$seq]['remarks'] =$post['remarks'][$seq];
 				$utility_details[$seq]['uom'] =$post['uom'][$seq]!=""?$post['uom'][$seq]:'';
 				$utility_details[$seq]['qty'] =$post['qty'][$seq]!=""?$post['qty'][$seq]:1;
@@ -854,7 +854,7 @@ class rentalUserClass extends userClass{
 				//extra added GST part
 			}
 			$utility_detail = json_encode($utility_details);
-			
+
 			foreach($utility_details as $biilrent){
 				if($biilrent['utility_bill_auto_and_fix'] !="M"){
 					$rent = $biilrent['rent'];
@@ -869,11 +869,11 @@ class rentalUserClass extends userClass{
 			$updateary = array('utility_amount'=>$utility_amount,'utility_tax'=>$utility_tax,'total_amount'=>$utility_amount+$ptbres->rent_total_amount,'utility_details'=>$utility_detail,'updated_by'=>$get['user_id'],'updated_date'=>date("Y-m-d H:i:s"),'utility_transaction_date'=>$this->dateconvertdbformat($post['transaction_date']),'utility_due_date'=>$this->dateconvertdbformat($post['due_date']),'utility_additional_notes'=>$post['additional_notes']);
 			$return['utility_detail_updateary'] = $updateary;
 		}elseif($post['bill_type'] == 'AMC'){
-			
+
 			$utility_amc_details = json_decode($ptbres->utility_amc_details,1);
 			$return['utility_amc_detail'] = $utility_amc_details;
 			foreach($post['rent'] as $seq =>$rent){
-				$utility_amc_details[$seq]['rent'] =$rent; 
+				$utility_amc_details[$seq]['rent'] =$rent;
 				$utility_amc_details[$seq]['remarks'] =$post['remarks'][$seq];
 				$utility_amc_details[$seq]['uom'] =$post['uom'][$seq]!=""?$post['uom'][$seq]:'';
 				$utility_amc_details[$seq]['qty'] =$post['qty'][$seq]!=""?$post['qty'][$seq]:1;
@@ -887,7 +887,7 @@ class rentalUserClass extends userClass{
 				//extra added GST part
 			}
 			$utility_amc_detail = json_encode($utility_amc_details);
-			
+
 			foreach($utility_amc_details as $biilrent){
 				if($biilrent['utility_bill_auto_and_fix'] !="M"){
 					$rent = $biilrent['rent'];
@@ -901,11 +901,11 @@ class rentalUserClass extends userClass{
 			//$updateary = array('utility_amount'=>$utility_amount,'rent_tax'=>$totaltax,'total_amount'=>$utility_amount+$ptbres->total_amount,'utility_details'=>$utility_detail,'ready_to_create_utility_invoice'=>$post['ready_to_create_utility_invoice'][$property_tenant_billings_id],'updated_by'=>$get['user_id'],'updated_date'=>date("Y-m-d H:i:s"));
 			$updateary = array('utility_amc_amount'=>$utility_amount,'utility_amc_tax'=>$utility_tax,'total_amount'=>$utility_amount+$ptbres->rent_total_amount,'utility_amc_details'=>$utility_amc_detail,'updated_by'=>$get['user_id'],'updated_date'=>date("Y-m-d H:i:s"),'utility_amc_transaction_date'=>$this->dateconvertdbformat($post['transaction_date']),'utility_amc_due_date'=>$this->dateconvertdbformat($post['due_date']),'utility_amc_additional_notes'=>$post['additional_notes']);
 			$return['utility_detail_updateary'] = $updateary;
-		}else{   
+		}else{
 
 			$bill_detail = json_decode($ptbres->bill_detail,1);
 			foreach($post['rent'] as $seq =>$rent){
-				$bill_detail[$seq]['rent'] =$rent; 
+				$bill_detail[$seq]['rent'] =$rent;
 				$bill_detail[$seq]['remarks'] =$post['remarks'][$seq];
 			}
 			$bill_detaill = json_encode($bill_detail);
@@ -922,14 +922,14 @@ class rentalUserClass extends userClass{
 		$return['property_tenant_billings......'][] = $updateary;
 		$res = $callConfig->updateRecord('property_tenant_billings',$updateary,'id',$property_tenant_billings_id);
 		$return['result'] = $res;
-		
+
 		if($post['type'] == "SG"){
 			$return['rental_invoices'] = $this->insertRentalInvoicesNew($get,$property_tenant_billings_id,0);
 		}elseif($post['type'] == "SGS"){
-			$rental_invoices= $this->insertRentalInvoicesNew($get,$property_tenant_billings_id,199); 
+			$rental_invoices= $this->insertRentalInvoicesNew($get,$property_tenant_billings_id,199);
 			$return['rental_invoices'] = $rental_invoices;
 			if($rental_invoices['rental_invoice_id'] !=""){
-				$return['send_pdf_details'] = $this->renatalInvoiceSend($get,$property_tenant_billings_id);	
+				$return['send_pdf_details'] = $this->renatalInvoiceSend($get,$property_tenant_billings_id);
 			}
 		}
 		return $return;
@@ -957,7 +957,7 @@ class rentalUserClass extends userClass{
 			$invoiceitemtaxtable = "rental_invoice_item_taxes";
 		}
 		$ptbsql1 = "SELECT ".$getfield." FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND id = '".$property_tenant_billings_id."' AND is_active = 0";
-		$return['ptbsql1'] = $ptbsql1; 
+		$return['ptbsql1'] = $ptbsql1;
 		$ptbres1 = $callConfig->getRow($ptbsql1);
 		if($ptbres1->pdf_name !=""){
 			//$pdfContent = file_get_contents(SITEROOT."/uploads/rental_invoices/".$ptbres1->pdf_name);
@@ -994,7 +994,7 @@ class rentalUserClass extends userClass{
 		$emailarray['attachment_file_name'] = $ptbres1->pdf_name;
 		$notarry = array();
 		$email  =$this->sendNotificationAndEmails($notarry,$emailarray,33);
-		$retrun['email'] = $email; 
+		$retrun['email'] = $email;
 		if($get['bill_type'] == 'U'){
 			$updateary = array('utility_shared'=>'0','utility_shared_datetime'=>date("Y-m-d H:i:s"));
 		}elseif($get['bill_type'] == 'AMC'){
@@ -1003,17 +1003,17 @@ class rentalUserClass extends userClass{
 			$updateary = array('shared'=>'0','shared_datetime'=>date("Y-m-d H:i:s"));
 		}
 		$res = $callConfig->updateRecord('property_tenant_billings',$updateary,'id',$property_tenant_billings_id);
-		$return['res'] = $res; 
+		$return['res'] = $res;
 		return $return;
 	}
 	public function insertRentalInvoicesNew($get,$property_tenant_billings_id,$status=''){
 		global $callConfig;
 		$post = array();
 		$return = array();
-		$ptbsql = "SELECT id,property_tenant_detail_id,bill_detail,utility_details,month_start_date, rent_amount, rent_tax, rent_total_amount, utility_amount, total_amount, rent_due_date, rent_additional_notes, utility_transaction_date,utility_due_date,utility_additional_notes,rent_transaction_date, utility_tax, utility_amc_details, utility_amc_amount, utility_amc_tax, utility_amc_transaction_date, utility_amc_due_date, utility_amc_additional_notes FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND id = '".$property_tenant_billings_id."' AND is_active = 0";      
+		$ptbsql = "SELECT id,property_tenant_detail_id,bill_detail,utility_details,month_start_date, rent_amount, rent_tax, rent_total_amount, utility_amount, total_amount, rent_due_date, rent_additional_notes, utility_transaction_date,utility_due_date,utility_additional_notes,rent_transaction_date, utility_tax, utility_amc_details, utility_amc_amount, utility_amc_tax, utility_amc_transaction_date, utility_amc_due_date, utility_amc_additional_notes FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND id = '".$property_tenant_billings_id."' AND is_active = 0";
 
 		$ptbres = $callConfig->getRow($ptbsql);
-		
+
 		$ref_bill_type = "";
 		$rent_tax = 0;
 		if(RENTAL_INVOICE_SPLIT == 'Y'){
@@ -1029,7 +1029,7 @@ class rentalUserClass extends userClass{
 				$transaction_date = $this->dateconvertdbformat($ptbres->utility_transaction_date);
 				$due_date = $ptbres->utility_due_date;
 				$additional_notes = $ptbres->utility_additional_notes;
-	
+
 			}elseif($get['bill_type'] == 'AMC'){ // utility invoice used only
 				$podaajax = json_decode($ptbres->utility_amc_details,1);
 				$rent_tax = ($ptbres->utility_amc_tax !="" AND $ptbres->utility_amc_tax != '0')?$ptbres->utility_amc_tax:0;
@@ -1042,7 +1042,7 @@ class rentalUserClass extends userClass{
 				$transaction_date = $this->dateconvertdbformat($ptbres->utility_amc_transaction_date);
 				$due_date = $ptbres->utility_amc_due_date;
 				$additional_notes = $ptbres->utility_amc_additional_notes;
-	
+
 			}else{ // rent invoice used only
 				$podaajax = json_decode($ptbres->bill_detail,1);
 				$rent_tax = ($ptbres->rent_tax !="" AND $ptbres->rent_tax != '0')?$ptbres->rent_tax:0;
@@ -1078,17 +1078,17 @@ class rentalUserClass extends userClass{
 		//ST_APPROVED
 		$ausql = "SELECT id,default_state_id FROM application_users WHERE company_id = '".$get['company_id']."' AND id = '".$property_tenant_detailsres->originator."' AND is_active = 0";
 		$aures = $callConfig->getRow($ausql);
-		
+
 		$property_ownerssql = "SELECT * FROM property_owners WHERE company_id = '".$get['company_id']."' AND id = '".$property_tenant_detailsres->property_owner_id."' AND is_active = 0";
 		$property_ownersres = $callConfig->getRow($property_ownerssql);
 
 		$owner_additional_detail = array('owner_name'=>$property_ownersres->owner_name,'owner_company_name'=>$property_ownersres->owner_company_name,'address'=>str_replace(["'", "\n", "\r"], "",$property_ownersres->address),'gst_no'=>$property_ownersres->gst_no,'pan_no'=>$property_ownersres->pan_no,'bank_id'=>$property_ownersres->bank_id,'ifsc_code'=>$property_ownersres->ifsc_code,'bank_account_no'=>$property_ownersres->bank_account_no,'account_type'=>$property_ownersres->account_type,'contact_no'=>$property_ownersres->contact_no,'email_id'=>$property_ownersres->email_id);
-		$owner_additional_details = json_encode((array)$owner_additional_detail);  
+		$owner_additional_details = json_encode((array)$owner_additional_detail);
 
 
 		$customersql = "SELECT * FROM customers WHERE company_id = '".$get['company_id']."' AND id = '".$property_tenant_detailsres->customer_id."' AND is_active = 0";
 		$customer = $callConfig->getRow($customersql);
-		
+
 
 		$countries = $states= array();
 		$countriessql = "SELECT id,country_name FROM countries WHERE company_id = '".$get['company_id']."' AND is_active = 0";
@@ -1096,7 +1096,7 @@ class rentalUserClass extends userClass{
 		foreach($countriesres as $cutr){
 			$countries[$cutr->id] = $cutr->country_name;
 		}
-		
+
 		$statessql = "SELECT id,state_name FROM states WHERE company_id = '".$get['company_id']."' AND (id = '".$customer->billing_state."' OR id = '".$customer->shipping_state."') AND is_active = 0";
 		$statesres = $callConfig->getAllRows($statessql);
 		foreach($statesres as $cutr){
@@ -1113,7 +1113,7 @@ class rentalUserClass extends userClass{
 		$party_ship_adderss = $customer->billing_address." ".$cities[$customer->shipping_city]." ".$states[$customer->shipping_state]." ".$customer->shipping_post_code;
 
 		$party_additional_details = array('gstin'=>$customer->gstin,'pan_no'=>$customer->pan_no);
-		$party_additional_detail = json_encode((array)$party_additional_details);  
+		$party_additional_detail = json_encode((array)$party_additional_details);
 		//$due_date = $ptbres->rent_due_date;
 
 		$rounding_off = round($total_amount) - $total_amount;
@@ -1127,7 +1127,7 @@ class rentalUserClass extends userClass{
 		//$return['podaajax'][] = $podaajax;
 		foreach($podaajax as $poda){
 			//if($poda['utility_bill_auto_and_fix'] !="M"){
-				
+
 				$rent_tax = $poda['rent_tax'];
 				$total_amount =$poda['rent'];
 				$unitom = $poda['uom']!=""?$poda['uom']:"UN";
@@ -1144,11 +1144,11 @@ class rentalUserClass extends userClass{
 					$item_quantity = $poda['qty'] !=""?$poda['qty']:"1";
 					$item_price =$poda['rate'];
 					$rent_amount = $poda['rent'];
-					
+
 				}
 				$without_tax_amount = $rent_amount-$rent_tax;
 				$insertcust = array('company_id'=>$get['company_id'],'transaction_id'=>$rental_invoice_id,'item_table_name'=>$poda['transaction_table'],'item_id'=>$poda['poda_and_rbt_id'],'item_name'=>$item_name,'description'=>$poda['remarks'],'purchase_uom'=>$unitom,'item_quantity'=>$item_quantity,'item_price'=>$item_price,'item_amount'=>$without_tax_amount,'tax_amount'=>$rent_tax,'total_amount'=>$without_tax_amount,'approved_quantity'=>$item_quantity,'transaction_qty'=>$item_quantity,'pending_qty'=>$item_quantity,'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"),'parent_id'=>$poda['parent_id']);
-				
+
 				if($invoiceitemtable =="utility_rental_invoice_items"){
 					$insertcust['operation_symbol'] = $poda['condition'];
 				}else{
@@ -1156,7 +1156,7 @@ class rentalUserClass extends userClass{
 				}
 				$rental_invoicesins = $callConfig->insertRecord($invoiceitemtable,$insertcust);
 				$return['rental_invoice_items'][] = $rental_invoicesins;
-				
+
 				if($poda['rent_tax'] !="" AND $poda['rent_tax'] !="0" AND $poda['tax_percentage'] !="" AND $poda['tax_percentage'] !="0"){
 
 					if($property_tenant_detailsres->hsn_and_sac_code_id !=""){
@@ -1176,7 +1176,7 @@ class rentalUserClass extends userClass{
 			}elseif($get['bill_type'] == 'AMC'){  // utility invoice used only
 				$updateary = array('utility_amc_rental_invoice_id'=>$rental_invoice_id,'utility_amc_generated_invoice'=>'0','utility_amc_generated_invoice_datetime'=>date("Y-m-d H:i:s"));
 			}else{ // rent invoice used only
-				$updateary = array('rental_invoice_id'=>$rental_invoice_id,'generated_invoice'=>'0','generated_invoice_datetime'=>date("Y-m-d H:i:s"));	
+				$updateary = array('rental_invoice_id'=>$rental_invoice_id,'generated_invoice'=>'0','generated_invoice_datetime'=>date("Y-m-d H:i:s"));
 			}
 		}else{ // Not Splite invoice used only
 			$updateary = array('rental_invoice_id'=>$rental_invoice_id,'generated_invoice'=>'0','generated_invoice_datetime'=>date("Y-m-d H:i:s"),'utility_rental_invoice_id'=>$rental_invoice_id,'utility_generated_invoice'=>'0','utility_generated_invoice_datetime'=>date("Y-m-d H:i:s"));
@@ -1220,7 +1220,7 @@ class rentalUserClass extends userClass{
 		$filename = "rental_invoice_".time().'.pdf';
 		$sFilePath = SITEROOT.'/uploads/rental_invoices/'.$filename;
 		$output = $dompdf->output();
-		file_put_contents($sFilePath, $output); 
+		file_put_contents($sFilePath, $output);
 		//$return['pdf_filename'] = $filename;
 		$updateary = array('pdf_name'=>$filename,'updated_date'=>date("Y-m-d H:i:s"));
 		$callConfig->updateRecord('property_tenant_billings',$updateary,'rental_invoice_id',$rid);
@@ -1251,20 +1251,20 @@ class rentalUserClass extends userClass{
 		$emailarray['total_amount'] = $rental_invoicesres->total_amount;
 		$emailarray['created_by'] = $get['user_id'];
 
-		require('htmltopdfconverterTCPDF/tcpdf.php');   
-	    $obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);  
-	    $obj_pdf->SetCreator(PDF_CREATOR);  
-	    $obj_pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);  
-	    $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));  
-	    $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));  
-	    $obj_pdf->SetDefaultMonospacedFont('helvetica');  
-	    $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);  
-	    $obj_pdf->SetMargins(PDF_MARGIN_LEFT, '5', PDF_MARGIN_RIGHT);  
-	    $obj_pdf->setPrintHeader(false);  
-	    $obj_pdf->setPrintFooter(false);  
-	    $obj_pdf->SetAutoPageBreak(TRUE, 10);  
-	    $obj_pdf->SetFont('helvetica', '', 12);  
-	    $obj_pdf->AddPage();  
+		require('htmltopdfconverterTCPDF/tcpdf.php');
+	    $obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+	    $obj_pdf->SetCreator(PDF_CREATOR);
+	    $obj_pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);
+	    $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+	    $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+	    $obj_pdf->SetDefaultMonospacedFont('helvetica');
+	    $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+	    $obj_pdf->SetMargins(PDF_MARGIN_LEFT, '5', PDF_MARGIN_RIGHT);
+	    $obj_pdf->setPrintHeader(false);
+	    $obj_pdf->setPrintFooter(false);
+	    $obj_pdf->SetAutoPageBreak(TRUE, 10);
+	    $obj_pdf->SetFont('helvetica', '', 12);
+	    $obj_pdf->AddPage();
 	    $content = '';
 	    $content .= '<html><body>';
 	    $content .= '<div class="invoice-top">
@@ -1320,7 +1320,7 @@ class rentalUserClass extends userClass{
 						            </td>
 						        </tr>
 						    </table>
-                        </div>'; 
+                        </div>';
            $content .= '<div class="invoice-center">
                             <div class="table-section table-responsive clearfix">
                                 <table class="table caption-top invoice-table" style="width:100%;">
@@ -1359,7 +1359,7 @@ class rentalUserClass extends userClass{
                                     </tbody>
                                 </table>
                             </div>
-                        </div>'; 
+                        </div>';
           $content .= '<div class="invoice-bottom">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -1375,7 +1375,7 @@ class rentalUserClass extends userClass{
                                 <p class="text-muted">'.$rental_invoicesres->printing_notes.'</p>
                             </div>
                         </div>
-                    </div>'; 
+                    </div>';
         $content .= '</body></html>';
         $return['content'] = $content;
       	$html = $obj_pdf->writeHTML($content);
@@ -1395,7 +1395,7 @@ class rentalUserClass extends userClass{
 		// $emailarray['attachment_file_name'] = $time.'.pdf';
 		// $notarry = array();
 		// $email  =$this->sendNotificationAndEmails($notarry,$emailarray,33);
-		// $retrun['email'] = $email; 
+		// $retrun['email'] = $email;
 		return $return;
 
 	}  **/
@@ -1411,14 +1411,14 @@ class rentalUserClass extends userClass{
 				$condition .=" AND display_name like '".$get['alphabet']."%'";
 			}
 			if($get['searchname'] !=""){
-				$condition ="AND (display_name LIKE '%".$get['searchname']."%' OR email LIKE '%".$get['searchname']."%' OR phone LIKE '%".$get['searchname']."%' OR company LIKE '%".$get['searchname']."%')";	
+				$condition ="AND (display_name LIKE '%".$get['searchname']."%' OR email LIKE '%".$get['searchname']."%' OR phone LIKE '%".$get['searchname']."%' OR company LIKE '%".$get['searchname']."%')";
 			}
 			if($get['sort_by'] !=""){
-				$sortby =" ORDER BY ".$get['sort_by']." ASC ";	
+				$sortby =" ORDER BY ".$get['sort_by']." ASC ";
 			}
 			if($get['limit'] !=""){
-				$limit =" limit ".$get['limit'];	
-			}	
+				$limit =" limit ".$get['limit'];
+			}
 		}
 		if($get['admin_type'] != 1){
 			$condition .= " AND created_by = '".$get['user_id']."'";
@@ -1472,7 +1472,7 @@ class rentalUserClass extends userClass{
 		$customersres = $callConfig->getRow($customerssql);
 		$return['customers'] = $customersres;
 
-		
+
 		$property_tenant_detailssql = "SELECT * FROM property_tenant_details WHERE company_id = '".$get['company_id']."' AND customer_id = '".$customersres->id."' AND is_active = 0";
 		$property_tenant_detailsres = $callConfig->getAllRows($property_tenant_detailssql);
 		$return['property_tenant_details'] = $property_tenant_detailsres;
@@ -1484,7 +1484,7 @@ class rentalUserClass extends userClass{
 			$propertylist[$rilist->id] = $rilist;
 		}
 		$return['property_owner_details'] = $propertylist;
-		
+
 		$property_ownerssql = "SELECT id, owner_name FROM property_owners WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$property_ownersres = $callConfig->getAllRows($property_ownerssql);
 		$property_owners = array();
@@ -1588,7 +1588,7 @@ class rentalUserClass extends userClass{
 		$property_ownersallsql = "SELECT id, owner_name WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_ownersallres=$callConfig->getAllRows($property_ownersallsql);
 		$return['property_owners_all'] = $property_ownersallres;
-		
+
 		$property_ownerssql = "SELECT id, owner_name, address, gst_no, bank_id, bank_account_no FROM property_owners WHERE company_id = '".$get['company_id']."' AND is_active =0".$condition;
 		$property_ownersres=$callConfig->getAllRows($property_ownerssql);
 		$return['property_owners'] = $property_ownersres;
@@ -1636,7 +1636,7 @@ class rentalUserClass extends userClass{
 		$property_ownerssql = "SELECT id, owner_name FROM property_owners WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_ownersres=$callConfig->getAllRows($property_ownerssql);
 		$property_owners =  array();
-		
+
 		foreach($property_ownersres as $pwd){
 			$property_owners[$pwd->id]= $pwd->owner_name;
 		}
@@ -1682,7 +1682,7 @@ class rentalUserClass extends userClass{
 			$monthandyear = $startDate->format('M Y');
 			$monthyearkey = $startDate->format('mY');
 			$monthyearary[$monthyearkey] = $monthandyear;
-			$startDate->modify('+1 month'); 
+			$startDate->modify('+1 month');
 		}
 		$return['monthyearary'] = $monthyearary;
 		$customer_condition= "";
@@ -1722,7 +1722,7 @@ class rentalUserClass extends userClass{
 		}
 		$return['property_owner_details'] = $property_owner_details;
 		$invoices = $opening_balance_inv =  array();
-		
+
 		//Start opening balance
 		$ob_rental_invoicessql = "SELECT parent_ref_id, SUM(amount) as amount, SUM(tax_amount) as tax_amount, SUM(total_amount) as total_amount, SUM(pending_amount) as pending_amount FROM rental_invoices WHERE company_id = '".$get['company_id']."' AND is_active =0 AND current_status = '".ST_APPROVED."' AND cancel_invoice = 'N' AND transaction_date <= '".$previouslastdate."' AND party_id IN(".$custids.") GROUP BY parent_ref_id";
 		$return['ob_rental_invoicessql'] = $ob_rental_invoicessql;
@@ -1737,12 +1737,12 @@ class rentalUserClass extends userClass{
 		}
 		$return['opening_balance'] = $opening_balance_inv;
 		//End opening balance
-		
+
 		//$rental_invoicessql = "SELECT transaction_date, parent_ref_id, SUM(if(ref_bill_type = 'OB',total_amount,0)) as ob_total_amount, SUM(if(ref_bill_type = 'OB',pending_amount,0)) as ob_pending_amount, SUM(if(ref_bill_type !='OB',amount,0)) as amount, SUM(if(ref_bill_type !='OB',tax_amount,0)) as tax_amount, SUM(if(ref_bill_type !='OB',total_amount,0)) as total_amount, SUM(if(ref_bill_type !='OB',pending_amount,0)) as pending_amount FROM rental_invoices WHERE company_id = '".$get['company_id']."' AND is_active =0 AND current_status = '".ST_APPROVED."' AND transaction_date >= '".$sdate."' AND transaction_date <=  '".$edate."' GROUP BY MONTH(transaction_date), YEAR(transaction_date),parent_ref_id";
 		$rental_invoicessql = "SELECT transaction_date, parent_ref_id, SUM(amount) as amount, SUM(tax_amount) as tax_amount, SUM(total_amount) as total_amount, SUM(pending_amount) as pending_amount FROM rental_invoices WHERE company_id = '".$get['company_id']."' AND is_active =0 AND current_status = '".ST_APPROVED."'  AND cancel_invoice = 'N' AND transaction_date >= '".$sdate."' AND transaction_date <=  '".$edate."' AND party_id IN(".$custids.") GROUP BY MONTH(transaction_date), YEAR(transaction_date),parent_ref_id";
 		$return['rent_sql'] = $rental_invoicessql;
 		$rental_invoicesres=$callConfig->getAllRows($rental_invoicessql);
-		
+
 		foreach($rental_invoicesres as $ri){
 			$monthyear = date('mY',strtotime($ri->transaction_date));
 			$invoices[$ri->parent_ref_id]['rent'][$monthyear]= $ri;
@@ -1787,7 +1787,7 @@ class rentalUserClass extends userClass{
 		foreach($credit_notesres as $ri){
 			$credit_notes[$ri->party_id][$ri->parent_ref_id]= $ri;
 		}
-		
+
 
 		$credit_notessql = "SELECT SUM(cn.total_amount) as total_amount, cn.party_id, ri.parent_ref_id FROM credit_notes cn LEFT JOIN utility_rental_invoices ri ON cn.ref_id = ri.id AND ri.cancel_invoice = 'N' WHERE cn.company_id = '".$get['company_id']."' AND cn.transaction_date <= '".$edate."' AND cn.is_active =0 GROUP BY ri.parent_ref_id, cn.party_id";
 		$credit_notesres=$callConfig->getAllRows($credit_notessql);
@@ -1799,7 +1799,7 @@ class rentalUserClass extends userClass{
 		$return['credit_notes'] = $credit_notes;
 		$return['credit_notes_sql'] = $credit_notessql;
 
-		
+
 		$debit_notessql = "SELECT SUM(cn.total_amount) as total_amount, cn.party_id, ri.parent_ref_id FROM debit_notes cn LEFT JOIN rental_invoices ri ON cn.ref_id = ri.id AND ri.cancel_invoice = 'N' WHERE cn.company_id = '".$get['company_id']."' AND cn.transaction_date <= '".$edate."' AND cn.is_active =0 GROUP BY  ri.parent_ref_id, cn.party_id";
 		$debit_notesres=$callConfig->getAllRows($debit_notessql);
 		$debit_notes =  array();
@@ -1854,7 +1854,7 @@ class rentalUserClass extends userClass{
 		$rental_invoices = $opening_balance_inv =  array();
 		foreach($rental_invoicesres as $ri){
 			if($ri->ref_bill_type =="OB"){
-				$opening_balance_inv[$ri->parent_ref_id][] =$ri; 
+				$opening_balance_inv[$ri->parent_ref_id][] =$ri;
 			}else{
 				$rental_invoices[$ri->id]= $ri;
 			}
@@ -1887,8 +1887,8 @@ class rentalUserClass extends userClass{
 	public function getTenantProperty($get){
 		global $callConfig;
 		if($get['type'] == 'getcustid' || $get['type'] =='parent_ref_id'){
-			//$sql = "SELECT  ptd.id, ptd.monthly_total, pod.property_name as value, ptd.rent_commencement_date, ptd.company_name FROM property_tenant_details ptd, property_owner_details pod WHERE  ptd.company_id = '".$get['company_id']."' AND pod.company_id = ptd.company_id AND pod.id = ptd.property_owner_detail_id AND ptd.customer_id = '".$get['valu']."' AND ptd.current_status = '".ST_APPROVED."' AND pod.is_active = ptd.is_active AND ptd.is_active ='0' ORDER BY pod.property_name ASC";	
-			$sql = "SELECT  ptd.id, ptd.monthly_total, pod.property_name as value, ptd.rent_commencement_date, ptd.company_name, poown.owner_name FROM property_tenant_details ptd, property_owner_details pod, property_owners poown WHERE  ptd.company_id = '".$get['company_id']."' AND pod.company_id = ptd.company_id AND pod.company_id = poown.company_id AND pod.id = ptd.property_owner_detail_id AND poown.id = ptd.property_owner_id AND ptd.customer_id = '".$get['valu']."' AND ptd.current_status = '".ST_APPROVED."' AND pod.is_active = ptd.is_active AND ptd.is_active ='0' ORDER BY pod.property_name ASC";	
+			//$sql = "SELECT  ptd.id, ptd.monthly_total, pod.property_name as value, ptd.rent_commencement_date, ptd.company_name FROM property_tenant_details ptd, property_owner_details pod WHERE  ptd.company_id = '".$get['company_id']."' AND pod.company_id = ptd.company_id AND pod.id = ptd.property_owner_detail_id AND ptd.customer_id = '".$get['valu']."' AND ptd.current_status = '".ST_APPROVED."' AND pod.is_active = ptd.is_active AND ptd.is_active ='0' ORDER BY pod.property_name ASC";
+			$sql = "SELECT  ptd.id, ptd.monthly_total, pod.property_name as value, ptd.rent_commencement_date, ptd.company_name, poown.owner_name FROM property_tenant_details ptd, property_owner_details pod, property_owners poown WHERE  ptd.company_id = '".$get['company_id']."' AND pod.company_id = ptd.company_id AND pod.company_id = poown.company_id AND pod.id = ptd.property_owner_detail_id AND poown.id = ptd.property_owner_id AND ptd.customer_id = '".$get['valu']."' AND ptd.current_status = '".ST_APPROVED."' AND pod.is_active = ptd.is_active AND ptd.is_active ='0' ORDER BY pod.property_name ASC";
 			$property_tenant_details=$callConfig->getAllRows($sql);
 			$return['result'] = $property_tenant_details;
 			$return['result_sql'] = $sql;
@@ -1915,12 +1915,12 @@ class rentalUserClass extends userClass{
 			}elseif($get['bill_type'] == "AMC"){
 				$billtypecondition = ' AND utility_amc_generated_invoice IS NULL';
 			}
-			$sql = "SELECT id, month_start_date,total_amount FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND property_tenant_detail_id = '".$get['valu']."' ".$billtypecondition." AND month_start_date >= '".$maxrecorddate."' AND is_active = 0 ORDER BY month_start_date ASC";	
+			$sql = "SELECT id, month_start_date,total_amount FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND property_tenant_detail_id = '".$get['valu']."' ".$billtypecondition." AND month_start_date >= '".$maxrecorddate."' AND is_active = 0 ORDER BY month_start_date ASC";
 			$property_tenant_billings=$callConfig->getAllRows($sql);
 			$return['result'] = $property_tenant_billings;
 			$return['result_sql'] = $sql;
 		}elseif($get['type'] == 'getproperty_tenant_billings_id'){
-			$sql = "SELECT id, month_start_date,bill_detail,utility_details, rent_additional_notes, rent_due_date, rent_transaction_date, utility_transaction_date, utility_due_date, utility_additional_notes, utility_amc_details, utility_amc_transaction_date, utility_amc_due_date, utility_amc_additional_notes FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND id = '".$get['valu']."' AND is_active = 0";	
+			$sql = "SELECT id, month_start_date,bill_detail,utility_details, rent_additional_notes, rent_due_date, rent_transaction_date, utility_transaction_date, utility_due_date, utility_additional_notes, utility_amc_details, utility_amc_transaction_date, utility_amc_due_date, utility_amc_additional_notes FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND id = '".$get['valu']."' AND is_active = 0";
 			$property_tenant_billings=$callConfig->getRow($sql);
 			$return['result'] = $property_tenant_billings;
 			$return['result_sql'] = $sql;
@@ -1934,13 +1934,13 @@ class rentalUserClass extends userClass{
 	        $return['hsn_and_sac_codes'] = $hsn_and_sac_codes;
 
 
-	        $sql = "SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = '".$get['company_id']."' AND genc_code = 'UTILITYUOM' AND is_active = 0";	
+	        $sql = "SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = '".$get['company_id']."' AND genc_code = 'UTILITYUOM' AND is_active = 0";
 			$uomres=$callConfig->getAllRows($sql);
 			$return['utility_uom'] = $uomres;
 
 
 		}elseif($get['type'] == 'ref_id'){
-			$sql = "SELECT id, month_start_date as value FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND property_tenant_detail_id = '".$get['valu']."' AND is_active = 0 ORDER BY month_start_date ASC";	
+			$sql = "SELECT id, month_start_date as value FROM property_tenant_billings WHERE company_id = '".$get['company_id']."' AND property_tenant_detail_id = '".$get['valu']."' AND is_active = 0 ORDER BY month_start_date ASC";
 			$property_tenant_billings=$callConfig->getAllRows($sql);
 			$return['result'] = $property_tenant_billings;
 			$return['result_sql'] = $sql;
@@ -1981,13 +1981,13 @@ class rentalUserClass extends userClass{
 
 			$debit_notessql = "SELECT id, transaction_number, transaction_date, total_amount FROM `debit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = '".$invoicetable."' AND ref_id = '".$get['rid']."' AND is_active =0";
 			$debit_notesres = $callConfig->getAllRows($debit_notessql);
-			$return['debit_notes']= $debit_notesres;  
+			$return['debit_notes']= $debit_notesres;
 
 			$credit_notessql = "SELECT id, transaction_number, transaction_date, total_amount FROM `credit_notes` WHERE company_id = ".$get['company_id']." AND ref_type = '".$invoicetable."' AND ref_id = '".$get['rid']."' AND is_active =0";
 			$credit_notesres = $callConfig->getAllRows($credit_notessql);
 			$return['credit_notes']= $credit_notesres;
 
-		}else{ 
+		}else{
 			$customerssql = "SELECT id, transaction_number, transaction_date, party_name, amount, tax_amount, discount_amount, total_amount, pending_amount, party_email, ref_bill_type, current_status, cancel_invoice FROM ".$invoicetable." WHERE company_id = '".$get['company_id']."' AND is_active =0";
 			$customersres=$callConfig->getAllRows($customerssql);
 			$return['rental_invoices'] = $customersres;
@@ -2033,7 +2033,7 @@ class rentalUserClass extends userClass{
 		$comment = $post['popup_comment'];
 		$account_code = $post['popup_account_code'];
 		$transactionsql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND id = '".$transaction_id."' AND is_active = 0";
-		
+
 		$transactionres = $callConfig->getRow($transactionsql);
 
 		//$transaction_number = $this->toGetApplicationSerialNumber('debit_notes');
@@ -2065,7 +2065,7 @@ class rentalUserClass extends userClass{
 		$comment = $post['popup_comment'];
 		$account_code = $post['popup_account_code'];
 		$transactionsql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND id = '".$transaction_id."' AND is_active = 0";
-		
+
 		$transactionres = $callConfig->getRow($transactionsql);
 
 		//$transaction_number = $this->toGetApplicationSerialNumber('credit_notes');
@@ -2094,11 +2094,11 @@ class rentalUserClass extends userClass{
 		$configsql = "SELECT name, display_logo, default_bank_account_id,number_format, date_separator, date_format,pan_number,phone_number, gst_number, contact_address  FROM config WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$configres=$callConfig->getRow($configsql);
 		$return['config'] = $configres;
-		
+
 		$rental_invoicessql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND id = '".$rid."'  AND is_active =0";
 		$rental_invoicesres=$callConfig->getRow($rental_invoicessql);
 		$return['rental_invoices'] = $rental_invoicesres;
-		
+
 		$rental_invoice_itemsaql = "SELECT id, item_name, description, item_price, item_amount, tax_amount, total_amount, purchase_uom, item_quantity, item_id, parent_id FROM ".$fieldarray[$transaction_table]['item']." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$rid."'  AND is_active =0";
 		$rental_invoice_items=$callConfig->getAllRows($rental_invoice_itemsaql);
 		$return['rental_invoice_items'] = $rental_invoice_items;
@@ -2129,7 +2129,7 @@ class rentalUserClass extends userClass{
 			$banks[$bnk->id] = $bnk->bank_name;
 		}
 		$return['banks'] = $banks;
-		
+
 		$account_type_sql = "SELECT genc_detail_name, genc_detail_code FROM general_code_details WHERE genc_code = 'BANKACCTTYPE' AND company_id = '".$get['company_id']."' AND is_active = 0";
 		$account_type_res=$callConfig->getAllRows($account_type_sql);
 		foreach($account_type_res as $btr){
@@ -2144,10 +2144,10 @@ class rentalUserClass extends userClass{
 	public function insertTenantOpeningBalance($get,$post){
 		global $callConfig;
 		$return = array();
-		$return['post'] =$post; 
+		$return['post'] =$post;
 		$sql = "SELECT * FROM property_tenant_details WHERE company_id = '".$post['company_id']."' AND id = '".$post['rid']."' AND is_active =0";
 		$ptdres =$callConfig->getRow($sql);
-		
+
 		$customersql = "SELECT * FROM customers WHERE company_id = '".$get['company_id']."' AND id = '".$ptdres->customer_id."' AND is_active = 0";
 		$customer = $callConfig->getRow($customersql);
 		$party_additional_details = array('gstin'=>$customer->gstin,'pan_no'=>$customer->pan_no);
@@ -2156,8 +2156,8 @@ class rentalUserClass extends userClass{
 		foreach($post['transaction_date'] as $key=>$valu){
 			$transaction_date = $this->dateconvertdbformat($post['transaction_date'][$key]);
 			$total_rent = $post['total'][$key];
-			$serial_transaction_number = $this->toGetApplicationSerialNumber('rental_invoices'); 
-			$transaction_number = $this->toGetApplicationRentalOwnerSerialNumber('rental_invoices',$ptdres->property_owner_id,$transaction_date); 
+			$serial_transaction_number = $this->toGetApplicationSerialNumber('rental_invoices');
+			$transaction_number = $this->toGetApplicationRentalOwnerSerialNumber('rental_invoices',$ptdres->property_owner_id,$transaction_date);
 			$insertcust = array('company_id'=>$post['company_id'],'transaction_number'=>$transaction_number,'transaction_date'=>$transaction_date,'originator'=>$post['user_id'],'party_id'=>$ptdres->customer_id,'party_name'=>$ptdres->tenant_name,'party_email'=>$ptdres->tenant_email,'party_phone'=>$ptdres->tenant_mobile,'party_address'=>$ptdres->tenant_address,'party_ship_adderss'=>$ptdres->tenant_address,'amount'=>$total_rent,'tax_amount'=>'0','total_amount'=>$total_rent,'due_date'=>$transaction_date,'ref_type'=>'property_tenant_billings','parent_ref_id'=>$ptdres->id,'pending_amount'=>$total_rent,'is_active'=>'0','current_status'=>'199','created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"),'party_additional_details'=>$party_additional_detail,'ref_bill_type'=>'OB','serial_transaction_number'=>$serial_transaction_number);
 			$rental_invoicesins = $callConfig->insertRecord('rental_invoices',$insertcust);
 			$rental_invoice_id = $rental_invoicesins['LASTID'];
@@ -2169,9 +2169,9 @@ class rentalUserClass extends userClass{
 				$insertcust = array('company_id'=>$post['company_id'],'transaction_id'=>$rental_invoice_id,'item_table_name'=>'property_owner_detail_areas','item_id'=>$property_area_id,'item_name'=>$item_name,'description'=>$item_name,'purchase_uom'=>'UN','item_quantity'=>'1','item_price'=>$rent_amount,'item_amount'=>$rent_amount,'tax_amount'=>'0','total_amount'=>$rent_amount,'approved_quantity'=>'1','transaction_qty'=>'1','pending_qty'=>'0','is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
 				$rental_invoicesins = $callConfig->insertRecord('rental_invoice_items',$insertcust);
 				$return['rental_invoice_items'][$rental_invoice_id] = $rental_invoicesins;
-			} 
+			}
 			$this->tocreatejounalvoucherbaseallcases('rental_invoices',$rental_invoice_id);
-		}		
+		}
 		return $return;
 	}
 	public function updatePropertyTenantDetails($get,$post){
@@ -2196,20 +2196,20 @@ class rentalUserClass extends userClass{
 			foreach($ptbres as $ptbress){
 				$ptbid[$ptbress->id] = $ptbress->id;
 				if($ptbress->rental_invoice_id !=""){
-					$rental_invoice_id[$ptbress->rental_invoice_id] = $ptbress->rental_invoice_id; 
+					$rental_invoice_id[$ptbress->rental_invoice_id] = $ptbress->rental_invoice_id;
 				}
 				if($ptbress->utility_rental_invoice_id !=""){
 					$utility_rental_invoice_id1[$ptbress->utility_rental_invoice_id] = $ptbress->utility_rental_invoice_id;
 				}
 			}
-			if(count((array)$ptbid) !=0){ 
+			if(count((array)$ptbid) !=0){
 				$property_tenant_billings_id = implode(',', (array)$ptbid);
 				$updateary = array('is_active'=>null,'to_date'=>$agreement_expiry_date,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
 				$where = "company_id = '".$post['company_id']."' AND id IN(".$property_tenant_billings_id.") AND is_active = 0";
 				$res= $callConfig->updateRecord('property_tenant_billings',$updateary,'','',$where);
 				$return['property_tenant_billings_update'] = $res; //Update effected date data property_tenant_billings
 			}
-			if(count((array)$rental_invoice_id) !='0'){ 
+			if(count((array)$rental_invoice_id) !='0'){
 				$rentalinvid = implode(',',  (array)$rental_invoice_id);
 				$updateary = array('is_active'=>null,'to_date'=>$agreement_expiry_date,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
 				$where = "company_id = '".$post['company_id']."' AND id IN(".$rentalinvid.") AND is_active = 0";
@@ -2221,7 +2221,7 @@ class rentalUserClass extends userClass{
 				$res= $callConfig->updateRecord('rental_invoice_items',$updateary,'','',$where);
 				$return['rental_invoice_items'] = $res; //Update effected date data rental_invoices_items
 			}
-			if(count((array)$utility_rental_invoice_id1) !=0){ 
+			if(count((array)$utility_rental_invoice_id1) !=0){
 				$rentalinvid22 = implode(',',  (array)$utility_rental_invoice_id1);
 				$updateary = array('is_active'=>null,'to_date'=>$agreement_expiry_date,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
 				$where = "company_id = '".$post['company_id']."' AND id IN(".$rentalinvid22.") AND is_active = 0";
@@ -2234,7 +2234,7 @@ class rentalUserClass extends userClass{
 				$return['rental_invoice_items'] = $res; //Update effected date data rental_invoices_items
 			}
 
-		}else{ 
+		}else{
 			//$sql = "SELECT id, un_lock_tenant_log FROM property_tenant_details WHERE company_id = '".$post['company_id']."' AND id = '".$post['rid']."' AND is_active =0";
 			///$ptdres =$callConfig->getRow($sql);
 
@@ -2243,7 +2243,7 @@ class rentalUserClass extends userClass{
 			$addonemore_day_date = date('Y-m-d', strtotime($un_lock_date . ' +1 day'));
 			//$un_lock_tenant_log[] = array('un_lock_date'=>$un_lock_date,'remarks'=>$post['remarks']);
 			//$logencode = json_encode($un_lock_tenant_log);
-			
+
 			$updateary = array('un_lock_tenant_date'=>$un_lock_date,'un_lock_tenant_remarks'=>$post['remarks'],'to_date'=>$un_lock_date,'last_date_of_billing'=>$un_lock_date,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
 			$res= $callConfig->updateRecord('property_tenant_details',$updateary,'id',$post['rid']);
 			$return['property_tenant_details_update'] = $res;
@@ -2254,17 +2254,17 @@ class rentalUserClass extends userClass{
 			$return['ptbres'] = $ptbsql;
 			foreach($ptbres as $ptbress){
 				$ptbid[$ptbress->id] = $ptbress->id;
-				$rental_invoice_id[$ptbress->rental_invoice_id] = $ptbress->rental_invoice_id; 
+				$rental_invoice_id[$ptbress->rental_invoice_id] = $ptbress->rental_invoice_id;
 				$utility_rental_invoice_id[$ptbress->utility_rental_invoice_id] = $ptbress->utility_rental_invoice_id;
 			}
-			if(count((array)$ptbid) !=0){ 
+			if(count((array)$ptbid) !=0){
 				$property_tenant_billings_id = implode(',', (array)$ptbid);
 				$updateary = array('is_active'=>null,'to_date'=>$un_lock_date,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
 				$where = "company_id = '".$post['company_id']."' AND id IN(".$property_tenant_billings_id.") AND is_active = 0";
 				$res= $callConfig->updateRecord('property_tenant_billings',$updateary,'','',$where);
 				$return['property_tenant_billings_update'] = $res; //Update effected date data property_tenant_billings
 			}
-			if(count((array)$rental_invoice_id) !=0){ 
+			if(count((array)$rental_invoice_id) !=0){
 				$rentalinvid = implode(',',  (array)$rental_invoice_id);
 				$updateary = array('is_active'=>null,'to_date'=>$un_lock_date,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
 				$where = "company_id = '".$post['company_id']."' AND id IN(".$rentalinvid.") AND is_active = 0";
@@ -2276,7 +2276,7 @@ class rentalUserClass extends userClass{
 				$res= $callConfig->updateRecord('rental_invoice_items',$updateary,'','',$where);
 				$return['rental_invoice_items'] = $res; //Update effected date data rental_invoices_items
 			}
-			if(count((array)$utility_rental_invoice_id) !=0){ 
+			if(count((array)$utility_rental_invoice_id) !=0){
 				$rentalinvid = implode(',',  (array)$utility_rental_invoice_id);
 				$updateary = array('is_active'=>null,'to_date'=>$un_lock_date,'updated_date'=>date('Y-m-d h:i:s'),'updated_by'=>$post['user_id']);
 				$where = "company_id = '".$post['company_id']."' AND id IN(".$rentalinvid.") AND is_active = 0";
@@ -2296,7 +2296,7 @@ class rentalUserClass extends userClass{
 			}else{
 				$main_parent_rent_commencement_date = $ptdres->rent_commencement_date;
 			}
-			
+
 			$replicatsql = 'INSERT INTO `property_tenant_details` (`company_id`, `originator`, `property_owner_id`, `property_owner_detail_id`, `property_owner_area_ids`, `property_owner_detail_areas`, `monthly_rent`, `monthly_tax`, `monthly_total`, `lease_period_start_date`, `lease_period_end_date`, `rent_free_period_day`, `rent_commencement_date`, `rent_escalation_after_month`, `rent_escalation_percentage`, `notice_period`, `rent_bill_to_be_raise`, `rent_bill_to_be_raise_type`, `security_deposit`, `gst_added`, `locking_period_tenant`, `locking_period_landlord`, `bill_to_be_raised`, `customer_id`,`company_name`, `tenant_name`, `tenant_email`, `tenant_mobile`, `tenant_address`, `tenant_pin_code`, `bill_to_be_send_for_the_following`, `note`, `rental_bill_types`, `last_date_of_billing`, `lock_tenant`, `lock_tenant_date`, `un_lock_tenant_date`,`un_lock_tenant_remarks`, `parent_id`, `renewal_date`, `hsn_and_sac_code_id`, `tax_percentage`,`rental_invoice_to_be_raised`,`rental_invoice_stoped_from`, `due_bill_to_be_raise_type`, `due_bill_to_be_raise`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_by`, `created_date`,`main_parent_rent_commencement_date`) SELECT `company_id`,"'.$post['user_id'].'", `property_owner_id`, `property_owner_detail_id`, `property_owner_area_ids`, `property_owner_detail_areas`, `monthly_rent`, `monthly_tax`, `monthly_total`, "'.$addonemore_day_date.'", `lease_period_end_date`, `rent_free_period_day`, "'.$addonemore_day_date.'", `rent_escalation_after_month`, `rent_escalation_percentage`, `notice_period`, `rent_bill_to_be_raise`, `rent_bill_to_be_raise_type`, `security_deposit`, `gst_added`, `locking_period_tenant`, `locking_period_landlord`, `bill_to_be_raised`, `customer_id`,`company_name`, `tenant_name`, `tenant_email`, `tenant_mobile`, `tenant_address`, `tenant_pin_code`, `bill_to_be_send_for_the_following`, `note`, `rental_bill_types`, `last_date_of_billing`,null, null, null, null, "'.$post['rid'].'", `renewal_date`, `hsn_and_sac_code_id`, `tax_percentage`,`rental_invoice_to_be_raised`,`rental_invoice_stoped_from`, `due_bill_to_be_raise_type`, `due_bill_to_be_raise`, `is_active`, 0, `status_date`,  "'.$addonemore_day_date.'", `rent_commencement_date`,  "'.$post['user_id'].'", "'.date('Y-m-d h:i:s').'","'.$main_parent_rent_commencement_date.'" FROM `property_tenant_details` WHERE company_id = "'.$post['company_id'].'" AND id = "'.$post['rid'].'"';
 			$res2 = $callConfig->executeQuery($replicatsql);
 			$return['unlock'] = $res2;
@@ -2313,7 +2313,7 @@ class rentalUserClass extends userClass{
 		$return['startmothyear'] =$startmothyear." -- ".$endmothyear;
 		if($get['property_owner_id'] !=""){
 			$property_owners_condition = " AND id ='".$get['property_owner_id']."'";
-			
+
 			$podsql = "SELECT id, property_name FROM property_owner_details WHERE company_id = '".$get['company_id']."' AND property_owner_id = '".$get['property_owner_id']."' AND is_active =0";
 			$podres =$callConfig->getAllRows($podsql);
 			$return['all_property_owner_details'] =$podres;
@@ -2360,7 +2360,7 @@ class rentalUserClass extends userClass{
 			$return['invoices'] =$invoices;
 		}else{
 
-			
+
 			$risql = "SELECT ptd.customer_id,  ptd.property_owner_id, ptd.property_owner_detail_id, SUM(ri.amount) as amount, SUM(ri.tax_amount) as tax_amount, SUM(ri.total_amount) as total_amount, SUM(ri.pending_amount) as pending_amount, (SELECT SUM(dn.pending_amount) FROM debit_notes dn WHERE dn.company_id = ri.company_id  AND dn.ref_type = 'rental_invoices' AND FIND_IN_SET(dn.ref_id, GROUP_CONCAT(ri.id)) AND dn.is_active = ri.is_active AND dn.current_status = '".ST_APPROVED."') as debit_total_amount, (SELECT SUM(cn.pending_amount) FROM credit_notes cn WHERE cn.company_id = ri.company_id  AND cn.ref_type = 'rental_invoices' AND FIND_IN_SET(cn.ref_id, GROUP_CONCAT(ri.id)) AND cn.is_active = ri.is_active AND cn.current_status = '".ST_APPROVED."') as credit_total_amount FROM property_tenant_details ptd, rental_invoices ri WHERE ri.company_id = '".$get['company_id']."' AND ri.company_id = ptd.company_id AND ri.parent_ref_id = ptd.id AND ri.is_active = ptd.is_active AND ri.is_active = 0 AND ri.current_status = '".ST_APPROVED."' AND ri.transaction_date >= '".$startmothyear."' AND ri.transaction_date <=  '".$endmothyear."'  AND ri.cancel_invoice = 'N' GROUP BY ptd.customer_id, ptd.property_owner_id, ptd.property_owner_detail_id";
 	//$risql = "SELECT ptd.customer_id,  ptd.property_owner_id, ptd.property_owner_detail_id, SUM(if(ref_bill_type = 'OB',ri.total_amount,0)) as ob_total_amount, SUM(if(ref_bill_type = 'OB',ri.pending_amount,0)) as ob_pending_amount, SUM(if(ref_bill_type !='OB',ri.amount,0)) as amount, SUM(if(ref_bill_type !='OB',ri.tax_amount,0)) as tax_amount, SUM(if(ref_bill_type !='OB',ri.total_amount,0)) as total_amount, SUM(if(ref_bill_type !='OB',ri.pending_amount,0)) as pending_amount, (SELECT SUM(dn.pending_amount) FROM debit_notes dn WHERE dn.company_id = ri.company_id  AND dn.ref_type = 'rental_invoices' AND FIND_IN_SET(dn.ref_id, GROUP_CONCAT(ri.id)) AND dn.is_active = ri.is_active AND dn.current_status = '".ST_APPROVED."') as debit_total_amount, (SELECT SUM(cn.pending_amount) FROM credit_notes cn WHERE cn.company_id = ri.company_id  AND cn.ref_type = 'rental_invoices' AND FIND_IN_SET(cn.ref_id, GROUP_CONCAT(ri.id)) AND cn.is_active = ri.is_active AND cn.current_status = '".ST_APPROVED."') as credit_total_amount FROM property_tenant_details ptd, rental_invoices ri WHERE ri.company_id = '".$get['company_id']."' AND ri.company_id = ptd.company_id AND ri.parent_ref_id = ptd.id AND ri.is_active = ptd.is_active AND ri.is_active = 0 AND ri.current_status = '".ST_APPROVED."' AND ri.transaction_date >= '".$startmothyear."' AND ri.transaction_date <=  '".$endmothyear."' GROUP BY ptd.customer_id, ptd.property_owner_id, ptd.property_owner_detail_id";
 			$rires =$callConfig->getAllRows($risql);
@@ -2376,13 +2376,13 @@ class rentalUserClass extends userClass{
 				$invoices[$uri->property_owner_id][$uri->property_owner_detail_id][$uri->customer_id]['utility'] = $uri;
 			}
 			$return['invoices'] =$invoices;
-		}	
+		}
 
 	//Start filter
 		$property_ownerssql = "SELECT id, owner_name, address, gst_no, bank_id, bank_account_no FROM property_owners WHERE company_id = '".$get['company_id']."' AND is_active =0";
 		$property_ownersres =$callConfig->getAllRows($property_ownerssql);
 		$return['all_property_owners'] =$property_ownersres;
-	//End filter	
+	//End filter
 
 	//$searialnumber = $this->toGetApplicationRentalOwnerSerialNumber('rental_invoices','1','2026-04-01');
 	//echo $searialnumber;
@@ -2392,33 +2392,33 @@ class rentalUserClass extends userClass{
 	/**function toGetApplicationVoucherSerialNumbers111($get,$table_name,$trans_date){
         global $callConfig;
         $return = array();
-        	
+
         $trans_date = $trans_date !=""?strtotime($trans_date):strtotime(date('Y-m-d'));
 		$finyaer = date("m",$transdate) >= 4 ? date("Y",$transdate). '-' . (date("y",$transdate)+1) : (date("Y",$transdate) - 1). '-' . date("y",$transdate);
-		echo $finyaer; exit;	
-       
+		echo $finyaer; exit;
 
-        $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type."' AND start_date <= '".$this->dateconvertdbformat($trans_date)."' AND end_date >= '".$this->dateconvertdbformat($trans_date)."' AND is_active =0";  
-        $return['query_1'] = $query;   
+
+        $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type."' AND start_date <= '".$this->dateconvertdbformat($trans_date)."' AND end_date >= '".$this->dateconvertdbformat($trans_date)."' AND is_active =0";
+        $return['query_1'] = $query;
         $res = $callConfig->getRow($query);
-        $return['query_1_res'] = $res;   
+        $return['query_1_res'] = $res;
         if($res->id !=""){
             $le = $res->doc_no_length;
             $var = "%0".$le."d";
             $data = $res->pre_fix.sprintf($var,$res->serial_number+1).$res->post_fix;
-            $update = $callConfig->updateRecord('application_voucher_serial_numbers',array('serial_number' =>$res->serial_number+1),'id',$res->id); 
-            $return['query_1_update'] = $update; 
+            $update = $callConfig->updateRecord('application_voucher_serial_numbers',array('serial_number' =>$res->serial_number+1),'id',$res->id);
+            $return['query_1_update'] = $update;
        }else{
-            $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type."' AND is_active =0";  
-            $return['query_2_res'] = $query;   
+            $query = "SELECT * FROM `application_voucher_serial_numbers` WHERE company_id = ".$get['company_id']." AND application_table_name = '".$table_name."' AND serial_number_type = '".$serial_number_type."' AND is_active =0";
+            $return['query_2_res'] = $query;
             $res = $callConfig->getRow($query);
-            $return['query_2_res'] = $res;  
+            $return['query_2_res'] = $res;
             if(isset($res->doc_no_length)){
                 $le = $res->doc_no_length;
                 $var = "%0".$le."d";
                 $data = $res->pre_fix.sprintf($var,1).$res->post_fix;
 
-              
+
                 if(date("m",strtotime($trans_date)) >= 4){
                     $startyear = date("Y",strtotime($trans_date));
                     $endyear = (date("Y",strtotime($trans_date))+1);
@@ -2430,17 +2430,17 @@ class rentalUserClass extends userClass{
                     $startdate = $startyear."-04-01";
                     $enddate = $endyear."-03-31";
                 }
-                
+
                 if($res->post_fix !="" AND $res->pre_fix !="" AND $res->doc_no_length !="" AND $res->serial_number_type !="" AND  $res->voucher_type !=""){
-                    $insertary=array('company_id'=>$get['company_id'],'application_table_name'=>$table_name,'serial_number'=>'1','pre_fix'=>$res->pre_fix,'post_fix'=>$res->post_fix,'doc_no_length'=>$res->doc_no_length,'serial_number_type'=>$res->serial_number_type,'voucher_type'=>$res->voucher_type,'start_date'=>$startdate,'end_date'=>$enddate,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date("Y-m-d H:i:s")); 
+                    $insertary=array('company_id'=>$get['company_id'],'application_table_name'=>$table_name,'serial_number'=>'1','pre_fix'=>$res->pre_fix,'post_fix'=>$res->post_fix,'doc_no_length'=>$res->doc_no_length,'serial_number_type'=>$res->serial_number_type,'voucher_type'=>$res->voucher_type,'start_date'=>$startdate,'end_date'=>$enddate,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date("Y-m-d H:i:s"));
                     $return['res_item_insertary'] = $insertary;
                     $res1 = $callConfig->insertRecord('application_voucher_serial_numbers',$insertary);
-                    $return['res_item'] = $res1;  
-                } 
+                    $return['res_item'] = $res1;
+                }
             }else{
                 $data = 1;
-            }  
-        }  
+            }
+        }
         //return $return;
         return trim($data);
     }
@@ -2451,12 +2451,12 @@ class rentalUserClass extends userClass{
 		global $callConfig;
 		$get = array();
 		$transdate = $trandate !=""?$trandate:date('Y-m-d');
-		
+
 		$finyaer = date("m",strtotime($transdate)) >= 4 ? date("Y",strtotime($transdate)). '-' . (date("y",strtotime($transdate))+1) : (date("Y",strtotime($transdate)) - 1). '-' . date("y",strtotime($transdate));
-		$query = "SELECT * FROM `application_rental_owner_serial_numbers` WHERE application_table_name = '".$table_name."' AND owner_id = '".$owner_id."' AND start_date <= '".$this->dateconvertdbformat($transdate)."' AND end_date >= '".$this->dateconvertdbformat($transdate)."' AND is_active =0";  
-        $return['query_1'] = $query;   
+		$query = "SELECT * FROM `application_rental_owner_serial_numbers` WHERE application_table_name = '".$table_name."' AND owner_id = '".$owner_id."' AND start_date <= '".$this->dateconvertdbformat($transdate)."' AND end_date >= '".$this->dateconvertdbformat($transdate)."' AND is_active =0";
+        $return['query_1'] = $query;
         $res = $callConfig->getRow($query);
-        $return['query_1_res'] = $res; 
+        $return['query_1_res'] = $res;
         if($res->id !=""){
             $res = $callConfig->getRow($query);
 			$le = $res->doc_no_length;
@@ -2466,9 +2466,9 @@ class rentalUserClass extends userClass{
 				$update = $callConfig->updateRecord('application_rental_owner_serial_numbers',array('serial_number' =>$res->serial_number+1),'id',$res->id);
 			}
        }else{
-            $query = "SELECT * FROM `application_rental_owner_serial_numbers` WHERE application_table_name = '".$table_name."' AND owner_id = '".$owner_id."' AND is_active =0";  
+            $query = "SELECT * FROM `application_rental_owner_serial_numbers` WHERE application_table_name = '".$table_name."' AND owner_id = '".$owner_id."' AND is_active =0";
             $res = $callConfig->getRow($query);
-            $return['query_2_res'] = $res;  
+            $return['query_2_res'] = $res;
             if(isset($res->doc_no_length)){
                 $le = $res->doc_no_length;
                 $var = "%0".$le."d";
@@ -2486,14 +2486,14 @@ class rentalUserClass extends userClass{
                     $enddate = $endyear."-03-31";
                 }
                 if($res->doc_no_length !="" AND $res->serial_number_type !="" AND $table_name !=""){
-                    $insertary=array('company_id'=>$res->company_id,'application_table_name'=>$table_name,'owner_id'=>$res->owner_id,'serial_number'=>'1','pre_fix'=>$res->pre_fix,'post_fix'=>$res->post_fix,'doc_no_length'=>$res->doc_no_length,'serial_number_type'=>$res->serial_number_type,'start_date'=>$startdate,'end_date'=>$enddate,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date("Y-m-d H:i:s")); 
+                    $insertary=array('company_id'=>$res->company_id,'application_table_name'=>$table_name,'owner_id'=>$res->owner_id,'serial_number'=>'1','pre_fix'=>$res->pre_fix,'post_fix'=>$res->post_fix,'doc_no_length'=>$res->doc_no_length,'serial_number_type'=>$res->serial_number_type,'start_date'=>$startdate,'end_date'=>$enddate,'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'],'created_date'=>date("Y-m-d H:i:s"));
                     $return['res_item_insertary'] = $insertary;
                     $res1 = $callConfig->insertRecord('application_rental_owner_serial_numbers',$insertary);
-                    $return['res_item'] = $res1;  
-                } 
+                    $return['res_item'] = $res1;
+                }
             }else{
                 $data = 1;
-            }  
+            }
        }
 		return trim($data);
 	}
@@ -2626,7 +2626,7 @@ class rentalUserClass extends userClass{
 
         foreach($paymenttabledata as $paymentalocre){
         	$updatesql = "UPDATE ".$paymentalocre->transaction_table." SET pending_amount=pending_amount-".$paymentalocre->total_paid_amonut.",updated_date='".date('Y-m-d H:i:s')."' WHERE id = ".$paymentalocre->transaction_id;
-			//$updaterow = $callConfig->executeQuery($updatesql); 
+			//$updaterow = $callConfig->executeQuery($updatesql);
 			//$return['updatetransaction'][] = $updatesql;
 			//$return['updatetransactionres'][] = $updaterow;
         }
@@ -2648,7 +2648,7 @@ class rentalUserClass extends userClass{
 			$monthandyear = $startDate->format('M Y');
 			$monthyearkey = $startDate->format('mY');
 			$monthyearary[$monthyearkey] = $monthandyear;
-			$startDate->modify('+1 month'); 
+			$startDate->modify('+1 month');
 		}
 		$return['monthyearary'] = $monthyearary;
 		$customer_condition= "";
@@ -2688,7 +2688,7 @@ class rentalUserClass extends userClass{
 		}
 		$return['property_owner_details'] = $property_owner_details;
 		$invoices = $opening_balance_inv =  array();
-		
+
 		//Start opening balance
 		$ob_rental_invoicessql = "SELECT parent_ref_id, SUM(amount) as amount, SUM(tax_amount) as tax_amount, SUM(total_amount) as total_amount, SUM(pending_amount) as pending_amount FROM rental_invoices WHERE company_id = '".$get['company_id']."' AND is_active =0 AND current_status = '".ST_APPROVED."' AND cancel_invoice = 'N' AND transaction_date <= '".$previouslastdate."' AND party_id IN(".$custids.") GROUP BY parent_ref_id";
 		$return['ob_rental_invoicessql'] = $ob_rental_invoicessql;
@@ -2703,12 +2703,12 @@ class rentalUserClass extends userClass{
 		}
 		$return['opening_balance'] = $opening_balance_inv;
 		//End opening balance
-		
+
 		//$rental_invoicessql = "SELECT transaction_date, parent_ref_id, SUM(if(ref_bill_type = 'OB',total_amount,0)) as ob_total_amount, SUM(if(ref_bill_type = 'OB',pending_amount,0)) as ob_pending_amount, SUM(if(ref_bill_type !='OB',amount,0)) as amount, SUM(if(ref_bill_type !='OB',tax_amount,0)) as tax_amount, SUM(if(ref_bill_type !='OB',total_amount,0)) as total_amount, SUM(if(ref_bill_type !='OB',pending_amount,0)) as pending_amount FROM rental_invoices WHERE company_id = '".$get['company_id']."' AND is_active =0 AND current_status = '".ST_APPROVED."' AND transaction_date >= '".$sdate."' AND transaction_date <=  '".$edate."' GROUP BY MONTH(transaction_date), YEAR(transaction_date),parent_ref_id";
 		$rental_invoicessql = "SELECT transaction_date, parent_ref_id, SUM(amount) as amount, SUM(tax_amount) as tax_amount, SUM(total_amount) as total_amount, SUM(pending_amount) as pending_amount FROM rental_invoices WHERE company_id = '".$get['company_id']."' AND is_active =0 AND current_status = '".ST_APPROVED."'  AND cancel_invoice = 'N' AND transaction_date >= '".$sdate."' AND transaction_date <=  '".$edate."' AND party_id IN(".$custids.") GROUP BY MONTH(transaction_date), YEAR(transaction_date),parent_ref_id";
 		$return['rent_sql'] = $rental_invoicessql;
 		$rental_invoicesres=$callConfig->getAllRows($rental_invoicessql);
-		
+
 		foreach($rental_invoicesres as $ri){
 			$monthyear = date('mY',strtotime($ri->transaction_date));
 			$invoices[$ri->parent_ref_id]['rent'][$monthyear]= $ri;
@@ -2740,7 +2740,7 @@ class rentalUserClass extends userClass{
 
 /**/
 
-		$ob_paymentssql = "SELECT DATE_FORMAT(pay.payment_date, '%m%Y') as payment_month_year, pay.party_id, SUM(pa.total_paid_amonut) as total_paid,ri.parent_ref_id as rental_inv_ref_id,uri.parent_ref_id as rental_utility_inv_ref_id FROM	payments pay, payment_allocations pa LEFT JOIN rental_invoices ri ON ri.id = pa.transaction_id AND pa.transaction_table = 'rental_invoices' AND	pa.company_id = ri.company_id AND pa.is_active = ri.is_active AND ri.cancel_invoice  ='N' LEFT JOIN utility_rental_invoices uri ON uri.id = pa.transaction_id AND pa.transaction_table = 'utility_rental_invoices' AND pa.company_id = uri.company_id AND pa.is_active = uri.is_active AND uri.cancel_invoice  ='N' WHERE	pay.company_id = '1' AND pay.company_id = pa.company_id AND	pay.cancel_payment = 'N' AND pay.payment_date <= '".$previouslastdate."' AND pay.party_id IN(".$custids.") AND pay.id = pa.payment_id AND pay.is_active = 0 AND pay.cancel_payment = 'N' AND pay.is_active = pa.is_active GROUP BY ri.parent_ref_id, uri.parent_ref_id"; 
+		$ob_paymentssql = "SELECT DATE_FORMAT(pay.payment_date, '%m%Y') as payment_month_year, pay.party_id, SUM(pa.total_paid_amonut) as total_paid,ri.parent_ref_id as rental_inv_ref_id,uri.parent_ref_id as rental_utility_inv_ref_id FROM	payments pay, payment_allocations pa LEFT JOIN rental_invoices ri ON ri.id = pa.transaction_id AND pa.transaction_table = 'rental_invoices' AND	pa.company_id = ri.company_id AND pa.is_active = ri.is_active AND ri.cancel_invoice  ='N' LEFT JOIN utility_rental_invoices uri ON uri.id = pa.transaction_id AND pa.transaction_table = 'utility_rental_invoices' AND pa.company_id = uri.company_id AND pa.is_active = uri.is_active AND uri.cancel_invoice  ='N' WHERE	pay.company_id = '1' AND pay.company_id = pa.company_id AND	pay.cancel_payment = 'N' AND pay.payment_date <= '".$previouslastdate."' AND pay.party_id IN(".$custids.") AND pay.id = pa.payment_id AND pay.is_active = 0 AND pay.cancel_payment = 'N' AND pay.is_active = pa.is_active GROUP BY ri.parent_ref_id, uri.parent_ref_id";
 		$ob_paymentsres11=$callConfig->getAllRows($ob_paymentssql);
 		foreach($ob_paymentsres11 as $ob_ri){
 			if($ob_ri->rental_inv_ref_id !=""){
@@ -2752,7 +2752,7 @@ class rentalUserClass extends userClass{
 		$return['opening_balance_payments_month_wyse'] = $opening_balance_payments_month_wyse;
 /**/
 
-		$paymentssql = "SELECT DATE_FORMAT(pay.payment_date, '%m%Y') as payment_month_year, pay.party_id, SUM(pa.total_paid_amonut) as total_paid,ri.parent_ref_id as rental_inv_ref_id,uri.parent_ref_id as rental_utility_inv_ref_id FROM	payments pay, payment_allocations pa LEFT JOIN rental_invoices ri ON ri.id = pa.transaction_id AND pa.transaction_table = 'rental_invoices' AND	pa.company_id = ri.company_id AND pa.is_active = ri.is_active AND ri.cancel_invoice  ='N' LEFT JOIN utility_rental_invoices uri ON uri.id = pa.transaction_id AND pa.transaction_table = 'utility_rental_invoices' AND pa.company_id = uri.company_id AND pa.is_active = uri.is_active AND uri.cancel_invoice  ='N' WHERE	pay.company_id = '1' AND pay.company_id = pa.company_id AND	pay.cancel_payment = 'N' AND pay.payment_date >= '".$sdate."' AND pay.payment_date <=  '".$edate."' AND pay.id = pa.payment_id AND pay.is_active = 0 AND pay.cancel_payment = 'N' AND pay.is_active = pa.is_active GROUP BY YEAR(pay.payment_date), MONTH(pay.payment_date),ri.parent_ref_id, uri.parent_ref_id"; 
+		$paymentssql = "SELECT DATE_FORMAT(pay.payment_date, '%m%Y') as payment_month_year, pay.party_id, SUM(pa.total_paid_amonut) as total_paid,ri.parent_ref_id as rental_inv_ref_id,uri.parent_ref_id as rental_utility_inv_ref_id FROM	payments pay, payment_allocations pa LEFT JOIN rental_invoices ri ON ri.id = pa.transaction_id AND pa.transaction_table = 'rental_invoices' AND	pa.company_id = ri.company_id AND pa.is_active = ri.is_active AND ri.cancel_invoice  ='N' LEFT JOIN utility_rental_invoices uri ON uri.id = pa.transaction_id AND pa.transaction_table = 'utility_rental_invoices' AND pa.company_id = uri.company_id AND pa.is_active = uri.is_active AND uri.cancel_invoice  ='N' WHERE	pay.company_id = '1' AND pay.company_id = pa.company_id AND	pay.cancel_payment = 'N' AND pay.payment_date >= '".$sdate."' AND pay.payment_date <=  '".$edate."' AND pay.id = pa.payment_id AND pay.is_active = 0 AND pay.cancel_payment = 'N' AND pay.is_active = pa.is_active GROUP BY YEAR(pay.payment_date), MONTH(pay.payment_date),ri.parent_ref_id, uri.parent_ref_id";
 		$paymentsres11=$callConfig->getAllRows($paymentssql);
 		$payments_month_wyse =  array();
 		foreach($paymentsres11 as $ri1){
@@ -2773,7 +2773,7 @@ class rentalUserClass extends userClass{
 		}
 		$return['credit_notes'] = $credit_notes;
 		$return['credit_notes_sql'] = $credit_notessql;
-		
+
 		$debit_notessql = "SELECT SUM(cn.total_amount) as total_amount, cn.party_id, ri.parent_ref_id FROM debit_notes cn LEFT JOIN rental_invoices ri ON cn.ref_id = ri.id AND ri.cancel_invoice = 'N' WHERE cn.company_id = '".$get['company_id']."' AND cn.transaction_date <= '".$edate."' AND cn.is_active =0 GROUP BY  ri.parent_ref_id, cn.party_id";
 		$debit_notesres=$callConfig->getAllRows($debit_notessql);
 		$debit_notes =  array();
@@ -2818,7 +2818,7 @@ class rentalUserClass extends userClass{
 		$rental_invoices = $opening_balance_inv =  array();
 		foreach($rental_invoicesres as $ri){
 			if($ri->ref_bill_type =="OB"){
-				$opening_balance_inv[$ri->parent_ref_id][] =$ri; 
+				$opening_balance_inv[$ri->parent_ref_id][] =$ri;
 			}else{
 				$rental_invoices[$ri->id]= $ri;
 			}
@@ -2883,12 +2883,12 @@ class rentalUserClass extends userClass{
 
         $updateary = array('is_active'=>1);
         $callConfig->updateRecord('utility_rental_invoice_item_taxes', $updateary, 'transaction_id', $transaction_id);
-        
+
         $return['res'] = $fieldsToUpdate;
         if (isset($post['utility_rental_invoice_items_id']) && count($post['utility_rental_invoice_items_id']) > 0) {
             foreach ($post['utility_rental_invoice_items_id'] as $key => $tritmid) {
                 $itemData = ['item_quantity' => $post['item_quantity'][$key], 'purchase_uom' => $post['purchase_uom'][$key], 'item_price' => $post['item_price'][$key], 'item_amount' => $post['total_amount'][$key], 'total_amount' => $post['total_amount'][$key], 'description' => $post['description'][$key], 'operation_symbol'=>$post['operation_symbol'][$key],'updated_date' => date('Y-m-d H:i:s'), 'updated_by' => $post['user_id']];
-                
+
                 $utility_gst_switch = $post['utility_gst_switch'][$key];
                 if($post['utility_gst'][$utility_gst_switch] == "Y"){
                 	$itemData['tax_amount'] = $post['utility_gst_total_tax'][$key];
@@ -2900,9 +2900,9 @@ class rentalUserClass extends userClass{
                 $return['items'][] = $resItem;
 
                  if($itemData['tax_amount'] !="" AND $itemData['tax_amount'] !="0"){
-	               
+
 	                 if($post['utility_rental_invoice_item_taxes_id'][$key] !=""){
-	                  	$taxData = ['amount' => $post['total_amount'][$key] ?? null,'tax_amount' => $itemData['tax_amount'] ?? null,'total_amount' => $post['total_amount'][$key] ?? null,'updated_date' => date('Y-m-d H:i:s'), 'updated_by' => $post['user_id']]; 
+	                  	$taxData = ['amount' => $post['total_amount'][$key] ?? null,'tax_amount' => $itemData['tax_amount'] ?? null,'total_amount' => $post['total_amount'][$key] ?? null,'updated_date' => date('Y-m-d H:i:s'), 'updated_by' => $post['user_id']];
 	                  	$return['taxdata'][] = $taxData;
 						$resItem = $callConfig->updateRecord('utility_rental_invoice_item_taxes', $taxData, 'id', $post['tax_ids'][$key]);
 	                  }else{
@@ -2913,7 +2913,7 @@ class rentalUserClass extends userClass{
 	                  $return['tax_items'][] = $res1;
             	 }
             }
-        } 
+        }
         return $return;
 	}
 	public function updateUtilityAMCRentalInvoices($get, $post){
@@ -2925,12 +2925,12 @@ class rentalUserClass extends userClass{
 
         $updateary = array('is_active'=>1);
         $callConfig->updateRecord('utility_amc_rental_invoice_item_taxes', $updateary, 'transaction_id', $transaction_id);
-        
+
         $return['res'] = $fieldsToUpdate;
         if (isset($post['utility_rental_invoice_items_id']) && count($post['utility_rental_invoice_items_id']) > 0) {
             foreach ($post['utility_rental_invoice_items_id'] as $key => $tritmid) {
                 $itemData = ['item_quantity' => $post['item_quantity'][$key], 'purchase_uom' => $post['purchase_uom'][$key], 'item_price' => $post['item_price'][$key], 'item_amount' => $post['total_amount'][$key], 'total_amount' => $post['total_amount'][$key], 'description' => $post['description'][$key], 'operation_symbol'=>$post['operation_symbol'][$key],'updated_date' => date('Y-m-d H:i:s'), 'updated_by' => $post['user_id']];
-                
+
                 $utility_gst_switch = $post['utility_gst_switch'][$key];
                 if($post['utility_gst'][$utility_gst_switch] == "Y"){
                 	$itemData['tax_amount'] = $post['utility_gst_total_tax'][$key];
@@ -2942,9 +2942,9 @@ class rentalUserClass extends userClass{
                 $return['items'][] = $resItem;
 
                  if($itemData['tax_amount'] !="" AND $itemData['tax_amount'] !="0"){
-	               
+
 	                 if($post['utility_rental_invoice_item_taxes_id'][$key] !=""){
-	                  	$taxData = ['amount' => $post['total_amount'][$key] ?? null,'tax_amount' => $itemData['tax_amount'] ?? null,'total_amount' => $post['total_amount'][$key] ?? null,'updated_date' => date('Y-m-d H:i:s'), 'updated_by' => $post['user_id']]; 
+	                  	$taxData = ['amount' => $post['total_amount'][$key] ?? null,'tax_amount' => $itemData['tax_amount'] ?? null,'total_amount' => $post['total_amount'][$key] ?? null,'updated_date' => date('Y-m-d H:i:s'), 'updated_by' => $post['user_id']];
 	                  	$return['taxdata'][] = $taxData;
 						$resItem = $callConfig->updateRecord('utility_amc_rental_invoice_item_taxes', $taxData, 'id', $post['tax_ids'][$key]);
 	                  }else{
@@ -2955,7 +2955,7 @@ class rentalUserClass extends userClass{
 	                  $return['tax_items'][] = $res1;
             	 }
             }
-        } 
+        }
         return $return;
 	}
 	public function getUtilityAMCRentalInvoices($get){

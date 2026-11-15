@@ -1,14 +1,14 @@
-<?php 
+<?php
 /*require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
-use Dompdf\Options;		
+use Dompdf\Options;
 */
 class attendanceUserClass extends userClass{
 	public function attendaceswdatainsert_new($get, $post){
 
 		global $callConfig;
 		$insert = array();
-		//$insert = $callConfig->insertRecord('sw_attendance_data',$post);		
+		//$insert = $callConfig->insertRecord('sw_attendance_data',$post);
 		$data = json_decode($post['data'],1);
 		$query = "SELECT id, emp_code From employees";
 		$emp_datta= $callConfig->getAllRows($query);
@@ -18,10 +18,10 @@ class attendanceUserClass extends userClass{
 		}
 		foreach($data as $dat){
 			$emp_id = $get['employee_id'] ?? 190;
-			// $clock_in="10:00:00";		
+			// $clock_in="10:00:00";
 			// $clock_out="19:00:00";
-			$clock_in=$dat['in_time'] ?? "";		
-			$clock_out=$dat['out_time'] ?? "";	
+			$clock_in=$dat['in_time'] ?? "";
+			$clock_out=$dat['out_time'] ?? "";
 			$attendance_key_short_code = "";
 			if($clock_in != '' && $clock_in != '00:00:00' && $clock_in != '00:00' && ($clock_out == "" || $clock_out == "00:00:00" || $clock_out == "00:00") ){
 				$attendance_key_short_code = 'MP';
@@ -67,24 +67,24 @@ class attendanceUserClass extends userClass{
 				}
 			}
 			$insert_array = array(
-				'company_id' =>$get['company_id'], 
-				'employee_id' =>$emp_id, 
-				'attendance_key_short_code' =>$attendance_key_short_code,  
-				'clock_in' =>$clock_in, 
-				'clock_out' =>$clock_out, 
-				'attendace_date' =>$dat['new_date'] ?? null, 
-				'clock_in_date' =>$dat['new_date'] ?? null, 
-				'check_in_type' =>1, 
-				'check_out_type' =>1, 
+				'company_id' =>$get['company_id'],
+				'employee_id' =>$emp_id,
+				'attendance_key_short_code' =>$attendance_key_short_code,
+				'clock_in' =>$clock_in,
+				'clock_out' =>$clock_out,
+				'attendace_date' =>$dat['new_date'] ?? null,
+				'clock_in_date' =>$dat['new_date'] ?? null,
+				'check_in_type' =>1,
+				'check_out_type' =>1,
 				'clock_out_date' =>$dat['out_date'] ?? null,
-				'in_out' =>0, 
-				'device_type' =>'biometric',  
-				'shift_code' =>$dat['d_ind'] ?? null, 
-				'swipes' =>$dat['biometric_code'] ?? null, 
-				'is_active' =>'0', 
+				'in_out' =>0,
+				'device_type' =>'biometric',
+				'shift_code' =>$dat['d_ind'] ?? null,
+				'swipes' =>$dat['biometric_code'] ?? null,
+				'is_active' =>'0',
 				'current_status' =>'0');
-			
-			$insert[] = $callConfig->insertRecord('employee_daily_attendances',$insert_array);		
+
+			$insert[] = $callConfig->insertRecord('employee_daily_attendances',$insert_array);
 		}
 			// print_r($get); print_r($insert_array); print_r($data); exit;
 		return $insert;
@@ -102,9 +102,9 @@ class attendanceUserClass extends userClass{
 		}
 		$insert = array();
 		foreach($data as $dat){
-			$emp_id = 11;		
+			$emp_id = 11;
 			$insert_array = array('company_id' =>'1', 'employee_id' =>$emp_id, 'attendace_date' =>$dat['new_date'], 'clock_in_date' =>$dat['new_date'], 'clock_in' =>$dat['in_time'], 'check_in_type' =>1, 'check_out_type' =>1, 'clock_out_date' =>$dat['out_date'], 'clock_out' =>$dat['out_time'], 'in_out' =>0, 'device_type' =>'biometric',  'shift_code' =>$dat['d_ind'], 'swipes' =>$dat['biometric_code'], 'is_active' =>'0', 'current_status' =>'0');
-			
+
 			$insert[] = $callConfig->insertRecord('employee_daily_attendances',$insert_array);
 			//print_r($dat); print_r($insert_array); exit;
 		}
@@ -735,7 +735,7 @@ class attendanceUserClass extends userClass{
 	                    $final_clock_out_date ?: $att_date
 	                );
                 }
-                
+
                 $callConfig->updateRecord('pull_employee_attendance', array(
                     'clock_in'                  => $final_clock_in,
                     'clock_in_date'             => $final_clock_in_date,
@@ -756,7 +756,7 @@ class attendanceUserClass extends userClass{
                 );
 
             } else {
-                
+
                 // Fresh insert
                 if($in_out_mode == 1) {
 	                $att_key = $this->getPullEmployeeAttendanceKey(
@@ -768,7 +768,7 @@ class attendanceUserClass extends userClass{
 	                    $clock_out_date ?: $att_date
 	                );
             	}
-                
+
                 $res = $callConfig->insertRecord('pull_employee_attendance', array(
                     'company_id'                => $company_id,
                     'employee_id'               => $emp_id,
@@ -818,7 +818,7 @@ class attendanceUserClass extends userClass{
                 'created_by'     => isset($get['user_id']) ? (int)$get['user_id'] : 0
             ));
         }
-       
+
 
         return array(
             'status'  => 'success',
@@ -957,9 +957,9 @@ class attendanceUserClass extends userClass{
     }
 
     public function fixWrongInPullEmployeeAttendance($get){
-        global $callConfig; 
+        global $callConfig;
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
-        $user_id    = isset($get['user_id']) ? (int)$get['user_id'] : 0; 
+        $user_id    = isset($get['user_id']) ? (int)$get['user_id'] : 0;
         if ($company_id <= 0) {
             return array('status' => 'error', 'message' => 'company_id is required');
         }
@@ -984,11 +984,11 @@ class attendanceUserClass extends userClass{
 
             }
 
-            $raw_in_out_mode = isset($desc['in_out_mode']) ? (int)$desc['in_out_mode'] : null; 
+            $raw_in_out_mode = isset($desc['in_out_mode']) ? (int)$desc['in_out_mode'] : null;
 
             $id_parts = explode('|', (string)($desc['id'] ?? ''));
 
-            $direction_part = $id_parts[0] ?? ''; 
+            $direction_part = $id_parts[0] ?? '';
 
             $derived_in_out_mode = null;
 
@@ -1261,7 +1261,7 @@ class attendanceUserClass extends userClass{
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
         $clock_in_start = '2026-06-30';
         $clock_in_end = '2026-08-01';
-        // $delete_query = " DELETE FROM  employee_daily_attendances 
+        // $delete_query = " DELETE FROM  employee_daily_attendances
         // WHERE clock_in_date > '" . $clock_in_start . "'  AND clock_in_date < '" . $clock_in_end . "'";
         // $result = $callConfig->executeQuery($delete_query);
         // $insert['deleted']= $result;
@@ -1276,7 +1276,7 @@ class attendanceUserClass extends userClass{
         $emp_data= $callConfig->getAllRows($query);
          foreach($emp_data as $emp_dat){
             $emp_code[$emp_dat->b_machine_id] = $emp_dat->id;
-        } 
+        }
 
         $insert = array();
         if (count((array)$biometric_data) > 0) {
@@ -1419,7 +1419,7 @@ class attendanceUserClass extends userClass{
         );
     }
     public function torunnewattendancecodes($get){
- 
+
         global $callConfig;
         //echo "<pre>"; print_r($get); exit;
         $query = "SELECT * FROM `sm_biometric_entry` WHERE `new_date` > '2026-03-31'";
@@ -1440,12 +1440,12 @@ class attendanceUserClass extends userClass{
                 // $emp_id = $get['employee_id'] ?? 190;
                 $dat = (array)$dat;
                 //print_r($dat); exit;
-                $emp_id = $emp_code[$dat['biometric_code']] ?? null;    
+                $emp_id = $emp_code[$dat['biometric_code']] ?? null;
                 //print_r($dat); exit;
-                // $clock_in="10:00:00";        
+                // $clock_in="10:00:00";
                 // $clock_out="19:00:00";
-                $clock_in=$dat['in_time'] ?? "";        
-                $clock_out=$dat['out_time'] ?? "";  
+                $clock_in=$dat['in_time'] ?? "";
+                $clock_out=$dat['out_time'] ?? "";
                 $attendance_key_short_code = "";
 
                  $query = "SELECT * FROM  employee_daily_attendances WHERE attendace_date='".$dat['new_date']."' AND employee_id = ".$emp_id." AND is_active = 0";
@@ -1490,27 +1490,27 @@ class attendanceUserClass extends userClass{
                     }
                 }
 
-                
+
                 if($clock_in != '00:00:00' && $clock_out != "00:00:00"){
                 if(($clock_in != '' && ($clock_in != '00:00:00' || $clock_in != '00:00')) && ($clock_out == "" || $clock_out == "00:00:00" || $clock_out == "00:00") ){
                     $attendance_key_short_code = 'MP';
                 }
                  //print_r($dat); exit;
                 if( ($clock_in != '' && ($clock_in != '00:00:00' || $clock_in != '00:00')) && ($clock_out != "" || $clock_out != "00:00:00" || $clock_out != "00:00") ){
-     
+
                     $query = "SELECT id, shift_id FROM emp_shifts WHERE emp_id = {$emp_id} AND company_id={$get['company_id']} AND is_active=0";
                     $data1= $callConfig->getRow($query);
-     
+
                     if(!empty($data1) && $data1->shift_id > 0){
-     
+
                         $query = "SELECT id, shift_setting_id FROM shifts WHERE id = {$data1->shift_id} AND company_id={$get['company_id']} AND is_active=0";
                         $data2= $callConfig->getRow($query);
-     
+
                         if(!empty($data2) && $data2->shift_setting_id > 0){
-     
+
                             $query = "SELECT * FROM shift_settings WHERE id = {$data2->shift_setting_id} AND company_id={$get['company_id']} AND is_active=0";
                             $data3 = $callConfig->getRow($query);
-     
+
                             if (!empty($data3)) {
                                 $in  = strtotime($clock_in);
                                 $out = strtotime($clock_out);
@@ -1518,17 +1518,17 @@ class attendanceUserClass extends userClass{
                                     $workedMinutes = ($out - $in) / 60;
                                     list($fd_h, $fd_m) = explode(':', $data3->full_day_hours);
                                     $fullDayMinutes = ((int)$fd_h * 60) + (int)$fd_m;
-     
+
                                     list($hd_h, $hd_m) = explode(':', $data3->half_day_hours);
                                     $halfDayMinutes = ((int)$hd_h * 60) + (int)$hd_m;
-     
+
                                     // $graceMinutes = (int)$data3->grace_perieod;
                                     // Grace period (HH:MM:SS) → minutes
                                     $graceParts = explode(':', $data3->grace_perieod);
                                     $g_h = isset($graceParts[0]) ? (int)$graceParts[0] : 0;
                                     $g_m = isset($graceParts[1]) ? (int)$graceParts[1] : 0;
                                     // ignore seconds safely
-                                    $graceMinutes = ($g_h * 60) + $g_m; 
+                                    $graceMinutes = ($g_h * 60) + $g_m;
                                     if ($workedMinutes < ($fullDayMinutes - $graceMinutes) && $workedMinutes >= $halfDayMinutes) {
                                         $attendance_key_short_code = 'Z';
                                     }elseif ($workedMinutes < $halfDayMinutes) {
@@ -1543,35 +1543,35 @@ class attendanceUserClass extends userClass{
                 }
 
                 $insert_array = array(
-                    'company_id' =>$get['company_id'], 
-                    'employee_id' =>$emp_id, 
-                    'attendance_key_short_code' =>$attendance_key_short_code,  
-                    'clock_in' =>$clock_in, 
-                    'clock_out' =>$clock_out, 
-                    'attendace_date' =>$dat['new_date'] ?? null, 
-                    'clock_in_date' =>$dat['new_date'] ?? null, 
-                    'check_in_type' =>1, 
-                    'check_out_type' =>1, 
+                    'company_id' =>$get['company_id'],
+                    'employee_id' =>$emp_id,
+                    'attendance_key_short_code' =>$attendance_key_short_code,
+                    'clock_in' =>$clock_in,
+                    'clock_out' =>$clock_out,
+                    'attendace_date' =>$dat['new_date'] ?? null,
+                    'clock_in_date' =>$dat['new_date'] ?? null,
+                    'check_in_type' =>1,
+                    'check_out_type' =>1,
                     'clock_out_date' =>$dat['out_date'] ?? null,
-                    'in_out' =>0, 
-                    'device_type' =>'biometric',  
-                    'shift_code' =>$dat['d_ind'] ?? null, 
-                    'swipes' =>$dat['biometric_code'] ?? null, 
-                    'is_active' =>'0', 
+                    'in_out' =>0,
+                    'device_type' =>'biometric',
+                    'shift_code' =>$dat['d_ind'] ?? null,
+                    'swipes' =>$dat['biometric_code'] ?? null,
+                    'is_active' =>'0',
                     'current_status' =>'0');
-                
 
-               
-                
+
+
+
                 if(count((array)$cgtgdata)>0){
                     //echo "----1---";
                     $whrcon = "id=".$cgtgdata->id;
                     $insert[] = $callConfig->updateRecord('employee_daily_attendances',$insert_array,'','',$whrcon);
-                    
+
                 }else{
                     //echo "----2---";
                     $insert[] = $callConfig->insertRecord('employee_daily_attendances',$insert_array);
-                    
+
                 }
                 $allinsert_array[] =$insert_array;
                 }
@@ -1579,7 +1579,7 @@ class attendanceUserClass extends userClass{
             //echo "<pre>";print_r($allinsert_array); exit;
             // print_r($get); print_r($insert_array); print_r($data); exit;
             //echo "<pre>";print_r($insert); print_r($cgtgdata);print_r($insert_array); print_r($dat); exit;
-        
+
         return $insert;
     }
 

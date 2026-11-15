@@ -1,4 +1,4 @@
-<?php 
+<?php
 class manufacturingUserClass extends userClass{
 	public function getManufacturingBOMS($get)
 	{
@@ -14,7 +14,7 @@ class manufacturingUserClass extends userClass{
 
 		}elseif($get['gettype'] =="SELECTMANUFACTURINGOPERATION"){
 			$manufacturing_operation_id = $get['manufacturing_operation_id'];
-			
+
 			$locsql = "SELECT * FROM manufacturing_operations WHERE company_id =" . $get['company_id'] . " AND id = ".$manufacturing_operation_id." AND is_active = 0";
 			$locres = $callConfig->getRow($locsql);
 			$return['SELECTMANUFACTURINGOPERATION'] = $locres;
@@ -22,10 +22,10 @@ class manufacturingUserClass extends userClass{
 			$locsql1 = "SELECT * FROM manufacturing_operations WHERE company_id =" . $get['company_id'] . " AND parent_id = ".$manufacturing_operation_id." AND is_active = 0";
 			$locres1 = $callConfig->getAllRows($locsql1);
 			$return['SELECTMANUFACTURINGOPERATION_MACHINE'] = $locres1;
-		
+
 		}elseif($get['gettype'] =="SELECTMANUFACTURINGOPERATIONMACHINE"){
 			$manufacturing_operation_id = $get['manufacturing_operation_id'];
-			
+
 			$locsql = "SELECT * FROM manufacturing_operations WHERE company_id =" . $get['company_id'] . " AND id = ".$manufacturing_operation_id." AND is_active = 0";
 			$locres = $callConfig->getRow($locsql);
 			$return['SELECTMANUFACTURINGOPERATION'] = $locres;
@@ -151,8 +151,8 @@ class manufacturingUserClass extends userClass{
 			$return['manufacturing_boms'] = $res;
 			$rid = $res['LASTID'];
 		}
-		if($rid !=""){ 
-			foreach($materialItemIds as $seq=>$itmid){ 
+		if($rid !=""){
+			foreach($materialItemIds as $seq=>$itmid){
 				if(intval($itmid) <= 0 || floatval($post['quantity'][$seq] ?? 0) <= 0){
 					continue;
 				}
@@ -189,7 +189,7 @@ class manufacturingUserClass extends userClass{
 				}
 			}
 
-			foreach((array)($post['byitem_item_id'] ?? array()) as $seq=>$itmid){ 
+			foreach((array)($post['byitem_item_id'] ?? array()) as $seq=>$itmid){
 				if(intval($itmid) <= 0){
 					continue;
 				}
@@ -209,7 +209,7 @@ class manufacturingUserClass extends userClass{
 				}
 			}
 
-			foreach((array)($post['manufacturing_operation_id'] ?? array()) as $seq=>$opertid){ 
+			foreach((array)($post['manufacturing_operation_id'] ?? array()) as $seq=>$opertid){
 				if(intval($opertid) <= 0){
 					continue;
 				}
@@ -253,7 +253,7 @@ class manufacturingUserClass extends userClass{
 	public function getmanufacturingworkorders($get){
 		global $callConfig;
 		$return = array();
-		
+
 		if($get['gettype'] =="SELECTMANUFACTURINGFIRMORDER"){
 			$sql = "SELECT mfo.id, mfo.product_id, mfo.year_month, mfo.firm_month_1, mfo.firm_qty_1, firm.firm_order_no, itm.sku, itm.item_name, itm.stocking_type, itm.sale_uom, uoms.uom_name FROM manufacturing_firm_order_items mfo INNER JOIN manufacturing_firm_orders firm ON firm.company_id = mfo.company_id AND firm.id = mfo.manufacturing_firm_order_id AND firm.is_active = mfo.is_active AND firm.current_status = ".ST_APPROVED." LEFT JOIN items itm ON mfo.company_id = itm.company_id AND mfo.product_id = itm.id AND mfo.is_active = itm.is_active LEFT JOIN unit_of_measurements uoms ON uoms.company_id = itm.company_id AND uoms.id = itm.sale_uom AND uoms.is_active = itm.is_active WHERE mfo.company_id =".$get['company_id']." AND mfo.id = '".$get['manufacturing_firm_order_id']."' AND mfo.is_active = 0 AND NOT EXISTS (SELECT 1 FROM manufacturing_work_orders used WHERE used.company_id = mfo.company_id AND used.manufacturing_firm_order_id = mfo.id AND used.is_active = 0 AND used.current_status != ".ST_REJECTED.")";
 			$res = $callConfig->getRow($sql);
@@ -357,7 +357,7 @@ class manufacturingUserClass extends userClass{
 			}
 
 		}
-	
+
 		return $return;
 	}
 	public function insertManufacturingWorkOrders($get, $post){
@@ -480,8 +480,8 @@ class manufacturingUserClass extends userClass{
 		}
 
 
-		if($rid !=""){ 
-			foreach($post['item_id'] as $seq=>$itmid){ 
+		if($rid !=""){
+			foreach($post['item_id'] as $seq=>$itmid){
 				$manufacturingMethod = strtoupper(trim($post['manufacturing_method'][$seq] ?? 'INHOUSE'));
 				$componentItem = $callConfig->getRow("SELECT id, stocking_type FROM items WHERE company_id='".$companyId."' AND id='".intval($post['item_id'][$seq])."' AND is_active=0");
 				$isWipComponent = (!empty($componentItem->id) && $componentItem->stocking_type == 'W');
@@ -493,7 +493,7 @@ class manufacturingUserClass extends userClass{
 					$warehouseId = $post['warehouse_id'][$seq] != '' ? intval($post['warehouse_id'][$seq]) : NULL;
 				}
 				$postdata = array('company_id'=>$post['company_id'],'transaction_id'=>$rid,'item_id'=>$post['item_id'][$seq],'uom'=>$post['uom'][$seq],'request_qty'=>$post['request_qty'][$seq],'bom_qty'=>$post['bom_qty'][$seq],'description'=>$post['description'][$seq],'scrap'=>$post['scrap'][$seq],'party_id'=>$partyId,'warehouse_id'=>$warehouseId,'bom_manufacturing_operation_id'=>$post['bom_manufacturing_operation_id'][$seq],'rate'=>$post['rate'][$seq],'amount'=>$post['amount'][$seq],'is_active'=>0);
-				
+
 				if($post['manufacturing_work_order_item_id'][$seq]!="" AND $post['form_updatetion_type'] == "update"){
 					$postdata['updated_date'] = date('Y-m-d H:i:s');
 					$postdata['updated_by'] = $post['user_id'];
@@ -509,10 +509,10 @@ class manufacturingUserClass extends userClass{
 			}
 
 			if(isset($post['byitem_item_id']) && count((array)$post['byitem_item_id']) > 0){
-				foreach($post['byitem_item_id'] as $seq=>$itmid){ 
+				foreach($post['byitem_item_id'] as $seq=>$itmid){
 					if($itmid != ""){
 						$postdata = array('company_id'=>$post['company_id'],'transaction_id'=>$rid,'byitem_item_id'=>$post['byitem_item_id'][$seq],'byitem_uom'=>$post['byitem_uom'][$seq],'byitem_quantity'=>$post['byitem_quantity'][$seq],'byitem_description'=>$post['byitem_description'][$seq],'is_active'=>0);
-						
+
 						if($post['manufacturing_work_order_items_by_product_id'][$seq]!="" AND $post['form_updatetion_type'] == "update"){
 							$postdata['updated_date'] = date('Y-m-d H:i:s');
 							$postdata['updated_by'] = $userId;
@@ -529,9 +529,9 @@ class manufacturingUserClass extends userClass{
 				}
 			}
 
-			foreach($post['manufacturing_operation_id'] as $seq=>$itmid){ 
+			foreach($post['manufacturing_operation_id'] as $seq=>$itmid){
 				$postdata = array('company_id'=>$post['company_id'],'transaction_id'=>$rid,'manufacturing_operation_id'=>$post['manufacturing_operation_id'][$seq],'operation_time'=>$post['operation_time'][$seq],'operation_manpower'=>$post['operation_manpower'][$seq],'operation_note'=>$post['operation_note'][$seq],'manufacturing_operation_machine_id'=>$post['manufacturing_operation_machine_id'][$seq],'operation_cost_per_hours'=>$post['operation_cost_per_hours'][$seq],'operation_total'=>$post['operation_total'][$seq],'is_active'=>0);
-				
+
 				if($post['manufacturing_work_order_operation_id'][$seq]!="" AND $post['form_updatetion_type'] == "update"){
 					$postdata['updated_date'] = date('Y-m-d H:i:s');
 					$postdata['updated_by'] = $userId;
@@ -546,7 +546,7 @@ class manufacturingUserClass extends userClass{
 				}
 			}
 
-		}	
+		}
 		return $return;
 	}
 
@@ -715,7 +715,7 @@ class manufacturingUserClass extends userClass{
 
 				$mbomisql = "SELECT mbi.*, itm.sku, itm.item_name, itm.purchase_expense_account FROM manufacturing_bom_items mbi LEFT JOIN items itm ON mbi.company_id = itm.company_id AND mbi.item_id = itm.id AND mbi.is_active = itm.is_active WHERE mbi.company_id =".$get['company_id']." AND mbi.manufacturing_bom_id IN (".$mbomsid.") AND mbi.is_active = 0";
 				$mbomires = $callConfig->getAllRows($mbomisql);
-				
+
 				foreach($mbomires as $mbomires1){
 					$manufacturing_bomslist[$mbomires1->manufacturing_bom_id]['child_item'][]= $mbomires1;
 				}
@@ -731,13 +731,13 @@ class manufacturingUserClass extends userClass{
 			$bommain = $boms['main'];
 			$manufacturing_work_order_item = $manufacturing_work_order_items[$bommain->bom_item_id][0];
 			$manufacturing_boms_qty = ($bommain->bom_quantity!="" AND $bommain->bom_quantity!="0")?$bommain->bom_quantity:1;
-			$workorderitemqty = ($manufacturing_work_order_item->request_qty/$manufacturing_boms_qty);	
+			$workorderitemqty = ($manufacturing_work_order_item->request_qty/$manufacturing_boms_qty);
 			if(intval($manufacturing_work_order_item->party_id) > 0){
 				$return['subcontract_work_orders'][] = $this->createSubcontractWorkOrderFromManufacturingWip($mwores, $manufacturing_work_order_item, $bomid, $boms, $get, $workorderitemqty);
 				continue;
 			}
 			$postdata = array('company_id'=>$get['company_id'],'originator'=>$mwores->originator,'transaction_date'=>$this->dateconvertdbformat($mwores->transaction_date),'parent_manufacturing_work_order_id'=>$transaction_id,'manufacturing_firm_order_id'=>NULL,'work_order_item_id'=>$bommain->bom_item_id,'work_order_item_qty'=>$workorderitemqty,'manufacturing_bom_id'=>$bomid,'planned_start_date'=>$this->dateconvertdbformat($mwores->planned_start_date),'planned_end_date'=>$this->dateconvertdbformat($mwores->planned_end_date),'warehouse'=>$mwores->warehouse,'is_active'=>0,'current_status'=>0,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$get['user_id']);
-			
+
 			$transaction_no	= $this->toGetApplicationSerialNumber('manufacturing_work_orders',$get);
 			$postdata['transaction_no'] = $transaction_no;
 			$res=$callConfig->insertRecord('manufacturing_work_orders',$postdata);

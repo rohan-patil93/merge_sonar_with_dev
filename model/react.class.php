@@ -1,12 +1,12 @@
-<?php 
+<?php
 class reactClass extends userClass{
 	public function dynamicadddatareact($get, $data){
 		global $callConfig;
-		
+
 		$data['company_id'] = $get['company_id'];
 		$data['is_active'] = '0';
 		$data['current_status'] = '0';
-		$data['created_by'] = $get['user_id']; 
+		$data['created_by'] = $get['user_id'];
 		$data['created_date'] = date("Y-m-d H:i:s");
     	//print_r($post); exit;
 		$res=$callConfig->insertRecord($get['table'],$data);
@@ -34,7 +34,7 @@ class reactClass extends userClass{
 		$whr ='is_active=0';
 		$field = '*';
 		if($_GET['fid'] !='' && $_GET['rid'] !=''){
-			
+
 			$rid = $_GET['rid'] !='' ? $_GET['rid'] : '';
 			$fid = $_GET['fid'] !='' ? $_GET['fid'] : '';
 			$whr = $fid."='".$rid."'";
@@ -45,7 +45,7 @@ class reactClass extends userClass{
 		if($_GET['field'] !=''){
 
 			$field = $_GET['field'] !='' ? $_GET['field'] : '*';
-			
+
 		}
 		//echo "hai".$orderby; exit;
 		$res = $this->getAllTablesData($_GET['table'],'*',$whr,$orderby);
@@ -63,7 +63,7 @@ class reactClass extends userClass{
 		$select = $query['0']." ".$search." ORDER ".$query['1'];
 		$array['value_field'] = $dis_data->value_field;
 		$array['display_field'] = $dis_data->display_field;
-		$listdata = $callConfig->getAllRows($select); 
+		$listdata = $callConfig->getAllRows($select);
 		$array['data'] = $listdata;
 		return $array;
 		//print_r($get); exit;*/
@@ -94,12 +94,12 @@ class reactClass extends userClass{
 		$rolepermission['role_permission_pages'] = $rolepermission['permission'];
 
 		$query = "SELECT * FROM application_menu WHERE company_id =".$get['company_id']." AND aplication_module = '".$defaultmoduleid."' AND is_active = 0 ORDER BY display_priority ASC";
-		$application_menu = $callConfig->getAllRows($query); 
+		$application_menu = $callConfig->getAllRows($query);
 		$rolepermission['application_menu'] = $application_menu;
 
 		$whrs = " company_id =".$get['company_id']." AND is_active= 0";
 		$query = $callConfig->selectQuery('application_pages','*',$whrs,'','','');
-		$pagesrow = $callConfig->getAllRows($query); 
+		$pagesrow = $callConfig->getAllRows($query);
 		$rolepermission['application_pages'] = $pagesrow;
 
 		$return['application_menu_LN'] = $this->toGETNavDetails('LN',$admin_type,$rolepermission);
@@ -115,12 +115,12 @@ class reactClass extends userClass{
 		$menu  = $rolepermission['application_menu'];
 	//echo $type."<pre>";print_r($menu); //exit;
 
-		foreach ($menu as $key => $value) { 
+		foreach ($menu as $key => $value) {
 			if($value->menu_location == $type && $value->parent_menu == 0){
 
 				if($admin_type=='0'){
 			  //echo "Ravi";
-			  //echo "if the loopt".$key;	
+			  //echo "if the loopt".$key;
 					if(in_array($value->page_name,(array)$rolepermission['application_no_permission_pages']['option'])){
 						$res = 1;
 					}else{
@@ -142,7 +142,7 @@ class reactClass extends userClass{
 				$array[$value->id]['Page_Name'] =  $value->page_name;
 				$array[$value->id]['dashboard'] =  $value->dashboard;
 				$array[$value->id]['child'] = $child;
-			} 
+			}
 		}
 		if($admin_type=='0'){
 			$array = $this->menurecheck($array);
@@ -191,7 +191,7 @@ class reactClass extends userClass{
 		$return = 0;
 	//echo  $name; //exit;
 	//echo "<pre>"; print_r($_SESSION['role_permission']);print_r($_SESSION['role_permission']);
-	//rohan added page with paramiter passe tis time not working 
+	//rohan added page with paramiter passe tis time not working
 		if(strpos($name,'&')){
 			$explode = explode('&', $name);
 			$name = $explode[0];
@@ -215,7 +215,7 @@ class reactClass extends userClass{
 		}
 		if($return == 0){
 			if( isset($rolepermission['role_page_permission'][$name]) && $rolepermission['role_page_permission'][$name]['permission_list'] == 0){
-				$return =1;	
+				$return =1;
 			}
 		}
 
@@ -223,10 +223,10 @@ class reactClass extends userClass{
 		if(isset($rolepermission['role_permission'][$table][$approvaltype]) && $rolepermission['role_permission'][$table][$approvaltype] == 0){
 			$return =1;
 		}
-	//print_r($_SESSION['role_permission']);	
+	//print_r($_SESSION['role_permission']);
 	//echo $table." -- ".$type." --- ".$return."</br></br>"; //exit;
 	//approval check
-		return $return; 
+		return $return;
 	}
 
 
@@ -262,8 +262,8 @@ class reactClass extends userClass{
 			//$array1[$value->id]['child'] = $rolepermission;
 			}
 		}
-		return $array1; 
-	} 
+		return $array1;
+	}
 	public function getParentidmenuscheck($pid,$len,$admin_type,$rolepermission){
 		$menu  = $rolepermission['application_menu'];
 		foreach ($menu as $key => $value) {
@@ -286,7 +286,7 @@ class reactClass extends userClass{
     //print_r($res);
 			if($res->id !=""){
     	//echo "iiiiii";
-				$value = (array)$res;	    
+				$value = (array)$res;
 				if($value['list_page_name']==$name){	$type = 'list';	}
 				if($value['insert_page_name']==$name){	$approvaltype = 'approval';	}
 				if($value['insert_page_name']==$name){	$type = 'insert'; }
@@ -300,23 +300,23 @@ class reactClass extends userClass{
 				$return['page'] = $pp_name;
 				if($value[$page_type]==2){
 					$disptemp = "views/".$pp_name.".php";
-					$return['page'] = strtolower(str_replace("COM","CUSTOME",$name)); 
-					/*if (!file_exists($disptemp)){ 
-						$return['page'] = '404.php'; 
+					$return['page'] = strtolower(str_replace("COM","CUSTOME",$name));
+					/*if (!file_exists($disptemp)){
+						$return['page'] = '404.php';
 					}*/
 				}
 				$return['other'] = $value;
 			}else{
 			//echo "iiiiiisss";
 				$disptemp = "views/".$name.".php";
-				$return['page'] = strtolower(str_replace("COM","CUSTOME",$name)); 
-					/*if (!file_exists($disptemp)){ 
-						$return['page'] = '404.php'; 
+				$return['page'] = strtolower(str_replace("COM","CUSTOME",$name));
+					/*if (!file_exists($disptemp)){
+						$return['page'] = '404.php';
 					}*/
 				}
 				return $return;
 			}
-			
+
 			public function insertcontractsreact($get, $post){
 				global $callConfig;
 				$return = [];
@@ -341,7 +341,7 @@ class reactClass extends userClass{
 						if($post['contact_persons']['name'][$key] !="" AND $post['contact_persons']['number'][$key]!=""){
 							$contact_personsary[] =  array('name'=>$post['contact_persons']['name'][$key],'email'=>$post['contact_persons']['email'][$key],'number'=>$post['contact_persons']['number'][$key]);
 						}
-					}	
+					}
 				}
 				$contact_persons = json_encode($contact_personsary);
 
@@ -541,10 +541,10 @@ class reactClass extends userClass{
 					foreach($seluserres as $seluser){
 						if($seluser->id == $insert_array['originator']){
 								$originatordetailary = $seluser;
-						} 
+						}
 						if($seluser->id == $get['user_id']){
 								$updatedby = $seluser;
-						} 
+						}
 						$emailuserdetails[$seluser->id] = $seluser;
 					}
 					foreach($emailuserdetails as $seluser){
@@ -556,17 +556,17 @@ class reactClass extends userClass{
 						$emailarray['session_company_id'] = $seluser->company_id;
 						$emailarray['default_module_id'] = 40;
 						$emailarray['created_by'] = $get['user_id'];
-						$emailarray['contract_creation_or_updation'] = $contract_creation_or_updation;		
+						$emailarray['contract_creation_or_updation'] = $contract_creation_or_updation;
 						$emailarray['contract_name'] = $insert_array['transaction_no']." - ".$insert_array['contract_name'];
 						$emailarray['contract_user_name'] = $originatordetailary->display_name;;
 						$emailarray['contract_update_datetime'] = date('Y-m-d H:i:s');
 						$emailarray['contract_update_by'] = $updatedby->display_name;
-						
+
 						$msg = "Contract ".$insert_array['contract_name']." - ".$insert_array['transaction_no']." has been created successfully.";
 						$notarry = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$contract_id,'application_table_name'=>'contracts','type'=>'INFORMATION', 'notification_users'=>$notification_users,'option'=>$option,'assigner_id'=>$get['user_id']);
 						$sendnotification =$this->sendNotificationAndEmails($notarry,$emailarray,75);
 					}
-				}	
+				}
 				$control_array = array(
 					'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]),
 					'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]),
@@ -659,7 +659,7 @@ class reactClass extends userClass{
 				foreach($permisires as $perms){
 					$permision_contract_id[$perms->contract_id] = $perms->contract_id;
 				}
-				
+
 				if(count((array)$permision_contract_id) != 0){
 					$expcanid = implode(',',$permision_contract_id);
 					if($get['admin_type']!=1){
@@ -676,7 +676,7 @@ class reactClass extends userClass{
 				global $callConfig;
 				$return = array();
 				$return['get'] = $get;
-				$admin_or_user_whr = $this->adminOrUserOrFM($get); 
+				$admin_or_user_whr = $this->adminOrUserOrFM($get);
 				if($get['api_type'] == "listpage"){
 
 						$paymenttermssql = "SELECT `id`, `payment_term_name` FROM payment_terms WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY payment_term_name ASC";
@@ -694,7 +694,7 @@ class reactClass extends userClass{
 							$locations[$red->id] = $red;
 						}
 						$return['locations'] = $locations;
-						
+
 						$gencsql = "SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY agreement_name ASC";
 						$gencres = $callConfig->getAllRows($gencsql);
 						if (count((array)$gencres) == 0) {
@@ -705,7 +705,7 @@ class reactClass extends userClass{
 						foreach($gencres as $red){
 							$agreement_type[$red->genc_detail_code] = $red;
 						}
-						$return['agreement_type'] = $agreement_type;						
+						$return['agreement_type'] = $agreement_type;
 						$sql = "SELECT id, department_name FROM departments WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
 						$res = $callConfig->getAllRows($sql);
 						$departments = array();
@@ -738,7 +738,7 @@ class reactClass extends userClass{
 						}
 						$return['vendors'] = $vendors;
 
-						
+
 						$condition = "";
 						if($get['party_id'] !=""){
 							$condition .= " AND party_id = '".$get['party_id']."'";
@@ -767,7 +767,7 @@ class reactClass extends userClass{
 			 			if($get['is_amc_contract'] !=""){
 							$condition .= " AND is_amc_contract = '".$get['is_amc_contract']."'";
 						}
-			 			
+
 			 			$cntsql = "SELECT COUNT(id) as cnt FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0".$condition.$admin_or_user_whr;
 			     		$cntres =  $callConfig->getRow($cntsql);
 			     		$return['total_record_cnt'] = $cntres;
@@ -778,7 +778,7 @@ class reactClass extends userClass{
 						$current_page = max(1, min($current_page, $total_pages));
 						$start_from = ($current_page - 1) * $get['limit_select'];
 						$return['total_pages'] = $total_pages;
-							
+
 						$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0".$condition.$admin_or_user_whr." LIMIT ".$start_from.", ".$get['limit_select'];
 						$contractsres = $callConfig->getAllRows($contractssql);
 						$return['contractssql'] = $contractssql;
@@ -823,28 +823,28 @@ class reactClass extends userClass{
 				global $callConfig;
 				$return = [];
 				$return['get'] = $get;
-				$return['post'] = $post; 
+				$return['post'] = $post;
 				if (!empty($post['documents_meta'])) {
 					$documentsMeta = json_decode($post['documents_meta'], true);
 					if (json_last_error() !== JSON_ERROR_NONE) {
 						$return['error'] = "Invalid JSON in documents_meta";
 						return $return;
-					} 
+					}
 					$processedDocumentTypes = [];
 					if (!empty($post['processed_document_types'])) {
 						$processedDocumentTypes = json_decode($post['processed_document_types'], true) ?: [];
-					} 
-					foreach ($processedDocumentTypes as $documentTypeId) { 
+					}
+					foreach ($processedDocumentTypes as $documentTypeId) {
 						$existingQuery = "SELECT id, file_name FROM contract_documents WHERE contract_id = '" . addslashes($post['contract_id']) . "' AND document_list_id = '" . addslashes($documentTypeId) . "' AND is_active = 0";
-						$existingDocs = $callConfig->getAllRows($existingQuery); 
+						$existingDocs = $callConfig->getAllRows($existingQuery);
 						$keepDocIds = [];
 						foreach ($documentsMeta as $doc) {
 							if ($doc['document_list_id'] == $documentTypeId && !empty($doc['Rid'])) {
 								$keepDocIds[] = $doc['Rid'];
 							}
-						} 
+						}
 						foreach ($existingDocs as $existingDoc) {
-							if (!in_array($existingDoc->id, $keepDocIds)) { 
+							if (!in_array($existingDoc->id, $keepDocIds)) {
 								$deleteArray = [
 									'is_active' => NULL, 'updated_by' => $post['user_id'], 'updated_date' => date('Y-m-d H:i:s')
 								];
@@ -857,17 +857,17 @@ class reactClass extends userClass{
 								}
 							}
 						}
-					} 
+					}
 					foreach ($documentsMeta as $index => $doc) {
-						$action = $doc['action'] ?? 'new_upload'; 
-						if ($action === 'keep_existing' && !empty($doc['Rid'])) { 
+						$action = $doc['action'] ?? 'new_upload';
+						if ($action === 'keep_existing' && !empty($doc['Rid'])) {
 							$fileName = $doc['file_name'] ?? null;
 							if ($fileName) {
 								$update_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'updated_by' => $post['user_id'], 'updated_date' => date('Y-m-d H:i:s') ];
 								$res = $callConfig->updateRecord('contract_documents', $update_array, 'id', $doc['Rid']);
 								$return['update_results'][] = ['Rid' => $doc['Rid'], 'result' => $res];
 							}
-						} elseif ($action === 'new_upload') { 
+						} elseif ($action === 'new_upload') {
 							$fileName = $doc['file_name'] ?? null;
 							if ($fileName) {
 								$insert_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'company_id' => $post['company_id'], 'is_active' => 0, 'created_by' => $post['user_id'], 'created_date' => date('Y-m-d H:i:s') ];
@@ -883,7 +883,7 @@ class reactClass extends userClass{
 				} else {
 					$return['error'] = "No documents_meta found in POST data";
 					return $return;
-				} 
+				}
 				return $return;
 			}
 
@@ -997,7 +997,7 @@ class reactClass extends userClass{
 		$return['post'] = $post;
 		$return['get'] = $get;
 
-		try { 
+		try {
 			$Rid = $post['Rid'] ?? null;
 
 			$stepsPermissionsValue = null;
@@ -1014,12 +1014,12 @@ class reactClass extends userClass{
 
 			$workflow_array = array( 'contract_id' => $post['contract_id'] ?? null, 'workflow_steps' => $post['workflow_steps'] ?? null, 'steps_permissions' => $stepsPermissionsValue,);
 
-			if (!empty($Rid)) { 
+			if (!empty($Rid)) {
 				$workflow_array['updated_by'] = $get['user_id'] ?? ($post['user_id'] ?? 459);
 				$workflow_array['updated_date'] = date('Y-m-d H:i:s');
 				$res = $callConfig->updateRecord('workflows_contract', $workflow_array, 'id', $Rid);
 				$return['workflow_result'] = $res;
-			} else { 
+			} else {
 				$workflow_array['company_id'] = $get['company_id'] ?? ($post['company_id'] ?? 1);
 				$workflow_array['is_active'] = 0;
 				$workflow_array['created_by'] = $get['user_id'] ?? ($post['user_id'] ?? 459);
@@ -1074,12 +1074,12 @@ class reactClass extends userClass{
 
 		$insert_array = array( 'contract_id' => $post['contract_id'], 'user' => $post['user'], 'basic_permissions' => $basic_permissions, 'document_permissions' => $document_permissions );
 
-		if (!empty($post['Rid'])) { 
+		if (!empty($post['Rid'])) {
 			$insert_array['updated_by'] = $post['user_id'];
 			$insert_array['updated_date'] = date('Y-m-d H:i:s');
 			$res = $callConfig->updateRecord('contract_permissions', $insert_array, 'id', $post['Rid']);
 			$return['permission_result'] = $res;
-		} else { 
+		} else {
 			$insert_array['company_id'] = $post['company_id'];
 			$insert_array['is_active'] = 0;
 			$insert_array['created_by'] = $post['user_id'];
@@ -1232,7 +1232,7 @@ class reactClass extends userClass{
 		$return['result'] = $activityres;
 		return $return;
 	}
-	
+
 	public function insertCustomersreact($get, $post)
 	{
 		global $callConfig;
@@ -1428,7 +1428,7 @@ class reactClass extends userClass{
 		foreach($permisires as $perms){
 			$permision_contract_id[$perms->contract_id] = $perms->contract_id;
 		}
-		
+
 		if(count((array)$permision_contract_id) != 0){
 			$expcanid = implode(',',$permision_contract_id);
 			if($get['admin_type']!=1){
@@ -1497,7 +1497,7 @@ class reactClass extends userClass{
 		$return =array();
 		$return['post'] = $post;
 		$insert_array = array('contract_id'=>$post['contract_id'],'transaction_date'=>date('Y-m-d H:i:s'),'activation_date'=>$this->dateconvertdbformat($post['activation_date']),'recharge_date'=>$this->dateconvertdbformat($post['recharge_date']),'expiry_date'=>$this->dateconvertdbformat($post['expiry_date']),'plan_duration'=>$this->dateconvertdbformat($post['plan_duration']));
-		if($post['Rid']!=""){ 
+		if($post['Rid']!=""){
 			$insert_array['updated_by']=$get['user_id'];
 			$insert_array['updated_date']=date('Y-m-d H:i:s');
 			$res=$callConfig->updateRecord('contract_recharge_details',$insert_array,'id',$post['Rid']);
@@ -1521,7 +1521,7 @@ class reactClass extends userClass{
 		$displayattributessql = "SELECT `id`, `list_attributes`, `insert_attributes`, `additional_attributes`, `file_upload`, `help_text` FROM display_attributes WHERE company_id =" . $get['company_id'] . " AND application_table_name = 'contracts' AND is_active = 0 ORDER BY id ASC";
 		$displayattributesres = $callConfig->getRow($displayattributessql);
 		$return['displayattributesres'] = $displayattributesres;
-		$admin_or_user_whr = $this->adminOrUserOrFM($get); 
+		$admin_or_user_whr = $this->adminOrUserOrFM($get);
 		$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ".$admin_or_user_whr." ORDER BY id ASC";
 		$contractsres = $callConfig->getAllRows($contractssql);
 		$return['contractsres'] = $contractsres;
@@ -1591,23 +1591,23 @@ class reactClass extends userClass{
 		$desres = $callConfig->getAllRows($dessql);
 		$return['desres'] = $desres;
 
-		$today = date('Y-m-d'); 
+		$today = date('Y-m-d');
 		$contractsres['renewal_frequency'] = "quaterly";
-		switch (strtolower($contractsres['renewal_frequency'])) 
-		{ 
-			case 'onday': 
-			 	$reminderDays = 1; 
-				break; 
-			case 'weekly': 
-				$reminderDays = 7; 
-				break; 
-			case 'monthly': 
-				$reminderDays = 30; 
-				break; 
-			case 'quarterly': 
-				$reminderDays = 90; 
-				break; 
-			default: 
+		switch (strtolower($contractsres['renewal_frequency']))
+		{
+			case 'onday':
+			 	$reminderDays = 1;
+				break;
+			case 'weekly':
+				$reminderDays = 7;
+				break;
+			case 'monthly':
+				$reminderDays = 30;
+				break;
+			case 'quarterly':
+				$reminderDays = 90;
+				break;
+			default:
 				$reminderDays = 90;
 		}
 
@@ -1615,33 +1615,33 @@ class reactClass extends userClass{
 		$expiringContracts = $callConfig->getAllRows($expirySql);
 		$return['expiringContracts'] = $expirySql;
 
-		if (!empty($expiringContracts)) { 
+		if (!empty($expiringContracts)) {
 			// $contractNames = implode(', ', array_column($expiringContracts, 'contract_name'));
 			// $msglist = "The following contracts are expiring soon: $contractNames.";
-			// $useridd[$user_id] = $get['user_id']; 
-			// $notarry = array('company_id' => $get['company_id'], 'notification_message' => $msglist, 'id' => '', 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $useridd, 'option' => '', 'assigner_id' => $get['user_id'] ); 
+			// $useridd[$user_id] = $get['user_id'];
+			// $notarry = array('company_id' => $get['company_id'], 'notification_message' => $msglist, 'id' => '', 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $useridd, 'option' => '', 'assigner_id' => $get['user_id'] );
 			// $return['notarry'] = $notarry;
 			// $this->sendNotificationAndEmails($notarry, '', '');
 		}
- 	
+
  		if($rid != ""){
     		$historySql = "SELECT contract_name,transaction_no, start_date, end_date, parent_contract ,  contract_amount FROM contracts WHERE company_id = " . $get['company_id'] . " AND parent_contract = $rid AND is_active = 0";
             $historyContracts = $callConfig->getAllRows($historySql);
             $return['historySql'] = $historySql;
             $return['historycontractsres'] = $historyContracts;
-       
+
             $childrenSql = "SELECT parent_contract FROM contracts WHERE company_id = " . $get['company_id'] . " AND id = " . $rid . " AND is_active = 0";
             $childrenData = $callConfig->getRow($childrenSql);
             $return['childrenData'] = $childrenData;
             $parentId = $childrenData->parent_contract;
             $return['parentId'] = $parentId;
-       
+
             if (!empty($parentId) && intval($parentId) > 0) {
                 $parentSql = "SELECT * FROM contracts WHERE company_id = " . intval($get['company_id']) . " AND id = " . intval($parentId) . " AND is_active = 0";
                 $parentContracts = $callConfig->getAllRows($parentSql);
                 $return['parentSql'] = $parentSql;
                 $return['parentcontractsres'] = $parentContracts;
-           
+
             } else {
                 $return['parentcontractsres'] = [];
             }
@@ -1659,7 +1659,7 @@ class reactClass extends userClass{
 		$conservsql = "SELECT id, service_name FROM contract_services WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
 		$conservres = $callConfig->getAllRows($conservsql);
 		$return['contract_services'] = $conservres;
-		
+
 		return $return;
 	}
 	/**/
@@ -1790,23 +1790,23 @@ class reactClass extends userClass{
 		$desres = $callConfig->getAllRows($dessql);
 		$return['desres'] = $desres;
 
-		$today = date('Y-m-d'); 
+		$today = date('Y-m-d');
 		$contractsres['renewal_frequency'] = "quaterly";
-		switch (strtolower($contractsres['renewal_frequency'])) 
-		{ 
-			case 'onday': 
-			$reminderDays = 1; 
-			break; 
-			case 'weekly': 
-			$reminderDays = 7; 
-			break; 
-			case 'monthly': 
-			$reminderDays = 30; 
-			break; 
-			case 'quarterly': 
-			$reminderDays = 90; 
-			break; 
-			default: 
+		switch (strtolower($contractsres['renewal_frequency']))
+		{
+			case 'onday':
+			$reminderDays = 1;
+			break;
+			case 'weekly':
+			$reminderDays = 7;
+			break;
+			case 'monthly':
+			$reminderDays = 30;
+			break;
+			case 'quarterly':
+			$reminderDays = 90;
+			break;
+			default:
 			$reminderDays = 90;
 		}
 
@@ -1814,11 +1814,11 @@ class reactClass extends userClass{
 		$expiringContracts = $callConfig->getAllRows($expirySql);
 		$return['expiringContracts'] = $expirySql;
 
-		if (!empty($expiringContracts)) { 
+		if (!empty($expiringContracts)) {
 			// $contractNames = implode(', ', array_column($expiringContracts, 'contract_name'));
 			// $msglist = "The following contracts are expiring soon: $contractNames.";
-			// $useridd[$user_id] = $get['user_id']; 
-			// $notarry = array('company_id' => $get['company_id'], 'notification_message' => $msglist, 'id' => '', 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $useridd, 'option' => '', 'assigner_id' => $get['user_id'] ); 
+			// $useridd[$user_id] = $get['user_id'];
+			// $notarry = array('company_id' => $get['company_id'], 'notification_message' => $msglist, 'id' => '', 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $useridd, 'option' => '', 'assigner_id' => $get['user_id'] );
 			// $return['notarry'] = $notarry;
 			// $this->sendNotificationAndEmails($notarry, '', '');
 		}
@@ -2132,46 +2132,46 @@ class reactClass extends userClass{
 // 	$return['get'] = $get;
 
 // 	$locations = '';
-// 	if (isset($post['locations']) && is_array($post['locations'])) { 
-// 		$locations = json_encode($post['locations']); 
+// 	if (isset($post['locations']) && is_array($post['locations'])) {
+// 		$locations = json_encode($post['locations']);
 // 	}
 
 // 	$insert_array = array(
 // 		'contract_name' => $post['contract_name'],
-// 		'renewal_frequency' => $post['renewal_frequency'], 
-// 		'parent_contract_id' => $post['parent_contract_id'], 
-// 		'transaction_no' => $this->toGetApplicationSerialNumber('contracts',$post), 
-// 		'invoice_number' => $post['invoice_number'], 
-// 		'rt_number' => $post['rt_number'], 
-// 		'business_code' => $post['business_code'], 
-// 		'party_type' => $post['party_type'], 
-// 		'contract_owner_name' => $post['contract_owner_name'], 
-// 		'contract_owner_email' => $post['contract_owner_email'], 
-// 		'contract_owner_number' => $post['contract_owner_number'], 
-// 		'party_id' => $post['party_id'], 
-// 		'start_date' => $this->dateconvertdbformat($post['start_date']), 
-// 		'end_date' => $this->dateconvertdbformat($post['end_date']), 
-// 		'contract_amount' => $post['contract_amount'], 
-// 		'description' => $post['description'], 
-// 		'additional_notes' => $post['additional_notes'], 
-// 		'payment_term_id' => $post['payment_term_id'], 
-// 		'termination_condition' => $post['termination_condition'], 
-// 		'contract_status' => $post['contract_status'], 
-// 		'current_status' => 0, 
-// 		'auto_renew' => $post['auto_renew'], 
-// 		'renew_type' => $post['renew_type'], 
-// 		'state' => $post['state'], 
-// 		'isp' => $post['isp'], 
-// 		'paid_by' => $post['paid_by'], 
-// 		'internet_charges' => $post['internet_charges'], 
-// 		'hub_spoc_name' => $post['hub_spoc_name'], 
-// 		'hub_spoc_number' => $post['hub_spoc_number'], 
-// 		'wifi_pass' => $post['wifi_pass'], 
-// 		'wifi_provider' => $post['wifi_provider'], 
-// 		'additional_document' => $post['additional_document'], 
-// 		'contract_payment_terms' => $post['contract_payment_terms'], 
-// 		'typeofaggrements' => $post['typeofaggrements'], 
-// 		'description_id' => $post['description_id'], 
+// 		'renewal_frequency' => $post['renewal_frequency'],
+// 		'parent_contract_id' => $post['parent_contract_id'],
+// 		'transaction_no' => $this->toGetApplicationSerialNumber('contracts',$post),
+// 		'invoice_number' => $post['invoice_number'],
+// 		'rt_number' => $post['rt_number'],
+// 		'business_code' => $post['business_code'],
+// 		'party_type' => $post['party_type'],
+// 		'contract_owner_name' => $post['contract_owner_name'],
+// 		'contract_owner_email' => $post['contract_owner_email'],
+// 		'contract_owner_number' => $post['contract_owner_number'],
+// 		'party_id' => $post['party_id'],
+// 		'start_date' => $this->dateconvertdbformat($post['start_date']),
+// 		'end_date' => $this->dateconvertdbformat($post['end_date']),
+// 		'contract_amount' => $post['contract_amount'],
+// 		'description' => $post['description'],
+// 		'additional_notes' => $post['additional_notes'],
+// 		'payment_term_id' => $post['payment_term_id'],
+// 		'termination_condition' => $post['termination_condition'],
+// 		'contract_status' => $post['contract_status'],
+// 		'current_status' => 0,
+// 		'auto_renew' => $post['auto_renew'],
+// 		'renew_type' => $post['renew_type'],
+// 		'state' => $post['state'],
+// 		'isp' => $post['isp'],
+// 		'paid_by' => $post['paid_by'],
+// 		'internet_charges' => $post['internet_charges'],
+// 		'hub_spoc_name' => $post['hub_spoc_name'],
+// 		'hub_spoc_number' => $post['hub_spoc_number'],
+// 		'wifi_pass' => $post['wifi_pass'],
+// 		'wifi_provider' => $post['wifi_provider'],
+// 		'additional_document' => $post['additional_document'],
+// 		'contract_payment_terms' => $post['contract_payment_terms'],
+// 		'typeofaggrements' => $post['typeofaggrements'],
+// 		'description_id' => $post['description_id'],
 // 		'locations' => $locations,
 // 		'parent_contract' => $post['Rid'],'is_oem' => $post['is_oem'] ?? 'No', 'oem_registration_number' => $post['oem_registration_number'] ?? '', 'oem_distributor_name' => $post['oem_distributor_name'] ?? '', 'oem_product_category' => $post['oem_product_category'] ?? ''); // additional document stores comma-separated filenames
 
@@ -2182,14 +2182,14 @@ class reactClass extends userClass{
 // 	$insert_array['created_date'] = date('Y-m-d H:i:s');
 
 // 	$insert_data = $callConfig->insertRecord('contracts', $insert_array);
-// 	$renew_id = $insert_data['LASTID']; 
+// 	$renew_id = $insert_data['LASTID'];
 // 	$return['contract_result'] = $insert_data;
 // 	$return['renew_id'] = $renew_id;
 
 // 	if (!empty($post['Rid'])) {
 // 		$rid = $post['Rid'];
 // 		$contract_query = "SELECT renew_data FROM contracts WHERE id = '{$rid}'";
-		
+
 // 		$contract_row = $callConfig->getRow($contract_query);
 
 // 		$new_renew_info = [
@@ -2198,24 +2198,24 @@ class reactClass extends userClass{
 // 			'end_date' => $this->dateconvertdbformat($post['end_date']),
 // 			'contract_amount' => $post['contract_amount']
 // 		];
-		
+
 // 		$return['new_renew_info'] = $new_renew_info;
 // 		$return['contract_row'] = $contract_row;
 
-// 		$renew_history = [];  
-// 		if (!empty($contract_row->renew_data)) { 
+// 		$renew_history = [];
+// 		if (!empty($contract_row->renew_data)) {
 // 			$decoded = json_decode($contract_row->renew_data, true);
-// 			if (is_array($decoded)) $renew_history = $decoded; 
+// 			if (is_array($decoded)) $renew_history = $decoded;
 // 		}
-// 		$renew_history[] = $new_renew_info;  
+// 		$renew_history[] = $new_renew_info;
 
 // 		$update_data = [
 // 			'renew_data' => json_encode($renew_history),
 // 			'updated_by' => $get['user_id'],
 // 			'updated_date' => date('Y-m-d H:i:s')
 // 		];
-// 		$callConfig->updateRecord('contracts', $update_data, 'id', $rid); 
-// 	} 
+// 		$callConfig->updateRecord('contracts', $update_data, 'id', $rid);
+// 	}
 
 // 	$related_tables = [
 // 		'contract_documents',
@@ -2229,11 +2229,11 @@ class reactClass extends userClass{
 // 		$rows = $callConfig->getAllRows($q);
 // 		if (!empty($rows)) {
 // 			foreach ($rows as $row) {
-// 				$row = (array)$row; 
-// 				unset($row['id']); 
+// 				$row = (array)$row;
+// 				unset($row['id']);
 // 				$row['contract_id'] = $renew_id;
 // 				$row['created_date'] = date('Y-m-d H:i:s');
-// 				$row['created_by'] = $get['user_id']; 
+// 				$row['created_by'] = $get['user_id'];
 // 				$callConfig->insertRecord($table, $row);
 // 			}
 // 		}
@@ -2259,9 +2259,9 @@ class reactClass extends userClass{
 // 				$callConfig->executeQuery($updateQuery);
 // 			}
 
-// 			foreach ($post['milestones'] as $milestone) { 
+// 			foreach ($post['milestones'] as $milestone) {
 // 				if (empty(trim($milestone['milestone_name'] ?? '')))
-// 					continue; 
+// 					continue;
 // 				$milestoneData = ['company_id' => $get['company_id'], 'transaction_id' => $renew_id, 'transaction_date' => date('Y-m-d H:i:s'), 'milestone' => trim($milestone['milestone_name']), 'milestone_date' => !empty($milestone['milestone_date']) ? $milestone['milestone_date'] : null, 'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0, 'is_active' => 0, 'current_status' => 0, 'status_date' => date('Y-m-d H:i:s'), 'created_date' => date('Y-m-d H:i:s'), 'created_by' => $get['user_id'], 'updated_by' => $get['user_id'], 'updated_date' => date('Y-m-d H:i:s'), ];
 
 // 				$milestoneInsert = $callConfig->insertRecord('milestone_contracts', $milestoneData);
@@ -2324,13 +2324,13 @@ class reactClass extends userClass{
 			];
 		}
 
-		
+
 		public function sendCronJobContractExpiryNotifications($get){
 			global $callConfig;
 			$startdate =  date('Y-m-d');
 			$enddate =  date('Y-m-d', strtotime('+3 months'));
 			$consql = "SELECT cn.contract_name, cn.transaction_no, cn.start_date, cn.end_date, cn.locations FROM contracts cn WHERE cn.company_id = '".$get['company_id']."' AND cn.end_date >= '".$startdate."' AND cn.end_date <= '".$enddate."' AND (cn.cancel_status = 'N' OR cn.cancel_status IS NULL) AND cn.is_active = 0";
-			$consres = $callConfig->getAllRows($consql);	
+			$consres = $callConfig->getAllRows($consql);
 
 			$encoded = urlencode(json_encode((array)$consres));
 			$insert_array = array('company_id'=>$get['company_id'], 'start_date_time'=>date('Y-m-d h:i:s'), 'command'=> urlencode($consql), 'api_data'=> $encoded, 'is_active'=>'0', 'current_status'=>'0', 'created_date'=>date('Y-m-d h:i:s'));
@@ -2351,9 +2351,9 @@ class reactClass extends userClass{
 	 		foreach ($consres as $contract) {
 	 			$locationsid = json_decode($contract->locations ,1);
              	$locationnames = "";
-            	foreach($locationsid as $locid){ 
+            	foreach($locationsid as $locid){
             		if($locations[$locid]->location_name !=""){
-            			$locationnames .= $locations[$locid]->location_name.", "; 
+            			$locationnames .= $locations[$locid]->location_name.", ";
             		}
             	}
             	$contract->location_name  = $locationnames;
@@ -2403,14 +2403,14 @@ class reactClass extends userClass{
 				$notarry = array();
 				$sendnotification[] =$this->sendNotificationAndEmails($notarry,$emailarray,76);
 			}
-			if($ccres['LASTID'] !=""){	
-				$encoded = urlencode(json_encode((array)$sendnotification));	
+			if($ccres['LASTID'] !=""){
+				$encoded = urlencode(json_encode((array)$sendnotification));
 			 	$update_array = array('end_date_time'=>date('Y-m-d h:i:s'),'result_data'=>$encoded,'updated_date'=>date('Y-m-d h:i:s'));
 				$wh = "id = '".$ccres['LASTID']."'";
 				$ccresupdate = $callConfig->updateRecord('cron_jobs',$update_array,'','',$wh);
 			}
 			return $get;
-		}	
+		}
 
 		public function sendCronJobContractExpiryNotificationsExtrafuncall($title, $contracts){
 		    $html = "<h3>{$title}</h3>";
@@ -2584,7 +2584,7 @@ class reactClass extends userClass{
 				$contract_id = $insert_data['LASTID'];
 				$return['contract_result'] = $insert_data;
 				$return['contract_result11'] = $insert_data;
-				
+
 				if($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
 					$seluser = "SELECT id FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL";
 					$return['seluser'] = $seluser;
@@ -2661,7 +2661,7 @@ class reactClass extends userClass{
 			$insert_data = $callConfig->insertRecord('contracts', $insert_array);
 			$contract_id = $insert_data['LASTID'];
 			$return['contract_result'] = $insert_data;
-		       
+
 			if($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
 				//if($insert_array['originator'] !=""){
 				//	$conditins = " AND (JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL OR id = '".$insert_array['originator']."')";
@@ -2710,7 +2710,7 @@ class reactClass extends userClass{
 						$emailarray['default_module_id'] = 40;
 						$emailarray['created_by'] = $get['user_id'];
 
-						$emailarray['contract_creation_or_updation'] = "Inserted";		
+						$emailarray['contract_creation_or_updation'] = "Inserted";
 						$emailarray['contract_vendor_name'] = "";
 						$emailarray['contract_name'] = $insert_array['contract_name'];
 						$emailarray['contract_number'] = $insert_array['transaction_no'];
@@ -2827,7 +2827,7 @@ class reactClass extends userClass{
 		$deactivate('contract_amc_details');
 		$deactivate('contract_amc_locations');
 		$deactivate('contract_amc_assets');
-		
+
 		$contractStartYmd = $this->amcParseDateYmd($post['start_date'] ?? '');
 		$contractEndYmd = $this->amcParseDateYmd($post['end_date'] ?? '');
 
@@ -3700,7 +3700,7 @@ class reactClass extends userClass{
     	$return =array();
     	$return['post'] = $post;
 	   $insert_array = array('contract_name'=>$post['contract_name'],'transaction_no'=>$post['transaction_no'],'party_id'=> $post['party_id'],'start_date'=>$post['start_date'],'end_date'=>$post['end_date'],'description'=>$post['description'],'additional_notes'=>$post['additional_notes'],'payment_term_id'=>$post['payment_term_id'],'termination_condition'=>$post['termination_condition'],'contract_status'=>$post['contract_status'],'rt_number'=>$post['rt_number']);
-	    if($post['Rid']!=""){ 
+	    if($post['Rid']!=""){
     		$insert_array['updated_by']=$get['user_id'];
     		$insert_array['updated_date']=date('Y-m-d H:i:s');
     		$res=$callConfig->updateRecord('contracts',$insert_array,'id',$post['Rid']);
@@ -7260,8 +7260,8 @@ class reactClass extends userClass{
 
 	public function getAmcAdminLandingDashboardData($get)
 	{
-		
-		
+
+
 		global $callConfig;
 		$emptyKpis = array('contracts' => 0, 'active' => 0, 'expired' => 0,'cancelcontract' => 0, 'customers' => 0, 'vendors' => 0);
 		//return $get;
@@ -7307,7 +7307,7 @@ class reactClass extends userClass{
 			}
 		}
 		$allowedContractIds = array_values(array_filter(array_unique($allowedContractIds)));
-				
+
 		$split = $this->splitAmcAdminLandingActiveExpired($allowedContracts);
 		$return['kpis'] = array(
 			'contracts' => count((array)$allowedContracts),
@@ -7320,7 +7320,7 @@ class reactClass extends userClass{
 
 		$return['yearly_chart'] = $this->buildAmcAdminLandingYearlyChart($allowedContracts);
 		$return['locations'] = $this->buildAmcAdminLandingLocationsList($dashboardData['locations'] ?? array());
-		//return $return;		
+		//return $return;
 		$partyTypes = array('customer', 'vendor', 'inhouse');
 		if (count((array)$partyTypes) > 0) {
 			foreach ($partyTypes as $partyType) {
@@ -7488,7 +7488,7 @@ class reactClass extends userClass{
 
 	public function getAmcAdminLandingContractsPopupList($get)
 	{
-		global $callConfig;	
+		global $callConfig;
 		$return = array('contracts' => array(), 'total' => 0);
 		$companyId = (int) ($get['company_id'] ?? 0);
 		if ($companyId <= 0) {
@@ -7566,7 +7566,7 @@ class reactClass extends userClass{
 		foreach($gencres as $red){
 			$agreement_type[$red->genc_detail_code] = $red;
 		}
-		$return['agreement_type'] = $agreement_type;		
+		$return['agreement_type'] = $agreement_type;
 
 		return $return;
 	}
@@ -7757,7 +7757,7 @@ class reactClass extends userClass{
 			'end_date' => $c['end_date'] ?? '',
 			'is_amc' => $c['is_amc_contract'] ?? 'N',
 			'typeofaggrements' => $c['typeofaggrements'],
-			
+
 		);
 		if (count((array)$rollup) > 0) {
 			$row['asset_total'] = (int) ($rollup['asset_total'] ?? 0);
@@ -8643,17 +8643,17 @@ class reactClass extends userClass{
         $return = array();
         $return['post'] = $post;
         $return['get'] = $get;
-	//return $return; 
+	//return $return;
         $locations = '';
         if (isset($post['locations']) && is_array($post['locations'])) {
             $locations = json_encode($post['locations']);
         }
- 
+
         $contract_services_id = '';
         if (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) {
             $contract_services_id = json_encode($post['contract_services_id']);
         }
- 
+
         $contact_personsary = array();
         if (isset($post['contact_persons']) && is_array($post['contact_persons']) && count((array)($post['contact_persons']['name'] ?? array())) > 0) {
             foreach ($post['contact_persons']['name'] as $key => $conpers) {
@@ -8667,14 +8667,14 @@ class reactClass extends userClass{
             }
         }
         $contact_persons = json_encode($contact_personsary);
- 
+
         $contract_type = 'Contract';
         if (!empty($post['parent_contract_id']) && $post['parent_contract_id'] != 0) {
             $contract_type = 'SOW';
         }
- 
+
         $isAmcContract = (!empty($post['is_amc_contract']) && in_array($post['is_amc_contract'], array('Y', 'Yes', '1', 1), true)) ? 'Y' : 'N';
- 
+
         $insert_array = array(
             'contract_name' => $post['contract_name'],
             'renewal_frequency' => $post['renewal_frequency'],
@@ -8733,12 +8733,12 @@ class reactClass extends userClass{
         if (trim((string) ($insert_array['payment_term_id'] ?? '')) == '') {
             unset($insert_array['payment_term_id']);
         }
-	// print_r($insert_array);exit; 
+	// print_r($insert_array);exit;
         $insert_data = $callConfig->insertRecord('contracts', $insert_array);
 	//echo "------"; print_r($insert_data);exit;
 	$contract_id = $insert_data['LASTID'] ?? 0;
         $return['contract_result'] = $insert_data;
- 	
+
         if (($insert_data['status'] ?? '') == 'sucess' || ($insert_data['status'] ?? '') == 'success') {
             if (isset($post['milestones']) && is_array($post['milestones']) && count((array)$post['milestones']) > 0) {
                 foreach ($post['milestones'] as $milestone) {
@@ -8766,12 +8766,12 @@ class reactClass extends userClass{
             } else {
                 $return['milestone_inserts'] = 'No milestones found in POST.';
             }
- 
+
             if ($isAmcContract == 'Y') {
                 $return['amc_contract_result'] = $this->saveAmcContractData($contract_id, $get, $post);
             }
         }
- 
+
         return $return;
     }
 	public function importContractsExcel($get, $post)
@@ -9875,7 +9875,7 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	
+
 
 	}
 	?>

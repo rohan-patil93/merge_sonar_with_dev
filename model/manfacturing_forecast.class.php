@@ -1,4 +1,4 @@
-<?php 
+<?php
 class manfacturingForecastUserClass extends userClass{
     public function getmanufacturingforecastedata($get){
 		global $callConfig;
@@ -66,7 +66,7 @@ class manfacturingForecastUserClass extends userClass{
         $return = array();
         $return['post']=$post;
         $return['get']=$get;
-        
+
         $company_id = intval($get['company_id']);
         $user_id = intval($get['user_id']);
         $year = intval($post['year'] ?? 0);
@@ -90,7 +90,7 @@ class manfacturingForecastUserClass extends userClass{
                 return array(array('status' => 'fail', 'message' => 'Approved forecast cannot be edited.'));
             }
         }
-        
+
         if (!empty($forecastHeader->id)) {
             $forecastHeaderId = intval($forecastHeader->id);
             $headerRecord = array(
@@ -171,7 +171,7 @@ class manfacturingForecastUserClass extends userClass{
             $record['forecast_quarterly_4'] = $record['forecast_month_10'] + $record['forecast_month_11'] + $record['forecast_month_12'];
             $record['forecast_yearly'] = $total;
             $record['total_forecast'] = $total;
-        
+
 
             if (isset($existingMap[$product_id])) {
                 $record['updated_by'] = $user_id;
@@ -463,15 +463,15 @@ class manfacturingForecastUserClass extends userClass{
         $return['itemrows'] = $itemrows;
         $return['summary'] = $summary;
         $return['shortages'] = $shortages;
-        
-        
+
+
         $mpnQuery = "SELECT YEAR(transaction_date) AS year, SUM(request_qty) AS total_request_qty, SUM(produced_qty) AS total_produced_qty FROM manufacturing_product_notes WHERE company_id = '".$company_id."' AND is_active = 0 GROUP BY YEAR(transaction_date) ORDER BY YEAR(transaction_date) ASC ";
         $mpnRows = $callConfig->getAllRows($mpnQuery);
         $productNotesTotals = [];
         foreach ($mpnRows as $row) {
             $productNotesTotals[$row->year] = ['total_request_qty' => $row->total_request_qty ?? 0, 'total_produced_qty' => $row->total_produced_qty ?? 0  ];
-        } 
-        $return['product_notes'] = $productNotesTotals; 
+        }
+        $return['product_notes'] = $productNotesTotals;
         return $return;
     }
 
@@ -1167,7 +1167,7 @@ class manfacturingForecastUserClass extends userClass{
         $return['data'] = $res ?? array();
 
         $production_note_id = $get['production_note_id'] ?? 0;
-        
+
         if($production_note_id != '' && $production_note_id != 0){
             $query = "SELECT mpn.transaction_no, mpn.transaction_date, mpn.work_order_id, mpn.item_id, mpn.request_qty, mpn.produced_qty, mpn.wastage_qty, mpn.remarks, i.item_name
                 FROM manufacturing_product_notes mpn
@@ -1244,9 +1244,9 @@ class manfacturingForecastUserClass extends userClass{
 
             $callConfig->updateRecord('manufacturing_product_notes', $record, 'id', $note_id);
             // --- Soft delete existing child records ---
-            // $callConfig->executeQuery("UPDATE manufacturing_product_note_items 
-            //                    SET is_active = NULL 
-            //                    WHERE company_id = '{$company_id}' 
+            // $callConfig->executeQuery("UPDATE manufacturing_product_note_items
+            //                    SET is_active = NULL
+            //                    WHERE company_id = '{$company_id}'
             //                    AND transaction_id = '{$note_id}'");
             // --- Reinsert / Update child items ---
             if (!empty($post['note_items']) && is_array($post['note_items'])) {
@@ -1260,7 +1260,7 @@ class manfacturingForecastUserClass extends userClass{
                         'updated_date'   => date('Y-m-d H:i:s')
                     );
                     // --- Update existing item record ---
-                    $callConfig->updateRecord('manufacturing_product_note_items', $child, 'id', $item_id); 
+                    $callConfig->updateRecord('manufacturing_product_note_items', $child, 'id', $item_id);
                 }
             }
             $return[] = array('status' => 'success', 'message' => 'Product Note updated successfully');
@@ -1335,7 +1335,7 @@ class manfacturingForecastUserClass extends userClass{
             if (!$skip_work_order_updates) {
                 $this->applyManufacturingProductNoteWorkOrderProgress($company_id, $user_id, $post);
             }
-        } 
+        }
 
         return $return;
     }
@@ -1912,7 +1912,7 @@ class manfacturingForecastUserClass extends userClass{
             }
             $return['stock_transfer_history'] = array_values($stock_transfer_history);
         }
-        
+
         return $return;
     }
     public function insertstocktransfer($get, $post){
@@ -2246,10 +2246,10 @@ class manfacturingForecastUserClass extends userClass{
             // Get all stock request items and their references in one query
             $stkreq_items_map = array(); // keyed by stkreq_item.id
             $mfg_items_map = array();     // keyed by manufacturing_work_order_items.id
-            
+
             if (!empty($ref_item_ids)) {
                 $ref_ids_str = implode(',', $ref_item_ids);
-                
+
                 // Get all stock request items
                 $stkreq_query = "SELECT * FROM stkreq_items WHERE company_id = '{$company_id}' AND id IN ({$ref_ids_str}) AND is_active = 0";
                 $stkreq_items_res = $callConfig->getAllRows($stkreq_query);
@@ -2313,7 +2313,7 @@ class manfacturingForecastUserClass extends userClass{
             foreach ($selected_items as $selected_item) {
                 $stktrn_item = $selected_item['stock_transfer_item'];
                 $receipt_qty = $selected_item['receipt_qty'];
-                        
+
                 $item_price = floatval($stktrn_item->item_price ?? 0);
                 $item_amount = $item_price * $receipt_qty;
                 $tax_amount = 0;
@@ -2353,13 +2353,13 @@ class manfacturingForecastUserClass extends userClass{
                     // Use pre-fetched data instead of querying in loop
                     if (!empty($stktrn_item->ref_transaction_item_table_id) && isset($stkreq_items_map[$stktrn_item->ref_transaction_item_table_id])) {
                         $stkreq_item = $stkreq_items_map[$stktrn_item->ref_transaction_item_table_id];
-                            
+
                         if (!empty($stkreq_item->ref_transaction_item_table_id) && isset($mfg_items_map[$stkreq_item->ref_transaction_item_table_id])) {
                             $mfg_item = $mfg_items_map[$stkreq_item->ref_transaction_item_table_id];
-                                
+
                             $current_stock_receipts_qty = floatval($mfg_item->stock_receipts_qty ?? 0);
                             $updated_stock_receipts_qty = $current_stock_receipts_qty + $receipt_qty;
-                                
+
                             // Update manufacturing_work_order_items
                             $callConfig->updateRecord('manufacturing_work_order_items', array(
                                 'stock_receipts_id' => $receipt_id,
@@ -2393,10 +2393,10 @@ class manfacturingForecastUserClass extends userClass{
 
         return $return;
     }
-    
+
     public function insertManufacturingProductionStart($get, $post) {
         global $callConfig;
-        
+
         $work_order_id = $get['work_order_id'] ?? $post['work_order_id'] ?? 0;
         $company_id = $get['company_id'] ?? $post['company_id'] ?? 0;
         $created_by = $get['created_by'] ?? $post['created_by'] ?? 0;
@@ -2460,7 +2460,7 @@ class manfacturingForecastUserClass extends userClass{
     public function getManufacturingProductionDetails($get) {
         global $callConfig;
         $return = array();
-        
+
         $work_order_id = $get['work_order_id'] ?? 0;
         $company_id = $get['company_id'] ?? 0;
 
@@ -2481,7 +2481,7 @@ class manfacturingForecastUserClass extends userClass{
                      LEFT JOIN unit_of_measurements u ON u.company_id = i.company_id AND u.id = i.sale_uom AND u.is_active = i.is_active
                      WHERE mwo.id = '{$work_order_id}' AND mwo.company_id = '{$company_id}' AND mwo.is_active = 0";
         $wo_result = $callConfig->getRow($wo_query);
-        
+
         if (empty($wo_result)) {
             return array(
                 'status' => 'error',
@@ -2505,14 +2505,14 @@ class manfacturingForecastUserClass extends userClass{
         $query = "SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE genc_code='MANHOLDRES' AND company_id = '{$company_id}' AND is_active = 0";
         $hold_reasons = $callConfig->getAllRows($query);
         $return['hold_reasons'] = $hold_reasons;
-        
+
         return $return;
     }
 
     public function updateManufacturingProductionData($get, $post) {
         global $callConfig;
         $return = array();
-        
+
         $work_order_id = $post['work_order_id'] ?? 0;
         $company_id = $post['company_id'] ?? 0;
         $created_by = $post['created_by'] ?? 0;
@@ -2700,7 +2700,7 @@ class manfacturingForecastUserClass extends userClass{
                 'created_by' => $created_by,
                 'created_date' => date('Y-m-d H:i:s')
             );
-            
+
             $prod_result = $callConfig->insertRecord('manufacturing_production', $production_data);
 
             // 2. Update manufacturing_work_orders
@@ -2740,7 +2740,7 @@ class manfacturingForecastUserClass extends userClass{
                 foreach ($post['item_id'] as $seq => $item_id) {
                     $mwoi_id = $post['manufacturing_work_order_item_id'][$seq] ?? 0;
                     $consumed_qty = $post['consumed_qty'][$seq] ?? 0;
-                    
+
                     if ($mwoi_id > 0 && $consumed_qty > 0) {
                         $current_item_row = $callConfig->getRow(
                             "SELECT completed_qty,item_id, request_qty FROM manufacturing_work_order_items WHERE id = '{$mwoi_id}' AND company_id = '{$company_id}' AND is_active = 0"
@@ -2786,7 +2786,7 @@ class manfacturingForecastUserClass extends userClass{
 
     public function resumeManufacturingProduction($get, $post) {
         global $callConfig;
-        
+
         $work_order_id = $get['work_order_id'] ?? $post['work_order_id'] ?? 0;
         $company_id = $get['company_id'] ?? $post['company_id'] ?? 0;
         $created_by = $get['created_by'] ?? $post['created_by'] ?? 0;

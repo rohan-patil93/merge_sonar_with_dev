@@ -156,7 +156,7 @@ class surveyPollUserClass extends userClass
     			$disp_question[$value_id]['survey_question_option'] = $survey_answer_details->survey_question_option;
     		}
 
-    		$queryresponse = "SELECT * FROM ".TBL_SURVEY_RESPONSE_DETAILS." WHERE is_active=0 and company_id=".$get['company_id']." and survey_id=".$get['survey_id']." and employee_id=".$get['emp_id'] ; 
+    		$queryresponse = "SELECT * FROM ".TBL_SURVEY_RESPONSE_DETAILS." WHERE is_active=0 and company_id=".$get['company_id']." and survey_id=".$get['survey_id']." and employee_id=".$get['emp_id'] ;
     		$response = $callConfig->getAllRows($queryresponse);
     		foreach($response as $result){
     			$resultdata[$result->question_id] = $result->response_option;
@@ -184,29 +184,29 @@ class surveyPollUserClass extends userClass
     	}
     	public function getsurveysummary($get){
     		global $callConfig;
-			
+
     		if($get['survey_type']==EXITE_INTERVIEW_TYPE){
     			$condition = " AND survey_type ='".$get['survey_type']."'";
     		}else{
     			$condition = " AND survey_type!='".EXITE_INTERVIEW_TYPE."'";
-    		} 
+    		}
     		$tag1 = $get['category'] ==1 ?'Surveys' : 'Polls';
     		$tag2= $get['category'] ==1 ?'Surveyed' : 'Collectors';
 
-    		$queryresponse = "SELECT count(id) as total_surveys, sum(assigned_to_count) as collectors  FROM ".TBL_SURVEY_SETUP." WHERE is_active=0 and company_id=".$get['company_id']." and category=".$get['category'] ; 
-    		$sresponse = $callConfig->getRow($queryresponse); 
+    		$queryresponse = "SELECT count(id) as total_surveys, sum(assigned_to_count) as collectors  FROM ".TBL_SURVEY_SETUP." WHERE is_active=0 and company_id=".$get['company_id']." and category=".$get['category'] ;
+    		$sresponse = $callConfig->getRow($queryresponse);
     		$details['summary'][] = array('data'=>$sresponse->total_surveys,'name'=>$tag1,'bgcolor'=>'primary');
     		$details['summary'][] = array('data'=>$sresponse->collectors,'name'=>$tag2,'bgcolor'=>'secondary');
-    		$queryresponse = "SELECT count(id) as total_responses,round(sum(duration_taken)/count(id),2) as avg_duration_taken  FROM ".TBL_SURVEY_RESPONSES." WHERE is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and current_status=".ST_COMPLETE ; 
+    		$queryresponse = "SELECT count(id) as total_responses,round(sum(duration_taken)/count(id),2) as avg_duration_taken  FROM ".TBL_SURVEY_RESPONSES." WHERE is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and current_status=".ST_COMPLETE ;
     		$response = $callConfig->getRow($queryresponse);
     		$details['summary'][] = array('data'=>$response->total_responses==''?'0':$response->total_responses,'name'=>'Responses','bgcolor'=>'success');
-			
-    		$queryresponse = "SELECT count(id) as partial  FROM ".TBL_SURVEY_RESPONSES." WHERE is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and current_status=".ST_INPROGRESS; 
+
+    		$queryresponse = "SELECT count(id) as partial  FROM ".TBL_SURVEY_RESPONSES." WHERE is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and current_status=".ST_INPROGRESS;
     		$presponse = $callConfig->getRow($queryresponse);
 
     		$details['summary'][] = array('data'=>$presponse->partial==''?'0':$presponse->partial,'name'=>'Partial','bgcolor'=>'warning');
     //	$details['summary'][] = array('data'=>($sresponse->total_surveys-$response->total_responses)==''?'0':($sresponse->collectors-$response->total_responses),'name'=>'Incomplete','bgcolor'=>'info');
-			
+
     		$details['summary'][] = array('data'=>$response->avg_duration_taken==''?'0':$response->avg_duration_taken,'name'=>'Avg Time','bgcolor'=>'dark');
     		if($sresponse->total_surveys>0){
     			$rate = round(($response->total_responses/$sresponse->total_surveys*100),2);
@@ -214,7 +214,7 @@ class surveyPollUserClass extends userClass
     			$rate = "0";
     		}
     		$details['rate']= $rate." %";
-    		
+
 
     		$whr="company_id=".$get['company_id']." and is_active='0' and category=".$get['category'].$condition;
     		$query=$callConfig->selectQuery(TBL_SURVEY_SETUP,'*',$whr,'','','');
@@ -230,8 +230,8 @@ class surveyPollUserClass extends userClass
     			$whr="company_id=".$get['company_id']." and is_active='0' and survey_id=".$svalues->id." and category=".$get['category']." and current_status=".ST_COMPLETE  ;
     			$questions=$callConfig->selectQuery(TBL_SURVEY_RESPONSES,'count(id) as totalresponse',$whr,'','','');
     			$qresponse = $callConfig->getRow($questions);
-				
-				
+
+
     			if($qresponse->totalresponse && $qresponse->totalresponse>0 && $surveyed>0){
     				$completionrate = round(($qresponse->totalresponse/$surveyed*100),2);
     			}else{
@@ -256,7 +256,7 @@ class surveyPollUserClass extends userClass
     				$surveyvalues['completionratecolor'] = "danger";
     			}
     			$details['survey_details'][] = $surveyvalues;
-				
+
     		}
 			return $details;
 
@@ -264,11 +264,11 @@ class surveyPollUserClass extends userClass
 
     	public function getsurveylist($get){
     		global $callConfig;
-    		$queryresponse = "SELECT * FROM ".TBL_SURVEY_SETUP." WHERE is_active=0 and company_id=".$get['company_id']." and id=".$get['survey_id']." and category=".$get['category'] ; 
+    		$queryresponse = "SELECT * FROM ".TBL_SURVEY_SETUP." WHERE is_active=0 and company_id=".$get['company_id']." and id=".$get['survey_id']." and category=".$get['category'] ;
     		$response = $callConfig->getRow($queryresponse);
     		$details['overview'] = $response;
 
-    		$queryresponse = "SELECT id,display_name FROM ".TBL_EMPLOYEES." WHERE is_active=0 and company_id=".$get['company_id']; 
+    		$queryresponse = "SELECT id,display_name FROM ".TBL_EMPLOYEES." WHERE is_active=0 and company_id=".$get['company_id'];
     		$response = $callConfig->getAllRows($queryresponse);
     		foreach($response as $emp){
     			$employees[$emp->id] = $emp->display_name;
@@ -288,7 +288,7 @@ class surveyPollUserClass extends userClass
     		{
     			$details['rate'] = "0 ";
     		}
-    		$queryresponse = "SELECT * FROM ".TBL_SURVEY_RESPONSES." WHERE is_active=0 and company_id=".$get['company_id']." and survey_id=".$get['survey_id']." group by employee_id"; 
+    		$queryresponse = "SELECT * FROM ".TBL_SURVEY_RESPONSES." WHERE is_active=0 and company_id=".$get['company_id']." and survey_id=".$get['survey_id']." group by employee_id";
     		$response = $callConfig->getAllRows($queryresponse);
     		$details['response'] = $response;
     	//echo "<pre>"; print_r($details);
@@ -298,7 +298,7 @@ class surveyPollUserClass extends userClass
 
     	public function getsurveyresult($get){
     		global $callConfig;
-    		$queryresponse = "SELECT * FROM ".TBL_SURVEY_RESPONSE_DETAILS." WHERE is_active=0 and company_id=".$get['company_id']." and survey_id=".$get['survey_id']." and employee_id=".$get['survey_emp_id'] ; 
+    		$queryresponse = "SELECT * FROM ".TBL_SURVEY_RESPONSE_DETAILS." WHERE is_active=0 and company_id=".$get['company_id']." and survey_id=".$get['survey_id']." and employee_id=".$get['survey_emp_id'] ;
     		$response = $callConfig->getAllRows($queryresponse);
     		foreach($response as $result){
     			$resultdata[$result->question_id] = $result->response_option;
@@ -332,7 +332,7 @@ class surveyPollUserClass extends userClass
     		$details['questions'] = $disp_question;
 
     		return $details;
-    	}	
+    	}
 
 
     	public function getsurveyreport($get){
@@ -365,15 +365,15 @@ class surveyPollUserClass extends userClass
     			}
     			$optionid = 0;
     			$maxoptions = count((array)$detailoptions) > $maxoptions ? count((array)$detailoptions) : $maxoptions;
-    			foreach($detailoptions as $optionsdata) { 
+    			foreach($detailoptions as $optionsdata) {
     				$details['option'][$value->id]['option'][] = $optionsdata;
     				$whr="company_id=".$get['company_id']." and is_active='0' and survey_id=".$get['survey_id']." and question_id=".$value->id;
     				$query_opt=$callConfig->selectQuery(TBL_SURVEY_RESPONSE_DETAILS,'*',$whr,'','','');
     				$query_opt_details = $callConfig->getAllRows($query_opt);
     				$count=0;
     				if($qtype!=4){
-    					foreach($query_opt_details as $opt){ 
-    						$response = json_decode($opt->response_option,1); 
+    					foreach($query_opt_details as $opt){
+    						$response = json_decode($opt->response_option,1);
     						if(in_array($optionsdata, (array)$response)){
     							$count = $count+1;;
     						}
@@ -382,8 +382,8 @@ class surveyPollUserClass extends userClass
     						// }
     					}
     				}else{
-    					foreach($query_opt_details as $opt){ 
-    						$response = json_decode($opt->response_option,1)[0]; 
+    					foreach($query_opt_details as $opt){
+    						$response = json_decode($opt->response_option,1)[0];
     						if($response!=''){
     							$count = $count+1;;
     						}else{
@@ -404,7 +404,7 @@ class surveyPollUserClass extends userClass
     		global $callConfig;
     		$tag1 = $get['category'] ==1 ?'Surveys' : 'Polls';
 
-    		$queryresponse = "SELECT survey_id,current_status FROM ".TBL_SURVEY_RESPONSES." WHERE is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and employee_id=".$get['emp_id']; 
+    		$queryresponse = "SELECT survey_id,current_status FROM ".TBL_SURVEY_RESPONSES." WHERE is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and employee_id=".$get['emp_id'];
     		$survey_list = $callConfig->getAllRows($queryresponse);
 
     		foreach($survey_list as $list){
@@ -421,7 +421,7 @@ class surveyPollUserClass extends userClass
     				$qresponse = $callConfig->getRow($questions);
     				$surveyvalues['totalquestion'] = $qresponse->totalquestion;
 
-    				if($list->current_status == ST_COMPLETE){ 
+    				if($list->current_status == ST_COMPLETE){
     					$surveyvalues['completionrate'] = ST_COMPLETE;
     					$surveyvalues['completionratecolor'] = "success";
     				}else if (date('Y-m-d') > $svalues->survey_end_date && strtotime($enddatatime = $svalues->survey_end_date." ".$svalues->survey_end_time) < strtotime(date('Y-m-d H:i:s'))) {
@@ -439,12 +439,12 @@ class surveyPollUserClass extends userClass
 
                 $details['summary'][] = array('data'=>count((array)$survey_list),'name'=>$tag1,'bgcolor'=>'primary');
 
-                $queryresponse = "SELECT count(id) as total_responses, round(sum(duration_taken)/count(id),2) as avg_duration_taken FROM ".TBL_SURVEY_RESPONSES." WHERE employee_id=".$get['emp_id']." and is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and survey_id in (".$survyidlist.") and current_status=".ST_COMPLETE; 
+                $queryresponse = "SELECT count(id) as total_responses, round(sum(duration_taken)/count(id),2) as avg_duration_taken FROM ".TBL_SURVEY_RESPONSES." WHERE employee_id=".$get['emp_id']." and is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and survey_id in (".$survyidlist.") and current_status=".ST_COMPLETE;
                 $response = $callConfig->getRow($queryresponse);
 
                 $details['summary'][] = array('data'=>($response->total_responses)==''?'0':($response->total_responses),'name'=>'Complete','bgcolor'=>'success');
 
-                $queryresponse = "SELECT count(id) as partial  FROM ".TBL_SURVEY_RESPONSES." WHERE employee_id=".$get['emp_id']." and is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and survey_id in (".$survyidlist.") and current_status=".ST_INPROGRESS; 
+                $queryresponse = "SELECT count(id) as partial  FROM ".TBL_SURVEY_RESPONSES." WHERE employee_id=".$get['emp_id']." and is_active=0 and company_id=".$get['company_id']." and category=".$get['category']." and survey_id in (".$survyidlist.") and current_status=".ST_INPROGRESS;
                 $presponse = $callConfig->getRow($queryresponse);
 
                 $details['summary'][] = array('data'=>$presponse->partial==''?'0':$presponse->partial,'name'=>'Partial','bgcolor'=>'warning');
@@ -1097,7 +1097,7 @@ class surveyPollUserClass extends userClass
 		}
 
 		return $details;
-	} 
+	}
 	public function totestcodems($get){
 		global $callConfig;
 		$start = date("Y-m-d", strtotime($get['fromdate']."-01"));
@@ -1165,16 +1165,16 @@ class surveyPollUserClass extends userClass
     	foreach($emp_data as $emp){
     		$emp_all = (array)$emp;
     		$emp_id = $emp->employee_id;
-    		//print_r($empwork[$emp->employee_id]); 
+    		//print_r($empwork[$emp->employee_id]);
     		$emp_rate_card_id = $empwork[$emp_id]['vrc_id'];
-    		///print_r($card[$emp_rate_card_id]); 
+    		///print_r($card[$emp_rate_card_id]);
 			$emp_vendor_id = $card[$emp_rate_card_id]['customer_id'];
-			$rate_uom =  $vrc[$empwork[$emp_id]['vrc_item_id']]['purchase_uom']; 
+			$rate_uom =  $vrc[$empwork[$emp_id]['vrc_item_id']]['purchase_uom'];
 			$rate_amount = $vrc[$empwork[$emp_id]['vrc_item_id']]['item_price'];
-			$mpc_uom =  $mpc[$empwork[$emp_id]['work_order_detail_id']]['purchase_uom']; 
+			$mpc_uom =  $mpc[$empwork[$emp_id]['work_order_detail_id']]['purchase_uom'];
 			$mpc_amount = $mpc[$empwork[$emp_id]['work_order_detail_id']]['item_price'];
 			$location_id = $emp->location_id;
-			
+
 			//echo "<pre>";print_r($loc_holiday[$location_id]); exit;
     		$emp_all['vendor_id'] = $emp_vendor_id;
     		$emp_all['vendor_name'] = $vend[$emp_vendor_id]['display_name'];
@@ -1182,10 +1182,10 @@ class surveyPollUserClass extends userClass
     		$emp_all['nonbillable_hrs'] = isset($timesheet[$emp_id]['nonbillable_hrs']) ? $timesheet[$emp_id]['nonbillable_hrs'] :0;
     		$emp_all['current_status'] = isset($timesheet[$emp_id]['current_status']) ? $timesheet[$emp_id]['current_status'] :0;
     		if($rate_uom == 'PD'){
-				$rate_amount = $rate_amount* $loc_holiday[$location_id]['count_working_days'];				
+				$rate_amount = $rate_amount* $loc_holiday[$location_id]['count_working_days'];
 			}
 			if($mpc_uom == 'PD'){
-				$mpc_amount = $mpc_amount* $loc_holiday[$location_id]['count_working_days'];				
+				$mpc_amount = $mpc_amount* $loc_holiday[$location_id]['count_working_days'];
 			}
 			$amount = round (($emp_all['billable_hrs']/8) * ($rate_amount/$loc_holiday[$location_id]['count_working_days']));
 			$main_amount = round(($emp_all['billable_hrs']/8) * ($mpc_amount/$loc_holiday[$location_id]['count_working_days']));
@@ -1251,21 +1251,21 @@ class surveyPollUserClass extends userClass
 			//print_r($location);
 		$work_days = 0; $offdays =0;
 		$work_dates = array();
-			for($i = 0; $i < $datediff+1; $i++){			
+			for($i = 0; $i < $datediff+1; $i++){
 				$valda =  date("Y-m-d", strtotime($from . ' + ' . $i . 'day'));
-				$valday = ucwords(date("l", strtotime($from . ' + ' . $i . 'day')));	
-				//echo $valday."step1".$valday."--";  		
+				$valday = ucwords(date("l", strtotime($from . ' + ' . $i . 'day')));
+				//echo $valday."step1".$valday."--";
 				if(in_array($valday, $weekly_working_days)){
 					if(!in_array($valda, $holidaydates[$location->id])){ //echo "step2";
 						$work_days = $work_days+1;
 						$work_dates[] = $valda;
 					}
 				}else{
-					$offdays =  $offdays+1;	
+					$offdays =  $offdays+1;
 				}
 			}
 			$return[$location->id] = array('holidaydates'=>$holidaydates[$location->id],'count_hoilydays'=>count($holidaydates[$location->id]),'minimum_hours'=>$minimum_hours_required,'week_days'=>$weekly_working_days,'count_week'=>count($weekly_working_days),'count_working_days'=>$work_days,'work_dates'=>$work_dates,'offdays'=>$offdays,'work_hrs'=>$work_days*$minimum_hours_required);
-		}	
+		}
 		//print_r($return);
 		return 	$return;
 	}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 class crmuserClass extends userClass{
 	public function getCRMLeads($get){
 		global $callConfig;
@@ -9,7 +9,7 @@ class crmuserClass extends userClass{
 			$originatercondition = " AND originator = '".$get['user_id']."'";
 			$prooriginatercondition = " AND assigner_id = '".$get['user_id']."'";
 			$feasibiltycondition = " AND fr.created_by = '".$get['user_id']."'";
-			
+
 		}
 		if($get['dashboard'] == "Y"){
 			$datecondition = " AND created_date BETWEEN '".$todaydate." 00:00:00' AND '".$todaydate." 23:59:59'";
@@ -34,11 +34,11 @@ class crmuserClass extends userClass{
 			$crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_contacts WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 GROUP BY crm_status";
 			$crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
 			$return['crm_contacts_graph'] = $crm_leadsgraphres;
-			
+
 			$crm_dealssql = "SELECT * FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 ORDER BY created_date DESC limit 5";
 			$crm_dealsres=$callConfig->getAllRows($crm_dealssql);
 			$return['crm_deals'] = $crm_dealsres;
-			
+
 			$crm_leadsgraphsql = "SELECT count(id) as cnt, crm_status FROM crm_deals WHERE company_id = '".$get['company_id']."' ".$originatercondition." AND is_active = 0 GROUP BY crm_status";
 			$crm_leadsgraphres=$callConfig->getAllRows($crm_leadsgraphsql);
 			$return['crm_deals_graph'] = $crm_leadsgraphres;
@@ -71,7 +71,7 @@ class crmuserClass extends userClass{
 				}
 				//$return['crm_pendding_task_details'][$transtable] = $ids;
 			}
-			
+
 			$frsql =  "SELECT fr.id as feasibility_id, cc.id as crm_contact_id, cc.display_name, cc.email_id, cc.phone, cc.company_name, cc.crm_company_id FROM feasibility_requirements fr, crm_contacts cc WHERE fr.company_id = '".$get['company_id']."' AND fr.company_id = cc.company_id AND fr.lead_id = cc.id AND fr.is_active = cc.is_active  AND fr.is_active = 0 AND fr.sales_order_id IS NULL AND fr.current_status = '".ST_APPROVED."'".$feasibiltycondition;
 			$frres=$callConfig->getAllRows($frsql);
 			$return['feasibility_requirements'] = $frres;
@@ -113,7 +113,7 @@ class crmuserClass extends userClass{
 					foreach($feasibility_requirementsres as $feasl){
 						$feasibility_requirements[$feasl->lead_id] = $feasl;
 					}
-					$return['feasibility_requirements'] = $feasibility_requirements;	
+					$return['feasibility_requirements'] = $feasibility_requirements;
 				}
 
 
@@ -162,7 +162,7 @@ class crmuserClass extends userClass{
 			// $return['crm_feasibilities_query'] = $query;
 			$crm_feasibilities = $callConfig->getAllRows($query);
 			$return['crm_feasibilities'] = $crm_feasibilities;
-			
+
 		}
 		// $crmldid = array();
 			// foreach($crm_leadsres as $crmlead){
@@ -172,7 +172,7 @@ class crmuserClass extends userClass{
 			// $lastcrmleadssql = "SELECT id, transaction_id, lead_type, date, time, address, country_id, state_id, city_id, post_code, phone, sms_text, email_content_id, recipient_email_id, member, comment, max(updated_date) as max_updated_date FROM crm_lead_details WHERE company_id = '".$get['company_id']."' AND transaction_id IN(".implode(',', $crmldid).") AND is_active = 0 GROUP BY transaction_id,updated_date ORDER BY max_updated_date ASC";
 			// $lastcrmleadsres=$callConfig->getAllRows($lastcrmleadssql);
 			// $return['lastactivity_crm_lead_details'] = $lastcrmleadsres;
-			
+
 			$todaycrmleadssql = "SELECT crmp.id, crmp.transaction_table, crmp.transaction_id, crmp.lead_type, crmp.date, crmp.time, crmp.address, crmp.country_id, crmp.state_id, crmp.city_id, crmp.post_code, crmp.phone, crmp.sms_text, crmp.email_content_id, crmp.recipient_email_id, crmp.member, crmp.comment, crmp.created_date FROM crm_histories crmp WHERE crmp.company_id = '".$get['company_id']."' AND crmp.is_active = 0 AND crmp.id IN(SELECT MAX(id) as id FROM crm_histories crmc WHERE crmc.company_id = crmp.company_id AND crmc.is_active = crmp.is_active AND crmc.transaction_table = crmp.transaction_table AND crmc.transaction_id = crmp.transaction_id GROUP BY crmc.transaction_table, crmc.transaction_id)";
 			$todaycrmleadsres=$callConfig->getAllRows($todaycrmleadssql);
 			$return['crm_histories'] = $todaycrmleadsres;
@@ -187,7 +187,7 @@ class crmuserClass extends userClass{
 			$return['crm_companies_id_name'] = $crm_companies;
 
 
-		
+
 
 		}elseif($get['rid'] !=0 AND $get['rid'] !="" AND $get['transaction_table'] !=""){
 			//* requird please don't add filed list
@@ -240,7 +240,7 @@ class crmuserClass extends userClass{
 		$crm_general_codessql = "SELECT id, code, value, label FROM crm_general_codes WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$crm_general_codesres=$callConfig->getAllRows($crm_general_codessql);
 		foreach($crm_general_codesres as $crmcode){
-			$crm_general_codes[$crmcode->code][] =$crmcode; 
+			$crm_general_codes[$crmcode->code][] =$crmcode;
 		}
 		$return['crm_general_codes'] = $crm_general_codes;
 
@@ -256,17 +256,17 @@ class crmuserClass extends userClass{
 		$crm_lead_typesres=$callConfig->getAllRows($crm_lead_typessql);
 		$return['crm_lead_types'] = $crm_lead_typesres;
 
-		$company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$company_typessql = "select id,company_type_name FROM company_types WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$company_typesres = $callConfig->getAllRows($company_typessql);
-		$return['company_types'] = $company_typesres;	
+		$return['company_types'] = $company_typesres;
 
-		$project_task_statussql = "SELECT  id, table_name, name, status, action_label FROM project_task_status WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$project_task_statussql = "SELECT  id, table_name, name, status, action_label FROM project_task_status WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$project_task_statusres = $callConfig->getAllRows($project_task_statussql);
 		$project_task_status = array();
 		foreach($project_task_statusres as $aulres){
 			$project_task_status[$aulres->table_name][$aulres->status]= $aulres;
 		}
-		$return['project_task_status'] = $project_task_status;	
+		$return['project_task_status'] = $project_task_status;
 		//echo "ascsdcvsvsfvsfvsfv".$get['transaction_table']; exit;
 		if($get['transaction_table'] =="crm_companies"){
 			$crm_lead_detailssql = "SELECT id, display_name FROM crm_contacts WHERE company_id = '".$get['company_id']."' AND (crm_company_id IN ('".$get['rid']."') OR crm_company_id IS NULL) AND is_active = 0";
@@ -308,7 +308,7 @@ class crmuserClass extends userClass{
 		}elseif($transaction_table== "crm_contacts"){
 			$insertary['crm_company_id'] = $post['crm_company_id'];
 			$insertary['crm_campaign_id'] = $post['crm_campaign_id'];
-			$insertary['feasibility_check'] = $post['feasibility_check'] =="Y"?"Y":"N";		
+			$insertary['feasibility_check'] = $post['feasibility_check'] =="Y"?"Y":"N";
 		}elseif($transaction_table =="crm_companies"){
 			//$insertary=array('company_id'=>$post['company_id'],'company_name'=>$post['company_name'],'business_size'=>$post['business_size'],'business_type'=>$post['business_type'],'established_year'=>$post['established_year'],'tin_number'=>$post['tin_number'],'vat_number'=>$post['vat_number'],'website_url'=>$post['website_url'],'pan_no'=>$post['pan_no'],'company_trading_name'=>$post['company_trading_name'],'company_registration_number'=>$post['company_registration_number'],'tan_number'=>$post['tan_number'],'address'=>$post['address'],'post_code'=>$post['post_code'],'country_id'=>$post['country_id'],'state_id'=>$post['state_id'],'city_id'=>$post['city_id'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
 
@@ -323,7 +323,7 @@ class crmuserClass extends userClass{
 					$return['customer'] = $customerinsert;
 					$insertary['customer_id'] = $customerinsert['LASTID'];
 				}
-				
+
 
 		}elseif($transaction_table =="crm_campaigns"){
 			$insertary=array('company_id'=>$post['company_id'],'campaign_name'=>$post['campaign_name'],'crm_campaign_type'=>$post['crm_campaign_type'],'campaign_objective'=>$post['campaign_objective'],'campaign_start_date'=>$this->dateconvertdbformat($post['campaign_start_date']),'campaign_end_date'=>$this->dateconvertdbformat($post['campaign_end_date']),'total_budget'=>$post['total_budget'],'redirect_url'=>$post['redirect_url'],'contact_email_id'=>$post['contact_email_id'],'contact_no'=>$post['contact_no'],'originator'=>$post['originator'],'remark'=>$post['remark'],'image'=>$post['image']);
@@ -336,14 +336,14 @@ class crmuserClass extends userClass{
 			$insertary['updated_date']=date('Y-m-d h:i:s');
 			$insertary['updated_by']=$post['user_id'];
 			$return['res'] = $callConfig->updateRecord($transaction_table,$insertary,'id',$post['rid']);
-			$lastid = $post['rid'];	
-			
+			$lastid = $post['rid'];
+
 			if($transaction_table == "projects"){
 				$projctteamsql = "SELECT id, user_id FROM `project_teams` WHERE company_id = '".$get['company_id']."' AND project_id = '".$lastid."' AND is_active = 0";
 				$projctteamres=$callConfig->getAllRows($projctteamsql);
 				$project_teamsuserid = array();
 				foreach($projctteamres as $prteam){
-					$project_teamsuserid[$prteam->user_id] = $prteam->id; 
+					$project_teamsuserid[$prteam->user_id] = $prteam->id;
 				}
 				$callConfig->updateRecord('project_teams',array('is_active'=>null),'id',$lastid);
 				if(count((array)$post['project_team_user_id']) != '0'){
@@ -368,8 +368,8 @@ class crmuserClass extends userClass{
 			$insertary['current_status']='0';
 			$tapres = $callConfig->insertRecord($transaction_table,$insertary);
 			$return['res'] =$tapres;
-			$lastid = $tapres['LASTID'];	
-			
+			$lastid = $tapres['LASTID'];
+
 			if($tapres['status'] == 'sucess' AND $transaction_table == "projects"){
 				if(count((array)$post['project_team_user_id']) != '0'){
 					foreach($post['project_team_user_id'] as $userid){
@@ -383,8 +383,8 @@ class crmuserClass extends userClass{
 		return $return;
 	}
 	public function insertCRMLeadDetails($get,$post){
-		global $callConfig; 
-		$return = array(); 
+		global $callConfig;
+		$return = array();
 		if($post['rid'] !=""){ // updatre status
 			$insertary1=array('company_id'=>$post['company_id'],'completion_datetime'=>date("Y-m-d H:i:s"),'completion_note'=>$post['comment'],'current_status'=>ST_APPROVED,'updated_by'=>$post['user_id'],'updated_date'=>date("Y-m-d H:i:s"));
 			$crmleaddetails = $callConfig->updateRecord('crm_histories',$insertary1,'id',$post['rid']);
@@ -410,7 +410,7 @@ class crmuserClass extends userClass{
 				$senddata['lead_Task'] = $post['comment'];
 				$senddata['assign_user_list'] = $assign_user_list;
 				$res = $this->emailsendmediaternew($senddata);
-				
+
 				$msg = "New Task Assign For You :".$post['comment'];
 				$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$post['transaction_id'],'application_table_name'=>'crm_histories', 'type'=>'ACTION', 'notification_users'=>$touserarray,'option'=>'COM_VIEW_CRM_DASHBOARDS','assigner_id'=>$post['user_id']);
 				$sendnotification = $this->tosendnotifiations($notdataa);
@@ -460,7 +460,7 @@ class crmuserClass extends userClass{
 
 
 
-//Start Email New Code 
+//Start Email New Code
 
 	public function emailsendmediaternew($senddata){
 		global $callConfig;
@@ -503,10 +503,10 @@ class crmuserClass extends userClass{
 			}
 		}
 		return $ress;
-	} 
+	}
 	public function sendEmailslistnew($data){
 		global $callConfig;
-		$email_data = array('email_source'=>$data['sender'], 'content'=>$data['content'], 'email_type'=>$data['email_type'], 'is_active'=>0 , 'current_status'=>0,'email_content_ref_id'=>$data['email_content_ref_id'], 'created_by'=>$data['created_by'] ,'created_date'=> date('Y-m-d H:i:s'));   
+		$email_data = array('email_source'=>$data['sender'], 'content'=>$data['content'], 'email_type'=>$data['email_type'], 'is_active'=>0 , 'current_status'=>0,'email_content_ref_id'=>$data['email_content_ref_id'], 'created_by'=>$data['created_by'] ,'created_date'=> date('Y-m-d H:i:s'));
 		foreach ($data['revicer'] as $email) {
 			$email_data['email'] = $email;
 			$email_res=$callConfig->insertRecord(TBL_EMAIL_LOGS,$email_data);
@@ -520,7 +520,7 @@ class crmuserClass extends userClass{
 		}
 		//echo "email send sucess";
 		return $email_data;
-	} 	
+	}
 	public function emailtemplatenew($send_data){
 		global $callConfig;
 		$temp = "";
@@ -537,8 +537,8 @@ class crmuserClass extends userClass{
 		$return['emailcontentsql'] = $emailcontentsql;
 		//print_r($send_data);
 		$emailcontentres=$callConfig->getRow($emailcontentsql);
-		$subject =  $this->emaildatareplace($send_data, $emailcontentres->email_subject);	
-		
+		$subject =  $this->emaildatareplace($send_data, $emailcontentres->email_subject);
+
 		$temp = '
 		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml">
@@ -625,9 +625,9 @@ class crmuserClass extends userClass{
 			preg_match('/\b\d{6}\b/', $cust->billing_address, $postalCodeMatch);
 			$postalCode = $postalCodeMatch[0] ?? null;
 			$address = trim(str_replace($postalCode, '', $cust->billing_address));
-			$customers[$cust->id]['post_code'] = $postalCode;			
+			$customers[$cust->id]['post_code'] = $postalCode;
 			//End Get Post Code
-			
+
 			// $words = preg_split('/[\s,]+/', $cust->billing_address);
 		 //    foreach ($words as $word) {
 		 //        if (in_array(ucfirst(strtolower($word)), $stateNames, true)) {
@@ -646,8 +646,8 @@ class crmuserClass extends userClass{
 
 			// foreach($citiesres as $citt){
 		 //        if (stripos($cust->billing_address, $citt->city_name) !== false) {
-		 //            $customers[$cust->id]['city_id'] = $citt->id;			
-		 //        	$customers[$cust->id]['city_city_name'] = $citt->city_name;	
+		 //            $customers[$cust->id]['city_id'] = $citt->id;
+		 //        	$customers[$cust->id]['city_city_name'] = $citt->city_name;
 		 //        }
 		 //    }
 			$updateary = array('billing_city'=>'','billing_state'=>'','billing_post_code'=>$postalCode,'billing_country'=>'101','shipping_city'=>'','shipping_state'=>'','shipping_post_code'=>$postalCode,'shipping_country'=>'101');
@@ -670,7 +670,7 @@ class crmuserClass extends userClass{
 			$insertary['crm_contact_id']=$transaction_id;
 			$callConfig->updateRecord("crm_leads",$insertary,'id',$transaction_id);
 		}
-		return $res; 
+		return $res;
 
 	}
 	public function getLeadAndContactAssigned($get){
@@ -682,16 +682,16 @@ class crmuserClass extends userClass{
 
 		$application_userssql = "SELECT id,display_name,user_photo FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0  AND JSON_SEARCH(role_id, 'one', 'CRM_USER') IS NOT NULL";
 		$application_usersres=$callConfig->getAllRows($application_userssql);
-		
 
- 		$crm_historiessql = "SELECT crml.access_user_id, COUNT(DISTINCT crml.id) AS lead_total_cnt, COUNT(DISTINCT crmh.transaction_id) AS lead_used_cnt FROM crm_leads crml LEFT JOIN crm_histories crmh ON crmh.company_id = crml.company_id AND crmh.transaction_table = 'crm_leads' AND crmh.transaction_id = crml.id AND crmh.is_active = crml.is_active WHERE crml.company_id = '".$get['company_id']."' ".$originatercondition." AND crml.is_active = 0 GROUP BY crml.access_user_id"; 
+
+ 		$crm_historiessql = "SELECT crml.access_user_id, COUNT(DISTINCT crml.id) AS lead_total_cnt, COUNT(DISTINCT crmh.transaction_id) AS lead_used_cnt FROM crm_leads crml LEFT JOIN crm_histories crmh ON crmh.company_id = crml.company_id AND crmh.transaction_table = 'crm_leads' AND crmh.transaction_id = crml.id AND crmh.is_active = crml.is_active WHERE crml.company_id = '".$get['company_id']."' ".$originatercondition." AND crml.is_active = 0 GROUP BY crml.access_user_id";
  		$return['crm_historiessql'] = $crm_historiessql;
  		$crm_historiesres=$callConfig->getAllRows($crm_historiessql);
  		foreach($crm_historiesres as $aus){
 	 		$crm_histories_lead['crm_leads'][$aus->access_user_id] =$aus;
 	 	}
 
- 		$crm_contactssql = "SELECT crml.access_user_id, COUNT(DISTINCT crml.id) AS lead_total_cnt, COUNT(DISTINCT crmh.transaction_id) AS lead_used_cnt FROM crm_contacts crml LEFT JOIN crm_histories crmh ON crmh.company_id = crml.company_id AND crmh.transaction_table = 'crm_contacts' AND crmh.transaction_id = crml.id AND crmh.is_active = crml.is_active WHERE crml.company_id = '".$get['company_id']."' ".$originatercondition." AND crml.is_active = 0 GROUP BY crml.access_user_id"; 
+ 		$crm_contactssql = "SELECT crml.access_user_id, COUNT(DISTINCT crml.id) AS lead_total_cnt, COUNT(DISTINCT crmh.transaction_id) AS lead_used_cnt FROM crm_contacts crml LEFT JOIN crm_histories crmh ON crmh.company_id = crml.company_id AND crmh.transaction_table = 'crm_contacts' AND crmh.transaction_id = crml.id AND crmh.is_active = crml.is_active WHERE crml.company_id = '".$get['company_id']."' ".$originatercondition." AND crml.is_active = 0 GROUP BY crml.access_user_id";
  		$return['crm_contactssql'] = $crm_contactssql;
  		$crm_contactsres=$callConfig->getAllRows($crm_contactssql);
  		foreach($crm_contactsres as $aus){
@@ -717,7 +717,7 @@ class crmuserClass extends userClass{
 		$crm_dealsres=$callConfig->getAllRows($crm_dealssql);
 		$return['crm_projects'] = $crm_dealsres;
 
-		return $return; 
+		return $return;
 	}
 	public function leadAndContactAssigning($get,$post){
 		global $callConfig;
@@ -736,8 +736,8 @@ class crmuserClass extends userClass{
 				$projuid[] = $resultt->user_id;
 			}
 			$return['projuid'] = $projuid;
-			$contactCount = $post['number_of_lead_contact']; 
-			$employeeCount = count((array)$projuid); 
+			$contactCount = $post['number_of_lead_contact'];
+			$employeeCount = count((array)$projuid);
 			$contactsPerEmployee = intdiv($contactCount, $employeeCount);
 			$extraContacts = $contactCount % $employeeCount;
 			$seq = 0;
@@ -745,7 +745,7 @@ class crmuserClass extends userClass{
 			    $distribution = $contactsPerEmployee + ($i == $employeeCount - 1 ? $extraContacts : 0);
 			    $user_id[] = array("user_id"=>$projuid[$seq],"contact"=>$distribution);
 				$seq++;
-			}	
+			}
 		}else{ //user
 			$user_id[] = array("user_id"=>$post['application_user_id'],"contact"=>$post['number_of_lead_contact']);
 		}
@@ -765,7 +765,7 @@ class crmuserClass extends userClass{
 
 			}
 		}
-		return $return; 
+		return $return;
 	}
 	public function testAPI($get){
 		global $callConfig;
@@ -776,7 +776,7 @@ class crmuserClass extends userClass{
 		// $get['party_id'] = 1;
 		// $get['transaction_type'] = '';
 		// $return['transaction_number_details'] = $this->generatingApplicationSerialNumberMastersTst('purchase_invoices',$get);
-		
+
 /**payment tersm
 		$transaction_table = 'sales_invoices';
 		$sql = "SELECT * FROM `sales_invoices` WHERE  is_active = 0 AND cancel_invoice = 'N' AND current_status = 199";
@@ -787,15 +787,15 @@ class crmuserClass extends userClass{
 			if(count((array)$payment_term_history) != "0"){
 				$pth_cnt = count((array)$payment_term_history);
 				$mk = 1;
-				foreach($payment_term_history as $key=>$pterh){ 
-					
+				foreach($payment_term_history as $key=>$pterh){
+
 					$insertdata = array('company_id'=>1,'transaction_table'=>$transaction_table,'transaction_id'=>$transaction_no,'transaction_number'=>$partyinvoice->transaction_number,'party_id'=>$partyinvoice->party_id,'due_date'=>$this->dateconvertdbformat($pterh['due_date']),'due_amount'=>$pterh['amount'],'advance_offer_date'=>$this->dateconvertdbformat($pterh['extra_date']),'advance_offer_amount'=>$pterh['extra_amt'],'pending_amount'=>$pterh['amount'],'is_active'=>'0','current_status'=>'0','created_date'=>date('Y-m-d H:i:s'),'created_by'=>$get['user_id'],'amount'=>$pterh['without_tax_amount'],'tax_amount'=>$pterh['tax_amount'],'percentage'=>$pterh['percentage'],'without_tax_pending_amount'=>$pterh['without_tax_amount'],'tax_pending_amount'=>$pterh['tax_amount']);
 					$callConfig->insertRecord('payment_term_transactions',$insertdata);
 					$mk++;
-				}	
+				}
 			}
 		}
-payment tersm**/ 
+payment tersm**/
 
 
 		//	$mobilsendnotification = array('company_id'=>1,'message'=>'hi test message','user_id'=>14,'title'=>'Test');
@@ -803,22 +803,22 @@ payment tersm**/
 
 //Start opening balance stock upload
 	/**
-		
+
 
 		$itemsql = "SELECT * FROM `items`";
         $itemres = $callConfig->getAllRows($itemsql);
 		foreach($itemres as $itm){
 
-			
+
 			//$day_rate = $this->togetitemwadayrate($itm->item_id, $get['company_id']);
 			$day_rate = $day_rate !=""?$day_rate:0;
-   			
-		/**	
+
+		/**
    			$reason_id = 1;//1:add, 2 minus
-   			//$in_qty = $purchase_qty = $itm->plus_qty; 
+   			//$in_qty = $purchase_qty = $itm->plus_qty;
 			//$in_value = $itm->plus_qty*$day_rate;
 
-			$in_qty = $purchase_qty = 0; 
+			$in_qty = $purchase_qty = 0;
 			$in_value = 0;
 			$out_qty = $sales_qty = 0;
 			$out_value = 0;
@@ -828,8 +828,8 @@ payment tersm**/
 			$reason_id = 2;//1:add, 2 minus
    			$in_qty = $purchase_qty = 0;
 			$in_value = 0;
-			
-			$out_qty = $sales_qty = $itm->minus_qty; 
+
+			$out_qty = $sales_qty = $itm->minus_qty;
 			$out_value = $itm->minus_qty*$day_rate;
 			$sale_price = $day_rate;
 			$sale_value = $itm->minus_qty*$day_rate;
@@ -841,7 +841,7 @@ payment tersm**/
 
 
 		}
-**/ 
+**/
 //End opening balance stock upload
 
 
@@ -854,17 +854,17 @@ payment tersm**/
 		$sires=$callConfig->getAllRows($sql);
 		foreach ($sires as $sidata){
 			$insertary = "INSERT INTO `sla_tracking_logs`(`company_id`, `module_setup_id`, `transaction_table`, `transaction_id`, `originator`, `request_datetime`, `response_datetime`, `remarks`, `sla_type`, `previous_status`, `response_status`, `is_active`, `current_status`) VALUES ('1',1,'".$transrtable."','".$sidata->id."','".$sidata->originator."','".$sidata->transaction_date." 14:54:58','".$sidata->transaction_date." 14:54:58','INSERT','T','2','',0,0),('1',1,'".$transrtable."','".$sidata->id."','".$sidata->originator."','".$sidata->transaction_date." 16:54:58','".$sidata->transaction_date." 16:54:58','WorkFlow','W','2','0',0,0),('1',1,'".$transrtable."','".$sidata->id."','4','".$sidata->transaction_date." 17:54:58','".$sidata->transaction_date." 17:54:58','WorkFlow','W','0','101',0,0),('1',1,'".$transrtable."','".$sidata->id."','3','".$sidata->transaction_date." 19:54:58','".$sidata->transaction_date." 19:54:58','WorkFlow','W','101','199',0,0)";
-			//$res = $callConfig->executeQuery($insertary);	
+			//$res = $callConfig->executeQuery($insertary);
 			$return['maintrans_sql'][] = $insertary;
 			$return['maintrans_res'][] = $res;
 		}
 		echo "<pre>"; print_r($return);
 		**/
-//End SLA Traking Log		
+//End SLA Traking Log
 
-		
 
-//Start Insert goods_receipt_notes 
+
+//Start Insert goods_receipt_notes
 		/**
 		 //SELECT * FROM `purchase_invoices` WHERE current_status = 199  AND id >= 812
 		//$sql ="SELECT * FROM `purchase_invoices` WHERE current_status = 199  AND id >= 812 AND is_active = 0";
@@ -873,27 +873,27 @@ payment tersm**/
 		$sires=$callConfig->getAllRows($sql);
 		foreach ($sires as $sidata){
 			$return['maintrans'][] = $sidata;
-			$insertary=array('company_id'=>$get['company_id'],'cost_center_id'=>$sidata->cost_center_id,'transaction_date'=>$sidata->transaction_date,'party_id'=>$sidata->party_id,'party_name'=>$sidata->party_name,'party_tax_number'=>$sidata->party_tax_number,'cost_center_id'=>$sidata->party_email,'party_email'=>$sidata->party_email,'party_phone'=>$sidata->party_phone,'party_address'=>$sidata->party_address,'party_ship_adderss'=>$sidata->party_ship_adderss,'payment_terms'=>$sidata->payment_terms,'amount'=>$sidata->amount,'tax_amount'=>$sidata->tax_amount,'type'=>$sidata->type,'tax_type'=>$sidata->tax_type,'discount_type'=>$sidata->discount_type,'discount_value'=>$sidata->discount_value,'discount_amount'=>$sidata->discount_amount,'total_amount'=>$sidata->total_amount,'tax_state'=>$sidata->tax_state,'due_date'=>$sidata->due_date,'ref_type'=>$sidata->ref_type,'ref_id'=>$sidata->ref_id,'ref_no'=>$sidata->ref_no,'ref_date'=>$sidata->ref_date,'payment_term_history'=>$sidata->payment_term_history,'pending_amount'=>$sidata->pending_amount,'total_tax_split_details'=>$sidata->total_tax_split_details,'is_active'=>0 ,'current_status'=>199); 
-			$res = $callConfig->insertRecord('goods_receipt_notes',$insertary);	
+			$insertary=array('company_id'=>$get['company_id'],'cost_center_id'=>$sidata->cost_center_id,'transaction_date'=>$sidata->transaction_date,'party_id'=>$sidata->party_id,'party_name'=>$sidata->party_name,'party_tax_number'=>$sidata->party_tax_number,'cost_center_id'=>$sidata->party_email,'party_email'=>$sidata->party_email,'party_phone'=>$sidata->party_phone,'party_address'=>$sidata->party_address,'party_ship_adderss'=>$sidata->party_ship_adderss,'payment_terms'=>$sidata->payment_terms,'amount'=>$sidata->amount,'tax_amount'=>$sidata->tax_amount,'type'=>$sidata->type,'tax_type'=>$sidata->tax_type,'discount_type'=>$sidata->discount_type,'discount_value'=>$sidata->discount_value,'discount_amount'=>$sidata->discount_amount,'total_amount'=>$sidata->total_amount,'tax_state'=>$sidata->tax_state,'due_date'=>$sidata->due_date,'ref_type'=>$sidata->ref_type,'ref_id'=>$sidata->ref_id,'ref_no'=>$sidata->ref_no,'ref_date'=>$sidata->ref_date,'payment_term_history'=>$sidata->payment_term_history,'pending_amount'=>$sidata->pending_amount,'total_tax_split_details'=>$sidata->total_tax_split_details,'is_active'=>0 ,'current_status'=>199);
+			$res = $callConfig->insertRecord('goods_receipt_notes',$insertary);
 			$return['maintrans_res'][] = $res;
 
 			if($res['LASTID'] !=""){
-				$siitemssql= "INSERT INTO grn_items (`company_id`, `transaction_id`, `item_id`, `account_code`, `item_name`, `description`, `purchase_uom`, `item_quantity`, `item_price`, `item_amount`, `tax_amount`, `discount_amount`, `total_amount`, `reason_id`, `doc_ref_no`, `doc_ref_date`, `req_date`, `item_st_cost`, `item_fifo_cost`, `item_lifo_cost`, `item_wa_cost`, `approved_quantity`, `transaction_type`, `transaction_qty`, `pending_qty`, `item_details`, `tax_deducted_source_id`, `tds_amount`, `ref_transaction_item_table_id`, ref_transaction_table_id, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`) SELECT `company_id`, ".$res['LASTID'].", `item_id`, `account_code`, `item_name`, `description`, `purchase_uom`, `item_quantity`, `item_price`, `item_amount`, `tax_amount`, `discount_amount`, `total_amount`, `reason_id`, `doc_ref_no`, `doc_ref_date`, `req_date`, `item_st_cost`, `item_fifo_cost`, `item_lifo_cost`, `item_wa_cost`, `approved_quantity`, `transaction_type`, `transaction_qty`, `pending_qty`, `item_details`, `tax_deducted_source_id`, `tds_amount`, ref_transaction_item_table_id, ref_transaction_table_id, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `pi_items` WHERE transaction_id = '".$sidata->id."' AND is_active = 0"; 
+				$siitemssql= "INSERT INTO grn_items (`company_id`, `transaction_id`, `item_id`, `account_code`, `item_name`, `description`, `purchase_uom`, `item_quantity`, `item_price`, `item_amount`, `tax_amount`, `discount_amount`, `total_amount`, `reason_id`, `doc_ref_no`, `doc_ref_date`, `req_date`, `item_st_cost`, `item_fifo_cost`, `item_lifo_cost`, `item_wa_cost`, `approved_quantity`, `transaction_type`, `transaction_qty`, `pending_qty`, `item_details`, `tax_deducted_source_id`, `tds_amount`, `ref_transaction_item_table_id`, ref_transaction_table_id, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`) SELECT `company_id`, ".$res['LASTID'].", `item_id`, `account_code`, `item_name`, `description`, `purchase_uom`, `item_quantity`, `item_price`, `item_amount`, `tax_amount`, `discount_amount`, `total_amount`, `reason_id`, `doc_ref_no`, `doc_ref_date`, `req_date`, `item_st_cost`, `item_fifo_cost`, `item_lifo_cost`, `item_wa_cost`, `approved_quantity`, `transaction_type`, `transaction_qty`, `pending_qty`, `item_details`, `tax_deducted_source_id`, `tds_amount`, ref_transaction_item_table_id, ref_transaction_table_id, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `pi_items` WHERE transaction_id = '".$sidata->id."' AND is_active = 0";
 				$res1 = $callConfig->executeQuery($siitemssql);
 				$return['maintrans_res1'][] = $res1;
 
-				$siitemssql= "INSERT INTO grn_item_taxes (`company_id`, `transaction_id`, `transaction_item_id`, `tax_name`, `tax_value`, `tax_id`, `amount`, `tax_amount`, `total_amount`, `tax_type`, `tax_split_details`, `transaction_item_row_id`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`)SELECT `company_id`, ".$res['LASTID'].", `transaction_item_id`, `tax_name`, `tax_value`, `tax_id`, `amount`, `tax_amount`, `total_amount`, `tax_type`, `tax_split_details`, `transaction_item_row_id`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `pi_item_taxes` WHERE transaction_id = '".$sidata->id."' AND is_active = 0"; 
+				$siitemssql= "INSERT INTO grn_item_taxes (`company_id`, `transaction_id`, `transaction_item_id`, `tax_name`, `tax_value`, `tax_id`, `amount`, `tax_amount`, `total_amount`, `tax_type`, `tax_split_details`, `transaction_item_row_id`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`)SELECT `company_id`, ".$res['LASTID'].", `transaction_item_id`, `tax_name`, `tax_value`, `tax_id`, `amount`, `tax_amount`, `total_amount`, `tax_type`, `tax_split_details`, `transaction_item_row_id`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `pi_item_taxes` WHERE transaction_id = '".$sidata->id."' AND is_active = 0";
 				$res2 = $callConfig->executeQuery($siitemssql);
 				$return['maintrans_res1_text'][] = $res2;
 			}
-		}	
+		}
 
 	**/
-//End Insert goods_receipt_notes 
+//End Insert goods_receipt_notes
 
 
 
-//Start Insert delivery_orders 
+//Start Insert delivery_orders
 		/**
 		$sql = "SELECT * FROM `sales_invoices` WHERE id >= 843 AND id <=995 AND is_active = 0";
 		$sires=$callConfig->getAllRows($sql);
@@ -901,30 +901,30 @@ payment tersm**/
 		foreach ($sires as $sidata){
 			$return['maintrans'][] = $sidata;
 // 'transaction_number'=>'DO000'.$i
-			$insertary=array('company_id'=>$get['company_id'],'cost_center_id'=>$sidata->cost_center_id,'transaction_date'=>$sidata->transaction_date,'party_id'=>$sidata->party_id,'party_name'=>$sidata->party_name,'party_tax_number'=>$sidata->party_tax_number,'cost_center_id'=>$sidata->party_email,'party_email'=>$sidata->party_email,'party_phone'=>$sidata->party_phone,'party_address'=>$sidata->party_address,'party_ship_adderss'=>$sidata->party_ship_adderss,'payment_terms'=>$sidata->payment_terms,'amount'=>$sidata->amount,'tax_amount'=>$sidata->tax_amount,'type'=>$sidata->type,'tax_type'=>$sidata->tax_type,'discount_type'=>$sidata->discount_type,'discount_value'=>$sidata->discount_value,'discount_amount'=>$sidata->discount_amount,'total_amount'=>$sidata->total_amount,'tax_state'=>$sidata->tax_state,'due_date'=>$sidata->due_date,'ref_type'=>$sidata->ref_type,'ref_id'=>$sidata->ref_id,'ref_no'=>$sidata->ref_no,'ref_date'=>$sidata->ref_date,'payment_term_history'=>$sidata->payment_term_history,'pending_amount'=>$sidata->pending_amount,'total_tax_split_details'=>$sidata->total_tax_split_details,'is_active'=>0 ,'current_status'=>199); 
-			$res = $callConfig->insertRecord('delivery_orders',$insertary);	
+			$insertary=array('company_id'=>$get['company_id'],'cost_center_id'=>$sidata->cost_center_id,'transaction_date'=>$sidata->transaction_date,'party_id'=>$sidata->party_id,'party_name'=>$sidata->party_name,'party_tax_number'=>$sidata->party_tax_number,'cost_center_id'=>$sidata->party_email,'party_email'=>$sidata->party_email,'party_phone'=>$sidata->party_phone,'party_address'=>$sidata->party_address,'party_ship_adderss'=>$sidata->party_ship_adderss,'payment_terms'=>$sidata->payment_terms,'amount'=>$sidata->amount,'tax_amount'=>$sidata->tax_amount,'type'=>$sidata->type,'tax_type'=>$sidata->tax_type,'discount_type'=>$sidata->discount_type,'discount_value'=>$sidata->discount_value,'discount_amount'=>$sidata->discount_amount,'total_amount'=>$sidata->total_amount,'tax_state'=>$sidata->tax_state,'due_date'=>$sidata->due_date,'ref_type'=>$sidata->ref_type,'ref_id'=>$sidata->ref_id,'ref_no'=>$sidata->ref_no,'ref_date'=>$sidata->ref_date,'payment_term_history'=>$sidata->payment_term_history,'pending_amount'=>$sidata->pending_amount,'total_tax_split_details'=>$sidata->total_tax_split_details,'is_active'=>0 ,'current_status'=>199);
+			$res = $callConfig->insertRecord('delivery_orders',$insertary);
 			$return['maintrans_res'][] = $res;
 
 			if($res['LASTID'] !=""){
 			//$callConfig->updateRecord("sales_invoices",array('ref_no'=>$res['LASTID']),'id',$sidata->id);
-				$siitemssql= "INSERT INTO do_items (`company_id`, `transaction_id`, `item_id`, `account_code`, `item_name`, `description`, `purchase_uom`, `item_quantity`, `item_price`, `item_amount`, `tax_amount`, `discount_amount`, `total_amount`, `reason_id`, `doc_ref_no`, `doc_ref_date`, `req_date`, `item_st_cost`, `item_fifo_cost`, `item_lifo_cost`, `item_wa_cost`, `approved_quantity`, `transaction_type`, `transaction_qty`, `pending_qty`, `item_details`, `tax_deducted_source_id`, `tds_amount`, `ref_transaction_item_table_id`, ref_transaction_table_id, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`)SELECT `company_id`, ".$res['LASTID'].", `item_id`, `account_code`, `item_name`, `description`, `purchase_uom`, `item_quantity`, `item_price`, `item_amount`, `tax_amount`, `discount_amount`, `total_amount`, `reason_id`, `doc_ref_no`, `doc_ref_date`, `req_date`, `item_st_cost`, `item_fifo_cost`, `item_lifo_cost`, `item_wa_cost`, `approved_quantity`, `transaction_type`, `transaction_qty`, `pending_qty`, `item_details`, `tax_deducted_source_id`, `tds_amount`, `id`,  transaction_id,`is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `si_items` WHERE transaction_id = '".$sidata->id."'  AND is_active = 0"; 
+				$siitemssql= "INSERT INTO do_items (`company_id`, `transaction_id`, `item_id`, `account_code`, `item_name`, `description`, `purchase_uom`, `item_quantity`, `item_price`, `item_amount`, `tax_amount`, `discount_amount`, `total_amount`, `reason_id`, `doc_ref_no`, `doc_ref_date`, `req_date`, `item_st_cost`, `item_fifo_cost`, `item_lifo_cost`, `item_wa_cost`, `approved_quantity`, `transaction_type`, `transaction_qty`, `pending_qty`, `item_details`, `tax_deducted_source_id`, `tds_amount`, `ref_transaction_item_table_id`, ref_transaction_table_id, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`)SELECT `company_id`, ".$res['LASTID'].", `item_id`, `account_code`, `item_name`, `description`, `purchase_uom`, `item_quantity`, `item_price`, `item_amount`, `tax_amount`, `discount_amount`, `total_amount`, `reason_id`, `doc_ref_no`, `doc_ref_date`, `req_date`, `item_st_cost`, `item_fifo_cost`, `item_lifo_cost`, `item_wa_cost`, `approved_quantity`, `transaction_type`, `transaction_qty`, `pending_qty`, `item_details`, `tax_deducted_source_id`, `tds_amount`, `id`,  transaction_id,`is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `si_items` WHERE transaction_id = '".$sidata->id."'  AND is_active = 0";
 				$res1 = $callConfig->executeQuery($siitemssql);
 				$return['maintrans_res1'][] = $res1;
 
-				$siitemssql= "INSERT INTO do_item_taxes (`company_id`, `transaction_id`, `transaction_item_id`, `tax_name`, `tax_value`, `tax_id`, `amount`, `tax_amount`, `total_amount`, `tax_type`, `tax_split_details`, `transaction_item_row_id`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`)SELECT `company_id`, ".$res['LASTID'].", `transaction_item_id`, `tax_name`, `tax_value`, `tax_id`, `amount`, `tax_amount`, `total_amount`, `tax_type`, `tax_split_details`, `transaction_item_row_id`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `si_item_taxes` WHERE transaction_id = '".$sidata->id."'  AND is_active = 0"; 
+				$siitemssql= "INSERT INTO do_item_taxes (`company_id`, `transaction_id`, `transaction_item_id`, `tax_name`, `tax_value`, `tax_id`, `amount`, `tax_amount`, `total_amount`, `tax_type`, `tax_split_details`, `transaction_item_row_id`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`)SELECT `company_id`, ".$res['LASTID'].", `transaction_item_id`, `tax_name`, `tax_value`, `tax_id`, `amount`, `tax_amount`, `total_amount`, `tax_type`, `tax_split_details`, `transaction_item_row_id`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `si_item_taxes` WHERE transaction_id = '".$sidata->id."'  AND is_active = 0";
 				$res2 = $callConfig->executeQuery($siitemssql);
 				$return['maintrans_res1_tax'][] = $res2;
 
 			}
 
 			$i++;
-		
-		} 
+
+		}
 		**/
-//End Insert delivery_orders 
+//End Insert delivery_orders
 
 
-		
+
 
 
 
@@ -936,24 +936,24 @@ payment tersm**/
 		$sires1=$callConfig->getAllRows($sql1);
 		$datewithgrndo = array();
 		foreach ($sires1 as $transaction1){
-			$datewithgrndo111[$transaction1->transaction_date] =$transaction1->transaction_date; 
-			$datewithgrndo[$transaction1->transaction_date]['goods_receipt_notes'][] =$transaction1; 
+			$datewithgrndo111[$transaction1->transaction_date] =$transaction1->transaction_date;
+			$datewithgrndo[$transaction1->transaction_date]['goods_receipt_notes'][] =$transaction1;
 		}
 
 		$sql2 = "SELECT * FROM `delivery_orders` WHERE transaction_number IS NULL ORDER BY `transaction_date` ASC";
-		
+
 		//$sql2 = "SELECT id, transaction_date,transaction_location_id, transaction_warehouse_id, transaction_number FROM delivery_orders WHERE  MONTH(transaction_date) IN(01) AND  YEAR(transaction_date) IN(2026)  AND is_active = 0 ORDER BY `transaction_date` ASC";
 		//$sql = "SELECT id, transaction_date,transaction_location_id, transaction_warehouse_id, transaction_number FROM delivery_orders ORDER BY `transaction_date` ASC";
 		$sires2=$callConfig->getAllRows($sql2);
 		foreach ($sires2 as $transaction2){
-			$datewithgrndo111[$transaction2->transaction_date] =$transaction2->transaction_date; 
-			$datewithgrndo[$transaction2->transaction_date]['delivery_orders'][] =$transaction2; 
+			$datewithgrndo111[$transaction2->transaction_date] =$transaction2->transaction_date;
+			$datewithgrndo[$transaction2->transaction_date]['delivery_orders'][] =$transaction2;
 		}
 		ksort($datewithgrndo);
 		$i=1;
 		foreach($datewithgrndo as $date=>$transtab){
 			foreach($transtab as $transaction_table=>$sires1){
-			
+
 				$get['transaction_table'] = $transaction_table;
 				$parentdmtsql = "SELECT id,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$get['transaction_table']."' AND item_table !='' AND is_active = 0";
 				$parentdmtres=$callConfig->getRow($parentdmtsql);
@@ -971,9 +971,9 @@ payment tersm**/
 
 					foreach($itemresult as $itemres){
 						$mainitem = $this->togetitemvalues($itemres->item_id);
-						$day_rate = $this->togetitemwadayrate($itemres->item_id, $get['company_id']);	
+						$day_rate = $this->togetitemwadayrate($itemres->item_id, $get['company_id']);
 						$len = array('company_id' =>$itemres->company_id , 'location_id' =>$transaction->transaction_location_id, 'transaction_warehouse_id' => $transaction->transaction_warehouse_id, 'transaction_date' => $transaction->transaction_date , 'item_id' =>$itemres->item_id,'document_no'=>$transaction->id,'document_type' =>$get['transaction_table'],'document_ref_no' =>$transaction->transaction_number,'in_qty' =>$itemres->item_quantity,'in_value' =>$itemres->total_amount,'item_in_value' =>$itemres->item_amount,'reason_id'=>$itemres->reason_id,'out_qty' =>$itemres->item_quantity,'out_value' =>$itemres->total_amount,'sale_price'=>$itemres->item_price,'sale_value'=>$itemres->total_amount,'item_wa_cost'=>$day_rate,'item_st_cost'=>$mainitem->purchase_price,'is_active'=>'0','current_status'=>'0','sales_qty'=>0,'purchase_qty'=>0);
-					
+
 
 						if(in_array($get['transaction_table'], (array)$purchaseuomtables)){
 							$len['purchase_uom'] =$itemres->purchase_uom;
@@ -1017,17 +1017,17 @@ payment tersm**/
 
 						if(in_array($get['transaction_table'], (array)$in_array)){
 							$len['out_qty'] = '0';
-							$len['out_value'] = '0'; 
+							$len['out_value'] = '0';
 						}else if(in_array($get['transaction_table'], (array)$out_array)){
 							$len['in_qty'] = '0';
-							$len['in_value'] = '0'; 
+							$len['in_value'] = '0';
 						}else if(in_array($get['transaction_table'], (array)$reason_array)){
 							if($itemres->reason_id == 0){
 								$len['in_qty'] = '0';
-								$len['in_value'] = '0'; 
+								$len['in_value'] = '0';
 							}else{
 								$len['out_qty'] = '0';
-								$len['out_value'] = '0'; 
+								$len['out_value'] = '0';
 							}
 						}else{
 							$len = array();
@@ -1035,14 +1035,14 @@ payment tersm**/
 						//echo "<pre>"; print_r($len); echo "</pre>";
 						//echo $transaction->transaction_date." -------- ".$get['transaction_table']." --- transaction_number - ".$transaction->transaction_date."  - ".$transaction->id."</br></br></br>";
 						if(count((array)$len) !=0){
-							
+
 							$ddf = $this->invoiceUpdates($get['transaction_table'],$len);
 								//echo "<pre>"; print_r($len); echo "</pre>";
-						} 
+						}
 					}
 					//stock In And Out Code End
-					
-				}	
+
+				}
 			}
 		}
 **/
@@ -1053,7 +1053,7 @@ payment tersm**/
 
 
 
-	/**	
+	/**
 
 		foreach ($sires as $transaction){
 			//echo "<pre>"; print_r($transaction->id); echo "</pre>";
@@ -1073,7 +1073,7 @@ payment tersm**/
 
 			foreach($itemresult as $itemres){
 				$mainitem = $this->togetitemvalues($itemres->item_id);
-				$day_rate = $this->togetitemwadayrate($itemres->item_id, $get['company_id']);	
+				$day_rate = $this->togetitemwadayrate($itemres->item_id, $get['company_id']);
 				$len = array('company_id' =>$itemres->company_id , 'location_id' =>$transaction->transaction_location_id, 'transaction_warehouse_id' => $transaction->transaction_warehouse_id, 'transaction_date' => $transaction->transaction_date , 'item_id' =>$itemres->item_id,'document_no'=>$transaction->id,'document_type' =>$get['transaction_table'],'document_ref_no' =>$transaction->transaction_number,'in_qty' =>$itemres->item_quantity,'in_value' =>$itemres->total_amount,'item_in_value' =>$itemres->item_amount,'reason_id'=>$itemres->reason_id,'out_qty' =>$itemres->item_quantity,'out_value' =>$itemres->total_amount,'sale_price'=>$itemres->item_price,'sale_value'=>$itemres->total_amount,'item_wa_cost'=>$day_rate,'item_st_cost'=>$mainitem->purchase_price,'is_active'=>'0','current_status'=>'0','sales_qty'=>0,'purchase_qty'=>0);
 				//echo "<pre>"; print_r($len);echo "<pre>";
 
@@ -1112,17 +1112,17 @@ payment tersm**/
 				}
 				if(in_array($get['transaction_table'], (array)$in_array)){
 					$len['out_qty'] = '0';
-					$len['out_value'] = '0'; 
+					$len['out_value'] = '0';
 				}else if(in_array($get['transaction_table'], (array)$out_array)){
 					$len['in_qty'] = '0';
-					$len['in_value'] = '0'; 
+					$len['in_value'] = '0';
 				}else if(in_array($get['transaction_table'], (array)$reason_array)){
 					if($itemres->reason_id == 0){
 						$len['in_qty'] = '0';
-						$len['in_value'] = '0'; 
+						$len['in_value'] = '0';
 					}else{
 						$len['out_qty'] = '0';
-						$len['out_value'] = '0'; 
+						$len['out_value'] = '0';
 					}
 				}else{
 					$len = array();
@@ -1130,7 +1130,7 @@ payment tersm**/
 				if(count((array)$len) !=0){
 					$ddf = $this->invoiceUpdates($get['transaction_table'],$len);
 					//echo "<pre>"; print_r('woerwfwfcwefc'); echo "</pre>";
-				} 
+				}
 			}
 			//stock In And Out Code End
 	}
@@ -1142,10 +1142,10 @@ payment tersm**/
 	$itemsql = "SELECT * FROM excel_march_item_stocks where item_id = 8077";
         $itemres11 = $callConfig->getAllRows($itemsql);
         echo "<pre>"; print_r($itemres11);
-        
-        foreach($itemres11 as $itemres){ 
+
+        foreach($itemres11 as $itemres){
 				$mainitem = $this->togetitemvalues($itemres->item_id);
-				$day_rate = $this->togetitemwadayrate($itemres->item_id, 1);	
+				$day_rate = $this->togetitemwadayrate($itemres->item_id, 1);
 				$len = array('company_id' =>1 , 'location_id' =>1, 'transaction_warehouse_id' => 1, 'transaction_date' =>'2025-04-01', 'item_id' =>$itemres->item_id,'document_no'=>0,'document_type' =>'stock_adjustments','document_ref_no' =>0,'in_qty' =>0,'in_value' =>0,'item_in_value' =>0,'reason_id'=>0,'out_qty' =>0,'out_value' =>0,'sale_price'=>0,'sale_value'=>0,'item_wa_cost'=>$day_rate,'item_st_cost'=>$mainitem->purchase_price,'is_active'=>'0','current_status'=>'0','sales_qty'=>0,'purchase_qty'=>0);
 				$doandgrn = $itemres->actual_qty-$itemres->closing_qty;
 				//$oldrate = $itemres->closing_val/($itemres->closing_qty==0?1:$itemres->closing_qty);
@@ -1153,17 +1153,17 @@ payment tersm**/
 				echo "rate --  ".$oldrate;
 				if($doandgrn > 0){
 					$len['in_qty'] = $doandgrn;
-					$len['in_value'] = $doandgrn*$oldrate; 
-					$len['item_in_value'] = $doandgrn*$oldrate; 
-					$len['item_wa_cost'] = $oldrate; 
-					$len['item_st_cost'] = $oldrate; 
+					$len['in_value'] = $doandgrn*$oldrate;
+					$len['item_in_value'] = $doandgrn*$oldrate;
+					$len['item_wa_cost'] = $oldrate;
+					$len['item_st_cost'] = $oldrate;
 				}else{
 					$len['out_qty'] = abs($doandgrn);
-					$len['out_value'] = abs($doandgrn)*$oldrate; 
+					$len['out_value'] = abs($doandgrn)*$oldrate;
 					$len['sale_price'] = $oldrate;
-					$len['sale_value'] = abs($doandgrn)*$oldrate; 
-					$len['item_wa_cost'] = $oldrate; 
-					$len['item_st_cost'] = $oldrate;  
+					$len['sale_value'] = abs($doandgrn)*$oldrate;
+					$len['item_wa_cost'] = $oldrate;
+					$len['item_st_cost'] = $oldrate;
 				}
 				$bdate = '2025-04-01';
 				$insert = array('company_id' =>$len['company_id'] , 'item_id' =>$len['item_id'] ,'balance_date' =>$bdate,'in_qty' =>$len['in_qty'] ,'in_value' =>$post['in_value'],'out_qty' =>$len['out_qty'] ,'out_value' =>$len['out_value'],'day_value' => $len['day_value'],'day_rate' => $len['day_rate']);
@@ -1250,7 +1250,7 @@ payment tersm**/
 
 		echo "Working<pre>"; print_r($return);
 
-		//return $return; 
+		//return $return;
 	}
 
 	//Koteswar start
@@ -1260,7 +1260,7 @@ payment tersm**/
     	// $return['get'] = $get;
     	// $return['post'] = $post;
     	$parent_id =  '';
-    	
+
     	$data = array(
     		'file_name' => $post['file_name'],
     		'import_name' => $post['import_name'],
@@ -1344,7 +1344,7 @@ payment tersm**/
 		       	if (!$res1) {
 				    error_log("Insert failed: " . json_encode($insert_array));
 				}
-			    
+
 			}
 		}
 	    // echo json_encode(['status' => 'success', 'message' => 'Data imported']);
@@ -1352,7 +1352,7 @@ payment tersm**/
 	   	return $return;
 
 	}
-	
+
 	public function toMySQLDate($dateString) {
 	    $date = DateTime::createFromFormat('d-m-Y', trim($dateString));
 	    return $date ? $date->format('Y-m-d') : null;
@@ -1418,7 +1418,7 @@ payment tersm**/
         if($get['LIMIT']!=""){
         	$condlimi = " LIMIT ".$get['LIMIT'];
         }
-        $sql = "SELECT * FROM sales_invoice_data_parent WHERE company_id=".$get['company_id']." AND is_active=0 ORDER BY `import_date` ASC".$condlimi;  
+        $sql = "SELECT * FROM sales_invoice_data_parent WHERE company_id=".$get['company_id']." AND is_active=0 ORDER BY `import_date` ASC".$condlimi;
 		$res = $callConfig->getAllRows($sql);
 		$excel_data = array();
 		foreach($res as $row) {
@@ -1482,34 +1482,34 @@ payment tersm**/
 	        //$return['tax_authorities_rates_splitres1'] = $tax_authorities_rates_splitsql;
 	        foreach($bill_no_array as $billno=>$billitems){
 	        	$first = $billitems[0];
-	        	
 
-	        	//$userdeatil = (count((array)$application_usersuser_name[$first->user_name])!='0')?$application_usersuser_name[$first->user_name]:$application_usersdiplay_name[$first->user_name]; 
+
+	        	//$userdeatil = (count((array)$application_usersuser_name[$first->user_name])!='0')?$application_usersuser_name[$first->user_name]:$application_usersdiplay_name[$first->user_name];
 		       	$salemannameid = NULL;
 	        	// if(isset($salesmendetails[$first->user_name])){
-	        	// 	$salemannameid = $salesmendetails[$first->user_name]; 	
+	        	// 	$salemannameid = $salesmendetails[$first->user_name];
 	        	// }else{
 	        	// 	$insertsalesmenary = array('company_id'=>$post['company_id'],'salesman_name'=>$first->user_name,'is_active'=>0,'current_status'=>0,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$get['user_id']);
 				// 	$salesmenres = $callConfig->insertRecord('salesmen', $insertsalesmenary);
-				// 	$salemannameid = $salesmenres['LASTID']; 
+				// 	$salemannameid = $salesmenres['LASTID'];
 				// 	$salesmendetails[$first->user_name] = $salemannameid;
 	        	// }
-	        	
-		       	
+
+
 	        	if(isset($customerscompany[$first->party_name])){
 	        		$custdeatil = $customerscompany[$first->party_name];
 	        	}elseif(isset($customersdisplay_name[$first->party_name])){
-	        		$custdeatil = $customersdisplay_name[$first->party_name]; 		
+	        		$custdeatil = $customersdisplay_name[$first->party_name];
 	        	}else{
 	        		$insertcustomersary = array('company_id'=>$post['company_id'],'company'=>$first->party_name,'display_name'=>$first->party_name,'email'=>'','billing_address'=>$first->address,'shipping_address'=>$first->address,'billing_post_code'=>$first->pin_code,'shipping_post_code'=>$first->pin_code,'phone'=>$first->mobile_no,'contact_person'=>$first->user_name,'is_active'=>0,'current_status'=>0,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$post['user_id']);
 					$customerres = $callConfig->insertRecord('customers', $insertcustomersary);
-					
-					$custdeatilary = array('id'=>$customerres['LASTID'],'company'=>$first->party_name,'display_name'=>$first->party_name,'email'=>'','billing_address'=>$first->address,'shipping_address'=>$first->address,'billing_post_code'=>$first->pin_code,'shipping_post_code'=>$first->pin_code,'phone'=>$first->mobile_no); 
+
+					$custdeatilary = array('id'=>$customerres['LASTID'],'company'=>$first->party_name,'display_name'=>$first->party_name,'email'=>'','billing_address'=>$first->address,'shipping_address'=>$first->address,'billing_post_code'=>$first->pin_code,'shipping_post_code'=>$first->pin_code,'phone'=>$first->mobile_no);
 					$custdeatil = (object)$custdeatilary;
 					$customerscompany[$first->party_name] = $custdeatil;
 	        	}
 
-		       	
+
 		       	$saleinvitem = array('amount'=>0,'total_amount'=>0,'total_tax_amount'=>0,'discount_amount'=>0);
 		       	$txvalc1 = 0;
 		       	$txvalc2 = 0;
@@ -1529,8 +1529,8 @@ payment tersm**/
 		       		if(count((array)$tax_authorities_rates_splitres1) !=0){
 				       	$tax_authorities_rates_splitres = json_decode(json_encode($tax_authorities_rates_splitres1), true);
 						$return['tax_authorities_rates_splitres'] = $tax_authorities_rates_splitres;
-				       
-						//if($post['originator_state_id'] == $post['supplier_state_id']){ 
+
+						//if($post['originator_state_id'] == $post['supplier_state_id']){
 							$tax_flag = "S";
 							$split_1_name = $tax_authorities_rates_splitres[0]['split_name'];
 						    $split_2_name = $tax_authorities_rates_splitres[1]['split_name'];
@@ -1557,7 +1557,7 @@ payment tersm**/
 						$return['split_1'] = $split_1;
 					}
 
-		       		if($itmlist->sgst !='0' AND $itmlist->sgst!=''){ 
+		       		if($itmlist->sgst !='0' AND $itmlist->sgst!=''){
 						if($tax_flag == "S"){
 							$perc = ($totaltax/$itmlist->plan_amount)*100;
 							$txperc1 = $perc*$split_1;
@@ -1571,13 +1571,13 @@ payment tersm**/
 					}
 		       	}
 
-				
+
 				$total_tax_split_details = array();
 				//if($txperc1 == '0'){
 					if($tax_flag == "S"){
-						$total_tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txperc1,'tax_amount'=>$txvalc1,'account_code'=>$split_1_gl_account_code),array('tax_name'=>$split_2_name,'tax_percentage'=>$txperc2,'tax_amount'=>$txvalc2,'account_code'=>$split_2_gl_account_code));  
+						$total_tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txperc1,'tax_amount'=>$txvalc1,'account_code'=>$split_1_gl_account_code),array('tax_name'=>$split_2_name,'tax_percentage'=>$txperc2,'tax_amount'=>$txvalc2,'account_code'=>$split_2_gl_account_code));
 					}else{
-						$total_tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txperc1,'tax_amount'=>$txvalc1,'account_code'=>$split_1_gl_account_code)); 
+						$total_tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txperc1,'tax_amount'=>$txvalc1,'account_code'=>$split_1_gl_account_code));
 					}
 				//}
 				$return['total_tax_split_details'] = $total_tax_split_details;
@@ -1586,7 +1586,7 @@ payment tersm**/
 
 				$payment_term_historyary = array();
 				$payment_term_historyary[] = array('amount'=>$saleinvitem['total_amount'],'due_date'=>$this->dateconvertdbformat($first->bill_date),'extra_amt'=>'0','extra_date'=>'','percentage'=>'100','tax_amount'=>$totaltax,'without_tax_amount'=>$saleinvitem['amount']);
-				
+
 				$payment_term_history = json_encode($payment_term_historyary);
 
 				$party_additional_detail = array('gstin'=>$first->client_gst,'pan_no'=>$custdeatil->pan_no);
@@ -1634,20 +1634,20 @@ payment tersm**/
 	           	$res1 = $callConfig->insertRecord('sales_invoices', $sales_invoice_data);
 	           	$return['res'] = $res1;
 
-	        
+
 
 	           	if($res1['status'] == 'sucess'){
 	           	   foreach($billitems as $itmlist){
-	             		
+
 	           	   		if($itemssku[$itmlist->plan_name]!=""){
 			        		$itemdetail = $itemssku[$itmlist->plan_name];
 			        	}elseif($itemsitemname[$itmlist->plan_name]!=""){
-			        		$itemdetail = $itemsitemname[$itmlist->plan_name]; 		
+			        		$itemdetail = $itemsitemname[$itmlist->plan_name];
 			        	}else{
 			        		$insertitemary = array('company_id'=>$post['company_id'],'sku'=>$itmlist->plan_name,'item_name'=>$itmlist->plan_name,'is_active'=>0,'current_status'=>0,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$post['user_id']);
 							$itemsres = $callConfig->insertRecord('items', $insertitemary);
-							
-							$itmary = array('id'=>$itemsres['LASTID'],'item_name'=>$itmlist->plan_name); 
+
+							$itmary = array('id'=>$itemsres['LASTID'],'item_name'=>$itmlist->plan_name);
 							$itemdetail = (object)$itmary;
 
 							$itemssku[$itmlist->plan_name] = $itemdetail;
@@ -1676,7 +1676,7 @@ payment tersm**/
 	                    $return['res_item'][] = $res2;
 
 
-						if($itmlist->sgst !='0' AND $itmlist->sgst!=''){ 
+						if($itmlist->sgst !='0' AND $itmlist->sgst!=''){
 							$perc = (($itmlist->sgst + $itmlist->cgst)/$itmlist->plan_amount)*100;
 
 
@@ -1699,12 +1699,12 @@ payment tersm**/
 								$txval1 = ($itmlist->sgst + $itmlist->cgst)*$split_1;
 								$txper2 = $perc*$split_2;
 								$txval2 = ($itmlist->sgst + $itmlist->cgst)*$split_2;
-								$tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txper1,'tax_amount'=>$txval1,'account_code'=>$split_1_gl_account_code),array('tax_name'=>$split_2_name,'tax_percentage'=>$txper2,'tax_amount'=>$txval2,'account_code'=>$split_2_gl_account_code));  
+								$tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txper1,'tax_amount'=>$txval1,'account_code'=>$split_1_gl_account_code),array('tax_name'=>$split_2_name,'tax_percentage'=>$txper2,'tax_amount'=>$txval2,'account_code'=>$split_2_gl_account_code));
 								$taxfield['tax_split_details'] = json_encode($tax_split_details);
 							}else{
 								$txper1 = $post['tax'][$key]*$split_1;
 								$txval1 = ($itmlist->sgst + $itmlist->cgst)*$split_1;
-								$tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txper1,'tax_amount'=>$txval1,'account_code'=>$split_1_gl_account_code)); 
+								$tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txper1,'tax_amount'=>$txval1,'account_code'=>$split_1_gl_account_code));
 								$taxfield['tax_split_details'] = json_encode($tax_split_details);
 							}
 							$itax_id2=$callConfig->insertRecord('si_item_taxes',$taxfield);
@@ -1717,7 +1717,7 @@ payment tersm**/
 	         	$query4 = "UPDATE sales_invoice_data_excel SET table_name ='sales_invoices', table_id = '".$res1['LASTID']."',comments = '',current_status=".ST_APPROVED." WHERE bill_no = '".$first->bill_no."'";
 				$res323 = $callConfig->executeQuery($query4);
 
-	        } 
+	        }
 	    }
 	    return $return;
 	}
@@ -1826,7 +1826,7 @@ payment tersm**/
 		}
 		return ['status' => 'success','message' => 'Contacts imported successfully.','summary' => ['total_rows' => count($rows), 'inserted' => $inserted, 'duplicates' => $duplicates, 'failed' => $failed]];
 	}
-	
+
 
 	public function insertleaddata($get, $post){
 		global $callConfig;
@@ -1864,7 +1864,7 @@ payment tersm**/
 		$data = $callConfig->getAllRows($query);
 		$return['crm_general_codes'] = $data;
 		return $return;
-	} 
+	}
 
     // End feasibilty part By Kote - 25-06-2025
 
@@ -1878,18 +1878,18 @@ payment tersm**/
         $feasibility_id = $get['feasibility_id'] ?? '';
         if (empty($id) && !empty($lead_id)) {
             // Lookup feasibility ID using lead_id
-            $query = "SELECT id FROM feasibility_requirements 
-                    WHERE lead_id = {$lead_id} AND company_id = {$get['company_id']} AND is_active = 0 
+            $query = "SELECT id FROM feasibility_requirements
+                    WHERE lead_id = {$lead_id} AND company_id = {$get['company_id']} AND is_active = 0
                     ORDER BY id DESC LIMIT 1";
                     $return['feasibility_types_query'] = $query;
             $row = $callConfig->getRow($query);
             if (!empty($row)) {
-                $id = $row->id;  
+                $id = $row->id;
             }
         }
         if (isset($id) && $id != '') {
             $query = "SELECT * FROM feasibility_requirements WHERE id = ".$id." AND company_id=".$get['company_id']." AND is_active=0";
-            $feasibility_requirement_res = $callConfig->getRow($query);  
+            $feasibility_requirement_res = $callConfig->getRow($query);
             $return['feasibility_requirement_res'] = $feasibility_requirement_res;
         }
         if( (isset($feasibility_id) && $feasibility_id != '')){
@@ -1954,7 +1954,7 @@ payment tersm**/
                 $html .= "<div class='$length mb-3'><label class='form-label'>$label ";
                 if ($type === 'text' || $type === 'number' || $type === 'date') {
                     $html .= "<span class='text-danger'>*</span>";
-                } 
+                }
                 $html .="</label>";
 
                 if ($type === 'text' || $type === 'number' || $type === 'date') {
@@ -2079,10 +2079,10 @@ payment tersm**/
         return $rows;
 
     }
-    
+
     function getFeasibilityDashboard($get){
         global $callConfig;
-        $query = "SELECT 
+        $query = "SELECT
             fr.id AS feasibility_id,
             fr.lead_id AS lead_id,
             ft.type_name AS feasibility_type,
@@ -2115,19 +2115,19 @@ payment tersm**/
                     $return['feasibility_types_query'] = $query;
             $row = $callConfig->getRow($query);
             if (!empty($row)) {
-                $id = $row->id;  
+                $id = $row->id;
             }
         }
         if (isset($id) && $id != '') {
             $query = "SELECT * FROM feasibility_requirements WHERE id = ".$id." AND company_id=".$get['company_id']." AND is_active=0";
-            $feasibility_requirement_res = $callConfig->getRow($query);  
+            $feasibility_requirement_res = $callConfig->getRow($query);
             $return['feasibility_requirement_res'] = $feasibility_requirement_res;
         }
         if( (isset($feasibility_id) && $feasibility_id != '')){
         	$query = "SELECT * FROM feasibility_requirements WHERE id = ".$feasibility_id." AND company_id=".$get['company_id']." AND is_active=0";
-            $feasibility_requirement_res = $callConfig->getRow($query);  
+            $feasibility_requirement_res = $callConfig->getRow($query);
             $return['feasibility_requirement_res'] = $feasibility_requirement_res;
-            
+
             $whr = '';
             if($feasibility_id != ''){
                 $whr = "  feasibility_id = ".$feasibility_id." AND ";
@@ -2209,7 +2209,7 @@ payment tersm**/
 				$star = $mandatory === 0 ? " <span class='text-danger'>*</span>" : '';
 				$requiredAttr = $mandatory === 0 ? 'required' : '';
                 $html .= "<div class='$length mb-3'><label class='form-label'>$label $star </label>";
-                
+
 
                 if ($type === 'text' || $type === 'number' || $type === 'date') {
 
@@ -2341,7 +2341,7 @@ payment tersm**/
 			foreach ($checklist_item_name_arr as $i => $item_name) {
 				// Check if a check_row_id is available, if yes, perform an update
 				$check_row_id = $check_row_id_arr[$i];
-				
+
 				// Prepare the data for the checklist update
 				$update_array = array(
 					'item_name' => $item_name,
@@ -2579,7 +2579,7 @@ payment tersm**/
 
 				// Field preview section (unchanged)
 				$html .= "<div class='row' id='dynamic_preview'>";
-			
+
 
 	foreach ($data as $row) {
 		$row = (array) $row;
@@ -2625,7 +2625,7 @@ $html .= "</div>";
 		}
 
 		return $html;
-	}	
+	}
 	public function insertFeasibilityfeildslist($get, $post) {
 		global $callConfig;
 		$return = array();
@@ -2734,7 +2734,7 @@ $html .= "</div>";
         		$return['insert_customers'] = $insertcust;
         		$customer_id = $insertcust['customers']['LASTID'];
         		//to create customer
-        	}	
+        	}
     	}else{
     		$insertcust = $this->createCustomerWithContactLeadDetails($crm_contactsres, $crm_contact_id,'',$get);
     		$return['insert_customers'] = $insertcust;
@@ -2960,14 +2960,14 @@ $html .= "</div>";
 
 		$asnsql = "SELECT * FROM application_serial_number_masters WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$transaction_table."' AND is_active = 0";
 		$asnres = $callConfig->getRow($asnsql);
-		
+
 		if($asnres->id !=""){
 			$main_transaction_no_type = $asnres->reset_type;
 			$serial_number_position = $asnres->serial_number_position;
 			$financial_year_position = $asnres->financial_year_position;
 			$numLength   = !empty($asnres->doc_no_length) ? (int)$asnres->doc_no_length : 3;
-			    	
-			$display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$transaction_table."' AND field_name = 'party_id'";	
+
+			$display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '".$get['company_id']."' AND application_table_name = '".$transaction_table."' AND field_name = 'party_id'";
 			$parttable_name = $callConfig->getRow($display_attribute_typessql);
 			$qquery = urldecode($parttable_name->content);
 			$explosql = explode("FROM", $qquery); // splite from to get table name and other part get
@@ -2979,13 +2979,13 @@ $html .= "</div>";
 			$checksequincerow = array();
 			$transdate = $transaction_date !=""?$this->dateconvertdbformat($transaction_date):date('Y-m-d');
 			$finyaer = date("m",strtotime($transdate)) >= 4 ? date("Y",strtotime($transdate)). '-' . (date("y",strtotime($transdate))+1) : (date("Y",strtotime($transdate)) - 1). '-' . date("y",strtotime($transdate));
-			
+
 	    	$additional_settings = json_decode($asnres->additional_settings,1);
-	    	$position_with_val = array(); 
+	    	$position_with_val = array();
 	    	foreach($additional_settings as $adsetting){
-	    		$position_with_val[$adsetting['positions']] = $adsetting; 
+	    		$position_with_val[$adsetting['positions']] = $adsetting;
 	    	}
-	    	
+
 	    	$parts = [];
 	    	$serial = '';
 		    for ($m = 1; $m <= 10; $m++) {
@@ -3032,7 +3032,7 @@ $html .= "</div>";
 						$insertwithconditionary["position_".$seq_key] = $seq_val;
 						$parts[$seq_key] = $seq_val;
 					}
-		    	
+
 		    	}elseif($seq_val == "TRANSACTION_TYPE"){
 		    		if($transaction_type !=""){
 		    			$additional_conditions .= " AND position_".$seq_key." = '".$transaction_type."'";
@@ -3062,7 +3062,7 @@ $html .= "</div>";
 		    		$insertwithconditionary["position_".$seq_key] = $seq_val;
 		    		$parts[$seq_key] = $seq_val;
 		    	}
-		    }	
+		    }
 
 		    ksort($parts);
 
@@ -3072,7 +3072,7 @@ $html .= "</div>";
 			if($monthlyres->id !=""){
 					$serial_number = $monthlyres->serial_number+1;
 
-					
+
 					$serial = str_pad((string)$serial_number, $numLength, '0', STR_PAD_LEFT);
 					$parts[$serial_number_position] = $serial;
 					$callConfig->updateRecord('application_serial_number_master_details',array('serial_number' =>$serial_number),'id',$monthlyres->id);
@@ -3086,7 +3086,7 @@ $html .= "</div>";
 				$parts[$serial_number_position] = $serial;
 				$insertary = array('company_id'=>$get['company_id'],'application_serial_number_master_id'=>$asnres->id, 'serial_number_reset_type'=>'MT','from_date'=>$from_date,'to_date'=>$to_date,'serial_number'=>1,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'current_status'=>0, 'is_active'=>0);
 				foreach($insertwithconditionary as $fieldkey=>$filedval){
-					$insertary[$fieldkey] = $filedval;	
+					$insertary[$fieldkey] = $filedval;
 				}
 				$return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
 
@@ -3096,7 +3096,7 @@ $html .= "</div>";
 			$monthly_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
 			$yearlysql = "SELECT * FROM application_serial_number_master_details WHERE company_id = '".$get['company_id']."' AND application_serial_number_master_id = '".$asnres->id."' AND serial_number_reset_type = 'YR' AND from_date <= '".$this->dateconvertdbformat($transaction_date)."' AND to_date >= '".$this->dateconvertdbformat($transaction_date)."' AND is_active = 0".$additional_conditions;
 			$yearlyres = $callConfig->getRow($yearlysql);
-			
+
 			if(date("m",strtotime($transaction_date)) >= 4){
                 $startyear = date("Y",strtotime($transaction_date));
                 $endyear = (date("Y",strtotime($transaction_date))+1);
@@ -3120,7 +3120,7 @@ $html .= "</div>";
 				$parts[$serial_number_position] = $serial;
 				$insertary = array('company_id'=>$get['company_id'],'application_serial_number_master_id'=>$asnres->id, 'serial_number_reset_type'=>'YR','from_date'=>$from_date,'to_date'=>$to_date,'serial_number'=>1,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'current_status'=>0, 'is_active'=>0);
 				foreach($insertwithconditionary as $fieldkey=>$filedval){
-					$insertary[$fieldkey] = $filedval;	
+					$insertary[$fieldkey] = $filedval;
 				}
 				$return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
 
@@ -3144,7 +3144,7 @@ $html .= "</div>";
 				$parts[$serial_number_position] = $serial;
 				$insertary = array('company_id'=>$get['company_id'],'application_serial_number_master_id'=>$asnres->id, 'serial_number_reset_type'=>'LT','from_date'=>$from_date,'to_date'=>$to_date,'serial_number'=>1,'created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'current_status'=>0, 'is_active'=>0);
 				foreach($insertwithconditionary as $fieldkey=>$filedval){
-					$insertary[$fieldkey] = $filedval;	
+					$insertary[$fieldkey] = $filedval;
 				}
 				$return['res'] = $callConfig->insertRecord('application_serial_number_master_details', $insertary);
 			}
@@ -3156,7 +3156,7 @@ $html .= "</div>";
 			}
 			$lifetime_transaction_number = trim(implode($asnres->separator_symbols, (array)$parts));
 
-			
+
 		}
 		$main_transaction_number = random_int(1, PHP_INT_MAX);
 		$monthly_transaction_number = $monthly_transaction_number !=""?$monthly_transaction_number:random_int(1, PHP_INT_MAX);
@@ -3169,8 +3169,8 @@ $html .= "</div>";
 		}elseif($main_transaction_no_type=="LT"){
 			$main_transaction_number = $lifetime_transaction_number;
 		}
-		$returnres = array('main_transaction_number'=>$main_transaction_number,'monthly_transaction_number'=>$monthly_transaction_number, 'yearly_transaction_number'=>$yearly_transaction_number, 'lifetime_transaction_number'=>$lifetime_transaction_number);	
-		return 	$returnres;		
+		$returnres = array('main_transaction_number'=>$main_transaction_number,'monthly_transaction_number'=>$monthly_transaction_number, 'yearly_transaction_number'=>$yearly_transaction_number, 'lifetime_transaction_number'=>$lifetime_transaction_number);
+		return 	$returnres;
 	}
 	public function getCRMAIDashboards($get){
 		global $callConfig;
@@ -3209,14 +3209,14 @@ $html .= "</div>";
 		$crm_leadsres=$callConfig->getAllRows($crm_leadssql);
 		$return['crm_leads'] = $crm_leadsres;
 
-		$project_task_statussql = "SELECT id, table_name, name, status, action_label, created_date, created_by FROM project_task_status WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$project_task_statussql = "SELECT id, table_name, name, status, action_label, created_date, created_by FROM project_task_status WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$project_task_statusres = $callConfig->getAllRows($project_task_statussql);
-		$return['project_task_status'] = $project_task_statusres;	
+		$return['project_task_status'] = $project_task_statusres;
 
 		$crm_general_codessql = "SELECT id, code, value, label, created_date, created_by FROM crm_general_codes WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$crm_general_codesres=$callConfig->getAllRows($crm_general_codessql);
 		foreach($crm_general_codesres as $crmcode){
-			$crm_general_codes[$crmcode->code][] =$crmcode; 
+			$crm_general_codes[$crmcode->code][] =$crmcode;
 		}
 		$return['crm_general_codes'] = $crm_general_codes;
 

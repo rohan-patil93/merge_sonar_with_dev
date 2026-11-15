@@ -7,7 +7,7 @@ class SecurityClass
         $return = array();
         $date = $get['date'] ?? '';
         $visit_type = $get['visit_type'] ?? '';
-        
+
         $whr = '';
         if ($date != '') {
             $whr .= " AND DATE(in_datetime) = '" . $callConfig->real_escape_string($date) . "' ";
@@ -20,11 +20,11 @@ class SecurityClass
             // Default to today
             $whr .= " AND DATE(in_datetime) = CURDATE() ";
         }
-        
+
         if ($visit_type != '' && strtolower($visit_type) !== 'all') {
             $whr .= " AND LOWER(visit_type) = '" . $callConfig->real_escape_string(strtolower($visit_type)) . "' ";
         }
-        
+
         $query = "SELECT * FROM visitor_logs WHERE company_id = " . (int)$get['company_id'] . " AND is_active = 0 " . $whr . " ORDER BY in_datetime DESC";
         $return['query'] = $query;
         $data = $callConfig->getAllRows($query);
@@ -395,15 +395,15 @@ public function getVisitorsDataBasedOnDate($get)
             $transaction_id = $get['transaction_id'];
             $transaction_table = $get['transaction_table'];
             $tables = $userObj->toGetInvoicetabledata($transaction_table);
-            
+
             $rental_invoicessql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND id = '".$transaction_id."'  AND is_active =0";
             $rental_invoicesres=$callConfig->getRow($rental_invoicessql);
             $return['transaction'] = $rental_invoicesres;
-                
+
             $transaction_itemssql = "SELECT * FROM ".$tables['item']." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$transaction_id."'  AND is_active =0";
             $transaction_itemsres=$callConfig->getAllRows($transaction_itemssql);
             $return['transaction_items'] = $transaction_itemsres;
-           
+
             $transaction_item_taxessql = "SELECT * FROM ".$tables['tax']." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$transaction_id."'  AND is_active =0";
             $transaction_item_taxesres=$callConfig->getAllRows($transaction_item_taxessql);
             $return['transaction_item_taxes'] = $transaction_item_taxesres;
@@ -492,11 +492,11 @@ public function getVisitorsDataBasedOnDate($get)
         $query = "SELECT id, department_name AS name FROM departments WHERE company_id = " . $get['company_id'] . " AND is_active = 0 ";
         $data = $callConfig->getAllRows($query);
         $return['departments_res'] = $data;
-       
+
         if ($rid == '' && $get['gate_id'] != ''){
             $return['next_badge'] = $this->getNextBadgeForGate($get);
         }
-        
+
         $unit_of_measurementssql = "SELECT id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id = '".$get['company_id']."' AND is_active =0";
         $unit_of_measurementsres=$callConfig->getAllRows($unit_of_measurementssql);
         $return['unit_of_measurements'] = $unit_of_measurementsres;
@@ -690,7 +690,7 @@ public function getVisitorsDataBasedOnDate($get)
 
         // ---------- common mapper ----------
         $visit_type = $post['visit_type'] ?? ''; // visitor|delivery|service|employee|others
-        
+
         // -------- normalize "__new__" selections (Delivery / Service) --------
         // DELIVERY: delivery_company_person
         if (($post['visit_type'] ?? '') === 'delivery') {
@@ -840,10 +840,10 @@ public function getVisitorsDataBasedOnDate($get)
         $hasHost = (!empty($post['whom_to_meet']) && $post['whom_to_meet'] != '0') ||
             (!empty($post['emp_temp_whom_to_meet']) && $post['emp_temp_whom_to_meet'] != '0') ||
             (!empty($post['deliver_to']) && $post['deliver_to'] != '0') ||
-            (!empty($post['authorized_employee']) && $post['authorized_employee'] != '0');           
+            (!empty($post['authorized_employee']) && $post['authorized_employee'] != '0');
 
         if (!$isUpdate) {
-            
+
             // ---------------------- INSERT ----------------------
             if ($hasHost) {
                 // Host selected: Set status as pending approval (10), do not generate serial number yet
@@ -895,11 +895,11 @@ public function getVisitorsDataBasedOnDate($get)
                 if (!empty($hostRow) && !empty($hostRow->user_email)) {
                     $hostEmail = $hostRow->user_email;
                     $hostName = $hostRow->display_name;
- 
+
                     $visitTypeLabel = 'Visitor';
                     $subjectName = $logData['name'] ?? 'Visitor';
                     $detailsHtml = '';
- 
+
                     if ($visit_type === 'delivery') {
                         $visitTypeLabel = 'Delivery / Courier';
                         $deliveryCompany = $logData['delivery_company_person'] ?? '—';
@@ -1007,7 +1007,7 @@ public function getVisitorsDataBasedOnDate($get)
                         $vehicleType = trim($logData['vehicle_type'] ?? 'None');
                         $vehicleNumber = trim($logData['vehicle_number'] ?? '—');
                         $subjectName = $visitorName;
- 
+
                         $detailsHtml .= '<div class="info-row"><span class="info-label">Visitor Name:</span> ' . htmlspecialchars($visitorName) . '</div>';
                         $detailsHtml .= '<div class="info-row"><span class="info-label">Phone:</span> ' . htmlspecialchars($visitorPhone) . '</div>';
                         $detailsHtml .= '<div class="info-row"><span class="info-label">Company:</span> ' . htmlspecialchars($logData['company_name'] ?? '—') . '</div>';
@@ -1015,13 +1015,13 @@ public function getVisitorsDataBasedOnDate($get)
                         $detailsHtml .= '<div class="info-row"><span class="info-label">Vehicle Type:</span> ' . htmlspecialchars($vehicleType) . '</div>';
                         $detailsHtml .= '<div class="info-row"><span class="info-label">Vehicle No:</span> ' . htmlspecialchars($vehicleNumber) . '</div>';
                     }
- 
+
                     // Build URLs
                     // $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
                     // $baseUrl = "http://" . $host . "/infisuite/feasibility/api.php";
                     // $approveUrl = $baseUrl . "?mode=approveVisitor&rid=" . $visitor_log_id . "&status=approve";
                     // $rejectUrl = $baseUrl . "?mode=approveVisitor&rid=" . $visitor_log_id . "&status=reject";
- 
+
                     $approveparam = array('mode'=>'approveVisitor','rid'=>$visitor_log_id,'status'=>'approve','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
                     $rejectparam = array('mode'=>'approveVisitor','rid'=>$visitor_log_id,'status'=>'reject','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
                     $baseUrl = SITEURL."/security_module_verification_page.php";
@@ -1064,7 +1064,7 @@ public function getVisitorsDataBasedOnDate($get)
                             </div>
                         </body>
                         </html>';
- 
+
                     if (!class_exists('userClass')) {
                         include_once("model/user.class.php");
                     }
@@ -1076,19 +1076,19 @@ public function getVisitorsDataBasedOnDate($get)
                 if (!empty($hostRow) && !empty($hostRow->user_email)) {
                     $hostEmail = $hostRow->user_email;
                     $hostName = $hostRow->display_name;
-                    
+
                     $visitorName = trim($logData['name'] ?? 'Visitor');
                     $visitorPhone = trim($logData['phone'] ?? '—');
                     $purpose = trim($logData['purpose'] ?? '—');
                     $vehicleType = trim($logData['vehicle_type'] ?? 'None');
                     $vehicleNumber = trim($logData['vehicle_number'] ?? '—');
-                    
+
                     // Build URLs
                    // $host = SITEURL;
                     // $baseUrl = SITEURL."/api.php";
                     // $approveUrl = $baseUrl . "?mode=approveVisitor&rid=" . $visitor_log_id . "&status=approve";
                     // $rejectUrl = $baseUrl . "?mode=approveVisitor&rid=" . $visitor_log_id . "&status=reject";
-                    
+
                     $approveparam = array('mode'=>'approveVisitor','rid'=>$visitor_log_id,'status'=>'approve','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
                     $rejectparam = array('mode'=>'approveVisitor','rid'=>$visitor_log_id,'status'=>'reject','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
                     $baseUrl = SITEURL."/security_module_verification_page.php";
@@ -1135,7 +1135,7 @@ public function getVisitorsDataBasedOnDate($get)
                                 </div>
                             </body>
                             </html>';
-                                                
+
                     if (!class_exists('userClass')) {
                         include_once("model/user.class.php");
                     }
@@ -1248,8 +1248,8 @@ public function getVisitorsDataBasedOnDate($get)
         if (!empty($dbIds)) {
             $toDelete = array_diff($dbIds, $submittedIds); // present in DB, not in POST
             if (!empty($toDelete)) {
-                foreach ($toDelete as $id) { 
-                    $id = (int)$id; 
+                foreach ($toDelete as $id) {
+                    $id = (int)$id;
                     $lug = array(
                         'is_active'    => 1,
                         'updated_date' => date('Y-m-d H:i:s'),
@@ -1273,7 +1273,7 @@ public function getVisitorsDataBasedOnDate($get)
                     $qty = (float)($post['received_qty'][$idx] ?? 0);
                     $desc = $post['description'][$idx] ?? '';
                     $uom = $post['purchase_uom'][$idx] ?? '';
-                    
+
                     $lug = [
                         'company_id'        => $company_id,
                         'visitor_log_id'    => (int)$visitor_log_id,
@@ -1331,8 +1331,8 @@ public function getVisitorsDataBasedOnDate($get)
                 ];
                 $callConfig->updateRecord('visitor_badges', $upd, 'id', $oldBadge->id);
             }
-        } 
-        
+        }
+
         // ========== SERVICE TAG DETAILS (diff-based upsert) ==========
         if ($visit_type === 'service') {
             // Fetch existing active child tags (current state in DB)
@@ -1834,12 +1834,12 @@ public function getVisitorsDataBasedOnDate($get)
             $query = "SELECT * FROM visitor_logs WHERE id={$get['rid']} AND company_id = {$get['company_id']} AND is_active = 0 ";
             $res = $callConfig->getRow($query);
             $return['visitor_data'] =  $res;
-        
+
 
             $query = "SELECT * FROM visitor_luggages WHERE visitor_log_id={$get['rid']} AND company_id = {$get['company_id']} AND is_active = 0 ";
             $res1 = $callConfig->getAllRows($query);
             $return['visitor_luggage_data'] =  $res1;
-            
+
             $emp_code = $res->employee_code ?? '';
             if($emp_code != ''){
                 $query = "SELECT * FROM employees WHERE emp_code='{$emp_code}' AND company_id = {$get['company_id']} AND is_active = 0 ";
@@ -1856,7 +1856,7 @@ public function getVisitorsDataBasedOnDate($get)
         if($get['rid'] != ''){
             $query = "SELECT * FROM visitor_logs WHERE id={$get['rid']} AND company_id = {$get['company_id']} AND is_active = 0 ";
             $res = $callConfig->getRow($query);
-            
+
             $query = "SELECT * FROM visitor_luggages WHERE visitor_log_id={$get['rid']} AND company_id = {$get['company_id']} AND is_active = 0 ";
             $res1 = $callConfig->getAllRows($query);
             $return['visitor_luggage_data'] =  $res1;
@@ -1898,11 +1898,11 @@ public function getVisitorsDataBasedOnDate($get)
         if (empty($row)) {
             return ['status' => 'error', 'message' => 'Request not found'];
         }
-        
+
         if ($row->current_Status == 0 || $row->current_Status == 199) {
             return ['status' => 'success', 'message' => 'Already finalized'];
         }
-        
+
         $newStatus = ($status === 'approve') ? 12 : 11;
         $upd = [
             'current_Status' => $newStatus,
@@ -1919,7 +1919,7 @@ public function getVisitorsDataBasedOnDate($get)
         if (empty($row)) {
             return ['status' => 'error', 'message' => 'Not found'];
         }
-        
+
         // Resolve host employee info
         $hostId = (int)($row->whom_to_meet ?? $row->emp_temp_whom_to_meet ?? $row->deliver_to ?? $row->authorized_employee ?? 0);
         $hostInfo = ['name' => '', 'email' => '', 'phone' => ''];
@@ -1931,7 +1931,7 @@ public function getVisitorsDataBasedOnDate($get)
                 $hostInfo['phone'] = $emp->phone ?? '';
             }
         }
-        
+
         return [
             'status'         => 'success',
             'current_Status' => (int)$row->current_Status,
@@ -1949,34 +1949,34 @@ public function getVisitorsDataBasedOnDate($get)
         if ((int)$row->current_Status !== 10) {
             return ['status' => 'error', 'message' => 'Not in pending approval state'];
         }
-        
+
         // Resolve host
         $hostId = (int)($row->whom_to_meet ?? $row->emp_temp_whom_to_meet ?? $row->deliver_to ?? $row->authorized_employee ?? 0);
         if (!$hostId) {
             return ['status' => 'error', 'message' => 'No host assigned to this entry'];
         }
-        
+
         $hostRow = $callConfig->getRow("SELECT display_name, email_id AS user_email FROM employees WHERE id = {$hostId} AND is_active = 0");
         if (empty($hostRow) || empty($hostRow->user_email)) {
             return ['status' => 'error', 'message' => 'Host email not found'];
         }
-        
+
         $hostEmail = $hostRow->user_email;
         $hostName  = $hostRow->display_name;
-        
+
         $visitorName  = trim($row->name ?? ($row->emp_temp_name ?? 'Visitor'));
         $visitorPhone = trim($row->phone ?? ($row->emp_temp_phone ?? '—'));
         $purpose      = trim($row->purpose ?? '—');
         $vehicleType  = trim($row->vehicle_type ?? 'None');
         $vehicleNumber = trim($row->vehicle_number ?? '—');
-        
+
 
         $approveparam = array('mode'=>'approveVisitor','rid'=>$rid,'status'=>'approve','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
         $rejectparam = array('mode'=>'approveVisitor','rid'=>$rid,'status'=>'reject','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
         $baseUrl = SITEURL."/security_module_verification_page.php";
         $approveUrl = $baseUrl . "?param=".base64_encode(json_encode($approveparam));
         $rejectUrl  = $baseUrl . "?param=".base64_encode(json_encode($rejectparam));
-        
+
         $subject   = "[Reminder] Visitor Entry Approval Request: " . $visitorName;
         $emailBody = '<!DOCTYPE html>
 <html>
@@ -2019,17 +2019,17 @@ public function getVisitorsDataBasedOnDate($get)
     </div>
 </body>
 </html>';
-        
+
         if (!class_exists('userClass')) {
             include_once("model/user.class.php");
         }
         $userObj = new userClass();
         $sent = $userObj->sendmailwithsmtp($hostEmail, $subject, $emailBody, '', '');
-        
+
         if (!empty($sent['error_email_']) || (isset($sent['error_email_msg']) && strpos($sent['error_email_msg'], 'could not') !== false)) {
             return ['status' => 'error', 'message' => 'Email failed: ' . ($sent['error_email_'] ?? $sent['error_email_msg'] ?? 'Unknown error')];
         }
-        
+
         return ['status' => 'success', 'message' => 'Reminder email sent to ' . $hostEmail,'sent_log'=>$sent];
     }
 
@@ -2040,7 +2040,7 @@ public function getVisitorsDataBasedOnDate($get)
         if (empty($row)) {
             return ['status' => 'error', 'message' => 'Request not found'];
         }
-        
+
         $upd = [
             'current_Status' => 12,
             'status_date' => date('Y-m-d H:i:s')
@@ -2056,12 +2056,12 @@ public function getVisitorsDataBasedOnDate($get)
         if (empty($row)) {
             return ['status' => 'error', 'message' => 'Request not found'];
         }
-        
+
         if ($row->current_Status == 0) {
             $badge = $callConfig->getRow("SELECT full_code FROM visitor_badges WHERE visitor_log_id = {$rid} AND is_active = 0 LIMIT 1");
             return ['status' => 'success', 'rid' => $rid, 'badge' => $badge->full_code ?? $row->visiting_company_id];
         }
-        
+
         if (!class_exists('userClass')) {
             include_once("model/user.class.php");
         }
@@ -2071,7 +2071,7 @@ public function getVisitorsDataBasedOnDate($get)
         $generatedCode = $userObj->toGetApplicationSerialNumber('visitor_logs',$postary);
         if (empty($generatedCode)) {
             return ['status' => 'error', 'message' => 'Failed to generate serial number'];
-        }       
+        }
         $updLog = [
             'visitor_idcard_no' => $generatedCode,
             'visiting_company_id' => $generatedCode,
@@ -2079,13 +2079,13 @@ public function getVisitorsDataBasedOnDate($get)
             'in_datetime' => date('Y-m-d H:i:s'),
             'status_date' => date('Y-m-d H:i:s')
         ];
-        
+
         if ($row->visit_type === 'vendor_supplier' && empty(trim($row->vendor_supplier_transaction_no ?? ''))) {
             $updLog['vendor_supplier_transaction_no'] = $generatedCode;
         }
-        
+
         $callConfig->updateRecord('visitor_logs', $updLog, 'id', $rid);
-        
+
         $badge = [
             'company_id'     => $company_id,
             'gate_id'        => $gate_id,
@@ -2102,7 +2102,7 @@ public function getVisitorsDataBasedOnDate($get)
             'location_id'    => $location_id,
         ];
         $callConfig->insertRecord('visitor_badges', $badge);
-        
+
         return ['status' => 'success', 'rid' => $rid, 'badge' => $generatedCode];
     }
     /**
@@ -2214,7 +2214,7 @@ public function getVisitorsDataBasedOnDate($get)
         if ($company_id <= 0) {
             return [];
         }
-        
+
         $results = [];
         if (in_array($doc_type, ['purchase_orders', 'purchase_invoices'])) {
             $sql = "SELECT id, transaction_number FROM " . $doc_type . " WHERE company_id = '" . $company_id . "' AND is_active = 0 ORDER BY transaction_number ASC";
@@ -2244,7 +2244,7 @@ public function getVisitorsDataBasedOnDate($get)
             $where = [];
             $where[] = "company_id = " . $company_id;
             $where[] = "is_active = 0";
-            
+
             // If searching for visitor, search visitor and others
             // if ($visit_type === 'visitor') {
             //     $where[] = "visit_type IN ('visitor', 'others')";
@@ -2396,7 +2396,7 @@ public function getVisitorProfilesReportData($get)
         if ($visit_type !== 'all' && $visit_type !== '') {
             $whr .= " AND visit_type = '" . $callConfig->real_escape_string($visit_type) . "'";
         }
-        
+
         $coalescePhone = "COALESCE(NULLIF(phone, ''), NULLIF(emp_temp_phone, ''), NULLIF(service_phone, ''), NULLIF(vendor_supplier_driver_mobile, ''), NULLIF(delivery_phone, ''), NULLIF(doctor_phone, ''))";
         $coalesceName = "COALESCE(NULLIF(name, ''), NULLIF(emp_temp_name, ''), NULLIF(service_person, ''), NULLIF(vendor_supplier_driver_name, ''), NULLIF(delivery_company_person, ''), NULLIF(doctor_name, ''))";
 
@@ -2499,7 +2499,7 @@ public function getVisitorProfilesReportData($get)
 
         $return['query'] = $query;
         $rows = $callConfig->getAllRows($query) ?: [];
-        
+
         $processed = [];
         foreach ($rows as $row) {
             $processed[] = (array)$row;
@@ -2561,7 +2561,7 @@ public function getVisitorProfilesReportData($get)
                 $whomToMeetIds[] = $wtm;
             }
         }
-        
+
         $employeesMap = [];
         if (!empty($whomToMeetIds)) {
             $idsCsv = implode(',', array_unique($whomToMeetIds));
@@ -2609,7 +2609,7 @@ public function getVisitorProfilesReportData($get)
         if (!empty($logIds)) {
             $logIdsCsv = implode(',', $logIds);
             $luggagesList = $callConfig->getAllRows("SELECT * FROM visitor_luggages WHERE visitor_log_id IN ({$logIdsCsv}) AND is_active = 0") ?: [];
-            
+
             $uoms = $callConfig->getAllRows("SELECT id, uom_name, uom_short_code FROM unit_of_measurements") ?: [];
             foreach ($uoms as $u) {
                 $uom_map[$u->id] = $u->uom_name . ($u->uom_short_code ? ' (' . $u->uom_short_code . ')' : '');
@@ -2677,7 +2677,7 @@ public function getVisitorProfilesReportData($get)
             $qty = (float)$lug->qty;
             if (strtoupper($lug->visitor_type) === 'IN') {
                 $overallMaterials[$key]['qty_in'] += $qty;
-                
+
                 // If visitor has checked out, calculate how much was taken out
                 $has_checked_out = $logsCheckoutMap[$lId] ?? false;
                 if ($has_checked_out) {

@@ -24,7 +24,7 @@ class CSRClass
         }
 
         if($get['old_id'] && $get['old_id'] != ''){
-            $id = $get['old_id']; 
+            $id = $get['old_id'];
             $updated_date = date('Y-m-d h:i:s');
             $updated_by = $get['user_id'];
 
@@ -136,10 +136,10 @@ public function getCommitteMembers($get)
 //     global $callConfig;
 //     $id = $get['id'];
 //     $table = $get['table'];
-//     $query = "SELECT cpd.* FROM transaction_approval_logs tal 
-//     LEFT JOIN " . $table . " cpd ON cpd.id = tal.transaction_id 
+//     $query = "SELECT cpd.* FROM transaction_approval_logs tal
+//     LEFT JOIN " . $table . " cpd ON cpd.id = tal.transaction_id
 //     WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='" . $table . "'
-//     AND tal.company_id='" . $get['company_id'] . "' 
+//     AND tal.company_id='" . $get['company_id'] . "'
 //     AND cpd.is_active='0'";
 //     $res = $callConfig->getAllRows($query);
 //     return $res;
@@ -168,11 +168,11 @@ public function getCommitteMembers($get)
         $return['total_records'] = $total_records;
 
         // changed by koti
-        // $pending_approval_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal 
-        // LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id 
+        // $pending_approval_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal
+        // LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id
         // WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_proposal_data'
         // AND (tal.response_type = 0 OR tal.response_type IS NULL) AND tal.previous_status = cpd.current_status
-        // AND tal.company_id='" . $get['company_id'] . "' 
+        // AND tal.company_id='" . $get['company_id'] . "'
         // AND cpd.is_active='0' AND cpd.current_status='" . $current_status . "'";
         $pending_approval_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal 
         LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id 
@@ -346,7 +346,7 @@ public function getCsrSetting($get)
 }
 
 
-   // MAP Point 
+   // MAP Point
 public function getCompaniesData($get)
 {
     global $callConfig;
@@ -760,8 +760,8 @@ public function getUsersMapPointsData($get){
         }
         $return['tracking_inprogress'] = $tracking_inprogress;
 
-        // $query3 = "SELECT DISTINCT proposal_id 
-        //     FROM csr_project_tracking 
+        // $query3 = "SELECT DISTINCT proposal_id
+        //     FROM csr_project_tracking
         //     WHERE (status = '' OR status IS NULL) AND proposal_id IN (SELECT id FROM csr_proposal_data WHERE company_id = '" . $get['company_id'] . "' AND orgininaor = '" . $orgininaor . "' AND is_active = 0 AND current_status = 199  AND tracking_status=0)";
         $query3 = "SELECT id AS proposal_id FROM csr_proposal_data
         WHERE company_id = '" . $get['company_id'] . "'
@@ -777,7 +777,7 @@ public function getUsersMapPointsData($get){
                     OR STATUS IS NOT NULL
                     ) ) ORDER BY proposal_id DESC";
         $return['query3'] = $query3;
-                
+
         $query3_res = $callConfig->getAllRows($query3);
         $tracking_pending = array();
         foreach ($query3_res as $row) {
@@ -813,9 +813,9 @@ public function getUsersMapPointsData($get){
         }
         $return['tracking_percent_arr'] = $tracking_percent_arr;
 
-        // $query2 = "SELECT au.id, au.display_name, au.user_email FROM application_user_module_roles aumr LEFT JOIN application_users au ON au.id = aumr.user_id 
+        // $query2 = "SELECT au.id, au.display_name, au.user_email FROM application_user_module_roles aumr LEFT JOIN application_users au ON au.id = aumr.user_id
         // WHERE aumr.role_short_code='CSR_COMMITTEE_MEMBER'
-        // AND aumr.company_id='" . $get['company_id'] . "' 
+        // AND aumr.company_id='" . $get['company_id'] . "'
         // AND aumr.is_active='0'";
 
         // $query2_res = $callConfig->getAllRows($query2);
@@ -863,10 +863,10 @@ public function getUsersMapPointsData($get){
         $query = "SELECT id, proposal_id, start_date, end_date, tracking_budget, status FROM  csr_project_tracking where  company_id = '" . $get['company_id'] . "' AND is_active=0 AND proposal_id IN (SELECT id FROM csr_proposal_data WHERE company_id = '" . $get['company_id'] . "'  AND is_active = 0 AND current_status = 199 AND tracking_status = 0) ";
         $budget_tracking_res = $callConfig->getAllRows($query);
 
-        $groupedArray = array(); 
+        $groupedArray = array();
 
         foreach ($budget_tracking_res as $row) {
-            $id = $row->proposal_id; 
+            $id = $row->proposal_id;
 
             if (!isset($groupedArray[$id])) {
                 $groupedArray[$id] = [];
@@ -893,14 +893,14 @@ public function getUsersMapPointsData($get){
         }
         $return['csr_history'] = $csr_history;
         return $return;
-        
+
     }
     public function getCSRYearlyBudget($get){
         global $callConfig;
         $return = array();
         $rid = $get['rid'] ?? '';
-       
-        if(isset($rid) && $rid != ''){            
+
+        if(isset($rid) && $rid != ''){
             $query1 = "SELECT * FROM  csr_yearly_budget
             where company_id = '" . $get['company_id'] . "' AND id = ".$rid." AND is_active=0";
             // $return['query'] = $query1;
@@ -914,7 +914,7 @@ public function getUsersMapPointsData($get){
             $query2 = "SELECT id, date, subject, project_start_date, project_end_date, institue_name, created_by, total_budget_grand_total, current_status, tracking_status FROM `csr_proposal_data` WHERE project_start_date like '%$query_res->base_year%'
              AND company_id = '" . $get['company_id'] . "' AND is_active=0 ";
             $return['query2'] = $query2;
-           
+
 
             $query2_res = $callConfig->getAllRows($query2);
             $csr_proposal_arr = array();
@@ -922,7 +922,7 @@ public function getUsersMapPointsData($get){
             if(!empty($query2_res)){
                 foreach ($query2_res as $row) {
                     $csr_proposal_arr[] = $row;
-                }    
+                }
             }
             $return['csr_proposal_arr'] = $csr_proposal_arr;
 
@@ -935,13 +935,13 @@ public function getUsersMapPointsData($get){
             if(!empty($query_res)){
                 foreach ($query_res as $row) {
                     $csr_yearly_budget[$row->id] = $row;
-                }    
+                }
             }
             $return['csr_yearly_budget'] = $csr_yearly_budget;
         }
         return $return;
     }
-    
+
     public function getCSRContractors($get){
         global $callConfig;
         $return = array();
@@ -959,12 +959,12 @@ public function getUsersMapPointsData($get){
             $csr_contractors[] = $row;
         }
         $return['csr_contractors'] = $csr_contractors;
-        
+
         return $return;
     }
 
     public function getAllCSRData($get){
-        global $callConfig; 
+        global $callConfig;
         $return = array();
         $query = "SELECT * FROM  csr_proposal_data WHERE company_id = '" .$get['company_id']. "' AND current_status>0  AND is_active=0";
         $query_res = $callConfig->getAllRows($query);
@@ -973,7 +973,7 @@ public function getUsersMapPointsData($get){
             $csr_proposal_arr[] = $row;
         }
         $return['csr_proposal_arr'] = $csr_proposal_arr;
-        
+
 
         $query1 = "SELECT * FROM  csr_contractor_registations WHERE company_id = '" .$get['company_id']. "' AND current_status>0  AND is_active=0";
         $query_res1 = $callConfig->getAllRows($query1);
@@ -1040,7 +1040,7 @@ public function getUsersMapPointsData($get){
         return $return;
     }
 
-    
+
     public function tovCSRObjOthrSideCornJob($get, $post) {
         global $callConfig;
         $return = array();
@@ -1052,8 +1052,8 @@ public function getUsersMapPointsData($get){
 
         // --- Sync main 3 tables ---
         $mainTables = [
-            'csr_project_tracking' => $data['project_tracking_arr'] ?? [], 
-            'csr_contractor_registations' => $data['csr_contractor_arr'] ?? [],       
+            'csr_project_tracking' => $data['project_tracking_arr'] ?? [],
+            'csr_contractor_registations' => $data['csr_contractor_arr'] ?? [],
             'csr_proposal_data' => $data['csr_proposal_arr'] ?? [],
         ];
 
@@ -1237,7 +1237,7 @@ public function getUsersMapPointsData($get){
     }
 
     public function getUsersData($get){
-        global $callConfig; 
+        global $callConfig;
         $return = array();
         $query = "SELECT * FROM  application_users WHERE company_id = '" .$get['company_id']. "' AND is_active=0";
         $query_res = $callConfig->getAllRows($query);
@@ -1246,7 +1246,7 @@ public function getUsersMapPointsData($get){
             $application_users_arr[] = $row;
         }
         $return['application_users_arr'] = $application_users_arr;
-        
+
 
         $query1 = "SELECT * FROM  application_user_module_roles WHERE company_id = '" .$get['company_id']. "'  AND is_active=0";
         $query_res1 = $callConfig->getAllRows($query1);
@@ -1256,12 +1256,12 @@ public function getUsersMapPointsData($get){
         }
         $return['user_module_roles_arr'] = $user_module_roles_arr;
 
-        
+
         return $return;
     }
 
     public function insertUsersData($get, $post){
-        global $callConfig; 
+        global $callConfig;
         $return = array();
         $data = json_decode($post['data'], 1);
         // return $data;
@@ -1321,7 +1321,7 @@ public function getUsersMapPointsData($get){
         ];
         $company_id = $get['company_id'];
         $from_db = $get['data_name'];
-        $to_db = $get['target_db'] ?? ''; 
+        $to_db = $get['target_db'] ?? '';
         // Get last sync time from sync_logs
         $syncQuery = "SELECT last_sync_time FROM sync_logs 
                     WHERE company_id = '$company_id' AND from_db = '$from_db' AND to_db = '$to_db'
@@ -1436,7 +1436,7 @@ public function getUsersMapPointsData($get){
                     ORDER BY id DESC LIMIT 1";
         $syncRow = $callConfig->getRow($syncQuery);
         $lastSync = $syncRow ? $syncRow->last_sync_time : null;
-    
+
         if ($lastSync) {
             if ($table === 'transaction_approval_logs') {
                 $where = "WHERE company_id = '$company_id' AND (
@@ -1551,29 +1551,29 @@ public function getUsersMapPointsData($get){
     public function getVerticalsData($get){
         global $callConfig;
         $return = array();
-        $query = "SELECT id, vertical_name FROM verticals WHERE company_id = {$get['company_id']} AND is_active = 0 ORDER BY vertical_name ASC"; 
+        $query = "SELECT id, vertical_name FROM verticals WHERE company_id = {$get['company_id']} AND is_active = 0 ORDER BY vertical_name ASC";
         $data = $callConfig->getAllRows($query);
         $return['verticals'] = $data;
 
-        $query = "SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE genc_code = 'JOBUOM' AND company_id = {$get['company_id']} AND is_active = 0"; 
+        $query = "SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE genc_code = 'JOBUOM' AND company_id = {$get['company_id']} AND is_active = 0";
         $data = $callConfig->getAllRows($query);
         $return['types'] = $data;
 
-        $query = "SELECT id, display_name FROM vendors WHERE  company_id = {$get['company_id']} AND is_active = 0"; 
+        $query = "SELECT id, display_name FROM vendors WHERE  company_id = {$get['company_id']} AND is_active = 0";
         $data = $callConfig->getAllRows($query);
         $return['vendors'] = $data;
 
-        $query = "SELECT id, concat(currency_short_code, '-', currency_name) AS currency FROM currencies WHERE  company_id = {$get['company_id']} AND is_active = 0"; 
+        $query = "SELECT id, concat(currency_short_code, '-', currency_name) AS currency FROM currencies WHERE  company_id = {$get['company_id']} AND is_active = 0";
         $data = $callConfig->getAllRows($query);
         $return['currencies'] = $data;
 
-        $query = "SELECT id, job_title FROM job_titles WHERE  company_id = {$get['company_id']} AND is_active = 0"; 
+        $query = "SELECT id, job_title FROM job_titles WHERE  company_id = {$get['company_id']} AND is_active = 0";
         $data = $callConfig->getAllRows($query);
         $return['job_titles'] = $data;
 
         return $return;
     }
-    
+
     public function getCsrViewRelatedData($get){
         global $callConfig;
         $return = array();
@@ -1663,7 +1663,7 @@ public function getUsersMapPointsData($get){
 
         $fyRows = $callConfig->getAllRows($fyQuery);
         $return['fyRows'] = $fyRows;
-                
+
         return $return;
 
     }
@@ -2243,7 +2243,7 @@ public function getUsersMapPointsData($get){
 
         return $return;
     }
-    
+
     public function getCSRProjects($get){
         global $callConfig;
         $query = "SELECT id, subject 
@@ -2437,7 +2437,7 @@ public function getUsersMapPointsData($get){
         global $callConfig;
 
         $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
-        
+
         // Client request: all CSR dashboard users see full company data (admin scope).
         // Set to false when role-based filtering is needed again.
         $force_admin_scope = true;
@@ -2489,7 +2489,7 @@ public function getUsersMapPointsData($get){
             'po_project_scope' => " AND project_id IN (".$project_id_subquery.")"
         );
     }
-    
+
     public function getCsrFirstDashboardData($get) {
         global $callConfig;
 
@@ -2595,7 +2595,7 @@ public function getUsersMapPointsData($get){
             ) inv ON inv.financial_year COLLATE utf8mb4_general_ci = fy.financial_year COLLATE utf8mb4_general_ci
             ORDER BY fy.id ASC";
         $yearly_rows = $callConfig->getAllRows($yearly_query);
-        $return['yearly_query'] = $yearly_query; 
+        $return['yearly_query'] = $yearly_query;
 
         if ($is_admin_scope) {
             $budget_query = "SELECT financial_year, net_profit_before_tax_mtipl

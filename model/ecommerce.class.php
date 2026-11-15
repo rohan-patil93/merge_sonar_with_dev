@@ -1,6 +1,6 @@
 <?php
 class userClass
-{ 
+{
 	/* start */
 	public function toGetBannerDetails() {
 		global $callConfig;

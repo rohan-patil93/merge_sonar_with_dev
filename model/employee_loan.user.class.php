@@ -201,7 +201,7 @@ class employeeLoanClass extends userClass
 	    $result['locations'] = $callConfig->getAllRows($query);
 	    $query = "SELECT id, vehicle_reg_no, model, model_group, vehicle_type FROM transport_vehicle_master WHERE company_id = $company_id AND is_active = 0 ";
 	    $result['transport_vehicle_master'] = $callConfig->getAllRows($query);
-	    $userCondition = "";  
+	    $userCondition = "";
 	    if ($admin_type != 1 && $employee_id > 0) {
 	        $userCondition = " AND id = $employee_id ";
 	    }
@@ -234,12 +234,12 @@ class employeeLoanClass extends userClass
 
 		$query = "SELECT m.id, m.vehicle_reg_no, m.model, m.model_group, m.vehicle_type FROM transport_vehicle_master m WHERE  m.vehicle_reg_no !='' AND vehicle_reg_no NOT IN ( SELECT vehicle_number FROM transport_gateway WHERE `process_val` =0 AND is_active = 0 ) AND m.company_id = $company_id AND m.is_active =0 AND m.vehicle_type='motorcycle'";
 		$result['motor_cycle_list'] = $callConfig->getAllRows($query);
- 
+
 		$query = "SELECT id, emp_code, display_name, phone as user_mobile, email_id as user_email FROM employees WHERE company_id = $company_id AND is_active = '0' ORDER BY display_name ASC";
 		$result['application_users'] = $callConfig->getAllRows($query);
 
 		return $result;
-	} 
+	}
 
 
 	public function gettransportvehiclemasterlist($get)
@@ -247,7 +247,7 @@ class employeeLoanClass extends userClass
         global $callConfig;
         $return = array();
         $company_id = $get['company_id'];
- 
+
         $statusQuery = "SELECT id, name, name_value, background_color, color FROM status 
                         WHERE company_id = " . $company_id . " 
                         AND is_active = 0";
@@ -255,19 +255,19 @@ class employeeLoanClass extends userClass
         $return['status_list'] = $statusList;
 
         $where = "company_id = " . $company_id;
-          
+
         if (isset($get['is_active']) && $get['is_active'] !== '') {
             $where .= " AND is_active = " . intval($get['is_active']);
-        } else { 
+        } else {
             $where .= " AND is_active IS NOT NULL";
         }
- 
+
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $from_date = $get['from_date'];
             $to_date = $get['to_date'];
             $where .= " AND DATE(created_date) BETWEEN '" . $from_date . "' AND '" . $to_date . "'";
         }
- 
+
         $query = $callConfig->selectQuery('transport_vehicle_master', '*', $where, 'vehicle_reg_no ASC', '', '');
         $vehicles = $callConfig->getAllRows($query);
 
@@ -277,21 +277,21 @@ class employeeLoanClass extends userClass
         return $return;
     }
 
-	public function getpersonalgatewaylist($get)	
+	public function getpersonalgatewaylist($get)
     {
         global $callConfig;
         $return['get'] = $get;
- 
+
         $company_id = $get['company_id'] ?? $_SESSION['company_id'];
         $work_admin_type = $get['work_admin_type'] ?? '';
         $employee_id = $get['employee_id'] ?? '';
-       
+
         $where = "company_id = " . $company_id . " AND is_active = 0";
- 
+
         if ($work_admin_type != 1 && $employee_id > 0) {
             $where .= " AND JSON_UNQUOTE(JSON_EXTRACT(person_details, '$.employee_id')) = '" . $employee_id . "'";
         }
- 
+
         if (!empty($get['from_date']) && !empty($get['to_date'])) {
             $where .= " AND (
                 (entry_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "')
@@ -302,11 +302,11 @@ class employeeLoanClass extends userClass
         } elseif (!empty($get['to_date'])) {
             $where .= " AND (entry_date <= '" . $get['to_date'] . "' OR exit_date <= '" . $get['to_date'] . "')";
         }
- 
+
         $limit = !empty($get['limit']) ? $get['limit'] : '';
         $query = $callConfig->selectQuery("transport_personal_gateway", '*', $where, 'created_date DESC', '', $limit);
         $entries = $callConfig->getAllRows($query);
-         
+
         $formatted_entries = [];
         if ($entries && is_array($entries)) {
             foreach ($entries as $entry) {
@@ -336,7 +336,7 @@ class employeeLoanClass extends userClass
             }
         }
         $return['entries'] = $formatted_entries;
- 
+
         return $return;
     }
 
@@ -347,7 +347,7 @@ class employeeLoanClass extends userClass
 
 	// 	$company_id = $get['company_id'] ?? $_SESSION['company_id'];
 	// 	$where = "company_id = " . $company_id . " AND is_active = 0";
- 
+
 	// 	if (!empty($get['from_date']) && !empty($get['to_date'])) {
 	// 		$where .= " AND ((entry_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "') OR (exit_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'))";
 	// 	} elseif (!empty($get['from_date'])) {
@@ -359,7 +359,7 @@ class employeeLoanClass extends userClass
 	// 	$limit = !empty($get['limit']) ? $get['limit'] : '';
 	// 	$query = $callConfig->selectQuery("transport_gateway", '*', $where, 'created_date DESC', '', $limit);
 	// 	$rows = $callConfig->getAllRows($query);
-		 
+
 	// 	$vehicles = array();
 	// 	foreach ($rows as $row) {
 	// 		$vehicles[] = array(
@@ -399,10 +399,10 @@ class employeeLoanClass extends userClass
     //     $where = "company_id = ".$company_id;
     //     if (isset($get['is_active']) && $get['is_active'] !== '') {
     //         $where .= " AND is_active = " . intval($get['is_active']);
-    //     } else { 
+    //     } else {
     //         $where .= " AND is_active IS NOT NULL";
     //     }
- 
+
     //     if (!empty($get['from_date']) && !empty($get['to_date'])) {
     //         $from_date = $get['from_date'];
     //         $to_date = $get['to_date'];
@@ -422,16 +422,16 @@ class employeeLoanClass extends userClass
     {
         global $callConfig;
         $return = [];
- 
+
         try {
             $company_id = $get['company_id'] ?? $_SESSION['company_id'];
             $today = date('Y-m-d');
- 
+
             $work_admin_type  = $get['work_admin_type'];
             $employee_id = $get['employee_id'];
-           
+
             $employeeCondition = "";
-           
+
             if ($work_admin_type != 1 && $employee_id > 0) {
                 $employeeCondition = "
                     AND JSON_UNQUOTE(
@@ -439,7 +439,7 @@ class employeeLoanClass extends userClass
                     ) = '{$employee_id}'
                 ";
             }
- 
+
             $current_query = "
                 SELECT *
                 FROM transport_personal_gateway
@@ -457,7 +457,7 @@ class employeeLoanClass extends userClass
                 ORDER BY created_date DESC
             ";
             $current_persons = $callConfig->getAllRows($current_query);
-           
+
             // Parse person_details for each entry
             $formatted_persons = [];
             if ($current_persons && is_array($current_persons)) {
@@ -486,7 +486,7 @@ class employeeLoanClass extends userClass
                     ];
                 }
             }
- 
+
             // Get today's entries count
             $entries_query = "
                 SELECT COUNT(*) AS count
@@ -496,7 +496,7 @@ class employeeLoanClass extends userClass
                 AND is_active = 0
             ";
             $entries_count = $callConfig->getRow($entries_query);
- 
+
             // Get today's exits count (completed records)
             $exits_query = "
                 SELECT COUNT(*) AS count
@@ -507,7 +507,7 @@ class employeeLoanClass extends userClass
                 AND is_active = 0
             ";
             $exits_count = $callConfig->getRow($exits_query);
- 
+
             // Get average duration
             $avg_query = "
                 SELECT AVG(TIMESTAMPDIFF(MINUTE, entry_timestamp, exit_timestamp)) AS avg_duration
@@ -521,7 +521,7 @@ class employeeLoanClass extends userClass
                 AND is_active = 0
             ";
             $avg_duration = $callConfig->getRow($avg_query);
- 
+
             $result = [
                 'current_persons' => $formatted_persons,
                 'statistics' => [
@@ -540,7 +540,7 @@ class employeeLoanClass extends userClass
             ];
         }
     }
- 	
+
 	public function getrecentpersonalactivity($get){
 	    global $callConfig;
 
@@ -548,9 +548,9 @@ class employeeLoanClass extends userClass
 	    $limit       = $get['limit'] ?? 1;
 	    $admin_type  = $get['work_admin_type'];
 	    $employee_id = $get['employee_id'];
-	 
+
 	    $employeeCondition = "";
-	 
+
 	    if ($admin_type != 1 && $employee_id > 0) {
 	        $employeeCondition = "
 	            AND JSON_UNQUOTE(
@@ -558,7 +558,7 @@ class employeeLoanClass extends userClass
 	            ) = '{$employee_id}'
 	        ";
 	    }
-	 
+
 	    $query = "
 	        SELECT *
 	        FROM transport_personal_gateway
@@ -570,7 +570,7 @@ class employeeLoanClass extends userClass
 	    ";
 
 	    $activities = $callConfig->getAllRows($query);
-	 
+
 	    $formatted_activities = [];
 
 	    if ($activities && is_array($activities)) {
@@ -616,21 +616,21 @@ class employeeLoanClass extends userClass
 	public function insertpersonalgateway($get, $post)
 	{
 		global $callConfig;
- 
+
 		$rid = isset($get['rid']) && !empty($get['rid']) ? $get['rid'] : '';
- 
+
 		$personDetails = json_encode([
 			'employee_id' => $post['employee_id'] ?? '',
 			'employee_name' => $post['employee_name'] ?? '',
 			'employee_contact' => $post['employee_contact'] ?? '',
 			'employee_email' => $post['employee_email'] ?? ''
 		]);
- 
+
 		$method_type = isset($post['method_type']) && $post['method_type'] !== '' ? $post['method_type'] : 'entry_first';
 		$selected_location = $post['location'] ?? '';
 		$other_location = ($selected_location === '99999') ? trim($post['other_location'] ?? '') : '';
-		 
-		 
+
+
 		$time_value = $post['in_time'] ?? date('H:i:s');
 		$date_value = $post['entry_date'] ?? date('Y-m-d');
 		$current_status = 0;
@@ -640,7 +640,7 @@ class employeeLoanClass extends userClass
 			$process_val = 1;
 			$current_status = 199;
 		}
-		 
+
 		$fieldnames = array(
 			'company_id' => $post['company_id'],
 			'user_id' => $post['user_id'],
@@ -657,29 +657,29 @@ class employeeLoanClass extends userClass
 			'requested_by' => isset($post['requested_by']) ? (int)$post['requested_by'] : NULL,
 			'authorized_by' => $post['authorized_by'] ?? $get['user_id']
 		);
-		
-		if ($method_type === 'exit_first') { 
+
+		if ($method_type === 'exit_first') {
 			$fieldnames['exit_date'] = $date_value;
 			$fieldnames['exit_time'] = $time_value;
 			$fieldnames['exit_timestamp'] = date('Y-m-d H:i:s');
 			$fieldnames['current_status'] = $current_status;
-		} else { 
+		} else {
 			$fieldnames['entry_date'] = $date_value;
 			$fieldnames['entry_time'] = $time_value;
 			$fieldnames['entry_timestamp'] = date('Y-m-d H:i:s');
 			$fieldnames['current_status'] = $current_status;
 		}
-		 
+
 		if (!empty($rid)) {
 			$fieldnames['updated_by'] = $get['user_id'] ?? $post['user_id'];
-			$fieldnames['updated_date'] = date('Y-m-d H:i:s'); 
+			$fieldnames['updated_date'] = date('Y-m-d H:i:s');
 			$res = $callConfig->updateRecord('transport_personal_gateway', $fieldnames, 'id', $rid);
 		} else {
 			$fieldnames['created_by'] = $get['user_id'];
-			$fieldnames['created_date'] = date('Y-m-d H:i:s'); 
+			$fieldnames['created_date'] = date('Y-m-d H:i:s');
 			$res = $callConfig->insertRecord('transport_personal_gateway', $fieldnames);
 		}
-		
+
 		return $res;
 	}
 
@@ -689,14 +689,14 @@ class employeeLoanClass extends userClass
 
 		$res['get'] = $get;
 		$res['post'] = $post;
-		 
-		$entry_id = $post['entry_id']; 
-		 
+
+		$entry_id = $post['entry_id'];
+
 		$method_type = $post['method_type'];
 		$time_value = $post['exit_time'] ?? date('H:i:s');
 		$date_value = $post['exit_date'] ?? date('Y-m-d');
-		
-		if ($method_type === 'exit_first') { 
+
+		if ($method_type === 'exit_first') {
 			$fieldnames = array(
 				'entry_date' => $date_value,
 				'entry_time' => $time_value,
@@ -710,7 +710,7 @@ class employeeLoanClass extends userClass
 				'requested_by' => isset($post['requested_by']) ? (int)$post['requested_by'] : 2,
 				'authorized_by' => $post['authorized_by'] ?? $get['user_id']
 			);
-		} else { 
+		} else {
 			$fieldnames = array(
 				'exit_date' => $date_value,
 				'exit_time' => $time_value,
@@ -728,7 +728,7 @@ class employeeLoanClass extends userClass
 
 		$res['fieldnames'] = $fieldnames;
 		$res['entry_id'] = $entry_id;
-		
+
 		$res = $callConfig->updateRecord("transport_personal_gateway", $fieldnames, 'id', $post['entry_id']);
 		return $res;
 	}
@@ -741,7 +741,7 @@ class employeeLoanClass extends userClass
 		try {
 			$company_id = $get['company_id'] ?? $_SESSION['company_id'];
 			$today = date('Y-m-d');
- 			
+
 			$current_query = "
 				SELECT * 
 				FROM transport_gateway
@@ -829,37 +829,37 @@ class employeeLoanClass extends userClass
 			$method_type = $activity->method_type ?? 'entry_first';
 			$entry_time = $activity->entry_time;
 			$exit_time = $activity->exit_time;
-			 
+
 			if ($entry_time === '00:00:00') $entry_time = null;
 			if ($exit_time === '00:00:00') $exit_time = null;
-			 
-			if ($method_type === 'exit_first') { 
+
+			if ($method_type === 'exit_first') {
 				$type = (!empty($entry_time) && !empty($exit_time)) ? 'entry' : 'exit';
 				$latest_timestamp = !empty($activity->entry_timestamp) ? $activity->entry_timestamp : $activity->exit_timestamp;
-			} else { 
+			} else {
 				$type = !empty($exit_time) ? 'exit' : 'entry';
 				$latest_timestamp = !empty($activity->exit_timestamp) ? $activity->exit_timestamp : $activity->entry_timestamp;
 			}
 
 			$formatted_activities[] = array(
-				'id' => $activity->id, 
-				'vehicle_id' => $activity->id, 
-				'vehicle_number' => $activity->vehicle_number, 
-				'vehicle_type' => $activity->vehicle_type, 
-				'driver_name' => $activity->driver_name, 
-				'visit_purpose' => $activity->visit_purpose, 
-				'location' => $activity->location ?? '', 
+				'id' => $activity->id,
+				'vehicle_id' => $activity->id,
+				'vehicle_number' => $activity->vehicle_number,
+				'vehicle_type' => $activity->vehicle_type,
+				'driver_name' => $activity->driver_name,
+				'visit_purpose' => $activity->visit_purpose,
+				'location' => $activity->location ?? '',
 				'other_location' => $activity->other_location ?? '',
-				'type' => $type, 
+				'type' => $type,
 				'method_type' => $method_type,
-				'timestamp' => $latest_timestamp, 
-				'entry_timestamp' => $activity->entry_timestamp, 
-				'entry_date' => $activity->entry_date, 
-				'entry_time' => $activity->entry_time, 
-				'exit_timestamp' => $activity->exit_timestamp, 
-				'exit_date' => $activity->exit_date, 
-				'exit_time' => $activity->exit_time, 
-				'formatted_date' => date('M j, Y', strtotime($latest_timestamp)), 
+				'timestamp' => $latest_timestamp,
+				'entry_timestamp' => $activity->entry_timestamp,
+				'entry_date' => $activity->entry_date,
+				'entry_time' => $activity->entry_time,
+				'exit_timestamp' => $activity->exit_timestamp,
+				'exit_date' => $activity->exit_date,
+				'exit_time' => $activity->exit_time,
+				'formatted_date' => date('M j, Y', strtotime($latest_timestamp)),
 				'formatted_time' => date('g:i A', strtotime($latest_timestamp))
 			);
 		}
@@ -902,47 +902,47 @@ class employeeLoanClass extends userClass
 	public function insertvehiclegateway($get, $post)
 	{
 		global $callConfig;
- 
+
 		$method_type = isset($post['method_type']) && $post['method_type'] !== '' ? $post['method_type'] : 'entry_first';
-		
+
 		$time_value = $post['entry_time'] ?? date('H:i:s');
 		$date_value = $post['entry_date'] ?? date('Y-m-d');
 		$vehicle_reading = $post['vehicle_reading'] ?? NULL;
- 
+
 		$fieldnames = array(
-			'company_id' => $post['company_id'], 
-			'user_id' => $post['user_id'], 
-			'vehicle_number' => strtoupper($post['vehicle_number']), 
-			'vehicle_type' => $post['vehicle_type'], 
-			'other_vehicle_type' => $post['other_vehicle_type'] ?? '', 
-			'person_details' => $post['person_details'] ?? '[]', 
-			'driver_name' => $post['driver_name'], 
-			'driver_contact' => $post['driver_contact'] ?? '', 
-			'visit_purpose' => $post['visit_purpose'], 
-			'other_visit_purpose' => $post['other_visit_purpose'] ?? '', 
-			'expected_duration' => $post['expected_duration'] ?? '', 
-			'visiting_person' => $post['visiting_person'] ?? '', 
-			'company_name' => $post['company_name'] ?? '', 
+			'company_id' => $post['company_id'],
+			'user_id' => $post['user_id'],
+			'vehicle_number' => strtoupper($post['vehicle_number']),
+			'vehicle_type' => $post['vehicle_type'],
+			'other_vehicle_type' => $post['other_vehicle_type'] ?? '',
+			'person_details' => $post['person_details'] ?? '[]',
+			'driver_name' => $post['driver_name'],
+			'driver_contact' => $post['driver_contact'] ?? '',
+			'visit_purpose' => $post['visit_purpose'],
+			'other_visit_purpose' => $post['other_visit_purpose'] ?? '',
+			'expected_duration' => $post['expected_duration'] ?? '',
+			'visiting_person' => $post['visiting_person'] ?? '',
+			'company_name' => $post['company_name'] ?? '',
 			'location' => $post['location'] ?? '',
 			'other_location' => $post['other_location'] ?? '',
-			'notes' => $post['notes'] ?? '', 
-			'has_goods' => $post['has_goods'] ?? '0', 
-			'goods_description' => $post['goods_description'] ?? '', 
+			'notes' => $post['notes'] ?? '',
+			'has_goods' => $post['has_goods'] ?? '0',
+			'goods_description' => $post['goods_description'] ?? '',
 			'method_type' => $method_type,
-			'is_active' => '0', 
-			'created_by' => $get['user_id'], 
+			'is_active' => '0',
+			'created_by' => $get['user_id'],
 			'created_date' => date('Y-m-d H:i:s'),
 			"process_val" => 0
 		);
-		
-		if ($method_type === 'exit_first') { 
+
+		if ($method_type === 'exit_first') {
 			$fieldnames['exit_date'] = $date_value;
 			$fieldnames['exit_time'] = $time_value;
 			$fieldnames['exit_timestamp'] = date('Y-m-d H:i:s');
 			$fieldnames['current_status'] = ST_APPROVED;
 			$fieldnames['vehicle_exit_reading'] = $vehicle_reading;
 
-		} else { 
+		} else {
 			$fieldnames['entry_date'] = $date_value;
 			$fieldnames['entry_time'] = $time_value;
 			$fieldnames['entry_timestamp'] = date('Y-m-d H:i:s');
@@ -950,7 +950,7 @@ class employeeLoanClass extends userClass
 			$fieldnames['vehicle_entry_reading'] = $vehicle_reading;
 
 		}
-		
+
 		$res = $callConfig->insertRecord('transport_gateway', $fieldnames);
 		// if ($res['status'] == 'sucess' && isset($post['vehicle_ownership']) && $post['vehicle_ownership'] == 'company') {
 		// 	if (!isset($post['vehicle_found_in_lookup']) || $post['vehicle_found_in_lookup'] !== true) {
@@ -963,17 +963,17 @@ class employeeLoanClass extends userClass
 	public function updatevehicleexit($get, $post)
 	{
 		global $callConfig;
-		 
+
 		$vehicle_id = $post['vehicle_id'] ?? null;
 		if (empty($vehicle_id)) {
 			return array('status' => 'error', 'message' => 'Vehicle ID is missing in function');
 		}
-		 
+
 		$method_type = isset($post['method_type']) && $post['method_type'] !== '' ? $post['method_type'] : 'entry_first';
 		$time_value = $post['exit_time'] ?? date('H:i:s');
 		$date_value = $post['exit_date'] ?? date('Y-m-d');
-		
-		if ($method_type === 'exit_first') { 
+
+		if ($method_type === 'exit_first') {
 			$fieldnames = array(
 				'entry_date' => $date_value,
 				'entry_time' => $time_value,
@@ -986,7 +986,7 @@ class employeeLoanClass extends userClass
 				'updated_by' => $post['user_id'] ?? $_SESSION['userid'],
 				'updated_date' => date('Y-m-d H:i:s')
 			);
-		} else { 
+		} else {
 			$fieldnames = array(
 				'exit_date' => $date_value,
 				'exit_time' => $time_value,
@@ -1000,9 +1000,9 @@ class employeeLoanClass extends userClass
 				'updated_date' => date('Y-m-d H:i:s')
 			);
 		}
-		
+
 		$res = $callConfig->updateRecord("transport_gateway", $fieldnames, 'id', $vehicle_id);
-		  
+
 		return $res;
 	}
 
@@ -1093,7 +1093,7 @@ class employeeLoanClass extends userClass
 
 		$company_id = $get['company_id'] ?? $_SESSION['company_id'];
 		$where = "company_id = " . $company_id . " AND is_active = 0";
- 
+
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$where .= " AND ((entry_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "') OR (exit_date BETWEEN '" . $get['from_date'] . "' AND '" . $get['to_date'] . "'))";
 		} elseif (!empty($get['from_date'])) {
@@ -1105,7 +1105,7 @@ class employeeLoanClass extends userClass
 		$limit = !empty($get['limit']) ? $get['limit'] : '';
 		$query = $callConfig->selectQuery("transport_gateway", '*', $where, 'created_date DESC', '', $limit);
 		$rows = $callConfig->getAllRows($query);
-		 
+
 		$vehicles = array();
 		foreach ($rows as $row) {
 			$vehicles[] = array(
@@ -1139,7 +1139,7 @@ class employeeLoanClass extends userClass
         $company_id = $get['company_id'];
         $rid = $get['rid'];
         $user_id = $get['user_id'];
- 
+
         $query = "UPDATE transport_vehicle_master SET is_active = NULL, updated_by = " . intval($user_id) . ", updated_date = '" . date('Y-m-d H:i:s') . "' WHERE id = " . intval($rid) . " AND company_id = " . intval($company_id);
         $res = $callConfig->executeQuery($query);
         return $res;
@@ -1386,7 +1386,7 @@ class employeeLoanClass extends userClass
 		return $res;
 	}
 	// omkar related code end
-	// 
+	//
 	public function getEmployeesAttendanceData($get){
 	    global $callConfig;
 	    $query = "SELECT id, display_name, emp_code FROM employees
@@ -1455,7 +1455,7 @@ class employeeLoanClass extends userClass
 		    	$qry = "SELECT id, working_days, full_day_hours, half_day_hours, grace_perieod FROM attendance_settings 
 				        WHERE company_id = {$get['company_id']} AND is_active = 0 ORDER BY id ASC LIMIT 1";
 				$weak_off_arr = $callConfig->getRow($qry);
-				
+
 				// No shift assigned - use general attendance settings
 				$shift_info = array(
 					'shift_id' => 0,
@@ -1496,17 +1496,17 @@ class employeeLoanClass extends userClass
 		        WHERE company_id = {$get['company_id']}
 		        AND leave_category_id IS NULL
 		        AND is_active = 0";
-	 
+
 		    $shiftKeysData = $callConfig->getAllRows($shiftKeysSql);
 		    $shiftKeys = array();
-	 
+
 		    foreach ($shiftKeysData as $row) {
 		        $shiftKeys[$row->key_short_code] = (array)$row;
 		    }
 	    }
 	    $whr="company_id= '".$get['company_id']."' AND is_active=0";
 		$adqry = $callConfig->selectQuery('leave_month_wise','id,salad_from,salad_to,allowed_leave_days',$whr,'','','');
-		
+
 	    $app_leave_day = $callConfig->getAllRows($adqry);
 	    return array('table'=>$data, 'attendance_data'=>$attendance_data, 'holidays' => $holidays, 'leaves' => $leaves, 'weak_off_arr' => $weak_off_arr,'employee_name' => $emp, 'shift_info' => $shift_info, 'attendance_key_types' => $shiftKeys, 'app_leave_day'=>$app_leave_day);
 	}
@@ -1880,7 +1880,7 @@ class employeeLoanClass extends userClass
                 if(!empty($attRow->clock_in) && !empty($attRow->clock_out)){
                     $ci = strtotime($attRow->clock_in);
                     $co = strtotime($attRow->clock_out);
-                    
+
                     if($co > $ci){
                         $workedSeconds = $co - $ci;
                         if($fullDaySeconds > 0){
@@ -1915,10 +1915,10 @@ class employeeLoanClass extends userClass
 	        WHERE company_id = {$get['company_id']}
 	        AND leave_category_id IS NULL
 	        AND is_active = 0";
- 
+
 	    $shiftKeysData = $callConfig->getAllRows($shiftKeysSql);
 	    $shiftKeys = array();
- 
+
 	    foreach ($shiftKeysData as $row) {
 	        $shiftKeys[$row->key_short_code] = (array)$row;
 	    }
@@ -2511,7 +2511,7 @@ class employeeLoanClass extends userClass
 	 */
 	public function confirmBuddyReassignment($get, $post){
 		global $callConfig;
-        
+
 		$buddy_type = isset($post['buddy_type']) ? $post['buddy_type'] : '';
 		$from_buddy = isset($post['from_buddy']) ? $post['from_buddy'] : '';
 		$to_buddy = isset($post['to_buddy']) ? $post['to_buddy'] : '';
@@ -2566,7 +2566,7 @@ class employeeLoanClass extends userClass
 			'created_by' => $user_id,
 			'created_date' => $current_date
 		);
-		
+
 		$log_result = $callConfig->insertRecord('employee_buddy_change_log', $log_data);
 
 		if ($updated_count > 0) {
@@ -2610,7 +2610,7 @@ class employeeLoanClass extends userClass
 	    $employee = $callConfig->getRow($emp_qry);
 	    $return['employee'] = $employee ? (array)$employee : array();
 
-		
+
 
 	    $details_qry = "SELECT id, employee_id, attendace_date, clock_in, clock_out,
 	            check_in_type, check_out_type,
@@ -2663,31 +2663,31 @@ class employeeLoanClass extends userClass
 	    global $callConfig;
 	    $return = array();
 	    $company_id = $get['company_id'];
-	    
+
 	    // Get all active employees
 	    $query = "SELECT id, display_name, emp_code 
 	              FROM employees 
 	              WHERE company_id = '{$company_id}' 
 	              AND is_active = 0 
 	              ORDER BY display_name ASC";
-	    
+
 	    $employees = $callConfig->getAllRows($query);
 	    $return['employees'] = $employees ? array_map(function($row) {
 	        return (array)$row;
 	    }, $employees) : array();
-	    
+
 	    // Get all active leave types
 	    $query = "SELECT id, leave_type_name, back_ground_color 
 	              FROM leave_types 
 	              WHERE company_id = '{$company_id}' 
 	              AND is_active = 0 
 	              ORDER BY leave_type_name ASC";
-	    
+
 	    $leaveTypes = $callConfig->getAllRows($query);
 	    $return['leave_types'] = $leaveTypes ? array_map(function($row) {
 	        return (array)$row;
 	    }, $leaveTypes) : array();
-	    
+
 	    $return['status'] = 'success';
 	    return $return;
 	}
@@ -2701,7 +2701,7 @@ class employeeLoanClass extends userClass
 	    $company_id = $get['company_id'];
 	    $employee_id = $get['employee_id'] ?? 0;
 	    $leave_year = $get['leave_year'] ?? date('Y');
-	    
+
 	    // Get leave balances with leave type details
 	    if ($employee_id > 0) {
 	        $query = "SELECT 
@@ -2723,12 +2723,12 @@ class employeeLoanClass extends userClass
 	            AND eb.leave_year = '{$leave_year}'
 	            AND eb.is_active = 0
 	            ORDER BY lt.leave_type_name ASC";
-	        
+
 	        $balances = $callConfig->getAllRows($query);
 	        $return['balances'] = $balances ? array_map(function($row) {
 	            return (array)$row;
 	        }, $balances) : array();
-	        
+
 	        // Get leave allocations with leave type details
 	        $query = "SELECT 
 	                ea.id,
@@ -2752,12 +2752,12 @@ class employeeLoanClass extends userClass
 	            AND ea.leave_year = '{$leave_year}'
 	            AND ea.is_active = 0
 	            ORDER BY ea.transaction_date ASC";
-	        
+
 	        $allocations = $callConfig->getAllRows($query);
 	        $return['allocations'] = $allocations ? array_map(function($row) {
 	            return (array)$row;
 	        }, $allocations) : array();
-	        
+
 	        // Get selected employee details
 	        $empQuery = "SELECT id, display_name, emp_code 
 	                     FROM employees 
@@ -2768,7 +2768,7 @@ class employeeLoanClass extends userClass
 	        $employee = $callConfig->getRow($empQuery);
 	        $return['selected_employee'] = $employee ? (array)$employee : array();
 	    }
-	    
+
 	    $return['status'] = 'success';
 	    return $return;
 	}
@@ -2779,7 +2779,7 @@ class employeeLoanClass extends userClass
 	public function saveLeaveAllocation($get, $post){
 	    global $callConfig;
 	    $return = array();
-	    
+
 	    $company_id = $get['company_id'];
 	    $user_id = $get['user_id'];
 	    $employee_id = $post['employee_id'] ?? 0;
@@ -2789,25 +2789,25 @@ class employeeLoanClass extends userClass
 	    $transaction_date = $post['transaction_date'] ?? date('Y-m-d');
 	    $note = $post['note'] ?? '';
 	    $leave_year = $post['leave_year'] ?? date('Y');
-	    
+
 	    // Validation
 	    if ($employee_id <= 0) {
 	        return array('status' => 'error', 'message' => 'Invalid employee selected');
 	    }
-	    
+
 	    if ($leave_type_id <= 0) {
 	        return array('status' => 'error', 'message' => 'Invalid leave type selected');
 	    }
-	    
+
 	    if ($applicable_leaves == 0 && $consumed_leaves == 0) {
 	        return array('status' => 'error', 'message' => 'Please enter at least one leave value');
 	    }
-	    
+
 	    // Validate transaction date
 	    if (!$this->isValidDate($transaction_date)) {
 	        return array('status' => 'error', 'message' => 'Invalid transaction date');
 	    }
-	    
+
 	    // ==============================
 	    // 1. Update emp_leave_balances
 	    // ==============================
@@ -2819,21 +2819,21 @@ class employeeLoanClass extends userClass
 	                     AND company_id = '{$company_id}'
 	                     AND is_active = 0
 	                     LIMIT 1";
-	    
+
 	    $existingBalance = $callConfig->getRow($balanceQuery);
-	    
+
 	    if ($existingBalance) {
 	        // Update existing balance
 	        $newApplicable = floatval($existingBalance->applicable_leaves) + $applicable_leaves;
 	        $newConsumed = floatval($existingBalance->consumed_leaves) + $consumed_leaves;
-	        
+
 	        $updateData = array(
 	            "applicable_leaves" => $newApplicable,
 	            "consumed_leaves" => $newConsumed,
 	            "updated_by" => $user_id,
 	            "updated_date" => date("Y-m-d H:i:s")
 	        );
-	        
+
 	        $callConfig->updateRecord(
 	            "emp_leave_balances",
 	            $updateData,
@@ -2856,10 +2856,10 @@ class employeeLoanClass extends userClass
 	            "created_by" => $user_id,
 	            "created_date" => date("Y-m-d H:i:s")
 	        );
-	        
+
 	        $callConfig->insertRecord("emp_leave_balances", $insertData);
 	    }
-	    
+
 	    // ==============================
 	    // 2. Insert into emp_leave_allocations
 	    // ==============================
@@ -2880,9 +2880,9 @@ class employeeLoanClass extends userClass
 	        "created_by" => $user_id,
 	        "created_date" => date("Y-m-d H:i:s")
 	    );
-	    
+
 	    $insertResult = $callConfig->insertRecord("emp_leave_allocations", $allocationData);
-	    
+
 	    if ($insertResult && isset($insertResult['LASTID']) && $insertResult['LASTID'] > 0) {
 	        $return['status'] = 'success';
 	        $return['message'] = 'Leave allocation saved successfully';
@@ -2891,7 +2891,7 @@ class employeeLoanClass extends userClass
 	        $return['status'] = 'error';
 	        $return['message'] = 'Error saving leave allocation';
 	    }
-	    
+
 	    return $return;
 	}
 
@@ -2908,22 +2908,22 @@ class employeeLoanClass extends userClass
 	 * Handles both insert and update of clock_in/clock_out times
 	 * Automatically calculates attendance status code (P/Z/A/MP)
 	 * Also inserts/updates record in employee_daily_attendance_details
-	 * 
+	 *
 	 * @param array $get - Contains company_id, user_id
 	 * @param array $post - Contains rid, employee_id, attendace_date, check_type, clock_value, user_id
 	 * @return array - Response with status, clock times, attendance code, and error messages if any
 	 */
     public function saveClockTime($get, $post) {
         global $callConfig;
- 
+
         $company_id = $get['company_id'] ?? 0;
         $user_id = $post['user_id'] ?? 0;
         $rid = $post['rid'] ?? 0;
         $emp_id = $post['employee_id'] ?? 0;
         $attendace_date = $post['attendace_date'] ?? '';
         $check_type = $post['check_type'] ?? ''; // 'clockin' or 'clockout'
-        $clock_value = $post['clock_value'] ?? ''; // HH:MM format 
-        
+        $clock_value = $post['clock_value'] ?? ''; // HH:MM format
+
         if (strlen($clock_value) == 5) { // HH:MM format
             $clock_value = $clock_value . ':00';
         }
@@ -2932,21 +2932,21 @@ class employeeLoanClass extends userClass
         $attendance_key_short_code = '';
         $old_clock_times = ''; // For audit trail
 
-        $existing = array(); 
-        if ($rid > 0) {            
+        $existing = array();
+        if ($rid > 0) {
             $query = "SELECT clock_in, clock_out FROM employee_daily_attendances
                     WHERE id = {$rid} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
             $existing = $callConfig->getRow($query);
             if ($existing) {
                 $clock_in = $existing->clock_in ?? '';
                 $clock_out = $existing->clock_out ?? '';
-               
+
                 // Store old times for audit trail before overwriting
                 if ($clock_in || $clock_out) {
                     $old_clock_times = ($clock_in ?: '--') . ' - ' . ($clock_out ?: '--');
                 }
             }
-            
+
         }
  		$clock_out_date = $attendace_date; // default
 		$clock_in_date  = $attendace_date; // default
@@ -3011,7 +3011,7 @@ class employeeLoanClass extends userClass
     public function employeeattendancechangebaseonshift($get,$post){
 
 	    global $callConfig;
-	    
+
 	    $shift_from = str_replace('/"', '-', $post['shift_from']);
 		$fromDate =  date('Y-m-d', strtotime($shift_from));
 		$shift_to = str_replace('/"', '-', $post['shift_to']);
@@ -3095,7 +3095,7 @@ class employeeLoanClass extends userClass
 
 	                            //$workedMinutes = ($out - $in) / 60;
 	                           $workedMinutes =  ($out->getTimestamp() - $in->getTimestamp()) / 60;
-	                           
+
 	                            list($fd_h, $fd_m) = explode(':', $data3->minimum_hours_required);
 	                            $fullDayMinutes = ((int)$fd_h * 60) + (int)$fd_m;
 
@@ -3116,7 +3116,7 @@ class employeeLoanClass extends userClass
 								$seconds =   (strtotime($nclockIn) - strtotime('today')) + (strtotime($ngracePeriod) - strtotime('today'));
 								$check_grace = gmdate('H:i:s', $seconds);
 								//echo $nclockIn."//".$ngracePeriod."//";
-								//echo "<pre>".$check_grace ; print_r($row); print_r($data1);print_r($data2);print_r($data3); 
+								//echo "<pre>".$check_grace ; print_r($row); print_r($data1);print_r($data2);print_r($data3);
 								//echo "clockInDate:".$clockInDate; echo "/// clockOutDate:".$clockOutDate; exit;
 
 								$cccheck = strtotime($check_grace);
@@ -3125,7 +3125,7 @@ class employeeLoanClass extends userClass
 								$empddata = $callConfig->getRow($query);
 								$des = $empddata->designation_id;
 
-								
+
 	                            if($workedMinutes < ($fullDayMinutes - $graceMinutes) && $workedMinutes >= $halfDayMinutes){
 	                                $attendance_key_short_code = 'Z'; // Half Day
 	                            }elseif($workedMinutes < $halfDayMinutes){
@@ -3135,7 +3135,7 @@ class employeeLoanClass extends userClass
 	                            }
 	                            if($des!=5){
 									if($cccheck<$ccin){
-										$attendance_key_short_code = 'Z'; 
+										$attendance_key_short_code = 'Z';
 									}
 								}
 	                        }
@@ -3156,7 +3156,7 @@ class employeeLoanClass extends userClass
 	            $updated[] = $attendance_id;
 	        // }
 	    }
-	    
+
 	    } //exit;
 	    return array(
 	        'updated_count' => count($updated),
@@ -3166,7 +3166,7 @@ class employeeLoanClass extends userClass
 	/**
 	 * Calculate attendance code based on clock times
 	 * Returns: P (Full Day), Z (Half Day), A (Absent/Below Min), MP (Morning Present)
-	 * 
+	 *
 	 * @param string $clock_in - Clock in time (HH:MM:SS)
 	 * @param string $clock_out - Clock out time (HH:MM:SS)
 	 * @param int $emp_id - Employee ID
@@ -3177,13 +3177,13 @@ class employeeLoanClass extends userClass
 		global $callConfig;
 		$attendance_key_short_code = '';
 		// Case A: Only clock_in, no clock_out → MP (Morning Present)
-		if (($clock_in != '' && ($clock_in != '00:00:00' && $clock_in != '00:00')) && 
+		if (($clock_in != '' && ($clock_in != '00:00:00' && $clock_in != '00:00')) &&
 			($clock_out == '' || $clock_out == '00:00:00' || $clock_out == '00:00')) {
 			$attendance_key_short_code = 'MP';
 		}
 
 		// Case B: Both clock_in and clock_out → Calculate based on hours
-		if (($clock_in != '' && ($clock_in != '00:00:00' && $clock_in != '00:00')) && 
+		if (($clock_in != '' && ($clock_in != '00:00:00' && $clock_in != '00:00')) &&
 			($clock_out != '' && ($clock_out != '00:00:00' && $clock_out != '00:00'))) {
 
 			$query = "SELECT id, designation_id, b_machine_id From employees WHERE id = {$emp_id} AND company_id = {$company_id} AND is_active = 0 LIMIT 1";
@@ -3232,7 +3232,7 @@ class employeeLoanClass extends userClass
                             }
                             if($des!=5){
                                 if($cccheck<$ccin){
-                                    $attendance_key_short_code = 'Z'; 
+                                    $attendance_key_short_code = 'Z';
                                 }
                             }
                         }
@@ -3444,16 +3444,16 @@ class employeeLoanClass extends userClass
 	public function getpersonalgateway($get){
         global $callConfig;
         $return = [];
- 
+
         try {
             $company_id = $get['company_id'] ?? $_SESSION['company_id'];
             $today = date('Y-m-d');
- 
+
             $work_admin_type  = $get['work_admin_type'];
             $employee_id = $get['employee_id'];
-           
+
             $employeeCondition = "";
-           
+
             if ($work_admin_type != 1 && $employee_id > 0) {
                 $employeeCondition = "
                     AND JSON_UNQUOTE(
@@ -3461,7 +3461,7 @@ class employeeLoanClass extends userClass
                     ) = '{$employee_id}'
                 ";
             }
- 
+
             $current_query = "
                 SELECT *
                 FROM transport_personal_gateway
@@ -3471,7 +3471,7 @@ class employeeLoanClass extends userClass
                 ORDER BY created_date DESC
             ";
             $current_persons = $callConfig->getAllRows($current_query);
-           
+
             // Parse person_details for each entry
             $formatted_persons = [];
             if ($current_persons && is_array($current_persons)) {
@@ -3503,8 +3503,8 @@ class employeeLoanClass extends userClass
                     ];
                 }
             }
- 
-            
+
+
             $result = [
                 'current_persons' => $formatted_persons,
             ];
@@ -3561,12 +3561,12 @@ class employeeLoanClass extends userClass
             // Get date and time from form
             $exit_date = $post['exit_date'] ?? date('Y-m-d');
             $exit_time = $post['exit_time'] ?? date('H:i:s');
-            
+
             // Format time to HH:MM:SS if only HH:MM provided
             if (strlen($exit_time) == 5) {
                 $exit_time = $exit_time . ':00';
             }
-            
+
             $exit_timestamp = $exit_date . ' ' . $exit_time;
 
             $updateData = array(
@@ -3602,7 +3602,7 @@ class employeeLoanClass extends userClass
                     $updateData['entry_time'] = $exit_time;
                     $updateData['entry_date'] = $exit_date;
                     $updateData['entry_timestamp'] = $exit_timestamp;
-                    
+
                 } else {
                     // Recording exit time (departure)
                     $updateData['exit_time'] = $exit_time;
@@ -3648,7 +3648,7 @@ class employeeLoanClass extends userClass
 	        if(!$row){
 	            return ['status'=>'error','message'=>'Record not found'];
 	        }
-	        if($row->process_val != 2){		        
+	        if($row->process_val != 2){
 		        // Check valid values
 		        $entry_date_valid = !empty($row->entry_date) && $row->entry_date != '0000-00-00';
 		        $entry_time_valid = !empty($row->entry_time) && $row->entry_time != '00:00:00';

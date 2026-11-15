@@ -1,7 +1,7 @@
-<?php 
+<?php
 /*require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
-use Dompdf\Options;		
+use Dompdf\Options;
 */
 class erpUserClass extends userClass{
 	public function togetinventorysummaryrepot($get){
@@ -9,7 +9,7 @@ class erpUserClass extends userClass{
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'"; 
+			$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'";
 		}
 		//$query = "SELECT it.id item_id, it.sku, it.item_name, sum(tl.in_qty) in_qty, sum(tl.out_qty) out_qty, 0 ord_qty, 0 sh_qty, 0 cm_qty  FROM item_ledger_st tl, items it WHERE tl.company_id = it.company_id AND tl.company_id =".$get['company_id']." AND tl.item_id = it.id ".$whr." GROUP BY tl.item_id";
 		$query = "SELECT 
@@ -60,7 +60,7 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT it.id item_id, it.sku, it.item_name, si.pending_qty qty, so.id so_id, so.transaction_number  FROM sales_orders so, so_items si, items it WHERE  so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.current_status = 199 AND si.pending_qty > 0 AND so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY si.item_id";
 		$return['query'] = $query;
@@ -74,10 +74,10 @@ GROUP BY tl.item_id";
 		//print_r($return); exit;
 		// $whr = "";
 		// if($get['from_date']!="" && $get['to_date']!=""){
-		// 	$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'"; 
+		// 	$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'";
 		// }
 		//$query = "SELECT it.id item_id, it.sku, it.item_name, sum(tl.in_qty) in_qty, sum(tl.out_qty) out_qty, 0 open_qty FROM item_ledger_st tl, items it WHERE tl.company_id = it.company_id AND tl.company_id =".$get['company_id']." AND tl.item_id = it.id ".$whr." GROUP BY tl.item_id";
-		
+
 		$query = "SELECT it.id item_id,
 		(SELECT iwb.closing_qty
          FROM item_wa_balances iwb
@@ -156,7 +156,7 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT it.id item_id, it.sku, it.item_name, si.pending_qty qty, si.item_amount , si.pending_qty * si.item_amount total,  so.id so_id, so.transaction_number  FROM purchase_orders so, po_items si, items it WHERE  so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.current_status = 0 AND so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY si.item_id";
 		$return['query'] = $query;
@@ -169,7 +169,7 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT it.id item_id, it.sku, it.item_name, si.pending_qty qty, so.id so_id, so.transaction_number, it.purchase_price, it.sale_price, it.sale_price-it.purchase_price margin, (it.sale_price*0.18)+it.sale_price salewithprice   FROM sales_orders so, so_items si, items it WHERE  so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.current_status = 199 AND si.pending_qty > 0 AND so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY si.item_id";
 		$return['query'] = $query;
@@ -182,7 +182,7 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'"; 
+			$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT it.id item_id, it.sku, it.item_name, it.purchase_price, sum(tl.in_qty) in_qty, sum(tl.out_qty) out_qty, 0 ord_qty, 0 sh_qty, 0 cm_qty  FROM item_ledger_st tl, items it WHERE tl.company_id = it.company_id AND tl.company_id =".$get['company_id']." AND tl.item_id = it.id ".$whr." GROUP BY tl.item_id";
 		$return['query'] = $query;
@@ -195,7 +195,7 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'"; 
+			$whr = " AND tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT it.id item_id, it.sku, it.item_name, it.purchase_price, tl.in_qty, tl.out_qty, tl.document_date_time, tl.document_type, tl.document_no, it.purchase_price, tl.in_value, tl.out_value FROM item_ledger_st tl, items it, item_lot_nos iln WHERE tl.company_id = it.company_id AND tl.company_id = it.company_id AND tl.company_id = ".$get['company_id']." AND tl.item_id = it.id AND it.id = iln.item_id AND tl.document_no = iln.transaction_id AND tl.document_type = iln.transaction_table";
 		$return['query'] = $query;
@@ -203,13 +203,13 @@ GROUP BY tl.item_id";
 		$return['data']= $data;
 		return $return;
 	}
-	
+
 	public function togetpurchasesbyitemrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT it.id item_id, it.sku, it.item_name, sum(si.item_quantity) qty, sum(si.item_amount) total FROM purchase_invoices so, pi_items si, items it WHERE so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.current_status = '".ST_APPROVED."' AND so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY si.item_id";
 		$return['query'] = $query;
@@ -222,7 +222,7 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT  so.transaction_date, so.party_name, so.party_id, sum(si.item_quantity) qty,  so.transaction_number, po.transaction_number po_transaction_number FROM goods_receipt_notes so, grn_items si, items it,purchase_orders po WHERE  so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id = po.company_id AND  so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.ref_id = po.id AND so.current_status = 199 AND so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY si.transaction_id";
 		$return['query'] = $query;
@@ -235,20 +235,20 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT  so.transaction_date, so.party_name, so.party_id, sum(si.item_quantity) qty, so.transaction_number, sp.name status_name FROM purchase_orders so, po_items si, status_progress sp WHERE  so.company_id = si.company_id AND so.company_id = sp.company_id AND so.company_id =".$get['company_id']."  AND so.id = si.transaction_id AND  so.current_status = sp.status AND  so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY si.transaction_id";
 		$return['query'] = $query;
 		$data = $callConfig->getAllRows($query);
 		$return['data']= $data;
 		return $return;
-	}	
+	}
 	public function togetpaymentreceivedrepot($get){
 		global $callConfig;
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND pay.payment_date >= '".$get['from_date']."' AND pay.payment_date <= '".$get['to_date']."'"; 
+			$whr = " AND pay.payment_date >= '".$get['from_date']."' AND pay.payment_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT pay.id, pay.transaction_no, pay.payment_date, pay.payment_type, pay.payment_process, pay.ref_no, pay.remarks ,  pa.transaction_no, pa.party_id, pa.total_paid_amonut, ven.company , ven.display_name FROM payments pay, payment_allocations pa, vendors ven WHERE pay.company_id = ".$get['company_id']." AND pay.company_id = pa.company_id AND pay.company_id = ven.company_id AND pay.id = pa.payment_id AND pay.is_active = pa.is_active AND pay.is_active = ven.is_active AND pay.is_active = 0 AND pay.transaction_type = 'vendors' AND ven.id = pa.party_id ".$whr;
 		//$query = "SELECT py.*, vn.display_name FROM payments py, vendors vn WHERE py.company_id = vn.company_id AND py.company_id = ".$get['company_id']." AND py.party_id = vn.id ".$whr." AND py.is_active =0";
@@ -266,7 +266,7 @@ GROUP BY tl.item_id";
 			$item_con = " AND ilw.item_id IN (".$get['itemids'].")";
 			$opening_item_con = " AND itm.id IN (".$get['itemids'].")";
 			//$opening_balance_condition = " AND ilw.item_id IN (".$get['itemids'].")";
-		/**$query = "SELECT 
+		/**$query = "SELECT
 		    itm.id,
 		    itm.sku,
 		    itm.item_name,
@@ -282,7 +282,7 @@ GROUP BY tl.item_id";
 		        FROM 	item_categories itc
 		        WHERE	itc.company_id = itm.company_id
 		        AND		itc.id = itm.category_id
-		     )item_category_name,     
+		     )item_category_name,
 		    itm.item_image,
 		    ilw.document_type,
 		    ilw.document_ref_no,
@@ -307,7 +307,7 @@ GROUP BY tl.item_id";
 		    itm.id,
 		    ilw.document_date,
 		    ilw.id"; **/
-		//  $query = "SELECT itm.id, itm.sku, itm.item_name, itm.item_type,(SELECT its.item_type_name FROM item_types its WHERE its.company_id = itm.company_id AND its.id = itm.item_type) AS item_type_name,(SELECT itc.category_description FROM item_categories itc WHERE itc.company_id = itm.company_id AND itc.id = itm.category_id ) AS item_category_name, itm.item_image, ilw.document_type, ilw.document_ref_no, ilw.document_date, ilw.in_value, ilw.out_value, ilw.in_qty, ilw.out_qty, @running_total := @running_total + IFNULL(ilw.in_qty, 0) - IFNULL(ilw.out_qty, 0) AS running_total FROM items itm LEFT JOIN item_ledger_wa ilw ON ilw.company_id = itm.company_id AND ilw.item_id = itm.id AND ilw.document_date >= '".$get['from_date']."' AND ilw.document_date <= '".$get['to_date']."' JOIN (SELECT @running_total := 0) r WHERE itm.company_id = '".$get['company_id']."'  ".$opening_item_con." ORDER BY itm.id, ilw.document_date, ilw.id"; 
+		//  $query = "SELECT itm.id, itm.sku, itm.item_name, itm.item_type,(SELECT its.item_type_name FROM item_types its WHERE its.company_id = itm.company_id AND its.id = itm.item_type) AS item_type_name,(SELECT itc.category_description FROM item_categories itc WHERE itc.company_id = itm.company_id AND itc.id = itm.category_id ) AS item_category_name, itm.item_image, ilw.document_type, ilw.document_ref_no, ilw.document_date, ilw.in_value, ilw.out_value, ilw.in_qty, ilw.out_qty, @running_total := @running_total + IFNULL(ilw.in_qty, 0) - IFNULL(ilw.out_qty, 0) AS running_total FROM items itm LEFT JOIN item_ledger_wa ilw ON ilw.company_id = itm.company_id AND ilw.item_id = itm.id AND ilw.document_date >= '".$get['from_date']."' AND ilw.document_date <= '".$get['to_date']."' JOIN (SELECT @running_total := 0) r WHERE itm.company_id = '".$get['company_id']."'  ".$opening_item_con." ORDER BY itm.id, ilw.document_date, ilw.id";
 		    $query = "SELECT itm.id,itm.sku,itm.item_name,itm.item_type, (SELECT its.item_type_name FROM item_types its WHERE its.company_id = itm.company_id AND its.id = itm.item_type) AS item_type_name,(SELECT itc.category_description FROM item_categories itc WHERE itc.company_id = itm.company_id AND itc.id = itm.category_id) AS item_category_name, itm.item_image, ilw.document_type, ilw.document_ref_no, ilw.document_date,ilw.in_value, ilw.out_value, ilw.in_qty, ilw.out_qty, @running_qty := IF(ilw.document_date IS NULL, opening_balances.opening_qty, @running_qty + IFNULL(ilw.in_qty, 0) - IFNULL(ilw.out_qty, 0)) AS running_quantity,    @running_value := IF(ilw.document_date IS NULL, opening_balances.opening_value, @running_value + IFNULL(ilw.in_value, 0) - IFNULL(ilw.out_value, 0)) AS running_value FROM items itm LEFT JOIN item_ledger_wa ilw ON ilw.company_id = itm.company_id AND ilw.item_id = itm.id AND ilw.document_date >= '".$get['from_date']."' AND ilw.document_date <= '".$get['to_date']."' LEFT JOIN (SELECT ilw_open.item_id, SUM(IFNULL(ilw_open.in_qty, 0) - IFNULL(ilw_open.out_qty, 0)) AS opening_qty, SUM(IFNULL(ilw_open.in_value, 0) - IFNULL(ilw_open.out_value, 0)) AS opening_value FROM item_ledger_wa ilw_open WHERE ilw_open.document_date < '".$get['from_date']."' GROUP BY ilw_open.item_id) opening_balances ON opening_balances.item_id = itm.id JOIN (SELECT @running_qty := 0, @running_value := 0) r WHERE '".$get['company_id']."'  ".$opening_item_con." ORDER BY itm.id, ilw.document_date,ilw.id";
 		$return['query'] = $query;
 		$data = $callConfig->getAllRows($query);
@@ -429,7 +429,7 @@ GROUP BY tl.item_id";
 
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND  pi.transaction_date >= '".$get['from_date']."' AND pi.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND  pi.transaction_date >= '".$get['from_date']."' AND pi.transaction_date <= '".$get['to_date']."'";
 		}
 		if($vendor_ids != ''){
 			$whr .= " AND v.id IN ($vendor_ids) ";
@@ -471,7 +471,7 @@ GROUP BY tl.item_id";
 
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " pi.transaction_date >= '".$get['from_date']."' AND pi.transaction_date <= '".$get['to_date']."' AND "; 
+			$whr = " pi.transaction_date >= '".$get['from_date']."' AND pi.transaction_date <= '".$get['to_date']."' AND ";
 		}
 		if($vendor_ids != ''){
 			$whr .= " v.id IN ($vendor_ids) AND ";
@@ -518,7 +518,7 @@ GROUP BY tl.item_id";
 
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " cn.transaction_date >= '".$get['from_date']."' AND cn.transaction_date <= '".$get['to_date']."' AND "; 
+			$whr = " cn.transaction_date >= '".$get['from_date']."' AND cn.transaction_date <= '".$get['to_date']."' AND ";
 		}
 		if($vendor_ids != ''){
 			$whr .= " v.id IN ($vendor_ids) AND ";
@@ -562,7 +562,7 @@ GROUP BY tl.item_id";
 
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " p.payment_date >= '".$get['from_date']."' AND p.payment_date <= '".$get['to_date']."' AND "; 
+			$whr = " p.payment_date >= '".$get['from_date']."' AND p.payment_date <= '".$get['to_date']."' AND ";
 		}
 		if($vendor_ids != ''){
 			$whr .= " v.id IN ($vendor_ids) AND ";
@@ -605,7 +605,7 @@ GROUP BY tl.item_id";
 
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " po.transaction_date >= '".$get['from_date']."' AND po.transaction_date <= '".$get['to_date']."' AND "; 
+			$whr = " po.transaction_date >= '".$get['from_date']."' AND po.transaction_date <= '".$get['to_date']."' AND ";
 		}
 		if($vendor_ids != ''){
 			$whr .= " v.id IN ($vendor_ids) AND ";
@@ -650,7 +650,7 @@ GROUP BY tl.item_id";
 		$return['unit_of_measurements']= $uomres;
 
 
-			
+
 
 		return $return;
 	}
@@ -659,7 +659,7 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT it.id item_id, it.sku, it.item_name, sum(si.item_quantity) qty, sum(si.item_amount) total FROM sales_invoices so, si_items si, items it WHERE so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.current_status = '".ST_APPROVED."' AND so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY si.item_id";
 		$return['query'] = $query;
@@ -673,7 +673,7 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND so.transaction_date >= '".$get['from_date']."' AND so.transaction_date <= '".$get['to_date']."'";
 		}
 		$query = "SELECT so.id, si.item_id, it.sku, it.item_name, sum(si.item_quantity) as order_qty FROM sales_orders so, so_items si, items it WHERE so.company_id = si.company_id AND so.company_id = it.company_id AND so.company_id =".$get['company_id']." AND si.item_id = it.id AND so.id = si.transaction_id AND so.current_status = '".ST_APPROVED."' AND so.is_active = 0 AND si.is_active =0  ".$whr." GROUP BY so.id, si.item_id, it.sku, it.item_name";
 		$return['query'] = $query;
@@ -709,7 +709,7 @@ GROUP BY tl.item_id";
 
 		$whr = "";
 		if($get['from_date']!="" && $get['to_date']!=""){
-			$whr = " AND  pi.transaction_date >= '".$get['from_date']."' AND pi.transaction_date <= '".$get['to_date']."'"; 
+			$whr = " AND  pi.transaction_date >= '".$get['from_date']."' AND pi.transaction_date <= '".$get['to_date']."'";
 		}
 		if($vendor_ids != ''){
 			$whr .= " AND v.id IN ($vendor_ids) ";
@@ -749,9 +749,9 @@ GROUP BY tl.item_id";
 		$return['get']= $get;
 		$transaction_table = $get['transaction_table'];
 		$transaction_id = $get['transaction_id'];
-		
+
 		if($transaction_table =='kittings' || $transaction_table =='Kittings'){
-			$tranitmsql = "SELECT kiti.item_id, SUM(kiti.quantity) as sum_item_quantity, (SELECT CONCAT(item_name,' (',SKU,')') FROM items itm WHERE itm.id = kiti.item_id) as item_name FROM kitting_items kiti WHERE kiti.company_id = '".$get['company_id']."' AND kiti.transaction_id = '".$transaction_id."' AND kiti.is_active = 0 GROUP BY kiti.item_id";	
+			$tranitmsql = "SELECT kiti.item_id, SUM(kiti.quantity) as sum_item_quantity, (SELECT CONCAT(item_name,' (',SKU,')') FROM items itm WHERE itm.id = kiti.item_id) as item_name FROM kitting_items kiti WHERE kiti.company_id = '".$get['company_id']."' AND kiti.transaction_id = '".$transaction_id."' AND kiti.is_active = 0 GROUP BY kiti.item_id";
 			$tranitmresult = $callConfig->getAllRows($tranitmsql);
 			$transactionitems = $item_wa_balances =$errorthrow =  array();
 			foreach($tranitmresult as $tritm){
@@ -759,7 +759,7 @@ GROUP BY tl.item_id";
 				$transactionitemsdetail[$tritm->item_id] = $tritm;
 			}
 		}elseif($transaction_table =='dekittings'){
-			$tranitmsql = "SELECT diki.parent_item_id as item_id, SUM(diki.parent_quantity) as sum_item_quantity, (SELECT CONCAT(item_name,' (',SKU,')') FROM items itm WHERE itm.id = kiti.item_id) as item_name FROM dekittings diki WHERE diki.company_id = '".$get['company_id']."' AND diki.id = '".$transaction_id."' AND diki.is_active = 0 GROUP BY diki.parent_item_id";	
+			$tranitmsql = "SELECT diki.parent_item_id as item_id, SUM(diki.parent_quantity) as sum_item_quantity, (SELECT CONCAT(item_name,' (',SKU,')') FROM items itm WHERE itm.id = kiti.item_id) as item_name FROM dekittings diki WHERE diki.company_id = '".$get['company_id']."' AND diki.id = '".$transaction_id."' AND diki.is_active = 0 GROUP BY diki.parent_item_id";
 			$tranitmresult = $callConfig->getAllRows($tranitmsql);
 			$transactionitems = $item_wa_balances =$errorthrow =  array();
 			foreach($tranitmresult as $tritm){
@@ -768,8 +768,8 @@ GROUP BY tl.item_id";
 			}
 		}else{
 			$fieldarray  = $this->toGetDynamicTables($transaction_table,$get['page_option']);
-			$return['fieldarray'] =$fieldarray; 
-			$tranitmsql = "SELECT item_id, item_name, SUM(item_quantity) as sum_item_quantity FROM ".$fieldarray[$transaction_table]['item']." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$transaction_id."' AND is_active = 0 GROUP BY item_id, item_name";	
+			$return['fieldarray'] =$fieldarray;
+			$tranitmsql = "SELECT item_id, item_name, SUM(item_quantity) as sum_item_quantity FROM ".$fieldarray[$transaction_table]['item']." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$transaction_id."' AND is_active = 0 GROUP BY item_id, item_name";
 			$tranitmresult = $callConfig->getAllRows($tranitmsql);
 			$transactionitems = $item_wa_balances =$errorthrow =  array();
 			foreach($tranitmresult as $tritm){
@@ -777,26 +777,26 @@ GROUP BY tl.item_id";
 				$transactionitemsdetail[$tritm->item_id] = $tritm;
 			}
 		}
-		$return['tranitmsql'] =$tranitmsql; 
-		$return['transactionitemsid'] =$transactionitemsid; 
-		$return['transactionitemsdetail'] =$transactionitemsdetail; 
-	
+		$return['tranitmsql'] =$tranitmsql;
+		$return['transactionitemsid'] =$transactionitemsid;
+		$return['transactionitemsdetail'] =$transactionitemsdetail;
+
 		if(count((array)$transactionitemsid)!=0){
 			$itemids = implode(",",(array)$transactionitemsid);
-			
+
 			$isbsql =  "SELECT iwb.item_id, iwb.balance_date, iwb.closing_qty FROM item_wa_balances iwb JOIN ( SELECT item_id, MAX(balance_date) AS max_date FROM item_wa_balances WHERE company_id = '".$get['company_id']."' AND item_id IN (".$itemids.") GROUP BY item_id ) latest ON iwb.item_id = latest.item_id AND iwb.balance_date = latest.max_date WHERE iwb.company_id = '".$get['company_id']."'";
 			$isbres = $callConfig->getAllRows($isbsql);
 			foreach($isbres as $balitem){
 				$item_wa_balances[$balitem->item_id]= $balitem;
 			}
-			$return['isbsql'] =$isbsql; 
-			$return['item_wa_balances'] =$item_wa_balances; 
-		}	
+			$return['isbsql'] =$isbsql;
+			$return['item_wa_balances'] =$item_wa_balances;
+		}
 
 		$stocknotcheckrequird = array();
 		if(count((array)$transactionitemsid)!=0){
 			$itemids = implode(",",(array)$transactionitemsid);
-			
+
 			$itmsql =  "SELECT id FROM items WHERE company_id = '".$get['company_id']."' AND id IN (".$itemids.") AND negative_stock = '0' AND is_active =0";
 			$itmres = $callConfig->getAllRows($itmsql);
 			foreach($itmres as $balitem){
@@ -816,12 +816,12 @@ GROUP BY tl.item_id";
 					$itmdetails->closing_qty = 0;
 					$errorthrow[] = $itmdetails;
 				}
-			}	
+			}
 		}
 		$return['errorthrow'] = array('details'=>$errorthrow,'errorcount'=>count((array)$errorthrow));
 		//print_r($return);
-		return $return;	
-	
+		return $return;
+
 	}
 
 	public function getKittings($get){
@@ -835,7 +835,7 @@ GROUP BY tl.item_id";
 	 	if($get['rid'] !=""){
 	        $kittingQuery = "SELECT * FROM kittings WHERE company_id = '" . $get['company_id'] . "' AND id = '" . $get['rid'] . "' AND is_active = 0";
 	        $kittingData = $callConfig->getRow($kittingQuery);
-	 
+
 	        $itemsQuery = "SELECT * FROM kitting_items WHERE company_id = '" . $get['company_id'] . "' AND transaction_id = '" . $get['rid'] . "' AND is_active = 0";
 	        $itemsData = $callConfig->getAllRows($itemsQuery);
 	 	}
@@ -852,7 +852,7 @@ GROUP BY tl.item_id";
 	 	if($get['rid'] !=""){
 	        $dekittingQuery = "SELECT * FROM dekittings WHERE company_id = '" . $get['company_id'] . "' AND id = '" . $get['rid'] . "' AND is_active = 0";
 	        $dekittingData = $callConfig->getRow($dekittingQuery);
-	 
+
 	        $itemsQuery = "SELECT * FROM dekitting_items WHERE company_id = '" . $get['company_id'] . "' AND transaction_id = '" . $get['rid'] . "' AND is_active = 0";
 	        $itemsData = $callConfig->getAllRows($itemsQuery);
 	 	}
@@ -861,7 +861,7 @@ GROUP BY tl.item_id";
     public function getDailyAndWeeklyTransactions($get){
     	global $callConfig;
     	$returntrans = array();
-    	$return['get'] = $get; 
+    	$return['get'] = $get;
     	$transaction_tables = json_decode(base64_decode($get['transaction_tables']),1);
     	$return['transaction_tables'] = $transaction_tables;
     	foreach($transaction_tables as $transtab){
@@ -870,7 +870,7 @@ GROUP BY tl.item_id";
 	        $resl = $callConfig->getAllRows($query);
 	        foreach($resl as $res1){
 	         	$dateyearary[$res1->daymonthyear] = $res1;
-	        }	
+	        }
 	        $returntrans[$transtab] = $dateyearary;
 	    }
 	    $return['transaction'] = $returntrans;
@@ -901,7 +901,7 @@ GROUP BY tl.item_id";
 		if (isset($post['rid']) && !empty($post['rid'])) {
 			$parentData['updated_by'] = $get['user_id'];
 			$parentData['updated_date'] = date('Y-m-d H:i:s');
-			
+
 			$parentUpdate = $callConfig->updateRecord('dekittings', $parentData, 'id', $post['rid']);
 			$return['parent_insert_update'] = $parentUpdate;
 
@@ -1092,7 +1092,7 @@ GROUP BY tl.item_id";
                 $childResults[] = $callConfig->insertRecord('kitting_items', $childData);
             }
         }
- 
+
 		$return['child_inserts'] = $childResults;
 		return $return;
 	}
@@ -1117,7 +1117,7 @@ GROUP BY tl.item_id";
 	    $res_parent = $callConfig->getRow($sql);
  		$itemids[$res_parent->parent_item_id] = $res_parent->parent_item_id;
  		$mainitem = $this->togetitemvalues($res_parent->parent_item_id);
-		//$day_rate = $this->togetitemwadayrate($res_parent->parent_item_id, $get['company_id']);	
+		//$day_rate = $this->togetitemwadayrate($res_parent->parent_item_id, $get['company_id']);
 		$day_rate = $res_parent->parent_item_day_rate;
 		$itemres = null;
 		$len = array('company_id' =>$get['company_id'] , 'location_id' =>$aures->location_id, 'transaction_warehouse_id' => $aures->default_warehouse_id, 'transaction_date' => $res_parent->transaction_date, 'item_id' =>$res_parent->parent_item_id,'document_no'=>$res_parent->id,'document_type' =>$transaction_table,'document_ref_no' =>'','in_qty' =>$res_parent->parent_quantity,'in_value'=>0,'item_in_value' =>0,'reason_id'=>0,'out_qty' =>$res_parent->parent_quantity,'out_value' =>0,'sale_price'=>0,'sale_value'=>0,'item_wa_cost'=>$day_rate,'item_st_cost'=>$mainitem->purchase_price,'is_active'=>'0','current_status'=>'0','sales_qty'=>0,'purchase_qty'=>0,'day_rate'=>$day_rate);
@@ -1132,16 +1132,16 @@ GROUP BY tl.item_id";
 		}
 		if($transaction_table=="kittings"){
 			$len['out_qty'] = '0';
-			$len['out_value'] = '0'; 
+			$len['out_value'] = '0';
 		}elseif($transaction_table=="dekittings"){
 			$len['in_qty'] = '0';
-			$len['in_value'] = '0'; 
+			$len['in_value'] = '0';
 		}else{
 			$len = array();
 		}
 		if(count((array)$len) !=0){
 			$this->invoiceUpdates($transaction_table,$len);
-		} 
+		}
  //parent related transaction
  //child related transaction
 	    $sql1 = "SELECT * FROM ".$child_trans_table." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$transaction_id."' AND is_active=0";
@@ -1149,12 +1149,12 @@ GROUP BY tl.item_id";
 	    $childitemdetail = array();
 		foreach($res_child as $itemres){
 			$itemids[$itemres->item_id] = $itemres->item_id;
- 		
+
 			$mainitem = $this->togetitemvalues($itemres->item_id);
 			//$day_rate = $this->togetitemwadayrate($itemres->item_id, $get['company_id']);
 			$day_rate = $itemres->component_day_rate;
 			$itemres->mainitem = $mainitem;
-			$itemres->day_rate = $day_rate;	
+			$itemres->day_rate = $day_rate;
 			$childitemdetail[] = $itemres;
 			$len = array('company_id' =>$get['company_id'] , 'location_id' =>$aures->location_id, 'transaction_warehouse_id' => $aures->default_warehouse_id, 'transaction_date' => $res_parent->transaction_date, 'item_id' =>$itemres->item_id,'document_no'=>$res_parent->id,'document_type' =>$child_trans_table,'document_ref_no' =>'','in_qty' =>$itemres->quantity,'in_value'=>0,'item_in_value' =>0,'reason_id'=>0,'out_qty' =>$itemres->quantity,'out_value' =>0,'sale_price'=>0,'sale_value'=>0,'item_wa_cost'=>$day_rate,'item_st_cost'=>$mainitem->purchase_price,'is_active'=>'0','current_status'=>'0','sales_qty'=>0,'purchase_qty'=>0,'day_rate'=>$day_rate);
 
@@ -1193,16 +1193,16 @@ GROUP BY tl.item_id";
 			}
 			if($transaction_table=="dekittings"){
 				$len['out_qty'] = '0';
-				$len['out_value'] = '0'; 
+				$len['out_value'] = '0';
 			}elseif($transaction_table=="kittings"){
 				$len['in_qty'] = '0';
-				$len['in_value'] = '0'; 
+				$len['in_value'] = '0';
 			}else{
 				$len = array();
 			}
 			if(count((array)$len) !=0){
 				$this->invoiceUpdates($transaction_table,$len);
-			} 
+			}
 		}
 //End Child Related transaction
 
@@ -1218,11 +1218,11 @@ GROUP BY tl.item_id";
 /**/
 
 
-		// account parts 
+		// account parts
 		$defaultaccount = DEFAULTACCOUNTS;
 		$rounddigits = 2;
 		//$aures //$user
-	
+
 		$whrs = "company_id= '".$get['company_id']."' AND is_active = 0";
 		$query = $callConfig->selectQuery('config','*',$whrs,'','','');
 		$config = $callConfig->getRow($query);
@@ -1230,7 +1230,7 @@ GROUP BY tl.item_id";
 		$suspense_account = $config->jv_suspense_acc!=""?$config->jv_suspense_acc:$defaultaccount['jv_suspense_acc'];
 		$default_round_off_account = $config->default_round_off_account!=""?$config->default_round_off_account:$defaultaccount['default_round_off_account'];
 
-		$coasql = "SELECT account_code FROM `chart_of_accounts` WHERE company_id = '".$get['company_id']."' AND allow_posting = 0 AND is_active = 0";	
+		$coasql = "SELECT account_code FROM `chart_of_accounts` WHERE company_id = '".$get['company_id']."' AND allow_posting = 0 AND is_active = 0";
 		$coares = $callConfig->getAllRows($coasql);
 		$chartofaccount = array();
 		foreach($coares as $coa){
@@ -1239,25 +1239,25 @@ GROUP BY tl.item_id";
 		$transaction_location_id = $aures->location_id;
 		$department_id = $aures->department_id;
 		$cost_center_id = $aures->cost_center;
-		if(count((array)$itemids) !=0){ 
+		if(count((array)$itemids) !=0){
 			$itemsitemids = implode(',', (array)$itemids);
-			$itemssql = "SELECT id, category_id, sku, item_name, item_description, inventory_asset_account, inventory_adjustment_account, inventory_cost_variance_account, cogs_account, purchase_expense_account, sales_revenue_account, sales_discount_account, sales_return_account, purchase_price_variance_account, freight_expense_account, packaging_expense_account, sales_tax_payable_account, purchase_tax_payable_account, promotions_and_discounts_account, sales_allowances_account, deferred_revenue_account, ap_account, ar_account, accrued_expenses_account, prepaid_expenses_account, wip_asset_account, goods_received_not_invoiced_account, invoiced_not_received_account, goods_sold_not_invoiced_account FROM items WHERE company_id = '".$get['company_id']."' AND id IN(".$itemsitemids.") AND is_active = 0";	
+			$itemssql = "SELECT id, category_id, sku, item_name, item_description, inventory_asset_account, inventory_adjustment_account, inventory_cost_variance_account, cogs_account, purchase_expense_account, sales_revenue_account, sales_discount_account, sales_return_account, purchase_price_variance_account, freight_expense_account, packaging_expense_account, sales_tax_payable_account, purchase_tax_payable_account, promotions_and_discounts_account, sales_allowances_account, deferred_revenue_account, ap_account, ar_account, accrued_expenses_account, prepaid_expenses_account, wip_asset_account, goods_received_not_invoiced_account, invoiced_not_received_account, goods_sold_not_invoiced_account FROM items WHERE company_id = '".$get['company_id']."' AND id IN(".$itemsitemids.") AND is_active = 0";
 				$itemsres = $callConfig->getAllRows($itemssql);
 			foreach($itemsres as $itm){
 				$items[$itm->id] = $itm;
 				$itemcatid[$itm->category_id] = $itm->category_id;
-			}	
+			}
 		}
 		if(count((array)$itemcatid) !=0){
 			$itemcatids = implode(',', (array)$itemcatid);
-			$item_categoriessql = "SELECT id, inventory_asset_account, inventory_adjustment_account, inventory_cost_variance_account, cogs_account, purchase_expense_account, sales_revenue_account, sales_discount_account, sales_return_account, purchase_price_variance_account, freight_expense_account, packaging_expense_account, sales_tax_payable_account, purchase_tax_payable_account, promotions_and_discounts_account, sales_allowances_account, deferred_revenue_account, ap_account, ar_account, accrued_expenses_account, prepaid_expenses_account, wip_asset_account, goods_received_not_invoiced_account, invoiced_not_received_account, goods_sold_not_invoiced_account FROM item_categories WHERE company_id = '".$get['company_id']."' AND id IN(".$itemcatids.") AND is_active = 0";	
+			$item_categoriessql = "SELECT id, inventory_asset_account, inventory_adjustment_account, inventory_cost_variance_account, cogs_account, purchase_expense_account, sales_revenue_account, sales_discount_account, sales_return_account, purchase_price_variance_account, freight_expense_account, packaging_expense_account, sales_tax_payable_account, purchase_tax_payable_account, promotions_and_discounts_account, sales_allowances_account, deferred_revenue_account, ap_account, ar_account, accrued_expenses_account, prepaid_expenses_account, wip_asset_account, goods_received_not_invoiced_account, invoiced_not_received_account, goods_sold_not_invoiced_account FROM item_categories WHERE company_id = '".$get['company_id']."' AND id IN(".$itemcatids.") AND is_active = 0";
 				$item_categoriesres = $callConfig->getAllRows($item_categoriessql);
-				$item_categories = array();	
+				$item_categories = array();
 			foreach($item_categoriesres as $itcat){
 				$item_categories[$itcat->id] = $itcat;
 			}
 		}
-		
+
 
 		foreach($childitemdetail as $itemrow){
 			$itemrow = (array)$itemrow;
@@ -1281,14 +1281,14 @@ GROUP BY tl.item_id";
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
 				if($chartofaccount[$itemaccount_code] =="" || $itemaccount_code ==""){ // chart Of Account Not Found Suspens Account Enter data
 					$itemaccount_code =$suspense_account;
-				}	
+				}
 				$jvary['account_code'] = $itemaccount_code;
 				$jvary['credit_amount'] = round($totalamt,$rounddigits);
 			 	$jvary['debit_amount'] = 0;
 				$itemref[$itemaccount_code][] = $jvary;
-			
+
 			}elseif($child_trans_table == 'kitting_items'){
-					
+
 				//inventory_asset_account
 				$itemaccount_code = "";
 				if($itemtabledetails->inventory_asset_account !="" AND $itemtabledetails->inventory_asset_account !="0"){
@@ -1301,7 +1301,7 @@ GROUP BY tl.item_id";
 				$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
 				if($chartofaccount[$itemaccount_code] =="" || $itemaccount_code ==""){ // chart Of Account Not Found Suspens Account Enter data
 					$itemaccount_code =$suspense_account;
-				}	
+				}
 				$jvary['account_code'] = $itemaccount_code;
 				$jvary['credit_amount'] = 0;
 			 	$jvary['debit_amount'] = round($totalamt,$rounddigits);
@@ -1330,7 +1330,7 @@ GROUP BY tl.item_id";
 //Start parent data
 		$itemtabledetails = $items[$res_parent->parent_item_id];
 		$itemcategoorytabledetails = $item_categories[$itemtabledetails->category_id];
-		
+
 		//$mainitem = $this->togetitemvalues($res_parent->parent_item_id);
 		//$day_rate = $this->togetitemwadayrate($res_parent->parent_item_id, $get['company_id']);
 		$day_rate = $res_parent->parent_item_day_rate;
@@ -1352,7 +1352,7 @@ GROUP BY tl.item_id";
 			$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
 			if($chartofaccount[$itemaccount_code] =="" || $itemaccount_code ==""){ // chart Of Account Not Found Suspens Account Enter data
 				$itemaccount_code =$suspense_account;
-			}	
+			}
 			$witemlistary['account_code'] = $itemaccount_code;
 			$jvary['account_code'] = $itemaccount_code;
 			$jvary['credit_amount'] = round($totalamt,$rounddigits);
@@ -1360,7 +1360,7 @@ GROUP BY tl.item_id";
 			$witemlistary['credit_amount'] =  round($totalamt,$rounddigits);
 		 	$witemlistary['debit_amount'] = 0;
 		 	$total_credit_amt +=round($totalamt,$rounddigits);
-		 	
+
 		}elseif($transaction_table == 'dekittings'){
 			//inventory_asset_account
 			$itemaccount_code = "";
@@ -1374,10 +1374,10 @@ GROUP BY tl.item_id";
 			$itemaccount_code!=""?$itemaccount_code:$defaultaccount['inventory_asset_account'];
 			if($chartofaccount[$itemaccount_code] =="" || $itemaccount_code ==""){ // chart Of Account Not Found Suspens Account Enter data
 				$itemaccount_code =$suspense_account;
-			}	
+			}
 			$witemlistary['account_code'] = $itemaccount_code;
 			$jvary['account_code'] = $itemaccount_code;
-			
+
 			$jvary['credit_amount'] = 0;
 			$jvary['debit_amount'] = round($totalamt,$rounddigits);
 			$witemlistary['credit_amount'] = 0;
@@ -1400,7 +1400,7 @@ GROUP BY tl.item_id";
 		$jvary = array('company_id'=>$get['company_id'],  'transaction_location_id'=>$transaction_location_id,  'transaction_id'=>$transaction_id,  'transaction_item_id'=>'',  'item_id'=>'', 'particulars'=>'JV Suspense', 'item_name'=>'JV Suspense',  'description'=>'JV Suspense',  'purchase_uom'=>'',  'item_quantity'=>1,  'item_price'=>0,  'item_amount'=>0,  'tax_amount'=>0,  'discount_amount'=>0,  'total_amount'=>0,  'name_type'=>'C',  'doc_ref_no'=>'',  'doc_ref_date'=>'',  'req_date'=>$res_parent->transaction_date,  'approved_quantity'=>'',  'transaction_type'=>'',  'transaction_qty'=>'',  'pending_qty'=>'',  'is_active'=>'0',  'current_status'=>'0','created_by'=>$get['user_id'],'account_code'=>$suspense_account);
 
 		if(round($tot_debit_amount,2) > round($tot_credit_amount,2)){
-		//if($tot_debit_amount > $tot_credit_amount){	
+		//if($tot_debit_amount > $tot_credit_amount){
 			$suspencamount = round($tot_debit_amount,2) - round($tot_credit_amount,2);
 			//$suspencamount = $tot_debit_amount - $tot_credit_amount;
 			$total_credit_amt +=round($suspencamount,$rounddigits);
@@ -1408,7 +1408,7 @@ GROUP BY tl.item_id";
 			$jvary['credit_amount'] = $suspencamount;
 			$suspensearry['debit_amount'] = 0;
 			$jvary['debit_amount'] = 0;
-			$itemref[$suspense_account][] = $jvary;	
+			$itemref[$suspense_account][] = $jvary;
 			$witemlist[] =$suspensearry;
 		}elseif(round($tot_debit_amount,2) < round($tot_credit_amount,2)){
 		//}elseif($tot_debit_amount < $tot_credit_amount){
@@ -1419,7 +1419,7 @@ GROUP BY tl.item_id";
 			$jvary['debit_amount'] = $suspencamount;
 			$suspensearry['credit_amount'] = 0;
 			$jvary['credit_amount'] = 0;
-			$itemref[$suspense_account][] = $jvary;	
+			$itemref[$suspense_account][] = $jvary;
 			$witemlist[] =$suspensearry;
 		}
 
@@ -1427,7 +1427,7 @@ GROUP BY tl.item_id";
 		$ref_id = '';
 		$senddata = array('company_id'=>$get['company_id'],'transaction_location_id'=>$transaction_location_id,  'department_id'=>$department_id,  'cost_center_id'=> $cost_center_id,  'transaction_number'=>'',  'transaction_date'=>$res_parent->transaction_date,  'currency_id'=>$aures->default_currency_id,  'currency_rate'=>1,  'originator'=>$res_parent->originator, 'created_date'=>date('Y-m-d h:i:s'),  'created_by'=>$get['user_id'],'credit_amount'=>$total_credit_amt, 'debit_amount'=>$total_debit_amt,'debit_tax'=>0,'credit_tax'=>'0','current_status'=>ST_APPROVED); // master table entry
 
-		//echo "<pre>";print_r($witemlist); 
+		//echo "<pre>";print_r($witemlist);
 		$postdata = array('main'=>$senddata,'items'=>$witemlist,'itemref'=>$itemref,'update_id'=>'','ref_id'=>$ref_id,'company_id'=>$get['company_id']);
 		$return['postdatajvdata'] = $postdata;
 		//echo "<pre>"; print_r($postdata); exit;
@@ -1448,11 +1448,11 @@ GROUP BY tl.item_id";
 		$item = $callConfig->getAllRows($itemquery);
 		$uomquery = "SELECT id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id = '" . $get['company_id'] . "' AND is_active=0";
 		$uom = $callConfig->getAllRows($uomquery);
-		
+
 
 		$kittingQuery = "SELECT id, originator, kitting_name as process_name, parent_item_id, parent_quantity, transaction_date FROM kittings WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0";
 		$kittingData = $callConfig->getAllRows($kittingQuery);
-		
+
 		$itemsQuery = "SELECT id, transaction_id, item_id, uom_id, quantity FROM kitting_items WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0";
 		$itemsData = $callConfig->getAllRows($itemsQuery);
 		$dekittingQuery = "SELECT id, originator, dekitting_name  as process_name, parent_item_id, parent_quantity, transaction_date FROM dekittings WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0";
@@ -1505,7 +1505,7 @@ GROUP BY tl.item_id";
 		global $callConfig;
 		$return = array();
 		$return['get'] = $get;
-		$whr = '';	
+		$whr = '';
 		if($get['from_date']!="" && $get['to_date']!=""){
 			$whr .= " AND transa.transaction_date >= '".$get['from_date']."' AND transa.transaction_date <= '".$get['to_date']."' ";
 
@@ -1516,10 +1516,10 @@ GROUP BY tl.item_id";
 		foreach($status_progress as $statusprogress){
 			$return['status_progress'][$statusprogress->status] = $statusprogress;
 		}
-		
-		$listsql ="SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.originator, transa.party_id, transa.party_name,transa.amount, transa.discount_amount, transa.tax_amount,transa.total_amount, itemtb.item_id, itemtb.item_name, itemtb.item_quantity, itemtb.pending_qty, itemtb.item_amount as atm_item_amount , itemtb.tax_amount as itm_tax_amount ,itemtb.total_amount as atm_total_amount, transa.current_status, transa.ref_type, transa.ref_no FROM requisitions transa, rq_items itemtb WHERE transa.company_id = '".$get['company_id']."' AND transa.company_id = itemtb.company_id AND transa.id = itemtb.transaction_id AND transa.is_active = itemtb.is_active AND transa.is_active = 0 $whr ORDER BY transa.id DESC";	
+
+		$listsql ="SELECT transa.id, transa.transaction_number, transa.transaction_date, transa.originator, transa.party_id, transa.party_name,transa.amount, transa.discount_amount, transa.tax_amount,transa.total_amount, itemtb.item_id, itemtb.item_name, itemtb.item_quantity, itemtb.pending_qty, itemtb.item_amount as atm_item_amount , itemtb.tax_amount as itm_tax_amount ,itemtb.total_amount as atm_total_amount, transa.current_status, transa.ref_type, transa.ref_no FROM requisitions transa, rq_items itemtb WHERE transa.company_id = '".$get['company_id']."' AND transa.company_id = itemtb.company_id AND transa.id = itemtb.transaction_id AND transa.is_active = itemtb.is_active AND transa.is_active = 0 $whr ORDER BY transa.id DESC";
 		$listres=$callConfig->getAllRows($listsql);
-		
+
 		$list = array();
 		foreach($listres as $listre){
 			$list[$listre->id][] = $listre;
@@ -1527,7 +1527,7 @@ GROUP BY tl.item_id";
 		$return['requisition_list'] = $list;
 		$return['sql'] = $listsql;
 		return $return;
-		
+
 	}
 
 	public function  getStatusProgressList($data){
@@ -2642,7 +2642,7 @@ GROUP BY tl.item_id";
 	}
 
 	// added by koti end
-	
+
 	// added by omkar start
 	public function getOpenPOReport($get){
         global $callConfig;
@@ -2769,7 +2769,7 @@ GROUP BY tl.item_id";
 
 	public function getAccruedLiabilitiesReport($get){
 		global $callConfig;
- 
+
 		$whereDatePO = $whereDateGRN = $whereDateINV = '';
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$from = date('Y-m-d', strtotime($get['from_date']));
@@ -2783,12 +2783,12 @@ GROUP BY tl.item_id";
 			$whereDateGRN = " AND grn.transaction_date = '{$date}'";
 			$whereDateINV = " AND inv.transaction_date = '{$date}'";
 		}
- 
+
 		$whereCompany = '';
 		if (!empty($get['company_id'])) {
 			$whereCompany = " AND po.company_id = '" . $get['company_id'] . "'";
 		}
- 
+
 		$sql = "SELECT po.transaction_number AS po_no, po.transaction_date   AS po_date, po.party_name AS vendor_name, grn.transaction_number AS grn_no, grn.transaction_date   AS grn_date, SUM(grni.item_quantity) AS received_qty, ROUND(SUM(grni.item_price * grni.item_quantity), 2) AS received_value, IFNULL(inv.total_amount, 0) AS invoiced_value,  
 		(ROUND(SUM(grni.item_price * grni.item_quantity), 2) - IFNULL(inv.total_amount, 0)) AS accrued_amount, 
 		CASE WHEN IFNULL(inv.total_amount, 0) = 0 THEN 'Pending Invoice' WHEN IFNULL(inv.total_amount, 0) < ROUND(SUM(grni.item_price * grni.item_quantity), 2) THEN 'Partially Invoiced' ELSE 'Fully Invoiced'
@@ -2802,7 +2802,7 @@ GROUP BY tl.item_id";
 	}
 
 	public function getPaymentProposalReport($get)	{
-		global $callConfig; 
+		global $callConfig;
 		$whereDate = '';
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$from = date('Y-m-d', strtotime($get['from_date']));
@@ -2811,12 +2811,12 @@ GROUP BY tl.item_id";
 		} elseif (!empty($get['date'])) {
 			$date = date('Y-m-d', strtotime($get['date']));
 			$whereDate = " AND inv.due_date = '{$date}'";
-		} 
+		}
 		$whereCompany = '';
 		if (!empty($get['company_id'])) {
 			$whereCompany = " AND inv.company_id = '" . $get['company_id'] . "'";
 		}
- 
+
 		$sql = "SELECT inv.transaction_number AS invoice_no, inv.transaction_date AS invoice_date, inv.due_date, po.party_name AS vendor_name, po.party_id AS vendor_id, inv.total_amount, COALESCE(p.payments_allocated, 0) AS paid_amount, (inv.total_amount - COALESCE(p.payments_allocated, 0)) AS pending_amount, CASE WHEN COALESCE(p.payments_allocated, 0) = 0 THEN 'Pending' WHEN COALESCE(p.payments_allocated, 0) < inv.total_amount THEN 'Partially Paid' ELSE 'Paid' END AS payment_status, inv.payment_terms, inv.notes AS remarks FROM purchase_invoices inv LEFT JOIN purchase_orders po ON po.id = inv.ref_no LEFT JOIN ( SELECT ref_no, SUM(allocated_amount) AS payments_allocated FROM payments WHERE is_active = '0' GROUP BY ref_no ) p ON p.ref_no = inv.id WHERE inv.is_active = '0' {$whereCompany} {$whereDate} ORDER BY inv.due_date ASC ";
 
 		$res = $callConfig->getAllRows($sql);
@@ -2828,7 +2828,7 @@ GROUP BY tl.item_id";
 
 	public function getAdvancePaymentReport($get){
 		global $callConfig;
- 
+
 		$whereDate = '';
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$from = date('Y-m-d', strtotime($get['from_date']));
@@ -2838,12 +2838,12 @@ GROUP BY tl.item_id";
 			$date = date('Y-m-d', strtotime($get['date']));
 			$whereDate = " AND inv.transaction_date = '{$date}'";
 		}
- 
+
 		$whereCompany = '';
 		if (!empty($get['company_id'])) {
 			$whereCompany = " AND inv.company_id = '" . $get['company_id'] . "'";
 		}
- 
+
 		$sql = "SELECT inv.transaction_number AS invoice_no, inv.transaction_date AS invoice_date, inv.due_date, po.party_name AS vendor_name, po.party_id AS vendor_id, inv.advance_payment AS advance_paid, inv.total_amount AS total_invoice_amount, COALESCE(p.total_payment, 0) AS total_payment_done, CASE WHEN COALESCE(p.total_payment, 0) = 0 THEN 'No Payment' WHEN COALESCE(p.total_payment, 0) < inv.advance_payment THEN 'Partially Paid' WHEN COALESCE(p.total_payment, 0) >= inv.advance_payment THEN 'Advance Cleared' ELSE 'Unknown' END AS payment_status, inv.payment_terms, inv.notes AS remarks FROM purchase_invoices inv LEFT JOIN purchase_orders po ON po.id = inv.ref_no LEFT JOIN (ELECT  ref_no, SUM(allocated_amount) AS total_payment FROM payments WHERE is_active = '0' GROUP BY ref_no ) p ON p.ref_no = inv.id WHERE inv.is_active = '0' {$whereCompany} {$whereDate} ORDER BY inv.transaction_date ASC ";
 
 		$res = $callConfig->getAllRows($sql);
@@ -2873,7 +2873,7 @@ GROUP BY tl.item_id";
 	    CASE WHEN DATEDIFF('{$selectedDate}', pi.due_date) > 180 THEN (pi.total_amount - IFNULL(pi.advance_payment,0)) ELSE 0 END AS days_181_plus, 
 	    pi.current_status, pi.company_id FROM purchase_invoices pi WHERE pi.is_active = '0' AND pi.cancel_invoice = 'N' {$whereCompany} AND pi.transaction_date <= '{$selectedDate}' ORDER BY pi.party_name ASC, pi.transaction_date ASC ";
 
-	    $invoices = $callConfig->getAllRows($sql); 
+	    $invoices = $callConfig->getAllRows($sql);
 	    $result['vendor_payment_aging_report'] = $invoices;
 	    $result['sql'] = $sql;
 	    $result['filters'] = [
@@ -2887,7 +2887,7 @@ GROUP BY tl.item_id";
 
 	public function getVendorReconciliationStatement($get)	{
 		global $callConfig;
- 
+
 		$whereDatePO = $whereDateGRN = $whereDateINV = '';
 		if (!empty($get['from_date']) && !empty($get['to_date'])) {
 			$from = date('Y-m-d', strtotime($get['from_date']));
@@ -2901,18 +2901,18 @@ GROUP BY tl.item_id";
 			$whereDateGRN = " AND grn.transaction_date = '{$date}'";
 			$whereDateINV = " AND pi.transaction_date = '{$date}'";
 		}
- 
+
 		$whereCompany = '';
 		if (!empty($get['company_id'])) {
 			$whereCompany = " AND po.company_id = '" . $get['company_id'] . "'";
 		}
- 
+
 		$sql = "SELECT po.party_id, po.party_name, po.transaction_number AS po_no, po.transaction_date AS po_date, po.total_amount AS po_amount, 
         grn.transaction_number AS grn_no, grn.transaction_date AS grn_date, grn.total_amount AS grn_amount, pi.transaction_number AS invoice_no, pi.transaction_date AS invoice_date, pi.total_amount AS invoice_amount, 
         SUM(poi.item_quantity) AS qty_ordered, SUM(grni.item_quantity) AS qty_received, CASE WHEN pi.id IS NULL AND grn.id IS NULL THEN 'Only PO Created' WHEN grn.id IS NOT NULL AND pi.id IS NULL THEN 'Pending Invoice' WHEN grn.id IS NULL AND pi.id IS NOT NULL THEN 'Pending GRN' WHEN ABS(po.total_amount - pi.total_amount) < 1 THEN 'Matched' ELSE 'Mismatch' END AS reconciliation_status
         FROM purchase_orders po LEFT JOIN po_items poi ON poi.transaction_id = po.id LEFT JOIN goods_receipt_notes grn  ON grn.ref_id = po.id  AND grn.ref_type = 'PO'  {$whereDateGRN} LEFT JOIN grn_items grni ON grni.transaction_id = grn.id LEFT JOIN purchase_invoices pi ON pi.ref_id = grn.id  AND pi.ref_type = 'GRN' {$whereDateINV} WHERE po.is_active = '0' {$whereCompany} {$whereDatePO} GROUP BY po.id ORDER BY po.party_name ASC, po.transaction_date ASC ";
 
-		$res = $callConfig->getAllRows($sql); 
+		$res = $callConfig->getAllRows($sql);
 		$result['vendor_reconciliation_statement'] = $res;
 		$result['sql'] = $sql;
 		$result['filters'] = [
@@ -2946,7 +2946,7 @@ GROUP BY tl.item_id";
 
 		$sql = "SELECT pi.id, pi.transaction_number AS invoice_no, pi.transaction_date AS invoice_date, pi.due_date, pi.party_name, pi.total_amount, pi.pending_amount, st.name AS status_name, st.name_value, st.background_color, st.color, CASE WHEN LOWER(st.name) IN ('pending','draft','awaiting approval') THEN 'Pending Invoice' WHEN LOWER(st.name) IN ('generated','completed','issued','done','approved') THEN 'Completed Invoice' ELSE 'Other' END AS report_status FROM purchase_invoices pi LEFT JOIN `status` st ON st.name_value = pi.current_status  WHERE pi.is_active = '0' AND pi.cancel_invoice = 'N' {$whereCompany} {$whereDate} ORDER BY pi.transaction_date ASC ";
 
-		$res = $callConfig->getAllRows($sql); 
+		$res = $callConfig->getAllRows($sql);
 		$result['pending_invoice_report'] = $res;
 		$result['sql'] = $sql;
 		$result['filters'] = [
@@ -2962,19 +2962,19 @@ GROUP BY tl.item_id";
 	public function getSalesTrendReport($get){
 	    global $callConfig;
 
-	    $category = $get['category'] ?? 'monthly';  
-	 
+	    $category = $get['category'] ?? 'monthly';
+
 	    $whereDate = '';
 	    if (!empty($get['from_date']) && !empty($get['to_date'])) {
 	        $from = date('Y-m-d', strtotime($get['from_date']));
 	        $to   = date('Y-m-d', strtotime($get['to_date']));
 	        $whereDate = " AND so.transaction_date BETWEEN '{$from}' AND '{$to}'";
 	    }
-	 
+
 	    $whereCompany = '';
 	    if (!empty($get['company_id'])) {
 	        $whereCompany = " AND so.company_id = '" . $get['company_id'] . "'";
-	    } 
+	    }
 	    switch ($category) {
 	        case 'monthly':
 	            $groupBy = "DATE_FORMAT(so.transaction_date, '%Y-%m')";
@@ -2995,7 +2995,7 @@ GROUP BY tl.item_id";
 	            $groupBy = "DATE_FORMAT(so.transaction_date, '%Y-%m')";
 	            $selectPeriod = $groupBy . " AS period";
 	    }
-	 
+
 	    $sql = "SELECT {$selectPeriod}, COUNT(so.id) AS total_orders, SUM(so.total_amount) AS total_sales, SUM(so.tax_amount) AS total_tax, SUM(so.discount_amount) AS total_discount, AVG(so.total_amount) AS avg_order_value FROM sales_orders so WHERE so.is_active = '0' {$whereCompany} {$whereDate} GROUP BY {$groupBy} ORDER BY so.transaction_date ASC ";
 
 	    $res = $callConfig->getAllRows($sql);
@@ -3026,7 +3026,7 @@ GROUP BY tl.item_id";
 	    }
 
 	    $sql = " SELECT si.party_name, si.transaction_number AS invoice_no, si.transaction_date AS invoice_date, si.due_date, si.total_amount AS invoice_amount, IFNULL(SUM(ra.paid_amonut), 0) AS payment_received_amount, IFNULL(DATEDIFF(NOW(), si.transaction_date), 0) AS days_outstanding, CASE WHEN si.total_amount - IFNULL(SUM(ra.paid_amonut), 0) > 0 THEN 'Pending' WHEN IFNULL(SUM(ra.paid_amonut), 0) = si.total_amount THEN 'Paid On Time' ELSE 'Paid Late' END AS status FROM sales_invoices si LEFT JOIN receipt_allocations ra ON ra.transaction_table = 'sales_invoices' AND ra.transaction_id = si.id AND ra.is_active = '0' WHERE si.is_active = '0' {$whereCompany} {$whereDate} GROUP BY si.id ORDER BY si.transaction_date ASC ";
-	    $res = $callConfig->getAllRows($sql); 
+	    $res = $callConfig->getAllRows($sql);
 	    $result['dso_report'] = $res;
 	    $result['sql'] = $sql;
 
@@ -3036,7 +3036,7 @@ GROUP BY tl.item_id";
 
 	public function getARAgingReport($get) {
 	    global $callConfig;
-	 
+
 	    $selectedDate = !empty($get['date'])
 	        ? date('Y-m-d', strtotime($get['date']))
 	        : date('Y-m-d');
@@ -3045,14 +3045,14 @@ GROUP BY tl.item_id";
 	    if (!empty($get['company_id'])) {
 	        $whereCompany = " AND si.company_id = '" . $get['company_id'] . "' ";
 	    }
-	 
+
 	    $sql = "SELECT  si.id AS invoice_id, si.party_id, si.party_name, si.transaction_number AS invoice_no, si.transaction_date AS invoice_date, si.due_date, si.total_amount AS invoice_amount, IFNULL(si.total_amount - si.pending_amount, 0) AS paid_amount, si.pending_amount AS outstanding_amount, DATEDIFF('{$selectedDate}', si.due_date) AS days_overdue, 
 	        CASE WHEN DATEDIFF('{$selectedDate}', si.due_date) BETWEEN 0 AND 30 THEN si.pending_amount ELSE 0 END AS days_0_30,
 	        CASE WHEN DATEDIFF('{$selectedDate}', si.due_date) BETWEEN 31 AND 60 THEN si.pending_amount ELSE 0 END AS days_31_60,
 	        CASE WHEN DATEDIFF('{$selectedDate}', si.due_date) BETWEEN 61 AND 90 THEN si.pending_amount ELSE 0 END AS days_61_90,
 	        CASE WHEN DATEDIFF('{$selectedDate}', si.due_date) BETWEEN 91 AND 180 THEN si.pending_amount ELSE 0 END AS days_91_180,
-	        CASE WHEN DATEDIFF('{$selectedDate}', si.due_date) > 180 THEN si.pending_amount ELSE 0 END AS days_181_plus, si.current_status, s.name AS status_name, s.background_color AS status_bg_color, s.color AS status_text_color, si.company_id FROM purchase_invoices si LEFT JOIN status s  ON si.current_status = s.name_value AND s.is_active = '0' WHERE si.is_active = '0' AND si.cancel_invoice = 'N' {$whereCompany} AND si.transaction_date <= '{$selectedDate}' ORDER BY si.party_name ASC, si.transaction_date ASC "; 
-	    $invoices = $callConfig->getAllRows($sql); 
+	        CASE WHEN DATEDIFF('{$selectedDate}', si.due_date) > 180 THEN si.pending_amount ELSE 0 END AS days_181_plus, si.current_status, s.name AS status_name, s.background_color AS status_bg_color, s.color AS status_text_color, si.company_id FROM purchase_invoices si LEFT JOIN status s  ON si.current_status = s.name_value AND s.is_active = '0' WHERE si.is_active = '0' AND si.cancel_invoice = 'N' {$whereCompany} AND si.transaction_date <= '{$selectedDate}' ORDER BY si.party_name ASC, si.transaction_date ASC ";
+	    $invoices = $callConfig->getAllRows($sql);
 	    $result['ar_aging_report'] = $invoices;
 	    $result['sql'] = $sql;
 	    $result['filters'] = [
@@ -3065,17 +3065,17 @@ GROUP BY tl.item_id";
 
 	public function getPriceVarianceReport($get){
 	    global $callConfig;
-	 
+
 	    $fromDate = !empty($get['from_date']) ? date('Y-m-d', strtotime($get['from_date'])) : '1970-01-01';
 	    $toDate   = !empty($get['to_date']) ? date('Y-m-d', strtotime($get['to_date'])) : date('Y-m-d');
-	 
+
 	    $whereCompany = "";
 	    if (!empty($get['company_id'])) {
 	        $whereCompany = " AND po.company_id = '" . $get['company_id'] . "' ";
 	    }
-	 
-	    $sql = " SELECT  po.id AS purchase_order_id, po.transaction_number AS po_number, po.transaction_date AS po_date, po.party_name AS supplier_name, poi.item_id, poi.item_name, i.sku AS item_code, i.purchase_price AS list_price, poi.item_price AS ordered_price, gri.item_price AS actual_price, ROUND((gri.item_price - i.purchase_price), 2) AS variance_amount, ROUND(((gri.item_price - i.purchase_price) / i.purchase_price) * 100, 2) AS variance_percent, gri.item_quantity AS received_qty, ROUND((gri.item_quantity * (gri.item_price - i.purchase_price)), 2) AS total_variance_value, po.total_amount AS po_total, po.current_status, s.name AS status_name, s.background_color AS status_bg_color, s.color AS status_text_color, po.company_id FROM purchase_orders po INNER JOIN po_items poi ON po.id = poi.transaction_id LEFT JOIN goods_receipt_notes grn  ON grn.ref_id = po.id  AND grn.is_active = '0' LEFT JOIN grn_items gri ON grn.id = gri.transaction_id  AND gri.item_id = poi.item_id LEFT JOIN items i  ON poi.item_id = i.id LEFT JOIN status s ON po.current_status = s.name_value AND s.is_active = '0' WHERE po.is_active = '0' {$whereCompany} AND po.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}' ORDER BY po.transaction_date DESC, po.transaction_number ASC "; 
-	    $reportData = $callConfig->getAllRows($sql); 
+
+	    $sql = " SELECT  po.id AS purchase_order_id, po.transaction_number AS po_number, po.transaction_date AS po_date, po.party_name AS supplier_name, poi.item_id, poi.item_name, i.sku AS item_code, i.purchase_price AS list_price, poi.item_price AS ordered_price, gri.item_price AS actual_price, ROUND((gri.item_price - i.purchase_price), 2) AS variance_amount, ROUND(((gri.item_price - i.purchase_price) / i.purchase_price) * 100, 2) AS variance_percent, gri.item_quantity AS received_qty, ROUND((gri.item_quantity * (gri.item_price - i.purchase_price)), 2) AS total_variance_value, po.total_amount AS po_total, po.current_status, s.name AS status_name, s.background_color AS status_bg_color, s.color AS status_text_color, po.company_id FROM purchase_orders po INNER JOIN po_items poi ON po.id = poi.transaction_id LEFT JOIN goods_receipt_notes grn  ON grn.ref_id = po.id  AND grn.is_active = '0' LEFT JOIN grn_items gri ON grn.id = gri.transaction_id  AND gri.item_id = poi.item_id LEFT JOIN items i  ON poi.item_id = i.id LEFT JOIN status s ON po.current_status = s.name_value AND s.is_active = '0' WHERE po.is_active = '0' {$whereCompany} AND po.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}' ORDER BY po.transaction_date DESC, po.transaction_number ASC ";
+	    $reportData = $callConfig->getAllRows($sql);
 	    $result['price_variance_report'] = $reportData;
 	    $result['sql'] = $sql;
 	    $result['filters'] = [
@@ -3119,7 +3119,7 @@ GROUP BY tl.item_id";
 		$result['sql'] = $finalSQL;
 		return $result;
 	}
-	
+
 	public function getCashApplicationReport($get){
 	    global $callConfig;
 
@@ -3127,7 +3127,7 @@ GROUP BY tl.item_id";
 	    $to = '';
 	    $whereDate = '';
 	    $whereCompany = '';
-	 
+
 	    if (!empty($get['from_date']) && !empty($get['to_date'])) {
 	        $from = date('Y-m-d', strtotime($get['from_date']));
 	        $to = date('Y-m-d', strtotime($get['to_date']));
@@ -3136,11 +3136,11 @@ GROUP BY tl.item_id";
 	        $date = date('Y-m-d', strtotime($get['date']));
 	        $whereDate = " AND r.payment_date = '{$date}'";
 	    }
-	 
+
 	    if (!empty($get['company_id'])) {
 	        $whereCompany = " AND r.company_id = '" . $get['company_id'] . "'";
 	    }
-	 
+
 	    $sql = "SELECT r.id AS receipt_id, r.transaction_no AS receipt_no, r.payment_date, si.party_id, si.party_name, si.transaction_number AS invoice_no, si.transaction_date AS invoice_date, r.amount AS receipt_amount, COALESCE(SUM(ra.total_paid_amonut), 0) AS allocated_amount, (r.amount - COALESCE(SUM(ra.total_paid_amonut), 0)) AS unallocated_amount,
 	        CASE WHEN COALESCE(SUM(ra.total_paid_amonut), 0) = 0 THEN 'Unallocated' WHEN COALESCE(SUM(ra.total_paid_amonut), 0) = r.amount THEN 'Fully Allocated' ELSE 'Partially Allocated' END AS allocation_status, GROUP_CONCAT(DISTINCT si.transaction_number SEPARATOR ', ') AS allocated_invoices, r.remarks, r.current_status, s.name AS status_name, s.background_color AS status_bg, s.color AS status_color, r.created_by FROM receipts r
 	        LEFT JOIN receipt_allocations ra ON ra.receipt_id = r.id AND ra.is_active = '0' LEFT JOIN sales_invoices si ON si.id = ra.transaction_id AND ra.transaction_table = 'sales_invoices'
@@ -3148,7 +3148,7 @@ GROUP BY tl.item_id";
 	    ";
 
 	    $reportData = $callConfig->getAllRows($sql);
-	 
+
 	    $summarySql = "SELECT COUNT(r.id) AS total_receipts, SUM(r.amount) AS total_receipt_amount, SUM(COALESCE(SUM_RA.total_allocated, 0)) AS total_allocated, SUM(r.amount - COALESCE(SUM_RA.total_allocated, 0)) AS total_unallocated FROM receipts r
 	        LEFT JOIN ( SELECT receipt_id, SUM(total_paid_amonut) AS total_allocated FROM receipt_allocations WHERE is_active = '0' GROUP BY receipt_id ) AS SUM_RA ON SUM_RA.receipt_id = r.id WHERE r.is_active = '0' {$whereCompany} {$whereDate} ";
 
@@ -3164,15 +3164,15 @@ GROUP BY tl.item_id";
 
 	public function getTopVendorSpendReport($get){
 	    global $callConfig;
-	 
+
 	    $fromDate = !empty($get['from_date']) ? date('Y-m-d', strtotime($get['from_date'])) : '1970-01-01';
 	    $toDate   = !empty($get['to_date']) ? date('Y-m-d', strtotime($get['to_date'])) : date('Y-m-d');
-	 
+
 	    $whereCompany = "";
 	    if (!empty($get['company_id'])) {
 	        $whereCompany = " AND po.company_id = '" . $get['company_id'] . "' ";
 	    }
-	 
+
 	    $sql = "
 	        SELECT vendor_id, vendor_name, total_pos, total_invoices, total_spend, avg_po_value, ROUND((total_spend / grand_total.total_overall_spend) * 100, 2) AS percent_of_total
 	        FROM ( SELECT  po.party_id AS vendor_id, po.party_name AS vendor_name, COUNT(DISTINCT po.id) AS total_pos, COUNT(DISTINCT pi.id) AS total_invoices, ROUND(SUM(COALESCE(pi.total_amount, po.total_amount)), 2) AS total_spend, ROUND(AVG(COALESCE(po.total_amount, 0)), 2) AS avg_po_value
@@ -3197,7 +3197,7 @@ GROUP BY tl.item_id";
 
 	public function getDiscountAndRebateUtilizationReport($get){
 	    global $callConfig;
-	 
+
 	    $fromDate = !empty($get['from_date']) ? date('Y-m-d', strtotime($get['from_date'])) : '1970-01-01';
 	    $toDate   = !empty($get['to_date']) ? date('Y-m-d', strtotime($get['to_date'])) : date('Y-m-d');
 	    $whereCompany = "";
@@ -3205,12 +3205,12 @@ GROUP BY tl.item_id";
 	    if (!empty($get['company_id'])) {
 	        $whereCompany = " AND po.company_id = '" . $get['company_id'] . "' ";
 	    }
-	 
+
 	    $sql = "
 	        SELECT po.party_id AS vendor_id, po.party_name AS vendor_name, ROUND(SUM(po.total_amount), 2) AS total_purchase_value,  ROUND(SUM(COALESCE(po.discount_amount, 0)), 2) AS eligible_discount,  ROUND(SUM(COALESCE(pi.discount_amount, 0)), 2) AS utilized_discount,  ROUND(SUM(COALESCE(po.discount_amount, 0)) - SUM(COALESCE(pi.discount_amount, 0)), 2) AS balance_discount, 0 AS eligible_rebate, 0 AS utilized_rebate, 0 AS balance_rebate, 
 	        CASE  WHEN SUM(COALESCE(po.discount_amount, 0)) > 0 THEN  ROUND((SUM(COALESCE(pi.discount_amount, 0)) / SUM(COALESCE(po.discount_amount, 0))) * 100, 2) ELSE 0 END AS utilization_percent 
 	        FROM purchase_orders po LEFT JOIN purchase_invoices pi  ON pi.ref_id = po.id AND pi.is_active = '0' AND pi.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}' 
-	        WHERE  po.is_active = '0' AND po.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}' {$whereCompany} GROUP BY po.party_id, po.party_name ORDER BY total_purchase_value DESC "; 
+	        WHERE  po.is_active = '0' AND po.transaction_date BETWEEN '{$fromDate}' AND '{$toDate}' {$whereCompany} GROUP BY po.party_id, po.party_name ORDER BY total_purchase_value DESC ";
 	    $reportData = $callConfig->getAllRows($sql);
 
 	    $result['discount_rebate_utilization_report'] = $reportData;

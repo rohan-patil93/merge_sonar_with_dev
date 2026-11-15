@@ -1,8 +1,8 @@
 <?php
 
 class dashboardUserClass{
-	
-	public function togetHRAdminDashboardData($get){	
+
+	public function togetHRAdminDashboardData($get){
 		global $callConfig;
 
 		$company_id = $get['company_id'];
@@ -27,7 +27,7 @@ class dashboardUserClass{
 		$detail['month'] = $month;
 		$detail['year'] = $year;
 		$return['detail'] = $detail;
-		// ===  New Joiners ==== 
+		// ===  New Joiners ====
 		$query = "SELECT
 		id,
 		emp_code,
@@ -44,7 +44,7 @@ class dashboardUserClass{
 		$new_joiners = $callConfig->getAllRows($query);
 		$return['count_new_joiners'] = count((array)$new_joiners);
 		$return['new_joiners'] = $new_joiners;
-	     // ==== Upcoming Exits (Next 30 Days) ======= 
+	     // ==== Upcoming Exits (Next 30 Days) =======
 		$query = "
 		SELECT
 		e.id,
@@ -63,7 +63,7 @@ class dashboardUserClass{
 		$return['count_upcoming_exits'] = count((array)$upcoming_exits);
 		$return['upcoming_exits'] = $upcoming_exits;
 
-	     // ===  Attendance Summary (Today)=== 
+	     // ===  Attendance Summary (Today)===
 		// Total Active Employees
 		$query = "
 		SELECT COUNT(*) AS total
@@ -81,7 +81,7 @@ class dashboardUserClass{
 		$row = $callConfig->getRow($query);
 		$total_employees = isset($row->total) ? (int)$row->total : 0;
 		$return['total_employees'] = $total_employees;
-		
+
     		// Present
 		$query = "
 		SELECT COUNT(DISTINCT employee_id) AS total
@@ -93,10 +93,10 @@ class dashboardUserClass{
 		$present = isset($row->total) ? (int)$row->total : 0;
 		$return['present'] = $present;
     		// Absent
-		
+
 		$absent = $total_employees-$present;
 		$return['absent'] = $absent;
-		
+
     		// On Leave
 		$query = "SELECT COUNT(DISTINCT employee_id) AS total
 		FROM employee_leaves
@@ -117,7 +117,7 @@ class dashboardUserClass{
 		: 0;
 
 
-    		// ======= Upcoming Birthdays (Next 30 Days) ====== 
+    		// ======= Upcoming Birthdays (Next 30 Days) ======
 		$query = "
 		SELECT
 		id,
@@ -167,7 +167,7 @@ class dashboardUserClass{
 			);
 		}
 		$return['employee_headcount_last_6_months'] = $employee_headcount_last_6_months;
-			// ===== Department-wise Headcount 
+			// ===== Department-wise Headcount
 		$query = "
 		SELECT
 		d.id AS department_id,
@@ -191,7 +191,7 @@ class dashboardUserClass{
 
 		$department_wise_headcount = $callConfig->getAllRows($query);
 		$return['department_wise_headcount'] = $department_wise_headcount;
-			// ====Transaction Approval Logs - Pending Count by Table  =============== 
+			// ====Transaction Approval Logs - Pending Count by Table  ===============
 		$query = "
 			SELECT
 			transaction_table,
@@ -285,7 +285,7 @@ class dashboardUserClass{
 	}
 	public function getEmployeeSelfDashboard($get){
 		global $callConfig;
-		
+
 		$company_id = $get['company_id'];
 		$user_id = $get['user_id'];
 		$emp_id = $get['se_emp_id'];
@@ -594,7 +594,7 @@ class dashboardUserClass{
 	    $return['company_links'] = $company_links;
 	   return $return;
 	}
-	
+
 	public function getPayrollDashboardSummary($get){
     	global $callConfig;
 
@@ -632,7 +632,7 @@ class dashboardUserClass{
 	    $total_employees = isset($row->total_employees) ? (int)$row->total_employees : 0;
 	    //$return['total_employee_query'] = $query;
 	    $return['total_employees'] = $total_employees;
-		// Gross Payroll 
+		// Gross Payroll
 	    $query = "
 	        SELECT COALESCE(SUM(salary_component_actual), 0) AS gross_payroll
 	        FROM pay_run_summary_components
@@ -715,7 +715,7 @@ class dashboardUserClass{
           AND is_active = 0
         GROUP BY pay_year, pay_month ";
         $all_summary = $callConfig->getAllRows($query);
-	    $return['all_summary'] = $all_summary;	    
+	    $return['all_summary'] = $all_summary;
 	    return $return;
    }
 }

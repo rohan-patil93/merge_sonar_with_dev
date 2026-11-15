@@ -1,5 +1,5 @@
 <?php
-class phpMysqlClass{ 
+class phpMysqlClass{
 	/**
 	 * Server-side RBAC gate for the raw SQL endpoints. Must be called by every
 	 * controller/route BEFORE any method of this class is dispatched.
@@ -32,7 +32,7 @@ class phpMysqlClass{
 			$table_list[] = $table->$rowdb;
 		}
 		$return['table_list'] = $table_list;
-		return $return; 
+		return $return;
 	}
 	public function postPHPMYSQLDetails($get,$post){
 		global $callConfig;
@@ -56,7 +56,7 @@ class phpMysqlClass{
 		    		$return['total_record_cnt'] = $respons_data_cnt;
 	    		}
 	    	}else{
-	    		
+
 	    		$sql_rewsult=$callConfig->getAllRowsError($sql_textarea);
 	    		$return['else_removellimtsql'] =$sql_textarea;
 	    		if($sql_rewsult['status'] == '200'){
@@ -92,8 +92,8 @@ class phpMysqlClass{
 	    	$return['respons_data'] = $sql_rewsult['respons'];
     	}
 		$return['final_data_sql'] =$sql_textarea;
-    	
-		return $return; 
+
+		return $return;
 	}
 	public function getfieldlist($get){
 		global $callConfig;
@@ -103,7 +103,7 @@ class phpMysqlClass{
 			$colums_list=$callConfig->getAllRows($getfiledsql);
 			$return['colums_list'] = $colums_list;
 		}
-		return $return; 
+		return $return;
 	}
 	public function exicutePHPMYSQL(){
 		global $callConfig;
@@ -113,9 +113,9 @@ class phpMysqlClass{
 			$sqlresult=$callConfig->executeQuery($exicute_sql_textarea);
 			$return['exicute_sql_res'] = $sqlresult;
 		}else{
-			return false; // previously `$return['error'] == 404` (always false, undefined-index warning)	
+			return false; // previously `$return['error'] == 404` (always false, undefined-index warning)
 		}
-		return $return; 	
+		return $return;
 	}
 
 

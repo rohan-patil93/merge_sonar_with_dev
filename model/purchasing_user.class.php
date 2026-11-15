@@ -3,7 +3,7 @@ class purchasingUserClass extends userClass{
     public function getSubcontractWorkOrders($get){
         global $callConfig;
         $return = array();
-        
+
 
         $vendorssql = "SELECT id, company, display_name FROM vendors WHERE company_id = '".$get['company_id']."' AND is_active =0";
         $vendorsres=$callConfig->getAllRows($vendorssql);
@@ -48,19 +48,19 @@ class purchasingUserClass extends userClass{
     public function insertSubcontractWorkOrders($get, $post){
         global $callConfig;
         $return = array();
-        
+
         try {
             // Fetch vendor details
             $vendorsql = "SELECT company, display_name, email, phone,  billing_address, shipping_address FROM vendors WHERE id = '".$post['party_id']."' AND company_id = '".$get['company_id']."' AND is_active = 0";
             $vendorres = $callConfig->getRow($vendorsql);
-            
+
             if(!$vendorres){
                 $return['parent_insert_update'] = array('status' => 'fail', 'error_no' => '404', 'message' => 'Vendor not found');
                 return $return;
             }
 
             $party_name = $vendorres->company != "" ? $vendorres->company : $vendorres->display_name;
-            
+
             // Prepare parent table data
             $postdata = array(
                 'company_id' => $get['company_id'],
@@ -90,7 +90,7 @@ class purchasingUserClass extends userClass{
                 $postdata['updated_by'] = $get['user_id'];
                 $res = $callConfig->updateRecord('subcontract_work_orders', $postdata, 'id', $rid);
                 $return['parent_update'] = $res;
-                
+
                 // Soft-delete existing child records
             $upary = array('is_active' => NULL);
                 $callConfig->updateRecord('subcontract_work_order_items', $upary, 'transaction_id', $rid);
@@ -116,7 +116,7 @@ class purchasingUserClass extends userClass{
                         // Fetch item pricing
                         $itemsql = "SELECT purchase_price,item_name,inventory_asset_account FROM items WHERE id = '".$item_id."' AND company_id = '".$get['company_id']."' AND is_active = 0";
                         $itemres = $callConfig->getRow($itemsql);
-                        
+
                         $item_price = $post['item_price'][$seq] ?? $itemres->purchase_price ?? 0;
                         $item_quantity = $post['request_qty'][$seq] ? $post['request_qty'][$seq] : 0;
                         $item_amount = $post['item_total_amount'][$seq] ??  $item_quantity * $item_price;
@@ -140,7 +140,7 @@ class purchasingUserClass extends userClass{
                             'approved_quantity' => $item_quantity,
                             'transaction_qty' => $item_quantity,
                             'pending_qty' => $item_quantity,
-                            
+
                         );
 
                         // Check if updating existing item or inserting new
@@ -213,7 +213,7 @@ class purchasingUserClass extends userClass{
                            AND swo.company_id = '".$get['company_id']."' 
                            AND swo.is_active = 0";
             $parent = $callConfig->getRow($parent_sql);
-            
+
             if(!$parent){
                 $return['status'] = 'error';
                 $return['message'] = 'Record not found';
@@ -289,14 +289,14 @@ class purchasingUserClass extends userClass{
                     $issue_history_details[$history_transaction_id][] = $history_item_row;
                 }
             }
-            
+
             $return['parent'] = $parent;
             $return['child_items'] = $child_items;
             $return['issues_history'] = $issues_history;
             $return['issue_history_details'] = $issue_history_details;
             $return['status'] = 'success';
         }
-        
+
         return $return;
     }
 
@@ -527,7 +527,7 @@ class purchasingUserClass extends userClass{
         $return['status'] = 'success';
         return $return;
     }
-    
+
     public function updateSubcontractWorkOrderPendingQty($get){
         global $callConfig;
         $return = array();
@@ -635,7 +635,7 @@ class purchasingUserClass extends userClass{
 
     public function getSubcontractReceiptWorkOrderDetails($company_id, $work_order_id, $exclude_receipt_id = ''){
         global $callConfig;
-        
+
         $work_order_sql = "SELECT swo.id, swo.transaction_number, swo.transaction_date, swo.product_id, swo.party_id, swo.party_name, swo.request_warehouse_id, swo.party_warehouse_id, swo.work_order_item_qty, swo.work_order_item_price, swo.work_order_total_amount  as item_total_amount, ven.company as vendor_company, ven.display_name as vendor_display_name, ven.email as vendor_email, ven.phone as vendor_phone, ven.billing_address, ven.shipping_address, ven.billing_state, ven.shipping_state, ven.gstin, ven.pan_no, ownw.warehouse_name as requested_warehouse_name, venw.warehouse_name as vendor_warehouse_name, itm.item_name as product_name, itm.sku as product_sku, itm.purchase_uom as product_uom, uom.uom_name as product_uom_name
                            FROM subcontract_work_orders swo
                            LEFT JOIN vendors ven ON swo.party_id = ven.id AND ven.company_id = swo.company_id AND ven.is_active = 0
@@ -682,7 +682,7 @@ class purchasingUserClass extends userClass{
                          ORDER BY swo.transaction_date DESC, swo.id DESC";
         $dropdown_rows = $callConfig->getAllRows($dropdown_sql);
                                                         $return['subcontract_work_orders_list'] = (array)$dropdown_rows;
-        
+
         $selected_work_order_id = isset($get['work_order_id']) ? $get['work_order_id'] : '';
 
         if($selected_work_order_id != ''){
@@ -962,7 +962,7 @@ class purchasingUserClass extends userClass{
                 );
                 $callConfig->insertRecord('subcontract_work_order_receipt_item_taxes', $taxfield);
             }
-            
+
             $return['parent_insert_update'] = array(
                 'status' => 'success',
                 'LASTID' => isset($insert_res['LASTID']) ? $insert_res['LASTID'] : 0,

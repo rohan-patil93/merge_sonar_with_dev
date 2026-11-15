@@ -1,11 +1,11 @@
-<?php 
+<?php
 class pmsUserClass extends userClass{
 	public function publichAppraisal($get){
 		global $callConfig;
 		$returnarray = array();
 		$pssal ="SELECT * FROM performance_appraisal_setups WHERE company_id =".$get['company_id']." AND id = '".$get['id']."' AND is_active = 0";
 		$psres = $callConfig->getRow($pssal);
-		
+
 		$condition = "";
 		$filtersql = "SELECT ft.id,ft.content, ft.filter_condition FROM filter_tables ft  WHERE ft.company_id = '".$get['company_id']."' AND ft.transaction_id = '".$get['id']."' AND ft.application_tablename ='performance_appraisal_setups'";
 		$returnarray['filtersql'] = $filtersql;
@@ -24,8 +24,8 @@ class pmsUserClass extends userClass{
 					$condition .= ' AND '.$keys.'  IN ('.$vale.')';
 				}
 			}
-		} 
-		$employeesql = "SELECT id,user_id, department_id, designation_id, location_id FROM employees WHERE is_active='0' and company_id='".$get['company_id']."' AND (date_of_leaving IS NULL OR date_of_leaving >= '".$psres->self_assessment_start_date."')".$condition; 
+		}
+		$employeesql = "SELECT id,user_id, department_id, designation_id, location_id FROM employees WHERE is_active='0' and company_id='".$get['company_id']."' AND (date_of_leaving IS NULL OR date_of_leaving >= '".$psres->self_assessment_start_date."')".$condition;
 		$returnarray['employeesql'] = $employeesql;
 		$emplist = $callConfig->getAllRows($employeesql);
 
@@ -33,7 +33,7 @@ class pmsUserClass extends userClass{
 		$ogoalssql ="SELECT id,job_title_id, department_id, location_id FROM `organization_goals` WHERE company_id =".$get['company_id']." AND appraisal_id = '".$get['id']."' AND is_active = 0";
 		$ogoalsres = $callConfig->getAllRows($ogoalssql);
 		foreach($ogoalsres as $ogres){
-			$locdepdesiarray[$ogres->location_id][$ogres->department_id][$ogres->job_title_id][] = $ogres->id; 
+			$locdepdesiarray[$ogres->location_id][$ogres->department_id][$ogres->job_title_id][] = $ogres->id;
 		}
 		$empwithuser = array();
 		$insert_heade = "INSERT INTO `employee_performance_appraisals` (`company_id`, `appraisal_id`, `employee_id`,`organization_goal_id`,`start_date`,`end_date`, `is_active`, `current_status`, `created_by`, `created_date`) VALUES ";
@@ -68,7 +68,7 @@ class pmsUserClass extends userClass{
 
 
 /**
-		$getupdatesql ="SELECT epah.id,epah.appraisal_id,epah.employee_id,epah.assessment_year,epah.created_by FROM employee_performance_appraisal_headers epah WHERE epah.company_id = '".$get['company_id']."' AND epah.appraisal_id = '".$get['id']."' AND is_active = 0"; 
+		$getupdatesql ="SELECT epah.id,epah.appraisal_id,epah.employee_id,epah.assessment_year,epah.created_by FROM employee_performance_appraisal_headers epah WHERE epah.company_id = '".$get['company_id']."' AND epah.appraisal_id = '".$get['id']."' AND is_active = 0";
 		$getupdateres = $callConfig->getAllRows($getupdatesql);
 		$returnarray['getupdateres'] = $getupdateres;
 		foreach($getupdateres as $getupdatere){
@@ -104,12 +104,12 @@ class pmsUserClass extends userClass{
 		foreach($headerow as $kkey=>$valu){
 			$newewarray[$headerid] = $valu;
 		}
-	}	
+	}
 	// used how meny time loop run
 	foreach($newewarray as $header_id => $headerow){
 		$field = array();
 		foreach($headerow as $key => $hea){
-			for($field = 1;$field <= 6;$field++){ 
+			for($field = 1;$field <= 6;$field++){
 				$fird[$field] = $post['filed'][$header_id][$field][$key];
 			}
 			$rowid = $post['row_id'][$header_id][$key];
@@ -123,7 +123,7 @@ class pmsUserClass extends userClass{
 				}
 			}
 		}
-		if($inserexc == 'Y'){	
+		if($inserexc == 'Y'){
 			$insertsql = rtrim($insertsql, ',');
 			$res = $callConfig->executeQuery($insertsql);
 			$returnaray['res'] = $res;
@@ -139,7 +139,7 @@ class pmsUserClass extends userClass{
 					$insert_array = array('response_option'=>$answ, 'response_remark'=>$textrepons,'updated_by'=>$post['user_id'],'updated_date'=>date('Y-m-d h:i:s'));
 					//$insert_a[] = $insert_array;
 					$callConfig->updateRecord('performance_responses_details',$insert_array,'id',$resid);
-				}else{	
+				}else{
 					$responsdetailssql .= "('".$post['company_id']."','".$post['employee_id']."','".$post['epa_header_id']."','".$queid."','".$answ."','".$textrepons."','0','0','".date('Y-m-d h:i:s')."','".$post['user_id']."'),";
 				}
 			}
@@ -173,7 +173,7 @@ class pmsUserClass extends userClass{
 	// 	$update_transaction_id = array("publish"=>"Y","updated_by"=>$get['user_id'],"updated_date"=>date('Y-m-d h:i:s'));
 	// 	$res =$callConfig->updateRecord('performance_setup',$update_transaction_id,'id',$get['id']);
 	// 	$returnarray['performance_setup'] = $res;
-		
+
 	// 	$condition = "";
 	// 	$filtersql = "SELECT ft.id,ft.content, ft.filter_condition FROM filter_tables ft  WHERE ft.company_id = '".$get['company_id']."' AND ft.transaction_id = '".$get['id']."' AND ft.application_tablename ='performance_setup'";
 	// 	$returnarray['filtersql'] = $filtersql;
@@ -192,14 +192,14 @@ class pmsUserClass extends userClass{
 	// 				$condition .= ' AND '.$keys.'  IN ('.$vale.')';
 	// 			}
 	// 		}
-	// 	} 
-	// 	$employeesql = "SELECT id,user_id FROM employees WHERE is_active='0' and company_id='".$get['company_id']."' AND (date_of_leaving IS NULL OR date_of_leaving >= '".$psres->employee_start."')".$condition; 
+	// 	}
+	// 	$employeesql = "SELECT id,user_id FROM employees WHERE is_active='0' and company_id='".$get['company_id']."' AND (date_of_leaving IS NULL OR date_of_leaving >= '".$psres->employee_start."')".$condition;
 	// 	$returnarray['employeesql'] = $employeesql;
 	// 	$employee_goals_list = $callConfig->getAllRows($employeesql);
 	// 	$empwithuser = array();
 	// 	$insert_heade = "INSERT INTO `employee_performance_appraisal_headers` (`company_id`, `appraisal_id`, `employee_id`, `assessment_year`, `is_active`, `current_status`, `created_by`, `created_date`) VALUES ";
 	// 	foreach($employee_goals_list as $employee_goals_list){
-	// 		$empwithuser[$employee_goals_list->id] = $employee_goals_list->user_id; 
+	// 		$empwithuser[$employee_goals_list->id] = $employee_goals_list->user_id;
 	// 		$insert_heade .= "('".$get['company_id']."','".$get['id']."','".$employee_goals_list->id."','".$get['assessment_year']."','0','".ST_DRAFT."','".$get['user_id']."','".date('Y-m-d h:i:s')."'),";
 	// 	}
 	// 	$insertsql = rtrim($insert_heade, ',');
@@ -207,7 +207,7 @@ class pmsUserClass extends userClass{
 	// 	//$returnarray['insertsql'] = $insertsql;
 	// 	$res = $callConfig->executeQuery($insertsql);
 
-	// 	$getupdatesql ="SELECT epah.id,epah.appraisal_id,epah.employee_id,epah.assessment_year,epah.created_by FROM employee_performance_appraisal_headers epah WHERE epah.company_id = '".$get['company_id']."' AND epah.appraisal_id = '".$get['id']."' AND is_active = 0"; 
+	// 	$getupdatesql ="SELECT epah.id,epah.appraisal_id,epah.employee_id,epah.assessment_year,epah.created_by FROM employee_performance_appraisal_headers epah WHERE epah.company_id = '".$get['company_id']."' AND epah.appraisal_id = '".$get['id']."' AND is_active = 0";
 	// 	$getupdateres = $callConfig->getAllRows($getupdatesql);
 	// 	$returnarray['getupdateres'] = $getupdateres;
 	// 	foreach($getupdateres as $getupdatere){
@@ -222,7 +222,7 @@ class pmsUserClass extends userClass{
 	// 			$sendnotification = $this->tosendnotifiations($notdataa);
 	// 		}
 
-	// 	} 
+	// 	}
 	// return $returnarray;
 	// }
 	/**function getPerFormanceAppraisalReport($get){
@@ -253,7 +253,7 @@ class pmsUserClass extends userClass{
 		}
 		$psid = implode(',', (array)$idds);
 		$retuenres['performance_setup'] = $pasettingres;
-		$epahlsql = "SELECT epah.id, epah.appraisal_id, epah.employee_id, epah.assessment_year, epah.hr_user_id,epah.current_status, emp.emp_code, emp.display_name, emp.image,epah.self_score,epah.approved_score FROM employee_performance_appraisal_headers epah, employees emp WHERE epah.company_id = '".$get['company_id']."' AND epah.company_id = emp.company_id AND epah.employee_id = emp.id AND epah.is_active = emp.is_active AND epah.is_active = 0 AND epah.appraisal_id IN(".$psid.")".$condition; 
+		$epahlsql = "SELECT epah.id, epah.appraisal_id, epah.employee_id, epah.assessment_year, epah.hr_user_id,epah.current_status, emp.emp_code, emp.display_name, emp.image,epah.self_score,epah.approved_score FROM employee_performance_appraisal_headers epah, employees emp WHERE epah.company_id = '".$get['company_id']."' AND epah.company_id = emp.company_id AND epah.employee_id = emp.id AND epah.is_active = emp.is_active AND epah.is_active = 0 AND epah.appraisal_id IN(".$psid.")".$condition;
 		$epahlres = $callConfig->getAllRows($epahlsql);
 		$retuenres['employee_performance_appraisal_headers_Sql'] = $epahlsql;
 		$retuenres['employee_performance_appraisal_headers'] = $epahlres;
@@ -261,7 +261,7 @@ class pmsUserClass extends userClass{
 		$pasettingsql = "SELECT ps.id,ps.name,ps.assessment_year,ps.assessment_start_date,ps.assessment_end_date FROM performance_setup ps, employee_performance_appraisal_headers epah WHERE ps.company_id = '".$get['company_id']."' AND ps.is_active = 0 AND ps.company_id = epah.company_id AND ps.is_active = epah.is_active AND ps.id = epah.appraisal_id AND epah.employee_id IN (".$empid.") group by ps.id,ps.name,ps.assessment_year,ps.assessment_start_date,ps.assessment_end_date";
 		$pasettingres = $callConfig->getAllRows($pasettingsql);
 		$retuenres['performance_setup'] = $pasettingres;
-		$pasettingselfsql = "SELECT ps.id,ps.name,ps.assessment_year,ps.assessment_start_date,ps.assessment_end_date FROM performance_setup ps, employee_performance_appraisal_headers epah WHERE ps.company_id = '".$get['company_id']."' AND ps.is_active = 0 AND ps.company_id = epah.company_id AND ps.is_active = epah.is_active AND ps.id = epah.appraisal_id AND epah.employee_id = '".$get['emp_id']."' group by ps.id,ps.name,ps.assessment_year,ps.assessment_start_date,ps.assessment_end_date"; 
+		$pasettingselfsql = "SELECT ps.id,ps.name,ps.assessment_year,ps.assessment_start_date,ps.assessment_end_date FROM performance_setup ps, employee_performance_appraisal_headers epah WHERE ps.company_id = '".$get['company_id']."' AND ps.is_active = 0 AND ps.company_id = epah.company_id AND ps.is_active = epah.is_active AND ps.id = epah.appraisal_id AND epah.employee_id = '".$get['emp_id']."' group by ps.id,ps.name,ps.assessment_year,ps.assessment_start_date,ps.assessment_end_date";
 		$pasettingselfres = $callConfig->getAllRows($pasettingselfsql);
 		$retuenres['performance_setup_self'] = $pasettingselfres;
 
@@ -270,7 +270,7 @@ class pmsUserClass extends userClass{
 			$transapprlogres = $callConfig->getAllRows($transapprlogsql);
 		$retuenres['transaction_approval_logs'] = $transapprlogres;
 
-	}	
+	}
 	return $retuenres;
 }**/
 	public function getPerFormanceAppraisalReport($get){
@@ -323,7 +323,7 @@ class pmsUserClass extends userClass{
 			// $psid = implode(',', (array)$idds);
 			// $retuenres['performance_appraisal_setups'] = $pasettingres;
 
-			// $epahlsql = "SELECT epah.id, epah.appraisal_id, epah.employee_id, epah.assessment_year, epah.hr_user_id,epah.current_status, emp.emp_code, emp.display_name, emp.image,epah.self_score,epah.approved_score FROM employee_performance_appraisal_headers epah, employees emp WHERE epah.company_id = '".$get['company_id']."' AND epah.company_id = emp.company_id AND epah.employee_id = emp.id AND epah.is_active = emp.is_active AND epah.is_active = 0 AND epah.appraisal_id IN(".$psid.") ".$condition; 
+			// $epahlsql = "SELECT epah.id, epah.appraisal_id, epah.employee_id, epah.assessment_year, epah.hr_user_id,epah.current_status, emp.emp_code, emp.display_name, emp.image,epah.self_score,epah.approved_score FROM employee_performance_appraisal_headers epah, employees emp WHERE epah.company_id = '".$get['company_id']."' AND epah.company_id = emp.company_id AND epah.employee_id = emp.id AND epah.is_active = emp.is_active AND epah.is_active = 0 AND epah.appraisal_id IN(".$psid.") ".$condition;
 			// $epahlres = $callConfig->getAllRows($epahlsql);
 			// $retuenres['employee_performance_appraisal_headers_Sql'] = $epahlsql;
 			// $retuenres['employee_performance_appraisal_headers'] = $epahlres;
@@ -333,15 +333,15 @@ class pmsUserClass extends userClass{
 			$pasettingsql = "SELECT pas.id, pas.performance_appraisal_name, pas.assessment_year FROM performance_appraisal_setups pas, employee_performance_appraisals epa WHERE pas.company_id = '".$get['company_id']."' AND pas.company_id = epa.company_id AND pas.id = epa.appraisal_id AND epa.employee_id IN (".$empid.") AND pas.is_active = 0 AND pas.is_active = epa.is_active group by pas.id,pas.assessment_year";
 			$pasettingres = $callConfig->getAllRows($pasettingsql);
 			$retuenres['performance_appraisal_setups'] = $pasettingres;
-			
+
 			$pasettingselfsql = "SELECT pas.id, pas.performance_appraisal_name, pas.assessment_year FROM performance_appraisal_setups pas, employee_performance_appraisals epa WHERE pas.company_id = '".$get['company_id']."' AND pas.company_id = epa.company_id AND pas.id = epa.appraisal_id AND epa.employee_id ='".$get['emp_id']."' AND pas.is_active = 0 AND pas.is_active = epa.is_active group by pas.id,pas.assessment_year";
 			$pasettingselfres = $callConfig->getAllRows($pasettingselfsql);
 			$retuenres['performance_appraisal_setups_self'] = $pasettingselfres;
 
 			$transapprlogsql = "SELECT tal.request_date,tal.response_date, tal.response_type,epa.id, epa.employee_id, emp.display_name, emp.emp_code FROM transaction_approval_logs tal, employee_performance_appraisals epa, employees emp WHERE tal.company_id =  '".$get['company_id']."' AND tal.company_id = epa.company_id AND tal.company_id = emp.company_id AND  tal.transaction_table = 'employee_performance_appraisals' AND tal.user_id = '".$get['user_id']."' AND tal.transaction_id = epa.id  AND epa.employee_id = emp.id AND epa.is_active = 0 AND epa.is_active =emp.is_active";
 				$transapprlogres = $callConfig->getAllRows($transapprlogsql);
-			$retuenres['transaction_approval_logs'] = $transapprlogres;	
-		}	
+			$retuenres['transaction_approval_logs'] = $transapprlogres;
+		}
 	return $retuenres;
 }
 
@@ -350,36 +350,36 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 	$retuenres = array(); //emp_id
 	if($get['ajax']=="Y"){  // Ajax Not Call
 
-		$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND id = '".$get['header_id']."' AND is_active = 0"; 
+		$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND id = '".$get['header_id']."' AND is_active = 0";
 		$pa_headeres = $callConfig->getRow($pa_headersql);
 		$retuenres['performance_appraisal_headers'] = $pa_headeres;
 
 	}else{
-		$employeessql = "SELECT emp.*,(select department_name from departments dep where emp.department_id = dep.id)  department_name,(select designation_name from designations des where emp.designation_id = des.id) designation_name,au.reports_to FROM employees emp, application_users au  WHERE emp.id = '".$get['emp_id']."' AND emp.user_id = au.id  AND emp.company_id = au.company_id AND emp.company_id='".$get['company_id']."' AND emp.is_active=0"; 
+		$employeessql = "SELECT emp.*,(select department_name from departments dep where emp.department_id = dep.id)  department_name,(select designation_name from designations des where emp.designation_id = des.id) designation_name,au.reports_to FROM employees emp, application_users au  WHERE emp.id = '".$get['emp_id']."' AND emp.user_id = au.id  AND emp.company_id = au.company_id AND emp.company_id='".$get['company_id']."' AND emp.is_active=0";
 		$employeesres = $callConfig->getRow($employeessql);
 		$retuenres['employee'] = $employeesres;
-		
-		$reporttosql = "SELECT emp.display_name,(select designation_name from designations des where emp.designation_id = des.id) designation_name FROM employees emp WHERE emp.user_id = '".$employeesres->reports_to."' AND emp.company_id='".$get['company_id']."' AND emp.is_active=0"; 
+
+		$reporttosql = "SELECT emp.display_name,(select designation_name from designations des where emp.designation_id = des.id) designation_name FROM employees emp WHERE emp.user_id = '".$employeesres->reports_to."' AND emp.company_id='".$get['company_id']."' AND emp.is_active=0";
 		$reporttores = $callConfig->getRow($reporttosql);
 		$retuenres['report_to'] = $reporttores;
 
 
-		$krasql = "SELECT eg.*,kra.kra_type,kra.area_name,kra.weightage kra_weightage FROM employee_goals eg, appraisal_key_result_areas kra WHERE eg.company_id = kra.company_id AND eg.company_id = '".$get['company_id']."' AND eg.key_reslut_id = kra.id AND eg.employee_id = '".$get['emp_id']."' AND eg.assessment_year = '".$get['assessment_year']."' AND eg.is_active = 0 AND eg.is_active = kra.is_active"; 
+		$krasql = "SELECT eg.*,kra.kra_type,kra.area_name,kra.weightage kra_weightage FROM employee_goals eg, appraisal_key_result_areas kra WHERE eg.company_id = kra.company_id AND eg.company_id = '".$get['company_id']."' AND eg.key_reslut_id = kra.id AND eg.employee_id = '".$get['emp_id']."' AND eg.assessment_year = '".$get['assessment_year']."' AND eg.is_active = 0 AND eg.is_active = kra.is_active";
 		$krares = $callConfig->getAllRows($krasql);
 		$retuenres['kra_list'] = $krares;
 
-		$arssql = "SELECT score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$arssql = "SELECT score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$arsres = $callConfig->getAllRows($arssql);
 		$retuenres['arslabs'] = $arsres;
 
-		$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND appraisal_id ='".$get['appraisal_id']."' "; 
+		$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND appraisal_id ='".$get['appraisal_id']."' ";
 		$pa_headeres = $callConfig->getAllRows($pa_headersql);
 		$retuenres['performance_appraisal_headers'] = $pa_headeres;
 
-		$epappraisalsql = "SELECT id,header_id,filed_1,filed_2,filed_3,filed_4,filed_5 FROM employee_performance_appraisal_details WHERE company_id = '".$get['company_id']."' AND employee_id = '".$get['emp_id']."' AND appraisal_id = '".$get['appraisal_id']."' AND assessment_year = '".$get['assessment_year']."' AND is_active = 0 "; 
+		$epappraisalsql = "SELECT id,header_id,filed_1,filed_2,filed_3,filed_4,filed_5 FROM employee_performance_appraisal_details WHERE company_id = '".$get['company_id']."' AND employee_id = '".$get['emp_id']."' AND appraisal_id = '".$get['appraisal_id']."' AND assessment_year = '".$get['assessment_year']."' AND is_active = 0 ";
 		$epappraisalres = $callConfig->getAllRows($epappraisalsql);
 		$retuenres['employee_performance_appraisals'] = $epappraisalres;
-		$performance_setupsql = "SELECT id,name,publish FROM performance_setup WHERE  company_id = '".$get['company_id']."'  AND  id='".$get['appraisal_id']."' AND is_active = 0 "; 
+		$performance_setupsql = "SELECT id,name,publish FROM performance_setup WHERE  company_id = '".$get['company_id']."'  AND  id='".$get['appraisal_id']."' AND is_active = 0 ";
 		$performance_setupres = $callConfig->getRow($performance_setupsql);
 		$retuenres['performance_setup'] = $performance_setupres;
 
@@ -421,7 +421,7 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 	$retuenres['employees'] = $empres;
 
 
-	$pasettingsql = "SELECT appraisal_setting_id FROM performance_appraisal_setting_histories WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND appraisal_id='".$get['appraisal_id']."' AND applicable = 0"; 
+	$pasettingsql = "SELECT appraisal_setting_id FROM performance_appraisal_setting_histories WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND appraisal_id='".$get['appraisal_id']."' AND applicable = 0";
 	$pasettingres = $callConfig->getAllRows($pasettingsql);
 	$retuenres['performance_appraisal_setting_histories'] = $pasettingres;
 	return $retuenres;
@@ -513,23 +513,23 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 		$passql ="SELECT id, bell_curve_name FROM appraisal_bell_curves WHERE company_id =".$get['company_id']." AND is_active = 0";
 		$pasres = $callConfig->getAllRows($passql);
 		$return['appraisal_bell_curves'] = $pasres;
-		
+
 
 		if($get['preview']=="Y"){
-			$krasql = "SELECT id,area_name FROM appraisal_key_result_areas WHERE company_id='".$get['company_id']."' AND appraisal_id = '".$get['rid']."' AND is_active=0"; 
+			$krasql = "SELECT id,area_name FROM appraisal_key_result_areas WHERE company_id='".$get['company_id']."' AND appraisal_id = '".$get['rid']."' AND is_active=0";
 			$krares = $callConfig->getAllRows($krasql);
 			foreach($krares as $krares11){
 				$akraresult[$krares11->id] = $krares11;
 				$kraarray[$krares11->id] = $krares11->id;
 			}
 			$return['appraisal_key_result_areas'] = $akraresult;
-			$kraids = implode(",",(array)$kraarray);  
+			$kraids = implode(",",(array)$kraarray);
 
-			$kpisql = "SELECT akpi.id,akpi.indicator_name,akpi.key_reslut_id,akpi.weightage,akpi.model,akpi.uom FROM appraisal_key_performance_indicators akpi WHERE akpi.company_id='".$get['company_id']."'AND akpi.is_active=0 AND akpi.key_reslut_id IN(".$kraids.")"; 
+			$kpisql = "SELECT akpi.id,akpi.indicator_name,akpi.key_reslut_id,akpi.weightage,akpi.model,akpi.uom FROM appraisal_key_performance_indicators akpi WHERE akpi.company_id='".$get['company_id']."'AND akpi.is_active=0 AND akpi.key_reslut_id IN(".$kraids.")";
 			$kpires = $callConfig->getAllRows($kpisql);
 			$return['appraisal_key_performance_indicators'] = $kpires;
 
-			$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND appraisal_id ='".$get['rid']."' "; 
+			$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND appraisal_id ='".$get['rid']."' ";
 			$pa_headeres = $callConfig->getAllRows($pa_headersql);
 			$return['performance_appraisal_headers_sql'] = $pa_headersql;
 			$return['performance_appraisal_headers'] = $pa_headeres;
@@ -576,39 +576,39 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 		$kpitable = $get['kpitable'];
 		$kpitasktable = $get['kpitasktable'];
 		if($get['kpi_kra_popup'] == "Y"){
-			$modellistsql = "SELECT id,kpi_id,task_name,description,task_shot_code,task_frequency,mandatory FROM ".$kpitasktable." WHERE company_id='".$get['company_id']."' AND is_active=0 AND id IN(".$get['kpi_tasks_ids'].")"; 
+			$modellistsql = "SELECT id,kpi_id,task_name,description,task_shot_code,task_frequency,mandatory FROM ".$kpitasktable." WHERE company_id='".$get['company_id']."' AND is_active=0 AND id IN(".$get['kpi_tasks_ids'].")";
 			$modellistres = $callConfig->getAllRows($modellistsql);
 			$retuenres['kpi_taskslist'] = $modellistres;
 
-			$freqlistsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='TASKFREQUENCY' AND is_active=0"; 
+			$freqlistsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='TASKFREQUENCY' AND is_active=0";
 			$freqlistres = $callConfig->getAllRows($freqlistsql);
 			$retuenres['task_frequency_list'] = $freqlistres;
 		}else{
-			$modellistsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='KPIMODAL' AND is_active=0"; 
+			$modellistsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='KPIMODAL' AND is_active=0";
 			$modellistres = $callConfig->getAllRows($modellistsql);
 			$retuenres['modellist'] = $modellistres;
 
-			$uomsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='KPIUOM' AND is_active=0"; 
+			$uomsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='KPIUOM' AND is_active=0";
 			$uomres = $callConfig->getAllRows($uomsql);
 			$retuenres['uomllist'] = $uomres;
 
 			if($get['appraisal_id'] !=""){
 				$kracondition = " AND appraisal_id = '".$get['appraisal_id']."'";
 			}
-			$krasql = "SELECT id,area_name,description,weightage FROM ".$kratable." WHERE company_id='".$get['company_id']."' AND is_active=0".$kracondition; 
+			$krasql = "SELECT id,area_name,description,weightage FROM ".$kratable." WHERE company_id='".$get['company_id']."' AND is_active=0".$kracondition;
 			$krares = $callConfig->getAllRows($krasql);
 			$retuenres['kralist'] = $krares;
 
 			foreach($krares as $krares11){
 				$kraarray[] = $krares11->id;
 			}
-			$kraids = implode(",",(array)$kraarray);  
+			$kraids = implode(",",(array)$kraarray);
 
-			$kpisql = "SELECT kpi.id,kpi.indicator_name,kpi.key_reslut_id,kpi.weightage,kpi.model,kpi.uom,kpi.display_sequence,kpi.role_id,(SELECT GROUP_CONCAT(kt.id SEPARATOR ',') AS id FROM ".$kpitasktable." kt WHERE kpi.company_id = kt.company_id AND kpi.id = kt.kpi_id AND kpi.is_active = kt.is_active GROUP BY kt.kpi_id) as kpi_tasks_ids FROM ".$kpitable." kpi WHERE kpi.company_id='".$get['company_id']."'  AND kpi.is_active=0 AND kpi.key_reslut_id IN(".$kraids.")"; 
+			$kpisql = "SELECT kpi.id,kpi.indicator_name,kpi.key_reslut_id,kpi.weightage,kpi.model,kpi.uom,kpi.display_sequence,kpi.role_id,(SELECT GROUP_CONCAT(kt.id SEPARATOR ',') AS id FROM ".$kpitasktable." kt WHERE kpi.company_id = kt.company_id AND kpi.id = kt.kpi_id AND kpi.is_active = kt.is_active GROUP BY kt.kpi_id) as kpi_tasks_ids FROM ".$kpitable." kpi WHERE kpi.company_id='".$get['company_id']."'  AND kpi.is_active=0 AND kpi.key_reslut_id IN(".$kraids.")";
 			$kpires = $callConfig->getAllRows($kpisql);
 			$retuenres['kpilist'] = $kpires;
 
-			// $performance_setupsql = "SELECT id,name FROM performance_setup WHERE  company_id = '".$get['company_id']."'  AND  id='".$get['appraisal_id']."' AND is_active = 0 "; 
+			// $performance_setupsql = "SELECT id,name FROM performance_setup WHERE  company_id = '".$get['company_id']."'  AND  id='".$get['appraisal_id']."' AND is_active = 0 ";
 			// $performance_setupres = $callConfig->getRow($performance_setupsql);
 			// $retuenres['performance_setup'] = $performance_setupres;
 
@@ -634,7 +634,7 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 		return $insert;
 	}
 	public function addorupdatekpi($get,$post){
-		global $callConfig; 
+		global $callConfig;
 		$returnres = array();
 		$kratable  = $post['kratable'];
 		$kpitable = $post['kpitable'];
@@ -649,11 +649,11 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 					if($post['kpi_id'][$key1][$key]!="" ){
 						$insert_array['updated_by'] =$get['user_id'];
 						$insert_array['updated_date'] =date('Y-m-d h:i:s');
-						$insert_array['is_active'] ='0'; 
+						$insert_array['is_active'] ='0';
 						$kpiid = $post['kpi_id'][$key1][$key];
 						$insert['upd'][] = $callConfig->updateRecord($kpitable,$insert_array,'id',$post['kpi_id'][$key1][$key]);
 					}else{
-						$insert_array['is_active'] ='0'; 
+						$insert_array['is_active'] ='0';
 						$insert_array['current_status'] ='0';
 						$insert_array['created_by'] =$get['user_id'];
 						$insert_array['created_date']=date('Y-m-d h:i:s');
@@ -722,7 +722,7 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 				}elseif($keys == 'designation_id'){
 					$designationcondition .= ' AND jt.id IN ('.$vale.')';
 				}
-				
+
 			}
 		}
 	}
@@ -763,7 +763,7 @@ public function getKRATagging($get){
 		$krares = $callConfig->getAllRows($krasql);
 		$retuenres['kralid'] = $krares;
 	}
-	$krasql = "SELECT id,area_name,description FROM appraisal_key_result_areas WHERE company_id='".$get['company_id']."' AND is_active=0 AND appraisal_id= '".$get['appraisal_id']."'"; 
+	$krasql = "SELECT id,area_name,description FROM appraisal_key_result_areas WHERE company_id='".$get['company_id']."' AND is_active=0 AND appraisal_id= '".$get['appraisal_id']."'";
 	$krares = $callConfig->getAllRows($krasql);
 	$retuenres['kralist'] = $krares;
 
@@ -788,19 +788,19 @@ public function getKRATagging($get){
 				}elseif($keys == 'designation_id'){
 					$designationcondition .= ' AND id IN ('.$vale.')';
 				}
-				
+
 			}
 		}
 	}
-	$departsql = "SELECT id,department_name FROM departments WHERE company_id='".$get['company_id']."'  ".$dipartcondition." AND is_active=0"; 
+	$departsql = "SELECT id,department_name FROM departments WHERE company_id='".$get['company_id']."'  ".$dipartcondition." AND is_active=0";
 	$departres = $callConfig->getAllRows($departsql);
 	$retuenres['department_list'] = $departres;
-	
-	$desingsql = "SELECT id,job_title as designation_name FROM job_titles WHERE company_id='".$get['company_id']."'  ".$designationcondition." AND is_active=0"; 
+
+	$desingsql = "SELECT id,job_title as designation_name FROM job_titles WHERE company_id='".$get['company_id']."'  ".$designationcondition." AND is_active=0";
 	$desingres = $callConfig->getAllRows($desingsql);
 	$retuenres['designation_list'] = $desingres;
 
-	$locasql = "SELECT id,location_name FROM locations WHERE company_id='".$get['company_id']."'  ".$locationcondition."  AND is_active=0"; 
+	$locasql = "SELECT id,location_name FROM locations WHERE company_id='".$get['company_id']."'  ".$locationcondition."  AND is_active=0";
 	$locares = $callConfig->getAllRows($locasql);
 	$retuenres['location_list'] = $locares;
 	return $retuenres;
@@ -818,7 +818,7 @@ public function insertGoalData($get,$post){
 		// 	$callConfig->executeQuery($updatesql);
 		// 	$updatesql = "DELETE FROM `employee_goals` WHERE key_performance_id IN(".$post['organization_goalsidd'].")";
 		// 	$returnaray['updatesql'] = $updatesql;
-		// 	$callConfig->executeQuery($updatesql);	
+		// 	$callConfig->executeQuery($updatesql);
 		// }
 		$kra_ids = implode(',', (array)$post['kra_ids']);
 		$locatdepdesignatio =  json_decode($post['locatdepdesignatio'],1);
@@ -842,7 +842,7 @@ public function insertGoalData($get,$post){
 	if(count((array($checkmenyrows))) !=0){
 		$setinsertsql = 1;
 		$insertsql = "INSERT INTO `organization_goals`(`company_id`,`appraisal_id`, `key_reslut_id`, `key_performance_id`, `assessment_frequency`, `traget`, `job_title_id`, `department_id`, `location_id`, `is_active`, `current_status`, `created_date`, `created_by`) VALUES ";
-		foreach($checkmenyrows as $resultrow){ 
+		foreach($checkmenyrows as $resultrow){
 			foreach($locatdepdesignatio as $locid =>$loclist){
 				foreach($loclist as $dipid =>$deplist){
 					foreach($deplist as $desid =>$deslist){
@@ -854,9 +854,9 @@ public function insertGoalData($get,$post){
 						}else{
 							$setinsertsql = 0;
 							$insertsql .= "('".$post['company_id']."','".$post['appraisal_id']."','".$resultrow->kra_id."','".$resultrow->kpi_id."','".$post['assessment_frequency'][$resultrow->kra_id][$resultrow->kpi_id]."','".$post['traget'][$resultrow->kra_id][$resultrow->kpi_id]."','".$desid."','".$dipid."','".$locid."','0','0','".date('Y-m-d h:i:s')."','".$post['user_id']."'),";
-						}		 
+						}
 					}
-				}	
+				}
 			}
 		}
 		if($setinsertsql == '0'){
@@ -873,16 +873,16 @@ public function insertGoalData($get,$post){
 	// 	$res = $callConfig->executeQuery($employee_goals);
 	// 	$returnaray['employee_goals'] = $employee_goals;
 	// }
-	$returnaray['insertsql'] = $insertsql;  
+	$returnaray['insertsql'] = $insertsql;
 	$returnaray['max'] = $sql;
-	$returnaray['checkmenyrows'] = $checkmenyrows; 
-	$returnaray['post'] = $post; 
+	$returnaray['checkmenyrows'] = $checkmenyrows;
+	$returnaray['post'] = $post;
 	return $returnaray;
 }
 public function pmsDashboard1($get){
 		global $callConfig;
 		$return = array();
-		$performance_setupsql = "SELECT id, name,assessment_year FROM performance_setup WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY assessment_start_date DESC"; 
+		$performance_setupsql = "SELECT id, name,assessment_year FROM performance_setup WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY assessment_start_date DESC";
 		$performance_setupres = $callConfig->getAllRows($performance_setupsql);
 		$return['performance_setup'] = $performance_setupres;
 		if($get['appraisal_id'] ==""){
@@ -902,7 +902,7 @@ public function pmsDashboard1($get){
 		}
 		$return['employees'] = $empdeatils;
 
-		$arssql = "SELECT score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$arssql = "SELECT score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$arsres = $callConfig->getAllRows($arssql);
 		$return['arslabs'] = $arsres;
 		return $return;
@@ -912,7 +912,7 @@ public function pmsDashboard1($get){
 // function pmsDashboard2($get){
 // 	global $callConfig;
 // 	$return = array();
-// 	$performance_setupsql = "SELECT id, name,assessment_year FROM performance_setup WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY assessment_start_date DESC"; 
+// 	$performance_setupsql = "SELECT id, name,assessment_year FROM performance_setup WHERE company_id = '".$get['company_id']."' AND is_active = 0 ORDER BY assessment_start_date DESC";
 // 	$performance_setupres = $callConfig->getAllRows($performance_setupsql);
 // 	$return['performance_setup'] = $performance_setupres;
 // 	if($get['appraisal_id'] ==""){
@@ -945,7 +945,7 @@ public function pmsDashboard1($get){
 // 	$listgoal = $callConfig->getAllRows($org_goal_sql);
 // 	$return['employee_goals'] = $listgoal;
 
-// 	$arssql = "SELECT score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+// 	$arssql = "SELECT score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 // 	$arsres = $callConfig->getAllRows($arssql);
 // 	$return['arslabs'] = $arsres;
 // 	return $return;
@@ -981,15 +981,15 @@ public function pmsDashboard1($get){
 		$loc_id = implode(",",(array)$loc_ids);
 		$jobt_id = implode(",",(array)$jobt_ids);
 		$depar_id = implode(",",(array)$depar_ids);
-		$departsql = "SELECT id,department_name FROM departments WHERE company_id='".$get['company_id']."'  AND is_active=0 AND id IN(".$depar_id.")"; 
+		$departsql = "SELECT id,department_name FROM departments WHERE company_id='".$get['company_id']."'  AND is_active=0 AND id IN(".$depar_id.")";
 		$departres = $callConfig->getAllRows($departsql);
 		$retuenres['department_list'] = $departres;
 
-		$desingsql = "SELECT id,job_title as designation_name FROM job_titles WHERE company_id='".$get['company_id']."'  AND is_active=0 AND id IN(".$jobt_id.")"; 
+		$desingsql = "SELECT id,job_title as designation_name FROM job_titles WHERE company_id='".$get['company_id']."'  AND is_active=0 AND id IN(".$jobt_id.")";
 		$desingres = $callConfig->getAllRows($desingsql);
 		$retuenres['designation_list'] = $desingres;
 
-		$locasql = "SELECT id,location_name FROM locations WHERE company_id='".$get['company_id']."'  AND is_active=0 AND id IN(".$loc_id.")"; 
+		$locasql = "SELECT id,location_name FROM locations WHERE company_id='".$get['company_id']."'  AND is_active=0 AND id IN(".$loc_id.")";
 		$locares = $callConfig->getAllRows($locasql);
 		$retuenres['location_list'] = $locares;
 	}
@@ -999,15 +999,15 @@ public function getOrganizationGoals($get){
 	global $callConfig;
 	$return = array();
 	$return['get'] = $get;
-	$departsql = "SELECT id,department_name FROM departments WHERE company_id='".$get['company_id']."'  AND is_active=0"; 
+	$departsql = "SELECT id,department_name FROM departments WHERE company_id='".$get['company_id']."'  AND is_active=0";
 	$departres = $callConfig->getAllRows($departsql);
 	$return['department_list'] = $departres;
 
-	$desingsql = "SELECT id,job_title as designation_name FROM job_titles WHERE company_id='".$get['company_id']."'  AND is_active=0 "; 
+	$desingsql = "SELECT id,job_title as designation_name FROM job_titles WHERE company_id='".$get['company_id']."'  AND is_active=0 ";
 	$desingres = $callConfig->getAllRows($desingsql);
 	$return['designation_list'] = $desingres;
 
-	$locasql = "SELECT id,location_name FROM locations WHERE company_id='".$get['company_id']."'  AND is_active=0"; 
+	$locasql = "SELECT id,location_name FROM locations WHERE company_id='".$get['company_id']."'  AND is_active=0";
 	$locares = $callConfig->getAllRows($locasql);
 	$return['location_list'] = $locares;
 	if($get['popup'] =="Y"){
@@ -1040,7 +1040,7 @@ public function getOrganizationGoals($get){
 
 
 	}else{
-	
+
 		$ogsql = "SELECT DISTINCT og.job_title_id, og.department_id, og.location_id FROM organization_goals og WHERE og.company_id = '".$get['company_id']."' AND og.appraisal_id = '".$get['appraisal_id']."' AND  og.is_active =0";
 		$ogres = $callConfig->getAllRows($ogsql);
 		$return['organization_goals']=$ogres;
@@ -1091,19 +1091,19 @@ public function getOrganizationGoals($get){
 	public function getGoals($get){
 		global $callConfig;
 		$return = array();
-		$employee_goalssql = "SELECT * FROM goals WHERE company_id='".$get['company_id']."' AND id='".$get['rid']."' AND is_active=0"; 
+		$employee_goalssql = "SELECT * FROM goals WHERE company_id='".$get['company_id']."' AND id='".$get['rid']."' AND is_active=0";
 		$employee_goalsres = $callConfig->getRow($employee_goalssql);
 		$return['employee_goals'] = $employee_goalsres;
 
-		$modellistsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='KPIMODAL' AND is_active=0"; 
+		$modellistsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='KPIMODAL' AND is_active=0";
 		$modellistres = $callConfig->getAllRows($modellistsql);
 		$return['modellist'] = $modellistres;
 
-		$uomsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='KPIUOM' AND is_active=0"; 
+		$uomsql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='KPIUOM' AND is_active=0";
 		$uomres = $callConfig->getAllRows($uomsql);
 		$return['uomllist'] = $uomres;
 
-		$employeessql = "SELECT id, display_name FROM employees WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+		$employeessql = "SELECT id, display_name FROM employees WHERE company_id='".$get['company_id']."' AND is_active=0";
 		$employeesres = $callConfig->getAllRows($employeessql);
 		$employees = array();
 		foreach($employeesres as $empres){
@@ -1117,16 +1117,16 @@ public function getOrganizationGoals($get){
 		global $callConfig;
 		$return = array();
 
-		$feedbackssql = "SELECT * FROM feedbacks WHERE company_id='".$get['company_id']."' AND id='".$get['rid']."' AND is_active=0"; 
+		$feedbackssql = "SELECT * FROM feedbacks WHERE company_id='".$get['company_id']."' AND id='".$get['rid']."' AND is_active=0";
 		$feedbacksres = $callConfig->getRow($feedbackssql);
 		$return['feedbacks'] = $feedbacksres;
 
 
-		$frequencyql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='TASKFREQUENCY' AND is_active=0"; 
+		$frequencyql = "SELECT genc_detail_code,genc_detail_name  FROM ".TBL_GENRAL_CODE_DETAILS." WHERE company_id='".$get['company_id']."' AND genc_code='TASKFREQUENCY' AND is_active=0";
 		$frequencyres = $callConfig->getAllRows($frequencyql);
 		$return['frequency'] = $frequencyres;
 
-		$employeessql = "SELECT id, display_name FROM employees WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+		$employeessql = "SELECT id, display_name FROM employees WHERE company_id='".$get['company_id']."' AND is_active=0";
 		$employeesres = $callConfig->getAllRows($employeessql);
 		$employees = array();
 		foreach($employeesres as $empres){
@@ -1136,7 +1136,7 @@ public function getOrganizationGoals($get){
 
 		return $return;
 	}
-	
+
 	public function insertFeedBacks($get,$post){
 		global $callConfig;
 		$returnarray = array();
@@ -1157,7 +1157,7 @@ public function getOrganizationGoals($get){
 
 			$question_options = json_encode($post['question_options']);
 			$employee_ids = json_encode($post['employee_ids']);
-			
+
 			$insert_array = array('question'=>$post['question'],'description'=>$post['description'],'answer_type'=>$post['answer_type'],'feedback_type'=>$post['feedback_type'],'question_options'=>$question_options,'max_ratting'=>$post['max_ratting'],'attachment'=>$post['attachment'],'employee_ids'=>$employee_ids,'action_frequency'=>$post['action_frequency']);
 			if($post['rid'] !=""){
 				$insert_array['updated_by'] = $post['userid'];
@@ -1183,7 +1183,7 @@ public function getOrganizationGoals($get){
 	$return = array();
 	if($get['ajax']=="Y"){  // Ajax Not Call
 
-		$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND id = '".$get['header_id']."' AND is_active = 0"; 
+		$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND id = '".$get['header_id']."' AND is_active = 0";
 		$pa_headeres = $callConfig->getRow($pa_headersql);
 		$return['performance_appraisal_headers'] = $pa_headeres;
 
@@ -1192,8 +1192,8 @@ public function getOrganizationGoals($get){
 		$sql ="SELECT * FROM employee_performance_appraisals WHERE company_id =".$get['company_id']." AND id = '".$get['rid']."' AND is_active = 0";
 		$epares = $callConfig->getRow($sql);
 		$return['employee_performance_appraisals'] = $epares;
-		
-		$employeessql = "SELECT emp.id,emp.emp_code,emp.display_name,emp.email_id,emp.user_id, (select department_name from departments dep where emp.department_id = dep.id)  department_name,(select designation_name from designations des where emp.designation_id = des.id) designation_name,au.reports_to FROM employees emp, application_users au  WHERE emp.id = '".$epares->employee_id."' AND emp.user_id = au.id  AND emp.company_id = au.company_id AND emp.company_id='".$get['company_id']."' AND emp.is_active=0"; 
+
+		$employeessql = "SELECT emp.id,emp.emp_code,emp.display_name,emp.email_id,emp.user_id, (select department_name from departments dep where emp.department_id = dep.id)  department_name,(select designation_name from designations des where emp.designation_id = des.id) designation_name,au.reports_to FROM employees emp, application_users au  WHERE emp.id = '".$epares->employee_id."' AND emp.user_id = au.id  AND emp.company_id = au.company_id AND emp.company_id='".$get['company_id']."' AND emp.is_active=0";
 			$employeesres = $callConfig->getRow($employeessql);
 			$return['employee'] = $employeesres;
 
@@ -1208,7 +1208,7 @@ public function getOrganizationGoals($get){
 		// $sql ="SELECT id,key_reslut_id,indicator_name,weightage,model,uom, display_sequence FROM `appraisal_key_performance_indicators` WHERE company_id =".$get['company_id']." AND appraisal_id = '".$epares->appraisal_id."' AND is_active = 0";
 		// $epares2 = $callConfig->getAllRows($sql);
 		// $return['appraisal_key_performance_indicators'] = $epares2;
-		
+
 		$organization_goal_id = json_decode($epares->organization_goal_id,1);
 		$implodeid = implode(',', (array)$organization_goal_id);
 		//$ogsql ="SELECT og.id, og.key_reslut_id, og.key_performance_id,  og.assessment_frequency, og.traget, akra.area_name, akra.description, akra.weightage as appraisal_key_result_area_weightage, akpi.indicator_name, akpi.weightage as appraisal_key_performance_indicator_weightage,  akpi.model, akpi.uom FROM organization_goals og, appraisal_key_result_areas akra, appraisal_key_performance_indicators akpi WHERE og.company_id = ".$get['company_id']." AND og.company_id = akra.company_id AND og.company_id = akpi.company_id AND og.appraisal_id ='".$epares->appraisal_id."' AND og.appraisal_id = akra.appraisal_id AND og.key_reslut_id = akra.id AND og.key_performance_id = akpi.id AND og.id IN(".$implodeid.") AND og.is_active = 0 AND og.is_active = akra.is_active";
@@ -1218,10 +1218,10 @@ public function getOrganizationGoals($get){
 		// foreach($ogres as $og){
 		// 	$organization_goals[$og->key_reslut_id][]= $og;
 		// }
-		$return['organization_goals'] = $organization_goals;	
+		$return['organization_goals'] = $organization_goals;
 
 
-		$arssql = "SELECT id, score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$arssql = "SELECT id, score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$arsres = $callConfig->getAllRows($arssql);
 		$return['arslabs'] = $arsres;
 
@@ -1229,26 +1229,26 @@ public function getOrganizationGoals($get){
 		$returnresp = $this->getempconnectwithempid($sendemployedetails);
 		$return['buddy_details'] = $returnresp;
 
-		$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND appraisal_id ='".$epares->appraisal_id."' "; 
+		$pa_headersql = "SELECT id,appraisal_id,assessment_year,header_name,header_comment,sub_header_name,sub_header_addmore,sub_header_default_row,header_display_setting,dynamic_page,page_name FROM performance_appraisal_headers WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND appraisal_id ='".$epares->appraisal_id."' ";
 			$pa_headeres = $callConfig->getAllRows($pa_headersql);
 		$return['performance_appraisal_headers'] = $pa_headeres;
 
-		$epappraisalsql = "SELECT id,header_id,filed_1,filed_2,filed_3,filed_4,filed_5 FROM employee_performance_appraisal_details WHERE company_id = '".$get['company_id']."' AND employee_id = '".$epares->employee_id."' AND appraisal_id = '".$epares->appraisal_id."' AND is_active = 0 "; 
+		$epappraisalsql = "SELECT id,header_id,filed_1,filed_2,filed_3,filed_4,filed_5 FROM employee_performance_appraisal_details WHERE company_id = '".$get['company_id']."' AND employee_id = '".$epares->employee_id."' AND appraisal_id = '".$epares->appraisal_id."' AND is_active = 0 ";
 		$epappraisalres = $callConfig->getAllRows($epappraisalsql);
 		$return['employee_performance_appraisal_details'] = $epappraisalres;
 
 
 
-		$aaqsql = "SELECT id, appraisal_id, question, description, answer_type, display_answer, display_question, question_options, max_ratting FROM performance_appraisal_questions WHERE company_id = '".$get['company_id']."' AND appraisal_id = '".$epares->appraisal_id."' AND is_active = 0 "; 
+		$aaqsql = "SELECT id, appraisal_id, question, description, answer_type, display_answer, display_question, question_options, max_ratting FROM performance_appraisal_questions WHERE company_id = '".$get['company_id']."' AND appraisal_id = '".$epares->appraisal_id."' AND is_active = 0 ";
 		$aaqres = $callConfig->getAllRows($aaqsql);
 		$return['performance_appraisal_questions'] = $aaqres;
 
 
-		$employee_goalssql = "SELECT eg.id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."' AND eg.employee_id = '".$epares->employee_id."' AND eg.is_active = 0 "; 
+		$employee_goalssql = "SELECT eg.id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."' AND eg.employee_id = '".$epares->employee_id."' AND eg.is_active = 0 ";
 		$employee_goalsres = $callConfig->getAllRows($employee_goalssql);
 		$return['employee_goals'] = $employee_goalsres;
 
-		$employee_feedbackssql = "SELECT ef.id, ef.employee_id, ef.response_status, ef.response_datetime,fe.question FROM employee_feedbacks ef, feedbacks fe WHERE ef.company_id = '".$get['company_id']."'  AND ef.company_id = fe.company_id AND ef.feedback_id = fe.id AND ef.employee_id = '".$epares->employee_id."' AND ef.is_active = 0 AND ef.is_active = fe.is_active"; 
+		$employee_feedbackssql = "SELECT ef.id, ef.employee_id, ef.response_status, ef.response_datetime,fe.question FROM employee_feedbacks ef, feedbacks fe WHERE ef.company_id = '".$get['company_id']."'  AND ef.company_id = fe.company_id AND ef.feedback_id = fe.id AND ef.employee_id = '".$epares->employee_id."' AND ef.is_active = 0 AND ef.is_active = fe.is_active";
 		$employee_feedbacksres = $callConfig->getAllRows($employee_feedbackssql);
 		$return['employee_feedbacks'] = $employee_feedbacksres;
 
@@ -1258,21 +1258,21 @@ public function getOrganizationGoals($get){
 	public function insertEmployeePerformanceAppraisals($get,$post){
 		global $callConfig;
 		$return = array();
-		$epasql = "SELECT id, appraisal_id,employee_id FROM employee_performance_appraisals WHERE company_id = '".$get['company_id']."' AND id = '".$post['rid']."' AND is_active = 0"; 
+		$epasql = "SELECT id, appraisal_id,employee_id FROM employee_performance_appraisals WHERE company_id = '".$get['company_id']."' AND id = '".$post['rid']."' AND is_active = 0";
 		$epares = $callConfig->getRow($epasql);
 		$return['employee_performance_appraisals'] = $epares;
-		
-		$arssql = "SELECT id, start_range,end_range FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+
+		$arssql = "SELECT id, start_range,end_range FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$arsres = $callConfig->getAllRows($arssql);
 		$self_appraisal_rating_slab_id = $ro_appraisal_rating_slab_id = "";
 		foreach($arsres as $slab){
-			if($slab->start_range <= $post['self_total'] && $slab->end_range >= $post['self_total']){ 
+			if($slab->start_range <= $post['self_total'] && $slab->end_range >= $post['self_total']){
 				$self_appraisal_rating_slab_id = $slab->id;
 		 	}
-		 	if($slab->start_range <= $post['ro_total'] && $slab->end_range >= $post['ro_total']){ 
+		 	if($slab->start_range <= $post['ro_total'] && $slab->end_range >= $post['ro_total']){
 				$ro_appraisal_rating_slab_id = $slab->id;
 		 	}
-		}					
+		}
 		$performance_appraisal_questions = json_encode($post['performance_appraisal_questions']);
 		$self_achived = json_encode($post['self_achived']);
 		$ro_achived= json_encode($post['ro_achived']);
@@ -1288,13 +1288,13 @@ public function getOrganizationGoals($get){
 			foreach($headerow as $kkey=>$valu){
 				$newewarray[$headerid] = $valu;
 			}
-		}	
+		}
 		$wherecond = "appraisal_id = '".$epares->appraisal_id."' AND employee_id = '".$epares->employee_id."'";
 		$callConfig->updateRecord('employee_performance_appraisal_details',array('is_active'=>null),'','',$wherecond);
 		foreach($newewarray as $header_id => $headerow){
 			$field = array();
 			foreach($headerow as $key => $hea){
-				for($field = 1;$field <= 6;$field++){ 
+				for($field = 1;$field <= 6;$field++){
 					$fird[$field] = $post['filed'][$header_id][$field][$key];
 				}
 				$rowid = $post['row_id'][$header_id][$key];
@@ -1308,7 +1308,7 @@ public function getOrganizationGoals($get){
 				}
 			}
 		}
-		if($inserexc == 'Y'){	
+		if($inserexc == 'Y'){
 			$insertsql = rtrim($insertsql, ',');
 			$res = $callConfig->executeQuery($insertsql);
 			$return['res'] = $res;
@@ -1318,7 +1318,7 @@ public function getOrganizationGoals($get){
 	public function getEmployeeGoals($get){
 		global $callConfig;
 		$return = array();
-		$employee_goalssql = "SELECT eg.id, eg.employee_id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."' AND eg.id = '".$get['rid']."' AND eg.is_active = 0 "; 
+		$employee_goalssql = "SELECT eg.id, eg.employee_id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."' AND eg.id = '".$get['rid']."' AND eg.is_active = 0 ";
 		$employee_goalsres = $callConfig->getRow($employee_goalssql);
 		$return['employee_goals_sql'] = $employee_goalssql;
 		$return['employee_goals'] = $employee_goalsres;
@@ -1327,11 +1327,11 @@ public function getOrganizationGoals($get){
 	public function getPMSAdminDashboard($get){
 		global $callConfig;
 		$return = array();
-		$employee_goalssql = "SELECT eg.id, eg.employee_id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."' AND eg.is_active = 0 "; 
+		$employee_goalssql = "SELECT eg.id, eg.employee_id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."' AND eg.is_active = 0 ";
 		$employee_goalsres = $callConfig->getAllRows($employee_goalssql);
 		$return['employee_goals'] = $employee_goalsres;
-		
-		$employeessql = "SELECT id, display_name, image, emp_code FROM employees WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+
+		$employeessql = "SELECT id, display_name, image, emp_code FROM employees WHERE company_id='".$get['company_id']."' AND is_active=0";
 		$employeesres = $callConfig->getAllRows($employeessql);
 		$employees = array();
 		foreach($employeesres as $empres){
@@ -1351,16 +1351,16 @@ public function getOrganizationGoals($get){
 		}
 		$return['employee_performance_appraisals_ratting'] = $rattingchart;
 
-		$performance_appraisal_setupssql = "SELECT id, performance_appraisal_name, assessment_year, assessment_start_date, assessment_end_date, self_assessment_start_date, self_assessment_end_date, manager_assessment_start_date, manager_assessment_end_date, reviewing_start_date, reviewing_end_date, publish FROM performance_appraisal_setups WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$performance_appraisal_setupssql = "SELECT id, performance_appraisal_name, assessment_year, assessment_start_date, assessment_end_date, self_assessment_start_date, self_assessment_end_date, manager_assessment_start_date, manager_assessment_end_date, reviewing_start_date, reviewing_end_date, publish FROM performance_appraisal_setups WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$performance_appraisal_setupsres = $callConfig->getAllRows($performance_appraisal_setupssql);
 		$return['performance_appraisal_setups'] = $performance_appraisal_setupsres;
 
 		$pasid = array();
 		foreach($performance_appraisal_setupsres as $pas){
-			$pasid[$pas->id] =$pas->id; 
+			$pasid[$pas->id] =$pas->id;
 		}
 		$implodeid = implode(",", $pasid);
-		$employee_performance_appraisalssql = "SELECT id, appraisal_id, employee_id, self_total, ro_total,current_status FROM employee_performance_appraisals WHERE company_id='".$get['company_id']."' AND appraisal_id IN(".$implodeid.") AND is_active=0"; 
+		$employee_performance_appraisalssql = "SELECT id, appraisal_id, employee_id, self_total, ro_total,current_status FROM employee_performance_appraisals WHERE company_id='".$get['company_id']."' AND appraisal_id IN(".$implodeid.") AND is_active=0";
 		$employee_performance_appraisalsres = $callConfig->getAllRows($employee_performance_appraisalssql);
 		$employee_performance_appraisals = array();
 		foreach($employee_performance_appraisalsres as $epas){
@@ -1368,16 +1368,16 @@ public function getOrganizationGoals($get){
 		}
 		$return['employee_performance_appraisals'] = $employee_performance_appraisals;
 		/////////////////////////////////////////// Start goals///////////////////////////
-		$goalssql = "SELECT id, goal_name, descriptions, goal_start_date, goal_end_date, shared FROM goals WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$goalssql = "SELECT id, goal_name, descriptions, goal_start_date, goal_end_date, shared FROM goals WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$goalsres = $callConfig->getAllRows($goalssql);
 		$return['goals'] = $goalsres;
 
 		$goalid = array();
 		foreach($goalsres as $go){
-			$goalid[$go->id] =$go->id; 
+			$goalid[$go->id] =$go->id;
 		}
 		$implodegoalid = implode(",", $goalid);
-		$employee_goalssql = "SELECT id, employee_id, goal_id, percentage_of_completion FROM employee_goals WHERE company_id='".$get['company_id']."' AND goal_id IN(".$implodegoalid.") AND is_active=0"; 
+		$employee_goalssql = "SELECT id, employee_id, goal_id, percentage_of_completion FROM employee_goals WHERE company_id='".$get['company_id']."' AND goal_id IN(".$implodegoalid.") AND is_active=0";
 		$employee_goalsres = $callConfig->getAllRows($employee_goalssql);
 		$employee_goals = array();
 		foreach($employee_goalsres as $empg){
@@ -1385,19 +1385,19 @@ public function getOrganizationGoals($get){
 		}
 		$return['all_employee_goals'] = $employee_goals;
 		/////////////////////////////////////////// Start goals///////////////////////////
-		
+
 		/////////////////////////////////////////// Start Feedbacks///////////////////////////
 
-		$feedbackssql = "SELECT id, question, shared, shared_datetime FROM feedbacks WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$feedbackssql = "SELECT id, question, shared, shared_datetime FROM feedbacks WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$feedbacksres = $callConfig->getAllRows($feedbackssql);
 		$return['feedbacks'] = $feedbacksres;
-		
+
 		$feedbackid = array();
 		foreach($feedbacksres as $go){
-			$feedbackid[$go->id] =$go->id; 
+			$feedbackid[$go->id] =$go->id;
 		}
 		$implodefeedbackid = implode(",", $feedbackid);
-		$employee_feedbackssql = "SELECT id, employee_id, feedback_id, response_status, response, response_datetime FROM employee_feedbacks WHERE company_id='".$get['company_id']."' AND feedback_id IN(".$implodefeedbackid.") AND is_active=0"; 
+		$employee_feedbackssql = "SELECT id, employee_id, feedback_id, response_status, response, response_datetime FROM employee_feedbacks WHERE company_id='".$get['company_id']."' AND feedback_id IN(".$implodefeedbackid.") AND is_active=0";
 		$employee_feedbacksres = $callConfig->getAllRows($employee_feedbackssql);
 		$employee_feedbacks = array();
 		foreach($employee_feedbacksres as $empf){
@@ -1408,7 +1408,7 @@ public function getOrganizationGoals($get){
 
 		/////////////////////////////////////////// End Feedbacks///////////////////////////
 
-		$arssql = "SELECT id, score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$arssql = "SELECT id, score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$arsres = $callConfig->getAllRows($arssql);
 		$return['arslabs'] = $arsres;
 
@@ -1423,20 +1423,20 @@ public function getOrganizationGoals($get){
 		$return['total_cnt']  = $cntres;
 		$return['total_cnt_Sql']  = $cntsql;
 
-		$employee_goalssql = "SELECT eg.id, eg.employee_id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."'  AND employee_id = '".$get['employee_id']."' AND eg.is_active = 0 "; 
+		$employee_goalssql = "SELECT eg.id, eg.employee_id, eg.percentage_of_completion, go.goal_name, go.descriptions, go.goal_start_date, go.goal_end_date FROM employee_goals eg, goals go WHERE eg.company_id = '".$get['company_id']."'  AND employee_id = '".$get['employee_id']."' AND eg.is_active = 0 ";
 		$employee_goalsres = $callConfig->getAllRows($employee_goalssql);
 		$return['employee_goals'] = $employee_goalsres;
 
-		$employee_performance_appraisalssql = "SELECT epa.id, epa.start_date, epa.end_date, epa.self_total, epa.ro_total, epa.current_status, pas.performance_appraisal_name FROM employee_performance_appraisals epa, performance_appraisal_setups pas WHERE epa.company_id = '".$get['company_id']."' AND epa.company_id = pas.company_id AND epa.appraisal_id = pas.id  AND epa.employee_id = '".$get['employee_id']."' AND epa.is_active =0 AND epa.is_active = pas.is_active"; 
+		$employee_performance_appraisalssql = "SELECT epa.id, epa.start_date, epa.end_date, epa.self_total, epa.ro_total, epa.current_status, pas.performance_appraisal_name FROM employee_performance_appraisals epa, performance_appraisal_setups pas WHERE epa.company_id = '".$get['company_id']."' AND epa.company_id = pas.company_id AND epa.appraisal_id = pas.id  AND epa.employee_id = '".$get['employee_id']."' AND epa.is_active =0 AND epa.is_active = pas.is_active";
 		$employee_performance_appraisalsews = $callConfig->getAllRows($employee_performance_appraisalssql);
 		$return['employee_performance_appraisals'] = $employee_performance_appraisalsews;
 
-		$employee_feedbackssql = "SELECT ef.id, ef.employee_id, ef.response_datetime,fe.question FROM employee_feedbacks ef, feedbacks fe WHERE ef.company_id = '".$get['company_id']."'  AND ef.company_id = fe.company_id AND ef.feedback_id = fe.id AND ef.employee_id = '".$get['employee_id']."' AND ef.is_active = 0 AND ef.is_active = fe.is_active"; 
+		$employee_feedbackssql = "SELECT ef.id, ef.employee_id, ef.response_datetime,fe.question FROM employee_feedbacks ef, feedbacks fe WHERE ef.company_id = '".$get['company_id']."'  AND ef.company_id = fe.company_id AND ef.feedback_id = fe.id AND ef.employee_id = '".$get['employee_id']."' AND ef.is_active = 0 AND ef.is_active = fe.is_active";
 		$employee_feedbacksres = $callConfig->getAllRows($employee_feedbackssql);
 		$return['employee_feedbacks'] = $employee_feedbacksres;
 
 
-		$arssql = "SELECT id, score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$arssql = "SELECT id, score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$arsres = $callConfig->getAllRows($arssql);
 		$return['arslabs'] = $arsres;
 
@@ -1445,7 +1445,7 @@ public function getOrganizationGoals($get){
 	public function getEmployeeFeedBacks($get){
 		global $callConfig;
 		$return = array();
-		$employee_feedbackssql = "SELECT fe.question, fe.description, fe.answer_type, fe.feedback_type, fe.action_frequency, fe.question_options, fe.max_ratting, ef.id, ef.response, ef.response_datetime FROM employee_feedbacks ef, feedbacks fe WHERE ef.company_id = '".$get['company_id']."' AND ef.company_id = fe.company_id AND ef.feedback_id = fe.id AND ef.id = '".$get['rid']."'  AND ef.is_active = 0 AND ef.is_active = fe.is_active"; 
+		$employee_feedbackssql = "SELECT fe.question, fe.description, fe.answer_type, fe.feedback_type, fe.action_frequency, fe.question_options, fe.max_ratting, ef.id, ef.response, ef.response_datetime FROM employee_feedbacks ef, feedbacks fe WHERE ef.company_id = '".$get['company_id']."' AND ef.company_id = fe.company_id AND ef.feedback_id = fe.id AND ef.id = '".$get['rid']."'  AND ef.is_active = 0 AND ef.is_active = fe.is_active";
 		$employee_feedbacksres = $callConfig->getRow($employee_feedbackssql);
 		$return['employee_feedbacks_sql'] = $employee_feedbackssql;
 		$return['employee_feedbacks'] = $employee_feedbacksres;
@@ -1471,24 +1471,24 @@ public function getOrganizationGoals($get){
 			}
 		}
 
-		
-		if($post['submit_btn'] == 'submitnormalizations' || $post['submit_btn'] == 'submitfilter'){ 
+
+		if($post['submit_btn'] == 'submitnormalizations' || $post['submit_btn'] == 'submitfilter'){
 			if($post['appraisal_id'] !=""){
 				$condition .= " AND appraisal_id = '".$post['appraisal_id']."'";
 			}
 			if($post['assessment_year'] !=""){
-				$passql = "SELECT GROUP_CONCAT(id SEPARATOR ',') AS id FROM performance_appraisal_setups WHERE company_id = '".$get['company_id']."' AND publish = 'Y' AND assessment_year = '".$post['assessment_year']."' AND is_active = 0 GROUP BY assessment_year"; 
+				$passql = "SELECT GROUP_CONCAT(id SEPARATOR ',') AS id FROM performance_appraisal_setups WHERE company_id = '".$get['company_id']."' AND publish = 'Y' AND assessment_year = '".$post['assessment_year']."' AND is_active = 0 GROUP BY assessment_year";
 				$pasres = $callConfig->getRow($passql);
 				$condition .= " AND appraisal_id IN(".$pasres->id.")";
-			}	
-			if($post['reports_to'] !=""){ 
-				$application_userssql = "SELECT GROUP_CONCAT(id SEPARATOR ',') AS id  FROM application_users WHERE company_id='".$get['company_id']."' AND reports_to = '".$post['reports_to']."' AND is_active=0 GROUP BY reports_to"; 
+			}
+			if($post['reports_to'] !=""){
+				$application_userssql = "SELECT GROUP_CONCAT(id SEPARATOR ',') AS id  FROM application_users WHERE company_id='".$get['company_id']."' AND reports_to = '".$post['reports_to']."' AND is_active=0 GROUP BY reports_to";
 				$application_usersres = $callConfig->getRow($application_userssql);
 				$emp_condition .= " AND user_id IN(".$application_usersres->id.")";
 			}
 			if($post['location_id'] !=""){
 				$emp_condition .= " AND location_id = '".$post['location_id']."'";
-			} 
+			}
 			if($post['department_id'] !=""){
 				$emp_condition .= " AND department_id = '".$post['department_id']."'";
 			}
@@ -1502,22 +1502,22 @@ public function getOrganizationGoals($get){
 			if($post['joining_date'] !=""){
 				$emp_condition .= " AND joining_date >= '".$this->dateconvertdbformat($post['joining_date'])."'";
 			}
-			$employeesidsql = "SELECT GROUP_CONCAT(id SEPARATOR ',') AS id FROM employees WHERE company_id='".$get['company_id']."' ".$emp_condition." AND is_active=0"; 
+			$employeesidsql = "SELECT GROUP_CONCAT(id SEPARATOR ',') AS id FROM employees WHERE company_id='".$get['company_id']."' ".$emp_condition." AND is_active=0";
 			$return['reports_to'] = $employeesidsql;
 			$employeesids = $callConfig->getRow($employeesidsql);
 			//if(isset($employeesids->id)){
 				$condition = " AND employee_id IN(".$employeesids->id.")";
 			//}
-			$epasql = "SELECT * FROM employee_performance_appraisals WHERE company_id = '".$get['company_id']."' AND normalization_status = '0' ".$condition." AND is_active = 0"; 
+			$epasql = "SELECT * FROM employee_performance_appraisals WHERE company_id = '".$get['company_id']."' AND normalization_status = '0' ".$condition." AND is_active = 0";
 			$epares = $callConfig->getAllRows($epasql);
 			$return['employee_performance_appraisals_sql'] = $epasql;
 			$return['employee_performance_appraisals'] = $epares;
 		}
-		$passql = "SELECT id, performance_appraisal_name, assessment_year, appraisal_bell_curve_id FROM performance_appraisal_setups WHERE company_id = '".$get['company_id']."' AND publish = 'Y' AND is_active = 0"; 
+		$passql = "SELECT id, performance_appraisal_name, assessment_year, appraisal_bell_curve_id FROM performance_appraisal_setups WHERE company_id = '".$get['company_id']."' AND publish = 'Y' AND is_active = 0";
 		$pasres = $callConfig->getAllRows($passql);
 		$return['performance_appraisal_setups'] = $pasres;
 
-		$employeessql = "SELECT id, display_name, image, emp_code FROM employees WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+		$employeessql = "SELECT id, display_name, image, emp_code FROM employees WHERE company_id='".$get['company_id']."' AND is_active=0";
 		$employeesres = $callConfig->getAllRows($employeessql);
 		$employees = array();
 		foreach($employeesres as $empres){
@@ -1525,27 +1525,27 @@ public function getOrganizationGoals($get){
 		}
 		$return['employees'] = $employees;
 
-		$arssql = "SELECT id, score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0"; 
+		$arssql = "SELECT id, score,slabs_name,start_range,end_range,background_color,font_color FROM appraisal_rating_slabs WHERE company_id = '".$get['company_id']."' AND is_active = 0";
 		$arsres = $callConfig->getAllRows($arssql);
 		$return['arslabs'] = $arsres;
 
-		$application_userssql = "SELECT id, display_name FROM application_users WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+		$application_userssql = "SELECT id, display_name FROM application_users WHERE company_id='".$get['company_id']."' AND is_active=0";
 		$application_usersres = $callConfig->getAllRows($application_userssql);
 		$return['application_users'] = $application_usersres;
 
-		$locationssql = "SELECT id, location_name FROM locations WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+		$locationssql = "SELECT id, location_name FROM locations WHERE company_id='".$get['company_id']."' AND is_active=0";
 		$locationsres = $callConfig->getAllRows($locationssql);
 		$return['locations'] = $locationsres;
 
-		$departmentssql = "SELECT id, department_name FROM departments WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+		$departmentssql = "SELECT id, department_name FROM departments WHERE company_id='".$get['company_id']."' AND is_active=0";
 		$departmentsres = $callConfig->getAllRows($departmentssql);
 		$return['departments'] = $departmentsres;
 
-		$job_titlesql = "SELECT id, job_title FROM job_titles WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+		$job_titlesql = "SELECT id, job_title FROM job_titles WHERE company_id='".$get['company_id']."' AND is_active=0";
 		$job_titleres = $callConfig->getAllRows($job_titlesql);
 		$return['job_title'] = $job_titleres;
 
-		$appraisal_bell_curvessql = "SELECT * FROM appraisal_bell_curves WHERE company_id='".$get['company_id']."' AND id = '".$post['appraisal_bell_curve_id']."' AND is_active=0"; 
+		$appraisal_bell_curvessql = "SELECT * FROM appraisal_bell_curves WHERE company_id='".$get['company_id']."' AND id = '".$post['appraisal_bell_curve_id']."' AND is_active=0";
 		$appraisal_bell_curvesres = $callConfig->getRow($appraisal_bell_curvessql);
 		$return['appraisal_bell_curves'] = $appraisal_bell_curvesres;
 
@@ -1557,14 +1557,14 @@ public function getOrganizationGoals($get){
 		$condition = "";
 		$post = array();
 		$return['post'] = $post;
-		$appraisal_rating_slabssql = "SELECT id, slabs_name, background_color, font_color FROM appraisal_rating_slabs WHERE company_id='".$get['company_id']."' AND is_active=0"; 
+		$appraisal_rating_slabssql = "SELECT id, slabs_name, background_color, font_color FROM appraisal_rating_slabs WHERE company_id='".$get['company_id']."' AND is_active=0";
 		$appraisal_rating_slabsres = $callConfig->getAllRows($appraisal_rating_slabssql);
 		$return['appraisal_rating_slabs'] = $appraisal_rating_slabsres;
 
-		$appraisal_bell_curvessql = "SELECT * FROM appraisal_bell_curves WHERE company_id='".$get['company_id']."' AND id = '".$get['rid']."' AND is_active=0"; 
+		$appraisal_bell_curvessql = "SELECT * FROM appraisal_bell_curves WHERE company_id='".$get['company_id']."' AND id = '".$get['rid']."' AND is_active=0";
 		$appraisal_bell_curvesres = $callConfig->getRow($appraisal_bell_curvessql);
 		$return['appraisal_bell_curves'] = $appraisal_bell_curvesres;
-		
+
 		return $return;
 	}
 	public function insertAppraisalBellCurves($get,$post){
@@ -1602,7 +1602,7 @@ public function getOrganizationGoals($get){
 			$insert_array['publish_rank'] = 0;
 		}
 		$insert = $callConfig->updateRecord('employee_performance_appraisals',$insert_array,'id',$post['rid']);
-		
+
 		return $insert;
 	}
 }
