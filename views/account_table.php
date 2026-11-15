@@ -251,7 +251,7 @@ foreach ($cusresponse_dump as $custt) {
         <tr>
             <th scope="col" class="thheader" width="2%">
                 <div class="checkbox-fade fade-in-primary">
-                    <label class="kt-checkbox">
+                    <label aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox">
                         <input id="checkAll" type="checkbox">
                         <span class="cr">
                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -275,7 +275,7 @@ foreach ($cusresponse_dump as $custt) {
                 <tr>
                     <td>
                         <div class="checkbox-fade fade-in-primary ">
-                            <label class="form-label">
+                            <label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="form-label">
                                 <input type="checkbox" class="itemRow" data-rowid="<?php echo $i; ?>">
                                 <span class="cr">
                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
