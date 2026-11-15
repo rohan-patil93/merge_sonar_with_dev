@@ -402,7 +402,7 @@ $due_date_period_list = $result['period_list'];
                 style="display: none" aria-label="Candidate Current Role">
             </div>
             <div class="mb-2 pb-2">
-              <label class="f-w-600 form-label">Department</label>
+              <span class="f-w-600 form-label d-inline-block">Department</span>
               <p class="f-14 mb-0 contact_detailsL">
                 <?php echo $candidates['department_id'] != "" ? $job_titles[$candidates['department_id']] : "N/A"; ?></p>
               <select class="form-select contact_detailsT" data-type="select" id="department_id" name="department_id"
@@ -414,7 +414,7 @@ $due_date_period_list = $result['period_list'];
               </select>
             </div>
             <div class=" mb-2 pb-2">
-              <label class="f-w-600 form-label">Designation</label>
+              <span class="f-w-600 form-label d-inline-block">Designation</span>
               <p class="f-14 mb-0 contact_detailsL">
                 <?php echo $candidates['job_tittle_id'] != "" ? $job_titles[$candidates['job_tittle_id']] : "N/A"; ?></p>
               <select class="form-select  contact_detailsT" data-type="select" id="job_tittle_id" name="job_tittle_id"
@@ -469,7 +469,7 @@ $due_date_period_list = $result['period_list'];
               </select>
             </div>
             <div class="row mb-2 pb-2">
-              <label class="f-w-600 form-label">Recruiter</label>
+              <span class="f-w-600 form-label d-inline-block">Recruiter</span>
               <p class="f-14 mb-0">
                 <?php echo $job_posting_candidates['recruitment_manager'] != "" ? $_SESSION['users'][$job_posting_candidates['recruitment_manager']] : "N/A"; ?>
               </p>
