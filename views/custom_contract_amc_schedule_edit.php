@@ -514,7 +514,7 @@ if ($checklistTotal > 0) {
 
         <div class="contract-amc-tech-panel">
 
-            <label class="contract-amc-info-label mb-2"><?php echo $assigneeLabel; ?></label>
+            <span class="contract-amc-info-label mb-2 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo $assigneeLabel; ?></span>
 
             <?php if ($canExecute) { ?>
 
