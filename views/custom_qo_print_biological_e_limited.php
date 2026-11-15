@@ -12,7 +12,7 @@
                             </p>
                         </td>
                         <td style="width: 40%; border: 1px solid #cccccc; text-align: center; padding: 5px;">
-                            <img src="uploads/all/<?php echo $config['display_logo']; ?>" style="width:80px;">
+                            <img alt="" src="uploads/all/<?php echo $config['display_logo']; ?>" style="width:80px;">
                         </td>
                         <td style="width: 30%;border: 1px solid #cccccc; vertical-align: top; padding: 5px;">
                             <h4 style="font-size: 12px; margin: 0 0 10px 0; font-weight: 600;">PURCHASE ORDER(DOM)</h4>
