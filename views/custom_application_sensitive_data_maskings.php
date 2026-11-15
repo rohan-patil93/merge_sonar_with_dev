@@ -345,7 +345,7 @@ if ($isPolicyActive) {
                                             </td>
                                             <td class="text-center">
                                                 <div class="form-check form-switch d-inline-block">
-                                                    <input class="form-check-input rule-toggle-restricted" type="checkbox" role="switch"
+                                                    <input class="form-check-input rule-toggle-restricted" type="checkbox"
                                                            id="switch_<?php echo $typeKey; ?>"
                                                            name="restrictions[<?php echo $typeKey; ?>][is_restricted]" value="1"
                                                            <?php echo $isRestricted ? 'checked' : ''; ?>
@@ -444,7 +444,7 @@ if ($isPolicyActive) {
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="form-check form-switch d-inline-block">
-                                                                <input class="form-check-input rule-toggle-restricted" type="checkbox" role="switch"
+                                                                <input class="form-check-input rule-toggle-restricted" type="checkbox"
                                                                        name="custom_type_restricted[]" value="1"
                                                                        id="switch_<?php echo $cKey; ?>"
                                                                        <?php echo $cRestricted ? 'checked' : ''; ?>
