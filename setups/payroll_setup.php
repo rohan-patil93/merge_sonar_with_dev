@@ -13,8 +13,6 @@ $locations =  $result['locations'];
 $earnings_componentlist = $result['earnings_componentlist'];
 $deduction_componentlist = $result['deduction_componentlist'];
 $other_earnings_componentlist = $result['other_earnings_componentlist'];
-//echo "nextseqstartnumber - ".$nextseqstartnumber;
-//echo "<pre>"; print_r($result); echo "</pre>";
 ?>
 <script type="text/javascript">
 function  removeslabrows(argument) {
@@ -629,7 +627,7 @@ function addslabrows(){
                     </form>
                     <div class="footer_btn">
                         <button type="button"  class="btn btn-success m-r-50" onclick="nextsetupview(<?php echo $pagedetail[2]['sequence']; ?>)"><i class="ti-arrow-left"></i> Previous Step</button>
-            <!-- <button type="button"  class="btn btn-primary" onclick="nextsetupview(<?php //echo $pagedetail[4]['sequence']; ?>,'<?php //echo $pagedetail['3']['sequence']; ?>')"><i class="ti-arrow-right"></i>  Next Step</button> -->
+            <!-- <button type="button"  class="btn btn-primary" onclick="nextsetupview(<?php ?>,'<?php ?>')"><i class="ti-arrow-right"></i>  Next Step</button> -->
             <button type="button"  class="btn btn-primary "   onclick="nextsetupview('<?php echo $nextseqstartnumber; ?>','<?php echo $pagedetail[3]['sequence']; ?>')"><i class="ti-arrow-right"></i>  <?php echo $nextseqstartnumber !=""?"Next Step":"Finish"; ?></button>
                     </div>
                 </div>
