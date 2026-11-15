@@ -1134,8 +1134,9 @@ class hrUserClass extends userClass{
 
 		$query = 'SELECT * FROM payroll_steps WHERE company_id = '.$get['company_id'].' AND pay_year='.$get['pay_year'].' AND pay_month='.$get['pay_month'].' AND pay_area_id='.$get['pay_area_id'].' AND is_active = 0';
 		$detals['payroll_steps'] = $callConfig->getAllRows($query);
-		$get['type'] = 'earnings';
-		$detals['payroll_update_one_time_earnings'] = $this->togetupdateontimeearinings($get);
+		$getEarnings = $get;
+		$getEarnings['type'] = 'earnings';
+		$detals['payroll_update_one_time_earnings'] = $this->togetupdateontimeearinings($getEarnings);
 		$get['type'] = 'deductions';
 		$detals['payroll_update_one_time_deductions'] =  $this->togetupdateontimeearinings($get);
 		return $detals;
