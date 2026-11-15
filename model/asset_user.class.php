@@ -420,30 +420,6 @@ class assetUserClass extends userClass{
 			//$attributessql = "SELECT id,name FROM asset_attributes WHERE is_active =0 AND company_id = '".$get['company_id']."' AND category_id IN(".$requestres->asset_category_id.")";
 			//$attributesres=$callConfig->getAllRows($attributessql);
 			//$returnresult['attributes'] = $attributesres;
-		}elseif($get['resultgettype'] == 'ASSET_RETURNS'){
-			if($get['admin_type'] !='1'){
-	    		$codition = " AND approval_user_id = '".$get['user_id']."'";
-	    	}
-
-			$assetsql = "SELECT * FROM asset_returns WHERE company_id = '".$get['company_id']."' ".$codition." AND is_active =0 ";
-			$assetsres=$callConfig->getAllRows($assetsql);
-			// foreach($assetsres as $assetct){
-			// 	$asset_returns[$assetct->asset_id] = $assetct;
-			// }
-			$return['asset_returns'] = $assetsres;
-
-
-
-
-			// $asset_requestssql = "SELECT ass.asset_code, ass.asset_description, ass.category_id, aua.id, aua.asset_id, aua.start_date, aua.end_date, aua.current_status FROM user_assets aua , assets ass WHERE aua.company_id = '".$get['company_id']."' AND aua.user_id = '".$get['user_id']."' AND aua.company_id = ass.company_id AND aua.asset_id = ass.id  AND aua.is_active = ass.is_active AND ass.is_active =0";
-			// 	$asset_requestsres=$callConfig->getAllRows($asset_requestssql);
-			// 	$return['user_assets'] = $asset_requestsres;
-			// 	$return['asset_requestssql'] = $asset_requestssql;
-
-
-				
-
-
 		}
 
 		return $return;
