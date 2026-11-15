@@ -647,7 +647,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 <input aria-label="<?= htmlspecialchars(__('From date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="from_date" id="from_date" value="<?php echo $from_date; ?>">
             </div>
             <div class="col-lg-5">
-                <label  class="form-label"><?= __('End Date'); ?></label>
+                <span  class="form-label d-inline-block fw-bold"><?= __('End Date'); ?></span>
                 <input aria-label="<?= htmlspecialchars(__('To date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="to_date" id="to_date" value="<?php echo $to_date; ?>">
             </div>
             <div class="col-lg-2">
