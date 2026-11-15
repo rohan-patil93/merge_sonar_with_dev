@@ -843,7 +843,7 @@ function toggleRowLock(button) {
 					<div class="col-md-11">
 						<div class="media-left">
 							<a href="#" class="profile-image">
-								<img src="<?php echo $image; ?>" class=" img-120 user-img b-radius-10" alt="User-Profile-Image" onerror="this.src='uploads/all/no-image.jpg';">
+								<img src="<?php echo $image; ?>" class=" img-120 user-img b-radius-10" alt="User profile" onerror="this.src='uploads/all/no-image.jpg';">
 							</a>
 						</div>
 						<div class="media-body row">
