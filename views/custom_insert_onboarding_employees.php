@@ -711,7 +711,7 @@ function insertReleive(){
 			 		
 			 		<div class="form-group col-lg-6">
 			 				<label class="form-label"><?php echo __('Relieve Reason'); ?> </label>
-			 				<select class="js-example-basic-single" id="termination_type" name="termination_type"> 
+			 				<select aria-label="<?= htmlspecialchars(__('Termination type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" id="termination_type" name="termination_type"> 
 			 					<option value="0"><?php echo __('Select Any One'); ?></option>
 			 					<?php foreach($result['termination_type'] as $termination_types){ ?>
 			 						<option <?php if($data_termination['termination_type']==$termination_types['genc_detail_code']){ echo __('selected'); } ?> value="<?php echo $termination_types['genc_detail_code']; ?>"><?php echo $termination_types['genc_detail_name']; ?></option>
@@ -721,22 +721,22 @@ function insertReleive(){
 			 			<div class="form-group col-lg-6">
 			 				<label class="form-label"><?php echo __('Resignation Date'); ?> </label>
 			 				<span class="d-block error-message text-danger"></span>
-			 				<input type="text" class="form-control datepicker " id="effective_date" name="effective_date" value="<?php echo fromDate($data_termination['effective_date']); ?>">
+			 				<input aria-label="<?= htmlspecialchars(__('Effective date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker " id="effective_date" name="effective_date" value="<?php echo fromDate($data_termination['effective_date']); ?>">
 			 			</div>
 			 			<div class="form-group col-lg-6">
 			 				<label class="form-label"><?php echo __('Last Working  Date'); ?> </label>
 			 				<span class="d-block error-message text-danger"></span>
-			 				<input type="text" class="form-control datepicker " id="releive_date" name="releive_date" value="<?php echo fromDate($data_termination['releive_date']); ?>">
+			 				<input aria-label="<?= htmlspecialchars(__('Releive date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker " id="releive_date" name="releive_date" value="<?php echo fromDate($data_termination['releive_date']); ?>">
 			 			</div>
 			 			<div class="form-group col-lg-6">
 			 				<label class="form-label"><?php echo __('Settle On Date'); ?> </label>
 			 				<span class="d-block error-message text-danger"></span>
-			 				<input type="text" class="form-control datepicker " id="settle_on" name="settle_on" value="<?php echo fromDate($data_termination['settle_on']); ?>">
+			 				<input aria-label="<?= htmlspecialchars(__('Settle on'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker " id="settle_on" name="settle_on" value="<?php echo fromDate($data_termination['settle_on']); ?>">
 			 			</div>
 			 			<div id="releive_date_error" style="display: none;"> <?php echo __('Please Fill The Releive Date'); ?></div>
 			 			<div class="form-group col-lg-6 ">
 			 				<label><?php echo __('Comments'); ?></label>
-			 				<textarea class="form-control " id="releive_comments" name="releive_comments"><?php echo $data_termination['remarks_by_admin']; ?> </textarea> 
+			 				<textarea aria-label="<?= htmlspecialchars(__('Releive comments'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " id="releive_comments" name="releive_comments"><?php echo $data_termination['remarks_by_admin']; ?> </textarea> 
 			 			</div> 
 			 		</div>
 			 	</div>
@@ -1274,7 +1274,7 @@ function insertReleive(){
 								<div class="card-block text-center">
 									<div data-label="<?php echo initials($reporting_manager['display_name']); ?>" class="radial-bar custom-radial-bar radial-bar-40 radial-bar-lg radial-bar-danger mt-0 mb-2">
 										<?php if($reporting_manager['user_photo']!=""){ ?>
-											<img src="uploads/all/<?php echo $reporting_manager['user_photo']; ?>" >
+											<img alt="" src="uploads/all/<?php echo $reporting_manager['user_photo']; ?>" >
 										<?php } ?>
 									</div>
 									<div class="row">
@@ -1307,7 +1307,7 @@ function insertReleive(){
 									<div class="card-block text-center">
 										<div data-label="<?php echo initials($team['display_name']); ?>" class="radial-bar custom-radial-bar radial-bar-40 radial-bar-lg radial-bar-danger mt-0 mb-2">
 											<?php if($team['user_photo']!=""){ ?>
-												<img src="uploads/all/<?php echo $team['user_photo']; ?>" >
+												<img alt="" src="uploads/all/<?php echo $team['user_photo']; ?>" >
 											<?php } ?>
 
 										</div>
@@ -1319,13 +1319,13 @@ function insertReleive(){
 										<div class="row">
 											<div class="col-6">
 												<div class="s-cont d-inline-block">       
-													<input type="checkbox" class="js-success-sm" <?php if($team['on_off_site']==0){ echo __('checked'); } ?> onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;<label style="font-size: 12px; <?php if($team['on_off_site']==1){ echo __('color: red'); } ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?>"><?php if($team['on_off_site']==1){ echo __('Off-Site'); }else{ echo __('On-Site'); } ?> </label>
+													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-success-sm" <?php if($team['on_off_site']==0){ echo __('checked'); } ?> onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;<label style="font-size: 12px; <?php if($team['on_off_site']==1){ echo __('color: red'); } ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?>"><?php if($team['on_off_site']==1){ echo __('Off-Site'); }else{ echo __('On-Site'); } ?> </label>
 													<input type="hidden" id="onsite_<?php echo $team['id']; ?>" value="<?php echo $team['on_off_site']; ?>">  
 												</div>
 											</div>
 											<div class="col-6 b-l-default">
 												<div class="s-cont d-inline-block">      
-													<input type="checkbox" class="js-primary-sm" <?php if($team['billable']=='0'){ echo __('checked'); } ?> onchange="changebillable(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp; 
+													<input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-primary-sm" <?php if($team['billable']=='0'){ echo __('checked'); } ?> onchange="changebillable(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp; 
 													<label style="font-size: 12px; <?php if($team['billable']=='1'){ echo __('color: red'); } ?>" class="col-form-label billable_lable<?php echo $team['id']; ?>" > <?php if($team['billable']=='1'){ echo __('Non Billable'); }else{ echo __('Billable'); } ?> </label>
 													<input type="hidden" id="billable_<?php echo $team['id']; ?>" value="<?php echo $team['billable']; ?>">  
 												</div>
