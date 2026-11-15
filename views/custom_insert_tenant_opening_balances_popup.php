@@ -151,7 +151,7 @@ function calculateRent(rowid){
 							<?php }  ?>
 							<tr>
 								<th class="p-1"><?php echo __('Total'); ?></th>
-								<th class="p-1 text-right"><?php echo customeummarmonyformateifine($renti['total_amount']); ?></th>
+								<th scope="col" class="p-1 text-right"><?php echo customeummarmonyformateifine($renti['total_amount']); ?></th>
 							</tr>											
 						</tbody>
 					</table>
@@ -182,20 +182,20 @@ function calculateRent(rowid){
 					<th class="p-1">
 						<input type="hidden" name="property_area_name[1][]"  class="form-control" value="<?php echo $property_owner_detail_areas[$prid]['property_area_name'];  ?>">
 						<input type="hidden" name="property_area_id[1][]"  class="form-control" value="<?php echo $prid;  ?>">
-						<input type="number" name="rent[1][]"  class="form-control text-right sumrent_1 checkempty" onblur="calculateRent(1)">
+						<input aria-label="<?= htmlspecialchars(__('Rent'), ENT_QUOTES, 'UTF-8'); ?>" type="number" name="rent[1][]"  class="form-control text-right sumrent_1 checkempty" onblur="calculateRent(1)">
 					</th>
 					<?php } ?>
-					<th class="p-1">
-						<input type="text" name="transaction_date[1]" class="form-control datepicker checkempty" value="">
+					<th scope="col" class="p-1">
+						<input aria-label="<?= htmlspecialchars(__('Transaction date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="transaction_date[1]" class="form-control datepicker checkempty" value="">
 					</th>
-					<th class="p-1">
-						<input type="number" name="total[1]" class="form-control text-right checkempty" id="total_rent_1" value="" readonly="">
+					<th scope="col" class="p-1">
+						<input aria-label="<?= htmlspecialchars(__('Total'), ENT_QUOTES, 'UTF-8'); ?>" type="number" name="total[1]" class="form-control text-right checkempty" id="total_rent_1" value="" readonly="">
 					</th>
-					<th class="p-1">
-						<textarea type="text" name="comment[1]" class="form-control " id="comment"></textarea>
+					<th scope="col" class="p-1">
+						<textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="comment[1]" class="form-control " id="comment"></textarea>
 					</th>
-					<th class="p-1 text-center">
-						<i class="ti-trash text-danger mr-5" onclick="deletRow('removerow_1')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Removed'); ?>"></i>
+					<th scope="col" class="p-1 text-center">
+						<i role="button" tabindex="0" aria-label="<?php echo __('Removed'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger mr-5" onclick="deletRow('removerow_1')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Removed'); ?>"></i>
 					</th>
 				</tr>
 			</tbody>
