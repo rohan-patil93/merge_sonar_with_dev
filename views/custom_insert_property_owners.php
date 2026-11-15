@@ -273,31 +273,31 @@ function addMoreAttachment(rowid){
 					<input aria-label="<?= htmlspecialchars(__('Owner name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-capitalize" name="owner_name" value="<?php echo $property_owners['owner_name']; ?>" required>
 				</div>
         <div class="form-group">
-          <label class="form-label"><?php echo __('Company Name'); ?> <span class="text-danger">*</span></label>
+          <span class="form-label d-inline-block fw-bold"><?php echo __('Company Name'); ?> <span class="text-danger">*</span></span>
           <input aria-label="<?= htmlspecialchars(__('Owner company name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-capitalize" name="owner_company_name" value="<?php echo $property_owners['owner_company_name']; ?>" required>
         </div>
 				<div class="form-group">
-					<label class="form-label"><?php echo __('Address'); ?></label>
+					<span class="form-label d-inline-block fw-bold"><?php echo __('Address'); ?></span>
 					<textarea aria-label="<?= htmlspecialchars(__('Address'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="address" required><?php echo $property_owners['address']; ?></textarea>
 				</div>
         <div class="form-group">
-          <label class="form-label"><?php echo __('Contact Number'); ?></label>
+          <span class="form-label d-inline-block fw-bold"><?php echo __('Contact Number'); ?></span>
           <input aria-label="<?= htmlspecialchars(__('Contact no'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="contact_no" value="<?php echo $property_owners['contact_no']; ?>" >
         </div>
         <div class="form-group">
-          <label class="form-label"><?php echo __('Email Id'); ?></label>
+          <span class="form-label d-inline-block fw-bold"><?php echo __('Email Id'); ?></span>
           <input aria-label="<?= htmlspecialchars(__('Email id'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="email_id" value="<?php echo $property_owners['email_id']; ?>" >
         </div>
 				<div class="form-group">
-					<label class="form-label"><?php echo __('GST No'); ?></label>
+					<span class="form-label d-inline-block fw-bold"><?php echo __('GST No'); ?></span>
 					<input aria-label="<?= htmlspecialchars(__('Gst no'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="gst_no" value="<?php echo $property_owners['gst_no']; ?>" >
 				</div>
         <div class="form-group">
-          <label class="form-label"><?php echo __('PAN No'); ?></label>
+          <span class="form-label d-inline-block fw-bold"><?php echo __('PAN No'); ?></span>
           <input aria-label="<?= htmlspecialchars(__('Pan no'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="pan_no" value="<?php echo $property_owners['pan_no']; ?>" >
         </div>
 				<div class="form-group">
-					<label class="form-label"><?php echo __('Bank Name'); ?></label>
+					<span class="form-label d-inline-block fw-bold"><?php echo __('Bank Name'); ?></span>
 					<select aria-label="<?= htmlspecialchars(__('Bank id'), ENT_QUOTES, 'UTF-8'); ?>" name="bank_id" class="form-control form-select js-example-basic-single">
 						<option value=""><?php echo __('Select Any One'); ?> </option>
 						<?php foreach($banks as $bnk) {  ?>
@@ -306,15 +306,15 @@ function addMoreAttachment(rowid){
 					</select>
 				</div>
         <div class="form-group">
-          <label class="form-label"><?php echo __('IFSC Code'); ?></label>
+          <span class="form-label d-inline-block fw-bold"><?php echo __('IFSC Code'); ?></span>
           <input aria-label="<?= htmlspecialchars(__('Ifsc code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="ifsc_code" value="<?php echo $property_owners['ifsc_code']; ?>">
         </div>
 				<div class="form-group">
-					<label class="form-label"><?php echo __('Bank Account No'); ?></label>
+					<span class="form-label d-inline-block fw-bold"><?php echo __('Bank Account No'); ?></span>
 					<input aria-label="<?= htmlspecialchars(__('Bank account no'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="bank_account_no" value="<?php echo $property_owners['bank_account_no']; ?>">
 				</div>
         <div class="form-group">
-          <label class="form-label"><?php echo __('Account Type'); ?></label>
+          <span class="form-label d-inline-block fw-bold"><?php echo __('Account Type'); ?></span>
           <select aria-label="<?= htmlspecialchars(__('Account type'), ENT_QUOTES, 'UTF-8'); ?>" name="account_type" class="form-control form-select js-example-basic-single">
             <?php foreach($account_types as $bnktkey=>$bnkval) {  ?>
               <option value="<?php echo $bnktkey; ?>" <?php echo $property_owners['account_type'] ==$bnktkey?"selected":""; ?>><?php echo $bnkval;?></option>
@@ -379,7 +379,7 @@ function addMoreAttachment(rowid){
 														</div>
 													</div>
 													<div class="form-group col-lg-12">
-														<label class="form-label"><?php echo __('Sub Property Type'); ?><span class="text-danger">*</span></label>
+														<span class="form-label d-inline-block fw-bold"><?php echo __('Sub Property Type'); ?><span class="text-danger">*</span></span>
 														<select name="property_sub_type[<?php echo $i; ?>]" id="property_sub_type_<?php echo $i; ?>" class="form-control form-select js-example-basic-single" required>
 															<option value=""><?php echo __('Select Any One'); ?> </option>
 															<?php foreach($propertychildtypes[$pod['property_type']] as $pct){?>
@@ -388,19 +388,19 @@ function addMoreAttachment(rowid){
 														</select>
 													</div>
 													<div class="form-group col-lg-12">
-														<label class="form-label"><?php echo __('Property Name'); ?><span class="text-danger">*</span></label>
+														<span class="form-label d-inline-block fw-bold"><?php echo __('Property Name'); ?><span class="text-danger">*</span></span>
 														<input aria-label="<?= htmlspecialchars(__('Property name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-capitalize" name="property_name[<?php echo $i; ?>]" value="<?php echo $pod['property_name']; ?>" required>
 													</div>
 													<div class="form-group col-lg-12">
-														<label class="form-label"><?php echo __('Address'); ?><span class="text-danger">*</span></label>
+														<span class="form-label d-inline-block fw-bold"><?php echo __('Address'); ?><span class="text-danger">*</span></span>
 														<textarea aria-label="<?= htmlspecialchars(__('Property address'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="property_address[<?php echo $i; ?>]" ><?php echo $pod['property_address']; ?></textarea>
 													</div>
 													<div class="form-group col-lg-6">
-														<label class="form-label"><?php echo __('Longitude'); ?> </label>
+														<span class="form-label d-inline-block fw-bold"><?php echo __('Longitude'); ?> </span>
 														<input aria-label="<?= htmlspecialchars(__('Longitude'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="longitude[<?php echo $i; ?>]" value="<?php echo $pod['longitude']; ?>">
 													</div>
 													<div class="form-group col-lg-6">
-														<label class="form-label"><?php echo __('Latitude'); ?></label>
+														<span class="form-label d-inline-block fw-bold"><?php echo __('Latitude'); ?></span>
 														<input aria-label="<?= htmlspecialchars(__('Latitude'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="latitude[<?php echo $i; ?>]" value="<?php echo $pod['latitude']; ?>">
 													</div>
 													<div class="form-group col-lg-12">
@@ -418,7 +418,7 @@ function addMoreAttachment(rowid){
 																<label class="form-label"><?php echo __('File Name'); ?></label>
 															</div>
 															<div class="col-lg-6">
-																<label class="form-label"><?php echo __('Upload File'); ?></label>
+																<span class="form-label d-inline-block fw-bold"><?php echo __('Upload File'); ?></span>
 															</div>
 														</div>
 														<div id="addmoreattachements_id_<?php echo $i; ?>">
@@ -438,10 +438,10 @@ function addMoreAttachment(rowid){
 												</div>
 												<div class="row">
 							                <div class="form-group col-lg-8">
-							                    <label><?php echo __('Join Owners'); ?></label>
+							                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Join Owners'); ?></span>
 							                </div>
 							                <div class="form-group col-lg-3">
-							                    <label><?php echo __('Percentage(%)'); ?><span class="text-danger">*</span></label>
+							                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Percentage(%)'); ?><span class="text-danger">*</span></span>
 							                </div>
 							            </div>
 							            <div id="addmoredivowner_<?php echo $i; ?>"> 
@@ -476,16 +476,16 @@ function addMoreAttachment(rowid){
 											<div class="col-lg-7">
 												<div class="row">
 									                <div class="form-group col-lg-4">
-									                    <label><?php echo __('Property Rental Name'); ?><span class="text-danger">*</span></label>
+									                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Property Rental Name'); ?><span class="text-danger">*</span></span>
 									                </div>
 									                <div class="form-group col-lg-2">
-									                    <label><?php echo __('Area'); ?><span class="text-danger">*</span></label>
+									                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Area'); ?><span class="text-danger">*</span></span>
 									                </div>
 									                <div class="form-group col-lg-3">
-									                    <label><?php echo __('UOM'); ?><span class="text-danger">*</span></label>
+									                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('UOM'); ?><span class="text-danger">*</span></span>
 									                </div>
 									                <div class="form-group col-lg-2">
-									                    <label><?php echo __('Rate'); ?><span class="text-danger">*</span></label>
+									                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Rate'); ?><span class="text-danger">*</span></span>
 									                </div>
 									                <div class="form-group col-lg-1">
 									                </div>
