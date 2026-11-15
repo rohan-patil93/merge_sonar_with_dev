@@ -464,7 +464,6 @@ function addslabrows(){
                         <div class="tab-content mt-5" id="myTabContent">
                               <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
                                 <div class="text-right">
-                                  <!--     <button type="button" onclick="showpopup('Earning','','system_earnings');" class="btn btn-success waves-effect waves-light"><i class="ti-plus"></i> New Earning</button> -->
                                 </div>
                                 <div class="row mt-2">
                                       <div class="col-xl-5">
@@ -520,7 +519,6 @@ function addslabrows(){
                               </div>
                                     <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
                                          <div class="text-right">
-                                          <!--     <button type="button" onclick="showpopup('Deduction','','system_earnings');" class="btn btn-success waves-effect waves-light"><i class="ti-plus "></i> New Deduction</button> -->
                                         </div>
                                         <div class="row mt-2">
                                               <div class="col-xl-5">
@@ -579,9 +577,6 @@ function addslabrows(){
                                         </div>
                                         <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                                          <div class="text-right">
-                                         <!--  <a href="#"onclick="showreimburse('Reimbursement','','system_other_earnings');" class="btn btn-success waves-effect waves-light" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                            <i class="ti-plus"></i> New Reimbursement
-                                          </a> -->
                                         </div>
                                         <div class="row mt-2">
                                           <div class="col-xl-5">
