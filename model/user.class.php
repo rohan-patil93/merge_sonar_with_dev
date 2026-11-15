@@ -1609,7 +1609,7 @@ class userClass{
 		//print_r($fields); exit;
 		return json_encode($fields);	
 	}
-	public function testTableInsert($data, $filename,$get){
+	public function testTableInsert($unusedData, $filename,$get){
 		global $callConfig;
 		$edrdquery=$callConfig->selectQuery('edi_read','*','file_name="'.$filename.'"','','','');
 		//echo $edrdquery; exit;
@@ -5914,7 +5914,7 @@ class userClass{
 		//echo "email send sucess";
 		return $email_data;
 	}
-	public function sendmailwithsmtp($email, $subject, $mesg, $smtp,$data){
+	public function sendmailwithsmtp($email, $subject, $mesg, $unusedSmtp,$data){
 		global $callConfig;
 		//$email = 'rohan.patil@infisuite.com';
 		//$email = 'sourabh.singh@infisuite.com';
@@ -33714,7 +33714,7 @@ $itemref[$vendorsres->account_code][] = $jvary;
 	 	}
 		return $return;
 	}
-	public function generateallsendPDF($get,$post){
+	public function generateallsendPDF($get,$unusedPost){
 		global $callConfig;
 		$return = array();
 		$post = array('rid'=>11,'page'=>'custom_view_candidate_details','file_name'=>'Candidate');
