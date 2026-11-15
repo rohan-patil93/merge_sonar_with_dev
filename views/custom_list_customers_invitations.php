@@ -172,7 +172,7 @@ function listUserType(){
                     <div class="col-auto col-lg-10">
                       <div class="align-middle">
                        <?php if($applicationuser['user_photo'] != "" && $applicationuser['user_activated'] == "Y"){ ?>
-                        <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-30 m-r-15" alt="Customer Photo" onerror="this.src='uploads/all/no-image.jpg';">
+                        <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-30 m-r-15" alt="Customer" onerror="this.src='uploads/all/no-image.jpg';">
                       <?php } else { ?>
                        <span class="img-radius img-50 custom_txt_round  p-2 f-14 m-r-15 text-center bg-white text-mute"><?php echo initials($displayname); ?></span>
                       <?php } ?> 
