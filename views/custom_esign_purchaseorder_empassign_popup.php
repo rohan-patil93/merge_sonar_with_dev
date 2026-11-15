@@ -112,7 +112,7 @@ $job  = $data['job'];
 						</div>
 						<div class="col-lg-6 form-group">
 							<label for="valid_from">Valid From</label>
-							<input type="text" name="valid_from" id="valid_from"  value="<?php echo $data['mpcmain']['effective_from_date'];; ?>" class="form-control datepicker vcs" aria-label="Valid From">
+							<input type="text" name="valid_from" id="valid_from"  value="<?php echo $data['mpcmain']['effective_from_date']; ?>" class="form-control datepicker vcs" aria-label="Valid From">
 
 						</div>
 						<div class="col-lg-6 form-group">

@@ -174,7 +174,7 @@ $res_data = json_decode($res_data, 1);
 							<div class="col-lg-2">
 									<?php $filed_array = array('text' => __('Simple Text'),  'date_pick' => __('Date'), 'date_range' => __('Date Range'), 'select'=> __('List'));
 									 $att_filter_type =$attribute[$keyf]['filter_type'] !='' ? $attribute[$keyf]['filter_type'] : 'text'; ?>
-										<select class="form-control" id="<?php echo $key.".".$field;; ?>" onchange="Getinserttype(this.id,this.value)" name= "type[]" aria-label="<?php echo __('Type'); ?>">
+										<select class="form-control" id="<?php echo $key.".".$field; ?>" onchange="Getinserttype(this.id,this.value)" name= "type[]" aria-label="<?php echo __('Type'); ?>">
 
 											<?php foreach ($filed_array as $typekey => $typevalue) {?>
 												<option value = "<?php echo $typekey; ?>" <?php if($att_filter_type == $typekey) { ?> selected <?php } ?>  ><?php echo htmlspecialchars(__($typevalue ?? '')); ?></option>
