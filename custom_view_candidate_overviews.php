@@ -376,12 +376,12 @@ $due_date_period_list = $result['period_list'];
         <div class="card-header">
           <h5>About</h5>
           <div class="card-header-right">
-            <i class="ti-pencil"
+            <i role="button" tabindex="0" aria-label="Edit" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-pencil"
               onclick="editFormShow('contact_detailsL','contact_detailsT','edit_contact_details','save_contact_details','Edit')"
               id="edit_contact_details" data-bs-toggle="tooltip" data-placement="bottom" title=""
               data-bs-original-title="Edit"></i>
 
-            <i class="ti-back-left" data-bs-toggle="tooltip" id="save_contact_details_undo" data-placement="bottom"
+            <i role="button" tabindex="0" aria-label="Cancel" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-back-left" data-bs-toggle="tooltip" id="save_contact_details_undo" data-placement="bottom"
               title="" data-bs-original-title="Cancel"
               onclick="cancelChange('contact_detailsT','contact_detailsL','save_contact_details','edit_contact_details')"
               style="display: none"></i>
@@ -432,11 +432,11 @@ $due_date_period_list = $result['period_list'];
         <div class="card-header">
           <h5>Key Contacts</h5>
           <div class="card-header-right">
-            <i class="ti-pencil"
+            <i role="button" tabindex="0" aria-label="Edit" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-pencil"
               onclick="editFormShow('personal_detailsL','personal_detailsT','edit_personal_details','save_personal_details','Edit')"
               id="edit_personal_details" data-bs-toggle="tooltip" data-placement="bottom" title=""
               data-bs-original-title="Edit"></i>
-            <i class="ti-back-left" data-bs-toggle="tooltip" id="save_personal_details_undo" data-placement="bottom"
+            <i role="button" tabindex="0" aria-label="Cancel" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-back-left" data-bs-toggle="tooltip" id="save_personal_details_undo" data-placement="bottom"
               title="" data-bs-original-title="Cancel"
               onclick="cancelChange('personal_detailsT','personal_detailsL','save_personal_details','edit_personal_details')"
               style="display: none"></i>
@@ -774,7 +774,7 @@ $due_date_period_list = $result['period_list'];
                                             <div class="card-header">
                                               <h5>Task</h5>
                                               <div class="card-header-right">
-                                                <i class="ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip"
+                                                <i role="button" tabindex="0" aria-label="Closed" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip"
                                                   data-placement="bottom" data-bs-original-title="Closed"></i>
                                               </div>
                                             </div>
