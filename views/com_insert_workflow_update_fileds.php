@@ -143,7 +143,7 @@ for($i=0;$i <= 1;$i++){
 		<div class="form-group row">
 			<div class="col-lg-2 mt-4">Level <span class="badge bg-info "><?php echo $i; ?></span></div>
 			<div class="col-lg-3">
-				<label class="form-label">Status</label>
+				<span class="form-label d-inline-block fw-bold">Status</span>
 				<select class="form-select js-example-basic-single" name="status[]" aria-label="Status">
 				<option value="">Select Any One</option>	
 					<?php foreach($statusrow as $statusrows){ ?>
@@ -152,15 +152,15 @@ for($i=0;$i <= 1;$i++){
 				</select>
 			</div>
 			<div class="col-lg-2">
-				<label class="form-label">Followup Days</label>
+				<span class="form-label d-inline-block fw-bold">Followup Days</span>
 				<input class="form-control"  type="number" name="followup_days[]" value="<?php echo  $updatefields[$mk]['followup_days']; ?>" placeholder="Eg.5" aria-label="Eg.5">
 			</div>
 			<div class="col-lg-2">
-				<label class="form-label">Auto Forward Days</label>
+				<span class="form-label d-inline-block fw-bold">Auto Forward Days</span>
 				<input class="form-control"  type="number" name="auto_forword_days[]" value="<?php echo  $updatefields[$mk]['auto_forword_days']; ?>" placeholder="Eg.2" aria-label="Eg.2">
 			</div>
 			<div class="col-lg-3">
-				<label class="form-label">Work Flow Field</label>
+				<span class="form-label d-inline-block fw-bold">Work Flow Field</span>
 				<select class="form-select js-example-basic-single" name="work_flow_field[]" aria-label="Work Flow Field">
 				<option value="">Select Any One</option>	
 					<?php  foreach($field_list as $ros){  ?>
