@@ -346,22 +346,22 @@ function cancelInvoices(transaction_table,transaction_id){
                                             value="<?= htmlspecialchars($rental_item['originator_state_id']) ?>">
                                         <input type="hidden" id="supplier_state_id"
                                             value="<?= htmlspecialchars($rental_item['supplier_state_id']) ?>">
-                                        <input type="text" id="itemName" class="form-control"
+                                        <input aria-label="<?= htmlspecialchars(__('Item name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="itemName" class="form-control"
                                             placeholder="<?php echo __('Item Name'); ?>" name="item_name[]"
                                             value="<?= htmlspecialchars($rental_item['item_name']) ?>" readonly>
                                     </td>
                                     <td class="w-52 border">
-                                        <input type="text" id="hsntax" name="hsntax[]"
+                                        <input aria-label="<?= htmlspecialchars(__('Hsntax'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="hsntax" name="hsntax[]"
                                             value="HSN - <?= htmlspecialchars($hsnSacCodesData['code'] ?? 'N/A') ?> / Tax - <?= htmlspecialchars($invoiceItemsTaxData['tax_value'] ?? 'N/A') ?>"
                                             class="form-control" placeholder="<?php echo __('Enter HSN TAX'); ?>" readonly>
                                     </td>
                                     <td class="w-28 border text-end">
-                                        <input type="number" id="item_qty" name="item_quantity[]"
+                                        <input aria-label="<?= htmlspecialchars(__('Item quantity'), ENT_QUOTES, 'UTF-8'); ?>" type="number" id="item_qty" name="item_quantity[]"
                                             value="<?= htmlspecialchars($rental_item['item_quantity'] ?? 0) ?>"
                                             class="form-control text-end" placeholder="<?php echo __('Enter QTY'); ?>">
                                     </td>
                                     <td class="w-28 border">
-                                        <select name="purchase_uom[]"  class="form-control js-example-basic-single">
+                                        <select aria-label="<?= htmlspecialchars(__('Purchase uom'), ENT_QUOTES, 'UTF-8'); ?>" name="purchase_uom[]"  class="form-control js-example-basic-single">
                                             <?php foreach ($generalCodeDetailsData as $uom): ?>
                                                 <option value="<?= htmlspecialchars($uom['genc_detail_code']) ?>">
                                                     <?= htmlspecialchars($uom['genc_detail_name']) ?>
@@ -370,17 +370,17 @@ function cancelInvoices(transaction_table,transaction_id){
                                         </select>
                                     </td>
                                     <td class="w-28 border text-end">
-                                        <input type="text" id="item_rate" name="item_price[]"
+                                        <input aria-label="<?= htmlspecialchars(__('Item price'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="item_rate" name="item_price[]"
                                             value="<?= $rental_item['item_price']; ?>"
                                             class="form-control text-end" placeholder="<?php echo __('Enter Rate'); ?>">
                                     </td>
                                     <td class="w-28 border text-end">
                                         <input type="hidden" id="tax_percentage" name="tax_percentage[]" value="<?php echo $tax_row_detail['tax_value']; ?>">
-                                        <input type="text" class="form-control text-end" id="tax_amount" name="tax_amount[]"
+                                        <input aria-label="<?= htmlspecialchars(__('Tax amount'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-end" id="tax_amount" name="tax_amount[]"
                                             value="<?= htmlspecialchars($rental_item['tax_amount'] ?? '') ?>" readonly>
                                     </td>
                                     <td class="w-40 border text-end">
-                                        <input type="text" id="item_amount" name="item_amount[]"
+                                        <input aria-label="<?= htmlspecialchars(__('Item amount'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="item_amount" name="item_amount[]"
                                             value="<?= $rental_item['item_amount'] ?>"
                                             class="form-control text-end" placeholder="<?php echo __('Enter Amount'); ?>" readonly>
                                         
@@ -390,7 +390,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                 </tr>
                                 <tr>
                                     <td class="border border-slate-200">
-                                        <textarea id="itemdescription1" name="description[]" rows="1"
+                                        <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" id="itemdescription1" name="description[]" rows="1"
                                             style="height: 15vh;" class="form-control"
                                             placeholder="<?php echo __('Enter Description'); ?>"><?= htmlspecialchars($rental_item['description'] ?? '') ?></textarea>
                                     </td>
@@ -466,7 +466,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                                     </span>
                                                 </span>
                                             </th>
-                                            <th class="p-2 text-end border">
+                                            <th scope="col" class="p-2 text-end border">
                                                 <span class="tax_amount_display">
                                                     ₹<?= number_format($rental_item['tax_amount'], 2) ?>
                                                 </span>
@@ -486,7 +486,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                                     </span>
                                                 </span>
                                             </th>
-                                            <th class="p-2 text-end border">
+                                            <th scope="col" class="p-2 text-end border">
                                                 <span class="tax_amount_display">
                                                     ₹<?= number_format($rental_item['tax_amount'], 2) ?>
                                                 </span>
@@ -497,7 +497,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                             <th class="text-start p-2 border">
                                                 <span><?php echo __('Total Tax'); ?></span>
                                             </th>
-                                            <th class="p-2 text-end border">
+                                            <th scope="col" class="p-2 text-end border">
                                                 <span class="tax_amount_display_total">
                                                     ₹<?= number_format($rental_item['tax_amount'], 2) ?>
                                                 </span>
@@ -513,7 +513,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                 <th class="text-start p-2 border">
                                     <span><?php echo __('Grand Total'); ?></span>
                                 </th>
-                                <th class="p-2 text-end border">
+                                <th scope="col" class="p-2 text-end border">
                                     <span class="total_amount_display">
                                         ₹<?= number_format($invoiceData['total_amount'], 2) ?>
                                     </span>
@@ -525,7 +525,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                 <th class="text-start p-2 border">
                                     <span><?php echo __('Rounding Off'); ?></span>
                                 </th>
-                                <th class="p-2 text-end border">
+                                <th scope="col" class="p-2 text-end border">
                                     <input type="hidden" class="rounding_off" name="rounding_off" value="<?php echo $invoiceData['rounding_off']!=""?$invoiceData['rounding_off']:0; ?>">
                                     <span id="rounding_off">
                                         ₹<?= number_format($invoiceData['rounding_off'], 2) ?>
@@ -540,13 +540,13 @@ function cancelInvoices(transaction_table,transaction_id){
                         <div class="col-lg-4 form-group">
                             <label for="transaction_number" class="inline-block mb-1 f-w-600"><?php echo __('Internal
                                 Note(s)'); ?> </label>
-                            <textarea id="notes" name="notes" rows="4" class="form-control border"
+                            <textarea aria-label="<?= htmlspecialchars(__('Notes'), ENT_QUOTES, 'UTF-8'); ?>" id="notes" name="notes" rows="4" class="form-control border"
                                 placeholder="<?php echo __('Enter Description'); ?>"><?= htmlspecialchars($invoiceData['notes'] ?? '') ?></textarea>
                         </div>
                         <div class="col-lg-4 form-group">
                             <label for="transaction_number" class="inline-block mb-1 f-w-600"><?php echo __('Printing
                                 Note(s)'); ?> </label>
-                            <textarea id="printing_notes" name="printing_notes" rows="4"
+                            <textarea aria-label="<?= htmlspecialchars(__('Printing notes'), ENT_QUOTES, 'UTF-8'); ?>" id="printing_notes" name="printing_notes" rows="4"
                                 class="form-control border"
                                 placeholder="<?php echo __('Enter Description'); ?>"><?= htmlspecialchars($invoiceData['printing_notes'] ?? '') ?></textarea>
                         </div>
