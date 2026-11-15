@@ -274,7 +274,7 @@
 									<div class="kt-todo__toolbar">
 										<div class="kt-todo__actions kt-todo__actions--expanded">
 											<div class="kt-todo__check">
-												<label class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
+												<label aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
 													<input type="checkbox" name="checkall" onclick="checkall()" id="checkall" value="0">
 
 													<span></span>
@@ -301,7 +301,7 @@
 										<div class="kt-todo__item kt-todo__item--unread">
 											<div class="kt-todo__info">
 												<div class="kt-todo__actions">
-													<label class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
+													<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
 														<input type="hidden" id="checked_<?php echo $j; ?>" value="0">
 														<input type="checkbox" onclick="singlecheck(this.id,<?php echo $j; ?>)" id="check_<?php echo $j; ?>"  value="<?php echo  $list['transaction_id']; ?>">
 														<span></span>
