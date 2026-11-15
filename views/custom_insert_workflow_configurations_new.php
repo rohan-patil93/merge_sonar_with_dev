@@ -971,7 +971,7 @@ $stausresult = ViewStatusData();
 							$valuefields = "{[" . $workflowconfiguration['process_name'] . "." . $keyy . "]}";
 							?>
 							<p id="fieldspro_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-							<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+							<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 								onclick="copyfiled('#fieldspro_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 								data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($aray['lable']); ?> <i
 									class="ti-layers"></i></span>
@@ -1000,7 +1000,7 @@ $stausresult = ViewStatusData();
 									$valuefields = "{[application_users." . $keyy . "]}";
 									?>
 									<p id="fieldsappuser_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-									<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+									<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 										onclick="copyfiled('#fieldsappuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 										data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
 											class="ti-layers"></i></span>
@@ -1017,7 +1017,7 @@ $stausresult = ViewStatusData();
 									$valuefields = "{[employees." . $keyy . "]}";
 									?>
 									<p id="fieldsemp_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-									<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+									<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 										onclick="copyfiled('#fieldsemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 										data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
 											class="ti-layers"></i></span>
@@ -1049,7 +1049,7 @@ $stausresult = ViewStatusData();
 										$valuefields = "{[session_user." . $keyy . "]}";
 										?>
 										<p id="fieldssesiuser_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-										<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+										<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 											onclick="copyfiled('#fieldssesiuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 											data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
 												class="ti-layers"></i></span>
@@ -1066,7 +1066,7 @@ $stausresult = ViewStatusData();
 										$valuefields = "{[session_employee." . $keyy . "]}";
 										?>
 										<p id="fieldssesiemp_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-										<span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+										<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 											onclick="copyfiled('#fieldssesiemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
 											data-placement="bottom" title="Click Copy To used" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
 												class="ti-layers"></i></span>
