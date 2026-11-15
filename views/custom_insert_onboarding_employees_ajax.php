@@ -873,7 +873,7 @@ $bank_work_flow = "Y";
 	                        <span> <i class="fa fa-camera"></i> <?php echo __('&nbsp; Change Image'); ?></span>
 	                    </label>
 	                    <input type="file" name="profile_image" id="profile_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-	                    <img alt="" src="<?php echo "uploads/all/".$data['image'] ; ?>" id="outputprofile_image" width="200" onerror="this.src='uploads/all/no-image.jpg';"/>
+	                    <img alt="" src="<?php echo "uploads/all/".$data['image'] ; ?>" id="outputprofile_image" width="200" data-onerror-src="uploads/all/no-image.jpg"/>
 	                    <input type="hidden" name="old_profile_image" value="<?php echo $data['image'] ;  ?>">
 	                </div>
 	            </div>
