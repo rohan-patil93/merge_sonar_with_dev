@@ -132,7 +132,7 @@ if ($userData['user_photo'] != '') {
               <!-- Toggle Logo -->
               <div id="logoVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2"><?= __('Toggle Logo') ?></label>
+                  <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Logo') ?></span>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showLogo" name="showLogo" <?php echo $logoOptions['showLogo'] ? 'checked' : ''; ?> title="Showlogo" aria-label="Showlogo">
                     <label class="form-check-label" for="showLogo"><?= __('Show Logo') ?></label>
@@ -1064,7 +1064,7 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Table Header Background -->
                   <div class="mb-1">
-                    <label class="form-label"><?= __('Table Header Background') ?></label>
+                    <span class="form-label d-inline-block fw-bold"><?= __('Table Header Background') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableHeaderbgColor" value="<?php echo $tableOptions['headerBgColor'] ?? '#f0f0f0'; ?>" title="Input" aria-label="Input">
                   </div>
