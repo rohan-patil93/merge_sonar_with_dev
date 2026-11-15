@@ -74,7 +74,7 @@ $grand_total_unspent  = 0;
                 <div class="row mb-3">
                     <div class="col-md-3">
                         <label><b><?= __('Financial Year') ?></b></label>
-                        <select name="year" id="csrProjectSummaryYearSelect" class="form-control js-example-basic-single">
+                        <select aria-label="<?= htmlspecialchars(__('Year'), ENT_QUOTES, 'UTF-8'); ?>" name="year" id="csrProjectSummaryYearSelect" class="form-control js-example-basic-single">
                             <?php if (count((array)$financial_years) > 0) {
                                 foreach ($financial_years as $fyRow) {
                                     $fyCode = is_array($fyRow) ? ($fyRow['genc_detail_code'] ?? '') : ($fyRow->genc_detail_code ?? '');
