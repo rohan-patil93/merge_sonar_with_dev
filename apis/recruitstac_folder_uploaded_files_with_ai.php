@@ -1,6 +1,6 @@
 <?php
-include_once('../dbconfig.php');
-include_once('../comm.php');
+include_once '../dbconfig.php';
+include_once '../comm.php';
 $transaction_table = $_POST['transaction_table'];
 $transaction_id = '';
 $data1["where"] = array('company_id'=> $_POST['company_id'],'api_code'=>'CANDIDATEFOLDERSCANOCR','is_active'=>'0');

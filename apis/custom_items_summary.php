@@ -1,8 +1,8 @@
 <?php
 if($_GET['refresh'] == "Y"){
-	include_once('../includes/session.php');
-	include_once('../dbconfig.php');
-	include_once('../comm.php');
+	include_once '../includes/session.php';
+	include_once '../dbconfig.php';
+	include_once '../comm.php';
 }
 $itsum_company_id = $_GET['company_id'];
 $itsum_data_name = $_GET['data_name'];

@@ -10,8 +10,8 @@ $urlrefkey = $_GET['refkey'];
 $explodeurl = explode("?action=",$urlrefkey);
 if($explodeurl[1] == 'liveness-success'){
 	session_start();
-	include_once('../dbconfig.php');
-	include_once('../comm.php');
+	include_once '../dbconfig.php';
+	include_once '../comm.php';
 	if(file_exists($logFile)){
 		$logContent = file_get_contents($logFile);
 		$logContent = str_replace("null","",$logContent);
@@ -29,8 +29,8 @@ if($explodeurl[1] == 'liveness-success'){
 	}
 }else{
 	session_start();
-	include_once('../dbconfig.php');
-	include_once('../comm.php');
+	include_once '../dbconfig.php';
+	include_once '../comm.php';
 	$user_reference_id = $explodeurl[0];
 	$decoderefkey = decodeString($user_reference_id);
 	$explodekey = explode("-",$decoderefkey);
