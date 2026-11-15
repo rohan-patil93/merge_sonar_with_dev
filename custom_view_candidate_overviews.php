@@ -394,7 +394,7 @@ $due_date_period_list = $result['period_list'];
         <div class="card-block">
           <form id="contactdetailsfrom">
             <div class="mb-2 pb-2">
-              <label class="f-w-600 form-label">Job Role</label>
+              <span class="f-w-600 form-label d-inline-block">Job Role</span>
               <p class="f-14 mb-0 contact_detailsL">
                 <?php echo $candidates['candidate_current_role'] != "" ? $candidates['candidate_current_role'] : "N/A"; ?></p>
               <input class="form-control contact_detailsT" data-type="text" type="text" id="candidate_current_role"
@@ -451,13 +451,13 @@ $due_date_period_list = $result['period_list'];
         <div class="card-block">
           <form id="personaldetailsfrom">
             <div class="row mb-2 pb-2">
-              <label class="f-w-600 form-label">Manager</label>
+              <span class="f-w-600 form-label d-inline-block">Manager</span>
               <p class="f-14 mb-0">
                 <?php echo $job_posting_candidates['requested_by'] != "" ? $_SESSION['users'][$job_posting_candidates['requested_by']] : "N/A"; ?>
               </p>
             </div>
             <div class=" mb-2 pb-2">
-              <label class="f-w-600 form-label">HR Manager</label>
+              <span class="f-w-600 form-label d-inline-block">HR Manager</span>
               <p class="f-14 mb-0 personal_detailsL">
                 <?php echo $candidates['hr_connect'] != "" ? $_SESSION['users'][$candidates['hr_connect']] : "N/A"; ?></p>
               <select class="form-select  personal_detailsT" data-type="select" id="hr_connect" name="hr_connect"
