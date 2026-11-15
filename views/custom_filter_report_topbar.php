@@ -8,14 +8,14 @@ $apires = callAPI($url);
           <div class="col-lg-2">
             <div class="form-group">
               <div class=" date">
-                <input type="text" class="form-control datepicker"  name="fromdate"  value="<?php echo fromDate($fromdate); ?>" />                  
+                <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker"  name="fromdate"  value="<?php echo fromDate($fromdate); ?>" />                  
                 <span class="text-danger submiteddateerrer"></span>
               </div>
             </div>
           </div>
           <div class="col-lg-2">
             <div class=" date">
-              <input type="text" class="form-control datepicker"  name="todate"  value="<?php echo fromDate($todate); ?>" />                  
+              <input aria-label="<?= htmlspecialchars(__('Todate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker"  name="todate"  value="<?php echo fromDate($todate); ?>" />                  
               <span class="text-danger submiteddateerrer"></span>
             </div>
           </div>
