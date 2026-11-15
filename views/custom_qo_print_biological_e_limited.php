@@ -56,7 +56,7 @@
                         </p>
                     </td>
                     <td style="padding: 0 !important; vertical-align: top;">
-                        <table style="width: 100%;">
+                        <table role="presentation" style="width: 100%;">
                             <tr>
                                 <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">Your Reference</td>
                                 <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
