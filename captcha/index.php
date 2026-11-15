@@ -15,7 +15,7 @@
 			<h5>Default user</h5>
 			<h5>Username: admin</h5>
 			<h5>Password: admin</h5>
-		</div>	
+		</div>
 		<div class="col-md-6">
 			<form action="" method="POST">
 				<div class="form-group">
@@ -36,7 +36,7 @@
 				<?php include_once 'login.php'?>
 				<div class="text-center"><button name="login" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> login</button></div>
 			</form>
-		</div>	
+		</div>
 	</div>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <?php
 	session_start();
-	
+
 	$random = random_int(1, 9).random_int(1, 9).random_int(1, 9).random_int(1, 9);
-	
+
 	$_SESSION['captcha'] = $random;
-	
+
 	$captcha = imagecreatefromjpeg("images/captcha.jpg");
 	$color = imagecolorallocate($captcha, 0, 0, 0);
 	$font = realpath('code.otf');

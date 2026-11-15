@@ -3,7 +3,7 @@
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		$captcha = $_POST['captcha'];
-		
+
 		if($username == "admin" && $password == "admin"){
 			if($_SESSION['captcha'] == $captcha){
 				echo "<div class='text-center'><span class='text-success'>Login successfully</span></div>";
