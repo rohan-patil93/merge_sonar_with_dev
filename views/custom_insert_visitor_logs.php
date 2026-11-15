@@ -2433,7 +2433,7 @@ if ($printMode && $printRid) {
                     <div class="print-badge-body">
                         <div class="print-badge-photo-area">
                             <?php if (!empty($prImage)): ?>
-                                <img src="uploads/visitors/<?= htmlspecialchars($prImage) ?>" alt="Visitor Photo">
+                                <img src="uploads/visitors/<?= htmlspecialchars($prImage) ?>" alt="Visitor">
                             <?php else: ?>
                                 <div class="print-badge-photo-placeholder">
                                     <i class="fa fa-user"></i>
