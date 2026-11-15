@@ -772,7 +772,7 @@ $stausresult = ViewStatusData();
 								foreach ($criteria as $criterias) { ?>
 									<div class="form-group col-lg-4" id="deletdiv_<?php echo $j; ?>">
 										<label class="form-label">Criteria-<?php echo $j; ?> </label>
-										<span class="float-right"><i class="ti-close text-danger f-12"
+										<span class="float-right"><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Deletecriteria'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-close text-danger f-12"
 												onclick="deletecriteria('deletdiv_<?php echo $j; ?>')"></i></span>
 										<div <?php echo $criterias != "-1" ? 'style="pointer-events: none; opacity: 0.6;"' : ""; ?>>
 											<select class="form-select js-example-basic-single selectcriteria"
