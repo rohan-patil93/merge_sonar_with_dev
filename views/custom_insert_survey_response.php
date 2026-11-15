@@ -271,7 +271,7 @@ function submitsurvey(){
       <div class="row q-sec">  
         <div class="col-md-5">
           <div class="q-img">
-            <img src="assets/media/books/img-72.jpg" class="w-100">
+            <img alt="" src="assets/media/books/img-72.jpg" class="w-100">
           </div>    
         </div>  
         <input type="hidden" name="emp_id" value="<?php echo $_SESSION['emp_id'];?>">
@@ -311,7 +311,7 @@ function submitsurvey(){
                   }
                   ?>
                   <b> <div class="<?php echo $option_cat;?>-group required">
-                    <input type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
+                    <input aria-label="<?= htmlspecialchars(__('Response option'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> <?php echo in_array($option,(array)$selectedoption )==1 ?  'Checked': '';?> >
                     <label for="q1"><?php echo $option; ?> </label> </div>
                   </b>
                 <?php }
