@@ -891,9 +891,11 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
         if(in_array('19',(array)$_SESSION['module_list'])){
         if(in_array('4',(array)$_SESSION['role_ids'])){
             $ttimesheet = "COM_BULK_HR_PROJECT_TIMESHEET";
-            }if(in_array('7',(array)$_SESSION['role_ids'])){
+            }
+            if(in_array('7',(array)$_SESSION['role_ids'])){
             $ttimesheet = "COM_BULK_FINANCE_PROJECT_TIMESHEET";
-        }if(in_array('3',(array)$_SESSION['role_ids'])){
+        }
+        if(in_array('3',(array)$_SESSION['role_ids'])){
             $ttimesheet = "COM_BULK_PROJECT_TIMESHEET";
         }
         }
