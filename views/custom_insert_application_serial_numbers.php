@@ -254,7 +254,7 @@ function formSubmitBTN(){
     </div>
 	<div class="card-body">
 		<div class="form-group col-lg-6">
-			<label class="form-label"><?= __('Process Name') ?></label>
+			<span class="form-label d-inline-block fw-bold"><?= __('Process Name') ?></span>
 			<select aria-label="<?= htmlspecialchars(__('Process name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="process_name" id="process_name" onchange="selectProcessName(this.value)">
 				<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach($dynamic_mapping_tables as $process){ ?>
