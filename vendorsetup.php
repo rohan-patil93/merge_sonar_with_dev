@@ -1024,7 +1024,7 @@ if($register_data['current_status'] !=""){
 </div> </div>
 
 <div class="form-group col-lg-12">
-  <label>Shipping Address</label>
+  <span class="d-inline-block fw-bold" style="margin-bottom:5px">Shipping Address</span>
   <textarea type="text" class="form-control" name="shipping_address" id="shipping_address" title="Shipping Address" aria-label="Shipping Address"><?php echo $register_data['shipping_address'];?></textarea>
 </div>
 
