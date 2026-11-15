@@ -297,17 +297,20 @@ function save_statuse_bilable_onsite(){
                                              <th scope="row"><?= __('Employee Code') ?></th>
                                              <td><?php echo emptytextdashShow($data['emp_code']); ?></td>
                                           </tr>
-                                        <?php  }if($fieldaccesright['field']['middle_name']!="NA"){ ?>
+                                        <?php  }
+                                        if($fieldaccesright['field']['middle_name']!="NA"){ ?>
                                           <tr>
                                              <th scope="row"><?= __('Middle Name') ?></th>
                                              <td><?php echo emptytextdashShow($data['middle_name']); ?></td>
                                           </tr>
-                                          <?php }if($fieldaccesright['field']['phone']!="NA"){ ?>
+                                          <?php }
+                                          if($fieldaccesright['field']['phone']!="NA"){ ?>
                                           <tr>
                                              <th scope="row"><?= __('Contact') ?></th>
                                              <td><?php echo emptytextdashShow($data['phone']); ?></td>
                                           </tr>
-                                          <?php }if($fieldaccesright['field']['address']!="NA"){ ?>
+                                          <?php }
+                                          if($fieldaccesright['field']['address']!="NA"){ ?>
                                           <tr>
                                              <th scope="row"><?= __('Permanent Address') ?></th>
                                              <td class="address-basic" style="line-height:normal;"><?php echo emptytextdashShow($data['address']); ?></td>
@@ -332,22 +335,26 @@ function save_statuse_bilable_onsite(){
                                              <th scope="row"><?= __('First Name') ?></th>
                                              <td><?php echo emptytextdashShow($data['first_name']); ?></td>
                                           </tr>
-                                        <?php }if($fieldaccesright['field']['last_name']!="NA"){  ?>
+                                        <?php }
+                                        if($fieldaccesright['field']['last_name']!="NA"){  ?>
                                           <tr>
                                              <th scope="row"><?= __('Last Name') ?></th>
                                              <td><?php echo emptytextdashShow($data['last_name']); ?></td>
                                           </tr>
-                                           <?php }if($fieldaccesright['field']['email_id']!="NA"){  ?>
+                                           <?php }
+                                           if($fieldaccesright['field']['email_id']!="NA"){  ?>
                                           <tr>
                                              <th scope="row"><?= __('Email') ?></th>
                                              <td><?php echo emptytextdashShow($data['email_id']); ?></td>
                                           </tr>
-                                           <?php }if($fieldaccesright['field']['post_code']!="NA"){  ?>
+                                           <?php }
+                                           if($fieldaccesright['field']['post_code']!="NA"){  ?>
                                           <tr>
                                              <th scope="row"><?= __('Postcode') ?></th>
                                              <td><?php echo emptytextdashShow($data['post_code']); ?></td>
                                           </tr>
-                                           <?php }if($fieldaccesright['field']['fax']!="NA"){  ?>
+                                           <?php }
+                                           if($fieldaccesright['field']['fax']!="NA"){  ?>
                                           <tr>
                                              <th scope="row"><?= __('Fax') ?></th>
                                              <td><?php echo emptytextdashShow($data['fax']); ?></td>
@@ -386,7 +393,8 @@ function save_statuse_bilable_onsite(){
                                                       <td><?php echo emptytextdashShow($department[$data['department_id']]); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['designation_id']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['designation_id']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Designation') ?></th>
                                                       <td>
@@ -397,7 +405,8 @@ function save_statuse_bilable_onsite(){
                                                          <?php echo emptytextdashShow($designation[$data['designation_id']]);?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['band_id']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['band_id']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Band') ?></th>
                                                       <td>
@@ -406,7 +415,8 @@ function save_statuse_bilable_onsite(){
 } echo emptytextdashShow($bandval); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['location_id']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['location_id']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Work Location') ?></th>
                                                       <td>
@@ -415,30 +425,35 @@ function save_statuse_bilable_onsite(){
 } echo emptytextdashShow($worklocaton); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['office_phone']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['office_phone']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Office Phone') ?></th>
                                                       <td>
                                                          <?php echo emptytextdashShow($data['office_phone']); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['hiring_source']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['hiring_source']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Hiring Source') ?></th>
                                                       <td><?php echo emptytextdashShow($data['hiring_source']); ?></td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['total_experiance']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['total_experiance']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Total Experience') ?></th>
                                                       <td><?php echo emptytextdashShow($data['total_experiance']); ?> - Year(s)</td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['relevant_experience']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['relevant_experience']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Relevant Experience') ?></th>
                                                       <td><?php echo emptytextdashShow($data['relevant_experience']); ?> - Year(s)</td>
                                                    </tr>
 
-                                                   <?php }if($fieldaccesright['field']['employee_type']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['employee_type']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Employment Type') ?></th>
                                                       <td>
@@ -460,7 +475,8 @@ function save_statuse_bilable_onsite(){
                                                          </div>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['billable']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['billable']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Billable') ?></th>
                                                       <td>
@@ -500,7 +516,8 @@ function save_statuse_bilable_onsite(){
 } echo emptytextdashShow($vertical); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['role_id']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['role_id']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Role') ?></th>
                                                       <td>
@@ -509,14 +526,16 @@ function save_statuse_bilable_onsite(){
 } echo emptytextdashShow($employment_role); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['level_id']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['level_id']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Level') ?></th>
                                                       <td><?php $employment_level="";  foreach ($empdata['employment_levels'] as $employment_levels) {   if($data['level_id'] == $employment_levels['id']){  $employment_level = $employment_levels['level_name'];
 }
 }  echo emptytextdashShow($employment_level); ?></td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['seat_location']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['seat_location']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Seat Location') ?></th>
                                                       <td>
@@ -525,33 +544,38 @@ function save_statuse_bilable_onsite(){
 } echo emptytextdashShow($location); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['office_ext']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['office_ext']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Extension') ?></th>
                                                       <td>
                                                          <?php echo emptytextdashShow($data['office_ext']); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['joining_date']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['joining_date']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Date of Joining') ?></th>
                                                       <td><?php $date_pic = $data['joining_date'] !='0000-00-00'?$data['joining_date']:nowDate(); echo dateFormate($date_pic); ?></td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['experience_current_organization']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['experience_current_organization']!="NA"){  ?>
                                                    <tr>
                                                       <th class="" scope="row"><?= __('Exp in') ?></th>
                                                       <td>
                                                          <?php echo $data['experience_current_organization'] !=""?$data['experience_current_organization']." - Year(s)":" - "; ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['notice_period']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['notice_period']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Notice Period') ?></th>
                                                       <td>
                                                          <?php echo $data['notice_period'] !=""?$data['notice_period']."- Day(s)":" - "; ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['reporting_manager_id']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['reporting_manager_id']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Repoting to') ?></th>
                                                       <td>
@@ -588,14 +612,16 @@ function save_statuse_bilable_onsite(){
                                                          <?php  echo dateFormate($data['date_of_birth']); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['marital_status']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['marital_status']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Marital Status') ?></th>
                                                       <td>
                                                        <?php echo emptytextdashShow($marital_statuses[$data['marital_status']]); ?>
                                                       </td>
                                                   </tr>
-                                                  <?php }if($fieldaccesright['field']['gender']!="NA"){  ?>
+                                                  <?php }
+                                                  if($fieldaccesright['field']['gender']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Gender') ?></th>
                                                       <td>
@@ -610,7 +636,8 @@ function save_statuse_bilable_onsite(){
                                                         ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['soc_facebook']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['soc_facebook']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Facebook Link') ?></th>
                                                       <td>
@@ -635,7 +662,8 @@ function save_statuse_bilable_onsite(){
                                                          <?php echo floor($diff / (365*60*60*24)); ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['blood_group']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['blood_group']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Blood Group') ?></th>
                                                       <td>
@@ -644,14 +672,16 @@ function save_statuse_bilable_onsite(){
                                                                 <?php echo $bloodgroups[$data['blood_group']]!=""?$bloodgroups[$data['blood_group']]:"-";?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['soc_linkedin']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['soc_linkedin']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Linkedin Link') ?></th>
                                                       <td>
                                                          <?php  echo emptytextdashShow($data['soc_linkedin']);  ?>
                                                       </td>
                                                    </tr>
-                                                   <?php }if($fieldaccesright['field']['soc_twitter']!="NA"){  ?>
+                                                   <?php }
+                                                   if($fieldaccesright['field']['soc_twitter']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Twitter Link') ?></th>
                                                       <td>
@@ -738,7 +768,8 @@ function save_statuse_bilable_onsite(){
                                                 <input aria-label="Input field" type="text" name="" disabled class="form-control" value="<?php echo ""; ?>" disabled>
                                              </td>
                                           </tr>
-                                          <?php }if($fieldaccesright['field']['passport']!="NA"){  ?>
+                                          <?php }
+                                          if($fieldaccesright['field']['passport']!="NA"){  ?>
                                           <tr>
                                              <td scope="row">2</td>
                                              <td>
@@ -752,7 +783,8 @@ function save_statuse_bilable_onsite(){
                                                 <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['passport_expiry_date']!="0000-00-00"?$data['passport_expiry_date']:""; ?>" disabled>
                                              </td>
                                           </tr>
-                                         <?php }if($fieldaccesright['field']['driving_licence']!="NA"){  ?>
+                                         <?php }
+                                         if($fieldaccesright['field']['driving_licence']!="NA"){  ?>
                                           <tr>
                                              <td scope="row">3</td>
                                              <td>
@@ -766,7 +798,8 @@ function save_statuse_bilable_onsite(){
                                                 <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['driving_licence_expiry_date']!="0000-00-00"?$data['driving_licence_expiry_date']:""; ?>" disabled>
                                              </td>
                                           </tr>
-                                          <?php }if($fieldaccesright['field']['pan_number']!="NA"){  ?>
+                                          <?php }
+                                          if($fieldaccesright['field']['pan_number']!="NA"){  ?>
                                           <tr>
                                              <td scope="row">4</td>
                                              <td>
@@ -780,7 +813,8 @@ function save_statuse_bilable_onsite(){
                                                 <input aria-label="Input field" type="text"  disabled name="" class="form-control" disabled>
                                              </td>
                                           </tr>
-                                          <?php }if($fieldaccesright['field']['pf_no']!="NA"){  ?>
+                                          <?php }
+                                          if($fieldaccesright['field']['pf_no']!="NA"){  ?>
                                           <tr>
                                              <td scope="row">5</td>
                                              <td>
@@ -794,7 +828,8 @@ function save_statuse_bilable_onsite(){
                                                 <input aria-label="Input field" type="text" disabled name="" class="form-control" disabled>
                                              </td>
                                           </tr>
-                                          <?php }if($fieldaccesright['field']['pf_uan']!="NA"){  ?>
+                                          <?php }
+                                          if($fieldaccesright['field']['pf_uan']!="NA"){  ?>
                                            <tr>
                                              <td scope="row">6</td>
                                              <td>
@@ -871,7 +906,8 @@ function save_statuse_bilable_onsite(){
 
 
                         </div>
-                        <?php }if(count((array)$teams['teams']) !=0){ ?>
+                        <?php }
+                        if(count((array)$teams['teams']) !=0){ ?>
                         <div class="mt-10">
                           <h4 class="f-w-700 mb-2">Teams</h4>
 

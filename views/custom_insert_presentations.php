@@ -179,7 +179,8 @@ if(isset($_GET['PID'] )) {
                                     foreach ($data_presentation_pages as $pages) { ?>
                                         <option <?php if($pages['id'] == $_GET['PAGEID'] ){ echo __('selected');
 } ?> value="<?php echo $pages['id']; ?>"><?php echo $pages['header_name']; ?> </option>
-                                    <?php } if($_GET['PID']!=""){ ?>
+                                    <?php }
+                                    if($_GET['PID']!=""){ ?>
 
                                         <option value="add"><?php echo __('Add New'); ?></option>
                                     <?php } ?>

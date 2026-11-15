@@ -17,7 +17,8 @@ if ($_POST['submit']) {
         $url = API . "?mode=adddata&table=" . $table_name . "&method=post";
         $response = file_post_contents($url, $_POST, 'insert');
         $response = json_decode($response, 1);
-    }if ($_POST['submit'] == 'update') {
+    }
+    if ($_POST['submit'] == 'update') {
         unset($_POST['submit']);
         $rid = $_POST['rid'];
         unset($_POST['rid']);

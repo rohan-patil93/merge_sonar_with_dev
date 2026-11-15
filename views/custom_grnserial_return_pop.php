@@ -241,7 +241,8 @@ if($item_daata['tracking_type'] == 2){
 						</div>
 					<?php $i++; } ?>
 				</div>
-				<?php }if($item_daata['tracking_type'] == 2){ ?>
+				<?php }
+				if($item_daata['tracking_type'] == 2){ ?>
 				<div id='append_statick'>
 				<div class="row align-items-center" style="margin-top: 10px;">
 					<div class="col-lg-3">

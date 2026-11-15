@@ -23,7 +23,8 @@ function mfg_wos_csv_safe($value){ return str_replace(',', ' ', (string)($value 
 <?php foreach($rows as $row){
     $csvdata[] = array('WO No' => mfg_wos_csv_safe($row['transaction_no'] ?? '-'), 'Date' => mfg_wos_csv_safe(mfg_wos_date($row['transaction_date'] ?? '')), 'Product' => mfg_wos_csv_safe($row['product_name'] ?? '-'), 'Planned Qty' => mfg_wos_csv_safe($row['planned_qty'] ?? 0), 'Completed Qty' => mfg_wos_csv_safe($row['completed_qty'] ?? 0), 'Progress' => mfg_wos_csv_safe(($row['progress_percent'] ?? 0) . '%'), 'Status' => mfg_wos_csv_safe($row['status_name'] ?: 'Unknown'), 'Actual Start' => mfg_wos_csv_safe(mfg_wos_date($row['actual_start_date'] ?? '')), 'Actual End' => mfg_wos_csv_safe(mfg_wos_date($row['actual_end_date'] ?? '')), 'data' => array());
 ?><tr><td><?php echo htmlspecialchars($row['transaction_no']); ?></td><td><?php echo mfg_wos_date($row['transaction_date']); ?></td><td><?php echo htmlspecialchars($row['product_name']); ?></td><td><?php echo htmlspecialchars($row['planned_qty']); ?></td><td><?php echo htmlspecialchars($row['completed_qty']); ?></td><td><?php echo htmlspecialchars($row['progress_percent']); ?>%</td><td><?php echo mfg_wos_badge($row); ?></td><td><?php echo mfg_wos_date($row['actual_start_date']); ?></td><td><?php echo mfg_wos_date($row['actual_end_date']); ?></td></tr><?php
-} if(count((array)$rows)==0){ ?><tr><td colspan="9" class="text-center text-muted"><?= __('No report data found.'); ?></td></tr><?php
+}
+if(count((array)$rows)==0){ ?><tr><td colspan="9" class="text-center text-muted"><?= __('No report data found.'); ?></td></tr><?php
 } ?>
 <?php $_SESSION['download_data'] = $csvdata; ?>
 </table></div></div></div></div>

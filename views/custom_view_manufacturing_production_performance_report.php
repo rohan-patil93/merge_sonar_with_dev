@@ -21,7 +21,8 @@ function mfg_pp_csv_safe($value){ return str_replace(',', ' ', (string)($value ?
 <?php foreach($rows as $row){
     $csvdata[] = array('Production Note' => mfg_pp_csv_safe($row['production_note_no'] ?? '-'), 'Date' => mfg_pp_csv_safe(mfg_pp_date($row['transaction_date'] ?? '')), 'Month' => mfg_pp_csv_safe($row['production_month'] ?? '-'), 'WO No' => mfg_pp_csv_safe($row['work_order_no'] ?? '-'), 'Product' => mfg_pp_csv_safe($row['product_name'] ?? '-'), 'Requested Qty' => mfg_pp_csv_safe($row['planned_qty'] ?? 0), 'Produced Qty' => mfg_pp_csv_safe($row['produced_qty'] ?? 0), 'Wastage Qty' => mfg_pp_csv_safe($row['wastage_qty'] ?? 0), 'Performance' => mfg_pp_csv_safe(($row['performance_percent'] ?? 0) . '%'), 'Wastage %' => mfg_pp_csv_safe(($row['wastage_percent'] ?? 0) . '%'), 'Status' => mfg_pp_csv_safe($row['status_name'] ?? '-'), 'data' => array());
 ?><tr><td><?php echo htmlspecialchars($row['production_note_no']); ?></td><td><?php echo mfg_pp_date($row['transaction_date']); ?></td><td><?php echo htmlspecialchars($row['production_month']); ?></td><td><?php echo htmlspecialchars($row['work_order_no']); ?></td><td><?php echo htmlspecialchars($row['product_name']); ?></td><td><?php echo htmlspecialchars($row['planned_qty']); ?></td><td><?php echo htmlspecialchars($row['produced_qty']); ?></td><td><?php echo htmlspecialchars($row['wastage_qty']); ?></td><td><?php echo htmlspecialchars($row['performance_percent']); ?>%</td><td><?php echo htmlspecialchars($row['wastage_percent']); ?>%</td><td><?php echo htmlspecialchars($row['status_name']); ?></td></tr><?php
-} if(count((array)$rows)==0){ ?><tr><td colspan="11" class="text-center text-muted"><?= __('No report data found.'); ?></td></tr><?php
+}
+if(count((array)$rows)==0){ ?><tr><td colspan="11" class="text-center text-muted"><?= __('No report data found.'); ?></td></tr><?php
 } ?>
 <?php $_SESSION['download_data'] = $csvdata; ?>
 </table></div></div></div></div>

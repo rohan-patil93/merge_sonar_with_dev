@@ -640,7 +640,8 @@ $locations = $result['locations'];
                                 </div>
                                 <div class="d-none text-danger" id="phone_err"> Please enter phone </div>
                             </div>
-                        <?php } if ($fieldaccesright['field']['vendor_type_id'] != "NA") {
+                        <?php }
+                        if ($fieldaccesright['field']['vendor_type_id'] != "NA") {
                             $accessreadonly = $fieldaccesright['field']['vendor_type_id'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-3">
@@ -657,7 +658,8 @@ $locations = $result['locations'];
                                 </div>
                                 <div class="d-none text-danger" id="vendor_type_id_err"> Please Vendor Type </div>
                             </div>
-                        <?php } if ($fieldaccesright['field']['service_types'] != "NA") {
+                        <?php }
+                        if ($fieldaccesright['field']['service_types'] != "NA") {
                             $accessreadonly = $fieldaccesright['field']['service_types'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-3">
@@ -677,7 +679,8 @@ $locations = $result['locations'];
                             <span class="form-label">BP Code</span>
                             <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bp_code" name="bp_code" value="<?php echo $vendordetail['bp_code']; ?>" autocomplete="off">
                         </div>
-                        <?php } if ($fieldaccesright['field']['location_id'] != "NA") {
+                        <?php }
+                        if ($fieldaccesright['field']['location_id'] != "NA") {
                             $accessreadonly = $fieldaccesright['field']['location_id'] != "E" ? "custom_readonly" : "";
                             ?>
                         <div class="form-group col-lg-3">

@@ -1291,7 +1291,8 @@ function insertReleive(){
 					</div>
 				</div>
 			</div>
-		<?php }if(count((array)$teams) !=0){ ?>
+		<?php }
+		if(count((array)$teams) !=0){ ?>
 			<div class="card" >
 				<div class="card-header">
 				    <h5><?php echo __('Teams'); ?></h5>

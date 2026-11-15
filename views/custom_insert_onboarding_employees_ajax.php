@@ -103,47 +103,56 @@ $bank_work_flow = "Y";
 	          	<span class="form-label d-block fw-bold"><?php echo __('Employee Code'); ?> </span>
 	          	<p> <?php echo emptytextdashShow($data['emp_code']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['email_id']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['email_id']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Email'); ?></span>
 	          	<p> <?php echo emptytextdashShow(renderSensitiveDataWithToggle($data['email_id'], 'email')); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['first_name']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['first_name']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('First Name'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['first_name']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['middle_name']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['middle_name']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Middle Name'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['middle_name']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['last_name']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['last_name']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Last Name'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['last_name']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['phone']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['phone']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Contact'); ?></span>
 	          	<p> <?php echo emptytextdashShow(renderSensitiveDataWithToggle($data['phone'], 'mobile')); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['address']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['address']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Permanent Address'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['address']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['contact_address']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['contact_address']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Current Address'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['contact_address']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['post_code']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['post_code']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Postcode'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['post_code']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['fax']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['fax']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Fax'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['fax']); ?></p>
@@ -160,82 +169,98 @@ $bank_work_flow = "Y";
 	          	<span class="form-label d-block fw-bold"><?php echo __('Department'); ?> </span>
 	          	<p> <?php echo emptytextdashShow($departments[$data['department_id']]['department_name']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['designation_id']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['designation_id']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Designation'); ?></span>
 	          	<p>  <?php echo emptytextdashShow($designations[$data['designation_id']]['designation_name']);?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['division_id']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['division_id']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Division'); ?></span>
 	          	<p>  <?php echo emptytextdashShow($divisions[$data['division_id']]['division_name']);?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['band_id']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['band_id']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Band'); ?></span>
 	          	<p> <?php echo emptytextdashShow($employment_bands[$data['band_id']]['band_name']);?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['level_id']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['level_id']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('level'); ?></span>
 	          	<p>  <?php echo emptytextdashShow($employment_levels[$data['level_id']]['level_name']);?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['vertical_id']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['vertical_id']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Vertical'); ?></span>
 	          	<p>  <?php echo emptytextdashShow($verticals[$data['vertical_id']]['vertical_name']);?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['hiring_source']!="NA"){ ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['hiring_source']!="NA"){ ?>
 		  	<div class="col-xl-6 form-group" >
 		        <span class="form-label d-block fw-bold"><?php echo __('Hiring Source'); ?>  </span>
 		        <p><?php echo emptytextdashShow($data['hiring_source']); ?></p>
 		    </div>
-	      	<?php }if($fieldaccesright['field']['joining_date']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['joining_date']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Date of Joining'); ?></span>
 	          	<p>  <?php echo $data['joining_date'] !=""?fromDate($data['joining_date']):"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['experience_current_organization']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['experience_current_organization']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Current Organization Experience'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['experience_current_organization']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['total_experiance']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['total_experiance']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Total Experience'); ?></span>
 	          	<p> <?php echo $data['total_experiance'] !=""?$data['total_experiance']."- Year(s)":"-"; ?> </p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['relevant_experience']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['relevant_experience']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Relevant Experience'); ?></span>
 	          	<p> <?php echo $data['relevant_experience'] !=""?$data['relevant_experience']."- Year(s)":"-"; ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['notice_period']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['notice_period']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Notice Period'); ?></span>
 	          	<p> <?php echo $data['notice_period'] !=""?$data['notice_period']."- Day(s)":" - "; ?> </p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['location_id']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['location_id']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Work Location'); ?></span>
 	          	<p>  <?php echo emptytextdashShow($locations[$data['location_id']]['location_name']);?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['employee_type']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['employee_type']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Employment Type'); ?></span>
 	          	<p> <?php echo $data['employee_type']!=""?emptytextdashShow($employeement_types[$data['employee_type']]['genc_detail_name']):"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['billable']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['billable']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Billable'); ?></span>
 	          	<p>  <?php echo emptytextdashShow($billable[$data['billable']]); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['office_phone']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['office_phone']!="NA"){  ?>
 			<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Office Phone'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['office_phone']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['office_ext']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['office_ext']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Extension'); ?></span>
 	          	<p> <?php echo emptytextdashShow($data['office_ext']); ?></p>
@@ -252,62 +277,74 @@ $bank_work_flow = "Y";
 	          	<span class="form-label d-block fw-bold"><?php echo __('Date of Birth'); ?> </span>
 	          	<p> <?php echo dateFormate($data['date_of_birth']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['age']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['age']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Age'); ?> </span>
 	          	<p> <?php echo $agecalc; ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['marital_status']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['marital_status']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Marital Status'); ?> </span>
 	          	<p> <?php echo emptytextdashShow($marital_statuses[$data['marital_status']]['marital_status_name']); ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['wedding_date']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['wedding_date']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group" style="<?php echo $data['marital_status'] =="2"?"":"display: none"; ?>">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Marrige Date'); ?></span>
 	          	<p> <?php echo $data['wedding_date'] !=""?fromDate($data['wedding_date']):"-"; ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['gender']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['gender']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Gender'); ?> </span>
 	          	<p> <?php echo emptytextdashShow($gender_details[$data['gender']]['genc_detail_name']);?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['blood_group']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['blood_group']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Blood Group'); ?> </span>
 	          	<p> 	<?php echo $blood_groups[$data['blood_group']]['blood_group']!=""?$blood_groups[$data['blood_group']]['blood_group']:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['disability']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['disability']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Disability'); ?> </span>
 	          	<p> 	<?php echo $data['disability'] !=""?$yesno[$data['disability']]:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['disability_percentage']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['disability_percentage']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group" style="<?php echo $data['disability'] =="0"?"":"display: none"; ?>">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Disability percentage'); ?> </span>
 	          	<p> <?php echo $data['disability_percentage'] !=""?$data['disability_percentage']:"-"; ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['work_textile_industry']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['work_textile_industry']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group" >
 	          	<span class="form-label d-block fw-bold"><?php echo __('Working In Textile Industry'); ?></span>
 	          	<p><?php echo $data['work_textile_industry'] !=""?$yesno[$data['work_textile_industry']]:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['physically_challenged_children']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['physically_challenged_children']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Physically Challenged Children'); ?></span>
 	          	<p><?php echo $data['physically_challenged_children'] !=""?$yesno[$data['physically_challenged_children']]:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['soc_facebook']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['soc_facebook']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Facebook Link'); ?> </span>
 	          	<p> <?php  echo emptytextdashShow($data['soc_facebook']);  ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['soc_twitter']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['soc_twitter']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Twitter Link'); ?> </span>
 	          	<p> <?php  echo emptytextdashShow($data['soc_twitter']);  ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['soc_linkedin']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['soc_linkedin']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Linkedin Link'); ?> </span>
 	          	<p> <?php  echo emptytextdashShow($data['soc_linkedin']);  ?></p>
@@ -367,12 +404,14 @@ $bank_work_flow = "Y";
 	          	<span class="form-label d-block fw-bold"><?php echo __('Bank'); ?> </span>
 	          	<p> <?php echo $banks[$data['bank_id']]['bank_name']!=""?$banks[$data['bank_id']]['bank_name']:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['bank_link']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['bank_link']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('IFSC Code'); ?> </span>
 	          	<p> <?php  echo emptytextdashShow($data['bank_link']);  ?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['bank_account_no']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['bank_account_no']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Account No'); ?> </span>
 	          	<p> <?php  echo emptytextdashShow($data['bank_account_no']);  ?></p>
@@ -409,7 +448,8 @@ $bank_work_flow = "Y";
                 	<?php }else{ echo "-"; } ?>
                 	 </td>
 	            </tr>
-	            <?php }if($fieldaccesright['field']['passport']!="NA"){  ?>
+	            <?php }
+	            if($fieldaccesright['field']['passport']!="NA"){  ?>
 	            <tr>
 	                <th class="p-2"><?php echo __('Passport'); ?></th>
 	                <td class="p-2"><?php echo renderSensitiveDataWithToggle($data['passport'], 'passport'); ?></td>
@@ -420,7 +460,8 @@ $bank_work_flow = "Y";
                 	<?php }else{ echo "-"; } ?>
                 	 </td>
 	            </tr>
-	            <?php }if($fieldaccesright['field']['driving_licence']!="NA"){  ?>
+	            <?php }
+	            if($fieldaccesright['field']['driving_licence']!="NA"){  ?>
 	            <tr>
 	                <th class="p-2"><?php echo __('Driving Licence'); ?></th>
 	                <td class="p-2"><?php echo renderSensitiveDataWithToggle($data['driving_licence'], 'driving_licence'); ?></td>
@@ -431,7 +472,8 @@ $bank_work_flow = "Y";
 	                	<?php }else{ echo "-"; } ?>
                 	</td>
 	             </tr>
-	             <?php }if($fieldaccesright['field']['pan_number']!="NA"){  ?>
+	             <?php }
+	             if($fieldaccesright['field']['pan_number']!="NA"){  ?>
 	             <tr>
 	                <th class="p-2"><?php echo __('PAN Number'); ?></th>
 	                <td class="p-2"><?php echo renderSensitiveDataWithToggle($data['pan_number'], 'pan'); ?> </td>
@@ -442,7 +484,8 @@ $bank_work_flow = "Y";
                 	<?php }else{ echo "-"; } ?>
 	                 </td>
 	              </tr>
-	              <?php }if($fieldaccesright['field']['pf_no']!="NA"){  ?>
+	              <?php }
+	              if($fieldaccesright['field']['pf_no']!="NA"){  ?>
 	              <tr>
 	                 <th class="p-2"><?php echo __('PF Number'); ?></th>
 	                 <td class="p-2"><?php echo renderSensitiveDataWithToggle($data['pf_no'], 'pf_number'); ?> </td>
@@ -453,7 +496,8 @@ $bank_work_flow = "Y";
                 	<?php }else{ echo "-"; } ?>
                 	 </td>
 	              </tr>
-	              <?php }if($fieldaccesright['field']['pf_uan']!="NA"){  ?>
+	              <?php }
+	              if($fieldaccesright['field']['pf_uan']!="NA"){  ?>
 	               <tr>
 	                 	<th class="p-2"><?php echo __('UAN Number'); ?></th>
 	                  	<td class="p-2"><?php echo renderSensitiveDataWithToggle($data['pf_uan'], 'uan_number'); ?></td>
@@ -464,7 +508,8 @@ $bank_work_flow = "Y";
                 	<?php }else{ echo "-"; } ?>
                 	 </td>
 	              </tr>
-            	<?php }if($fieldaccesright['field']['gosi_number']!="NA"){  ?>
+            	<?php }
+            	if($fieldaccesright['field']['gosi_number']!="NA"){  ?>
 	              <tr>
 	                 <th class="p-2"><?php echo __('GOSI Number'); ?></th>
 	                 <td class="p-2"><?php echo renderSensitiveDataWithToggle($data['gosi_number'], 'gosi_number'); ?> </td><td class="p-2"> - </td>
@@ -645,32 +690,38 @@ $bank_work_flow = "Y";
 	          	<span class="form-label d-block fw-bold"><?php echo __('Employment Role'); ?> </span>
 	          	<p> <?php echo $employment_roles[$data['role_id']]['role_name']!=""?$employment_roles[$data['role_id']]['role_name']:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['reporting_manager_id']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['reporting_manager_id']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Repoting To'); ?></span>
 	          	<p> <?php echo $application_users[$data['reporting_manager_id']]['display_name']!=""?$application_users[$data['reporting_manager_id']]['display_name']:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['admin_buddy']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['admin_buddy']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Admin Buddy'); ?> </span>
 	          	<p> <?php echo $all_employees[$data['admin_buddy']]['display_name']!=""?$all_employees[$data['admin_buddy']]['display_name']:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['hr_buddy']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['hr_buddy']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('HR Buddy'); ?></span>
 	          	<p> <?php echo $all_employees[$data['hr_buddy']]['display_name']!=""?$all_employees[$data['hr_buddy']]['display_name']:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['finance_buddy']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['finance_buddy']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Finance Buddy'); ?></span>
 	          	<p> <?php echo $all_employees[$data['finance_buddy']]['display_name']!=""?$all_employees[$data['finance_buddy']]['display_name']:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['project_buddy']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['project_buddy']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Project Buddy'); ?></span>
 	          	<p> <?php echo $all_employees[$data['project_buddy']]['display_name']!=""?$all_employees[$data['project_buddy']]['display_name']:"-";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['loc_buddy']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['loc_buddy']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Location Buddy'); ?></span>
 	          	<p> <?php echo $all_employees[$data['loc_buddy']]['display_name']!=""?$all_employees[$data['loc_buddy']]['display_name']:"-";?></p>
@@ -688,17 +739,20 @@ $bank_work_flow = "Y";
 	          	<span class="form-label d-block fw-bold"><?php echo __('Cover Under PF'); ?> </span>
 	          	<p> <?php echo $data['cover_under_pf']!="" && $data['cover_under_pf'] == '0' ? "YES":"NO";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['cover_under_esi']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['cover_under_esi']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Cover Under ESI'); ?></span>
 	          	<p>  <?php echo $data['cover_under_esi']!="" && $data['cover_under_esi'] == '0'?"YES":"NO";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['clock_event_type']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['clock_event_type']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('ClockIn & ClockOut Access'); ?> </span>
 	          	<p>  <?php echo $data['clock_event_type']!="" && $data['clock_event_type'] == 'Y'?"YES":"NO";?></p>
 	      	</div>
-	      	<?php }  if($fieldaccesright['field']['b_machine_id']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['b_machine_id']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('B Machine Id'); ?> </span>
 	          	<p>  <?php echo $data['b_machine_id']!="" ? $data['b_machine_id']:"-";?></p>
@@ -716,12 +770,14 @@ $bank_work_flow = "Y";
 	          	<span class="form-label d-block fw-bold"><?php echo __('Job Title'); ?> </span>
 	          	<p>  <?php echo emptytextdashShow($designations[$data['job_title_id']]['job_title']);?></p>
 	      	</div>
-	      	<?php } if($fieldaccesright['field']['is_muslim']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['is_muslim']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Are You Muslim ?'); ?></span>
 	          	<p>  <?php echo $data['is_muslim']!="" && $data['is_muslim'] == '0'?"YES":"NO";?></p>
 	      	</div>
-	      	<?php }if($fieldaccesright['field']['is_local']!="NA"){  ?>
+	      	<?php }
+	      	if($fieldaccesright['field']['is_local']!="NA"){  ?>
 	      	<div class="col-xl-6 form-group">
 	          	<span class="form-label d-block fw-bold"><?php echo __('Are You Local ?'); ?> </span>
 	          	<p>  <?php echo $data['is_local']!="" && $data['is_local'] == 'Y'?"YES":"NO";?></p>
@@ -809,61 +865,71 @@ $bank_work_flow = "Y";
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Employee Code'); ?> </span>
 		        <input aria-label="<?= htmlspecialchars(__('Emp code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" name="emp_code" value="<?php echo $data['emp_code']; ?>" readonly/>
 		    </div>
-		<?php }if($fieldaccesright['field']['email_id']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['email_id']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['email_id'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Email'); ?> </span>
 		        <input aria-label="<?= htmlspecialchars(__('Email id'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg  <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter email'); ?>" name="email_id" value="<?php echo $data['email_id']; ?>" readonly/>
 		    </div>
-		<?php }if($fieldaccesright['field']['first_name']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['first_name']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['first_name'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('First Name'); ?>  </span>
 		        <input aria-label="<?= htmlspecialchars(__('First name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg  <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter first Name'); ?>" name="first_name" value="<?php echo $data['first_name']; ?>"/>
 		    </div>
-		<?php }if($fieldaccesright['field']['middle_name']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['middle_name']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['middle_name'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Middle Name'); ?> </span>
 		        <input aria-label="<?= htmlspecialchars(__('Middle name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter middle Name'); ?>" name="middle_name" value="<?php echo $data['middle_name']; ?>"/>
 		    </div>
-		<?php }if($fieldaccesright['field']['last_name']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['last_name']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['last_name'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Last Name'); ?> </span>
 		        <input aria-label="<?= htmlspecialchars(__('Last name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter last Name'); ?>" name="last_name" value="<?php echo $data['last_name']; ?>"/>
 		    </div>
-		<?php }if($fieldaccesright['field']['phone']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['phone']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['phone'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Contact'); ?> </span>
 		        <input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter Contact'); ?>" name="phone" value="<?php echo $data['phone']; ?>"/>
 		    </div>
-		<?php }if($fieldaccesright['field']['address']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['address']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['address'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Permanent Address'); ?> </span>
 		        <textarea aria-label="<?= htmlspecialchars(__('Address'), ENT_QUOTES, 'UTF-8'); ?>" style="overflow:auto" class="form-control form-control-lg  <?php echo $readonlycheck; ?>" placeholder="<?php echo __('Enter your permanent address'); ?>" name="address"><?php echo $data['address'];?></textarea>
 		    </div>
-		 <?php }if($fieldaccesright['field']['contact_address']!="NA"){
+		 <?php }
+		 if($fieldaccesright['field']['contact_address']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['contact_address'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Current Address'); ?> </span>
 		        <textarea aria-label="<?= htmlspecialchars(__('Contact address'), ENT_QUOTES, 'UTF-8'); ?>" style="overflow:auto" class="form-control <?php echo $readonlycheck; ?>" placeholder="<?php echo __('Enter your current address'); ?>" name="contact_address"><?php echo $data['contact_address'];?></textarea>
 		    </div>
-		<?php }if($fieldaccesright['field']['post_code']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['post_code']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['post_code'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Postcode'); ?> </span>
 		        <input aria-label="<?= htmlspecialchars(__('Post code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control <?php echo $readonlycheck; ?>" placeholder="<?php echo __('Enter your postcode'); ?>" name="post_code" value="<?php echo $data['post_code']; ?>"/>
 		    </div>
-		<?php }if($fieldaccesright['field']['fax']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['fax']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['fax'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Fax'); ?> </span>
 		        <input aria-label="<?= htmlspecialchars(__('Fax'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter fax'); ?>" name="fax" value="<?php echo $data['fax']; ?>"/>
 		    </div>
-		<?php }if($fieldaccesright['field']['image']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['image']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['image'] !="E"?"custom_readonly":""; ?>
 			<div class="mt-2 col-lg-2 <?php echo $readonlycheck; ?>">
 	            <span class="form-label d-inline-block fw-bold"><?php echo __('Profile Image'); ?></span>
@@ -902,7 +968,8 @@ $bank_work_flow = "Y";
 			        </select>
 			    </div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['designation_id']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['designation_id']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['designation_id'] !="E"?"custom_readonly":""; ?>
 		   	<div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Designation'); ?> </span>
@@ -918,7 +985,8 @@ $bank_work_flow = "Y";
 					</select>
 				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['division_id']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['division_id']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['division_id'] !="E"?"custom_readonly":""; ?>
 		   	<div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Division'); ?> </span>
@@ -934,7 +1002,8 @@ $bank_work_flow = "Y";
 					</select>
 				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['band_id']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['band_id']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['band_id'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Band'); ?> </span>
@@ -950,7 +1019,8 @@ $bank_work_flow = "Y";
 					</select>
 				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['level_id']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['level_id']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['level_id'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Level'); ?> </span>
@@ -965,7 +1035,8 @@ $bank_work_flow = "Y";
 				  </select>
 				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['vertical_id']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['vertical_id']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['vertical_id'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Vertical'); ?> </span>
@@ -980,13 +1051,15 @@ $bank_work_flow = "Y";
 				    </select>
 				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['hiring_source']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['hiring_source']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['hiring_source'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Hiring Source'); ?>  </span>
 		        <input aria-label="<?= htmlspecialchars(__('Hiring source'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter Hiring Source'); ?>" name="hiring_source" value="<?php echo $data['hiring_source']; ?>"/>
 		    </div>
-		    <?php }if($fieldaccesright['field']['joining_date']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['joining_date']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['joining_date'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Date of Joining'); ?> </span>
@@ -994,13 +1067,15 @@ $bank_work_flow = "Y";
   					<input aria-label="<?= htmlspecialchars(__('Joining date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" value="<?php echo ($data['joining_date']!="0000-00-00" && $data['joining_date']!="")?fromDate($data['joining_date']):""; ?>"  name="joining_date" placeholder="<?php echo __('Enter Date of Joining'); ?>"/>
   				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['experience_current_organization']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['experience_current_organization']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['experience_current_organization'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		    	<span class="form-label d-inline-block fw-bold"><?php echo __('Experience in Current Organization'); ?> </span>
 		        <input aria-label="<?= htmlspecialchars(__('Experience current organization'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Experience in Current Organization'); ?>" name="experience_current_organization" value="<?php echo $data['experience_current_organization']; ?>"/>
 		    </div>
-		    <?php }if($fieldaccesright['field']['total_experiance']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['total_experiance']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['total_experiance'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Total Experience'); ?> </span>
@@ -1009,7 +1084,8 @@ $bank_work_flow = "Y";
 			        <span class="input-group-text addon-style"><span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Years'); ?></span></span>
 		        </div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['relevant_experience']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['relevant_experience']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['relevant_experience'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Relevant Experience'); ?> </span>
@@ -1018,7 +1094,8 @@ $bank_work_flow = "Y";
 		        	<span class="input-group-text addon-style"><span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Years'); ?></span></span>
 		        </div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['notice_period']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['notice_period']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['notice_period'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Notice Period'); ?> </span>
@@ -1027,7 +1104,8 @@ $bank_work_flow = "Y";
 				   <span class="input-group-text addon-style"><span class=" d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Days'); ?></span></span>
 				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['location_id']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['location_id']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['location_id'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Work Location'); ?> </span>
@@ -1043,7 +1121,8 @@ $bank_work_flow = "Y";
 					</select>
 				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['employee_type']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['employee_type']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['employee_type'] !="E"?"custom_readonly":""; ?>
 		   <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Employment Type'); ?></span>
@@ -1060,7 +1139,8 @@ $bank_work_flow = "Y";
 			    <?php } ?>
 				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['billable']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['billable']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['billable'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Billable'); ?> </span>
@@ -1077,13 +1157,15 @@ $bank_work_flow = "Y";
 				    </div>
 				</div>
 		    </div>
-		    <?php }if($fieldaccesright['field']['office_phone']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['office_phone']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['office_phone'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Office Phone'); ?>  </span>
 		        <input aria-label="<?= htmlspecialchars(__('Office phone'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_phone" placeholder="<?php echo __('Enter Office Phone'); ?>" value="<?php echo $data['office_phone']; ?>"/>
 		    </div>
-		    <?php }if($fieldaccesright['field']['office_ext']!="NA"){
+		    <?php }
+		    if($fieldaccesright['field']['office_ext']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['office_ext'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Extension'); ?> </span>
@@ -1129,7 +1211,8 @@ $bank_work_flow = "Y";
 			 <?php } ?>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['wedding_date']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['wedding_date']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['wedding_date'] !="E"?"custom_readonly":""; ?>
 		<div class="col-lg-6 " style="<?php echo $data['marital_status'] =="2"?"":"display: none"; ?>"  id="marriagedateshow">
 			<div class="mt-2" id="marriagedateshow1">
@@ -1139,7 +1222,8 @@ $bank_work_flow = "Y";
 				</div>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['gender']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['gender']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['gender'] !="E"?"custom_readonly":""; ?>
 	    <div class="col-xl-6 mt-2" >
 		    <span class="form-label d-inline-block fw-bold"><?php echo __('Gender'); ?></span>
@@ -1157,7 +1241,8 @@ $bank_work_flow = "Y";
 			 <?php } ?>
 			</div>
 	    </div>
-	    <?php }if($fieldaccesright['field']['blood_group']!="NA"){
+	    <?php }
+	    if($fieldaccesright['field']['blood_group']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['blood_group'] !="E"?"custom_readonly":""; ?>
 	    <div class="col-xl-6 mt-2" >
 		    <span class="form-label d-inline-block fw-bold"><?php echo __('Blood Group'); ?></span>
@@ -1172,7 +1257,8 @@ $bank_work_flow = "Y";
 				</select>
 			</div>
 		</div>
-	    <?php }if($fieldaccesright['field']['disability']!="NA"){
+	    <?php }
+	    if($fieldaccesright['field']['disability']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['disability'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" >
 		    <span class="form-label d-inline-block fw-bold"><?php echo __('Disability'); ?></span>
@@ -1190,13 +1276,15 @@ $bank_work_flow = "Y";
 			 <?php } ?>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['disability_percentage']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['disability_percentage']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['disability_percentage'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" id="disabilitypercentage_id" style="<?php echo $data['disability'] =="0"?"":"display: none"; ?>">
 		    <label class="form-label"><?php echo __('Disability percentage'); ?></label>
 		    <input type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="" name="disability_percentage" value="<?php echo $data['disability_percentage']; ?>"/>
 		</div>
-		<?php }if($fieldaccesright['field']['work_textile_industry']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['work_textile_industry']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['work_textile_industry'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('Working In Textile Industry'); ?></label>
@@ -1214,7 +1302,8 @@ $bank_work_flow = "Y";
 			 	<?php } ?>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['physically_challenged_children']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['physically_challenged_children']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['physically_challenged_children'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('Physically Challenged Children'); ?></label>
@@ -1232,19 +1321,22 @@ $bank_work_flow = "Y";
 			 <?php } ?>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['soc_facebook']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['soc_facebook']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['soc_facebook'] !="E"?"custom_readonly":""; ?>
 		<div class="col-lg-6 mt-2" >
 			<label  class="form-label"><?php echo __('Facebook Link'); ?></label>
 			<input type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Facebook URL'); ?>" name="soc_facebook" value="<?php echo $data['soc_facebook']; ?>"/>
 		</div>
-		<?php }if($fieldaccesright['field']['soc_twitter']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['soc_twitter']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['soc_twitter'] !="E"?"custom_readonly":""; ?>
 		<div class="col-lg-6 mt-2" >
 			<label  class="form-label"><?php echo __('Twitter Link'); ?></label>
 			<input type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Twitter URL'); ?>" name="soc_twitter" value="<?php echo $data['soc_twitter']; ?>"/>
 		</div>
-		<?php }if($fieldaccesright['field']['soc_linkedin']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['soc_linkedin']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['soc_linkedin'] !="E"?"custom_readonly":""; ?>
 		<div class="col-lg-6 mt-2" >
 			<label  class="form-label"><?php echo __('Linkedin Link'); ?></label>
@@ -1272,13 +1364,15 @@ $bank_work_flow = "Y";
 		        </select>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['bank_link']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['bank_link']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['bank_link'] !="E"?"custom_readonly":""; ?>
 		<div class="col-lg-6 mt-2" >
 			<label  class="form-label"><?php echo __('IFSC Code'); ?></label>
 			<input type="text" class="form-control <?php echo $readonlycheck; ?>"  name="bank_link" value="<?php echo $data['bank_link']; ?>" placeholder="<?php echo __('Enter IFSC Code'); ?>"/>
 		</div>
-		<?php }if($fieldaccesright['field']['bank_account_no']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['bank_account_no']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['bank_account_no'] !="E"?"custom_readonly":""; ?>
 		<div class="col-lg-6 mt-2" >
 			<label  class="form-label"><?php echo __('Account No'); ?></label>
@@ -1308,7 +1402,8 @@ $bank_work_flow = "Y";
 				</select>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['reporting_manager_id']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['reporting_manager_id']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['reporting_manager_id'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('Repoting to'); ?></label>
@@ -1323,7 +1418,8 @@ $bank_work_flow = "Y";
 				</select>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['admin_buddy']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['admin_buddy']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['admin_buddy'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('Admin Buddy'); ?></label>
@@ -1338,7 +1434,8 @@ $bank_work_flow = "Y";
 				 </select>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['hr_buddy']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['hr_buddy']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['hr_buddy'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('HR Buddy'); ?></label>
@@ -1353,7 +1450,8 @@ $bank_work_flow = "Y";
 				</select>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['finance_buddy']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['finance_buddy']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['finance_buddy'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('Finance Buddy'); ?> </label>
@@ -1368,7 +1466,8 @@ $bank_work_flow = "Y";
 				</select>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['project_buddy']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['project_buddy']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['project_buddy'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('Project Buddy'); ?></label>
@@ -1383,7 +1482,8 @@ $bank_work_flow = "Y";
 			    </select>
 			</div>
 		</div>
-		<?php }if($fieldaccesright['field']['loc_buddy']!="NA"){
+		<?php }
+		if($fieldaccesright['field']['loc_buddy']!="NA"){
 		  	$readonlycheck = $fieldaccesright['field']['loc_buddy'] !="E"?"custom_readonly":""; ?>
 		<div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('Location Buddy'); ?></label>
@@ -1618,7 +1718,8 @@ $bank_work_flow = "Y";
                 	<?php } ?>
 				</td>
 			</tr>
-			<?php }if($fieldaccesright['field']['passport']!="NA"){
+			<?php }
+			if($fieldaccesright['field']['passport']!="NA"){
 				$readonlycheck = $fieldaccesright['field']['passport'] !="E"?"custom_readonly":"";
 				?>
 			<tr class="<?php echo $readonlycheck; ?>">
@@ -1637,7 +1738,8 @@ $bank_work_flow = "Y";
                 	<?php } ?>
 				</td>
 			</tr>
-			<?php }if($fieldaccesright['field']['driving_licence']!="NA"){
+			<?php }
+			if($fieldaccesright['field']['driving_licence']!="NA"){
 			$readonlycheck = $fieldaccesright['field']['driving_licence'] !="E"?"custom_readonly":"";
 			 ?>
 			<tr class="<?php echo $readonlycheck; ?>">
@@ -1657,7 +1759,8 @@ $bank_work_flow = "Y";
                 	<?php } ?>
 				</td>
 			</tr>
-			<?php }if($fieldaccesright['field']['pan_number']!="NA"){
+			<?php }
+			if($fieldaccesright['field']['pan_number']!="NA"){
 				$readonlycheck = $fieldaccesright['field']['pan_number'] !="E"?"custom_readonly":"";
 				?>
 			<tr class="<?php echo $readonlycheck; ?>">
@@ -1675,7 +1778,8 @@ $bank_work_flow = "Y";
                 	<?php } ?>
 				</td>
 			</tr>
-			<?php }if($fieldaccesright['field']['pf_no']!="NA"){
+			<?php }
+			if($fieldaccesright['field']['pf_no']!="NA"){
 				$readonlycheck = $fieldaccesright['field']['pf_no'] !="E"?"custom_readonly":"";
 				?>
 			<tr class="<?php echo $readonlycheck; ?>">
@@ -1693,7 +1797,8 @@ $bank_work_flow = "Y";
                 	<?php } ?>
 				</td>
 			</tr>
-			<?php }if($fieldaccesright['field']['pf_uan']!="NA"){
+			<?php }
+			if($fieldaccesright['field']['pf_uan']!="NA"){
 				$readonlycheck = $fieldaccesright['field']['pf_uan'] !="E"?"custom_readonly":"";
 				?>
 			<tr class="<?php echo $readonlycheck; ?>">
@@ -1710,7 +1815,8 @@ $bank_work_flow = "Y";
                 	<?php } ?>
 				</td>
 			</tr>
-			<?php }if($fieldaccesright['field']['gosi_number']!="NA"){
+			<?php }
+			if($fieldaccesright['field']['gosi_number']!="NA"){
 				$readonlycheck = $fieldaccesright['field']['gosi_number'] !="E"?"custom_readonly":"";
 				?>
 			<tr class="<?php echo $readonlycheck; ?>">

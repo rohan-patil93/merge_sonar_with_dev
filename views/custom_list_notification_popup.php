@@ -49,7 +49,8 @@ if(isset($_POST['page']) && $_POST['page']!=""){
         </div>
         <?php $aci++;
 }
-} if($aci == 0){?>
+}
+if($aci == 0){?>
             <a href="javascript:;" class="kt-notification__item">
                 <div class="kt-notification__item-details">
                     <div class="kt-notification__item-title">
@@ -90,7 +91,8 @@ if(isset($_POST['page']) && $_POST['page']!=""){
         </div>
         <?php $aci++;
 }
-} if($aci == 0){?>
+}
+if($aci == 0){?>
             <a href="javascript:;" class="kt-notification__item">
                 <div class="kt-notification__item-details">
                     <div class="kt-notification__item-title">

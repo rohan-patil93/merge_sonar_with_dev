@@ -300,7 +300,8 @@ function getDepreciationMethod(){
 						<span class="form-label d-block">QR Code</span>
 						<img src="<?php echo "uploads/equipments/qr_code/".$assetsdeatil['qr_code'] ; ?>" class="img-100"  width="200" onerror="this.src='uploads/all/no-image.jpg';"/>
 					</div>
-					<?php } if($assetsdeatil['id'] !=""){ ?>
+					<?php }
+					if($assetsdeatil['id'] !=""){ ?>
 					<div class=" form-group col-lg-6">
 						<span class="form-label d-block">Barcode </span>
 

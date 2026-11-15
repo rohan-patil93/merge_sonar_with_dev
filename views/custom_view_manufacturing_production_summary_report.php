@@ -59,7 +59,8 @@ function mfg_ps_csv_safe($value){ return str_replace(',', ' ', (string)($value ?
                         );
                     ?>
                         <tr><td><?php echo htmlspecialchars($row['production_note_no']); ?></td><td><?php echo mfg_ps_date($row['transaction_date']); ?></td><td><?php echo htmlspecialchars($row['work_order_no']); ?></td><td><?php echo htmlspecialchars($row['product_name']); ?></td><td><?php echo mfg_ps_num($row['planned_qty']); ?></td><td><?php echo mfg_ps_num($row['produced_qty']); ?></td><td><?php echo mfg_ps_num($row['wastage_qty']); ?></td><td><?php echo mfg_ps_num($row['pending_qty']); ?></td><td><?php echo mfg_ps_num($row['achievement_percent']); ?>%</td><td><?php echo mfg_ps_badge($row); ?></td></tr>
-                    <?php } if(count((array)$rows)==0){ ?><tr><td colspan="10" class="text-center text-muted"><?= __('No report data found.'); ?></td></tr><?php
+                    <?php }
+                    if(count((array)$rows)==0){ ?><tr><td colspan="10" class="text-center text-muted"><?= __('No report data found.'); ?></td></tr><?php
 } ?>
                     <?php $_SESSION['download_data'] = $csvdata; ?>
                 </table>

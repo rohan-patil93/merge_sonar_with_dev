@@ -160,7 +160,8 @@ if(isset($_POST['sid'])){
                                 </label>
                             </div>
                         </td>
-                    <?php }if($stocktakes['status'] == '3'){
+                    <?php }
+                    if($stocktakes['status'] == '3'){
 
                         $stock_adjusted      = "-";
                         if($stockitemdetail['update_balance']=="Y"){

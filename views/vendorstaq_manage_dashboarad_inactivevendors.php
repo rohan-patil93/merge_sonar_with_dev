@@ -58,7 +58,8 @@
                 </tr>
 
             <?php  }
-} if($checkyy ==0){ ?>
+}
+if($checkyy ==0){ ?>
             <tr>
                 <td colspan="3">
                     <div class="text-center mt-3">

@@ -23,7 +23,8 @@ function mfg_bom_csv_safe($value){ return str_replace(',', ' ', (string)($value 
 <?php foreach($rows as $row){
     $csvdata[] = array('BOM No' => mfg_bom_csv_safe($row['transaction_no'] ?? '-'), 'Date' => mfg_bom_csv_safe(mfg_bom_date($row['transaction_date'] ?? '')), 'Product' => mfg_bom_csv_safe($row['product_name'] ?? '-'), 'BOM Qty' => mfg_bom_csv_safe(mfg_bom_num($row['bom_quantity'] ?? 0)), 'Material' => mfg_bom_csv_safe($row['material_name'] ?? '-'), 'Material Qty' => mfg_bom_csv_safe(mfg_bom_num($row['material_qty'] ?? 0)), 'Scrap' => mfg_bom_csv_safe(mfg_bom_num($row['scrap'] ?? 0)), 'Rate' => mfg_bom_csv_safe(mfg_bom_num($row['rate'] ?? 0)), 'Amount' => mfg_bom_csv_safe(mfg_bom_num($row['amount'] ?? 0)), 'UOM' => mfg_bom_csv_safe($row['uom_name'] ?? '-'), 'data' => array());
 ?><tr><td><?php echo htmlspecialchars($row['transaction_no']); ?></td><td><?php echo mfg_bom_date($row['transaction_date']); ?></td><td><?php echo htmlspecialchars($row['product_name']); ?></td><td><?php echo mfg_bom_num($row['bom_quantity']); ?></td><td><?php echo htmlspecialchars($row['material_name']); ?></td><td><?php echo mfg_bom_num($row['material_qty']); ?></td><td><?php echo mfg_bom_num($row['scrap']); ?></td><td><?php echo mfg_bom_num($row['rate']); ?></td><td><?php echo mfg_bom_num($row['amount']); ?></td><td><?php echo htmlspecialchars($row['uom_name']); ?></td></tr><?php
-} if(count((array)$rows)==0){ ?><tr><td colspan="10" class="text-center text-muted"><?= __('No report data found.'); ?></td></tr><?php
+}
+if(count((array)$rows)==0){ ?><tr><td colspan="10" class="text-center text-muted"><?= __('No report data found.'); ?></td></tr><?php
 } ?>
 <?php $_SESSION['download_data'] = $csvdata; ?>
 </table></div></div></div></div>

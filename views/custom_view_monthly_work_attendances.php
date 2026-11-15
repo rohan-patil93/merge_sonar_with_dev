@@ -384,7 +384,8 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
                             </div>
                             <?php }
 }
-} if($avbl == 0){ ?>
+}
+if($avbl == 0){ ?>
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 100px!important;">
                             <?php } ?>
 

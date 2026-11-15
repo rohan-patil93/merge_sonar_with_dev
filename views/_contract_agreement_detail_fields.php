@@ -28,7 +28,8 @@ $contract_agreement_section = $contract_agreement_section ?? '';
                                 } ?>
                             </select>
                         </div>
-<?php } if ($contract_agreement_locations_section == 'Y') { ?>
+<?php }
+if ($contract_agreement_locations_section == 'Y') { ?>
 <div class="col-md-12 " style="<?= $fieldDisplay['locations']['style'] ?>">
                             <label for="unified_locations_multiselect" class="form-label"><?= __('Locations '.$fieldDisplay['locations']['star']) ?></label>
                             <select name="locations[]" multiple class="form-control js-example-basic-multiple" id="unified_locations_multiselect" <?= $fieldDisplay['locations']['required'] ?>>
@@ -43,7 +44,8 @@ $contract_agreement_section = $contract_agreement_section ?? '';
                             </select>
                         </div>
 
-<?php } if ($contract_agreement_section == 'extended') { ?>
+<?php }
+if ($contract_agreement_section == 'extended') { ?>
 
                         <div class="col-md-12 cc-amc-only">
                             <p class="text-muted small mb-0"><em><?= __('Locations are configured in Step 2 — Locations, Assets & Service Periods.') ?></em></p>

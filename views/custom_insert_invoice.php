@@ -1432,7 +1432,8 @@ function calculateTotal(){
                                     </div>
                                 </div>
                             </div>
-                            <?php } if($table_name == 'bills'){?>
+                            <?php }
+                            if($table_name == 'bills'){?>
                              <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12"><?php echo __('Refernce Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">

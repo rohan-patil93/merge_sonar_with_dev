@@ -259,7 +259,8 @@ if($key == "billable"){ $employee_detail = $_POST['billable'] == '0'?__('Billabl
                                         <td><?php echo $employee_details['work_to'][$ky]; ?></td>
                                     </tr>
                                 <?php }
-} if($exper=="0"){
+}
+if($exper=="0"){
                                         echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Experience Details') . "</h4></td</tr>";
                                     } ?>
                             </tbody>
@@ -294,7 +295,8 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                                         <td><?php echo $employee_details['score'][$k2y]; ?></td>
                                     </tr>
                                 <?php }
-} if($qualifi=="0"){
+}
+if($qualifi=="0"){
                                         echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Qualification Details') . "</h4></td</tr>";
                                     } ?>
                             </tbody>
@@ -323,7 +325,8 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                                         <td><?php echo $employee_details['dependent_date_of_birth'][$ky3]; ?></td>
                                     </tr>
                                 <?php }
-} if($depend=="0"){
+}
+if($depend=="0"){
                                         echo "<tr><td colspan='3' class='text-center'><h4><i class='ti-help-alt'></i> " . __('No Dependents Details') . "</h4></td</tr>";
                                     } ?>
 
