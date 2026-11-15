@@ -1109,7 +1109,7 @@ $bank_work_flow = "Y";
 		  	?> 
 	    <div class="col-xl-6 mt-2" >
 		    <span class="form-label d-inline-block fw-bold"><?php echo __('Age In Years'); ?> </span>
-		    <input type="text" class="form-control <?php echo $readonlycheck; ?>"  value="<?php echo $agecalc; ?>" name="age" id="age" readonly/>
+		    <input aria-label="Age" type="text" class="form-control <?php echo $readonlycheck; ?>"  value="<?php echo $agecalc; ?>" name="age" id="age" readonly/>
 	    </div>
 	    <?php } **/ if($fieldaccesright['field']['marital_status']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['marital_status'] !="E"?"custom_readonly":""; ?> 
