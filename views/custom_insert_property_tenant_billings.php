@@ -205,15 +205,15 @@ if(isset($_POST['submittenantbills'])){
         </div>
     </div>
     <div class="card-body">
-		<ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
+		<ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#invoicetobegenerated" role="tab" aria-selected="true">  <?php echo __('Invoice to Be Generated'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$invoicetobegenerated);?></label></a>
+				<a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#invoicetobegenerated" role="tab" aria-selected="true">  <?php echo __('Invoice to Be Generated'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$invoicetobegenerated);?></span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#invoicetobeemailed" role="tab" aria-selected="true"> <?php echo __('Invoice to be Emailed'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$invoicetobeemailed);?></label></a>
+				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#invoicetobeemailed" role="tab" aria-selected="true"> <?php echo __('Invoice to be Emailed'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$invoicetobeemailed);?></span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#invoicesharedwithtenant" role="tab" aria-selected="true"> <?php echo __('Invoice Shared With Tenant'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$invoicesharedwithtenant);?></label></a>
+				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#invoicesharedwithtenant" role="tab" aria-selected="true"> <?php echo __('Invoice Shared With Tenant'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$invoicesharedwithtenant);?></span></a>
 			</li>
 		</ul>
 		<div class="tab-content tabs " >
@@ -252,7 +252,7 @@ if(isset($_POST['submittenantbills'])){
 											<div class="card-header">
 												<h5><?php echo __('Property Tenant Billing'); ?></h5>
 												<div class="card-header-right">
-													<i class="ti-close" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
+													<i class="ti-close" role="button" tabindex="0" aria-label="<?php echo __('Closed'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
 												</div>
 											</div>
 											<form method="post" id="form_id_<?php echo $ptb['id']; ?>">
@@ -277,9 +277,9 @@ if(isset($_POST['submittenantbills'])){
 																<tr>
 																	<td  class="p-1"><?php echo $i; ?></td>
 																	<td class="p-1"><span class="d-block"><?php echo $bd['name']; ?></span><?php echo $extrlebl; ?></td>
-																	<td class="p-1"><input class="form-control text-right checkamountnotepmty_<?php echo $ptb['id']; ?>" type="number" name="rent[]" value="<?php echo $bd['rent']; ?>" <?php echo $redonlytext; ?> ></td>
+																	<td class="p-1"><input aria-label="<?= htmlspecialchars(__('Rent'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right checkamountnotepmty_<?php echo $ptb['id']; ?>" type="number" name="rent[]" value="<?php echo $bd['rent']; ?>" <?php echo $redonlytext; ?> ></td>
 																	<td class="p-1">
-																		<textarea class="form-control" name="remarks[]"><?php echo $bd['remarks']; ?></textarea>
+																		<textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="remarks[]"><?php echo $bd['remarks']; ?></textarea>
 																	</td>
 																</tr>
 																<?php $i++; } ?>
@@ -296,7 +296,7 @@ if(isset($_POST['submittenantbills'])){
 										</div>
 										
 										</td>
-										<td class="p-2 text-center"><i class="fa fa-cog  f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityPopUp('<?php echo $ptb['id']; ?>')" ></i>
+										<td class="p-2 text-center"><i class="fa fa-cog  f-16" role="button" tabindex="0" aria-label="<?php echo __('Utility Bill'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityPopUp('<?php echo $ptb['id']; ?>')" ></i>
 										</td>
 									</tr>
 									<?php  $m++; } ?> 
@@ -466,15 +466,15 @@ if(isset($_POST['submittenantbills'])){
         </div>
     </div>
     <div class="card-body">
-		<ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3" role="tablist">
+		<ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#utility_invoicetobegenerated" role="tab" aria-selected="true">  <?php echo __('Invoice to Be Generated'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$utility_invoicetobegenerated);?></label></a>
+				<a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#utility_invoicetobegenerated" role="tab" aria-selected="true">  <?php echo __('Invoice to Be Generated'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$utility_invoicetobegenerated);?></span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#utility_invoicetobeemailed" role="tab" aria-selected="true"> <?php echo __('Invoice to be Emailed'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$utility_invoicetobeemailed);?></label></a>
+				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#utility_invoicetobeemailed" role="tab" aria-selected="true"> <?php echo __('Invoice to be Emailed'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$utility_invoicetobeemailed);?></span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#utility_invoicesharedwithtenant" role="tab" aria-selected="true"> <?php echo __('Invoice Shared With Tenant'); ?> <label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$utility_invoicesharedwithtenant);?></label></a>
+				<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#utility_invoicesharedwithtenant" role="tab" aria-selected="true"> <?php echo __('Invoice Shared With Tenant'); ?> <span class="form-label label label-xs label-success m-l-10 d-inline-block"><?php echo count((array)$utility_invoicesharedwithtenant);?></span></a>
 			</li>
 		</ul>
 		<div class="tab-content tabs " >
@@ -509,7 +509,7 @@ if(isset($_POST['submittenantbills'])){
 												<div class="card-header">
 													<h5><?php echo __('Utility Tenant Billing'); ?></h5>
 													<div class="card-header-right">
-														<i class="ti-close" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
+														<i class="ti-close" role="button" tabindex="0" aria-label="<?php echo __('Closed'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="closePopUp('<?php echo $ptb['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i>
 													</div>
 												</div>
 												<form method="post" id="form_id_utility_<?php echo $ptb['id']; ?>">
@@ -534,9 +534,9 @@ if(isset($_POST['submittenantbills'])){
 																	<tr>
 																		<td  class="p-1"><?php echo $i; ?></td>
 																		<td class="p-1"><span class="d-block"><?php echo $bd['name']; ?></span><?php echo $extrlebl; ?></td>
-																		<td class="p-1"><input class="form-control text-right checkamountnotepmty_utility_<?php echo $ptb['id']; ?>" type="number" name="rent[]" value="<?php echo $bd['rent']; ?>" <?php echo $redonlytext; ?> ></td>
+																		<td class="p-1"><input aria-label="<?= htmlspecialchars(__('Rent'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right checkamountnotepmty_utility_<?php echo $ptb['id']; ?>" type="number" name="rent[]" value="<?php echo $bd['rent']; ?>" <?php echo $redonlytext; ?> ></td>
 																		<td class="p-1">
-																			<textarea class="form-control" name="remarks[]"><?php echo $bd['remarks']; ?></textarea>
+																			<textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="remarks[]"><?php echo $bd['remarks']; ?></textarea>
 																		</td>
 																	</tr>
 																	<?php $i++; } ?>
@@ -552,7 +552,7 @@ if(isset($_POST['submittenantbills'])){
 												</div>
 												</div>
 										</td>
-										<td class="p-2 text-center"><i class="fa fa-cog  f-16" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityonlyPopUp('<?php echo $ptb['id']; ?>')" ></i>
+										<td class="p-2 text-center"><i class="fa fa-cog  f-16" role="button" tabindex="0" aria-label="<?php echo __('Utility Bill'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Utility Bill'); ?>" onclick="opentTenantUtilityonlyPopUp('<?php echo $ptb['id']; ?>')" ></i>
 										</td>
 									</tr>
 									<?php  $m++; } ?> 
