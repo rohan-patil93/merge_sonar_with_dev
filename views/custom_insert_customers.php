@@ -842,7 +842,7 @@ function toggleRowLock(button) {
 					<div class="col-md-11">
 						<div class="media-left">
 							<a href="#" class="profile-image">
-								<img src="<?php echo $image; ?>" class=" img-120 user-img b-radius-10" alt="User profile" onerror="this.src='uploads/all/no-image.jpg';">
+								<img src="<?php echo $image; ?>" class=" img-120 user-img b-radius-10" alt="User profile" data-onerror-src="uploads/all/no-image.jpg">
 							</a>
 						</div>
 						<div class="media-body row">
@@ -1333,7 +1333,7 @@ function toggleRowLock(button) {
 												<span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
 											</label>
 											<input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ title="<?= __('Image') ?>" aria-label="Image">
-											<img alt="" src="<?php echo $image; ?>" id="outputdisplay_logo" width="200"  onerror="this.onerror=null;this.src='uploads/all/no-image.jpg';"/>
+											<img alt="" src="<?php echo $image; ?>" id="outputdisplay_logo" width="200"  data-onerror-src="uploads/all/no-image.jpg"/>
 											<input type="hidden" name="hid_image" value="<?php echo $customers['image'] ;  ?>">
 										</div>
 									</div>
