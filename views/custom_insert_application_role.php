@@ -41,7 +41,7 @@ $module_setup = $result['module_setup'];
   <div class="card-body"> 
   	<div class="row mb-3">
   		<div class="col-lg-4">
-  			<label class="form-label"><?= __('Module') ?></label>
+  			<span class="form-label d-inline-block fw-bold"><?= __('Module') ?></span>
   			<select aria-label="<?= htmlspecialchars(__('Module id'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="module_id" onchange="changeModule(this.value)" >
   				<option value="0">Select Any One Module</option>
 				<?php foreach($module_setup as $module_setups){ ?>
