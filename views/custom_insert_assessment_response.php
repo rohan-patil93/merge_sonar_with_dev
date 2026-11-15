@@ -265,7 +265,7 @@ function submitassessment(){
       </div>
       <div class="row ">  
         <div class="col-md-4" STYLE="OVERFLOW: HIDDEN;">
-            <img src="assets/media/books/img-72.jpg" class="">
+            <img alt="" src="assets/media/books/img-72.jpg" class="">
         </div>  
         <input type="hidden" name="emp_id" value="<?php echo $_SESSION['emp_id'];?>">
         <input type="hidden" id="category" name="category" value="<?php echo $assessment_details['category'];?>">
@@ -305,7 +305,7 @@ function submitassessment(){
                   }
                   ?>
                   <b> <div class="<?php echo $option_cat;?>-group required">
-                    <input type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="1") echo "required"; ?> <?php echo in_array($option, (array)$answer)==1 ?  'Checked': '';?> >
+                    <input aria-label="<?= htmlspecialchars(__('Response option'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="1") echo "required"; ?> <?php echo in_array($option, (array)$answer)==1 ?  'Checked': '';?> >
                     <label for="q1"><?php echo htmlspecialchars(__($option ?? '')); ?> </label> </div>
                   </b>
                 <?php }
