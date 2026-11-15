@@ -157,7 +157,7 @@
                                         </div>
                                         <?php } ?>
 										<div class="row text-right">
-                                            <a class="float-right f-w-600 text-primary forgot-pwd-open" href="#" onclick="fergotpassworddisplay()" >Forgot Password?</a>
+                                            <a class="float-right f-w-600 text-primary forgot-pwd-open" href="#top" onclick="fergotpassworddisplay()" >Forgot Password?</a>
                                         </div>
                                         <div class="form-group">
 									        <input class="form-control" type="hidden" id="<?php echo $subdomain; ?>"  name="ip" value="<?php echo getIPAddress();?>" >
@@ -194,7 +194,7 @@
                                             <input type="hidden" name="submit" value="signup" />
                                             <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-3">Sign Up</button>
                                         </div>
-                                        <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <a class="text-primary" href="#" onclick="loginpagedisplay()">Sign In</a></p>
+                                        <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <a class="text-primary" href="#top" onclick="loginpagedisplay()">Sign In</a></p>
                                     </div>
 								</form>
                             </div>
