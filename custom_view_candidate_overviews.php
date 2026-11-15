@@ -538,7 +538,7 @@ $due_date_period_list = $result['period_list'];
                         ?>
                         <tr>
                           <td>
-                            <h6 class="mb-0 f-14"><i class="ti-pencil"
+                            <h6 class="mb-0 f-14"><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-pencil"
                                 onclick="window.open('index.php?option=COM_INSERT_CANDIDATE&ETYPE=<?php echo str_replace(" ", "_", $keylabel); ?>&Rid=<?php echo $_GET['Rid']; ?>', '_blank');"></i>
                               <?php echo $keylabel; ?></h6>
                           </td>
@@ -756,7 +756,7 @@ $due_date_period_list = $result['period_list'];
                                           </h6>
                                         </a>
                                       <?php } else { ?>
-                                        <h6 class="mb-0 f-14" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i
+                                        <h6 role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="mb-0 f-14" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i
                                             class="ti-check-box"></i> <?php echo $tas['task_name']; ?></h6>
                                       <?php } ?>
                                     </td>
