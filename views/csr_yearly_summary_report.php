@@ -47,7 +47,7 @@ function fyLabel($year) {
       <form method="POST" id="yearForm">
         <div class="row mb-3">
           <div class="col-md-3">
-            <label><b><?= __('Financial Year') ?></b></label>
+            <span class="d-inline-block fw-bold" style="margin-bottom:5px"><b><?= __('Financial Year') ?></b></span>
             <select aria-label="<?= htmlspecialchars(__('Year'), ENT_QUOTES, 'UTF-8'); ?>" name="year"
         class="form-control js-example-basic-single"
         id="csrYearSelect">
