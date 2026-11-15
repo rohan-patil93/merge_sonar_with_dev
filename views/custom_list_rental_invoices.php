@@ -160,16 +160,16 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
                             <label class="form-label label label-primary" style="color: <?php echo $stausresult[$ri['current_status']]['color']; ?>;    background:  <?php echo $stausresult[$ri['current_status']]['background_color']; ?>; border-color: <?php echo $stausresult[$ri['current_status']]['background_color']; ?>;"><?php echo $stausresult[$ri['current_status']]['name']; ?></label>
                           </h5>
                           <div class="card-header-right">
-                            <i class="ti-printer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Print" onclick="goToAnotherPageAndPrint('<?php echo $ri['id']; ?>','rental_invoices')"></i>
+                            <i role="button" tabindex="0" aria-label="Print" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-printer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Print" onclick="goToAnotherPageAndPrint('<?php echo $ri['id']; ?>','rental_invoices')"></i>
 
-                             <i class="ti-cloud-down" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download" onclick="DownloadPDF('<?php echo $ri['id']; ?>','rental_invoices')"></i>
+                             <i role="button" tabindex="0" aria-label="Download" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-cloud-down" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download" onclick="DownloadPDF('<?php echo $ri['id']; ?>','rental_invoices')"></i>
                              
 
                             <?php /**if($property_tenant_billings_shared_datetime[$ri['id']]['pdf_name'] !=""){  ?>       
                                <a href="/uploads/rental_invoices/<?php echo $property_tenant_billings_shared_datetime[$ri['id']]['pdf_name']; ?>" download><i class="ti-cloud-down" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download"></i>
                             <?php } **/ ?>
                             <?php if($ri['party_email'] !="" AND $property_tenant_billings_shared_datetime[$ri['id']]['id'] !=""){  ?>       
-                              <i class="ti-email" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Send Email" onclick="renatalInvoiceSend('<?php echo $property_tenant_billings_shared_datetime[$ri['id']]['id']; ?>','<?php echo $ri['ref_bill_type'];?>')"></i>
+                              <i role="button" tabindex="0" aria-label="Send Email" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-email" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Send Email" onclick="renatalInvoiceSend('<?php echo $property_tenant_billings_shared_datetime[$ri['id']]['id']; ?>','<?php echo $ri['ref_bill_type'];?>')"></i>
                             <?php } ?>
                           </div>
                       </div>
