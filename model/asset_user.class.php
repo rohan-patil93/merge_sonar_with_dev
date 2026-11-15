@@ -724,7 +724,7 @@ class assetUserClass extends userClass{
 		//$returnresult['history'] = $this->insertAssetTransaction($post,$table,$res,$assetupdatearray);
 		return $returnresult;
 	}
-function updateAssetAllocation($get, $post){
+public function updateAssetAllocation($get, $post){
 		global $callConfig;
 		$table =  "Assets";
 		foreach($post['asset_id'] as $key=>$rid){
@@ -742,7 +742,7 @@ function updateAssetAllocation($get, $post){
 		}
 		return $returncdc;
 	}
-function insertAsset($post){
+public function insertAsset($post){
 	global $callConfig;
 	$returncdc['post'] = $post;
 	//return $returncdc;
