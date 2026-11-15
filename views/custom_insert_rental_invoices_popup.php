@@ -217,7 +217,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 
 	<div class="row">
 		<div class="form-group col-lg-4">
-			<label class="col-lg-4"><?php echo __('Tenant'); ?></label>
+			<span class="col-lg-4 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Tenant'); ?></span>
 			<select aria-label="<?= htmlspecialchars(__('Cust id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single" name="cust_id" id="cust_id" onchange="getTenantDetails('getcustid',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($customers as $cust) { ?>					
@@ -226,7 +226,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 			</select> 
 		</div>
 		<div class="form-group col-lg-4">
-			<label class="col-lg-4"><?php echo __('Property'); ?></label>
+			<span class="col-lg-4 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Property'); ?></span>
 			<select aria-label="<?= htmlspecialchars(__('Property tenant detail id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="property_tenant_detail_id" id="property_tenant_detail_id" onchange="getTenantDetails('getproperty_tenant_detail_id',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>					
@@ -235,7 +235,7 @@ function rentalInvoicePopupCalculattion(ruid,parent_id){
 			</select> 
 		</div>
 		<div class="form-group col-lg-4">
-			<label class="col-lg-4"><?php echo __('Bills'); ?></label>
+			<span class="col-lg-4 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Bills'); ?></span>
 			<select aria-label="<?= htmlspecialchars(__('Property tenant billings id'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="property_tenant_billings_id" id="property_tenant_billings_id" onchange="getTenantDetails('getproperty_tenant_billings_id',this.value)">
 				<option value=""><?php echo __('Select Any One'); ?></option>
 				<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>					
