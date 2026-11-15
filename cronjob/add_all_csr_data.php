@@ -102,7 +102,7 @@ function syncTableData($fromdb, $todb, $table_name){
             CURLOPT_POSTFIELDS => $post,
         ));
         $res = curl_exec($curl);
-        
+
         $decoded = json_decode($res, 1);
         print_r($decoded);
         return $decoded;

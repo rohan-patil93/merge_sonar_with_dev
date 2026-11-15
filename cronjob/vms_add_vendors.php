@@ -46,7 +46,7 @@ if(count((array)$datas)>0){
       $curl = curl_init();
       curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://pilot.vendorstaq.com//api.php?mode=vmsvendorupdatetoapi&upload_ids='.implode(",",$lodids['resids']).'&ref_ids='.implode(",",$lodids['insertids']).'&user_id=1&server=dev.infistaq.in&company_id=1&data_name=vendorstaq_1',
-        //CURLOPT_URL => 'https://pilot.vendorstaq.com//api.php?mode=vmsvendorupdatetoapi&upload_ids='.implode(",",$lodids['resids']).'&delete_mode=Y&user_id=25&company_id=1&data_name=vendorstaq_1',  
+        //CURLOPT_URL => 'https://pilot.vendorstaq.com//api.php?mode=vmsvendorupdatetoapi&upload_ids='.implode(",",$lodids['resids']).'&delete_mode=Y&user_id=25&company_id=1&data_name=vendorstaq_1',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
