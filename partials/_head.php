@@ -1,3 +1,10 @@
+<script>
+/* Image fallback: replaces the former inline onerror="this.src='...'" handlers (same behaviour; stops if the fallback itself fails). */
+document.addEventListener('error', function (e) {
+    var t = e.target, fb = t && t.tagName === 'IMG' ? t.getAttribute('data-onerror-src') : null;
+    if (fb && t.getAttribute('src') !== fb) { t.src = fb; }
+}, true);
+</script>
 <title>Infistaq | Home</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
