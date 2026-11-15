@@ -198,7 +198,7 @@ function submitdetails(){
 		</div>
 		<div class="row">
 			<div class="form-group col-lg-4 select_caost_center w-full" style="display:none">
-				<label><?= __('Cost Center') ?> <span class="requried">*</span></label>
+				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Cost Center') ?> <span class="requried">*</span></span>
 				<select class="form-select js-example-basic-single " name="coast_center_id" aria-label="Coast Center Id">
 						<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach ($costcenters as $costcenter){ ?>					
@@ -253,7 +253,7 @@ function submitdetails(){
                  </div>   
 			</div>
 			<div class="form-group col-lg-7">
-				<label><?= __('Remarks') ?> </label>
+				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Remarks') ?> </span>
 				<textarea type="text" class="form-control" id="remarks" rows="4" cols="50" name="remarks" aria-label="Remarks"></textarea>
 			</div> 
 		</div>
