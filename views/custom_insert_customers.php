@@ -1334,7 +1334,7 @@ function toggleRowLock(button) {
 												<span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
 											</label>
 											<input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ title="<?= __('Image') ?>" aria-label="Image">
-											<img src="<?php echo $image; ?>" id="outputdisplay_logo" width="200"  onerror="this.onerror=null;this.src='uploads/all/no-image.jpg';"/>
+											<img alt="" src="<?php echo $image; ?>" id="outputdisplay_logo" width="200"  onerror="this.onerror=null;this.src='uploads/all/no-image.jpg';"/>
 											<input type="hidden" name="hid_image" value="<?php echo $customers['image'] ;  ?>">
 										</div>
 									</div>
@@ -1444,7 +1444,7 @@ function toggleRowLock(button) {
 		                                    </div>
 										</div>
 										<div class="col-lg-3 text-right d-flex flex-column justify-content-between ">
-											<span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Cliek To Remove') ?>" class="cursor-pointer" onclick="removeGSTDiv(<?php echo $mkseq; ?>)">
+											<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Cliek To Remove') ?>" class="cursor-pointer" onclick="removeGSTDiv(<?php echo $mkseq; ?>)">
 												<i class="ti-trash text-danger"></i> Remove
 											</span>
 											<div class="form-group ">
