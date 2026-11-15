@@ -445,7 +445,7 @@ $successChangeLabel = ($successRateChange >= 0 ? '&#8593; ' : '&#8595; ') . abs(
     <div class="dod-card custom-scroll" style="max-height: 300px;">
       <div class="dod-card-title-row">
         <h3 class="dod-card-title"><?= __('Visits This Week'); ?></h3>
-        <select class="dod-select" disabled>
+        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="dod-select" disabled>
           <option><?= __('This Week'); ?></option>
         </select>
       </div>
@@ -471,7 +471,7 @@ $successChangeLabel = ($successRateChange >= 0 ? '&#8593; ' : '&#8595; ') . abs(
     <div class="dod-card custom-scroll" style="max-height: 300px;">
       <div class="dod-card-title-row">
         <h3 class="dod-card-title"><?= __('Visit Success Rate'); ?></h3>
-        <select class="dod-select" disabled>
+        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="dod-select" disabled>
           <option><?= __('This Month'); ?></option>
         </select>
       </div>
