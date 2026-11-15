@@ -708,7 +708,7 @@ class configClass
 		}
 
 		
-function generateRandomString($length)
+public function generateRandomString($length)
   {
     $password = "";
     $possible = "12346789bcdfghjkmnpqrtvwxyzBCDFGHJKLMNPQRTVWXYZ";
@@ -728,7 +728,7 @@ function generateRandomString($length)
     //return $password.time();
   }	
 		
-function random_code()
+public function random_code()
 {
 	$string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
 	$rand = '';
