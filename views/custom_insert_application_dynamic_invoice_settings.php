@@ -2722,7 +2722,7 @@ if ($userData['user_photo'] != '') {
                     : ($sizeMap[$defaultSize] ?? 85);
                   ?>
 
-                  <img id="logoPreview" src="<?php echo $image; ?>" alt="<?php echo $image; ?>" style="display: block; position: absolute; max-height: <?php echo $finalSize; ?>px; left: 0; top: 0;
+                  <img id="logoPreview" src="<?php echo $image; ?>" alt="" style="display: block; position: absolute; max-height: <?php echo $finalSize; ?>px; left: 0; top: 0;
                   <?php echo empty($logoOptions['showLogo']) ? 'display: none;' : ''; ?>">
                   <div class="invoice-no" style="display: block; text-align: right;">
                     <p class="invoice" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Invoice
@@ -2833,7 +2833,7 @@ if ($userData['user_photo'] != '') {
                           style="<?php echo (!$tableOptions['showColumns']['item']) ? 'display: none;' : ''; ?>">
                           1</td>
                         <td class="img col-2">
-                          <img width="35px" src="<?= $image ?>" alt="<?= $image ?>">
+                          <img width="35px" src="<?= $image ?>" alt="">
                         </td>
                         <td class="item col-3 text-1">
                           xxxx
