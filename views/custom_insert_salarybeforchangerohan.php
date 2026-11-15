@@ -659,7 +659,7 @@ if(catlink=='PTX'){
                                                        <?php $addsaldata = $value['id'];
                                                        echo $value['name']; ?>
                                                        <div class="checkbox-fade fade-in-primary float-right">
-                                                        <label class="form-label ">
+                                                        <label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="form-label ">
                                                             <input type="hidden" name="addsaldata" id="<?php echo $addsaldata."_detail"; ?>" value='<?php echo json_encode($value); ?>' >
                                                             <input type="hidden" id="<?php echo $addsaldata."check"; ?>" value="<?php echo in_array($addsaldata, (array)$checkdata) ? 1 : 0 ; ?>">
                                                             <input type="checkbox"   <?php if(in_array($addsaldata, (array)$checkdata)){ echo __('checked '); } ?> <?php if(in_array($addsaldata, (array)$mandatroy)){ echo __('disabled'); } ?>   name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)">
