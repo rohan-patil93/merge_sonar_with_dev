@@ -115,11 +115,11 @@ $property_tenant_details = $result['property_tenant_details'];
 			<form id="unlocktenantform" method="post">
 				<div class="row">
 					<div class="form-group col-lg-6">
-						<label class="form-label"><?php echo __('Tenant Agreement Expiry Date'); ?> <span class="text-danger">*</span></label>
+						<span class="form-label d-inline-block fw-bold"><?php echo __('Tenant Agreement Expiry Date'); ?> <span class="text-danger">*</span></span>
 						<input aria-label="<?= htmlspecialchars(__('Un lock date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="un_lock_date" id="un_lock_date" onchange="GetDateToRentalInvoices()">
 					</div>
 					<div class="form-group col-lg-6">
-						<label class="form-label "><?php echo __('Remarks'); ?> <span class="text-danger">*</span></label>
+						<span class="form-label  d-inline-block fw-bold"><?php echo __('Remarks'); ?> <span class="text-danger">*</span></span>
 						<textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="remarks" id="remarks"></textarea>
 					</div>
 				</div>
