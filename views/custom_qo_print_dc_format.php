@@ -8,7 +8,7 @@
                     <h3 style="font-size: 13px; color: #000000; font-weight: 600; margin: 5px 0 0 0;"><?php echo $bill_by_name; ?></h3>
                 </th>
                 <th scope="col" style="padding: 5px; text-align: right;">
-                    <img style="width: 60px;" src="uploads/all/<?php echo $config['display_logo']; ?>">
+                    <img alt="" style="width: 60px;" src="uploads/all/<?php echo $config['display_logo']; ?>">
                 </th>
             </tr>
             <tr>
