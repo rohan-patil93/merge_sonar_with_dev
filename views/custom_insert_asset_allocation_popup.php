@@ -174,7 +174,7 @@ function submitdetails(){
 	<div class="card p-2 mt-2">	
 		<div class="row">
 			<div class="col-lg-6">
-				<label class="f-w-700"><?= __('Allocation Type') ?> <span class="requried text-danger">*</span></label>
+				<span class="f-w-700 d-inline-block" style="margin-bottom:5px"><?= __('Allocation Type') ?> <span class="requried text-danger">*</span></span>
 				<div class="form-radio">
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_e">
@@ -207,7 +207,7 @@ function submitdetails(){
 				</select> 
 			</div>
 			<div class="form-group col-lg-4 select_dept w-full" style="display:none">
-				<label><?= __('Department') ?> <span class="requried">*</span></label>
+				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Department') ?> <span class="requried">*</span></span>
 				<select class="form-select js-example-basic-single " name="departent_id" aria-label="Departent Id">
 						<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach ($departments as $departments){ ?>					
@@ -216,7 +216,7 @@ function submitdetails(){
 				</select> 
 			</div>
 			<div class="form-group col-lg-4 w-full" >
-				<label><?= __('User') ?> <span class="requried">*</span></label>
+				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('User') ?> <span class="requried">*</span></span>
 				<span class="d-block error-message text-danger"></span>
 				<select class="form-select js-example-basic-single requried_field" name="select_user_id" aria-label="Select User Id">
 						<option value=""><?= __('Select Any One') ?></option>
@@ -226,17 +226,17 @@ function submitdetails(){
 				</select> 
 			</div>
 			<div class="form-group col-lg-4">
-				<label><?= __('Start date') ?> <span class="requried text-danger">*</span></label>
+				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Start date') ?> <span class="requried text-danger">*</span></span>
 				<span class="d-block error-message text-danger"></span>
 				<input type="text" class="form-control datepicker requried_field" id="start_date"  name="start_date" value="<?php echo fromDate(); ?>" aria-label="Start Date">
 			</div>
 			<div class="form-group col-lg-4">
-				<label><?= __('End date') ?> <span class="requried text-danger">*</span></label>
+				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('End date') ?> <span class="requried text-danger">*</span></span>
 				<span class="d-block error-message text-danger"></span>
 				<input type="text" class="form-control datepicker requried_field" id="end_date" name="end_date" aria-label="End Date">
 			</div>
 			<div class=" col-lg-5" >
-				<label><?= __('How Do You Want The Asset To be Delivered?') ?><span class="requried">*</span></label>
+				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('How Do You Want The Asset To be Delivered?') ?><span class="requried">*</span></span>
 				<div class="form-radio">
 				<div class="radio radio-inline">
                       <label class="form-label">
