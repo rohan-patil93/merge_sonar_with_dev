@@ -335,17 +335,17 @@ function submitsurvey(){
               <div class="card-footer mt-5">
 
                 <?php if ($total_q!=$questionid){ ?> 
-                  <a href="#" id="save" <?php echo $dispnext; ?> onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?php echo __('Next'); ?> <i class="fas fa-chevron-right"> </i></a>
+                  <a href="#top" id="save" <?php echo $dispnext; ?> onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?php echo __('Next'); ?> <i class="fas fa-chevron-right"> </i></a>
                   <?php if($questionid==1) { ?>
-                    <a href="#" id="start" style="display: block"   onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?php echo __('Next'); ?> <i class="fas fa-chevron-right"> </i></a>
+                    <a href="#top" id="start" style="display: block"   onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?php echo __('Next'); ?> <i class="fas fa-chevron-right"> </i></a>
                   <?php } ?>
                 <?php } else {?>
-                  <a href="#" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i><?php echo __('Previous'); ?> </a>
+                  <a href="#top" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i><?php echo __('Previous'); ?> </a>
                 <?php } ?>
 
                 <!-- <a href="#" id="clear" onclick="callclear('<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-light-success font-weight-bold float-left">Clear Response</a> -->
                 <?php if ($questionid!=1 && $total_q!=$questionid){ ?> 
-                  <a href="#" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i><?php echo __('Previous'); ?> </a>
+                  <a href="#top" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i><?php echo __('Previous'); ?> </a>
                 <?php } ?>
                 
 
@@ -362,7 +362,7 @@ function submitsurvey(){
           <div class="q-n">
             <ul>
               <?php foreach ($display_questions as $qidkey=>$qidval) { ?>
-                <li><a id="summary<?php echo $qidkey;?>" href="#" onclick="callnext('<?php echo $qidkey;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" ><span class="badge badge-inverse-primary" id="summarytext<?php echo $qidkey;?>"><?php echo $qidkey; ?></span></a></li>
+                <li><a id="summary<?php echo $qidkey;?>" href="#top" onclick="callnext('<?php echo $qidkey;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" ><span class="badge badge-inverse-primary" id="summarytext<?php echo $qidkey;?>"><?php echo $qidkey; ?></span></a></li>
               <?php  } ?>
             </ul>
             <div class="row">
