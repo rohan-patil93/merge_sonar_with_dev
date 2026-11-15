@@ -45,4 +45,3 @@ if($explodeurl[1] == 'liveness-success'){
 	$url = API."?mode=updaterowtabledata&rid=".$api_hit_id."&table=api_hits&method=post&data_name=".$dataname;
 	$response = file_post_contents($url, $postdata, 'update');
 }
-?>

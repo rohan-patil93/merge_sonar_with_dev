@@ -38,4 +38,3 @@ $insertresponse = curl_exec($ch);
 $insertresponsede = json_decode($insertresponse,1);
 $last_id = $insertresponsede['LASTID'];
 echo json_encode(array('status'=>'success', 'LASTID'=>$last_id));
-?>

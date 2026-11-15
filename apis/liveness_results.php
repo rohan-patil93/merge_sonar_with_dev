@@ -43,4 +43,3 @@ if($request_id !=""){
 	$result['response_message'] = 'Request Id Is Empty';
 }
 echo json_encode($result);
-?>
