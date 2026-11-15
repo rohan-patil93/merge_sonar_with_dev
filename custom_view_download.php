@@ -1,5 +1,5 @@
 <?php
-include_once('includes/session.php');
+include_once 'includes/session.php';
 $array_data = $_SESSION['download_data'];
 $table = $_REQUEST['page']!="" ? $_REQUEST['page'] : 'download';
 //echo "<pre>"; print_r($array_data);

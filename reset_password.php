@@ -1,6 +1,6 @@
 <?php
-include_once('dbconfig.php');
-include_once('comm.php');
+include_once 'dbconfig.php';
+include_once 'comm.php';
 //print_r($_POST);
 //include_once('views/custom_logout.php');
 session_start();

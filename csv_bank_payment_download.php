@@ -1,7 +1,7 @@
 <?php
-include_once('includes/session.php');
-include_once('dbconfig.php');
-include_once('comm.php');
+include_once 'includes/session.php';
+include_once 'dbconfig.php';
+include_once 'comm.php';
 $head_array = array('PYMT_PROD_TYPE_CODE','PYMT_MODE','DEBIT_ACC_NO','BNF_NAME','BENE_ACC_NO','BENE_IFSC','AMOUNT','DEBIT_NARR','CREDIT_NARR','MOBILE_NUM','EMAIL_ID', 'REMARK', 'PYMT_DATE', 'REF_NO', 'ADDL_INFO1', 'ADDL_INFO2', 'ADDL_INFO3', 'ADDL_INFO4', 'ADDL_INFO5', 'LEI_NUMBER');
 $data[] = $head_array;
 $pay_year =$_GET['pay_year'];

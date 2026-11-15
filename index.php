@@ -4,9 +4,9 @@ $maxtimeshow = 40;
 $start =0;
 
 date_default_timezone_set('Asia/Kolkata');
-include_once('includes/session.php');
-include_once('dbconfig.php');
-include_once('comm.php');
+include_once 'includes/session.php';
+include_once 'dbconfig.php';
+include_once 'comm.php';
 
 //echo "-------------------------------------------".DUMPTABLE;
 //include_once('views/custom_logout.php'); exit;
@@ -17,7 +17,7 @@ if(isset($_GET['view_session'])){
     echo "<pre>"; print_r($_SESSION); echo "</pre>";
 }
 if($_GET['option'] =="COM_LOGOUT" || $_GET['option'] =="com_logout"){
-        include_once("views/custom_logout.php"); exit;
+        include_once "views/custom_logout.php"; exit;
 }
 if($_GET['check_m'] =="SSS"){
         echo customeummarmonyformateifinecheck('700000.00'); exit;
@@ -200,11 +200,11 @@ if($user['user_type'] ==4){  //db config get candidate type
     }
     $check = array('com_logout','COM_INSERT_CANDIDATE','COM_LIST_CANDIDATE_DOCUMENTS','COM_LIST_CANDIDATE_QUERY','COM_LIST_CANDIDATE_OFFER','COM_LIST_JOIN_REQUIRED_DOCUMENTS','COM_INSERT_EMPLOYEE_CONTRACT','COM_VIEW_CANDIDATE_DETAILS');
     if(!in_array($_GET['option'], (array)$check) and $_GET['option'] !=""){
-        include_once("includes/controller.php");
+        include_once "includes/controller.php";
         $disptemp = "views/custom_logout.php";
     }else{
         //$_GET['option'] = 'COM_LIST_CANDIDATE_INFO';
-        include_once("includes/controller.php");
+        include_once "includes/controller.php";
     }
 }elseif($user['user_type'] ==3){ //db config get Vendor type
     if(count((array)$_SESSION['application_pages']) == 0){
@@ -253,7 +253,7 @@ if($user['user_type'] ==4){  //db config get candidate type
     }
 
     //$check = array('com_logout','COM_INSERT_VENDOR','COM_LIST_EMPLOYEES','COM_INSERT_VENDORS','COM_LIST_VENDOR_RATE_CARDS','COM_INSERT_VENDOR_RATE_CARDS','COM_LIST_JOB_POSTING_CANDIDATES','COM_LIST_CONTRACT_EMPLOYEES','COM_LIST_INBOX','COM_LIST_JOB_POSTING_CANDIDATE','COM_INSERT_CANDIDATE','COM_INSERT_EMP_CONTRACTS','COM_INSERT_EMPLOYEE_CONTRACT','COM_INSERT_CANDIDATES','COM_LIST_CANDIDATE_DOCUMENTS','COM_LIST_CANDIDATE_QUERY','COM_LIST_CANDIDATE_OFFER','COM_LIST_JOIN_REQUIRED_DOCUMENTS','COM_VIEW_PROJECT_TIMESHEETS','COM_VIEW_DASHBOARD_VENDORS','COM_INSERT_PURCHASE_INVOICES','COM_LIST_TABLE_FILTERS');
-    include_once("includes/controller.php");
+    include_once "includes/controller.php";
 }else{
 
 
@@ -391,7 +391,7 @@ if(count((array)$_SESSION['application_menu']) == 0 and !isset($_SESSION['applic
 	if($timeprint == '1' and $maxtimeshow >= '15'){
 		echo "Clock in out details - ".date('m/d/Y h:i:s a')."</br>";
 	}
-   include_once("includes/controller.php");
+   include_once "includes/controller.php";
    if($timeprint == '1' and $maxtimeshow >= '16'){
 	   echo "control page include - ".date('m/d/Y h:i:s a')."</br>";
    }
@@ -456,7 +456,7 @@ if(isset($_SESSION['work_module_setup_id']) && $_SESSION['work_module_setup_id']
 <html lang="en" <?php echo $_SESSION['selected_application_languages']=='arabic'?'dir="rtl"':''; ?>>
 <head>
 <title>InfiSuite | Home</title>
-<?php  include_once("partials/_head.php");
+<?php  include_once "partials/_head.php";
 if($timeprint == '1' and $maxtimeshow >= '17'){
 	echo "CSS Ending - ".date('m/d/Y h:i:s a')."</br>";
 }
@@ -472,7 +472,7 @@ if($timeprint == '1' and $maxtimeshow >= '17'){
         <div class="pcoded-container navbar-wrapper">
 	 <?php
 		if($timeprint == '1' and $maxtimeshow >= '18'){	echo "before Header - ".date('m/d/Y h:i:s a')."</br>"; }
-		include_once("partials/_header.php");
+		include_once "partials/_header.php";
 
 		if($timeprint == '1' and $maxtimeshow >= '18'){	echo "After Header - ".date('m/d/Y h:i:s a')."</br>"; }
 	?>
@@ -488,10 +488,10 @@ if($timeprint == '1' and $maxtimeshow >= '17'){
             			//$count_nav = 3;
             			 if($count_nav >0){
                                     if($_SESSION['nav_type'] == "LEFT" || $count_nav>8){
-                                        include_once("partials/_side_nav.php");
+                                        include_once "partials/_side_nav.php";
 
                                      }else{
-                                       include_once("partials/_side_top_nav.php");
+                                       include_once "partials/_side_top_nav.php";
 
                                     }
             			}
@@ -533,7 +533,7 @@ if($_SESSION['user_activated'] == 'N' and $_GET['option'] != "com_logout"){
                         <?php
 
                         //echo "&&&&&&&&&".$disptemp;
-                        include_once($disptemp); //echo $count_nav; //include_once("views/new_hrms_dash_board.php");
+                        include_once $disptemp; //echo $count_nav; //include_once("views/new_hrms_dash_board.php");
                          ?>
                         <?php
 						if($timeprint == '1' and $maxtimeshow >= '20'){
@@ -549,13 +549,13 @@ if($_SESSION['user_activated'] == 'N' and $_GET['option'] != "com_logout"){
                 </div>
             </div>
         </div>
-	<?php include_once("partials/_footer.php");
+	<?php include_once "partials/_footer.php";
 	?>
     </div>
     <?php
         if(!isset($_SESSION['expiryalert']) and EXPIRY_DOCUMENT_DISPLAY=='Y'){
             $_SESSION['expiryalert'] = '1';
-            include_once('views/custom_list_expiry_documents.php');
+            include_once 'views/custom_list_expiry_documents.php';
         }
     ?>
     <!-- Warning Section Ends -->

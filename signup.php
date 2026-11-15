@@ -2,7 +2,7 @@
 /*if(isset($_POST['submit'])){
 print_r($_POST); exit;
 } */
-include_once('dbconfig.php');
+include_once 'dbconfig.php';
 session_start();
 /*
 unset($_SESSION['userid']);

@@ -1,8 +1,8 @@
 <?php
 ini_set('display_errors' ,0);
-include_once('includes/session.php');
-include_once('dbconfig.php');
-include_once('comm.php');
+include_once 'includes/session.php';
+include_once 'dbconfig.php';
+include_once 'comm.php';
 
 if(isset($_POST['submit'])){
 	$_POST['company_id']=$_SESSION['company_id'];

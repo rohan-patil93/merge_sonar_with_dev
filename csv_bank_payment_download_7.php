@@ -1,7 +1,7 @@
 <?php
-include_once('includes/session.php');
-include_once('dbconfig.php');
-include_once('comm.php');
+include_once 'includes/session.php';
+include_once 'dbconfig.php';
+include_once 'comm.php';
 
 $head_array = array('Transaction type (Within Bank (WIB)/NEFT (NFT)/RTGS (RTG)/IMPS (IFC))','Debit Account no Should be exactly 12 digit','IFSC (Always 11 character alphanumeric and 5th character always 0 (zero)) (For ICICI bank accounts keep it blank)','Beneficiary Account No (Max length for other bank 34 character alphanumeric and for ICICI Bank 12 digit number )','Beneficiary Name (Max length 32 Character) (No Special Character is allowed but Space is allowed)','Amount (Should not be more than 15 digit including decimals and paise)','Remarks for Client(should not be more than 21 characters)','Remarks for Beneficiary (should not be more than 30 characters)');
 

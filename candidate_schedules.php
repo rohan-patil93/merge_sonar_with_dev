@@ -1,6 +1,6 @@
 <?php
-  include_once('dbconfig.php');
-  include_once('comm.php');
+  include_once 'dbconfig.php';
+  include_once 'comm.php';
   if(isset($_POST['btnsubmited'])){
         $url = API."?mode=insertcandidateschedule&method=post&data_name=".base64_decode($_POST['softversion']);
         $response = file_post_contents($url, $_POST, 'insert');

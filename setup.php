@@ -1,9 +1,9 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = "1";
 ini_set('display_errors' ,0);
-include_once('includes/session.php');
-include_once('dbconfig.php');
-include_once('comm.php');
+include_once 'includes/session.php';
+include_once 'dbconfig.php';
+include_once 'comm.php';
 if($_GET['setup'] == 'F'){
    unset($_SESSION['login_details']);
         ?>
@@ -971,7 +971,7 @@ $date_format = str_replace('yyyy', 'yy',$date_format); **/
 				}else{
 					$nextseqstartnumber = '';
 				}
-				include_once("setups/".$pagedetail[0]['page_name'].".php");
+				include_once "setups/".$pagedetail[0]['page_name'].".php";
 				$previousarray = end($pagedetail);
 				$previousseqnumber = $previousarray['sequence'];
 			}  /**/

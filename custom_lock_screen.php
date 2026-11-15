@@ -1,5 +1,5 @@
 <?php
-include_once('dbconfig.php');
+include_once 'dbconfig.php';
 session_start();
 //session_destroy();
 $_SESSION['userid']="";

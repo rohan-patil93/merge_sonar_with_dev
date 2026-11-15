@@ -1443,13 +1443,13 @@ function validategstin($gstNumber)
 	$GSTINFORMAT_REGEX = "/[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}/";
 	if (preg_match($GSTINFORMAT_REGEX, $gstNumber)) {
 		if (gst_error_check($gstNumber) == $gstNumber) {
-			return (1);
+			return 1;
 		} else {
-			return (0);
+			return 0;
 		}
 
 	} else {
-		return (0);
+		return 0;
 	}
 }
 function gst_error_check($gst_number)
@@ -1479,7 +1479,7 @@ function gst_error_check($gst_number)
 	}
 	$checkCodePoint = ($mod - ($sum % $mod)) % $mod;
 	$inputChars = implode('', (array) $inputChars);
-	return ($inputChars . $cpChars[$checkCodePoint]);
+	return $inputChars . $cpChars[$checkCodePoint];
 }
 function emaildatareplaceNew($data, $val)
 {
@@ -1715,7 +1715,7 @@ function todisplayquerylist($data)
 	}
 	ob_start();
 	echo '<div class="col-lg-6">';
-	include_once("views/custom_query.php");
+	include_once "views/custom_query.php";
 	echo '</div>';
 	return ob_get_clean();
 }

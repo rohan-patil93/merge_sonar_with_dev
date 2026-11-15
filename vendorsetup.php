@@ -1,8 +1,8 @@
 <?php
 ini_set('display_errors' ,0);
-include_once('includes/session.php');
-include_once('dbconfig.php');
-include_once('comm.php');
+include_once 'includes/session.php';
+include_once 'dbconfig.php';
+include_once 'comm.php';
 $user_id =  $_SESSION['userid'];
 $data12["where"] = array('email'=>$_SESSION['email']);
 $datw12 = urlencode(json_encode($data12));

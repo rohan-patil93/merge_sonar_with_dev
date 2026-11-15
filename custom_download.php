@@ -1,5 +1,5 @@
 <?php
-include_once('includes/session.php');
+include_once 'includes/session.php';
 //$array_data = json_decode(urldecode($_REQUEST['data']),1);
 $array_data = $_SESSION['download_data'];
 //print_r($_SESSION['head_data']);

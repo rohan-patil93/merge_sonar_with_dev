@@ -69,7 +69,7 @@ if (count($parts) > 2) {
 $dbconfig_floder = "custom_code/" . $subdomain;
 $dbconfig_file = "custom_code/" . $subdomain . "/dbconfig.php";
 if ($subdomain != "" && is_dir($dbconfig_floder) && file_exists($dbconfig_file)) {
-  include_once($dbconfig_file);
+  include_once $dbconfig_file;
 }
 
 
