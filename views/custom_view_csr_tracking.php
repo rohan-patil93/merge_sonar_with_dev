@@ -168,8 +168,7 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
     $fid = 'proposal_id';
     $url = API . "?mode=gettabledetails&method=get&rid=" . $rid . "&table=" . $table_name1 . "&fid=" . $fid;
     $che = callAPI($url);
-    $return = json_decode($che, 1);
-    return $return;
+    return json_decode($che, 1);
   }
   function getProposalData($rid)
   {
@@ -177,8 +176,7 @@ if(isset($_GET['ajax_page']) && $_GET['ajax_page'] == 'Y'){
     $fid = 'id';
     $url = API . "?mode=singlerowtabledata&method=get&rid=" . $rid . "&table=" . $table_name2 . "&fid=" . $fid;
     $proposal_data = callAPI($url);
-    $proposal_return = json_decode($proposal_data, 1);
-    return $proposal_return;
+    return json_decode($proposal_data, 1);
   }
   $table_name2 = 'csr_proposal_data';
   $url = API . "?mode=gettabledetails&method=get&table=" . $table_name2;

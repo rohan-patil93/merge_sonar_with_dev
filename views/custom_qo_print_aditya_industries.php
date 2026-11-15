@@ -101,8 +101,7 @@ function currencyFormat($number,$config){
             $formatter = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
             $formatter->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, $expoldform[1]);
             $formattedNumber = $formatter->formatCurrency($number, 'INR');
-            $formattedCurrencyWithoutSymbol = trim(str_replace($formatter->getSymbol(NumberFormatter::CURRENCY_SYMBOL), '', $formattedNumber));
-            return $formattedCurrencyWithoutSymbol;
+            return trim(str_replace($formatter->getSymbol(NumberFormatter::CURRENCY_SYMBOL), '', $formattedNumber));
         }else{
             return number_format($number, $expoldform[1], '.', ',');
         }

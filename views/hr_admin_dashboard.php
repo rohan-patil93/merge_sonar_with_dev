@@ -4,8 +4,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
 function percnetagetwovalue($num_amount, $num_total) {
   $count1 = $num_amount / $num_total;
   $count2 = $count1 * 100;
-  $count = round($count2);
-  return $count;
+  return round($count2);
 }
 
 $admin_type = $_SESSION['admin_type'];

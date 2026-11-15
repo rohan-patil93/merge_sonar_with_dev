@@ -36,8 +36,7 @@ function currencyFormat($number,$config){
         if($expoldform[0]== 1){
             $formatter = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
             $formatter->setAttribute(\NumberFormatter::MIN_FRACTION_DIGITS, $expoldform[1]);
-            $formattedNumber = $formatter->formatCurrency($number, 'INR');
-            return $formattedNumber;
+            return $formatter->formatCurrency($number, 'INR');
         }else{
             return number_format($number, $expoldform[1], '.', ',');
         }

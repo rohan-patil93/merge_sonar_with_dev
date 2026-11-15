@@ -136,8 +136,7 @@ if(isset($month_lock['id']) && $month_lock['id']!=""){
 function timeConvertphp($val){
  $value = str_replace(' ', '', $val);
  $value = str_replace('m', '', $value);
- $value = str_replace('h', '.', $value);
- return $value;
+ return str_replace('h', '.', $value);
 }
 if(isset($_POST['savetimesheet'])){
  $vurl = API."?mode=tocheckesginemployee&emp_id=".$_SESSION['emp_id'];

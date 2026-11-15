@@ -106,8 +106,7 @@ function insertUserFieldData($table_name, $data)
     $data['created_date'] = nowDate();
     $data['created_by'] = $_SESSION['userid'];
     $url = API . "?mode=adddata&table=" . $table_name . "&method=post";
-    $response = file_post_contents($url, $data, 'insert');
-    return $response;
+    return file_post_contents($url, $data, 'insert');
 }
 
 $url = API . "?mode=getApplicationUsersDataforInsert&method=get&admin_type=" . $admin_type;

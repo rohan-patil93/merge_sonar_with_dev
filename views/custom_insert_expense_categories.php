@@ -83,8 +83,7 @@ function savecategory($postarry){
         $data['updated_by'] = $_SESSION['userid'];
         $url = API."?mode=updaterowtabledata&rid=".$postarry['rid']."&table=expense_categories&method=post";
         $response = file_post_contents($url, $data, 'update');
-        $pid = deocdeId("id:".$postarry["rid"]);
-        return $pid;
+        return deocdeId("id:".$postarry["rid"]);
     }else{
         $data['created_date'] = nowDate();
         $data['created_by'] = $_SESSION['userid'];
@@ -93,8 +92,7 @@ function savecategory($postarry){
         $url = API."?mode=adddata&table=expense_categories&method=post";
         $response = file_post_contents($url, $data, 'insert');
         $res = json_decode($response,1);
-        $pid = deocdeId("id:".$res["LASTID"]);
-        return $pid;
+        return deocdeId("id:".$res["LASTID"]);
     }
 }
 if(isset($_POST['submit'])){
