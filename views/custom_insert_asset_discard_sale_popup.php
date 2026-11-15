@@ -144,12 +144,12 @@ function submitdetails(){
 			<div class="form-group col-lg-4">
 				<label><?= __('Discard/ Sales date') ?> <span class="requried text-danger">*</span></label>
 				<span class="d-block error-message text-danger"></span>
-				<input type="text" class="form-control datepicker requried_field" id="discard_and_sales_date"  name="discard_and_sales_date" value="<?php echo fromDate(); ?>">
+				<input aria-label="<?= htmlspecialchars(__('Discard and sales date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker requried_field" id="discard_and_sales_date"  name="discard_and_sales_date" value="<?php echo fromDate(); ?>">
 			</div>
 			<div class="form-group col-lg-8">
 				<label><?= __('Reason') ?> <span class="requried text-danger">*</span></label>
 				<span class="d-block error-message text-danger"></span>
-				<textarea type="text" class="form-control requried_field" id="remarks" rows="4" cols="50" name="discard_and_sales_remarks" ></textarea>
+				<textarea aria-label="<?= htmlspecialchars(__('Discard and sales remarks'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control requried_field" id="remarks" rows="4" cols="50" name="discard_and_sales_remarks" ></textarea>
 			</div> 
 		</div>
 	</div>
