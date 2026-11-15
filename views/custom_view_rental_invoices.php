@@ -245,7 +245,7 @@ function emptyCheck($valu){
 				}
 				?>
 			<div class="" style="float: right;margin-right: 15px;">
-	            <img src="uploads/all/<?php echo $config['display_logo']; ?>" style="width:100px;">
+	            <img alt="" src="uploads/all/<?php echo $config['display_logo']; ?>" style="width:100px;">
 	        </div>
 			</h1>
 	        <div class="" style="width:49%;display: inline-block;vertical-align: middle;">
@@ -390,12 +390,12 @@ function emptyCheck($valu){
 	        	<?php } }else{ ?>
 	            <tr style="background: #eeeeee;">
 	                <th style="padding:5px;text-align: left;font-size: 12px;"><?= __('Particular'); ?></th>
-	                <th style="padding:5px;text-align: left;font-size: 12px;"><?= __('Note'); ?></th>
-					<th style="padding:5px;font-size: 12px;"><?= __('HSN/SAC'); ?></th>
-	                <th style="padding:5px;font-size: 12px;"><?= __('Qty'); ?></th> 
-	                <th style="padding:5px;font-size: 12px;"><?= __('UOM'); ?></th> 
-	                <th style="padding:5px;text-align: right;font-size: 12px;"><?= __('Rate'); ?></th>
-	              	<th style="padding:5px;text-align: right;font-size: 12px;"><?= __('Total'); ?></th>
+	                <th scope="col" style="padding:5px;text-align: left;font-size: 12px;"><?= __('Note'); ?></th>
+					<th scope="col" style="padding:5px;font-size: 12px;"><?= __('HSN/SAC'); ?></th>
+	                <th scope="col" style="padding:5px;font-size: 12px;"><?= __('Qty'); ?></th> 
+	                <th scope="col" style="padding:5px;font-size: 12px;"><?= __('UOM'); ?></th> 
+	                <th scope="col" style="padding:5px;text-align: right;font-size: 12px;"><?= __('Rate'); ?></th>
+	              	<th scope="col" style="padding:5px;text-align: right;font-size: 12px;"><?= __('Total'); ?></th>
 	            </tr>
 	            <?php foreach($transaction_items as $ta){ ?>
 	            <tr style="border: 1px solid #cccccc;">
@@ -490,7 +490,7 @@ function emptyCheck($valu){
 			                   <?php } ?>
 			                <tr style="border-top:1px solid #444444;border-bottom: 1px solid #444444;">
 			                    <th style="padding-top: 5px;text-align: left;border-top:1px solid #cccccc;font-weight: 500;"><span style="font-size: 21px;"><?= __('Grand Total'); ?></span> </th>
-			                    <th style="padding-top: 5px;text-align: right;border-top:1px solid #cccccc;font-weight: 500"><span style="font-size:21px;"><?php echo currencyFormat(round($transaction['total_amount']),$config); ?></span> </th>
+			                    <th scope="col" style="padding-top: 5px;text-align: right;border-top:1px solid #cccccc;font-weight: 500"><span style="font-size:21px;"><?php echo currencyFormat(round($transaction['total_amount']),$config); ?></span> </th>
 			                </tr>
 
 			            </table>
