@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 //echo "Test Work 1"; exit;
 
