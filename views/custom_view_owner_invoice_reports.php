@@ -7,7 +7,6 @@ $api = callAPI($url);
 $result = json_decode($api,1);
 $property_owners = $result['property_owners'];
 $property_owner_details = $result['property_owner_details'];
-//$rental_invoices = $result['rental_invoices'];
 $customers = $result['customers'];
 
 
@@ -156,7 +155,7 @@ function getOwnerProperty(valu){
 		            <tbody>
 		            	<?php
 		            		$t_rent_total_amount = $t_rent_payment =$t_rent_pending_amount =$t_utility_total_amoun = $t_utility_payment = $t_utility_pending_amount = $t_both_total = $t_both_payment = $t_both_due =$t_both_rent_dr=$t_both_rent_cr=$t_both_utility_dr=$t_both_utility_cr=$t_both_dr=$t_both_cr = 0;
-		                	$rentinvoices = $invoices[$powner['id']][$podetail['id']]; // $rental_invoices[oenwerid][detailsid];
+		                	$rentinvoices = $invoices[$powner['id']][$podetail['id']];
 		                	$i=1;
 		                	foreach($rentinvoices as $custid =>$rentinvoice){
 		                		$customer_detail = $customers[$custid];

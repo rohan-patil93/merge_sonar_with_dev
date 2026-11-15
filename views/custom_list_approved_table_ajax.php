@@ -76,7 +76,7 @@ $get_option = $_POST['get_option'];
 
 
 
-                        <th scope="col" class="text-center">Generate <?php //echo $rr_data['genrate_next_level']; ?> </th>
+                        <th scope="col" class="text-center">Generate <?php ?> </th>
                         <th scope="col" class="text-center"></th>
 
                     </tr>

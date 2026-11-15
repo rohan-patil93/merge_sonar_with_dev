@@ -1292,7 +1292,7 @@ function calculateTotal(){
 
 </tr>
 <?php if(count((array)$table2)>0){ $i=1;
- foreach ($table2 as $tab2) { //print_r($tab2); ?>
+ foreach ($table2 as $tab2) {?>
 <tr>
     <td>
         <label class="kt-checkbox"><input aria-label="Checkbox" class="form-control itemRow" type="checkbox"> <span></span> </label>
@@ -1396,7 +1396,7 @@ function calculateTotal(){
                         <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
                             <?php
                             $stausresult = ViewStatusData();
-                            foreach ($commentss as  $lists) { //print_r($vdvalue); ?>
+                            foreach ($commentss as  $lists) {?>
                             <div class="kt-timeline-v2__item">
 
                                 <div class="kt-timeline-v2__item-cricle">

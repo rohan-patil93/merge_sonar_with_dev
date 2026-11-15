@@ -12,7 +12,6 @@ $vendor_types = $result['vendor_types'];
 $states = $result['states'];
 $countries = $result['countries'];
 $cities = $result['cities'];
-//echo "<pre>"; print_r($states); echo "</pre>";
 $_SESSION['download_data'] = array();
 ?>
 
@@ -215,6 +214,6 @@ $_SESSION['download_data'] = array();
 	          	</tbody>
       		</table>
   		</div>
-  		<?php //echo "<pre>"; print_r($cssdata); echo "</pre>"; ?>
+  		<?php ?>
 	</div>
 </div>

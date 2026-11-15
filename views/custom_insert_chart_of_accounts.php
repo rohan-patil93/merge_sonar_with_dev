@@ -6,7 +6,6 @@ include_once '../comm.php';
 $vurl = API."?mode=getchartofaccounts";
 $resultapi = callAPI($vurl);
 $result = json_decode($resultapi,1);
-//print_r($result);
 $chart_of_accounts =$result['chart_of_accounts'];
 $account_type =$result['account_type'];
 $taxes =$result['taxes'];
@@ -23,12 +22,8 @@ $chartofaccounts = array();
 foreach($chart_of_accounts as $finanacerepogrp){
      $financereportgroupsreport[$finanacerepogrp['parent_account_code']][] = $finanacerepogrp;
 
-   // $financereportgroupsreport[$finanacerepogrp['parent_account_code']][$finanacerepogrp['account_code']] = $finanacerepogrp;
     $financereportgroups[$finanacerepogrp['account_code']] = $finanacerepogrp;
 }
-//echo "<pre>"; print_r($balanceaccountarray); echo "</pre>";
-//echo "<pre>"; echo "testing"; print_r($financereportgroupsreport['1000100010000000']); echo "</pre>";
-//print_r($financereportgroupsreport);
 ?>
 <script type="text/javascript">
     function addFinaanceAccGrp(){
@@ -262,9 +257,7 @@ function clickChartOfAccountLockAndUnlock(ca_status, ca_id){
                          if(file_exists("views/".$pageurl)){
                              include_once "views/".$pageurl;
                          }else{
-                            //echo $pageurl;
                              include_once $pageurl;
-                            //include_once('custom_insert_chart_of_accounts_ajax.php');
                          }
                         ?>
                     </div>

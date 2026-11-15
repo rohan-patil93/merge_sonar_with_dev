@@ -13,7 +13,6 @@ $ptbilling = $result['property_tenant_billings'];
 $rental_invoices = $result['rental_invoices'];
 $utility_rental_invoices = $result['utility_rental_invoices'];
 $opening_balance_inv = $result['opening_balance_inv'];
-//echo "<pre>";print_r($opening_balance_inv); echo "</pre>";
 ?>
 <div class="card">
     <form method="post">
@@ -101,7 +100,7 @@ $opening_balance_inv = $result['opening_balance_inv'];
                       <?php
                         if($bilamt['rental_invoice_id'] ==""){
                           echo '<p class="d-block text-dark text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="'.htmlspecialchars(__('Bill Amount'), ENT_QUOTES, 'UTF-8').'">B : '.customeummarmonyformateifine($bilamt['rent_total_amount'])."</span>";
-                        }else{ // print_r($rentinv);
+                        }else{
                         ?>
                         <p class="d-block text-dark text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Bill Amount'), ENT_QUOTES, 'UTF-8'); ?>">B : <?php echo customeummarmonyformateifine($bilamt['rent_total_amount']); ?></p>
                          <p class="d-block text-start mb-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Invoice Amount'), ENT_QUOTES, 'UTF-8'); ?>"><a href="index.php?option=COM_VIEW_RENTAL_INVOICES&rid=<?php echo $bilamt['rental_invoice_id']; ?>&table=rental_invoices&title=Rental Invoice" target="_blank" class="text-primary text-start">I &nbsp; : <?php echo customeummarmonyformateifine($rentinv['total_amount']); ?></a></p>

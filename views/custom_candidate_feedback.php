@@ -3,17 +3,12 @@ include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
 
-//print_r($_POST);
 $table_list = array("job_feedback_setup","job_feedback_questions","job_feedback_question_options");
 $company_id = $_SESSION['company_id'];
 $vurl = API."?mode=getcandidatefeedbackresult&job_candidate_id=".$_POST['job_candidate_id']."&job_selection_process_step_id=".$_POST['job_selection_process_step_id'];
-//echo $vurl;
 $configesponse = callAPI($vurl);
 $surveyData = json_decode($configesponse,1);
-//echo "<pre>"; print_r($surveyData);
 $survey_details = $surveyData['survey_details'];
-//print_r($survey_details);
-//$survey_response_details = $surveyData['survey_reponse_details'];
 
 $answer_data = $surveyData['response'];
 foreach($answer_data as $answer_da){
@@ -60,7 +55,6 @@ foreach ($qustion_types as $qtype) {
           <?php
           foreach($survey_details as $datail){
           $value_id = 0; $display_questions = $surveyData['question'][$datail['id']];
-          //print_r($display_questions);
           ?>
           <div class="row col-lg-12 font-weight-bolder h6 mb-2">
             <?= htmlspecialchars(__($datail['name'] ?? '')) ?>

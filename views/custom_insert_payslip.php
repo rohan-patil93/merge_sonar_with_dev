@@ -321,7 +321,7 @@ function expensesDetailsPopUp(emp_id,exp_id="",sub_id=""){
 
                           <div id="chart_Donut<?php echo $row; ?>" style="width: 100%; height: 200px;"></div>
 
-                            <div class="mt-7"><?php //echo $chart_id; ?>
+                            <div class="mt-7"><?php ?>
 
                             <div id="<?php echo $chart_id; ?>" class="d-flex justify-content-center"></div>
                             <input type="hidden" id="<?php echo $chart_data; ?>" class="chertvalues" data-id="chart_Donut<?php echo $row; ?>" value="<?php echo $chart_fill_data?>">

@@ -4,7 +4,6 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 $content = $_POST['html_content'];
 $options = new Options();
-//echo realpath('');
 $options->set('chroot', '/home/infistaq/live_infistaq_com/');
 $dompdf = new Dompdf($options);
 $dompdf->loadHtml($content);

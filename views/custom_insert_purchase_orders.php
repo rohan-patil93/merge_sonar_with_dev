@@ -584,7 +584,7 @@ function calculateTotal(){
 
 </tr>
 <?php if(count((array)$table2)>0){ $i=1;
- foreach ($table2 as $tab2) { //print_r($tab2); ?>
+ foreach ($table2 as $tab2) {?>
 <tr>
     <td>
         <label class="kt-checkbox"><input aria-label="<?php echo __('Checkbox'); ?>" class="form-control itemRow" type="checkbox"> <span></span> </label>

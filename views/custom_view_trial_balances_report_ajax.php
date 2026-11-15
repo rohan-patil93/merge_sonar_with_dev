@@ -203,9 +203,9 @@ if(count((array)$getbredcrump) != 0){
         <tr>
             <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;"><span class="<?php echo $textclasss; ?> cursor-pointer mb-0" onclick="<?php echo $onckiclfun; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $trialbal['account_code']; ?> <?php echo $icons; ?></span></td>
             <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;"><?php echo $trialbal['account_name']; ?></td>
-            <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right;" class="<?php echo ($accountdebitamount < 0)?"text-danger":""; ?>"><?php //echo ($accountdebitamount!="" && $accountdebitamount!="0")?customeummarmonyformate($accountdebitamount):"-";
+            <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right;" class="<?php echo ($accountdebitamount < 0)?"text-danger":""; ?>"><?php 
             echo ($accountdebitamount!="" && $accountdebitamount!="0")?accountingAmontFormat($accountdebitamount):"-"; ?></td>
-            <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right;" class="<?php echo ($accountcreditamount < 0)?"text-danger":""; ?>"><?php //echo ($accountcreditamount!="" && $accountcreditamount!="0")?customeummarmonyformate($accountcreditamount):"-";
+            <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right;" class="<?php echo ($accountcreditamount < 0)?"text-danger":""; ?>"><?php 
 
             echo ($accountcreditamount!="" && $accountcreditamount!="0")?accountingAmontFormat($accountcreditamount):"-";
              ?></td>

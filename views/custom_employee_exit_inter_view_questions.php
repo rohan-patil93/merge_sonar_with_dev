@@ -2,7 +2,6 @@
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
-//print_r($_POST);
 $category = array('1' =>'Survey','2'=> 'Poll' );
 $table_list = array(TBL_SURVEY_SETUP,TBL_SURVEY_SETUP_QUESTIONS,TBL_SURVEY_SETUP_QUESTION_OPTIONS);
 $company_id = $_SESSION['company_id'];
@@ -12,7 +11,6 @@ $vurl = API."?mode=getsurveyresult&company_id=".$company_id."&survey_emp_id=".$e
 $configesponse = callAPI($vurl);
 $surveyData = json_decode($configesponse,1);
 $survey_details = $surveyData['survey_details'];
-//print_r($survey_details);
 $survey_response_details = $surveyData['survey_reponse_details'];
 $survey_start_date = $survey_details['survey_start_date'];
 $survey_end_date = $survey_details['survey_end_date'];
@@ -22,7 +20,6 @@ $allocated_time =  $survey_details['allocated_time'] == '0'? ST_SURVEY_DURATION_
 $allocated_time = $allocated_time * 60;
 $display_questions = $surveyData['questions'];
 $answer = $surveyData['resultdata'];
-  //echo "<pre>";print_r($answer);
 $display_tag = $category[$survey_details['category']];
 
 $qustion_types = $surveyData['qustion_types'];
@@ -59,7 +56,7 @@ function formsubmit(){
 <div class="modal-body1" >
   <form method="post" id="myform" name="myform" action="">
     <div class="row q-sec m-10">
-      <input type="hidden" name="emp_id" value="<?php echo $_POST['emp_id'];//$_SESSION['emp_id'];?>">
+      <input type="hidden" name="emp_id" value="<?php echo $_POST['emp_id'];?>">
       <input type="hidden" name="category" value="<?php echo '1';?>">
       <input type="hidden" id="allocatedtime" value="<?php echo ST_SURVEY_DURATION_IN_MINUTES;?>">
       <input type="hidden" id="total_q" value="<?php echo $total_q;?>" name="total_q" >
@@ -72,8 +69,6 @@ function formsubmit(){
       foreach ($display_questions as $questionid=>$val) {
         $value_id++;
         $selectedoption = json_decode($answer[$questionid],1);
-        //print_r($selectedoption);
-        //echo $display_questions[$questionid]['options_display_type'];
         ?>
         <input type="hidden" name="value_id[]" value="<?php echo $questionid;?>">
         <div class="col-lg-12 mb-3" id="disdiv<?php echo $questionid;?>" <?php echo $addcss;?>>
@@ -104,7 +99,6 @@ function formsubmit(){
               <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="number"  class="form-control col-md-5" value=<?php echo $selectedoption;?> >
               <?php
             }elseif($display_questions[$questionid]['options_display_type']==4){
-             //$selectedoption =$answer[$questionid];
 
              ?>
              <textarea id="response_option<?php echo $questionid;?>"  name="response_option<?php echo $questionid;?>" class="form-control mb-2" placeholder=""><?php echo $selectedoption;?></textarea>

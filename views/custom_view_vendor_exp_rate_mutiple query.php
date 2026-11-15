@@ -2,7 +2,6 @@
 $url = API."?mode=togetjobtitleexploc";
 $apires = callAPI($url);
 $result = json_decode($apires,1);
-//echo "<pre>"; print_r($result); echo "</pre>";
 $_SESSION['download_data'] = array();
 ?>
 <style type="text/css">

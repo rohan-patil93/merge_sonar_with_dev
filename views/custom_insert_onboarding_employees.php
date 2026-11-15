@@ -15,7 +15,6 @@ if(isset($_GET['Rid']) && $_GET['Rid']!=""){
 $url = API."?mode=getemployees&employee_id=".$employee_id."&working_role_short_code=".$_SESSION['working_role_short_code'];
 $response = callAPI($url);
 $result = json_decode($response,1);
-//echo "<pre>"; print_r($result['emp_contacts']); echo "</pre>";
 $data = $result['employees'];
 $employees_display_fields = $result['employees_display_fields'];
 $vafield = json_decode($employees_display_fields['field_list'],1);
@@ -49,10 +48,6 @@ $reporting_manager =  $result['reporting_manager'];
 $emp_leave_balances = $result['emp_leave_balances'];
 $leavetype_detrails  = $emp_leave_balances['leavetype_detrails'];
 
-//echo "<pre>"; print_r($_POST); echo "</pre>";
-//echo "<pre>"; print_r($teams); echo "</pre>";
-//$employees_display_fields = $result['employees_display_fields'];
-//$vafield = json_decode($employees_display_fields['field_list'],1);
 function replaceNetTabAndsinglequote($string){
 	$search = ["\t", "'"]; // Characters to search for: tab and single quote
 	$replace = ''; // Empty string to remove the characters
@@ -813,7 +808,6 @@ function insertReleive(){
 								}else{
 									include "custom_insert_onboarding_employees_ajax.php";
 								}
-			  					//include('views/custom_insert_onboarding_employees_ajax.php');
 			  					unset($_POST['edittype']); unset($_POST['showpagetype']);
 			  				?>
 					  			</div>

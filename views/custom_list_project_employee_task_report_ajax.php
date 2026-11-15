@@ -13,7 +13,6 @@ $apires = callAPI($url);
 $result = json_decode($apires, 1);
 $tasks = isset($result['tasks']) ? $result['tasks'] : array();
 $progress_var = isset($result['project_status']) ? $result['project_status'] : array();
-// print_r($progress_var);
 
 $_SESSION['download_data'] = array();
 $cssdata = array();

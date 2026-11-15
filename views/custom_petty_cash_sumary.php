@@ -84,7 +84,7 @@
                                                         <tr style="text-align: center;">
                                                             <?php $grand = $grand+$mes['total'];
 
-                                                            foreach ($header as  $head) {  //print_r($head);?>
+                                                            foreach ($header as  $head) {?>
                                                             <th scope="col"><?php echo customeummarmonyformate($data[$key][$head['id']]); ?></th>
                                                         <?php } ?>
                                                         </tr>

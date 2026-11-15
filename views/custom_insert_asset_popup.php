@@ -8,7 +8,6 @@ $url = API."?mode=getassetallocation&Rid=".$rid."&resultgettype=INSERTPAGE";
 $data_details = callAPI($url);
 $details = json_decode($data_details,1);
 $assetcategory = $details['asset_categories'];
-//echo "<pre>"; print_r($details); echo "</pre>";
 $locations = $details['locations'];
 $departments = $details['departments'];
 $users = $details['users'];
@@ -19,7 +18,6 @@ $chart_of_accounts = $details['chart_of_accounts'];
 $depreciation_method= $details['depreciation_method'];
 $journals = $details['journals'];
 $custom_field=json_decode(urldecode($assetsdeatil['custom_field']),1);
-//$ass_status = array('1'=>'In Stock','2'=>'Out Stock','3'=>'Out For Repair','4'=>'Under Stock');
 $ass_condition = $details['asset_condition_type'];
 $allocation_type = array('1'=>'Create Assets','2'=>'Update Assets','3'=>'Allocation','4'=>'Return Assets','5'=>'Transefer');
 foreach($details['asset_status'] as $asset_status){
@@ -37,7 +35,6 @@ foreach($assetcategory as $acat){
 	$asset_categories[$acat['id']] = $acat;
 }
 
-//print_r($assetsdeatil);
 ?>
 <style>
 	.drop-zone {
@@ -456,7 +453,7 @@ function getDepreciationMethod(){
                 	<div class="row">
 	                   	<!-- <div class="form-group col-lg-6">
 							<label class="form-label"><?= __('Capitalization Price') ?></label>
-							<input class="form-control text-right"  type="text"  id="capitalization_price" name="capitalization_price"  value="<?php //echo $assetsdeatil['capitalization_price']; ?>" onblur="returnDepreciation()" aria-label="Capitalization Price">
+							<input class="form-control text-right"  type="text"  id="capitalization_price" name="capitalization_price"  value="<?php ?>" onblur="returnDepreciation()" aria-label="Capitalization Price">
 						</div> -->
 						<div class="form-group col-lg-6">
 							<span class="form-label d-inline-block fw-bold"><?= __('Capitalization Date') ?></span>

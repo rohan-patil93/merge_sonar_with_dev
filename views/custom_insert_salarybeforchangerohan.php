@@ -20,7 +20,6 @@ if(isset($_POST['submit'])){
 $pageurl = API."?mode=togetsalarycatdetaillist";
 $data =  callAPI($pageurl);
 $data = json_decode($data,1);
-//echo "<pre>"; print_r($data);
 $vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0','employee_type'=>1);
 $vdata = urlencode(json_encode($vdata1));
 $vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata;
@@ -47,13 +46,10 @@ if($_GET['Rid']!="" || $_GET['SEid']!=""){
         $disabled = "disabled";
         $main_id = explode(":",$main_ids);
         $datawr["where"] = array('is_active'=> '0','employee_id'=>$main_id['1']);
-        //echo "<pre>".$main_ids."--"; print_r($_GET);print_r($main_id); print_r($datawr);
         $costdata = urlencode(json_encode($datawr));
         $url = API."?mode=gettabledetailswithconditions&table=salary_template&data=".$costdata;
         $salarydata = callAPI($url);
         $salarydata = json_decode($salarydata,1);
-        //print_r($salarydata);
-        //print_r($salarydata);
         $salarydata = $salarydata[0];
     }
     if($_GET['SCid']!=""){
@@ -72,11 +68,9 @@ if($_GET['Rid']!="" || $_GET['SEid']!=""){
     $stpdata["where"] = array('is_active'=> '0','salary_template_id'=>$salarydata['id']);
     $stpdata["order"] = "component_cat_id ASC";
     $stpmdata = urlencode(json_encode($stpdata));
-    //echo "<pre>"; print_r($stpdata);
     $stpurl = API."?mode=gettabledetailswithconditions&table=salary_template_components&data=".$stpmdata;
     $salarytmpdata = callAPI($stpurl);
     $salarytmpdata = json_decode($salarytmpdata,1);
-    //print_r($salarytmpdata);
     foreach ((array)$salarytmpdata as  $salarytmpda) {
       $checkdata[] = $salarytmpda['component_id'];
       $placevalue[$salarytmpda['component_id']] = $salarytmpda;
@@ -103,7 +97,6 @@ $eedata1["order"] = "id Desc";
 $eedata1["limit"] = "0,1";
 $eedata = urlencode(json_encode($eedata1));
 $curl = API."?mode=gettabledetailswithconditions&table=emp_provident_funds&data=".$eedata;
-    //echo $curl;
 $cudata = callAPI($curl);
 $cudata = json_decode($cudata,1);
 $esdata =  $cudata['0'];
@@ -111,7 +104,6 @@ $listpf = $esdata;
 $pfval = $esdata['employee_contribution'];
 $emppfval = $esdata['employer_contribution'];
 $curl = API."?mode=gettabledetailswithconditions&table=emp_state_insaurance&data=".$eedata;
-    //echo $curl;
 $cudata = callAPI($curl);
 $cudata = json_decode($cudata,1);
 $esdata =  $cudata['0'];
@@ -130,10 +122,6 @@ $ptsalabs = $ptdata['0']['slabs'];
 
 $sal_emp_id = $salarydata['employee_id']!="" ? $salarydata['employee_id'] : $_GET['newempid'];
 
-/*if(count((array)$salarytmpdata)<1){
-    $salarytmpdata = "";
-}
-echo "---------"; print_r($salarydata);echo "++++";print_r($salarytmpdata);*/
 ?>
 <script type="text/javascript">
     function addandremove(type,valu){
@@ -747,11 +735,9 @@ if(catlink=='PTX'){
                                         </thead>
                                     </table>
                                     <?php $j=1; foreach ($data as  $dat) {
-                                            //print_r($dat);
                                         if(in_array($dat['id'], (array)$checkmainids)){
                                             $maincss ="";
                                         }else{
-                                                //$maincss = "style='display: none;'";
                                         }
                                         ?>
                                         <table role="presentation" <?php echo $maincss; ?> id="invoiceItem<?php echo  $dat['id']; ?>">
@@ -777,7 +763,6 @@ if(catlink=='PTX'){
                                                  $read_only = "";
                                              }
                                              $note = urlencode($value['note']);
-                                                 //print_r($value);
                                              if(in_array($value['id'], (array)$checkdata)){
                                                  ?>
                                                  <tr  id="<?php echo $value['id']; ?>" >
@@ -802,7 +787,6 @@ if(catlink=='PTX'){
                                                 <td style="width: 20%" >
                                                     <?php
                                                     $cat_type = $placevalue[$value['id']]['component_type'];
-                                                        // if($cat_type ==""){
                                                     $cat_type = $value['calculation_type'];
                                                          ///}
                                                     $component_number = $placevalue[$value['id']]['component_number'];
@@ -898,20 +882,6 @@ if(catlink=='PTX'){
     </div>
 </div>
 <?php }else{
-   /* $main_ids = encodeId($_GET['Rid']);
-    $main_id = explode(":",$main_ids);
-    $datawr["where"] = array('is_active'=> '0','id'=>$main_id['1']);
-    $costdata = urlencode(json_encode($datawr));
-    $url = API."?mode=gettabledetailswithconditions&table=salary_template&data=".$costdata;
-    $salarydata = callAPI($url);
-    $salarydata = json_decode($salarydata,1);
-    $salarydata = $salarydata[0];
-    $stpdata["where"] = array('is_active'=> '0','salary_template_id'=>$salarydata['id']);
-    $stpdata["order"] = "component_cat_id ASC";
-    $stpmdata = urlencode(json_encode($stpdata));
-    $stpurl = API."?mode=gettabledetailswithconditions&table=salary_template_components&data=".$stpmdata;
-    $salarytmpdata = callAPI($stpurl);
-    $salarytmpdata = json_decode($salarytmpdata,1);*/
     $datacat["where"] = array('is_active'=> '0');
     $catdata = urlencode(json_encode($datacat));
     $caturl = API."?mode=gettabledetailswithconditions&table=salary_categories&data=".$catdata;

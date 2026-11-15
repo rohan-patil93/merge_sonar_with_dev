@@ -7,7 +7,6 @@ $credit_notes_sum = $result['credit_notes_sum'];
 $debit_notes_sum = $result['debit_notes_sum'];
 $property_tenant_billings_shared_datetime = $result['property_tenant_billings_shared_datetime'];
 $stausresult = ViewStatusData();
-//echo "<pre>"; print_r($rental_invoices); echo "</pre>";
 ?>
 <script type="text/javascript">
   function OpenInsertRentalInvoicePopUp(billtype=""){

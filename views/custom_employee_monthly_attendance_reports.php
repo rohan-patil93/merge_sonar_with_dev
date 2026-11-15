@@ -8,7 +8,6 @@ $session_month_key = 'attendance_report_month';
 $url = API . "?mode=getEmployeesAttendanceData&method=get";
 $result = callAPI($url);
 $result = json_decode($result, true);
-//echo "<pre>"; print_r($result); echo "<pre>";
 $employees = $result['table'] ?? array();
 
 $employee_id = $_SESSION[$session_employee_key] ?? '';

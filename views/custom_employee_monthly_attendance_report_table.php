@@ -21,10 +21,8 @@ if (!$employee_id || !$month) {
 $url = API . "?mode=getEmployeesAttendanceData&method=get"
 	. "&employee_id={$employee_id}"
 	. "&month={$month}";
-//echo $url;
 $response = callAPI($url);
 $response = json_decode($response, true);
-//echo "<pre>"; print_r($response); echo "</pre>";
 $attendance = $response['attendance_data'] ?? array();
 $holidays   = $response['holidays'] ?? array();
 $leaves     = $response['leaves'] ?? array();
@@ -93,8 +91,6 @@ for ($fdate = strtotime($from_date); $fdate <= strtotime($lto_date); $fdate = st
     }
 }
 $cnt_holiday = count((array)$holidays);
-//$sundays = floor((date('t', strtotime($month."-01")) + date('w', strtotime($month."01")) - 1) / 7);
-//print_r($atdata);
 $emp_work_days = $atdata['P'];
 foreach($app_leave_day as $app_day){
     if($app_day['salad_from'] <= $emp_work_days && $app_day['salad_to'] >= $emp_work_days ){

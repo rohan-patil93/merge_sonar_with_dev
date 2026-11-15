@@ -353,7 +353,7 @@ function TagDelete(){
     <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_4" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">FeedBack Rating Report</a>
   </li>
 </ul>
-<div class="tab-content mt-5 <?php //echo $event_disabled; ?>" id="myTabContent">
+<div class="tab-content mt-5 <?php ?>" id="myTabContent">
  <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel"  <?php if($jobcand['file']!=""){ ?> style="height: 1000px;" <?php
 } ?> >
   <?php if($jobcand['file']!=""){ ?>
@@ -423,7 +423,7 @@ function TagDelete(){
 <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
  <div class="card-block accordion-block color-accordion-block">
   <div class="color-accordion" id="color-accordion">
-   <?php $kk=0; if(count((array)$feedbackresult) !=0){  foreach($feedbackresult as $feedbackresultrow){ //print_r($feedbackresultrow); ?>
+   <?php $kk=0; if(count((array)$feedbackresult) !=0){  foreach($feedbackresult as $feedbackresultrow){?>
      <a class="accordion-msg bg-dark-primary b-none waves-effect waves-light"><?php echo $feedbackresultrow['procees_step_name'];?></a>
      <div class="accordion-desc dt-responsive table-responsive">
       <?php $jk=1;

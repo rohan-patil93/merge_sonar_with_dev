@@ -6,7 +6,6 @@ $url = API."?mode=getrecruitmentintegdashboard&apitype=candidatelistpopup&candid
 $apires = callAPI($url);
 $result = json_decode($apires,1);
 $candidates = $result['candidates'];
-//echo "<pre>";print_r($result);echo "</pre>";
 ?>
 <div class="modal-header">
 	<h5 class="modal-title">

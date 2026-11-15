@@ -1,16 +1,12 @@
 <?php
-//print_r($_POST); exit;
 if (isset($_POST['submit'])){
-	// print_r($_POST);
 	$data = $_POST;
 	unset($data['submit']);
 	unset($data['hid']);
-	//print_r($data);
 	$url="";
 	$urldata = urlencode(json_encode($data,true));
 	$urldata = urlencode(json_encode($data,true));
 	$url = API."?mode=updaterowtabledata&rid=".$_POST['hid']."&table=".TPREFIX.TBL_CONFIG."&data=$urldata";
-	//echo $url; exit;
 	$response = file_get_contents($url, false, $context);
 	if ($response) {
 		header("location:index.php?option=com_config&Rid=TVE9PQ==");
@@ -21,33 +17,25 @@ if (isset($_POST['submit'])){
 if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
 	$rid =  base64_decode(base64_decode($_GET['Rid']));
 	$url = API."?mode=singlerowtabledata&rid=".$rid."&table=".TPREFIX.TBL_CONFIG;
-	//echo $url;
 	$response = file_get_contents($url, false, $context);
-	//echo $response;
 	$data = json_decode($response,1);
 }
 $time_zones = timezoan();
 $typeurl = API."?mode=gettabledetails&fid=genc_code&rid=INVOICEPREFIX&table=".TBL_GENRAL_CODE_DETAILS;
-//echo $typeurl; exit;
 $typeresponse = file_get_contents($typeurl, false, $context);
 $perfixresponse = json_decode($typeresponse,1);
 $taxurl = API."?mode=gettabledetails&fid=company_id&rid=".$_SESSION['company_id']."&table=".TPREFIX.TBL_TAXES;
-//echo $taxurl."|||".$_SESSION['company_id']; exit;
 $taxres = file_get_contents($taxurl, false, $context);
 $taxres = json_decode($taxres,1);
 $currencyurl = API."?mode=gettabledetails&table=".TBL_CURRENCIES;
-//echo $currencyurl; exit;
 $currencyres = file_get_contents($currencyurl, false, $context);
 $currencyres = json_decode($currencyres,1);
 $languurl = API."?mode=gettabledetails&fid=genc_code&rid=LANGUAGE&table=".TBL_GENRAL_CODE_DETAILS;
-//echo $typeurl; exit;
 $languagedata = file_get_contents($languurl, false, $context);
 $languagedata = json_decode($languagedata,1);
 $payurl = API."?mode=gettabledetails&fid=genc_code&rid=PAYMETHOD&table=".TBL_GENRAL_CODE_DETAILS;
-//echo $typeurl; exit;
 $paydata = file_get_contents($payurl, false, $context);
 $paydata = json_decode($paydata,1);
-//print_r($languagedata); exit;
 ?>
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 	<div class="kt-portlet">

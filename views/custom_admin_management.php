@@ -1,6 +1,5 @@
 <?php
 if (isset($_POST['submit'])){
-	//echo "<pre>"; print_r($_POST); exit;
 	$tables = array_unique($_POST['table']);
 	$post ['role']= $_POST['hid'];
 	$post ['company_id']= $_SESSION['company_id'];
@@ -21,18 +20,16 @@ if (isset($_POST['submit'])){
 }
 $role_id = $_GET['Rid']!=''? $_GET['Rid'] : 1 ;
 $navlisturl = API."?mode=gettabledetails&fid=genc_code&rid=MENULOCATION&table=".TBL_GENRAL_CODE_DETAILS;
-$navelistdata = callAPI($navlisturl); //file_get_contents($navlisturl, false, $context);
+$navelistdata = callAPI($navlisturl);
 $navelistdata = json_decode($navelistdata,1);
 
 $data1["where"] = array('is_active'=> 0);
 $data = urlencode(json_encode($data1));
 $curl = API."?mode=gettabledetailswithconditions&table=".TBL_ROLES."&data=".$data;
-//$tdurl = API."?mode=gettabledetails&table=".TBL_ROLES;
-$showtablesdata = callAPI($curl); // file_get_contents($tdurl, false, $context);
+$showtablesdata = callAPI($curl);
 $show = json_decode($showtablesdata,1);
 $roleurl = API."?mode=gettabledetails&fid=role_id&rid=$role_id&table=".TBL_ROLE_PERMISSIONS;
-//echo $roleurl;
-$roledata = callAPI($roleurl);//file_get_contents($roleurl, false, $context);
+$roledata = callAPI($roleurl);
 $roledata = json_decode($roledata,1);
 foreach ($roledata as $roles) {
 	$role[$roles['table_name']]['view'] = $roles['permission_view'];
@@ -41,7 +38,6 @@ foreach ($roledata as $roles) {
 	$role[$roles['table_name']]['delete'] = $roles['permission_delete'];
 
 }
-//echo "<pre>";print_r($role); exit;
 ?>
 <script type="text/javascript">
 	function redirectpage(val){
@@ -99,7 +95,6 @@ foreach ($roledata as $roles) {
 				<?php $menunava = toGETNavDetails($navdata['genc_detail_code']);?>
 				<div class="row" id="kt_sortable_portlets">
 					<?php foreach ($menunava as  $menu) {
-							//if(count((array)$menu['child']) < 1 && $menu['page_name'] == ''){ continue; }
 						?>
 
 					<div class="col-lg-6 mt-5">

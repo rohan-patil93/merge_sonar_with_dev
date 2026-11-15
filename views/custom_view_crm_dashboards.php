@@ -1,12 +1,10 @@
 <?php $_SESSION['apply_js']['multiselest'] = 1;
-//$_SESSION['apply_js']['ratting'] = 1;
 $_SESSION['apply_js']['CRM_DASHBOARDS'] = 1;
 $from_date = fromDate($_REQUEST['from_date'] !=""?$_REQUEST['from_date']:date("Y-01-01"));
 $to_date =fromDate($_REQUEST['to_date'] !=""?$_REQUEST['to_date']:date("Y-12-t"));
 $menu = API."?mode=getcrmleads&dashboard=Y&admin_type=".$_SESSION['admin_type'];
 $page_list = callAPI($menu);
 $result = json_decode($page_list,1);
-//echo "<pre>"; print_r($result);echo "</pre>";
 $dashboard_cnt = $result['dashboard_cnt'];
 $crm_leads = $result['crm_leads'];
 $crm_contacts = $result['crm_contacts'];
@@ -27,7 +25,6 @@ foreach($crm_general_codes as $key=>$crmsource1){
 $crm_activity_typesres =$result['crm_activity_types'];
 $crm_activity_types = array();
 foreach($crm_activity_typesres as $crmlt){
-    //if($crmlt['type'] == 2){
         $crm_activity_types[$crmlt['id']] =$crmlt;
     //}
 }
@@ -53,8 +50,6 @@ foreach($crm_deals_graph as $crmstat){
 //End graph crm Deals
 
 
-//echo "<pre>"; print_r($feasibility_requirements);echo "</pre>";
-// $crm_leads = $result['crm_leads'];
 
 // $crm_companies = $result['crm_companies'];
 // $crm_general_codes = $result['crm_general_codes'];
@@ -103,12 +98,6 @@ foreach($crm_deals_graph as $crmstat){
 // }
 //LEAD CHART
 
-//print_r($crm_contacts_chart);
-// $crm_histories =$result['crm_histories'];
-// foreach($crm_histories as $crmhistry){
-// 	$lastactivity[$crmhistry['transaction_table']][$crmhistry['transaction_id']]=$crmhistry;
-// }
-//print_r($lastactivity);
 
 
 // print_r($res); // For debugging, you can remove this later
@@ -415,53 +404,13 @@ foreach ($feasibility_requirements_expiry_days as $item) {
  -->
 
 <?php
-// function xor_encrypt($text, $key) {
-//     $encrypted = '';
-//     for ($i = 0; $i < strlen($text); $i++) {
-//         $encrypted .= $text[$i] ^ $key[$i % strlen($key)];
-//     }
-//     return $encrypted;
-// }
 
-// // Custom Base64 Encoding (symbol-free)
-// function safe_base64_encode($string) {
-//     $data = base64_encode($string);
-//     $data = str_replace(['+', '/', '='], ['-', '_', ''], $data);
-//     return $data;
-// }
 
-// // Custom Base64 Decoding
-// function safe_base64_decode($string) {
-//     $data = str_replace(['-', '_'], ['+', '/'], $string);
-//     $mod4 = strlen($data) % 4;
-//     if ($mod4) {
-//         $data .= substr('====', $mod4);
-//     }
-//     return base64_decode($data);
-// }
 
-// // Encrypt Function
-// function encrypt($text, $key) {
-//     $xor = xor_encrypt($text, $key);
-//     return safe_base64_encode($xor);
-// }
 
-// // Decrypt Function
-// function decrypt($encoded, $key) {
-//     $xor = safe_base64_decode($encoded);
-//     return xor_encrypt($xor, $key);  // XOR is reversible
-// }
 
-// // Example Usage
-// $text = "infistaqin_infisuite-super_admin";
-// $key = "mysecretkey";
 
-// $encrypted = stringXOREncrypt($text);
-// $decrypted = stringXORDecrypt($encrypted);
 
-// echo "Original: $text\n";
-// echo "Encrypted: $encrypted\n";
-// echo "Decrypted: $decrypted\n";
 ?>
 
 
@@ -617,22 +566,22 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 <a class="nav-link f-w-600 f-12 active_crm_home active active_all_class" data-bs-toggle="tab" href="#home-tab" role="tab" aria-selected="true" onclick="viewAllListPage('home')"><?= __('Home'); ?></a>
             </li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active_crm_leads active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_leads')"><?= __('Leads'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php //echo $dashboard_cnt['crm_lead_cnt']!=""?$dashboard_cnt['crm_lead_cnt']:0; ?></label> --></a>
+				<a class="nav-link f-w-600 f-12 active_crm_leads active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_leads')"><?= __('Leads'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active_crm_contacts active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_contacts')"><?= __('Contacts'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php //echo $dashboard_cnt['crm_contacts_cnt']!=""?$dashboard_cnt['crm_contacts_cnt']:0; ?></label> --></a>
+				<a class="nav-link f-w-600 f-12 active_crm_contacts active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_contacts')"><?= __('Contacts'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active_crm_companies active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_companies')"><?= __('Companies'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php //echo $dashboard_cnt['crm_companies_cnt']!=""?$dashboard_cnt['crm_companies_cnt']:0; ?></label> --></a>
+				<a class="nav-link f-w-600 f-12 active_crm_companies active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_companies')"><?= __('Companies'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active_crm_deals active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_deals')"><?= __('Deals'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php //echo $dashboard_cnt['crm_deals_cnt']!=""?$dashboard_cnt['crm_deals_cnt']:0; ?></label> --></a>
+				<a class="nav-link f-w-600 f-12 active_crm_deals active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_deals')"><?= __('Deals'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
 			</li>
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active_crm_campaigns active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_campaigns')"> <?= __('Campaign'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php //echo $dashboard_cnt['crm_campaigns_cnt']!=""?$dashboard_cnt['crm_campaigns_cnt']:0; ?></label> --></a>
+                <a class="nav-link f-w-600 f-12 active_crm_campaigns active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_campaigns')"> <?= __('Campaign'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active_crm_projects active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_projects')"><?= __('Projects'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php //echo $dashboard_cnt['projects_cnt']!=""?$dashboard_cnt['projects_cnt']:0; ?></label> --></a>
+                <a class="nav-link f-w-600 f-12 active_crm_projects active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_projects')"><?= __('Projects'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link f-w-600 f-12 active_crm_feasibilities active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_feasibilities')"><?= __('Feasibility'); ?></a>
@@ -691,7 +640,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 <?php include "views/custom_view_crm_home_dashboards.php"; ?>
             </div>
 			<div class="tab-pane card-body p-0 dynamictabviews active_all_class" id="lead-tab" role="tabpanel" >
-                 <?php //include("views/custom_list_crm_leads.php"); ?>
+                 <?php ?>
 
         	</div>
 	<!--

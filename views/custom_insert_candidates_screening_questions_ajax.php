@@ -10,7 +10,6 @@ $job_posting_id = $_POST['job_posting_id'];
 $url = API."?mode=getcandidatescreeningquestions&job_posting_candidate_id=".$job_posting_candidate_id."&candidate_id=".$candidate_id."&job_posting_id=".$job_posting_id."&gettype=".$gettype;
 $api = callAPI($url);
 $result = json_decode($api,1);
- //echo "<pre>"; print_r($result); echo "</pre>";
 if($gettype =="QuestionsAnswers"){
 
     $candidate_screening_questions_and_answers = $result['candidate_screening_questions_and_answers'];
@@ -40,7 +39,6 @@ if($gettype =="QuestionsAnswers"){
     $job_postings = $result['job_postings'];
     $question = $job_postings['question'];
     $questions = json_decode($question,1);
-    //echo "<pre>"; print_r($questions); echo "</pre>";
     ?>
    <form id="questionform">
         <div class="col-lg-12" id="videoquestiontextfileds">

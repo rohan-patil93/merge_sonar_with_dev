@@ -65,18 +65,10 @@ if(isset($_POST['skip_compliance'])){
 	$_SESSION['user_activated'] = 'Y';
 	unset($_SESSION['login_details']);
 	header("location:index.php");
-	//header("location:index.php?option=COM_LIST_APPLICATION_USER_INVITATIONS");
 }
 
-//echo "fvdfvgf".$_SESSION['userid'];
 
 
-// if(isset($_GET['Rid'])){
-// 	$rid =  encodeId($_GET['Rid']);
-// 	$rid = urldecode($rid);
-// 	$rid = explode(':', $rid);
-// 	$rid = $rid['1'];
-// }else{
 	$rid = $_SESSION['userid'];
 //}
 $wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'id'=>$rid);
@@ -104,7 +96,6 @@ $url2 = API."?mode=gettabledetailswithconditions&table=application_roles&data=".
 $rolesres = callAPI($url2);
 $rolesres = json_decode($rolesres,1);
 $role_idd  =array(SUPERADMIN_ROLE);
-//print_r($role_idd);
 foreach($rolesres as $rolesre){
     if(!in_array($rolesre['role_short_code'], (array)$role_idd)){
         $roles[$rolesre['application_module']][] = $rolesre;
@@ -293,7 +284,7 @@ $countriesres   = json_decode($countriesres,1);
 						</div>
 					</div>
 				</div>
-				<?php //if($application_users['user_activated'] == 'N' || $_SESSION['user_activated'] == 'Y'){ ?>
+				<?php ?>
 				<div class="form-group mt-5">
 					<input type="hidden" name="Rid" value="<?php echo $rid; ?>">
 					<input type="hidden" name="tab" value="<?php echo $tab; ?>">

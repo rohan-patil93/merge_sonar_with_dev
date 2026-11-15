@@ -848,7 +848,7 @@ if($employee_performance_appraisals['id'] !=""){
                                 <table class="table table-bordered" id="dinamictable_<?php echo $paheaders['id']; ?>">
                                     <thead>
                                         <tr>
-                                            <?php foreach($sub_header_name as $sub_headerres){ //if($sub_headerres[$loginuser_type] == "Y"){?>
+                                            <?php foreach($sub_header_name as $sub_headerres){?>
                                                 <th scope="col"><?php echo __($sub_headerres['field_name'] ?? ''); ?></th>
                                             <?php } //}
                                             if($paheaders['sub_header_addmore'] == '0'){ ?>
@@ -923,7 +923,7 @@ if($employee_performance_appraisals['id'] !=""){
                         <textarea aria-label="<?php echo __('Ro Comment'); ?>" class="form-control" name="ro_comment" style="height: 270px;" <?php echo $loginuser_type != "RO"?"readonly":""; ?>><?php echo $employee_performance_appraisals['ro_comment']; ?></textarea>
                     </div>
                 </div>
-            </div><?php //print_r($employee_performance_appraisals); ?>
+            </div><?php ?>
             <div class="col-lg-4 " <?php echo $notshowhod; ?>>
                 <div class="card">
                     <div class="card-header">

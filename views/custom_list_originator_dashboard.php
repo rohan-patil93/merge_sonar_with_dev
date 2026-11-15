@@ -95,7 +95,7 @@ $progress_var =  gettableStatusArray($table_name1);
 					<span class="m-b-30 bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> Active CSRs</span>
 					<span class="form-label label label-success float-end f-w-600"><?php echo $activeCount; ?></span>
 					<div class="text-center">
-						<!-- <h2 class="m-t-20 m-b-0 d-inline-block text-c-blue cursor-pointer" ><?php // echo $activeCount; ?></h2> -->
+						<!-- <h2 class="m-t-20 m-b-0 d-inline-block text-c-blue cursor-pointer" ><?php ?></h2> -->
                         <p class="m-b-0 f-w-600 m-t-10"><?php echo customeummarmonyformate($activeValue); ?></p>
 
 					</div>
@@ -111,7 +111,7 @@ $progress_var =  gettableStatusArray($table_name1);
 					<span class="m-b-30 bg-c-purple lbl-card"><i class="fas fa-file-archive"></i> In Progress</span>
 					<span class="form-label label label-success float-end f-w-600"><?php echo $progressCount; ?></span>
 					<div class="text-center">
-						<!-- <h2 class="m-b-0 d-inline-block text-c-purple cursor-pointer"><?php // echo $progressCount; ?></h2> -->
+						<!-- <h2 class="m-b-0 d-inline-block text-c-purple cursor-pointer"><?php ?></h2> -->
                         <p class="m-b-0 f-w-600 m-t-10"><?php echo customeummarmonyformate($progressValue); ?></p>
 
 					</div>
@@ -129,7 +129,7 @@ $progress_var =  gettableStatusArray($table_name1);
 					<span class="m-b-30 bg-c-lite-green lbl-card"><i class="fas fa-file-archive"></i> Approved CSRs</span>
 					<span class="form-label label label-success float-end f-w-600"><?php echo $approvedCount; ?></span>
 					<div class="text-center">
-						<!-- <h2 class="m-t-20 m-b-0 d-inline-block text-c-lite-green cursor-pointer"><?php // echo $approvedCount; ?></h2> -->
+						<!-- <h2 class="m-t-20 m-b-0 d-inline-block text-c-lite-green cursor-pointer"><?php ?></h2> -->
                         <p class="m-b-0 f-w-600 m-t-10"><?php echo customeummarmonyformate($approvedValue); ?></p>
 
 					</div>

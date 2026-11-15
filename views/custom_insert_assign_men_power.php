@@ -417,7 +417,7 @@ if(isset($_POST['submit1'])){
                             <div class="card-body">
                                 <div class="kt-timeline-v2">
                                     <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
-                                        <?php foreach ($vdata_details as  $vdvalue) { //print_r($vdvalue); ?>
+                                        <?php foreach ($vdata_details as  $vdvalue) {?>
                                         <div class="kt-timeline-v2__item">
 
                                             <div class="kt-timeline-v2__item-cricle">

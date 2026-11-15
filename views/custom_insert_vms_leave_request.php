@@ -396,7 +396,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                 <?php if($buddy_details['hr_connect']=="0" || $buddy_details['report_to']=="0"){  ?>
                                                     <span class="text-danger f-12"><?php echo $_SESSION['error_message']['9001']; ?></span></br>
                                                 <?php } ?>
-                                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php //if($employee_leaves['current_status'] == ST_ACTIVE OR $employee_leaves['current_status'] ==ST_SEND_BACK OR $employee_leaves['current_status'] ==""){}else{ echo "disabled"; } ?>  name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
+                                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php ?>  name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -474,7 +474,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                             <tr >
                                                                 <td class="p-2"><?php echo $mk; ?></td>
                                                                 <td class="p-2"><a href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php  echo deocdeId("id:".$leavel1['id']); ?>"><span class="form-label label label-success p-2 cursor-pointer"><i class="ti-pencil-alt"></i> <?php echo $leavel1['leave_from']." To ".$leavel1['leave_to']; ?></span></td>
-                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);//((strtotime($leavel1['leave_to']) - strtotime($leavel1['leave_from']))  / (60 * 60 * 24))+1; ?> Day</span></td>
+                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);?> Day</span></td>
                                                                 </tr>
                                                                 <?php $mk++;
 } ?>
@@ -515,7 +515,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                                     <tr >
                                                                         <td class="p-2"><?php echo $mk; ?></td>
                                                                         <td class="p-2"><a href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php  echo deocdeId("id:".$leavel1['id']); ?>" class="cursor_pointer"><span class="form-label label label-success p-2"><i class="ti-pencil-alt"></i> <?php echo $leavel1['leave_from']." To ".$leavel1['leave_to']; ?></span></td>
-                                                                            <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);// ((strtotime($leavel1['leave_to']) - strtotime($leavel1['leave_from']))  / (60 * 60 * 24))+1; ?> Day</span></td>
+                                                                            <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);?> Day</span></td>
                                                                         </tr>
                                                                         <?php $mk++;
 } ?>
@@ -556,7 +556,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                                             <tr >
                                                                                 <td class="p-2"><?php echo $mk; ?></td>
                                                                                 <td class="p-2"><a href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php  echo deocdeId("id:".$leavel1['id']); ?>" class="cursor_pointer"><span class="form-label label label-success p-2"><i class="ti-pencil-alt"></i> <?php echo $leavel1['leave_from']." To ".$leavel1['leave_to']; ?></span></td>
-                                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1); //echo ((strtotime($leavel1['leave_to']) - strtotime($leavel1['leave_from']))  / (60 * 60 * 24))+1; ?> Day</span></td>
+                                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);?> Day</span></td>
                                                                                 </tr>
                                                                                 <?php $mk++;
 } ?>

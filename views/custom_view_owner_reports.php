@@ -4,7 +4,6 @@ $_SESSION['apply_js']['multiselest'] = "1";
 $url = API."?mode=getownerreports&property_owner_id=".$_POST['property_owner_id'];
 $api = callAPI($url);
 $result = json_decode($api,1);
-//echo "<pre>";print_r($result); echo "</pre>";
 $property_owners = $result['property_owners'];
 $property_owners_all = $result['property_owners_all'];
 $banks = $result['banks'];

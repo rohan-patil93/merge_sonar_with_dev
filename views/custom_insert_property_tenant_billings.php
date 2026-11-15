@@ -25,7 +25,6 @@ if(isset($_POST['monthyear'])){
 	}
 	$tenant_billings  =$admindashboardd['tenant_billings'];
 
-	//echo "<pre>"; print_r($rental_invoices_transnumber); echo "</pre>";
 	echo "<div style='display:none' id='hide_result'><pre>"; print_r($admindashboardd); echo "</pre></div>";
 
 }
@@ -67,7 +66,6 @@ if(isset($_POST['submittenantbills'])){
 
 	**/
 
-	//echo "<pre>";print_r($_POST);print_r($result);echo "</pre>";
 	$property_tenant_billings = $tenant_billings['property_tenant_billings'];
 	$invoicetobegenerated = $invoicetobeemailed = $invoicesharedwithtenant = $utility_invoicetobegenerated = $utility_invoicetobeemailed = $utility_invoicesharedwithtenant= array();
 	foreach($property_tenant_billings as $ptb){
@@ -497,7 +495,6 @@ if(isset($_POST['submittenantbills'])){
 						</thead>
 						<tbody>
 							<?php $m=1; foreach($utility_invoicetobegenerated as $ptb){
-								//$bill_detail = json_decode($ptb['bill_detail'],1);
 								$utility_details = json_decode($ptb['utility_details'],1);
 								$totalamt = $utilitytotalamt =  0;
 								?>

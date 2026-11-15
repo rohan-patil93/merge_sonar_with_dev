@@ -162,7 +162,7 @@ function publichappraisal(id){
                                     <div class="tab-pane " id="modul_setting" role="tabpanel">
                                         <?php include_once 'views/custom_insert_performance_appraisal_settings.php'; ?>
                                     </div>
-                                    <?php foreach($performance_appraisal_se as $kyid=>$performance_appraiseting){ //echo $performance_appraiseting['url'];?>
+                                    <?php foreach($performance_appraisal_se as $kyid=>$performance_appraiseting){?>
                                     <div class="tab-pane " id="dynamicmenu_<?php echo $kyid; ?>" role="tabpanel">
                                         <?php include_once 'views/'.$performance_appraiseting['url'].'.php'; ?>
                                     </div>

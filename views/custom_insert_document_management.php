@@ -229,7 +229,6 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
             if ($rid > 0) {
                 $currentStatus = isset($documentData['current_status']) ? (int)$documentData['current_status'] : 0;
                 $workflowsteps = getWorkflowStatus( TBL_DOCUMENT_MANAGEMENT, $rid, $currentStatus);
-                // print_r($workflowsteps);
             }
             ?>
 

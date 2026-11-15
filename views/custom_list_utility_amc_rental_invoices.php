@@ -6,9 +6,6 @@ $rental_invoices = $result['rental_invoices'];
 $credit_notes_sum = $result['credit_notes_sum'];
 $debit_notes_sum = $result['debit_notes_sum'];
 $property_tenant_billings_shared_datetime = $result['property_tenant_billings_shared_datetime'];
-// echo "<pre>"; print_r($property_tenant_billings_shared_datetime); echo "</pre>";
-// echo "<pre>"; print_r($result['property_tenant_billings_shared_datetime_sql']); echo "</pre>";
-// echo "<pre>"; print_r($rental_invoices); echo "</pre>";
 $stausresult = ViewStatusData();
 ?>
 <script type="text/javascript">
@@ -139,7 +136,7 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
               </div>
             </div>
 
-              <?php //if(RENTAL_INVOICE_SPLIT =="Y"){ ?>
+              <?php ?>
                 <a href='#!' class="btn btn-success mb-2 desktop-view col-lg-4 ml-2" onclick="OpenInsertRentalInvoicePopUp('AMC')"><i class="icofont icofont-plus icon-white "></i> Utility AMC Invoice</a>
               <?php /** }else{ ?>
                   <a href="#!" onclick="OpenInsertRentalInvoicePopUp()" class="btn btn-success mb-2 desktop-view col-lg-3">

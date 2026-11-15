@@ -4,10 +4,8 @@ $option = strtoupper($_GET['option']);
 $list = str_replace('INSERT', 'LIST', $option);
 
 if($_POST['submit'] == 'query'){
-   //print_r($_POST);  exit;
     $res = Insertqueries($_POST);
-     $_POST['submit'] = '';//exit;
-    //$_POST = array();
+     $_POST['submit'] = '';
 }
 if($_POST['submit'] == 'reply'){
     $res = updatequeries($_POST);
@@ -15,7 +13,6 @@ if($_POST['submit'] == 'reply'){
 if($_POST['submit1'] == 'Add'){
     $_POST['created_by'] = $_SESSION['userid'];
     $_POST['created_date'] = nowDate();
-    //echo "<pre>";print_r($_FILES); print_r($_POST);  exit;
     $url = API."?mode=addjournalvouchers&table=".$_POST['table_name']."&method=post";
     $response = file_post_contents($url, $_POST, 'insert');
      if ($response) {
@@ -31,11 +28,6 @@ if($_POST['submit1'] == 'Add'){
 if($_POST['submit1'] == 'Update'){
     $_POST['updated_by'] = $_SESSION['userid'];
     $_POST['updated_date'] = nowDate();
-   // print_r($_POST); exit;
-   /* if($_POST['status_values'] ==  ST_QUOTATION_GENERATED){
-        $retun_list = toGetpageOptionName('quotations');
-        header("location:index.php?option=".$retun_list['option_url']."&table=".$_POST['table_name']."&Rid=".$_POST['hid']);
-    }*/
     if($_POST['status_values'] == ST_PURCHASE_ORDER_GENRATED){
         $retun_list = toGetpageOptionName('purchase_orders');
         header("location:index.php?option=".$retun_list['option_url']."&table=".$_POST['table_name']."&Rid=".$_POST['hid']);
@@ -46,22 +38,15 @@ if($_POST['submit1'] == 'Update'){
         if(!in_array($_POST['table_name'], (array)$originator_tab)){
              $checkurl.="&opex_cpex=".$_POST['opex_cpex']."&category_type=".$_POST['type'];
         }
-       // echo $checkurl; exit;
         $check_data = callAPI($checkurl);
-        //echo $check_data; exit;
-        //echo $checkurl; exit;
         $check_data = json_decode($check_data,1);
         if(!isset($check_data['id']) || $check_data['id'] == ''){
-            //print_r($check_data);
             header("location:index.php?option=".$option."&error=9001&Rid=".deocdeId('id:'.$_POST['hid'])); exit;
         }
-        //print_r($check_data); exit;
     }
     $_POST['file_add'] = $_SESSION['file_add'][$_POST['table_name']][$_POST['hid']];
     $_SESSION['file_add'][$_POST['table_name']][$_POST['hid']]= array();
     $url = API."?mode=addinvoietype&table=".$_POST['table_name']."&method=post&type=update";
-    //echo $url; exit;
-  //  echo "<pre>"; print_r($_POST); exit;
     $response = file_post_contents($url, $_POST, 'update');
     if ($response) {
         header("location:index.php?option=".$list);
@@ -70,8 +55,6 @@ if($_POST['submit1'] == 'Update'){
 $originator_tables = array('requisitions', 'petty_cash');
 $stock_table = array('stock_request', 'stock_transfer');
 $originator_table_withbill = array('requisitions', 'petty_cash','bills', 'stock_request');
-//$table_list = toCreateInvoicePages();
-//print_r($table_list); exit;
 $table_name = "journal_vouchers";
 
 $title =  "Journal Vouchers";
@@ -79,22 +62,17 @@ $title =  "Journal Vouchers";
 //$title =  $title != "" ? $title ? viewTitle($option);
 //$table1 = array('');
 $stausresult = statusData($table_name);
-//print_r($stausresult); exit;
 $table2 = array(array('item_id'=>'0'));
 $copy = 0;
 $cusurl = API."?mode=gettabledetails&fid=company_id&rid=".$_SESSION['company_id']."&table=".TBL_USERS;
 $cusresponse = callAPI($cusurl);
 $cusresponse = json_decode($cusresponse,1);
-/*echo $_SESSION['userid'];
-echo "<pre>";print_r($cusresponse);*/
 foreach ($cusresponse as  $cust) {
         if($cust['id'] == $_SESSION['userid']){
             $cusdata = $cust;
             break;
         }
     }
-   // print_r($cusdata);
-    //echo "<pre>".$_SESSION['userid']."ravi"; print_r($cusdata); exit;
     $res = json_decode($response,1);
     $locurl = API."?mode=singlerowtabledata&table=".TBL_LOCATIONS."&fid=id&rid=".$cusdata['location_id'];
     $locares = callAPI($locurl);
@@ -103,7 +81,6 @@ foreach ($cusresponse as  $cust) {
     $table1['location_id'] =  $cusdata['location_id'];
     $table1['cost_center'] =  $cusdata['cost_center'];
 if(in_array($table_name, (array)$originator_table_withbill)){
-    //echo $locares;
 
     $table1['party_id'] = $_SESSION['userid'];
     $table1['party_name'] = $cusdata['first_name'].' '.$cusdata['middle_name'].' '.$cusdata['last_name'];
@@ -119,18 +96,14 @@ if(in_array($table_name, (array)$originator_table_withbill)){
     $cusresponse = json_decode($cusresponse,1);
 }
 $taxres =  toGetTaxrates();
-//print_r($taxres); exit;
 if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
-   // echo "data"; exit;
     $rtable_name = ""; $subt_amount = ""; $stax_amount="";
     if(isset($_GET['table']) && $_GET['table'] !=''){
         $rtable_name = $_GET['table'] ;
         $rid = $_GET['Rid'];
     } else{
-        //echo "data";
         $rid =  encodeId($_GET['Rid']);
         $rid = urldecode($rid);
-        //echo $rid;
         $rid = explode(":", $rid);
         $rid= $rid[1];
         $copy = 1;
@@ -141,31 +114,24 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_ACTION_LOG."&data=".$vdata;
         $vdata_details = callAPI($vurl);
         $vdata_details = json_decode($vdata_details,1);
-        //echo "<pre>"; print_r($vdata_details); exit;
 
    }
     $rtable = $rtable_name!='' ? $rtable_name : $table_name;
     $table2 = array(''); $i=0;
     $rpurl =  API."?mode=getInvoicesData&in_id=$rid&table=$rtable";
 
-    //echo $rpurl; exit;
     $rp_data = callAPI($rpurl);
     $rpres = json_decode($rp_data, 1);
-     //echo "<pre>"; print_r($rpres); exit;
     $rpdata = $rpres['data'];
     $items = $rpres['items'];
     $taxes = $rpres['taxes'];
     $files = $rpres['files'];
-    //echo "<pre>";print_r($files); exit;
     $taxes_ship = $taxes;
     if($rpdata['shipping_tax']!=0){
     $taxes_ship[] = array('tax_id'=> $rpdata['shipping_tax'],'tax_value'=> $rpdata['shipping_tax'],'amount'=>$rpdata['shipping_amount'],'tax_amount'=>$rpdata['shipping_tax_amount']);
     }
-    //echo"<pre>"; print_r($taxes_ship); //exit;
     $dutax = array();
 
-    //echo"<pre>"; print_r($distax); exit;
-    //echo $rtable;
     if($rtable_name != ''){
        $table1['qo_number'] = "";
        $table1['qo_date'] = "";
@@ -181,9 +147,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
        $table1['ref_date'] = $rpdata['ref_date'];
        $table1['ref_type'] = $rpdata['ref_type'];
     }
-    //print_r($table1); exit;
-    //echo $rtable_name;
-    if($rtable_name != 'requisitions'){ //echo "done11";
+    if($rtable_name != 'requisitions'){
         $table1['party_id'] = $rpdata['party_id'];
         $table1['party_name'] = $rpdata['party_name'];
         $table1['party_email'] = $rpdata['party_email'];
@@ -218,7 +182,6 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     foreach ($taxes as  $taxs) {
        $tax_array[$taxs['transaction_item_id']] = $taxs['tax_id'];
     }
-   // print_r($taxes);
     foreach($items as $item){
         $itemid[] = $item['item_id'];
         $itemda['item_id']= $item['item_id'];
@@ -270,22 +233,17 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     }
     $item_ids = "";
     $item_ids = implode(',', (array)$itemid);
-    //echo "<pre>";print_r($item_ids);exit;
     $acode['account_code']=$account_code;
     $acode['cost_center_id']=$table1['cost_center'];
     $acode['company_id']=$_SESSION['company_id'];
     $acode['fiscal_year']=$table1['qo_date'];
-    //echo "<pre>"; print_r($acode); exit;
     $acurl = API."?mode=budgetcheckreftadledata&method=post";
     $response_code = file_post_contents($acurl, $acode, 'insert');
     $response_code = json_decode($response_code,1);
-    //print_r($response_code); exit;
 }
-//$typeurl = API."?mode=gettabledetails&fid=genc_code&rid=PLACEOFSUPPLY&table=".TBL_GENRAL_CODE_DETAILS;
 /* $itemtaxee[$item['item_id']]*/
 $distax = array();
 foreach ($taxes_ship as  $taxvalue) {
-    //print_r($dutax);
      if($itemtaxee[$taxvalue['transaction_item_id']] == 'c'){
          $distax[$taxvalue['tax_id']] ['credit_amount'] = $distax[$taxvalue['tax_id']] ['credit_amount'] + $taxvalue['tax_amount'];
          $distax[$taxvalue['tax_id']] ['debit_amount'] =  $distax[$taxvalue['tax_id']] ['debit_amount'] + 0;
@@ -294,7 +252,6 @@ foreach ($taxes_ship as  $taxvalue) {
         $distax[$taxvalue['tax_id']] ['debit_amount'] =  $distax[$taxvalue['tax_id']] ['debit_amount'] + $taxvalue['tax_amount'];
      }
 }
-//echo "<pre>";print_r($taxes_ship); exit;
 $typeurl = API."?mode=getplaceofsuppl";
 $typeresponse = callAPI($typeurl);
 $posresponse = json_decode($typeresponse,1);
@@ -321,22 +278,18 @@ $boxlist = json_decode($boxlist,1);
 $departmentsurl = API."?mode=gettabledetails&table=".TBL_DEPARTMENTS;
 $departmentslist =  callAPI($departmentsurl);
 $departmentslist = json_decode($departmentslist,1);
-//print_r($departmentslist); exit;
 
 $crdata["field"] = "id,currency_list";
 $crdata = urlencode(json_encode($crdata));
 $crurl = API."?mode=gettabledetailswithconditions&table=".TBL_CURRENCIES."&data=".$crdata;
-//echo $crurl; exit;
 $cr_data = callAPI($crurl);
 $cr_data = json_decode($cr_data, 1);
-//print_r($cr_data); exit;
 $_SESSION['application_table_name'] = $table_name;
 $_SESSION['transaction_id'] = $rid;
 $_SESSION['file_add'][$table_name][$rid]= array();
 
     $costcenterurl = API."?mode=gettabledetails&table=".TBL_COST_CENTERS;
 
-    //print_r($table1); exit;
     $cost = callAPI($costcenterurl);
     $cost = json_decode($cost,1);
     foreach ($cost as $valu) {
@@ -351,11 +304,9 @@ $_SESSION['file_add'][$table_name][$rid]= array();
     $costurl = API."?mode=gettabledetailswithconditions&table=".TBL_USERS_COST_CENTERS."&data=".$costdata;
     $costdata = callAPI($costurl);
     $costress = json_decode($costdata, 1);
-    //echo "<pre>"; print_r($costress); exit;
     foreach ($costress as  $costres) {
         $incost[] = $costres['cost_center_id'];
     }
-    //print_r($incost);
     foreach ($cost as $value) {
        if($value['parent_cost_center_id'] == 0){
             $costs[$value['cost_center_name']][$value['id']]= $value['cost_center_name'];
@@ -375,7 +326,6 @@ if(in_array($table_name, (array)$stock_table)){
     $locations_url = API."?mode=gettabledetails&table=".TBL_LOCATIONS;
     $locations_data = callAPI($locations_url);
     $locations_data = json_decode($locations_data, 1);
-   // print_r($locations_data);
 }
 
 
@@ -1158,21 +1108,17 @@ function calculateTotal(){
                 <i class="flaticon2-print"></i>
 
          </a>
-         <?php //$table1['originator'] =1;
+         <?php 
             $nmm= ViewStatusValue($table1['current_status']);
             $lists = toGetStatusProgressAction($table_name, $table1['current_status']);
             $lists1 = $lists;
-            //print_r($lists); exit;
               $appruser_list_data = togetaprovaluserlist($table_name, $rid);
 
                 $appruser_list = $appruser_list_data['user'];
                 $appruser_data =  $appruser_list_data['details'];
-            //echo $_SESSION['userid']."||".$table1['originator']; exit;
             if($_SESSION['userid'] != $table1['originator']){
-                //echo "ravi"; exit;
                 $small_sub = 0;
 
-               // print_r($appruser_list_data); exit;
                 if(!in_array($_SESSION['userid'], (array)$appruser_list)){
                     $lists = array();
                     $small_sub = 1;
@@ -1189,8 +1135,6 @@ function calculateTotal(){
 
                 }
             }else{
-                //echo "man"; exit;
-                 //$commentss[] = $appruser_data[$_SESSION['userid']];
                 $commentss = $appruser_data;
                 if($table1['current_status'] == ST_ACTIVE || $table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_SEND_BACK || $table1['current_status'] == ST_QUOTATION_GENERATED || $table1['current_status'] == ST_PURCHASE_ORDER_GENRATED || $table1['current_status'] == ST_APPROVED){
 
@@ -1198,8 +1142,6 @@ function calculateTotal(){
                      $lists = array();
                 }
             }
-                 //$lists = $lists1;
-               //print_r($commentss);
                /* $lists = json_decode($listjs,1);ST_QUOTATION_GENERATED*/ ?>
         <div class="btn-group">
             <button class="btn btn-primary btn-sm dropdown-toggle" style="background: #<?php echo $nmm['background_color']; ?>;border: #<?php echo $nmm['background_color']; ?>; color:#<?php echo $nmm['color']; ?>  " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -1246,7 +1188,6 @@ function calculateTotal(){
 <div class="kt-portlet__body">
 <div class="form-group row">
 <?php
-//if($table1['qo_number'] !=''){
    $tran_no =  $table1['qo_number'];
 //}
  ?>
@@ -1612,7 +1553,7 @@ function calculateTotal(){
                         <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
                             <?php
                             $stausresult = ViewStatusData();
-                            foreach ($commentss as  $lists) { //print_r($lists); ?>
+                            foreach ($commentss as  $lists) {?>
                             <div class="kt-timeline-v2__item">
                                 <!-- <span class="kt-timeline-v2__item-time"> </span> -->
                                 <div class="kt-timeline-v2__item-cricle">
@@ -1800,7 +1741,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                             <div class="card-body">
                                 <div class="kt-timeline-v2">
                                     <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
-                                        <?php foreach ($vdata_details as  $vdvalue) { //print_r($vdvalue); ?>
+                                        <?php foreach ($vdata_details as  $vdvalue) {?>
                                         <div class="kt-timeline-v2__item">
                                             <!-- <span class="kt-timeline-v2__item-time"> </span> -->
                                             <div class="kt-timeline-v2__item-cricle">

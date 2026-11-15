@@ -4,7 +4,6 @@ include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
 $filter_id = $_GET['filter_id'];
-//print_r($_GET);
 $company_id = $_SESSION['company_id'];
 $filter_table = 'manpower_requisitions';
  $url = API."?mode=getbudgetfilterdetails&company_id=".$company_id."&filter_id=".$filter_id."&filter_table=".$filter_table;
@@ -12,9 +11,6 @@ $response = callAPI($url);
 $tasks_details = json_decode($response,1);
 $filter_list = $tasks_details['filter_list'];
 $filter_category = $tasks_details['filter_option'];
-/*$emp_count = json_decode($_GET['matchcount'],1);*/
-//print_r($selectedlist);
-//echo "<pre>";print_r($filter_list); //exit;
 
 ?>
 <?php
@@ -46,7 +42,6 @@ $filter_category = $tasks_details['filter_option'];
 </script>
 <?php
 
-//print_r($emp_list_names);
 if($emp_list_names!="") {
   echo '<script type="text/JavaScript">  
   populatenamelist(); 
@@ -102,13 +97,8 @@ if($emp_list_names!="") {
         </div>
         <div id="aaa<?php echo $targetid; ?>" class="collapse mb-5" data-parent="#accordionExample7">
           <?php
-                                 //print_r($fieldlist);
-                               // echo $targettable_field;
-                                //echo $targettable;
 
-                                 //print_r($targettable,$targettable_field);
           $table_details = dyanamicselectdata($targettable, $targettable_field);
-                                 // print_r($table_details);
           ?>
           <select onchange="selectemployee()" class="form-control mt-5" id="kt_select2_4<?php echo $index;?>" name="empstatus[]" multiple="multiple">
            <?php

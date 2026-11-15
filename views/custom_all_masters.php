@@ -1,9 +1,8 @@
 <?php
 $emailurl = API."?mode=togetmastertablesdetais";
 //echo $emailurl; exit; togetmastertablesdetais
-$emailgroupdata = callAPI($emailurl); //file_get_contents($emailurl, false, $context);
+$emailgroupdata = callAPI($emailurl);
 $datas = json_decode($emailgroupdata,1);
-//echo"<pre>"; print_r($datas); exit;
 ?>
 <div class="d-flex flex-column-fluid">
     <div class="container-fluid">
@@ -110,7 +109,6 @@ $datas = json_decode($emailgroupdata,1);
          $display ['2'] = "Custom";
          $discolor['1'] = "93a2dd";
          $discolor['2'] = "595d6e";
-    			//print_r($page); exit;
          ?>
          <div class="col-xl-3">
 

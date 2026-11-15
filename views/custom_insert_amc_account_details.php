@@ -1,9 +1,6 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
 $_SESSION['apply_js']['multiselest'] = 1;
 if (isset($_POST['submit'])) {
-    // echo "<pre>"; print_r($_POST);
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['user_id'] = $_SESSION['userid'];
     $dob = str_replace('/"', '-', $_POST['dob']);
@@ -15,13 +12,11 @@ if (isset($_POST['submit'])) {
 
     $rid = $_POST['rid'];
     if ($rid != "") {
-        // echo "Update";  print_r($_POST); exit;
         unset($_POST['submit']);
         $_POST['rid'];
         $url = API . "?mode=insertamcaccountdetails&method=post";
         $response1 = file_post_contents($url, $_POST, 'update');
     } else {
-        // echo "ADD";  print_r($_POST); exit;
         unset($_POST['submit']);
         $url = API . "?mode=insertamcaccountdetails&method=post";
         $response1 = file_post_contents($url, $_POST, 'insert');
@@ -33,16 +28,13 @@ if (isset($_POST['submit'])) {
     }
 }
 if ($_GET['Rid'] != "") {
-    // print_r($_GET);
     $rid = encodeId($_GET['Rid']);
     $rid = urldecode($rid);
     $rid = explode(':', $rid);
     $rid = $rid['1'];
     $url = API . "?mode=getamcaccountdetails&id=" . $rid;
-    // echo $url;   exit;
     $response = callAPI($url);
     $result = json_decode($response, 1);
-    // print_r($result);
     $details = $result['amc_details'];
 }
 $url = API . "?mode=getalldetails";
@@ -51,7 +43,6 @@ $all_details_response = json_decode($all_details_response, 1);
 
 $gc_details = $all_details_response['gc_details'];
 $st_details = $all_details_response['st_details'];
-// $ct_details = $all_details_response['ct_details'];
 
 $account_groups = $all_details_response['account_groups'];
 

@@ -40,7 +40,6 @@ if (isset($_POST['submit'])) {
     if ($response != ''){
          header("location:index.php?option=COM_LIST_AMC_PRODUCT_MANAGEMENT"); exit;
     }
-    // echo "<pre>"; print_r($response);
 }
 $rid = encodeId($_GET['Rid']);
 $rid = urldecode($rid);

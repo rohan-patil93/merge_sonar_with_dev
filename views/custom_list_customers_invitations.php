@@ -7,7 +7,6 @@ $urlcat = API."?mode=gettabledetailswithconditions&table=application_user_invita
 $invitationres = callAPI($urlcat);
 $invitationlis = json_decode($invitationres,1);
 $invitationlists =  $invitationlis;
-//echo "<pre>"; print_r($invitationlists); echo "</pre>";
 $wher["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0');
 $wher["field"] = "id,image,display_name,first_name,user_id,company,image";
 $userencodeurl = urlencode(json_encode($wher));

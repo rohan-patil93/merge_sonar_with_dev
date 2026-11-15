@@ -28,7 +28,6 @@ if($current_status != ''){
     } elseif ($status === 'completed') {
         $filtered = $response['tracking_completed'] ?? array();
     }
-    // echo '<pre>'; print_r($filtered); echo '</pre>';
 
 }else{
 

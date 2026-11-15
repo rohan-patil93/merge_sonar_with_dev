@@ -2,25 +2,18 @@
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
-//print_r($_POST);
 $tdurl1 = API."?mode=showtables";
 $showtablesdata1 = callAPI($tdurl1);
-//$showtablesdata1 = file_get_contents($tdurl1, false, $context);
 $showtables1 = json_decode($showtablesdata1,1);
 $table = $_POST['table'];
 $field= $_POST['field'];
-/*$table = "account_sections";
-$field = "section_name";*/
 $dataurl = API."?mode=viewdattributetype&table=".$table."&field=".$field;
 $view = callAPI($dataurl);
 $view = json_decode($view,1);
 $attribute_type = $view['attribute_type'] !="" ? $view['attribute_type'] : "custom_sql" ;
-//echo $attribute_type;
-//print_r($view);
 if($attribute_type == 'static'){
 	$table_str = urldecode($view['content']);
 	$static_str = json_decode($table_str,1);
-	//echo "<pre>"; print_r($table_str);
 }
 if($attribute_type == 'custom_sql'){
 	$view_details = json_decode(urldecode($view['content_details']),1);
@@ -28,31 +21,22 @@ if($attribute_type == 'custom_sql'){
 	$table_str = trim($table_str);
 	$table_name_data = explode('FROM', $table_str);
 	$table_name_data = explode(' ',trim($table_name_data['1']));
-	//print_r($table_name_data);
 	$table_name_field = $table_name_data['0'];
-	//echo $table_name_field;
 	$table_data = str_replace('ORDER', 'WHERE', $table_str);
 	//print_r($table_data);
 	//pecho "replace:".$table_str;
 	$table_data = explode('WHERE', $table_data);
-	//print_r($table_data);
 	$trs = explode(' ', trim($table_data[1]));
-	//print_r($trs);
-	//exit;
 	if(count((array)$trs) >1){
 		for ($i=0; $i < count((array)$trs) ; $i=$i+3) {
-			//echo $i.",";
 			$arry['drop_field'] = $trs[$i];
 			$arry['drop_operends'] = $trs[$i+2];
 			$exp = explode("'", $trs[$i+1]);
 			$arry['drop_condition'] = $exp[0];
 			$arry['drop_value'] = $exp[1];
-			//print_r($exp); exit;
 			$tr[] = $arry;
 		}
 	}
-	//echo "<pre>";  print_r($tr);
-	//exit;
 
 	$duplicate='';
 	foreach ($view['list'] as $list  ) {
@@ -60,7 +44,6 @@ if($attribute_type == 'custom_sql'){
 	}
 }
 $comparator_array = array('=','!=','>','>=','<','<=');
-//echo "<pre>"; print_r($view); exit;
 ?>
 
 <script type="text/javascript">
@@ -571,7 +554,7 @@ elem.forEach(function(html) {
 											</tr>
 											<?php if(count((array)$tr)>0){
 												$count = 1;
-												foreach ($tr as $td) { //print_r($td); ?>
+												foreach ($tr as $td) {?>
 
 
 													<tr id="qur_div_<?php echo $count; ?>" >

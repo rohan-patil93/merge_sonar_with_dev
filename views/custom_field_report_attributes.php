@@ -1,6 +1,5 @@
 <?php
 if (isset($_POST['submit'])){
-	//echo "<pre>"; ///print_r($_POST); exit;
 	$data1= array(); 	$data= array();
 	foreach ($_POST['field'] as $postkey => $postvalue) {
 		$data1[$postvalue]['lable'] = $_POST['lable'][$postkey];
@@ -9,14 +8,12 @@ if (isset($_POST['submit'])){
 		$data1[$postvalue]['filter'] = $_POST['filter'][$postkey];
 		$data1[$postvalue]['filter_type'] = $_POST['type'][$postkey];
 	}
-	//print_r($data1); exit;
 	$data_json = json_encode($data1);
 	$data['attributes'] = $data_json;
 	$data['help_text'] = $_POST['content'];
 	if($_POST['id'] !=''){
 			$url = API."?mode=updaterowtabledata&method=post&rid=".$_POST['id']."&table=".TBL_REPORT_ATTRIBUTES;
 	}
-	//echo $url; exit;
 	$response = file_post_contents($url, $data);
 	if ($response) {
 		header("location:index.php?option=COM_LIST_REPORT_ATTRIBUTES&error=3001");
@@ -24,28 +21,19 @@ if (isset($_POST['submit'])){
 	}
 
 }
-//$_GET['table'] = "accounts";
 if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
-		//echo $_GET['Rid'];
 		$rid= $_GET['Rid'];
 		$report_id = $rid;
 		$tableurl = API."?mode=singlerowtabledata&table=".TBL_REPORT_ATTRIBUTES."&rid=".$rid;
-	  	//echo $tableurl; exit;
 		$response = callAPI($tableurl);
-		//echo $response; exit;
 		$data = json_decode($response,1);
-		//echo $data['content_details'];
 		$content_details = json_decode($data['content_details'],1);
-		//print_r($content_details);
 		$tables =  $content_details['tables'];
 		$tables_js = json_encode($tables);
 		$attribute = json_decode($data['attributes'],1);
-		//print_r($attribute); exit;
 		$url = API."?mode=morefilednames&table=".json_encode($tables_js);
-	//echo $url;
 	$showtablesdata = callAPI($url);
 	$showtables = json_decode($showtablesdata,1);
-	//echo"<pre>"; print_r($showtables); exit;
 
 }
 
@@ -55,7 +43,6 @@ $data = urlencode(json_encode($data1));
 $resurl = API."?mode=gettabledetailswithconditions&table=".TBL_REPORT_ATTRIBUTES."&data=".$data;
 $res_data = callAPI($resurl);
 $res_data = json_decode($res_data, 1);
- //print_r($res_data);
 ?>
 <script type="text/javascript">
 	function GetSelectedTextValue(key) {

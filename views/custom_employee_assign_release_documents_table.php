@@ -18,10 +18,8 @@ if (!$employee_id || !$month) {
 $url = API . "?mode=togetdocumentlistfile&method=get"
 	. "&semp_id={$employee_id}"
 	. "&assessment_year={$assessment_year}";
-//echo $url;
 $response = callAPI($url);
 $response = json_decode($response, true);
-//echo "<pre>"; print_r($response); echo "</pre>";
 
 $data = $response['data'] ?? array();
 ?>

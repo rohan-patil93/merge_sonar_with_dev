@@ -5,14 +5,11 @@
 	}
 	$emp_id = isset($_SESSION['emp_id']) ? $_SESSION['emp_id'] : '';
 	$approval_url = API."?mode=toGetblukHrProjectTimesheet&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$emp_id;
-	//echo $approval_url;
 	$app_data = callAPI($approval_url);
 	$app_data = json_decode($app_data,1);
 	$lastapproval_url = API."?mode=toGetblukHrProjectTimesheetlastmonths&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$emp_id;
-	//echo $lastapproval_url;
 	$last_data = callAPI($lastapproval_url);
 	$last_data = json_decode($last_data,1);
-	//echo "<pre>"; print_r($app_data); print_r($last_data); exit;
 	$apv = array();
 	$sba = array();
 	$employees = array();
@@ -90,13 +87,11 @@
 				$lmonth['employee_ids'] = $la_employee;
 				$lmonth['period']=$key;
 			}
-			//$dismonth[] = $key;
 			$disuitlize[] = $la_billable_amount!="" ? number_format($la_billable_amount/100000,2):'0' ;
 			$ltotal =$ltotal+$la_budgeted_amount;
 			$k++;
 		}
 	}
-	//echo "<pre>"; print_r($last_data); print_r($lmonth);print($disuitlize); exit;
 	krsort($dismonth);
 	krsort($disuitlize);
 	$ttcount =  $apv_billable_amount+$sba_billable_amount;
@@ -199,7 +194,6 @@
 		                                $disss = date('M Y',$month);
 		                                $dis_year = date('Y',$month);
 		                                $dis_month = date('m',$month);
-		                                //echo $dis_year."_".$dis_month.",";
 		                                if(isset($_GET['PAY_YEAR']) && isset($_GET['PAY_MONTH']) && $_GET['PAY_YEAR'] == $dis_year && $_GET['PAY_MONTH'] == $dis_month ){
 		                                     $class = 'btn btn-primary';
 		                                 }else{

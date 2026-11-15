@@ -1,6 +1,5 @@
 <?php
 include_once '../includes/session.php';
-//print_r($_SESSION); exit;
 include_once '../dbconfig.php';
 include_once '../comm.php';
 ?>
@@ -100,7 +99,7 @@ include_once '../comm.php';
 											</tr>
 											<?php /*if(count((array)$tr)>0){
 												$count = 1;
-												foreach ($tr as $td) {*/ //print_r($td); ?>
+												foreach ($tr as $td) {*/?>
 
 
 												<tr class="itemRow123" id="qur_div_<?php echo $count; ?>"  >

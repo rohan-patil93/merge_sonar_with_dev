@@ -371,7 +371,7 @@ function submitEmployeeLeave(){
                                         <div class="d-flex flex-column">
                                             <div class="row p-4">
                                             <?php
-                                            $mk=0; //foreach ($cate as  $type) { ?>
+                                            $mk=0;?>
                                             <?php
                                             foreach($leavecriterialistres['available_category'] as $key=>$values){
                                                 $leave_details  = $leavetype_detrails[$key]['leavedetails']; ?>

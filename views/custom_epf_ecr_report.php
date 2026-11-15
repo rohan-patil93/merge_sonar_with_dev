@@ -4,7 +4,6 @@ if(isset($_POST['get_ecr_summary'])) {
 } else {
 	$pay_month_year = date('F, Y');
 }
-//$pay_month_year = "2021-01";
 
 $dataorg["where"] = array('company_id'=> $_SESSION['company_id'], 'is_active'=>'0');
 $datw = urlencode(json_encode($dataorg));
@@ -19,10 +18,8 @@ $pay_year = date('Y',strtotime($pay_month_year));
 $pay_month = date('m',strtotime($pay_month_year));
 
  $vurl1 = API."?mode=togetepfecrsummary&company_id=".$company_id."&pay_year=".$pay_year."&pay_month=".$pay_month."&epf_remitted_component_id=".$epf_remitted_component_id."&eps_remitted_component_id=".$eps_remitted_component_id;
-//print($vurl1); exit;
 $configesponse = callAPI($vurl1);
 $ecr_list = json_decode($configesponse,1);
-//print_r($ecr_list); exit;
 ?>
 <div class="flex-column-fluid j-wrapper">
 <div class="container-fluid j-pro">

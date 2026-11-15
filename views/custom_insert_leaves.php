@@ -201,7 +201,7 @@ function scehduleaction(){
 
                 <div class="row">
                   <div class="form-group col-lg-9 ">
-                    <span><?php echo __('Leave Category'); ?></span><?php //print_r($lcdata);?>
+                    <span><?php echo __('Leave Category'); ?></span><?php ?>
                     <select aria-label="<?php echo __('Category Name'); ?>" class="form-control selectlist form-select js-example-basic-single" id="kt_select2_47"  name="category_name">
                       <option value=""> <?php echo __('Select Any one'); ?></option>
                       <?php foreach ($lcdata as $lc) {  ?>

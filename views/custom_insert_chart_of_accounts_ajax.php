@@ -17,7 +17,6 @@ $currencies =$result['currencies'];
 $locations =$result['locations'];
 $departments =$result['departments'];
 $cost_centers =$result['cost_centers'];
-//print_r($chart_of_accounts_single);
 $chartofaccounts = array();
 foreach($chart_of_accounts as $finanacerepogrp){
     $financereportgroupsreport[$finanacerepogrp['parent_account_code']][$finanacerepogrp['account_code']] = $finanacerepogrp;
@@ -26,28 +25,9 @@ foreach($chart_of_accounts as $finanacerepogrp){
  $reportgroupid = ($_POST['pargrp'] !="0" && $_POST['pargrp'] !="")?$_POST['pargrp']:$chartofaccountssingle['parent_account_code'];
 
 
-  // $vurl = API."?mode=getfinanacereportgroups&Rid=".$_POST['id'];
-  // $resultapi = callAPI($vurl);
-  // $result = json_decode($resultapi,1);
 
-  // $chart_of_accounts =$result['chart_of_accounts'];
-  // $finance_report_groups =$result['finance_report_groups'];
-  // $chartofaccounts = array();
-  // $chartofaccounts = array();
-  // foreach($chart_of_accounts as $chartofacc){
-  //     $chartofaccounts[$chartofacc['id']] = $chartofacc;
-  // }
-  // foreach($finance_report_groups as $finanacerepogrp){
-  //     $financereportgroups[$finanacerepogrp['id']] = $finanacerepogrp;
-  // }
-  // $frgres =$result['finance_report_groups_edit'];
-  // $reportgroupid = ($_POST['pargrp'] !="0" && $_POST['pargrp'] !="")?$_POST['pargrp']:$frgres['parent_group_id'];
-  // $cudata = $result['selectedaccountlist'];
-  // $selectedode = json_decode($frgres['chart_of_account_codes'],1);
 }
 $account_groups = $result['account_groups'];
- //echo "<pre>"; print_r($selectedode);  echo "</pre>";
-//echo "-----------".$reportgroupid;
 ?>
 <?php if($chartofaccountssingle['id']!=""){ ?>
 <div >

@@ -172,7 +172,7 @@ $reasons = json_decode($reason,1);
             <th scope="col" class="p-1" style="width: 5%;"></th>
         </tr>
         <?php if(count((array)$table2)>0){ $i=1;
-         foreach ($table2 as $tab2) { //print_r($tab2); ?>
+         foreach ($table2 as $tab2) {?>
         <tr>
             <td>
                 <div class="checkbox-fade fade-in-primary">

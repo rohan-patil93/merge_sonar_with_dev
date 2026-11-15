@@ -14,10 +14,8 @@ if (!$employee_id || !$month) {
 $url = API . "?mode=getEmployeesAttendanceData&method=get"
 	. "&employee_id={$employee_id}"
 	. "&month={$month}";
-//echo $url;
 $response = callAPI($url);
 $response = json_decode($response, true);
-//echo "<pre>"; print_r($response); echo "</pre>";
 $attendance = $response['attendance_data'] ?? array();
 $holidays   = $response['holidays'] ?? array();
 $leaves     = $response['leaves'] ?? array();

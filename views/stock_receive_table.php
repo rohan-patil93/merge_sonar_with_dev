@@ -105,7 +105,7 @@
 
 </tr>
 <?php if(count((array)$table2)>0){ $i=1;
- foreach ($table2 as $tab2) { //print_r($tab2); ?>
+ foreach ($table2 as $tab2) {?>
 <tr>
     <td>
         <label class="kt-checkbox"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" data-rowid="<?php echo $i; ?>"> <span></span> </label>

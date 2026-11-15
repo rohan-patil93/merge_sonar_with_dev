@@ -7,21 +7,7 @@
 	$announcement_id = $_POST['announcement_id'];
 	$whrcondion = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0','announcement_id'=>$announcement_id);
 	$viewtab = $_POST['view'];
-//print_r($_POST);
 
-	/*if($viewtab=='comment'){
-	 $whrcondion['msg_type'] = '1';
-	}
-
-	if($viewtab=='likes'){
-	 $whrcondion['msg_type'] = '2';
-	 $whrcondion['like_type'] = '1';
-
-	}
-	if($viewtab=='dislikes'){
-	 $whrcondion['msg_type'] = '2';
-	 $whrcondion['like_type'] = '2';
-	}*/
 	$data11["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0','id'=>$announcement_id);
 	$datw = urlencode(json_encode($data11));
 	$curl1 = API."?mode=gettabledetailswithconditions&table=company_announcements&data=".$datw;
@@ -34,7 +20,6 @@
 	$curl1 = API."?mode=gettabledetailswithconditions&table=summary_announcements&data=".$datw;
 	$cudata1 = callAPI($curl1);
 	$announce_data = json_decode($cudata1,1);
-   // print_r($announce_data);
 	foreach ($announce_data as $data)
 	{
 		$userlist[] = $data['userid'];

@@ -3,7 +3,6 @@ $_SESSION['apply_js']['multiselest'] = '1';
 $url = API."?mode=getapplicationserialnumbers";
 $responseres = callAPI($url);
 $result = json_decode($responseres,1);
-//echo "<pre>"; print_r($result); echo "</pre>";
 $dynamic_mapping_tables = $result['dynamic_mapping_tables'];
 
 ?>

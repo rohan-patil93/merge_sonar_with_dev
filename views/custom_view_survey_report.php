@@ -1,10 +1,8 @@
 <?php
-//$survey_id = 3;
 $vurl = API."?mode=getsurveyreport&company_id=".$company_id."&is_active=0&survey_id=".$survey_id;
 $configesponse = callAPI($vurl);
 $surveyData = json_decode($configesponse,1);
 $maxoptions = isset($surveyData['maxoptions']) ? (int)$surveyData['maxoptions'] : 0;
-//echo "<pre>";print_r($surveyData); exit;
 ?>
 
 <div class="col-lg-12">

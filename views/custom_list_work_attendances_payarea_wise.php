@@ -368,7 +368,7 @@ function getWorkAttendanceLogs(yearmonth){
 
         <tbody>
             <?php $mk=1;  $dis_dates['slno'] = "SLNO"; $dis_dates['emp_id'] = "emp_id"; $dis_dates['name'] = "Name";
-            foreach($emplist as $keye => $elist){ //print_r($elist); ?>
+            foreach($emplist as $keye => $elist){?>
              <tr>
               <th scope="col">
 

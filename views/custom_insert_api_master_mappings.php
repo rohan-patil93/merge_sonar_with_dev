@@ -13,13 +13,11 @@ if(isset($_POST['submit_value'])){
 	$datacv['created_date'] = nowDate();
 	$datacv['created_by'] = $_SESSION['userid'];
 	$datacv['company_id'] = $_SESSION['company_id'];
-	//print_r($datacv); //exit;
 	$url = API."?mode=adddata&table=api_masters&method=post";
 	$response = file_post_contents($url, $datacv, 'insert');
 	if ($response) {
 		header("location:index.php?option=COM_LIST_API_MASTER_MAPPINGS");
 	}
-	//echo $response ; exit;
 }
 $rid = 10;
 $vurl = API."?mode=togetapiidbasemapdetail&api_master_id=".$rid;
@@ -30,17 +28,8 @@ $all_api_masters = $result['all_api_masters'];
 $amt = $result['api_masters'];
 $edidumpsdata = json_decode($amt['api_response_details'],1);
 
-// $vurl = API."?mode=togetapiidbasemapdetail&api_master_id=".$rid;
-// $configesponse = callAPI($vurl);
-// $data = json_decode($configesponse,1);
-// echo "<pre>"; print_r($data); echo "</pre>";
-// $amt = $data['master'];
-// $edidumpsdata = json_decode($amt['api_response_details'],1);
 
-//$edidumpsdata = $data['table_filed'];
-//unset($selectdata['id']);
 $selectdata = $data['table_filed'];
-//print_r($selectdata); //exit;
 ?>
 <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
 	<div class="card card-custom">

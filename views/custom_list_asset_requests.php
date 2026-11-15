@@ -2,7 +2,6 @@
 	$url1 = API."?mode=getassettransferrequests&admin_type=".$_SESSION['admin_type'];
 	$data_details1 = callAPI($url1);
 	$result = json_decode($data_details1,1);
-	//echo "<pre>"; print_r($result); echo "</pre>";
    	$asset_requests = $result['asset_requests'];
    	$asset_categories = $result['asset_categories'];
    	$locations = $result['locations'];

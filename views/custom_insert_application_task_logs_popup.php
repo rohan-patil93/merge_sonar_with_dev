@@ -9,7 +9,6 @@ $result = json_decode($apicall, 1);
 $application_task_logs = $result['project_task_details'];
 $email_logs = $result['email_logs'];
 $statuse = ViewStatusData();
-//echo "<pre>"; print_r($result); echo "</pre>";
 ?>
 <script type="text/javascript">
 	function SubmitTaskDetails(){

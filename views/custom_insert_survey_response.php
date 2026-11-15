@@ -14,7 +14,6 @@ $vurl = API."?mode=getsharedsurveydetails&company_id=".$company_id."&emp_id=".$e
 $configesponse = callAPI($vurl);
 $surveyData = json_decode($configesponse,1);
 $survey_details = $surveyData['survey_details'];
-//print_r($survey_details);
 $survey_response_details = $surveyData['survey_reponse_details'];
 $survey_start_date = $survey_details['survey_start_date'];
 $survey_end_date = $survey_details['survey_end_date'];
@@ -26,12 +25,9 @@ $display_questions = $surveyData['questions'];
 $display_tag = $category[$survey_details['category']];
 $markedanswer = $surveyData['resultdata'];
 
-//$duration = timediff($survey_start_date,$survey_end_date,$survey_start_time,$survey_end_time);
-//print_r($markedanswer); exit;
 $qustion_types = $surveyData['qustion_types'];
 $total_q = count((array)$display_questions);
 $_GET['Qid']==''? ($questionid=1) : ($questionid=$_GET['Qid']);
-//$answer = json_decode($_SESSION['survey'][$emp_id][$survey_id]['answered'][$_GET['Qid']]['answer'],1);
 
 foreach ($_SESSION['survey'][$emp_id][$survey_id]['answered'] as $keyans=>$valueans) {
   $answers_no[]=$keyans;
@@ -46,7 +42,6 @@ if(isset($_POST['clear'])) {
   header("location:index.php?option=".$_GET['option']."&Qid=".$questionid);
 }
 if(isset($_POST['submit'])){
-  // print_r($_POST); exit;
   $partial_complete = 1;
   $answered = 0;
   if (count((array)$_POST['value_id']) > 0) {
@@ -67,7 +62,6 @@ if(isset($_POST['submit'])){
   $duration_taken = round(abs($diff)/3600,2);
 
   $commondata = array('duration_taken'=>$duration_taken,'partial_complete'=>$partial_complete,'category'=>$_POST['category'],'employee_id'=>$_POST['emp_id'],'survey_id'=>$_POST['survey_id'],'response_start_date'=>date('Y-m-d'),'response_start_time'=>$_SESSION['response_start_time'],'response_end_date'=>date('Y-m-d'),'response_end_time'=>date('H:i:s'),'created_date'=>date('Y-m-d'),'created_by'=>$_SESSION['user_id'],'is_active'=>'0','company_id'=>$_SESSION['company_id']);
-  // print_r($commondata); exit;
   if($_POST['submit']=='Submit '.$display_tag) {
     $commondata['current_status'] = ST_COMPLETE;
   }else{
@@ -87,13 +81,7 @@ if(isset($_POST['submit'])){
  }
  $url = API."?mode=savesurveyreponses&table=survey_responses&method=post";
  $retunn_inserted_qid = file_post_contents($url,$data,'insert');
-  //  echo "<pre>"; print_r($data); //exit;
   header("location:index.php");exit;
-  // if($_SESSION['working_role_short_code'] == "SURVEY_ADMIN"){
-  //   header("location:index.php?option=COM_SURVEY_ADMIN_DASHBOARD&CAT=".$_GET['CAT']);
-  // }else{
-  //   header("location:index.php?option=COM_EMPLOYEE_SURVEY_ADMIN_DASHBOARD&CAT=".$_GET['CAT']);
-  // }
 }
 ?>
 <style type="text/css">

@@ -264,7 +264,7 @@ $parentdocuments  = json_decode($parentdocuments,1);
      <div class="d-flex font-weight-bold">
        <?php if($value['current_status'] != ST_APPROVED){ ?>
          <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5"  style=" height:0px; ">
-           <label class="btn-hover-text-primary mt-1 <?php //echo $value['document_shared']!=""?"mt-3":"mt-1"; ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File" aria-label="Upload File">
+           <label class="btn-hover-text-primary mt-1 <?php ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File" aria-label="Upload File">
 
              <i class="ti-clip" style="font-size: 20px;"></i>
              <input aria-label="File upload" type="file" name="image_<?php echo $value['id']; ?>" />

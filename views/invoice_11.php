@@ -28,7 +28,6 @@ if($_POST['callapi'] =='Y'){
     $bank_accounts = $result['bank_accounts'];
     $_SESSION['pdf_file_name'] = $table;
     $items  = $result['items'];
-//echo "<pre>";print_r($result); echo "</pre>";
 }
 $party_additional_details = json_decode($transaction['party_additional_details'],1);
 function currencyFormat($number,$config){
@@ -100,18 +99,6 @@ function emptyCheck($valu){
     }
     return $value;
 }
-// function dateFormat($from='',$config){
-//  $configdate_format = str_replace('-',$config['date_separator'], strtolower($config['date_format']));
-//  $date_formate = str_replace('yyyy', 'Y', str_replace('mm', 'm', str_replace('dd', 'd', $configdate_format)));
-//  $from = $from!='0000-00-00' ? $from :'';
-//  $dateformat = $date_formate!="0"?$date_formate: 'Y-m-d';
-//     if($from != ""){
-//      $from =  date($dateformat,strtotime($from));
-//  }else{
-//      $from = date($dateformat);
-//  }
-//  return $from;
-// }
 ?>
 <script>
     function printDiv(divName) {

@@ -5,7 +5,6 @@ include_once '../comm.php';
 $dataurl = API."?mode=togetesignpolistpopup&type=".$_POST['type']."&rid=".$_POST['rid']."&item=".$_POST['item']."&emp_id=".$_POST['emp_id'];
 $view = callAPI($dataurl);
 $data = json_decode($view,1);
-//echo "<pre>"; print_r($_POST);print_r($data);
 $job  = $data['job'];
 ?>
 <style type="text/css">

@@ -24,11 +24,8 @@ $subscription_plans = $subscriptusers['subscription_plans'];
 $subscriptiontypeunit = $subscriptusers['subscriptiontypeunit'];
 $module_setup = $subscriptusers['module_setup'];
 $company_subscription_plan_licenses = $subscriptusers['company_subscription_plan_licenses'];
-//print_r($company_subscription_plan_licenses);
 
 
-// echo "<pre>";print_r($response1);
-// echo "</pre>";
 ?>
 <script type="text/javascript">
     function addSubscriptionPlans(){
@@ -324,7 +321,7 @@ function refrashpage(){
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                   <?php $custom_fields = json_decode($applicationuser['custom_fields'],1);// print_r($custom_fields);
+                                                   <?php $custom_fields = json_decode($applicationuser['custom_fields'],1);
                                                    foreach($custom_fields as $kk=>$custoval){
                                                      ?>
                                                      <tr id="deleterow1">

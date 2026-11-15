@@ -8,7 +8,6 @@ if (isset($_POST['submitrentalinvoice'])) {
     $response1 = file_post_contents($url, $_POST, 'insert');
     $response1 = json_decode($response1, 1);
     $response = $response1['res'];
-  // echo "<pre>"; print_r($response1); echo "</pre>";
     if($response['status'] == 'sucess'){
         if($response['LASTID'] == 0){
             $msgcode = 3001; //update
@@ -61,7 +60,6 @@ $party_additional_details = json_decode($transaction_data['party_additional_deta
 $owner_additional_details = json_decode($transaction_data['owner_additional_details'],1);
 $utility_uom = $result['utility_uom'];
 $states= $result['states'];
-//echo "<pre>"; print_r($utility_rental_invoice_item_taxes); echo "</pre>";
 $operation_symbol = array('+','/','*','%','=');
 
 
@@ -369,7 +367,6 @@ function cancelInvoices(transaction_table,transaction_id){
                         </button>
                 <?php  }
                 	echo $workflowsteps['workflow_btn'];
-                 	//$printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$rid."&table=utility_rental_invoices&title=".urlencode('Rental Invoices');
 
                     $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$transaction_id."&table=utility_rental_invoices&title=".urlencode('Utility Invoices');
                 	 ?>

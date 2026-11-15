@@ -24,7 +24,7 @@
 </script>
 <?php
 $rattig = 1;
-foreach ($disarray as $diskey => $disvalue) {  // print_r($disvalue);
+foreach ($disarray as $diskey => $disvalue) {
 	if($diskey != 'normal'){ if($diskey == 'right' || !isset($disarray['right'])){ ?>
 	<div class="row">
 	<?php } ?>
@@ -47,12 +47,10 @@ foreach ($disarray as $diskey => $disvalue) {  // print_r($disvalue);
 
 foreach($disvalue as  $fullvalue){
 	$key = $fullvalue['table'];
-//print_r($fullvalue); echo $fullvalue['lable'];
 	$after = $fullvalue['after'];
 	$value =  $fullvalue['lable'];
 	$class = "form-group col-lg-".$fullvalue['width'];
 	$sch = 0;
-	/*if($diskey == 'normal'){ $class = "form-group col-lg-".$fullvalue['width']; }*/
 	?>
 	<?php if($fullvalue['type'] == 'text' || $fullvalue['type'] == 'read_only' ){ $read_only=""; if($fullvalue['type'] == 'read_only'){ $read_only= "readonly";
 	}?>
@@ -82,7 +80,6 @@ if($attribute_types_list['refer_by_action']=='0'){
 	$selectdata = dyanamicselectdata($table_name,$key);
 }
 if($key == "hsn_and_sac_code_id"){
-	//$dynamicfunction = "onchange='dynamicfunction(/''.$key.'/',this.value)'";
 	$dynamicfunction =  "onchange=\"dynamicfunction('".$key."', this.value)\"";
 }
 ?>
@@ -161,7 +158,6 @@ if($attribute_types_list['refer_by_action']=='0'){
 <?php }elseif($fullvalue['type']=='switch') { ?>
 		<?php $selectdata = dyanamicselectdata($table_name,$key);
 		$k=1;
-		//print_r($selectdata);
 		foreach ($selectdata as $selectkey => $selectvalue) {
 			if($k < 3){
 				$one = $k==1 ? $selectkey : $one;
@@ -170,7 +166,7 @@ if($attribute_types_list['refer_by_action']=='0'){
 				break;
 			}
 		$k++;
-		} //echo $one."##".$sen; exit;?>
+		}?>
 		<div class="<?php echo $class; ?>">
 			<label><?php echo __($value); if (in_array($key, (array)$mandatory)){ ?>&nbsp;<span class="requried">*</span><?php } ?></label>
 			<div class="">
@@ -414,7 +410,6 @@ if(is_array($role[$key])){ $mulcheck = $role[$key];
 	</div></div>
 <?php $slider++;
 }elseif($fullvalue['type']=='hidden'){
-        //echo $key."//".$role[$key]; print_r($role);
 	    $hidden_key = $role[$key] !="" ? $role[$key] : $_SEESSION[$key];
 
 	?>
@@ -423,7 +418,6 @@ if(is_array($role[$key])){ $mulcheck = $role[$key];
 
 	<?php if($after == 1){?>
 		<?php $afterdata = dyanamicafterdata($table_name,$key);
-		//print_r($afterdata);
 		if($afterdata['display'] != 'list'){
 		$new_class = "form-group col-lg-".$afterdata['width']; ?>
 		<div class="<?php echo $new_class; ?>">

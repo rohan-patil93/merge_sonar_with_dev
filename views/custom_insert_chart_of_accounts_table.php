@@ -14,7 +14,6 @@ if(isset($_POST['pageshow']) && $_POST['pageshow'] =="Y"){
     $financereportgroups = [];
     if (!empty($chart_of_accounts) && is_array($chart_of_accounts)) {
         foreach($chart_of_accounts as $finanacerepogrp){
-            //$financereportgroupsreport[$finanacerepogrp['parent_account_code']][$finanacerepogrp['account_code']] = $finanacerepogrp;
             $financereportgroupsreport[$finanacerepogrp['parent_account_code']][] = $finanacerepogrp;
             $financereportgroups[$finanacerepogrp['account_code']] = $finanacerepogrp;
         }
@@ -26,7 +25,6 @@ if (!isset($financereportgroupsreport) || !is_array($financereportgroupsreport))
 if (!isset($financereportgroups) || !is_array($financereportgroups)) {
     $financereportgroups = [];
 }
-//echo "<pre>"; print_r($financereportgroups); echo "</pre>";
 $account_groups = $result['account_groups'] ?? [];
 ?>
 <table class="table table-bordered table-hover">
@@ -40,7 +38,7 @@ $account_groups = $result['account_groups'] ?? [];
                             </tr>
                         </thead>
                         <tbody>
-                        <?php $i = 1; //foreach($financereportgroupsreport as $level0){
+                        <?php $i = 1;
                             $level1_items = $financereportgroupsreport[0] ?? [];
                             foreach($level1_items as $level1){
                             $Alevel2 = $financereportgroupsreport[$level1['account_code']] ?? [];

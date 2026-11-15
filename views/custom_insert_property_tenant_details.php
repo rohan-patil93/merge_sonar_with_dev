@@ -8,14 +8,12 @@ if($_GET['ajaxcall'] =='Y'){
 $_SESSION['apply_js']['multiselest'] = "1";
 $_SESSION['apply_js']['textediter'] = '1';
 $_SESSION['apply_js']['table'] = '1';
-//echo "<pre>";print_r($_POST); echo "</pre>";
 if(isset($_POST['submittenantdetails'])){
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['user_id'] = $_SESSION['userid'];
    	$url = API."?mode=insertpropertytenantdetails&method=post";
     $response1 = file_post_contents($url, $_POST, 'insert');
     $res = json_decode($response1,1);
-//echo "<pre>";print_r($res); echo "</pre>";
     $response = $res['res'];
     if($response['status'] == 'sucess'){
         if($response['LASTID'] == 0){
@@ -72,56 +70,16 @@ foreach($podareas as $podarea){
 }
 $podaajax = json_decode($property_tenant_details['property_owner_detail_areas'],1);
 foreach($podaajax as $poda){
-	//$detail = $property_owner_detail_areas[$poda['property_area_id']];
 	$totaldis +=$poda['rent'];
 }
 $owners = array();
 foreach($property_owners as $coa) {
 	$owners[$coa['id']] =$coa['owner_name'];
 }
-// echo "<pre>";
-// print_r($podaajax);
-// echo "</pre>";
 
-// $rentastartdate = $property_tenant_details['rent_commencement_date'];
-// $rentenddate = $property_tenant_details['lease_period_end_date'];
-// $startday = 10;
-// $billinggeneratedate = date('Y-m-'.$startday, strtotime($rentastartdate));
-// if(strtotime($rentastartdate) >= strtotime($billinggeneratedate)){
-// 	//$finalapproveddate = date('Y-m-d', strtotime($rentastartdate));
-// 	$totaldayaddornot = '-';
-// }else{
-// 	//$finalapproveddate = date('Y-m-d', strtotime($billinggeneratedate));
-// 	$totaldayaddornot = '+';
-// }
-// $date1 = new DateTime($billinggeneratedate);
-// $date2 = new DateTime($rentastartdate);
-// $interval = $date1->diff($date2);
-// $daysCount = $interval->days;
-// echo "----------".$daysCount." --- ".$finalapproveddate." --- ".$rentastartdate."</br>";
 
-// $startDate = new DateTime($billinggeneratedate);
-// $endDate = new DateTime($rentenddate);
-// while($startDate <= $endDate ){
-// 	$timestamp1 = $startDate->format('Y-m-'.$startday);
-// 	$startDate->format('Y-m-'.$startday);
-// 	$startDate->modify('+1 month');
-// 	$timestamp2 = $startDate->format('Y-m-'.$startday);
-// 	$timestamp2 = date('Y-m-d', strtotime($timestamp2 . ' -1 day'));
 
-// 	$sdate = new DateTime($timestamp1);
-// 	$edate2 = new DateTime($timestamp2);
-// 	$totaldays = $sdate->diff($edate2);
 
-// 	if ($totaldayaddornot == '+') {
-//     	$remainingdays = $totaldays->days + $daysCount;
-// 	} elseif ($totaldayaddornot == '-') {
-// 	    $remainingdays = $totaldays->days - $daysCount;
-// 	}
-// 	echo $timestamp1." -- ".$timestamp2." - ".$remainingdays."</br>";
-// }
-//$rentbilltoberaise = array('Next','Same');
-//$billtoberaisedtype = array('Auto','Manual','Last Date of Billing');
 ?>
 <script type="text/javascript">
 
@@ -656,9 +614,6 @@ function extendAgreement(){
         </div>
 <?php } ?>
 <?php
-// if($property_tenant_details['lock_tenant']=='0' || $property_tenant_details['current_status'] !=0){
-// 	$dyncss = 'style="pointer-events: none; opacity: 0.6;"';
-// }
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,ST_CALLBACK,'');
 if(in_array($property_tenant_details['current_status'], (array)$check_array) && $property_tenant_details['originator'] == $_SESSION['userid'] || $property_tenant_details['originator'] ==""){
 
@@ -751,7 +706,7 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 						 	$detail = $property_owner_detail_areas[$poda['property_area_id']];
 							$totaldis +=$poda['rent'];
 						?>
-							<tr> <?php //print_r($detail); ?>
+							<tr> <?php ?>
 
 								<td class="p-2">
 									<input type="hidden" name="property_area_id[]" value="<?php echo $poda['property_area_id']; ?>"><input type="hidden" name="property_area_name[]" value="<?php echo $detail['property_area_name']; ?>">
@@ -999,7 +954,6 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 					<?php
 					$mc = 1;
 					$rbtype = json_decode($property_tenant_details['rental_bill_types'],1);
-					//echo "<pre>"; print_r($rbtype); echo "</pre>";
 					foreach($rental_bill_types as $rbt){
 						$rbtyp =$rbtype[$rbt['id']];
 						?>
@@ -1171,7 +1125,6 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 							<div id="addmorerow">
 								<?php $i = 0;
 								$bill_to_be_send_for_the_following = json_decode($property_tenant_details['bill_to_be_send_for_the_following'],1);
-								//echo "<pre>"; print_r($property_tenant_details['bill_to_be_send_for_the_following']); print_r($bill_to_be_send_for_the_following);	echo "</pre>";
 								if(count((array)$bill_to_be_send_for_the_following) == 0){
 									$bill_to_be_send_for_the_following[] = array();
 								}

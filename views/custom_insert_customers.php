@@ -1,15 +1,7 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = 1;
 $_SESSION['apply_js']['dropzone'] = 1;
-// $page_details= toGetTableNameBaseApplicationPagesList('insert_page_name', $_GET['option']);
-// print_r($page_details);
 $File_Uploads_Path = "uploads/customer/";
-// $content = "Help Text";
-// $add_url = $page_details['list_page_name'];
-// $view_url = $page_details['list_page_name'];
-// $table_name = $page_details['application_table_name'];
-// $table_name = "vendors";
-//echo $table_name; exit;
 if(isset($_POST['submit'])){
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['user_id'] = $_SESSION['userid'];
@@ -18,7 +10,6 @@ if(isset($_POST['submit'])){
   	$url = API."?mode=insertcustomers&method=post";
     $response1 = file_post_contents($url, $_POST, 'insert');
     $res = json_decode($response1,1);
-	//echo "<pre>";print_r($res); echo "</pre>";
 	for ($i = 0; $i < count((array)$_POST['lut_no']); $i++) {
 	 	if(($_POST['lut_no'][$i] !="" || $_POST['bond_no'][$i] !="") && $_POST['lock_status'][$i] =='1'){
 			$additional_notice = "Please lock your row(s) in Tax Info. Otherwise, it may not be used anywhere.";
@@ -214,8 +205,6 @@ if (isset($_POST['submit'])){
 }
 
 **/
-//if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
-	//$rid =  encodeId($_GET['Rid']);
 $rid =  encodeId($_GET['Rid']);
 $rid = urldecode($rid);
 $rid = explode(':', $rid);
@@ -230,7 +219,6 @@ $property_owners =$result['property_owners'];
 $payment_method =$result['payment_method'];
 $salestype =$result['salestype'];
 $gstregistrationtype = $result['gstregistrationtype'];
-	// $emplist = $result['employess'];
 $countrieslist = $result['countries'];
 $states = $result['states'];
 $cities = $result['cities'];
@@ -248,8 +236,6 @@ foreach($states as $states_list){
 foreach($cities as $cities_list){
 	$citieslist[$cities_list['id']] = $cities_list['city_name'];
 }
-//echo "<pre>";print_r($cities); //print_r($property_details); print_r($property_owners);
-//echo "</pre>";
 
 //print_r($['customer_vendor_gst_billing_details_sql']);
 if($customers['image'] !=''){
@@ -1893,7 +1879,7 @@ function toggleRowLock(button) {
 						</div>
 					</div>
 					<div id="showdivpagehtml">
-						<?php //include_once('custom_insert_property_tenant_details.php'); ?>
+						<?php ?>
 					</div>
 				</div>
 				</div>

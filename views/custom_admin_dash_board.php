@@ -2,11 +2,9 @@
 $vurl = API."?mode=togetVendorAgreementexpirelist";
     $configesponse = callAPI($vurl);
 	$vendor_agreement = json_decode($configesponse,1);
-	//print_r($vendor_agreement); exit;
 	 $vurl = API."?mode=customadmdashboardmodule3";
     $configesponse = callAPI($vurl);
 	$mcats = json_decode($configesponse,1);
-	//echo "<pre>"; print_r($mcats); exit;
 	foreach($mcats as $mkey=>$mca){
 		$overallemployees[$mkey]=0;
 		$maingra['months'][]=date('M',strtotime($mkey));
@@ -23,7 +21,6 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 		$maingra['bdget'][]=$budget;
 		$maingra['billable'][]=$bilable;
 	}
-	//echo "<pre>"; print_r($vendor_admin);exit;
 	foreach($vertical_admin as $vkey=>$vertical_a){
 		foreach($vertical_a as $vertical_ad){
 			$name = $vertical_ad['vertical_name'];
@@ -47,14 +44,12 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 		$cctdetail['ym'] = $ym;
 
 	}
-	//echo "<pre>"; print_r($ccbillable); exit;
 	foreach($ccbillable as $cckey=>$ccbillaa){
 		$ccarray = array(); $ccemparray =array();
 		foreach($ccbillaa as $ccbil){
 			$ccarray[]=$ccbil['billable_amount']/1000;
 			$ccemparray[] = $ccbil['no_emp'];
 		}
-		//print_r($ccarray);
 		$cdatas[$cckey] = implode('|',(array)$ccarray);
 		$cdatasemp[$cckey] = implode('|',(array)$ccemparray);
 	}
@@ -86,66 +81,11 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	}
 	$vntdetail['data'] = implode(',',(array)$vndatas);
 	$vntdetail['noemp'] = implode(',',(array)$vndatasemp);
-//echo "<pre>"; print_r($vnbillable); print_r($vntdetail); exit;
-/*
-	//echo "<pre>"; print_r($ccbillable); print_r($cctdetail); exit;
-    $vurl = API."?mode=togetverticaldata";
-    $configesponse = callAPI($vurl);
-	$vcats = json_decode($configesponse,1);
-	//print_r($vcats);
-    foreach($vcats as $vcat){
-        $vnames[] = $vcat['verticallame'];
-        $vvalue[] = $vcat['charg'];
-    }
-
-    $vurl = API."?mode=togetcoscentergraphdata";
-    $configesponse = callAPI($vurl);
-	$cdatas = json_decode($configesponse,1);
-	$vurl = API."?mode=togetvendorgraphdata";
-    $configesponse = callAPI($vurl);
-	$vendordatas= json_decode($configesponse,1);
-	foreach($cdatas as $cdata){
-	    if($cdata['cost_center']!=""){
-    	    $cname[$cdata['cost_center']] = $cdata['cost_center_name'];
-    	    //$cyx[$cdata['monthdate']] = $cdata['monthdate'];
-    	    $ccosval[$cdata['cost_center']][$cdata['monthdate']] = round($cdata['chargable_amount']);
-	    }
-	}
-	foreach($vendordatas as $vendordata){
-	    if($vendordata['vendor_id']!=""){
-    	    $vname[$vendordata['vendor_id']] = $vendordata['vendor_name'];
-    	    //$cyx[$cdata['monthdate']] = $cdata['monthdate'];
-    	    $vendorval[$vendordata['vendor_id']][$vendordata['monthdate']] = round($vendordata['chargable_amount']);
-	    }
-	}
-	$fmont = date('m');
-	if($fmont >3){ $fdate = date('Y')."-04"; }else{ $fdate = date("Y", strtotime("-1 years"))."-04"; }
-	for($i=1; $i<13 ;$i++){
-	   $cyx[] = $fdate;
-
-	   foreach($ccosval as $key=>$ccos){
-	       $ccosval[$key][$fdate] = $ccos[$fdate]!="" ? $ccos[$fdate] : 0;
-	   }
-	   foreach($vendorval as $key=>$vendorva){
-	       $vendorval[$key][$fdate] = $vendorva[$fdate]!="" ? $vendorva[$fdate] : 0;
-	   }
-	   $fdate = date('Y-m', strtotime($fdate." +1 month"));
-	}
-	foreach($ccosval as $key=>$ccos){
-	    $ccosvaldata[]= implode("|",$ccos);
-	}
-	foreach($vendorval as $key=>$vendorv){
-	    $vendorvaldata[]= implode("|",$vendorv);
-	}
-	//print_r($ccosvaldata);
-	$ccosvaldatas = implode(",",$ccosvaldata);
-	$vendorvaldatas = implode(",",$vendorvaldata);
-	//echo "ravi".$ccosvaldatas; exit;*/
 
 ?>
 <div class="row p-5">
 	<!--<div class="col-lg-6 col-xxl-6">
-	<?php //include_once('custom_view_vms_jobs.php'); ?>
+	<?php ?>
 </div>-->
 
 <div class="col-lg-8  draggable-zone">
@@ -614,7 +554,7 @@ $vurl = API."?mode=togetVendorAgreementexpirelist";
 	</div>	 -->
 </div>
 	<!-- <div class="col-lg-8 draggable-zone">
-         <?php //include_once('custom_view_admin_dashboard_report.php'); ?>
+         <?php ?>
       </div> -->
 
 

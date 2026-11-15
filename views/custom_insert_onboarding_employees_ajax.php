@@ -7,9 +7,7 @@ if($_POST['ajaxcallemployee'] =="Y"){
 	$url = API."?mode=getemployees&employee_id=".$employee_id."&working_role_short_code=".$_SESSION['working_role_short_code'];
 	$response = callAPI($url);
 	$result = json_decode($response,1);
-	//echo "<pre>"; print_r($result); echo "</pre>";
 	$data = $result['employees'];
-	//echo "<pre>"; print_r($result); echo "</pre>";
 }
 $employees_display_fields = $result['employees_display_fields'];
 $vafield = json_decode($employees_display_fields['field_list'],1);
@@ -45,12 +43,8 @@ $emp_bank_status = $result['emp_bank_status'];
 $employee_access = $result['employee_access'];
 $employee_other_access = $result['employee_other_access'];
 $statuse = ViewStatusData();
-//echo "<pre>"; print_r($emp_bank_status); echo "</pre>";
 
-//$employment_bands_details = $employee_basic_details['employment_bands_details'];
-//$verticals_details = $employee_basic_details['verticals_details'];
 
-//$employee_type = array("1"=>"Permanent","2"=>"Contract"," "=>"Not Defined");
 $billable = array("0"=>"Yes","1"=>"No"," "=>"Not Defined");
 $yesno = array('0'=>'Yes','1'=>'No');
 
@@ -447,7 +441,7 @@ $bank_work_flow = "Y";
                  	<td class="p-2"> - </td>
                  	<td class="p-2">
                  	<?php if($attached_files['aadhar_attachment'] !=""){ ?>
-                	<a href="uploads/all/<?php echo $attached_files['aadhar_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['aadhar_attachment']; ?></a>
+                	<a href="uploads/all/<?php echo $attached_files['aadhar_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php ?></a>
                 	<?php }else{ echo "-";
                 	} ?>
                 	 </td>
@@ -460,7 +454,7 @@ $bank_work_flow = "Y";
 	                <td class="p-2"><?php echo ($data['passport_expiry_date']!="0000-00-00" && $data['passport_expiry_date']!="")?fromDate($data['passport_expiry_date']):" - "; ?></td>
 	                <td class="p-2">
 	                <?php if($attached_files['passport_attachment'] !=""){ ?>
-                	<a href="uploads/all/<?php echo $attached_files['passport_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['passport_attachment']; ?></a>
+                	<a href="uploads/all/<?php echo $attached_files['passport_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php ?></a>
                 	<?php }else{ echo "-";
                 	} ?>
                 	 </td>
@@ -473,7 +467,7 @@ $bank_work_flow = "Y";
 	                <td class="p-2"><?php echo ($data['driving_licence_expiry_date']!="0000-00-00" && $data['driving_licence_expiry_date']!="")?fromDate($data['driving_licence_expiry_date']):" - "; ?></td>
 	                <td class="p-2">
 		                <?php if($attached_files['driving_licence_attachment'] !=""){ ?>
-	                	<a href="uploads/all/<?php echo $attached_files['driving_licence_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['driving_licence_attachment']; ?></a>
+	                	<a href="uploads/all/<?php echo $attached_files['driving_licence_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php ?></a>
 	                	<?php }else{ echo "-";
 	                	} ?>
                 	</td>
@@ -486,7 +480,7 @@ $bank_work_flow = "Y";
 	                <td class="p-2"> - </td>
 	                <td class="p-2">
 	                	<?php if($attached_files['pan_attachment'] !=""){ ?>
-                	<a href="uploads/all/<?php echo $attached_files['pan_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['pan_attachment']; ?></a>
+                	<a href="uploads/all/<?php echo $attached_files['pan_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php ?></a>
                 	<?php }else{ echo "-";
                 	} ?>
 	                 </td>
@@ -499,7 +493,7 @@ $bank_work_flow = "Y";
 	                 <td class="p-2"> - </td>
 	                 <td class="p-2">
 	                 <?php if($attached_files['pf_attachment'] !=""){ ?>
-                	<a href="uploads/all/<?php echo $attached_files['pf_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['pf_attachment']; ?></a>
+                	<a href="uploads/all/<?php echo $attached_files['pf_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php ?></a>
                 	<?php }else{ echo "-";
                 	} ?>
                 	 </td>
@@ -512,7 +506,7 @@ $bank_work_flow = "Y";
 	                	<td class="p-2"> - </td>
 	                 	<td class="p-2">
 	                 	<?php if($attached_files['pf_uan_attachment'] !=""){ ?>
-                	<a href="uploads/all/<?php echo $attached_files['pf_uan_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['pf_uan_attachment']; ?></a>
+                	<a href="uploads/all/<?php echo $attached_files['pf_uan_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php ?></a>
                 	<?php }else{ echo "-";
                 	} ?>
                 	 </td>
@@ -524,7 +518,7 @@ $bank_work_flow = "Y";
 	                 <td class="p-2"><?php echo renderSensitiveDataWithToggle($data['gosi_number'], 'gosi_number'); ?> </td><td class="p-2"> - </td>
 	                 <td class="p-2">
 	                 <?php if($attached_files['gosi_attachment'] !=""){ ?>
-                	<a href="uploads/all/<?php echo $attached_files['gosi_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php //echo $attached_files['pf_attachment']; ?></a>
+                	<a href="uploads/all/<?php echo $attached_files['gosi_attachment']; ?>" class="text-primary mt-2 f-14" download><i class="ti-cloud-down"></i> <?php ?></a>
                 	<?php }else{ echo "-";
                 	} ?>
                 	 </td>

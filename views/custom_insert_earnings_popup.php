@@ -286,7 +286,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
 
                                             if(count((array)$tr)>0){
                                                 $count = 1;
-                                                foreach ($tr as $td) { //print_r($td); ?>
+                                                foreach ($tr as $td) {?>
 
 
                                                 <tr id="qur_div_<?php echo $count; ?>" >

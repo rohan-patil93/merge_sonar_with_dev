@@ -21,7 +21,5 @@ $_SESSION['user_token'] = $row['user_token'];
 $_SESSION['work_module_setup_id'] = base64_decode($_GET['Rid']);
 $_SESSION['working_role_short_code'] = $_GET['working_role_short_code'];
 $_SESSION['HTTP_INFI_TOKEN'] = $row['HTTP_INFI_TOKEN'];
-//echo "ravi".$_SESSION['userid'];
-//print_r($_SESSION);
 header("Location:index");
 exit;

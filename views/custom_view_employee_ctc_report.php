@@ -75,7 +75,6 @@ foreach((array)$presulta['list'] as $key=>$rows){
     $grandgrosssal[$rows[0]['id']] = $grosssal;
 
 }
-//echo "<pre>"; print_r($grandtotal); exit;
 $teremp = array();
 if(!empty((array)$resulta['terminations'])){
     foreach((array)$resulta['terminations'] as $termination){

@@ -10,11 +10,9 @@ if($_POST['ajax']  =="Y"){
 	$workflowconfiguration = $getresult['workflow_configuration'];
 
 }
-//$roleprecesstypearray = array('user'=>'User','email_groups'=>'Email Group','access_levels'=>'Access Levels','manager'=>'Manager','Managers_Manager'=>'Managers Manager','individual_employee_role'=>'Individual Employee Role','buddy'=>'Buddy');
 $roleprecesstypearray = array('user'=>'User','email_groups'=>'Email Group','access_levels'=>'Access Levels','manager'=>'Manager','Managers_Manager'=>'Managers Manager','individual_employee_role'=>'Individual Employee Role','buddy'=>'Buddy','custom_field'=>'Custome Field','allbuddy'=>'All Buddy','location_wise'=>'Location Wise');
 function subProcessType($val,$getresult){
 	$listval = array();
-	//$option = "<option value=''>Select Any</option>";
 	if($val=="user"){
 		foreach($getresult['application_users'] as $lists){
 			$listval[$lists['id']] =  $lists['display_name'];
@@ -60,7 +58,6 @@ if($_POST['work_level_type'] =="custom_process"){
 		$approvalprocess = $approval_process[$i];
 		$statusinc++;
 
-		//print_r($approvalprocess);
 		?>
 	<input type="hidden" name="workflow_level_seq[]" value="<?php echo $i; ?>">
 	<input type="hidden" name="workflow_level_status[<?php echo $i; ?>]" value="<?php echo $statusinc; ?>">
@@ -83,7 +80,7 @@ if($_POST['work_level_type'] =="custom_process"){
 				<?php
 				$showsublist = ["user","email_groups","access_levels","buddy","individual_employee_role","custom_field", "location_wise"];
 				?>
-				<?php // echo '<pre>'; print_r($approvalprocess); ?>
+				<?php ?>
 				<div class="col-lg-4 form-group w-full" id="sub_approve_type<?php echo $i; ?>" style="display:<?php echo (in_array($approvalprocess['approval_type'], $showsublist) && $approvalprocess['approval_type']!="" )?"":"none"?>">
 					<span class="form-label d-block">Sub Type </span>
 					<select aria-label="Select option" class="form-select js-example-basic-single sub_approve_type<?php echo $i; ?>" name="sub_approve_type[<?php echo $i; ?>]">

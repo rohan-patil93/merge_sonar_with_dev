@@ -28,7 +28,6 @@ if($_POST['action']=="pagelist"){
    <?php
 
    $i = 0;
-//print_r($resutlvalue);
 $vdata1["where"] = array('role_short_code'=> $_POST['role_short_code'],'is_active'=>'0');
 $vdata = urlencode(json_encode($vdata1));
 $vurl = API."?mode=gettabledetailswithconditions&table=role_permissions&data=".$vdata;
@@ -186,7 +185,6 @@ foreach($resutlvalue as $resultlist){
     $applicatroleapi = API."?mode=getapplicationrole&application_roles=".$_POST['role_id']."&selectmodule_id=".$_POST['module_id'];
     $applicatrolecall = callAPI($applicatroleapi);
     $result = json_decode($applicatrolecall,1);
-    //echo "<pre>";print_r($result['module_setup']);echo "</pre>";
     $aruserdetails  = $result['application_roles'];
     $menulocation  = $result['menulocation'];
 
@@ -198,9 +196,7 @@ foreach($resutlvalue as $resultlist){
     foreach($resutlvalue as $resutlvalue){
       if($resutlvalue['is_active']==0){
           $processseleclis[] = $resutlvalue['application_process_id'];
-        //array_push($processseleclis, );
       }
-     // $newaray[$resutlvalue['application_process_id']] = $resutlvalue['id'];
     }
 
     $resultlist = $result['application_process'];

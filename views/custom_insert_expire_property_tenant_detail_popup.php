@@ -7,8 +7,6 @@ $url1 = API."?mode=getpropertytenantdetails&rid=".$rid;
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);
 $property_tenant_details = $result['property_tenant_details'];
-//$un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log'],1);
-//print_r($un_lock_tenant_log);
 ?>
 <script type="text/javascript">
 	function submitUnlockTenant(){

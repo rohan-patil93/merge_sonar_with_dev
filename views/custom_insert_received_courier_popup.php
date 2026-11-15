@@ -95,7 +95,7 @@ $row = $data['rowdata'];
 
         <div class="form-group w-full col-lg-6">
                 <span class="d-block"><?php echo __('Delivey Type'); ?> </span>
-                <select aria-label="<?php echo __('Deliver Type'); ?>"  name="deliver_type" id="deliver_type" <?php //if( $row['deliver_type']!=""){ echo __('disabled'); } ?> class="form-select js-example-basic-single">
+                <select aria-label="<?php echo __('Deliver Type'); ?>"  name="deliver_type" id="deliver_type" <?php ?> class="form-select js-example-basic-single">
                     <option value=""><?php echo __('Select Any One'); ?></option>
                     <?php foreach($data['deliver_type'] as $deliver_type){ ?>
                         <option <?php if($row['deliver_type']== $deliver_type['genc_detail_code']){ echo __('selected');

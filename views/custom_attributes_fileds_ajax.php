@@ -3,7 +3,6 @@ include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
  $page = $_POST['page'];
- //print_r($_POST);
 if($page == "elementordesign"){
 	$filedTypes ="";
 	foreach($filed_array as $key => $value){

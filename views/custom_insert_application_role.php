@@ -4,7 +4,6 @@ $_SESSION['apply_js']['role'] = '1';
 $apiurl = API."?mode=getapplicationroles";
 $callapi = callAPI($apiurl);
 $result = json_decode($callapi, 1);
-//echo "<pre>";print_r($result);echo "</pre>";
 $resultlist = $result['application_roles'];
 $application_process = $result['application_process'];
 $module_setup = $result['module_setup'];

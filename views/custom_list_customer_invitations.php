@@ -36,12 +36,6 @@ $vendorregisters = array();
 foreach($useruresponse as $useruresponse2){
   $vendorregisters[$useruresponse2['user_id']] = $useruresponse2;
 }
-//print_r($vendorregisters);
-// $invitationlists = $invitationlist['invitation_list'];
-// $vendors = $invitationlist['vendors'];
-// foreach($vendors as $vendor){
-// 	$vend_array[$vendor['user_id']] = $vendor;
-// }
 if(isset($_SESSION['message']) && $_SESSION['message'] !=""){
   unset($_SESSION['message']);
   ?>
@@ -185,11 +179,8 @@ function listUserType(){
             if(count((array)$invitationlists) !="0"){
             foreach ($invitationlists as $vendorslist){
               if($vendorslist['user_id'] != $_SESSION['userid']){
-                //$send = implode(",", $send);
-                //$rid = deocdeId($send);
                 $applicationuser = $applicationusers[$vendorslist['user_id']];
                 $vendorregisters11 = $vendorregisters[$vendorslist['user_id']];
-               // print_r($applicationuser);
                 $stausresult = $_SESSION['status'][$vendorslist['current_status']];
         				if(count((array)$applicationuser) != 0){
         					$ribbon =  "Active";

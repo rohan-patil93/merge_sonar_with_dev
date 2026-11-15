@@ -4,7 +4,6 @@ if(isset($_POST['submititem'])){
     $url = API."?mode=insertitems&method=post";
     $response1 = file_post_contents($url, $_POST, 'insert');
     $res = json_decode($response1,1);
-    //print_r($res);
     $response = isset($res['result']) ? $res['result'] : array();
     if(isset($response['status']) && $response['status'] == 'sucess'){
         if(isset($response['LASTID']) && $response['LASTID'] == 0){
@@ -48,7 +47,6 @@ $rid = isset($rrid[1]) ? $rrid[1] : '';
 $url = API."?mode=getbreakingdownitemprocess&rid=".$rid;
 $apires = callAPI($url);
 $result = !empty($apires) ? json_decode($apires, 1) : array();
-//print_r($result);
 $items = isset($result['items']) && is_array($result['items']) ? $result['items'] : array();
 $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($result['unit_of_measurements']) ? $result['unit_of_measurements'] : array();
 ?>

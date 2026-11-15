@@ -1,7 +1,6 @@
 <?php
     if(isset($_POST['submit'])){
         $data = $_POST;
-        //echo "<pre>"; print_r($_POST); //exit;
         $data['application_table_name'] = "project_timesheets";
         $data['lock_type_list'] = json_encode($_POST['lock_list']);
         $month = explode("-",$_POST['month']);
@@ -40,13 +39,10 @@
         $rid =  encodeId($_GET['Rid']);
         $rid = urldecode($rid);
         $url = API."?mode=togetdatabasepaimairy&rid=$rid&table=application_monthly_lock";
-        //echo $rid;
         $response = callAPI($url);
-        //echo $response; exit;
         $role = json_decode($response,1);
 
         $checkven = json_decode($role['lock_type_list'],1);
-        //print_r($checkven);
     }
     $vendorwhc["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>0);
     $vendorwhc['field'] = "id,company";

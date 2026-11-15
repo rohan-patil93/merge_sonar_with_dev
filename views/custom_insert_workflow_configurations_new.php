@@ -1,5 +1,4 @@
 <?php
-//echo "<pre>";print_r($_POST);echo "</pre>";
 $_SESSION['apply_js']['multiselest'] = '1';
 $_SESSION['apply_js']['inputmask'] = 1;
 $roleprecesstypearray = array('user' => 'User', 'email_groups' => 'Email Group', 'access_levels' => 'Access Levels', 'manager' => 'Manager', 'individual_employee_role' => 'Individual Employee Role', 'buddy' => 'Buddy', 'individual_employee_role' => 'Individual Employee Role', 'custom_field' => 'Custome Field');
@@ -29,7 +28,6 @@ if (isset($_POST['submit'])) {
 	if ($_POST['workflow_level'] == '0') {
 		$workflowlevel[1] = array("workflow_level_seq" => "1", "approval_type" => "", "sub_approve_type" => "", "sub_approve_field" => "", "minimum" => "", "approval_user_type" => "", 'workflow_level_status' => '199', 'updatebtn' => 1);
 	}
-	//echo "<pre>";print_r($workflowlevel);echo "</pre>";
 	foreach ($_POST['approval_level_criteria'] as $seq => $vl) {
 		foreach ($_POST['doa_amount'][$seq] as $keyseq => $doa_amount) {
 			if ($keyseq == 1) {
@@ -39,7 +37,6 @@ if (isset($_POST['submit'])) {
 			}
 			$_POST['doa_amount_convert'][$seq][$keyseq]['end_doa'] = convertamountnumber($doa_amount);
 		}
-		//$workflowapprovallevel[$seq] = array("approval_level_criteria"=>$vl,"doa_amount"=>$_POST['doa_amount'][$seq],"final_approval"=>$_POST['final_approval_'.$seq]);
 	}
 	$notification_message = array('approve_message' => $_POST['approve_message'], 'approve_message_information' => $_POST['approve_message_information'], 'reject_message' => $_POST['reject_message'], 'sendback_message' => $_POST['sendback_message'], 'completed_workflow_message' => $_POST['completed_workflow_message'], 'callback' => $_POST['callback'], 'employee_message' => $_POST['employee_message']);
 	$_POST['notification_message'] = json_encode($notification_message);
@@ -47,19 +44,15 @@ if (isset($_POST['submit'])) {
 	//echo "<pre>";print_r($_POST);echo "</pre>";
 	//approval_level_criteria
 	$_POST['approval_process'] = json_encode($workflowlevel);
-	//$_POST['approval_level_criteria'] = json_encode($workflowapprovallevel);
 	$url = API . "?mode=insertworkflownew&method=post";
 	$respon = file_post_contents($url, $_POST, 'insert');
 	$response = json_decode($respon, 1);
 	if ($_POST['Rid'] == "") {
 		header("location:index.php?option=COM_INSERT_WORKFLOW_CONFIGURATIONS_NEW&Rid=" . deocdeId("id:" . $response['res']['LASTID']));
 	} else {
-		//header("location:index.php?option=COM_INSERT_WORKFLOW_CONFIGURATIONS_NEW&Rid=".deocdeId("id:".$_POST['Rid']));
 	}
 }
 
-//echo "<pre>";print_r($response);echo "</pre>";
-//echo "<pre>";print_r($workflowapprovallevel);echo "</pre>";
 $customselectfieldarray = array("location_id" => "Locations", "division_id" => "Division", "department_id" => "Department", "cost_center_id" => "Cost Center", "type" => "Transacton Type", "opex_cpex" => "Opex Capex");
 
 $rid = encodeId($_GET['Rid']);
@@ -95,26 +88,11 @@ foreach ($getdoacriteria as $getdoacriteria1) {
 if (count((array) $getdoacriteria) == 0) {
 	$dynamicdoacriteria['criteria_no'] = array('criteria' => 'criteria=amount=no');
 }
-//echo "<pre>";print_r($dynamicdoacriteria_nocriteria);echo "</pre>";
-// $when_to_exicute =  json_decode($workflowlist['when_to_exicute'],1);
-// $criteria = json_decode($workflowlist['criteria'],1);
-// $transaction_message_res = json_decode($workflowlist['transaction_message'],1);
-// $approvefield_list = json_decode($workflowlist['approve_field'],1);
-// $listfields = json_decode($getresult['display_attributes']['list_attributes'],1);
-// $updatefields = json_decode($workflowlist['approve_update_status'],1);
 $pagenameres = $getresult['display_attributes_list'];
 foreach ($pagenameres as $pagenamesres) {
 	$pagenamesrow[$pagenamesres['application_table_name']] = $pagenamesres;
 }
 $listfields = json_decode($pagenamesrow[$workflowconfiguration['process_name']]['list_attributes'], 1);
-//$priorityresult= $getresult['priority'];
-//$statusrow  = $getresult['status_progress'];
-// $mopdulesetup = $getresult['module_setup'];
-// $locations = $getresult['locations'];
-// $divisions = $getresult['divisions'];
-// $departments = $getresult['departments'];
-// $cost_centers = $getresult['cost_centers'];
-//echo "<pre>";print_r($listfields);echo "</pre>";
 
 foreach ($workflowconfigurationdetails as $warkfdetails) {
 	$decodewf = json_decode($warkfdetails['approval_level_criteria'], 1);
@@ -125,7 +103,6 @@ foreach ($workflowconfigurationdetails as $warkfdetails) {
 	$uniid = implode($uniqd);
 	$wfdetails[$uniid] = $warkfdetails;
 }
-//echo "<pre>";print_r($wfdetails);echo "</pre>";
 $stausresult = ViewStatusData();
 ?>
 <script type="text/javascript">
@@ -856,7 +833,7 @@ $stausresult = ViewStatusData();
 									?>
 									<tr align="center" style="height: 75px;">
 										<td>
-											<?php //print_r($sublist); ?>
+											<?php ?>
 											<span class="form-label label label-lg label-primary d-inline-block fw-bold"
 												style="width: -webkit-fill-available;"><span
 													class="f-18"><?php echo $roleprecesstypearray[$approvalprocess['approval_type']]; ?></span>

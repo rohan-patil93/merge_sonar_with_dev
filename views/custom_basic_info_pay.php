@@ -26,7 +26,7 @@
       $total_perks_in_current_year[$value['pay_year']] = $total_perks_in_current_year['pay_year'] + $value['salary_component_actual'];
     }
   }
-  $m=1; //echo "-----------------------"; print_r($total_monthly_earnings);
+  $m=1;
 
  ?>
 <script type="text/javascript">
@@ -48,7 +48,7 @@
  <div class="card card-custom gutter-b">
   <div class="" id="kt_page_sticky_card">
     <div class="card-header">
-      <h5><?= __("My Pay") ?> <?php //echo $employee_id; ?></h5>
+      <h5><?= __("My Pay") ?> <?php ?></h5>
     </div>
     <div class="card-body">
       <div class="row">

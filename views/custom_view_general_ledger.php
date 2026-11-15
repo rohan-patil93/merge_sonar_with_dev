@@ -293,11 +293,11 @@ $debitcreditamount =$debitallamount -$creditallamount;
 
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; " onclick="viewJournalVoucher('<?php echo $gl['voucher_id']; ?>')" class="text-primary cursor-pointer" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $gl['voucher_ref_no']; ?></td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? "color:#f00" : ""; ?> <?php //echo $debitbg; ?>" >
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>" >
                                     <?php echo ($gl['debit_amount']!="" && $gl['debit_amount']!="0")?accountingAmontFormat($gl['debit_amount']):"-"; ?>
                                 </td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? "color:#f00" : ""; ?> <?php //echo $credit; ?>">
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>">
                                     <?php echo ($gl['credit_amount']!="" && $gl['credit_amount']!="0")?accountingAmontFormat($gl['credit_amount']):"-"; ?>
                                 </td>
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? "color:#f00" : ""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
@@ -508,11 +508,11 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 </td>
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; " onclick="viewJournalVoucher('<?php echo $gl['voucher_id']; ?>')" class="text-primary cursor-pointer" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $gl['voucher_ref_no']; ?></td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? "color:#f00" : ""; ?> <?php //echo $debitbg; ?>" >
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>" >
                                     <?php echo ($gl['debit_amount']!="" && $gl['debit_amount']!="0")?accountingAmontFormat($gl['debit_amount']):"-"; ?>
                                 </td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? "color:#f00" : ""; ?> <?php //echo $credit; ?>">
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>">
                                     <?php echo ($gl['credit_amount']!="" && $gl['credit_amount']!="0")?accountingAmontFormat($gl['credit_amount']):"-"; ?>
                                 </td>
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? "color:#f00" : ""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
@@ -723,11 +723,11 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 </td>
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; " onclick="viewJournalVoucher('<?php echo $gl['voucher_id']; ?>')" class="text-primary cursor-pointer" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $gl['voucher_ref_no']; ?></td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? "color:#f00" : ""; ?> <?php //echo $debitbg; ?>" >
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>" >
                                     <?php echo ($gl['debit_amount']!="" && $gl['debit_amount']!="0")?accountingAmontFormat($gl['debit_amount']):"-"; ?>
                                 </td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? "color:#f00" : ""; ?> <?php //echo $credit; ?>">
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>">
                                     <?php echo ($gl['credit_amount']!="" && $gl['credit_amount']!="0")?accountingAmontFormat($gl['credit_amount']):"-"; ?>
                                 </td>
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? "color:#f00" : ""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>

@@ -426,7 +426,7 @@ if(isset($_POST['submit1'])){
                                 </select>
                             </div>
                             <div class="input-field input-field-pre col-lg-2">
-                                <span>Interval <?php //echo $view_type; ?></span>
+                                <span>Interval <?php ?></span>
                                 <select aria-label="Inveral" class="form-select js-example-basic-single" name="inveral" onchange="inveral123(this.value)" id="inveral">
                                     <option <?php if($view_type == 'M' ){ echo "selected";
 } ?> value="month"><?= __('Monthly') ?></option>
@@ -974,7 +974,7 @@ if(isset($_POST['submit1'])){
                                                     <div class="card-body">
                                                         <div class="kt-timeline-v2">
                                                             <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
-                                                                <?php foreach ($vdata_details as  $vdvalue) { //print_r($vdvalue); ?>
+                                                                <?php foreach ($vdata_details as  $vdvalue) {?>
                                                                     <div class="kt-timeline-v2__item">
 
                                                                         <div class="kt-timeline-v2__item-cricle">

@@ -1,8 +1,6 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = 1;
 $rid = "";
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
 
 if (isset($_POST['submit'])) {
     $table_name = 'amc_customer_details';

@@ -8,11 +8,9 @@
 	$approval_url = API."?mode=toGetblukFinaceProjectTimesheet&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$_SESSION['emp_id'];
 	$post_vendor =0; $post_reports=0;
 	if(isset($_POST['search'])){
-		/*$approval_url = API."?mode=toGetblukHrProjectTimesheet&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$_SESSION['emp_id']."&vendor=".$_POST['vendor']."&reports_to=".$_POST['reports_to'];*/
 		$post_vendor = $_POST['vendor'];
 		$post_reports = $_POST['reports_to'];
 	}
-	//echo $approval_url;
 	$gtnvk = $_GET['TNVAL']!="" ? $_GET['TNVAL'] : "2";
 	$app_data = callAPI($approval_url);
 	$app_data = json_decode($app_data,1);
@@ -21,7 +19,6 @@
 	$todate = date('Y-m-d', strtotime('last day of this month', strtotime($from_date)));
 	$vurl = API."?mode=toretriveminhorsandweksanddayebasedondates&from_date=".$from_date."&to_date=".$todate;
 	$attdenace_data = callAPI($vurl);
-	//$attdenace_data = json_decode($attdenace_data,1);
 	$attdenace_data_location  = json_decode($attdenace_data,1);
 $mulval=1;
 $attdenace_data = $attdenace_data_location[1];
@@ -45,16 +42,10 @@ if($app_data['purchase_uom']=='PD'){
 		$statu_progress[$status_progress['status']]['action_label']=$status_progress['action_label'];
 		$st_prog[$status_progress['status']]=$status_progress['action_label'];
 	}
-	//$stausresult = ViewStatusData();
-	//$statu_progress =$stausresult;
-	//echo "<pre>"; print_r($statu_progress);
 	$getym = $_GET['PAY_YEAR']."-".$_GET['PAY_MONTH']."-01"; $lastdd = date("Y-m-d", strtotime('-1 months', strtotime($getym)));
 $lastapproval_url =  API."?mode=toGetblukFinaceProjectTimesheet&month=".date('m',strtotime($lastdd))."&year=".date('Y',strtotime($lastdd))."&&emp_id=".$_SESSION['emp_id'];
-	//$lastapproval_url = API."?mode=toGetblukProjectTimesheetlastmonths&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&emp_id=".$_SESSION['emp_id'];
-	//echo $lastapproval_url;
 	$last_data = callAPI($lastapproval_url);
 	$last_data = json_decode($last_data,1);
-	//echo "<pre>"; print_r($app_data); print_r($last_data); exit;
 	$apv_billable_amount = 0;
 	$sba_billable_amount =0;
 	$total_budget_amount =0;
@@ -85,7 +76,6 @@ if($apps['pt_status_id']>ST_APPROVED4){
 		  $apv_list[] = $capps;
 }
 		if(($post_vendor!=0) || ($post_reports!=0)){
-			//		echo "yes";
 			if(($post_vendor !=0) && ($post_reports !=0)){
 				if($apps['vendor_id'] == $post_vendor && $apps['reports_to']== $post_reports){
 					if($apps['pt_status_id']==ST_APPROVED4){
@@ -186,32 +176,6 @@ $lmonth['vendor_ids'] = $la_vendor ;
 $lmonth['employee_ids'] = $la_employee;
 $lmonth['period']=$key;
 
-/*	foreach($last_data as $key=>$last){
-		$dismonth[] = date('M-Y',strtotime($key));
-		$la_billable_amount = 0;
-		$la_budgeted_amount = 0;
-		$la_employee = 0;
-		foreach($last as $lastt){
-			$la_billable_amount = $la_billable_amount+$lastt['billable_amount'];
-			$la_budgeted_amount = $la_budgeted_amount+$lastt['budgeted_amount'];
-			$la_vendor = $lastt['vendor_ids'];
-			$la_employee = $la_employee+$lastt['employee_ids'];
-		}
-		if($k==1){
-		 		$lmonth['billable_amount'] = $la_billable_amount;
-		 		$lmonth['budgeted_amount'] = $la_budgeted_amount;
-		 		$lmonth['vendor_ids'] = $la_vendor ;
-		 		$lmonth['employee_ids'] = $la_employee;
-		 		$lmonth['period']=$key;
-		  }
-		//$dismonth[] = $key;
-		$disuitlize[] = $la_billable_amount!="" ? number_format($la_billable_amount/100000,2):'0' ;
-		$ltotal =$ltotal+$la_budgeted_amount;
-		$k++;
-	}*/
-	//echo "<pre>"; print_r($last_data); print_r($lmonth);print($disuitlize); exit;
-	// krsort($dismonth);
-	// krsort($disuitlize);
 	$ttcount =  $apv_billable_amount+$sba_billable_amount;
 	$erp_url = API."?mode=togetempvmstransactionslist";
 $erp_data = callAPI($erp_url);
@@ -450,7 +414,6 @@ $erp = json_decode($erp_data,1);
 		                                $disss = date('M Y',$month);
 		                                $dis_year = date('Y',$month);
 		                                $dis_month = date('m',$month);
-		                                //echo $dis_year."_".$dis_month.",";
 		                                if($_GET['PAY_YEAR'] == $dis_year && $_GET['PAY_MONTH'] == $dis_month ){
 		                                    $class = 'nav-link bg-primary me-6 active';
 															}else{
@@ -768,7 +731,6 @@ if($sb['vrc_purchase_uom']=='PD'){
 													$sb_bp = number_format((($sb['billable_amount']/($sb['budgeted_amount']*$mulval))*100),2);
 $sb['vrc_budgeted_amount'] = $sb['vrc_budgeted_amount']*$vrcmulval;
 $bbg_color= lableandbgcolor($sb_bp);
-//echo $sb['vrc_billable_amount']."___".$sb['vrc_budgeted_amount'];
 $vrcsb_bp = number_format((($sb['vrc_billable_amount']/$sb['vrc_budgeted_amount'])*100),2);
 $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 $llablecolor = lableandleave($k);
@@ -968,7 +930,6 @@ if($sb['vrc_purchase_uom']=='PD'){
 							$sb_bp = number_format((($sb['billable_amount']/($sb['budgeted_amount']*$mulval))*100),2);
 $sb['vrc_budgeted_amount'] = $sb['vrc_budgeted_amount']*$vrcmulval;
 $bbg_color= lableandbgcolor($sb_bp);
-//echo $sb['vrc_billable_amount']."___".$sb['vrc_budgeted_amount'];
 $vrcsb_bp = number_format((($sb['vrc_billable_amount']/$sb['vrc_budgeted_amount'])*100),2);
 $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 $llablecolor = lableandleave($k);
@@ -1209,7 +1170,7 @@ $llablecolor = lableandleave($k);
 							<h2 class="text-facebook m-b-20">
 								<i class="fa fa-mortar-board text-c-green f-30"></i>
 							</h2>
-							<?php //$total_apv_p = number_format(((count((array)$employees)/$team_count_data['team'])*100),2); ?>
+							<?php ?>
 							<h3 class="text-facebook f-w-700"><?php echo count((array)$employees); ?></h3>
 
 							<p class="m-b-0 m-t-15">Resources</p>

@@ -158,7 +158,7 @@
     <?php } ?>
 </tr>
 <?php if(count((array)$table2)>0){ $i=1;
- foreach ((array)$table2 as $tab2) { //print_r($tab2); ?>
+ foreach ((array)$table2 as $tab2) {?>
 <tr>
     <td>
         <div class="checkbox-fade fade-in-primary ">

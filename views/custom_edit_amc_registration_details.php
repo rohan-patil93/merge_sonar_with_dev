@@ -4,7 +4,6 @@ $_SESSION['apply_js']['multiselest'] = 1;
 $url = API . "?mode=getallproductdetails";
 $response = callAPI($url);
 $response = json_decode($response, 1);
-// print_r($response);
 $products = $response['pm_details'];
 $customers = $response['cust_details'];
 $tech_details = $response['tech_details'];
@@ -18,7 +17,6 @@ $che = callAPI($url);
 $return = json_decode($che, 1);
 $registration_details = $return['amc_registration_details'];
 $dynamic_fields = $return['dynamic_fields_details'];
-// print_r($dynamic_fields);
 
 ?>
 <div class="container mt-5">

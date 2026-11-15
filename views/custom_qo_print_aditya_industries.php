@@ -42,7 +42,6 @@ $printuom = array();
 foreach($unit_of_measurements as $uoom){
     $printuom[$uoom['id']] = $uoom['uom_name'];
 }
-//print_r($result['unit_of_measurements']);
 $paymentshow = 'N';
 $amountpartshowornot = 'Y';
 $refinvoicenumberlabel = "Ref No./Date";
@@ -58,12 +57,10 @@ if($transaction_table == 'sales_orders'){
     $invoicenumberlabel = "Invoice Number";
     $invoicedatelable = "Invoice Date";
 }
-//if($transaction_table == 'purchase_invoices' OR $transaction_table == 'supplier_bills'){
 if($transaction_table == 'sales_invoices' || $transaction_table == 'sales_invoice_receipts'){
     $paymentshow = "Y";
 }
 
-//echo "<pre>"; print_r($bank_accounts); echo "</pre>";
 $dutax = array();
 $distax = array();
 $parentrowidwithtax = array();
@@ -96,7 +93,6 @@ if($transaction['originator_state_id'] == $transaction['supplier_state_id']){
 }
 
 
-// echo "<pre>";print_r($distax); echo "</pre>";
 $party_additional_details = json_decode($transaction['party_additional_details'],1);
 function currencyFormat($number,$config){
     if($number !=""){
@@ -168,18 +164,6 @@ function emptyCheck($valu){
     }
     return $value;
 }
-// function dateFormat($from='',$config){
-//  $configdate_format = str_replace('-',$config['date_separator'], strtolower($config['date_format']));
-//  $date_formate = str_replace('yyyy', 'Y', str_replace('mm', 'm', str_replace('dd', 'd', $configdate_format)));
-//  $from = $from!='0000-00-00' ? $from :'';
-//  $dateformat = $date_formate!="0"?$date_formate: 'Y-m-d';
-//     if($from != ""){
-//      $from =  date($dateformat,strtotime($from));
-//  }else{
-//      $from = date($dateformat);
-//  }
-//  return $from;
-// }
 ?>
 <?php if($callapi !='Y'){ ?>
 <!DOCTYPE html>
@@ -409,7 +393,7 @@ function emptyCheck($valu){
                             <?php  if(count((array)$distax)){
                                     $tattax = 0;
                                     foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
-                                    <?php //if($table1['tax_state'] == 'S'){
+                                    <?php 
                                         if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>
                                     <tr>
                                         <th scope="col" class="f-14 text-start"><?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?>%</th>

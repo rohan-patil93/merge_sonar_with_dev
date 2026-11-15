@@ -1,6 +1,6 @@
 
 <!-- include in a container a heading, paragraph and svg for the keyhole -->
-<?php  //echo "<pre>"; print_r($_SESSION['error_message']);
+<?php 
     if(!isset($_GET['error'])){
         $_GET['error'] = "403";
       }

@@ -7,7 +7,6 @@ if(isset($_POST['get_ecr_summary'])) {
 	$pay_month_year = date('F, Y');
 
 }
-//$pay_month_year = "2021-01";
 $company_name = "Infisuite";
 $basic_pay_component_id =1;
 $company_id=$_SESSION['company_id'];
@@ -22,7 +21,6 @@ $url = API."?mode=gettabledetailswithconditions&table=pay_run_summary&data=".$vd
 $response = callAPI($url);
 $empdata = json_decode($response,1);
 
-//print_r($whrcon);
 	foreach ($empdata as  $data) {
 		$employee_id = $data['employee_id'];
 		$date_of_leaving = $data['date_of_leaving'];
@@ -30,13 +28,11 @@ $empdata = json_decode($response,1);
 
 $whrcon1["where"] = array('company_id'=> $company_id,'is_active'=>0,'id'=>$employee_id);
 $vdata1 = urlencode(json_encode($whrcon1));
-//print_r($whrcon1);
 
 $url = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata1;
 $response = callAPI($url);
 $employee_data = json_decode($response,1);
 $emp_details = $employee_data[0];
-//print_r($url);
 
 $employee_name =$emp_details['display_name'];
 
@@ -49,7 +45,6 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 
 	}
 
-//print_r($esi_return_list);
 
 ?>
 

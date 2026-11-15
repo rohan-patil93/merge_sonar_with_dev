@@ -7,7 +7,6 @@ $data_details = callAPI($url);
 $data = json_decode($data_details,1);
 $emps = $data['employees'];
 $row = $data['rowdata'];
-//print_r($row);
 ?>
 <script type="text/javascript">
 	function submitincourierfrom(){
@@ -68,7 +67,7 @@ $row = $data['rowdata'];
 				</select>
 		</div>
 	</div>
-	<?php //if($row['deliver_type']!="" && $row['requested_by'] != $_SESSION['userid']){
+	<?php 
 		if($row['id'] !=""){?>
 
 		<div class="form-group">

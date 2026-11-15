@@ -1,13 +1,9 @@
 <?php
-// include_once('../includes/session.php');
-// include_once('../dbconfig.php');
-// include_once('../comm.php');
 
 // ✅ API Call
 $url = API . "?mode=getCsrPoVsActualsSummary&start_fy=".STARTING_YEAR;
 $apires = callAPI($url);
 $result = json_decode($apires, true);
-// echo '<pre>'; print_r($result['sql']); echo '</pre>'; // For debugging
 $list = $result['po_vs_actuals_list'] ?? [];
 $fy_list = $result['fy_list'] ?? [];
 

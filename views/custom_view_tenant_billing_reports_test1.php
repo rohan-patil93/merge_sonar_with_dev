@@ -18,8 +18,6 @@ $credit_notes = $result['credit_notes'];
 $debit_notes = $result['debit_notes'];
 $payments_month_wyse = $result['payments_month_wyse'];
 $opening_balance_payments_month_wyse = $result['opening_balance_payments_month_wyse'];
-//echo "<pre>";print_r($result); echo "</pre>";
-//echo "<pre>";print_r($opening_balance_payments_month_wyse); echo "</pre>";
 ?>
 <script type="text/javascript">
 function printReport(divId) {
@@ -83,7 +81,6 @@ function printReport(divId) {
       <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
       <?php foreach($customers as $cust){
         $paymentmonthwyse = $payments_month_wyse[$cust['id']];
-        //print_r($payment);
         ?>
         <div class="row mt-2">
           <h3 class="text-center text-primary">
@@ -145,24 +142,8 @@ function printReport(divId) {
                   $column_rent_utility_payment_total += $ob_row_total_payment;
 
 
-                  // //payments
-                  //$obrentpayment = ($opening_balance['ob_rent']['total_amount']-$opening_balance['ob_rent']['pending_amount']);
-                  // $obutilitypayment = ($opening_balance['ob_utility']['total_amount']-$opening_balance['ob_utility']['pending_amount']);
-                  //  //payments
-                  // $st_ob_total += $opening_balance['ob_rent']['total_amount']+$opening_balance['ob_utility']['total_amount'];
-                  // $st_ob_payment = $obrentpayment+$obutilitypayment;
-                  // $st_ob_due = $opening_balance['ob_rent']['pending_amount']+$opening_balance['ob_utility']['pending_amount'];
 
 
-                  // $t_rent_total_amount += $opening_balance['ob_rent']['total_amount'];
-                  // $t_rent_payment += $obrentpayment;
-                  // $t_rent_pending_amount += $opening_balance['ob_rent']['pending_amount'];
-                  // $t_utility_total_amount += $opening_balance['ob_utility']['total_amount'];
-                  // $t_utility_payment += $obutilitypayment;
-                  // $t_utility_pending_amount += $opening_balance['ob_utility']['pending_amount'];
-                  // $t_total += $st_ob_total;
-                  // $t_payment += $st_ob_payment;
-                  // $t_due += $st_ob_due;
 
                 ?>
                 <tr>
@@ -200,7 +181,6 @@ function printReport(divId) {
 
                     $openingbaldue += ($row_total_inv-$row_total_payment);
 
-                  //  $row_duo_amt_inv = (($ob_row_total_inv+$row_total_inv)-($ob_row_total_payment+$row_total_payment));
 
                      //calculate End
                   ?>

@@ -44,7 +44,6 @@ if(count((array)$rows) > 0){
 				$i = 1;
 				foreach($rows as $row){
 					$visit_date = isset($row['visit_date']) ? $row['visit_date'] : '';
-					// $id_no = isset($row['id_no']) ? $row['id_no'] : '';
 					$name = isset($row['name']) ? $row['name'] : '';
 					$card_no = isset($row['card_no']) ? $row['card_no'] : '';
 					$access_no = isset($row['card_no']) ? $row['card_no'] : '';

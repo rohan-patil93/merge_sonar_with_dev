@@ -23,11 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         'user_id' => $postUserId,
         'type_ids' => $postTypeIds,
     );
-    // print_r($payload);
     $saveUrl = API . "?mode=saveuserassignedcontracttypes&method=post";
     $saveType = ($postRid != '' && $postRid != '0') ? 'update' : 'insert';
     $result = file_post_contents($saveUrl, $payload, $saveType);
-    // print_r($result); // Debugging line to check the response from the API
     $saveRes = json_decode($result, 1);
 
      // Debugging line to check the response from the API

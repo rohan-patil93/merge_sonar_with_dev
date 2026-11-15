@@ -1,8 +1,7 @@
-<?php //print_r($_POST);
+<?php 
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
-//print_r($_POST);
 $url = API."?mode=togetreportvillbaseidvendors&val=".$_POST['val'];
 $apires = callAPI($url);
 $datas = json_decode($apires,1);

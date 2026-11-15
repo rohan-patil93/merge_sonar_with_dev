@@ -23,12 +23,10 @@ foreach($admindashboardd['rental_invoices_list'] as $pending_list){
     }elseif($pending_list['generated_invoice']=='0'){
         $generatedinvoice[] = $pending_list;
     }
-   // $rental_invoices_transnumber[$pending_list['id']] = $pending_list['transaction_number'];
 }
 foreach($admindashboardd['all_rental_invoices_list'] as $pending_list){
     $rental_invoices_transnumber[$pending_list['id']] = $pending_list['transaction_number'];
 }
-//print_r($admindashboardd);
 $transaction_approval_logs = $admindashboardd['transaction_approval_logs'];
 foreach($transaction_approval_logs as $tal){
     if($tal['response_type'] == 0){
@@ -91,7 +89,6 @@ foreach($recent_renewal_contract as $rcc){
 }
 $top_rent_res = $admindashboardd['top_rent_res'];
 $top_oldest = $admindashboardd['top_oldest'];
-//echo "<pre>"; print_r($admindashboardd['vendors_recent_join']); echo "</pre>";
 ?>
 <script>
 
@@ -314,12 +311,11 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
             <div class="card-header">
                 <h5><?= __('Tenants Invoice'); ?></h5>
             </div>
-            <?php  //print($vendorinvoicecnt); ?>
+            <?php ?>
             <div class="card-block text-center">
                  <?php
 
                     $tamount = $vendorinvoicecnt['total_amount'];
-                   // $pending_amount= $vendorinvoicecnt['pending_amount'];
                     $totalpaidamount= round($vendorinvoicecnt['total_amount'])-round($vendorinvoicecnt['total_pending']);
                     $percengraf = 0;
                     if($tamount !="" && $tamount !=0){

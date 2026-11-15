@@ -169,7 +169,7 @@ function save_statuse_bilable_onsite(){
                       <?php if(in_array('8',(array)$_SESSION['module_list']) || $data['employee_type'] == '1'){ ?>
                     <li class="nav-item">
                         <a class="nav-link besic-info-txt-start" id="home-tab-70" data-bs-toggle="tab" href="#home-70" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                        <span class="nav-text">Pay<?php //echo $pass_module['0']['page']; ?> </span>
+                        <span class="nav-text">Pay<?php ?> </span>
                         </a>
                           <div class="slide"></div>
                      </li>

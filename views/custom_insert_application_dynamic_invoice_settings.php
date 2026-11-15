@@ -6,11 +6,9 @@ $_SESSION['apply_js']['multiselest'] = 1;
 if (isset($_POST['submitinvoice'])) {
   $_POST['company_id'] = $_SESSION['company_id'];
   $_POST['user_id'] = $_SESSION['userid'];
-  //unset($_POST['rid']);
   $url = API . "?mode=insertdynamicinvoice&method=post";
   $response1 = file_post_contents($url, $_POST, 'insert');
   $response33 = json_decode($response1, 1);
- // echo "<pre>"; print_r($response33); echo "</pre>";
   $response = $response33['res'];
   if ($response['status'] == 'sucess') {
     if ($response['LASTID'] == 0) {
@@ -18,7 +16,6 @@ if (isset($_POST['submitinvoice'])) {
     } else {
       $msgcode = 3000;
       $_SESSION['insert_msg'] = $msgcode;
-     // header("location:index?option=COM_LIST_APPLICATION_DYNAMIC_INVOICE_SETTINGS");
     }
     ?>
     <script type="text/javascript">

@@ -12,7 +12,6 @@ $optiondetails = getOptionPageTableName($_POST['option']);
 $url = API."?mode=getdynamicmoduledashboard&transaction_table=".$optiondetails['application_table_name']."&admin_type=".$_SESSION['admin_type']."&admin_access_employee=".$_SESSION['admin_access_employee'];
 $apires = callAPI($url);
 $result = json_decode($apires,1);
-//echo "<pre>"; print_r($result['transaction_approval_logs_sql']); echo "</pre>";
 $category_data = $result['category_data'];
 $categorydatalist = array();
 foreach($category_data as $category_data){
@@ -74,10 +73,7 @@ foreach($allrecords as $allrecord){
         }
     }
 }
-//echo "<pre>"; print_r($result['transaction_approval_logs_sql']); echo "</pre>";
 foreach($result['transaction_approval_logs'] as $transactionlog){
-    //print_r($transactionlog);
-    //if($transactionlog['response_type'] =='0' AND $transactionlog['send_back_flag'] == '0'){
     if($transactionlog['response_type'] =='0' && $transactionlog['send_back_flag'] == '0' && $transactionlog['call_back'] == '1'){
         $createtransactioncnt++;
         $pendinglog[$transactionlog['transaction_id']] = $transactionlog;
@@ -103,7 +99,6 @@ foreach($rejectlogcheck as $transid => $transactionlog){
 
 $status_progress = $result['status_progress'];
 $allpermision = $_SESSION['role_permission'][$optiondetails['application_table_name']];
-//echo "<pre>"; print_r($sendbacklog); echo "</pre>";
 $permission_listbtn = $insert_permissionbtn = $permission_importbtn = $edit_permissionbtn = $approval_permissionbtn = "";
 if($allpermision['permission_view'] == '1'){$permission_listbtn = "disabled";
 }
@@ -113,15 +108,8 @@ if($allpermision['permission_import'] == '1'){$permission_importbtn = "disabled"
 }
 if($allpermision['permission_update'] == '1'){$edit_permissionbtn = "disabled";
 }
-//if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disabled"; }
-//echo "<pre>";print_r($result['generatesql']);echo "</pre>";
 $generatedocs = $result['generate'];
 $table_name = $optiondetails['application_table_name'];
-//echo "table name - ".$table_name;
-//print_r($optiondetails['transaction_approval_logs/']);
- // echo "<pre>";
- //  print_r($result['transaction_approval_logs_sql']);
- //  echo "</pre>";
 ?>
 <script type="text/javascript">
     function viewAllRecord(transaction_table,type){
@@ -300,7 +288,6 @@ if($totaldoc != 0 && $totaldoc !=""){
                                 <div class="s-caption bg-c-red m-0"></div>
                                 <div class="s-cont d-inline-block">
                                     <h5 class="f-w-700 m-b-0  f-12"><?php
-                                    //echo number_format($totaldocsamt)."</br>";
                                     echo convert_Rupee_Number($totaldocsamt !=''?$totaldocsamt:"0"); ?></h5>
                                     <p class="m-b-0 f-10"><?= __('Total Value'); ?></p>
                                 </div>
@@ -309,7 +296,6 @@ if($totaldoc != 0 && $totaldoc !=""){
                                 <div class="s-caption bg-c-green m-0"></div>
                                 <div class="s-cont d-inline-block">
                                     <h5 class="f-w-700 m-b-0 f-12"><?php
-                                    //echo number_format($approvedresamt)."</br>";
                                     echo convert_Rupee_Number($approvedresamt !=''?$approvedresamt:"0"); ?></h5>
                                     <p class="m-b-0 f-10"><?= __('Approved'); ?> </p>
                                 </div>
@@ -328,7 +314,6 @@ if($totaldoc != 0 && $totaldoc !=""){
                             $anouncement =  API."?mode=togetlatestannouncement";
                             $anouncement_list = callAPI($anouncement);
                             $anouncement_list = json_decode($anouncement_list,1);
-                                                //print_r($anouncement_list);
                             ?>
                             <p><?php echo substr($anouncement_list['announcement_message'],0,250);?></p>
                             <p class="m-b-0 m-t-15"><a  href="index.php?option=COM_VIEW_ANNOUNCEMENTS" class="btn btn-info waves-effect waves-light btn_mobile"><?php echo $anouncement_list['button_label']; ?></a></p>
@@ -455,8 +440,6 @@ if($totaldoc != 0 && $totaldoc !=""){
                                     $itemcatname = "Item Categories";
                                     if($_SESSION['work_module_setup_id'] == PETTY_CASH_MODULE){
                                         $itemcatname =  "Petty Cash";
-                                    //}elseif($_SESSION['work_module_setup_id'] == ACCOUNT_MODULE || $table_name == "debit_notes" || $table_name == "credit_notes"){
-                                    //}elseif($_SESSION['work_module_setup_id'] == ACCOUNT_MODULE){
                                     }elseif($table_name == "debit_notes" || $table_name == "credit_notes" || $table_name == "journal_vouchers" || $table_name =="bank_vouchers" || $table_name =="cash_vouchers"){
                                         $itemcatname =  "Transaction Type";
                                         $item_categories = array(array('id'=>'purchase_invoices','category_description'=>'Purchase Invoices'),array('id'=>'supplier_bills','category_description'=>'Supplier Bills'),array('id'=>'supplier_bill_cancellations','category_description'=>'Supplier Bill Cancellations'),array('id'=>'payments','category_description'=>'Payments'),array('id'=>'receipts','category_description'=>'Receipts'),array('id'=>'sales_invoices','category_description'=>'Sales Invoices'),array('id'=>'sales_returns','category_description'=>'Sales Returns'),array('id'=>'sales_invoice_cancellations','category_description'=>'Sales Invoice Cancellations'),array('id'=>'goods_receipt_notes','category_description'=>'Goods Receipt Notes'),array('id'=>'grn_return','category_description'=>'GRN Return'),array('id'=>'delivery_orders','category_description'=>'Delivery Orders'),array('id'=>'debit_notes','category_description'=>'Debit Notes'),array('id'=>'credit_notes','category_description'=>'Credit Notes'),array('id'=>'stock_transfers','category_description'=>'Stock Transfers'),array('id'=>'stock_transfer_receipts','category_description'=>'Stock Transfer Receipts'),array('id'=>'stock_transfer_returns','category_description'=>'Stock Transfer Returns'),array('id'=>'stock_adjustments','category_description'=>'Stock Adjustments'),array('id'=>'manual','category_description'=>'Manual'));
@@ -495,16 +478,6 @@ if($totaldoc != 0 && $totaldoc !=""){
                                 <div class="card-block accordion-block color-accordion-block itemcategory_sec">
                                     <div class="color-accordion" id="color-accordion">
                                         <?php
-                                        // $recordaray = $norecordaray = array();
-                                        // foreach($item_categories as $item_categorielist){
-                                        //  $list = $categorydatalist[$item_categorielist['id']];
-                                        //  if(count((array)$list)){
-                                        //      $recordaray[] = $item_categorielist;
-                                        //  }else{
-                                        //      $norecordaray[] = $item_categorielist;
-                                        //  }
-                                        // }
-                                        // $margeitemcat = array_merge((array)$recordaray,(array)$norecordaray);
                                         if(count((array)$item_categories) !=0){
                                         foreach($item_categories as $item_categorie){
                                             $list = $categorydatalist[$item_categorie['id']]; ?>
@@ -605,16 +578,6 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                                 <div class="card-block accordion-block color-accordion-block itemcategory_sec">
                                     <div class="color-accordion" id="color-accordion-location">
                                         <?php
-                                        // $recordaray = $norecordaray = array();
-                                        // foreach($locations as $item_categorielist){
-                                        //  $list = $locationlist[$item_categorielist['id']];
-                                        //  if(count((array)$list)){
-                                        //      $recordaray[] = $item_categorielist;
-                                        //  }else{
-                                        //      $norecordaray[] = $item_categorielist;
-                                        //  }
-                                        // }
-                                        // $margeitemloc = array_merge((array)$recordaray,(array)$norecordaray);
                                         foreach($locations as $item_categorie){
                                             $list = $locationlist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><span class="m-r-20">
@@ -704,16 +667,6 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                                     <div class="color-accordion" id="color-accordion-costcenter">
 
                                         <?php
-                                        // $recordaray = $norecordaray = array();
-                                        // foreach($cost_center_datalist as $item_categorielist){
-                                        //  $list = $costcenterlist[$item_categorielist['id']];
-                                        //  if(count((array)$list)){
-                                        //      $recordaray[] = $item_categorielist;
-                                        //  }else{
-                                        //      $norecordaray[] = $item_categorielist;
-                                        //  }
-                                        // }
-                                        // $margeitemcostcenter = array_merge((array)$recordaray,(array)$norecordaray);
                                         foreach($cost_center_datalist as $item_categorie){
                                             $list = $costcenterlist[$item_categorie['id']]; ?>
                                             <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray" ><span class="m-r-20">
@@ -941,7 +894,7 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
-                            <?php //echo "<pre>"; print_r($draftres); echo "</pre>";
+                            <?php 
                              $mm = 1; if(count((array)$draftres) !=0){ foreach($draftres as $activeres1){ if($mm == 4){ break;
                              } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
@@ -1178,7 +1131,6 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$pendinglog) !=0){ foreach($pendinglog as $logdetails){
-                                //$activeres1 = $alltransaction[$logdetails['transaction_id']];
                                 if($mm == 4){ break;
                                 } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
@@ -1223,7 +1175,6 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$aprovedlog) !=0){ foreach($aprovedlog as $logdetails){
-                                //$activeres1 = $alltransaction[$logdetails['transaction_id']];
                                 if($mm == 4){ break;
                                 } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
@@ -1267,7 +1218,6 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$sendbacklog) !=0){ foreach($sendbacklog as $logdetails){
-                                //$activeres1 = $alltransaction[$logdetails['transaction_id']];
                                 if($mm == 4){ break;
                                 } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
@@ -1311,7 +1261,6 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
                         </div>
                         <div class="card-body">
                             <?php $mm = 1; if(count((array)$rejectlog) !=0){ foreach($rejectlog as $logdetails){
-                                //$activeres1 = $alltransaction[$logdetails['transaction_id']];
                                 if($mm == 4){ break;
                                 } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">

@@ -1,7 +1,6 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = '1';
 $category = array('1' =>'Survey', '2'=> 'Poll');
-//if($_GET['CAT']=="" && $_GET['option']="COM_INSERT_SURVEY_SETUP"){
 if($_GET['CAT']==""){
   $_GET['CAT'] = 1;
 }
@@ -21,7 +20,6 @@ $emp_id = $_SESSION['emp_id'];
 $vurl = API."?mode=getsurveydetails&company_id=".$company_id."&emp_id=".$emp_id."&is_active=0&survey_id=".$row_id;
 $configesponse = callAPI($vurl);
 $employeeDetails = json_decode($configesponse,1);
-//echo "<pre>";print_r($employeeDetails);echo "<pre>";
 $employee_list = $employeeDetails['employeedetails'];
 $qustion_types = $employeeDetails['qustion_types'];
 $survey_details = $employeeDetails['survey_details'];
@@ -53,7 +51,6 @@ foreach ($survey_qustion_details as $qdata) {
  $starray[] =array("options_display_type"=>$qdata['options_display_type'],"survey_question"=>$qdata['survey_question'],"require_response"=>$qdata['require_response'],"allow_multiple_selections"=>$qdata['allow_multiple_selections'],"survey_question_option"=>$answer[$qdata['id']],'question_id'=>$qdata['id']);
 }
 $who_can_see_id = json_decode($survey_details['who_can_see_the_results'],1);
-//$survey_date = $survey_details['survey_start_date']." ".$survey_details['survey_start_time']." / ".$survey_details['survey_end_date']." ".$survey_details['survey_end_time'];
 $survey_types = $employeeDetails['survey_types'][$_GET['CAT']];
 foreach ($qustion_types as $key => $value) {
  $question_types[$value['genc_detail_code']]  = $value['genc_detail_code'];
@@ -476,7 +473,7 @@ function addnewoptionrows(qid) {
                     </div>
                   </div>
                   <div class="form-group">
-                    <?php //print_r($who_can_see_id); ?>
+                    <?php ?>
                     <label for="kt_select2_43" class="form-label"><?php echo __('Who can see the results'); ?></label>
                     <select class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple" aria-label="<?php echo __('Who Can See The Results'); ?>">
                       <?php foreach ($employee_list as $value) {

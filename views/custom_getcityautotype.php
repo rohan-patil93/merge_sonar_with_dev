@@ -8,7 +8,6 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
     $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$selectfiledextra;
     $data_details1 = callAPI($url1);
     $values =  json_decode($data_details1,1);
-  // echo "reewds"; print_r($values);
     foreach($values as $row){
       $arraybdbd[] = array('id'=>$row['id'],'full_name'=>$row[$_GET['fieldsname1']]." - ".$row[$_GET['fieldsname2']]."(".$row[$_GET['fieldsname3']]."%)");
     }
@@ -44,7 +43,6 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
     }
       $data_details1 = callAPI($url1);
       $values =  json_decode($data_details1,1);
-      //print_r($values);
       if($_GET['extracat1'] !=""){
           $explode2 = explode(',',$_GET['extracat1']);
       }
@@ -71,7 +69,6 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
           $arraybdbd[] = array('id'=>$row['id'],'full_name'=>$row['sku']." - ".$row[$_GET['fieldsname']]);
         }
       }
-      //$arraybdbd[] = array('id'=>'-1','full_name'=>'Other');
       if($_GET['ref_id'] !='' &&  $_GET['amendment'] =='N'){
         $arraybdbd[] = array('id'=>'-0','full_name'=>__('Amendment'));
       }

@@ -9,17 +9,14 @@ $viewtab = $_POST['view'];
 $data11["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0','id'=>$announcement_id);
 $datw = urlencode(json_encode($data11));
 $curl1 = API."?mode=gettabledetailswithconditions&table=company_announcements&data=".$datw;
-//print_r($_POST); exit;
 $cudata1 = callAPI($curl1);
 $announce_detail = json_decode($cudata1,1);
 $announce_details = $announce_detail[0];
 $data11["where"] = $whrcondion;
-    //print_r($data11);
 $datw = urlencode(json_encode($data11));
 $curl1 = API."?mode=gettabledetailswithconditions&table=summary_announcements&data=".$datw;
 $cudata1 = callAPI($curl1);
 $announce_data = json_decode($cudata1,1);
-//print_r($announce_data);
 foreach ($announce_data as $data) {
     $userlist[] = $data['userid'];
     $data11["field"] = 'image,display_name';
@@ -45,7 +42,6 @@ foreach ($announce_data as $data) {
 $totalcomments = count((array)$commentslist);
 $totallikes = count((array)$likelist);
 $totaldislikes= count((array)$dislikelist);
-//print_r($commentslist);
 ?>
 <div class="modal-header">
         <h5 class="modal-title text-center">

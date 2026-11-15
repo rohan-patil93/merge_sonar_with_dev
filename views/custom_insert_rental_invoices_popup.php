@@ -6,7 +6,6 @@ $url1 = API."?mode=gettenantproperty&type=".$_POST['type']."&valu=".$_POST['valu
 $data_details1 = callAPI($url1);
 $result =  json_decode($data_details1,1);
 $customers = $result['customers'];
-//print_r($_POST);
 ?>
 <script type="text/javascript">
 function getTenantDetails(type,valu){

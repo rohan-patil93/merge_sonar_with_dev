@@ -8,7 +8,6 @@ if(isset($_POST['submitemptytransactions'])){
 	$response1 = file_post_contents($url, $_POST, 'insert');
 	$res = json_decode($response1,1);
 	$response = $res['result'];
-	//echo "<pre>"; print_r($res); echo "</pre>";
 	if($response['status'] == 'sucess'){
 		if($response['LASTID'] == 0){
             $msgcode = 3001; //update
@@ -38,7 +37,6 @@ if(isset($_POST['submitemptytransactions'])){
     	}
     }
 
-    //header("location:index?option=COM_INSERT_COMPANY_VALUATIONS");
 }
 
 
@@ -57,7 +55,6 @@ $transaction_table = $result['transaction_table'];
 $application_messages = $result['application_messages'];
 $transaction_tables_json =  json_decode($application_empty_transactions['transaction_tables'],1);
 $option_type = array('list_page_name'=>'List Option','insert_page_name'=>'Insert Option');
-//echo "<pre>"; print_r($application_empty_transactions);echo "</pre>";
 ?>
 <script type="text/javascript">
 	var maxsar = 100;

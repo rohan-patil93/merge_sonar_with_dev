@@ -19,7 +19,6 @@ $url = API . "?mode=getCsrDashboardPopupProjects&method=get"
 $response = callAPI($url);
 $response = json_decode($response, true);
 $projects = $response['projects'] ?? array();
-// print_r($response['query']);
 ?>
 
 <div class="modal-header">

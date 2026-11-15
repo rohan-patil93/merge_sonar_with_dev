@@ -1,13 +1,9 @@
 <?php
 $_SESSION['apply_js']['calender'] = '1';
-	//echo "Ravi".$_GET['Rid']."%%%";
 	if($_GET['Rid']!=""){
 		$rid =  encodeId($_GET['Rid']);
-		//echo $rid ;
 		$rid = explode(":",$rid);
-		//print_r($rid);
 		 $id = $rid['1'];
-		// echo "id --".$id;
 	}
 	$table ="employee_leaves";
 	$vdata1["where"] = array('is_active'=> 0);
@@ -22,7 +18,6 @@ $_SESSION['apply_js']['calender'] = '1';
     $configesponse = callAPI($vurl);
 	$empl = json_decode($configesponse,1);
 	$empl = $empl['0'];
-	//print_r($empl);
 	$vdata1["where"] = array('is_active'=> 0,);
     $vdata = urlencode(json_encode($vdata1));
     $vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata;
@@ -34,14 +29,11 @@ $_SESSION['apply_js']['calender'] = '1';
 	$emps = $empdata[$empl['employee_id']];
 	$otstdate = date('Y-m-d', strtotime('-90 day', strtotime($empl['leave_from'])));
 	$ottodate = date('Y-m-d', strtotime('+90 day', strtotime($empl['leave_to'])));
-	//echo $otstdate."&".$ottodate;
 	$evurl = API."?mode=tosearchempleavesbydate&start=".$otstdate."&end=".$ottodate."&type=REPORTTO";
-	//echo $evurl;
 	$otherempurl = callAPI($evurl);
 	$searchresult = json_decode($otherempurl,1);
 	$all_leave_categories =  $searchresult['all_leave_categories'];
 	$otheremp =  $searchresult['employee_leaves'];	$stausresult = ViewStatusData();
-	//print_r($otheremp); exit;
 ?>
 <script type="text/javascript">
 		function statuspopup(status,id){
@@ -141,7 +133,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 
 </script>
 
-<?php //echo "<pre>"; print_r(getPagenametotable('accounts','edit_page_name'));  //approval_page_name,edit_page_name,insert_page_name?>
+<?php ?>
 <div class="d-flex flex-column-fluid j-content">
 	<div class="container-fluid">
 		<div class="row">

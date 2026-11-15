@@ -1,5 +1,4 @@
 <?php
-//$data = array();
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -7,17 +6,13 @@ $_SESSION['apply_js']['table']= 1;
 $_SESSION['apply_js']['multiselest'] = '1';
 if (isset($_POST['submit'])){
 	if($_POST['submit'] == 'search'){
-		//print_r($_POST); exit;
 		$array =  array('category_id', 'vendor_id', 'cost_center_id', 'location_id','opex_cpex','from','to');
 		foreach ($array as  $value) {
 			if($_POST[$value] != ''){
 				$ress[$value] = $_POST[$value];
 			}
 		}
-		// $data1["where"] = $ress;
-		// $data = urlencode(json_encode($data1));
 
-		//print_r($data); exit;
 	}
 }
 $table_name = $_REQUEST['table'];
@@ -37,11 +32,9 @@ $_POST['table'] = $table_name;
 $_POST['get_display_table'] = $_POST['get_display_table']!="" ? $_POST['get_display_table'] : 'vendors';
 $_POST['get_option'] = $_GET['option'];
 
-//echo "<pre>"; print_r($_POST); echo "</pre>";
 $tableurl = API."?mode=serchforpos&method=post";
 $response = file_post_contents($tableurl, $_POST, '');
 $result = json_decode($response,1);
-//echo "<pre>"; print_r($result); echo "</pre>";
 $quotations = $result['quotations'];
 $purchase_orders = $result['purchase_orders'];
 $data = $result['transaction_details'];
@@ -52,31 +45,15 @@ $datalocation = $result['locations'];
 $datavendor = $result['vendors'];
 $dis_list = $result['display_attributes'];
 $status_progress = $result['status_progress'];
-// $tablecat = API."?mode=gettabledetails&table=".TBL_ITEM_CATEGORIES;
-// $rescat = callAPI($tablecat);
-// $datacat = json_decode($rescat,1);
 
 
-// $tablecost = API."?mode=gettabledetails&table=".TBL_COST_CENTERS;
-// $rescost = callAPI($tablecost);
-// $datacost = json_decode($rescost,1);
-// $tablelocation = API."?mode=gettabledetails&table=".TBL_LOCATIONS;
-// $reslocation = callAPI($tablelocation);
-// $datalocation = json_decode($reslocation,1);
-// $tablevendor = API."?mode=gettabledetails&table=".TBL_VENDOR;
-// $resvendor = callAPI($tablevendor);
-// $datavendor = json_decode($resvendor,1);
 
 $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
 $rr_data = toGetpageOptionName($table_name,$_REQUEST['option']);
-//echo "<pre>";print_r($rr_data);echo "</pre>";
 $nextlevelsteptable = $_REQUEST['clone'] !=""?$_REQUEST['clone']:$rr_data['genrate_next_level'];
 $rr_data['genrate_next_level'] = $nextlevelsteptable;
 $pr_data = toGetpageOptionName($nextlevelsteptable);
 
-// $pageurl = API."?mode=displayattributesview&fid=application_table_name&view=".$table_name;
-// $page_response = callAPI($pageurl);
-// $dis_list = json_decode($page_response,1);
 $lists = json_decode($dis_list['list_attributes'],1);
 
 $cus_list = $lists['party_id'];
@@ -92,12 +69,10 @@ $return = json_decode($configesponse,1);
 $return = $return['0'];
 $return_data = json_decode(urldecode($return['content_details']),1);
 $get_table =$return_data['table_name'];
-//$get_table =$_GET['table']; //$return_data['table_name'];
 $viewpageotion = getPagenametotable($table_name,'insert_page_name');
 
 $stausresult = ViewStatusData();
 $get_option = $_REQUEST['option'];
-//echo $_REQUEST['option'];
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -221,7 +196,7 @@ $get_option = $_REQUEST['option'];
 						</select>
 					</div>
 					<div class="col-lg-2 kt-margin-b-10-tablet-and-mobile mb-2">
-						<!-- <label  class="form-label"><?php //echo "Capex/Opex"; ?>:</label> -->
+						<!-- <label  class="form-label"><?php ?>:</label> -->
 						<select class="form-control form-select js-example-basic-single" id="kt_select2_42" name="opex_cpex" aria-label="Opex Cpex">
 							<option value=""> All CAPEX / OPEX </option>
 							<?php foreach($capexopex as $selectcat){ ?>
@@ -315,7 +290,7 @@ $get_option = $_REQUEST['option'];
 			<!--begin: Datatable -->
 			<div class="card card-custom mt-4">
 				<div class="card-body" id="filterpageshow">
-					<?php 	//include_once "views/custom_list_approved_table_ajax.php"; ?>
+					<?php ?>
 					<div class="card-px text-center ">
 							<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Please Apply Filter</p>
 							<div class="text-center px-4">

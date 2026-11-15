@@ -17,8 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sku_generator_name'])
     if (strtolower(trim($response['status'])) === 'success') {
         $_SESSION['sku_msg_type'] = 'success';
         $_SESSION['sku_msg'] = $response['message'] ?? "SKU saved successfully.";
-        // header("location: index.php?option=sku_generator");
-        // exit;
     } else {
         $_SESSION['sku_msg_type'] = 'error';
         $_SESSION['sku_msg'] = $response['message'] ?? "Something went wrong while saving SKU.";
@@ -31,9 +29,6 @@ $rid = $rid['1'];
 $url = API . "?mode=getskudetails&method=get&rid=$rid";
 $response = callAPI($url);
 $res = json_decode($response, true);
-// echo"<pre>";
-// print_r($url);
-// echo"</pre>";
 $sku = $res['sku'][0] ?? [];
 $sku_detail = [];
 if (!empty($sku['sku_generator_detail'])) {

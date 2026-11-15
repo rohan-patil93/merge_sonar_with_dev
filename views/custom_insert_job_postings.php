@@ -2,8 +2,6 @@
 $_SESSION['apply_js']['multiselest'] = '1';
 $_SESSION['apply_js']['textediter'] = '1';
 $_SESSION['apply_js']['inputmask'] = '1';
-//$_SESSION['apply_js']['jobposting'] = '1';
-//echo "<pre>"; print_r($_POST); echo "</pre>";
 $mandetorycandidatevalue = array('first_name'=>'First Name','middle_name'=>'Middle Name','last_name'=>'Last Name','address'=>'Address','post_code'=>'Post Code','email_id'=>'Email','gender'=>'Gender','disability'=>'Disability','marital_status'=>'Marital Status','date_of_birth'=>'Date Of Birth','blood_group'=>'Blood Group','adhar_no'=>'Aadhar No','pan_number'=>'Pan Number','total_experiance'=>'Total Experiance','notice_period'=>'Notice Period','excepted_doj'=>'Expected Date Of Join','current_location'=>'Current Location','current_ctc'=>'Current CTC','expected_ctc'=>'Expected CTC');
 if(isset($_POST['post_job']) && $alreadypost_job != '1'){
     $url = API."?mode=insertjobpost&method=post";
@@ -28,7 +26,6 @@ if(isset($_POST['post_job']) && $alreadypost_job != '1'){
     $_POST['annual_salary'] = convertamountnumber($_POST['annual_salary']);
     $_POST['candidate_show_status'] = isset($_POST['candidate_show_status'])?"0":"1";
     $_POST['aa_eeo'] = isset($_POST['aa_eeo'])?"0":"1";
-  //   echo "<pre>"; print_r($_POST); echo "</pre>";
     $responses = file_post_contents($url, $_POST);
     $response = json_decode($responses,1);
     if($response['status'] == 'fail'){
@@ -64,7 +61,6 @@ $rid = $rid[1];
 $url = API."?mode=getjobpostings&rid=".$rid;
 $resret = callAPI($url);
 $results  = json_decode($resret,1);
-//echo "<pre>"; print_r($results); echo "</pre>";
 $title_list  =$results['job_titles'];
 $location_list = $results['locations'];
 $user_list = $results['application_users'];
@@ -342,7 +338,7 @@ $joblevel_list = $results['job_grade'];
 </div>
 <div class="row mt-2">
   <div class="col-lg-6 m-b-10" data-step="7" data-intro="Recruitment Manager">
-      <label for="recruitment_by" class="form-label mt-1"><?php echo __('Recruitment Manager'); ?> <?php //print_r($user_list); ?></label>
+      <label for="recruitment_by" class="form-label mt-1"><?php echo __('Recruitment Manager'); ?> <?php ?></label>
       <div >
         <span class="d-block error-message text-danger"></span>
         <select class=" form-select js-example-basic-single requried_field" id="recruitment_by" name="recruitment_by">

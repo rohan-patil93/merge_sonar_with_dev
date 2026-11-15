@@ -24,9 +24,6 @@ $resarray = json_decode($data_details1,1);
 
 
 
-// $tdurl = API."?mode=showtables";
-// $showtablesdata = callAPI($tdurl);
-// $showtables = json_decode($showtablesdata,1);
 
 
 $showtableswh["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id']);
@@ -35,7 +32,6 @@ $showtableswhdecid = urlencode(json_encode($showtableswh));
 $showtablesurl = API."?mode=gettabledetailswithconditions&table=application_tours&data=".$showtableswhdecid;
 $showtables = callAPI($showtablesurl);
 $showtables = json_decode($showtables,1);
-//print_r($showtables);
 
 $filed_array = array('text' => 'Simple Text', 'touchspin' => 'Touch Spin', 'date_pick' => 'Date','month_year'=>'Month','time_pick'=>'Time' ,'color_pick' => 'Color', 'email'=> 'Email','phone'=> 'Phone','number'=> 'Quantity','currency'=> 'Currency', 'password'=> 'Password', 'textarea' => 'Text Area', 'checkbox' => 'Check Box', 'switch' => 'Switch', 'radio' => 'Radio', 'select'=> 'List','auto_select'=>'Auto Select' ,'multi_select'=> 'Multi Select','rating'=>'Rating','image' => 'Photo','editor' => 'Editor','slider'=>'Slider','number_type'=> 'Number','read_only'=> 'Read Only Text','disable_select'=> 'Disable List','hidden'=> 'Hidden', 'serial_no'=>'Serial Number', 'button'=>'Button','array'=>'Array');
 

@@ -18,14 +18,14 @@ foreach($vendor_charts as $vendor_chart){
 <div class="card card-custom gutter-b">
 	<div class="card-header">
 		<div class="card-title">
-			<h5 class="card-label"><?= __("Vendor-Wise Budget Vs Actuals") ?> <?php //print_r($chart_data); ?></h5>
+			<h5 class="card-label"><?= __("Vendor-Wise Budget Vs Actuals") ?> <?php ?></h5>
 		</div>
 	</div>
 	<div class="card-body">
 		<!--begin::Chart-->
-		<!-- <input type="hidden" id="monthdata" value="<?php //echo implode("|", $chart_data['vendor']); ?>">
-		<input type="hidden" id="estimationdata" value="<?php //echo implode("|", $chart_data['budget']); ?>">
-		<input type="hidden" id="actualdata" value="<?php //echo implode("|", $chart_data['bill']); ?>">
+		<!-- <input type="hidden" id="monthdata" value="<?php ?>">
+		<input type="hidden" id="estimationdata" value="<?php ?>">
+		<input type="hidden" id="actualdata" value="<?php ?>">
 		<div id="chart_3"></div> -->
 		<!--end::Chart-->
 		<!-- <?php foreach($vendor_charts as $vendor_chart){ ?>
@@ -56,7 +56,7 @@ foreach($vendor_charts as $vendor_chart){
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach($vendor_charts as $vendor_chart){ //if(isset($vendors[$vendor_chart['id']])){ ?>
+					<?php foreach($vendor_charts as $vendor_chart){?>
 						<tr>
 							<td class="">
 								<?php if($vendor_chart['image']!=""){ ?>

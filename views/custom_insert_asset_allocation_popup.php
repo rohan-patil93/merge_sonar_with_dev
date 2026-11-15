@@ -1,20 +1,14 @@
-<?php //print_r($_POST);
+<?php 
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
-//$url = API."?mode=getassetallocation&list=Y&assetid=".$_POST['assetid'];
 $url = API."?mode=getassetallocation&admin_type=".$_SESSION['admin_type']."&resultgettype=DIRECTASSETALLOCATE&assetid=".$_POST['assetid'];
 $data_details = callAPI($url);
 $details = json_decode($data_details,1);
-//echo "<pre>"; print_r($details['already_assets_list']); echo "</pre>";
 
 
 
 
-//$url = API."?mode=getassetallocation&list=Y&assetid=".$_POST['assetid'];
-//$data_details = callAPI($url);
-//$details = json_decode($data_details,1);
-//$assetcategory = $details['asset_categories'];
 
 $already_assets_list = $details['already_assets_list'];
 $already_assets_list_ary = explode(",",$already_assets_list);
@@ -41,17 +35,12 @@ if($repeateasset=="1"){ ?>
 <?php }
 
 
-//$employees = $details['employees'];
-// $ass_condition = array('1'=>'Used','2'=>'Good','3'=>'Poor','4'=>'Damaged','New');
 foreach($details['asset_categories'] as $asset_category_list){
 	$asset_category_lists[$asset_category_list['id']] = $asset_category_list['category_description'];
 }
 foreach($details['locations'] as $locations_list){
 	$locations_lists[$locations_list['id']] = $locations_list['location_name'];
 }
-// foreach($details['asset_status'] as $asset_status){
-// 	$ass_status[$asset_status['id']] = $asset_status['name'];
-// }
 ?>
 <script type="text/javascript">
 	function selectAllocationType(){
@@ -147,7 +136,7 @@ function submitdetails(){
 								<?php } ?>
 							</select>
 						</td>
-						<td class="w-full"><?php //echo $ass_status[$list_asset['asset_status']]; ?>
+						<td class="w-full"><?php ?>
 							<select  class="form-select js-example-basic-single" name="asset_status[]" aria-label="Asset Status">
 								<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($ass_status as $ass_statuskey=>$ass_statuss){ ?>

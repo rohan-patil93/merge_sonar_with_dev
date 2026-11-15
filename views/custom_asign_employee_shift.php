@@ -1,6 +1,5 @@
 <?php
 if(isset($_POST['submit_sh'])){
-	//print_r($_POST); exit;
 	$data = $_POST;
 	$data['current_status'] = 0;
 	$data['status_date'] = nowDate();
@@ -19,20 +18,16 @@ $vdata1["where"] = array('is_active'=> 0);
 	$response = $emp;
 if(isset($_POST['submit_shift'])){
 	$url = API."?mode=tosearchemployee&department=".$_POST['department']."&designation=".$_POST['designation']."&employee=".json_encode($_POST['employee'],1);
-	//echo $url;// exit;
 	$response = callAPI($url);
 	$response = json_decode($response,1);
-	//print_r($response); exit;
 	$sfwr["where"] = array('is_active'=> 0);
 	$sfwre = urlencode(json_encode($sfwr));
 
 }
 
 	$vurl = API."?mode=gettabledetailswithconditions&table=shifts&data=".$sfwre;
-	//echo $vurl;
 	$Shifts = callAPI($vurl);
 	$Shifts = json_decode($Shifts,1);
-	//print_r($Shifts);
 
 $dpwr["where"] = array('is_active'=> 0);
 $dpwr = urlencode(json_encode($dpwr));
@@ -45,7 +40,6 @@ $vurl = API."?mode=gettabledetailswithconditions&table=designations&data=".$dpwr
 $designations = callAPI($vurl);
 $designations = json_decode($designations,1);
 
-//print_r($emp); exit;
 ?>
 <div class="d-flex flex-column-fluid">
 	<div class="container-fluid">

@@ -24,7 +24,6 @@ $is_renew_mode = isset($_GET['renew']) && $_GET['renew'] === 'Y';
 // $show_contract_type_toggle = !$is_edit_mode && !$is_renew_mode && !empty($contractRoleAccess['show_toggle']);
 // NEW: user-assigned contract types from single API
 $contractRoleAccess = resolveUserContractTypeAccessFromApi();
-//echo "<pre> role"; print_r($contractRoleAccess); echo "</pre>";
 $allowedContractTypes = $contractRoleAccess['types'] ?? array();
 $show_contract_type_toggle = !$is_edit_mode && !$is_renew_mode && !empty($contractRoleAccess['show_toggle']);
 $formData = ['contract_name' => '', 'transaction_no' => '', 'invoice_number' => '', 'rt_number' => '', 'business_code' => '', 'parent_contract_id' => '', 'contract_payment_terms' => '', 'locations' => '', 'typeofaggrements' => '', 'party_type' => 'vendor', 'contract_owner_name' => '', 'contract_owner_email' => '', 'contract_owner_number' => '', 'party_id' => '', 'start_date' => '', 'end_date' => '', 'renewal_frequency' => 'quarterly', 'contract_amount' => '', 'description' => '', 'additional_notes' => '', 'payment_term_id' => '', 'termination_condition' => '', 'contract_status' => 'Pending', 'auto_renew' => false, 'renew_type' => '', 'state' => '', 'isp' => '', 'paid_by' => '', 'internet_charges' => '', 'hub_spoc_name' => '', 'hub_spoc_number' => '', 'wifi_provider' => '', 'wifi_pass' => '', 'additional_document' => '', 'id' => '', 'is_oem' => 'No', 'oem_registration_number' => '', 'oem_distributor_name' => '', 'oem_product_category' => '', 'contract_type' => '', 'contract_services_id' => '', 'contact_persons' => '']; // additional document new
@@ -44,10 +43,6 @@ $notification = ['message' => '', 'type' => ''];
 $currentDate = new DateTime();
 $versionId = 'V_' . $currentDate->format('Ymd_His');
 
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
-// exit();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
@@ -80,12 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// $url = API . "?mode=getcontractdetailsreactamc&method=get&rid={$contract_id}";
-// $response = callAPI($url);
-// $datatest = json_decode($response, true);
-// echo "<pre> 0--------------"; print_r($datatest); echo "</pre>"; //exit;
 
-// $url = API . "?mode=getcontractdetailsreactamc&method=get&rid={$contract_id}";
 $url = API . "?mode=getcontractdetailsreactamc&method=get&rid={$contract_id}" . "&admin_type=" . $_SESSION['admin_type'];
 $response = callAPI($url);
 $data = json_decode($response, true);
@@ -119,7 +109,6 @@ $insert_attributes = json_decode($insert_attributes, true);
 if (!is_array($insert_attributes)) {
     $insert_attributes = array();
 }
-// echo "<pre>"; print_r($milestones);
 function getFieldDisplay($field, $insert_attributes)
 {
     $display = $insert_attributes[$field]['insert_display_list'] ?? 1;
@@ -911,9 +900,6 @@ function handleContractRenewal()
         $response = file_post_contents($renewalUrl, $renewalData, 'renew');
         $result = json_decode($response, true);
 
-        // echo "<pre>";
-        // print_r($result);
-        // echo "</pre>";
 
         $notification = ['message' => 'Contract renewed successfully!', 'type' => 'success'];
 
@@ -1054,9 +1040,6 @@ function handleContractSubmission()
         error_log("API Response for " . $contractUrl . ": " . $response);
         $result = json_decode($response, true);
 
-        // echo "<pre> test";
-        // print_r($result);
-        // echo "</pre>";
 
         if ($result['contract_result']['LASTID'] == 0) {
             $msgcode = 3001;
@@ -1075,11 +1058,7 @@ function handleContractSubmission()
         </script>
         <?php
 
-        // if (!empty($result['contract_result']['LASTID'])) {
-        //     $contract_id = $result['contract_result']['LASTID'];
-        // }
 
-        // $notification = ['message' => 'Data submitted successfully!', 'type' => 'success'];
 
     } catch (Exception $error) {
         $notification = ['message' => 'An error occurred while submitting!', 'type' => 'danger'];
@@ -3549,7 +3528,6 @@ if (count((array) $milestones) > 0) {
                                                 <span class="form-label d-block">Select Contract Permission</span>
                                                 <div class="form-group">
                                                     <?php
-                                                    //$permissionTypes = ['edit', 'delete', 'document', 'workflows', 'activity', 'associated', 'permission', 'observer'];
                                                     $permissionTypes = ['edit', 'document', 'activity', 'associated', 'permission', 'observer'];
                                                     foreach ($permissionTypes as $perm):
                                                         ?>

@@ -1,5 +1,4 @@
 <?php
-// echo '<pre>'; print_r($_SESSION);
 $category = array('1' => __('Survey'), '2' => __('Poll'));
 if($_GET['CAT'] == ""){
 	$_GET['CAT'] = 1;

@@ -15,7 +15,6 @@ $curl12 = API."?mode=gettabledetailswithconditions&table=locations&data=".$datw1
 $cudata12 = callAPI($curl12);
 $locations = json_decode($cudata12,1);
 
-	//print_r($foodoptions);exit;
 $vurl = API."?mode=getemprequests&company_id=".$_SESSION['company_id']."&is_active=0";
 $configesponse = callAPI($vurl);
 $requestData = json_decode($configesponse,1);
@@ -26,7 +25,6 @@ $transport = $requestData['transport'];
 $transport_req = $requestData['transport_req'];
 
 
-//echo "<pre>"; print_r(count((array)$locfooddata[2][1]));
 
 if(isset($_POST['datefilter'])){
 	$current_from_date = $_POST['fromdate'];
@@ -40,7 +38,6 @@ if(isset($_POST['datefilter'])){
 	$transport = $requestData['transport'];
 	$transport_req = $requestData['transport_req'];
 
-//echo "<pre>"; print_r($transport[5]);
 
 }
 
@@ -139,7 +136,7 @@ if(isset($_POST['datefilter'])){
 													<td>  <a href="index.php?option=COM_LIST_EMP_REPORT&EID=<?php echo $decode_emplist;?>" target="_blank"> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?php echo __('Number of Requests'); ?>" style="vertical-align: middle;">  <?php echo count((array)$locfooddata[$foodoptionval][$locval]); ?> </span></a>  </td>
 												<?php } ?>
 
-												<?php  //foreach($transport as $trans){
+												<?php 
 
 													$locval = $loc['id']; $emplist = json_encode(array_keys($transport[$locval]),1); $decode_emplist = deocdeId(urlencode($emplist));  ?>
 													<td>  <a href="index.php?option=COM_LIST_EMP_REPORT&EID=<?php echo $decode_emplist;?>" target="_blank"> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?php echo __('Number of Requests'); ?>" style="vertical-align: middle;">  <?php echo count((array)$transport[$locval]); ?> </span></a>  </td>

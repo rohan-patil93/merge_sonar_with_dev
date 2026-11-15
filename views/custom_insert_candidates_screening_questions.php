@@ -8,11 +8,9 @@ $candidate_id = $cand['1'];
 $url = API."?mode=getcandidatescreeningquestions&candidate_id=".$candidate_id;
 $api = callAPI($url);
 $result = json_decode($api,1);
-//echo "<pre>"; print_r($result); echo "</pre>";
 
 $candidates = $result['candidates'];
 $job_posting_candidates = $result['job_posting_candidates'];
-//print_r($job_posting_candidates);
 ?>
 <script>
 /**function aIGenerateJobDescription() {

@@ -20,9 +20,6 @@ $vdata = urlencode(json_encode($vdata1));
 $vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata;
 $configesponse = callAPI($vurl);
 $empdata = json_decode($configesponse,1);
-//echo "<pre> -----------------------";
-	//print_r($_REQUEST);print_r($vdata1); print_r($empdata); echo "</pre>";
-//print_r($aemp); echo "</pre>";
 $month_type = 'N';
 if(isset($_REQUEST['month'])){
 	$month_type = $_REQUEST['month'];
@@ -91,7 +88,7 @@ if(isset($_REQUEST['month'])){
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= __('Close') ?>"></button>
 </div>
 <div class="modal-body">
-	<?php  //print_r($_SESSION['document'][$_POST['assement_year']][$_POST['list_id']]); ?>
+	<?php ?>
 	<table class="table table-hover custom_asign_emp_mpc" id="kt_datatable1" >
 		<thead >
 			<tr>

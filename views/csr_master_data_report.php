@@ -19,7 +19,6 @@ $apires = callAPI($url);
 $result = json_decode($apires, true);
 
 $list = $result['project_financial_list'] ?? [];
-// echo $result['sql'] ;
 $_SESSION['download_data'] = [];
 ?>
 <link rel="stylesheet" href="assets/css/csr_master_data_report.css">

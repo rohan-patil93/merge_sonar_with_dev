@@ -1,10 +1,5 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = 1;
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-// echo '<pre>'; print_r($_POST); echo '</pre>';
-// echo '<pre>'; print_r($_FILES); echo '</pre>';
 if(isset($_POST['submit'])){
 	$table_name = 'complaints';
     $last_id = '';
@@ -33,8 +28,6 @@ if(isset($_POST['submit'])){
 	    $_POST['updated_by'] = $_SESSION['userid'];
 	    $url = API . "?mode=updaterowtabledata&rid=" . $rid . "&table=" . $table_name . "&method=post&fid=id";
 	    $response = file_post_contents($url, $_POST, 'update');
-	    // $response = json_decode($response, 1);
-	    // print_r($response);
 	    $last_id = $rid;
 
 	}
@@ -96,12 +89,10 @@ if ($_GET['Rid']) {
 	$return = json_decode($che, 1);
 	$view  = $_GET['view'];
 	$copy  = $_GET['copy'];
-    // print_r($return);
 }
 $url = API . "?mode=getamccomplaintsdetails&method=get";
 $result = callAPI($url);
 $result = json_decode($result, 1);
-// print_r($result['assets']);
 $buildings = $items = $assets = array();
 $buildings = $result['buildings'];
 $items = $result['items'];

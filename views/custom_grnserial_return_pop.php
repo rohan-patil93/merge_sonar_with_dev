@@ -2,20 +2,12 @@
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
-//echo "<pre>"; print_r($_POST); echo "</pre>";
 $table = "goods_receipt_notes";
 $qty= $_POST['qty'];
 $item_id= $_POST['item_id'];
 $tranid = $_POST['trn_ref_id'];
-//$qty= 15;
-/*$table = 'requisitions';
-$field= '201';
-$tranid = '4';
-*/
-//print_r($_POST);
 
 $vurl = API."?mode=singlerowtabledata&table=".TBL_ITEMS."&rid=".$item_id;
-//echo $vurl;
 $item_daata = callAPI($vurl);
 $item_daata = json_decode($item_daata,1);
 
@@ -41,8 +33,6 @@ if($item_daata['tracking_type'] == 2){
 		$serialnos[] = array('lot'=>$res['lot_no'], 'lot_value'=>$res['lot_quantity']);
 	}
 }
-////$status = ViewStatusValue($field);
-//	print_r($serialnos);
 ?>
 
 <script type="text/javascript">

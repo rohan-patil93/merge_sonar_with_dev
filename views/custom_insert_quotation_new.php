@@ -1,27 +1,22 @@
 <?php
-$checktimeprint =0; //$subt_amount = 0;
+$checktimeprint =0;
 if($checktimeprint > 0){
     echo "Check Step - ".$checktimeprint. " Date Time : ".date('m/d/Y h:i:s a')."</br>";
     $checktimeprint++;
 }
-//echo "<pre>"; print_r($_SESSION['module_setp']);echo "</pre>";
 $_SESSION['apply_js']['multiselest'] = "1";
 $_SESSION['apply_js']['dropzone'] = "1";
 $_SESSION['apply_js']['from-validation'] = "1";
 $option = strtoupper($_GET['option']);
 $list = str_replace('INSERT', 'LIST', $option);
 if($_POST['submit'] == 'query'){
-   //print_r($_POST);  exit;
     $res = Insertqueries($_POST);
-     $_POST['submit'] = '';//exit;
-    //$_POST = array();
+     $_POST['submit'] = '';
 }
 if($_POST['submit'] == 'reply'){
     $res = updatequeries($_POST);
-    //$_POST = array();
 }
 if(isset($_POST['submit1'])){
-    //echo "<pre>";print_r($_FILES); print_r($_POST);echo "</pre>";
 
     /**if($_POST['add_mandatory_str'] !=""){
         $add_mandatory_exp = explode(',', $_POST['add_mandatory_str']);
@@ -44,13 +39,9 @@ if(isset($_POST['submit1'])){
         $url = API."?mode=addinvoietype&table=".$_POST['table_name']."&method=post";
         $response = file_post_contents($url, $_POST, 'insert');
         $response2 = json_decode($response,1);
-       //echo "<pre>wwwwwwwwwwwwwwwwwwwwwwwww----------"; print_r($response2); echo "</pre>";
 
         if($response) {
             if($_POST['submit_value'] == 'continue'){
-                //$LASTID = json_decode($response,1);
-                //$nrid = "id:".$LASTID['LASTID'];
-                //header("location:index.php?option=".$option."&Rid=".deocdeId($nrid));
                 header("location:index.php?option=".$option);
             }else{
                 header("location:index.php?option=".$list);
@@ -65,9 +56,7 @@ if(isset($_POST['submit1'])){
         $url = API."?mode=addinvoietype&table=".$_POST['table_name']."&method=post&type=update";
         $response = file_post_contents($url, $_POST, 'update');
         $fddrfg = json_decode($response,1);
-       // echo "<pre>wwwwwwwwwwwwwwwwwwwwwwwww----------"; print_r($fddrfg); echo "</pre>";
         if ($response) {
-          //header("location:index.php?option=".$list);
         }
     } //update condition end
 } //submit button code end
@@ -88,7 +77,6 @@ $cusdata = $_SESSION['user'];
 $geturl = API."?mode=getdynamicquotationdetails&location_id=".$cusdata['location_id'];
 $getesponse = callAPI($geturl);
 $result = json_decode($getesponse,1);
-//print_r($result);
 $cusresponse = $result['application_users'];
 $locares = $result['location'];
 $dynamic_mapping_tables = $result['dynamic_mapping_tables'];
@@ -159,16 +147,12 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $rpurl =  API."?mode=getInvoicesData&in_id=$rid&table=".$rtable."&copy=".$copy;
     $rp_data = callAPI($rpurl);
     $rpres = json_decode($rp_data, 1);
-    //echo "<pre>"; print_r($rpres); echo "</pre>";
     $rpdata = $rpres['data'];
     $items = $rpres['items'];
-   //echo "<input type='hidden' value='".htmlspecialchars(print_r($items, true))."'>";
     $taxes = $rpres['taxes'];
     $files = $rpres['files'];
     $jv_items = $rpres['jv_items'];
     $customer_vendor_gst_billing_details = $rpres['customer_vendor_gst_billing_details'];
-   // print_r($rpres['customer_vendor_gst_billing_details']);
-    //echo __('customer_vendor_gst_billing_details');
     $itemidwithhsn = $rpres['itemidwithhsn'];
     $chart_of_accounts = $rpres['chart_of_accounts'];
     $reftable_items = $rpres['ref_table_details']['items'];
@@ -190,7 +174,6 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     // End Added Rohan 2024-01-29
     if($copy == 0){
         foreach((array)$items as $reftableitems){
-            //$reftableitemlist[$reftableitems['item_id']] = $reftableitems;
             $reftableitemlist[$reftableitems['id']] = $reftableitems;
             $reftableitemidlist[] = $reftableitems['item_id'];
             $errormessage[$reftableitems['id']] = $reftableitems;
@@ -202,8 +185,6 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
             $errormessage[$reftableitems['id']] = $reftableitems;
         }
     }
-    //  echo "<pre>"; print_r($rpdata); echo "</pre>";
-    //echo "<pre>"; print_r($taxes_ship); echo "</pre>";
     /** ROhan Remove list calculate with pendding  **/
     $dutax = array();
     $distax = array();
@@ -244,7 +225,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $table1['follow_up_level_ids'] = $rpdata['follow_up_level_ids'];
         $table1['advance_payment'] = $rpdata['advance_payment'];
     }
-    if($rtable_name != 'requisitions'){ //echo __('done11');
+    if($rtable_name != 'requisitions'){
         $table1['party_id'] = $rpdata['party_id'];
         $table1['party_name'] = $rpdata['party_name'];
         $table1['party_email'] = $rpdata['party_email'];
@@ -300,13 +281,12 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $table1['compliance_specification_documents'] = $rpdata['compliance_specification_documents'];
     $table1['security_deposit'] = $rpdata['security_deposit'];
     $table1['advance_payment'] = $rpdata['advance_payment'];
-    if(isset($rpdata['additional_attributes']) && $rpdata['additional_attributes']){ //echo __('ravi');
+    if(isset($rpdata['additional_attributes']) && $rpdata['additional_attributes']){
         $extara = json_decode($rpdata['additional_attributes'],1);
         foreach ((array)$extara as $extr_key => $extar) {
             $table1[$extr_key] = $extar;
         }
     }
-    //echo "<pre>"; print_r($taxes); echo "</pre>";
     foreach ((array)$taxes as  $taxs) {
        $tax_array[$taxs['transaction_item_row_id']] = $taxs['tax_id'];
        $tax_valuearray[$taxs['transaction_item_row_id']] = $taxs['tax_value'];
@@ -321,7 +301,6 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     foreach((array)$items as $item){
         if(($table_name == 'quotations' || $table_name == 'purchase_orders') && $rtable_name !='' && $table_name != 'purchase_invoices'){
             if(count((array)$reftableitemlist)>0){
-               // $subt_amount+=$item['item_price'] * $reftableitemlist[$item['item_id']]['pending_qty'];
                 $subt_amount+=$item['item_price'] * $reftableitemlist[$item['id']]['pending_qty'];
             }else{
                 $subt_amount+=$item['item_price'] * $item['pending_qty'];
@@ -329,7 +308,6 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         }
     }
 
-    //echo "rtable_name -- ".$rtable_name." - table_name - ".$table_name;
     $chktxtseq = 1;
     $duplicateitemscheckary = $duplicateitemsary = array();
     foreach((array)$items as $item){
@@ -377,8 +355,6 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         if(($table_name == 'quotations' || $table_name == 'purchase_orders' || $table_name == 'purchase_invoices') && $rtable_name !='' && $table_name != 'purchase_invoices'){
             $tax_val = $tax_valuearray[$item['id']] !=''?$tax_valuearray[$item['id']] :0;
             if(count((array)$reftableitemlist) !=0){
-                // $itemda['quantity']= $reftableitemlist[$item['item_id']]['pending_qty'];
-                // $item['pending_qty'] = $reftableitemlist[$item['item_id']]['pending_qty'];
                 $itemda['quantity']= $reftableitemlist[$item['id']]['pending_qty'];
                 $item['pending_qty'] = $reftableitemlist[$item['id']]['pending_qty'];
             }else{
@@ -408,15 +384,10 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
                 $distax[$tax_val] ['amount'] =  $productamount;
                 $distax[$tax_val] ['tax_amount'] =  ($productamount)*($tax_val/100);
            }
-            //if(isset($distax[$tax_val]['amount'])){ //rohan remove tax part....
-                //$distax[$tax_val]['amount'] =  $productamount;
-                //$distax[$tax_val]['tax_amount'] = ($productamount)*($tax_val/100);
-            //} //rohan remove tax part....
             $itemda['taxabled_amount'] = $productamount;
             $itemda['tax_amount']= ($productamount)*($tax_val/100);
             $itemda['total_amount']=  $item['item_price'] * $item['pending_qty'];
 
-            //$subt_amount+=$item['item_price'] * $item['pending_qty'];
             $tax_val = $tax_val!=""? $tax_val :0;
             $stax_amount+=($productamount)*($tax_val/100);
         }
@@ -426,7 +397,6 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $chktxtseq++;
 
     }
-    //echo "<pre>"; print_r($duplicateitemsary); echo "</pre>";
 
     if($subt_amount != ""){
         if($rpdata['discount_type'] == 'P'){
@@ -458,7 +428,6 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $acode['cost_center_id']=$table1['cost_center'];
     $acode['company_id']=$_SESSION['company_id'];
     $acode['fiscal_year']=$table1['qo_date'];
-    //echo "<pre>"; print_r($meantableitemlist); print_r($errormessage); echo "</pre>";
     if(count((array)$meantableitemlist) !=0 && count((array)$errormessage) != 0){
         foreach((array)$meantableitemlist as $ref_itm_id=>$qytvalue){
             if(isset($errormessage[$ref_itm_id]['pending_qty']) && $qytvalue > $errormessage[$ref_itm_id]['pending_qty'] && $table1['ref_type'] != 'delivery_challans'){
@@ -513,18 +482,15 @@ if($table1['currency_id']!="" && $table1['currency_id']!="0"){
 //////////////////////currency_id//////////////////////////////////
 //////////////////////state//////////////////////////////////
 if($table1['originator_state_id']!="" && $table1['originator_state_id']!="0"){
-    //echo __('wroking --- 1');
 }elseif($_SESSION['user']['default_state_id'] !="" && $_SESSION['user']['default_state_id']!="0"){
     $table1['originator_state_id'] = $_SESSION['user']['default_state_id'];
 
     if($table1['supplier_state_id']=="" || $table1['supplier_state_id']=="0"){
         $table1['supplier_state_id'] = $_SESSION['user']['default_state_id'];
     }
-   // echo __('wroking --- 2');
 }else{
     $table1['originator_state_id'] = $_SESSION['user_company']['state'];
     $table1['supplier_state_id'] = $_SESSION['user_company']['state'];
-   // echo __('wroking --- 3');
 }
 $table1['currency_rate'] = ($table1['currency_rate'] != "" && $table1['currency_rate'] !="0")?$table1['currency_rate']:1;
 //////////////////////state//////////////////////////////////
@@ -779,7 +745,7 @@ function validateFormold(){
          return false;
     }
     }
-    /*var data = <?php //echo $mandatory_json; ?>;
+    /*var data = <?php ?>;
     var res = 'N';
 //  alert(data);
     if(typeof(data) == 'object'){
@@ -2495,7 +2461,7 @@ if($checktimeprint > 0){
 
 
     <?php if($_GET['error_messages'] !="" && $copy == '1' && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)){ $disable = "disabled"; ?>
-    <?php //if($_GET['error_messages'] !="" AND ($table1['current_status'] == ST_DRAFT OR $table1['current_status'] == ST_ACTIVE OR $copy == 0)){  $disable = "disabled"; ?>
+    <?php ?>
          <div class="alert alert-danger alert-dismissible">
                 <strong><?php echo $_GET['error_messages']; ?> </strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
@@ -2542,7 +2508,6 @@ if($checktimeprint > 0){
 ?>
                     <?php
                         $printurl = "index.php?option=COM_QO_PRINT&rid=".$rid."&table=".$table_name."&title=".urlencode($title);
-                        // $printurl = "index.php?option=COM_QO_PRINT_OMKAR2&rid=".$rid."&table=".$table_name."&title=".urlencode($title);
 
                         if($table_name =="rental_invoices"){
                             $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=".$rid."&table=".$table_name."&title=".urlencode($title);
@@ -2588,7 +2553,7 @@ if($checktimeprint > 0){
                     <?php } ?>
                 <?php }  ?>
                  &nbsp;  &nbsp;
-                    <!-- <input type="hidden" name="status_values" id="status_values" value="<?php //echo  $table1['current_status']!=""?$table1['current_status']:2; ?>"> -->
+                    <!-- <input type="hidden" name="status_values" id="status_values" value="<?php ?>"> -->
                 <input type="hidden" name="status_values" id="status_values" value="<?php echo  ($table1['current_status']!="" && $rtable_name =="")?$table1['current_status']:ST_DRAFT; ?>">
                 <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
 
@@ -2614,7 +2579,6 @@ if($checktimeprint > 0){
             $dyncss = "";
             if($_GET['Rid']!=""){
                 $dyncss = "pointer-events: none; opacity: 0.7;";
-               // echo "status:".$table1['current_status'].",user:". $table1['originator'].",seesion user:".$_SESSION['userid'].",rtable:".$rtable_name;
 
 
                 if((in_array($table1['current_status'], (array)$visibledfields) && $rtable_name =="" && $table1['originator'] ==$_SESSION['userid']) || ($rtable_name !="" && $table1['current_status'] == ST_ACTIVE) ){
@@ -2627,19 +2591,11 @@ if($checktimeprint > 0){
                     $reftabledyncss = "pointer-events: none; opacity: 0.7;";
                 }
             }
-            /*if(in_array($table1['current_status'], (array)$visibledfields) && $rtable_name =="" OR ($table1['current_status'] == ST_CALLBACK && $table1['originator'] ==$_SESSION['userid']) OR ($rtable_name !="" && $table1['current_status'] == ST_ACTIVE) ){
-                echo "status:".$table1['current_status'].",user:". $table1['originator'].",seesion user:".$_SESSION['userid'].",rtable:".$rtable_name;
-            }else{
-                $dyncss = "pointer-events: none; opacity: 0.7;";
-            } */
             ?>
             <div  style="<?php echo $dyncss." ".$reftabledyncss; ?>">
 
             <?php
-            //if($table1['qo_number'] !=''){
                $tran_no =  $table1['qo_number'];
-            //}
-               //echo "<pre>"; print_r($table1); echo "</pre>";
                include_once "custom_insert_quotation_topup.php";
              ?>
        <?php
@@ -2696,7 +2652,6 @@ if($checktimeprint > 0){
                             <?php
                             $array_table = array('requisition'=>'quotation_table_new','petty_cash'=>'petty_cash_table','bills'=>'bill_table','goods_receipt_notes'=>'grn_table','stock_receipts'=>'stock_receive_table','stock_adjust_table'=>'stock_adjust_table','genral'=>'genral_table','account'=>'account_table','esgin_table'=>'esgin_table','vrc_table'=>'vrc_table','mpc_table'=>'mpc_table','glod_table'=>'glod_table', 'grn_return_table'=>'grn_return_table','rental_invoices'=>'rental_invoice_table','sale'=>'sale_table','sales_requisition_quotation_order'=>'sales_requisition_quotation_order_table','delivery_order'=>'delivery_order_table');
                              $display_table =$array_table[$table_list[$option]['display_table']].'.php';
-                            //echo "<pre>"; print_r($table1); echo "</pre>";
                             if(isset($table2[0]['item_id'])){
                                 include_once $display_table;
                             }else{
@@ -2711,7 +2666,7 @@ if($checktimeprint > 0){
                             }
                             ?>
                             <div class="row mt-2">
-                                <?php //print_r($table1); ?>
+                                <?php ?>
                                 <div class="col-xs-12">
                                     <button class="btn btn-danger delete" id="removeRows" type="button"><?php echo __('- Delete'); ?></button>
                                     <?php
@@ -2970,13 +2925,13 @@ if($checktimeprint > 0){
                         <?php  } ?>
                         <tr class="p-0" id="display_taxshow" style="<?php echo count((array)$distax) =="0"?"display:none":""?>">
                             <td colspan="2" class="p-2">
-                                <?php //echo "<pre>"; print_r($distax);echo "</pre>";  //exit; ?>
+                                <?php ?>
                             <table class=" table table-bordered mb-0">
                                 <tbody id='display_tax'>
                          <?php  if(count((array)$distax)){
                                     $tattax = 0;
                                     foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
-                                    <?php //if($table1['tax_state'] == 'S'){
+                                    <?php 
                                         if($table1['originator_state_id'] == $table1['supplier_state_id']){ ?>
                                     <tr>
                                         <td class="p-2">  <?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?><?php echo __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?>
@@ -3041,7 +2996,6 @@ if($checktimeprint > 0){
                              <?php
                             $adpaymenttable = array('sales_orders','sales_invoices','purchase_orders','purchase_invoices');
 
-                           // if($table1['advance_payment'] !="" AND $table1['advance_payment'] !="0"){
                                if(in_array($table_name, $adpaymenttable)){
 
                             ?>
@@ -3156,8 +3110,7 @@ if($checktimeprint > 0){
                        </div>
                    </div>
                     <div class="tab-pane card-body p-0 suppliercurrencycalc_tab" id="suppliercurrencycalc" role="tabpanel">
- <?php //if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != '0'){ $css = ""; }else{ $css = 'style="display: none;"'; }
-//if($table1['originator_currency_id'] != $table1['currency_id'] && $table1['currency_id'] != '0' && $table1['currency_id'] != '' && $table1['originator_currency_id'] != '0' && $table1['originator_currency_id'] != ''){ $css =''; }else{ $css = 'style="display: none;"'; }
+ <?php 
      ?>
                         <table   class=" table table-bordered exchange" <?php echo $currency_conversion_style; ?>>
                                     <tr class="bg-primary" >
@@ -3201,7 +3154,6 @@ if($checktimeprint > 0){
         </div>
     </div>
     <?php
-//print_r($file_data);
 if($rid !='' && isset($file_data['file_upload']) && $file_data['file_upload']==0 ){
  $file_array = array('application_table_name'=>$table_name,'transaction_id'=>$rid ,'is_active'=>'0','width'=>$file_data['fileuplodingwidth']!=""?$file_data['fileuplodingwidth']:'6','deletewidth'=>$file_data['fileuplodingdleetewidth']!=""?$file_data['fileuplodingdleetewidth']:'6','deleteview'=>$file_data['fileuplodingdeleteddisplay']!=""?$file_data['fileuplodingdeleteddisplay']:1,'file_size'=>$file_data['file_size']!=""?$file_data['file_size']:'6','file_limit'=>$file_data['number_of_files']!=""?$file_data['number_of_files']:'6','lable'=>$file_data['fileuplodinglabel']);
    fileUplodingUi($file_array);
@@ -3290,7 +3242,6 @@ if($rid !='' && isset($file_data['file_upload']) && $file_data['file_upload']==0
         $passid = "";
     }
     echo $todisplaythree = todisplaythree(array('table'=>$table_name,'originator'=>$rpdata['created_by'],'encode'=>'no','id'=>$passid,'dis_query'=>'yes','dis_timeline'=>'yes','dis_comments'=>'yes','dis_track'=>'yes'));
-//echo $todisplaytracking = todisplaytracking('s');
 ?>
 <!-- <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl" style="max-width: 800px;">

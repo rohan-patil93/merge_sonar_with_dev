@@ -7,7 +7,6 @@ $roleshortcodes  = json_encode($_SESSION['role_ids']);
 $url = API."?mode=getrecruitmentintegdashboard&reportstartdate=".$reportstartdate."&reportenddate=".$reportenddate."&roleshortcode=".$roleshortcodes;
 $apires = callAPI($url);
 $result = json_decode($apires,1);
-//echo "<pre>"; print_r($result['job_posting_candidates_sql']);echo "</pre>";
 $holidaydata = $result['holidays'];
 $holidays = nearestDateFirstShow($holidaydata,'holiday_date');
 $candidates = $result['candidates'];
@@ -28,7 +27,6 @@ while($startmonth0 <= $endmonth0){
 	$montharray[$monthkey] = $monthval;
 	$startmonth0->modify('+1 month');
 }
-//echo "<pre>"; print_r($job_posting_candidates);echo "</pre>";
 $montharray2 = array();
 $startmonth02 = new DateTime(date("Y-m-d",strtotime("-3 month")));
 $endmonth02 = new DateTime(date("Y-m-d",strtotime("+2 month")));
@@ -39,8 +37,6 @@ while($startmonth02 <= $endmonth02){
 	$montharray2[$monthkey] = $monthval;
 	$startmonth02->modify('+1 month');
 }
-//echo "<pre>";print_r($montharray); print_r($job_posting_candidates);echo "</pre>";
-//echo "<pre>"; print_r($job_posting_candidates);echo "</pre>";
 $stausresult = ViewStatusData();
 $lola = array('apshort','rhshort','hmshort','lorshort','logshort','loashort');
 foreach($result['tabsdata'] as $tabsdata){
@@ -78,7 +74,6 @@ foreach($statuslist as $statuslist){
 
 $candidate_dashboard = $result['candidate_dashboard'];
 $candidate_dashboard_today = $result['candidate_dashboard_today'];
-//echo "<pre>"; print_r($candidate_dashboard_today); echo "</pre>";
 ?>
 <script type="text/javascript">
 	function displaystausdrop(id,table,status_id,tab){
@@ -394,7 +389,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 										$jobpostingcandidates = $job_posting_candidates[$key1];
 										?>
 										<div class="tab-pane <?php echo $mm == count((array)$montharray)?"active":""; ?> card-body" id="month<?php echo date("M",strtotime($datev));?>" role="tabpanel">
-											<?php if(count((array)$jobpostingcandidates)  !=0){ //print_r($jobpostingcandidates); ?>
+											<?php if(count((array)$jobpostingcandidates)  !=0){?>
 												<table class="table table-hover m-b-0" style="font-size:13px;">
 													<thead>
 														<tr style="border-bottom-style: hidden;">
@@ -595,11 +590,8 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 											<?php
 											$dateloop = 0; $donutchartary = array();	foreach($montharray2 as $key2=>$date2){
 												$jobpostingcandidates2 = $job_posting_candidates[$key2];
-												//print_r($jobpostingcandidates2);
 												if($dateloop > 2){
-												//echo $jobpostingcandidates2['current_status']." ==ST_ACTIVE</br>";
 													$donutchartlist = $donutchart[$key2];
-													//print_r($donutchartlist);
 													$donutchartary[ST_ACTIVE] += $donutchartlist[ST_ACTIVE];
 													$donutchartary[ST_INPROGRESS] += $donutchartlist[ST_INPROGRESS];
 													$donutchartary[ST_HOLD] += $donutchartlist[ST_HOLD];
@@ -677,7 +669,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 													</div>
 
 													<?php $dateloop++;
-													} //print_r($donutchartary); ?>
+													}?>
 
 												</div>
 												<div class="col-lg-7">
@@ -703,7 +695,7 @@ function getJobPostingApplyCandidate(job_posting_id,field_name,value){
 									<h5><?= __('Active Jobs'); ?>
 										<span class="label label-xs label-success m-l-10" style="background-color: <?php echo strval($stausresult[$job_postings['0']['current_status']]['background_color']);?> !important" ><?php echo $result['job_postings_count']; ?></span>
 									</h5>
-									<?php // if($result['job_postings_count']>3){ ?>
+									<?php ?>
 										<!-- <a href="index.php?option=COM_LIST_VIEW_ALL_DASH_BOARD&TYPE=ACTIVE" class=" b-b-primary text-primary float-right">View all</a> -->
 										<a href="#!"  onclick="viewAllRecord('COM_LIST_VIEW_ALL_DASH_BOARD','ACTIVE')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
 

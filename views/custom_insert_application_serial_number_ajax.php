@@ -8,12 +8,10 @@ if(isset($_POST['process_name']) && $_POST['process_name'] !=""){
 	$url = API."?mode=getapplicationserialnumbers&process_name=".$process_name."&rid=".$rid;
 	$responseres = callAPI($url);
 	$result = json_decode($responseres,1);
-	//echo "<pre>"; print_r($asnres); echo "</pre>";
 	$application_pages = $result['application_pages'];
 	$application_serial_numbers_list = $result['application_serial_numbers_list'];
 	$asnres = $result['application_serial_numbers'];
 	$rid = $asnres['id'];
-	//echo "<pre>"; print_r($asnres); echo "</pre>";
 }
 $staticpoint = array(1,2,3,4,5,6,7,8,9,10);
 
@@ -308,7 +306,6 @@ function addMoreAdditionalSettings(){
 							$additional_settings[] = array();
 						}
 						$seq = 1;
-						//echo "<pre>"; print_r($additional_settings); echo "</pre>";
 						foreach($additional_settings as $asettings){ ?>
 							<div class="row" id="additional_rowid_<?php echo $seq; ?>">
 								<div class="col-lg-3 " >

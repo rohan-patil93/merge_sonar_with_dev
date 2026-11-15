@@ -1,5 +1,4 @@
 <?php
-// print_r($_POST);
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -33,7 +32,6 @@ $vurl = API . "?mode=gettabledetailswithconditions&table=$table_name&data=$vdata
 $che = callAPI($vurl);
 $return = json_decode($che, true);
 $fyRows = $return ?? array();
-// echo "<pre>"; print_r($_SESSION);
 
 ?>
 <link rel="stylesheet" href="assets/css/custom_csr_po_details.css">

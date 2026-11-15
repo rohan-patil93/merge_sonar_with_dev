@@ -18,7 +18,6 @@ $result = is_array($result) ? $result : array();
 $rows   = isset($result['rows']) ? $result['rows'] : array();
 
 $statusList = getstatusprogresslist('document_management');
-// echo "<pre>"; print_r($statusList);
 $statusMap  = array();
 if (count((array)$statusList) > 0) {
     foreach ($statusList as $s) {

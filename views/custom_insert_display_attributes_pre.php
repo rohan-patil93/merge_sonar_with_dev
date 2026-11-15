@@ -33,7 +33,6 @@ if(isset($_POST['submit'])){
 			$display_postion = servalnumber($serval, $_POST['add_display_postion'][$postkey]);
 			$serval[] = $display_postion;
 			$data1[$postvalue]['display_postion'] = $display_postion;
-			//$data1[$postvalue]['display_postion'] = $_POST['display_postion'][$postkey];
 			$data1[$postvalue]['display_list'] = $_POST['add_display_list'][$postkey]==1 ? 1: 2 ;
 			$data1[$postvalue]['lable'] = $_POST['add_lable'][$postkey];
 			$data1[$postvalue]['mandatory'] = $_POST['add_mandatory'][$postkey]==1 ? 1: 2 ;
@@ -67,7 +66,6 @@ if(isset($_POST['submit'])){
 		$data['is_active'] = '0';
 		$url = API."?mode=adddata&method=post&table=".TBL_DISPLAYATTRIBUTES;
 		$checkurl = API."?mode=checkAndInsertapplicationpages&table=".$_POST['table_name']."&company_id=".$_SESSION['company_id']."&display_list_type=".$_POST['display_list_type'];
-			//echo $checkurl; exit;
 		$res =  callAPI($checkurl);
 	}
 	$response = file_post_contents($url, $data);
@@ -76,7 +74,6 @@ if(isset($_POST['submit'])){
 	}
 }
 
-//$_GET['table'] = "accounts";
 if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']!=""){
 	$display_list_type = $_GET['display_list'];
 	$table = $_GET['table'];
@@ -85,17 +82,11 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']!=""){
 	$rid = explode(':', $rid);
 	$rid = $rid['1'];
 	$company_id = $_SESSION['company_id'];
-		//echo $rid; exit;
 	$tableurl = API."?mode=displayattribute&dis_table=$table&rid=$rid&display_list=$display_list_type";
-	//echo $tableurl; //exit;
 	$response = callAPI($tableurl);
-		//echo $response; exit;
 	$role = json_decode($response,1);
-		//print_r($role); exit;
 	$table = $table!="" ? $table : $role['application_table_name'];
-		//$display_list_type = $role['display_list_type'];
 	$attribute = json_decode($role['list_attributes'],1);
-		//echo "<pre>"; print_r($attribute); exit;
 	$rtitle_accordiont = json_decode($role['additional_attributes'],1);
 }
 
@@ -104,7 +95,6 @@ $showtablesdata = callAPI($tdurl);
 $showtables = json_decode($showtablesdata,1);
 $title = viewTitle($_GET['option']);
 $array = array('id', 'company_id' , 'current_status', 'status_date', 'from_date', 'to_date', 'created_by',  'created_date', 'updated_by', 'updated_date');
-//print_r($showtables);exit;
 foreach($_SESSION['field_secruity'] as $field_secruity){
 	$viewfiled_array[$field_secruity['configuiration_code']] = $field_secruity['field_name'];
 }
@@ -403,7 +393,6 @@ function fileUplodingDisplay(){
 							if($value['add_exter'] == 1){
 								$itemRowadd = "itemRowadd";
 							}
-							//print_r($value);
 							?>
 							<div class="form-group row <?php echo $itemRowadd;  ?>">
 								<div class="col-lg-1">
@@ -455,7 +444,7 @@ function fileUplodingDisplay(){
 										</span>
 									</span>
 								</div>
-								<div class="col-lg-1">	<?php //echo $value['insert_view_width']; ?>
+								<div class="col-lg-1">	<?php ?>
 
 									<select class="form-select js-example-basic-single"  name= "insert_view_width[]" aria-label="Insert View Width">
 
@@ -542,7 +531,6 @@ function fileUplodingDisplay(){
 							<?php $classwizard =''; if($role['wizard']==1){
 								$classwizard ='style="display: none;"';
 							}
-							//$wizard_data = json_decode($role['wizard_details'],1);
 							?>
 							<div <?php echo $classwizard; ?> id="wizard_display">
 								<?php if(count((array)$wizard_data) >0 ) { $z=1;

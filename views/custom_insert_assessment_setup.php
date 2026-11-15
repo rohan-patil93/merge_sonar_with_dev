@@ -41,7 +41,6 @@ foreach ($assessment_option_details as $option_data) {
 $who_can_see_id = json_decode($assessment_details['who_can_see_the_results'],1);
 $assessment_date = $assessment_details['assessment_start_date']." ".$assessment_details['assessment_start_time']." / ".$assessment_details['assessment_end_date']." ".$assessment_details['assessment_end_time'];
 $assessment_types = $employeeDetails['assessment_types'];
-//print_r($answer); exit;
 
 foreach ($qustion_types as $key => $value) {
  $question_types[$value['genc_detail_code']]  = $value['genc_detail_code'];
@@ -49,15 +48,12 @@ foreach ($qustion_types as $key => $value) {
 
 }
 if($row_id!='') {
-//print_r($assessment_qustion_details);
    foreach ($assessment_qustion_details as $qkey => $qvalue) {
       $qid = $qvalue['id'];
-      //print_r($answer[$qid]);
       $checkedstatus = array();
       foreach($answer[$qid] as $anslist){
          $checkedstatus[] = in_array($anslist,(array)$correctoption[$qid]) ? "checked" : "";
       }
-      // print_r($checkedstatus);
 
       $questions_list = array('title'=>$question_title[$qvalue['options_display_type']],'type'=>$qvalue['options_display_type'],'question'=>$qvalue['assessment_question'],'marks'=>$marks[$qid],'checkedstatus'=>$checkedstatus,'allow_multiple_selections'=>$qvalue['allow_multiple_selections'],'option_data'=>$answer[$qid],'rid'=>$row_id,'question_id'=>$qid);
       $questiondetails[$qid] = json_encode($questions_list,1);
@@ -66,15 +62,8 @@ if($row_id!='') {
    $_SESSION['questions_list'] = $questiondetails;
 }
 
-//echo "<pre>"; print_r($_SESSION['questions_list']); //exit;
 
 if(isset($_POST['create'])){
- /*  $assessment_date= $_POST['assessment_date'];
-   $assessment_start_date = fromDate(substr($assessment_date, 0, 10));
-   $assessment_start_time = substr($assessment_date, 11, 8);
-   $assessment_end_date = fromDate(substr($assessment_date, 22, 10));
-   $assessment_end_time = substr($assessment_date, 33, 8);
-*/
 	$assessment_start_date = date('Y-m-d',strtotime($_POST['assessment_start_date']));
    $assessment_start_time = "12:00:00";
    $assessment_end_date = date('Y-m-d',strtotime($_POST['assessment_end_date']));
@@ -90,7 +79,6 @@ if(isset($_POST['create'])){
 
 
    $survy_setup_array['company_id'] = $_SESSION['company_id'];
-  // echo '<pre>'; print_r($_POST); exit;
    foreach ($_POST['value_id'] as $vkey => $i) {
       $assessment_question='assessment_question'.$i;
       $options_display_type='options_display_type'.$i;
@@ -104,12 +92,8 @@ if(isset($_POST['create'])){
       foreach($oplist as $ops){
            $assessment_answer_option[] = $_POST[$assessment_question_option][$ops];
       }
-     // print_r($assessment_answer_option);
-     // $oplist = $_POST[$assessment_question_option][];
-      //$_POST[$assessment_correct_option] = $_POST[$assessment_correct_option]== 'on' ? '0' : '1';
 
 
-     // print_r($_POST[$assessment_correct_option]); //exit;
       $_POST[$allow_multiple_selections] = $_POST[$allow_multiple_selections]== 'on' ? '0' : '1';
       $qustion[]=array('rid'=>$_POST['rid'],'question_id'=>$_POST[$question_id],'assessment_question'=>$_POST[$assessment_question],'options_display_type'=>$_POST[$options_display_type],'allow_multiple_selections'=>$_POST[$allow_multiple_selections],'assessment_question_option'=>json_encode($_POST[$assessment_question_option],1),'assessment_correct_option'=>json_encode($assessment_answer_option,1),'assessment_marks'=>$_POST[$assessment_marks]);
 
@@ -117,20 +101,15 @@ if(isset($_POST['create'])){
    $data['main'] = $survy_setup_array;
    $data['qustion'] = $qustion;
 
- //echo '<pre>';  print_r($data); exit;
    if($_GET['Rid']==""){
      $url = API."?mode=createassessments&table_setup=".$table_list[0]."&table_questions=".$table_list[1]."&table_options=".$table_list[2]."&method=post";
   }
   else{
      $url = API."?mode=createassessments&table_setup=".$table_list[0]."&table_questions=".$table_list[1]."&table_options=".$table_list[2]."&method=post&rowid=".$row_id;
   }
-  //echo "<pre>".$row_id;
-  //print_r($data); exit;
   $retunn_assessment_id = file_post_contents($url,$data,'insert');
   $return_response=json_decode($retunn_assessment_id,1);
- // exit;
   header("location:index.php?option=COM_LIST_ASSESSMENT_SETUP&CAT=".$_GET['CAT']);
- // header("location:index.php?option=".$_GET['option']."&CAT=".$_GET['CAT']."&Rid=".$return_response);
 }
 
 ?>

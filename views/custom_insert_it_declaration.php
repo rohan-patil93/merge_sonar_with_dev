@@ -76,7 +76,7 @@
       }
   }
   if(isset($_POST['Add80cDeclaration'])) {
-      print_r($_POST);//exit;
+      print_r($_POST);
       $itd8amount = $_POST['itd8amount'];
       $itd8id = $_POST['itd8id'];
       $url = API."?mode=addorupdateitdeclaration80c&table=emp_it_declaration_80&method=post";
@@ -84,7 +84,7 @@
       header("location:index.php?option=COM_INSERT_IT_DECLARATION&assessment_year=".$_POST['assessment_year']."&version_no=".$_POST['version']);
   }
   if(isset($_POST['AddotherDeclaration'])) {
-         print_r($_POST);//exit;
+         print_r($_POST);
          $url = API."?mode=addorupdateitdeclarationotherincome&table=emp_it_declaration_other&method=post";
          $response = file_post_contents($url, $_POST, 'insert');
   }
@@ -227,7 +227,7 @@
 <form method="post" action="#">
 <?php
 $it_row = 1;
-foreach ($send as $sent) { //echo "<pre>";print_r($sent); //exit;
+foreach ($send as $sent) {
    $colspan = 3; $width_len = 65;
    if($viewmanager!=""){
       $colspan = 4;

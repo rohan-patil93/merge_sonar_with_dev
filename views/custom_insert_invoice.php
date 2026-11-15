@@ -1534,7 +1534,7 @@ function calculateTotal(){
                         <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
                             <?php
                             $stausresult = ViewStatusData();
-                            foreach ($commentss as  $lists) { //print_r($lists); ?>
+                            foreach ($commentss as  $lists) {?>
                             <div class="kt-timeline-v2__item">
 
                                 <div class="kt-timeline-v2__item-cricle">

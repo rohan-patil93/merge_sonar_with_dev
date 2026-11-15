@@ -17,10 +17,6 @@ $payments = $result['payments'];
 $credit_notes = $result['credit_notes'];
 $debit_notes = $result['debit_notes'];
 $all_this_date_range_payments = $result['all_this_date_range_payments_res'];
-//echo "<pre>";print_r($all_this_date_range_payments); echo "</pre>";
-//echo "<pre>"; print_r($result['debit_notes']); echo "</pre>";
-//echo "<pre>";print_r($result['credit_notes_sql']); echo "</pre>";
-// echo "<pre>";print_r($result['debit_notes_sql']); echo "</pre>";
 ?>
 <style>
   @media print {
@@ -212,7 +208,7 @@ function printReport(divId) {
                   $t_due += $st_due;
                   ?>
                 <tr>
-                  <td class="p-2"><?php echo $i; //print_r($rentinvoice); ?></td>
+                  <td class="p-2"><?php echo $i;?></td>
                   <td class="p-2 border-right-black"><?php echo $mothlable; ?>
                     <!-- <p class="d-block text-start mt-1 mb-0 " >
                           <span data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Opening Balance">O : <?php echo customeummarmonyformateifine($rentinvoice['ob_total_amount']); ?></span>

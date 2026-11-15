@@ -8,18 +8,13 @@
 	$status = $_GET['status'] != '' ? $_GET['status'] : '2';
 	$transaction_type = $_GET['transaction_type'] != '' ? $_GET['transaction_type'] : 'requisitions';
 	$list_url = API."?mode=togetbluckstatusdata&status=".$status."&transaction_type=".$transaction_type;
-	//echo $list_url; exit;
 	$list_data = callAPI($list_url);
 	$list_data = json_decode($list_data ,1);
-	//echo "<pre>"; print_r($list_data); exit;
 	$sum_count = 0;
 	foreach ($count as  $cc) {
 		$sum_count+= array_sum($cc);
 	}
-	//print_r($_SESSION); exit;
 
-	//echo $list_url; exit;
-	//echo "<pre>"; print_r($approval_data); exit;
 ?>
 <script type="text/javascript">
 	function ajaxview(rid,table) {
@@ -298,7 +293,7 @@
 								</div>
 								<div class="kt-todo__body">
 									<div class="kt-todo__items" data-type="task">
-										<?php $j=1; foreach ($list_data as $list){ //print_r($list); ?>
+										<?php $j=1; foreach ($list_data as $list){?>
 										<div class="kt-todo__item kt-todo__item--unread">
 											<div class="kt-todo__info">
 												<div class="kt-todo__actions">

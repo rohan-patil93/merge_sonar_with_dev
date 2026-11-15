@@ -1,6 +1,5 @@
 <?php $_SESSION['apply_js']['multiselest'] = 1;
 if (isset($_POST['submit'])) {
-    //echo "<pre>"; print_r($_POST); echo "</pre>";
     $request_arry = array();
     foreach ((array)$_POST['get_name'] as $key => $name) {
         $request_arry[$name] = $_POST['get_value'][$key];
@@ -24,9 +23,7 @@ if (isset($_POST['submit'])) {
         $response_arry[$name]['response_field'] = $_POST['get_response_details_name'][$key];
         $response_arry[$name]['application_table_field'] = $_POST['get_response_details_value'][$key];
         $response_arry[$name]['uniqueness'] = $_POST['uniqueness'][$key] =="Y"?"Y":"N";
-       // $response_arry[$name]['application_table_field'] = $_POST['application_table_field'][$key];
     }
-    //print_r($response_arry);
     $_POST['api_response_details'] = json_encode($response_arry);
     $table_name = 'api_masters';
     unset($_POST['get_name']);
@@ -62,11 +59,9 @@ if (isset($_POST['submit'])) {
         $response = file_post_contents($url, $_POST, 'update');
     }
     $res = json_decode($response, 1);
-  // echo "<pre>"; print_r($res); echo "</pre>";
     if($res['status'] == 'sucess'){
         if($res['LASTID'] == 0){
             $msgcode = 3001; //update
-           // $_SESSION['insert_msg'] = $msgcode;
         }else{
             $msgcode = 3000; //insert
             $_SESSION['insert_msg'] = $msgcode;
@@ -83,7 +78,6 @@ if (isset($_POST['submit'])) {
     <?php  }else{
             if(isset($_SESSION['error'][$res['error_no']])){
               $dis_err = explode(",", $res['other']);
-              //print_r($dis_labels); exit;
               foreach ($dis_err as $va) {
                 $dis_er [] = $dis_labels[$va];
               }
@@ -92,13 +86,7 @@ if (isset($_POST['submit'])) {
               $error_message = $res['message'];
             }
         }
-    // if($result11['LASTID'] != '0' AND $result11['LASTID']){
-    //      //header("location:index.php?option=COM_LIST_API_MASTERS"); exit;
-    // }
-    //echo $response;
-    // print_r($response);
 }
-// echo deocdeId("id:9");
 $rid = encodeId($_GET['Rid']);
 $rid = urldecode($rid);
 $rid = explode(':', $rid);
@@ -112,7 +100,6 @@ $display_attributes_list_attributes = $result['display_attributes_list_attribute
 if($display_attributes_list_attributes['list_attributes'] !=""){
     $list_attributes = json_decode($display_attributes_list_attributes['list_attributes'],1);
 }
-//echo "<pre>"; print_r($_POST); echo "</pre>";
 ?>
 <style type="text/css">
     /* Table styling */
@@ -389,7 +376,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                     <?php $sqo = 1; foreach(json_decode($details['api_response_details'], true) as $name => $value): ?>
                                         <tr>
                                             <td><input type="text" class="form-control responsedetailsrow" name="get_response_details_name[<?php echo $sqo; ?>]" value="<?php echo $name; ?>" id="get_response_details_name_<?php echo $sqo; ?>" <?php echo $details['api_type'] == 'S'?"readonly":""; ?> onkeypress="if (event.keyCode === 32) return false;" aria-label="Input"></td>
-                                            <!-- <td><input type="text" class="form-control" name="get_response_details_value[]" value="<?php //echo $value['value']; ?>" readonly aria-label="Get Response Details Value"></td> -->
+                                            <!-- <td><input type="text" class="form-control" name="get_response_details_value[]" value="<?php ?>" readonly aria-label="Get Response Details Value"></td> -->
                                             <td>
                                                 <select name="get_response_details_value[<?php echo $sqo; ?>]" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('<?php echo $sqo; ?>')" id="get_response_details_value_<?php echo $sqo; ?>" aria-label="Select">
                                                     <option value="" ><?= __('Select Any One') ?></option>

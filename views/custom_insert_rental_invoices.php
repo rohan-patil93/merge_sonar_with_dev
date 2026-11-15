@@ -9,7 +9,6 @@ if (isset($_POST['submitrentalinvoice'])) {
     $response1 = file_post_contents($url, $_POST, 'insert');
     $response1 = json_decode($response1, 1);
     $response = $response1['res'];
-   //echo "<pre>"; print_r($response); echo "</pre>";
     if($response['status'] == 'sucess'){
         if($response['LASTID'] == 0){
             $msgcode = 3001; //update
@@ -62,7 +61,6 @@ foreach($invoiceallItemsTaxData as $taxdata){
 $hsnSacCodesData = $result['hsn_and_sac_codes'];
 $userData = $result['application_users'];
 $dynamic_mapping_tables = $result['dynamic_mapping_tables'];
-//echo "<pre>"; print_r($taxdatawithitemdataid); echo "</pre>";
 
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
 if(in_array($invoiceData['current_status'], (array)$check_array) || ($invoiceData['current_status'] == ST_CALLBACK && $invoiceData['originator'] == $_SESSION['userid'])){
@@ -200,7 +198,6 @@ function cancelInvoices(transaction_table,transaction_id){
                 ?>
 
                 <?php
-               // $invoicetables = array('sales_invoices','purchase_invoices','supplier_bills','rental_invoices','utility_rental_invoices');
                 if($invoiceData['current_status'] == ST_APPROVED){  ?>
                     <a href="index.php?option=COM_INSERT_DEBIT_NOTES&ref_type=rental_invoices&ref_id=<?php echo $rid; ?>"  class=" cursor-pointer  btn btn-success" > <i class="icofont icofont-plus icon-white"></i> <?php echo __('Debit Note'); ?> </a>
                     <a href="index.php?option=COM_INSERT_CREDIT_NOTES&ref_type=rental_invoices&ref_id=<?php echo $rid; ?>" class="cursor-pointer  btn btn-danger" ><i class="icofont icofont-plus icon-white"></i> <?php echo __('Credit Note'); ?> </a>

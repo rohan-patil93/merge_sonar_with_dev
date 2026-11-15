@@ -9,21 +9,13 @@ if($_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m');
 }
 if($_GET['PAY_YEAR']==''){ $_GET['PAY_YEAR'] = date('Y');
 }
-	//echo date('Y-m-d H:i:s')."in<br>"; //exit;
  $approval_url = API."?mode=toGetblukProjectTimesheet&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&vendor_id=".$post_vendor."&emp_name=".$emp_name."&approval_manager=".$approval_manager;
-//echo $approval_url;
 $app_data = callAPI($approval_url);
 $app_data = json_decode($app_data,1);
-	//echo "<pre>"; print_r($app_data);echo "</pre>";//exit;
-//$lastapproval_url = API."?mode=toGetblukProjectTimesheetlastmonths&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR'];
 $getym = $_GET['PAY_YEAR']."-".$_GET['PAY_MONTH']."-01"; $lastdd = date("Y-m-d", strtotime('-1 months', strtotime($getym)));
 $lastapproval_url =  API."?mode=toGetblukProjectTimesheet&month=".date('m',strtotime($lastdd))."&year=".date('Y',strtotime($lastdd))."&vendor_id=".$post_vendor."&emp_name=".$emp_name;
-	//echo $lastapproval_url;
 $last_data = callAPI($lastapproval_url);
 $last_data = json_decode($last_data,1);
-	//echo date('Y-m-d H:i:s')."in2<br>";;// exit;
-	//echo "<pre>"; print_r($app_data); print_r($last_data); exit;
-//$team_count_url = API."?mode=togetteamcount";
 $team_count_url = API."?mode=togetteamcount&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR']."&vendor_id=".$post_vendor."&emp_name=".$emp_name."&approval_manager=".$approval_manager;
 $team_count_data = callAPI($team_count_url);
 $team_count_data = json_decode($team_count_data,1);
@@ -46,9 +38,7 @@ foreach((array)$team_count_data['data'] as $sbb ){
 	$todate = date('Y-m-d', strtotime('last day of this month', strtotime($from_date)));
 	$vurl = API."?mode=toretriveminhorsandweksanddayebasedondates&from_date=".$from_date."&to_date=".$todate;
 	$attdenace_data = callAPI($vurl);
-	//$attdenace_data = json_decode($attdenace_data,1);
 	$attdenace_data_location  = json_decode($attdenace_data,1);
-	//print_r($attdenace_data);
 $mulval=1;
 $attdenace_data = $attdenace_data_location[1];
 if($app_data['purchase_uom']=='PH'){
@@ -72,8 +62,6 @@ foreach((array)$status_progresss as $status_progress){
 	$statu_progress[$status_progress['status']]['name']=$status_progress['name'];
 	$statu_progress[$status_progress['status']]['action_label']=$status_progress['action_label'];
 }
-	//echo date('Y-m-d H:i:s')."in3<br>";
-	//print_r($team_count_data);
 $la_billable_amount = 0;
 	$la_budgeted_amount = 0;
 	$la_employee = 0;
@@ -132,7 +120,6 @@ foreach((array)$app_data as $apps){
 		$apv_list[] = $capps;
 		if($apps['pt_status_id']>ST_APPROVED1){
 			$btncheck = 1;
-			  		//echo $apps['employee_id'].$apps['current_status'];
 		}
 		$s_status_id = $apps['pt_status_id'];
 	}
@@ -159,34 +146,27 @@ $sba_count = count((array)$sba);
 $apv_count = count((array)$apv);
 $table = "project_timesheets";
 $stausresult = ViewStatusData();
-//krsort((array)$dismonth);
-//krsort((array)$disuitlize);
 $ttcount =  $apv_billable_amount+$sba_billable_amount;
 $vdata1["where"] = array('table_name'=> $table,'is_active'=>0);
 	$vdata = urlencode(json_encode($vdata1));
 	$vurl = API."?mode=gettabledetailswithconditions&table=status_progress&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$statusprogress = json_decode($configesponse,1);
-//print_r($statusprogress);
 foreach((array)$statusprogress as $statusprog){
 	$st_prog[$statusprog['status']] = $statusprog['action_label'];
 }
-//print_r($st_prog);
 $vdata1["where"] = array('is_active'=>0);
 	$vdata = urlencode(json_encode($vdata1));
 	$vurl = API."?mode=gettabledetailswithconditions&table=vendors&data=".$vdata;
 	$configesponse = callAPI($vurl);
 	$allvendors_list = json_decode($configesponse,1);
-//print_r($statusprogress);
 $allvendors = array();
 foreach((array)$allvendors_list as $allvendors_li){
 	$allvendors[$allvendors_li['id']] = $allvendors_li['display_name'];
 }
 $erp_url = API."?mode=togetempvmstransactionslist&month=".$_GET['PAY_MONTH']."&year=".$_GET['PAY_YEAR'];
-//echo $erp_url;
 $erp_data = callAPI($erp_url);
 $erp = json_decode($erp_data,1);
-//print_r($erp);
 ?>
 <script type="text/javascript">
 	function projecttimesheetsubmittohr(){
@@ -490,11 +470,9 @@ $erp = json_decode($erp_data,1);
   										$month = strtotime(date('Y').'-'.date('m').'-01 - 11 months');
   										$end = strtotime(date('Y').'-'.date('m').'-'.date('j').' + 0 months');
   										while($month <= $end){
-											//echo date("d-m-Y",$month);
   											$disss = date('M Y',$month);
   											$dis_year = date('Y',$month);
   											$dis_month = date('m',$month);
-		                                //echo $dis_year."_".$dis_month.",";
   											if($_GET['PAY_YEAR'] == $dis_year && $_GET['PAY_MONTH'] == $dis_month ){
   												$class = 'nav-link bg-primary me-6 active';
   											}else{
@@ -538,7 +516,7 @@ $erp = json_decode($erp_data,1);
 			<input type="hidden"  id="last_pre_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_hrs'=>'billable_hrs','billable_amount'=>'billable_amount')); ?>' >
                 </div>
             </div>
-		<?php //$total_vs_p = number_format((($ttcount/((array)$lmonth['billable_amount']+(array)$lmonth['nonbillable_amount']) )*100),0); ?>
+		<?php ?>
             <div class="row align-items-center m-b-15">
                 <div class="col-auto">
                     <p class="m-b-0 text-muted">Utilization</p>
@@ -846,7 +824,6 @@ if($sb['vrc_purchase_uom']=='PD'){
 																		$sb_bp = number_format((($sb['billable_amount']/($sb['budgeted_amount']*$mulval))*100),2);
 																		$sb['vrc_budgeted_amount'] = $sb['vrc_budgeted_amount']*$vrcmulval;
 																		$bbg_color= lableandbgcolor($sb_bp);
-																		//echo $sb['vrc_billable_amount']."___".$sb['vrc_budgeted_amount'];
 																		$vrcsb_bp = number_format((($sb['vrc_billable_amount']/$sb['vrc_budgeted_amount'])*100),2);
 														$vrcbbg_color= lableandbgcolor($vrcsb_bp);
 																		$llablecolor = lableandleave($k);
@@ -1007,7 +984,6 @@ if($sb['vrc_purchase_uom']=='PD'){
 													if(count((array)$sba)>0){
 													 foreach((array)$sba as $sb ){
 
-	//print_r($sb);
 														$mulval=1;
 														$attdenace_data = $attdenace_data_location[$sb['location_id']];
 if($sb['purchase_uom']=='PH'){
@@ -1031,7 +1007,6 @@ if($sb['vrc_purchase_uom']=='PD'){
 }
 														$sb_bp = number_format((($sb['billable_amount']/($sb['budgeted_amount']*$mulval))*100),2);
 														$sb['vrc_budgeted_amount'] = $sb['vrc_budgeted_amount']*$vrcmulval;
-														//echo $sb['vrc_budgeted_amount']."----".$sb['vrc_billable_amount'];
 $bbg_color= lableandbgcolor($sb_bp);
 $vrcsb_bp = number_format((($sb['vrc_billable_amount']/$sb['vrc_budgeted_amount'])*100),2);
 $vrcbbg_color= lableandbgcolor($vrcsb_bp);
@@ -1185,8 +1160,6 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 												<?php $k=3;
 												foreach((array)$team_count_data_sb as $sb ){
 													if(!in_array($sb['id'],(array)$employees)){
-														//print_r($sb);
-														//$sb['budgeted_amount']= "65320";
 														$mulval=1;
 														$attdenace_data = $attdenace_data_location[$sb['location_id']];
 														if($sb['purchase_uom']=='PH'){
@@ -1233,7 +1206,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 																<?php } ?>
 															</td>
 															<td class="pl-0">
-																<a href="index.php?option=COM_VIEW_EMP_TIMESHEETS&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>&EMP=<?php echo $sb['id']; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-sm"><?php echo $sb['display_name']; ?></a> <?php //echo $sb['emp_billable']; ?>
+																<a href="index.php?option=COM_VIEW_EMP_TIMESHEETS&PAY_YEAR=<?php echo $_GET['PAY_YEAR']; ?>&PAY_MONTH=<?php echo $_GET['PAY_MONTH']; ?>&EMP=<?php echo $sb['id']; ?>" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-sm"><?php echo $sb['display_name']; ?></a> <?php ?>
 																<div>
 <a class="text-muted font-weight-bold text-hover-primary" href="#"><?php echo $_SESSION['users'][$sb['approval_manager']]; ?></a>							</br>										<a class="text-muted font-weight-bold text-hover-primary" href="#"><?php echo $sb['job_title']; ?></a>
 <?php echo custombuttonserp($erp,$sb['id']); ?>
@@ -1265,7 +1238,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 															</td>
 												<!--  <td class="text-right">
 													<span class="text-dark-75 font-weight-500 d-block font-size-sm">
-														<?php //echo customeummarmonyformate('65320'); ?>
+														<?php ?>
 													</span>
 
 												</td> -->

@@ -9,8 +9,6 @@ $priority = $result['priority'];
 $application_tickets = $result['application_tickets'];
 $stausresult = ViewStatusData();
 $status = array("0"=>"In Progress","1"=>"In Working","40"=>"Cancel","199"=>"Completed");
-//echo "<pre>"; print_r($result); echo "</pre>";
-//phpinfo();
 ?>
 <script type="text/javascript">
 function insertApplicationTickets(){

@@ -18,8 +18,6 @@ if(isset($_POST['submitesopplanse'])){
     			$temp = explode(".", basename($_FILES['attachment']['name'][$rowid][$key]));
 				$Filename=  "file_".time()."_".uniqid();
 				$newfilename = $Filename.'.' .end($temp);
-				// $_POST['all_attachment'][$rowid][] = $newfilename;
-				// $_POST['all_attachment_name'][$rowid][] = $_POST['attachment_name'][$rowid][$key];
 				$attachedfiles = array();
 				$attachedfiles['attachment'] = $newfilename;
 				$attachedfiles['attachment_name'] = $_POST['attachment_name'][$rowid][$key];
@@ -28,18 +26,15 @@ if(isset($_POST['submitesopplanse'])){
     		}
     	}
     }
-   //echo "<pre>";print_r($_POST); print_r($_FILES); echo "</pre>";
   	$url = API."?mode=insertpropertyowners&method=post";
    	$response1 = file_post_contents($url, $_POST, 'insert');
    	$res = json_decode($response1,1);
-    //echo "<pre>"; print_r($res); echo "</pre>";
     $response = $res['res'];
     if($response['status'] == 'sucess'){
         if($response['LASTID'] == 0){
             $msgcode = 3001; //update
         }else{
             $msgcode = 3000; //insert
-           // header("location:index?option=COM_INSERT_PROPERTY_OWNERS&Rid=");
         }
             ?>
         <script type="text/javascript">
@@ -50,7 +45,6 @@ if(isset($_POST['submitesopplanse'])){
             }
         </script>
         <?php
-        // header("location:index?option=COM_LIST_ESOP_PLANS");
 
     }else{
         //($response['status'] == 'fail'){
@@ -67,7 +61,6 @@ if(isset($_POST['submitesopplanse'])){
 }
 
 
-//echo "<pre>";print_r($_POST); echo "</pre>";
 $rid =  encodeId($_GET['Rid']);
 $rid = urldecode($rid);
 $rid = explode(':', $rid);
@@ -94,7 +87,6 @@ foreach($property_types as $pt){
 		$propertychildtypes[$pt['parent_id']][] = $pt;
 	}
 }
-//echo "<pre>"; print_r($result['property_owner_details']); echo "</pre>";
 ?>
 <script type="text/javascript">
 	function getPropertParentType(typeid,rowid){
@@ -356,7 +348,7 @@ function addMoreAttachment(rowid){
                         <div class="accordion-desc p-0 card_id_<?php echo $i; ?>">
 							<div class="row" >
 								<div class="card" >
-									<?php //print_r($property_owner_details); ?>
+									<?php ?>
 									<input type="hidden" name="property_owner_detail_id[<?php echo $i; ?>]" value="<?php echo $pod['id'];?>">
 									<div class="card-body">
 										<div class="row">
@@ -496,7 +488,6 @@ function addMoreAttachment(rowid){
 									            <div id="addmorediv_<?php echo $i; ?>">
 									             <?php
 									             	$property_owner_detail_areas_array = $property_owner_detail_areas_ary[$pod['id']];
-                               // echo "<pre>"; print_r($property_owner_detail_areas_array); echo "</pre>";
 									                if(count((array)$property_owner_detail_areas_array) == 0){
 									                    $property_owner_detail_areas_array[] = array();
 									                }

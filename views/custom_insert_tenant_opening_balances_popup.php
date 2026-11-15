@@ -22,7 +22,6 @@ foreach($podareas as $podarea){
 	$property_owner_detail_areas[$podarea['id']] = $podarea;
 }
 $pownerareids =json_decode($property_tenant_details['property_owner_area_ids'],1);
-//echo "<pre>"; print_r($rental_invoices); print_r($rentalinvoiceitems); echo "</pre>";
 ?>
 <script type="text/javascript">
 function submitTenantOpeningbalance(){

@@ -72,7 +72,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                             </ul>
                         </div>
                         <div class="tab-content tabs">
-                            <?php $k=1;//foreach($timesheet as $month=>$sheet){
+                            <?php $k=1;
                                 $month_start = date('Y-m-01');
                                 $mont_last = date('Y-m-t');
                                 $last_start = date("Y-m-d", strtotime('-6 month', strtotime($month_start)));

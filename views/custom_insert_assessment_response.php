@@ -14,7 +14,6 @@ $vurl = API."?mode=getsharedassessmentdetails&company_id=".$company_id."&emp_id=
 $configesponse = callAPI($vurl);
 $assessmentData = json_decode($configesponse,1);
 $assessment_details = $assessmentData['assessment_details'];
-//print_r($assessment_details); exit;
 $assessment_response_details = $assessmentData['assessment_reponse_details'];
 $assessment_start_date = $assessment_details['assessment_start_date'];
 $assessment_end_date = $assessment_details['assessment_end_date'];
@@ -25,8 +24,6 @@ $allocated_time = $allocated_time * 60;
 $display_questions = $assessmentData['questions'];
 $display_tag = $category[$assessment_details['category']];
 
-//$duration = timediff($assessment_start_date,$assessment_end_date,$assessment_start_time,$assessment_end_time);
-//print_r($display_questions); exit;
 $qustion_types = $assessmentData['qustion_types'];
 $total_q = count((array)$display_questions);
 $_GET['Qid']==''? ($questionid=1) : ($questionid=$_GET['Qid']);
@@ -58,7 +55,6 @@ if(isset($_POST['submit'])){
   $commondata = array('duration_taken'=>$duration_taken,'partial_complete'=>$partial_complete,'category'=>$_POST['category'],'employee_id'=>$_POST['emp_id'],'assessment_id'=>$_POST['assessment_id'],'response_start_date'=>date('Y-m-d'),'response_start_time'=>$_SESSION['assesment_response_start_time'],'response_end_date'=>date('Y-m-d'),'response_end_time'=>date('H:i:s'),'created_date'=>date('Y-m-d'),'created_by'=>$_SESSION['user_id'],'is_active'=>'0','company_id'=>$_SESSION['company_id']);
   $commondata['current_status'] = ST_COMPLETE;
   $data['assessment_response'] = $commondata;
-  //print_r($commondata); exit;
   unset($commondata['duration_taken']);
   unset($commondata['partial_complete']);
   unset($commondata['category']);
@@ -68,8 +64,6 @@ $total_score = 0;
    $commondata['question_id'] = $_POST['queid'.$q_no];
    $commondata['response_option']=json_encode($ans_data,1);
    $display_questions['response_option']=json_encode($ans_data,1);
-  // echo $_POST['queid'.$q_no];
-   //print_r($display_questions[$q_no]['assessment_correct_option']);
     $correctoptionvalue= $display_questions[$q_no]['assessment_correct_option'];
     $correctoptionmarks= $display_questions[$q_no]['assessment_marks'];
 
@@ -81,7 +75,6 @@ $total_score = 0;
    $data['assessment_response_details'][] = $commondata;
  }
  $url = API."?mode=saveassessmentreponses&table=assessment_responses&method=post";
- //echo "<pre>"; print_r($data['assessment_response']); exit;
  $retunn_inserted_qid = file_post_contents($url,$data,'insert');
  header("location:index.php?option=COM_LIST_EMP_ASSESSMENT&CAT=".$_GET['CAT']);
 }

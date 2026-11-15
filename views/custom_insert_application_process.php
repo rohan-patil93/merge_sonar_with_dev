@@ -58,7 +58,6 @@ if (isset($_POST['submit'])) {
     $url = API . "?mode=insertmoduleprocess&method=post";
     $response = file_post_contents($url, $postData, 'insert');
     $response = json_decode($response, 1);
-    //echo "<pre>"; print_r($response); echo "</pre>";
     ?>
     <script type="text/javascript">
         window.addEventListener("load", function() {

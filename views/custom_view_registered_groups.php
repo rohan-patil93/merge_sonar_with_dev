@@ -125,7 +125,7 @@ function AddUserPlans(company_subscr_id){
                                         <table class="table table-hover m-b-0">
                                             <tbody>
                                                 <?php
-                                                foreach($csplres as $csplress){  //print_r($csplress);?>
+                                                foreach($csplres as $csplress){?>
                                                 <tr>
                                                     <th scope="col" class="min-w-400px"><?= __('Invoice No.'); ?> <?php echo $licensecode[$csplress['csp_id']]; ?> <?= __('User License'); ?> :
                                                         <a href="#" class="fw-bolder text-gray-800 text-hover-primary me-1"><?php echo $csplress['added_license_users']; ?></a> <?= __('Price'); ?> : <?php echo $csplress['price']; ?>

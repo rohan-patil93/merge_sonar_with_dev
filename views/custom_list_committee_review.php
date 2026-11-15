@@ -1,6 +1,4 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
 $role_current_status = array(
 	'CSR_COMMITTEE_GROUP' => '101',
 	'CSR_COMMITTEE_MEMBER' => '102',
@@ -9,13 +7,11 @@ $role_current_status = array(
 
 $table_name = 'csr_proposal_data';
 $url = API . "?mode=getcsrdata&method=get&table=" . $table_name . "&id=" . $_SESSION['userid'] . "&current_status=" . $role_current_status[$_SESSION['working_role_short_code']];
-// echo $url; exit('test');
 $progress_var =  gettableStatusArray($table_name);
 $csr_response = callAPI($url);
 $response = json_decode($csr_response, 1);
 $pending_approvals_arr = $approved_by_me_arr = $approval_inprogress_arr = $approved_arr = array();
 
-// echo $response['pending_approval_query'];
 $pending_approvals_arr = $response['pending_approvals'];
 $approved_by_me_arr = $response['approved_by_me'];
 $approval_inprogress_arr = $response['approval_inprogress'];
@@ -26,42 +22,22 @@ $tracking_pending_arr = $response['tracking_pending'];
 $tracking_inprogress_arr = $response['tracking_inprogress'];
 $tracking_completed_arr = $response['tracking_completed'];
 $tracking_percentage_arr = $response['tracking_percentage'];
-// echo '<pre>';
-// print_r($tracking_percentage_arr);
-// echo '</pre>';
 
-// echo " competed rows: </br>";
-// print_r($tracking_completed_arr);
 
 $total_records = $response['total_records'];
 
 
-// $table_name1 = 'application_users';
-// $vdata1['order'] = "id ASC";
-// // $vdata1['limit'] = "0,5";
-// $vdata1["where"] = array('company_id' => $_SESSION['company_id'], 'is_active' => '0');
-// $vdata = urlencode(json_encode($vdata1));
-// $vurl = API . "?mode=gettabledetailswithconditions&table=" . $table_name1 . "&data=" . $vdata;
-// $users_response = callAPI($vurl);
-// $users_response = json_decode($users_response, 1);
-// print_r($users_response);
-// $users_array = array();
-// foreach ($users_response as $row) {
-// 	$users_array[$row['id']] = $row['display_name'];
-// }
 $length = count($total_records) ?? 0;
 $completedCount = count($tracking_completed_arr) ?? 0;
 $approvedCount = count($approved_arr) ?? 0;
 $activeCount = count($pending_approvals_arr) ?? 0;
 $progressCount = count($approval_inprogress_arr) ?? 0;
-// $trackingcount = $approvedCount - $completedCount;
 $trackingcount = count($tracking_inprogress_arr) ?? 0;
 
 
 // Initialize counters
 $total_amount = 0;
 foreach ($total_records as $row) {
-	// echo 'amount: '.$row['total_budget_grand_total'];
 	$total_amount += $row['total_budget_grand_total'];
 }
 $approved_amount = 0;
@@ -117,7 +93,6 @@ foreach ($tracking_inprogress_arr as $row) {
 
 		$csr_amount_unit = $total_amount_val['label'];
 
-		// $tracking_amount = $approved_amount - $completed_amount;
 
 		?>
 
@@ -641,7 +616,6 @@ foreach ($tracking_inprogress_arr as $row) {
 									<tbody>
 										<?php if (!empty($tracking_inprogress_arr)){
 											foreach ($tracking_inprogress_arr as $key => $row) {
-												// $response1 = getTracckingPerentage($row['id']);
 												$percentage = $tracking_percentage_arr[$row['id']] ?? 0;
 
 

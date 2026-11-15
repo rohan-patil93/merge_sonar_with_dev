@@ -9,7 +9,6 @@ if(isset($_POST['submitbellcurves'])){
     if($response['status'] == 'sucess'){
         if($response['LASTID'] == 0){
             $msgcode = 3001; //update
-            //$_SESSION['insert_msg'] = $msgcode;
         }else{
             $msgcode = 3000; //insert
             $_SESSION['insert_msg'] = $msgcode;
@@ -49,7 +48,6 @@ $result = json_decode($apicallss,1);
 $appraisal_rating_slabs = $result['appraisal_rating_slabs'];
 $appraisal_bell_curves = $result['appraisal_bell_curves'];
 $slabsval = json_decode($appraisal_bell_curves['slabs'],1);
-//echo "<pre>"; print_r($slabsval); echo "</pre>";
 ?>
 <script type="text/javascript">
 	function getTotalBellCurve(){
