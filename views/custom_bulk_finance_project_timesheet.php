@@ -723,7 +723,7 @@ $erp = json_decode($erp_data,1);
 												
 												<th scope="col" class=" min-w-50px text-center">
 													<div class="checkbox-fade fade-in-primary" name="approval_all_check_box">
-														<label class="checkbox checkbox-success">
+														<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="checkbox checkbox-success">
 															<input type="checkbox" checked id="" disabled class="">
 															<span class="cr">
 																<i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -837,7 +837,7 @@ $llablecolor = lableandleave($k);
 												
 												<td class="text-center pr-0">
 													<div class="checkbox-fade fade-in-primary" name="individual_approvalcheckbox">
-														<label class="checkbox checkbox-success">
+														<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="checkbox checkbox-success">
 															<input type="checkbox" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>">
 															<span class="cr">
 															  <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -919,7 +919,7 @@ $llablecolor = lableandleave($k);
 												
 												<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary" name="approval_pending_all_check_box">
-															<label class="checkbox checkbox-success">
+															<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="checkbox checkbox-success">
 																<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()">
 																<span class="cr">
 																	 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
@@ -1045,7 +1045,7 @@ $llablecolor = lableandleave($k);
 												
 												<td class="text-center pr-0">
 													<div class="checkbox-fade fade-in-primary" name="individual_approval_pending_checkbox">
-														<label class="checkbox checkbox-success">
+														<label aria-label="<?= htmlspecialchars(__('Select box'), ENT_QUOTES, 'UTF-8'); ?>" class="checkbox checkbox-success">
 															<input type="checkbox" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>">
 															<span class="cr">
 																<i class="cr-icon icofont icofont-ui-check txt-primary"></i>
