@@ -945,7 +945,7 @@ if($list['current_status'] == ST_APPROVED AND ($table_name =="supplier_bills" OR
                 
                 <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
@@ -1000,7 +1000,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
@@ -1054,7 +1054,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
@@ -1110,7 +1110,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$activeres1['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$activeres1['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$activeres1['originator']]); ?></span>
                   <?php } ?>
@@ -1170,7 +1170,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
@@ -1212,7 +1212,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
@@ -1253,7 +1253,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
@@ -1294,7 +1294,7 @@ if($activeres1['current_status'] == ST_APPROVED AND ($table_name =="supplier_bil
                                     </div> -->
                                     <div class="align-middle">
                   <?php if($_SESSION['user_image'][$logdetails['originator']]!=""){?>
-                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" onerror="this.src='uploads/all/no-image.jpg';" alt="" >
+                    <img src="uploads/all/<?php echo $_SESSION['user_image'][$logdetails['originator']]; ?>"   class="img-radius img-40 align-top" data-onerror-src="uploads/all/no-image.jpg" alt="" >
                   <?php }else{ ?>
                     <span class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$logdetails['originator']]); ?></span>
                   <?php } ?>
