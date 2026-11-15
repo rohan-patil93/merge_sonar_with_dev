@@ -245,7 +245,7 @@ $countriesres   = json_decode($countriesres,1);
 								<input type="file" name="image1" id="image1" accept=".png, .jpg, .jpeg"  onchange="loadFile(event,this.id)">
 								
 								<input type="hidden" name="hidimage" value="<?php echo $application_users['user_photo']; ?>">
-								<img src="<?php echo $File_Uploads_Path.$application_users['display_logo'] ; ?>" id="outputimage1" width="200" onerror="this.src='uploads/all/no-image.jpg';" alt="" />
+								<img src="<?php echo $File_Uploads_Path.$application_users['display_logo'] ; ?>" id="outputimage1" width="200" data-onerror-src="uploads/all/no-image.jpg" alt="" />
 							</div>
 
 							<div class="image-input image-input-outline" id="kt_image_61">
@@ -278,7 +278,7 @@ $countriesres   = json_decode($countriesres,1);
 								</label>
 								<input type="file" name="image" id="image" accept=".png, .jpg, .jpeg"  onchange="loadFile(event,this.id)">
 								<input type="hidden" name="hidimage1" value="<?php echo $application_users['user_photo']; ?>">
-								<img src="<?php echo $File_Uploads_Path.$application_users['user_photo'] ; ?>" id="outputimage" width="200" onerror="this.src='uploads/all/no-image.jpg';" alt="" />
+								<img src="<?php echo $File_Uploads_Path.$application_users['user_photo'] ; ?>" id="outputimage" width="200" data-onerror-src="uploads/all/no-image.jpg" alt="" />
 							</div>
 
 							<div class="image-input image-input-outline" id="kt_image_61">
