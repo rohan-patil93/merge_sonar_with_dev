@@ -72,7 +72,7 @@ $today = date('Y-m-d');
 					<td>
 						<div class="align-middle">
 							<?php if($image != ""){ ?>
-								<img src="uploads/all/<?php echo $image; ?>" class="img-radius img-40 align-top m-r-15" onerror="this.src='uploads/all/no-image.jpg';">
+								<img alt="" src="uploads/all/<?php echo $image; ?>" class="img-radius img-40 align-top m-r-15" onerror="this.src='uploads/all/no-image.jpg';">
 							<?php } else { ?>
 								<span alt="user image" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($display_name); ?></span>
 							<?php } ?>
