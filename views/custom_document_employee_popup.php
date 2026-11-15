@@ -109,7 +109,7 @@ if(isset($_REQUEST['month'])){
 					<td class="p-2">
 						<div class="align-middle">
 							<?php if($row['image']!="") {?>
-								<img alt="" src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" onerror="this.src='uploads/all/no-image.jpg';">
+								<img alt="" src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" data-onerror-src="uploads/all/no-image.jpg">
 							<?php } else { ?>
 								<span  alt="<?= __('user image') ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
 							<?php } ?>
