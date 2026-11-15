@@ -176,7 +176,7 @@ if ($userData['user_photo'] != '') {
 
               <div id="topheaderoptions" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2"><?= __('Toggle Top Header Options') ?></label>
+                  <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Top Header Options') ?></span>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showinvoiceno" name="showInvoiceNo" <?php echo $logoOptions['showInvoiceNo'] ? 'checked' : ''; ?> title="Showinvoiceno" aria-label="Showinvoiceno">
                     <label class="form-check-label" for="showinvoiceno"><?= __('Show Invoice No.') ?></label>
@@ -863,7 +863,7 @@ if ($userData['user_photo'] != '') {
               <!-- Visibility Options -->
               <div id="addressVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2"><?= __('Toggle Header') ?></label>
+                  <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Header') ?></span>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showAddress" <?php echo $headerOptions['showAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showAddress"><?= __('Show Header') ?></label>
@@ -1049,7 +1049,7 @@ if ($userData['user_photo'] != '') {
               <!-- Visibility Options -->
               <div id="tableVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2"><?= __('Toggle Table') ?></label>
+                  <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Table') ?></span>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showTable" readonly disabled checked title="Input" aria-label="Input">
                     <label class="form-check-label" for="showTable"><?= __('Show Table') ?></label>
@@ -1071,49 +1071,49 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Table Header color -->
                   <div class="mb-1">
-                    <label class="form-label"><?= __('Table Header Text Color') ?></label>
+                    <span class="form-label d-inline-block fw-bold"><?= __('Table Header Text Color') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableHeaderColor" value="<?php echo $tableOptions['headerTextColor'] ?? '#000'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Body Background -->
                   <div class="mb-1">
-                    <label class="form-label"><?= __('Table Body Background') ?></label>
+                    <span class="form-label d-inline-block fw-bold"><?= __('Table Body Background') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableBodybgColor" value="<?php echo $tableOptions['bodyBgColor'] ?? '#ffffff'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table body color -->
                   <div class="mb-1">
-                    <label class="form-label"><?= __('Table body Text Color') ?></label>
+                    <span class="form-label d-inline-block fw-bold"><?= __('Table body Text Color') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableBodyColor" value="<?php echo $bodyTextColor['bodyBgColor'] ?? '#000'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Footer Background -->
                   <div class="mb-1">
-                    <label class="form-label"><?= __('Table Footer Background') ?></label>
+                    <span class="form-label d-inline-block fw-bold"><?= __('Table Footer Background') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableFooterbgColor" value="<?php echo $bodyTextColor['footerBgColor'] ?? '#f8f9fa'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Table Header color -->
                   <div class="mb-1">
-                    <label class="form-label"><?= __('Table Footer Text Color') ?></label>
+                    <span class="form-label d-inline-block fw-bold"><?= __('Table Footer Text Color') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
                       id="tableFooterColor" value="<?php echo $bodyTextColor['footerTextColor'] ?? '#000000'; ?>" title="Input" aria-label="Input">
                   </div>
 
                   <!-- Row Height -->
                   <div class="mb-1">
-                    <label class="form-label"><?= __('Table Row Height') ?></label>
+                    <span class="form-label d-inline-block fw-bold"><?= __('Table Row Height') ?></span>
                     <input type="number" class="form-control" id="rowHeight" min="20"
                       placeholder="Enter Row Height (px)" value="<?php echo $bodyTextColor['rowHeight'] ?? '40'; ?>" title="Enter Row Height (px)" aria-label="Enter Row Height (px)">
                   </div>
 
                   <!-- Heading Height -->
                   <div class="mb-1">
-                    <label class="form-label"><?= __('Table Heading Height') ?></label>
+                    <span class="form-label d-inline-block fw-bold"><?= __('Table Heading Height') ?></span>
                     <input type="number" class="form-control" id="headingHeight" min="20"
                       placeholder="Enter Heading Height (px)"
                       value="<?php echo $bodyTextColor['headingHeight'] ?? '40'; ?>" title="Enter Heading Height (px)" aria-label="Enter Heading Height (px)">
@@ -1121,7 +1121,7 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Font Size -->
                   <div class="mb-1">
-                    <label class="form-label"><?= __('Table Font Size') ?></label>
+                    <span class="form-label d-inline-block fw-bold"><?= __('Table Font Size') ?></span>
                     <input type="number" class="form-control" id="fontSize" min="8" max="36"
                       placeholder="Enter Font Size (px)" value="<?php echo $bodyTextColor['fontSize'] ?? '16'; ?>" title="Enter Font Size (px)" aria-label="Enter Font Size (px)">
                   </div>
@@ -1131,7 +1131,7 @@ if ($userData['user_photo'] != '') {
               <!-- Cols Visibility Options -->
               <div id="colsVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2"><?= __('Toggle Columns') ?></label>
+                  <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Columns') ?></span>
 
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showimagecol" <?php echo $tableOptions['showColumns']['img'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
@@ -1832,7 +1832,7 @@ if ($userData['user_photo'] != '') {
               ?>
               <div id="page_footerVisibility" class="dynamic-options">
                 <div class="card card-body mt-2">
-                  <label class="form-label mb-2"><?= __('Toggle Page Footer') ?></label>
+                  <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Page Footer') ?></span>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="showpagefooter" <?php echo $footerOptions['showFooter'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
                     <label class="form-check-label" for="showpagefooter"><?= __('Show Page Footer') ?></label>
