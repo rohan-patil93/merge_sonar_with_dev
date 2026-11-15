@@ -41,7 +41,7 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
                 <div class="row">
                     <!-- Employee -->
                     <div class="form-group col-md-4">
-                        <label><?= __('Employee') ?> <span style="color:red;">*</span></label>
+                        <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Employee') ?> <span style="color:red;">*</span></span>
                         <select aria-label="<?= htmlspecialchars(__('Employee id'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="employee_id" name="employee_id">
                             <option value="0"><?= __('Select Employee') ?></option>
                             <?php foreach ($employees as $row): ?>
@@ -54,13 +54,13 @@ if (isset($_GET['employee_id']) || isset($_GET['month'])) {
 
                     <!-- Month -->
                     <div class="form-group col-md-3">
-                        <label><?= __('Month') ?> <span style="color:red;">*</span></label>
+                        <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Month') ?> <span style="color:red;">*</span></span>
                         <input aria-label="<?= htmlspecialchars(__('Month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" id="report_month" name="month" value="<?= htmlspecialchars($report_month, ENT_QUOTES); ?>">
                     </div>
 
                     <!-- Search -->
                     <div class="form-group col-md-2">
-                        <label>&nbsp;</label>
+                        <span class="d-inline-block fw-bold" style="margin-bottom:5px">&nbsp;</span>
                         <button type="submit" class="btn btn-primary form-control" id="searchBtn">
                             <?= __('Search') ?>
                         </button>
