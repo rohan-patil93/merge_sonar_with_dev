@@ -593,7 +593,7 @@ $stausresult = ViewStatusData();
 							</select>
 						</div> -->
 								<div class="form-group col-lg-12">
-									<label class="form-label">Process Name</label>
+									<span class="form-label d-inline-block fw-bold">Process Name</span>
 									<select class="form-select js-example-basic-single process_name" name="process_name"
 										id="process_name" onchange="selectProcessName(this.value)" aria-label="Process Name">
 										<option value="0">Select Any One</option>
@@ -606,7 +606,7 @@ $stausresult = ViewStatusData();
 								</div>
 								<div class="form-group col-lg-12 document_type_block w-full"
 									style="<?php echo ($prefillProcess == 'document_management') ? '' : 'display:none;'; ?>">
-									<label class="form-label">Document Type</label>
+									<span class="form-label d-inline-block fw-bold">Document Type</span>
 									<select class="form-select js-example-basic-single" name="document_type_id"
 										id="document_type_id" aria-label="Document Type Id">
 										<!-- <option value="">Select Document Type</option> -->
@@ -626,12 +626,12 @@ $stausresult = ViewStatusData();
 									</select>
 								</div>
 								<div class="form-group col-lg-12">
-									<label class="form-label">Description</label>
+									<span class="form-label d-inline-block fw-bold">Description</span>
 									<textarea class="form-control "
 										name="process_description" aria-label="Process Description"><?php echo $workflowconfiguration['process_description']; ?></textarea>
 								</div>
 								<div class="form-group col-lg-12">
-									<label class="form-label">Workflow Trigger Status</label>
+									<span class="form-label d-inline-block fw-bold">Workflow Trigger Status</span>
 									<select class="form-select js-example-basic-single" name="workflow_trigger_status" aria-label="Workflow Trigger Status">
 										<?php foreach ($stausresult as $statukey => $statusvalue) { ?>
 											<option value="<?php echo $statukey; ?>" <?php echo $workflowconfiguration['workflow_trigger_status'] == $statukey ? "selected" : "" ?>><?php echo $statusvalue['name']; ?></option>
@@ -660,7 +660,7 @@ $stausresult = ViewStatusData();
 									</div>
 								</div>
 								<div class="form-group col-lg-12">
-									<label class="form-label">Workflow Level</label>
+									<span class="form-label d-inline-block fw-bold">Workflow Level</span>
 									<select class="form-select js-example-basic-single" name="workflow_level"
 										id="select_workflow_level" onchange="selectWorkflowLevel('remove')" aria-label="Workflow Level">
 										<?php for ($m = 0; $m <= 30; $m++) { ?>
@@ -771,7 +771,7 @@ $stausresult = ViewStatusData();
 								$j = 1;
 								foreach ($criteria as $criterias) { ?>
 									<div class="form-group col-lg-4" id="deletdiv_<?php echo $j; ?>">
-										<label class="form-label">Criteria-<?php echo $j; ?> </label>
+										<span class="form-label d-inline-block fw-bold">Criteria-<?php echo $j; ?> </span>
 										<span class="float-right"><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Deletecriteria'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-close text-danger f-12"
 												onclick="deletecriteria('deletdiv_<?php echo $j; ?>')"></i></span>
 										<div <?php echo $criterias != "-1" ? 'style="pointer-events: none; opacity: 0.6;"' : ""; ?>>
@@ -857,7 +857,7 @@ $stausresult = ViewStatusData();
 									<tr align="center" style="height: 75px;">
 										<td>
 											<?php //print_r($sublist); ?>
-											<label class="form-label label label-lg label-primary"
+											<span class="form-label label label-lg label-primary d-inline-block fw-bold"
 												style="width: -webkit-fill-available;"><span
 													class="f-18"><?php echo $roleprecesstypearray[$approvalprocess['approval_type']]; ?></span>
 												<span class="label label-lg label-primary d-inline-block"
@@ -865,7 +865,7 @@ $stausresult = ViewStatusData();
 														class="f-18"><?php echo $roleprecesstypearray[$approvalprocess['approval_type']]; ?></span>
 													<span
 														class="d-block tetx-dark mt-1"><?php echo $sublist[$approvalprocess['sub_approve_type']]; ?></span>
-											</label>L<?php echo $i; ?>
+											</span>L<?php echo $i; ?>
 											</span>L<?php echo $i; ?>
 											<?php if ($i < $workflowconfiguration['workflow_level']) { ?>
 												<i class="ti-arrow-down d-block m-0"></i>
@@ -1103,27 +1103,27 @@ $stausresult = ViewStatusData();
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
-									<label>Reject</label>
+									<span class="d-inline-block fw-bold" style="margin-bottom:5px">Reject</span>
 									<textarea class="form-control "
 										name="reject_message" aria-label="Reject Message"><?php echo $transaction_message_res['reject_message']; ?></textarea>
 								</div>
 								<div class="form-group">
-									<label>Send Back</label>
+									<span class="d-inline-block fw-bold" style="margin-bottom:5px">Send Back</span>
 									<textarea class="form-control "
 										name="sendback_message" aria-label="Sendback Message"><?php echo $transaction_message_res['sendback_message']; ?></textarea>
 								</div>
 								<div class="form-group">
-									<label>Completed Workflow</label>
+									<span class="d-inline-block fw-bold" style="margin-bottom:5px">Completed Workflow</span>
 									<textarea class="form-control "
 										name="completed_workflow_message" aria-label="Completed Workflow Message"><?php echo $transaction_message_res['completed_workflow_message']; ?></textarea>
 								</div>
 								<div class="form-group">
-									<label>Call Back</label>
+									<span class="d-inline-block fw-bold" style="margin-bottom:5px">Call Back</span>
 									<textarea class="form-control "
 										name="callback" aria-label="Callback"><?php echo $transaction_message_res['callback']; ?></textarea>
 								</div>
 								<div class="form-group ">
-									<label>Information</label>
+									<span class="d-inline-block fw-bold" style="margin-bottom:5px">Information</span>
 									<textarea class="form-control "
 										name="employee_message" aria-label="Employee Message"><?php echo $transaction_message_res['employee_message']; ?></textarea>
 								</div>
