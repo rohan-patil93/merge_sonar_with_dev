@@ -3,13 +3,10 @@ include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
 $data1q["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>0);
-                           //print_r($data1q); //exit;
 $ssdata = urlencode(json_encode($data1q));
 $csuurl = API."?mode=gettabledetailswithconditions&table=document_lists&data=".$ssdata;
-                           //echo  $csuurl ;
 $esudata = callAPI($csuurl);
 $document_details = json_decode($esudata,1);
-//print_r($document_details);
 
 $selectedlist = json_decode($_GET['filelist'],1);
 print_r($selectedlist);

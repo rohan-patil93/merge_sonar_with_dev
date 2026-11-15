@@ -1,7 +1,6 @@
 <?php
 ini_set('display_errors' ,0);
 include_once 'includes/session.php';
-//$_SESSION['DB_NAME']="infistaq_infisuite_1";
 include_once 'dbconfig.php';
 include_once 'comm.php';
 
@@ -63,7 +62,6 @@ $helptext = array('location'=>'Please Enter Your Location',
   'compcat'=>'Please Select Component Category'
 );
 $placeholder= array('location'=>'London','org_name'=>'Infisuite Technologies','phone'=>'4547987440','email'=>'hello@infisuite.com','pincode'=>'641004','dateformat'=>'YYYY-MM-DD','licensenumber'=>'U72200MH2009PLC123456','pan'=>'AAAPZ1234C','tan'=>'PDES03028F','gst'=>'04AABCU9603R1ZV', 'cin'=>'L21091KA2019OPC141331','epf'=>'TN/MAS/0054055/0000175','epfempc'=>'8.33','epfemprc'=>'3.67','esi'=>'31–00–123456–000–0001','esiempc'=>'8.33','esiemprc'=>'3.67','pt'=>'27123456789P','ptloc'=>'Bangalore','lwfrs'=>'10.00','compname'=>'BASIC PAY','comptype'=>'BASIC','compdisplay'=>'FULL BASIC','dcompname'=>'PROFESSIONAL TAX','dcomptype'=>'PTAX','dcompdisplay'=>'PROFESSIONAL TAX','rcompname'=>'FUEL REIMBURSEMENT','rcomptype'=>'FUELREIM','rcompdisplay'=>'FUEL REIMBURSEMENT','compamt'=>'5000.00');
-//$dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/DD/YYYY','DD/MM/YYYY');
 
 $dateformatlist = array('YYYY MM DD','DD MM YYYY','MM DD YYYY');
 $datesparatelist = array("-","/");
@@ -72,7 +70,6 @@ $response = callAPI($url);
 $setup_details = json_decode($response,1);
 $countrieslist = $setup_details['countries'];
 $currencies = $setup_details['currencies'];
-  // print_r($countrieslist); exit;
 $statelist = $setup_details['statelist'];
 $earnings_componentlist = $setup_details['earnings_componentlist'];
 $deduction_componentlist = $setup_details['deduction_componentlist'];
@@ -111,7 +108,6 @@ if(isset($_POST['Save'])){
 $_POST['selectedcomponentlist'] = array_merge($_POST['selectedcomponentlist1'],$_POST['selectedcomponentlist2']);
 $_POST['selectedcomponents'] = array_merge($_POST['selectedcomponentlist1'],$_POST['selectedcomponentlist2']);
 $_POST['selected_other_earnings'] = $_POST['selectedcomponentlist3'];
-  //  echo "<pre>"; print_r($_POST);  //exit;
 $url = API."?mode=setuphr&method=post";
 $response = file_post_contents($url, $_POST, 'insert');
 header('Location:index.php?option=COM_INSERT_HRSETUP');
@@ -697,7 +693,7 @@ function addslabrows(){
                                 <img src="<?php echo $bimage ; ?>" id="outputdisplay_logo" width="200"  data-onerror-src="uploads/all/no-image.jpg" alt="" />
                               </div>
                             </div>
-                            <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>
+                            <span class="form-text text-muted"><?php ?> </span>
                           </div>
                           <div class="form-group col-lg-6">
                             <span class="d-inline-block fw-bold" style="margin-bottom:5px">Location</span>

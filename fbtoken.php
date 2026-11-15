@@ -1,8 +1,6 @@
 <?php
 
-//echo  __DIR__; exit;
 require_once __DIR__.'/vendor/autoload.php';
-//echo  __DIR__; exit;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Auth;
 

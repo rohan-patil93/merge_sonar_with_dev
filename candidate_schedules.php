@@ -18,7 +18,6 @@
   }
   $candidate_details= json_decode(base64_decode($_GET['OPTION']),1);
   $timezonelist = array();
-  // $tzlist = DateTimeZone::listIdentifiers();
 $url = API."?mode=getcandidateschedule&method=post";
 $getresponse = file_post_contents($url, $candidate_details, 'update');
 $getreturnresponse = json_decode($getresponse,1);
@@ -32,7 +31,6 @@ $countries = $getreturnresponse['countries'];
   		$timezonelist[$explode[0]][$timezonelists1['zoneName']] = gettTimeZone('',$timezonelists1['zoneName']);
 	}
   }
-  //echo "<pre>";print_r($getreturnresponse['candidate_interview_schedule_all']); echo "</pre>";
 
 
 ?>

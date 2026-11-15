@@ -162,12 +162,12 @@
         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 text-center desktop-view-bg">
             <div class="p-4">
                 <!-- <div class="text-center d-block">
-                    <img class="img-100 mt-3" src="assets/images/sign-in/<?php // echo LOGIN_INFO['logo']; ?>" alt="" >
+                    <img class="img-100 mt-3" src="assets/images/sign-in/<?php ?>" alt="" >
                 </div> -->
                 <!-- <img class="mt-5 mb-5" src="assets/images/sign-in/auth-screens.png" style="" alt="" > -->
                 <div class="mt-4 text-center text-dark">
-                    <h2 class="f-30 f-w-600">Welcome to Vendor Registration Portal<?php // echo LOGIN_INFO['heding']; ?></h2>
-                    <!-- <p class="f-14 text-white p-2 m-l-30 m-r-30"><?php // echo LOGIN_INFO['text']; ?></p> -->
+                    <h2 class="f-30 f-w-600">Welcome to Vendor Registration Portal<?php ?></h2>
+                    <!-- <p class="f-14 text-white p-2 m-l-30 m-r-30"><?php ?></p> -->
                     <p class="text-start mt-4 mb-2">Please enter your login credentials to access your secure vendor portal account.</p>
                     <ul class="text-start m-l-10" style="list-style: disc; list-style-position: inside;">
                         <li class=""><b class="f-w-600">Username/Email:</b> Enter the email address associated with your registration.</li>

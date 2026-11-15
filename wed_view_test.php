@@ -1,19 +1,5 @@
 ﻿<?php
-/*include_once('dbconfig.php');
-session_start();
-$row = $_GET;
-$_SESSION['userid'] = $row['id'];
-
-$_SESSION['company_id'] = $row['company_id'];
-$_SESSION['DB_NAME']=$row['db'];
-echo $_SESSION; exit;*/
 $domainurl = API."?mode=toretrivewebviewlogin&domain_name=".$subdomain."&data_name=".MAINDB;
-/*$domainres = file_get_contents($domainurl, false, $context);
-$domainresult = json_decode($domainres,1);
-$_SESSION['us_name']=$row['user_name'];
-$_SESSION['email']=$row['user_email'];
-$_SESSION['role_id']=$row['role_id'];*/
-//include_once('comm.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

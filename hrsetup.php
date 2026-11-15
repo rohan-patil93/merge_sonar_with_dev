@@ -56,7 +56,6 @@ $url = API."?mode=getconfigsettings";
 $response = callAPI($url);
 $setup_details = json_decode($response,1);
 $countrieslist = $setup_details['countries'];
-  // print_r($countrieslist); exit;
 $statelist = $setup_details['statelist'];
 $earnings_componentlist = $setup_details['earnings_componentlist'];
 $deduction_componentlist = $setup_details['deduction_componentlist'];
@@ -96,7 +95,6 @@ if(isset($_POST['Save'])){
 $_POST['selectedcomponentlist'] = array_merge($_POST['selectedcomponentlist1'],$_POST['selectedcomponentlist2']);
 $_POST['selectedcomponents'] = array_merge($_POST['selectedcomponentlist1'],$_POST['selectedcomponentlist2']);
 $_POST['selected_other_earnings'] = $_POST['selectedcomponentlist3'];
-  //  echo "<pre>"; print_r($_POST);  //exit;
 $url = API."?mode=setuphr&method=post";
 $response = file_post_contents($url, $_POST, 'insert');
 header('Location:index.php?option=COM_INSERT_HRSETUP');
@@ -656,7 +654,7 @@ function addslabrows(){
 
 
   </div>
-  <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>
+  <span class="form-text text-muted"><?php ?> </span>
 </div>
 <div class="form-group col-lg-6">
   <span class="d-inline-block fw-bold" style="margin-bottom:5px">Location</span>

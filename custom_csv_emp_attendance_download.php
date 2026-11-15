@@ -7,7 +7,6 @@ if (isset($_GET['month'])) {
     $month = $_GET['month'];
 
     $curl = API . "?mode=createExcelDataForEmployeeMonthlyAttedance&month=" . $month;
-    // exit($curl);
     $response = callAPI($curl);
     $response = json_decode($response, true);
 

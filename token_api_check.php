@@ -31,18 +31,6 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
-/*
-try {
-    echo "Valid credentials q";
-    $signInResult = $auth->signInWithEmailAndPassword($email, $password);
-    echo "ID Token: ";
-    $idToken = $signInResult->idToken();
-    print_r($idToken);
-
-   // echo "ID Token: " . $idToken->toString();
-} catch (\Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
-    echo "Invalid credentials";
-}*/
 try {
     // Sign in with email and password
     $signInResult = $auth->signInWithEmailAndPassword($email, $password);

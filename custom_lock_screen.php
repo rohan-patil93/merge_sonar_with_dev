@@ -1,7 +1,6 @@
 <?php
 include_once 'dbconfig.php';
 session_start();
-//session_destroy();
 $_SESSION['userid']="";
 
 if($_COOKIE['user_email']=="" || !isset($_COOKIE['user_email'])){
@@ -33,7 +32,6 @@ if(isset($_POST['submit'])){
                  header("location:index.php?option=".$_POST['option']);
             }
         }else {
-            //echo $row['error']; exit;
             $error = $row['error'];
              header("location:custom_lock_screen.php?error=$error");
         }

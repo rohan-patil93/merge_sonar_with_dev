@@ -1,16 +1,9 @@
 <?php
 include_once 'includes/session.php';
-//print_r($_SESSION); exit;
 include_once 'dbconfig.php';
 include_once 'comm.php';
  $page = $_POST['page'];
  $response = 'Empty';
-// if($page=="selectadditionalcharge"){
-//     $curl = API."?mode=getsetupdetails&getsetupdetails=Y&additional_charge_id=".$_POST['additional_charge_id'];
-// 	echo $cudata = callAPI($curl);
-//     //$res = json_decode($cudata,1);
-//    	//echo  json_encode($res);
-// }
 if($page=="updateprojecttaskdetailsfollowup"){
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];

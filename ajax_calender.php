@@ -1,9 +1,7 @@
 <?php
 include_once 'includes/session.php';
-//print_r($_SESSION); exit;
 include_once 'dbconfig.php';
 include_once 'comm.php';
-	// echo $_GET['category'];
 	$categories = explode('-', $_GET['category']);
     $data11["where"] = array('company_id'=> $_SESSION['company_id']);
 	$datw = urlencode(json_encode($data11));
@@ -16,29 +14,20 @@ include_once 'comm.php';
 		$cate[$cat['id']]['bgcolor'] = $cat['display_background_color'];
 		$cate[$cat['id']]['auto_manual'] = $cat['auto_manual']; // work flow or not
 	}
-	//print_r($cate);
 	if(in_array('1', $categories)){
 	    $category =1;
-		//$_SESSION['emp_id'] =1;
 		$arr = array();
 		$empatt["where"] = array('company_id'=> $_SESSION['company_id'],'employee_id'=>$_SESSION['emp_id'],'is_active'=>'0');
 		$empattcon = urlencode(json_encode($empatt));
 		$empatturl = API."?mode=gettabledetailswithconditions&table=employee_daily_attendances&data=".$empattcon;
-		//echo $empatturl;
 		$empattdata = callAPI($empatturl);
-		//echo $empattdata; exit;
 		$empattdata = json_decode($empattdata,1);
-		//print_r($empattdata);
 		foreach ($empattdata as  $empat) {
 		    $arr = array();
 			$arr['title'] = "Present";
 			$arr['start'] = $empat['attendace_date']."T00:00:00";
-		//	$arr['start'] = $empat['attendace_date'];
 			$arr['end'] = $empat['attendace_date'];
 			$arr['constraint'] = "Attendance";
-			//$arr['ispopup'] = 1;
-		    //$arr['idvalue'] = 1;
-	    	//$arr['popup_function'] = "popupempkpitask";
 			$arr['backgroundColor'] = strtoupper($cate[$category]['bgcolor'])=="INFO"?'#00bcd4':strtoupper($cate[$category]['bgcolor']);
 			$array_list[] = $arr;
 		}
@@ -75,11 +64,9 @@ include_once 'comm.php';
 		$spdata = callAPI($curlss);
 		$spdata = json_decode($spdata,1);
 		foreach ($spdata as  $value) {
-		    //print_r($value);
 		    $arr = array();
 			$start_date = ""; $end_date ="";
 			$start_date = $value['start_date'].'T'.$value['start_time'];
-			//if($value['start_time']!="00:00:00"){ $start_date.='T'.$value['start_time'];}
 			$end_date = $value['end_date'];
 			if($value['end_time']!="00:00:00"){ $end_date.='T'.$value['end_time'];
 			}
@@ -119,10 +106,9 @@ include_once 'comm.php';
 	}
 	}
 	/***  Notification End *****/
- 	//print_r($array_list);
 	/***  Transaction Approval Log Start *****/
 	if(in_array('3', $categories)){
-	$arr = array(); //print_r($_SESSION['application_pages']);
+	$arr = array();
 	foreach ($_SESSION['application_pages'] as $app) {
 		$table_insert[$app['application_table_name']] = $app['insert_page_name'];
 	}
@@ -149,7 +135,6 @@ include_once 'comm.php';
 		$array_list[] = $arr;
 	}
 	}
-	//echo $category; print_r($arr);
 	/***  Transaction Approval Log End *****/
 
 	/***  Employee Task Start *****/
@@ -175,14 +160,11 @@ include_once 'comm.php';
 	}
 
 
-	//print_r($arr);
 	/***  Employee Task End *****/
 /***   LEAVE  Start *****/
 	if(in_array('6', $categories)){
         $arr = array();
-        //array('company_id'=> $_SESSION['company_id'],'employee_id'=>$_SESSION['emp_id'],'is_active'=>'0');
         $empatturl = API."?mode=getleavecalender&table=employee_leaves&employee_id=".$_SESSION['emp_id'];
-        // echo $empatturl;
 		$empattdata = callAPI($empatturl);
 		$array_lists = json_decode($empattdata,1);
 		$array_list = array();
@@ -200,69 +182,14 @@ include_once 'comm.php';
         }
 
         $arr['url'] = $link;
-   //      $empatt["where"] = array('company_id'=> $_SESSION['company_id'],'employee_id'=>$_SESSION['emp_id'],'is_active'=>'0');
-   //      $empattcon = urlencode(json_encode($empatt));
-   //      $empatturl = API."?mode=gettabledetailswithconditions&table=employee_leaves&data=".$empattcon;
-   //      $empattdata = callAPI($empatturl);
-   //      $empattdata = json_decode($empattdata,1);
-   //      $leave["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0');
-   //      $leavecon = urlencode(json_encode($leave));
-   //      $leaveurl = API."?mode=gettabledetailswithconditions&table=leave_types&data=".$leavecon;
-   //      $leavedata = callAPI($leaveurl);
-   //      $leavetypedata = json_decode($leavedata,1);
-   //      foreach ($leavetypedata as $value) {
-   //          $leave_data[$value['id']]=$value['back_ground_color'];
-   //      }
-   //      foreach ($empattdata as  $empat) {
-			// $onedayadded  = date('Y-m-d', strtotime('+1 day', strtotime($empat['leave_to'])));
-   //          $arr['title'] = "LEAVES";
-   //          $arr['start'] = $empat['leave_from']."T00:00:00";
-   //          $arr['end'] = $onedayadded;  // because the calendar Is Showing one day less so added one day in a array
-   //          $arr['constraint'] = "LEAVES";
-   //          $arr['backgroundColor'] = strtoupper($cate[$category]['bgcolor']);
-   //          $array_list[] = $arr;
-   //      }
     }
  /*Team leaves */
-    /*if(in_array('56', $categories)){
-        $arr = array();
-        $teamempurl = API."?mode=togetteammeberemployeeids";
-        $teamdata = callAPI($teamempurl);
-        $teamdata = json_decode($teamdata,1);
-        foreach($teamdata as $team){
-        	$emps[] = $team['emp_id'];
-        }
-        $empatt["where_in"]  = $emps;
-        $empatt["whr_in_key"] = 'employee_id';
-        $empatt["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0');
-        $empattcon = urlencode(json_encode($empatt));
-        $empatturl = API."?mode=gettabledetailswithconditions&table=employee_leaves&data=".$empattcon;
-        $empattdata = callAPI($empatturl);
-        $empattdata = json_decode($empattdata,1);
-        $leave["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0');
-        $leavecon = urlencode(json_encode($leave));
-        $leaveurl = API."?mode=gettabledetailswithconditions&table=leave_types&data=".$leavecon;
-        $leavedata = callAPI($leaveurl);
-        $leavetypedata = json_decode($leavedata,1);
-        foreach ($leavetypedata as $value) {
-            $leave_data[$value['id']]=$value['back_ground_color'];
-        }
-        foreach ($empattdata as  $empat) {
-            $arr['title'] = "LEAVES";
-            $arr['start'] = $empat['leave_from'];
-            $arr['end'] = $empat['leave_to'];
-            $arr['description'] = "LEAVES";
-            $arr['backgroundColor'] = "fc-event-".strtoupper($leave_data[$empat['leave_type_id']])." fc-event-solid-".strtoupper($leave_data[$empat['leave_type_id']]);
-            $array_list[] = $arr;
-        }
-    }*/
     if(in_array('11', $categories)){
 		$arr = array();
 		$data = json_decode($_GET['data'],1);
 		$empatt["where"] = array('company_id'=> $_SESSION['company_id'],'employee_id'=>$data['employee_id'],'is_active'=>'0');
 		$empattcon = urlencode(json_encode($empatt));
 		$empatturl = API."?mode=gettabledetailswithconditions&table=employee_leaves&data=".$empattcon;
-		//echo $empatturl;
 		$empattdata = callAPI($empatturl);
 		$empattdata = json_decode($empattdata,1);
 		foreach ($empattdata as  $empat) {
@@ -277,11 +204,8 @@ include_once 'comm.php';
 
 	if(in_array('15', $categories)){
         $arr = array();
-       // $empatt["where"] = array('company_id'=> $_SESSION['company_id'],'emp_id'=>$_SESSION['emp_id'],'is_active'=>'0');
-        //$empattcon = urlencode(json_encode($empatt));
          $empatturl = API."?mode=gettimesheetscalendar&table=project_timesheets&emp_id=".$_SESSION['emp_id'];
         $empattdata = callAPI($empatturl);
-        //echo $empattdata; exit;
         $empattdata = json_decode($empattdata,1);
         foreach ($empattdata as  $empat) {
             $arr = array();
@@ -303,7 +227,6 @@ include_once 'comm.php';
             $array_list[] = $arr;
         }
     }
-	//print_r($arr);
 	/***  LEAVE  Task End *****/
 
 
@@ -329,7 +252,6 @@ include_once 'comm.php';
 		$empatt["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0');
 		$empattcon = urlencode(json_encode($empatt));
 		$empatturl = API."?mode=togetleavelstemployeeajax";
-		//echo $empatturl;
 		$empattdata = callAPI($empatturl);
 		$empattdata = json_decode($empattdata,1);
 		foreach ($empattdata as  $empat) {
@@ -348,7 +270,6 @@ include_once 'comm.php';
 		$empatt["where"] = array('company_id'=> $_SESSION['company_id'],'emp_id'=>$_SESSION['emp_id'],'is_active'=>'0');
 		$empattcon = urlencode(json_encode($empatt));
 		$empatturl = API."?mode=gettabledetailswithconditions&table=request_work_from_home&data=".$empattcon;
-		//echo $empatturl;
 		$empattdata = callAPI($empatturl);
 		$empattdata = json_decode($empattdata,1);
 		foreach ($empattdata as  $empat) {

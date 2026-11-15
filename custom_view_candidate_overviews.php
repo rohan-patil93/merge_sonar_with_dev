@@ -7,9 +7,6 @@ $rid = urldecode($rid);
 $cand = explode(':', $rid);
 $candidate_id = $cand['1'];
 $table_name = "candidates";
-//echo $candidate_id; exit;
-//$option_c = $_GET['option'];
-//$RID_c = $_GET['Rid'];
 if (isset($_POST['submit_doc'])) {
   $candidate_id = $_POST['candidate_id'];
   $k = 0;
@@ -30,7 +27,6 @@ if (isset($_POST['submit_doc'])) {
   $url = API . "?mode=updatecandaitedocument&method=post";
   $response = file_post_contents($url, $_POST, 'insert');
   $response = json_decode($response, 1);
-  // echo "<pre>"; print_r($response); echo "</pre>";
   if ($response) { ?>
     <script type="text/javascript">
       document.onreadystatechange = function () {
@@ -39,7 +35,7 @@ if (isset($_POST['submit_doc'])) {
         }
       }
     </script>
-  <?php   // header("location:index.php?option=COM_INSERT_CANDIDATE&NI=".$_GET['NI']."&Rid=".$RID_c);
+  <?php 
   }
 }
 //request documents
@@ -48,7 +44,6 @@ if (isset($_POST['submitrequerd_docs'])) {
   $_POST['company_id'] = $_SESSION['company_id'];
   $response = file_post_contents($url, $_POST, 'insert');
   $response = json_decode($response, 1);
-  //echo "<pre>"; print_r($response); echo "</pre>";
   if ($response) {
     ?>
     <script type="text/javascript">
@@ -59,7 +54,6 @@ if (isset($_POST['submitrequerd_docs'])) {
       }
     </script>
   <?php
-    //header("location:index.php?option=COM_INSERT_CANDIDATE&NI=1&Rid=".$RID_c);
   }
 }
 //request documents
@@ -92,7 +86,6 @@ $document_lists = $result['document_lists'];
 foreach ($document_lists as $document_list) {
   $documentlist[$document_list['id']] = $document_list['document_name'];
 }
-//echo "<pre>"; print_r($document_lists); echo "</pre>";
 foreach ($document_lists as $alldo) {
   if ($alldo['parent_document_id'] == 0) {
     $parentdocumentslist[] = $alldo;
@@ -125,7 +118,6 @@ foreach ($result['transaction_activity_schedule'] as $transaction_activity_sched
   $totaltask[$transaction_activity_schedule['process_id']]++;
 }
 
-//print_r($linktransactionactivityschedule);
 $job_posting_candidates = $result['job_posting_candidates'];
 foreach ($result['departments'] as $department) {
   $departments[$department['id']] = $department['department_name'];
@@ -139,26 +131,17 @@ foreach ($result['application_users'] as $application_users) {
   $applicationusers[$application_users['id']] = $application_users['display_name'];
 }
 
-//$job_titles = $result['job_titles'];
 
 
 
 
 
-// echo "<pre>dcdcdcbdcdfhvb";print_r($checkl);
-// echo "</pre>";
 
 $profilereadiness = array("Contact Details" => array('first_name', 'middle_name', 'last_name', 'display_name', 'phone', 'email_id', 'address', 'post_code', 'bio'), "Personal Details" => array('gender', 'date_of_birth', 'marital_status', 'wedding_date', 'blood_group', 'father_name', 'spouse_name', 'adhar_no', 'pan_number', 'hiring_source'), "Dependents" => array('employee_dependents'), "Current Employment" => array('employee_contacts', 'current_location', 'reason_for_change', 'relocate', 'current_ctc', 'expected_ctc', 'no_of_reportees', 'job_grade,pay_template', 'job_type,location_id'), "Awards and Accolades" => array('candidate_awards'), "HR Details" => array('first_role', 'candidate_current_role', 'notice_period', 'np_negotiatable', 'first_pay', 'current_pay', 'gaps_in_employment_reason', 'performance_ratings'), "Skills" => array('skills'), "Work Experiences" => array('candidate_experiances'), "Education Details" => array('candidate_qualifications'));
 $stausresult = ViewStatusData();
-//echo "<pre>"; print_r($data); echo "</pre>";
 
 $due_date_period_list = $result['period_list'];
 
-// $statuslist  = getstatusprogresslist('candidate_documents');
-// foreach($statuslist as $statuslist){
-//   $candidatedocumentsstatusname[$statuslist['status']] = $statuslist['name'];
-//   $candidatedocumentsstatusnameaction[$statuslist['status']] = $statuslist['action_label'];
-// }
 
 ?>
 

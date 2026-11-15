@@ -12,7 +12,6 @@ $presentation_id = 1;
 $vurl = API."?mode=togetpresentationdetails&presentation_id=".$presentation_id;
 $configesponse = callAPI($vurl);
 $presentation_array = json_decode($configesponse,1);
-	//print_r($presentation_array); exit;
 ?>
 <!--begin::Content-->
 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">

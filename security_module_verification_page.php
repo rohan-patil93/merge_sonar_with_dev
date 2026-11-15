@@ -1,6 +1,5 @@
 <?php
 include_once 'dbconfig.php';
-//ini_set("display_errors",1);
 $param= $_GET['param'];
 $allparam = json_decode(base64_decode($param),1);
 $urlhit = SITEURL.'/api.php?mode=approveVisitor&rid='.$allparam['rid'].'&user_id=1&data_name='.$allparam['dbname'].'&company_id='.$allparam['company_id'].'&status='.$allparam['status'];

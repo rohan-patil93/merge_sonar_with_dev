@@ -1,10 +1,8 @@
 <?php
-//include_once('dbconfig.php');
     compareDatabaseSchemas($_GET);
     function compareDatabaseSchemas($get){
         $dbName1 = $get['db1']; // e.g., 'my_database_1'
         $dbName2 = $get['db2']; // e.g., 'my_database_2'
-        // return $get;
         $db1 = $this->connectToDatabaseByName($dbName1);
         $db2 = $this->connectToDatabaseByName($dbName2);
         function getTablesDB($db) {

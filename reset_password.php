@@ -1,35 +1,25 @@
 <?php
 include_once 'dbconfig.php';
 include_once 'comm.php';
-//print_r($_POST);
-//include_once('views/custom_logout.php');
 session_start();
 if (isset($_POST['submit'])){
-   // print_r($_POST); //exit;
     if($_POST['submit']=="submit") {
         if($_POST['new_password'] != $_POST['conpassword']){
-            //echo "not match";
             header("location:reset_password.php?error=6008");
         }else{
-          //echo "ravi"; exit;
           $data = urlencode(json_encode($_POST));
           $url = API."?mode=resetpassword&data=".$data;
           $rows = file_get_contents($url, false, $context);
           $row = json_decode($rows,1);
          if($row['error'] == '6009'){
-              //echo "data"; exit;
               header("location:reset_password.php?error=6009");
           }else{
-              //echo $row['error']; exit;
-              //$error = $row['error'];
-            //echo "page redirect";
              $_SESSION['reset_password'] = 1;
               header("location:login.php");
           }
         }
     }
 }
-//print_r($_SESSION['reset_password']);
 function getIPAddress(){
     return $_SERVER['REMOTE_ADDR'];
 }?>

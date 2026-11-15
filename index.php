@@ -8,8 +8,6 @@ include_once 'includes/session.php';
 include_once 'dbconfig.php';
 include_once 'comm.php';
 
-//echo "-------------------------------------------".DUMPTABLE;
-//include_once('views/custom_logout.php'); exit;
 if(($timeprint == '1' && $maxtimeshow >= '2') || $start ==1 ){
 	echo "after include dbconfig - ".date('m/d/Y h:i:s a')."</br>";
 }
@@ -23,16 +21,10 @@ if($_GET['check_m'] =="SSS"){
         echo customeummarmonyformateifinecheck('700000.00'); exit;
 }
 $_SESSION['nav_type'] = "TOP";
-//if(!isset($_SESSION['login_details']) || $_SESSION['login_details'] == "" || count((array)$_SESSION['login_details']) == 0){
 
 $login_details = togetlogindetails();
 
 
-    //print_r($login_details['callConfig']); print_r($login_details['callConfig2']);
-    //print_r($login_details['application_menu']);
-    //print_r($login_details['application_pages']);
-    //echo "</pre>";
-  //echo "<pre>"; echo "default_module_id"; print_r($login_details['application_menu']);  echo "</pre>"; exit;
    $_SESSION['login_details'] = $login_details;
    $_SESSION['emp_pay_area'] = $login_details['emp_pay_area'];
    $_SESSION['pay_admin_emp'] = $login_details['pay_admin_emp'];
@@ -51,10 +43,6 @@ $login_details = togetlogindetails();
     if(!isset($_SESSION['application_languages'])){
         $_SESSION['application_languages'] = $login_details['application_languages'];
     }
-   //echo "<pre>"; print_r($_SESSION); exit;
-//}else{
- //  $login_details = $_SESSION['login_details'];
-//}
 
 if(count((array)$_SESSION['modulewithrole']) ==0){
     if($timeprint == '1' && $maxtimeshow >= '3'){
@@ -65,15 +53,11 @@ if(count((array)$_SESSION['modulewithrole']) ==0){
         $modulewithrole[$mwithrole['application_module']][]= $mwithrole['role_short_code'];
         $_SESSION['modulewithroledetails'][$mwithrole['application_module']][]= $mwithrole;
         $_SESSION['module_code'][] = $mwithrole['role_short_code'];
-        //$_SESSION['working_role_short_code'] = $mwithrole['role_short_code'];
     }
     $_SESSION['modulewithrole'] = $modulewithrole;
     $_SESSION['module_setp'] = $login_details['module_setup'];
 }
-//echo "<pre>"; print_r($_SESSION['modulewithroledetails']); echo "</pre>";//print_r($_SESSION['working_role_short_code']);echo "</pre>";
-//print_r($_SESSION['user']);
 if(!isset($_SESSION['user']) && count((array)$_SESSION['user']) == 0){
-//if(count((array)$_SESSION['user']) == 0){
     $user = $login_details['users'];
     $_SESSION['user'] = $user;
     $_SESSION['user_activated'] = $user['user_activated'];
@@ -88,10 +72,6 @@ if(count((array)$_SESSION['application_user_module_roles']) == 0){
 if($timeprint == '1' && $maxtimeshow >= '3'){
 	echo "Get user - ".date('m/d/Y h:i:s a')."</br>";
 }
-//setcookie("user_email", $user['user_email'], time() + (86400 * 30), "/");   ///set coockies
-//setcookie("cookie_option", $_GET['option'], time() + (86400 * 30), "/");   ///set coockies
-//setcookie("work_module_setup_id", $_SESSION['work_module_setup_id'], time() + (86400 * 30), "/");   ///set coockies
-//setcookie("working_role_short_code", $_SESSION['working_role_short_code'], time() + (86400 * 30), "/");   ///set coockies
 $_SESSION['user_type'] = $user['user_type'];
 $_SESSION['user_email'] = $user['user_email'];
 $_SESSION['user_mobile'] = $user['user_mobile'];
@@ -115,7 +95,6 @@ if(in_array(ADMIN_ROLES,(array)$user_roles)){
 //rohan added
 if(!isset($_SESSION['work_module_setup_id'])){
     $_SESSION['work_module_setup_id'] = $login_details['default_module_id'];
-    //$_SESSION['work_module_setup_id'] = $_SESSION['config']['application_module'];
 }
 if(!isset($_SESSION['working_role_short_code'])){
       $_SESSION['working_role_short_code'] = $login_details['working_role_short_code'];
@@ -124,7 +103,6 @@ $_SESSION['permission_check'] = 'N';
 foreach($_SESSION['module_setp'] as $module_list12){
     if((in_array($module_list12['role_admin_short_code'],(array)$_SESSION['role_ids']) || in_array($module_list12['role_view_short_code'],(array)$_SESSION['role_ids'])) && $_SESSION['work_module_setup_id'] == $module_list12['module_id']){
         $_SESSION['admin_type'] = 1;
-        //$_SESSION['config']['role_permission']=1;
         if(in_array($module_list12['role_view_short_code'],(array)$_SESSION['role_ids'])){
             $_SESSION['permission_check'] = 'Y';
         }
@@ -151,22 +129,7 @@ if($_SESSION['login_details']['setup_page_logs']['current_status'] != ST_APPROVE
 /**if($_SESSION['reset_password'] == 0){
     header("location:reset_password.php");
 }**/
-//echo "<pre>"; print_r($login_details);
-// if(!isset($_SESSION['work_module_setup_id'])){
-//     $_SESSION['work_module_setup_id'] = $login_details['default_module_id'];
-//     //$_SESSION['work_module_setup_id'] = $_SESSION['config']['application_module'];
-// }
-// if(!isset($_SESSION['working_role_short_code'])){
-//       $_SESSION['working_role_short_code'] = $login_details['working_role_short_code'];
-// }
-// echo 'moduleid'.$_SESSION['work_module_setup_id'];
-// echo "<pre>";
-// print_r($login_details['application_menu']);echo "</pre>";
-// if(count($_SESSION['configsetornot']) == 'N'){ /// hrstaq show only
-//    header("location:module_setup.php");
-// }
 if($_SESSION['configsetornot'] == 'N'){ /// hrstaq show only
-    //header("location:infistaq_setup.php");
 }
 $date_format = str_replace('-',$_SESSION['config']['date_separator'], strtolower($_SESSION['config']['date_format']));
 $_SESSION['date_formate'] = str_replace('yyyy', 'Y', str_replace('mm', 'm', str_replace('dd', 'd', $date_format)));
@@ -178,9 +141,6 @@ if(isset($_GET['noti_id'])){
 if($timeprint == '1' && $maxtimeshow >= '5'){
 echo "Notifition - ".date('m/d/Y h:i:s a')."</br>";
 }
-//$notificationlist = $login_details['notification'];
-//$action_log = $login_details['actionlog'];
-//$inboxcount = toGetInboxCountUsingUserId();
 
 if($timeprint == '1' && $maxtimeshow >= '6'){
 	echo "inbox count - ".date('m/d/Y h:i:s a')."</br>";
@@ -189,7 +149,6 @@ if($timeprint == '1' && $maxtimeshow >= '6'){
 
 if($user['user_type'] ==4){  //db config get candidate type
      $candidate = candidatedetais($user['user_email']);
-    //print_r($candidate); //exit;
     $Rid="";
     if($candidate['id']!=''){
         $_GET['Rid']= deocdeId("id:".$candidate['id']);
@@ -203,7 +162,6 @@ if($user['user_type'] ==4){  //db config get candidate type
         include_once "includes/controller.php";
         $disptemp = "views/custom_logout.php";
     }else{
-        //$_GET['option'] = 'COM_LIST_CANDIDATE_INFO';
         include_once "includes/controller.php";
     }
 }elseif($user['user_type'] ==3){ //db config get Vendor type
@@ -222,13 +180,12 @@ if($user['user_type'] ==4){  //db config get candidate type
                 $view_navary[$view_nav1] = $view_nav1;
             }
          }
-        $_SESSION['role_nav']= $view_navary;//exit;
+        $_SESSION['role_nav']= $view_navary;
         $_SESSION['role_permission'] = $role_data['permission'];
         $_SESSION['role_page_permission'] = $role_data['page_permission'];
         $_SESSION['role_permission_pages'] = $role_data['permission'];
     }
 
-   // print_r($user); exit;
     $vendor = vendordetails($user['user_email']);
     if($vendor['id']!=''){
          $_SESSION['vendor_id'] = $vendor['id'];
@@ -249,24 +206,17 @@ if($user['user_type'] ==4){  //db config get candidate type
     $return = checkPremission($_GET['option']);
     if($_GET['option']==''){
         $_GET['option'] = 'COM_INSERT_VENDORS';
-        //$_GET['option'] = 'COM_VIEW_DASHBOARD_VENDORS';
     }
 
-    //$check = array('com_logout','COM_INSERT_VENDOR','COM_LIST_EMPLOYEES','COM_INSERT_VENDORS','COM_LIST_VENDOR_RATE_CARDS','COM_INSERT_VENDOR_RATE_CARDS','COM_LIST_JOB_POSTING_CANDIDATES','COM_LIST_CONTRACT_EMPLOYEES','COM_LIST_INBOX','COM_LIST_JOB_POSTING_CANDIDATE','COM_INSERT_CANDIDATE','COM_INSERT_EMP_CONTRACTS','COM_INSERT_EMPLOYEE_CONTRACT','COM_INSERT_CANDIDATES','COM_LIST_CANDIDATE_DOCUMENTS','COM_LIST_CANDIDATE_QUERY','COM_LIST_CANDIDATE_OFFER','COM_LIST_JOIN_REQUIRED_DOCUMENTS','COM_VIEW_PROJECT_TIMESHEETS','COM_VIEW_DASHBOARD_VENDORS','COM_INSERT_PURCHASE_INVOICES','COM_LIST_TABLE_FILTERS');
     include_once "includes/controller.php";
 }else{
 
 
 
-    //print_r($user);
-    //if($_GET['option']=='' &&  $user['role_id'] == '["5"]' ){
-      //  $_GET['option'] = 'COM_LIST_ONLY_EMPLOYEE';
-    //}
 
     if(isset($_POST['user_image']) && $_POST['user_image']=='user_image'){
         if($_FILES['profile_avatar']['name']!=""){
             $image_nname = imageupload('all','profile_avatar','');
-            //echo $image_nname;
             $data = toupdateemployee($image_nname);
         }
     }
@@ -283,10 +233,8 @@ if($timeprint == '1' && $maxtimeshow >= '7'){
     }
 
     if($_SESSION['emp_id']!="" && $_SESSION['user_type']==1 &&  $_SESSION['confirmed_basic_ino']==1 && $user['confirmed_basic_ino']=="1"){
-        //$_GET['option'] = "COM_INSERT_ONBOARDING_EMPLOYEES";
         $_SESSION['confirmed_basic_ino'] = 0;
         $_SESSION['confirmed_basic_ino_val'] = 2;
-        //toupdateuserconfirmedbasicinfo();
     }
 
     if(count((array)$_SESSION['application_pages']) == 0){
@@ -307,12 +255,11 @@ if($_SESSION['rolepermisionget'] != '1'){
             $view_navary[$view_nav1] = $view_nav1;
         }
      }
-    $_SESSION['role_nav']= $view_navary;//exit;
+    $_SESSION['role_nav']= $view_navary;
     $_SESSION['role_permission'] = $role_data['permission'];
     $_SESSION['role_page_permission'] = $role_data['page_permission'];
     $_SESSION['role_permission_pages'] = $role_data['permission'];
 }
-//echo "<pre>"; print_r($_SESSION['application_pages']);echo "<pre>";
 if($timeprint == '1' && $maxtimeshow >= '9'){
 echo "page Permission - ".date('m/d/Y h:i:s a')."</br>";
 }
@@ -329,15 +276,8 @@ if(count((array)$_SESSION['application_menu']) == 0 && !isset($_SESSION['applica
         $_SESSION['application_menu_TNR'] = toGETNavDetails('TNR');
         $_SESSION['application_menu_TNC'] = resequenceMenuList($_SESSION['application_menu_TNC']);
  }
-//echo "<pre>";print_r($_SESSION['application_menu_TNC']); echo "</pre>"; exit;
-// $resequencemenu = resequenceMenuList($_SESSION['application_menu_TNC']);
-//$_SESSION['application_menu_TNC'] = $resequencemenu;
-//echo  "<pre>";print_r($resequencemenu); echo "</pre>";
-// echo  "<pre>";print_r($_SESSION['application_menu_TNC']); echo "</pre>";
- //echo "<pre>";print_r($resequenceMenuList);echo "</pre>";
 
 
-//$_SESSION['application_menu_LN'] = toGETNavDetails('LN');
 	if($timeprint == '1' && $maxtimeshow >= '10'){
 		echo "application menu - ".date('m/d/Y h:i:s a')."</br>";
 	}
@@ -346,17 +286,11 @@ if(count((array)$_SESSION['application_menu']) == 0 && !isset($_SESSION['applica
     $toplistnav =   $_SESSION['application_menu_TNL'];
     $topnavcenter =  $_SESSION['application_menu_TNC'];
 
-    //echo "<pre>"; print_r($topnavcenter);// echo "</pre>";
-    //print_r($saidnav);print_r($topnav);print_r($toplistnav);
-    // echo "-----------"; print_r($_SESSION['role_nav']); echo "</pre>";
 
 	if($timeprint == '1' && $maxtimeshow >= '11'){
 		echo "Status - ".date('m/d/Y h:i:s a')."</br>";
 	}
 
-   /* if(count($_SESSION['field_secruity']) == 0){
-       $_SESSION['field_secruity'] = $login_details['field_secruity'];
-    }*/
 	if($timeprint == '1' && $maxtimeshow >= '12'){
 		echo "security - ".date('m/d/Y h:i:s a')."</br>";
 	}
@@ -381,9 +315,6 @@ if(count((array)$_SESSION['application_menu']) == 0 && !isset($_SESSION['applica
 	if($timeprint == '1' && $maxtimeshow >= '14'){
 		echo "Comoany details - ".date('m/d/Y h:i:s a')."</br>";
 	}
-   	//if(isset($_GET['noti_id'])){ // repeted used
-      //  $not = NotificationRead($_GET['noti_id']);
-    //} // repeted used
 
     if($_SESSION['emp_id']!=""){
         $clock_data =toGetclockdata();
@@ -398,7 +329,6 @@ if(count((array)$_SESSION['application_menu']) == 0 && !isset($_SESSION['applica
 }
 
 
-//echo date('Y-m-d H:i:s')."<br>";exit;
 $_SESSION['apply_js'] = array();
 
 
@@ -442,11 +372,6 @@ $_SESSION['apply_css']['calendercss'] = '1';
     if($_GET['option'] == "custom_view_crm_dashboards"){
         $_SESSION['apply_css']['starcss'] =1;
     }
-//echo "<pre>"; print_r($_SESSION); echo "</pre>"; exit;
-//echo "<pre>";print_r($_SESSION['application_menu_TNC']); echo "</pre>";
-    /*if($_GET['DO'] == "111"){
-        echo "<pre>";   print_r($_SESSION['application_menu_TNR']);echo "</pre>";
-    }*/
 if(isset($_SESSION['work_module_setup_id']) && $_SESSION['work_module_setup_id'] == POLL_MODULE_ID){
     $_GET['CAT'] = POLL_CAT_ID;
 }
@@ -487,7 +412,6 @@ if($timeprint == '1' && $maxtimeshow >= '17'){
 	<div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
 			<?php		$count_nav = count((array)$topnav);
-            			//$count_nav = 3;
             			 if($count_nav >0){
                                     if($_SESSION['nav_type'] == "LEFT" || $count_nav>8){
                                         include_once "partials/_side_nav.php";
@@ -508,7 +432,6 @@ if($timeprint == '1' && $maxtimeshow >= '17'){
 if($_SESSION['timesheetalertshow'] != '0' && in_array('11',(array)$_SESSION['module_list'])){
    $_SESSION['timesheetalertshow'] = '0';
    $getTimeSheetNotSubmitedDeatils = getTimeSheetNotSubmitedDeatils();
-   // print_r($getTimeSheetNotSubmitedDeatils);
     if($getTimeSheetNotSubmitedDeatils['timesheetsmessagecode'] !='0' && (in_array('3',(array)$_SESSION['role_ids']) || in_array('5',(array)$_SESSION['role_ids']))){
 ?>
     <div class="alert alert-warning border-warning alert-dismissible mt-2  m-r-20 m-l-20">
@@ -526,17 +449,15 @@ if($_SESSION['timesheetalertshow'] != '0' && in_array('11',(array)$_SESSION['mod
 						 <div class="page-header card" style="margin: 15px !important;">
 
 
-     <?php // include_once("partials/_sub_header.php");
+     <?php 
 if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
      $disptemp = 'views/custom_insert_application_users.php';
 }else{
-    //getApplicationEmptyTransactions($_GET['option']);
 }
                         ?>
                         <?php
 
-                        //echo "&&&&&&&&&".$disptemp;
-                        include_once $disptemp; //echo $count_nav; //include_once("views/new_hrms_dash_board.php");
+                        include_once $disptemp;
                          ?>
                         <?php
 						if($timeprint == '1' && $maxtimeshow >= '20'){
@@ -786,7 +707,7 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 	<script src="assets/pages/form-masking/autoNumeric.js"></script>
 	<script src="assets/pages/form-masking/form-mask.js"></script>
 	<?php } ?>
-    <?php //if($_SESSION['apply_js']['Switch'] == '1'){ ?>
+    <?php ?>
 	<!-- Switch component js -->
 	<script type="text/javascript" src="assets/bower_components/switchery/js/switchery.min.js"></script>
 	<script type="text/javascript" src="assets/bower_components/bootstrap-maxlength/js/bootstrap-maxlength.js"></script>
@@ -847,11 +768,11 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 	<script type="text/javascript" src="assets/bower_components/fullcalendar/js/fullcalendar.min.js"></script>
 	<script type="text/javascript" src="assets/pages/full-calender/calendar.js"></script>
 	<?php } ?>
-	<?php //if($_GET['option']=='COM_INSERT_APPLICATION_ROLE') {
+	<?php 
 		 if($_SESSION['apply_js']['role']==1){  ?>
 		<script src="assets/js/custom_insert_application_role.js"></script>
 	<?php  } ?>
-	<?php // if($_GET['option']=='COM_INSERT_JOB_POSTINGS') {
+	<?php 
 		if($_SESSION['apply_js']['jobposting']==1){  ?>
  		<script src="assets/js/custom_job_post.js"></script>
 	<?php } ?>
@@ -863,15 +784,15 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 	<?php if($_SESSION['apply_js']['tour']==1){ ?>
 		<script type="text/javascript" src="assets/bower_components/intro.js/js/intro.js"></script>
 	<?php } ?>
-	<?php // if(strtoupper($_GET['option'])=='COM_INSERT_DISPLAY_ATTRIBUTES') {
+	<?php 
 		if($_SESSION['apply_js']['custom_insert_display_attributes']==1){ ?>
 	<script src="assets/js/custom_insert_display_attributes.js"></script>
 	<?php } ?>
-	<?php // if(strtoupper($_GET['option'])=="COM_INSERT_LETTERS"){
+	<?php 
 		if($_SESSION['apply_js']['custom_insert_letters']==1){ ?>
 	<script src="assets/js/custom_insert_latter.js"></script>
 	<?php } ?>
-	<?php // if(strtoupper($_GET['option'])=="COM_INSERT_MY_REPORTS" || strtoupper($_GET['option'])=="COM_INSERT_REPORT_ATTRIBUTES_NEW"){
+	<?php 
 		if($_SESSION['apply_js']['custom_insert_my_reports']==1){ ?>
 	<script src="assets/js/custom_insert_my_reports.js"></script>
 	<?php } ?>
@@ -881,23 +802,23 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 		<!-- Knob Chart js -->
    		<script type="text/javascript" src="assets/pages/chart/knob/knob-custom-chart.js"></script>
 	<?php } ?>
-	<?php //if($_GET['option']=='' && $pass_module['0']['page'] == 'vendorstaq_admin_dashboarad'){
+	<?php 
 		if($_SESSION['apply_js']['vendorstaq_admin_dashboarad_new']==1){ ?>
             <script src="assets/pages/widget/amchart/amcharts.js"></script>
             <script src="assets/pages/widget/amchart/serial.js"></script>
             <script src="assets/bower_components/chartist/js/chartist.js"></script>
             <script type="text/javascript" src="assets/pages/widget/vendorstaq_admin_dashboarad.js"></script>
 	<?php } ?>
-	<?php //if($_GET['option']=='COM_LIST_EMPLOYEE_LEAVES') {
+	<?php 
 		if($_SESSION['apply_js']['employee_leaves']==1){ ?>
 	    <script type="text/javascript" src="assets/pages/widget/leaves_widget.js"></script>
 	<?php } ?>
-	<?php //if($_GET['option']=='COM_BULK_PROJECT_TIMESHEET') {
+	<?php 
 		if($_SESSION['apply_js']['bulk_project_timesheet']==1){ ?>
 
 	    <script type="text/javascript" src="assets/pages/widget/demo_dashboard4.js"></script>
 	<?php } ?>
-	<?php //if($pass_module['0']['page'] == 'hr_admin_dashboard' || $_GET['option']==''){
+	<?php 
 		if($_SESSION['apply_js']['hr_admin_dashboard']==1){ ?>
             <script src="assets/pages/widget/amchart/amcharts.js"></script>
             <script src="assets/pages/widget/amchart/serial.js"></script>
@@ -923,13 +844,13 @@ if($_SESSION['user_activated'] == 'N' && $_GET['option'] != "com_logout"){
 <script type="text/javascript" src="assets/pages/chart/google/js/com_view_dash_board_vendor_employee_charts.js"></script>
 <!-- End google chart -->
 <?php } ?>
-	<?php //if($_GET['option']=='COM_LIST_CANDIDATE_OFFER') {
+	<?php 
 		if($_SESSION['apply_js']['googlechart']==1){  ?>
 		<!-- google chart custom_list_candidate_offer-->
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript" src="assets/pages/chart/google/js/custom-google-chart.js"></script><!-- End google chart --->
 	<?php } ?>
-	<?php //if($_GET['option']=='COM_INSERT_PAYSLIP' || in_array('8',$_SESSION['module_list'])) {
+	<?php 
 		if($_SESSION['apply_js']['payslipchart']==1){ 	?>
 		<!-- google chart custom_list_candidate_offer-->
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

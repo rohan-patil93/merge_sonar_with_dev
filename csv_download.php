@@ -1,13 +1,11 @@
 <?php
 
 include_once 'includes/session.php';
-//print_r($_SESSION); exit;
 include_once 'dbconfig.php';
 include_once 'comm.php';
 $table = $_GET['table'];
 $array = array();
 if($_GET['DISPLAY_ATTRIBUTE']!=""){
-	//echo "Ravi";exit;
 	$pageurl = API."?mode=displayattributesview&fid=application_table_name&view=".$table;
 	$page_response = callAPI($pageurl);
 	$list = json_decode($page_response,1);
@@ -19,7 +17,6 @@ if($_GET['DISPLAY_ATTRIBUTE']!=""){
 	}
 
 }else{
-	//echo "Shankar"; exit;
 	$no_array = array('id','company_id','current_status','status_date','from_date','to_date','created_date','created_by','updated_by','updated_date');
 
 	if($table != "salary_template"){
@@ -29,10 +26,8 @@ if($_GET['DISPLAY_ATTRIBUTE']!=""){
 		$vdata1["where"] = array('is_active'=> '0');
 		$vdata = urlencode(json_encode($vdata1));
 		$vurl = API."?mode=listofTableFieldsonly&table=".$table;
-    //echo $vurl; exit;
 		$configesponse = callAPI($vurl);
 		$array = json_decode($configesponse,1);
-	//unset($array[0]);
 		$array = array_diff($array,$no_array);
 	}else{
 		$array[] = 'employee_code';
@@ -42,7 +37,6 @@ if($_GET['DISPLAY_ATTRIBUTE']!=""){
 		$earningsdata = callAPI($vurl);
 		$earningsdata = json_decode($earningsdata,1);
 		foreach ($earningsdata as  $earnings) {
-			//if(strtolower($earnings['name']) != 'ctc'){
 				$array[]  = $earnings['name'];
 			//}
 		}
@@ -56,8 +50,6 @@ if($table =='employee_other_earnings'){
 	$array[] = 'Component Name';
 	$array[] = 'Claim Amount';
 }
-	//print_r($array); exit;
-	//$array = lcfirst(implode('', array_map('ucfirst', explode('_', $array ))));
 $data = strtoupper(implode(',', $array));
 	//echo $data; exit;
 	//$data = "SLNo,Name,Age,Department,DOB,".$table;

@@ -6,7 +6,6 @@ function isacStatusDescrption($value)
 	$statusurl = API . "?mode=singlerowtabledata&fid=name_value&rid=" . $value . "&table=" . TBL_STATUS;
 	$statusres = file_get_contents($statusurl, false, $context);
 	$stausresult = json_decode($statusres, 1);
-	//echo "-----".$value."hahha"; //print_r($stausresult);
 	$dgc = "#" . strval($stausresult["background_color"]);
 	$string = '<span style = "color: #' . $stausresult["color"] . ';    background: ' . $dgc . ';" class="kt-badge  kt-badge--inline kt-badge--pill">' . $stausresult["name"] . '</span>';
 	return $string;
@@ -14,7 +13,6 @@ function isacStatusDescrption($value)
 function errorMessageUseErrorCode($code)
 {
 	$resurl = API . "?mode=singlerowtabledata&table=" . TBL_ERRORMESSAGE . "&fid=error_number&rid=" . $code;
-	//echo $resurl; exit;
 	$resresponse = file_get_contents($resurl, false, $context);
 	$resresponsedata = json_decode($resresponse, 1);
 	return $resresponsedata['error_description'];
@@ -47,37 +45,28 @@ function toGetUserDetais()
 function candidatedetais($email)
 {
 	$statusurl = API . "?mode=singlerowtabledata&fid=email_id&rid=" . $email . "&table=candidates";
-	//echo $statusurl; exit;
 	$statusres = callAPI($statusurl);
-	//echo $statusres; exit;
 	$stausresult = json_decode($statusres, 1);
 	return $stausresult;
 }
 function vendordetails($email)
 {
 	$statusurl = API . "?mode=singlerowtabledata&fid=email&rid=" . $email . "&table=vendors";
-	//echo $statusurl; exit;
 	$statusres = callAPI($statusurl);
-	//echo $statusres; exit;
 	$stausresult = json_decode($statusres, 1);
 	return $stausresult;
 }
 function vendorRegisterdetails($email)
 {
 	$statusurl = API . "?mode=singlerowtabledata&fid=email&rid=" . $email . "&table=vendor_registers";
-	//echo $statusurl; exit;
 	$statusres = callAPI($statusurl);
-	//echo $statusres; exit;
 	$stausresult = json_decode($statusres, 1);
 	return $stausresult;
 }
 function dyanamicselectdata($table_name, $filed_name)
 {
 	$dsurl = API . "?mode=dyanamicselectdata&table_name=" . $table_name . "&filed_namee=" . $filed_name;
-	//echo $dsurl;
-	//$resresponse = file_get_contents($dsurl, false, $context);
 	$resresponse = callAPI($dsurl);
-	//echo $dsurl; exit;
 	$res = json_decode($resresponse, 1);
 	if ($res['type'] != 'function') {
 		$return = $res['res'];
@@ -90,7 +79,6 @@ function dyanamicselectdatatablename($table_name, $filed_name)
 	$data1["where"] = array('application_table_name' => $table_name, 'field_name' => $filed_name, 'company_id' => $_SESSION['company_id']);
 	$data = urlencode(json_encode($data1));
 	$curl = API . "?mode=gettabledetailswithconditions&table=display_attribute_types&data=" . $data;
-	//echo $curl;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata, 1);
 	$json_data = json_decode(urldecode($cudata[0]['content_details']), 1);
@@ -104,16 +92,12 @@ function dyanamicSelectDataTablenameAllFileds($table_name, $filed_name)
 	$curl = API . "?mode=gettabledetailswithconditions&table=display_attribute_types&data=" . $data;
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata, 1);
-	//	print_r($cudata[0]);
 	return $cudata[0];
 }
 function dyanamicselectreportdata($report_id, $filed_name)
 {
 	$dsurl = API . "?mode=dyanamicselectreportdata&report_id=" . $report_id . "&filed_name=" . $filed_name;
-	//echo $dsurl; exit;
-	//$resresponse = file_get_contents($dsurl, false, $context);
 	$resresponse = callAPI($dsurl);
-	//echo $resresponse;exit;
 	$res = json_decode($resresponse, 1);
 	$return = $res['res'];
 	return $return;
@@ -121,18 +105,13 @@ function dyanamicselectreportdata($report_id, $filed_name)
 function dyanamicafterdata($table_name, $filed_name)
 {
 	$dsurl = API . "?mode=dyanamicafterdata&&table_name=" . $table_name . "&filed_namee=" . $filed_name;
-	//echo $dsurl; exit;
 	$resresponse = file_get_contents($dsurl, false, $context);
 	$res = json_decode($resresponse, 1);
-	/*if($res['type'] != 'function'){
-		$return = $res['res'];
-	}*/
 	return $res;
 }
 function imageupload($jnt, $imagename, $hidimage, $exname = "")
 {
 	$name = $hidimage;
-	//echo "Ravi".$imagename.$array_number; print_r($_FILES); //exit;
 	$exname = ($exname == "") ? "file" : $exname;
 	if ($_FILES[$imagename]['name'] != "") {
 		$ext = explode(".", $_FILES[$imagename]['name']);
@@ -151,7 +130,6 @@ function imageupload($jnt, $imagename, $hidimage, $exname = "")
 
 		}
 		$res = move_uploaded_file($_FILES[$imagename]['tmp_name'], $path . $name);
-		//echo $res."Ravi"; //exit;
 	}
 	return $name;
 }
@@ -160,15 +138,10 @@ function imageuploadwitharray($jnt, $imagename, $hidimage, $exname = "", $array_
 
 	$name = $hidimage;
 	$exname = ($exname == "") ? "file" : $exname;
-	//echo $jnt."--".$imagename."--".$hidimage."---".$exname."---".$array_number; print_r($_FILES);
-	//echo $jnt;
-	//print_r($_FILES[$imagename]['name']);
 	if ($_FILES[$imagename]['name'] != "") {
-		//echo "man";
 		$ext = explode(".", $_FILES[$imagename]['name']);
 		$name = $exname . '_' . time() . "_" . uniqid() . '.' . $ext[1];
 		$path = 'uploads/' . $jnt . '/';
-		//echo $path.$name; //exit;
 		if (!is_dir($path)) {
 			$dual_path = trim($path, '/');
 			$dual_path = explode('/', $dual_path);
@@ -197,7 +170,6 @@ function toGETUsersList()
 		$status[$value['id']] = $name;
 		$imagess[$value['id']] = $value['user_photo'];
 	}
-	//print_r($status); exit;
 	$_SESSION['user_image'] = $imagess;
 	return $status;
 }
@@ -215,7 +187,6 @@ function toGETStatuList()
 }
 function dateformates($pdate, $formate, $sparater)
 {
-	//echo $formate;
 	$array = array('DD' => 'd', 'MM' => 'm', 'YYYY' => 'Y');
 	$formates = explode('-', $formate);
 	$return = "";
@@ -230,13 +201,11 @@ function fromDate($from = '')
 {
 	$from = $from != '0000-00-00' ? $from : '';
 	$_SESSION['date_formate'] = $_SESSION['date_formate'] != "0" ? $_SESSION['date_formate'] : 'Y-m-d';
-	//$_SESSION['date_formate'] = $_SESSION['date_formate']!="" ? $_SESSION['date_formate'] : 'Y-m-d';
 	if ($from != "") {
 		$from = date($_SESSION['date_formate'], strtotime($from));
 	} else {
 		$from = date($_SESSION['date_formate']);
 	}
-	//echo $from; exit;
 	return $from;
 }
 function reqDate($to = '')
@@ -244,7 +213,6 @@ function reqDate($to = '')
 	if ($to != "") {
 		$to = date($_SESSION['date_formate'], strtotime($to));
 	} else {
-		//$to = date($_SESSION['date_formate'],strtotime(date("Y-m-d", mktime()) . " + 15 days"));
 		$to = date($_SESSION['date_formate'], strtotime(date("Y-m-d") . " + 15 days"));
 	}
 	return $to;
@@ -278,9 +246,7 @@ function exportname($name)
 function statusData($table)
 {
 	$statusurl = API . "?mode=statusdata&fid=table_name&rid=" . $table . "&table=" . TBL_STATUSPROGRES;
-	//echo $statusurl;
 	$statusres = callAPI($statusurl);
-	//$statusres = file_get_contents($statusurl, false, $context);
 	$stausresult = json_decode($statusres, 1);
 	return $stausresult;
 }
@@ -295,19 +261,15 @@ function ViewStatusData()
 function ViewStatusValue($value, $table_name = '')
 {
 	$statusurl = API . "?mode=singlestatusdata&status=" . $value . "&table=" . $table_name;
-	//echo $statusurl; exit;
 	$statusres = callAPI($statusurl);
 	$stausresult = json_decode($statusres, 1);
-	//print_r($stausresult); exit;
 	return $stausresult;
 }
 function toGetStatusProgressAction($table_name, $status)
 {
 	$statusurl = API . "?mode=toGetStatusProgressActionList&table=" . $table_name . "&status=" . $status;
-	//echo $statusurl; exit;
 	$statusres = callAPI($statusurl);
 	$stausresult = json_decode($statusres, 1);
-	//print_r($stausresult); exit;
 	return $stausresult;
 
 }
@@ -328,11 +290,6 @@ function viewTitle($title)
 	//strtolower(str)
 	return ucwords(strtolower(str_replace('_', ' ', $title)));
 }
-// function customeummarmonyformateifine($number){
-// 	$num = $_SESSION['config']['number_format'] !='' ? $_SESSION['config']['number_format'] :2;
-// 	$return = number_format($number, $num, '.', ',');
-// 	return $return!='0.00' ? $_SESSION['config']['currency_symbol']."".$return : '-';
-// }
 function customeummarmonyformateifinecheck($number)
 {
 	if ($number != "") {
@@ -353,13 +310,6 @@ function customeummarmonyformateifine($number)
 	if ($number != "") {
 		$formatvalue = customeummarmonyformate($number);
 		return $formatvalue;
-		// if((array)$_SESSION['config']['number_format'] !='' && (array)$_SESSION['config']['currency_symbol']){
-		// 	$num = $_SESSION['config']['number_format'] !='' ? $_SESSION['config']['number_format'] :2;
-		// 	$return = number_format($number, $num, '.', ',');
-		// 	return $return!='0.00' ? $_SESSION['config']['currency_symbol']." ".$return : '-';
-		// }else{
-		// 	return $number;
-		// }
 
 	} else {
 		return "-";
@@ -368,7 +318,6 @@ function customeummarmonyformateifine($number)
 }
 function customeummarmonyformate($number)
 {
-	//print_r($_SESSION['config']['number_format']);
 	if ($number != "") {
 		$expoldform = explode('.', $_SESSION['config']['number_format']);
 		if ($expoldform[0] == 1) {
@@ -383,7 +332,6 @@ function customeummarmonyformate($number)
 }
 function customeNumberFormate($number)
 {
-	//print_r($_SESSION['config']['number_format']);
 	if ($number != "" && $number != 'NaN') {
 		$expoldform = explode('.', $_SESSION['config']['number_format']);
 		if ($expoldform[0] == 1) {
@@ -402,7 +350,6 @@ function customeNumberFormate($number)
 
 function customePayslipNumberFormate($number)
 {
-	//print_r($_SESSION['config']['number_format']);
 	if ($number != 0) {
 		$res = customeNumberFormate($number);
 	} else {
@@ -441,7 +388,6 @@ function itemAttributesDisplayType()
 	$array = array();
 	$array["text"] = "Text";
 	$array["dop_down"] = "Drop Down";
-	//$array["checkbox"]="Check Box";
 	$array["radio"] = "Radio";
 	return $array;
 }
@@ -478,20 +424,13 @@ function dates()
 }
 function file_post_contents($url, $data, $type = '', $username = null, $password = null)
 {
-	//echo $url; exit;
 	if (!strpos($url, 'data_name')) {
 		$url .= "&data_name=" . $_SESSION['DB_NAME'];
 	}
-	// if(!strpos($url,'extra_paramiter')){
-	// 	$url .= "&extra_paramiter=".json_encode($_GET);
-	// }
 	$url .= "&user_id=" . $_SESSION['userid'] . "&company_id=" . $_SESSION['company_id'] . "&module_id=" . $_SESSION['work_module_setup_id'] . "&module_group_id=" . $_SESSION['default_module_group_id'] . "&ipaddress=" . $_SERVER['REMOTE_ADDR'] . "&page_option=" . $_REQUEST['option'];
 
 
-	//$url = $url."&data_name=".$_SESSION['DB_NAME']."&user_id=".$_SESSION['userid']."&company_id=".$_SESSION['company_id']."&module_id=".$_SESSION['module_setp'][0]['module_id']."&module_group_id=".$_SESSION['default_module_group_id']."&ipaddress=".$_SERVER['REMOTE_ADDR']."&page_option=".$_GET['option'];
 
-	//echo $url;  print_r($_REQUEST); //exit;
-	//echo $type; //exit;
 	$postdata = http_build_query($data);
 	$opts = array(
 		'http' => array(
@@ -504,8 +443,6 @@ function file_post_contents($url, $data, $type = '', $username = null, $password
 	);
 	$context = stream_context_create($opts);
 	$return = file_get_contents($url, false, $context);
-	//echo $return; //exit;
-	//print_r($return);// exit;
 	$cahek_dd = json_decode($return, 1);
 	if ($cahek_dd['status'] == 'sucess') {
 		if ($type == 'insert') {
@@ -515,7 +452,6 @@ function file_post_contents($url, $data, $type = '', $username = null, $password
 			$_SESSION['check'] = '3001';
 		}
 	}
-	//print_r($return); exit;
 	return $return;
 }
 function toGetErrorMessages()
@@ -541,10 +477,7 @@ function toGetErrorMessages()
 function toGetRolePermisssionsByUserId($user_id)
 {
 	$rolesurl = API . "?mode=getrolepermission&user_id=" . $user_id;
-	//echo $rolesurl; exit;
 	$roledata = callAPI($rolesurl);
-	//exit;
-	//echo $roledata; exit;
 	$roledata = json_decode($roledata, 1);
 	return $roledata;
 }
@@ -645,9 +578,6 @@ function timezoan()
 }
 function callAPI($page)
 {
-	/*if(!strpos($page,'extra_paramiter')){
-		$page .= "&extra_paramiter=".json_encode($_GET);
-	}*/
 	if (!strpos($page, 'page_option')) {
 		$page .= "&page_option=" . $_GET['option'];
 	}
@@ -666,8 +596,6 @@ function callAPI($page)
 	$context = stream_context_create($opts);
 
 	$res = file_get_contents($url, false, $context);
-	//echo $res; //exit;
-	//echo "man";
 	return $res;
 }
 function toGetApplicationPagesList()
@@ -677,7 +605,6 @@ function toGetApplicationPagesList()
 	$wh1['field'] = "application_table_name,list_page_name,insert_page_name,edit_page_name,view_page_name,approval_page_name,insert_page_type,edit_page_type,view_page_type,list_page_type";
 	$data1 = urlencode(json_encode($wh1));
 	$pages = API . "?mode=gettabledetailswithconditions&table=" . TBL_APPLICATION_PAGES . "&data=" . $data1;
-	//$pages = API."?mode=gettabledetails&table=".TBL_APPLICATION_PAGES;
 	$page_list = callAPI($pages);
 	$res = json_decode($page_list, 1);
 	return $res;
@@ -685,7 +612,6 @@ function toGetApplicationPagesList()
 function logout()
 {
 	$pages = API . "?mode=logout&user_id=" . $_SESSION['userid'];
-	//echo $pages;exit;
 	$page_list = callAPI($pages);
 
 	$res = json_decode($page_list, 1);
@@ -693,7 +619,6 @@ function logout()
 }
 function toGetTableNameBaseApplicationPagesList($type, $type_name, $case = '')
 {
-	//echo "asdlaslda";
 	if ($case == '') {
 		$type_name = strtoupper($type_name);
 	}
@@ -703,18 +628,12 @@ function toGetTableNameBaseApplicationPagesList($type, $type_name, $case = '')
 			break;
 		}
 	}
-	//print_r($data);
 	return $data;
 }
 function toGetMenuDetailsBaseMenuPageName($page)
 {
-	//echo $page;
-	//echo "<pre>";print_r($_SESSION['application_menu']);
 	foreach ($_SESSION['application_menu'] as $pages) {
-		//print_r($page); //exit;
-		//echo $pages['Page_Name']."==". $page."</br>";
 		if ($pages['page_name'] == $page) {
-			//echo "ravi";
 			$data = $pages;
 			break;
 		}
@@ -738,13 +657,11 @@ function toGetApplicationMenuListold()
 	$menu = API . "?mode=gettabledetailswithconditions&table=application_menu&data=" . $vdata;
 
 	$page_list = callAPI($menu);
-	//print_r($vdata1); echo  $page_list; exit;
 	$res = json_decode($page_list, 1);
 	return $res;
 }
 function toGETModuleList()
 {
-	//$vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>0);
 
 	$vdata1 = array();
 	$vdata1["where"] = array('company_id' => $_SESSION['company_id'], 'is_active' => 0, 'module_id' => $_SESSION['work_module_setup_id']);
@@ -769,7 +686,6 @@ function toGetApplicationMenuList()
 	$vdata = urlencode(json_encode($vdata1));
 	$menu = API . "?mode=gettabledetailswithconditions&table=application_menu&data=" . $vdata;
 	$page_list = callAPI($menu);
-	//print_r($vdata1); echo  $page_list; exit;
 	$res = json_decode($page_list, 1);
 	return $res;
 }
@@ -777,14 +693,8 @@ function toGETNavDetailslastest($type)
 {
 	$array = array();
 	$menu = $_SESSION['application_menu'];
-	//echo $type."<pre>"; print_r($_SESSION['role_permission']); echo $type." Menus:"; print_r($menu); //exit;
-	//echo "<pre>".$type." Menus:"; print_r($menu);
 	foreach ($menu as $key => $value) {
-		//echo $value['page_name']."||".$type ."||". $value['parent_menu']."||".$res."</br>";
 		if ($value['menu_location'] == $type && $value['parent_menu'] == 0) {
-			//$res = checkPremission($value['page_name']);
-			//echo "<br>SHANKAR".$value['page_name']."||".$value['menu_label']."Check Premission:".$res;
-			//if($res==1){
 			$child = getParentidmenus($value['id'], 1);
 			$array[$value['id']]['id'] = $value['id'];
 			$array[$value['id']]['Label'] = $value['menu_label'];
@@ -794,8 +704,6 @@ function toGETNavDetailslastest($type)
 			//}
 		}
 	}
-	//echo $type."<pre>";print_r($array);exit;
-	//echo "<pre>check"; print_r($_SESSION['role_permission']);
 
 	return $array;
 }
@@ -804,7 +712,6 @@ function menurecheck($data)
 	$array = array();
 	foreach ($data as $key => $dat) {
 		if (count((array) $dat['child']) > 0) {
-			//$array[$key]=$dat;
 			foreach ($dat['child'] as $ddkey => $dd) {
 				if (count((array) $dd['child']) > 0) {
 					$array[$key]['id'] = $dat['id'];
@@ -836,14 +743,11 @@ function menurecheck($data)
 function toGETNavDetails($type)
 {
 	$menu = $_SESSION['application_menu'];
-	//echo $type."<pre>";print_r($menu); //exit;
 
 	foreach ($menu as $key => $value) {
 		if ($value['menu_location'] == $type && $value['parent_menu'] == 0) {
 
 			if ($_SESSION['config']['role_permission'] == 0) {
-				//echo "Ravi";
-				//echo "if the loopt".$key;
 				if (in_array($value['page_name'], (array) $_SESSION['application_no_permission_pages']['option'])) {
 					$res = 1;
 				} else {
@@ -869,9 +773,6 @@ function toGETNavDetails($type)
 	}
 	if ($_SESSION['config']['role_permission'] == 0) {
 		$array = menurecheck($array);
-		// if($type=='LN' && $_SESSION['admin_type'] != 1){
-		// 	$array = tocheckmenurolepermssion($array);
-		// }
 	}
 
 	return $array;
@@ -960,8 +861,6 @@ function checkPremission($name)
 function checkPremissionlastet($name)
 {
 	$return = 0;
-	//echo  "Ravi".$name."<br>"; //exit;
-	//echo "<pre>check"; print_r($_SESSION['role_permission']);
 	foreach ($_SESSION['application_pages'] as $value) {
 		if ($value['list_page_name'] == $name || $value['insert_page_name'] == $name || $value['edit_page_name'] == $name || $value['view_page_name'] == $name) {
 			$table = $value['application_table_name'];
@@ -984,12 +883,10 @@ function checkPremissionlastet($name)
 
 		}
 	}
-	//echo $type."--".$name; echo $table; //exit;
 	if ($_SESSION['role_permission'][$name][$type] == 1 || $_SESSION['role_permission'][$lname][$type] == 1 || $_SESSION['role_permission'][$iname][$type] == 1 || $_SESSION['role_permission'][$ename][$type] == 1 || $_SESSION['role_permission'][$vname][$type] == 1) {
 		$return = 1;
 	}
-	//echo "<br>".$name."----".$return; //exit;
-	return $return; //exit;
+	return $return;
 }
 function toGetTableNameUsingPageName($name)
 {
@@ -999,14 +896,13 @@ function toGetTableNameUsingPageName($name)
 			$return = $value['application_table_name'];
 		}
 	}
-	return $return; //exit;
+	return $return;
 }
 function getParentidmenus($pid, $len)
 {
 	$menu = $_SESSION['application_menu'];
 	$array1 = array();
 	foreach ($menu as $key => $value) {
-		//$res = checkPremission($value['page_name']);
 
 		$res = 1;
 		if ($value['parent_menu'] == $pid && $_SESSION['config']['role_permission'] == 0) {
@@ -1044,7 +940,6 @@ function getParentidmenuscheck($pid, $len)
 			$array1[$value['id']]['Label'] = $value['menu_label'];
 			$array1[$value['id']]['Menu_Icon'] = $value['menu_icon'];
 			$array1[$value['id']]['Page_Name'] = $value['page_name'];
-			//$array1[$value[id]]['child'] = getParentidmenus($value['id'],$len+1);
 			break;
 		}
 	}
@@ -1212,40 +1107,20 @@ function numberToWordFormateRupees($number)
 }
 function toGetCountryNameBaseCountryID($id)
 {
-	//echo "hai||".$id;
 	$cu = API . "?mode=singlerowtabledata&rid=$id&table=" . TBL_COUNREIES;
-	//echo $cu;
 	$res = callAPI($cu);
-	//echo $res;
 	$res = json_decode($res, 1);
-	//print_r($res);
 	return $res['country_name'];
 }
 function toGETConfigartion()
 {
 	$configurl = API . "?mode=singlerowtabledata&fid=company_id&rid=" . $_SESSION['company_id'] . "&table=" . TBL_CONFIG;
-	//echo $configurl;
 	$configesponse = callAPI($configurl);
 	$configdata = json_decode($configesponse, 1);
-	//print_r($configdata); exit;
 	return $configdata;
 }
 function toGetTaxrates()
 {
-	/*$configurl = API."?mode=toGetTaxrates";
-	$configesponse = callAPI($configurl);
-	$configdata = json_decode($configesponse,1);
-	foreach($configdata as $data){
-		$array[$data['id']] = $data['tax_rate']*100 . "Percentage";
-	}
-	$configurl = API."?mode=gettabledetails&table=".TBL_TAX_AUTHORITIES_RATES;
-	$configesponse = callAPI($configurl);
-	$configdata = json_decode($configesponse,1);
-	foreach($configdata as $data){
-		$array[$data['id']] = $data['tax_rate']*100 . " %";
-	}
-	return $array;*/
-	//return array('2.5'=>"2.5% Percentage",'5'=>"5% Percentage",'10'=>"10% Percentage", '18'=>"18% Percentage",'20'=>"20% Percentage",'28'=>"28% Percentage");
 	return array('2.5' => "2.5%", '5' => "5%", '10' => "10%", '18' => "18%", '20' => "20%", '28' => "28%");
 }
 function toCreateInvoicePages()
@@ -1266,7 +1141,6 @@ function toCreateInvoicePages()
 		$table_list[$con['option_url']]['display_page'] = $con['display_page'];
 	}
 
-	//print_r($table_list); exit;
 	return $table_list;
 }
 function toGetpageOptionName($table, $page_option = "")
@@ -1280,7 +1154,6 @@ function toGetpageOptionName($table, $page_option = "")
 	$vurl = API . "?mode=gettabledetailswithconditions&table=" . TBL_DYNAMIC_MAPPING_TABLES . "&data=" . $vdata;
 	$configesponse = callAPI($vurl);
 	$return = json_decode($configesponse, 1);
-	//print_r($return);exit;
 	return $return[0];
 
 }
@@ -1292,7 +1165,6 @@ function toGETactionloglastetrecards()
 	$vdata1["where"] = array('company_id' => $_SESSION['company_id'], 'user_id' => $_SESSION['userid']);
 	$vdata = urlencode(json_encode($vdata1));
 	$vurl = API . "?mode=gettabledetailswithconditions&table=" . TBL_ACTION_LOG . "&data=" . $vdata;
-	// echo $vurl;
 	$configesponse = callAPI($vurl);
 	return json_decode($configesponse, 1);
 
@@ -1305,14 +1177,10 @@ function togetaprovaluserlist($table_name, $rid)
 	$return = array();
 	$vdata1["where"] = array('transaction_table' => $table_name, 'transaction_id' => $rid, 'company_id' => $_SESSION['company_id']);
 	$vdata = urlencode(json_encode($vdata1));
-	// print_r($vdata1);
 	$vurl = API . "?mode=gettabledetailswithconditions&table=" . TBL_TRANSACTION_APPROVAL_LOGS . "&data=" . $vdata;
 	$res = callAPI($vurl);
-	//echo $table_name."|||||".$rid; exit;
 	$res = json_decode($res, 1);
-	//echo $res;
 	foreach ($res as $data) {
-		//print_r($data);
 		if ($data['response_type'] == "0") {
 			$user[] = $data['user_id'];
 		}
@@ -1324,20 +1192,16 @@ function togetaprovaluserlist($table_name, $rid)
 }
 function toGetPendingRequisitionQty($table)
 {
-	//echo "hai adasd asd ad asd as d asd asd asdas d asd asdasd as d asd as d as d asdasdasd asd"; exit;
 	$vurl = API . "?mode=toGetPendingRequisitionQty&table=" . $table;
-	//echo $vurl; //exit;
 	$res = callAPI($vurl);
 	return json_decode($res, 1);
 }
 function toGetApplicationSerialNumber($table_name)
 {
-	//echo $table_name;
 	$vdata1 = array();
 	$vdata1["where"] = array('application_table_name' => $table_name, 'is_active' => 0);
 	$vdata = urlencode(json_encode($vdata1));
 	$vurl = API . "?mode=gettabledetailswithconditions&table=" . TBL_APPLICATION_SERIAL_NUMBERS . "&data=" . $vdata;
-	// echo $vurl;
 	$res = callAPI($vurl);
 	$res = json_decode($res, 1);
 	$res = $res[0];
@@ -1353,7 +1217,6 @@ function toGetCompanyList()
 	$res = callAPI($vurl);
 	$res = json_decode($res, 1);
 	foreach ($res as $data) {
-		//print_r($data);
 		$datas[$data['id']] = $data['name'];
 	}
 	return $datas;
@@ -1363,7 +1226,6 @@ function NotificationRead($id)
 	$data = array('read_status' => 1);
 	$data = urlencode(json_encode($data));
 	$vurl = API . "?mode=notification_read&id=" . encodeId($id);
-	//echo $vurl; exit;
 	$res = callAPI($vurl);
 }
 function fiscalmonth($month)
@@ -1381,8 +1243,6 @@ function dateDiffInDays($date1, $date2 = '')
 }
 function Insertqueries($post)
 {
-	//print_r($post);//exit;
-	//$dats = $post;
 	$dats = array();
 	$dats['query_type'] = $post['query_type'];
 	$dats['query_text'] = $post['query_text'];
@@ -1394,18 +1254,14 @@ function Insertqueries($post)
 	$dats['company_id'] = $_SESSION['company_id'];
 	$dats['is_active'] = 0;
 	$dats['current_status'] = 0;
-	//$dats['created_date'] = nowDate();
 	$post['option'] = $_GET['option'];
 	$dats['originator'] = $post['send_id'];
 	$post['company_id'] = $_SESSION['company_id'];
 	unset($dats['submit']);
 	unset($dats['trno']);
 	unset($dats['send_id']);
-	//print_r($dats);exit;
 	$url = API . "?mode=adddata&table=" . TBL_TRANSACTION_QUERIES . "&method=post";
 	$response = file_post_contents($url, $dats, 'insert');
-	/* echo $response;
-	print_r($post); exit;*/
 	$post['user_id'] = $_SESSION['userid'];
 	$notiurrl = API . "?mode=querynotificationandemail&method=post";
 	$res = file_post_contents($notiurrl, $post, 'insert');
@@ -1418,22 +1274,14 @@ function updatequeries($da)
 	$data['updated_by'] = $da['user_id'];
 	$data['updated_date'] = nowDate();
 
-	//print_r($data); exit;
 	$url = API . "?mode=updaterowtabledata&rid=" . $da['reply_id'] . "&table=" . TBL_TRANSACTION_QUERIES . "&method=post";
-	//echo $url; exit;
 	$response = file_post_contents($url, $data, 'update');
 	return $response;
 }
 function insertatchments($data)
 {
-	/*$url = API."?mode=adddata&table=".TBL_APPLICATION_ATTACHMENTS."&method=post";
-
-	//echo $url; exit;
-	$response = file_post_contents($url, $data, 'update');
-	//echo $data; exit;*/
 	$vdata = urlencode(json_encode($data));
 	$vurl = API . "?mode=adddata&table=" . TBL_APPLICATION_ATTACHMENTS . "&data=" . $vdata;
-	//echo $vurl;  exit;
 	$response = callAPI($vurl);
 	return $response;
 }
@@ -1473,7 +1321,6 @@ function gst_error_check($gst_number)
 		$digit = $factor * $codePoint;
 		$factor = ($factor == 2) ? 1 : 2;
 		$x = ($digit % $mod);
-		#echo $x;
 		$digit = (int) ($digit / $mod) + (int) ($digit % $mod);
 		$sum += $digit;
 	}
@@ -1502,10 +1349,9 @@ function emaildatareplacedd($data, $mesg)
 	if ($mes2 == '') {
 		$mes2 = 0;
 	}
-	//$mesg= "11qww".$mes1."ppp".$mes2; //exit;
 	echo $mes1 . "###" . $mes2;
 	if ($mes1 > 0 && $mes2 > 0) {
-		echo "Ravi";//exit;
+		echo "Ravi";
 		$str = '';
 		$sstr = '';
 		$str = strtolower(substr($mesg, $mes1, $mes2 - $mes1));
@@ -1514,36 +1360,29 @@ function emaildatareplacedd($data, $mesg)
 		$mesg = emaildatareplace($data, $mesg);
 
 	}
-	//echo $mesg; exit;
 	return $mesg;
 }
 function emaildatareplace($data, $mesg)
 {
-	//print_r($data);
 	$mes1 = strpos($mesg, '{[') + 2;
 	$mes2 = strpos($mesg, ']}');
 	if ($mes2 == '') {
 		$mes2 = 0;
 	}
-	//$mesg= "11qww".$mes1."ppp".$mes2; //exit;
-	//echo $mes1."###".$mes2;
 	$count = substr_count((array) $mesg, "{[") + 2;
 	for ($i = 0; $i < $count; $i++) {
 		if ($mes1 > 0 && $mes2 > 0) {
-			//   echo "Ravi";//exit;
 			$str = '';
 			$sstr = '';
 			$str = strtolower(substr($mesg, $mes1, $mes2 - $mes1));
 			$sstr = "{[" . $str . "]}";
 			$mesg = str_replace($sstr, $data[$str], $mesg);
-			//$mesg = emaildatareplace($data, $mesg);
 			$mes1 = strpos($mesg, '{[') + 2;
 			$mes2 = strpos($mesg, ']}');
 		} else {
 			break;
 		}
 	}
-	//echo $mesg; exit;
 	return $mesg;
 }
 function emailnumberschange($mesg)
@@ -1554,7 +1393,6 @@ function emailnumberschange($mesg)
 	if ($mes2 == '') {
 		$mes2 = 0;
 	}
-	//echo "11qww".$mes1."ppp".$mes2;
 	if ($mes1 > 0 && $mes2 > 0) {
 		$str = '';
 		$sstr = '';
@@ -1568,7 +1406,6 @@ function emailnumberschange($mesg)
 function dyanamicserialnumber($table)
 {
 	$vurl = API . "?mode=dyanamicserialnumber&table=" . $table;
-	//echo $vurl;  exit;
 	$res = callAPI($vurl);
 	return json_decode($res);
 }
@@ -1576,33 +1413,26 @@ function toGetclockdata()
 {
 	$vdata1 = array();
 	$vdata1["where"] = array('is_active' => '0', 'employee_id' => $_SESSION['emp_id'], 'attendace_date' => date('Y-m-d'));
-	//print_r($vdata1); exit;
 	$vdata = urlencode(json_encode($vdata1));
 	$vurl = API . "?mode=gettabledetailswithconditions&table=employee_daily_attendances&data=" . $vdata;
-	//echo " Before Clock in out details - ".date('m/d/Y h:i:s a')."</br>";
 	$configesponse = callAPI($vurl);
 	$return = json_decode($configesponse, 1);
-	//print_r($return);exit;
-	//echo " After Clock in out details - ".date('m/d/Y h:i:s a')."</br>";
 	return $return[0];
 }
 function toGetEmployeeData()
 {
 	$vdata1 = array();
 	$vdata1["where"] = array('is_active' => '0', 'user_id' => $_SESSION['userid']);
-	//print_r($vdata1); exit;
 	$vdata = urlencode(json_encode($vdata1));
 	$vurl = API . "?mode=gettabledetailswithconditions&table=employees&data=" . $vdata;
 	$configesponse = callAPI($vurl);
 	$return = json_decode($configesponse, 1);
-	//print_r($return);exit;
 	return $return[0];
 }
 function phonenumberdisplay($result)
 {
 
 	return preg_replace('~.*(\d{3})[^\d]{0,7}(\d{3})[^\d]{0,7}(\d{4}).*~', '($1) $2-$3', $result);
-	//return $result;
 }
 function toupdateuserconfirmedbasicinfo()
 {
@@ -1616,7 +1446,6 @@ function toupdateemployee($name)
 
 	$updata = array();
 	$updata['image'] = $name;
-	//print_r($data); exit;
 	$url = API . "?mode=updaterowtabledata&rid=" . $_SESSION['emp_id'] . "&table=employees&method=post";
 	///echo $url; exit;
 	$response = file_post_contents($url, $updata, 'update');
@@ -1624,11 +1453,9 @@ function toupdateemployee($name)
 }
 function todisplaystatuslist($data)
 {
-	//print_r($data); exit;
 	$wlist = array();
 	if ($data['table'] != "" && $data['current_status'] != "") {
 		$wlist_url = API . "?mode=wrokflowlist&table=" . $data['table'] . "&amount=" . $data['grand_total'];
-		// echo $wlist_url; exit;
 		$wlist = callAPI($wlist_url);
 		$wlist = json_decode($wlist, 1);
 	}
@@ -1670,7 +1497,6 @@ function todisplaystatuslist($data)
 
 function todisplaythree($data)
 {
-	//print_r($data);
 	$diss = "";
 	if ($data['id'] != "" && $data['id'] != "0") {
 		if ($data['encode'] == 'no') {
@@ -1685,7 +1511,6 @@ function todisplaythree($data)
 			$data['transaction_number'] = $erid[1];
 			$data['transaction_id'] = $erid[1];
 		}
-		//print_r($data);
 		echo '<div class="container-fluid "><div class="card card-custom"><div class="card-body"><div class="row">';
 		if ($data['dis_query'] == 'yes') {
 			$diss .= todisplayquerylist($data);
@@ -1705,7 +1530,6 @@ function todisplaythree($data)
 }
 function todisplayquerylist($data)
 {
-	//print_r($data); exit;
 	$question_display = 'Y';
 	$replay_display = 'N';
 	$trnsation_no = $data['transaction_number'];
@@ -1721,19 +1545,15 @@ function todisplayquerylist($data)
 }
 function todisplaytimeline($data)
 {
-	// print_r($data);
 	$vdata1 = array();
 	$vdata1["where"] = array('transaction_primary_1' => $data['value_id'], 'transaction_table' => $data['table'], 'company_id' => $_SESSION['company_id']);
 	$vdata1["field"] = "id,transaction_type,user_id,action_log,action_date,status_value";
 	$vdata1['order'] = "id ASC";
 	$vdata = urlencode(json_encode($vdata1));
 	$vurl = API . "?mode=gettabledetailswithconditions&table=" . TBL_ACTION_LOG . "&data=" . $vdata;
-	//print_r($vdata1); echo $vurl;
 	$vdata_details = callAPI($vurl);
 	$vdata_details = json_decode($vdata_details, 1);
-	//print_r($vdata1);
 	$dis_str = '';
-	//$dis_str.='<div class="col-lg-12">';
 	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-6" id="accordionExample2">                    
 		<div class="card latest-update-card acc-bgc">
 		<div class="card-header" id="headingTwo2">
@@ -1772,7 +1592,6 @@ function todiplaycomments($data)
 	$appruser_list = $appruser_list_data['user'];
 	$appruser_data = $appruser_list_data['details'];
 	$dis_str = '';
-	//	print_r($appruser_data);
 	if (count((array) $appruser_data) > 0) {
 		$stausresult = ViewStatusData();
 
@@ -1825,14 +1644,9 @@ function todiplaycomments($data)
 }
 function todisplaytracking($data)
 {
-	//$vurl = API."?mode=gettrackingdynamic";
 	$vurl = API . "?mode=gettrackingdynamic&table=" . $data['table'] . "&transaction_id=" . $data['transaction_id'];
-	//echo $vurl;
 	$vdata_details = callAPI($vurl);
 	$vdata_details = json_decode($vdata_details, 1);
-	// echo "<pre>";
-	// print_r($vdata_details);
-	// echo "<pre>";
 	$dis_str = '';
 	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-6" id="accordionExample4">                    
 		<div class="card latest-update-card acc-bgc">
@@ -2235,7 +2049,6 @@ function getList($tablename = "", $id = "")
 {
 	$url = API . "?mode=getlist&tablename=" . $tablename . "&id=" . $id;
 	$collfunction = callAPI($url);
-	//$jsondecode = json_decode($collfunction,1);
 	return $collfunction;
 }
 function userlistwithrole($data)
@@ -2249,16 +2062,6 @@ function convert_Rupee_Nomber($amount)
 {
 	return $amount;
 }
-// function convert_Rupee_Nomber($amount){
-//     $length = strlen($amount);
-//     if($length>=6 && $length <=7){
-//         echo round($amount/100000,2).' Lac';
-//     }else if($length>=8 && $length <=9){
-//         echo round($amount/10000000,2).' Cr.';
-//     }else if($length>=4 && $length <=5){
-//         echo round($amount/1000,2).' K';
-//     }else{ echo $amount; }
-// }
 function convert_Rupee_Number($amount)
 {
 	if (($amount / 10000000) >= 1) {
@@ -2301,7 +2104,6 @@ function checkWhoShouldApprove($val)
 {   // find who should approve
 	$ssql = API . "?mode=checkwhoshouldapproves&tablename=" . $val['tablename'] . "&rid=" . $val['rid'] . "&exicute_type=" . $val['exicute_type'] . "&emp_id=" . $_SESSION['emp_id'];
 	$rowreturn = callAPI($ssql);
-	//$rowreturns = json_decode($rowreturn,1);
 	return $rowreturn;
 }
 function checkcriteria($val)
@@ -2314,7 +2116,6 @@ function checkcriteria($val)
 	} else {
 		return "No WorkFlow";
 	}
-	//return $return;
 }
 function getstatusprogresslist($table)
 {
@@ -2337,7 +2138,6 @@ function customgetstatusworkflow($table, $id, $currnet_status, $created_by)
 	}
 	if (isset($result['approve'])) {
 		$approve_display_status = $result['approve'];
-		//$acceptstatus = $approve_display_status['status']=="-1"?"Approve11":$stausresult[$approve_display_status['status']]['name'];
 		$acceptstatus = $approve_display_status['status'] == "-1" ? "Approval" : $statuse[$approve_display_status['status']];
 		?>
 		<button class="btn"
@@ -2365,7 +2165,6 @@ function customgetstatusworkflow($table, $id, $currnet_status, $created_by)
 			onclick="startWorkflow(<?php echo $id; ?>,'<?php echo $table; ?>')"><?php echo $statuse[$result['staus']['status']]; ?>
 		</button>
 	<?php }
-	//return $result;
 	$statusVal = $stausresult[$currnet_status];
 	if ($id != "") {
 		?>
@@ -2380,10 +2179,8 @@ function todisplayviewfiled($value, $type)
 {
 	if (is_array($_SESSION['field_secruity'][$type]) && $value != "") {
 		if ($_SESSION['field_secruity'][$type]['field_type'] == 'email') {
-			//echo "ste3 ".$value;
 			$cemail = explode('@', $value);
 			$value = $cemail['0'];
-			//echo "ste113 ".$value."--".$cemail['1'];
 		}
 		$prefix = $_SESSION['field_secruity'][$type]['display_field_prefix_no'];
 		$postfix = $_SESSION['field_secruity'][$type]['display_field_suffix_no'];
@@ -2395,7 +2192,6 @@ function todisplayviewfiled($value, $type)
 			$str_array = str_split($value);
 
 			foreach ($str_array as $key => $char) {
-				//echo "--".$key."--".$char;
 				if ($key < $prefix || $key > $value_count - 1 - $postfix) {
 					$str[$key] = $char;
 				} else {
@@ -2411,7 +2207,6 @@ function todisplayviewfiled($value, $type)
 				$str[] = $replacement;
 			}
 			$str = implode("", (array) $str);
-			//$str = substr_replace($value,$replacement,0,$value_count);
 			if ($_SESSION['field_secruity'][$type]['field_type'] == "email") {
 				$str .= $cemail['1'];
 			}
@@ -2468,7 +2263,7 @@ function checkTableName($name)
 			}
 		}
 	}
-	return $table; //exit;
+	return $table;
 }
 function dyanamicreferFunc($val, $filed_name, $table)
 {
@@ -2658,18 +2453,13 @@ function nearestDateFirstShowone($arry, $field)
 	$nearendholiday = array();
 	$holdyadate = array();
 	foreach ($arry as $key => $value) {
-		//$dateggd[] = date('Y').'-'.date('m-d',strtotime($value[$field]));
 		if (strtotime(date('Y') . '-' . date('m-d', strtotime($value[$field]))) >= strtotime(date("Y-m-d"))) {
-			//$value[$field.'_1']  = date('Y').'-'.date('m-d',strtotime($value[$field]));
 			$nearstartholiday[] = $value;
 		} else {
-			//$value[$field.'_1']  = date('Y').'-'.date('m-d',strtotime($value[$field]));
 			$nearendholiday[] = $value;
 		}
 	}
 	$resultary = array_merge($nearstartholiday, $nearendholiday);
-	//$resultary['new'] =  $nearstartholiday;
-	//$resultary['old'] =  $nearendholiday;
 	return $resultary;
 }
 
@@ -2825,10 +2615,6 @@ function DynamicPhoneNumberFormt($phone_number)
 	}
 
 
-	//$pregacode = DEFAULT_PHONE_NUMBER_FORMAT;
-	//print_r($pregacode);
-	//$formatted_number = preg_replace($pregacode['digit_format'], $pregacode['view_format'], $phone_number);
-	//$formatted_number = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "($1) $2-$3", $phone_number);
 	return $formatted_number;
 }
 function insertAuditTrail($parent_option = "", $extra_paramiter = "", $extra_details = "")
@@ -2866,7 +2652,6 @@ function getTheDay($date)
 }
 function viewTitlePage($title)
 {
-	//$array = array('COM_','LIST_','INSERT_','EDIT_','VIEW_','_');
 	$array = array('com', 'COM_', '_');
 	foreach ($array as $value) {
 		$title = str_replace($value, ' ', $title);
@@ -3133,13 +2918,9 @@ function getWorkflowStatus($table_name,$transaction_no,$current_status){
 **/
 function getWorkflowStatus($table_name, $transaction_no, $current_status, $device_type = "")
 {
-	// return $table_name;
-	//echo "table_name:".$table_name."--transaction_no:".$transaction_no."---current_status:".$current_status;
 	$url = API . "?mode=getdynamicworkflowsteps&transaction_table=" . $table_name . "&transaction_no=" . $transaction_no . "&current_status=" . $current_status;
 	$api = callAPI($url);
 	$result = json_decode($api, 1);
-	// return $result;
-	//echo "<pre>"; print_r($result); echo "</pre>";
 	$workflowsteps = $result['workflowsteps'];
 	$workflow_details = $result['workflow_details'];
 	$status_progress = $result['status_progress'];
@@ -3171,7 +2952,6 @@ function getWorkflowStatus($table_name, $transaction_no, $current_status, $devic
 		if (count((array) $nextstepkeyvalue) >= 5) {
 			$breadcrumbwidthcall = "addwidth";
 		}
-		//if($workflow_details['workflow_level'] !=0){ // not Workflow Direct Approved
 		foreach ($nextstepkeyvalue as $statuskey => $nextstatus) {
 			if ($statuskey != ST_APPROVED) {
 				$userdetails = $breadcrumb[$statuskey]['aproval_user'];
@@ -3179,7 +2959,6 @@ function getWorkflowStatus($table_name, $transaction_no, $current_status, $devic
 				if ($statuskey == '0' || ($statuskey == '3' && $table_name == 'transaction_activity_schedule')) {
 					$display_name = $_SESSION['users'][$transaction_owner_id];
 				} else {
-					// if(count((array)$userdetails) == 1){
 					if (count((array) $userdetails) == 1 && $breadcrumb[$statuskey]['approval_type'] != 'location_wise') {
 						if ($workflow_details['breadcrumb_view_field_type'] == "R") { // Role Show
 							$display_name = $application_user_module_roles[$userdetails[0]['user_id']];
@@ -3187,7 +2966,6 @@ function getWorkflowStatus($table_name, $transaction_no, $current_status, $devic
 							$display_name = $userdetails[0]['permision'] . ' - ' . $userdetails[0]['display_name'];
 						}
 					} else {
-						//$multiuserlistfun = "viewApprovalAllUsers('".json_encode($userdetails)."')";
 						$multiuserlistfun = "viewApprovalAllUsers('open-slide_popup" . $statuskey . "')";
 						$display_name = ucwords(str_replace("_", " ", ($breadcrumb[$statuskey]['sub_approve_type']))) . ' <i class="ti-arrow-circle-down" onclick="' . $multiuserlistfun . '"></i>';
 					}
@@ -3239,14 +3017,10 @@ function getWorkflowStatus($table_name, $transaction_no, $current_status, $devic
 				$workflow_btn .= '<div class="btn-group workflow-btn mt-4" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">';
 			}
 			if ($current_status == ST_ACTIVE || $current_status == ST_SEND_BACK || $current_status == ST_CALLBACK || $workflow_details['workflow_trigger_status'] == $current_status) {  //Active Time Show Button
-				//echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAA".$transaction_owner_id;
 				if ($transaction_owner_id == $_SESSION['userid']) {
 					if ($current_status == ST_SEND_BACK || $current_status == ST_CALLBACK) {
-						//$workflowsteps[$current_status]['current_status'] = ST_ACTIVE;
 						$current_status = $workflow_details['workflow_trigger_status']; // direct use accept
 						$nextstatus = $workflow_details['workflow_trigger_status']; // direct use accept
-						// 	$current_status = ST_ACTIVE;
-						// 	$nextstatus = ST_ACTIVE;
 					} else {
 						$nextstatus = $workflow_details['workflow_trigger_status'];
 					}
@@ -3468,7 +3242,6 @@ function getApplicationEmptyTransactions($option)
 	$empty_transaction = $result['empty_transaction'];
 	$mesg = "<div class='row'>";
 	$show = 1;
-	//echo "<pre>"; print_r($empty_transaction); echo "</pre>";
 	foreach ($empty_transaction as $et) {
 		if ($et['cnt'] == '0') {
 			$show = 0;
@@ -3550,7 +3323,6 @@ function getPagePermision($option = "", $transaction_table = "", $transaction_ty
 				}
 			}
 			$permissions_transaction = $_SESSION['role_permission'][$transaction_table];
-			//echo "<pre>"; print_r($_SESSION['role_page_permission'][$option]); echo "</pre>";
 			if ($permissions_transaction['permission_view'] != '0' && $_SESSION['role_page_permission'][$option]['permission_view'] != '0' && $transaction_type == 'VIEW') {
 				$permission = array('permission' => 'N', 'tooltip' => 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="' . $_SESSION['error_message']['403'] . '"', 'class' => 'no-permission', 'else' => $transaction_table);
 			} elseif ($permissions_transaction['permission_insert'] != '0' && $_SESSION['role_page_permission'][$option]['permission_insert'] != '0' && $transaction_type == 'INSERT') {
@@ -3573,9 +3345,6 @@ function getPagePermision($option = "", $transaction_table = "", $transaction_ty
 		} else {
 			$permission = array('permission' => 'N', 'tooltip' => 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="' . $_SESSION['error_message']['403'] . '"', 'class' => 'no-permission');
 		}
-		// if(in_array($option,(array)$_SESSION['application_no_permission_pages']['option'])){
-		// 	$permission = array('permission'=>'Y','tooltip'=>'','class'=>'');
-		// }
 	}
 	return $permission;
 }
@@ -3615,90 +3384,19 @@ function totalHoursAndMinutesInDateTimeArray($dateTimes)
 	$minutes = floor(($totalSeconds % 3600) / 60);
 	$seconds = $totalSeconds % 60;
 	return array('days' => $days, 'hours' => $hours, 'minutes' => $minutes, 'seconds' => $seconds);
-	//echo "Total time: {$days} days, {$hours} hours, {$minutes} minutes, {$seconds} seconds\n";
-	// $totalHours = 0;
-	// $totalMinutes = 0;
-	// for($i = 0; $i < count($dateTimes) - 1; $i++){
-	//     $start = new DateTime($dateTimes[$i]);
-	//     $end = new DateTime($dateTimes[$i + 1]);
-	//     $interval = $start->diff($end);
-	//     $totalHours += ($interval->days * 24) + $interval->h;
-	//     //$totalMinutes += $interval->i.".".$interval->s;
-	//    // $totalMinutes += $interval->i + ($interval->s / 60);
-	//     $totalMinutes += $interval->h * 60 + $interval->i + ($interval->s / 60);
 
 
-	// }
-	// $totalHours += intdiv($totalMinutes, 60);
-	// $totalMinutes = $totalMinutes % 60; // Remaining minutes after converting to hours
-	// return array('hours'=>$totalHours,'minutes'=>$totalMinutes);
 }
-// function stringXOREncrypt($string) {
-// 	$key = "secretkey";
-//     $result = '';
-//     $key_length = strlen($key);
 
-//     // Allowed characters: A-Z, a-z, 0-9, _, -
-//     $allowed_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-';
-//     $allowed_length = strlen($allowed_chars);
 
-//     for ($i = 0; $i < strlen($string); $i++) {
-//         // XOR each character with the key
-//         $xor_char = ord($string[$i]) ^ ord($key[$i % $key_length]);
 
-//         // Map the XOR result to allowed characters
-//         $mapped_char = $allowed_chars[$xor_char % $allowed_length];
-//         $result .= $mapped_char;
-//     }
 
-//     return $result;
-// }
 
-// function stringXORDecrypt($encrypted) {
-// 	$key = "secretkey";
-//     $result = '';
-//     $key_length = strlen($key);
 
-//     // Allowed characters: A-Z, a-z, 0-9, _, -
-//     $allowed_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-';
-//     $allowed_length = strlen($allowed_chars);
 
-//     for ($i = 0; $i < strlen($encrypted); $i++) {
-//         // Get the index of the encrypted character in allowed characters
-//         $index = strpos($allowed_chars, $encrypted[$i]);
 
-//         // Reverse the XOR operation
-//         $original_char = chr(($index ^ ord($key[$i % $key_length])) & 0xFF);
-//         $result .= $original_char;
-//     }
 
-//     return $result;
-// }
-// function stringXOREncrypt($string) {
-// 	$key = "secretkey";
-//     $result = '';
-//     $key_length = strlen($key);
 
-//     for ($i = 0; $i < strlen($string); $i++) {
-//         // XOR each character with the key and map to printable ASCII range
-//         $xor_char = ord($string[$i]) ^ ord($key[$i % $key_length]);
-//         $printable_char = chr(($xor_char % 94) + 33); // Map to ASCII 33-126
-//         $result .= $printable_char;
-//     }
-//     return $result;
-// }
-// function stringXORDecrypt($encrypted) {
-// 	$key = "secretkey";
-//     $result = '';
-//     $key_length = strlen($key);
-//     for ($i = 0; $i < strlen($encrypted); $i++) {
-//         // Reverse mapping from printable range
-//         $mapped_value = ord($encrypted[$i]) - 33;
-//         $original_char = $mapped_value ^ ord($key[$i % $key_length]);
-//         $result .= chr($original_char);
-//     }
-//     return $result;
-// }
 function encodeString($input)
 {
 	$randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -3728,7 +3426,6 @@ function crmLastActivity($crmld, $created_date)
 		$meg .= "<span class='d-block'>" . $crmld['recipient_email_id'] . "</span>" . $crmld['sms_text'];
 	} elseif ($crmld['lead_type'] == '7') { //meeting
 		$member = json_decode($crmld['member'], 1);
-		//($member);
 		$membermsg = "";
 		foreach ($member as $members) {
 			$membermsg .= "<span class='m-r-5'>" . $_SESSION['users'][$members] . ",</span>";

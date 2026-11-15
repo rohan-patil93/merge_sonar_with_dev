@@ -81,12 +81,9 @@ if($_GET['setup'] == 'F'){
 	$nextseqstartnumber = $pagedetail['sequence'];
 
 	if($config['id'] !=""){
-	  // header("location:index.php");
 	}
-	//echo "nextseqstartnumber   --  <pre>"; print_r($setup_page_logs); echo "</pre>";
 	$lastsetupnumber = 6;
 	$dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/DD/YYYY','DD/MM/YYYY');
-	//$currency_format = array('L'=>'Lakhs (99,99,99,999.99)','M'=>'Million (999,999,999.99)');
 	$currency_format = array('1'=>'Lakhs (0)','1.1'=>'Lakhs (0.0)','1.2'=>'Lakhs (0.00)','1.3'=>'Lakhs (0.000)','1.4'=>'Lakhs (0.0000)','2'=>'Millians (0)','2.1'=>'Millians (0.0)','2.2'=>'Millians (0.00)','2.3'=>'Millians (0.000)','2.4'=>'Millians (0.0000)');
 	$system_message = array('welcome_tab'=>array('header'=>'COMPANY</br> INFORMATION','description'=>'Enter your company details here. This information will be used across various modules and documents within the system, ensuring accurate branding and identification.'),'company_details'=>array('header'=>'COMPANY </br>INFORMATION','description'=>'Enter your company details here. This information will be used across various modules and documents within the system, ensuring accurate branding and identification.'),'contact_details'=>array('header'=>'CONTACT </br>INFORMATION','description'=>'Enter your company details here. This information will be used across various modules and documents within the system, ensuring accurate branding and identification.'),'tax_information'=>array('header'=>'TAX</br> INFORMATION','description'=>'Enter your company details here. This information will be used across various modules and documents within the system, ensuring accurate branding and identification.'),'system_configuration'=>array('header'=>'LOCALIZATION </br>INFORMATION','description'=>'Enter your company details here. This information will be used across various modules and documents within the system, ensuring accurate branding and identification.'),'locations'=>array('header'=>'Location </br>INFORMATION','description'=>'Enter your company details here. This information will be used across various modules and documents within the system, ensuring accurate branding and identification.'));
 	$date_format = str_replace('-',$_SESSION['config']['date_separator'], strtolower($_SESSION['config']['date_format']));

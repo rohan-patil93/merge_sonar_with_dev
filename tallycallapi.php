@@ -9,7 +9,6 @@ $method = $_GET['method'];
 $mode = $_GET['mode'];
 $api_code = $_REQUEST['uniquecode'];
 if($method == 'post'){
-  // echo "working";
     $jsonData = file_get_contents('php://input');
     $data = json_decode($jsonData, true);
     if (json_last_error() === JSON_ERROR_NONE) {

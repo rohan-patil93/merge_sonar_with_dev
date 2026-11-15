@@ -40,7 +40,6 @@
 ###################################################################
 
 ob_start();
-//session_start();
 ini_set("display_errors", 0);
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -81,8 +80,6 @@ define("MAINDB", $_ENV['MAIN_DATABASE']);
 define("DUMPTABLE", $_ENV['DB_DUMPTABLE']);
 
 
-//$db = $_SESSION['DB_NAME'].".";
-//$db = '';
 
 
 
@@ -90,7 +87,6 @@ define("CURRENCY_ICON", '<i class="fa fa-rupee"></i>');
 
 define("KRA_KPI_HEADERID", '5');
 
-//define("CAPTCHA_YES_NO",'YES');
 
 define("CAPTCHA_YES_NO", 'NO');
 
@@ -481,7 +477,6 @@ define('TIMESHEET_BILLABLE_CHECk', 'Y');
 
 define("COMPANY_LDAP", 'N');
 
-//define('ADMIN_ROLE', '1');
 
 define('REVIWER_ROLE', '8');
 
@@ -505,7 +500,6 @@ define('ST_RECOGNITION_MSG', 'I`d like to recognize to');
 
 define('ST_EFFECTIVE_TODATE', '3999-01-01');
 
-//define('ADMIN_ROLE', '1');
 
 define('ST_SURVEY_DURATION_IN_MINUTES', '15');
 
@@ -520,36 +514,6 @@ define('CSR_AMOUNT_DISPLAY_UNIT', 'L'); // L = Lakhs, Cr = Crores, M = Millions
 
 #################Status Start##################################
 
-/*define('ST_ACTIVE', '0');
-
-define('ST_INACTIVE', '1');
-
-define('ST_DRAFT', '2');
-
-define('ST_APPROVED', '3');
-
-define('ST_QUOTATION_GENERATED', '4');
-
-define('ST_CANCEL', '5');
-
-define('ST_APPROVAL_PENDING', '6');
-
-define('ST_PURCHASE_ORDER_GENRATED', '7');
-
-define('ST_INVOICE_GENERATED', '8');
-
-define('ST_REJECTED', '9');
-
-define('ST_PAYMENT_RECEIVED', '10');
-
-define('ST_PARTIAL_PAYMENT', '11');
-
-define('ST_PARTIAL_RECEIPT', '12');
-
-define('ST_SEND_BACK', '13');
-
-
-*/
 define('COMPANY_SEND_NO', '8179947020');
 
 define('NO_OF_NOTICE_DAYS', 60);
@@ -720,8 +684,6 @@ define('MODUL_ATTENDANCE', 9);
 #####################################candidate schedule insert entry email####################
 
 
-// define("SUBSCRIPTION_ROLE",'13');
-// define("COMPANY_ADMIN_ROLE",'1');
 
 ##################Status END ####################################
 
@@ -772,12 +734,9 @@ define("TICKET_FOLLOWER_ROLE", '7');
 define("TICKET_USER_ROLE", '3');
 
 
-//define(SITEROOT, 				$_SERVER['DOCUMENT_ROOT']."/");
 
 define("SITEROOT", $_SERVER['DOCUMENT_ROOT'] . "/");
 
-/*define(LISTINGIMAGESROOT, 		SITEROOT."/images/listings");
- */
 define("UPLOADSROOT", SITEROOT . "/uploads/");
 
 define("USER_IMAGE_ROOT", SITEROOT . "/images/");
@@ -788,7 +747,6 @@ define("USER_IMAGE_ROOT", SITEROOT . "/images/");
 
 ###################################################################
 
-//define(SITEURL, 				"http://".$_SERVER['HTTP_HOST']);
 
 /*------------- DEFULT PROJECT FLODER ------------------ */
 define("DYNAMIC_SITEURL", "https://www.{domain_name}.");
@@ -796,7 +754,6 @@ define("DYNAMIC_SITEURL", "https://www.{domain_name}.");
 
 define("SITEURL", "https://" . $_SERVER['HTTP_HOST'] . "/");
 
-/*define("TEST", 				SITEURL."/api.php");*/
 
 define("API", SITEURL . "/api.php/");
 

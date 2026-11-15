@@ -15,7 +15,6 @@ if(isset($_POST['submit'])){
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$_POST['user_id'] = $_SESSION['userid'];
 	$url = API."?mode=insertsetupdetails&method=post";
-  //$re = file_post_contents($url, $_POST, 'insert');
 	$reponse = json_decode($re,1);
 	$response = $reponse['insert_config'];
 	if($response['status'] == 'sucess'){
@@ -58,20 +57,16 @@ if(isset($_POST['submit'])){
 		}
 	}
 
-  //echo "<pre>"; print_r($res); echo "</pre>";
-    //header('Location:index.php?option=COM_VIEW_PROJECT_KANBAN&RID='.$res['project_id']);
 }
 $ptapi = API."?mode=getsetupdetails";
 $callptapi = callAPI($ptapi);
 $result = json_decode($callptapi,1);
-//echo "<pre>"; print_r($result); echo "</pre>";
 $countries = $result['countries'];
 $company_types = $result['company_types'];
 $companies = $result['companies'];
 $config = $result['config'];
 $industrylist = $result['industries'];
 if($config['id'] !=""){
-  // header("location:index.php");
 }
 $dateformatlist = array('YYYY-MM-DD','YYYY/MM/DD','DD-MM-YYYY','MM-DD-YYYY','MM/DD/YYYY','DD/MM/YYYY');
 ?>
@@ -219,7 +214,7 @@ document.addEventListener('error', function (e) {
       <div class="container-fluid text-right">
         <div class="top-logo p-2">
           <a href="">
-            <img class="img-100" src="assets/images/sign-in/<?php //echo LOGIN_INFO['logo']; ?>" alt="" >
+            <img class="img-100" src="assets/images/sign-in/<?php ?>" alt="" >
           </a>
         </div>
       </div>

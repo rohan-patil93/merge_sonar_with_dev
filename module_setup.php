@@ -11,7 +11,6 @@ if(isset($_POST['submit'])){
 		$url = API."?mode=updatemoduleselection&method=post";
 		$response = file_post_contents($url, $_POST, 'insert');
 		$response1 = json_decode($response,1);
-		//echo "<pre>";print_r($response1);echo "</pre>";
 		$_SESSION['sbt_message'] = "1";
 		unset($_SESSION['login_details']);
 		unset($_SESSION['application_menu']);
@@ -38,7 +37,6 @@ $moduleapi = callAPI($moduleurl);
 $modulelists = json_decode($moduleapi,1);
 
 foreach($modulelists as $modulelist){
-	//if($modulelist['module_url'] != '' AND $modulelist['id'] != '1'){
 	if($modulelist['id'] != '1' && $modulelist['linking'] == '1'){
 		$allmodule[$modulelist['module_id']] = $modulelist;
 	}
@@ -152,7 +150,6 @@ foreach($modulelinklists as $linking){
 				<div class="row">
 
 					<?php
-					//echo "<pre>";  print_r($allmodule); echo "</pre>";
 					foreach($allmodule as $modul){ if($modul['linking'] == 1){ ?>
 						<div class="col-lg-2 position-relative" >
 							<div class="card social-card">

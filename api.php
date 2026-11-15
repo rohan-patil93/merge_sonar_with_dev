@@ -15,37 +15,6 @@ $infi_token = $headers['Infi-Token'] ?? '';
 $method = $_GET['method'];
 $mode = $_GET['mode'];
 $notchecktokanary = array('login', 'domainverifye', 'signup', 'forgotpassword');
-/*if(!in_array($mode, $notchecktokanary) AND $method == 'post'){
-	if($infi_token){
-		 try {
-			$decoded = JWT::decode($infi_token, new Key(JWT_SECRET_KEY, JWT_ALGORITHM));
-		} catch (Exception $e) {
-			http_response_code(401);
-			echo json_encode([
-				'valid' => false,
-				'status'=>'Fail',
-				'message' => $e->getMessage(),
-			]);
-			exit;
-		}
-	}else{
-		http_response_code(401);
-			echo json_encode([
-				'valid' => false,
-				'status'=>'Fail',
-				'message' => 'Token not provided. Please provide the token to proceed.',
-		]);
-		exit;
-	}
-}
-
-
-foreach($_GET as $getval){
-	if(is_array($getval)){
-		$res = array('status'=>'Fail', 'code'=>"CHECK_PARAMETER", 'msg'=>'Parameter is incorrect');
-		echo json_encode($res); exit;
-	}
-}*/
 include_once "model/user.class.php";
 include_once "model/integartion.class.php";
 include_once "model/demo.class.php";
@@ -60,10 +29,6 @@ include_once "model/petty_cash.class.php";
 include_once "model/vms.class.php";
 include_once "model/hr_user.class.php";
 include_once "model/space_user.class.php";
-//include_once("model/stocktake_user.class.php");
-//include_once('model/sitesettings.class.php');
-/*include_once("model/bill.class.php");
-$billObj=new billClass();*/
 $userObj = new userClass();
 $intiObj = new integartionClass();
 $demoObj = new demoClass();
@@ -78,9 +43,6 @@ $pettycashObj = new pettyCashUserClass();
 $vmsObj = new vMSUserClass();
 $hrObj = new hrUserClass();
 $spaceObj = new spaceUserClass();
-//$stocktakeObj=new stocktakeuserClass();
-//print_r($_GET);
-// echo "Test".$mode."|| -- ".$method; exit;
 if ($method == 'post') {
 	if ($_GET['platform'] == 'react') {
 		$jsonData = file_get_contents('php://input');
@@ -92,7 +54,6 @@ if ($method == 'post') {
 			$_GET['json_data'] = 'N';
 		}
 	}
-	//echo "fff".$mode;
 	if ($mode == 'postApprovalDiscussionMessage') {
 		include_once "model/web_view.class.php";
 		$wvObj = new webViewClass();
@@ -110,14 +71,11 @@ if ($method == 'post') {
 		exit;
 	}
 	if ($mode == 'loginflutter') {
-		//print_r($_POST); print_r($_GET);
 		$post = $_POST;
 		$data['chrUserName'] = $post['useremail'];
 		$data['chrPassword'] = $post['password'];
 		$data['api'] = "api call done";
-		//print_r($data); exit;
 		$res = $userObj->checkAdmin($data);
-		//$res['error'] = false;
 		echo json_encode($res);
 	}
 	if ($mode == "infisuitejobcandedatesave") {
@@ -134,65 +92,42 @@ if ($method == 'post') {
 		exit;
 	}
 	if ($mode == 'adddata') {
-		//echo "<pre>";
-		//echo "ha"; exit;
 		if ($_GET['table'] == TBL_REPORT_ATTRIBUTES) {
 			$transation = $userObj->toGetApplicationSerialNumber(TBL_REPORT_ATTRIBUTES);
 			$_POST['report_code'] = $transation;
 		}
-		// if($_GET['table'] == 'candidates'){
-		// 	$transation = $userObj->toGetApplicationSerialNumber('candidates');
-		// 	$_POST['candidate_code'] = $transation;
-		// }
 		$data = $_POST;
-		//print_r($data); echo "faf"; exit;
 		$res = $userObj->insertTablesdata($data, $_GET['table']);
 		if ($_GET['table'] == TBL_USERS && $res['status'] == 'sucess') {
 			$res1 = $userObj->NewUserformate($data, $_GET['data_name']);
 		}
 
-		// if($res['status'] == 'sucess' AND ($_GET['table'] == 'vendors' || $_GET['table'] == 'vendor_registers')){
-		// 	include_once("model/vendor_portal_user.class.php");
-		// 	$vendportObj=new vendorPortelUserClass();
-		// 	$vendportObj->getVendorandVendorRegistersSynchAPI($data,$_GET['table'],$res['LASTID']);
-		// }
 
 		echo json_encode($res);
 	}
 	if ($mode == 'updateapprovallog') {
 		$data = $_POST;
-		//print_r($data);
 		$res = $userObj->updateapprovallog($data);
 		echo json_encode($res);
 
 	}
 	if ($mode == 'updatedynamicapprovallog') {
 		$data = $_POST;
-		//print_r($data);
 		$res = $userObj->updatedynamicapprovallog($data);
 		echo json_encode($res);
 
 	}
 	if ($mode == 'updaterowtabledata') {
-		//echo "sada"; exit;
 		$rid = $_GET['rid'];
 		$fid = $_GET['fid'] != '' ? $_GET['fid'] : 'id';
 		$data = $_POST;
-		//echo "ads".$fid; exit;
 		$res = $userObj->updateTablesdata($data, $_GET['table'], $fid, $rid);
 
-		// if($res['status'] == 'sucess' AND ($_GET['table'] == 'vendors' || $_GET['table'] == 'vendor_registers')){
-		// 	include_once("model/vendor_portal_user.class.php");
-		// 	$vendportObj=new vendorPortelUserClass();
-		// 	$transupdate = $vendportObj->getVendorandVendorRegistersSynchAPI($data,$_GET['table'],$rid);
-		// 	$res['vendor_update'] = $transupdate;
-		// }
 		if ($post['table'] == 'project_task_details' && $rid = !"") {
 			$task_query = "SELECT id, project_id, task_name FROM project_task_details WHERE id=" . $rid;
 			$task_data = $callConfig->getRow($task_query);
 			$task_team_q = "SELECT id,  user_id FROM project_task_teams WHERE company_id = " . $get['company_id'] . " AND  project_task_id=" . $rid . " AND is_active=0";
 			$teams = $callConfig->getAllRows($task_team_q);
-			//print_r($teams); exit;
 			foreach ((array) $teams as $list) {
 				$mobilsendnotification = array();
 				$mobilsendnotification = $get;
@@ -204,7 +139,6 @@ if ($method == 'post') {
 				$mobilsendnotification['user_id'] = $list->user_id;
 				$mobilsendnotification['title'] = 'Task Comment';
 				$mobilsendnotification['data'] = array('module' => 'TASKDA', 'module_id' => '25', 'click_action' => 'OPEN_TASK', 'task_id' => $post['transaction_id'], 'project_id' => $task_data->project_id, 'event_type' => 'task_assign', 'application_table_name' => 'project_task_details');
-				//print_r($mobilsendnotification); exit;
 				$mobres = $this->tocallmobilenotificationmob($mobilsendnotification);
 			}
 
@@ -215,10 +149,6 @@ if ($method == 'post') {
 	}
 	if ($mode == 'addinvoietype') {
 		$data = $_POST;
-		//echo $_POST;
-		//print_r();
-		//print_r($_POST); exit;
-		//$data = json_decode($_GET['data'],1);
 		$res = $userObj->insertInvoiceType($data, $_GET['table'], $_GET);
 		echo json_encode($res);
 		exit;
@@ -233,13 +163,11 @@ if ($method == 'post') {
 	}
 
 	if ($mode == "addbills") {
-		//echo "ravi"; exit;
 		$res = $userObj->insertBills($_POST, $_GET['type']);
 		echo json_encode($res);
 		exit;
 	}
 	if ($mode == "addpccash") {
-		//echo "ravi"; exit;
 		$res = $userObj->insertPC($_POST, $_GET['type']);
 		echo json_encode($res);
 		exit;
@@ -258,11 +186,6 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 	if ($mode == 'displayattributetye') {
-		//echo "ravi"; exit;
-		//echo "hi".$_GET['data']."<pre>";
-		//$post = json_decode(str_replace('Empty','', urldecode($_GET['data'])),1);
-		//$post = json_decode(urldecode($_GET['data']),1);
-		//print_r($post);
 		$post = $_POST;
 		$data['application_table_name'] = $post['table'];
 		$data['field_name'] = $post['field'];
@@ -293,7 +216,6 @@ if ($method == 'post') {
 				$value = $val[1];
 				$arra[$key] = $value;
 			}
-			//print_r($arra);
 			for ($i = 1; $i < (count($discon) / 6) + 1; $i++) {
 				$array['select'][] = $arra['select1_value_' . $i];
 				$array['select'][] = $arra['select2_value_' . $i];
@@ -302,7 +224,6 @@ if ($method == 'post') {
 				$array['opration'][] = $arra['oparends1_value_' . $i];
 				$array['opration'][] = $arra['oparends2_value_' . $i];
 			}
-			//print_r($array);
 			$array = json_encode($array);
 			$data['content'] = $array;
 		}
@@ -310,20 +231,16 @@ if ($method == 'post') {
 		$data['company_id'] = $post['company_id'];
 		$data['attribute_type'] = $post['type'];
 		$data['content_details'] = urlencode(json_encode($post));
-		print_r($data); //exit;
+		print_r($data);
 
 		$whr = "application_table_name='" . $post['table'] . "' and field_name='" . $post['field'] . "'";
-		//echo $whr;
 		$userObj->deleterows(TBL_DISPLAYATTRIBUTES_TYPE, $whr);
-		//exit;
 		$res = $userObj->insertTablesdata($data, TBL_DISPLAYATTRIBUTES_TYPE);
 		print_r($res);
 		echo $res;
 		exit;
 	}
 	if ($mode == 'addorupdatewizardsettings') {
-		/*echo "ravi";
-		print_r($_POST); print_r($_GET); exit;*/
 		$res = $userObj->addorupdatewizardsettings($_POST, $_GET);
 		echo json_encode($res);
 	}
@@ -348,61 +265,47 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'candidateautoregistation') {
-		//echo "api check"; exit;
 		$res = $userObj->candidateautoregistation($_POST, $_GET);
 		echo json_encode($res);
 	}
 	if ($mode == 'addorupdatecandaitedocument') {
-		//echo "api check"; exit;
 		$res = $userObj->addorupdatecandaitedocument($_POST, $_GET);
 		echo json_encode($res);
 	}
 	if ($mode == 'updatecandaitedocument') {
-		//echo "api check"; exit;
 		$res = $userObj->updatecandaitedocument($_POST, $_GET);
 		echo json_encode($res);
 	}
 	if ($mode == 'toinsertpayrnsummary') {
-		//echo "api check"; exit;
 		$res = $userObj->toinsertpayrnsummary($_POST, $_GET);
 		echo json_encode($res);
 	}
 	if ($mode == 'genratecandidatetoemployee') {
-		//echo "ravi"; exit;
 		$details = $userObj->genratecandidatetoemployee($_POST, $_GET);
 		echo json_encode($details);
 	}
 	if ($mode == 'genratecandidatesalarytemplate') {
-		//echo "api check"; exit;
 		$res = $userObj->genratecandidatesalarytemplate($_POST, $_GET);
 		echo json_encode($res);
 	}
 	if ($mode == 'usernotify') {
-		//echo "api check"; exit;
 		$res = $userObj->usernotify($_POST, $_GET);
 		echo json_encode($res);
 	}
 	if ($mode == 'employeeclocks') {
-		//echo "api check"; exit;
 		$res = $userObj->employeeclocks($_POST, $_GET);
 		echo json_encode($res);
 	}
 	if ($mode == "multiinsert") {
-		//echo "hai"; exit;
-		//print_r($_POST); exit;
 		$res = $userObj->testTableInsert($_POST, $_GET['filename'], $get);
 		echo $res;
 	}
 
 	if ($mode == "payrollupdateonetime") {
-		//echo "hai"; exit;
-		//print_r($_POST); exit;
 		$res = $userObj->payrollupdateonetime($_POST, $_GET);
 		echo $res;
 	}
 	if ($mode == "addorupdateitdeclaration80c") {
-		//echo "hai"; exit;
-		//print_r($_POST); exit;
 		$res = $userObj->addorupdateitdeclaration80c($_POST, $_GET);
 		echo $res;
 	}
@@ -417,16 +320,13 @@ if ($method == 'post') {
 	if ($mode == 'savetofiltertable') {
 		$details = $userObj->savetofiltertable($_POST, $_GET);
 		echo json_encode($details);
-		//echo "345";
 	}
 	if ($mode == 'employeedetailsupdate') {
-		//echo "employeedetailsupdate";exit;
 		$details = $userObj->employeedetailsupdate($_POST, $_GET);
 		echo json_encode($details);
 	}
 
 	if ($mode == 'employeesdisplayfieldsset') {
-		//echo "employeedetailsupdate";exit;
 		$details = $userObj->employeesdisplayfieldsset($_POST, $_GET);
 		echo json_encode($details);
 	}
@@ -435,9 +335,7 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 	if ($mode == 'getemployeeattendance') {
-		//print_r($_POST);
 		$details = $userObj->getemployeeattendance($_POST, $_GET);
-		//exit;
 		echo json_encode($details);
 	}
 	if ($mode == 'setuppayroll') {
@@ -454,7 +352,6 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 	if ($mode == 'addeployeeshifts') {
-		//echo "Ravi"; exit;
 		$details = $userObj->addeployeeshifts($_POST, $_GET);
 		echo json_encode($details);
 	}
@@ -506,17 +403,14 @@ if ($method == 'post') {
 	if ($mode == 'createassessments') {
 		$details = $userObj->createassessments($_POST, $_GET);
 		echo json_encode($details);
-		//exit;
 	}
 	if ($mode == 'saveassessmentreponses') {
 		$details = $userObj->saveassessmentreponses($_POST, $_GET);
 		echo json_encode($details);
-		//exit;
 	}
 	if ($mode == 'saveperformanceresponse') {
 		$details = $userObj->saveperformanceresponse($_POST, $_GET);
 		echo json_encode($details);
-		//exit;
 	}
 	if ($mode == 'savepeerfeedbackquestions') {
 		$details = $userObj->savepeerfeedbackquestions($_POST, $_GET);
@@ -526,20 +420,17 @@ if ($method == 'post') {
 	if ($mode == 'createempperformancepeerfeedback') {
 		$details = $userObj->createempperformancepeerfeedback($_POST, $_GET);
 		echo json_encode($details);
-		//exit;
 	}
 
 	if ($mode == 'saveperformanceresponse') {
 		$details = $userObj->saveperformanceresponse($_POST, $_GET);
 		echo json_encode($details);
-		//exit;
 	}
 	if ($mode == 'savepeerfeedbackquestions') {
 		$details = $userObj->savepeerfeedbackquestions($_POST, $_GET);
 		echo json_encode($details);
 	}
 	if ($mode == 'insertandupdateperformancesetupquestions') {
-		//echo "ravi"; print_r($_POST); exit;
 		$details = $userObj->insertandupdateperformancesetupquestions($_POST, $_GET);
 		echo json_encode($details);
 	}
@@ -558,32 +449,26 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 	if ($mode == 'toinsertandpdateesignemployee') {
-		//echo "ravi"; print_r($_POST);print_r($_GET);
 		$details = $userObj->toinsertandpdateesignemployee($_POST, $_GET);
 		echo json_encode($details);
 	}
 	if ($mode == 'toinsertandpdateesignemployeeonlyone') {
-		//echo "ravi"; print_r($_POST);print_r($_GET);
 		$details = $userObj->toinsertandpdateesignemployeeonlyone($_POST, $_GET);
 		echo json_encode($details);
 	}
 	if ($mode == 'createjobfeedback') {
-		//echo "ssss"; exit;
 		$details = $userObj->createjobfeedback($_POST, $_GET);
 		echo json_encode($details);
 	}
 	if ($mode == 'savejobfeedbackreponses') {
-		//echo "ssss"; exit;
 		$details = $userObj->savejobfeedbackreponses($_POST, $_GET);
 		echo json_encode($details);
 	}
 	if ($mode == 'addorupdategradedailysalary') {
-		//echo "ssss"; exit;
 		$details = $userObj->addorupdategradedailysalary($_POST, $_GET);
 		echo json_encode($details);
 	}
 	if ($mode == 'addremovetransport') {
-		//echo "ssss"; exit;
 		$details = $userObj->addremovetransport($_POST, $_GET);
 		echo json_encode($details);
 	}
@@ -592,7 +477,6 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'addfloderupdatereportid') {
-		//echo "ssss"; exit;
 		$details = $userObj->addfloderupdatereportid($_POST, $_GET);
 		echo json_encode($details);
 	}
@@ -627,7 +511,6 @@ if ($method == 'post') {
 		}
 		echo json_encode($res);
 	}
-	//$check_postget_array = array('togetemployeeageprofile'=>'togetemployeeageprofile','togetemployeeageprofile'=>'togetemployeeageprofile','addfloderupdatereportid'=>'addfloderupdatereportid','addfloderupdatereportid'=>'addfloderupdatereportid','addremovetransport'=>'addremovetransport','insertupdateesgcpopup'=>'insertupdateesgcpopup',,'insertletters'=>'insertLetters',);
 	$vms_post_class_array = array(
 		'savevendoragreements' => 'savevendoragreements',
 		'indertupdateperdiem' => 'indertupdateperdiem',
@@ -693,7 +576,6 @@ if ($method == 'post') {
 	if (isset($check_postget_integartion_array[$mode])) {
 		$fun = $check_postget_integartion_array[$mode];
 		$details = $intiObj->$fun($_POST, $_GET);
-		//print_r($_GET);
 		echo json_encode($details);
 
 	}
@@ -701,7 +583,6 @@ if ($method == 'post') {
 	$check_array = array('insertletters' => 'insertLetters', 'statusprogressaction' => 'insertORUpadateStatusprogressaction', 'productupload' => 'productupload', 'budgetinsert' => 'budgetinsert', 'serchforpos' => 'serchforpos', 'querynotificationandemail' => 'querynotificationandemail', 'insertvenderquatation' => 'ToInserttransactions', 'upadateblukapproval' => 'upadateblukapproval', 'budgetcheckreftadledata' => 'budgetcheckreftadledata', 'reportfilter' => 'insertorupdatereportfilter', 'insertorupdatepermissions' => 'insertorupdatepermissions', 'insertprintdesigning' => 'insertPrintDesigning', 'insertdisplayattribute' => 'insertDisplayAttribute', 'imageuploading' => 'imageuploading', 'insertautodesigntable' => 'insertAutoDesignTable', 'insertemphistries' => 'insertEmpHistries', 'tosendnotifiations' => 'tosendnotifiations', 'interviewschedule' => 'interviewSchedule', 'insertjobpost' => 'insertJobPost', 'insertrole' => 'insertRole', 'resetnewpassword' => 'resetNewPassword', 'insertemailcontain' => 'insertEmailContain', 'insertreportattributesnew' => 'insertReportAttributesNew', 'insertworkflownew' => 'insertWorkFlowNew', 'updatedynamicapprovallognew' => 'updateDynamicApprovalLogNew', 'updatedynamicapprovallognew' => 'updateDynamicApprovalLogNew', 'insertleaverequest' => 'insertLeaveRequest', 'insertapplicationtours' => 'insertapplicationtours', 'inserttickets' => 'insertTickets', 'getemployeetickets' => 'getEmployeeTickets', 'insertprojecttasklogs' => 'insertProjectTaskLogs', 'insertemployeedetails' => 'insertemployeedetails', 'insertpayareaasignemployee' => 'insertpayareaasignemployee', 'insertpayrolladminasignemployee' => 'insertpayrolladminasignemployee', 'insertvendorinvitation' => 'insertVendorInvitation', 'insertexpensespolicies' => 'insertexpensespolicies', 'insertexpensespoliciescategory' => 'insertExpensesPoliciesCategory', 'insertexpensesmileagesperdiem' => 'insertExpensesMileagesPerDiem', 'insertstocktakes' => 'insertStockTakes', 'insertstocktakesitems' => 'insertStockTakesItems', 'getstocktakeadjustments' => 'getStockTakeAdjustments', 'insertcompliance' => 'insertCompliance', 'insertcompliancetaskanswer' => 'insertComplianceTaskAnswer', 'insertapplicationuser' => 'insertapplicationuser', 'insertjobtitlecompetencies' => 'insertJobTitleCompetencies', 'inserperformanaceappraiserheader' => 'inserPerformanaceAppraiserHeader', 'udateleaveforvms' => 'udateleaveforvms', 'loginafterdetails' => 'loginafterdetails', 'togetemployeeuserids' => 'togetemployeeuserids', 'insertperformancesetup' => 'insertPerformanceSetup', 'insertfeeds' => 'insertFeeds', 'inserthrservices' => 'insertHRServices', 'insertcompanysubscriptionplans' => 'insertCompanySubscriptionPlans', 'insertcompanysubscription' => 'insertCompanySubscription', 'insertregistiredgroups' => 'insertRegistiredGroups', 'insertadditionalserviceslicense' => 'insertAdditionalServicesLicense', 'insertcandidatedetails' => 'insertCandidateDetails', 'insertuserinvitation' => 'insertUserInvitation', 'assignecandidatejobpostingpopup' => 'assigneCandidateJobPostingPopup', 'insertcandidatespopup' => 'insertCandiDatesPopup', 'insertcandidatelogs' => 'insertCandidateLogs', 'sendcandidatemailpopup' => 'sendCandidatEmailPopup', 'candidaterequestdocs' => 'candidateRequestDocs', 'insertcandidateaccessright' => 'insertCandidateAccessRight', 'insertcandidateschedule' => 'insertCandidateSchedule', 'getcandidateschedule' => 'getCandidateSchedule', 'updatemoduleselection' => 'UpdateModuleSelection', 'submitstatusdynamicworkflow' => 'submitStatusDynamicWorkFlow', 'insertdocumentaccesssetups' => 'insertDocumentAccessSetups', 'inserttransactionaccesspermission' => 'insertTransActionAccessPermission', 'updatetransactionactivityschedule' => 'updatetransactionactivityschedule', 'updateonboardingtaskstatus' => 'updateOnBoardingTaskStatus', 'insertcommentjobposting' => 'insertCommentJobPosting', 'inserttagjobposting' => 'inserttagjobposting', 'addorupdateitdeclarationotherincome' => 'addorupdateitdeclarationotherincome', 'insertpayments' => 'insertPayments', 'submitsetup' => 'submitSetup', 'insertapplicationemptytransactions' => 'insertApplicationEmptyTransactions', 'updateprojecttaskdetailsfollowup' => 'updateProjectTaskDetailsFollowUp', 'insertdynamiccancelinvoice' => 'insertDynamicCancelInvoice', 'checkemailidallreadyavilableornot' => 'checkEmailidAllReadyAvilableOrNot', 'updateapplicationusers' => 'updateApplicationUsers', 'updateapplicationfavourites' => 'updateApplicationFavourites', 'insertemployeesdisplayfields' => 'insertEmployeesDisplayFields', 'updateemployees' => 'updateEmployees', 'insertempbanks' => 'insertEMPBanks', 'insertvendorcustomeritems' => 'insertVendorCustomerItems', 'insertreceipts' => 'insertReceipts', 'insertitems' => 'insertItems', 'insertitemcategories' => 'insertItemCategories', 'insertclonetransactions' => 'insertCloneTransactions', 'getitemsearch' => 'getItemSearch', 'insertimportexceldata' => 'insertImportExcelData', 'insertdynamicinvoice' => 'insertdynamicinvoice', 'insertskucode' => 'insertskucode', 'checkalreadyavailableornotcustomerorvendordetails' => 'checkalreadyavailableornotcustomerorvendordetails', 'submitmultireferencedocumnets' => 'submitMultiReferenceDocumnets');
 	if (isset($check_array[$mode])) {
 		$fun = $check_array[$mode];
-		// echo $fun; exit;
 		$details = $userObj->$fun($_POST);
 		echo json_encode($details);
 	}
@@ -722,16 +603,9 @@ if ($method == 'post') {
 	$check_array_getpost = array('insertapplicationuserinvitations' => 'insertApplicationUserInvitations', 'cancelpayments' => 'cancelPayments');
 	if (isset($check_array_getpost[$mode])) {
 		$fun = $check_array_getpost[$mode];
-		//echo $fun; exit;
 		$details = $userObj->$fun($_GET, $_POST);
 		echo json_encode($details);
 	}
-	// $demo_class_array =  array();
-	// if(isset($demo_class_array[$mode])){
-	// 	$fun = $demo_class_array[$mode];
-	// 	$details = $demoObj->$fun($_POST,$_GET);
-	// 	echo json_encode($details);
-	// }
 
 	$asset_class_array = array('insertassetallocation' => 'insertAssetAllocation', 'assetaccepts' => 'assetAccepts', 'insertassetreturn' => 'insertAssetReturn', 'insertassetrequest' => 'insertAssetRequest', 'insertassetextension' => 'insertAssetExtension', 'updateassetallocation' => 'updateAssetAllocation', 'assetallocationaws' => 'assetAllocationAws', 'assetacceptreectvms' => 'assetacceptreectvms', 'getemployeeassetandassetsdata' => 'getemployeeassetandassetsdata', 'togetassetsempassetdetails' => 'togetassetsempassetdetails', 'togetassestdashboarddetails' => 'togetassestdashboarddetails', 'insertassetverification' => 'insertAssetVerification', 'updateassetverificationstatus' => 'updateAssetVerificationStatus', 'insertassetrequesttransfers' => 'insertAssetRequestTransfers');
 	if (isset($asset_class_array[$mode])) {
@@ -791,7 +665,6 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 
-	//$vendor_porter_class_array =  array('insertapplicationtickets'=>'insertApplicationTickets','updateapplicationtickets'=>'updateApplicationTickets', 'insertvendorregistrationrequests'=>'insertVendorRegistrationRequests','updatesendverificationprofilestatus'=>'updateSendVerificationProfileStatus','updatevendorprofileupdatestatus'=>'updateVendorProfileUpdateStatus','updatevendorverifications'=>'updateVendorVerifications','insertvendordisplayfields'=>'insertVendorDisplayFields', 'getdynamicthirdpartyapicall'=>'getDynamicThirdPartyAPICall','insertupdatevendorverificationdetails' => 'insertupdatevendorverificationdetails','insertvendorandvendorregisterssynchapi'=>'insertVendorandVendorRegistersSynchAPI');
 	$vendor_porter_class_array = array('insertapplicationtickets' => 'insertApplicationTickets', 'updateapplicationtickets' => 'updateApplicationTickets', 'insertvendorregistrationrequests' => 'insertVendorRegistrationRequests', 'updatesendverificationprofilestatus' => 'updateSendVerificationProfileStatus', 'updatevendorprofileupdatestatus' => 'updateVendorProfileUpdateStatus', 'updatevendorverifications' => 'updateVendorVerifications', 'insertvendordisplayfields' => 'insertVendorDisplayFields', 'togetcontractemployeepaydetails' => 'togetcontractemployeepaydetails', 'togetcontractorctcreportdetails' => 'togetcontractorctcreportdetails', 'getdynamicthirdpartyapicall' => 'getDynamicThirdPartyAPICall', 'insertupdatevendorverificationdetails' => 'insertupdatevendorverificationdetails', 'insertvendorandvendorregisterssynchapi' => 'insertVendorandVendorRegistersSynchAPI', 'msmeconfirmationupdate' => 'MSMEConfirmationUpdate', 'insertvendorsandvendorregisters' => 'insertVendorsAndVendorRegisters', 'sendemailapiwithoutlogdocumentverification' => 'sendEmailAPIWithoutLogDocumentVerification', 'insertapplicationuserinvitations' => 'insertApplicationUserInvitations', 'getvendoradmindashboardpost' => 'getVendorAdminDashboardPost');
 	if (isset($vendor_porter_class_array[$mode])) {
 		include_once "model/vendor_portal_user.class.php";
@@ -810,7 +683,6 @@ if ($method == 'post') {
 	$mobilecheck_array = array('toaddupdateusermobiledetails' => 'toaddupdateusermobiledetails', 'toaddmobileempleave' => 'toaddmobileempleave', 'toupdatemobileempleave' => 'toupdatemobileempleave', 'toinsertfieldmapuser' => 'toinsertfieldmapuser', 'tocreatecomplanatedetails' => 'tocreatecomplanatedetails', 'toupdatecomplanatedetails' => 'toupdatecomplanatedetails', 'toaddcomplaintshisorydetails' => 'toaddcomplaintshisorydetails', 'mobileuserregistation' => 'mobileuserregistation', 'toaddmobfielddailyplans' => 'toaddmobfielddailyplans', 'toaddmobfieldwork' => 'toaddmobfieldwork', 'toaddmobilehelpdetails' => 'toaddmobilehelpdetails', 'toupdatedynamicfielddata' => 'toupdatedynamicfielddata', 'togetpostvaldynmicdetials' => 'togetpostvaldynmicdetials', 'dynamicinsertformobile' => 'dynamicinsertformobile', 'toinsertpurchaseorderonmobile' => 'toinsertpurchaseorderonmobile', 'insertmobilereceipts' => 'insertMobileReceipts', 'insertmobileemployeeleaves' => 'insertMobileEmployeeLeaves', 'addupdaterolememberdetailformobile' => 'addupdaterolememberdetailformobile', 'insertbookingagainstreceipt' => 'insertBookingAgainstReceipt', 'insertbookingagainstsalesinvoices' => 'insertBookingAgainstSalesInvoices', 'toinserttripexpencesdetails' => 'toinserttripexpencesdetails', 'toupdatetripexpencesdetails' => 'toupdatetripexpencesdetails', 'toaddmultipletypeannocumetcomment' => 'toupdatetripexpencesdetails', 'toaddalltypelikdidcomother' => 'toaddalltypelikdidcomother', 'insertmobidynamicmappingtransactions' => 'insertMobiDynamicMappingTransactions', 'toaddpersonaldataonmobile' => 'toaddpersonaldataonmobile', 'toupdatepersonaldataonmobile' => 'toupdatepersonaldataonmobile', 'saveAttendanceRegularizationRequestData' => 'saveAttendanceRegularizationRequestData', 'savevehiclegatepass' => 'savevehiclegatepass', 'manageStationeryCart' => 'manageStationeryCart', 'createStationeryRequest' => 'createStationeryRequest', 'insertAssetRequests' => 'insertAssetRequests', 'insertWorkFromHomeRequests' => 'insertWorkFromHomeRequests', 'toupdateprojecttaskteamremove' => 'toupdateprojecttaskteamremove', 'toaddprojecttaskdetails' => 'toaddprojecttaskdetails', 'toinsertpurchaseordermobile' => 'toinsertpurchaseordermobile', 'adddataprojecttask' => 'adddataprojecttask', 'toinsertupdateprojecttasktimlog' => 'toinsertupdateprojecttasktimlog', 'updatedynamicfiedrojecttaskdetail' => 'updatedynamicfiedrojecttaskdetail');
 
 	if (isset($mobilecheck_array[$mode])) {
-		//echo "RRRR"; exit;
 		include_once "model/mobile_user.class.php";
 		$mobileObj = new mobileUserClass();
 
@@ -829,7 +701,6 @@ if ($method == 'post') {
 		}
 
 		$fun = $mobilecheck_array[$mode];
-		//print_r($_GET); print_r($_POST); exit;
 		$details = $mobileObj->$fun($_GET, $_POST);
 		echo json_encode($details);
 	}
@@ -857,11 +728,6 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 
-	/*if($mode=='toinsertfieldmapuser'){
-		//echo "ssss"; exit;
-		$details = $mobileObj->toinsertfieldmapuser($_GET,$_POST,$_FILES);
-		///echo json_encode($details);
-	}*/
 
 	$tailly_array1 = array('checkapidatavalidateornot' => 'checkAPIDataValidateOrNot', 'apidetailstoretodatabase' => 'aPIDetailStoretoDatabase');
 	if (isset($tailly_array1[$mode])) {
@@ -884,7 +750,6 @@ if ($method == 'post') {
 		} else {
 			$_GET['json_data'] = 'N';
 		}
-		//echo "<pre>";  print_r($data); print_r($_POST); print_r($_GET); echo "</pre>"; exit;
 		include_once "model/tally.class.php";
 		$tallyObj = new tallyClass();
 		$fun = $tailly_array[$mode];
@@ -927,7 +792,6 @@ if ($method == 'post') {
 	);
 	if (isset($react_post[$mode])) {
 
-		//echo "Api call check "; print_r($data); print_r($_GET);  exit;
 		include_once "model/react.class.php";
 		$reactObj = new reactClass();
 		$fun = $react_post[$mode];
@@ -959,22 +823,16 @@ if ($method == 'post') {
 
 	if ($mode == "imageuploadtoreact") {
 		$images = explode(",", $_POST['image_names']);
-		/*print_r($_POST);
-		print_r($images);
-		print_r($_GET);
-		 print_r($_FILES); exit;	*/
 		$get = $_GET;
 		$file_uploads_path = "uploads/all/";
 		foreach ($images as $img) {
 			$image = trim($img);
-			//print_r($_FILES); //exit;
 			$temp = explode(".", $_FILES[$image]['name']);
 			$Filename = "file_" . time() . "_" . uniqid();
 			$newfilename = $Filename . '.' . end($temp);
 			$insert_data = array('company_id' => $_GET['company_id'], 'current_status' => '0', 'is_active' => '0', 'file_name' => $_FILES[$image]['name'], 'actual_file_name' => $newfilename, 'file_size_mb' => $_FILES[$image]['size'], 'application_table_name' => $get['table_name'], 'transaction_id' => $get['transaction_id']);
 			$res = $userObj->insertTablesdata($insert_data, 'application_attachments');
 			if (move_uploaded_file($_FILES[$image]["tmp_name"], $file_uploads_path . $newfilename)) {
-				//echo "<br> yesss";
 				$res[$image] = $newfilename;
 			}/*else{
 			   echo "<br> Nooo";
@@ -1079,14 +937,6 @@ if ($method == 'post') {
 		$details = $intiObj->$fun($_POST, $_GET);
 		echo json_encode($details);
 	}
-	// $mobile_view_arr = array('insertandupdatemanufacturingforecaste' => 'insertandupdatemanufacturingforecaste', 'insertandupdatemanufacturingfirmorder'=>'insertandupdatemanufacturingfirmorder', 'insertmanufacturingproductnote' => 'insertmanufacturingproductnote');
-	// if (isset($mobile_view_arr[$mode])) {
-	// 	include_once("model/manfacturing_forecast.class.php");
-	// 	$mfObj = new manfacturingForecastUserClass();
-	// 	$fun = $mobile_view_arr[$mode];
-	// 	$details = $mfObj->$fun($_GET, $_POST);
-	// 	echo json_encode($details);
-	// }
 	if ($mode == 'getBuddyTypeEmployees') {
 		include_once "model/employee_loan.user.class.php";
 		$elObj = new employeeLoanClass();
@@ -1210,17 +1060,9 @@ if ($method == 'post') {
 	}
 } else {
 
-	//echo $mode; exit;
 	if ($mode == 'login') {
-		/*$post['name'] = $_GET['name'];
-		$post['password'] = $_GET['password'];*/
-		//print_r($_GET); exit;
-		//echo $name."/".$password;
 		$data = json_decode(urldecode($_GET['data']), 1);
-		//print_r($data); exit;
 		$res = $userObj->checkAdmin($data);
-		//print_r($res);
-		//return $res;
 		echo json_encode($res);
 	}
 	if ($mode == 'emailconfirm') {
@@ -1229,20 +1071,17 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'resetpassword') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->reSetPassword($data);
 		echo json_encode($res);
 	}
 	if ($mode == 'forgotpassword') {
-		//echo "ravi"; exit;
 		$email = $_GET['data'];
 		$res = $userObj->forgotpassword($email);
 		echo json_encode($res);
 	}
 	if ($mode == 'logout') {
 		$data = $_GET['user_id'];
-		//print_r($data);
 		$res = $userObj->logout($data);
 		echo json_encode($res);
 	}
@@ -1253,7 +1092,6 @@ if ($method == 'post') {
 		$value = urldecode($_GET['value']);
 		$whr = $filedname . "='" . $value . "'";
 		$res = $userObj->getrowTablesData($table_name, '*', $whr);
-		//print_r($res);
 		if (count($res) > 0) {
 			$return = 'Not Available';
 		} else {
@@ -1264,10 +1102,8 @@ if ($method == 'post') {
 	}
 	if ($mode == 'signup') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data); exit;
 		$res = $userObj->insertAdminUser($data);
 		echo json_encode($res);
-		//echo $data; exit;
 	}
 	if ($mode == 'userdetails') {
 		$userid = $_GET['userid'];
@@ -1276,19 +1112,16 @@ if ($method == 'post') {
 	}
 	if ($mode == 'updateuserdetails') {
 		$data = json_decode(urldecode($_GET['data']), 1);
-		//print_r($data); exit;
 		$res = $userObj->updateAdminUser($data);
 		echo json_encode($res);
 	}
 	if ($mode == 'addrole') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data); exit;
 		$res = $userObj->addrole($data);
 		echo $res;
 	}
 	if ($mode == 'roledetails') {
 		$res = $userObj->getRoleData();
-		//print_r($res);
 		echo json_encode($res);
 	}
 	if ($mode == 'onerole') {
@@ -1297,7 +1130,6 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'updaterole') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->updateRole($data);
 		echo $res;
@@ -1315,12 +1147,10 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'revenuesDetaills') {
-		//echo TBL_REVENUES;
 		$res = $userObj->getAllTablesData(TPREFIX . TBL_REVENUES);
 		echo json_encode($res);
 	}
 	if ($mode == 'addcategories') {
-		//echo TBL_REVENUES;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->insertCategories($data);
 		echo $res;
@@ -1332,18 +1162,15 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'updatecategories') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->updatecategories($data);
 		echo $res;
 	}
 	if ($mode == 'categoriesdetails') {
-		//echo TBL_REVENUES;
 		$res = $userObj->getAllTablesData(TPREFIX . TBL_CATEGORIES);
 		echo json_encode($res);
 	}
 	if ($mode == 'addcompanies') {
-		//echo "aaaa";
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->insertCompanies($data);
 		echo $res;
@@ -1355,18 +1182,15 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'updatecompanies') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->updateCompanies($data);
 		echo $res;
 	}
 	if ($mode == 'companiesdetails') {
-		//echo TBL_REVENUES;
 		$res = $userObj->getAllTablesData(TPREFIX . TBL_COMPANIES);
 		echo json_encode($res);
 	}
 	if ($mode == 'addconfig') {
-		//echo "aaaa"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->insertConfig($data);
 		echo $res;
@@ -1378,18 +1202,15 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'updateconfig') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->updateConfig($data);
 		echo $res;
 	}
 	if ($mode == 'configdetails') {
-		//echo TBL_REVENUES;
 		$res = $userObj->getAllTablesData(TPREFIX . TBL_CONFIG);
 		echo json_encode($res);
 	}
 	if ($mode == 'addcurrencies') {
-		//echo "aaaa"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->insertCurrencies($data);
 		echo $res;
@@ -1401,18 +1222,15 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'updatecurrencies') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->updateCurrencies($data);
 		echo $res;
 	}
 	if ($mode == 'currenciesdetails') {
-		//echo TBL_REVENUES;
 		$res = $userObj->getAllTablesData(TPREFIX . TBL_CURRENCIES);
 		echo json_encode($res);
 	}
 	if ($mode == 'addcustomers') {
-		//echo "aaaa"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->insertCustomer($data);
 		echo $res;
@@ -1424,18 +1242,15 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'updatecustomers') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->updateCustomer($data);
 		echo $res;
 	}
 	if ($mode == 'customersdetails') {
-		//echo TBL_REVENUES;
 		$res = $userObj->getAllTablesData(TPREFIX . TBL_CUSTOMERS);
 		echo json_encode($res);
 	}
 	if ($mode == 'addmediables') {
-		//echo "aaaa"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->insertMediables($data);
 		echo $res;
@@ -1447,18 +1262,15 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'updatemediables') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->updateMediables($data);
 		echo $res;
 	}
 	if ($mode == 'mediablesdetails') {
-		//echo TBL_REVENUES;
 		$res = $userObj->getAllTablesData(TPREFIX . TBL_MEDIABLES);
 		echo json_encode($res);
 	}
 	if ($mode == 'addnotifications') {
-		//echo "aaaa"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->insertNotifications($data);
 		echo $res;
@@ -1470,18 +1282,15 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'updatenotifications') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->updateNotifications($data);
 		echo $res;
 	}
 	if ($mode == 'notificationsdetails') {
-		//echo TBL_REVENUES;
 		$res = $userObj->getAllTablesData(TPREFIX . TBL_NOTIFICATIONS);
 		echo json_encode($res);
 	}
 	if ($mode == 'additems') {
-		//echo "aaaa"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->insertItems($data);
 		echo $res;
@@ -1493,26 +1302,19 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'updateitems') {
-		//echo "ravi"; exit;
 		$data = json_decode($_GET['data'], 1);
 		$res = $userObj->updateItems($data);
 		echo $res;
 	}
 	if ($mode == 'itemsdetails') {
-		//echo TBL_REVENUES;
 		$res = $userObj->getAllTablesData(TPREFIX . TBL_ITEMS);
 		echo json_encode($res);
 	}
 	if ($mode == 'displayattributes') {
-		//echo "data"; exit;
 		$page_name = $_GET['page_name'];
 		$whr = "page_name='" . $page_name . "'";
-		//echo $whr;
-		//$whr = "id=2";
 		$res = $userObj->getrowTablesData(TPREFIX . TBL_DISPLAYATTRIBUTES, '*', $whr);
-		//print_r($res);
 		echo json_encode($res);
-		//echo "1";
 	}
 	if ($mode == 'displayattributesview') {
 		$view = $_GET['view'];
@@ -1565,21 +1367,16 @@ if ($method == 'post') {
 		echo json_encode($res);
 	}
 	if ($mode == 'adddata') {
-		//echo "ha"; //exit;
 		$decode = urldecode($_GET['data']);
-		//echo $decode;
 		$data = json_decode($decode, 1);
-		//print_r($data); echo "faf"; //exit;
 		$res = $userObj->insertTablesdata($data, $_GET['table']);
 		if ($_GET['table'] == 'isac_items') {
-			//echo "gga"; exit;
 			$data1['item_id'] = $res;
 			$res = $userObj->updateTablesdata($data1, TBL_ITEM_SPECIFICATIONS, 'sku', $data['sku']);
 		}
 		echo $res;
 	}
 	if ($mode == 'addemail') {
-		//echo "haooooo"; exit;
 		$post = json_decode($_GET['data'], 1);
 		$data['name'] = $post['name'];
 		$data['email'] = $post['email'];
@@ -1607,9 +1404,7 @@ if ($method == 'post') {
 			$field = $_GET['field'] != '' ? $_GET['field'] : '*';
 
 		}
-		//echo "hai".$orderby;
 		$res = $userObj->getAllTablesData($_GET['table'], '*', $whr, $orderby);
-		//print_r($res);
 		echo json_encode($res);
 	}
 	if ($mode == 'singlerowtabledata') {
@@ -1617,73 +1412,54 @@ if ($method == 'post') {
 		$fid = $_GET['fid'] != '' ? $_GET['fid'] : 'id';
 		$whr = $fid . "='" . $rid . "'";
 		$res = $userObj->getrowTablesData($_GET['table'], '*', $whr);
-		//print_r($res);exit;
 		echo json_encode($res);
 	}
 
 	if ($mode == 'updaterowtabledata') {
-		//echo "sada"; exit;
 		$rid = $_GET['rid'];
 		$fid = $_GET['fid'] != '' ? $_GET['fid'] : 'id';
 		$data = json_decode(urldecode($_GET['data']), 1);
-		//echo "ads".$fid; exit;
 		$res = $userObj->updateTablesdata($data, $_GET['table'], $fid, $rid);
 		echo json_encode($res);
 	}
 	if ($mode == 'addemailgroupemail') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data); exit;
 		$insert_data['email_groups_id'] = $data['email_groups_id'];
 		$emails = explode(",", $data['email']);
 		foreach ($emails as $email) {
 			$insert_data['email_id'] = $email;
-			//print_r($insert_data); exit;
 			$res = $userObj->insertTablesdata($insert_data, TPREFIX . TBL_EMAILGROUPSEMAIL);
 		}
 		echo $res;
 	}
 	if ($mode == 'addbill') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data);
 		$data['company_id'] = 3;
 		$res = $userObj->insertBillTables($data);
 		echo $res;
 	}
 	if ($mode == 'addestimates') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data);
-		/*$data['company_id'] =3;*/
 		$res = $userObj->insertEstimatesTables($data);
 		echo $res;
 	}
 	if ($mode == 'adddebitnote') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data);
-		/*$data['company_id'] =3;*/
 		$res = $userObj->insertdebitnoteTables($data);
 		echo $res;
 	}
 	if ($mode == 'addcreaditnote') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data);
-		/*$data['company_id'] =3;*/
 		$res = $userObj->insertcreaditnoteTables($data);
 		echo $res;
 	}
 	if ($mode == 'adddquotation') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data);
-		/*$data['company_id'] =3;*/
 		$res = $userObj->insertquotationTables($data);
 		echo $res;
 	}
-	/*if($mode == 'billdetails'){
-		$res = biillData(2);
-		echo $res;
-	}*/
 	if ($mode == 'showtables') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data);
 		$data['company_id'] = 3;
 		$res = $userObj->listofTables($_GET['data_name']);
 		echo json_encode($res);
@@ -1706,34 +1482,25 @@ if ($method == 'post') {
 		} else {
 			$whr = "id='" . $rid . "'";
 		}
-		//echo $whr;exit;
 		$res = $userObj->getrowTablesData(TBL_DISPLAYATTRIBUTES, '*', $whr);
-		//print_r($res); exit;
 		$attribute = json_decode($res->list_attributes, 1);
-		//print_r($attribute); exit;
 		if ($table == '') {
 			$table = $res->application_table_name;
 		}
 		$displayattribute = $userObj->listofTableFields($table, $attribute);
-		//print_r($displayattribute);
 		if (isset($res->list_attributes)) {
-			//echo "test1";
 			$res->list_attributes = $displayattribute;
 		} else {
-			//echo "test2";
 			$res['list_attributes'] = $displayattribute;
 		}
-		//$res->list_attributes = $displayattribute;
 		echo json_encode($res);
 
 	}
 
 	if ($mode == "getspcificattributes") {
-		//echo "hai";
 		$tablename = $_GET['table'];
 		$rid = explode(",", $_GET['rid']);
 		$fid = $_GET['fid'] != '' ? $_GET['fid'] : 'id';
-		//print_r($rid);
 		$res = $userObj->getINqueryData($tablename, '', $fid, $rid);
 		echo json_encode($res);
 	}
@@ -1746,7 +1513,6 @@ if ($method == 'post') {
 		$status = json_decode($res->status, 1);
 		$status = implode(",", $status);
 		$result = $userObj->getStatusSeq($status);
-		//print_r($result);
 		echo json_encode($result);
 	}
 	if ($mode == 'selectgroup') {
@@ -1755,7 +1521,6 @@ if ($method == 'post') {
 		foreach ($reslut as $resl) {
 			$res[$resl->Parent_Account_Code][$resl->Account_Code] = $resl->Account_Name;
 		}
-		//print_r($res);
 		echo json_encode($res);
 	}
 	if ($mode == 'invoicenumber') {
@@ -1765,9 +1530,6 @@ if ($method == 'post') {
 	}
 	if ($mode == 'changepassword') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data); exit;
-		//$whr = "='".$rid."'and";
-		//$res = $userObj->getrowTablesData($_GET['table'],'*',$whr);
 		$result = $userObj->changepassword($data);
 		echo $result;
 	}
@@ -1775,7 +1537,6 @@ if ($method == 'post') {
 		//TBL_DISPLAYATTRIBUTES_TYPE
 		//echo "hai";; exit;
 		$result = $userObj->getDyanamicSelectData($_GET['table_name'], $_GET['filed_namee']);
-		//print_r($result);
 		echo json_encode($result);
 		exit;
 	}
@@ -1786,7 +1547,6 @@ if ($method == 'post') {
 	}
 	if ($mode == 'dyanamicselectreportdata') {
 		$result = $userObj->getDyanamicReportSelectData($_GET['report_id'], $_GET['filed_name']);
-		//print_r($result);
 		echo json_encode($result);
 		exit;
 	}
@@ -1794,7 +1554,6 @@ if ($method == 'post') {
 		//TBL_DISPLAYATTRIBUTES_TYPE
 		//echo "hai";; exit;
 		$result = $userObj->getDyanamicafterData($_GET['table_name'], $_GET['filed_namee']);
-		//print_r($result);
 		echo json_encode($result);
 		exit;
 	}
@@ -1806,31 +1565,25 @@ if ($method == 'post') {
 
 	if ($mode == 'notificationinsert') {
 		$post = json_decode(urldecode($_GET['data']), 1);
-		//print_r($post); exit;
 		$data['Notification_Message'] = $post['notification_message'];
 		$data['Notification_details'] = json_encode($post);
-		//print_r($data); exit;
 		$notification_id = $userObj->insertTablesdata($data, TBL_NOTIFICATIONS);
-		//echo $notification_id;
 		$data1['Notification_id'] = $notification_id;
 		$data1['Notification_Type'] = 'Action';
 		$users = explode(',', $post['notification_users']);
 		foreach ($users as $key => $value) {
 			$data1['User_id'] = $value;
-			//print_r($data1); exit;
 			$res = $userObj->insertTablesdata($data1, TBL_USER_NOTIFICATON);
 		}
 		echo $notification_id;
 	}
 	if ($mode == 'toGetNotigficationListByUsingUserId') {
 		$user_id = $_GET['user_id'];
-		//echo $user_id; exit;
 		$notificationdetails = $userObj->toGetNotigficationList($user_id, $_GET['type'], $_GET);
 		echo json_encode($notificationdetails);
 	}
 	if ($mode == 'displayrolepermission') {
 		$role_id = $_GET['rid'];
-		//echo $role_id; exit;
 		$rolepermission = $userObj->displayrolepermission($role_id);
 		echo json_encode($rolepermission);
 
@@ -1848,19 +1601,11 @@ if ($method == 'post') {
 	if ($mode == 'checkinvoicedetails') {
 		$customer_id = $_GET['customer_id'];
 		$details = $userObj->toGetblanceInvoices($customer_id);
-		//print_r($details);
 		echo json_encode($details);
 	}
-	// if($mode == 'checkbilldetails'){
-// 	$customer_id = $_GET['customer_id'];
-// 	$details = $userObj->toGetblancebill($customer_id,$get);
-// 	//print_r($details);
-// 	echo json_encode($details);
-// }
 	if ($mode == 'receiptinsert') {
 		$data = json_decode(urldecode($_GET['data']), 1);
 		$details = $userObj->toInsertandupateinvoice($data);
-		//print_r($details);
 		echo json_encode($details);
 	}
 	if ($mode == 'getemailgroupdetails') {
@@ -1872,7 +1617,6 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 	if ($mode == 'checkAndInsertapplicationpages') {
-		//echo $_GET['table'];
 		$details = $userObj->checkAndInsertapplicationpage($_GET['table'], $_GET['company_id']);
 		echo json_encode($details);
 	}
@@ -1898,18 +1642,14 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 	if ($mode == "togetreportdata") {
-		//echo $_GET['data'];
 		$data = json_decode(urldecode($_GET['data']), 1);
-		//print_r($data);
 		$details = $userObj->togetreportdata($data);
 		echo json_encode($details);
 
 	}
 	if ($mode == 'gettabledetailswithconditions') {
-		// echo "hai";//exit;
 		$data = urldecode($_GET['data']);
 		$data = json_decode($data, 1);
-		//print_r($data); exit;
 		$whr = $data['where'];
 		$whr_in = $data['where_in'];
 		$whr_in_key = $data['whr_in_key'];
@@ -1924,17 +1664,12 @@ if ($method == 'post') {
 			}
 
 			$where = trim($where, 'AND ');
-			//echo $where;
-			//$where = implode(' AND ', $where);
 		}
 		if ($whr_in_key != '') {
 
 			$whr_in_con = " AND " . $whr_in_key . " IN (" . implode(',', $whr_in) . ")";
 			$where .= $whr_in_con;
-			//echo $where;
-			//$where = implode(' AND ', $where);
 		}
-		//echo $where; exit;
 		if ($data['field'] != '') {
 			$fieldnames = $data['field'];
 		}
@@ -1947,14 +1682,11 @@ if ($method == 'post') {
 			$limit1 = $limit[0];
 			$limit2 = $limit[1];
 		}
-		//echo "hai".$order;
 		$details = $userObj->getAllTablesData($_GET['table'], $fieldnames, $where, $order, $limit1, $limit2);
-		//echo "<pre>"; print_r($details); exit;
 		if ($_GET['table'] == 'currencies') {
 			$i = 0;
 			foreach ($details as $dd) {
 				$led[$i]['id'] = $dd->id;
-				//$led[$i]['currency_list']= base64_encode($dd->currency_list);
 				$led[$i]['currency_name'] = $dd->currency_short_code;
 				$led[$i]['currency_short_code'] = $dd->currency_short_code;
 
@@ -1962,7 +1694,6 @@ if ($method == 'post') {
 			}
 			$details = $led;
 		}
-		//	echo "<pre>"; print_r($details);
 		echo json_encode($details);
 		exit;
 	}
@@ -2015,13 +1746,11 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 	if ($mode == 'togetpcdata') {
-		//echo "Hello Test";
 		$details = $userObj->togetpcdata($_GET['company_id'], $_GET['user_id']);
 		echo json_encode($details);
 	}
 	if ($mode == 'pettycashbranchamount') {
 		$data = json_decode($_GET['data'], 1);
-		//print_r($data);
 		$details = $userObj->pettycashbranchamount($data);
 		echo json_encode($details);
 	}
@@ -2031,13 +1760,11 @@ if ($method == 'post') {
 	}
 
 	if ($mode == 'tocreatejounalvoucherbaseallcases') {
-		//echo "----------------"; exit;
 		$details = $userObj->tocreatejounalvoucherbaseallcases($_GET['table_name'], $_GET['id']);
 		echo json_encode($details);
 	}
 
 	if ($mode == 'insertpaymentstojv') {
-		//echo "----------------"; exit;
 		$details = $userObj->insertpaymentstojv($_GET['transaction_id'], $_GET);
 		echo json_encode($details);
 	}
@@ -2053,7 +1780,6 @@ if ($method == 'post') {
 		}
 	}
 	if ($mode == 'sendmailwithsmtp') {
-		//echo "-------------------"; exit;
 		$details = $userObj->sendmailwithsmtp('shilpa.duttapattanayak@microchip.com', 'Test mail', 'body', '', '');
 		echo json_encode($details);
 	}
@@ -2156,16 +1882,13 @@ if ($method == 'post') {
 	$check_array = array('projecttaskchart' => 'projectTaskChart', 'updateprojecttaskstatuse' => 'updateProjectTaskStatuse', 'getprojecttaskemplist' => 'getProjectTaskEmpList', 'getlistcreatdocumentsfields' => 'getListCreatDocumentsFields', 'gettablerow' => 'getListTableRow', 'getprintdesigning' => 'getPrintDesigning', 'gettableattributes' => 'getTableAttributes', 'getlisttable' => 'getListTable', 'getattribute' => 'getAttribute', 'fileuploadingdelete' => 'fileUploadingDelete', 'filleuploadinglist' => 'filleUploadingList', 'getjobpostingsreport' => 'getjobpostingsreport', 'getempreport' => 'getempreport', 'getemprequests' => 'getemprequests', 'togetVendorAgreementexpirelist' => 'togetVendorAgreementexpirelist', 'getpeerfeedbackquestionsandoptions' => 'getpeerfeedbackquestionsandoptions', 'getperformanceemployees' => 'getperformanceemployees', 'getempperformancepeerfeedback' => 'getempperformancepeerfeedback', 'getperformanceassessment' => 'getperformanceassessment', 'employeedashboard' => 'employeedashboard', 'togetepfecrsummary' => 'togetepfecrsummary', 'togetesisummary' => 'togetesisummary', 'togetepfsummary' => 'togetepfsummary', 'togetpayslipctcreports' => 'togetpayslipctcreports', 'togetstateinsurance' => 'togetstateinsurance', 'togetpercentofempprovidentfunds' => 'togetpercentofempprovidentfunds', 'togetsumofempsalaryoncomponentidbtwdates' => 'togetsumofempsalaryoncomponentidbtwdates', 'togetsumofempsalaryoncomponentid' => 'togetsumofempsalaryoncomponentid', 'togetsalarytotaldetails' => 'togetsalarytotaldetails', 'getcandidatededata' => 'getcandidatededata', 'gettimesheedays' => 'gettimesheedays', 'getjobsreport' => 'getjobsreport', 'getempassessment' => 'getempassessment', 'getassessmentreport' => 'getassessmentreport', 'getassessmentresult' => 'getassessmentresult', 'getassessmentlist' => 'getassessmentlist', 'getassessmentsummary' => 'getassessmentsummary', 'getsharedassessmentdetails' => 'getsharedassessmentdetails', 'getassessmentdetails' => 'getassessmentdetails', 'getemployeeworkordertimesheethorus' => 'getemployeeworkordertimesheethorus', 'getbudgetlist' => 'getbudgetlist', 'getbudgetfilterdetails' => 'getbudgetfilterdetails', 'getvmsbudgetutilization' => 'getvmsbudgetutilization', 'gettimesheetscalendar' => 'gettimesheetscalendar', 'togetjobdetails' => 'togetjobdetails', 'getcontractemployees' => 'getcontractemployees', 'getvendorwisereport' => 'getvendorwisereport', 'NewUserEmailresent' => 'NewUserEmailresent', 'getprojecttimesheets' => 'getprojecttimesheets', 'togetprojectdetails' => 'togetprojectdetails', 'toGetVendorDashBoardData' => 'toGetVendorDashBoardData', 'employeeshift' => 'employeeshift', 'toGetInboxCountUsingUserId' => 'toGetInboxCountUsingUserId', 'getfilteremployeenames' => 'getfilteremployeenames', 'updatebulktransferemployees' => 'updatebulktransferemployees', 'getbulkchangecategories' => 'getbulkchangecategories', 'toGetTransactionLogdata' => 'toGetTransactionLogdata', 'getrecognitionsettings' => 'getrecognitionsettings', 'getfilterdetails' => 'getfilterdetails', 'getheadcountreport' => 'getheadcountreport', 'wrokflowlist' => 'wrokflowlist', 'getterminatesettings' => 'getterminatesettings', 'getannouncements' => 'getannouncements', 'getvendorsettings' => 'getvendorsettings', 'tosearchemployee' => 'tosearchemployee', 'tosearchempleavesbydate' => 'tosearchempleavesbydate', 'togetleaveform' => 'togetleaveform', 'getconfigsettings' => 'getconfigsettings', 'togetallpayslipdetails' => 'togetallpayslipdetails', 'toimportthedataintotables' => 'toimportthedataintotables', 'getsalarygroupsitreportdata' => 'getsalaryreportinggroupsdata', 'togetnoteslist' => 'togetnoteslist', 'getemployeeinfoforupdation' => 'getemployeeinfoforupdation', 'tasksendmail' => 'tasksendmail', 'gettasksdetails' => 'gettasksdetails', 'singlestatusdata' => 'singlestatusdata', 'payrolldetails' => 'payrolldetails', 'togetkpitaskstatus' => 'togetkpitaskstatus', 'togetkpitaskhistories' => 'togetkpitaskhistories', 'togetemployeeslist' => 'togetemployeeslist', 'togetempleavebalances' => 'togetempleavebalances', 'togetpresentationpagedetails' => 'togetpresentationpagedetails', 'togetpresentationdetails' => 'togetpresentationdetails', 'togetemployeeattendanacecalucater' => 'togetemployeeattendanacecalucater', 'togetcurrentmonthsalaryrevisions' => 'togetcurrentmonthsalaryrevisions', 'togetcurrentmonthexitemployes' => 'togetcurrentmonthexitemployes', 'togetpayslipdetails' => 'togetpayslipdetails', 'togetpayrolledetails' => 'togetpayrolledetails', 'updateonlystatus' => 'updateonlystatus', 'employeegoalscheckandadd' => 'employeegoalscheckandadd', 'goalscheckandadd' => 'goalscheckandadd', 'togetsalarycatdetaillist' => 'togetsalarycatdetaillist', 'togetcandidatedocumentlist' => 'togetcandidatedocumentlist', 'gettabledetailswithtransationlogconditions' => 'employeeDetails', 'employeedetails' => 'employeeDetails', 'toGetItemcostingtyewithdata' => 'toGetItemcostingtyewithdata', 'togetstatusprogressactiondetails' => 'togetstatusprogressactiondetails', 'togetgenralledgerlistdata' => 'togetgenralledgerlistdata', 'pendingquerieslist' => 'pendingQuerieslist', 'togetbudgetuserdeails' => 'togetbudgetuserdeails', 'togetstatusprogresstables' => 'togetstatusprogresstables', 'dasboaradrequisition1coscenterdetails' => 'dasboaradrequisition1coscenterdetails', 'dasboaradrequisition1details' => 'dasboaradrequisition1details', 'montlypettycashdetails' => 'montlypettycashdetails', 'dailypettycashdaydetails' => 'dailypettycashdaydetails', 'dailypettycashmonth' => 'dailypettycashmonth', 'dailypettycashdetails' => 'dailypettycashformonth', 'togetuserpettycashboxdetails' => 'togetuserpettycashboxdetails', 'toGetTaxrates' => 'toGetTaxrates', 'togetpettycashsummary' => 'toGetPettyCashSummary', 'togetbluckstatusdata' => 'toGetBluckStatusData', 'toGetBluckApprovaldata' => 'toGetBluckApprovaldata', 'pettycashdetails' => 'pettycashdetails', 'getchartofaccountdetailsuseglaccountuser' => 'getchartofaccountdetailsuseglaccountuser', 'getapprovallogdata' => 'getApprovalLogData', 'getmyreportlist' => 'getMyReportList', 'deletemyreport' => 'deleteMyReport', 'getchartjobreport' => 'getChartJobReport', 'getlistchartjobreport' => 'getListChartJobReport', 'getheadcountcurrentreport' => 'getHeadCountCurrentReport', 'getlistheadcountcurrentreport' => 'getListHeadCountCurrentReport', 'getchartcandidatesreport' => 'getChartCandidatesReport', 'getlistchartcandidatesreport' => 'getListchartcandidatesreport', 'tocheckesginemployee' => 'tocheckesginemployee', 'blukapprovalvendorchart' => 'blukapprovalvendorchart', 'processtaskschecduleview' => 'processTaskSchecduleView', 'processtaskschecduleoverview' => 'processTaskSchecduleOverView', 'getlistjobpostingslist' => 'getListJobPostingsList', 'getjoboverview' => 'getJobOverView', 'updatecandidateshortlist' => 'updateCandidateShortList', 'getcandidatefeedbackresult' => 'getcandidatefeedbackresult', 'candidateactivityreports' => 'candidateActivityReports', 'togetfeedbackcandidate' => 'togetfeedbackcandidate', 'getlist' => 'getList', 'applicationprocesslist' => 'applicationProcessList', 'applicationprocesspages' => 'applicationProcessPages', 'applictionprocelist' => 'applictionProceList', 'updateapplicationprocesspages' => 'updateApplicationProcessPages', 'userlistwithrole' => 'userlistwithrole', 'getfeedbackcandidatereport' => 'getfeedbackcandidatereport', 'getriviewsdata' => 'getRiviewsData', 'getcitydatasautotype' => 'getcitydatasautotype', 'gettrackingdynamic' => 'gettrackingdynamic', 'getfamilytreelist' => 'getFamilyTreeList', 'getemployeetreelist' => 'getEmployeeTreeList', 'getchartofaccountreelist' => 'getCharTofAccounTreeList', 'myreportviewsql' => 'myreportViewSql', 'reportfilterselectdata' => 'reportFilterSelectData', 'checkcriteria' => 'checkCriteria', 'checkwhoshouldapproves' => 'checkWhoShouldApproves', 'customgetstatusworkflow' => 'customGetStatusWorkFlow', 'updatedynamicapprovallognew' => 'updateDynamicApprovalLogNew', 'testingfunction' => 'testingfunction', 'checkemployeeleaveavailableornot' => 'checkEmployeeLeaveAvailableOrNot', 'cronjobleave' => 'cronJobLeave', 'checkleaveapplicable' => 'checkLeaveApplicable', 'checkleavebalanceorhalfday' => 'checkLeaveBalanceOrHalfDay', 'tocerateapplicationuser' => 'tocerateapplicationuser', 'getemployeeworkingentrys' => 'getEmployeeWorkingEntrys', 'edittimesheetbillablehrs' => 'editTimeSheetBillableHrs', 'tocreatemutltiusercreate' => 'tocreatemutltiusercreate', 'getmonthlyctcreports' => 'getMonthlyCTCReports', 'insertcheckpayroll' => 'insertCheckPayRoll', 'dyanamicreferfunc' => 'dyanamicReferFunc', 'closenotificationinfo' => 'closeNotificationInfo', 'tocerateapplicationuserbasedonalltype' => 'tocerateapplicationuserbasedonalltype', 'togetptanualstatment' => 'togetPtAnualStatment', 'getemployeectcreports' => 'getEmployeeCTCReports', 'closenotificationinfo' => 'closeNotificationInfo', 'bugetvendorrareporttest' => 'bugetvendorrareporttest', 'updateticketdetails' => 'updateTicketDetails', 'getviewticketdetails' => 'getViewTicketDetails', 'getheadcountreportemployefilter' => 'getheadcountreportEmployeFilter11', 'getlitsattendancesapi' => 'getLitsAttendancesApi', 'getleavewithstatus' => 'getLeaveWithStatus', 'togetpayrollpayarea' => 'togetpayrollpayarea', 'payareapayrolldetails' => 'payareapayrolldetails', 'listoutpayareapayrolldetails' => 'listoutpayareapayrolldetails', 'getgrosssalarywithregim' => 'getgrosssalarywithregim', 'getmyreportfields' => 'getMyReportfields', 'getadmindashboard' => 'getAdminDashboard', 'gettablefilter' => 'getTableFilter', 'getemployeeexpencesdetails' => 'getEmployeeExpencesDetails', 'getexpensespoliciesdetails' => 'getExpensesPoliciesDetails', 'assignemployeelistpolicy' => 'assignEmployeeListPolicy', 'getuserinvitations' => 'getUserInvitations', 'updatestatusvendordocuments' => 'updatestatusvendordocuments', 'reaprovevendordoc' => 'reAproVevendorDoc', 'getstocktakes' => 'getStockTakes', 'getstocktakesuom' => 'getstocktakesuom', 'getstocktakeadjustments' => 'getStockTakeAdjustments', 'startstocktakes' => 'startstocktakes', 'getstocktakelocations' => 'getStockTakeLocations', 'softdeletedrecord' => 'softDeletedRecord', 'getjobpostings' => 'getJobPostings', 'getassetallocationvms' => 'getAssetAllocationVms', 'getcompliancedetails' => 'getComplianceDetails', 'setcompliance' => 'setCompliance', 'setcomplianceallocation' => 'setComplianceAllocation', 'getcompliancesdashbord' => 'getCompliancesDashbord', 'updateticketfollowers' => 'updateTicketFollowers', 'getstatusworkflow' => 'getStatusWorkFlow', 'startworkflow' => 'startWorkFlow', 'getuserstatusstep' => 'getUserStatusStep', 'getstatusprogresslist' => 'getStatusProgressList', 'insertemployeesalary' => 'insertemployeesalary', 'closeallnotifications' => 'closeallnotifications', 'closesinglenotifications' => 'closesinglenotifications', 'getnewemployeedashboarddetails' => 'getnewemployeedashboarddetails', 'getwrokflowsteps' => 'getWrokflowSteps', 'checkworkflowcriteria' => 'checkWorkFlowCriteria', 'insertleaverequest' => 'insertLeaveRequest', 'gettocheckleavetypecriteria' => 'getToCheckLeaveTypeCriteria', 'loginafterdetails' => 'loginafterdetails', 'togettransactionlogempitdeclaration' => 'togettransactionlogempitdeclaration', 'updatepormanace' => 'updatePormanace', 'addkra' => 'addKra', 'getorganizationgoalsdetails' => 'getOrganizationGoalsSetails', 'getjobtitlecompetencies' => 'getJobTitleCompetencies', 'getperformanaceappraiserheader' => 'getPerformanaceAppraiserHeader', 'getpeerfeedback' => 'getPeerFeedback', 'getperformanceappraisalsettings' => 'getPerFormanceAppraisalAettings', 'getviewperformanceappraisalsettig' => 'getViewPerFormanceAppraisalSettig', 'getpayrunsummarysalary' => 'getPayRunSummarySalary', 'getemployeenotattendance' => 'getEmployeeNotAttendance', 'getindexmobiledetails' => 'getIndexMobileDetails', 'getdashboardmobiledetails' => 'getDashboardMobileDetails', 'getemployeehrservice' => 'getEmployeeHRService', 'togettransactionLoginbox' => 'toGetTransactionLogInbox', 'getleaveavailability' => 'getLeaveAvailability', 'getleavecalender' => 'getLeaveCalender', 'getdynamictabledetails' => 'getDynamicTableDetails', 'getholidayscalendor' => 'getHolidaysCalendor', 'getsubscriptionusers' => 'getSubscriptionUsers', 'employeeattendaceupload' => 'employeeattendaceupload', 'employeesalaryupload' => 'employeesalaryupload', 'employeesalarycomponetsupload' => 'employeesalarycomponetsupload', 'insertemployeectcrrohan' => 'insertemployeectcrrohan', 'getcandidates' => 'getCandidates', 'getcandidatedetails' => 'getCandidateDetails', 'getrecruitmentdashboard' => 'getRecruitmentDashboard', 'getcandidateoverviews' => 'getCandidateOverViews', 'getcandidatelogs' => 'getCandidateLogs', 'getapplicationrole' => 'getApplicationRole', 'getnewjoinjobcandidates' => 'getnewjoinjobcandidates', 'getlistofjobcandidate' => 'getlistofjobcandidate', 'getviewalldetilarecruitmentdashboard' => 'getviewalldetilarecruitmentdashboard', 'getjobhiringsource' => 'getJobHiringSource', 'getcandidateemailpopup' => 'getCandidateEmailPopup', 'getjobpostingpagedetails' => 'getJobPostingPageDetails', 'getrecruitngmanagerdashboard' => 'getRecruitngManagerDashboard', 'getcandidateaccessright' => 'getCandidateAccessRight', 'getworkflowconfiguration' => 'getWorkFlowConfiguration', 'domainverifye' => 'domainVerifye', 'insertaudittrail' => 'insertAuditTrail', 'getaudittrails' => 'getAuditTrails', 'getdynamicmoduledashboard' => 'getDynamicModuleDashboard', 'payrolldashboard' => 'payRollDashboard', 'getreportsalesbycustomer' => 'getReportSalesByCustomer', 'getdynamicworkflowsteps' => 'getDynamicWorkFlowSteps', 'submitstatusdynamicworkflow' => 'submitStatusDynamicWorkFlow', 'getdynamicquotationdetails' => 'getDynamicQuotationDetails', 'gettopupdetails' => 'getTopUpdetails', 'dynamiccheckqtyvalidation' => 'dynamicCheckQtyValidation', 'getdynamictransactioninvoices' => 'getDynamicTransactionInvoices', 'getdynamicpopupvendorsassignrequisition' => 'getDynamicpopUpVendorsAssignRequisition', 'getdocumentaccesssetups' => 'getDocumentAccessSetups', 'getapplicationroles' => 'getApplicationRoles', 'currencyconversionrate' => 'currencyConversionRate', 'userandcurrencydetails' => 'userAndCurrencyDetails', 'tochecktransactionlocationwarehousebefore' => 'tochecktransactionlocationwarehousebefore', 'getdisplayattributesnewversion' => 'getDisplayAttributesNewVersion', 'getcandidategenerateemployee' => 'getCandidateGenerateEmployee', 'getemployeeonboardingtask' => 'getEmployeeOnboardingTask', 'getvendordashboard' => 'getVendorDashboard', 'checkbilldetails' => 'toGetblancebill', 'getpayments' => 'getPayments', 'getbillsstackdashboardchart' => 'getBillsStackDashboardChart', 'togethremployeedetails' => 'togethremployeedetails', 'sendmailwithpdf' => 'sendMailWithPDF', 'getsetupdetails' => 'getSetupDetails', 'replicateListofCommonTables' => 'replicateListofCommonTables', 'dynamicapplicationemptytransactions' => 'dynamicApplicationEmptyTransactions', 'getapplicationemptytransactions' => 'getApplicationEmptyTransactions', 'getadditionalcharge' => 'getAdditionalCharge', 'setfollowuplevels' => 'setfollowUpLevels', 'getdynamicinvoiceprint' => 'getDynamicInvoicePrint', 'cronjobfollowuplevels' => 'cronJobFollowUpLevels', 'getprojecttaskdetailsfolloups' => 'getProjectTaskDetailsFolloUps', 'newcandidateautoregistation' => 'newcandidateautoregistation', 'getsalarytemplatecomponents' => 'getSalaryTemplateComponents', 'tocreateprocesstaskintotaskdatail' => 'tocreateprocesstaskintotaskdatail', 'vendorregistartiontasksssigne' => 'vendorRegistartionTaskAssigne', 'getapplicationusers' => 'getApplicationUsers', 'gettransactionactivityschedules' => 'getTransactionActivitySchedules', 'gettransactionactivityschedulesdashboartd' => 'getTransactionActivitySchedulesDashboartd', 'togenrateholdemployees' => 'togenrateholdemployees', 'emailfunctioncheck' => 'emailfunctioncheck', 'getitempricehistoriesbyitemid' => 'getitempricehistoriesbyitemid', 'getitemsorders' => 'getItemsOrders', 'getpartydetails' => 'getPartyDetails', 'getapplicationuserinvitations' => 'getApplicationUserInvitations', 'setcronjobworkflowconfigurationsnew' => 'setCronJobWorkFlowConfigurationsNew', 'allocateemployeeseat' => 'allocateEmployeeSeat', 'getemployeesdisplayfields' => 'getEmployeesDisplayFields', 'getapplicationreports' => 'getApplicationReports', 'getemployees' => 'getEmployees', 'getempbanks' => 'getEMPBanks', 'toinvoitesendmail' => 'toInvoiteSendMail', 'userpasswordreset' => 'userPasswordReset', 'getpurchaseinvoiceandsupplireinvoicedashboard' => 'getPurchaseInviceandSupplireInvoiceDashboard', 'getvendorcustomeritems' => 'getVendorCustomerItems', 'updatetransactiontds' => 'updateTransactionTDS', 'gerreferancetabledetails' => 'gerReferanceTableDetails', 'getreceipts' => 'getReceipts', 'tosendotpmessage' => 'tosendotpmessage', 'togetotpmobiledetails' => 'togetotpmobiledetails', 'toupdatemobilenumber' => 'toupdatemobilenumber', 'toverifymobileotp' => 'toverifymobileotp', 'emailinvoicesend' => 'emailInvoiceSend', 'getitems' => 'getItems', 'getitemcategories' => 'getItemCategories', 'getclonetransactions' => 'getCloneTransactions', 'getslatrackinglogreports' => 'getSLSTrackingLogReports', 'getitemsearch' => 'getItemSearch', 'getimportexceldata' => 'getImportCxcelData', 'getdynamicinvocedetails' => 'getdynamicinvocedetails', 'gettranslations' => 'gettranslations', 'tocreateusertoken' => 'tocreateusertoken', 'tosendmessagetomobile' => 'tosendmessagetomobile', 'tosendwhatsappdata' => 'tosendwhatsappdata', 'getskudetails' => 'getskudetails', 'getdynamicinviceparty' => 'getDynamicInviceParty', 'getmultireferencepagedetails' => 'getMultiReferencePageDetails', 'sendotptoverifymobile' => 'sendotptoverifymobile', 'verifyotpsendtomobile' => 'verifyotpsendtomobile', 'tocreateuserwithusermodulelist' => 'tocreateuserwithusermodulelist', 'getaudittrails_new' => 'getAuditTrails_new', 'tosendmailtest' => 'tosendmailtest', 'getmodulerolelogs' => 'getModuleRoleLogs', 'getfailedloginattempts' => 'getFailedLoginAttempts', 'getfailedloginattemptdetails' => 'getFailedLoginAttemptDetails', 'getcancelinvoicepopup' => 'getCancelInvoicePopUp', 'proformainvoicethroughsalesinvoicescreated' => 'proformaInvoiceThroughSalesInvoicesCreated', 'tocallmobilenotificationmob' => 'tocallmobilenotificationmob');
 
 	if (isset($check_array[$mode])) {
-		//echo "api data"; exit;
 		$fun = $check_array[$mode];
 		$details = $userObj->$fun($_GET);
 		echo json_encode($details);
 	}
 	$integcheck_array = array('getviewalldetilarecruitmentdashboardineg' => 'getviewalldetilarecruitmentdashboardineg', 'togetmyreportswithdetails' => 'togetmyreportswithdetails', 'togetcandidatefunnel' => 'togetcandidatefunnel', 'togetcandidatebydisabilitygender' => 'togetcandidatebydisabilitygender', 'toinsertreportviewdata' => 'toinsertreportviewdata', 'togetcandidatebyracegender' => 'togetcandidatebyracegender', 'togetcandidatesources' => 'togetcandidatesources', 'togetcandidatebyveterangender' => 'togetcandidatebyveterangender', 'toinsertapplication_table_histories' => 'toinsertapplication_table_histories', 'togetleavelstemployeeajax' => 'togetleavelstemployeeajax', 'togetprojectinsertdata' => 'togetprojectinsertdata', 'togetprojectkanbanboarddetails' => 'togetprojectkanbanboarddetails', 'togetprojecttaskdetailspopup' => 'togetprojecttaskdetailspopup', 'togetprojectdashboarddetails' => 'togetprojectdashboarddetails', 'togettopprojecttasklist' => 'togettopprojecttasklist', 'togettopprojectworkspacelist' => 'togettopprojectworkspacelist', 'togetlistprojecttaskdetailspopup' => 'togetlistprojecttaskdetailspopup', 'todatainsertall' => 'todatainsertall', 'togetprojectviewalldetails' => 'togetprojectviewalldetails', 'togetuseralldetailsforuser' => 'togetuseralldetailsforuser', 'togetprojecteamaddetails' => 'togetprojecteamaddetails', 'togetunassigntaskslist' => 'togetunassigntaskslist', 'tocheckprojectteamuncompletetasks' => 'tocheckprojectteamuncompletetasks', 'togetprojecttasktimelog' => 'togetprojecttasktimelog', 'getitemqualitychecknewdetails' => 'getitemqualitychecknewdetails', 'togetqualitychecmappingindetails' => 'togetqualitychecmappingindetails', 'togetqualitychecmappinginwithitemmadetails' => 'togetqualitychecmappinginwithitemmadetails', 'togetdatawithseriallotnumber' => 'togetdatawithseriallotnumber', 'tocheckandisertthedatafortablequalitycheck' => 'tocheckandisertthedatafortablequalitycheck', 'toudatedepartmentandcoscenter' => 'toudatedepartmentandcoscenter', 'togetdyanamicselectdatatablename' => 'togetdyanamicselectdatatablename', 'togenratesalarytemplates' => 'togenratesalarytemplates', 'togetreportvillvendors' => 'togetreportvillvendors', 'togetreportvillbaseidvendors' => 'togetreportvillbaseidvendors', 'togetprojectdnewashboarddetails' => 'togetprojectdnewashboarddetails', 'togetprojectmahinematerial' => 'togetprojectmahinematerial', 'togetprojecttaskmahinematerial' => 'togetprojecttaskmahinematerial', 'togetcourier' => 'togetcourier', 'togetofficemanagement' => 'togetofficemanagement', 'addstationerycartqty' => 'addstationerycartqty', 'togetuserstationerycart' => 'togetuserstationerycart', 'tocreateuserstationeryrequest' => 'tocreateuserstationeryrequest', 'togetuserliststationerycart' => 'togetuserliststationerycart', 'togetuserrequestcartdetails' => 'togetuserrequestcartdetails', 'togetallslectedtrasportdetails' => 'togetallslectedtrasportdetails', 'searchcourierdata' => 'searchcourierdata', 'searchstationerydata' => 'searchstationerydata', 'updatetranspotfrom' => 'updatetranspotfrom', 'togetinsertdetalsfoods' => 'togetinsertdetalsfoods', 'updatefoodrequest' => 'updatefoodrequest', 'searchstationeryreport' => 'searchstationeryreport', 'togetofficemanagementdashboard' => 'togetofficemanagementdashboard', 'tochangeprojectowner' => 'tochangeprojectowner', 'searchtransportbus' => 'searchtransportbus', 'reportofyearmonthalldetails' => 'reportofyearmonthalldetails', 'togetemployeeform16adetails' => 'togetemployeeform16adetails', 'assignemptofrom16a' => 'assignemptofrom16a', 'getassignfrom16aemployeelist' => 'getassignfrom16aemployeelist', 'togetreleasedocumentlistdetails' => 'togetreleasedocumentlistdetails', 'togetdcumentdashboarddetails' => 'togetdcumentdashboarddetails', 'togetinsertemptaxdepositdetails' => 'togetinsertemptaxdepositdetails', 'toinsertupdateemptaxdeposit' => 'toinsertupdateemptaxdeposit', 'togetueremailactivation' => 'togetueremailactivation', 'toinsertuseremailactivation' => 'toinsertuseremailactivation', 'togetgeneralcodedetails' => 'togetgeneralcodedetails', 'togetimplodesdetailsount' => 'togetimplodesdetailsount', 'toimportthedataintotablesemployeessalary' => 'toimportthedataintotablesemployeessalary', 'gnrolepermision' => 'gnrolepermision', 'toinsertapplication_table_histories' => 'toinsertapplication_table_histories', 'togetjobtitleexploc' => 'togetjobtitleexploc', 'togetjobtitleexp' => 'togetjobtitleexp', 'togetcarddetailsemp' => 'togetcarddetailsemp', 'toinsertapplicationpageprocess' => 'toinsertapplicationpageprocess', 'togetanddifflisttablefields' => 'togetanddifflisttablefields', 'getmoduleprocesslist' => 'getmoduleprocesslist', 'getapplicationserialnumbers' => 'getApplicationSerialNumbers', 'tobeforeaddmeetingrommbook' => 'tobeforeaddmeetingrommbook', 'getDynamicCities' => 'getDynamicCities', 'getCompanyAnnouncements' => 'getCompanyAnnouncements', 'tocreateuserstationeryrequestnewhr' => 'tocreateuserstationeryrequestnewhr', 'getStationeryAvailableItemsData' => 'getStationeryAvailableItemsData', 'getEmployeeWiseIssuanceDetails' => 'getEmployeeWiseIssuanceDetails', 'getMonthlyStationeryReport' => 'getMonthlyStationeryReport', 'getStationeryStockBalance' => 'getStationeryStockBalance', 'getTotalItemsIssuedCategoryWise' => 'getTotalItemsIssuedCategoryWise', 'getStationeryStockInOutDatewise' => 'getStationeryStockInOutDatewise', 'getprojectemployeetaskreport' => 'getProjectEmployeeTaskReport', 'togenratesalarytemplatesoot' => 'togenratesalarytemplatesoot');
 	if (isset($integcheck_array[$mode])) {
-		//echo "api-".$mode; exit;
 		$fun = $integcheck_array[$mode];
-		//echo $fun; exit;
 		$details = $intiObj->$fun($_GET);
 		echo json_encode($details);
 	}
@@ -2241,7 +1964,6 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 
-	//$vendor_porter_class_array =  array('getapplicationtickets'=>'getApplicationTickets','vendorapicallforvmslist'=>'vendorapicallforvmslist','vmsvendorupdatetoapi'=>'vmsvendorupdatetoapi','getvendorregistrationrequests'=>'getVendorRegistrationRequests','getvendordisplayfields'=>'getVendorDisplayFields','getvendorandvendorregisterssynchapi'=>'getVendorandVendorRegistersSynchAPI','insertvendorandvendorregisterssynchapi'=>'insertVendorandVendorRegistersSynchAPI','getvendorsdetailsreports'=>'getVendorsDetailsReports','getvendorsdetails'=>'getVendorsDetails');
 	$vendor_porter_class_array = array('getapplicationtickets' => 'getApplicationTickets', 'vendorapicallforvmslist' => 'vendorapicallforvmslist', 'vmsvendorupdatetoapi' => 'vmsvendorupdatetoapi', 'getvendorregistrationrequests' => 'getVendorRegistrationRequests', 'getvendordisplayfields' => 'getVendorDisplayFields', 'getvendorandvendorregisterssynchapi' => 'getVendorandVendorRegistersSynchAPI', 'insertvendorandvendorregisterssynchapi' => 'insertVendorandVendorRegistersSynchAPI', 'getvendorsdetailsreports' => 'getVendorsDetailsReports', 'getvendorsdetails' => 'getVendorsDetails', 'getvendoradmindashboard' => 'getVendorAdminDashboard', 'getinvitationvendors' => 'getInvitationVendors');
 	if (isset($vendor_porter_class_array[$mode])) {
 		include_once "model/vendor_portal_user.class.php";
@@ -2465,9 +2187,7 @@ if ($method == 'post') {
 		'tgetcurrenttasklogdata' => 'tgetcurrenttasklogdata'
 	);
 	if (isset($mobilecheck_array[$mode])) {
-		//echo "RRRR"; exit;
 		include_once "model/mobile_user.class.php";
-		//echo "uuuu"; exit;
 		$mobileObj = new mobileUserClass();
 		$fun = $mobilecheck_array[$mode];
 		$details = $mobileObj->$fun($_GET);
@@ -2580,14 +2300,6 @@ if ($method == 'post') {
 		echo json_encode($details);
 	}
 
-	// $stocktakecheck_array = array('getstocktakes'=>'getStockTakes','getstocktakesuom'=>'getstocktakesuom','getstocktakeadjustments'=>'getStockTakeAdjustments','startstocktakes'=>'startstocktakes','getstocktakelocations'=>'getStockTakeLocations');
-//  	if(isset($stocktakecheck_array[$mode])){
-//  		//echo "api-".$mode; exit;
-// 		$fun = $stocktakecheck_array[$mode];
-// 		//echo $fun; exit;
-// 		$details = $stocktakeObj->$fun($_GET);
-// 		echo json_encode($details);
-// 	}
 
 	$complaints_array = array(
 		'getAllComplaintsData' => 'getAllComplaintsData',
@@ -2685,7 +2397,6 @@ if ($method == 'post') {
 	);
 	if (isset($react_post[$mode])) {
 		include_once "model/react.class.php";
-		//echo "----------Check-----"; exit;
 		$reactObj = new reactClass();
 		$fun = $react_post[$mode];
 		$details = $reactObj->$fun($_GET);
@@ -2884,7 +2595,6 @@ if ($method == 'post') {
 		'torunnewattendancecodes' => 'torunnewattendancecodes'
 	);
 	if (isset($atten_arr[$mode])) {
-		//echo "reaa"; exit;
 		include_once "model/attendance_user.class.php";
 		$attObj = new attendanceUserClass();
 		$fun = $atten_arr[$mode];

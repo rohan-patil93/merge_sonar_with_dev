@@ -23,7 +23,7 @@ if($transaction_table!=""){
 	$type_array = array('select','multi_select','disable_select','radio','checklist', 'color_pick','image');
 	$whrcon = array();
 	$emp_array   = array();
-	foreach ($lists as $key => $value){ //echo $key;
+	foreach ($lists as $key => $value){
 	  	if($value['display_list'] ==1 ){
 	    	$dis[$value['display_postion']] ['name'] = $key;
 	    	$dis[$value['display_postion']] ['lable'] = $value['lable'];
@@ -62,8 +62,7 @@ if($transaction_table!=""){
 		        	$str =  $bill[$header['name']];
 		        	$str = $field[$header['name']][$str];
 		      	}
-		        $dynamicdata[$header['name']] = todisplayviewfiled($str,$header['type']); //echo $field[$header['name']][$bill[$header['name']]];
-		        //echo "111Ye1111s </br>";
+		        $dynamicdata[$header['name']] = todisplayviewfiled($str,$header['type']);
 		    }elseif($header['type'] == 'date_pick'){
 		       $dynamicdata[$header['name']] = $bill[$header['name']] != "" ? fromDate($bill[$header['name']]) : "";
 		    }else{
@@ -110,7 +109,6 @@ if($transaction_table!=""){
 		    $data .= " ,".implode(',', $listarray);
 		$m++;
 		}
-		//$data .="\n";
 		$i++;
 	}
 	header('Content-Type: application/csv');

@@ -50,25 +50,3 @@ if ($result) {
 }
 
 
-/*
-
-$method = $_GET['method'];
-
-if($_GET['method']=='todisplayemployee'){
-	if($_GET['token']=='xcqwerty1456315'){
-		$array[] = array('id'=>1, 'name'=>'Ramana Kumar', 'department'=> 'Sale', 'designation'=>'Sale Manager', 'join_date'=> '2024-03-12', 'phone'=>'89765432');
-		$array[] = array('id'=>2, 'name'=>'Kiran Kumar', 'department'=> 'Sale', 'designation'=>'Sales Person', 'join_date'=> '2024-02-22', 'phone'=>'79765432');
-		$array[] = array('id'=>3, 'name'=>'Usha Rani', 'department'=> 'Sale', 'designation'=>'CEO', 'join_date'=> '2024-01-18', 'phone'=>'69765432');
-		$array[] = array('id'=>4, 'name'=>'Sadya', 'department'=> 'Admin', 'designation'=>'Admin', 'join_date'=> '2024-04-02', 'phone'=>'65565432');
-		$array[] = array('id'=>5, 'name'=>'Pavitra', 'department'=> 'Admin', 'designation'=>'Offer', 'join_date'=> '2024-01-11', 'phone'=>'8435432');
-	}
-	echo json_encode($array);exit;
-}
-if($_GET['method']=='tocheckpost'){
-	if($_GET['token']=='xcqwerty1456315'){
-		if($_GET['approve_id']==1){
-			$array = array('status'=>'success', 'Message'=>'Aproved the data');
-		}
-	}
-	echo json_encode($array);exit;
-}*/

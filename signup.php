@@ -1,30 +1,6 @@
 <?php
-/*if(isset($_POST['submit'])){
-print_r($_POST); exit;
-} */
 include_once 'dbconfig.php';
 session_start();
-/*
-unset($_SESSION['userid']);
-
-unset($_SESSION['us_name']);
-
-unset($_SESSION['lastlogin']);
-
-unset($_SESSION['roletype']);
-
-unset($_SESSION['email']);
-
-unset($_SESSION['adminmemberjoinedon']);
-
-unset($_SESSION['last_activity']);
-
-unset($_SESSION['application_pages']);
-
-unset($_SESSION['application_menu']);
-session_destroy ();
-
-$_SESSION = array();*/
 function getBrowser()
 {
   $u_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -102,26 +78,18 @@ if ($_SESSION['userid'] != '') {
 }
 if (isset($_GET['confirm']) && $_GET['confirm'] != '') {
   $confirm = base64_decode($_GET['confirm']);
-  //echo $confirm;
   $url = API . "?mode=emailconfirm&confirm=" . $confirm;
-  //echo $url; exit;
   $response = file_get_contents($url, false, $context);
-  //echo $response;
   header("location:login.php?error=6001");
 
 }
 if (isset($_POST['submit'])) {
-  //print_r($_POST); exit;
   if ($_POST['submit'] == "Login") {
     $data = urlencode(json_encode($_POST));
     $url = API . "?mode=login&data=" . $data;
-    //echo $url; //exit;
     $response = file_get_contents($url, false, $context);
-    //echo $response;
     $row = json_decode($response, 1);
-    //print_r($row); //exit;
     if ($row['id'] != '') {
-      //echo "data"; exit;
       $_SESSION['userid'] = $row['id'];
       $_SESSION['us_name'] = $row['user_name'];
       $_SESSION['company_id'] = $row['company_id'];
@@ -132,11 +100,8 @@ if (isset($_POST['submit'])) {
       $_SESSION['lastlogin'] = $row['lastlogin'];
       $_SESSION['reset_password'] = $row['reset_password'];
       $_SESSION['confirmed_basic_ino'] = 1;
-      //echo "<pre>"; print_r($_SESSION); exit;
-      //$_SESSION['adminmemberjoinedon']=$row['createdon'];
       header("location:index.php");
     } else {
-      //echo $row['error']; exit;
       $error = $row['error'];
       header("location:login.php?error=$error");
     }
@@ -145,17 +110,13 @@ if (isset($_POST['submit'])) {
   if ($_POST['submit'] == "signup") {
     $_POST['email_check'] = 0;
     $url = API . "?mode=signup&data=" . json_encode($_POST, 1);
-    //echo $url; exit;
     $response = file_get_contents($url, false, $context);
-    //echo $response;
     header("location:login.php?error=6003");
   }
   if ($_POST['submit'] == "forgot") {
     $url = API . "?mode=forgotpassword&data=" . $_POST['email'];
-    // echo $url; exit;
     $response = file_get_contents($url, false, $context);
     $row = json_decode($response, 1);
-    //print_r($row); exit;
     if ($row['error'] == '6005') {
       header("location:login.php?error=6005");
     } else {

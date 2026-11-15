@@ -11,7 +11,6 @@ $cudata12 = callAPI($curl12);
 $approved = json_decode($cudata12,1);
 $approved_data = $approved[0];
 if(count((array)$approved_data) > 0){
-  //header('Location:index.php');
 }
 $File_Uploads_Path = "uploads/all/";
 $_SESSION['error_message']  =  toGetErrorMessages();
@@ -72,7 +71,7 @@ if($response['status'] == 'fail'){
 }else{
  $error_message = $response['message'];
 }
-}else{   //header('Location:vendorsetup.php');
+}else{
 ?>
 <script type="text/javascript">
         document.onreadystatechange = function(){
@@ -632,7 +631,7 @@ function(isConfirm) {
 
 
   //  Swal.fire({
-  //    title: '<?php //echo $_SESSION['error_message'][1004]; ?>',
+  //    title: '<?php ?>',
   //    showDenyButton: true,
   //    showCancelButton: false,
   //    confirmButtonText: 'Yes',
@@ -823,7 +822,7 @@ if($register_data['current_status'] !=""){
                               <div class="col-xl-6">
                                 <!--begin::Input-->
                                 <div class="form-group">
-            <!--       <input type="hidden" name="vendor_hrconnect" id="vendor_hrconnect" value="<?php //echo ST_VENDOR_HRCONNECT ==""?$invitation[0]['created_by']:ST_VENDOR_HRCONNECT; ?>"> -->
+            <!--       <input type="hidden" name="vendor_hrconnect" id="vendor_hrconnect" value="<?php ?>"> -->
 
 
  <input type="hidden" name="Rid" value="<?php echo $register_data['id']; ?>">
@@ -869,11 +868,11 @@ if($register_data['current_status'] !=""){
                               <img src="<?php echo $logo; ?>" id="outputdisplay_logo" width="200"  data-onerror-src="uploads/all/no-image.jpg" alt="" />
                             </div>
                           </div>
-                          <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>
+                          <span class="form-text text-muted"><?php ?> </span>
                         </div>
                         <div class="form-group col-lg-12">
                          <span class="d-inline-block fw-bold" style="margin-bottom:5px">Email <span class="requried">*</span></span>
-                          <input type="text" class="form-control input-group-solid required"  name="email" readonly value="<?php echo $_SESSION['email'];?>" placeholder="<?php //echo $placeholder['email']; ?>"  / title="Email" aria-label="Email">
+                          <input type="text" class="form-control input-group-solid required"  name="email" readonly value="<?php echo $_SESSION['email'];?>" placeholder="<?php ?>"  / title="Email" aria-label="Email">
                         </div>
                         <div class="col-xl-6">
                           <!--begin::Input-->
@@ -1232,13 +1231,12 @@ if($register_data['current_status'] !=""){
                           <div class="row mb-3">
                             <h4 class="mb-10 font-weight-bold text-dark col-lg-6">List of Documents to be Submitted</h4>
                            <!--  <div class="col-lg-6 text-right">
-                             <button  type="button" class="btn btn-primary waves-effect waves-light" onclick="reaprovedoc('<?php //echo $rowid; ?>')">Submit For Approval Documnets</button>
+                             <button  type="button" class="btn btn-primary waves-effect waves-light" onclick="reaprovedoc('<?php ?>')">Submit For Approval Documnets</button>
                            </div> -->
                          </div>
                          <div class="row" <?php echo $disablecss; ?>>
 
                           <?php
- //echo "<pre>"; print_r($attach_doccategory);print_r($attach_filename); echo "</pre>";
                           foreach ($document_lists as $dockey => $docvalue){
                             $vendor_documen = $vendor_documents[$dockey];
                             $filestatus = $_SESSION['status'][$vendor_documen['current_status']];
@@ -1295,7 +1293,7 @@ if($register_data['current_status'] !=""){
                                       <?php if($vendor_documen['current_status'] != ST_APPROVED){ ?>
                                        <div class="d-flex font-weight-bold">
                                         <div class="image-input image-input-empty image-input-outline mr-10" id="kt_image_5"  style=" height:0px; ">
-                                          <label class="btn-hover-text-primary  <?php //echo $value['document_shared']!=""?"mt-3":"mt-1"; ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
+                                          <label class="btn-hover-text-primary  <?php ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
                                             <i class="ti-clip" style="font-size: 20px;"></i>
                                             <input type="file" class="custom-file-input" id="customFile" name="fileToUpload[]"  onchange="checkFileSelect(event,'<?php echo $dockey; ?>')"/ title="Filetoupload" aria-label="Filetoupload">
                                             <input type="hidden" name="hidden_fileToUpload[]" value="<?php echo $vendor_documen['filename']; ?>">
@@ -1480,14 +1478,12 @@ if($register_data['current_status'] !=""){
                     <div class="tab-content tabs card-block ">
                       <div class="tab-pane active custom-scroll" style="height: 550px;" id="home1" role="tabpanel" >
                         <?php $aci = 0; foreach ($notificationlist as  $value) {
-    if($value['Notification_Type'] == 'ACTION' || $value['Notification_Type'] == 'INFORMATION'){ //print_r($value);
+    if($value['Notification_Type'] == 'ACTION' || $value['Notification_Type'] == 'INFORMATION'){
       $option_url = $value['option'];
       $recent_notification = $value;
       if($value['option']==""|| $value['option']==null ){
         $tabledata = toGetTableNameBaseApplicationPagesList('application_table_name',$value['Notification_Table'],1);
         $option_url = $tabledata['insert_page_name'];
-			//$nrid = "id:".$value['option_id'];
-			//$link = "index.php?option=".$option_url."&Rid=". deocdeId($nrid)."&noti_id=".deocdeId($value['id']);
       }
       ?>
       <div class="media userlist-box waves-effect waves-light notification-box-shadow p-2 bg-white mb-1" >

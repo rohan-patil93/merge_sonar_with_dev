@@ -15,23 +15,6 @@ $company_details = $exdetails['company_details'];
 $data[] = array('Trace Account (Where amount to be reversed in case of transaction failure)',$company_details['bank_account'] );
 $data[] = array('Date of Transaction (Current Date or Future date for scheduled transaction)', date('M d, Y'));
 $data[] = $head_array;
-//echo "<pre>"; print_r($exdetails);exit;
-/*$listdate = $pay_year.'-'.$pay_month.'-01';
-$narra = json_decode($bankdata['narration'],1);
-$str="";
-foreach($narra as $key=>$narr){
-	if(key($narr) == 'text'){
-	 	$str.= $narr['text'];
-	}
-	if(key($narr) == 'list'){
-	 	if( $narr['list'] == 'M'){
-	 		$str.= date('M', strtotime($listdate));
-	 	}
-	 	if($narr['list'] == 'Y'){
-	 		$str.= $pay_year;
-	 	}
-	}
-}*/
 $viewdate = $pay_year."-".$pay_month."-01";
 $viewsal = date('M Y', strtotime($viewdate));
 $new_viewsal = "Salary ".$viewsal;
@@ -42,7 +25,6 @@ foreach($empdatas as $empdata){
 	$data[] = $addarray;
 }
 $filename = $new_viewsal." Employee Bank Detais.csv";
-//echo "<pre>"; print_r($data);exit;
 array_to_csv_download($data,$filename);
 
 function array_to_csv_download($array, $filename = "export.csv", $delimiter=",") {
@@ -54,8 +36,6 @@ function array_to_csv_download($array, $filename = "export.csv", $delimiter=",")
 
     $f = fopen('php://output', 'w');
     foreach ($array as $line) {
-	//fwrite($f, '<cols><col min="1" max="1" width="100" customWidth="1"/><col min="2" max="6" width="30" customWidth="1"/></cols>');
-	//fwrite($this->sheetFilePointer, '<cols><col min="1" max="1" width="100" customWidth="1"/><col min="2" max="6" width="30" customWidth="1"/></cols>');
         fputcsv($f, $line, $delimiter);
     }
 }

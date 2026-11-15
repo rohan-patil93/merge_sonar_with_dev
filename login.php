@@ -1,16 +1,9 @@
 <?php
-//echo $_SERVER['DOCUMENT_ROOT'];
- /*if(isset($_POST['submit'])){
-print_r($_POST); exit;
-} */
-//echo "Good Boy"; exit;
 include_once 'dbconfig.php';
 session_start();
 $session_id = session_id();
-//echo "check"; exit;
 $image = "assets/images/logo.png";
  /**/    $domain = $_SERVER['HTTP_HOST'];
-    //echo "Main domain name: $domain";exit;
     $subdomain = '';
     $host = $_SERVER['HTTP_HOST'];
     // Split host into parts
@@ -49,27 +42,6 @@ $image = "assets/images/logo.png";
         header("location:".$httpshttp."://".$mainDomain."/signin");
     }
 **/
-/*
-unset($_SESSION['userid']);
-
-unset($_SESSION['us_name']);
-
-unset($_SESSION['lastlogin']);
-
-unset($_SESSION['roletype']);
-
-unset($_SESSION['email']);
-
-unset($_SESSION['adminmemberjoinedon']);
-
-unset($_SESSION['last_activity']);
-
-unset($_SESSION['application_pages']);
-
-unset($_SESSION['application_menu']);
-session_destroy ();
-
-$_SESSION = array();*/
 function getBrowser() {
   $u_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
   $bname = 'Unknown';
@@ -146,16 +118,9 @@ if(!empty($_SESSION['userid'])){
 }
 if(isset($_GET['confirm']) && $_GET['confirm'] != ''){
     $confirm = base64_decode($_GET['confirm']);
-    //echo $confirm;
     $url = API."?mode=emailconfirm&confirm=".$confirm;
-    //echo $url; exit;
     $response = file_get_contents($url, false, $context);
     $response = json_decode($response,1);
-    // echo "<pre>";
-    // print_r($response);
-    //  echo "</pre>";
-    //echo $response;
-    //echo $response;
    header("location:login.php?error=6001");
 
 }
@@ -167,10 +132,7 @@ if (isset($_POST['submit'])){
       //if(empty($_SESSION['captcha_code'] ) || strcasecmp($_SESSION['captcha_code'], $_POST['captcha_code']) == 0){
       //if(empty($_SESSION['captcha'] ) || strcasecmp($_SESSION['captcha'], $_POST['captcha']) == 0){
           $_POST['php_session'] = $session_id;
-            //echo "yes captcha code"; exit;
-            //$data = urlencode(json_encode($_POST));
             $url = API."?mode=login&method=post";
-            //echo $url; print_r($_POST); exit;
             $postdata = http_build_query($_POST);
             $opts = array('http' =>array(
               'method'  => 'POST',
@@ -181,16 +143,11 @@ if (isset($_POST['submit'])){
         $context = stream_context_create($opts);
         $response = file_get_contents($url, false, $context);
 
-        //echo $url; exit;
-        //$response = file_get_contents($url, false, $context);
-        //echo $response;
         if (is_string($response)) {
             $response = preg_replace('/^[\xEF\xBB\xBF\r\n\s]+/', '', $response);
         }
         $row = json_decode($response,1);
-        //print_r($row); //exit;
         if (isset($row['id']) && $row['id'] !=''){
-            //echo "data"; exit;
             $_SESSION['userid'] = $row['id'];
             $_SESSION['us_name']=$row['user_name'];
             $_SESSION['company_id'] = $row['company_id'];
@@ -205,36 +162,23 @@ if (isset($_POST['submit'])){
             $_SESSION['domain_name'] =$subdomain;
             $_SESSION['user_token'] =$row['user_token'];
             $_SESSION['HTTP_INFI_TOKEN'] =$row['infi_token'];
-            //echo "<pre>"; print_r($_SESSION); exit;
-            //$_SESSION['adminmemberjoinedon']=$row['createdon'];
            header("location:index");
         }else {
-            //echo $row['error']; exit;
             $error = !empty($row['error']) ? $row['error'] : '6002';
             header("location:login?error=$error");
            exit;
         }
-      // }else{// Captcha verification is Correct. Final Code Execute here!
-      //   //echo "No captcha code"; exit;
-      //   $error = '6007';
-      //    header("location:login?error=$error");
-      //      exit;
-      // }
     }
     if($_POST['submit']=="signup"){
     $_POST['email_check'] =0;
         $url = API."?mode=signup&data=".json_encode($_POST,1);
-        //echo $url; exit;
         $response = file_get_contents($url, false, $context);
-        //echo $response;
         header("location:login?error=6003");
     }
     if($_POST['submit']=="forgot"){
         $url = API."?mode=forgotpassword&data=".$_POST['email'];
-       // echo $url; exit;
         $response = file_get_contents($url, false, $context);
         $row = json_decode($response,1);
-        //print_r($row); exit;
         if ($row['error'] =='6005'){
             header("location:login?error=6005");
         }else{
@@ -250,7 +194,6 @@ if(isset($datadetail['image'])){
   $image = $datadetail['image'];
 
 }
-//$image = 'uploads/all/file_1704095913_659270a975d4a.png';
 $error = isset($_GET['error']) && $_GET['error'] !== '' ? $_GET['error'] : '';
 $dis_error['6001'] = "Thank you very much for confirming your registration, </br> please login using email ID.";
 $dis_error['6002'] = "Incorrect username or password.  Please try again.";
@@ -319,7 +262,6 @@ $dis_error['6007']  = "The Captcha code does not match!";
   }else{
     $pageid  = LOGIN_PAGE_ID;
   }
-    //echo LOGIN_ARRAY[$pageid];
     if(isset(LOGIN_ARRAY[$pageid]) && LOGIN_ARRAY[$pageid] !=""){
         include_once LOGIN_ARRAY[$pageid];
     }else{
