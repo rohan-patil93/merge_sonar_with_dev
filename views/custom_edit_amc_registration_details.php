@@ -48,7 +48,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                 <div class="row">
 
                     <div class="col-lg-4 text-center">
-                        <label class="form-label"><?= __('Select Customer') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Select Customer') ?></span>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
@@ -65,7 +65,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
 
                     <!-- Activation Date -->
                     <div class="col-lg-4 text-center">
-                        <label class="form-label"><?= __('Activation Date') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Activation Date') ?></span>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
@@ -75,7 +75,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
 
                     <!-- Deactivation Date -->
                     <div class="col-lg-4 text-center">
-                        <label class="form-label"><?= __('Deactivation Date') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Deactivation Date') ?></span>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
@@ -85,7 +85,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
 
                     <!-- Payment/Service Type -->
                     <div class="col-lg-4 text-center">
-                        <label class="form-label"><?= __('Payment/Service Type') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Payment/Service Type') ?></span>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
@@ -99,7 +99,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
 
                     <!-- Service Charge -->
                     <div class="col-lg-4 text-center" id="serviceChargeContainer" style="display: none;">
-                        <label class="form-label"><?= __('Service Charge') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Service Charge') ?></span>
                     </div>
                     <div class="col-lg-8" id="serviceChargeInputContainer" style="display: none;">
                         <div class="form-group">
@@ -108,7 +108,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
                     </div>
 
                     <div class="col-lg-4 text-center">
-                        <label class="form-label"><?= __('Service on') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Service on') ?></span>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
@@ -124,7 +124,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
 
                     <!-- No of Service -->
                     <div class="col-lg-4 text-center">
-                        <label class="form-label"><?= __('No of Services') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('No of Services') ?></span>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
@@ -137,7 +137,7 @@ $dynamic_fields = $return['dynamic_fields_details'];
 
                     </div>
                     <div class="col-lg-4 text-center">
-                        <label class="form-label"><?= __('Select Technician') ?></label>
+                        <span class="form-label d-inline-block fw-bold"><?= __('Select Technician') ?></span>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
