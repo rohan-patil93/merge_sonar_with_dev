@@ -78,7 +78,7 @@ $file_array = array_keys($selectedlist);
           </div>
           <div class="col-lg-6">
            <!-- Start content -->
-           <label>Select files</label>
+           <span class="d-inline-block fw-bold" style="margin-bottom:5px">Select files</span>
                 <select aria-label="<?= htmlspecialchars(__('Filelist'), ENT_QUOTES, 'UTF-8'); ?>" onchange="selectfiles()" class="form-control mt-5 form-select js-example-basic-multiple" id="kt_select2_42" name="filelist[]" multiple="multiple">
            <?php 
            foreach ($document_details as $table_data) {
