@@ -158,7 +158,7 @@ function emptyCheck($valu){
             <table class="table">
                 <tr>
                     <td class="p-2 f-12 border-0">
-                        <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;">
+                        <img alt="" src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;">
                     </td>
                     <td class="p-2 f-12 border-0">
                         <b class="f-40"><?= __('Invoice'); ?></b>
