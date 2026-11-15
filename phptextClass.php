@@ -28,7 +28,7 @@ class phptextClass
 		imagettftext($im, $fontSize, 0, $x, $y, $textColor, $font, $text);
 		if(imagejpeg($im,$dir.$fileName,90)){/*save image as JPG*/
 			imagedestroy($im);
-			return json_encode(array('status'=>TRUE,'image'=>$dir.$fileName));
+			return json_encode(array('status'=>true,'image'=>$dir.$fileName));
 		}
 	}
 
@@ -66,7 +66,7 @@ class phptextClass
 		list($x, $y) = $this->ImageTTFCenter($im, $text, $font, $fontSize);
 		imagettftext($im, $fontSize, 0, $x, $y, $textColor, $font, $text);
 
-		imagejpeg($im,NULL,90);/* Showing image */
+		imagejpeg($im,null,90);/* Showing image */
 		header('Content-Type: image/jpeg');/* defining the image type to be shown in browser widow */
 		imagedestroy($im);/* Destroying image instance */
 		if(isset($_SESSION)){

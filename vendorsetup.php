@@ -1476,7 +1476,7 @@ if($register_data['current_status'] !=""){
     if($value['Notification_Type'] == 'ACTION' || $value['Notification_Type'] == 'INFORMATION'){ //print_r($value);
       $option_url = $value['option'];
       $recent_notification = $value;
-      if($value['option']==""|| $value['option']==Null ){
+      if($value['option']==""|| $value['option']==null ){
         $tabledata = toGetTableNameBaseApplicationPagesList('application_table_name',$value['Notification_Table'],1);
         $option_url = $tabledata['insert_page_name'];
 			//$nrid = "id:".$value['option_id'];

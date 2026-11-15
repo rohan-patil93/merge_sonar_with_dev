@@ -384,7 +384,7 @@ function customeummarmonyformate($number)
 function customeNumberFormate($number)
 {
 	//print_r($_SESSION['config']['number_format']);
-	if ($number != "" AND $number != 'NaN') {
+	if ($number != "" and $number != 'NaN') {
 		$expoldform = explode('.', $_SESSION['config']['number_format']);
 		if ($expoldform[0] == 1) {
 			$formatter = new NumberFormatter('en_IN', NumberFormatter::CURRENCY);
@@ -1071,7 +1071,7 @@ function toGetNotigficationListByUsingUserIdAndGrpId($user_id, $type = "", $defa
 	$retrun = array();
 	foreach ($res as $restl) {
 		$grpsum[$restl['module_group_id']]++;
-		if ($restl['module_group_id'] == $defaultgrpid AND $defaultgrpid != "") {
+		if ($restl['module_group_id'] == $defaultgrpid and $defaultgrpid != "") {
 			$notifiction[] = $restl;
 		}
 	}
@@ -2030,7 +2030,7 @@ function fileUplodingUi($fileuploading)
 	$acceptable = array('jpeg', 'jpg', 'JPG', 'gif', 'png');
 	$validationfunction = "";
 	$validation_style = "";
-	if ($fileuploading['file_limit'] == "" OR $fileuploading['file_size'] == "") {
+	if ($fileuploading['file_limit'] == "" or $fileuploading['file_size'] == "") {
 		$validationfunction = "onclick='validationfunction()'";
 		$validation_style = "style='pointer-events: none;'";
 	}
@@ -2280,7 +2280,7 @@ function dyanamicselectAutoSelect($table_name, $filed_name, $word)
 }
 function customNanAndEmptyValidation($val)
 {
-	if (is_nan($val) OR $val == "") {
+	if (is_nan($val) or $val == "") {
 		return "0";
 	} else {
 		return $val;
@@ -2359,7 +2359,7 @@ function customgetstatusworkflow($table, $id, $currnet_status, $created_by)
 			style="background-color: <?php echo $stausresult[ST_SEND_BACK]['background_color'] ?>; color: <?php echo $stausresult[ST_SEND_BACK]['color'] ?>; "
 			onclick="statuspopupnew(<?php echo $id; ?>,'<?php echo $table; ?>',<?php echo ST_SEND_BACK; ?>,<?php echo $reject_display_status['transaction_id']; ?>,<?php echo $reject_display_status['workflow_id']; ?>,'')"><?php echo $stausresult[ST_SEND_BACK]['name']; ?></button>
 	<?php }
-	if (($currnet_status == $statusList[0]['status'] OR $currnet_status == ST_SEND_BACK) AND $created_by == $_SESSION['userid']) {
+	if (($currnet_status == $statusList[0]['status'] or $currnet_status == ST_SEND_BACK) and $created_by == $_SESSION['userid']) {
 		?>
 		<button class="btn btn-primary"
 			onclick="startWorkflow(<?php echo $id; ?>,'<?php echo $table; ?>')"><?php echo $statuse[$result['staus']['status']]; ?>
@@ -2718,7 +2718,7 @@ function todisplayWorkflowstatuslist($data)
 					}
 					**/
 				$username = "";
-				if ($pwlist['status'] != '0' AND $pwlist['status'] != '10') { //not created by show only
+				if ($pwlist['status'] != '0' and $pwlist['status'] != '10') { //not created by show only
 					if ($logres[$pwlist['status']] != "") {
 						$username .= "(" . $_SESSION['users'][$logres[$pwlist['status']]] . ")";
 					}
@@ -2735,17 +2735,17 @@ function todisplayWorkflowstatuslist($data)
 						$oricon = '<i class="far fa-check-circle text-success"></i> &nbsp;';
 					}
 				} else {
-					if ($ork == 0 AND $checkcurrent_status != ST_REJECTED) {
+					if ($ork == 0 and $checkcurrent_status != ST_REJECTED) {
 						$orcolor = "text-primary";
 						$oricon = '<i class="far fa-hourglass text-warning"></i> &nbsp;';
 						$ork = 1;
-						if ($pwlist['status'] != 0 AND $pwlist['status'] != '10') {
+						if ($pwlist['status'] != 0 and $pwlist['status'] != '10') {
 							$username = "(" . $_SESSION['users'][$logres[0]] . ")";
 						}
 					} elseif ($checkcurrent_status == $pwlist['status']) {
 						$orcolor = "text-primary";
 						$oricon = '<i class="far fa-hourglass text-warning"></i> &nbsp;';
-						if ($pwlist['status'] != 0 AND $pwlist['status'] != '10') {
+						if ($pwlist['status'] != 0 and $pwlist['status'] != '10') {
 							$username = "(" . $_SESSION['users'][$logres[0]] . ")";
 						}
 					}
@@ -2816,10 +2816,10 @@ function gettTimeZone($datetimezone = "", $timezone)
 function DynamicPhoneNumberFormt($phone_number)
 {
 	$formatted_number = $phone_number;
-	if (isset($_SESSION['user']['countries']) AND $_SESSION['user']['countries']['phone_number_digit'] != "") {
+	if (isset($_SESSION['user']['countries']) and $_SESSION['user']['countries']['phone_number_digit'] != "") {
 		$pregacode = $_SESSION['user']['countries'];
 		$formatted_number = preg_replace($pregacode['phone_number_digit'], $pregacode['phone_number_view'], $phone_number);
-	} elseif (isset($_SESSION['config']['countries']) AND $_SESSION['config']['countries']['phone_number_digit'] != "") {
+	} elseif (isset($_SESSION['config']['countries']) and $_SESSION['config']['countries']['phone_number_digit'] != "") {
 		$pregacode = $_SESSION['config']['countries'];
 		$formatted_number = preg_replace($pregacode['phone_number_digit'], $pregacode['phone_number_view'], $phone_number);
 	}
@@ -3176,7 +3176,7 @@ function getWorkflowStatus($table_name, $transaction_no, $current_status, $devic
 			if ($statuskey != ST_APPROVED) {
 				$userdetails = $breadcrumb[$statuskey]['aproval_user'];
 				$icons = $successicons;
-				if ($statuskey == '0' || ($statuskey == '3' AND $table_name == 'transaction_activity_schedule')) {
+				if ($statuskey == '0' || ($statuskey == '3' and $table_name == 'transaction_activity_schedule')) {
 					$display_name = $_SESSION['users'][$transaction_owner_id];
 				} else {
 					// if(count((array)$userdetails) == 1){
@@ -3232,16 +3232,16 @@ function getWorkflowStatus($table_name, $transaction_no, $current_status, $devic
 		<span class="d-block">' . $successiconsr . ' Approved</span></a></li>';
 		$dis_str .= '</ul>';
 
-		if ($current_status != ST_APPROVED AND $current_status != ST_REJECTED) {
+		if ($current_status != ST_APPROVED and $current_status != ST_REJECTED) {
 			if ($device_type == "MOBILE") {
 
 			} else {
 				$workflow_btn .= '<div class="btn-group workflow-btn mt-4" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">';
 			}
-			if ($current_status == ST_ACTIVE OR $current_status == ST_SEND_BACK OR $current_status == ST_CALLBACK OR $workflow_details['workflow_trigger_status'] == $current_status) {  //Active Time Show Button
+			if ($current_status == ST_ACTIVE or $current_status == ST_SEND_BACK or $current_status == ST_CALLBACK or $workflow_details['workflow_trigger_status'] == $current_status) {  //Active Time Show Button
 				//echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAA".$transaction_owner_id;
 				if ($transaction_owner_id == $_SESSION['userid']) {
-					if ($current_status == ST_SEND_BACK OR $current_status == ST_CALLBACK) {
+					if ($current_status == ST_SEND_BACK or $current_status == ST_CALLBACK) {
 						//$workflowsteps[$current_status]['current_status'] = ST_ACTIVE;
 						$current_status = $workflow_details['workflow_trigger_status']; // direct use accept
 						$nextstatus = $workflow_details['workflow_trigger_status']; // direct use accept
@@ -3312,12 +3312,12 @@ function getWorkflowStatus($table_name, $transaction_no, $current_status, $devic
 	} else {
 
 		$workflow_btn .= '<div class="btn-group workflow-btn" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">';
-		if ($result['error'] == '9061' AND $transaction_owner_id == $_SESSION['userid'] AND $current_status == ST_DRAFT) {
+		if ($result['error'] == '9061' and $transaction_owner_id == $_SESSION['userid'] and $current_status == ST_DRAFT) {
 
 			$dynamicfunction = "data-table_name='" . $table_name . "' data-transaction_id='" . $transaction_no . "' data-current_status='" . $current_status . "' data-next_status = '" . ST_ACTIVE . "'  data-old_status_name = '" . $status_progress[$current_status]['name'] . "' new_status_name= '" . $status_progress[ST_ACTIVE]['name'] . "'";
 			$workflow_btn .= '<button type="button" class="btn btn-info btn-sm waves-effect waves-light submitDynamicWorkflow" ' . $dynamicfunction . '> <span class="fa fa-thumbs-up text-white"></span> &nbsp;' . $status_progress[ST_DRAFT]['action_label'] . '</button>';
 
-		} elseif ($result['error'] == '9063' OR $result['error'] == '9062' OR $result['error'] == '9060') {
+		} elseif ($result['error'] == '9063' or $result['error'] == '9062' or $result['error'] == '9060') {
 
 			$workflow_btn .= '<button type="button" class="btn btn-danger btn-sm waves-effect waves-light"><span class="fa fa-info text-white"></span> &nbsp;' . $_SESSION['error_message'][$result['error']] . '</button>';
 

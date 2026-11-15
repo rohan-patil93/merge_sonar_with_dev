@@ -54,7 +54,7 @@ if($_GET['setup'] == 'F'){
 	$setuppages = array();
 	$seqpageary = array();
 	foreach((array)$modulelists as $modulelist){
-		if($modulelist['id'] != '1' AND $modulelist['linking'] == '1'){
+		if($modulelist['id'] != '1' and $modulelist['linking'] == '1'){
 			$allmodule[$modulelist['module_id']] = $modulelist;
 		}
 		if($modulelist['is_active'] == '0'){

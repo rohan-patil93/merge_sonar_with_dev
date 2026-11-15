@@ -326,7 +326,7 @@ if($page == 'dynamicchangestatus'){
 		$url = API."?mode=updateprojecttimesheets&method=post";
 		$response = file_post_contents($url, $sarray);
 	}
-	if($_POST['table']=="candidates" AND $_POST['status']==ST_REJECTED){
+	if($_POST['table']=="candidates" and $_POST['status']==ST_REJECTED){
 		$historyurl = API."?mode=candidatesofferhistories&candidate_id=".$_POST['hid']."&company_id=".$_SESSION['company_id']."&status_date=".$_POST['date']."&current_status=".$_POST['status']."&is_active=0&comments=".$_POST['comment'];
 		$histroy = callAPI($historyurl);
 	}
@@ -2398,7 +2398,7 @@ if($page == 'checkemployeeleaveavailableornot'){
 	$leavecheckurl = API."?mode=checkemployeeleaveavailableornot&emp_id=".$_SESSION['emp_id']."&leavetype=".$_POST['leave_type_id']."&leave_from=".$_POST['leave_from']."&leave_to=".$_POST['leave_to']."&rid=".$_POST['rid']."&old_leave_days=".$_POST['old_leave_days']."&start_half_day=".$_POST['start_half_day']."&end_half_day=".$_POST['end_half_day'];
 	$leavecheckresponse = callAPI($leavecheckurl);
 	$details = json_decode($leavecheckresponse,1);
-	if($_POST['leave_from']!="" AND $_POST['leave_to']!=""){
+	if($_POST['leave_from']!="" and $_POST['leave_to']!=""){
 		$date2 = $_POST['leave_to'];
 		$date2 = str_replace('/', '-', $date2);
 		$date1 = $_POST['leave_from'];
@@ -2409,7 +2409,7 @@ if($page == 'checkemployeeleaveavailableornot'){
 	echo $details_res;
 }
 if($page == 'leavedaystoworkdays'){
-	if($_POST['leave_from']!="" AND $_POST['leave_to']!=""){
+	if($_POST['leave_from']!="" and $_POST['leave_to']!=""){
 		$date2 = $_POST['leave_to'];
 		$date2 = str_replace('/', '-', $date2);
 		$date1 = $_POST['leave_from'];
@@ -2557,11 +2557,11 @@ if($page == 'current_status_drop_project_timesheets'){
 	   $checkapprovemanager = checkApproveManager($user_id,$_POST['current_status']);
 	   $lists = toGetStatusProgressAction($_POST['table'], $_POST['current_status']);
 	   //echo "test"; print_r($lists);
-	   if($checkapprovemanager == ST_APPROVAL_MANAGER AND ($_POST['current_status']==ST_ACTIVE || $_POST['current_status']==ST_SEND_BACK )){
+	   if($checkapprovemanager == ST_APPROVAL_MANAGER and ($_POST['current_status']==ST_ACTIVE || $_POST['current_status']==ST_SEND_BACK )){
 		foreach ($lists as $list){
 			$str .= '<div class="dropdown-item" onclick="statuspopupActiveStatusOnly('.ST_APPROVAL_MANAGER.','. $_POST[id] .')" name="status" id="status" value="'.ST_APPROVAL_MANAGER.'">'.$list[action_label].'</div>';
 		}
-	   }elseif($checkapprovemanager == ST_APPROVAL_PENDING AND ($_POST['current_status']==ST_ACTIVE || $_POST['current_status']==ST_SEND_BACK)){
+	   }elseif($checkapprovemanager == ST_APPROVAL_PENDING and ($_POST['current_status']==ST_ACTIVE || $_POST['current_status']==ST_SEND_BACK)){
 		foreach ($lists as $list){
 			$str .= '<div class="dropdown-item" onclick="statuspopupActiveStatusOnly('.ST_APPROVAL_PENDING.','. $_POST[id] .')" name="status" id="status" value="'.ST_APPROVAL_PENDING.'">'.$list[action_label].'</div>';
 		}
@@ -3473,7 +3473,7 @@ if($page == "cnadidateverified"){
 	print_r($return);
 }
 if($page =="updatetransactionactivityschedule"){
-	if($_FILES['file']['error'] != "4" AND isset($_FILES['file']['error'])){
+	if($_FILES['file']['error'] != "4" and isset($_FILES['file']['error'])){
 		$transaction_table = $_POST['transaction_table'] !=""?$_POST['transaction_table']:"candidates";
 	   	$path = $_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$transaction_table."/".$_POST['assigned_to']."/Documents";
 		$filename = imageuploadwitharray($path,'file'.$seq,'','',$key);
@@ -3809,7 +3809,7 @@ if($page == 'currencyconversionrate'){
 	}else{
 		$resultary =array("rate"=>0,'operater'=>'*');
 	}
-	if($resultary['rate'] == 0 AND $_POST['originator_currency_id'] == $_POST['currency_id']){
+	if($resultary['rate'] == 0 and $_POST['originator_currency_id'] == $_POST['currency_id']){
 		$resultary =array("rate"=>1,'operater'=>'*');
 	}
 	echo json_encode($resultary);
@@ -4186,7 +4186,7 @@ if($page == "getdepreciationtable"){
 	$depreciationprice = $depn_rate;
 	if($depreciation_method == 'SL'){
 		$peryeardeprciation = $depn_rate;
-		if($duration !=0 AND $duration !=''){
+		if($duration !=0 and $duration !=''){
 			$peryeardeprciation = ($depn_rate/$duration);
 		}else{
 			$duration = 1;
@@ -4545,7 +4545,7 @@ if($page=="gettenantproperty"){
 						$html2 = '';
 						 $i=1;foreach($bill_detail as $bd){
 						 	$redonlytext = $extrlebl = '';
-							if($bd['transaction_table']=='property_owner_detail_areas' OR $bd['utility_bill_auto_and_fix']=='F'){
+							if($bd['transaction_table']=='property_owner_detail_areas' or $bd['utility_bill_auto_and_fix']=='F'){
 								$redonlytext = 'readonly';
 								$extrlebl = "<span>Rent (".$bd['monthly_rent'].")+ Tax (".$bd['rent_tax'].")</span>";
 							}
@@ -4570,7 +4570,7 @@ if($page=="gettenantproperty"){
 									$html2 .='<td class="p-1" ><input type="hidden" id="rentinvpopup_condition_'.$bd['poda_and_rbt_id'].'" value="'.$bd['condition'].'"><label class="form-label badge badge-md bg-success"><span class="f-16">'.$bd['condition'].'</span></label></td>';
 									$html2 .='<td class="p-1" ><input class="form-control text-right" type="number" name="rate[]" value="'.$bd['rate'].'" id="rentinvpopup_rate_'.$bd['poda_and_rbt_id'].'" onblur="rentalInvoicePopupCalculattion('.$bd['poda_and_rbt_id'].','.$bd['parent_id'].')"></td>';
 								}
-								if($bd['rent'] !="" AND $bd['rent'] !="0"){
+								if($bd['rent'] !="" and $bd['rent'] !="0"){
 									$rent =$bd['rent'];
 								}else{
 									$rent = calculateStringCalculation($bd['qty'].$bd['condition'].$bd['rate']);
@@ -4644,7 +4644,7 @@ if($page=="getassetcategorydetails"){
 	$depreciationprice = $depn_rate;
 	if($depreciation_method == 'SL'){
 		$peryeardeprciation = $depn_rate;
-		if($duration !=0 AND $duration !=''){
+		if($duration !=0 and $duration !=''){
 			$peryeardeprciation = ($depn_rate/$duration);
 		}else{
 			$duration = 1;
@@ -4722,7 +4722,7 @@ if($page=="getpaymentterms"){
   	$due_days = 0;
   	$html = "";
   	$i=1;
-  	if($grandtotal !="0" AND $grandtotal !=""){
+  	if($grandtotal !="0" and $grandtotal !=""){
 	  	$html .= '<td colspan="2" class="p-2"><table class=" table table-bordered mb-0">';
 	  	foreach($content as $row){
 	  		if($row['due_type'] == "P"){
@@ -4749,7 +4749,7 @@ if($page=="getpaymentterms"){
 	  		}
 	  		$days = $row['days'];
 	  		$extradescount = $before_date = $discountwithamt="";
-	  		if($row['discount'] !="" AND $row['discount'] !="0" AND $row['discount_day'] !="" AND $row['discount_day'] !="0"){
+	  		if($row['discount'] !="" and $row['discount'] !="0" and $row['discount_day'] !="" and $row['discount_day'] !="0"){
 	  			$finalday = $days-$row['discount_day'];
 	  			$before_date = date('Y-m-d', strtotime($transaction_date.' + '.$finalday.' days'));
 	  			$discountamt = ($row['discount'] / 100)*$duetypediscountamt;
@@ -5193,7 +5193,7 @@ if($page == "getcity"){
 	echo $option;
 }
 if($page == "updatemodulestatus"){
-	if($_POST['module_id'] !="" AND $_POST['statuse'] !=""){
+	if($_POST['module_id'] !="" and $_POST['statuse'] !=""){
 		$data['updated_date'] = nowDate();
 		$data['updated_by'] = $_SESSION['userid'];
 		$data['is_active'] = $_POST['statuse'];
@@ -5208,7 +5208,7 @@ if($page == "updatemodulestatus"){
 	$setuppages = array();
 	$seqpageary = array();
 	foreach($modulelists as $modulelist){
-		if($modulelist['id'] != '1' AND $modulelist['linking'] == '1'){
+		if($modulelist['id'] != '1' and $modulelist['linking'] == '1'){
 			$allmodule[$modulelist['module_id']] = $modulelist;
 		}
 		if($modulelist['is_active'] == '0'){
@@ -5530,7 +5530,7 @@ if($page == "checkcompanynameallreadyavilableornot"){
 	$url = API."?mode=getinvitationvendors&method=post";
 	$return = file_post_contents($url, $_POST);
 	$result = json_decode($return,1);
-	if(isset($result['company_name']['id']) AND $result['company_name']['id'] !=""){
+	if(isset($result['company_name']['id']) and $result['company_name']['id'] !=""){
 		echo json_encode(array("company_name"=>"1",'allresult'=>$result));
 	}else{
 		echo json_encode(array("company_name"=>"0",'allresult'=>$result));
@@ -5584,7 +5584,7 @@ if($page == "insertbuildings"){
 	$_POST['building_floors'] = $listdata;
 	$_POST['building_image'] = $_POST['old_image'];
 	//print_r($_FILES);
-	if($_FILES['building_image']['error'] != 4 AND isset($_FILES['building_image']['error'])){
+	if($_FILES['building_image']['error'] != 4 and isset($_FILES['building_image']['error'])){
 		$temp = explode(".", basename($_FILES['building_image']['name']));
 		$Filename=  "file_".time()."_".uniqid();
 		$newfilename = $Filename.'.' .end($temp);
@@ -5700,7 +5700,7 @@ if($page == "gettransactionactivityschedulecheckList"){
 		if($check_lits['mandatory_checklist'] =='Y'){
 			$requerdcnt++; // mandatory count
 		}
-		if($check_lits['mandatory_checklist']=='Y' AND $check_lits['checklist_completed'] !='Y'){
+		if($check_lits['mandatory_checklist']=='Y' and $check_lits['checklist_completed'] !='Y'){
 			$mandatory++; // all mandatory solve requerd
 		}
 	}
@@ -5725,7 +5725,7 @@ if($page == "gettransactionactivityschedulecheckList"){
 	//print_r($workflowsteps);
 	$workflow_btn = "";
 	$transaction_table = $transaction_activity_schedule['transaction_table'];
-	if($requerdcnt <= $alldone AND $mandatory == '0' AND ($transaction_activity_schedule['approval_user_id'] == $_SESSION['userid'] || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] AND $transaction_activity_schedule['current_status'] == ST_SEND_BACK AND ($transaction_table == 'employees' || $transaction_table == 'vendor_registers' || $transaction_table == 'vendors')) || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] AND $transaction_table != 'vendor_registers' AND $transaction_table != 'vendors' AND $transaction_table != 'employees'))){
+	if($requerdcnt <= $alldone and $mandatory == '0' and ($transaction_activity_schedule['approval_user_id'] == $_SESSION['userid'] || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] and $transaction_activity_schedule['current_status'] == ST_SEND_BACK and ($transaction_table == 'employees' || $transaction_table == 'vendor_registers' || $transaction_table == 'vendors')) || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] and $transaction_table != 'vendor_registers' and $transaction_table != 'vendors' and $transaction_table != 'employees'))){
 	//if($requerdcnt <= $alldone AND $mandatory == '0'){
 		$workflow_btn = $workflowsteps['workflow_btn'];
 		//echo "statr workflow";
@@ -5755,7 +5755,7 @@ if($page == "gettransactionactivityschedulecheckList"){
 	    }
 	    $html .= '<tr>';
 	    $onclickfunction = $extraparam = "";
-	   if($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] AND in_array($transaction_activity_schedule['current_status'], $visibleclckstatus)){
+	   if($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] and in_array($transaction_activity_schedule['current_status'], $visibleclckstatus)){
 	    	//$onclickfunction = 'onclick="getSingleCheckList('.$transaction_activity_schedule['id'].','.$positionkey.')"';
 	    	$onclickfunctionclass = 'getSingleCheckList';
 	    	$extraparam = "data-task_id='".$transaction_activity_schedule['id']."' data-positionkey='".$positionkey."'";
@@ -5773,13 +5773,13 @@ if($page == "gettransactionactivityschedulecheckList"){
 		$html .= '</div></div></td>';
 
 		$html .= '<td width="10%"><span class="float_end">';
-            if(trim($list['attachment_name']) !="" AND strlen($list['attachment_name']) !='0'){
+            if(trim($list['attachment_name']) !="" and strlen($list['attachment_name']) !='0'){
              	$path = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$transaction_activity_schedule['transaction_table']."/".$transaction_activity_schedule['assigned_to']."/Documents/";
             	//$html .= '<a href="'.$path.$list['attachment_name'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download Attachment" download><i class="ti-cloud-down m-l-20"></i></a>';
             	$html .= '<a class="dynamicFilePriviews" data-pathurl="'.$path.$list['attachment_name'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Attachment"><i class="ti-eye"></i></a>';
 
             }
-             if(trim($list['downloadfile']) !="" AND strlen($list['downloadfile']) !='0'){
+             if(trim($list['downloadfile']) !="" and strlen($list['downloadfile']) !='0'){
               $html .= '<a href="uploads/all/'.$list['downloadfile'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download Document" download><i class="ti-exchange-vertical  m-l-20"></i></a>';
             }
             if($tas['link_page'] == '0'){
@@ -5842,14 +5842,14 @@ if($page == 'gettransactionactivityschedulesinglechecklist'){
 	$html .= '<span class="text-danger d-block f-12">'.$accepted_file_message.'</span>';
 
 	$html .= '</div><div class="col-lg-2"><span class="form-label d-block">File</span>';
-	if(trim($checklist_position_detail['attachment_name']) !="" AND strlen($checklist_position_detail['attachment_name']) !='0'){
+	if(trim($checklist_position_detail['attachment_name']) !="" and strlen($checklist_position_detail['attachment_name']) !='0'){
      	$path = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$transaction_activity_schedule['transaction_table']."/".$transaction_activity_schedule['assigned_to']."/Documents/";
     	//$html .= '<a href="'.$path.$checklist_position_detail['attachment_name'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Old Attachments Download" class=" text-primary" download><i class="ti-cloud-down"></i> &nbsp; Old Attachment Download</a>';
     	$html .= '<a class="dynamicFilePriviews" data-pathurl="'.$path.$checklist_position_detail['attachment_name'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Old Attachments Preview"><i class="ti-eye"></i></a>';
     }else{
     	$html .= ' - ';
     }
-	if(trim($checklist_position_detail['downloadfile']) !="" AND strlen($checklist_position_detail['downloadfile']) !='0'){
+	if(trim($checklist_position_detail['downloadfile']) !="" and strlen($checklist_position_detail['downloadfile']) !='0'){
 	    $html .= '<a href="uploads/all/'.$checklist_position_detail['downloadfile'].'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download Document" download><i class="ti-exchange-vertical m-l-10"></i></a>';
 	}
 
@@ -5925,7 +5925,7 @@ if($page == "intertequipments"){
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
 	$_POST['equipment_image'] = $_POST['old_equipment_image'];
-	if($_FILES['equipment_image']['error'] != 4 AND isset($_FILES['equipment_image']['error'])){
+	if($_FILES['equipment_image']['error'] != 4 and isset($_FILES['equipment_image']['error'])){
 		$temp = explode(".", basename($_FILES['equipment_image']['name']));
 		$Filename=  "equipment_".time()."_".uniqid();
 		$newfilename = $Filename.'.' .end($temp);
@@ -5964,7 +5964,7 @@ if($page == "getequipmenttypespopup"){
 if($page == "insertemployeepopup"){
 	$emp_id = $_POST['emp_id'];
 	$_POST['image'] = $_POST['old_image'];
-	if($_FILES['user_image']['error'] != 4 AND isset($_FILES['user_image']['error'])){
+	if($_FILES['user_image']['error'] != 4 and isset($_FILES['user_image']['error'])){
 		$temp = explode(".", basename($_FILES['user_image']['name']));
 		$Filename=  "file_".time()."_".uniqid();
 		$newfilename = $Filename.'.' .end($temp);
@@ -6011,7 +6011,7 @@ if($page == "getemployeeemailidalreadyavailableornot"){
 	$data_details1 = callAPI($url1);
 	$json = json_decode($data_details1,1);
 	$json = $json[0];
-	if(isset($json['id']) AND $_POST['emp_id']!=$json['id']){
+	if(isset($json['id']) and $_POST['emp_id']!=$json['id']){
 		echo json_encode(array("res"=>"true"));
 	}else{
 		echo json_encode(array("res"=>"false"));
@@ -6193,7 +6193,7 @@ if($page == "updateemployees"){
 			$_POST['we_attachment'][]= $file;
 		}
 	}elseif($_POST['transaction_table'] == "employees"){
-		if($_FILES['profile_image']['error'] != 4 AND isset($_FILES['profile_image']['error'])){
+		if($_FILES['profile_image']['error'] != 4 and isset($_FILES['profile_image']['error'])){
 			$temp = explode(".", basename($_FILES['profile_image']['name']));
 			$Filename=  "file_".time()."_".uniqid();
 			$newfilename = $Filename.'.' .end($temp);
@@ -6202,7 +6202,7 @@ if($page == "updateemployees"){
 		}
 		//Aadhar
 		$attached_files = array();
-		if($_FILES['aadhar_attachment']['error'] != 4 AND isset($_FILES['aadhar_attachment']['error'])){
+		if($_FILES['aadhar_attachment']['error'] != 4 and isset($_FILES['aadhar_attachment']['error'])){
 			$temp = explode(".", basename($_FILES['aadhar_attachment']['name']));
 			$Filename=  "file_".time()."_".uniqid();
 			$newfilename = $Filename.'.' .end($temp);
@@ -6212,7 +6212,7 @@ if($page == "updateemployees"){
 			$attached_files['aadhar_attachment'] = $_POST['old_aadhar_attachment'];
 		}
 		//passport
-		if($_FILES['passport_attachment']['error'] != 4 AND isset($_FILES['passport_attachment']['error'])){
+		if($_FILES['passport_attachment']['error'] != 4 and isset($_FILES['passport_attachment']['error'])){
 			$temp = explode(".", basename($_FILES['passport_attachment']['name']));
 			$Filename=  "file_".time()."_".uniqid();
 			$newfilename = $Filename.'.' .end($temp);
@@ -6222,7 +6222,7 @@ if($page == "updateemployees"){
 			$attached_files['passport_attachment'] = $_POST['old_passport_attachment'];
 		}
 		//driving_licence
-		if($_FILES['driving_licence_attachment']['error'] != 4 AND isset($_FILES['driving_licence_attachment']['error'])){
+		if($_FILES['driving_licence_attachment']['error'] != 4 and isset($_FILES['driving_licence_attachment']['error'])){
 			$temp = explode(".", basename($_FILES['driving_licence_attachment']['name']));
 			$Filename=  "file_".time()."_".uniqid();
 			$newfilename = $Filename.'.' .end($temp);
@@ -6232,7 +6232,7 @@ if($page == "updateemployees"){
 			$attached_files['driving_licence_attachment'] = $_POST['old_driving_licence_attachment'];
 		}
 		//pan_attachment
-		if($_FILES['pan_attachment']['error'] != 4 AND isset($_FILES['pan_attachment']['error'])){
+		if($_FILES['pan_attachment']['error'] != 4 and isset($_FILES['pan_attachment']['error'])){
 			$temp = explode(".", basename($_FILES['pan_attachment']['name']));
 			$Filename=  "file_".time()."_".uniqid();
 			$newfilename = $Filename.'.' .end($temp);
@@ -6242,7 +6242,7 @@ if($page == "updateemployees"){
 			$attached_files['pan_attachment'] = $_POST['old_pan_attachment'];
 		}
 		//pf_attachment
-		if($_FILES['pf_attachment']['error'] != 4 AND isset($_FILES['pf_attachment']['error'])){
+		if($_FILES['pf_attachment']['error'] != 4 and isset($_FILES['pf_attachment']['error'])){
 			$temp = explode(".", basename($_FILES['pf_attachment']['name']));
 			$Filename=  "file_".time()."_".uniqid();
 			$newfilename = $Filename.'.' .end($temp);
@@ -6252,7 +6252,7 @@ if($page == "updateemployees"){
 			$attached_files['pf_attachment'] = $_POST['old_pf_attachment'];
 		}
 		//pf_attachment
-		if($_FILES['pf_uan_attachment']['error'] != 4 AND isset($_FILES['pf_uan_attachment']['error'])){
+		if($_FILES['pf_uan_attachment']['error'] != 4 and isset($_FILES['pf_uan_attachment']['error'])){
 			$temp = explode(".", basename($_FILES['pf_uan_attachment']['name']));
 			$Filename=  "file_".time()."_".uniqid();
 			$newfilename = $Filename.'.' .end($temp);
@@ -8654,7 +8654,7 @@ if($page == "getbaseuomconversion"){
 	$json = json_decode($data_details1,1);
 	if(count((array)$json) != 0){
 		$conuom = $json[0];
-		$conversion_ratio = ($conuom['conversion_ratio']!=0 AND $conuom['conversion_ratio']!="")?$conuom['conversion_ratio']:"1";
+		$conversion_ratio = ($conuom['conversion_ratio']!=0 and $conuom['conversion_ratio']!="")?$conuom['conversion_ratio']:"1";
 		echo json_encode(array('status'=>'Success','res'=>($quantity*$conversion_ratio),'res'=>($quantity*$conversion_ratio)));
 	}else{
 		echo json_encode(array('status'=>'Fail','res'=>$quantity,'res'=>'NA - '.$quantity));

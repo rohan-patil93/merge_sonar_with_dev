@@ -39,7 +39,7 @@ $modulelists = json_decode($moduleapi,1);
 
 foreach($modulelists as $modulelist){
 	//if($modulelist['module_url'] != '' AND $modulelist['id'] != '1'){
-	if($modulelist['id'] != '1' AND $modulelist['linking'] == '1'){
+	if($modulelist['id'] != '1' and $modulelist['linking'] == '1'){
 		$allmodule[$modulelist['module_id']] = $modulelist;
 	}
 	if($modulelist['is_active'] == '0'){

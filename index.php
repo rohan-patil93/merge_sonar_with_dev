@@ -10,7 +10,7 @@ include_once('comm.php');
 
 //echo "-------------------------------------------".DUMPTABLE;
 //include_once('views/custom_logout.php'); exit;
-if(($timeprint == '1' AND $maxtimeshow >= '2') || $start ==1 ){
+if(($timeprint == '1' and $maxtimeshow >= '2') || $start ==1 ){
 	echo "after include dbconfig - ".date('m/d/Y h:i:s a')."</br>";
 }
 if(isset($_GET['view_session'])){
@@ -57,7 +57,7 @@ $login_details = togetlogindetails();
 //}
 
 if(count((array)$_SESSION['modulewithrole']) ==0){
-    if($timeprint == '1' AND $maxtimeshow >= '3'){
+    if($timeprint == '1' and $maxtimeshow >= '3'){
         echo "Call Main function- ".date('m/d/Y h:i:s a')."</br>";
     }
     $modulewithrole =$modulewithroledetails =  array();
@@ -72,7 +72,7 @@ if(count((array)$_SESSION['modulewithrole']) ==0){
 }
 //echo "<pre>"; print_r($_SESSION['modulewithroledetails']); echo "</pre>";//print_r($_SESSION['working_role_short_code']);echo "</pre>";
 //print_r($_SESSION['user']);
-if(!isset($_SESSION['user']) AND count((array)$_SESSION['user']) == 0){
+if(!isset($_SESSION['user']) and count((array)$_SESSION['user']) == 0){
 //if(count((array)$_SESSION['user']) == 0){
     $user = $login_details['users'];
     $_SESSION['user'] = $user;
@@ -85,7 +85,7 @@ if(count((array)$_SESSION['application_user_module_roles']) == 0){
 
     $_SESSION['application_user_module_roles'] = $login_details['application_user_module_roles'];
 }
-if($timeprint == '1' AND $maxtimeshow >= '3'){
+if($timeprint == '1' and $maxtimeshow >= '3'){
 	echo "Get user - ".date('m/d/Y h:i:s a')."</br>";
 }
 //setcookie("user_email", $user['user_email'], time() + (86400 * 30), "/");   ///set coockies
@@ -105,7 +105,7 @@ $_SESSION['role_ids'] = $user_roles;
 if(count((array)$_SESSION['config']) == 0){
     $_SESSION['config'] = $login_details['config'];
 }
-if($timeprint == '1' AND $maxtimeshow >= '4'){
+if($timeprint == '1' and $maxtimeshow >= '4'){
 	echo "config - ".date('m/d/Y h:i:s a')."</br>";
 }
 if(in_array(ADMIN_ROLES,(array)$user_roles)){
@@ -122,7 +122,7 @@ if(!isset($_SESSION['working_role_short_code'])){
 }
 $_SESSION['permission_check'] = 'N';
 foreach($_SESSION['module_setp'] as $module_list12){
-    if((in_array($module_list12['role_admin_short_code'],(array)$_SESSION['role_ids']) || in_array($module_list12['role_view_short_code'],(array)$_SESSION['role_ids'])) AND $_SESSION['work_module_setup_id'] == $module_list12['module_id']){
+    if((in_array($module_list12['role_admin_short_code'],(array)$_SESSION['role_ids']) || in_array($module_list12['role_view_short_code'],(array)$_SESSION['role_ids'])) and $_SESSION['work_module_setup_id'] == $module_list12['module_id']){
         $_SESSION['admin_type'] = 1;
         //$_SESSION['config']['role_permission']=1;
         if(in_array($module_list12['role_view_short_code'],(array)$_SESSION['role_ids'])){
@@ -144,7 +144,7 @@ if(count((array)$_SESSION['status']) == 0){
 if($_SESSION['reset_password'] == 0){
     header("location:reset_password.php"); exit;
 }
-if($_SESSION['login_details']['setup_page_logs']['current_status'] != ST_APPROVED AND isset($_SESSION['login_details']['setup_page_logs']['current_status'])){ /// hrstaq show only
+if($_SESSION['login_details']['setup_page_logs']['current_status'] != ST_APPROVED and isset($_SESSION['login_details']['setup_page_logs']['current_status'])){ /// hrstaq show only
    header("location:setup.php"); exit;
 }
 
@@ -175,14 +175,14 @@ $_SESSION['system_date_formate'] = $date_format;
 if(isset($_GET['noti_id'])){
     NotificationRead($_GET['noti_id']);
 }
-if($timeprint == '1' AND $maxtimeshow >= '5'){
+if($timeprint == '1' and $maxtimeshow >= '5'){
 echo "Notifition - ".date('m/d/Y h:i:s a')."</br>";
 }
 //$notificationlist = $login_details['notification'];
 //$action_log = $login_details['actionlog'];
 //$inboxcount = toGetInboxCountUsingUserId();
 
-if($timeprint == '1' AND $maxtimeshow >= '6'){
+if($timeprint == '1' and $maxtimeshow >= '6'){
 	echo "inbox count - ".date('m/d/Y h:i:s a')."</br>";
 }
 
@@ -199,7 +199,7 @@ if($user['user_type'] ==4){  //db config get candidate type
         $_GET['option'] = 'COM_INSERT_CANDIDATE';
     }
     $check = array('com_logout','COM_INSERT_CANDIDATE','COM_LIST_CANDIDATE_DOCUMENTS','COM_LIST_CANDIDATE_QUERY','COM_LIST_CANDIDATE_OFFER','COM_LIST_JOIN_REQUIRED_DOCUMENTS','COM_INSERT_EMPLOYEE_CONTRACT','COM_VIEW_CANDIDATE_DETAILS');
-    if(!in_array($_GET['option'], (array)$check) AND $_GET['option'] !=""){
+    if(!in_array($_GET['option'], (array)$check) and $_GET['option'] !=""){
         include_once("includes/controller.php");
         $disptemp = "views/custom_logout.php";
     }else{
@@ -274,7 +274,7 @@ if($user['user_type'] ==4){  //db config get candidate type
  if(count((array)$_SESSION['employee']) == 0){  //To Get Employee Details For The session
 	   $_SESSION['employee'] =   $login_details['employees'];
     }
-if($timeprint == '1' AND $maxtimeshow >= '7'){
+if($timeprint == '1' and $maxtimeshow >= '7'){
 	echo "GEt employe details - ".date('m/d/Y h:i:s a')."</br>";
 }
     $_SESSION['emp_id'] = $_SESSION['employee']['id'];
@@ -292,7 +292,7 @@ if($timeprint == '1' AND $maxtimeshow >= '7'){
     if(count((array)$_SESSION['application_pages']) == 0){
         $_SESSION['application_pages'] = $login_details['application_pages'];
     }
-if($timeprint == '1' AND $maxtimeshow >= '8'){
+if($timeprint == '1' and $maxtimeshow >= '8'){
 	echo "Application Pages - ".date('m/d/Y h:i:s a')."</br>";
 }
 if($_SESSION['rolepermisionget'] != '1'){
@@ -313,10 +313,10 @@ if($_SESSION['rolepermisionget'] != '1'){
     $_SESSION['role_permission_pages'] = $role_data['permission'];
 }
 //echo "<pre>"; print_r($_SESSION['application_pages']);echo "<pre>";
-if($timeprint == '1' AND $maxtimeshow >= '9'){
+if($timeprint == '1' and $maxtimeshow >= '9'){
 echo "page Permission - ".date('m/d/Y h:i:s a')."</br>";
 }
-if(count((array)$_SESSION['application_menu']) == 0 AND !isset($_SESSION['application_menu'])){
+if(count((array)$_SESSION['application_menu']) == 0 and !isset($_SESSION['application_menu'])){
 
 		$_SESSION['menu_role_id'] = $login_details['menurole'];
 		$_SESSION['module_setp'] = $login_details['module_setup'];
@@ -338,7 +338,7 @@ if(count((array)$_SESSION['application_menu']) == 0 AND !isset($_SESSION['applic
 
 
 //$_SESSION['application_menu_LN'] = toGETNavDetails('LN');
-	if($timeprint == '1' AND $maxtimeshow >= '10'){
+	if($timeprint == '1' and $maxtimeshow >= '10'){
 		echo "application menu - ".date('m/d/Y h:i:s a')."</br>";
 	}
     $saidnav = $_SESSION['application_menu_LN'];
@@ -350,14 +350,14 @@ if(count((array)$_SESSION['application_menu']) == 0 AND !isset($_SESSION['applic
     //print_r($saidnav);print_r($topnav);print_r($toplistnav);
     // echo "-----------"; print_r($_SESSION['role_nav']); echo "</pre>";
 
-	if($timeprint == '1' AND $maxtimeshow >= '11'){
+	if($timeprint == '1' and $maxtimeshow >= '11'){
 		echo "Status - ".date('m/d/Y h:i:s a')."</br>";
 	}
 
    /* if(count($_SESSION['field_secruity']) == 0){
        $_SESSION['field_secruity'] = $login_details['field_secruity'];
     }*/
-	if($timeprint == '1' AND $maxtimeshow >= '12'){
+	if($timeprint == '1' and $maxtimeshow >= '12'){
 		echo "security - ".date('m/d/Y h:i:s a')."</br>";
 	}
     $_SESSION['check_value'] = "";
@@ -368,7 +368,7 @@ if(count((array)$_SESSION['application_menu']) == 0 AND !isset($_SESSION['applic
     if(count((array)$_SESSION['error_message']) == 0){
         $_SESSION['error_message']  = $login_details['error_message'];
     }
-	if($timeprint == '1' AND $maxtimeshow >= '13'){
+	if($timeprint == '1' and $maxtimeshow >= '13'){
 		echo "Errer - ".date('m/d/Y h:i:s a')."</br>";
 	}
     $error = $_SESSION['error_message'][$_SESSION['check_value']];
@@ -378,7 +378,7 @@ if(count((array)$_SESSION['application_menu']) == 0 AND !isset($_SESSION['applic
     if(count((array)$_SESSION['user_company']) == 0){
         $_SESSION['user_company'] = $login_details['user_company'];
     }
-	if($timeprint == '1' AND $maxtimeshow >= '14'){
+	if($timeprint == '1' and $maxtimeshow >= '14'){
 		echo "Comoany details - ".date('m/d/Y h:i:s a')."</br>";
 	}
    	//if(isset($_GET['noti_id'])){ // repeted used
@@ -388,11 +388,11 @@ if(count((array)$_SESSION['application_menu']) == 0 AND !isset($_SESSION['applic
     if($_SESSION['emp_id']!=""){
         $clock_data =toGetclockdata();
     }
-	if($timeprint == '1' AND $maxtimeshow >= '15'){
+	if($timeprint == '1' and $maxtimeshow >= '15'){
 		echo "Clock in out details - ".date('m/d/Y h:i:s a')."</br>";
 	}
    include_once("includes/controller.php");
-   if($timeprint == '1' AND $maxtimeshow >= '16'){
+   if($timeprint == '1' and $maxtimeshow >= '16'){
 	   echo "control page include - ".date('m/d/Y h:i:s a')."</br>";
    }
 }
@@ -457,7 +457,7 @@ if(isset($_SESSION['work_module_setup_id']) && $_SESSION['work_module_setup_id']
 <head>
 <title>InfiSuite | Home</title>
 <?php  include_once("partials/_head.php");
-if($timeprint == '1' AND $maxtimeshow >= '17'){
+if($timeprint == '1' and $maxtimeshow >= '17'){
 	echo "CSS Ending - ".date('m/d/Y h:i:s a')."</br>";
 }
 ?>
@@ -471,10 +471,10 @@ if($timeprint == '1' AND $maxtimeshow >= '17'){
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
 	 <?php
-		if($timeprint == '1' AND $maxtimeshow >= '18'){	echo "before Header - ".date('m/d/Y h:i:s a')."</br>"; }
+		if($timeprint == '1' and $maxtimeshow >= '18'){	echo "before Header - ".date('m/d/Y h:i:s a')."</br>"; }
 		include_once("partials/_header.php");
 
-		if($timeprint == '1' AND $maxtimeshow >= '18'){	echo "After Header - ".date('m/d/Y h:i:s a')."</br>"; }
+		if($timeprint == '1' and $maxtimeshow >= '18'){	echo "After Header - ".date('m/d/Y h:i:s a')."</br>"; }
 	?>
 	<script>
              var HOST_URL = "https://demo.hrstaq.com/";
@@ -496,18 +496,18 @@ if($timeprint == '1' AND $maxtimeshow >= '17'){
                                     }
             			}
 
-            			if($timeprint == '1' AND $maxtimeshow >= '19'){
+            			if($timeprint == '1' and $maxtimeshow >= '19'){
             					echo "After Side nav - ".date('m/d/Y h:i:s a')."</br>";
             				}
                     ?>
                     <div class="pcoded-content ">
 
 <?php
-if($_SESSION['timesheetalertshow'] != '0' AND in_array('11',(array)$_SESSION['module_list'])){
+if($_SESSION['timesheetalertshow'] != '0' and in_array('11',(array)$_SESSION['module_list'])){
    $_SESSION['timesheetalertshow'] = '0';
    $getTimeSheetNotSubmitedDeatils = getTimeSheetNotSubmitedDeatils();
    // print_r($getTimeSheetNotSubmitedDeatils);
-    if($getTimeSheetNotSubmitedDeatils['timesheetsmessagecode'] !='0' AND (in_array('3',(array)$_SESSION['role_ids']) || in_array('5',(array)$_SESSION['role_ids']))){
+    if($getTimeSheetNotSubmitedDeatils['timesheetsmessagecode'] !='0' and (in_array('3',(array)$_SESSION['role_ids']) || in_array('5',(array)$_SESSION['role_ids']))){
 ?>
     <div class="alert alert-warning border-warning alert-dismissible mt-2  m-r-20 m-l-20">
        <strong><a href="index.php?option=<?php echo $getTimeSheetNotSubmitedDeatils['option']; ?>" class="f-14"> <?php echo $getTimeSheetNotSubmitedDeatils['mes']; ?></a></strong>
@@ -524,7 +524,7 @@ if($_SESSION['timesheetalertshow'] != '0' AND in_array('11',(array)$_SESSION['mo
 
 
      <?php // include_once("partials/_sub_header.php");
-if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
+if($_SESSION['user_activated'] == 'N' and $_GET['option'] != "com_logout"){
      $disptemp = 'views/custom_insert_application_users.php';
 }else{
     //getApplicationEmptyTransactions($_GET['option']);
@@ -536,7 +536,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
                         include_once($disptemp); //echo $count_nav; //include_once("views/new_hrms_dash_board.php");
                          ?>
                         <?php
-						if($timeprint == '1' AND $maxtimeshow >= '20'){
+						if($timeprint == '1' and $maxtimeshow >= '20'){
 							echo "Page End - ".date('m/d/Y h:i:s a')."</br>";
 						}
 						?>
@@ -553,7 +553,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 	?>
     </div>
     <?php
-        if(!isset($_SESSION['expiryalert']) AND EXPIRY_DOCUMENT_DISPLAY=='Y'){
+        if(!isset($_SESSION['expiryalert']) and EXPIRY_DOCUMENT_DISPLAY=='Y'){
             $_SESSION['expiryalert'] = '1';
             include_once('views/custom_list_expiry_documents.php');
         }
@@ -1085,7 +1085,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
  <?php if($pass_module[0]['page']=="custom_view_reimbursement_dashboard"){?>
  <script type="text/javascript" src="assets/js/custom_view_reimbursement_dashboard.js"></script>
  <?php } ?>
-  <?php if($pass_module[0]['page']=="custom_view_rental_admin_dashboard" OR $_GET['option']=="COM_RENTAL_AGING_AND_PROJECTION_REPORTS"){?>
+  <?php if($pass_module[0]['page']=="custom_view_rental_admin_dashboard" or $_GET['option']=="COM_RENTAL_AGING_AND_PROJECTION_REPORTS"){?>
         <script type="text/javascript" src="assets/js/custom_view_rental_admin_dashboard.js"></script>
  <!-- google chart custom_list_candidate_offer-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -1093,7 +1093,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
         src="assets/js/custom_rental_aging_and_projection_reports.js"></script>
          <!-- End google chart -->
  <?php } ?>
- <?php if($pass_module[0]['page']=="custom_view_petty_cash_dashboard" OR $_GET['option']=="COM_RENTAL_AGING_AND_PROJECTION_REPORTS"){ ?>
+ <?php if($pass_module[0]['page']=="custom_view_petty_cash_dashboard" or $_GET['option']=="COM_RENTAL_AGING_AND_PROJECTION_REPORTS"){ ?>
         <script type="text/javascript" src="assets/js/custom_view_petty_cash_dashboard.js"></script>
  <!-- google chart custom_list_candidate_offer -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -1227,7 +1227,7 @@ if($_SESSION['user_activated'] == 'N' AND $_GET['option'] != "com_logout"){
 </script>
 
 <?php
-if($timeprint == '1' AND $maxtimeshow >= '21'){
+if($timeprint == '1' and $maxtimeshow >= '21'){
 	echo "Javascript End - ".date('m/d/Y h:i:s a')."</br>";
 }
 						?>
