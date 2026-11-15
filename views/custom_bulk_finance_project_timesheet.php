@@ -423,7 +423,7 @@ $erp = json_decode($erp_data,1);
 			<div class="col-lg-12">
 				<div class="card">					
 					<div class="card-header table-card-header">
-						<h5><?= __("Bulk Time Sheet Approval") ?></h5> <i class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Take A Tour"></i> 
+						<h5><?= __("Bulk Time Sheet Approval") ?></h5> <i role="button" tabindex="0" aria-label="Take A Tour" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Take A Tour"></i> 
 						<div class="card-header-right table-card-header ">
 
 							<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
@@ -634,7 +634,7 @@ $erp = json_decode($erp_data,1);
 								<div class="col-lg-4">
 									<div class="d-flex align-items-center">
 										<label class="mr-3 mb-0 d-none d-md-block"><?= __("Manger:") ?>&nbsp;</label>
-										<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_status"  name="reports_to">
+										<select aria-label="<?= htmlspecialchars(__('Reports to'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_datatable_search_status"  name="reports_to">
 											<option value="0"><?= __("All") ?></option>
 
 											<?php foreach($reportto_list as $rkey=>$rlist){  if($rlist!=""){  ?>
@@ -650,7 +650,7 @@ $erp = json_decode($erp_data,1);
 								<div class="col-lg-4">
 									<div class="d-flex align-items-center">
 										<label class="mr-3 mb-0 d-none d-md-block"><?= __("Vendor:") ?>&nbsp;</label>
-										<select class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor">
+										<select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_datatable_search_type" name="vendor">
 											<option value="0"><?= __("All") ?></option>
 											<?php foreach($vendor_list as $vkey=>$vlist){ ?>
 												<option  <?php echo ($post_vendor==$vkey) ? 'selected' :""; ?> value="<?php echo $vkey; ?>"><?php echo $vlist; ?></option>
