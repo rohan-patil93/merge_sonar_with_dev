@@ -42,7 +42,7 @@ $sample_headers = array(
         </div>
     </div>
     <div class="card-body p-3">
-        <input type="file" id="poUploadInput" accept=".xlsx,.xls,.csv" hidden>
+        <input aria-label="<?= htmlspecialchars(__('Po upload input'), ENT_QUOTES, 'UTF-8'); ?>" type="file" id="poUploadInput" accept=".xlsx,.xls,.csv" hidden>
 
         <div
             id="poUploadConfig"
