@@ -97,7 +97,7 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 	} else {
 		$text_height = 0;
 	}
-	
+
 	for ( $i=1; $i <= strlen($code_string); $i++ ){
 		$code_length = $code_length + (integer)(substr($code_string,($i-1),1));
         }
@@ -128,7 +128,7 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 			imagefilledrectangle( $image, 0, $location*$SizeFactor, $img_width, $cur_size*$SizeFactor, ($position % 2 == 0 ? $white : $black) );
 		$location = $cur_size;
 	}
-	
+
 	// Draw barcode to the screen or save in a file
 	if ( $filepath=="" ) {
 		header ('Content-type: image/png');
@@ -136,7 +136,7 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 		imagedestroy($image);
 	} else {
 		imagepng($image,$filepath);
-		imagedestroy($image);		
+		imagedestroy($image);
 	}
 }
 
