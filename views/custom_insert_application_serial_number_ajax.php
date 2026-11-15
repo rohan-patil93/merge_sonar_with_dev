@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['process_name']) and $_POST['process_name'] !=""){
+if(isset($_POST['process_name']) && $_POST['process_name'] !=""){
 	include_once '../includes/session.php';
 	include_once '../dbconfig.php';
 	include_once '../comm.php';
@@ -241,7 +241,7 @@ function addMoreAdditionalSettings(){
 						<div class="form-group  mt-2">
 							<select aria-label="<?= htmlspecialchars(__('Serial number position'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="serial_number_position"  id="serial_number_position" onmousedown="storeOld(this)" onchange="positionChange(this)" >
 								<?php foreach($staticpoint as $i){ ?>
-					                <option value="<?php echo $i; ?>" <?php if($asnres['serial_number_position'] ==$i){ echo "selected"; }elseif($asnres['serial_number_position'] == "" and $i=='1'){ echo "selected"; } ?>>
+					                <option value="<?php echo $i; ?>" <?php if($asnres['serial_number_position'] ==$i){ echo "selected"; }elseif($asnres['serial_number_position'] == "" && $i=='1'){ echo "selected"; } ?>>
 					                <?php echo $i."- Position"; ?>
 					                </option>
 					          <?php } ?>
@@ -256,7 +256,7 @@ function addMoreAdditionalSettings(){
 						<div class="form-group mt-2 financial_year_check_css <?php echo $asnres['financial_year_check'] =="N"?"event_disabled":""; ?>">
 							<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="financial_year_position"  id="financial_year_position" onchange="positionChange(this)">
 								<?php foreach($staticpoint as $i){ ?>
-					                <option value="<?php echo $i; ?>" <?php if($asnres['financial_year_position'] ==$i){ echo "selected"; }elseif($asnres['financial_year_position'] == "" and  $i=='2'){ echo "selected"; } ?>>
+					                <option value="<?php echo $i; ?>" <?php if($asnres['financial_year_position'] ==$i){ echo "selected"; }elseif($asnres['financial_year_position'] == "" &&  $i=='2'){ echo "selected"; } ?>>
 					                <?php echo $i."- Position"; ?>
 					                </option>
 					          <?php } ?>
@@ -320,7 +320,7 @@ function addMoreAdditionalSettings(){
 									<input type="text" class="form-control" name="additional_settings[static_value][]" id="static_value_<?php echo $seq; ?>" value="<?php echo $asettings['static_value']; ?>" onblur="serialNumberPreview()">
 								</div>
 
-								<div class="form-group col-lg-3 w-full" id="dynamic_value_div_<?php echo $seq; ?>" <?php if($asettings['display_type']=="STATIC" or $asettings['display_type']==""){ ?>style="display: none;" <?php } ?>>
+								<div class="form-group col-lg-3 w-full" id="dynamic_value_div_<?php echo $seq; ?>" <?php if($asettings['display_type']=="STATIC" || $asettings['display_type']==""){ ?>style="display: none;" <?php } ?>>
 									<span class="text-danger empty_error" id="error_dynamic_value_<?php echo $seq; ?>"></span>
 									<select class ="form-control form-control-lg form-select js-example-basic-single" id="dynamic_value_<?php echo $seq; ?>" name="additional_settings[dynamic_value][]" onchange="serialNumberPreview()">
 										<option value="PARTY_NAME" <?php echo $asettings['dynamic_value'] =="PARTY_NAME"?"selected":""; ?>><?= __('Party') ?></option>
@@ -332,7 +332,7 @@ function addMoreAdditionalSettings(){
 								<div class="form-group col-lg-3 ">
 									<select class ="form-control form-control-lg form-select js-example-basic-single position_dropdown" name="additional_settings[positions][]" id="positions_<?php echo $seq; ?>"  onchange="positionChange(this)">
 										<?php foreach($staticpoint as $i){ ?>
-							                <option value="<?php echo $i; ?>" <?php if($asettings['positions'] ==$i){ echo "selected"; }elseif($asettings['positions'] == "" and  $i=='3'){ echo "selected"; } ?> >
+							                <option value="<?php echo $i; ?>" <?php if($asettings['positions'] ==$i){ echo "selected"; }elseif($asettings['positions'] == "" &&  $i=='3'){ echo "selected"; } ?> >
 							                <?php echo $i."- Position"; ?>
 							                </option>
 							          <?php } ?>

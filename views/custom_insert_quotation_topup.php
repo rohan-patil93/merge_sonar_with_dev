@@ -698,7 +698,7 @@ if($fullvalue['type'] == 'serial_no'){
              <?php }elseif($fullvalue['type']=='select' || $fullvalue['type']=='disable_select' || $key == 'place_of_supply') {
 
                  $selectdata = array();
-                 if($table_name=="rental_invoices" and ($key == 'parent_ref_id' || $key == 'ref_id')){
+                 if($table_name=="rental_invoices" && ($key == 'parent_ref_id' || $key == 'ref_id')){
                      if($key == 'parent_ref_id'){
                          $rentval = $role['party_id'];
                      }elseif($key == 'ref_id'){
@@ -715,7 +715,7 @@ if($fullvalue['type'] == 'serial_no'){
                      $selectdata =$field_result[$key];
                      $select_table = $fieldtables[$key];
                  }
-                 if(($table_name=="requisitions"  || $table_name=="quotations" || $table_name=="estimates") and ($key == 'ref_type' || $key == 'ref_id')){
+                 if(($table_name=="requisitions"  || $table_name=="quotations" || $table_name=="estimates") && ($key == 'ref_type' || $key == 'ref_id')){
                      $selectdisabled = "event_disabled";
                  }else{
                      $selectdisabled  = "";

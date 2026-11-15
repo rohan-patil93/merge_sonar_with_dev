@@ -431,7 +431,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     if($subt_amount != ""){
         if($rpdata['discount_type'] == 'P'){
 
-            if($subt_amount !="" and $subt_amount !="0" and $rpdata['discount_value'] !="" and $rpdata['discount_value'] !="0"){
+            if($subt_amount !="" && $subt_amount !="0" && $rpdata['discount_value'] !="" && $rpdata['discount_value'] !="0"){
                 $discount_amt += $subt_amount * ($rpdata['discount_value'] /100);
             }else{
                 $discount_amt += 0;
@@ -442,7 +442,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $table1['tax_amount'] = $stax_amount;
         // Added Rohan 2024-01-29
             foreach((array)$additional_charges as $addchrg){
-                if($addchrg['shipping_amount'] != '' and $addchrg['shipping_amount'] != '0'){
+                if($addchrg['shipping_amount'] != '' && $addchrg['shipping_amount'] != '0'){
                    $shipping_amounttax += $addchrg['shipping_amount'] * ($addchrg['shipping_tax'] /100);
                 }
             }
@@ -451,7 +451,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $table1['grand_total'] = $subt_amount + $shipping_amountt + $stax_amount-$totaldiscountamt;
     }
     $item_ids = "";
-    if(count((array)$itemid) != 0 and $itemid !=""){
+    if(count((array)$itemid) != 0 && $itemid !=""){
         $item_ids = implode(',', (array)$itemid);
     }
     $acode['account_code']=$account_code;
@@ -459,9 +459,9 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     $acode['company_id']=$_SESSION['company_id'];
     $acode['fiscal_year']=$table1['qo_date'];
     //echo "<pre>"; print_r($meantableitemlist); print_r($errormessage); echo "</pre>";
-    if(count((array)$meantableitemlist) !=0 and count((array)$errormessage) != 0){
+    if(count((array)$meantableitemlist) !=0 && count((array)$errormessage) != 0){
         foreach((array)$meantableitemlist as $ref_itm_id=>$qytvalue){
-            if(isset($errormessage[$ref_itm_id]['pending_qty']) && $qytvalue > $errormessage[$ref_itm_id]['pending_qty'] and $table1['ref_type'] != 'delivery_challans'){
+            if(isset($errormessage[$ref_itm_id]['pending_qty']) && $qytvalue > $errormessage[$ref_itm_id]['pending_qty'] && $table1['ref_type'] != 'delivery_challans'){
                 $_GET['error_messages'] .= $errormessage[$ref_itm_id]['item_name']." (".$qytvalue." Qty) - ".$_SESSION['error_message'][6030]." - (Qty - ".round($errormessage[$ref_itm_id]['pending_qty']).") Please Check </br>";
             }
         }
@@ -502,8 +502,8 @@ if($table_name == 'petty_cash' || $table_name == 'bills') {
 }
 $small_sub = 111;
 //////////////////////currency_id//////////////////////////////////
-if($table1['currency_id']!="" and $table1['currency_id']!="0"){
-}elseif($_SESSION['user']['default_currency_id'] !="" and $_SESSION['user']['default_currency_id'] !="0"){
+if($table1['currency_id']!="" && $table1['currency_id']!="0"){
+}elseif($_SESSION['user']['default_currency_id'] !="" && $_SESSION['user']['default_currency_id'] !="0"){
     $table1['currency_id'] = $_SESSION['user']['default_currency_id'];
     $table1['originator_currency_id'] = $_SESSION['user']['default_currency_id'];
 }else{
@@ -512,12 +512,12 @@ if($table1['currency_id']!="" and $table1['currency_id']!="0"){
 }
 //////////////////////currency_id//////////////////////////////////
 //////////////////////state//////////////////////////////////
-if($table1['originator_state_id']!="" and $table1['originator_state_id']!="0"){
+if($table1['originator_state_id']!="" && $table1['originator_state_id']!="0"){
     //echo __('wroking --- 1');
-}elseif($_SESSION['user']['default_state_id'] !="" and $_SESSION['user']['default_state_id']!="0"){
+}elseif($_SESSION['user']['default_state_id'] !="" && $_SESSION['user']['default_state_id']!="0"){
     $table1['originator_state_id'] = $_SESSION['user']['default_state_id'];
 
-    if($table1['supplier_state_id']=="" or $table1['supplier_state_id']=="0"){
+    if($table1['supplier_state_id']=="" || $table1['supplier_state_id']=="0"){
         $table1['supplier_state_id'] = $_SESSION['user']['default_state_id'];
     }
    // echo __('wroking --- 2');
@@ -526,11 +526,11 @@ if($table1['originator_state_id']!="" and $table1['originator_state_id']!="0"){
     $table1['supplier_state_id'] = $_SESSION['user_company']['state'];
    // echo __('wroking --- 3');
 }
-$table1['currency_rate'] = ($table1['currency_rate'] != "" and $table1['currency_rate'] !="0")?$table1['currency_rate']:1;
+$table1['currency_rate'] = ($table1['currency_rate'] != "" && $table1['currency_rate'] !="0")?$table1['currency_rate']:1;
 //////////////////////state//////////////////////////////////
-  if(isset($_GET['TD']) and $_GET['TD'] !=""){
+  if(isset($_GET['TD']) && $_GET['TD'] !=""){
         $table1['transaction_date'] =  $_GET['TD'];
-        $table1['due_date'] =  ($table1['payment_terms'] !="" and $table1['payment_terms'] !="0")?fromDate(date('Y-m-d', strtotime($_GET['TD'].' + '.$table1['payment_terms'].' days'))):$_GET['TD'];
+        $table1['due_date'] =  ($table1['payment_terms'] !="" && $table1['payment_terms'] !="0")?fromDate(date('Y-m-d', strtotime($_GET['TD'].' + '.$table1['payment_terms'].' days'))):$_GET['TD'];
     }
 if($table_name != '' && $rtable_name =='purchase_orders' && $table_name != 'purchase_invoices'){
     $table2 = array();
@@ -2429,7 +2429,7 @@ if($checktimeprint > 0){
         <?php
         $notrequirdtoshow = array('requisitions', 'enquiries', 'sales_invoices');
 
-        if(!in_array($table_name, $notrequirdtoshow) and  ($table1['multi_reference'] == "Y" or $table1['multi_reference'] == "") and ($table1['current_status'] == ST_DRAFT or $table1['current_status'] == ST_ACTIVE or $table1['current_status'] =="") and $table1['ref_id'] ==""){ ?>
+        if(!in_array($table_name, $notrequirdtoshow) &&  ($table1['multi_reference'] == "Y" || $table1['multi_reference'] == "") && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE || $table1['current_status'] =="") && $table1['ref_id'] ==""){ ?>
         <button type="button" class="btn btn-primary" onclick="createMultiReferenceDocumnets()"><i class="fa fa-object-group"></i> <?php echo __('&nbsp;Multi Reference Documents'); ?></button>
         <?php } ?>
     </div>
@@ -2463,7 +2463,7 @@ if($checktimeprint > 0){
             </div>
     <?php } ?>
 
-    <?php if(count((array)$items_chart_of_account_not_provide) !="0" and isset($_SESSION['module_setp'][4])){
+    <?php if(count((array)$items_chart_of_account_not_provide) !="0" && isset($_SESSION['module_setp'][4])){
             $errmsg = __('Please Provide Chart of Account - ');
             foreach($items_chart_of_account_not_provide as $npac){
                 $errmsg .= "</br>".$npac['sku']." - ";
@@ -2478,7 +2478,7 @@ if($checktimeprint > 0){
     <?php } ?>
 
     <?php $chartofacounterrer = 0;
-        if(count((array)$chart_of_account_lock) !="0" and isset($_SESSION['module_setp'][4])){  $chartofacounterrer = 1;
+        if(count((array)$chart_of_account_lock) !="0" && isset($_SESSION['module_setp'][4])){  $chartofacounterrer = 1;
             $errmsg = __('This account is locked. Please check the following account - ');
             foreach($chart_of_account_lock as $npac){
                 $errmsg .= "</br>".$npac['sku']." - ";
@@ -2494,7 +2494,7 @@ if($checktimeprint > 0){
 
 
 
-    <?php if($_GET['error_messages'] !="" and $copy == '1' and ($table1['current_status'] == ST_DRAFT or $table1['current_status'] == ST_ACTIVE)){ $disable = "disabled"; ?>
+    <?php if($_GET['error_messages'] !="" && $copy == '1' && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)){ $disable = "disabled"; ?>
     <?php //if($_GET['error_messages'] !="" AND ($table1['current_status'] == ST_DRAFT OR $table1['current_status'] == ST_ACTIVE OR $copy == 0)){  $disable = "disabled"; ?>
          <div class="alert alert-danger alert-dismissible">
                 <strong><?php echo $_GET['error_messages']; ?> </strong>
@@ -2554,20 +2554,20 @@ if($checktimeprint > 0){
 
                     <?php
 
-                    if(($chartofacounterrer == '1' or $_GET['error_messages']) and ($table1['current_status'] == ST_DRAFT or $table1['current_status'] == ST_ACTIVE)){ }else{
+                    if(($chartofacounterrer == '1' || $_GET['error_messages']) && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)){ }else{
 
 
-                        echo ($rtable_name =="" and (isset($table2[0]['item_id'])))?$workflowsteps['workflow_btn']:"";
+                        echo ($rtable_name =="" && (isset($table2[0]['item_id'])))?$workflowsteps['workflow_btn']:"";
 
                     }
 
 
-                    if($dynamic_mapping_tables[$table_name]['cancellation_application_table_name'] !="" and ($table1['cancel_invoice'] =="N" || $table1['cancel_invoice'] =="") && $table1['originator'] ==$_SESSION['userid']){ ?>
+                    if($dynamic_mapping_tables[$table_name]['cancellation_application_table_name'] !="" && ($table1['cancel_invoice'] =="N" || $table1['cancel_invoice'] =="") && $table1['originator'] ==$_SESSION['userid']){ ?>
                             <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('<?php echo $table_name; ?>','<?php echo $rid; ?>')">
                                 <i class="text-white fa fa-times-circle"></i> <?php echo __('&nbsp;Cancel'); ?> <?php echo $title; ?>
                             </button>
                     <?php } ?>
-                    <?php if($table_name == "enquiries" or $table_name == "estimates" or $table_name == "sales_orders" and $table1['current_status'] == ST_APPROVED){ ?>
+                    <?php if($table_name == "enquiries" || $table_name == "estimates" || $table_name == "sales_orders" && $table1['current_status'] == ST_APPROVED){ ?>
                         <div class="dropdown-primary dropdown open">
                             <button class="btn btn-primary dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?php echo __('Request'); ?></button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
@@ -2577,7 +2577,7 @@ if($checktimeprint > 0){
                             </div>
                         </div>
                     <?php } ?>
-                    <?php if($table_name == "proforma_sales_invoices" and $table1['current_status'] == ST_APPROVED and $rpres['data']['sales_invoice_id'] ==""){ ?>
+                    <?php if($table_name == "proforma_sales_invoices" && $table1['current_status'] == ST_APPROVED && $rpres['data']['sales_invoice_id'] ==""){ ?>
                             <button type="button" class="btn btn-primary btn-sm waves-effect waves-light" id="clickToConvertproformaInvoicetoSalesInvoicesid" onclick="clickToConvertproformaInvoicetoSalesInvoices('<?php echo $table_name; ?>','<?php echo $rid; ?>')">
                                 <i class="text-white ti-layers"></i> <?php echo __('Convert to Sales Invoice'); ?>
                             </button>
@@ -2585,7 +2585,7 @@ if($checktimeprint > 0){
                 <?php }  ?>
                  &nbsp;  &nbsp;
                     <!-- <input type="hidden" name="status_values" id="status_values" value="<?php //echo  $table1['current_status']!=""?$table1['current_status']:2; ?>"> -->
-                <input type="hidden" name="status_values" id="status_values" value="<?php echo  ($table1['current_status']!="" and $rtable_name =="")?$table1['current_status']:ST_DRAFT; ?>">
+                <input type="hidden" name="status_values" id="status_values" value="<?php echo  ($table1['current_status']!="" && $rtable_name =="")?$table1['current_status']:ST_DRAFT; ?>">
                 <input type="hidden" name="status_old_value" id="status_old_value" value="<?php echo $table1['current_status']; ?>">
 
 
@@ -2599,7 +2599,7 @@ if($checktimeprint > 0){
                 <div class="col-lg-4 text-right">
                     <?php
                     $invoicetables = array('sales_invoices','purchase_invoices','supplier_bills');
-                    if(in_array($table_name, $invoicetables) and $table1['current_status'] == ST_APPROVED and $rid != "" and $copy == 1){  ?>
+                    if(in_array($table_name, $invoicetables) && $table1['current_status'] == ST_APPROVED && $rid != "" && $copy == 1){  ?>
                         <a href="index.php?option=COM_INSERT_DEBIT_NOTES&ref_type=<?php echo $table_name; ?>&ref_id=<?php echo $rid; ?>"  class=" cursor-pointer  btn btn-success" > <i class="icofont icofont-plus icon-white"></i> <?php echo __('Debit Note -'); ?> <?php echo $debit_notes_cnt['cnt']; ?></a>
                         <a href="index.php?option=COM_INSERT_CREDIT_NOTES&ref_type=<?php echo $table_name; ?>&ref_id=<?php echo $rid; ?>" class="cursor-pointer  btn btn-danger" ><i class="icofont icofont-plus icon-white"></i> <?php echo __('Credit Note -'); ?> <?php echo $credit_notes_cnt['cnt']; ?></a>
                     <?php } ?>
@@ -2651,7 +2651,7 @@ if($checktimeprint > 0){
                                 <div class="row">
                                 <div class="w-full  col-lg-6">
                                     <select class="form-control form-select js-example-basic-single" id="discount_mode" name= "discount_mode" onchange="changeDiscountMode()" title="<?php echo __('Discount Mode'); ?>" aria-label="<?php echo __('Discount Mode'); ?>">
-                                            <option  <?php if($table1['discount_mode'] =="" or $table1['discount_mode'] == 'DO'){ ?>selected <?php } ?> value="DO"> <?php echo __('Discount Overall'); ?> </option>
+                                            <option  <?php if($table1['discount_mode'] =="" || $table1['discount_mode'] == 'DO'){ ?>selected <?php } ?> value="DO"> <?php echo __('Discount Overall'); ?> </option>
                                             <option  <?php if($table1['discount_mode'] == 'DI'){ ?>selected <?php } ?> value="DI"> <?php echo __('Discount Inline'); ?> </option>
                                     </select>
                                 </div>
@@ -2846,7 +2846,7 @@ if($checktimeprint > 0){
                                             <i class="helper"></i><?php echo $_SESSION['config']['currency_symbol']; ?>
                                         </label>
                                         <label class="m-l-10 d-inline-block">
-                                            <input type="radio" name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="P" <?php echo ($table1['discount_type'] == 'P' or $table1['discount_type'] =="")?"checked":""; ?> title="<?php echo __('Discount Type'); ?>" aria-label="<?php echo __('Discount Type'); ?>">
+                                            <input type="radio" name="discount_type" class="calculateTotal_discount" id="disType" onclick="calculateTotal()" value="P" <?php echo ($table1['discount_type'] == 'P' || $table1['discount_type'] =="")?"checked":""; ?> title="<?php echo __('Discount Type'); ?>" aria-label="<?php echo __('Discount Type'); ?>">
                                             <i class="helper"></i> %
                                         </label>
                                     </div>
@@ -3066,7 +3066,7 @@ if($checktimeprint > 0){
                                 <td class="p-2 text-right f-w-600" >
                                      <span ><span id="advance_payment_text"><?php echo $table1['advance_payment']!=""?customeummarmonyformate($table1['advance_payment']):customeummarmonyformate(0); ?> </span>
                                      <?php
-                                     if($table_name == "sales_invoices" or $table_name == "purchase_invoices"){
+                                     if($table_name == "sales_invoices" || $table_name == "purchase_invoices"){
                                         //AND $table1['advance_payment']!="" AND $table1['advance_payment']!="0"
                                     ?>
                                      <i class="ti-pencil" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Adjust Advance Payment'); ?>" onclick="openAdvancePaymentsPopup()"></i>
@@ -3087,7 +3087,7 @@ if($checktimeprint > 0){
 
 
                         <?php } ?>
-                        <?php if($table1['security_deposit'] !="" and $table1['security_deposit'] !="0"){ ?>
+                        <?php if($table1['security_deposit'] !="" && $table1['security_deposit'] !="0"){ ?>
                             <tr >
                                 <th scope="col" class="p-2  text-left"><?php echo __('Security Deposit'); ?></th>
                                 <td class="p-2 text-right f-w-600" ><?php echo $table1['security_deposit'] !=""?$table1['security_deposit']:0; ?></td>
@@ -3130,7 +3130,7 @@ if($checktimeprint > 0){
                                     <tr>
                                         <td class="p-2"><?php echo fromDate($pth['due_date']); ?></td>
                                         <td class="p-2 text-right"><?php echo customeummarmonyformate($pth['amount']); ?>
-                                        <?php if($pth['extra_date'] !="" and $pth['extra_amt'] !=""){?>
+                                        <?php if($pth['extra_date'] !="" && $pth['extra_amt'] !=""){?>
                                         <span class='d-block f-10 f-w-600'><?php echo __('Before Date'); ?> <?php echo fromDate($pth['extra_date'])." (".customeummarmonyformate($pth['extra_amt']).")"; ?></span> <?php } ?></td>
                                     </tr>
                                         <?php echo '<input type="hidden" name="payment_term_history['.$mjk.'][due_date]" value="'.$pth['due_date'].'">
@@ -3206,7 +3206,7 @@ if($rid !='' && isset($file_data['file_upload']) && $file_data['file_upload']==0
 
 <?php
     $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
-    if(in_array($table1['current_status'], (array)$check_array) and $rtable_name =="" or ($table1['current_status'] == ST_CALLBACK and $table1['originator'] ==$_SESSION['userid'])){
+    if(in_array($table1['current_status'], (array)$check_array) && $rtable_name =="" || ($table1['current_status'] == ST_CALLBACK && $table1['originator'] ==$_SESSION['userid'])){
             $disable = "" ;
      }else{
         if($rtable_name !=""){

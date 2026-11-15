@@ -37,7 +37,7 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
     }else{
         $tringselect = 0;
     }
-    if(($tringselect=="" or $tringselect=="0")){
+    if(($tringselect=="" || $tringselect=="0")){
        	$url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
     }else{
       $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&selectvalue=".$tringselect."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
@@ -55,8 +55,8 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
 
         if($_GET['amendment'] =='Y'){
           $arraybdbd[] = array('id'=>$row['id'],'full_name'=>$row[$_GET['fieldsname']]);
-        }elseif(count((array)$explode2) !=0 and count((array)$refitemid) !=0){
-            if(in_array($row[$_GET['extracat']], (array)$explode2) and in_array($row['id'],(array)$refitemid)){
+        }elseif(count((array)$explode2) !=0 && count((array)$refitemid) !=0){
+            if(in_array($row[$_GET['extracat']], (array)$explode2) && in_array($row['id'],(array)$refitemid)){
                   $arraybdbd[] = array('id'=>$row['id'],'full_name'=>$row['sku']." - ".$row[$_GET['fieldsname']]);
             }
         }elseif(count((array)$refitemid) !=0){
@@ -72,7 +72,7 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
         }
       }
       //$arraybdbd[] = array('id'=>'-1','full_name'=>'Other');
-      if($_GET['ref_id'] !='' and  $_GET['amendment'] =='N'){
+      if($_GET['ref_id'] !='' &&  $_GET['amendment'] =='N'){
         $arraybdbd[] = array('id'=>'-0','full_name'=>__('Amendment'));
       }
       $arrara = array('total_count'=>1,'incomplete_results'=>true,'items'=>$arraybdbd);

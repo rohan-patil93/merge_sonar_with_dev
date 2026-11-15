@@ -65,7 +65,7 @@ $dynamic_mapping_tables = $result['dynamic_mapping_tables'];
 //echo "<pre>"; print_r($taxdatawithitemdataid); echo "</pre>";
 
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
-if(in_array($invoiceData['current_status'], (array)$check_array) or ($invoiceData['current_status'] == ST_CALLBACK and $invoiceData['originator'] == $_SESSION['userid'])){
+if(in_array($invoiceData['current_status'], (array)$check_array) || ($invoiceData['current_status'] == ST_CALLBACK && $invoiceData['originator'] == $_SESSION['userid'])){
         $disable = "" ;
 }else{
     $disable = "event_disabled" ;
@@ -188,7 +188,7 @@ function cancelInvoices(transaction_table,transaction_id){
         <div class="card-header-right table-card-header ">
 
              <?php
-                if($dynamic_mapping_tables['cancellation_application_table_name'] !="" and $invoiceData['current_status'] == ST_APPROVED and $invoiceData['cancel_invoice'] !="Y" && $invoiceData['originator'] ==$_SESSION['userid']){ ?>
+                if($dynamic_mapping_tables['cancellation_application_table_name'] !="" && $invoiceData['current_status'] == ST_APPROVED && $invoiceData['cancel_invoice'] !="Y" && $invoiceData['originator'] ==$_SESSION['userid']){ ?>
                         <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('rental_invoices','<?php echo $rid; ?>')">
                             <i class="text-white fa fa-times-circle"></i> <?php echo __('&nbsp;Cancel Invoice'); ?>
                         </button>

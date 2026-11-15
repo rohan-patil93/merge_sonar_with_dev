@@ -12,7 +12,7 @@ include_once '../comm.php';
 $additional_license_lot =$subscription_plans['additional_license_lot'];
 $standard_price = $_POST['agreed_price'];
 
-if($company_subscription_plans['standard_user_limit'] !=0 and $company_subscription_plans['standard_user_limit'] !=""){
+if($company_subscription_plans['standard_user_limit'] !=0 && $company_subscription_plans['standard_user_limit'] !=""){
 	$additional_license_lot_price=round($standard_price/$company_subscription_plans['standard_user_limit']);
 }else{
 	$additional_license_lot_price = round($standard_price);

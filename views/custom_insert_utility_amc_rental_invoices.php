@@ -66,7 +66,7 @@ $operation_symbol = array('+','/','*','%','=');
 
 
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
-if(in_array($transaction_data['current_status'], (array)$check_array) or ($transaction_data['current_status'] == ST_CALLBACK and $transaction_data['originator'] == $_SESSION['userid'])){
+if(in_array($transaction_data['current_status'], (array)$check_array) || ($transaction_data['current_status'] == ST_CALLBACK && $transaction_data['originator'] == $_SESSION['userid'])){
         $disable = "" ;
 }else{
     $disable = "event_disabled" ;
@@ -512,7 +512,7 @@ function cancelInvoices(transaction_table,transaction_id){
 
 								<?php if($bd['parent_id'] == 0){
 									$checkedswitch = ""; $onetimecheck = "0";
-									if($bd['tax_amount'] !="" and $bd['tax_amount'] !="0"){
+									if($bd['tax_amount'] !="" && $bd['tax_amount'] !="0"){
 										$checkedswitch = "checked"; $onetimecheck = "1";
 									}
 									?>

@@ -600,7 +600,7 @@ function fileUplodingDisplay(){
 																<select class="form-select js-example-basic-single" name="file_upload[fileuplodingwidth]" aria-label="File Upload[fileuplodingwidth]">
 																	<?php for($i=1; $i<13;$i++){
 																		$view_type = "col-lg-".$i; ?>
-																		<option  value = "<?php echo $i; ?>" <?php if(($file_data['fileuplodingwidth']== $i) or ($file_data['fileuplodingwidth'] =="" and $file_data['fileuplodingwidth'] == '6')){ ?> selected <?php }?>><?php echo $view_type; ?> </option>
+																		<option  value = "<?php echo $i; ?>" <?php if(($file_data['fileuplodingwidth']== $i) || ($file_data['fileuplodingwidth'] =="" && $file_data['fileuplodingwidth'] == '6')){ ?> selected <?php }?>><?php echo $view_type; ?> </option>
 																	<?php } ?>
 																</select>
 															</div>

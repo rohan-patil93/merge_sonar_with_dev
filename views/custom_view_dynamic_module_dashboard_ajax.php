@@ -25,7 +25,7 @@ $location_data = $result['location_data'];
 $locations = $result['locations'];
 $locationlist = array();
 foreach($location_data as $locationdata){
-    if($locationdata['location_id'] !="0" and $locationdata['location_id'] !=""){
+    if($locationdata['location_id'] !="0" && $locationdata['location_id'] !=""){
         $locationlist[$locationdata['location_id']][] = $locationdata;
     }
 }
@@ -33,7 +33,7 @@ $cost_center_datalist = $result['cost_center_name'];
 $cost_center_data = $result['cost_center_data'];
 $costcenterlist = array();
 foreach($cost_center_data as $costcenterdata){
-    if($costcenterdata['cost_center_id'] !="0" and $costcenterdata['cost_center_id'] !=""){
+    if($costcenterdata['cost_center_id'] !="0" && $costcenterdata['cost_center_id'] !=""){
         $costcenterlist[$costcenterdata['cost_center_id']][] = $costcenterdata;
     }
 }
@@ -78,7 +78,7 @@ foreach($allrecords as $allrecord){
 foreach($result['transaction_approval_logs'] as $transactionlog){
     //print_r($transactionlog);
     //if($transactionlog['response_type'] =='0' AND $transactionlog['send_back_flag'] == '0'){
-    if($transactionlog['response_type'] =='0' and $transactionlog['send_back_flag'] == '0' and $transactionlog['call_back'] == '1'){
+    if($transactionlog['response_type'] =='0' && $transactionlog['send_back_flag'] == '0' && $transactionlog['call_back'] == '1'){
         $createtransactioncnt++;
         $pendinglog[$transactionlog['transaction_id']] = $transactionlog;
     }elseif($transactionlog['response_type'] == ST_SEND_BACK){
@@ -91,12 +91,12 @@ foreach($result['transaction_approval_logs'] as $transactionlog){
     }
 }
 foreach($sendbacklogcheck as $transid => $transactionlog){
-    if(!isset($pendinglog[$transid]) and !isset($aprovedlog[$transid])){
+    if(!isset($pendinglog[$transid]) && !isset($aprovedlog[$transid])){
         $sendbacklog[$transid] = $transactionlog;
     }
 }
 foreach($rejectlogcheck as $transid => $transactionlog){
-    if(!isset($pendinglog[$transid]) and !isset($aprovedlog[$transid])){
+    if(!isset($pendinglog[$transid]) && !isset($aprovedlog[$transid])){
         $rejectlog[$transid] = $transactionlog;
     }
 }
@@ -271,7 +271,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=''){
 $approvedresamt = $approvedresamt !=""?$approvedresamt:0;
 $totaldocsamt = $totaldocsamt !=""?$totaldocsamt:0;
 $totaldoc = $totaldocsamt+$approvedresamt;
-if($totaldoc != 0 and $totaldoc !=""){
+if($totaldoc != 0 && $totaldoc !=""){
 
     $approvedocs = 100-round((($totaldocsamt-$approvedresamt)/$totaldoc)*100);
 }else{
@@ -460,7 +460,7 @@ if($totaldoc != 0 and $totaldoc !=""){
                                     <?php echo $itemcatname; ?><span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $categorydatalist)); ?></span></a>
 
                             </li>
-                            <?php if($table_name != "debit_notes" and $table_name != "credit_notes" and $table_name != "journal_vouchers" and $table_name !="bank_vouchers" and $table_name !="cash_vouchers"){ ?>
+                            <?php if($table_name != "debit_notes" && $table_name != "credit_notes" && $table_name != "journal_vouchers" && $table_name !="bank_vouchers" && $table_name !="cash_vouchers"){ ?>
                             <li class="nav-item">
                                 <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true"><?= __('Locations'); ?><span class="label label-xs label-success m-l-10"><?php echo array_sum(array_map("count", $locationlist)); ?></span></a>
                             </li>
@@ -533,7 +533,7 @@ if($totaldoc != 0 and $totaldoc !=""){
                                                                 <tr>
                                                                     <td><a class="d-block" href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$list['id']); ?>" <?php echo $edit_permissionbtn; ?>><?php echo $list['transaction_number']; ?></a>
 <?php
-if($list['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or $table_name =="sales_invoices")){
+if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || $table_name =="sales_invoices")){
     $badgeclass = "";
     if($list['pending_amount'] == $list['total_amount']){
         $badgeclass ="label-danger";
@@ -642,7 +642,7 @@ if($list['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or
                                                                 <tr>
                                                                     <td><a class="d-block" href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$list['id']); ?>" <?php echo $edit_permissionbtn; ?>><?php echo $list['transaction_number']; ?></a>
 <?php
-if($list['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or $table_name =="sales_invoices")){
+if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || $table_name =="sales_invoices")){
     $badgeclass = "";
     if($list['pending_amount'] == $list['total_amount']){
         $badgeclass ="label-danger";
@@ -740,7 +740,7 @@ if($list['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or
                                                                 <tr>
                                                                     <td><a class="d-block" href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$list['id']); ?>" <?php echo $edit_permissionbtn; ?>><?php echo $list['transaction_number']; ?></a>
                                                                     <?php
-if($list['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or $table_name =="sales_invoices")){
+if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || $table_name =="sales_invoices")){
     $badgeclass = "";
     if($list['pending_amount'] == $list['total_amount']){
         $badgeclass ="label-danger";
@@ -872,7 +872,7 @@ if($list['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or
                                                                 <tr>
                                                                     <td><a class="d-block" href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$list['id']); ?>" <?php echo $edit_permissionbtn; ?>><?php echo $list['transaction_number']; ?></a>
                                                                                                                 <?php
-if($list['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or $table_name =="sales_invoices")){
+if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || $table_name =="sales_invoices")){
     $badgeclass = "";
     if($list['pending_amount'] == $list['total_amount']){
         $badgeclass ="label-danger";
@@ -955,7 +955,7 @@ if($list['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or
                                 <div class="col p-0 m-l-10">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$activeres1['id']); ?>" <?php echo $edit_permissionbtn; ?>>
                                         <h6 class="f-w-600 mb-1 f-14"><?php echo $_SESSION['users'][$activeres1['originator']]; ?>                                          <?php
-if($activeres1['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or $table_name =="sales_invoices")){
+if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || $table_name =="sales_invoices")){
     $badgeclass = "";
     if($activeres1['pending_amount'] == $activeres1['total_amount']){
         $badgeclass ="label-danger";
@@ -1009,7 +1009,7 @@ if($activeres1['current_status'] == ST_APPROVED and ($table_name =="supplier_bil
                                 <div class="col p-0">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$activeres1['id']); ?>" <?php echo $edit_permissionbtn; ?>>
                                         <h6 class="f-w-600 mb-1 f-14"><?php echo $activeres1['party_name']; ?>                                          <?php
-if($activeres1['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or $table_name =="sales_invoices")){
+if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || $table_name =="sales_invoices")){
     $badgeclass = "";
     if($activeres1['pending_amount'] == $activeres1['total_amount']){
         $badgeclass ="label-danger";
@@ -1063,7 +1063,7 @@ if($activeres1['current_status'] == ST_APPROVED and ($table_name =="supplier_bil
                                 <div class="col p-0">
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$activeres1['id']); ?>" <?php echo $edit_permissionbtn; ?>>
                                         <h6 class="f-w-600 mb-1 f-14"><?php echo $_SESSION['users'][$activeres1['originator']]; ?>                                          <?php
-if($activeres1['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or $table_name =="sales_invoices")){
+if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || $table_name =="sales_invoices")){
     $badgeclass = "";
     if($activeres1['pending_amount'] == $activeres1['total_amount']){
         $badgeclass ="label-danger";
@@ -1120,7 +1120,7 @@ if($activeres1['current_status'] == ST_APPROVED and ($table_name =="supplier_bil
                                     <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$activeres1['id']); ?>" <?php echo $edit_permissionbtn; ?>>
                                         <h6 class="f-w-600 mb-1 f-14"><?php echo $_SESSION['users'][$activeres1['originator']]; ?>
                                             <?php
-if($activeres1['current_status'] == ST_APPROVED and ($table_name =="supplier_bills" or $table_name =="sales_invoices")){
+if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || $table_name =="sales_invoices")){
     $badgeclass = "";
     if($activeres1['pending_amount'] == $activeres1['total_amount']){
         $badgeclass ="label-danger";

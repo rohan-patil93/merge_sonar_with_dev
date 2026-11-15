@@ -4,10 +4,10 @@ include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
 }
-if(isset($_GET['Rid']) and $_GET['Rid']!=""){
+if(isset($_GET['Rid']) && $_GET['Rid']!=""){
 	$idvalue = explode(':',encodeId($_GET['Rid']));
   	$employee_id = $idvalue[1];
-}elseif(isset($_POST['emp_id']) and $_POST['emp_id']!=""){
+}elseif(isset($_POST['emp_id']) && $_POST['emp_id']!=""){
   	$employee_id = $_POST['emp_id'];
 }else{
   	$employee_id = $_SESSION['emp_id'];
@@ -882,13 +882,13 @@ function insertReleive(){
 			   		<?php } ?>
 			   		<?php if($bank_work_flow == 'Y'){
 			            $fieldaccesright = $vafield['bank_details'];
-			            if($fieldaccesright['access'] !="NA" and $fieldaccesright['field']['bank_details']!="NA"){
+			            if($fieldaccesright['access'] !="NA" && $fieldaccesright['field']['bank_details']!="NA"){
 			        ?>
 					<div class="card">
 						<div class="card-header">
 						    <h5><?php echo __('Bank Details'); ?></h5>
 						    <div class="card-header-right" id="bank_details_employee_btn">
-						    	<?php if($fieldaccesright['access'] !="V" and $fieldaccesright['field']['bank_details']!="V"){ ?>
+						    	<?php if($fieldaccesright['access'] !="V" && $fieldaccesright['field']['bank_details']!="V"){ ?>
 						    	<button class="btn <?php echo $accessbtnclasssuccess; ?>" onclick="addBankRequest()"><i class="icofont icofont-plus icon-white "></i> <?php echo __('Add Bank Request'); ?></button>
 						    	<?php } ?>
 						    </div>
@@ -1007,7 +1007,7 @@ function insertReleive(){
 
 <?php
    $fieldaccesright = $vafield['employee_other_access'];
-   if($fieldaccesright['access'] !="NA" and $fieldaccesright['field']['employee_other_access']!="NA"){
+   if($fieldaccesright['access'] !="NA" && $fieldaccesright['field']['employee_other_access']!="NA"){
 	?>
 <div class="card">
 <div class="card-header">
@@ -1071,13 +1071,13 @@ function insertReleive(){
 					<?php } ?>
 			   		<?php
 			            $fieldaccesright = $vafield['experience_details'];
-			            if($fieldaccesright['access'] !="NA" and $fieldaccesright['field']['employee_experiances']!="NA"){
+			            if($fieldaccesright['access'] !="NA" && $fieldaccesright['field']['employee_experiances']!="NA"){
 			        ?>
 					<div class="card latest-update-card" id="experience_details_div">
 						<div class="card-header">
 						    <h5><?php echo __('Employment History'); ?></h5>
 						    <div class="card-header-right" id="experience_details_employee_btn">
-						    	<?php if($fieldaccesright['access'] !="V" and $fieldaccesright['field']['employee_experiances']!="V"){ ?>
+						    	<?php if($fieldaccesright['access'] !="V" && $fieldaccesright['field']['employee_experiances']!="V"){ ?>
 						    	<button class="btn <?php echo $accessbtnclass; ?>" onclick="editEmployeeProfile('experience_details','INSERT','ajaxemployeeexperiencedetailstab','experience_details_employee_btn','employment_history_form','emp_work_experiences')"><i class="ti-pencil text-white"></i> <?php echo __('Edit'); ?></button>
 						    	<?php } ?>
 						    </div>
@@ -1102,13 +1102,13 @@ function insertReleive(){
 					<?php } ?>
 			   		<?php
 			            $fieldaccesright = $vafield['employee_qualifications'];
-			            if($fieldaccesright['access'] !="NA" and $fieldaccesright['field']['employee_qualifications']!="NA"){
+			            if($fieldaccesright['access'] !="NA" && $fieldaccesright['field']['employee_qualifications']!="NA"){
 			        ?>
 					<div class="card latest-update-card" id="employee_qualifications_div">
 						<div class="card-header">
 						    <h5><?php echo __('Educational Details'); ?></h5>
 						    <div class="card-header-right" id="employee_qualifications_employee_btn">
-						    	<?php if($fieldaccesright['access'] !="V" and $fieldaccesright['field']['employee_qualifications']!="V"){ ?>
+						    	<?php if($fieldaccesright['access'] !="V" && $fieldaccesright['field']['employee_qualifications']!="V"){ ?>
 						    	<button class="btn <?php echo $accessbtnclass; ?>" onclick="editEmployeeProfile('employee_qualifications','INSERT','ajaxemployeeemployeequalificationstab','employee_qualifications_employee_btn','employee_qualifications_form','emp_educations')"><i class="ti-pencil text-white"></i> <?php echo __('Edit'); ?></button>
 						    	<?php } ?>
 						    </div>
@@ -1133,13 +1133,13 @@ function insertReleive(){
 					<?php } ?>
 					<?php
 			            $fieldaccesright = $vafield['employee_dependents'];
-			            if($fieldaccesright['access'] !="NA" and $fieldaccesright['field']['employee_dependents']!="NA"){
+			            if($fieldaccesright['access'] !="NA" && $fieldaccesright['field']['employee_dependents']!="NA"){
 			        ?>
 					<div class="card" id="employee_dependents_div">
 						<div class="card-header">
 						    <h5><?php echo __('Dependents'); ?></h5>
 						    <div class="card-header-right" id="employee_dependents_employee_btn">
-						    	<?php if($fieldaccesright['access'] !="V" and $fieldaccesright['field']['employee_dependents']!="V"){ ?>
+						    	<?php if($fieldaccesright['access'] !="V" && $fieldaccesright['field']['employee_dependents']!="V"){ ?>
 			  					<button class="btn <?php echo $accessbtnclass; ?>" onclick="editEmployeeProfile('employee_dependents','INSERT','ajaxemployeeemployeedependentstab','employee_dependents_employee_btn','employee_dependents_form','emp_dependents')"><i class="ti-pencil text-white"></i> <?php echo __('Edit'); ?></button>
 			  					<?php } ?>
 						    </div>
@@ -1164,13 +1164,13 @@ function insertReleive(){
 					<?php } ?>
 					<?php
 			            $fieldaccesright = $vafield['employee_contacts'];
-			            if($fieldaccesright['access'] !="NA" and $fieldaccesright['field']['employee_contacts']!="NA"){
+			            if($fieldaccesright['access'] !="NA" && $fieldaccesright['field']['employee_contacts']!="NA"){
 			        ?>
 					<div class="card" id="employee_contacts_div">
 						<div class="card-header">
 						    <h5><?php echo __('Emergency Contact'); ?></h5>
 						    <div class="card-header-right" id="employee_contacts_employee_btn">
-						    	<?php if($fieldaccesright['access'] !="V" and $fieldaccesright['field']['employee_contacts']!="V"){ ?>
+						    	<?php if($fieldaccesright['access'] !="V" && $fieldaccesright['field']['employee_contacts']!="V"){ ?>
 						    	<button class="btn <?php echo $accessbtnclass; ?>" onclick="editEmployeeProfile('employee_contacts','INSERT','ajaxemployeeemployeecontactstab','employee_contacts_employee_btn','employee_contacts_form','emp_contacts')"><i class="ti-pencil text-white"></i> <?php echo __('Edit'); ?></button>
 						    	<?php } ?>
 						    </div>
@@ -1195,13 +1195,13 @@ function insertReleive(){
 					<?php } ?>
 					<?php
 			            $fieldaccesright = $vafield['emp_visa'];
-			            if($fieldaccesright['access'] !="NA" and $fieldaccesright['field']['emp_visa']!="NA"){
+			            if($fieldaccesright['access'] !="NA" && $fieldaccesright['field']['emp_visa']!="NA"){
 			        ?>
 					<div class="card" id="visa_detail_div">
 						<div class="card-header">
 						    <h5><?php echo __('VISA Details'); ?></h5>
 						    <div class="card-header-right" id="employee_emp_visa_btn">
-						    	<?php if($fieldaccesright['access'] !="V" and $fieldaccesright['field']['emp_visa']!="V"){ ?>
+						    	<?php if($fieldaccesright['access'] !="V" && $fieldaccesright['field']['emp_visa']!="V"){ ?>
 						    	<button class="btn <?php echo $accessbtnclass; ?>" onclick="editEmployeeProfile('emp_visa','INSERT','ajaxemployeeempvisatab','employee_emp_visa_btn','emp_visa_form','emp_visa')"><i class="ti-pencil text-white"></i> <?php echo __('Edit'); ?></button>
 						    	<?php } ?>
 						    </div>
@@ -1226,13 +1226,13 @@ function insertReleive(){
 					<?php } ?>
 					<?php
 			            $fieldaccesright = $vafield['emp_skills'];
-			            if($fieldaccesright['access'] !="NA" and $fieldaccesright['field']['emp_skills']!="NA"){
+			            if($fieldaccesright['access'] !="NA" && $fieldaccesright['field']['emp_skills']!="NA"){
 			        ?>
 					<div class="card" >
 						<div class="card-header">
 						    <h5><?php echo __('Skills Details'); ?></h5>
 						    <div class="card-header-right" id="employee_emp_skills_btn">
-						    	<?php if($fieldaccesright['access'] !="V" and $fieldaccesright['field']['emp_skills']!="V"){ ?>
+						    	<?php if($fieldaccesright['access'] !="V" && $fieldaccesright['field']['emp_skills']!="V"){ ?>
 						    		<button class="btn <?php echo $accessbtnclasssuccess; ?> " onclick="skillpopupNew()"><i class="icofont icofont-plus icon-white "></i> <?php echo __('Add Skill'); ?></button>
 						    	<?php } ?>
 						    </div>

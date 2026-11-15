@@ -660,12 +660,12 @@ function extendAgreement(){
 // 	$dyncss = 'style="pointer-events: none; opacity: 0.6;"';
 // }
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,ST_CALLBACK,'');
-if(in_array($property_tenant_details['current_status'], (array)$check_array) and $property_tenant_details['originator'] == $_SESSION['userid'] or $property_tenant_details['originator'] ==""){
+if(in_array($property_tenant_details['current_status'], (array)$check_array) && $property_tenant_details['originator'] == $_SESSION['userid'] || $property_tenant_details['originator'] ==""){
 
 }else{
 	$dyncss = 'style="pointer-events: none; opacity: 0.6;"';
 }
-if($property_tenant_details['parent_id'] !="0" and $property_tenant_details['originator'] !=""){
+if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['originator'] !=""){
 	$un_lockdyncss = "style='pointer-events: none; opacity: 0.6;'";
 }
 ?>
@@ -961,7 +961,7 @@ if($property_tenant_details['parent_id'] !="0" and $property_tenant_details['ori
 						<?php foreach($billtoberaisedtype as $rbr) {  ?>
 							<div class="radio radio-inline">
                               <label class="form-label">
-                                <input type="radio" name="bill_to_be_raised" value="<?php echo $rbr['genc_detail_code'];?>" <?php echo $property_tenant_details['bill_to_be_raised'] == $rbr['genc_detail_code'] || ($rbr['bill_to_be_raised'] =="" and $rbr['genc_detail_code'] == 'M')?"checked":""; ?> >
+                                <input type="radio" name="bill_to_be_raised" value="<?php echo $rbr['genc_detail_code'];?>" <?php echo $property_tenant_details['bill_to_be_raised'] == $rbr['genc_detail_code'] || ($rbr['bill_to_be_raised'] =="" && $rbr['genc_detail_code'] == 'M')?"checked":""; ?> >
                                 <i class="helper"></i><?php echo $rbr['genc_detail_name'];?>
                               </label>
                             </div>
@@ -1026,7 +1026,7 @@ if($property_tenant_details['parent_id'] !="0" and $property_tenant_details['ori
 								<div class="form-radio">
 									<div class="radio radio-inline">
 			                          <label class="form-label">
-			                            <input type="radio" name="utility_bill_auto_and_fix[<?php echo $rbt['id'];?>]" value="A" <?php echo ($rbtyp['utility_bill_auto_and_fix'] == 'A' or $rbtyp['utility_bill_auto_and_fix'] == '')?"checked":""; ?> onchange="getUtilityBillAutoAndFix(<?php echo $rbt['id'];?>,this.value)">
+			                            <input type="radio" name="utility_bill_auto_and_fix[<?php echo $rbt['id'];?>]" value="A" <?php echo ($rbtyp['utility_bill_auto_and_fix'] == 'A' || $rbtyp['utility_bill_auto_and_fix'] == '')?"checked":""; ?> onchange="getUtilityBillAutoAndFix(<?php echo $rbt['id'];?>,this.value)">
 			                            <i class="helper"></i><?php echo __('Actual'); ?>
 			                          </label>
 			                        </div>
@@ -1255,7 +1255,7 @@ if($property_tenant_details['parent_id'] !="0" and $property_tenant_details['ori
 				<h5><?php echo __('Rental Chart'); ?></h5>
 				<div class="card-header-right table-card-header">
 					<?php
-					if($property_tenant_details['lock_tenant']=='0' and $property_tenant_details['originator']==$_SESSION['userid'] and $property_tenant_details['agreement_expiry_date']==''){ ?>
+					if($property_tenant_details['lock_tenant']=='0' && $property_tenant_details['originator']==$_SESSION['userid'] && $property_tenant_details['agreement_expiry_date']==''){ ?>
 						<button type="button" class="cursor-pointer float-left btn btn-info m-l-10" onclick="extendAgreement()"><i class="ti-reload
  text-white"></i> <?php echo __('Extend Agreement'); ?></button>
 					<?php } ?>
@@ -1268,11 +1268,11 @@ if($property_tenant_details['parent_id'] !="0" and $property_tenant_details['ori
 			<div class="card-body ">
 				<div class="text-right">
 					<?php
-					if($property_tenant_details['lock_tenant']=='0' and $property_tenant_details['originator']==$_SESSION['userid'] and $property_tenant_details['agreement_expiry_date']==''){ ?>
+					if($property_tenant_details['lock_tenant']=='0' && $property_tenant_details['originator']==$_SESSION['userid'] && $property_tenant_details['agreement_expiry_date']==''){ ?>
 					<button type="button" class="btn btn-danger m-l-10" onclick="expireTenantAgreement('<?php echo $rid; ?>')"><i class="ti-unlock text-white"></i>  <?php echo __('Expire Agreement'); ?></button>
 				<?php }  ?>
 				<?php
-					 if($property_tenant_details['lock_tenant']=='0' and $property_tenant_details['originator']==$_SESSION['userid'] and $property_tenant_details['agreement_expiry_date']==''){ ?>
+					 if($property_tenant_details['lock_tenant']=='0' && $property_tenant_details['originator']==$_SESSION['userid'] && $property_tenant_details['agreement_expiry_date']==''){ ?>
 					<button type="button" class="cursor-pointer float-left btn btn-primary" onclick="addOpeningBalances('<?php echo $rid; ?>')"><i class="ti-plus text-white"></i> <?php echo __('Opening Balance'); ?></button>
 				<?php } ?>
 				</div>
