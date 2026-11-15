@@ -54,7 +54,6 @@ class vendorPortelUserClass extends userClass
 		$notdataa = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $res['LASTID'], 'application_table_name' => 'application_tickets', 'type' => 'ACTION', 'notification_users' => $user_ids, 'option' => $option, 'assigner_id' => $post['user_id']);
 		$emails = $this->sendNotificationAndEmails($notdataa, $emailarray, 59);
 
-		$notdataa['type'] = "Ticket Submited To - " . $adminres->display_name;
 		$notdataa['type'] = "INFORMATION";
 		$notdataa['notification_users'] = array($post['user_id']);
 		$emails = $this->tosendnotifiations($notdataa);
@@ -483,7 +482,6 @@ class vendorPortelUserClass extends userClass
 		$return['post'] = $post;
 		$fielddata = json_encode($post['fieldgrpaccess']);
 		$dashboard_field_list = json_encode($post['dashboard_field_list']);
-		$return['post'] = $post;
 		if (isset($post['Rid']) AND $post['Rid'] != "") {
 			$post_array = array("role_short_code" => $post['role_short_code'], "field_list" => $fielddata, "dashboard_field_list" => $dashboard_field_list, "updated_by" => $post['user_id'], "updated_date" => date('Y-m-d H:i:s'));
 			$res = $callConfig->updateRecord('vendor_display_fields', $post_array, 'id', $post['Rid']);
