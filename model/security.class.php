@@ -150,7 +150,7 @@ class SecurityClass
 }
 
     // --- Add/replace your function with this compatible superset ---
-function getVisitorsDataBasedOnDate($get)
+public function getVisitorsDataBasedOnDate($get)
 {
     global $callConfig;
     $return = array();
@@ -2384,7 +2384,7 @@ function getVisitorsDataBasedOnDate($get)
 
     return $return;
 }
-function getVisitorProfilesReportData($get)
+public function getVisitorProfilesReportData($get)
     {
         global $callConfig;
         $return = array();
