@@ -79,10 +79,10 @@ if (count((array)$rows) > 0) {
                 <td><?php echo $typeName; ?></td>
                 <td><?php echo $fileCount; ?></td>
                 <td>
-                    <label class="form-label label label-md"
+                    <span class="form-label label label-md d-inline-block fw-bold"
                         style="background:<?php echo $statusBg; ?>; color:<?php echo $statusColor; ?>; border-color:<?php echo $statusBg; ?>;">
                         <?php echo htmlspecialchars(__($statusName)); ?>
-                    </label>
+                    </span>
                 </td>
                 <td><?php echo htmlspecialchars($createdDate); ?></td>
                 <td>
