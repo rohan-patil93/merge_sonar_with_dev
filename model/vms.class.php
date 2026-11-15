@@ -6589,7 +6589,7 @@ class vMSUserClass extends userClass{
 		return $return;
 }
 
-function  vendorstaqAdminDashboard($get){
+public function  vendorstaqAdminDashboard($get){
 	global $callConfig;
 	$month = $get['month'];
 	$year = $get['year'];
@@ -6762,13 +6762,13 @@ function  vendorstaqAdminDashboard($get){
 	return $returnarry;
 }
 
-function vendorlistforadminmanag($get){
+public function vendorlistforadminmanag($get){
 		global $callConfig;
 		$query = "SELECT id, display_name, image, from_date, is_active FROM vendors WHERE company_id=".$get['company_id'];
 		$data = $callConfig->getAllRows($query);
 		return $data;
 	}
-function togetretrivemanageremployeeleaves($get){
+public function togetretrivemanageremployeeleaves($get){
  	global $callConfig;
  	//$get['fromdate'] = date("Y-m-01", strtotime($get['year_month']));
  	//$get['todate'] = date("Y-m-t", strtotime($get['fromdate']));
@@ -6784,7 +6784,7 @@ function togetretrivemanageremployeeleaves($get){
 	return $details;
 }
 
-function togetretrivemanageremployetermination($get){
+public function togetretrivemanageremployetermination($get){
  	global $callConfig;
  	$get['fromdate'] = date("Y-m-01", strtotime($get['year_month']));
  	$get['todate'] = date("Y-m-t", strtotime($get['fromdate']));
@@ -6793,7 +6793,7 @@ function togetretrivemanageremployetermination($get){
 	$details['data'] = $callConfig->getAllRows($query);
 	return $details;
 }
-function  vmssingleemployeedashoard_new($get){
+public function  vmssingleemployeedashoard_new($get){
 		global $callConfig;
 		//print_r($get);
 		$fristdate = date("Y-m-01", strtotime( date( 'Y-m-01' )." -6 months")); 
