@@ -333,7 +333,7 @@ $bank_work_flow = "Y";
 		                    		$visiblebtnstatus =array(ST_ACTIVE,ST_SEND_BACK,ST_CALLBACK);
 		                    		if(in_array($emp_bank['current_status'], (array)$visiblebtnstatus)){
 		                    		?>
-		                    			<span class="float-end cursor-pointer" onclick="addBankRequest('<?php echo $emp_bank['id']; ?>')"><i class="ti-pencil"></i></span>
+		                    			<span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Add bank request'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="float-end cursor-pointer" onclick="addBankRequest('<?php echo $emp_bank['id']; ?>')"><i class="ti-pencil"></i></span>
 		                    	<?php }else{ 
 		                    		$stausresult = $statuse[$emp_bank['current_status']];
 		                    		?>
@@ -770,7 +770,7 @@ $bank_work_flow = "Y";
 		<div class="col-xl-6 col-md-6" >
             <div class="card social-res-card">
                 <div class="card-body">
-                    <label class="form-label d-block"><?php echo __('Skill'); ?> <?php if($fieldaccesright['field']['emp_skills']!="V"){  ?><span class="float-end cursor-pointer" onclick="skillpopupNew('<?php echo $emp_skil['id']; ?>')"><i class="ti-pencil"></i></span><?php } ?></label>
+                    <label class="form-label d-block"><?php echo __('Skill'); ?> <?php if($fieldaccesright['field']['emp_skills']!="V"){  ?><span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Skillpopup new'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="float-end cursor-pointer" onclick="skillpopupNew('<?php echo $emp_skil['id']; ?>')"><i class="ti-pencil"></i></span><?php } ?></label>
                    	<p><?php echo emptytextdashShow($skills[$emp_skil['skill_id']]['skill']); ?></p>
                    	<label class="form-label d-block"><?php echo __('Years Of Experience'); ?></label>
                     <p><?php echo emptytextdashShow($emp_skil['years_of_exp']); ?></p>
@@ -807,61 +807,61 @@ $bank_work_flow = "Y";
 		  	$readonlycheck = $fieldaccesright['field']['emp_code'] !="E"?"custom_readonly":""; ?>
 			<div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Employee Code'); ?> </label>
-		        <input class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" name="emp_code" value="<?php echo $data['emp_code']; ?>" readonly/>
+		        <input aria-label="<?= htmlspecialchars(__('Emp code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" name="emp_code" value="<?php echo $data['emp_code']; ?>" readonly/>
 		    </div>
 		<?php }if($fieldaccesright['field']['email_id']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['email_id'] !="E"?"custom_readonly":""; ?>
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Email'); ?> </label>
-		        <input class="form-control form-control-lg  <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter email'); ?>" name="email_id" value="<?php echo $data['email_id']; ?>" readonly/>
+		        <input aria-label="<?= htmlspecialchars(__('Email id'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg  <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter email'); ?>" name="email_id" value="<?php echo $data['email_id']; ?>" readonly/>
 		    </div>
 		<?php }if($fieldaccesright['field']['first_name']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['first_name'] !="E"?"custom_readonly":""; ?>    
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('First Name'); ?>  </label>
-		        <input class="form-control form-control-lg  <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter first Name'); ?>" name="first_name" value="<?php echo $data['first_name']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('First name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg  <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter first Name'); ?>" name="first_name" value="<?php echo $data['first_name']; ?>"/>
 		    </div>
 		<?php }if($fieldaccesright['field']['middle_name']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['middle_name'] !="E"?"custom_readonly":""; ?>   
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Middle Name'); ?> </label>
-		        <input class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter middle Name'); ?>" name="middle_name" value="<?php echo $data['middle_name']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('Middle name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter middle Name'); ?>" name="middle_name" value="<?php echo $data['middle_name']; ?>"/>
 		    </div>
 		<?php }if($fieldaccesright['field']['last_name']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['last_name'] !="E"?"custom_readonly":""; ?>    
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Last Name'); ?> </label>
-		        <input class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter last Name'); ?>" name="last_name" value="<?php echo $data['last_name']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('Last name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter last Name'); ?>" name="last_name" value="<?php echo $data['last_name']; ?>"/>
 		    </div>
 		<?php }if($fieldaccesright['field']['phone']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['phone'] !="E"?"custom_readonly":""; ?>    
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Contact'); ?> </label>
-		        <input class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter Contact'); ?>" name="phone" value="<?php echo $data['phone']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter Contact'); ?>" name="phone" value="<?php echo $data['phone']; ?>"/>
 		    </div>
 		<?php }if($fieldaccesright['field']['address']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['address'] !="E"?"custom_readonly":""; ?>    
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Permanent Address'); ?> </label>
-		        <textarea style="overflow:auto" class="form-control form-control-lg  <?php echo $readonlycheck; ?>" placeholder="<?php echo __('Enter your permanent address'); ?>" name="address"><?php echo $data['address'];?></textarea>
+		        <textarea aria-label="<?= htmlspecialchars(__('Address'), ENT_QUOTES, 'UTF-8'); ?>" style="overflow:auto" class="form-control form-control-lg  <?php echo $readonlycheck; ?>" placeholder="<?php echo __('Enter your permanent address'); ?>" name="address"><?php echo $data['address'];?></textarea>
 		    </div>
 		 <?php }if($fieldaccesright['field']['contact_address']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['contact_address'] !="E"?"custom_readonly":""; ?>   
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Current Address'); ?> </label>
-		        <textarea style="overflow:auto" class="form-control <?php echo $readonlycheck; ?>" placeholder="<?php echo __('Enter your current address'); ?>" name="contact_address"><?php echo $data['contact_address'];?></textarea>
+		        <textarea aria-label="<?= htmlspecialchars(__('Contact address'), ENT_QUOTES, 'UTF-8'); ?>" style="overflow:auto" class="form-control <?php echo $readonlycheck; ?>" placeholder="<?php echo __('Enter your current address'); ?>" name="contact_address"><?php echo $data['contact_address'];?></textarea>
 		    </div>
 		<?php }if($fieldaccesright['field']['post_code']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['post_code'] !="E"?"custom_readonly":""; ?>    
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Postcode'); ?> </label>
-		        <input type="text" class="form-control <?php echo $readonlycheck; ?>" placeholder="<?php echo __('Enter your postcode'); ?>" name="post_code" value="<?php echo $data['post_code']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('Post code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control <?php echo $readonlycheck; ?>" placeholder="<?php echo __('Enter your postcode'); ?>" name="post_code" value="<?php echo $data['post_code']; ?>"/>
 		    </div>
 		<?php }if($fieldaccesright['field']['fax']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['fax'] !="E"?"custom_readonly":""; ?>    
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Fax'); ?> </label>
-		        <input class="form-control <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter fax'); ?>" name="fax" value="<?php echo $data['fax']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('Fax'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter fax'); ?>" name="fax" value="<?php echo $data['fax']; ?>"/>
 		    </div>
 		<?php }if($fieldaccesright['field']['image']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['image'] !="E"?"custom_readonly":""; ?>    
@@ -873,7 +873,7 @@ $bank_work_flow = "Y";
 	                        <span> <i class="fa fa-camera"></i> <?php echo __('&nbsp; Change Image'); ?></span>
 	                    </label>
 	                    <input type="file" name="profile_image" id="profile_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-	                    <img src="<?php echo "uploads/all/".$data['image'] ; ?>" id="outputprofile_image" width="200" onerror="this.src='uploads/all/no-image.jpg';"/>
+	                    <img alt="" src="<?php echo "uploads/all/".$data['image'] ; ?>" id="outputprofile_image" width="200" onerror="this.src='uploads/all/no-image.jpg';"/>
 	                    <input type="hidden" name="old_profile_image" value="<?php echo $data['image'] ;  ?>">
 	                </div>
 	            </div>
@@ -893,7 +893,7 @@ $bank_work_flow = "Y";
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Department'); ?> </label>
 		        <div class="<?php echo $readonlycheck; ?>">
-			        <select class ="form-control form-control-lg form-select js-example-basic-single"   name="department_id">
+			        <select aria-label="<?= htmlspecialchars(__('Department id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single"   name="department_id">
 			          	<option value=""><?php echo __('Select Any One'); ?></option>
 			          	<?php foreach ($departments as $departments) {
 			            ?>
@@ -907,7 +907,7 @@ $bank_work_flow = "Y";
 		   	<div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Designation'); ?> </label>
 		        <div class="<?php echo $readonlycheck; ?>">
-			        <select class ="form-control form-control-lg form-select js-example-basic-single" name="designation_id">
+			        <select aria-label="<?= htmlspecialchars(__('Designation id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" name="designation_id">
 					  	<option value=""><?php echo __('Select Any One'); ?></option>
 					  	<?php foreach ($designations as $desigs) {
 					    ?>
@@ -923,7 +923,7 @@ $bank_work_flow = "Y";
 		   	<div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Division'); ?> </label>
 		        <div class="<?php echo $readonlycheck; ?>">
-			        <select class ="form-control form-control-lg form-select js-example-basic-single" onclick="tochangedeparment(this.value)" name="designation_id">
+			        <select aria-label="<?= htmlspecialchars(__('Designation id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" onclick="tochangedeparment(this.value)" name="designation_id">
 					  	<option value=""><?php echo __('Select Any One'); ?></option>
 					  	<?php foreach ($divisions as $desigs) {
 					    ?>
@@ -939,7 +939,7 @@ $bank_work_flow = "Y";
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Band'); ?> </label>
 		        <div class="<?php echo $readonlycheck; ?>">
-			        <select class ="form-control form-control-lg form-select js-example-basic-single" name="band_id" onchange="getBandid(this.value)">
+			        <select aria-label="<?= htmlspecialchars(__('Band id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" name="band_id" onchange="getBandid(this.value)">
 					    <option value=""><?php echo __('Select Any One'); ?></option>
 					    <?php foreach ($employment_bands as $employment_ban) { 
 					      ?>
@@ -955,7 +955,7 @@ $bank_work_flow = "Y";
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Level'); ?> </label>
 		        <div class="<?php echo $readonlycheck; ?>">
-			        <select class ="form-control js-example-basic-single" name="level_id" id="employeement_level">
+			        <select aria-label="<?= htmlspecialchars(__('Level id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control js-example-basic-single" name="level_id" id="employeement_level">
 				      	<option value=""><?php echo __('Select Any One'); ?></option>
 				      	<?php foreach ($employment_levels as $employment_levl) { ?>
 				       	<option <?php if($data['level_id'] == $employment_levl['id']){ ?> selected <?php } ?>  value="<?php echo $employment_levl['id']; ?>" >
@@ -970,7 +970,7 @@ $bank_work_flow = "Y";
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Vertical'); ?> </label>
 		        <div class="<?php echo $readonlycheck; ?>">
-			        <select class ="form-control form-control-lg form-select js-example-basic-single" name="vertical_id">
+			        <select aria-label="<?= htmlspecialchars(__('Vertical id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" name="vertical_id">
 				        <option value=""><?php echo __('Select Any One'); ?></option>
 				        <?php foreach($verticals as $verticals){ ?>
 				         <option <?php if($data['vertical_id'] == $verticals['id']){ ?>selected <?php } ?> value="<?php echo $verticals['id']; ?>" >
@@ -984,28 +984,28 @@ $bank_work_flow = "Y";
 		  	$readonlycheck = $fieldaccesright['field']['hiring_source'] !="E"?"custom_readonly":""; ?>  
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Hiring Source'); ?>  </label>
-		        <input  class="form-control <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter Hiring Source'); ?>" name="hiring_source" value="<?php echo $data['hiring_source']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('Hiring source'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control <?php echo $readonlycheck; ?>" type="text" placeholder="<?php echo __('Enter Hiring Source'); ?>" name="hiring_source" value="<?php echo $data['hiring_source']; ?>"/>
 		    </div>
 		    <?php }if($fieldaccesright['field']['joining_date']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['joining_date'] !="E"?"custom_readonly":""; ?>  
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Date of Joining'); ?> </label>
 		        <div class="<?php echo $readonlycheck; ?>">
-  					<input type="text" class="form-control datepicker" value="<?php echo ($data['joining_date']!="0000-00-00" AND $data['joining_date']!="")?fromDate($data['joining_date']):""; ?>"  name="joining_date" placeholder="<?php echo __('Enter Date of Joining'); ?>"/>
+  					<input aria-label="<?= htmlspecialchars(__('Joining date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" value="<?php echo ($data['joining_date']!="0000-00-00" AND $data['joining_date']!="")?fromDate($data['joining_date']):""; ?>"  name="joining_date" placeholder="<?php echo __('Enter Date of Joining'); ?>"/>
   				</div>
 		    </div>
 		    <?php }if($fieldaccesright['field']['experience_current_organization']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['experience_current_organization'] !="E"?"custom_readonly":""; ?>  
 		    <div class="col-xl-6 mt-2" >
 		    	<label class="form-label"><?php echo __('Experience in Current Organization'); ?> </label>
-		        <input type="number" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Experience in Current Organization'); ?>" name="experience_current_organization" value="<?php echo $data['experience_current_organization']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('Experience current organization'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Experience in Current Organization'); ?>" name="experience_current_organization" value="<?php echo $data['experience_current_organization']; ?>"/>
 		    </div>
 		    <?php }if($fieldaccesright['field']['total_experiance']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['total_experiance'] !="E"?"custom_readonly":""; ?>  
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Total Experience'); ?> </label>
 		        <div class="input-group input-group-button">
-			        <input  type="number" class="form-control form-control-lg width1 <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Total Experience'); ?>"  name="total_experiance" value="<?php echo $data['total_experiance']; ?>"/>
+			        <input aria-label="<?= htmlspecialchars(__('Total experiance'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control form-control-lg width1 <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Total Experience'); ?>"  name="total_experiance" value="<?php echo $data['total_experiance']; ?>"/>
 			        <span class="input-group-text addon-style"><label class=""><?php echo __('Years'); ?></label></span>
 		        </div>
 		    </div>
@@ -1014,7 +1014,7 @@ $bank_work_flow = "Y";
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Relevant Experience'); ?> </label>
 		        <div class="input-group input-group-button">
-		        	<input   type="number" class="form-control form-control-lg width1 <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Relevant Experience'); ?>"  name="relevant_experience" value="<?php echo $data['relevant_experience']; ?>"/>
+		        	<input aria-label="<?= htmlspecialchars(__('Relevant experience'), ENT_QUOTES, 'UTF-8'); ?>"   type="number" class="form-control form-control-lg width1 <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Relevant Experience'); ?>"  name="relevant_experience" value="<?php echo $data['relevant_experience']; ?>"/>
 		        	<span class="input-group-text addon-style"><label class=""><?php echo __('Years'); ?></label></span>
 		        </div>
 		    </div>
@@ -1023,7 +1023,7 @@ $bank_work_flow = "Y";
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Notice Period'); ?> </label>
 		        <div class="input-group input-group-button">
-				   <input  type="number" class="form-control width1 <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Notice Period'); ?>" name="notice_period" value="<?php echo $data['notice_period']; ?>" />
+				   <input aria-label="<?= htmlspecialchars(__('Notice period'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control width1 <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Notice Period'); ?>" name="notice_period" value="<?php echo $data['notice_period']; ?>" />
 				   <span class="input-group-text addon-style"><label class=""><?php echo __('Days'); ?></label></span>
 				</div>
 		    </div>
@@ -1032,7 +1032,7 @@ $bank_work_flow = "Y";
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Work Location'); ?> </label>
 		        <div class="<?php echo $readonlycheck; ?>">
-			        <select class ="form-control js-example-basic-single" name="location_id">
+			        <select aria-label="<?= htmlspecialchars(__('Location id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control js-example-basic-single" name="location_id">
 						<option value=""><?php echo __('Select Any One'); ?></option>
 						  <?php foreach ($locations as $locations) { 
 						    if($locations['parent_location_id'] =='') { ?>
@@ -1047,7 +1047,7 @@ $bank_work_flow = "Y";
 		  	$readonlycheck = $fieldaccesright['field']['employee_type'] !="E"?"custom_readonly":""; ?>  
 		   <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Employment Type'); ?></label>
-		        <span class="float-end btn btn-success" onclick="employementviewhistoryppup(<?php echo $employee_id; ?>)"> <?php echo __('History'); ?> </span>
+		        <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="float-end btn btn-success" onclick="employementviewhistoryppup(<?php echo $employee_id; ?>)"> <?php echo __('History'); ?> </span>
 		        <div class="form-radio <?php echo $readonlycheck; ?>">
 		        <?php
 			     foreach ($employeement_types as $emptypes) {
@@ -1081,13 +1081,13 @@ $bank_work_flow = "Y";
 		  	$readonlycheck = $fieldaccesright['field']['office_phone'] !="E"?"custom_readonly":""; ?>  
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Office Phone'); ?>  </label>
-		        <input  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_phone" placeholder="<?php echo __('Enter Office Phone'); ?>" value="<?php echo $data['office_phone']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('Office phone'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_phone" placeholder="<?php echo __('Enter Office Phone'); ?>" value="<?php echo $data['office_phone']; ?>"/>
 		    </div>
 		    <?php }if($fieldaccesright['field']['office_ext']!="NA"){ 
 		  	$readonlycheck = $fieldaccesright['field']['office_ext'] !="E"?"custom_readonly":""; ?>  
 		    <div class="col-xl-6 mt-2" >
 		        <label class="form-label"><?php echo __('Extension'); ?> </label>
-		        <input  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_ext" placeholder="<?php echo __('Enter Extension'); ?>" value="<?php echo $data['office_ext']; ?>"/>
+		        <input aria-label="<?= htmlspecialchars(__('Office ext'), ENT_QUOTES, 'UTF-8'); ?>"  type="number" class="form-control <?php echo $readonlycheck; ?>" name="office_ext" placeholder="<?php echo __('Enter Extension'); ?>" value="<?php echo $data['office_ext']; ?>"/>
 		    </div>
 			<?php } ?>
 		</div>
@@ -1100,7 +1100,7 @@ $bank_work_flow = "Y";
 		<div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('Date of Birth'); ?> </label>
 		    <div class="<?php echo $readonlycheck; ?>">
-			    <input type="text" class="form-control form-control-lg datepicker"  value="<?php echo  ($data['date_of_birth']!="0000-00-00" AND $data['date_of_birth']!="")?fromDate($data['date_of_birth']):""; ?>"  name="date_of_birth" placeholder="<?php echo __('Enter Date of Birth'); ?>" onchange="selectdateOfBirth(this.value)" />
+			    <input aria-label="<?= htmlspecialchars(__('Date of birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg datepicker"  value="<?php echo  ($data['date_of_birth']!="0000-00-00" AND $data['date_of_birth']!="")?fromDate($data['date_of_birth']):""; ?>"  name="date_of_birth" placeholder="<?php echo __('Enter Date of Birth'); ?>" onchange="selectdateOfBirth(this.value)" />
 			</div>
 	    </div>
 	    <?php } /**if($fieldaccesright['field']['age']!="NA"){ 
@@ -1135,7 +1135,7 @@ $bank_work_flow = "Y";
 			<div class="mt-2" id="marriagedateshow1">
 			  	<label  class="form-label"><?php echo __('Marrige Date'); ?></label>
 			  	<div class="<?php echo $readonlycheck; ?>"> 
-				  	<input type="text"  class="form-control datepicker" name="wedding_date" id="wedding_date" value="<?php echo ($data['wedding_date']!="0000-00-00" AND $data['wedding_date']!="")?fromDate($data['wedding_date']):""; ?>" placeholder="<?php echo __('Enter Marrige Date'); ?>"/>
+				  	<input aria-label="<?= htmlspecialchars(__('Wedding date'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control datepicker" name="wedding_date" id="wedding_date" value="<?php echo ($data['wedding_date']!="0000-00-00" AND $data['wedding_date']!="")?fromDate($data['wedding_date']):""; ?>" placeholder="<?php echo __('Enter Marrige Date'); ?>"/>
 				</div>
 			</div>
 		</div>
@@ -1162,7 +1162,7 @@ $bank_work_flow = "Y";
 	    <div class="col-xl-6 mt-2" >
 		    <label class="form-label"><?php echo __('Blood Group'); ?></label>
 		    <div class="<?php echo $readonlycheck; ?>">
-				<select class ="form-select js-example-basic-single" name="blood_group">
+				<select aria-label="<?= htmlspecialchars(__('Blood group'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-select js-example-basic-single" name="blood_group">
 				  	<option value=""><?php echo __('Select Any One'); ?></option>
 				  	<?php foreach ($blood_groups as $blood_group) { ?>
 				    <option <?php if($data['blood_group'] == $blood_group['id']){ ?>selected  <?php } ?> value="<?php echo $blood_group['id']; ?>" >
