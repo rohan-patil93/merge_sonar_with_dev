@@ -17,8 +17,6 @@ document.addEventListener('error', function (e) {
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 
 <!-- Google font-->
-<!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet"> -->
 <link href="assets/css/fonts.googleapis.css" rel="stylesheet">
 <link href="assets/css/fonts.googleapis_next.css" rel="stylesheet">
 <!-- Required Fremwork -->
@@ -115,20 +113,14 @@ document.addEventListener('error', function (e) {
 <!--forms-widget css-->
 <link rel="stylesheet" type="text/css" href="assets/css/widget.css">
 <?php } ?>
-<!--- <link rel="stylesheet" type="text/css" href="assets/css/widget.css">  -->
-<!-- <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
 
 
-<!---<link rel="stylesheet" type="text/css" href="assets/js/sweetalert.js">  -->
 
 
   <!-- sweet alert framework -->
     <link rel="stylesheet" type="text/css" href="assets/bower_components/sweetalert/css/sweetalert.css">
   <!-- sweet alert framework -->
 
-<!--  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- -->
  <?php if($_SESSION['apply_css']['kanban']==1){ ?>
 <link rel="stylesheet" type="text/css" href="assets/css/kanban_style.css">
 <?php } ?>

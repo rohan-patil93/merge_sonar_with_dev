@@ -191,14 +191,6 @@ function menudisplaytop($menuarray, $type)
 
             <?php if (count($toplistnav) > 0 && in_array('TNL', $_SESSION['role_nav'])) {
                 foreach ($toplistnav as $listnav) { ?>
-                    <!--  <ul class="pcoded-item pcoded-left-item">
-                            <li class="pcoded-hasmenu ">
-                                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                    <span class="pcoded-mtext">Dashboard</span>
-                                </a>
-                            </li>
-                        </ul> -->
                 <?php }
             } ?>
             <?php if (count($topnav) > 0 && in_array('TN', $_SESSION['role_nav'])) {
@@ -219,7 +211,6 @@ function menudisplaytop($menuarray, $type)
                                     <?php } else { ?>
                                         <i class="<?php echo $nav['Menu_Icon']; ?>"></i>
                                     <?php } ?>
-                                    <!-- <i class="feather icon-sidebar"></i> -->
                                 </span>
                                 <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                             </a>

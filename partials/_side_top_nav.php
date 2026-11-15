@@ -71,7 +71,6 @@ function menudisplaytop($menuarray,$type){
                         <?php }else{ ?>
                             <i class="<?php echo $listnav['Menu_Icon']; ?> btn waves-effect waves-light btn-primary btn-icon"></i>
                         <?php } ?>
-                        <!-- <i class="feather icon-sidebar"></i> -->
 		   </span>
                     <span class="pcoded-mtext"><?php echo $nav['Label']; ?></span>
                 </a>

@@ -417,13 +417,6 @@
                     </div>
                 </li>
         <?php } **/?>
-         <!-- <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Office Management">
-            <div class="dropdown-primary" onclick="location.href='index.php?option=COM_VIEW_OFFICE_MANAGEMENT';">
-                <div class="" data-bs-toggle="dropdown">
-                    <i class="ti-agenda" ></i>
-                </div>
-            </div>
-        </li>  -->
         <?php if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids'])){ ?>
         <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Display Attributes">
             <div class="dropdown-primary" role="button" tabindex="0" aria-label="Display Attributes" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_DISPLAY_ATTRIBUTES';">
@@ -432,27 +425,6 @@
                 </div>
             </div>
         </li>
-        <!-- <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Report Builder">
-            <div class="dropdown-primary" onclick="location.href='index.php?option=COM_VIEW_REPORT';">
-                <div class="" data-bs-toggle="dropdown">
-                    <i class="ti-panel"></i>
-                </div>
-            </div>
-        </li> -->
-        <!-- <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="My Reports">
-                 <div class="dropdown-primary" onclick="location.href='index.php?option=COM_LIST_MY_REPORTS';">
-                    <div class="" data-bs-toggle="dropdown">
-                        <i class="ti-pie-chart"></i>
-                 </div>
-             </div>
-         </li>  -->
-        <!-- <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Project Dashboard">
-            <div class="dropdown-primary" onclick="location.href='index.php?option=COM_VIEW_PROJECT_DASH_BOARD';">
-                <div class="" data-bs-toggle="dropdown">
-                    <i class="fa fa-cube" ></i>
-                </div>
-            </div>
-        </li> -->
 
 
 
@@ -561,11 +533,6 @@
                   <i class="ti-angle-down"></i>
               </div>
               <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-             <!--   <li>
-                    <a href="#!">
-                        <i class="ti-settings"></i> Settings
-                    </a>
-                </li>  --->
                 <?php if(!empty($_SESSION['application_languages']) && is_array($_SESSION['application_languages'])){ ?>
                     <li class="px-3 py-2">
                         <label for="application_language_select" class="d-block mb-1"><?= __('Language'); ?></label>
@@ -591,11 +558,6 @@
 
                     </a>
                 </li>
-               <!--  <li>
-                    <a href="?option=COM_LIST_NOT_EMPLOYEE&tab=cp">
-                        <i class="ti-key"></i> Change Password
-                    </a>
-                </li> -->
                 <li>
                     <a href="index.php?option=COM_LIST_INBOX">
                         <i class="ti-email"></i> <?php echo __('My Messages'); ?>
@@ -622,7 +584,6 @@
     <li class="header-notification">
         <div class="dropdown-primary dropdown">
             <div class="dropdown-toggle" data-bs-toggle="dropdown">
-                <!-- <i class="ti-view-grid"></i> -->
                 <img src="assets/images/favicon.ico" class="img-30" alt="" >
             </div>
             <div class="show-notification notification-view dropdown-menu pt-0 pb-0" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
@@ -638,7 +599,6 @@
                     <?php
                     if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids']) || $showswitch == '0'){
                    // if(in_array(ADMIN_ROLES,(array)$_SESSION['role_ids'])){ ?>
-                    <!-- <div class="col-lg-3 text-white">Employee</div> -->
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                         <!-- <input type="checkbox" class="js-switch" id="admin_access_employee" onchange="changeAdminToEmployee()" <?php ?> aria-label="Input"> -->
                         <?php /** ?><div class="toggle-button-cover mt-2">
@@ -730,7 +690,6 @@ if($_SESSION['user_activated'] == 'Y'){ ?>
          <?php if($user['user_type'] !=4 && $user['user_type'] !=3 && $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_logo'] !=""){ ?>
     <li class="nav-item has-megamenu">
     <a class="nav-link  text-primary f-w-600" href="index.php" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_name'];?> Home">
-       <!-- <i class="ti-home btn waves-effect waves-light btn-success btn-icon"></i>  -->
        <img src="uploads/all/<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_logo'];?>" class="img-40" alt="" >
 
     </a>
@@ -955,9 +914,6 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                     <div class="right-icon-control">
                         <div class="input-group input-group-button">
                             <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search a notiffication" aria-label="Search a notiffication">
-                         <!--   <button class="btn btn-primary waves-effect waves-light" type="button">
-                                <i class="ti-search"></i>
-                            </button>  -->
                         </div>
                     </div>
                 </div>
@@ -972,130 +928,6 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
 <!-- [ chat user list ] end -->
 
 
-<!--
-<div id="sidebar" class="users p-chat-user showChat">
-    <div class="had-container">
-        <div class="p-fixed users-main">
-            <div class="user-box">
-                <div class="chat-search-box">
-                    <a class="back_friendlist">
-                        <i class="feather icon-x"></i>
-                    </a>
-                    <div class="right-icon-control">
-                        <div class="input-group input-group-button">
-                            <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search Friend" aria-label="Search Friend">
-                            <button class="btn btn-primary waves-effect waves-light" type="button">
-                                <i class="feather icon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="main-friend-list">
-                    <div class="media userlist-box waves-effect waves-light" data-id="1" data-status="online" data-username="Josephin Doe">
-                        <a class="media-left" href="#!">
-                            <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image " >
-                            <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                            <div class="chat-header">Josephin Doe</div>
-                        </div>
-                    </div>
-                    <div class="media userlist-box waves-effect waves-light" data-id="2" data-status="online" data-username="Lary Doe">
-                        <a class="media-left" href="#!">
-                            <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image" >
-                            <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                            <div class="f-13 chat-header">Lary Doe</div>
-                        </div>
-                    </div>
-                    <div class="media userlist-box waves-effect waves-light" data-id="3" data-status="online" data-username="Alice">
-                        <a class="media-left" href="#!">
-                            <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image" >
-                            <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                            <div class="f-13 chat-header">Alice</div>
-                        </div>
-                    </div>
-                    <div class="media userlist-box waves-effect waves-light" data-id="4" data-status="offline" data-username="Alia">
-                        <a class="media-left" href="#!">
-                            <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image" >
-                            <div class="live-status bg-default"></div>
-                        </a>
-                        <div class="media-body">
-                            <div class="f-13 chat-header">Alia<small class="d-block text-muted">10 min ago</small></div>
-                        </div>
-                    </div>
-                    <div class="media userlist-box waves-effect waves-light" data-id="5" data-status="offline" data-username="Suzen">
-                        <a class="media-left" href="#!">
-                            <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image" >
-                            <div class="live-status bg-default"></div>
-                        </a>
-                        <div class="media-body">
-                            <div class="f-13 chat-header">Suzen<small class="d-block text-muted">15 min ago</small></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <!-- [ chat user list ] end -->
 
-<!-- [ chat message ] start
-<div class="showChat_inner">
-    <div class="d-flex chat-inner-header">
-        <a class="back_chatBox">
-            <i class="feather icon-x"></i> Josephin Doe
-        </a>
-    </div>
-    <div class="main-friend-chat">
-        <div class="d-flex chat-messages">
-            <a class="media-left photo-table" href="#!">
-                <div class="flex-shrink-0">
-                    <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image" >
-                </div>
-            </a>
-            <div class="flex-grow-1 chat-menu-content">
-                <div class="">
-                    <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
-                </div>
-                <p class="chat-time">8:20 a.m.</p>
-            </div>
-        </div>
-        <div class="d-flex chat-messages">
-            <div class="flex-grow-1 chat-menu-reply">
-                <div class="">
-                    <p class="chat-cont">Ohh! very nice</p>
-                </div>
-                <p class="chat-time">8:22 a.m.</p>
-            </div>
-        </div>
-        <div class="d-flex chat-messages">
-            <a class="media-left photo-table" href="#!">
-                <div class="flex-shrink-0">
-                    <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image" >
-                </div>
-            </a>
-            <div class="media-body chat-menu-content">
-                <div class="">
-                    <p class="chat-cont">can you come with me?</p>
-                </div>
-                <p class="chat-time">8:20 a.m.</p>
-            </div>
-        </div>
-    </div>
-    <div class="chat-reply-box">
-        <div class="right-icon-control">
-            <div class="input-group input-group-button">
-                <input type="text" class="form-control" placeholder="Write hear . . " aria-label="Write hear . .">
-                <button class="btn btn-primary waves-effect waves-light" type="button">
-                    <i class="feather icon-message-circle"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-         [ chat message ] end -->
 
