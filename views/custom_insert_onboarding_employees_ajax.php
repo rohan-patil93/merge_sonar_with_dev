@@ -325,7 +325,7 @@ $bank_work_flow = "Y";
 				<div class="col-xl-4 col-md-4" >
 		            <div class="card social-res-card">
 		                <div class="card-body">
-		                    <label class="form-label d-block "><?php echo __('Bank'); ?> 
+		                    <span class="form-label d-block  fw-bold"><?php echo __('Bank'); ?> 
 		                    	<?php if($fieldaccesright['access'] !="V" AND $fieldaccesright['field']['bank_details']!="V"){ ?>
 		                    	<?php if($emp_bank['activation_status'] == 'Y'){ ?>
 		                    		<span class="form-label label label-warning float-end d-inline-block fw-bold"><?php echo __('Active'); ?></span>
@@ -340,7 +340,7 @@ $bank_work_flow = "Y";
 		                    		<span class="form-label label float-end d-inline-block fw-bold" style="color: <?php echo "#".$stausresult['color']; ?>;    background:  <?php echo $stausresult['background_color']; ?>; border-color: <?php echo $stausresult['background_color']; ?>;" ><?php echo $emp_bank_status[$emp_bank['current_status']]['name']; ?></span>
 		                    		
 		                    	<?php } } }?>
-		                    </label>
+		                    </span>
 		                   	<p><?php echo $banks[$emp_bank['bank_id']]['bank_name']!=""?$banks[$emp_bank['bank_id']]['bank_name']:"-";?></p>
 		                   	
 		                   	<span class="form-label d-block fw-bold"><?php echo __('IFSC Code'); ?></span>
@@ -1108,7 +1108,7 @@ $bank_work_flow = "Y";
 
 		  	?> 
 	    <div class="col-xl-6 mt-2" >
-		    <label class="form-label"><?php echo __('Age In Years'); ?> </label>
+		    <span class="form-label d-inline-block fw-bold"><?php echo __('Age In Years'); ?> </span>
 		    <input type="text" class="form-control <?php echo $readonlycheck; ?>"  value="<?php echo $agecalc; ?>" name="age" id="age" readonly/>
 	    </div>
 	    <?php } **/ if($fieldaccesright['field']['marital_status']!="NA"){ 
