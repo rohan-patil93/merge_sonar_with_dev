@@ -31,7 +31,7 @@ $jsondecode = json_decode($jsondecode,1);
 					<div class="card-header-right table-card-header mb-2">
 				<label class="form-label  col-form-label m-r-20"><?= __("User List") ?></label>		
 
-<select class="form-select js-example-basic-single " id="hid_userid" onchange="usertree(this.value)">
+<select aria-label="<?= htmlspecialchars(__('Hid userid'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " id="hid_userid" onchange="usertree(this.value)">
 	<?php foreach($jsondecode as $dt){ ?>
 		<option value="<?php echo $dt['id']; ?>" <?php echo $dt['id']==$_SESSION['userid']?"selected":"";  ?>><?php echo $dt['display_name']; ?></option>
 	
