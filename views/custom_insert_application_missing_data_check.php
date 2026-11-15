@@ -178,7 +178,7 @@ echo "<pre>"; print_r($result);echo "</pre>";
 			    		<textarea type="text" class="form-control" name="extra_message[]" id="extra_message_<?php echo $im; ?>" aria-label="Extra Message"><?php echo $ttj['extra_message']; ?></textarea> 
 			    	</div>
 			    	<div class="col-lg-1">
-			    		<i class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow('<?php echo $rowid; ?>')"></i>
+			    		<i role="button" tabindex="0" aria-label="Remove" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow('<?php echo $rowid; ?>')"></i>
 			    	</div>
 			    </div>
 			<?php $im++; } ?>
