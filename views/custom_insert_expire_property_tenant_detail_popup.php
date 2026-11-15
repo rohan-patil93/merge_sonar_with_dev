@@ -116,11 +116,11 @@ $property_tenant_details = $result['property_tenant_details'];
 				<div class="row">
 					<div class="form-group col-lg-6">
 						<label class="form-label"><?php echo __('Tenant Agreement Expiry Date'); ?> <span class="text-danger">*</span></label>
-						<input type="text" class="form-control datepicker" name="un_lock_date" id="un_lock_date" onchange="GetDateToRentalInvoices()">
+						<input aria-label="<?= htmlspecialchars(__('Un lock date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="un_lock_date" id="un_lock_date" onchange="GetDateToRentalInvoices()">
 					</div>
 					<div class="form-group col-lg-6">
 						<label class="form-label "><?php echo __('Remarks'); ?> <span class="text-danger">*</span></label>
-						<textarea class="form-control" name="remarks" id="remarks"></textarea>
+						<textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="remarks" id="remarks"></textarea>
 					</div>
 				</div>
 				<input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>"> 
