@@ -370,7 +370,7 @@ function getnamelist(){
                                  <div class="dropdown-menu">
                                     <?php  foreach ($qustion_types as $key => $value) {
                               //$question_types[$value['genc_detail_code']]  = $value['genc_detail_code']; ?>
-                              <a href="#" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo htmlspecialchars(__($value['genc_detail_name'] ?? '')); ?>')" class="dropdown-item">  <?php echo htmlspecialchars(__($value['genc_detail_name'] ?? '')); ?></a>
+                              <a href="#top" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo htmlspecialchars(__($value['genc_detail_name'] ?? '')); ?>')" class="dropdown-item">  <?php echo htmlspecialchars(__($value['genc_detail_name'] ?? '')); ?></a>
                            <?php } ?>
                         </div>
                      </div>
