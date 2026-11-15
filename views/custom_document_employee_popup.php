@@ -109,7 +109,7 @@ if(isset($_REQUEST['month'])){
 					<td class="p-2">
 						<div class="align-middle">
 							<?php if($row['image']!="") {?>
-								<img src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" onerror="this.src='uploads/all/no-image.jpg';">
+								<img alt="" src="uploads/all/<?php echo $row['image']; ?>"   class="img-radius img-50 align-top m-r-15" onerror="this.src='uploads/all/no-image.jpg';">
 							<?php } else { ?>
 								<span  alt="<?= __('user image') ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
 							<?php } ?>
@@ -131,7 +131,7 @@ if(isset($_REQUEST['month'])){
 					</td>
 					<td class="p-2">
 						<p>
-							<span class="f-14 f-w-600  text-danger cursor-pointer" onclick="assignemp(<?php echo $row['id']; ?>)"> <i class="icofont icofont-ui-delete"></i></span>
+							<span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Assignemp'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="f-14 f-w-600  text-danger cursor-pointer" onclick="assignemp(<?php echo $row['id']; ?>)"> <i class="icofont icofont-ui-delete"></i></span>
 						</p>
 					</td>
 				</tr>
