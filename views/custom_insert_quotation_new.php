@@ -2571,9 +2571,9 @@ if($checktimeprint > 0){
                         <div class="dropdown-primary dropdown open">
                             <button class="btn btn-primary dropdown-toggle waves-effect waves-light " type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?php echo __('Request'); ?></button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                <a class="dropdown-item waves-light waves-effect" href="#" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','requisitions')"><?php echo __('Requisitions'); ?></a>
-                                <a class="dropdown-item waves-light waves-effect" href="#" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','quotations')"><?php echo __('Quotations'); ?></a>
-                                <a class="dropdown-item waves-light waves-effect" href="#" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','purchase_orders')"><?php echo __('Purchase Order'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect" href="#top" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','requisitions')"><?php echo __('Requisitions'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect" href="#top" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','quotations')"><?php echo __('Quotations'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect" href="#top" onclick="requestDocumentsCreation('<?php echo $table_name; ?>','<?php echo $rid; ?>','purchase_orders')"><?php echo __('Purchase Order'); ?></a>
                             </div>
                         </div>
                     <?php } ?>
