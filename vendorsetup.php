@@ -151,6 +151,13 @@ foreach($notificationlist as $notifcn){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+/* Image fallback: replaces the former inline onerror="this.src='...'" handlers (same behaviour; stops if the fallback itself fails). */
+document.addEventListener('error', function (e) {
+    var t = e.target, fb = t && t.tagName === 'IMG' ? t.getAttribute('data-onerror-src') : null;
+    if (fb && t.getAttribute('src') !== fb) { t.src = fb; }
+}, true);
+</script>
   <title>Infistaq | Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -857,7 +864,7 @@ if($register_data['current_status'] !=""){
                               </label>
                               <input  type="file" name="logo_image" id="display_logo" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/ title="Logo Image" aria-label="Logo Image">
                               <input type="hidden" name="logo_remove" >
-                              <img src="<?php echo $logo; ?>" id="outputdisplay_logo" width="200"  onerror="this.src='uploads/all/no-image.jpg';" alt="" />
+                              <img src="<?php echo $logo; ?>" id="outputdisplay_logo" width="200"  data-onerror-src="uploads/all/no-image.jpg" alt="" />
                             </div>
                           </div>  
                           <span class="form-text text-muted"><?php //echo $helptext['logo'];?> </span>
