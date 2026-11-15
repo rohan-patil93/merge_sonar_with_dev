@@ -319,7 +319,7 @@ function submitsurvey(){
                 $selectedoption =json_decode($markedanswer[$display_questions[$questionid]['queid']],1)[0];
                 ?>
 
-                <label class="mt-10"><?php echo __('Scale from 1 to:'); ?> <?php echo $option;?></label>
+                <span class="mt-10 d-inline-block fw-bold" style="margin-bottom:5px"><?php echo __('Scale from 1 to:'); ?> <?php echo $option;?></span>
                 <input type="number" <?php if($display_questions[$questionid]['require_response']=="0") echo __('required'); ?> id="response_option_scale_<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]" class="form-control col-md-5" value="<?php echo $markedanswer;?>" placeholder="<?php echo $selectedoption;?>"> 
                 <?php             
               }
