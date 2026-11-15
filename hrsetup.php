@@ -1151,7 +1151,7 @@ function addslabrows(){
             <div class="card-body">
               <div class="form-group row">
                 <div class="form-group col-lg-6">
-                  <label>PT Number</label>
+                  <span class="d-inline-block fw-bold" style="margin-bottom:5px">PT Number</span>
                   <div class="input-group input-icon-right">
                     <input type="text" class="form-control"  name="pt_number" placeholder="<?php echo $placeholder['pt'];?>" title="Pt Number" aria-label="Pt Number">
 
@@ -1256,7 +1256,7 @@ function addslabrows(){
      <div class="card-body">
       <div class="form-group row">
         <div class="form-group col-lg-6">
-          <div> <label>State</label> </div>
+          <div> <span class="d-inline-block fw-bold" style="margin-bottom:5px">State</span> </div>
           <select class="form-select js-example-basic-single" name="lwf_state_id" title="Lwf State Id" aria-label="Lwf State Id">
             <option> Select Any One State</option>
             <?php foreach ($statelist as $statevalue)  { ?>
