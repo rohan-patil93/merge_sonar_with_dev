@@ -827,7 +827,7 @@ if(catlink=='PTX'){
 
                                                         <input type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   $placevalue[$value['id']]['yearly_amount']; ?>" class="form-control text-right width1"placeholder="0.00" aria-label="<?php echo __('Amount Annually'); ?>">
 
-                                                        <a href="#" class="mt-6" onclick="dynamicinformationopup(<?php echo "'".$note."'"; ?>)">&nbsp;<i class="fa fa-info-circle f-14"></i></a>
+                                                        <a href="#top" class="mt-6" onclick="dynamicinformationopup(<?php echo "'".$note."'"; ?>)">&nbsp;<i class="fa fa-info-circle f-14"></i></a>
 
 
                                                     </div> </div>
