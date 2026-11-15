@@ -112,7 +112,7 @@ include_once '../comm.php';
 					    <div class="input-group input-icon-right">
 						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="<?php echo __('Option'); ?>" aria-label="<?php echo __('Option'); ?>">
 									<span class="input-group-text addon-style">
-    <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</span>
+    <span class=""><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Deloptionrows'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="fa fa-trash" onclick="deloptionrows('s1rowid1')"></i>	</span>
 </span></div>
 					</div>
 				</div>
@@ -122,7 +122,7 @@ include_once '../comm.php';
 					    <div class="input-group input-icon-right">
 						<input type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="<?php echo __('Option'); ?>" aria-label="<?php echo __('Option'); ?>">
 						<span class="input-group-text addon-style">
-    <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid2')"></i>	</span>
+    <span class=""><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Deloptionrows'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="fa fa-trash" onclick="deloptionrows('s1rowid2')"></i>	</span>
 </span></div>
 					</div>
 				</div>
