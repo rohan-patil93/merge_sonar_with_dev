@@ -223,8 +223,17 @@ class configClass
 			foreach($fieldnames as $k=>$values)
 			{
 				$values = mysqli_real_escape_string($this->con,$values);
+				//Rohan Encryption code
+				$dataencryptiontablefields =DATA_ENCRYPTION_TABLE_FIELDS;
+				if(isset($dataencryptiontablefields[$tablename])){
+					$filedlist = $dataencryptiontablefields[$tablename];
+					if(in_array($k, $filedlist, true)) {
+						$values = $values!=""?$this->dynamicDataEncode($values):"";
+					}
+				}
+				//Rohan Encryption code
 				if(is_numeric($values) && preg_match('/^[1-9][0-9]*$/', $values)){
-
+					$values=$values;
 				}elseif(is_null($values)){
 					$values="";
 				}elseif($values == ""){
@@ -291,9 +300,18 @@ class configClass
 		$status = "";
 		foreach($fieldnames as $k=>$values)
 		{
-			$values = mysqli_real_escape_string($this->con,$values);
+			//$values = mysqli_real_escape_string($this->con,$values);
+			//Rohan Encryption code
+			$dataencryptiontablefields =DATA_ENCRYPTION_TABLE_FIELDS;
+			if(isset($dataencryptiontablefields[$tablename])){
+				$filedlist = $dataencryptiontablefields[$tablename];
+				if(in_array($k, $filedlist, true)) {
+					$values = $values!=""?$this->dynamicDataEncode($values):"";
+				}
+			}
+			//Rohan Encryption code
 			if(is_numeric($values)){
-
+				$values=$values;
 				if($values['0']==0){
 					$values="'".$values."'";
 				}
@@ -841,4 +859,17 @@ public function random_code()
 
 		return strtolower(str_replace(' ','+',$string));
 		}
+		function dynamicDataEncode($data){
+		if(DATA_ENCRYPTION_ONOFF == 'Y'){
+			$key = hash('sha256', DATA_ENCRYPTION_KEY, true);
+			$iv = random_bytes(16);
+			$encrypted = openssl_encrypt((string)$data,'AES-256-CBC',$key,OPENSSL_RAW_DATA,$iv);
+			if ($encrypted === false) {
+				return false;
+			}
+			return rtrim(strtr(base64_encode($iv . $encrypted), '+/', '-_'),'=');
+		}else{
+			return $data;
+		}
+	}	
 }
