@@ -74,7 +74,7 @@ if(isset($_POST['log_id'])){
                                 <?php } ?>
                             </td>
                             <td class="p-1" style="width: 30%;"> <?php if($translog['response_type'] != 0){ ?>
-                                <span class="form-label label label-md label-primary mt-2" style="color: <?php echo "#".$stausresult[$value['current_status']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$value['current_status']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$value['current_status']]['background_color']); ?>;"><?php echo $stausresult[$value['current_status']]['name']; ?> </span>
+                                <span class="form-label label label-md label-primary mt-2" style="color: <?php echo "#".$stausresult[$value['current_status']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$value['current_status']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$value['current_status']]['background_color']); ?>;"><?php echo htmlspecialchars(__($stausresult[$value['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?> </span>
                             <?php }else{ ?>
                                 <span class="form-label label label-md label-primary mt-2"><?= __('Waiting For Approval'); ?></span>
                             <?php } ?>

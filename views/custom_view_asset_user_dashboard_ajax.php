@@ -44,13 +44,13 @@ $statuse = ViewStatusData();
                     <tr>
                         <td class="p-2"><?php echo $assetcategory[$arequest['category_id']]['category_description']; ?></td>
                         <td class="p-2"><?php echo $locations[$arequest['location_id']]['location_name']; ?></td>
-                        <td class="p-2"><?php echo $arequest['delivery_type']=="D"?"Delivery":"Self"; ?></td>
+                        <td class="p-2"><?php echo $arequest['delivery_type']=="D"?__('Delivery'):__('Self'); ?></td>
                         <td class="p-2 w-b-w-s"><?php echo $arequest['delivery_address'] !=""?$arequest['delivery_address']:"-"; ?></td>
                         <td class="p-2 text-right"><?php echo $arequest['quantity']!=""?$arequest['quantity']:0; ?></td>
                         <td class="p-2"><?php echo $arequest['request_datetime']!=""?fromDate($arequest['request_datetime']):"-"; ?></td>
                         <td class="p-2"><?php echo $arequest['approval_user_id']!=""?$_SESSION['users'][$arequest['approval_user_id']]:"-"; ?></td>
                         <td class="p-2">
-                            <span class="form-label label label-md" style="color:<?php echo $statuse[$arequest['current_status']]['color']; ?>; background-color:<?php echo $statuse[$arequest['current_status']]['background_color']; ?>;"><?php echo $statuse[$arequest['current_status']]['name']; ?></span>
+                            <span class="form-label label label-md" style="color:<?php echo $statuse[$arequest['current_status']]['color']; ?>; background-color:<?php echo $statuse[$arequest['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($statuse[$arequest['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                         </td>
                     </tr>
                 <?php } ?>
@@ -104,10 +104,10 @@ $statuse = ViewStatusData();
 
                     <td class="p-2"><?php echo $auasset['asset_transfer_date']!=""?fromDate($auasset['asset_transfer_date']):"-"; ?></td>
 
-                    <td class="p-2"><?php echo $auasset['delivery_type']!="D"?"Delivery Partner":"Self"; ?></td>
+                    <td class="p-2"><?php echo $auasset['delivery_type']!="D"?__('Delivery Partner'):__('Self'); ?></td>
                     <td class="p-2"><?php echo $auasset['asset_accept_or_reject_date']!=""?fromDate($auasset['asset_accept_or_reject_date']):"-"; ?></td>
                     <td class="p-2">
-                        <span class="form-label label label-md" style="color:<?php echo $statuse[$auasset['current_status']]['color']; ?>; background-color:<?php echo $statuse[$auasset['current_status']]['background_color']; ?>;"><?php echo $statuse[$auasset['current_status']]['name']; ?></span>
+                        <span class="form-label label label-md" style="color:<?php echo $statuse[$auasset['current_status']]['color']; ?>; background-color:<?php echo $statuse[$auasset['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($statuse[$auasset['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                     </td>
                     <td class="p-2">
                         <?php if($auasset['current_status'] == 0){ ?>
@@ -165,7 +165,7 @@ $statuse = ViewStatusData();
                     <td class="p-2"><?php echo $auasset['description']!=""?$auasset['description']:"-"; ?></td>
                     <td class="p-2"><?php echo $auasset['approve_datetime']!=""?$auasset['approve_datetime']:"-"; ?></td>
                     <td class="p-2">
-                        <span class="form-label label label-md" style="color:<?php echo $statuse[$auasset['current_status']]['color']; ?>; background-color:<?php echo $statuse[$auasset['current_status']]['background_color']; ?>;"><?php echo $statuse[$auasset['current_status']]['name']; ?></span>
+                        <span class="form-label label label-md" style="color:<?php echo $statuse[$auasset['current_status']]['color']; ?>; background-color:<?php echo $statuse[$auasset['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($statuse[$auasset['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                     </td>
                 </tr>
             <?php } ?>
@@ -221,10 +221,10 @@ $statuse = ViewStatusData();
                     <td class="p-2"><?php echo $auasset['start_date']!=""?fromDate($auasset['start_date']):"-"; ?></td>
                     <td class="p-2"><?php echo $auasset['end_date']!=""?fromDate($auasset['end_date']):"-"; ?></td>
                     <td class="p-2">
-                        <span class="form-label label label-md" style="color:<?php echo $statuse[$auasset['current_status']]['color']; ?>; background-color:<?php echo $statuse[$auasset['current_status']]['background_color']; ?>;"><?php echo $statuse[$auasset['current_status']]['name']; ?></span>
+                        <span class="form-label label label-md" style="color:<?php echo $statuse[$auasset['current_status']]['color']; ?>; background-color:<?php echo $statuse[$auasset['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($statuse[$auasset['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                     </td>
                     <td class="p-2">
-                        <?php if(isset($asset_returns[$auasset['asset_id']])){ echo "Return Process";
+                        <?php if(isset($asset_returns[$auasset['asset_id']])){ echo __('Return Process');
 }else{ ?>
                          <i class="ti ti-unlink"  return request  onclick="assetReturnRequest('<?php echo $auasset['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
                      <?php  } ?>

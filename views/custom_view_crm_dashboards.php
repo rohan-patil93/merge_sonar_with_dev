@@ -32,20 +32,20 @@ foreach($crm_activity_typesres as $crmlt){
 //Start graph crm leads
 $crm_leads_graph = $result['crm_leads_graph'];
 foreach($crm_leads_graph as $crmstat){
-    $crm_leads_chart[] = array($project_task_status['crm_leads'][$crmstat['crm_status']]['name'],(int)$crmstat['cnt']);
+    $crm_leads_chart[] = array(__($project_task_status['crm_leads'][$crmstat['crm_status']]['name'] ?? ''),(int)$crmstat['cnt']);
 }
 //End graph crm leads
 
 //Start graph crm Contacts
 $crm_contacts_graph = $result['crm_contacts_graph'];
 foreach($crm_contacts_graph as $crmstat){
-    $crm_contacts_chart[] = array($project_task_status['crm_leads'][$crmstat['crm_status']]['name'],(int)$crmstat['cnt']);
+    $crm_contacts_chart[] = array(__($project_task_status['crm_leads'][$crmstat['crm_status']]['name'] ?? ''),(int)$crmstat['cnt']);
 }
 //End graph crm Contacts
 //Start graph crm Deals
 $crm_deals_graph= $result['crm_deals_graph'];
 foreach($crm_deals_graph as $crmstat){
-    $crm_deals_chart[] = array($project_task_status['crm_leads'][$crmstat['crm_status']]['name'],(int)$crmstat['cnt']);
+    $crm_deals_chart[] = array(__($project_task_status['crm_leads'][$crmstat['crm_status']]['name'] ?? ''),(int)$crmstat['cnt']);
 }
 //End graph crm Deals
 

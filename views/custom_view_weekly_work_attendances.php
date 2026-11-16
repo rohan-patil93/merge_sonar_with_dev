@@ -134,9 +134,9 @@ $sprogress = $statusprogress['full'] ?? array();
                     var obj = (typeof data === 'object') ? data : $.parseJSON(data);
                     if(obj.status === 'fail'){
                         if(typeof swal === 'function'){
-                            swal({ title: <?php echo json_encode(__('Attendance Notice'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, text: obj.message || "Cannot update attendance.", type: "warning" });
+                            swal({ title: <?php echo json_encode(__('Attendance Notice'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, text: obj.message || <?php echo json_encode(__('Cannot update attendance.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, type: "warning" });
                         } else {
-                            alert(obj.message || "Cannot update attendance.");
+                            alert(obj.message || <?php echo json_encode(__('Cannot update attendance.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                         }
                         return;
                     }
@@ -165,7 +165,7 @@ $sprogress = $statusprogress['full'] ?? array();
                         $("#status_id").hide();
                     }
                     if(typeof tostarnotify === 'function'){
-                        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success pt-2 pb-2','animated flipInX','animated flipOutX','Weekly timesheet updated successfully','');
+                        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success pt-2 pb-2','animated flipInX','animated flipOutX',<?php echo json_encode(__('Weekly timesheet updated successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
                     }
                 } catch(e) {
                     console.error("Parse error:", e, data);
@@ -190,7 +190,7 @@ $sprogress = $statusprogress['full'] ?? array();
 
     function alradysubmitedmanager(){
         if(typeof tostarnotify === 'function'){
-            tostarnotify('top','right','fa fa-info-circle','form-label label label-danger pt-2 pb-2','animated flipInX','animated flipOutX','Weekly timesheet is already submitted to manager','');
+            tostarnotify('top','right','fa fa-info-circle','form-label label label-danger pt-2 pb-2','animated flipInX','animated flipOutX',<?php echo json_encode(__('Weekly timesheet is already submitted to manager'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
         } else {
             alert(<?php echo json_encode(__('Weekly timesheet is already submitted to manager.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }
@@ -246,9 +246,9 @@ $sprogress = $statusprogress['full'] ?? array();
                             var obj = (typeof response === 'object') ? response : JSON.parse(response);
                             if(obj.status === 'fail'){
                                 if(typeof swal === 'function'){
-                                    swal({ title: <?php echo json_encode(__('Leave Notice'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, text: obj.message || "Cannot apply leave.", type: "warning" });
+                                    swal({ title: <?php echo json_encode(__('Leave Notice'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, text: obj.message || <?php echo json_encode(__('Cannot apply leave.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, type: "warning" });
                                 } else {
-                                    alert(obj.message || "Cannot apply leave.");
+                                    alert(obj.message || <?php echo json_encode(__('Cannot apply leave.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                                 }
                                 return;
                             }
@@ -286,9 +286,9 @@ $sprogress = $statusprogress['full'] ?? array();
                             }
 
                             if(typeof tostarnotify === 'function'){
-                                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success pt-2 pb-2','animated flipInX','animated flipOutX', obj.message || 'Leave applied successfully for ' + date,'');
+                                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success pt-2 pb-2','animated flipInX','animated flipOutX', obj.message || <?php echo json_encode(__('Leave applied successfully for'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> + ' ' + date,'');
                             } else {
-                                alert(obj.message || 'Leave applied successfully.');
+                                alert(obj.message || <?php echo json_encode(__('Leave applied successfully.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                             }
                         } catch(e) {
                             console.error("Parse error:", e, response);
@@ -498,7 +498,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                                 <button type="button" class="badge badge-hover" style="background-color:#d62828;" title="<?= htmlspecialchars(__('Mark Absent'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Mark Absent'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     <?php if($checkcurrent_status != 1){ ?> onclick="attendanceupload('a','<?php echo $predate; ?>',<?php echo $num; ?>,'Absent')" <?php }else{ ?> onclick="alradysubmitedmanager()" <?php } ?>>A</button>
                                                 <?php if($ccedit == 0){ ?>
-                                                    <button type="button" class="badge badge-hover" id="btn_leave_<?php echo $num; ?>" style="background-color:#e9c46a; color:#fff;" title="Apply Leave for <?php echo date('d M Y', strtotime($predate)); ?>" aria-label="Apply Leave for <?php echo date('d M Y', strtotime($predate)); ?>"
+                                                    <button type="button" class="badge badge-hover" id="btn_leave_<?php echo $num; ?>" style="background-color:#e9c46a; color:#fff;" title="<?= htmlspecialchars(__('Apply Leave for'), ENT_QUOTES, 'UTF-8'); ?> <?php echo date('d M Y', strtotime($predate)); ?>" aria-label="<?= htmlspecialchars(__('Apply Leave for'), ENT_QUOTES, 'UTF-8'); ?> <?php echo date('d M Y', strtotime($predate)); ?>"
                                                         onclick="directApplyLeave('<?php echo $predate; ?>', <?php echo $num; ?>)">L</button>
                                                 <?php } ?>
                                             </div>

@@ -37,7 +37,7 @@ foreach($application_process_pages as $app){
     function getTransactionAccessPermission(roll_id,app_id,sync="",transaction_access_permission_id=""){
         $(".notselect").html('');
         $("#selecticon_"+app_id).html('<i class="fa fa-check-circle text-warning f-16"></i>');
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#userassignajax").html(loader);
         $.ajax({
             url: "views/custom_view_application_role_ajax.php",
@@ -72,11 +72,11 @@ foreach($application_process_pages as $app){
     <div class="container-fluid " >
         <div class="card card-custom card-sticky " id="kt_page_sticky_card">
             <div class="card-header">
-                <h5> Permissions List</h5>
+                <h5> <?= __('Permissions List'); ?></h5>
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light ">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -110,7 +110,7 @@ foreach($application_process_pages as $app){
                                                 </ul>
                                             <?php }else{ ?>
                                                 <div class="card-px text-center ">
-                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Process Page</p>
+                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Process Page'); ?></p>
                                                     <div class="text-center px-4">
                                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 100px!important;">
                                                     </div>
@@ -129,7 +129,7 @@ foreach($application_process_pages as $app){
                         <?php
 
                          <div class="card-px text-center ">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Please Select Process Page?</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('Please Select Process Page?'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>

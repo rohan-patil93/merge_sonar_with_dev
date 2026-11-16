@@ -3268,7 +3268,7 @@ function printWithDetailsOption(skipDialog = null) {
             <div class="text-center mb-3">
                 <i class="fa fa-print fa-3x text-primary mb-3"></i>
                 <p class="mb-3">You are about to print <strong>${quantity}</strong> ${quantity === 1 ? 'copy' : 'copies'} of this ${codeTypeText}.</p>
-                <p class="text-muted">Would you like to include row details and headings in the print, or print only the codes?</p>
+                <p class="text-muted"><?= htmlspecialchars(__('Would you like to include row details and headings in the print, or print only the codes?'), ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
         `,
         icon: 'question',
@@ -3988,7 +3988,7 @@ function bulkPrint() {
             <div class="text-center mb-3">
                 <i class="fa fa-print fa-3x text-primary mb-3"></i>
                 <p class="mb-3">You are about to print <strong>${selectedRows.length}</strong> ${codeTypeText}.</p>
-                <p class="text-muted">Would you like to include row details and headings in the print, or print only the codes?</p>
+                <p class="text-muted"><?= htmlspecialchars(__('Would you like to include row details and headings in the print, or print only the codes?'), ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
         `,
         icon: 'question',

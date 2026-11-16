@@ -62,14 +62,14 @@
                                         </div>
                                     </td>
                                     <td  class="p-2"><?php echo $crm_source_types['SOURCETYPE'][$crmleads['contact_source']]; ?></td>
-                                    <td  class="p-2"><?php echo $project_task_status['crm_leads'][$crmleads['crm_status']]['name']; ?></td>
+                                    <td  class="p-2"><?php echo htmlspecialchars(__($project_task_status['crm_leads'][$crmleads['crm_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td>
                                 </tr>
                         <?php $im++;
 } ?>
                             </table>
                             <?php }else{ ?>
                             <div class="card-px text-center ">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> No Leads</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> <?= __('No Leads'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -85,7 +85,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Recently Created Contacts</h5>
+                        <h5><?= __('Recently Created Contacts'); ?></h5>
                         <button type="button" !" onclick="viewAllListPage('crm_contacts')" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></button>
                     </div>
                     <div class="card-body custom-scroll" style="min-height: 400px; max-height: 400px;">
@@ -116,14 +116,14 @@
                                     </td>
 
                                     <td  class="p-2"><?php echo $crm_source_types['SOURCETYPE'][$crmleads['contact_source']]; ?></td>
-                                    <td  class="p-2"><?php echo $project_task_status['crm_contacts'][$crmleads['crm_status']]['name']; ?></td>
+                                    <td  class="p-2"><?php echo htmlspecialchars(__($project_task_status['crm_contacts'][$crmleads['crm_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td>
                                 </tr>
                         <?php $im++;
 } ?>
                             </table>
                             <?php }else{ ?>
                             <div class="card-px text-center ">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> No Contacts</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> <?= __('No Contacts'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -136,14 +136,14 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Contact Status</h5>
+                        <h5><?= __('Contact Status'); ?></h5>
                         <div class="card-header-right"></div>
                     </div>
                     <div class="card-body custom-scroll" style="min-height: 400px; max-height: 400px;">
                         <input type="hidden" name="chart_data_contact_chart" id="chart_data_contact_chart" value='<?php echo json_encode((array)$crm_contacts_chart); ?>' >
                         <?php /**/if(count((array)$crm_contacts_chart) =='0'){ ?>
                           <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>
@@ -161,16 +161,16 @@
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5>Sales Order Not Yet Generated</h5>
+                <h5><?= __('Sales Order Not Yet Generated'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="min-height: 400px; max-height: 400px;">
                 <?php if(count((array)$feasibility_requirements) !=0){ ?>
                 <table class="table table-hover m-b-0" style="font-size:13px;" >
                     <thead>
                         <tr>
-                            <th scope="col" >Name</th>
-                            <th scope="col" >Contact</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" ><?= __('Name'); ?></th>
+                            <th scope="col" ><?= __('Contact'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <?php foreach($feasibility_requirements as $crmld){  ?>
@@ -181,7 +181,7 @@
                                 </a>
                             </td>
                             <td class="w-b-w-s p-2"><?php echo $crmld['phone']; ?></td>
-                            <td class="p-2"><button class="btn btn-primary" onclick="createSalesOrdersWithFeasibilty('<?php echo $crmld['feasibility_id']; ?>','<?php echo $crmld['crm_contact_id']; ?>')">Generate SO</button></td>
+                            <td class="p-2"><button class="btn btn-primary" onclick="createSalesOrdersWithFeasibilty('<?php echo $crmld['feasibility_id']; ?>','<?php echo $crmld['crm_contact_id']; ?>')"><?= __('Generate SO'); ?></button></td>
                         </tr>
                     <?php } ?>
                     <tbody>
@@ -189,7 +189,7 @@
                 </table>
                 <?php }else{ ?>
                     <div class="card-px text-center ">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> No Sales Order Not Yet Generated</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> <?= __('No Sales Order Not Yet Generated'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
@@ -200,7 +200,7 @@
 
         <div class="card">
             <div class="card-header">
-                <h5>Pending Tasks</h5>
+                <h5><?= __('Pending Tasks'); ?></h5>
             </div>
             <div class="card-body">
                 <?php if(count((array)$crm_pendding_tasks) !=0){ ?>
@@ -208,7 +208,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col" class="text-left">Tasks</th>
+                            <th scope="col" class="text-left"><?= __('Tasks'); ?></th>
                         </tr>
                     </thead>
                     <tbody>

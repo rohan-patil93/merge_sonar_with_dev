@@ -6,7 +6,7 @@ $itemres = json_decode($item_data, 1);
 <script type="text/javascript">
     function itemChange(item_id, id){
         if(item_id == '-1'){
-            $("#other_"+id).html('<input aria-label="Item Name[]" type="text" class="form-control" name= "item_name[]" id="item_name_'+id+'"><input type="hidden" class="form-control" value="-'+id+'" name= "productCode[]" id="productCode_'+id+'">');
+            $("#other_"+id).html('<input aria-label="<?= htmlspecialchars(__('Item Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name= "item_name[]" id="item_name_'+id+'"><input type="hidden" class="form-control" value="-'+id+'" name= "productCode[]" id="productCode_'+id+'">');
 
         }
         $.ajax({
@@ -37,18 +37,18 @@ $itemres = json_decode($item_data, 1);
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><div class="checkbox-fade fade-in-primary "><label class="form-label"> <input aria-label="Checkbox" type="checkbox" class="itemRow" data-rowid="'+count+'"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span></label></div></td>';
-        htmlRows += '<td id="other_'+count+'"><select aria-label="Product Code[]" class="form-control form-select js-example-basic-single"  name= "productCode[]" id="productCode__2"+count+'" onchange="itemChange(this.value,'+count+')" > <option value="0"> <?= htmlspecialchars(__('Select Any Category'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($itemres as  $item) {  ?>      <option  value = <?php echo $item[id]; ?>><?php echo $item[expense_name]; ?> </option> <?php
+        htmlRows += '<td><div class="checkbox-fade fade-in-primary "><label class="form-label"> <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow" data-rowid="'+count+'"><span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i> </span></label></div></td>';
+        htmlRows += '<td id="other_'+count+'"><select aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single"  name= "productCode[]" id="productCode__2"+count+'" onchange="itemChange(this.value,'+count+')" > <option value="0"> <?= htmlspecialchars(__('Select Any Category'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($itemres as  $item) {  ?>      <option  value = <?php echo $item[id]; ?>><?php echo $item[expense_name]; ?> </option> <?php
 } ?><option  value = "-1"> <?= htmlspecialchars(__('Other'), ENT_QUOTES, 'UTF-8'); ?></option> </select> <input type="hidden" name="item_name[]" id="item_name__2"+count+'" class="form-control"> </td>';
-        htmlRows += '<td><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control"></textarea></td><input type="hidden" name="account_code[]" id="account_code_'+count+'" class="form-control">  ';
-        htmlRows += '<td> <input type="hidden" name="quantity[]" id="quantity__2"+count+'"    class="form-control amount" value="1"> <input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> Enter Rate</div></td>';
-        htmlRows += '<td><select aria-label="Tax[]" class="form-control form-select js-example-basic-single"  name= "tax[]" id="tax_'+count+'"> <option value="0"> <?= htmlspecialchars(__('Select Any Tax Rate'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($taxres as $key => $tax) {  ?>      <option <?php if($_SESSION[configdata][default_tax_rate] == $key){ ?> selected  <?php
+        htmlRows += '<td><textarea aria-label="<?= htmlspecialchars(__('Product Name'), ENT_QUOTES, 'UTF-8'); ?>[]" name="productName[]" id="productName_'+count+'" class="form-control"></textarea></td><input type="hidden" name="account_code[]" id="account_code_'+count+'" class="form-control">  ';
+        htmlRows += '<td> <input type="hidden" name="quantity[]" id="quantity__2"+count+'"    class="form-control amount" value="1"> <input aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> Enter Rate</div></td>';
+        htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Tax'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single"  name= "tax[]" id="tax_'+count+'"> <option value="0"> <?= htmlspecialchars(__('Select Any Tax Rate'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($taxres as $key => $tax) {  ?>      <option <?php if($_SESSION[configdata][default_tax_rate] == $key){ ?> selected  <?php
 } ?> value = <?php echo $key?>><?php echo $tax; ?> </option> <?php
 } ?>  </select><div style="display: none;color: red;" id="tax_err_'+count+'"> <?= htmlspecialchars(__('Enter Tax'), ENT_QUOTES, 'UTF-8'); ?></div>';
 
         htmlRows += '<input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount_'+count+'"><input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount" id="pdiscount_amount_'+count+'"><input type="hidden" readonly name="p_amount[]" id="p_amount_'+count+'" class="form-control price amount"><input type="hidden" readonly name="ptax_amount[]" id="ptax_amount_'+count+'" class="form-control price amount"><input type="hidden" readonly name="amount[]" id="amount__2"+count+'" class="form-control price amount">  <input type="hidden" name="dis_amount[]" readonly id="dis_amount_'+count+'" class="form-control amount" value=""></td>';
-         htmlRows += '<td><input aria-label="Doc Ref No[]" type="text" name="doc_ref_no[]"  id="doc_ref_no_'+count+'" class="form-control amount" value="" autocomplete="off"></td>';
-        htmlRows += ' <td><input aria-label="Doc Ref Date[]" type="date" class="form-control"  value=""  name="doc_ref_date[]"  id="kt_datepicker_3'+count+'" /> </td>';
+         htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Doc Ref No'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="doc_ref_no[]"  id="doc_ref_no_'+count+'" class="form-control amount" value="" autocomplete="off"></td>';
+        htmlRows += ' <td><input aria-label="<?= htmlspecialchars(__('Doc Ref Date'), ENT_QUOTES, 'UTF-8'); ?>[]" type="date" class="form-control"  value=""  name="doc_ref_date[]"  id="kt_datepicker_3'+count+'" /> </td>';
 
 
         htmlRows += '</tr>';

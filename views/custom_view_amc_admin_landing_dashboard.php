@@ -48,43 +48,43 @@ $repairs = $data['repairs']['rows'] ?? array();
 $contractExpiry = $data['contract_expiry'] ?? array('expiring' => array(), 'expired' => array());
 
 $quickActions = array(
-    array('label' => 'New Contract', 'icon' => 'fa fa-plus', 'class' => 'amc-qa-primary', 'mode' => 'link', 'href' => 'index.php?option=COM_INSERT_CONTRACTS'),
-    array('label' => 'Contract List', 'icon' => 'fa fa-list', 'class' => 'amc-qa-info', 'mode' => 'link', 'href' => 'index.php?option=COM_LIST_CONTRACTS'),
-    array('label' => 'Assign Technicians', 'icon' => 'fa fa-user', 'class' => 'amc-qa-warning amc-landing-qa-contract-popup cursor-pointer', 'mode' => 'contract_popup', 'purpose' => 'assign', 'title' => 'Assign Technicians'),
-    array('label' => 'Schedules', 'icon' => 'fa fa-calendar', 'class' => 'amc-qa-success amc-landing-qa-contract-popup cursor-pointer', 'mode' => 'contract_popup', 'purpose' => 'schedules', 'title' => 'Schedules'),
-    array('label' => 'Reports', 'icon' => 'fa fa-bar-chart', 'class' => 'amc-qa-reports amc-landing-qa-reports-popup cursor-pointer', 'mode' => 'reports_popup', 'title' => 'Reports'),
+    array('label' => __('New Contract'), 'icon' => 'fa fa-plus', 'class' => 'amc-qa-primary', 'mode' => 'link', 'href' => 'index.php?option=COM_INSERT_CONTRACTS'),
+    array('label' => __('Contract List'), 'icon' => 'fa fa-list', 'class' => 'amc-qa-info', 'mode' => 'link', 'href' => 'index.php?option=COM_LIST_CONTRACTS'),
+    array('label' => __('Assign Technicians'), 'icon' => 'fa fa-user', 'class' => 'amc-qa-warning amc-landing-qa-contract-popup cursor-pointer', 'mode' => 'contract_popup', 'purpose' => 'assign', 'title' => __('Assign Technicians')),
+    array('label' => __('Schedules'), 'icon' => 'fa fa-calendar', 'class' => 'amc-qa-success amc-landing-qa-contract-popup cursor-pointer', 'mode' => 'contract_popup', 'purpose' => 'schedules', 'title' => __('Schedules')),
+    array('label' => __('Reports'), 'icon' => 'fa fa-bar-chart', 'class' => 'amc-qa-reports amc-landing-qa-reports-popup cursor-pointer', 'mode' => 'reports_popup', 'title' => __('Reports')),
 );
 
 $kpiCards = array(
     array(
-        'label' => 'Total Contracts',
+        'label' => __('Total Contracts'),
         'value' => (int) $kpis['contracts'],
         'icon' => 'fa fa-file',
         'tone' => 'rose',
         'mode' => 'popup',
         'type' => 'total',
-        'title' => 'Total Contracts',
+        'title' => __('Total Contracts'),
     ),
     array(
-        'label' => 'Active',
+        'label' => __('Active'),
         'value' => (int) $kpis['active'],
         'icon' => 'fa fa-check-circle',
         'tone' => 'blue',
         'mode' => 'popup',
         'type' => 'active',
-        'title' => 'Active',
+        'title' => __('Active'),
     ),
     array(
-        'label' => 'Expired',
+        'label' => __('Expired'),
         'value' => (int) $kpis['expired'],
         'icon' => 'fa fa-times-circle',
         'tone' => 'amber',
         'mode' => 'popup',
         'type' => 'expired',
-        'title' => 'Expired',
+        'title' => __('Expired'),
     ),
     array(
-        'label' => 'Customers',
+        'label' => __('Customers'),
         'value' => (int) $kpis['customers'],
         'icon' => 'fa fa-users',
         'tone' => 'teal',
@@ -92,7 +92,7 @@ $kpiCards = array(
         'href' => 'index.php?option=COM_LIST_CUSTOMERS',
     ),
     array(
-        'label' => 'Vendors',
+        'label' => __('Vendors'),
         'value' => (int) $kpis['vendors'],
         'icon' => 'fa fa-briefcase',
         'tone' => 'indigo',
@@ -130,7 +130,7 @@ function amcLandingRenderContractRows($rows, $limit = 5)
     foreach ($rows as $contract) {
         $contractId = (int) ($contract['id'] ?? 0);
         $editUrl = 'index.php?option=COM_INSERT_CONTRACTS&Rid=' . deocdeId('id:' . $contractId);
-        $statusLabel = htmlspecialchars($contract['status_label'] ?? '-', ENT_QUOTES, 'UTF-8');
+        $statusLabel = htmlspecialchars(__($contract['status_label'] ?? '-'), ENT_QUOTES, 'UTF-8');
         $statusClass = htmlspecialchars($contract['status_class'] ?? 'bg-secondary', ENT_QUOTES, 'UTF-8');
         $canEdit = !empty($contract['can_edit']);
         ?>
@@ -167,7 +167,7 @@ function amcLandingRenderVisitRows($rows, $limit = 5, $section = '')
         $contractId = (int) ($row['contract_id'] ?? 0);
         $scheduleUrl = 'index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=' . $contractId;
         $assignUrl = 'index.php?option=COM_ASSIGN_CONTRACT_AMC_TECHNICIANS&contract_id=' . $contractId;
-        $statusLabel = htmlspecialchars($row['status_label'] ?? '-', ENT_QUOTES, 'UTF-8');
+        $statusLabel = htmlspecialchars(__($row['status_label'] ?? '-'), ENT_QUOTES, 'UTF-8');
         $statusClass = htmlspecialchars($row['status_class'] ?? 'bg-secondary', ENT_QUOTES, 'UTF-8');
         $action = $row['action'] ?? 'view';
         ?>
@@ -198,7 +198,7 @@ function amcLandingRenderVisitRows($rows, $limit = 5, $section = '')
 
 function amcLandingRenderStatusBadge($row)
 {
-    $statusLabel = htmlspecialchars(trim((string) ($row['status_label'] ?? '-')), ENT_QUOTES, 'UTF-8');
+    $statusLabel = htmlspecialchars(__(trim((string) ($row['status_label'] ?? '-'))), ENT_QUOTES, 'UTF-8');
     if ($statusLabel == '') {
         $statusLabel = '-';
     }
@@ -486,13 +486,13 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
                         if ($mode == 'contract_popup') { ?>
                         <a href="#" class="<?php echo $tileClass; ?>"
                             data-purpose="<?php echo htmlspecialchars($action['purpose'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
-                            data-title="<?php echo htmlspecialchars($action['title'] ?? 'Contracts', ENT_QUOTES, 'UTF-8'); ?>">
+                            data-title="<?php echo htmlspecialchars($action['title'] ?? __('Contracts'), ENT_QUOTES, 'UTF-8'); ?>">
                             <span class="amc-qa-icon"><i class="<?php echo htmlspecialchars($action['icon'], ENT_QUOTES, 'UTF-8'); ?>"></i></span>
                             <span class="amc-qa-label"><?php echo htmlspecialchars($action['label'], ENT_QUOTES, 'UTF-8'); ?></span>
                         </a>
                         <?php } elseif ($mode == 'reports_popup') { ?>
                         <a href="#" class="<?php echo $tileClass; ?>"
-                            data-title="<?php echo htmlspecialchars($action['title'] ?? 'Reports', ENT_QUOTES, 'UTF-8'); ?>">
+                            data-title="<?php echo htmlspecialchars($action['title'] ?? __('Reports'), ENT_QUOTES, 'UTF-8'); ?>">
                             <span class="amc-qa-icon"><i class="<?php echo htmlspecialchars($action['icon'], ENT_QUOTES, 'UTF-8'); ?>"></i></span>
                             <span class="amc-qa-label"><?php echo htmlspecialchars($action['label'], ENT_QUOTES, 'UTF-8'); ?></span>
                         </a>
@@ -613,10 +613,10 @@ function amcLandingRenderContractExpiryPanel($contractExpiry)
 
     <?php
     $visitSections = array(
-        array('key' => 'overdue', 'title' => 'Overdue Visits', 'subtitle' => '', 'card_class' => 'amc-visit-overdue'),
-        array('key' => 'today', 'title' => "Today's Visits", 'subtitle' => '', 'card_class' => 'amc-visit-today'),
-        array('key' => 'yesterday', 'title' => 'Yesterday Visits', 'subtitle' => '', 'card_class' => 'amc-visit-yesterday'),
-        array('key' => 'next_7_days', 'title' => 'Next 7 Days Visits', 'subtitle' => 'Tomorrow + 6 days', 'card_class' => 'amc-visit-next7'),
+        array('key' => 'overdue', 'title' => __('Overdue Visits'), 'subtitle' => '', 'card_class' => 'amc-visit-overdue'),
+        array('key' => 'today', 'title' => __("Today's Visits"), 'subtitle' => '', 'card_class' => 'amc-visit-today'),
+        array('key' => 'yesterday', 'title' => __('Yesterday Visits'), 'subtitle' => '', 'card_class' => 'amc-visit-yesterday'),
+        array('key' => 'next_7_days', 'title' => __('Next 7 Days Visits'), 'subtitle' => __('Tomorrow + 6 days'), 'card_class' => 'amc-visit-next7'),
     );
     ?>
     <div class="row mb-3">

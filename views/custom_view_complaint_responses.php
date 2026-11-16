@@ -132,7 +132,7 @@ if ($_GET['Rid']) {
 
                             <tr>
                                 <th scope="col"><?= __('Status'); ?></th>
-                                <td><span class="form-label label label-lg  label-primary label-inline f-w-900 " style="background-color:<?php echo $return['background_color']; ?> ; color:<?php echo $return['color']; ?> ;"><?php echo $return['name']; ?></span> </td>
+                                <td><span class="form-label label label-lg  label-primary label-inline f-w-900 " style="background-color:<?php echo $return['background_color']; ?> ; color:<?php echo $return['color']; ?> ;"><?php echo htmlspecialchars(__($return['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span> </td>
                             </tr>
                             <tr>
                                 <th scope="col"><?= __('Complaint User'); ?></th>

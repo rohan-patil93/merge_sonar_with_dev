@@ -32,7 +32,7 @@ if(isset($_POST['datefilter'])){
     $endingdate = strtotime('last day of this month', strtotime($current_from_date));
 
     $empp_id = $_GET['EMP']!="" ? $_GET['EMP'] : $_SESSION['emp_id'];
-    $summary_data = array('Yearly','Quaterly','Monthly','Non-Billable');
+    $summary_data = array(__('Yearly'),__('Quaterly'),__('Monthly'),__('Non-Billable'));
     $selectedMonday = date("Y-m-d", strtotime('monday this week', strtotime($current_from_date)));
     $data11["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0','emp_id'=>$empp_id,'timesheet_date'=>$selectedMonday);
     $datw = urlencode(json_encode($data11));
@@ -167,7 +167,7 @@ $currentmonth = $_GET['PAY_MONTH']!=""?$_GET['PAY_MONTH']:date('m');
                                         <?php } ?>
                                         <td>
                                             <?php if($loc['status']!=""){ ?>
-                                                <button class="btn btn-primary" style="color: <?php echo "#". $stausresult[$loc['status']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$loc['status']]['background_color'] ); ?>; border-color: <?php echo "#".strval($stausresult[$loc['status']]['background_color']); ?>;" type="button" ><?php echo $stausprocessresult[$loc['status']]['name']; ?>  </button>
+                                                <button class="btn btn-primary" style="color: <?php echo "#". $stausresult[$loc['status']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$loc['status']]['background_color'] ); ?>; border-color: <?php echo "#".strval($stausresult[$loc['status']]['background_color']); ?>;" type="button" ><?php echo htmlspecialchars(__($stausprocessresult[$loc['status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>  </button>
                                             <?php }else{ echo "-";
 } ?>
                                         </td>

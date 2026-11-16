@@ -107,7 +107,7 @@ $projcetroleuser =  $details['projcetroleuser'];
           type: "POST",
           success:function(data){
             console.log(data);
-            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Project Upadate Successfully','');
+            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Project Upadate Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
             window.location.reload();
         },
         error:function (){}
@@ -644,7 +644,7 @@ function dashchange(val){
                                                                                 </td>
                                                                                 <td>
                                                                                     <span class="label label-md label-primary" style="background-color: <?php echo $_SESSION['status'][$emp_ass['current_status']]['background_color']; ?>">
-                                                                                        <?php echo $procttaskstatus[$emp_ass['project_id']][$emp_ass['current_status']]['name']; ?>
+                                                                                        <?php echo htmlspecialchars(__($procttaskstatus[$emp_ass['project_id']][$emp_ass['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>
                                                                                     </span>
                                                                                 </td>
                                                                                 <td>

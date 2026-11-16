@@ -153,7 +153,7 @@ function changestatus(val,tranid,allowitemid,table_name){
                     <div class="card-header">
                         <h5><?php echo $_POST['menu_label']; ?></h5>
                         <div class="card-header-right">
-                            <a href="#!" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_POST['menu_label']; ?> Details "<?php echo $permission_listbtn; ?> onclick="getTransactionInvoiceList()"> <i class="ti-eye icon-dark"></i></a>
+                            <a href="#!" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('Details'), ENT_QUOTES, 'UTF-8'); ?>"<?php echo $permission_listbtn; ?> onclick="getTransactionInvoiceList()"> <i class="ti-eye icon-dark"></i></a>
                         </div>
                     </div>
                     <div class="card-block text-center">
@@ -298,7 +298,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td >
-                                                                        <span class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
+                                                                        <span class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($status_progress[$list['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -372,7 +372,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td >
-                                                                        <span class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
+                                                                        <span class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($status_progress[$list['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -446,7 +446,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td>
-                                                                        <span class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
+                                                                        <span class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($status_progress[$list['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>

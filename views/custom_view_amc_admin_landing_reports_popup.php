@@ -6,15 +6,15 @@ include_once '../comm.php';
 $title = $_GET['title'] ?? 'Reports';
 
 $reports = array(
-    array('label' => 'Vendor AMC Tracker', 'option' => 'COM_VIEW_VENDOR_AMC_TRACKER_REPORT'),
-    array('label' => 'Vendor AMC Schedule', 'option' => 'COM_VIEW_VENDOR_AMC_SCHEDULE_REPORT'),
-    array('label' => 'In-house PPM Report', 'option' => 'COM_VIEW_PPM_INHOUSE_REPORT'),
-    array('label' => 'Complaints Report', 'option' => 'COM_LIST_AMC_COMPLAINTS_REPORT'),
+    array('label' => __('Vendor AMC Tracker'), 'option' => 'COM_VIEW_VENDOR_AMC_TRACKER_REPORT'),
+    array('label' => __('Vendor AMC Schedule'), 'option' => 'COM_VIEW_VENDOR_AMC_SCHEDULE_REPORT'),
+    array('label' => __('In-house PPM Report'), 'option' => 'COM_VIEW_PPM_INHOUSE_REPORT'),
+    array('label' => __('Complaints Report'), 'option' => 'COM_LIST_AMC_COMPLAINTS_REPORT'),
 );
 ?>
 
 <div class="modal-header">
-    <h5 class="modal-title"><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h5>
+    <h5 class="modal-title"><?php echo htmlspecialchars(__($title), ENT_QUOTES, 'UTF-8'); ?></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">

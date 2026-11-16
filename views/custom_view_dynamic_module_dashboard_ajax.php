@@ -252,9 +252,9 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=''){
                     <div class="card-header pb-mob">
                         <h5><?php echo $_POST['menu_label']; ?></h5>
                         <div class="card-header-right custom-right-header">
-                            <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Add <?php echo $_POST['menu_label']; ?>" aria-label="Add <?php echo $_POST['menu_label']; ?>" <?php echo $insert_permissionbtn; ?>> <i class="icofont icofont-plus icon-dark"></i> </a>
-                            <a href="index.php?option=<?php echo $optiondetails['list_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_POST['menu_label']; ?> List " aria-label="<?php echo $_POST['menu_label']; ?> List"<?php echo $permission_listbtn; ?>> <i class="ti ti-timer icon-dark"></i></a>
-                            <a href="#!" role="button" aria-label="<?php echo $_POST['menu_label']; ?> Details" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_POST['menu_label']; ?> Details "<?php echo $permission_listbtn; ?> onclick="getTransactionInvoiceList()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"> <i class="ti-eye icon-dark"></i></a>
+                            <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars(__('Add').' '.$_POST['menu_label'], ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?php echo htmlspecialchars(__('Add').' '.$_POST['menu_label'], ENT_QUOTES, 'UTF-8'); ?>" <?php echo $insert_permissionbtn; ?>> <i class="icofont icofont-plus icon-dark"></i> </a>
+                            <a href="index.php?option=<?php echo $optiondetails['list_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('List'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('List'), ENT_QUOTES, 'UTF-8'); ?>"<?php echo $permission_listbtn; ?>> <i class="ti ti-timer icon-dark"></i></a>
+                            <a href="#!" role="button" aria-label="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('Details'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('Details'), ENT_QUOTES, 'UTF-8'); ?>"<?php echo $permission_listbtn; ?> onclick="getTransactionInvoiceList()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"> <i class="ti-eye icon-dark"></i></a>
                         </div>
                     </div>
                     <div class="card-block text-center">
@@ -532,7 +532,7 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td >
-                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
+                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($status_progress[$list['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -628,7 +628,7 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td >
-                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
+                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($status_progress[$list['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -715,7 +715,7 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td>
-                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
+                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($status_progress[$list['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -847,7 +847,7 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                                                                     <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                                                     <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                                                     <td>
-                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $status_progress[$list['current_status']]['name']; ?></span>
+                                                                        <span class="label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($status_progress[$list['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -1040,7 +1040,7 @@ if($activeres1['current_status'] == ST_APPROVED && ($table_name =="supplier_bill
 <?php } ?></h6>
                                         <span class="text-muted f-12"><?php echo $activeres1['transaction_number']; ?> - (<?php echo customeummarmonyformateifine($activeres1['total_amount']); ?>) - <?php echo fromDate($activeres1['transaction_date']); ?></span>
 
-                                        <span class="label label-md" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;"><?php echo $status_progress[$activeres1['current_status']]['name']; ?></span>
+                                        <span class="label label-md" style="color:<?php echo $statuse[$activeres1['current_status']]['color']; ?>; background-color:<?php echo $statuse[$activeres1['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($status_progress[$activeres1['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                     </a>
                                 </div>
                             </div>

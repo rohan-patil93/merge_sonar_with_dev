@@ -30,7 +30,7 @@ $old_requests = $data['old_requests'];
                 error:function (){}
             });
         }else{
-            tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX','Please Select  status','');
+            tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',<?php echo json_encode(__('Please Select status'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
         }
     }
 </script>

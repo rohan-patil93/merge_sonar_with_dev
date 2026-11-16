@@ -7,8 +7,8 @@ if($_GET['Rid']!=""){
     $assessment_id = $ex_rid['1'];
 }
 
-$tag1= $_GET['CAT'] ==1 ?'Assigned' : '';
-$display_tag = $_GET['CAT'] ==1 ?'Assessment' : '';
+$tag1= $_GET['CAT'] ==1 ?__('Assigned') : '';
+$display_tag = $_GET['CAT'] ==1 ?__('Assessment') : '';
 
 $vurl = API."?mode=getassessmentlist&company_id=".$company_id."&is_active=0"."&assessment_id=".$assessment_id."&category=".$_GET['CAT'];
 $configesponse = callAPI($vurl);
@@ -165,18 +165,18 @@ $who_can_see_the_results = json_decode($assessment_details['who_can_see_the_resu
                                     <li class="nav-item">
                                         <a class="nav-link text-active-primary me-6 <?php if($display_id== 2){ echo "active";
 } ?>"  href="index.php?option=COM_VIEW_ASSESSMENT_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=<?php echo "2"; ?>">
-                                            <?php echo $display_tag." Details"; ?></a>
+                                            <?php echo $display_tag." ".__('Details'); ?></a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link text-active-primary me-6 <?php if($display_id== 1){ echo "active";
 } ?>"  href="index.php?option=COM_VIEW_ASSESSMENT_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=1">
-                                                <?php echo $display_tag." Responses"; ?></a>
+                                                <?php echo $display_tag." ".__('Responses'); ?></a>
                                             </li>
 
                                             <li class="nav-item">
                                                 <a class="nav-link text-active-primary me-6 <?php if($display_id== 3){ echo "active";
 } ?>"  href="index.php?option=COM_VIEW_ASSESSMENT_SUMMARY&Rid=<?php echo $_GET['Rid']; ?>&CAT=<?php echo $_GET['CAT']; ?>&NI=3">
-                                                    <?php echo $display_tag." Report"; ?></a>
+                                                    <?php echo $display_tag." ".__('Report'); ?></a>
                                                 </li>
 
                                             </ul>

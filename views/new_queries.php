@@ -4,7 +4,7 @@ $querytypelist = callAPI($querytypeurl);
 $querytypelist = json_decode($querytypelist,1);
 $query_types = array();
 foreach ($querytypelist as $querystype) {
-    $query_types[$querystype['genc_detail_code']] = $querystype['genc_detail_name'];
+    $query_types[$querystype['genc_detail_code']] = __($querystype['genc_detail_name']);
 }
 $quu['order'] = "id DESC";
 $quu["where"] = array('company_id'=> $_SESSION['company_id'],'transaction_id'=>$rid,'table_name'=>$table_name);

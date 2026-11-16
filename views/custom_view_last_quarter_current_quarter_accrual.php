@@ -116,7 +116,7 @@ $head_1 = array('FY'.$ly.'-'.$lf.' CY'.$lcy.'-'.$lcq.' Current Quarter Actual','
             type: "POST",
             success:function(data){
                 console.log(data);
-                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success  pt-2 pb-2','animated flipInX','animated flipOutX','Your comments have been successfully inserted.','');
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success  pt-2 pb-2','animated flipInX','animated flipOutX',<?php echo json_encode(__('Your comments have been successfully inserted.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
 
             },
             error:function (){}

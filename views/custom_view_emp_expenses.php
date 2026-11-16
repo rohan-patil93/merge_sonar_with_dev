@@ -24,9 +24,9 @@ foreach($result['expenses_mileages_perdiem'] as $catdat){
 $arraycurrncy = array("1"=>"INR","2"=>"USD");
 foreach($result['general_code_details'] as $code){
     if($code['genc_code']=="PAYMETHOD"){
-        $Payment_mode[$code['genc_detail_code']]  = $code['genc_detail_name'];
+        $Payment_mode[$code['genc_detail_code']]  = __($code['genc_detail_name']);
     }elseif($code['genc_code']=="EXPENSTYPE"){
-        $expense_typelist[$code['genc_detail_code']]  = $code['genc_detail_name'];
+        $expense_typelist[$code['genc_detail_code']]  = __($code['genc_detail_name']);
     }
 }
 

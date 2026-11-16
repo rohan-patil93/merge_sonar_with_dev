@@ -5,7 +5,7 @@
       <div class="card-body">
         <p class="text-muted mb-0"><?= __('New Leads'); ?></p>
         <h3 class="f-w-600 f-50 mt-2 mb-2">428</h3>
-        <p class="text-success mb-0 f-w-600"><i class="ti-arrow-up"></i> 18% this month</p>
+        <p class="text-success mb-0 f-w-600"><i class="ti-arrow-up"></i> <?= __('18% this month'); ?></p>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
             <h4 class="f-w-600 f-30"><?= __('CRM Pipeline Flow'); ?></h4>
             <p class="f-w-600 f-14 text-muted"><?= __('Lead to opportunity conversion tracking'); ?></p>
           </div>
-          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center">36% Conversion Rate</span>
+          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center"><?= __('36% Conversion Rate'); ?></span>
         </div>
         <div class="pipeline-wrapper mt-4">
           <div class="pipeline">

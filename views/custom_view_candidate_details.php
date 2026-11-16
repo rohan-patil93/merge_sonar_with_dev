@@ -67,7 +67,7 @@
     $configesponse = callAPI($configurl);
     $configdata = json_decode($configesponse,1);
     foreach($alldata['genders'] as $gen){
-        $genders[$gen['genc_detail_code']] = $gen['genc_detail_name'];
+        $genders[$gen['genc_detail_code']] = __($gen['genc_detail_name']);
     }
     foreach($alldata['maritalstatus'] as $gen){
         $maritalstatus[$gen['id']] = $gen['marital_status_name'];
@@ -84,7 +84,7 @@
     }
 
     foreach($alldata['educationtype'] as $gen){
-        $educationtype[$gen['genc_detail_code']] = $gen['genc_detail_name'];
+        $educationtype[$gen['genc_detail_code']] = __($gen['genc_detail_name']);
     }
     foreach($alldata['religions'] as $maritalstatus1){
   $religions[$maritalstatus1['id']] = $maritalstatus1['religion_name'];

@@ -189,7 +189,7 @@ $successChangeLabel = ($successRateChange >= 0 ? '&#8593; ' : '&#8595; ') . abs(
           <polyline fill="rgba(37,99,235,0.1)" stroke="none" points="<?php echo $employeeSparkPoints; ?> 200,40 0,40"/>
         </svg>
       </div>
-      <a href="index.php?option=COM_LIST_FIELD_WORK_DAILY_PLANS_NEW" class="dod-stat-footer">View Details &#8594;</a>
+      <a href="index.php?option=COM_LIST_FIELD_WORK_DAILY_PLANS_NEW" class="dod-stat-footer"><?= __('View Details'); ?> &#8594;</a>
     </div>
 
     <div class="dod-card dod-stat-card">
@@ -210,7 +210,7 @@ $successChangeLabel = ($successRateChange >= 0 ? '&#8593; ' : '&#8595; ') . abs(
           <text x="28" y="32" text-anchor="middle" font-size="12" font-weight="700" fill="#2563eb"><?php echo $plannedProgressPct; ?>%</text>
         </svg>
       </div>
-      <a href="index.php?option=COM_LIST_FIELD_WORK_DAILY_PLANS_NEW" class="dod-stat-footer">View Details &#8594;</a>
+      <a href="index.php?option=COM_LIST_FIELD_WORK_DAILY_PLANS_NEW" class="dod-stat-footer"><?= __('View Details'); ?> &#8594;</a>
     </div>
 
     <div class="dod-card dod-stat-card">
@@ -227,7 +227,7 @@ $successChangeLabel = ($successRateChange >= 0 ? '&#8593; ' : '&#8595; ') . abs(
       <div class="dod-progress-bar">
         <div class="dod-progress-bar-fill" style="width: <?php echo $completionPct; ?>%;"></div>
       </div>
-      <a href="index.php?option=COM_LIST_FIELD_WORK_USER_MAP_POINTS_NEW" class="dod-stat-footer">View Details &#8594;</a>
+      <a href="index.php?option=COM_LIST_FIELD_WORK_USER_MAP_POINTS_NEW" class="dod-stat-footer"><?= __('View Details'); ?> &#8594;</a>
     </div>
 
     <div class="dod-card dod-stat-card">
@@ -247,7 +247,7 @@ $successChangeLabel = ($successRateChange >= 0 ? '&#8593; ' : '&#8595; ') . abs(
           <polyline fill="rgba(245,158,11,0.1)" stroke="none" points="<?php echo $extraSparkPoints; ?> 200,40 0,40"/>
         </svg>
       </div>
-      <a href="index.php?option=COM_LIST_FIELD_WORK_USER_MAP_POINTS_NEW" class="dod-stat-footer">View Details &#8594;</a>
+      <a href="index.php?option=COM_LIST_FIELD_WORK_USER_MAP_POINTS_NEW" class="dod-stat-footer"><?= __('View Details'); ?> &#8594;</a>
     </div>
   </div>
 

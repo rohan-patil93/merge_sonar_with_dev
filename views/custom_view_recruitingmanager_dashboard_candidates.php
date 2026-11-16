@@ -32,12 +32,12 @@ function submitResumeFiles(){
 		    contentType: false,
 		    success: function (response) {
 		        console.log(response);
-		        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','File uploaded successfully','');
+		        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('File uploaded successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
 		       	 location.reload();
 		    }
 		});
 	} else {
-		tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX','Please select at least one file.','');
+		tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',<?php echo json_encode(__('Please select at least one file.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
 	    return false;
 	}
 }
@@ -87,7 +87,7 @@ function SynchCandidateFolder(){
         data:'company_id='+company_id+'&data_name='+data_name+'&user_id='+user_id,
         success: function(response) {
         	console.log(response);
-            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Folder files scanned successfully. Candidates created successfully.','');
+            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Folder files scanned successfully. Candidates created successfully.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
             location.reload();
         }
     });

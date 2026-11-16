@@ -94,10 +94,10 @@ $_SESSION['apply_js']['multiselest'] = '1';
     function chekother(val,id){
         console.log("check"+val+"iddds"+id);
         if(val=='123'){
-             $("#other_"+id).html('<input aria-label="Lcode[]" type="text" class="form-control fitemRow" name= "lcode[]" id="lcode_'+id+'">');
+             $("#other_"+id).html('<input aria-label="<?= htmlspecialchars(__('Lcode'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control fitemRow" name= "lcode[]" id="lcode_'+id+'">');
         }
         if(val=='321'){
-             $("#rother_"+id).html('<input aria-label="Rcode[]" type="text" class="form-control" name= "rcode[]" id="rcode_'+id+'">');
+             $("#rother_"+id).html('<input aria-label="<?= htmlspecialchars(__('Rcode'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name= "rcode[]" id="rcode_'+id+'">');
         }
     }
     function deletestatickRows(val){
@@ -122,13 +122,13 @@ $_SESSION['apply_js']['multiselest'] = '1';
         count++;
         var htmlRows = '';
         htmlRows += '<tr id="qur_div_'+count+'" >';
-        htmlRows += '<td id="other_'+count+'"><select aria-label="Lcode[]" class="form-control fitemRow js-example-basic-single" id="lcode__2"+count+'" name= "lcode[]"  onchange="chekother(this.value,'+count+')"><option value=""> <?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($codes as  $code) { ?><option value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option><?php
-} ?> <option value="123">Other</option> </select></td>';
-        htmlRows += '<td><select aria-label="Loperand[]" class="form-control  js-example-basic-single" id="loperand_'+count+'" name= "loperand[]" ><option value=""> <?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($operators as  $operator) { ?><option value="<?php echo $operator; ?>"><?php echo $operator; ?></option><?php
+        htmlRows += '<td id="other_'+count+'"><select aria-label="<?= htmlspecialchars(__('Lcode'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control fitemRow js-example-basic-single" id="lcode__2"+count+'" name= "lcode[]"  onchange="chekother(this.value,'+count+')"><option value=""> <?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($codes as  $code) { ?><option value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option><?php
+} ?> <option value="123"><?= htmlspecialchars(__('Other'), ENT_QUOTES, 'UTF-8'); ?></option> </select></td>';
+        htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Loperand'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control  js-example-basic-single" id="loperand_'+count+'" name= "loperand[]" ><option value=""> <?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($operators as  $operator) { ?><option value="<?php echo $operator; ?>"><?php echo $operator; ?></option><?php
 } ?></select></td>';
-        htmlRows += '<td id="rother_'+count+'"> <select aria-label="Rcode[]" class="form-control  js-example-basic-single" id="rcode__2"+count+'" name= "rcode[]" onchange="chekother(this.value,'+count+')" ><option value=""> <?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($codes as  $code) { ?><option value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option><?php
-} ?> <option value="321">Other</option> </select></td>';
-        htmlRows += '<td><select aria-label="Roperand[]" class="form-control  js-example-basic-single" id="roperand_'+count+'" name= "roperand[]" ><option value=""> <?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($operators as  $operator) { ?><option value="<?php echo $operator; ?>"><?php echo $operator; ?></option><?php
+        htmlRows += '<td id="rother_'+count+'"> <select aria-label="<?= htmlspecialchars(__('Rcode'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control  js-example-basic-single" id="rcode__2"+count+'" name= "rcode[]" onchange="chekother(this.value,'+count+')" ><option value=""> <?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($codes as  $code) { ?><option value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option><?php
+} ?> <option value="321"><?= htmlspecialchars(__('Other'), ENT_QUOTES, 'UTF-8'); ?></option> </select></td>';
+        htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Roperand'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control  js-example-basic-single" id="roperand_'+count+'" name= "roperand[]" ><option value=""> <?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($operators as  $operator) { ?><option value="<?php echo $operator; ?>"><?php echo $operator; ?></option><?php
 } ?></select></td>';
 
         htmlRows += '<td><input type="hidden" id="delete_value_'+count+'" value="0"><div  id="'+count+'"  class="close" onclick="deletestatickRows(this.id)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-trash"></i></div>';

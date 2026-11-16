@@ -41,7 +41,7 @@ $vendors = $result['vendors'];
     <div class="card-header">
       <h5 class="f-30">
         <?php
-        $title = "Account Payable 3 Way Match";
+        $title = __('Account Payable 3 Way Match');
         echo $title;
         ?>
        </h5>

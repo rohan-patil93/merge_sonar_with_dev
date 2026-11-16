@@ -74,7 +74,7 @@ $data = json_decode($response, true);
     const actual_return_by = document.getElementById('return_' + bom_id).value;
 
     if (!actual_return_by) {
-      tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'Please select a return date.', '');
+      tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', <?php echo json_encode(__('Please select a return date.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, '');
 
       return;
     }

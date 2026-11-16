@@ -378,19 +378,19 @@ $final_data    = $return['final'] ?? array();
 
                 <div class="row mb-3 align-items-end one-row" data-row="${index}">
                   <div class="col-6">
-                    <span>Location</span>
-                    <select aria-label="${section} Location []" class="form-select js-example-basic-single loc" name="${section}_location_id[]" required>
-                      <option value="">Select Location</option>
+                    <span><?= __('Location'); ?></span>
+                    <select aria-label="${section} <?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single loc" name="${section}_location_id[]" required>
+                      <option value=""><?= __('Select Location'); ?></option>
                       <?php foreach ($locations as $loc) { ?>
                         <option value="<?php echo $loc['id']; ?>"><?php echo $loc['location_full_name']; ?></option>
                       <?php } ?>
-                      <option value="99">ALL</option>
+                      <option value="99"><?= __('ALL'); ?></option>
                     </select>
                   </div>
                   <div class="col-5">
-                    <span>Employee</span>
-                    <select aria-label="${section} Employee []" class="form-select js-example-basic-single emp" name="${section}_employee_id[]" required>
-                      <option value="">Select Employee</option>
+                    <span><?= __('Employee'); ?></span>
+                    <select aria-label="${section} <?= htmlspecialchars(__('Employee'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single emp" name="${section}_employee_id[]" required>
+                      <option value=""><?= __('Select Employee'); ?></option>
                     </select>
                   </div>
                   <div class="col-1 text-end">

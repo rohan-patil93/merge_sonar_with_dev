@@ -29,7 +29,7 @@ $_SESSION['apply_js']['standart_report_bill_vendor']=1;
 
 <div class="page-body">
   <?php
-  $title = "Bill Report";
+  $title = __('Bill Report');
   include_once "custom_standard_top_print.php"; ?>
   <div class="card">
     <div class="card-header">

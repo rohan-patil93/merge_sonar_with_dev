@@ -15,7 +15,7 @@ $vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'emp_id'=>$_GET[
     $gendat = callAPI($vurl);
     $gendata = json_decode($gendat,1);
     foreach($gendata as $genda){
-        $gencode[$genda['genc_detail_code']] = $genda['genc_detail_name'];
+        $gencode[$genda['genc_detail_code']] = __($genda['genc_detail_name']);
     }
     $vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0');
     $vdata = urlencode(json_encode($vdata1));

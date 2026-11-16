@@ -109,15 +109,15 @@ $location_res = $data['location_res'] ?? array();
         var from_date = $('#from_date').val();
         var to_date = $('#to_date').val();
         if (from_date == '') {
-            tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'Please select From Date.', '');
+            tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', <?php echo json_encode(__('Please select From Date.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, '');
             return false;
         }
         if (to_date == '') {
-            tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'Please select To Date.', '');
+            tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', <?php echo json_encode(__('Please select To Date.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, '');
             return false;
         }
         if (new Date(to_date) < new Date(from_date)) {
-            tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', 'To Date cannot be earlier than From Date.', '');
+            tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger', 'animated flipInX', 'animated flipOutX', <?php echo json_encode(__('To Date cannot be earlier than From Date.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, '');
             return false;
         }
         $.ajax({

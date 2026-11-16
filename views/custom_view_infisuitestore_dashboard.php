@@ -47,7 +47,7 @@
             <h4 class="f-w-600 f-30"><?= __('Stock Movement Analytics'); ?></h4>
             <p class="f-w-600 f-14 text-muted"><?= __('Inward vs outward inventory movement'); ?></p>
           </div>
-          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center">94% Inventory Accuracy</span>
+          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center"><?= __('94% Inventory Accuracy'); ?></span>
         </div>
         <div id="line-example" style="height: 360px;"></div>
       </div>

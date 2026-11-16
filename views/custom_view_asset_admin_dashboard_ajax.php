@@ -66,8 +66,8 @@ $user_assets = $details['user_assets'];
                     <td class="p-2 w-b-w-s"><?php echo $assetcategory[$list_asset['category_id']]['category_description']; ?></td>
                     <td class="p-2"><?php echo $locations[$list_asset['asset_location']]['location_name']; ?></td>
 
-                    <td class="p-2"><?php echo $asset_status[$list_asset['asset_status']]['name']; ?></td>
-                    <td class="p-2"><?php echo $ass_condition[$list_asset['conditions']]['condition_name']; ?></td>
+                    <td class="p-2"><?php echo htmlspecialchars(__($asset_status[$list_asset['asset_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td class="p-2"><?php echo htmlspecialchars(__($ass_condition[$list_asset['conditions']]['condition_name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td>
                     <td class="p-2 w-b-w-s"><?php echo $application_users[$list_asset['asset_custodian']]['display_name']; ?></td>
                     <td class="p-2"> <?php echo $user_assets[$list_asset['id']] !=""?$_SESSION['users'][$user_assets[$list_asset['id']]]:"-"; ?> </td>
                 </tr>

@@ -379,7 +379,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                                         if($approvedusercriteria['opex_cpex'] == $opex_cpex['genc_detail_code']){
                                             $selected ="selected";
                                         }
-                                        echo '<option value="'.$opex_cpex['genc_detail_code'].'" '.$selected.'>'.strtoupper($opex_cpex['genc_detail_name']).'</option>';
+                                        echo '<option value="'.$opex_cpex['genc_detail_code'].'" '.$selected.'>'.htmlspecialchars(__(strtoupper($opex_cpex['genc_detail_name'])), ENT_QUOTES, 'UTF-8').'</option>';
                                     } ?>
                                 </select>
                             </td>
@@ -397,7 +397,7 @@ $processpagename =mb_convert_case($application_process_pages_single['name'], MB_
                                         if(in_array($transactiontypes['genc_detail_code'],(array)$transaction_type)){
                                             $selected ="selected";
                                         }
-                                        echo '<option value="'.$transactiontypes['genc_detail_code'].'" '.$selected.'>'.$transactiontypes['genc_detail_name'].'</option>';
+                                        echo '<option value="'.$transactiontypes['genc_detail_code'].'" '.$selected.'>'.htmlspecialchars(__($transactiontypes['genc_detail_name']), ENT_QUOTES, 'UTF-8').'</option>';
                                     } ?>
                                 </select>
                             </td>

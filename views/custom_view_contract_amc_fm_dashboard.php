@@ -70,7 +70,7 @@ function renderContractAmcFmDashboardRows($rows, $page = 1, $limit = 10)
 
         $completedDisplay = htmlspecialchars($row['completed_display'] ?? '—', ENT_QUOTES, 'UTF-8');
 
-        $statusLabel = htmlspecialchars($row['fm_status_label'] ?? 'Due', ENT_QUOTES, 'UTF-8');
+        $statusLabel = htmlspecialchars(__($row['fm_status_label'] ?? 'Due'), ENT_QUOTES, 'UTF-8');
 
         $statusClass = htmlspecialchars($row['fm_status_class'] ?? 'bg-primary', ENT_QUOTES, 'UTF-8');
 

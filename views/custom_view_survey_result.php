@@ -32,7 +32,7 @@ $display_tag = $category[$survey_details['category']];
 $qustion_types = $surveyData['qustion_types'];
 $total_q = count((array)$display_questions);
 foreach ($qustion_types as $qtype) {
-  $questiontypes[$qtype['genc_detail_code']] =  $qtype['genc_detail_name'];
+  $questiontypes[$qtype['genc_detail_code']] = __($qtype['genc_detail_name']);
 }
 
 ?>

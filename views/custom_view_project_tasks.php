@@ -39,7 +39,7 @@ foreach ($statusList as $statusItem) {
     $id = $statusItem['status'];
     $statuses[$id] = [
         'id' => $id,
-        'name' => $statusItem['name'],
+        'name' => __($statusItem['name']),
         'action_label' => $statusItem['action_label'],
         'background_color' => $stausresultwithcolor[$id]['background_color'] ?? '#999',
         'color' => $stausresultwithcolor[$id]['color'] ?? '#fff'

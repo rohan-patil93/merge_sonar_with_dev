@@ -19,7 +19,7 @@ $response = $surveyData['response'];
 $display_questions = $surveyData['questions'];
 $qustion_types = $surveyData['qustion_types'];
 foreach ($qustion_types as $qtype) {
-	$questiontypes[$qtype['genc_detail_code']] =  $qtype['genc_detail_name'];
+	$questiontypes[$qtype['genc_detail_code']] = __($qtype['genc_detail_name']);
 }
 
 $assigntonames = json_decode($survey_details['assigned_to_employees'],1);

@@ -110,7 +110,7 @@ $questions = $data['questions'];
               <div class="rating">
                 <?php for($i=$optionlist['0'];$i>=1; $i--){ ?>
                     <input type="radio" id="star<?php echo $questionid.'_val_'.$i; ?>" name="response_option[<?php echo $questionid; ?>]" value="<?php echo $i; ?>">
-                    <label for="star<?php echo $questionid.'_val_'.$i; ?>" aria-label="Star <?php echo $i; ?>"></label>
+                    <label for="star<?php echo $questionid.'_val_'.$i; ?>" aria-label="<?= htmlspecialchars(__('Star'), ENT_QUOTES, 'UTF-8'); ?> <?php echo $i; ?>"></label>
                 <?php } ?>
                 </div>
               <?php
@@ -135,7 +135,7 @@ $questions = $data['questions'];
               <div class="rating">
                 <?php for($i=10;$i>=1; $i--){ ?>
                     <input type="radio" id="star<?php echo 'overall_'.$i; ?>" name="overall_rating" value="<?php echo $i; ?>">
-                    <label for="star<?php echo 'overall_'.$i; ?>" aria-label="Star <?php echo $i; ?>"></label>
+                    <label for="star<?php echo 'overall_'.$i; ?>" aria-label="<?= htmlspecialchars(__('Star'), ENT_QUOTES, 'UTF-8'); ?> <?php echo $i; ?>"></label>
                 <?php } ?>
                 </div>
           </div>

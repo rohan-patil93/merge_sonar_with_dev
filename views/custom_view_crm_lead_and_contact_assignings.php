@@ -84,7 +84,7 @@ function submitForm(){
             }
         });
     }else{
-        tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX','Oopps','');
+        tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',<?php echo json_encode(__('Oopps'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
     }
 }
 </script>
@@ -229,9 +229,9 @@ function submitForm(){
                                     $lead_used_cnt = $leadcnt['lead_used_cnt'] !=""?$leadcnt['lead_used_cnt']:0;
                                     $unused = $lead_total_cnt-$lead_used_cnt;
                                 ?>
-                                <span class="form-label label label-xs label-info " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Total"><?php echo $lead_total_cnt;  ?></span>
-                                <span class="form-label label label-xs label-danger " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title=" Yet To start"> <?php echo $unused ?></span>
-                                <span class="form-label label label-xs label-success " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="In-Progress"><?php echo $lead_used_cnt; ?></span>
+                                <span class="form-label label label-xs label-info " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Total'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $lead_total_cnt;  ?></span>
+                                <span class="form-label label label-xs label-danger " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Yet To start'), ENT_QUOTES, 'UTF-8'); ?>"> <?php echo $unused ?></span>
+                                <span class="form-label label label-xs label-success " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('In-Progress'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $lead_used_cnt; ?></span>
                             </td>
                             <td>
                                 <?php
@@ -239,9 +239,9 @@ function submitForm(){
                                     $lead_used_cnt = $contactscnt['lead_used_cnt'] !=""?$contactscnt['lead_used_cnt']:0;
                                     $unused = $lead_total_cnt-$lead_used_cnt;
                                 ?>
-                               <span class="form-label label label-xs label-info " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Total"><?php echo $lead_total_cnt;  ?></span>
-                                <span class="form-label label label-xs label-danger " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Yet To start"><?php echo $unused ?></span>
-                                <span class="form-label label label-xs label-success " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="In-Progress"><?php echo $lead_used_cnt ?></span>
+                               <span class="form-label label label-xs label-info " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Total'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $lead_total_cnt;  ?></span>
+                                <span class="form-label label label-xs label-danger " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Yet To start'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $unused ?></span>
+                                <span class="form-label label label-xs label-success " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('In-Progress'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $lead_used_cnt ?></span>
                             </td>
                         </tr>
                 <?php $im++;
@@ -249,7 +249,7 @@ function submitForm(){
                     </table>
                     <?php }else{ ?>
                     <div class="card-px text-center ">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> No Users</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> <?= __('No Users'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
@@ -262,11 +262,11 @@ function submitForm(){
     <div class="col-lg-7">
         <div class="card">
             <div class="card-header table-card-header">
-                <h5> Lead And Contact Assigning</h5>
+                <h5> <?= __('Lead And Contact Assigning'); ?></h5>
                 <div class="card-header-right table-card-header ">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -274,18 +274,18 @@ function submitForm(){
                 <form id="assignecontactform">
                     <div class="row">
                         <div class=" col-lg-12">
-                            <span class="form-label">Assign Type <span class="requried  text-danger">*</span></span>
+                            <span class="form-label"><?= __('Assign Type'); ?> <span class="requried  text-danger">*</span></span>
                             <div class="form-radio">
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input aria-label="Assign Type" type="radio" name="assign_type" id="assign_type_3" value="1"  onchange="chnageAssigneType()" checked="checked">
-                                        <i class="helper"></i>Manual Assign
+                                        <input aria-label="<?= htmlspecialchars(__('Assign Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="assign_type" id="assign_type_3" value="1"  onchange="chnageAssigneType()" checked="checked">
+                                        <i class="helper"></i><?= __('Manual Assign'); ?>
                                     </label>
                                 </div>
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input aria-label="Assign Type" type="radio" name="assign_type" id="assign_type_4"  value="2" onchange="chnageAssigneType()">
-                                        <i class="helper"></i>Auto Assign
+                                        <input aria-label="<?= htmlspecialchars(__('Assign Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="assign_type" id="assign_type_4"  value="2" onchange="chnageAssigneType()">
+                                        <i class="helper"></i><?= __('Auto Assign'); ?>
                                     </label>
                                 </div>
                             </div>
@@ -293,20 +293,20 @@ function submitForm(){
                     </div>
                     <div class="row" >
                         <div class=" col-lg-6">
-                            <span class="form-label">Assign Lead/Contacts <span class="requried  text-danger">*</span></span>
+                            <span class="form-label"><?= __('Assign Lead/Contacts'); ?> <span class="requried  text-danger">*</span></span>
                             <div class="form-radio">
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input aria-label="Assign Lead Contact" type="radio" name="assign_lead_contact" id="assign_lead_contact_2" checked="checked" value="crm_leads">
-                                        <i class="helper"></i>Leads
+                                        <input aria-label="<?= htmlspecialchars(__('Assign Lead Contact'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="assign_lead_contact" id="assign_lead_contact_2" checked="checked" value="crm_leads">
+                                        <i class="helper"></i><?= __('Leads'); ?>
                                     </label>
                                     <input type="hidden" id="crm_lead_total_cnt" value="<?php echo $dashboard_cnt['crm_lead_un_assigne_cnt'] !=""?$dashboard_cnt['crm_lead_un_assigne_cnt']:0; ?>">
                                     <span class="form-label label label-xs label-primary text-white"><?php echo $dashboard_cnt['crm_lead_un_assigne_cnt'] !=""?$dashboard_cnt['crm_lead_un_assigne_cnt']:0; ?></span>
                                 </div>
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input aria-label="Assign Lead Contact" type="radio" name="assign_lead_contact"  id="assign_lead_contact_3" value="crm_contacts">
-                                        <i class="helper"></i>Contacts
+                                        <input aria-label="<?= htmlspecialchars(__('Assign Lead Contact'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="assign_lead_contact"  id="assign_lead_contact_3" value="crm_contacts">
+                                        <i class="helper"></i><?= __('Contacts'); ?>
                                     </label>
                                     <input type="hidden" id="crm_contacts_total_cnt" value="<?php echo $dashboard_cnt['crm_contacts_un_assigne_cnt'] !=""?$dashboard_cnt['crm_contacts_un_assigne_cnt']:0; ?>">
                                     <span class="form-label label label-xs label-warning  text-white"><?php echo $dashboard_cnt['crm_contacts_un_assigne_cnt'] !=""?$dashboard_cnt['crm_contacts_un_assigne_cnt']:0; ?></span>
@@ -314,51 +314,51 @@ function submitForm(){
                             </div>
                         </div>
                         <div class=" col-lg-6 mt-2">
-                            <span class="form-label">Order By <span class="requried  text-danger">*</span></span>
+                            <span class="form-label"><?= __('Order By'); ?> <span class="requried  text-danger">*</span></span>
                             <div class="form-radio">
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input aria-label="Order By" type="radio" name="order_by" id="order_by"  value="ASC" checked="checked">
-                                        <i class="helper"></i>Oldest
+                                        <input aria-label="<?= htmlspecialchars(__('Order By'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="order_by" id="order_by"  value="ASC" checked="checked">
+                                        <i class="helper"></i><?= __('Oldest'); ?>
                                     </label>
                                 </div>
                                 <div class="radio radio-inline">
                                     <label class="form-label">
-                                        <input aria-label="Order By" type="radio" name="order_by" id="order_by_2" value="DESC" >
-                                        <i class="helper"></i>Newest
+                                        <input aria-label="<?= htmlspecialchars(__('Order By'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="order_by" id="order_by_2" value="DESC" >
+                                        <i class="helper"></i><?= __('Newest'); ?>
                                     </label>
                                 </div>
 
                             </div>
                         </div>
                         <div class="col-lg-6 form-group w-full mt-2" id="manual_assign_div">
-                            <span class="form-label  d-block">User <span class="requried  text-danger">*</span></span>
+                            <span class="form-label  d-block"><?= __('User'); ?> <span class="requried  text-danger">*</span></span>
                             <span id="error_user_id" class="text-danger"></span>
-                            <select aria-label="Application User" class="form-control js-example-basic-single" name="application_user_id" id="application_user_id">
-                                <option value="">Select Any One</option>
+                            <select aria-label="<?= htmlspecialchars(__('Application User'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="application_user_id" id="application_user_id">
+                                <option value=""><?= __('Select Any One'); ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['application_user_id'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full mt-2" id="auto_assign_div" style="display: none">
-                            <span class="form-label d-block">Project <span class="requried  text-danger">*</span></span>
+                            <span class="form-label d-block"><?= __('Project'); ?> <span class="requried  text-danger">*</span></span>
                             <span id="error_project_id" class="text-danger"></span>
-                            <select aria-label="Project" class="form-control js-example-basic-single project_ids" name="project_id" id="project_ids">
-                                <option value="">Select Any One</option>
+                            <select aria-label="<?= htmlspecialchars(__('Project'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single project_ids" name="project_id" id="project_ids">
+                                <option value=""><?= __('Select Any One'); ?></option>
                                <?php foreach($crm_projects as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>"><?php echo $uval['project_name']." - (".$uval['team_user_cnt'].")"; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group mt-2">
-                            <span class="form-label d-block">Sharing Count <span class="requried  text-danger">*</span></span>
+                            <span class="form-label d-block"><?= __('Sharing Count'); ?> <span class="requried  text-danger">*</span></span>
                             <span id="error_number_of_lead_contact" class="text-danger"></span>
-                            <input aria-label="Count" class="form-control" type="text" name="number_of_lead_contact" id="number_of_lead_contact" placeholder="Count" value="">
+                            <input aria-label="<?= htmlspecialchars(__('Count'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="number_of_lead_contact" id="number_of_lead_contact" placeholder="<?= htmlspecialchars(__('Count'), ENT_QUOTES, 'UTF-8'); ?>" value="">
                         </div>
 
                          <div class="mt-2">
-                            <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitForm()">Assign</button>
+                            <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitForm()"><?= __('Assign'); ?></button>
 
                         </div>
                     </div>

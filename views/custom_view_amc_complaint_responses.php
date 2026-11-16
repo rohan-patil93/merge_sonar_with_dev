@@ -136,9 +136,9 @@ if ($_GET['Rid']) {
               <?php
               $priority = $return['complaint_priority'];
               $badgeClass = ($priority == 'H') ? 'danger' : (($priority == 'M') ? 'warning' : 'success');
-              $label = ($priority == 'H') ? 'High' : (($priority == 'M') ? 'Medium' : 'Low');
+              $label = ($priority == 'H') ? __('High') : (($priority == 'M') ? __('Medium') : __('Low'));
               ?>
-              <span class="badge bg-<?php echo $badgeClass; ?> px-3 py-1 fw-bold"><?php echo $label; ?></span>
+              <span class="badge bg-<?php echo $badgeClass; ?> px-3 py-1 fw-bold"><?php echo htmlspecialchars($label, ENT_QUOTES, 'UTF-8'); ?></span>
             </span>
           </div>
         </div>
@@ -150,7 +150,7 @@ if ($_GET['Rid']) {
           </div>
           <div class="detail-box">
             <span class="label"><?= __('Status'); ?>:</span>
-            <span class="value"><span class="badge bg-primary fw-bold"><?php echo $return['name']; ?></span></span>
+            <span class="value"><span class="badge bg-primary fw-bold"><?php echo htmlspecialchars(__($return['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span></span>
           </div>
           <div class="detail-box">
             <span class="label"><?= __('Complaint User'); ?>:</span>

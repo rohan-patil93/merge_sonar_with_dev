@@ -8,8 +8,8 @@ $details = json_decode($data_details,1);
 
 $list_assets = $details['list_assets'];
 $momenthistory1 = $details['momenthistory'];
-$ass_condition = array('1'=>'Used','2'=>'Good','3'=>'Poor','4'=>'Damaged','New');
-$allocation_type = array('1'=>'Create Assets','2'=>'Update Assets','3'=>'Allocation','4'=>'Asset accept','5'=>'Asset Reject','6'=>'Return Assets','7'=>'Transefer');
+$ass_condition = array('1'=>__('Used'),'2'=>__('Good'),'3'=>__('Poor'),'4'=>__('Damaged'),__('New'));
+$allocation_type = array('1'=>__('Create Assets'),'2'=>__('Update Assets'),'3'=>__('Allocation'),'4'=>__('Asset accept'),'5'=>__('Asset Reject'),'6'=>__('Return Assets'),'7'=>__('Transefer'));
 foreach($details['asset_status'] as $asset_status){
     $ass_status[$asset_status['id']] = $asset_status['name'];
 }
@@ -114,7 +114,7 @@ function submitdetails(){
                                           <span class="form-label label label-primary"><?= __('Location'); ?> : <?php echo $locations_lists[$jsondecode['asset_location']]; ?></span>
                                         </div>
                                         <div class="label-main">
-                                          <span class="form-label label label-success"><?= __('Status'); ?> : <?php echo $ass_status[$jsondecode['status']]; ?></span>
+                                          <span class="form-label label label-success"><?= __('Status'); ?> : <?php echo htmlspecialchars(__($ass_status[$jsondecode['status']] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                         </div>
                                         <div class="label-main">
                                           <span class="form-label label label-info"><?= __('Candition'); ?> : <?php echo $ass_condition[$jsondecode['conditions']]; ?></span>

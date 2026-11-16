@@ -65,13 +65,13 @@ $has_next_c = (($offset + $limit) < $out_count);
 
 $title = "";
 if ($day_type == 'TODAY') {
-    $title = "Today Visitors";
+    $title = __('Today Visitors');
 } elseif ($day_type == 'YESTERDAY') {
-    $title = "Yesterday Visitors";
+    $title = __('Yesterday Visitors');
 } elseif ($day_type == 'LAST7DAYS') {
-    $title = "Last 7 Days Visitors";
+    $title = __('Last 7 Days Visitors');
 } elseif ($day_type == 'ALL') {
-    $title = "All Visitors";
+    $title = __('All Visitors');
 }
 
 $ITEM_SETS = [
@@ -282,7 +282,7 @@ $ITEM_SETS = [
                                                 $icon = $ITEM_SETS[$it['item_key']] ?? 'fa-ellipsis-h';
                                                 ?>
                                                 <span class="luggage-item-icon" data-bs-toggle="tooltip"
-                                                      title="Type: <?= $it['visitor_type'] ?> · Serial: <?= $it['serial_or_remarks'] ?: '-' ?>">
+                                                      title="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>: <?= $it['visitor_type'] ?> · <?= htmlspecialchars(__('Serial'), ENT_QUOTES, 'UTF-8'); ?>: <?= $it['serial_or_remarks'] ?: '-' ?>">
                                                     <i class="fa <?= $icon ?>"></i>
                                                 </span>
                                             <?php }
@@ -459,7 +459,7 @@ $ITEM_SETS = [
                                             foreach ($items as $it) {
                                                 $icon = $ITEM_SETS[$it['item_key']] ?? 'fa-ellipsis-h';
                                                 ?>
-                                                <span class="luggage-item-icon" data-bs-toggle="tooltip" title="Type: <?= $it['visitor_type'] ?> · Serial: <?= $it['serial_or_remarks'] ?>">
+                                                <span class="luggage-item-icon" data-bs-toggle="tooltip" title="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>: <?= $it['visitor_type'] ?> · <?= htmlspecialchars(__('Serial'), ENT_QUOTES, 'UTF-8'); ?>: <?= $it['serial_or_remarks'] ?>">
                                                     <i class="fa <?= $icon ?>"></i>
                                                 </span>
                                             <?php }
@@ -618,7 +618,7 @@ $ITEM_SETS = [
                                             foreach ($items as $it) {
                                                 $icon = $ITEM_SETS[$it['item_key']] ?? 'fa-ellipsis-h';
                                                 ?>
-                                                <span class="luggage-item-icon" data-bs-toggle="tooltip" title="Type: <?= $it['visitor_type'] ?> · Serial: <?= $it['serial_or_remarks'] ?>">
+                                                <span class="luggage-item-icon" data-bs-toggle="tooltip" title="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>: <?= $it['visitor_type'] ?> · <?= htmlspecialchars(__('Serial'), ENT_QUOTES, 'UTF-8'); ?>: <?= $it['serial_or_remarks'] ?>">
                                                     <i class="fa <?= $icon ?>"></i>
                                                 </span>
                                             <?php }

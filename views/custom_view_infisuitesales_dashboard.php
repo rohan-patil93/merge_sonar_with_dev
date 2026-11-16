@@ -5,7 +5,7 @@
       <div class="card-body">
         <p class="text-muted mb-0"><?= __('Monthly Revenue'); ?></p>
         <h3 class="f-w-600 f-50 mt-3 mb-3"><?= __('₹6.8 Cr'); ?></h3>
-        <p class="text-success mb-0 f-w-600"><i class="ti-arrow-up"></i> 18% vs last month</p>
+        <p class="text-success mb-0 f-w-600"><i class="ti-arrow-up"></i> <?= __('18% vs last month'); ?></p>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@
             <h4 class="f-w-600 f-30"><?= __('Sales Funnel Pipeline'); ?></h4>
             <p class="f-w-600 f-14 text-muted"><?= __('Lead to revenue conversion tracking'); ?></p>
           </div>
-          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center">32% Conversion Rate</span>
+          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center"><?= __('32% Conversion Rate'); ?></span>
         </div>
         <div class="pipeline-wrapper mt-4">
           <div class="pipeline">

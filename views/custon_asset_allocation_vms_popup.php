@@ -33,7 +33,7 @@ include_once '../comm.php';
             success:function(data){
                 console.log(data);
                 $('#kt_modal_dynamic_popup2').modal("hide");
-                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Asset Allocation Successfully','');
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Asset Allocation Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
             },
             error:function (){}
         });

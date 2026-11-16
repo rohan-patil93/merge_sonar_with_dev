@@ -12,9 +12,9 @@ $investertypeary = array('Month');
 $lastinvestertypeary = array();
 $usertype = array();
 foreach($contribution_users_type as $cut){
-  $investertypeary[] = $cut['genc_detail_name'];
-  $lastinvestertypeary[] = $cut['genc_detail_name'];
-  $usertype[$cut['genc_detail_code']] =$cut['genc_detail_name'];
+  $investertypeary[] = __($cut['genc_detail_name']);
+  $lastinvestertypeary[] = __($cut['genc_detail_name']);
+  $usertype[$cut['genc_detail_code']] = __($cut['genc_detail_name']);
 }
 $investergrpary[] = $investertypeary;
 foreach($company_valuation_graph as $yr=>$vl){

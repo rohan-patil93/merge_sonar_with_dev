@@ -339,7 +339,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                             foreach((array)$details['create'] as $submited){ ?>
                             <div class="row mt-3 pb-3 cursor-pointer" onclick="toredriacte('index.php?option=COM_INSERT_PROJECT_TIMESHEETS&CHANGE_DATE=<?php echo $submited[lastofweek]; ?>&EMP=<?php echo $_SESSION[emp_id]?>')" style="border-bottom:1px dashed #cccccc;" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                 <div class="col-lg-3">
-                                    <button data-bs-toggle="tooltip" data-placement="bottom" title="&nbsp;&nbsp;<?php echo $sprogress[$submited['current_status']]['name']; ?>&nbsp;&nbsp;" class="waves-effect waves-light btn-primary p-l-15 p-r-15 p-t-10 p-b-10 b-radius-5 border-0" style="background-color: <?php echo "#".$_SESSION['status'][$submited['current_status']]['background_color']; ?>"><i class="ti-calendar f-w-600"></i></button>
+                                    <button data-bs-toggle="tooltip" data-placement="bottom" title="&nbsp;&nbsp;<?php echo htmlspecialchars(__($sprogress[$submited['current_status']]['name']), ENT_QUOTES, 'UTF-8'); ?>&nbsp;&nbsp;" class="waves-effect waves-light btn-primary p-l-15 p-r-15 p-t-10 p-b-10 b-radius-5 border-0" style="background-color: <?php echo "#".$_SESSION['status'][$submited['current_status']]['background_color']; ?>"><i class="ti-calendar f-w-600"></i></button>
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <h6 class="f-w-600"><?php echo date('F', strtotime($submited['lastofweek'])); ?></h6>
@@ -373,7 +373,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                             foreach((array)$details['submited'] as $submited){ ?>
                             <div class="row mt-3 pb-3 cursor-pointer"  onclick="toredriacte('index.php?option=COM_INSERT_PROJECT_TIMESHEETS&CHANGE_DATE=<?php echo $submited[lastofweek]; ?>&EMP=<?php echo $_SESSION[emp_id]?>')" style="border-bottom:1px dashed #cccccc;" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                 <div class="col-lg-3">
-                                    <button data-bs-toggle="tooltip" data-placement="bottom" title="&nbsp;&nbsp;<?php echo $sprogress[$submited['current_status']]['name']; ?>&nbsp;&nbsp;" class="waves-effect waves-light btn-primary p-l-15 p-r-15 p-t-10 p-b-10 b-radius-5 border-0" style="background-color: <?php echo "#".$_SESSION['status'][$submited['current_status']]['background_color']; ?>"><i class="ti-calendar f-w-600"></i></button>
+                                    <button data-bs-toggle="tooltip" data-placement="bottom" title="&nbsp;&nbsp;<?php echo htmlspecialchars(__($sprogress[$submited['current_status']]['name']), ENT_QUOTES, 'UTF-8'); ?>&nbsp;&nbsp;" class="waves-effect waves-light btn-primary p-l-15 p-r-15 p-t-10 p-b-10 b-radius-5 border-0" style="background-color: <?php echo "#".$_SESSION['status'][$submited['current_status']]['background_color']; ?>"><i class="ti-calendar f-w-600"></i></button>
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <h6 class="f-w-600"><?php echo date('F', strtotime($submited['timesheet_date'])); ?></h6>
@@ -406,7 +406,7 @@ $quet = array('1'=>array('1','2','3'),'2'=>array('1','2','3'),'3'=>array('1','2'
                             foreach((array)$details['approved'] as $submited){ ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">
                                 <div class="col-lg-3">
-                                    <button data-bs-toggle="tooltip" data-placement="bottom" title="&nbsp;&nbsp;<?php echo $sprogress[$submited['current_status']]['name']; ?>&nbsp;&nbsp;" class="waves-effect waves-light btn-primary p-l-15 p-r-15 p-t-10 p-b-10 b-radius-5 border-0"><i class="ti-calendar f-w-600" style="background-color: <?php echo "#".$_SESSION['status'][$submited['current_status']]['background_color']; ?>"></i></button>
+                                    <button data-bs-toggle="tooltip" data-placement="bottom" title="&nbsp;&nbsp;<?php echo htmlspecialchars(__($sprogress[$submited['current_status']]['name']), ENT_QUOTES, 'UTF-8'); ?>&nbsp;&nbsp;" class="waves-effect waves-light btn-primary p-l-15 p-r-15 p-t-10 p-b-10 b-radius-5 border-0"><i class="ti-calendar f-w-600" style="background-color: <?php echo "#".$_SESSION['status'][$submited['current_status']]['background_color']; ?>"></i></button>
                                 </div>
                                 <div class="col-lg-6 p-0">
                                     <h6 class="f-w-600"><?php echo date('F', strtotime($submited['year']."-".$submited['month']."-01")); ?></h6>

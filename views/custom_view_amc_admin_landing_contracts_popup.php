@@ -32,7 +32,7 @@ $colspan = $showAssignment ? 9 : 7;
 ?>
 
 <div class="modal-header">
-    <h5 class="modal-title"><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h5>
+    <h5 class="modal-title"><?php echo htmlspecialchars(__($title), ENT_QUOTES, 'UTF-8'); ?></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
@@ -69,10 +69,10 @@ $colspan = $showAssignment ? 9 : 7;
                                 }
                                 $transactionNo = htmlspecialchars($contract['transaction_no'] ?? '-', ENT_QUOTES, 'UTF-8');
                                 $contractName = htmlspecialchars($contract['contract_name'] ?? '-', ENT_QUOTES, 'UTF-8');
-                                $partyType = htmlspecialchars($contract['party_type'] ?? '-', ENT_QUOTES, 'UTF-8');
-                                $statusLabel = htmlspecialchars($contract['status_label'] ?? '-', ENT_QUOTES, 'UTF-8');
+                                $partyType = htmlspecialchars(__($contract['party_type'] ?? '-'), ENT_QUOTES, 'UTF-8');
+                                $statusLabel = htmlspecialchars(__($contract['status_label'] ?? '-'), ENT_QUOTES, 'UTF-8');
                                 $statusClass = htmlspecialchars($contract['status_class'] ?? 'bg-secondary', ENT_QUOTES, 'UTF-8');
-                                $assignmentLabel = htmlspecialchars($contract['assignment_label'] ?? '-', ENT_QUOTES, 'UTF-8');
+                                $assignmentLabel = htmlspecialchars(__($contract['assignment_label'] ?? '-'), ENT_QUOTES, 'UTF-8');
                                 $assignmentClass = htmlspecialchars($contract['assignment_class'] ?? 'bg-secondary', ENT_QUOTES, 'UTF-8');
                                 $assigneeLabel = htmlspecialchars($contract['assignee_label'] ?? '—', ENT_QUOTES, 'UTF-8');
                                 ?>

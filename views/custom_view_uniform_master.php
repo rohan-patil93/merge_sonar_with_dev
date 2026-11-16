@@ -755,9 +755,9 @@ foreach ((array)$data['locations'] as $row) {
 
                     <input type="hidden" class="typeField" value="${type_id}">
 
-                    <small>Size:</small>
+                    <small><?= __('Size'); ?>:</small>
 
-                    <select aria-label="Select option" class="form-control sizeField js-example-basic-single" style="width:150px;display:inline-block;">
+                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control sizeField js-example-basic-single" style="width:150px;display:inline-block;">
 
                         <?php foreach ($sizes as $s) { ?>
                             <option value="<?= $s['genc_detail_code'] ?>">

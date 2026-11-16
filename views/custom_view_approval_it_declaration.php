@@ -15,10 +15,10 @@ foreach($allemployees as $allemployee){
     $employees[$allemployee['id']] = $allemployee;
 
 }
-$itapprovallist[] = array('bgcolor'=>'primary','data'=>count((array)$allemployees),'name'=>'Total Employees');
-$itapprovallist[] = array('bgcolor'=>'success','data'=>count((array)$apv),'name'=>'Approved');
-$itapprovallist[] = array('bgcolor'=>'warning','data'=>count((array)$sba),'name'=>'Approval Pending');
-$itapprovallist[] = array('bgcolor'=>'dark','data'=>count((array)$allemployees)-(count((array)$apv)+count((array)$sba)),'name'=>'Yet to Submit');
+$itapprovallist[] = array('bgcolor'=>'primary','data'=>count((array)$allemployees),'name'=>__('Total Employees'));
+$itapprovallist[] = array('bgcolor'=>'success','data'=>count((array)$apv),'name'=>__('Approved'));
+$itapprovallist[] = array('bgcolor'=>'warning','data'=>count((array)$sba),'name'=>__('Approval Pending'));
+$itapprovallist[] = array('bgcolor'=>'dark','data'=>count((array)$allemployees)-(count((array)$apv)+count((array)$sba)),'name'=>__('Yet to Submit'));
 $stausresult = ViewStatusData();
 ?>
 <script type="text/javascript">
@@ -174,7 +174,7 @@ $stausresult = ViewStatusData();
                                                         <td class="text-right"> <?php echo $apdata['potential_amount']; ?> </td>
                                                         <td class="text-right"> <?php echo $apdata['declaration_tax']; ?> </td>
                                                         <td >
-                                                         <button onclick="displaystausdrop(<?php echo $apdata['id']; ?>,'emp_it_declaration',<?php echo $apdata['current_status']; ?>)" class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".$stausresult[$apdata['current_status']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$apdata['current_status']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$apdata['current_status']]['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $stausresult[$apdata['current_status']]['name']; ?> </button>
+                                                         <button onclick="displaystausdrop(<?php echo $apdata['id']; ?>,'emp_it_declaration',<?php echo $apdata['current_status']; ?>)" class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".$stausresult[$apdata['current_status']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$apdata['current_status']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$apdata['current_status']]['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo htmlspecialchars(__($stausresult[$apdata['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?> </button>
                                                       <div class="dropdown-menu" id="dropdownlist_<?php echo $apdata['id']; ?>">
 
                                                       </div>

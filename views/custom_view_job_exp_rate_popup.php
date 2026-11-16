@@ -12,7 +12,7 @@ $errorurl = API."?mode=gettabledetailswithconditions&table=general_code_details&
 $urlcode = callAPI($errorurl);
 $gen_codes = json_decode($urlcode,1);
 foreach($gen_codes as $gen_code){
-    $code[$gen_code['genc_detail_code']] = $gen_code['genc_detail_name'];
+    $code[$gen_code['genc_detail_code']] = __($gen_code['genc_detail_name']);
 }
 ?>
 <div class="modal-header card-header">

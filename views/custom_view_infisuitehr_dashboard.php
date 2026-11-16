@@ -15,7 +15,7 @@
       <div class="card-body">
         <p class="text-muted mb-0"><?= __('Present Today'); ?></p>
         <h3 class="f-w-600 f-50 mt-3 mb-3">1,176</h3>
-        <p class="text-primary mb-0 f-w-600">94.2% Attendance</p>
+        <p class="text-primary mb-0 f-w-600"><?= __('94.2% Attendance'); ?></p>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@
             <h4 class="f-w-600 f-30"><?= __('Workforce Health Analytics'); ?></h4>
             <p class="f-w-600 f-14 text-muted"><?= htmlspecialchars(__('Attendance, overtime & productivity trends'), ENT_QUOTES, 'UTF-8'); ?></p>
           </div>
-          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center">91% Productivity Score</span>
+          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center"><?= __('91% Productivity Score'); ?></span>
         </div>
         <div id="line-example" style="min-height: 360px;"></div>
       </div>

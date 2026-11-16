@@ -58,12 +58,12 @@
             count++;
             var htmlRows = '';
             htmlRows += '<tr> <td class=" m-t-5" style="width: 1%;">  <div class="checkbox-fade fade-in-primary" style="display: inherit;margin: 0px;"><label class="kt-checkbox"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="itemRow" type="checkbox"> <span class="cr"> <i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div> </td>';
-            htmlRows += '<td  class="p-1">  <input aria-label="Product Code[]" type="text"   name="productCode[]" id="productCode_'+count+'" class="form-control mt-2" autocomplete="off" value=""></td>';
-           htmlRows += '<td id="other_'+count+'" class="p-1"> <textarea aria-label="Product Name[]"  name="productName[]" id="productName_'+count+'" class="form-control mt-2"></textarea></td>';
-            htmlRows += '<td ><input type="text" class="form-control datepicker minw-140 effective_date "  value=""  name="effective_date[]"  id="kt_datepicker_3_'+count+'" data-bs-toggle="tooltip" data-placement="bottom" title="Planned Date" ></td>';
+            htmlRows += '<td  class="p-1">  <input aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text"   name="productCode[]" id="productCode_'+count+'" class="form-control mt-2" autocomplete="off" value=""></td>';
+           htmlRows += '<td id="other_'+count+'" class="p-1"> <textarea aria-label="<?= htmlspecialchars(__('Product Name'), ENT_QUOTES, 'UTF-8'); ?>[]"  name="productName[]" id="productName_'+count+'" class="form-control mt-2"></textarea></td>';
+            htmlRows += '<td ><input type="text" class="form-control datepicker minw-140 effective_date "  value=""  name="effective_date[]"  id="kt_datepicker_3_'+count+'" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Planned Date'), ENT_QUOTES, 'UTF-8'); ?>" ></td>';
             htmlRows += '<td ><input type="text" class="form-control datepicker minw-140 expire_date'+count+'"  value=""  name="expire_date[]"  id="kt_datepicker_4_'+count+'" data-bs-toggle="tooltip" data-placement="bottom" title="" ></td>';
 
-            htmlRows += '<td><input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" value="0.00" autocomplete="off"></td>';
+            htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" value="0.00" autocomplete="off"></td>';
             htmlRows += '<td class="text-center"></td> </tr>';
             console.log(htmlRows);
             $('#sowinvoiceItem').append(htmlRows);

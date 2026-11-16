@@ -33,7 +33,7 @@ include_once '../comm.php';
               type: "POST",
               success:function(data){
                   console.log(data);
-                  tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Upadate Project Task  Successfully','');
+                  tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Upadate Project Task  Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
                   window.location.reload();
               },
               error:function (){}

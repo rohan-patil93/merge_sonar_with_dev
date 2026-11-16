@@ -82,7 +82,7 @@ $field_tabs = $field_res['alldatamonth'];
 
             </div>
             <div class="card-block">
-                <iframe title="Field Employee Dashboard" src="https:
+                <iframe title="<?= htmlspecialchars(__('Field Employee Dashboard'), ENT_QUOTES, 'UTF-8'); ?>" src="https:
             </div>
         </div>
     </div>

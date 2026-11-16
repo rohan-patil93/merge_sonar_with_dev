@@ -60,7 +60,7 @@ minutes = minutes < 10 ? "0" + minutes : minutes;
 seconds = seconds < 10 ? "0" + seconds : seconds;
 if(minutes==0 && seconds==0 ){
   clearInterval(myVar);
-  document.getElementById(display).innerHTML = "EXPIRED";
+  document.getElementById(display).innerHTML = <?php echo json_encode(__('EXPIRED'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
  submitassessment();
 }else {
   document.getElementById(display).innerHTML = minutes + ":" + seconds;

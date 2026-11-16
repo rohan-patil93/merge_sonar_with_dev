@@ -79,7 +79,7 @@ function printDiv(divId) {
    document.body.innerHTML = originalContents;
 }
 function convertHTMLToPDF() {
-    var  title ='Vendor Registration Details';
+    var title = <?php echo json_encode(__('Vendor Registration Details'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
     var htmlContent = $('#printDiv_popup').html();
     $.ajax({
         url: 'convert_html_to_pdf.php',

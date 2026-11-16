@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $locstr = "";
 if(in_array(REVIWER_ROLE,(array)$_SESSION['role_ids'])){
     $vdata1["where"] = array('is_active'=> 0, 'user_id'=>$_SESSION['userid']);
@@ -204,24 +204,24 @@ $venders[$role['location_id']]['nonbillable'] = $venders[$role['location_id']]['
                                 <table class="mb-3" style="width: 100%">
                                     <tr>
                                         <th scope="col" style="width: 3%;"></th>
-                                        <th scope="col" style="width: 5%;">SL.NO</th>
-                    <th scope="col" style="width: 13%;">Employee Name</th>
-                    <th scope="col" class="text-right" style="width: 10%;">Billable Days</th>
-                    <th scope="col" class="text-right" style="width: 12%;">Nonbillable Days</th>
+                                        <th scope="col" style="width: 5%;"><?= __('SL.NO'); ?></th>
+                    <th scope="col" style="width: 13%;"><?= __('Employee Name'); ?></th>
+                    <th scope="col" class="text-right" style="width: 10%;"><?= __('Billable Days'); ?></th>
+                    <th scope="col" class="text-right" style="width: 12%;"><?= __('Nonbillable Days'); ?></th>
                     <?php if($_SESSION['user_type']!=3){ ?>
-                    <th scope="col" class="text-right" style="width: 10%;"> Budget Amount</th>
-                    <th scope="col" class="text-right" style="width: 10%;">VRC Budget Amount</th>
+                    <th scope="col" class="text-right" style="width: 10%;"> <?= __('Budget Amount'); ?></th>
+                    <th scope="col" class="text-right" style="width: 10%;"><?= __('VRC Budget Amount'); ?></th>
                     <?php } ?>
-                    <th scope="col" class="text-right" style="width: 10%;">Billable Amount</th>
-                    <th scope="col" class="text-right" style="width: 10%;">VRC Billable Amount</th>
+                    <th scope="col" class="text-right" style="width: 10%;"><?= __('Billable Amount'); ?></th>
+                    <th scope="col" class="text-right" style="width: 10%;"><?= __('VRC Billable Amount'); ?></th>
 
-                    <th scope="col" class="text-right" style="width: 10%;">Billable status</th>
-                                            <th scope="col" class="text-right" style="width: 8%;">Leave Days</th>
-                                <th scope="col" style="width: 15%;">Job Tittle</th>
-                    <th scope="col" class="text-right" style="width: 7%;">Exp-Year</th>
+                    <th scope="col" class="text-right" style="width: 10%;"><?= __('Billable status'); ?></th>
+                                            <th scope="col" class="text-right" style="width: 8%;"><?= __('Leave Days'); ?></th>
+                                <th scope="col" style="width: 15%;"><?= __('Job Tittle'); ?></th>
+                    <th scope="col" class="text-right" style="width: 7%;"><?= __('Exp-Year'); ?></th>
                     <?php if($_SESSION['user_type']!=3){ ?>
-                    <th scope="col" style="width: 5%;">Rate Card</th>
-                    <th scope="col" style="width: 5%;">Remarks</th>
+                    <th scope="col" style="width: 5%;"><?= __('Rate Card'); ?></th>
+                    <th scope="col" style="width: 5%;"><?= __('Remarks'); ?></th>
                     <?php } ?>
                                     </tr>
                                     <?php $l=1; foreach((array)$vender['data'] as $data){
@@ -245,7 +245,7 @@ $venders[$role['location_id']]['nonbillable'] = $venders[$role['location_id']]['
                     <?php } ?>
                     <td class="text-right"><?php echo customeummarmonyformateround($data['billable_amount']); ?></td>
                      <td class="text-right"><?php echo customeummarmonyformateround($data['vrc_billable_amount']); ?></td>
-                    <td class="text-right"><?php echo $data['emp_billable']==0 ? 'Billable':'<span style="color:red">'.__('Non Billable').'</span>' ?></td>
+                    <td class="text-right"><?php echo $data['emp_billable']==0 ? __('Billable'):'<span style="color:red">'.__('Non Billable').'</span>' ?></td>
 
                     <td class="text-right"><?php echo customeummarmonyformateround($data['leave_days_from_to']); ?></td>
                        <td class=""><?php echo $data['job_title']; ?></td>
@@ -266,16 +266,16 @@ $venders[$role['location_id']]['nonbillable'] = $venders[$role['location_id']]['
 } ?>
                         <?php if(count($venders) !="0"){ ?>
                         <tr>
-                            <td colspan='3'><b>Total</b></td>
-                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" Employees"><?php echo customeummarmonyformateround($empcnt); ?></span></td>
-                            <td class="text-right" ><span data-bs-toggle="tooltip" data-placement="bottom" title=" Billable Days"><?php echo $billable_hrs; ?></span></td>
-                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" Nonbillable Days"><?php echo $nonbillable_hrs; ?></span></td>
-                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" PO Amount"><?php echo customeummarmonyformateround($budgeted_amount); ?></span></td>
-                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" VRC Amount"><?php echo customeummarmonyformateround($vrc_budgeted_amount); ?></span></td>
-                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" Billable Amount"><?php echo customeummarmonyformateround($billable_amount); ?></span></td>
-                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" VRC Billable Amount"><?php echo customeummarmonyformateround($vrc_billable_amount); ?></span></td>
-                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" Billable/Non Billable"><?php echo $bilableemp.'/'.$nonbilableemp; ?></span></td>
-                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" Leave Days"><?php echo customeummarmonyformateround($leavedays); ?></span></td>
+                            <td colspan='3'><b><?= __('Total'); ?></b></td>
+                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Employees'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo customeummarmonyformateround($empcnt); ?></span></td>
+                            <td class="text-right" ><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Billable Days'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $billable_hrs; ?></span></td>
+                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Nonbillable Days'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $nonbillable_hrs; ?></span></td>
+                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('PO Amount'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo customeummarmonyformateround($budgeted_amount); ?></span></td>
+                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('VRC Amount'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo customeummarmonyformateround($vrc_budgeted_amount); ?></span></td>
+                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Billable Amount'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo customeummarmonyformateround($billable_amount); ?></span></td>
+                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('VRC Billable Amount'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo customeummarmonyformateround($vrc_billable_amount); ?></span></td>
+                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Billable/Non Billable'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $bilableemp.'/'.$nonbilableemp; ?></span></td>
+                            <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Leave Days'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo customeummarmonyformateround($leavedays); ?></span></td>
                         </tr>
                         <?php } ?>
                     </table>

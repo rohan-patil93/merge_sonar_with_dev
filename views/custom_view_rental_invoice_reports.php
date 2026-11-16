@@ -138,7 +138,7 @@ function getOwnerProperty(valu){
 					            </thead>
 					            <tbody>
 			    			<?php $mk=1; foreach($rentinvoice['rent'] as $inv){ ?>
-			    					<tr class="<?php echo $inv['ref_bill_type'] == "OB"?"bg-success":"";?>" <?php echo $inv['ref_bill_type'] == "OB"?'data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Opening Balance"':'';?> >
+			    					<tr class="<?php echo $inv['ref_bill_type'] == "OB"?"bg-success":"";?>" <?php echo $inv['ref_bill_type'] == "OB"?'data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="' . htmlspecialchars(__('Opening Balance'), ENT_QUOTES, 'UTF-8') . '"':'';?> >
 					                    <td class="p-2">
 					                    	<?php echo $inv['transaction_number']; ?>
 					                    	<span class="d-block"><?php echo $inv['transaction_date']; ?></span>

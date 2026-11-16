@@ -23,7 +23,7 @@
       <div class="card-body">
         <p class="text-muted mb-0"><?= __('Monthly Burn Rate'); ?></p>
         <h3 class="f-w-600 f-50 mt-3 mb-3">₹92 L</h3>
-        <p class="text-warning mb-0 f-w-600">8% from previous month</p>
+        <p class="text-warning mb-0 f-w-600"><?= __('8% from previous month'); ?></p>
       </div>
     </div>
   </div>
@@ -123,7 +123,7 @@
           <div class="d-inline-block m-d-block">
             <h4 class="f-w-600 f-30"><?= __('Compliance Radar'); ?></h4>
           </div>
-          <a href="" class="f-12 text-success bg-green-50 p-2 b-radius-30 f-w-600 text-center">92% Compliant</a>
+          <a href="" class="f-12 text-success bg-green-50 p-2 b-radius-30 f-w-600 text-center"><?= __('92% Compliant'); ?></a>
         </div>
         <div class="mt-4">
           <div class="d-flex justify-content-between bg-green-50 b-radius-20 p-3 border-green-100">

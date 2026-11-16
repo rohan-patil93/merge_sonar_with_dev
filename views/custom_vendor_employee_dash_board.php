@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 if($_GET['option'] == 'COM_VENDOR_EMPLOYEE_DASH_BOARD'){
     $loc  = $_GET['LOC']!=""?$_GET['LOC']:0;
@@ -237,12 +237,12 @@ if($_GET['option'] == 'COM_VENDOR_EMPLOYEE_DASH_BOARD'){ ?>
                                <table class="mb-3" style="width: 100%">
                                    <tr>
                                        <th scope="col" style="width: 3%;"></th>
-                                       <th scope="col" style="width: 5%;">SL.NO</th>
-                                       <th scope="col" style="width: 13%;">Employee Name</th>
-                                    <th scope="col" style="width: 13%;">Cost Center</th>
-                                    <th scope="col" style="width: 13%;">Department</th>
-                                       <th scope="col" class="text-right" style="width: 10%;"> Days</th>
-                                       <th scope="col" class="text-right" style="width: 10%;">Billable Amount</th>
+                                       <th scope="col" style="width: 5%;"><?= __('SL.NO'); ?></th>
+                                       <th scope="col" style="width: 13%;"><?= __('Employee Name'); ?></th>
+                                    <th scope="col" style="width: 13%;"><?= __('Cost Center'); ?></th>
+                                    <th scope="col" style="width: 13%;"><?= __('Department'); ?></th>
+                                       <th scope="col" class="text-right" style="width: 10%;"> <?= __('Days'); ?></th>
+                                       <th scope="col" class="text-right" style="width: 10%;"><?= __('Billable Amount'); ?></th>
                                    </tr>
                                    <?php $l=1; $list_data= array(); foreach($vender['data'] as $data){
                                            $vrcmulval = uomcalculation($data['vrc_uom'],$attdenace_data['minimum_hours'],$attdenace_data['count_working_days'],$attdenace_data['count_week']);
@@ -268,11 +268,11 @@ if($_GET['option'] == 'COM_VENDOR_EMPLOYEE_DASH_BOARD'){ ?>
 } ?>
                         <?php if(count($venders) !="0"){ ?>
                 <tr>
-                    <td colspan='3'><b>Total</b></td>
-                    <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" Employees"><?php echo customeummarmonyformateround($empcnt); ?></span></td>
-                    <td class="text-right" ><span data-bs-toggle="tooltip" data-placement="bottom" title=" Billable Days"><?php echo $billable_hrs; ?></span></td>
+                    <td colspan='3'><b><?= __('Total'); ?></b></td>
+                    <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Employees'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo customeummarmonyformateround($empcnt); ?></span></td>
+                    <td class="text-right" ><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Billable Days'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $billable_hrs; ?></span></td>
 
-                    <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title=" Billable Amount"><?php echo customeummarmonyformateround($vrc_billable_amount); ?></span></td>
+                    <td class="text-right"><span data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Billable Amount'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo customeummarmonyformateround($vrc_billable_amount); ?></span></td>
                 </tr>
             <?php } ?>
                    </table>

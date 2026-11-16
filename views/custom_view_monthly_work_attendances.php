@@ -111,7 +111,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
                 }else{
                     $("#status_id").hide();
                 }
-                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success  pt-2 pb-2','animated flipInX','animated flipOutX','Project timesheet is submitted successfully','');
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success  pt-2 pb-2','animated flipInX','animated flipOutX',<?php echo json_encode(__('Project timesheet is submitted successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
             },
             error:function (){}
         });
@@ -139,7 +139,7 @@ if($_SESSION['user']['approval_manager']!= $_SESSION['user']['reports_to']){
     }
     function alradysubmitedmanager(){
 
-           tostarnotify('top','right','fa fa-thumbs-up','form-label label label-danger  pt-2 pb-2','animated flipInX','animated flipOutX','Project timesheet already submitted to manage','');
+           tostarnotify('top','right','fa fa-thumbs-up','form-label label label-danger  pt-2 pb-2','animated flipInX','animated flipOutX',<?php echo json_encode(__('Project timesheet already submitted to manage'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
     }
 </script>
 

@@ -13,7 +13,7 @@
             <li class="nav-item">
                 <a class="nav-link <?php echo $activtb; ?>"  href="index.php?option=COM_VIEW_BUTTON_DASHBOARDS&SUBO=<?php echo $nav['Page_Name']; ?>">
                     <span class="nav-icon"> <i class="<?php echo $nav['Menu_Icon']; ?>"></i></span> &nbsp;
-                    <span class="nav-text"><?php echo $nav['Label']; ?></span>
+                    <span class="nav-text"><?php echo htmlspecialchars(__($nav['Label'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                 </a>
             </li>
             <?php $km++;

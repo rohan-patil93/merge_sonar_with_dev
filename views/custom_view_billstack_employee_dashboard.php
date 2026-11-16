@@ -8,7 +8,7 @@
  $status_progress = $admindashboardd['status_progress'];
  $statusprogress = array();
  foreach($status_progress as $sp) {
-    $statusprogress[$sp['status']] = $sp['name'];
+    $statusprogress[$sp['status']] = __($sp['name']);
  }
  $holiday_list = array();
  $current_year = date("Y");

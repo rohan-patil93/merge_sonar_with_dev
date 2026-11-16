@@ -138,7 +138,7 @@ if (isset($_POST['submit'])) {
             newRow.innerHTML = `
                 <div class="col-lg-4 cc_val">
                     <div class="form-group">
-                        <select aria-label="Asset []" class="form-control form-select js-example-basic-single asset-select" name="asset_id[]" id="asset_id_`+count+`" required>
+                        <select aria-label="<?= htmlspecialchars(__('Asset'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-control form-select js-example-basic-single asset-select" name="asset_id[]" id="asset_id_`+count+`" required>
                             <option value=""><?= htmlspecialchars(__('Select Asset'), ENT_QUOTES, 'UTF-8'); ?></option>
                             <?php foreach ($assets as $asset){ ?>
                                 <option value="<?php echo $asset['id']; ?>"><?php echo $asset['asset_description']; ?></option>

@@ -36,15 +36,15 @@
             <div class="col-lg-6">
                <div class="col-lg-12 row">
                   <?php
-                  $box_array['0']=array('name'=>"Open Jobs",'count'=>'123','color'=>'primary');
-                  $box_array['1']=array('name'=>"Apply Jobs",'count'=>'123','color'=>'warning');
-                  $box_array['2']=array('name'=>"Approved Jobs",'count'=>'110','color'=>'success');
-                  $box_array['3']=array('name'=>"Sned Candidates",'count'=>$vdash['4']['all_candidates'],'color'=>'info');
-                  $box_array['4']=array('name'=>"Approved Candidates",'count'=>$vdash['4']['selected'],'color'=>'success');
-                  $box_array['5']=array('name'=>"Rejected Candidates",'count'=>$vdash['4']['rejected'],'color'=>'danger');
-                  $box_array['6']=array('name'=>"Submited Time Sheet",'count'=>'30','color'=>'dark');
-                  $box_array['7']=array('name'=>"Approved Time Sheet",'count'=>'14','color'=>'success');
-                  $box_array['8']=array('name'=>"Pending Time Sheet",'count'=>'16','color'=>'warning');
+                  $box_array['0']=array('name'=>__("Open Jobs"),'count'=>'123','color'=>'primary');
+                  $box_array['1']=array('name'=>__("Apply Jobs"),'count'=>'123','color'=>'warning');
+                  $box_array['2']=array('name'=>__("Approved Jobs"),'count'=>'110','color'=>'success');
+                  $box_array['3']=array('name'=>__("Sned Candidates"),'count'=>$vdash['4']['all_candidates'],'color'=>'info');
+                  $box_array['4']=array('name'=>__("Approved Candidates"),'count'=>$vdash['4']['selected'],'color'=>'success');
+                  $box_array['5']=array('name'=>__("Rejected Candidates"),'count'=>$vdash['4']['rejected'],'color'=>'danger');
+                  $box_array['6']=array('name'=>__("Submited Time Sheet"),'count'=>'30','color'=>'dark');
+                  $box_array['7']=array('name'=>__("Approved Time Sheet"),'count'=>'14','color'=>'success');
+                  $box_array['8']=array('name'=>__("Pending Time Sheet"),'count'=>'16','color'=>'warning');
                   foreach($box_array as $box){ ?>
                   <div class="col-lg-4">
                      <div class="card card-custom bg-<?php echo $box['color']; ?> gutter-b" style="height: 150px">
@@ -69,10 +69,10 @@
                </div>
             </div>
             <?php
-               $table_list['0']= array('title'=>'Candidate List','sub_title'=>'','tab'=>array('All','Seleted','Rejected'),'sub'=>$vdash['0'],'th_title'=>array('','Name','Job Title','Apply'));
-               $table_list['1']= array('title'=>'Seleted Candidates','sub_title'=>'','tab'=>'','sub'=>$vdash['1'],'th_title'=>array('','Name','Job Title','Status Date'));
-               $table_list['2']= array('title'=>'Time Sheet','sub_title'=>'','tab'=>'','sub'=>$vdash['2'],'th_title'=>array('','Name','Job Title','Apply'));
-               $table_list['3']= array('title'=>'Contracts','sub_title'=>'','tab'=>'','sub'=>$vdash['3'],'th_title'=>array('','Name','Job Title','Apply'));
+               $table_list['0']= array('title'=>__('Candidate List'),'sub_title'=>'','tab'=>array(__('All'),__('Seleted'),__('Rejected')),'sub'=>$vdash['0'],'th_title'=>array('',__('Name'),__('Job Title'),__('Apply')));
+               $table_list['1']= array('title'=>__('Seleted Candidates'),'sub_title'=>'','tab'=>'','sub'=>$vdash['1'],'th_title'=>array('',__('Name'),__('Job Title'),__('Status Date')));
+               $table_list['2']= array('title'=>__('Time Sheet'),'sub_title'=>'','tab'=>'','sub'=>$vdash['2'],'th_title'=>array('',__('Name'),__('Job Title'),__('Apply')));
+               $table_list['3']= array('title'=>__('Contracts'),'sub_title'=>'','tab'=>'','sub'=>$vdash['3'],'th_title'=>array('',__('Name'),__('Job Title'),__('Apply')));
                $n=1; foreach($table_list as $table){ ?>
             <div class="col-lg-6">
                <div class="">
@@ -142,7 +142,7 @@
                                           </td>
                                           <td class="text-center">
                                              <div>
-                                                <span class="label label-lg  label-inline" style="background-color:<?php echo "#".$stausresult[$tabs['status']]['background_color']; ?>; color:<?php echo "#".$stausresult[$tabs['status']]['color']; ?>;"><?php echo $stausresult[$tabs['status']]['name']; ?></span>
+                                                <span class="label label-lg  label-inline" style="background-color:<?php echo "#".$stausresult[$tabs['status']]['background_color']; ?>; color:<?php echo "#".$stausresult[$tabs['status']]['color']; ?>;"><?php echo htmlspecialchars(__($stausresult[$tabs['status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                              </div>
                                              <a href="#" class="text-dark font-weight-bold text-hover-primary mt-1 font-size-lg"><?php echo date('d M, Y', strtotime($tabs['field2'])); ?></a>
 

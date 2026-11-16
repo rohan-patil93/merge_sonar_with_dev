@@ -624,7 +624,7 @@ function AddAssets(asset_id=""){
                         <select aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="status" id="status" onchange="assetFilter()">
                             <option value=""><?= __('All'); ?></option>
                             <?php foreach ($asset_status as $ass_statu) { ?>
-                                <option value="<?php echo $ass_statu['id']; ?>"><?php echo ucwords($ass_statu['name']); ?></option>
+                                <option value="<?php echo $ass_statu['id']; ?>"><?php echo htmlspecialchars(__(ucwords($ass_statu['name'])), ENT_QUOTES, 'UTF-8'); ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -633,7 +633,7 @@ function AddAssets(asset_id=""){
                         <select aria-label="<?= htmlspecialchars(__('Candition'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="candition" id="candition" onchange="assetFilter()">
                             <option value=""><?= __('All'); ?></option>
                             <?php foreach ($ass_condition as $ass_conditio) { ?>
-                            <option  value="<?php echo $ass_conditio['id']; ?>"><?php echo ucwords($ass_conditio['condition_name']); ?></option>
+                            <option  value="<?php echo $ass_conditio['id']; ?>"><?php echo htmlspecialchars(__(ucwords($ass_conditio['condition_name'])), ENT_QUOTES, 'UTF-8'); ?></option>
                             <?php } ?>
                         </select>
                     </div>

@@ -131,7 +131,7 @@
           <div class="d-inline-block m-d-block">
             <h4 class="f-w-600 f-30"><?= htmlspecialchars(__('Compliance & Audit'), ENT_QUOTES, 'UTF-8'); ?></h4>
           </div>
-          <button class="btn bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center">96% Compliant</button>
+          <button class="btn bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center"><?= __('96% Compliant'); ?></button>
         </div>
         <div class="mt-4">
           <div class="d-flex justify-content-between bg-green-50 b-radius-20 p-3 border-green-100">
@@ -154,7 +154,7 @@
         <div class="mt-4">
           <div class="d-flex justify-content-between bg-blue-50 b-radius-20 p-3 border-red-100">
             <span class="f-16 text-dark"><?= __('Bank Reconciliation'); ?></span>
-            <span class="f-16 text-primary f-w-600">92% Complete</span>
+            <span class="f-16 text-primary f-w-600"><?= __('92% Complete'); ?></span>
           </div>
         </div>
       </div>

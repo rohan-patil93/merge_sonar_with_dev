@@ -46,7 +46,7 @@
             <h4 class="f-w-600 f-30"><?= __('Procurement Pipeline'); ?></h4>
             <p class="f-w-600 f-14 text-muted"><?= __('Real-time procurement workflow visibility'); ?></p>
           </div>
-          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center">91% SLA Compliance</span>
+          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center"><?= __('91% SLA Compliance'); ?></span>
         </div>
         <div class="pipeline-wrapper mt-4">
           <div class="pipeline">

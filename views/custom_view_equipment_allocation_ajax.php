@@ -428,7 +428,7 @@ if($_POST['pagetype'] =="IEQ"){
                                                             $allocated = "allocated";
                                                             $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$employees[$equal['emp_id']]['display_name'].'"';
                                                         }else{
-                                                            $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Allocate seat"';
+                                                            $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.htmlspecialchars(__('Click To Allocate seat'), ENT_QUOTES, 'UTF-8').'"';
                                                         }
                                                         ?>
                                                         <li class="<?php echo $allocated; ?> custom-popup" >
@@ -711,7 +711,7 @@ if($_POST['pagetype'] =="IEQ"){
 } ?>
                             </ul>
                         <?php }else{ ?>
-                            <h5 class="text-center"><i class="ti-alert"></i> No Cubicle Space</h5>
+                            <h5 class="text-center"><i class="ti-alert"></i> <?= __('No Cubicle Space'); ?></h5>
                         <?php } ?>
                         </div>
                     </div>
@@ -993,7 +993,7 @@ if($_POST['pagetype'] =="IEQ"){
                 <div class="col-lg-3 form-group  w-full">
                     <span class="form-label">Employee</span>
                      <select aria-label="<?= htmlspecialchars(__('Emp'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="emp_id" onchange="selectSpaceallocatedemployee(this.value)">
-                         <option value="">All Employees</option>
+                         <option value=""><?= __('All Employees'); ?></option>
                         <?php foreach($result['select_employees'] as $emp){ ?>
                         <option value="<?php echo $emp['id']; ?>" <?php echo $emp['id']==$_POST['emp_id']?"selected":""; ?>><?php echo $emp['display_name']; ?></option>
                         <?php } ?>
@@ -1140,7 +1140,7 @@ if($_POST['pagetype'] =="IEQ"){
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label">Building</span>
                      <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="building_id">
-                         <option value="">All Buildings</option>
+                         <option value=""><?= __('All Buildings'); ?></option>
                         <?php foreach($buildings as $stytpe){ ?>
                         <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['building_id']?"selected":""; ?>><?php echo $stytpe['building_name']; ?></option>
                         <?php } ?>
@@ -1149,7 +1149,7 @@ if($_POST['pagetype'] =="IEQ"){
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label">Building Floor</span>
                       <select aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="building_floor_id">
-                          <option value="">All Building Floor</option>
+                          <option value=""><?= __('All Building Floor'); ?></option>
                         <?php foreach($building_floors as $stytpe){ ?>
                         <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['building_floor_id']?"selected":""; ?>><?php echo $stytpe['floor_name']; ?></option>
                         <?php } ?>
@@ -1158,7 +1158,7 @@ if($_POST['pagetype'] =="IEQ"){
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label">Equipment</span>
                      <select aria-label="<?= htmlspecialchars(__('Equipment'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="equipment_id">
-                         <option value="">All Equipments</option>
+                         <option value=""><?= __('All Equipments'); ?></option>
                         <?php foreach($equipments as $stytpe){ ?>
                         <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_id']?"selected":""; ?>><?php echo $stytpe['equipment_name']; ?></option>
                         <?php } ?>
@@ -1167,7 +1167,7 @@ if($_POST['pagetype'] =="IEQ"){
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label">Employee</span>
                      <select aria-label="<?= htmlspecialchars(__('Emp'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="emp_id">
-                         <option value="">All Employees</option>
+                         <option value=""><?= __('All Employees'); ?></option>
                         <?php foreach($employees as $emp){ ?>
                         <option value="<?php echo $emp['id']; ?>" <?php echo $emp['id']==$_POST['emp_id']?"selected":""; ?>><?php echo $emp['display_name']; ?></option>
                         <?php } ?>
@@ -1498,7 +1498,7 @@ if($_POST['pagetype'] =="IEQ"){
                     <div class="col-lg-2 form-group  w-full">
                         <span class="form-label">Category</span>
                          <select aria-label="<?= htmlspecialchars(__('Equipment Category'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="equipment_category_id">
-                             <option value="">All Categories</option>
+                             <option value=""><?= __('All Categories'); ?></option>
                             <?php foreach($asset_categories as $stytpe){ ?>
                             <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_category_id']?"selected":""; ?>><?php echo $stytpe['category_description']; ?></option>
                             <?php } ?>
@@ -1507,7 +1507,7 @@ if($_POST['pagetype'] =="IEQ"){
                     <div class="col-lg-2 form-group  w-full">
                         <span class="form-label">Assets</span>
                           <select aria-label="<?= htmlspecialchars(__('Equipment Type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="equipment_type_id">
-                              <option value="">All Assets</option>
+                              <option value=""><?= __('All Assets'); ?></option>
                             <?php foreach($assets as $stytpe){ ?>
                             <option value="<?php echo $stytpe['id']; ?>" <?php echo $stytpe['id']==$_POST['equipment_type_id']?"selected":""; ?>><?php echo $stytpe['asset_description']; ?></option>
                             <?php } ?>
@@ -1736,7 +1736,7 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label d-block">Building</span>
                      <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="building_id" onchange="getfloorslist(this.value)">
-                         <option value="">All Buildings</option>
+                         <option value=""><?= __('All Buildings'); ?></option>
                         <?php foreach($buildings_report as $stytpe){ ?>
                         <option value="<?php echo $stytpe['id']; ?>"><?php echo $stytpe['building_name']; ?></option>
                         <?php } ?>
@@ -1745,7 +1745,7 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label d-block">Building Floor</span>
                       <select aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="building_floor_id" id="detailreportfoolr">
-                          <option value="">All Building Floor</option>
+                          <option value=""><?= __('All Building Floor'); ?></option>
                         <?php foreach($buildings_report as $buldd){ ?>
                             <optgroup label="<?php echo $buldd['building_name']; ?>" >
                             <?php    $buildingwithfloors = $building_with_floors[$buldd['id']];
@@ -1760,16 +1760,16 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label d-block">Space Types</span>
                      <select aria-label="<?= htmlspecialchars(__('Space Type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="space_type_id">
-                         <option value="">All Space Types</option>
+                         <option value=""><?= __('All Space Types'); ?></option>
                         <?php foreach($space_types as $keyid=>$sptype){ ?>
-                        <option value="<?php echo $keyid; ?>"><?php echo $sptype; ?></option>
+                        <option value="<?php echo $keyid; ?>"><?php echo htmlspecialchars(__($sptype), ENT_QUOTES, 'UTF-8'); ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="col-lg-2 form-group  w-full">
                     <span class="form-label d-block">Reserve Pool</span>
                      <select aria-label="<?= htmlspecialchars(__('Seating Pool'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="seating_pool_id">
-                         <option value="">All Reserve Pool</option>
+                         <option value=""><?= __('All Reserve Pool'); ?></option>
                         <?php foreach($seating_pools as $poll){ ?>
                         <option value="<?php echo $poll['id']; ?>"><?php echo $poll['pool_name']; ?></option>
                         <?php } ?>
@@ -2011,7 +2011,7 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
                                                 </table>
                                                 <?php }else{ ?>
                                                     <div class="card-px text-center py-20 m-t-30">
-                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Cubicle Spaces</p>
+                                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Cubicle Spaces'); ?></p>
                                                         <div class="text-center px-4">
                                                             <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                                                         </div>
@@ -2106,7 +2106,7 @@ $buildingwithfloors = $building_with_floors[$buldd['id']];
             <div class="col-xl-3">
                 <div class="card ticket-card">
                     <div class="card-body">
-                        <p class="m-b-30 bg-c-blue  lbl-card"><i class="fas fa-folder-open"></i> All Employees</p>
+                        <p class="m-b-30 bg-c-blue  lbl-card"><i class="fas fa-folder-open"></i> <?= __('All Employees'); ?></p>
                         <div class="text-center">
                             <h2 class="m-b-0 d-inline-block text-c-blue "><?php echo $locationbdydashboard['all_emp_cnt']!=""?$locationbdydashboard['all_emp_cnt']:"0"; ?></h2>
                         </div>
@@ -2590,7 +2590,7 @@ foreach($empparentwithchild[$selecteduser] as $empd){ ?>
             <div class="card-body" >
                 <div class="col-lg-12">
                     <div class="input-group input-group-button mb-0">
-                        <input type="text" class="form-control form-control-sm width1" placeholder="Enter Minimum 3 Characters" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search" onkeyup="getSearchEmployeeLocations(this.value)">
+                        <input type="text" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Enter Minimum 3 Characters'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" onkeyup="getSearchEmployeeLocations(this.value)">
                         <div class="input-group-text addon-style">
                             <span class=""><i class="ti-search text-white mt-2"></i></span>
                         </div>

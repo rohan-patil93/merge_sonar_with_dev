@@ -63,7 +63,7 @@ if($cntgraphtwo<5){
             </tr>
             <tr>
               <th scope="col"><?= __('Cost'); ?></th>
-              <td>27% under budget</td>
+              <td><?= __('27% under budget'); ?></td>
             </tr>
           </table>
         </div>

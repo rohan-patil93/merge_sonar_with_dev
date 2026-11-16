@@ -142,24 +142,24 @@
 
                             </div>
                             <div class="card-block">
-                                <iframe title="Field Admin Dashboard" src="https:
+                                <iframe title="<?= htmlspecialchars(__('Field Admin Dashboard'), ENT_QUOTES, 'UTF-8'); ?>" src="https:
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-6 col-md-6">
                         <div class="card new-cust-card">
                             <div class="card-header">
-                                <h5>Visit</h5>
+                                <h5><?= __('Visit'); ?></h5>
                                 <div class="card-header-right">
                                     <ul class="nav nav-tabs  tabs">
                                         <li class="nav-item">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#planned" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Planned</a>
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#planned" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Planned'); ?></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#visited" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Visited</a>
+                                            <a class="nav-link" data-bs-toggle="tab" href="#visited" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Visited'); ?></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#extra" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Extra</a>
+                                            <a class="nav-link" data-bs-toggle="tab" href="#extra" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Extra'); ?></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -174,9 +174,9 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Company 1</th>
-                                                    <th scope="col">Start Date</th>
-                                                    <th scope="col">End Date</th>
-                                                    <th scope="col">Status</th>
+                                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                                    <th scope="col"><?= __('End Date'); ?></th>
+                                                    <th scope="col"><?= __('Status'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -184,25 +184,25 @@
                                                     <td>Apple Company</td>
                                                     <td>23/05/2017</td>
                                                     <td>04/08/2018</td>
-                                                    <td><span class="form-label label label-success">Paid</span></td>
+                                                    <td><span class="form-label label label-success"><?= __('Paid'); ?></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Envato Pvt Ltd.</td>
                                                     <td>20/03/2017</td>
                                                     <td>04/08/2019</td>
-                                                    <td><span class="form-label label label-danger">Unpaid</span></td>
+                                                    <td><span class="form-label label label-danger"><?= __('Unpaid'); ?></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Envato Pvt Ltd.</td>
                                                     <td>20/03/2017</td>
                                                     <td>04/08/2019</td>
-                                                    <td><span class="form-label label label-danger">Unpaid</span></td>
+                                                    <td><span class="form-label label label-danger"><?= __('Unpaid'); ?></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Envato Pvt Ltd.</td>
                                                     <td>20/03/2017</td>
                                                     <td>04/08/2019</td>
-                                                    <td><span class="form-label label label-danger">Unpaid</span></td>
+                                                    <td><span class="form-label label label-danger"><?= __('Unpaid'); ?></span></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -214,9 +214,9 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Company 2</th>
-                                                    <th scope="col">Start Date</th>
-                                                    <th scope="col">End Date</th>
-                                                    <th scope="col">Status</th>
+                                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                                    <th scope="col"><?= __('End Date'); ?></th>
+                                                    <th scope="col"><?= __('Status'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -224,25 +224,25 @@
                                                     <td>Apple Company</td>
                                                     <td>23/05/2017</td>
                                                     <td>04/08/2018</td>
-                                                    <td><span class="form-label label label-success">Paid</span></td>
+                                                    <td><span class="form-label label label-success"><?= __('Paid'); ?></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Envato Pvt Ltd.</td>
                                                     <td>20/03/2017</td>
                                                     <td>04/08/2019</td>
-                                                    <td><span class="form-label label label-danger">Unpaid</span></td>
+                                                    <td><span class="form-label label label-danger"><?= __('Unpaid'); ?></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Envato Pvt Ltd.</td>
                                                     <td>20/03/2017</td>
                                                     <td>04/08/2019</td>
-                                                    <td><span class="form-label label label-danger">Unpaid</span></td>
+                                                    <td><span class="form-label label label-danger"><?= __('Unpaid'); ?></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Envato Pvt Ltd.</td>
                                                     <td>20/03/2017</td>
                                                     <td>04/08/2019</td>
-                                                    <td><span class="form-label label label-danger">Unpaid</span></td>
+                                                    <td><span class="form-label label label-danger"><?= __('Unpaid'); ?></span></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -254,9 +254,9 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Company 3</th>
-                                                    <th scope="col">Start Date</th>
-                                                    <th scope="col">End Date</th>
-                                                    <th scope="col">Status</th>
+                                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                                    <th scope="col"><?= __('End Date'); ?></th>
+                                                    <th scope="col"><?= __('Status'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -264,25 +264,25 @@
                                                     <td>Apple Company</td>
                                                     <td>23/05/2017</td>
                                                     <td>04/08/2018</td>
-                                                    <td><span class="form-label label label-success">Paid</span></td>
+                                                    <td><span class="form-label label label-success"><?= __('Paid'); ?></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Envato Pvt Ltd.</td>
                                                     <td>20/03/2017</td>
                                                     <td>04/08/2019</td>
-                                                    <td><span class="form-label label label-danger">Unpaid</span></td>
+                                                    <td><span class="form-label label label-danger"><?= __('Unpaid'); ?></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Envato Pvt Ltd.</td>
                                                     <td>20/03/2017</td>
                                                     <td>04/08/2019</td>
-                                                    <td><span class="form-label label label-danger">Unpaid</span></td>
+                                                    <td><span class="form-label label label-danger"><?= __('Unpaid'); ?></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Envato Pvt Ltd.</td>
                                                     <td>20/03/2017</td>
                                                     <td>04/08/2019</td>
-                                                    <td><span class="form-label label label-danger">Unpaid</span></td>
+                                                    <td><span class="form-label label label-danger"><?= __('Unpaid'); ?></span></td>
                                                 </tr>
                                             </tbody>
                                         </table>

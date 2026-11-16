@@ -253,7 +253,7 @@ foreach($mcats as $mm=>$mtatss){
                     <table class="mb-3" style="width: 100%">
                         <tr>
                             <th scope="col" style="width: 3%;"></th>
-                            <th scope="col" style="width: 5%;">SL.NO</th>
+                            <th scope="col" style="width: 5%;"><?= __('SL.NO'); ?></th>
                              <?php foreach($employees_fieldlist as $fkey=>$fieldlist){
                                 if(in_array($fkey,$defalut_sub_fields)){ ?>
                                 <th scope="col"><?php echo $fieldlist; ?> </th>

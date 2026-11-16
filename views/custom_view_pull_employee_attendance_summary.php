@@ -161,12 +161,12 @@ $attendance_data = $data['attendance_data'] ?? array();
                                             $day_cell = $emp_row['days'][$date_key] ?? array();
                                             $cell_value = $day_cell['display_value'] ?? '-';
                                             $cell_color = $day_cell['color_code'] ?? '#f8f9fa';
-                                            $cell_title = ($day_cell['status_label'] ?? '-')
-                                                . ' | In: ' . ($day_cell['clock_in'] ?? '-')
-                                                . ' | Out: ' . ($day_cell['clock_out'] ?? '-')
-                                                . ' | Hrs: ' . ($day_cell['worked_hours'] ?? '-')
-                                                . ' | Shift: ' . ($day_cell['shift_code'] ?? '-')
-                                                . ' | Loc: ' . ($day_cell['location_status'] ?? '-');
+                                            $cell_title = (!empty($day_cell['status_label']) ? __($day_cell['status_label']) : '-')
+                                                . ' | ' . __('In') . ': ' . ($day_cell['clock_in'] ?? '-')
+                                                . ' | ' . __('Out') . ': ' . ($day_cell['clock_out'] ?? '-')
+                                                . ' | ' . __('Hrs') . ': ' . ($day_cell['worked_hours'] ?? '-')
+                                                . ' | ' . __('Shift') . ': ' . ($day_cell['shift_code'] ?? '-')
+                                                . ' | ' . __('Loc') . ': ' . ($day_cell['location_status'] ?? '-');
                                         ?>
                                             <td style="background-color: <?php echo htmlspecialchars($cell_color); ?>;" title="<?php echo htmlspecialchars($cell_title); ?>">
                                                 <?php echo htmlspecialchars($cell_value); ?>

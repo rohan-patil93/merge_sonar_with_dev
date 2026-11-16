@@ -26,7 +26,7 @@ $statuse = ViewStatusData();
 
 </script>
 <div class="modal-header">
-    <h5 class="modal-title"><?= __('Task Update To'); ?> <?php echo $statuse[$_POST['status']]['name'];  ?></h5>
+    <h5 class="modal-title"><?= __('Task Update To'); ?> <?php echo htmlspecialchars(__($statuse[$_POST['status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8');  ?></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body" >

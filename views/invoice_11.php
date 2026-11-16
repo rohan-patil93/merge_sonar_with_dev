@@ -264,7 +264,7 @@ function emptyCheck($valu){
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">10% DISCOUNT</th>
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1">10% <?= __('DISCOUNT'); ?></th>
                                     <th scope="col" class="text-right f-12 p-0 pt-1 pb-1">
                                         <?= __('INR 12,000/'); ?>-
                                     </th>

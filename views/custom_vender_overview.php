@@ -20,11 +20,11 @@
                                                         <div class="kt-widget14__legends">
                                                             <div class="kt-widget14__legend">
                                                                 <span class="kt-widget14__bullet kt-bg-success"></span>
-                                                                <span class="kt-widget14__stats">5.6% Due</span>
+                                                                <span class="kt-widget14__stats"><?= __('5.6% Due'); ?></span>
                                                             </div>
                                                             <div class="kt-widget14__legend">
                                                                 <span class="kt-widget14__bullet kt-bg-danger"></span>
-                                                                <span class="kt-widget14__stats">94.4% Paid</span>
+                                                                <span class="kt-widget14__stats"><?= __('94.4% Paid'); ?></span>
                                                             </div>
 
 
@@ -59,15 +59,15 @@
                                                         <div class="kt-widget14__legends">
                                                             <div class="kt-widget14__legend">
                                                                 <span class="kt-widget14__bullet kt-bg-success"></span>
-                                                                <span class="kt-widget14__stats">25% Furniture</span>
+                                                                <span class="kt-widget14__stats"><?= __('25% Furniture'); ?></span>
                                                             </div>
                                                             <div class="kt-widget14__legend">
                                                                 <span class="kt-widget14__bullet kt-bg-danger"></span>
-                                                                <span class="kt-widget14__stats">3.57% Eletronics </span>
+                                                                <span class="kt-widget14__stats"><?= __('3.57% Eletronics'); ?> </span>
                                                             </div>
                                                                                                                     <div class="kt-widget14__legend">
                                                                 <span class="kt-widget14__bullet kt-bg-brand"></span>
-                                                                <span class="kt-widget14__stats">71.43% Consumable</span>
+                                                                <span class="kt-widget14__stats"><?= __('71.43% Consumable'); ?></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -82,15 +82,15 @@
                                                     <div class="kt-widget1 kt-widget1--fit">
                                                         <div class="kt-widget1__item">
                                                             <div class="kt-widget1__info">
-                                                                <h3 class="kt-widget1__title">Total Invoices</h3>
-                                                                <span class="kt-widget1__desc">Till Date</span>
+                                                                <h3 class="kt-widget1__title"><?= __('Total Invoices'); ?></h3>
+                                                                <span class="kt-widget1__desc"><?= __('Till Date'); ?></span>
                                                             </div>
                                                             <span class="kt-widget1__number kt-font-brand">+$17,800</span>
                                                         </div>
                                                         <div class="kt-widget1__item">
                                                             <div class="kt-widget1__info">
-                                                                <h3 class="kt-widget1__title">Total Paymnts</h3>
-                                                                <span class="kt-widget1__desc">Till Date</span>
+                                                                <h3 class="kt-widget1__title"><?= __('Total Paymnts'); ?></h3>
+                                                                <span class="kt-widget1__desc"><?= __('Till Date'); ?></span>
                                                             </div>
                                                             <span class="kt-widget1__number kt-font-brand">+$17,800</span>
                                                         </div>
@@ -102,29 +102,29 @@
                                                     <div class="kt-widget1 kt-widget1--fit">
                                                         <div class="kt-widget1__item">
                                                             <div class="kt-widget1__info">
-                                                                <h3 class="kt-widget1__title">Total Purchases</h3>
-                                                                <span class="kt-widget1__desc">Till Date</span>
+                                                                <h3 class="kt-widget1__title"><?= __('Total Purchases'); ?></h3>
+                                                                <span class="kt-widget1__desc"><?= __('Till Date'); ?></span>
                                                             </div>
                                                             <span class="kt-widget1__number kt-font-brand">+$17,800</span>
                                                         </div>
                                                         <div class="kt-widget1__item">
                                                             <div class="kt-widget1__info">
-                                                                <h3 class="kt-widget1__title">Orders</h3>
-                                                                <span class="kt-widget1__desc">Till Date</span>
+                                                                <h3 class="kt-widget1__title"><?= __('Orders'); ?></h3>
+                                                                <span class="kt-widget1__desc"><?= __('Till Date'); ?></span>
                                                             </div>
                                                             <span class="kt-widget1__number kt-font-danger">+1,800</span>
                                                         </div>
                                                         <div class="kt-widget1__item">
                                                             <div class="kt-widget1__info">
-                                                                <h3 class="kt-widget1__title">Rejections</h3>
-                                                                <span class="kt-widget1__desc">Till Date</span>
+                                                                <h3 class="kt-widget1__title"><?= __('Rejections'); ?></h3>
+                                                                <span class="kt-widget1__desc"><?= __('Till Date'); ?></span>
                                                             </div>
                                                             <span class="kt-widget1__number kt-font-success">-27,49%</span>
                                                         </div>
                                                         <div class="kt-widget1__item">
                                                             <div class="kt-widget1__info">
-                                                                <h3 class="kt-widget1__title">Vendor Rating</h3>
-                                                                <span class="kt-widget1__desc">Rating</span>
+                                                                <h3 class="kt-widget1__title"><?= __('Vendor Rating'); ?></h3>
+                                                                <span class="kt-widget1__desc"><?= __('Rating'); ?></span>
                                                             </div>
                                                             <span class="kt-widget1__number kt-font-warning">40%</span>
                                                         </div>
@@ -184,13 +184,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <a href="#" class="kt-widget31__stats">
                                                                                 <span>63%</span>
-                                                                                <span>London</span>
+                                                                                <span><?= __('London'); ?></span>
                                                                             </a>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-brand" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="kt-widget31__item">
@@ -211,13 +211,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <a href="#" class="kt-widget31__stats">
                                                                                 <span>33%</span>
-                                                                                <span>Paris</span>
+                                                                                <span><?= __('Paris'); ?></span>
                                                                             </a>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="kt-widget31__item">
@@ -238,13 +238,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <a href="#" class="kt-widget31__stats">
                                                                                 <span>13%</span>
-                                                                                <span>London</span>
+                                                                                <span><?= __('London'); ?></span>
                                                                             </a>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="kt-widget31__item">
@@ -265,13 +265,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <div class="kt-widget31__stats">
                                                                                 <span>93%</span>
-                                                                                <span>New York</span>
+                                                                                <span><?= __('New York'); ?></span>
                                                                             </div>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="kt-widget31__item">
@@ -292,13 +292,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <div class="kt-widget31__stats">
                                                                                 <span>50%</span>
-                                                                                <span>New York</span>
+                                                                                <span><?= __('New York'); ?></span>
                                                                             </div>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -323,13 +323,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <a href="#" class="kt-widget31__stats">
                                                                                 <span>13%</span>
-                                                                                <span>London</span>
+                                                                                <span><?= __('London'); ?></span>
                                                                             </a>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="kt-widget31__item">
@@ -350,13 +350,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <div class="kt-widget31__stats">
                                                                                 <span>93%</span>
-                                                                                <span>New York</span>
+                                                                                <span><?= __('New York'); ?></span>
                                                                             </div>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="kt-widget31__item">
@@ -377,13 +377,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <a href="#" class="kt-widget31__stats">
                                                                                 <span>33%</span>
-                                                                                <span>Paris</span>
+                                                                                <span><?= __('Paris'); ?></span>
                                                                             </a>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="kt-widget31__item">
@@ -404,13 +404,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <div class="kt-widget31__stats">
                                                                                 <span>50%</span>
-                                                                                <span>New York</span>
+                                                                                <span><?= __('New York'); ?></span>
                                                                             </div>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-success" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="kt-widget31__item">
@@ -431,13 +431,13 @@
                                                                         <div class="kt-widget31__progress">
                                                                             <a href="#" class="kt-widget31__stats">
                                                                                 <span>63%</span>
-                                                                                <span>London</span>
+                                                                                <span><?= __('London'); ?></span>
                                                                             </a>
                                                                             <div class="progress progress-sm">
                                                                                 <div class="progress-bar bg-brand" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                                                             </div>
                                                                         </div>
-                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold">Follow</button>
+                                                                        <button type="button" class="btn-label-brand btn btn-sm btn-bold"><?= __('Follow'); ?></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -479,31 +479,31 @@
                                                                     <li class="kt-nav__item">
                                                                         <a href="#" class="kt-nav__link">
                                                                             <i class="kt-nav__link-icon flaticon2-line-chart"></i>
-                                                                            <span class="kt-nav__link-text">Reports</span>
+                                                                            <span class="kt-nav__link-text"><?= __('Reports'); ?></span>
                                                                         </a>
                                                                     </li>
                                                                     <li class="kt-nav__item">
                                                                         <a href="#" class="kt-nav__link">
                                                                             <i class="kt-nav__link-icon flaticon2-send"></i>
-                                                                            <span class="kt-nav__link-text">Messages</span>
+                                                                            <span class="kt-nav__link-text"><?= __('Messages'); ?></span>
                                                                         </a>
                                                                     </li>
                                                                     <li class="kt-nav__item">
                                                                         <a href="#" class="kt-nav__link">
                                                                             <i class="kt-nav__link-icon flaticon2-pie-chart-1"></i>
-                                                                            <span class="kt-nav__link-text">Charts</span>
+                                                                            <span class="kt-nav__link-text"><?= __('Charts'); ?></span>
                                                                         </a>
                                                                     </li>
                                                                     <li class="kt-nav__item">
                                                                         <a href="#" class="kt-nav__link">
                                                                             <i class="kt-nav__link-icon flaticon2-avatar"></i>
-                                                                            <span class="kt-nav__link-text">Members</span>
+                                                                            <span class="kt-nav__link-text"><?= __('Members'); ?></span>
                                                                         </a>
                                                                     </li>
                                                                     <li class="kt-nav__item">
                                                                         <a href="#" class="kt-nav__link">
                                                                             <i class="kt-nav__link-icon flaticon2-settings"></i>
-                                                                            <span class="kt-nav__link-text">Settings</span>
+                                                                            <span class="kt-nav__link-text"><?= __('Settings'); ?></span>
                                                                         </a>
                                                                     </li>
                                                                 </ul>
@@ -679,7 +679,7 @@
                                                             <a href="#" class="kt-widget4__title kt-widget4__title--light">
                                                                 <?= __('ale! Purchase Metronic at 70% off for limited time'); ?>
                                                             </a>
-                                                            <span class="kt-widget4__number kt-font-primary">70% Off!</span>
+                                                            <span class="kt-widget4__number kt-font-primary"><?= __('70% Off!'); ?></span>
                                                         </div>
                                                         <div class="kt-widget4__item">
                                                             <span class="kt-widget4__icon">
@@ -697,7 +697,7 @@
                                                             <a href="#" class="kt-widget4__title kt-widget4__title--light">
                                                                 <?= __('Black Friday! Purchase Metronic at ever lowest 90% off for limited time'); ?>
                                                             </a>
-                                                            <span class="kt-widget4__number kt-font-warning">70% Off!</span>
+                                                            <span class="kt-widget4__number kt-font-warning"><?= __('70% Off!'); ?></span>
                                                         </div>
                                                         <div class="kt-widget4__item">
                                                             <span class="kt-widget4__icon">

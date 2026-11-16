@@ -169,7 +169,7 @@ foreach($data['project_teams'] as $pteam){
               type: "POST",
               success:function(data){
                 console.log("Responce:"+data);
-                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Project Type Upadate Successfully','');
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Project Type Upadate Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
             },
             error:function (){}
         });
@@ -182,7 +182,7 @@ foreach($data['project_teams'] as $pteam){
             type: "POST",
             success:function(data){
             console.log(data);
-            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Project  status deleted Successfully','');
+            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Project  status deleted Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
             window.location.href += "&TAB=8";
             },
             error:function (){}
@@ -202,7 +202,7 @@ foreach($data['project_teams'] as $pteam){
                         type: "POST",
                         success:function(data){
                             console.log(data);
-                            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Member is removed to this project','');
+                            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Member is removed to this project'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
                     },
                     error:function (){}
                 });
@@ -237,7 +237,7 @@ foreach($data['project_teams'] as $pteam){
                 type: "POST",
                 success:function(data){
                     console.log(data);
-                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Member is added to this project','');
+                    tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Member is added to this project'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
                        },
                        error:function (){}
                    });
@@ -256,7 +256,7 @@ foreach($data['project_teams'] as $pteam){
         type: "POST",
         success:function(data){
             console.log("Responce:"+data);
-            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Project Team Member Added Successfully','');
+            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Project Team Member Added Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
             window.location.href += "&TAB=3";
         },
         error:function (){}
@@ -297,7 +297,7 @@ function saveprojecttype(update_id){
           type: "POST",
           success:function(data){
             console.log("Responce:"+data);
-            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Project Type Upadate Successfully','');
+            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Project Type Upadate Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
         },
         error:function (){}
     });
@@ -309,7 +309,7 @@ function saveprojecttype(update_id){
           type: "POST",
           success:function(data){
             console.log("Responce:"+data);
-            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Project Label Upadate Successfully','');
+            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Project Label Upadate Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
         },
         error:function (){}
     });
@@ -322,7 +322,7 @@ function saveprojecttype(update_id){
           type: "POST",
           success:function(data){
             console.log("Responce:"+data);
-            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Project Label Upadate Successfully','');
+            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Project Label Upadate Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
         },
         error:function (){}
     });

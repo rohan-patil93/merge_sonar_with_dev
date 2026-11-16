@@ -53,7 +53,7 @@ $st_show_type=$_SESSION['st_show_type'];
             type: "POST",
             success:function(data){
                 console.log(data);
-                tostarnotify('top','right','fa fa-thumbs-up','form-label w-100 label label-success','animated flipInX','animated flipOutX','Stationery request submitted successfully.','');
+                tostarnotify('top','right','fa fa-thumbs-up','form-label w-100 label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Stationery request submitted successfully.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
                 window.location.reload();
             },
             error:function (){}
@@ -117,7 +117,7 @@ $st_show_type=$_SESSION['st_show_type'];
             htmlRows += ' <h4 class="f-14 mb-0 f-w-600 m-l-10">'+item_name+'</h4>';
             htmlRows += '<span class="f-12 m-l-10">'+item_name+'</span></div>';
             htmlRows += '<div class="col-lg-4 p-2"> <div class="text-right m-b-10 m-r-5 quantity-sec"><div class="input-group"><b class="input-group-btn position-static"><button type="button" class="quantity-left-minus btn btn-danger btn-number p-2" onclick="addmins('+mins+','+item_id+')"><i class="ti-minus"></i></button></b>';
-            htmlRows += '<input aria-label="Quantity" type="text"  name="quantity" id="sidqty_'+item_id+'" value="'+qty+'"  onblur="addqty('+item_id+')"  class="form-control input-number text-center" min="1" max="100"><b class="input-group-btn position-static"><button type="button" class="quantity-right-plus btn btn-success btn-number p-2" onclick="addmins('+add+','+item_id+')" ><i class="ti-plus"></i></button></b></div></div></div>';
+            htmlRows += '<input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  name="quantity" id="sidqty_'+item_id+'" value="'+qty+'"  onblur="addqty('+item_id+')"  class="form-control input-number text-center" min="1" max="100"><b class="input-group-btn position-static"><button type="button" class="quantity-right-plus btn btn-success btn-number p-2" onclick="addmins('+add+','+item_id+')" ><i class="ti-plus"></i></button></b></div></div></div>';
             $('#sidestationary').append(htmlRows);
         }
         if(qty==0){

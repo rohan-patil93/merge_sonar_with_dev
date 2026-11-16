@@ -149,9 +149,9 @@ $transactionNo = htmlspecialchars($contract['transaction_no'] ?? '', ENT_QUOTES,
                                                                                 ?>
                                                                             </td>
                                                                             <td><?php echo customeNumberFormate((float) ($sch['added_amount'] ?? 0)); ?></td>
-                                                                            <td><span class="badge <?php echo $sch['status_class'] ?? 'bg-primary'; ?>"><?php echo htmlspecialchars($sch['status_label'] ?? 'Pending', ENT_QUOTES, 'UTF-8'); ?></span></td>
+                                                                            <td><span class="badge <?php echo $sch['status_class'] ?? 'bg-primary'; ?>"><?php echo htmlspecialchars(__($sch['status_label'] ?? 'Pending'), ENT_QUOTES, 'UTF-8'); ?></span></td>
                                                                             <td>
-                                                                                <a href="#" class="openContractAmcScheduleModal" data-schedule-id="<?php echo (int) ($sch['id'] ?? 0); ?>" title="<?php echo $canExecute ? 'Manage visit' : 'View visit'; ?>">
+                                                                                <a href="#" class="openContractAmcScheduleModal" data-schedule-id="<?php echo (int) ($sch['id'] ?? 0); ?>" title="<?php echo htmlspecialchars($canExecute ? __('Manage visit') : __('View visit'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                                     <i class="ti-eye text-info f-16"></i>
                                                                                 </a>
                                                                                 <?php if (($sch['repair_eligibility'] ?? '') == 'editable') {

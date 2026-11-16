@@ -100,7 +100,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
           type: "POST",
           success:function(data){
             console.log(data);
-            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Title Upadated Successfully','');
+            tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Title Upadated Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
           },
           error:function (){}
         });
@@ -401,7 +401,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
 
 
                                             ?>
-                                            <i class="ti-link m-r-5 text-muted" data-bs-toggle="tooltip" data-placement="bottom" title=" Dependencies : <?php echo implode(",", (array)$viewdpids); ?>"></i>
+                                            <i class="ti-link m-r-5 text-muted" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Dependencies').' : '.implode(",", (array)$viewdpids), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                         <?php } ?>
 
                                         <?php if($pts['planned_finish']!=""){ ?>

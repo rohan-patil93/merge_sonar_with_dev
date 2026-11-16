@@ -163,7 +163,7 @@ function submitVerification(){
         <div class="col-lg-6" >
             <table style="width: 100%;">
 
-                <tr><th scope="col"><?= __('Conditions'); ?></th><td  class="w-b-w-s"><?php echo $asset_verifications['condition_name']; ?></td></tr>
+                <tr><th scope="col"><?= __('Conditions'); ?></th><td  class="w-b-w-s"><?php echo htmlspecialchars(__($asset_verifications['condition_name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td></tr>
                 <tr><th scope="col"><?= __('Serial_no'); ?></th><td  class="w-b-w-s"><?php echo $asset_verifications['serial_no']; ?></td></tr>
                 <tr><th scope="col"><?= __('Warranty Expiry Date'); ?></th><td  class="w-b-w-s"><?php echo $asset_verifications['warranty_expiry_date']; ?></td></tr>
                 <tr><th scope="col"><?= __('End Of Life'); ?></th><td  class="w-b-w-s"><?php echo $asset_verifications['end_of_life']; ?></td></tr>
@@ -182,7 +182,7 @@ function submitVerification(){
                 <select aria-label="<?= htmlspecialchars(__('Conditions'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="conditions" id="conditions" >
                     <option value=""><?= __('Select Any One'); ?></option>
                     <?php foreach ($asset_condition_type as $keyid=>$condition) { ?>
-                        <option value="<?php echo $keyid; ?>" <?php echo $asset_verifications['conditions']==$keyid?"selected":""; ?>><?php echo $condition; ?></option>
+                        <option value="<?php echo $keyid; ?>" <?php echo $asset_verifications['conditions']==$keyid?"selected":""; ?>><?php echo htmlspecialchars(__($condition), ENT_QUOTES, 'UTF-8'); ?></option>
                     <?php } ?>
                 </select>
                 <span id="errormessage_conditions" class="text-danger"></span>

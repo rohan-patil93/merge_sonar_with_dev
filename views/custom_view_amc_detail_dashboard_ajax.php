@@ -63,7 +63,7 @@ $schedule_data = $details['today_services']['schedule_data'];
                         <?php $viw= "text-warning"; if($schedule['current_status']){ $viw= "text-danger";
 }?>
                         <h6 class="m-0 <?php echo $viw; ?> ">
-                        <?php echo $schedule['status_name'] !=""?$schedule['status_name']:"-"; ?>
+                        <?php echo $schedule['status_name'] !="" ? htmlspecialchars(__($schedule['status_name']), ENT_QUOTES, 'UTF-8') : "-"; ?>
                         </h6>
                     </td>
                 </tr>

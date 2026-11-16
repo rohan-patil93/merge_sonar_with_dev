@@ -250,8 +250,8 @@ $stausresult = ViewStatusData();
                                 <div class=" mt-2 text-end">
 
 
-                                    <a href="index?option=COM_INSERT_VENDOR_REGISTRATION_REQUESTS&Rid=<?php echo deocdeId('id:'.$vendorsres['id']); ?>" target="_blank" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php if($vendorsres['share_pdf'] == "Y"){ ?>View Registration Details<?php
-}else{  ?>Edit Registration Details<?php
+                                    <a href="index?option=COM_INSERT_VENDOR_REGISTRATION_REQUESTS&Rid=<?php echo deocdeId('id:'.$vendorsres['id']); ?>" target="_blank" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php if($vendorsres['share_pdf'] == "Y"){ ?><?= htmlspecialchars(__('View Registration Details'), ENT_QUOTES, 'UTF-8'); ?><?php
+}else{  ?><?= htmlspecialchars(__('Edit Registration Details'), ENT_QUOTES, 'UTF-8'); ?><?php
 } ?>"><button class="btn btn-warning waves-effect waves-light btn-mini">
  <?php if($vendorsres['share_pdf'] == "Y"){ ?><?= __('View'); ?><?php
 }else{  ?><?= __('Edit'); ?><?php

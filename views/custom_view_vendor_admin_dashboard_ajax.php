@@ -114,14 +114,14 @@ if(count((array)($vendors)) != 0){  ?>
                                             $bgcolor = "";
                                             $label_title = $_SESSION['users'][$uidkey] . " : ";
                                             if ($vpu['status'] == 'Y') {
-                                                $label_title .=  " recommend";
+                                                $label_title .= " " . __('recommend');
                                                 $bgcolor = "bg-success";
                                             } elseif ($vpu['status'] == 'N') {
-                                                $label_title .=  " Object";
+                                                $label_title .= " " . __('Object');
                                                 $bgcolor = "bg-danger";
                                                 $allaproveprofile = 1;
                                             } else {
-                                                $label_title .=  " Pending";
+                                                $label_title .= " " . __('Pending');
                                                 $allaproveprofile = 1;
                                             }
                                             ?>

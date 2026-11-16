@@ -189,9 +189,9 @@ function getOwnerProperty(valu){
 		                	<td class="p-2"><?php echo $i; ?></td>
 		                	<td class="p-2 w-b-w-s"><?php echo $customer_detail['display_name']; ?>
 		                		<!-- <p class="d-block text-start mt-1 mb-0 " >
-		                			<span data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Opening Balance">O : <?php echo customeummarmonyformateifine($rentinvoice['rent']['ob_total_amount']); ?></span>
-		                        <span class="m-l-5" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Payments">P : <?php echo customeummarmonyformateifine($rentinvoice['rent']['ob_total_amount']-$rentinvoice['rent']['ob_pending_amount']); ?></span>
-		                        <span class="m-l-5" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Due Amount">D : <?php echo customeummarmonyformateifine($rentinvoice['rent']['ob_pending_amount']); ?></span></p> -->
+		                			<span data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Opening Balance'), ENT_QUOTES, 'UTF-8'); ?>">O : <?php echo customeummarmonyformateifine($rentinvoice['rent']['ob_total_amount']); ?></span>
+		                        <span class="m-l-5" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Payments'), ENT_QUOTES, 'UTF-8'); ?>">P : <?php echo customeummarmonyformateifine($rentinvoice['rent']['ob_total_amount']-$rentinvoice['rent']['ob_pending_amount']); ?></span>
+		                        <span class="m-l-5" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Due Amount'), ENT_QUOTES, 'UTF-8'); ?>">D : <?php echo customeummarmonyformateifine($rentinvoice['rent']['ob_pending_amount']); ?></span></p> -->
 
 		                	</td>
 

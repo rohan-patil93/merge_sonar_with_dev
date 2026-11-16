@@ -41,13 +41,13 @@ $announcement_reslut_view = 'Y';
          <div class="card-header">
             <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                <div class="d-flex align-items-center flex-wrap mr-2">
-                  <h5 class="text-dark font-weight-bolder mt-2 mb-5 mr-5">ANNOUNCEMENTS</h5>
+                  <h5 class="text-dark font-weight-bolder mt-2 mb-5 mr-5"><?= __('ANNOUNCEMENTS'); ?></h5>
                   <div class="subheader-separator subheader-separator-ver mt-2 mb-5 mr-5 bg-gray-200"></div>
                </div>
                <?php if(in_array(ST_ADMIN_ANNOUNCEMENT, $emp_role_id)) { ?>
                   <div class="d-flex align-items-center">
                      <a href="#" class="btn btn-primary font-weight-bolder mr-2 announcements-new-btn">
-                        + NEW ANNOUNCEMENTS
+                        <?= __('+ NEW ANNOUNCEMENTS'); ?>
                      </a>
                   </div>
                <?php } ?>
@@ -74,7 +74,7 @@ $announcement_reslut_view = 'Y';
                               <div class="d-flex flex-column flex-center">
                                  <!--begin::Image-->
                                  <div class="bgi-no-repeat rounded text-center" >
-                                    <img src="<?php echo $fileupload_path.$configdata['display_logo'];?>" class="max-w-200px" alt="Logo">
+                                    <img src="<?php echo $fileupload_path.$configdata['display_logo'];?>" class="max-w-200px" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                                  </div>
                                  <!--end::Image-->
                                  <!--begin::Title-->
@@ -116,7 +116,7 @@ $announcement_reslut_view = 'Y';
                                        </div>
                                        <!--end::Text-->
                                        <!--begin::label-->
-                                       <span class="form-label badge badge-lg bg-info" data-toggle="tooltip" title="Number of Announcements"><?php echo $acvalue['category_count'];?></span>
+                                       <span class="form-label badge badge-lg bg-info" data-toggle="tooltip" title="<?= htmlspecialchars(__('Number of Announcements'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $acvalue['category_count'];?></span>
                                        <!--end::label-->
                                     </div>
                                  <?php } ?>
@@ -139,8 +139,8 @@ $announcement_reslut_view = 'Y';
                   <!--begin::Header-->
                   <div class="card-header border-0 pt-5">
                      <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label font-weight-bolder text-dark">My Announcements</span>
-                        <span class="text-muted mt-3 font-weight-bold font-size-sm"><?php echo $live_my_announcemnts; ?> Announcements</span>
+                        <span class="card-label font-weight-bolder text-dark"><?= __('My Announcements'); ?></span>
+                        <span class="text-muted mt-3 font-weight-bold font-size-sm"><?php echo $live_my_announcemnts; ?> <?= __('Announcements'); ?></span>
                      </h3>
 
                   </div>
@@ -170,28 +170,28 @@ $announcement_reslut_view = 'Y';
                                     <!--end::Title-->
                                     <!--begin::Text-->
                                     <span><?php echo substr($myannounce['announcement_message'],0,120).'...';?>
-                                    <a href="index.php?option=<?php echo $_GET['option'];?>&AID=<?php echo $myannounce['id']; ?>" >More
+                                    <a href="index.php?option=<?php echo $_GET['option'];?>&AID=<?php echo $myannounce['id']; ?>" ><?= __('More'); ?>
                                     </a>
                                  </span>
                                  <!--end::Action-->
                               </div>
                               <!--end::Info-->
                            </div>
-                           <button type="button" class=" btn btn-light font-weight-bolder font-size-sm ">Expires: <?php echo date('d M, Y', strtotime($myannounce['expiry_date']));?></button>
+                           <button type="button" class=" btn btn-light font-weight-bolder font-size-sm "><?= __('Expires:'); ?> <?php echo date('d M, Y', strtotime($myannounce['expiry_date']));?></button>
                            <div class="text-dark-50 font-weight-bolder font-size-sm mb-3 mt-2">
                                 <i class="ti-comments text-primary m-r-10 text-dark f-w-600"></i>
                               <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $myannounce['id'];?>" data-view-type="comment">
-                                 <span class="btn font-weight-bolder label label-xl label-success px-3 py-2 mr-5" style="vertical-align: middle;" data-toggle="tooltip" title="Comments">
+                                 <span class="btn font-weight-bolder label label-xl label-success px-3 py-2 mr-5" style="vertical-align: middle;" data-toggle="tooltip" title="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <?php echo $myannounce['totalcomments'];?>  </span>
                                  </a>
                                  <i class="icon-xxl fa fa-thumbs-up"></i>
                                  <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $myannounce['id'];?>" data-view-type="likes">
-                                    <span class="btn font-weight-bolder label label-xl  label-info px-3 py-2 mr-5" style="vertical-align: middle;" data-toggle="tooltip" title="Likes">
+                                    <span class="btn font-weight-bolder label label-xl  label-info px-3 py-2 mr-5" style="vertical-align: middle;" data-toggle="tooltip" title="<?= htmlspecialchars(__('Likes'), ENT_QUOTES, 'UTF-8'); ?>">
                                        <?php echo $myannounce['totallikes'];?>  </span>
                                     </a>
                                     <i class="icon-xxl  fa fa-thumbs-down"></i>
                                     <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $myannounce['id'];?>" data-view-type="dislikes">
-                                       <span class="btn font-weight-bolder label label-xl label-warning px-3 py-2 mr-5" style="vertical-align: middle" data-toggle="tooltip" title="Dislikes">
+                                       <span class="btn font-weight-bolder label label-xl label-warning px-3 py-2 mr-5" style="vertical-align: middle" data-toggle="tooltip" title="<?= htmlspecialchars(__('Dislikes'), ENT_QUOTES, 'UTF-8'); ?>">
                                           <?php echo $myannounce['totaldislikes'];?> </span>
                                        </a>
                                     </div>
@@ -230,7 +230,7 @@ $announcement_reslut_view = 'Y';
                                        <div class="symbol-group symbol-hover">
                                           <?php if($annvalue['created_by_image']!=""){ ?>
                                              <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip" title="<?php echo $annvalue['display_name'];?>">
-                                                <img src="uploads/all/<?php echo $annvalue['created_by_image']; ?>" class="img-50" alt="Details">
+                                                <img src="uploads/all/<?php echo $annvalue['created_by_image']; ?>" class="img-50" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                              </div>
                                           <?php }else{ ?>
                                              <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" title="<?php echo $annvalue['display_name'];?>">
@@ -260,7 +260,7 @@ $announcement_reslut_view = 'Y';
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                              </span>
-                                             <span class="text-muted font-weight-bold">Posted: <?php echo date('d M, Y', strtotime($annvalue['start_date']));?></span>
+                                             <span class="text-muted font-weight-bold"><?= __('Posted:'); ?> <?php echo date('d M, Y', strtotime($annvalue['start_date']));?></span>
                                           </div>
                                           <div class="d-flex align-items-center">
                                              <span class="svg-icon svg-icon-md svg-icon-primary pr-1">
@@ -274,7 +274,7 @@ $announcement_reslut_view = 'Y';
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                              </span>
-                                             <span class="text-muted font-weight-bold">Expires: <?php echo date('d M, Y', strtotime($annvalue['expiry_date']));?> </span>
+                                             <span class="text-muted font-weight-bold"><?= __('Expires:'); ?> <?php echo date('d M, Y', strtotime($annvalue['expiry_date']));?> </span>
                                           </div>
                                        </div>
                                     </div>
@@ -298,15 +298,15 @@ $announcement_reslut_view = 'Y';
                                                 <div class="card-header card-header-right ribbon ribbon-top ribbon-ver">
                                                    <div class="ribbon-target custom" style="top: -2px; left:0px;">
                                                     <?php if($emplist[$first_emp]['image']!="") { ?>
-                                                      <img src="uploads/all/<?php echo $emplist[$first_emp]['image']; ?>"  class="img-radius img-50 align-top m-r-15" style="z-index: 9;" alt="Attachment Preview">
+                                                      <img src="uploads/all/<?php echo $emplist[$first_emp]['image']; ?>"  class="img-radius img-50 align-top m-r-15" style="z-index: 9;" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                    <?php } else { ?>
-                                                      <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"  style="width: 51px; left: 4px; top: 4px; background-color: white;color: black;z-index: 9;"><?php echo initials($emplist[$first_emp]['display_name']); ?></span>
+                                                      <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"  style="width: 51px; left: 4px; top: 4px; background-color: white;color: black;z-index: 9;"><?php echo initials($emplist[$first_emp]['display_name']); ?></span>
                                                    <?php } ?>
                                                 </div>
 
                                              <h4 class="card-title">
                                                <?php echo $badges[$badgeid]['badge_name']; ?>&nbsp; <img class="ml-3" src="uploads/all/<?php echo $badges[$badgeid]['image']; ?>" style="width: 60px;height: auto;border-radius: 50%;z-index: 9;margin: -2px 0 0 -9px;
-                                               " alt="Attachment Preview">
+                                               " alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </h4>
                                          </div>
                                          <div class="custom-text">
@@ -324,7 +324,7 @@ $announcement_reslut_view = 'Y';
                               <!--end::Text-->
                               <!--begin::Video-->
                               <?php if($annvalue['image_url']!='') { ?>
-                                 <div class="bgi-no-repeat bgi-size-cover rounded min-h-295px text-center" > <img src="uploads/all/<?php echo $annvalue['image_url'];?>" style = "max-width:680px;" alt="Attachment Preview" /></div>
+                                 <div class="bgi-no-repeat bgi-size-cover rounded min-h-295px text-center" > <img src="uploads/all/<?php echo $annvalue['image_url'];?>" style = "max-width:680px;" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" /></div>
                               <?php } elseif($annvalue['video_url']!='')  { ?>
                                  <div class="embed-responsive embed-responsive-16by9">
 
@@ -366,15 +366,15 @@ $announcement_reslut_view = 'Y';
                                       ?>
                                        <div class="mt-5" style="width: 80%;">
                                          <div class="rating-group">
-                                            <span class="rating-label">Kindly provide your ranking using the slider below</span>
-                                            <input aria-label="Input field" type="range" class="rating-range announcements-ranking-slider" min="<?php echo $survy_data['data']['start']; ?>" max="<?php echo $survy_data['data']['end']; ?>" id="ran_<?php echo $annvalue['id']; ?>" value="<?php echo $annvalue['survey_result']; ?>" data-anu-id="<?php echo $annvalue['id']; ?>" data-mes-type="3" style="background: linear-gradient(90deg, rgb(34, 197, 94) <?php echo $da_va; ?>%, rgb(229, 231, 235) <?php echo $da_va; ?>%);">
-                                            <div class="rating-value">Rating: <span id="ran_<?php echo $annvalue['id']; ?>_spn"><?php echo $annvalue['survey_result']; ?></span> / <?php echo $survy_data['data']['end']; ?></div>
+                                            <span class="rating-label"><?= __('Kindly provide your ranking using the slider below'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="range" class="rating-range announcements-ranking-slider" min="<?php echo $survy_data['data']['start']; ?>" max="<?php echo $survy_data['data']['end']; ?>" id="ran_<?php echo $annvalue['id']; ?>" value="<?php echo $annvalue['survey_result']; ?>" data-anu-id="<?php echo $annvalue['id']; ?>" data-mes-type="3" style="background: linear-gradient(90deg, rgb(34, 197, 94) <?php echo $da_va; ?>%, rgb(229, 231, 235) <?php echo $da_va; ?>%);">
+                                            <div class="rating-value"><?= __('Rating:'); ?> <span id="ran_<?php echo $annvalue['id']; ?>_spn"><?php echo $annvalue['survey_result']; ?></span> / <?php echo $survy_data['data']['end']; ?></div>
                                          </div>
 
                                       </div>
                                     <?php }
                                     if($survy_data['type']=='CHOICES'){  ?>
-                                        <div class="question">Choices Any One
+                                        <div class="question"><?= __('Choices Any One'); ?>
                                           <ul class="answer-list">
                                              <?php $i=1; foreach((array)$survy_data['data'] as $survy_da){ ?>
                                                 <li class="answer-row">
@@ -396,26 +396,26 @@ $announcement_reslut_view = 'Y';
                            <input type="hidden" id="totaldislikes<?php echo $annvalue['id'];?>" value="<?php echo $annvalue['totaldislikes'];?>">
                            <div class="mt-3">
 
-                              <a href="#" class="mt-0 announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="comment" data-toggle="tooltip" title="Comments">
+                              <a href="#" class="mt-0 announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="comment" data-toggle="tooltip" title="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>">
                                  <i class="icon-xxl fa fa-comment <?php echo $annvalue['highlight_comment']=='1'? 'text-primary':'';?>"></i>
                                  <span class="btn font-weight-bolder label label-xl label-success px-3 py-2" style="vertical-align: middle;"  id="spantotalcomments<?php echo $annvalue['id'];?>">
-                                    <?php echo $annvalue['totalcomments'];?> </span> <span class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2"> Comments </span>
+                                    <?php echo $annvalue['totalcomments'];?> </span> <span class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2"> <?= __('Comments'); ?> </span>
                                  </a>
                                  <a href="#" class="announcements-save-summary-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-field-name="like">
-                                    <i id="iconspantotallikes<?php echo $annvalue['id'];?>" class="cursor-pointer icon-xxl  fa fa-thumbs-up <?php echo $annvalue['highlight_like']=='1'? 'text-primary':'';?> ml-5" data-toggle="tooltip" title="Like this"></i>
+                                    <i id="iconspantotallikes<?php echo $annvalue['id'];?>" class="cursor-pointer icon-xxl  fa fa-thumbs-up <?php echo $annvalue['highlight_like']=='1'? 'text-primary':'';?> ml-5" data-toggle="tooltip" title="<?= htmlspecialchars(__('Like this'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                  </a>
                                  <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="likes">
-                                    <span class="btn font-weight-bolder label label-xl label-info px-3 py-2" style="vertical-align: middle;" id="spantotallikes<?php echo $annvalue['id'];?>" data-toggle="tooltip" title="Likes">
+                                    <span class="btn font-weight-bolder label label-xl label-info px-3 py-2" style="vertical-align: middle;" id="spantotallikes<?php echo $annvalue['id'];?>" data-toggle="tooltip" title="<?= htmlspecialchars(__('Likes'), ENT_QUOTES, 'UTF-8'); ?>">
                                        <?php echo $annvalue['totallikes'];?> </span>
-                                       <span class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2"> Likes </span>
+                                       <span class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2"> <?= __('Likes'); ?> </span>
                                     </a>
                                     <a href="#" class="announcements-save-summary-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-field-name="dislike">
-                                       <i id="iconspantotaldislikes<?php echo $annvalue['id'];?>" class="cursor-pointer icon-xxl <?php echo $annvalue['highlight_dislike']=='1'? 'text-primary':'';?> fa fa-thumbs-down ml-5" data-toggle="tooltip" title="Dislike this"></i>
+                                       <i id="iconspantotaldislikes<?php echo $annvalue['id'];?>" class="cursor-pointer icon-xxl <?php echo $annvalue['highlight_dislike']=='1'? 'text-primary':'';?> fa fa-thumbs-down ml-5" data-toggle="tooltip" title="<?= htmlspecialchars(__('Dislike this'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                     </a>
                                     <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="dislikes">
-                                       <span class="btn font-weight-boldest label label-xl label-warning px-3 py-2" style="vertical-align: middle;" id="spantotaldislikes<?php echo $annvalue['id'];?>" data-toggle="tooltip" title="Dislikes">
+                                       <span class="btn font-weight-boldest label label-xl label-warning px-3 py-2" style="vertical-align: middle;" id="spantotaldislikes<?php echo $annvalue['id'];?>" data-toggle="tooltip" title="<?= htmlspecialchars(__('Dislikes'), ENT_QUOTES, 'UTF-8'); ?>">
                                           <?php echo $annvalue['totaldislikes'];?> </span>
-                                          <span class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2"> Dislikes </span>
+                                          <span class="btn btn-hover-text-primary btn-hover-icon-primary btn-sm btn-text-dark-50 bg-hover-light-primary rounded font-weight-bolder font-size-sm p-2"> <?= __('Dislikes'); ?> </span>
                                        </a>
                                     </div>
                                  </div>
@@ -432,9 +432,9 @@ $announcement_reslut_view = 'Y';
                                  <form class="position-relative">
                                     <input type="hidden" id="userid" value="<?php echo $_SESSION['userid']; ?>">
                                     <div class="input-group input-group-button mt-2">
-                                       <textarea aria-label="Text area" id="input<?php echo $annvalue['id'];?>" style="overflow:hidden" class="form-control p-2 pr-10 resize-none width1" rows="2" placeholder="Any Comments?"></textarea>
+                                       <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" id="input<?php echo $annvalue['id'];?>" style="overflow:hidden" class="form-control p-2 pr-10 resize-none width1" rows="2" placeholder="<?= htmlspecialchars(__('Any Comments?'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                                        <button class="input-group-text addon-style announcements-save-summary-btn" type="button" data-announcement-id="<?php echo $annvalue['id'];?>" data-field-name="comments">
-                                          <span class=""><i class="ti ti-send"></i> Save</span>
+                                          <span class=""><i class="ti ti-send"></i> <?= __('Save'); ?></span>
                                        </button>
                                     </div>
 
@@ -452,18 +452,18 @@ $announcement_reslut_view = 'Y';
                         <div class="">
                            <div class="card-header border-0 pt-7">
                               <h3 class="card-title align-items-start flex-column float-left float-left-none">
-                                 <span class="card-label font-weight-bold font-size-h4 text-dark-75">History</span>
+                                 <span class="card-label font-weight-bold font-size-h4 text-dark-75"><?= __('History'); ?></span>
                                  <span class="text-muted mt-3 font-weight-bold font-size-sm">
-                                    <span class="text-primary font-weight-bolder"><?php echo $total_current_year_announces;?> Announcements</span>
+                                    <span class="text-primary font-weight-bolder"><?php echo $total_current_year_announces;?> <?= __('Announcements'); ?></span>
                                  </span>
                               </h3>
                               <div class="card-toolbar float-right mb-3 float-right-none">
                                  <ul class="nav md-tabs history_custom_tab">
                                     <li class="nav-item ml-0">
-                                       <a class="nav-link py-2 px-4 active font-weight-bolder font-size-sm" data-bs-toggle="tab" href="#kt_tab_pane_1_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Year</a>
+                                       <a class="nav-link py-2 px-4 active font-weight-bolder font-size-sm" data-bs-toggle="tab" href="#kt_tab_pane_1_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Year'); ?></a>
                                     </li>
                                     <li class="nav-item">
-                                       <a class="nav-link py-2 px-4 font-weight-bolder font-size-sm" data-bs-toggle="tab" href="#kt_tab_pane_2_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Month</a>
+                                       <a class="nav-link py-2 px-4 font-weight-bolder font-size-sm" data-bs-toggle="tab" href="#kt_tab_pane_2_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Month'); ?></a>
                                     </li>
                                  </ul>
                               </div>
@@ -478,27 +478,27 @@ $announcement_reslut_view = 'Y';
                                              <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg mb-1"><?php echo $annvalue['announcement_heading']; ?></a>
                                              <span class="text-dark-50 font-weight-normal font-size-sm">
                                                 <?php echo substr($annvalue['announcement_message'],0,120).'...'; ?>
-                                                <a href="index.php?option=<?php echo $_GET['option'];?>&AID=<?php echo $annvalue['id']; ?>" >More
+                                                <a href="index.php?option=<?php echo $_GET['option'];?>&AID=<?php echo $annvalue['id']; ?>" ><?= __('More'); ?>
                                                 </a>
                                              </span>
                                           </div>
                                        </div>
-                                       <button type="button" class=" btn btn-light font-weight-bolder font-size-sm ">Expires: <?php echo date('d M, Y', strtotime($annvalue['expiry_date']));?></button>
+                                       <button type="button" class=" btn btn-light font-weight-bolder font-size-sm "><?= __('Expires:'); ?> <?php echo date('d M, Y', strtotime($annvalue['expiry_date']));?></button>
                                        <div class="text-dark-50 font-weight-bolder font-size-sm pb-7 pt-3">
                                           <i class="icon-xxl la la-comment-o" ></i>
                                           <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="comment">
-                                             <span class="btn font-weight-bolder label label-lg label-success px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="Comments">
+                                             <span class="btn font-weight-bolder label label-lg label-success px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <?php echo $annvalue['totalcomments'];?>  </span>
                                           </a>
                                           <i class="icon-xxl la la-thumbs-up"></i>
                                           <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="likes">
-                                             <span class="btn font-weight-bolder label label-lg label-info px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="Likes">
+                                             <span class="btn font-weight-bolder label label-lg label-info px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="<?= htmlspecialchars(__('Likes'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <?php echo $annvalue['totallikes'];?>
                                              </span>
                                           </a>
                                           <i class="icon-xxl la la-thumbs-down"></i>
                                           <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="dislikes">
-                                             <span class="btn font-weight-bolder label label-lg label-warning px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="Dislikes">
+                                             <span class="btn font-weight-bolder label label-lg label-warning px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="<?= htmlspecialchars(__('Dislikes'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <?php echo $annvalue['totaldislikes'];?> </span>
                                           </a>
                                        </div>
@@ -513,26 +513,26 @@ $announcement_reslut_view = 'Y';
                                              <a href="#" class="text-dark-75 font-weight-bolder font-size-lg text-hover-primary mb-1"><?php echo $annvalue['announcement_heading']; ?></a>
                                              <span class="text-dark-50 font-weight-normal font-size-sm">
                                                 <?php echo substr($annvalue['announcement_message'],0,120).'...'; ?>
-                                                <a href="index.php?option=<?php echo $_GET['option'];?>&AID=<?php echo $annvalue['id']; ?>" > More
+                                                <a href="index.php?option=<?php echo $_GET['option'];?>&AID=<?php echo $annvalue['id']; ?>" > <?= __('More'); ?>
                                                 </a>
                                              </span>
                                           </div>
                                        </div>
-                                       <button type="button" class=" btn btn-light font-weight-bolder font-size-sm ">Expires: <?php echo date('d M, Y', strtotime($annvalue['expiry_date']));?></button>
+                                       <button type="button" class=" btn btn-light font-weight-bolder font-size-sm "><?= __('Expires:'); ?> <?php echo date('d M, Y', strtotime($annvalue['expiry_date']));?></button>
                                        <div class="text-dark-50 font-weight-bolder font-size-sm pb-7 pt-3">
                                           <i class="icon-xxl la la-comment-o"></i>
                                           <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="comment">
-                                             <span class="btn font-weight-bolder label label-lg label-success px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="Comments">
+                                             <span class="btn font-weight-bolder label label-lg label-success px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>">
                                                    <?php echo $annvalue['totalcomments'];?>  </span>
                                           </a>
                                           <i class="icon-xxl la la-thumbs-up"></i>
                                           <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="likes">
-                                             <span class="btn font-weight-bolder label label-lg label-info px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="Likes">
+                                             <span class="btn font-weight-bolder label label-lg label-info px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="<?= htmlspecialchars(__('Likes'), ENT_QUOTES, 'UTF-8'); ?>">
                                                       <?php echo $annvalue['totallikes'];?>  </span>
                                           </a>
                                           <i class="icon-xxl la la-thumbs-down"></i>
                                           <a href="#" class="announcements-popup-btn" data-announcement-id="<?php echo $annvalue['id'];?>" data-view-type="dislikes">
-                                             <span class="btn font-weight-bolder label label-lg label-warning px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="Dislikes">
+                                             <span class="btn font-weight-bolder label label-lg label-warning px-3 py-3 mr-5 mb-4" style="vertical-align:middle" data-toggle="tooltip" title="<?= htmlspecialchars(__('Dislikes'), ENT_QUOTES, 'UTF-8'); ?>">
                                                          <?php echo $annvalue['totaldislikes'];?> </span>
                                           </a>
                                        </div>

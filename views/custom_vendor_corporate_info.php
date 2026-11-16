@@ -89,7 +89,7 @@
                                                                             <div class="form-group row">
                                                                                 <span class="col-form-label col-lg-2 col-sm-12"><?= __('About'); ?></span>
                                                                                 <div class="col-lg-10 col-md-9 col-sm-12">
-                                                                                    <textarea aria-label="<?= htmlspecialchars(__('Kt Autosize 2'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2" rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 76px;">A brief about the company</textarea>
+                                                                                    <textarea aria-label="<?= htmlspecialchars(__('Kt Autosize 2'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2" rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 76px;"><?= __('A brief about the company'); ?></textarea>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
@@ -97,19 +97,19 @@
                                                                                 <div class="col-lg-10 col-md-9 col-sm-12">
                                                                                     <div class="kt-radio-list row check-radio">
                                                                                         <label class="kt-radio kt-radio--bold kt-radio--brand col-lg-2">
-                                                                                            <input aria-label="Io6" type="radio" name="radio6"> <?= __('Private'); ?>
+                                                                                            <input aria-label="<?= htmlspecialchars(__('Private'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="radio6"> <?= __('Private'); ?>
                                                                                             <span></span>
                                                                                         </label>
                                                                                         <label class="kt-radio kt-radio--bold kt-radio--brand col-lg-2">
-                                                                                            <input aria-label="Io6" type="radio" name="radio6"> <?= __('Public'); ?>
+                                                                                            <input aria-label="<?= htmlspecialchars(__('Public'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="radio6"> <?= __('Public'); ?>
                                                                                             <span></span>
                                                                                         </label>
                                                                                         <label class="kt-radio kt-radio--bold kt-radio--brand col-lg-2">
-                                                                                            <input aria-label="Io6" type="radio" name="radio6"> <?= __('Partnership'); ?>
+                                                                                            <input aria-label="<?= htmlspecialchars(__('Partnership'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="radio6"> <?= __('Partnership'); ?>
                                                                                             <span></span>
                                                                                         </label>
                                                                                         <label class="kt-radio kt-radio--bold kt-radio--brand col-lg-2">
-                                                                                            <input aria-label="Io6" type="radio" name="radio6"> <?= __('Others'); ?>
+                                                                                            <input aria-label="<?= htmlspecialchars(__('Others'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="radio6"> <?= __('Others'); ?>
                                                                                             <span></span>
                                                                                         </label>
 

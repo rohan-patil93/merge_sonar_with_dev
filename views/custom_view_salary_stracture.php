@@ -68,8 +68,8 @@ foreach((array)$earnings as $ern){
         }
 
         htmlRows+='<div class="row align-items-end" id="'+ids+'">';
-        htmlRows+=' <div class="col-lg-5"><div class="form-group"> <input type="text" class="form-control" id="er_name_'+count+'" aria-label="Input"></div> </div>';
-        htmlRows+='<div class="col-lg-5"><div class="form-group"><input type="text" readonly class="form-control" id="er_code_'+count+'" aria-label="Input"> </div></div>';
+        htmlRows+=' <div class="col-lg-5"><div class="form-group"> <input type="text" class="form-control" id="er_name_'+count+'" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></div> </div>';
+        htmlRows+='<div class="col-lg-5"><div class="form-group"><input type="text" readonly class="form-control" id="er_code_'+count+'" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"> </div></div>';
         htmlRows+='<div class="col-lg-2 text-end mb-3"> <span onclick="deleterow(\'' + ids + '\',\'paydetails\')" > <i class="fa fa-trash"></i><button type="button" class="btn p-0 m-l-10" ><i class="fa fa-pause-circle"></i></button></div>';
         htmlRows+='</div>';
         if(type=='deduction'){
@@ -89,7 +89,7 @@ foreach((array)$earnings as $ern){
               type: "POST",
               success:function(data){
                 console.log(data);
-                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-danger','animated flipInX','animated flipOutX','Row Deleted Successfully','');
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-danger','animated flipInX','animated flipOutX',<?php echo json_encode(__('Row Deleted Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
                             },
             error:function (){}
         });

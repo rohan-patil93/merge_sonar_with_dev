@@ -375,25 +375,25 @@
                                                             <li class="kt-nav__item">
                                                                 <a href="#" class="kt-nav__link">
                                                                     <i class="kt-nav__link-icon flaticon2-drop"></i>
-                                                                    <span class="kt-nav__link-text">Activity</span>
+                                                                    <span class="kt-nav__link-text"><?= __('Activity'); ?></span>
                                                                 </a>
                                                             </li>
                                                             <li class="kt-nav__item">
                                                                 <a href="#" class="kt-nav__link">
                                                                     <i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-                                                                    <span class="kt-nav__link-text">FAQ</span>
+                                                                    <span class="kt-nav__link-text"><?= __('FAQ'); ?></span>
                                                                 </a>
                                                             </li>
                                                             <li class="kt-nav__item">
                                                                 <a href="#" class="kt-nav__link">
                                                                     <i class="kt-nav__link-icon flaticon2-telegram-logo"></i>
-                                                                    <span class="kt-nav__link-text">Settings</span>
+                                                                    <span class="kt-nav__link-text"><?= __('Settings'); ?></span>
                                                                 </a>
                                                             </li>
                                                             <li class="kt-nav__item">
                                                                 <a href="#" class="kt-nav__link">
                                                                     <i class="kt-nav__link-icon flaticon2-new-email"></i>
-                                                                    <span class="kt-nav__link-text">Support</span>
+                                                                    <span class="kt-nav__link-text"><?= __('Support'); ?></span>
                                                                     <span class="kt-nav__link-badge">
                                                                         <span class="kt-badge kt-badge--success kt-badge--rounded">5</span>
                                                                     </span>
@@ -401,8 +401,8 @@
                                                             </li>
                                                             <li class="kt-nav__separator"></li>
                                                             <li class="kt-nav__foot">
-                                                                <a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">Learn more</a>
-                                                                <button type="button" class="btn btn-clean btn-bold btn-sm" data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">Learn more</button>
+                                                                <a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Learn more'); ?></a>
+                                                                <button type="button" class="btn btn-clean btn-bold btn-sm" data-toggle="kt-tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Learn more'); ?></button>
                                                             </li>
                                                         </ul>
 
@@ -435,10 +435,10 @@
                                                             AEOL Meeting With
                                                         </div>
                                                         <div class="kt-list-pics kt-list-pics--sm kt-padding-l-20">
-                                                            <a href="#"><img src="assets/media/users/100_4.jpg" title="" alt="User Profile"></a>
-                                                            <a href="#"><img src="assets/media/users/100_13.jpg" title="" alt="User Profile"></a>
-                                                            <a href="#"><img src="assets/media/users/100_11.jpg" title="" alt="User Profile"></a>
-                                                            <a href="#"><img src="assets/media/users/100_14.jpg" title="" alt="User Profile"></a>
+                                                            <a href="#"><img src="assets/media/users/100_4.jpg" title="" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>"></a>
+                                                            <a href="#"><img src="assets/media/users/100_13.jpg" title="" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>"></a>
+                                                            <a href="#"><img src="assets/media/users/100_11.jpg" title="" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>"></a>
+                                                            <a href="#"><img src="assets/media/users/100_14.jpg" title="" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>"></a>
                                                         </div>
                                                     </div>
                                                     <div class="kt-timeline-v2__item">

@@ -1,4 +1,4 @@
-﻿<div class="banner">
+<div class="banner">
             <img src="assets/images/student-courses/banner-1.jpg" class="" alt="">
             <div class="banner-text">
                 <h2><?= __('Start managing supplier invoices with ease!'); ?></h2>
@@ -375,7 +375,7 @@
                                                       <td><?php echo fromDate($pending_list['expense_date']); ?></td>
                                                       <td class="text-right"><?php echo customeummarmonyformateifine($pending_list['total_amount']); ?></td>
                                                           <td>
-                                                          <span class="form-label label " style="background-color: <?php echo $stausresultpending_list['background_color'][0] == '#'?$stausresultpending_list['background_color']:"#".$stausresultpending_list['background_color']; ?>; color:<?php echo $stausresultpending_list['color'][0] =='#'?$stausresultpending_list['color']:'#'.$stausresultpending_list['color']; ?>"><?php echo $stausresultpending_list['name']?></span>
+                                                          <span class="form-label label " style="background-color: <?php echo $stausresultpending_list['background_color'][0] == '#'?$stausresultpending_list['background_color']:"#".$stausresultpending_list['background_color']; ?>; color:<?php echo $stausresultpending_list['color'][0] =='#'?$stausresultpending_list['color']:'#'.$stausresultpending_list['color']; ?>"><?php echo htmlspecialchars(__($stausresultpending_list['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                                           </td>
                                                           <td>
                                                             <a href="index?option=COM_INSERT_EMP_EXPENSES&Rid=<?php echo $ridrecengtbils; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Edit Datails'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit"></i></a>

@@ -7,19 +7,19 @@ $result = json_decode($apicallss,1);
     $sdate = $year."-01-01";
 
 $farray = array('head_count'=>'Head Count','addtion_head_count'=>'Addtion to Head Count','re_joinee'=>'Re-Joinee','revoke'=> 'Revoke resignation', 'internal_transfer'=>'Internal Transfer', 'deletion_head_count'=>'Deletion to Head Count', 'promotion'=>'Promotion', 'revision_salary'=>'Revision on Salary','revision_promotion'=> 'Revision+Promotion', 'salary_correction'=>'Salary Correction', 'lop'=>'LOP for the Month', 'lop_reversal'=>'LOP reversal', 'location_transfer'=>'Location Transfer', 'stop_salary'=>'Stop Salary');
-$ftarray = array('tag'=>'Per EE TAG','gross'=>'Per EE Gross Sal','tax'=>'Per EE TAX', 'tax_gross'=>'TAX to Gross Salary', 'net'=>'Per EE Net Pay');
-$menus['0']['name']= 'Last 12 Months';
+$ftarray = array('tag'=>__('Per EE TAG'),'gross'=>__('Per EE Gross Sal'),'tax'=>__('Per EE TAX'), 'tax_gross'=>__('TAX to Gross Salary'), 'net'=>__('Per EE Net Pay'));
+$menus['0']['name']= __('Last 12 Months');
 $menus['0']['code']= 'Last';
-$menus['0']['data']=  array('0'=>'Last 12 Months');
+$menus['0']['data']=  array('0'=>__('Last 12 Months'));
 $year = date('Y');
 $year = $year-6;
 for($i=1;$i<7;$i++){
     $array[] = $year+$i;
 }
-$menus['1']['name']= 'Assessment Year';
+$menus['1']['name']= __('Assessment Year');
 $menus['1']['data']=  $array;
 $menus['1']['code']= 'ASS';
-$menus['2']['name']= 'Yearly';
+$menus['2']['name']= __('Yearly');
 $menus['2']['data']=  $array;
 $menus['2']['code']= 'YEAR';
 

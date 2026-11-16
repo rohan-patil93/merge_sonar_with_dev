@@ -15,8 +15,8 @@
          <div class="col-lg-12 row">
 
             <?php
-               $table_list['0']= array('title'=>'Timesheet List','sub_title'=>'','tab'=>array('Approved','Tobe Approved'),'sub'=>$vdash['0'],'th_title'=>array('','Name','Spent','Status'));
-               $table_list['1']= array('title'=>'Conracts','sub_title'=>'','tab'=>array('Approved','Tobe Approved'),'sub'=>$vdash['1'],'th_title'=>array('','Name','Details','Status Date'));
+               $table_list['0']= array('title'=>__('Timesheet List'),'sub_title'=>'','tab'=>array(__('Approved'),__('Tobe Approved')),'sub'=>$vdash['0'],'th_title'=>array('',__('Name'),__('Spent'),__('Status')));
+               $table_list['1']= array('title'=>__('Conracts'),'sub_title'=>'','tab'=>array(__('Approved'),__('Tobe Approved')),'sub'=>$vdash['1'],'th_title'=>array('',__('Name'),__('Details'),__('Status Date')));
                $n=1; foreach($table_list as $table){ ?>
             <div class="col-lg-6">
                <div class="">
@@ -86,7 +86,7 @@
                                           </td>
                                           <td class="text-center">
                                              <div>
-                                                <span class="label label-lg  label-inline" style="background-color:<?php echo "#".$stausresult[$tabs['status']]['background_color']; ?>; color:<?php echo "#".$stausresult[$tabs['status']]['color']; ?>;"><?php echo $stausresult[$tabs['status']]['name']; ?></span>
+                                                <span class="label label-lg  label-inline" style="background-color:<?php echo "#".$stausresult[$tabs['status']]['background_color']; ?>; color:<?php echo "#".$stausresult[$tabs['status']]['color']; ?>;"><?php echo htmlspecialchars(__($stausresult[$tabs['status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                              </div>
                                              <a href="#" class="text-dark font-weight-bold text-hover-primary mt-1 font-size-lg"><?php echo date('d M, Y', strtotime($tabs['field2'])); ?></a>
 

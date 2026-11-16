@@ -15,7 +15,7 @@ if ($_SESSION['admin_type'] == '1') {
 }
 
 if (!$has_access) {
-    echo "<script>alert('Access Denied: You do not have permission to access this page.'); window.location.href='../index.php';</script>";
+    echo "<script>alert(" . json_encode(__('Access Denied: You do not have permission to access this page.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) . "); window.location.href='../index.php';</script>";
     exit;
 }
 

@@ -142,7 +142,7 @@ if($allpermision['permission_update'] == '1'){$edit_permissionbtn = "disabled";
                                 <td class="w-b-w-s"><?php echo $list['party_name']; ?></td>
                                 <td class="text-right"><?php echo customeummarmonyformateifine($list['total_amount']); ?></td>
                                 <td>
-                                    <span class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo $statuse[$list['current_status']]['name']; ?></span>
+                                    <span class="form-label label label-md" style="color:<?php echo $statuse[$list['current_status']]['color']; ?>; background-color:<?php echo $statuse[$list['current_status']]['background_color']; ?>;"><?php echo htmlspecialchars(__($statuse[$list['current_status']]['name'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></span>
                                 </td>
                             </tr>
                         <?php $mk++;

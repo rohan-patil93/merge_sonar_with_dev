@@ -237,9 +237,9 @@ th{
                 success:function(data){
                     var returnres = JSON.parse(data);
                     if(returnres.check ==0){
-                        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success pt-4 pb-4','animated flipInX','animated flipOutX',' Added On Mile Stone','');
+                        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success pt-4 pb-4','animated flipInX','animated flipOutX',<?php echo json_encode(__('Added On Mile Stone'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
                     }else{
-                        tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger pt-4 pb-4','animated flipInX','animated flipOutX',' Removed From  Mile Stone','');
+                        tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger pt-4 pb-4','animated flipInX','animated flipOutX',<?php echo json_encode(__('Removed From Mile Stone'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
                     }
 
                 },

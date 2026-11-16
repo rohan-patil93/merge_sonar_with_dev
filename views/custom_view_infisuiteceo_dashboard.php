@@ -9,7 +9,7 @@
       <div class="card-body">
         <p class="text-muted mb-0"><?= __('Revenue (MTD)'); ?></p>
         <h3 class="f-w-600 f-34 mt-2 mb-2"><?= htmlspecialchars(__('₹4.8 Cr'), ENT_QUOTES, 'UTF-8'); ?></h3>
-        <p class="text-success mb-0 f-w-600"><i class="ti-arrow-up"></i> 14% vs last month</p>
+        <p class="text-success mb-0 f-w-600"><i class="ti-arrow-up"></i> <?= __('14% vs last month'); ?></p>
       </div>
     </div>
   </div>

@@ -46,7 +46,7 @@
             <h4 class="f-w-600 f-30"><?= __('Order Lifecycle Tracker'); ?></h4>
             <p class="f-w-600 f-14 text-muted"><?= __('Real-time process visibility'); ?></p>
           </div>
-          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center">92% Process Efficiency</span>
+          <span class="bg-green-50 b-radius-20 pt-1 pb-1 border-green-100 p-l-10 p-r-10 text-center"><?= __('92% Process Efficiency'); ?></span>
         </div>
         <div class="pipeline-wrapper mt-4">
           <div class="pipeline">
@@ -242,7 +242,7 @@
         <div class="mt-4">
           <div class="d-flex justify-content-between bg-yellow-50 b-radius-20 p-3 border-green-100">
             <span class="f-16"><?= __('Overtime Hours'); ?></span>
-            <span class="f-16 text-danger f-w-600">428 hrs</span>
+            <span class="f-16 text-danger f-w-600"><?= __('428 hrs'); ?></span>
           </div>
         </div>
         <div class="mt-4">
