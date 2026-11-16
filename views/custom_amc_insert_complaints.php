@@ -120,7 +120,7 @@ $contracts = $result['contracts'] ?? array();
 					<div class="row">
 						<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Complaint priority") ?> <span style="color:red;">*</span></span>
-							<select class="form-select js-example-basic-single" id="complaint_priority" name="complaint_priority" aria-label="Complaint Priority">
+							<select class="form-select js-example-basic-single" id="complaint_priority" name="complaint_priority" aria-label="<?= htmlspecialchars(__('Complaint Priority'), ENT_QUOTES, 'UTF-8'); ?>">
 								<option value="0"> <?= __("Select Any one") ?> </option>
 								<option value="L" <?php echo $return['complaint_priority']=="L"? 'selected': '' ?>> <?= __("Low") ?></option>
 								<option value="M" <?php echo $return['complaint_priority']=="M"? 'selected': '' ?>> <?= __("Medium") ?> </option>
@@ -131,17 +131,17 @@ $contracts = $result['contracts'] ?? array();
 						</div>
 						<div class="col-lg-3 col-xs-6 form-group">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Date") ?><span style="color:red;">*</span></span>
-							<input class="form-control" type="date" name="transaction_date" id="transaction_date"   value="<?php echo isset($return['transaction_date']) && $return['transaction_date'] != '' ? date('Y-m-d', strtotime($return['transaction_date'])) :  date('Y-m-d'); ?>"/ aria-label="Transaction Date">
+							<input class="form-control" type="date" name="transaction_date" id="transaction_date"   value="<?php echo isset($return['transaction_date']) && $return['transaction_date'] != '' ? date('Y-m-d', strtotime($return['transaction_date'])) :  date('Y-m-d'); ?>"/ aria-label="<?= htmlspecialchars(__('Transaction Date'), ENT_QUOTES, 'UTF-8'); ?>">
 							<div style="display: none;color: red;" id="transaction_date_err"></div>
 						</div>
 						<div class="form-group col-lg-3 col-xs-6 ">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Complaint Name") ?><span style="color:red;">*</span></span>
-							<input class="form-control" placeholder="<?= __("Enter Complaint Name") ?>" type="text" name="complaint_name" id="complaint_name" value="<?php echo $return['complaint_name'] ?? ''; ?>" aria-label="Enter Complaint Name">
+							<input class="form-control" placeholder="<?= __("Enter Complaint Name") ?>" type="text" name="complaint_name" id="complaint_name" value="<?php echo $return['complaint_name'] ?? ''; ?>" aria-label="<?= htmlspecialchars(__('Enter Complaint Name'), ENT_QUOTES, 'UTF-8'); ?>">
 							<div style="display: none;color: red;" id="complaint_name_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Complaint Type") ?><span style="color:red;">*</span></span>
-							<select class="form-select js-example-basic-single" id="complaint_type" name="complaint_type" onchange="handleComplaintType()" aria-label="Complaint Type">
+							<select class="form-select js-example-basic-single" id="complaint_type" name="complaint_type" onchange="handleComplaintType()" aria-label="<?= htmlspecialchars(__('Complaint Type'), ENT_QUOTES, 'UTF-8'); ?>">
 								<option value="0"> <?= __("Select Any one") ?> </option>
 								<option value="Item" <?php echo $return['complaint_type']=="Item"? 'selected': '' ?> ><?= __("Item") ?></option>
 								<option value="Asset" <?php echo $return['complaint_type']=="Asset"? 'selected': '' ?> ><?= __("Asset") ?></option>
@@ -151,7 +151,7 @@ $contracts = $result['contracts'] ?? array();
 
 						<div class="col-md-3 w-full">
 							<span class="form-label d-inline-block fw-bold"><?= __("Location") ?> <span class="text-danger">*</span></span>
-							<select class="form-select js-example-basic-single" id="location_id" name="location_id" onchange="onLocationChange(this.value)" aria-label="Location Id">
+							<select class="form-select js-example-basic-single" id="location_id" name="location_id" onchange="onLocationChange(this.value)" aria-label="<?= htmlspecialchars(__('Location Id'), ENT_QUOTES, 'UTF-8'); ?>">
 								<option value=""><?= __("Select Location") ?></option>
 								<?php foreach ($locations as $loc): ?>
 								<option value="<?= $loc['id'] ?>" <?= ($return && $return['location_id']==$loc['id'])?'selected':''; ?>><?= htmlspecialchars(__($loc['short_name'] ?? '')) ?></option>
@@ -161,7 +161,7 @@ $contracts = $result['contracts'] ?? array();
 						</div>
 						<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Building") ?><span style="color:red;">*</span></span>
-							<select class="form-select js-example-basic-single" id="building_id" name="building_id" aria-label="Building Id">
+							<select class="form-select js-example-basic-single" id="building_id" name="building_id" aria-label="<?= htmlspecialchars(__('Building Id'), ENT_QUOTES, 'UTF-8'); ?>">
 								<option value="0"> <?= __("Select Any one") ?> </option>
 
 								<?php /* foreach ($buildings as $row): ?>
@@ -174,21 +174,21 @@ $contracts = $result['contracts'] ?? array();
 						</div>
 						<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Building Floor") ?><span style="color:red;">*</span></span>
-							<select class="form-select js-example-basic-single" id="building_floor_id" name="building_floor_id" aria-label="Building Floor Id">
+							<select class="form-select js-example-basic-single" id="building_floor_id" name="building_floor_id" aria-label="<?= htmlspecialchars(__('Building Floor Id'), ENT_QUOTES, 'UTF-8'); ?>">
 								<option value="0"> <?= __("Select Any one") ?> </option>
 							</select>
 							<div style="display: none;color: red;" id="building_floor_id_err"></div>
 						</div>
 						<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Building Floor Space") ?><span style="color:red;">*</span></span>
-							<select class="form-select js-example-basic-single" id="building_floor_space_id" name="building_floor_space_id" aria-label="Building Floor Space Id">
+							<select class="form-select js-example-basic-single" id="building_floor_space_id" name="building_floor_space_id" aria-label="<?= htmlspecialchars(__('Building Floor Space Id'), ENT_QUOTES, 'UTF-8'); ?>">
 								<option value="0"> <?= __("Select Any one") ?> </option>
 							</select>
 							<div style="display: none;color: red;" id="building_floor_space_id_err"></div>
 						</div>
 												<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Asset") ?><span style="color:red;">*</span></span>
-							<select class="form-select js-example-basic-single" id="asset_id" name="asset_id" aria-label="Asset Id">
+							<select class="form-select js-example-basic-single" id="asset_id" name="asset_id" aria-label="<?= htmlspecialchars(__('Asset Id'), ENT_QUOTES, 'UTF-8'); ?>">
 								<option value="0"> <?= __("Select Any one") ?> </option>
 								<?php foreach ($assets as $row): ?>
 									<option value="<?php echo $row['id']; ?>"  <?php echo $return['asset_id']==$row['id']? 'selected': '' ?> >
@@ -200,7 +200,7 @@ $contracts = $result['contracts'] ?? array();
 						</div>
 						<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Item") ?> <span style="color:red;">*</span></span>
-							<select class="form-select js-example-basic-single" id="item_id" name="item_id" aria-label="Item Id">
+							<select class="form-select js-example-basic-single" id="item_id" name="item_id" aria-label="<?= htmlspecialchars(__('Item Id'), ENT_QUOTES, 'UTF-8'); ?>">
 								<option value="0"> <?= __("Select Any one") ?> </option>
 								<?php foreach ($items as $row): ?>
 									<option value="<?php echo $row['id']; ?>" <?php echo $return['item_id']==$row['id']? 'selected': '' ?>  >
@@ -214,15 +214,15 @@ $contracts = $result['contracts'] ?? array();
 						<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("AMC Contract") ?></span>
 							<input type="hidden" name="contract_id" id="contract_id" value="<?php echo (int) ($return['contract_id'] ?? 0); ?>">
-							<input type="text" class="form-control" id="contract_display" readonly value="<?php echo htmlspecialchars($return['contract_name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= __("Auto from asset + location") ?>" aria-label="Auto from asset + location">
+							<input type="text" class="form-control" id="contract_display" readonly value="<?php echo htmlspecialchars($return['contract_name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= __("Auto from asset + location") ?>" aria-label="<?= htmlspecialchars(__('Auto from asset + location'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 						<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("ServiceNow Ref") ?></span>
-							<input type="text" class="form-control" name="servicenow_ref" id="servicenow_ref" value="<?php echo htmlspecialchars($return['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= __("Optional") ?>" aria-label="Optional">
+							<input type="text" class="form-control" name="servicenow_ref" id="servicenow_ref" value="<?php echo htmlspecialchars($return['servicenow_ref'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= __("Optional") ?>" aria-label="<?= htmlspecialchars(__('Optional'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 						<div class="form-group col-lg-3 w-full">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Linked Schedule Visit") ?></span>
-							<select class="form-select js-example-basic-single" id="schedule_id" name="schedule_id" aria-label="Schedule Id">
+							<select class="form-select js-example-basic-single" id="schedule_id" name="schedule_id" aria-label="<?= htmlspecialchars(__('Schedule Id'), ENT_QUOTES, 'UTF-8'); ?>">
 								<option value=""><?= __("None — Adhoc") ?></option>
 							</select>
 						</div>
@@ -230,12 +230,12 @@ $contracts = $result['contracts'] ?? array();
 
 						<div class="col-lg-3 col-xs-6 form-group">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Remarks") ?></span>
-							<textarea class="form-control" placeholder="<?= __("Enter Remarks") ?>" type="text" name="remarks" id="remarks" aria-label="Enter Remarks"><?php echo $return['remarks'] ?? ''; ?></textarea>
+							<textarea class="form-control" placeholder="<?= __("Enter Remarks") ?>" type="text" name="remarks" id="remarks" aria-label="<?= htmlspecialchars(__('Enter Remarks'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $return['remarks'] ?? ''; ?></textarea>
 						</div>
 
 						<div class="col-lg-3 col-xs-6 form-group">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Complaint Image") ?> </span>
-							<input class="form-control mb-1" type="file" name="complaint_images[]" id="complaint_images" multiple / aria-label="Complaint Images">
+							<input class="form-control mb-1" type="file" name="complaint_images[]" id="complaint_images" multiple / aria-label="<?= htmlspecialchars(__('Complaint Images'), ENT_QUOTES, 'UTF-8'); ?>">
 							<?php
 							if(!empty($rid)){
 								$application_table_name  = 'complaints';

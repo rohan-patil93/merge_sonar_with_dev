@@ -71,7 +71,7 @@ function closedPopupcompliance22(){
 </script>
 <div class="modal-header">
     <h4 class="modal-title"><?= __('Email') ?></h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body col-lg-10 mx-auto">
         <ul class="nav md-tabs infisuite_tab mb-2">
@@ -91,7 +91,7 @@ function closedPopupcompliance22(){
                     <div class="col-lg-4">
                         <div class="form-group w-full">
                             <span class="form-label"><?= __('Email Template') ?>  <span class="requried">*</span></span>
-                            <select aria-label="Email Template" class="form-control js-example-basic-signle" name="email_template_id" onchange="emailTemplateId(this.value)">
+                            <select aria-label="<?= htmlspecialchars(__('Email Template'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-signle" name="email_template_id" onchange="emailTemplateId(this.value)">
                                 <option value="-1"><?= __('New Email') ?></option>
                                 <?php foreach($email_content as $res){  ?>
                                 <option value="<?php echo $res['template_reference_id']; ?>"><?php echo htmlspecialchars(__($res['template_name'] ?? '')); ?></option>
@@ -100,13 +100,13 @@ function closedPopupcompliance22(){
                         </div>
                         <div class="form-group">
                             <span class="form-label"><?= __('Subject') ?><span class="requried">*</span></span>
-                            <input aria-label="Subject" class="form-control notemptyclass text-capitalize"  type="text" name="subject" id="subject" value="<?php echo $emaildetail['email_subject_to']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Subject'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control notemptyclass text-capitalize"  type="text" name="subject" id="subject" value="<?php echo $emaildetail['email_subject_to']; ?>">
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="form-group">
                             <span class="form-label"><?= __('Email Content') ?><span class="requried">*</span></span>
-                            <textarea aria-label="Email Content To" class="form-control " name="email_content_to" id="editor11" ><?php echo $emaildetail['email_content_to']; ?></textarea>
+                            <textarea aria-label="<?= htmlspecialchars(__('Email Content To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " name="email_content_to" id="editor11" ><?php echo $emaildetail['email_content_to']; ?></textarea>
                         </div>
                     </div>
                 </div>

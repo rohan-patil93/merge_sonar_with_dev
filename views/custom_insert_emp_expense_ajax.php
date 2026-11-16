@@ -54,7 +54,7 @@ if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
     if($trips_select['id']!=""){
 ?>
 <div class=" mt-3">
-    <h4>Trips</h4>
+    <h4><?= __('Trips'); ?></h4>
     <table class="table table-hover table-sm">
         <tr>
             <th scope="col" class="p-2"><?= __('Trip Name') ?></th>
@@ -76,7 +76,7 @@ if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
 </div>
 
 <div class=" mt-3">
-    <h4>Journey</h4>
+    <h4><?= __('Journey'); ?></h4>
     <table class="table table-hover table-sm">
         <thead>
             <tr>
@@ -102,7 +102,7 @@ if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
 </div>
 
 <div class=" mt-3">
-    <h4>Hotel</h4>
+    <h4><?= __('Hotel'); ?></h4>
     <table class="table table-hover table-sm">
         <thead>
             <tr>
@@ -130,7 +130,7 @@ if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
 </div>
 
 <div class=" mt-3">
-    <h4>Local</h4>
+    <h4><?= __('Local'); ?></h4>
     <table class="table table-hover table-sm">
         <thead>
             <tr>
@@ -161,7 +161,7 @@ if($_POST['expaince_list'] !="" && $_POST['expaince_list'] =="Y"){  ?>
 <?php }else{ ?>
 
 <div class="card-px text-center ">
-    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Trip</p>
+    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Trip'); ?></p>
     <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
     </div>

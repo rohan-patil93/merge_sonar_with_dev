@@ -81,7 +81,7 @@ if($emp_list_names!="") {
       foreach ($filter_list as $filter) {
        ?>
        <option <?php if($selectedoption==$filter['genc_detail_name']) {?> selected <?php
-} ?> value="<?php echo $filter['genc_detail_code'];?>"><?php echo $filter['genc_detail_name'];?></option>
+} ?> value="<?php echo $filter['genc_detail_code'];?>"><?php echo __($filter['genc_detail_name']);?></option>
      <?php } ?>
    </select>
  </div>

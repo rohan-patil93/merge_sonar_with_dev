@@ -446,7 +446,7 @@ if($employee_performance_appraisals['id'] !=""){
                 <div class="d-flex">
                     <div class="flex-shrink-0 m-r-30 m-l-25 mt-lg-0 mt-3">
                         <div class="symbol symbol-50 symbol-lg-120">
-                            <img src="../uploads/all/135.jpg" class="img-120 " alt="Preview">
+                            <img src="../uploads/all/135.jpg" class="img-120 " alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
                     </div>
                     <div class="flex-grow-1">

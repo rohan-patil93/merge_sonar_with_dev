@@ -37,10 +37,10 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
     <!-- Filter Card -->
     <div class="card">
         <div class="card-header">
-            <h5><i class="ti-filter"></i> Fuel Track List</h5>
+            <h5><i class="ti-filter"></i> <?= __('Fuel Track List'); ?></h5>
             <div class="card-header-right">
                 <a href="index.php?option=custom_insert_transport_fuel" class="btn btn-primary waves-effect waves-light">
-                    <i class="ti-plus"></i> Add New Entry
+                    <i class="ti-plus"></i> <?= __('Add New Entry'); ?>
                 </a>
             </div>
         </div>
@@ -63,38 +63,38 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                             </button>
                             <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split waves-effect waves-light"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 20%;height: 40px;">
-                                <span class="visually-hidden">Toggle primary</span>
+                                <span class="visually-hidden"><?= __('Toggle primary'); ?></span>
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TD" ? "active" : ""; ?> empty_active"
-                                    id="TD" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')">Today</a>
+                                    id="TD" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')"><?= __('Today'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TW" ? "active" : ""; ?> empty_active"
-                                    id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week'))); ?>','<?php echo fromDate(date("Y-m-d", strtotime('sunday this week'))); ?>')">This Week</a>
+                                    id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week'))); ?>','<?php echo fromDate(date("Y-m-d", strtotime('sunday this week'))); ?>')"><?= __('This Week'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TM" ? "active" : ""; ?> empty_active"
-                                    id="TM" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')">This Month</a>
+                                    id="TM" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')"><?= __('This Month'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TY" ? "active" : ""; ?> empty_active"
-                                    id="TY" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')">This Year</a>
+                                    id="TY" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')"><?= __('This Year'); ?></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "YD" ? "active" : ""; ?> empty_active"
-                                    id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>')">Yesterday</a>
+                                    id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>')"><?= __('Yesterday'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "PM" ? "active" : ""; ?> empty_active"
-                                    id="PM" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01", strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t", strtotime('last month'))); ?>')">Previous Month</a>
+                                    id="PM" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01", strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t", strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "CD" ? "active" : ""; ?> empty_active"
-                                    id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')">Custom Date</a>
+                                    id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')"><?= __('Custom Date'); ?></a>
                             </div>
                         </div>
                         <div class="row mt-2" style="display: <?php echo $shortcode == 'CD' ? '' : 'none' ?>" id="custome_date">
                             <div class="col-lg-6">
-                                <input aria-label="From" type="text" class="form-control filterdynamic datepicker" name="from" id="from_date" value="<?php echo $from_date_display; ?>">
+                                <input aria-label="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="from" id="from_date" value="<?php echo $from_date_display; ?>">
                             </div>
                             <div class="col-lg-6">
-                                <input aria-label="To" type="text" class="form-control filterdynamic datepicker" name="to" id="to_date" value="<?php echo $to_date_display; ?>">
+                                <input aria-label="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="to" id="to_date" value="<?php echo $to_date_display; ?>">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <button type="submit" name="applyform" value="apply" class="btn btn-info">Search</button>
+                        <button type="submit" name="applyform" value="apply" class="btn btn-info"><?= __('Search'); ?></button>
                     </div>
                 </div>
             </form>
@@ -109,7 +109,7 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
                             <h4 class="mb-0"><?php echo $total_entries; ?></h4>
-                            <p class="mb-0">Total Entries</p>
+                            <p class="mb-0"><?= __('Total Entries'); ?></p>
                         </div>
                         <div class="flex-shrink-0">
                             <i class="ti-dropbox" style="font-size: 2rem;"></i>
@@ -124,7 +124,7 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
                             <h4 class="mb-0"><?php echo number_format($total_fuel, 2); ?>L</h4>
-                            <p class="mb-0">Total Fuel</p>
+                            <p class="mb-0"><?= __('Total Fuel'); ?></p>
                         </div>
                         <div class="flex-shrink-0">
                             <i class="ti-stats-up" style="font-size: 2rem;"></i>
@@ -139,7 +139,7 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
                             <h4 class="mb-0">₹<?php echo number_format($total_amount, 2); ?></h4>
-                            <p class="mb-0">Total Amount</p>
+                            <p class="mb-0"><?= __('Total Amount'); ?></p>
                         </div>
                         <div class="flex-shrink-0">
                             <i class="ti-wallet" style="font-size: 2rem;"></i>
@@ -154,7 +154,7 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
                             <h4 class="mb-0">₹<?php echo $total_entries > 0 ? number_format($total_amount / $total_fuel, 2) : '0.00'; ?></h4>
-                            <p class="mb-0">Avg Price/L</p>
+                            <p class="mb-0"><?= __('Avg Price/L'); ?></p>
                         </div>
                         <div class="flex-shrink-0">
                             <i class="ti-bar-chart" style="font-size: 2rem;"></i>
@@ -168,10 +168,10 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
 
     <div class="card table-card">
         <div class="card-header table-card-header">
-            <h5><i class="ti-dropbox"></i> Fuel Entries</h5>
+            <h5><i class="ti-dropbox"></i> <?= __('Fuel Entries'); ?></h5>
             <div class="card-header-right">
                 <span class="badge badge-primary text-white" id="table-count-badge">
-                    <?php echo $total_entries; ?> entr<?php echo $total_entries !== 1 ? 'ies' : 'y'; ?>
+                    <?php echo $total_entries; ?> <?= __('entr'); ?><?php echo $total_entries !== 1 ? 'ies' : 'y'; ?>
                 </span>
             </div>
         </div>
@@ -180,20 +180,20 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                 <table class="table table-hover" id="fuelEntriesTable">
                     <thead>
                         <tr>
-                            <th scope="col">S.No</th>
-                            <th scope="col">Vehicle Number</th>
-                            <th scope="col">Ownership</th>
-                            <th scope="col">Driver Name</th>
-                            <th scope="col">Contact</th>
-                            <th scope="col">Department</th>
-                            <th scope="col">Fuel Type</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Price/L</th>
-                            <th scope="col">Total Amount</th>
-                            <th scope="col">Payment Method</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col"><?= __('S.No'); ?></th>
+                            <th scope="col"><?= __('Vehicle Number'); ?></th>
+                            <th scope="col"><?= __('Ownership'); ?></th>
+                            <th scope="col"><?= __('Driver Name'); ?></th>
+                            <th scope="col"><?= __('Contact'); ?></th>
+                            <th scope="col"><?= __('Department'); ?></th>
+                            <th scope="col"><?= __('Fuel Type'); ?></th>
+                            <th scope="col"><?= __('Quantity'); ?></th>
+                            <th scope="col"><?= __('Price/L'); ?></th>
+                            <th scope="col"><?= __('Total Amount'); ?></th>
+                            <th scope="col"><?= __('Payment Method'); ?></th>
+                            <th scope="col"><?= __('Date'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col"><?= __('Actions'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -226,26 +226,26 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                                     <td><?php echo date('d-m-Y', strtotime($entry['fuel_date'])); ?></td>
                                     <td>
                                         <?php if ($entry['is_emergency'] == 1): ?>
-                                            <span class="badge badge-danger">Emergency</span>
+                                            <span class="badge badge-danger"><?= __('Emergency'); ?></span>
                                         <?php endif; ?>
                                         <?php if ($entry['is_advance'] == 1): ?>
-                                            <span class="badge badge-warning">Advance</span>
+                                            <span class="badge badge-warning"><?= __('Advance'); ?></span>
                                         <?php endif; ?>
                                         <?php if ($entry['is_emergency'] == 0 && $entry['is_advance'] == 0): ?>
-                                            <span class="badge badge-success">Regular</span>
+                                            <span class="badge badge-success"><?= __('Regular'); ?></span>
                                         <?php endif; ?>
                                     </td>
                                     <td>
                                         <div class="rows">
                                             <button type="button" class="btn btn-warning btn-sm"
                                                     onclick="editFuelEntry(<?php echo $entry['id']; ?>)"
-                                                    title="Edit Entry">
-                                                <i class="ti-pencil"></i> Edit
+                                                    title="<?= htmlspecialchars(__('Edit Entry'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <i class="ti-pencil"></i> <?= __('Edit'); ?>
                                             </button>
                                             <button type="button" class="btn btn-danger btn-sm"
                                                     onclick="deleteFuelEntry(<?php echo $entry['id']; ?>)"
-                                                    title="Delete Entry">
-                                                <i class="ti-trash"></i> Delete
+                                                    title="<?= htmlspecialchars(__('Delete Entry'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <i class="ti-trash"></i> <?= __('Delete'); ?>
                                             </button>
                                         </div>
                                     </td>
@@ -255,7 +255,7 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                             <tr>
                                 <td colspan="14" class="text-center p-4">
                                     <i class="ti-info-alt text-muted" style="font-size: 2rem;"></i>
-                                    <p class="text-muted mt-2">No fuel entries found for the selected date range.</p>
+                                    <p class="text-muted mt-2"><?= __('No fuel entries found for the selected date range.'); ?></p>
                                 </td>
                             </tr>
                         <?php endif; ?>
@@ -283,7 +283,7 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
 
     function deleteFuelEntry(fuelId) {
         if (typeof swal === 'undefined') {
-            if (!confirm('Are you sure you want to delete this fuel entry? This action cannot be undone.')) {
+            if (!confirm(<?php echo json_encode(__('Are you sure you want to delete this fuel entry? This action cannot be undone.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>)) {
                 return;
             }
             performDelete(fuelId);
@@ -291,14 +291,14 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
         }
 
         swal({
-            title: 'Are you sure?',
-            text: 'You want to delete this fuel entry? This action cannot be undone.',
+            title: <?php echo json_encode(__('Are you sure?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('You want to delete this fuel entry? This action cannot be undone.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'Cancel'
+            confirmButtonText: <?php echo json_encode(__('Yes, delete it!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('Cancel'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
         }, function(isConfirm) {
             if (isConfirm) {
                 performDelete(fuelId);
@@ -309,17 +309,17 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
     function performDelete(fuelId) {
         if (typeof jQuery === 'undefined') {
             if (typeof swal !== 'undefined') {
-                swal('System Not Ready', 'Please wait a moment and try again.', 'warning');
+                swal(<?php echo json_encode(__('System Not Ready'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('Please wait a moment and try again.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'warning');
             } else {
-                alert('System not ready. Please wait a moment and try again.');
+                alert(<?php echo json_encode(__('System not ready. Please wait a moment and try again.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
             return;
         }
 
         if (typeof swal !== 'undefined') {
             swal({
-                title: 'Deleting...',
-                text: 'Please wait while we delete the fuel entry.',
+                title: <?php echo json_encode(__('Deleting...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                text: <?php echo json_encode(__('Please wait while we delete the fuel entry.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 type: 'info',
                 showConfirmButton: false,
                 allowOutsideClick: false
@@ -341,21 +341,21 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                 if (result.status === 'success' || result.status === 'sucess') {
                     if (typeof swal !== 'undefined') {
                         swal({
-                            title: 'Deleted!',
-                            text: 'Fuel entry has been deleted successfully.',
+                            title: <?php echo json_encode(__('Deleted!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                            text: <?php echo json_encode(__('Fuel entry has been deleted successfully.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             type: 'success',
-                            confirmButtonText: 'OK'
+                            confirmButtonText: <?php echo json_encode(__('OK'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
                         }, function() {
                             window.location.reload();
                         });
                     } else {
-                        alert('Fuel entry deleted successfully!');
+                        alert(<?php echo json_encode(__('Fuel entry deleted successfully!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                         window.location.reload();
                     }
                 } else {
-                    const errorMsg = 'Error deleting fuel entry: ' + (result.message || 'Unknown error');
+                    const errorMsg = <?php echo json_encode(__('Error deleting fuel entry').': ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> + (result.message || 'Unknown error');
                     if (typeof swal !== 'undefined') {
-                        swal('Error!', errorMsg, 'error');
+                        swal(<?php echo json_encode(__('Error!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, errorMsg, 'error');
                     } else {
                         alert(errorMsg);
                     }
@@ -364,9 +364,9 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
                 console.error('JSON parse error:', e);
                 console.log('Raw response:', response);
 
-                const errorMsg = 'Error processing delete request.';
+                const errorMsg = <?php echo json_encode(__('Error processing delete request.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
                 if (typeof swal !== 'undefined') {
-                    swal('Error!', errorMsg, 'error');
+                    swal(<?php echo json_encode(__('Error!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, errorMsg, 'error');
                 } else {
                     alert(errorMsg);
                 }
@@ -374,9 +374,9 @@ if (isset($data['status']) && $data['status'] === 'success' && isset($data['fuel
         }).fail(function(xhr, status, error) {
             console.error('AJAX error:', {xhr, status, error});
 
-            const errorMsg = 'Network error deleting fuel entry. Please check your connection.';
+            const errorMsg = <?php echo json_encode(__('Network error deleting fuel entry. Please check your connection.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             if (typeof swal !== 'undefined') {
-                swal('Network Error!', errorMsg, 'error');
+                swal(<?php echo json_encode(__('Network Error!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, errorMsg, 'error');
             } else {
                 alert(errorMsg);
             }

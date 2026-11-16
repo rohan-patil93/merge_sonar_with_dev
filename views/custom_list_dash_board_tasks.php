@@ -4,8 +4,8 @@
                                             <!--begin::Header-->
                                             <div class="card-header border-0 pt-5">
                                                 <div class="card-title font-weight-bolder">
-                                                    <div class="card-label">Overall achievement till today
-                                                    <div class="font-size-sm text-muted mt-2">Total : <?php echo $total_tasks_achieve; ?> &nbsp; Achieve : <?php echo $completed_tasks_achieve; ?></div></div>
+                                                    <div class="card-label"><?= __('Overall achievement till today'); ?>
+                                                    <div class="font-size-sm text-muted mt-2"><?= __('Total'); ?> : <?php echo $total_tasks_achieve; ?> &nbsp; <?= __('Achieve'); ?> : <?php echo $completed_tasks_achieve; ?></div></div>
                                                 </div>
 
                                             </div>

@@ -53,8 +53,8 @@ function updateApplicationTickets(rid,status){
 </script>
 <?php if($_POST['page_type'] == "PT"){ ?>
 <div class="modal-header  ">
-	<h5 class="modal-title"> Tickets Submited To Me</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+	<h5 class="modal-title"> <?= __('Tickets Submited To Me'); ?></h5>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" ></button>
 </div>
 <div class="modal-body">
 	<?php if(count((array)$application_tickets) != 0){ ?>
@@ -80,7 +80,7 @@ function updateApplicationTickets(rid,status){
 				<!-- <td class="p-2"><?php echo $at['completion_datetime'] !=""?fromDate($at['completion_datetime']):"-"; ?></td> -->
 				<td class="p-2 text-center">
 					<?php if($at['attachment']!=""){ ?>
-						<a onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Attachments Preview"><i class="ti-eye"></i></a>
+						<a onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Attachments Preview'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye"></i></a>
 					<?php }else{ echo " - ";
 					} ?>
 				</td>
@@ -106,7 +106,7 @@ function updateApplicationTickets(rid,status){
 	</table>
 <?php }else{ ?>
 	<div class="card-px text-center ">
-		<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Tickets</p>
+		<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Tickets'); ?></p>
 		<div class="text-center px-4">
 			<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 		</div>
@@ -118,8 +118,8 @@ function updateApplicationTickets(rid,status){
 </div>
 <?php }elseif($_POST['page_type'] == "LT"){ ?>
 <div class="modal-header  ">
-	<h5 class="modal-title"> My Tickets</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+	<h5 class="modal-title"> <?= __('My Tickets'); ?></h5>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" ></button>
 </div>
 <div class="modal-body">
 	<?php if(count((array)$application_tickets) != 0){ ?>
@@ -142,7 +142,7 @@ function updateApplicationTickets(rid,status){
 				<!-- <td class="p-2"><?php echo $at['completion_datetime'] !=""?fromDate($at['completion_datetime']):"-"; ?></td> -->
 				<td class="p-2 text-center">
 					<?php if($at['attachment']!=""){ ?>
-						<a onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Attachments Preview"><i class="ti-eye"></i></a>
+						<a onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Attachments Preview'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye"></i></a>
 					<?php }else{ echo " - ";
 					} ?>
 				</td>
@@ -157,7 +157,7 @@ function updateApplicationTickets(rid,status){
 	</table>
 	<?php }else{ ?>
 	<div class="card-px text-center ">
-		<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Tickets</p>
+		<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Tickets'); ?></p>
 		<div class="text-center px-4">
 			<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 		</div>
@@ -169,8 +169,8 @@ function updateApplicationTickets(rid,status){
 </div>
 <?php }else{ ?>
 <div class="modal-header  ">
-	<h5 class="modal-title"> New Ticket</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+	<h5 class="modal-title"> <?= __('New Ticket'); ?></h5>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" ></button>
 </div>
 <div class="modal-body p-l-50 p-r-50">
 	<form id="applicationtickets_form">
@@ -178,17 +178,17 @@ function updateApplicationTickets(rid,status){
 			<div class="col-lg-12">
 				<span class="form-label col-form-label d-inline-block fw-bold"><?= __('Issue Name') ?> <span class="requried">*</span></span>
 				<span class="d-block error-message text-danger"></span>
-				<input type="text" class="form-control requried_field" name="issue_name" aria-label="Issue Name">
+				<input type="text" class="form-control requried_field" name="issue_name" aria-label="<?= htmlspecialchars(__('Issue Name'), ENT_QUOTES, 'UTF-8'); ?>">
 			</div>
 			<div class="col-lg-12">
 				<span class="form-label col-form-label d-inline-block fw-bold"><?= __('Issue Description') ?> <span class="requried">*</span></span>
 				<span class="d-block error-message text-danger"></span>
-				<textarea class="form-control requried_field" name="issue_description" aria-label="Issue Description"></textarea>
+				<textarea class="form-control requried_field" name="issue_description" aria-label="<?= htmlspecialchars(__('Issue Description'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
 			</div>
 			<div class="col-lg-6 w-full">
 				<span class="form-label col-form-label d-inline-block fw-bold"><?= __('Priority') ?> <span class="requried">*</span></span>
 				<span class="d-block error-message text-danger"></span>
-				<select class="form-control form-select js-example-basic-single requried_field" name="priority" aria-label="Priority">
+				<select class="form-control form-select js-example-basic-single requried_field" name="priority" aria-label="<?= htmlspecialchars(__('Priority'), ENT_QUOTES, 'UTF-8'); ?>">
 					<?php foreach($priority as $priok=>$priov){ ?>
 	                    <option value="<?php echo $priok; ?>" ><?php echo htmlspecialchars(__($priov)); ?></option>
 	                <?php } ?>
@@ -196,7 +196,7 @@ function updateApplicationTickets(rid,status){
 			</div>
 			<div class="col-lg-6">
 		        <label for="popattickettachment" class="form-label col-form-label d-block"><?= __('Attache File') ?></label>
-		        <input type="file" class="form-control" id="popattickettachment" aria-label="Input">
+		        <input type="file" class="form-control" id="popattickettachment" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 		    </div>
 		</div>
 	</form>

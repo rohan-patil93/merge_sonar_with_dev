@@ -38,7 +38,7 @@ $report = array_reverse($report);
                         <td></td>
                         <th scope="col"><?= __('Particulars') ?></th>
                         <?php foreach ($report as $r) { ?>
-                            <th scope="col" class="text-center">FY <?= ($r['year_label']) ?></th>
+                            <th scope="col" class="text-center"><?= __('FY'); ?> <?= ($r['year_label']) ?></th>
                         <?php } ?>
                     </tr>
 
@@ -312,7 +312,7 @@ $report = array_reverse($report);
 
                     <!-- 🧾 Provision -->
                     <tr>
-                        <td align="right">(iv)</td>
+                        <td align="right"><?= __('(iv)'); ?></td>
                         <th scope="col"><?= __('Amt to be Debited to P&L (Provision amt) as of 31-Mar-') ?><?= $report[0]['year'] ?></th>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end"><?= number_format($r['provision']) ?></td>

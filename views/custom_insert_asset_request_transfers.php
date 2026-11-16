@@ -43,7 +43,7 @@ function selctAssetID(check_assetid){
     $("#transferred_qty").val(selectcnt);
 }
 function filetrassett(){
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#assetlistid").html(loader);
     var rid = $("#asset_requests_id").val();
     var categroy_list = [];
@@ -78,7 +78,7 @@ function submitAssetRequestTransfer(){
     var transferred_qty = $("#transferred_qty").val();
     console.log(transferred_qty);
     if(transferred_qty == "" || transferred_qty ==0){
-        $("#transferred_qty_error").text('Please Enter Required Fields');
+        $("#transferred_qty_error").text(<?php echo json_encode(__('Please Enter Required Fields'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     }else{
         var validations = ajaxFormSubmitValidation();
         if(validations == 0){
@@ -115,50 +115,50 @@ function getDeliveryType(){
     }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Asset Requests</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Asset Requests'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="card m-r-50 m-l-50">
         <div class="row">
             <div class="col-3 text-center">
                 <div class="s-cont d-inline-block">
-                    <span class="f-w-700 m-b-0">User</span>
+                    <span class="f-w-700 m-b-0"><?= __('User'); ?></span>
                     <p class="m-b-0 f-10"> <?php echo $_SESSION['users'][$asset_requests['originator']]; ?></p>
                 </div>
             </div>
             <div class="col-3 b-l-default text-center">
                 <div class="s-cont d-inline-block">
-                    <span class="f-w-700 m-b-0">Asset Category</span>
+                    <span class="f-w-700 m-b-0"><?= __('Asset Category'); ?></span>
                     <p class="m-b-0 "> <?php echo $asset_categories[$asset_requests['category_id']]['category_description']; ?> </p>
                 </div>
             </div>
             <div class="col-2 b-l-default text-center">
                 <div class="s-cont d-inline-block">
-                    <span class="f-w-700 m-b-0">Request Date</span>
+                    <span class="f-w-700 m-b-0"><?= __('Request Date'); ?></span>
                     <p class="m-b-0 f-10"> <?php echo $asset_requests['request_datetime'] !=""?fromDate($asset_requests['request_datetime']):"-"; ?></p>
                 </div>
             </div>
             <div class="col-2 b-l-default text-center">
                 <div class="s-cont d-inline-block">
-                    <span class="f-w-700 m-b-0">Required From</span>
+                    <span class="f-w-700 m-b-0"><?= __('Required From'); ?></span>
                     <p class="m-b-0 f-10"> <?php echo $asset_requests['asset_required_start_date'] !=""?fromDate($asset_requests['asset_required_start_date']):"-"; ?> </p>
                 </div>
             </div>
             <div class="col-2 b-l-default text-center">
                 <div class="s-cont d-inline-block">
-                    <span class="f-w-700 m-b-0">Required To</span>
+                    <span class="f-w-700 m-b-0"><?= __('Required To'); ?></span>
                     <p class="m-b-0 f-10"> <?php echo $asset_requests['asset_required_end_date'] !=""?fromDate($asset_requests['asset_required_end_date']):"-"; ?> </p>
                 </div>
             </div>
         </div>
         <div class="row mt-4">
             <div class="col-lg-6">
-                <span class="f-w-700 mb-2 col-lg-12">Catgeory</span>
+                <span class="f-w-700 mb-2 col-lg-12"><?= __('Catgeory'); ?></span>
                 <?php foreach ($asset_categories as $asset_category_id=>$asscat){ ?>
                     <div class="checkbox-fade fade-in-primary">
                         <label class="form-label">
-                            <input aria-label="Checkbox" type="checkbox" class="categroy_list"  value="<?php echo $asset_category_id;?>" <?php echo in_array($asset_category_id,(array)$filterassetcategory)?"checked":"";?> onclick="filetrassett()" onkeydown="">
+                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="categroy_list"  value="<?php echo $asset_category_id;?>" <?php echo in_array($asset_category_id,(array)$filterassetcategory)?"checked":"";?> onclick="filetrassett()" onkeydown="">
                             <span class="cr">
                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                             </span>
@@ -168,11 +168,11 @@ function getDeliveryType(){
                 <?php } ?>
             </div>
             <div class="col-lg-3">
-                <span class="f-w-700 mb-2 col-lg-12">Status</span>
+                <span class="f-w-700 mb-2 col-lg-12"><?= __('Status'); ?></span>
                 <?php foreach ($asset_status as $ass_statu){ ?>
                     <div class="checkbox-fade fade-in-primary">
                         <label class="form-label">
-                            <input aria-label="Checkbox" type="checkbox" class="asset_status" <?php echo in_array($ass_statu['id'],(array)$filterassetstatus)?"checked":"";?> value="<?php echo $ass_statu['id'];?>" onclick="filetrassett()" onkeydown="">
+                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="asset_status" <?php echo in_array($ass_statu['id'],(array)$filterassetstatus)?"checked":"";?> value="<?php echo $ass_statu['id'];?>" onclick="filetrassett()" onkeydown="">
                             <span class="cr">
                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                             </span>
@@ -183,11 +183,11 @@ function getDeliveryType(){
                 <?php } ?>
             </div>
             <div class="col-lg-3">
-                <span class="f-w-700 mb-2 col-lg-12">Condition</span>
+                <span class="f-w-700 mb-2 col-lg-12"><?= __('Condition'); ?></span>
                 <?php foreach ($asset_condition_type as $ass_conditiokey=>$ass_conditio) { ?>
                     <div class="checkbox-fade fade-in-primary">
                         <label class="form-label">
-                            <input aria-label="Checkbox" type="checkbox" <?php echo in_array($ass_conditiokey,(array)$filterassetcondition)?"checked":"";?>  class="asset_condition" value="<?php echo $ass_conditiokey;?>" onclick="filetrassett()" onkeydown="">
+                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" <?php echo in_array($ass_conditiokey,(array)$filterassetcondition)?"checked":"";?>  class="asset_condition" value="<?php echo $ass_conditiokey;?>" onclick="filetrassett()" onkeydown="">
                             <span class="cr">
                               <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                             </span>
@@ -201,7 +201,7 @@ function getDeliveryType(){
             <div class="col-lg-8" >
                 <div class="card card-custom card-sticky">
                     <div class="card-header mb-3">
-                        <h5> Assets</h5>
+                        <h5> <?= __('Assets'); ?></h5>
                     </div>
                     <div class="card-body" id="assetlistid">
                         <?php include_once "custom_insert_asset_request_transfers_ajax.php"; ?>
@@ -211,17 +211,17 @@ function getDeliveryType(){
             <div class="col-lg-4">
                 <ul class="nav md-tabs infisuite_tab mb-2">
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#assetsrequesttransfer" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Request Transfer</a>
+                        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#assetsrequesttransfer" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Request Transfer'); ?></a>
                     </li>
                     <li class="nav-item float-right">
-                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#oldassetsrequesttransfer" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Old Transfer</a>
+                        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#oldassetsrequesttransfer" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Old Transfer'); ?></a>
                     </li>
                 </ul>
                 <div class="tab-content tabs">
                     <div class="tab-pane card-body p-0 active" id="assetsrequesttransfer" role="tabpanel">
                         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                             <div class="card-header mb-3">
-                                <h5> Assets Request Transfer</h5>
+                                <h5> <?= __('Assets Request Transfer'); ?></h5>
                             </div>
                             <div class="card-body">
                                 <form id="assetrequesttransferform" method="post" >
@@ -229,57 +229,57 @@ function getDeliveryType(){
                                     <input type="hidden" name="asset_id" id="asset_id" value="">
                                     <div class="row">
                                         <div class="form-group col-lg-6">
-                                            <span>Start date <span class="requried">*</span></span>
+                                            <span><?= __('Start date'); ?> <span class="requried">*</span></span>
                                             <span class="d-block error-message text-danger"></span>
-                                            <input aria-label="Start Date" type="text" class="form-control datepicker requried_field" id="start_date"  name="start_date" value="<?php echo fromDate($asset_requests['asset_required_start_date']); ?>">
+                                            <input aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker requried_field" id="start_date"  name="start_date" value="<?php echo fromDate($asset_requests['asset_required_start_date']); ?>">
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <span>End date <span class="requried">*</span></span>
+                                            <span><?= __('End date'); ?> <span class="requried">*</span></span>
                                             <span class="d-block error-message text-danger"></span>
-                                            <input aria-label="End Date" type="text" class="form-control datepicker requried_field" id="end_date" name="end_date" value="<?php echo $asset_requests['asset_required_end_date'] !=""?fromDate($asset_requests['asset_required_end_date']):""; ?>">
+                                            <input aria-label="<?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker requried_field" id="end_date" name="end_date" value="<?php echo $asset_requests['asset_required_end_date'] !=""?fromDate($asset_requests['asset_required_end_date']):""; ?>">
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <span>Request Quantity</span>
-                                            <input aria-label="Requested Qty" type="number" class="form-control" id="requested_qty"  value="<?php echo $asset_requests['quantity']; ?>" readonly>
+                                            <span><?= __('Request Quantity'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Requested Qty'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control" id="requested_qty"  value="<?php echo $asset_requests['quantity']; ?>" readonly>
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <span>Transfer Quantity <span class="requried">*</span></span>
+                                            <span><?= __('Transfer Quantity'); ?> <span class="requried">*</span></span>
                                             <span class="d-block error-message text-danger" id="transferred_qty_error"></span>
-                                            <input aria-label="Quantity" type="number" class="form-control requried_field" id="transferred_qty" name="quantity" value=""  onblur="getquontiy(this.value)" readonly>
+                                            <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control requried_field" id="transferred_qty" name="quantity" value=""  onblur="getquontiy(this.value)" readonly>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <span class="f-w-700 col-lg-6">Pending Quantity</span>
+                                            <span class="f-w-700 col-lg-6"><?= __('Pending Quantity'); ?></span>
                                             <span class="col-lg-6 pendinreq"><?php echo $asset_requests['quantity']-$already_transfer_quantity; ?></span>
                                             <input type="hidden" class="form-control" id="pending_qty"  value="<?php echo $asset_requests['quantity']-$already_transfer_quantity; ?>">
                                         </div>
                                         <div class="col-lg-12">
-                                            <span>How Do You Want The Asset To be Delivered? <span class="requried">*</span></span>
+                                            <span><?= __('How Do You Want The Asset To be Delivered?'); ?> <span class="requried">*</span></span>
                                             <div class="form-radio">
                                                 <div class="radio radio-inline">
                                   <label class="form-label">
-                                    <input aria-label="Delivery Type" type="radio" name="delivery_type" value="S" style="display:none;" <?php echo ($asset_requests['delivery_type']=="S" || $asset_requests['delivery_type']=="")?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
+                                    <input aria-label="<?= htmlspecialchars(__('Delivery Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="delivery_type" value="S" style="display:none;" <?php echo ($asset_requests['delivery_type']=="S" || $asset_requests['delivery_type']=="")?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
                                     <i class="helper"></i><?= __('Self Pickup') ?>
                                   </label>
                             </div>
                             <div class="radio radio-inline">
                                   <label class="form-label">
-                                    <input aria-label="Delivery Type" type="radio" name="delivery_type" value="D" style="display:none" <?php echo $asset_requests['delivery_type']=="D"?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
+                                    <input aria-label="<?= htmlspecialchars(__('Delivery Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="delivery_type" value="D" style="display:none" <?php echo $asset_requests['delivery_type']=="D"?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
                                     <i class="helper"></i><?= __('Deliver Through Logistics Partner') ?>
                                   </label>
                             </div>
                             </div>
                                         </div>
                                         <div class="form-group col-lg-12" id="popup_asset_delivery_address"  <?php echo $asset_requests['delivery_type']!="D"?"style='display:none'":"";?>>
-                                            <span>Delivery Address</span>
-                                            <textarea aria-label="Delivery Address" type="text" class="form-control" id="delivery_address" rows="4" cols="50" name="delivery_address" ><?php echo $asset_requests['delivery_address']; ?></textarea>
+                                            <span><?= __('Delivery Address'); ?></span>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Delivery Address'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="delivery_address" rows="4" cols="50" name="delivery_address" ><?php echo $asset_requests['delivery_address']; ?></textarea>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <span>Remarks</span>
-                                            <textarea aria-label="Description" type="text" class="form-control" id="description" rows="4" cols="50" name="description" ></textarea>
+                                            <span><?= __('Remarks'); ?></span>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="description" rows="4" cols="50" name="description" ></textarea>
                                         </div>
                                     </div>
                                     <div>
-                                        <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitAssetRequestTransfer()">Submit
+                                        <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitAssetRequestTransfer()"><?= __('Submit'); ?>
                                         </button>
                                     </div>
                                 </form>
@@ -327,7 +327,7 @@ function getDeliveryType(){
                                 <?php } ?>
                                 <?php } else { ?>
                                     <div class="card-px text-center ">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert"></i> No Request</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert"></i> <?= __('No Request'); ?></p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                         </div>

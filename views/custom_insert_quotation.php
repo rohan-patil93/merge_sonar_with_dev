@@ -829,12 +829,12 @@ function calculateTotal(){
             if(arr2[k]['amount']){
                 console.log('check:'+k+'cal:'+arr2[k]['amount'])
                 if(old_state != change_state){
-                    str+= "<tr><td style='width: 67%;text-align:right;'> IGST @ "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
+                    str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('IGST @'), ENT_QUOTES, 'UTF-8'); ?> "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
                     str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"''> </td></tr>";
                 }else{
-                    str+= "<tr><td style='width: 67%;text-align:right;'> CGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                    str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('CGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                     str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
-                     str+= "<tr><td style='width: 67%;text-align:right;'> SGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                     str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('SGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                     str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
                 }
                  totaltax+=parseFloat(arr2[k]['tax_amount']);

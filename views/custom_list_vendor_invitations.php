@@ -57,30 +57,30 @@ if($_SESSION['insert_msg'] !=""){
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header ">
-          <h5>Vendors</h5>
+          <h5><?= __('Vendors'); ?></h5>
           <div class="card-header-right table-card-header ">
           <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Reg Invoit" type="radio" name="reg_invoit" value="hideall" checked class="listUserType">
-                        All
+                        <input aria-label="<?= htmlspecialchars(__('Reg Invoit'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="reg_invoit" value="hideall" checked class="listUserType">
+                        <?= __('All'); ?>
                       </label>
           </div>
           <div class="radio radio-inline">
             <label class="form-label">
-            <input aria-label="Reg Invoit" type="radio" name="reg_invoit" value="active_vend" class="listUserType">
-            Active
+            <input aria-label="<?= htmlspecialchars(__('Reg Invoit'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="reg_invoit" value="active_vend" class="listUserType">
+            <?= __('Active'); ?>
             </label>
           </div>
                     <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Reg Invoit" type="radio" name="reg_invoit" value="inprogress_vend" class="listUserType">
-                        In-Progress
+                        <input aria-label="<?= htmlspecialchars(__('Reg Invoit'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="reg_invoit" value="inprogress_vend" class="listUserType">
+                        <?= __('In-Progress'); ?>
                       </label>
                     </div>
                     <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Reg Invoit" type="radio" name="reg_invoit" value="invited_vend" class="listUserType">
-                        Invited
+                        <input aria-label="<?= htmlspecialchars(__('Reg Invoit'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="reg_invoit" value="invited_vend" class="listUserType">
+                        <?= __('Invited'); ?>
                       </label>
                     </div>
 
@@ -88,7 +88,7 @@ if($_SESSION['insert_msg'] !=""){
 
 <a href="index.php?option=COM_INSERT_INVITE_VENDOR" class="btn btn-success mb-2 desktop-view <?php echo getPagePermision('COM_INSERT_INVITE_VENDOR','','INSERT')['class']; ?>"  <?php echo getPagePermision('COM_INSERT_INVITE_VENDOR','','INSERT')['tooltip']; ?>>
             <i class="icofont icofont-plus icon-white text-white"></i>
-            Invite Vendor
+            <?= __('Invite Vendor'); ?>
           </a>
     </div>
 
@@ -154,7 +154,7 @@ if($_SESSION['insert_msg'] !=""){
 
 
                        <?php if($applicationuser['user_photo'] != "" && $applicationuser['user_activated'] == "Y"){ ?>
-    <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-30 m-r-15" alt="User Profile">
+    <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-30 m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
   <?php } else { ?>
    <span class="img-radius img-50 custom_txt_round  p-2 f-14 m-r-15 text-center bg-white text-mute"><?php echo initials($displayname); ?></span>
   <?php } ?>
@@ -166,17 +166,17 @@ if($_SESSION['insert_msg'] !=""){
                   </div>
               </div>
               <div class="row">
-                <span class="col-lg-3 f-12 mb-1">Name :</span>
+                <span class="col-lg-3 f-12 mb-1"><?= __('Name'); ?> :</span>
                 <span class="col-lg-9 f-12"> <?php echo $displayname; ?> </span>
-                <span class="col-lg-3 f-12 mb-1">Since  :</span>
+                <span class="col-lg-3 f-12 mb-1"><?= __('Since'); ?>  :</span>
                 <span class="col-lg-9 f-12"> <?php echo fromDate($vendorslist['created_date']); ?> </span>
-                <span class="col-lg-3 f-12 mb-1">Email  :</span>
+                <span class="col-lg-3 f-12 mb-1"><?= __('Email'); ?>  :</span>
                 <span class="col-lg-9 f-12"> <?php echo $vendorslist['user_email']; ?> </span>
-                <span class="col-lg-3 f-12 mb-1">Phone  :</span>
+                <span class="col-lg-3 f-12 mb-1"><?= __('Phone'); ?>  :</span>
                 <span class="col-lg-9 f-12"> <?php echo $vendorslist['user_mobile']!=""?$vendorslist['user_mobile']:"-"; ?> </span>
               </div>
               <?php if($tven == '0'){ ?>
-              <i class="ti-share float-right position-absolute text-white resendrequest right-70 top-10" data-user_id = '<?php echo $vendorslist['user_id']; ?>' data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Re-Invite User"></i>
+              <i class="ti-share float-right position-absolute text-white resendrequest right-70 top-10" data-user_id = '<?php echo $vendorslist['user_id']; ?>' data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Re-Invite User'), ENT_QUOTES, 'UTF-8'); ?>"></i>
             <?php } ?>
             </div>
           </div>
@@ -192,7 +192,7 @@ if($_SESSION['insert_msg'] !=""){
     }else{   ?>
 
  <div class="card-px text-center py-20 m-t-30">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Vendor Invitation Available</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> <?= __('No Vendor Invitation Available'); ?></p>
         <div class="text-center px-4">
           <img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
       </div>
@@ -201,7 +201,7 @@ if($_SESSION['insert_msg'] !=""){
             <?php    } ?>
 
  <div class="card-px text-center py-20 m-t-30 d-none" id="available_record_error" >
-        <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Vendor Invitation Available</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> <?= __('No Vendor Invitation Available'); ?></p>
         <div class="text-center px-4">
           <img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
       </div>

@@ -26,25 +26,25 @@ $closed_cnt = count((array)$closed);
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>AMC Complaints List <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$tableData) ?? 0; ?></span></h5>
+            <h5><?= __('AMC Complaints List'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$tableData) ?? 0; ?></span></h5>
             <div class="card-header-right d-flex align-items-center gap-3">
                 <a href="index.php?option=COM_INSERT_AMC_COMPLAINTS" class="btn btn-success  desktop-view">
                     <i class="icofont icofont-plus text-white"></i>
-                AMC Complaint</a>
+                <?= __('AMC Complaint'); ?></a>
 
                 <ul class="nav md-tabs infisuite_tab">
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12  ACTIVE active" data-bs-toggle="tab" href="#ACTIVE" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Received
+                        <a class="nav-link f-w-600 f-12  ACTIVE active" data-bs-toggle="tab" href="#ACTIVE" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Received'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo $active_cnt; ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 PENDING" data-bs-toggle="tab" href="#PENDING" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">In Progress
+                        <a class="nav-link f-w-600 f-12 PENDING" data-bs-toggle="tab" href="#PENDING" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('In Progress'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo $pending_cnt; ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 CLOSED" data-bs-toggle="tab" href="#CLOSED" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Closed
+                        <a class="nav-link f-w-600 f-12 CLOSED" data-bs-toggle="tab" href="#CLOSED" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Closed'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo $closed_cnt; ?></span>
                         </a>
                     </li>
@@ -58,14 +58,14 @@ $closed_cnt = count((array)$closed);
                         <table class="table  table-hover nowrap ">
                             <thead>
                                 <tr>
-                                    <th scope="col">Sl No.</th>
-                                    <th scope="col">Complaint Name</th>
-                                    <th scope="col">Complaint Type</th>
-                                    <th scope="col">Priority</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Property</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Sl No.'); ?></th>
+                                    <th scope="col"><?= __('Complaint Name'); ?></th>
+                                    <th scope="col"><?= __('Complaint Type'); ?></th>
+                                    <th scope="col"><?= __('Priority'); ?></th>
+                                    <th scope="col"><?= __('Date'); ?></th>
+                                    <th scope="col"><?= __('Property'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -93,12 +93,12 @@ $closed_cnt = count((array)$closed);
                                             <td><span class="form-label label label-lg  label-primary label-inline f-w-900 " ><?php echo $row['name']; ?></span> </td>
                                             <td>
                                                 <a class=" m-r-5"
-                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="View Details">
+                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-eye  p-2 b-radius-5"></i>
                                                 </a>
 
                                                 <a class=" m-r-5"
-                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>&RS=1" title="Copy Details">
+                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>&RS=1" title="<?= htmlspecialchars(__('Copy Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-edit  p-2 b-radius-5"></i>
                                                 </a>
 
@@ -111,7 +111,7 @@ $closed_cnt = count((array)$closed);
                                         <td colspan="9">
                                             <div class="text-center">
                                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                                    <i class="fa fa-warning"></i> No Records
+                                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                                 </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -131,14 +131,14 @@ $closed_cnt = count((array)$closed);
                         <table class="table  table-hover nowrap ">
                             <thead>
                                 <tr>
-                                    <th scope="col">Sl No.</th>
-                                    <th scope="col">Complaint Name</th>
-                                    <th scope="col">Complaint Type</th>
-                                    <th scope="col">Priority</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Property</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Sl No.'); ?></th>
+                                    <th scope="col"><?= __('Complaint Name'); ?></th>
+                                    <th scope="col"><?= __('Complaint Type'); ?></th>
+                                    <th scope="col"><?= __('Priority'); ?></th>
+                                    <th scope="col"><?= __('Date'); ?></th>
+                                    <th scope="col"><?= __('Property'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -167,11 +167,11 @@ $closed_cnt = count((array)$closed);
                                             <td><span class="form-label label label-lg  label-warning label-inline f-w-900 " ><?php echo $row['name']; ?></span> </td>
                                             <td>
                                                 <a class=" m-r-5"
-                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="View Details">
+                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-eye  p-2 b-radius-5"></i>
                                                 </a>
                                                 <a class=" m-r-5"
-                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>&RS=1" title="Copy Details">
+                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>&RS=1" title="<?= htmlspecialchars(__('Copy Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-edit  p-2 b-radius-5"></i>
                                                 </a>
                                             </td>
@@ -183,7 +183,7 @@ $closed_cnt = count((array)$closed);
                                         <td colspan="9">
                                             <div class="text-center">
                                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                                    <i class="fa fa-warning"></i> No Records
+                                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                                 </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -203,14 +203,14 @@ $closed_cnt = count((array)$closed);
                         <table class="table  table-hover nowrap ">
                             <thead>
                                 <tr>
-                                    <th scope="col">Sl No.</th>
-                                    <th scope="col">Complaint Name</th>
-                                    <th scope="col">Complaint Type</th>
-                                    <th scope="col">Priority</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Property</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Sl No.'); ?></th>
+                                    <th scope="col"><?= __('Complaint Name'); ?></th>
+                                    <th scope="col"><?= __('Complaint Type'); ?></th>
+                                    <th scope="col"><?= __('Priority'); ?></th>
+                                    <th scope="col"><?= __('Date'); ?></th>
+                                    <th scope="col"><?= __('Property'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -239,11 +239,11 @@ $closed_cnt = count((array)$closed);
                                             <td><span class="form-label label label-lg  label-success label-inline f-w-900 " ><?php echo $row['name']; ?></span> </td>
                                             <td>
                                                 <a class=" m-r-5"
-                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="View Details">
+                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-eye  p-2 b-radius-5"></i>
                                                 </a>
                                                 <a class=" m-r-5"
-                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>&RS=1" title="Copy Details">
+                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>&RS=1" title="<?= htmlspecialchars(__('Copy Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-edit  p-2 b-radius-5"></i>
                                                 </a>
                                             </td>
@@ -255,7 +255,7 @@ $closed_cnt = count((array)$closed);
                                         <td colspan="9">
                                             <div class="text-center">
                                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                                    <i class="fa fa-warning"></i> No Records
+                                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                                 </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">

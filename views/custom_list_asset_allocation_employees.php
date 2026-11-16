@@ -45,7 +45,7 @@ function alloteAssets(){
         }
     });
     if (assetid.length === 0) {
-        alert("please select Minimum one assets");
+        alert(<?php echo json_encode(__('please select Minimum one assets'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         return false;
     }
     jQuery.ajax({
@@ -66,7 +66,7 @@ function momentAssets(){
         }
     });
     if (assetid.length === 0) {
-        alert("please select Minimum one assets");
+        alert(<?php echo json_encode(__('please select Minimum one assets'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         return false;
     }
     jQuery.ajax({
@@ -87,7 +87,7 @@ function returnAssets(){
         }
     });
     if (assetid.length === 0) {
-        alert("please select Minimum one assets");
+        alert(<?php echo json_encode(__('please select Minimum one assets'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         return false;
     }
     jQuery.ajax({
@@ -108,7 +108,7 @@ function updateMultipleAssets(){
         }
     });
     if (assetid.length === 0) {
-        alert("please select Minimum one assets");
+        alert(<?php echo json_encode(__('please select Minimum one assets'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         return false;
     }
     jQuery.ajax({
@@ -129,7 +129,7 @@ function assetDiscrdOrSell(){
         }
     });
     if (assetid.length === 0) {
-        alert("please select Minimum one assets");
+        alert(<?php echo json_encode(__('please select Minimum one assets'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         return false;
     }
     jQuery.ajax({
@@ -251,7 +251,7 @@ function assetFilter(){
 <?php if($error_message !=''){ ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 <?php } ?>
 <script type="text/javascript">
@@ -282,14 +282,14 @@ function assetFilter(){
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
 
                     <div class="card-header mb-3">
-                        <h5> Assets Employee Allocation List</h5>
+                        <h5> <?= __('Assets Employee Allocation List'); ?></h5>
                         <div class="card-header-right">
                             <?php if(isset($_GET['Rid'])){ ?>
-                                <a href="index.php?option=COM_VIEW_STOCKTAKES&Rid=<?php echo $_GET['Rid']; ?>" class="btn btn-success"> <i class="fa fa-eye"></i> Priview</a>
+                                <a href="index.php?option=COM_VIEW_STOCKTAKES&Rid=<?php echo $_GET['Rid']; ?>" class="btn btn-success"> <i class="fa fa-eye"></i> <?= __('Priview'); ?></a>
                             <?php } ?>
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -298,9 +298,9 @@ function assetFilter(){
                     <div class="card-body">
                     <div class="row ml-20 mr-20">
                         <div class="form-group col-lg-4">
-                                <span class="col-lg-12">Category</span>
-                                <select aria-label="Category"  class="form-select js-example-basic-single " name="category" id="category" onchange="assetFilter()">
-                                    <option value="">Select Any One</option>
+                                <span class="col-lg-12"><?= __('Category'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="category" id="category" onchange="assetFilter()">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                             <?php foreach ($assetcategory as $assetcategor) { ?>
                                 <option value="<?php echo $assetcategor['id']; ?>"><?php echo ucwords($assetcategor['category_description']); ?></option>
                             <?php } ?>
@@ -308,18 +308,18 @@ function assetFilter(){
                         </div>
 
                         <div class="form-group col-lg-4">
-                                <span class="col-lg-12">Status</span>
-                                <select aria-label="Status"  class="form-select js-example-basic-single " name="status" id="status" onchange="assetFilter()">
-                                    <option value="">Select Any One</option>
+                                <span class="col-lg-12"><?= __('Status'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="status" id="status" onchange="assetFilter()">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                             <?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>
                                 <option  value="<?php echo $ass_statukey; ?>"><?php echo ucwords($ass_statu); ?></option>
                             <?php } ?>
                             </select>
                         </div>
                         <div class="form-group col-lg-4">
-                                <span class="col-lg-12">Condition</span>
-                                <select aria-label="Candition"  class="form-select js-example-basic-single " name="candition" id="candition" onchange="assetFilter()">
-                                    <option value="">Select Any One</option>
+                                <span class="col-lg-12"><?= __('Condition'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Candition'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="candition" id="candition" onchange="assetFilter()">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                             <?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>
                                 <option  value="<?php echo $ass_conditiokey; ?>"><?php echo ucwords($ass_conditio); ?></option>
                             <?php } ?>
@@ -327,9 +327,9 @@ function assetFilter(){
                         </div>
                     </div>
                 <div class="row ml-20 mr-20">
-                     <div class="col-lg-2"><button type="button" class="btn btn-primary waves-effect waves-light col-lg-12" onclick="returnAssets()">Assets Return</button></div>
-                     <div class="col-lg-2"><button type="button" class="btn btn-danger waves-effect waves-light col-lg-12" onclick="momentAssets()"><i class="fa fa-file"></i> History</button></div>
-                    <div class="col-lg-2"><button  type="button" class="btn btn-primary waves-effect waves-light col-lg-12" onclick="requestAssets()">Requets</button></div>
+                     <div class="col-lg-2"><button type="button" class="btn btn-primary waves-effect waves-light col-lg-12" onclick="returnAssets()"><?= __('Assets Return'); ?></button></div>
+                     <div class="col-lg-2"><button type="button" class="btn btn-danger waves-effect waves-light col-lg-12" onclick="momentAssets()"><i class="fa fa-file"></i> <?= __('History'); ?></button></div>
+                    <div class="col-lg-2"><button  type="button" class="btn btn-primary waves-effect waves-light col-lg-12" onclick="requestAssets()"><?= __('Requets'); ?></button></div>
                 </div>
 
                 <div class="row mt-4 assetstable">

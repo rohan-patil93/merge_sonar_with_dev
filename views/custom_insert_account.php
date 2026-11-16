@@ -415,15 +415,15 @@ function removefile(val){
         var dsub = $('#subtotal_debit').val();
         var cgrand = $('#grandtotal_credit').val();
         var dgrand = $('#grandtotal_debit').val();
-        alert("csub"+csub+"dsub"+dsub+"ctax"+ctax+"dtax"+dtax+"cgrand"+cgrand+"grand"+dgrand);
-        alert("Hi");
+        alert(<?php echo json_encode(__('csub'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+csub+<?php echo json_encode(__('dsub'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+dsub+<?php echo json_encode(__('ctax'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+ctax+<?php echo json_encode(__('dtax'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+dtax+<?php echo json_encode(__('cgrand'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+cgrand+<?php echo json_encode(__('grand'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+dgrand);
+        alert(<?php echo json_encode(__('Hi'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         if(csub != dsub){
-            alert("Debit amont Credit amount is not equal");
+            alert(<?php echo json_encode(__('Debit amont Credit amount is not equal'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return false;
         }
         var ctax = cgrand-csub; var dtax = dgrand-dsub;
         if(ctax != dtax){
-            if (confirm("Tax is not equal on debit and credit")) {
+            if (confirm(<?php echo json_encode(__('Tax is not equal on debit and credit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>)) {
                 return true;
             } else {
                 return false;
@@ -568,7 +568,7 @@ function removefile(val){
     });
     $(document).on('click', '.deleteInvoice', function(){
         var id = $(this).attr("id");
-        if(confirm("Are you sure you want to remove this?")){
+        if(confirm(<?php echo json_encode(__('Are you sure you want to remove this?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>)){
             $.ajax({
                 url:"action.php",
                 method:"POST",
@@ -853,12 +853,12 @@ function calculateTotal(){
     for( var k =0 ; k < arr2.length; k++){
 
             if(old_state != change_state){
-                str+= "<tr><td style='width: 67%;text-align:right;'> IGST @ "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
+                str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('IGST @'), ENT_QUOTES, 'UTF-8'); ?> "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
                 str+= "<td>  <input  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"'' aria-label="Input"> </td></tr>";
             }else{
-                str+= "<tr><td style='width: 67%;text-align:right;'> CGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('CGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                 str+= "<td>  <input  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
-                 str+= "<tr><td style='width: 67%;text-align:right;'> SGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                 str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('SGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                 str+= "<td>  <input  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"'' aria-label="Input"> </td></tr>";
             }
 
@@ -1193,7 +1193,7 @@ function calculateTotal(){
  <?php if(in_array($table_name, (array)$originator_tables)){  ?>
    <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Originator'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValueEmployee(this.value)" aria-label="Party Id">
+        <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValueEmployee(this.value)" aria-label="<?= htmlspecialchars(__('Party Id'), ENT_QUOTES, 'UTF-8'); ?>">
             <option value="0"> <?php echo __('Select Any EMployee'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
             <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['first_name']," ".$cus['middle_name']."".$cus['last_name']; ?>
@@ -1204,7 +1204,7 @@ function calculateTotal(){
 <?php } elseif(in_array($table_name, (array)$stock_table)){ ?>
     <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Location'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select class="form-control" id="transfer_location_id" name= "transfer_location_id" aria-label="Transfer Location Id">
+        <select class="form-control" id="transfer_location_id" name= "transfer_location_id" aria-label="<?= htmlspecialchars(__('Transfer Location Id'), ENT_QUOTES, 'UTF-8'); ?>">
             <option value="0"> <?php echo __('Select Any Location'); ?> </option>
             <?php foreach ($locations_data as $locatdata) {  ?>
             <option  <?php if($table1['transfer_location_id'] == $locatdata['id']){ ?> selected  <?php } ?> value = <?php echo $locatdata['id'] ?>   >      <?php echo $locatdata['location_description']; ?>
@@ -1216,7 +1216,7 @@ function calculateTotal(){
 <?php }else{ ?>
     <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Vendor'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValue(this.value)" aria-label="Party Id">
+        <select class="form-control" id="party_id" name= "party_id" onchange="GetSelectedTextValue(this.value)" aria-label="<?= htmlspecialchars(__('Party Id'), ENT_QUOTES, 'UTF-8'); ?>">
             <option value="0"> <?php echo __('Select Any Vendor'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
             <option  <?php if($table1['party_id'] == $cus['id']){ ?> selected  <?php } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?>
@@ -1235,7 +1235,7 @@ function calculateTotal(){
 <div class="form-group row">
     <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Cost Center'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select class="form-control" id="cost_center" name="cost_center" aria-label="Cost Center">
+        <select class="form-control" id="cost_center" name="cost_center" aria-label="<?= htmlspecialchars(__('Cost Center'), ENT_QUOTES, 'UTF-8'); ?>">
             <option value="0"> <?php echo __('Select any'); ?>  </option>
             <?php foreach ($costs as  $k1 =>$pos) {  ?>
                 <optgroup label="<?php echo $k1; ?>">
@@ -1261,7 +1261,7 @@ function calculateTotal(){
 <div class="form-group row" <?php echo $petty_cash_style; ?>>
     <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Department'); ?>:</span>
     <div class=" col-lg-3 col-md-9 col-sm-12">
-        <select class="form-control kt-select2" id="kt_select2_3" name="param" aria-label="Param">
+        <select class="form-control kt-select2" id="kt_select2_3" name="param" aria-label="<?= htmlspecialchars(__('Param'), ENT_QUOTES, 'UTF-8'); ?>">
            <?php foreach ($departmentslist as  $department) { ?>
 
             <option value="<?php echo $department['id']; ?>"><?php echo htmlspecialchars(__($department['department_name'] ?? '')); ?></option>
@@ -1271,7 +1271,7 @@ function calculateTotal(){
      <?php $table1['place_of_supply'] = $table1['place_of_supply'] !='' ? $table1['place_of_supply'] : $location_state; ?>
     <span class="col-lg-2 col-form-label d-inline-block fw-bold"><?php echo __('Place Of Supply'); ?>:</span>
     <div class="col-lg-3">
-        <select class="form-control" name="place_of_supply" id="party_place_of_supply" onchange="displaytaxes()" aria-label="Place Of Supply">
+        <select class="form-control" name="place_of_supply" id="party_place_of_supply" onchange="displaytaxes()" aria-label="<?= htmlspecialchars(__('Place Of Supply'), ENT_QUOTES, 'UTF-8'); ?>">
             <option value="0"> <?php echo __('Select Any Place'); ?> </option>
             <?php foreach ($posresponse as $key => $pos) {  ?>
                 <option   <?php if($table1['place_of_supply'] == $pos['id']){ ?>selected <?php } ?>  value ="<?php echo $pos['id']; ?>" > <?php echo $pos['state_name']; ?> </option>
@@ -1287,9 +1287,9 @@ function calculateTotal(){
     ?>
 <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Category'); ?>:</span>
 <div class=" col-lg-3 col-md-9 col-sm-12">
-    <select class="form-control" id="kt_select2_4" name= "type" aria-label="Type">
+    <select class="form-control" id="kt_select2_4" name= "type" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
                <?php foreach ($itemtypelist as $itemtype) {  ?>
-                     <option   <?php if($table1['type'] == $itemtype['genc_detail_code']){ ?>selected <?php } ?>  value ="<?php echo $itemtype['genc_detail_code']; ?>" > <?php echo $itemtype['genc_detail_name']; ?> </option>
+                     <option   <?php if($table1['type'] == $itemtype['genc_detail_code']){ ?>selected <?php } ?>  value ="<?php echo $itemtype['genc_detail_code']; ?>" > <?php echo __($itemtype['genc_detail_name']); ?> </option>
                 <?php } ?>
      </select>
 </div>
@@ -1297,7 +1297,7 @@ function calculateTotal(){
 } else{ ?>
 <span class="col-form-label col-lg-2 col-sm-12 d-inline-block fw-bold"><?php echo __('Branch'); ?>:</span>
 <div class=" col-lg-3 col-md-9 col-sm-12">
-    <select class="form-control" id="kt_select2_4" name= "type" aria-label="Type">
+    <select class="form-control" id="kt_select2_4" name= "type" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
                <?php foreach ($boxlist as $itemtype) {  ?>
                      <option   <?php if($table1['id'] == $itemtype['id']){ ?>selected <?php } ?>  value ="<?php echo $itemtype['id']; ?>" > <?php echo $itemtype['pc_box_code']; ?> </option>
                 <?php } ?>
@@ -1327,7 +1327,7 @@ function calculateTotal(){
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Name'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                  <input readonly class="form-control"  type='text' id="party_name" name="party_name"    value="<?php echo $table1['party_name']; ?>" / aria-label="Party Name">
+                                  <input readonly class="form-control"  type='text' id="party_name" name="party_name"    value="<?php echo $table1['party_name']; ?>" / aria-label="<?= htmlspecialchars(__('Party Name'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                             <div class="">
@@ -1350,13 +1350,13 @@ function calculateTotal(){
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Email Address'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <input type='text' class="form-control" id="party_email" readonly name="party_email"  value="<?php echo $table1['party_email']; ?>"/ aria-label="Party Email">
+                                    <input type='text' class="form-control" id="party_email" readonly name="party_email"  value="<?php echo $table1['party_email']; ?>"/ aria-label="<?= htmlspecialchars(__('Party Email'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Phone Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <input type='text' id="party_phone" name="party_phone" class="form-control" readonly value="<?php echo $table1['party_phone']; ?>" / aria-label="Party Phone">
+                                    <input type='text' id="party_phone" name="party_phone" class="form-control" readonly value="<?php echo $table1['party_phone']; ?>" / aria-label="<?= htmlspecialchars(__('Party Phone'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <input type='hidden'  name="company_id" id="company_id" class="form-control" readonly value="<?php echo $_SESSION['company_id']; ?>" />
                                 </div>
                             </div>
@@ -1381,16 +1381,16 @@ function calculateTotal(){
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Tax Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <input type='text' id="party_tax_number" name="party_tax_number" class="form-control" readonly value="<?php echo $table1['party_tax_number']; ?>" / aria-label="Party Tax Number">
+                                    <input type='text' id="party_tax_number" name="party_tax_number" class="form-control" readonly value="<?php echo $table1['party_tax_number']; ?>" / aria-label="<?= htmlspecialchars(__('Party Tax Number'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Payment Terms'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                     <select class="form-control"  onchange="duedate()"  name="payment_terms" id="party_payment_terms" aria-label="Payment Terms">
+                                     <select class="form-control"  onchange="duedate()"  name="payment_terms" id="party_payment_terms" aria-label="<?= htmlspecialchars(__('Payment Terms'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <option value="0"> <?php echo __('Select Any Term'); ?> </option>
                                         <?php foreach ($posresponsept as $key => $pos) {  ?>
-                                            <option   <?php if($table1['payment_terms'] == $pos['genc_detail_code']){ ?>selected <?php } ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo $pos['genc_detail_name']; ?> </option>
+                                            <option   <?php if($table1['payment_terms'] == $pos['genc_detail_code']){ ?>selected <?php } ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo __($pos['genc_detail_name']); ?> </option>
                                         <?php } ?>
                                     </select>
                                     <?php
@@ -1402,7 +1402,7 @@ function calculateTotal(){
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Currency'); ?></span>
                                 <?php  $table1['currency_id'] =  $table1['currency_id'] !="" ? $table1['currency_id'] : $_SESSION['config']['default_currency_id'];?>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <select class="form-control" onchange="currencychange(this.value,<?php echo  $_SESSION['config']['default_currency_id'];  ?>)"  name="currency_id" id="currency_id" aria-label="Currency Id">
+                                    <select class="form-control" onchange="currencychange(this.value,<?php echo  $_SESSION['config']['default_currency_id'];  ?>)"  name="currency_id" id="currency_id" aria-label="<?= htmlspecialchars(__('Currency Id'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <option value="0"> <?php echo __('Select Any Currency'); ?> </option>
                                         <?php
                                         foreach ($cr_data as  $crpos) {  ?>
@@ -1415,14 +1415,14 @@ function calculateTotal(){
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Ex Rate'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                   <input type='text' class="form-control" id="currency_rate" onchange="exchangerate()"  name="currency_rate"  value="<?php echo customeummarmonyformate($table1['currency_rate']); ?>"/ aria-label="Currency Rate">
+                                   <input type='text' class="form-control" id="currency_rate" onchange="exchangerate()"  name="currency_rate"  value="<?php echo customeummarmonyformate($table1['currency_rate']); ?>"/ aria-label="<?= htmlspecialchars(__('Currency Rate'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Due Date'); ?>:</span>
                                   <?php $duee = $table1['due_date'] !='' ?  fromDate($table1['due_date']) :  ''; ?>
                                    <div class="col-lg-8 col-md-8 col-sm-12">
-                                <input type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly / aria-label="Due Date">
+                                <input type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly / aria-label="<?= htmlspecialchars(__('Due Date'), ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             </div>
                             <?php if(!in_array($table_name, (array)$originator_table_withbill)){
@@ -1430,7 +1430,7 @@ function calculateTotal(){
                             <div class="form-group row">
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
-                                     <select class="form-control"  name="ref_id" id="ref_id" onchange="toredriacte(this.value,<?php echo  "'".$option."'"; ?>,<?php echo  "'".$rtable_name."'"; ?>)" aria-label="Ref Id">
+                                     <select class="form-control"  name="ref_id" id="ref_id" onchange="toredriacte(this.value,<?php echo  "'".$option."'"; ?>,<?php echo  "'".$rtable_name."'"; ?>)" aria-label="<?= htmlspecialchars(__('Ref Id'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <option value="0"> <?php echo __('Select Any Refernce'); ?> </option>
                                         <?php foreach ($req_list as  $req) {  ?>
                                             <option  <?php if($table1['ref_id'] == $req['id']){ ?> selected  <?php } ?>   value ="<?php echo $req['id']; ?>" > <?php echo $req['transaction_number']; ?> </option>
@@ -1445,7 +1445,7 @@ function calculateTotal(){
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Date'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <div class="kt-input-icon kt-input-icon--right" >
-                                        <input type='text' class="form-control" readonly id="ref_date"  name="ref_date"  value="<?php echo $table1['ref_date']; ?>"/ aria-label="Ref Date">
+                                        <input type='text' class="form-control" readonly id="ref_date"  name="ref_date"  value="<?php echo $table1['ref_date']; ?>"/ aria-label="<?= htmlspecialchars(__('Ref Date'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-calendar"></i></span></span>
                                     </div>
                                 </div>
@@ -1456,7 +1456,7 @@ function calculateTotal(){
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Number'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
 
-                                    <input type='text' class="form-control"  name="doc_ref_no"  value="<?php echo $table1['doc_ref_no']; ?>"/ aria-label="Doc Ref No">
+                                    <input type='text' class="form-control"  name="doc_ref_no"  value="<?php echo $table1['doc_ref_no']; ?>"/ aria-label="<?= htmlspecialchars(__('Doc Ref No'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                             </div>
@@ -1464,7 +1464,7 @@ function calculateTotal(){
                                 <span class="col-form-label col-lg-4 col-sm-12 d-inline-block fw-bold"><?php echo __('Refernce Date'); ?></span>
                                 <div class="col-lg-8 col-md-8 col-sm-12">
                                     <div class="kt-input-icon kt-input-icon--right" >
-                                        <input type='text' class="form-control"  id="kt_datepicker_32"  name="doc_ref_date"  value="<?php echo $table1['doc_ref_date']; ?>"/ aria-label="Doc Ref Date">
+                                        <input type='text' class="form-control"  id="kt_datepicker_32"  name="doc_ref_date"  value="<?php echo $table1['doc_ref_date']; ?>"/ aria-label="<?= htmlspecialchars(__('Doc Ref Date'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <span class="kt-input-icon__icon kt-input-icon__icon--right"><span><i class="la la-calendar"></i></span></span>
                                     </div>
                                 </div>
@@ -1486,7 +1486,7 @@ function calculateTotal(){
         <div class="kt-portlet__head-label"><h3 class="kt-portlet__head-title"> <?php echo __('Items/Services'); ?> </h3></div>
     <div class="kt-portlet__head-label" style="float: right;">
          <div class="form-group col-lg-12">
-            <select class="form-control" id="taxtype" name= "tax_type" onchange="calculateTotal()" aria-label="Tax Type">
+            <select class="form-control" id="taxtype" name= "tax_type" onchange="calculateTotal()" aria-label="<?= htmlspecialchars(__('Tax Type'), ENT_QUOTES, 'UTF-8'); ?>">
                     <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php } ?> value="E"> <?php echo __('Exclusive'); ?> </option>
                     <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php } ?> value="I"> <?php echo __('Inclusive'); ?> </option>
                     <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php } ?> value="O"> <?php echo __('Out Of scope'); ?> </option>
@@ -1516,20 +1516,20 @@ function calculateTotal(){
        <div>
             <div style="float: left;width: 48%;padding: 1%;">
                 <label class=""><?php echo __('Internal Note(s)'); ?> </label>
-                <textarea style="height: 120px;" name="notes" class="form-control" aria-label="Notes"><?php echo $table1['notes']; ?></textarea>
+                <textarea style="height: 120px;" name="notes" class="form-control" aria-label="<?= htmlspecialchars(__('Notes'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $table1['notes']; ?></textarea>
             </div>
             <div style="float: left;width: 48%;padding: 1%;">
                 <label class=""><?php echo __('Printing Note(s)'); ?> </label>
-                <textarea style="height: 120px;" name="printing_notes" class="form-control" aria-label="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
+                <textarea style="height: 120px;" name="printing_notes" class="form-control" aria-label="<?= htmlspecialchars(__('Printing Notes'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $table1['printing_notes']; ?></textarea>
             </div>
         </div>
           <?php if($small_sub == 0  ){ ?>
             <div style="margin-top: 10px;clear:both;">
                 <label class=""><?php echo __('Comment(s)'); ?></label>
-                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" aria-label="Comments"><?php echo $comments; ?></textarea>
+                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" aria-label="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $comments; ?></textarea>
             </div>
             <div class="btn-group" style="margin-top: 10px;float: right;">
-                     <button id="kt_llogin_signup_submit"  class="btn btn-brand" >Submit1</button>
+                     <button id="kt_llogin_signup_submit"  class="btn btn-brand" ><?= __('Submit1'); ?></button>
             </div>
         <?php }  ?>
 
@@ -1543,7 +1543,7 @@ function calculateTotal(){
         <div class="card">
             <div class="card-header" id="headingTwo21">
                 <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21">
-                    Comments
+                    <?= __('Comments'); ?>
                 </div>
             </div>
             <div id="collapseTwo21" class="collapse" aria-labelledby="headingTwo21" data-parent="#accordionComments">
@@ -1566,7 +1566,7 @@ function calculateTotal(){
                                     }else{ echo $list_date = $lists['response_date'];
                                     }?>
                                     <b> <?php echo date("M d, Y g:i A", strtotime($list_date)); ?></b>
-                                    <?php echo " ".$_SESSION['users'][$lists['user_id']]." with Status "; ?><span style="color: <?php echo "#".$stausresult[$lists['response_type']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$lists['response_type']]['background_color']); ?>;" class="kt-badge  kt-badge--inline kt-badge--pill"><?php if($lists['response_type'] == 0){ echo "Yet to respond";
+                                    <?php echo " ".$_SESSION['users'][$lists['user_id']]." with Status "; ?><span style="color: <?php echo "#".$stausresult[$lists['response_type']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$lists['response_type']]['background_color']); ?>;" class="kt-badge  kt-badge--inline kt-badge--pill"><?php if($lists['response_type'] == 0){ echo __('Yet to respond');
                                     }else{ echo $stausresult[$lists['response_type']]['name'];
                                     }?></span>
                                    <?php echo "</br>".$lists['comments']; ?>
@@ -1590,7 +1590,7 @@ function calculateTotal(){
             <th scope="col" class="amount"><span><?php echo __('Sub Total'); ?></span></th>
             <td  width="18%">
                 <span>
-                    <input  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subtotal_debit" id="dis_subtotal_debit" aria-label="Dis Subtotal Debit">
+                    <input  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subtotal_debit" id="dis_subtotal_debit" aria-label="<?= htmlspecialchars(__('Dis Subtotal Debit'), ENT_QUOTES, 'UTF-8'); ?>">
                     <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subtotal_debit" id="subtotal_debit"  >
                 </span>
             </td>
@@ -1610,21 +1610,21 @@ function calculateTotal(){
                         foreach ($distax as $takey => $ktax) { ?>
                         <?php if($table1['tax_state'] == 'Su'){ ?>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount" aria-label="Tax Amount">            </td>
+                            <td style="width: 67%;text-align:right;">  <?= __('CGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?= __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= htmlspecialchars(__('Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>">            </td>
                         </tr>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="Tax Amount" aria-label="Tax Amount">            </td>
+                            <td style="width: 67%;text-align:right;">  <?= __('CGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?= __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= htmlspecialchars(__('Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>">            </td>
                         </tr>
                     <?php } else{?>
 
-                        <tr><td style='text-align:right;'> IGST @ <?php echo $takey; ?>% </td>
+                        <tr><td style='text-align:right;'> <?= __('IGST @'); ?> <?php echo $takey; ?>% </td>
                             <td  width='18%'>
-                             <input  type='text' class='form-control amount'   readonly  value="<?php echo $ktax['debit_amount']; ?>" aria-label="Input">
+                             <input  type='text' class='form-control amount'   readonly  value="<?php echo $ktax['debit_amount']; ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                          </td>
                          <td  width='18%'>
-                           <input  type='text' class='form-control amount' readonly  value="<?php echo $ktax['credit_amount']; ?>" aria-label="Input">
+                           <input  type='text' class='form-control amount' readonly  value="<?php echo $ktax['credit_amount']; ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                        </td></tr>
 
                     <?php }?>
@@ -1638,7 +1638,7 @@ function calculateTotal(){
             <th scope="col" class="amount" ><span><?php echo __('Grand Total'); ?></span></th>
              <input  type="hidden" class="form-control amount" name="credit_tax" value="0" id="credit_tax">
              <input  type="hidden" class="form-control amount" name="debit_tax" value="0" id="debit_tax">
-             <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="Tax Amount">
+             <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="<?= htmlspecialchars(__('Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>">
             <td><input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal_debit" id="dis_grandtotal_debit" readonly placeholder="<?php echo __('Grand Total'); ?>" aria-label="<?php echo __('Grand Total'); ?>"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal_debit" id="grandtotal_debit" readonly placeholder="<?php echo __('Grand Total'); ?>"></td>
             <td><input  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal_credit" id="dis_grandtotal_credit" readonly placeholder="<?php echo __('Grand Total'); ?>" aria-label="<?php echo __('Grand Total'); ?>"><input  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal_credit" id="grandtotal_credit" readonly placeholder="<?php echo __('Grand Total'); ?>"></td>
         </tr>
@@ -1663,7 +1663,7 @@ function calculateTotal(){
     <div class="dz-details">
         <div class="dz-size">
             <span data-dz-size="">
-                <strong><?php echo $file_value['file_size_mb']; ?></strong> MB
+                <strong><?php echo $file_value['file_size_mb']; ?></strong> <?= __('MB'); ?>
             </span>
         </div>
         <div class="dz-filename">
@@ -1675,7 +1675,7 @@ function calculateTotal(){
     </div>
     <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
     <div class="dz-success-mark">
-        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Check</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>      </g>    </svg>  </div>  <div class="dz-error-mark">    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Error</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">          <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>        </g>      </g>    </svg>
+        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title><?= __('Check'); ?></title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>      </g>    </svg>  </div>  <div class="dz-error-mark">    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title><?= __('Error'); ?></title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">          <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>        </g>      </g>    </svg>
     </div>
     <a class="dz-remove" href="javascript:undefined;" data-dz-remove="" onclick="removefile(<?php echo $file_value['id']; ?>)"><?php echo __('Remove'); ?></a>
     <a class="dz-remove" target="_blank" href="uploads/121/files/<?php echo $file_value['file_name']; ?>" ><?php echo __('Download'); ?></a>

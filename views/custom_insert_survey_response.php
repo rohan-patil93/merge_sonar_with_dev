@@ -197,9 +197,9 @@ function submitsurvey(){
     title: "",
     text: <?php echo json_encode(__('Time is Expired And Please Submit')); ?>,
     buttonsStyling: false,
-    confirmButtonText: "<i class='la la-thumbs-up'></i>OK",
+    confirmButtonText: "<i class='la la-thumbs-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
     showCancelButton: false,
-    cancelButtonText: "<i class='la la-thumbs-down'></i> No I will do it later",
+    cancelButtonText: "<i class='la la-thumbs-down'></i> <?= htmlspecialchars(__('No I will do it later'), ENT_QUOTES, 'UTF-8'); ?>",
     customClass: {
      confirmButton: "btn btn-success",
      cancelButton: "btn btn-default"
@@ -357,7 +357,7 @@ function submitsurvey(){
 
             </div>
             <div class="row mt-2">
-              <input type="submit" name="submit" class="btn btn-success font-weight-bold " value="Save & Pause" />
+              <input type="submit" name="submit" class="btn btn-success font-weight-bold " value="<?= htmlspecialchars(__('Save & Pause'), ENT_QUOTES, 'UTF-8'); ?>" />
             </div>
 
           </div>

@@ -24,7 +24,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">My Info</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center"><?= __('My Info'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -44,7 +44,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Attendance</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?= __('Attendance'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -64,7 +64,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Leave</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?= __('Leave'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -86,7 +86,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Tasks</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?= __('Tasks'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -106,7 +106,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Calendar</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?= __('Calendar'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -127,7 +127,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Self Service</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center"><?= __('Self Service'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -147,7 +147,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Pay</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?= __('Pay'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -167,7 +167,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Feeds</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?= __('Feeds'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -189,7 +189,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Manage</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?= __('Manage'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->
@@ -209,7 +209,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center">Teams</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bolder text-center"><?= __('Teams'); ?></span>
                                                         </a>
                                                     </li>
                                                     <!--end::Item-->

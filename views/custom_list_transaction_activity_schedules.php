@@ -7,7 +7,7 @@ function paggination($records,$pageno ="",$limit="",$functionname=""){
     $array=array_slice($records, $pageno, $limit);
     $pageui = "";
     $j=0;
-    $pageui .='<tr class="datatable-row"><td colspan="100%"><nav aria-label="Page navigation example" style="float:right"><ul class="pagination my-2 mb-sm-0">';
+    $pageui .='<tr class="datatable-row"><td colspan="100%"><nav aria-label="'.htmlspecialchars(__('Page navigation example'), ENT_QUOTES, 'UTF-8').'" style="float:right"><ul class="pagination my-2 mb-sm-0">';
     for($i = 0; $i< $number_of_page; $i++) {
        $classactive ="";
        if($btnpageno == $i){
@@ -57,13 +57,13 @@ $paegs = paggination($result,$_GET['page'],"10","index.php?option=com_list_trans
                     <span class="kt-portlet__head-icon">
                         <i class="kt-font-brand flaticon2-line-chart"></i>
                     </span>
-                    <h3 class="card-label">&nbsp;<?php echo "Candidate Activity List";  ?> </h3>
+                    <h3 class="card-label">&nbsp;<?php echo __("Candidate Activity List");  ?> </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
                     <div class="card-toolbar">
                             <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                                 <i class="ki ki-long-arrow-back icon-xs"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                     </div>
                 </div>
@@ -76,13 +76,13 @@ $paegs = paggination($result,$_GET['page'],"10","index.php?option=com_list_trans
      <table class="table table-separate table-head-custom table-checkable data-table" id="kt_datatable1">
          <tr>
                 <th scope="col" style="width: 3%;"></th>
-                <th scope="col" style="width: 5%;">SL.NO.</th>
-                <th scope="col" style="width: 13%;">Image</th>
-                <th scope="col" style="width: 10%;">Name</th>
-                <th scope="col" style="width: 12%;">Email</th>
+                <th scope="col" style="width: 5%;"><?= __('SL.NO.'); ?></th>
+                <th scope="col" style="width: 13%;"><?= __('Image'); ?></th>
+                <th scope="col" style="width: 10%;"><?= __('Name'); ?></th>
+                <th scope="col" style="width: 12%;"><?= __('Email'); ?></th>
 
-                <th scope="col" style="width: 10%;">Contact</th>
-                 <th scope="col" style="width: 10%;">Status</th>
+                <th scope="col" style="width: 10%;"><?= __('Contact'); ?></th>
+                 <th scope="col" style="width: 10%;"><?= __('Status'); ?></th>
 
             </tr>
             <?php $k=1; foreach($paegs['array'] as  $result){ ?>

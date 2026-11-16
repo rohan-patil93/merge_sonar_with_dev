@@ -81,13 +81,13 @@ function shareprofile(id){
         <div class=" flex-row j-content">
             <div class="card card-custom ">
                 <div class="card-header">
-                    <h5>Note</h5><span><?php echo $note_count;?> Total</span>
+                    <h5><?= __('Note'); ?></h5><span><?php echo $note_count;?> <?= __('Total'); ?></span>
                     <div class="card-header-right">
                     <button type="button" onclick="dynamicinsertpopup('COM_INSERT_EMPLOYEE_NOTES')" class="btn btn-success ">
-                                              <i class="icofont icofont-plus icon-white"></i>ADD NOTES  </button>
+                                              <i class="icofont icofont-plus icon-white"></i><?= __('ADD NOTES'); ?>  </button>
                           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                               <i class="icofont icofont-reply"></i>
-                              Back
+                              <?= __('Back'); ?>
                             </a>
                     </div>
                 </div>
@@ -110,9 +110,9 @@ function shareprofile(id){
                                         <div class="px-3">
                                             <div class="align-middle m-b-25">
                                                 <?php if($created_by_image!=""){ ?>
-                                                    <img src="uploads/all/<?php echo $created_by_image; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                    <img src="uploads/all/<?php echo $created_by_image; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <?php } else { ?>
-                                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($display_name); ?></span>
+                                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($display_name); ?></span>
                                                 <?php } ?>
                                                 <div class="d-inline-block">
                                                     <a href="#!"><h6 class="f-w-600"><?php echo $notesdata['notes_title']; ?></h6></a>
@@ -121,7 +121,7 @@ function shareprofile(id){
                                                 <p class="text-muted m-t-10">
                                                     <?php if(strlen($notesdata['notes'])>300){
                                                             echo substr($notesdata['notes'],0,150)."..."; ?>
-                                                        <button type="button" onclick="displaycontent(<?php echo "'".$notesdata['notes']."'"; ?>)" class="text-primary cursor-pointer">More </button>
+                                                        <button type="button" onclick="displaycontent(<?php echo "'".$notesdata['notes']."'"; ?>)" class="text-primary cursor-pointer"><?= __('More'); ?> </button>
                                                     <?php    }else{
                                                             echo $notesdata['notes'];
                                                         } ?>
@@ -142,7 +142,7 @@ function shareprofile(id){
                                                     $i = 0; if($i==5){ break;
 } $i++; ?>
                                                     <?php if($shaerlist['shared_image']!=""){ ?>
-                                                        <img src="uploads/all/<?php echo $shaerlist['shared_image']; ?>" data-bs-toggle="tooltip" data-bs-original-title="<?php echo $shaerlist['shared_display_name']; ?>"  class="img-radius img-30" alt="User">
+                                                        <img src="uploads/all/<?php echo $shaerlist['shared_image']; ?>" data-bs-toggle="tooltip" data-bs-original-title="<?php echo $shaerlist['shared_display_name']; ?>"  class="img-radius img-30" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <?php } else { ?>
                                                         <div class="symbol symbol-35 symbol-circle" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $shaerlist['shared_display_name']; ?>">
                                                             <span class="symbol-label font-weight-bold"> <?php echo initials($shaerlist['shared_display_name']); ?></span>
@@ -166,7 +166,7 @@ function shareprofile(id){
                         <?php if(count((array)$share_u)>0){ ?>
                             <div class="row">
                                 <div class="card-header m-b-10">
-                                <h5>Shared Notes</h5>
+                                <h5><?= __('Shared Notes'); ?></h5>
                                 </div>
                             <?php foreach ($share_u as $notesdata) {
                                 $display_name =$_SESSION['users'][$notesdata['created_by']];
@@ -182,9 +182,9 @@ function shareprofile(id){
                                         <div class="card-block">
                                             <div class="align-middle m-b-25">
                                                 <?php if($created_by_image!=""){ ?>
-                                                    <img src="uploads/all/<?php echo $created_by_image; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                    <img src="uploads/all/<?php echo $created_by_image; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <?php } else { ?>
-                                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($display_name); ?></span>
+                                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($display_name); ?></span>
                                                 <?php } ?>
                                                 <div class="d-inline-block">
                                                     <a href="#!"><h6 class="f-w-600"><?php echo $notesdata['notes_title']; ?></h6></a>
@@ -193,7 +193,7 @@ function shareprofile(id){
                                                 <p class="text-muted m-t-10">
                                                     <?php if(strlen($notesdata['notes'])>300){
                                                             echo substr($notesdata['notes'],0,150)."..."; ?>
-                                                        <button type="button" onclick="displaycontent(<?php echo "'".$notesdata['notes']."'"; ?>)" class="text-primary cursor-pointer">More </button>
+                                                        <button type="button" onclick="displaycontent(<?php echo "'".$notesdata['notes']."'"; ?>)" class="text-primary cursor-pointer"><?= __('More'); ?> </button>
                                                     <?php    }else{
                                                             echo $notesdata['notes'];
                                                         } ?>
@@ -207,7 +207,7 @@ function shareprofile(id){
                         <?php } ?>
                     <?php }else{ ?>
                         <div class="card-px text-center ">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Notes</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Notes'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>

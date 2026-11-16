@@ -21,16 +21,16 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5>Duplicate Invoice Check Report</h5>
+        <h5><?= __('Duplicate Invoice Check Report'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=DuplicateInvoiceCheckReport&format=csv" target="_blank">CSV</a>
+                        href="custom_view_download.php?page=DuplicateInvoiceCheckReport&format=csv" target="_blank"><?= __('CSV'); ?></a>
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=DuplicateInvoiceCheckReport&format=excel" target="_blank">Excel</a>
+                        href="custom_view_download.php?page=DuplicateInvoiceCheckReport&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -47,14 +47,14 @@ $_SESSION['download_data'] = [];
             <table class="table table-separate table-head-custom table-checkable data-table">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-right">SL No</th>
-                        <th scope="col">PI No.</th>
+                        <th scope="col" class="text-right"><?= __('SL No'); ?></th>
+                        <th scope="col"><?= __('PI No.'); ?></th>
 
-                        <th scope="col">Supplier Name</th>
-                        <th scope="col">Invoice Date</th>
-                        <th scope="col" class="text-right">Total Amount</th>
-                        <th scope="col" class="text-center">Duplicate Count</th>
-                        <th scope="col">Duplicate Type</th>
+                        <th scope="col"><?= __('Supplier Name'); ?></th>
+                        <th scope="col"><?= __('Invoice Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Amount'); ?></th>
+                        <th scope="col" class="text-center"><?= __('Duplicate Count'); ?></th>
+                        <th scope="col"><?= __('Duplicate Type'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,7 +97,7 @@ $_SESSION['download_data'] = [];
             <tr>
                 <td colspan="15">
                     <div class="card-px text-center py-20 m-t-30">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>

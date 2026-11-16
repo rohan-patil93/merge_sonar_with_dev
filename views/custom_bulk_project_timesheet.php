@@ -186,8 +186,8 @@ $erp = json_decode($erp_data,1);
             type: "success",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
           },
@@ -230,7 +230,7 @@ $erp = json_decode($erp_data,1);
 			success:function(data){
 				console.log(data);
 				//var msg = <?php echo "'".$_SESSION['error_message']['9024']."'" ?>;
-				var msg = "Timesheet approved successfully by Finance.";
+				var msg = <?php echo json_encode(__('Timesheet approved successfully by Finance.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
 				console.log(msg);
 
 				swal({
@@ -239,8 +239,8 @@ $erp = json_decode($erp_data,1);
 	                type: "success",
 	                showCancelButton: false,
 	                confirmButtonClass: "btn-danger",
-	                confirmButtonText: "Yes",
-	                cancelButtonText: "No",
+	                confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+	                cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 	                closeOnConfirm: true,
 	                closeOnCancel: true
 	              },
@@ -301,10 +301,10 @@ $erp = json_decode($erp_data,1);
 						title: msg,
 						type: "success",
 						buttonsStyling: false,
-						confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+						confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
 						confirmButtonClass: "btn btn-info",
 						showCancelButton: false,
-						cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+						cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
 						cancelButtonClass: "btn btn-default"
 					});
 				}
@@ -412,10 +412,10 @@ $erp = json_decode($erp_data,1);
     					title: msg,
     					type: "success",
     					buttonsStyling: false,
-    					confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+    					confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
     					confirmButtonClass: "btn btn-info",
     					showCancelButton: false,
-    					cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+    					cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
     					cancelButtonClass: "btn btn-default"
     				});
     			}
@@ -452,7 +452,7 @@ $erp = json_decode($erp_data,1);
 
             		 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
 	</div>
 	</div>
@@ -508,7 +508,7 @@ $erp = json_decode($erp_data,1);
                     <h6 class="m-b-5 f-14"><?= __("Current Vs Previous") ?></h6>
                     <h6 class="m-b-0 text-c-blue"><a onclick="cvppopup('Current',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'apv_list')" >
 				<?php echo customeummarmonyformate($ttcount/100000); ?> L
-				</a> Vs <a onclick="cvppopup('Previous',<?php echo "'".customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000)." Lac'"; ?>,'last_pre_list')" > <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L </a></h6>
+				</a> <?= __('Vs'); ?> <a onclick="cvppopup('Previous',<?php echo "'".customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000)." Lac'"; ?>,'last_pre_list')" > <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L </a></h6>
 			<input type="hidden" name="apv_list" id="apv_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="apv_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_hrs'=>'billable_hrs','billable_amount'=>'billable_amount')); ?>' >
 			<input type="hidden" id="last_pre_list" value='<?php echo json_encode((array)$last_pre_list); ?>' >
@@ -519,7 +519,7 @@ $erp = json_decode($erp_data,1);
 		<?php ?>
             <div class="row align-items-center m-b-15">
                 <div class="col-auto">
-                    <p class="m-b-0 text-muted">Utilization</p>
+                    <p class="m-b-0 text-muted"><?= __('Utilization'); ?></p>
                 </div>
 
             </div>
@@ -543,7 +543,7 @@ $erp = json_decode($erp_data,1);
 			<h6 class="m-b-0 text-c-green">
 			<a onclick="cvppopup('Budget',<?php echo "'".$total_budget_hrs." Hrs'"; ?>,'bg_hr_list')" >
 				<?php echo $total_budget_hrs; ?> H </a>
-			 Vs <a onclick="cvppopup('Actuals',<?php echo "'".$total_billabe_hrs." Hrs'"; ?>,'bg_hr_list')" >
+			 <?= __('Vs'); ?> <a onclick="cvppopup('Actuals',<?php echo "'".$total_billabe_hrs." Hrs'"; ?>,'bg_hr_list')" >
 				<?php echo $total_billabe_hrs; ?> H </a>
 			</h6>
 			<input type="hidden" name="bg_hr_list" id="bg_hr_list" value='<?php echo json_encode($emp_sub); ?>' >
@@ -563,7 +563,7 @@ if ($total_budget_hrs > 0) {
 ?>
             <div class="row align-items-center m-b-15">
                 <div class="col-auto">
-                    <p class="m-b-0 text-muted">Current Month Efforts</p>
+                    <p class="m-b-0 text-muted"><?= __('Current Month Efforts'); ?></p>
                 </div>
 
             </div>
@@ -585,10 +585,10 @@ if ($total_budget_hrs > 0) {
                     <i class="far fa fa-coffee text-c-red f-30"></i>
                 </div>
                 <div class="col p-l-0">
-                    <h6 class="m-b-5 f-14">Budget Vs Utilization</h6>
+                    <h6 class="m-b-5 f-14"><?= __('Budget Vs Utilization'); ?></h6>
                     <h6 class="m-b-0 text-c-red">
 			 <a onclick="cvppopup('Budget',<?php echo "'".customeummarmonyformate($total_budget_amount/100000)." Lac'"; ?>,'bg_ut_list')" >
-			<?php echo customeummarmonyformate($total_budget_amount/100000); ?> L</a> Vs  <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'bg_ut_list')" >  <?php echo customeummarmonyformate($ttcount/100000); ?> L </a></h6>
+			<?php echo customeummarmonyformate($total_budget_amount/100000); ?> L</a> <?= __('Vs'); ?>  <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'bg_ut_list')" >  <?php echo customeummarmonyformate($ttcount/100000); ?> L </a></h6>
 			<input type="hidden" name="bg_hr_list" id="bg_ut_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="bg_ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','budgeted_amount'=>'budgeted_amount','billable_amount'=>'billable_amount')); ?>' >
                 </div>
@@ -596,7 +596,7 @@ if ($total_budget_hrs > 0) {
 	    <?php $total_p = ($total_budget_amount > 0) ? number_format((($ttcount / $total_budget_amount) * 100), 0) : 0; ?>
             <div class="row align-items-center m-b-15">
                 <div class="col-auto">
-                    <p class="m-b-0 text-muted">Current Month Utilized</p>
+                    <p class="m-b-0 text-muted"><?= __('Current Month Utilized'); ?></p>
                 </div>
 
             </div>
@@ -616,17 +616,17 @@ if ($total_budget_hrs > 0) {
                     <i class="fa fa-thumbs-up  text-c-yellow f-30"></i>
                 </div>
                 <div class="col p-l-0">
-                    <h6 class="m-b-5 f-14">Utilization Vs Approved</h6>
+                    <h6 class="m-b-5 f-14"><?= __('Utilization Vs Approved'); ?></h6>
                     <h6 class="m-b-0 text-c-yellow">
 				 <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'ut_list')" >
-				<?php echo customeummarmonyformate($ttcount/100000); ?> L </a> Vs<a onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000)." Lac'"; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </a></h6>
+				<?php echo customeummarmonyformate($ttcount/100000); ?> L </a> <?= __('Vs'); ?><a onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000)." Lac'"; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </a></h6>
 			<input type="hidden" name="bg_hr_list" id="ut_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_amount'=>'billable_amount','utilize'=>'Status')); ?>' >
                 </div>
             </div>
             <div class="row align-items-center m-b-15">
                 <div class="col-auto">
-                    <p class="m-b-0 text-muted">Current Month Approved</p>
+                    <p class="m-b-0 text-muted"><?= __('Current Month Approved'); ?></p>
                 </div>
 
             </div>
@@ -673,11 +673,11 @@ if ($total_budget_hrs > 0) {
   							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-success waves-effect waves-light <?php if($gtnvk==1){ echo 'active';
   							} ?>">
   								<?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
-  								<?php echo "Billable"; ?></a> </span>
+  								<?php echo __("Billable"); ?></a> </span>
   							<span class="radio nav-item d-inline-block" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-disabled  waves-effect waves-light <?php if($gtnvk==0){ echo 'active';
   							} ?>" style="cursor: pointer;">
   									<?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?>
-  								<?php echo "Non-billable"; ?></a> </span>
+  								<?php echo __("Non-billable"); ?></a> </span>
   						</div>
   					</div>
 
@@ -729,18 +729,18 @@ if ($total_budget_hrs > 0) {
                 	<div class="col-lg-7">
                     <ul class="nav  md-tabs infisuite_tab">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#home3" role="tab">Approved
+                            <a class="nav-link active" data-bs-toggle="tab" href="#home3" role="tab"><?= __('Approved'); ?>
                             		&nbsp;<span class="badge badge-warning"><?php echo $apv_count; ?></span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#profile3" role="tab">Approvals Pending
+                            <a class="nav-link" data-bs-toggle="tab" href="#profile3" role="tab"><?= __('Approvals Pending'); ?>
                             	&nbsp;	<span class="badge badge-warning"><?php echo $sba_count; ?></span>
                             </a>
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#messages3" role="tab">Yet to Submit
+                            <a class="nav-link" data-bs-toggle="tab" href="#messages3" role="tab"><?= __('Yet to Submit'); ?>
                             	&nbsp;<span class="badge badge-warning"><?php $yy=count((array)$team_count_data_sb)-($sba_count+$apv_count);
 			echo $yy>0?$yy:0;?></span></a>
                         </li>
@@ -786,7 +786,7 @@ if ($total_budget_hrs > 0) {
 																	<th scope="col" class=" min-w-50px text-center">
 																		<div class="checkbox-fade fade-in-primary">
 																			<label class="checkbox checkbox-success">
-																				<input type="checkbox" aria-label="Select all" checked id="" disabled class="">
+																				<input type="checkbox" aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>" checked id="" disabled class="">
 																				<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -893,7 +893,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 	<?php if($sb['pt_status_id'] != "104"){ ?>
 	<div class="checkbox-fade fade-in-primary">
 		<label class="checkbox checkbox-success">
-			<input type="checkbox" aria-label="Select row" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>">
+			<input type="checkbox" aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>">
 			<span class="cr">
 			<i class="cr-icon icofont icofont-ui-check txt-primary"></i>
 			</span>
@@ -919,7 +919,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 												<?php if(count((array)$apv)>0){ ?>
 																	<tr>
 														<td></td>
-														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> Total </span></td>
+														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> <?= __('Total'); ?> </span></td>
 
 														<td class="text-right">
 <div class="d-flex flex-column w-100 mr-2">
@@ -969,7 +969,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 													<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary">
 															<label class="checkbox checkbox-success">
-																<input type="checkbox" aria-label="Select all" id="select_all" class="itemRow" onclick="tocheckallboxes()">
+																<input type="checkbox" aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>" id="select_all" class="itemRow" onclick="tocheckallboxes()">
 																<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -1076,7 +1076,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 												<td class="text-center pr-0">
 													<div class="checkbox-fade fade-in-primary">
 														<label class="checkbox checkbox-success">
-															<input type="checkbox" aria-label="Select row" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>">
+															<input type="checkbox" aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>">
 															<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -1104,7 +1104,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 												<?php if(count((array)$sba)>0){ ?>
 													<tr>
 														<td></td>
-														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> Total </span></td>
+														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> <?= __('Total'); ?> </span></td>
 
 														<td class="text-right">
 <div class="d-flex flex-column w-100 mr-2">
@@ -1246,7 +1246,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 													<span class="text-muted font-weight-500"><?php echo $sb['billable_hrs']; ?></span>
 												</td>
 												<td class="text-center">
-													<span class="form-label label label-lg label-warning"><?php echo "Yet to Submit"; ?></span>
+													<span class="form-label label label-lg label-warning"><?php echo __("Yet to Submit"); ?></span>
 												</td>
 												<td class=" pr-0">
 													<button class="btn btn-success font-size-sm float-right" onclick="notifyuser(<?php echo $sb['user_id']; ?>)"><?= __("Notify") ?></button>
@@ -1278,31 +1278,31 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 			<div class="col-lg-4 card social-card">
     <div class="card-body text-center">
         <h2 class="text-facebook m-b-20">
-		<i class="fa fa-group text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Vendors</span>
+		<i class="fa fa-group text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><?= __('Vendors'); ?></span>
 	</h2>
         <h3 class="text-facebook f-w-700"><?php echo count((array)$vendors); ?></h3>
-        <p class="m-b-0 m-t-15">Vendors</p>
+        <p class="m-b-0 m-t-15"><?= __('Vendors'); ?></p>
     </div>
 </div>
 <div class="col-lg-4 card social-card">
     <div class="card-body text-center">
         <h2 class="text-facebook m-b-20">
-		<i class="fa fa-mortar-board text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Resources</span>
+		<i class="fa fa-mortar-board text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><?= __('Resources'); ?></span>
 	</h2>
 <?php $total_apv_p = (!empty($team_count_data['team']) && $team_count_data['team'] > 0) ? number_format(((count((array)$employees) / $team_count_data['team']) * 100), 2) : '0.00'; ?>
         <h3 class="text-facebook f-w-700"><?php echo $team_count_data['team']; ?></h3>
 
-        <p class="m-b-0 m-t-15">Resources</p>
+        <p class="m-b-0 m-t-15"><?= __('Resources'); ?></p>
     </div>
 </div>
 <div class="col-lg-4 card social-card">
     <div class="card-body text-center">
         <h2 class="text-facebook m-b-20">
-		<i class="fa fa-bed text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Leaves</span>
+		<i class="fa fa-bed text-c-green f-30" aria-hidden="true"></i><span style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><?= __('Leaves'); ?></span>
 	</h2>
         <h3 class="text-facebook f-w-700"><?php echo $totalleaveallowvrc."/".$totalleaveadaysemployee; ?></h3>
 
-        <p class="m-b-0 m-t-15">Leaves</p>
+        <p class="m-b-0 m-t-15"><?= __('Leaves'); ?></p>
     </div>
 </div>
 

@@ -53,12 +53,12 @@ $designation_list = $empgoalsresult['designation_list'];
          <div class="row">
              <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                  <div class="card-header">
-                     <h5>Organization Goals</h5>
+                     <h5><?= __('Organization Goals'); ?></h5>
                  </div>
                  <div class="card-body">
                      <div class="accordion-block color-accordion-block">
                          <div class="color-accordion" id="color-accordion">
-                             <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2 ">Locations <span class="pcoded-badge label label-warning float-right"><?php echo count((array)$location_list); ?></span></a>
+                             <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2 "><?= __('Locations'); ?> <span class="pcoded-badge label label-warning float-right"><?php echo count((array)$location_list); ?></span></a>
 
                              <div class="accordion-desc">
                                  <div class="row dt-responsive table-responsive">
@@ -67,8 +67,8 @@ $designation_list = $empgoalsresult['designation_list'];
                                              <tr>
                                                  <th scope="col" style="width: 3%;"></th>
                                                  <th scope="col" style="width: 7%;">#</th>
-                                                 <th scope="col" style="width: 60%;">Location Name</th>
-                                                 <th scope="col" style="width: 30%;">Employee Count</th>
+                                                 <th scope="col" style="width: 60%;"><?= __('Location Name'); ?></th>
+                                                 <th scope="col" style="width: 30%;"><?= __('Employee Count'); ?></th>
                                              </tr>
                                          </thead>
                                          <?php $k=1; foreach($location_list as  $location_lists){ $empdetails = $employees_loc[$location_lists['id']]; ?>
@@ -145,10 +145,10 @@ $designation_list = $empgoalsresult['designation_list'];
                                                  <table class="mb-3" style="width: 100%">
                                                      <tr>
                                                          <th scope="col" style="width: 3%;"></th>
-                                                         <th scope="col" class="text-center" style="width: 7%;">SL.NO</th>
-                                                         <th scope="col" class="text-center" style="width: 30%;">Employee Name</th>
-                                                         <th scope="col" class="text-center" style="width: 30%;">Emp Code</th>
-                                                         <th scope="col" class="text-center" style="width: 30%;">Action</th>
+                                                         <th scope="col" class="text-center" style="width: 7%;"><?= __('SL.NO'); ?></th>
+                                                         <th scope="col" class="text-center" style="width: 30%;"><?= __('Employee Name'); ?></th>
+                                                         <th scope="col" class="text-center" style="width: 30%;"><?= __('Emp Code'); ?></th>
+                                                         <th scope="col" class="text-center" style="width: 30%;"><?= __('Action'); ?></th>
                                                      </tr>
                                                      <?php $l=1; foreach($empdetails as $empdetail){ ?>
                                                          <tr>
@@ -156,7 +156,7 @@ $designation_list = $empgoalsresult['designation_list'];
                                                              <td class="text-center"><?php echo $l; ?></td>
                                                              <td class="text-center"><?php echo $empdetail['display_name']; ?></td>
                                                              <td class="text-center"><?php echo $empdetail['emp_code']; ?></td>
-                                                             <td class="text-center"><span class="pcoded-badge label label-primary cursor-pointer" onclick="viewemployeeGoals('<?php echo $empdetail['id']; ?>','<?php echo $appraisal_id; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">View Goals</span></td>
+                                                             <td class="text-center"><span class="pcoded-badge label label-primary cursor-pointer" onclick="viewemployeeGoals('<?php echo $empdetail['id']; ?>','<?php echo $appraisal_id; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('View Goals'); ?></span></td>
                                                          </tr>
                                                          <?php  $l++;
 } ?>
@@ -170,7 +170,7 @@ $designation_list = $empgoalsresult['designation_list'];
                                      </div>
                                  </div>
 
-                                 <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2">Designations <span class="pcoded-badge label label-warning float-right"><?php echo count((array)$designation_list); ?></span></a>
+                                 <a class="accordion-msg b-none waves-effect waves-light f-16 f-w-600 bg-gray mb-2"><?= __('Designations'); ?> <span class="pcoded-badge label label-warning float-right"><?php echo count((array)$designation_list); ?></span></a>
                                  <div class="accordion-desc">
                                          <div class="row dt-responsive table-responsive">
                                      <table class="table table-separate table-head-custom table-checkable data-table" id="kt_datatable1_3">
@@ -178,8 +178,8 @@ $designation_list = $empgoalsresult['designation_list'];
                                              <tr>
                                                  <th scope="col" style="width: 3%;"></th>
                                                  <th scope="col" style="width: 7%;">#</th>
-                                                 <th scope="col" style="width: 60%;">Designation Name</th>
-                                                 <th scope="col" style="width: 30%;">Employee Count</th>
+                                                 <th scope="col" style="width: 60%;"><?= __('Designation Name'); ?></th>
+                                                 <th scope="col" style="width: 30%;"><?= __('Employee Count'); ?></th>
                                              </tr>
                                          </thead>
                                          <?php $k=1; foreach($designation_list as  $designation_lists){ $empdetails = $employees_job[$designation_lists['id']]; ?>

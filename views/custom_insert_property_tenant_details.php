@@ -173,7 +173,7 @@ foreach($property_owners as $coa) {
 			//console.log("property_area - "+property_area+" - per_sq_ft_rate - "+per_sq_ft_rate+" - per_sq_ft_discount - "+per_sq_ft_discount+" - persqrate - "+persqrate);
 			//var manually_rent = $("#manually_rent_id_"+id).is(':checked')
 			if(parseFloat(per_sq_ft_discount) > parseFloat(per_sq_ft_rate)){
-	           swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Discount cannot be more than "+per_sq_ft_rate+", Please Check", "error");
+	           swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Discount cannot be more than').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+per_sq_ft_rate+<?php echo json_encode(__(', Please Check'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
 	           $("#per_sq_ft_discount_"+id).val(per_sq_ft_rate);
 	           per_sq_ft_discount = per_sq_ft_rate;
 	        }
@@ -837,7 +837,7 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 								<span class="d-block error-message text-danger"></span>
 								<select name="rent_bill_to_be_raise_type" class="form-control form-select js-example-basic-single requried_field" >
 									<?php foreach($rentbilltoberaise as $rbr) {  ?>
-										<option value="<?php echo $rbr['genc_detail_code']; ?>" <?php echo $property_tenant_details['rent_bill_to_be_raise_type'] ==$rbr['genc_detail_code']?"selected":""; ?>><?php echo $rbr['genc_detail_name'];?></option>
+										<option value="<?php echo $rbr['genc_detail_code']; ?>" <?php echo $property_tenant_details['rent_bill_to_be_raise_type'] ==$rbr['genc_detail_code']?"selected":""; ?>><?php echo __($rbr['genc_detail_name']);?></option>
 									<?php } ?>
 								</select>
 							</div>
@@ -912,7 +912,7 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 							<div class="radio radio-inline">
                               <label class="form-label">
                                 <input type="radio" name="bill_to_be_raised" value="<?php echo $rbr['genc_detail_code'];?>" <?php echo $property_tenant_details['bill_to_be_raised'] == $rbr['genc_detail_code'] || ($rbr['bill_to_be_raised'] =="" && $rbr['genc_detail_code'] == 'M')?"checked":""; ?> >
-                                <i class="helper"></i><?php echo $rbr['genc_detail_name'];?>
+                                <i class="helper"></i><?php echo __($rbr['genc_detail_name']);?>
                               </label>
                             </div>
 			            <?php } ?>

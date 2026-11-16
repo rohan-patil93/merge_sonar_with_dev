@@ -65,8 +65,8 @@ $reporting_manager = $details['reporting_manager'];
     }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Asset Requests</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Asset Requests'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="card m-r-50 m-l-50">
@@ -75,9 +75,9 @@ $reporting_manager = $details['reporting_manager'];
             <input type="hidden" name="approval_user_id" id="approval_user_id" value="<?php echo $reporting_manager['reports_to'] ; ?>">
             <div class="row">
                 <div class="form-group col-lg-6 select_emp w-full" >
-                    <span>Asset Category <span class="requried">*</span></span>
+                    <span><?= __('Asset Category'); ?> <span class="requried">*</span></span>
                     <span class="d-block error-message text-danger"></span>
-                    <select aria-label="Category" class="form-select js-example-basic-single requried_field" name="category_id" id="category_id" onchange="selectAssetCategory()">
+                    <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single requried_field" name="category_id" id="category_id" onchange="selectAssetCategory()">
                             <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach ($assetcategory as $ac){ ?>
                         <option  value="<?php echo $ac['id']; ?>" <?php echo $request['category_id']==$ac['id']?"selected":"";?>><?php echo ucwords($ac['category_description']); ?></option>
@@ -85,7 +85,7 @@ $reporting_manager = $details['reporting_manager'];
                     </select>
                 </div>
                 <div class="form-group col-lg-6 " >
-                    <span>Attributes </span>
+                    <span><?= __('Attributes'); ?> </span>
                     <div id="listattributes">
                         <?php
                         $explodeattribute = explode(",",$request['attribute']);
@@ -94,7 +94,7 @@ $reporting_manager = $details['reporting_manager'];
                         ?>
                             <div class="checkbox-fade fade-in-primary">
                                   <label class="form-label">
-                                    <input aria-label="Attribute[]" type="checkbox" name="attribute[]" <?php echo $checked; ?> value="<?php echo $asset_attributes['id']; ?>" >
+                                    <input aria-label="<?= htmlspecialchars(__('Attribute'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox" name="attribute[]" <?php echo $checked; ?> value="<?php echo $asset_attributes['id']; ?>" >
                                     <span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
@@ -105,26 +105,26 @@ $reporting_manager = $details['reporting_manager'];
                     </div>
                 </div>
                 <div class="form-group col-lg-6">
-                    <span>Quantity <span class="text-danger">*</span> </span>
+                    <span><?= __('Quantity'); ?> <span class="text-danger">*</span> </span>
                     <span class="d-block error-message text-danger"></span>
-                    <input aria-label="Quantity" type="number" class="form-control requried_field" id="quantity" name="quantity" value="<?php echo $request['quantity']; ?>">
+                    <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control requried_field" id="quantity" name="quantity" value="<?php echo $request['quantity']; ?>">
                 </div>
                 <div class="form-group col-lg-6">
-                    <span>Description</span>
-                    <textarea aria-label="Description"  class="form-control" id="description" rows="4" cols="50" name="description" ><?php echo $request['description']; ?></textarea>
+                    <span><?= __('Description'); ?></span>
+                    <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" id="description" rows="4" cols="50" name="description" ><?php echo $request['description']; ?></textarea>
                 </div>
                 <div class="col-lg-6">
-                    <span>How Do You Want The Asset To be Delivered? <span class="requried">*</span></span>
+                    <span><?= __('How Do You Want The Asset To be Delivered?'); ?> <span class="requried">*</span></span>
                     <div class="form-radio">
                         <div class="radio radio-inline">
                               <label class="form-label">
-                                <input aria-label="Delivery Type" type="radio" name="delivery_type" value="S" style="display:none;" <?php echo ($request['delivery_type']=="S" || $request['delivery_type']=="")?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
+                                <input aria-label="<?= htmlspecialchars(__('Delivery Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="delivery_type" value="S" style="display:none;" <?php echo ($request['delivery_type']=="S" || $request['delivery_type']=="")?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
                                 <i class="helper"></i><?= __('Self Pickup') ?>
                               </label>
                         </div>
                         <div class="radio radio-inline">
                               <label class="form-label">
-                                <input aria-label="Delivery Type" type="radio" name="delivery_type" value="D" style="display:none" <?php echo $request['delivery_type']=="D"?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
+                                <input aria-label="<?= htmlspecialchars(__('Delivery Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="delivery_type" value="D" style="display:none" <?php echo $request['delivery_type']=="D"?"checked":"";?> onclick="getDeliveryType()" onkeydown="">
                                 <i class="helper"></i><?= __('Deliver Through Logistics Partner') ?>
                               </label>
                         </div>
@@ -132,23 +132,23 @@ $reporting_manager = $details['reporting_manager'];
                 </div>
                 <div class="col-lg-6" >
                     <div class=" form-group " id="popup_asset_delivery_address"  <?php echo $request['delivery_type']!="D"?"style='display:none'":"";?>>
-                        <span>Delivered Address </span>
-                        <textarea aria-label="Delivery Address"  class="form-control" id="delivery_address" rows="4" cols="50" name="delivery_address" ><?php echo $request['delivery_address']; ?></textarea>
+                        <span><?= __('Delivered Address'); ?> </span>
+                        <textarea aria-label="<?= htmlspecialchars(__('Delivery Address'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" id="delivery_address" rows="4" cols="50" name="delivery_address" ><?php echo $request['delivery_address']; ?></textarea>
                     </div>
                 </div>
                 <div class="form-group col-lg-4">
-                    <span>Start date <span class="text-danger">*</span></span>
+                    <span><?= __('Start date'); ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
-                    <input aria-label="Asset Required Start Date" type="text" class="form-control datepicker requried_field" id="asset_required_start_date"  name="asset_required_start_date" value="<?php echo fromDate($request['asset_required_start_date']); ?>">
+                    <input aria-label="<?= htmlspecialchars(__('Asset Required Start Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker requried_field" id="asset_required_start_date"  name="asset_required_start_date" value="<?php echo fromDate($request['asset_required_start_date']); ?>">
                 </div>
                 <div class="form-group col-lg-4">
-                    <span>End date</span>
-                    <input aria-label="Asset Required End Date" type="text" class="form-control datepicker" id="asset_required_end_date" name="asset_required_end_date" value="<?php echo $request['asset_required_end_date']!=""?fromDate($request['asset_required_end_date']):""; ?>">
+                    <span><?= __('End date'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Asset Required End Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" id="asset_required_end_date" name="asset_required_end_date" value="<?php echo $request['asset_required_end_date']!=""?fromDate($request['asset_required_end_date']):""; ?>">
                 </div>
                 <div class="form-group col-lg-4 w-full">
-                    <span>Location <span class="text-danger">*</span></span>
+                    <span><?= __('Location'); ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
-                    <select aria-label="Location"  class="form-select js-example-basic-single requried_field" name="location_id">
+                    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single requried_field" name="location_id">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($locations as $location) { ?>
                             <option location value="<?php echo $location['id']; ?>"  <?php echo $request['location_id']==$location['id']?"selected":"";?>><?php echo ucwords($location['location_name']); ?></option>

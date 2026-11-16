@@ -56,15 +56,15 @@ $emp_ptax_list[] = array('period'=>$period ,'employees_count'=>$emp_count,'total
     <div class="col-md-4">
         <form method="post" action="">
             <div class="form-group row">
-                <label for="example-date-input-from" class="col-2 col-form-label">From</label>
+                <label for="example-date-input-from" class="col-2 col-form-label"><?= __('From'); ?></label>
                 <div class="col-10">
-                    <input aria-label="Pay Date From" class="form-control" type="date" name="pay_date_from" value="<?php echo $pay_year."-".$pay_month."-01";?>"  id="example-date-input-from" />
+                    <input aria-label="<?= htmlspecialchars(__('Pay Date From'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="pay_date_from" value="<?php echo $pay_year."-".$pay_month."-01";?>"  id="example-date-input-from" />
                 </div>
             </div>
             <div class="form-group row">
-                <label for="example-date-input-to" class="col-2 col-form-label">To</label>
+                <label for="example-date-input-to" class="col-2 col-form-label"><?= __('To'); ?></label>
                 <div class="col-10">
-                    <input aria-label="Pay Date To" class="form-control" type="date" name="pay_date_to" value="<?php echo $pay_year."-".$pay_month."-01";?>"  id="example-date-input-to" />
+                    <input aria-label="<?= htmlspecialchars(__('Pay Date To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="pay_date_to" value="<?php echo $pay_year."-".$pay_month."-01";?>"  id="example-date-input-to" />
                 </div>
             </div>
 
@@ -95,7 +95,7 @@ $emp_ptax_list[] = array('period'=>$period ,'employees_count'=>$emp_count,'total
 <div class="card card-custom">
     <div class="card-header flex-wrap border-0 pt-4 pb-0 pl-5 mx-auto">
         <div class="card-title">
-            <h3 class="card-label text-center">PT Annual Return Statement
+            <h3 class="card-label text-center"><?= __('PT Annual Return Statement'); ?>
 
             </h3>
         </div>
@@ -108,9 +108,9 @@ $emp_ptax_list[] = array('period'=>$period ,'employees_count'=>$emp_count,'total
                     <table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" aria-describedby="kt_datatable_info" style="width: 1236px;">
                         <thead>
                             <tr role="row" style="background-color: #f7f7f7;">
-                                <th scope="col">Period</th>
-                                <th scope="col">No. of Employee's</th>
-                                <th scope="col">PT Amount</th>
+                                <th scope="col"><?= __('Period'); ?></th>
+                                <th scope="col"><?= __('No. of Employee\'s'); ?></th>
+                                <th scope="col"><?= __('PT Amount'); ?></th>
                             </tr>
                         </thead>
                         <tbody>

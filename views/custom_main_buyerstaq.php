@@ -22,7 +22,7 @@
                                         <div class="card card-custom gutter-b">
                                             <div class="card-header">
                                                 <div class="card-title">
-                                                    <h3 class="card-label">Month Wise Sales</h3>
+                                                    <h3 class="card-label"><?= __('Month Wise Sales'); ?></h3>
 
                                                 </div>
                                             </div>
@@ -50,7 +50,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                                 <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">790</div>
-                                                                <a href="#" class="text-inverse-success font-weight-bold font-size-lg mt-1">Total Purchase</a>
+                                                                <a href="#" class="text-inverse-success font-weight-bold font-size-lg mt-1"><?= __('Total Purchase'); ?></a>
                                                             </div>
                                                         </div>
 
@@ -70,7 +70,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                                 <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">700 / 90</div>
-                                                                <a href="#" class="text-inverse-success font-weight-bold font-size-lg mt-1">QC OK/Damages</a>
+                                                                <a href="#" class="text-inverse-success font-weight-bold font-size-lg mt-1"><?= __('QC OK/Damages'); ?></a>
                                                             </div>
 
                                                         </div>
@@ -92,7 +92,7 @@
                                                                     <!--end::Svg Icon-->
                                                                 </span>
                                                                 <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">500/200</div>
-                                                                <a href="#" class="text-inverse-success font-weight-bold font-size-lg mt-1"> Sales /Stock  </a>
+                                                                <a href="#" class="text-inverse-success font-weight-bold font-size-lg mt-1"> <?= __('Sales /Stock'); ?>  </a>
                                                             </div>
                                                         </div>
 
@@ -105,19 +105,19 @@
                                             <!--begin::Header-->
                                             <div class="card-header border-0 pt-5">
                                                 <h3 class="card-title align-items-start flex-column">
-                                                    <span class="card-label font-weight-bolder text-dark">Wrok Progress</span>
-                                                    <span class="text-muted mt-3 font-weight-bold font-size-sm">Staff wise Progress</span>
+                                                    <span class="card-label font-weight-bolder text-dark"><?= __('Wrok Progress'); ?></span>
+                                                    <span class="text-muted mt-3 font-weight-bold font-size-sm"><?= __('Staff wise Progress'); ?></span>
                                                 </h3>
                                                 <div class="card-toolbar">
                                                     <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                                                         <li class="nav-item">
-                                                            <a class="nav-link py-2 px-4 " data-toggle="tab" href="#kt_tab_pane_1_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Month</a>
+                                                            <a class="nav-link py-2 px-4 " data-toggle="tab" href="#kt_tab_pane_1_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Month'); ?></a>
                                                         </li>
                                                         <li class="nav-item">
-                                                            <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Week</a>
+                                                            <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Week'); ?></a>
                                                         </li>
                                                         <li class="nav-item">
-                                                            <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Day</a>
+                                                            <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Day'); ?></a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -149,14 +149,14 @@
                                                                             </div>
                                                                         </th>
                                                                         <td class="py-6 pl-0">
-                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">Ravi</a>
-                                                                            <span class="text-muted font-weight-bold d-block">Best Customers</span>
+                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Ravi'); ?></a>
+                                                                            <span class="text-muted font-weight-bold d-block"><?= __('Best Customers'); ?></span>
                                                                         </td>
                                                                         <td>
                                                                             <div class="d-flex flex-column w-100 mr-2">
                                                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                                                     <span class="text-muted mr-2 font-size-sm font-weight-bold">71%</span>
-                                                                                    <span class="text-muted font-size-sm font-weight-bold">Progress</span>
+                                                                                    <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
                                                                                     <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -174,14 +174,14 @@
                                                                             </div>
                                                                         </th>
                                                                         <td class="py-6 pl-0">
-                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">Raju</a>
-                                                                            <span class="text-muted font-weight-bold d-block">Best Customers</span>
+                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Raju'); ?></a>
+                                                                            <span class="text-muted font-weight-bold d-block"><?= __('Best Customers'); ?></span>
                                                                         </td>
                                                                         <td>
                                                                             <div class="d-flex flex-column w-100 mr-2">
                                                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                                                     <span class="text-muted mr-2 font-size-sm font-weight-bold">71%</span>
-                                                                                    <span class="text-muted font-size-sm font-weight-bold">Progress</span>
+                                                                                    <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
                                                                                     <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -199,14 +199,14 @@
                                                                             </div>
                                                                         </th>
                                                                         <td class="py-6 pl-0">
-                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">Shankar</a>
-                                                                            <span class="text-muted font-weight-bold d-block">Best Customers</span>
+                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Shankar'); ?></a>
+                                                                            <span class="text-muted font-weight-bold d-block"><?= __('Best Customers'); ?></span>
                                                                         </td>
                                                                         <td>
                                                                             <div class="d-flex flex-column w-100 mr-2">
                                                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                                                     <span class="text-muted mr-2 font-size-sm font-weight-bold">71%</span>
-                                                                                    <span class="text-muted font-size-sm font-weight-bold">Progress</span>
+                                                                                    <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
                                                                                     <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -224,14 +224,14 @@
                                                                             </div>
                                                                         </th>
                                                                         <td class="py-6 pl-0">
-                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">Naresh</a>
-                                                                            <span class="text-muted font-weight-bold d-block">Best Customers</span>
+                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Naresh'); ?></a>
+                                                                            <span class="text-muted font-weight-bold d-block"><?= __('Best Customers'); ?></span>
                                                                         </td>
                                                                         <td>
                                                                             <div class="d-flex flex-column w-100 mr-2">
                                                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                                                     <span class="text-muted mr-2 font-size-sm font-weight-bold">71%</span>
-                                                                                    <span class="text-muted font-size-sm font-weight-bold">Progress</span>
+                                                                                    <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
                                                                                     <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -249,14 +249,14 @@
                                                                             </div>
                                                                         </th>
                                                                         <td class="py-6 pl-0">
-                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">Rani</a>
-                                                                            <span class="text-muted font-weight-bold d-block">Best Customers</span>
+                                                                            <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"><?= __('Rani'); ?></a>
+                                                                            <span class="text-muted font-weight-bold d-block"><?= __('Best Customers'); ?></span>
                                                                         </td>
                                                                         <td>
                                                                             <div class="d-flex flex-column w-100 mr-2">
                                                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                                                     <span class="text-muted mr-2 font-size-sm font-weight-bold">71%</span>
-                                                                                    <span class="text-muted font-size-sm font-weight-bold">Progress</span>
+                                                                                    <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
                                                                                 </div>
                                                                                 <div class="progress progress-xs w-100">
                                                                                     <div class="progress-bar bg-danger" role="progressbar" style="width: 71%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -284,7 +284,7 @@
                     <div class="card card-custom gutter-b card-stretch">
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
-                            <h3 class="card-title font-weight-bolder">Frist Level QC</h3>
+                            <h3 class="card-title font-weight-bolder"><?= __('Frist Level QC'); ?></h3>
 
                         <!--end::Header-->
                         <!--begin::Body-->
@@ -294,9 +294,9 @@
                                 <div id="kt_dashboard_mixed_widget_14_chart" style="height: 200px"></div>
                             </div>
                             <div class="pt-5">
-                                <p class="text-center font-weight-normal font-size-lg pb-7">Notes: Total Recived : 500
-                                <br/> Frist QC complted : 370 </p>
-                                <button type="button" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">Generate Report</button>
+                                <p class="text-center font-weight-normal font-size-lg pb-7"><?= __('Notes: Total Recived : 500'); ?>
+                                <br/> <?= __('Frist QC complted : 370'); ?> </p>
+                                <button type="button" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3"><?= __('Generate Report'); ?></button>
                             </div>
                         </div>
                         <!--end::Body-->
@@ -311,7 +311,7 @@
                     <div class="card card-custom gutter-b card-stretch">
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
-                            <h3 class="card-title font-weight-bolder">Second Level QC</h3>
+                            <h3 class="card-title font-weight-bolder"><?= __('Second Level QC'); ?></h3>
 
                         <!--end::Header-->
                         <!--begin::Body-->
@@ -320,9 +320,9 @@
                                 <div id="kt_dashboard_mixed_widget_15_chart" style="height: 200px"></div>
                             </div>
                             <div class="pt-5">
-                                <p class="text-center font-weight-normal font-size-lg pb-7">Notes: Total Allocated : 370
-                                <br/> Second QC complted : 350 </p>
-                                <button type="button" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">Generate Report</button>
+                                <p class="text-center font-weight-normal font-size-lg pb-7"><?= __('Notes: Total Allocated : 370'); ?>
+                                <br/> <?= __('Second QC complted : 350'); ?> </p>
+                                <button type="button" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3"><?= __('Generate Report'); ?></button>
                             </div>
                         </div>
                         <!--end::Body-->
@@ -333,7 +333,7 @@
                                                     <div class="card card-custom gutter-b card-stretch">
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
-                            <h3 class="card-title font-weight-bolder">Sales</h3>
+                            <h3 class="card-title font-weight-bolder"><?= __('Sales'); ?></h3>
 
                         <!--end::Header-->
                         <!--begin::Body-->
@@ -342,9 +342,9 @@
                                 <div id="kt_dashboard_mixed_widget_16_chart" style="height: 200px"></div>
                             </div>
                             <div class="pt-5">
-                                <p class="text-center font-weight-normal font-size-lg pb-7">Notes: Ready for Sales : 320
-                                <br/> Sold Products : 160 </p>
-                                <button type="button" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">Generate Report</button>
+                                <p class="text-center font-weight-normal font-size-lg pb-7"><?= __('Notes: Ready for Sales : 320'); ?>
+                                <br/> <?= __('Sold Products : 160'); ?> </p>
+                                <button type="button" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3"><?= __('Generate Report'); ?></button>
                             </div>
                         </div>
                         <!--end::Body-->
@@ -355,7 +355,7 @@
                                                     <div class="card card-custom gutter-b card-stretch">
                         <!--begin::Header-->
                         <div class="card-header border-0 pt-5">
-                            <h3 class="card-title font-weight-bolder">Damage</h3>
+                            <h3 class="card-title font-weight-bolder"><?= __('Damage'); ?></h3>
 
                         <!--end::Header-->
                         <!--begin::Body-->
@@ -364,9 +364,9 @@
                                 <div id="kt_dashboard_mixed_widget_17_chart" style="height: 200px"></div>
                             </div>
                             <div class="pt-5">
-                                <p class="text-center font-weight-normal font-size-lg pb-7">Notes: Total Recived : 500
-                                <br/> Damage Products : 30 </p>
-                                <button type="button" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">Generate Report</button>
+                                <p class="text-center font-weight-normal font-size-lg pb-7"><?= __('Notes: Total Recived : 500'); ?>
+                                <br/> <?= __('Damage Products : 30'); ?> </p>
+                                <button type="button" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3"><?= __('Generate Report'); ?></button>
                             </div>
                         </div>
                         <!--end::Body-->

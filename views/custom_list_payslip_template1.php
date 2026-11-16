@@ -32,15 +32,15 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                 <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-1 mr-5">Payslip 1</h5>
+                    <h5 class="text-dark font-weight-bold my-1 mr-5"><?= __('Payslip 1'); ?></h5>
                     <!--end::Page Title-->
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                         <li class="breadcrumb-item">
-                            <a href="" class="text-muted">Pages</a>
+                            <a href="" class="text-muted"><?= __('Pages'); ?></a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="" class="text-muted">Payslip 1</a>
+                            <a href="" class="text-muted"><?= __('Payslip 1'); ?></a>
                         </li>
                     </ul>
                     <!--end::Breadcrumb-->
@@ -51,10 +51,10 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Actions-->
-                <button type="button" class="btn btn-light-primary font-weight-bolder btn-sm">Actions</button>
+                <button type="button" class="btn btn-light-primary font-weight-bolder btn-sm"><?= __('Actions'); ?></button>
                 <!--end::Actions-->
                 <!--begin::Dropdown-->
-                <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                     <a href="#" class="btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                         <span class="svg-icon svg-icon-success svg-icon-2x">
 
@@ -72,49 +72,49 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                         <!--begin::Navigation-->
                         <ul class="navi navi-hover">
                             <li class="navi-header font-weight-bold py-4">
-                                <span class="font-size-lg">Choose Label:</span>
-                                <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                <span class="font-size-lg"><?= __('Choose Label'); ?>:</span>
+                                <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                             </li>
                             <li class="navi-separator mb-3 opacity-70"></li>
                             <li class="navi-item">
                                 <a href="#" class="navi-link">
                                     <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-success">Customer</span>
+                                        <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
                                     </span>
                                 </a>
                             </li>
                             <li class="navi-item">
                                 <a href="#" class="navi-link">
                                     <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                        <span class="label label-xl label-inline label-light-danger"><?= __('Partner'); ?></span>
                                     </span>
                                 </a>
                             </li>
                             <li class="navi-item">
                                 <a href="#" class="navi-link">
                                     <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                        <span class="label label-xl label-inline label-light-warning"><?= __('Suplier'); ?></span>
                                     </span>
                                 </a>
                             </li>
                             <li class="navi-item">
                                 <a href="#" class="navi-link">
                                     <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-primary">Member</span>
+                                        <span class="label label-xl label-inline label-light-primary"><?= __('Member'); ?></span>
                                     </span>
                                 </a>
                             </li>
                             <li class="navi-item">
                                 <a href="#" class="navi-link">
                                     <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                        <span class="label label-xl label-inline label-light-dark"><?= __('Staff'); ?></span>
                                     </span>
                                 </a>
                             </li>
                             <li class="navi-separator mt-3 opacity-70"></li>
                             <li class="navi-footer py-4">
                                 <a class="btn btn-clean font-weight-bold btn-sm" href="#">
-                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                                    <i class="ki ki-plus icon-sm"></i><?= __('Add new'); ?></a>
                                 </li>
                             </ul>
                             <!--end::Navigation-->
@@ -138,7 +138,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                         <div class="row justify-content-center bgi-size-cover bgi-no-repeat py-8 px-8 py-md-27 px-md-0" style="background-image: url(assets/media/bg/bg-6.jpg);">
                             <div class="col-md-10">
                                 <div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
-                                    <h1 class="display-4 text-white font-weight-boldest mb-10">PAYSLIP FOR <?php echo $payslip_data_list['month']." ".$payslip_data_list['year'];?></h1>
+                                    <h1 class="display-4 text-white font-weight-boldest mb-10"><?= __('PAYSLIP FOR'); ?> <?php echo $payslip_data_list['month']." ".$payslip_data_list['year'];?></h1>
                                     <div class="d-flex flex-column align-items-md-end px-0">
                                         <!--begin::Logo-->
                                         <a href="#" class="mb-5">
@@ -157,25 +157,25 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                 <div class="border-bottom w-100 opacity-20"></div>
                                 <div class="d-flex justify-content-between text-white pt-6">
                                     <div class="d-flex flex-column flex-root">
-                                        <span class="font-weight-bolder mb-2">STD DAYS</span>
+                                        <span class="font-weight-bolder mb-2"><?= __('STD DAYS'); ?></span>
                                         <span class="opacity-70"><?php echo $payslip_data_list['std']; ?>
                                     </div>
                                     <div class="d-flex flex-column flex-root">
-                                        <span class="font-weight-bolder mb-2">WORKED DAYS</span>
+                                        <span class="font-weight-bolder mb-2"><?= __('WORKED DAYS'); ?></span>
                                         <span class="opacity-70"><?php echo $payslip_data_list['work']; ?>
                                     </div>
                                     <div class="d-flex flex-column flex-root">
-                                        <span class="font-weight-bolder mb-2">LOP DAYS</span>
+                                        <span class="font-weight-bolder mb-2"><?= __('LOP DAYS'); ?></span>
                                         <span class="opacity-70"><?php echo $payslip_data_list['lop']; ?></span>
                                     </div>
 
                                     <div class="d-flex flex-column flex-root">
-                                        <span class="font-weight-bolder mb-2">DATE OF JOINING</span>
+                                        <span class="font-weight-bolder mb-2"><?= __('DATE OF JOINING'); ?></span>
                                         <span class="opacity-70"><?php
                                         echo date('F d, Y',strtotime($payslip_data_list['doj'])); ?>
                                     </div>
                                     <div class="d-flex flex-column flex-root">
-                                        <span class="font-weight-bolder mb-2">EMPLOYEE</span>
+                                        <span class="font-weight-bolder mb-2"><?= __('EMPLOYEE'); ?></span>
                                         <span><?php echo $payslip_data_list['emp_number']; ?> - <?php echo $payslip_data_list['emp_name']; ?></span>
                                         <span class="opacity-70"><?php echo $payslip_data_list['designation']; ?></span>
                                     </div>
@@ -191,10 +191,10 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase ">Earnings</th>
-                                                <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase">Amount</th>
-                                                <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase">Deductions</th>
-                                                <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase">Amount</th>
+                                                <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase "><?= __('Earnings'); ?></th>
+                                                <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase"><?= __('Amount'); ?></th>
+                                                <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase"><?= __('Deductions'); ?></th>
+                                                <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase"><?= __('Amount'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -223,33 +223,33 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                             <?php } ?>
 
                                             <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                                <td class="pl-0 pt-5">GROSS EARNINGS</td>
+                                                <td class="pl-0 pt-5"><?= __('GROSS EARNINGS'); ?></td>
                                                 <td class="text-right pt-5 text-primary"><?php echo $payslip_data_list['actual_amount'];?></td>
-                                                <td class="pl-0 pt-5">TOTAL DEDUCTIONS</td>
+                                                <td class="pl-0 pt-5"><?= __('TOTAL DEDUCTIONS'); ?></td>
                                                 <td class="text-right pt-5 text-danger"><?php echo $payslip_data_list['dedaction_amount'];?></td>
                                             </tr>
 
                                             <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                                <td class="pl-0 pt-7 text-muted">NET PAY</td>
+                                                <td class="pl-0 pt-7 text-muted"><?= __('NET PAY'); ?></td>
                                                 <td class="text-right pt-5"></td>
                                                 <td class="pl-0 pt-5"></td>
-                                                <td class="text-right pt-5 text-muted">AMOUNT</td>
+                                                <td class="text-right pt-5 text-muted"><?= __('AMOUNT'); ?></td>
                                             </tr>
                                             <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                                <td class="pl-0 pt-5">GROSS EARNINGS</td>
+                                                <td class="pl-0 pt-5"><?= __('GROSS EARNINGS'); ?></td>
                                                 <td class="text-right pt-5 text-primary"></td>
                                                 <td class="pl-0 pt-5"></td>
                                                 <td class="text-right pt-5 text-primary"><?php echo $payslip_data_list['actual_amount'];?></td>
                                             </tr>
                                             <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                                <td class="pl-0 pt-5">TOTAL DEDUCTIONS</td>
+                                                <td class="pl-0 pt-5"><?= __('TOTAL DEDUCTIONS'); ?></td>
                                                 <td class="text-right pt-5 text-primary"></td>
                                                 <td class="pl-0 pt-5"></td>
                                                 <td class="text-right pt-5 text-danger"><?php echo $payslip_data_list['dedaction_amount'];?></td>
                                             </tr>
 
                                             <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                                <td class="pl-0 pt-5">TOTAL NET PAYABLE</td>
+                                                <td class="pl-0 pt-5"><?= __('TOTAL NET PAYABLE'); ?></td>
                                                 <td class="text-right pt-5 text-primary"></td>
                                                 <td class="pl-0 pt-5"></td>
                                                 <td class="text-right pt-5 text-primary">
@@ -264,7 +264,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     <div class="col-md-10">
                                         <div class="d-flex justify-content-between flex-column flex-md-row font-size-lg">
                                             <div class="d-flex flex-column mb-10 mb-md-0">
-                                                <div class="font-weight-bolder font-size-lg mb-3">Total Net Payable : ₹<?php echo $payslip_data_list['net'];?>
+                                                <div class="font-weight-bolder font-size-lg mb-3"><?= __('Total Net Payable : ₹'); ?><?php echo $payslip_data_list['net'];?>
                                             </div>
                                         </div>
                                     </div>
@@ -278,30 +278,30 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                         <div class="col-md-9">
                             <div class="d-flex justify-content-between flex-column flex-md-row font-size-lg">
                                 <div class="d-flex flex-column mb-10 mb-md-0">
-                                    <div class="font-weight-bolder font-size-lg mb-3">BANK TRANSFER</div>
+                                    <div class="font-weight-bolder font-size-lg mb-3"><?= __('BANK TRANSFER'); ?></div>
                                     <div class="d-flex justify-content-between mb-3">
-                                        <span class="mr-15 font-weight-bold">Account Name:</span>
+                                        <span class="mr-15 font-weight-bold"><?= __('Account Name'); ?>:</span>
                                         <span class="text-right"><?php echo $payslip_data_list['bank']; ?></span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
-                                        <span class="mr-15 font-weight-bold ">Account Number:</span>
+                                        <span class="mr-15 font-weight-bold "><?= __('Account Number'); ?>:</span>
                                         <span class="text-right"><?php echo $payslip_data_list['bank_account_no']; ?></span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
-                                        <span class="mr-15 font-weight-bold">PF A/C:</span>
+                                        <span class="mr-15 font-weight-bold"><?= __('PF A/C'); ?>:</span>
                                         <span class="text-right"><?php echo $payslip_data_list['pf']; ?></span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
-                                        <span class="mr-15 font-weight-bold">UAN:</span>
+                                        <span class="mr-15 font-weight-bold"><?= __('UAN'); ?>:</span>
                                         <span class="text-right"><?php echo $payslip_data_list['pf_uan']; ?></span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
-                                        <span class="mr-15 font-weight-bold">PAN:</span>
+                                        <span class="mr-15 font-weight-bold"><?= __('PAN'); ?>:</span>
                                         <span class="text-right"><?php echo $payslip_data_list['pan_number']; ?></span>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column text-md-right">
-                                    <span class="font-size-lg font-weight-bolder mb-1">NET SALARY</span>
+                                    <span class="font-size-lg font-weight-bolder mb-1"><?= __('NET SALARY'); ?></span>
                                     <span class="font-size-h2 font-weight-boldest text-primary mb-1">₹<?php echo $payslip_data_list['net'];?></span>
                                                     </div>
 </div>
@@ -312,8 +312,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
 <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
     <div class="col-md-9">
         <div class="d-flex justify-content-between">
-            <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.print();">Download Payslip</button>
-            <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Payslip</button>
+            <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.print();"><?= __('Download Payslip'); ?></button>
+            <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();"><?= __('Print Payslip'); ?></button>
         </div>
     </div>
 </div>

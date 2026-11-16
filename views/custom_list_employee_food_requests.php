@@ -49,7 +49,7 @@ if(isset($_POST['datefilter'])){
                     <div class="card card-custom " id="kt_page_sticky_card">
                         <div class="card-header">
                             <div class="card-title">
-                                <h3 class="card-label">&nbsp; Employees Food And Transport Requests </h3>
+                                <h3 class="card-label">&nbsp; <?= __('Employees Food And Transport Requests'); ?> </h3>
                             </div>
 
                         </div>
@@ -86,23 +86,23 @@ if(isset($_POST['datefilter'])){
 
 
                                                 ?>
-                                                <button type="button" class="btn circle-circle-xl border-<?php echo $bgcolorlist[$colorindex]; ?> ml-4 "><div class="text-center font-size-h3"><?php echo $transport_req; ?></div> <div class="text-center font-size-h6"><?php echo "Transport";?></div></button>
+                                                <button type="button" class="btn circle-circle-xl border-<?php echo $bgcolorlist[$colorindex]; ?> ml-4 "><div class="text-center font-size-h3"><?php echo $transport_req; ?></div> <div class="text-center font-size-h6"><?php echo __("Transport");?></div></button>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                     <form method="post" action="#">
                                                         <div class="form-group row">
-                                                            <label for="example-date-input-from" class="col-3 col-form-label">From</label>
+                                                            <label for="example-date-input-from" class="col-3 col-form-label"><?= __('From'); ?></label>
                                                             <div class="col-10">
-                                                                <input aria-label="Fromdate" class="form-control" type="date" name="fromdate" value="<?php echo $current_from_date;?>" id="example-date-input-from" />
+                                                                <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="fromdate" value="<?php echo $current_from_date;?>" id="example-date-input-from" />
                                                             </div>
-                                                            <label for="example-date-input-to" class="col-3 col-form-label">To</label>
+                                                            <label for="example-date-input-to" class="col-3 col-form-label"><?= __('To'); ?></label>
                                                             <div class="col-10">
-                                                                <input aria-label="Todate" class="form-control" type="date" name="todate" value="<?php echo $current_to_date;?>" id="example-date-input-to" />
+                                                                <input aria-label="<?= htmlspecialchars(__('Todate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="todate" value="<?php echo $current_to_date;?>" id="example-date-input-to" />
                                                             </div>
                                                         </div>
 
-                                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="datefilter" value="exit">Apply</button>
+                                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="datefilter" value="exit"><?= __('Apply'); ?></button>
                                                     </form>
                                             </div>
                                         </div>
@@ -117,11 +117,11 @@ if(isset($_POST['datefilter'])){
                                         <thead>
                                             <tr>
                                                 <th scope=\"col\">#</th>
-                                                <th scope=\"col\">Location </th>
+                                                <th scope=\"col\"><?= __('Location'); ?> </th>
                                                 <?php foreach($foodoptions as $food_op){ ?>
                                                     <th scope=\"col\"> <?php echo $food_op['food_option']; ?></th>
                                                 <?php } ?>
-                                                <th scope=\"col\">Transport </th>
+                                                <th scope=\"col\"><?= __('Transport'); ?> </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -131,11 +131,11 @@ if(isset($_POST['datefilter'])){
                                                     <td> <?php echo $sno; ?> </td>
                                                     <td> <?php echo $loc['location_name']; ?> </td>
                                                     <?php foreach($foodoptions as $food_op){ $foodoptionval = $food_op['id']; $locval = $loc['id']; $emplist = json_encode(array_keys($locfooddata[$foodoptionval][$locval]),1); $decode_emplist = deocdeId(urlencode($emplist));  ?>
-                                                    <td>  <a href="index.php?option=COM_LIST_EMPLOYEES_REPORT&EID=<?php echo $decode_emplist;?>" target="_blank"> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="Number of Requests" style="vertical-align: middle;">  <?php echo count((array)$locfooddata[$foodoptionval][$locval]); ?> </span></a>  </td>
+                                                    <td>  <a href="index.php?option=COM_LIST_EMPLOYEES_REPORT&EID=<?php echo $decode_emplist;?>" target="_blank"> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?= htmlspecialchars(__('Number of Requests'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;">  <?php echo count((array)$locfooddata[$foodoptionval][$locval]); ?> </span></a>  </td>
                                                 <?php } ?>
 
                                                     $locval = $loc['id']; $emplist = json_encode(array_keys($transport[$locval]),1); $decode_emplist = deocdeId(urlencode($emplist));  ?>
-                                                    <td>  <a href="index.php?option=COM_LIST_EMPLOYEES_REPORT&EID=<?php echo $decode_emplist;?>" target="_blank"> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="Number of Requests" style="vertical-align: middle;">  <?php echo count((array)$transport[$locval]); ?> </span></a>  </td>
+                                                    <td>  <a href="index.php?option=COM_LIST_EMPLOYEES_REPORT&EID=<?php echo $decode_emplist;?>" target="_blank"> <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?= htmlspecialchars(__('Number of Requests'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;">  <?php echo count((array)$transport[$locval]); ?> </span></a>  </td>
                                             </tr>
 
                                         <?php }
@@ -152,7 +152,7 @@ if(isset($_POST['datefilter'])){
                                         <input type="hidden" id="survey_qtypes" value="<?php echo $req_types_count; ?>">
                                         <input type="hidden" id="survey_qtype_names" value="<?php echo $req_types_names; ?>">
                                         <div id="survey_overview_chart" class="d-flex justify-content-center"></div>
-                                        <h3 class="font-weight-bolder text-center"> <?php echo "Request Types"; ?></h3>
+                                        <h3 class="font-weight-bolder text-center"> <?php echo __("Request Types"); ?></h3>
 
                                     </div>
                                     </div>

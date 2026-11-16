@@ -105,7 +105,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
             <div class="alert-icon"><i class="flaticon-warning"></i></div>
             <div class="alert-text">    <?php echo isset($_SESSION['error_message'][$_GET['error']]) ? $_SESSION['error_message'][$_GET['error']] : ''; ?>  </div>
             <div class="alert-close">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span aria-hidden="true"><i class="la la-close"></i></span>
                 </button>
             </div>
@@ -124,7 +124,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
                 <div class="card-toolbar">
                     <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                         <i class="ki ki-long-arrow-back icon-xs"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -156,7 +156,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
                                                 <span class="col-xl-3 col-lg-3 col-form-label"><?= __('File Upload') ?></span>
                                                 <div class="col-lg-9 col-xl-6">
                                                     <div class="input-group">
-                                                        <input aria-label="Data" type="file" name="data" class="">
+                                                        <input aria-label="<?= htmlspecialchars(__('Data'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="data" class="">
                                                     </div>
                                                 </div>
                                             </div>

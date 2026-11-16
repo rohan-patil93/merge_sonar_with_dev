@@ -113,7 +113,7 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
          <div class="row bg-gray">
                  <p class="f-16 f-w-600"><?= __('Who Can Create') ?>
                      <span>
-                         <select aria-label="Transaction Table" class="js-example-basic-single" name="transaction_table" id="transaction_table">
+                         <select aria-label="<?= htmlspecialchars(__('Transaction Table'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="transaction_table" id="transaction_table">
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($table_list as $res){?>
                                 <option value="<?php echo $res; ?>" <?php echo $document_access_setups['transaction_table'] == $res?"selected":""; ?>><?php echo ucwords(str_replace("_"," ",($res))); ?></option>
@@ -121,7 +121,7 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
                         </select>
                      </span> ?
                      <span>
-                         <select aria-label="User Access Type" class="js-example-basic-single" onchange="whoCreateType(this.value)" name="user_access_type">
+                         <select aria-label="<?= htmlspecialchars(__('User Access Type'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" onchange="whoCreateType(this.value)" name="user_access_type">
                              <option value="0"><?= __('Select Any One') ?></option>
                              <option value="A" <?php echo $document_access_setups['user_access_type'] == "A"?"selected":""; ?>><?= __('All Users') ?></option>
                              <option value="S" <?php echo $document_access_setups['user_access_type'] == "S"?"selected":""; ?>><?= __('Specific Users') ?></option>
@@ -132,23 +132,23 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
          <div class="bg-gray align-items-center" id="selectlistusers" style="<?php echo ($document_access_setups['user_access_type'] == "A" || $document_access_setups['user_access_type'] =="")?"display: none":""; ?>">
                      <div class="row mb-2">
                          <di class="col-lg-2">
-                             <p class="f-16 f-w-600">Select Users?</p>
+                             <p class="f-16 f-w-600"><?= __('Select Users?'); ?></p>
                          </di>
                          <div class="col-lg-2">
                              <div class="checkbox-fade fade-in-primary ">
                                   <label class="form-label ">
-                                <input aria-label="Checkalluser" type="checkbox" value="0" id="checkalluser" onchange="viewcheckallUsers()" checked="">
+                                <input aria-label="<?= htmlspecialchars(__('Checkalluser'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="0" id="checkalluser" onchange="viewcheckallUsers()" checked="">
                                 <span class="cr" >
                                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                 </span>
-                                <span>Check All</span>
+                                <span><?= __('Check All'); ?></span>
                               </label>
                              </div>
                         </div>
                         <div class="col-lg-6" ></div>
                         <div class="col-lg-2" >
                             <div class="input-group input-group-button mb-0" >
-                                <input aria-label="Search" type="text" id="dynamicfilterhideshow" data-id='userselectfilter' class="form-control form-control-sm width1"  placeholder="<?= __('Search') ?>" data-type="div" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Search') ?>">
+                                <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="dynamicfilterhideshow" data-id='userselectfilter' class="form-control form-control-sm width1"  placeholder="<?= __('Search') ?>" data-type="div" data-bs-toggle="tooltip" data-placement="bottom" title="<?= __('Search') ?>">
                                 <span class="input-group-text addon-style">
                                     <span class=""><i class="ti-search"></i></span>
                                 </span>
@@ -161,7 +161,7 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
                  <div class="align-middle float-left ml-2">
                      <div class="checkbox-fade fade-in-primary m-0 d-inline-block">
                       <label class="form-label m-0">
-                        <input aria-label="Checkbox" type="checkbox" value="<?php echo $appuser['id']; ?>" name="create_access_users[]" class="userchecklist" <?php echo in_array($appuser['id'],(array)$create_access_users)?"checked":""; ?>>
+                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="<?php echo $appuser['id']; ?>" name="create_access_users[]" class="userchecklist" <?php echo in_array($appuser['id'],(array)$create_access_users)?"checked":""; ?>>
                         <span class="cr m-0" style="height: 10px;width:10px">
                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                         </span>
@@ -169,9 +169,9 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
                     </div>
 
                   <?php if($appuser['user_photo']!=""){?>
-                    <img src="uploads/all/<?php echo $appuser['user_photo']; ?>"   class="img-radius img-30 align-top m-r-15" alt="User Profile">
+                    <img src="uploads/all/<?php echo $appuser['user_photo']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                   <?php }else{ ?>
-                    <span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($appuser['display_name']); ?></span>
+                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($appuser['display_name']); ?></span>
                   <?php } ?>
                   <div class="d-inline-block">
                     <p class="f-10"><?php echo $appuser['display_name']; ?></p>
@@ -182,7 +182,7 @@ $create_access_users = json_decode($document_access_setups['create_access_users'
 
          </div>
          <div class="text-right">
-         <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold" type="button" onclick="nextSteps()"><i class="la la-check"></i>Next</button>
+         <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold" type="button" onclick="nextSteps()"><i class="la la-check"></i><?= __('Next'); ?></button>
         </div>
     </div>
     <div class="row bg-gray align-items-center" id="uservalidationtable" style="<?php echo ($document_access_setups['id'] =="")?"display:none":""; ?>">

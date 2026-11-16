@@ -20,15 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromDate && $toDate) {
 <div class="page-body">
     <div class="card proj-progress-card">
         <div class="card-header">
-            <h5>CSR History</h5>
-            <span class="text-muted">View CSR history based on the selected date range.</span>
+            <h5><?= __('CSR History'); ?></h5>
+            <span class="text-muted"><?= __('View CSR history based on the selected date range.'); ?></span>
         </div>
         <div class="card-block">
             <form method="POST" action="" class="form-inline mb-3">
 
                 <div class="row">
                     <div class="col-md-4 form-group mr-3">
-                        <label for="from_date" class="mr-2">From Date:</label>
+                        <label for="from_date" class="mr-2"><?= __('From Date'); ?>:</label>
                         <input type="date"
                             id="from_date"
                             name="from_date"
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromDate && $toDate) {
 
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="to_date">To Date:</label>
+                        <label for="to_date"><?= __('To Date'); ?>:</label>
                         <input type="date"
                             id="to_date"
                             name="to_date"
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromDate && $toDate) {
 
                     </div>
                     <div class="col-md-4 align-self-end form-group">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary"><?= __('Submit'); ?></button>
                     </div>
                 </div>
 
@@ -58,13 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromDate && $toDate) {
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Sr. No</th>
-                            <th scope="col">Creator</th>
-                            <th scope="col">Project Name</th>
-                            <th scope="col">Start Date</th>
-                            <th scope="col">End Date</th>
-                            <th scope="col">Total Budget</th>
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Sr. No'); ?></th>
+                            <th scope="col"><?= __('Creator'); ?></th>
+                            <th scope="col"><?= __('Project Name'); ?></th>
+                            <th scope="col"><?= __('Start Date'); ?></th>
+                            <th scope="col"><?= __('End Date'); ?></th>
+                            <th scope="col"><?= __('Total Budget'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,9 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromDate && $toDate) {
                                     <td><?php echo $i++; ?></td>
                                     <td>
                                         <?php if ($_SESSION['user_image'][$row['created_by']] != ""): ?>
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php else: ?>
-                                            <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
                                         <?php endif; ?>
                                         <span class='mt-2 ml-2'><?php echo $_SESSION['users'][$row['created_by']]; ?></span>
                                     </td>
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromDate && $toDate) {
                                             if ($row['current_status'] == 0) {
                                                 echo "Active";
                                             } elseif ($row['current_status'] > 0 && $row['current_status'] < 199) {
-                                                echo "In Progress";
+                                                echo __('In Progress');
                                             } elseif ($row['current_status'] == 199 && $row['tracking_status'] == 0) {
                                                 echo "Tracking";
                                             } elseif ($row['current_status'] == 199 && $row['tracking_status'] == 1) {
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $fromDate && $toDate) {
                         <?php }
                         } else {
                             echo '<tr> <td colspan="7" class="text-center">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
                                         </div>

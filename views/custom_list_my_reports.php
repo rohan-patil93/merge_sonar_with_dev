@@ -14,10 +14,10 @@ foreach($result['reportdata'] as $freport){
  <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="text-primary"><i class="ti-pie-chart m-r-10"></i>Standard Reports</h5>
+      <h5 class="text-primary"><i class="ti-pie-chart m-r-10"></i><?= __('Standard Reports'); ?></h5>
       <div class="card-header-right table-card-header">
           <div class="input-group input-group-button mb-0">
-              <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="Search" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Search" aria-label="Search">
+              <input type="text" id="dynamicfilterhideshow" data-id="categoryfilter" data-type="tr" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
               <span class="input-group-text addon-style">
                   <span class=""><span class="ti-search text-white mt-2"></span></span>
               </span>
@@ -28,8 +28,8 @@ foreach($result['reportdata'] as $freport){
       <div class="table-responsive">
         <table class="table table-hover" id="categoryfilter_2">
           <tr>
-            <th scope="col"><i class="ti-time m-r-10 text-primary f-w-600 f-18"></i> Recent</th>
-            <th scope="col">Last Viewed</th>
+            <th scope="col"><i class="ti-time m-r-10 text-primary f-w-600 f-18"></i> <?= __('Recent'); ?></th>
+            <th scope="col"><?= __('Last Viewed'); ?></th>
           </tr>
           <?php foreach($result['view'] as $keyview=>$review){ $rece =$list[$keyview];
                   if(in_array($rece['module_id'], $_SESSION['module_list']) || $rece['module_id'] =='0'){

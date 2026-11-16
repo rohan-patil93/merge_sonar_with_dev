@@ -26,7 +26,7 @@ $generated_at = date('d-m-Y H:i');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Contracts - InfiSuite</title>
+  <title><?= __('Contracts - InfiSuite'); ?></title>
     <meta charset="UTF-8">
     <style type="text/css">
         body { font-family: Arial, sans-serif; font-size: 9px; margin: 0; padding: 10px; color: #333; }
@@ -44,31 +44,31 @@ $generated_at = date('d-m-Y H:i');
     </style>
 </head>
 <body>
-    <h3>Contracts List</h3>
+    <h3><?= __('Contracts List'); ?></h3>
     <?php if ($company_name != "") { ?>
-        <p class="meta">Company: <?php echo htmlspecialchars($company_name); ?> | Generated: <?php echo $generated_at; ?></p>
+        <p class="meta"><?= __('Company'); ?>: <?php echo htmlspecialchars($company_name); ?> <?= __('| Generated'); ?>: <?php echo $generated_at; ?></p>
     <?php } else { ?>
-        <p class="meta">Generated: <?php echo $generated_at; ?></p>
+        <p class="meta"><?= __('Generated'); ?>: <?php echo $generated_at; ?></p>
     <?php } ?>
 <?php if (count((array)$contracts) > 0) { ?>
     <table>
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Contract No.</th>
-                <th scope="col">Contract Type</th>
-                <th scope="col">Contract Name</th>
-                <th scope="col">Vendor</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Agreements Type</th>
-                <th scope="col">Location</th>
-                <th scope="col">Department</th>
-                <th scope="col">Contract Category</th>
-                <th scope="col">Payment Terms</th>
-                <th scope="col">Status</th>
-                <th scope="col">Approval Status</th>
-                <th scope="col">View Schedule</th>
+                <th scope="col"><?= __('Contract No.'); ?></th>
+                <th scope="col"><?= __('Contract Type'); ?></th>
+                <th scope="col"><?= __('Contract Name'); ?></th>
+                <th scope="col"><?= __('Vendor'); ?></th>
+                <th scope="col"><?= __('Start Date'); ?></th>
+                <th scope="col"><?= __('End Date'); ?></th>
+                <th scope="col"><?= __('Agreements Type'); ?></th>
+                <th scope="col"><?= __('Location'); ?></th>
+                <th scope="col"><?= __('Department'); ?></th>
+                <th scope="col"><?= __('Contract Category'); ?></th>
+                <th scope="col"><?= __('Payment Terms'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
+                <th scope="col"><?= __('Approval Status'); ?></th>
+                <th scope="col"><?= __('View Schedule'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -100,9 +100,9 @@ $generated_at = date('d-m-Y H:i');
                 <td><?php echo htmlspecialchars($transaction_no); ?></td>
                 <td>
                     <?php if ($isAmc) { ?>
-                        <span class="badge badge-amc">AMC</span>
+                        <span class="badge badge-amc"><?= __('AMC'); ?></span>
                     <?php } else { ?>
-                        <span class="badge badge-standard">Standard</span>
+                        <span class="badge badge-standard"><?= __('Standard'); ?></span>
                     <?php } ?>
                 </td>
                 <td><?php echo htmlspecialchars($contract_name); ?></td>
@@ -116,9 +116,9 @@ $generated_at = date('d-m-Y H:i');
                 <td><?php echo htmlspecialchars($payment_name); ?></td>
                 <td>
                     <?php if ($is_expired) { ?>
-                        <span class="badge badge-expired">Expired</span>
+                        <span class="badge badge-expired"><?= __('Expired'); ?></span>
                     <?php } else { ?>
-                        <span class="badge badge-active">Active</span>
+                        <span class="badge badge-active"><?= __('Active'); ?></span>
                     <?php } ?>
                 </td>
                 <td>
@@ -133,7 +133,7 @@ $generated_at = date('d-m-Y H:i');
         </tbody>
     </table>
 <?php } else { ?>
-    <p class="empty-msg">No Contracts</p>
+    <p class="empty-msg"><?= __('No Contracts'); ?></p>
 <?php } ?>
 </body>
 </html>

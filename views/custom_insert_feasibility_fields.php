@@ -577,11 +577,11 @@ $feasibility_types_res = $res['feasibility_types_res'] ?? array();
                 console.log("Raw response:", response);
                 const res = typeof response === 'string' ? JSON.parse(response) : response;
                 if (res.status === 'success') {
-                    swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Custom fields saved successfully!", "success");
+                    swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Custom fields saved successfully!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "success");
 
                     loadFeasibilityFields();
                 } else {
-                    swal("<?php echo ucwords($_SESSION['config']['name']); ?>", 'Failed to save fields: ' + (res.message || 'Unknown error.'), "danger");
+                    swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Failed to save fields').': ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> + (res.message || 'Unknown error.'), "danger");
 
                 }
             },

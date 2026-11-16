@@ -63,15 +63,15 @@ if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disab
         <div class="card-custom card-sticky" id="kt_page_sticky_card">
 
 <div class="card-header">
-    <h5>Job Post Candidates</h5>
+    <h5><?= __('Job Post Candidates'); ?></h5>
     <div class="card-header-right">
         <input type="hidden" id="job_posting_id_ajax" value="<?php echo $jobpost; ?>">
 
-        <button type="button" class="btn btn-primary" onclick="AddCandidate()" <?php echo $insert_permissionbtn; ?>><i class="ti-plus text-white"></i> Candidates</button>
+        <button type="button" class="btn btn-primary" onclick="AddCandidate()" <?php echo $insert_permissionbtn; ?>><i class="ti-plus text-white"></i> <?= __('Candidates'); ?></button>
 
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
 
     </div>
@@ -86,14 +86,14 @@ if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disab
                     <thead>
                         <tr>
                             <th scope="col">#.</th>
-                            <th scope="col">Candidate Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">RM Shortlist</th>
-                            <th scope="col">HM Shortlist</th>
-                            <th scope="col">Selection Process</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('Candidate Name'); ?></th>
+                            <th scope="col"><?= __('Email'); ?></th>
+                            <th scope="col"><?= __('Phone'); ?></th>
+                            <th scope="col"><?= __('RM Shortlist'); ?></th>
+                            <th scope="col"><?= __('HM Shortlist'); ?></th>
+                            <th scope="col"><?= __('Selection Process'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,21 +110,21 @@ if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disab
                                 <td><?php  echo $candidate_table['phone']; ?></td>
                                 <td>
                                     <?php if($res['shortlisted']=='0'){ ?>
-                                        <span class="label label-lg label-success label-inline mr-2">Shortlisted</span>
+                                        <span class="label label-lg label-success label-inline mr-2"><?= __('Shortlisted'); ?></span>
                                     <?php }elseif($res['shortlisted']=='1'){ ?>
-                                        <span class="label label-lg label-danger label-inline mr-2">Rejected</span>
+                                        <span class="label label-lg label-danger label-inline mr-2"><?= __('Rejected'); ?></span>
                                     <?php }else{ ?>
-                                        <span class="label label-lg label-warning label-inline mr-2">Pending</span>
+                                        <span class="label label-lg label-warning label-inline mr-2"><?= __('Pending'); ?></span>
                                     <?php  } ?>
 
                                 </td>
                                 <td>
                                     <?php if($res['hm_shortlisted']=='0'){ ?>
-                                        <span class="label label-lg label-success label-inline mr-2">Shortlisted</span>
+                                        <span class="label label-lg label-success label-inline mr-2"><?= __('Shortlisted'); ?></span>
                                     <?php }elseif($res['hm_shortlisted']=='1'){ ?>
-                                        <span class="label label-lg label-danger label-inline mr-2">Rejected</span>
+                                        <span class="label label-lg label-danger label-inline mr-2"><?= __('Rejected'); ?></span>
                                     <?php }else{ ?>
-                                        <span class="label label-lg label-warning label-inline mr-2">Pending</span>
+                                        <span class="label label-lg label-warning label-inline mr-2"><?= __('Pending'); ?></span>
                                     <?php  } ?>
 
                                 </td>
@@ -145,8 +145,8 @@ if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disab
                                             <i class="fa fa-star"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">    <ul class="nav nav-hoverable flex-column">
-                                            <li class="nav-item"  style="margin-left:10px"><button type="button" class="nav-link" onclick="updatepostcandidate('0',<?php echo $res['id']; ?>,'comments')" ><i class="nav-icon la la-comments"></i><span class="nav-text">Commennts</span></button></li>
-                                            <li class="nav-item"  style="margin-left:10px"><a class="nav-link" href="#"><span class="nav-text">Ratting</span></a></li>
+                                            <li class="nav-item"  style="margin-left:10px"><button type="button" class="nav-link" onclick="updatepostcandidate('0',<?php echo $res['id']; ?>,'comments')" ><i class="nav-icon la la-comments"></i><span class="nav-text"><?= __('Commennts'); ?></span></button></li>
+                                            <li class="nav-item"  style="margin-left:10px"><a class="nav-link" href="#"><span class="nav-text"><?= __('Ratting'); ?></span></a></li>
 
                                             <li class="nav-item" style="margin-left:30px">
                                                 <?php $rate= $res['ratting'];
@@ -171,8 +171,8 @@ if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disab
                                     </div>
                                 </div>
 
-    <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$res['candidate_id']); ?>" class="btn btn-sm btn-clean btn-icon" title="Edit" <?php echo $edit_permissionbtn; ?>><i class="fa fa-edit"></i>    </a>
-    <button type="button" class="btn btn-sm btn-clean btn-icon" onclick="displaycandidateview(<?php echo $res['id']; ?>)" title="View"><i class="fa fa-eye"></i>    </button>
+    <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$res['candidate_id']); ?>" class="btn btn-sm btn-clean btn-icon" title="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $edit_permissionbtn; ?>><i class="fa fa-edit"></i>    </a>
+    <button type="button" class="btn btn-sm btn-clean btn-icon" onclick="displaycandidateview(<?php echo $res['id']; ?>)" title="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i>    </button>
 
                             </td>
                         </tr>
@@ -182,7 +182,7 @@ if($allpermision['permission_approval'] == '1'){$approval_permissionbtn = "disab
                 </table>
 <?php }else{ ?>
     <div class="card-px text-center py-20 m-t-30">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Candidates </p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
         <div class="text-center px-4">
             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
         </div>

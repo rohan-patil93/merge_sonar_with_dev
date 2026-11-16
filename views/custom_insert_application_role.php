@@ -30,10 +30,10 @@ $module_setup = $result['module_setup'];
 </script>
 <div class="card card-custom card-sticky " id="kt_page_sticky_card">
   <div class="card-header table-card-header">
-    <h5> Application roles</h5>
+    <h5> <?= __('Application roles'); ?></h5>
     <div class="card-header-right table-card-header ">
       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light ">
-        <i class="icofont icofont-reply"></i>  Back
+        <i class="icofont icofont-reply"></i>  <?= __('Back'); ?>
       </a>
     </div>
   </div>
@@ -42,7 +42,7 @@ $module_setup = $result['module_setup'];
   		<div class="col-lg-4">
   			<span class="form-label d-inline-block fw-bold"><?= __('Module') ?></span>
   			<select aria-label="<?= htmlspecialchars(__('Module id'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="module_id" onchange="changeModule(this.value)" >
-  				<option value="0">Select Any One Module</option>
+  				<option value="0"><?= __('Select Any One Module'); ?></option>
 				<?php foreach($module_setup as $module_setups){ ?>
 					<option value="<?php echo $module_setups['module_id']; ?>" ><?php echo htmlspecialchars(__($module_setups['display_name'] ?? '')); ?></option>
 				<?php  } ?>
@@ -72,7 +72,7 @@ $module_setup = $result['module_setup'];
                 </div>
               </div>
               <div class="card-body" style="min-height: 106px;">
-                <h3 class="text-gray-600" style="text-align: center;">Add New Role</h3>
+                <h3 class="text-gray-600" style="text-align: center;"><?= __('Add New Role'); ?></h3>
               </div>
             </div>
           </div>
@@ -100,13 +100,13 @@ $module_setup = $result['module_setup'];
               if($count > '5'){ ?>
                 <li>
                   <p>
-                    <span class="icon"><i style="color: cornflowerblue;" class="fa fa-minus"></i></span> <span class="name">and <?php echo $count-5; ?> more...</span>
+                    <span class="icon"><i style="color: cornflowerblue;" class="fa fa-minus"></i></span> <span class="name"><?= __('and'); ?> <?php echo $count-5; ?> <?= __('more...'); ?></span>
                   </p>
                 </li>
               <?php  } ?>
             </ul>
               <button type="submit" name="submit" class="btn btn-primary w-100" style="background-color: #f5f8fa; color: #7e8299;" data-toggle="modal" onclick="addrolemodal('<?php echo $resultlist['id']; ?>')"><b><i class="fa fa-edit"></i> <?= __('Edit Role') ?></b></button>
-              <a href="index.php?option=COM_VIEW_APPLICATION_ROLE&Rid=<?php echo deocdeId("id:".$resultlist['id']); ?>&name=<?php echo $resultlist['display_name']; ?>" class="btn btn-success  mt-2 w-100" target="_blank"><i class="icofont icofont-plus icon-white "></i> Assign User</a>
+              <a href="index.php?option=COM_VIEW_APPLICATION_ROLE&Rid=<?php echo deocdeId("id:".$resultlist['id']); ?>&name=<?php echo $resultlist['display_name']; ?>" class="btn btn-success  mt-2 w-100" target="_blank"><i class="icofont icofont-plus icon-white "></i> <?= __('Assign User'); ?></a>
 
         </div>
       </div>
@@ -121,8 +121,8 @@ $module_setup = $result['module_setup'];
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Role</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title"><?= __('Role'); ?></h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
       </div>
       <div class="modal-body ajaxmodal j-pro j-content">
       </div>

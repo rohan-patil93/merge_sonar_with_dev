@@ -39,26 +39,26 @@ if($_SESSION['insert_msg'] !=""){
 </script>
 <div class="card">
     <div class="card-header">
-        <h5>Contracts</h5>
+        <h5><?= __('Contracts'); ?></h5>
         <div class="card-header-right table-card-header">
              <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
                     data-dropdown-out="fadeOut">
-                    <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Contract List" target="_blank">CSV</a>
-                    <a class="dropdown-item waves-light waves-effect" href="#!" id="downloadContractsPDF">PDF</a>
+                    <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Contract List" target="_blank"><?= __('CSV'); ?></a>
+                    <a class="dropdown-item waves-light waves-effect" href="#!" id="downloadContractsPDF"><?= __('PDF'); ?></a>
                 </div>
             </div>
             <a href="index.php?option=COM_INSERT_CONTRACTS" class="btn btn-success">
               <i class="icofont icofont-plus icon-white "></i>
-              Contract </a>
+              <?= __('Contract'); ?> </a>
             <a href="index.php?option=COM_IMPORT_CONTRACTS_EXCEL" class="btn btn-warning">
               <i class="fa fa-file-excel-o"></i>
-              Excel Upload
+              <?= __('Excel Upload'); ?>
             </a>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                <i class="icofont icofont-reply"></i>Back
+                <i class="icofont icofont-reply"></i><?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -68,13 +68,13 @@ if($_SESSION['insert_msg'] !=""){
             <input type="hidden" name="current_page" value="1" id="hide_current_page">
             <div class="row">
                 <div class="col-lg-2">
-                     <span class="form-label d-block d-block">Contract No/Name</span>
-                     <input aria-label="Transaction No And Name" type="text" name="transaction_no_and_name" value="" class="form-control" >
+                     <span class="form-label d-block d-block"><?= __('Contract No/Name'); ?></span>
+                     <input aria-label="<?= htmlspecialchars(__('Transaction No And Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="transaction_no_and_name" value="" class="form-control" >
                 </div>
                 <div class="col-lg-2">
-                     <span class="form-label d-block d-block">Vendor</span>
-                     <select aria-label="Party" name="party_id" class="form-select js-example-basic-single" >
-                         <option value="">All Vendor</option>
+                     <span class="form-label d-block d-block"><?= __('Vendor'); ?></span>
+                     <select aria-label="<?= htmlspecialchars(__('Party'), ENT_QUOTES, 'UTF-8'); ?>" name="party_id" class="form-select js-example-basic-single" >
+                         <option value=""><?= __('All Vendor'); ?></option>
                          <?php
                              foreach ($vendors as $ven){ ?>
                                 <option value="<?= $ven['id'] ?>"><?= htmlspecialchars($ven['company']) ?> </option>
@@ -82,9 +82,9 @@ if($_SESSION['insert_msg'] !=""){
                      </select>
                 </div>
                 <div class="col-lg-2">
-                    <span class="form-label d-block d-block">Services</span>
-                     <select aria-label="Contract Services" name="contract_services_id" class="form-select js-example-basic-single" >
-                         <option value="">All Services</option>
+                    <span class="form-label d-block d-block"><?= __('Services'); ?></span>
+                     <select aria-label="<?= htmlspecialchars(__('Contract Services'), ENT_QUOTES, 'UTF-8'); ?>" name="contract_services_id" class="form-select js-example-basic-single" >
+                         <option value=""><?= __('All Services'); ?></option>
                          <?php
                              foreach ($contract_services as $conserv){ ?>
                                 <option value="<?= $conserv['id'] ?>" ><?= htmlspecialchars($conserv['service_name']) ?> </option>
@@ -93,20 +93,20 @@ if($_SESSION['insert_msg'] !=""){
 
                 </div>
                 <div class="col-lg-2">
-                    <span class="form-label d-block d-block">Type of Agreements</span>
-                    <select aria-label="Typeofaggrements" name="typeofaggrements" class="form-select js-example-basic-single" >
-                        <option  value="">All Type of Agreements</option>
+                    <span class="form-label d-block d-block"><?= __('Type of Agreements'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Typeofaggrements'), ENT_QUOTES, 'UTF-8'); ?>" name="typeofaggrements" class="form-select js-example-basic-single" >
+                        <option  value=""><?= __('All Type of Agreements'); ?></option>
                          <?php
                              foreach ($agreement_type as $agrtype){ ?>
-                                <option value="<?= $agrtype['genc_detail_code'] ?>" ><?= htmlspecialchars($agrtype['genc_detail_name']) ?> </option>
+                                <option value="<?= $agrtype['genc_detail_code'] ?>" ><?= htmlspecialchars(__($agrtype['genc_detail_name'])) ?> </option>
                         <?php } ?>
                      </select>
 
                 </div>
                 <div class="col-lg-2">
-                    <span class="form-label d-block d-block">Location</span>
-                    <select aria-label="Locations" name="locations" class="form-select js-example-basic-single" >
-                        <option  value="">All Location</option>
+                    <span class="form-label d-block d-block"><?= __('Location'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Locations'), ENT_QUOTES, 'UTF-8'); ?>" name="locations" class="form-select js-example-basic-single" >
+                        <option  value=""><?= __('All Location'); ?></option>
                          <?php
                              foreach ($locations as $loc){ ?>
                                 <option value="<?= $loc['id'] ?>" ><?= htmlspecialchars($loc['location_name']) ?> </option>
@@ -114,9 +114,9 @@ if($_SESSION['insert_msg'] !=""){
                      </select>
                 </div>
                 <div class="col-lg-2">
-                    <span class="form-label d-block d-block">Department</span>
-                    <select aria-label="Department" name="department_id" class="form-select js-example-basic-single" >
-                        <option value="">All Department</option>
+                    <span class="form-label d-block d-block"><?= __('Department'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" name="department_id" class="form-select js-example-basic-single" >
+                        <option value=""><?= __('All Department'); ?></option>
                          <?php
                              foreach ($departments as $dep){ ?>
                                 <option value="<?= $dep['id'] ?>" ><?= htmlspecialchars($dep['department_name']) ?> </option>
@@ -124,19 +124,19 @@ if($_SESSION['insert_msg'] !=""){
                      </select>
                 </div>
                 <div class="col-lg-2">
-                    <span class="form-label d-block d-block">Contract Category</span>
-                    <select aria-label="Type Of Contract" name="type_of_contract_id" class="form-select js-example-basic-single" >
-                        <option value="">All Contract Category</option>
+                    <span class="form-label d-block d-block"><?= __('Contract Category'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Type Of Contract'), ENT_QUOTES, 'UTF-8'); ?>" name="type_of_contract_id" class="form-select js-example-basic-single" >
+                        <option value=""><?= __('All Contract Category'); ?></option>
                          <?php
                              foreach ($contract_types as $conserv){ ?>
-                                <option value="<?= $conserv['genc_detail_code'] ?>" ><?= htmlspecialchars($conserv['genc_detail_name']) ?> </option>
+                                <option value="<?= $conserv['genc_detail_code'] ?>" ><?= htmlspecialchars(__($conserv['genc_detail_name'])) ?> </option>
                         <?php } ?>
                      </select>
                 </div>
                 <div class="col-lg-2">
-                    <span class="form-label d-block d-block">Payment Terms</span>
-                    <select aria-label="Contract Payment Terms" name="contract_payment_terms" class="form-select js-example-basic-single" >
-                        <option value="">All Payment Terms</option>
+                    <span class="form-label d-block d-block"><?= __('Payment Terms'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Contract Payment Terms'), ENT_QUOTES, 'UTF-8'); ?>" name="contract_payment_terms" class="form-select js-example-basic-single" >
+                        <option value=""><?= __('All Payment Terms'); ?></option>
                          <?php
                              foreach ($payment_terms as $payt){ ?>
                                 <option value="<?= $payt['id'] ?>"><?= htmlspecialchars($payt['payment_term_name']) ?> </option>
@@ -144,8 +144,8 @@ if($_SESSION['insert_msg'] !=""){
                      </select>
                 </div>
                 <div class="col-lg-2">
-                    <span class="form-label d-block d-block">Records</span>
-                     <select aria-label="Limit Select" name="limit_select" class="form-select js-example-basic-single" >
+                    <span class="form-label d-block d-block"><?= __('Records'); ?></span>
+                     <select aria-label="<?= htmlspecialchars(__('Limit Select'), ENT_QUOTES, 'UTF-8'); ?>" name="limit_select" class="form-select js-example-basic-single" >
                          <?php
                              for($i = 20; $i <= 1000; $i += 20) { ?>
                                 <option value="<?php echo $i; ?>" ><?php echo htmlspecialchars($i); ?> </option>
@@ -154,7 +154,7 @@ if($_SESSION['insert_msg'] !=""){
 
                 </div>
                 <div class="col-lg-2">
-                    <button type="button" name="applyform" value="apply" class=" btn btn-info waves-effect waves-light input-group-text m-t-30 submitfilervtn">Apply</button>
+                    <button type="button" name="applyform" value="apply" class=" btn btn-info waves-effect waves-light input-group-text m-t-30 submitfilervtn"><?= __('Apply'); ?></button>
                 </div>
 
             </div>

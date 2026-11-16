@@ -80,27 +80,27 @@ if (!empty($_SESSION['sku_msg'])) {
                             <input type="text" name="sku_generator_name" id="sku_generator_name"
                                 class="form-control form-control-lg shadow-sm"
                                 value="<?= htmlspecialchars($sku['sku_generator_name'] ?? '') ?>"
-                                placeholder="<?= __('Enter name') ?>" required aria-label="SKU Generator Name">
+                                placeholder="<?= __('Enter name') ?>" required aria-label="<?= htmlspecialchars(__('SKU Generator Name'), ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
                         <div class=" col-lg-6 mb-3">
                             <label for="serial_number" class="form-label"><?= __('Serial Number') ?> <span class="text-danger">*</span></label>
                             <input type="number" name="serial_number" id="serial_number"
                                 class="form-control form-control-lg shadow-sm"
-                                value="<?= htmlspecialchars($sku['serial_number'] ?? '') ?>" required aria-label="Serial Number">
+                                value="<?= htmlspecialchars($sku['serial_number'] ?? '') ?>" required aria-label="<?= htmlspecialchars(__('Serial Number'), ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
                         <div class="col-lg-6 mb-3">
                             <label for="serial_number_length" class="form-label"><?= __('Serial Number Length') ?> <span class="text-danger">*</span></label>
                             <input type="number" name="serial_number_length" id="serial_number_length"
                                 class="form-control form-control-lg shadow-sm"
-                                value="<?= htmlspecialchars($sku['serial_number_length'] ?? '') ?>" min="1" required aria-label="Serial Number Length">
+                                value="<?= htmlspecialchars($sku['serial_number_length'] ?? '') ?>" min="1" required aria-label="<?= htmlspecialchars(__('Serial Number Length'), ENT_QUOTES, 'UTF-8'); ?>">
                         </div>
                         <div class="col-lg-6 mb-3">
                             <label for="separation_symbol" class="form-label"><?= __('Separation Symbol') ?> <span class="text-danger">*</span></label>
                             <input type="text" name="separation_symbol" id="separation_symbol"
                                 class="form-control form-control-lg shadow-sm" maxlength="1"
-                                value="<?= htmlspecialchars($sku['separation_symbol'] ?? '') ?>" required aria-label="Separation Symbol">
+                                value="<?= htmlspecialchars($sku['separation_symbol'] ?? '') ?>" required aria-label="<?= htmlspecialchars(__('Separation Symbol'), ENT_QUOTES, 'UTF-8'); ?>">
                             <div id="sepError" class="invalid-feedback d-none">
-                                Please enter a valid symbol (not letter/number).
+                                <?= __('Please enter a valid symbol (not letter/number).'); ?>
                             </div>
                         </div>
                     </div>
@@ -108,12 +108,12 @@ if (!empty($_SESSION['sku_msg'])) {
                 <div class="col-lg-6">
                     <div class="card shadow-sm border-0 h-100">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                            <h6 class="text-secondary">Live Demo SKU</h6>
+                            <h6 class="text-secondary"><?= __('Live Demo SKU'); ?></h6>
                             <div id="demoskugenerator"
                                 class="bg-light border border-dashed rounded-3 px-4 py-3 fw-bold text-primary fs-5 shadow-sm">
                                 <!-- SKU will appear here -->
                             </div>
-                            <small class="text-muted mt-2">Preview updates in real-time as you type</small>
+                            <small class="text-muted mt-2"><?= __('Preview updates in real-time as you type'); ?></small>
                         </div>
                     </div>
                 </div>

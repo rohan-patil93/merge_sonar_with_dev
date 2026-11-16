@@ -15,14 +15,14 @@
 												<div class="kt-widget24__details">
 													<div class="kt-widget24__info">
 														<h4 class="kt-widget24__title">
-															Total Income
+															<?= __('Total Income'); ?>
 														</h4>
 														<span class="kt-widget24__desc">
-															Total Acounts Receivable
+															<?= __('Total Acounts Receivable'); ?>
 														</span>
 													</div>
 													<span class="kt-widget24__stats kt-font-brand">
-														₹ 18 Lac
+														<?= __('₹ 18 Lac'); ?>
 													</span>
 												</div>
 												<div class="progress progress--sm">
@@ -30,7 +30,7 @@
 												</div>
 												<div class="kt-widget24__action">
 													<span class="kt-widget24__change">
-														Due
+														<?= __('Due'); ?>
 													</span>
 													<span class="kt-widget24__number">
 														78%
@@ -47,14 +47,14 @@
 												<div class="kt-widget24__details">
 													<div class="kt-widget24__info">
 														<h4 class="kt-widget24__title">
-															Total Expenses
+															<?= __('Total Expenses'); ?>
 														</h4>
 														<span class="kt-widget24__desc">
-															Total Accounts Payable
+															<?= __('Total Accounts Payable'); ?>
 														</span>
 													</div>
 													<span class="kt-widget24__stats kt-font-warning">
-														₹ 13 Lac
+														<?= __('₹ 13 Lac'); ?>
 													</span>
 												</div>
 												<div class="progress progress--sm">
@@ -62,7 +62,7 @@
 												</div>
 												<div class="kt-widget24__action">
 													<span class="kt-widget24__change">
-														Due
+														<?= __('Due'); ?>
 													</span>
 													<span class="kt-widget24__number">
 														84%
@@ -78,19 +78,19 @@
 											<div class="kt-widget1">
 												<div class="kt-widget1__item">
 													<div class="kt-widget1__info">
-														<h3 class="kt-widget1__title">Equity Ratio </h3>
+														<h3 class="kt-widget1__title"><?= __('Equity Ratio'); ?> </h3>
 													</div>
 													<span class="kt-widget1__number kt-font-brand">+$17,800</span>
 												</div>
 												<div class="kt-widget1__item">
 													<div class="kt-widget1__info">
-														<h3 class="kt-widget1__title">Debt Equity</h3>
+														<h3 class="kt-widget1__title"><?= __('Debt Equity'); ?></h3>
 													</div>
 													<span class="kt-widget1__number kt-font-danger">+1,800</span>
 												</div>
 												<div class="kt-widget1__item">
 													<div class="kt-widget1__info">
-														<h3 class="kt-widget1__title">Current Ratio</h3>
+														<h3 class="kt-widget1__title"><?= __('Current Ratio'); ?></h3>
 													</div>
 													<span class="kt-widget1__number kt-font-success">-27,49%</span>
 												</div>
@@ -105,7 +105,7 @@
 												<div class="kt-widget24__details" style="margin-top: 40px;">
 													<div class="kt-widget24__info">
 														<h4 class="kt-widget24__title">
-															Current Ratio
+															<?= __('Current Ratio'); ?>
 														</h4>
 														<span class="kt-widget24__desc">
 
@@ -134,10 +134,10 @@
 											<div class="kt-widget14">
 												<div class="kt-widget14__header kt-margin-b-30">
 													<h3 class="kt-widget14__title">
-														Daily Sales
+														<?= __('Daily Sales'); ?>
 													</h3>
 													<span class="kt-widget14__desc">
-														Check out each collumn for more details
+														<?= __('Check out each collumn for more details'); ?>
 													</span>
 												</div>
 												<div class="kt-widget14__chart" style="height:120px;">
@@ -155,10 +155,10 @@
 											<div class="kt-widget14">
 												<div class="kt-widget14__header">
 													<h3 class="kt-widget14__title">
-														Profit Share
+														<?= __('Profit Share'); ?>
 													</h3>
 													<span class="kt-widget14__desc">
-														Profit Share between customers
+														<?= __('Profit Share between customers'); ?>
 													</span>
 												</div>
 												<div class="kt-widget14__content">
@@ -193,10 +193,10 @@
 											<div class="kt-widget14">
 												<div class="kt-widget14__header">
 													<h3 class="kt-widget14__title">
-														Revenue Change
+														<?= __('Revenue Change'); ?>
 													</h3>
 													<span class="kt-widget14__desc">
-														Revenue change breakdown by cities
+														<?= __('Revenue change breakdown by cities'); ?>
 													</span>
 												</div>
 												<div class="kt-widget14__content">
@@ -231,12 +231,12 @@
 										<div class="kt-portlet__head">
 											<div class="kt-portlet__head-label">
 												<h3 class="kt-portlet__head-title">
-													Current Month
+													<?= __('Current Month'); ?>
 												</h3>
 											</div>
 											<div class="kt-portlet__head-toolbar">
 												<a href="#" class="btn btn-label-brand btn-bold btn-sm dropdown-toggle" data-toggle="dropdown">
-													Sales Reports
+													<?= __('Sales Reports'); ?>
 												</a>
 												<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
 
@@ -245,31 +245,31 @@
 														<li class="kt-nav__item">
 															<a href="#" class="kt-nav__link">
 																<i class="kt-nav__link-icon flaticon2-drop"></i>
-																<span class="kt-nav__link-text">Current Month</span>
+																<span class="kt-nav__link-text"><?= __('Current Month'); ?></span>
 															</a>
 														</li>
 														<li class="kt-nav__item">
 															<a href="#" class="kt-nav__link">
 																<i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-																<span class="kt-nav__link-text">Last Month</span>
+																<span class="kt-nav__link-text"><?= __('Last Month'); ?></span>
 															</a>
 														</li>
 														<li class="kt-nav__item">
 															<a href="#" class="kt-nav__link">
 																<i class="kt-nav__link-icon flaticon2-telegram-logo"></i>
-																<span class="kt-nav__link-text">Quarterly</span>
+																<span class="kt-nav__link-text"><?= __('Quarterly'); ?></span>
 															</a>
 														</li>
 														<li class="kt-nav__item">
 															<a href="#" class="kt-nav__link">
 																<i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-																<span class="kt-nav__link-text">Yearly</span>
+																<span class="kt-nav__link-text"><?= __('Yearly'); ?></span>
 															</a>
 														</li>
 														<li class="kt-nav__item">
 															<a href="#" class="kt-nav__link">
 																<i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-																<span class="kt-nav__link-text">All Time</span>
+																<span class="kt-nav__link-text"><?= __('All Time'); ?></span>
 															</a>
 														</li>
 
@@ -295,12 +295,12 @@
 																<thead>
 																	<tr>
 																		<td style="width:1%">#</td>
-																		<td style="width:40%">Customer</td>
-																		<td style="width:14%">Amount		 </td>
-																		<td style="width:14%">Paid </td>
-																		<td style="width:15%">Due </td>
-																		<td style="width:15%">Status</td>
-																		<td style="width:15%" class="kt-align-right">Total </td>
+																		<td style="width:40%"><?= __('Customer'); ?></td>
+																		<td style="width:14%"><?= __('Amount'); ?>		 </td>
+																		<td style="width:14%"><?= __('Paid'); ?> </td>
+																		<td style="width:15%"><?= __('Due'); ?> </td>
+																		<td style="width:15%"><?= __('Status'); ?></td>
+																		<td style="width:15%" class="kt-align-right"><?= __('Total'); ?> </td>
 																	</tr>
 																</thead>
 																<tbody>
@@ -311,8 +311,8 @@
 																			</label>
 																		</td>
 																		<td>
-																			<a href="#" class="kt-widget11__title">Loop</a>
-																			<span class="kt-widget11__sub">CRM System</span>
+																			<a href="#" class="kt-widget11__title"><?= __('Loop'); ?></a>
+																			<span class="kt-widget11__sub"><?= __('CRM System'); ?></span>
 																		</td>
 																		<td>19,200</td>
 																		<td>19,200</td>
@@ -329,8 +329,8 @@
 																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
-																			<a href="#" class="kt-widget11__title">Selto</a>
-																			<span class="kt-widget11__sub">Powerful Website Builder</span>
+																			<a href="#" class="kt-widget11__title"><?= __('Selto'); ?></a>
+																			<span class="kt-widget11__sub"><?= __('Powerful Website Builder'); ?></span>
 																		</td>
 																		<td>24,310</td>
 																		<td>24,310</td>
@@ -347,8 +347,8 @@
 																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
-																			<a href="#" class="kt-widget11__title">Jippo</a>
-																			<span class="kt-widget11__sub">The Best Selling App</span>
+																			<a href="#" class="kt-widget11__title"><?= __('Jippo'); ?></a>
+																			<span class="kt-widget11__sub"><?= __('The Best Selling App'); ?></span>
 																		</td>
 																		<td>9,076</td>
 																		<td>24,310</td>
@@ -365,8 +365,8 @@
 																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
-																			<a href="#" class="kt-widget11__title">Verto</a>
-																			<span class="kt-widget11__sub">Web Development Tool</span>
+																			<a href="#" class="kt-widget11__title"><?= __('Verto'); ?></a>
+																			<span class="kt-widget11__sub"><?= __('Web Development Tool'); ?></span>
 																		</td>
 																		<td>11,094</td>
 																		<td>24,310</td>
@@ -382,7 +382,7 @@
 															</table>
 														</div>
 														<div class="kt-widget11__action kt-align-right">
-															<button type="button" class="btn btn-label-brand btn-bold btn-sm">Import Report</button>
+															<button type="button" class="btn btn-label-brand btn-bold btn-sm"><?= __('Import Report'); ?></button>
 														</div>
 													</div>
 													<!--end::Widget 11-->
@@ -400,11 +400,11 @@
 																<thead>
 																	<tr>
 																		<td style="width:1%">#</td>
-																		<td style="width:40%">Application</td>
-																		<td style="width:14%">Sales</td>
-																		<td style="width:15%">Change</td>
-																		<td style="width:15%">Status</td>
-																		<td style="width:15%" class="kt-align-right">Total</td>
+																		<td style="width:40%"><?= __('Application'); ?></td>
+																		<td style="width:14%"><?= __('Sales'); ?></td>
+																		<td style="width:15%"><?= __('Change'); ?></td>
+																		<td style="width:15%"><?= __('Status'); ?></td>
+																		<td style="width:15%" class="kt-align-right"><?= __('Total'); ?></td>
 																	</tr>
 																</thead>
 																<tbody>
@@ -415,12 +415,12 @@
 																			</label>
 																		</td>
 																		<td>
-																			<span class="kt-widget11__title">Loop</span>
-																			<span class="kt-widget11__sub">CRM System</span>
+																			<span class="kt-widget11__title"><?= __('Loop'); ?></span>
+																			<span class="kt-widget11__sub"><?= __('CRM System'); ?></span>
 																		</td>
 																		<td>19,200</td>
 																		<td>$63</td>
-																		<td><span class="kt-badge kt-badge--inline kt-badge--danger">pending</span></td>
+																		<td><span class="kt-badge kt-badge--inline kt-badge--danger"><?= __('pending'); ?></span></td>
 																		<td class="kt-align-right kt-font-brand  kt-font-bold">$23,740</td>
 																	</tr>
 																	<tr>
@@ -428,12 +428,12 @@
 																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
-																			<span class="kt-widget11__title">Selto</span>
-																			<span class="kt-widget11__sub">Powerful Website Builder</span>
+																			<span class="kt-widget11__title"><?= __('Selto'); ?></span>
+																			<span class="kt-widget11__sub"><?= __('Powerful Website Builder'); ?></span>
 																		</td>
 																		<td>24,310</td>
 																		<td>$39</td>
-																		<td><span class="kt-badge kt-badge--inline kt-badge--success">new</span></td>
+																		<td><span class="kt-badge kt-badge--inline kt-badge--success"><?= __('new'); ?></span></td>
 																		<td class="kt-align-right kt-font-success  kt-font-bold">$46,010</td>
 																	</tr>
 																	<tr>
@@ -441,12 +441,12 @@
 																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
-																			<span class="kt-widget11__title">Jippo</span>
-																			<span class="kt-widget11__sub">The Best Selling App</span>
+																			<span class="kt-widget11__title"><?= __('Jippo'); ?></span>
+																			<span class="kt-widget11__sub"><?= __('The Best Selling App'); ?></span>
 																		</td>
 																		<td>9,076</td>
 																		<td>$105</td>
-																		<td><span class="kt-badge kt-badge--inline kt-badge--brand">approved</span></td>
+																		<td><span class="kt-badge kt-badge--inline kt-badge--brand"><?= __('approved'); ?></span></td>
 																		<td class="kt-align-right kt-font-danger kt-font-bold">$15,800</td>
 																	</tr>
 																	<tr>
@@ -454,19 +454,19 @@
 																			<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single"><input type="checkbox"><span></span></label>
 																		</td>
 																		<td>
-																			<span class="kt-widget11__title">Verto</span>
-																			<span class="kt-widget11__sub">Web Development Tool</span>
+																			<span class="kt-widget11__title"><?= __('Verto'); ?></span>
+																			<span class="kt-widget11__sub"><?= __('Web Development Tool'); ?></span>
 																		</td>
 																		<td>11,094</td>
 																		<td>$16</td>
-																		<td><span class="kt-badge kt-badge--inline kt-badge--info">done</span></td>
+																		<td><span class="kt-badge kt-badge--inline kt-badge--info"><?= __('done'); ?></span></td>
 																		<td class="kt-align-right kt-font-warning kt-font-bold">$8,520</td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 														<div class="kt-widget11__action kt-align-right">
-															<button type="button" class="btn btn-label-success btn-bold btn-sm">Generate Report1</button>
+															<button type="button" class="btn btn-label-success btn-bold btn-sm"><?= __('Generate Report1'); ?></button>
 														</div>
 													</div>
 
@@ -495,7 +495,7 @@
 										<div class="kt-portlet__head">
 											<div class="kt-portlet__head-label">
 												<h3 class="kt-portlet__head-title">
-													MIS
+													<?= __('MIS'); ?>
 												</h3>
 
 											</div>
@@ -503,18 +503,18 @@
 												<ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-brand">
 													<li class="nav-item">
 														<a class="nav-link active" data-toggle="tab" href="#kt_widget11_tab1_content" role="tab">
-															YTD
+															<?= __('YTD'); ?>
 														</a>
 													</li>
 
 													<li class="nav-item">
 														<a class="nav-link" data-toggle="tab" href="#kt_widget11_tab2_content" role="tab">
-															QTD
+															<?= __('QTD'); ?>
 														</a>
 													</li>
 													<li class="nav-item">
 														<a class="nav-link" data-toggle="tab" href="#kt_widget11_tab2_content" role="tab">
-															MTD
+															<?= __('MTD'); ?>
 														</a>
 													</li>
 												</ul>
@@ -525,21 +525,21 @@
 												<div class="kt-widget12__content">
 													<div class="kt-widget12__item">
 														<div class="kt-widget12__info">
-															<span class="kt-widget12__desc"> Taxes</span>
+															<span class="kt-widget12__desc"> <?= __('Taxes'); ?></span>
 															<span class="kt-widget12__value">$400,000</span>
 														</div>
 														<div class="kt-widget12__info">
-															<span class="kt-widget12__desc">Finance Review Date</span>
-															<span class="kt-widget12__value">July 24,2019</span>
+															<span class="kt-widget12__desc"><?= __('Finance Review Date'); ?></span>
+															<span class="kt-widget12__value"><?= __('July 24,2019'); ?></span>
 														</div>
 													</div>
 													<div class="kt-widget12__item">
 														<div class="kt-widget12__info">
-															<span class="kt-widget12__desc"> Revenue</span>
+															<span class="kt-widget12__desc"> <?= __('Revenue'); ?></span>
 															<span class="kt-widget12__value">$60M</span>
 														</div>
 														<div class="kt-widget12__info">
-															<span class="kt-widget12__desc">Revenue Margin</span>
+															<span class="kt-widget12__desc"><?= __('Revenue Margin'); ?></span>
 															<div class="kt-widget12__progress">
 																<div class="progress kt-progress--sm">
 																	<div class="progress-bar kt-bg-brand" role="progressbar" style="width: 40%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -575,7 +575,7 @@
 										<div class="kt-portlet__head">
 											<div class="kt-portlet__head-label">
 												<h3 class="kt-portlet__head-title">
-													Cash
+													<?= __('Cash'); ?>
 												</h3>
 
 											</div>
@@ -583,18 +583,18 @@
 												<ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-brand">
 													<li class="nav-item">
 														<a class="nav-link active" data-toggle="tab" href="#kt_widget11_tab1_content" role="tab">
-															YTD
+															<?= __('YTD'); ?>
 														</a>
 													</li>
 
 													<li class="nav-item">
 														<a class="nav-link" data-toggle="tab" href="#kt_widget11_tab2_content" role="tab">
-															QTD
+															<?= __('QTD'); ?>
 														</a>
 													</li>
 													<li class="nav-item">
 														<a class="nav-link" data-toggle="tab" href="#kt_widget11_tab2_content" role="tab">
-															MTD
+															<?= __('MTD'); ?>
 														</a>
 													</li>
 												</ul>
@@ -605,21 +605,21 @@
 												<div class="kt-widget12__content">
 													<div class="kt-widget12__item">
 														<div class="kt-widget12__info">
-															<span class="kt-widget12__desc"> Taxes</span>
+															<span class="kt-widget12__desc"> <?= __('Taxes'); ?></span>
 															<span class="kt-widget12__value">$400,000</span>
 														</div>
 														<div class="kt-widget12__info">
-															<span class="kt-widget12__desc">Finance Review Date</span>
-															<span class="kt-widget12__value">July 24,2019</span>
+															<span class="kt-widget12__desc"><?= __('Finance Review Date'); ?></span>
+															<span class="kt-widget12__value"><?= __('July 24,2019'); ?></span>
 														</div>
 													</div>
 													<div class="kt-widget12__item">
 														<div class="kt-widget12__info">
-															<span class="kt-widget12__desc"> Revenue</span>
+															<span class="kt-widget12__desc"> <?= __('Revenue'); ?></span>
 															<span class="kt-widget12__value">$60M</span>
 														</div>
 														<div class="kt-widget12__info">
-															<span class="kt-widget12__desc">Revenue Margin</span>
+															<span class="kt-widget12__desc"><?= __('Revenue Margin'); ?></span>
 															<div class="kt-widget12__progress">
 																<div class="progress kt-progress--sm">
 																	<div class="progress-bar kt-bg-brand" role="progressbar" style="width: 40%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -659,7 +659,7 @@
 										<div class="kt-portlet__head">
 											<div class="kt-portlet__head-label">
 												<h3 class="kt-portlet__head-title">
-													Recent Activities
+													<?= __('Recent Activities'); ?>
 												</h3>
 											</div>
 											<div class="kt-portlet__head-toolbar">
@@ -672,8 +672,8 @@
 														<!--begin::Nav-->
 														<ul class="kt-nav">
 															<li class="kt-nav__head">
-																Export Options
-																<span data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">
+																<?= __('Export Options'); ?>
+																<span data-toggle="kt-tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>">
 																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand kt-svg-icon--md1">
 																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 																			<rect x="0" y="0" width="24" height="24" />
@@ -687,25 +687,25 @@
 															<li class="kt-nav__item">
 																<a href="#" class="kt-nav__link">
 																	<i class="kt-nav__link-icon flaticon2-drop"></i>
-																	<span class="kt-nav__link-text">Activity</span>
+																	<span class="kt-nav__link-text"><?= __('Activity'); ?></span>
 																</a>
 															</li>
 															<li class="kt-nav__item">
 																<a href="#" class="kt-nav__link">
 																	<i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-																	<span class="kt-nav__link-text">FAQ</span>
+																	<span class="kt-nav__link-text"><?= __('FAQ'); ?></span>
 																</a>
 															</li>
 															<li class="kt-nav__item">
 																<a href="#" class="kt-nav__link">
 																	<i class="kt-nav__link-icon flaticon2-telegram-logo"></i>
-																	<span class="kt-nav__link-text">Settings</span>
+																	<span class="kt-nav__link-text"><?= __('Settings'); ?></span>
 																</a>
 															</li>
 															<li class="kt-nav__item">
 																<a href="#" class="kt-nav__link">
 																	<i class="kt-nav__link-icon flaticon2-new-email"></i>
-																	<span class="kt-nav__link-text">Support</span>
+																	<span class="kt-nav__link-text"><?= __('Support'); ?></span>
 																	<span class="kt-nav__link-badge">
 																		<span class="kt-badge kt-badge--success kt-badge--rounded">5</span>
 																	</span>
@@ -713,8 +713,8 @@
 															</li>
 															<li class="kt-nav__separator"></li>
 															<li class="kt-nav__foot">
-																<a class="btn btn-label-danger btn-bold btn-sm" href="#">Upgrade plan</a>
-																<a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">Learn more</a>
+																<a class="btn btn-label-danger btn-bold btn-sm" href="#"><?= __('Upgrade plan'); ?></a>
+																<a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Learn more'); ?></a>
 															</li>
 														</ul>
 
@@ -734,8 +734,8 @@
 															<i class="fa fa-genderless kt-font-danger"></i>
 														</div>
 														<div class="kt-timeline-v2__item-text  kt-padding-top-5">
-															Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
-															incididunt ut labore et dolore magna
+															<?= __('Lorem ipsum dolor sit amit,consectetur eiusmdd tempor'); ?><br>
+															<?= __('incididunt ut labore et dolore magna'); ?>
 														</div>
 													</div>
 													<div class="kt-timeline-v2__item">
@@ -744,7 +744,7 @@
 															<i class="fa fa-genderless kt-font-success"></i>
 														</div>
 														<div class="kt-timeline-v2__item-text kt-timeline-v2__item-text--bold">
-															AEOL Meeting With
+															<?= __('AEOL Meeting With'); ?>
 														</div>
 														<div class="kt-list-pics kt-list-pics--sm kt-padding-l-20">
 															<a href="#"><img src="assets/media/users/100_4.jpg" title="" alt="" ></a>
@@ -759,7 +759,7 @@
 															<i class="fa fa-genderless kt-font-brand"></i>
 														</div>
 														<div class="kt-timeline-v2__item-text kt-padding-top-5">
-															Make Deposit <a href="#" class="kt-link kt-link--brand kt-font-bolder">USD 700</a> To ESL.
+															<?= __('Make Deposit'); ?> <a href="#" class="kt-link kt-link--brand kt-font-bolder"><?= __('USD 700'); ?></a> <?= __('To ESL.'); ?>
 														</div>
 													</div>
 													<div class="kt-timeline-v2__item">
@@ -768,9 +768,9 @@
 															<i class="fa fa-genderless kt-font-warning"></i>
 														</div>
 														<div class="kt-timeline-v2__item-text kt-padding-top-5">
-															Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
-															incididunt ut labore et dolore magna elit enim at minim<br>
-															veniam quis nostrud
+															<?= __('Lorem ipsum dolor sit amit,consectetur eiusmdd tempor'); ?><br>
+															<?= __('incididunt ut labore et dolore magna elit enim at minim'); ?><br>
+															<?= __('veniam quis nostrud'); ?>
 														</div>
 													</div>
 													<div class="kt-timeline-v2__item">
@@ -779,7 +779,7 @@
 															<i class="fa fa-genderless kt-font-info"></i>
 														</div>
 														<div class="kt-timeline-v2__item-text kt-padding-top-5">
-															Placed a new order in <a href="#" class="kt-link kt-link--brand kt-font-bolder">SIGNATURE MOBILE</a> marketplace.
+															<?= __('Placed a new order in'); ?> <a href="#" class="kt-link kt-link--brand kt-font-bolder"><?= __('SIGNATURE MOBILE'); ?></a> <?= __('marketplace.'); ?>
 														</div>
 													</div>
 													<div class="kt-timeline-v2__item">
@@ -788,9 +788,9 @@
 															<i class="fa fa-genderless kt-font-brand"></i>
 														</div>
 														<div class="kt-timeline-v2__item-text kt-padding-top-5">
-															Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
-															incididunt ut labore et dolore magna elit enim at minim<br>
-															veniam quis nostrud
+															<?= __('Lorem ipsum dolor sit amit,consectetur eiusmdd tempor'); ?><br>
+															<?= __('incididunt ut labore et dolore magna elit enim at minim'); ?><br>
+															<?= __('veniam quis nostrud'); ?>
 														</div>
 													</div>
 													<div class="kt-timeline-v2__item">
@@ -799,7 +799,7 @@
 															<i class="fa fa-genderless kt-font-danger"></i>
 														</div>
 														<div class="kt-timeline-v2__item-text kt-padding-top-5">
-															Received a new feedback on <a href="#" class="kt-link kt-link--brand kt-font-bolder">FinancePro App</a> product.
+															<?= __('Received a new feedback on'); ?> <a href="#" class="kt-link kt-link--brand kt-font-bolder"><?= __('FinancePro App'); ?></a> <?= __('product.'); ?>
 														</div>
 													</div>
 													<div class="kt-timeline-v2__item">
@@ -808,7 +808,7 @@
 															<i class="fa fa-genderless kt-font-danger"></i>
 														</div>
 														<div class="kt-timeline-v2__item-text kt-padding-top-5">
-															New notification message has been received on <a href="#" class="kt-link kt-link--brand kt-font-bolder">LoopFin Pro</a> product.
+															<?= __('New notification message has been received on'); ?> <a href="#" class="kt-link kt-link--brand kt-font-bolder"><?= __('LoopFin Pro'); ?></a> <?= __('product.'); ?>
 														</div>
 													</div>
 												</div>
@@ -827,19 +827,19 @@
 										<div class="kt-portlet__head">
 											<div class="kt-portlet__head-label">
 												<h3 class="kt-portlet__head-title">
-													Recent Notifications
+													<?= __('Recent Notifications'); ?>
 												</h3>
 											</div>
 											<div class="kt-portlet__head-toolbar">
 												<ul class="nav nav-pills nav-pills-sm nav-pills-label nav-pills-bold">
 													<li class="nav-item">
 														<a class="nav-link active" data-toggle="tab" href="#kt_widget3_tab1_content" role="tab">
-															Today
+															<?= __('Today'); ?>
 														</a>
 													</li>
 													<li class="nav-item">
 														<a class="nav-link" data-toggle="tab" href="#kt_widget3_tab2_content" role="tab">
-															Month
+															<?= __('Month'); ?>
 														</a>
 													</li>
 												</ul>
@@ -856,11 +856,11 @@
 																<span class="kt-timeline-v3__item-time">09:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Lorem ipsum dolor sit amit,consectetur eiusmdd tempor
+																		<?= __('Lorem ipsum dolor sit amit,consectetur eiusmdd tempor'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Bob
+																			<?= __('By Bob'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -869,11 +869,11 @@
 																<span class="kt-timeline-v3__item-time">10:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Lorem ipsum dolor sit amit
+																		<?= __('Lorem ipsum dolor sit amit'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Sean
+																			<?= __('By Sean'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -882,11 +882,11 @@
 																<span class="kt-timeline-v3__item-time">11:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Lorem ipsum dolor sit amit eiusmdd tempor
+																		<?= __('Lorem ipsum dolor sit amit eiusmdd tempor'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By James
+																			<?= __('By James'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -895,11 +895,11 @@
 																<span class="kt-timeline-v3__item-time">12:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Lorem ipsum dolor
+																		<?= __('Lorem ipsum dolor'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By James
+																			<?= __('By James'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -908,11 +908,11 @@
 																<span class="kt-timeline-v3__item-time">14:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Lorem ipsum dolor sit amit,consectetur eiusmdd
+																		<?= __('Lorem ipsum dolor sit amit,consectetur eiusmdd'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Derrick
+																			<?= __('By Derrick'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -921,11 +921,11 @@
 																<span class="kt-timeline-v3__item-time">15:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Lorem ipsum dolor sit amit,consectetur
+																		<?= __('Lorem ipsum dolor sit amit,consectetur'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Iman
+																			<?= __('By Iman'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -934,11 +934,11 @@
 																<span class="kt-timeline-v3__item-time">17:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Lorem ipsum dolor sit consectetur eiusmdd tempor
+																		<?= __('Lorem ipsum dolor sit consectetur eiusmdd tempor'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Aziko
+																			<?= __('By Aziko'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -957,11 +957,11 @@
 																<span class="kt-timeline-v3__item-time kt-font-success">09:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Contrary to popular belief, Lorem Ipsum is not simply random text.
+																		<?= __('Contrary to popular belief, Lorem Ipsum is not simply random text.'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Bob
+																			<?= __('By Bob'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -970,11 +970,11 @@
 																<span class="kt-timeline-v3__item-time kt-font-warning">10:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		There are many variations of passages of Lorem Ipsum available.
+																		<?= __('There are many variations of passages of Lorem Ipsum available.'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Sean
+																			<?= __('By Sean'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -983,11 +983,11 @@
 																<span class="kt-timeline-v3__item-time kt-font-primary">11:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Contrary to popular belief, Lorem Ipsum is not simply random text.
+																		<?= __('Contrary to popular belief, Lorem Ipsum is not simply random text.'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By James
+																			<?= __('By James'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -996,11 +996,11 @@
 																<span class="kt-timeline-v3__item-time kt-font-success">12:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		The standard chunk of Lorem Ipsum used since the 1500s is reproduced.
+																		<?= __('The standard chunk of Lorem Ipsum used since the 1500s is reproduced.'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By James
+																			<?= __('By James'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -1009,11 +1009,11 @@
 																<span class="kt-timeline-v3__item-time kt-font-warning">14:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Latin words, combined with a handful of model sentence structures.
+																		<?= __('Latin words, combined with a handful of model sentence structures.'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Derrick
+																			<?= __('By Derrick'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -1022,11 +1022,11 @@
 																<span class="kt-timeline-v3__item-time kt-font-info">15:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Contrary to popular belief, Lorem Ipsum is not simply random text.
+																		<?= __('Contrary to popular belief, Lorem Ipsum is not simply random text.'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Iman
+																			<?= __('By Iman'); ?>
 																		</a>
 																	</span>
 																</div>
@@ -1035,11 +1035,11 @@
 																<span class="kt-timeline-v3__item-time kt-font-danger">17:00</span>
 																<div class="kt-timeline-v3__item-desc">
 																	<span class="kt-timeline-v3__item-text">
-																		Lorem Ipsum is therefore always free from repetition, injected humour.
+																		<?= __('Lorem Ipsum is therefore always free from repetition, injected humour.'); ?>
 																	</span><br>
 																	<span class="kt-timeline-v3__item-user-name">
 																		<a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
-																			By Aziko
+																			<?= __('By Aziko'); ?>
 																		</a>
 																	</span>
 																</div>

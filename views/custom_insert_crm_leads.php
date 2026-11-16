@@ -36,7 +36,7 @@ $email_content = $res['email_content'];
 ?>
 <script type="text/javascript">
    function pageCallHistories(transaction_table,rid){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#crmleadhistories").html(loader);
         jQuery.ajax({
             url: "views/custom_insert_crm_lead_histories.php",
@@ -51,7 +51,7 @@ $email_content = $res['email_content'];
     function submitLeadForm(){
         var validations = ajaxFormSubmitValidation();
         if(validations == 0){
-            $(".sbt_loading_en_dis").text("Please Wait........");
+            $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             $(".sbt_loading_en_dis").attr("disabled", true);
             var crm_lead_id = $("#crm_lead_id").val();
             var formData = new FormData();
@@ -90,7 +90,7 @@ $email_content = $res['email_content'];
                             }
                     }else{
                         tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',jsonres.res.message,'');
-                        $(".sbt_loading_en_dis").text("Submit");
+                        $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                         $(".sbt_loading_en_dis").attr("disabled", false);
 
                     }
@@ -114,7 +114,7 @@ $email_content = $res['email_content'];
                     $(".errorshowcrmcomment").text(' ');
                 }else{
                     assetid.push(field.name);
-                    $(".errorshowcrmcomment").text('Invalid email address');
+                    $(".errorshowcrmcomment").text(<?php echo json_encode(__('Invalid email address'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 }
             }
 
@@ -122,11 +122,11 @@ $email_content = $res['email_content'];
         if (assetid.length != 0){
             swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: "Please Enter Required Fields",
+                text: <?php echo json_encode(__('Please Enter Required Fields'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 type: "error",
                 showCancelButton: false,
                 confirmButtonClass: "btn-primary",
-                confirmButtonText: "Ok",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             });
             return false;
@@ -220,8 +220,8 @@ $email_content = $res['email_content'];
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -271,18 +271,18 @@ $email_content = $res['email_content'];
                     <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Personal information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Lead Source <span class="requried text-danger">*</span></span>
+                            <span class="form-label"><?= __('Lead Source'); ?> <span class="requried text-danger">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Contact Source" class="form-control js-example-basic-single requried_field" name="contact_source">
+                            <select aria-label="<?= htmlspecialchars(__('Contact Source'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="contact_source">
                                 <?php foreach($crm_general_codes['SOURCETYPE'] as $lsval){ ?>
                                     <option value="<?php echo $lsval['value']; ?>" <?php echo $transaction['contact_source'] == $lsval['value']?"selected":"";?>><?php echo $lsval['label']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Originator <span class="requried  text-danger">*</span></span>
+                            <span class="form-label"><?= __('Originator'); ?> <span class="requried  text-danger">*</span></span>
                              <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Originator" class="form-control js-example-basic-single requried_field" name="originator">
+                            <select aria-label="<?= htmlspecialchars(__('Originator'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="originator">
                                 <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['originator'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
@@ -290,47 +290,47 @@ $email_content = $res['email_content'];
                             </select>
                         </div>
                         <div class="col-lg-4 form-group">
-                            <span class="form-label">First Name <span class="requried  text-danger">*</span></span>
+                            <span class="form-label"><?= __('First Name'); ?> <span class="requried  text-danger">*</span></span>
                              <span class="d-block error-message text-danger"></span>
-                            <input aria-label="First Name" class="form-control requried_field" type="text" name="first_name" placeholder="<?= __('First Name') ?>" value="<?php echo $transaction['first_name']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('First Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="text" name="first_name" placeholder="<?= __('First Name') ?>" value="<?php echo $transaction['first_name']; ?>">
                         </div>
                         <div class="col-lg-4 form-group">
                             <span class="form-label"><?= __('Middle Name') ?></span>
-                            <input aria-label="Middle Name" class="form-control" type="text" name="middle_name" placeholder="<?= __('Middle Name') ?>" value="<?php echo $transaction['middle_name']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Middle Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="middle_name" placeholder="<?= __('Middle Name') ?>" value="<?php echo $transaction['middle_name']; ?>">
                         </div>
                         <div class="col-lg-4 form-group">
-                            <span class="form-label">last Name <span class="requried  text-danger">*</span></span>
+                            <span class="form-label"><?= __('last Name'); ?> <span class="requried  text-danger">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Last Name" class="form-control requried_field" type="text" name="last_name" placeholder="<?= __('Last Name') ?>" value="<?php echo $transaction['last_name']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Last Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="text" name="last_name" placeholder="<?= __('Last Name') ?>" value="<?php echo $transaction['last_name']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label"><?= __('Email') ?></span>
-                            <input aria-label="Email" class="form-control" type="email" name="email_id" placeholder="<?= __('Email') ?>" value="<?php echo $transaction['email_id']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="email" name="email_id" placeholder="<?= __('Email') ?>" value="<?php echo $transaction['email_id']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
-                            <span class="form-label">Phone No. <span class="requried  text-danger">*</span></span>
+                            <span class="form-label"><?= __('Phone No.'); ?> <span class="requried  text-danger">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Phone" class="form-control requried_field" type="tel" name="phone" placeholder="<?= __('Phone') ?>" value="<?php echo $transaction['phone']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="tel" name="phone" placeholder="<?= __('Phone') ?>" value="<?php echo $transaction['phone']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Office No.') ?></span>
-                            <input aria-label="Phone" class="form-control" type="tel" name="office_phone" placeholder="<?= __('Phone') ?>" value="<?php echo $transaction['office_phone']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="tel" name="office_phone" placeholder="<?= __('Phone') ?>" value="<?php echo $transaction['office_phone']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label"><?= __('Fax') ?></span>
-                            <input aria-label="Fax" class="form-control" type="text" name="fax" placeholder="<?= __('Fax') ?>" value="<?php echo $transaction['fax']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Fax'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="fax" placeholder="<?= __('Fax') ?>" value="<?php echo $transaction['fax']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Website') ?></span>
-                            <input aria-label="Website" class="form-control" type="text" name="website" placeholder="<?= __('Website') ?>" value="<?php echo $transaction['website']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Website'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="website" placeholder="<?= __('Website') ?>" value="<?php echo $transaction['website']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Company Name') ?></span>
-                            <input aria-label="Company Name" class="form-control" type="text" name="company_name" placeholder="<?= __('Company Name') ?>" value="<?php echo $transaction['company_name']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Company Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="company_name" placeholder="<?= __('Company Name') ?>" value="<?php echo $transaction['company_name']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Campaign') ?></span>
-                            <select aria-label="Crm Campaign" class="form-control js-example-basic-single" name="crm_campaign_id">
+                            <select aria-label="<?= htmlspecialchars(__('Crm Campaign'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="crm_campaign_id">
                                 <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($crm_campaigns as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['crm_campaign_id'] == $uval['id'])?"selected":"";?>><?php echo $uval['campaign_name']; ?></option>
@@ -339,7 +339,7 @@ $email_content = $res['email_content'];
                         </div>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Lead Status') ?></span>
-                            <select aria-label="Crm Status" class="form-control js-example-basic-single" name="crm_status">
+                            <select aria-label="<?= htmlspecialchars(__('Crm Status'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="crm_status">
                                <?php foreach($project_task_status as $uval){ ?>
                                     <option value="<?php echo $uval['status']; ?>" <?php echo ($transaction['crm_status'] == $uval['status'])?"selected":"";?>><?php echo $uval['name']; ?></option>
                                 <?php } ?>
@@ -353,7 +353,7 @@ $email_content = $res['email_content'];
                                         <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                                     </label>
                                     <input type="file" name="image" id="display_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                                    <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="Attachment Preview" />
+                                    <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                                     <input type="hidden" name="hid_image" value="<?php echo $transaction['image'] ;  ?>">
                                 </div>
                             </div>
@@ -364,12 +364,12 @@ $email_content = $res['email_content'];
                         <div class="col-lg-12 form-group">
                             <span class="form-label"><?= __('Address') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Address" name="address" placeholder="<?= __('Address') ?>" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['address']; ?></textarea>
+                                <textarea aria-label="<?= htmlspecialchars(__('Address'), ENT_QUOTES, 'UTF-8'); ?>" name="address" placeholder="<?= __('Address') ?>" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['address']; ?></textarea>
                             </div>
                         </div>
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label"><?= __('Country') ?></span>
-                            <select aria-label="Country" class="form-control js-example-basic-single" name="country_id" onchange="selectedcategory(this.value,'state_id','states','country_id')">
+                            <select aria-label="<?= htmlspecialchars(__('Country'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="country_id" onchange="selectedcategory(this.value,'state_id','states','country_id')">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($countries as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['country_id'] == $cval['id']?"selected":"";?>><?php echo $cval['country_name']; ?></option>
@@ -378,7 +378,7 @@ $email_content = $res['email_content'];
                         </div>
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label"><?= __('State') ?></span>
-                            <select aria-label="State" class="form-control js-example-basic-single" name="state_id" id="state_id" onchange="selectedcategory(this.value,'city_id','cities','state_id')">
+                            <select aria-label="<?= htmlspecialchars(__('State'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="state_id" id="state_id" onchange="selectedcategory(this.value,'city_id','cities','state_id')">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($states as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['state_id'] == $cval['id']?"selected":"";?>><?php echo $cval['state_name']; ?></option>
@@ -387,7 +387,7 @@ $email_content = $res['email_content'];
                         </div>
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label"><?= __('City') ?></span>
-                            <select aria-label="City" class="form-control js-example-basic-single" name="city_id" id="city_id">
+                            <select aria-label="<?= htmlspecialchars(__('City'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="city_id" id="city_id">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($cities as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['city_id'] == $cval['id']?"selected":"";?>><?php echo $cval['city_name']; ?></option>
@@ -396,7 +396,7 @@ $email_content = $res['email_content'];
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label"><?= __('Post Code') ?></span>
-                            <input aria-label="Postal Code" class="form-control" type="text" name="post_code" placeholder="<?= __('Postal Code') ?>" value="<?php echo $transaction['post_code']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Postal Code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="post_code" placeholder="<?= __('Postal Code') ?>" value="<?php echo $transaction['post_code']; ?>">
                         </div>
                     </div>
                     <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Description Information') ?></h5>
@@ -404,7 +404,7 @@ $email_content = $res['email_content'];
                         <div class="col-lg-12 form-group">
                             <span class="form-label"><?= __('Description') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Description" name="remark" placeholder="<?= __('Description') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
+                                <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" name="remark" placeholder="<?= __('Description') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -420,7 +420,7 @@ $email_content = $res['email_content'];
             <div class="col-lg-7">
                   <?php if($rid ==""){ ?>
                  <div class="card-px text-center ">
-                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> No Histories</p>
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> <?= __('No Histories'); ?></p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                     </div>

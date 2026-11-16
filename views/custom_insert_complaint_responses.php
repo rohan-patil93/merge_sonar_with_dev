@@ -55,12 +55,12 @@ if ($_GET['Rid']) {
                     <div class="row">
                         <div class="col-lg-6 col-xs-12 form-group">
                             <span><?= __('Complaint Name') ?></span>
-                            <input aria-label="Input field" class="form-control" type="text"  value="<?php echo $return['complaint_name']; ?>" disabled/>
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text"  value="<?php echo $return['complaint_name']; ?>" disabled/>
                         </div>
 
                         <div class="col-lg-4 col-xs-8 form-group">
                             <span><?= __('Complaint Date') ?></span>
-                            <input aria-label="Select date" class="form-control" type="date"  value="<?php echo $return['transaction_date']; ?>" disabled/>
+                            <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date"  value="<?php echo $return['transaction_date']; ?>" disabled/>
 
                         </div>
                         <div class="col-lg-2 col-xs-4 form-group">
@@ -69,17 +69,17 @@ if ($_GET['Rid']) {
                         </div>
                         <div class="col-lg-6 col-xs-12 form-group">
                             <span><?= __('Response Comments') ?></span>
-                            <input aria-label="Remarks" class="form-control" type="text" name="remarks" id="remarks" value="" />
+                            <input aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="remarks" id="remarks" value="" />
                         </div>
                         <div class="col-lg-6 col-xs-12 form-group">
                             <span><?= __('Response Date') ?><span style="color:red;">*</span></span>
-                            <input aria-label="Transaction Date" class="form-control" type="date" name="transaction_date" id="transaction_date"  value="<?php echo date('Y-m-d'); ?>"/>
+                            <input aria-label="<?= htmlspecialchars(__('Transaction Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="transaction_date" id="transaction_date"  value="<?php echo date('Y-m-d'); ?>"/>
                             <div style="display: none;color: red;" id="transaction_date_err"></div>
                         </div>
 
                         <div class="col-lg-6 col-xs-12 form-group">
                             <span><?= __('Complaint Image') ?></span>
-                            <input aria-label="Complaint Image" class="form-control" type="file" name="complaint_image" id="complaint_image" value="" />
+                            <input aria-label="<?= htmlspecialchars(__('Complaint Image'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="file" name="complaint_image" id="complaint_image" value="" />
                         </div>
 
                     </div>

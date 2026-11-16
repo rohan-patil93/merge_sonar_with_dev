@@ -49,15 +49,15 @@ $alpha =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 <div class="page-body">
    <div class="card">
     <div class="card-header">
-      <h5 class="f-30">EEO Details</h5>
-      <h6 class="mt-4"><?php echo count((array)$emp_details); ?> Active Employees</h6>
+      <h5 class="f-30"><?= __('EEO Details'); ?></h5>
+      <h6 class="mt-4"><?php echo count((array)$emp_details); ?> <?= __('Active Employees'); ?></h6>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=EEO-1 Report" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=EEO-1 Report" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=EEO-1 Report" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=EEO-1 Report" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -68,20 +68,20 @@ $alpha =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
           <div class="row col-lg-12 ">
         <div class="col-lg-2">
           <div class="form-group">
-            <input aria-label="Fromdate" class="form-control datepicker" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
-} ?> placeholder="From Date" >
+            <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
+} ?> placeholder="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" >
           </div>
         </div>
         <div class="col-lg-2">
           <div class="form-group">
-            <input aria-label="Input field" class="form-control datepicker" <?php if($todate!=""){ ?>  value="<?php echo $todate; ?>" <?php
-} ?> name="todate" type="text" placeholder="To Date">
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" <?php if($todate!=""){ ?>  value="<?php echo $todate; ?>" <?php
+} ?> name="todate" type="text" placeholder="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
           </div>
         </div>
         <?php include_once 'views/custom_standard_report_hr_employee_filter.php'; ?>
         <div class="col-lg-2 mt-1">
           <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-            Apply
+            <?= __('Apply'); ?>
           </button>
           <input type="hidden" name="submit" value="applyform">
         </div>
@@ -97,12 +97,12 @@ $alpha =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         <table class="table table-hover">
           <tr style="background-color: #eeeeee;">
             <th scope="col">#</th>
-            <th scope="col">Employee Name</th>
+            <th scope="col"><?= __('Employee Name'); ?></th>
 
-            <th scope="col">Gender</th>
-            <th scope="col">Employee Ethnicity</th>
-            <th scope="col">Job Title</th>
-            <th scope="col">EEO Category</th>
+            <th scope="col"><?= __('Gender'); ?></th>
+            <th scope="col"><?= __('Employee Ethnicity'); ?></th>
+            <th scope="col"><?= __('Job Title'); ?></th>
+            <th scope="col"><?= __('EEO Category'); ?></th>
           </tr>
           <?php $k=1; foreach($emp_details as $emdata){
              $cssdata[] = array('Sl No'=> $k,'Employee Name'=> $emdata['display_name'], 'Employee Code'=> $emdata['emp_code'], 'Gender'=> $fmarray[$emdata['gender']],'Employee Ethnicity'=> $race_name[$emdata['race_id']], 'Job Title'=> $job_tittle_name[$emdata['job_title_id']], 'EEO Category'=>$titles[$jobtitlecat[$emdata['job_title_id']]]);
@@ -112,7 +112,7 @@ $alpha =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             <td>
               <div class="d-inline-block align-middle">
                 <?php if($emdata['image']!=""){ ?>
-                  <img src="uploads/module/hr.webp" alt="user" class="img-radius img-40 align-top m-r-15">
+                  <img src="uploads/module/hr.webp" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15">
                 <?php }else{ ?>
                   <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  mt-1"><?php echo initials($emdata['display_name']); ?></span>
                 <?php } ?>
@@ -133,8 +133,8 @@ $alpha =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         </table>
         <div class="f-20 text-danger text-center">
         <?php if(count((array)$emp_details)==0){ ?>
-            Please Link to Job title, EEO Categories</br>
-            Please Link to Employee , Race
+            <?= __('Please Link to Job title, EEO Categories'); ?></br>
+            <?= __('Please Link to Employee , Race'); ?>
         <?php } ?>
       </div>
       </div>

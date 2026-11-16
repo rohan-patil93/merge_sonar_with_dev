@@ -60,8 +60,8 @@ $subscriptiontypeunit = $subscriptusers['subscriptiontypeunit'];
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Subscription Plans</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Subscription Plans'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="table-responsive">
@@ -69,7 +69,7 @@ $subscriptiontypeunit = $subscriptusers['subscriptiontypeunit'];
             <div class="row mb-2">
                 <div class="col-lg-9"></div>
                 <div class="col-lg-3">
-                    <select aria-label="Subscriptiontypeunit" class="form-select  js-example-basic-single" name="subscriptiontypeunit" onchange="selectSubcritpType(this.value)">
+                    <select aria-label="<?= htmlspecialchars(__('Subscriptiontypeunit'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select  js-example-basic-single" name="subscriptiontypeunit" onchange="selectSubcritpType(this.value)">
                         <?php foreach($subscriptiontypeunit as $kyvalue=>$kyename){ ?>
                             <option value="<?php echo $kyvalue; ?>"><?php echo $kyename; ?></option>
                         <?php } ?>
@@ -97,7 +97,7 @@ $subscriptiontypeunit = $subscriptusers['subscriptiontypeunit'];
                             <div class="checkbox-fade fade-in-primary" >
                               <label class="form-label">
 
-                                <input aria-label="Checkbox" type="checkbox" value="<?php echo $mdid; ?>" id="checkmodule_<?php echo $mdid; ?>" name="checkmodule[<?php echo $mdid; ?>]" class="uncheckall" onchange="moduleSelect(<?php echo $mdid; ?>)" <?php echo $modelcheck; ?>>
+                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="<?php echo $mdid; ?>" id="checkmodule_<?php echo $mdid; ?>" name="checkmodule[<?php echo $mdid; ?>]" class="uncheckall" onchange="moduleSelect(<?php echo $mdid; ?>)" <?php echo $modelcheck; ?>>
                                 <span class="cr">
                                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                 </span>
@@ -128,13 +128,13 @@ $subscriptiontypeunit = $subscriptusers['subscriptiontypeunit'];
 
                     <th scope="col" class="planedshow_<?php echo $mdid; ?> allhideclass allcssshow <?php echo $showclass; ?>" <?php echo $showoffcss; ?>>
                         <div class="d-inline-block align-middle">
-                            <input aria-label="Radio option" type="radio" name="planedname_<?php echo $mdid; ?>" <?php echo $checked ; ?> value="<?php echo $subscription_plann['id']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="planedname_<?php echo $mdid; ?>" <?php echo $checked ; ?> value="<?php echo $subscription_plann['id']; ?>">
                             <h6 class="mb-0"><?php echo $subscription_plann['plan_name'];  ?></h6>
                             <p class="text-muted m-b-0"><?php echo $subscription_plann['lot_user']."- Users Limit"; ?></p>
-<h6 class="f-w-700 monthly_lot_price allhideclass" ><?php echo "Rs. ".$subscription_plann['monthly_lot_price']; ?> / <span class="text-muted d-inline-block">Monthly</span></h6>
-<h6 class="f-w-700 quarterly_lot_price allhideclass" style="display: none"><?php echo "Rs. ".$subscription_plann['quarterly_lot_price']; ?> / <span class="text-muted d-inline-block">Quarterly</span></h6>
-<h6 class="f-w-700 half_yearly_lot_price allhideclass" style="display: none"><?php echo "Rs. ".$subscription_plann['half_yearly_lot_price']; ?> / <span class="text-muted d-inline-block">Half Yearly</span></h6>
-<h6 class="f-w-700 yearly_lot_price allhideclass" style="display: none"><?php echo "Rs. ".$subscription_plann['yearly_lot_price']; ?> / <span class="text-muted d-inline-block">Yearly</span></h6>
+<h6 class="f-w-700 monthly_lot_price allhideclass" ><?php echo "Rs. ".$subscription_plann['monthly_lot_price']; ?> / <span class="text-muted d-inline-block"><?= __('Monthly'); ?></span></h6>
+<h6 class="f-w-700 quarterly_lot_price allhideclass" style="display: none"><?php echo "Rs. ".$subscription_plann['quarterly_lot_price']; ?> / <span class="text-muted d-inline-block"><?= __('Quarterly'); ?></span></h6>
+<h6 class="f-w-700 half_yearly_lot_price allhideclass" style="display: none"><?php echo "Rs. ".$subscription_plann['half_yearly_lot_price']; ?> / <span class="text-muted d-inline-block"><?= __('Half Yearly'); ?></span></h6>
+<h6 class="f-w-700 yearly_lot_price allhideclass" style="display: none"><?php echo "Rs. ".$subscription_plann['yearly_lot_price']; ?> / <span class="text-muted d-inline-block"><?= __('Yearly'); ?></span></h6>
                             </div>
                     </th>
                 <?php $mk++;
@@ -150,6 +150,6 @@ $subscriptiontypeunit = $subscriptusers['subscriptiontypeunit'];
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary mr-2" onclick="submitFormSubscrib()" >Submit</button>
+    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary mr-2" onclick="submitFormSubscrib()" ><?= __('Submit'); ?></button>
 </div>

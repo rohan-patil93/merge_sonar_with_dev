@@ -391,7 +391,7 @@ $application_users = $result['application_users'];
         }
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright"><?php echo __('OpenStreetMap'); ?></a> contributors'
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright"><?php echo __('OpenStreetMap'); ?></a> <?= htmlspecialchars(__('contributors'), ENT_QUOTES, 'UTF-8'); ?>'
         }).addTo(map);
         const searchControl = new L.Control.Search({
             url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',

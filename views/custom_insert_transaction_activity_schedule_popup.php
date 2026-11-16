@@ -20,11 +20,11 @@ function submitform(){
 
                 swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: "Its mandatory to upload the attachment",
+            text: <?php echo json_encode(__('Its mandatory to upload the attachment'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             type: "error",
             showCancelButton: true,
             showConfirmButton: false,
-            cancelButtonText: "Ok",
+            cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonClass: "btn-danger",
             closeOnCancel: false
         });
@@ -50,11 +50,11 @@ function submitform(){
                 console.log(response);
                 var jsonres = JSON.parse(response);
                 if(jsonres.status == "<?php echo ST_INPROGRESS; ?>"){
-                    $(".statusid_"+rid).html('<span class="form-label label" style="color: #FFFFFF;    background:  #f5b700; border-color: ##f5b700;">In Progress </span>');
+                    $(".statusid_"+rid).html('<span class="form-label label" style="color: #FFFFFF;    background:  #f5b700; border-color: ##f5b700;"><?= htmlspecialchars(__('In Progress'), ENT_QUOTES, 'UTF-8'); ?> </span>');
                 }
                 if(jsonres.status == "<?php echo ST_COMPLETE; ?>"){
                     $('.sendapprove_'+rid).attr("disabled", true);
-                    $(".statusid_"+rid).html('<span class="form-label label " style="color:#FFFFFF;background:#bc00dd;border-color:#bc00dd;">Completed</span>');
+                    $(".statusid_"+rid).html('<span class="form-label label " style="color:#FFFFFF;background:#bc00dd;border-color:#bc00dd;"><?= htmlspecialchars(__('Completed'), ENT_QUOTES, 'UTF-8'); ?></span>');
                     location.reload();
                 }
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message']['3001']; ?>','');
@@ -77,9 +77,9 @@ function submitform(){
     </script>
 <div class="modal-header">
     <h5 class="modal-title">
-        <?php echo "Submit Task / Checklist"; ?>
+        <?php echo __("Submit Task / Checklist"); ?>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closecompliencfunction()"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" onclick="closecompliencfunction()"></button>
 </div>
 <div class="modal-body" >
     <form class="kt-form kt-form--label-right" action="" id="frmsubmit" method="post">
@@ -88,11 +88,11 @@ function submitform(){
             <div class="form-group row">
                 <div class="col-lg-12  form-group">
                     <span class="form-label"><?php echo $check_list[$_POST['aryposition']]['name']; ?><span class="text-danger">*</span></span>
-                    <textarea aria-label="Comment" class="form-control" name="comment" id="comment"></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="comment" id="comment"></textarea>
                 </div>
                 <div class="col-lg-12  form-group" style="<?php echo $check_list[$_POST['aryposition']]['attachment_requerd']=='Y'?"display:block":"display:none";?>">
-                    <span class="form-label">Attchements<span class="text-danger">*</span></span>
-                    <input aria-label="Popupfile" class="form-control" id="popupfile" type="file">
+                    <span class="form-label"><?= __('Attchements'); ?><span class="text-danger">*</span></span>
+                    <input aria-label="<?= htmlspecialchars(__('Popupfile'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="popupfile" type="file">
                 </div>
             </div>
         </div>
@@ -105,6 +105,6 @@ function submitform(){
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal" onclick="closecompliencfunction()">Close</button>
-    <button type="button" class="btn btn-primary mr-2" onclick="submitform()" >Submit</button>
+    <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal" onclick="closecompliencfunction()"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary mr-2" onclick="submitform()" ><?= __('Submit'); ?></button>
 </div>

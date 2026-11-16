@@ -9,8 +9,8 @@ if(strtotime($startdate)<= $todaydate && strtotime($enddate) >=$todaydate && !is
 ?>
 
 <div class="alert alert-warning alert-dismissible">
-      <strong>Please submit your timesheet by <?php echo date("d-M-Y",strtotime($enddate)); ?>, please ignore this message if already submitted</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <strong><?= __('Please submit your timesheet by'); ?> <?php echo date("d-M-Y",strtotime($enddate)); ?><?= __(', please ignore this message if already submitted'); ?></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
   </div>
 <?php }
 } ?>

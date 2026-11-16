@@ -30,13 +30,13 @@ $inactive_count = $result['inactive_count'] ?? 0;
 
     <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
 
-        <h5 class="mb-0">Customer Contracts</h5>
+        <h5 class="mb-0"><?= __('Customer Contracts'); ?></h5>
 
         <div class="d-flex align-items-center gap-3 flex-wrap">
 
             <a href="index.php?option=COM_INSERT_CONTRACTS&party_type=customer&party_id=<?php echo htmlspecialchars($customer_id); ?>" class="btn btn-success btn-sm">
 
-                <i class="icofont icofont-plus text-white"></i> Add Contract
+                <i class="icofont icofont-plus text-white"></i> <?= __('Add Contract'); ?>
 
             </a>
 
@@ -46,7 +46,7 @@ $inactive_count = $result['inactive_count'] ?? 0;
 
                     <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#customer_contracts_active" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                        Active
+                        <?= __('Active'); ?>
 
                         <span class="form-label label label-xs label-success m-l-10"><?php echo $active_count; ?></span>
 
@@ -58,7 +58,7 @@ $inactive_count = $result['inactive_count'] ?? 0;
 
                     <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#customer_contracts_inactive" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                        Inactive
+                        <?= __('Inactive'); ?>
 
                         <span class="form-label label label-xs label-success m-l-10"><?php echo $inactive_count; ?></span>
 
@@ -86,29 +86,29 @@ $inactive_count = $result['inactive_count'] ?? 0;
 
                             <tr>
 
-                                <th scope="col">SL No</th>
+                                <th scope="col"><?= __('SL No'); ?></th>
 
-                                <th scope="col">Contract Name</th>
+                                <th scope="col"><?= __('Contract Name'); ?></th>
 
-                                <th scope="col">Transaction No</th>
+                                <th scope="col"><?= __('Transaction No'); ?></th>
 
-                                <th scope="col">AMC?</th>
+                                <th scope="col"><?= __('AMC?'); ?></th>
 
-                                <th scope="col">Next Visit</th>
+                                <th scope="col"><?= __('Next Visit'); ?></th>
 
-                                <th scope="col">Overdue</th>
+                                <th scope="col"><?= __('Overdue'); ?></th>
 
-                                <th scope="col">Last Completed</th>
+                                <th scope="col"><?= __('Last Completed'); ?></th>
 
-                                <th scope="col">Pending</th>
+                                <th scope="col"><?= __('Pending'); ?></th>
 
-                                <th scope="col">Start Date</th>
+                                <th scope="col"><?= __('Start Date'); ?></th>
 
-                                <th scope="col">End Date</th>
+                                <th scope="col"><?= __('End Date'); ?></th>
 
-                                <th scope="col">Status</th>
+                                <th scope="col"><?= __('Status'); ?></th>
 
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Action'); ?></th>
 
                             </tr>
 
@@ -140,29 +140,29 @@ $inactive_count = $result['inactive_count'] ?? 0;
 
                             <tr>
 
-                                <th scope="col">SL No</th>
+                                <th scope="col"><?= __('SL No'); ?></th>
 
-                                <th scope="col">Contract Name</th>
+                                <th scope="col"><?= __('Contract Name'); ?></th>
 
-                                <th scope="col">Transaction No</th>
+                                <th scope="col"><?= __('Transaction No'); ?></th>
 
-                                <th scope="col">AMC?</th>
+                                <th scope="col"><?= __('AMC?'); ?></th>
 
-                                <th scope="col">Next Visit</th>
+                                <th scope="col"><?= __('Next Visit'); ?></th>
 
-                                <th scope="col">Overdue</th>
+                                <th scope="col"><?= __('Overdue'); ?></th>
 
-                                <th scope="col">Last Completed</th>
+                                <th scope="col"><?= __('Last Completed'); ?></th>
 
-                                <th scope="col">Pending</th>
+                                <th scope="col"><?= __('Pending'); ?></th>
 
-                                <th scope="col">Start Date</th>
+                                <th scope="col"><?= __('Start Date'); ?></th>
 
-                                <th scope="col">End Date</th>
+                                <th scope="col"><?= __('End Date'); ?></th>
 
-                                <th scope="col">Status</th>
+                                <th scope="col"><?= __('Status'); ?></th>
 
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Action'); ?></th>
 
                             </tr>
 

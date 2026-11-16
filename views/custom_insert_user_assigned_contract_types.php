@@ -95,7 +95,7 @@ $pageTitle = $isEdit ? 'Edit User Assigned Contract Types' : 'Assign Contract Ty
             <div class="card-header-right table-card-header">
                 <a href="index.php?option=COM_LIST_USER_ASSIGNED_CONTRACT_TYPES" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -109,9 +109,9 @@ $pageTitle = $isEdit ? 'Edit User Assigned Contract Types' : 'Assign Contract Ty
                 <input type="hidden" name="rid" value="<?php echo htmlspecialchars((string) $rid); ?>">
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label class="form-label" for="uact_user_id">User <span class="text-danger">*</span></label>
+                        <label class="form-label" for="uact_user_id"><?= __('User'); ?> <span class="text-danger">*</span></label>
                         <select name="user_id" id="uact_user_id" class="form-control js-example-basic-single" required>
-                            <option value="">Select User</option>
+                            <option value=""><?= __('Select User'); ?></option>
                             <?php if (count((array) $users) > 0) {
                                 foreach ($users as $userRow) {
                                     $uArr = is_array($userRow) ? $userRow : json_decode(json_encode($userRow), true);
@@ -127,7 +127,7 @@ $pageTitle = $isEdit ? 'Edit User Assigned Contract Types' : 'Assign Contract Ty
                         </select>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label class="form-label" for="uact_type_ids">Contract Types <span class="text-danger">*</span></label>
+                        <label class="form-label" for="uact_type_ids"><?= __('Contract Types'); ?> <span class="text-danger">*</span></label>
                         <select name="type_ids[]" id="uact_type_ids" class="form-control js-example-basic-multiple" multiple="multiple">
                             <?php if (count((array) $contractTypes) > 0) {
                                 foreach ($contractTypes as $typeRow) {
@@ -149,7 +149,7 @@ $pageTitle = $isEdit ? 'Edit User Assigned Contract Types' : 'Assign Contract Ty
                         <button type="submit" name="submit" value="<?php echo $isEdit ? 'update' : 'insert'; ?>" class="btn btn-primary">
                             <?php echo $isEdit ? 'Update' : 'Save'; ?>
                         </button>
-                        <a href="index.php?option=COM_LIST_USER_ASSIGNED_CONTRACT_TYPES" class="btn btn-secondary">Cancel</a>
+                        <a href="index.php?option=COM_LIST_USER_ASSIGNED_CONTRACT_TYPES" class="btn btn-secondary"><?= __('Cancel'); ?></a>
                     </div>
                 </div>
             </form>

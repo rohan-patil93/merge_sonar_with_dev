@@ -2,7 +2,7 @@
   <div class="">
     <div class="card card-custom">
         <div class="card-header table-card-header">
-            <h5>  My Calendar</h5>
+            <h5>  <?= __('My Calendar'); ?></h5>
             <div class="card-header-right table-card-header ">
                <input type="hidden" name="calendar_cat" id="calendar_cat" value="1-2-3-4-5-6">
             </div>

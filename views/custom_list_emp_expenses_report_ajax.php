@@ -77,23 +77,23 @@ function eerStatusClass($status_code) {
 <div class="col-12">
 	<div class="eer-summary">
 		<div class="eer-chip eer-chip-claims">
-			<span class="eer-chip-label">Claims</span>
+			<span class="eer-chip-label"><?= __('Claims'); ?></span>
 			<span class="eer-chip-value"><?php echo $claims; ?></span>
 		</div>
 		<div class="eer-chip eer-chip-lines">
-			<span class="eer-chip-label">Line Items</span>
+			<span class="eer-chip-label"><?= __('Line Items'); ?></span>
 			<span class="eer-chip-value"><?php echo $line_items; ?></span>
 		</div>
 		<div class="eer-chip eer-chip-total">
-			<span class="eer-chip-label">Total Amount</span>
+			<span class="eer-chip-label"><?= __('Total Amount'); ?></span>
 			<span class="eer-chip-value"><?php echo eerFormatMoney($total_amount); ?></span>
 		</div>
 		<div class="eer-chip eer-chip-tax">
-			<span class="eer-chip-label">Tax</span>
+			<span class="eer-chip-label"><?= __('Tax'); ?></span>
 			<span class="eer-chip-value"><?php echo eerFormatMoney($tax_amount); ?></span>
 		</div>
 		<div class="eer-chip eer-chip-pending">
-			<span class="eer-chip-label">Pending Reimburse</span>
+			<span class="eer-chip-label"><?= __('Pending Reimburse'); ?></span>
 			<span class="eer-chip-value"><?php echo eerFormatMoney($pending_amount); ?></span>
 		</div>
 	</div>
@@ -103,19 +103,19 @@ function eerStatusClass($status_code) {
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col">Sl.No</th>
-				<th scope="col">Date</th>
-				<th scope="col">Code</th>
-				<th scope="col">Employee</th>
-				<th scope="col">Type</th>
-				<th scope="col">Merchant</th>
-				<th scope="col">Bill No</th>
-				<th scope="col">Payment</th>
-				<th scope="col">Location</th>
-				<th scope="col">Tax</th>
-				<th scope="col">Amount</th>
-				<th scope="col">Status</th>
-				<th scope="col">Bill</th>
+				<th scope="col"><?= __('Sl.No'); ?></th>
+				<th scope="col"><?= __('Date'); ?></th>
+				<th scope="col"><?= __('Code'); ?></th>
+				<th scope="col"><?= __('Employee'); ?></th>
+				<th scope="col"><?= __('Type'); ?></th>
+				<th scope="col"><?= __('Merchant'); ?></th>
+				<th scope="col"><?= __('Bill No'); ?></th>
+				<th scope="col"><?= __('Payment'); ?></th>
+				<th scope="col"><?= __('Location'); ?></th>
+				<th scope="col"><?= __('Tax'); ?></th>
+				<th scope="col"><?= __('Amount'); ?></th>
+				<th scope="col"><?= __('Status'); ?></th>
+				<th scope="col"><?= __('Bill'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -182,7 +182,7 @@ function eerStatusClass($status_code) {
 					</td>
 					<td>
 						<?php if ($bill_url != '') { ?>
-							<a class="eer-bill-link" href="<?php echo htmlspecialchars($bill_url); ?>" target="_blank" rel="noopener noreferrer" title="View bill">
+							<a class="eer-bill-link" href="<?php echo htmlspecialchars($bill_url); ?>" target="_blank" rel="noopener noreferrer" title="<?= htmlspecialchars(__('View bill'), ENT_QUOTES, 'UTF-8'); ?>">
 								<i class="fas fa-paperclip"></i>
 							</a>
 						<?php } else { ?>
@@ -201,7 +201,7 @@ function eerStatusClass($status_code) {
 </div>
 <?php } else { ?>
 <div class="card-px text-center py-20 mt-2">
-	<p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Employee Expenses</p>
+	<p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No Employee Expenses'); ?></p>
 	<div class="text-center px-4">
 		<img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
 	</div>

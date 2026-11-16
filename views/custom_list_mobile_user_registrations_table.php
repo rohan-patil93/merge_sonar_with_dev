@@ -14,11 +14,11 @@ $tableData = $result['table'];
 <table class="table table-striped table-inverse nowrap " >
     <thead>
         <tr>
-            <th scope="col">Sl No.</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone No.</th>
-            <th scope="col">Registered Date</th>
+            <th scope="col"><?= __('Sl No.'); ?></th>
+            <th scope="col"><?= __('Name'); ?></th>
+            <th scope="col"><?= __('Email'); ?></th>
+            <th scope="col"><?= __('Phone No.'); ?></th>
+            <th scope="col"><?= __('Registered Date'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -39,7 +39,7 @@ $tableData = $result['table'];
                 <td colspan="5">
                     <div class="text-center">
                         <p class="text-muted f-16 fw-bold m-b-30">
-                            <i class="fa fa-warning"></i> No Records
+                            <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                         </p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">

@@ -22,16 +22,16 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5>Withholding Tax (TDS / VAT / GST) Report</h5>
+        <h5><?= __('Withholding Tax (TDS / VAT / GST) Report'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=WithholdingTax&format=csv" target="_blank">CSV</a>
+                        href="custom_view_download.php?page=WithholdingTax&format=csv" target="_blank"><?= __('CSV'); ?></a>
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=WithholdingTax&format=excel" target="_blank">Excel</a>
+                        href="custom_view_download.php?page=WithholdingTax&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -47,18 +47,18 @@ $_SESSION['download_data'] = [];
             <table class="table table-separate table-head-custom table-checkable data-table">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-right">SL No</th>
-                        <th scope="col">PI No.</th>
+                        <th scope="col" class="text-right"><?= __('SL No'); ?></th>
+                        <th scope="col"><?= __('PI No.'); ?></th>
 
-                        <th scope="col">Supplier</th>
-                        <th scope="col">Invoice No</th>
-                        <th scope="col">Invoice Date</th>
-                        <th scope="col" class="text-right">Taxable Amount</th>
-                        <th scope="col" class="text-right">GST/VAT Amount</th>
-                        <th scope="col" class="text-right">TDS Withheld</th>
-                        <th scope="col" class="text-right">Invoice Total</th>
-                        <th scope="col" class="text-right">Net Payable</th>
-                        <th scope="col">Tax Type</th>
+                        <th scope="col"><?= __('Supplier'); ?></th>
+                        <th scope="col"><?= __('Invoice No'); ?></th>
+                        <th scope="col"><?= __('Invoice Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Taxable Amount'); ?></th>
+                        <th scope="col" class="text-right"><?= __('GST/VAT Amount'); ?></th>
+                        <th scope="col" class="text-right"><?= __('TDS Withheld'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Invoice Total'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Net Payable'); ?></th>
+                        <th scope="col"><?= __('Tax Type'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,7 +104,7 @@ $_SESSION['download_data'] = [];
             </table>
         <?php } else { ?>
             <div class="text-center py-4">
-                <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Data Available</p>
+                <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

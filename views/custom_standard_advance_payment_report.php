@@ -19,17 +19,17 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5>Advance Payment Report</h5>
+      <h5><?= __('Advance Payment Report'); ?></h5>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
           <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
             data-dropdown-out="fadeOut">
             <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=PO Details"
-              target="_blank">CSV</a>
+              target="_blank"><?= __('CSV'); ?></a>
             <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=PO Details"
-              target="_blank">Excel</a>
+              target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -52,58 +52,52 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
               <button type="button"
                 class="btn btn-primary dropdown-toggle dropdown-toggle-split waves-effect waves-light"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 20%;height: 40px;">
-                <span class="visually-hidden">Toggle primary</span>
+                <span class="visually-hidden"><?= __('Toggle primary'); ?></span>
               </button>
               <div class="dropdown-menu">
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TD" ? "active" : ""; ?> empty_active"
                   id="TD" href="#!"
-                  onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')">Today</a>
+                  onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')"><?= __('Today'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TW" ? "active" : ""; ?> empty_active"
                   id="TW" href="#!"
-                  onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week'))); ?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday '))); ?>')">This
-                  Week</a>
+                  onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week'))); ?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday '))); ?>')"><?= __('This Week'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TM" ? "active" : ""; ?> empty_active"
                   id="TM" href="#!"
-                  onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')">This
-                  Month</a>
+                  onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')"><?= __('This Month'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TY" ? "active" : ""; ?> empty_active"
                   id="TY" href="#!"
-                  onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')">This
-                  Year</a>
+                  onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')"><?= __('This Year'); ?></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "YD" ? "active" : ""; ?> empty_active"
                   id="YD" href="#!"
-                  onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>')">Yesterday</a>
+                  onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>')"><?= __('Yesterday'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "PW" ? "active" : ""; ?> empty_active"
                   id="PW" href="#!"
-                  onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')">Previous
-                  Week</a>
+                  onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')"><?= __('Previous Week'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "PM" ? "active" : ""; ?> empty_active"
                   id="PM" href="#!"
-                  onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01", strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t", strtotime('last month'))); ?>')">Previous
-                  Month</a>
+                  onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01", strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t", strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "PY" ? "active" : ""; ?> empty_active"
                   id="PY" href="#!"
-                  onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date("Y-01-01", strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31", strtotime('last year'))); ?>')">Previous
-                  Year</a>
+                  onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date("Y-01-01", strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31", strtotime('last year'))); ?>')"><?= __('Previous Year'); ?></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "CD" ? "active" : ""; ?> empty_active"
-                  id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')">Custom Date</a>
+                  id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')"><?= __('Custom Date'); ?></a>
               </div>
             </div>
             <div class="row mt-2" style="display: <?php echo $shortcode == 'CD' ? '' : 'none' ?>" id="custome_date">
               <div class="col-lg-6">
-                <input aria-label="From" type="text" class="form-control filterdynamic datepicker" name="from" id="from_date"
+                <input aria-label="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="from" id="from_date"
                   value="<?php echo $from_date; ?>">
               </div>
               <div class="col-lg-6">
-                <input aria-label="To" type="text" class="form-control filterdynamic datepicker" name="to" id="to_date"
+                <input aria-label="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="to" id="to_date"
                   value="<?php echo $to_date; ?>">
               </div>
             </div>
           </div>
           <div class="col-lg-2">
-            <button type="submit" name="applyform" value="apply" class="btn btn-info">Search</button>
+            <button type="submit" name="applyform" value="apply" class="btn btn-info"><?= __('Search'); ?></button>
           </div>
         </div>
       </form>
@@ -118,16 +112,16 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
           <thead>
             <tr style="background-color: #eeeeee;">
               <th scope="col">#</th>
-              <th scope="col">Invoice No.</th>
-              <th scope="col">Invoice Date</th>
-              <th scope="col">Due Date</th>
-              <th scope="col">Vendor Name</th>
-              <th scope="col" class="text-end">Total Amount (₹)</th>
-              <th scope="col" class="text-end">Paid Amount (₹)</th>
-              <th scope="col" class="text-end">Pending Amount (₹)</th>
-              <th scope="col">Payment Status</th>
-              <th scope="col">Payment Terms</th>
-              <th scope="col">Remarks</th>
+              <th scope="col"><?= __('Invoice No.'); ?></th>
+              <th scope="col"><?= __('Invoice Date'); ?></th>
+              <th scope="col"><?= __('Due Date'); ?></th>
+              <th scope="col"><?= __('Vendor Name'); ?></th>
+              <th scope="col" class="text-end"><?= __('Total Amount (₹)'); ?></th>
+              <th scope="col" class="text-end"><?= __('Paid Amount (₹)'); ?></th>
+              <th scope="col" class="text-end"><?= __('Pending Amount (₹)'); ?></th>
+              <th scope="col"><?= __('Payment Status'); ?></th>
+              <th scope="col"><?= __('Payment Terms'); ?></th>
+              <th scope="col"><?= __('Remarks'); ?></th>
             </tr>
           </thead>
           <tbody>
@@ -182,7 +176,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                 <td colspan="11" class="text-center">
                   <div class="card-px py-20 m-t-30">
                     <p class="text-muted f-16 fw-bold m-b-30">
-                      <i class="ti-alert text-warning"></i> No Data Available
+                      <i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?>
                     </p>
                     <div class="text-center px-4">
                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png"

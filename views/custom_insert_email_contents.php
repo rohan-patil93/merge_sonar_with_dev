@@ -103,7 +103,7 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
             var replace_value = $(".note-editable").html();
             $("#summernote").val(replace_value);
         }else{
-            alert("Please You Select Replace code");
+            alert(<?php echo json_encode(__('Please You Select Replace code'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return false;
         }
     }
@@ -111,7 +111,7 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
     function emailPreviews(){
         $(".emty_temp_id").text("");
         if($("#template_id").val()==""){
-            $(".emty_temp_id").text("Requerd fileds");
+            $(".emty_temp_id").text(<?php echo json_encode(__('Requerd fileds'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX','Please Enter Template Id','');
         }else{
             CKEDITOR.instances['editor1'].updateElement();
@@ -178,7 +178,7 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
                                     <?php  if($Rid ==""){ ?>
                                     <div class="form-group col-lg-6 w-full">
                                         <span class="form-label"><?= __('Module') ?></span>
-                                        <select aria-label="Application Module[]" class="form-select js-example-basic-multiple" id="application_module" name="application_module[]" multiple>
+                                        <select aria-label="<?= htmlspecialchars(__('Application Module'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" id="application_module" name="application_module[]" multiple>
                                             <?php foreach($mopdulesetup as $modulesetup){ ?>
                                                 <option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $jsondecode3['application_module'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['module_name']; ?></option>
                                             <?php } ?>
@@ -187,7 +187,7 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
                                     <?php }else{ ?>
                                         <div class="form-group col-lg-6 w-full">
                                         <span class="form-label"><?= __('Module') ?></span>
-                                        <select aria-label="Application Module" class="form-select js-example-basic-single" id="application_module_2" name="application_module">
+                                        <select aria-label="<?= htmlspecialchars(__('Application Module'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="application_module_2" name="application_module">
                                             <?php foreach($mopdulesetup as $modulesetup){ ?>
                                                 <option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $jsondecode3['application_module'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['module_name']; ?></option>
                                             <?php } ?>
@@ -197,7 +197,7 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
                                     <?php } ?>
                                     <div class="form-group col-lg-6 w-full">
                                         <span class="form-label"><?= __('Template Type') ?></span>
-                                        <select aria-label="Template Type" class="form-select js-example-basic-single" id="template_type_id" name="template_type_id">
+                                        <select aria-label="<?= htmlspecialchars(__('Template Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="template_type_id" name="template_type_id">
                                             <?php foreach($emailtemplatetypes as $emailtemplatetypes){ ?>
                                                 <option value="<?php echo $emailtemplatetypes['id']; ?>" <?php echo $jsondecode3['template_type_id'] == $emailtemplatetypes['id']?"selected":""; ?>><?php echo $emailtemplatetypes['email_template_type']; ?></option>
                                             <?php } ?>
@@ -207,7 +207,7 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class="form-label"><?= __('Template Name') ?></span>
-                                        <input aria-label="Template Name" class="form-control" type="text" dada="template_name" name="template_name" value="<?php echo $jsondecode3['template_name']; ?>" id="textArea_2">
+                                        <input aria-label="<?= htmlspecialchars(__('Template Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" dada="template_name" name="template_name" value="<?php echo $jsondecode3['template_name']; ?>" id="textArea_2">
                                         <span class="f-12 text-danger emty_temp_id"></span>
                                         <div>
                                             <ul class='custom-menu'>
@@ -219,11 +219,11 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class="form-label"><?= __('Button Label') ?></span>
-                                        <input aria-label="Button Label" class="form-control" type="text" id="button_label" name="button_label" value="<?php echo  $jsondecode3['button_label']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Button Label'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="button_label" name="button_label" value="<?php echo  $jsondecode3['button_label']; ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class="form-label"><?= __('Email Footer') ?></span>
-                                        <input aria-label="Email Footer" class="form-control" type="text" id="email_footer" name="email_footer" value="<?php echo $jsondecode3['email_footer']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Email Footer'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="email_footer" name="email_footer" value="<?php echo $jsondecode3['email_footer']; ?>">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -235,25 +235,25 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
                                             <div class="p-3">
                                                 <div class="form-group">
                                                 <span class="form-label"><?= __('Email Subject') ?></span>
-                                                <input aria-label="Email Subject To" class="form-control" type="text" id="email_subject_to" name="email_subject_to" value="<?php echo $jsondecode3['email_subject_to']; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Email Subject To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="email_subject_to" name="email_subject_to" value="<?php echo $jsondecode3['email_subject_to']; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <span class="form-label"><?= __('Email Header') ?></span>
-                                                <input aria-label="Email Header To" class="form-control" type="text" id="email_header_to" name="email_header_to" value="<?php echo $jsondecode3['email_header_to']; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Email Header To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="email_header_to" name="email_header_to" value="<?php echo $jsondecode3['email_header_to']; ?>">
                                             </div>
 
                                             <div class="form-group">
                                                 <span class="form-label"><?= __('Email Addressed') ?></span>
-                                                <input aria-label="Email  To" class="form-control" type="text" id="email_id_to" name="email_id_to" value="<?php echo $jsondecode3['email_id_to']; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Email To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="email_id_to" name="email_id_to" value="<?php echo $jsondecode3['email_id_to']; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <span class="form-label"><?= __('Notification') ?></span>
-                                                <input aria-label="Notification To" class="form-control" type="text" id="notification_to" name="notification_to" value="<?php echo $jsondecode3['notification_to']; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Notification To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="notification_to" name="notification_to" value="<?php echo $jsondecode3['notification_to']; ?>">
                                             </div>
 
                                             <div class="form-group">
-                                                <span class="form-label">Email Content</span>
-                                                <textarea aria-label="Email Content To" class="form-control " name="email_content_to" id="editor11" style="display:inline-block;" > <?php echo $jsondecode3['email_content_to']; ?></textarea>
+                                                <span class="form-label"><?= __('Email Content'); ?></span>
+                                                <textarea aria-label="<?= htmlspecialchars(__('Email Content To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " name="email_content_to" id="editor11" style="display:inline-block;" > <?php echo $jsondecode3['email_content_to']; ?></textarea>
                                             </div>
                                         </div>
                                         </div>
@@ -266,24 +266,24 @@ $jsondecode3 = json_decode($jsondecode3,1)[0];
                                             <div class="p-3">
                                             <div class="form-group">
                                                 <span class="form-label"><?= __('Email Subject') ?></span>
-                                                <input aria-label="Email Subject Cc" class="form-control" type="text" id="email_subject_cc" name="email_subject_cc" value="<?php echo $jsondecode3['email_subject_cc']; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Email Subject Cc'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="email_subject_cc" name="email_subject_cc" value="<?php echo $jsondecode3['email_subject_cc']; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <span class="form-label"><?= __('Email Header') ?></span>
-                                                <input aria-label="Email Header Cc" class="form-control" type="text" id="email_header_cc" name="email_header_cc" value="<?php echo $jsondecode3['email_header_cc']; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Email Header Cc'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="email_header_cc" name="email_header_cc" value="<?php echo $jsondecode3['email_header_cc']; ?>">
                                             </div>
 
                                             <div class="form-group">
                                                 <span class="form-label"><?= __('Email Addressed') ?></span>
-                                                <input aria-label="Email  Cc" class="form-control" type="text" id="email_id_cc" name="email_id_cc" value="<?php echo $jsondecode3['email_id_cc']; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Email Cc'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="email_id_cc" name="email_id_cc" value="<?php echo $jsondecode3['email_id_cc']; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <span class="form-label"><?= __('Notification') ?></span>
-                                                <input aria-label="Notification Cc" class="form-control" type="text" id="notification_cc" name="notification_cc" value="<?php echo $jsondecode3['notification_cc']; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Notification Cc'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="notification_cc" name="notification_cc" value="<?php echo $jsondecode3['notification_cc']; ?>">
                                             </div>
                                             <div class="form-group">
-                                                <span class="form-label">Email Content</span>
-                                                <textarea aria-label="Email Content Cc" id="editor1" class="summernote email_content_1" name="email_content_cc"  > <?php echo $jsondecode3['email_content_cc']; ?></textarea>
+                                                <span class="form-label"><?= __('Email Content'); ?></span>
+                                                <textarea aria-label="<?= htmlspecialchars(__('Email Content Cc'), ENT_QUOTES, 'UTF-8'); ?>" id="editor1" class="summernote email_content_1" name="email_content_cc"  > <?php echo $jsondecode3['email_content_cc']; ?></textarea>
                                             </div>
                                         </div>
                                         </div>

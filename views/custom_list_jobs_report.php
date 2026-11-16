@@ -40,7 +40,7 @@ if(isset($_POST['datefilter'])){
                     <div class="card card-custom " id="kt_page_sticky_card">
                         <div class="card-header">
                             <div class="card-title">
-                                <h3 class="card-label">&nbsp; Job Postings Summary </h3>
+                                <h3 class="card-label">&nbsp; <?= __('Job Postings Summary'); ?> </h3>
                             </div>
 
                         </div>
@@ -80,17 +80,17 @@ if(isset($_POST['datefilter'])){
                                             <div class="col-lg-3">
                                                     <form method="post" action="#">
                                                         <div class="form-group row">
-                                                            <label for="example-date-input-from" class="col-3 col-form-label">From</label>
+                                                            <label for="example-date-input-from" class="col-3 col-form-label"><?= __('From'); ?></label>
                                                             <div class="col-10">
-                                                                <input aria-label="Fromdate" class="form-control" type="date" name="fromdate" value="<?php echo $current_from_date;?>" id="example-date-input-from" />
+                                                                <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="fromdate" value="<?php echo $current_from_date;?>" id="example-date-input-from" />
                                                             </div>
-                                                            <label for="example-date-input-to" class="col-3 col-form-label">To</label>
+                                                            <label for="example-date-input-to" class="col-3 col-form-label"><?= __('To'); ?></label>
                                                             <div class="col-10">
-                                                                <input aria-label="Todate" class="form-control" type="date" name="todate" value="<?php echo $current_to_date;?>" id="example-date-input-to" />
+                                                                <input aria-label="<?= htmlspecialchars(__('Todate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="todate" value="<?php echo $current_to_date;?>" id="example-date-input-to" />
                                                             </div>
                                                         </div>
 
-                                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="datefilter" value="exit">Apply</button>
+                                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="datefilter" value="exit"><?= __('Apply'); ?></button>
                                                     </form>
                                             </div>
                                         </div>
@@ -105,11 +105,11 @@ if(isset($_POST['datefilter'])){
                                         <thead>
                                             <tr>
                                                 <th scope="col" style="width: 5%;">#</th>
-                                                <th scope="col" style="width: 20%;">Vendor </th>
+                                                <th scope="col" style="width: 20%;"><?= __('Vendor'); ?> </th>
                                                 <?php foreach($job_type_data as $jobtype){ ?>
                                                     <th scope="col" style="width: 15%;"> <?php echo $jobtype; ?></th>
                                                 <?php } ?>
-                                                <th scope="col" style="width: 15%;">Action </th>
+                                                <th scope="col" style="width: 15%;"><?= __('Action'); ?> </th>
 
                                             </tr>
                                         </thead>
@@ -120,11 +120,11 @@ if(isset($_POST['datefilter'])){
                                                     <td> <?php echo $sno; ?> </td>
                                                     <td> <?php echo $ven['display_name']; ?> </td>
                                                     <?php foreach($job_type_data as $jkey =>$jobtype){ $vendorid = $ven['id'];  ?>
-                                                    <td>  <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="Number of Jobs" style="vertical-align: middle;">  <?php echo $vendor_jobs[$vendorid][$jkey]==''?'0':$vendor_jobs[$vendorid][$jkey]; ?> </span> </td>
+                                                    <td>  <span class="font-weight-bolder label label-xl label-success "  data-toggle="tooltip" title="<?= htmlspecialchars(__('Number of Jobs'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;">  <?php echo $vendor_jobs[$vendorid][$jkey]==''?'0':$vendor_jobs[$vendorid][$jkey]; ?> </span> </td>
 
                                                 <?php } ?>
 
-                                                <td> <a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATES&VENDOR=<?php echo $vendorid;?>" target="_blank"> <span class="btn btn-primary "  data-toggle="tooltip" title="View Details" style="vertical-align: middle;">  View </span></a> </td>
+                                                <td> <a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATES&VENDOR=<?php echo $vendorid;?>" target="_blank"> <span class="btn btn-primary "  data-toggle="tooltip" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>" style="vertical-align: middle;">  <?= __('View'); ?> </span></a> </td>
                                             </tr>
 
                                         <?php }
@@ -141,7 +141,7 @@ if(isset($_POST['datefilter'])){
                                         <input type="hidden" id="survey_qtypes" value="<?php echo $req_types_count; ?>">
                                         <input type="hidden" id="survey_qtype_names" value="<?php echo $req_types_names; ?>">
                                         <div id="survey_overview_chart" class="d-flex justify-content-center"></div>
-                                        <h3 class="font-weight-bolder text-center"> <?php echo "Request Types"; ?></h3>
+                                        <h3 class="font-weight-bolder text-center"> <?php echo __("Request Types"); ?></h3>
 
                                     </div>
                                     </div>

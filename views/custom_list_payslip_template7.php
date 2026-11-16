@@ -115,87 +115,87 @@ if($_GET['viewcheck']==1){
                         &nbsp;
                     </div>
                     <div style="width: 60%; float:left; text-align: center;">
-                        <?php echo $organization_name; ?> asasdasd
+                        <?php echo $organization_name; ?> <?= __('asasdasd'); ?>
                     </div>
                     <div style="width: 20%; float:left; text-align: right;">
-                        <img src="uploads/all/<?php echo $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['pay_area_config']['display_logo'] : $_SESSION['config']['display_logo'];  ?>" style="width: 125px;" alt="Logo">
+                        <img src="uploads/all/<?php echo $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['pay_area_config']['display_logo'] : $_SESSION['config']['display_logo'];  ?>" style="width: 125px;" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
 
                 </th>
             </tr>
             <tr>
-                <th scope="col" class="text-center" colspan="3" style="border: #CCCCCC solid 3px;">Salary Slip</th>
+                <th scope="col" class="text-center" colspan="3" style="border: #CCCCCC solid 3px;"><?= __('Salary Slip'); ?></th>
                 <th scope="col" class="text-center"style="border: #CCCCCC solid 3px;" ><?php echo $payslip_data_list['month']." - ".$payslip_data_list['year'];?></th>
             </tr>
             <tr>
-                <th scope="col"  style="border: #CCCCCC solid 3px; text-align: left; width: 20%;" >Employee Name</th>
+                <th scope="col"  style="border: #CCCCCC solid 3px; text-align: left; width: 20%;" ><?= __('Employee Name'); ?></th>
                 <td style="border: #CCCCCC solid 3px; text-align: left; width: 30%;"><?php echo $payslip_data_list['emp_name']; ?></td>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left; width: 20%;">Date of Joning</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left; width: 20%;"><?= __('Date of Joning'); ?></th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px; width: 30%;">
                     <?php echo date('F d, Y',strtotime($payslip_data_list['doj'])); ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Employee Code</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Employee Code'); ?></th>
                 <td style="border: #CCCCCC solid 3px; text-align: left;">
                     <?php echo $payslip_data_list['emp_number']; ?>
                 </td>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Total working days</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Total working days'); ?></th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">
                     <?php echo $payslip_data_list['std']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Designation</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Designation'); ?></th>
                 <td style="border: #CCCCCC solid 3px; text-align: left;">
                 <?php echo $payslip_data_list['designation']; ?>
                 </td>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Working days Attended</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Working days Attended'); ?></th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">
                     <?php echo $payslip_data_list['std']-$payslip_data_list['lop']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">PAN</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('PAN'); ?></th>
                 <td style="border: #CCCCCC solid 3px; text-align: left;">
                     <?php echo $payslip_data_list['pan_number']; ?>
                 </td>
-                <th scope="col"style="border: #CCCCCC solid 3px; text-align: left;">LOP</th>
+                <th scope="col"style="border: #CCCCCC solid 3px; text-align: left;"><?= __('LOP'); ?></th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">
                     <?php echo $payslip_data_list['lop']-$no_lopdays; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Bank Account Number</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Bank Account Number'); ?></th>
                 <td style="border: #CCCCCC solid 3px; text-align: left;">
                     <?php echo $payslip_data_list['bank_account_no']; ?>
                 </td>
 
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">PF UAN</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('PF UAN'); ?></th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">
                     <?php echo $payslip_data_list['pf_uan']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Bank Name</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Bank Name'); ?></th>
                 <td style="border: #CCCCCC solid 3px; text-align: left;">
                     <?php echo $payslip_data_list['bank']; ?>
                 </td>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">PF No</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('PF No'); ?></th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">
                     <?php echo $payslip_data_list['pf']; ?>
                 </th>
             </tr>
             <tr>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Grade</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Grade'); ?></th>
                 <td style="border: #CCCCCC solid 3px; text-align: left;">
                     <?php echo $payslip_data_list['grade']; ?>
                 </td>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Opted Under</th>
-                <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">New Scheme</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Opted Under'); ?></th>
+                <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;"><?= __('New Scheme'); ?></th>
             </tr>
             <tr>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Location</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Location'); ?></th>
                 <td style="border: #CCCCCC solid 3px; text-align: left;">
                     <?php echo $payslip_data_list['location']; ?>
                 </td>
@@ -206,16 +206,16 @@ if($_GET['viewcheck']==1){
         </table>
         <table class="table table-hover table-bordered table-sm payslip_table mt-3" style="">
             <tr>
-                <th scope="col" class="text-center" colspan="3" style="border: #CCCCCC solid 3px; width: 50%;">Income</th>
-                <th scope="col" class="text-center" colspan="3" style="border: #CCCCCC solid 3px; text-align: center; width: 50%;">Deductions</th>
+                <th scope="col" class="text-center" colspan="3" style="border: #CCCCCC solid 3px; width: 50%;"><?= __('Income'); ?></th>
+                <th scope="col" class="text-center" colspan="3" style="border: #CCCCCC solid 3px; text-align: center; width: 50%;"><?= __('Deductions'); ?></th>
             </tr>
             <tr>
-                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 18%;">Particulars</th>
-                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 16%;">Amount</th>
-                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 16%;">Annual</th>
-                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 18%;">Particulars</th>
-                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 16%;">Amount</th>
-                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 16%;">Annual</th>
+                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 18%;"><?= __('Particulars'); ?></th>
+                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 16%;"><?= __('Amount'); ?></th>
+                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 16%;"><?= __('Annual'); ?></th>
+                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 18%;"><?= __('Particulars'); ?></th>
+                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 16%;"><?= __('Amount'); ?></th>
+                <th scope="col" class="text-center" style="border: #CCCCCC solid 3px; width: 16%;"><?= __('Annual'); ?></th>
             </tr>
             <?php
                 $actual_count= count((array)$payslip_data_list['actual']);
@@ -253,14 +253,14 @@ if($_GET['viewcheck']==1){
             </tr>
             <?php } ?>
             <tr>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Total</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Total'); ?></th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">
                     <?php echo customePayslipNumberFormate($earnings); ?>
                 </th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">
                     <?php echo customePayslipNumberFormate($st_earnings*12); ?>
                 </th>
-                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;">Total</th>
+                <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Total'); ?></th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">
                     <?php echo customePayslipNumberFormate($dedaction); ?>
                 </th>
@@ -269,7 +269,7 @@ if($_GET['viewcheck']==1){
                 </th>
             </tr>
             <tr>
-                <th scope="col" colspan="4" style="background-color: #cccccc; border: #CCCCCC solid 3px; text-align: center;">Net Salary</th>
+                <th scope="col" colspan="4" style="background-color: #cccccc; border: #CCCCCC solid 3px; text-align: center;"><?= __('Net Salary'); ?></th>
                 <th scope="col" class="text-end" style="border: #CCCCCC solid 3px;">
                     <?php echo customePayslipNumberFormate($earnings-$dedaction); ?>
                 </th>
@@ -282,18 +282,18 @@ if($_GET['viewcheck']==1){
                 <th scope="col" colspan="3" style="height: 60px;border: #CCCCCC solid 3px; text-align: center;"></th>
             </tr>
             <tr>
-                <th scope="col" colspan="3" style="border: #CCCCCC solid 3px; text-align: center;">Employee Signature</th>
-                <th scope="col" colspan="3" style="border: #CCCCCC solid 3px; text-align: center;">Employer Signature</th>
+                <th scope="col" colspan="3" style="border: #CCCCCC solid 3px; text-align: center;"><?= __('Employee Signature'); ?></th>
+                <th scope="col" colspan="3" style="border: #CCCCCC solid 3px; text-align: center;"><?= __('Employer Signature'); ?></th>
             </tr>
         </table>
     </div>
     <div class="card-body">
-        <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" >Print Payslip</button>
+        <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" ><?= __('Print Payslip'); ?></button>
     </div>
 <?php }else{ ?>
 
     <div class="text-center text-warning f-w-800">
-        It is in process
+        <?= __('It is in process'); ?>
     </div>
     <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">

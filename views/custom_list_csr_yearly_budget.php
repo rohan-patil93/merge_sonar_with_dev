@@ -60,7 +60,7 @@ $progress_var =  gettableStatusArray($table_name);
 
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -70,7 +70,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-3 col-md-6">
             <div class="card ticket-card ticket-card-fixed" >
                 <div class="card-body">
-                    <p class="m-b-30 bg-c-red lbl-card"><i class="fas fa-file-archive"></i><?php echo $csr_yearly_budget['base_year'] ?> - Budget</p>
+                    <p class="m-b-30 bg-c-red lbl-card"><i class="fas fa-file-archive"></i><?php echo $csr_yearly_budget['base_year'] ?> - <?= __('Budget'); ?></p>
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-red "> <?php echo customeummarmonyformate($csr_yearly_budget['finance_budget']) ?? 0.00; ?>
                         </h2>
@@ -82,7 +82,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-3 col-md-6">
             <div class="card ticket-card ticket-card-fixed" >
                 <div class="card-body">
-                    <p class="m-b-30 bg-c-red lbl-card"><i class="fas fa-file-archive"></i> Total CSRs/<?php echo $totalCount; ?></p>
+                    <p class="m-b-30 bg-c-red lbl-card"><i class="fas fa-file-archive"></i> <?= __('Total CSRs/'); ?><?php echo $totalCount; ?></p>
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-red "> <?php echo customeummarmonyformate($totalValue); ?>
                         </h2>
@@ -94,7 +94,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-3 col-md-6">
             <div class="card ticket-card ticket-card-fixed" >
                 <div class="card-body">
-                    <p class="m-b-30 bg-c-lite-green lbl-card"><i class="fas fa-file-archive"></i> Approved CSRs/<?php echo $approvedCount; ?></p>
+                    <p class="m-b-30 bg-c-lite-green lbl-card"><i class="fas fa-file-archive"></i> <?= __('Approved CSRs/'); ?><?php echo $approvedCount; ?></p>
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-lite-green ">
                             <?php echo customeummarmonyformate($approvedValue); ?>
@@ -107,7 +107,7 @@ $progress_var =  gettableStatusArray($table_name);
         <div class="col-xl-3 col-md-6">
             <div class="card ticket-card ticket-card-fixed" >
                 <div class="card-body">
-                    <p class="m-b-30 bg-c-green lbl-card"><i class="fas fa-file-archive"></i><?php echo $csr_yearly_budget['base_year'] ?> - Available Budget</p>
+                    <p class="m-b-30 bg-c-green lbl-card"><i class="fas fa-file-archive"></i><?php echo $csr_yearly_budget['base_year'] ?> - <?= __('Available Budget'); ?></p>
                     <div class="text-center">
                         <h2 class="m-b-0 d-inline-block text-c-green ">
                             <?php echo customeummarmonyformate($csr_yearly_budget['finance_budget'] - $approvedValue) ?? 0; ?>

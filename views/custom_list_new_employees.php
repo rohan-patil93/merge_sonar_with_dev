@@ -56,7 +56,7 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
                             <!--begin::Details-->
                             <div class="d-flex align-items-center flex-wrap mr-2">
                                 <!--begin::Title-->
-                                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Users</h5>
+                                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5"><?= __('Users'); ?></h5>
 
                             </div>
                         </div>
@@ -71,7 +71,7 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
 
                                             <input type="hidden" name="search_value" id="search_value" value="<?php echo $search_value; ?>">
 
-                                            <h5>Departments</h5>
+                                            <h5><?= __('Departments'); ?></h5>
                                         </div>
                                         <?php foreach ($all_departments as $dept) { ?>
 
@@ -91,7 +91,7 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
  <div class="card">
   <div class="card-header" id="headingOne5">
    <div class="card-title" data-toggle="collapse" data-target="#collapseOne5">
-    <i class="flaticon-pie-chart-1"></i> Departments
+    <i class="flaticon-pie-chart-1"></i> <?= __('Departments'); ?>
    </div>
   </div>
   <div id="collapseOne5" class="collapse show" data-parent="#accordionExample5">
@@ -109,7 +109,7 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
  <div class="card">
   <div class="card-header" id="headingTwo5">
    <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo5">
-    <i class="flaticon2-notification"></i> Order Statistics
+    <i class="flaticon2-notification"></i> <?= __('Order Statistics'); ?>
    </div>
   </div>
   <div id="collapseTwo5" class="collapse" data-parent="#accordionExample5">
@@ -121,7 +121,7 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
  <div class="card">
   <div class="card-header" id="headingThree5">
    <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseThree5">
-    <i class="flaticon2-chart"></i> eCommerce Reports
+    <i class="flaticon2-chart"></i> <?= __('eCommerce Reports'); ?>
    </div>
   </div>
   <div id="collapseThree5" class="collapse" data-parent="#accordionExample5">
@@ -149,7 +149,7 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
                                     <div class="card-body pt-4">
                                         <!--begin::Toolbar-->
                                         <div class="d-flex justify-content-end">
-                                            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                                                 <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                     <i class="ki ki-bold-more-hor"></i>
                                                 </a>
@@ -157,21 +157,21 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
                                                     <!--begin::Navigation-->
                                                     <ul class="navi navi-hover">
                                                         <li class="navi-header font-weight-bold py-4">
-                                                            <span class="font-size-lg">Choose Label:</span>
-                                                            <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                                                            <span class="font-size-lg"><?= __('Choose Label'); ?>:</span>
+                                                            <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
                                                         </li>
                                                         <li class="navi-separator mb-3 opacity-70"></li>
                                                         <li class="navi-item">
                                                             <a href="#" class="navi-link">
                                                                 <span class="navi-text">
-                                                                    <span class="label label-xl label-inline label-light-success">Insert</span>
+                                                                    <span class="label label-xl label-inline label-light-success"><?= __('Insert'); ?></span>
                                                                 </span>
                                                             </a>
                                                         </li>
                                                         <li class="navi-item">
                                                             <a href="#" class="navi-link">
                                                                 <span class="navi-text">
-                                                                    <span class="label label-xl label-inline label-light-danger">Update</span>
+                                                                    <span class="label label-xl label-inline label-light-danger"><?= __('Update'); ?></span>
                                                                 </span>
                                                             </a>
                                                         </li>
@@ -190,7 +190,7 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
                                                 <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                                     <?php if($data['image']){ ?>
                                                         <div class="symbol symbol-circle symbol-lg-75">
-                                                            <img src="uploads/all/<?php echo $data['image']; ?>" alt="Details">
+                                                            <img src="uploads/all/<?php echo $data['image']; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         </div>
                                                     <?php }else{ ?>
                                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary">
@@ -210,7 +210,7 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
                                         </div>
                                         <!--end::User-->
                                         <!--begin::Desc-->
-                                        <p class="mb-7"><span class="text-dark-75 font-weight-bolder mr-2">Contact:</span>
+                                        <p class="mb-7"><span class="text-dark-75 font-weight-bolder mr-2"><?= __('Contact'); ?>:</span>
                                             <a href="#" class="text-primary pr-1"><?php echo $data['email_id']; ?></a>
                                             <br>
                                             <?php echo $data['address'];?></p>
@@ -219,20 +219,20 @@ $vurl = API."?mode=togetemployeeslist&company_id=".$company_id."&is_active=0&off
                                             <!--begin::Info-->
                                             <div class="mb-7">
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <span class="text-dark-75 font-weight-bolder mr-2">DOJ:</span>
+                                                    <span class="text-dark-75 font-weight-bolder mr-2"><?= __('DOJ'); ?>:</span>
                                                     <a href="#" class="text-muted text-hover-primary"><?php echo $data['date_of_joining']; ?></a>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-cente my-1">
-                                                    <span class="text-dark-75 font-weight-bolder mr-2">Phone:</span>
+                                                    <span class="text-dark-75 font-weight-bolder mr-2"><?= __('Phone'); ?>:</span>
                                                     <a href="#" class="text-muted text-hover-primary"><?php echo $data['phone_no']; ?></a>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
+                                                    <span class="text-dark-75 font-weight-bolder mr-2"><?= __('Location'); ?>:</span>
                                                     <span class="text-muted font-weight-bold"><?php echo $data['location_city']; ?></span>
                                                 </div>
                                             </div>
                                             <!--end::Info-->
-                                            <button type="button" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">Go</button>
+                                            <button type="button" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4"><?= __('Go'); ?></button>
                                         </div>
                                         <!--end::Body-->
                                     </div>

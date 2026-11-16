@@ -25,7 +25,7 @@ else{
 			var appenddiv = '<label class="checkbox checkbox-primary" for="multiplechoice'+i+'"><input type="checkbox" name="multiplechoicestatus" id="multiplechoice'+i+'" aria-label="Multiplechoicestatus"><span></span></label>';
 		}
 
-		$("#optionrow").append('<div class="form-group row" id="s1rowid'+i+'"><div class="col-lg-1 mt-2">'+appenddiv+'</div><div class="col-lg-8">  <div class="input-group input-icon-right"> <input type="text" class="form-control display-inline"  name="assessment_question_option[]" placeholder="<?= __('Option') ?>" aria-label="Option"><div class="input-group-append "><span class="input-group-text bg-primary width1"><span><i class="fa fa-trash" role="button" tabindex="0" aria-label="Delete option" onkeydown="if(event.key===\'Enter\'||event.key===\' '){event.preventDefault();this.click();}" onclick="deloptionrows(\'s1rowid'+i+'')"></i></span></span></div></div></div></div>');
+		$("#optionrow").append('<div class="form-group row" id="s1rowid'+i+'"><div class="col-lg-1 mt-2">'+appenddiv+'</div><div class="col-lg-8">  <div class="input-group input-icon-right"> <input type="text" class="form-control display-inline"  name="assessment_question_option[]" placeholder="<?= __('Option') ?>" aria-label="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>"><div class="input-group-append "><span class="input-group-text bg-primary width1"><span><i class="fa fa-trash" role="button" tabindex="0" aria-label="Delete option" onkeydown="if(event.key===\'Enter\'||event.key===\' '){event.preventDefault();this.click();}" onclick="deloptionrows(\'s1rowid'+i+'')"></i></span></span></div></div></div></div>');
 	}
 	function deloptionrows(rowid) {
 		$('#'+rowid).remove();
@@ -97,66 +97,66 @@ else{
 <div class="col-lg-12" id="<?php echo $question_id;?>">
 	<div class="modal-header">
 		<h5 class="modal-title" id="exampleModalLabel"><?php echo $_GET['question_title']; ?></h5>
-		   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
 	</div>
 	<div class="custom-icon p-4">
 		<div class="form-group text-left row">
 			<div class="col-lg-8">
 				<label for="assessment_question"><?= __('Question Text:') ?> <span class="text-danger">*</span></label>
-				<textarea id="assessment_question" name="assessment_question" class="form-control" placeholder="" aria-label="Assessment Question"> </textarea>
+				<textarea id="assessment_question" name="assessment_question" class="form-control" placeholder="" aria-label="<?= htmlspecialchars(__('Assessment Question'), ENT_QUOTES, 'UTF-8'); ?>"> </textarea>
 			</div>
 			<div class="col-lg-4">
 				<label for="markfieldvalue"><?= __('Marks') ?> <span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="markfieldvalue" name="marks"  placeholder="<?= __('Enter Marks') ?>" aria-label="Enter Marks">
+				<input type="text" class="form-control" id="markfieldvalue" name="marks"  placeholder="<?= __('Enter Marks') ?>" aria-label="<?= htmlspecialchars(__('Enter Marks'), ENT_QUOTES, 'UTF-8'); ?>">
 			</div>
 		</div>
 
 		<?php if($_GET['type']== $typeofquestion['1'] || $_GET['type']== $typeofquestion['2'])	{ ?>
-			<div class="col-lg-12 mt-2 mb-4">	Mark the Correct Answer
+			<div class="col-lg-12 mt-2 mb-4">	<?= __('Mark the Correct Answer'); ?>
 		</div>
 			<div id="optionrow">
 				<div class="form-group row" id="s1rowid1">
 					<div class="col-lg-1 mt-2">	<?php if($_GET['type']== $typeofquestion['1'] ) { ?>
 						<label class="radio radio-primary" for="singlechoice1">
-							<input type="radio" name="singlechoicestatus"  id="singlechoice1" aria-label="Singlechoicestatus">
+							<input type="radio" name="singlechoicestatus"  id="singlechoice1" aria-label="<?= htmlspecialchars(__('Singlechoicestatus'), ENT_QUOTES, 'UTF-8'); ?>">
 							<span></span>
 						</label>
 					<?php } else { ?>
 						<label class="checkbox checkbox-primary" for="multiplechoice1">
-							<input type="checkbox"  name="multiplechoicestatus" id="multiplechoice1" aria-label="Multiplechoicestatus">
+							<input type="checkbox"  name="multiplechoicestatus" id="multiplechoice1" aria-label="<?= htmlspecialchars(__('Multiplechoicestatus'), ENT_QUOTES, 'UTF-8'); ?>">
 							<span></span>
 						</label>
 					<?php } ?>
 				</div>
 				<div class="col-lg-8">
 					<div class="input-group input-icon-right">
-					<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"  placeholder="<?= __('Option') ?>" aria-label="Option">
+					<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"  placeholder="<?= __('Option') ?>" aria-label="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>">
 					<span class="input-group-text addon-style">
-    <span class=""><i class="fa fa-trash" role="button" tabindex="0" aria-label="Delete option" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deloptionrows('s1rowid1')"></i>	</span>
+    <span class=""><i class="fa fa-trash" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Delete option'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deloptionrows('s1rowid1')"></i>	</span>
 </span></div>
 				</div>
 			</div>
 			<div class="form-group row" id="s1rowid2">
 				<div class="col-lg-1 mt-2"> <?php if($_GET['type']== $typeofquestion['1'] ) { ?>
 					<label class="radio radio-primary" for="singlechoice2">
-						<input type="radio"  name="singlechoicestatus"  id="singlechoice2" aria-label="Singlechoicestatus">
+						<input type="radio"  name="singlechoicestatus"  id="singlechoice2" aria-label="<?= htmlspecialchars(__('Singlechoicestatus'), ENT_QUOTES, 'UTF-8'); ?>">
 						<span></span>
 
 					</label>
 				<?php } else { ?>
 					<label class="checkbox checkbox-primary" for="multiplechoice2">
-						<input type="checkbox"  name="multiplechoicestatus" id="multiplechoice2" aria-label="Multiplechoicestatus">
+						<input type="checkbox"  name="multiplechoicestatus" id="multiplechoice2" aria-label="<?= htmlspecialchars(__('Multiplechoicestatus'), ENT_QUOTES, 'UTF-8'); ?>">
 						<span></span>
 					</label>
 				<?php } ?>
 			</div>
 			<div class="col-lg-8">
 				<div class="input-group input-icon-right">
-				<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"   placeholder="<?= __('Option') ?>" aria-label="Option">
+				<input type="text" class="form-control  display-inline width1" name="assessment_question_option[]"   placeholder="<?= __('Option') ?>" aria-label="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>">
 
 						<span class="input-group-text addon-style">
-    <span class=""><i class="fa fa-trash" role="button" tabindex="0" aria-label="Delete option" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deloptionrows('s1rowid2')"></i>	</span>
+    <span class=""><i class="fa fa-trash" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Delete option'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="deloptionrows('s1rowid2')"></i>	</span>
 </span>
 
 				</div>

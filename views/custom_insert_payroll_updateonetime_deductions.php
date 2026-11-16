@@ -21,7 +21,7 @@
                         <div class="form-group row mt-2">
                             <span class="col-3">&nbsp;</span>
                             <div class="col-9">
-                                <input type="submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" value="Submit" name="submit" />
+                                <input type="submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" value="<?= htmlspecialchars(__('Submit'), ENT_QUOTES, 'UTF-8'); ?>" name="submit" />
                                 <a target="_blank" href="csv_download.php?table=employee_other_earnings" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2">
                                     <?php echo __('Sample    Download'); ?>
                                 </a>

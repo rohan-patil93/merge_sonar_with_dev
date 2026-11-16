@@ -176,7 +176,7 @@ function addMorefloorSpaces(){
             <?php foreach($all_building_floors  as $abf){ ?>
             <li class="nav-item">
                 <button type="button" class="nav-link position-relative text-center p-2 cursor-pointer border-0 bg-transparent <?php echo $abf['id'] == $building_floors['id']?"active":""; ?>" onclick="getBuildingFoolSpaceDetailsNew('<?php echo $abf['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="<?php echo __('Click To Open Building Floor Plans'); ?>">
-                   <img src="uploads/building_floors/<?php echo $abf['floor_image']; ?>" style="width: 100px; height: 100px;" alt="Attachment Preview">
+                   <img src="uploads/building_floors/<?php echo $abf['floor_image']; ?>" style="width: 100px; height: 100px;" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="text-info f-14 f-w-700"><?php echo __($abf['floor_name']); ?></span>
                 </button>
             </li>
@@ -270,7 +270,7 @@ function addMorefloorSpaces(){
 
 <div class="row mt-5">
     <div id="floor_cabin">
-        <img id="disable_crop_floor_image" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="Attachment Preview">
+        <img id="disable_crop_floor_image" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
         <?php
         $cabincnt = 0;
         foreach($asset_allocations as $ealloc){  $cabincnt++;

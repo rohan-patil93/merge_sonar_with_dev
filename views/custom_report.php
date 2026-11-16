@@ -45,7 +45,7 @@ foreach ($attributes as $key => $att) {
                                     <i class="kt-font-brand flaticon-list-2"></i>
                                 </span>
                                 <h3 class="kt-portlet__head-title">
-                                    <?php echo "Report";  ?>
+                                    <?php echo __("Report");  ?>
                                 </h3>
 
                             </div>
@@ -55,7 +55,7 @@ foreach ($attributes as $key => $att) {
                                         <div class="dropdown dropdown-inline">
                                             <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
                                                     <i class="la la-arrow-left"></i>
-                                                    <span class="kt-hidden-mobile">Back</span>
+                                                    <span class="kt-hidden-mobile"><?= __('Back'); ?></span>
                                                 </a>
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@ foreach ($attributes as $key => $att) {
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
             <span><?php echo $filt['lable']; ?>:</span>
 
-            <input aria-label="Input field" type="text" class="form-control kt-input" value="<?php echo $sear[$ser_field]; ?>" name="<?php echo $filt['field']; ?>"  data-col-index="4">
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control kt-input" value="<?php echo $sear[$ser_field]; ?>" name="<?php echo $filt['field']; ?>"  data-col-index="4">
         </div>
         <?php }elseif($filt['filter_type']=='select') {
             $selectdata = dyanamicselectreportdata($report_id,$filt['field']);
@@ -81,7 +81,7 @@ foreach ($attributes as $key => $att) {
             ?>
             <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                 <span><?php echo $filt['lable']; ?>:</span>
-                <select aria-label="Select option" class="form-control kt-input" name="<?php echo $filt['field']; ?>" data-col-index="2">
+                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt-input" name="<?php echo $filt['field']; ?>" data-col-index="2">
                     <?php foreach($selectdata as $selectkey=>$select){ ?>
                     <option <?php if($se == $selectkey){ ?> selected <?php
 } ?> value="<?php echo $selectkey; ?>"><?php echo $select; ?></option>
@@ -92,7 +92,7 @@ foreach ($attributes as $key => $att) {
             <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
             <span><?php echo $filt['lable']; ?>:</span>
 
-            <input aria-label="Input field" type="text" class="form-control"  value="<?php echo $sear[$ser_field]; ?>"  name="<?php echo $filt['field']; ?>"  id="kt_datepicker_3<?php echo $dateid; ?>" />
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="<?php echo $sear[$ser_field]; ?>"  name="<?php echo $filt['field']; ?>"  id="kt_datepicker_3<?php echo $dateid; ?>" />
         </div>
         <?php $dateid++;
 } ?>
@@ -106,14 +106,14 @@ foreach ($attributes as $key => $att) {
             <button class="btn btn-primary btn-brand--icon" id="kt_search">
                 <span>
                     <i class="la la-search"></i>
-                    <span>Search</span>
+                    <span><?= __('Search'); ?></span>
                 </span>
             </button>
             &nbsp;&nbsp;
             <button class="btn btn-secondary btn-secondary--icon" id="kt_reset">
                 <span>
                     <i class="la la-close"></i>
-                    <span>Reset</span>
+                    <span><?= __('Reset'); ?></span>
                 </span>
             </button>
         </div>

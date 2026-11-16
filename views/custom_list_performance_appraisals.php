@@ -46,7 +46,7 @@ foreach($employee_performance_appraisals as $epahlres){
                     <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                         <div class="card table-card">
                             <div class="card-header">
-                                <h5>Yet To Submit</h5>
+                                <h5><?= __('Yet To Submit'); ?></h5>
                                 <div class="card-header-right">
                                     <span class="form-label label label-primary"><?php echo count((array)$isactivelist);?></span>
                                 </div>
@@ -60,9 +60,9 @@ foreach($employee_performance_appraisals as $epahlres){
                                     <table class="table table-hover m-b-0">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="width: 60%;">Employee</th>
-                                                <th scope="col" class="text-right" style="width: 20%;">Self %</th>
-                                                <th scope="col" class="text-right" style="width: 20%;">RO %</th>
+                                                <th scope="col" style="width: 60%;"><?= __('Employee'); ?></th>
+                                                <th scope="col" class="text-right" style="width: 20%;"><?= __('Self %'); ?></th>
+                                                <th scope="col" class="text-right" style="width: 20%;"><?= __('RO %'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody class="custom-scroll" style="height: 300px; display: table-caption;">
@@ -76,9 +76,9 @@ foreach($employee_performance_appraisals as $epahlres){
                                                     <a href="<?php echo $href; ?>" target="_blank">
                                                     <div class="align-middle">
                                                         <?php if($empdetails['image']!="") {?>
-                                                            <img src="uploads/all/<?php echo $empdetails['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                                                            <img src="uploads/all/<?php echo $empdetails['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <?php } else { ?>
-                                                            <span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 img-30 text-center" ><?php echo initials($empdetails['display_name']); ?></span>
+                                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 img-30 text-center" ><?php echo initials($empdetails['display_name']); ?></span>
                                                         <?php } ?>
 
                                                         <div class="d-inline-block width73">
@@ -102,7 +102,7 @@ foreach($employee_performance_appraisals as $epahlres){
                                     <?php    }else{ ?>
                                     <div class="card-px text-center py-20 m-t-30">
                                         <p class="text-muted f-16 fw-bold m-b-30">
-                                            <i class='fa fa-warning'></i> No Employees
+                                            <i class='fa fa-warning'></i> <?= __('No Employees'); ?>
                                         </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -117,7 +117,7 @@ foreach($employee_performance_appraisals as $epahlres){
                         <div class="card table-card">
                             <div class="card-header">
                                 <?php $isactivelist = $epahlresult[$performancesetup['id']]['inpro']; ?>
-                                <h5>In-Process</h5>
+                                <h5><?= __('In-Process'); ?></h5>
                                 <div class="card-header-right">
                                     <span class="form-label label label-primary"><?php echo count((array)$isactivelist);?></span>
                                 </div>
@@ -130,9 +130,9 @@ foreach($employee_performance_appraisals as $epahlres){
                                     <table class="table table-hover m-b-0">
                                         <thead>
                                             <tr>
-                                            <th scope="col" style="width: 60%;">Employee</th>
-                                            <th scope="col" class="text-right" style="width: 20%;">Self %</th>
-                                            <th scope="col" class="text-right" style="width: 20%;">RO %</th>
+                                            <th scope="col" style="width: 60%;"><?= __('Employee'); ?></th>
+                                            <th scope="col" class="text-right" style="width: 20%;"><?= __('Self %'); ?></th>
+                                            <th scope="col" class="text-right" style="width: 20%;"><?= __('RO %'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody classs="custom-scroll" style="height: 300px; display: table-caption;">
@@ -148,9 +148,9 @@ foreach($employee_performance_appraisals as $epahlres){
                                                     <div class="align-middle">
 
                                                         <?php if($empdetails['image']!="") {?>
-                                                            <img src="uploads/all/<?php echo $empdetails['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                                                            <img src="uploads/all/<?php echo $empdetails['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <?php } else { ?>
-                                                            <span  alt="user" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empdetails['display_name']); ?></span>
+                                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empdetails['display_name']); ?></span>
                                                         <?php } ?>
 
                                                         <div class="d-inline-block width73">
@@ -174,7 +174,7 @@ foreach($employee_performance_appraisals as $epahlres){
                                     </table>
                                     <?php    }else{ ?>
                                     <div class="card-px text-center py-20 m-t-30">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Employees </p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?= __('No Employees'); ?> </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                         </div>
@@ -188,7 +188,7 @@ foreach($employee_performance_appraisals as $epahlres){
                         <div class="card table-card">
                             <?php $isactivelist = $epahlresult[$performancesetup['id']][ST_APPROVED]; ?>
                             <div class="card-header">
-                                <h5>Approved</h5>
+                                <h5><?= __('Approved'); ?></h5>
                                 <div class="card-header-right">
                                     <span class="form-label label label-primary"><?php echo count((array)$isactivelist);?></span>
                                 </div>
@@ -201,9 +201,9 @@ foreach($employee_performance_appraisals as $epahlres){
                                     <table class="table table-hover m-b-0">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="width: 60%;">Employee</th>
-                                                <th scope="col" class="text-right" style="width: 20%;">Self %</th>
-                                                <th scope="col" class="text-right" style="width: 20%;">RO %</th>
+                                                <th scope="col" style="width: 60%;"><?= __('Employee'); ?></th>
+                                                <th scope="col" class="text-right" style="width: 20%;"><?= __('Self %'); ?></th>
+                                                <th scope="col" class="text-right" style="width: 20%;"><?= __('RO %'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody class="custom-scroll" style="height: 300px; display: table-caption;">
@@ -218,9 +218,9 @@ foreach($employee_performance_appraisals as $epahlres){
                                                     <div class="align-middle">
 
                                                         <?php if($empdetails['image']!="") {?>
-                                                            <img src="uploads/all/<?php echo $empdetails['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                                                            <img src="uploads/all/<?php echo $empdetails['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <?php } else { ?>
-                                                            <span  alt="user" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empdetails['display_name']); ?></span>
+                                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empdetails['display_name']); ?></span>
                                                         <?php } ?>
 
                                                         <div class="d-inline-block width73">
@@ -244,7 +244,7 @@ foreach($employee_performance_appraisals as $epahlres){
                                     </table>
                                     <?php    }else{ ?>
                                     <div class="card-px text-center py-20 m-t-30">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Employees </p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?= __('No Employees'); ?> </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                         </div>

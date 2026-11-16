@@ -386,12 +386,12 @@ if(isset($_POST['submit1'])){
         <div class="card">
             <!--- Header Start --->
             <div class="card-header table-card-header">
-                <h5><?php echo "Budget";  ?></h5>
+                <h5><?php echo __("Budget");  ?></h5>
                 <div class="card-header-right table-card-header">
 
                 <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                     &nbsp;<i class="ki ki-long-arrow-back icon-xs"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
                 </div>
             </div>
@@ -404,13 +404,13 @@ if(isset($_POST['submit1'])){
 
                         <div class="budget-section row">
                             <div class="input-field col-lg-2">
-                                <span>Name </span>
-                                <input aria-label="Name" type="text" name="name" class="form-control" value="<?php echo $account_budgets['budget_name']; ?>">
+                                <span><?= __('Name'); ?> </span>
+                                <input aria-label="<?= htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="name" class="form-control" value="<?php echo $account_budgets['budget_name']; ?>">
                             </div>
 
                             <div class="input-field input-field-pre col-lg-2">
-                                <span>Financial Year</span>
-                                <select aria-label="Fiscal Year" class="form-select js-example-basic-single" onchange="validaiontoall()" id="fiscal_year" name="fiscal_year">
+                                <span><?= __('Financial Year'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Fiscal Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" onchange="validaiontoall()" id="fiscal_year" name="fiscal_year">
                                     <?php $year = date('Y');
                                     $view_fiscal_year = $account_budgets['fiscal_year']!=""? $account_budgets['fiscal_year'] : $_GET['fiscal_year'];
                                     for($i=1; $i<6; $i++) {
@@ -426,8 +426,8 @@ if(isset($_POST['submit1'])){
                                 </select>
                             </div>
                             <div class="input-field input-field-pre col-lg-2">
-                                <span>Interval <?php ?></span>
-                                <select aria-label="Inveral" class="form-select js-example-basic-single" name="inveral" onchange="inveral123(this.value)" id="inveral">
+                                <span><?= __('Interval'); ?> <?php ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Inveral'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="inveral" onchange="inveral123(this.value)" id="inveral">
                                     <option <?php if($view_type == 'M' ){ echo "selected";
 } ?> value="month"><?= __('Monthly') ?></option>
                                     <option <?php if($view_type == 'Q' ){ echo "selected";
@@ -444,15 +444,15 @@ if(isset($_POST['submit1'])){
                                 $nwever= $account_budgets['budget_version']!="" ? $account_budgets['budget_version']+1 : 1;
                             ?>
                             <div class="input-field input-field-ver col-lg-1">
-                                <span>Version</span>
-                                <input aria-label="Input field" type="text"  class="form-control" name="" readonly value="<?php echo $ver; ?>">
+                                <span><?= __('Version'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control" name="" readonly value="<?php echo $ver; ?>">
                             </div>
                             <input type="hidden" name="budget_version" value="<?php echo $nwever; ?>">
 
                             <div class="input-field input-field-pre col-lg-2" >
-                                <span>Cost Center</span>
-                                <select aria-label="Cost Center" class="form-select js-example-basic-single" onchange="validaiontoall()" id="cost_center_id" name="cost_center_id">
-                                    <option value="0"> Select Any One</option>
+                                <span><?= __('Cost Center'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Cost Center'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" onchange="validaiontoall()" id="cost_center_id" name="cost_center_id">
+                                    <option value="0"> <?= __('Select Any One'); ?></option>
                                     <?php
                                     $view_cost_center = $account_budgets['cost_center_id']!=""?$account_budgets['cost_center_id'] : $_GET['cost_center'];
                                     foreach($cost_centers as $cost_center){ ?>
@@ -462,7 +462,7 @@ if(isset($_POST['submit1'])){
 
                                 </select>
                                  <?php if($_GET['cost_center']==""){ ?>
-                                <div  class="text-danger f-14 f-w-600 mt-2"> Please Select The Cost Center </div>
+                                <div  class="text-danger f-14 f-w-600 mt-2"> <?= __('Please Select The Cost Center'); ?> </div>
                                 <?php } ?>
                             </div>
                         </div>
@@ -473,7 +473,7 @@ if(isset($_POST['submit1'])){
 } ?>  id="month"
  <?php if($view_type!='M'){?> style="display: none;" <?php
 } ?>>
-                            <h3>Budget Monthly</h3>
+                            <h3><?= __('Budget Monthly'); ?></h3>
                             <table>
                                 <tr style="background-color: #22b9ff; height: 40px;">
                                     <th scope="col"><?= __('Account') ?></th>
@@ -545,44 +545,44 @@ if(isset($_POST['submit1'])){
                                          <input type="hidden" name="<?php echo $name.'account_code'; ?>" value="<?php echo $budget['account_code'];?>">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'1'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m1']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'1'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m1']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'2'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m2']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'2'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'2'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m2']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'2'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'3'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m3']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'3'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'3'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m3']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'3'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'4'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m4']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'4'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'4'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m4']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'4'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'5'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m5']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'5'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'5'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m5']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'5'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'6'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m6']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'6'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'6'; ?>" value="<?php echo round($rbd[$budget['account_code']]['distribution_m6']); ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'6'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'7'; ?>"
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'7'; ?>"
                                               value="<?php echo round($rbd[$budget['account_code']]['distribution_m7']); ?>"
                                               onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'7'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'8'; ?>" onblur="totalcaluclation(this.id,this.value)"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m8']); ?>"  id="<?php echo $value_id.'8'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'8'; ?>" onblur="totalcaluclation(this.id,this.value)"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m8']); ?>"  id="<?php echo $value_id.'8'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'9'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m9']); ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'9'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'9'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m9']); ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'9'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'10'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m10']); ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'10'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'10'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m10']); ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'10'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'11'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m11']); ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'11'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'11'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m11']); ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'11'; ?>" class="form-control text-right">
                                          </td>
                                          <td>
-                                             <input aria-label="Input field" type="text" name="<?php echo $name.'12'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m12']); ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'12'; ?>" class="form-control text-right">
+                                             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'12'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_m12']); ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'12'; ?>" class="form-control text-right">
                                          </td>
-                                         <td><input aria-label="Input field" type="text" readonly name="<?php echo $name.'total'; ?>" id="<?php echo $value_id.'total'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_tot']); ?>"  class="form-control text-right"></td>
+                                         <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly name="<?php echo $name.'total'; ?>" id="<?php echo $value_id.'total'; ?>"  value="<?php echo round($rbd[$budget['account_code']]['distribution_tot']); ?>"  class="form-control text-right"></td>
                                      </tr>
                                      <?php $l++; $z++;
 } ?>
@@ -590,7 +590,7 @@ if(isset($_POST['submit1'])){
                                      $cat_idss = "kt_".$k;
                                      ?>
                                  <tr class="totalbudget" style="background-color: #d3d4d5; height: 40px;">
-                                     <td style="padding-left: 10px;"> Total</td>
+                                     <td style="padding-left: 10px;"> <?= __('Total'); ?></td>
 
                                      <?php $line_total = 0;
                                          for($g =1 ; $g<13;$g++) { ?>
@@ -616,7 +616,7 @@ if(isset($_POST['submit1'])){
                                  <?php } ?>
                                  <input type="hidden" name="" id="gd_count" value="<?php echo $k; ?>">
                                  <tr class="totalbudget" style="background-color: #88d98a; height: 40px;">
-                                     <td style="padding-left: 10px;">Grand Total</td>
+                                     <td style="padding-left: 10px;"><?= __('Grand Total'); ?></td>
                                      <?php
                                      for($g =1 ; $g<13;$g++) { ?>
                                          <td class="text-right">
@@ -637,7 +637,7 @@ if(isset($_POST['submit1'])){
                         <!--- Quater Section Start --->
                         <div class="budget-table m-t-20" id="quater" <?php if($view_type!='Q'){?> style="display: none;" <?php
 } ?>>
-                            <h3>Budget Quaterly</h3>
+                            <h3><?= __('Budget Quaterly'); ?></h3>
                             <table>
                                 <tr style="background-color: #22b9ff; height: 40px;" >
                                     <th scope="col"><?= __('Account') ?></th>
@@ -682,19 +682,19 @@ if(isset($_POST['submit1'])){
                                                 <input type="hidden" name="<?php echo $name.'account_code'; ?>" value="<?php echo $budget['account_code'];?>">
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_q1']); ?>" name="<?php echo $name.'1'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" class="form-control text-right">
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_q1']); ?>" name="<?php echo $name.'1'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" class="form-control text-right">
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_q2']); ?>" name="<?php echo $name.'2'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'2'; ?>" class="form-control text-right">
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_q2']); ?>" name="<?php echo $name.'2'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'2'; ?>" class="form-control text-right">
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_q3']); ?>" name="<?php echo $name.'3'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'3'; ?>" class="form-control text-right">
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_q3']); ?>" name="<?php echo $name.'3'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'3'; ?>" class="form-control text-right">
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_q4']); ?>" name="<?php echo $name.'4'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'4'; ?>" class="form-control text-right">
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_q4']); ?>" name="<?php echo $name.'4'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'4'; ?>" class="form-control text-right">
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" readonly value="<?php echo round($rbd[$budget['account_code']]['distribution_tot']); ?>" name="<?php echo $name.'total'; ?>" id="<?php echo $value_id.'total'; ?>" class="form-control text-right">
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly value="<?php echo round($rbd[$budget['account_code']]['distribution_tot']); ?>" name="<?php echo $name.'total'; ?>" id="<?php echo $value_id.'total'; ?>" class="form-control text-right">
                                                 </td>
                                             </tr>
                                         <?php $l++; $z++;
@@ -703,7 +703,7 @@ if(isset($_POST['submit1'])){
                                         $cat_idss = "mkt_".$k;
                                         ?>
                                         <tr class="totalbudget" style="background-color: #d3d4d5; height: 40px;">
-                                            <td style="padding-left: 10px;"> Total</td>
+                                            <td style="padding-left: 10px;"> <?= __('Total'); ?></td>
 
                                             <?php $line_total = 0;
                                              for($g =1 ; $g<5;$g++) { ?>
@@ -734,7 +734,7 @@ if(isset($_POST['submit1'])){
                                 }  ?>
                                 <input type="hidden" name="" id="mgd_count" value="<?php echo $k; ?>">
                                 <tr class="totalbudget" style="background-color: #88d98a; height: 40px;">
-                                    <td style="padding-left: 10px;">Grand Total</td>
+                                    <td style="padding-left: 10px;"><?= __('Grand Total'); ?></td>
                                     <?php
                                     for($g =1 ; $g<5;$g++) { ?>
                                         <td class="text-right">
@@ -755,7 +755,7 @@ if(isset($_POST['submit1'])){
                         <!--- Half Section Start --->
                         <div class="budget-table m-t-20" id="half" <?php if($view_type!='H'){?> style="display: none;" <?php
 } ?>>
-                            <h3>Budget Half Yearly</h3>
+                            <h3><?= __('Budget Half Yearly'); ?></h3>
                             <table>
                                 <tr style="background-color: #22b9ff; height: 40px;" >
                                     <th scope="col"><?= __('Account') ?></th>
@@ -794,13 +794,13 @@ if(isset($_POST['submit1'])){
                                                 <input type="hidden" name="<?php echo $name.'account_code'; ?>" value="<?php echo $budget['account_code'];?>">
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_h1']); ?>" name="<?php echo $name.'1'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" class="form-control text-right">
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_h1']); ?>" name="<?php echo $name.'1'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" class="form-control text-right">
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_h2']); ?>" name="<?php echo $name.'2'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'2'; ?>" class="form-control text-right">
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_h2']); ?>" name="<?php echo $name.'2'; ?>"  onblur="totalcaluclationquaterly(this.id,this.value)" id="<?php echo $value_id.'2'; ?>" class="form-control text-right">
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" readonly value="<?php echo round($rbd[$budget['account_code']]['distribution_tot']); ?>" name="<?php echo $name.'total'; ?>" id="<?php echo $name.'total'; ?>" class="form-control text-right">
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly value="<?php echo round($rbd[$budget['account_code']]['distribution_tot']); ?>" name="<?php echo $name.'total'; ?>" id="<?php echo $name.'total'; ?>" class="form-control text-right">
                                                 </td>
                                             </tr>
                                         <?php $l++; $z++;
@@ -809,7 +809,7 @@ if(isset($_POST['submit1'])){
                                         $cat_idss = "ykt_".$k;
                                         ?>
                                         <tr class="totalbudget" style="background-color: #d3d4d5; height: 40px;">
-                                            <td style="padding-left: 10px;"> Total</td>
+                                            <td style="padding-left: 10px;"> <?= __('Total'); ?></td>
 
                                             <?php $line_total = 0;
                                              for($g =1 ; $g<3;$g++) { ?>
@@ -840,7 +840,7 @@ if(isset($_POST['submit1'])){
                                 }  ?>
                                 <input type="hidden" name="" id="ygd_count" value="<?php echo $k; ?>">
                                 <tr class="totalbudget" style="background-color: #88d98a; height: 40px;">
-                                    <td style="padding-left: 10px;">Grand Total</td>
+                                    <td style="padding-left: 10px;"><?= __('Grand Total'); ?></td>
                                     <?php
                                     for($g =1 ; $g<3;$g++) { ?>
                                         <td class="text-right">
@@ -861,7 +861,7 @@ if(isset($_POST['submit1'])){
                         <!--- Yearly Section Start --->
                         <div class="budget-table m-t-20" id="yearly" <?php if($view_type!='Y'){?> style="display: none;" <?php
 } ?>>
-                            <h3>Budget  Yearly</h3>
+                            <h3><?= __('Budget Yearly'); ?></h3>
                             <table>
                                 <tr style="background-color: #22b9ff; height: 40px;" >
                                     <th scope="col"><?= __('Account') ?></th>
@@ -892,7 +892,7 @@ if(isset($_POST['submit1'])){
                                                     <input type="hidden" name="<?php echo $name.'account_code'; ?>" value="<?php echo $budget['account_code'];?>">
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Input field" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_tot']); ?>" name="<?php echo $name.'1'; ?>"  onblur="totalcaluclationyear(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" class="form-control text-right">
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" value="<?php echo round($rbd[$budget['account_code']]['distribution_tot']); ?>" name="<?php echo $name.'1'; ?>"  onblur="totalcaluclationyear(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" class="form-control text-right">
                                                 </td>
 
                                             </tr>
@@ -903,7 +903,7 @@ if(isset($_POST['submit1'])){
                                         $cctt =  "lkt_".$k."_total";
                                         ?>
                                         <tr class="totalbudget" style="background-color: #d3d4d5; height: 40px;">
-                                            <td style="padding-left: 10px;"> Total</td>
+                                            <td style="padding-left: 10px;"> <?= __('Total'); ?></td>
 
 
                                                 <td class="text-right">
@@ -927,7 +927,7 @@ if(isset($_POST['submit1'])){
                                 }  ?>
                                 <input type="hidden" name="" id="mgd_count_2" value="<?php echo $k; ?>">
                                 <tr class="totalbudget" style="background-color: #88d98a; height: 40px;">
-                                    <td style="padding-left: 10px;">Grand Total</td>
+                                    <td style="padding-left: 10px;"><?= __('Grand Total'); ?></td>
 
                                     <td class="text-right" id="total_lgd" style="padding-right: 5px;">
                                         <?php echo $alltotal_yy; ?>
@@ -967,7 +967,7 @@ if(isset($_POST['submit1'])){
                                             <div class="card">
                                                 <div class="card-header" id="headingTwo2">
                                                     <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                                        Transaction Timeline
+                                                        <?= __('Transaction Timeline'); ?>
                                                     </div>
                                                 </div>
                                                 <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample2">
@@ -1012,13 +1012,13 @@ if(isset($_POST['submit1'])){
                                 <?php if(count((array)$budget_data)==0 ){ ?>
                                 <div class="alert alert-danger background-danger alert-dismissible">
                                     <strong><?php echo $_SESSION['error_message']['9163']; ?></strong>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                                 </div>
                                 <?php } ?>
                                 <?php if(count((array)$cost_centers)==0 ){ ?>
                                 <div class="alert alert-danger background-danger alert-dismissible">
                                     <strong><?php echo $_SESSION['error_message']['9164']; ?></strong>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                                 </div>
                                 <?php } ?>
 

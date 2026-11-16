@@ -24,18 +24,18 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5>Vendor Verification List</h5>
+      <h5><?= __('Vendor Verification List'); ?></h5>
     </div>
     <div class="card-body">
       <form method="post" action="" id="typeForm">
         <div class="row col-lg-12 align-items-end">
           <div class="col-lg-4 mb-2">
-            <span class="form-label">Vendor Type <span class="text-danger">*</span></span>
-            <select aria-label="Type" class="form-select js-example-basic-single verificationFormSubmit" name="type" id="type" required>
-              <option value="">Select any Type</option>
-              <option value="vendors" <?php echo ($selected_type == 'vendors') ? 'selected' : ''; ?>>Vendors</option>
+            <span class="form-label"><?= __('Vendor Type'); ?> <span class="text-danger">*</span></span>
+            <select aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single verificationFormSubmit" name="type" id="type" required>
+              <option value=""><?= __('Select any Type'); ?></option>
+              <option value="vendors" <?php echo ($selected_type == 'vendors') ? 'selected' : ''; ?>><?= __('Vendors'); ?></option>
               <option value="vendor_registers" <?php echo ($selected_type == 'vendor_registers') ? 'selected' : ''; ?>>
-                Vendor Registers</option>
+                <?= __('Vendor Registers'); ?></option>
             </select>
           </div>
         </div>
@@ -51,12 +51,12 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
             <thead>
               <tr class="table-secondary">
                 <th scope="col">#</th>
-                <th scope="col">Company Details</th>
-                <th scope="col">PAN</th>
-                <th scope="col">GST</th>
-                <th scope="col">Bank Details</th>
-                <th scope="col">TAN</th>
-                <th scope="col">MSME</th>
+                <th scope="col"><?= __('Company Details'); ?></th>
+                <th scope="col"><?= __('PAN'); ?></th>
+                <th scope="col"><?= __('GST'); ?></th>
+                <th scope="col"><?= __('Bank Details'); ?></th>
+                <th scope="col"><?= __('TAN'); ?></th>
+                <th scope="col"><?= __('MSME'); ?></th>
               </tr>
             </thead>
             <tbody>
@@ -94,7 +94,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                           <div>
                             <div><?= htmlspecialchars($pan_value); ?></div>
                             <?php if (isset($vendor_verifications['PAN']['verification_datetime'])) { ?>
-                              <small class="text-muted">Verified:
+                              <small class="text-muted"><?= __('Verified'); ?>:
                                 <?= date('d-m-Y H:i', strtotime($vendor_verifications['PAN']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
@@ -108,12 +108,12 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                         </div>
                         <div class="verification-buttons mt-2">
 
-                          <button type="button" class="btn btn-sm btn-primary verificationDetails" data-verification_type="pan" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>" >Change</button>
+                          <button type="button" class="btn btn-sm btn-primary verificationDetails" data-verification_type="pan" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>" ><?= __('Change'); ?></button>
                         </div>
                       <?php } else { ?>
-                        <span class="text-muted">N/A</span>
+                        <span class="text-muted"><?= __('N/A'); ?></span>
                         <div class="verification-buttons mt-2">
-                          <button type="button" class="btn btn-sm btn-info verificationDetails" data-verification_type="pan" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>"  >Insert</button>
+                          <button type="button" class="btn btn-sm btn-info verificationDetails" data-verification_type="pan" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>"  ><?= __('Insert'); ?></button>
                         </div>
                       <?php } ?>
                     </td>
@@ -123,7 +123,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                           <div>
                             <div><?= htmlspecialchars($gst_value); ?></div>
                             <?php if (isset($vendor_verifications['GSTIN']['verification_datetime'])) { ?>
-                              <small class="text-muted">Verified:
+                              <small class="text-muted"><?= __('Verified'); ?>:
                                 <?= date('d-m-Y H:i', strtotime($vendor_verifications['GSTIN']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
@@ -136,14 +136,13 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                           </div>
                         </div>
                         <div class="verification-buttons mt-2">
-                          <button type="button" class="btn btn-sm btn-primary me-1 verificationDetails" data-verification_type="gst" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>">Change</button>
-                          <button type="button" class="btn btn-sm btn-secondary  verificationDetails" data-verification_type="gst" data-record_id="<?php echo $row['id']; ?>" data-action_type="add_new" data-table_name ="<?php echo  $selected_type; ?>">Add
-                            New GST</button>
+                          <button type="button" class="btn btn-sm btn-primary me-1 verificationDetails" data-verification_type="gst" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>"><?= __('Change'); ?></button>
+                          <button type="button" class="btn btn-sm btn-secondary  verificationDetails" data-verification_type="gst" data-record_id="<?php echo $row['id']; ?>" data-action_type="add_new" data-table_name ="<?php echo  $selected_type; ?>"><?= __('Add New GST'); ?></button>
                         </div>
                       <?php } else { ?>
-                        <span class="text-muted">N/A</span>
+                        <span class="text-muted"><?= __('N/A'); ?></span>
                         <div class="verification-buttons mt-2">
-                          <button type="button" class="btn btn-sm btn-info  verificationDetails" data-verification_type="gst" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>">Insert</button>
+                          <button type="button" class="btn btn-sm btn-info  verificationDetails" data-verification_type="gst" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>"><?= __('Insert'); ?></button>
                         </div>
                       <?php } ?>
                     </td>
@@ -153,10 +152,10 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                           <div>
                             <div class="fw-bold"><?= htmlspecialchars($bank_value); ?></div>
                             <?php if (!empty($ifsc_value)) { ?>
-                              <div class="text-muted small">IFSC: <?= htmlspecialchars($ifsc_value); ?></div>
+                              <div class="text-muted small"><?= __('IFSC'); ?>: <?= htmlspecialchars($ifsc_value); ?></div>
                             <?php } ?>
                             <?php if (isset($vendor_verifications['BANK']['verification_datetime'])) { ?>
-                              <small class="text-muted">Verified:
+                              <small class="text-muted"><?= __('Verified'); ?>:
                                 <?= date('d-m-Y H:i', strtotime($vendor_verifications['BANK']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
@@ -169,12 +168,12 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                           </div>
                         </div>
                         <div class="verification-buttons mt-2">
-                          <button type="button" class="btn btn-sm btn-primary verificationDetails" data-verification_type="bank" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>">Change</button>
+                          <button type="button" class="btn btn-sm btn-primary verificationDetails" data-verification_type="bank" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>"><?= __('Change'); ?></button>
                         </div>
                       <?php } else { ?>
-                        <span class="text-muted">N/A</span>
+                        <span class="text-muted"><?= __('N/A'); ?></span>
                         <div class="verification-buttons mt-2">
-                          <button type="button" class="btn btn-sm btn-info verificationDetails" data-verification_type="bank" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>">Insert</button>
+                          <button type="button" class="btn btn-sm btn-info verificationDetails" data-verification_type="bank" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>"><?= __('Insert'); ?></button>
                         </div>
                       <?php } ?>
                     </td>
@@ -184,7 +183,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                           <div>
                             <div><?= htmlspecialchars($tan_value); ?></div>
                             <?php if (isset($vendor_verifications['TAN']['verification_datetime'])) { ?>
-                              <small class="text-muted">Verified:
+                              <small class="text-muted"><?= __('Verified'); ?>:
                                 <?= date('d-m-Y H:i', strtotime($vendor_verifications['TAN']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
@@ -197,12 +196,12 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                           </div>
                         </div>
                         <div class="verification-buttons mt-2">
-                          <button type="button" class="btn btn-sm btn-primary verificationDetails" data-verification_type="tan" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>">Change</button>
+                          <button type="button" class="btn btn-sm btn-primary verificationDetails" data-verification_type="tan" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>"><?= __('Change'); ?></button>
                         </div>
                       <?php } else { ?>
-                        <span class="text-muted">N/A</span>
+                        <span class="text-muted"><?= __('N/A'); ?></span>
                         <div class="verification-buttons mt-2">
-                          <button type="button" class="btn btn-sm btn-info verificationDetails" data-verification_type="tan" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>">Insert</button>
+                          <button type="button" class="btn btn-sm btn-info verificationDetails" data-verification_type="tan" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>"><?= __('Insert'); ?></button>
                         </div>
                       <?php } ?>
                     </td>
@@ -212,7 +211,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                           <div>
                             <div><?= htmlspecialchars($msme_value); ?></div>
                             <?php if (isset($vendor_verifications['MSME']['verification_datetime'])) { ?>
-                              <small class="text-muted">Verified:
+                              <small class="text-muted"><?= __('Verified'); ?>:
                                 <?= date('d-m-Y H:i', strtotime($vendor_verifications['MSME']['verification_datetime'])); ?></small>
                             <?php } ?>
                           </div>
@@ -225,12 +224,12 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                           </div>
                         </div>
                         <div class="verification-buttons mt-2">
-                          <button type="button" class="btn btn-sm btn-primary verificationDetails" data-verification_type="msme" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>">Change</button>
+                          <button type="button" class="btn btn-sm btn-primary verificationDetails" data-verification_type="msme" data-record_id="<?php echo $row['id']; ?>" data-action_type="change" data-table_name ="<?php echo  $selected_type; ?>"><?= __('Change'); ?></button>
                         </div>
                       <?php } else { ?>
-                        <span class="text-muted">N/A</span>
+                        <span class="text-muted"><?= __('N/A'); ?></span>
                         <div class="verification-buttons mt-2">
-                          <button type="button" class="btn btn-sm btn-info verificationDetails" data-verification_type="msme" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>">Insert</button>
+                          <button type="button" class="btn btn-sm btn-info verificationDetails" data-verification_type="msme" data-record_id="<?php echo $row['id']; ?>" data-action_type="insert" data-table_name ="<?php echo  $selected_type; ?>"><?= __('Insert'); ?></button>
                         </div>
                       <?php } ?>
                     </td>
@@ -241,7 +240,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                   <td colspan="7" class="text-center">
                     <div class="card-px text-center py-20 m-t-30">
                       <p class="text-muted f-16 fw-bold m-b-30">
-                        <i class="ti-alert text-warning"></i> No Items
+                        <i class="ti-alert text-warning"></i> <?= __('No Items'); ?>
                       </p>
                       <div class="text-center px-4">
                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png"
@@ -260,7 +259,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
     <div class="card">
       <div class="card-body text-center">
         <div class="alert alert-info">
-          <i class="ti-info-alt"></i> Please select a type to view the verification list.
+          <i class="ti-info-alt"></i> <?= __('Please select a type to view the verification list.'); ?>
         </div>
       </div>
     </div>

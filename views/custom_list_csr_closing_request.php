@@ -11,21 +11,21 @@ $response = json_decode($response, 1);
         <div class="col-xl-12 col-md-12">
             <div class="card table-card">
                 <div class="card-header">
-                    <h5>CSR Closing Request</h5>
+                    <h5><?= __('CSR Closing Request'); ?></h5>
                 </div>
                 <div class="card-block custom-scroll csr-closing-scroll" >
                     <div class="table-responsive">
                         <table class="table table-hover m-b-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">S No.</th>
-                                    <th scope="col">Project Name</th>
-                                    <th scope="col">Project Requestor</th>
-                                    <th scope="col">Count Of Phases</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Cost</th>
-                                    <th scope="col" class="text-center">Action</th>
+                                    <th scope="col"><?= __('S No.'); ?></th>
+                                    <th scope="col"><?= __('Project Name'); ?></th>
+                                    <th scope="col"><?= __('Project Requestor'); ?></th>
+                                    <th scope="col"><?= __('Count Of Phases'); ?></th>
+                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                    <th scope="col"><?= __('End Date'); ?></th>
+                                    <th scope="col"><?= __('Cost'); ?></th>
+                                    <th scope="col" class="text-center"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,7 +49,7 @@ $response = json_decode($response, 1);
                                                 <button class="btn btn-primary waves-effect waves-light btn-s csr-closing-btn"
                                                     type="button"
                                                     data-id="<?php echo $row['proposal_id']; ?>">
-                                                Completed
+                                                <?= __('Completed'); ?>
                                             </button>
 
                                             </td>
@@ -60,7 +60,7 @@ $response = json_decode($response, 1);
                                     endforeach;
                                 }else{
                                     echo '<tr><td colspan="8"> <div class="text-center ">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png">
                                         </div>

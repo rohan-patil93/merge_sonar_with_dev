@@ -341,7 +341,7 @@ if($table_name =="sales_invoices" && $table1['ref_type'] != "" || ($table_name =
                     type: "POST",
                     success:function(data){
                         console.log(data);
-                        $("#grade").html("<select aria-label='Pay Template' class='form-control' name='pay_template'>"+data+"</select>");
+                        $("#grade").html("<select aria-label='<?= htmlspecialchars(__('Pay Template'), ENT_QUOTES, 'UTF-8'); ?>' class='form-control' name='pay_template'>"+data+"</select>");
                     },
                     error:function (){}
                 });

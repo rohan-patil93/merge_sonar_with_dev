@@ -27,11 +27,11 @@
             <div class="col-lg-12">
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
                     <div class="card-header mb-3">
-                        <h5>Assets Return</h5>
+                        <h5><?= __('Assets Return'); ?></h5>
                         <div class="card-header-right">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -42,13 +42,13 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">User</th>
-                                        <th scope="col">Asset</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Return Date</th>
-                                        <th scope="col">Request Date Time</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"><?= __('User'); ?></th>
+                                        <th scope="col"><?= __('Asset'); ?></th>
+                                        <th scope="col"><?= __('Description'); ?></th>
+                                        <th scope="col"><?= __('Return Date'); ?></th>
+                                        <th scope="col"><?= __('Request Date Time'); ?></th>
+                                        <th scope="col"><?= __('Status'); ?></th>
+                                        <th scope="col"><?= __('Action'); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,7 +79,7 @@
                         </div>
                         <?php }else{ ?>
                             <div class="card-px text-center ">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Asset Return</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Asset Return'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>

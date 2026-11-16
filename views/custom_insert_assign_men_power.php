@@ -26,7 +26,7 @@ if(isset($_POST['submit1'])){
 
      }
      function inveral123(val){
-         alert('hai');
+         alert(<?php echo json_encode(__('hai'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
          var vals = "month,quater,yearly";
          var split_val = vals.split(",");
          for(var i=0; i<4; i++){
@@ -186,13 +186,13 @@ if(isset($_POST['submit1'])){
                 <span class="kt-portlet__head-icon">
 
                 </span>
-                <h3 class="card-label">&nbsp;<?php echo "Contracts";  ?> </h3>
+                <h3 class="card-label">&nbsp;<?php echo __("Contracts");  ?> </h3>
             </div>
     <div class="kt-portlet__head-toolbar">
                 <div class="card-toolbar">
                         <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                             <i class="ki ki-long-arrow-back icon-xs"></i>
-                            Back
+                            <?= __('Back'); ?>
                         </a>
                     &nbsp;
 
@@ -205,8 +205,8 @@ if(isset($_POST['submit1'])){
                 <div class="budget-section">
 
                     <div class="input-field input-field-pre">
-                        <span>Year</span>
-                        <select aria-label="Fiscal Year" class="form-control kt_select2" name="fiscal_year" id="kt_select2_41">
+                        <span><?= __('Year'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Fiscal Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt_select2" name="fiscal_year" id="kt_select2_41">
                             <?php $year = date('Y'); for($i=1; $i<10; $i++) { $to_year = $year+1; ?>
                             <option value="<?php echo $to_year; ?>"><?php echo $year; ?></option>
                             <?php $year = $year+1;
@@ -214,40 +214,40 @@ if(isset($_POST['submit1'])){
                         </select>
                     </div>
                     <div class="input-field  col-lg-4">
-                        <span>Location</span>
-                        <select aria-label="Location" class="form-control kt_select2 " name="location" id="kt_select2_42">
+                        <span><?= __('Location'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt_select2 " name="location" id="kt_select2_42">
 
-                            <option value="0">All</option>
+                            <option value="0"><?= __('All'); ?></option>
                             <?php foreach($locations as $location){ ?>
                             <option value="<?php echo $location['id']; ?> "><?php echo $location['location_name']; ?> </option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="input-field  col-lg-4">
-                        <span>Department</span>
-                        <select aria-label="Department" class="form-control kt_select2 " name="department" id="kt_select2_43">
+                        <span><?= __('Department'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt_select2 " name="department" id="kt_select2_43">
 
-                            <option value="0">All</option>
+                            <option value="0"><?= __('All'); ?></option>
                             <?php foreach($departments as $department){ ?>
                             <option value="<?php echo $department['id']; ?> "><?php echo $department['department_name']; ?> </option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="input-field  col-lg-4">
-                        <span>Job Title</span>
-                        <select aria-label="Department" class="form-control kt_select2 " name="department" id="kt_select2_44">
+                        <span><?= __('Job Title'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt_select2 " name="department" id="kt_select2_44">
 
-                            <option value="0">All</option>
+                            <option value="0"><?= __('All'); ?></option>
                             <?php foreach($job_tittles as $job_title){ ?>
                             <option value="<?php echo $job_title['id']; ?> "><?php echo $job_title['job_title']; ?> </option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="input-field  col-lg-4">
-                        <span>Vendor</span>
-                        <select aria-label="Vendor" class="form-control kt_select2" name="vendor" id="kt_select2_45">
+                        <span><?= __('Vendor'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt_select2" name="vendor" id="kt_select2_45">
 
-                            <option value="0">ALL</option>
+                            <option value="0"><?= __('ALL'); ?></option>
                             <?php foreach($vendors as $vendor){ ?>
                             <option value="<?php echo $vendor['id']; ?> "><?php echo $vendor['first_name']; ?> </option>
                             <?php } ?>
@@ -258,7 +258,7 @@ if(isset($_POST['submit1'])){
 
 
                     <div class="budget-table" id="month">
-                        <h3>Contract Monthly</h3>
+                        <h3><?= __('Contract Monthly'); ?></h3>
                         <table>
                             <tr style="background-color: #22b9ff;">
                                 <th scope="col"><?= __('Job Title') ?></th>
@@ -317,31 +317,31 @@ if(isset($_POST['submit1'])){
                                         <td class="padlft" style="min-width: 200px; text-align: left;"><?php echo $budget['name'];?>
                                             <input type="hidden" name="<?php echo $name.'account_code'; ?>" value="<?php echo $budget['id'];?>">
                                         </td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'1'; ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" <?php if($no_dis['1']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'1'; ?>"  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'1'; ?>" <?php if($no_dis['1']==""){ echo "readonly";
 } ?>  value="<?php echo $no_dis['1']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'2'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'2'; ?>" <?php if($no_dis['2']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'2'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'2'; ?>" <?php if($no_dis['2']==""){ echo "readonly";
 } ?>   value="<?php echo $no_dis['2']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'3'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'3'; ?>" <?php if($no_dis['3']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'3'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'3'; ?>" <?php if($no_dis['3']==""){ echo "readonly";
 } ?>   value="<?php echo $no_dis['3']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'4'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'4'; ?>" <?php if($no_dis['4']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'4'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'4'; ?>" <?php if($no_dis['4']==""){ echo "readonly";
 } ?>  value="<?php echo $no_dis['4']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'5'; ?>" <?php if($no_dis['5']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'5'; ?>" <?php if($no_dis['5']==""){ echo "readonly";
 } ?>  onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'5'; ?>"  value="<?php echo $no_dis['5']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'6'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'6'; ?>" <?php if($no_dis['6']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'6'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'6'; ?>" <?php if($no_dis['6']==""){ echo "readonly";
 } ?>  value="<?php echo $no_dis['6']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'7'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'7'; ?>" <?php if($no_dis['7']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'7'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'7'; ?>" <?php if($no_dis['7']==""){ echo "readonly";
 } ?>  value="<?php echo $no_dis['7']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'8'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'8'; ?>"  <?php if($no_dis['8']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'8'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'8'; ?>"  <?php if($no_dis['8']==""){ echo "readonly";
 } ?> value="<?php echo $no_dis['8']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'9'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'9'; ?>" <?php if($no_dis['9']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'9'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'9'; ?>" <?php if($no_dis['9']==""){ echo "readonly";
 } ?> value="<?php echo $no_dis['9']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'10'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'10'; ?>" <?php if($no_dis['10']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'10'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'10'; ?>" <?php if($no_dis['10']==""){ echo "readonly";
 } ?> value="<?php echo $no_dis['10']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'11'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'11'; ?>"  <?php if($no_dis['11']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'11'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'11'; ?>"  <?php if($no_dis['11']==""){ echo "readonly";
 } ?> value="<?php echo $no_dis['11']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" name="<?php echo $name.'12'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'12'; ?>" <?php if($no_dis['12']==""){ echo "readonly";
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="<?php echo $name.'12'; ?>" onblur="totalcaluclation(this.id,this.value)" id="<?php echo $value_id.'12'; ?>" <?php if($no_dis['12']==""){ echo "readonly";
 } ?>  value="<?php echo $no_dis['12']; ?>" class="form-control text-right"></td>
-                                        <td><input aria-label="Input field" type="text" readonly name="<?php echo $name.'total'; ?>" id="<?php echo $value_id.'total'; ?>"  value="<?php echo $total_no; ?>" class="form-control text-right"></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly name="<?php echo $name.'total'; ?>" id="<?php echo $value_id.'total'; ?>"  value="<?php echo $total_no; ?>" class="form-control text-right"></td>
                                     </tr>
                             <?php $l++; $z++;
 }  ?>
@@ -349,7 +349,7 @@ if(isset($_POST['submit1'])){
                                   $cat_idss = "kt_".$k;
                                      ?>
                                     <tr class="totalbudget" style="background-color: #f6f7f9; height: 40px;">
-                                        <td style="padding-left: 10px;"> Total</td>
+                                        <td style="padding-left: 10px;"> <?= __('Total'); ?></td>
 
                 <?php $dep_total ="";
                     for($g =1 ; $g<13;$g++){
@@ -368,7 +368,7 @@ if(isset($_POST['submit1'])){
 } ?>
                             <input type="hidden" name="" id="gd_count" value="<?php echo $k; ?>">
                             <tr class="totalbudget" style="background-color: #f6f7f9; height: 40px;">
-                                <td style="padding-left: 10px;">Grand Total</td>
+                                <td style="padding-left: 10px;"><?= __('Grand Total'); ?></td>
                                 <?php
                                  for($g =1 ; $g<13;$g++) { ?>
                                     <td><div id="<?php echo "gd_".$g; ?>" style="padding-right: 5px;"> <?php echo $gp[$g]; ?></div></td>
@@ -410,7 +410,7 @@ if(isset($_POST['submit1'])){
                     <div class="card">
                         <div class="card-header" id="headingTwo2">
                             <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                Transaction Timeline
+                                <?= __('Transaction Timeline'); ?>
                             </div>
                         </div>
                         <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample2">

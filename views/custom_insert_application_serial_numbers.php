@@ -181,7 +181,7 @@ function formSubmitBTN(){
     console.log('doc_no_length -------'+ doc_no_length);
     if(doc_no_length =="" || doc_no_length ==0){
         error_seq = 1;
-        $("#error_doc_no_length").text('Please Enter Number Length');
+        $("#error_doc_no_length").text(<?php echo json_encode(__('Please Enter Number Length'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     }
     $(".columns_sequince").each(function () {
         let seqid = $(this).val();
@@ -193,13 +193,13 @@ function formSubmitBTN(){
             if(static_value == ""){
                 //console.log('static_value----------');
                 error_seq = 1;
-                $("#error_static_value_"+seqid).text('Please Enter Value');
+                $("#error_static_value_"+seqid).text(<?php echo json_encode(__('Please Enter Value'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
         }else{
             if(dynamic_value == ""){
                 //console.log('dynamic_value----------');
                 error_seq = 1;
-                $("#error_dynamic_value_"+seqid).text('Please Select Any one');
+                $("#error_dynamic_value_"+seqid).text(<?php echo json_encode(__('Please Select Any one'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
         }
 
@@ -248,7 +248,7 @@ function formSubmitBTN(){
 	<div class="card-header">
         <h5><?= __('Transaction Serial Numbers') ?></h5>
         <div class="card-header-right">
-          	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back </a>
+          	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?> </a>
         </div>
     </div>
 	<div class="card-body">

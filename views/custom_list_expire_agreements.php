@@ -9,8 +9,8 @@ $data = json_decode($details,1);
 ?>
 <?php if(count((array)$data) != 0){ ?>
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Expire Agreements List</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLabel"><?= __('Expire Agreements List'); ?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -23,10 +23,10 @@ $data = json_decode($details,1);
 
                     <thead>
                         <tr>
-                            <th scope="col">Sr.No.</th>
-                            <th scope="col">Agreement Name </th>
-                            <th scope="col">Vendor Name</th>
-                            <th scope="col">Expiry Date  </th>
+                            <th scope="col"><?= __('Sr.No.'); ?></th>
+                            <th scope="col"><?= __('Agreement Name'); ?> </th>
+                            <th scope="col"><?= __('Vendor Name'); ?></th>
+                            <th scope="col"><?= __('Expiry Date'); ?>  </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -48,7 +48,7 @@ $data = json_decode($details,1);
         </div>
     </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= __('Close'); ?></button>
       </div>
       </form>
 

@@ -70,13 +70,13 @@ $get_option = $_POST['get_option'];
                 <thead>
                     <tr>
 
-                        <th scope="col">Trans No.</th>
-                        <th scope="col">Date</th>
+                        <th scope="col"><?= __('Trans No.'); ?></th>
+                        <th scope="col"><?= __('Date'); ?></th>
                         <th scope="col"><?php echo $cus_list['lable']; ?></th>
 
 
 
-                        <th scope="col" class="text-center">Generate <?php ?> </th>
+                        <th scope="col" class="text-center"><?= __('Generate'); ?> <?php ?> </th>
                         <th scope="col" class="text-center"></th>
 
                     </tr>
@@ -115,7 +115,7 @@ if($table_name == "requisitions" ||  $table_name == "quotations"){
     }
     if($_REQUEST['clone'] == "purchase_orders"){
         if(!isset($quotations[$row['id']])){ ?>
-            <button class="btn btn-primary btn-brand--icon" id="kt_search_2" onclick="changestatus('purchase_orders','<?php echo $rid; ?>','<?php echo $row['itemtb_id']; ?>')"  <?php echo $newinsert_permissionbtn; ?>><span>Purchase Order</span>
+            <button class="btn btn-primary btn-brand--icon" id="kt_search_2" onclick="changestatus('purchase_orders','<?php echo $rid; ?>','<?php echo $row['itemtb_id']; ?>')"  <?php echo $newinsert_permissionbtn; ?>><span><?= __('Purchase Order'); ?></span>
             </button>
         <?php
         }else{
@@ -135,7 +135,7 @@ if($table_name == "requisitions" ||  $table_name == "quotations"){
     }
     if($_REQUEST['clone'] == "sales_orders"){
         if(!isset($quotations[$row['id']])){ ?>
-            <button class="btn btn-primary btn-brand--icon" id="kt_search_4" onclick="changestatus('sales_orders','<?php echo $rid; ?>','<?php echo $row['itemtb_id']; ?>','customers')"  <?php echo $newinsert_permissionbtn; ?>><span>Sales Order</span>
+            <button class="btn btn-primary btn-brand--icon" id="kt_search_4" onclick="changestatus('sales_orders','<?php echo $rid; ?>','<?php echo $row['itemtb_id']; ?>','customers')"  <?php echo $newinsert_permissionbtn; ?>><span><?= __('Sales Order'); ?></span>
             </button>
         <?php
         }else{
@@ -185,7 +185,7 @@ if($table_name == "requisitions" ||  $table_name == "quotations"){
                         </table>
                     <?php }else{ ?>
                         <div class="card-px text-center ">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>

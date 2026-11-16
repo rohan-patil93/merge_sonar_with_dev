@@ -369,7 +369,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
           if($buddy_details['hr_connect']=="0" || $buddy_details['report_to']=="0"){ ?>
              <div class="card-body">
                  <div class="alert alert-danger background-info alert-dismissible">
-                    <strong><?php echo "HR connect is not configured.  <strong>Workflow need to be started!</strong>"; ?></strong>
+                    <strong><?php echo "".__('HR connect is not configured.')."  <strong>".__('Workflow need to be started!')."</strong>"; ?></strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
                     </button>
                 </div>

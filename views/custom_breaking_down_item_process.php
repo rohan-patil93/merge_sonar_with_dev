@@ -63,12 +63,12 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
 	            <div class="form-group">
 	                <label class="form-label" for="process_name"><?= __("Process Name") ?> &nbsp;<span class="text-danger">*</span></label>
 	                 <span class="d-block error-message text-danger"></span>
-	                <input class="form-control requried_field" type="text" id="process_name" name="process_name" value="<?php echo htmlspecialchars($items['process_name'] ?? '', ENT_QUOTES); ?>" aria-label="Process Name">
+	                <input class="form-control requried_field" type="text" id="process_name" name="process_name" value="<?php echo htmlspecialchars($items['process_name'] ?? '', ENT_QUOTES); ?>" aria-label="<?= htmlspecialchars(__('Process Name'), ENT_QUOTES, 'UTF-8'); ?>">
 	            </div>
 	            <div class="form-group">
 	                <label class="form-label" for="breaking_down_item_id"><?= __("Breaking Down Item") ?> &nbsp;<span class="text-danger">*</span></label>
 	                <span class="d-block error-message text-danger"></span>
-	                <select class="form-select border js-example-basic-single requried_field" id="breaking_down_item_id" name="breaking_down_item_id" aria-label="Breaking Down Item Id">
+	                <select class="form-select border js-example-basic-single requried_field" id="breaking_down_item_id" name="breaking_down_item_id" aria-label="<?= htmlspecialchars(__('Breaking Down Item Id'), ENT_QUOTES, 'UTF-8'); ?>">
 	                    <option value="0"><?= __("Select Any one") ?> </option>
 	                    <?php if (!empty($items) && is_array($items)) {
 	                        foreach ($items as $itm) {
@@ -82,11 +82,11 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
 	            </div>
 	            <div class="form-group">
 	                <label class="form-label" for="breaking_down_item_date"><?= __("Date") ?></label>
-	                <input class="form-control datepicker" type="text" id="breaking_down_item_date" name="breaking_down_item_date" value="<?php echo (!empty($items['breaking_down_item_date']) && function_exists('fromDate')) ? fromDate($items['breaking_down_item_date']) : (!empty($items['breaking_down_item_date']) ? htmlspecialchars($items['breaking_down_item_date'], ENT_QUOTES) : ''); ?>" aria-label="Breaking Down Item Date">
+	                <input class="form-control datepicker" type="text" id="breaking_down_item_date" name="breaking_down_item_date" value="<?php echo (!empty($items['breaking_down_item_date']) && function_exists('fromDate')) ? fromDate($items['breaking_down_item_date']) : (!empty($items['breaking_down_item_date']) ? htmlspecialchars($items['breaking_down_item_date'], ENT_QUOTES) : ''); ?>" aria-label="<?= htmlspecialchars(__('Breaking Down Item Date'), ENT_QUOTES, 'UTF-8'); ?>">
 	            </div>
 	            <div class="form-group">
 	                <label class="form-label" for="parent_quantity"><?= __("Quantity") ?></label>
-	                <input class="form-control" type="text" id="parent_quantity" name="quantity" value="<?php echo !empty($items['quantity']) ? htmlspecialchars($items['quantity'], ENT_QUOTES) : 1; ?>" readonly aria-label="Quantity">
+	                <input class="form-control" type="text" id="parent_quantity" name="quantity" value="<?php echo !empty($items['quantity']) ? htmlspecialchars($items['quantity'], ENT_QUOTES) : 1; ?>" readonly aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>">
 	            </div>
 	        </div>
 	        <div class="col-lg-8">
@@ -105,7 +105,7 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
 	        	</div>
 	        	<div class="row">
 	        		<div class="form-group col-lg-5">
-		                <select class="form-select border js-example-basic-single" id="child_item_id" name="purchase_uom" aria-label="Item Name">
+		                <select class="form-select border js-example-basic-single" id="child_item_id" name="purchase_uom" aria-label="<?= htmlspecialchars(__('Item Name'), ENT_QUOTES, 'UTF-8'); ?>">
 		                    <option value="0"><?= __("Select Any one") ?> </option>
 		                    <?php if (!empty($items) && is_array($items)) {
 		                        foreach ($items as $itm) {
@@ -118,7 +118,7 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
 		                </select>
 		            </div>
 		            <div class="form-group col-lg-3">
-		            	<select class="form-select border js-example-basic-single" id="child_purchase_uom" name="purchase_uom" aria-label="UOM">
+		            	<select class="form-select border js-example-basic-single" id="child_purchase_uom" name="purchase_uom" aria-label="<?= htmlspecialchars(__('UOM'), ENT_QUOTES, 'UTF-8'); ?>">
 		                    <option value="0"><?= __("Select Any one") ?></option>
 		                    <?php if (!empty($unit_of_measurements) && is_array($unit_of_measurements)) {
 		                        foreach ($unit_of_measurements as $uomr) {
@@ -131,7 +131,7 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
 		                </select>
 		            </div>
 		            <div class="form-group col-lg-2">
-		                <input class="form-control" type="text" id="item_quantity" name="quantity" value="<?php echo !empty($items['quantity']) ? htmlspecialchars($items['quantity'], ENT_QUOTES) : 1; ?>" aria-label="Quantity">
+		                <input class="form-control" type="text" id="item_quantity" name="quantity" value="<?php echo !empty($items['quantity']) ? htmlspecialchars($items['quantity'], ENT_QUOTES) : 1; ?>" aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>">
 		            </div>
 		            <div class="form-group col-lg-1">
 		            	<i class="ti ti-trash" aria-hidden="true"></i>

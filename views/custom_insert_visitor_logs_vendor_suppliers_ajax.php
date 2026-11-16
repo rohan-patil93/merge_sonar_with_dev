@@ -23,18 +23,18 @@ if(count((array)$transaction_items) > 0){
         <table class="table table-hover" id="invoiceItem">
             <thead>
                 <tr>
-                    <th scope="col" class="p-1" style="width: 35%;">Items/Service</th>
-                    <th scope="col" class="thheader p-1" style="width: 30%;">Description</th>
-                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">QTY</th>
-                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Received Qty <span class="requried">*</span></th>
-                    <th scope="col" class="thheader p-1" style="width: 5%;">UOM <span class="requried">*</span></th>
+                    <th scope="col" class="p-1" style="width: 35%;">'.__('Items/Service').'</th>
+                    <th scope="col" class="thheader p-1" style="width: 30%;">'.__('Description').'</th>
+                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">'.__('QTY').'</th>
+                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;">'.__('Received Qty').' <span class="requried">*</span></th>
+                    <th scope="col" class="thheader p-1" style="width: 5%;">'.__('UOM').' <span class="requried">*</span></th>
                 </tr>
             </thead>
             <tbody>';
 
     if ($txnItems) {
         foreach ($txnItems as $idx => $row) {
-            $rowOptions = '<option value="">Select Any one</option>';
+            $rowOptions = '<option value="">'.__('Select Any one').'</option>';
             if ($allItems) {
                 foreach ($allItems as $it) {
                     $selected = ($it['id'] == $row['item_id']) ? 'selected' : '';
@@ -47,7 +47,7 @@ if(count((array)$transaction_items) > 0){
             $qty = (float)($row['item_quantity'] ?? 0);
             $uomId = $row['purchase_uom'] ?? '';
 
-            $uomOptions = '<option value="">-- UOM --</option>';
+            $uomOptions = '<option value="">-- '.__('UOM').' --</option>';
             if ($allUoms) {
                 foreach ($allUoms as $u) {
                     $sel = ($u['id'] == $uomId) ? 'selected' : '';
@@ -81,7 +81,7 @@ if(count((array)$transaction_items) > 0){
                 </tr>';
         }
     } else {
-        $htmlview .= '<tr><td colspan="5" class="text-center p-3 text-muted">No items found in transaction</td></tr>';
+        $htmlview .= '<tr><td colspan="5" class="text-center p-3 text-muted">'.__('No items found in transaction').'</td></tr>';
     }
 
     $htmlview .= '
@@ -94,15 +94,15 @@ if(count((array)$transaction_items) > 0){
         <table class="table table-hover" id="invoiceItem_2">
             <thead>
                 <tr>
-                    <th scope="col" class="p-1" style="width: 35%;">Items/Service</th>
-                    <th scope="col" class="thheader p-1" style="width: 30%;">Description</th>
-                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">QTY</th>
-                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;">Received Qty <span class="requried">*</span></th>
-                    <th scope="col" class="thheader p-1" style="width: 5%;">UOM <span class="requried">*</span></th>
+                    <th scope="col" class="p-1" style="width: 35%;">'.__('Items/Service').'</th>
+                    <th scope="col" class="thheader p-1" style="width: 30%;">'.__('Description').'</th>
+                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;">'.__('QTY').'</th>
+                    <th scope="col" class="thheader p-1 text-right" style="width: 15%;">'.__('Received Qty').' <span class="requried">*</span></th>
+                    <th scope="col" class="thheader p-1" style="width: 5%;">'.__('UOM').' <span class="requried">*</span></th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td colspan="5" class="text-center p-3 text-muted">No Reference Document selected</td></tr>
+                <tr><td colspan="5" class="text-center p-3 text-muted">'.__('No Reference Document selected').'</td></tr>
             </tbody>
         </table>
     </div>';

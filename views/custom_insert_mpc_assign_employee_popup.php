@@ -169,7 +169,7 @@ foreach($empesgindata as $empesginda){
                           showDenyButton: true,
                           showCancelButton: false,
                           confirmButtonText: <?php echo json_encode(__('New Create')); ?>,
-                          denyButtonText: 'old continue',
+                          denyButtonText: <?php echo json_encode(__('old continue'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         }).then((result) => {
                           if (result.isConfirmed) {
                             toinsertandpdateesignemployeeonlyone(id,uname,"Y")

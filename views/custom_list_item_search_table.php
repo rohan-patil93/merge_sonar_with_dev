@@ -25,15 +25,15 @@ foreach($result['warehouses'] as $ware){
 <table class=" table table-hover">
 <thead>
     <tr>
-        <th scope="col">SKU </th>
-        <th scope="col">Item </th>
-        <th scope="col">Item Type</th>
-        <th scope="col">category</th>
-        <th scope="col">Location</th>
-        <th scope="col">Warehous</th>
-        <th scope="col">User Access</th>
-        <th scope="col">Vendors Part Details</th>
-        <th scope="col">Customers Part Details</th>
+        <th scope="col"><?= __('SKU'); ?> </th>
+        <th scope="col"><?= __('Item'); ?> </th>
+        <th scope="col"><?= __('Item Type'); ?></th>
+        <th scope="col"><?= __('category'); ?></th>
+        <th scope="col"><?= __('Location'); ?></th>
+        <th scope="col"><?= __('Warehous'); ?></th>
+        <th scope="col"><?= __('User Access'); ?></th>
+        <th scope="col"><?= __('Vendors Part Details'); ?></th>
+        <th scope="col"><?= __('Customers Part Details'); ?></th>
     </tr>
 </thead>
 <body>
@@ -45,15 +45,15 @@ foreach($result['warehouses'] as $ware){
         <td class="p-2"><?php echo $item_categories[$itm['category_id']]['category_description']; ?></td>
         <td class="p-2"><?php echo '-' ?></td>
         <td class="p-2"><?php echo $warehouses[$itm['warehouse_id']]['warehouse_name']; ?></td>
-         <td class="p-2"><span class="cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('U','<?php echo $itm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-arrow-circle-down"></i> User</span></td>
-        <td class="p-2"><span class="cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('V','<?php echo $itm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-arrow-circle-down"></i> Vendor</span></td>
-        <td class="p-2"><span class="cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('C','<?php echo $itm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-arrow-circle-down"></i> Customer</span></td>
+         <td class="p-2"><span class="cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('U','<?php echo $itm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-arrow-circle-down"></i> <?= __('User'); ?></span></td>
+        <td class="p-2"><span class="cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('V','<?php echo $itm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-arrow-circle-down"></i> <?= __('Vendor'); ?></span></td>
+        <td class="p-2"><span class="cursor-pointer text-primary" onclick="getUserVendorCustomerItemList('C','<?php echo $itm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-arrow-circle-down"></i> <?= __('Customer'); ?></span></td>
     </tr>
     <?php } ?>
 </body>
 <?php }else{ ?>
 <div class="card-px text-center ">
-    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Items</p>
+    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Items'); ?></p>
     <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
     </div>

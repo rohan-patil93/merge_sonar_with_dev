@@ -53,9 +53,9 @@ foreach ($empdata as  $data) {
     <div class="col-md-4">
         <form method="post" action="#">
             <div class="form-group row">
-                <label for="example-month-input" class="col-2 col-form-label">Month</label>
+                <label for="example-month-input" class="col-2 col-form-label"><?= __('Month'); ?></label>
                 <div class="col-10">
-                    <input aria-label="Pay Month Year" class="form-control" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input" />
+                    <input aria-label="<?= htmlspecialchars(__('Pay Month Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input" />
                 </div>
             </div>
 
@@ -104,7 +104,7 @@ foreach ($empdata as  $data) {
 <div class="card card-custom">
     <div class="card-header flex-wrap border-0 pt-4 pb-0 pl-5 mx-auto">
         <div class="card-title">
-            <h3 class="card-label text-center">PT Statement for <?php echo $pay_month_year; ?>
+            <h3 class="card-label text-center"><?= __('PT Statement for'); ?> <?php echo $pay_month_year; ?>
 
         </h3>
     </div>
@@ -117,10 +117,10 @@ foreach ($empdata as  $data) {
                 <table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" aria-describedby="kt_datatable_info" style="width: 1236px;">
                     <thead>
                         <tr role="row" style="background-color: #f7f7f7;">
-                            <th scope="col">Employee ID</th>
-                            <th scope="col">Employee Name</th>
-                            <th scope="col">PT Wages</th>
-                            <th scope="col">PT Amount</th>
+                            <th scope="col"><?= __('Employee ID'); ?></th>
+                            <th scope="col"><?= __('Employee Name'); ?></th>
+                            <th scope="col"><?= __('PT Wages'); ?></th>
+                            <th scope="col"><?= __('PT Amount'); ?></th>
                         </tr>
                     </thead>
                     <tbody>

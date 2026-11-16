@@ -17,13 +17,13 @@
                 <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td style="font-size: 16px; font-weight: bold; font-family: Arial, sans-serif;">
-                            DELIVERY CHALLAN
+                            <?= __('DELIVERY CHALLAN'); ?>
                         </td>
                         <td align="right" valign="top">
-                            <span style="font-size: 20px; font-weight: bold; color: #cc0000;">BION</span>
-                            <span style="font-size: 20px; font-weight: bold; color: #000000;">EAU</span>
+                            <span style="font-size: 20px; font-weight: bold; color: #cc0000;"><?= __('BION'); ?></span>
+                            <span style="font-size: 20px; font-weight: bold; color: #000000;"><?= __('EAU'); ?></span>
                             <span style="font-size: 16px; font-weight: bold; color: #000000;">&reg;</span>
-                            <div style="font-size: 9px; color: #555555; margin-top: -2px;">aspire to think beyond</div>
+                            <div style="font-size: 9px; color: #555555; margin-top: -2px;"><?= __('aspire to think beyond'); ?></div>
                         </td>
                     </tr>
                 </table>
@@ -39,22 +39,22 @@
                         <td width="48%" valign="top" style="border: 1px solid #cccccc; padding: 6px;">
                             <table role="presentation" width="100%" border="0" cellpadding="2" cellspacing="0" style="font-size: 11px;">
                                 <tr>
-                                    <td width="35%" style="font-weight: bold;">Contact Person</td>
+                                    <td width="35%" style="font-weight: bold;"><?= __('Contact Person'); ?></td>
                                     <td width="5%">:</td>
-                                    <td>Shobhna</td>
+                                    <td><?= __('Shobhna'); ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">Email ID</td>
+                                    <td style="font-weight: bold;"><?= __('Email ID'); ?></td>
                                     <td>:</td>
                                     <td>shobhna@nri.infistaq.in</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">Phone Number</td>
+                                    <td style="font-weight: bold;"><?= __('Phone Number'); ?></td>
                                     <td>:</td>
                                     <td>-</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">SOB No./Date</td>
+                                    <td style="font-weight: bold;"><?= __('SOB No./Date'); ?></td>
                                     <td>:</td>
                                     <td>- / -</td>
                                 </tr>
@@ -67,27 +67,27 @@
                         <td width="48%" valign="top" style="border: 1px solid #cccccc; padding: 6px;">
                             <table role="presentation" width="100%" border="0" cellpadding="2" cellspacing="0" style="font-size: 11px;">
                                 <tr>
-                                    <td width="35%" style="font-weight: bold;">Challan No.</td>
+                                    <td width="35%" style="font-weight: bold;"><?= __('Challan No.'); ?></td>
                                     <td width="5%">:</td>
-                                    <td>DC/127191</td>
+                                    <td><?= __('DC/127191'); ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">Challan Date</td>
+                                    <td style="font-weight: bold;"><?= __('Challan Date'); ?></td>
                                     <td>:</td>
                                     <td>03 Aug 2026</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">PO Number</td>
+                                    <td style="font-weight: bold;"><?= __('PO Number'); ?></td>
                                     <td>:</td>
                                     <td>127191</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">PO Date</td>
+                                    <td style="font-weight: bold;"><?= __('PO Date'); ?></td>
                                     <td>:</td>
                                     <td>03 Aug 2026</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">Due Date</td>
+                                    <td style="font-weight: bold;"><?= __('Due Date'); ?></td>
                                     <td>:</td>
                                     <td>03 Aug 2026</td>
                                 </tr>
@@ -105,18 +105,18 @@
                     <tr>
                         <!-- Billed by -->
                         <td width="31%" valign="top" style="border: 1px solid #cccccc; padding: 6px;">
-                            <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">Billed by (Supplier)</div>
-                            <div style="font-weight: bold; font-size: 12px;">Suresh Enterprises</div>
-                            <div style="font-size: 12px;">Suresh Enterprises</div>
+                            <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;"><?= __('Billed by (Supplier)'); ?></div>
+                            <div style="font-weight: bold; font-size: 12px;"><?= __('Suresh Enterprises'); ?></div>
+                            <div style="font-size: 12px;"><?= __('Suresh Enterprises'); ?></div>
 
                             <table role="presentation" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
                                 <tr>
-                                    <td width="30%" style="font-weight: bold;">GSTIN</td>
+                                    <td width="30%" style="font-weight: bold;"><?= __('GSTIN'); ?></td>
                                     <td width="10%">:</td>
                                     <td>-</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">PAN</td>
+                                    <td style="font-weight: bold;"><?= __('PAN'); ?></td>
                                     <td>:</td>
                                     <td>-</td>
                                 </tr>
@@ -127,18 +127,18 @@
 
                         <!-- Billed to -->
                         <td width="31%" valign="top" style="border: 1px solid #cccccc; padding: 6px; white-space: normal;">
-                            <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">Billed to (Consignee)</div>
-                            <div style="font-weight: bold; font-size: 12px;">National Rubber Industries</div>
-                            <div style="font-size: 12px;">NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063</div>
+                            <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;"><?= __('Billed to (Consignee)'); ?></div>
+                            <div style="font-weight: bold; font-size: 12px;"><?= __('National Rubber Industries'); ?></div>
+                            <div style="font-size: 12px;"><?= __('NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063'); ?></div>
 
                             <table role="presentation" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
                                 <tr>
-                                    <td width="30%" style="font-weight: bold;">GSTIN</td>
+                                    <td width="30%" style="font-weight: bold;"><?= __('GSTIN'); ?></td>
                                     <td width="10%">:</td>
-                                    <td>36AFXPG6150R1ZJ</td>
+                                    <td><?= __('36AFXPG6150R1ZJ'); ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">PAN</td>
+                                    <td style="font-weight: bold;"><?= __('PAN'); ?></td>
                                     <td>:</td>
                                     <td>-</td>
                                 </tr>
@@ -149,18 +149,18 @@
 
                         <!-- Shipped to -->
                         <td width="31%" valign="top" style="border: 1px solid #cccccc; padding: 6px; white-space: normal;">
-                            <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;">Shipped to (Delivery Address)</div>
-                            <div style="font-weight: bold; font-size: 12px;">National Rubber Industries</div>
-                            <div style="font-size: 12px;">NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063</div>
+                            <div style="font-weight: bold; margin-bottom: 5px; font-size: 12px;"><?= __('Shipped to (Delivery Address)'); ?></div>
+                            <div style="font-weight: bold; font-size: 12px;"><?= __('National Rubber Industries'); ?></div>
+                            <div style="font-size: 12px;"><?= __('NATIONAL RUBBER INDUSTRIES, Corp.Office:305,Ashoka Chambers, Adarshnagar,Hill Fort Road, Hyderabad,500063'); ?></div>
 
                             <table role="presentation" width="100%" border="0" cellpadding="1" cellspacing="0" style="font-size: 11px;">
                                 <tr>
-                                    <td width="30%" style="font-weight: bold;">GSTIN</td>
+                                    <td width="30%" style="font-weight: bold;"><?= __('GSTIN'); ?></td>
                                     <td width="10%">:</td>
-                                    <td>36AFXPG6150R1ZJ</td>
+                                    <td><?= __('36AFXPG6150R1ZJ'); ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">PAN</td>
+                                    <td style="font-weight: bold;"><?= __('PAN'); ?></td>
                                     <td>:</td>
                                     <td>-</td>
                                 </tr>
@@ -178,44 +178,38 @@
                     <thead>
                         <tr style="font-weight: bold; text-align: center; border: 1px solid #cccccc;">
                             <td width="5%" style="border: 1px solid #cccccc;">#</td>
-                            <td width="12%" style="border: 1px solid #cccccc;">Item Code</td>
-                            <td width="35%" style="border: 1px solid #cccccc;">Description</td>
-                            <td width="13%" style="border: 1px solid #cccccc;">HSN/SAC</td>
-                            <td width="8%" style="border: 1px solid #cccccc;">UOM</td>
-                            <td width="7%" style="border: 1px solid #cccccc;">QTY.</td>
-                            <td width="12%" style="border: 1px solid #cccccc;">Unit Description</td>
-                            <td width="8%" style="border: 1px solid #cccccc;">Remarks</td>
+                            <td width="12%" style="border: 1px solid #cccccc;"><?= __('Item Code'); ?></td>
+                            <td width="35%" style="border: 1px solid #cccccc;"><?= __('Description'); ?></td>
+                            <td width="13%" style="border: 1px solid #cccccc;"><?= __('HSN/SAC'); ?></td>
+                            <td width="8%" style="border: 1px solid #cccccc;"><?= __('UOM'); ?></td>
+                            <td width="7%" style="border: 1px solid #cccccc;"><?= __('QTY.'); ?></td>
+                            <td width="12%" style="border: 1px solid #cccccc;"><?= __('Unit Description'); ?></td>
+                            <td width="8%" style="border: 1px solid #cccccc;"><?= __('Remarks'); ?></td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td align="center" style="border: 1px solid #cccccc;">1</td>
-                            <td align="center" style="font-weight: bold; border: 1px solid #cccccc;">N-01-AX308</td>
+                            <td align="center" style="font-weight: bold; border: 1px solid #cccccc;"><?= __('N-01-AX308'); ?></td>
                             <td style="white-space: normal; border: 1px solid #cccccc;">
-                                Neauseal US 2560, Autoclave Door Gasket, US2500 FDA, SIL Pt Red Colour, Square Solid Type, 2950 * 21 * 21
+                                <?= __('Neauseal US 2560, Autoclave Door Gasket, US2500 FDA, SIL Pt Red Colour, Square Solid Type, 2950 * 21 * 21'); ?>
                             </td>
-                            <td align="center" style="border: 1px solid #cccccc;">NO-HSN-CODE</td>
-                            <td align="center" style="border: 1px solid #cccccc;">NOS</td>
+                            <td align="center" style="border: 1px solid #cccccc;"><?= __('NO-HSN-CODE'); ?></td>
+                            <td align="center" style="border: 1px solid #cccccc;"><?= __('NOS'); ?></td>
                             <td align="center" style="border: 1px solid #cccccc;">4.00</td>
-                            <td align="center" style="border: 1px solid #cccccc;">Pieces</td>
+                            <td align="center" style="border: 1px solid #cccccc;"><?= __('Pieces'); ?></td>
                             <td align="center" style="border: 1px solid #cccccc;">-</td>
                         </tr>
                         <tr>
                             <td align="center" style="border: 1px solid #cccccc;">2</td>
-                            <td align="center" style="font-weight: bold; border: 1px solid #cccccc;">N-01-AX310</td>
+                            <td align="center" style="font-weight: bold; border: 1px solid #cccccc;"><?= __('N-01-AX310'); ?></td>
                             <td style="white-space: normal; border: 1px solid #cccccc;">
-                                Neauseal US 2560
-                                Autoclave Door Gasket
-                                US2500 FDA
-                                SIL Pt Red Colour
-                                Square Solid Type
-                                2350 * 21 * 21
-                                Chamber Size: 600 * 600
+                                <?= __('Neauseal US 2560 Autoclave Door Gasket US2500 FDA SIL Pt Red Colour Square Solid Type 2350 * 21 * 21 Chamber Size: 600 * 600'); ?>
                             </td>
-                            <td align="center" style="border: 1px solid #cccccc;">NO-HSN-CODE</td>
-                            <td align="center" style="border: 1px solid #cccccc;">NOS</td>
+                            <td align="center" style="border: 1px solid #cccccc;"><?= __('NO-HSN-CODE'); ?></td>
+                            <td align="center" style="border: 1px solid #cccccc;"><?= __('NOS'); ?></td>
                             <td align="center" style="border: 1px solid #cccccc;">4.00</td>
-                            <td align="center" style="border: 1px solid #cccccc;">Pieces</td>
+                            <td align="center" style="border: 1px solid #cccccc;"><?= __('Pieces'); ?></td>
                             <td align="center" style="border: 1px solid #cccccc;">-</td>
                         </tr>
                     </tbody>
@@ -231,34 +225,34 @@
                         <td width="50%" valign="top" style="border-right: 1px solid #cccccc; padding: 6px;">
                             <table role="presentation" width="100%" border="0" cellpadding="2" cellspacing="0" style="font-size: 10px;">
                                 <tr>
-                                    <td width="45%" style="font-weight: bold;">Total Packages / Boxes</td>
+                                    <td width="45%" style="font-weight: bold;"><?= __('Total Packages / Boxes'); ?></td>
                                     <td width="5%">:</td>
                                     <td>-</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">Transporter</td>
+                                    <td style="font-weight: bold;"><?= __('Transporter'); ?></td>
                                     <td>:</td>
                                     <td>-</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">Vehicle No.</td>
+                                    <td style="font-weight: bold;"><?= __('Vehicle No.'); ?></td>
                                     <td>:</td>
                                     <td>-</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">LR / GR No.</td>
+                                    <td style="font-weight: bold;"><?= __('LR / GR No.'); ?></td>
                                     <td>:</td>
                                     <td>-</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: bold;">Dispatched Through</td>
+                                    <td style="font-weight: bold;"><?= __('Dispatched Through'); ?></td>
                                     <td>:</td>
                                     <td>-</td>
                                 </tr>
                             </table>
                         </td>
                         <td width="50%" valign="top" style="padding: 6px;">
-                            <div style="font-weight: bold; font-size: 10px; margin-bottom: 5px;">Remarks / Instructions</div>
+                            <div style="font-weight: bold; font-size: 10px; margin-bottom: 5px;"><?= __('Remarks / Instructions'); ?></div>
                             <div style="font-size: 10px;">-</div>
                         </td>
                     </tr>
@@ -273,25 +267,25 @@
                     <tr>
                         <!-- Left: Acknowledgment Box -->
                         <td width="35%" valign="top" style="border: 1px solid #cccccc; padding: 6px;">
-                            <div style="font-weight: bold; font-size: 10px; margin-bottom: 12px;">Received the above goods in good condition</div>
+                            <div style="font-weight: bold; font-size: 10px; margin-bottom: 12px;"><?= __('Received the above goods in good condition'); ?></div>
                             <table role="presentation" width="100%" border="0" cellpadding="4" cellspacing="0" style="font-size: 10px;">
                                 <tr>
-                                    <td width="30%">Name</td>
+                                    <td width="30%"><?= __('Name'); ?></td>
                                     <td width="5%">:</td>
                                     <td style="border-bottom: 1px solid #cccccc;">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td>Designation</td>
+                                    <td><?= __('Designation'); ?></td>
                                     <td>:</td>
                                     <td style="border-bottom: 1px solid #cccccc;">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td>Signature</td>
+                                    <td><?= __('Signature'); ?></td>
                                     <td>:</td>
                                     <td style="border-bottom: 1px solid #cccccc;">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td>Date</td>
+                                    <td><?= __('Date'); ?></td>
                                     <td>:</td>
                                     <td style="border-bottom: 1px solid #cccccc;">&nbsp;</td>
                                 </tr>
@@ -305,7 +299,7 @@
                             <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="border: 1px solid #cccccc; padding: 4px; text-align: center;">
-                                        <div style="font-weight: bold; font-size: 10px;">Delivery Schedule</div>
+                                        <div style="font-weight: bold; font-size: 10px;"><?= __('Delivery Schedule'); ?></div>
                                         <div style="font-size: 10px; margin-top: 4px;">-</div>
                                     </td>
                                 </tr>
@@ -314,8 +308,8 @@
                                 </tr>
                                 <tr>
                                     <td style="border: 1px solid #cccccc; padding: 4px; text-align: center;">
-                                        <div style="font-weight: bold; font-size: 10px;">Payment Terms</div>
-                                        <div style="font-size: 10px; margin-top: 4px;">30 DAYS</div>
+                                        <div style="font-weight: bold; font-size: 10px;"><?= __('Payment Terms'); ?></div>
+                                        <div style="font-size: 10px; margin-top: 4px;"><?= __('30 DAYS'); ?></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -338,11 +332,11 @@
 
                         <!-- Right: Signature Box -->
                         <td width="33%" valign="top" align="center" style="padding-top: 10px;">
-                            <div style="font-weight: bold; font-size: 10px; margin-bottom: 40px;">For National Rubber Industries</div>
+                            <div style="font-weight: bold; font-size: 10px; margin-bottom: 40px;"><?= __('For National Rubber Industries'); ?></div>
                             <div style="border-top: 1px solid #cccccc; width: 80%; margin: 0 auto;"></div>
-                            <div style="font-weight: bold; font-size: 10px; margin-top: 4px;">Authorised Signature</div>
-                            <div style="font-size: 9px; margin-top: 10px;">This is a computer generated document<br />no signature required</div>
-                            <div style="font-size: 10px; margin-top: 8px;">E. & O.E.</div>
+                            <div style="font-weight: bold; font-size: 10px; margin-top: 4px;"><?= __('Authorised Signature'); ?></div>
+                            <div style="font-size: 9px; margin-top: 10px;"><?= __('This is a computer generated document'); ?><br /><?= __('no signature required'); ?></div>
+                            <div style="font-size: 10px; margin-top: 8px;"><?= htmlspecialchars(__('E. & O.E.'), ENT_QUOTES, 'UTF-8'); ?></div>
                         </td>
                     </tr>
                 </table>
@@ -353,4 +347,4 @@
 
 </div>
 
-<button class="print-btn" style="margin: 15px 0; padding: 8px 16px; cursor: pointer;" onclick="printDiv('printableArea')">Print Invoice</button>
+<button class="print-btn" style="margin: 15px 0; padding: 8px 16px; cursor: pointer;" onclick="printDiv('printableArea')"><?= __('Print Invoice'); ?></button>

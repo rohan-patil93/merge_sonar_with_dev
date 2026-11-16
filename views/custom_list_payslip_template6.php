@@ -37,7 +37,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                     <div class="col-md-9">
                                                         <!--begin::Invoice header-->
                                                         <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-40">
-                                                            <h1 class="display-3 font-weight-boldest text-white mb-5 mb-md-0">PAYSLIP FOR <?php echo $payslip_data_list['month']." ".$payslip_data_list['year'];?></h1>
+                                                            <h1 class="display-3 font-weight-boldest text-white mb-5 mb-md-0"><?= __('PAYSLIP FOR'); ?> <?php echo $payslip_data_list['month']." ".$payslip_data_list['year'];?></h1>
                                                             <div class="d-flex flex-column px-0 text-right">
     <img src="uploads/all/<?php echo $organization_logo; ?>"     width="60" height="60" alt="" />
                                                                 <span class="d-flex flex-column font-size-h5 font-weight-bold text-white align-items-center align-items-md-end">
@@ -54,10 +54,10 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                             <table class="table">
                                  <thead>
                                      <tr>
-                                         <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase ">Earnings</th>
-                                         <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase">Amount</th>
-                                         <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase">Deductions</th>
-                                         <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase">Amount</th>
+                                         <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase "><?= __('Earnings'); ?></th>
+                                         <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase"><?= __('Amount'); ?></th>
+                                         <th scope="col" class="pl-0 font-weight-boldest text-muted text-uppercase"><?= __('Deductions'); ?></th>
+                                         <th scope="col" class="text-right font-weight-boldest text-muted text-uppercase"><?= __('Amount'); ?></th>
                                      </tr>
                                  </thead>
                                  <tbody>
@@ -85,31 +85,31 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
             <?php } ?>
 
                                      <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                         <td class="pl-0 pt-5">GROSS EARNINGS</td>
+                                         <td class="pl-0 pt-5"><?= __('GROSS EARNINGS'); ?></td>
                                          <td class="text-right pt-5 text-primary"><?php echo $payslip_data_list['actual_amount'];?></td>
-                                         <td class="pl-0 pt-5">TOTAL DEDUCTIONS</td>
+                                         <td class="pl-0 pt-5"><?= __('TOTAL DEDUCTIONS'); ?></td>
                                          <td class="text-right pt-5 text-danger"><?php echo $payslip_data_list['dedaction_amount'];?></td>
                                      </tr>
                                      <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                         <td class="pl-0 pt-7 text-muted">NET PAY</td>
+                                         <td class="pl-0 pt-7 text-muted"><?= __('NET PAY'); ?></td>
                                          <td class="text-right pt-5"></td>
                                          <td class="pl-0 pt-5"></td>
-                                         <td class="text-right pt-5 text-muted">AMOUNT</td>
+                                         <td class="text-right pt-5 text-muted"><?= __('AMOUNT'); ?></td>
                                      </tr>
                                      <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                         <td class="pl-0 pt-5">GROSS EARNINGS</td>
+                                         <td class="pl-0 pt-5"><?= __('GROSS EARNINGS'); ?></td>
                                          <td class="text-right pt-5 text-primary"></td>
                                          <td class="pl-0 pt-5"></td>
                                          <td class="text-right pt-5 text-primary"><?php echo $payslip_data_list['actual_amount'];?></td>
                                      </tr>
                                      <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                         <td class="pl-0 pt-5">TOTAL DEDUCTIONS</td>
+                                         <td class="pl-0 pt-5"><?= __('TOTAL DEDUCTIONS'); ?></td>
                                          <td class="text-right pt-5 text-primary"></td>
                                          <td class="pl-0 pt-5"></td>
                                          <td class="text-right pt-5 text-danger"><?php echo $payslip_data_list['dedaction_amount'];?></td>
                                      </tr>
                                      <tr class="font-weight-boldest border-bottom-0 font-size-lg">
-                                         <td class="pl-0 pt-5">TOTAL NET PAYABLE</td>
+                                         <td class="pl-0 pt-5"><?= __('TOTAL NET PAYABLE'); ?></td>
                                          <td class="text-right pt-5 text-primary"></td>
                                          <td class="pl-0 pt-5"></td>
                                          <td class="text-right pt-5 text-primary"><?php echo $payslip_data_list['net'];?></td>
@@ -123,7 +123,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                                     <table class="table text-md-right font-weight-boldest">
                                                                         <tbody>
                                                                             <tr>
-                                                                                <th scope="col" class="align-middle title-color font-size-h4 border-0 pl-0 w-50">NET SALARY</th>
+                                                                                <th scope="col" class="align-middle title-color font-size-h4 border-0 pl-0 w-50"><?= __('NET SALARY'); ?></th>
                                                                                 <th scope="col" class="align-middle text-primary font-size-h2 border-0">₹<?php echo $payslip_data_list['net'];?></th>
                                                                             </tr>
                                                                             <tr>
@@ -142,26 +142,26 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                         <!--begin::Invoice note-->
                                                         <div class="d-flex flex-wrap align-items-end mt-30">
                                                             <div>
-                                                                <div class="font-size-h4 font-weight-boldest title-color mb-3">BANK TRANSFER</div>
+                                                                <div class="font-size-h4 font-weight-boldest title-color mb-3"><?= __('BANK TRANSFER'); ?></div>
                                                                 <div class="font-size-h6 font-weight-bold note-color max-w-375px">
                                                                     <div class="d-flex justify-content-between font-size-lg mb-3">
-                                     <span class="font-weight-bold mr-15">Account Name:</span>
+                                     <span class="font-weight-bold mr-15"><?= __('Account Name'); ?>:</span>
                                      <span class="text-right"><?php echo $payslip_data_list['bank']; ?></span>
                                  </div>
                                  <div class="d-flex justify-content-between font-size-lg mb-3">
-                                     <span class="font-weight-bold mr-15">Account Number:</span>
+                                     <span class="font-weight-bold mr-15"><?= __('Account Number'); ?>:</span>
                                      <span class="text-right"><?php echo $payslip_data_list['bank_account_no']; ?></span>
                                  </div>
                                  <div class="d-flex justify-content-between mb-3">
-                                     <span class="mr-15 font-weight-bold">PF A/C:</span>
+                                     <span class="mr-15 font-weight-bold"><?= __('PF A/C'); ?>:</span>
                                      <span class="text-right"><?php echo $payslip_data_list['pf']; ?></span>
                                  </div>
                                  <div class="d-flex justify-content-between mb-3">
-                                     <span class="mr-15 font-weight-bold">UAN:</span>
+                                     <span class="mr-15 font-weight-bold"><?= __('UAN'); ?>:</span>
                                      <span class="text-right"><?php echo $payslip_data_list['pf_uan']; ?></span>
                                  </div>
                                  <div class="d-flex justify-content-between mb-3">
-                                     <span class="mr-15 font-weight-bold">PAN:</span>
+                                     <span class="mr-15 font-weight-bold"><?= __('PAN'); ?>:</span>
                                      <span class="text-right"><?php echo $payslip_data_list['pan_number']; ?></span>
                                  </div>
 
@@ -169,7 +169,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                             </div>
                                                             <div class="font-weight-bolder font-size-lg ml-sm-auto mt-5 px-5 py-4">
 
-                                                                <div class="font-size-h4 font-weight-boldest title-color mb-3">EMPLOYEE</div>
+                                                                <div class="font-size-h4 font-weight-boldest title-color mb-3"><?= __('EMPLOYEE'); ?></div>
                          <div class="font-size-lg font-weight-bold mb-10"><?php echo $payslip_data_list['emp_number']; ?> - <?php echo $payslip_data_list['emp_name']; ?><span class="opacity-70"><?php echo $payslip_data_list['designation']; ?></span>
                          </div>
                          <!--end::Invoice To-->
@@ -177,16 +177,16 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
 
                          <!--end::Invoice No-->
                          <!--begin::Invoice Date-->
-                         <div class="text-dark-50      font-size-lg font-weight-bold mb-3">DATE OF JOINING</div>
+                         <div class="text-dark-50      font-size-lg font-weight-bold mb-3"><?= __('DATE OF JOINING'); ?></div>
                          <div class="font-size-lg font-weight-bold"><?php
                          echo date('F d, Y',strtotime($payslip_data_list['doj'])); ?></div>
                          <br>
-                         <div class="text-dark-50 font-size-lg font-weight-bold mb-3">STD DAYS</div>
+                         <div class="text-dark-50 font-size-lg font-weight-bold mb-3"><?= __('STD DAYS'); ?></div>
                          <div class="font-size-lg font-weight-bold"><?php echo $payslip_data_list['std']; ?></div>
-                         <div class="text-dark-50 font-size-lg font-weight-bold mb-3">WORKED DAYS</div>
+                         <div class="text-dark-50 font-size-lg font-weight-bold mb-3"><?= __('WORKED DAYS'); ?></div>
                          <div class="font-size-lg font-weight-bold mb-10"><?php echo $payslip_data_list['work']; ?></div>
 
-                         <div class="text-dark-50 font-size-lg font-weight-bold mb-3">LOP DAYS</div>
+                         <div class="text-dark-50 font-size-lg font-weight-bold mb-3"><?= __('LOP DAYS'); ?></div>
                          <div class="font-size-lg font-weight-bold mb-10"><?php echo $payslip_data_list['lop']; ?></div>
 
 
@@ -194,7 +194,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                         <!--end::Invoice note-->
                                                         <!--begin::Invoice footer-->
                                                         <div class="d-flex justify-content-between flex-column flex-sm-row text-center text-sm-left mt-30">
-                                                            <div class="font-size-h2 font-weight-bolder text-white">Thanks For Your Order</div>
+                                                            <div class="font-size-h2 font-weight-bolder text-white"><?= __('Thanks For Your Order'); ?></div>
                                                             <!--begin::Logo-->
                                                             <a href="#" class="max-w-150px mx-auto mx-sm-0 mt-5 mt-sm-0">
                                                                 <span class="svg-icon svg-icon-full svg-logo-white">
@@ -252,8 +252,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
         <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
             <!--begin::Header-->
             <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-                <h3 class="font-weight-bold m-0">User Profile
-                <small class="text-muted font-size-sm ml-2">12 messages</small></h3>
+                <h3 class="font-weight-bold m-0"><?= __('User Profile'); ?>
+                <small class="text-muted font-size-sm ml-2"><?= __('12 messages'); ?></small></h3>
                 <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
                     <i class="ki ki-close icon-xs text-muted"></i>
                 </a>
@@ -268,8 +268,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                         <i class="symbol-badge bg-success"></i>
                     </div>
                     <div class="d-flex flex-column">
-                        <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">James Jones</a>
-                        <div class="text-muted mt-1">Application Developer</div>
+                        <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"><?= __('James Jones'); ?></a>
+                        <div class="text-muted mt-1"><?= __('Application Developer'); ?></div>
                         <div class="navi mt-2">
                             <a href="#" class="navi-item">
                                 <span class="navi-link p-0 pb-2">
@@ -289,7 +289,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     <span class="navi-text text-muted text-hover-primary">jm@softplus.com</span>
                                 </span>
                             </a>
-                            <button type="button" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</button>
+                            <button type="button" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5"><?= __('Sign Out'); ?></button>
                         </div>
                     </div>
                 </div>
@@ -318,9 +318,9 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                 </div>
                             </div>
                             <div class="navi-text">
-                                <div class="font-weight-bold">My Profile</div>
-                                <div class="text-muted">Account settings and more
-                                <span class="label label-light-danger label-inline font-weight-bold">update</span></div>
+                                <div class="font-weight-bold"><?= __('My Profile'); ?></div>
+                                <div class="text-muted"><?= __('Account settings and more'); ?>
+                                <span class="label label-light-danger label-inline font-weight-bold"><?= __('update'); ?></span></div>
                             </div>
                         </div>
                     </a>
@@ -346,8 +346,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                 </div>
                             </div>
                             <div class="navi-text">
-                                <div class="font-weight-bold">My Messages</div>
-                                <div class="text-muted">Inbox and tasks</div>
+                                <div class="font-weight-bold"><?= __('My Messages'); ?></div>
+                                <div class="text-muted"><?= __('Inbox and tasks'); ?></div>
                             </div>
                         </div>
                     </a>
@@ -371,8 +371,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                 </div>
                             </div>
                             <div class="navi-text">
-                                <div class="font-weight-bold">My Activities</div>
-                                <div class="text-muted">Logs and notifications</div>
+                                <div class="font-weight-bold"><?= __('My Activities'); ?></div>
+                                <div class="text-muted"><?= __('Logs and notifications'); ?></div>
                             </div>
                         </div>
                     </a>
@@ -396,8 +396,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                 </div>
                             </div>
                             <div class="navi-text">
-                                <div class="font-weight-bold">My Tasks</div>
-                                <div class="text-muted">latest tasks and projects</div>
+                                <div class="font-weight-bold"><?= __('My Tasks'); ?></div>
+                                <div class="text-muted"><?= __('latest tasks and projects'); ?></div>
                             </div>
                         </div>
                     </a>
@@ -410,7 +410,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                 <!--begin::Notifications-->
                 <div>
                     <!--begin:Heading-->
-                    <h5 class="mb-5">Recent Notifications</h5>
+                    <h5 class="mb-5"><?= __('Recent Notifications'); ?></h5>
                     <!--end:Heading-->
                     <!--begin::Item-->
                     <div class="d-flex align-items-center bg-light-warning rounded p-5 gutter-b">
@@ -428,8 +428,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             </span>
                         </span>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Another purpose persuade</a>
-                            <span class="text-muted font-size-sm">Due in 2 Days</span>
+                            <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Another purpose persuade'); ?></a>
+                            <span class="text-muted font-size-sm"><?= __('Due in 2 Days'); ?></span>
                         </div>
                         <span class="font-weight-bolder text-warning py-1 font-size-lg">+28%</span>
                     </div>
@@ -450,8 +450,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             </span>
                         </span>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Would be to people</a>
-                            <span class="text-muted font-size-sm">Due in 2 Days</span>
+                            <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Would be to people'); ?></a>
+                            <span class="text-muted font-size-sm"><?= __('Due in 2 Days'); ?></span>
                         </div>
                         <span class="font-weight-bolder text-success py-1 font-size-lg">+50%</span>
                     </div>
@@ -472,8 +472,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             </span>
                         </span>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1">Purpose would be to persuade</a>
-                            <span class="text-muted font-size-sm">Due in 2 Days</span>
+                            <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Purpose would be to persuade'); ?></a>
+                            <span class="text-muted font-size-sm"><?= __('Due in 2 Days'); ?></span>
                         </div>
                         <span class="font-weight-bolder text-danger py-1 font-size-lg">-27%</span>
                     </div>
@@ -496,8 +496,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             </span>
                         </span>
                         <div class="d-flex flex-column flex-grow-1 mr-2">
-                            <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1">The best product</a>
-                            <span class="text-muted font-size-sm">Due in 2 Days</span>
+                            <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('The best product'); ?></a>
+                            <span class="text-muted font-size-sm"><?= __('Due in 2 Days'); ?></span>
                         </div>
                         <span class="font-weight-bolder text-info py-1 font-size-lg">+8%</span>
                     </div>
@@ -512,7 +512,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
         <div id="kt_quick_cart" class="offcanvas offcanvas-right p-10">
             <!--begin::Header-->
             <div class="offcanvas-header d-flex align-items-center justify-content-between pb-7">
-                <h4 class="font-weight-bold m-0">Shopping Cart</h4>
+                <h4 class="font-weight-bold m-0"><?= __('Shopping Cart'); ?></h4>
                 <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_cart_close">
                     <i class="ki ki-close icon-xs text-muted"></i>
                 </a>
@@ -525,11 +525,11 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                     <!--begin::Item-->
                     <div class="d-flex align-items-center justify-content-between py-8">
                         <div class="d-flex flex-column mr-2">
-                            <a href="#" class="font-weight-bold text-dark-75 font-size-lg text-hover-primary">iBlender</a>
-                            <span class="text-muted">The best kitchen gadget in 2020</span>
+                            <a href="#" class="font-weight-bold text-dark-75 font-size-lg text-hover-primary"><?= __('iBlender'); ?></a>
+                            <span class="text-muted"><?= __('The best kitchen gadget in 2020'); ?></span>
                             <div class="d-flex align-items-center mt-2">
                                 <span class="font-weight-bold mr-1 text-dark-75 font-size-lg">$ 350</span>
-                                <span class="text-muted mr-1">for</span>
+                                <span class="text-muted mr-1"><?= __('for'); ?></span>
                                 <span class="font-weight-bold mr-2 text-dark-75 font-size-lg">5</span>
                                 <a href="#" class="btn btn-xs btn-light-success btn-icon mr-2">
                                     <i class="ki ki-minus icon-xs"></i>
@@ -550,11 +550,11 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                     <!--begin::Item-->
                     <div class="d-flex align-items-center justify-content-between py-8">
                         <div class="d-flex flex-column mr-2">
-                            <a href="#" class="font-weight-bold text-dark-75 font-size-lg text-hover-primary">SmartCleaner</a>
-                            <span class="text-muted">Smart tool for cooking</span>
+                            <a href="#" class="font-weight-bold text-dark-75 font-size-lg text-hover-primary"><?= __('SmartCleaner'); ?></a>
+                            <span class="text-muted"><?= __('Smart tool for cooking'); ?></span>
                             <div class="d-flex align-items-center mt-2">
                                 <span class="font-weight-bold mr-1 text-dark-75 font-size-lg">$ 650</span>
-                                <span class="text-muted mr-1">for</span>
+                                <span class="text-muted mr-1"><?= __('for'); ?></span>
                                 <span class="font-weight-bold mr-2 text-dark-75 font-size-lg">4</span>
                                 <a href="#" class="btn btn-xs btn-light-success btn-icon mr-2">
                                     <i class="ki ki-minus icon-xs"></i>
@@ -575,11 +575,11 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                     <!--begin::Item-->
                     <div class="d-flex align-items-center justify-content-between py-8">
                         <div class="d-flex flex-column mr-2">
-                            <a href="#" class="font-weight-bold text-dark-75 font-size-lg text-hover-primary">CameraMax</a>
-                            <span class="text-muted">Professional camera for edge cutting shots</span>
+                            <a href="#" class="font-weight-bold text-dark-75 font-size-lg text-hover-primary"><?= __('CameraMax'); ?></a>
+                            <span class="text-muted"><?= __('Professional camera for edge cutting shots'); ?></span>
                             <div class="d-flex align-items-center mt-2">
                                 <span class="font-weight-bold mr-1 text-dark-75 font-size-lg">$ 150</span>
-                                <span class="text-muted mr-1">for</span>
+                                <span class="text-muted mr-1"><?= __('for'); ?></span>
                                 <span class="font-weight-bold mr-2 text-dark-75 font-size-lg">3</span>
                                 <a href="#" class="btn btn-xs btn-light-success btn-icon mr-2">
                                     <i class="ki ki-minus icon-xs"></i>
@@ -600,11 +600,11 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                     <!--begin::Item-->
                     <div class="d-flex align-items-center justify-content-between py-8">
                         <div class="d-flex flex-column mr-2">
-                            <a href="#" class="font-weight-bold text-dark text-hover-primary">4D Printer</a>
-                            <span class="text-muted">Manufactoring unique objects</span>
+                            <a href="#" class="font-weight-bold text-dark text-hover-primary"><?= __('4D Printer'); ?></a>
+                            <span class="text-muted"><?= __('Manufactoring unique objects'); ?></span>
                             <div class="d-flex align-items-center mt-2">
                                 <span class="font-weight-bold mr-1 text-dark-75 font-size-lg">$ 1450</span>
-                                <span class="text-muted mr-1">for</span>
+                                <span class="text-muted mr-1"><?= __('for'); ?></span>
                                 <span class="font-weight-bold mr-2 text-dark-75 font-size-lg">7</span>
                                 <a href="#" class="btn btn-xs btn-light-success btn-icon mr-2">
                                     <i class="ki ki-minus icon-xs"></i>
@@ -625,11 +625,11 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                     <!--begin::Item-->
                     <div class="d-flex align-items-center justify-content-between py-8">
                         <div class="d-flex flex-column mr-2">
-                            <a href="#" class="font-weight-bold text-dark text-hover-primary">MotionWire</a>
-                            <span class="text-muted">Perfect animation tool</span>
+                            <a href="#" class="font-weight-bold text-dark text-hover-primary"><?= __('MotionWire'); ?></a>
+                            <span class="text-muted"><?= __('Perfect animation tool'); ?></span>
                             <div class="d-flex align-items-center mt-2">
                                 <span class="font-weight-bold mr-1 text-dark-75 font-size-lg">$ 650</span>
-                                <span class="text-muted mr-1">for</span>
+                                <span class="text-muted mr-1"><?= __('for'); ?></span>
                                 <span class="font-weight-bold mr-2 text-dark-75 font-size-lg">7</span>
                                 <a href="#" class="btn btn-xs btn-light-success btn-icon mr-2">
                                     <i class="ki ki-minus icon-xs"></i>
@@ -649,15 +649,15 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                 <!--begin::Purchase-->
                 <div class="offcanvas-footer">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <span class="font-weight-bold text-muted font-size-sm mr-2">Total</span>
+                        <span class="font-weight-bold text-muted font-size-sm mr-2"><?= __('Total'); ?></span>
                         <span class="font-weight-bolder text-dark-50 text-right">$1840.00</span>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-7">
-                        <span class="font-weight-bold text-muted font-size-sm mr-2">Sub total</span>
+                        <span class="font-weight-bold text-muted font-size-sm mr-2"><?= __('Sub total'); ?></span>
                         <span class="font-weight-bolder text-primary text-right">$5640.00</span>
                     </div>
                     <div class="text-right">
-                        <button type="button" class="btn btn-primary text-weight-bold">Place Order</button>
+                        <button type="button" class="btn btn-primary text-weight-bold"><?= __('Place Order'); ?></button>
                     </div>
                 </div>
                 <!--end::Purchase-->
@@ -671,13 +671,13 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
             <div class="offcanvas-header offcanvas-header-navs d-flex align-items-center justify-content-between mb-5">
                 <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-primary flex-grow-1 px-10">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#kt_quick_panel_logs" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Audit Logs</a>
+                        <a class="nav-link active" data-toggle="tab" href="#kt_quick_panel_logs" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Audit Logs'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#kt_quick_panel_notifications" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Notifications</a>
+                        <a class="nav-link" data-toggle="tab" href="#kt_quick_panel_notifications" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Notifications'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#kt_quick_panel_settings" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Settings</a>
+                        <a class="nav-link" data-toggle="tab" href="#kt_quick_panel_settings" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Settings'); ?></a>
                     </li>
                 </ul>
                 <div class="offcanvas-close mt-n1 pr-5">
@@ -694,7 +694,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                     <div class="tab-pane fade show pt-3 pr-5 mr-n5 active" id="kt_quick_panel_logs" role="tabpanel">
                         <!--begin::Section-->
                         <div class="mb-15">
-                            <h5 class="font-weight-bold mb-5">System Messages</h5>
+                            <h5 class="font-weight-bold mb-5"><?= __('System Messages'); ?></h5>
                             <!--begin: Item-->
                             <div class="d-flex align-items-center flex-wrap mb-5">
                                 <div class="symbol symbol-50 symbol-light mr-5">
@@ -703,8 +703,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </span>
                                 </div>
                                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Top Authors</a>
-                                    <span class="text-muted font-weight-bold">Most Successful Fellas</span>
+                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Top Authors'); ?></a>
+                                    <span class="text-muted font-weight-bold"><?= __('Most Successful Fellas'); ?></span>
                                 </div>
                                 <span class="btn btn-sm btn-light font-weight-bolder py-1 my-lg-0 my-2 text-dark-50">+82$</span>
                             </div>
@@ -717,8 +717,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </span>
                                 </div>
                                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Popular Authors</a>
-                                    <span class="text-muted font-weight-bold">Most Successful Fellas</span>
+                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Popular Authors'); ?></a>
+                                    <span class="text-muted font-weight-bold"><?= __('Most Successful Fellas'); ?></span>
                                 </div>
                                 <span class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+280$</span>
                             </div>
@@ -731,8 +731,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </span>
                                 </div>
                                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">New Users</a>
-                                    <span class="text-muted font-weight-bold">Most Successful Fellas</span>
+                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('New Users'); ?></a>
+                                    <span class="text-muted font-weight-bold"><?= __('Most Successful Fellas'); ?></span>
                                 </div>
                                 <span class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+4500$</span>
                             </div>
@@ -745,8 +745,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </span>
                                 </div>
                                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Active Customers</a>
-                                    <span class="text-muted font-weight-bold">Most Successful Fellas</span>
+                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Active Customers'); ?></a>
+                                    <span class="text-muted font-weight-bold"><?= __('Most Successful Fellas'); ?></span>
                                 </div>
                                 <span class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+4500$</span>
                             </div>
@@ -759,8 +759,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </span>
                                 </div>
                                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1">Bestseller Theme</a>
-                                    <span class="text-muted font-weight-bold">Most Successful Fellas</span>
+                                    <a href="#" class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Bestseller Theme'); ?></a>
+                                    <span class="text-muted font-weight-bold"><?= __('Most Successful Fellas'); ?></span>
                                 </div>
                                 <span class="btn btn-sm btn-light font-weight-bolder my-lg-0 my-2 py-1 text-dark-50">+4500$</span>
                             </div>
@@ -769,7 +769,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                         <!--end::Section-->
                         <!--begin::Section-->
                         <div class="mb-5">
-                            <h5 class="font-weight-bold mb-5">Notifications</h5>
+                            <h5 class="font-weight-bold mb-5"><?= __('Notifications'); ?></h5>
                             <!--begin: Item-->
                             <div class="d-flex align-items-center bg-light-warning rounded p-5 mb-5">
                                 <span class="svg-icon svg-icon-warning mr-5">
@@ -786,8 +786,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </span>
                                 </span>
                                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                                    <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Another purpose persuade</a>
-                                    <span class="text-muted font-size-sm">Due in 2 Days</span>
+                                    <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Another purpose persuade'); ?></a>
+                                    <span class="text-muted font-size-sm"><?= __('Due in 2 Days'); ?></span>
                                 </div>
                                 <span class="font-weight-bolder text-warning py-1 font-size-lg">+28%</span>
                             </div>
@@ -808,8 +808,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </span>
                                 </span>
                                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                                    <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1">Would be to people</a>
-                                    <span class="text-muted font-size-sm">Due in 2 Days</span>
+                                    <a href="#" class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Would be to people'); ?></a>
+                                    <span class="text-muted font-size-sm"><?= __('Due in 2 Days'); ?></span>
                                 </div>
                                 <span class="font-weight-bolder text-success py-1 font-size-lg">+50%</span>
                             </div>
@@ -830,8 +830,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </span>
                                 </span>
                                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                                    <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1">Purpose would be to persuade</a>
-                                    <span class="text-muted font-size-sm">Due in 2 Days</span>
+                                    <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('Purpose would be to persuade'); ?></a>
+                                    <span class="text-muted font-size-sm"><?= __('Due in 2 Days'); ?></span>
                                 </div>
                                 <span class="font-weight-bolder text-danger py-1 font-size-lg">-27%</span>
                             </div>
@@ -854,8 +854,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </span>
                                 </span>
                                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                                    <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1">The best product</a>
-                                    <span class="text-muted font-size-sm">Due in 2 Days</span>
+                                    <a href="#" class="font-weight-normel text-dark-75 text-hover-primary font-size-lg mb-1"><?= __('The best product'); ?></a>
+                                    <span class="text-muted font-size-sm"><?= __('Due in 2 Days'); ?></span>
                                 </div>
                                 <span class="font-weight-bolder text-info py-1 font-size-lg">+8%</span>
                             </div>
@@ -877,8 +877,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">5 new user generated report</div>
-                                        <div class="text-muted">Reports based on sales</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('5 new user generated report'); ?></div>
+                                        <div class="text-muted"><?= __('Reports based on sales'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -892,8 +892,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">2 new items submited</div>
-                                        <div class="text-muted">by Grog John</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('2 new items submited'); ?></div>
+                                        <div class="text-muted"><?= __('by Grog John'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -907,8 +907,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">79 PSD files generated</div>
-                                        <div class="text-muted">Reports based on sales</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('79 PSD files generated'); ?></div>
+                                        <div class="text-muted"><?= __('Reports based on sales'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -923,7 +923,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </div>
                                     <div class="navi-text">
                                         <div class="font-weight-bold font-size-lg">$2900 worth producucts sold</div>
-                                        <div class="text-muted">Total 234 items</div>
+                                        <div class="text-muted"><?= __('Total 234 items'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -937,8 +937,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">4.5h-avarage response time</div>
-                                        <div class="text-muted">Fostest is Barry</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('4.5h-avarage response time'); ?></div>
+                                        <div class="text-muted"><?= __('Fostest is Barry'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -952,7 +952,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">3 Defence alerts</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('3 Defence alerts'); ?></div>
                                         <div class="text-muted">40% less alerts thar last week</div>
                                     </div>
                                 </div>
@@ -967,8 +967,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">Avarage 4 blog posts per author</div>
-                                        <div class="text-muted">Most posted 12 time</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('Avarage 4 blog posts per author'); ?></div>
+                                        <div class="text-muted"><?= __('Most posted 12 time'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -982,8 +982,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">16 authors joined last week</div>
-                                        <div class="text-muted">9 photodrapehrs, 7 designer</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('16 authors joined last week'); ?></div>
+                                        <div class="text-muted"><?= __('9 photodrapehrs, 7 designer'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -997,8 +997,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">2 new items have been submited</div>
-                                        <div class="text-muted">by Grog John</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('2 new items have been submited'); ?></div>
+                                        <div class="text-muted"><?= __('by Grog John'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -1012,8 +1012,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">2.8 GB-total downloads size</div>
-                                        <div class="text-muted">Mostly PSD end AL concepts</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('2.8 GB-total downloads size'); ?></div>
+                                        <div class="text-muted"><?= __('Mostly PSD end AL concepts'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -1028,7 +1028,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </div>
                                     <div class="navi-text">
                                         <div class="font-weight-bold font-size-lg">$2900 worth producucts sold</div>
-                                        <div class="text-muted">Total 234 items</div>
+                                        <div class="text-muted"><?= __('Total 234 items'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -1042,8 +1042,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">7 new user generated report</div>
-                                        <div class="text-muted">Reports based on sales</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('7 new user generated report'); ?></div>
+                                        <div class="text-muted"><?= __('Reports based on sales'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -1057,8 +1057,8 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                         </div>
                                     </div>
                                     <div class="navi-text">
-                                        <div class="font-weight-bold font-size-lg">4.5h-avarage response time</div>
-                                        <div class="text-muted">Fostest is Barry</div>
+                                        <div class="font-weight-bold font-size-lg"><?= __('4.5h-avarage response time'); ?></div>
+                                        <div class="text-muted"><?= __('Fostest is Barry'); ?></div>
                                     </div>
                                 </div>
                             </a>
@@ -1072,35 +1072,35 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                         <form class="form">
                             <!--begin::Section-->
                             <div>
-                                <h5 class="font-weight-bold mb-3">Customer Care</h5>
+                                <h5 class="font-weight-bold mb-3"><?= __('Customer Care'); ?></h5>
                                 <div class="form-group mb-0 row align-items-center">
-                                    <span class="col-8 col-form-label">Enable Notifications:</span>
+                                    <span class="col-8 col-form-label"><?= __('Enable Notifications'); ?>:</span>
                                     <div class="col-4 d-flex justify-content-end">
                                         <span class="switch switch-success switch-sm">
                                             <label>
-                                                <input aria-label="Ect" type="checkbox" checked="checked" name="select" />
+                                                <input aria-label="<?= htmlspecialchars(__('Ect'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" checked="checked" name="select" />
                                                 <span></span>
                                             </label>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 row align-items-center">
-                                    <span class="col-8 col-form-label">Enable Case Tracking:</span>
+                                    <span class="col-8 col-form-label"><?= __('Enable Case Tracking'); ?>:</span>
                                     <div class="col-4 d-flex justify-content-end">
                                         <span class="switch switch-success switch-sm">
                                             <label>
-                                                <input aria-label="Quick Panel Notifications 2" type="checkbox" name="quick_panel_notifications_2" />
+                                                <input aria-label="<?= htmlspecialchars(__('Quick Panel Notifications 2'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="quick_panel_notifications_2" />
                                                 <span></span>
                                             </label>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 row align-items-center">
-                                    <span class="col-8 col-form-label">Support Portal:</span>
+                                    <span class="col-8 col-form-label"><?= __('Support Portal'); ?>:</span>
                                     <div class="col-4 d-flex justify-content-end">
                                         <span class="switch switch-success switch-sm">
                                             <label>
-                                                <input aria-label="Ect" type="checkbox" checked="checked" name="select" />
+                                                <input aria-label="<?= htmlspecialchars(__('Ect'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" checked="checked" name="select" />
                                                 <span></span>
                                             </label>
                                         </span>
@@ -1111,35 +1111,35 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             <div class="separator separator-dashed my-6"></div>
                             <!--begin::Section-->
                             <div class="pt-2">
-                                <h5 class="font-weight-bold mb-3">Reports</h5>
+                                <h5 class="font-weight-bold mb-3"><?= __('Reports'); ?></h5>
                                 <div class="form-group mb-0 row align-items-center">
-                                    <span class="col-8 col-form-label">Generate Reports:</span>
+                                    <span class="col-8 col-form-label"><?= __('Generate Reports'); ?>:</span>
                                     <div class="col-4 d-flex justify-content-end">
                                         <span class="switch switch-sm switch-danger">
                                             <label>
-                                                <input aria-label="Ect" type="checkbox" checked="checked" name="select" />
+                                                <input aria-label="<?= htmlspecialchars(__('Ect'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" checked="checked" name="select" />
                                                 <span></span>
                                             </label>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 row align-items-center">
-                                    <span class="col-8 col-form-label">Enable Report Export:</span>
+                                    <span class="col-8 col-form-label"><?= __('Enable Report Export'); ?>:</span>
                                     <div class="col-4 d-flex justify-content-end">
                                         <span class="switch switch-sm switch-danger">
                                             <label>
-                                                <input aria-label="Ect" type="checkbox" name="select" />
+                                                <input aria-label="<?= htmlspecialchars(__('Ect'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="select" />
                                                 <span></span>
                                             </label>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 row align-items-center">
-                                    <span class="col-8 col-form-label">Allow Data Collection:</span>
+                                    <span class="col-8 col-form-label"><?= __('Allow Data Collection'); ?>:</span>
                                     <div class="col-4 d-flex justify-content-end">
                                         <span class="switch switch-sm switch-danger">
                                             <label>
-                                                <input aria-label="Ect" type="checkbox" checked="checked" name="select" />
+                                                <input aria-label="<?= htmlspecialchars(__('Ect'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" checked="checked" name="select" />
                                                 <span></span>
                                             </label>
                                         </span>
@@ -1150,35 +1150,35 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             <div class="separator separator-dashed my-6"></div>
                             <!--begin::Section-->
                             <div class="pt-2">
-                                <h5 class="font-weight-bold mb-3">Memebers</h5>
+                                <h5 class="font-weight-bold mb-3"><?= __('Memebers'); ?></h5>
                                 <div class="form-group mb-0 row align-items-center">
-                                    <span class="col-8 col-form-label">Enable Member singup:</span>
+                                    <span class="col-8 col-form-label"><?= __('Enable Member singup'); ?>:</span>
                                     <div class="col-4 d-flex justify-content-end">
                                         <span class="switch switch-sm switch-primary">
                                             <label>
-                                                <input aria-label="Ect" type="checkbox" checked="checked" name="select" />
+                                                <input aria-label="<?= htmlspecialchars(__('Ect'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" checked="checked" name="select" />
                                                 <span></span>
                                             </label>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 row align-items-center">
-                                    <span class="col-8 col-form-label">Allow User Feedbacks:</span>
+                                    <span class="col-8 col-form-label"><?= __('Allow User Feedbacks'); ?>:</span>
                                     <div class="col-4 d-flex justify-content-end">
                                         <span class="switch switch-sm switch-primary">
                                             <label>
-                                                <input aria-label="Ect" type="checkbox" name="select" />
+                                                <input aria-label="<?= htmlspecialchars(__('Ect'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="select" />
                                                 <span></span>
                                             </label>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 row align-items-center">
-                                    <span class="col-8 col-form-label">Enable Customer Portal:</span>
+                                    <span class="col-8 col-form-label"><?= __('Enable Customer Portal'); ?>:</span>
                                     <div class="col-4 d-flex justify-content-end">
                                         <span class="switch switch-sm switch-primary">
                                             <label>
-                                                <input aria-label="Ect" type="checkbox" checked="checked" name="select" />
+                                                <input aria-label="<?= htmlspecialchars(__('Ect'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" checked="checked" name="select" />
                                                 <span></span>
                                             </label>
                                         </span>
@@ -1226,7 +1226,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                     <span class="navi-icon">
                                                         <i class="flaticon2-drop"></i>
                                                     </span>
-                                                    <span class="navi-text">New Group</span>
+                                                    <span class="navi-text"><?= __('New Group'); ?></span>
                                                 </a>
                                             </li>
                                             <li class="navi-item">
@@ -1234,7 +1234,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                     <span class="navi-icon">
                                                         <i class="flaticon2-list-3"></i>
                                                     </span>
-                                                    <span class="navi-text">Contacts</span>
+                                                    <span class="navi-text"><?= __('Contacts'); ?></span>
                                                 </a>
                                             </li>
                                             <li class="navi-item">
@@ -1242,9 +1242,9 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                     <span class="navi-icon">
                                                         <i class="flaticon2-rocket-1"></i>
                                                     </span>
-                                                    <span class="navi-text">Groups</span>
+                                                    <span class="navi-text"><?= __('Groups'); ?></span>
                                                     <span class="navi-link-badge">
-                                                        <span class="label label-light-primary label-inline font-weight-bold">new</span>
+                                                        <span class="label label-light-primary label-inline font-weight-bold"><?= __('new'); ?></span>
                                                     </span>
                                                 </a>
                                             </li>
@@ -1253,7 +1253,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                     <span class="navi-icon">
                                                         <i class="flaticon2-bell-2"></i>
                                                     </span>
-                                                    <span class="navi-text">Calls</span>
+                                                    <span class="navi-text"><?= __('Calls'); ?></span>
                                                 </a>
                                             </li>
                                             <li class="navi-item">
@@ -1261,7 +1261,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                     <span class="navi-icon">
                                                         <i class="flaticon2-gear"></i>
                                                     </span>
-                                                    <span class="navi-text">Settings</span>
+                                                    <span class="navi-text"><?= __('Settings'); ?></span>
                                                 </a>
                                             </li>
                                             <li class="navi-separator my-3"></li>
@@ -1270,7 +1270,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                     <span class="navi-icon">
                                                         <i class="flaticon2-magnifier-tool"></i>
                                                     </span>
-                                                    <span class="navi-text">Help</span>
+                                                    <span class="navi-text"><?= __('Help'); ?></span>
                                                 </a>
                                             </li>
                                             <li class="navi-item">
@@ -1278,7 +1278,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                                     <span class="navi-icon">
                                                         <i class="flaticon2-bell-2"></i>
                                                     </span>
-                                                    <span class="navi-text">Privacy</span>
+                                                    <span class="navi-text"><?= __('Privacy'); ?></span>
                                                     <span class="navi-link-badge">
                                                         <span class="label label-light-danger label-rounded font-weight-bold">5</span>
                                                     </span>
@@ -1291,10 +1291,10 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                 <!--end::Dropdown Menu-->
                             </div>
                             <div class="text-center flex-grow-1">
-                                <div class="text-dark-75 font-weight-bold font-size-h5">Matt Pears</div>
+                                <div class="text-dark-75 font-weight-bold font-size-h5"><?= __('Matt Pears'); ?></div>
                                 <div>
                                     <span class="label label-dot label-success"></span>
-                                    <span class="font-weight-bold text-muted font-size-sm">Active</span>
+                                    <span class="font-weight-bold text-muted font-size-sm"><?= __('Active'); ?></span>
                                 </div>
                             </div>
                             <div class="text-right flex-grow-1">
@@ -1314,70 +1314,70 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     <div class="d-flex flex-column mb-5 align-items-start">
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-circle symbol-40 mr-3">
-                                                <img alt="Pic" src="assets/media/users/300_12.jpg" />
+                                                <img alt="<?= htmlspecialchars(__('Pic'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/media/users/300_12.jpg" />
                                             </div>
                                             <div>
-                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-                                                <span class="text-muted font-size-sm">2 Hours</span>
+                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6"><?= __('Matt Pears'); ?></a>
+                                                <span class="text-muted font-size-sm"><?= __('2 Hours'); ?></span>
                                             </div>
                                         </div>
-                                        <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">How likely are you to recommend our company to your friends and family?</div>
+                                        <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px"><?= __('How likely are you to recommend our company to your friends and family?'); ?></div>
                                     </div>
                                     <!--end::Message In-->
                                     <!--begin::Message Out-->
                                     <div class="d-flex flex-column mb-5 align-items-end">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <span class="text-muted font-size-sm">3 minutes</span>
-                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
+                                                <span class="text-muted font-size-sm"><?= __('3 minutes'); ?></span>
+                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6"><?= __('You'); ?></a>
                                             </div>
                                             <div class="symbol symbol-circle symbol-40 ml-3">
-                                                <img alt="Pic" src="assets/media/users/300_21.jpg" />
+                                                <img alt="<?= htmlspecialchars(__('Pic'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/media/users/300_21.jpg" />
                                             </div>
                                         </div>
-                                        <div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.</div>
+                                        <div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px"><?= __('Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.'); ?></div>
                                     </div>
                                     <!--end::Message Out-->
                                     <!--begin::Message In-->
                                     <div class="d-flex flex-column mb-5 align-items-start">
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-circle symbol-40 mr-3">
-                                                <img alt="Pic" src="assets/media/users/300_21.jpg" />
+                                                <img alt="<?= htmlspecialchars(__('Pic'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/media/users/300_21.jpg" />
                                             </div>
                                             <div>
-                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-                                                <span class="text-muted font-size-sm">40 seconds</span>
+                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6"><?= __('Matt Pears'); ?></a>
+                                                <span class="text-muted font-size-sm"><?= __('40 seconds'); ?></span>
                                             </div>
                                         </div>
-                                        <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">Ok, Understood!</div>
+                                        <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px"><?= __('Ok, Understood!'); ?></div>
                                     </div>
                                     <!--end::Message In-->
                                     <!--begin::Message Out-->
                                     <div class="d-flex flex-column mb-5 align-items-end">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <span class="text-muted font-size-sm">Just now</span>
-                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
+                                                <span class="text-muted font-size-sm"><?= __('Just now'); ?></span>
+                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6"><?= __('You'); ?></a>
                                             </div>
                                             <div class="symbol symbol-circle symbol-40 ml-3">
-                                                <img alt="Pic" src="assets/media/users/300_21.jpg" />
+                                                <img alt="<?= htmlspecialchars(__('Pic'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/media/users/300_21.jpg" />
                                             </div>
                                         </div>
-                                        <div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">You’ll receive notifications for all issues, pull requests!</div>
+                                        <div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px"><?= __('You’ll receive notifications for all issues, pull requests!'); ?></div>
                                     </div>
                                     <!--end::Message Out-->
                                     <!--begin::Message In-->
                                     <div class="d-flex flex-column mb-5 align-items-start">
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-circle symbol-40 mr-3">
-                                                <img alt="Pic" src="assets/media/users/300_12.jpg" />
+                                                <img alt="<?= htmlspecialchars(__('Pic'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/media/users/300_12.jpg" />
                                             </div>
                                             <div>
-                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-                                                <span class="text-muted font-size-sm">40 seconds</span>
+                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6"><?= __('Matt Pears'); ?></a>
+                                                <span class="text-muted font-size-sm"><?= __('40 seconds'); ?></span>
                                             </div>
                                         </div>
-                                        <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">You can unwatch this repository immediately by clicking here:
+                                        <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px"><?= __('You can unwatch this repository immediately by clicking here'); ?>:
                                         <a href="#">https://github.com</a></div>
                                     </div>
                                     <!--end::Message In-->
@@ -1385,42 +1385,42 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     <div class="d-flex flex-column mb-5 align-items-end">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <span class="text-muted font-size-sm">Just now</span>
-                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
+                                                <span class="text-muted font-size-sm"><?= __('Just now'); ?></span>
+                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6"><?= __('You'); ?></a>
                                             </div>
                                             <div class="symbol symbol-circle symbol-40 ml-3">
-                                                <img alt="Pic" src="assets/media/users/300_21.jpg" />
+                                                <img alt="<?= htmlspecialchars(__('Pic'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/media/users/300_21.jpg" />
                                             </div>
                                         </div>
-                                        <div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Discover what students who viewed Learn Figma - UI/UX Design. Essential Training also viewed</div>
+                                        <div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px"><?= __('Discover what students who viewed Learn Figma - UI/UX Design. Essential Training also viewed'); ?></div>
                                     </div>
                                     <!--end::Message Out-->
                                     <!--begin::Message In-->
                                     <div class="d-flex flex-column mb-5 align-items-start">
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-circle symbol-40 mr-3">
-                                                <img alt="Pic" src="assets/media/users/300_12.jpg" />
+                                                <img alt="<?= htmlspecialchars(__('Pic'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/media/users/300_12.jpg" />
                                             </div>
                                             <div>
-                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">Matt Pears</a>
-                                                <span class="text-muted font-size-sm">40 seconds</span>
+                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6"><?= __('Matt Pears'); ?></a>
+                                                <span class="text-muted font-size-sm"><?= __('40 seconds'); ?></span>
                                             </div>
                                         </div>
-                                        <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">Most purchased Business courses during this sale!</div>
+                                        <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px"><?= __('Most purchased Business courses during this sale!'); ?></div>
                                     </div>
                                     <!--end::Message In-->
                                     <!--begin::Message Out-->
                                     <div class="d-flex flex-column mb-5 align-items-end">
                                         <div class="d-flex align-items-center">
                                             <div>
-                                                <span class="text-muted font-size-sm">Just now</span>
-                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
+                                                <span class="text-muted font-size-sm"><?= __('Just now'); ?></span>
+                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6"><?= __('You'); ?></a>
                                             </div>
                                             <div class="symbol symbol-circle symbol-40 ml-3">
-                                                <img alt="Pic" src="assets/media/users/300_21.jpg" />
+                                                <img alt="<?= htmlspecialchars(__('Pic'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/media/users/300_21.jpg" />
                                             </div>
                                         </div>
-                                        <div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">Company BBQ to celebrate the last quater achievements and goals. Food and drinks provided</div>
+                                        <div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px"><?= __('Company BBQ to celebrate the last quater achievements and goals. Food and drinks provided'); ?></div>
                                     </div>
                                     <!--end::Message Out-->
                                 </div>
@@ -1432,7 +1432,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                         <!--begin::Footer-->
                         <div class="card-footer align-items-center">
                             <!--begin::Compose-->
-                            <textarea aria-label="Type a message" class="form-control border-0 p-0" rows="2" placeholder="Type a message"></textarea>
+                            <textarea aria-label="<?= htmlspecialchars(__('Type a message'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border-0 p-0" rows="2" placeholder="<?= htmlspecialchars(__('Type a message'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                             <div class="d-flex align-items-center justify-content-between mt-5">
                                 <div class="mr-3">
                                     <a href="#" class="btn btn-clean btn-icon btn-md mr-1">
@@ -1443,7 +1443,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </a>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-primary btn-md text-uppercase font-weight-bold chat-send py-2 px-6">Send</button>
+                                    <button type="button" class="btn btn-primary btn-md text-uppercase font-weight-bold chat-send py-2 px-6"><?= __('Send'); ?></button>
                                 </div>
                             </div>
                             <!--begin::Compose-->
@@ -1473,28 +1473,28 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
         <!--begin::Sticky Toolbar-->
         <ul class="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4">
             <!--begin::Item-->
-            <li class="nav-item mb-2" id="kt_demo_panel_toggle" data-toggle="tooltip" title="Check out more demos" data-placement="right">
+            <li class="nav-item mb-2" id="kt_demo_panel_toggle" data-toggle="tooltip" title="<?= htmlspecialchars(__('Check out more demos'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="right">
                 <a class="btn btn-sm btn-icon btn-bg-light btn-icon-success btn-hover-success" href="#">
                     <i class="flaticon2-drop"></i>
                 </a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="nav-item mb-2" data-toggle="tooltip" title="Layout Builder" data-placement="left">
+            <li class="nav-item mb-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Layout Builder'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                 <a class="btn btn-sm btn-icon btn-bg-light btn-icon-primary btn-hover-primary" href="https://preview.keenthemes.com/metronic/demo1/builder.html" target="_blank">
                     <i class="flaticon2-gear"></i>
                 </a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="nav-item mb-2" data-toggle="tooltip" title="Documentation" data-placement="left">
+            <li class="nav-item mb-2" data-toggle="tooltip" title="<?= htmlspecialchars(__('Documentation'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                 <a class="btn btn-sm btn-icon btn-bg-light btn-icon-warning btn-hover-warning" href="https://keenthemes.com/metronic/?page=docs" target="_blank">
                     <i class="flaticon2-telegram-logo"></i>
                 </a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="nav-item" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="Chat Example" data-placement="left">
+            <li class="nav-item" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title="<?= htmlspecialchars(__('Chat Example'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                 <a class="btn btn-sm btn-icon btn-bg-light btn-icon-danger btn-hover-danger" href="#" data-toggle="modal" data-target="#kt_chat_modal" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <i class="flaticon2-chat-1"></i>
                 </a>
@@ -1506,7 +1506,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
         <div id="kt_demo_panel" class="offcanvas offcanvas-right p-10">
             <!--begin::Header-->
             <div class="offcanvas-header d-flex align-items-center justify-content-between pb-7">
-                <h4 class="font-weight-bold m-0">Select A Demo</h4>
+                <h4 class="font-weight-bold m-0"><?= __('Select A Demo'); ?></h4>
                 <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_demo_panel_close">
                     <i class="ki ki-close icon-xs text-muted"></i>
                 </a>
@@ -1516,13 +1516,13 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
             <div class="offcanvas-content">
                 <!--begin::Wrapper-->
                 <div class="offcanvas-wrapper mb-5 scroll-pull">
-                    <h5 class="font-weight-bold mb-4 text-center">Demo 1</h5>
+                    <h5 class="font-weight-bold mb-4 text-center"><?= __('Demo 1'); ?></h5>
                     <div class="overlay rounded-lg mb-8 offcanvas-demo offcanvas-demo-active">
                         <div class="overlay-wrapper rounded-lg">
                             <img src="assets/media/demos/demo1.png" alt="" class="w-100" />
                         </div>
                         <div class="overlay-layer">
-                            <a href="../../../../../demo1/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank">Default</a>
+                            <a href="../../../../../demo1/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank"><?= __('Default'); ?></a>
                             <a href="https:
                         </div>
                     </div>
@@ -1536,13 +1536,13 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             <a href="https:
                         </div>
                     </div>
-                    <h5 class="font-weight-bold mb-4 text-center">Demo 3</h5>
+                    <h5 class="font-weight-bold mb-4 text-center"><?= __('Demo 3'); ?></h5>
                     <div class="overlay rounded-lg mb-8 offcanvas-demo">
                         <div class="overlay-wrapper rounded-lg">
                             <img src="assets/media/demos/demo3.png" alt="" class="w-100" />
                         </div>
                         <div class="overlay-layer">
-                            <a href="../../../../../demo3/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank">Default</a>
+                            <a href="../../../../../demo3/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank"><?= __('Default'); ?></a>
                             <a href="https:
                         </div>
                     </div>
@@ -1556,13 +1556,13 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             <a href="https:
                         </div>
                     </div>
-                    <h5 class="font-weight-bold mb-4 text-center">Demo 5</h5>
+                    <h5 class="font-weight-bold mb-4 text-center"><?= __('Demo 5'); ?></h5>
                     <div class="overlay rounded-lg mb-8 offcanvas-demo">
                         <div class="overlay-wrapper rounded-lg">
                             <img src="assets/media/demos/demo5.png" alt="" class="w-100" />
                         </div>
                         <div class="overlay-layer">
-                            <a href="../../../../../demo5/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank">Default</a>
+                            <a href="../../../../../demo5/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank"><?= __('Default'); ?></a>
                             <a href="https:
                         </div>
                     </div>
@@ -1576,13 +1576,13 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             <a href="https:
                         </div>
                     </div>
-                    <h5 class="font-weight-bold mb-4 text-center">Demo 7</h5>
+                    <h5 class="font-weight-bold mb-4 text-center"><?= __('Demo 7'); ?></h5>
                     <div class="overlay rounded-lg mb-8 offcanvas-demo">
                         <div class="overlay-wrapper rounded-lg">
                             <img src="assets/media/demos/demo7.png" alt="" class="w-100" />
                         </div>
                         <div class="overlay-layer">
-                            <a href="../../../../../demo7/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank">Default</a>
+                            <a href="../../../../../demo7/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank"><?= __('Default'); ?></a>
                             <a href="https:
                         </div>
                     </div>
@@ -1596,13 +1596,13 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             <a href="https:
                         </div>
                     </div>
-                    <h5 class="font-weight-bold mb-4 text-center">Demo 9</h5>
+                    <h5 class="font-weight-bold mb-4 text-center"><?= __('Demo 9'); ?></h5>
                     <div class="overlay rounded-lg mb-8 offcanvas-demo">
                         <div class="overlay-wrapper rounded-lg">
                             <img src="assets/media/demos/demo9.png" alt="" class="w-100" />
                         </div>
                         <div class="overlay-layer">
-                            <a href="../../../../../demo9/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank">Default</a>
+                            <a href="../../../../../demo9/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank"><?= __('Default'); ?></a>
                             <a href="https:
                         </div>
                     </div>
@@ -1616,13 +1616,13 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             <a href="https:
                         </div>
                     </div>
-                    <h5 class="font-weight-bold mb-4 text-center">Demo 11</h5>
+                    <h5 class="font-weight-bold mb-4 text-center"><?= __('Demo 11'); ?></h5>
                     <div class="overlay rounded-lg mb-8 offcanvas-demo">
                         <div class="overlay-wrapper rounded-lg">
                             <img src="assets/media/demos/demo11.png" alt="" class="w-100" />
                         </div>
                         <div class="overlay-layer">
-                            <a href="../../../../../demo11/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank">Default</a>
+                            <a href="../../../../../demo11/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank"><?= __('Default'); ?></a>
                             <a href="https:
                         </div>
                     </div>
@@ -1636,13 +1636,13 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                             <a href="https:
                         </div>
                     </div>
-                    <h5 class="font-weight-bold mb-4 text-center">Demo 13</h5>
+                    <h5 class="font-weight-bold mb-4 text-center"><?= __('Demo 13'); ?></h5>
                     <div class="overlay rounded-lg mb-8 offcanvas-demo">
                         <div class="overlay-wrapper rounded-lg">
                             <img src="assets/media/demos/demo13.png" alt="" class="w-100" />
                         </div>
                         <div class="overlay-layer">
-                            <a href="../../../../../demo13/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank">Default</a>
+                            <a href="../../../../../demo13/dist" class="btn btn-white btn-text-primary btn-hover-primary font-weight-boldest text-center min-w-75px shadow" target="_blank"><?= __('Default'); ?></a>
                             <a href="https:
                         </div>
                     </div>

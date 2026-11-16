@@ -33,8 +33,8 @@ foreach($result['assign_task_list'] as $transaction_activity_schedule){
     }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Task Details</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Task Details'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body" >
     <?php if(count((array)$transactionactivityschedule) != 0){
@@ -53,10 +53,10 @@ foreach($result['assign_task_list'] as $transaction_activity_schedule){
                             <table class="table table-hover m-b-0" style="width: 100%;">
                                       <thead>
                                           <tr>
-                                              <th scope="col">Task</th>
-                                              <th scope="col">Mandatory</th>
-                                              <th scope="col">Attach</th>
-                                              <th scope="col">Approval</th>
+                                              <th scope="col"><?= __('Task'); ?></th>
+                                              <th scope="col"><?= __('Mandatory'); ?></th>
+                                              <th scope="col"><?= __('Attach'); ?></th>
+                                              <th scope="col"><?= __('Approval'); ?></th>
                                           </tr>
                                       </thead>
                                        <tbody>
@@ -100,6 +100,6 @@ foreach($result['assign_task_list'] as $transaction_activity_schedule){
         <?php } ?>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="AssignTaskSchedule('<?php echo $employee_id; ?>')"><i class="la la-check"></i>Assign task</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="AssignTaskSchedule('<?php echo $employee_id; ?>')"><i class="la la-check"></i><?= __('Assign task'); ?></button>
 </div>

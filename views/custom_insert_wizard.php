@@ -11,18 +11,18 @@
             <div class="d-flex align-items-baseline flex-wrap mr-5">
                 <!--begin::Page Title-->
                 <h5 class="text-dark font-weight-bold my-1 mr-5">
-                    Wizard 3                                    </h5>
+                    <?= __('Wizard 3'); ?>                                    </h5>
                 <!--end::Page Title-->
 
                                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                                     <li class="breadcrumb-item">
                                 <a href="" class="text-muted">
-                                    Pages                                </a>
+                                    <?= __('Pages'); ?>                                </a>
                             </li>
                                                     <li class="breadcrumb-item">
                                 <a href="" class="text-muted">
-                                    Wizard 3                                </a>
+                                    <?= __('Wizard 3'); ?>                                </a>
                             </li>
                                             </ul>
                     <!--end::Breadcrumb-->
@@ -35,12 +35,12 @@
         <div class="d-flex align-items-center">
                             <!--begin::Actions-->
                 <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">
-                    Actions
+                    <?= __('Actions'); ?>
                 </a>
                 <!--end::Actions-->
 
             <!--begin::Dropdown-->
-            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                 <a href="#" class="btn btn-icon"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                     <span class="svg-icon svg-icon-success svg-icon-2x"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -53,42 +53,42 @@
                     <!--begin::Navigation-->
 <ul class="navi navi-hover">
     <li class="navi-header font-weight-bold py-4">
-        <span class="font-size-lg">Choose Label:</span>
-        <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+        <span class="font-size-lg"><?= __('Choose Label'); ?>:</span>
+        <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>"></i>
     </li>
     <li class="navi-separator mb-3 opacity-70"></li>
     <li class="navi-item">
         <a href="#" class="navi-link">
             <span class="navi-text">
-                <span class="label label-xl label-inline label-light-success">Customer</span>
+                <span class="label label-xl label-inline label-light-success"><?= __('Customer'); ?></span>
             </span>
         </a>
     </li>
     <li class="navi-item">
         <a href="#" class="navi-link">
             <span class="navi-text">
-                <span class="label label-xl label-inline label-light-danger">Partner</span>
+                <span class="label label-xl label-inline label-light-danger"><?= __('Partner'); ?></span>
             </span>
         </a>
     </li>
     <li class="navi-item">
         <a href="#" class="navi-link">
             <span class="navi-text">
-                <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                <span class="label label-xl label-inline label-light-warning"><?= __('Suplier'); ?></span>
             </span>
         </a>
     </li>
     <li class="navi-item">
         <a href="#" class="navi-link">
             <span class="navi-text">
-                <span class="label label-xl label-inline label-light-primary">Member</span>
+                <span class="label label-xl label-inline label-light-primary"><?= __('Member'); ?></span>
             </span>
         </a>
     </li>
     <li class="navi-item">
         <a href="#" class="navi-link">
             <span class="navi-text">
-                <span class="label label-xl label-inline label-light-dark">Staff</span>
+                <span class="label label-xl label-inline label-light-dark"><?= __('Staff'); ?></span>
             </span>
         </a>
     </li>
@@ -96,7 +96,7 @@
     <li class="navi-footer py-4">
         <a class="btn btn-clean font-weight-bold btn-sm" href="#">
             <i class="ki ki-plus icon-sm"></i>
-            Add new
+            <?= __('Add new'); ?>
         </a>
     </li>
 </ul>
@@ -125,7 +125,7 @@
                     <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
                         <div class="wizard-label">
                             <h3 class="wizard-title">
-                                <span>1.</span> Setup Location
+                                <span>1.</span> <?= __('Setup Location'); ?>
                             </h3>
                             <div class="wizard-bar"></div>
                         </div>
@@ -136,7 +136,7 @@
                     <div class="wizard-step" data-wizard-type="step">
                         <div class="wizard-label">
                             <h3 class="wizard-title">
-                                <span>2.</span> Enter Details
+                                <span>2.</span> <?= __('Enter Details'); ?>
                             </h3>
                             <div class="wizard-bar"></div>
                         </div>
@@ -147,7 +147,7 @@
                     <div class="wizard-step" data-wizard-type="step">
                         <div class="wizard-label">
                             <h3 class="wizard-title">
-                                <span>3.</span> Select Services
+                                <span>3.</span> <?= __('Select Services'); ?>
                             </h3>
                             <div class="wizard-bar"></div>
                         </div>
@@ -158,7 +158,7 @@
                     <div class="wizard-step" data-wizard-type="step">
                         <div class="wizard-label">
                             <h3 class="wizard-title">
-                                <span>4.</span> Delivery Address
+                                <span>4.</span> <?= __('Delivery Address'); ?>
                             </h3>
                             <div class="wizard-bar"></div>
                         </div>
@@ -169,7 +169,7 @@
                     <div class="wizard-step" data-wizard-type="step">
                         <div class="wizard-label">
                             <h3 class="wizard-title">
-                                <span>5</span> Review and Submit
+                                <span>5</span> <?= __('Review and Submit'); ?>
                             </h3>
                             <div class="wizard-bar"></div>
                         </div>
@@ -187,37 +187,37 @@
                         <!--begin: Wizard Step 1-->
                         <?php for($i=1;$i<6;$i++){ ?>
                         <div class="pb-5" data-wizard-type="step-content" >
-                            <h4 class="mb-10 font-weight-bold text-dark">Setup Your Current Location <?php echo $i; ?></h4>
+                            <h4 class="mb-10 font-weight-bold text-dark"><?= __('Setup Your Current Location'); ?> <?php echo $i; ?></h4>
 
                             <div class="form-group col-lg-6">
-                                <span>Address Line 1</span>
-                                <input aria-label="Address Line 1" type="text" class="form-control" name="address1" placeholder="Address Line 1" value="Address Line 1"/>
-                                <span class="form-text text-muted">Please enter your Address.</span>
+                                <span><?= __('Address Line 1'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Address Line 1'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="address1" placeholder="<?= htmlspecialchars(__('Address Line 1'), ENT_QUOTES, 'UTF-8'); ?>" value="Address Line 1"/>
+                                <span class="form-text text-muted"><?= __('Please enter your Address.'); ?></span>
                             </div>
 
 
                             <div class="form-group col-lg-6">
-                                <span>Address Line 2</span>
-                                <input aria-label="Address Line 2" type="text" class="form-control" name="address2" placeholder="Address Line 2" value="Address Line 2"/>
-                                <span class="form-text text-muted">Please enter your Address.</span>
+                                <span><?= __('Address Line 2'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Address Line 2'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="address2" placeholder="<?= htmlspecialchars(__('Address Line 2'), ENT_QUOTES, 'UTF-8'); ?>" value="Address Line 2"/>
+                                <span class="form-text text-muted"><?= __('Please enter your Address.'); ?></span>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-6">
 
                                     <div class="form-group">
-                                        <span>Postcode</span>
-                                        <input aria-label="Postcode" type="text" class="form-control" name="postcode" placeholder="Postcode" value="3000"/>
-                                        <span class="form-text text-muted">Please enter your Postcode.</span>
+                                        <span><?= __('Postcode'); ?></span>
+                                        <input aria-label="<?= htmlspecialchars(__('Postcode'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="postcode" placeholder="<?= htmlspecialchars(__('Postcode'), ENT_QUOTES, 'UTF-8'); ?>" value="3000"/>
+                                        <span class="form-text text-muted"><?= __('Please enter your Postcode.'); ?></span>
                                     </div>
 
                                 </div>
                                 <div class="col-lg-6">
 
                                     <div class="form-group">
-                                        <span>City</span>
-                                        <input aria-label="City" type="text" class="form-control" name="city" placeholder="City" value="Melbourne"/>
-                                        <span class="form-text text-muted">Please enter your City.</span>
+                                        <span><?= __('City'); ?></span>
+                                        <input aria-label="<?= htmlspecialchars(__('City'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="city" placeholder="<?= htmlspecialchars(__('City'), ENT_QUOTES, 'UTF-8'); ?>" value="Melbourne"/>
+                                        <span class="form-text text-muted"><?= __('Please enter your City.'); ?></span>
                                     </div>
 
                                 </div>
@@ -226,9 +226,9 @@
                                 <div class="col-lg-6">
 
                                     <div class="form-group">
-                                        <span>State</span>
-                                        <input aria-label="State" type="text" class="form-control" name="state" placeholder="State" value="VIC"/>
-                                        <span class="form-text text-muted">Please enter your State.</span>
+                                        <span><?= __('State'); ?></span>
+                                        <input aria-label="<?= htmlspecialchars(__('State'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="state" placeholder="<?= htmlspecialchars(__('State'), ENT_QUOTES, 'UTF-8'); ?>" value="VIC"/>
+                                        <span class="form-text text-muted"><?= __('Please enter your State.'); ?></span>
                                     </div>
 
                                 </div>

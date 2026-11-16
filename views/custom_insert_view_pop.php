@@ -11,7 +11,7 @@ $dispage = str_replace("views/", '', $disptemp);
 <head><?php include_once "../partials/_head.php" ?>
 <div class="modal-header modal-header text-white p-25 header-bg" style="border-top-right-radius: 20px; border-top-left-radius: 20px;">
     <h4 class="modal-title"><?php echo $_GET['title']; ?></h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="custom-scroll" style="height: 600px;">
     <div class="p-20">

@@ -14,16 +14,16 @@ $emplist_weekly = $projectData['emplist_week'];
          <!--begin::Header-->
          <div class="card-header border-0 pt-5">
             <h3 class="card-title align-items-start flex-column">
-               <span class="card-label font-weight-bolder text-dark">Contract Employees</span>
-               <span class="text-muted mt-3 font-weight-bold font-size-sm">Total Number of Employees : <?php echo count((array)$emplist_monthly);?></span>
+               <span class="card-label font-weight-bolder text-dark"><?= __('Contract Employees'); ?></span>
+               <span class="text-muted mt-3 font-weight-bold font-size-sm"><?= __('Total Number of Employees'); ?> : <?php echo count((array)$emplist_monthly);?></span>
             </h3>
             <div class="card-toolbar">
                <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                   <li class="nav-item">
-                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_12_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Month</a>
+                     <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_12_1" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Month'); ?></a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_12_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Week</a>
+                     <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_12_2" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Week'); ?></a>
                   </li>
                </ul>
             </div>
@@ -41,11 +41,11 @@ $emplist_weekly = $projectData['emplist_week'];
                         <tr>
                            <th scope=\"col\" class="p-0 w-50px">#</th>
 
-                           <th scope=\"col\" class="p-0 w-50px">Employee</th>
+                           <th scope=\"col\" class="p-0 w-50px"><?= __('Employee'); ?></th>
                            <th scope=\"col\" class="p-0 min-w-200px"></th>
-                           <th scope=\"col\" class="p-0 min-w-120px">Timesheet Status</th>
-                           <th scope=\"col\" class="p-0 min-w-120px">Scheduled Time (Hrs)</th>
-                           <th scope=\"col\" class="p-0 min-w-120px">Total Time Spent (Hrs)</th>
+                           <th scope=\"col\" class="p-0 min-w-120px"><?= __('Timesheet Status'); ?></th>
+                           <th scope=\"col\" class="p-0 min-w-120px"><?= __('Scheduled Time (Hrs)'); ?></th>
+                           <th scope=\"col\" class="p-0 min-w-120px"><?= __('Total Time Spent (Hrs)'); ?></th>
 
                         </tr>
                      </thead>
@@ -111,12 +111,12 @@ $emplist_weekly = $projectData['emplist_week'];
                      <thead>
                         <tr>
                            <th scope=\"col\" class="p-0 w-50px">#</th>
-                           <th scope=\"col\" class="p-0 w-50px">Employee</th>
+                           <th scope=\"col\" class="p-0 w-50px"><?= __('Employee'); ?></th>
                            <th scope=\"col\" class="p-0 min-w-200px"></th>
-                           <th scope=\"col\" class="p-0 min-w-120px">Timesheet Status</th>
+                           <th scope=\"col\" class="p-0 min-w-120px"><?= __('Timesheet Status'); ?></th>
 
-                           <th scope=\"col\" class="p-0 min-w-120px">Scheduled Time (Hrs)</th>
-                           <th scope=\"col\" class="p-0 min-w-120px">Total Time Spent (Hrs)</th>
+                           <th scope=\"col\" class="p-0 min-w-120px"><?= __('Scheduled Time (Hrs)'); ?></th>
+                           <th scope=\"col\" class="p-0 min-w-120px"><?= __('Total Time Spent (Hrs)'); ?></th>
                         </tr>
                      </thead>
                      <tbody>

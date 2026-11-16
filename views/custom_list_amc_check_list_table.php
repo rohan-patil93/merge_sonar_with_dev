@@ -27,15 +27,15 @@ foreach ($gc_details as $row) {
         <div class="table-responsive mt-3">
             <table class="table  table-sm f-12">
                 <tr class="f-14">
-                    <th scope="col">S.NO</th>
-                    <th scope="col">Service Date</th>
-                    <th scope="col">Service Type</th>
-                    <th scope="col">Service Charge</th>
-                    <th scope="col">Service Expenditure</th>
-                    <th scope="col">TA/DA</th>
-                    <th scope="col">Service Name</th>
-                    <th scope="col">Service Person</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"><?= __('S.NO'); ?></th>
+                    <th scope="col"><?= __('Service Date'); ?></th>
+                    <th scope="col"><?= __('Service Type'); ?></th>
+                    <th scope="col"><?= __('Service Charge'); ?></th>
+                    <th scope="col"><?= __('Service Expenditure'); ?></th>
+                    <th scope="col"><?= __('TA/DA'); ?></th>
+                    <th scope="col"><?= __('Service Name'); ?></th>
+                    <th scope="col"><?= __('Service Person'); ?></th>
+                    <th scope="col"><?= __('Action'); ?></th>
                 </tr>
                 <?php $i = 1;
                 foreach ($response as $row) { ?>
@@ -60,7 +60,7 @@ foreach ($gc_details as $row) {
                 }
                 } else{?>
                 <div class="card-px text-center py-20 m-t-30">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                   <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                   </div>

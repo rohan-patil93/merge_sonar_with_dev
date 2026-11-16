@@ -65,8 +65,8 @@ foreach($user_reimbursement_policies as $empesginda){
                         icon: 'info',
                         showDenyButton: true,
                         showCancelButton: false,
-                        confirmButtonText: 'Yes',
-                        denyButtonText: 'No',
+                        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                        denyButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     }).then((result) => {
                         if (result.isConfirmed) {
                             toinsertandpdateesignemployeeonlyone(id,uname,"Y")
@@ -88,15 +88,15 @@ foreach($user_reimbursement_policies as $empesginda){
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Assign Employees Policy</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Assign Employees Policy'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="row kt-margin-b-20 mb-2" >
         <div class="col-lg-3 form-group w-full">
-            <span class="form-label d-block"><?php echo "Cost Center"; ?>:</span>
-            <select aria-label="Cost Center Pp" class="form-control js-example-basic-single" id="cost_center_pp" name="">
-                <option value=""> All  </option>
+            <span class="form-label d-block"><?php echo __("Cost Center"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Cost Center Pp'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="cost_center_pp" name="">
+                <option value=""> <?= __('All'); ?>  </option>
                 <?php foreach($empcos as $cos){ $emp_cos[$cos['id']]= $cos['cost_center_name']; ?>
                 <option   <?php if($ress['cost_center_pp'] == $cos['id'] ){ ?> selected <?php
 } ?> value="<?php echo $cos['id']; ?>"><?php echo $cos['cost_center_name']; ?></option>
@@ -104,9 +104,9 @@ foreach($user_reimbursement_policies as $empesginda){
         </select>
     </div>
 <div class="col-lg-3  form-group w-full">
-    <span class="form-label d-block"><?php echo "Location"; ?>:</span>
-    <select aria-label="Location" class="form-control js-example-basic-single" id="location" name="">
-        <option value=""> All  </option>
+    <span class="form-label d-block"><?php echo __("Location"); ?>:</span>
+    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="location" name="">
+        <option value=""> <?= __('All'); ?>  </option>
         <?php foreach($emploc as $loc){ $emp_loc[$loc['id']]= $loc['location_name']; ?>
         <option   <?php if($ress['location'] == $loc['id'] ){ ?> selected <?php
 } ?> value="<?php echo $loc['id']; ?>"><?php echo $loc['location_name']; ?></option>
@@ -115,8 +115,8 @@ foreach($user_reimbursement_policies as $empesginda){
 </div>
 
 <div class="col-lg-3 form-group">
-    <span class="form-label d-block">Enter Usser Name/Email</span>
-    <input aria-label="Emp Name Code" type="text" class="form-control" name="emp_name_code"  value="<?php echo $_POST['emp_name_code']; ?>" id="emp_name_code">
+    <span class="form-label d-block"><?= __('Enter Usser Name/Email'); ?></span>
+    <input aria-label="<?= htmlspecialchars(__('Emp Name Code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="emp_name_code"  value="<?php echo $_POST['emp_name_code']; ?>" id="emp_name_code">
 </div>
 <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
     <span>&nbsp;</span>
@@ -124,7 +124,7 @@ foreach($user_reimbursement_policies as $empesginda){
     <div>
         <button class="btn btn-primary btn-brand--icon mt-2" type="button" id="kt_search" onclick="assignemployeelist()">
             <span>
-                <span>Search</span>
+                <span><?= __('Search'); ?></span>
             </span>
         </button>
     </div>
@@ -137,10 +137,10 @@ foreach($user_reimbursement_policies as $empesginda){
             <tr>
                 <th scope="col">&nbsp;</th>
                 <th scope="col">#</th>
-                <th scope="col">Name </th>
-                <th scope="col">Email Id </th>
-                <th scope="col">Cost Center</th>
-                <th scope="col">Location</th>
+                <th scope="col"><?= __('Name'); ?> </th>
+                <th scope="col"><?= __('Email Id'); ?> </th>
+                <th scope="col"><?= __('Cost Center'); ?></th>
+                <th scope="col"><?= __('Location'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -148,16 +148,16 @@ foreach($user_reimbursement_policies as $empesginda){
                 <tr>
                     <td class="p-2">
                         <label class="kt-checkbox">
-                            <input aria-label="Input field" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>,'<?php echo $row['display_name']; ?>')" class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo "checked";
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>,'<?php echo $row['display_name']; ?>')" class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo "checked";
 }?> id="checkbox_<?php echo $row['id']; ?>" type="checkbox" value="<?php echo $row['id']; ?>" onkeydown=""> <span> </span> </label>
                         </td>
                         <td class="p-2"><?php echo $i; ?></td>
                         <td class="p-2">
                             <div class="align-middle">
                                 <?php if($row['user_photo']!="") {?>
-                                    <img src="uploads/all/<?php echo $row['user_photo']; ?>"   class="img-radius img-50 align-top m-r-15" alt="User Profile">
+                                    <img src="uploads/all/<?php echo $row['user_photo']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php } else { ?>
-                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($row['display_name']); ?></span>
                                 <?php } ?>
                                 <div class="d-inline-block width73">
                                     <a href="#!" class="text-danger text-capitalize"><h6> <?php echo $row['display_name']; ?></h6></a>

@@ -41,7 +41,7 @@ $data = json_decode($data,1);
         }
     }
     function spicalallowances(id){
-        alert("rav");
+        alert(<?php echo json_encode(__('rav'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         var basic = $("#total_month").val();
         var ctc = $("#ctc").val();
         sp_amount = ctc-basic;
@@ -116,7 +116,7 @@ $data = json_decode($data,1);
                 if(!basic){ basic = 0; }
                 month_amount = (parseFloat(data.calculation_number)/100)* parseFloat(basic);
             }else if(data.calculation_type == 'SP'){
-                alert("Good");
+                alert(<?php echo json_encode(__('Good'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 $('#SPS').val(count);
                 var codedetail = "Fixed Amount";
                 var basic = $("#total_month").val();
@@ -183,8 +183,8 @@ $data = json_decode($data,1);
 
                 <div class="row salary-template">
                     <div class="col-md-3">
-                        <p class="text-dark-75 font-weight-bolder font-size-h5 m-0">Build Your Template</p>
-                        <div class="font-size-sm text-muted font-weight-bold mt-1 mb-8">Include active salary components</div>
+                        <p class="text-dark-75 font-weight-bolder font-size-h5 m-0"><?= __('Build Your Template'); ?></p>
+                        <div class="font-size-sm text-muted font-weight-bold mt-1 mb-8"><?= __('Include active salary components'); ?></div>
                         <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample3">
 
                             <?php $j=1; foreach ($data as  $dat) { ?>
@@ -203,7 +203,7 @@ $data = json_decode($data,1);
                                             <label class="checkbox float-right">
                                             <input type="hidden" name="addsaldata" id="<?php echo $addsaldata."_detail"; ?>" value='<?php echo json_encode($value); ?>' >
                                             <input type="hidden" id="<?php echo $addsaldata."check"; ?>" value="0">
-                                                <input aria-label="Checkboxes1" type="checkbox" name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)" onkeydown=""><span></span>
+                                                <input aria-label="<?= htmlspecialchars(__('Checkboxes1'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="Checkboxes1" onclick="addsaldata(<?php echo "'".$addsaldata."'"; ?>)" onkeydown=""><span></span>
                                             </label>
                                         </div>
                                     <?php } ?>
@@ -222,33 +222,33 @@ $data = json_decode($data,1);
                                 <!--begin::Header-->
                                 <div class="card-header border-0 py-0 pl-5">
                                     <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label font-weight-bolder text-dark">Salary</span>
-                                        <span class="text-muted mt-3 font-weight-bold font-size-sm">Experience in different organizations</span>
+                                        <span class="card-label font-weight-bolder text-dark"><?= __('Salary'); ?></span>
+                                        <span class="text-muted mt-3 font-weight-bold font-size-sm"><?= __('Experience in different organizations'); ?></span>
                                     </h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group row">
                                         <div class="col-lg-4">
-                                            <span>Employee </span>
-                                            <select aria-label="Select option">
-                                                <option> Select Any One</option>
+                                            <span><?= __('Employee'); ?> </span>
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <option> <?= __('Select Any One'); ?></option>
                                             </select>
 
                                         </div>
                                         <div class="col-lg-4">
-                                            <span>Description:</span>
-                                            <textarea aria-label="Kt Autosize 2" class="form-control" id="kt_autosize_2" rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 40px;">Max 5000 characters</textarea>
+                                            <span><?= __('Description'); ?>:</span>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Kt Autosize 2'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2" rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 40px;">Max 5000 characters</textarea>
                                         </div>
                                         <div class="col-lg-4">
-                                            <span>Notes:</span>
-                                            <textarea aria-label="Max 5000 characters" class="form-control" id="kt_autosize_2_2" name="note" placeholder="Max 5000 characters" ></textarea>
+                                            <span><?= __('Notes'); ?>:</span>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Max 5000 characters'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2_2" name="note" placeholder="<?= htmlspecialchars(__('Max 5000 characters'), ENT_QUOTES, 'UTF-8'); ?>" ></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <!--end::Header-->
                                 <div class="card-body row pl-5 py-0">
                                     <div class="col-md-2 mt-3">
-                                        <span>Annual CTC</span>
+                                        <span><?= __('Annual CTC'); ?></span>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -271,11 +271,11 @@ $data = json_decode($data,1);
                                             <thead>
                                                 <tr class="text-uppercase">
                                                     <th scope="col" style="width: 30%" class="pl-7">
-                                                        <span class="text-dark-75">Salary Component</span>
+                                                        <span class="text-dark-75"><?= __('Salary Component'); ?></span>
                                                     </th>
-                                                    <th scope="col" style="width: 20%">Calculation Type</th>
-                                                    <th scope="col" style="width: 20%;text-align: center;">Amount Monthly</th>
-                                                    <th scope="col" style="width: 20%">Amount Annually</th>
+                                                    <th scope="col" style="width: 20%"><?= __('Calculation Type'); ?></th>
+                                                    <th scope="col" style="width: 20%;text-align: center;"><?= __('Amount Monthly'); ?></th>
+                                                    <th scope="col" style="width: 20%"><?= __('Amount Annually'); ?></th>
 
                                                 </tr>
                                             </thead>
@@ -303,17 +303,17 @@ $data = json_decode($data,1);
 
                                                 <tr style="background-color: #eee;">
                                                     <td class="pl-2 py-4">
-                                                        <span class="text-dark-75">Cost to Company</span>
+                                                        <span class="text-dark-75"><?= __('Cost to Company'); ?></span>
                                                     </td>
                                                     <td></td>
                                                     <td>
                                                         <span class="text-dark-75 font-weight-bolder font-size-lg">
-                                                             <input aria-label="Total Month" type="text" name="total_month" class="form-control text-right" id="total_month"  value="0.00">
+                                                             <input aria-label="<?= htmlspecialchars(__('Total Month'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="total_month" class="form-control text-right" id="total_month"  value="0.00">
                                                         </span>
                                                     </td>
                                                     <td>
                                                         <span class="text-dark-75 font-weight-bolder font-size-lg">
-                                                            <input aria-label="Total Year" type="text" name="total_year" class="form-control text-right " id="total_year"  value="0.00">
+                                                            <input aria-label="<?= htmlspecialchars(__('Total Year'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="total_year" class="form-control text-right " id="total_year"  value="0.00">
                                                         </span>
                                                     </td>
 
@@ -330,8 +330,8 @@ $data = json_decode($data,1);
                                     <div class="col-lg-4"></div>
                                     <div class="col-lg-8">
                                         <input type="hidden" name="submit" value="submit">
-                                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" class="btn btn-primary mr-2"><?= __('Submit'); ?></button>
+                                        <button type="reset" class="btn btn-secondary"><?= __('Cancel'); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -346,8 +346,8 @@ $data = json_decode($data,1);
         <div class="modal-content" >
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Information</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel"><?= __('Information'); ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
@@ -355,7 +355,7 @@ $data = json_decode($data,1);
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal"><?= __('Close'); ?></button>
             </div>
         </div>
     </div>
@@ -391,7 +391,7 @@ $datacat["where"] = array('is_active'=> '0');
 <div class="card card-custom " id="kt_page_sticky_card">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">&nbsp;<?php echo " Salaray Template";  ?> </h3>
+                    <h3 class="card-label">&nbsp;<?php echo ' '.__('Salaray Template');  ?> </h3>
                 </div>
             </div>
             <div class="card-body">
@@ -401,17 +401,17 @@ $datacat["where"] = array('is_active'=> '0');
                                 <div  class="col-lg-12" style="page-break-before: always;">
         <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
             <tr style="height: 50px;border: 1px solid #000;">
-                <td style="border:1px solid #000;padding: 5px;"><b>Name</b></td>
+                <td style="border:1px solid #000;padding: 5px;"><b><?= __('Name'); ?></b></td>
                 <td  style="border:1px solid #000;padding: 5px;"colspan="2">&nbsp;<?php echo  $send_data['display_name']; ?></td>
             </tr>
             <tr style="height: 50px;border: 1px solid #000;">
-                <td style="border:1px solid #000;padding: 5px;"><b>Designation</b></td>
+                <td style="border:1px solid #000;padding: 5px;"><b><?= __('Designation'); ?></b></td>
                 <td style="border:1px solid #000;padding: 5px;" colspan="2">&nbsp;<?php echo $send_data['job_title']; ?></td>
             </tr>
             <tr style="border: 1px solid #000;">
-                <td style="border:1px solid #000;padding: 5px;"><b>COMPENSATION DETAILS</b>                </td>
-                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>MONTHLY</b>        </td>
-                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>YEARLY</b>    </td>
+                <td style="border:1px solid #000;padding: 5px;"><b><?= __('COMPENSATION DETAILS'); ?></b>                </td>
+                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b><?= __('MONTHLY'); ?></b>        </td>
+                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b><?= __('YEARLY'); ?></b>    </td>
             </tr>
             <?php $nm=0; foreach ($salarytmpdata as  $stvalue) { ?>
                 <?php if($stvalue['component_cat_id'] !=$nm ){ $nm =$stvalue['component_cat_id'];  ?>
@@ -428,12 +428,12 @@ $datacat["where"] = array('is_active'=> '0');
                 </tr>
             <?php } ?>
                 <tr style="border: 1px solid #000;" >
-                    <td style="border:1px solid #000;padding: 5px;" ><?php echo "Total";?></td>
+                    <td style="border:1px solid #000;padding: 5px;" ><?php echo __("Total");?></td>
                     <td style="text-align: center;border:1px solid #000;padding: 5px;"> <?php echo customeummarmonyformate($salarydata['company_cost_monthly']);?></td>
                     <td style="text-align: center;border:1px solid #000;padding: 5px;"><?php echo customeummarmonyformate($salarydata['company_cost_yearly']);?></td>
                 </tr>
                 <tr style="border: 1px solid #000;" >
-                    <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  Notes: </br>
+                    <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  <?= __('Notes'); ?>: </br>
                         <p style="padding: 0px 5%;"><?php echo  $salarydata['note']; ?></p>
                     </td>
 
@@ -441,18 +441,18 @@ $datacat["where"] = array('is_active'=> '0');
         </table>
     </div>
     <div style="width: 50%; display: inline-block; margin: 30px 0 0 0;">
-        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">With best wishes.<br />For <?php echo  $send_data['company_name']; ?></b>
+        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;"><?= __('With best wishes.'); ?><br /><?= __('For'); ?> <?php echo  $send_data['company_name']; ?></b>
     </div>
     <div style="width: 48%; display: inline-block; margin: 30px 0 0 0; text-align: right;">
-        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">ANJANA AUDUKOORI<br />DIRECTOR HR</b>
+        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;"><?= __('ANJANA AUDUKOORI'); ?><br /><?= __('DIRECTOR HR'); ?></b>
     </div>
     <div style="width: 50%; display: inline-block; margin: 40px 0 0 0;">
         <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
-        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Candidate Signature</b>
+        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;"><?= __('Candidate Signature'); ?></b>
     </div>
     <div style="width: 48%; display: inline-block; margin: 40px 0 0 0; text-align: right;">
         <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
-        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Date</b>
+        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;"><?= __('Date'); ?></b>
     </div>
 
                                 </div>

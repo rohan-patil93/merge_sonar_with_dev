@@ -177,7 +177,7 @@ if($page == "elementordesign"){
 	</div>
 	<div class="form-group row">
 	<div class="col-12">
-	<p class="text-muted font-size-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</p>
+	<p class="text-muted font-size-xs">'.__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s').'</p>
 	</div>
 	</div>
 	<div class="form-group row">
@@ -190,7 +190,7 @@ if($page == "elementordesign"){
 	</div>
 	</div></div></div></div>';
 	$inputtype ='<div class="divbox'.$_POST['id'].'  col-lg-6" id="divid'.$_POST['id'].'" >
-	<label class="textcapital col-form-label text-lg-right inputlabel'.$_POST['id'].'"><span class="labletext'.$_POST['id'].'">labe</span><span class="text-danger labletextrequerd'.$_POST['id'].'" style="display:none"  > * </span></label>	
+	<label class="textcapital col-form-label text-lg-right inputlabel'.$_POST['id'].'"><span class="labletext'.$_POST['id'].'">'.__('labe').'</span><span class="text-danger labletextrequerd'.$_POST['id'].'" style="display:none"  > * </span></label>	
 	<div class="inputtypediv'.$_POST['id'].'" >			
 	<input type="text"  class="form-control form-control-lg inputbox'.$_POST['id'].'" name="inputtype'.$_POST['id'].'" placeholder="" />
 	</div></div>';
@@ -230,7 +230,7 @@ if($page== "elementordesignbutton"){
 	</div>
 	</div>
 	<div class="form-group row">
-	<label  class="col-5 col-form-label">Column Width</label>
+	<label  class="col-5 col-form-label">'.__('Column Width').'</label>
 	<div class="col-7">
 	<select class="form-control buttonwidth buttonwidth'.$_POST['id'].' form-select js-example-basic-single" id="" data-id="'.$_POST['id'].'" name="buttonwidth[]" data-select2-id="" tabindex="-1" aria-hidden="true">'.optiontype(6,$widtharray).'</select>
 	</div>

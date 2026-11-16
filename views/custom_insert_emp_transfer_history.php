@@ -214,16 +214,16 @@ foreach ($defalut_fields as $dfield) {
                         <div class="card-header">
                             <h5><?= __('Employees Bulk Transfer') ?></h5>
                             <div class="row mt-4">
-                                <div class="col-lg-2 text-right"><span>Month</span></div>
+                                <div class="col-lg-2 text-right"><span><?= __('Month'); ?></span></div>
                                 <div class="col-lg-2">
-                                    <input aria-label="Month Year Cal" class="form-control" type="month" name="month_year_cal" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
+                                    <input aria-label="<?= htmlspecialchars(__('Month Year Cal'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="month_year_cal" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
                                 </div>
                                 <div class="col-lg-1">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Filter</button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter'); ?></button>
                                 </div>
 
                                 <div class="col-lg-4">
-                                    <select aria-label="Displayattributes[]" class="form-control selectpicker form-select js-example-basic-multiple-limit_custom" name="displayattributes[]" multiple="multiple">
+                                    <select aria-label="<?= htmlspecialchars(__('Displayattributes'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control selectpicker form-select js-example-basic-multiple-limit_custom" name="displayattributes[]" multiple="multiple">
                                         <?php $jd=0; foreach ($employees_fieldlist as $fkey => $fieldvalue) { if(in_array($fkey, (array)$defalut_fields)){ $jd++;
 }  ?>
                                             <option value="<?php echo $fkey; ?>" <?php echo in_array($fkey, (array)$defalut_fields) ? 'selected' : ''; ?>  <?php echo $jd==1?'locked="locked"':''; ?>> <?php echo $fieldvalue['lable']; ?> </option>
@@ -247,8 +247,8 @@ foreach ($defalut_fields as $dfield) {
         <div class="card card-custom col-lg-12 hidedive" style="display: none;">
             <div class="row p-4">
                 <div class="form-group col-lg-3 mt-10 mb-10"  id="bulkcategory" style="display: none;">
-                    <span class="mb-2">Transfer Category</span></br>
-                    <select aria-label="Bulkchangecategory" onchange="showbulkchangefilter(this.value);" id="bulkchangecategory" name="bulkchangecategory" class="form-control form-select js-example-basic-single mt-2" >
+                    <span class="mb-2"><?= __('Transfer Category'); ?></span></br>
+                    <select aria-label="<?= htmlspecialchars(__('Bulkchangecategory'), ENT_QUOTES, 'UTF-8'); ?>" onchange="showbulkchangefilter(this.value);" id="bulkchangecategory" name="bulkchangecategory" class="form-control form-select js-example-basic-single mt-2" >
                         <?php
                         foreach ($bulkchangecategory as $filter) {
                             ?>
@@ -256,15 +256,15 @@ foreach ($defalut_fields as $dfield) {
 } ?> value="<?php echo $filter['application_tablename']."|".$filter['application_table_fieldname'].'|'.$filter['id'].'|'.$filter['update_employees_fieldname'].'|'.$filter['insert_history_tablename'];?>"><?php echo $filter['category_name'];?></option>
                         <?php } ?>
                     </select></br>
-                    <span class="form-text text-muted">Select Bulk Transfer Category</span>
+                    <span class="form-text text-muted"><?= __('Select Bulk Transfer Category'); ?></span>
                 </div>
                 <div class="col-lg-3 mt-10 mb-10" id="application_tablename_filter">
 
                 </div>
                 <div class="col-lg-3 mt-10 mb-10" id="effectdate" style="display: none">
-                    <span>Effective From</span></br>
-                    <input aria-label="Effective Date" type="date" class="form-control mt-2"  id="kt_datepicker_4_1"  name="effective_date" style="height: 45px;"/>
-                    <span class="form-text text-muted">Enter Effective From</span>
+                    <span><?= __('Effective From'); ?></span></br>
+                    <input aria-label="<?= htmlspecialchars(__('Effective Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control mt-2"  id="kt_datepicker_4_1"  name="effective_date" style="height: 45px;"/>
+                    <span class="form-text text-muted"><?= __('Enter Effective From'); ?></span>
                 </div>
                 <div class="col-lg-2 mt-10 mb-10">
                     <input type="hidden" id="application_tablename">
@@ -311,7 +311,7 @@ foreach ($defalut_fields as $dfield) {
 
                                             <div class="checkbox-fade fade-in-primary">
                                                 <label class="form-label">
-                                                    <input aria-label="Bulkemplist[]" type="checkbox" name="bulkemplist[]" id="bulkemplist" onchange="selectempdata(this.value);"  value="<?php echo $empvalue['id']; ?>">
+                                                    <input aria-label="<?= htmlspecialchars(__('Bulkemplist'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox" name="bulkemplist[]" id="bulkemplist" onchange="selectempdata(this.value);"  value="<?php echo $empvalue['id']; ?>">
                                                     <span class="cr">
                                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                     </span>
@@ -321,9 +321,9 @@ foreach ($defalut_fields as $dfield) {
                                         </td>
                                         <td style="width: 15%;">
                                             <?php if($empvalue['image']!="") { ?>
-                                                <img src="uploads/all/<?php echo $empvalue['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $empvalue['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empvalue['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empvalue['display_name']); ?></span>
                                             <?php } ?>
                                             <?php echo $empvalue['display_name']; ?>
                                         </td>

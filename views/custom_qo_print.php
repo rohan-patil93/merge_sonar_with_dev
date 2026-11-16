@@ -253,7 +253,7 @@ if ($party_table == "customers" || $party_table = "") {
     <html lang="en">
 
     <head>
-        <title>Quotation Print</title>
+        <title><?= __('Quotation Print'); ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -294,7 +294,7 @@ if ($party_table == "customers" || $party_table = "") {
             function printDiv(divId) {
                 var printContents = document.getElementById(divId).innerHTML;
                 var originalContents = document.body.innerHTML;
-                document.body.innerHTML = "<html><head><title>Quotation Print</title></head><body>" + printContents + "</body>";
+                document.body.innerHTML = "<html><head><title><?= htmlspecialchars(__('Quotation Print'), ENT_QUOTES, 'UTF-8'); ?></title></head><body>" + printContents + "</body>";
                 window.print();
                 document.body.innerHTML = originalContents;
             }
@@ -336,7 +336,7 @@ if ($party_table == "customers" || $party_table = "") {
                 <?php
 
                 if ($transaction_table == "purchase_orders" && ($config['name'] == "National Rubber Industries")) {
-                    echo "Work Order";
+                    echo __('Work Order');
                 } elseif ($transaction_table == "quotations") {
                     echo "Enquiry";
                 } elseif ($transaction_table_config['page_title'] != "") {
@@ -347,7 +347,7 @@ if ($party_table == "customers" || $party_table = "") {
                 }
                 ?>
                 <div class="" style="float: right;margin-right: 15px;">
-                    <img src="uploads/all/<?php echo $config['display_logo']; ?>" style="width:80px;" alt="Logo">
+                    <img src="uploads/all/<?php echo $config['display_logo']; ?>" style="width:80px;" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
             </h1>
             <div class="" style="width:49%;display: inline-block;vertical-align: middle;">
@@ -371,25 +371,25 @@ if ($party_table == "customers" || $party_table = "") {
                         </td>
                     </tr>
                     <tr>
-                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Due Date:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Due Date'); ?>:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;">
                             <?php echo date("d M Y", strtotime($transaction['due_date'])); ?>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Contact Person:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Contact Person'); ?>:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;">
                             <?php echo $bill_by['display_name']; ?>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Email ID:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Email ID'); ?>:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;">
                             <?php echo emptyCheck($bill_by['user_email']); ?>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Phone Number:</th>
+                        <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Phone Number'); ?>:</th>
                         <td style="padding-top: 5px;text-align: left;font-size: 12px;">
                             <?php echo emptyCheck($bill_by['user_mobile']); ?>
                         </td>
@@ -410,7 +410,7 @@ if ($party_table == "customers" || $party_table = "") {
                         $transaction['doc_ref_date'] = ($transaction['doc_ref_date'] != '0000-00-00' && $transaction['doc_ref_date'] != '1970-01-01') ? date("d M Y", strtotime($transaction['doc_ref_date'])) : "";
                         ?>
                         <tr>
-                            <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">Doc Ref No./Date:
+                            <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('Doc Ref No./Date'); ?>:
                             </th>
                             <td style="padding-top: 5px;text-align: left;font-size: 12px;">
                                 <?php echo emptyCheck($transaction['doc_ref_no']) . " / " . emptyCheck($transaction['doc_ref_date']); ?>
@@ -420,7 +420,7 @@ if ($party_table == "customers" || $party_table = "") {
                     if ($refrance_transaction_master['transaction_number'] != "" && $transaction_table == "goods_receipt_notes") { ?>
 
                         <tr>
-                            <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">SOB Number:</th>
+                            <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('SOB Number'); ?>:</th>
                             <td style="padding-top: 5px;text-align: left;font-size: 12px;">
                                 <?php echo emptyCheck($refrance_transaction_master['transaction_number']); ?>
                             </td>
@@ -430,7 +430,7 @@ if ($party_table == "customers" || $party_table = "") {
                     if ($customer_lut_bond_details['bond_no'] != "" && $paymentshow == "Y") {
                         ?>
                         <tr>
-                            <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;">LUT/BOND:</th>
+                            <th scope="col" style="padding-top: 5px;text-align: left;font-size: 12px;"><?= __('LUT/BOND'); ?>:</th>
                             <td style="padding-top: 5px;text-align: left;font-size: 12px;">
                                 <?php echo emptyCheck($customer_lut_bond_details['lut_no']) . " / " . emptyCheck($customer_lut_bond_details['bond_no']); ?>
                             </td>
@@ -451,13 +451,13 @@ if ($party_table == "customers" || $party_table = "") {
                     </p>
                     <table style="width: 100%;">
                         <tr>
-                            <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:</th>
+                            <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('GSTIN'); ?>:</th>
                             <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                 <?php echo $bill_by_gst_number; ?>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="col" style="font-size: 12px;text-align: left;">PAN:</th>
+                            <th scope="col" style="font-size: 12px;text-align: left;"><?= __('PAN'); ?>:</th>
                             <td style="text-align: right;font-size: 12px;"><?php echo $bill_by_pan_number; ?></td>
                         </tr>
                     </table>
@@ -478,14 +478,14 @@ if ($party_table == "customers" || $party_table = "") {
                             </p>
                             <table style="width: 100%;">
                                 <tr>
-                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('GSTIN'); ?>:
                                     </th>
                                     <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                         <?php echo $Billed_to_gstin; ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="col" style="font-size: 12px;text-align: left;">PAN:</th>
+                                    <th scope="col" style="font-size: 12px;text-align: left;"><?= __('PAN'); ?>:</th>
                                     <td style="text-align: right;font-size: 12px;"><?php echo $Billed_to_pan_no; ?></td>
                                 </tr>
                             </table>
@@ -504,14 +504,14 @@ if ($party_table == "customers" || $party_table = "") {
                             </p>
                             <table style="width: 100%;">
                                 <tr>
-                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">GSTIN:
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('GSTIN'); ?>:
                                     </th>
                                     <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                         <?php echo $Shipped_to_gstin; ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="col" style="font-size: 12px;text-align: left;">PAN:</th>
+                                    <th scope="col" style="font-size: 12px;text-align: left;"><?= __('PAN'); ?>:</th>
                                     <td style="text-align: right;font-size: 12px;"><?php echo $Shipped_to_pan_no; ?>
                                     </td>
                                 </tr>
@@ -523,20 +523,20 @@ if ($party_table == "customers" || $party_table = "") {
             <table style="width:99%;margin:10px 0 0 0;">
                 <tr style="background: #eeeeee;">
                     <th scope="col" style="padding:5px;text-align: left;">#</th>
-                    <th scope="col" style="padding:5px;text-align: left;">Item Name</th>
-                    <th scope="col" style="padding:5px;text-align: left;">Description</th>
+                    <th scope="col" style="padding:5px;text-align: left;"><?= __('Item Name'); ?></th>
+                    <th scope="col" style="padding:5px;text-align: left;"><?= __('Description'); ?></th>
                     <?php if ($party_code_field == "Y") { ?>
-                        <th scope="col" style="padding:5px;text-align: left;">Party Code</th>
+                        <th scope="col" style="padding:5px;text-align: left;"><?= __('Party Code'); ?></th>
                     <?php } ?>
-                    <th scope="col" style="padding:10px;">HSN/SAC</th>
-                    <th scope="col" style="padding:10px;">UOM</th>
+                    <th scope="col" style="padding:10px;"><?= __('HSN/SAC'); ?></th>
+                    <th scope="col" style="padding:10px;"><?= __('UOM'); ?></th>
 
-                    <th scope="col" style="padding:10px;text-align: right;">QTY.</th>
+                    <th scope="col" style="padding:10px;text-align: right;"><?= __('QTY.'); ?></th>
                     <?php if ($amountpartshowornot == 'Y') { ?>
-                        <th scope="col" style="padding:5px;text-align: right;">Rate</th>
-                        <th scope="col" style="padding:5px;text-align: right;">Tax</th>
-                        <th scope="col" style="padding:10px;text-align: right;">Disc</th>
-                        <th scope="col" style="padding:5px;text-align: right;">Total</th>
+                        <th scope="col" style="padding:5px;text-align: right;"><?= __('Rate'); ?></th>
+                        <th scope="col" style="padding:5px;text-align: right;"><?= __('Tax'); ?></th>
+                        <th scope="col" style="padding:10px;text-align: right;"><?= __('Disc'); ?></th>
+                        <th scope="col" style="padding:5px;text-align: right;"><?= __('Total'); ?></th>
                     <?php } ?>
                 </tr>
                 <?php $seq = 1;
@@ -595,13 +595,13 @@ if ($party_table == "customers" || $party_table = "") {
 
                         <div class=""
                             style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
-                            <h3 style="font-size: 12px;color:#333333;margin: 0; white-space: normal;">Bank & UPI Detail
+                            <h3 style="font-size: 12px;color:#333333;margin: 0; white-space: normal;"><?= htmlspecialchars(__('Bank & UPI Detail'), ENT_QUOTES, 'UTF-8'); ?>
                             </h3>
                             <?php if ($paymentshow == 'Y') { ?>
                                 <table style="width: 100%; margin:10px 0 0 0;">
                                     <tr>
                                         <th scope="col"
-                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Bank Name:
+                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('Bank Name'); ?>:
                                         </th>
                                         <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;">
                                             <?php echo emptyCheck($bank_accounts['bank_name']); ?>
@@ -609,10 +609,9 @@ if ($party_table == "customers" || $party_table = "") {
                                         <td rowspan="6" style="width: 20%; text-align: center;">
                                             <?php if ($bank_accounts['upi_qr_code_image'] != '') { ?>
 
-                                                <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight: 500;">Scan to
-                                                    pay via UPI</h3>
+                                                <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight: 500;"><?= __('Scan to pay via UPI'); ?></h3>
                                                 <img src="uploads/all/<?php echo $bank_accounts['upi_qr_code_image']; ?>"
-                                                    style="width:80px;margin: 10px 0 0 0;" alt="QR Code">
+                                                    style="width:80px;margin: 10px 0 0 0;" alt="<?= htmlspecialchars(__('QR Code'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <?php if ($bank_accounts['upi_id'] != "") { ?>
                                                     <p style="font-size: 12px;color:#333333;font-weight: bold;">
                                                         <?php echo emptyCheck($bank_accounts['upi_id']); ?>
@@ -624,44 +623,40 @@ if ($party_table == "customers" || $party_table = "") {
                                     </tr>
                                     <tr>
                                         <th scope="col"
-                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account
-                                            Holder:</th>
+                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('Account Holder'); ?>:</th>
                                         <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;">
                                             <?php echo emptyCheck($bank_accounts['bank_contact_person']); ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"
-                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account
-                                            Number:</th>
+                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('Account Number'); ?>:</th>
                                         <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;">
                                             <?php echo emptyCheck($bank_accounts['bank_account_number']); ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"
-                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">IFSC
-                                            Number:</th>
+                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('IFSC Number'); ?>:</th>
                                         <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;">
                                             <?php echo emptyCheck($bank_accounts['ifsc_code']); ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"
-                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">Account
-                                            Type:</th>
+                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('Account Type'); ?>:</th>
                                         <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;"><?php if ($bank_accounts['account_type'] == "C") {
-                                            echo "Current Account";
+                                            echo __('Current Account');
                                         }
                                         if ($bank_accounts['account_type'] == "S") {
-                                            echo "Saving Account";
+                                            echo __('Saving Account');
                                         } ?>
 
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="col"
-                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;">UPI:</th>
+                                            style="padding-top: 5px;font-size: 12px;text-align: left;width: 30%;"><?= __('UPI'); ?>:</th>
                                         <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;">
                                             <?php echo emptyCheck($bank_accounts['upi_id']); ?>
                                         </td>
@@ -675,14 +670,14 @@ if ($party_table == "customers" || $party_table = "") {
                         <?php if ($amountpartshowornot == 'Y') { ?>
                             <table style="width: 100%; margin:10px 0 0 0;">
                                 <tr>
-                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">Sub Total
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('Sub Total'); ?>
                                     </th>
                                     <td style="padding-top: 5px;padding-bottom: 5px;text-align:right;font-size: 12px;">
                                         <?php echo currencyFormat($transaction['amount'], $config); ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">Discount</th>
+                                    <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('Discount'); ?></th>
                                     <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                         <?php echo currencyFormat($transaction['discount_amount'], $config); ?>
                                     </td>
@@ -711,47 +706,47 @@ if ($party_table == "customers" || $party_table = "") {
                                         if ($transaction['originator_state_id'] == $transaction['supplier_state_id']) { ?>
                                             <tr>
                                                 <td style="padding-top: 5px;font-size: 12px;text-align: left;">
-                                                    <?php echo $split_1_name; ?> @ <?php echo $ktax['percentage'] * $split_1; ?>% on
+                                                    <?php echo $split_1_name; ?> @ <?php echo $ktax['percentage'] * $split_1; ?><?= __('% on'); ?>
                                                     <?php echo currencyFormat($ktax['amount'], $config); ?>
                                                 </td>
                                                 <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                                     <span
                                                         id="dis_taxRateid"><?php echo currencyFormat($ktax['tax_amount'] * $split_1, $config); ?></span>
-                                                    <input aria-label="Input field"
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"
                                                         value="<?php echo currencyFormat($ktax['tax_amount'] * $split_1, $config); ?>"
                                                         type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly
-                                                        placeholder="Tax Amount">
+                                                        placeholder="<?= htmlspecialchars(__('Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="padding-top: 5px;font-size: 12px;text-align: left;">
                                                     <?php echo $split_2_name; ?> @
-                                                    <?php echo currencyFormat($ktax['percentage'] * $split_2, $config); ?>% on
+                                                    <?php echo currencyFormat($ktax['percentage'] * $split_2, $config); ?><?= __('% on'); ?>
                                                     <?php echo currencyFormat($ktax['amount'], $config); ?>
                                                 </td>
                                                 <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                                     <span
                                                         id="dis_taxRateid_2"><?php echo currencyFormat($ktax['tax_amount'] * $split_2, $config); ?></span>
-                                                    <input aria-label="Input field"
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"
                                                         value="<?php echo currencyFormat($ktax['tax_amount'] * $split_2, $config); ?>"
                                                         type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly
-                                                        placeholder="Tax Amount">
+                                                        placeholder="<?= htmlspecialchars(__('Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 </td>
                                             </tr>
                                         <?php } else { ?>
                                             <tr>
                                                 <td style="padding-top: 5px;font-size: 12px;text-align: left;">
                                                     <?php echo $split_1_name; ?> @
-                                                    <?php echo currencyFormat($ktax['percentage'], $config); ?>% on
+                                                    <?php echo currencyFormat($ktax['percentage'], $config); ?><?= __('% on'); ?>
                                                     <?php echo currencyFormat($ktax['amount'], $config); ?>
                                                 </td>
                                                 <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                                     <span
                                                         id="dis_taxRateid_3"><?php echo currencyFormat($ktax['tax_amount'], $config); ?></span>
-                                                    <input aria-label="Input field"
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"
                                                         value="<?php echo currencyFormat($ktax['tax_amount'], $config); ?>"
                                                         type="hidden" class="form-control amount" name="dis_taxRate" id="" readonly
-                                                        placeholder="Tax Amount">
+                                                        placeholder="<?= htmlspecialchars(__('Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -761,7 +756,7 @@ if ($party_table == "customers" || $party_table = "") {
                                 <?php ?>
                                 <?php if ($transaction['security_deposit'] != "" && $transaction['security_deposit'] != "0") { ?>
                                     <tr>
-                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;"> Security Deposit
+                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;"> <?= __('Security Deposit'); ?>
                                         </td>
                                         <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                             <span><?php echo currencyFormat($transaction['security_deposit'], $config); ?></span>
@@ -770,7 +765,7 @@ if ($party_table == "customers" || $party_table = "") {
                                 <?php }
                                 if ($transaction['rounding_off'] != "" && $transaction['rounding_off'] != "0") { ?>
                                     <tr>
-                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;"> Rounding Off
+                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;"> <?= __('Rounding Off'); ?>
                                         </td>
                                         <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                             <span><?php echo currencyFormat($transaction['rounding_off'], $config); ?></span>
@@ -780,7 +775,7 @@ if ($party_table == "customers" || $party_table = "") {
                                 <tr style="border-top:1px solid #444444;border-bottom: 1px solid #444444;">
                                     <th scope="col"
                                         style="padding-top: 5px;text-align: left;border-top:1px solid #cccccc;font-weight: 500;">
-                                        <span style="font-size: 21px;">Total</span>
+                                        <span style="font-size: 21px;"><?= __('Total'); ?></span>
                                     </th>
                                     <th scope="col"
                                         style="padding-top: 5px;text-align: right;border-top:1px solid #cccccc;font-weight: 500">
@@ -791,7 +786,7 @@ if ($party_table == "customers" || $party_table = "") {
 
                                 <?php if ($transaction_table == "purchase_orders") { ?>
                                     <tr>
-                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;"> Delivery Schedule
+                                        <td style="padding-top: 5px;font-size: 12px;text-align: left;"> <?= __('Delivery Schedule'); ?>
                                         </td>
                                         <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                             <span><?php echo emptyCheck($transaction['printing_notes']); ?></span>
@@ -805,7 +800,7 @@ if ($party_table == "customers" || $party_table = "") {
 
                                 ?>
                                 <tr>
-                                    <td style="padding-top: 5px;font-size: 12px;text-align: left;"> Payment Terms
+                                    <td style="padding-top: 5px;font-size: 12px;text-align: left;"> <?= __('Payment Terms'); ?>
                                     </td>
                                     <td style="padding-top: 5px;text-align: right;font-size: 12px;">
                                         <span><?php echo $payment_terms[$transaction['payment_terms']]['payment_term_name']; ?></span>
@@ -820,8 +815,8 @@ if ($party_table == "customers" || $party_table = "") {
                                             <table class=" table table-bordered mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col" class="p-2">Due Date</th>
-                                                        <th scope="col" class="p-2 text-right">Amount</th>
+                                                        <th scope="col" class="p-2"><?= __('Due Date'); ?></th>
+                                                        <th scope="col" class="p-2 text-right"><?= __('Amount'); ?></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -834,7 +829,7 @@ if ($party_table == "customers" || $party_table = "") {
                                                             <td class="p-2 text-right">
                                                                 <?php echo customeummarmonyformate($pth['amount']); ?>
                                                                 <?php if ($pth['extra_date'] != "" && $pth['extra_amt'] != "") { ?>
-                                                                    <span class='d-block f-10 f-w-600'>Before Date
+                                                                    <span class='d-block f-10 f-w-600'><?= __('Before Date'); ?>
                                                                         <?php echo date("d M Y", strtotime($pth['extra_date'])) . " (" . customeummarmonyformate($pth['extra_amt']) . ")"; ?></span> <?php
                                                                 } ?>
                                                             </td>
@@ -855,8 +850,7 @@ if ($party_table == "customers" || $party_table = "") {
                         </table>
                         <?php if ($amountpartshowornot == "Y") { ?>
                             <div style="margin-top: 10px;vertical-align: top;">
-                                <span style="font-size: 12px; color: #333333;font-weight: 600;">Invoice total in
-                                    words</span>
+                                <span style="font-size: 12px; color: #333333;font-weight: 600;"><?= __('Invoice total in words'); ?></span>
                                 <p style="font-size: 12px; color: #333333; margin-top: 10px;white-space:initial;">
                                     <?php echo numberToWordFormate($transaction['total_amount']); ?>
                                 </p>
@@ -873,7 +867,7 @@ if ($party_table == "customers" || $party_table = "") {
                             <div class=""
                                 style="display: block; box-sizing:border-box;background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right: 10px; margin-top:10px;">
                                 <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight:bold; white-space: normal;">
-                                    Additional Notes</h3>
+                                    <?= __('Additional Notes'); ?></h3>
                                 <p style="font-size:12px;color:#333333; white-space: normal;">
                                     <?php echo emptyCheck($transaction['printing_notes']); ?>
                                 </p>
@@ -883,24 +877,22 @@ if ($party_table == "customers" || $party_table = "") {
                     <td style="width:40%;">
                         <div style="vertical-align: top;">
                             <span
-                                style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500; white-space: normal;">For
+                                style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500; white-space: normal;"><?= __('For'); ?>
                                 <?php echo $config['name']; ?></span>
                             <p
                                 style="background: #eeeeee;height:45px;margin-bottom: 0px;margin-top: 0; white-space: normal;">
 
                             </p>
                             <span
-                                style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500; white-space: normal;">Authorised
-                                Signature</span>
+                                style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500; white-space: normal;"><?= __('Authorised Signature'); ?></span>
                             <span
-                                style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500; white-space: normal;">This
-                                is a computer generated invoice no signature required</span>
+                                style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500; white-space: normal;"><?= __('This is a computer generated invoice no signature required'); ?></span>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <span style="float:inline-end;">E. & O.E.</span>
+                        <span style="float:inline-end;"><?= htmlspecialchars(__('E. & O.E.'), ENT_QUOTES, 'UTF-8'); ?></span>
                     </td>
                 </tr>
             </table>
@@ -913,10 +905,10 @@ if ($party_table == "customers" || $party_table = "") {
         </div>
         <div class="invoice-btn-section clearfix d-print-none" style="margin-top:5px;">
             <button class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printDiv');">
-                <i class="fa fa-print"></i> Print
+                <i class="fa fa-print"></i> <?= __('Print'); ?>
             </button>
             <button class="btn waves-effect waves-light btn-grd-info" onclick="convertHTMLToPDF();">
-                <i class="fa fa-download"></i> Download
+                <i class="fa fa-download"></i> <?= __('Download'); ?>
             </button>
         </div>
     </body>

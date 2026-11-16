@@ -55,25 +55,25 @@ function amcComplaintListAssetDisplay($row)
 <div class="page-body">
     <div class="card">
         <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
-            <h5 class="mb-0">AMC Complaints List <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$tableData) ?? 0; ?></span></h5>
+            <h5 class="mb-0"><?= __('AMC Complaints List'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$tableData) ?? 0; ?></span></h5>
             <div class="card-header-right d-flex align-items-center gap-3 flex-wrap">
                 <a href="index.php?option=COM_INSERT_AMC_COMPLAINTS" class="btn btn-success  desktop-view">
                     <i class="icofont icofont-plus text-white"></i>
-                AMC Complaint</a>
+                <?= __('AMC Complaint'); ?></a>
 
                 <ul class="nav md-tabs infisuite_tab">
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12  ACTIVE active" data-bs-toggle="tab" href="#ACTIVE" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Active
+                        <a class="nav-link f-w-600 f-12  ACTIVE active" data-bs-toggle="tab" href="#ACTIVE" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Active'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo $active_cnt; ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 PENDING" data-bs-toggle="tab" href="#PENDING" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Pending
+                        <a class="nav-link f-w-600 f-12 PENDING" data-bs-toggle="tab" href="#PENDING" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Pending'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo $pending_cnt; ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link f-w-600 f-12 CLOSED" data-bs-toggle="tab" href="#CLOSED" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Closed
+                        <a class="nav-link f-w-600 f-12 CLOSED" data-bs-toggle="tab" href="#CLOSED" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Closed'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo $closed_cnt; ?></span>
                         </a>
                     </li>
@@ -87,17 +87,17 @@ function amcComplaintListAssetDisplay($row)
                         <table class="table table-hover table-striped mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col" class="text-nowrap">Sl No.</th>
-                                    <th scope="col" style="min-width: 160px;">Complaint Name</th>
-                                    <th scope="col" class="text-nowrap">Priority</th>
-                                    <th scope="col" class="text-nowrap">Date</th>
-                                    <th scope="col" style="min-width: 140px;">Contract</th>
-                                    <th scope="col" style="min-width: 130px;">Location</th>
-                                    <th scope="col" style="min-width: 130px;">Asset</th>
-                                    <th scope="col" style="min-width: 120px;">Schedule</th>
-                                    <th scope="col" class="text-nowrap">ServiceNow Ref</th>
-                                    <th scope="col" class="text-nowrap">Status</th>
-                                    <th scope="col" class="text-nowrap">Action</th>
+                                    <th scope="col" class="text-nowrap"><?= __('Sl No.'); ?></th>
+                                    <th scope="col" style="min-width: 160px;"><?= __('Complaint Name'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Priority'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Date'); ?></th>
+                                    <th scope="col" style="min-width: 140px;"><?= __('Contract'); ?></th>
+                                    <th scope="col" style="min-width: 130px;"><?= __('Location'); ?></th>
+                                    <th scope="col" style="min-width: 130px;"><?= __('Asset'); ?></th>
+                                    <th scope="col" style="min-width: 120px;"><?= __('Schedule'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('ServiceNow Ref'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Status'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -127,11 +127,11 @@ function amcComplaintListAssetDisplay($row)
                                             <td class="text-nowrap"><span class="form-label label label-lg  label-primary label-inline f-w-900 " ><?php echo $row['name']; ?></span> </td>
                                             <td class="text-nowrap">
                                                 <a class="m-r-5"
-                                                    href="index.php?option=COM_INSERT_AMC_COMPLAINTS&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="Edit Details">
+                                                    href="index.php?option=COM_INSERT_AMC_COMPLAINTS&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-edit p-2 b-radius-5"></i>
                                                 </a>
                                                 <a class="m-r-5" target="_blank"
-                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="View Details">
+                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-eye p-2 b-radius-5"></i>
                                                 </a>
                                             </td>
@@ -143,7 +143,7 @@ function amcComplaintListAssetDisplay($row)
                                         <td colspan="11">
                                             <div class="text-center">
                                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                                    <i class="fa fa-warning"></i> No Records
+                                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                                 </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -163,17 +163,17 @@ function amcComplaintListAssetDisplay($row)
                         <table class="table table-hover table-striped mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col" class="text-nowrap">Sl No.</th>
-                                    <th scope="col" style="min-width: 160px;">Complaint Name</th>
-                                    <th scope="col" class="text-nowrap">Priority</th>
-                                    <th scope="col" class="text-nowrap">Date</th>
-                                    <th scope="col" style="min-width: 140px;">Contract</th>
-                                    <th scope="col" style="min-width: 130px;">Location</th>
-                                    <th scope="col" style="min-width: 130px;">Asset</th>
-                                    <th scope="col" style="min-width: 120px;">Schedule</th>
-                                    <th scope="col" class="text-nowrap">ServiceNow Ref</th>
-                                    <th scope="col" class="text-nowrap">Status</th>
-                                    <th scope="col" class="text-nowrap">Action</th>
+                                    <th scope="col" class="text-nowrap"><?= __('Sl No.'); ?></th>
+                                    <th scope="col" style="min-width: 160px;"><?= __('Complaint Name'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Priority'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Date'); ?></th>
+                                    <th scope="col" style="min-width: 140px;"><?= __('Contract'); ?></th>
+                                    <th scope="col" style="min-width: 130px;"><?= __('Location'); ?></th>
+                                    <th scope="col" style="min-width: 130px;"><?= __('Asset'); ?></th>
+                                    <th scope="col" style="min-width: 120px;"><?= __('Schedule'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('ServiceNow Ref'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Status'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -204,7 +204,7 @@ function amcComplaintListAssetDisplay($row)
                                             <td class="text-nowrap"><span class="form-label label label-lg  label-warning label-inline f-w-900 " ><?php echo $row['name']; ?></span> </td>
                                             <td class="text-nowrap">
                                                 <a class="m-r-5" target="_blank"
-                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="View Details">
+                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-eye p-2 b-radius-5"></i>
                                                 </a>
                                             </td>
@@ -216,7 +216,7 @@ function amcComplaintListAssetDisplay($row)
                                         <td colspan="11">
                                             <div class="text-center">
                                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                                    <i class="fa fa-warning"></i> No Records
+                                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                                 </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -236,17 +236,17 @@ function amcComplaintListAssetDisplay($row)
                         <table class="table table-hover table-striped mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col" class="text-nowrap">Sl No.</th>
-                                    <th scope="col" style="min-width: 160px;">Complaint Name</th>
-                                    <th scope="col" class="text-nowrap">Priority</th>
-                                    <th scope="col" class="text-nowrap">Date</th>
-                                    <th scope="col" style="min-width: 140px;">Contract</th>
-                                    <th scope="col" style="min-width: 130px;">Location</th>
-                                    <th scope="col" style="min-width: 130px;">Asset</th>
-                                    <th scope="col" style="min-width: 120px;">Schedule</th>
-                                    <th scope="col" class="text-nowrap">ServiceNow Ref</th>
-                                    <th scope="col" class="text-nowrap">Status</th>
-                                    <th scope="col" class="text-nowrap">Action</th>
+                                    <th scope="col" class="text-nowrap"><?= __('Sl No.'); ?></th>
+                                    <th scope="col" style="min-width: 160px;"><?= __('Complaint Name'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Priority'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Date'); ?></th>
+                                    <th scope="col" style="min-width: 140px;"><?= __('Contract'); ?></th>
+                                    <th scope="col" style="min-width: 130px;"><?= __('Location'); ?></th>
+                                    <th scope="col" style="min-width: 130px;"><?= __('Asset'); ?></th>
+                                    <th scope="col" style="min-width: 120px;"><?= __('Schedule'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('ServiceNow Ref'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Status'); ?></th>
+                                    <th scope="col" class="text-nowrap"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -277,7 +277,7 @@ function amcComplaintListAssetDisplay($row)
                                             <td class="text-nowrap"><span class="form-label label label-lg  label-success label-inline f-w-900 " ><?php echo $row['name']; ?></span> </td>
                                             <td class="text-nowrap">
                                                 <a class="m-r-5" target="_blank"
-                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="View Details">
+                                                    href="index.php?option=COM_VIEW_AMC_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-eye p-2 b-radius-5"></i>
                                                 </a>
                                             </td>
@@ -289,7 +289,7 @@ function amcComplaintListAssetDisplay($row)
                                         <td colspan="11">
                                             <div class="text-center">
                                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                                    <i class="fa fa-warning"></i> No Records
+                                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                                 </p>
                                                 <div class="text-center px-4">
                                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">

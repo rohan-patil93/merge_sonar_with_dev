@@ -98,14 +98,14 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="">Candidate Sources</h5>
+      <h5 class=""><?= __('Candidate Sources'); ?></h5>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate Sources" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate Sources" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate Sources" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate Sources" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -118,25 +118,25 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
             <div class="col-lg-2">
               <div class="form-group">
                 <div class="date">
-                   <input aria-label="Fromdate" type="text" class="form-control datepicker"  name="fromdate"  value="<?php echo fromDate($fromdate); ?>" />
+                   <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker"  name="fromdate"  value="<?php echo fromDate($fromdate); ?>" />
                 </div>
               </div>
             </div>
             <div class="col-lg-2">
               <div class="form-group">
                 <div class="date">
-                  <input aria-label="Todate" type="text" class="form-control datepicker"  name="todate"  value="<?php echo fromDate($todate); ?>" />
+                  <input aria-label="<?= htmlspecialchars(__('Todate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker"  name="todate"  value="<?php echo fromDate($todate); ?>" />
                 </div>
               </div>
             </div>
             <div class="col-lg-3">
                <div class="dropdown border w-100">
-                  <button type="button" class="dropbtn w-100 text-start form-control">All Sources</button>
+                  <button type="button" class="dropbtn w-100 text-start form-control"><?= __('All Sources'); ?></button>
                   <div class="dropdown-content">
                   <?php foreach($result['job_hiring_source'] as $source){ ?>
                     <div class="border-checkbox-section p-2">
                       <div class="border-checkbox-group border-checkbox-group-primary">
-                        <input aria-label="Input field"  <?php if(in_array($source['id'],(array)$view_source)){ echo "checked";
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  <?php if(in_array($source['id'],(array)$view_source)){ echo "checked";
 } ?> class="border-checkbox" type="checkbox" name="hiring_source_id[]"  value="<?php echo $source['id']; ?>" id="<?php echo $source['hiring_source_name']; ?>">
                         <label class="form-label border-checkbox-label mb-0" for="<?php echo $source['hiring_source_name']; ?>"><?php echo $source['hiring_source_name']; ?></label>
                       </div>
@@ -150,7 +150,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
             <div class="col-lg-3">
               <nav class="all-employee">
                 <ul>
-                  <li class="d-block border"><a href="#">All Jobs</a>
+                  <li class="d-block border"><a href="#"><?= __('All Jobs'); ?></a>
                     <ul>
                       <?php foreach($job_postings as $jobtitle){ ?>
                       <li><a href="#"><?php echo $jobtitle['name']; ?> <i class="ti-angle-right float-end f-12 m-t-5"></i> </a>
@@ -159,7 +159,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
                           <li>
                             <div class="border-checkbox-section">
                               <div class="border-checkbox-group border-checkbox-group-primary">
-                                <input aria-label="Input field"  <?php if(in_array($jobpost['id'],(array)$view_post)){ echo "checked";
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  <?php if(in_array($jobpost['id'],(array)$view_post)){ echo "checked";
 } ?> class="border-checkbox" type="checkbox" name="job_post[]" value="<?php echo $jobpost['id']; ?>" id="<?php echo $jobpost['job_number']; ?>" >
                                 <label class="form-label border-checkbox-label" for="<?php echo $jobpost['job_number']; ?>">
                                   <?php echo $jobpost['job_name']." (".$jobpost['job_number'].")"; ?>
@@ -178,7 +178,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
           </div>
             <div class="col-lg-2">
               <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                Apply
+                <?= __('Apply'); ?>
               </button>
             <input type="hidden" name="submit" value="applyform">
             </div>
@@ -188,11 +188,11 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
         <div class="col-lg-2">
           <ul class="nav nav-tabs md-tabs">
             <li class="nav-item">
-              <a class="nav-link active" data-bs-toggle="tab" href="#graph" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-pie-chart m-r-10"></i>Graph</a>
+              <a class="nav-link active" data-bs-toggle="tab" href="#graph" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-pie-chart m-r-10"></i><?= __('Graph'); ?></a>
               <div class="slide"></div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" href="#table" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-view-list-alt m-r-10 f-w-600 f-14 text-muted"></i>Table</a>
+              <a class="nav-link" data-bs-toggle="tab" href="#table" role="tab" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-view-list-alt m-r-10 f-w-600 f-14 text-muted"></i><?= __('Table'); ?></a>
               <div class="slide"></div>
             </li>
           </ul>
@@ -206,8 +206,8 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
         <div class="tab-pane active" id="graph" role="tabpanel">
           <div class="row">
             <div class="col-lg-5">
-              <h4 class="f-w-600 text-success">Conversion by Source</h4>
-              <p class="mb-0 f-12">This shows how effective sources are in converting applicants into hires.</p>
+              <h4 class="f-w-600 text-success"><?= __('Conversion by Source'); ?></h4>
+              <p class="mb-0 f-12"><?= __('This shows how effective sources are in converting applicants into hires.'); ?></p>
             </div>
             <div class="col-lg-7">
               <div class="row">
@@ -216,21 +216,21 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
                 </div>
                 <div class="col-lg-3">
                   <h4 class="f-w-600 text-success mb-2"><?php echo $most_convert; ?>%<span class="f-w-300 text-muted f-14">&nbsp; <?php echo $job_hiring_source_other[$mostraido_sourec_id]['hiring_source_name']; ?></span></h4>
-                  <p class="f-12 mb-0">MOST CONVERTED</p>
+                  <p class="f-12 mb-0"><?= __('MOST CONVERTED'); ?></p>
                 </div>
                 <div class="col-lg-1 text-center">
                   <i  class="fa fa-filter f-24 text-success border p-2 img-radius"></i>
                 </div>
                 <div class="col-lg-3">
                   <h4 class="f-w-600 text-success mb-2"><?php echo $convert; ?>%</h4>
-                  <p class="f-12 mb-0">CONVERSION RATE</p>
+                  <p class="f-12 mb-0"><?= __('CONVERSION RATE'); ?></p>
                 </div>
                 <div class="col-lg-1 text-center">
                   <i  class="fa fa-calendar f-24 text-success border p-2 img-radius"></i>
                 </div>
                 <div class="col-lg-3">
                   <h4 class="f-w-600 text-danger mb-2"><?php echo $lastconvert; ?>%</h4>
-                  <p class="f-12 mb-0">LAST 7 DAYS</p>
+                  <p class="f-12 mb-0"><?= __('LAST 7 DAYS'); ?></p>
                 </div>
               </div>
             </div>
@@ -242,7 +242,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
           <div class="col-lg-3">
             <div class="bg-gray p-4">
               <h5><?php echo $castatus['action_label']; ?></h5>
-              <p class="mb-0"><i class="fa fa-clock-o"></i> Candidates <?php echo count((array)$liststatus[$castatus['status']]); ?></p>
+              <p class="mb-0"><i class="fa fa-clock-o"></i> <?= __('Candidates'); ?> <?php echo count((array)$liststatus[$castatus['status']]); ?></p>
             </div>
             <?php if($totlcan !=$j){?>
             <div class="text-center">
@@ -296,8 +296,8 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
           <div class="mt-4">
             <div class="d-inline-block m-r-10 align-top"><i class="fa fa-times-circle text-danger f-24"></i></div>
             <div class="d-inline-block">
-              <h4 class="text-danger f-w-600">'Not Hired Because...'</h4>
-              <p>This shows reasons why all inactive candidates ended up in your status workflow.</p>
+              <h4 class="text-danger f-w-600"><?= __('\'Not Hired Because...\''); ?></h4>
+              <p><?= __('This shows reasons why all inactive candidates ended up in your status workflow.'); ?></p>
             </div>
           </div>
           <input type="hidden" name="raphval" id="raphval" value="<?php echo urlencode(json_encode($rgar)); ?>">
@@ -307,7 +307,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
               if($i<4){ ?>
             <div class="col-lg-4" >
               <div>
-                <select aria-label="Select option" class="form-select js-example-basic-single mb-2"  onchange="selectothereason(<?php echo $i; ?>,this.value)">
+                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single mb-2"  onchange="selectothereason(<?php echo $i; ?>,this.value)">
                  <?php foreach($result['hold_rejection'] as $gsourkey=>$gsour){ ?>
                   <option <?php if($gsourkey==$reas){ echo "selected";
 } ?> value="<?php echo $gsourkey; ?>"><?php echo $gsour; ?></option>
@@ -336,7 +336,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
                 </div>
                 <?php }else{?>
                   <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Candidates</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Candidates'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -355,11 +355,11 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
           <div class="table-responsive">
             <table class="table table-hover">
               <tr>
-                <th scope="col">Source</th>
+                <th scope="col"><?= __('Source'); ?></th>
                 <?php  foreach($result['status'] as $castatus){ ?>
                   <th scope="col"> <?php echo $castatus['action_label']; ?></th>
                 <?php } ?>
-                <th scope="col">Conversion Rate</th>
+                <th scope="col"><?= __('Conversion Rate'); ?></th>
 
               </tr>
               <?php $csv = array();
@@ -394,7 +394,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
 } ?>
 
               <tr>
-                <th scope="col">Total</th>
+                <th scope="col"><?= __('Total'); ?></th>
                 <?php $csvdata = array();  $csvdata['Source'] = 'Total';
                  foreach($result['status'] as $castatus){
                   if($castatus['status']==ST_ACTIVE){ $apli = $sttotal[$castatus['status']];
@@ -421,8 +421,8 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
           <div class="mt-4">
             <div class="d-inline-block m-r-10 align-top"><i class="fa fa-times-circle text-danger f-24"></i></div>
             <div class="d-inline-block">
-              <h4 class="text-danger f-w-600">'Not Hired Because...' </h4>
-              <p>This shows reasons why all inactive candidates ended up in your status workflow.</p>
+              <h4 class="text-danger f-w-600"><?= __('\'Not Hired Because...\''); ?> </h4>
+              <p><?= __('This shows reasons why all inactive candidates ended up in your status workflow.'); ?></p>
             </div>
           </div>
           <?php if($source_rej>0){ ?>
@@ -430,7 +430,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
             <table class="table table-hover">
 
               <tr>
-                <th scope="col">Source</th>
+                <th scope="col"><?= __('Source'); ?></th>
                 <?php foreach($reasons as $reas){ ?>
                 <th scope="col" class="text-right"><?php echo $result['hold_rejection'][$reas]; ?></th>
                 <?php } ?>
@@ -447,7 +447,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
                 </tr>
               <?php } ?>
               <tr>
-                <th scope="col">Total</th>
+                <th scope="col"><?= __('Total'); ?></th>
                 <?php foreach($reasons as $reas){ ?>
                   <th scope="col" class="text-right"><?php echo $total_re[$reas]; ?></th>
                 <?php } ?>
@@ -456,7 +456,7 @@ $lastconvert = round(($lastcancount/$cand_count)*100);
           </div>
         <?php }else{ ?>
           <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Candidates</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Candidates'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

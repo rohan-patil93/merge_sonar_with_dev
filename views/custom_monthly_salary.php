@@ -374,11 +374,11 @@ if(catlink=='PTX'){
                                     <thead>
                                         <tr class="text-uppercase">
                                             <th scope="col" style="width: 30%" class="pl-7">
-                                                <span class="f-14">Salary Component</span>
+                                                <span class="f-14"><?= __('Salary Component'); ?></span>
                                             </th>
-                                            <th scope="col" style="width: 20%"><span class="f-14">Calculation Type</span></th>
-                                            <th scope="col" style="width: 20%;text-align: center;"><span class="f-14">Amount Monthly</span></th>
-                                            <th scope="col" style="width: 20%"><span class="f-14">Amount Annually</span></th>
+                                            <th scope="col" style="width: 20%"><span class="f-14"><?= __('Calculation Type'); ?></span></th>
+                                            <th scope="col" style="width: 20%;text-align: center;"><span class="f-14"><?= __('Amount Monthly'); ?></span></th>
+                                            <th scope="col" style="width: 20%"><span class="f-14"><?= __('Amount Annually'); ?></span></th>
 
                                         </tr>
                                     </thead>
@@ -417,7 +417,7 @@ if(catlink=='PTX'){
                                              <tr  id="<?php echo $value['id']; ?>" >
                                                 <td style="width: 30%">
                                                     <div class="form-group col-lg-11" >
-                                                        <input aria-label="Input field" type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']."(".$value['code'].")"; ?>" name="name[]">
+                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']."(".$value['code'].")"; ?>" name="name[]">
                                                         <input type="hidden" class="form-control" readonly id="id_<?php echo $value['id'];?>" value="<?php echo $value['id']; ?>" name="id[]">
                                                     </div>
                                                 </td>
@@ -428,7 +428,7 @@ if(catlink=='PTX'){
                                                          if($placevalue[$value['id']]['component_number']==""){ $component_number=$value['calculation_number'];
                                                         } ?>
                                                        <div class="input-group input-group-button">
-                                                        <input aria-label="Input field" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo$value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" aria-describedby="basic-addon2"/>
+                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo$value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" aria-describedby="basic-addon2"/>
                                                         <button class="btn btn-primary w-100PX" type="button"><?php echo $codedetail; ?> </button>
                                                     </div>
                                                 </div>
@@ -462,7 +462,7 @@ if(catlink=='PTX'){
                                                     <div class="input-group">
                                                         <input type="hidden" name="<?php echo $value['code']; ?>" value="<?php echo $ddcode; ?>" id="<?php echo $value['code']; ?>" >
 
-                                                        <input aria-label="Input field" type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   $placevalue[$value['id']]['yearly_amount']; ?>" class="form-control text-right width1"placeholder="0.00">
+                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   $placevalue[$value['id']]['yearly_amount']; ?>" class="form-control text-right width1"placeholder="0.00">
 
                                                         <button type="button" class="mt-6" onclick="dynamicinformationopup(<?php echo "'".$note."'"; ?>)">&nbsp;<i class="fa fa-info-circle f-14"></i></button>
 

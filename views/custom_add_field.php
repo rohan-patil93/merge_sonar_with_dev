@@ -103,7 +103,7 @@
 	}
 
 	function addRowssd() {
-		alert('hai');
+		alert(<?php echo json_encode(__('hai'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
 
 		var count = $(".itemRows").length;
 		alert(count);
@@ -130,14 +130,14 @@
 			var s2 = $('#ds1_2_'+i).val();
 			alert(F1+"***"+F2)
 			if((F1=='' && F2 == '0') || (s1=='' && s2 == '0') ){
-				alert('check values');
+				alert(<?php echo json_encode(__('check values'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
 				return false;
 			}
 		}
 	}
 
 	function addRowss() {
-		alert('hai');
+		alert(<?php echo json_encode(__('hai'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
 
 		var count = $(".itemRow").length;
 		alert(count);
@@ -209,7 +209,7 @@
 				<h5 class="modal-title">
 					<?= __("Add Custom Field") ?>  <?php echo $get_table; ?>
 				</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -225,23 +225,23 @@
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
 
-									<input type="radio"  id='spacer' value="custom_sql"  name="type" checked="checked" onclick="difftype(this.id)" aria-label="Type">
+									<input type="radio"  id='spacer' value="custom_sql"  name="type" checked="checked" onclick="difftype(this.id)" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
 									<?= __("spacer") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="text"  value="static"  name="type" onclick="difftype(this.id)" aria-label="Type"> <?= __("Test") ?> <span></span>
+										<input type="radio" id="text"  value="static"  name="type" onclick="difftype(this.id)" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("Test") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="static"  value="static"  name="type" onchange="difftype(this.id)" aria-label="Type"> <?= __("Static Formula") ?> <span></span>
+										<input type="radio" id="static"  value="static"  name="type" onchange="difftype(this.id)" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("Static Formula") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="dynamic"  value="dynamic"  name="type" onchange="difftype(this.id)" aria-label="Type"> <?= __("Dynamic Formula") ?> <span></span>
+										<input type="radio" id="dynamic"  value="dynamic"  name="type" onchange="difftype(this.id)" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("Dynamic Formula") ?> <span></span>
 									</label>
 								</div>
 							</div>
@@ -253,18 +253,18 @@
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
 
-									<input type="radio"  id='insert' value="insert" onclick="viewtype(this.id)"  name="view" checked="checked" aria-label="View">
+									<input type="radio"  id='insert' value="insert" onclick="viewtype(this.id)"  name="view" checked="checked" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>">
 									<?= __("Insert") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="list"  value="list" onclick="viewtype(this.id)"  name="view" aria-label="View"> <?= __("List") ?> <span></span>
+										<input type="radio" id="list"  value="list" onclick="viewtype(this.id)"  name="view" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("List") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="all"  value="all" onclick="viewtype(this.id)"  name="view" aria-label="View"> <?= __("All") ?> <span></span>
+										<input type="radio" id="all"  value="all" onclick="viewtype(this.id)"  name="view" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("All") ?> <span></span>
 									</label>
 								</div>
 								<input type="hidden" id="view_value" value="insert">
@@ -275,7 +275,7 @@
 					<div class="row align-items-center" id="spacer_data" style="margin-top: 10px;" >
 						<div class="form-group col-lg-3">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lenth") ?></span>
-							<select class="form-control" id="width" name= "width" aria-label="Width">
+							<select class="form-control" id="width" name= "width" aria-label="<?= htmlspecialchars(__('Width'), ENT_QUOTES, 'UTF-8'); ?>">
 								<?php for($i=1; $i<13;$i++){
 									$view_type = "col-lg-".$i; ?>
 									<option  value = "<?php echo $i; ?>" ><?php echo $view_type; ?> </option>
@@ -288,7 +288,7 @@
 					<div class="row align-items-center" id="text_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lenth") ?></span>
-							<select class="form-control" id="width_text" name= "width" aria-label="Width">
+							<select class="form-control" id="width_text" name= "width" aria-label="<?= htmlspecialchars(__('Width'), ENT_QUOTES, 'UTF-8'); ?>">
 								<?php for($i=1; $i<13;$i++){
 									$view_type = "col-lg-".$i; ?>
 									<option  value = "<?php echo $i; ?>" > <?php echo $view_type; ?> </option>
@@ -297,11 +297,11 @@
 						</div>
 						<div class="form-group col-lg-3">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lable") ?></span>
-							<input class="form-control"  type="text" id="lable" name="lable"  value="" aria-label="Lable">
+							<input class="form-control"  type="text" id="lable" name="lable"  value="" aria-label="<?= htmlspecialchars(__('Lable'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 						<div class="form-group col-lg-6">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Content") ?></span>
-							<textarea class="form-control" id="content" rows="3" aria-label="Textarea"></textarea>
+							<textarea class="form-control" id="content" rows="3" aria-label="<?= htmlspecialchars(__('Textarea'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
 						</div>
 					</div>
 					<!---- end test----->
@@ -309,7 +309,7 @@
 					<div class="row align-items-center" id="static_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3" >
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lenth") ?></span>
-							<select class="form-control" id="width_static" name= "insert_view_width[]" aria-label="Insert View Width">
+							<select class="form-control" id="width_static" name= "insert_view_width[]" aria-label="<?= htmlspecialchars(__('Insert View Width'), ENT_QUOTES, 'UTF-8'); ?>">
 								<?php for($i=1; $i<13;$i++){
 									$view_type = "col-lg-".$i; ?>
 									<option  value = "<?php echo $i; ?>"><?php echo $view_type; ?> </option>
@@ -318,7 +318,7 @@
 						</div>
 						<div class="form-group col-lg-3" >
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lable") ?></span>
-							<input class="form-control"  type="text" id="static_lable" name="lable"  value="" aria-label="Lable">
+							<input class="form-control"  type="text" id="static_lable" name="lable"  value="" aria-label="<?= htmlspecialchars(__('Lable'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 
 						<div class="col-lg-7">
@@ -334,23 +334,23 @@
 									</tr>
 									<tr>
 										<td>
-											<input  class="form-control itemRow" type="text" id="f_1" name="" aria-label="Input">
+											<input  class="form-control itemRow" type="text" id="f_1" name="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 										</td>
 										<td>
-											<select class="form-control" id="op_1_1" aria-label="Select">
+											<select class="form-control" id="op_1_1" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
 											<?php foreach($operator as $ope){?>
 												<option value="<?php echo $ope; ?>"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ope; ?></option>
 											<?php } ?>
 											</select>
 										</td>
 										<td>
-											<input type="text" class="form-control" id="s_1" name="" aria-label="Input">
+											<input type="text" class="form-control" id="s_1" name="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 										</td>
 										<td>
-											<input type="text" class="form-control" id="v_1" name="" aria-label="Input">
+											<input type="text" class="form-control" id="v_1" name="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 										</td>
 										<td>
-											<select class="form-control" id="op_2_1" aria-label="Select">
+											<select class="form-control" id="op_2_1" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
 											<?php foreach($operator as $ope){?>
 												<option value="<?php echo $ope; ?>"> &nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ope; ?></option>
 											<?php } ?>
@@ -363,7 +363,7 @@
 							<table>
 								<tr>
 										<td > <?= __("Total") ?></td>
-										<td > <input type="text" class="form-control" id="total"  name="" aria-label="Input"></td>
+										<td > <input type="text" class="form-control" id="total"  name="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -381,7 +381,7 @@
 					<div class="row align-items-center" id="dynamic_data" style="margin-top: 10px;display: none;" >
 						<div class="form-group col-lg-3">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lenth") ?></span>
-							<select class="form-control" id="width_dynamic" name= "width" aria-label="Width">
+							<select class="form-control" id="width_dynamic" name= "width" aria-label="<?= htmlspecialchars(__('Width'), ENT_QUOTES, 'UTF-8'); ?>">
 								<?php for($i=1; $i<13;$i++){
 									$view_type = "col-lg-".$i; ?>
 									<option  value = "<?php echo $i; ?>"><?php echo $view_type; ?> </option>
@@ -390,7 +390,7 @@
 						</div>
 						<div class="form-group col-lg-3">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __("Lable") ?></span>
-							<input class="form-control"  type="text" id="lable_dynamic" name="lable"  value="" aria-label="Lable">
+							<input class="form-control"  type="text" id="lable_dynamic" name="lable"  value="" aria-label="<?= htmlspecialchars(__('Lable'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 
 						<div class="col-lg-12">
@@ -406,7 +406,7 @@
 									<tr>
 										<td>
 										<div class="col-lg-6" style="float: left;">
-											<select class="form-control" id="ds_1_1" aria-label="Select">
+											<select class="form-control" id="ds_1_1" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
 												<option value="0"> <?= __("Select") ?> </option>
 											<?php foreach($response as $res){?>
 												<option value="<?php echo $res; ?>"><?php echo $res; ?></option>
@@ -414,18 +414,18 @@
 											</select>
 										</div>
 										<div class="col-lg-6" style="float: left;">
-											<input  class="form-control itemRows" type="text" id="f1_1" name="" aria-label="Input">
+											<input  class="form-control itemRows" type="text" id="f1_1" name="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 										</div>
 										</td>
 										<td>
-											<select class="form-control" id="op1_1_1" aria-label="Select">
+											<select class="form-control" id="op1_1_1" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
 											<?php foreach($operator as $ope){?>
 												<option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option>
 											<?php } ?>
 											</select>
 										</td>
 										<td> <div class="col-lg-6" style="float: left;">
-											<select class="form-control" id="ds_2_1" aria-label="Select">
+											<select class="form-control" id="ds_2_1" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
 												<option value="0"> <?= __("Select") ?> </option>
 											<?php foreach($response as $res){?>
 												<option value="<?php echo $res; ?>"><?php echo $res; ?></option>
@@ -433,12 +433,12 @@
 											</select>
 										</div>
 										<div class="col-lg-6" style="float: left;">
-											<input type="text" class="form-control" id="s1_1" name="" aria-label="Input">
+											<input type="text" class="form-control" id="s1_1" name="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 										</div>
 										</td>
 
 										<td>
-											<select class="form-control" id="op1_2_1" aria-label="Select">
+											<select class="form-control" id="op1_2_1" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
 											<?php foreach($operator as $ope){?>
 												<option value="<?php echo $ope; ?>"> <?php echo $ope; ?></option>
 											<?php } ?>

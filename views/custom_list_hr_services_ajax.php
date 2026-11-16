@@ -26,7 +26,7 @@ if(isset($_POST['month'])){
     <div class="col-xl-4 col-md-4">
         <div class="card table-card">
             <div class="card-header">
-                <h5>Yet To Submit</h5>
+                <h5><?= __('Yet To Submit'); ?></h5>
                 <div class="card-header-right">
                     <span class="form-label label label-primary"><?php echo count((array)$isactivelist);?></span>
                 </div>
@@ -39,8 +39,8 @@ if(isset($_POST['month'])){
                             <thead>
                                 <tr>
                                     <th scope="col" class="p-2" style="width: 10%;">#</th>
-                                    <th scope="col" class="p-2" style="width: 45%;">Name</th>
-                                    <th scope="col" class="p-2" style="width: 45%;">Request</th>
+                                    <th scope="col" class="p-2" style="width: 45%;"><?= __('Name'); ?></th>
+                                    <th scope="col" class="p-2" style="width: 45%;"><?= __('Request'); ?></th>
                                 </tr>
                             </thead>
                             <tbody class="custom-scroll" style="height: 300px; display: table-caption; ">

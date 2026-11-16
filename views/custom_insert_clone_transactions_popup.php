@@ -19,7 +19,7 @@ $btndisabled = "disabled";
 function submitCloneTransaction(){
     var party_id_popup = $('#party_id_popup').val();
     if(party_id_popup !=""){
-        $("#statuspopupbtn").text("Please Wait........");
+        $("#statuspopupbtn").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         $("#statuspopupbtn").addClass("disabled");
         $("#party_id_popup_error").hide();
         var poststr = $('#clone_transaction_form').serialize();
@@ -49,14 +49,14 @@ function submitCloneTransaction(){
 </script>
 <div class="modal-header">
     <h5 class="modal-title"><?php echo viewtitle($transaction_table); ?> - <?php echo $transaction_table_detail['transaction_number']; ?> (<?php echo $transaction_table_detail['transaction_date']; ?>) <?= __('Clone To') ?>  <?php echo viewtitle($clone_table); ?></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <form  method="post" id="clone_transaction_form">
     <div class="modal-body" >
         <div class="form-group row">
             <div class="col-lg-6 w-full" >
                 <span class="form-label"><?= __('Vendors') ?> <span class="text-danger">*</span></span>
-                <select aria-label="Party" class="form-control js-example-basic-single" name="party_id" id="party_id_popup" >
+                <select aria-label="<?= htmlspecialchars(__('Party'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="party_id" id="party_id_popup" >
                     <?php foreach ($party_list as $plist) {  ?>
                         <option value = <?php echo $plist['id'] ?>><?php echo $plist['display_name']; ?></option>
                     <?php } ?>

@@ -99,7 +99,7 @@ function fyLabel($year) {
           </tr>
 
           <tr>
-            <td>ii) <?= __('On purposes other than (i)') ?></td>
+            <td><?= __('ii)'); ?> <?= __('On purposes other than (i)') ?></td>
             <td></td>
           </tr>
 

@@ -23,9 +23,9 @@ if(isset($_POST['log_id'])){
                 <thead>
                     <tr>
                         <th scope="col" class="p-1" style="width: 10%;"></th>
-                        <th scope="col" class="p-1" style="width: 30%;">Message</th>
-                        <th scope="col" class="p-1" style="width: 30%;">Status</th>
-                        <th scope="col" class="p-1" style="width: 30%;">Request Date</th>
+                        <th scope="col" class="p-1" style="width: 30%;"><?= __('Message'); ?></th>
+                        <th scope="col" class="p-1" style="width: 30%;"><?= __('Status'); ?></th>
+                        <th scope="col" class="p-1" style="width: 30%;"><?= __('Request Date'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,7 +56,7 @@ if(isset($_POST['log_id'])){
                                 <div class="check-star">
                                     <?php if($disimage != ""){ ?>
                                         <div class=" m-r-15 text-center userimageround">
-                                            <img src="uploads/all/<?php echo $disimage; ?>" alt="Details" class="img-radius img-40">
+                                            <img src="uploads/all/<?php echo $disimage; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40">
                                         </div>
                                     <?php }else{ ?>
                                         <div class="img-radius img-50 align-top m-r-15 text-center userimageround">
@@ -75,7 +75,7 @@ if(isset($_POST['log_id'])){
                             <td class="p-1" style="width: 30%;"> <?php if($translog['response_type'] != 0){ ?>
                                 <span class="form-label label label-md label-primary mt-2" style="color: <?php echo "#".$stausresult[$value['current_status']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$value['current_status']]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[$value['current_status']]['background_color']); ?>;"><?php echo $stausresult[$value['current_status']]['name']; ?> </span>
                             <?php }else{ ?>
-                                <span class="form-label label label-md label-primary mt-2">Waiting For Approval</span>
+                                <span class="form-label label label-md label-primary mt-2"><?= __('Waiting For Approval'); ?></span>
                             <?php } ?>
 
                         </td>
@@ -109,7 +109,7 @@ if(isset($_POST['log_id'])){
 <?php }else{ ?>
     <div class="card-body">
         <div class="card-px text-center ">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Transaction</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Transaction'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>

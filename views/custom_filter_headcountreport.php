@@ -68,7 +68,7 @@ if (!empty($emp_list_names_raw)) {
 }
 ?>
 <div class="modal-header">
-    <h5 class="modal-title">Filter Options</h5>
+    <h5 class="modal-title"><?= __('Filter Options'); ?></h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
         <i aria-hidden="true" class="ki ki-close"></i>
     </button>
@@ -78,31 +78,31 @@ if (!empty($emp_list_names_raw)) {
         <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
             <div class="row">
                 <div class="col-lg-6">
-                    <label for="filterfor">Include</label>
+                    <label for="filterfor"><?= __('Include'); ?></label>
                     <input type="hidden" name="filterlist" id="filterlist" value="">
                     <input type="hidden" name="filter_id" id="filter_id" value="<?php echo htmlspecialchars((string)$filter_id, ENT_QUOTES); ?>">
                     <input type="hidden" name="tablename" id="tablename" value="<?php echo htmlspecialchars($filter_table, ENT_QUOTES); ?>">
 
-                    <select onchange="showfilter(this.value);" id="filterfor" name="filterfor" class="form-control" aria-label="Include">
+                    <select onchange="showfilter(this.value);" id="filterfor" name="filterfor" class="form-control" aria-label="<?= htmlspecialchars(__('Include'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php if (!empty($filter_list) && is_array($filter_list)) {
                             foreach ($filter_list as $filter) {
                                 $selectedAttr = ($selectedoption === ($filter['genc_detail_name'] ?? '')) ? 'selected="selected"' : '';
                         ?>
-                            <option <?php echo $selectedAttr; ?> value="<?php echo htmlspecialchars($filter['genc_detail_code'] ?? '', ENT_QUOTES); ?>"><?php echo htmlspecialchars($filter['genc_detail_name'] ?? '', ENT_QUOTES); ?></option>
+                            <option <?php echo $selectedAttr; ?> value="<?php echo htmlspecialchars($filter['genc_detail_code'] ?? '', ENT_QUOTES); ?>"><?php echo htmlspecialchars(__($filter['genc_detail_name']) ?? '', ENT_QUOTES); ?></option>
                         <?php }
                         } ?>
                     </select>
                 </div>
                 <div class="col-lg-6">
-                    <label for="sel_option">Selected Employees</label>
-                    <select id="sel_option" class="form-control" aria-label="Selected Employees"></select>
+                    <label for="sel_option"><?= __('Selected Employees'); ?></label>
+                    <select id="sel_option" class="form-control" aria-label="<?= htmlspecialchars(__('Selected Employees'), ENT_QUOTES, 'UTF-8'); ?>"></select>
                 </div>
                 <div class="col-lg-12">
                     <div class="bg-white rounded row mt-5" style="<?php echo ($selectedoption === 'Only Some Employees') ? 'display: block;' : 'display: none;'; ?>" id="filtershow">
                         <div class="col-lg-6">
-                            <span class="font-weight-bold">Filter <?php echo htmlspecialchars($filter_table); ?> by</span>
+                            <span class="font-weight-bold"><?= __('Filter'); ?> <?php echo htmlspecialchars($filter_table); ?> <?= __('by'); ?></span>
                             <i class="fas fa-user icon-nm pl-40" aria-hidden="true"></i>
-                            <span class="font-weight-bold"><span id="matches_count"> <?php echo htmlspecialchars((string)$emp_count); ?> </span> Matches</span>
+                            <span class="font-weight-bold"><span id="matches_count"> <?php echo htmlspecialchars((string)$emp_count); ?> </span> <?= __('Matches'); ?></span>
                         </div>
                         <div class="col-lg-6 card card-custom card-border">
                             <div class="accordion accordion-light accordion-svg-toggle" id="accordionExample7">

@@ -82,10 +82,10 @@ $vehicleTypes = [
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5><i class="ti-car"></i> Vehicle Gateway Records</h5>
+            <h5><i class="ti-car"></i> <?= __('Vehicle Gateway Records'); ?></h5>
             <div class="card-header-right">
                 <a href="index.php?option=custom_insert_transport_gateway" class="btn btn-primary waves-effect waves-light">
-                    <i class="ti-plus text-white"></i> Add New Entry
+                    <i class="ti-plus text-white"></i> <?= __('Add New Entry'); ?>
                 </a>
             </div>
         </div>
@@ -109,38 +109,38 @@ $vehicleTypes = [
                             </button>
                             <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split waves-effect waves-light"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 20%;height: 40px;">
-                                <span class="visually-hidden">Toggle primary</span>
+                                <span class="visually-hidden"><?= __('Toggle primary'); ?></span>
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TD" ? "active" : ""; ?> empty_active"
-                                    id="TD" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')">Today</a>
+                                    id="TD" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')"><?= __('Today'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TW" ? "active" : ""; ?> empty_active"
-                                    id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week'))); ?>','<?php echo fromDate(date("Y-m-d", strtotime('sunday this week'))); ?>')">This Week</a>
+                                    id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week'))); ?>','<?php echo fromDate(date("Y-m-d", strtotime('sunday this week'))); ?>')"><?= __('This Week'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TM" ? "active" : ""; ?> empty_active"
-                                    id="TM" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')">This Month</a>
+                                    id="TM" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')"><?= __('This Month'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "TY" ? "active" : ""; ?> empty_active"
-                                    id="TY" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')">This Year</a>
+                                    id="TY" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')"><?= __('This Year'); ?></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "YD" ? "active" : ""; ?> empty_active"
-                                    id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>')">Yesterday</a>
+                                    id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("-1 days"))); ?>')"><?= __('Yesterday'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "PM" ? "active" : ""; ?> empty_active"
-                                    id="PM" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01", strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t", strtotime('last month'))); ?>')">Previous Month</a>
+                                    id="PM" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01", strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t", strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode == "CD" ? "active" : ""; ?> empty_active"
-                                    id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')">Custom Date</a>
+                                    id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')"><?= __('Custom Date'); ?></a>
                             </div>
                         </div>
                         <div class="row mt-2" style="display: <?php echo $shortcode == 'CD' ? '' : 'none' ?>" id="custome_date">
                             <div class="col-lg-6">
-                                <input aria-label="From" type="text" class="form-control filterdynamic datepicker" name="from" id="from_date" value="<?php echo $from_date_display; ?>">
+                                <input aria-label="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="from" id="from_date" value="<?php echo $from_date_display; ?>">
                             </div>
                             <div class="col-lg-6">
-                                <input aria-label="To" type="text" class="form-control filterdynamic datepicker" name="to" id="to_date" value="<?php echo $to_date_display; ?>">
+                                <input aria-label="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="to" id="to_date" value="<?php echo $to_date_display; ?>">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <button type="submit" name="applyform" value="apply" class="btn btn-info p-2">Search</button>
+                        <button type="submit" name="applyform" value="apply" class="btn btn-info p-2"><?= __('Search'); ?></button>
                     </div>
                 </div>
             </form>
@@ -155,19 +155,19 @@ $vehicleTypes = [
                     <thead>
                         <tr style="background-color: #eeeeee;">
                             <th scope="col">#</th>
-                            <th scope="col">Vehicle Number</th>
-                            <th scope="col">Vehicle Type</th>
-                            <th scope="col">Driver Name</th>
-                            <th scope="col">Driver Contact</th>
-                            <th scope="col">Purpose</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Method</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">In Time</th>
-                            <th scope="col">Out Time</th>
-                            <th scope="col">Duration</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col"><?= __('Vehicle Number'); ?></th>
+                            <th scope="col"><?= __('Vehicle Type'); ?></th>
+                            <th scope="col"><?= __('Driver Name'); ?></th>
+                            <th scope="col"><?= __('Driver Contact'); ?></th>
+                            <th scope="col"><?= __('Purpose'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Method'); ?></th>
+                            <th scope="col"><?= __('Date'); ?></th>
+                            <th scope="col"><?= __('In Time'); ?></th>
+                            <th scope="col"><?= __('Out Time'); ?></th>
+                            <th scope="col"><?= __('Duration'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col"><?= __('Actions'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -215,7 +215,7 @@ $vehicleTypes = [
                                     <td>
                                         <?= htmlspecialchars(ucfirst($vehicle['visit_purpose'])); ?>
                                         <?php if (!empty($vehicle['visiting_person'])): ?>
-                                            <br><small class="text-muted">To: <?= htmlspecialchars($vehicle['visiting_person']); ?></small>
+                                            <br><small class="text-muted"><?= __('To'); ?>: <?= htmlspecialchars($vehicle['visiting_person']); ?></small>
                                         <?php endif; ?>
                                     </td>
                                     <td>
@@ -227,17 +227,17 @@ $vehicleTypes = [
                                     <td>
                                         <?php if ($method_type == 'exit_first'): ?>
                                             <span class="badge badge-danger" style="padding:4px 8px;">
-                                                <i class="ti-export"></i> Exit First
+                                                <i class="ti-export"></i> <?= __('Exit First'); ?>
                                             </span>
                                         <?php else: ?>
                                             <span class="badge badge-success" style="padding:4px 8px;">
-                                                <i class="ti-import"></i> Entry First
+                                                <i class="ti-import"></i> <?= __('Entry First'); ?>
                                             </span>
                                         <?php endif; ?>
                                     </td>
                                     <td><?= !empty($record_date) ? date('d-M-Y', strtotime($record_date)) : '-'; ?></td>
-                                    <td><?= !empty($in_time) ? date('g:i A', strtotime($in_time)) : '<span class="text-muted">Pending</span>'; ?></td>
-                                    <td><?= !empty($out_time) ? date('g:i A', strtotime($out_time)) : '<span class="text-muted">Pending</span>'; ?></td>
+                                    <td><?= !empty($in_time) ? date('g:i A', strtotime($in_time)) : '<span class="text-muted">'.__('Pending').'</span>'; ?></td>
+                                    <td><?= !empty($out_time) ? date('g:i A', strtotime($out_time)) : '<span class="text-muted">'.__('Pending').'</span>'; ?></td>
                                     <td><?= $duration; ?></td>
                                     <td>
                                         <span class="badge" style="background-color: <?= $status_bg; ?>; color: <?= $status_color; ?>; padding:6px 10px; border-radius:6px;">
@@ -246,7 +246,7 @@ $vehicleTypes = [
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-info btn-round print-slip-btn"
-                                            data-vehicle-id="<?= $vehicle['id']; ?>" title="Print Slip">
+                                            data-vehicle-id="<?= $vehicle['id']; ?>" title="<?= htmlspecialchars(__('Print Slip'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <i class="ti-printer"></i>
                                         </button>
                                         <?php if (!$is_complete): ?>
@@ -268,7 +268,7 @@ $vehicleTypes = [
                             <td colspan="14">
                               <div class="card-px text-center py-20 m-t-30">
                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                  <i class="ti-alert text-warning"></i> No Data Available
+                                  <i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?>
                                 </p>
                                 <div class="text-center px-4">
                                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png"
@@ -291,8 +291,8 @@ $vehicleTypes = [
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><i class="ti-printer"></i> Vehicle Gate Pass</h4>
-                <button type="button" class="close close-print-modal-btn" aria-label="Close">
+                <h4 class="modal-title"><i class="ti-printer"></i> <?= __('Vehicle Gate Pass'); ?></h4>
+                <button type="button" class="close close-print-modal-btn" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -300,9 +300,9 @@ $vehicleTypes = [
                 <!-- Print content will be loaded here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary close-print-modal-btn">Close</button>
+                <button type="button" class="btn btn-secondary close-print-modal-btn"><?= __('Close'); ?></button>
                 <button type="button" class="btn btn-primary print-slip-btn-action">
-                    <i class="ti-printer"></i> Print
+                    <i class="ti-printer"></i> <?= __('Print'); ?>
                 </button>
             </div>
         </div>
@@ -314,8 +314,8 @@ $vehicleTypes = [
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="actionModalTitle"><i class="ti-export"></i> Record Out Time</h4>
-                <button type="button" class="close close-exit-modal-btn" aria-label="Close">
+                <h4 class="modal-title" id="actionModalTitle"><i class="ti-export"></i> <?= __('Record Out Time'); ?></h4>
+                <button type="button" class="close close-exit-modal-btn" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -325,31 +325,31 @@ $vehicleTypes = [
                     <input type="hidden" name="method_type" id="actionMethodType">
                     <div class="alert alert-info" id="actionAlertInfo">
                         <i class="ti-info-alt"></i>
-                        <span id="actionAlertText">Recording for vehicle:</span> <strong id="exitVehicleNumber"></strong>
+                        <span id="actionAlertText"><?= __('Recording for vehicle'); ?>:</span> <strong id="exitVehicleNumber"></strong>
                     </div>
                     <div class="form-group row">
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Date</span>
-                            <input aria-label="Exit Date" type="date" class="form-control" name="exit_date" id="actionDate" value="<?php echo date('Y-m-d'); ?>" readonly>
+                            <span class="form-label"><?= __('Date'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Exit Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="exit_date" id="actionDate" value="<?php echo date('Y-m-d'); ?>" readonly>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Time</span>
-                            <input aria-label="Exit Time" type="time" class="form-control" name="exit_time" id="actionTime" value="<?php echo date('H:i'); ?>" readonly>
+                            <span class="form-label"><?= __('Time'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Exit Time'), ENT_QUOTES, 'UTF-8'); ?>" type="time" class="form-control" name="exit_time" id="actionTime" value="<?php echo date('H:i'); ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group">
-                        <span class="form-label">Notes (Optional)</span>
-                        <textarea aria-label="Any observations or notes..." class="form-control" name="exit_notes" rows="3" placeholder="Any observations or notes..."></textarea>
+                        <span class="form-label"><?= __('Notes (Optional)'); ?></span>
+                        <textarea aria-label="<?= htmlspecialchars(__('Any observations or notes...'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="exit_notes" rows="3" placeholder="<?= htmlspecialchars(__('Any observations or notes...'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                     </div>
                     <div class="form-group">
-                        <span class="form-label">Authorized By</span>
-                        <input aria-label="Name of person authorizing" type="text" class="form-control" name="authorized_by" placeholder="Name of person authorizing" value="<?php echo $_SESSION['display_name']; ?>">
+                        <span class="form-label"><?= __('Authorized By'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Name of person authorizing'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="authorized_by" placeholder="<?= htmlspecialchars(__('Name of person authorizing'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $_SESSION['display_name']; ?>">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect close-exit-modal-btn">Cancel</button>
+                    <button type="button" class="btn btn-default waves-effect close-exit-modal-btn"><?= __('Cancel'); ?></button>
                     <button type="submit" class="btn btn-danger waves-effect waves-light" id="actionSubmitBtn">
-                        <i class="ti-check"></i> <span id="actionSubmitText">Record Out</span>
+                        <i class="ti-check"></i> <span id="actionSubmitText"><?= __('Record Out'); ?></span>
                     </button>
                 </div>
             </form>

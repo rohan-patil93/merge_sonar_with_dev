@@ -44,8 +44,8 @@ if (isset($_POST['submit'])){
                                 <!--begin::Nav-->
                                 <ul class="kt-nav">
                                     <li class="kt-nav__head">
-                                        Export Options
-                                        <span data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">
+                                        <?= __('Export Options'); ?>
+                                        <span data-toggle="kt-tooltip" data-placement="right" title="<?= htmlspecialchars(__('Click to learn more...'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <svg xmlns="http:
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24" />

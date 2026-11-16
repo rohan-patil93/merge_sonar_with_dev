@@ -18,7 +18,7 @@ foreach($project_teams as $prteam){
 ?>
 <script type="text/javascript">
     function pageCallHistories(rid){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#crmleadhistories").html(loader);
         jQuery.ajax({
             url: "views/custom_insert_crm_lead_histories.php",
@@ -33,7 +33,7 @@ foreach($project_teams as $prteam){
     function submitLeadForm(){
         var validations = ajaxFormSubmitValidation();
         if(validations == 0){
-            $(".sbt_loading_en_dis").text("Please Wait........");
+            $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             $(".sbt_loading_en_dis").attr("disabled", true);
             var crm_lead_id = $("#crm_lead_id").val();
             var formData = new FormData();
@@ -71,7 +71,7 @@ foreach($project_teams as $prteam){
                             }
                     }else{
                         tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',jsonres.res.message,'');
-                        $(".sbt_loading_en_dis").text("Submit");
+                        $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                         $(".sbt_loading_en_dis").attr("disabled", false);
                     }
                 }
@@ -113,14 +113,14 @@ foreach($project_teams as $prteam){
                     <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Project Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Project Name<span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Project Name'); ?><span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Project Name" class="form-control requried_field" type="text" name="project_name" placeholder="<?= __('Project Name') ?>" value="<?php echo $transaction['project_name']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Project Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="text" name="project_name" placeholder="<?= __('Project Name') ?>" value="<?php echo $transaction['project_name']; ?>">
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Originator <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Originator'); ?> <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Originator" class="form-control js-example-basic-single requried_field" name="originator">
+                            <select aria-label="<?= htmlspecialchars(__('Originator'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="originator">
                                 <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['originator'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
@@ -128,9 +128,9 @@ foreach($project_teams as $prteam){
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Customer <span class="requried text-danger">*</span></span>
+                            <span class="form-label"><?= __('Customer'); ?> <span class="requried text-danger">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Customer" class="form-control js-example-basic-single requried_field" name="customer_id">
+                            <select aria-label="<?= htmlspecialchars(__('Customer'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="customer_id">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($customers as $cust){ ?>
                                     <option value="<?php echo $cust['id']; ?>" <?php echo $cust['id'] == $transaction['customer_id']?"selected":""; ?>><?php echo $cust['company']; ?></option>
@@ -139,23 +139,23 @@ foreach($project_teams as $prteam){
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label"><?= __('Project Total Budget') ?></span>
-                            <input aria-label="Total Budget" class="form-control" type="number" name="project_cost" placeholder="<?= __('Total Budget') ?>" value="<?php echo $transaction['project_cost']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Total Budget'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="number" name="project_cost" placeholder="<?= __('Total Budget') ?>" value="<?php echo $transaction['project_cost']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Start Sate <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Start Sate'); ?> <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Start Date" class="form-control startdatepicker requried_field" type="text" name="planned_start" placeholder="<?= __('Start Date') ?>" value="<?php echo fromDate($transaction['planned_start']); ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control startdatepicker requried_field" type="text" name="planned_start" placeholder="<?= __('Start Date') ?>" value="<?php echo fromDate($transaction['planned_start']); ?>">
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">End Date <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('End Date'); ?> <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="End Date" class="form-control requried_field enddatepicker" type="text" name="planned_finish" placeholder="<?= __('End Date') ?>" value="<?php echo fromDate($transaction['planned_finish']); ?>">
+                            <input aria-label="<?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field enddatepicker" type="text" name="planned_finish" placeholder="<?= __('End Date') ?>" value="<?php echo fromDate($transaction['planned_finish']); ?>">
                         </div>
 
                          <div class="col-lg-12 form-group w-full">
-                            <span class="form-label">Team Member <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Team Member'); ?> <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Project Team User []" class="form-control js-example-basic-single requried_field" name="project_team_user_id[]" multiple="">
+                            <select aria-label="<?= htmlspecialchars(__('Project Team User'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-control js-example-basic-single requried_field" name="project_team_user_id[]" multiple="">
                                 <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo in_array($uval['id'], (array)$project_teams_userid)?"selected":""; ?>><?php echo $uval['display_name']; ?></option>
@@ -170,7 +170,7 @@ foreach($project_teams as $prteam){
                                         <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                                     </label>
                                     <input type="file" name="image" id="display_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                                    <img src="<?php echo "uploads/all/".$transaction['project_logo'] ; ?>" id="outputdisplay_image" width="200" alt="Logo" />
+                                    <img src="<?php echo "uploads/all/".$transaction['project_logo'] ; ?>" id="outputdisplay_image" width="200" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                                     <input type="hidden" name="hid_image" value="<?php echo $transaction['image'] ;  ?>">
                                 </div>
                             </div>
@@ -178,7 +178,7 @@ foreach($project_teams as $prteam){
                         <div class="col-lg-12 form-group">
                             <span class="form-label"><?= __('Description') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Description" name="description" placeholder="<?= __('Description') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['description']; ?></textarea>
+                                <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" name="description" placeholder="<?= __('Description') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['description']; ?></textarea>
                             </div>
                         </div>
                    </div>

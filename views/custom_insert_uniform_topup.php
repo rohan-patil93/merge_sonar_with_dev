@@ -23,7 +23,7 @@ $category_id = $data['category_id'];
 
 <div class="card">
     <div class="card-header">
-        <h5 class="mb-4 text-primary">Top-Up Uniform Stock</h5>
+        <h5 class="mb-4 text-primary"><?= __('Top-Up Uniform Stock'); ?></h5>
     </div>
 
     <div class="card-body">
@@ -36,8 +36,8 @@ $category_id = $data['category_id'];
                 <!-- Location -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
-                        <span class="fw-bold">Location</span>
-                        <select aria-label="Location" name="location_id" id="location_id" class="form-select select2"
+                        <span class="fw-bold"><?= __('Location'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" name="location_id" id="location_id" class="form-select select2"
                             <?= (!in_array("UNIFORM_ADMIN", (array)$roles)) ? "disabled" : "" ?>>
                             <?php foreach($locations as $loc){ ?>
                                 <option value="<?= $loc['id']; ?>"
@@ -52,9 +52,9 @@ $category_id = $data['category_id'];
                 <!-- Item -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
-                        <span class="fw-bold">Item</span>
-                        <select aria-label="Item" name="item_id" id="item_id" class="form-select select2" required>
-                            <option value="">Select Item</option>
+                        <span class="fw-bold"><?= __('Item'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Item'), ENT_QUOTES, 'UTF-8'); ?>" name="item_id" id="item_id" class="form-select select2" required>
+                            <option value=""><?= __('Select Item'); ?></option>
                             <?php foreach($items as $i){ ?>
                                 <option value="<?= $i['item_name']; ?>"><?= $i['item_name']; ?></option>
                             <?php } ?>
@@ -65,8 +65,8 @@ $category_id = $data['category_id'];
                 <!-- Current Quantity -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
-                        <span class="fw-bold">Current Quantity</span>
-                        <input aria-label="Current Qty" type="text" id="current_qty" class="form-control" readonly />
+                        <span class="fw-bold"><?= __('Current Quantity'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Current Qty'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="current_qty" class="form-control" readonly />
                     </div>
                 </div>
 
@@ -77,9 +77,9 @@ $category_id = $data['category_id'];
                 <!-- Color -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
-                        <span class="fw-bold">Color</span>
-                        <select aria-label="Color" name="color" id="color" class="form-select select2" required>
-                            <option value="">Select Color</option>
+                        <span class="fw-bold"><?= __('Color'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Color'), ENT_QUOTES, 'UTF-8'); ?>" name="color" id="color" class="form-select select2" required>
+                            <option value=""><?= __('Select Color'); ?></option>
                             <?php foreach($colors as $c){ ?>
                                 <option value="<?= $c['genc_detail_code']; ?>"><?= $c['color_name']; ?></option>
                             <?php } ?>
@@ -90,9 +90,9 @@ $category_id = $data['category_id'];
                 <!-- Size -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
-                        <span class="fw-bold">Size</span>
-                        <select aria-label="Size" name="size" id="size" class="form-select select2" required>
-                            <option value="">Select Size</option>
+                        <span class="fw-bold"><?= __('Size'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Size'), ENT_QUOTES, 'UTF-8'); ?>" name="size" id="size" class="form-select select2" required>
+                            <option value=""><?= __('Select Size'); ?></option>
                             <?php foreach($sizes as $s){ ?>
                                 <option value="<?= $s['genc_detail_code']; ?>"><?= $s['size_name']; ?></option>
                             <?php } ?>
@@ -103,15 +103,15 @@ $category_id = $data['category_id'];
                 <!-- Top-Up Quantity -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                     <div class="form-group">
-                        <span class="fw-bold">Top-Up Quantity</span>
-                        <input aria-label="Topup Qty" type="number" name="topup_qty" id="topup_qty" class="form-control" min="1" required />
+                        <span class="fw-bold"><?= __('Top-Up Quantity'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Topup Qty'), ENT_QUOTES, 'UTF-8'); ?>" type="number" name="topup_qty" id="topup_qty" class="form-control" min="1" required />
                     </div>
                 </div>
 
             </div>
 
             <button type="submit" class="btn btn-primary px-5">
-                <i class="fa fa-plus"></i> Add Stock
+                <i class="fa fa-plus"></i> <?= __('Add Stock'); ?>
             </button>
 
         </form>
@@ -136,7 +136,7 @@ $("#location_id").on("change", function () {
         },
         success: function(res){
             let r = JSON.parse(res);
-            let h = '<option value="">Select Item</option>';
+            let h = '<option value=""><?= htmlspecialchars(__('Select Item'), ENT_QUOTES, 'UTF-8'); ?></option>';
 
             r.items.forEach(i => {
                 h += `<option value="${i.item_name}">${i.item_name}</option>`;

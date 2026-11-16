@@ -250,7 +250,7 @@ function loadDynamicPage(option,id="",tabid="",subtabid=""){
     var parent_option  = '<?php echo $_GET['option']; ?>';
     $(".removeativtab").removeClass("active");
     $("#active_"+option).addClass("active");
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#dynamicpageshow').html(htmloader);
     jQuery.ajax({
         url: "views/custom_inbox_page_redirection.php",
@@ -293,7 +293,7 @@ function loadDynamicPage(option,id="",tabid="",subtabid=""){
         <?php if($error_message !=''){ ?>
             <div class="alert alert-danger background-danger alert-dismissible">
                 <strong><?php echo $error_message; ?></strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
         <?php } ?>
         <div class="card mb-1 mb-xl-10">
@@ -310,7 +310,7 @@ function loadDynamicPage(option,id="",tabid="",subtabid=""){
                                     <form method="post" id="profile_pic_file" enctype="multipart/form-data" class="position-relative">
                                         <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Edit Profile Pic') ?>" style="left: 90px; bottom: 0px;position: absolute;">
                                             <span><i class="ti-pencil-alt"></i></span>
-                                            <input aria-label="Profile Pic File" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg"  onchange="updateProfilePic()" />
+                                            <input aria-label="<?= htmlspecialchars(__('Profile Pic File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg"  onchange="updateProfilePic()" />
                                         </label>
 
                                         <?php if($data['image']!=""){ ?>
@@ -362,16 +362,16 @@ if($data['phone']!=""){  ?>
                                         <?php } ?>
                                         <div class="font-weight-bold text-dark-50 mt-1 f-14">
                                             <?php if($data['total_experiance']!=""){  ?>
-                                                <b class="f-w-600">Total Experiance : </b><?php echo $data['total_experiance']." Years";?>&nbsp;
+                                                <b class="f-w-600"><?= __('Total Experiance'); ?> : </b><?php echo $data['total_experiance']." Years";?>&nbsp;
                                             <?php }
 if($data['notice_period']!=""){  ?>
-                                                <b class="f-w-600">Notice Period : </b><?php echo $data['notice_period']." Days";?>&nbsp;
+                                                <b class="f-w-600"><?= __('Notice Period'); ?> : </b><?php echo $data['notice_period']." Days";?>&nbsp;
                                             <?php }
 if($data['excepted_doj']!=""){  ?>
-                                                <b class="f-w-600">Available By : </b><?php echo fromDate($data['excepted_doj']);?>&nbsp;
+                                                <b class="f-w-600"><?= __('Available By'); ?> : </b><?php echo fromDate($data['excepted_doj']);?>&nbsp;
                                             <?php }
 if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
-                                                <b class="f-w-600">Expected CTC : </b>
+                                                <b class="f-w-600"><?= __('Expected CTC'); ?> : </b>
                                                 <?php echo customeummarmonyformate($data['expected_ctc']);?>&nbsp;
                                             <?php } ?>
                                         </div>
@@ -394,7 +394,7 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                                                 <div class="card-body">
                                                     <div class="form-group">
                                                         <span class="form-label"><?= __('Field Group') ?></span>
-                                                        <select aria-label="Application Query" class="form-select js-example-basic-single" name="application_query_id">
+                                                        <select aria-label="<?= htmlspecialchars(__('Application Query'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="application_query_id">
                                                             <option value="0"><?= __('Select Any One') ?></option>
                                                             <?php foreach((array)$application_query as $applicationquery){ ?>
                                                                 <option   value="<?php echo $applicationquery['id']; ?>"><?php echo $applicationquery['field_group'];  ?></option>
@@ -403,7 +403,7 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                                                     </div>
                                                     <div class="form-group">
                                                         <span class="form-label"><?= __('Query') ?></span>
-                                                        <textarea aria-label="Description" type="text" class="form-control" name="description"></textarea>
+                                                        <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="description"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="card-footer pt-0">
@@ -417,7 +417,7 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                                     </div>
                                     <?php if($data['file']!=""){ ?>
                                         <a href="uploads/all/<?php echo $data['file']; ?>" class="btn waves-effect waves-light btn-primary mt-5 b-radius-10 " download>
-                                            <i class="ti-download m-r-10"></i> &nbsp Download CV
+                                            <i class="ti-download m-r-10"></i> &nbsp <?= __('Download CV'); ?>
                                         </a>
                                     <?php } ?>
                                     <button class="btn waves-effect waves-light btn-primary mt-5 b-radius-10 ">
@@ -425,7 +425,7 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                                             <form method="post" id="resume_upload_file" enctype="multipart/form-data" class="position-relative">
                                                 <label class="btn-hover-text-primary m-0 text-white" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Upload CV') ?>" style="left: -9px;top: 0px;">
                                                     <span> <i class="ti-upload"></i></span>
-                                                    <input aria-label="Resume Upload File" type="file" name="resume_upload_file" accept=".pdf"  onchange="updateresume()" />
+                                                    <input aria-label="<?= htmlspecialchars(__('Resume Upload File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="resume_upload_file" accept=".pdf"  onchange="updateresume()" />
                                                 </label>
                                             </form>
                                         </div>
@@ -433,7 +433,7 @@ if($data['expected_ctc']!="" && $data['expected_ctc'] !="0"){  ?>
                                     <?php if($_SESSION['user_type']!=4){ ?>
                                         <a href="index.php?option=COM_VIEW_CANDIDATE_DETAILS&Rid=<?php echo $data['id']; ?>" target="_blank" class="btn waves-effect waves-light btn-primary mt-5 b-radius-10 ">
 
-                                            <i class="ti-download m-r-10"></i>  Download Profile
+                                            <i class="ti-download m-r-10"></i>  <?= __('Download Profile'); ?>
                                         </a>
                                     <?php } ?>
                                     <div class="row mt-4">

@@ -48,22 +48,22 @@
                     <div class="card card-custom " id="kt_page_sticky_card">
                         <div class="card-header">
                             <div class="card-title">
-                                <h3 class="card-label">&nbsp;<?php echo "Genrate Employee";  ?> </h3>
+                                <h3 class="card-label">&nbsp;<?php echo __("Genrate Employee");  ?> </h3>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
                                 <label for="example-email-input" class="col-2 col-form-label"><?= __('Email') ?></label>
                                 <div class="col-10">
-                                 <input aria-label="Email" class="form-control" type="email"  value="" name="email" id="email"/>
-                                 <div id="email_err" class="text-danger" style="display: none;"> Please Enter Email</div>
+                                 <input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="email"  value="" name="email" id="email"/>
+                                 <div id="email_err" class="text-danger" style="display: none;"> <?= __('Please Enter Email'); ?></div>
                                 </div>
 
                             </div>
                             <div class="form-group row">
                                 <label for="example-email-input" class="col-2 col-form-label"><?= __('Phone') ?></label>
                                 <div class="col-10">
-                                 <input aria-label="Phone" class="form-control" name="phone" value="<?php echo $data['phone'];  ?>" />
+                                 <input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="phone" value="<?php echo $data['phone'];  ?>" />
                                 </div>
                              </div>
                         </div>
@@ -73,7 +73,7 @@
                             <div class="col-lg-4">
                                 <input type="hidden" name="candidate_id" value="<?php echo $candidate_id;  ?>" />
                                 <input type="hidden" name="submit" value="submit" />
-                                 <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Genrate Employee</button>
+                                 <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i><?= __('Genrate Employee'); ?></button>
                             </div>
                         </div>
                     </div>

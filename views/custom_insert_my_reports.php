@@ -154,7 +154,7 @@ function addmoreformula(){
 
     html += '<div id="collapseOnes'+maxformulid+'" class="collapse" data-parent="#accordionExample5"><div class="card-body"><div class=""><div class="tab-content mt-2" id="myTabContent4"><div class="tab-pane fade show active btn-sm" id="content-1" role="tabpanel" aria-labelledby="content_1">';
 
-    html += '<div class="form-group row  mt-2"><span class="f-14">Heading<span class="tex-danger f-10">* Requerd Space used "_" </span></span><div class=""><input aria-label="<?php echo __('Custom Report Heding[]'); ?>"  class="form-control" type="text"   name="custom_report_heding[]" value=""  onkeyup="nospaces(this)" required> </div> </div>';
+    html += '<div class="form-group row  mt-2"><span class="f-14"><?= htmlspecialchars(__('Heading'), ENT_QUOTES, 'UTF-8'); ?><span class="tex-danger f-10">* <?= htmlspecialchars(__('Requerd Space used "_"'), ENT_QUOTES, 'UTF-8'); ?> </span></span><div class=""><input aria-label="<?php echo __('Custom Report Heding[]'); ?>"  class="form-control" type="text"   name="custom_report_heding[]" value=""  onkeyup="nospaces(this)" required> </div> </div>';
 
     html += '<div class="form-group row  mt-2"><span class="f-14"><?php echo __('Report Formula'); ?></span><div class=""><textarea aria-label="<?php echo __('Custom Report Formula[]'); ?>" class="form-control"   name="custom_report_formula[]" rows="3" required></textarea></div></div>';
 
@@ -188,7 +188,7 @@ function removeformuladiv(id){
 }
 
 function fieldCopy(id){
-    var $temp = $("<input aria-label='Input field'>");
+    var $temp = $("<input aria-label='<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>'>");
     var content = $('#'+id).val();
     $("body").append($temp);
     $temp.val(content).select();
@@ -666,7 +666,7 @@ function Getinserttype(table,field,type){
                         <div class="" id="heading_div_id" data-order="header_order_position" style="'.$display.'">
                         <h5 class="card-label text-center f-w-700 d-block mb-0">'.$label.'</h5>
 
-                        <span class="f-10 d-block">From 17-05-2023 To 17-05-2023</span>
+                        <span class="f-10 d-block">'.__('From 17-05-2023 To 17-05-2023').'</span>
                         </div>
                         </div>';
                     }elseif($seq == $addres){
@@ -674,7 +674,7 @@ function Getinserttype(table,field,type){
                         $display =  $headers['addressdislay']==1?"display:none":"";
                         return '<div class="col-lg-4 '.$po.' box" draggable="true" data-id="'.$seq.'" >
                         <div id="address_div_id" data-order="header_order_address" style="'.$display.'" >
-                        <span class="f-10 f-w-600"><span class="d-block">Name : '.$_SESSION['display_name'].' </span> <span> Date & Time : '.date("d-m-Y H:i:s").'</span></span>
+                        <span class="f-10 f-w-600"><span class="d-block">'.__('Name').' : '.$_SESSION['display_name'].' </span> <span> '.htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8').' : '.date("d-m-Y H:i:s").'</span></span>
                         </div>
                         </div>';
                     }elseif($seq == $logo){

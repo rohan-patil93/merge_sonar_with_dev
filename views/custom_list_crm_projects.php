@@ -26,20 +26,20 @@ $project_task_status = $result['project_task_status'];
 
 ?>  <div class="card">
     <div class="card-header">
-        <h5>Projects <small class="f-12 text-info">(<?php echo fromDate($from_date)." To ".fromDate($to_date); ?>)</small></h5>
+        <h5><?= __('Projects'); ?> <small class="f-12 text-info">(<?php echo fromDate($from_date)." To ".fromDate($to_date); ?>)</small></h5>
         <div class="card-header-right">
-            <button type="button" class="btn btn-success mb-2 desktop-view leadsidebar "  onclick="leadPageCall('PROJECT')"><i class="icofont icofont-plus icon-white "></i> Project </button>
+            <button type="button" class="btn btn-success mb-2 desktop-view leadsidebar "  onclick="leadPageCall('PROJECT')"><i class="icofont icofont-plus icon-white "></i> <?= __('Project'); ?> </button>
         </div>
     </div>
     <div class="card-body">
         <?php if(count((array)$crm_projects) !=0){ ?>
             <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                 <thead>
-                    <tr><th scope="col">Project Name</th>
-                        <th scope="col">Originator</th>
-                        <th scope="col">Project Start</th>
-                        <th scope="col">Project End</th>
-                        <th scope="col">Total Budget</th>
+                    <tr><th scope="col"><?= __('Project Name'); ?></th>
+                        <th scope="col"><?= __('Originator'); ?></th>
+                        <th scope="col"><?= __('Project Start'); ?></th>
+                        <th scope="col"><?= __('Project End'); ?></th>
+                        <th scope="col"><?= __('Total Budget'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,9 +49,9 @@ $project_task_status = $result['project_task_status'];
                         <td  class="p-2">
                             <div class="align-middle">
                               <?php if($prjct['project_logo']) { ?>
-                                  <img src="uploads/all/<?php echo $prjct['project_logo']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Logo">
+                                  <img src="uploads/all/<?php echo $prjct['project_logo']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                               <?php } else { ?>
-                                  <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($prjct['project_name']); ?></span>
+                                  <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($prjct['project_name']); ?></span>
                               <?php } ?>
                               <div class="d-inline-block width73">
                                   <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('PROJECT','<?php echo $prjct['id']; ?>')"><h6><?php echo $prjct['project_name']; ?></h6></button>

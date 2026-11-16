@@ -40,15 +40,15 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="f-30">Age Profile</h5>
-      <h6 class="mt-4"><?php echo count((array)$result['emp_data']); ?> People</h6>
+      <h5 class="f-30"><?= __('Age Profile'); ?></h5>
+      <h6 class="mt-4"><?php echo count((array)$result['emp_data']); ?> <?= __('People'); ?></h6>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -59,14 +59,14 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
         <?php include_once 'views/custom_standard_report_hr_employee_filter.php'; ?>
         <div class="col-lg-2 mt-1">
             <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                Apply
+                <?= __('Apply'); ?>
               </button>
             <input type="hidden" name="submit" value="applyform">
           </div>
         </form>
         <div class="col-lg-12">
           <div class="border mt-4">
-            <h3 class="bg-gray p-2 border-bottom f-16 f-w-600">Breakdown By Age</h3>
+            <h3 class="bg-gray p-2 border-bottom f-16 f-w-600"><?= __('Breakdown By Age'); ?></h3>
             <div class="col-lg-12 row">
             <div class="col-lg-8">
               <div id="chart_Donut_age" style="width: 100%; height: 400px;"></div>
@@ -85,9 +85,9 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
                     <div class="table-responsive">
                       <table class="table ontable table-hover m-b-0">
                         <thead>
-                          <th scope="col"> Age Group</th>
-                          <th scope="col">Precentage </th>
-                          <th scope="col">Count</th>
+                          <th scope="col"> <?= __('Age Group'); ?></th>
+                          <th scope="col"><?= __('Precentage'); ?> </th>
+                          <th scope="col"><?= __('Count'); ?></th>
                         </thead>
                         <tbody>
                           <?php foreach($cdaa as $chart_data){
@@ -129,13 +129,13 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
         <table class="table table-hover">
           <tr style="background-color: #eeeeee;">
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Age</th>
-            <th scope="col">Division</th>
-            <th scope="col">Department</th>
-            <th scope="col">Location</th>
-            <th scope="col">Designation</th>
-            <th scope="col">Employee Status</th>
+            <th scope="col"><?= __('Name'); ?></th>
+            <th scope="col"><?= __('Age'); ?></th>
+            <th scope="col"><?= __('Division'); ?></th>
+            <th scope="col"><?= __('Department'); ?></th>
+            <th scope="col"><?= __('Location'); ?></th>
+            <th scope="col"><?= __('Designation'); ?></th>
+            <th scope="col"><?= __('Employee Status'); ?></th>
           </tr>
           <?php $sl=1; if(count((array)$result['emp_data'])>0){
            foreach($result['emp_data'] as $emp_data ){
@@ -159,7 +159,7 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
             <?php
           }else{ ?>
           <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Candidates</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Candidates'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

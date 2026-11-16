@@ -63,36 +63,36 @@ $statistics = [
         <div class="col-md-3 col-sm-6">
             <div class="card bg-primary order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Today's Fuel Cost</h6>
+                    <h6 class="text-white"><?= __('Today\'s Fuel Cost'); ?></h6>
                     <h2 class="text-right text-white"><i class="ti-money f-left"></i> <span id="stat-today-amount">₹0</span></h2>
-                    <p class="m-b-0 text-white">Total amount spent today</p>
+                    <p class="m-b-0 text-white"><?= __('Total amount spent today'); ?></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="card bg-success order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Today's Fuel Quantity</h6>
+                    <h6 class="text-white"><?= __('Today\'s Fuel Quantity'); ?></h6>
                     <h2 class="text-right text-white"><i class="ti-dropbox f-left"></i> <span id="stat-today-quantity">0L</span></h2>
-                    <p class="m-b-0 text-white">Total liters dispensed</p>
+                    <p class="m-b-0 text-white"><?= __('Total liters dispensed'); ?></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="card bg-warning order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Monthly Cost</h6>
+                    <h6 class="text-white"><?= __('Monthly Cost'); ?></h6>
                     <h2 class="text-right text-white"><i class="ti-stats-up f-left"></i> <span id="stat-monthly-cost">₹0</span></h2>
-                    <p class="m-b-0 text-white">This month's total</p>
+                    <p class="m-b-0 text-white"><?= __('This month\'s total'); ?></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="card bg-info order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Vehicles Fueled</h6>
+                    <h6 class="text-white"><?= __('Vehicles Fueled'); ?></h6>
                     <h2 class="text-right text-white"><i class="ti-car f-left"></i> <span id="stat-vehicles-count">0</span></h2>
-                    <p class="m-b-0 text-white">Today's vehicle count</p>
+                    <p class="m-b-0 text-white"><?= __('Today\'s vehicle count'); ?></p>
                 </div>
             </div>
         </div>
@@ -107,7 +107,7 @@ $statistics = [
                     <div class="card-header-right table-card-header">
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                             <i class="icofont icofont-reply"></i>
-                            Back
+                            <?= __('Back'); ?>
                         </a>
                     </div>
                 </div>
@@ -123,18 +123,18 @@ $statistics = [
 
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Vehicle Number <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Vehicle Number'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <input aria-label="e.g., ABC-1234" type="text" class="form-control text-uppercase" name="vehicle_number"
-                                        id="vehicle_number" placeholder="e.g., ABC-1234"
+                                    <input aria-label="<?= htmlspecialchars(__('e.g., ABC-1234'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-uppercase" name="vehicle_number"
+                                        id="vehicle_number" placeholder="<?= htmlspecialchars(__('e.g., ABC-1234'), ENT_QUOTES, 'UTF-8'); ?>"
                                         value="<?php echo $editMode && $fuelData ? htmlspecialchars($fuelData['vehicle_number']) : ''; ?>" required>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Vehicle Ownership <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Vehicle Ownership'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Vehicle Ownership" class="form-select js-example-basic-single" name="vehicle_ownership" id="vehicleOwnership" onchange="toggleDepartmentSection()" required>
-                                        <option value="">Select Ownership Type</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Vehicle Ownership'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="vehicle_ownership" id="vehicleOwnership" onchange="toggleDepartmentSection()" required>
+                                        <option value=""><?= __('Select Ownership Type'); ?></option>
                                         <?php foreach ($vehicleOwnership as $key => $type): ?>
                                             <option value="<?php echo $key; ?>" <?php echo ($editMode && $fuelData && $fuelData['vehicle_ownership'] == $key) ? 'selected' : ''; ?>><?php echo $type; ?></option>
                                         <?php endforeach; ?>
@@ -146,18 +146,18 @@ $statistics = [
                         <!-- Department -->
                         <div class="form-group row" id="departmentRow" style="display: <?php echo ($editMode && $fuelData && $fuelData['vehicle_ownership'] == 'company') ? 'flex' : 'none'; ?>;">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Department <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Department'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Department" class="form-select js-example-basic-single" name="department" id="departmentSelect" onchange="loadEmployeesByDepartment()">
-                                        <option value="">Select Department</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="department" id="departmentSelect" onchange="loadEmployeesByDepartment()">
+                                        <option value=""><?= __('Select Department'); ?></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Employee <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Employee'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Employee" class="form-select js-example-basic-single" name="employee" id="employeeSelect" onchange="fillEmployeeDetails()">
-                                        <option value="">Select Employee</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Employee'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="employee" id="employeeSelect" onchange="fillEmployeeDetails()">
+                                        <option value=""><?= __('Select Employee'); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -166,18 +166,18 @@ $statistics = [
 
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Driver/Employee Name <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Driver/Employee Name'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <input aria-label="Full name of driver/employee" type="text" class="form-control" name="driver_name"
-                                        placeholder="Full name of driver/employee"
+                                    <input aria-label="<?= htmlspecialchars(__('Full name of driver/employee'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="driver_name"
+                                        placeholder="<?= htmlspecialchars(__('Full name of driver/employee'), ENT_QUOTES, 'UTF-8'); ?>"
                                         value="<?php echo $editMode && $fuelData ? htmlspecialchars($fuelData['driver_name']) : ''; ?>" required>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Contact Number</span>
+                                <span class="form-label"><?= __('Contact Number'); ?></span>
                                 <div>
-                                    <input aria-label="Phone number" type="tel" class="form-control" name="contact_number"
-                                        placeholder="Phone number"
+                                    <input aria-label="<?= htmlspecialchars(__('Phone number'), ENT_QUOTES, 'UTF-8'); ?>" type="tel" class="form-control" name="contact_number"
+                                        placeholder="<?= htmlspecialchars(__('Phone number'), ENT_QUOTES, 'UTF-8'); ?>"
                                         value="<?php echo $editMode && $fuelData ? htmlspecialchars($fuelData['contact_number']) : ''; ?>">
                                 </div>
                             </div>
@@ -186,11 +186,11 @@ $statistics = [
 
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Fuel Type <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Fuel Type'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Fuel Type" class="form-select js-example-basic-single" name="fuel_type"
+                                    <select aria-label="<?= htmlspecialchars(__('Fuel Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="fuel_type"
                                         id="fuelType" onchange="toggleOtherFuelType()" required>
-                                        <option value="">Select Fuel Type</option>
+                                        <option value=""><?= __('Select Fuel Type'); ?></option>
                                         <?php foreach ($fuelTypes as $key => $type): ?>
                                             <option value="<?php echo $key; ?>" <?php echo ($editMode && $fuelData && $fuelData['fuel_type'] == $key) ? 'selected' : ''; ?>><?php echo $type; ?></option>
                                         <?php endforeach; ?>
@@ -198,7 +198,7 @@ $statistics = [
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Fuel Quantity (Liters) <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Fuel Quantity (Liters)'); ?> <span class="text-danger">*</span></span>
                                 <div>
                                     <input aria-label="0.00" type="number" class="form-control" name="fuel_quantity" step="0.01" min="0"
                                         placeholder="0.00" onchange="calculateTotal()"
@@ -210,10 +210,10 @@ $statistics = [
 
                         <div class="form-group row" id="otherFuelTypeRow" style="display: none;">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Specify Fuel Type <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Specify Fuel Type'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <input aria-label="Please specify fuel type" type="text" class="form-control" name="other_fuel_type"
-                                        id="otherFuelType" placeholder="Please specify fuel type"
+                                    <input aria-label="<?= htmlspecialchars(__('Please specify fuel type'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="other_fuel_type"
+                                        id="otherFuelType" placeholder="<?= htmlspecialchars(__('Please specify fuel type'), ENT_QUOTES, 'UTF-8'); ?>"
                                         value="<?php echo $editMode && $fuelData ? htmlspecialchars($fuelData['other_fuel_type']) : ''; ?>">
                                 </div>
                             </div>
@@ -222,7 +222,7 @@ $statistics = [
 
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Price per Liter (₹) <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Price per Liter (₹)'); ?> <span class="text-danger">*</span></span>
                                 <div>
                                     <input aria-label="0.00" type="number" class="form-control" name="price_per_liter" step="0.01" min="0"
                                         placeholder="0.00" onchange="calculateTotal()"
@@ -230,7 +230,7 @@ $statistics = [
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Total Amount (₹)</span>
+                                <span class="form-label"><?= __('Total Amount (₹)'); ?></span>
                                 <div>
                                     <input aria-label="0.00" type="number" class="form-control" name="total_amount" step="0.01" min="0"
                                         placeholder="0.00" value="<?php echo $editMode && $fuelData ? $fuelData['total_amount'] : ''; ?>" readonly>
@@ -241,10 +241,10 @@ $statistics = [
 
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Payment Method <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Payment Method'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Payment Method" class="form-select js-example-basic-single" name="payment_method" required>
-                                        <option value="">Select Payment Method</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Payment Method'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="payment_method" required>
+                                        <option value=""><?= __('Select Payment Method'); ?></option>
                                         <?php foreach ($paymentMethods as $key => $method): ?>
                                             <option value="<?php echo $key; ?>" <?php echo ($editMode && $fuelData && $fuelData['payment_method'] == $key) ? 'selected' : ''; ?>><?php echo $method; ?></option>
                                         <?php endforeach; ?>
@@ -252,9 +252,9 @@ $statistics = [
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Fuel Date</span>
+                                <span class="form-label"><?= __('Fuel Date'); ?></span>
                                 <div>
-                                    <input aria-label="Fuel Date" type="date" class="form-control" name="fuel_date"
+                                    <input aria-label="<?= htmlspecialchars(__('Fuel Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="fuel_date"
                                         value="<?php echo $editMode && $fuelData ? $fuelData['fuel_date'] : date('Y-m-d'); ?>">
                                 </div>
                             </div>
@@ -263,10 +263,10 @@ $statistics = [
 
                         <div class="form-group row">
                             <div class="form-group col-lg-12">
-                                <span class="form-label">Additional Notes</span>
+                                <span class="form-label"><?= __('Additional Notes'); ?></span>
                                 <div>
-                                    <textarea aria-label="Any additional information or remarks..." class="form-control" name="notes" rows="3"
-                                        placeholder="Any additional information or remarks..."><?php echo $editMode && $fuelData ? htmlspecialchars($fuelData['notes']) : ''; ?></textarea>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Any additional information or remarks...'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="notes" rows="3"
+                                        placeholder="<?= htmlspecialchars(__('Any additional information or remarks...'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $editMode && $fuelData ? htmlspecialchars($fuelData['notes']) : ''; ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -276,18 +276,18 @@ $statistics = [
                             <div class="form-group col-lg-6">
                                 <div class="checkbox-fade fade-in-primary">
                                     <label>
-                                        <input aria-label="Is Emergency" type="checkbox" name="is_emergency" value="1" <?php echo ($editMode && $fuelData && $fuelData['is_emergency'] == 1) ? 'checked' : ''; ?>>
+                                        <input aria-label="<?= htmlspecialchars(__('Is Emergency'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="is_emergency" value="1" <?php echo ($editMode && $fuelData && $fuelData['is_emergency'] == 1) ? 'checked' : ''; ?>>
                                         <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                        <span>Emergency fuel requirement</span>
+                                        <span><?= __('Emergency fuel requirement'); ?></span>
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
                                 <div class="checkbox-fade fade-in-primary">
                                     <label>
-                                        <input aria-label="Is Advance" type="checkbox" name="is_advance" value="1" <?php echo ($editMode && $fuelData && $fuelData['is_advance'] == 1) ? 'checked' : ''; ?>>
+                                        <input aria-label="<?= htmlspecialchars(__('Is Advance'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="is_advance" value="1" <?php echo ($editMode && $fuelData && $fuelData['is_advance'] == 1) ? 'checked' : ''; ?>>
                                         <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                        <span>Advance fuel allocation</span>
+                                        <span><?= __('Advance fuel allocation'); ?></span>
                                     </label>
                                 </div>
                             </div>
@@ -301,7 +301,7 @@ $statistics = [
                             </button>
                             <button type="reset"
                                 class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile">
-                                <i class="la la-refresh"></i>Clear Form
+                                <i class="la la-refresh"></i><?= __('Clear Form'); ?>
                             </button>
                         </div>
                     </form>
@@ -315,10 +315,10 @@ $statistics = [
         <div class="col-12">
             <div class="card table-card">
                 <div class="card-header table-card-header">
-                    <h5><i class="ti-time"></i> Today's Fuel Distribution Summary</h5>
+                    <h5><i class="ti-time"></i> <?= __('Today\'s Fuel Distribution Summary'); ?></h5>
                     <div class="card-header-right">
                         <a href="index.php?option=custom_list_transport_fuel" class="btn btn-sm btn-primary">
-                            <i class="ti-eye"></i> View All Records
+                            <i class="ti-eye"></i> <?= __('View All Records'); ?>
                         </a>
                     </div>
                 </div>
@@ -327,19 +327,19 @@ $statistics = [
                         <table class="table table-hover" id="todayFuelSummaryTable">
                             <thead>
                                 <tr>
-                                    <th scope="col">Vehicle</th>
-                                    <th scope="col">Driver</th>
-                                    <th scope="col">Fuel Type</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Time</th>
+                                    <th scope="col"><?= __('Vehicle'); ?></th>
+                                    <th scope="col"><?= __('Driver'); ?></th>
+                                    <th scope="col"><?= __('Fuel Type'); ?></th>
+                                    <th scope="col"><?= __('Quantity'); ?></th>
+                                    <th scope="col"><?= __('Amount'); ?></th>
+                                    <th scope="col"><?= __('Time'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td colspan="6" class="text-center p-4">
                                         <i class="fa fa-spinner fa-spin text-muted" style="font-size: 2rem;"></i>
-                                        <p class="text-muted mt-2">Loading today's summary...</p>
+                                        <p class="text-muted mt-2"><?= __('Loading today\'s summary...'); ?></p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -356,8 +356,8 @@ $statistics = [
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><i class="ti-printer"></i> Fuel Receipt</h4>
-                <button type="button" class="close" onclick="closeReceiptModal()" aria-label="Close">
+                <h4 class="modal-title"><i class="ti-printer"></i> <?= __('Fuel Receipt'); ?></h4>
+                <button type="button" class="close" onclick="closeReceiptModal()" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -365,9 +365,9 @@ $statistics = [
                 <!-- Receipt content will be loaded here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeReceiptModal()">Close</button>
+                <button type="button" class="btn btn-secondary" onclick="closeReceiptModal()"><?= __('Close'); ?></button>
                 <button type="button" class="btn btn-primary" onclick="printReceipt()">
-                    <i class="ti-printer"></i> Print
+                    <i class="ti-printer"></i> <?= __('Print'); ?>
                 </button>
             </div>
         </div>
@@ -437,10 +437,10 @@ $statistics = [
         const otherInput = document.getElementById('otherFuelType');
 
         if (fuelType === 'other') {
-            otherRow.style.display = 'block';
+            otherRow.style.display = <?php echo json_encode(__('block'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             otherInput.required = true;
         } else {
-            otherRow.style.display = 'none';
+            otherRow.style.display = <?php echo json_encode(__('none'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             otherInput.required = false;
             otherInput.value = '';
         }
@@ -512,7 +512,7 @@ $statistics = [
 
     function populateDepartmentSelect(departments) {
         const departmentSelect = document.getElementById('departmentSelect');
-        departmentSelect.innerHTML = '<option value="">Select Department</option>';
+        departmentSelect.innerHTML = '<option value=""><?= htmlspecialchars(__('Select Department'), ENT_QUOTES, 'UTF-8'); ?></option>';
 
         departments.forEach(dept => {
             const option = document.createElement('option');
@@ -532,7 +532,7 @@ $statistics = [
         const employeeSelect = document.getElementById('employeeSelect');
 
         if (!departmentId) {
-            employeeSelect.innerHTML = '<option value="">Select Employee</option>';
+            employeeSelect.innerHTML = '<option value=""><?= htmlspecialchars(__('Select Employee'), ENT_QUOTES, 'UTF-8'); ?></option>';
             if (typeof jQuery !== 'undefined') {
                 $(employeeSelect).trigger('change');
             }
@@ -553,21 +553,21 @@ $statistics = [
                     populateEmployeeSelect(result.data);
                 } else {
                     console.error('Error loading employees:', result.message);
-                    employeeSelect.innerHTML = '<option value="">No employees found</option>';
+                    employeeSelect.innerHTML = '<option value=""><?= htmlspecialchars(__('No employees found'), ENT_QUOTES, 'UTF-8'); ?></option>';
                 }
             } catch (e) {
                 console.error('Error parsing employees response:', e);
-                employeeSelect.innerHTML = '<option value="">Error loading employees</option>';
+                employeeSelect.innerHTML = '<option value=""><?= htmlspecialchars(__('Error loading employees'), ENT_QUOTES, 'UTF-8'); ?></option>';
             }
         }).fail(function(xhr, status, error) {
             console.error('Network error loading employees:', error);
-            employeeSelect.innerHTML = '<option value="">Network error</option>';
+            employeeSelect.innerHTML = '<option value=""><?= htmlspecialchars(__('Network error'), ENT_QUOTES, 'UTF-8'); ?></option>';
         });
     }
 
     function populateEmployeeSelect(employees) {
         const employeeSelect = document.getElementById('employeeSelect');
-        employeeSelect.innerHTML = '<option value="">Select Employee</option>';
+        employeeSelect.innerHTML = '<option value=""><?= htmlspecialchars(__('Select Employee'), ENT_QUOTES, 'UTF-8'); ?></option>';
 
         employees.forEach(emp => {
             const option = document.createElement('option');
@@ -840,7 +840,7 @@ $statistics = [
                     <td colspan="2">
                         <div class="card-px text-center py-20 m-t-30">
                             <p class="text-muted f-16 fw-bold m-b-30">
-                                <i class="ti-alert text-warning"></i> No Recent Entries
+                                <i class="ti-alert text-warning"></i> <?= htmlspecialchars(__('No Recent Entries'), ENT_QUOTES, 'UTF-8'); ?>
                             </p>
                         </div>
                     </td>
@@ -886,7 +886,7 @@ $statistics = [
                     <td colspan="6">
                         <div class="card-px text-center py-20 m-t-30">
                             <p class="text-muted f-16 fw-bold m-b-30">
-                                <i class="ti-alert text-warning"></i> No Data Available
+                                <i class="ti-alert text-warning"></i> <?= htmlspecialchars(__('No Data Available'), ENT_QUOTES, 'UTF-8'); ?>
                             </p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -927,7 +927,7 @@ $statistics = [
 
     function printFuelReceipt(fuelId) {
         if (typeof jQuery === 'undefined') {
-            alert('System not ready. Please wait a moment and try again.');
+            alert(<?php echo json_encode(__('System not ready. Please wait a moment and try again.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return;
         }
 
@@ -937,13 +937,13 @@ $statistics = [
                 if (result.status === 'success') {
                     showPrintReceipt(result.data);
                 } else {
-                    alert('Error loading fuel details for printing: ' + (result.message || 'Unknown error'));
+                    alert(<?php echo json_encode(__('Error loading fuel details for printing').': ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> + (result.message || 'Unknown error'));
                 }
             } catch (e) {
-                alert('Error processing fuel details.');
+                alert(<?php echo json_encode(__('Error processing fuel details.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
         }).fail(function(xhr, status, error) {
-            alert('Network error loading fuel details.');
+            alert(<?php echo json_encode(__('Network error loading fuel details.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         });
     }
 
@@ -960,7 +960,7 @@ $statistics = [
 
         // Check required fields
         if (!vehicleNumber || !vehicleOwnership || !driverName || !fuelType || !fuelQuantity || !pricePerLiter || !paymentMethod) {
-            alert('Please fill in all required fields.');
+            alert(<?php echo json_encode(__('Please fill in all required fields.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return false;
         }
 
@@ -969,12 +969,12 @@ $statistics = [
             const employeeId = document.getElementById('employeeSelect').value;
 
             if (!departmentId) {
-                alert('Please select a department for company vehicles.');
+                alert(<?php echo json_encode(__('Please select a department for company vehicles.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 return false;
             }
 
             if (!employeeId) {
-                alert('Please select an employee for company vehicles.');
+                alert(<?php echo json_encode(__('Please select an employee for company vehicles.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 return false;
             }
         }
@@ -982,7 +982,7 @@ $statistics = [
         if (fuelType === 'other') {
             const otherFuelType = document.getElementById('otherFuelType').value.trim();
             if (!otherFuelType) {
-                alert('Please specify the fuel type.');
+                alert(<?php echo json_encode(__('Please specify the fuel type.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 document.getElementById('otherFuelType').focus();
                 return false;
             }
@@ -990,32 +990,32 @@ $statistics = [
 
         // Validate fuel quantity
         if (fuelQuantity <= 0 || fuelQuantity > 1000) {
-            alert('Please enter a valid fuel quantity (0.01 to 1000 liters).');
+            alert(<?php echo json_encode(__('Please enter a valid fuel quantity (0.01 to 1000 liters).'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return false;
         }
 
         // Validate price per liter
         if (pricePerLiter <= 0 || pricePerLiter > 500) {
-            alert('Please enter a valid price per liter (₹0.01 to ₹500).');
+            alert(<?php echo json_encode(__('Please enter a valid price per liter (₹0.01 to ₹500).'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return false;
         }
 
         // Basic vehicle number format validation
         const vehiclePattern = /^[A-Z0-9\-\s]+$/;
         if (!vehiclePattern.test(vehicleNumber)) {
-            alert('Please enter a valid vehicle number format.');
+            alert(<?php echo json_encode(__('Please enter a valid vehicle number format.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return false;
         }
 
         // Driver name validation
         if (driverName.length < 2) {
-            alert('Please enter a valid driver name (at least 2 characters).');
+            alert(<?php echo json_encode(__('Please enter a valid driver name (at least 2 characters).'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return false;
         }
 
         const contactNumber = document.querySelector('input[name="contact_number"]').value.trim();
         if (contactNumber && !/^[\+]?[0-9\-\s\(\)]{10,15}$/.test(contactNumber)) {
-            alert('Please enter a valid phone number.');
+            alert(<?php echo json_encode(__('Please enter a valid phone number.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return false;
         }
 
@@ -1025,7 +1025,7 @@ $statistics = [
 
     function submitFuelEntry() {
         if (typeof jQuery === 'undefined') {
-            alert('System not ready. Please wait a moment and try again.');
+            alert(<?php echo json_encode(__('System not ready. Please wait a moment and try again.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return;
         }
 
@@ -1059,7 +1059,7 @@ $statistics = [
 
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Recording...';
+        submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> <?= htmlspecialchars(__('Recording...'), ENT_QUOTES, 'UTF-8'); ?>';
         submitBtn.disabled = true;
 
         $.post('ajax/employee_loan_ajax.php', Object.fromEntries(formData), function(response) {

@@ -86,7 +86,7 @@ $showtables = json_decode($showtablesdata,1);
             }
             i++;
         });
-        $("#view_table").html("<select aria-label='Table' class='form-control form-select js-example-basic-single' id ='table' name='table' onchange='fieldchange(this.value)'><option value=''><?php echo __('Select any table'); ?> </option>"+option+"</select>");
+        $("#view_table").html("<select aria-label='<?= htmlspecialchars(__('Table'), ENT_QUOTES, 'UTF-8'); ?>' class='form-control form-select js-example-basic-single' id ='table' name='table' onchange='fieldchange(this.value)'><option value=''><?php echo __('Select any table'); ?> </option>"+option+"</select>");
         $(".js-example-basic-single").select2();
         $(".js-example-disabled-results").select2();
 
@@ -157,7 +157,7 @@ $showtables = json_decode($showtablesdata,1);
             data:'page=custom_right_join&table='+val,
             type: "POST",
             success:function(data){
-                $("#right_field_id").html("<select aria-label='Right Field' class='form-control form-select js-example-basic-single' onchange='bulidquery(this.value,this.id)' id ='right_field' name='right_field'>"+data+"</select>");
+                $("#right_field_id").html("<select aria-label='<?= htmlspecialchars(__('Right Field'), ENT_QUOTES, 'UTF-8'); ?>' class='form-control form-select js-example-basic-single' onchange='bulidquery(this.value,this.id)' id ='right_field' name='right_field'>"+data+"</select>");
                 $(".js-example-basic-single").select2();
                 $(".js-example-disabled-results").select2();
             },
@@ -170,7 +170,7 @@ $showtables = json_decode($showtablesdata,1);
             data:'page=dis_att_type&table='+val,
             type: "POST",
             success:function(data){
-                $("#left_field_id").html("<select aria-label='Left Field' class='form-control form-select js-example-basic-single' onchange='bulidquery(this.value,this.id)' id ='left_field' name='left_field'>"+data+"</select>");
+                $("#left_field_id").html("<select aria-label='<?= htmlspecialchars(__('Left Field'), ENT_QUOTES, 'UTF-8'); ?>' class='form-control form-select js-example-basic-single' onchange='bulidquery(this.value,this.id)' id ='left_field' name='left_field'>"+data+"</select>");
                 $(".js-example-basic-single").select2();
                 $(".js-example-disabled-results").select2();
             },
@@ -694,7 +694,7 @@ function sessionModal(){
                     var element = document.getElementById("placeholderrow"+value);
                     console.log(element);
                     if (element == null){
-                        returnhtml += '<div class="row" id="placeholderrow'+value+'"><div class="col-lg-4"><span class="form-label">Mapping placeholder <button type="button" class="btn p-0 border-0 bg-transparent ti-files cursor-pointer" onclick="copyToClipboard(\''+value+'\')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Copy To Use Placeholder'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></span><input aria-label="<?php echo __('Text'); ?>" type="text"  readonly class="form-control" value="@'+value+'"  id="text_'+value+'"></div><div class="col-lg-8"><span class="form-label"><?php echo __('Sql Formula/Sub Sql'); ?></span><textarea aria-label="<?php echo __('Formulaplaceholder[@'); ?>" type="text" class="form-control" rows="4" cols="50"   name="formulaplaceholder[@'+value+']"></textarea></div></div>';
+                        returnhtml += '<div class="row" id="placeholderrow'+value+'"><div class="col-lg-4"><span class="form-label"><?= htmlspecialchars(__('Mapping placeholder'), ENT_QUOTES, 'UTF-8'); ?> <button type="button" class="btn p-0 border-0 bg-transparent ti-files cursor-pointer" onclick="copyToClipboard(\''+value+'\')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Copy To Use Placeholder'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></span><input aria-label="<?php echo __('Text'); ?>" type="text"  readonly class="form-control" value="@'+value+'"  id="text_'+value+'"></div><div class="col-lg-8"><span class="form-label"><?php echo __('Sql Formula/Sub Sql'); ?></span><textarea aria-label="<?php echo __('Formulaplaceholder[@'); ?>" type="text" class="form-control" rows="4" cols="50"   name="formulaplaceholder[@'+value+']"></textarea></div></div>';
                     }else{
                         console.log("ok");
                     }

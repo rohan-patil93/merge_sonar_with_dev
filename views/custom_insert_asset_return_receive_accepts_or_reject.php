@@ -26,8 +26,8 @@ function submitdetails(current_status){
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -60,44 +60,44 @@ function submitdetails(current_status){
 }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Asset Receive</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Asset Receive'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="row">
         <div class="col-2 text-center">
             <div class="s-cont d-inline-block">
-                <span class="f-w-700 m-b-0">Asset/Code</span>
+                <span class="f-w-700 m-b-0"><?= __('Asset/Code'); ?></span>
                 <p class="m-b-0 f-10"> <?php echo $assets['asset_description']."/".$assets['asset_code']; ?></p>
             </div>
         </div>
         <div class="col-2 b-l-default text-center">
             <div class="s-cont d-inline-block">
-                <span class="f-w-700 m-b-0">Brand</span>
+                <span class="f-w-700 m-b-0"><?= __('Brand'); ?></span>
                 <p class="m-b-0 f-10"> <?php echo $assets['brand'] !=""?$assets['brand']:"-"; ?></p>
             </div>
         </div>
         <div class="col-2 b-l-default text-center">
             <div class="s-cont d-inline-block">
-                <span class="f-w-700 m-b-0">Model/Serial No</span>
+                <span class="f-w-700 m-b-0"><?= __('Model/Serial No'); ?></span>
                 <p class="m-b-0 f-10"> <?php echo $assets['model'] !=""?$assets['model']:"-"; ?>/<?php echo $assets['serial_no'] !=""?$assets['serial_no']:"-"; ?></p>
             </div>
         </div>
         <div class="col-2 b-l-default text-center">
             <div class="s-cont d-inline-block">
-                <span class="f-w-700 m-b-0">Start date</span>
+                <span class="f-w-700 m-b-0"><?= __('Start date'); ?></span>
                 <p class="m-b-0 "> <?php echo $asset_returns['start_date'] !=""?fromDate($asset_returns['start_date']):"-"; ?></p>
             </div>
         </div>
         <div class="col-2 b-l-default text-center">
             <div class="s-cont d-inline-block">
-                <span class="f-w-700 m-b-0">Return Date</span>
+                <span class="f-w-700 m-b-0"><?= __('Return Date'); ?></span>
                 <p class="m-b-0 f-10"> <?php echo $asset_returns['end_date'] !=""?fromDate($asset_returns['end_date']):"-"; ?></p>
             </div>
         </div>
         <div class="col-2 b-l-default text-center">
             <div class="s-cont d-inline-block">
-                <span class="f-w-700 m-b-0">Description</span>
+                <span class="f-w-700 m-b-0"><?= __('Description'); ?></span>
                 <p class="m-b-0 f-10"> <?php echo $asset_returns['delivery_type']!="D"?"Delivery Partner":"Self"; ?> </p>
             </div>
         </div>
@@ -110,19 +110,19 @@ function submitdetails(current_status){
             <div class="card p-2 mt-2">
                 <div class="row">
                     <div class="form-group col-lg-3">
-                        <span>Asset Name <span class="requried text-danger">*</span></span>
+                        <span><?= __('Asset Name'); ?> <span class="requried text-danger">*</span></span>
                         <span class="d-block error-message text-danger"></span>
-                        <input aria-label="Asset Name" type="text" class="form-control requried_field" id="asset_name"  name="asset_name" value="<?php echo $assets['asset_description']."/".$assets['asset_code']; ?>" readonly>
+                        <input aria-label="<?= htmlspecialchars(__('Asset Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control requried_field" id="asset_name"  name="asset_name" value="<?php echo $assets['asset_description']."/".$assets['asset_code']; ?>" readonly>
                     </div>
                     <div class="form-group col-lg-3">
-                        <span>Receive date <span class="requried text-danger">*</span></span>
+                        <span><?= __('Receive date'); ?> <span class="requried text-danger">*</span></span>
                         <span class="d-block error-message text-danger"></span>
-                        <input aria-label="Received Date" type="text" class="form-control datepicker requried_field" id="received_date"  name="received_date" value="">
+                        <input aria-label="<?= htmlspecialchars(__('Received Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker requried_field" id="received_date"  name="received_date" value="">
                     </div>
                     <div class="form-group col-lg-6">
-                        <span>Note <span class="requried text-danger">*</span></span>
+                        <span><?= __('Note'); ?> <span class="requried text-danger">*</span></span>
                         <span class="d-block error-message text-danger"></span>
-                        <textarea aria-label="Received Note" type="text" class="form-control requried_field" id="received_note" rows="4" cols="50" name="received_note" ></textarea>
+                        <textarea aria-label="<?= htmlspecialchars(__('Received Note'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control requried_field" id="received_note" rows="4" cols="50" name="received_note" ></textarea>
                     </div>
                 </div>
             </div>

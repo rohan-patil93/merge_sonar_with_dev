@@ -13,43 +13,43 @@
             </tr>
             <tr>
                 <th scope="col" bgcolor="#eeeeee" colspan="2" style="font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
-                    1. Client Details
+                    <?= __('1. Client Details'); ?>
                 </th>
             </tr>
             <tr>
                 <th scope="col" colspan="2" style="padding: 0px;">
                     <table style="width:100%;">
                         <tr>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Customer Name</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Customer No.</th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Customer Name'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Customer No.'); ?></th>
                         </tr>
                         <tr>
                             <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding:5px;font-weight:normal;"><?php echo $Billed_to_party_name; ?></td>
-                            <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;">NA</td>
+                            <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;"><?= __('NA'); ?></td>
                         </tr>
                     </table>
                 </th>
             </tr>
             <tr>
                 <th scope="col" bgcolor="#eeeeee" colspan="2" style="font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
-                    2. Transaction Details
+                    <?= __('2. Transaction Details'); ?>
                 </th>
             </tr>
             <tr>
                 <th scope="col" colspan="2" style="padding: 0px;">
                     <table style="width:100%;">
                         <tr>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Supply Type Code</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Document No</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Place of Supply</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Document Type</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Document Date</th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Supply Type Code'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Document No'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Place of Supply'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Document Type'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Document Date'); ?></th>
                         </tr>
                         <tr>
-                            <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding:5px;font-weight:normal;">NA</td>
+                            <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding:5px;font-weight:normal;"><?= __('NA'); ?></td>
                             <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;"><?php echo $transaction['transaction_number']; ?></td>
-                            <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;">NA</td>
-                            <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;">Delivery Challan</td>
+                            <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;"><?= __('NA'); ?></td>
+                            <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;"><?= __('Delivery Challan'); ?></td>
                             <td style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;font-weight:normal;"><?php echo date("d M Y",strtotime($transaction['transaction_date'])); ?></td>
                         </tr>
                     </table>
@@ -57,44 +57,44 @@
             </tr>
             <tr>
                 <th scope="col" colspan="2" style="font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
-                    IGST applicable despite Supplier and Recipient located in same State: <?php echo $transaction['originator_state_id'] == $transaction['supplier_state_id']?"Yes":"No";?>
+                    <?= __('IGST applicable despite Supplier and Recipient located in same State'); ?>: <?php echo $transaction['originator_state_id'] == $transaction['supplier_state_id']?"Yes":"No";?>
                 </th>
             </tr>
 
             <tr>
                 <th scope="col" bgcolor="#eeeeee" colspan="2" style="font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
-                    3. Party Details
+                    <?= __('3. Party Details'); ?>
                 </th>
             </tr>
             <tr>
                 <td style="padding: 0px; border-right: 1px solid #cccccc;">
-                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;">Billed By:</div>
-                    <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0;">GSTIN: <?php echo $Billed_to_gstin; ?></p>
+                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;"><?= __('Billed By'); ?>:</div>
+                    <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0;"><?= __('GSTIN'); ?>: <?php echo $Billed_to_gstin; ?></p>
                     <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0; white-space: normal;"><?php echo $Billed_to_party_name; ?></p>
                     <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0; white-space: normal;"><?php echo $Billed_to_party_address; ?></p>
                 </td>
                 <td style="padding: 0px;">
-                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;">Ship To:</div>
-                    <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0;">GSTIN: <?php echo $Shipped_to_gstin; ?></p>
+                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;"><?= __('Ship To'); ?>:</div>
+                    <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0;"><?= __('GSTIN'); ?>: <?php echo $Shipped_to_gstin; ?></p>
                     <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0; white-space: normal;"><?php echo $Shipped_to_party_name; ?></p>
                     <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0; white-space: normal;"><?php echo $Shipped_to_party_ship_adderss; ?></p>
                 </td>
             </tr>
             <tr>
                 <th scope="col" bgcolor="#eeeeee" colspan="2" style="font-size: 13px; color: #000000; padding: 5px; margin: 0; border: 1px solid #cccccc;">
-                    4. Details of Goods / Services
+                    <?= __('4. Details of Goods / Services'); ?>
                 </th>
             </tr>
             <tr>
                 <th scope="col" colspan="2" style="padding: 0px;">
                     <table style="width: 100%;">
                         <tr>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">S.N.</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Part Number</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Description</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">HSN Code</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Quantity</th>
-                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;">Unit</th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('S.N.'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Part Number'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Description'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('HSN Code'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Quantity'); ?></th>
+                            <th scope="col" style="font-size:12px; color: #333333; border: 1px solid #cccccc; padding: 5px;"><?= __('Unit'); ?></th>
                         </tr>
                         <?php $seq=1; foreach($transaction_items as $ta){ ?>
                         <tr>
@@ -114,12 +114,12 @@
         <tfoot>
             <tr>
                 <td style="padding: 0px; border-right: 1px solid #cccccc;">
-                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;">Requested By: <?php echo $config['name']; ?></div>
-                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;">Requested On: 26-08-2026</div>
-                    <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0;">Remarks- <?php echo emptyCheck($transaction['printing_notes']); ?></p>
+                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;"><?= __('Requested By'); ?>: <?php echo $config['name']; ?></div>
+                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;"><?= __('Requested On: 26-08-2026'); ?></div>
+                    <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0;"><?= __('Remarks'); ?>- <?php echo emptyCheck($transaction['printing_notes']); ?></p>
                 </td>
                 <td style="padding: 0px; vertical-align: top;">
-                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;">Sign:</div>
+                    <div style="font-size:14px; color: #000000; padding: 5px; display: block;"><?= __('Sign'); ?>:</div>
                     <p style="font-size: 13px; color: #000000; padding: 5px; margin: 0;"></p>
                 </td>
             </tr>

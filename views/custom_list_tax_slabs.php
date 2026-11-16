@@ -23,7 +23,7 @@ $title = "Tax Slabs"
                     </a>
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                       <i class="icofont icofont-reply"></i>
-                      Back
+                      <?= __('Back'); ?>
                    </a>
                 </div>
             </div>
@@ -31,10 +31,10 @@ $title = "Tax Slabs"
                 <table id="basic-btn" class="table table-striped table-bordered nowrap">
                     <thead>
                         <tr>
-                            <th scope="col">SL NO.</th>
-                            <th scope="col">Assessment Year</th>
-                            <th scope="col">Tax Slab Name</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('SL NO.'); ?></th>
+                            <th scope="col"><?= __('Assessment Year'); ?></th>
+                            <th scope="col"><?= __('Tax Slab Name'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,9 +44,9 @@ $title = "Tax Slabs"
                                 <td><?php echo $tax['assessment_year']; ?></td>
                                 <td><?php echo $tax['tax_slab_name']; ?></td>
                                 <td>
-                                    <a href="index.php?option=COM_INSERT_TAX_SLABS&ASS=<?php echo $tax['assessment_year']; ?>&SNAME=<?php echo $tax['tax_slab_name']; ?>"  class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit Details"><i class="fa fa-edit"></i></a>
-                                    <a href="index.php?option=COM_INSERT_TAX_SLABS&ASS=<?php echo $tax['assessment_year']; ?>&SNAME=<?php echo $tax['tax_slab_name']; ?>&COPY=1" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Copy Details"><i class="fa fa-clone"></i> </a>
-                                    <a href="index.php?option=COM_INSERT_TAX_SLABS&ASS=<?php echo $tax['assessment_year']; ?>&SNAME=<?php echo $tax['tax_slab_name']; ?>&VIEW=1" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View Details"><i class="fa fa-eye"></i></a>
+                                    <a href="index.php?option=COM_INSERT_TAX_SLABS&ASS=<?php echo $tax['assessment_year']; ?>&SNAME=<?php echo $tax['tax_slab_name']; ?>"  class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit"></i></a>
+                                    <a href="index.php?option=COM_INSERT_TAX_SLABS&ASS=<?php echo $tax['assessment_year']; ?>&SNAME=<?php echo $tax['tax_slab_name']; ?>&COPY=1" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Copy Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-clone"></i> </a>
+                                    <a href="index.php?option=COM_INSERT_TAX_SLABS&ASS=<?php echo $tax['assessment_year']; ?>&SNAME=<?php echo $tax['tax_slab_name']; ?>&VIEW=1" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

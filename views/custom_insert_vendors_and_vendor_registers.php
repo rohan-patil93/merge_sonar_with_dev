@@ -324,7 +324,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
     <?php if ($error_message != '') { ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 <?php } ?>
     <div class="card mb-1 mb-xl-10">
@@ -339,9 +339,9 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                 <div class="col-lg-5">
                     <div class="image-input image-input-empty image-input-outline" id="kt_image_5">
                         <form method="post" id="profile_pic_file" enctype="multipart/form-data" class="position-relative">
-                            <label class="btn-hover-text-primary position-absolute  text-white" data-action="remove" data-bs-toggle="tooltip" title="Edit Profile Pic" style="left: -3px; top: -2px;">
+                            <label class="btn-hover-text-primary position-absolute  text-white" data-action="remove" data-bs-toggle="tooltip" title="<?= htmlspecialchars(__('Edit Profile Pic'), ENT_QUOTES, 'UTF-8'); ?>" style="left: -3px; top: -2px;">
                                 <span><i class="ti-pencil-altj"></i></span>
-                                <input aria-label="Profile Pic File" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg" onchange="updateProfilePic()" />
+                                <input aria-label="<?= htmlspecialchars(__('Profile Pic File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="profile_pic_file" accept=".png, .jpg, .jpeg" onchange="updateProfilePic()" />
                             </label>
                             <?php if ($vendordetail['image'] != "") { ?>
                                 <img src="<?php echo $image; ?>" class="img-radius img-90" alt="">
@@ -377,7 +377,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                         <?php } ?>
                         <div class="font-weight-bold text-dark-50 mt-1 f-14">
                             <?php if ($vendordetail['established_year'] != "" && $vendordetail['established_year'] != "0") {  ?>
-                                <b class="f-w-600">Established Year : </b><?php echo $vendordetail['established_year']; ?>&nbsp;
+                                <b class="f-w-600"><?= __('Established Year'); ?> : </b><?php echo $vendordetail['established_year']; ?>&nbsp;
                             <?php }  ?>
                         </div>
                     </div>
@@ -392,51 +392,51 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                             $verifivcatiostatus_y = "checked";
                             $verification_profile_users_status = 'event_disabled';
                             $lablestauss = '';
-                            $lablestauss .= '<span class="d-block"> <span class="f-w-700">Comment : </span>' . $verification_profile_users[$_SESSION['userid']]['comment'] . '</span>';
-                            $lablestauss .= '<span class="d-block"> <span class="f-w-700">Reviewed Date Time : </span>' . $verification_profile_users[$_SESSION['userid']]['updatedatetime'] . '</span>';
+                            $lablestauss .= '<span class="d-block"> <span class="f-w-700">'.__('Comment').' : </span>' . $verification_profile_users[$_SESSION['userid']]['comment'] . '</span>';
+                            $lablestauss .= '<span class="d-block"> <span class="f-w-700">'.__('Reviewed Date Time').' : </span>' . $verification_profile_users[$_SESSION['userid']]['updatedatetime'] . '</span>';
                         } elseif ($verification_profile_users[$_SESSION['userid']]['status'] == 'N') {
                             $verifivcatiostatus_n = "checked";
                             $verification_profile_users_status = 'event_disabled';
-                            $lablestauss .= '<span class="d-block"> comment : ' . $verification_profile_users[$_SESSION['userid']]['comment'] . '</span>';
-                            $lablestauss .= '<span class="d-block"> Reviewed Date Time : ' . $verification_profile_users[$_SESSION['userid']]['updatedatetime'] . '</span>';
+                            $lablestauss .= '<span class="d-block"> '.__('comment').' : ' . $verification_profile_users[$_SESSION['userid']]['comment'] . '</span>';
+                            $lablestauss .= '<span class="d-block"> '.__('Reviewed Date Time').' : ' . $verification_profile_users[$_SESSION['userid']]['updatedatetime'] . '</span>';
                         }
                     ?>
                         <div class="card <?php echo $verification_profile_users_status; ?>" >
                             <div class="card-body">
-                                <span class="text-info "><i class="ti-alert"></i> I have reviewed the information provided for this vendor and am confident in their ability to successfully fulfill the agreed-upon terms of the contract</span>
+                                <span class="text-info "><i class="ti-alert"></i> <?= __('I have reviewed the information provided for this vendor and am confident in their ability to successfully fulfill the agreed-upon terms of the contract'); ?></span>
                                 <div class="mt-3" id="dispabled_div">
                                     <div class="checkbox-fade fade-in-primary showComment" data-showCommenttype="Y">
                                         <label class="form-label">
-                                            <input aria-label="Checkbox" type="checkbox" value="" <?php echo $verifivcatiostatus_y; ?> class="coomment_check_box">
+                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="" <?php echo $verifivcatiostatus_y; ?> class="coomment_check_box">
                                             <span class="cr">
                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                             </span>
-                                            <span>I Recommend</span>
+                                            <span><?= __('I Recommend'); ?></span>
                                         </label>
                                     </div>
                                     <div class="checkbox-fade fade-in-primary text-danger showComment" data-showCommenttype="N">
                                         <label class="form-label">
-                                            <input aria-label="Checkbox" type="checkbox" value="" <?php echo $verifivcatiostatus_n; ?> class="coomment_check_box">
+                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="" <?php echo $verifivcatiostatus_n; ?> class="coomment_check_box">
                                             <span class="cr">
                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                             </span>
-                                            <span>I Object</span>
+                                            <span><?= __('I Object'); ?></span>
                                         </label>
                                     </div>
                                     <?php echo $lablestauss; ?>
                                 </div>
                                 <div class="mt-3 row d-none" id="profile_review_comment_div" >
                                     <div class="col-lg-8">
-                                        <span class="form-label">Comment <span class="text-danger">*</span></span>
+                                        <span class="form-label"><?= __('Comment'); ?> <span class="text-danger">*</span></span>
                                         <input type="hidden" class="form-control" id="selected_check_box">
-                                        <textarea aria-label="Profile Review Comments" class="form-control" id="profile_review_comments"></textarea>
-                                        <span class="text-danger d-none" id="profile_review_comments_error" >Please Enter Comment</span>
+                                        <textarea aria-label="<?= htmlspecialchars(__('Profile Review Comments'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="profile_review_comments"></textarea>
+                                        <span class="text-danger d-none" id="profile_review_comments_error" ><?= __('Please Enter Comment'); ?></span>
                                     </div>
                                     <div class="col-lg-2">
-                                        <button class="btn btn-warning waves-effect waves-light mt-4 vendorProfileUpdateStatus" > Save</button>
+                                        <button class="btn btn-warning waves-effect waves-light mt-4 vendorProfileUpdateStatus" > <?= __('Save'); ?></button>
                                     </div>
                                     <div class="col-lg-2">
-                                        <button class="btn btn-danger waves-effect waves-light mt-4 cancelComment"> Cancel</button>
+                                        <button class="btn btn-danger waves-effect waves-light mt-4 cancelComment"> <?= __('Cancel'); ?></button>
                                     </div>
                                 </div>
 
@@ -454,7 +454,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                 <div class="col-lg-6 p-3 text-left">
                     <?php $allaproveprofile = 0;
                     if ($vendordetail['send_verification_profile_status'] == "Y") { ?>
-                        <span class="text-warning d-block">* Profile Verification In-Process</span>
+                        <span class="text-warning d-block">* <?= __('Profile Verification In-Process'); ?></span>
                         <?php if ($vendordetail['user_id'] != $_SESSION['userid']) {
                             echo "<div class=' mt-2'>";
                             foreach ($verification_profile_users as $uidkey => $vpu) {
@@ -473,7 +473,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                                 }
 
                         ?>
-                                <span alt="user" class="img-radius img-30 align-top m-r-10 custom_txt_round f-12 text-center <?php echo $bgcolor; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $label_title; ?>"><?php echo initials($_SESSION['users'][$uidkey]); ?></span>
+                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round f-12 text-center <?php echo $bgcolor; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $label_title; ?>"><?php echo initials($_SESSION['users'][$uidkey]); ?></span>
                         <?php }
                             echo "</div>";
                         } ?>
@@ -481,7 +481,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                 </div>
                 <div class="col-lg-6 p-3 text-right">
                     <?php if ($transaction_table == "vendor_registers") { ?>
-                        <span class="text-info">* Registration in-progress</span>
+                        <span class="text-info">* <?= __('Registration in-progress'); ?></span>
                     <?php } ?>
                 </div>
             </div>
@@ -495,12 +495,12 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                 <div class="col-lg-6">
                     <ul class="nav md-tabs infisuite_tab mt-2 ml-2">
                         <li class="nav-item">
-                            <a class="nav-link updateUrlParameter_tab <?php echo ($_GET['T1'] == 'overview_tab' || $_GET['T1'] == "") ? "active" : ""; ?>" data-bs-toggle="tab" href="#overview_tab" data-param="T1" data-paramvalue ="overview_tab" role="tab" >Overview</a>
+                            <a class="nav-link updateUrlParameter_tab <?php echo ($_GET['T1'] == 'overview_tab' || $_GET['T1'] == "") ? "active" : ""; ?>" data-bs-toggle="tab" href="#overview_tab" data-param="T1" data-paramvalue ="overview_tab" role="tab" ><?= __('Overview'); ?></a>
                             <div class="slide"></div>
                         </li>
                         <?php if($vendor_id !=""){ ?>
                         <li class="nav-item">
-                            <a class="getAjaxDynamicPage nav-link <?php echo $_GET['T1'] == 'task_tab' ? "active" : ""; ?>" data-trans-table="custom_insert_transaction_activity_schedules" data-trans-tab="task_tab" data-bs-toggle="tab" href="#task_tab" role="tab" >Task</a>
+                            <a class="getAjaxDynamicPage nav-link <?php echo $_GET['T1'] == 'task_tab' ? "active" : ""; ?>" data-trans-table="custom_insert_transaction_activity_schedules" data-trans-tab="task_tab" data-bs-toggle="tab" href="#task_tab" role="tab" ><?= __('Task'); ?></a>
                             <div class="slide"></div>
                         </li>
                     <?php } ?>
@@ -509,11 +509,11 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                 <div class="col-lg-6 text-right">
                     <?php
                     if (($vendordetail['user_id'] == $_SESSION['userid'] || $vendordetail['originator'] == $_SESSION['userid']) && $vendordetail['send_verification_profile_status'] == "N" && $transaction_table == "vendor_registers"){ ?>
-                        <button class="btn btn-danger waves-effect waves-light SubmitForVendorCreation" ><i class="ti-thumb-up"></i> Submit For Approval</button>
+                        <button class="btn btn-danger waves-effect waves-light SubmitForVendorCreation" ><i class="ti-thumb-up"></i> <?= __('Submit For Approval'); ?></button>
                     <?php } ?>
 
                     <?php if (($vendor_id !="" && $vendordetail['vendor_id'] == "" && $_SESSION['admin_type'] == '1' && $totalapprovedtask == $totaltasks && $transaction_table == "vendor_registers" && $vendordetail['send_verification_profile_status'] == "Y" && $allaproveprofile == '0' && $vendordetail['vendor_type_id'] == "1") || ($vendordetail['vendor_type_id'] != "1" && $vendordetail['vendor_id'] == "" && ($vendor_id !="" && $_SESSION['admin_type'] == '1' || $vendordetail['originator'] == $_SESSION['userid'])) && $transaction_table == "vendor_registers") { ?>
-                        <button class="btn btn-primary waves-effect waves-light createVendorRegisterToVendor" ><i class="ti ti-user"></i> Create Vendor</button>
+                        <button class="btn btn-primary waves-effect waves-light createVendorRegisterToVendor" ><i class="ti ti-user"></i> <?= __('Create Vendor'); ?></button>
                     <?php } ?>
                 </div>
             </div>
@@ -525,7 +525,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                 <div class="col-lg-3">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Profile Completion</h5>
+                            <h5><?= __('Profile Completion'); ?></h5>
                             <div class="card-header-right">
 
                             </div>
@@ -550,7 +550,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                                             <th scope="col" style="text-align: right;">
                                                 <div class="d-flex align-items-center w-100px w-sm-120px flex-column ">
                                                     <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                        <span class="f-12 f-w-600">Completion </span>
+                                                        <span class="f-12 f-w-600"><?= __('Completion'); ?> </span>
                                                         <span class="f-12 f-w-600"><?php echo round($percentage); ?>%</span>
                                                     </div>
                                                     <div class="col-md-12">
@@ -570,7 +570,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
                 <div class="col-lg-9">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Overview</h5>
+                            <h5><?= __('Overview'); ?></h5>
                             <div class="card-header-right" id="chnagebtndiv">
 
                                 <?php
@@ -579,7 +579,7 @@ if ($vendordetail['instruction_status'] == "N" && $transaction_table == "vendor_
 // ) {
     if(($vendor_id == "" || $vendordetail['send_verification_profile_status'] == "N") && ($vendordetail['originator'] == $_SESSION['userid'] || $vendordetail['user_id'] == $_SESSION['userid'] || $vendordetail['created_by'] == $_SESSION['userid']) || $transaction_table == "vendors"){
                                 ?>
-                                    <button class="btn btn-primary editVendorProfile" data-functiontype = "EDIT"><i class="ti-pencil text-white"></i> Edit</button>
+                                    <button class="btn btn-primary editVendorProfile" data-functiontype = "EDIT"><i class="ti-pencil text-white"></i> <?= __('Edit'); ?></button>
                                 <?php } ?>
                             </div>
                         </div>

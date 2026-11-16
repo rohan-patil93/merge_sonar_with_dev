@@ -45,8 +45,8 @@ if(isset($_POST['submit'])){
                                 type: "warning",
                                 showCancelButton: false,
                                 confirmButtonClass: "btn-danger",
-                                confirmButtonText: "Yes",
-                                cancelButtonText: "No",
+                                confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                                cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                                 closeOnConfirm: true,
                                 closeOnCancel: true
                             },
@@ -214,7 +214,7 @@ if($timeprint == '1' && $maxtimeshow >= '1'){
                 $(".halfdayselect option[value='1']").prop('disabled',true);
                 $(".halfdayselect option[value='2']").prop('disabled',true);
             }
-            $(".hilidayorweekend").html('<span class="form-label label label-md bg-info ml-2">Available leaves - '+availablelv+'</span>');
+            $(".hilidayorweekend").html('<span class="form-label label label-md bg-info ml-2"><?= htmlspecialchars(__('Available leaves'), ENT_QUOTES, 'UTF-8'); ?> - '+availablelv+'</span>');
         });
     }
 
@@ -234,12 +234,12 @@ function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,nex
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Please note the status of the document will change to "+new_status_name,
+        text: <?php echo json_encode(__('Please note the status of the document will change to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+new_status_name,
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         closeOnConfirm: false
     },
     function(){
@@ -266,12 +266,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -295,13 +295,13 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 ?>
                 <div class="card card-custom " id="kt_page_sticky_card">
                     <div class="card-header table-card-header ">
-                        <h5>Leave Request  <?php if($rowid!=""){ ?> <span class="form-label label label-primary"> <i class="fa fa-user"></i> <?php echo ucwords($$empdata[$leave_details['employee_id']]['display_name']); ?></span> <?php
+                        <h5><?= __('Leave Request'); ?>  <?php if($rowid!=""){ ?> <span class="form-label label label-primary"> <i class="fa fa-user"></i> <?php echo ucwords($$empdata[$leave_details['employee_id']]['display_name']); ?></span> <?php
 } ?> </h5>
                         <div class="card-header-right">
                             <?php  echo $workflowsteps['workflow_btn']; ?>
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                             <?php if($Rid!=""){ ?>
                             <div class="btn-group <?php echo $Rid; ?>">
@@ -320,7 +320,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         if($error_message !=''){ ?>
                             <div class="alert alert-danger background-danger alert-dismissible">
                                 <strong><?php echo $error_message; ?></strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                             </div>
                         <?php } ?>
                         <input type="hidden" name="old_leave_days" id="old_leave_days" value="<?php echo $employee_leaves['leave_days'] !=""?$employee_leaves['leave_days']:'0'; ?>">
@@ -339,34 +339,34 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 
                                         <div class="leaveformshoehide" >
                                             <div class="row ">
-                                                <span class="form-label">Start Date(s)</span>
+                                                <span class="form-label"><?= __('Start Date(s)'); ?></span>
                                                 <div class=" col-lg-6 form-group">
-                                                    <input aria-label="Input field" type="text" onchange="tocheckdays()" class="form-control startdatepicker"  value="<?php echo  $_POST['leave_from']!=""?$_POST['leave_from']:dateFormate($employee_leaves['leave_from']); ?>"  name="leave_from"  id="kt_datepicker_31" />
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" onchange="tocheckdays()" class="form-control startdatepicker"  value="<?php echo  $_POST['leave_from']!=""?$_POST['leave_from']:dateFormate($employee_leaves['leave_from']); ?>"  name="leave_from"  id="kt_datepicker_31" />
                                                 </div>
                                                 <div class="col-lg-6 form-group">
                                                     <?php $starthlfdy = $_POST['start_half_day']!=""?$_POST['start_half_day']:$employee_leaves['start_half_day']; ?>
 
-                                                    <select aria-label="Start Half Day" class="form-control form-select js-example-basic-single halfdayselect"   name="start_half_day" id="start_half_day" onchange="tocheckdays()">
-                                                        <option value="0" <?php echo $starthlfdy == "0"?"selected":""; ?> > Full Day</option>
-                                                        <option value="1" <?php echo $starthlfdy == "1"?"selected":""; ?>> Start Half</option>
-                                                        <option value="2" <?php echo $starthlfdy == "2"?"selected":""; ?>> End Half</option>
+                                                    <select aria-label="<?= htmlspecialchars(__('Start Half Day'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single halfdayselect"   name="start_half_day" id="start_half_day" onchange="tocheckdays()">
+                                                        <option value="0" <?php echo $starthlfdy == "0"?"selected":""; ?> > <?= __('Full Day'); ?></option>
+                                                        <option value="1" <?php echo $starthlfdy == "1"?"selected":""; ?>> <?= __('Start Half'); ?></option>
+                                                        <option value="2" <?php echo $starthlfdy == "2"?"selected":""; ?>> <?= __('End Half'); ?></option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <span class="form-label mb-1 mt-3">End Date(s)</span>
+                                                <span class="form-label mb-1 mt-3"><?= __('End Date(s)'); ?></span>
                                                 <div class="col-lg-6 form-group">
                                                     <div class=" date ">
-                                                        <input aria-label="Input field" type="text" onchange="tocheckdays()" class="form-control enddatepicker"  value="<?php echo  $_POST['leave_to']!=""?$_POST['leave_to']:dateFormate($employee_leaves['leave_to']); ?>"  name="leave_to"  id="kt_datepicker_32" />
+                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" onchange="tocheckdays()" class="form-control enddatepicker"  value="<?php echo  $_POST['leave_to']!=""?$_POST['leave_to']:dateFormate($employee_leaves['leave_to']); ?>"  name="leave_to"  id="kt_datepicker_32" />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 form-group">
                                                     <?php $endhlfdy = $_POST['end_half_day']!=""?$_POST['end_half_day']:$employee_leaves['end_half_day']; ?>
 
-                                                    <select aria-label="End Half Day" class="form-control form-select js-example-basic-single halfdayselect"  name="end_half_day" id="end_half_day" onchange="tocheckdays()">
-                                                        <option value="0" <?php echo $endhlfdy == "0"?"selected":""; ?>> Full Day</option>
-                                                        <option value="1" <?php echo $endhlfdy == "1"?"selected":""; ?>> Start Half</option>
-                                                        <option value="2" <?php echo $endhlfdy == "2"?"selected":""; ?>> End Half</option>
+                                                    <select aria-label="<?= htmlspecialchars(__('End Half Day'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single halfdayselect"  name="end_half_day" id="end_half_day" onchange="tocheckdays()">
+                                                        <option value="0" <?php echo $endhlfdy == "0"?"selected":""; ?>> <?= __('Full Day'); ?></option>
+                                                        <option value="1" <?php echo $endhlfdy == "1"?"selected":""; ?>> <?= __('Start Half'); ?></option>
+                                                        <option value="2" <?php echo $endhlfdy == "2"?"selected":""; ?>> <?= __('End Half'); ?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -374,19 +374,19 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                             <div class="row">
 
                                                 <div class="form-group col-lg-6 ">
-                                                    <span class="form-label">Leave Days</span>
+                                                    <span class="form-label"><?= __('Leave Days'); ?></span>
                                                     <?php  $cleave_days = $_POST['days']!=""?$_POST['days']:$employee_leaves['leave_days'];
                                                     $cleave_days = $cleave_days !="" ? $cleave_days : 0;
                                                     ?>
-                                                    <input aria-label="Days" type="text" class="form-control" name="days" value="<?php echo $_POST['days']!=""?$_POST['days']:$employee_leaves['leave_days']; ?>" id="leave_days" readonly="">
+                                                    <input aria-label="<?= htmlspecialchars(__('Days'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="days" value="<?php echo $_POST['days']!=""?$_POST['days']:$employee_leaves['leave_days']; ?>" id="leave_days" readonly="">
                                                 </div>
                                                 <div class="col-lg-6 hilidayorweekend mt-4">
 
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-12 form-group">
-                                                <span class="form-label">Special Request</span>
-                                                <textarea aria-label="Special Request" type="text" class="form-control" name="special_request" rows="5"><?php echo $_POST['special_request']!=""?$_POST['special_request']:$employee_leaves['special_request'];?></textarea>
+                                                <span class="form-label"><?= __('Special Request'); ?></span>
+                                                <textarea aria-label="<?= htmlspecialchars(__('Special Request'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="special_request" rows="5"><?php echo $_POST['special_request']!=""?$_POST['special_request']:$employee_leaves['special_request'];?></textarea>
                                             </div>
                                             <div class="card-footer">
                                                 <div class="row">
@@ -396,7 +396,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                 <?php if($buddy_details['hr_connect']=="0" || $buddy_details['report_to']=="0"){  ?>
                                                     <span class="text-danger f-12"><?php echo $_SESSION['error_message']['9001']; ?></span></br>
                                                 <?php } ?>
-                                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php ?>  name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
+                                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" <?php ?>  name="submit_value" value="exit"><i class="la la-check"></i><?= htmlspecialchars(__('Save & exit'), ENT_QUOTES, 'UTF-8'); ?></button>
                                             </div>
                                         </div>
                                     </div>
@@ -407,7 +407,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                 <div class="col-lg-4" style="float: left;">
                                     <div class="card card-custom card-stretch gutter-b">
                                         <div class="card-header border-0">
-                                            <h3 class="card-title font-weight-bolder text-dark">Who else wil be out</h3>
+                                            <h3 class="card-title font-weight-bolder text-dark"><?= __('Who else wil be out'); ?></h3>
                                         </div>
                                         <?php foreach ($otheremp as $othemp) {
                                             if($othemp['employee_id'] !=$empl['employee_id']){
@@ -416,7 +416,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                     <div class="d-flex align-items-center">
                                                         <?php if($empdata[$othemp['employee_id']]['image'] !=''){ ?>
                                                             <div class="symbol symbol-60 symbol-sm flex-shrink-0 ">
-                                                                <img class="img-80" src="uploads/all/<?php echo $empdata[$othemp['employee_id']]['image']; ?>" alt="Details">
+                                                                <img class="img-80" src="uploads/all/<?php echo $empdata[$othemp['employee_id']]['image']; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             </div>
                                                         <?php }else{ ?>
                                                             <div class="symbol mr-3 img-radius p-15">
@@ -425,7 +425,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                         <?php } ?>
                                                         <div class="ml-4">
                                                             <div class="text-dark-75 font-weight-bolder font-size-lg mb-0"><?php echo $empdata[$othemp['employee_id']]['display_name']; ?></div>
-                                                            <a href="#" class="text-muted font-weight-bold text-hover-primary"><?php echo date('dS M Y',strtotime($othemp['leave_from'])) ; ?> TO <?php echo date('dS M Y',strtotime($othemp['leave_to'])) ; ?> </a>
+                                                            <a href="#" class="text-muted font-weight-bold text-hover-primary"><?php echo date('dS M Y',strtotime($othemp['leave_from'])) ; ?> <?= __('TO'); ?> <?php echo date('dS M Y',strtotime($othemp['leave_to'])) ; ?> </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -438,7 +438,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     <div class="card card-custom">
 
                                         <div class="card-header">
-                                            <h5>My Leaves</h5>
+                                            <h5><?= __('My Leaves'); ?></h5>
 
                                         </div>
                                         <div class="card-body">
@@ -456,7 +456,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                             <div class="col-xl-4 col-md-4">
                                 <div class="card table-card">
                                     <div class="card-header">
-                                        <h5>Pending Submit For Approval</h5>
+                                        <h5><?= __('Pending Submit For Approval'); ?></h5>
                                     </div>
                                     <div class="card-block custom-scroll" style="height: 300px;">
                                         <div class="table-responsive">
@@ -465,8 +465,8 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Days</th>
+                                                            <th scope="col"><?= __('Date'); ?></th>
+                                                            <th scope="col"><?= __('Days'); ?></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -474,7 +474,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                             <tr >
                                                                 <td class="p-2"><?php echo $mk; ?></td>
                                                                 <td class="p-2"><a href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php  echo deocdeId("id:".$leavel1['id']); ?>"><span class="form-label label label-success p-2 cursor-pointer"><i class="ti-pencil-alt"></i> <?php echo $leavel1['leave_from']." To ".$leavel1['leave_to']; ?></span></td>
-                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);?> Day</span></td>
+                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);?> <?= __('Day'); ?></span></td>
                                                                 </tr>
                                                                 <?php $mk++;
 } ?>
@@ -482,7 +482,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                         </table>
                                                     <?php    }else{ ?>
                                                         <div class="card-px text-center py-20 m-t-30">
-                                                            <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Leaves </p>
+                                                            <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?= __('No Leaves'); ?> </p>
                                                             <div class="text-center px-4">
                                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                             </div>
@@ -496,7 +496,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     <div class="col-xl-4 col-md-4">
                                         <div class="card table-card">
                                             <div class="card-header">
-                                                <h5>In-Process</h5>
+                                                <h5><?= __('In-Process'); ?></h5>
                                             </div>
                                             <div class="card-block custom-scroll" style="height: 300px;">
                                                 <div class="table-responsive">
@@ -506,8 +506,8 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">#</th>
-                                                                    <th scope="col">Date</th>
-                                                                    <th scope="col">Days</th>
+                                                                    <th scope="col"><?= __('Date'); ?></th>
+                                                                    <th scope="col"><?= __('Days'); ?></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -515,7 +515,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                                     <tr >
                                                                         <td class="p-2"><?php echo $mk; ?></td>
                                                                         <td class="p-2"><a href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php  echo deocdeId("id:".$leavel1['id']); ?>" class="cursor_pointer"><span class="form-label label label-success p-2"><i class="ti-pencil-alt"></i> <?php echo $leavel1['leave_from']." To ".$leavel1['leave_to']; ?></span></td>
-                                                                            <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);?> Day</span></td>
+                                                                            <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);?> <?= __('Day'); ?></span></td>
                                                                         </tr>
                                                                         <?php $mk++;
 } ?>
@@ -523,7 +523,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                                 </table>
                                                             <?php    }else{ ?>
                                                                 <div class="card-px text-center py-20 m-t-30">
-                                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Leaves </p>
+                                                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?= __('No Leaves'); ?> </p>
                                                                     <div class="text-center px-4">
                                                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                                     </div>
@@ -537,7 +537,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                             <div class="col-xl-4 col-md-4">
                                                 <div class="card table-card">
                                                     <div class="card-header">
-                                                        <h5>Approved Leaves</h5>
+                                                        <h5><?= __('Approved Leaves'); ?></h5>
                                                     </div>
                                                     <div class="card-block custom-scroll" style="height: 300px;">
 
@@ -547,8 +547,8 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">#</th>
-                                                                            <th scope="col">Date</th>
-                                                                            <th scope="col">Days</th>
+                                                                            <th scope="col"><?= __('Date'); ?></th>
+                                                                            <th scope="col"><?= __('Days'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -556,7 +556,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                                             <tr >
                                                                                 <td class="p-2"><?php echo $mk; ?></td>
                                                                                 <td class="p-2"><a href="index.php?option=COM_INSERT_LEAVE_REQUEST&Rid=<?php  echo deocdeId("id:".$leavel1['id']); ?>" class="cursor_pointer"><span class="form-label label label-success p-2"><i class="ti-pencil-alt"></i> <?php echo $leavel1['leave_from']." To ".$leavel1['leave_to']; ?></span></td>
-                                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);?> Day</span></td>
+                                                                                    <td class="text-right p-2"><span class="form-label label label-primary p-2"><?php echo number_format($leavel1['leave_days'],1);?> <?= __('Day'); ?></span></td>
                                                                                 </tr>
                                                                                 <?php $mk++;
 } ?>
@@ -564,7 +564,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                                                         </table>
                                                                     <?php    }else{ ?>
                                                                         <div class="card-px text-center py-20 m-t-30">
-                                                                            <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> No Leaves </p>
+                                                                            <p class="text-muted f-16 fw-bold m-b-30"><i class='fa fa-warning'></i> <?= __('No Leaves'); ?> </p>
                                                                             <div class="text-center px-4">
                                                                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                                                             </div>

@@ -16,15 +16,15 @@ $tableData = $cudata['table'];
 <table class="table table-striped table-inverse nowrap " >
     <thead>
         <tr>
-            <th scope="col">Sl No.</th>
-            <th scope="col">Complaint Name</th>
-            <th scope="col">Complaint Type</th>
-            <th scope="col">Priority</th>
-            <th scope="col">Date</th>
-            <th scope="col">Item</th>
-            <th scope="col">Asset</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
+            <th scope="col"><?= __('Sl No.'); ?></th>
+            <th scope="col"><?= __('Complaint Name'); ?></th>
+            <th scope="col"><?= __('Complaint Type'); ?></th>
+            <th scope="col"><?= __('Priority'); ?></th>
+            <th scope="col"><?= __('Date'); ?></th>
+            <th scope="col"><?= __('Item'); ?></th>
+            <th scope="col"><?= __('Asset'); ?></th>
+            <th scope="col"><?= __('Status'); ?></th>
+            <th scope="col"><?= __('Action'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -60,15 +60,15 @@ $tableData = $cudata['table'];
             <td><span class="form-label label label-lg  label-primary label-inline f-w-900 " style="background-color:<?php echo $row['background_color']; ?> ; color:<?php echo $row['color']; ?> ;"><?php echo $row['name']; ?></span> </td>
             <td>
                 <a class=" m-r-5"
-                href="index.php?option=COM_INSERT_COMPLAINTS&Rid=<?php echo deocdeId('id:'.$row['id']); ?>" title="Edit Details">
+                href="index.php?option=COM_INSERT_COMPLAINTS&Rid=<?php echo deocdeId('id:'.$row['id']); ?>" title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>">
                 <i class="fa fa-edit  p-2 b-radius-5"></i>
             </a>
             <a class=" m-r-5"
-            href="index.php?option=COM_VIEW_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:'.$row['id']); ?>" title="View Details">
+            href="index.php?option=COM_VIEW_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:'.$row['id']); ?>" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>">
             <i class="fa fa-eye  p-2 b-radius-5"></i>
         </a>
         <a class=" m-r-5"
-        href="index.php?option=COM_INSERT_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="Copy Details">
+        href="index.php?option=COM_INSERT_COMPLAINT_RESPONSES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('Copy Details'), ENT_QUOTES, 'UTF-8'); ?>">
         <i class="fa fa-clone  p-2 b-radius-5"></i>
     </a>
 </td>
@@ -81,7 +81,7 @@ $tableData = $cudata['table'];
         <td colspan="9">
             <div class="text-center">
                 <p class="text-muted f-16 fw-bold m-b-30">
-                    <i class="fa fa-warning"></i> No Records
+                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                 </p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">

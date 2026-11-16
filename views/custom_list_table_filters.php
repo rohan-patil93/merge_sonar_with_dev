@@ -62,10 +62,10 @@ function displaystausdrop(id,table,status_id){
 
             <input type="hidden" name="filtertbl_rowid" id="filtertbl_rowid" value="<?php echo $filtertbl_rowid;?>" >
 
-                                <div class="col-lg-3"> <h5 class="card-label">List <?php echo ucwords($page_title); ?></h5> </div>
+                                <div class="col-lg-3"> <h5 class="card-label"><?= __('List'); ?> <?php echo ucwords($page_title); ?></h5> </div>
                                 <div class="col-lg-7">
-                                    <span class="f-w-600">Field Lists</span>
-                                    <select aria-label="Displayattributes[]" class="form-select js-example-basic-multiple-limit_custom" name="displayattributes[]" multiple="multiple">
+                                    <span class="f-w-600"><?= __('Field Lists'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Displayattributes'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple-limit_custom" name="displayattributes[]" multiple="multiple">
                                         <?php $jd='0'; foreach ($tablefiledslist as $keyvalue => $fieldvalue){
 $lock = "";
 if(in_array($keyvalue, (array)$defalut_fields) && $jd =='0'){
@@ -79,7 +79,7 @@ if(in_array($keyvalue, (array)$defalut_fields) && $jd =='0'){
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="hidden" id="filterby" name="filterby">
-                                    <button id="kt_login_signin_submit" class="btn btn-primary mt-4 btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                                    <button id="kt_login_signin_submit" class="btn btn-primary mt-4 btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
                                 </div>
 
                             </div>
@@ -91,7 +91,7 @@ if(in_array($keyvalue, (array)$defalut_fields) && $jd =='0'){
                         <?php foreach($field as $fieldskey=>$fieldsloop){ ?>
                             <div class="col-lg-4">
                                     <span class="f-w-600"><?php echo ucwords(str_replace("_"," ",($fieldskey))); ?></span>
-                                    <select aria-label="Select option" class="form-select js-example-basic-multiple-limit_custom" id="filter_<?php echo $fieldskey; ?>"  name="f_<?php echo $fieldskey; ?>" onchange="customFilterField('<?php echo $fieldskey; ?>')" multiple="multiple">
+                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-multiple-limit_custom" id="filter_<?php echo $fieldskey; ?>"  name="f_<?php echo $fieldskey; ?>" onchange="customFilterField('<?php echo $fieldskey; ?>')" multiple="multiple">
                                         <?php foreach ($fieldsloop as $keyvalue1 => $fieldvalue1){
                                             ?>
                                             <option value="<?php echo $keyvalue1; ?>"  > <?php echo $fieldvalue1; ?> </option>
@@ -117,7 +117,7 @@ if(in_array($keyvalue, (array)$defalut_fields) && $jd =='0'){
         <table id="basic-btn" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th scope="col">SL.No.</th>
+                                    <th scope="col"><?= __('SL.No.'); ?></th>
 
                                     <?php foreach ($tablefiledslist as $keyvalue => $fieldvalue){
                                         if(in_array($keyvalue, (array)$defalut_fields)){
@@ -126,7 +126,7 @@ if(in_array($keyvalue, (array)$defalut_fields) && $jd =='0'){
                                                 <?php echo $fieldvalue; ?> </th>
                                             <?php } ?>
                                             <?php } ?>
-                                            <th scope="col">Action</th>
+                                            <th scope="col"><?= __('Action'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -175,7 +175,7 @@ if(in_array($keyvalue, (array)$defalut_fields) && $jd =='0'){
                                                     <?php } ?>
                                                     <?php } ?>
                                                     <td>
-                                                            <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="Edit Datails" ><i class="fa fa-edit"></i></a>
+                                                            <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="<?= htmlspecialchars(__('Edit Datails'), ENT_QUOTES, 'UTF-8'); ?>" ><i class="fa fa-edit"></i></a>
                                                     </td>
                                                 </tr>
 

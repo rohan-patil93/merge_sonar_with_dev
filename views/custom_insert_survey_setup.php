@@ -425,8 +425,8 @@ function addnewoptionrows(qid) {
                     <div class="radio-inline">
                       <?php foreach ($survey_types as $k => $value) { ?>
                       <label class="radio radio-success">
-                        <input type="radio" name="survey_type" id="survey_type<?php echo $k > 0 ? '_'.$k : ''; ?>" value="<?php echo $value['genc_detail_code'];?>" <?php if($survey_details['survey_type'] == $value['genc_detail_code'] || $survey_details['survey_type'] =="") {?> checked="checked" <?php } ?> aria-label="Survey Type <?php echo $value['genc_detail_name']; ?>">
-                        <span></span><?php echo $value['genc_detail_name']; ?>
+                        <input type="radio" name="survey_type" id="survey_type<?php echo $k > 0 ? '_'.$k : ''; ?>" value="<?php echo $value['genc_detail_code'];?>" <?php if($survey_details['survey_type'] == $value['genc_detail_code'] || $survey_details['survey_type'] =="") {?> checked="checked" <?php } ?> aria-label="Survey Type <?php echo __($value['genc_detail_name']); ?>">
+                        <span></span><?php echo __($value['genc_detail_name']); ?>
                       </label>
                       <?php } ?>
                     </div>
@@ -494,7 +494,7 @@ function addnewoptionrows(qid) {
                       <div class="dropdown-menu">
                         <?php  foreach ($qustion_types as $key => $value) {
                         //$question_types[$value['genc_detail_code']]  = $value['genc_detail_code']; ?>
-                        <a href="#top" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo $value['genc_detail_name']; ?>')" class="dropdown-item">  <?php echo $value['genc_detail_name']; ?>
+                        <a href="#top" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo __($value['genc_detail_name']); ?>')" class="dropdown-item">  <?php echo __($value['genc_detail_name']); ?>
                         </a>
                         <?php } ?>
                       </div>

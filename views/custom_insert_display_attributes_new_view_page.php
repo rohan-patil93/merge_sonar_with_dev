@@ -29,7 +29,7 @@ if($pagetype == "F"){ ?>
              <?php foreach ($mastertablefield as $keyfield=>$mtf) { ?>
                  <div class="col-lg-6 form-group">
                     <span class="form-label d-block"><?php echo $mtf['display_name']; ?></span>
-                    <input aria-label="Display Position" class="form-control" type="text" name="display_position" placeholder="<?php echo $editfield['display_name']; ?>">
+                    <input aria-label="<?= htmlspecialchars(__('Display Position'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_position" placeholder="<?php echo $editfield['display_name']; ?>">
                 </div>
              <?php } ?>
             </div>
@@ -74,7 +74,7 @@ if($pagetype == "F"){ ?>
               </tr>
               <tr>
                 <th scope="col" class="p-2"><?= __('Part Name') ?></th>
-                <td class="text-right p-2">Batakrishna Pattanayak</td>
+                <td class="text-right p-2"><?= __('Batakrishna Pattanayak'); ?></td>
               </tr>
               <tr>
                 <th scope="col" class="p-2"><?= __('Amount') ?></th>

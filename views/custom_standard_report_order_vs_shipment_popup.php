@@ -22,8 +22,8 @@ $title = ucfirst($type);
 $count = count($items_res);
 ?>
 <div class="modal-header py-2">
-    <h6 class="modal-title"><?= $title .' - '. $transaction_no . ' - '.$count ?> record<?= $count === 1 ? '' : 's' ?></h6>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h6 class="modal-title"><?= $title .' - '. $transaction_no . ' - '.$count ?> <?= __('record'); ?><?= $count === 1 ? '' : 's' ?></h6>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 
 <div class="modal-body p-0">
@@ -32,12 +32,12 @@ $count = count($items_res);
             <thead class="table-light">
                 <tr>
                     <th scope="col" style="width:56px">#</th>
-                    <th scope="col">Item Name</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Pending Quantity</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Tax</th>
-                    <th scope="col">Total</th>
+                    <th scope="col"><?= __('Item Name'); ?></th>
+                    <th scope="col"><?= __('Quantity'); ?></th>
+                    <th scope="col"><?= __('Pending Quantity'); ?></th>
+                    <th scope="col"><?= __('Amount'); ?></th>
+                    <th scope="col"><?= __('Tax'); ?></th>
+                    <th scope="col"><?= __('Total'); ?></th>
 
                 </tr>
             </thead>
@@ -46,7 +46,7 @@ $count = count($items_res);
                     <tr>
                         <td colspan="7">
                             <div class="text-center p-4">
-                                <p class="text-muted fw-bold mb-3"><i class="fa fa-warning me-1"></i>No Records</p>
+                                <p class="text-muted fw-bold mb-3"><i class="fa fa-warning me-1"></i><?= __('No Records'); ?></p>
                                 <img class="img-fluid" alt="" src="assets/images/work.png" style="max-height:300px;">
                             </div>
                         </td>
@@ -75,6 +75,6 @@ $count = count($items_res);
 
 <div class="modal-footer py-2">
     <small class="text-muted">
-       Type: <?= $type ?>
+       <?= __('Type'); ?>: <?= $type ?>
     </small>
 </div>

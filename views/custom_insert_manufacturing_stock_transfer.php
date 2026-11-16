@@ -112,7 +112,7 @@ $workOrderNo = $result['work_order_no'] ?? ($stockRequestDetails['ref_no'] ?? ''
 }</option>";
               }
             } else {
-              echo "<option value=''>No Stock Requests Found</option>";
+              echo "<option value=''>".__('No Stock Requests Found')."</option>";
             }
             ?>
           </select>

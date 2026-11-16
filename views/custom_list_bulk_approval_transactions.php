@@ -52,14 +52,14 @@
                     console.log(data);
                     if(data){
                         swal.fire({
-                            title: "Record has been Updated successfully ",
-                            text: "Do you want to close ? ",
+                            title: <?php echo json_encode(__('Record has been Updated successfully').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                            text: <?php echo json_encode(__('Do you want to close ?').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             type: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
                             confirmButtonClass: "btn btn-danger",
                             showCancelButton: false,
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                             cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {
@@ -72,7 +72,7 @@
                 error:function (){}
             });
         }else{
-            alert("Please Select At leaset one");
+            alert(<?php echo json_encode(__('Please Select At leaset one'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }
     }
     function checkall(){
@@ -143,7 +143,7 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </span>
-                                    <span class="navi-text font-weight-bolder font-size-lg">My Tasks</span>
+                                    <span class="navi-text font-weight-bolder font-size-lg"><?= __('My Tasks'); ?></span>
                                     <span class="navi-label">
                                         <span class="label label-rounded label-light-success font-weight-bolder"><?php echo $sum_count;?></span>
                                     </span>
@@ -220,21 +220,21 @@
                                         <!--begin::Item-->
                                         <div class="navi-item mr-2">
                                             <a href="custom/apps/todo/tasks.html" class="navi-link active">
-                                                <span class="navi-text">Selected  &nbsp;<span class="label label-rounded label-light-success font-weight-bolder" id="sel">0</span> </span>
+                                                <span class="navi-text"><?= __('Selected'); ?>  &nbsp;<span class="label label-rounded label-light-success font-weight-bolder" id="sel">0</span> </span>
                                             </a>
                                         </div>
                                         <!--end::Item-->
                                         <!--begin::Item-->
                                         <div class="navi-item mr-2">
                                             <a href="custom/apps/todo/docs.html" class="navi-link">
-                                                <span class="navi-text">Unselected &nbsp;<span class="label label-rounded label-light-success font-weight-bolder" id="uns"><?php echo count((array)$list_data); ?></span></span>
+                                                <span class="navi-text"><?= __('Unselected'); ?> &nbsp;<span class="label label-rounded label-light-success font-weight-bolder" id="uns"><?php echo count((array)$list_data); ?></span></span>
                                             </a>
                                         </div>
                                         <!--end::Item-->
                                         <!--begin::Item-->
                                         <div class="navi-item mr-2">
                                             <a href="custom/apps/todo/files.html" class="navi-link">
-                                                <span class="navi-text">Total &nbsp;<span class="label label-rounded label-light-success font-weight-bolder" id="to"><?php echo count((array)$list_data); ?></span> </span>
+                                                <span class="navi-text"><?= __('Total'); ?> &nbsp;<span class="label label-rounded label-light-success font-weight-bolder" id="to"><?php echo count((array)$list_data); ?></span> </span>
                                             </a>
                                         </div>
                                         <!--end::Item-->
@@ -246,7 +246,7 @@
                             <!--begin::Users-->
                             <div class="symbol-group symbol-hover py-2">
 
-                                <div class="symbol symbol-30 symbol-light-primary" data-toggle="tooltip" data-placement="top" title="New user" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                <div class="symbol symbol-30 symbol-light-primary" data-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('New user'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                     <span class="symbol-label font-weight-bold">
                                         <i class="fa flaticon2-plus font-size-sm"></i>
                                     </span>
@@ -268,7 +268,7 @@
                                     <div class="d-flex flex-wrap align-items-center">
                                         <div class="d-flex align-items-center mr-1 my-2">
                                             <label data-inbox="group-select" class="checkbox checkbox-inline checkbox-primary mr-3">
-                                                <input aria-label="Checkall" type="checkbox" name="checkall" onclick="checkall()" id="checkall" value="0" onkeydown="">
+                                                <input aria-label="<?= htmlspecialchars(__('Checkall'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="checkall" onclick="checkall()" id="checkall" value="0" onkeydown="">
                                                 <span class="symbol-label"></span>
                                             </label>
                                             <?php $lists_status = toGetStatusProgressAction($transaction_type, $status);?>
@@ -305,7 +305,7 @@
                                                         <!--begin::Checkbox-->
                                                         <label class="checkbox checkbox-inline checkbox-primary flex-shrink-0 mr-3">
                                                             <input type="hidden" id="checked_<?php echo $j; ?>" value="0">
-                                                        <input aria-label="Checkbox" type="checkbox" onclick="singlecheck(this.id,<?php echo $j; ?>)" id="check_<?php echo $j; ?>"  value="<?php echo  $list['transaction_id']; ?>" onkeydown="">
+                                                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" onclick="singlecheck(this.id,<?php echo $j; ?>)" id="check_<?php echo $j; ?>"  value="<?php echo  $list['transaction_id']; ?>" onkeydown="">
                                                             <span></span>
                                                         </label>
 
@@ -339,7 +339,7 @@
                                                     <!--begin::Datetime-->
                                                     <div class="font-weight-bolder" data-toggle="view">
                                                         <?php $days = dateDiffInDays($list['request_date']);
-                                                    if($days == 0){ echo "To day";
+                                                    if($days == 0){ echo __('To day');
 }
                                                     elseif($days < 7){ echo $days ." days ago";
 }

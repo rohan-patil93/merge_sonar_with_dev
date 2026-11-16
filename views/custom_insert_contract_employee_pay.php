@@ -65,7 +65,7 @@
         <h5><?= __('Contract Pay Salary') ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                <i class="icofont icofont-reply"></i> Back
+                <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -75,7 +75,7 @@
             <div class="form-group row">
                 <div class="form-group col-lg-4">
                     <span class="form-label"><?= __('Employee') ?></span>
-                    <select aria-label="Employee" class="form-select js-example-basic-single" id="employee_id" name='employee_id'>
+                    <select aria-label="<?= htmlspecialchars(__('Employee'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="employee_id" name='employee_id'>
                         <option><?= __('Select Any One') ?></option>
                         <?php foreach ($data['emp_data'] as $employe) { ?>
                            <option <?php if( $salarydata['employee_id'] == $employe['id'] ){ echo "selected";
@@ -86,11 +86,11 @@
 
                 <div class="form-group col-lg-4">
                     <span class="form-label"><?= __('Pay Type') ?></span>
-                    <select aria-label="Pay Type" class="form-select js-example-basic-single" id="pay_type" name='pay_type'>
+                    <select aria-label="<?= htmlspecialchars(__('Pay Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="pay_type" name='pay_type'>
                         <option value="0"><?= __('Select Any One') ?></option>
                         <?php foreach ($data['pay_type_data'] as $pay_type) { ?>
                            <option <?php if( $salarydata['pay_type'] == $pay_type['genc_detail_code'] ){ echo "selected";
-} ?> value="<?php echo $pay_type['genc_detail_code']; ?>"> <?php echo $pay_type['genc_detail_name']; ?></option>
+} ?> value="<?php echo $pay_type['genc_detail_code']; ?>"> <?php echo __($pay_type['genc_detail_name']); ?></option>
                        <?php } ?>
                    </select>
                 </div>
@@ -98,18 +98,18 @@
                 <div class="form-group  col-lg-4 ">
                     <span class="form-label"><?= __('Pay Rate') ?></span>
                     <div>
-                        <input aria-label="Pay Rate" class="form-control text-right" id="pay_rate" type="text" name="pay_rate" value="<?php echo $salarydata['pay_rate']!=""? $salarydata['pay_rate']: '0.00'; ?>" >
+                        <input aria-label="<?= htmlspecialchars(__('Pay Rate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right" id="pay_rate" type="text" name="pay_rate" value="<?php echo $salarydata['pay_rate']!=""? $salarydata['pay_rate']: '0.00'; ?>" >
                     </div>
                 </div>
 
                 <div class="form-group  col-lg-4 " <?php echo $stylecss; ?>>
                     <span class="form-label"><?= __('Effective Date') ?></span>
-                    <input aria-label="Affected Date" class="form-control datepicker" type="text" name="affected_date" value="<?php echo fromDate($salarydata['affected_date']); ?>">
+                    <input aria-label="<?= htmlspecialchars(__('Affected Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text" name="affected_date" value="<?php echo fromDate($salarydata['affected_date']); ?>">
                 </div>
 
                 <div class="form-group col-lg-4">
                     <span class="form-label"><?= __('Pay Frequency') ?></span>
-                    <select aria-label="Pay Frequency" class="form-select js-example-basic-single" id="pay_frequency" name='pay_frequency'>
+                    <select aria-label="<?= htmlspecialchars(__('Pay Frequency'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="pay_frequency" name='pay_frequency'>
                         <option value="0"><?= __('Select Any One') ?></option>
                         <?php
                         $frequency_array = array('D'=>'Daily', 'W'=> 'Weekly', 'B'=> 'Biweekly', 'M'=> 'Monthly');
@@ -122,11 +122,11 @@
 
                 <div class="form-group col-lg-4">
                     <span class="form-label"><?= __('GST Applicable') ?></span>
-                    <select aria-label="Gst Type" class="form-select js-example-basic-single" onchange="gesttyype(this.value)" id="gst_type" name='gst_type'>
+                    <select aria-label="<?= htmlspecialchars(__('Gst Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" onchange="gesttyype(this.value)" id="gst_type" name='gst_type'>
                         <option value="0"><?= __('Select Any One') ?></option>
                         <?php foreach ($data['gst_type_data'] as $gst_type) { ?>
                            <option <?php if( $salarydata['gst_type'] == $gst_type['genc_detail_code']){ echo "selected";
-} ?> value="<?php echo $gst_type['genc_detail_code']; ?>"> <?php echo $gst_type['genc_detail_name']; ?></option>
+} ?> value="<?php echo $gst_type['genc_detail_code']; ?>"> <?php echo __($gst_type['genc_detail_name']); ?></option>
                        <?php } ?>
                    </select>
                 </div>
@@ -134,7 +134,7 @@
                 <div class="form-group col-lg-4" id="dis_gst_no" <?php if($salarydata['gst_type']!=0){ ?> style="display:none; "; <?php
 } ?> >
                     <span class="form-label"><?= __('GST No.') ?></span>
-                    <input aria-label="Gst No" class="form-control" type="text" name="gst_no" id="gst_no" value="<?php echo $salarydata['gst_no']; ?>">
+                    <input aria-label="<?= htmlspecialchars(__('Gst No'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="gst_no" id="gst_no" value="<?php echo $salarydata['gst_no']; ?>">
                 </div>
 
                 <div class="form-group  col-lg-4">
@@ -142,7 +142,7 @@
                     <div>
                          <button type="button" onclick="changejoiningboun()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn p-0 border-0 bg-transparent">
                         <?php $is_joining_bouns = $salarydata['joining_bonus_applicable']!=""?$salarydata['joining_bonus_applicable']: 1; ?>
-                        <input aria-label="Checkbox" type="checkbox"  class="js-switch" value="<?php echo $sen; ?>"  name="is_joining_bonus" <?php if($is_joining_bouns== 0 ){ ?> checked <?php
+                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"  class="js-switch" value="<?php echo $sen; ?>"  name="is_joining_bonus" <?php if($is_joining_bouns== 0 ){ ?> checked <?php
 } ?>  />
                          <input type="hidden"   value="<?php echo $is_joining_bouns; ?>"  name="joining_bonus_applicable" id="is_joining_bouns_val"  />
                          </button>
@@ -154,7 +154,7 @@
 } ?> >
                     <span class="form-label"><?= __('Please Enter Joining Bonus') ?></span>
                     <div>
-                        <input aria-label="Joining Bonus Amount" class="form-control text-right" id="joining_bouns" type="text" name="joining_bonus_amount" value="<?php echo $salarydata['joining_bonus_amount']!=""? $salarydata['joining_bonus_amount']: '0.00'; ?>">
+                        <input aria-label="<?= htmlspecialchars(__('Joining Bonus Amount'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right" id="joining_bouns" type="text" name="joining_bonus_amount" value="<?php echo $salarydata['joining_bonus_amount']!=""? $salarydata['joining_bonus_amount']: '0.00'; ?>">
                     </div>
                 </div>
 
@@ -165,7 +165,7 @@
 
                 <div class="form-group  col-lg-4">
                     <span class="form-label"><?= __('Notes') ?></span>
-                    <textarea aria-label="Max 500 characters" class="form-control" id="kt_autosize_2" name="note" placeholder="<?= __('Max 500 characters') ?>" ><?php echo $salarydata['note']; ?></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Max 500 characters'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_autosize_2" name="note" placeholder="<?= __('Max 500 characters') ?>" ><?php echo $salarydata['note']; ?></textarea>
                 </div>
 
 
@@ -174,7 +174,7 @@
                     <div>
                          <button type="button" onclick="shoehidetdssection()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" class="btn p-0 border-0 bg-transparent">
                         <?php $is_tds_applicable = $salarydata['tds_applicable']!=""?$salarydata['tds_applicable']: 1; ?>
-                        <input aria-label="Checkbox" type="checkbox"  class="js-switch" value="<?php echo $sen; ?>"  name="is_joining_bonus" <?php if($is_tds_applicable== 0 ){ ?> checked <?php
+                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"  class="js-switch" value="<?php echo $sen; ?>"  name="is_joining_bonus" <?php if($is_tds_applicable== 0 ){ ?> checked <?php
 } ?>  />
                          <input type="hidden"   value="<?php echo $is_tds_applicable; ?>"  name="tds_applicable" id="is_tds_applicable_val"  />
                          </button>
@@ -184,7 +184,7 @@
                 <div class="form-group col-lg-4"  id="tds_section_dis"  <?php if($is_tds_applicable ==1){ ?> style="display:none; "; <?php
 } ?>>
                     <span class="form-label"><?= __('TDS Section') ?></span>
-                    <select aria-label="Tds Section" class="form-select js-example-basic-single" id="tds_section" name='tds_section'>
+                    <select aria-label="<?= htmlspecialchars(__('Tds Section'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="tds_section" name='tds_section'>
                         <option value="0"><?= __('Select Any One') ?></option>
                         <?php foreach ($data['tax_deducted_sources_data'] as $gst_type) { ?>
                            <option <?php if( $salarydata['tds_section'] == $gst_type['id']){ echo "selected";

@@ -66,10 +66,10 @@ if(empty($tempdata)){
         title: msg,
         type: "success",
         buttonsStyling: false,
-        confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+        confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
         confirmButtonClass: "btn btn-info",
         showCancelButton: false,
-        cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+        cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
         cancelButtonClass: "btn btn-default"
       });
      },
@@ -244,10 +244,10 @@ function showmarriagedate(value) {
    htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="<?php echo __('Checkbox'); ?>" class="form-control itemRow" type="checkbox"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
 
    htmlRows += '<td><input aria-label="<?php echo __('Enter Instistute name'); ?>" type="text" name="institute_name[]"  placeholder="<?php echo __('Enter Instistute name'); ?>" class="form-control " autocomplete="off">  </td>';
-   htmlRows += '<td><select aria-label="<?php echo __('Education Type[]'); ?>" class="form-control form-select js-example-basic-single" name="education_type[]" > <option value="0"> <?php echo __('Select Any One'); ?></option> <?php foreach ($edutypedata as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo $edutype['genc_detail_name']; ?></option> <?php
+   htmlRows += '<td><select aria-label="<?php echo __('Education Type[]'); ?>" class="form-control form-select js-example-basic-single" name="education_type[]" > <option value="0"> <?php echo __('Select Any One'); ?></option> <?php foreach ($edutypedata as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo __($edutype['genc_detail_name']); ?></option> <?php
 } ?></select> </td>';
    htmlRows += '<td><input aria-label="<?php echo __('Start Date'); ?>" type="text" name="start_date[]" placeholder="<?php echo __('Start Date'); ?>"  class="form-control datepicker"  autocomplete="off"> <input aria-label="<?php echo __('End Date'); ?>" type="text" name="end_date[]"  class="form-control datepicker mt-2"   autocomplete="off" placeholder="<?php echo __('End Date'); ?>">  </td>';
-   htmlRows += '<td><input aria-label="<?php echo __('Score'); ?>" type="text" name="score[]"  class="form-control " placeholder ="Score" autocomplete="off">  </td>';
+   htmlRows += '<td><input aria-label="<?php echo __('Score'); ?>" type="text" name="score[]"  class="form-control " placeholder ="<?= htmlspecialchars(__('Score'), ENT_QUOTES, 'UTF-8'); ?>" autocomplete="off">  </td>';
    htmlRows += '</tr>';
    $('#edutable').append(htmlRows);
    $(".js-example-basic-single").select2();
@@ -310,7 +310,7 @@ function checkageemployee(val){
 
 
        <div class="alert alert-primary alert-dismissible">
-        <strong><?php echo "HR connect is not configured.  <strong>Workflow need to be started!</strong>"; ?></strong>
+        <strong><?php echo "".__('HR connect is not configured.')."  <strong>".__('Workflow need to be started!')."</strong>"; ?></strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
         </button>
       </div>
@@ -319,7 +319,7 @@ function checkageemployee(val){
 
 
        <div class="alert alert-primary alert-dismissible">
-        <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
+        <strong><?php echo "This function is used for maintaining <strong>".__('Display Attributes')."</strong>".__('. * represents mandatory fields.').""; ?></strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>">
         </button>
       </div>
@@ -800,7 +800,7 @@ foreach ($emptypes_details as $emptypes) {
                <label class="form-label <?php echo $text_color_ety; ?>">
                  <input aria-label="<?php echo __('Employee Type'); ?>"  type="radio" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php
 } ?> value="<?php echo $emptypes['genc_detail_code'];?>" class="d-none" />
-                 <i class="helper"></i><?php echo $emptypes['genc_detail_name'];?> </label>
+                 <i class="helper"></i><?php echo __($emptypes['genc_detail_name']);?> </label>
                </div>
 
              <?php } ?>
@@ -959,7 +959,7 @@ foreach ($emptypes_details as $emptypes) {
                                    <label class="form-label <?php echo $text_color_gen; ?>">
                                      <input aria-label="<?php echo __('Gender'); ?>" type="radio" name="gender"  value="<?php echo $gender_data['genc_detail_code'];?>" class="d-none"/>
                                      <i class="helper"></i>
-                                     <?php echo $gender_data['genc_detail_name']; ?>
+                                     <?php echo __($gender_data['genc_detail_name']); ?>
                                    </label>
                                  </div>
                                <?php } ?>
@@ -981,8 +981,8 @@ foreach ($emptypes_details as $emptypes) {
                                $empdata['blood_group'] = $blood_groups['genc_detail_name'];
                              }
                              ?>
-                             <option value="<?php echo $blood_groups['genc_detail_name']; ?>" >
-                              <?php echo $blood_groups['genc_detail_name']; ?>
+                             <option value="<?php echo __($blood_groups['genc_detail_name']); ?>" >
+                              <?php echo __($blood_groups['genc_detail_name']); ?>
                             </option>
                           <?php } ?>
                         </select>
@@ -1008,7 +1008,7 @@ foreach ($emptypes_details as $emptypes) {
                          <label  class="form-label <?php echo $text_color_ma; ?>">
                            <input aria-label="<?php echo __('Marital Status'); ?>" onclick="showmarriagedate(this.value);" type="radio" name="marital_status"  value="<?php echo $marital_stat['genc_detail_code']; ?>" class="d-none" onkeydown="" />
                            <i class="helper"></i>
-                           <?php echo $marital_stat['genc_detail_name']; ?>
+                           <?php echo __($marital_stat['genc_detail_name']); ?>
                          </label>
                        </div>
                      <?php } ?>
@@ -1168,9 +1168,9 @@ if(count((array)$edu_details)>0){
                           <select aria-label="<?php echo __('Education Type[]'); ?>" class="form-control form-select js-example-basic-single" name="education_type[]" >
                             <option value=""> <?php echo __('Select Any One'); ?></option>
                             <?php foreach ($edutypedata as  $edutype) {   ?>
-                              <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo $edutype['genc_detail_name']; ?></option>
+                              <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo __($edutype['genc_detail_name']); ?></option>
                             <?php   } ?>
-                            <option value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo $edutype['genc_detail_name']; ?></option>
+                            <option value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo __($edutype['genc_detail_name']); ?></option>
                           </select>
                         </td>
                         <td>

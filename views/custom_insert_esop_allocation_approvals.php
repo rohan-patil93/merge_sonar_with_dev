@@ -86,9 +86,9 @@ foreach($esop_vesting_schedule as $evs){
     }
     function updateDynamicCurrentStataus(status,rid){
         if(status == 199){
-            msg = "Approve";
+            msg = <?php echo json_encode(__('Approve'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
         }else{
-            msg ="Reject";
+            msg =<?php echo json_encode(__('Reject'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
         }
         swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",

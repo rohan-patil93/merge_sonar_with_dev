@@ -60,13 +60,13 @@ function setcompliance(){
      <div class="page-body">
     <div class="card">
         <div class="card-header ">
-            <h5>Allocation Compliance</h5>
+            <h5><?= __('Allocation Compliance'); ?></h5>
             <div class="card-header-right">
                 <button type="button" onclick="setcompliance()" class="btn btn-success ">
-                Task Allocation
+                <?= __('Task Allocation'); ?>
                 </button>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                  <i class="icofont icofont-reply"></i> Back
+                  <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -76,10 +76,10 @@ function setcompliance(){
         <thead>
             <tr>
 
-                <th scope="col">Compliance Name</th>
-                <th scope="col">Action Frequency</th>
-                <th scope="col">Critical Compliance</th>
-                <th scope="col">Action</th>
+                <th scope="col"><?= __('Compliance Name'); ?></th>
+                <th scope="col"><?= __('Action Frequency'); ?></th>
+                <th scope="col"><?= __('Critical Compliance'); ?></th>
+                <th scope="col"><?= __('Action'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -90,7 +90,7 @@ function setcompliance(){
                     <td><?php echo $frequencyary[$compliancelist['action_frequency']]; ?></td>
                     <td><?php echo $compliancelist['critical_compliance']=="N"?'No':'Yes'; ?></td>
                     <td>
-                        <a href="index.php?option=COM_INSERT_COMPLIANCES&TBL=compliances&Rid=<?php echo deocdeId("id:".$compliancelist['id']); ?>" target="_blank" class="btn btn-primary waves-effect waves-light" ><i class="fa fa-edit"></i> Edit</a>
+                        <a href="index.php?option=COM_INSERT_COMPLIANCES&TBL=compliances&Rid=<?php echo deocdeId("id:".$compliancelist['id']); ?>" target="_blank" class="btn btn-primary waves-effect waves-light" ><i class="fa fa-edit"></i> <?= __('Edit'); ?></a>
                     </td>
                 </tr>
             <?php } ?>
@@ -110,23 +110,23 @@ function setcompliance(){
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title modallabel" id="exampleModalLabel">Task Allocation Period</h5>
+                <h5 class="modal-title modallabel" id="exampleModalLabel"><?= __('Task Allocation Period'); ?></h5>
             </div>
             <div class="card-body">
                 <div class="form-group row">
-                   <label for="popup_start_date" class="col-4 col-form-label">Start Date</label>
+                   <label for="popup_start_date" class="col-4 col-form-label"><?= __('Start Date'); ?></label>
                    <div class="col-5">
-                      <input aria-label="Popup Start Date" class="form-control datepicker" type="text" id="popup_start_date" value="<?php echo fromDate(date('d-m-Y'))?>">
+                      <input aria-label="<?= htmlspecialchars(__('Popup Start Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text" id="popup_start_date" value="<?php echo fromDate(date('d-m-Y'))?>">
                    </div>
-                   <label for="popup_end_date" class="col-4 col-form-label mt-2">End Date</label>
+                   <label for="popup_end_date" class="col-4 col-form-label mt-2"><?= __('End Date'); ?></label>
                    <div class="col-5 mt-2">
-                      <input aria-label="Popup End Date" class="form-control datepicker" type="text" id="popup_end_date" value="<?php echo fromDate(date('d-m-Y',strtotime('+1 year')))?>">
+                      <input aria-label="<?= htmlspecialchars(__('Popup End Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text" id="popup_end_date" value="<?php echo fromDate(date('d-m-Y',strtotime('+1 year')))?>">
                    </div>
                 </div>
             </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" >Cancel</button>
-        <button type="button" class="btn btn-primary " onclick="taskAllocationSubmit()" >Submit</button>
+        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" ><?= __('Cancel'); ?></button>
+        <button type="button" class="btn btn-primary " onclick="taskAllocationSubmit()" ><?= __('Submit'); ?></button>
     </div>
     </div>
 

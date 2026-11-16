@@ -2,7 +2,7 @@
     <div class="card card-custom gutter-b draggable" role="region" style="">
         <div class="card-header">
             <div class="card-title">
-                <h3 class="card-label">Attendance Summary</h3>
+                <h3 class="card-label"><?= __('Attendance Summary'); ?></h3>
             </div>
             <div class="card-toolbar">
                 <a href="#" class="btn btn-icon btn-sm btn-hover-light-primary draggable-handle">
@@ -18,13 +18,13 @@
                      <div class="row">
                         <div class="col-md-6 col-6 text-center">
                            <div class="stats-box mb-4">
-                              <p>Total Employees</p>
+                              <p><?= __('Total Employees'); ?></p>
                               <h3>385</h3>
                            </div>
                         </div>
                         <div class="col-md-6 col-6 text-center">
                            <div class="stats-box mb-4">
-                              <p>Present</p>
+                              <p><?= __('Present'); ?></p>
                               <h3>19</h3>
                            </div>
                         </div>
@@ -38,15 +38,15 @@
                      <div class="progress-bar bg-info" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">10%</div>
                   </div>
                   <div>
-                     <p><i class="far fa-dot-circle text-purple mr-2"></i>Users have checked in<span class="float-right">166</span></p>
-                     <p><i class="far fa-dot-circle text-warning mr-2"></i>Users are currently inside office <span class="float-right">115</span></p>
-                     <p><i class="far fa-dot-circle text-success mr-2"></i>Users are yet to check in <span class="float-right">31</span></p>
-                     <p><i class="far fa-dot-circle text-danger mr-2"></i>Users are on paid leave <span class="float-right">47</span></p>
-                     <p class=""><i class="far fa-dot-circle text-info mr-2"></i>Users are on weekend today <span class="float-right">5</span></p>
-                     <p class=""><i class="far fa-dot-circle text-purple mr-2"></i>Users are on unpaid leave <span class="float-right">5</span></p>
-                     <p class=""><i class="far fa-dot-circle text-warning mr-2"></i>Users are on Holiday today <span class="float-right">5</span></p>
-                     <p class=""><i class="far fa-dot-circle text-success mr-2"></i>Users are on onduty today <span class="float-right">5</span></p>
-                     <p class="mb-0"><i class="far fa-dot-circle text-info mr-2"></i>Users are on work from home today <span class="float-right">5</span></p>
+                     <p><i class="far fa-dot-circle text-purple mr-2"></i><?= __('Users have checked in'); ?><span class="float-right">166</span></p>
+                     <p><i class="far fa-dot-circle text-warning mr-2"></i><?= __('Users are currently inside office'); ?> <span class="float-right">115</span></p>
+                     <p><i class="far fa-dot-circle text-success mr-2"></i><?= __('Users are yet to check in'); ?> <span class="float-right">31</span></p>
+                     <p><i class="far fa-dot-circle text-danger mr-2"></i><?= __('Users are on paid leave'); ?> <span class="float-right">47</span></p>
+                     <p class=""><i class="far fa-dot-circle text-info mr-2"></i><?= __('Users are on weekend today'); ?> <span class="float-right">5</span></p>
+                     <p class=""><i class="far fa-dot-circle text-purple mr-2"></i><?= __('Users are on unpaid leave'); ?> <span class="float-right">5</span></p>
+                     <p class=""><i class="far fa-dot-circle text-warning mr-2"></i><?= __('Users are on Holiday today'); ?> <span class="float-right">5</span></p>
+                     <p class=""><i class="far fa-dot-circle text-success mr-2"></i><?= __('Users are on onduty today'); ?> <span class="float-right">5</span></p>
+                     <p class="mb-0"><i class="far fa-dot-circle text-info mr-2"></i><?= __('Users are on work from home today'); ?> <span class="float-right">5</span></p>
                   </div>
                </div>
             </div>

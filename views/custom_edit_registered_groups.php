@@ -116,9 +116,9 @@ function chekTotalAmount(id=""){
     });
     //$("#totalactualuser").text(agreeduserlimit);
     console.log(discount_prices);
-    $("#totaldiscount_prices").text("Rs."+discount_prices);
-    $("#totalactualprice").text("Rs."+agreedprice);
-    $("#totalpricesubscription").text("Rs."+agreedprice);
+    $("#totaldiscount_prices").text(<?php echo json_encode(__('Rs.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+discount_prices);
+    $("#totalactualprice").text(<?php echo json_encode(__('Rs.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+agreedprice);
+    $("#totalpricesubscription").text(<?php echo json_encode(__('Rs.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+agreedprice);
 
 }
 
@@ -281,7 +281,7 @@ function refrashpage(){
 
 
                                                             <td>
-<input type="checkbox" class="js-switch" <?php echo $subscriptuser['payment_type']=="Y"?"checked disabled":"";?> onchange="acceptPaymentSubscription('<?php echo $subscriptuser['id']; ?>','<?php echo $subscriptuser['added_license_users']; ?>','<?php echo $subscriptuser['price']; ?>')"   / aria-label="Input"></td>
+<input type="checkbox" class="js-switch" <?php echo $subscriptuser['payment_type']=="Y"?"checked disabled":"";?> onchange="acceptPaymentSubscription('<?php echo $subscriptuser['id']; ?>','<?php echo $subscriptuser['added_license_users']; ?>','<?php echo $subscriptuser['price']; ?>')"   / aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
                                                         </tr>
                                                         <?php $i++;
                                                         } ?>
@@ -352,7 +352,7 @@ function refrashpage(){
                                             <div class="col-lg-4">
                                                 <div class="checkbox-fade fade-in-warning  d-block">
                                                     <label class="form-label  d-block mb-0">
-                                                        <input type="checkbox" name="usage_trash_holder_type" id="usagetreshold" value="Y" onchange="checkUsageTreshold()" <?php echo $applicationuser['usage_trash_holder_type']=='Y'?"checked":""; ?> aria-label="Usage Trash Holder Type">
+                                                        <input type="checkbox" name="usage_trash_holder_type" id="usagetreshold" value="Y" onchange="checkUsageTreshold()" <?php echo $applicationuser['usage_trash_holder_type']=='Y'?"checked":""; ?> aria-label="<?= htmlspecialchars(__('Usage Trash Holder Type'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <span class="cr mt-0">
                                                           <i class="cr-icon icofont icofont-ui-check txt-warning"></i>
                                                       </span>
@@ -365,7 +365,7 @@ function refrashpage(){
                                             <div class="row align-items-center">
                                                 <label class="form-label col-lg-3 f-w-700 f-14"><?= __('Days') ?></label>
                                                 <div class="col-lg-7">
-                                                    <input type="number" name="usage_trash_holder_day"  class="form-control" value="<?php echo $applicationuser['usage_trash_holder_day']; ?>" aria-label="Usage Trash Holder Day">
+                                                    <input type="number" name="usage_trash_holder_day"  class="form-control" value="<?php echo $applicationuser['usage_trash_holder_day']; ?>" aria-label="<?= htmlspecialchars(__('Usage Trash Holder Day'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -375,7 +375,7 @@ function refrashpage(){
 
                                     <div class="checkbox-fade fade-in-warning  d-block">
                                         <label class="form-label  d-block">
-                                            <input type="checkbox" name="pro_rata_billing" id="usagetreshold" value="Y" <?php echo $applicationuser['pro_rata_billing']=='Y'?"checked":""; ?> aria-label="Pro Rata Billing">
+                                            <input type="checkbox" name="pro_rata_billing" id="usagetreshold" value="Y" <?php echo $applicationuser['pro_rata_billing']=='Y'?"checked":""; ?> aria-label="<?= htmlspecialchars(__('Pro Rata Billing'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <span class="cr mt-0">
                                               <i class="cr-icon icofont icofont-ui-check txt-warning"></i>
                                           </span>
@@ -463,8 +463,8 @@ function refrashpage(){
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="payment_id_popup" id="payment_id_popup" value="">
-                <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="refrashpage()">Cancel</button>
-                <button type="button" class="btn btn-primary " onclick="insertPaymentSubScription()" >Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="refrashpage()"><?= __('Cancel'); ?></button>
+                <button type="button" class="btn btn-primary " onclick="insertPaymentSubScription()" ><?= __('Submit'); ?></button>
             </div>
         </form>
     </div>

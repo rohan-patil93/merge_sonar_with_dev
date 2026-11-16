@@ -55,12 +55,12 @@ $stausresult = ViewStatusData();
         <div class="card">
         <div class="card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
-                <h5>Job Post Candidates</h5>
+                <h5><?= __('Job Post Candidates'); ?></h5>
                 <div class="card-header-right">
                     <input type="hidden" id="job_posting_id_ajax" value="<?php echo $jobpost; ?>">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
             </div>
         </div>
@@ -73,13 +73,13 @@ $stausresult = ViewStatusData();
                         <thead>
                             <tr>
                                 <th scope="col">#.</th>
-                                <th scope="col">Job Post Name</th>
-                                <th scope="col">Candidate Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Shortlist</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Job Post Name'); ?></th>
+                                <th scope="col"><?= __('Candidate Name'); ?></th>
+                                <th scope="col"><?= __('Email'); ?></th>
+                                <th scope="col"><?= __('Phone'); ?></th>
+                                <th scope="col"><?= __('Shortlist'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,11 +94,11 @@ $stausresult = ViewStatusData();
                                 <td><?php  echo $res['candidate_phone']; ?></td>
                                 <td>
                                     <?php if($res['shortlisted']=='0'){ ?>
-                                        <span class="label label-lg label-success label-inline mr-2">Shortlisted</span>
+                                        <span class="label label-lg label-success label-inline mr-2"><?= __('Shortlisted'); ?></span>
                                     <?php }elseif($res['shortlisted']=='1'){ ?>
-                                        <span class="label label-lg label-danger label-inline mr-2">Rejected</span>
+                                        <span class="label label-lg label-danger label-inline mr-2"><?= __('Rejected'); ?></span>
                                     <?php }else{ ?>
-                                        <span class="label label-lg label-warning label-inline mr-2">Pending</span>
+                                        <span class="label label-lg label-warning label-inline mr-2"><?= __('Pending'); ?></span>
                                     <?php  } ?>
                                 </td>
                                 <td>
@@ -106,7 +106,7 @@ $stausresult = ViewStatusData();
                                 </td>
                                 <td nowrap="nowrap" style="display: flex;">
 
-                                    <button type="button" class="btn btn-sm btn-clean btn-icon" onclick="displaycandidateview(<?php echo $res['job_post_id']; ?>)" title="View"><i class="fa fa-eye"></i>    </button>
+                                    <button type="button" class="btn btn-sm btn-clean btn-icon" onclick="displaycandidateview(<?php echo $res['job_post_id']; ?>)" title="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i>    </button>
                             </td>
                         </tr>
                         <?php $k++;

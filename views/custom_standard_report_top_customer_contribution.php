@@ -23,16 +23,16 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5>Top Customer Contribution Report</h5>
+        <h5><?= __('Top Customer Contribution Report'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown-2"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    More
+                    <?= __('More'); ?>
                 </button>
                 <div class="dropdown-menu p-0">
-                    <a class="dropdown-item" href="custom_view_download.php?page=TopCustomerContribution&format=csv" target="_blank">CSV</a>
-                    <a class="dropdown-item" href="custom_view_download.php?page=TopCustomerContribution&format=excel" target="_blank">Excel</a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=TopCustomerContribution&format=csv" target="_blank"><?= __('CSV'); ?></a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=TopCustomerContribution&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -46,14 +46,14 @@ $_SESSION['download_data'] = [];
             <table class="table table-separate table-head-custom table-checkable data-table">
                 <thead>
                     <tr>
-                        <th scope="col">Rank</th>
-                        <th scope="col">Customer Name</th>
-                        <th scope="col" class="text-right">Total Sales (₹)</th>
-                        <th scope="col" class="text-right">Total Tax (₹)</th>
-                        <th scope="col" class="text-right">Gross Total (₹)</th>
-                        <th scope="col" class="text-right">No. of Invoices</th>
-                        <th scope="col" class="text-right">Avg. Invoice (₹)</th>
-                        <th scope="col" class="text-right">% Contribution</th>
+                        <th scope="col"><?= __('Rank'); ?></th>
+                        <th scope="col"><?= __('Customer Name'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Sales (₹)'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Tax (₹)'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Gross Total (₹)'); ?></th>
+                        <th scope="col" class="text-right"><?= __('No. of Invoices'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Avg. Invoice (₹)'); ?></th>
+                        <th scope="col" class="text-right"><?= __('% Contribution'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,7 +90,7 @@ $_SESSION['download_data'] = [];
         <?php } else { ?>
             <div class="text-center py-4">
                 <p class="text-muted f-16 fw-bold">
-                    <i class="ti-alert text-warning"></i> No Data Available
+                    <i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?>
                 </p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">

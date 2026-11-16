@@ -17,17 +17,17 @@ if(count((array)$admindashboardd['sales_invoices_list'])!='0' || !isset($adminda
 ?>
 <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3">
     <li class="nav-item">
-        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#approvedinvoicse11" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-check-circle f-20"></i> Approved <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$approvedinvoices); ?></span></a>
+        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#approvedinvoicse11" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-check-circle f-20"></i> <?= __('Approved'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$approvedinvoices); ?></span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#unapprovedinvoicse11" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-shopping-basket f-20"></i> Un-Approved <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$unapprovedinvoices); ?></span></a>
+        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#unapprovedinvoicse11" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="fa fa-shopping-basket f-20"></i> <?= __('Un-Approved'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$unapprovedinvoices); ?></span></a>
     </li>
 </ul>
 <div class="tab-content tabs">
     <div class="tab-pane card-body active p-0" id="approvedinvoicse11" role="tabpanel">
         <div class="card table-card">
             <div class="card-header">
-                <h5>Approved Sales invoices</h5>
+                <h5><?= __('Approved Sales invoices'); ?></h5>
             </div>
             <div class="card-body">
                   <div class="card-block table-responsive" >
@@ -35,12 +35,12 @@ if(count((array)$admindashboardd['sales_invoices_list'])!='0' || !isset($adminda
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Customer</th>
-                                <th scope="col">Invoices Number</th>
-                                <th scope="col">Date</th>
-                                <th scope="col" class="text-right">Price</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Customer'); ?></th>
+                                <th scope="col"><?= __('Invoices Number'); ?></th>
+                                <th scope="col"><?= __('Date'); ?></th>
+                                <th scope="col" class="text-right"><?= __('Price'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
 
                             </tr>
                         </thead>
@@ -59,13 +59,13 @@ if(count((array)$admindashboardd['sales_invoices_list'])!='0' || !isset($adminda
                                         <span class="form-label label " style="background-color: <?php echo $stausresultpending_list['background_color'][0] == '#'?$stausresultpending_list['background_color']:"#".$stausresultpending_list['background_color']; ?>; color:<?php echo $stausresultpending_list['color'][0] =='#'?$stausresultpending_list['color']:'#'.$stausresultpending_list['color']; ?>"><?php echo $stausresultpending_list['name']?></span>
                                     </td>
                                     <td>
-                                        <a href="index?option=COM_INSERT_SALES_INVOICES&Rid=<?php echo $ridrecengtbils; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit Datails"><i class="fa fa-edit"></i></a>
+                                        <a href="index?option=COM_INSERT_SALES_INVOICES&Rid=<?php echo $ridrecengtbils; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Edit Datails'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
                                 <?php  $mq++;
 }
 }else{
-                                    echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Invoices Created</h4></td></tr>";
+                                    echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Invoices Created')."</h4></td></tr>";
                                 } ?>
                             </tbody>
                         </table>
@@ -76,7 +76,7 @@ if(count((array)$admindashboardd['sales_invoices_list'])!='0' || !isset($adminda
         <div class="tab-pane card-body p-0" id="unapprovedinvoicse11" role="tabpanel">
             <div class="card table-card">
             <div class="card-header">
-                <h5>Un Approved Supplier invoices</h5>
+                <h5><?= __('Un Approved Supplier invoices'); ?></h5>
             </div>
             <div class="card-body">
                   <div class="card-block table-responsive" >
@@ -84,12 +84,12 @@ if(count((array)$admindashboardd['sales_invoices_list'])!='0' || !isset($adminda
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Vendor</th>
-                                <th scope="col">Invoices Number</th>
-                                <th scope="col">Date</th>
-                                <th scope="col" class="text-right">Price</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Vendor'); ?></th>
+                                <th scope="col"><?= __('Invoices Number'); ?></th>
+                                <th scope="col"><?= __('Date'); ?></th>
+                                <th scope="col" class="text-right"><?= __('Price'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
 
                             </tr>
                         </thead>
@@ -108,13 +108,13 @@ if(count((array)$admindashboardd['sales_invoices_list'])!='0' || !isset($adminda
                                         <span class="form-label label " style="background-color: <?php echo $stausresultpending_list['background_color'][0] == '#'?$stausresultpending_list['background_color']:"#".$stausresultpending_list['background_color']; ?>; color:<?php echo $stausresultpending_list['color'][0] =='#'?$stausresultpending_list['color']:'#'.$stausresultpending_list['color']; ?>"><?php echo $stausresultpending_list['name']?></span>
                                     </td>
                                     <td>
-                                        <a href="index?option=COM_INSERT_SUPPLIER_BILLS&Rid=<?php echo $ridrecengtbils; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit Datails"><i class="fa fa-edit"></i></a>
+                                        <a href="index?option=COM_INSERT_SUPPLIER_BILLS&Rid=<?php echo $ridrecengtbils; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Edit Datails'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
                                 <?php  $mq++;
 }
 }else{
-                                    echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> No Bills Created</h4></td></tr>";
+                                    echo "<tr><td colspan='7' class='text-center'><h4 ><i class='fa fa-warning'></i> ".__('No Bills Created')."</h4></td></tr>";
                                 } ?>
                             </tbody>
                         </table>

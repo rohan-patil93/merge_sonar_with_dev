@@ -46,40 +46,40 @@ if (!empty($_GET['from_date']) && !empty($_GET['to_date']) && count((array)$repo
 
 function statusBadge($s)
 {
-    if ($s == 0) { return '<span class="badge bg-primary">Active</span>';
+    if ($s == 0) { return '<span class="badge bg-primary">'.__('Active').'</span>';
 }
-    if ($s > 0 && $s < 199) { return '<span class="badge bg-warning">In Progress</span>';
+    if ($s > 0 && $s < 199) { return '<span class="badge bg-warning">'.__('In Progress').'</span>';
 }
-    if ($s == 199) { return '<span class="badge bg-success">Completed</span>';
+    if ($s == 199) { return '<span class="badge bg-success">'.__('Completed').'</span>';
 }
-    return '<span class="badge bg-secondary">Unknown</span>';
+    return '<span class="badge bg-secondary">'.__('Unknown').'</span>';
 }
 ?>
 <div class="page-body">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5>Adhoc Service Requests Report</h5>
+            <h5><?= __('Adhoc Service Requests Report'); ?></h5>
             <?php if (!empty($_SESSION['download_data'])) { ?>
-            <a href="custom_view_download.php?page=AmcAdhocRequests&format=csv" class="btn btn-outline-primary btn-sm">CSV Export</a>
+            <a href="custom_view_download.php?page=AmcAdhocRequests&format=csv" class="btn btn-outline-primary btn-sm"><?= __('CSV Export'); ?></a>
             <?php } ?>
         </div>
         <div class="card-body">
             <form method="get" id="reportFilterForm" class="row g-3 mb-3">
                 <input type="hidden" name="option" value="COM_LIST_AMC_COMPLAINTS_REPORT">
                 <div class="col-lg-2">
-                    <span>From Date <span class="text-danger">*</span></span>
-                    <input aria-label="From Date" type="date" class="form-control" name="from_date" id="from_date" value="<?php echo $_GET['from_date'] ?? ''; ?>">
+                    <span><?= __('From Date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="from_date" id="from_date" value="<?php echo $_GET['from_date'] ?? ''; ?>">
                     <div id="from_date_err" class="text-danger small d-none"></div>
                 </div>
                 <div class="col-lg-2">
-                    <span>To Date <span class="text-danger">*</span></span>
-                    <input aria-label="To Date" type="date" class="form-control" name="to_date" id="to_date" value="<?php echo $_GET['to_date'] ?? ''; ?>">
+                    <span><?= __('To Date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="to_date" id="to_date" value="<?php echo $_GET['to_date'] ?? ''; ?>">
                     <div id="to_date_err" class="text-danger small d-none"></div>
                 </div>
                 <div class="col-lg-2 form-group w-full">
-                    <span>Contract</span>
-                    <select aria-label="Contract" class="form-select js-example-basic-single" id="contract_id" name="contract_id">
-                        <option value="">All</option>
+                    <span><?= __('Contract'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Contract'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="contract_id" name="contract_id">
+                        <option value=""><?= __('All'); ?></option>
                         <?php if (count((array)$filterContracts) > 0) {
                             foreach ($filterContracts as $c) {
                                 $c = is_array($c) ? $c : (array) $c;
@@ -91,9 +91,9 @@ function statusBadge($s)
                     </select>
                 </div>
                 <div class="col-lg-2">
-                    <span>Vendor</span>
-                    <select aria-label="Vendor" class="form-select js-example-basic-single" name="vendor_id">
-                        <option value="">All</option>
+                    <span><?= __('Vendor'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="vendor_id">
+                        <option value=""><?= __('All'); ?></option>
                         <?php if (count((array)$filterVendors) > 0) {
                             foreach ($filterVendors as $v) {
                                 $v = is_array($v) ? $v : (array) $v;
@@ -105,9 +105,9 @@ function statusBadge($s)
                     </select>
                 </div>
                 <div class="col-lg-2">
-                    <span>Location</span>
-                    <select aria-label="Location" class="form-select js-example-basic-single" name="location_id">
-                        <option value="">All</option>
+                    <span><?= __('Location'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="location_id">
+                        <option value=""><?= __('All'); ?></option>
                         <?php if (count((array)$filterLocations) > 0) {
                             foreach ($filterLocations as $loc) {
                                 $loc = is_array($loc) ? $loc : (array) $loc;
@@ -119,9 +119,9 @@ function statusBadge($s)
                     </select>
                 </div>
                 <div class="col-lg-2">
-                    <span>Asset</span>
-                    <select aria-label="Asset" class="form-select js-example-basic-single" name="asset_id">
-                        <option value="">All</option>
+                    <span><?= __('Asset'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Asset'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="asset_id">
+                        <option value=""><?= __('All'); ?></option>
                         <?php if (count((array)$filterAssets) > 0) {
                             foreach ($filterAssets as $a) {
                                 $a = is_array($a) ? $a : (array) $a;
@@ -134,16 +134,16 @@ function statusBadge($s)
                     </select>
                 </div>
                 <div class="col-lg-2">
-                    <span>Status</span>
-                    <select aria-label="Status" class="form-select js-example-basic-single" name="status">
-                        <option value="">All</option>
-                        <option value="0" <?php echo (isset($_GET['status']) && $_GET['status'] == '0') ? 'selected' : ''; ?>>Active</option>
-                        <option value="1" <?php echo (isset($_GET['status']) && $_GET['status'] == '1') ? 'selected' : ''; ?>>In Progress</option>
-                        <option value="199" <?php echo (isset($_GET['status']) && $_GET['status'] == '199') ? 'selected' : ''; ?>>Completed</option>
+                    <span><?= __('Status'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="status">
+                        <option value=""><?= __('All'); ?></option>
+                        <option value="0" <?php echo (isset($_GET['status']) && $_GET['status'] == '0') ? 'selected' : ''; ?>><?= __('Active'); ?></option>
+                        <option value="1" <?php echo (isset($_GET['status']) && $_GET['status'] == '1') ? 'selected' : ''; ?>><?= __('In Progress'); ?></option>
+                        <option value="199" <?php echo (isset($_GET['status']) && $_GET['status'] == '199') ? 'selected' : ''; ?>><?= __('Completed'); ?></option>
                     </select>
                 </div>
                 <div class="col-lg-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary w-100"><i class="icofont icofont-search"></i> Search</button>
+                    <button type="submit" class="btn btn-primary w-100"><i class="icofont icofont-search"></i> <?= __('Search'); ?></button>
                 </div>
             </form>
         </div>
@@ -155,15 +155,15 @@ function statusBadge($s)
                     <thead class="bg-primary text-white">
                         <tr>
                             <th scope=\"col\">#</th>
-                            <th scope=\"col\">Date</th>
-                            <th scope=\"col\">Request No.</th>
-                            <th scope=\"col\">Complaint Name</th>
-                            <th scope=\"col\">Contract</th>
-                            <th scope=\"col\">Vendor</th>
-                            <th scope=\"col\">Asset / Item</th>
-                            <th scope=\"col\">Location</th>
-                            <th scope=\"col\">ServiceNow</th>
-                            <th scope=\"col\">Status</th>
+                            <th scope=\"col\"><?= __('Date'); ?></th>
+                            <th scope=\"col\"><?= __('Request No.'); ?></th>
+                            <th scope=\"col\"><?= __('Complaint Name'); ?></th>
+                            <th scope=\"col\"><?= __('Contract'); ?></th>
+                            <th scope=\"col\"><?= __('Vendor'); ?></th>
+                            <th scope=\"col\"><?= __('Asset / Item'); ?></th>
+                            <th scope=\"col\"><?= __('Location'); ?></th>
+                            <th scope=\"col\"><?= __('ServiceNow'); ?></th>
+                            <th scope=\"col\"><?= __('Status'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -192,7 +192,7 @@ function statusBadge($s)
                         </tr>
                         <?php }
                         } else { ?>
-                        <tr><td colspan="10" class="text-center text-muted">No records</td></tr>
+                        <tr><td colspan="10" class="text-center text-muted"><?= __('No records'); ?></td></tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -206,17 +206,17 @@ $("#reportFilterForm").submit(function(e) {
     var to = $("#to_date").val();
     $("#from_date_err, #to_date_err").addClass("d-none");
     if (!from) {
-        $("#from_date_err").text("Please select From Date").removeClass("d-none");
+        $("#from_date_err").text(<?php echo json_encode(__('Please select From Date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass("d-none");
         e.preventDefault();
         return;
     }
     if (!to) {
-        $("#to_date_err").text("Please select To Date").removeClass("d-none");
+        $("#to_date_err").text(<?php echo json_encode(__('Please select To Date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass("d-none");
         e.preventDefault();
         return;
     }
     if (new Date(to) < new Date(from)) {
-        $("#to_date_err").text("To Date must be greater than From Date").removeClass("d-none");
+        $("#to_date_err").text(<?php echo json_encode(__('To Date must be greater than From Date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass("d-none");
         e.preventDefault();
     }
 });

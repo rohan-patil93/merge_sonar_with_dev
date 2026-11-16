@@ -179,13 +179,13 @@ $supportedTypes = function_exists('getAllSupportedSensitiveTypes') ? getAllSuppo
 // Policy status calculation
 $isPolicyActive = !empty($currentPolicy['policy_active']);
 $today = date('Y-m-d');
-$statusBadge = '<span class="badge bg-danger">Inactive</span>';
+$statusBadge = '<span class="badge bg-danger">'.__('Inactive').'</span>';
 if ($isPolicyActive) {
-    $statusBadge = '<span class="badge bg-success">Active & Effective</span>';
+    $statusBadge = '<span class="badge bg-success">'.htmlspecialchars(__('Active & Effective'), ENT_QUOTES, 'UTF-8').'</span>';
 } elseif (!empty($currentPolicy['from_date']) && $today < $currentPolicy['from_date']) {
-    $statusBadge = '<span class="badge bg-warning text-dark">Scheduled (Effective from ' . htmlspecialchars($currentPolicy['from_date']) . ')</span>';
+    $statusBadge = '<span class="badge bg-warning text-dark">'.__('Scheduled (Effective from').' ' . htmlspecialchars($currentPolicy['from_date']) . ')</span>';
 } elseif (!empty($currentPolicy['to_date']) && $today > $currentPolicy['to_date']) {
-    $statusBadge = '<span class="badge bg-danger">Expired (Ended on ' . htmlspecialchars($currentPolicy['to_date']) . ')</span>';
+    $statusBadge = '<span class="badge bg-danger">'.__('Expired (Ended on').' ' . htmlspecialchars($currentPolicy['to_date']) . ')</span>';
 }
 ?>
 
@@ -219,14 +219,14 @@ if ($isPolicyActive) {
             <?php if (!empty($successMessage)): ?>
                 <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
                     <i class="feather icon-check-circle me-2"></i> <strong><?= __("Success:") ?></strong> <?php echo htmlspecialchars($successMessage); ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                 </div>
             <?php endif; ?>
 
             <?php if (!empty($errorMessage)): ?>
                 <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
                     <i class="feather icon-alert-triangle me-2"></i> <strong><?= __("Error:") ?></strong> <?php echo htmlspecialchars($errorMessage); ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                 </div>
             <?php endif; ?>
         </div>
@@ -458,17 +458,17 @@ if ($isPolicyActive) {
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <input aria-label="Show start characters" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first"
+                                                            <input aria-label="<?= htmlspecialchars(__('Show start characters'), ENT_QUOTES, 'UTF-8'); ?>" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first"
                                                                    name="custom_type_show_first[]" value="<?php echo htmlspecialchars($cFirst); ?>"
                                                                    oninput="updateRowPreview('<?php echo $cKey; ?>')">
                                                         </td>
                                                         <td>
-                                                            <input aria-label="Show end characters" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last"
+                                                            <input aria-label="<?= htmlspecialchars(__('Show end characters'), ENT_QUOTES, 'UTF-8'); ?>" type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last"
                                                                    name="custom_type_show_last[]" value="<?php echo htmlspecialchars($cLast); ?>"
                                                                    oninput="updateRowPreview('<?php echo $cKey; ?>')">
                                                         </td>
                                                         <td>
-                                                            <select aria-label="Mask character" class="form-select form-select-sm font-monospace rule-mask-char js-example-basic-single"
+                                                            <select aria-label="<?= htmlspecialchars(__('Mask character'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select form-select-sm font-monospace rule-mask-char js-example-basic-single"
                                                                     name="custom_type_mask_char[]"
                                                                     onchange="updateRowPreview('<?php echo $cKey; ?>')">
                                                                 <option value="*" <?php echo $cChar === '*' ? 'selected' : ''; ?>>*</option>
@@ -501,7 +501,7 @@ if ($isPolicyActive) {
                             <div class="card-footer bg-light d-flex justify-content-between align-items-center py-3">
                                 <div>
                                     <small class="text-muted">
-                                        <i class="feather icon-info me-1"></i> Asterisk counts calculate dynamically: <code>Mask Count = Total Length - Show Start - Show End</code>.
+                                        <i class="feather icon-info me-1"></i> <?= __('Asterisk counts calculate dynamically'); ?>: <code><?= __('Mask Count = Total Length - Show Start - Show End'); ?></code>.
                                     </small>
                                 </div>
                                 <div>
@@ -563,7 +563,7 @@ if ($isPolicyActive) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fw-bold"><i class="feather icon-plus-circle text-primary me-2"></i> <?= __("Add Custom Sensitive Field") ?></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
@@ -826,7 +826,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                name="custom_type_restricted[]" value="1" checked
                                id="switch_\${key}" onchange="updateRowPreview('\${key}')">
                         <label class="form-check-label small ms-1" for="switch_\${key}">
-                            <span class="status-label-\${key} badge bg-danger">Restricted</span>
+                            <span class="status-label-\${key} badge bg-danger"><?= htmlspecialchars(__('Restricted'), ENT_QUOTES, 'UTF-8'); ?></span>
                         </label>
                     </div>
                 </td>
@@ -852,7 +852,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="text-muted small"><?= __("Standard") ?></span>
                 </td>
                 <td>
-                    <span class="badge bg-light text-secondary border font-monospace rule-sample-orig">CONFIDENTIAL-1234</span>
+                    <span class="badge bg-light text-secondary border font-monospace rule-sample-orig"><?= htmlspecialchars(__('CONFIDENTIAL-1234'), ENT_QUOTES, 'UTF-8'); ?></span>
                 </td>
                 <td>
                     <span class="font-monospace text-primary fw-bold rule-preview-box" id="preview_\${key}">
@@ -884,7 +884,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var btn = document.getElementById('btnSavePolicy');
             if (btn) {
                 btn.disabled = true;
-                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Saving & Applying...';
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> <?= htmlspecialchars(__('Saving & Applying...'), ENT_QUOTES, 'UTF-8'); ?>';
             }
         });
     }

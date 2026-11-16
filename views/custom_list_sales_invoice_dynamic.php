@@ -57,7 +57,7 @@ if ($_GET['Rid'] != "") {
                 popup.print();
             },
             error: function () {
-                alert("Error fetching data");
+                alert(<?php echo json_encode(__('Error fetching data'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
         });
     }
@@ -92,7 +92,7 @@ if ($_GET['Rid'] != "") {
                 });
             },
             error: function () {
-                alert("Error fetching data");
+                alert(<?php echo json_encode(__('Error fetching data'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
         });
     }
@@ -101,11 +101,11 @@ if ($_GET['Rid'] != "") {
 <!-- Pradeep HTML Start here -->
 <div class="card">
     <div class="card-header">
-        <h5>Sales Invoice Excel Item List</h5>
+        <h5><?= __('Sales Invoice Excel Item List'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -116,14 +116,14 @@ if ($_GET['Rid'] != "") {
                 <table class="table table-hover">
                     <tr class="f-14" style="background-color: #eeeeee;">
                         <th scope="col">#</th>
-                        <th scope="col">Sr.No</th>
-                        <th scope="col">Party Name</th>
-                        <th scope="col">Salesmen</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Expiry Date</th>
-                        <th scope="col">Bill No.</th>
-                        <th scope="col">Items And Count</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"><?= __('Sr.No'); ?></th>
+                        <th scope="col"><?= __('Party Name'); ?></th>
+                        <th scope="col"><?= __('Salesmen'); ?></th>
+                        <th scope="col"><?= __('Mobile'); ?></th>
+                        <th scope="col"><?= __('Expiry Date'); ?></th>
+                        <th scope="col"><?= __('Bill No.'); ?></th>
+                        <th scope="col"><?= __('Items And Count'); ?></th>
+                        <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                     <?php
                     if (count((array)$sales) > 0) {
@@ -184,23 +184,23 @@ if ($_GET['Rid'] != "") {
                     ?>
                             <tr>
                                 <td>
-                                    <input aria-label="Ected Ids[]" type="checkbox" name="selected_ids[]" value="<?php echo $bill['bill_no'] ?>" <?php echo $checkboxDisabled ?>></td>
+                                    <input aria-label="<?= htmlspecialchars(__('Ected Ids'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox" name="selected_ids[]" value="<?php echo $bill['bill_no'] ?>" <?php echo $checkboxDisabled ?>></td>
                                 <td><?php echo  $i; ?></td>
                                 <td><?php echo  $partyTag ?></td>
                                 <td><?php echo  $user_nameTag; ?></td>
                                 <td><?php echo  $bill['mobile_no'] ?></td>
                                 <td><?php echo  fromDate($bill['expiry_date']) ?></td>
                                 <td><?php echo  $bill['bill_no'] ?></td>
-                                <td><?php echo  $planHTML ?><br><small>(<?php echo $bill['row_count']; ?>  Items) </small></td>
+                                <td><?php echo  $planHTML ?><br><small>(<?php echo $bill['row_count']; ?>  <?= __('Items)'); ?> </small></td>
                                 <td><?php
                                 if($bill['sales_invoice_id'] !=""){
                                     $nrid = "id:".$bill['sales_invoice_id'];
                                     $url = "index.php?option=COM_INSERT_SALES_INVOICES&Rid=".deocdeId($nrid);
                                     echo "<a href='".$url."' target='_blank' class='text-primary cursor-pointer m-r-10'><i class='ti ti-eye'></i>   ".$bill['sales_invoice_transaction_number']."</a>";
                                     ?>
-                                    <i class="ti-printer m-r-10 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Print" onclick="goToAnotherPageAndPrint('<?php echo $bill['sales_invoice_id']; ?>','sales_invoices')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                    <i class="ti-printer m-r-10 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" onclick="goToAnotherPageAndPrint('<?php echo $bill['sales_invoice_id']; ?>','sales_invoices')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
-                                    <i class="ti-cloud-down cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download" onclick="DownloadPDF('<?php echo $bill['sales_invoice_id']; ?>','sales_invoices')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                    <i class="ti-cloud-down cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" onclick="DownloadPDF('<?php echo $bill['sales_invoice_id']; ?>','sales_invoices')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
 
                              <?php
                                 }else{
@@ -214,7 +214,7 @@ if ($_GET['Rid'] != "") {
                         <tr>
                             <td colspan="8">
                                 <div class="card-px text-center py-20 m-t-30">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                     </div>
@@ -227,7 +227,7 @@ if ($_GET['Rid'] != "") {
 
 
             <div class="text-right mt-3">
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success"><?= __('Submit'); ?></button>
             </div>
         </form>
     </div>
@@ -236,7 +236,7 @@ if ($_GET['Rid'] != "") {
     document.getElementById("salesForm").addEventListener("submit", function(e) {
         const checkboxes = document.querySelectorAll('input[name="selected_ids[]"]:checked');
         if (checkboxes.length === 0) {
-            swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Please select at least one row.", "warning");
+            swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Please select at least one row.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "warning");
             e.preventDefault(); // Prevent form submission
         }
     });

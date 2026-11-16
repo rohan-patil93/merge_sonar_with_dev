@@ -15,7 +15,7 @@ $datacat["where"] = array('is_active'=> '0','id'=>$_POST['id']);
             <?php echo $data['header'] ; ?>
             <small>&nbsp; <?php echo $data['sub_header'] ; ?> </small>
         </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
     </div>
     <div class="modal-body" >
@@ -23,6 +23,6 @@ $datacat["where"] = array('is_active'=> '0','id'=>$_POST['id']);
     </div>
 
 <div class="modal-footer">
-         <button type="button" class="btn btn-primary waves-effect waves-light " data-bs-dismiss="modal" aria-label="Close">Close</button>
+         <button type="button" class="btn btn-primary waves-effect waves-light " data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Close'); ?></button>
 
 </div>

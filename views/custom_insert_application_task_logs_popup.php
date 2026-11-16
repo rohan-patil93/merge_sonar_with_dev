@@ -32,25 +32,25 @@ $statuse = ViewStatusData();
 	}
 </script>
 <div class="modal-header">
-	<h4 class="modal-title">Task Details</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<h4 class="modal-title"><?= __('Task Details'); ?></h4>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50" <?php if($application_task_logs['follow_up_type'] == EMAIL_TASK['type']){ ?>style="height: 450px;" <?php } ?>>
 	<div class="row">
 		<div class="form-group col-lg-3 text-center">
-			<span class="form-label d-block">Task Name</span>
+			<span class="form-label d-block"><?= __('Task Name'); ?></span>
 			<span><?php echo $application_task_logs['task_name'];?></span>
 		</div>
 		<div class="form-group col-lg-3 text-center">
-			<span class="form-label d-block">Task Date</span>
+			<span class="form-label d-block"><?= __('Task Date'); ?></span>
 			<span><?php echo fromDate($application_task_logs['planned_start']);?></span>
 		</div>
 		<div class="form-group col-lg-3  text-center">
-			<span class="form-label d-block">Task Type</span>
+			<span class="form-label d-block"><?= __('Task Type'); ?></span>
 			<span><?php echo $application_task_logs['follow_up_type'];?></span>
 		</div>
 		<div class="form-group col-lg-3  text-center">
-			<span class="form-label d-block">Status</span>
+			<span class="form-label d-block"><?= __('Status'); ?></span>
 			<span class="form-label label label-md" style="color:<?php echo $statuse[$application_task_logs['current_status']]['color']; ?>; background-color:<?php echo $statuse[$application_task_logs['current_status']]['background_color']; ?>;">
                 <?php echo $statuse[$application_task_logs['current_status']]['name']; ?>
             </label>
@@ -59,7 +59,7 @@ $statuse = ViewStatusData();
 	<?php if($application_task_logs['follow_up_type'] == EMAIL_TASK['type']){ ?>
 	<div class="row">
 		<div class="col-lg1-12">
-			<span class="form-label d-block">Attach Document</span>
+			<span class="form-label d-block"><?= __('Attach Document'); ?></span>
 			<a class="text-primary" href="uploads/invoices/<?php echo $email_logs['mail_attachments']; ?>" download><?php echo $email_logs['mail_attachments']; ?></a>
 		</div>
 		<div class="col-lg-12">
@@ -83,7 +83,7 @@ $statuse = ViewStatusData();
 	<?php } ?>
 </div>
 <div class="modal-footer" >
-	<span class="text-danger f-w-700" id="popupshowerror" style="display: none">Please fill out all required fields</span>
+	<span class="text-danger f-w-700" id="popupshowerror" style="display: none"><?= __('Please fill out all required fields'); ?></span>
 	<button type="button" class="btn btn-primary waves-effect waves-light <?php if($application_task_logs['follow_up_type'] == EMAIL_TASK['type'] || $application_task_logs['current_status'] !='0'){ ?>disabled<?php } ?>" onclick="SubmitTaskDetails()" ><?= __('Submit/Approved') ?></button>
 	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close') ?></button>
 </div>

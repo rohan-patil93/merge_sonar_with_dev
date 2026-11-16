@@ -57,7 +57,7 @@ function filterapplay(reset=""){
     var extra_paramiter  = '<?php echo json_encode($_GET); ?>';
     var parent_option  = '<?php echo $_GET['option']; ?>';
     insertadittrails(parent_option,'COM_LIST_CANDIDATES_TABLE',extra_paramiter);
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#formview").html(loader);
     if(reset !="Y"){
       var postarray = $("#filterfrom").serialize();
@@ -286,8 +286,8 @@ function closedPopupcompliance22(){
 <div class="card-body">
   <div class="text-center p-3 b-radius-10" style="background: #e6efff;">
 
-    <h3 class="mt-3 f-w-600">Browse Candidates  </h3>
-    <p class="text-muted f-w-500">Filter your search to focus on qualified candidates</p>
+    <h3 class="mt-3 f-w-600"><?= __('Browse Candidates'); ?>  </h3>
+    <p class="text-muted f-w-500"><?= __('Filter your search to focus on qualified candidates'); ?></p>
     <ul class="alphabet-filetr bg-white p-2 border b-radius-10 mt-4 mb-4">
        <li><button type="button" class="d-inline-block active activealpha" id="activealpha" !" onclick="selectAlphabet('')">All</button></li>
       <?php $alpha='A';  while($alpha < 'Z'){ ?>
@@ -304,23 +304,23 @@ function closedPopupcompliance22(){
       <!-- Checkbox card start -->
       <div class="card">
         <div class="card-header">
-          <h5> Filter</h5>
+          <h5> <?= __('Filter'); ?></h5>
           <div class="card-header-right">
 
-            <button type="reset" class="btn btn-danger" value="reset" onclick="filterapplay('Y')">Reset</button>
+            <button type="reset" class="btn btn-danger" value="reset" onclick="filterapplay('Y')"><?= __('Reset'); ?></button>
           </div>
         </div>
         <div class="card-block">
           <div class="form-grou row border-bottom mb-3 pb-3">
-            <span class="form-label col-lg-8">Perfect Match</span>
+            <span class="form-label col-lg-8"><?= __('Perfect Match'); ?></span>
             <div class="col-lg-4 text-right">
-            <input aria-label="Perfect Match" type="checkbox" class="js-switch" checked="" name="perfect_match" value="0" onchange="filterapplay()">
+            <input aria-label="<?= htmlspecialchars(__('Perfect Match'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-switch" checked="" name="perfect_match" value="0" onchange="filterapplay()">
           </div>
           </div>
           <div class="form-group border-bottom mb-3 pb-3">
-             <h5 class="f-w-600 mb-3">Location</h5>
-            <select aria-label="Location" class="form-control js-example-basic-single" name="location_id" onchange="filterapplay()">
-              <option value="">All</option>
+             <h5 class="f-w-600 mb-3"><?= __('Location'); ?></h5>
+            <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="location_id" onchange="filterapplay()">
+              <option value=""><?= __('All'); ?></option>
               <?php foreach((array)$locations as $location){ ?>
                 <option value="<?php echo $location['id']; ?>"><?php echo $location['location_name']; ?></option>
               <?php } ?>
@@ -328,7 +328,7 @@ function closedPopupcompliance22(){
           </div>
           <div class="row border-bottom mb-3 pb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">Job Title</h5>
+              <h5 class="f-w-600 mb-3"><?= __('Job Title'); ?></h5>
             </div>
           <div class="custom-scroll" style="max-height: 200px;">
           <?php foreach((array)$job_titles as $jobtitle){ ?>
@@ -336,7 +336,7 @@ function closedPopupcompliance22(){
             <div class="col-lg-10">
               <div class="checkbox-fade fade-in-primary">
                 <label class="form-label">
-                  <input aria-label="Checkbox" type="checkbox" value="<?php echo $jobtitle['id']; ?>" name="job_tittle_id[]" onchange="filterapplay()">
+                  <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="<?php echo $jobtitle['id']; ?>" name="job_tittle_id[]" onchange="filterapplay()">
                   <span class="cr">
                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                   </span>
@@ -355,7 +355,7 @@ function closedPopupcompliance22(){
           </div>
           <div class="row border-bottom mb-3 pb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">Gender</h5>
+              <h5 class="f-w-600 mb-3"><?= __('Gender'); ?></h5>
             </div>
           <div >
           <?php foreach((array)$genders as $key=>$gender){ ?>
@@ -363,7 +363,7 @@ function closedPopupcompliance22(){
             <div class="col-lg-10">
               <div class="checkbox-fade fade-in-primary">
                 <label class="form-label">
-                  <input aria-label="Checkbox" type="checkbox" value="<?php echo $key; ?>" name="gender[]" onchange="filterapplay()">
+                  <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="<?php echo $key; ?>" name="gender[]" onchange="filterapplay()">
                   <span class="cr">
                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                   </span>
@@ -382,7 +382,7 @@ function closedPopupcompliance22(){
           </div>
           <div class="row border-bottom mb-3 pb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">Job </h5>
+              <h5 class="f-w-600 mb-3"><?= __('Job'); ?> </h5>
             </div>
             <div>
             <?php foreach((array)$jobtype as $key1=>$jobtypes){ ?>
@@ -390,7 +390,7 @@ function closedPopupcompliance22(){
             <div class="col-lg-10">
                 <div class="checkbox-fade fade-in-primary">
                   <label class="form-label">
-                    <input aria-label="Checkbox" type="checkbox" value="<?php echo $key1; ?>" name="job_type[]" onchange="filterapplay()">
+                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="<?php echo $key1; ?>" name="job_type[]" onchange="filterapplay()">
                     <span class="cr">
                       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                     </span>
@@ -410,17 +410,17 @@ function closedPopupcompliance22(){
           </div>
           <div class="row border-bottom mb-3 pb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">Salary Range</h5>
+              <h5 class="f-w-600 mb-3"><?= __('Salary Range'); ?></h5>
             </div>
             <div class="form-group pb-3">
                 <div class="row">
                   <div class="col-lg-6">
-                    <span>Min</span>
-                    <input aria-label="Expected Ctc Start" class="form-control" type="text" id="minsalary" name="expected_ctc_start" value="0" onchange="filterapplay()">
+                    <span><?= __('Min'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Expected Ctc Start'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="minsalary" name="expected_ctc_start" value="0" onchange="filterapplay()">
                   </div>
                   <div class="col-lg-6">
-                    <span>Max</span>
-                    <input aria-label="Expected Ctc End" class="form-control" type="text" id="maxsalary" name="expected_ctc_end" value="10000000" onchange="filterapplay()">
+                    <span><?= __('Max'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Expected Ctc End'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="maxsalary" name="expected_ctc_end" value="10000000" onchange="filterapplay()">
                   </div>
                  </div>
                   <div id="rangesalary" class="mt-4"></div>
@@ -428,25 +428,25 @@ function closedPopupcompliance22(){
           </div>
           <div class="row border-bottom mb-3 pb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">Experiance</h5>
+              <h5 class="f-w-600 mb-3"><?= __('Experiance'); ?></h5>
             </div>
             <div class="form-group pb-3">
                 <div class="row">
                   <div class="col-lg-6">
-                    <span>Min</span>
-                    <input aria-label="Total Experiance Start" class="form-control" type="text" id="min" name="total_experiance_start" value="0" onchange="filterapplay()">
+                    <span><?= __('Min'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Total Experiance Start'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="min" name="total_experiance_start" value="0" onchange="filterapplay()">
                   </div>
                   <div class="col-lg-6">
-                    <span>Max</span>
-                    <input aria-label="Total Experiance End" class="form-control" type="text" id="max" name="total_experiance_end" value="100" onchange="filterapplay()">
+                    <span><?= __('Max'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Total Experiance End'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="max" name="total_experiance_end" value="100" onchange="filterapplay()">
                   </div>
                  </div>
                   <div id="range" class="mt-4"></div>
             </div>
           </div>
            <div class="form-group pb-3">
-            <span class="form-label">Skills</span>
-            <select aria-label="Skill[]" class="form-control js-example-basic-multiple" name="skill[]" onchange="filterapplay()" multiple>
+            <span class="form-label"><?= __('Skills'); ?></span>
+            <select aria-label="<?= htmlspecialchars(__('Skill'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control js-example-basic-multiple" name="skill[]" onchange="filterapplay()" multiple>
               <?php foreach((array)$skillist as $skillis){ ?>
                 <option value="<?php echo $skillis; ?>"><?php echo $skillis; ?></option>
               <?php } ?>
@@ -460,15 +460,15 @@ function closedPopupcompliance22(){
         <div class="card-block">
           <div class="row align-items-center border-bottom pb-3">
             <div class="col-lg-3">
-              <p class="mb-0">Showing <b class="f-w-600">10</b> of <b class="f-w-600">50</b> Candidate</p>
+              <p class="mb-0"><?= __('Showing'); ?> <b class="f-w-600">10</b> <?= __('of'); ?> <b class="f-w-600">50</b> <?= __('Candidate'); ?></p>
             </div>
             <div class="col-lg-9">
               <div class="row align-items-center">
                 <div class="col-lg-3">
                   <div class="form-group row align-items-center mb-0">
-                    <span class="form-label col-lg-5 text-right mb-0">Show :</span>
+                    <span class="form-label col-lg-5 text-right mb-0"><?= __('Show'); ?> :</span>
                     <div class="col-lg-7">
-                      <select aria-label="Limit" class=" border " name="limit" onchange="filterapplay()">
+                      <select aria-label="<?= htmlspecialchars(__('Limit'), ENT_QUOTES, 'UTF-8'); ?>" class=" border " name="limit" onchange="filterapplay()">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -480,12 +480,12 @@ function closedPopupcompliance22(){
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group row align-items-center mb-0">
-                    <span class="form-label col-lg-4 text-right mb-0">Sort :</span>
+                    <span class="form-label col-lg-4 text-right mb-0"><?= __('Sort'); ?> :</span>
                     <div class="col-lg-8">
-                      <select aria-label="Sort By" class=" border " name="sort_by" onchange="filterapplay()">
-                        <option value="display_name">Name</option>
-                        <option value="reporting_date">Reporting Date</option>
-                        <option value="total_experiance">Experience</option>
+                      <select aria-label="<?= htmlspecialchars(__('Sort By'), ENT_QUOTES, 'UTF-8'); ?>" class=" border " name="sort_by" onchange="filterapplay()">
+                        <option value="display_name"><?= __('Name'); ?></option>
+                        <option value="reporting_date"><?= __('Reporting Date'); ?></option>
+                        <option value="total_experiance"><?= __('Experience'); ?></option>
                       </select>
                     </div>
                   </div>
@@ -503,7 +503,7 @@ function closedPopupcompliance22(){
                 </div>
                 <div class="col-lg-3">
                 <input type="hidden" id="job_posting_id_ajax" value="<?php echo $jobpost; ?>">
-    <button type="button" class="btn btn-primary" onclick="AddCandidate()" <?php echo $insert_permissionbtn; ?>><i class="ti-plus text-white"></i> Candidate</button>
+    <button type="button" class="btn btn-primary" onclick="AddCandidate()" <?php echo $insert_permissionbtn; ?>><i class="ti-plus text-white"></i> <?= __('Candidate'); ?></button>
 </div>
               </div>
             </div>

@@ -29,9 +29,9 @@ foreach($all_party_table_detail as $ic){
     </div>
     <div class="col-lg-4">
         <div class="w-full">
-            <span class="form-label ">Item Category<span class="text-danger">*</span></span>
-            <select aria-label="Customer" name="customer_id" class="form-control form-select js-example-basic-single" onchange="filterItemCategory(this.value)">
-                <option value="">All Item Categories</option>
+            <span class="form-label "><?= __('Item Category'); ?><span class="text-danger">*</span></span>
+            <select aria-label="<?= htmlspecialchars(__('Customer'), ENT_QUOTES, 'UTF-8'); ?>" name="customer_id" class="form-control form-select js-example-basic-single" onchange="filterItemCategory(this.value)">
+                <option value=""><?= __('All Item Categories'); ?></option>
                 <?php foreach($item_categories as $icat){ ?>
                     <option value="<?php echo $icat['id']; ?>"><?php echo $icat['category_description']; ?></option>
                 <?php } ?>
@@ -43,7 +43,7 @@ foreach($all_party_table_detail as $ic){
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header">
-                <h5>Vendor Items</h5>
+                <h5><?= __('Vendor Items'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 500px; min-height: 500px;">
                 <?php
@@ -55,9 +55,9 @@ foreach($all_party_table_detail as $ic){
                             <div class="col-lg-10">
                                 <div class="align-middle  ">
                                     <?php if($itm['item_image']!=""){?>
-                                        <img src="uploads/all/<?php echo $itm['item_image']; ?>"   class="img-30 align-middle m-r-15 seating_emp_image" alt="Attachment Preview">
+                                        <img src="uploads/all/<?php echo $itm['item_image']; ?>"   class="img-30 align-middle m-r-15 seating_emp_image" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <?php }else{ ?>
-                                        <span  alt="user" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($itm['item_name']); ?></span>
+                                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($itm['item_name']); ?></span>
                                     <?php } ?>
                                     <div class="d-inline-block align-middle">
                                         <p class="f-14 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $itm['item_name']." - <span class='f-w-600'>(".$partyitm['vendor_part_name'].")</span>"; ?>
@@ -68,13 +68,13 @@ foreach($all_party_table_detail as $ic){
                                 </div>
                             </div>
                             <div class="col-lg-2 d-inline-block align-middle">
-                                <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Un-Allocate Item" onclick="selectItemsWithParty('<?php echo $itm['id']; ?>','REMOVE','<?php echo $partyitm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Item'), ENT_QUOTES, 'UTF-8'); ?>" onclick="selectItemsWithParty('<?php echo $itm['id']; ?>','REMOVE','<?php echo $partyitm['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
                             </div>
                         </div>
                 <?php } ?>
             <?php }else{ ?>
                 <div class="card-px text-center py-20 m-t-30">
-                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Items</p>
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Items'); ?></p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                     </div>
@@ -86,7 +86,7 @@ foreach($all_party_table_detail as $ic){
     <div class="col-lg-6">
         <div class="card">
             <div class="card-header">
-                <h5>Items</h5>
+                <h5><?= __('Items'); ?></h5>
             </div>
             <div class="card-body custom-scroll" style="max-height: 500px; min-height: 500px;">
                 <?php
@@ -100,9 +100,9 @@ foreach($all_party_table_detail as $ic){
                             <div class="col-lg-10">
                                 <div class="align-middle  ">
                                     <?php if($itm['item_image']!=""){?>
-                                        <img src="uploads/all/<?php echo $itm['item_image']; ?>"   class="img-30 align-middle m-r-15 seating_emp_image" alt="Attachment Preview">
+                                        <img src="uploads/all/<?php echo $itm['item_image']; ?>"   class="img-30 align-middle m-r-15 seating_emp_image" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <?php }else{ ?>
-                                        <span  alt="user" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($itm['item_name']); ?></span>
+                                        <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($itm['item_name']); ?></span>
                                     <?php } ?>
                                     <div class="d-inline-block align-middle">
                                         <p class="f-14 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $itm['item_name']; ?>
@@ -115,14 +115,14 @@ foreach($all_party_table_detail as $ic){
                                 </div>
                             </div>
                             <div class="col-lg-2 d-inline-block align-middle">
-                                <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Click To Allocate Item" onclick="selectItemsWithParty('<?php echo $itm['id']; ?>','ADD')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                                <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Item'), ENT_QUOTES, 'UTF-8'); ?>" onclick="selectItemsWithParty('<?php echo $itm['id']; ?>','ADD')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
                             </div>
                         </div>
                 <?php } ?>
                 <?php } ?>
             <?php }else{ ?>
                 <div class="card-px text-center py-20 m-t-30">
-                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Items</p>
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Items'); ?></p>
                     <div class="text-center px-4">
                         <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
                     </div>

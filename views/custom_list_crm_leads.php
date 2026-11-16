@@ -34,21 +34,21 @@ foreach($crm_leads_graph as $crmstat){
         <div class="col-lg-8">
             <div class="card">
                <div class="card-header">
-                    <h5>Leads <small class="f-12 text-info">(<?php echo fromDate($from_date)." To ".fromDate($to_date); ?>)</small></h5>
+                    <h5><?= __('Leads'); ?> <small class="f-12 text-info">(<?php echo fromDate($from_date)." To ".fromDate($to_date); ?>)</small></h5>
                     <div class="card-header-right">
-                        <button type="button" class="btn btn-success mb-2 desktop-view leadsidebar "  onclick="leadPageCall('LEAD')"><i class="icofont icofont-plus icon-white "></i> Leads </button>
+                        <button type="button" class="btn btn-success mb-2 desktop-view leadsidebar "  onclick="leadPageCall('LEAD')"><i class="icofont icofont-plus icon-white "></i> <?= __('Leads'); ?> </button>
                     </div>
                 </div>
              <div class="card-body custom-scroll" style="min-height: 1000px; max-height: 1000px;">
               <?php if(count((array)$crm_leads) !=0){ ?>
                   <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                      <thead>
-                        <tr><th scope="col">Name</th>
-                           <th scope="col">Contact</th>
-                           <th scope="col">Originator</th>
-                           <th scope="col">Source</th>
-                           <th scope="col">Last Action</th>
-                           <th scope="col">Status</th>
+                        <tr><th scope="col"><?= __('Name'); ?></th>
+                           <th scope="col"><?= __('Contact'); ?></th>
+                           <th scope="col"><?= __('Originator'); ?></th>
+                           <th scope="col"><?= __('Source'); ?></th>
+                           <th scope="col"><?= __('Last Action'); ?></th>
+                           <th scope="col"><?= __('Status'); ?></th>
                        </tr>
                    </thead>
                    <tbody>
@@ -59,9 +59,9 @@ foreach($crm_leads_graph as $crmstat){
                            <td  class="p-2">
                             <div class="align-middle">
                                   <?php if($crmleads['image']) { ?>
-                                      <img src="uploads/all/<?php echo $crmleads['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                      <img src="uploads/all/<?php echo $crmleads['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                   <?php } else { ?>
-                                      <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($crmleads['display_name']); ?></span>
+                                      <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($crmleads['display_name']); ?></span>
                                   <?php } ?>
                                   <div class="d-inline-block width73">
                                       <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('LEAD','<?php echo $crmleads['id']; ?>')"><h6><?php echo $crmleads['display_name']; ?></h6></button>
@@ -144,9 +144,9 @@ foreach($crm_leads_graph as $crmstat){
                        <td  class="p-2">
                         <div class="align-middle">
                           <?php  if($reocrdarray['3']) { ?>
-                              <img src="uploads/all/<?php echo $reocrdarray['3']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                              <img src="uploads/all/<?php echo $reocrdarray['3']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                           <?php } else { ?>
-                              <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($reocrdarray['1']); ?></span>
+                              <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($reocrdarray['1']); ?></span>
                           <?php } ?>
                           <div class="d-inline-block width73">
                               <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('LEAD','<?php echo $reocrdarray['0']; ?>')"><h6><?php echo $reocrdarray['1']; ?></h6></button>

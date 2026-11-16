@@ -44,7 +44,7 @@ $datacat["where"] = array('is_active'=> '0');
        var divToPrint =document.getElementById('printarea');
       var newWin=window.open('','Print-Window');
       newWin.document.open();
-      newWin.document.write('<html lang="en"><head><title>Offer Letter</title></head><body onload="window.print()">'+divToPrint.outerHTML+'</body></html>');
+      newWin.document.write('<html lang="en"><head><title><?= htmlspecialchars(__('Offer Letter'), ENT_QUOTES, 'UTF-8'); ?></title></head><body onload="window.print()">'+divToPrint.outerHTML+'</body></html>');
       newWin.document.close();
       setTimeout(function(){newWin.close();},10);
 
@@ -52,9 +52,9 @@ $datacat["where"] = array('is_active'=> '0');
 </script>
 <div class="modal-header">
                         <h5 class="modal-title">
-                            Offer letter
+                            <?= __('Offer letter'); ?>
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -66,20 +66,20 @@ $datacat["where"] = array('is_active'=> '0');
                                 </div>
                                 <div  class="col-lg-12" style="page-break-before: always;">
                                 <strong style="font-size: 18px; color: #000;  border-bottom: 2px solid #000; padding-bottom: 5px;">
-                                COST TO COMPANY CALCULATIONS w.e.f November 11, 2020</strong>
+                                <?= __('COST TO COMPANY CALCULATIONS w.e.f November 11, 2020'); ?></strong>
         <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
             <tr style="height: 50px;border: 1px solid #000;">
-                <td style="border:1px solid #000;padding: 5px;"><b>Name</b></td>
+                <td style="border:1px solid #000;padding: 5px;"><b><?= __('Name'); ?></b></td>
                 <td  style="border:1px solid #000;padding: 5px;"colspan="2">&nbsp;<?php echo  $send_data['display_name']; ?></td>
             </tr>
             <tr style="height: 50px;border: 1px solid #000;">
-                <td style="border:1px solid #000;padding: 5px;"><b>Designation</b></td>
+                <td style="border:1px solid #000;padding: 5px;"><b><?= __('Designation'); ?></b></td>
                 <td style="border:1px solid #000;padding: 5px;" colspan="2">&nbsp;<?php echo $send_data['job_title']; ?></td>
             </tr>
             <tr style="border: 1px solid #000;">
-                <td style="border:1px solid #000;padding: 5px;"><b>COMPENSATION DETAILS</b>                </td>
-                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>MONTHLY</b>        </td>
-                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b>YEARLY</b>    </td>
+                <td style="border:1px solid #000;padding: 5px;"><b><?= __('COMPENSATION DETAILS'); ?></b>                </td>
+                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b><?= __('MONTHLY'); ?></b>        </td>
+                <td style="text-align: center;border:1px solid #000;padding: 5px;"><b><?= __('YEARLY'); ?></b>    </td>
             </tr>
             <?php $nm=0; foreach ($salarytmpdata as  $stvalue) { ?>
                 <?php if($stvalue['component_cat_id'] !=$nm ){ $nm =$stvalue['component_cat_id'];  ?>
@@ -96,12 +96,12 @@ $datacat["where"] = array('is_active'=> '0');
                 </tr>
             <?php } ?>
                 <tr style="border: 1px solid #000;" >
-                    <td style="border:1px solid #000;padding: 5px;" ><?php echo "Total";?></td>
+                    <td style="border:1px solid #000;padding: 5px;" ><?php echo __("Total");?></td>
                     <td style="text-align: center;border:1px solid #000;padding: 5px;"> <?php echo customeummarmonyformate($salarydata['company_cost_monthly']);?></td>
                     <td style="text-align: center;border:1px solid #000;padding: 5px;"><?php echo customeummarmonyformate($salarydata['company_cost_yearly']);?></td>
                 </tr>
                 <tr style="border: 1px solid #000;" >
-                    <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  Notes: </br>
+                    <td colspan="3" style="border:1px solid #000;padding: 5px;">&nbsp;  <?= __('Notes'); ?>: </br>
                         <p style="padding: 0px 5%;"><?php echo  $salarydata['note']; ?></p>
                     </td>
 
@@ -109,18 +109,18 @@ $datacat["where"] = array('is_active'=> '0');
         </table>
     </div>
     <div style="width: 50%; display: inline-block; margin: 30px 0 0 0;">
-        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">With best wishes.<br />For <?php echo  $send_data['company_name']; ?></b>
+        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;"><?= __('With best wishes.'); ?><br /><?= __('For'); ?> <?php echo  $send_data['company_name']; ?></b>
     </div>
     <div style="width: 48%; display: inline-block; margin: 30px 0 0 0; text-align: right;">
-        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;">ANJANA AUDUKOORI<br />DIRECTOR HR</b>
+        <b style="font-size: 14px; color: #000; font-family: 'Noto Sans'; margin:0; display: block;"><?= __('ANJANA AUDUKOORI'); ?><br /><?= __('DIRECTOR HR'); ?></b>
     </div>
     <div style="width: 50%; display: inline-block; margin: 40px 0 0 0;">
         <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
-        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Candidate Signature</b>
+        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;"><?= __('Candidate Signature'); ?></b>
     </div>
     <div style="width: 48%; display: inline-block; margin: 40px 0 0 0; text-align: right;">
         <b style="font-size: 14px; color: #888; font-family: 'Noto Sans'; margin:0; display: block;">-----------------------------------------------</b>
-        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;">Date</b>
+        <b style="font-size: 14px; color: #666; font-family: 'Noto Sans'; margin:0; display: block;"><?= __('Date'); ?></b>
     </div>
 
                                 </div>
@@ -128,11 +128,11 @@ $datacat["where"] = array('is_active'=> '0');
             </div>
         </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary font-weight-bold" onclick="printForm()">Print Invoice</button>
+                <button type="button" class="btn btn-primary font-weight-bold" onclick="printForm()"><?= __('Print Invoice'); ?></button>
                 <input type="hidden" name="kpi_id" id="kpi_id" value="<?php echo $_POST['id']; ?>">
                 <input type="hidden" name="page" value="dis_submit">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="submitrom()" >Submit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= __('Close'); ?></button>
+                <button type="button" class="btn btn-primary" onclick="submitrom()" ><?= __('Submit'); ?></button>
 
             </div>
 

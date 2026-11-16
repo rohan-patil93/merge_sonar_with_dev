@@ -1,7 +1,7 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = "1";
 if (!isset($result) || $result['status'] != 'success') {
-    echo '<div class="alert alert-danger">Failed to load production details</div>';
+    echo '<div class="alert alert-danger">'.__('Failed to load production details').'</div>';
     exit;
 }
 
@@ -91,7 +91,7 @@ $(document).ready(function () {
                 <label for="hold_reason" class="form-label d-block"><?php echo __('Holding Reason'); ?></label>
                 <select class="js-example-basic-single form-control" name="hold_reason" id="hold_reason" >
                     <?php foreach ((array)$hold_reasons as $row){ ?>
-                        <option value="<?php echo $row['genc_detail_code']; ?>"><?php echo $row['genc_detail_name']; ?></option>
+                        <option value="<?php echo $row['genc_detail_code']; ?>"><?php echo __($row['genc_detail_name']); ?></option>
                     <?php } ?>
                 </select>
             </div>

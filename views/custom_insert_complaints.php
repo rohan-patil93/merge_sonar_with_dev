@@ -80,7 +80,7 @@ $assets = $result['assets'];
 
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Complaint priority') ?> <span style="color:red;">*</span></span>
-                                        <select aria-label="Complaint Priority" class="form-select js-example-basic-single" id="complaint_priority" name="complaint_priority">
+                                        <select aria-label="<?= htmlspecialchars(__('Complaint Priority'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="complaint_priority" name="complaint_priority">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <option value="L" <?php echo $return['complaint_priority']=="L"? 'selected': '' ?>> <?= __('Low') ?></option>
                                             <option value="M" <?php echo $return['complaint_priority']=="M"? 'selected': '' ?>> <?= __('Medium') ?> </option>
@@ -91,17 +91,17 @@ $assets = $result['assets'];
                                     </div>
                                     <div class="col-lg-6 col-xs-12 form-group">
                                         <span><?= __('Date') ?><span style="color:red;">*</span></span>
-                                        <input aria-label="Transaction Date" class="form-control" type="date" name="transaction_date" id="transaction_date"  value="<?php echo isset($return['transaction_date']) && $return['transaction_date'] != '' ? date('Y-m-d', strtotime($return['transaction_date'])) :  date('Y-m-d'); ?>"/>
+                                        <input aria-label="<?= htmlspecialchars(__('Transaction Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="transaction_date" id="transaction_date"  value="<?php echo isset($return['transaction_date']) && $return['transaction_date'] != '' ? date('Y-m-d', strtotime($return['transaction_date'])) :  date('Y-m-d'); ?>"/>
                                         <div style="display: none;color: red;" id="transaction_date_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6 col-xs-12 form-group">
                                         <span><?= __('Complaint Name') ?><span style="color:red;">*</span></span>
-                                        <input aria-label="Complaint Name" class="form-control" type="text" name="complaint_name" id="complaint_name" value="<?php echo $return['complaint_name'] ?? ''; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Complaint Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="complaint_name" id="complaint_name" value="<?php echo $return['complaint_name'] ?? ''; ?>">
                                         <div style="display: none;color: red;" id="complaint_name_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Complaint Type') ?><span style="color:red;">*</span></span>
-                                        <select aria-label="Complaint Type" class="form-select js-example-basic-single" id="complaint_type" name="complaint_type" onchange="handleComplaintType()">
+                                        <select aria-label="<?= htmlspecialchars(__('Complaint Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="complaint_type" name="complaint_type" onchange="handleComplaintType()">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <option value="Item" <?php echo $return['complaint_type']=="Item"? 'selected': '' ?> ><?= __('Item') ?></option>
                                             <option value="Asset" <?php echo $return['complaint_type']=="Asset"? 'selected': '' ?> ><?= __('Asset') ?></option>
@@ -112,7 +112,7 @@ $assets = $result['assets'];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Asset') ?><span style="color:red;">*</span></span>
-                                        <select aria-label="Asset" class="form-select js-example-basic-single" id="asset_id" name="asset_id">
+                                        <select aria-label="<?= htmlspecialchars(__('Asset'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="asset_id" name="asset_id">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($assets as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>"  <?php echo $return['asset_id']==$row['id']? 'selected': '' ?> >
@@ -124,7 +124,7 @@ $assets = $result['assets'];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Item') ?> <span style="color:red;">*</span></span>
-                                        <select aria-label="Item" class="form-select js-example-basic-single" id="item_id" name="item_id">
+                                        <select aria-label="<?= htmlspecialchars(__('Item'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="item_id" name="item_id">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($items as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['item_id']==$row['id']? 'selected': '' ?>  >
@@ -137,7 +137,7 @@ $assets = $result['assets'];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Building') ?><span style="color:red;">*</span></span>
-                                        <select aria-label="Building" class="form-select js-example-basic-single" id="building_id" name="building_id">
+                                        <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="building_id" name="building_id">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($buildings as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['building_id']==$row['id']? 'selected': '' ?>  >
@@ -149,14 +149,14 @@ $assets = $result['assets'];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Building Floor') ?><span style="color:red;">*</span></span>
-                                        <select aria-label="Building Floor" class="form-select js-example-basic-single" id="building_floor_id" name="building_floor_id">
+                                        <select aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="building_floor_id" name="building_floor_id">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                         </select>
                                         <div style="display: none;color: red;" id="building_floor_id_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Building Floor Space') ?><span style="color:red;">*</span></span>
-                                        <select aria-label="Building Floor Space" class="form-select js-example-basic-single" id="building_floor_space_id" name="building_floor_space_id">
+                                        <select aria-label="<?= htmlspecialchars(__('Building Floor Space'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="building_floor_space_id" name="building_floor_space_id">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                         </select>
                                         <div style="display: none;color: red;" id="building_floor_space_id_err"></div>
@@ -164,7 +164,7 @@ $assets = $result['assets'];
 
                                     <div class="col-lg-6 col-xs-12 form-group">
                                         <span><?= __('Complaint Image') ?></span>
-                                        <input aria-label="Complaint Image" class="form-control mb-1" type="file" name="complaint_image" id="complaint_image" value="<?php echo $return['complaint_image'] ?? ''; ?>" />
+                                        <input aria-label="<?= htmlspecialchars(__('Complaint Image'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control mb-1" type="file" name="complaint_image" id="complaint_image" value="<?php echo $return['complaint_image'] ?? ''; ?>" />
                                         <?php
                                         if(!empty($rid)){
                                             $table_name = 'complaints';
@@ -185,7 +185,7 @@ $assets = $result['assets'];
                                     </div>
                                     <div class="col-lg-6 col-xs-12 form-group">
                                         <span><?= __('Remarks') ?></span>
-                                        <input aria-label="Remarks" class="form-control" type="text" name="remarks" id="remarks" value="<?php echo $return['remarks'] ?? ''; ?>" />
+                                        <input aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="remarks" id="remarks" value="<?php echo $return['remarks'] ?? ''; ?>" />
 
                                     </div>
                                 </div>
@@ -354,19 +354,19 @@ $assets = $result['assets'];
         const transactionDate = $("#transaction_date").val();
 
         if (!complaintType || complaintType === "0") {
-            $("#complaint_type_err").text("Please select a complaint type").show();
+            $("#complaint_type_err").text(<?php echo json_encode(__('Please select a complaint type'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
             isValid = false;
         }
         if (!complaintName) {
-            $("#complaint_name_err").text("Please enter the complaint name").show();
+            $("#complaint_name_err").text(<?php echo json_encode(__('Please enter the complaint name'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
             isValid = false;
         }
         if (!complaintPriority || complaintPriority === "0") {
-            $("#complaint_priority_err").text("Please select a complaint priority").show();
+            $("#complaint_priority_err").text(<?php echo json_encode(__('Please select a complaint priority'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
             isValid = false;
         }
         if (!transactionDate) {
-            $("#transaction_date_err").text("Please select a transaction date").show();
+            $("#transaction_date_err").text(<?php echo json_encode(__('Please select a transaction date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
             isValid = false;
         }
 
@@ -374,14 +374,14 @@ $assets = $result['assets'];
         if (complaintType === "Item") {
             const itemId = $("#item_id").val();
             if (!itemId || itemId === "0") {
-                $("#item_id_err").text("Please select an item").show();
+                $("#item_id_err").text(<?php echo json_encode(__('Please select an item'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
                 isValid = false;
             }
 
         } else if (complaintType === "Asset") {
             const assetId = $("#asset_id").val();
             if (!assetId || assetId === "0") {
-                $("#asset_id_err").text("Please select an asset").show();
+                $("#asset_id_err").text(<?php echo json_encode(__('Please select an asset'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
                 isValid = false;
             }
 
@@ -391,15 +391,15 @@ $assets = $result['assets'];
             const buildingFloorSpaceId = $("#building_floor_space_id").val();
 
             if (!buildingId || buildingId === "0") {
-                $("#building_id_err").text("Please select a building").show();
+                $("#building_id_err").text(<?php echo json_encode(__('Please select a building'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
                 isValid = false;
             }
             if (!buildingFloorId || buildingFloorId === "0") {
-                $("#building_floor_id_err").text("Please select a building floor").show();
+                $("#building_floor_id_err").text(<?php echo json_encode(__('Please select a building floor'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
                 isValid = false;
             }
             if (!buildingFloorSpaceId || buildingFloorSpaceId === "0") {
-                $("#building_floor_space_id_err").text("Please select a building floor space").show();
+                $("#building_floor_space_id_err").text(<?php echo json_encode(__('Please select a building floor space'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
                 isValid = false;
             }
 

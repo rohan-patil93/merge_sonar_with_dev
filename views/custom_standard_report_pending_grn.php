@@ -21,16 +21,16 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5>Pending GRNs (Not Yet Invoiced) Report</h5>
+        <h5><?= __('Pending GRNs (Not Yet Invoiced) Report'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=PendingGRN&format=csv" target="_blank">CSV</a>
+                        href="custom_view_download.php?page=PendingGRN&format=csv" target="_blank"><?= __('CSV'); ?></a>
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=PendingGRN&format=excel" target="_blank">Excel</a>
+                        href="custom_view_download.php?page=PendingGRN&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -47,8 +47,8 @@ $_SESSION['download_data'] = [];
             <table class="table table-separate table-head-custom table-checkable data-table">
                 <thead>
                     <tr>
-                        <th scope="col">GRN / PO Info</th>
-                        <th scope="col">Items</th>
+                        <th scope="col"><?= __('GRN / PO Info'); ?></th>
+                        <th scope="col"><?= __('Items'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,23 +61,23 @@ $_SESSION['download_data'] = [];
                             <td>
                                 <table role="presentation">
                                     <tr>
-                                        <td class="p-1">GRN No.</td>
+                                        <td class="p-1"><?= __('GRN No.'); ?></td>
                                         <td class="p-1"><?php echo $rows[0]['grn_no']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="p-1">GRN Date</td>
+                                        <td class="p-1"><?= __('GRN Date'); ?></td>
                                         <td class="p-1"><?php echo fromDate($rows[0]['grn_date']); ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="p-1">Vendor</td>
+                                        <td class="p-1"><?= __('Vendor'); ?></td>
                                         <td class="p-1"><?php echo $rows[0]['vendor_name']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="p-1">PO No.</td>
+                                        <td class="p-1"><?= __('PO No.'); ?></td>
                                         <td class="p-1"><?php echo $rows[0]['po_no']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="p-1">PO Date</td>
+                                        <td class="p-1"><?= __('PO Date'); ?></td>
                                         <td class="p-1"><?php echo fromDate($rows[0]['po_date']); ?></td>
                                     </tr>
                                 </table>
@@ -88,11 +88,11 @@ $_SESSION['download_data'] = [];
                                 <table style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="p-1">Item</th>
-                                            <th scope="col" class="text-right p-1">GRN Qty</th>
-                                            <th scope="col" class="text-right p-1">Invoiced Qty</th>
-                                            <th scope="col" class="text-right p-1">Pending Qty</th>
-                                            <th scope="col" class="text-right p-1">GRN Amount</th>
+                                            <th scope="col" class="p-1"><?= __('Item'); ?></th>
+                                            <th scope="col" class="text-right p-1"><?= __('GRN Qty'); ?></th>
+                                            <th scope="col" class="text-right p-1"><?= __('Invoiced Qty'); ?></th>
+                                            <th scope="col" class="text-right p-1"><?= __('Pending Qty'); ?></th>
+                                            <th scope="col" class="text-right p-1"><?= __('GRN Amount'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -132,7 +132,7 @@ $_SESSION['download_data'] = [];
             <tr>
                 <td colspan="15">
                     <div class="card-px text-center py-20 m-t-30">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>

@@ -92,7 +92,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Add') {
                             <div class="form-group col-lg-6">
                                 <span><?= __('Import') ?></span>
                                 <div>
-                                    <input aria-label="Data" class="form-control" type="file" id="data" name="data" value="" required>
+                                    <input aria-label="<?= htmlspecialchars(__('Data'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="file" id="data" name="data" value="" required>
                                 </div>
                             </div>
                             <input type="hidden" name="table" value="<?php echo $_GET['table'] ?>">

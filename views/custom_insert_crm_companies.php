@@ -28,7 +28,7 @@ $without_company_contacts = $res['without_company_contacts'];
 ?>
 <script type="text/javascript">
     function pageCallHistories(rid){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#crmleadhistories").html(loader);
         jQuery.ajax({
             url: "views/custom_insert_crm_lead_histories.php",
@@ -43,7 +43,7 @@ $without_company_contacts = $res['without_company_contacts'];
     function submitLeadForm(){
         var validations = ajaxFormSubmitValidation();
         if(validations == 0){
-            $(".sbt_loading_en_dis").text("Please Wait........");
+            $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             $(".sbt_loading_en_dis").attr("disabled", true);
             var crm_lead_id = $("#crm_lead_id").val();
             var formData = new FormData();
@@ -82,7 +82,7 @@ $without_company_contacts = $res['without_company_contacts'];
                             }
                     }else{
                         tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',jsonres.res.message,'');
-                        $(".sbt_loading_en_dis").text("Submit");
+                        $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                         $(".sbt_loading_en_dis").attr("disabled", false);
                     }
                 }
@@ -152,11 +152,11 @@ $without_company_contacts = $res['without_company_contacts'];
         if (assetid.length != 0){
             swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: "Please Enter Required Fields",
+                text: <?php echo json_encode(__('Please Enter Required Fields'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 type: "error",
                 showCancelButton: false,
                 confirmButtonClass: "btn-primary",
-                confirmButtonText: "Ok",
+                confirmButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             });
             return false;
@@ -216,7 +216,7 @@ $without_company_contacts = $res['without_company_contacts'];
                 }
             });
         }else{
-          $("#error_message_companyid").text('Please Select Any One Contact');
+          $("#error_message_companyid").text(<?php echo json_encode(__('Please Select Any One Contact'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }
    }
 
@@ -283,14 +283,14 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                     <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Company Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Company Name<span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Company Name'); ?><span class="requried">*</span></span>
                             <span class="d-block error-message text-danger companynameavilableornotmsg"></span>
-                            <input aria-label="Company Name" class="form-control requried_field" type="text" name="company_name" placeholder="<?= __('Company Name') ?>" value="<?php echo $transaction['company_name']; ?>" onblur='checkCompanyNameAvilableOrNotInCustomer(this.value)'>
+                            <input aria-label="<?= htmlspecialchars(__('Company Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="text" name="company_name" placeholder="<?= __('Company Name') ?>" value="<?php echo $transaction['company_name']; ?>" onblur='checkCompanyNameAvilableOrNotInCustomer(this.value)'>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Originator <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Originator'); ?> <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Originator" class="form-control js-example-basic-single requried_field" name="originator">
+                            <select aria-label="<?= htmlspecialchars(__('Originator'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="originator">
                                 <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['originator'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
@@ -300,20 +300,20 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                         <?php  ?>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Website URL') ?></span>
-                            <input aria-label="Website URL" class="form-control" type="text" name="website_url" placeholder="<?= __('Website URL') ?>" value="<?php echo $transaction['website_url']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Website URL'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="website_url" placeholder="<?= __('Website URL') ?>" value="<?php echo $transaction['website_url']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Pan No.') ?></span>
-                            <input aria-label="Pan No." class="form-control" type="tel" name="pan_no" placeholder="<?= __('Pan No.') ?>" value="<?php echo $transaction['pan_no']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Pan No.'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="tel" name="pan_no" placeholder="<?= __('Pan No.') ?>" value="<?php echo $transaction['pan_no']; ?>">
                         </div>
 
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('GST No.') ?></span>
-                            <input aria-label="GST Number" class="form-control" type="text" name="gstin" placeholder="<?= __('GST Number') ?>" value="<?php echo $transaction['gstin']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('GST Number'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="gstin" placeholder="<?= __('GST Number') ?>" value="<?php echo $transaction['gstin']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Fax Number') ?></span>
-                            <input aria-label="Fax Number" class="form-control" type="text" name="fax" placeholder="<?= __('Fax Number') ?>" value="<?php echo $transaction['fax']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Fax Number'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="fax" placeholder="<?= __('Fax Number') ?>" value="<?php echo $transaction['fax']; ?>">
                         </div>
                         <div class="col-lg-6">
                             <span class="form-label"><?= __('Image') ?></span>
@@ -323,7 +323,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                                         <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                                     </label>
                                     <input type="file" name="image" id="display_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                                    <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="Attachment Preview" />
+                                    <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                                     <input type="hidden" name="hid_image" value="<?php echo $transaction['image'] ;  ?>">
                                 </div>
                             </div>
@@ -334,12 +334,12 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                         <div class="col-lg-12 form-group">
                             <span class="form-label"><?= __('Address') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Address" name="address" placeholder="<?= __('Address') ?>" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['address']; ?></textarea>
+                                <textarea aria-label="<?= htmlspecialchars(__('Address'), ENT_QUOTES, 'UTF-8'); ?>" name="address" placeholder="<?= __('Address') ?>" class="border form-control" rows="3" name="address" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['address']; ?></textarea>
                             </div>
                         </div>
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label"><?= __('Country') ?></span>
-                            <select aria-label="Country" class="form-control js-example-basic-single" name="country_id" onchange="selectedcategory(this.value,'state_id','states','country_id')">
+                            <select aria-label="<?= htmlspecialchars(__('Country'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="country_id" onchange="selectedcategory(this.value,'state_id','states','country_id')">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($countries as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['country_id'] == $cval['id']?"selected":"";?>><?php echo $cval['country_name']; ?></option>
@@ -348,7 +348,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                         </div>
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label"><?= __('State') ?></span>
-                            <select aria-label="State" class="form-control js-example-basic-single" name="state_id" id="state_id" onchange="selectedcategory(this.value,'city_id','cities','state_id')">
+                            <select aria-label="<?= htmlspecialchars(__('State'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="state_id" id="state_id" onchange="selectedcategory(this.value,'city_id','cities','state_id')">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($states as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['state_id'] == $cval['id']?"selected":"";?>><?php echo $cval['state_name']; ?></option>
@@ -357,7 +357,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                         </div>
                         <div class="col-lg-6 form-group w-full">
                             <span class="form-label"><?= __('City') ?></span>
-                            <select aria-label="City" class="form-control js-example-basic-single" name="city_id" id="city_id">
+                            <select aria-label="<?= htmlspecialchars(__('City'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="city_id" id="city_id">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($cities as $cval){ ?>
                                     <option value="<?php echo $cval['id']; ?>" <?php echo $transaction['city_id'] == $cval['id']?"selected":"";?>><?php echo $cval['city_name']; ?></option>
@@ -366,12 +366,12 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label"><?= __('Post Code') ?></span>
-                            <input aria-label="Postal Code" class="form-control" type="text" name="post_code" placeholder="<?= __('Postal Code') ?>" value="<?php echo $transaction['post_code']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Postal Code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="post_code" placeholder="<?= __('Postal Code') ?>" value="<?php echo $transaction['post_code']; ?>">
                         </div>
                          <div class="col-lg-12 form-group">
                             <span class="form-label"><?= __('Description') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Description" name="remark" placeholder="<?= __('Description') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
+                                <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" name="remark" placeholder="<?= __('Description') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -385,7 +385,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
             <div class="col-lg-7">
                 <div class="card-block accordion-block color-accordion-block itemcategory_sec">
                     <div class="color-accordion" id="color-accordion">
-                        <a class="accordion-msg b-none waves-effect waves-light">Contacts</a>
+                        <a class="accordion-msg b-none waves-effect waves-light"><?= __('Contacts'); ?></a>
                         <div class="accordion-desc">
                             <?php if(count((array)$company_with_contacts) !=0){ ?>
                             <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
@@ -429,7 +429,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                             <div class="row mt-3">
                                 <div class="col-lg-7">
 
-                                    <select aria-label="Add More Contact" class="form-control js-example-basic-single " id="add_more_contact">
+                                    <select aria-label="<?= htmlspecialchars(__('Add More Contact'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single " id="add_more_contact">
                                         <option value=""><?= __('Select Any One') ?></option>
                                        <?php foreach($without_company_contacts as $uval){ ?>
                                             <option value="<?php echo $uval['id']; ?>"><?php echo $uval['display_name']; ?></option>
@@ -473,7 +473,7 @@ function checkCompanyNameAvilableOrNotInCustomer(company_name){
                             </table>
                         <?php }else{ ?>
                             <div class="card-px text-center ">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> No Deal</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert text-warning"></i> <?= __('No Deal'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                 </div>

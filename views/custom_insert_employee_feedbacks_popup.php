@@ -29,7 +29,7 @@ $display_answer = json_decode($employee_feedbacks['display_answer'],1);
 </script>
 <div class="modal-header">
     <h5 class="modal-title"><?= __('Feed Back Respons') ?></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body" <?php if($_POST['emp_id'] == $_SESSION['emp_id']){
 }else{ ?>style="pointer-events: none; opacity: 0.7;" <?php
@@ -44,20 +44,20 @@ $display_answer = json_decode($employee_feedbacks['display_answer'],1);
                 <?php foreach($question_options as $qo){ ?>
                     <div class="checkbox-fade fade-in-primary mr-5">
                         <label class="form-label">
-                            <input aria-label="Checkbox" type="checkbox" value="<?php echo $qo; ?>" name="response[]" <?php echo in_array($qo,(array)$emp_answer)?"checked":""; ?>>
+                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="<?php echo $qo; ?>" name="response[]" <?php echo in_array($qo,(array)$emp_answer)?"checked":""; ?>>
                             <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span><span><?php echo $qo; ?></span>
                         </label>
                     </div>
                 <?php } ?>
                 <?php }elseif($employee_feedbacks['answer_type'] == 'O'){?>
-                    <select aria-label="Response" class="form-control js-example-basic-single" name="response">
+                    <select aria-label="<?= htmlspecialchars(__('Response'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="response">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach($question_options as $qo){ ?>
                                 <option value="<?php echo $qo; ?>" <?php echo $qo ==$emp_answer?"selected":""; ?>><?php echo $qo; ?></option>
                         <?php } ?>
                     </select>
                 <?php }else{ ?>
-                    <textarea aria-label="Response" class="form-control" name="response"><?php echo $emp_answer; ?></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Response'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="response"><?php echo $emp_answer; ?></textarea>
                 <?php } ?>
         </form>
 </div>

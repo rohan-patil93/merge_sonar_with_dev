@@ -47,11 +47,11 @@ function formatServiceDate($date) {
 <!-- Pradeep HTML Start here -->
 <div class="card">
     <div class="card-header">
-        <h4>AMC Registration Details</h4>
+        <h4><?= __('AMC Registration Details'); ?></h4>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn  waves-effect waves-light mb-2 desktop-view">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -60,15 +60,15 @@ function formatServiceDate($date) {
         <div class="card-body">
             <div class="row detail-row p-3 mb-2">
                 <div class="col-md-6">
-                    <p class="mb-1"><span class="detail-label">AMC Name:</span> <?php echo $customer_details['amc_name']; ?></p>
-                    <p class="mb-1"><span class="detail-label">Mobile:</span> <?php echo $customer_details['mobile_no']; ?></p>
-                    <p class="mb-1"><span class="detail-label">Address:</span> <?php echo $customer_details['address_line1'] . $customer_details['address_line2']; ?></p>
-                    <p class="mb-1"><span class="detail-label">Service On :</span> <?php echo $customer_details['service_frequency']; ?></p>
+                    <p class="mb-1"><span class="detail-label"><?= __('AMC Name'); ?>:</span> <?php echo $customer_details['amc_name']; ?></p>
+                    <p class="mb-1"><span class="detail-label"><?= __('Mobile'); ?>:</span> <?php echo $customer_details['mobile_no']; ?></p>
+                    <p class="mb-1"><span class="detail-label"><?= __('Address'); ?>:</span> <?php echo $customer_details['address_line1'] . $customer_details['address_line2']; ?></p>
+                    <p class="mb-1"><span class="detail-label"><?= __('Service On'); ?> :</span> <?php echo $customer_details['service_frequency']; ?></p>
                 </div>
                 <div class="col-md-6">
-                    <p class="mb-1"><span class="detail-label">Customer:</span> <?php echo $customer_details['customer_name']; ?></p>
-                    <p class="mb-1"><span class="detail-label">Activation Date:</span> <?php echo fromDate($customer_details['activation_date']); ?></p>
-                    <p class="mb-1"><span class="detail-label">Renewal/Deactivation Date:</span> <?php echo fromDate($customer_details['deactivation_date']); ?></p>
+                    <p class="mb-1"><span class="detail-label"><?= __('Customer'); ?>:</span> <?php echo $customer_details['customer_name']; ?></p>
+                    <p class="mb-1"><span class="detail-label"><?= __('Activation Date'); ?>:</span> <?php echo fromDate($customer_details['activation_date']); ?></p>
+                    <p class="mb-1"><span class="detail-label"><?= __('Renewal/Deactivation Date'); ?>:</span> <?php echo fromDate($customer_details['deactivation_date']); ?></p>
                 </div>
             </div>
         </div>
@@ -78,30 +78,30 @@ function formatServiceDate($date) {
     <div class="card-body custom-scroll" style="max-height: 600px;">
         <div class="row">
             <div class="col-lg-8">
-                <h4>Schedule List</h4>
+                <h4><?= __('Schedule List'); ?></h4>
             </div>
             <div class="col-lg-4 text-end">
                 <div class="input-group">
                     <span class="input-group-text addon-style">
                         <span class=""><i class="fa fa-calendar"></i></span>
                     </span>
-                    <input aria-label="Service Date Filter" type="date" class="form-control" id="serviceDateFilter">
-                    <button type="button" class="btn btn-secondary" id="clearServiceDateFilter">Clear</button>
+                    <input aria-label="<?= htmlspecialchars(__('Service Date Filter'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" id="serviceDateFilter">
+                    <button type="button" class="btn btn-secondary" id="clearServiceDateFilter"><?= __('Clear'); ?></button>
                 </div>
             </div>
         </div>
         <div class="table-responsive mt-3">
             <table class="table  table-sm f-12">
                 <tr class="f-14">
-                    <th scope="col">S.NO</th>
-                    <th scope="col">Service Date</th>
-                    <th scope="col">Service Type</th>
-                    <th scope="col">Service Charge</th>
-                    <th scope="col">Service Expenditure</th>
-                    <th scope="col">TA/DA</th>
-                    <th scope="col">Service</th>
-                    <th scope="col">Service Company</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"><?= __('S.NO'); ?></th>
+                    <th scope="col"><?= __('Service Date'); ?></th>
+                    <th scope="col"><?= __('Service Type'); ?></th>
+                    <th scope="col"><?= __('Service Charge'); ?></th>
+                    <th scope="col"><?= __('Service Expenditure'); ?></th>
+                    <th scope="col"><?= __('TA/DA'); ?></th>
+                    <th scope="col"><?= __('Service'); ?></th>
+                    <th scope="col"><?= __('Service Company'); ?></th>
+                    <th scope="col"><?= __('Action'); ?></th>
                 </tr>
                 <?php $i = 1;
                 foreach ($response as $row) { ?>
@@ -156,7 +156,7 @@ function formatServiceDate($date) {
     });
 
     function openAMCModal(recordId) {
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#dynamic_popup1").html(loader);
         $('#kt_modal_dynamic_popup').modal("show");
         $.ajax({
@@ -171,7 +171,7 @@ function formatServiceDate($date) {
 
             },
             error: function(xhr) {
-                alert('Failed to load data');
+                alert(<?php echo json_encode(__('Failed to load data'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
         });
 

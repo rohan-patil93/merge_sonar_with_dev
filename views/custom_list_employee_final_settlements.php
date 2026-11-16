@@ -23,7 +23,7 @@ $title = "Employees  Full & Final Settlement"
                     </a>
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                       <i class="icofont icofont-reply"></i>
-                      Back
+                      <?= __('Back'); ?>
                    </a>
                 </div>
             </div>
@@ -31,12 +31,12 @@ $title = "Employees  Full & Final Settlement"
                 <table id="basic-btn" class="table table-striped table-bordered nowrap">
                     <thead>
                         <tr>
-                            <th scope="col">SL NO.</th>
-                            <th scope="col">Employee Code</th>
-                            <th scope="col">Employee Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Termination Type</th>
-                            <th scope="col">Settle Date</th>
+                            <th scope="col"><?= __('SL NO.'); ?></th>
+                            <th scope="col"><?= __('Employee Code'); ?></th>
+                            <th scope="col"><?= __('Employee Name'); ?></th>
+                            <th scope="col"><?= __('Email'); ?></th>
+                            <th scope="col"><?= __('Termination Type'); ?></th>
+                            <th scope="col"><?= __('Settle Date'); ?></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -51,7 +51,7 @@ $title = "Employees  Full & Final Settlement"
                                 <td><?php echo fromDate($tax['settle_on']); ?></td>
                                 <td>
 
-                                    <a href="index.php?option=COM_VIEW_FULL_FINAL_SETTLEMENT_OF_ACCOUNTS_REPORT&EMPID=<?php echo $tax['emp_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View Details"><i class="fa fa-eye"></i></a>
+                                    <a href="index.php?option=COM_VIEW_FULL_FINAL_SETTLEMENT_OF_ACCOUNTS_REPORT&EMPID=<?php echo $tax['emp_id']; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -15,7 +15,7 @@
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
                         <h3 class="kt-portlet__head-title">
-                            Petty Cash Summary
+                            <?= __('Petty Cash Summary'); ?>
                         </h3>
                     </div>
                 </div>
@@ -24,19 +24,19 @@
                         <div class="row">
                             <div class="kt-invoice__items">
                                 <div class="kt-invoice__item">
-                                    <span class="kt-invoice__subtitle">Branch</span>
-                                    <span class="kt-invoice__text">Delhi Branch</span>
+                                    <span class="kt-invoice__subtitle"><?= __('Branch'); ?></span>
+                                    <span class="kt-invoice__text"><?= __('Delhi Branch'); ?></span>
                                 </div>
                                 <div class="kt-invoice__item">
-                                    <span class="kt-invoice__subtitle">As on</span>
-                                    <span class="kt-invoice__text">June 11, 2020</span>
+                                    <span class="kt-invoice__subtitle"><?= __('As on'); ?></span>
+                                    <span class="kt-invoice__text"><?= __('June 11, 2020'); ?></span>
                                 </div>
                                 <div class="kt-invoice__item">
-                                    <span class="kt-invoice__subtitle">Printed By</span>
+                                    <span class="kt-invoice__subtitle"><?= __('Printed By'); ?></span>
                                     <span class="kt-invoice__text"><?php echo $_SESSION['us_name']; ?></span>
                                 </div>
                                 <div class="kt-invoice__item">
-                                    <span class="kt-invoice__subtitle">Printed On</span>
+                                    <span class="kt-invoice__subtitle"><?= __('Printed On'); ?></span>
                                     <span class="kt-invoice__text"><?php echo date('M d, Y  h:i:s A'); ?></span>
                                 </div>
                             </div>
@@ -44,12 +44,12 @@
                                 <table style="width: 100%; margin: 20px 0 0 0;">
                                     <thead>
                                         <tr>
-                                            <th scope="col" style="text-align:center;">Cash Recieved</th>
-                                            <th scope="col" style="text-align:center;">Tr#</th>
-                                            <th scope="col" style="text-align:center;">Tr Date</th>
+                                            <th scope="col" style="text-align:center;"><?= __('Cash Recieved'); ?></th>
+                                            <th scope="col" style="text-align:center;"><?= __('Tr#'); ?></th>
+                                            <th scope="col" style="text-align:center;"><?= __('Tr Date'); ?></th>
 
-                                            <th scope="col" style="text-align:center;">Total Payment</th>
-                                            <th scope="col" colspan="3" rowspan="1">Category</th>
+                                            <th scope="col" style="text-align:center;"><?= __('Total Payment'); ?></th>
+                                            <th scope="col" colspan="3" rowspan="1"><?= __('Category'); ?></th>
                                         </tr>
                                         <tr role="row">
                                             <td rowspan="1"></td>
@@ -97,7 +97,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="col">Grand Total</th>
+                                            <th scope="col"><?= __('Grand Total'); ?></th>
                                             <td></td>
                                             <td></td>
 

@@ -79,7 +79,7 @@ foreach($finance_report_groups as $finanacerepogrp){
     }
 
     function editFinanaceGrp(id="",pargrp=""){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#insertform").html(loader);
         var fr_id = $("#fr_id").val();
         $.ajax({
@@ -104,7 +104,7 @@ foreach($finance_report_groups as $finanacerepogrp){
 
     }
     function GetViewReport(){
-        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#viewtable").html(loader);
         var fr_id = $("#fr_id").val();
         $.ajax({

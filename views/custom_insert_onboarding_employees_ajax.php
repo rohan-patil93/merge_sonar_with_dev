@@ -1139,7 +1139,7 @@ $bank_work_flow = "Y";
 			      <div class="radio radio-inline">
 			       <label class="form-label <?php echo $text_color_ety; ?>">
 			         <input type="radio" onclick="employeementtypepopup(<?php echo $employee_id.",".$emptypes['genc_detail_code'];?>)" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php } ?> value="<?php echo $emptypes['genc_detail_code'];?>" style="display:none"/>
-			         <i class="helper"></i><?php echo $emptypes['genc_detail_name'];?> </label>
+			         <i class="helper"></i><?php echo __($emptypes['genc_detail_name']);?> </label>
 			       </div>
 			    <?php } ?>
 				</div>
@@ -1240,7 +1240,7 @@ $bank_work_flow = "Y";
 			     	<label class="form-label <?php echo $text_color_gen; ?>">
 			       	<input  type="radio" name="gender" <?php if($data['gender'] == $gender_data['genc_detail_code']){ ?>  checked="checked" <?php } ?> value="<?php echo $gender_data['genc_detail_code'];?>" style="display:none"/>
 			       	<i class="helper"></i>
-			       	<?php echo $gender_data['genc_detail_name']; ?>
+			       	<?php echo __($gender_data['genc_detail_name']); ?>
 			     	</label>
 			   </div>
 			 <?php } ?>

@@ -96,13 +96,13 @@ foreach ($tracking_inprogress_arr as $row) {
 
 		<div class="col-xl-2 col-md-6">
 			<div class="card ticket-card cursor-pointer csr-click"
-     data-title="Total"
+     data-title="<?= htmlspecialchars(__('Total'), ENT_QUOTES, 'UTF-8'); ?>"
      data-count="<?= $length ?>"
      data-status="total"
      data-userid="<?php echo $_SESSION['userid']; ?>"
      data-current-status="<?php echo $role_current_status[$_SESSION['working_role_short_code']]; ?>" >
 				<div class="card-body">
-					<span class="m-b-30 bg-c-red lbl-card"><i class="fas fa-file-archive"></i> Total CSRs</span>
+					<span class="m-b-30 bg-c-red lbl-card"><i class="fas fa-file-archive"></i> <?= __('Total CSRs'); ?></span>
 					<span class="form-label label label-success float-end f-w-600"><?php echo $length ?></span>
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-red"><?php echo $total_amount; ?></h3>
@@ -115,13 +115,13 @@ foreach ($tracking_inprogress_arr as $row) {
 
 		<div class="col-xl-2 col-md-6">
 			<div class="card ticket-card cursor-pointer csr-click"
-     data-title="Active"
+     data-title="<?= htmlspecialchars(__('Active'), ENT_QUOTES, 'UTF-8'); ?>"
      data-count="<?= $activeCount ?>"
      data-status="active"
      data-userid="<?php echo $_SESSION['userid']; ?>"
      data-current-status="<?php echo $role_current_status[$_SESSION['working_role_short_code']]; ?>" >
 				<div class="card-body">
-					<span class="m-b-30 bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> Active CSRs</span>
+					<span class="m-b-30 bg-c-blue lbl-card"><i class="fas fa-file-archive"></i> <?= __('Active CSRs'); ?></span>
 					<span class="form-label label label-success float-end f-w-600"><?php echo $activeCount ?></span>
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-blue"><?php echo $active_amount; ?></h3>
@@ -133,13 +133,13 @@ foreach ($tracking_inprogress_arr as $row) {
 		</div>
 		<div class="col-xl-2 col-md-6">
 			<div class="card ticket-card cursor-pointer csr-click"
-     data-title="Approval In Progress"
+     data-title="<?= htmlspecialchars(__('Approval In Progress'), ENT_QUOTES, 'UTF-8'); ?>"
      data-count="<?= $progressCount ?>"
      data-status="progress"
      data-userid="<?php echo $_SESSION['userid']; ?>"
      data-current-status="<?php echo $role_current_status[$_SESSION['working_role_short_code']]; ?>">
 				<div class="card-body">
-					<span class="m-b-30 bg-c-purple lbl-card"><i class="fas fa-file-archive"></i> In Progress CSRs</span>
+					<span class="m-b-30 bg-c-purple lbl-card"><i class="fas fa-file-archive"></i> <?= __('In Progress CSRs'); ?></span>
 					<span class="form-label label label-success float-end f-w-600"><?php echo $progressCount ?></span>
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-purple"><?php echo $inprogress_amount; ?></h3>
@@ -153,13 +153,13 @@ foreach ($tracking_inprogress_arr as $row) {
 
 		<div class="col-xl-2 col-md-6">
 			<div class="card ticket-card cursor-pointer csr-click"
-     data-title="Approved"
+     data-title="<?= htmlspecialchars(__('Approved'), ENT_QUOTES, 'UTF-8'); ?>"
      data-count="<?= $approvedCount ?>"
      data-status="approved"
      data-userid="<?php echo $_SESSION['userid']; ?>"
      data-current-status="<?php echo $role_current_status[$_SESSION['working_role_short_code']]; ?>">
 				<div class="card-body">
-					<span class="m-b-30 bg-c-lite-green lbl-card"><i class="fas fa-file-archive"></i> Approved CSRs</span>
+					<span class="m-b-30 bg-c-lite-green lbl-card"><i class="fas fa-file-archive"></i> <?= __('Approved CSRs'); ?></span>
 					<span class="form-label label label-success float-end f-w-600"><?php echo $approvedCount ?></span>
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-lite-green"><?php echo $approved_amount; ?></h3>
@@ -172,13 +172,13 @@ foreach ($tracking_inprogress_arr as $row) {
 
 		<div class="col-xl-2 col-md-6">
 			<div class="card ticket-card cursor-pointer csr-click"
-     data-title="Tracking"
+     data-title="<?= htmlspecialchars(__('Tracking'), ENT_QUOTES, 'UTF-8'); ?>"
      data-count="<?= $trackingcount ?>"
      data-status="tracking"
      data-userid="<?php echo $_SESSION['userid']; ?>"
      data-current-status="<?php echo $role_current_status[$_SESSION['working_role_short_code']]; ?>">
 				<div class="card-body">
-					<span class="m-b-30 bg-c-yellow lbl-card"><i class="fas fa-file-archive"></i> Tracking CSRs</span>
+					<span class="m-b-30 bg-c-yellow lbl-card"><i class="fas fa-file-archive"></i> <?= __('Tracking CSRs'); ?></span>
 					<span class="form-label label label-success float-end f-w-600"><?php echo $trackingcount ?></span>
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-yellow"><?php echo $tracking_amount; ?></h3>
@@ -191,13 +191,13 @@ foreach ($tracking_inprogress_arr as $row) {
 
 		<div class="col-xl-2 col-md-6">
 			<div class="card ticket-card cursor-pointer csr-click"
-     data-title="Completed"
+     data-title="<?= htmlspecialchars(__('Completed'), ENT_QUOTES, 'UTF-8'); ?>"
      data-count="<?= $completedCount ?>"
      data-status="completed"
      data-userid="<?php echo $_SESSION['userid']; ?>"
      data-current-status="<?php echo $role_current_status[$_SESSION['working_role_short_code']]; ?>">
 				<div class="card-body">
-					<span class="m-b-30 bg-c-green lbl-card"><i class="fas fa-file-archive"></i> Completed CSRs</span>
+					<span class="m-b-30 bg-c-green lbl-card"><i class="fas fa-file-archive"></i> <?= __('Completed CSRs'); ?></span>
 					<span class="form-label label label-success float-end f-w-600"><?php echo $completedCount ?></span>
 					<div class="text-center">
 						<h3 class="m-b-0 d-inline-block text-c-green"><?php echo $completed_amount; ?></h3>
@@ -215,22 +215,22 @@ foreach ($tracking_inprogress_arr as $row) {
 		<div class="card-block">
 			<div class="row">
 				<div class="col-lg-2 m-auto">
-					<h5 class="d-flex align-itmes-center">CSR - Approvals</h5>
+					<h5 class="d-flex align-itmes-center"><?= __('CSR - Approvals'); ?></h5>
 				</div>
 				<div class="col-lg-4"></div>
 				<div class="col-lg-6">
 					<ul class="nav md-tabs infisuite_tab mt-2 ml-2 d-flex justify-content-end">
 						<li class="nav-item">
-							<a class="nav-link active" data-bs-toggle="tab" href="#tab0" role="tab">Approval Pending</a>
+							<a class="nav-link active" data-bs-toggle="tab" href="#tab0" role="tab"><?= __('Approval Pending'); ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link " data-bs-toggle="tab" href="#tab1" role="tab">Approved By Me</a>
+							<a class="nav-link " data-bs-toggle="tab" href="#tab1" role="tab"><?= __('Approved By Me'); ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link " data-bs-toggle="tab" href="#tab2" role="tab">Approval In Progress</a>
+							<a class="nav-link " data-bs-toggle="tab" href="#tab2" role="tab"><?= __('Approval In Progress'); ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link " data-bs-toggle="tab" href="#tab3" role="tab">Approved By All</a>
+							<a class="nav-link " data-bs-toggle="tab" href="#tab3" role="tab"><?= __('Approved By All'); ?></a>
 						</li>
 
 					</ul>
@@ -246,13 +246,13 @@ foreach ($tracking_inprogress_arr as $row) {
 
 									<thead>
 										<tr>
-											<th scope="col">Creator</th>
-											<th scope="col">Project Name</th>
+											<th scope="col"><?= __('Creator'); ?></th>
+											<th scope="col"><?= __('Project Name'); ?></th>
 
-											<th scope="col">Start Date</th>
-											<th scope="col">End Date</th>
-											<th scope="col" class='text-center'>Cost</th>
-											<th scope="col">Status</th>
+											<th scope="col"><?= __('Start Date'); ?></th>
+											<th scope="col"><?= __('End Date'); ?></th>
+											<th scope="col" class='text-center'><?= __('Cost'); ?></th>
+											<th scope="col"><?= __('Status'); ?></th>
 										</tr>
 									</thead>
 
@@ -265,7 +265,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
 															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
-															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+															<span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
 														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
@@ -292,7 +292,7 @@ foreach ($tracking_inprogress_arr as $row) {
 										else:
 
 											echo '<tr><td colspan="6" ><div class="text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>   
 										<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
 										</div>   
@@ -309,13 +309,13 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th scope="col">Creator</th>
-											<th scope="col">Project Name</th>
+											<th scope="col"><?= __('Creator'); ?></th>
+											<th scope="col"><?= __('Project Name'); ?></th>
 
-											<th scope="col">Start Date</th>
-											<th scope="col">End Date</th>
-											<th scope="col" class='text-center'>Cost</th>
-											<th scope="col">Status</th>
+											<th scope="col"><?= __('Start Date'); ?></th>
+											<th scope="col"><?= __('End Date'); ?></th>
+											<th scope="col" class='text-center'><?= __('Cost'); ?></th>
+											<th scope="col"><?= __('Status'); ?></th>
 
 										</tr>
 									</thead>
@@ -329,7 +329,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
 															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
-															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+															<span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
 														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
@@ -353,7 +353,7 @@ foreach ($tracking_inprogress_arr as $row) {
 										else:
 
 											echo '<tr><td colspan="6" ><div class="text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>   
 										<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
 										</div>   
@@ -371,13 +371,13 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th scope="col">Creator</th>
-											<th scope="col">Project Name</th>
+											<th scope="col"><?= __('Creator'); ?></th>
+											<th scope="col"><?= __('Project Name'); ?></th>
 
-											<th scope="col">Start Date</th>
-											<th scope="col">End Date</th>
-											<th scope="col" class='text-center'>Cost</th>
-											<th scope="col">Status</th>
+											<th scope="col"><?= __('Start Date'); ?></th>
+											<th scope="col"><?= __('End Date'); ?></th>
+											<th scope="col" class='text-center'><?= __('Cost'); ?></th>
+											<th scope="col"><?= __('Status'); ?></th>
 
 										</tr>
 									</thead>
@@ -391,7 +391,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
 															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
-															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+															<span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
 														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
@@ -415,7 +415,7 @@ foreach ($tracking_inprogress_arr as $row) {
 										else:
 
 											echo '<tr><td colspan="6" ><div class="text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>   
 										<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
 										</div>   
@@ -433,13 +433,13 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th scope="col">Creator</th>
-											<th scope="col">Project Name</th>
+											<th scope="col"><?= __('Creator'); ?></th>
+											<th scope="col"><?= __('Project Name'); ?></th>
 
-											<th scope="col">Start Date</th>
-											<th scope="col">End Date</th>
-											<th scope="col" class='text-center'>Cost</th>
-											<th scope="col">Status</th>
+											<th scope="col"><?= __('Start Date'); ?></th>
+											<th scope="col"><?= __('End Date'); ?></th>
+											<th scope="col" class='text-center'><?= __('Cost'); ?></th>
+											<th scope="col"><?= __('Status'); ?></th>
 											<th scope="col"></th>
 
 										</tr>
@@ -454,7 +454,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
 															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
-															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+															<span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
 														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
@@ -474,7 +474,7 @@ foreach ($tracking_inprogress_arr as $row) {
       data-bg="<?php echo $_SESSION['status'][$row['current_status']]['background_color']; ?>"><?php echo $progress_var[$row['current_status']]; ?> </label>
 															</td><td>
 	<a class="" href="index.php?option=COM_VIEW_CSR_TRACKING&Rid=<?php echo deocdeId('id:' . $row['id']); ?> ">
-	<span class='btn label label-md bg-primary cursor-pointer' >Tracking</span></a>
+	<span class='btn label label-md bg-primary cursor-pointer' ><?= __('Tracking'); ?></span></a>
 															 </td>
 												</tr>
 										<?php
@@ -482,7 +482,7 @@ foreach ($tracking_inprogress_arr as $row) {
 										else:
 
 											echo '<tr><td colspan="7" ><div class="text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>   
 										<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
 										</div>   
@@ -503,19 +503,19 @@ foreach ($tracking_inprogress_arr as $row) {
 		<div class="card-block">
 			<div class="row">
 				<div class="col-lg-2 m-auto">
-					<h5 class="d-flex align-itmes-center">CSR Tracking</h5>
+					<h5 class="d-flex align-itmes-center"><?= __('CSR Tracking'); ?></h5>
 				</div>
 				<div class="col-lg-5"></div>
 				<div class="col-lg-5">
 					<ul class="nav md-tabs infisuite_tab mt-2 ml-2 d-flex justify-content-end">
 						<li class="nav-item">
-							<a class="nav-link active" data-bs-toggle="tab" href="#tab4" role="tab">Yet to Start</a>
+							<a class="nav-link active" data-bs-toggle="tab" href="#tab4" role="tab"><?= __('Yet to Start'); ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link " data-bs-toggle="tab" href="#tab5" role="tab">In Progress</a>
+							<a class="nav-link " data-bs-toggle="tab" href="#tab5" role="tab"><?= __('In Progress'); ?></a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link " data-bs-toggle="tab" href="#tab6" role="tab"> Completed</a>
+							<a class="nav-link " data-bs-toggle="tab" href="#tab6" role="tab"> <?= __('Completed'); ?></a>
 						</li>
 
 					</ul>
@@ -530,11 +530,11 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th scope="col">Creator</th>
-											<th scope="col">Project Name</th>
-											<th scope="col">Start Date</th>
-											<th scope="col">End Date</th>
-											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col"><?= __('Creator'); ?></th>
+											<th scope="col"><?= __('Project Name'); ?></th>
+											<th scope="col"><?= __('Start Date'); ?></th>
+											<th scope="col"><?= __('End Date'); ?></th>
+											<th scope="col" class='text-center'><?= __('Cost'); ?></th>
 											<th scope="col"></th>
 										</tr>
 									</thead>
@@ -557,7 +557,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
 															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
-															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+															<span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
 														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
@@ -586,7 +586,7 @@ foreach ($tracking_inprogress_arr as $row) {
 										else:
 
 											echo '<tr><td colspan="6" ><div class="text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>   
 										<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
 										</div>   
@@ -603,11 +603,11 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th scope="col">Creator</th>
-											<th scope="col">Project Name</th>
-											<th scope="col">Start Date</th>
-											<th scope="col">End Date</th>
-											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col"><?= __('Creator'); ?></th>
+											<th scope="col"><?= __('Project Name'); ?></th>
+											<th scope="col"><?= __('Start Date'); ?></th>
+											<th scope="col"><?= __('End Date'); ?></th>
+											<th scope="col" class='text-center'><?= __('Cost'); ?></th>
 											<th scope="col"></th>
 										</tr>
 									</thead>
@@ -631,7 +631,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
 															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
-															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+															<span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
 														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
@@ -660,7 +660,7 @@ foreach ($tracking_inprogress_arr as $row) {
 											 }else{
 
 											echo '<tr><td colspan="6" ><div class="text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>   
 										<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
 										</div>   
@@ -677,11 +677,11 @@ foreach ($tracking_inprogress_arr as $row) {
 								<table class="table table-hover m-b-0">
 									<thead>
 										<tr>
-											<th scope="col">Creator</th>
-											<th scope="col">Project Name</th>
-											<th scope="col">Start Date</th>
-											<th scope="col">End Date</th>
-											<th scope="col" class='text-center'>Cost</th>
+											<th scope="col"><?= __('Creator'); ?></th>
+											<th scope="col"><?= __('Project Name'); ?></th>
+											<th scope="col"><?= __('Start Date'); ?></th>
+											<th scope="col"><?= __('End Date'); ?></th>
+											<th scope="col" class='text-center'><?= __('Cost'); ?></th>
 											<th scope="col"></th>
 										</tr>
 									</thead>
@@ -704,7 +704,7 @@ foreach ($tracking_inprogress_arr as $row) {
 														<?php if ($_SESSION['user_image'][$row['created_by']] != "") { ?>
 															<img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="" >
 														<?php } else { ?>
-															<span alt="user image" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+															<span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
 														<?php } ?>
 														<span class='mt-2 ml-2 d-inline-block fw-bold' style='margin-bottom:5px'> <?php echo $_SESSION['users'][$row['created_by']]; ?> </span>
 													</td>
@@ -732,7 +732,7 @@ foreach ($tracking_inprogress_arr as $row) {
 										else:
 
 											echo '<tr><td colspan="6" ><div class="text-center ">
-										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>   
+										<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>   
 										<div class="text-center px-4">
 										<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" >
 										</div>   

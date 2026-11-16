@@ -115,7 +115,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     	});
                     }else{
                     	swal({
-                    		title: "Oops...",
+                    		title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     		text: res.transaction_update.message,
                     		type: "error",
                     		showCancelButton: true,
@@ -180,7 +180,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
       <img alt="" src="uploads/all/<?php echo $emps['image']; ?>"   class="img-radius img-50 align-top m-r-15 mt-4" >
    </div>
    <?php }else{ ?>
-   <span  alt="user image" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($emps['display_name']); ?></span>
+   <span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($emps['display_name']); ?></span>
    <?php } ?>
 
 

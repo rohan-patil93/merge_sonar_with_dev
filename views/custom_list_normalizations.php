@@ -114,11 +114,11 @@ foreach($employee_performance_appraisals as $epa){
 </script>
 <div class="card custom_card">
     <div class="card-header">
-        <h5>Normalizations Appraisals</h5>
+        <h5><?= __('Normalizations Appraisals'); ?></h5>
         <div class="card-header-right table-card-header">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -126,9 +126,9 @@ foreach($employee_performance_appraisals as $epa){
         <form method="post">
             <div class="row">
                 <div class="col-lg-4 w-full">
-                    <span class="form-label">Appraisal</span>
-                    <select aria-label="Appraisal" class="form-control form-select js-example-basic-single" name="appraisal_id" id="appraisal_id" onchange="getAppraisalId(this.value)">
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?= __('Appraisal'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Appraisal'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="appraisal_id" id="appraisal_id" onchange="getAppraisalId(this.value)">
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach($performance_appraisal_setups as $pas){ ?>
                             <option value="<?php echo $pas['id']; ?>" <?php echo $_POST['appraisal_id'] == $pas['id']?"selected":"";?> data-id="<?php echo $pas['appraisal_bell_curve_id']; ?>"><?php echo $pas['performance_appraisal_name']." - ".$pas['assessment_year']; ?></option>
                         <?php  } ?>
@@ -145,9 +145,9 @@ foreach($employee_performance_appraisals as $epa){
             </div>
             <div class="row mt-2" id="showallfilter" <?php echo $_POST['appraisal_id'] ==""?"style='display:none'":"";?>>
                 <div class="col-lg-2 w-full">
-                    <span class="form-label">Aassessment Year</span>
-                    <select aria-label="Assessment Year" class="form-control form-select js-example-basic-single" name="assessment_year" >
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?= __('Aassessment Year'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Assessment Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="assessment_year" >
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php for ($i=2020; $i<2090;$i++) {
                             $k= $i+1; $view_assemnt_year =$i."-".$k; ?>
                             <option <?php echo $_POST['assessment_year'] == $view_assemnt_year?"selected":"";?> value="<?php echo $view_assemnt_year; ?>"  ><?php echo $i." - ".$k ?></option>
@@ -155,48 +155,48 @@ foreach($employee_performance_appraisals as $epa){
                     </select>
                 </div>
                 <div class="col-lg-2 w-full">
-                    <span class="form-label">Reporting Manager</span>
-                    <select aria-label="Reports To" class="form-control form-select js-example-basic-single" name="reports_to" >
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?= __('Reporting Manager'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Reports To'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="reports_to" >
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach($application_users as $au){ ?>
                             <option value="<?php echo $au['id']; ?>"  <?php echo $_POST['reports_to'] == $au['id']?"selected":"";?>><?php echo $au['display_name']; ?></option>
                         <?php  } ?>
                     </select>
                 </div>
                 <div class="col-lg-2 w-full">
-                    <span class="form-label">Location</span>
-                    <select aria-label="Location" class="form-control form-select js-example-basic-single" name="location_id" >
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?= __('Location'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="location_id" >
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach($locations as $loc){ ?>
                             <option value="<?php echo $loc['id']; ?>"  <?php echo $_POST['location_id'] == $loc['id']?"selected":"";?>><?php echo $loc['location_name']; ?></option>
                         <?php  } ?>
                     </select>
                 </div>
                 <div class="col-lg-2 w-full">
-                    <span class="form-label">Department</span>
-                    <select aria-label="Department" class="form-control form-select js-example-basic-single" name="department_id" >
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?= __('Department'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="department_id" >
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach($departments as $dep){ ?>
                             <option value="<?php echo $dep['id']; ?>"  <?php echo $_POST['department_id'] == $dep['id']?"selected":"";?>><?php echo $dep['department_name']; ?></option>
                         <?php  } ?>
                     </select>
                 </div>
                 <div class="col-lg-2 w-full">
-                    <span class="form-label">Designation</span>
-                    <select aria-label="Job Title" class="form-control form-select js-example-basic-single" name="job_title_id" >
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?= __('Designation'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Job Title'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="job_title_id" >
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach($job_title as $jt){ ?>
                             <option value="<?php echo $jt['id']; ?>"  <?php echo $_POST['job_title_id'] == $jt['id']?"selected":"";?>><?php echo $jt['job_title']; ?></option>
                         <?php  } ?>
                     </select>
                 </div>
                 <div class="col-lg-2">
-                    <span class="form-label">Date of joining</span>
-                    <input aria-label="Joining Date" type="text" class="form-control datepicker"  name="joining_date" value="<?php echo $_POST['joining_date'];?>">
+                    <span class="form-label"><?= __('Date of joining'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Joining Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker"  name="joining_date" value="<?php echo $_POST['joining_date'];?>">
                 </div>
                 <div class="col-lg-4 mt-2 w-full">
-                    <span class="form-label">Employee</span>
-                    <select aria-label="Emp []" class="form-control form-select js-example-basic-multiple" name="emp_id[]" multiple>
+                    <span class="form-label"><?= __('Employee'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Emp'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-control form-select js-example-basic-multiple" name="emp_id[]" multiple>
                         <?php foreach($employees as $em){ ?>
                             <option value="<?php echo $em['id']; ?>"  <?php echo (in_array($em['id'], (array)$_POST['emp_id']))?"selected":""; ?>><?php echo $em['display_name']; ?></option>
                         <?php  } ?>
@@ -205,7 +205,7 @@ foreach($employee_performance_appraisals as $epa){
             </div>
             <div class="mt-3 row">
                 <div class="col-lg-2">
-                <button type="submit" class="btn btn-primary waves-effect waves-light " name="submit_btn" value="submitfilter"><i class="fa fa-check m-r-10"></i> Filter</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light " name="submit_btn" value="submitfilter"><i class="fa fa-check m-r-10"></i> <?= __('Filter'); ?></button>
                 </div>
                 <div class="col-lg-10 text-right ">
                     <?php
@@ -225,19 +225,19 @@ foreach($employee_performance_appraisals as $epa){
                         <th scope="col">
                             <div class="checkbox-fade fade-in-primary">
                                 <label class="form-label">
-                                    <input aria-label="Allchecknormalize" type="checkbox" class="podalist" id="allchecknormalize" onclick="allCheckNormalize()" value="" onkeydown="">
+                                    <input aria-label="<?= htmlspecialchars(__('Allchecknormalize'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="podalist" id="allchecknormalize" onclick="allCheckNormalize()" value="" onkeydown="">
                                     <span class="cr">
                                       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
                                 </label>
                             </div>
                         </th>
-                        <th scope="col">Employee</th>
-                        <th scope="col">Self Grade</th>
-                        <th scope="col">RO Grade</th>
-                        <th scope="col">Final Grade</th>
-                        <th scope="col">RO Comment</th>
-                        <th scope="col">HOD Comment</th>
+                        <th scope="col"><?= __('Employee'); ?></th>
+                        <th scope="col"><?= __('Self Grade'); ?></th>
+                        <th scope="col"><?= __('RO Grade'); ?></th>
+                        <th scope="col"><?= __('Final Grade'); ?></th>
+                        <th scope="col"><?= __('RO Comment'); ?></th>
+                        <th scope="col"><?= __('HOD Comment'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -249,7 +249,7 @@ foreach($employee_performance_appraisals as $epa){
                         <td class="p-2" >
                             <div class="checkbox-fade fade-in-primary">
                                 <label class="form-label">
-                                    <input aria-label="Checkbox" type="checkbox" id="singlecheck_<?php echo $epa['id']; ?>" class="podalist <?php echo $epa['normalization_approved_status'] =='0'?"disabled":"checknormalize"; ?>" name="employee_performance_appraisal_id[]" value="<?php echo $epa['id']; ?>"  onclick="singleCheckNormalize('<?php echo $epa['id']; ?>')" onkeydown="">
+                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="singlecheck_<?php echo $epa['id']; ?>" class="podalist <?php echo $epa['normalization_approved_status'] =='0'?"disabled":"checknormalize"; ?>" name="employee_performance_appraisal_id[]" value="<?php echo $epa['id']; ?>"  onclick="singleCheckNormalize('<?php echo $epa['id']; ?>')" onkeydown="">
                                     <span class="cr">
                                       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
@@ -259,9 +259,9 @@ foreach($employee_performance_appraisals as $epa){
                         <td class="p-2 ">
                             <div class="align-middle">
                             <?php if($empdetail['image'] !=""){?>
-                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
-                                <span  alt="user" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
+                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-30 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                             <?php } ?>
                                 <div class="d-inline-block width73">
                                     <span class="f-12"><?php echo $empdetail['display_name']; ?></span>
@@ -289,7 +289,7 @@ foreach($employee_performance_appraisals as $epa){
                         </td>
                         <td class="p-2 <?php echo $epa['normalization_approved_status'] =='0'?"":"checknormalize_enter"; ?>" <?php echo $epa['normalization_approved_status'] =='0'?"":'style="pointer-events: none; opacity: 0.4;"'; ?> id="singlevisiblecheck_<?php echo $epa['id']; ?>">
                             <div class="w-full">
-                                <select aria-label="Select option" class="form-control form-select js-example-basic-single allrankingcnt" name="normalization_ranking[<?php echo $epa['id']; ?>]" onchange="chnageRanking()">
+                                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single allrankingcnt" name="normalization_ranking[<?php echo $epa['id']; ?>]" onchange="chnageRanking()">
                                     <?php foreach($arslabs as $slab){
                                         $selected = "";
                                         if($epa['normalization_ranking'] == $slab['id']){
@@ -313,12 +313,12 @@ foreach($employee_performance_appraisals as $epa){
                 </tbody>
             </table>
             <div class="mt-5">
-                <button type="submit" class="btn btn-info waves-effect waves-light submitnormalizations m-r-20"  name="submit_btn" value="savenormalizations"><i class="fa fa-folder-open m-r-10"></i> Save</button>
-                <button type="submit" class="btn btn-primary waves-effect waves-light submitnormalizations"  name="submit_btn" value="submitnormalizations"><i class="fa fa-check m-r-10"></i> Submit</button>
+                <button type="submit" class="btn btn-info waves-effect waves-light submitnormalizations m-r-20"  name="submit_btn" value="savenormalizations"><i class="fa fa-folder-open m-r-10"></i> <?= __('Save'); ?></button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light submitnormalizations"  name="submit_btn" value="submitnormalizations"><i class="fa fa-check m-r-10"></i> <?= __('Submit'); ?></button>
             </div>
         <?php }else{ ?>
             <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Normalization / Please Apply Filter</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Normalization / Please Apply Filter'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

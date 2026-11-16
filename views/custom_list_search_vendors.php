@@ -97,7 +97,7 @@ function filterapplay(reset=""){
     var extra_paramiter  = '<?php echo json_encode($_GET); ?>';
     var parent_option  = '<?php echo $_GET['option']; ?>';
     insertadittrails(parent_option,'COM_LIST_CANDIDATES_TABLE',extra_paramiter);
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#formview").html(loader);
     if(reset !="Y"){
       var postarray = $("#filterfrom").serialize();
@@ -331,7 +331,7 @@ function closedPopupcompliance22(){
 <div class="card-body">
   <div class="text-center p-3 b-radius-10" style="background: #e6efff;">
 
-    <h3 class="mt-3 f-w-600">Browse Vendors  </h3>
+    <h3 class="mt-3 f-w-600"><?= __('Browse Vendors'); ?>  </h3>
 
     <ul class="alphabet-filetr bg-white p-2 border b-radius-10 mt-4 mb-4">
        <li><button type="button" class="d-inline-block active activealpha" id="activealpha" !" onclick="selectAlphabet('')">All</button></li>
@@ -349,23 +349,23 @@ function closedPopupcompliance22(){
       <!-- Checkbox card start -->
       <div class="card">
         <div class="card-header">
-          <h5> Filter</h5>
+          <h5> <?= __('Filter'); ?></h5>
           <div class="card-header-right">
 
-            <button type="reset" class="btn btn-danger" value="reset" onclick="filterapplay('Y')">Reset</button>
+            <button type="reset" class="btn btn-danger" value="reset" onclick="filterapplay('Y')"><?= __('Reset'); ?></button>
           </div>
         </div>
         <div class="card-block">
           <div class="form-grou row border-bottom mb-3 pb-3">
-            <span class="form-label col-lg-8">Perfect Match</span>
+            <span class="form-label col-lg-8"><?= __('Perfect Match'); ?></span>
             <div class="col-lg-4 text-right">
-            <input aria-label="Perfect Match" type="checkbox" class="js-switch" checked="" name="perfect_match" value="0" onchange="filterapplay()">
+            <input aria-label="<?= htmlspecialchars(__('Perfect Match'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-switch" checked="" name="perfect_match" value="0" onchange="filterapplay()">
           </div>
           </div>
           <div class="form-group border-bottom mb-3 pb-3">
-             <h5 class="f-w-600 mb-3">Location</h5>
-            <select aria-label="Location" class="form-control js-example-basic-single" name="location_id" onchange="filterapplay()">
-              <option value="">All</option>
+             <h5 class="f-w-600 mb-3"><?= __('Location'); ?></h5>
+            <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="location_id" onchange="filterapplay()">
+              <option value=""><?= __('All'); ?></option>
               <?php foreach((array)$locations as $location){ ?>
                 <option value="<?php echo $location['id']; ?>"><?php echo $location['location_name']; ?></option>
               <?php } ?>
@@ -373,61 +373,61 @@ function closedPopupcompliance22(){
           </div>
           <div class="row border-bottom mb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">Vendor Name</h5>
+              <h5 class="f-w-600 mb-3"><?= __('Vendor Name'); ?></h5>
             </div>
             <div class="form-group">
                 <div class="row p-l-10 p-r-10">
-                    <input aria-label="Vendor Name" class="form-control" type="text" id="vendor_name" name="vendor_name" value="" onblur="filterapplay()">
+                    <input aria-label="<?= htmlspecialchars(__('Vendor Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="vendor_name" name="vendor_name" value="" onblur="filterapplay()">
                  </div>
             </div>
           </div>
           <div class="row border-bottom mb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">Vendor Email</h5>
+              <h5 class="f-w-600 mb-3"><?= __('Vendor Email'); ?></h5>
             </div>
             <div class="form-group">
                 <div class="row p-l-10 p-r-10">
-                    <input aria-label="Vendor Email" class="form-control" type="text" id="vendor_email" name="vendor_email" value="" onblur="filterapplay()">
+                    <input aria-label="<?= htmlspecialchars(__('Vendor Email'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="vendor_email" name="vendor_email" value="" onblur="filterapplay()">
                  </div>
             </div>
           </div>
           <div class="row border-bottom mb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">GST No</h5>
+              <h5 class="f-w-600 mb-3"><?= __('GST No'); ?></h5>
             </div>
             <div class="form-group">
                 <div class="row p-l-10 p-r-10">
-                    <input aria-label="Gstin" class="form-control" type="text" id="gstin" name="gstin" value="" onblur="filterapplay()">
+                    <input aria-label="<?= htmlspecialchars(__('Gstin'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="gstin" name="gstin" value="" onblur="filterapplay()">
                  </div>
             </div>
           </div>
          <div class="row border-bottom mb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">Tax Registation No</h5>
+              <h5 class="f-w-600 mb-3"><?= __('Tax Registation No'); ?></h5>
             </div>
             <div class="form-group">
                 <div class="row p-l-10 p-r-10">
-                    <input aria-label="Vendor Tax Reg No" class="form-control" type="text" id="vendor_tax_reg_no" name="vendor_tax_reg_no" value="" onblur="filterapplay()">
+                    <input aria-label="<?= htmlspecialchars(__('Vendor Tax Reg No'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="vendor_tax_reg_no" name="vendor_tax_reg_no" value="" onblur="filterapplay()">
                  </div>
             </div>
           </div>
           <div class="row border-bottom mb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">CST Registation No</h5>
+              <h5 class="f-w-600 mb-3"><?= __('CST Registation No'); ?></h5>
             </div>
             <div class="form-group">
                 <div class="row p-l-10 p-r-10">
-                    <input aria-label="Cst Reg No" class="form-control" type="text" id="cst_reg_no" name="cst_reg_no" value="" onblur="filterapplay()">
+                    <input aria-label="<?= htmlspecialchars(__('Cst Reg No'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="cst_reg_no" name="cst_reg_no" value="" onblur="filterapplay()">
                  </div>
             </div>
           </div>
          <div class="row border-bottom mb-3">
             <div class="col-lg-12">
-              <h5 class="f-w-600 mb-3">PAN No</h5>
+              <h5 class="f-w-600 mb-3"><?= __('PAN No'); ?></h5>
             </div>
             <div class="form-group">
                 <div class="row p-l-10 p-r-10">
-                    <input aria-label="Pan No" class="form-control" type="text" id="pan_no" name="pan_no" value="" onblur="filterapplay()">
+                    <input aria-label="<?= htmlspecialchars(__('Pan No'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="pan_no" name="pan_no" value="" onblur="filterapplay()">
                  </div>
             </div>
           </div>
@@ -440,15 +440,15 @@ function closedPopupcompliance22(){
         <div class="card-block">
           <div class="row align-items-center border-bottom pb-3">
             <div class="col-lg-3">
-              <p class="mb-0">Showing <b class="f-w-600">10</b> of <b class="f-w-600">50</b> Vendors</p>
+              <p class="mb-0"><?= __('Showing'); ?> <b class="f-w-600">10</b> <?= __('of'); ?> <b class="f-w-600">50</b> <?= __('Vendors'); ?></p>
             </div>
             <div class="col-lg-9">
               <div class="row align-items-center">
                 <div class="col-lg-3">
                   <div class="form-group row align-items-center mb-0">
-                    <span class="form-label col-lg-5 text-right mb-0">Show :</span>
+                    <span class="form-label col-lg-5 text-right mb-0"><?= __('Show'); ?> :</span>
                     <div class="col-lg-7">
-                      <select aria-label="Limit" class=" border " name="limit" onchange="filterapplay()">
+                      <select aria-label="<?= htmlspecialchars(__('Limit'), ENT_QUOTES, 'UTF-8'); ?>" class=" border " name="limit" onchange="filterapplay()">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -460,12 +460,12 @@ function closedPopupcompliance22(){
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group row align-items-center mb-0">
-                    <span class="form-label col-lg-4 text-right mb-0">Sort :</span>
+                    <span class="form-label col-lg-4 text-right mb-0"><?= __('Sort'); ?> :</span>
                     <div class="col-lg-8">
-                      <select aria-label="Sort By" class=" border " class="form-select js-example-basic-single" name="sort_by" onchange="filterapplay()">
-                        <option value="display_name">Name</option>
-                        <option value="company">Company </option>
-                        <option value="established_year">Established Year</option>
+                      <select aria-label="<?= htmlspecialchars(__('Sort By'), ENT_QUOTES, 'UTF-8'); ?>" class=" border " class="form-select js-example-basic-single" name="sort_by" onchange="filterapplay()">
+                        <option value="display_name"><?= __('Name'); ?></option>
+                        <option value="company"><?= __('Company'); ?> </option>
+                        <option value="established_year"><?= __('Established Year'); ?></option>
                       </select>
                     </div>
                   </div>

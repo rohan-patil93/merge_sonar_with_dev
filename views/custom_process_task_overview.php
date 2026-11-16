@@ -71,11 +71,11 @@ function cal_percentage($num_amount, $num_total) {
                     <div class="card card-custom " id="kt_page_sticky_card">
 
                         <div class="card-header">
-    <h5>Process Task Overview</h5>
+    <h5><?= __('Process Task Overview'); ?></h5>
     <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
     </div>
 </div>
@@ -87,19 +87,19 @@ function cal_percentage($num_amount, $num_total) {
 <div class="row col-lg-12">
         <button type="button" class="btn circle-circle-xl border-primary m-l-50 text-dark">
             <h3 class="text-center font-size-h3"><?php echo count((array)$tasklist); ?></h3>
-            <div class="text-center font-size-h6"><?php echo "Total Tasks";?></div>
+            <div class="text-center font-size-h6"><?php echo __("Total Tasks");?></div>
         </button>
         <button type="button" class="btn circle-circle-xl border-secondary  m-l-10 text-dark ">
             <h3 class="text-center font-size-h3"><?php echo $cntcomplte; ?></h3>
-            <div class="text-center font-size-h6"><?php echo "Completed";?></div>
+            <div class="text-center font-size-h6"><?php echo __("Completed");?></div>
         </button>
         <button type="button" class="btn circle-circle-xl border-success   m-l-10 text-dark">
             <h3 class="text-center font-size-h3"><?php echo $cntinproress; ?></h3>
-            <div class="text-center font-size-h6"><?php echo "InProgress";?></div>
+            <div class="text-center font-size-h6"><?php echo __("InProgress");?></div>
         </button>
         <button type="button" class="btn circle-circle-xl border-warning   m-l-10 text-dark">
             <h3 class="text-center font-size-h3"><?php echo $yasttostart; ?></h3>
-            <div class="text-center font-size-h6"><?php echo "Yet to start";?></div>
+            <div class="text-center font-size-h6"><?php echo __("Yet to start");?></div>
         </button>
 </div>
                                         </div>
@@ -114,12 +114,12 @@ function cal_percentage($num_amount, $num_total) {
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col" style="width: 20%;">Task Name </th>
-                                                    <th scope="col">Created Date </th>
-                                                    <th scope="col">Expiry Date </th>
-                                                    <th scope="col">Check List </th>
+                                                    <th scope="col" style="width: 20%;"><?= __('Task Name'); ?> </th>
+                                                    <th scope="col"><?= __('Created Date'); ?> </th>
+                                                    <th scope="col"><?= __('Expiry Date'); ?> </th>
+                                                    <th scope="col"><?= __('Check List'); ?> </th>
 
-                                                    <th scope="col">Progress</th><th scope="col">Action</th>
+                                                    <th scope="col"><?= __('Progress'); ?></th><th scope="col"><?= __('Action'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -153,7 +153,7 @@ $percentage = cal_percentage($tskcomplate,$totaltask);
     <div class="d-flex flex-column w-100 mr-2">
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <span class="text-muted mr-2 font-size-sm font-weight-bold"><?php echo $percentage!="nan"?$percentage:"0"; ?>%</span>
-                <span class="text-muted font-size-sm font-weight-bold">Progress</span>
+                <span class="text-muted font-size-sm font-weight-bold"><?= __('Progress'); ?></span>
             </div>
             <div class="progress progress-xs w-100">
                 <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $percentage!="nan"?$percentage:"0"; ?>%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -162,7 +162,7 @@ $percentage = cal_percentage($tskcomplate,$totaltask);
 </td>
 
 <td>
-    <a class="btn btn-success" href="index.php?option=COM_INSERT_TRANSACTION_ACTIVITY_SCHEDULE&Rid=<?php echo deocdeId("id:".$value['id']); ?>">  View   </a>
+    <a class="btn btn-success" href="index.php?option=COM_INSERT_TRANSACTION_ACTIVITY_SCHEDULE&Rid=<?php echo deocdeId("id:".$value['id']); ?>">  <?= __('View'); ?>   </a>
 </td>
                                                     </tr>
                                                 <?php } ?>

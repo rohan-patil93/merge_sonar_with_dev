@@ -45,17 +45,17 @@ $users = (isset($filter_res['users']) && is_array($filter_res['users'])) ? $filt
 <div class="page-body">
 	<div class="card">
 		<div class="card-header">
-			<h5>Field Work Operations Report</h5>
+			<h5><?= __('Field Work Operations Report'); ?></h5>
 			<div class="card-header-right">
 				<div class="dropdown-primary dropdown open">
-					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="fieldWorkOperationsReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="fieldWorkOperationsReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
 					<div class="dropdown-menu p-0" aria-labelledby="fieldWorkOperationsReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Field%20Work%20Operations%20Report" target="_blank" rel="noopener noreferrer">CSV</a>
+						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Field%20Work%20Operations%20Report" target="_blank" rel="noopener noreferrer"><?= __('CSV'); ?></a>
 					</div>
 				</div>
 				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
 					<i class="icofont icofont-reply" aria-hidden="true"></i>
-					Back
+					<?= __('Back'); ?>
 				</a>
 			</div>
 		</div>
@@ -63,8 +63,8 @@ $users = (isset($filter_res['users']) && is_array($filter_res['users'])) ? $filt
 			<div class="row">
 				<?php if ($admin_type != '3') { ?>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="user_id">Users</label>
-					<select class="form-control js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" style="width:100%" aria-label="Users">
+					<label for="user_id"><?= __('Users'); ?></label>
+					<select class="form-control js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Users'), ENT_QUOTES, 'UTF-8'); ?>">
 						<?php if (!empty($users)) {
 							foreach ($users as $user_row) {
 								$uid = is_array($user_row) ? ($user_row['id'] ?? '') : ($user_row->id ?? '');
@@ -80,24 +80,24 @@ $users = (isset($filter_res['users']) && is_array($filter_res['users'])) ? $filt
 				<?php } ?>
 
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="from_date">From Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
+					<label for="from_date"><?= __('From Date'); ?> <span class="text-danger">*</span></label>
+					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="to_date">To Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
+					<label for="to_date"><?= __('To Date'); ?> <span class="text-danger">*</span></label>
+					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="status">Status</label>
-					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="Status">
-						<option value="Visited">Visited</option>
-						<option value="Pending">Pending</option>
-						<option value="Extra">Extra</option>
+					<label for="status"><?= __('Status'); ?></label>
+					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>">
+						<option value="Visited"><?= __('Visited'); ?></option>
+						<option value="Pending"><?= __('Pending'); ?></option>
+						<option value="Extra"><?= __('Extra'); ?></option>
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="getFieldWorkOperationsReportBtn" aria-label="Search"><span class="visually-hidden">Search</span>&nbsp;</label>
-					<button type="button" class="btn btn-primary form-control" id="getFieldWorkOperationsReportBtn">Search</button>
+					<label for="getFieldWorkOperationsReportBtn" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"><span class="visually-hidden"><?= __('Search'); ?></span>&nbsp;</label>
+					<button type="button" class="btn btn-primary form-control" id="getFieldWorkOperationsReportBtn"><?= __('Search'); ?></button>
 				</div>
 			</div>
 			<div class="row mt-3 custom-scroll" id="Tablecontent" style="height:500px"></div>
@@ -147,7 +147,7 @@ $users = (isset($filter_res['users']) && is_array($filter_res['users'])) ? $filt
 		<?php } ?>
 
 		var statuses = fworFilterIds($("#status").val());
-		var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" alt="Loading..." style="width: 300px;"></div>';
+		var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" alt="<?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?>" style="width: 300px;"></div>';
 		$("#Tablecontent").html(loader);
 
 		$.ajax({
@@ -164,14 +164,14 @@ $users = (isset($filter_res['users']) && is_array($filter_res['users'])) ? $filt
 				$("#Tablecontent").html(response);
 			},
 			error: function () {
-				$("#Tablecontent").html('<div class="col-12"><p class="text-danger mb-0">Unable to load Field Work Operations Report.</p></div>');
+				$("#Tablecontent").html('<div class="col-12"><p class="text-danger mb-0"><?= htmlspecialchars(__('Unable to load Field Work Operations Report.'), ENT_QUOTES, 'UTF-8'); ?></p></div>');
 			}
 		});
 	}
 
 	$(document).ready(function () {
 		$(".js-example-basic-multiple").select2({
-			placeholder: "All",
+			placeholder: <?php echo json_encode(__('All'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 			allowClear: true,
 			width: "100%"
 		});

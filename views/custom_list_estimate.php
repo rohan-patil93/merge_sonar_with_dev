@@ -28,13 +28,13 @@ $itemres = json_decode($item_data, 1);
                     <span class="kt-portlet__head-icon">
                                 <i class="kt-font-brand flaticon-add-circular-button"></i>
                             </span>
-                    <h3 class="card-label">&nbsp; Estimate </h3>
+                    <h3 class="card-label">&nbsp; <?= __('Estimate'); ?> </h3>
                 </div>
                 <div class="card-toolbar">
                     &nbsp;
                         <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                         <i class="ki ki-long-arrow-back icon-xs"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -42,15 +42,15 @@ $itemres = json_decode($item_data, 1);
 
 <div class="form-group row">
     <div class="form-group col-lg-6">
-        <span>Estimate</span>
+        <span><?= __('Estimate'); ?></span>
     <div>
-         <select aria-label="Itemm" class="form-control"  name= "itemm" id="kt_select2_4" onchange="toselectproduct(this.value)">
-            <option value="0"> Select Any Category  </option>
+         <select aria-label="<?= htmlspecialchars(__('Itemm'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  name= "itemm" id="kt_select2_4" onchange="toselectproduct(this.value)">
+            <option value="0"> <?= __('Select Any Category'); ?>  </option>
             <?php foreach ($itemres as $item) {  ?>
             <option <?php if($tab2['item_id'] == $item['id']){ ?>selected <?php
 } ?> value = <?php echo $item['id']; ?>   > <?php echo $item['item_name']; ?>
             <?php } ?>
-            </option> <option value="-1">Other</option>
+            </option> <option value="-1"><?= __('Other'); ?></option>
         </select>
     </div>
 
@@ -63,7 +63,7 @@ $itemres = json_decode($item_data, 1);
     <div class="row">
         <div class="col-lg-6">
             <input type="hidden" name="submit" value="Add">
-            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i>Submit</button>
+            <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i><?= __('Submit'); ?></button>
     </div>
 </div>
 </div>

@@ -176,7 +176,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -193,7 +193,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                             <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample3">
                                 <div class="card">
                                     <div class="card-header p-2 f-w-600" id="headingOne3">
-                                        <div class="card-title" data-bs-toggle="collapse" data-bs-target="#collapseOne3">Form Fields</div>
+                                        <div class="card-title" data-bs-toggle="collapse" data-bs-target="#collapseOne3"><?= __('Form Fields'); ?></div>
                                     </div>
                                     <div id="collapseOne3" class="collapse show" data-parent="#accordionExample3">
                                         <div class="card-body">
@@ -204,7 +204,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                     $list = getListTables();
                                                     ?>
 
-                                                    <select aria-label="Select option" class="form-control tablname_new form-select js-example-basic-single">
+                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control tablname_new form-select js-example-basic-single">
                                                         <option value=""><?= __('Select Table Name') ?></option>
                                                         <?php foreach($list as $result){?>
                                                             <option value="<?php echo $result['Tables_in_hrstaq_demo_2']; ?>" <?php echo $role['application_table_name']==$result['Tables_in_hrstaq_demo_2']?"selected":""; ?>><?php echo ucwords(str_replace("_"," ",($result['Tables_in_hrstaq_demo_2']))); ?></option>
@@ -213,14 +213,14 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                         <option value="-1"><?= __('Create New Table') ?></option>
                                                     <?php } ?>
                                                     </select>
-                                                    <input aria-label="Enter Table Name" class="form-control space tablname mt-3" placeholder="<?= __('Enter Table Name') ?>" name="tablename" type="text" value="<?php echo $role['application_table_name'];?>"  style="display:none"/>
+                                                    <input aria-label="<?= htmlspecialchars(__('Enter Table Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control space tablname mt-3" placeholder="<?= __('Enter Table Name') ?>" name="tablename" type="text" value="<?php echo $role['application_table_name'];?>"  style="display:none"/>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <span  class="col-4 col-form-label"><?= __('Page Title') ?></span>
                                                 <div class="col-8">
-                                                    <input aria-label="Formname" class="form-control formname" name="formname" type="text" value="<?php echo $role['page_title']; ?>" id="" Required/>
+                                                    <input aria-label="<?= htmlspecialchars(__('Formname'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control formname" name="formname" type="text" value="<?php echo $role['page_title']; ?>" id="" Required/>
                                                 </div>
                                             </div>
                                             <div class="accordion accordion-toggle-arrow elementor-design" id="accordionExample5">
@@ -244,12 +244,12 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                         <ul class="nav nav-tabs md-tabs infisuite_tab">
                                                                             <li class="nav-item">
                                                                                 <a class="nav-link active" id="content_<?php echo $m; ?>" data-bs-toggle="tab" href="#content-<?php echo $m; ?>"   >
-                                                                                    <span class="nav-text">Content</span>
+                                                                                    <span class="nav-text"><?= __('Content'); ?></span>
                                                                                 </a>
                                                                             </li>
                                                                             <li class="nav-item">
                                                                                 <a class="nav-link" id="advanced_<?php echo $m; ?>" data-bs-toggle="tab" href="#advanced-<?php echo $m; ?>"  aria-controls="profile" >
-                                                                                    <span class="nav-text">Advanced</span>
+                                                                                    <span class="nav-text"><?= __('Advanced'); ?></span>
                                                                                 </a>
                                                                             </li>
                                                                         </ul>
@@ -260,14 +260,14 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
 
 
                                                                                     <div class="col-6">
-                                                                                        <input aria-label="Input field" class="form-control elementor_fieldname space elementor_fieldname<?php echo $m; ?>" data-id="<?php echo $m; ?>"  type="text" name="fieldname[]" value="<?php echo $key; ?>"  <?php if(isset($_GET['Rid']) || isset($_GET['table'])){ echo "readonly";
+                                                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control elementor_fieldname space elementor_fieldname<?php echo $m; ?>" data-id="<?php echo $m; ?>"  type="text" name="fieldname[]" value="<?php echo $key; ?>"  <?php if(isset($_GET['Rid']) || isset($_GET['table'])){ echo "readonly";
 } ?>/>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
                                                                                     <span  class="col-6 col-form-label "><?= __('Field Type') ?></span>
                                                                                     <div class="col-6">
-                                                                                        <select aria-label="Select option" class=" elementor_fieldtype elementor_fieldtype<?php echo $m; ?> form-select js-example-basic-single" name="elementorfieldtype[]" data-elementory_id="inputbox<?php echo $m; ?>" data-id="<?php echo $m; ?>"  >
+                                                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class=" elementor_fieldtype elementor_fieldtype<?php echo $m; ?> form-select js-example-basic-single" name="elementorfieldtype[]" data-elementory_id="inputbox<?php echo $m; ?>" data-id="<?php echo $m; ?>"  >
                                                                                             <option value="varchar" data-select2-id="42" <?php echo $result['elementorfieldtype']=="varchar"? "selected":""; ?>><?= __('String') ?></option>
                                                                                             <option value="text" <?php echo $result['elementorfieldtype']=="text"? "selected":""; ?>><?= __('Description') ?></option>
                                                                                             <option value="int" <?php echo  $result['elementorfieldtype']=="int"? "selected":""; ?>><?= __('Number') ?></option>
@@ -280,7 +280,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 <div class="form-group row">
                                                                                     <span class="col-6 col-form-label"><?= __('Position') ?></span>
                                                                                     <div class="col-6">
-                                                                                        <input aria-label="Display Postion[]" class="form-control" type="text" name="display_postion[]" value="<?php echo $result['display_postion']; ?>" />
+                                                                                        <input aria-label="<?= htmlspecialchars(__('Display Postion'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" type="text" name="display_postion[]" value="<?php echo $result['display_postion']; ?>" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
@@ -288,7 +288,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                     <div class="col-6">
                                                                                         <span class="switch switch-icon">
                                                                                             <label>
-                                                                                                <input aria-label="Checkbox" type="checkbox" data-id="<?php echo $m; ?>" class="js-switch elementory_labelandinputtype" data-elementory_id="inputbox<?php echo $m; ?>" data-label="inputlabel<?php echo $m; ?>" data-div="divbox<?php echo $m; ?>" <?php echo  $result['labelandinputineline']=="0"? "checked":""; ?>  name="labelandinputineline[<?php echo $m;?>]" />
+                                                                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" data-id="<?php echo $m; ?>" class="js-switch elementory_labelandinputtype" data-elementory_id="inputbox<?php echo $m; ?>" data-label="inputlabel<?php echo $m; ?>" data-div="divbox<?php echo $m; ?>" <?php echo  $result['labelandinputineline']=="0"? "checked":""; ?>  name="labelandinputineline[<?php echo $m;?>]" />
                                                                                                 <span></span>
                                                                                             </label>
                                                                                         </span>
@@ -298,7 +298,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
 <div class="form-group row">
     <span  class="col-6 col-form-label "><?= __('Type') ?></span>
     <div class="col-6">
-        <select aria-label="Elementorytexttype[]" class="form-control elementor_text_box_type form-select js-example-basic-single" onchange="Getinserttype(this.id,this.value)" id="type" name="elementorytexttype[]" data-elementory_id="inputbox<?php echo $m; ?>" data-id="<?php echo $m; ?>"  data-iddd="<?php echo $role['application_table_name']."#".$key; ?>">
+        <select aria-label="<?= htmlspecialchars(__('Elementorytexttype'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control elementor_text_box_type form-select js-example-basic-single" onchange="Getinserttype(this.id,this.value)" id="type" name="elementorytexttype[]" data-elementory_id="inputbox<?php echo $m; ?>" data-id="<?php echo $m; ?>"  data-iddd="<?php echo $role['application_table_name']."#".$key; ?>">
             <?php echo optiontype($result['type'],$filed_array); ?>
         </select>
     </div>
@@ -307,7 +307,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
 <div class="form-group row">
     <span  class="col-6 col-form-label"><?= __('Label') ?></span>
     <div class="col-6">
-        <input aria-label="Input field" class="form-control elementory_lable elementory_lable<?php echo $m; ?>" data-labletext="labletext<?php echo $m; ?>" data-elementory_id="inputlabel<?php echo $m; ?>" data-id="<?php echo $m; ?>"  type="text"  value="<?php echo str_replace("_"," ",$result['lable']);?>" name="elementorylabel[]" />
+        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control elementory_lable elementory_lable<?php echo $m; ?>" data-labletext="labletext<?php echo $m; ?>" data-elementory_id="inputlabel<?php echo $m; ?>" data-id="<?php echo $m; ?>"  type="text"  value="<?php echo str_replace("_"," ",$result['lable']);?>" name="elementorylabel[]" />
     </div>
 </div>
                                                                                 <div class="form-group row">
@@ -315,7 +315,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                     <div class="col-6">
                                                                                         <span class="switch switch-icon">
                                                                                             <label>
-                                                                                                <input aria-label="Checkbox" class="js-switch" type="checkbox"  <?php echo  $result['display_list']=="1"? "checked":""; ?>  name="display[<?php echo $m;?>]" />
+                                                                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="js-switch" type="checkbox"  <?php echo  $result['display_list']=="1"? "checked":""; ?>  name="display[<?php echo $m;?>]" />
 
                                                                                             </label>
                                                                                         </span>
@@ -327,16 +327,16 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                     <div class="col-6">
                                                                                         <span class="switch switch-icon">
                                                                                             <label>
-                                                                                                <input aria-label="Checkbox" type="checkbox" class="display_status js-switch" data-id="<?php echo $m; ?>" <?php echo  $result['insert_display_list']=="1"?"checked":""; ?>  name="insert_display_list[<?php echo $m; ?>]" />
+                                                                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="display_status js-switch" data-id="<?php echo $m; ?>" <?php echo  $result['insert_display_list']=="1"?"checked":""; ?>  name="insert_display_list[<?php echo $m; ?>]" />
                                                                                                 <span></span>
                                                                                             </label>
                                                                                         </span>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
-                                                                                    <span  class="col-6 col-form-label">Accordion</span>
+                                                                                    <span  class="col-6 col-form-label"><?= __('Accordion'); ?></span>
                                                                                     <div class="col-6">
-                                                                                        <select aria-label="Accordion[]" class="form-control form-select js-example-basic-single
+                                                                                        <select aria-label="<?= htmlspecialchars(__('Accordion'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single
                                                                                         " name="accordion[]" >
                                                                                         <option value="N" <?php echo $result['accordion']=="N"? "selected":""; ?>><?= __('Normal') ?></option>
                                                                                         <option value="R" <?php echo $result['accordion']=="R"? "selected":""; ?>><?= __('Right') ?></option>
@@ -345,9 +345,9 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <span  class="col-6 col-form-label">Wizard</span>
+                                                                                <span  class="col-6 col-form-label"><?= __('Wizard'); ?></span>
                                                                                 <div class="col-6">
-                                                                                    <select aria-label="Insert View Wizard[]" class="form-control form-select js-example-basic-single" id="exampleSelect1" name="insert_view_wizard[]">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Insert View Wizard'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" id="exampleSelect1" name="insert_view_wizard[]">
                                                                                         <option value="1" <?php echo $result['insert_view_wizard']=="1"? "selected":""; ?>><?= __('1- Wizard') ?></option>
                                                                                         <option value="2" <?php echo $result['insert_view_wizard']=="2"? "selected":""; ?>><?= __('2- Wizard') ?></option>
                                                                                         <option value="3" <?php echo $result['insert_view_wizard']=="3"? "selected":""; ?>><?= __('3- Wizard') ?></option>
@@ -362,26 +362,26 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <span  class="col-6 col-form-label">Placeholder</span>
+                                                                                <span  class="col-6 col-form-label"><?= __('Placeholder'); ?></span>
                                                                                 <div class="col-6">
-                                                                                    <input aria-label="Input field" class="form-control elementory_placeholder  elementory_placeholder<?php echo $m; ?>" type="text" value="<?php echo $result['elementorplacehilder'];?>" name="elementorplacehilder[]" data-elementory_id="inputbox<?php echo $m; ?>" id=""/>
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control elementory_placeholder  elementory_placeholder<?php echo $m; ?>" type="text" value="<?php echo $result['elementorplacehilder'];?>" name="elementorplacehilder[]" data-elementory_id="inputbox<?php echo $m; ?>" id=""/>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <span class="col-6 col-form-label">Required</span>
+                                                                                <span class="col-6 col-form-label"><?= __('Required'); ?></span>
                                                                                 <div class="col-6">
                                                                                     <span class="switch switch-icon">
                                                                                         <label>
-                                                                                            <input aria-label="Checkbox" type="checkbox" data-requerd= "labletextrequerd<?php echo $m; ?>" data-label="inputlabel<?php echo $m; ?>" data-div="divbox<?php echo $m; ?>" class="js-switch elementory_required" data-elementory_id="inputbox<?php echo $m; ?>" name="elementoryrequerd[<?php echo $m;?>]"  <?php echo $result['mandatory']=="1"? "checked":""; ?>/>
+                                                                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" data-requerd= "labletextrequerd<?php echo $m; ?>" data-label="inputlabel<?php echo $m; ?>" data-div="divbox<?php echo $m; ?>" class="js-switch elementory_required" data-elementory_id="inputbox<?php echo $m; ?>" name="elementoryrequerd[<?php echo $m;?>]"  <?php echo $result['mandatory']=="1"? "checked":""; ?>/>
                                                                                             <span></span>
                                                                                         </label>
                                                                                     </span>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <span  class="col-6 col-form-label">Column Width</span>
+                                                                                <span  class="col-6 col-form-label"><?= __('Column Width'); ?></span>
                                                                                 <div class="col-6">
-                                                                                    <select aria-label="Select option" class="form-control elementory_width form-select js-example-basic-single" data-id="<?php echo $m; ?>" data-elementory_id="divbox<?php echo $m; ?>" name="elementorycolunmwidth[]"  data-select2-id="" tabindex="-1">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control elementory_width form-select js-example-basic-single" data-id="<?php echo $m; ?>" data-elementory_id="divbox<?php echo $m; ?>" name="elementorycolunmwidth[]"  data-select2-id="" tabindex="-1">
                                                                                         <?php echo  optiontype($result['insert_view_width'],$widtharray); ?>
                                                                                     </select>
                                                                                 </div>
@@ -389,10 +389,10 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                         </div>
                                                                         <div class="tab-pane fade" id="advanced-<?php echo $m; ?>" role="tabpanel" aria-labelledby="advanced_1">
                                                                             <div class="form-group row">
-                                                                                <span  class="col-5 col-form-label">Default Value</span>
+                                                                                <span  class="col-5 col-form-label"><?= __('Default Value'); ?></span>
                                                                                 <div class="col-7">
                                                                                     <div class="input-group">
-                                                                                        <input aria-label="Input field" type="text" class="form-control valuesdefoult" data-id="<?php echo $m; ?>" name="valuesdefoult[]" value="<?php echo $result['valuesdefoult']; ?>" placeholder="<?= __('Search for...') ?>">
+                                                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control valuesdefoult" data-id="<?php echo $m; ?>" name="valuesdefoult[]" value="<?php echo $result['valuesdefoult']; ?>" placeholder="<?= __('Search for...') ?>">
                                                                                         <div class="input-group-append">
                                                                                             <button class="btn btn-secondary "  type="button">
                                                                                                 <i class="flaticon-coins"></i></button>
@@ -401,20 +401,20 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
-                                                                                    <span  class="col-5 col-form-label">ID Name</span>
+                                                                                    <span  class="col-5 col-form-label"><?= __('ID Name'); ?></span>
                                                                                     <div class="col-7">
-                                                                                        <input aria-label="Elementoryid[]" class="form-control elementory_id" name="elementoryid[]" type="text" data-elementory_id="inputbox<?php echo $m; ?>" value="<?php echo $result['elementoryid'];?>" id=""/>
+                                                                                        <input aria-label="<?= htmlspecialchars(__('Elementoryid'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control elementory_id" name="elementoryid[]" type="text" data-elementory_id="inputbox<?php echo $m; ?>" value="<?php echo $result['elementoryid'];?>" id=""/>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
                                                                                     <div class="col-12">
-                                                                                        <p class="text-muted font-size-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</p>
+                                                                                        <p class="text-muted font-size-xs"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'); ?></p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
-                                                                                    <span  class="col-5 col-form-label">Shortcode</span>
+                                                                                    <span  class="col-5 col-form-label"><?= __('Shortcode'); ?></span>
                                                                                     <div class="col-7">
-                                                                                        <input aria-label="Input field" class="form-control" type="text" value="" id=""/>
+                                                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="" id=""/>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -424,7 +424,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
 } //}    ?>
                                                                 </div>
                                                                 <div class="col-12 mt-3">
-                                                                    <button type="button" class="btn btn-primary mr-3 addnewfillds"><i class="flaticon2-plus"></i> ADD Item</button>
+                                                                    <button type="button" class="btn btn-primary mr-3 addnewfillds"><i class="flaticon2-plus"></i> <?= __('ADD Item'); ?></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -432,17 +432,17 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                 </div>
                                                 <div class="card">
                                                     <div class="card-header p-2 f-w-600" id="headingThreefileupload3">
-                                                        <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThreefileupload3">File Uploads
+                                                        <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThreefileupload3"><?= __('File Uploads'); ?>
                                                         </div>
                                                     </div>
                                                     <div id="collapseThreefileupload3" class="collapse" data-parent="#accordionExample3">
                                                         <div class="card-body">
                                                             <div class="form-group row">
-                                                                <span class="col-5 col-form-label">File uploading Display</span>
+                                                                <span class="col-5 col-form-label"><?= __('File uploading Display'); ?></span>
                                                                 <div class="col-7">
                                                                     <span class="switch switch-icon">
                                                                         <label>
-                                                                            <input aria-label="Fileuplodingdisplay" type="checkbox"  name="fileuplodingdisplay" class="js-switch fileuplodingdisplay" onclick="fileuploadingcheck()"  <?php echo $file_upload['file_upload']=="0"? "checked":""; ?> onkeydown=""> <span></span>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Fileuplodingdisplay'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"  name="fileuplodingdisplay" class="js-switch fileuplodingdisplay" onclick="fileuploadingcheck()"  <?php echo $file_upload['file_upload']=="0"? "checked":""; ?> onkeydown=""> <span></span>
                                                                         </label>
                                                                     </span>
                                                                 </div>
@@ -451,24 +451,24 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                             <div class="form-group row">
                                                                 <span  class="col-5 col-form-label"><?= __('Label') ?></span>
                                                                 <div class="col-7">
-                                                                    <input aria-label="Fileuplodinglabel" class="form-control fileuplodinglablel" type="text" name="fileuplodinglabel"  value="<?php echo $file_upload['fileuplodinglabel']!=""?$file_upload['fileuplodinglabel']:"File Upload"; ?>" />
+                                                                    <input aria-label="<?= htmlspecialchars(__('Fileuplodinglabel'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fileuplodinglablel" type="text" name="fileuplodinglabel"  value="<?php echo $file_upload['fileuplodinglabel']!=""?$file_upload['fileuplodinglabel']:"File Upload"; ?>" />
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <span  class="col-5 col-form-label">Width</span>
+                                                                <span  class="col-5 col-form-label"><?= __('Width'); ?></span>
                                                                 <div class="col-7">
-                                                                    <select aria-label="Fileuplodingwidth" class="form-control fileuplodingwidth form-select js-example-basic-single" name="fileuplodingwidth">
+                                                                    <select aria-label="<?= htmlspecialchars(__('Fileuplodingwidth'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fileuplodingwidth form-select js-example-basic-single" name="fileuplodingwidth">
 
                                                                         <?php echo  optiontype($file_upload['fileuplodingwidth']!=""?$file_upload['fileuplodingwidth']:"6",$widtharray); ?>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row mt-5">
-                                                                <span class="col-5 col-form-label">Delete Files Display</span>
+                                                                <span class="col-5 col-form-label"><?= __('Delete Files Display'); ?></span>
                                                                 <div class="col-7">
                                                                     <span class="switch switch-icon">
                                                                         <label>
-                                                                            <input aria-label="Checkbox" type="checkbox"    <?php if(isset($_GET['Rid']) || isset($_GET['table'])){ echo $file_upload['fileuplodingdeleteddisplay']=="0"? "checked":"";
+                                                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"    <?php if(isset($_GET['Rid']) || isset($_GET['table'])){ echo $file_upload['fileuplodingdeleteddisplay']=="0"? "checked":"";
 }else{ echo "checked";
 } ?>  class="fileuplodingdeleteddisplay js-switch" name="fileuplodingdeleteddisplay" />
                                                                             <span></span>
@@ -477,9 +477,9 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <span  class="col-5 col-form-label">Delete width</span>
+                                                                <span  class="col-5 col-form-label"><?= __('Delete width'); ?></span>
                                                                 <div class="col-7">
-                                                                    <select aria-label="Fileuplodingdleetewidth" class="form-control fileuplodingdleetewidth form-select js-example-basic-single"  name="fileuplodingdleetewidth" >
+                                                                    <select aria-label="<?= htmlspecialchars(__('Fileuplodingdleetewidth'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fileuplodingdleetewidth form-select js-example-basic-single"  name="fileuplodingdleetewidth" >
                                                                         <?php echo optiontype($file_upload['fileuplodingdleetewidth']!=""?$file_upload['fileuplodingdleetewidth']:"6",$widtharray); ?>
                                                                     </select>
                                                                 </div>
@@ -489,7 +489,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                 </div>
                                                 <div class="card">
                                                     <div class="card-header p-2 f-w-600" id="headingTwo3">
-                                                        <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo3">Buttons
+                                                        <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo3"><?= __('Buttons'); ?>
                                                         </div>
                                                     </div>
                                                     <div id="collapseTwo3" class="collapse" data-parent="#accordionExample3">
@@ -509,9 +509,9 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                     <div id="collapseOneebutton<?php echo $k; ?>" class="collapse" data-parent="#accordionExample5" style="">
                                                                         <div class="card-body">
                                                                             <div class="form-group row">
-                                                                                <span  class="col-5 col-form-label">Function Type</span>
+                                                                                <span  class="col-5 col-form-label"><?= __('Function Type'); ?></span>
                                                                                 <div class="col-7">
-                                                                                    <select aria-label="Select option" class="form-control function_type function_type<?php echo $k; ?> form-select js-example-basic-single" data-id="<?php echo $k; ?>" data-select2-id="" name="functiontype[]" tabindex="-1">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control function_type function_type<?php echo $k; ?> form-select js-example-basic-single" data-id="<?php echo $k; ?>" data-select2-id="" name="functiontype[]" tabindex="-1">
                                                                                         <option value="save" <?php echo $row['functiontype']=="2"? "selected":""; ?> ><?= __('save') ?></option>
                                                                                         <option value="saveandcontinue" <?php echo $row['functiontype']=="saveandcontinue"? "selected":""; ?>><?= __('Save & continue') ?></option>
                                                                                         <option value="update" <?php echo $row['functiontype']=="update"? "selected":""; ?> ><?= __('Update') ?></option>
@@ -520,9 +520,9 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <span  class="col-5 col-form-label">Size</span>
+                                                                                <span  class="col-5 col-form-label"><?= __('Size'); ?></span>
                                                                                 <div class="col-7">
-                                                                                    <select aria-label="Select option" class="form-control button_size button_sizes<?php echo $k; ?> form-select js-example-basic-single" id="" data-id="<?php echo $k; ?>" name="buttonsize[]" data-select2-id="" tabindex="-1">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control button_size button_sizes<?php echo $k; ?> form-select js-example-basic-single" id="" data-id="<?php echo $k; ?>" name="buttonsize[]" data-select2-id="" tabindex="-1">
                                                                                         <option value="btn-xs" <?php echo $row['buttonsize']=="btn-xs"? "selected":""; ?>><?= __('Extra Small') ?></option>
                                                                                         <option value="btn-sm" <?php echo $row['buttonsize']=="btn-sm"? "selected":""; ?>><?= __('Small') ?></option>
                                                                                         <option value="" <?php echo $row['buttonsize']==""? "selected":""; ?>><?= __('Medium') ?></option>
@@ -532,16 +532,16 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <span  class="col-5 col-form-label">Column Width</span>
+                                                                                <span  class="col-5 col-form-label"><?= __('Column Width'); ?></span>
                                                                                 <div class="col-7">
-                                                                                    <select aria-label="Select option" class="form-control buttonwidth buttonwidth<?php echo $k; ?> form-select js-example-basic-single" id="" data-id="<?php echo $k; ?>" name="buttonwidth[]" data-select2-id="" tabindex="-1">
+                                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control buttonwidth buttonwidth<?php echo $k; ?> form-select js-example-basic-single" id="" data-id="<?php echo $k; ?>" name="buttonwidth[]" data-select2-id="" tabindex="-1">
                                                                                         <option value="12" <?php echo $row['buttonwidth']=="12"? "selected":""; ?>><?= __('Default') ?></option>
                                                                                         <?php echo  optiontype($row['buttonwidth'],$widtharray); ?>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <span  class="col-5 col-form-label">Button Position</span>
+                                                                                <span  class="col-5 col-form-label"><?= __('Button Position'); ?></span>
 
                                                                                 <input type="hidden"  id="buttonposition<?php echo $k; ?>" name="buttonposition[]" value="<?php echo  $row['buttonwidth']; ?>">
 
@@ -559,83 +559,83 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <span  class="col-5 col-form-label">Button Name</span>
+                                                                                <span  class="col-5 col-form-label"><?= __('Button Name'); ?></span>
                                                                                 <div class="col-7">
-                                                                                    <input aria-label="Input field" class="form-control buttonname buttonname<?php echo $k; ?>" name="buttonname[]" data-id="<?php echo $k; ?>" type="text" value="<?php echo  $row['buttonname']; ?>" id=""/>
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control buttonname buttonname<?php echo $k; ?>" name="buttonname[]" data-id="<?php echo $k; ?>" type="text" value="<?php echo  $row['buttonname']; ?>" id=""/>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <span  class="col-5 col-form-label">Form Class</span>
+                                                                                <span  class="col-5 col-form-label"><?= __('Form Class'); ?></span>
                                                                                 <div class="col-7">
-                                                                                    <input aria-label="Input field" class="form-control button_class button_class<?php echo $k; ?>" name="buttonclass[]" data-id="<?php echo $k; ?>" type="text"  value="<?php echo  $row['buttonclass']; ?>" id=""/>
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control button_class button_class<?php echo $k; ?>" name="buttonclass[]" data-id="<?php echo $k; ?>" type="text"  value="<?php echo  $row['buttonclass']; ?>" id=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div></div></div>
                                                                     <?php } ?>
                                                                 </div>
                                                                 <div class="col-12 mt-3">
-                                                                    <button type="button" class="btn btn-primary mr-3 addnewbutton"><i class="flaticon2-plus"></i> Add Button</button>
+                                                                    <button type="button" class="btn btn-primary mr-3 addnewbutton"><i class="flaticon2-plus"></i> <?= __('Add Button'); ?></button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="card">
                                                             <div class="card-header p-2 f-w-600" id="headingThree3">
-                                                                <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree3">Email
+                                                                <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree3"><?= __('Email'); ?>
                                                                 </div>
                                                             </div>
                                                             <div id="collapseThree3" class="collapse" data-parent="#accordionExample3">
                                                                 <div class="card-body">
                                                                     <div class="form-group row">
-                                                                        <span  class="col-4 col-form-label">To</span>
+                                                                        <span  class="col-4 col-form-label"><?= __('To'); ?></span>
                                                                         <div class="col-8">
-                                                                            <input aria-label="Input field" class="form-control" type="text" value="abc@gmail.com" id=""/>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="abc@gmail.com" id=""/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <span  class="col-4 col-form-label">Subject</span>
+                                                                        <span  class="col-4 col-form-label"><?= __('Subject'); ?></span>
                                                                         <div class="col-8">
-                                                                            <input aria-label="Input field" class="form-control" type="text" value="Hi this is text" id=""/>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="Hi this is text" id=""/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <span  class="col-4 col-form-label">Mesage</span>
+                                                                        <span  class="col-4 col-form-label"><?= __('Mesage'); ?></span>
                                                                         <div class="col-8">
-                                                                            <textarea aria-label="Text area" class="form-control" id="" rows="3" style="height: 76px;"></textarea>
+                                                                            <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="" rows="3" style="height: 76px;"></textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <div class="col-12">
-                                                                            <p class="text-muted font-size-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                                                            <p class="text-muted font-size-xs"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s'); ?></p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <span  class="col-4 col-form-label">From Email</span>
+                                                                        <span  class="col-4 col-form-label"><?= __('From Email'); ?></span>
                                                                         <div class="col-8">
-                                                                            <input aria-label="Input field" class="form-control" type="text" value="abc@gmail.com" id=""/>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="abc@gmail.com" id=""/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <span  class="col-4 col-form-label">From Name</span>
+                                                                        <span  class="col-4 col-form-label"><?= __('From Name'); ?></span>
                                                                         <div class="col-8">
-                                                                            <input aria-label="Input field" class="form-control" type="text" value="Infisuite" id=""/>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="Infisuite" id=""/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <span  class="col-4 col-form-label">Reply-To</span>
+                                                                        <span  class="col-4 col-form-label"><?= __('Reply-To'); ?></span>
                                                                         <div class="col-8">
-                                                                            <input aria-label="Input field" class="form-control" type="text" value="abc@gmail.com" id=""/>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="abc@gmail.com" id=""/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <span  class="col-4 col-form-label">Cc</span>
+                                                                        <span  class="col-4 col-form-label"><?= __('Cc'); ?></span>
                                                                         <div class="col-8">
-                                                                            <input aria-label="Input field" class="form-control" type="text" value="" id=""/>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="" id=""/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <span  class="col-4 col-form-label">Bcc</span>
+                                                                        <span  class="col-4 col-form-label"><?= __('Bcc'); ?></span>
                                                                         <div class="col-8">
-                                                                            <input aria-label="Input field" class="form-control" type="text" value="abc@gmail.com" id=""/>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="abc@gmail.com" id=""/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -643,7 +643,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                         </div>
                                                         <div class="card">
                                                             <div class="card-header p-2 f-w-600" id="headingThree4">
-                                                                <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour3">Steps Settings
+                                                                <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour3"><?= __('Steps Settings'); ?>
                                                                 </div>
                                                             </div>
                                                             <div id="collapseFour3" class="collapse" data-parent="#accordionExample3">
@@ -651,7 +651,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                     <div class="form-group row">
                                                                         <span  class="col-5 col-form-label"><?= __('Type') ?></span>
                                                                         <div class="col-7">
-                                                                            <select aria-label="Param" class="form-control form-select js-example-basic-single" id="" name="param" data-select2-id="" >
+                                                                            <select aria-label="<?= htmlspecialchars(__('Param'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="" name="param" data-select2-id="" >
                                                                                 <option value="" data-select2-id=""><?= __('Number & Text') ?></option>
                                                                                 <option value="" data-select2-id=""><?= __('None') ?></option>
                                                                                 <option value="" data-select2-id=""><?= __('Text') ?></option>
@@ -664,9 +664,9 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <span  class="col-5 col-form-label">Shape</span>
+                                                                        <span  class="col-5 col-form-label"><?= __('Shape'); ?></span>
                                                                         <div class="col-7">
-                                                                            <select aria-label="Param" class="form-control form-select js-example-basic-single"  id="" name="param" data-select2-id="" tabindex="-1">
+                                                                            <select aria-label="<?= htmlspecialchars(__('Param'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single"  id="" name="param" data-select2-id="" tabindex="-1">
                                                                                 <option value="" data-select2-id=""><?= __('Circle') ?></option>
                                                                                 <option value="" data-select2-id=""><?= __('Square') ?></option>
                                                                                 <option value="" data-select2-id=""><?= __('Rounded') ?></option>
@@ -679,28 +679,28 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                         </div>
                                                         <div class="card">
                                                             <div class="card-header p-2 f-w-600" id="headingThree5">
-                                                                <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive5">Additional Options
+                                                                <div class="card-title collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive5"><?= __('Additional Options'); ?>
                                                                 </div>
                                                             </div>
                                                             <div id="collapseFive5" class="collapse" data-parent="#accordionExample3">
                                                                 <div class="card-body">
                                                                     <div class="form-group row">
-                                                                        <span  class="col-4 col-form-label">Form ID</span>
+                                                                        <span  class="col-4 col-form-label"><?= __('Form ID'); ?></span>
                                                                         <div class="col-8">
-                                                                            <input aria-label="Input field" class="form-control" type="text" value="new_form_id" id=""/>
+                                                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="new_form_id" id=""/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <div class="col-12">
-                                                                            <p class="text-muted font-size-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                                                            <p class="text-muted font-size-xs"><?= __('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s'); ?></p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <span class="col-6 col-form-label">Custom Message</span>
+                                                                        <span class="col-6 col-form-label"><?= __('Custom Message'); ?></span>
                                                                         <div class="col-6">
                                                                             <span class="switch switch-icon">
                                                                                 <label>
-                                                                                    <input aria-label="Checkbox" type="checkbox" name="" />
+                                                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="" />
                                                                                     <span></span>
                                                                                 </label>
                                                                             </span>
@@ -746,13 +746,13 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                                                             <div class="dropzone dropzone-default dropzone-primary digits" id="kt_dropzone_2">
                                                                                                 <div class="dropzone-msg dz-message needsclick">
                                                                                                     <h3 class="dropzone-msg-title"><?= __('Drop files here or click to upload.') ?></h3>
-                                                                                                    <span class="dropzone-msg-desc">Upload up to 10 files</span>
+                                                                                                    <span class="dropzone-msg-desc"><?= __('Upload up to 10 files'); ?></span>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-<?php echo $file_upload['fileuplodingdleetewidth']; ?> fileuploaddeleteui" style="<?php echo  $file_upload['fileuplodingdeleteddisplay']==0?'display: block':'display: none'; ?>" id="fileuploaddeleteuiid">
-                                                                                        <span class="textcapital">Delete list</span>
+                                                                                        <span class="textcapital"><?= __('Delete list'); ?></span>
                                                                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                                                                             <div class="dropzone dropzone-default dropzone-primary digits" id="kt_dropzone_2_2"></div>
                                                                                         </div>
@@ -790,7 +790,7 @@ if((isset($_GET['table']) && $_GET['table'] !='') || $_GET['Rid']){
                                                         <div class="row">
                                                             <div class="col-lg-10"></div>
                                                             <input type="hidden" name="option" value="COM_AUTO_UI_DESIGNING">
-                                                            <button type="submit" class="btn btn-primary mr-2 col-lg-2" name="submit" value="submit" ><i class="la la-check">    </i>Save Atrributes</button>
+                                                            <button type="submit" class="btn btn-primary mr-2 col-lg-2" name="submit" value="submit" ><i class="la la-check">    </i><?= __('Save Atrributes'); ?></button>
                                                         </div>
                                                     </div>
                                                 </div>

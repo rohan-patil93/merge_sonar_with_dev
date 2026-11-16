@@ -28,16 +28,16 @@ $statuse = ViewStatusData();
 ?>
 <div class="card">
     <div class="card-header">
-        <h5>Sales Register Report</h5>
+        <h5><?= __('Sales Register Report'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=SalesRegister&format=csv" target="_blank">CSV</a>
+                        href="custom_view_download.php?page=SalesRegister&format=csv" target="_blank"><?= __('CSV'); ?></a>
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=SalesRegister&format=excel" target="_blank">Excel</a>
+                        href="custom_view_download.php?page=SalesRegister&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -50,27 +50,27 @@ $statuse = ViewStatusData();
     <table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" id="sales_register_table">
         <thead>
             <tr>
-                <th scope="col">Sno</th>
-                <th scope="col">Date</th>
-                <th scope="col">Document No</th>
-                <th scope="col">PO No</th>
-                <th scope="col">PO Date</th>
-                <th scope="col">Party Name</th>
-                <th scope="col">SKU Code</th>
-                <th scope="col">HSN/SAC</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col" class="text-right">Quantity</th>
-                <th scope="col">Units</th>
-                <th scope="col" class="text-right">Rate</th>
-                <th scope="col" class="text-right">Gross</th>
-                <th scope="col" class="text-right">Discount</th>
-                <th scope="col" class="text-right">Taxable Amt.</th>
-                <th scope="col" class="text-right">Taxable Value</th>
-                <th scope="col" class="text-right">SGST</th>
-                <th scope="col" class="text-right">CGST</th>
-                <th scope="col" class="text-right">IGST</th>
-                <th scope="col" class="text-right">Net</th>
+                <th scope="col"><?= __('Sno'); ?></th>
+                <th scope="col"><?= __('Date'); ?></th>
+                <th scope="col"><?= __('Document No'); ?></th>
+                <th scope="col"><?= __('PO No'); ?></th>
+                <th scope="col"><?= __('PO Date'); ?></th>
+                <th scope="col"><?= __('Party Name'); ?></th>
+                <th scope="col"><?= __('SKU Code'); ?></th>
+                <th scope="col"><?= __('HSN/SAC'); ?></th>
+                <th scope="col"><?= __('Name'); ?></th>
+                <th scope="col"><?= __('Description'); ?></th>
+                <th scope="col" class="text-right"><?= __('Quantity'); ?></th>
+                <th scope="col"><?= __('Units'); ?></th>
+                <th scope="col" class="text-right"><?= __('Rate'); ?></th>
+                <th scope="col" class="text-right"><?= __('Gross'); ?></th>
+                <th scope="col" class="text-right"><?= __('Discount'); ?></th>
+                <th scope="col" class="text-right"><?= __('Taxable Amt.'); ?></th>
+                <th scope="col" class="text-right"><?= __('Taxable Value'); ?></th>
+                <th scope="col" class="text-right"><?= __('SGST'); ?></th>
+                <th scope="col" class="text-right"><?= __('CGST'); ?></th>
+                <th scope="col" class="text-right"><?= __('IGST'); ?></th>
+                <th scope="col" class="text-right"><?= __('Net'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -116,7 +116,7 @@ $statuse = ViewStatusData();
     </table>
     <?php }else{ ?>
         <div class="card-px text-center ">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Invoices</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Invoices'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>

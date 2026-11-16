@@ -78,11 +78,11 @@ if ($rid != '') {
                 <!-- Pradeep HTML Start here -->
                 <div class="card">
                     <div class="card-header">
-                        <h4>Add Product</h4>
+                        <h4><?= __('Add Product'); ?></h4>
                         <div class="card-header-right">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="product_name" value="<?php echo $pm_details['product_name'] ?? ""; ?>" class="form-control" type="text" placeholder="<?= __('Enter Product Name') ?>" aria-label="Enter Product Name">
+                                                <input name="product_name" value="<?php echo $pm_details['product_name'] ?? ""; ?>" class="form-control" type="text" placeholder="<?= __('Enter Product Name') ?>" aria-label="<?= htmlspecialchars(__('Enter Product Name'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -110,7 +110,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <textarea name="product_description" class="form-control" placeholder="Product Description" aria-label="Product Description"> <?php echo $pm_details['product_description'] ?? ""; ?> </textarea>
+                                                <textarea name="product_description" class="form-control" placeholder="<?= htmlspecialchars(__('Product Description'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Product Description'), ENT_QUOTES, 'UTF-8'); ?>"> <?php echo $pm_details['product_description'] ?? ""; ?> </textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -118,7 +118,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="product_part_no" value="<?php echo $pm_details['product_part_no'] ?? ""; ?>" class="form-control" type="text" placeholder="Enter Product Short Code" aria-label="Enter Product Short Code">
+                                                <input name="product_part_no" value="<?php echo $pm_details['product_part_no'] ?? ""; ?>" class="form-control" type="text" placeholder="<?= htmlspecialchars(__('Enter Product Short Code'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Product Short Code'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -127,8 +127,8 @@ if ($rid != '') {
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="hsn_code" class="form-control js-example-basic-single" aria-label="Hsn Code">
-                                                    <option value="0">--Select--</option>
+                                                <select name="hsn_code" class="form-control js-example-basic-single" aria-label="<?= htmlspecialchars(__('Hsn Code'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    <option value="0">--<?= __('Select'); ?>--</option>
                                                     <?php foreach ($ts_details as $ts): ?>
                                                         <option value="<?php echo $ts['id']; ?>" <?php echo $pm_details['hsn_code'] == $ts['id'] ? 'selected' : ''; ?>>
                                                             <?php echo $ts['code']; ?>
@@ -145,7 +145,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="purchase_price" value="<?php echo $pm_details['purchase_price'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= __('Enter Purchase Price') ?>" aria-label="Enter Purchase Price">
+                                                <input name="purchase_price" value="<?php echo $pm_details['purchase_price'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= __('Enter Purchase Price') ?>" aria-label="<?= htmlspecialchars(__('Enter Purchase Price'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -153,7 +153,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="sale_price" value="<?php echo $pm_details['sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= __('Enter Sale Price') ?>" aria-label="Enter Sale Price">
+                                                <input name="sale_price" value="<?php echo $pm_details['sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= __('Enter Sale Price') ?>" aria-label="<?= htmlspecialchars(__('Enter Sale Price'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -161,7 +161,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="mrp" value="<?php echo $pm_details['mrp'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= __('Enter MRP') ?>" aria-label="Enter MRP">
+                                                <input name="mrp" value="<?php echo $pm_details['mrp'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= __('Enter MRP') ?>" aria-label="<?= htmlspecialchars(__('Enter MRP'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -169,8 +169,8 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="primary_unit" class="form-control js-example-basic-single" aria-label="Primary Unit">
-                                                    <option value="0">--Select--</option>
+                                                <select name="primary_unit" class="form-control js-example-basic-single" aria-label="<?= htmlspecialchars(__('Primary Unit'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    <option value="0">--<?= __('Select'); ?>--</option>
                                                     <?php foreach ($units as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['primary_unit'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
                                                             <?php echo htmlspecialchars(__($row['genc_detail_name'] ?? '')); ?>
@@ -185,8 +185,8 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="alternative_unit" class="form-control js-example-basic-single" aria-label="Alternative Unit">
-                                                    <option value="0">--Select--</option>
+                                                <select name="alternative_unit" class="form-control js-example-basic-single" aria-label="<?= htmlspecialchars(__('Alternative Unit'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    <option value="0">--<?= __('Select'); ?>--</option>
                                                     <?php foreach ($units as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['alternative_unit'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
                                                             <?php echo htmlspecialchars(__($row['genc_detail_name'] ?? '')); ?>
@@ -234,8 +234,8 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="manage_stock" class="form-control js-example-basic-single" aria-label="Manage Stock">
-                                                    <option value="0">--Select--</option>
+                                                <select name="manage_stock" class="form-control js-example-basic-single" aria-label="<?= htmlspecialchars(__('Manage Stock'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    <option value="0">--<?= __('Select'); ?>--</option>
                                                     <?php foreach ($manage_stock as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['manage_stock'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
                                                             <?php echo htmlspecialchars(__($row['genc_detail_name'] ?? '')); ?>
@@ -249,8 +249,8 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="item_type" class="form-control js-example-basic-single" aria-label="Item Type">
-                                                    <option value="0">--Select--</option>
+                                                <select name="item_type" class="form-control js-example-basic-single" aria-label="<?= htmlspecialchars(__('Item Type'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    <option value="0">--<?= __('Select'); ?>--</option>
                                                     <?php foreach ($item_type as $row): ?>
                                                         <option value="<?php echo $row['genc_detail_code']; ?>" <?php echo $pm_details['item_type'] == $row['genc_detail_code'] ? 'selected' : ''; ?>>
                                                             <?php echo htmlspecialchars(__($row['genc_detail_name'] ?? '')); ?>
@@ -264,8 +264,8 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="building" id='building' class="form-control js-example-basic-single" onchange="buildingUpdate(this)" data-selected-floor="<?php echo $pm_details['building_floor']; ?>" data-selected-space="<?php echo $pm_details['building_floor_space']; ?>" aria-label="Building">
-                                                    <option value="0">--Select--</option>
+                                                <select name="building" id='building' class="form-control js-example-basic-single" onchange="buildingUpdate(this)" data-selected-floor="<?php echo $pm_details['building_floor']; ?>" data-selected-space="<?php echo $pm_details['building_floor_space']; ?>" aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    <option value="0">--<?= __('Select'); ?>--</option>
                                                     <?php foreach ($buildings as $row): ?>
                                                         <option value="<?php echo $row['id']; ?>" <?php echo $pm_details['building'] == $row['id'] ? 'selected' : ''; ?>>
                                                             <?php echo $row['building_name']; ?>
@@ -279,8 +279,8 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="building_floor" id='building_floor' class="form-control js-example-basic-single" onchange="buildingUpdate(this)" aria-label="Building Floor">
-                                                    <option value="0">--Select--</option>
+                                                <select name="building_floor" id='building_floor' class="form-control js-example-basic-single" onchange="buildingUpdate(this)" aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    <option value="0">--<?= __('Select'); ?>--</option>
 
                                                 </select>
                                             </div>
@@ -290,8 +290,8 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="building_floor_space" id='building_floor_space' class="form-control js-example-basic-single" aria-label="Building Floor Space">
-                                                    <option value="0">--Select--</option>
+                                                <select name="building_floor_space" id='building_floor_space' class="form-control js-example-basic-single" aria-label="<?= htmlspecialchars(__('Building Floor Space'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    <option value="0">--<?= __('Select'); ?>--</option>
 
                                                 </select>
                                             </div>
@@ -301,7 +301,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="image" value="<?php echo $pm_details['image'] ?? ""; ?>" class="form-control" type="file" name="" aria-label="Image">
+                                                <input name="image" value="<?php echo $pm_details['image'] ?? ""; ?>" class="form-control" type="file" name="" aria-label="<?= htmlspecialchars(__('Image'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -309,7 +309,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="min_sale_price" value="<?php echo $pm_details['min_sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="Min Sale Price" aria-label="Min Sale Price">
+                                                <input name="min_sale_price" value="<?php echo $pm_details['min_sale_price'] ?? ""; ?>" class="form-control" type="number" placeholder="<?= htmlspecialchars(__('Min Sale Price'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Min Sale Price'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -317,7 +317,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="bar_code" value="<?php echo $pm_details['bar_code'] ?? ""; ?>" class="form-control" type="text" placeholder="<?= __('Enter Bar Code') ?>" aria-label="Enter Bar Code">
+                                                <input name="bar_code" value="<?php echo $pm_details['bar_code'] ?? ""; ?>" class="form-control" type="text" placeholder="<?= __('Enter Bar Code') ?>" aria-label="<?= htmlspecialchars(__('Enter Bar Code'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -325,7 +325,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="openning_stock_pack" value="<?php echo $pm_details['openning_stock_pack'] ?? ""; ?>" class="form-control" type="number" placeholder="0" aria-label="Openning Stock Pack">
+                                                <input name="openning_stock_pack" value="<?php echo $pm_details['openning_stock_pack'] ?? ""; ?>" class="form-control" type="number" placeholder="0" aria-label="<?= htmlspecialchars(__('Openning Stock Pack'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -333,7 +333,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="openning_stock_loose" value="<?php echo $pm_details['openning_stock_loose'] ?? ""; ?>" class="form-control" type="number" placeholder="0" aria-label="Openning Stock Loose">
+                                                <input name="openning_stock_loose" value="<?php echo $pm_details['openning_stock_loose'] ?? ""; ?>" class="form-control" type="number" placeholder="0" aria-label="<?= htmlspecialchars(__('Openning Stock Loose'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -341,7 +341,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="openning_stock_value" value="<?php echo $pm_details['openning_stock_value'] ?? ""; ?>" class="form-control" type="number" placeholder="0" aria-label="Openning Stock Value">
+                                                <input name="openning_stock_value" value="<?php echo $pm_details['openning_stock_value'] ?? ""; ?>" class="form-control" type="number" placeholder="0" aria-label="<?= htmlspecialchars(__('Openning Stock Value'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -349,7 +349,7 @@ if ($rid != '') {
                                         </div>
                                         <div class="col-lg-6 text-end">
                                             <div class="form-group">
-                                                <input name="batch" value="<?php echo $pm_details['batch'] ?? ""; ?>" class="form-control" type="text" placeholder="Batch" aria-label="Batch">
+                                                <input name="batch" value="<?php echo $pm_details['batch'] ?? ""; ?>" class="form-control" type="text" placeholder="<?= htmlspecialchars(__('Batch'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Batch'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 text-end">
@@ -417,7 +417,7 @@ if ($rid != '') {
 
                     if (table_name === 'building_floors') {
                         const floorSelect = document.getElementById('building_floor');
-                        floorSelect.innerHTML = '<option value="0">--Select--</option>';
+                        floorSelect.innerHTML = '<option value="0">--<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>--</option>';
 
                         response.forEach(function(row) {
                             const option = document.createElement('option');
@@ -440,7 +440,7 @@ if ($rid != '') {
 
                     if (table_name === 'building_floor_spaces') {
                         const spaceSelect = document.getElementById('building_floor_space');
-                        spaceSelect.innerHTML = '<option value="0">--Select--</option>';
+                        spaceSelect.innerHTML = '<option value="0">--<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>--</option>';
 
                         response.forEach(function(row) {
                             const option = document.createElement('option');

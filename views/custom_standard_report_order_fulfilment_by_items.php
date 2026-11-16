@@ -40,14 +40,14 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
             <div class="card-header-right">
                 <div class="dropdown-primary dropdown open">
                     <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                     <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
                         data-dropdown-out="fadeOut" style="">
 
                         <a class="dropdown-item waves-light waves-effect"
-                            href="custom_view_download.php?page=Age Profile" target="_blank">CSV</a>
+                            href="custom_view_download.php?page=Age Profile" target="_blank"><?= __('CSV'); ?></a>
                         <a class="dropdown-item waves-light waves-effect"
-                            href="custom_view_download.php?page=Age Profile" target="_blank">Excel</a>
+                            href="custom_view_download.php?page=Age Profile" target="_blank"><?= __('Excel'); ?></a>
                     </div>
                 </div>
             </div>
@@ -63,12 +63,12 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
             <table class="table table-hover">
                 <tr style="background-color: #eeeeee;">
                     <th scope="col"># </th>
-                    <th scope="col">ITEM NAME </th>
-                    <th scope="col">SKU</th>
-                    <th scope="col" class="text-right">TOTAL ORDERED QTY</th>
-                    <th scope="col" class="text-right">FULFILLED QTY</th>
-                    <th scope="col" class="text-right">BACKORDERED QTY</th>
-                    <th scope="col" class="text-right">FULFILMENT RATE</th>
+                    <th scope="col"><?= __('ITEM NAME'); ?> </th>
+                    <th scope="col"><?= __('SKU'); ?></th>
+                    <th scope="col" class="text-right"><?= __('TOTAL ORDERED QTY'); ?></th>
+                    <th scope="col" class="text-right"><?= __('FULFILLED QTY'); ?></th>
+                    <th scope="col" class="text-right"><?= __('BACKORDERED QTY'); ?></th>
+                    <th scope="col" class="text-right"><?= __('FULFILMENT RATE'); ?></th>
                 </tr>
                 <?php $sl = 1;
                 if (count((array) $data_sales_orders) > 0) {
@@ -103,8 +103,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                     <tr>
                         <td colspan="9">
                             <div class="card-px text-center py-20 m-t-30">
-                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data
-                                    Available</p>
+                                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png"
                                         style="max-height: 300px!important;">

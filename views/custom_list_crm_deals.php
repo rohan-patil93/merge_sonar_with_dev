@@ -35,20 +35,20 @@ foreach($crm_deals_graph as $crmstat){
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Deals <small class="f-12 text-info">(<?php echo fromDate($from_date)." To ".fromDate($to_date); ?>)</small></h5>
+                                <h5><?= __('Deals'); ?> <small class="f-12 text-info">(<?php echo fromDate($from_date)." To ".fromDate($to_date); ?>)</small></h5>
                                 <div class="card-header-right">
-                                    <button type="button" class="btn btn-success mb-2 desktop-view leadsidebar "  onclick="leadPageCall('DEALS')"><i class="icofont icofont-plus icon-white "></i> Deal </button>
+                                    <button type="button" class="btn btn-success mb-2 desktop-view leadsidebar "  onclick="leadPageCall('DEALS')"><i class="icofont icofont-plus icon-white "></i> <?= __('Deal'); ?> </button>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <?php if(count((array)$crm_deals) !=0){ ?>
                                     <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                                         <thead>
-                                            <tr><th scope="col">Deal Name</th>
-                                                <th scope="col">Originator</th>
-                                                <th scope="col">Company</th>
-                                                <th scope="col">Due Date</th>
-                                                <th scope="col">Expected Close Date</th>
+                                            <tr><th scope="col"><?= __('Deal Name'); ?></th>
+                                                <th scope="col"><?= __('Originator'); ?></th>
+                                                <th scope="col"><?= __('Company'); ?></th>
+                                                <th scope="col"><?= __('Due Date'); ?></th>
+                                                <th scope="col"><?= __('Expected Close Date'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,9 +58,9 @@ foreach($crm_deals_graph as $crmstat){
                                                 <td  class="p-2">
                                                     <div class="align-middle">
                                                       <?php if($campaignsres['image']) { ?>
-                                                          <img src="uploads/all/<?php echo $campaignsres['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                          <img src="uploads/all/<?php echo $campaignsres['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                       <?php } else { ?>
-                                                          <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($campaignsres['deal_name']); ?></span>
+                                                          <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($campaignsres['deal_name']); ?></span>
                                                       <?php } ?>
                                                       <div class="d-inline-block width73">
                                                           <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('DEALS','<?php echo $campaignsres['id']; ?>')"><h6><?php echo $campaignsres['deal_name']; ?></h6></button>
@@ -127,9 +127,9 @@ foreach($crm_deals_graph as $crmstat){
                                            <td  class="p-2">
                                             <div class="align-middle">
                                               <?php  if($reocrdarray['3']) { ?>
-                                                  <img src="uploads/all/<?php echo $reocrdarray['3']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                  <img src="uploads/all/<?php echo $reocrdarray['3']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                               <?php } else { ?>
-                                                  <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($reocrdarray['1']); ?></span>
+                                                  <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($reocrdarray['1']); ?></span>
                                               <?php } ?>
                                               <div class="d-inline-block width73">
                                                   <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('DEALS','<?php echo $reocrdarray['0']; ?>')"><h6><?php echo $reocrdarray['1']; ?></h6></button>

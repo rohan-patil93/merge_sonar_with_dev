@@ -20,15 +20,15 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5>Blocked Orders Due to Credit Limit</h5>
+        <h5><?= __('Blocked Orders Due to Credit Limit'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" data-bs-toggle="dropdown">
-                    Export
+                    <?= __('Export'); ?>
                 </button>
                 <div class="dropdown-menu p-0">
-                    <a class="dropdown-item" href="custom_view_download.php?page=BlockedOrdersCredit&format=csv" target="_blank">CSV</a>
-                    <a class="dropdown-item" href="custom_view_download.php?page=BlockedOrdersCredit&format=excel" target="_blank">Excel</a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=BlockedOrdersCredit&format=csv" target="_blank"><?= __('CSV'); ?></a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=BlockedOrdersCredit&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -42,17 +42,17 @@ $_SESSION['download_data'] = [];
         <table class="table table-separate table-head-custom table-checkable data-table">
             <thead>
                 <tr>
-                    <th scope="col">Sl No</th>
-                    <th scope="col">Order No</th>
-                    <th scope="col">Order Date</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col" class="text-right">Credit Limit</th>
-                    <th scope="col" class="text-right">Current Utilization</th>
-                    <th scope="col" class="text-right">Order Value</th>
-                    <th scope="col" class="text-right">New Total</th>
-                    <th scope="col" class="text-right">Available Credit</th>
-                    <th scope="col" class="text-right">Excess Amount</th>
-                    <th scope="col" class="text-right">Utilization % After Order</th>
+                    <th scope="col"><?= __('Sl No'); ?></th>
+                    <th scope="col"><?= __('Order No'); ?></th>
+                    <th scope="col"><?= __('Order Date'); ?></th>
+                    <th scope="col"><?= __('Customer'); ?></th>
+                    <th scope="col" class="text-right"><?= __('Credit Limit'); ?></th>
+                    <th scope="col" class="text-right"><?= __('Current Utilization'); ?></th>
+                    <th scope="col" class="text-right"><?= __('Order Value'); ?></th>
+                    <th scope="col" class="text-right"><?= __('New Total'); ?></th>
+                    <th scope="col" class="text-right"><?= __('Available Credit'); ?></th>
+                    <th scope="col" class="text-right"><?= __('Excess Amount'); ?></th>
+                    <th scope="col" class="text-right"><?= __('Utilization % After Order'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -95,7 +95,7 @@ $_SESSION['download_data'] = [];
         </table>
         <?php } else { ?>
             <div class="text-center py-4">
-                <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Records Found</p>
+                <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No Records Found'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

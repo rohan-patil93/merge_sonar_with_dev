@@ -3,14 +3,14 @@
 <div class="card-custom">
     <div class="card-header">
       <div class="card-title">
-        <h5 class="card-label">Employee Attendance</h5>
+        <h5 class="card-label"><?= __('Employee Attendance'); ?></h5>
       </div>
       <div class="card-toolbar card-header-right">
         <?php if(count((array)$res_team)>0){ ?>
         <a href="index.php?option=COM_LIST_NEW_EMPLOYEE&NI=<?php echo $_GET['NI']; ?>" class="nav-link d-inline-block" <?php if($_GET['TEAM']!=1){  ?> style="border-bottom: 1px solid #3699FF;" <?php
-} ?>> <span class="nav-icon"><i class="flaticon2-user"></i></span>&nbsp;Attendance</a>
+} ?>> <span class="nav-icon"><i class="flaticon2-user"></i></span>&nbsp;<?= __('Attendance'); ?></a>
         <a href="index.php?option=COM_LIST_NEW_EMPLOYEE&NI=<?php echo $_GET['NI']; ?>&TEAM=1"  class="nav-link d-inline-block"  <?php if($_GET['TEAM']==1){  ?> style="border-bottom: 1px solid #3699FF;" <?php
-} ?>> <span class="nav-icon"><i class="flaticon-network"></i></span>&nbsp;Team Attendance</a>
+} ?>> <span class="nav-icon"><i class="flaticon-network"></i></span>&nbsp;<?= __('Team Attendance'); ?></a>
       <?php } ?>
         <?php if($_GET['TEAM']==1){ ?>
           <input type="hidden" name="calendar_cat" id="calendar_cat" value="51">

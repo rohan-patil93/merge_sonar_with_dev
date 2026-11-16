@@ -21,16 +21,16 @@ foreach ($gc_details as $row) {
 <!-- Pradeep HTML Start here -->
 <div class="card">
     <div class="card-header">
-        <h4>AMC Check List</h4>
+        <h4><?= __('AMC Check List'); ?></h4>
     </div>
     <div class="card-body">
         <div class="row g-2">
             <!-- Product -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Product <span class="text-danger">*</span></span>
-                    <select aria-label="Product" name="product_id" class="form-control js-example-basic-single" required>
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?= __('Product'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?= htmlspecialchars(__('Product'), ENT_QUOTES, 'UTF-8'); ?>" name="product_id" class="form-control js-example-basic-single" required>
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach ($products as $p) { ?>
                             <option value="<?php echo $p['id']; ?>" >
                                 <?php echo htmlspecialchars($p['product_name']); ?>
@@ -41,9 +41,9 @@ foreach ($gc_details as $row) {
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Service Name</span>
-                    <select aria-label="Account Group" name="account_group_id" class="form-control js-example-basic-single" id="selectGroup">
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?= __('Service Name'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Account Group'), ENT_QUOTES, 'UTF-8'); ?>" name="account_group_id" class="form-control js-example-basic-single" id="selectGroup">
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach ($ag_details as $k => $v) { ?>
                             <option value="<?php echo $k; ?>" >
                                 <?php echo $v; ?>
@@ -55,9 +55,9 @@ foreach ($gc_details as $row) {
             <!-- Customer -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <span class="form-label">Customer </span>
-                    <select aria-label="Customer" name="customer_id" class="form-control js-example-basic-single">
-                        <option value="">Select Any One</option>
+                    <span class="form-label"><?= __('Customer'); ?> </span>
+                    <select aria-label="<?= htmlspecialchars(__('Customer'), ENT_QUOTES, 'UTF-8'); ?>" name="customer_id" class="form-control js-example-basic-single">
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach ($customers as $c) { ?>
                             <option value="<?php echo $c['id']; ?>" >
                                 <?php echo $c['customer_name']; ?>
@@ -68,10 +68,10 @@ foreach ($gc_details as $row) {
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <span class="form-label">Building Name</span>
-                    <select aria-label="Building" name="building_id" class="form-control js-example-basic-single"
+                    <span class="form-label"><?= __('Building Name'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>" name="building_id" class="form-control js-example-basic-single"
                         id="selectBuilding" onchange="updateFloors(this)">
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One'); ?></option>
                         <?php foreach ($buildings as $row) { ?>
                             <option value="<?php echo $row['id']; ?>">
                                 <?php echo $row['building_name']; ?>
@@ -84,10 +84,10 @@ foreach ($gc_details as $row) {
             <!-- Floor Dropdown -->
             <div class="col-md-3">
                 <div class="form-group">
-                    <span class="form-label">Floor </span>
-                    <select aria-label="Building Floor" name="building_floor_id" class="form-control js-example-basic-single"
+                    <span class="form-label"><?= __('Floor'); ?> </span>
+                    <select aria-label="<?= htmlspecialchars(__('Building Floor'), ENT_QUOTES, 'UTF-8'); ?>" name="building_floor_id" class="form-control js-example-basic-single"
                         id="selectFloor" onchange="updateFloorSpaces(this)" disabled>
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One'); ?></option>
                     </select>
                 </div>
             </div>
@@ -95,33 +95,33 @@ foreach ($gc_details as $row) {
             <!-- Floor Spaces Dropdown -->
             <div class="col-md-3">
                 <div class="form-group">
-                    <span class="form-label">Floor Space </span>
-                    <select aria-label="Building Floor Space" name="building_floor_space_id" class="form-control js-example-basic-single"
+                    <span class="form-label"><?= __('Floor Space'); ?> </span>
+                    <select aria-label="<?= htmlspecialchars(__('Building Floor Space'), ENT_QUOTES, 'UTF-8'); ?>" name="building_floor_space_id" class="form-control js-example-basic-single"
                         id="selectFloorSpace" disabled>
-                        <option value="">Select Any One</option>
+                        <option value=""><?= __('Select Any One'); ?></option>
                     </select>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <span class="form-label">Date </span>
-                    <input aria-label="Activation Date" type="date" name="activation_date" id="activationDate" class="form-control"
+                    <span class="form-label"><?= __('Date'); ?> </span>
+                    <input aria-label="<?= htmlspecialchars(__('Activation Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="activation_date" id="activationDate" class="form-control"
                         value="<?php echo date('Y-m-d'); ?>" />
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary mt-3" onclick="loadCheckListData()">Search</button>
+        <button type="button" class="btn btn-primary mt-3" onclick="loadCheckListData()"><?= __('Search'); ?></button>
     </div>
 </div>
 
-<div id="checkListTable"> Please Select At Least One Filter </div>
+<div id="checkListTable"> <?= __('Please Select At Least One Filter'); ?> </div>
 
 <script>
     function updateFloors(sel) {
         const floorSel = $('#selectFloor');
         const spaceSel = $('#selectFloorSpace');
-        floorSel.empty().append('<option value="">Select Any One</option>').prop('disabled', true);
-        spaceSel.empty().append('<option value="">Select Any One</option>').prop('disabled', true);
+        floorSel.empty().append('<option value=""><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option>').prop('disabled', true);
+        spaceSel.empty().append('<option value=""><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option>').prop('disabled', true);
         if (!sel.value) return;
 
         $.ajax({
@@ -151,7 +151,7 @@ foreach ($gc_details as $row) {
 
     function updateFloorSpaces(sel, fromEdit = false) {
         const spaceSel = $('#selectFloorSpace');
-        spaceSel.empty().append('<option value="">Select Any One</option>').prop('disabled', true);
+        spaceSel.empty().append('<option value=""><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option>').prop('disabled', true);
 
         if (!sel.value) return;
 
@@ -192,7 +192,7 @@ foreach ($gc_details as $row) {
         const buildingFloorId = $('select[name="building_floor_id"]').val();
         const buildingFloorSpaceId = $('select[name="building_floor_space_id"]').val();
         const activationDate = $('#activationDate').val();
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#checkListTable").html(loader);
         $.ajax({
             url: 'views/custom_list_amc_check_list_table.php',
@@ -210,7 +210,7 @@ foreach ($gc_details as $row) {
                 $('#checkListTable').html(response);
             },
             error: function(xhr) {
-                alert('Failed to load data');
+                alert(<?php echo json_encode(__('Failed to load data'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
         });
     }

@@ -18,7 +18,7 @@ if($_POST['getajax'] == 'Y'  || $_POST['ajaxpage'] == "Y"){
 </script>
 <div class="card">
     <div class="card-header">
-        <h5>Building</h5>
+        <h5><?= __('Building'); ?></h5>
         <div class="card-header-right">
         </div>
     </div>
@@ -30,9 +30,9 @@ if($_POST['getajax'] == 'Y'  || $_POST['ajaxpage'] == "Y"){
                         <div class="card-block text-center pb-2">
                             <div data-label="100%" class="radial-bar radial-bar-100 radial-bar-lg radial-bar-danger mb-0">
                             <?php if($building['building_image'] !=""){ ?>
-                                <img src="uploads/all/<?php echo $building['building_image']; ?>" alt="User">
+                                <img src="uploads/all/<?php echo $building['building_image']; ?>" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php }else{  ?>
-                                <img src="uploads/all/no-image.jpg" alt="User-">
+                                <img src="uploads/all/no-image.jpg" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>-">
                             <?php } ?>
                             </div>
                             <div class="row" >
@@ -41,8 +41,8 @@ if($_POST['getajax'] == 'Y'  || $_POST['ajaxpage'] == "Y"){
                             </div>
                         </div>
                         <div class="card-footer pt-0">
-                            <a href="index.php?option=COM_INSERT_BUILDINGS&Rid=<?php echo deocdeId("id:".$building['id']); ?>" class="btn btn-primary desktop-view mt-2 float-left" title="Edit Details" target="_blank"><i class="fa fa-edit"></i> Edit Details</a>
-                            <button  type="button" onclick="showPopup('bulding_floors_<?php echo $building['id']; ?>')"class="btn btn-info desktop-view mt-2 float-right" title="View Details"><i class="fa fa-eye"></i> View Details</a>
+                            <a href="index.php?option=COM_INSERT_BUILDINGS&Rid=<?php echo deocdeId("id:".$building['id']); ?>" class="btn btn-primary desktop-view mt-2 float-left" title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" target="_blank"><i class="fa fa-edit"></i> <?= __('Edit Details'); ?></a>
+                            <button  type="button" onclick="showPopup('bulding_floors_<?php echo $building['id']; ?>')"class="btn btn-info desktop-view mt-2 float-right" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i> <?= __('View Details'); ?></a>
                         </div>
                     </div>
                     <div class="custom-popup-open bulding_floors_<?php echo $building['id']; ?> text-start" style="top: 0px; display: none;">
@@ -52,7 +52,7 @@ if($_POST['getajax'] == 'Y'  || $_POST['ajaxpage'] == "Y"){
                                     <a href="index.php?option=COM_INSERT_BUILDING_FLOORS&Rid=<?php echo deocdeId("id:".$bfloor['id']); ?>" target="_blank">
                                         <div class="card" onclick="ShowBuildingFloors('<?php echo $bfloor['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                             <div class="card-body">
-                                                <img src="uploads/building_floors/<?php echo $bfloor['floor_image']; ?>" class="img-100" alt="Attachment Preview">
+                                                <img src="uploads/building_floors/<?php echo $bfloor['floor_image']; ?>" class="img-100" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <span><?php echo $bfloor['floor_name']; ?></span>
                                             </div>
                                         </div>

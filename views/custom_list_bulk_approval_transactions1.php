@@ -58,14 +58,14 @@
 						//$("#ajaxdisplay").html(data);
 					if(data){
 						swal.fire({
-							title: "Record has been Updated successfully ",
-							text: "Do you want to close ? ",
+							title: <?php echo json_encode(__('Record has been Updated successfully').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+							text: <?php echo json_encode(__('Do you want to close ?').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 							type: "success",
 							buttonsStyling: false,
-							confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+							confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
 							confirmButtonClass: "btn btn-danger",
 							showCancelButton: false,
-							cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+							cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
 							cancelButtonClass: "btn btn-default"
 						}).then(function(result) {
 							if (result.value) {
@@ -78,7 +78,7 @@
 				error:function (){}
 			});
 		}else{
-			alert("Please Select At leaset one");
+			alert(<?php echo json_encode(__('Please Select At leaset one'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
 		}
 	}
 	function checkall(){
@@ -150,7 +150,7 @@
 									<path d="M10.875,15.75 C10.6354167,15.75 10.3958333,15.6541667 10.2041667,15.4625 L8.2875,13.5458333 C7.90416667,13.1625 7.90416667,12.5875 8.2875,12.2041667 C8.67083333,11.8208333 9.29375,11.8208333 9.62916667,12.2041667 L10.875,13.45 L14.0375,10.2875 C14.4208333,9.90416667 14.9958333,9.90416667 15.3791667,10.2875 C15.7625,10.6708333 15.7625,11.2458333 15.3791667,11.6291667 L11.5458333,15.4625 C11.3541667,15.6541667 11.1145833,15.75 10.875,15.75 Z" fill="#000000" />
 									<path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000" />
 								</g>
-							</svg> <span class="kt-nav__link-text">My Tasks</span>
+							</svg> <span class="kt-nav__link-text"><?= __('My Tasks'); ?></span>
 							<span class="kt-nav__link-badge">
 								<span class="kt-badge kt-badge--unified-success kt-badge--md kt-badge--rounded kt-badge--boldest">
 									<?php echo $sum_count;?>
@@ -203,16 +203,16 @@
 
 						<!--Begin:: Tasks Nav-->
 						<div class="kt-todo__nav">
-							<a href="custom/apps/todo/tasks.html" class="kt-todo__link kt-todo__link--active">Selected <span class="kt-badge kt-badge--brand kt-badge--square" id="sel">0</span></a>
-							<a href="custom/apps/todo/docs.html" class="kt-todo__link ">Unselected <span class="kt-badge kt-badge--primary kt-badge--square" id="uns" ><?php echo count((array)$list_data); ?></span></a>
-							<a href="custom/apps/todo/files.html" class="kt-todo__link ">Total <span class="kt-badge kt-badge--warning kt-badge--square" id="to"><?php echo count((array)$list_data); ?></span></a>
+							<a href="custom/apps/todo/tasks.html" class="kt-todo__link kt-todo__link--active"><?= __('Selected'); ?> <span class="kt-badge kt-badge--brand kt-badge--square" id="sel">0</span></a>
+							<a href="custom/apps/todo/docs.html" class="kt-todo__link "><?= __('Unselected'); ?> <span class="kt-badge kt-badge--primary kt-badge--square" id="uns" ><?php echo count((array)$list_data); ?></span></a>
+							<a href="custom/apps/todo/files.html" class="kt-todo__link "><?= __('Total'); ?> <span class="kt-badge kt-badge--warning kt-badge--square" id="to"><?php echo count((array)$list_data); ?></span></a>
 						</div>
 
 						<!--End:: Tasks Nav-->
 
 						<!--Begin:: Tasks Users-->
 						<div class="kt-todo__users">
-							<a href="#" class="kt-media kt-media--xs  kt-bg-success kt-margin-l-10" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Add Participants">
+							<a href="#" class="kt-media kt-media--xs  kt-bg-success kt-margin-l-10" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="<?= htmlspecialchars(__('Add Participants'), ENT_QUOTES, 'UTF-8'); ?>">
 								<span><i class="kt-nav__link-icon fa flaticon2-plus kt-font-light"></i></span>
 							</a>
 						</div>
@@ -278,7 +278,7 @@
 											</div>
 											<div class="kt-todo__datetime" data-toggle="view">
 												<?php $days = dateDiffInDays($list['request_date']);
-													if($days == 0){ echo "To day";
+													if($days == 0){ echo __('To day');
 													}
 													elseif($days < 7){ echo $days ." days ago";
 													}

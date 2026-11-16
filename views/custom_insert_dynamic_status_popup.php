@@ -16,18 +16,18 @@ foreach($statuslists as $statuslist){
 
   <div class="modal-header">
       <h5 class="modal-title">
-          <small>&nbsp;&nbsp; <b class="f-w-600">Transaction Type: </b>&nbsp; <?php echo viewtitle($_POST['table_name']); ?> &nbsp;&nbsp;
-              <b class="f-w-600">Status: </b>&nbsp; <?php echo $statuslistlable[$_POST['next_status']];  ?> </small>
+          <small>&nbsp;&nbsp; <b class="f-w-600"><?= __('Transaction Type'); ?>: </b>&nbsp; <?php echo viewtitle($_POST['table_name']); ?> &nbsp;&nbsp;
+              <b class="f-w-600"><?= __('Status'); ?>: </b>&nbsp; <?php echo $statuslistlable[$_POST['next_status']];  ?> </small>
           </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
       </div>
       <form action="" method="post" id="dynamic_status_forms">
           <div class="modal-body" >
             <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                 <div class="form-group row">
                     <div class="col-lg-12">
-                        <span class="m-b-5">Comment</span>
-                        <textarea aria-label="Comment" class="form-control" name="comment" id="comment"></textarea>
+                        <span class="m-b-5"><?= __('Comment'); ?></span>
+                        <textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="comment" id="comment"></textarea>
                     </div>
                 </div>
             </div>

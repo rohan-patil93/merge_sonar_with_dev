@@ -89,11 +89,11 @@ $visitPurposes = [
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5><i class="ti-user"></i> Personal Gateway Records</h5>
+            <h5><i class="ti-user"></i> <?= __('Personal Gateway Records'); ?></h5>
             <div class="card-header-right">
                 <a href="index.php?option=COM_INSERT_PERSONAL_GATEWAY" class="btn btn-success mb-2 desktop-view">
                     <i class="icofont icofont-plus icon-white "></i>
-                    Add New Entry
+                    <?= __('Add New Entry'); ?>
                 </a>
             </div>
         </div>
@@ -111,20 +111,20 @@ $visitPurposes = [
                     <thead>
                         <tr style="background-color: #eeeeee;">
                             <th scope="col">#</th>
-                            <th scope="col">Employee Name</th>
-                            <th scope="col">Contact</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Purpose</th>
-                            <th scope="col">Gateway Type</th>
-                            <th scope="col">Vehicle</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Method</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">In Time</th>
-                            <th scope="col">Exit Time</th>
-                            <th scope="col">Duration</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col"><?= __('Employee Name'); ?></th>
+                            <th scope="col"><?= __('Contact'); ?></th>
+                            <th scope="col"><?= __('Email'); ?></th>
+                            <th scope="col"><?= __('Purpose'); ?></th>
+                            <th scope="col"><?= __('Gateway Type'); ?></th>
+                            <th scope="col"><?= __('Vehicle'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Method'); ?></th>
+                            <th scope="col"><?= __('Date'); ?></th>
+                            <th scope="col"><?= __('In Time'); ?></th>
+                            <th scope="col"><?= __('Exit Time'); ?></th>
+                            <th scope="col"><?= __('Duration'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col"><?= __('Actions'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -171,7 +171,7 @@ $visitPurposes = [
                                     <td><?= htmlspecialchars($visitPurposes[$entry['visit_purpose']] ?? ucfirst($entry['visit_purpose'])); ?></td>
                                     <td> <?php
                                     if($entry['gateway_type'] == 1){
-                                        echo "ONE WAY";
+                                        echo __('ONE WAY');
                                     }else{
                                         echo "RETRUN";
                                     }
@@ -181,17 +181,17 @@ $visitPurposes = [
                                     <td>
                                         <?php if ($method_type == 'exit_first'): ?>
                                             <span class="badge badge-danger" style="padding:4px 8px;">
-                                                <i class="ti-export"></i> Exit First
+                                                <i class="ti-export"></i> <?= __('Exit First'); ?>
                                             </span>
                                         <?php else: ?>
                                             <span class="badge badge-success" style="padding:4px 8px;">
-                                                <i class="ti-import"></i> Entry First
+                                                <i class="ti-import"></i> <?= __('Entry First'); ?>
                                             </span>
                                         <?php endif; ?>
                                     </td>
                                     <td><?= !empty($record_date) ? date('d-M-Y', strtotime($record_date)) : '-'; ?></td>
-                                    <td><?= !empty($in_time) ? date('g:i A', strtotime($in_time)) : '<span class="text-muted">Pending</span>'; ?></td>
-                                    <td><?= !empty($out_time) ? date('g:i A', strtotime($out_time)) : '<span class="text-muted">Pending</span>'; ?></td>
+                                    <td><?= !empty($in_time) ? date('g:i A', strtotime($in_time)) : '<span class="text-muted">'.__('Pending').'</span>'; ?></td>
+                                    <td><?= !empty($out_time) ? date('g:i A', strtotime($out_time)) : '<span class="text-muted">'.__('Pending').'</span>'; ?></td>
                                     <td><?= $duration; ?></td>
                                     <td>
                                         <span class="badge" style="background-color: <?= $status_bg; ?>; color: <?= $status_color; ?>; padding:6px 10px; border-radius:6px;">
@@ -200,11 +200,11 @@ $visitPurposes = [
                                     </td>
                                     <td>
                                         <a href="index.php?option=COM_INSERT_PERSONAL_GATEWAY&Rid=<?= deocdeId('id:' . $entry['id']); ?>"
-                                            class="btn btn-sm btn-primary btn-round" title="Edit">
+                                            class="btn btn-sm btn-primary btn-round" title="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <i class="ti-pencil"></i>
                                         </a>
                                         <button type="button" class="btn btn-sm btn-info btn-round print-slip-btn"
-                                            data-entry-id="<?= $entry['id']; ?>" title="Print Slip">
+                                            data-entry-id="<?= $entry['id']; ?>" title="<?= htmlspecialchars(__('Print Slip'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <i class="ti-printer"></i>
                                         </button>
                                         <?php if (!$is_complete): ?>
@@ -226,7 +226,7 @@ $visitPurposes = [
                             <td colspan="14">
                               <div class="card-px text-center py-20 m-t-30">
                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                  <i class="ti-alert text-warning"></i> No Data Available
+                                  <i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?>
                                 </p>
                                 <div class="text-center px-4">
                                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
@@ -248,8 +248,8 @@ $visitPurposes = [
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><i class="ti-printer"></i> Personal Gate Pass</h4>
-                <button type="button" class="close close-print-modal-btn" aria-label="Close">
+                <h4 class="modal-title"><i class="ti-printer"></i> <?= __('Personal Gate Pass'); ?></h4>
+                <button type="button" class="close close-print-modal-btn" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -257,9 +257,9 @@ $visitPurposes = [
                 <!-- Print content will be loaded here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary close-print-modal-btn">Close</button>
+                <button type="button" class="btn btn-secondary close-print-modal-btn"><?= __('Close'); ?></button>
                 <button type="button" class="btn btn-primary print-slip-btn-action">
-                    <i class="ti-printer"></i> Print
+                    <i class="ti-printer"></i> <?= __('Print'); ?>
                 </button>
             </div>
         </div>
@@ -271,8 +271,8 @@ $visitPurposes = [
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="actionModalTitle"><i class="ti-export"></i> Record Out Time</h4>
-                <button type="button" class="close close-exit-modal-btn" aria-label="Close">
+                <h4 class="modal-title" id="actionModalTitle"><i class="ti-export"></i> <?= __('Record Out Time'); ?></h4>
+                <button type="button" class="close close-exit-modal-btn" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -282,31 +282,31 @@ $visitPurposes = [
                     <input type="hidden" name="method_type" id="actionMethodType">
                     <div class="alert alert-info" id="actionAlertInfo">
                         <i class="ti-info-alt"></i>
-                        <span id="actionAlertText">Recording for:</span> <strong id="exitEmployeeName"></strong>
+                        <span id="actionAlertText"><?= __('Recording for'); ?>:</span> <strong id="exitEmployeeName"></strong>
                     </div>
                     <div class="form-group row">
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Date</span>
-                            <input aria-label="Exit Date" type="date" class="form-control" name="exit_date" id="actionDate" value="<?php echo date('Y-m-d'); ?>" readonly>
+                            <span class="form-label"><?= __('Date'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Exit Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="exit_date" id="actionDate" value="<?php echo date('Y-m-d'); ?>" readonly>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Time</span>
-                            <input aria-label="Exit Time" type="time" class="form-control" name="exit_time" id="actionTime" value="<?php echo date('H:i'); ?>" readonly>
+                            <span class="form-label"><?= __('Time'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Exit Time'), ENT_QUOTES, 'UTF-8'); ?>" type="time" class="form-control" name="exit_time" id="actionTime" value="<?php echo date('H:i'); ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group">
-                        <span class="form-label">Notes (Optional)</span>
-                        <textarea aria-label="Any observations or notes..." class="form-control" name="exit_notes" rows="3" placeholder="Any observations or notes..."></textarea>
+                        <span class="form-label"><?= __('Notes (Optional)'); ?></span>
+                        <textarea aria-label="<?= htmlspecialchars(__('Any observations or notes...'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="exit_notes" rows="3" placeholder="<?= htmlspecialchars(__('Any observations or notes...'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                     </div>
                     <div class="form-group">
-                        <span class="form-label">Authorized By</span>
-                        <input aria-label="Name of person authorizing" type="text" class="form-control" name="authorized_by" placeholder="Name of person authorizing" value="<?php echo $_SESSION['display_name']; ?>">
+                        <span class="form-label"><?= __('Authorized By'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Name of person authorizing'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="authorized_by" placeholder="<?= htmlspecialchars(__('Name of person authorizing'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $_SESSION['display_name']; ?>">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect close-exit-modal-btn">Cancel</button>
+                    <button type="button" class="btn btn-default waves-effect close-exit-modal-btn"><?= __('Cancel'); ?></button>
                     <button type="submit" class="btn btn-danger waves-effect waves-light" id="actionSubmitBtn">
-                        <i class="ti-check"></i> <span id="actionSubmitText">Record Out</span>
+                        <i class="ti-check"></i> <span id="actionSubmitText"><?= __('Record Out'); ?></span>
                     </button>
                 </div>
             </form>

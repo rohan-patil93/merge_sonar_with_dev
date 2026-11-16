@@ -22,8 +22,8 @@ $un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log']
 				type: "warning",
 				showCancelButton: true,
 				confirmButtonClass: "btn-danger",
-				confirmButtonText: "Yes",
-				cancelButtonText: "No",
+				confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+				cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 				closeOnConfirm: true,
 				closeOnCancel: true
 			},
@@ -47,8 +47,8 @@ $un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log']
 									type: "success",
 									showCancelButton: false,
 									confirmButtonClass: "btn-danger",
-									confirmButtonText: "Yes",
-									cancelButtonText: "No",
+									confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+									cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 									closeOnConfirm: true,
 									closeOnCancel: true
 								},
@@ -96,13 +96,13 @@ $un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log']
 
 </script>
 <div class="modal-header">
-	<h4 class="modal-title">Un-Lock Tenant</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<h4 class="modal-title"><?= __('Un-Lock Tenant'); ?></h4>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
     <div class="alert alert-danger alert-dismissible">
         <strong class="f-16"><i class="ti-alert "></i></strong> <?php echo ucwords($_SESSION['error_message']['9106']); ?>
-        <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
     <div class="row">
     	<?php /** ?>
@@ -141,11 +141,11 @@ $un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log']
 			<form id="unlocktenantform" method="post">
 				<div class="row">
 					<div class="form-group col-lg-6">
-						<span class="form-label d-inline-block fw-bold">Un-Lock To Date <span class="text-danger">*</span></span>
+						<span class="form-label d-inline-block fw-bold"><?= __('Un-Lock To Date'); ?> <span class="text-danger">*</span></span>
 						<input aria-label="<?= htmlspecialchars(__('Un lock date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="un_lock_date" id="un_lock_date" onchange="GetDateToRentalInvoices()">
 					</div>
 					<div class="form-group col-lg-6">
-						<span class="form-label  d-inline-block fw-bold">Remarks <span class="text-danger">*</span></span>
+						<span class="form-label  d-inline-block fw-bold"><?= __('Remarks'); ?> <span class="text-danger">*</span></span>
 						<textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="remarks" id="remarks"></textarea>
 					</div>
 				</div>
@@ -156,7 +156,7 @@ $un_lock_tenant_log = json_decode($property_tenant_details['un_lock_tenant_log']
 	</div>
 </div>
 <div class="modal-footer" >
-	<span class="text-danger f-w-700" id="popupshowerror" style="display: none">Please fill out all required fields</span>
-	<button type="button" class="btn btn-primary waves-effect waves-light disabled" id="popupsubmtbtn" onclick="submitUnlockTenant()"> Un-Lock Tenant</button>
-	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+	<span class="text-danger f-w-700" id="popupshowerror" style="display: none"><?= __('Please fill out all required fields'); ?></span>
+	<button type="button" class="btn btn-primary waves-effect waves-light disabled" id="popupsubmtbtn" onclick="submitUnlockTenant()"> <?= __('Un-Lock Tenant'); ?></button>
+	<button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 </div>

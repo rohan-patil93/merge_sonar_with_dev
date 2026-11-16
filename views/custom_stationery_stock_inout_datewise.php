@@ -10,20 +10,20 @@ $location_res = $data['location_res'] ?? array();
 ?>
 <div class="card">
     <div class="card-header">
-        <h5>Stationery Stock In/Out Datewise</h5>
+        <h5><?= __('Stationery Stock In/Out Datewise'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
     <div class="card-body">
         <div class="row align-items-end">
             <div class="col-lg-2">
-                <span>Location</span>
-                <select aria-label="Location" class="form-control js-example-basic-single" id="location_id">
-                    <option value="">All Locations</option>
+                <span><?= __('Location'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="location_id">
+                    <option value=""><?= __('All Locations'); ?></option>
                     <?php
                     if(count((array)$location_res) > 0){
                         foreach((array)$location_res as $loc){
@@ -36,8 +36,8 @@ $location_res = $data['location_res'] ?? array();
                 </select>
             </div>
             <div class="col-lg-3">
-                <span>Categories</span>
-                <select aria-label="Category Ids" class="form-control js-example-basic-single" multiple id="category_ids">
+                <span><?= __('Categories'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Category Ids'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" multiple id="category_ids">
                     <?php
                     if(count((array)$category_res) > 0){
                         foreach((array)$category_res as $cat){
@@ -50,15 +50,15 @@ $location_res = $data['location_res'] ?? array();
                 </select>
             </div>
             <div class="col-lg-2">
-                <span>From Date</span>
-                <input aria-label="From Date" type="date" class="form-control" id="from_date" value="<?php echo $from_date; ?>">
+                <span><?= __('From Date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" id="from_date" value="<?php echo $from_date; ?>">
             </div>
             <div class="col-lg-2">
-                <span>To Date</span>
-                <input aria-label="To Date" type="date" class="form-control" id="to_date" value="<?php echo $to_date; ?>">
+                <span><?= __('To Date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" id="to_date" value="<?php echo $to_date; ?>">
             </div>
             <div class="col-lg-2">
-                <button type="button" class="btn btn-primary" id="search_stock_inout_datewise">Search</button>
+                <button type="button" class="btn btn-primary" id="search_stock_inout_datewise"><?= __('Search'); ?></button>
             </div>
         </div>
     </div>

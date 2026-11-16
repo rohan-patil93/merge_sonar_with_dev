@@ -17,15 +17,15 @@ $menus = $result['menu_data'];
             <div class="col-lg-2">
                 <div class="col bg-light-primary ">
                     <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                        <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                        <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                     </span>
                     <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $company_name; ?></span>
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <h4 class="card-label text-center f-w-700 d-block mb-0">Sales By Customer Report</h4>
-                <span class="f-10">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></span>
-                <span class="f-10 d-block">From 17-05-2023 To 17-05-2023</span>
+                <h4 class="card-label text-center f-w-700 d-block mb-0"><?= __('Sales By Customer Report'); ?></h4>
+                <span class="f-10"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></span>
+                <span class="f-10 d-block"><?= __('From 17-05-2023 To 17-05-2023'); ?></span>
 
 
             </div>
@@ -36,17 +36,17 @@ $menus = $result['menu_data'];
             <div class="col-lg-2">
                 <div class="dropdown-primary dropdown open " style="border: 1px solid #c3ffe1; width: 100%;">
                     <button
-                        class="btn dropdown-toggle waves-effect waves-light today-toggle" type="button" id="dropdown-2" data-bs-toggle="dropdown"aria-haspopup="true" aria-expanded="true" style="width: 100%;"> <i class="ti-calendar"></i> Today</button>
+                        class="btn dropdown-toggle waves-effect waves-light today-toggle" type="button" id="dropdown-2" data-bs-toggle="dropdown"aria-haspopup="true" aria-expanded="true" style="width: 100%;"> <i class="ti-calendar"></i> <?= __('Today'); ?></button>
                     <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="width: 100%;">
-                        <a class="dropdown-item waves-light waves-effect active" href="#">Today</a>
-                        <a class="dropdown-item waves-light waves-effect"  href="#">This Week</a>
-                        <a class="dropdown-item waves-light waves-effect"  href="#">This Month</a>
-                        <a class="dropdown-item waves-light waves-effect" href="#">This Year</a>
+                        <a class="dropdown-item waves-light waves-effect active" href="#"><?= __('Today'); ?></a>
+                        <a class="dropdown-item waves-light waves-effect"  href="#"><?= __('This Week'); ?></a>
+                        <a class="dropdown-item waves-light waves-effect"  href="#"><?= __('This Month'); ?></a>
+                        <a class="dropdown-item waves-light waves-effect" href="#"><?= __('This Year'); ?></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item waves-light waves-effect" href="#">Yesterday</a>
-                        <a class="dropdown-item waves-light waves-effect"  href="#">Previous Week</a>
-                        <a class="dropdown-item waves-light waves-effect"  href="#">Previous Month</a>
-                        <a class="dropdown-item waves-light waves-effect" href="#">Previous Year</a>
+                        <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Yesterday'); ?></a>
+                        <a class="dropdown-item waves-light waves-effect"  href="#"><?= __('Previous Week'); ?></a>
+                        <a class="dropdown-item waves-light waves-effect"  href="#"><?= __('Previous Month'); ?></a>
+                        <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Previous Year'); ?></a>
                         <div class="dropdown-divider"></div>
                         <button type="button" class="dropdown-item waves-light waves-effect" !" onclick="slectDateRange('CD')">Custom Date</button>
                     </div>

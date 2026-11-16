@@ -94,7 +94,7 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
 </script>
 <div class="modal-header  ">
     <h5 class="modal-title"> <?= __('Employee') ?></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeInsertEmployees()"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" onclick="closeInsertEmployees()"></button>
 </div>
 <div class="modal-body p-l-50 p-r-50 p-t-50">
     <form id="employee_popup_form">
@@ -105,37 +105,37 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
                     <div class="col-xl-4 form-group" >
                         <span class="form-label d-block"><?= __('Emp Code') ?> <span class="text-danger">*</span></span>
                         <span class="d-block error-message text-danger"></span>
-                        <input aria-label="Emp Code" class="form-control requried_field" type="text" name="emp_code" value="<?php echo $employees_list['emp_code']; ?>"/>
+                        <input aria-label="<?= htmlspecialchars(__('Emp Code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="text" name="emp_code" value="<?php echo $employees_list['emp_code']; ?>"/>
                    </div>
                     <div class="col-xl-4 form-group" >
                         <span class="form-label"><?= __('First Name') ?> <span class="text-danger">*</span></span>
                         <span class="d-block error-message text-danger"></span>
-                        <input aria-label="First Name" class="form-control requried_field" type="text" name="first_name" value="<?php echo $employees_list['first_name']; ?>"/>
+                        <input aria-label="<?= htmlspecialchars(__('First Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="text" name="first_name" value="<?php echo $employees_list['first_name']; ?>"/>
                    </div>
                    <div class="col-xl-4 form-group" >
                         <span class="form-label  d-block"><?= __('Middle Name') ?></span>
-                        <input aria-label="Middle Name" class="form-control" type="text" name="middle_name" value="<?php echo $employees_list['middle_name']; ?>"/>
+                        <input aria-label="<?= htmlspecialchars(__('Middle Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="middle_name" value="<?php echo $employees_list['middle_name']; ?>"/>
                    </div>
                    <div class="col-xl-4 form-group" >
                         <span class="form-label  d-block"><?= __('Last Name') ?> <span class="text-danger">*</span></span>
                         <span class="d-block error-message text-danger"></span>
-                        <input aria-label="Last Name" class="form-control requried_field" type="text" name="last_name" value="<?php echo $employees_list['last_name']; ?>"/>
+                        <input aria-label="<?= htmlspecialchars(__('Last Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="text" name="last_name" value="<?php echo $employees_list['last_name']; ?>"/>
                    </div>
                    <div class="col-xl-4 form-group" >
                         <span class="form-label  d-block"><?= __('Email') ?> <span class="text-danger">*</span></span>
                         <span class="d-block error-message text-danger"></span>
-                        <input aria-label="Email" class="form-control requried_field" type="text" name="email_id" value="<?php echo $employees_list['email_id']; ?>" onblur="getEmployeeEmailIdAlreadyAvailableOrNot(this.value,'<?php echo $emp_id; ?>')"/>
+                        <input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="text" name="email_id" value="<?php echo $employees_list['email_id']; ?>" onblur="getEmployeeEmailIdAlreadyAvailableOrNot(this.value,'<?php echo $emp_id; ?>')"/>
                          <span class="text-danger f-12" id="emailiderror"  style="display:none"><?= __('Email Id Already Register') ?></span>
                    </div>
                    <div class="col-xl-4 form-group" >
                         <span class="form-label  d-block"><?= __('Contact') ?> </span>
 
-                        <input aria-label="Phone" class="form-control" type="text" name="phone" value="<?php echo $employees_list['phone']; ?>"/>
+                        <input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="phone" value="<?php echo $employees_list['phone']; ?>"/>
                    </div>
                    <div class="col-xl-4 form-group w-full" >
                         <span class="form-label  d-block"><?= __('Department') ?> </span>
                         <span class="d-block error-message text-danger"></span>
-                        <select aria-label="Department" class="js-example-basic-single" name="department_id" >
+                        <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="department_id" >
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($departments as $deprt){ ?>
                             <option value="<?php echo $deprt['id']; ?>" <?php echo $deprt['id']==$employees_list['department_id']?"selected":""; ?>><?php echo htmlspecialchars(__($deprt['department_name'] ?? '')); ?></option>
@@ -145,7 +145,7 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
                    <div class="col-xl-4 form-group  w-full" >
                         <span class="form-label  d-block"><?= __('Location') ?> <span class="text-danger">*</span></span>
                         <span class="d-block error-message text-danger"></span>
-                        <select aria-label="Location" class="js-example-basic-single requried_field" name="location_id" >
+                        <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single requried_field" name="location_id" >
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($locations as $loc){ ?>
                             <option value="<?php echo $loc['id']; ?>" <?php echo $loc['id']==$employees_list['location_id']?"selected":""; ?>><?php echo htmlspecialchars(__($loc['location_name'] ?? '')); ?></option>
@@ -154,11 +154,11 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
                    </div>
                     <div class="col-xl-4 form-group  w-full" >
                         <span class="form-label  d-block"><?= __('Address') ?> </span>
-                        <textarea aria-label="Address"  class=" form-control form-control-lg" rows="5" cols="100" name="address"><?php echo $employees_list['address']; ?></textarea>
+                        <textarea aria-label="<?= htmlspecialchars(__('Address'), ENT_QUOTES, 'UTF-8'); ?>"  class=" form-control form-control-lg" rows="5" cols="100" name="address"><?php echo $employees_list['address']; ?></textarea>
                    </div>
                    <div class="col-xl-4 form-group  w-full" >
                         <span class="form-label  d-block"><?= __('Reporting Manager') ?> </span>
-                        <select aria-label="Reporting Manager" class="js-example-basic-single" name="reporting_manager_id" >
+                        <select aria-label="<?= htmlspecialchars(__('Reporting Manager'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="reporting_manager_id" >
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($employees as $empp){?>
                                 <option value="<?php echo $empp['id']; ?>" <?php echo $empp['id']==$employees_list['reporting_manager_id']?"selected":""; ?>><?php echo htmlspecialchars(__($empp['display_name'] ?? '')); ?></option>
@@ -170,7 +170,7 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
 } ?></span>
                         <?php if($_SESSION['working_role_short_code'] =="34"){ ?><span class="d-block error-message text-danger"></span><?php
 } ?>
-                        <select aria-label="Select option" class="js-example-basic-single <?php if($_SESSION['working_role_short_code'] =="34"){ ?>requried_field <?php
+                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single <?php if($_SESSION['working_role_short_code'] =="34"){ ?>requried_field <?php
 } ?>" name="loc_buddy" >
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($location_buddy_employees_list as $empp){ ?>
@@ -180,7 +180,7 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
                    </div>
                    <div class="col-xl-4 form-group  w-full" >
                         <span class="form-label  d-block"><?= __('HR Buddy') ?> </span>
-                        <select aria-label="Hr Buddy" class="js-example-basic-single" name="hr_buddy" >
+                        <select aria-label="<?= htmlspecialchars(__('Hr Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="hr_buddy" >
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($employees as $empp){?>
                                 <option value="<?php echo $empp['id']; ?>" <?php echo $empp['id']==$employees_list['hr_buddy']?"selected":""; ?>><?php echo htmlspecialchars(__($empp['display_name'] ?? '')); ?></option>
@@ -189,7 +189,7 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
                    </div>
                    <div class="col-xl-4 form-group  w-full" >
                         <span class="form-label  d-block"><?= __('Admin Buddy') ?> </span>
-                        <select aria-label="Admin Buddy" class="js-example-basic-single" name="admin_buddy" >
+                        <select aria-label="<?= htmlspecialchars(__('Admin Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="admin_buddy" >
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($employees as $empp){?>
                                 <option value="<?php echo $empp['id']; ?>" <?php echo $empp['id']==$employees_list['admin_buddy']?"selected":""; ?>><?php echo htmlspecialchars(__($empp['display_name'] ?? '')); ?></option>
@@ -198,7 +198,7 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
                    </div>
                    <div class="col-xl-4 form-group  w-full" >
                         <span class="form-label  d-block"><?= __('Finance Buddy') ?> </span>
-                        <select aria-label="Finance Buddy" class="js-example-basic-single" name="finance_buddy" >
+                        <select aria-label="<?= htmlspecialchars(__('Finance Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="finance_buddy" >
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach($employees as $empp){?>
                                 <option value="<?php echo $empp['id']; ?>" <?php echo $empp['id']==$employees_list['finance_buddy']?"selected":""; ?>><?php echo htmlspecialchars(__($empp['display_name'] ?? '')); ?></option>
@@ -207,7 +207,7 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
                    </div>
                    <div class="col-xl-4 form-group  w-full <?php echo $employees_list['is_active'] == "0"?"":"event_disabled"; ?>" >
                         <span class="form-label  d-block"><?= __('Employee Status') ?></span>
-                        <input aria-label="Is Active" type="checkbox" class="js-single-switch" name="is_active" id="employeeInactiveupdate" value="Y" onchange="employeeInactiveupdates()" checked >
+                        <input aria-label="<?= htmlspecialchars(__('Is Active'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-single-switch" name="is_active" id="employeeInactiveupdate" value="Y" onchange="employeeInactiveupdates()" checked >
                         <span id="employeeInactiveupdate_text" class="text-danger d-block"></span>
                     </div>
                </div>
@@ -220,7 +220,7 @@ $employees_list['finance_buddy'] = $employees_list['finance_buddy']!=""?$employe
                             <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                         </label>
                         <input type="file" id="user_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                        <img src="<?php echo "uploads/all/".$employees_list['image'] ; ?>" id="outputuser_image" width="200" alt="User Profile" />
+                        <img src="<?php echo "uploads/all/".$employees_list['image'] ; ?>" id="outputuser_image" width="200" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>" />
                         <input type="hidden" name="old_image" value="<?php echo $employees_list['image'] ;  ?>">
                     </div>
                 </div>

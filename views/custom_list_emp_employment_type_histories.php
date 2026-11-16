@@ -16,12 +16,12 @@ if ($_GET['Rid']) {
 <div class="page-body">
     <div class="card proj-progress-card">
         <div class="card-header">
-            <h5>Customer Billing Summary</h5>
+            <h5><?= __('Customer Billing Summary'); ?></h5>
         </div>
         <div class="card-block">
             <div class="row">
                 <div class="col-md-4 form-group mr-3">
-                    <label for="monthPicker">Select Year-Month:</label>
+                    <label for="monthPicker"><?= __('Select Year-Month'); ?>:</label>
                     <input type="month" id="monthPicker" class="form-control" value="<?= $month ?? date('Y-m') ?>">
                 </div>
             </div>
@@ -43,7 +43,7 @@ if ($_GET['Rid']) {
                 $('#dataTableWrapper').html(response);
             },
             error: function() {
-                $('#dataTableWrapper').html('<tr><td colspan="7" class="text-danger">Error loading data</td></tr>');
+                $('#dataTableWrapper').html('<tr><td colspan="7" class="text-danger"><?= htmlspecialchars(__('Error loading data'), ENT_QUOTES, 'UTF-8'); ?></td></tr>');
             }
         });
     }

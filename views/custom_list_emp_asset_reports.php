@@ -70,14 +70,14 @@ function chnagessttts(){
                 <div class="col-lg-3">
                     <div class="col bg-light-primary ">
                         <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                            <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                         </span>
                         <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $_SESSION['config']['name']; ?></span>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <h4 class="card-label text-center f-w-700">Employee Asset reports
-                     </br><small class="f-10">Name : <?php echo $_SESSION['display_name']; ?> &nbsp;  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small></h4>
+                    <h4 class="card-label text-center f-w-700"><?= __('Employee Asset reports'); ?>
+                     </br><small class="f-10"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> &nbsp;  <?= htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small></h4>
 
                 </div>
 
@@ -92,9 +92,9 @@ function chnagessttts(){
         <table class="table table-separate table-head-custom table-checkable data-table" id="kt_datatable1" >
             <tr>
                 <th scope="col" style="width: 3%;"></th>
-                <th scope="col" style="width: 5%;">SL.NO.</th>
-                <th scope="col" style="width: 13%;">Employee Name</th>
-                <th scope="col" class="text-right" style="width: 7%;">Total Asset</th>
+                <th scope="col" style="width: 5%;"><?= __('SL.NO.'); ?></th>
+                <th scope="col" style="width: 13%;"><?= __('Employee Name'); ?></th>
+                <th scope="col" class="text-right" style="width: 7%;"><?= __('Total Asset'); ?></th>
             </tr>
             <?php $k=1; foreach($empassetarrays as $kyid=> $empassets){
 

@@ -182,7 +182,7 @@ function addrecepitamount(fid){
         }
     }
     function anyChange(){
-        $("#anychangeerror").html('<i class="ti-alert text-warning"></i> Please Re-Submit Payment Details');
+        $("#anychangeerror").html('<i class="ti-alert text-warning"></i> <?= htmlspecialchars(__('Please Re-Submit Payment Details'), ENT_QUOTES, 'UTF-8'); ?>');
         $('#anychange').css({'pointer-events' : 'none', 'opacity' : '0.7'});
     }
 
@@ -260,7 +260,7 @@ function validCalucateamount(i,id,type){
          $("#allocatebtn").prop("disabled",false);
     }else{
         $("#"+id).val(0);
-        swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Amount Due is more than payment amount", "error");
+        swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Amount Due is more than payment amount'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
         receptandtdsamt = parseFloat($('#receipt_'+i).val())+parseFloat($('#tds_receipt_'+i).val());
         $("#total_amount_"+i).text(receptandtdsamt);
         $("#total_amount_input_"+i).val(receptandtdsamt);
@@ -315,7 +315,7 @@ function dynamicCalculations(id){
     var unallocated = unallocat-total;
     if(unallocated < 0){
         $("#"+id).val(0);
-        swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Payment entered is more than un-allocated amount", "error");
+        swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Payment entered is more than un-allocated amount'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
         $("#allocatebtn").prop("disabled",true);
         return true;
     }else{

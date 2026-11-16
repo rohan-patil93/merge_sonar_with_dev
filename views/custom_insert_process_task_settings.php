@@ -134,9 +134,9 @@ $task_for = $display_data['task_for'];
                             ?>
                             <div class="radio radio-inline">
                               <label class="form-label">
-                                <input aria-label="Assign To <?php echo $emptypes['genc_detail_name'] ?? '';?>" type="radio" name="assigned_to" class="d-none showemplist" value="<?php echo $emptypes['genc_detail_code'] ?? '';?>" <?php if(($main_data['assigned_to'] ?? '') == ($emptypes['genc_detail_code'] ?? '')) {?> checked="checked" <?php } ?> />
+                                <input aria-label="Assign To <?php echo __($emptypes['genc_detail_name']) ?? '';?>" type="radio" name="assigned_to" class="d-none showemplist" value="<?php echo $emptypes['genc_detail_code'] ?? '';?>" <?php if(($main_data['assigned_to'] ?? '') == ($emptypes['genc_detail_code'] ?? '')) {?> checked="checked" <?php } ?> />
                                 <i class="helper"></i>
-                                <?php echo $emptypes['genc_detail_name'] ?? '';?>
+                                <?php echo __($emptypes['genc_detail_name']) ?? '';?>
                               </label>
                             </div>
                           <?php } ?>
@@ -162,9 +162,9 @@ $task_for = $display_data['task_for'];
                             ?>
                             <div class="radio radio-inline">
                               <label class="form-label">
-                                <input aria-label="Approval Type <?php echo $emptypes['genc_detail_name'] ?? '';?>" type="radio" name="approval_type" class="d-none showemplist" value="<?php echo $emptypes['genc_detail_code'] ?? '';?>" <?php if(($main_data['approval_type'] ?? '') == ($emptypes['genc_detail_code'] ?? '')) {?> checked="checked" <?php } ?> />
+                                <input aria-label="Approval Type <?php echo __($emptypes['genc_detail_name']) ?? '';?>" type="radio" name="approval_type" class="d-none showemplist" value="<?php echo $emptypes['genc_detail_code'] ?? '';?>" <?php if(($main_data['approval_type'] ?? '') == ($emptypes['genc_detail_code'] ?? '')) {?> checked="checked" <?php } ?> />
                                 <i class="helper"></i>
-                                <?php echo $emptypes['genc_detail_name'] ?? '';?>
+                                <?php echo __($emptypes['genc_detail_name']) ?? '';?>
                               </label>
                             </div>
                           <?php } ?>
@@ -203,7 +203,7 @@ $task_for = $display_data['task_for'];
                                 <option value=""><?php echo __('Select Any One'); ?> </option>
                                 <?php foreach ($processtypedata as $processtype) {  ?>
                                   <option value="<?php echo $processtype['genc_detail_code'];?>" <?php if($main_data['process_type'] == $processtype['genc_detail_code']){ ?>selected <?php
-} ?> ><?php echo $processtype['genc_detail_name'];?></option>
+} ?> ><?php echo __($processtype['genc_detail_name']);?></option>
                                 <?php } ?>
                               </select>
                             </div>
@@ -224,7 +224,7 @@ $task_for = $display_data['task_for'];
                             <div class="radio radio-inline">
                               <label class="form-label">
                                 <input aria-label="<?php echo __('Trigger Date'); ?>" type="radio" name="trigger_date" value="<?php echo $tdt['genc_detail_code'];?>" <?php echo $checked; ?>/>
-                                <i class="helper"></i><?php echo $tdt['genc_detail_name'];?>
+                                <i class="helper"></i><?php echo __($tdt['genc_detail_name']);?>
                               </label>
                             </div>
                             <?php $mk++;
@@ -240,7 +240,7 @@ $task_for = $display_data['task_for'];
                                 <option value=""><?php echo __('Select'); ?></option>
                                 <?php foreach ($period_list as $due) {  ?>
                                   <option value="<?php echo $due['genc_detail_code'];?>" <?php if($main_data['before_or_after'] == $due['genc_detail_code']){ ?>selected <?php
-} ?> ><?php echo $due['genc_detail_name'];?></option>
+} ?> ><?php echo __($due['genc_detail_name']);?></option>
                                 <?php } ?>
                               </select>
                             </div>
@@ -253,7 +253,7 @@ $task_for = $display_data['task_for'];
                               <select aria-label="<?php echo __('Action Frequency'); ?>" name="action_frequency"  style="width:150px;" class="form-control form-select js-example-basic-single">
                                 <?php foreach ($due_list as $due) {    ?>
                                   <option value="<?php echo $due['genc_detail_code'];?>" <?php if($main_data['action_frequency'] == $due['genc_detail_code']){ ?>selected <?php
-} ?> ><?php echo $due['genc_detail_name'];?></option>
+} ?> ><?php echo __($due['genc_detail_name']);?></option>
                                 <?php } ?>
                               </select>
                             </div>

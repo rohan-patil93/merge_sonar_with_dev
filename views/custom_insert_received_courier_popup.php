@@ -99,7 +99,7 @@ $row = $data['rowdata'];
                     <option value=""><?php echo __('Select Any One'); ?></option>
                     <?php foreach($data['deliver_type'] as $deliver_type){ ?>
                         <option <?php if($row['deliver_type']== $deliver_type['genc_detail_code']){ echo __('selected');
-} ?> value="<?php echo $deliver_type['genc_detail_code']; ?>"><?php echo $deliver_type['genc_detail_name']; ?></option>
+} ?> value="<?php echo $deliver_type['genc_detail_code']; ?>"><?php echo __($deliver_type['genc_detail_name']); ?></option>
                     <?php } ?>
                 </select>
         </div>

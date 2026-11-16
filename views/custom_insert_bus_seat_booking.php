@@ -9,7 +9,7 @@
                             <span class="input-group-text addon-style">
                                 <span class=""><i class="ti-time"></i></span>
                             </span>
-                            <input aria-label="Select date" class="form-control" type="date" name="">
+                            <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="">
                         </div>
                     </div>
                     <div class="form-group m-b-15">
@@ -18,7 +18,7 @@
                             <span class="input-group-text addon-style">
                                 <span class=""><i class="ti-location-arrow"></i></span>
                             </span>
-                            <select aria-label="Select option" class="form-control border fill">
+                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border fill">
                                 <option><?= __('Select Point') ?></option>
                                 <option><?= __('Noida') ?></option>
                                 <option><?= __('Delhi') ?></option>
@@ -33,7 +33,7 @@
                             <span class="input-group-text addon-style">
                                 <span class=""><i class="ti-location-pin"></i></span>
                             </span>
-                            <select aria-label="Select option" class="form-control border fill">
+                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control border fill">
                                 <option><?= __('Select Point') ?></option>
                                 <option><?= __('Noida') ?></option>
                                 <option><?= __('Delhi') ?></option>
@@ -46,17 +46,17 @@
                         <span class="col-lg-12 m-b-5"><?= __('Select Gender') ?></span>
                         <div class="form-check form-check-inline">
                             <label class="form-label form-check-label">
-                              <input aria-label="Gender" class="form-check-input" type="radio" name="gender" id="male" value="option1"> <?= __('Male') ?>
+                              <input aria-label="<?= htmlspecialchars(__('Gender'), ENT_QUOTES, 'UTF-8'); ?>" class="form-check-input" type="radio" name="gender" id="male" value="option1"> <?= __('Male') ?>
                           </label>
                       </div>
                       <div class="form-check form-check-inline">
                         <label class="form-label form-check-label">
-                          <input aria-label="Gender" class="form-check-input" type="radio" name="gender" id="female" value="option2"> <?= __('Female') ?>
+                          <input aria-label="<?= htmlspecialchars(__('Gender'), ENT_QUOTES, 'UTF-8'); ?>" class="form-check-input" type="radio" name="gender" id="female" value="option2"> <?= __('Female') ?>
                       </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-label form-check-label">
-                      <input aria-label="Gender" class="form-check-input" type="radio" name="gender" id="other" value="option2"> <?= __('Other') ?>
+                      <input aria-label="<?= htmlspecialchars(__('Gender'), ENT_QUOTES, 'UTF-8'); ?>" class="form-check-input" type="radio" name="gender" id="other" value="option2"> <?= __('Other') ?>
                   </label>
               </div>
               <span class="messages"></span>

@@ -129,7 +129,7 @@ $feedbacks = $result['feedbacks'];
                                 <option value="0"><?php echo __('Select Any One'); ?></option>
                                 <?php foreach ($frequency as  $uom) { ?>
                                     <option <?php if($uom['genc_detail_code'] == $feedbacks['action_frequency']){ ?> selected <?php
-} ?> value="<?php echo $uom['genc_detail_code']; ?>"><?php echo $uom['genc_detail_name']; ?></option>
+} ?> value="<?php echo $uom['genc_detail_code']; ?>"><?php echo __($uom['genc_detail_name']); ?></option>
                                 <?php } ?>
                             </select>
                         </div>

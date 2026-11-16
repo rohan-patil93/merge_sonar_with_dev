@@ -72,19 +72,19 @@ function fworStatusClass($status) {
 <div class="col-12">
 	<div class="fwor-summary">
 		<div class="fwor-chip fwor-chip-planned">
-			<span class="fwor-chip-label">Planned</span>
+			<span class="fwor-chip-label"><?= __('Planned'); ?></span>
 			<span class="fwor-chip-value"><?php echo $planned; ?></span>
 		</div>
 		<div class="fwor-chip fwor-chip-visited">
-			<span class="fwor-chip-label">Visited</span>
+			<span class="fwor-chip-label"><?= __('Visited'); ?></span>
 			<span class="fwor-chip-value"><?php echo $visited; ?></span>
 		</div>
 		<div class="fwor-chip fwor-chip-pending">
-			<span class="fwor-chip-label">Pending</span>
+			<span class="fwor-chip-label"><?= __('Pending'); ?></span>
 			<span class="fwor-chip-value"><?php echo $pending; ?></span>
 		</div>
 		<div class="fwor-chip fwor-chip-extra">
-			<span class="fwor-chip-label">Extra</span>
+			<span class="fwor-chip-label"><?= __('Extra'); ?></span>
 			<span class="fwor-chip-value"><?php echo $extra; ?></span>
 		</div>
 	</div>
@@ -94,17 +94,17 @@ function fworStatusClass($status) {
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col">Sl.No</th>
-				<th scope="col">Date</th>
-				<th scope="col">Time</th>
-				<th scope="col">User</th>
-				<th scope="col">Customer</th>
-				<th scope="col">Contact</th>
-				<th scope="col">Location</th>
-				<th scope="col">Coordinates</th>
-				<th scope="col">Geo Location</th>
-				<th scope="col">Status</th>
-				<th scope="col">Map</th>
+				<th scope="col"><?= __('Sl.No'); ?></th>
+				<th scope="col"><?= __('Date'); ?></th>
+				<th scope="col"><?= __('Time'); ?></th>
+				<th scope="col"><?= __('User'); ?></th>
+				<th scope="col"><?= __('Customer'); ?></th>
+				<th scope="col"><?= __('Contact'); ?></th>
+				<th scope="col"><?= __('Location'); ?></th>
+				<th scope="col"><?= __('Coordinates'); ?></th>
+				<th scope="col"><?= __('Geo Location'); ?></th>
+				<th scope="col"><?= __('Status'); ?></th>
+				<th scope="col"><?= __('Map'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -192,7 +192,7 @@ function fworStatusClass($status) {
 </div>
 <?php } else { ?>
 <div class="card-px text-center py-20 mt-2">
-	<p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Field Work Operations</p>
+	<p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No Field Work Operations'); ?></p>
 	<div class="text-center px-4">
 		<img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
 	</div>

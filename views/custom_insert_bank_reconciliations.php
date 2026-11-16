@@ -67,11 +67,11 @@ $bank_accounts = $result['bank_accounts'];
 </style>
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Bank Reconciliation</h5>
+        <h5 class="mb-0"><?= __('Bank Reconciliation'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light m-r-50">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -80,9 +80,9 @@ $bank_accounts = $result['bank_accounts'];
             <div class="row align-items-center mt-3">
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <span class="form-label">Bank Account</span>
-                        <select aria-label="Select option" class="form-control js-example-basic-single" required>
-                            <option>Select Any one</option>
+                        <span class="form-label"><?= __('Bank Account'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" required>
+                            <option><?= __('Select Any one'); ?></option>
                             <?php foreach($bank_accounts as $ba){ ?>
                             <option value="<?php echo $ba['id']; ?>"><?php echo $ba['account_code']." - ".$ba['bank_account_name']." - ".$ba['bank_account_number']; ?></option>
                             <?php } ?>
@@ -90,17 +90,17 @@ $bank_accounts = $result['bank_accounts'];
                     </div>
                 </div>
                 <div class="col-lg-3 form-group">
-                    <span class="form-label">From Statement Date</span>
-                    <input aria-label="Leave From" type="text" class="form-control rangedatepicker startdatepicker_1" data-id="1" name="leave_from" required/>
+                    <span class="form-label"><?= __('From Statement Date'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Leave From'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control rangedatepicker startdatepicker_1" data-id="1" name="leave_from" required/>
                 </div>
                 <div class="col-lg-3 form-group">
-                    <span class="form-label">To Statement Date</span>
-                    <input aria-label="Leave From" type="text" class="form-control rangedatepicker enddatepicker_1" name="leave_from" required/>
+                    <span class="form-label"><?= __('To Statement Date'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Leave From'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control rangedatepicker enddatepicker_1" name="leave_from" required/>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <span class="form-label">Upload Bank Statement (CSV/XLS)</span>
-                        <input aria-label="Csv File" type="file" name="csv_file" class="form-control" required>
+                        <span class="form-label"><?= __('Upload Bank Statement (CSV/XLS)'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Csv File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="csv_file" class="form-control" required>
                     </div>
                 </div>
             </div>

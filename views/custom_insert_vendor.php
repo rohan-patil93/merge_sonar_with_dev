@@ -65,7 +65,7 @@ $i++;
                                             <div class="flex-shrink-0 m-r-25 mt-lg-0 mt-3">
                                                 <?php if( $data['image']!=""){ ?>
                             <div class="symbol symbol-50 symbol-lg-120">
-                                <img src="<?php echo $dispath; ?>" class="img-120 " alt="Details" />
+                                <img src="<?php echo $dispath; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" />
                             </div>
                         <?php }else{ ?>
                             <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
@@ -112,7 +112,7 @@ $i++;
                                                             <a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
                                                             <i class="ti-location-pin f-14 text-primary"></i><?php echo $data['current_location'];?></a>
                                                         </div>
-                                                        <span class="font-weight-bold text-dark-50"><b>Address: </b><?php echo $data['billing_address']." ".$data['post_code'];?> </span>
+                                                        <span class="font-weight-bold text-dark-50"><b><?= __('Address'); ?>: </b><?php echo $data['billing_address']." ".$data['post_code'];?> </span>
                                                         <span class="font-weight-bold text-dark-50">
 
                                                         </span>
@@ -120,7 +120,7 @@ $i++;
 
                                                     <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
                                                         <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                            <span class="fw-bold f-12 text-gray-400">Profile Compleation</span>
+                                                            <span class="fw-bold f-12 text-gray-400"><?= __('Profile Compleation'); ?></span>
                                                             <span class="fw-bolder f-12"><?php echo $pp; ?>%</span>
                                                         </div>
                                                         <div class="progress progress-xs" style="width:200px;">

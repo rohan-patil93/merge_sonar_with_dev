@@ -174,7 +174,7 @@ if (!empty($announcement['survey_details'])) {
 
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                             <i class="icofont icofont-reply"></i>
-                            Back
+                            <?= __('Back'); ?>
                         </a>
 
                     </div>
@@ -189,7 +189,7 @@ if (!empty($announcement['survey_details'])) {
                                 <div class="row">
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Announcement Category Id') ?></span>
-                                        <select aria-label="Announcement Category" class="form-select js-example-basic-single" id="announcement_category_id" name="announcement_category_id">
+                                        <select aria-label="<?= htmlspecialchars(__('Announcement Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="announcement_category_id" name="announcement_category_id">
                                             <option value="0"><?= __('Select Any one Announcement Category Id') ?></option>
                                             <?php foreach ($announcement_categories as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>"
@@ -204,41 +204,41 @@ if (!empty($announcement['survey_details'])) {
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Announcement Heading') ?>&nbsp;<span class="requried">*</span></span>
-                                        <input aria-label="Announcement Heading" class="form-control" type="text" id="announcement_heading" name="announcement_heading" value="<?php echo htmlspecialchars($announcement['announcement_heading'] ?? ''); ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Announcement Heading'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="announcement_heading" name="announcement_heading" value="<?php echo htmlspecialchars($announcement['announcement_heading'] ?? ''); ?>">
                                         <div style="display: none;color: red;" id="announcement_heading_err"> <?= __('Please enter Announcement Heading') ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Announcement Message') ?>&nbsp;<span class="requried">*</span></span>
                                         <div class="kt-radio-inline">
-                                            <textarea aria-label="Announcement Message" type="text" class="form-control " rows="5" cols="5" id="announcement_message" name="announcement_message"><?php echo htmlspecialchars($announcement['announcement_message'] ?? ''); ?></textarea>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Announcement Message'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control " rows="5" cols="5" id="announcement_message" name="announcement_message"><?php echo htmlspecialchars($announcement['announcement_message'] ?? ''); ?></textarea>
                                         </div>
                                         <div style="display: none;color: red;" id="announcement_message_err"> <?= __('Please Select Announcement Message') ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Image Url') ?>&nbsp;<span class="requried">*</span></span>
-                                        <input aria-label="Image Url" class="form-control" type="file" name="image_url" id="image_url" accept=".png, .jpg, .jpeg" />
+                                        <input aria-label="<?= htmlspecialchars(__('Image Url'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="file" name="image_url" id="image_url" accept=".png, .jpg, .jpeg" />
                                         <?php if (!empty($announcement['image_url'])): ?>
                                             <img src="uploads/all/<?php echo $announcement['image_url']; ?>"
-                                                alt="Saved File" style="max-height:80px; margin-top:5px;">
+                                                alt="<?= htmlspecialchars(__('Saved File'), ENT_QUOTES, 'UTF-8'); ?>" style="max-height:80px; margin-top:5px;">
                                         <?php endif; ?>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Video Url') ?></span>
-                                        <input aria-label="Video Url" class="form-control" type="text" id="video_url" name="video_url" value="<?php echo htmlspecialchars($announcement['video_url'] ?? ''); ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Video Url'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="video_url" name="video_url" value="<?php echo htmlspecialchars($announcement['video_url'] ?? ''); ?>">
                                         <div style="display: none;color: red;" id="video_url_err"> <?= __('Please enter Video Url') ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <span><?= __('Start Date') ?>&nbsp;<span class="requried">*</span></span>
-                                        <input aria-label="Input field" class="form-control datepicker" type="text" value="<?php echo !empty($announcement['start_date']) ? fromDate($announcement['start_date']) : ''; ?>" name="start_date">
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text" value="<?php echo !empty($announcement['start_date']) ? fromDate($announcement['start_date']) : ''; ?>" name="start_date">
                                     </div>
 
                                     <div class="form-group col-lg-3">
                                         <span><?= __('Expiry Date') ?>&nbsp;<span class="requried">*</span></span>
-                                        <input aria-label="Input field" class="form-control datepicker" type="text" value="<?php echo !empty($announcement['expiry_date']) && $announcement['expiry_date'] != '1970-01-01' ? fromDate($announcement['expiry_date']) : ''; ?>" name="expiry_date">
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text" value="<?php echo !empty($announcement['expiry_date']) && $announcement['expiry_date'] != '1970-01-01' ? fromDate($announcement['expiry_date']) : ''; ?>" name="expiry_date">
                                     </div>
                                     <div class="form-group col-lg-6">
 
@@ -257,12 +257,12 @@ if (!empty($announcement['survey_details'])) {
                                         <div class="col-12 col-form-label">
                                            <div class="radio-inline">
                                                <label class="radio radio-success">
-                                                    <input aria-label="Comment Visibility" type="radio" name="comment_visibility" value="Y" <?php if($announcement['comment_visibility']=='Y'){ ?> checked="checked" <?php
+                                                    <input aria-label="<?= htmlspecialchars(__('Comment Visibility'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="comment_visibility" value="Y" <?php if($announcement['comment_visibility']=='Y'){ ?> checked="checked" <?php
 } ?>>
                                                     <span></span><?= __('Public') ?>
                                                 </label>
                                                 <label class="radio radio-success">
-                                                    <input aria-label="Comment Visibility" type="radio" name="comment_visibility" value="N" <?php if($announcement['comment_visibility']=='N'){ ?> checked="checked" <?php
+                                                    <input aria-label="<?= htmlspecialchars(__('Comment Visibility'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="comment_visibility" value="N" <?php if($announcement['comment_visibility']=='N'){ ?> checked="checked" <?php
 } ?>>
                                                     <span></span><?= __('Private') ?>
                                                 </label>
@@ -272,7 +272,7 @@ if (!empty($announcement['survey_details'])) {
                                     <div class="form-group col-lg-6">
 
                                         <div class="form-check form-switch">
-                                            <input aria-label="Enable Survey" class="form-check-input" type="checkbox" id="enable_survey" name="enable_survey" value="1" <?php echo ($announcement['survey_type'] == 'Y') ? 'checked' : ''; ?>>
+                                            <input aria-label="<?= htmlspecialchars(__('Enable Survey'), ENT_QUOTES, 'UTF-8'); ?>" class="form-check-input" type="checkbox" id="enable_survey" name="enable_survey" value="1" <?php echo ($announcement['survey_type'] == 'Y') ? 'checked' : ''; ?>>
                                             <span class="slider round"></span>
                                             <span><?= __('Enable Survey?') ?></span>
                                         </div>
@@ -282,7 +282,7 @@ if (!empty($announcement['survey_details'])) {
                                     <!-- Survey Type Dropdown -->
                                     <div class="form-group col-lg-6 w-full"  id="survey_type_block" style="display:<?php echo ($announcement['survey_type'] == 'Y') ? 'block' : 'none'; ?>;">
                                         <span><?= __('Survey Type') ?></span>
-                                        <select aria-label="Survey Type" class="form-select js-example-basic-single" id="survey_type" name="survey_type">
+                                        <select aria-label="<?= htmlspecialchars(__('Survey Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="survey_type" name="survey_type">
                                             <option value=""><?= __('Select Survey Type') ?></option>
                                             <option value="POLIS" <?php echo ($survey_type_value == 'POLIS') ? 'selected' : ''; ?>><?= __('Polis') ?></option>
                                             <option value="RANKING" <?php echo ($survey_type_value == 'RANKING') ? 'selected' : ''; ?>><?= __('Rating') ?></option>
@@ -293,8 +293,8 @@ if (!empty($announcement['survey_details'])) {
 
                                     <div class="form-group col-lg-6" id="survey_polis_block" style="display:<?php echo ($survey_type_value == 'POLIS') ? 'block' : 'none'; ?>;">
                                         <span><?= __('Polis Options') ?></span>
-                                        <input aria-label="Polis1" type="text" class="form-control mb-2" name="polis1" value="<?php echo $survey_details_decoded['data'][0]['label'] ?? 'YES'; ?>">
-                                        <input aria-label="Polis2" type="text" class="form-control" name="polis2" value="<?php echo $survey_details_decoded['data'][1]['label'] ?? 'NO'; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Polis1'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2" name="polis1" value="<?php echo $survey_details_decoded['data'][0]['label'] ?? 'YES'; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Polis2'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="polis2" value="<?php echo $survey_details_decoded['data'][1]['label'] ?? 'NO'; ?>">
                                     </div>
 
 
@@ -302,10 +302,10 @@ if (!empty($announcement['survey_details'])) {
                                         <span><?= __('Rating Range') ?></span>
                                         <div class="row">
                                             <div class="col-6">
-                                                <input aria-label="Start (e.g. 0)" type="number" class="form-control" name="rating_start" id="rating_start" placeholder="<?= __('Start (e.g. 0)') ?>" value="<?php echo $survey_details_decoded['data']['start'] ?? '0'; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Start (e.g. 0)'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control" name="rating_start" id="rating_start" placeholder="<?= __('Start (e.g. 0)') ?>" value="<?php echo $survey_details_decoded['data']['start'] ?? '0'; ?>">
                                             </div>
                                             <div class="col-6">
-                                                <input aria-label="End (e.g. 10)" type="number" class="form-control" name="rating_end" id="rating_end" placeholder="<?= __('End (e.g. 10)') ?>" value="<?php echo $survey_details_decoded['data']['end'] ?? '10'; ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('End (e.g. 10)'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control" name="rating_end" id="rating_end" placeholder="<?= __('End (e.g. 10)') ?>" value="<?php echo $survey_details_decoded['data']['end'] ?? '10'; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -315,28 +315,28 @@ if (!empty($announcement['survey_details'])) {
                                         <span><?= __('Multi Choices') ?></span>
                                         <?php if ($survey_type_value == 'CHOICES' && !empty($survey_details_decoded['data'])):
                                             foreach ($survey_details_decoded['data'] as $i => $choice): ?>
-                                                <input aria-label="Input field" type="text" class="form-control mb-2" name="multi<?php echo $i + 1; ?>"
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2" name="multi<?php echo $i + 1; ?>"
                                                     value="<?php echo htmlspecialchars($choice['label']); ?>">
                                             <?php endforeach;
                                         else: ?>
-                                            <input aria-label="Option 1" type="text" class="form-control mb-2" name="multi1" placeholder="<?= __('Option 1') ?>" value="">
-                                            <input aria-label="Option 2" type="text" class="form-control mb-2" name="multi2" placeholder="<?= __('Option 2') ?>" value="">
-                                            <input aria-label="Option 3" type="text" class="form-control mb-2" name="multi3" placeholder="<?= __('Option 3') ?>" value="">
-                                            <input aria-label="Option 4" type="text" class="form-control mb-2" name="multi4" placeholder="<?= __('Option 4') ?>" value="">
-                                            <input aria-label="Option 5" type="text" class="form-control mb-2" name="multi5" placeholder="<?= __('Option 5') ?>" value="">
+                                            <input aria-label="<?= htmlspecialchars(__('Option 1'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2" name="multi1" placeholder="<?= __('Option 1') ?>" value="">
+                                            <input aria-label="<?= htmlspecialchars(__('Option 2'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2" name="multi2" placeholder="<?= __('Option 2') ?>" value="">
+                                            <input aria-label="<?= htmlspecialchars(__('Option 3'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2" name="multi3" placeholder="<?= __('Option 3') ?>" value="">
+                                            <input aria-label="<?= htmlspecialchars(__('Option 4'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2" name="multi4" placeholder="<?= __('Option 4') ?>" value="">
+                                            <input aria-label="<?= htmlspecialchars(__('Option 5'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control mb-2" name="multi5" placeholder="<?= __('Option 5') ?>" value="">
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group col-lg-6" id="survey_result_block" style="display:<?php echo ($announcement['survey_result_visibility'] == 'Y') ? 'block' : 'none'; ?>;">
-                                        <span>Survey Result Visibility </span>
+                                        <span><?= __('Survey Result Visibility'); ?> </span>
                                         <div class="col-12 col-form-label">
                                            <div class="radio-inline">
                                                <label class="radio radio-success">
-                                                    <input aria-label="Survey Result Visibility" type="radio" name="survey_result_visibility" value="Y" <?php if($announcement['survey_result_visibility']=='Y'){ ?> checked="checked" <?php
+                                                    <input aria-label="<?= htmlspecialchars(__('Survey Result Visibility'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="survey_result_visibility" value="Y" <?php if($announcement['survey_result_visibility']=='Y'){ ?> checked="checked" <?php
 } ?>>
                                                     <span></span><?= __('Public') ?>
                                                 </label>
                                                 <label class="radio radio-success">
-                                                    <input aria-label="Survey Result Visibility" type="radio" name="survey_result_visibility" value="N" <?php if($announcement['survey_result_visibility']=='N'){ ?> checked="checked" <?php
+                                                    <input aria-label="<?= htmlspecialchars(__('Survey Result Visibility'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="survey_result_visibility" value="N" <?php if($announcement['survey_result_visibility']=='N'){ ?> checked="checked" <?php
 } ?> >
                                                     <span></span><?= __('Private') ?>
                                                 </label>
@@ -351,9 +351,9 @@ if (!empty($announcement['survey_details'])) {
                                             <?php if ($announcement_id != '') { ?>
                                                 <input type="hidden" name="rid" value="<?php echo $announcement['id'] ?? ''; ?>">
                                                 <input type="hidden" name="hid_image" value="<?php echo $announcement['image_url'] ?? ''; ?>">
-                                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile" name="submit_value" value="update"><i class="la la-check-circle"></i>Update </button>
+                                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile" name="submit_value" value="update"><i class="la la-check-circle"></i><?= __('Update'); ?> </button>
                                             <?php } else {   ?>
-                                                <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile" name="submit_value" value="insert"><i class="la la-check-circle"></i>Save </button>
+                                                <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile" name="submit_value" value="insert"><i class="la la-check-circle"></i><?= __('Save'); ?> </button>
                                             <?php  }  ?>
                                         </div>
                                     </div>

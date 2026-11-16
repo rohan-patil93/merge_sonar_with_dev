@@ -304,7 +304,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
 		htmlRows += '<td><select class="form-control fitemRow js-example-basic-single" id="whrfield_'+count+'" name= "whrfield[]" aria-label="Whrfield">'+selectdata+'</select></td>';
 		htmlRows += '<td><select class="form-control form-select js-example-basic-single" id="comparator_'+count+'" name= "comparator[]" aria-label="Comparator"><?php foreach ($comparator_array as $dd) {  ?><option  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?> </select></td>';
 		htmlRows += '<td><input type="text" id="whrvalue_'+count+'" name="whrvalue[]"  class="form-control amount" aria-label="Whrvalue"></td>';
-		htmlRows += '<td><select class="form-control form-select js-example-basic-single "  id="operand_'+count+'"  name= "operand[]" id="" aria-label="Operand">	<option value="AND"> AND </option><option  value = "OR"> OR </option>	</select></td>';
+		htmlRows += '<td><select class="form-control form-select js-example-basic-single "  id="operand_'+count+'"  name= "operand[]" id="" aria-label="Operand">	<option value="AND"> <?= htmlspecialchars(__('AND'), ENT_QUOTES, 'UTF-8'); ?> </option><option  value = "OR"> <?= htmlspecialchars(__('OR'), ENT_QUOTES, 'UTF-8'); ?> </option>	</select></td>';
 		htmlRows += '<td><input type="hidden" id="delete_value_'+count+'" value="0"><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">' + <?= json_encode(__('Delete')) ?> + '</button></td>';
 		htmlRows += '</tr>';
 		$('#invoiceItem').append(htmlRows);
@@ -382,7 +382,7 @@ elem.forEach(function(html) {
 
 			</div>
 
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
 
 		</div>
@@ -400,7 +400,7 @@ elem.forEach(function(html) {
 								<div class="row align-items-center">
 									<div class="col-lg-4">
 										<label for="value_field" class="d-block"><?= __("Ratting") ?></label>
-										<input type="text" name="value_field" class="form-control" id="value_field" value="<?php echo $view['value_field']; ?>" aria-label="Value Field">
+										<input type="text" name="value_field" class="form-control" id="value_field" value="<?php echo $view['value_field']; ?>" aria-label="<?= htmlspecialchars(__('Value Field'), ENT_QUOTES, 'UTF-8'); ?>">
 									</div>
 								</div>
 							</div>
@@ -415,7 +415,7 @@ elem.forEach(function(html) {
 								<div class="form-radio">
 									<div class="radio radio-inline">
 										<label class="form-label">
-											<input type="radio" id='type_custom_sql' value="custom_sql" class="cursor-pointer" name="type" <?php if($attribute_type != 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none" aria-label="Type">
+											<input type="radio" id='type_custom_sql' value="custom_sql" class="cursor-pointer" name="type" <?php if($attribute_type != 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
 											<i class="helper"></i><?= __("Static values") ?>	</label>
 										</div>
 									</div>
@@ -424,7 +424,7 @@ elem.forEach(function(html) {
 									<div class="form-radio">
 										<div class="radio radio-inline">
 											<label class="form-label">
-												<input type="radio" id="type_static"  value="static"  name="type"  <?php if($attribute_type == 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none" aria-label="Type">
+												<input type="radio" id="type_static"  value="static"  name="type"  <?php if($attribute_type == 'static' ){ ?> checked="checked" <?php } ?> onchange="difftype(this.value)" style="display:none" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
 												<i class="helper"></i><?= __("Static values") ?>	</label>
 											</div>
 										</div>
@@ -435,7 +435,7 @@ elem.forEach(function(html) {
 								<div class="row align-items-center" style="margin-top: 10px;">
 									<div class="col-lg-3 wi-full">
 										<label for="table_name" class="d-block"><?= __("Table") ?></label>
-										<select class="form-control js-example-basic-single" id="table_name" name= "table_name" onchange="Getfields(this.value)" aria-label="Table Name">
+										<select class="form-control js-example-basic-single" id="table_name" name= "table_name" onchange="Getfields(this.value)" aria-label="<?= htmlspecialchars(__('Table Name'), ENT_QUOTES, 'UTF-8'); ?>">
 											<option value=""><?= __("Select Table Name") ?></option>
 											<?php foreach ($showtables1 as $key => $data) {  ?>
 												<option   value = <?php echo $data ?> <?php if($table_name_field == $data){ echo "selected";
@@ -446,7 +446,7 @@ elem.forEach(function(html) {
 									<div class="col-lg-2 w-full">
 										<label for="field_name" class="d-block"><?= __("Value Field") ?></label>
 										<div id='field_id'>
-											<select class="form-control js-example-basic-single" id='field_name' name="field_name" aria-label="Field Name">
+											<select class="form-control js-example-basic-single" id='field_name' name="field_name" aria-label="<?= htmlspecialchars(__('Field Name'), ENT_QUOTES, 'UTF-8'); ?>">
 												<option value="-1"><?= __("Select Filed") ?></option>
 												<?php foreach ($view['list'] as  $list) { ?>
 													<option value="<?php echo $list; ?>" <?php if($view['value_field'] == $list){ echo "selected";
@@ -458,7 +458,7 @@ elem.forEach(function(html) {
 									<div class="col-lg-2 w-full">
 										<label for="value" class="d-block"><?= __("Lable Field") ?></label>
 										<div id='label_id'>
-											<select class="form-control js-example-basic-single" id="value" name="value" aria-label="Value">
+											<select class="form-control js-example-basic-single" id="value" name="value" aria-label="<?= htmlspecialchars(__('Value'), ENT_QUOTES, 'UTF-8'); ?>">
 												<option value="-1"><?= __("Select Filed") ?></option>
 												<?php foreach ($view['list'] as  $list) { ?>
 													<option value="<?php echo $list; ?>" <?php if($view['display_field'] == $list){ echo "selected";
@@ -472,7 +472,7 @@ elem.forEach(function(html) {
 										<label for="order_by" class="d-block"><?= __("Order By Field") ?></label>
 										<div >
 											<input type="hidden" name="drop" id="drop" value="<?php echo $duplicate; ?>">
-											<select class="form-control form-select js-example-basic-single" id="order_by" name="order_by" aria-label="Order By">
+											<select class="form-control form-select js-example-basic-single" id="order_by" name="order_by" aria-label="<?= htmlspecialchars(__('Order By'), ENT_QUOTES, 'UTF-8'); ?>">
 												<option value="-1"><?= __("Select Filed") ?></option>
 												<?php foreach ($view['list'] as  $list) { ?>
 													<option value="<?php echo $list; ?>" <?php if($view_details['order_by'] == $list){ echo "selected";
@@ -485,10 +485,10 @@ elem.forEach(function(html) {
 									<div class="col-lg-2 w-full" id='order_check_soft'>
 										<label for="sort" class="d-block"><?= __("Sort") ?></label>
 										<div>
-											<select class="form-control js-example-basic-single" id="sort" name="sort" aria-label="Sort">
-												<option  value="ASC">ASC</option>
+											<select class="form-control js-example-basic-single" id="sort" name="sort" aria-label="<?= htmlspecialchars(__('Sort'), ENT_QUOTES, 'UTF-8'); ?>">
+												<option  value="ASC"><?= __('ASC'); ?></option>
 												<option  <?php if($view_details['sort'] == 'DESC'){ echo "selected";
-												} ?>  value="DESC">DESC</option>
+												} ?>  value="DESC"><?= __('DESC'); ?></option>
 											</select>
 										</div>
 									</div>
@@ -497,13 +497,13 @@ elem.forEach(function(html) {
 									<div class="col-lg-2">
 										<label for="refer_action" class="d-block"><?= __("Reference for") ?> </label>
 										<input type="checkbox" class="js-switch-s" name="refer_action" id="refer_action" onchange="swictchrefer1()" value="0" <?php if($view_details['refer_action'] == '0'){ echo "checked";
-										} ?> aria-label="Refer Action">
+										} ?> aria-label="<?= htmlspecialchars(__('Refer Action'), ENT_QUOTES, 'UTF-8'); ?>">
 									</div>
 									<div class="col-lg-3 w-full">
 									<?php $fieldlists = getListAttributes($_POST['table']); ?>
 										<div class="referfieldname col-lg-12" style="display: <?php if($view_details['refer_action'] == '1' || $view_details['refer_action'] == ''){ echo 'none';
 										} ?>">
-										<select class="form-control js-example-basic-single" id="refer_field" name= "refer_field" aria-label="Refer Field">
+										<select class="form-control js-example-basic-single" id="refer_field" name= "refer_field" aria-label="<?= htmlspecialchars(__('Refer Field'), ENT_QUOTES, 'UTF-8'); ?>">
 											<option value="-1"><?= __("Select Filed") ?></option>
 											<?php foreach ($fieldlists as  $fieldlist) { ?>
 												<option value="<?php echo $fieldlist['Field']; ?>" <?php if($view_details['refer_field'] == $fieldlist['Field']){ echo "selected";
@@ -515,12 +515,12 @@ elem.forEach(function(html) {
 									<div class="col-lg-2">
 										<label for="refer_by_action" class="d-block"><?= __("Referenced By") ?></label>
 										<input type="checkbox" class="js-switch-s" name="refer_by_action" id="refer_by_action" onchange="swictchrefer_by1()" value="0" <?php if($view_details['refer_by_action'] == '0'){ echo "checked";
-										} ?> aria-label="Refer By Action">
+										} ?> aria-label="<?= htmlspecialchars(__('Refer By Action'), ENT_QUOTES, 'UTF-8'); ?>">
 									</div>
 									<div class="col-lg-3 w-full">
 										<div class="referbyfieldname" style="display: <?php if($view_details['refer_by_action'] == '1' || $view_details['refer_by_action'] == ''){ echo 'none';
 										} ?>">
-										<select class="form-control js-example-basic-single" id="refer_by_field" name= "refer_by_field" aria-label="Refer By Field">
+										<select class="form-control js-example-basic-single" id="refer_by_field" name= "refer_by_field" aria-label="<?= htmlspecialchars(__('Refer By Field'), ENT_QUOTES, 'UTF-8'); ?>">
 											<option value="-1"><?= __("Select Filed") ?></option>
 											<?php foreach ($view['list'] as  $list) { ?>
 												<option value="<?php echo $list; ?>"  <?php if($view_details['refer_by_field'] == $list){ echo "selected";
@@ -557,7 +557,7 @@ elem.forEach(function(html) {
 
 													<tr id="qur_div_<?php echo $count; ?>" >
 														<td>
-															<select class="form-control fitemRow form-select js-example-basic-single" id="whrfield_<?php echo $count; ?>" name= "whrfield[]" aria-label="Whrfield">
+															<select class="form-control fitemRow form-select js-example-basic-single" id="whrfield_<?php echo $count; ?>" name= "whrfield[]" aria-label="<?= htmlspecialchars(__('Whrfield'), ENT_QUOTES, 'UTF-8'); ?>">
 																<?php foreach ($view['list'] as  $list) { ?>
 																	<option value="<?php echo $list; ?>" <?php if($td['drop_field'] == $list){ echo "selected";
 																	} ?> ><?php echo $list; ?></option>
@@ -565,20 +565,20 @@ elem.forEach(function(html) {
 															</select>
 														</td>
 														<td>
-															<select class="form-control form-select js-example-basic-single" id="comparator_<?php echo $count; ?>" name= "comparator[]" aria-label="Comparator">
+															<select class="form-control form-select js-example-basic-single" id="comparator_<?php echo $count; ?>" name= "comparator[]" aria-label="<?= htmlspecialchars(__('Comparator'), ENT_QUOTES, 'UTF-8'); ?>">
 																<?php foreach ($comparator_array as $dd) {  ?>
 																	<option  <?php if($td['drop_condition'] == $dd){ echo "selected";
 																	} ?>  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php } ?>
 																</select>
 															</td>
 															<td>
-																<input type="text" value="<?php echo $td['drop_value']?>" id="whrvalue_<?php echo $count; ?>" name="whrvalue[]"  class="form-control amount" aria-label="Whrvalue">
+																<input type="text" value="<?php echo $td['drop_value']?>" id="whrvalue_<?php echo $count; ?>" name="whrvalue[]"  class="form-control amount" aria-label="<?= htmlspecialchars(__('Whrvalue'), ENT_QUOTES, 'UTF-8'); ?>">
 															</td>
 															<td>
-																<select class="form-control form-select js-example-basic-single"  id="operand_<?php echo $count; ?>"  name= "operand[]" id="" aria-label="Operand">
-																	<option value="AND"> AND </option>
+																<select class="form-control form-select js-example-basic-single"  id="operand_<?php echo $count; ?>"  name= "operand[]" id="" aria-label="<?= htmlspecialchars(__('Operand'), ENT_QUOTES, 'UTF-8'); ?>">
+																	<option value="AND"> <?= __('AND'); ?> </option>
 																	<option <?php if($td['drop_condition'] == $dd){ echo "selected";
-																	} ?>  value = "OR"> OR </option>
+																	} ?>  value = "OR"> <?= __('OR'); ?> </option>
 																</select>
 															</td>
 															<td>
@@ -594,7 +594,7 @@ elem.forEach(function(html) {
 												<div class="col-lg-5">
 													<label><?= __("Query") ?></label>
 													<div class="kt-input-icon">
-														<textarea class="form-control"  type="text" id="dis_custom_sql" name="dis_custom_sql" style="height: 80px;" value="" aria-label="Dis Custom Sql"> <?php echo urldecode($view['content']); ?></textarea>
+														<textarea class="form-control"  type="text" id="dis_custom_sql" name="dis_custom_sql" style="height: 80px;" value="" aria-label="<?= htmlspecialchars(__('Dis Custom Sql'), ENT_QUOTES, 'UTF-8'); ?>"> <?php echo urldecode($view['content']); ?></textarea>
 													</div>
 												</div>
 											</div>
@@ -626,10 +626,10 @@ elem.forEach(function(html) {
 													foreach($static_str as $key => $sstr){ ?>
 														<div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
 															<div class="col-lg-3">
-																<input type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $key; ?>"  name="type" aria-label="Type">
+																<input type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $key; ?>"  name="type" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
 															</div>
 															<div class="col-lg-3">
-																<input type="text"class="form-control"  id="static_lable_<?php echo $i; ?>"  value="<?php echo $sstr; ?>"  name="type" aria-label="Type">
+																<input type="text"class="form-control"  id="static_lable_<?php echo $i; ?>"  value="<?php echo $sstr; ?>"  name="type" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
 															</div>
 															<div class="col-lg-3">
 																<input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
@@ -641,10 +641,10 @@ elem.forEach(function(html) {
 														} else{ ?>
 															<div class="row align-items-center sfitemRow" id="static_div_1" style="margin-top: 10px;">
 																<div class="col-lg-3">
-																	<input type="text" class="form-control"  id="static_value_1"  value=""  name="type" aria-label="Type">
+																	<input type="text" class="form-control"  id="static_value_1"  value=""  name="type" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
 																</div>
 																<div class="col-lg-3">
-																	<input type="text"class="form-control"  id="static_lable_1"  value=""  name="type" aria-label="Type">
+																	<input type="text"class="form-control"  id="static_lable_1"  value=""  name="type" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
 																</div>
 																<div class="col-lg-3">
 																	<input type="hidden" value="0" id="static_delete_value_1" >

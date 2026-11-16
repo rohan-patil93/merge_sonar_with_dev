@@ -885,7 +885,7 @@
                                             ?>
                                        <label class="radio radio-solid <?php echo $text_color_ety; ?>">
                                        <input aria-label="<?php echo __('Input field'); ?>" <?php echo $field_set['EMPLOYEMENT_TYPE']['readonly']!=0?'disabled="true"':'';?> type="radio" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php
-} ?> value="<?php echo $emptypes['genc_detail_name'];?>"/>
+} ?> value="<?php echo __($emptypes['genc_detail_name']);?>"/>
                                        <span></span>
                                        <?php echo __($emptypes['genc_detail_name']);?>
                                        </label>
@@ -1074,7 +1074,7 @@
                                           }
                                           ?>
                                        <option <?php if($data['blood_group'] == $blood_groups['genc_detail_name']){ ?>selected <?php
-} ?> value="<?php echo $blood_groups['genc_detail_name']; ?>" >
+} ?> value="<?php echo __($blood_groups['genc_detail_name']); ?>" >
                                           <?php echo __($blood_groups['genc_detail_name']); ?>
                                        </option>
                                        <?php } ?>

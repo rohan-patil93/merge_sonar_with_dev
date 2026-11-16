@@ -15,22 +15,22 @@ foreach($compliancetaskhistory as $list_compl){
 
 ?>
 <div class="modal-header">
-    <h4 class="modal-title">View Employee details</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('View Employee details'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body" >
 
 <div class="form-group row ml-20 mr-20">
     <div class="form-group col-lg-4 text-center">
-        <span class="f-w-700">Task Name</span></br>
+        <span class="f-w-700"><?= __('Task Name'); ?></span></br>
         <span><?php echo $compliancetaskhistory[0]['name']; ?></span>
     </div>
     <div class="form-group col-lg-4 text-center">
-        <span  class="f-w-700">Date</span></br>
+        <span  class="f-w-700"><?= __('Date'); ?></span></br>
         <span><?php echo $_POST['date']; ?></span>
     </div>
     <div class="form-group col-lg-4 text-center">
-        <span  class="f-w-700">Status</span></br>
+        <span  class="f-w-700"><?= __('Status'); ?></span></br>
         <span><?php echo (count((array)$compliancetaskhistory) == $alldone)?'Completed':'Pending'; ?></span>
     </div>
 </div>
@@ -39,9 +39,9 @@ foreach($compliancetaskhistory as $list_compl){
     <table id="new-cons" class="table table-striped table-bordered nowrap">
         <thead>
             <tr><th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Task</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('Name'); ?></th>
+                <th scope="col"><?= __('Task'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -60,7 +60,7 @@ foreach($compliancetaskhistory as $list_compl){
                         <?php }  ?>
                     </td>
                     <td>
-                    <?php echo count((array)$check_list) == $taskstatus?'<span class="form-label label label-success">Completed</span>':'<span class="form-label label label-warning">Pending</span>'; ?>
+                    <?php echo count((array)$check_list) == $taskstatus?'<span class="form-label label label-success">'.__('Completed').'</span>':'<span class="form-label label label-warning">'.__('Pending').'</span>'; ?>
                     </td>
                 </tr>
             <?php $i++;
@@ -71,7 +71,7 @@ foreach($compliancetaskhistory as $list_compl){
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 </div>
     <!-- data-table js -->
     <script src="assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>

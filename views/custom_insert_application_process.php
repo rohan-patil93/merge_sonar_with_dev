@@ -78,11 +78,11 @@ $application_pages = $return['application_pages'];
 
 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
     <div class="card-header table-card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Module Process Setup</h5>
+        <h5 class="mb-0"><?= __('Module Process Setup'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -90,7 +90,7 @@ $application_pages = $return['application_pages'];
         <form class="kt-form" id="moduleProcessForm" method="post" action="" name="moduleProcessForm">
             <div class="row mb-4">
                 <div class="col-md-5">
-                    <label for="module_id" class="form-label">Select Module <span
+                    <label for="module_id" class="form-label"><?= __('Select Module'); ?> <span
                             class="text-danger">*</span></label>
                     <select class="js-example-basic-single form-select" id="module_id" name="module_id"
                         onchange="handleModuleChange(this.value)" required>
@@ -103,7 +103,7 @@ $application_pages = $return['application_pages'];
             </div>
 
             <div id="process-container" class="mt-4" style="display: none;">
-                <h6 class="mb-3">Process Configuration</h6>
+                <h6 class="mb-3"><?= __('Process Configuration'); ?></h6>
 
                 <div class="table-responsive">
                     <table class="table table-bordered" id="process-table">
@@ -122,7 +122,7 @@ $application_pages = $return['application_pages'];
                 <div class="row">
                     <div class="col-md-4 d-flex align-items-end mt-2 mb-4">
                         <button type="button" id="add-process-btn" class="btn btn-success">
-                            + Add More Process
+                            + <?= __('Add More Process'); ?>
                         </button>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ $application_pages = $return['application_pages'];
                     <div class="col-md-12 text-left">
                         <button type="submit" name="submit"
                             class="btn btn-primary  mr-2">
-                            <i class="la la-check"></i> Submit
+                            <i class="la la-check"></i> <?= __('Submit'); ?>
                         </button>
                     </div>
                 </div>
@@ -263,7 +263,7 @@ $application_pages = $return['application_pages'];
         cardBody.insertBefore(errorDiv, cardBody.firstChild);
 
         // Show the error message
-        errorDiv.style.display = 'block';
+        errorDiv.style.display = <?php echo json_encode(__('block'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
 
         // Auto-hide after 5 seconds
         setTimeout(() => {
@@ -415,7 +415,7 @@ $application_pages = $return['application_pages'];
             // console.log('Configure pages clicked for process ID:', processId);
             if (processPagesContainer.style.display === 'none') {
                 processPagesContainer.style.display = 'block';
-                configPagesBtn.innerHTML = '<i class="fa fa-times mr-1"></i> Hide Pages';
+                configPagesBtn.innerHTML = '<i class="fa fa-times mr-1"></i> <?= htmlspecialchars(__('Hide Pages'), ENT_QUOTES, 'UTF-8'); ?>';
                 if (processPagesContainer.children.length === 0) {
                     showLoader(processPagesContainer, `loader-pages-${currentProcessIndex}`);
                     setTimeout(() => {
@@ -473,7 +473,7 @@ $application_pages = $return['application_pages'];
             // Toggle display of the process pages container
             if (processPagesContainer.style.display === 'none') {
                 processPagesContainer.style.display = 'block';
-                configPagesBtn.innerHTML = '<i class="fa fa-times mr-1"></i> Hide Pages';
+                configPagesBtn.innerHTML = '<i class="fa fa-times mr-1"></i> <?= htmlspecialchars(__('Hide Pages'), ENT_QUOTES, 'UTF-8'); ?>';
                 if (processPagesContainer.children.length === 0) {
                     showLoader(processPagesContainer, `loader-pages-${currentProcessIndex}`);
                     setTimeout(() => {

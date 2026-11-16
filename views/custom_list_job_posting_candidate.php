@@ -177,29 +177,29 @@ function displaystausdrop(id,table,status_id){
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><input aria-label="Name[]" type="text" class="form-control" name="name[]" value=""></td> ';
-        htmlRows += '<td><input aria-label="Email[]" type="text" class="form-control" name="email[]" value=""> </td>';
-        htmlRows += '<td><input aria-label="Phone[]" type="text" class="form-control" name="phone[]" value=""></td>';
-        htmlRows += '<?php if($_SESSION["user_type"] ==3){ ?><td>    <div class="custom-file"><input type="file" class="custom-file-input" id="customFile" name="file[]"/> <label class="custom-file-label" for="customFile">Choose file</label></div>  <input type="hidden" name="hid_image[]" value="<?php  echo $res['file']; ?>"></td>  <?php
+        htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="name[]" value=""></td> ';
+        htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="email[]" value=""> </td>';
+        htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="phone[]" value=""></td>';
+        htmlRows += '<?php if($_SESSION["user_type"] ==3){ ?><td>    <div class="custom-file"><input type="file" class="custom-file-input" id="customFile" name="file[]"/> <label class="custom-file-label" for="customFile"><?= htmlspecialchars(__('Choose file'), ENT_QUOTES, 'UTF-8'); ?></label></div>  <input type="hidden" name="hid_image[]" value="<?php  echo $res['file']; ?>"></td>  <?php
 } ?>';
-        htmlRows += '<td><select aria-label="Process[]" class="form-control" name="process[]" ><option value="0">Select Any One</option>    <?php foreach ($spdata as  $sp) { ?><option  value="<?php echo $sp['id']; ?>"><?php echo $sp['select_name']; ?></option><?php
+        htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Process'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" name="process[]" ><option value="0"><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option>    <?php foreach ($spdata as  $sp) { ?><option  value="<?php echo $sp['id']; ?>"><?php echo $sp['select_name']; ?></option><?php
 } ?></select></td>';
         htmlRows += '<?php if($_SESSION["user_type"] !=3){ ?><td>&nbsp; </td><td>&nbsp;</textarea> </td>';
         htmlRows += '<td>&nbsp;</textarea> </td><td> <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".$stausresult[0]['color']; ?>;    background:  <?php echo "#".strval($stausresult[0]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[0]['background_color']); ?>;" type="button"  ><?php echo $stausresult[0]['name']; ?> </button></td>';
-        htmlRows += '<td><a herf="#" class="btn btn-secondary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"  onkeypress="if(event.key===\'Enter\'||event.key===\' \')this.click()" role="button"> Genrate </a></td> <?php } ?>';
+        htmlRows += '<td><a herf="#" class="btn btn-secondary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"  onkeypress="if(event.key===\'Enter\'||event.key===\' \')this.click()" role="button"> <?= htmlspecialchars(__('Genrate'), ENT_QUOTES, 'UTF-8'); ?> </a></td> <?php } ?>';
         htmlRows += '</tr>';
         $('#invoiceItem').append(htmlRows);
     }
     function genrateregistation(name,email,phone){
         swal.fire({
             //title: "Do you want to Genrate auto candidaite registation",
-            text: "Do you want to Genrate auto candidaite registation ",
+            text: <?php echo json_encode(__('Do you want to Genrate auto candidaite registation').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             type: "success",
             buttonsStyling: false,
-            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
             confirmButtonClass: "btn btn-primary",
             showCancelButton: true,
-            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
             cancelButtonClass: "btn btn-danger"
         }).then(function(result) {
             if (result.value) {
@@ -220,10 +220,10 @@ function displaystausdrop(id,table,status_id){
                         text: mms,
                         type: "success",
                         buttonsStyling: false,
-                        confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                        confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
                         confirmButtonClass: "btn btn-primary",
                         showCancelButton: false,
-                        cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                        cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                         cancelButtonClass: "btn btn-danger"
                     }).then(function(result) {
                         if (result.value) {
@@ -327,7 +327,7 @@ function displaystausdrop(id,table,status_id){
 
 
     <?php if($jobpost!="" && $_SESSION['role_ids'][0]==RECRUITINGMANAGER_ROLE && $processdata['current_status'] >= ST_TOBEPUBLISH) {  ?>
-            <button onclick="publishdatapopup(<?php echo $jobpost; ?>)" class="btn btn-primary desktop-view text-capitalize"  type="button"  >Publish</button>
+            <button onclick="publishdatapopup(<?php echo $jobpost; ?>)" class="btn btn-primary desktop-view text-capitalize"  type="button"  ><?= __('Publish'); ?></button>
         <?php } ?> &nbsp;
         <?php $job_status = $processdata['job_status'];
         $job_status_name = $job_status==1 ? "CLOSE" : "OPEN";
@@ -337,20 +337,20 @@ function displaystausdrop(id,table,status_id){
 <div class="form-radio m-l-10 d-inline-block align-middle">
     <div class="radio radio-inline" >
       <label class="form-label">
-        <input aria-label="Io" type="radio" name="radio" <?php echo $job_status =="0"?"checked":"";  ?> onchange="updatejobstatus(<?php echo $processdata['id']; ?>,0)">
-        <i class="helper"></i>Open
+        <input aria-label="<?= htmlspecialchars(__('Io'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="radio" <?php echo $job_status =="0"?"checked":"";  ?> onchange="updatejobstatus(<?php echo $processdata['id']; ?>,0)">
+        <i class="helper"></i><?= __('Open'); ?>
       </label>
     </div>
     <div class="radio radio-inline" >
       <label class="form-label">
-        <input aria-label="Radio option" type="radio" <?php echo $job_status =="1"?"checked":"";  ?> name="radio" onchange="updatejobstatus(<?php echo $processdata['id']; ?>,1)">
-        <i class="helper"></i>Close
+        <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php echo $job_status =="1"?"checked":"";  ?> name="radio" onchange="updatejobstatus(<?php echo $processdata['id']; ?>,1)">
+        <i class="helper"></i><?= __('Close'); ?>
       </label>
     </div>
     <div class="radio radio-inline m-0" >
       <label class="form-label">
-        <input aria-label="Radio option" type="radio" <?php echo $job_status =="2"?"checked":"";  ?> name="radio" onchange="updatejobstatus(<?php echo $processdata['id']; ?>,2)">
-        <i class="helper"></i>Hold
+        <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php echo $job_status =="2"?"checked":"";  ?> name="radio" onchange="updatejobstatus(<?php echo $processdata['id']; ?>,2)">
+        <i class="helper"></i><?= __('Hold'); ?>
       </label>
     </div>
 </div>
@@ -367,7 +367,7 @@ function displaystausdrop(id,table,status_id){
                                         <div class="col-lg-9">
                                     <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3" style="min-width: 200px;">
                                             <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                            <span class="fw-bold fs-6 text-gray-400">Hiring Status</span>
+                                            <span class="fw-bold fs-6 text-gray-400"><?= __('Hiring Status'); ?></span>
                                             <span class="fw-bolder fs-6 ml-2"><?php echo $pp; ?>%</span>
                                         </div>
                                         <div class="col-md-12">
@@ -416,18 +416,18 @@ function displaystausdrop(id,table,status_id){
                         <div class="col-lg-10">
                             <div class="d-flex align-items-center " style="margin-left: 77px;">
                                 <div class="m-r-20 text-center">
-                                    <div class="font-weight-bold mb-2 mr-10 d-inline-block">Requested Date</div>
+                                    <div class="font-weight-bold mb-2 mr-10 d-inline-block"><?= __('Requested Date'); ?></div>
                                     <span class="form-label label label-lg label-primary f-14"><?php echo date('d M, Y',strtotime($processdata['requested_date']));?></span>
                                 </div>
                                 <div class="mr-5 text-center">
-                                    <div class="font-weight-bold mb-2 mr-5 d-inline-block">Required Date</div>
+                                    <div class="font-weight-bold mb-2 mr-5 d-inline-block"><?= __('Required Date'); ?></div>
                                     <span class="form-label label label-lg label-success f-14"><?php echo date('d M, Y',strtotime($processdata['required_date']));?></span>
                                 </div>
                             </div>
                         </div>
                             <div class="col-lg-2">
                                 <div class="text-end">
-                                    <div class="font-weight-bold mb-2 mr-5 d-inline-block">No of Resources </div>
+                                    <div class="font-weight-bold mb-2 mr-5 d-inline-block"><?= __('No of Resources'); ?> </div>
                                     <span class="form-label label label-lg label-primary f-14"><?php echo $processdata['no_of_resources'];?></span>
                                 </div>
                             </div>
@@ -449,28 +449,28 @@ function displaystausdrop(id,table,status_id){
                         <li class="nav-item">
                             <a class="nav-link me-6 <?php if($display_id== 2){ echo "active";
 } ?>"  href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo $_GET['Rid']; ?>&NI=<?php echo "2"; ?>">
-                                <?php echo "Job Details"; ?></a>
+                                <?php echo __("Job Details"); ?></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link me-6 <?php if($display_id== 1){ echo "active";
 } ?>"  href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo $_GET['Rid']; ?>&NI=1">
-                                    <?php echo "Candidates"; ?></a>
+                                    <?php echo __("Candidates"); ?></a>
                                 </li>
                                 <li class="nav-item">
                                 <a class="nav-link me-6 <?php if($display_id== 3){ echo "active";
 } ?>"  href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo $_GET['Rid']; ?>&NI=3">
-                                    <?php echo "Search"; ?></a>
+                                    <?php echo __("Search"); ?></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link me-6 <?php if($display_id== 4){ echo "active";
 } ?>"  href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo $_GET['Rid']; ?>&NI=4">
-                                    <?php echo "Job feedback questions"; ?></a>
+                                    <?php echo __("Job feedback questions"); ?></a>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-lg-4">
                             <?php if($_SESSION['user_type'] !=3){ ?>
-                                <a href="index.php?option=COM_INSERT_JOB_POSTINGS" class="btn btn-success desktop-view text-capitalize float-right"><i class="icofont icofont-plus icon-white"></i>   Job Posting</a>
+                                <a href="index.php?option=COM_INSERT_JOB_POSTINGS" class="btn btn-success desktop-view text-capitalize float-right"><i class="icofont icofont-plus icon-white"></i>   <?= __('Job Posting'); ?></a>
 </div>
                             <?php } ?>
                         </div>

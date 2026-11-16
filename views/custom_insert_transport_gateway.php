@@ -101,12 +101,12 @@ $visitPurposes = [
     function submitDynamicWorkflow(table_name, transaction_id, current_status, next_status, old_status_name, new_status_name) {
         swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: "Please note the status of the document will change to " + new_status_name,
+                text: <?php echo json_encode(__('Please note the status of the document will change to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> + new_status_name,
                 type: "info",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
+                confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: false
             },
             function() {
@@ -133,12 +133,12 @@ $visitPurposes = [
                             });
                         } else {
                             swal({
-                                title: "Oops...",
+                                title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                                 text: res.transaction_update.message,
                                 type: "error",
                                 showCancelButton: true,
                                 showConfirmButton: false,
-                                cancelButtonText: "Ok",
+                                cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                                 confirmButtonClass: "btn-danger",
                                 closeOnCancel: false
                             });
@@ -172,41 +172,41 @@ $visitPurposes = [
         <div class="col-md-3 col-sm-6">
             <div class="card bg-primary order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Vehicles Inside</h6>
+                    <h6 class="text-white"><?= __('Vehicles Inside'); ?></h6>
                     <h2 class="text-right text-white"><i
                             class="ti-car f-left"></i> <span id="stat-current-count"> 0</span></h2>
-                    <p class="m-b-0 text-white">Currently in premises</p>
+                    <p class="m-b-0 text-white"><?= __('Currently in premises'); ?></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="card bg-success order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Today's Entries</h6>
+                    <h6 class="text-white"><?= __('Today\'s Entries'); ?></h6>
                     <h2 class="text-right text-white"><i
                             class="ti-import f-left"></i> <span id="stat-today-entries"> 0</span></h2>
-                    <p class="m-b-0 text-white">Vehicles entered today</p>
+                    <p class="m-b-0 text-white"><?= __('Vehicles entered today'); ?></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="card bg-danger order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Today's Exits</h6>
+                    <h6 class="text-white"><?= __('Today\'s Exits'); ?></h6>
                     <h2 class="text-right text-white"><i
                             class="ti-export f-left"></i> <span id="stat-today-exits"> 0</span></h2>
-                    <p class="m-b-0 text-white">Vehicles exited today</p>
+                    <p class="m-b-0 text-white"><?= __('Vehicles exited today'); ?></p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="card bg-warning order-card">
                 <div class="card-body">
-                    <h6 class="text-white">Avg. Duration</h6>
+                    <h6 class="text-white"><?= __('Avg. Duration'); ?></h6>
                     <h2 class="text-right text-white"><i
                             class="ti-time f-left"></i> <span id="stat-avg-duration"> 0h</span>
                     </h2>
-                    <p class="m-b-0 text-white">Average stay time</p>
+                    <p class="m-b-0 text-white"><?= __('Average stay time'); ?></p>
                 </div>
             </div>
         </div>
@@ -223,12 +223,12 @@ $visitPurposes = [
                 } ?>
 
                 <div class="card-header table-card-header">
-                    <h5><i class="ti-car"></i> Vehicle Gateway Entry</h5>
+                    <h5><i class="ti-car"></i> <?= __('Vehicle Gateway Entry'); ?></h5>
                     <div class="card-header-right table-card-header">
                         <?php echo $workflowsteps['workflow_btn']; ?>
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                             <i class="icofont icofont-reply"></i>
-                            Back
+                            <?= __('Back'); ?>
                         </a>
                     </div>
                 </div>
@@ -247,34 +247,34 @@ $visitPurposes = [
                                 <input type="hidden" name="edit_mode" value="1">
                             <?php endif; ?>
                             <div class="form-group col-lg-12">
-                                <span class="form-label">Movement Type <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Movement Type'); ?> <span class="text-danger">*</span></span>
                                 <div class="d-flex gap-3">
                                     <div class="transport-gateway-radio radio-success mr-4">
                                         <input type="radio" name="method_type" id="method_entry_first" value="entry_first"
                                             <?php echo ($editMode && ($editMode && ($editData['method_type'] ?? '') == 'entry_first')) ? 'checked' : ''; ?>>
                                         <label for="method_entry_first" class="mr-3">
-                                            <i class="ti-import text-success"></i> Entry First (Vehicle Coming In)
+                                            <i class="ti-import text-success"></i> <?= __('Entry First (Vehicle Coming In)'); ?>
                                         </label>
                                     </div>
                                     <div class="transport-gateway-radio radio-danger">
                                         <input type="radio" name="method_type" id="method_exit_first" value="exit_first"
                                             <?php echo (!$editMode || ($editData['method_type'] ?? 'exit_first') == 'exit_first') ? 'checked' : ''; ?>>
                                         <label for="method_exit_first">
-                                            <i class="ti-export text-danger"></i> Exit First (Vehicle Going Out)
+                                            <i class="ti-export text-danger"></i> <?= __('Exit First (Vehicle Going Out)'); ?>
                                         </label>
                                     </div>
                                 </div>
-                                <small class="text-muted">Select "Exit First" when staff is taking a company vehicle out</small>
+                                <small class="text-muted"><?= __('Select "Exit First" when staff is taking a company vehicle out'); ?></small>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Vehicle Type <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Vehicle Type'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Vehicle Type" class="form-select js-example-basic-single" name="vehicle_type"
+                                    <select aria-label="<?= htmlspecialchars(__('Vehicle Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="vehicle_type"
                                         id="vehicleType" required>
-                                        <option value="">Select Type</option>
+                                        <option value=""><?= __('Select Type'); ?></option>
                                         <?php foreach ($vehicleTypes as $key => $type): ?>
                                             <option value="<?php echo $key; ?>"
                                                 <?php echo ($editMode && ($editData['vehicle_type'] ?? '') == $key) ? 'selected' : ''; ?>>
@@ -285,18 +285,18 @@ $visitPurposes = [
                                 </div>
                             </div>
                             <div class="form-group col-lg-6" id="vehicleNumberInputDiv">
-                                <span class="form-label">Vehicle Number <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Vehicle Number'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <input aria-label="e.g., ABC-1234" type="text" class="form-control text-uppercase" name="vehicle_number"
-                                        id="vehicle_number" placeholder="e.g., ABC-1234" required value="<?php echo $editMode ? htmlspecialchars($editData['vehicle_number'] ?? '') : ''; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('e.g., ABC-1234'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-uppercase" name="vehicle_number"
+                                        id="vehicle_number" placeholder="<?= htmlspecialchars(__('e.g., ABC-1234'), ENT_QUOTES, 'UTF-8'); ?>" required value="<?php echo $editMode ? htmlspecialchars($editData['vehicle_number'] ?? '') : ''; ?>">
                                 </div>
                             </div>
                             <div class="form-group w-full col-lg-6 d-none-initial" id="vehicleNumberSelectDiv">
-                                <span class="form-label">Vehicle Number <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Vehicle Number'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Vehicle Number Select" class="form-select js-example-basic-single" name="vehicle_number_select"
+                                    <select aria-label="<?= htmlspecialchars(__('Vehicle Number Select'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="vehicle_number_select"
                                         id="vehicle_number_select">
-                                        <option value="">Select Demo Vehicle</option>
+                                        <option value=""><?= __('Select Demo Vehicle'); ?></option>
                                         <?php foreach ($demoVehicles as $vehicle): ?>
                                             <option value="<?php echo htmlspecialchars($vehicle['vehicle_reg_no']); ?>"
                                                 <?php echo isset($editData['vehicle_number']) && $editData['vehicle_number']!= '' && $editData['vehicle_number']==$vehicle['vehicle_reg_no'] ? 'selected' : ''; ?>>
@@ -310,11 +310,11 @@ $visitPurposes = [
                                 </div>
                             </div>
                             <div class="form-group w-full col-lg-6 d-none-initial" id="vehicleNumberMotorCycleDiv">
-                                <span class="form-label">Motor Cycle Vehicle Number <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Motor Cycle Vehicle Number'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Motor Cycle Vehicle Number" class="form-select js-example-basic-single" name="motor_cycle_vehicle_number"
+                                    <select aria-label="<?= htmlspecialchars(__('Motor Cycle Vehicle Number'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="motor_cycle_vehicle_number"
                                         id="motor_cycle_vehicle_number">
-                                        <option value="">Select Demo Vehicle</option>
+                                        <option value=""><?= __('Select Demo Vehicle'); ?></option>
                                         <?php foreach ($motor_cycle_list as $vehicle){ ?>
                                             <option value="<?php echo htmlspecialchars($vehicle['vehicle_reg_no']); ?>"
                                         <?php echo isset($editData['vehicle_number']) && $editData['vehicle_number']!= '' && $editData['vehicle_number']==$vehicle['vehicle_reg_no'] ? 'selected' : ''; ?>
@@ -333,15 +333,15 @@ $visitPurposes = [
                         <!-- Vehicle Ownership Type -->
                         <div class="form-group row d-none-initial" id="vehicleOwnershipRow">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Vehicle Ownership <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Vehicle Ownership'); ?> <span class="text-danger">*</span></span>
                                 <div>
                                     <div class="transport-gateway-radio radio-primary">
                                         <input type="radio" name="vehicle_ownership" id="company_vehicle" value="company">
-                                        <label for="company_vehicle">Company Vehicle</label>
+                                        <label for="company_vehicle"><?= __('Company Vehicle'); ?></label>
                                     </div>
                                     <div class="transport-gateway-radio radio-primary">
                                         <input type="radio" name="vehicle_ownership" id="private_vehicle" value="private">
-                                        <label for="private_vehicle">Private Vehicle</label>
+                                        <label for="private_vehicle"><?= __('Private Vehicle'); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -349,21 +349,21 @@ $visitPurposes = [
 
                         <div class="form-group row d-none-initial" id="otherVehicleTypeRow">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Specify Vehicle Type <span
+                                <span class="form-label"><?= __('Specify Vehicle Type'); ?> <span
                                         class="text-danger">*</span></span>
                                 <div>
-                                    <input aria-label="Please specify vehicle type" type="text" class="form-control" name="other_vehicle_type"
-                                        id="otherVehicleType" placeholder="Please specify vehicle type">
+                                    <input aria-label="<?= htmlspecialchars(__('Please specify vehicle type'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="other_vehicle_type"
+                                        id="otherVehicleType" placeholder="<?= htmlspecialchars(__('Please specify vehicle type'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Employee <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Employee'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Driver Name" class="form-select js-example-basic-single" name="driver_name" required>
-                                        <option value="">Select Employee</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Driver Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="driver_name" required>
+                                        <option value=""><?= __('Select Employee'); ?></option>
                                         <?php foreach ($applicationUsers as $user){ ?>
                                             <?php
                                             $displayName = $user['display_name'] ?? '';
@@ -379,10 +379,10 @@ $visitPurposes = [
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Contact</span>
+                                <span class="form-label"><?= __('Contact'); ?></span>
                                 <div>
-                                    <input aria-label="Phone number" type="tel" class="form-control" name="driver_contact"
-                                        placeholder="Phone number"
+                                    <input aria-label="<?= htmlspecialchars(__('Phone number'), ENT_QUOTES, 'UTF-8'); ?>" type="tel" class="form-control" name="driver_contact"
+                                        placeholder="<?= htmlspecialchars(__('Phone number'), ENT_QUOTES, 'UTF-8'); ?>"
                                         value="<?php echo $editMode ? htmlspecialchars($editData['driver_contact'] ?? '') : ''; ?>">
                                 </div>
                             </div>
@@ -399,8 +399,8 @@ $visitPurposes = [
                                         <div class="card-body py-2">
                                             <div class="form-group row mb-0">
                                                 <div class="form-group col-lg-5 mb-0">
-                                                    <select aria-label="New Person Select" class="form-select js-example-basic-single new-person-select" id="newPersonSelect">
-                                                        <option value="">Select Employee</option>
+                                                    <select aria-label="<?= htmlspecialchars(__('New Person Select'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single new-person-select" id="newPersonSelect">
+                                                        <option value=""><?= __('Select Employee'); ?></option>
                                                         <?php foreach ($applicationUsers as $user){ ?>
                                                             <option value="<?php echo htmlspecialchars($user['id']); ?>"
                                                                 data-mobile="<?php echo htmlspecialchars($user['user_mobile'] ?? ''); ?>"
@@ -411,12 +411,12 @@ $visitPurposes = [
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-lg-5 mb-0">
-                                                    <input aria-label="Contact Number" type="tel" class="form-control form-control-sm" id="newPersonContact"
-                                                        placeholder="Contact Number" readonly>
+                                                    <input aria-label="<?= htmlspecialchars(__('Contact Number'), ENT_QUOTES, 'UTF-8'); ?>" type="tel" class="form-control form-control-sm" id="newPersonContact"
+                                                        placeholder="<?= htmlspecialchars(__('Contact Number'), ENT_QUOTES, 'UTF-8'); ?>" readonly>
                                                 </div>
                                                 <div class="form-group col-lg-2 mb-0">
                                                     <button type="button" class="btn btn-sm btn-success w-100 add-person-btn">
-                                                        <i class="ti-check"></i> Add
+                                                        <i class="ti-check"></i> <?= __('Add'); ?>
                                                     </button>
                                                 </div>
                                             </div>
@@ -424,7 +424,7 @@ $visitPurposes = [
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-sm btn-outline-primary" id="showAddPersonBtn">
-                                    <i class="ti-plus"></i> Add More Person
+                                    <i class="ti-plus"></i> <?= __('Add More Person'); ?>
                                 </button>
                                 <!-- Hidden field to store person details as JSON -->
                                 <input type="hidden" name="person_details" id="personDetailsJson" value="[]">
@@ -433,11 +433,11 @@ $visitPurposes = [
 
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Purpose of Visit <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Purpose of Visit'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Visit Purpose" class="form-select js-example-basic-single" name="visit_purpose"
+                                    <select aria-label="<?= htmlspecialchars(__('Visit Purpose'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="visit_purpose"
                                         id="visitPurpose" required>
-                                        <option value="">Select Purpose</option>
+                                        <option value=""><?= __('Select Purpose'); ?></option>
                                         <?php foreach ($visitPurposes as $key => $purpose): ?>
                                             <option value="<?php echo $key; ?>"
                                                 <?php echo ($editMode && ($editData['visit_purpose'] ?? '') == $key) ? 'selected' : ''; ?>>
@@ -451,23 +451,23 @@ $visitPurposes = [
 
                         <div class="form-group row d-none-initial" id="otherPurposeRow">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Specify Purpose <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Specify Purpose'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <input aria-label="Please specify purpose of visit" type="text" class="form-control" name="other_visit_purpose" id="otherPurpose"
-                                        placeholder="Please specify purpose of visit">
+                                    <input aria-label="<?= htmlspecialchars(__('Please specify purpose of visit'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="other_visit_purpose" id="otherPurpose"
+                                        placeholder="<?= htmlspecialchars(__('Please specify purpose of visit'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                             <div class="form-group w-full col-lg-6">
-                                <span class="form-label">Expected Duration</span>
+                                <span class="form-label"><?= __('Expected Duration'); ?></span>
                                 <div>
-                                    <select aria-label="Expected Duration" class="form-select js-example-basic-single" name="expected_duration">
-                                        <option value="">Select Duration</option>
-                                        <option value="30">30 minutes</option>
-                                        <option value="60">1 hour</option>
-                                        <option value="120">2 hours</option>
-                                        <option value="240">4 hours</option>
-                                        <option value="480">8 hours</option>
-                                        <option value="full_day">Full Day</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Expected Duration'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="expected_duration">
+                                        <option value=""><?= __('Select Duration'); ?></option>
+                                        <option value="30"><?= __('30 minutes'); ?></option>
+                                        <option value="60"><?= __('1 hour'); ?></option>
+                                        <option value="120"><?= __('2 hours'); ?></option>
+                                        <option value="240"><?= __('4 hours'); ?></option>
+                                        <option value="480"><?= __('8 hours'); ?></option>
+                                        <option value="full_day"><?= __('Full Day'); ?></option>
                                     </select>
                                 </div>
                             </div>
@@ -475,27 +475,27 @@ $visitPurposes = [
 
                         <div class="form-group row">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Visiting Person/Department</span>
+                                <span class="form-label"><?= __('Visiting Person/Department'); ?></span>
                                 <div>
-                                    <input aria-label="Person or department to visit" type="text" class="form-control" name="visiting_person"
-                                        placeholder="Person or department to visit" value="<?php echo $editMode ? htmlspecialchars($editData['visiting_person'] ?? '') : ''; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Person or department to visit'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="visiting_person"
+                                        placeholder="<?= htmlspecialchars(__('Person or department to visit'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $editMode ? htmlspecialchars($editData['visiting_person'] ?? '') : ''; ?>">
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Company/Organization</span>
+                                <span class="form-label"><?= __('Company/Organization'); ?></span>
                                 <div>
-                                    <input aria-label="Visitor" type="text" class="form-control" name="company_name"
-                                        placeholder="Visitor's company name" value="<?php echo $editMode ? htmlspecialchars($editData['company_name'] ?? '') : ''; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Visitor'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="company_name"
+                                        placeholder="<?= htmlspecialchars(__('Visitor\'s company name'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $editMode ? htmlspecialchars($editData['company_name'] ?? '') : ''; ?>">
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Location <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Location'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <select aria-label="Location" class="form-select js-example-basic-single" name="location" id="locationSelect" required>
-                                        <option value="">Select Location</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="location" id="locationSelect" required>
+                                        <option value=""><?= __('Select Location'); ?></option>
                                         <?php
 
                                         if (count((array)$locations) > 0) { ?>
@@ -507,20 +507,20 @@ $visitPurposes = [
                                                 <?php } ?>
                                             <?php } ?>
                                         <?php } ?>
-                                        <option value="99999" <?php echo ($editMode && ($editData['location'] ?? '') == '99999') ? 'selected' : ''; ?>>Others</option>
+                                        <option value="99999" <?php echo ($editMode && ($editData['location'] ?? '') == '99999') ? 'selected' : ''; ?>><?= __('Others'); ?></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-lg-4 <?php echo ($editMode && ($editData['location'] ?? '') == '99999') ? '' : 'd-none-initial'; ?>" id="otherLocationCol">
-                                <span class="form-label">Other Location <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Other Location'); ?> <span class="text-danger">*</span></span>
                                 <div>
-                                    <input aria-label="Enter other location" type="text" class="form-control" name="other_location" id="otherLocation"
-                                        placeholder="Enter other location"
+                                    <input aria-label="<?= htmlspecialchars(__('Enter other location'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="other_location" id="otherLocation"
+                                        placeholder="<?= htmlspecialchars(__('Enter other location'), ENT_QUOTES, 'UTF-8'); ?>"
                                         value="<?php echo $editMode && $editData ? htmlspecialchars($editData['other_location'] ?? '') : ''; ?>">
                                 </div>
                             </div>
                             <div class="form-group col-lg-4" >
-                                <span class="form-label">Vehicle Reading <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Vehicle Reading'); ?> <span class="text-danger">*</span></span>
                                 <?php
                                 $vehicle_reading=0;
                                 if($editMode && ($editData['method_type'] == 'entry_first')){
@@ -539,16 +539,16 @@ $visitPurposes = [
 
                         <div class="form-group row" id="entryDateTimeRow">
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Date</span>
+                                <span class="form-label"><?= __('Date'); ?></span>
                                 <div>
-                                    <input aria-label="Entry Date" type="date" class="form-control" name="entry_date"
+                                    <input aria-label="<?= htmlspecialchars(__('Entry Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="entry_date"
                                         value="<?php echo $editMode && !empty($editData['entry_date']) ? $editData['entry_date'] : date('Y-m-d'); ?>">
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label">Time</span>
+                                <span class="form-label"><?= __('Time'); ?></span>
                                 <div>
-                                    <input aria-label="Entry Time" type="time" class="form-control" name="entry_time"
+                                    <input aria-label="<?= htmlspecialchars(__('Entry Time'), ENT_QUOTES, 'UTF-8'); ?>" type="time" class="form-control" name="entry_time"
                                         value="<?php echo $editMode && !empty($editData['entry_time']) ? substr($editData['entry_time'], 0, 5) : date('H:i'); ?>">
                                 </div>
                             </div>
@@ -556,10 +556,10 @@ $visitPurposes = [
 
                         <div class="form-group row">
                             <div class="form-group col-lg-12">
-                                <span class="form-label">Additional Notes</span>
+                                <span class="form-label"><?= __('Additional Notes'); ?></span>
                                 <div>
-                                    <textarea aria-label="Any additional information..." class="form-control" name="notes" rows="3"
-                                        placeholder="Any additional information..."><?php echo $editMode ? htmlspecialchars($editData['notes'] ?? '') : ''; ?></textarea>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Any additional information...'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="notes" rows="3"
+                                        placeholder="<?= htmlspecialchars(__('Any additional information...'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $editMode ? htmlspecialchars($editData['notes'] ?? '') : ''; ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -568,11 +568,11 @@ $visitPurposes = [
                             <div class="form-group col-lg-6">
                                 <div class="checkbox-fade fade-in-primary">
                                     <label>
-                                        <input aria-label="Has Goods" type="checkbox" name="has_goods" value="1" id="hasGoods"
+                                        <input aria-label="<?= htmlspecialchars(__('Has Goods'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="has_goods" value="1" id="hasGoods"
                                             <?php echo ($editMode && ($editData['has_goods'] ?? '') == 1) ? 'checked' : ''; ?>>
                                         <span class="cr"><i
                                                 class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                        <span>Vehicle carrying goods/materials</span>
+                                        <span><?= __('Vehicle carrying goods/materials'); ?></span>
                                     </label>
                                 </div>
                             </div>
@@ -580,10 +580,10 @@ $visitPurposes = [
 
                         <div class="form-group row d-none-initial" id="goodsDetails">
                             <div class="form-group col-lg-12">
-                                <span class="form-label">Goods Description</span>
+                                <span class="form-label"><?= __('Goods Description'); ?></span>
                                 <div>
-                                    <textarea aria-label="Describe the goods being carried..." class="form-control" name="goods_description" rows="2"
-                                        placeholder="Describe the goods being carried..."><?php echo $editMode ? htmlspecialchars($editData['goods_description'] ?? '') : ''; ?></textarea>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Describe the goods being carried...'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="goods_description" rows="2"
+                                        placeholder="<?= htmlspecialchars(__('Describe the goods being carried...'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $editMode ? htmlspecialchars($editData['goods_description'] ?? '') : ''; ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -595,7 +595,7 @@ $visitPurposes = [
                             </button>
                             <button type="reset"
                                 class="btn btn-secondary btn-shadow-hover font-weight-bold mr-2 m-b-10 btn_mobile">
-                                <i class="la la-refresh"></i>Clear Form
+                                <i class="la la-refresh"></i><?= __('Clear Form'); ?>
                             </button>
                         </div>
                     </form>
@@ -608,27 +608,27 @@ $visitPurposes = [
         <div class="col-lg-4">
             <div class="card table-card">
                 <div class="card-header table-card-header">
-                    <h5><i class="ti-list"></i> Active Vehicles</h5>
+                    <h5><i class="ti-list"></i> <?= __('Active Vehicles'); ?></h5>
                     <div class="card-header-right">
-                        <span class="badge badge-primary text-white" id="vehicles-count-badge_2">0 vehicles</span>
+                        <span class="badge badge-primary text-white" id="vehicles-count-badge_2"><?= __('0 vehicles'); ?></span>
                     </div>
                 </div>
                 <div class="card-body custom-scroll" style="height: 1050px; overflow-y: auto;">
                     <!-- Search Box -->
                     <div class="mb-2">
-                        <input aria-label="Search by vehicle number, driver name, or purpose..." type="text" class="form-control form-control-sm" id="vehicleSearchInput_2"
-                            placeholder="Search by vehicle number, driver name, or purpose..."
+                        <input aria-label="<?= htmlspecialchars(__('Search by vehicle number, driver name, or purpose...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-sm" id="vehicleSearchInput_2"
+                            placeholder="<?= htmlspecialchars(__('Search by vehicle number, driver name, or purpose...'), ENT_QUOTES, 'UTF-8'); ?>"
                             style="border-radius: 4px; padding: 6px 10px;">
                     </div>
                     <ul class="nav nav-tabs" id="currentVehiclesTabs_2">
                         <li class="nav-item">
                             <a class="nav-link active" id="pending-vehicles-tab_2" data-tab="pending" data-toggle="tab" href="#pendingVehicles" role="tab" aria-controls="pendingVehicles" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                Pending Entry/Exit <span class="badge badge-warning" id="pending-vehicles-count_2">0</span>
+                                <?= __('Pending Entry/Exit'); ?> <span class="badge badge-warning" id="pending-vehicles-count_2">0</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="missing-vehicles-tab_2" data-tab="missing" data-toggle="tab" href="#missingVehicles" role="tab" aria-controls="missingVehicles" aria-selected="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                Approved<span class="badge badge-danger" id="missing-vehicles-count_2">0</span>
+                                <?= __('Approved'); ?><span class="badge badge-danger" id="missing-vehicles-count_2">0</span>
                             </a>
                         </li>
                     </ul>
@@ -640,7 +640,7 @@ $visitPurposes = [
                                         <tr>
                                             <th scope="col" colspan="2" class="text-center p-4">
                                                 <i class="fa fa-spinner fa-spin text-muted loading-spinner-icon"></i>
-                                                <p class="text-muted mt-2">Loading vehicles...</p>
+                                                <p class="text-muted mt-2"><?= __('Loading vehicles...'); ?></p>
                                             </th>
                                         </tr>
                                     </tbody>
@@ -654,7 +654,7 @@ $visitPurposes = [
                                         <tr>
                                             <th scope="col" colspan="2" class="text-center p-4">
                                                 <i class="fa fa-spinner fa-spin text-muted loading-spinner-icon"></i>
-                                                <p class="text-muted mt-2">Loading vehicles...</p>
+                                                <p class="text-muted mt-2"><?= __('Loading vehicles...'); ?></p>
                                             </th>
                                         </tr>
                                     </tbody>
@@ -672,10 +672,10 @@ $visitPurposes = [
         <div class="col-12">
             <div class="card table-card">
                 <div class="card-header table-card-header">
-                    <h5><i class="ti-time"></i> Recent Activity</h5>
+                    <h5><i class="ti-time"></i> <?= __('Recent Activity'); ?></h5>
                     <div class="card-header-right">
                         <a href="index.php?option=custom_list_transport_gateway" class="btn btn-sm btn-primary">
-                            <i class="ti-eye"></i> View All Records
+                            <i class="ti-eye"></i> <?= __('View All Records'); ?>
                         </a>
                     </div>
                 </div>
@@ -684,20 +684,20 @@ $visitPurposes = [
                         <table class="table table-hover" id="recentActivityTable">
                             <thead>
                                 <tr>
-                                    <th scope="col">Vehicle</th>
-                                    <th scope="col">Driver</th>
-                                    <th scope="col">Action</th>
-                                    <th scope="col">Purpose</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">In/Out Time</th>
-                                    <th scope="col">Print</th>
+                                    <th scope="col"><?= __('Vehicle'); ?></th>
+                                    <th scope="col"><?= __('Driver'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
+                                    <th scope="col"><?= __('Purpose'); ?></th>
+                                    <th scope="col"><?= __('Date'); ?></th>
+                                    <th scope="col"><?= __('In/Out Time'); ?></th>
+                                    <th scope="col"><?= __('Print'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td colspan="7" class="text-center p-4">
                                         <i class="fa fa-spinner fa-spin text-muted loading-spinner-icon"></i>
-                                        <p class="text-muted mt-2">Loading recent activity...</p>
+                                        <p class="text-muted mt-2"><?= __('Loading recent activity...'); ?></p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -714,8 +714,8 @@ $visitPurposes = [
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><i class="ti-export"></i> Record Vehicle Exit</h4>
-                <button type="button" class="close" onclick="closeExitModal()" aria-label="Close">
+                <h4 class="modal-title"><i class="ti-export"></i> <?= __('Record Vehicle Exit'); ?></h4>
+                <button type="button" class="close" onclick="closeExitModal()" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -725,25 +725,25 @@ $visitPurposes = [
                     <input type="hidden" name="method_type" id="actionMethodType" value="entry_first">
                     <div class="alert alert-info">
                         <i class="ti-info-alt"></i>
-                        Recording exit for vehicle: <strong id="exitVehicleNumber"></strong>
+                        <?= __('Recording exit for vehicle'); ?>: <strong id="exitVehicleNumber"></strong>
                     </div>
 
                     <div class="card border mb-3" id="exitVehicleDetails" style="display: none;">
                         <div class="card-body py-2">
-                            <h6 class="card-title mb-2"><i class="ti-car"></i> Vehicle Details</h6>
+                            <h6 class="card-title mb-2"><i class="ti-car"></i> <?= __('Vehicle Details'); ?></h6>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p class="mb-1"><strong>Driver:</strong> <span id="exitDriverName">-</span></p>
-                                    <p class="mb-1"><strong>Contact:</strong> <span id="exitDriverContact">-</span></p>
+                                    <p class="mb-1"><strong><?= __('Driver'); ?>:</strong> <span id="exitDriverName">-</span></p>
+                                    <p class="mb-1"><strong><?= __('Contact'); ?>:</strong> <span id="exitDriverContact">-</span></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="mb-1"><strong>Purpose:</strong> <span id="exitVisitPurpose">-</span></p>
-                                    <p class="mb-1"><strong>Location:</strong> <span id="exitLocation">-</span></p>
+                                    <p class="mb-1"><strong><?= __('Purpose'); ?>:</strong> <span id="exitVisitPurpose">-</span></p>
+                                    <p class="mb-1"><strong><?= __('Location'); ?>:</strong> <span id="exitLocation">-</span></p>
                                 </div>
                             </div>
                             <div id="exitAdditionalPersons" style="display: none;">
                                 <hr class="my-2">
-                                <p class="mb-1"><strong><i class="ti-user"></i> Additional Persons:</strong></p>
+                                <p class="mb-1"><strong><i class="ti-user"></i> <?= __('Additional Persons'); ?>:</strong></p>
                                 <div id="exitAdditionalPersonsList" class="text-muted"></div>
                             </div>
                         </div>
@@ -751,44 +751,44 @@ $visitPurposes = [
 
                     <div class="form-group row">
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Date</span>
-                            <input aria-label="Exit Date" type="date" class="form-control" name="exit_date"
+                            <span class="form-label"><?= __('Date'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Exit Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="exit_date"
                                 value="<?php echo date('Y-m-d'); ?>" readonly>
                         </div>
                         <div class="form-group col-lg-6">
-                            <span class="form-label">Time</span>
-                            <input aria-label="Exit Time" type="time" class="form-control" name="exit_time" value="<?php echo date('H:i'); ?>"
+                            <span class="form-label"><?= __('Time'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Exit Time'), ENT_QUOTES, 'UTF-8'); ?>" type="time" class="form-control" name="exit_time" value="<?php echo date('H:i'); ?>"
                                 readonly>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <span class="form-label">Notes (Optional)</span>
-                        <textarea aria-label="Any observations or notes..." class="form-control" name="exit_notes" rows="3"
-                            placeholder="Any observations or notes..."></textarea>
+                        <span class="form-label"><?= __('Notes (Optional)'); ?></span>
+                        <textarea aria-label="<?= htmlspecialchars(__('Any observations or notes...'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="exit_notes" rows="3"
+                            placeholder="<?= htmlspecialchars(__('Any observations or notes...'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                     </div>
 
                     <div class="form-group row">
                         <div class="form-group col-lg-6">
                             <div class="checkbox-fade fade-in-primary">
                                 <label>
-                                    <input aria-label="Goods Checked" type="checkbox" name="goods_checked" value="1" id="goodsChecked">
+                                    <input aria-label="<?= htmlspecialchars(__('Goods Checked'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="goods_checked" value="1" id="goodsChecked">
                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                    <span>Goods/materials verified</span>
+                                    <span><?= __('Goods/materials verified'); ?></span>
                                 </label>
                             </div>
                         </div>
                         <div class="form-group col-lg-6">
                             <div class="checkbox-fade fade-in-primary">
                                 <label>
-                                    <input aria-label="Security Check" type="checkbox" name="security_check" value="1" id="securityCheck">
+                                    <input aria-label="<?= htmlspecialchars(__('Security Check'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="security_check" value="1" id="securityCheck">
                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                    <span>Security check completed</span>
+                                    <span><?= __('Security check completed'); ?></span>
                                 </label>
                             </div>
                         </div>
                         <div class="form-group col-lg-6" >
-                                <span class="form-label">Vehicle Reading <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Vehicle Reading'); ?> <span class="text-danger">*</span></span>
                             <div>
                                 <input aria-label="12345" type="number" class="form-control text-right" name="meater_reading"
                                     id="meater_reading" step="0.01" min="0" placeholder="12345" required value="">
@@ -797,16 +797,16 @@ $visitPurposes = [
                     </div>
 
                     <div class="form-group">
-                        <span class="form-label">Authorized By</span>
-                        <input aria-label="Name of person authorizing" type="text" class="form-control" name="authorized_by"
-                            placeholder="Name of person authorizing"
+                        <span class="form-label"><?= __('Authorized By'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Name of person authorizing'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="authorized_by"
+                            placeholder="<?= htmlspecialchars(__('Name of person authorizing'), ENT_QUOTES, 'UTF-8'); ?>"
                             value="<?php echo isset($_SESSION['display_name']) ? htmlspecialchars($_SESSION['display_name']) : ''; ?>">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default waves-effect" onclick="closeExitModal()">Cancel</button>
+                    <button type="button" class="btn btn-default waves-effect" onclick="closeExitModal()"><?= __('Cancel'); ?></button>
                     <button type="submit" class="btn btn-danger waves-effect waves-light">
-                        <i class="ti-check"></i> Record Exit
+                        <i class="ti-check"></i> <?= __('Record Exit'); ?>
                     </button>
                 </div>
             </form>
@@ -818,8 +818,8 @@ $visitPurposes = [
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><i class="ti-printer"></i> Visitor Gate Pass</h4>
-                <button type="button" class="close close-print-modal-btn" aria-label="Close">
+                <h4 class="modal-title"><i class="ti-printer"></i> <?= __('Visitor Gate Pass'); ?></h4>
+                <button type="button" class="close close-print-modal-btn" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -827,9 +827,9 @@ $visitPurposes = [
                 <!-- Print content will be loaded here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary close-print-modal-btn">Close</button>
+                <button type="button" class="btn btn-secondary close-print-modal-btn"><?= __('Close'); ?></button>
                 <button type="button" class="btn btn-primary print-slip-btn">
-                    <i class="ti-printer"></i> Print
+                    <i class="ti-printer"></i> <?= __('Print'); ?>
                 </button>
             </div>
         </div>

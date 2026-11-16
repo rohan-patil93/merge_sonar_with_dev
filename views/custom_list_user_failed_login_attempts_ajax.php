@@ -21,13 +21,13 @@ if($view_type == 'detail'){
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Sl. No</th>
-                    <th scope="col">Email</th>
+                    <th scope="col"><?= __('Sl. No'); ?></th>
+                    <th scope="col"><?= __('Email'); ?></th>
 
-                    <th scope="col">Device</th>
+                    <th scope="col"><?= __('Device'); ?></th>
 
 
-                    <th scope="col">loggin at</th>
+                    <th scope="col"><?= __('loggin at'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -52,7 +52,7 @@ if($view_type == 'detail'){
                     }
                 }else{ ?>
                     <tr>
-                        <td colspan="7" class="text-center text-muted">No attempts found</td>
+                        <td colspan="7" class="text-center text-muted"><?= __('No attempts found'); ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
@@ -71,12 +71,12 @@ $failed_login_attempts = isset($result['failed_login_attempts']) ? $result['fail
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Sl. No</th>
-                <th scope="col">Email</th>
-                <th scope="col">Attempts</th>
+                <th scope="col"><?= __('Sl. No'); ?></th>
+                <th scope="col"><?= __('Email'); ?></th>
+                <th scope="col"><?= __('Attempts'); ?></th>
 
-                <th scope="col">Device Source</th>
-                <th scope="col">Last Attempt</th>
+                <th scope="col"><?= __('Device Source'); ?></th>
+                <th scope="col"><?= __('Last Attempt'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -105,7 +105,7 @@ $failed_login_attempts = isset($result['failed_login_attempts']) ? $result['fail
                 }
             }else{ ?>
                 <tr>
-                    <td colspan="6" class="text-center text-muted">No Failed Login Attempts found</td>
+                    <td colspan="6" class="text-center text-muted"><?= __('No Failed Login Attempts found'); ?></td>
                 </tr>
             <?php } ?>
         </tbody>

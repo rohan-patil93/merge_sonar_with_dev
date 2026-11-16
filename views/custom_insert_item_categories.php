@@ -139,7 +139,7 @@ function addnewfields(){
                                             <select aria-label="<?php echo __('Default Costing Type'); ?>" class="form-select border js-example-basic-single requried_field" id="default_costing_type" name="default_costing_type">
                                             <?php foreach ($result['costing_type'] as $ctype) { ?>
                                                     <option value="<?php echo $ctype['genc_detail_code']; ?>" <?php if($item_categories['default_costing_type']==$ctype['genc_detail_code']){ echo __('selected');
-} ?>><?php echo $ctype['genc_detail_name'] ?></option>
+} ?>><?php echo __($ctype['genc_detail_name']) ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -168,7 +168,7 @@ function addnewfields(){
                                             <div class="radio radio-outline  mt-1">
                                                 <?php $mk = 1; foreach($bill_matching_type as $bmtype){ ?>
                                                 <label class="radio radio-inline">
-                                                    <input aria-label="<?php echo __('Radio option'); ?>" type="radio" <?php echo (($item_categories['bill_matching_type'] =="" && $mk == '1') || $bmtype['genc_detail_code'] == $item_categories['bill_matching_type'])?"checked":""; ?> name="bill_matching_type" value="<?php echo $bmtype['genc_detail_code']; ?>">  <span></span><?php echo $bmtype['genc_detail_name']; ?>
+                                                    <input aria-label="<?php echo __('Radio option'); ?>" type="radio" <?php echo (($item_categories['bill_matching_type'] =="" && $mk == '1') || $bmtype['genc_detail_code'] == $item_categories['bill_matching_type'])?"checked":""; ?> name="bill_matching_type" value="<?php echo $bmtype['genc_detail_code']; ?>">  <span></span><?php echo __($bmtype['genc_detail_name']); ?>
                                                 </label>
                                                 <?php $mk++;
 } ?>
@@ -213,7 +213,7 @@ function addnewfields(){
                                             <select aria-label="<?php echo __('Price Variance Type'); ?>" class="form-select border js-example-basic-single" name="price_variance_type">
                                                 <?php foreach ($variance_type as $vt) {  ?>
                                                     <option value="<?php echo $vt['genc_detail_code']; ?>" <?php  if($item_categories['price_variance_type']==$vt['genc_detail_code']){echo __('selected');
-} ?>><?php echo $vt['genc_detail_name'] ?></option>
+} ?>><?php echo __($vt['genc_detail_name']) ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -245,7 +245,7 @@ function addnewfields(){
                                             <select aria-label="<?php echo __('Qty Variance Type'); ?>" class="form-select border js-example-basic-single" name="qty_variance_type">
                                                 <?php foreach ($variance_type as $vt) {  ?>
                                                     <option value="<?php echo $vt['genc_detail_code']; ?>" <?php  if($item_categories['qty_variance_type']==$vt['genc_detail_code']){echo __('selected');
-} ?>><?php echo $vt['genc_detail_name'] ?></option>
+} ?>><?php echo __($vt['genc_detail_name']) ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>

@@ -14,15 +14,15 @@ $result = json_decode($apires, true);
 <script type="text/javascript" src="assets/bower_components/jquery/js/jquery.min.js"></script>
 <div class="row mt-3">
   <div class="col-lg-8">
-    <h3 class="f-w-600 mb-0">HR Command Center</h3>
-    <p>Welcome back Admin!</p>
+    <h3 class="f-w-600 mb-0"><?= __('HR Command Center'); ?></h3>
+    <p><?= __('Welcome back Admin!'); ?></p>
   </div>
 
   <div class="col-lg-4 text-end">
     <div class="d-inline-block align-top me-3">
       <div class="form-group">
         <form method="post" id="dashboardDateForm">
-          <input aria-label="Date" type="date"
+          <input aria-label="<?= htmlspecialchars(__('Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date"
             name="date"
             class="form-control"
             value="<?php echo htmlspecialchars($date); ?>">
@@ -41,16 +41,16 @@ $result = json_decode($apires, true);
       <div class="modal-dialog modal-lg text-start" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Modal title</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h4 class="modal-title"><?= __('Modal title'); ?></h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
           </div>
           <div class="modal-body">
-            <h5>Default Modal</h5>
-            <p>This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+            <h5><?= __('Default Modal'); ?></h5>
+            <p><?= __('This is Photoshop\'s version of Lorem IpThis is Photoshop\'s version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.'); ?></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary waves-effect waves-light ">Save changes</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+            <button type="button" class="btn btn-primary waves-effect waves-light "><?= __('Save changes'); ?></button>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@ $result = json_decode($apires, true);
             <i class="fa fa-users f-24 text-primary"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">Total Employees</span>
+            <span class="f-12 f-w-600"><?= __('Total Employees'); ?></span>
             <h4 class="f-30 f-w-600 mt-3 mb-3"><?php echo $result['total_employees'] ?? 0; ?></h4>
 
           </div>
@@ -82,7 +82,7 @@ $result = json_decode($apires, true);
             <i class="fa fa-users f-24 text-success"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">Persent Today</span>
+            <span class="f-12 f-w-600"><?= __('Persent Today'); ?></span>
             <h4 class="f-30 f-w-600 mt-3 mb-3"><?php echo $result['present'] ?? 0; ?></h4>
 
           </div>
@@ -98,7 +98,7 @@ $result = json_decode($apires, true);
             <i class="far fa-user f-24 text-danger"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">Absent Today</span>
+            <span class="f-12 f-w-600"><?= __('Absent Today'); ?></span>
             <h4 class="f-30 f-w-600 mt-3 mb-3"><?php echo $result['absent'] ?? 0; ?></h4>
 
           </div>
@@ -114,7 +114,7 @@ $result = json_decode($apires, true);
             <i class="far fa-user f-24 text-warning"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">On Leave</span>
+            <span class="f-12 f-w-600"><?= __('On Leave'); ?></span>
             <h4 class="f-30 f-w-600 mt-3 mb-3"><?php echo $result['on_leave'] ?? 0; ?></h4>
 
           </div>
@@ -130,7 +130,7 @@ $result = json_decode($apires, true);
             <i class="fa fa-users f-24 text-primary"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">New Joiners<span class="f-8">(This Month)</span></span>
+            <span class="f-12 f-w-600"><?= __('New Joiners'); ?><span class="f-8"><?= __('(This Month)'); ?></span></span>
             <h4 class="f-30 f-w-600 mt-3 mb-3"><?php echo $result['count_new_joiners'] ?? 0; ?></h4>
 
           </div>
@@ -146,7 +146,7 @@ $result = json_decode($apires, true);
             <i class="far fa-user f-24 text-danger"></i>
           </span>
           <div class="d-inline-block">
-            <span class="f-12 f-w-600">Attrition<span class="f-8">(This Month)</span></span>
+            <span class="f-12 f-w-600"><?= __('Attrition'); ?><span class="f-8"><?= __('(This Month)'); ?></span></span>
             <h4 class="f-30 f-w-600 mt-3 mb-3"><?php echo $result['attendance_pct'] ?? 0; ?></h4>
 
           </div>
@@ -164,14 +164,14 @@ $result = json_decode($apires, true);
         <div class="card mb-3">
           <div class="card-body" style="height:520px;">
             <div class="d-flex justify-content-between align-items-center">
-              <h3 class="f-20 f-w-600">Headcount Trend</h3>
+              <h3 class="f-20 f-w-600"><?= __('Headcount Trend'); ?></h3>
 
               <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
-                <a class="dropdown-item waves-light waves-effect" href="#">Action</a>
-                <a class="dropdown-item waves-light waves-effect" href="#">Another action</a>
-                <a class="dropdown-item waves-light waves-effect" href="#">Something else</a>
+                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Action'); ?></a>
+                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Another action'); ?></a>
+                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Something else'); ?></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item waves-light waves-effect" href="#">Something else</a>
+                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Something else'); ?></a>
               </div>
             </div>
             <div class="mt-3">
@@ -234,7 +234,7 @@ $result = json_decode($apires, true);
         <div class="card mb-3">
           <div class="card-body" style="height:520px;">
             <div class="d-flex justify-content-between align-items-center">
-              <h3 class="f-20 f-w-600">Department wise Headcount</h3>
+              <h3 class="f-20 f-w-600"><?= __('Department wise Headcount'); ?></h3>
             </div>
             <div class="mt-1">
               <?php
@@ -307,7 +307,7 @@ $result = json_decode($apires, true);
                     <?php } ?>
                   <?php } else { ?>
                     <tr>
-                      <td class="text-center text-muted">No department data found</td>
+                      <td class="text-center text-muted"><?= __('No department data found'); ?></td>
                     </tr>
                   <?php } ?>
                 </table>
@@ -358,7 +358,7 @@ $result = json_decode($apires, true);
         <div class="card mb-3"  style="min-height: 424px;">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <h3 class="f-20 f-w-600">Pending Approvals</h3>
+              <h3 class="f-20 f-w-600"><?= __('Pending Approvals'); ?></h3>
             </div>
             <div class="table-responsive mt-3 height-300">
               <?php
@@ -426,7 +426,7 @@ $result = json_decode($apires, true);
                 <?php } else { ?>
                   <tr>
                     <td colspan="3" class="text-center text-muted f-12">
-                      No pending approvals found
+                      <?= __('No pending approvals found'); ?>
                     </td>
                   </tr>
                 <?php } ?>
@@ -440,7 +440,7 @@ $result = json_decode($apires, true);
         <div class="card mb-3" style="min-height: 424px;">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <h3 class="f-20 f-w-600">Leave Summary <span class="f-10 f-w-600 text-muted">(May 20xx)</span></h3>
+              <h3 class="f-20 f-w-600"><?= __('Leave Summary'); ?> <span class="f-10 f-w-600 text-muted"><?= __('(May 20xx)'); ?></span></h3>
             </div>
             <div class="table-responsive mt-3 height-300">
               <?php
@@ -449,9 +449,9 @@ $result = json_decode($apires, true);
 
               <table class="table table-borderless table-sm align-middle pedding-approvals f-12">
                 <tr class="border-bottom">
-                  <th scope="col">Leave Type</th>
-                  <th scope="col">Utilized</th>
-                  <th scope="col">Balance</th>
+                  <th scope="col"><?= __('Leave Type'); ?></th>
+                  <th scope="col"><?= __('Utilized'); ?></th>
+                  <th scope="col"><?= __('Balance'); ?></th>
                 </tr>
 
                 <?php if (count((array)$leaveSummary) > 0) { ?>
@@ -470,7 +470,7 @@ $result = json_decode($apires, true);
                 <?php } else { ?>
                   <tr>
                     <td colspan="3" class="text-center text-muted">
-                      No leave summary found
+                      <?= __('No leave summary found'); ?>
                     </td>
                   </tr>
                 <?php } ?>
@@ -484,7 +484,7 @@ $result = json_decode($apires, true);
         <div class="card mb-3" style="min-height: 424px;">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <h3 class="f-20 f-w-600">New Joiners</h3>
+              <h3 class="f-20 f-w-600"><?= __('New Joiners'); ?></h3>
             </div>
             <div class="table-responsive mt-3 height-300">
               <?php
@@ -531,7 +531,7 @@ $result = json_decode($apires, true);
                 <?php } else { ?>
                   <tr>
                     <td colspan="3" class="text-center text-muted f-12">
-                      No new joiners found
+                      <?= __('No new joiners found'); ?>
                     </td>
                   </tr>
                 <?php } ?>
@@ -545,7 +545,7 @@ $result = json_decode($apires, true);
         <div class="card mb-3" style="min-height: 424px;">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <h3 class="f-20 f-w-600">Upcoming Exits</h3>
+              <h3 class="f-20 f-w-600"><?= __('Upcoming Exits'); ?></h3>
             </div>
             <div class="table-responsive mt-3 height-300">
               <?php
@@ -592,7 +592,7 @@ $result = json_decode($apires, true);
                 <?php } else { ?>
                   <tr>
                     <td colspan="3" class="text-center text-muted f-12">
-                      No upcoming exits found
+                      <?= __('No upcoming exits found'); ?>
                     </td>
                   </tr>
                 <?php } ?>
@@ -606,7 +606,7 @@ $result = json_decode($apires, true);
         <div class="card recent-acknowledgement mb-0 mt-3">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <h3 class="f-20 f-w-600">Recent Announcements</h3>
+              <h3 class="f-20 f-w-600"><?= __('Recent Announcements'); ?></h3>
             </div>
             <div class="table-responsive mt-3 height-300">
               <?php
@@ -649,7 +649,7 @@ $result = json_decode($apires, true);
                 <?php } else { ?>
                   <tr>
                     <td colspan="3" class="text-center text-muted f-12">
-                      No announcements found
+                      <?= __('No announcements found'); ?>
                     </td>
                   </tr>
                 <?php } ?>
@@ -663,14 +663,14 @@ $result = json_decode($apires, true);
         <div class="card mb-3 mt-3">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <h3 class="f-20 f-w-600">Attendance Heatmap <span class="f-10 f-w-600 text-muted"> (<?php echo date('M Y'); ?>)</span></h3>
+              <h3 class="f-20 f-w-600"><?= __('Attendance Heatmap'); ?> <span class="f-10 f-w-600 text-muted"> (<?php echo date('M Y'); ?>)</span></h3>
 
               <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
-                <a class="dropdown-item waves-light waves-effect" href="#">Action</a>
-                <a class="dropdown-item waves-light waves-effect" href="#">Another action</a>
-                <a class="dropdown-item waves-light waves-effect" href="#">Something else</a>
+                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Action'); ?></a>
+                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Another action'); ?></a>
+                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Something else'); ?></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item waves-light waves-effect" href="#">Something else</a>
+                <a class="dropdown-item waves-light waves-effect" href="#"><?= __('Something else'); ?></a>
               </div>
             </div>
             <?php
@@ -742,7 +742,7 @@ $result = json_decode($apires, true);
     <div class="card mb-3">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-          <h3 class="f-20 f-w-600">Shortcuts</h3>
+          <h3 class="f-20 f-w-600"><?= __('Shortcuts'); ?></h3>
         </div>
         <div class="row mt-4 shortcuts">
 
@@ -751,7 +751,7 @@ $result = json_decode($apires, true);
             <span class="user-icon bg-blue-50 p-2 b-radius-15 d-block">
               <i class="far fa-user f-20 text-primary"></i>
             </span>
-            <strong class="d-block mt-2 f-12 f-w-600">Employee Directory</strong>
+            <strong class="d-block mt-2 f-12 f-w-600"><?= __('Employee Directory'); ?></strong>
             </a>
           </div>
           <div class="col-lg-4 text-center mb-3">
@@ -759,7 +759,7 @@ $result = json_decode($apires, true);
             <span class="user-icon bg-green-50 p-2 b-radius-15 d-block">
               <i class="fa fa-users f-20 text-success"></i>
             </span>
-            <strong class="d-block mt-2 f-12 f-w-600">Work From Home</strong>
+            <strong class="d-block mt-2 f-12 f-w-600"><?= __('Work From Home'); ?></strong>
           </a>
           </div>
           <div class="col-lg-4 text-center mb-3">
@@ -767,7 +767,7 @@ $result = json_decode($apires, true);
             <span class="user-icon bg-red-50 p-2 b-radius-15 d-block">
               <i class="fas fa-calendar-alt f-20 text-danger"></i>
             </span>
-            <strong class="d-block mt-2 f-12 f-w-600">Attendance Sheet</strong>
+            <strong class="d-block mt-2 f-12 f-w-600"><?= __('Attendance Sheet'); ?></strong>
           </a>
           </div>
 
@@ -776,7 +776,7 @@ $result = json_decode($apires, true);
             <span class="user-icon bg-red-50 p-2 b-radius-15 d-block">
               <i class="fas fa-calendar-alt f-20 text-danger"></i>
             </span>
-            <strong class="d-block mt-2 f-12 f-w-600">Recognition</strong>
+            <strong class="d-block mt-2 f-12 f-w-600"><?= __('Recognition'); ?></strong>
           </a>
           </div>
 
@@ -785,7 +785,7 @@ $result = json_decode($apires, true);
             <span class="user-icon bg-blue-50 p-2 b-radius-15 d-block">
               <i class="far fa-file-alt f-20 text-primary"></i>
             </span>
-            <strong class="d-block mt-2 f-12 f-w-600">Reports</strong>
+            <strong class="d-block mt-2 f-12 f-w-600"><?= __('Reports'); ?></strong>
           </a>
           </div>
           </a>
@@ -795,7 +795,7 @@ $result = json_decode($apires, true);
             <span class="user-icon bg-green-50 p-2 b-radius-15 d-block">
               <i class="far fa-file-alt f-20 text-success"></i>
             </span>
-            <strong class="d-block mt-2 f-12 f-w-600">HR Letters</strong>
+            <strong class="d-block mt-2 f-12 f-w-600"><?= __('HR Letters'); ?></strong>
           </a>
           </div>
 
@@ -804,7 +804,7 @@ $result = json_decode($apires, true);
             <span class="user-icon bg-purple-50 p-2 b-radius-15 d-block">
               <i class="fas fa-calendar-alt f-20 text-purple"></i>
             </span>
-            <strong class="d-block mt-2 f-12 f-w-600">Loans & Advances</strong>
+            <strong class="d-block mt-2 f-12 f-w-600"><?= htmlspecialchars(__('Loans & Advances'), ENT_QUOTES, 'UTF-8'); ?></strong>
           </a>
           </div>
 
@@ -813,7 +813,7 @@ $result = json_decode($apires, true);
             <span class="user-icon bg-blue-50 p-2 b-radius-15 d-block">
               <i class="far fa-file-alt f-20 text-primary"></i>
             </span>
-            <strong class="d-block mt-2 f-12 f-w-600">Personal Gateway</strong>
+            <strong class="d-block mt-2 f-12 f-w-600"><?= __('Personal Gateway'); ?></strong>
           </a>
           </div>
 
@@ -822,7 +822,7 @@ $result = json_decode($apires, true);
             <span class="user-icon bg-green-50 p-2 b-radius-15 d-block">
               <i class="far fa-file-alt f-20 text-success"></i>
             </span>
-            <strong class="d-block mt-2 f-12 f-w-600">Transport Gateway</strong>
+            <strong class="d-block mt-2 f-12 f-w-600"><?= __('Transport Gateway'); ?></strong>
           </a>
           </div>
          </a>
@@ -832,24 +832,24 @@ $result = json_decode($apires, true);
     <div class="card m-t-40 mb-3">
       <div class="card-body ">
         <div class="d-flex justify-content-between align-items-center">
-          <h3 class="f-20 f-w-600">HR Alerts</h3>
+          <h3 class="f-20 f-w-600"><?= __('HR Alerts'); ?></h3>
         </div>
         <div class="hr-alerts height-300">
           <div class="d-flex align-items-center mt-4">
             <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">3</span>
-            <h5 class="f-14 f-w-600 m-l-10">Probation confirmations pending</h5>
+            <h5 class="f-14 f-w-600 m-l-10"><?= __('Probation confirmations pending'); ?></h5>
           </div>
           <div class="d-flex align-items-center mt-3">
             <span class="img-40 b-radius-15 bg-green-50 text-success f-14 f-w-600 p-2 text-center">5</span>
-            <h5 class="f-14 f-w-600 m-l-10">Attendance Regularizations pending</h5>
+            <h5 class="f-14 f-w-600 m-l-10"><?= __('Attendance Regularizations pending'); ?></h5>
           </div>
           <div class="d-flex align-items-center mt-3">
             <span class="img-40 b-radius-15 bg-red-50 text-danger f-14 f-w-600 p-2 text-center">2</span>
-            <h5 class="f-14 f-w-600 m-l-10">Documents expiring this month</h5>
+            <h5 class="f-14 f-w-600 m-l-10"><?= __('Documents expiring this month'); ?></h5>
           </div>
           <div class="d-flex align-items-center mt-3">
             <span class="img-40 b-radius-15 bg-red-50 text-danger f-14 f-w-600 p-2 text-center">1</span>
-            <h5 class="f-14 f-w-600 m-l-10">Policy Acknowledgement pending</h5>
+            <h5 class="f-14 f-w-600 m-l-10"><?= __('Policy Acknowledgement pending'); ?></h5>
           </div>
         </div>
 
@@ -858,7 +858,7 @@ $result = json_decode($apires, true);
     <div class="card m-t-35 mb-3">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-          <h3 class="f-20 f-w-600">Upcoming Birthdays</h3>
+          <h3 class="f-20 f-w-600"><?= __('Upcoming Birthdays'); ?></h3>
         </div>
         <div class="table-responsive mt-3 upcoming height-280">
           <?php
@@ -904,7 +904,7 @@ $result = json_decode($apires, true);
             <?php } else { ?>
               <tr>
                 <td colspan="3" class="text-center text-muted f-12">
-                  No upcoming birthdays found
+                  <?= __('No upcoming birthdays found'); ?>
                 </td>
               </tr>
             <?php } ?>

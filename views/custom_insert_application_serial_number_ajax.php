@@ -125,7 +125,7 @@ function addMoreAdditionalSettings(){
 	        isSelected = "selected";
 	    }
 
-	    htmlviewoption +=`<option value="`+value+`" `+isSelected+`>`+value+`- Position</option>`;
+	    htmlviewoption +=`<option value="`+value+`" `+isSelected+`>`+value+`- <?= htmlspecialchars(__('Position'), ENT_QUOTES, 'UTF-8'); ?></option>`;
 	});
 
 
@@ -213,7 +213,7 @@ function addMoreAdditionalSettings(){
 				<input type="hidden" class="form-control" name="process_name" value="<?php echo $process_name; ?>">
 				<div class="row">
 					<div class="form-group col-lg-12">
-						<span class="form-label d-block">Output</span>
+						<span class="form-label d-block"><?= __('Output'); ?></span>
 						<span id="serialnumberoutput"> <?php echo serialNumberPreview($asnres);  ?>	</span>
 					</div>
 
@@ -287,13 +287,13 @@ function addMoreAdditionalSettings(){
 				    <div class="card-body">
 				    		<div class="row">
 								<div class="col-lg-3">
-									<span class="form-label d-block">Display Type</span>
+									<span class="form-label d-block"><?= __('Display Type'); ?></span>
 								</div>
 								<div class="col-lg-3">
-									<span class="form-label d-block">Value/Field</span>
+									<span class="form-label d-block"><?= __('Value/Field'); ?></span>
 								</div>
 								<div class="col-lg-3 text-left">
-									<span class="form-label d-block">Position</span>
+									<span class="form-label d-block"><?= __('Position'); ?></span>
 								</div>
 								<div class="col-lg-3">
 

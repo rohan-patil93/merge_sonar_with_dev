@@ -57,11 +57,11 @@ foreach ($st_details as $st) {
     <!-- Pradeep HTML Start here -->
     <div class="card">
         <div class="card-header">
-            <h4>Customer</h4>
+            <h4><?= __('Customer'); ?></h4>
             <div class="card-header-right">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -72,7 +72,7 @@ foreach ($st_details as $st) {
                 <div class="card">
                     <div class="card-header bg-primary p-3">
                         <h5 class="mb-0 text-white">
-                            Personal Details
+                            <?= __('Personal Details'); ?>
                         </h5>
                             <input name="rid" class="form-control" type="hidden" value="<?php echo $amc_customer_details['id'] != "" ? $amc_customer_details['id'] : ""; ?>">
                     </div>
@@ -147,7 +147,7 @@ foreach ($st_details as $st) {
                 <div class="card">
                     <div class="card-header bg-primary p-3">
                         <h5 class="mb-0 text-white" >
-                            Address
+                            <?= __('Address'); ?>
                         </h5>
                     </div>
                     <div class="card-body ">
@@ -175,7 +175,7 @@ foreach ($st_details as $st) {
                                 <div class="form-group">
 
                                     <select name="country_id" id="country_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)" data-selected-state="<?php echo $amc_customer_details['state_id']; ?>" data-selected-city="<?php echo $amc_customer_details['city_id']; ?>">
-                                        <option value="0">--Select--</option>
+                                        <option value="0">--<?= __('Select'); ?>--</option>
                                         <?php foreach ($states_list as $id => $country_name): ?>
                                             <option value="<?php echo $id; ?>" <?php if ($amc_customer_details['country_id'] == $id) echo 'selected'; ?>>
                                                 <?php echo $country_name; ?>
@@ -190,7 +190,7 @@ foreach ($st_details as $st) {
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <select name="state_id" id="state_id" class="form-control js-example-basic-single" onchange="updateStatesandCities(this)">
-                                        <option value="0">--Select--</option>
+                                        <option value="0">--<?= __('Select'); ?>--</option>
                                     </select>
                                 </div>
                             </div>
@@ -200,7 +200,7 @@ foreach ($st_details as $st) {
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <select name="city_id" id="city_id" class="form-control js-example-basic-single">
-                                        <option value="0">--Select--</option>
+                                        <option value="0">--<?= __('Select'); ?>--</option>
                                     </select>
                                 </div>
                             </div>
@@ -251,7 +251,7 @@ foreach ($st_details as $st) {
 
                     if (table_name === 'states') {
                         const stateSelect = document.getElementById('state_id');
-                        stateSelect.innerHTML = '<option value="0">--Select--</option>';
+                        stateSelect.innerHTML = '<option value="0">--<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>--</option>';
 
                         response.forEach(function(state) {
                             const option = document.createElement('option');
@@ -274,7 +274,7 @@ foreach ($st_details as $st) {
 
                     if (table_name === 'cities') {
                         const citySelect = document.getElementById('city_id');
-                        citySelect.innerHTML = '<option value="0">--Select--</option>';
+                        citySelect.innerHTML = '<option value="0">--<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>--</option>';
 
                         response.forEach(function(city) {
                             const option = document.createElement('option');

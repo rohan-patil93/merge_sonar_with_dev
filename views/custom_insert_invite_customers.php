@@ -65,7 +65,7 @@ foreach($application_roles as $rolesre){
 function addMoreInvitation(){
     maxvendors = maxvendors+1;
     var rowid = 'rowdivision_'.$im;
-    var errorvendorrowid = 'errorrowvendor_'+maxvendors;
+    var errorvendorrowid = <?php echo json_encode(__('errorrowvendor_'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+maxvendors;
     var vendorrowid = 'rowvendor_'+maxvendors;
     var email_id = "email_id";
 

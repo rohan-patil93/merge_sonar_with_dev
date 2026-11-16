@@ -56,7 +56,7 @@ $stausresult = ViewStatusData();
     <h5 class="modal-title">
         <?php echo $title; ?>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body" >
         <div class="card">
@@ -68,13 +68,13 @@ $stausresult = ViewStatusData();
                         <thead>
                             <tr>
                                 <th scope="col">#.</th>
-                                <th scope="col">Job Post Name</th>
-                                <th scope="col">Job Number</th>
-                                <th scope="col">Requested Date</th>
-                                <th scope="col">Required Date</th>
-                                <th scope="col">No of Resources</th>
-                                <th scope="col">Job Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Job Post Name'); ?></th>
+                                <th scope="col"><?= __('Job Number'); ?></th>
+                                <th scope="col"><?= __('Requested Date'); ?></th>
+                                <th scope="col"><?= __('Required Date'); ?></th>
+                                <th scope="col"><?= __('No of Resources'); ?></th>
+                                <th scope="col"><?= __('Job Status'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,11 +90,11 @@ $stausresult = ViewStatusData();
                                 <td class="text-right"><?php  echo $jobpostings['no_of_resources']; ?></td>
                                 <td>
                                     <?php if($jobpostings['job_status']=='0'){ ?>
-                                        <span class="label label-lg label-success label-inline mr-2">Open</span>
+                                        <span class="label label-lg label-success label-inline mr-2"><?= __('Open'); ?></span>
                                     <?php }elseif($jobpostings['job_status']=='1'){ ?>
-                                        <span class="label label-lg label-danger label-inline mr-2">Close</span>
+                                        <span class="label label-lg label-danger label-inline mr-2"><?= __('Close'); ?></span>
                                     <?php }else{ ?>
-                                        <span class="label label-lg label-warning label-inline mr-2">Hold</span>
+                                        <span class="label label-lg label-warning label-inline mr-2"><?= __('Hold'); ?></span>
                                     <?php  } ?>
                                 </td>
                                 <td>

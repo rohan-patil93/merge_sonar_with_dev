@@ -152,7 +152,7 @@
                        </div>
                      </div>
                    <?php }else{
-                    echo '<div class="text-center"><h4 class="text-info"><i class="fa fa-warning"></i> No Required Documents</h
+                    echo '<div class="text-center"><h4 class="text-info"><i class="fa fa-warning"></i> '.__('No Required Documents').'</h
                     4></div>';
                   }
 }?>

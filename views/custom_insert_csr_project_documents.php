@@ -274,17 +274,17 @@ if ($selectedProposalId > 0) {
                                     <input type="hidden" name="Rid" value="<?php echo csrProjectDocText($selectedProposalRid); ?>">
                                     <input type="hidden" name="document_id" value="<?php echo (int)($docRow['id'] ?? 0); ?>">
                                     <td>
-                                        <input aria-label="Document Name" type="text" class="form-control" name="document_name" value="<?php echo csrProjectDocText($docRow['document_name'] ?? ''); ?>" required>
+                                        <input aria-label="<?= htmlspecialchars(__('Document Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="document_name" value="<?php echo csrProjectDocText($docRow['document_name'] ?? ''); ?>" required>
                                     </td>
                                     <td class="w-full">
-                                        <select aria-label="Access Type" class="form-control js-example-basic-single select2" name="access_type">
+                                        <select aria-label="<?= htmlspecialchars(__('Access Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single select2" name="access_type">
                                             <?php foreach($allowedAccess as $row){ ?>
                                                 <option value="<?php echo $row; ?>" <?php echo ($docRow['access_type'] ?? '') == $row ? 'selected' : ''; ?>><?php echo __($row); ?></option>
                                         <?php } ?>
                                         </select>
                                     </td>
                                     <td><?php echo csrProjectDocText($docRow['actual_file_name'] ?? ''); ?></td>
-                                    <td><input aria-label="Document File" type="file" class="form-control" name="document_file"></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Document File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" class="form-control" name="document_file"></td>
                                     <td>
                                         <?php if (($docRow['file_name'] ?? '') != '') { ?>
                                             <a target="_blank" href="uploads/csr/<?php echo csrProjectDocText($docRow['file_name']); ?>" download>
@@ -317,15 +317,15 @@ if ($selectedProposalId > 0) {
                             <th scope="col" style="width: 10%;"><?= __('Action') ?></th>
                         </tr>
                         <tr class="doc-upload-row">
-                            <td><input aria-label="Enter document name" type="text" class="form-control" name="document_name[]" placeholder="<?= __('Enter document name') ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Enter document name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="document_name[]" placeholder="<?= __('Enter document name') ?>"></td>
                             <td>
-                                <select aria-label="Access Type[]" class="form-control js-example-basic-single" name="access_type[]">
+                                <select aria-label="<?= htmlspecialchars(__('Access Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control js-example-basic-single" name="access_type[]">
                                     <?php foreach($allowedAccess as $row){ ?>
                                                 <option value="<?php echo $row; ?>" ><?php echo __($row); ?></option>
                                         <?php } ?>
                                 </select>
                             </td>
-                            <td><input aria-label="Document File[]" type="file" class="form-control" name="document_file[]"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Document File'), ENT_QUOTES, 'UTF-8'); ?>[]" type="file" class="form-control" name="document_file[]"></td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-danger btn-sm btn-remove-row">x</button>
                             </td>
@@ -354,9 +354,9 @@ if ($selectedProposalId > 0) {
 } ?>';
         var rowHtml = '' +
             '<tr class="doc-upload-row">' +
-            '<td><input aria-label="Enter document name" type="text" class="form-control" name="document_name[]" placeholder="<?= __('Enter document name') ?>"></td>' +
-            '<td><select aria-label="Access Type[]" class="form-control js-example-basic-single" name="access_type[]">' + options + '</select></td>' +
-            '<td><input aria-label="Document File[]" type="file" class="form-control" name="document_file[]"></td>' +
+            '<td><input aria-label="<?= htmlspecialchars(__('Enter document name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="document_name[]" placeholder="<?= __('Enter document name') ?>"></td>' +
+            '<td><select aria-label="<?= htmlspecialchars(__('Access Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control js-example-basic-single" name="access_type[]">' + options + '</select></td>' +
+            '<td><input aria-label="<?= htmlspecialchars(__('Document File'), ENT_QUOTES, 'UTF-8'); ?>[]" type="file" class="form-control" name="document_file[]"></td>' +
             '<td class="text-center"><button type="button" class="btn btn-danger btn-sm btn-remove-row">x</button></td>' +
             '</tr>';
         $('#csrDocumentUploadTable').append(rowHtml);

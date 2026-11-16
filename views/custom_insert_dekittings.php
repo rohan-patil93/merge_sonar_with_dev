@@ -127,13 +127,13 @@ function findUomName($id, $uoms)
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
 <?php } ?>
 <?php if($component['suspense_total'] !='0'  && $rid!=""){ ?>
 <div class="alert alert-danger alert-dismissible">
     <strong><?php echo $_SESSION['error_message']['9179']; ?></strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <?php } ?>
 <?php
@@ -149,7 +149,7 @@ if($dekitting['current_status'] !=""){
             <?php echo $workflowsteps['workflow_btn']; ?>
             <a href="javascript:history.go(-1)" class="btn btn-light-primary waves-effect waves-light  m-r-50">
                 <i class="icofont icofont-reply mr-1"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -180,7 +180,7 @@ if($dekitting['current_status'] !=""){
                 <div class="col-md-6 mb-3 w-full">
                     <label for="final_item_name" class="form-label d-block"><?= __('Parent Item Name') ?> <span
                             class="text-danger">*</span></label>
-                    <select aria-label="Parent Item" class="js-example-basic-single" id="final_item_name" name="parent_item_id" onchange="updateItemOptions()" required>
+                    <select aria-label="<?= htmlspecialchars(__('Parent Item'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" id="final_item_name" name="parent_item_id" onchange="updateItemOptions()" required>
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($items as $item){
                         if($item['sold_in_groups'] == 0){  ?>
@@ -239,7 +239,7 @@ if($dekitting['current_status'] !=""){
                                                 <tr class="item-row">
                                                     <input type="hidden" class="form-control" name="component_items_ids[]" value="<?= $component['id'] ?>" >
                                                     <td class="w-full">
-                                                        <select aria-label="Component Items[]" class="js-example-basic-single component-item"
+                                                        <select aria-label="<?= htmlspecialchars(__('Component Items'), ENT_QUOTES, 'UTF-8'); ?>[]" class="js-example-basic-single component-item"
                                                             name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
                                                             <option value=""><?= __('Select Any One') ?></option>
                                                             <?php foreach ($items as $item){
@@ -253,7 +253,7 @@ if($dekitting['current_status'] !=""){
                                                         </select>
                                                     </td>
                                                     <td class="w-full">
-                                                        <select aria-label="Component Uoms[]" class="js-example-basic-single component-uom"
+                                                        <select aria-label="<?= htmlspecialchars(__('Component Uoms'), ENT_QUOTES, 'UTF-8'); ?>[]" class="js-example-basic-single component-uom"
                                                             name="component_uoms[]" required>
                                                             <option value=""><?= __('Select Any One') ?></option>
                                                             <?php foreach ($uom as $value): ?>
@@ -265,15 +265,15 @@ if($dekitting['current_status'] !=""){
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input aria-label="Component Quantities[]" type="number" class="form-control component-quantity"
+                                                        <input aria-label="<?= htmlspecialchars(__('Component Quantities'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control component-quantity"
                                                             name="component_quantities[]" min="1" onblur="updateCalculation()"
                                                             value="<?= $component['quantity'] ?>" step="any" required>
                                                     </td>
                                                     <td>
-                                                        <input aria-label="Component Day Rate[]" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="<?= $component['component_day_rate'] ?>" onblur="updateCalculation()" required>
+                                                        <input aria-label="<?= htmlspecialchars(__('Component Day Rate'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="<?= $component['component_day_rate'] ?>" onblur="updateCalculation()" required>
                                                     </td>
                                                     <td>
-                                                        <input aria-label="Component Total[]" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="<?= $component['component_total'] ?>" readonly required>
+                                                        <input aria-label="<?= htmlspecialchars(__('Component Total'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="<?= $component['component_total'] ?>" readonly required>
                                                     </td>
 
                                                     <td class="text-center">
@@ -284,7 +284,7 @@ if($dekitting['current_status'] !=""){
                                         <?php else: ?>
                                             <tr class="item-row">
                                                 <td class="w-full">
-                                                    <select aria-label="Component Items[]" class="js-example-basic-single component-item"
+                                                    <select aria-label="<?= htmlspecialchars(__('Component Items'), ENT_QUOTES, 'UTF-8'); ?>[]" class="js-example-basic-single component-item"
                                                         name="component_items[]" required onchange="setUomForRow(this.closest('tr')); updateItemOptions()">
                                                         <option value=""><?= __('Select Any One') ?></option>
                                                         <?php foreach ($items as $item){
@@ -298,7 +298,7 @@ if($dekitting['current_status'] !=""){
                                                     </select>
                                                 </td>
                                                 <td class="w-full">
-                                                    <select aria-label="Component Uoms[]" class="js-example-basic-single component-uom"
+                                                    <select aria-label="<?= htmlspecialchars(__('Component Uoms'), ENT_QUOTES, 'UTF-8'); ?>[]" class="js-example-basic-single component-uom"
                                                         name="component_uoms[]" required>
                                                         <option value=""><?= __('Select Any One') ?></option>
                                                         <?php foreach ($uom as $value): ?>
@@ -309,14 +309,14 @@ if($dekitting['current_status'] !=""){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Component Quantities[]" type="number" class="form-control component-quantity"
+                                                    <input aria-label="<?= htmlspecialchars(__('Component Quantities'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control component-quantity"
                                                         name="component_quantities[]" onblur="updateCalculation()" min="1" value="1" required>
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Component Day Rate[]" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="<?= $component['component_day_rate'] ?>" onblur="updateCalculation()" required>
+                                                    <input aria-label="<?= htmlspecialchars(__('Component Day Rate'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="<?= $component['component_day_rate'] ?>" onblur="updateCalculation()" required>
                                                 </td>
                                                 <td>
-                                                    <input aria-label="Component Total[]" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="<?= $component['component_total'] ?>" readonly required>
+                                                    <input aria-label="<?= htmlspecialchars(__('Component Total'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="<?= $component['component_total'] ?>" readonly required>
                                                 </td>
 
                                                 <td class="text-center">
@@ -340,15 +340,15 @@ if($dekitting['current_status'] !=""){
                             <div class="row">
                                 <div class="col-lg-4">
                                     <label for="date" class="form-label"><?= __('Parent Total') ?> </label>
-                                    <input aria-label="Parent Total" type="number" class="form-control" id="parent_total" name="parent_total" min="0" value="<?= $component['parent_total'] ?>" readonly required>
+                                    <input aria-label="<?= htmlspecialchars(__('Parent Total'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control" id="parent_total" name="parent_total" min="0" value="<?= $component['parent_total'] ?>" readonly required>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="date" class="form-label"><?= __('Child Total') ?> </label>
-                                    <input aria-label="Child Total" type="number" class="form-control" id="child_total" name="child_total" min="0" value="<?= $component['child_total'] ?>" readonly required>
+                                    <input aria-label="<?= htmlspecialchars(__('Child Total'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control" id="child_total" name="child_total" min="0" value="<?= $component['child_total'] ?>" readonly required>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="date" class="form-label"><?= __('Suspense Amount') ?> </label>
-                                    <input aria-label="Suspense Total" type="number" class="form-control" id="suspense_total" name="suspense_total" min="0" value="<?= $component['suspense_total']; ?>" readonly required>
+                                    <input aria-label="<?= htmlspecialchars(__('Suspense Total'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control" id="suspense_total" name="suspense_total" min="0" value="<?= $component['suspense_total']; ?>" readonly required>
                                 </div>
                             </div>
                         </div>
@@ -358,7 +358,7 @@ if($dekitting['current_status'] !=""){
                 <div class="row mt-4">
                     <div class="col-md-12 text-left">
                         <button type="submit" class="btn btn-primary" <?php echo $disable; ?>>
-                            <i class="la la-check"></i> Submit
+                            <i class="la la-check"></i> <?= __('Submit'); ?>
                         </button>
 
                     </div>
@@ -532,15 +532,15 @@ document.getElementById('final_item_name').addEventListener('change', function (
 
         // Create the quantity cell
         const quantityCell = document.createElement('td');
-        quantityCell.innerHTML = `<input aria-label="Component Quantities[]" type="number" class="form-control component-quantity" name="component_quantities[]" onblur="updateCalculation()" min="1" value="1" step="any" required>`;
+        quantityCell.innerHTML = `<input aria-label="<?= htmlspecialchars(__('Component Quantities'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control component-quantity" name="component_quantities[]" onblur="updateCalculation()" min="1" value="1" step="any" required>`;
 
         const dayrateCell = document.createElement('td');
         dayrateCell.innerHTML = `<td>
-            <input aria-label="Component Day Rate[]" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="0" onblur="updateCalculation()" required>
+            <input aria-label="<?= htmlspecialchars(__('Component Day Rate'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control component-day-rate" name="component_day_rate[]" min="0" step="any" value="0" onblur="updateCalculation()" required>
         </td>`;
         const totalcompCell = document.createElement('td');
         totalcompCell.innerHTML = `<td>
-            <input aria-label="Component Total[]" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="0" readonly required>
+            <input aria-label="<?= htmlspecialchars(__('Component Total'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control component-total" name="component_total[]" min="0" step="any" value="0" readonly required>
         </td>`;
 
         // Create the action cell
@@ -608,7 +608,7 @@ function updateCalculation(){
 }
 
 function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,next_status){
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#popup1").html(loader);
     $('#kt_modal_KTDatatable_remote').modal("show");
     jQuery.ajax({
@@ -625,12 +625,12 @@ function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,nex
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
 swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Please note the status of the document will change to "+new_status_name,
+        text: <?php echo json_encode(__('Please note the status of the document will change to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+new_status_name,
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         closeOnConfirm: false
     },
     function(){
@@ -656,12 +656,12 @@ swal({
                     });
                 }else{
                     swal({
-                        title: "Oops...",
+                        title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         text: res.transaction_update.message,
                         type: "error",
                         showCancelButton: true,
                         showConfirmButton: false,
-                        cancelButtonText: "Ok",
+                        cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         confirmButtonClass: "btn-danger",
                         closeOnCancel: false
                     });

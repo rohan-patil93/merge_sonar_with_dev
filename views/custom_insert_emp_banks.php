@@ -37,12 +37,12 @@ if($emp_banks['id'] !=""){
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-        text: "Please note the status of the document will change to "+new_status_name,
+        text: <?php echo json_encode(__('Please note the status of the document will change to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+new_status_name,
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
+        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         closeOnConfirm: false
     },
     function(){
@@ -69,12 +69,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                     });
                 }else{
                     swal({
-                        title: "Oops...",
+                        title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         text: res.transaction_update.message,
                         type: "error",
                         showCancelButton: true,
                         showConfirmButton: false,
-                        cancelButtonText: "Ok",
+                        cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         confirmButtonClass: "btn-danger",
                         closeOnCancel: false
                     });
@@ -105,7 +105,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 <div class="col-xl-6 mt-2" >
                     <span class="form-label"><?= __('Bank') ?></span>
                     <div class="">
-                        <select aria-label="Bank" class ="form-control form-control-lg form-select js-example-basic-single"  name="bank_id" >
+                        <select aria-label="<?= htmlspecialchars(__('Bank'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single"  name="bank_id" >
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach ($banks as $bnk) {  ?>
                                <option <?php if($emp_banks['bank_id'] == $bnk['id']){ ?>selected <?php
@@ -118,15 +118,15 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 </div>
                 <div class="col-lg-6 mt-2" >
                     <span  class="form-label"><?= __('IFSC Code') ?></span>
-                    <input aria-label="Ifsc Code" type="text" class="form-control"  name="ifsc_code" value="<?php echo $emp_banks['ifsc_code']; ?>" placeholder="<?= __('Enter IFSC Code') ?>"/>
+                    <input aria-label="<?= htmlspecialchars(__('Ifsc Code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  name="ifsc_code" value="<?php echo $emp_banks['ifsc_code']; ?>" placeholder="<?= __('Enter IFSC Code') ?>"/>
                 </div>
                 <div class="col-lg-6 mt-2" >
                     <span  class="form-label"><?= __('Account No') ?></span>
-                    <input aria-label="Bank Account No" type="text" class="form-control"  name="bank_account_no" value="<?php echo $emp_banks['bank_account_no']; ?>" placeholder="<?= __('Enter Account No') ?>"/>
+                    <input aria-label="<?= htmlspecialchars(__('Bank Account No'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  name="bank_account_no" value="<?php echo $emp_banks['bank_account_no']; ?>" placeholder="<?= __('Enter Account No') ?>"/>
                 </div>
                 <div class="col-lg-6 mt-2" >
                     <span  class="form-label"><?= __('Note') ?></span>
-                    <textarea aria-label="Enter Note" type="text" class="form-control"  name="request_note" placeholder="<?= __('Enter Note') ?>"/><?php echo $emp_banks['request_note']; ?></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Enter Note'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  name="request_note" placeholder="<?= __('Enter Note') ?>"/><?php echo $emp_banks['request_note']; ?></textarea>
                 </div>
             </div>
         </form>

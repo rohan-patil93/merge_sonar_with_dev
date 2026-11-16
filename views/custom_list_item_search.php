@@ -28,7 +28,7 @@ $statuse = ViewStatusData();
     }
     function getUserVendorCustomerItemList(usertype,item_id){
         $('#kt_modal_dynamic_popup').modal("show");
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#dynamic_popup1").html(loader);
         $.ajax({
             url: "views/custom_list_item_search_popup.php",
@@ -42,7 +42,7 @@ $statuse = ViewStatusData();
 </script>
 <div class="card">
     <div class="card-header table-card-header">
-          <h5>Item Search</h5>
+          <h5><?= __('Item Search'); ?></h5>
           <div class="card-header-right table-card-header">
           </div>
       </div>
@@ -50,58 +50,58 @@ $statuse = ViewStatusData();
           <form id="itemserach_form">
               <div class="row">
                   <div class="form-group col-lg-3">
-                    <span class="form-label">Item Name/ SKU Code</span>
-                     <input aria-label="Item Name Sku Code" class="form-control" type="text" name="item_name_sku_code" value="">
+                    <span class="form-label"><?= __('Item Name/ SKU Code'); ?></span>
+                     <input aria-label="<?= htmlspecialchars(__('Item Name Sku Code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="item_name_sku_code" value="">
                 </div>
                    <div class="form-group col-lg-3">
-                    <span class="form-label">Item Type </span>
-                    <select aria-label="Item Type" class="form-select border js-example-basic-single" name="item_type">
-                        <option value=""> Select Any one</option>
+                    <span class="form-label"><?= __('Item Type'); ?> </span>
+                    <select aria-label="<?= htmlspecialchars(__('Item Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select border js-example-basic-single" name="item_type">
+                        <option value=""> <?= __('Select Any one'); ?></option>
                         <?php foreach ($item_types as $item_type) { ?>
                             <option value="<?php echo $item_type['id']; ?>"><?php echo $item_type['item_type_name'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
                    <div class="form-group col-lg-3">
-                    <span class="form-label">Category</span>
-                    <select aria-label="Category" class="form-select border js-example-basic-single" name="category_id">
-                        <option value="">Select Any one</option>
+                    <span class="form-label"><?= __('Category'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select border js-example-basic-single" name="category_id">
+                        <option value=""><?= __('Select Any one'); ?></option>
                           <?php foreach ($item_categories as $category) { ?>
                             <option value="<?php echo $category['id']; ?>" ><?php echo $category['category_description'] ?></option>;
                         <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-3">
-                    <span class="form-label">Location</span>
-                    <select aria-label="Location" class="form-select border js-example-basic-single"  name="location_id">
-                        <option value="">Select Any one</option>
+                    <span class="form-label"><?= __('Location'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select border js-example-basic-single"  name="location_id">
+                        <option value=""><?= __('Select Any one'); ?></option>
                           <?php foreach ($locations as $locc) { ?>
                             <option value="<?php echo $locc['id']; ?>" ><?php echo $locc['location_name'] ?></option>;
                         <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-3">
-                    <span class="form-label">Warehous</span>
-                    <select aria-label="Warehouse" class="form-select js-example-basic-single" name="warehouse_id" >
-                        <option value=""> Select Any one</option>
+                    <span class="form-label"><?= __('Warehous'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Warehouse'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="warehouse_id" >
+                        <option value=""> <?= __('Select Any one'); ?></option>
                         <?php foreach($warehouses as $waro){ ?>
                             <option value="<?php echo $waro['id']; ?>" ><?php echo $waro['warehouse_name']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-3">
-                    <span class="form-label">Vendor</span>
-                    <select aria-label="Vendor" class="form-select js-example-basic-single" name="vendor_id" >
-                        <option value=""> Select Any one</option>
+                    <span class="form-label"><?= __('Vendor'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="vendor_id" >
+                        <option value=""> <?= __('Select Any one'); ?></option>
                         <?php foreach($vendors as $ven){ ?>
                             <option value="<?php echo $ven['id']; ?>" ><?php echo $ven['company']."-".$ven['display_name']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-3">
-                    <span class="form-label">Customer</span>
-                    <select aria-label="Customer" class="form-select js-example-basic-single" name="customer_id" >
-                        <option value=""> Select Any one</option>
+                    <span class="form-label"><?= __('Customer'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Customer'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="customer_id" >
+                        <option value=""> <?= __('Select Any one'); ?></option>
                         <?php foreach($customers as $cust){ ?>
                             <option value="<?php echo $cust['id']; ?>" ><?php echo $cust['company']."-".$cust['display_name']; ?></option>
                         <?php } ?>
@@ -109,13 +109,13 @@ $statuse = ViewStatusData();
                 </div>
                 <div class="form-group col-lg-2">
                     <span class="form-label d-block">&nbsp</span>
-                    <button class="btn btn-primary form-control" type="button" onclick="submitItemSearch()"><i class="ti-search m-r-2"></i>Search</button>
+                    <button class="btn btn-primary form-control" type="button" onclick="submitItemSearch()"><i class="ti-search m-r-2"></i><?= __('Search'); ?></button>
                 </div>
              </div>
          </form>
          <div class="table-responsive" id ="searchitemresults">
              <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> Please Search</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('Please Search'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

@@ -123,7 +123,7 @@ $stausresult = ViewStatusData();
                                                             $str = "<div style='background: #".$bill[$header['name']].";width: 20px;height: 20px;'>&nbsp;</div>";
                                                         }elseif( $header['type'] == 'image'){
                                                             $bimage = 'uploads/all/'.$bill[$header['name']];
-                                                            $str = "<img src='$bimage' style='width:35px;' alt='Preview'>";
+                                                            $str = "<img src='$bimage' style='width:35px;' alt='".htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8')."'>";
                                                         }else{
                                                             $str =  $bill[$header['name']];
 

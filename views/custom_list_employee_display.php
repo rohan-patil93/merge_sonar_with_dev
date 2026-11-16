@@ -24,9 +24,9 @@
                if($clock_data['clock_out'] !='' || count((array)$clock_data) == 0){
 
             ?>
-            <button type="button" onclick="checkinattendence('You have clocked in at')" class="btn btn-primary font-weight-bold btn-pill" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;<?php echo $check_out_display; ?> </div> </div> "> Check-in &nbsp; <i class='icon-lg far fa-clock'></i></button>
+            <button type="button" onclick="checkinattendence('You have clocked in at')" class="btn btn-primary font-weight-bold btn-pill" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;<?php echo $check_out_display; ?> </div> </div> "> <?= __('Check-in'); ?> &nbsp; <i class='icon-lg far fa-clock'></i></button>
             <?php }else{?>
-            <button type="button" onclick="checkinattendence('You have clocked out at')" class="btn btn-success font-weight-bold btn-pill" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;00:00:00  </div> </div> "> Check-Out &nbsp; <i class='icon-lg far fa-clock'></i></button>
+            <button type="button" onclick="checkinattendence('You have clocked out at')" class="btn btn-success font-weight-bold btn-pill" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;00:00:00  </div> </div> "> <?= __('Check-Out'); ?> &nbsp; <i class='icon-lg far fa-clock'></i></button>
             <?php } ?>
          </div>
       <?php } ?>

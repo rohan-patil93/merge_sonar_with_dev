@@ -6,8 +6,8 @@ $rows = $data['rows'] ?? array();
 <div class="page-body">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5>AMC Repair Orders <span class="badge bg-primary"><?php echo count((array)$rows); ?></span></h5>
-            <a href="index.php?option=COM_INSERT_AMC_REPAIR_ORDER" class="btn btn-success btn-sm"><i class="ti-plus"></i> New Repair Order</a>
+            <h5><?= __('AMC Repair Orders'); ?> <span class="badge bg-primary"><?php echo count((array)$rows); ?></span></h5>
+            <a href="index.php?option=COM_INSERT_AMC_REPAIR_ORDER" class="btn btn-success btn-sm"><i class="ti-plus"></i> <?= __('New Repair Order'); ?></a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -15,19 +15,19 @@ $rows = $data['rows'] ?? array();
                     <thead class="table-light">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">RO No.</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Contract</th>
-                            <th scope="col">Vendor</th>
-                            <th scope="col">Source</th>
-                            <th scope="col">ServiceNow</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('RO No.'); ?></th>
+                            <th scope="col"><?= __('Date'); ?></th>
+                            <th scope="col"><?= __('Contract'); ?></th>
+                            <th scope="col"><?= __('Vendor'); ?></th>
+                            <th scope="col"><?= __('Source'); ?></th>
+                            <th scope="col"><?= __('ServiceNow'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (count((array)$rows) == 0) { ?>
-                        <tr><td colspan="9" class="text-center text-muted">No repair orders</td></tr>
+                        <tr><td colspan="9" class="text-center text-muted"><?= __('No repair orders'); ?></td></tr>
                         <?php } else {
                             $i = 1;
                             foreach ($rows as $row) {
@@ -49,7 +49,7 @@ $rows = $data['rows'] ?? array();
                                 }
                                 ?>
                             <td>
-                                <a href="<?php echo htmlspecialchars($repairEditUrl, ENT_QUOTES, 'UTF-8'); ?>" title="Edit"><i class="ti-pencil text-info"></i></a>
+                                <a href="<?php echo htmlspecialchars($repairEditUrl, ENT_QUOTES, 'UTF-8'); ?>" title="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil text-info"></i></a>
                             </td>
                         </tr>
                         <?php }

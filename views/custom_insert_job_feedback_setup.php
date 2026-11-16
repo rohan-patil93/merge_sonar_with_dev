@@ -191,7 +191,7 @@ function getnamelist(emplist){
 
 <div class="card card-custom card-sticky " id="kt_page_sticky_card">
     <div class="alert alert-warning alert-dismissible">
-      <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
+      <strong><?php echo "This function is used for maintaining <strong>".__('Display Attributes')."</strong>".__('. * represents mandatory fields.').""; ?></strong>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
   </div>
 
@@ -249,7 +249,7 @@ function getnamelist(emplist){
                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo __('Add Questions'); ?></button>
                            <div class="dropdown-menu">
                               <?php foreach ($qustion_types as $key => $value) { ?>
-                              <button type="button" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo $value['genc_detail_name']; ?>')" class="dropdown-item">  <?php echo $value['genc_detail_name']; ?></button>
+                              <button type="button" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo __($value['genc_detail_name']); ?>')" class="dropdown-item">  <?php echo __($value['genc_detail_name']); ?></button>
                            <?php } ?>
                         </div>
                      </div>

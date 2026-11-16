@@ -38,31 +38,31 @@ foreach($useruresponse as $useruresponse){
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header ">
-          <h5>User Invitation List</h5>
+          <h5><?= __('User Invitation List'); ?></h5>
           <div class="card-header-right table-card-header ">
           <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Reg Invoit" type="radio" name="reg_invoit" value="0" checked class="listUserType" >
-                        All
+                        <input aria-label="<?= htmlspecialchars(__('Reg Invoit'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="reg_invoit" value="0" checked class="listUserType" >
+                        <?= __('All'); ?>
                       </label>
           </div>
                     <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Reg Invoit" type="radio" name="reg_invoit" value="1" class="listUserType">
-                        Active
+                        <input aria-label="<?= htmlspecialchars(__('Reg Invoit'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="reg_invoit" value="1" class="listUserType">
+                        <?= __('Active'); ?>
                       </label>
                     </div>
                     <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Reg Invoit" type="radio" name="reg_invoit" value="2" class="listUserType">
-                        Invited
+                        <input aria-label="<?= htmlspecialchars(__('Reg Invoit'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="reg_invoit" value="2" class="listUserType">
+                        <?= __('Invited'); ?>
                       </label>
                     </div>
 
 
 <a href="index.php?option=COM_LIST_MULTI_APPLICATION_USER_INVITATIONS" class="btn btn-success mb-2 desktop-view <?php echo getPagePermision('COM_LIST_MULTI_APPLICATION_USER_INVITATIONS','','INSERT')['class']; ?>" <?php echo getPagePermision('COM_LIST_MULTI_APPLICATION_USER_INVITATIONS','','INSERT')['tooltip']; ?>>
             <i class="icofont icofont-plus icon-white text-white"></i>
-            Invite User
+            <?= __('Invite User'); ?>
           </a>
     </div>
 
@@ -108,7 +108,7 @@ foreach($useruresponse as $useruresponse){
 
 
                        <?php if($applicationuser['user_photo'] != "" && $applicationuser['user_activated'] == "Y"){ ?>
-    <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-30 m-r-15" alt="User Profile">
+    <img src="uploads/all/<?php echo $applicationuser['user_photo']; ?>"  class="img-radius img-30 m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
   <?php } else { ?>
    <span class="img-radius img-50 custom_txt_round  p-2 f-14 m-r-15 text-center bg-white text-mute"><?php echo initials($displayname); ?></span>
   <?php } ?>
@@ -126,19 +126,19 @@ foreach($useruresponse as $useruresponse){
                   </div>
               </div>
               <div class="row">
-                <span class="col-lg-3 f-12 mb-1">Name :</span>
+                <span class="col-lg-3 f-12 mb-1"><?= __('Name'); ?> :</span>
                 <span class="col-lg-9 f-12"> <?php echo $first_name; ?> </span>
-                <span class="col-lg-3 f-12 mb-1">Since  :</span>
+                <span class="col-lg-3 f-12 mb-1"><?= __('Since'); ?>  :</span>
                 <span class="col-lg-9 f-12"> <?php echo fromDate($vendorslist['created_date']); ?> </span>
-                <span class="col-lg-3 f-12 mb-1">Email  :</span>
+                <span class="col-lg-3 f-12 mb-1"><?= __('Email'); ?>  :</span>
                 <span class="col-lg-9 f-12"> <?php echo $vendorslist['user_email']; ?> </span>
-                <span class="col-lg-3 f-12 mb-1">Phone  :</span>
+                <span class="col-lg-3 f-12 mb-1"><?= __('Phone'); ?>  :</span>
                 <span class="col-lg-9 f-12"> <?php echo $vendorslist['user_mobile']!=""?$vendorslist['user_mobile']:"-"; ?> </span>
               </div>
               <?php if($tven == '0'){ ?>
-              <i class="ti-share float-right position-absolute text-white resendrequest" data-userid="<?php echo $vendorslist['user_id']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Re-Invite User" style="right: 100px;top: 10px;"></i>
+              <i class="ti-share float-right position-absolute text-white resendrequest" data-userid="<?php echo $vendorslist['user_id']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Re-Invite User'), ENT_QUOTES, 'UTF-8'); ?>" style="right: 100px;top: 10px;"></i>
             <?php } ?>
-            <i class="ti-key float-right position-absolute text-danger reSentPassword" data-userid="<?php echo $vendorslist['user_id']; ?>"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Re-Set Password" style="right: 70px;top: 10px;"></i>
+            <i class="ti-key float-right position-absolute text-danger reSentPassword" data-userid="<?php echo $vendorslist['user_id']; ?>"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Re-Set Password'), ENT_QUOTES, 'UTF-8'); ?>" style="right: 70px;top: 10px;"></i>
             </div>
           </div>
 
@@ -151,7 +151,7 @@ foreach($useruresponse as $useruresponse){
     }else{   ?>
 
  <div class="card-px text-center py-20 m-t-30">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No User Invitation Available</p>
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> <?= __('No User Invitation Available'); ?></p>
                                     <div class="text-center px-4">
                                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                   </div>

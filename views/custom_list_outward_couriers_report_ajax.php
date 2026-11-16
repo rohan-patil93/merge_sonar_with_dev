@@ -25,20 +25,20 @@ if(count((array)$rows) > 0){
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col">Sl.No</th>
-				<th scope="col">Date</th>
-				<th scope="col">To Address</th>
-				<th scope="col">From Address</th>
-				<th scope="col">Tracking No</th>
-				<th scope="col">Vehicle No</th>
-				<th scope="col">Description of Materials</th>
-				<th scope="col">Qty.</th>
-				<th scope="col">Taken By Name</th>
-				<th scope="col">Taken By Date</th>
-				<th scope="col">Taken By Time</th>
-				<th scope="col">Taken By Contact No</th>
-				<th scope="col">Security Sign</th>
-				<th scope="col">Remarks</th>
+				<th scope="col"><?= __('Sl.No'); ?></th>
+				<th scope="col"><?= __('Date'); ?></th>
+				<th scope="col"><?= __('To Address'); ?></th>
+				<th scope="col"><?= __('From Address'); ?></th>
+				<th scope="col"><?= __('Tracking No'); ?></th>
+				<th scope="col"><?= __('Vehicle No'); ?></th>
+				<th scope="col"><?= __('Description of Materials'); ?></th>
+				<th scope="col"><?= __('Qty.'); ?></th>
+				<th scope="col"><?= __('Taken By Name'); ?></th>
+				<th scope="col"><?= __('Taken By Date'); ?></th>
+				<th scope="col"><?= __('Taken By Time'); ?></th>
+				<th scope="col"><?= __('Taken By Contact No'); ?></th>
+				<th scope="col"><?= __('Security Sign'); ?></th>
+				<th scope="col"><?= __('Remarks'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -106,7 +106,7 @@ if(count((array)$rows) > 0){
 </div>
 <?php }else{ ?>
 <div class="card-px text-center py-20 mt-2">
-	<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Outward Couriers </p>
+	<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Outward Couriers'); ?> </p>
 	<div class="text-center px-4">
 		<img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
 	</div>

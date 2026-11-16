@@ -105,11 +105,11 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
     <div class="container-fluid j-pro">
         <div class="card card-custom mb-5 ">
             <div class="card-header">
-                <h5>Work Entry</h5>
+                <h5><?= __('Work Entry'); ?></h5>
                 <div class="card-header-right">
                   <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                       <i class="icofont icofont-reply"></i>
-                      Back
+                      <?= __('Back'); ?>
                   </a>
               </div>
           </div>
@@ -123,7 +123,7 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
                                 <div class="form-group row">
                                     <div class="col-10">
                                         <input type="hidden" name="monthstartday" id="monthstartday" value="<?php echo $_SESSION['config']['default_payroll_day']; ?>">
-                                        <input aria-label="Att Month Year" class="form-control" type="month" name="att_month_year" value="<?php echo $yearr."-".$mnth?>"  id="att_month_year"  max="2020-03-30"/>
+                                        <input aria-label="<?= htmlspecialchars(__('Att Month Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="att_month_year" value="<?php echo $yearr."-".$mnth?>"  id="att_month_year"  max="2020-03-30"/>
 
                                     </div>
                                 </div>
@@ -134,14 +134,14 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
                         <div class="form-radio">
                             <div class="radio radio-inline">
                               <label class="form-label">
-                                <input aria-label="Recordtype" type="radio" name="recordtype" <?php echo $_POST['recordtype']=='discrepancy'?"checked":"";?> class="d-none" value="discrepancy"/>
-                                <i class="helper"></i>Discrepancy Records
+                                <input aria-label="<?= htmlspecialchars(__('Recordtype'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="recordtype" <?php echo $_POST['recordtype']=='discrepancy'?"checked":"";?> class="d-none" value="discrepancy"/>
+                                <i class="helper"></i><?= __('Discrepancy Records'); ?>
                             </label>
                         </div>
                         <div class="radio radio-inline">
                           <label class="form-label">
-                            <input aria-label="Recordtype" type="radio" name="recordtype" <?php echo $_POST['recordtype']!='discrepancy'?"checked":"";?> value="all" class="d-none"/>
-                            <i class="helper"></i>All Records
+                            <input aria-label="<?= htmlspecialchars(__('Recordtype'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="recordtype" <?php echo $_POST['recordtype']!='discrepancy'?"checked":"";?> value="all" class="d-none"/>
+                            <i class="helper"></i><?= __('All Records'); ?>
                         </label>
                     </div>
                 </div>
@@ -151,9 +151,9 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
                 <input type="hidden" name="task_for" id="filter" value='<?php echo $_POST['task_for']; ?>'>
                 <input type="hidden" name="attendancemonth" id="attendancemonth" value="<?php echo date('Y-m-d');?>">
                 <input type="hidden" name="process_type" id="process_type" value="1">
-                <button type="button" class="btn waves-effect waves-light hor-grd btn-grd-info" onclick="showpopup();"><i class="ti-user"></i> Select Employees</button>
+                <button type="button" class="btn waves-effect waves-light hor-grd btn-grd-info" onclick="showpopup();"><i class="ti-user"></i> <?= __('Select Employees'); ?></button>
             </div>
-            <div class="col-lg-2"> <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="ti-filter"></i> Apply Search</button></div>
+            <div class="col-lg-2"> <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="ti-filter"></i> <?= __('Apply Search'); ?></button></div>
         </form>
         <div class="row mb-5">
             <div class="mt-3 text-right">
@@ -169,7 +169,7 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
     <div class="table-responsive mt-4 work-entry">
         <table class="table table-bordered">
             <tr>
-                <th scope="col" rowspan="2">Work Entries</th>
+                <th scope="col" rowspan="2"><?= __('Work Entries'); ?></th>
                 <th scope="col" colspan="31" >
 
                     <?php echo date('d-M-y',strtotime($firstdate))." To ".date('d-M-y',strtotime($lastdate)); ?>
@@ -188,9 +188,9 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
 
 <div class="align-middle float-left ml-2">
 <?php if($elist['image']!=""){?>
-                      <img src="uploads/all/<?php echo $elist['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                      <img src="uploads/all/<?php echo $elist['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                     <?php } else { ?>
-                      <span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($elist['display_name']); ?></span>
+                      <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($elist['display_name']); ?></span>
                     <?php } ?>
                       <div class="d-inline-block">
                     <a href="#!"><?php echo $elist['display_name']; ?></a>

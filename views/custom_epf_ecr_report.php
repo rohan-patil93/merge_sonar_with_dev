@@ -40,7 +40,7 @@ $ecr_list = json_decode($configesponse,1);
 		<div class="col-md-5">
 			<form method="post" action="#">
 				<div class="form-group row">
-					<label for="example-month-input" class="col-2 f-w-700 mt-3 form-label">Month</label>
+					<label for="example-month-input" class="col-2 f-w-700 mt-3 form-label"><?= __('Month'); ?></label>
 					<div class="col-7">
 						<input class="form-control" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input" />
 					</div>
@@ -77,7 +77,7 @@ $ecr_list = json_decode($configesponse,1);
 	<div class="card card-custom">
 		<div class="card-header flex-wrap border-0 pt-4 pb-0 pl-5 mx-auto">
 			<div class="card-title">
-				<h3 class="card-label text-center f-w-700">EPF-ECR Report for <?php echo $pay_month_year; ?>
+				<h3 class="card-label text-center f-w-700"><?= __('EPF-ECR Report for'); ?> <?php echo $pay_month_year; ?>
 			</h3>
 			</div>
 		</div>
@@ -89,18 +89,18 @@ $ecr_list = json_decode($configesponse,1);
 						<table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" aria-describedby="kt_datatable_info" style="width: 1236px;">
 							<thead>
 								<tr role="row" bgcolor="#f7f7f7">
-									<th scope="col">Employee ID</th>
-									<th scope="col">Uan</th>
-									<th scope="col">Member Name</th>
+									<th scope="col"><?= __('Employee ID'); ?></th>
+									<th scope="col"><?= __('Uan'); ?></th>
+									<th scope="col"><?= __('Member Name'); ?></th>
 									<th scope="col"><?php echo __('Gross Wages'); ?></th>
 									<th scope="col"><?php echo __('EPF Wages'); ?></th>
 									<th scope="col"><?php echo __('EPS Wages'); ?></th>
 									<th scope="col"><?php echo __('EDLI Wages'); ?></th>
-									<th scope="col" style="text-align:right">EPF Contribution Remitted</th>
-									<th scope="col" style="text-align:right">EPS Contribution Remitted</th>
-									<th scope="col" style="text-align:right">EPF & EPS Diff Remitted</th>
+									<th scope="col" style="text-align:right"><?= __('EPF Contribution Remitted'); ?></th>
+									<th scope="col" style="text-align:right"><?= __('EPS Contribution Remitted'); ?></th>
+									<th scope="col" style="text-align:right"><?= htmlspecialchars(__('EPF & EPS Diff Remitted'), ENT_QUOTES, 'UTF-8'); ?></th>
 									<th scope="col"><?php echo __('NCP Days'); ?></th>
-									<th scope="col">Refund Of Advances</th>
+									<th scope="col"><?= __('Refund Of Advances'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -108,7 +108,7 @@ $ecr_list = json_decode($configesponse,1);
 										foreach ($ecr_list as $ecr_data) { ?>
 								<tr role="row" class="odd">
 									<th scope="col"><?php echo $ecr_data['employee_id']; ?></th>
-									<th scope="col">---TBD---</th>
+									<th scope="col">---<?= __('TBD'); ?>---</th>
 									<th scope="col"><?php echo $ecr_data['employee_name']; ?></th>
 									<th scope="col"><?php echo $ecr_data['emp_gross']; ?></th>
 									<th scope="col"><?php echo $ecr_data['epf_wages']; ?></th>
@@ -118,8 +118,8 @@ $ecr_list = json_decode($configesponse,1);
 									<th scope="col"><?php echo $ecr_data['epf_remitted']; ?></th>
 									<th scope="col"><?php echo $ecr_data['eps_remitted']; ?></th>
 									<th scope="col"><?php echo $ecr_data['epf_eps_diff']; ?></th>
-									<th scope="col">---TBD---</th>
-									<th scope="col">---TBD---</th>
+									<th scope="col">---<?= __('TBD'); ?>---</th>
+									<th scope="col">---<?= __('TBD'); ?>---</th>
 								</tr>
 
 								<?php

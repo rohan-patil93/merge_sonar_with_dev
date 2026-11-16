@@ -59,14 +59,14 @@ $_SESSION['download_data'] = array();
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="f-30">Headcount</h5>
+      <h5 class="f-30"><?= __('Headcount'); ?></h5>
        <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employment Head Count" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employment Head Count" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employment Head Count" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employment Head Count" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -77,14 +77,14 @@ $_SESSION['download_data'] = array();
           <div class="row col-lg-12 ">
         <div class="col-lg-2">
           <div class="form-group">
-            <input aria-label="Fromdate" class="form-control datepicker" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
-} ?> placeholder="From Date" >
+            <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
+} ?> placeholder="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" >
           </div>
         </div>
         <?php include_once 'views/custom_standard_report_hr_employee_filter.php'; ?>
         <div class="col-lg-2 mt-1">
           <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-            Apply
+            <?= __('Apply'); ?>
           </button>
           <input type="hidden" name="submit" value="applyform">
         </div>
@@ -116,8 +116,8 @@ $_SESSION['download_data'] = array();
           <div class="bg-gray">
             <h4 class="mb-3"><?php echo date("M d, Y"); $cy =date('Y')-1; ?></h4>
             <i class="fa fa-users f-30 text-success"></i>
-            <span class="f-30 f-w-600"><?php echo $countyear[date('Y')]; ?></span><b class="f-12 text-muted">  &nbsp;&nbsp; +(<?php echo $countyear[date('Y')]- $countyear[$cy]; ?>) YTD</b>
-            <h5 class="mt-3 mb-3">Total Employees</h5>
+            <span class="f-30 f-w-600"><?php echo $countyear[date('Y')]; ?></span><b class="f-12 text-muted">  &nbsp;&nbsp; +(<?php echo $countyear[date('Y')]- $countyear[$cy]; ?><?= __(') YTD'); ?></b>
+            <h5 class="mt-3 mb-3"><?= __('Total Employees'); ?></h5>
             <?php
             for($i=$cy; $i>$cy-4; $i--) {?>
             <div class="col-md-12 mt-2">
@@ -138,13 +138,13 @@ $_SESSION['download_data'] = array();
         <table class="table table-hover">
           <tr style="background-color: #eeeeee;">
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Hire Date</th>
-            <th scope="col">Divison</th>
-            <th scope="col">Department</th>
-            <th scope="col">Locations</th>
-            <th scope="col">Designations</th>
-            <th scope="col">Employement</th>
+            <th scope="col"><?= __('Name'); ?></th>
+            <th scope="col"><?= __('Hire Date'); ?></th>
+            <th scope="col"><?= __('Divison'); ?></th>
+            <th scope="col"><?= __('Department'); ?></th>
+            <th scope="col"><?= __('Locations'); ?></th>
+            <th scope="col"><?= __('Designations'); ?></th>
+            <th scope="col"><?= __('Employement'); ?></th>
           </tr>
           <?php foreach($emp_data as $emdata){
               $hire_date = $emdata['joining_date']!="" ? fromDate($emdata['joining_date']) : "";
@@ -155,7 +155,7 @@ $_SESSION['download_data'] = array();
               <td>
                 <div class="d-inline-block align-middle">
                 <?php if($emdata['image']!=""){ ?>
-                  <img src="uploads/module/hr.webp" alt="user" class="img-radius img-40 align-top m-r-15">
+                  <img src="uploads/module/hr.webp" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15">
                 <?php }else{ ?>
                   <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  mt-1"><?php echo initials($emdata['display_name']); ?></span>
                 <?php } ?>
@@ -180,7 +180,7 @@ $_SESSION['download_data'] = array();
     </div>
     <?php if(count((array)$emp_data)==0){ ?>
       <div class="card-px text-center py-20 m-t-30">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
         <div class="text-center px-4">
           <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
         </div>

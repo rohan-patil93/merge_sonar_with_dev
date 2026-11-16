@@ -452,7 +452,7 @@ function currencychange(val,old_val){
             title: <?php echo json_encode(__('6010 : Please Define Exchange Rate')); ?>,
             type: "warning",
             buttonsStyling: false,
-            confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
             confirmButtonClass: "btn btn-danger"
         })
     }
@@ -485,7 +485,7 @@ function toredriacte(id,url_option,table){
             //text: <?php echo json_encode(__('6030 : Quantity cannot be more than')); ?>+quantity_old,
             type: "warning",
             buttonsStyling: false,
-            confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
             confirmButtonClass: "btn btn-danger",
         })
         return false;
@@ -887,12 +887,12 @@ function displaytaxes(){
     for( var k =0 ; k < arr2.length; k++){
 
         if(old_state != change_state){
-            str+= "<tr><td style='width: 67%;text-align:right;'> IGST @ "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
+            str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('IGST @'), ENT_QUOTES, 'UTF-8'); ?> "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
             str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"''> </td></tr>";
         }else{
-            str+= "<tr><td style='width: 67%;text-align:right;'> CGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+            str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('CGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
             str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
-            str+= "<tr><td style='width: 67%;text-align:right;'> SGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+            str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('SGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
             str+= "<td>  <input aria-label="<?php echo __('Tax Amount'); ?>"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
         }
 
@@ -981,7 +981,7 @@ function quantityCheckold(fid){
             text: <?php echo json_encode(__('6030 : Quantity cannot be more than')); ?>+quantity_old,
             type: "warning",
             buttonsStyling: false,
-            confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
             confirmButtonClass: "btn btn-danger",
         }).then(function(result) {
 
@@ -1013,10 +1013,10 @@ function quantityCheck(fid){
                         text: <?php echo json_encode(__('6020 : Do you want to change the quantity to')); ?>+parseFloat(data)+" ?",
                         type: "warning",
                         buttonsStyling: false,
-                        confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, change!",
+                        confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, change!'), ENT_QUOTES, 'UTF-8'); ?>",
                         confirmButtonClass: "btn btn-danger",
                         showCancelButton: true,
-                        cancelButtonText: "<i class='la la-hand-o-right'></i> No, proceed",
+                        cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, proceed'), ENT_QUOTES, 'UTF-8'); ?>",
                         cancelButtonClass: "btn btn-default"
                     }).then(function(result) {
                         if (result.value) {

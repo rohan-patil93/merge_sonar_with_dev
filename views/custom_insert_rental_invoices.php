@@ -361,7 +361,7 @@ function cancelInvoices(transaction_table,transaction_id){
                                         <select aria-label="<?= htmlspecialchars(__('Purchase uom'), ENT_QUOTES, 'UTF-8'); ?>" name="purchase_uom[]"  class="form-control js-example-basic-single">
                                             <?php foreach ($generalCodeDetailsData as $uom): ?>
                                                 <option value="<?= htmlspecialchars($uom['genc_detail_code']) ?>">
-                                                    <?= htmlspecialchars($uom['genc_detail_name']) ?>
+                                                    <?= htmlspecialchars(__($uom['genc_detail_name'])) ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>

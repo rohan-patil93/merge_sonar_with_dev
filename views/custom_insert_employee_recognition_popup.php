@@ -77,7 +77,7 @@ $comments = $_GET['comments'];
                                 <?php if($emplist[$first_emp]['image']!="") { ?>
                                     <img src="uploads/all/<?php echo $emplist[$first_emp]['image']; ?>"  class="img-radius img-50 align-top m-r-15" style="z-index: 9;" alt="<?= __('Attachment Preview') ?>">
                                 <?php } else { ?>
-                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"  style="width: 51px; left: 4px; top: 4px; background-color: white;color: black;z-index: 9;"><?php echo initials($emplist[$first_emp]['display_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"  style="width: 51px; left: 4px; top: 4px; background-color: white;color: black;z-index: 9;"><?php echo initials($emplist[$first_emp]['display_name']); ?></span>
                                 <?php } ?>
                             </div>
                             <h4 class="card-title">
@@ -117,7 +117,7 @@ $comments = $_GET['comments'];
                                 <?php if($emplist[$_SESSION['userid']]['image']!="") { ?>
                                     <img src="uploads/all/<?php echo $emplist[$_SESSION['emp_id']]['image']; ?>"  class="img-radius img-50 align-top m-r-15" style="z-index: 9;" alt="<?= __('Attachment Preview') ?>">
                                 <?php } else { ?>
-                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"  style="z-index: 9; left: 10px; top: 7px; z-index: 9;"><?php echo initials($emplist[$_SESSION['emp_id']]['display_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"  style="z-index: 9; left: 10px; top: 7px; z-index: 9;"><?php echo initials($emplist[$_SESSION['emp_id']]['display_name']); ?></span>
                                 <?php } ?>
 
                             </div>

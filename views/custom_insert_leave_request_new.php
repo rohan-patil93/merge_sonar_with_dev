@@ -3,7 +3,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 $table_name = "employee_leaves";
 
 if(isset($_POST['submit'])){
-    echo "RRRR<pre>SSSS"; print_r($_POST); echo "</pre>";
+    echo "".__('RRRR')."<pre>SSSS"; print_r($_POST); echo "</pre>";
     $data['leave_from'] = date("Y-m-d",strtotime($_POST['leave_from']));
     $data['start_half_day'] = $_POST['start_half_day'];
     $data['leave_to'] = date("Y-m-d",strtotime($_POST['leave_to']));

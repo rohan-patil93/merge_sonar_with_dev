@@ -37,7 +37,7 @@ $response = curl_exec($curl);
 
 $data = json_decode($response, true);
 if (!$data || !isset($data['project_tasks'])) {
-    die("No ticket data found from API.<br>Raw response:<br><pre>" . htmlspecialchars($response) . "</pre>");
+    die("".__('No ticket data found from API.')."<br>".__('Raw response').":<br><pre>" . htmlspecialchars($response) . "</pre>");
 }
 $task = $data['project_tasks'];
 $priority_categories = $data['priority_categories'] ?? [];
@@ -211,7 +211,7 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
                     console.error("⚠️ Failed to parse response:", e, response);
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error',
+                        title: <?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         text: <?php echo json_encode(__('Invalid API response')); ?>
                     });
                     $("#request_completion_date, #request_completion_time, #sla_actual_response_date, #sla_resolution_date, #sla_responce_time, #sla_resolution_time").val('');
@@ -275,7 +275,7 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error',
+                            title: <?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             text: <?php echo json_encode(__('API returned error!')); ?>
                         });
                     }
@@ -283,7 +283,7 @@ $reqDateTime = !empty($task['request_completion_date']) ? explode(" ", $task['re
                     console.error("⚠️ Failed to parse response:", e, response);
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error',
+                        title: <?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         text: <?php echo json_encode(__('Invalid API response')); ?>
                     });
                 }

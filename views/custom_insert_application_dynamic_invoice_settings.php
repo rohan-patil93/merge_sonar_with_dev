@@ -74,12 +74,12 @@ if ($userData['user_photo'] != '') {
 <?php if ($error_message != '') { ?>
   <div class="alert alert-danger background-danger alert-dismissible">
     <strong><?php echo $error_message; ?></strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
   </div>
 <?php } ?>
 <div class="card">
   <div class="card-header">
-    <h5 class>Custom Invoice with preview</h5>
+    <h5 class><?= __('Custom Invoice with preview'); ?></h5>
     <div class="card-header-right">
       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
         <i class="icofont icofont-reply"></i> <?= __('Back') ?>
@@ -99,7 +99,7 @@ if ($userData['user_photo'] != '') {
                   <label for="template_name" class="form-label"><?= __('Template Name') ?></label>
                   <div class="form-group">
                     <input class="form-control mb-1" type="text" id="template_name" value="<?= $invoice_options ?>"
-                      placeholder="<?= __('Enter template name') ?>" title="Enter template name" aria-label="Enter template name">
+                      placeholder="<?= __('Enter template name') ?>" title="<?= htmlspecialchars(__('Enter template name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter template name'), ENT_QUOTES, 'UTF-8'); ?>">
                     <input class="form-control mb-1" type="hidden" id="rid" value="<?= $rid ?>">
                   </div>
                 </div>
@@ -131,7 +131,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Logo') ?></span>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showLogo" name="showLogo" <?php echo $logoOptions['showLogo'] ? 'checked' : ''; ?> title="Showlogo" aria-label="Showlogo">
+                    <input class="form-check-input" type="checkbox" id="showLogo" name="showLogo" <?php echo $logoOptions['showLogo'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Showlogo'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Showlogo'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showLogo"><?= __('Show Logo') ?></label>
                   </div>
                 </div>
@@ -141,7 +141,7 @@ if ($userData['user_photo'] != '') {
               <div id="logoPosition" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="logoPositionSelect" class="form-label"><?= __('Top Header Position') ?></label>
-                  <select class="form-select" id="logoPositionSelect" name="logoPosition" title="Logoposition" aria-label="Logoposition">
+                  <select class="form-select" id="logoPositionSelect" name="logoPosition" title="<?= htmlspecialchars(__('Logoposition'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Logoposition'), ENT_QUOTES, 'UTF-8'); ?>">
                     <option value="left" <?php echo (empty($logoOptions['logoPosition']) || $logoOptions['logoPosition'] === 'left') ? 'selected' : ''; ?>> <?= __('Left(Logo) to Right(Details)') ?> </option>
                     <option value="center" <?php echo $logoOptions['logoPosition'] === 'center' ? 'selected' : ''; ?>> <?= __('Center') ?> </option>
                     <option value="right" <?php echo $logoOptions['logoPosition'] === 'right' ? 'selected' : ''; ?>> <?= __('Right(Details) to Left(Logo)') ?> </option>
@@ -154,7 +154,7 @@ if ($userData['user_photo'] != '') {
               <div id="logoSize" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="logoSizeSelect" class="form-label"><?= __('Logo Size') ?></label>
-                  <select class="form-select" id="logoSizeSelect" name="logoSize" title="Logosize" aria-label="Logosize">
+                  <select class="form-select" id="logoSizeSelect" name="logoSize" title="<?= htmlspecialchars(__('Logosize'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Logosize'), ENT_QUOTES, 'UTF-8'); ?>">
                     <option value="small" <?php echo (empty($logoOptions['logoSize']) || $logoOptions['logoSize'] === 'small') ? 'selected' : ''; ?>> <?= __('Small') ?> </option>
                     <option value="medium" <?php echo $logoOptions['logoSize'] === 'medium' ? 'selected' : ''; ?>> <?= __('Medium') ?> </option>
                     <option value="large" <?php echo $logoOptions['logoSize'] === 'large' ? 'selected' : ''; ?>> <?= __('Large') ?> </option>
@@ -165,7 +165,7 @@ if ($userData['user_photo'] != '') {
                     <label for="customLogoSizeInput" class="form-label"><?= __('Custom Logo Size (px)') ?></label>
                     <input type="number" id="customLogoSizeInput" class="form-control" name="customLogoSize"
                       value="<?php echo htmlspecialchars($logoOptions['customLogoSize']); ?>"
-                      placeholder="Enter size in px" / title="Enter size in px" aria-label="Enter size in px">
+                      placeholder="<?= htmlspecialchars(__('Enter size in px'), ENT_QUOTES, 'UTF-8'); ?>" / title="<?= htmlspecialchars(__('Enter size in px'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter size in px'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
                 </div>
               </div>
@@ -175,11 +175,11 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Top Header Options') ?></span>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showinvoiceno" name="showInvoiceNo" <?php echo $logoOptions['showInvoiceNo'] ? 'checked' : ''; ?> title="Showinvoiceno" aria-label="Showinvoiceno">
+                    <input class="form-check-input" type="checkbox" id="showinvoiceno" name="showInvoiceNo" <?php echo $logoOptions['showInvoiceNo'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Showinvoiceno'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Showinvoiceno'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showinvoiceno"><?= __('Show Invoice No.') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="invoicenoheading"
-                      value="<?php echo !empty($logoOptions['invoiceNoHeading']) ? $logoOptions['invoiceNoHeading'] : 'Invoice No.'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="invoicenoSelect" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($logoOptions['invoiceNoHeading']) ? $logoOptions['invoiceNoHeading'] : 'Invoice No.'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="invoicenoSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['invoiceNoValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -290,11 +290,11 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showdate" <?php echo $logoOptions['showDate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showdate" <?php echo $logoOptions['showDate'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showdate"><?= __('Show Date') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="dateheading"
-                      value="<?php echo !empty($logoOptions['dateHeading']) ? $logoOptions['dateHeading'] : 'Date'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="invoicedateSelect" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($logoOptions['dateHeading']) ? $logoOptions['dateHeading'] : 'Date'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="invoicedateSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $logoOptions['dateValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -346,8 +346,7 @@ if ($userData['user_photo'] != '') {
                         value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'type' ? 'selected' : ''; ?> value="type"> <?= __('Type') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'tax_type' ? 'selected' : ''; ?> value="tax_type">
-                        Tax
-                        Type</option>
+                        <?= __('Tax Type'); ?></option>
                       <option <?php echo $logoOptions['dateValue'] === 'discount_type' ? 'selected' : ''; ?>
                         value="discount_type"> <?= __('Discount Type') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'discount_value' ? 'selected' : ''; ?>
@@ -371,22 +370,17 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $logoOptions['dateValue'] === 'doc_ref_date' ? 'selected' : ''; ?>
                         value="doc_ref_date"> <?= __('Doc Ref Date') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'due_date' ? 'selected' : ''; ?> value="due_date">
-                        Due
-                        Date</option>
+                        <?= __('Due Date'); ?></option>
                       <option <?php echo $logoOptions['dateValue'] === 'ref_type' ? 'selected' : ''; ?> value="ref_type">
-                        Ref
-                        Type</option>
+                        <?= __('Ref Type'); ?></option>
                       <option <?php echo $logoOptions['dateValue'] === 'parent_ref_id' ? 'selected' : ''; ?>
                         value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
-                      <option <?php echo $logoOptions['dateValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">Ref
-                        Id
+                      <option <?php echo $logoOptions['dateValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id"><?= __('Ref Id'); ?>
                       </option>
-                      <option <?php echo $logoOptions['dateValue'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no">Ref
-                        No
+                      <option <?php echo $logoOptions['dateValue'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no"><?= __('Ref No'); ?>
                       </option>
                       <option <?php echo $logoOptions['dateValue'] === 'ref_date' ? 'selected' : ''; ?> value="ref_date">
-                        Ref
-                        Date</option>
+                        <?= __('Ref Date'); ?></option>
                       <option <?php echo $logoOptions['dateValue'] === 'ref_bill_type' ? 'selected' : ''; ?>
                         value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'old_ref_no' ? 'selected' : ''; ?>
@@ -408,8 +402,7 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $logoOptions['dateValue'] === 'additional_charges' ? 'selected' : ''; ?>
                         value="additional_charges"> <?= __('Additional Charges') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'pdf_name' ? 'selected' : ''; ?> value="pdf_name">
-                        Pdf
-                        Name</option>
+                        <?= __('Pdf Name'); ?></option>
                       <option <?php echo $logoOptions['dateValue'] === 'owner_additional_details' ? 'selected' : ''; ?>
                         value="owner_additional_details"> <?= __('Owner Additional Details') ?> </option>
                       <option <?php echo $logoOptions['dateValue'] === 'serial_transaction_number' ? 'selected' : ''; ?>
@@ -417,11 +410,11 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showduedate" <?php echo $logoOptions['showDueDate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showduedate" <?php echo $logoOptions['showDueDate'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showduedate"><?= __('Show Due Date') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="duedateheading"
-                      value="<?php echo !empty($logoOptions['dueDateHeading']) ? $logoOptions['dueDateHeading'] : 'Due Date'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="invoiceduedateSelect" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($logoOptions['dueDateHeading']) ? $logoOptions['dueDateHeading'] : 'Due Date'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="invoiceduedateSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $logoOptions['dueDateValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -504,11 +497,9 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $logoOptions['dueDateValue'] === 'parent_ref_id' ? 'selected' : ''; ?>
                         value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">
-                        Ref
-                        Id</option>
+                        <?= __('Ref Id'); ?></option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no">
-                        Ref
-                        No</option>
+                        <?= __('Ref No'); ?></option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'ref_date' ? 'selected' : ''; ?>
                         value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $logoOptions['dueDateValue'] === 'ref_bill_type' ? 'selected' : ''; ?>
@@ -539,11 +530,11 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showpo_num" <?php echo $logoOptions['showPoNum'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showpo_num" <?php echo $logoOptions['showPoNum'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showpo_num"><?= __('Show P.O. Number') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="po_numheading"
-                      value="<?php echo !empty($logoOptions['poNumHeading']) ? $logoOptions['poNumHeading'] : 'P.O. Number'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="invoiceponumSelect" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($logoOptions['poNumHeading']) ? $logoOptions['poNumHeading'] : 'P.O. Number'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="invoiceponumSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $logoOptions['poNumValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -622,8 +613,7 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $logoOptions['poNumValue'] === 'ref_type' ? 'selected' : ''; ?> value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'parent_ref_id' ? 'selected' : ''; ?>
                         value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
-                      <option <?php echo $logoOptions['poNumValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">Ref
-                        Id
+                      <option <?php echo $logoOptions['poNumValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id"><?= __('Ref Id'); ?>
                       </option>
                       <option <?php echo (empty($logoOptions['poNumValue']) || $logoOptions['poNumValue'] === 'ref_no') ? 'selected' : ''; ?> value="ref_no"> <?= __('Ref No') ?> </option>
                       <option <?php echo $logoOptions['poNumValue'] === 'ref_date' ? 'selected' : ''; ?> value="ref_date"> <?= __('Ref Date') ?> </option>
@@ -655,11 +645,11 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showpo_date" <?php echo $logoOptions['showPoDate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showpo_date" <?php echo $logoOptions['showPoDate'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showpo_date"><?= __('Show P.O Date') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="po_dateheading"
-                      value="<?php echo !empty($logoOptions['poDateHeading']) ? $logoOptions['poDateHeading'] : 'P.O Date'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="invoicepodateSelect" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($logoOptions['poDateHeading']) ? $logoOptions['poDateHeading'] : 'P.O Date'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="invoicepodateSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $logoOptions['poDateValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -742,10 +732,8 @@ if ($userData['user_photo'] != '') {
                         value="ref_type"> <?= __('Ref Type') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'parent_ref_id' ? 'selected' : ''; ?>
                         value="parent_ref_id"> <?= __('Rarent Ref Id') ?> </option>
-                      <option <?php echo $logoOptions['poDateValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id">Ref
-                        Id</option>
-                      <option <?php echo $logoOptions['poDateValue'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no">Ref
-                        No</option>
+                      <option <?php echo $logoOptions['poDateValue'] === 'ref_id' ? 'selected' : ''; ?> value="ref_id"><?= __('Ref Id'); ?></option>
+                      <option <?php echo $logoOptions['poDateValue'] === 'ref_no' ? 'selected' : ''; ?> value="ref_no"><?= __('Ref No'); ?></option>
                       <option <?php echo (empty($logoOptions['poDateValue']) || $logoOptions['poDateValue'] === 'ref_date') ? 'selected' : ''; ?> value="ref_date"> <?= __('Ref Date') ?> </option>
                       <option <?php echo $logoOptions['poDateValue'] === 'ref_bill_type' ? 'selected' : ''; ?>
                         value="ref_bill_type"> <?= __('Ref Bill Type') ?> </option>
@@ -777,11 +765,11 @@ if ($userData['user_photo'] != '') {
                   </div>
                   <!-- om new -->
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showname" <?php echo $logoOptions['showName'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showname" <?php echo $logoOptions['showName'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showname"><?= __('Show Name') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="nameheading"
-                      value="<?php echo !empty($logoOptions['nameHeading']) ? $logoOptions['nameHeading'] : 'Name'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="invoicenameSelect" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($logoOptions['nameHeading']) ? $logoOptions['nameHeading'] : 'Name'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="invoicenameSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $logoOptions['nameValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['nameValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -797,11 +785,11 @@ if ($userData['user_photo'] != '') {
                   </div>
                   <!-- om new -->
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showemail" <?php echo $logoOptions['showEmail'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showemail" <?php echo $logoOptions['showEmail'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showemail"><?= __('Show Email') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="emailheading"
-                      value="<?php echo !empty($logoOptions['emailHeading']) ? $logoOptions['emailHeading'] : 'Email'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="invoiceemailSelect" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($logoOptions['emailHeading']) ? $logoOptions['emailHeading'] : 'Email'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="invoiceemailSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $logoOptions['emailValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['emailValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -817,11 +805,11 @@ if ($userData['user_photo'] != '') {
                   </div>
                   <!-- om new -->
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showphone" <?php echo $logoOptions['showPhone'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showphone" <?php echo $logoOptions['showPhone'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showphone"><?= __('Show Phone') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="phoneheading"
-                      value="<?php echo !empty($logoOptions['phoneHeading']) ? $logoOptions['phoneHeading'] : 'Phone'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="invoicephoneSelect" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($logoOptions['phoneHeading']) ? $logoOptions['phoneHeading'] : 'Phone'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="invoicephoneSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $logoOptions['phoneValue'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $logoOptions['phoneValue'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -862,7 +850,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Header') ?></span>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showAddress" <?php echo $headerOptions['showAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showAddress" <?php echo $headerOptions['showAddress'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showAddress"><?= __('Show Header') ?></label>
                   </div>
                 </div>
@@ -875,12 +863,12 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Address 1 -->
                   <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="showFirstAddress" <?php echo $headerOptions['showFirstAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showFirstAddress" <?php echo $headerOptions['showFirstAddress'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showFirstAddress"><?= __('Show Billing Address') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="inputheading1"
-                      value="<?php echo !empty($headerOptions['firstAddressHeading']) ? $headerOptions['firstAddressHeading'] : 'Billing Address'; ?>" title="Input" aria-label="Input">
+                      value="<?php echo !empty($headerOptions['firstAddressHeading']) ? $headerOptions['firstAddressHeading'] : 'Billing Address'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 
-                    <select class="form-select mb-2" id="address1Select" style="display: none;" title="Select" aria-label="Select">
+                    <select class="form-select mb-2" id="address1Select" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo (empty($headerOptions['firstAddressValue']) || $headerOptions['firstAddressValue'] === 'party_address') ? 'selected' : ''; ?>
                         value="party_address"> <?= __('Party Address') ?> </option>
                       <option <?php echo $headerOptions['firstAddressValue'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Shipping Address') ?> </option>
@@ -888,7 +876,7 @@ if ($userData['user_photo'] != '') {
                         value="company_address"> <?= __('Company Address') ?> </option>
                     </select>
 
-                    <select class="form-select" id="address1position" title="Select" aria-label="Select">
+                    <select class="form-select" id="address1position" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo (empty($headerOptions['firstAddressPosition']) || $headerOptions['firstAddressPosition'] === 'left') ? 'selected' : ''; ?> value="left"> <?= __('Position 1') ?> </option>
                       <option <?php echo $headerOptions['firstAddressPosition'] === 'center' ? 'selected' : ''; ?>
                         value="center"> <?= __('Position 2') ?> </option>
@@ -898,21 +886,21 @@ if ($userData['user_photo'] != '') {
 
                     <!-- om address part  -->
                     <div class="mt-3">
-                      <h6 class="text-muted">Address Field Visibility</h6>
+                      <h6 class="text-muted"><?= __('Address Field Visibility'); ?></h6>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showFirstAddressField" <?php echo ($headerOptions['showFirstAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showFirstAddressField" <?php echo ($headerOptions['showFirstAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showFirstAddressField"><?= __('Show Address Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showFirstPincodeField" <?php echo ($headerOptions['showFirstPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showFirstPincodeField" <?php echo ($headerOptions['showFirstPincodeField'] ?? true) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showFirstPincodeField"><?= __('Show Phone Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showFirstGstField" <?php echo ($headerOptions['showFirstGstField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showFirstGstField" <?php echo ($headerOptions['showFirstGstField'] ?? true) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showFirstGstField"><?= __('Show GST Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showFirstPanField" <?php echo ($headerOptions['showFirstPanField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showFirstPanField" <?php echo ($headerOptions['showFirstPanField'] ?? true) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showFirstPanField"><?= __('Show PAN Field') ?></label>
                       </div>
                     </div>
@@ -920,12 +908,12 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Address 2 -->
                   <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="showSecondAddress" <?php echo $headerOptions['showSecondAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showSecondAddress" <?php echo $headerOptions['showSecondAddress'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showSecondAddress"><?= __('Show Shipping Address') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="inputheading2"
-                      value="<?php echo !empty($headerOptions['secondAddressHeading']) ? $headerOptions['secondAddressHeading'] : 'Shipping Address'; ?>" title="Input" aria-label="Input">
+                      value="<?php echo !empty($headerOptions['secondAddressHeading']) ? $headerOptions['secondAddressHeading'] : 'Shipping Address'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 
-                    <select class="form-select mb-2" id="address2Select" style="display: none;" title="Select" aria-label="Select">
+                    <select class="form-select mb-2" id="address2Select" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $headerOptions['secondAddressValue'] === 'party_address' ? 'selected' : ''; ?>
                         value="party_address"> <?= __('Party Address') ?> </option>
                       <option <?php echo (empty($headerOptions['secondAddressValue']) || $headerOptions['secondAddressValue'] === 'party_ship_adderss') ? 'selected' : ''; ?>
@@ -934,7 +922,7 @@ if ($userData['user_photo'] != '') {
                         value="company_address"> <?= __('Company Address') ?> </option>
                     </select>
 
-                    <select class="form-select" id="address2position" title="Select" aria-label="Select">
+                    <select class="form-select" id="address2position" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $headerOptions['secondAddressPosition'] === 'left' ? 'selected' : ''; ?>
                         value="left"> <?= __('Position 1') ?> </option>
                       <option <?php echo (empty($headerOptions['secondAddressPosition']) || $headerOptions['secondAddressPosition'] === 'center') ? 'selected' : ''; ?> value="center"> <?= __('Position 2') ?> </option>
@@ -944,21 +932,21 @@ if ($userData['user_photo'] != '') {
 
                     <!-- om address part  -->
                     <div class="mt-3">
-                      <h6 class="text-muted">Address Field Visibility</h6>
+                      <h6 class="text-muted"><?= __('Address Field Visibility'); ?></h6>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showSecondAddressField" <?php echo ($headerOptions['showSecondAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showSecondAddressField" <?php echo ($headerOptions['showSecondAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showSecondAddressField"><?= __('Show Address Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showSecondPincodeField" <?php echo ($headerOptions['showSecondPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showSecondPincodeField" <?php echo ($headerOptions['showSecondPincodeField'] ?? true) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showSecondPincodeField"><?= __('Show Phone Number') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showSecondGstField" <?php echo ($headerOptions['showSecondGstField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showSecondGstField" <?php echo ($headerOptions['showSecondGstField'] ?? true) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showSecondGstField"><?= __('Show GST Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showSecondPanField" <?php echo ($headerOptions['showSecondPanField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showSecondPanField" <?php echo ($headerOptions['showSecondPanField'] ?? true) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showSecondPanField"><?= __('Show PAN Field') ?></label>
                       </div>
                     </div>
@@ -966,12 +954,12 @@ if ($userData['user_photo'] != '') {
 
                   <!-- Address 3 -->
                   <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="showThirdAddress" <?php echo $headerOptions['showThirdAddress'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showThirdAddress" <?php echo $headerOptions['showThirdAddress'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showThirdAddress"><?= __('Show Company Address') ?></label>
                     <input class="form-control mb-1 mt-2" type="text" id="inputheading3"
-                      value="<?php echo !empty($headerOptions['thirdAddressHeading']) ? $headerOptions['thirdAddressHeading'] : 'Company'; ?>" title="Input" aria-label="Input">
+                      value="<?php echo !empty($headerOptions['thirdAddressHeading']) ? $headerOptions['thirdAddressHeading'] : 'Company'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 
-                    <select class="form-select mb-2" id="address3Select" style="display: none;" title="Select" aria-label="Select">
+                    <select class="form-select mb-2" id="address3Select" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $headerOptions['thirdAddressValue'] === 'party_address' ? 'selected' : ''; ?>
                         value="party_address"> <?= __('Party Address') ?> </option>
                       <option <?php echo $headerOptions['thirdAddressValue'] === 'party_ship_adderss' ? 'selected' : ''; ?> value="party_ship_adderss"> <?= __('Party Shipping Address') ?> </option>
@@ -979,7 +967,7 @@ if ($userData['user_photo'] != '') {
                         value="company_address"> <?= __('Company Address') ?> </option>
                     </select>
 
-                    <select class="form-select" id="address3position" title="Select" aria-label="Select">
+                    <select class="form-select" id="address3position" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $headerOptions['thirdAddressPosition'] === 'left' ? 'selected' : ''; ?>
                         value="left"> <?= __('Position 1') ?> </option>
                       <option <?php echo $headerOptions['thirdAddressPosition'] === 'center' ? 'selected' : ''; ?>
@@ -989,21 +977,21 @@ if ($userData['user_photo'] != '') {
 
                     <!-- om address part  -->
                     <div class="mt-3">
-                      <h6 class="text-muted">Address Field Visibility</h6>
+                      <h6 class="text-muted"><?= __('Address Field Visibility'); ?></h6>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showThirdAddressField" <?php echo ($headerOptions['showThirdAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showThirdAddressField" <?php echo ($headerOptions['showThirdAddressField'] ?? true) ? 'checked' : ''; ?> disabled title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showThirdAddressField"><?= __('Show Address Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showThirdPincodeField" <?php echo ($headerOptions['showThirdPincodeField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showThirdPincodeField" <?php echo ($headerOptions['showThirdPincodeField'] ?? true) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showThirdPincodeField"><?= __('Show Phone Number') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showThirdGstField" <?php echo ($headerOptions['showThirdGstField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showThirdGstField" <?php echo ($headerOptions['showThirdGstField'] ?? true) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showThirdGstField"><?= __('Show GST Field') ?></label>
                       </div>
                       <div class="form-check form-switch mb-2">
-                        <input class="form-check-input" type="checkbox" id="showThirdPanField" <?php echo ($headerOptions['showThirdPanField'] ?? true) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                        <input class="form-check-input" type="checkbox" id="showThirdPanField" <?php echo ($headerOptions['showThirdPanField'] ?? true) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                         <label class="form-check-label" for="showThirdPanField"><?= __('Show PAN Field') ?></label>
                       </div>
                     </div>
@@ -1016,7 +1004,7 @@ if ($userData['user_photo'] != '') {
               <div id="addressSize" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="addressSizeSelect" class="form-label"><?= __('Text Size') ?></label>
-                  <select class="form-select" id="addressSizeSelect" title="Select" aria-label="Select">
+                  <select class="form-select" id="addressSizeSelect" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                     <option value="small" <?php echo $headerOptions['addressTextSize'] === 'small' ? 'selected' : ''; ?>> <?= __('Small') ?> </option>
                     <option value="medium" <?php echo (empty($headerOptions['addressTextSize']) || $headerOptions['addressTextSize'] === 'medium') ? 'selected' : ''; ?>> <?= __('Medium') ?> </option>
                     <option value="large" <?php echo $headerOptions['addressTextSize'] === 'large' ? 'selected' : ''; ?>> <?= __('Large') ?> </option>
@@ -1028,16 +1016,16 @@ if ($userData['user_photo'] != '') {
               <h6><?= __('Table Options') ?></h6>
               <div class="btn-group d-flex flex-wrap">
                 <button class="btn btn-outline-dark btn-sm mb-2" data-target="tableVisibility">
-                  <i class="bi bi-eye"></i> Visibility
+                  <i class="bi bi-eye"></i> <?= __('Visibility'); ?>
                 </button>
                 <button class="btn btn-outline-dark btn-sm mb-2" data-target="tableAppearance">
-                  <i class="bi bi-palette"></i> Appearance
+                  <i class="bi bi-palette"></i> <?= __('Appearance'); ?>
                 </button>
                 <button class="btn btn-outline-danger btn-sm mb-2" data-target="colsVisibility">
-                  <i class="bi bi-list"></i> Table Options
+                  <i class="bi bi-list"></i> <?= __('Table Options'); ?>
                 </button>
                 <button class="btn btn-outline-danger btn-sm mb-2" data-target="itemsshow">
-                  <i class="bi bi-list"></i> Items Show
+                  <i class="bi bi-list"></i> <?= __('Items Show'); ?>
                 </button>
               </div>
               <?php
@@ -1048,7 +1036,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Table') ?></span>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showTable" readonly disabled checked title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showTable" readonly disabled checked title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showTable"><?= __('Show Table') ?></label>
                   </div>
                 </div>
@@ -1063,64 +1051,64 @@ if ($userData['user_photo'] != '') {
                   <div class="mb-1">
                     <span class="form-label d-inline-block fw-bold"><?= __('Table Header Background') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableHeaderbgColor" value="<?php echo $tableOptions['headerBgColor'] ?? '#f0f0f0'; ?>" title="Input" aria-label="Input">
+                      id="tableHeaderbgColor" value="<?php echo $tableOptions['headerBgColor'] ?? '#f0f0f0'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
 
                   <!-- Table Header color -->
                   <div class="mb-1">
                     <span class="form-label d-inline-block fw-bold"><?= __('Table Header Text Color') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableHeaderColor" value="<?php echo $tableOptions['headerTextColor'] ?? '#000'; ?>" title="Input" aria-label="Input">
+                      id="tableHeaderColor" value="<?php echo $tableOptions['headerTextColor'] ?? '#000'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
 
                   <!-- Table Body Background -->
                   <div class="mb-1">
                     <span class="form-label d-inline-block fw-bold"><?= __('Table Body Background') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableBodybgColor" value="<?php echo $tableOptions['bodyBgColor'] ?? '#ffffff'; ?>" title="Input" aria-label="Input">
+                      id="tableBodybgColor" value="<?php echo $tableOptions['bodyBgColor'] ?? '#ffffff'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
 
                   <!-- Table body color -->
                   <div class="mb-1">
                     <span class="form-label d-inline-block fw-bold"><?= __('Table body Text Color') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableBodyColor" value="<?php echo $bodyTextColor['bodyBgColor'] ?? '#000'; ?>" title="Input" aria-label="Input">
+                      id="tableBodyColor" value="<?php echo $bodyTextColor['bodyBgColor'] ?? '#000'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
 
                   <!-- Table Footer Background -->
                   <div class="mb-1">
                     <span class="form-label d-inline-block fw-bold"><?= __('Table Footer Background') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableFooterbgColor" value="<?php echo $bodyTextColor['footerBgColor'] ?? '#f8f9fa'; ?>" title="Input" aria-label="Input">
+                      id="tableFooterbgColor" value="<?php echo $bodyTextColor['footerBgColor'] ?? '#f8f9fa'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
 
                   <!-- Table Header color -->
                   <div class="mb-1">
                     <span class="form-label d-inline-block fw-bold"><?= __('Table Footer Text Color') ?></span>
                     <input type="color" class="form-control form-control-color" style="max-width:100%;"
-                      id="tableFooterColor" value="<?php echo $bodyTextColor['footerTextColor'] ?? '#000000'; ?>" title="Input" aria-label="Input">
+                      id="tableFooterColor" value="<?php echo $bodyTextColor['footerTextColor'] ?? '#000000'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
 
                   <!-- Row Height -->
                   <div class="mb-1">
                     <span class="form-label d-inline-block fw-bold"><?= __('Table Row Height') ?></span>
                     <input type="number" class="form-control" id="rowHeight" min="20"
-                      placeholder="Enter Row Height (px)" value="<?php echo $bodyTextColor['rowHeight'] ?? '40'; ?>" title="Enter Row Height (px)" aria-label="Enter Row Height (px)">
+                      placeholder="<?= htmlspecialchars(__('Enter Row Height (px)'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $bodyTextColor['rowHeight'] ?? '40'; ?>" title="<?= htmlspecialchars(__('Enter Row Height (px)'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Row Height (px)'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
 
                   <!-- Heading Height -->
                   <div class="mb-1">
                     <span class="form-label d-inline-block fw-bold"><?= __('Table Heading Height') ?></span>
                     <input type="number" class="form-control" id="headingHeight" min="20"
-                      placeholder="Enter Heading Height (px)"
-                      value="<?php echo $bodyTextColor['headingHeight'] ?? '40'; ?>" title="Enter Heading Height (px)" aria-label="Enter Heading Height (px)">
+                      placeholder="<?= htmlspecialchars(__('Enter Heading Height (px)'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo $bodyTextColor['headingHeight'] ?? '40'; ?>" title="<?= htmlspecialchars(__('Enter Heading Height (px)'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Heading Height (px)'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
 
                   <!-- Font Size -->
                   <div class="mb-1">
                     <span class="form-label d-inline-block fw-bold"><?= __('Table Font Size') ?></span>
                     <input type="number" class="form-control" id="fontSize" min="8" max="36"
-                      placeholder="Enter Font Size (px)" value="<?php echo $bodyTextColor['fontSize'] ?? '16'; ?>" title="Enter Font Size (px)" aria-label="Enter Font Size (px)">
+                      placeholder="<?= htmlspecialchars(__('Enter Font Size (px)'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $bodyTextColor['fontSize'] ?? '16'; ?>" title="<?= htmlspecialchars(__('Enter Font Size (px)'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Font Size (px)'), ENT_QUOTES, 'UTF-8'); ?>">
                   </div>
                 </div>
               </div>
@@ -1131,12 +1119,12 @@ if ($userData['user_photo'] != '') {
                   <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Columns') ?></span>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showimagecol" <?php echo $tableOptions['showColumns']['img'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showimagecol" <?php echo $tableOptions['showColumns']['img'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showimagecol"><?= __('Show Image') ?></label>
                     <input type="text" id="imagecolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_img']) ? $tableOptions['heading_img'] : 'Img'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemimageSelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_img']) ? $tableOptions['heading_img'] : 'Img'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemimageSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_img'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1145,8 +1133,7 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $tableOptions['value_img'] === 'item_table_name' ? 'selected' : ''; ?>
                         value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
-                        Item
-                        Id</option>
+                        <?= __('Item Id'); ?></option>
                       <option <?php echo $tableOptions['value_img'] === 'account_code' ? 'selected' : ''; ?>
                         value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_img'] === 'item_name' ? 'selected' : ''; ?>
@@ -1196,12 +1183,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showitemcol" <?php echo $tableOptions['showColumns']['item'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showitemcol" <?php echo $tableOptions['showColumns']['item'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showitemcol"><?= __('Show Item Name') ?></label>
                     <input type="text" id="itemcolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_item']) ? $tableOptions['heading_item'] : 'Item'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemnameSelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_item']) ? $tableOptions['heading_item'] : 'Item'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemnameSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_item'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_item'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1260,12 +1247,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showdescol" <?php echo $tableOptions['showColumns']['des'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showdescol" <?php echo $tableOptions['showColumns']['des'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showitemcol"><?= __('Show Item Description') ?></label>
                     <input type="text" id="descolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_des']) ? $tableOptions['heading_des'] : 'Description'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemdescriptionSelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_des']) ? $tableOptions['heading_des'] : 'Description'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemdescriptionSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_des'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1274,8 +1261,7 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $tableOptions['value_des'] === 'item_table_name' ? 'selected' : ''; ?>
                         value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
-                        Item
-                        Id</option>
+                        <?= __('Item Id'); ?></option>
                       <option <?php echo $tableOptions['value_des'] === 'account_code' ? 'selected' : ''; ?>
                         value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_des'] === 'item_name' ? 'selected' : ''; ?>
@@ -1325,12 +1311,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showuomcol" <?php echo $tableOptions['showColumns']['uom'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showuomcol" <?php echo $tableOptions['showColumns']['uom'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showuomcol"><?= __('Show UOM') ?></label>
                     <input type="text" id="uomcolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_uom']) ? $tableOptions['heading_uom'] : 'UOM'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemuomSelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_uom']) ? $tableOptions['heading_uom'] : 'UOM'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemuomSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_uom'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1341,8 +1327,7 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $tableOptions['value_uom'] === 'item_table_name' ? 'selected' : ''; ?>
                         value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
-                        Item
-                        Id</option>
+                        <?= __('Item Id'); ?></option>
                       <option <?php echo $tableOptions['value_uom'] === 'account_code' ? 'selected' : ''; ?>
                         value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_uom'] === 'item_name' ? 'selected' : ''; ?>
@@ -1392,12 +1377,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showhsnsaccol" <?php echo $tableOptions['showColumns']['hsnsac'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showhsnsaccol" <?php echo $tableOptions['showColumns']['hsnsac'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showhsnsaccol"><?= __('Show HSN/SAC') ?></label>
                     <input type="text" id="hsnsaccolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_hsnsac']) ? $tableOptions['heading_hsnsac'] : 'Hsn/Sac'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemhsnsacSelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_hsnsac']) ? $tableOptions['heading_hsnsac'] : 'Hsn/Sac'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemhsnsacSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_hsnsac'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_hsnsac'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1460,12 +1445,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showqtycol" <?php echo $tableOptions['showColumns']['qty'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showqtycol" <?php echo $tableOptions['showColumns']['qty'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showqtycol"><?= __('Show QTY') ?></label>
                     <input type="text" id="qtycolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_qty']) ? $tableOptions['heading_qty'] : 'QTY'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemqtySelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_qty']) ? $tableOptions['heading_qty'] : 'QTY'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemqtySelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_qty'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1476,8 +1461,7 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $tableOptions['value_qty'] === 'item_table_name' ? 'selected' : ''; ?>
                         value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
-                        Item
-                        Id</option>
+                        <?= __('Item Id'); ?></option>
                       <option <?php echo $tableOptions['value_qty'] === 'account_code' ? 'selected' : ''; ?>
                         value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_name' ? 'selected' : ''; ?>
@@ -1527,12 +1511,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showratecol" <?php echo $tableOptions['showColumns']['rate'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showratecol" <?php echo $tableOptions['showColumns']['rate'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showratecol"><?= __('Show Rate') ?></label>
                     <input type="text" id="ratecolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_rate']) ? $tableOptions['heading_rate'] : 'Rate'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemrateSelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_rate']) ? $tableOptions['heading_rate'] : 'Rate'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemrateSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_rate'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_rate'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1593,12 +1577,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtaxcol" <?php echo $tableOptions['showColumns']['tax'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showtaxcol" <?php echo $tableOptions['showColumns']['tax'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showtaxcol"><?= __('Show TAX') ?></label>
                     <input type="text" id="taxcolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_tax']) ? $tableOptions['heading_tax'] : 'Tax'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemtaxSelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_tax']) ? $tableOptions['heading_tax'] : 'Tax'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemtaxSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_tax'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1609,8 +1593,7 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $tableOptions['value_tax'] === 'item_table_name' ? 'selected' : ''; ?>
                         value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
-                        Item
-                        Id</option>
+                        <?= __('Item Id'); ?></option>
                       <option <?php echo $tableOptions['value_tax'] === 'account_code' ? 'selected' : ''; ?>
                         value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_tax'] === 'item_name' ? 'selected' : ''; ?>
@@ -1660,12 +1643,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showdiscountcol" <?php echo $tableOptions['showColumns']['discount'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showdiscountcol" <?php echo $tableOptions['showColumns']['discount'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showdiscountcol"><?= __('Show Discount') ?></label>
                     <input type="text" id="discountcolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_discount']) ? $tableOptions['heading_discount'] : 'Discount'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemdiscountSelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_discount']) ? $tableOptions['heading_discount'] : 'Discount'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemdiscountSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_qty'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1676,8 +1659,7 @@ if ($userData['user_photo'] != '') {
                       <option <?php echo $tableOptions['value_qty'] === 'item_table_name' ? 'selected' : ''; ?>
                         value="item_table_name"> <?= __('Item Table Name') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_id' ? 'selected' : ''; ?> value="item_id">
-                        Item
-                        Id</option>
+                        <?= __('Item Id'); ?></option>
                       <option <?php echo $tableOptions['value_qty'] === 'account_code' ? 'selected' : ''; ?>
                         value="account_code"> <?= __('Account Code') ?> </option>
                       <option <?php echo $tableOptions['value_qty'] === 'item_name' ? 'selected' : ''; ?>
@@ -1727,12 +1709,12 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showamountcol" <?php echo $tableOptions['showColumns']['amount'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showamountcol" <?php echo $tableOptions['showColumns']['amount'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showamountcol"><?= __('Show Amount') ?></label>
                     <input type="text" id="amountcolumnInput" class="form-control" style="display: none;"
-                      placeholder="Enter Feild Name"
-                      value="<?php echo !empty($tableOptions['heading_amount']) ? $tableOptions['heading_amount'] : 'Amount'; ?>" title="Enter Feild Name" aria-label="Enter Feild Name">
-                    <select class="form-select mt-1" id="itemamountSelect" style="display: none;" title="Select" aria-label="Select">
+                      placeholder="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>"
+                      value="<?php echo !empty($tableOptions['heading_amount']) ? $tableOptions['heading_amount'] : 'Amount'; ?>" title="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter Feild Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select mt-1" id="itemamountSelect" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $tableOptions['value_amount'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('id') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -1764,8 +1746,7 @@ if ($userData['user_photo'] != '') {
                         value="tax_amount"> <?= __('Tax Amount') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'discount_amount' ? 'selected' : ''; ?>
                         value="discount_amount"> <?= __('Discount Amount') ?> </option>
-                      <option <?php echo (empty($tableOptions['value_amount']) || $tableOptions['value_amount'] === 'total_amount') ? 'selected' : ''; ?> value="total_amount">Total
-                        Amount</option>
+                      <option <?php echo (empty($tableOptions['value_amount']) || $tableOptions['value_amount'] === 'total_amount') ? 'selected' : ''; ?> value="total_amount"><?= __('Total Amount'); ?></option>
                       <option <?php echo $tableOptions['value_amount'] === 'reason_id' ? 'selected' : ''; ?>
                         value="reason_id"> <?= __('Reason Id') ?> </option>
                       <option <?php echo $tableOptions['value_amount'] === 'item_wa_cost' ? 'selected' : ''; ?>
@@ -1795,7 +1776,7 @@ if ($userData['user_photo'] != '') {
                     </select>
                   </div>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtaxsumcol" <?php echo $tableOptions['showColumns']['taxsum'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showtaxsumcol" <?php echo $tableOptions['showColumns']['taxsum'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showtaxsumcol"><?= __('Show Tax Summary') ?></label>
                   </div>
                 </div>
@@ -1807,7 +1788,7 @@ if ($userData['user_photo'] != '') {
                   <label for="itemsInput" class="form-label"><?= __('Items In Each Page Show') ?></label>
                   <input type="number" class="form-control" id="itemsInput"
                     value="<?php echo $tableOptions['itemstable'] ?? '0'; ?>"
-                    placeholder="Enter No. Of Items In Each Page Show" title="Enter No. Of Items In Each Page Show" aria-label="Enter No. Of Items In Each Page Show">
+                    placeholder="<?= htmlspecialchars(__('Enter No. Of Items In Each Page Show'), ENT_QUOTES, 'UTF-8'); ?>" title="<?= htmlspecialchars(__('Enter No. Of Items In Each Page Show'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter No. Of Items In Each Page Show'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
               </div>
             </div>
@@ -1815,10 +1796,10 @@ if ($userData['user_photo'] != '') {
               <h6><?= __('Footer Options') ?></h6>
               <div class="btn-group d-flex flex-wrap">
                 <button class="btn btn-outline-danger btn-sm mb-2" data-target="page_footerVisibility">
-                  <i class="bi bi-eye"></i> Visibility
+                  <i class="bi bi-eye"></i> <?= __('Visibility'); ?>
                 </button>
                 <button class="btn btn-outline-dark btn-sm mb-2" data-target="page_footer_optionsVisibility">
-                  <i class="bi bi-aspect-ratio"></i> Footer Options
+                  <i class="bi bi-aspect-ratio"></i> <?= __('Footer Options'); ?>
                 </button>
               </div>
               <?php
@@ -1828,7 +1809,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <span class="form-label mb-2 d-inline-block fw-bold"><?= __('Toggle Page Footer') ?></span>
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showpagefooter" <?php echo $footerOptions['showFooter'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showpagefooter" <?php echo $footerOptions['showFooter'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showpagefooter"><?= __('Show Page Footer') ?></label>
                   </div>
                 </div>
@@ -1839,36 +1820,36 @@ if ($userData['user_photo'] != '') {
                   <label for="page_footer_optionsVisibility" class="form-label"><?= __('Footer Options Visibility') ?></label>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotalinalpha" <?php echo $footerOptions['showTotalAlpha'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotalinalpha" <?php echo $footerOptions['showTotalAlpha'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showtotalinalpha"><?= __('Show Total In Alphabet') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showsignature" <?php echo $footerOptions['showSignature'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showsignature" <?php echo $footerOptions['showSignature'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showsignature"><?= __('Show Signature') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showqr" <?php echo $footerOptions['showQr'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showqr" <?php echo $footerOptions['showQr'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showqr"><?= __('Show QR') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showbankdetails" <?php echo isset($footerOptions['showBankDetails']) && $footerOptions['showBankDetails'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showbankdetails" <?php echo isset($footerOptions['showBankDetails']) && $footerOptions['showBankDetails'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showbankdetails"><?= __('Show Bank Details') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showadditionaldetails" <?php echo isset($footerOptions['showAdditionalDetails']) && $footerOptions['showAdditionalDetails'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showadditionaldetails" <?php echo isset($footerOptions['showAdditionalDetails']) && $footerOptions['showAdditionalDetails'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showadditionaldetails"><?= __('Show Additional Details') ?></label>
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotalbeforetax" <?php echo $footerOptions['totalbeforetax']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotalbeforetax" <?php echo $footerOptions['totalbeforetax']['visible'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showtotalbeforetax"><?= __('Show Sub Total') ?></label>
                     <input class="form-control mb-1" type="text" id="heading1"
-                      value="<?php echo !empty($footerOptions['totalbeforetax']['heading']) ? $footerOptions['totalbeforetax']['heading'] : 'Sub Total'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="value1" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($footerOptions['totalbeforetax']['heading']) ? $footerOptions['totalbeforetax']['heading'] : 'Sub Total'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="value1" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'id' ? 'selected' : ''; ?>
                         value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['totalbeforetax']['value'] === 'company_id' ? 'selected' : ''; ?>
@@ -1956,11 +1937,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showdiscount" <?php echo (isset($footerOptions['showFields']['discount']['visible']) && $footerOptions['showFields']['discount']['visible']) || (isset($footerOptions['discount']['visible']) && $footerOptions['discount']['visible']) ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showdiscount" <?php echo (isset($footerOptions['showFields']['discount']['visible']) && $footerOptions['showFields']['discount']['visible']) || (isset($footerOptions['discount']['visible']) && $footerOptions['discount']['visible']) ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showdiscount"><?= __('Show Discount') ?></label>
                     <input class="form-control mb-1" type="text" id="heading2"
-                      value="<?php echo !empty($footerOptions['showFields']['discount']['heading']) ? $footerOptions['showFields']['discount']['heading'] : (!empty($footerOptions['discount']['heading']) ? $footerOptions['discount']['heading'] : 'Discount'); ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="value2" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($footerOptions['showFields']['discount']['heading']) ? $footerOptions['showFields']['discount']['heading'] : (!empty($footerOptions['discount']['heading']) ? $footerOptions['discount']['heading'] : 'Discount'); ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="value2" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <?php $discountValue = isset($footerOptions['showFields']['discount']['value']) ? $footerOptions['showFields']['discount']['value'] : (isset($footerOptions['discount']['value']) ? $footerOptions['discount']['value'] : ''); ?>
                       <option <?php echo $discountValue === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $discountValue === 'company_id' ? 'selected' : ''; ?>
@@ -2071,11 +2052,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotaltaxamount" <?php echo $footerOptions['totaltaxamount']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotaltaxamount" <?php echo $footerOptions['totaltaxamount']['visible'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showtotaltaxamount"><?= __('Show Total Tax Amount') ?></label>
                     <input class="form-control mb-1" type="text" id="heading3"
-                      value="<?php echo !empty($footerOptions['totaltaxamount']['heading3']) ? $footerOptions['totalbeforetax']['heading'] : 'Total Tax Amount'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="value3" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($footerOptions['totaltaxamount']['heading3']) ? $footerOptions['totalbeforetax']['heading'] : 'Total Tax Amount'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="value3" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'id' ? 'selected' : ''; ?>
                         value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['totaltaxamount']['value'] === 'company_id' ? 'selected' : ''; ?>
@@ -2165,11 +2146,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showroundedoff" <?php echo $footerOptions['roundedoff']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showroundedoff" <?php echo $footerOptions['roundedoff']['visible'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showroundedoff"><?= __('Show Rounded Off') ?></label>
                     <input class="form-control mb-1" type="text" id="heading4"
-                      value="<?php echo !empty($footerOptions['roundedoff']['heading4']) ? $footerOptions['totalbeforetax']['heading'] : 'Rounded Off'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="value4" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($footerOptions['roundedoff']['heading4']) ? $footerOptions['totalbeforetax']['heading'] : 'Rounded Off'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="value4" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['roundedoff']['value'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -2275,11 +2256,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotalamount" <?php echo $footerOptions['totalamount']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotalamount" <?php echo $footerOptions['totalamount']['visible'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showtotalamount"><?= __('Show Total Amount') ?></label>
                     <input class="form-control mb-1" type="text" id="heading5"
-                      value="<?php echo !empty($footerOptions['totalamount']['heading5']) ? $footerOptions['totalamount']['heading'] : 'Total Amount'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="value5" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($footerOptions['totalamount']['heading5']) ? $footerOptions['totalamount']['heading'] : 'Total Amount'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="value5" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $footerOptions['totalamount']['value'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['totalamount']['value'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -2383,11 +2364,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showsecurityamount" <?php echo $footerOptions['securityamount']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showsecurityamount" <?php echo $footerOptions['securityamount']['visible'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showsecurityamount"><?= __('Show Security Amount') ?></label>
                     <input class="form-control mb-1" type="text" id="heading4_5"
-                      value="<?php echo !empty($footerOptions['securityamount']['heading']) ? $footerOptions['securityamount']['heading'] : 'Security Amount'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="value4_5" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($footerOptions['securityamount']['heading']) ? $footerOptions['securityamount']['heading'] : 'Security Amount'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="value4_5" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $footerOptions['securityamount']['value'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['securityamount']['value'] === 'company_id' ? 'selected' : ''; ?> value="company_id"> <?= __('Company Id') ?> </option>
                       <option <?php echo $footerOptions['securityamount']['value'] === 'cost_center_id' ? 'selected' : ''; ?> value="cost_center_id"> <?= __('Cost Center Id') ?> </option>
@@ -2452,11 +2433,11 @@ if ($userData['user_photo'] != '') {
                   </div>
 
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="showtotaldue" <?php echo $footerOptions['totaldue']['visible'] ? 'checked' : ''; ?> title="Input" aria-label="Input">
+                    <input class="form-check-input" type="checkbox" id="showtotaldue" <?php echo $footerOptions['totaldue']['visible'] ? 'checked' : ''; ?> title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                     <label class="form-check-label" for="showtotaldue"><?= __('Show Total Due') ?></label>
                     <input class="form-control mb-1" type="text" id="heading6"
-                      value="<?php echo !empty($footerOptions['totaldue']['heading6']) ? $footerOptions['totaldue']['heading'] : 'Total Due'; ?>" title="Input" aria-label="Input">
-                    <select class="form-select" id="value6" style="display: none;" title="Select" aria-label="Select">
+                      value="<?php echo !empty($footerOptions['totaldue']['heading6']) ? $footerOptions['totaldue']['heading'] : 'Total Due'; ?>" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <select class="form-select" id="value6" style="display: none;" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option <?php echo $footerOptions['totaldue']['value'] === 'id' ? 'selected' : ''; ?> value="id"> <?= __('ID') ?> </option>
                       <option <?php echo $footerOptions['totaldue']['value'] === 'company_id' ? 'selected' : ''; ?>
                         value="company_id"> <?= __('Company Id') ?> </option>
@@ -2571,14 +2552,14 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <div class="form-group">
                     <label for="address1position" class="form-label"><?= __('Signature & QR') ?></label>
-                    <select class="form-select" id="signatureqr1position" title="Select" aria-label="Select">
+                    <select class="form-select" id="signatureqr1position" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option value="left" <?php echo (empty($footerOptions['positions']['signatureqr']) || $footerOptions['positions']['signatureqr'] === 'left') ? 'selected' : ''; ?>> <?= __('Left') ?> </option>
                       <option value="right" <?php echo $footerOptions['positions']['signatureqr'] === 'right' ? 'selected' : ''; ?>> <?= __('Right') ?> </option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="address2position" class="form-label"><?= __('Invoice Summary') ?></label>
-                    <select class="form-select" id="invoicesummary2position" title="Select" aria-label="Select">
+                    <select class="form-select" id="invoicesummary2position" title="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                       <option value="left" <?php echo $footerOptions['positions']['invoicesummary'] === 'left' ? 'selected' : ''; ?>> <?= __('Left') ?> </option>
                       <option value="right" <?php echo (empty($footerOptions['positions']['invoicesummary']) || $footerOptions['positions']['invoicesummary'] === 'right') ? 'selected' : ''; ?>> <?= __('Right') ?> </option>
                     </select>
@@ -2587,7 +2568,7 @@ if ($userData['user_photo'] != '') {
               </div>
             </div>
             <div class="mb-3">
-              <h6>Border Options </h6>
+              <h6><?= __('Border Options'); ?> </h6>
               <div class="btn-group d-flex flex-wrap">
                 <a class="btn btn-outline-primary btn-sm mb-2" data-target="borderOptions">
                   <i class="bi bi-border"></i> <?= __('Border') ?>
@@ -2602,7 +2583,7 @@ if ($userData['user_photo'] != '') {
               <div id="borderOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="borderStyle" class="form-label"><?= __('Border Style') ?></label>
-                  <select class="form-select" id="borderStyle" name="borderStyle" title="Borderstyle" aria-label="Borderstyle">
+                  <select class="form-select" id="borderStyle" name="borderStyle" title="<?= htmlspecialchars(__('Borderstyle'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Borderstyle'), ENT_QUOTES, 'UTF-8'); ?>">
                     <option value="solid" <?php echo $borderstyle == 'solid' ? 'selected' : ''; ?>> <?= __('Solid') ?> </option>
                     <option value="dashed" <?php echo $borderstyle == 'dashed' ? 'selected' : ''; ?>> <?= __('Dashed') ?> </option>
                     <option value="dotted" <?php echo $borderstyle == 'dotted' ? 'selected' : ''; ?>> <?= __('Dotted') ?> </option>
@@ -2614,14 +2595,14 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label for="borderColor" class="form-label"><?= __('Border Color') ?></label>
                   <input type="color" class="form-control form-control-color" style="max-width:100%;" id="borderColor"
-                    title="Choose border color" value="<?php echo $bordercolor !=""?$bordercolor:'#000'; ?>" name="borderColor" aria-label="Choose border color">
+                    title="<?= htmlspecialchars(__('Choose border color'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $bordercolor !=""?$bordercolor:'#000'; ?>" name="borderColor" aria-label="<?= htmlspecialchars(__('Choose border color'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
               </div>
               <div id="widthOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="borderWidth" class="form-label"><?= __('Border Width') ?></label>
                   <input type="number" class="form-control" id="borderWidth" min="1" max="10"
-                    placeholder="Enter width (in px)" value="<?php echo $borderwidth!=""?$borderwidth:1; ?>" name="borderWidth" title="Enter width (in px)" aria-label="Enter width (in px)">
+                    placeholder="<?= htmlspecialchars(__('Enter width (in px)'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $borderwidth!=""?$borderwidth:1; ?>" name="borderWidth" title="<?= htmlspecialchars(__('Enter width (in px)'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter width (in px)'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
               </div>
             </div>
@@ -2650,16 +2631,14 @@ if ($userData['user_photo'] != '') {
               <div id="textStyleOptions" class="dynamic-options">
                 <div class="card card-body mt-2">
                   <label for="fontFamily" class="form-label"><?= __('Font Family') ?></label>
-                  <select class="form-select" id="fontFamily" name="fontFamily" title="Fontfamily" aria-label="Fontfamily">
+                  <select class="form-select" id="fontFamily" name="fontFamily" title="<?= htmlspecialchars(__('Fontfamily'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Fontfamily'), ENT_QUOTES, 'UTF-8'); ?>">
                     <option value="Arial" <?php echo $fontFamily == 'Arial' ? 'selected' : ''; ?>> <?= __('Arial') ?> </option>
                     <option value="Times New Roman" <?php echo $fontFamily == 'Times New Roman' ? 'selected' : ''; ?>>
-                      Times
-                      New Roman</option>
+                      <?= __('Times New Roman'); ?></option>
                     <option value="Courier New" <?php echo $fontFamily == 'Courier New' ? 'selected' : ''; ?>> <?= __('Courier New') ?> </option>
                     <option value="Verdana" <?php echo $fontFamily == 'Verdana' ? 'selected' : ''; ?>> <?= __('Verdana') ?> </option>
                     <option value="Georgia" <?php echo $fontFamily == 'Georgia' ? 'selected' : ''; ?>> <?= __('Georgia') ?> </option>
-                    <option value="Trebuchet MS" <?php echo $fontFamily == 'Trebuchet MS' ? 'selected' : ''; ?>>Trebuchet
-                      MS
+                    <option value="Trebuchet MS" <?php echo $fontFamily == 'Trebuchet MS' ? 'selected' : ''; ?>><?= __('Trebuchet MS'); ?>
                     </option>
                     <option value="Tahoma" <?php echo $fontFamily == 'Tahoma' ? 'selected' : ''; ?>> <?= __('Tahoma') ?> </option>
                     <option value="Roboto" <?php echo $fontFamily == 'Roboto' ? 'selected' : ''; ?>> <?= __('Roboto') ?> </option>
@@ -2672,7 +2651,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label for="marginInput" class="form-label"><?= __('Margin (in px)') ?></label>
                   <input type="number" class="form-control" id="marginInput" name="marginInput"
-                    value="<?php echo $margin; ?>" min="0" placeholder="Enter margin" title="Enter margin" aria-label="Enter margin">
+                    value="<?php echo $margin; ?>" min="0" placeholder="<?= htmlspecialchars(__('Enter margin'), ENT_QUOTES, 'UTF-8'); ?>" title="<?= htmlspecialchars(__('Enter margin'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter margin'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
               </div>
 
@@ -2681,7 +2660,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label for="paddingInput" class="form-label"><?= __('Padding (in px)') ?></label>
                   <input type="number" class="form-control" id="paddingInput" name="paddingInput"
-                    value="<?php echo isset($padding) && $padding !== '' ? $padding : 10; ?>" min="10" placeholder="Enter padding" title="Enter padding" aria-label="Enter padding">
+                    value="<?php echo isset($padding) && $padding !== '' ? $padding : 10; ?>" min="10" placeholder="<?= htmlspecialchars(__('Enter padding'), ENT_QUOTES, 'UTF-8'); ?>" title="<?= htmlspecialchars(__('Enter padding'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter padding'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
               </div>
 
@@ -2690,7 +2669,7 @@ if ($userData['user_photo'] != '') {
                 <div class="card card-body mt-2">
                   <label for="heightInput" class="form-label"><?= __('Height (in %)') ?></label>
                   <input type="number" class="form-control" id="heightInput" name="heightInput"
-                    value="<?php echo isset($height) && $height !== '' ? $height : 100; ?>" min="100" placeholder="Enter height (Minimum 100%)" title="Enter height (Minimum 100%)" aria-label="Enter height (Minimum 100%)">
+                    value="<?php echo isset($height) && $height !== '' ? $height : 100; ?>" min="100" placeholder="<?= htmlspecialchars(__('Enter height (Minimum 100%)'), ENT_QUOTES, 'UTF-8'); ?>" title="<?= htmlspecialchars(__('Enter height (Minimum 100%)'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter height (Minimum 100%)'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
               </div>
             </div>
@@ -2719,20 +2698,16 @@ if ($userData['user_photo'] != '') {
                   <img id="logoPreview" src="<?php echo $image; ?>" alt="" style="display: block; position: absolute; max-height: <?php echo $finalSize; ?>px; left: 0; top: 0;
                   <?php echo empty($logoOptions['showLogo']) ? 'display: none;' : ''; ?>">
                   <div class="invoice-no" style="display: block; text-align: right;">
-                    <p class="invoice" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Invoice
-                        No</span></p>
-                    <p class="date" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Date</span>
+                    <p class="invoice" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('Invoice No'); ?></span></p>
+                    <p class="date" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('Date'); ?></span>
                     </p>
-                    <p class="due_date" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Due
-                        Date</span></p>
-                    <p class="po_num" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">P.O.
-                        Number</span></p>
-                    <p class="po_date" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">P.O
-                        Date</span></p>
+                    <p class="due_date" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('Due Date'); ?></span></p>
+                    <p class="po_num" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('P.O. Number'); ?></span></p>
+                    <p class="po_date" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('P.O Date'); ?></span></p>
                     <!-- om new -->
-                    <p class="name" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Name</span></p>
-                    <p class="email" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Email</span></p>
-                    <p class="phone" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;">Phone</span></p>
+                    <p class="name" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('Name'); ?></span></p>
+                    <p class="email" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('Email'); ?></span></p>
+                    <p class="phone" style="font-weight: 100;margin: 0;"><span style="font-weight: 600;"><?= __('Phone'); ?></span></p>
                   </div>
                 </div>
               </div>
@@ -2741,19 +2716,19 @@ if ($userData['user_photo'] != '') {
                 <div class="address-sec"
                   style="display: flex; justify-content: space-between; flex-wrap: nowrap;">
                   <div class="first_address col-4">
-                    <strong class="address1heading" style="font-weight: 600;">Invoiced To:</strong>
+                    <strong class="address1heading" style="font-weight: 600;"><?= __('Invoiced To'); ?>:</strong>
                     <address class="address1data">
                       xxxx
                     </address>
                   </div>
                   <div class="second_address col-4">
-                    <strong class="address2heading" style="font-weight: 600;">Bill To:</strong>
+                    <strong class="address2heading" style="font-weight: 600;"><?= __('Bill To'); ?>:</strong>
                     <address class="address2data">
                       xxxx
                     </address>
                   </div>
                   <div class="third_address col-4">
-                    <strong class="address3heading" style="font-weight: 600;">Company</strong>
+                    <strong class="address3heading" style="font-weight: 600;"><?= __('Company'); ?></strong>
                     <address class="address3data">
                       xxxx
                     </address>
@@ -2768,7 +2743,7 @@ if ($userData['user_photo'] != '') {
                       <tr class="">
                         <td
                           style="<?php echo (!$tableOptions['showColumns']['item']) ? 'display: none;' : ''; ?> border-style: <?php echo $borderstyle; ?>; border-color: <?php echo $bordercolor; ?>; border-width: <?php echo $borderwidth; ?>px;"
-                          class="bordered col-1"><strong>S.No.</strong></td>
+                          class="bordered col-1"><strong><?= __('S.No.'); ?></strong></td>
                         <td
                           style="border-style: <?php echo $borderstyle; ?>; border-color: <?php echo $bordercolor; ?>; border-width: <?php echo $borderwidth; ?>px;"
                           class="bordered img col-2">
@@ -2867,7 +2842,7 @@ if ($userData['user_photo'] != '') {
                           class="bordered img col-2"></td>
                         <td
                           style="<?php echo $borderstyle; ?>; border-color: <?php echo $bordercolor; ?>; border-width: <?php echo $borderwidth; ?>px;"
-                          class="bordered item col-3 text-end"><br><span style="font-weight: 700;">Total: </span>
+                          class="bordered item col-3 text-end"><br><span style="font-weight: 700;"><?= __('Total'); ?>: </span>
                           <span>@xx% <br> @xx%</span>
                         </td>
                         <td
@@ -2911,16 +2886,16 @@ if ($userData['user_photo'] != '') {
                     <!-- Bank Details -->
                     <div class="bankdetails"
                       style="<?php echo !isset($footerOptions['showBankDetails']) || !$footerOptions['showBankDetails'] ? 'display: none;' : ''; ?> margin-bottom: 10px;">
-                      <h6 style="text-decoration: underline;margin-bottom: 5px;">Bank Details :</h6>
+                      <h6 style="text-decoration: underline;margin-bottom: 5px;"><?= __('Bank Details'); ?> :</h6>
                       <div
                         style="display: flex; justify-content: space-between; flex-wrap: nowrap; gap: 20px; padding: 5px; width: 100%;">
                         <div>
-                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;">Bank Name:</h6>
-                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;">Account Holder:</h6>
-                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;">Account Number:</h6>
-                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;">IFSC Number:</h6>
-                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;">Account Type:</h6>
-                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;">UPI:</h6>
+                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;"><?= __('Bank Name'); ?>:</h6>
+                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;"><?= __('Account Holder'); ?>:</h6>
+                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;"><?= __('Account Number'); ?>:</h6>
+                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;"><?= __('IFSC Number'); ?>:</h6>
+                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;"><?= __('Account Type'); ?>:</h6>
+                          <h6 style="text-align: left; white-space: nowrap; font-weight: 600;"><?= __('UPI'); ?>:</h6>
                         </div>
                         <div>
                           <h6 class="bank_name">xxxx</h6>
@@ -3000,18 +2975,18 @@ if ($userData['user_photo'] != '') {
                     </div>
 
                     <!-- Total in words -->
-                    <p class="totalinwords">Total : Twenty Five Thousand Seven Hundred Seventy Eight</p>
+                    <p class="totalinwords"><?= __('Total : Twenty Five Thousand Seven Hundred Seventy Eight'); ?></p>
 
                     <!-- Signature and QR -->
                     <div style="display: flex; justify-content: space-between; flex-wrap: nowrap; gap: 20px;">
                       <div class="qr">
-                        <img width="120px" src="https://pngimg.com/uploads/qr_code/small/qr_code_PNG33.png" alt="qr">
+                        <img width="120px" src="https://pngimg.com/uploads/qr_code/small/qr_code_PNG33.png" alt="<?= htmlspecialchars(__('qr'), ENT_QUOTES, 'UTF-8'); ?>">
                       </div>
                       <div class="signature">
                         <h6 style="text-decoration: underline;margin-bottom: 5px;"><?= __('Autherized Signature') ?> :</h6>
                         <img width="180px"
                           src="https://onlinepngtools.com/images/examples-onlinepngtools/george-walker-bush-signature.png"
-                          alt="signature">
+                          alt="<?= htmlspecialchars(__('signature'), ENT_QUOTES, 'UTF-8'); ?>">
                       </div>
                     </div>
                   </div>

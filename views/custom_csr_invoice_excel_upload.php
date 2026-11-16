@@ -54,7 +54,7 @@ $sample_headers = array(
         </div>
 
         <div class="alert alert-info mb-3" id="invoiceUploadInfo">
-            <?= __('Upload an invoice file in') ?> <strong>.xlsx</strong>, <strong>.xls</strong>, <?= __('or') ?> <strong>.csv</strong> <?= __('format.') ?>
+            <?= __('Upload an invoice file in') ?> <strong><?= __('.xlsx'); ?></strong>, <strong><?= __('.xls'); ?></strong>, <?= __('or') ?> <strong><?= __('.csv'); ?></strong> <?= __('format.') ?>
             <?= __('The preview will highlight required empty fields in red before submit.') ?>
         </div>
 

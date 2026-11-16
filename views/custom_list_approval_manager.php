@@ -69,7 +69,7 @@ $departlist = getArrayListData($departlist,'department_name');
       var status = "";
       var color = "";
       if(billable==0){ billable =1; status = "Non Billable"; color="red";  }else{ billable = 0; status = "Billable";  }
-      $(".modallabel").text("Billable OR Non-Billable");
+      $(".modallabel").text(<?php echo json_encode(__('Billable OR Non-Billable'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
       $(".modal_view_employee_name").text(name);
       $(".modal_view_status").text(status);
       $("#emp_id").val(id);
@@ -90,7 +90,7 @@ function changeonsite(id,name){
       var status = "";
       var color = "";
       if(onsite==0){ onsite =1;  status = "Off Site"; color="red"; }else{ onsite = 0; status = "On Site";}
-      $(".modallabel").text("On Site OR Off Site");
+      $(".modallabel").text(<?php echo json_encode(__('On Site OR Off Site'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
       $(".modal_view_employee_name").text(name);
       $(".modal_view_status").text(status);
       $("#emp_id").val(id);
@@ -122,13 +122,13 @@ function changestatusworkfromhome(id,name){
       var workformhome=  $("#workfromhome"+id).is(":checked");
       var value = '';
       if(workformhome){
-          $(".modal_view_status").text('Work From home On');
+          $(".modal_view_status").text(<?php echo json_encode(__('Work From home On'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
           value = 0;
         }else{
-          $(".modal_view_status").text('Work From home Off');
+          $(".modal_view_status").text(<?php echo json_encode(__('Work From home Off'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
           value = 1;
         }
-      $(".modallabel").text("Work From home");
+      $(".modallabel").text(<?php echo json_encode(__('Work From home'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
       $(".modal_view_employee_name").text(name);
       $("#emp_id").val(id);
       $("#field_name").val("work_from_home");
@@ -151,11 +151,11 @@ function refrashpage(){
     <div class="container-fluid">
         <div class="card card-custom ">
       <div class="card-header table-card-header mb-2">
-       <h5>Approval Manager Teams </h5>
+       <h5><?= __('Approval Manager Teams'); ?> </h5>
        <div class="card-header-right table-card-header ">
         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
           <i class="icofont icofont-reply"></i>
-          Back
+          <?= __('Back'); ?>
         </a>
         &nbsp;
       </div>
@@ -163,10 +163,10 @@ function refrashpage(){
             <div class="card-body">
                 <ul class="nav md-tabs  tabs infisuite_tab">
                     <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#my_team_gride_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-view-grid"></i> Grid</a>
+                        <a class="nav-link active" data-bs-toggle="tab" href="#my_team_gride_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-view-grid"></i> <?= __('Grid'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#my_team_list_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="ti-list"></i>  List</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#my_team_list_tab" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <i class="ti-list"></i>  <?= __('List'); ?></a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
@@ -182,7 +182,7 @@ function refrashpage(){
                                 <div class="card-block text-center">
                                     <div data-label="<?php echo initials($team['display_name']); ?>" class="radial-bar custom-radial-bar radial-bar-40 radial-bar-lg radial-bar-danger">
                                         <?php if($team['image']!=""){ ?>
-                                            <img src="uploads/all/<?php echo $team['image']; ?>" alt="Attachment Preview">
+                                            <img src="uploads/all/<?php echo $team['image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } ?>
                                     </div>
                                     <div class="row  mb-3">
@@ -193,7 +193,7 @@ function refrashpage(){
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="s-cont d-inline-block">
-                                                <input aria-label="Checkbox" type="checkbox" <?php if($_SESSION['admin_type'] != '1'){ ?> disabled="" readonly="" <?php
+                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" <?php if($_SESSION['admin_type'] != '1'){ ?> disabled="" readonly="" <?php
 } ?>  class="js-success-sm"
  <?php if($team['on_off_site']==0){ echo "checked";
 } ?> onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;<span style="font-size: 12px;
@@ -207,14 +207,14 @@ function refrashpage(){
                                         </div>
                                         <div class="col-6 b-l-default">
                                             <div class="s-cont d-inline-block">
-                                                <input aria-label="Checkbox" type="checkbox" <?php if($_SESSION['admin_type'] != '1'){ ?> disabled="" readonly="" <?php
+                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" <?php if($_SESSION['admin_type'] != '1'){ ?> disabled="" readonly="" <?php
 } ?> class="js-primary-sm"
  <?php if($team['billable']=='0'){ echo "checked";
 } ?> onchange="changebillable(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;
 
                                                 <span style="font-size: 12px; <?php if($team['billable']=='1'){ echo "color: red";
 } ?>" class="col-form-label billable_lable<?php echo $team['id']; ?>" >
- <?php if($team['billable']=='1'){ echo "Non Billable";
+ <?php if($team['billable']=='1'){ echo __('Non Billable');
 }else{ echo "Billable";
 } ?> </span>
 
@@ -233,13 +233,13 @@ function refrashpage(){
 <table id="basic-btn" class="table table-striped table-bordered nowrap">
 <thead>
     <tr>
-        <th scope="col">Name </th>
-        <th scope="col">phone</th>
-        <th scope="col">Department </th>
-        <th scope="col">designation</th>
-        <th scope="col">location</th>
-    <th scope="col">Bilable</th>
-    <th scope="col">On-Site</th>
+        <th scope="col"><?= __('Name'); ?> </th>
+        <th scope="col"><?= __('phone'); ?></th>
+        <th scope="col"><?= __('Department'); ?> </th>
+        <th scope="col"><?= __('designation'); ?></th>
+        <th scope="col"><?= __('location'); ?></th>
+    <th scope="col"><?= __('Bilable'); ?></th>
+    <th scope="col"><?= __('On-Site'); ?></th>
     </tr>
         </thead>
         <tbody>
@@ -248,9 +248,9 @@ function refrashpage(){
     <td>
         <div class="align-middle">
         <?php if($teams['image']!="") {?>
-            <img src="uploads/all/<?php echo $teams['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+            <img src="uploads/all/<?php echo $teams['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
         <?php } else { ?>
-            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($teams['display_name']); ?></span>
+            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($teams['display_name']); ?></span>
         <?php } ?>
         <div class="d-inline-block width73">
             <a href="#!" class="text-danger text-capitalize"><h6>  <?php echo $teams['display_name']; ?></h6></a>
@@ -264,7 +264,7 @@ function refrashpage(){
     <td><?php echo $locationlist[$teams['location_id']]; ?></td>
    <td>
       <div class="s-cont d-inline-block">
-         <input aria-label="Checkbox" type="checkbox" <?php if($_SESSION['admin_type'] != '1'){ ?> disabled="" readonly="" <?php
+         <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" <?php if($_SESSION['admin_type'] != '1'){ ?> disabled="" readonly="" <?php
 } ?> class="js-primary-sm"
  <?php if($teams['billable']=='0'){ echo "checked";
 } ?> onchange="changebillable(<?php echo $teams['id']; ?>,'<?php echo ucwords($teams['display_name']);?>')" value="1"/>
@@ -272,7 +272,7 @@ function refrashpage(){
   </td>
   <td>
       <div class="s-cont d-inline-block">
-          <input aria-label="Checkbox" type="checkbox" <?php if($_SESSION['admin_type'] != '1'){ ?> disabled="" readonly="" <?php
+          <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" <?php if($_SESSION['admin_type'] != '1'){ ?> disabled="" readonly="" <?php
 } ?> class="js-primary-sm"
  <?php if($teams['on_off_site']==0){ echo "checked";
 } ?> onchange="changeonsite(<?php echo $teams['id']; ?>,'<?php echo ucwords($teams['display_name']);?>')" value="1"/>
@@ -294,7 +294,7 @@ function refrashpage(){
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title modallabel" id="exampleModalLabel">Effort Share Status</h5>
+        <h5 class="modal-title modallabel" id="exampleModalLabel"><?= __('Effort Share Status'); ?></h5>
 
       </div>
 <form class="form" id="insertemphistries">
@@ -304,11 +304,11 @@ function refrashpage(){
       <div class="modal-body j-pro">
       <div class="alert alert-custom alert-default" role="alert">
           <div class="row" style="width: 100%;">
-             <span class="col-lg-4 text-black"><b>Employee name : </b></span>
+             <span class="col-lg-4 text-black"><b><?= __('Employee name'); ?> : </b></span>
              <div class="col-lg-8 text-black">
                 <p class="modal_view_employee_name"></p>
              </div>
-             <span class="col-lg-4 text-black"><b>Status : </b></span>
+             <span class="col-lg-4 text-black"><b><?= __('Status'); ?> : </b></span>
              <div class="col-lg-8 text-black">
                 <p class="modal_view_status"></p>
              </div>
@@ -316,11 +316,11 @@ function refrashpage(){
       </div>
       <div class="card-body">
 <div class="form-group row">
-   <label for="example-date-input-from" class="col-4 col-form-label">Effective From</label>
+   <label for="example-date-input-from" class="col-4 col-form-label"><?= __('Effective From'); ?></label>
    <div class="col-5">
       <input class="form-control datepicker" type="text" name="effective_from" value="2011-08-19" id="example-date-input-from">
    </div>
-   <label for="example-date-input-to" class="col-4 col-form-label mt-2">Effective To</label>
+   <label for="example-date-input-to" class="col-4 col-form-label mt-2"><?= __('Effective To'); ?></label>
    <div class="col-5 mt-2">
       <input class="form-control datepicker" type="text" name="effective_to" value="2011-08-19" id="example-date-input-to">
    </div>
@@ -328,8 +328,8 @@ function refrashpage(){
       </div>
    </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="refrashpage()">Cancel</button>
-        <button type="button" class="btn btn-primary " onclick="save_statuse_bilable_onsite()" >Submit</button>
+        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" onclick="refrashpage()"><?= __('Cancel'); ?></button>
+        <button type="button" class="btn btn-primary " onclick="save_statuse_bilable_onsite()" ><?= __('Submit'); ?></button>
       </div>
       </form>
     </div>

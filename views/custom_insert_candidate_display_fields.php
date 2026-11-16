@@ -117,7 +117,7 @@ $Rid = $candidate_display_fields['id'];
     <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
 <?php } ?>
         <div class="card-header" id="custom-popup">
@@ -129,7 +129,7 @@ $Rid = $candidate_display_fields['id'];
     <div class="row">
       <div class="form-group col-lg-4">
         <span class="form-label"><?= __('Role') ?></span>
-        <select aria-label="Role Short Code" class="form-control js-example-basic-single" name="role_short_code" onchange="selecteRole(this.value)" required>
+        <select aria-label="<?= htmlspecialchars(__('Role Short Code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="role_short_code" onchange="selecteRole(this.value)" required>
           <option value=""><?= __('Select Any One') ?></option>
           <?php
           $getroleid = $candidate_display_fields['role_short_code'] !=""?$candidate_display_fields['role_short_code']:$_GET['ROLE'];
@@ -141,10 +141,10 @@ $Rid = $candidate_display_fields['id'];
     </div>
       <ul class="nav nav-tabs md-tabs infisuite_tab">
             <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#candidate_form" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="icofont icofont-ui-user "></i> Candidate Form</a>
+                <a class="nav-link active" data-bs-toggle="tab" href="#candidate_form" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="icofont icofont-ui-user "></i> <?= __('Candidate Form'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#dashboard" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="icofont icofont-home"></i> Dashboard</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#dashboard" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="icofont icofont-home"></i> <?= __('Dashboard'); ?></a>
             </li>
         </ul>
 
@@ -157,11 +157,11 @@ $Rid = $candidate_display_fields['id'];
               $candfieldgrpaccess = $candidateaccess[$headingkey]['access'] != ""?$candidateaccess[$headingkey]['access']:"0";
               $candfieldgrpaccesslabel ="Access Varies";
               if($candfieldgrpaccess == "NA"){
-                  $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> No Access";
+                  $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> ".__('No Access')."";
               }elseif($candfieldgrpaccess == "E"){
-                  $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> Edit";
+                  $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> ".__('Edit')."";
               }elseif($candfieldgrpaccess == "V"){
-                  $candfieldgrpaccesslabel ="<i class='ti-eye'></i> View Only";
+                  $candfieldgrpaccesslabel ="<i class='ti-eye'></i> ".__('View Only')."";
               }
           ?>
                 <div class="col-lg-4">
@@ -193,11 +193,11 @@ $Rid = $candidate_display_fields['id'];
                                         <?php $mm=1; foreach($profilereadinesval['fields'] as $profilereadines=>$accesval){
                                 $candfieldgrpaccess = $candidateaccess[$headingkey]['field'][$profilereadines] != ""?$candidateaccess[$headingkey]['field'][$profilereadines]:"E";
                                   if($candfieldgrpaccess == "NA"){
-                                      $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> No Access";
+                                      $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> ".__('No Access')."";
                                   }elseif($candfieldgrpaccess == "V"){
-                                      $candfieldgrpaccesslabel ="<i class='ti-eye'></i> View Only";
+                                      $candfieldgrpaccesslabel ="<i class='ti-eye'></i> ".__('View Only')."";
                                   }else{
-                                      $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> Edit";
+                                      $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> ".__('Edit')."";
                                   }
                                 ?>
                                     <tr class="field-<?php echo $profilereadines."-".$mm."-div"; ?>">
@@ -243,7 +243,7 @@ $dashboardaccess = $dashboard_field_list[$dashboardcoulnmname]['access']!= ""?$d
                     </div>
                     <div class="col-lg-4">
                       <span id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-label">
-                          <?php echo $dashboardaccess == "Y"?"<i class='ti-unlock'></i> Access":"<i class='ti-lock  text-danger'></i> No Access"?>
+                          <?php echo $dashboardaccess == "Y"?"<i class='ti-unlock'></i> ".__('Access')."":"<i class='ti-lock  text-danger'></i> ".__('No Access').""?>
                       </span>
                     </div>
                        <div class="col-lg-1 text-right">

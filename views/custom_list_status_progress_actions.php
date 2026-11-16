@@ -45,7 +45,7 @@ $stausresult = ViewStatusData();
                 <div class="kt-portlet__head-wrapper">
                     <a href="#" class="btn btn-clean btn-icon-sm">
                         <i class="la la-long-arrow-left"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                     &nbsp;
                     <?php
@@ -65,11 +65,11 @@ $stausresult = ViewStatusData();
             <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
                 <thead>
                     <tr>
-                        <th scope="col">SL No.</th>
-                        <th scope="col">Table Name</th>
-                        <th scope="col">Label</th>
-                        <th scope="col">Target Label</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"><?= __('SL No.'); ?></th>
+                        <th scope="col"><?= __('Table Name'); ?></th>
+                        <th scope="col"><?= __('Label'); ?></th>
+                        <th scope="col"><?= __('Target Label'); ?></th>
+                        <th scope="col"><?= __('Action'); ?></th>
                     </tr>
 
                 </thead>
@@ -87,10 +87,10 @@ $stausresult = ViewStatusData();
                                 ?>
 
                                             <div style="float: left;">
-                                                    <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="Edit Datails" ><i  class="flaticon2-edit"></i></a>
+                                                    <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="<?= htmlspecialchars(__('Edit Datails'), ENT_QUOTES, 'UTF-8'); ?>" ><i  class="flaticon2-edit"></i></a>
                                            </div>
                                             <div style="float: left;">
-                                                <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Copy Datails">
+                                                <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Copy Datails'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <i class="flaticon2-file"></i></a>
                                             </div>
 

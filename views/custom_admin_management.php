@@ -55,7 +55,7 @@ foreach ($roledata as $roles) {
     <div class="container-fluid">
     	<div class="alert alert-warning alert-dismissible">
 		            <strong><?= __("This function is used to provide access") ?></strong>
-		            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 		        </div>
 
 <div class="row">
@@ -132,7 +132,7 @@ foreach ($roledata as $roles) {
 													<?php if($table_name != ''){ ?>
 													<input type="hidden" class="form-control"  name="table[]" value="<?php echo $table_name;?>" >
 												<?php } ?>
-													<input type="text" class="form-control" readonly name="" value="<?= htmlspecialchars(__($menu['Label'] ?? '')) ?>" aria-label="Table Name">
+													<input type="text" class="form-control" readonly name="" value="<?= htmlspecialchars(__($menu['Label'] ?? '')) ?>" aria-label="<?= htmlspecialchars(__('Table Name'), ENT_QUOTES, 'UTF-8'); ?>">
 												</div>
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">
@@ -210,7 +210,7 @@ foreach ($roledata as $roles) {
 													<?php if($table_name != ''){ ?>
 													<input type="hidden" class="form-control"  name="table[]" value="<?php echo $table_name;?>" >
 												<?php } ?>
-													<input type="text" class="form-control" readonly name="" value="<?= htmlspecialchars(__($value['Label'] ?? '')) ?>" aria-label="Table Name">
+													<input type="text" class="form-control" readonly name="" value="<?= htmlspecialchars(__($value['Label'] ?? '')) ?>" aria-label="<?= htmlspecialchars(__('Table Name'), ENT_QUOTES, 'UTF-8'); ?>">
 												</div>
 												<div class="col-lg-2 p-1">
 													<span class="switch switch-outline switch-icon switch-primary">

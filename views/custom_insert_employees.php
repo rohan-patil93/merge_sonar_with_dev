@@ -253,7 +253,7 @@ function showmarriagedate(value) {
    htmlRows += '<td><select aria-label="<?php echo __('Education Type[]'); ?>" class="form-control form-select js-example-basic-single" name="education_type[]" > <option value="0"> <?php echo __('Select Any One'); ?></option> <?php foreach ($edutypedata as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo __($edutype['genc_detail_name']); ?></option> <?php
 } ?></select> </td>';
    htmlRows += '<td><input aria-label="<?php echo __('Start Date'); ?>" type="text" name="start_date[]" placeholder="<?php echo __('Start Date'); ?>"  class="form-control datepicker"  autocomplete="off"> <input aria-label="<?php echo __('End Date'); ?>" type="text" name="end_date[]"  class="form-control datepicker mt-2"   autocomplete="off" placeholder="<?php echo __('End Date'); ?>">  </td>';
-   htmlRows += '<td><input aria-label="<?php echo __('Enter Score'); ?>" type="text" name="score[]"  class="form-control " placeholder ="Enter Score" autocomplete="off">  </td>';
+   htmlRows += '<td><input aria-label="<?php echo __('Enter Score'); ?>" type="text" name="score[]"  class="form-control " placeholder ="<?= htmlspecialchars(__('Enter Score'), ENT_QUOTES, 'UTF-8'); ?>" autocomplete="off">  </td>';
    htmlRows += '</tr>';
    $('#edutable').append(htmlRows);
    $(".js-example-basic-single").select2();

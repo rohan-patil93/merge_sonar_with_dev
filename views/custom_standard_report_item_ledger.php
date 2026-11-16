@@ -47,11 +47,11 @@ $items = $result['items'];
 
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -63,10 +63,10 @@ $items = $result['items'];
       <div class="row col-lg-12 ">
         <?php include_once 'views/custom_standard_report_erpf_filter.php'; ?>
         <div class="col-lg-3">
-           <span class="form-label"> Item &nbsp; </span>
+           <span class="form-label"> <?= __('Item'); ?> &nbsp; </span>
            <div>
-          <select aria-label="Item[]" class="js-example-basic-multiple" name="item[]"  >
-            <option value="0"> Select Any one </option>
+          <select aria-label="<?= htmlspecialchars(__('Item'), ENT_QUOTES, 'UTF-8'); ?>[]" class="js-example-basic-multiple" name="item[]"  >
+            <option value="0"> <?= __('Select Any one'); ?> </option>
             <?php foreach($items as $item){ ?>
                 <option <?php if(in_array($item['id'],(array)$select_items)){ echo "selected";
 } ?> value="<?php echo $item['id']; ?>"><?php echo $item['sku']." - ".$item['item_name']; ?></option>
@@ -74,13 +74,13 @@ $items = $result['items'];
           </select>
           </div>
           <?php if(count((array)$select_items)==0){ ?>
-          <div class="text-danger f-w-600 f-14"> Please Select Any  </div>
+          <div class="text-danger f-w-600 f-14"> <?= __('Please Select Any'); ?>  </div>
           <?php } ?>
         </div>
         <div class="col-lg-1 ">
           <span class="form-label"> &nbsp; </span>
             <button type="submit" name="applyform" value="apply" class=" btn btn-info waves-effect waves-light input-group-text mt-0">
-                Apply
+                <?= __('Apply'); ?>
               </button>
             <input type="hidden" name="submit" value="applyform">
           </div>
@@ -95,19 +95,19 @@ $items = $result['items'];
         <table class="table table-hover">
           <tr style="background-color: #eeeeee;">
             <th scope="col"># </th>
-            <th scope="col">ITEM CATEGORY </th>
-            <th scope="col">ITEM TYPE </th>
-            <th scope="col">ITEM NAME </th>
-            <th scope="col">ITEM SKU </th>
-            <th scope="col"> DOCUMENT REF NO</th>
-             <th scope="col"> DOCUMENT NAME</th>
-            <th scope="col">DOCUMENT DATE</th>
-            <th scope="col" class="text-right">IN QUANTITY </th>
-            <th scope="col" class="text-right">IN VALUE </th>
-            <th scope="col" class="text-right">OUT QUANTITY </th>
-            <th scope="col" class="text-right">OUT VALUE </th>
-            <th scope="col" class="text-right">RUN QUANTITY </th>
-            <th scope="col" class="text-right">RUN VALUE </th>
+            <th scope="col"><?= __('ITEM CATEGORY'); ?> </th>
+            <th scope="col"><?= __('ITEM TYPE'); ?> </th>
+            <th scope="col"><?= __('ITEM NAME'); ?> </th>
+            <th scope="col"><?= __('ITEM SKU'); ?> </th>
+            <th scope="col"> <?= __('DOCUMENT REF NO'); ?></th>
+             <th scope="col"> <?= __('DOCUMENT NAME'); ?></th>
+            <th scope="col"><?= __('DOCUMENT DATE'); ?></th>
+            <th scope="col" class="text-right"><?= __('IN QUANTITY'); ?> </th>
+            <th scope="col" class="text-right"><?= __('IN VALUE'); ?> </th>
+            <th scope="col" class="text-right"><?= __('OUT QUANTITY'); ?> </th>
+            <th scope="col" class="text-right"><?= __('OUT VALUE'); ?> </th>
+            <th scope="col" class="text-right"><?= __('RUN QUANTITY'); ?> </th>
+            <th scope="col" class="text-right"><?= __('RUN VALUE'); ?> </th>
           </tr>
           <?php $sl=1; if(count((array)$item_wise_data)>0){
           foreach($item_wise_data as $key=>$item_wise){
@@ -121,7 +121,7 @@ $items = $result['items'];
             <td ><?php echo  $itemdet[$key]['item_type_name']; ?></td>
             <td><?php echo  $itemdet[$key]['item_name']; ?></td>
             <td ><?php echo  $itemdet[$key]['sku']; ?></td>
-            <td ><?php echo  "Opeing Balance"; ?></td>
+            <td ><?php echo  __("Opeing Balance"); ?></td>
             <td ><?php echo  fromDate($from_date); ?></td>
             <td class="text-right"></td>
             <td class="text-right">-</td>
@@ -163,7 +163,7 @@ $items = $result['items'];
           <tr>
             <td colspan="13">
               <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

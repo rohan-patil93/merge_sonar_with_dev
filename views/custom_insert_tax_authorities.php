@@ -122,7 +122,7 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
         html += '<div class="card-body p-l-50 p-r-50">';
         html += '<div class="row">'
         html += '<div class="form-group col-lg-6">'
-        html += '<span class="form-label">Tax Authorities Rates Name<span class="text-danger">*</span></span>'
+        html += '<span class="form-label"><?= htmlspecialchars(__('Tax Authorities Rates Name'), ENT_QUOTES, 'UTF-8'); ?><span class="text-danger">*</span></span>'
         html += '<input type="hidden" class="form-control" name="tax_authorities_rates_seq['+taxauthsq+']" value="'+taxauthsq+'">';
         html += '<input type="hidden" class="form-control" name="tax_authorities_rates_id['+taxauthsq+']" value="">';
         html += '<input aria-label="<?php echo __('Tax Description['); ?>" type="text" class="form-control text-capitalize" name="tax_description['+taxauthsq+']" value="">';
@@ -135,7 +135,7 @@ $hsn_and_sac_codes = $result['hsn_and_sac_codes'];
         html += '<div id="addmoreinvoice_'+taxauthsq+'">';
         html += '</div>';
         html += '<div class="mt-3">';
-        html += '<button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn" onclick="addMore(\""I"\",'+taxauthsq+')"><i class="icofont icofont-plus icon-white "></i> Add More</button>';
+        html += '<button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-3" id="addmore_btn" onclick="addMore(\""I"\",'+taxauthsq+')"><i class="icofont icofont-plus icon-white "></i> <?= htmlspecialchars(__('Add More'), ENT_QUOTES, 'UTF-8'); ?></button>';
         html += '<span class="float-end">';
         html += '<span class="text-danger"><?php echo __('Pendding (%) :'); ?> </span>';
         html += '<span id="totaldistributionpendingI_'+taxauthsq+'"><?php echo 100-round($itotal); ?></span>';

@@ -18,7 +18,7 @@ if($fileaccetformat !=""){
 }
 if($file_upload['file_size'] !=""){
     $accepted_files = 'accept="'.$fileaccetformat.'"';
-    $accepted_file_message .=  '</br> Maximum Upload Size Is - '.$file_upload['file_size'].' Bytes';
+    $accepted_file_message .=  '</br> '.__('Maximum Upload Size Is').' - '.$file_upload['file_size'].' Bytes';
 }
 ?>
 <script type="text/javascript">
@@ -136,14 +136,14 @@ function closeInsertEquipment(){
                 <?php if($equipments['qr_code'] !=""){ ?>
                 <div class=" form-group col-lg-6">
                     <span class="form-label d-block"><?php echo __('QR Code'); ?></span>
-                    <img src="<?php echo "uploads/equipments/qr_code/".$equipments['qr_code'] ; ?>" class="img-100"  width="200" alt="QR Code" />
+                    <img src="<?php echo "uploads/equipments/qr_code/".$equipments['qr_code'] ; ?>" class="img-100"  width="200" alt="<?= htmlspecialchars(__('QR Code'), ENT_QUOTES, 'UTF-8'); ?>" />
                 </div>
                 <?php }
 if($equipments['id'] !=""){ ?>
                 <div class=" form-group col-lg-6">
                     <span class="form-label d-block"><?php echo __('Barcode'); ?> </span>
 
-                    <img src="<?php echo "barcode/barcode.php?text=".$equipments['id'].'-'.$equipments['equipment_code']; ?>" width="300" alt="Attachment Preview" />
+                    <img src="<?php echo "barcode/barcode.php?text=".$equipments['id'].'-'.$equipments['equipment_code']; ?>" width="300" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                 </div>
                 <?php } ?>
             </div>
@@ -156,7 +156,7 @@ if($equipments['id'] !=""){ ?>
                     <span> <i class="fa fa-camera"></i> &nbsp; <?php echo __('Change Image'); ?></span>
                 </label>
                 <input type="file" class="fileinputvalidation" name="equipment_image" id="equipment_image"  <?php echo $accepted_files; ?> data-size="<?php echo $file_upload['file_size']; ?>" onchange="loadFile(event,this.id)"/>
-                <img src="<?php echo "uploads/equipments/".$equipments['equipment_image'] ; ?>" id="outputequipment_image" width="200" alt="Attachment Preview" />
+                <img src="<?php echo "uploads/equipments/".$equipments['equipment_image'] ; ?>" id="outputequipment_image" width="200" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                 <input type="hidden" name="old_equipment_image" value="<?php echo $equipments['equipment_image'] ;  ?>">
             </div>
             <span class="text-danger d-block f-12"><?php echo $accepted_file_message; ?></span>

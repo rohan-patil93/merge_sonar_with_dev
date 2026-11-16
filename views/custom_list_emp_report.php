@@ -182,12 +182,12 @@ if(isset($_POST['submit_rating'])){
                     <div class="card card-custom  " id="kt_page_sticky_card">
                         <div class="card-header mt-5">
 
-                            <h3 class="card-label">Employee Details</h3>
+                            <h3 class="card-label"><?= __('Employee Details'); ?></h3>
                             <div class="col-lg-3">
-                                <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Filter</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter'); ?></button>
                             </div>
                             <div class="col-lg-3">
-                                <select aria-label="Displayattributes[]" class="form-control selectpicker" name="displayattributes[]" multiple="multiple">
+                                <select aria-label="<?= htmlspecialchars(__('Displayattributes'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control selectpicker" name="displayattributes[]" multiple="multiple">
                                     <?php foreach ($employees_fieldlist as $fkey => $fieldvalue) { ?>
                                         <option value="<?php echo $fkey; ?>" <?php echo in_array($fkey, $defalut_fields) ? 'selected' : ''; ?>  > <?php echo $fieldvalue['lable']; ?> </option>
                                     <?php }    ?>
@@ -196,7 +196,7 @@ if(isset($_POST['submit_rating'])){
                             </div>
                             <div class="col-lg-2">
                                 <input type="hidden" id="filterby" name="filterby">
-                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
                             </div>
 
                         </div>
@@ -224,18 +224,18 @@ if(isset($_POST['submit_rating'])){
                                                         </g>
                                                     </svg>
                                                     <!--end::Svg Icon-->
-                                                </span>Export</button>
+                                                </span><?= __('Export'); ?></button>
                                                 <!--begin::Dropdown Menu-->
                                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                                     <!--begin::Navigation-->
                                                     <ul class="navi flex-column navi-hover py-2">
-                                                        <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
+                                                        <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2"><?= __('Choose an option'); ?>:</li>
                                                         <li class="navi-item">
                                                             <a href="#" class="navi-link">
                                                                 <span class="navi-icon">
                                                                     <i class="la la-print"></i>
                                                                 </span>
-                                                                <span class="navi-text">Print</span>
+                                                                <span class="navi-text"><?= __('Print'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="navi-item">
@@ -243,7 +243,7 @@ if(isset($_POST['submit_rating'])){
                                                                 <span class="navi-icon">
                                                                     <i class="la la-copy"></i>
                                                                 </span>
-                                                                <span class="navi-text">Copy</span>
+                                                                <span class="navi-text"><?= __('Copy'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="navi-item">
@@ -251,7 +251,7 @@ if(isset($_POST['submit_rating'])){
                                                                 <span class="navi-icon">
                                                                     <i class="la la-file-excel-o"></i>
                                                                 </span>
-                                                                <span class="navi-text">Excel</span>
+                                                                <span class="navi-text"><?= __('Excel'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="navi-item">
@@ -259,7 +259,7 @@ if(isset($_POST['submit_rating'])){
                                                                 <span class="navi-icon">
                                                                     <i class="la la-file-text-o"></i>
                                                                 </span>
-                                                                <span class="navi-text">CSV</span>
+                                                                <span class="navi-text"><?= __('CSV'); ?></span>
                                                             </a>
                                                         </li>
                                                         <li class="navi-item">
@@ -267,7 +267,7 @@ if(isset($_POST['submit_rating'])){
                                                                 <span class="navi-icon">
                                                                     <i class="la la-file-pdf-o"></i>
                                                                 </span>
-                                                                <span class="navi-text">PDF</span>
+                                                                <span class="navi-text"><?= __('PDF'); ?></span>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -285,7 +285,7 @@ if(isset($_POST['submit_rating'])){
                     <thead>
                         <tr>
                             <th scope="col" style="width: 5%;">#</th>
-                            <th scope="col" style="width: 25%;">NAME </th>
+                            <th scope="col" style="width: 25%;"><?= __('NAME'); ?> </th>
                             <?php
 
                              foreach ($employees_fieldlist as $empkey => $empfield) {
@@ -315,7 +315,7 @@ if(isset($_POST['submit_rating'])){
                                             width: 50px;
                                             height: auto;
                                             border-radius: 50%;
-                                            " alt="Attachment Preview">
+                                            " alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
                                             <div class="symbol symbol-40 symbol-circle symbol-primary" data-toggle="tooltip" title="" data-original-title="<?php echo $empvalue['display_name']; ?>">
                                                 <span class="symbol-label font-size-h5 font-weight-boldest"><?php echo initials($empvalue['display_name']); ?></span>

@@ -66,11 +66,11 @@ if ($_POST['submit'] && $_POST['submit'] == 'insert') {
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Quarter Rate Apply</h5>
+            <h5><?= __('Quarter Rate Apply'); ?></h5>
             <div class="card-header-right">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -79,9 +79,9 @@ if ($_POST['submit'] && $_POST['submit'] == 'insert') {
                 <form id="vmsQuarterRateApplyForm" method="post">
                     <div class="row">
                         <div class="form-group col-lg-4">
-                            <span>From Financial Year <span style="color: red;">*</span></span>
-                            <select aria-label="From Financial Year" class="form-select js-example-basic-single" id="from_financial_year" name="from_financial_year" required>
-                                <option value="">Select Financial Year</option>
+                            <span><?= __('From Financial Year'); ?> <span style="color: red;">*</span></span>
+                            <select aria-label="<?= htmlspecialchars(__('From Financial Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="from_financial_year" name="from_financial_year" required>
+                                <option value=""><?= __('Select Financial Year'); ?></option>
                                 <?php if (count((array)$financial_years) > 0) {
                                     foreach ($financial_years as $fy) {
                                         $selected = ($form_data['from_financial_year'] == $fy) ? 'selected' : '';
@@ -95,9 +95,9 @@ if ($_POST['submit'] && $_POST['submit'] == 'insert') {
                             <div style="display: none; color: red;" id="from_financial_year_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>From Quarter <span style="color: red;">*</span></span>
-                            <select aria-label="From Quarter" class="form-select js-example-basic-single" id="from_quarter" name="from_quarter" required>
-                                <option value="">Select Quarter</option>
+                            <span><?= __('From Quarter'); ?> <span style="color: red;">*</span></span>
+                            <select aria-label="<?= htmlspecialchars(__('From Quarter'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="from_quarter" name="from_quarter" required>
+                                <option value=""><?= __('Select Quarter'); ?></option>
                                 <?php if (count((array)$quarters) > 0) {
                                     foreach ($quarters as $q_key => $q_label) {
                                         $selected = ($form_data['from_quarter'] == $q_key) ? 'selected' : '';
@@ -114,9 +114,9 @@ if ($_POST['submit'] && $_POST['submit'] == 'insert') {
 
                     <div class="row">
                         <div class="form-group col-lg-4">
-                            <span>To Financial Year <span style="color: red;">*</span></span>
-                            <select aria-label="To Financial Year" class="form-select js-example-basic-single" id="to_financial_year" name="to_financial_year" required>
-                                <option value="">Select Financial Year</option>
+                            <span><?= __('To Financial Year'); ?> <span style="color: red;">*</span></span>
+                            <select aria-label="<?= htmlspecialchars(__('To Financial Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="to_financial_year" name="to_financial_year" required>
+                                <option value=""><?= __('Select Financial Year'); ?></option>
                                 <?php if (count((array)$financial_years) > 0) {
                                     foreach ($financial_years as $fy) {
                                         $selected = ($form_data['to_financial_year'] == $fy) ? 'selected' : '';
@@ -130,9 +130,9 @@ if ($_POST['submit'] && $_POST['submit'] == 'insert') {
                             <div style="display: none; color: red;" id="to_financial_year_err"></div>
                         </div>
                         <div class="form-group col-lg-4">
-                            <span>To Quarter <span style="color: red;">*</span></span>
-                            <select aria-label="To Quarter" class="form-select js-example-basic-single" id="to_quarter" name="to_quarter" required>
-                                <option value="">Select Quarter</option>
+                            <span><?= __('To Quarter'); ?> <span style="color: red;">*</span></span>
+                            <select aria-label="<?= htmlspecialchars(__('To Quarter'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="to_quarter" name="to_quarter" required>
+                                <option value=""><?= __('Select Quarter'); ?></option>
                                 <?php if (count((array)$quarters) > 0) {
                                     foreach ($quarters as $q_key => $q_label) {
                                         $selected = ($form_data['to_quarter'] == $q_key) ? 'selected' : '';
@@ -149,15 +149,15 @@ if ($_POST['submit'] && $_POST['submit'] == 'insert') {
 
                     <div class="row">
                         <div class="form-group col-lg-4">
-                            <span>Extension <span style="color: red;">*</span></span>
-                            <input aria-label="Extension" class="form-control" type="text" id="extension" name="extension" value="<?php echo htmlspecialchars($form_data['extension']); ?>" required />
+                            <span><?= __('Extension'); ?> <span style="color: red;">*</span></span>
+                            <input aria-label="<?= htmlspecialchars(__('Extension'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="extension" name="extension" value="<?php echo htmlspecialchars($form_data['extension']); ?>" required />
                             <div style="display: none; color: red;" id="extension_err"></div>
                         </div>
                     </div>
 
                     <div class="border-top">
                         <button name="submit" value="insert" class="btn waves-effect waves-light btn-primary mt-2">
-                            Submit
+                            <?= __('Submit'); ?>
                         </button>
                     </div>
                 </form>

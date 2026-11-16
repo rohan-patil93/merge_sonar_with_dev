@@ -234,7 +234,7 @@ if($_GET['error'] !=''){ ?>
                           <input aria-label="<?php echo __('Assigned To'); ?>" type="radio" name="assigned_to"  onclick="showemplist(this.value);" value="<?php echo $emptypes['genc_detail_code'];?>" <?php if($assigned_to == $emptypes['genc_detail_code']) {?> checked="checked" <?php
 } ?> onkeydown="" />
                           <span></span>
-                          <?php echo $emptypes['genc_detail_name'];?>
+                          <?php echo __($emptypes['genc_detail_name']);?>
                       </label>
                   <?php } ?>
               </div>
@@ -289,7 +289,7 @@ if($_GET['error'] !=''){ ?>
                       foreach ($due_list as $due) {
                           ?>
                           <option value="<?php echo $due['genc_detail_code'];?>" <?php if($action_frequency == $due['id']){ ?>selected <?php
-} ?> ><?php echo $due['genc_detail_name'];?></option>
+} ?> ><?php echo __($due['genc_detail_name']);?></option>
                       <?php } ?>
                   </select>
                   &nbsp;
@@ -301,7 +301,7 @@ if($_GET['error'] !=''){ ?>
                       foreach ($period_list as $due) {
                           ?>
                           <option value="<?php echo $due['genc_detail_code'];?>" <?php if($before_or_after == $due['id']){ ?>selected <?php
-} ?> ><?php echo $due['genc_detail_name'];?></option>
+} ?> ><?php echo __($due['genc_detail_name']);?></option>
                       <?php } ?>
                   </select> &nbsp;
                   <span class="mt-3 ml-2"> <?php echo __('Reliving'); ?>  </span>

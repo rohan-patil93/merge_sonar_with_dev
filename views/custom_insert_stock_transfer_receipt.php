@@ -117,7 +117,7 @@ $totalAmount = $result['total_amount'] ?? 0;
 }</option>";
               }
             } else {
-              echo "<option value=''>No Stock Requests Found</option>";
+              echo "<option value=''>".__('No Stock Requests Found')."</option>";
             }
             ?>
           </select>
@@ -139,7 +139,7 @@ $totalAmount = $result['total_amount'] ?? 0;
 }</option>";
               }
             } else {
-              echo "<option value=''>No Stock Transfers Found</option>";
+              echo "<option value=''>".__('No Stock Transfers Found')."</option>";
             }
             ?>
           </select>

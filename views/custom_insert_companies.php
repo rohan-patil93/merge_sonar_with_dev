@@ -66,7 +66,7 @@ $cmp_details = $result['cmp_details'];
             <div class="page-body">
                 <div class="alert alert-light alert-dismissible">
                     <strong><?= __('This function is used for maintaining') ?> <strong><?= __('Companies') ?></strong>. <?= __('* represents mandatory fields.') ?></strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -84,12 +84,12 @@ $cmp_details = $result['cmp_details'];
                                 <div class="row">
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Name') ?> <span style="color:red;">*</span></span>
-                                        <input aria-label="Name" class="form-control" type="text" id="company_name" name="name" value="<?php echo $return['name']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="company_name" name="name" value="<?php echo $return['name']; ?>">
                                         <div style="display: none;color: red;" id="company_name_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Company Number') ?> <span style="color:red;">*</span></span>
-                                        <select aria-label="Companynumber" class="form-select js-example-basic-single  col-lg-4" name="companynumber" id="companynumber">
+                                        <select aria-label="<?= htmlspecialchars(__('Companynumber'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single  col-lg-4" name="companynumber" id="companynumber">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <?php for ($i = 1; $i <= 10; $i++) { ?>
                                                 <option value="<?php echo $i; ?>" <?php echo $return['companynumber'] == $i ? 'selected' : ''; ?>><?php echo $i; ?></option>
@@ -99,7 +99,7 @@ $cmp_details = $result['cmp_details'];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Base Country') ?> <span style="color:red;">*</span></span>
-                                        <select aria-label="Base Country" class="form-select js-example-basic-single  col-lg-4" name="base_country" id="base_country" onchange="updateStates(this)" data-selected-state="<?php echo $return['gst_state']; ?>">
+                                        <select aria-label="<?= htmlspecialchars(__('Base Country'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single  col-lg-4" name="base_country" id="base_country" onchange="updateStates(this)" data-selected-state="<?php echo $return['gst_state']; ?>">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($ct_details as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['base_country'] == $row['id'] ? 'selected' : ''; ?>>
@@ -111,7 +111,7 @@ $cmp_details = $result['cmp_details'];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('GST State') ?></span>
-                                        <select aria-label="Gst State" class="form-select js-example-basic-single" id="gst_state" name="gst_state">
+                                        <select aria-label="<?= htmlspecialchars(__('Gst State'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="gst_state" name="gst_state">
                                             <option value="0"><?= __('Select Any one') ?></option>
 
                                         </select>
@@ -119,22 +119,22 @@ $cmp_details = $result['cmp_details'];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Incharge Name') ?> <span style="color:red;">*</span></span>
-                                        <input aria-label="Incharge Name" class="form-control" type="text" id="incharge_name" name="incharge_name" value="<?php echo $return['incharge_name']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Incharge Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="incharge_name" name="incharge_name" value="<?php echo $return['incharge_name']; ?>">
                                         <div style="display: none;color: red;" id="incharge_name_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Telephone') ?> <span style="color:red;">*</span></span>
-                                        <input aria-label="Telephone" class="form-control" type="text" id="telephone" name="telephone" value="<?php echo $return['telephone']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Telephone'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="telephone" name="telephone" value="<?php echo $return['telephone']; ?>">
                                         <div style="display: none;color: red;" id="telephone_err"></div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Email') ?> <span style="color:red;">*</span></span>
-                                        <input aria-label="Email" class="form-control" type="text" id="email" name="email" value="<?php echo $return['email']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="email" name="email" value="<?php echo $return['email']; ?>">
                                         <div style="display: none;color: red;" id="email_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Parent Company') ?></span>
-                                        <select aria-label="Parent" class="form-select js-example-basic-single" id="parent_id" name="parent_id">
+                                        <select aria-label="<?= htmlspecialchars(__('Parent'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="parent_id" name="parent_id">
                                             <option value="0"><?= __('Select Any one') ?></option>
 
                                             <?php foreach ($cmp_details as $row): ?>
@@ -144,7 +144,7 @@ $cmp_details = $result['cmp_details'];
                                             <?php endforeach; ?>
                                             </optgroup>
                                         </select>
-                                        <div style="display: none;color: red;" id="parent_id_err"> Please Select Parent Company </div>
+                                        <div style="display: none;color: red;" id="parent_id_err"> <?= __('Please Select Parent Company'); ?> </div>
                                     </div>
 
                                     <div class="col-lg-12">
@@ -156,22 +156,22 @@ $cmp_details = $result['cmp_details'];
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Latitude') ?> <span style="color:red;">*</span></span>
-                                        <input aria-label="Location Latitude" class="form-control" type="text" id="location_latitude" name="location_latitude" value="<?php echo $return['location_latitude']; ?>" readonly>
+                                        <input aria-label="<?= htmlspecialchars(__('Location Latitude'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="location_latitude" name="location_latitude" value="<?php echo $return['location_latitude']; ?>" readonly>
                                         <div style="display: none;color: red;" id="location_latitude_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Longitude') ?> <span style="color:red;">*</span></span>
-                                        <input aria-label="Location Longitude" class="form-control" type="text" id="location_longitude" name="location_longitude" value="<?php echo $return['location_longitude']; ?>" readonly>
+                                        <input aria-label="<?= htmlspecialchars(__('Location Longitude'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="location_longitude" name="location_longitude" value="<?php echo $return['location_longitude']; ?>" readonly>
                                         <div style="display: none;color: red;" id="location_longitude_err"> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Fax') ?></span>
-                                        <input aria-label="Fax" class="form-control" type="text" id="fax" name="fax" value="<?php echo $return['fax']; ?>">
-                                        <div style="display: none;color: red;" id="fax_err"> Please enter Fax </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Fax'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="fax" name="fax" value="<?php echo $return['fax']; ?>">
+                                        <div style="display: none;color: red;" id="fax_err"> <?= __('Please enter Fax'); ?> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Hr Connect') ?></span>
-                                        <select aria-label="Hr Connect" class="form-select js-example-basic-single" id="hr_connect" name="hr_connect">
+                                        <select aria-label="<?= htmlspecialchars(__('Hr Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="hr_connect" name="hr_connect">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($application_users as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['hr_connect'] == $row['id'] ? 'selected' : ''; ?>>
@@ -179,11 +179,11 @@ $cmp_details = $result['cmp_details'];
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <div style="display: none;color: red;" id="hr_connect_err"> Please Select Hr Connect </div>
+                                        <div style="display: none;color: red;" id="hr_connect_err"> <?= __('Please Select Hr Connect'); ?> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Finance Connect') ?></span>
-                                        <select aria-label="Finance Connect" class="form-select js-example-basic-single" id="finance_connect" name="finance_connect">
+                                        <select aria-label="<?= htmlspecialchars(__('Finance Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="finance_connect" name="finance_connect">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($application_users as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['finance_connect'] == $row['id'] ? 'selected' : ''; ?>>
@@ -191,12 +191,12 @@ $cmp_details = $result['cmp_details'];
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <div style="display: none;color: red;" id="finance_connect_err"> Please Select Finance Connect </div>
+                                        <div style="display: none;color: red;" id="finance_connect_err"> <?= __('Please Select Finance Connect'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Admin Connect') ?></span>
-                                        <select aria-label="Admin Connect" class="form-select js-example-basic-single" id="admin_connect" name="admin_connect">
+                                        <select aria-label="<?= htmlspecialchars(__('Admin Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="admin_connect" name="admin_connect">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($application_users as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['admin_connect'] == $row['id'] ? 'selected' : ''; ?>>
@@ -204,12 +204,12 @@ $cmp_details = $result['cmp_details'];
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <div style="display: none;color: red;" id="admin_connect_err"> Please Select Admin Connect </div>
+                                        <div style="display: none;color: red;" id="admin_connect_err"> <?= __('Please Select Admin Connect'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span><?= __('Default Currency') ?></span>
-                                        <select aria-label="Currency" class="form-select js-example-basic-single" id="currency_id" name="currency_id">
+                                        <select aria-label="<?= htmlspecialchars(__('Currency'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="currency_id" name="currency_id">
                                             <option value="0"><?= __('Select Any one') ?></option>
                                             <?php foreach ($cr_details as $row): ?>
                                                 <option value="<?php echo $row['id']; ?>" <?php echo $return['currency_id'] == $row['id'] ? 'selected' : ''; ?>>
@@ -217,129 +217,129 @@ $cmp_details = $result['cmp_details'];
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <div style="display: none;color: red;" id="currency_id_err"> Please Select Default Currency </div>
+                                        <div style="display: none;color: red;" id="currency_id_err"> <?= __('Please Select Default Currency'); ?> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Bank Account') ?></span>
-                                        <input aria-label="Bank Account" class="form-control" type="text" id="bank_account" name="bank_account" value="<?php echo $return['bank_account']; ?>">
-                                        <div style="display: none;color: red;" id="bank_account_err"> Please enter Bank Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Bank Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="bank_account" name="bank_account" value="<?php echo $return['bank_account']; ?>">
+                                        <div style="display: none;color: red;" id="bank_account_err"> <?= __('Please enter Bank Account'); ?> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Payable Account') ?></span>
-                                        <input aria-label="Payable Account" class="form-control" type="text" id="payable_account" name="payable_account" value="<?php echo $return['payable_account']; ?>">
-                                        <div style="display: none;color: red;" id="payable_account_err"> Please enter Payable Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Payable Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="payable_account" name="payable_account" value="<?php echo $return['payable_account']; ?>">
+                                        <div style="display: none;color: red;" id="payable_account_err"> <?= __('Please enter Payable Account'); ?> </div>
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Receiable Account') ?></span>
-                                        <input aria-label="Receiable Account" class="form-control" type="text" id="receiable_account" name="receiable_account" value="<?php echo $return['receiable_account']; ?>">
-                                        <div style="display: none;color: red;" id="receiable_account_err"> Please enter Receiable Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Receiable Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="receiable_account" name="receiable_account" value="<?php echo $return['receiable_account']; ?>">
+                                        <div style="display: none;color: red;" id="receiable_account_err"> <?= __('Please enter Receiable Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Income Account') ?></span>
-                                        <input aria-label="Income Account" class="form-control" type="text" id="income_account" name="income_account" value="<?php echo $return['income_account']; ?>">
-                                        <div style="display: none;color: red;" id="income_account_err"> Please enter Income Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Income Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="income_account" name="income_account" value="<?php echo $return['income_account']; ?>">
+                                        <div style="display: none;color: red;" id="income_account_err"> <?= __('Please enter Income Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Cogs Account') ?></span>
-                                        <input aria-label="Cogs Account" class="form-control" type="text" id="cogs_account" name="cogs_account" value="<?php echo $return['cogs_account']; ?>">
-                                        <div style="display: none;color: red;" id="cogs_account_err"> Please enter Cogs Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Cogs Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="cogs_account" name="cogs_account" value="<?php echo $return['cogs_account']; ?>">
+                                        <div style="display: none;color: red;" id="cogs_account_err"> <?= __('Please enter Cogs Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Round Off Account') ?></span>
-                                        <input aria-label="Round Off Account" class="form-control" type="text" id="round_off_account" name="round_off_account" value="<?php echo $return['round_off_account']; ?>">
-                                        <div style="display: none;color: red;" id="round_off_account_err"> Please enter Round Off Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Round Off Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="round_off_account" name="round_off_account" value="<?php echo $return['round_off_account']; ?>">
+                                        <div style="display: none;color: red;" id="round_off_account_err"> <?= __('Please enter Round Off Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Employee Adv Account') ?></span>
-                                        <input aria-label="Employee Adv Account" class="form-control" type="text" id="employee_adv_account" name="employee_adv_account" value="<?php echo $return['employee_adv_account']; ?>">
-                                        <div style="display: none;color: red;" id="employee_adv_account_err"> Please enter Employee Adv Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Employee Adv Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="employee_adv_account" name="employee_adv_account" value="<?php echo $return['employee_adv_account']; ?>">
+                                        <div style="display: none;color: red;" id="employee_adv_account_err"> <?= __('Please enter Employee Adv Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Deferred Revenu Account') ?></span>
-                                        <input aria-label="Deferred Revenu Account" class="form-control" type="text" id="deferred_revenu_account" name="deferred_revenu_account" value="<?php echo $return['deferred_revenu_account']; ?>">
-                                        <div style="display: none;color: red;" id="deferred_revenu_account_err"> Please enter Deferred Revenu Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Deferred Revenu Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="deferred_revenu_account" name="deferred_revenu_account" value="<?php echo $return['deferred_revenu_account']; ?>">
+                                        <div style="display: none;color: red;" id="deferred_revenu_account_err"> <?= __('Please enter Deferred Revenu Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Deferred Expenses Account') ?></span>
-                                        <input aria-label="Deferred Expenses Account" class="form-control" type="text" id="deferred_expenses_account" name="deferred_expenses_account" value="<?php echo $return['deferred_expenses_account']; ?>">
-                                        <div style="display: none;color: red;" id="deferred_expenses_account_err"> Please enter Deferred Expenses Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Deferred Expenses Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="deferred_expenses_account" name="deferred_expenses_account" value="<?php echo $return['deferred_expenses_account']; ?>">
+                                        <div style="display: none;color: red;" id="deferred_expenses_account_err"> <?= __('Please enter Deferred Expenses Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Write Off Account') ?></span>
-                                        <input aria-label="Write Off Account" class="form-control" type="text" id="write_off_account" name="write_off_account" value="<?php echo $return['write_off_account']; ?>">
-                                        <div style="display: none;color: red;" id="write_off_account_err"> Please enter Write Off Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Write Off Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="write_off_account" name="write_off_account" value="<?php echo $return['write_off_account']; ?>">
+                                        <div style="display: none;color: red;" id="write_off_account_err"> <?= __('Please enter Write Off Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Disc Allowed Account') ?></span>
-                                        <input aria-label="Disc Allowed Account" class="form-control" type="text" id="disc_allowed_account" name="disc_allowed_account" value="<?php echo $return['disc_allowed_account']; ?>">
-                                        <div style="display: none;color: red;" id="disc_allowed_account_err"> Please enter Disc Allowed Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Disc Allowed Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="disc_allowed_account" name="disc_allowed_account" value="<?php echo $return['disc_allowed_account']; ?>">
+                                        <div style="display: none;color: red;" id="disc_allowed_account_err"> <?= __('Please enter Disc Allowed Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Disc Received Account') ?></span>
-                                        <input aria-label="Disc Received Account" class="form-control" type="text" id="disc_received_account" name="disc_received_account" value="<?php echo $return['disc_received_account']; ?>">
-                                        <div style="display: none;color: red;" id="disc_received_account_err"> Please enter Disc Received Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Disc Received Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="disc_received_account" name="disc_received_account" value="<?php echo $return['disc_received_account']; ?>">
+                                        <div style="display: none;color: red;" id="disc_received_account_err"> <?= __('Please enter Disc Received Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Sale Exchange Diff Account') ?></span>
-                                        <input aria-label="Sale Exchange Diff Account" class="form-control" type="text" id="sale_exchange_diff_account" name="sale_exchange_diff_account" value="<?php echo $return['sale_exchange_diff_account']; ?>">
-                                        <div style="display: none;color: red;" id="sale_exchange_diff_account_err"> Please enter Sale Exchange Diff Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Sale Exchange Diff Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="sale_exchange_diff_account" name="sale_exchange_diff_account" value="<?php echo $return['sale_exchange_diff_account']; ?>">
+                                        <div style="display: none;color: red;" id="sale_exchange_diff_account_err"> <?= __('Please enter Sale Exchange Diff Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Purchase Exchange Diff Account') ?></span>
-                                        <input aria-label="Purchase Exchange Diff Account" class="form-control" type="text" id="purchase_exchange_diff_account" name="purchase_exchange_diff_account" value="<?php echo $return['purchase_exchange_diff_account']; ?>">
-                                        <div style="display: none;color: red;" id="purchase_exchange_diff_account_err"> Please enter Purchase Exchange Diff Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Purchase Exchange Diff Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="purchase_exchange_diff_account" name="purchase_exchange_diff_account" value="<?php echo $return['purchase_exchange_diff_account']; ?>">
+                                        <div style="display: none;color: red;" id="purchase_exchange_diff_account_err"> <?= __('Please enter Purchase Exchange Diff Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Stock In Hand Account') ?></span>
-                                        <input aria-label="Stock In Hand Account" class="form-control" type="text" id="stock_in_hand_account" name="stock_in_hand_account" value="<?php echo $return['stock_in_hand_account']; ?>">
-                                        <div style="display: none;color: red;" id="stock_in_hand_account_err"> Please enter Stock In Hand Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Stock In Hand Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="stock_in_hand_account" name="stock_in_hand_account" value="<?php echo $return['stock_in_hand_account']; ?>">
+                                        <div style="display: none;color: red;" id="stock_in_hand_account_err"> <?= __('Please enter Stock In Hand Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Stock Adj Account') ?></span>
-                                        <input aria-label="Stock Adj Account" class="form-control" type="text" id="stock_adj_account" name="stock_adj_account" value="<?php echo $return['stock_adj_account']; ?>">
-                                        <div style="display: none;color: red;" id="stock_adj_account_err"> Please enter Stock Adj Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Stock Adj Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="stock_adj_account" name="stock_adj_account" value="<?php echo $return['stock_adj_account']; ?>">
+                                        <div style="display: none;color: red;" id="stock_adj_account_err"> <?= __('Please enter Stock Adj Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Stock Unbilled Account') ?></span>
-                                        <input aria-label="Stock Unbilled Account" class="form-control" type="text" id="stock_unbilled_account" name="stock_unbilled_account" value="<?php echo $return['stock_unbilled_account']; ?>">
-                                        <div style="display: none;color: red;" id="stock_unbilled_account_err"> Please enter Stock Unbilled Account </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Stock Unbilled Account'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="stock_unbilled_account" name="stock_unbilled_account" value="<?php echo $return['stock_unbilled_account']; ?>">
+                                        <div style="display: none;color: red;" id="stock_unbilled_account_err"> <?= __('Please enter Stock Unbilled Account'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Cost Center') ?></span>
-                                        <input aria-label="Cost Center" class="form-control" type="text" id="cost_center" name="cost_center" value="<?php echo $return['cost_center']; ?>">
-                                        <div style="display: none;color: red;" id="cost_center_err"> Please enter Cost Center </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Cost Center'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="cost_center" name="cost_center" value="<?php echo $return['cost_center']; ?>">
+                                        <div style="display: none;color: red;" id="cost_center_err"> <?= __('Please enter Cost Center'); ?> </div>
                                     </div>
 
                                     <div class="form-group col-lg-6">
                                         <span class=""><?= __('Inventory Valuation') ?></span>
-                                        <input aria-label="Inventory Valuation" class="form-control" type="text" id="inventory_valuation" name="inventory_valuation" value="<?php echo $return['inventory_valuation']; ?>">
-                                        <div style="display: none;color: red;" id="inventory_valuation_err"> Please enter Inventory Valuation </div>
+                                        <input aria-label="<?= htmlspecialchars(__('Inventory Valuation'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="inventory_valuation" name="inventory_valuation" value="<?php echo $return['inventory_valuation']; ?>">
+                                        <div style="display: none;color: red;" id="inventory_valuation_err"> <?= __('Please enter Inventory Valuation'); ?> </div>
                                     </div>
 
                                     <div class="col-lg-6 col-xs-12 form-group m-b-10">
                                         <span><?= __('From Date') ?></span>
-                                        <input aria-label="From Date" class="form-control" type="date" name="from_date"
+                                        <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="from_date"
                                             value="<?php echo isset($return['from_date']) && $return['from_date'] != '' ? date('Y-m-d', strtotime($return['from_date'])) : date('Y-m-d'); ?>" readonly />
                                     </div>
 
                                     <div class="col-lg-6 col-xs-12 form-group">
                                         <span><?= __('To Date') ?></span>
-                                        <input aria-label="To Date" class="form-control" type="date" name="to_date" value="<?php echo isset($return['to_date']) && $return['to_date'] != '' ? date('Y-m-d', strtotime($return['to_date'])) :  date('Y-m-d', strtotime('+5 years')); ?>" />
+                                        <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="to_date" value="<?php echo isset($return['to_date']) && $return['to_date'] != '' ? date('Y-m-d', strtotime($return['to_date'])) :  date('Y-m-d', strtotime('+5 years')); ?>" />
                                     </div>
 
                                 </div>
@@ -373,7 +373,7 @@ $cmp_details = $result['cmp_details'];
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="mapModalLabel"><?= __('Select Location') ?></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <div class="modal-body">
                 <div id="map" style="height: 400px; width: 100%;"></div>
@@ -532,7 +532,7 @@ $cmp_details = $result['cmp_details'];
         }
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright"><?= htmlspecialchars(__('OpenStreetMap'), ENT_QUOTES, 'UTF-8'); ?></a> <?= htmlspecialchars(__('contributors'), ENT_QUOTES, 'UTF-8'); ?>'
         }).addTo(map);
         const searchControl = new L.Control.Search({
             url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',

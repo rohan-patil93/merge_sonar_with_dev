@@ -207,14 +207,14 @@ foreach ($defalut_fields as $dfield) {
                             <div class="card-title col-lg-12">
                                 <h3 class="card-label"><?= __('Employees Bulk Transfer') ?></h3>
                                 <div class="col-lg-4">
-                                    <input aria-label="Month Year Cal" class="form-control" type="month" name="month_year_cal" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
+                                    <input aria-label="<?= htmlspecialchars(__('Month Year Cal'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="month_year_cal" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
                                 </div>
                                 <div class="col-lg-1">
                                     <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter') ?></button>
                                 </div>
 
                                 <div class="col-lg-3 w-full">
-                                    <select aria-label="Displayattributes[]" class="form-control selectpicker" name="displayattributes[]" multiple="multiple">
+                                    <select aria-label="<?= htmlspecialchars(__('Displayattributes'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control selectpicker" name="displayattributes[]" multiple="multiple">
                                         <?php foreach ($employees_fieldlist as $fkey => $fieldvalue) { ?>
                                             <option value="<?php echo $fkey; ?>" <?php echo in_array($fkey, (array)$defalut_fields) ? 'selected' : ''; ?>  > <?php echo htmlspecialchars(__($fieldvalue['lable'] ?? '')); ?> </option>
                                         <?php }    ?>
@@ -239,7 +239,7 @@ foreach ($defalut_fields as $dfield) {
             <div class="row ">
                 <div class="form-group col-lg-3 mt-10 mb-10 w-full"  id="bulkcategory" style="display: none">
                     <span><?= __('Transfer Category') ?></span>
-                    <select aria-label="Bulkchangecategory" onchange="showbulkchangefilter(this.value);" id="bulkchangecategory" name="bulkchangecategory" class="form-control" >
+                    <select aria-label="<?= htmlspecialchars(__('Bulkchangecategory'), ENT_QUOTES, 'UTF-8'); ?>" onchange="showbulkchangefilter(this.value);" id="bulkchangecategory" name="bulkchangecategory" class="form-control" >
                         <?php
                         foreach ($bulkchangecategory as $filter) {
                             ?>
@@ -257,7 +257,7 @@ foreach ($defalut_fields as $dfield) {
                 <div class="col-lg-3 mt-10 mb-10" id="effectdate" style="display: none">
                     <span><?= __('Effective From') ?></span>
                     <div class="input-group date">
-                        <input aria-label="Effective Date" type="text" class="form-control"  id="kt_datepicker_4_1"  name="effective_date" />
+                        <input aria-label="<?= htmlspecialchars(__('Effective Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  id="kt_datepicker_4_1"  name="effective_date" />
                         <div class="input-group-append">
                             <span class="input-group-text">
                                 <i class="la la-calendar-check-o"></i>
@@ -309,7 +309,7 @@ foreach ($defalut_fields as $dfield) {
                                 ?>
                                 <tr>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp; <label class="checkbox">
-                                        <input aria-label="Bulkemplist[]" type="checkbox" name="bulkemplist[]" id="bulkemplist" onchange="selectempdata(this.value);"  value="<?php echo $empvalue['id']; ?>" />
+                                        <input aria-label="<?= htmlspecialchars(__('Bulkemplist'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox" name="bulkemplist[]" id="bulkemplist" onchange="selectempdata(this.value);"  value="<?php echo $empvalue['id']; ?>" />
                                         <span></span>
                                     </label>  </td>
 
@@ -319,7 +319,7 @@ foreach ($defalut_fields as $dfield) {
                                             width: 50px;
                                             height: auto;
                                             border-radius: 50%;
-                                            " alt="Attachment Preview">
+                                            " alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
                                             <div class="symbol symbol-40 symbol-circle symbol-primary" data-toggle="tooltip" title="" data-original-title="<?php echo $empvalue['display_name']; ?>">
                                                 <span class="symbol-label font-size-h5 font-weight-boldest"><?php echo initials($empvalue['display_name']); ?></span>

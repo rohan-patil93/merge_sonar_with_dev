@@ -15,11 +15,11 @@ function valueemtpydash($val){
         <div class="col-sm-12">
             <div class="card j-pro">
                 <div class="card-header">
-                    <h5>Salary Components</h5>
+                    <h5><?= __('Salary Components'); ?></h5>
                     <div class="card-header-right">
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                             <i class="icofont icofont-reply"></i>
-                            Back
+                            <?= __('Back'); ?>
                         </a>
                     </div>
                 </div>
@@ -27,24 +27,24 @@ function valueemtpydash($val){
                     <table id="basic-btn" class="table table-striped table-bordered nowrap">
                         <thead>
                             <tr>
-                                <th scope="col"> SL NO </th>
-                                <th scope="col">Display name</th>
-                                <th scope="col">Emp Code</th>
-                                <th scope="col">DOJ</th>
-                                <th scope="col">Department</th>
-                                <th scope="col">Designation</th>
+                                <th scope="col"> <?= __('SL NO'); ?> </th>
+                                <th scope="col"><?= __('Display name'); ?></th>
+                                <th scope="col"><?= __('Emp Code'); ?></th>
+                                <th scope="col"><?= __('DOJ'); ?></th>
+                                <th scope="col"><?= __('Department'); ?></th>
+                                <th scope="col"><?= __('Designation'); ?></th>
 
                                 <?php foreach($unique as $names){ ?>
                                     <th scope="col"><?php echo "S_".$names; ?></th>
                                 <?php } ?>
-                                <th scope="col">Month Days </th>
-                                <th scope="col">Payable Days</th>
+                                <th scope="col"><?= __('Month Days'); ?> </th>
+                                <th scope="col"><?= __('Payable Days'); ?></th>
                                 <?php foreach($unique as $names){ ?>
                                     <th scope="col"><?php echo "A_".$names; ?></th>
                                 <?php } ?>
-                                <th scope="col">Net Payable</th>
-                                <th scope="col"> EPF Wages     </th>
-                                <th scope="col"> ESIC Wages </th>
+                                <th scope="col"><?= __('Net Payable'); ?></th>
+                                <th scope="col"> <?= __('EPF Wages'); ?>     </th>
+                                <th scope="col"> <?= __('ESIC Wages'); ?> </th>
                             </tr>
                         </thead>
                         <tbody>

@@ -63,7 +63,7 @@ $totaldislikes= count((array)$dislikelist);
                                 <span class="nav-icon">
                                     <i class="icon-xl la la-comment-o"></i>
                                 </span>
-                                <span class="nav-text">Comments ( <?php echo $totalcomments;  ?> )</span>
+                                <span class="nav-text"><?= __('Comments ('); ?> <?php echo $totalcomments;  ?> )</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -71,7 +71,7 @@ $totaldislikes= count((array)$dislikelist);
                                 <span class="nav-icon">
                                     <i class="icon-xl la la-thumbs-up"></i>
                                 </span>
-                                <span class="nav-text">Likes ( <?php echo $totallikes;  ?> )</span>
+                                <span class="nav-text"><?= __('Likes ('); ?> <?php echo $totallikes;  ?> )</span>
                             </a>
                         </li>
 
@@ -80,7 +80,7 @@ $totaldislikes= count((array)$dislikelist);
                                 <span class="nav-icon">
                                     <i class="icon-xl la la-thumbs-down"></i>
                                 </span>
-                                <span class="nav-text">Dislikes ( <?php echo $totaldislikes;  ?> )</span>
+                                <span class="nav-text"><?= __('Dislikes ('); ?> <?php echo $totaldislikes;  ?> )</span>
                             </a>
                         </li>
                     </ul>
@@ -117,7 +117,7 @@ $totaldislikes= count((array)$dislikelist);
                                 </div>
 
                                 <div class="d-flex align-items-center p-b-10">
-                                    <span class="text-dark-50 font-weight-normal font-size-sm pl-9"> Comments : </span>
+                                    <span class="text-dark-50 font-weight-normal font-size-sm pl-9"> <?= __('Comments'); ?> : </span>
                                     <!--begin::Section-->
                                     <div class="d-flex flex-column flex-grow-1">
                                         <!--begin::Title-->
@@ -140,7 +140,7 @@ $totaldislikes= count((array)$dislikelist);
                                     <div class="symbol-group symbol-hover">
                                         <?php if($cmtdata['created_by_image']!=""){ ?>
                                             <div class="m-r-15 text-center userimageround">
-                                                <img src="<?php echo $fileupload_path.$cmtdata['created_by_image']; ?>" alt="image" class="img-radius img-50">
+                                                <img src="<?php echo $fileupload_path.$cmtdata['created_by_image']; ?>" alt="<?= htmlspecialchars(__('image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50">
                                             </div>
                                         <?php }else{ ?>
                                             <div class="img-radius img-50 align-top m-r-15 text-center userimageround symbol-primary" title="">
@@ -168,7 +168,7 @@ $totaldislikes= count((array)$dislikelist);
                                         <div class="symbol-group symbol-hover">
                                             <?php if($cmtdata['created_by_image']!=""){ ?>
                                                 <div class="m-r-15 text-center userimageround">
-                                                    <img src="<?php echo $fileupload_path.$cmtdata['created_by_image']; ?>" alt="image" class="img-radius img-50">
+                                                    <img src="<?php echo $fileupload_path.$cmtdata['created_by_image']; ?>" alt="<?= htmlspecialchars(__('image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50">
                                                 </div>
                                             <?php }else{ ?>
                                                 <div class="img-radius img-50 align-top m-r-15 text-center userimageround symbol-primary" title="">

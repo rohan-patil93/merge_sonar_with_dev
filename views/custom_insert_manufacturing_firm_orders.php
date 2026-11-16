@@ -186,7 +186,7 @@ if (!empty($_GET['saved'])) {
                       } else {
                           $borderClass = 'border border-danger'; // fallback
                       }
-                      echo "<td><input aria-label='Rows' type='number' name='rows[$pid][firm_qty_$i]'
+                      echo "<td><input aria-label='".htmlspecialchars(__('Rows'), ENT_QUOTES, 'UTF-8')."' type='number' name='rows[$pid][firm_qty_$i]'
                                value='$val' step='any' min='0'
                                class='form-control form-control-sm text-end firm-order-input $borderClass' required></td>";
                       $sum += $val;

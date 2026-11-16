@@ -431,7 +431,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
     if(count((array)$meantableitemlist) !=0 && count((array)$errormessage) != 0){
         foreach((array)$meantableitemlist as $ref_itm_id=>$qytvalue){
             if(isset($errormessage[$ref_itm_id]['pending_qty']) && $qytvalue > $errormessage[$ref_itm_id]['pending_qty'] && $table1['ref_type'] != 'delivery_challans'){
-                $_GET['error_messages'] .= $errormessage[$ref_itm_id]['item_name']." (".$qytvalue." Qty) - ".$_SESSION['error_message'][6030]." - (Qty - ".round($errormessage[$ref_itm_id]['pending_qty']).") Please Check </br>";
+                $_GET['error_messages'] .= $errormessage[$ref_itm_id]['item_name']." (".$qytvalue." Qty) - ".$_SESSION['error_message'][6030]." - (Qty - ".round($errormessage[$ref_itm_id]['pending_qty'])."".__(') Please Check')." </br>";
             }
         }
     }
@@ -1358,7 +1358,7 @@ function calculateTotal(){
                     var itemdis = JSON.parse(data1);
                     if(parseInt(itemdis.max_discount) < parseInt(dis_val) && itemdis.max_discount != 0){
                           // $('#pdiscount_amount_'+id).val(itemdis.max_discount);
-                           swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Discount amount maximum allowed is "+itemdis.max_discount+", not "+dis_val+". Please check." , "error");
+                           swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Discount amount maximum allowed is').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+itemdis.max_discount+<?php echo json_encode(__(', not').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+dis_val+<?php echo json_encode(__('. Please check.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> , "error");
                           // displaytaxes();
                     }
                 }
@@ -1510,12 +1510,12 @@ function calculateTotal(){
             if(arr2[k]['amount']){
                 //console.log('check: '+k+ ' percentage - '+arr2[k]['id']+' cal:'+arr2[k]['amount'])
                 if(old_state != change_state){
-                    str+= "<tr><td class='p-2'> IGST @ "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
+                    str+= "<tr><td class='p-2'> <?= htmlspecialchars(__('IGST @'), ENT_QUOTES, 'UTF-8'); ?> "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
                     str+= "<td class='p-2 text-end'>  <span id='dis_taxRateid'>"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"</span>  <input  type='hidden' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"''> </td></tr>";
                 }else{
-                    str+= "<tr><td class='p-2'> CGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                    str+= "<tr><td class='p-2'> <?= htmlspecialchars(__('CGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                     str+= "<td class='p-2 text-end'> <span id='dis_taxRateid'>"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"</span> <input  type='hidden' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
-                     str+= "<tr><td class='p-2'> SGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                     str+= "<tr><td class='p-2'> <?= htmlspecialchars(__('SGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                     str+= "<td class='p-2 text-end'> <span id='dis_taxRateid'>"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"</span> <input  type='hidden' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
                 }
                 totaltax = parseFloat(totaltax);
@@ -1894,7 +1894,7 @@ function checkMandatoryArray(){
         var fieldmsg = "";
         var countitemrow = $('.itemRow').length;
         if(countitemrow == 0){
-            swal(<?php echo json_encode(__('Please add at least one Product or Service before Submit.')); ?> , "error");
+            swal(<?php echo json_encode(__('Please add at least one Product or Service before Submit.')); ?> , <?php echo json_encode(__('error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return 1;
         }
         if(mandatory_array !="" && mandatory_array !='null'){
@@ -1930,7 +1930,7 @@ function checkMandatoryArray(){
 
             });
             if(fieldmsg !=""){
-                swal("<?php echo ucwords($_SESSION['config']['name']); ?>", fieldmsg+" Is Mandatory" , "error");
+                swal("<?php echo ucwords($_SESSION['config']['name']); ?>", fieldmsg+<?php echo json_encode(' '.__('Is Mandatory'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> , "error");
                 return 1;
             }else{
                 return 0;
@@ -1957,7 +1957,7 @@ function addAdditionalCharges(){
     var additional_charge_id = $("#additional_charge_id").val();
     var additional_charge_amount = $("#additional_charge_amount").val();
     if (additional_charge_id === null || additional_charge_id =="" || additional_charge_amount =="" || additional_charge_amount =="0"){
-        $('#error_msg').text('*Please Re-Select Additional Charge/Enter Amount');
+        $('#error_msg').text(<?php echo json_encode('*'.__('Please Re-Select Additional Charge/Enter Amount'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     }else{
         $('#error_msg').text(' ');
         var additional_charge_amount = $("#additional_charge_amount").val();
@@ -2310,7 +2310,7 @@ function baseUOMConversion(seqid){
             error:function (){}
         });
     }else{
-        $('#baseuomtext_'+seqid).text('NA');
+        $('#baseuomtext_'+seqid).text(<?php echo json_encode(__('NA'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     }
 }
 function discountRestrictions(){
@@ -2357,14 +2357,14 @@ function clickToConvertproformaInvoicetoSalesInvoices(transaction_table, transac
                         tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','<?php echo $_SESSION['error_message'][3000]; ?>','');
                        window.location.href = window.location.href;
                     }else{
-                        $("#clickToConvertproformaInvoicetoSalesInvoicesid").html('<i class="text-white ti-layers"></i> Convert to Sales Invoice');
+                        $("#clickToConvertproformaInvoicetoSalesInvoicesid").html('<i class="text-white ti-layers"></i> <?= htmlspecialchars(__('Convert to Sales Invoice'), ENT_QUOTES, 'UTF-8'); ?>');
                         $("#clickToConvertproformaInvoicetoSalesInvoicesid").removeClass("disabled");
                     }
                 },
                 error:function (){}
             });
         } else {
-            $("#clickToConvertproformaInvoicetoSalesInvoicesid").html('<i class="text-white ti-layers"></i> Convert to Sales Invoice');
+            $("#clickToConvertproformaInvoicetoSalesInvoicesid").html('<i class="text-white ti-layers"></i> <?= htmlspecialchars(__('Convert to Sales Invoice'), ENT_QUOTES, 'UTF-8'); ?>');
             $("#clickToConvertproformaInvoicetoSalesInvoicesid").removeClass("disabled");
         }
     });
@@ -2417,7 +2417,7 @@ if($checktimeprint > 0){
             $stringdublicateitemname =implode(", ",$duplicateitemsary);
          ?>
             <div class="alert alert-info alert-dismissible">
-                <strong><?php echo $_SESSION['error_message']['9177']." <b>".$stringdublicateitemname."<b>   Please confirm"; ?> </strong>
+                <strong><?php echo $_SESSION['error_message']['9177']." <b>".$stringdublicateitemname."<b>   ".__('Please confirm').""; ?> </strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
             </div>
         <?php } ?>

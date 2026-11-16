@@ -75,22 +75,22 @@ foreach($application_roles as $rolesre){
 </div>
 <div class="card">
     <div class="card-header mb-3">
-        <h5>Invite Users</h5>
+        <h5><?= __('Invite Users'); ?></h5>
     </div>
     <form method="post">
         <div class="card-body m-l-50 m-r-50">
           <div class="row">
               <div class="col-lg-3">
-                <span class="form-label">First Name</span>
+                <span class="form-label"><?= __('First Name'); ?></span>
               </div>
               <div class="col-lg-3">
-                <span class="form-label">Last Name</span>
+                <span class="form-label"><?= __('Last Name'); ?></span>
               </div>
               <div class="col-lg-3">
-                <span class="form-label">Email Id</span>
+                <span class="form-label"><?= __('Email Id'); ?></span>
               </div>
               <div class="col-lg-2">
-                <span class="form-label">Role</span>
+                <span class="form-label"><?= __('Role'); ?></span>
               </div>
             </div>
             <div id="append_invitatiouser">
@@ -105,18 +105,18 @@ foreach($application_roles as $rolesre){
             ?>
               <div class="row" id="<?php echo $rowid; ?>">
 
-                <div class="col-lg-3"><input aria-label="First Name[]" type="text" class="form-control" name="first_name[]" required="" autocomplete="off" value="<?php echo $_GET['UFNAME']; ?>"><input type="hidden" name="user_type[]" value="1"></div>
+                <div class="col-lg-3"><input aria-label="<?= htmlspecialchars(__('First Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="first_name[]" required="" autocomplete="off" value="<?php echo $_GET['UFNAME']; ?>"><input type="hidden" name="user_type[]" value="1"></div>
 
-                <div class="col-lg-3"><input aria-label="Last Name[]" type="text" class="form-control" name="last_name[]" required="" autocomplete="off"></div>
+                <div class="col-lg-3"><input aria-label="<?= htmlspecialchars(__('Last Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="last_name[]" required="" autocomplete="off"></div>
 
                  <div class="col-lg-3">
-                  <input aria-label="User Email[]" type="text" class="form-control allemails checkEmailidAllReadyAvilableOrNot" name="user_email[]" data-errorcls="<?php echo $errorvendorrowid; ?>" data-errorcls1="validrepeateemailerror_<?php echo $errorvendorrowid; ?>" id="<?php echo $vendorrowid; ?>"  required="" >
-                  <span class="text-danger f-12 allemailerrer d-none" id="<?php echo $errorvendorrowid; ?>"  >Email Id Already Register</span>
-                   <span class="text-danger f-12 allemailerrer d-none" id="validrepeateemailerror_<?php echo $errorvendorrowid; ?>"  >Please Enter Valid Email Id</span>
+                  <input aria-label="<?= htmlspecialchars(__('User Email'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control allemails checkEmailidAllReadyAvilableOrNot" name="user_email[]" data-errorcls="<?php echo $errorvendorrowid; ?>" data-errorcls1="validrepeateemailerror_<?php echo $errorvendorrowid; ?>" id="<?php echo $vendorrowid; ?>"  required="" >
+                  <span class="text-danger f-12 allemailerrer d-none" id="<?php echo $errorvendorrowid; ?>"  ><?= __('Email Id Already Register'); ?></span>
+                   <span class="text-danger f-12 allemailerrer d-none" id="validrepeateemailerror_<?php echo $errorvendorrowid; ?>"  ><?= __('Please Enter Valid Email Id'); ?></span>
                 </div>
 
                 <div class="col-lg-2">
-                   <select aria-label="Role []"  class ="form-select js-example-basic-single" name="role_id[]" required="" >
+                   <select aria-label="<?= htmlspecialchars(__('Role'), ENT_QUOTES, 'UTF-8'); ?> []"  class ="form-select js-example-basic-single" name="role_id[]" required="" >
                       <?php foreach($module as $key=>$modulename){ ?>
                         <optgroup label="<?php echo $modulename; ?> ">
                         <?php foreach($roles[$key] as $rolesr){  ?>
@@ -127,7 +127,7 @@ foreach($application_roles as $rolesre){
                     </select>
                 </div>
                 <div class="col-lg-1">
-                  <i class="ti-trash text-danger removeOrganizationSetup" data-rowid='<?php echo $rowid; ?>' data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" ></i>
+                  <i class="ti-trash text-danger removeOrganizationSetup" data-rowid='<?php echo $rowid; ?>' data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>" ></i>
                 </div>
               </div>
           <?php $im++;
@@ -135,10 +135,10 @@ foreach($application_roles as $rolesre){
             </div>
 
 <div class="">
-               <button class="btn btn-info btn-round waves-effect waves-light col-lg-3 fw-bold mt-4 addMoreInvitation" id="addstatickRows" type="button">+ Add More Invite user</button>
+               <button class="btn btn-info btn-round waves-effect waves-light col-lg-3 fw-bold mt-4 addMoreInvitation" id="addstatickRows" type="button">+ <?= __('Add More Invite user'); ?></button>
            </div>
 <div class="">
-            <button class="btn btn-info btn-round waves-effect waves-light col-lg-2 mt-5 disabled" id="submituserbtn" name="submit_invite" type="submit" >Invite Users</button>
+            <button class="btn btn-info btn-round waves-effect waves-light col-lg-2 mt-5 disabled" id="submituserbtn" name="submit_invite" type="submit" ><?= __('Invite Users'); ?></button>
         </div>
     </div>
 </form>

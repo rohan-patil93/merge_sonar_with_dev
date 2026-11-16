@@ -40,12 +40,12 @@ function submitrom(){
           <?php if(count((array)$quotationlist) !=0 || count((array)$purchase_orderslist) !=0){ ?>
             swal({
                 title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                text: "Already Created documents",
+                text: <?php echo json_encode(__('Already Created documents'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 type: "info",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes",
-                cancelButtonText: "No",
+                confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 closeOnConfirm: true
             },
             function(){
@@ -58,7 +58,7 @@ function submitrom(){
 }
 
     function submistionsuccess(){
-        $("#statuspopupbtn").text("Please Wait........");
+        $("#statuspopupbtn").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         $("#statuspopupbtn").addClass("disabled");
         var  str = '';
           str = 'table='+$('#table').val()+'&new_table='+$('#field').val()+'&vender_id='+$('#kt_select2_41').val()+'&tranid='+$('#tranid').val()+'&hid='+$('#tranid').val()+'&tranid='+$('#tranid').val()+'&user_id='+$('#user_id').val()+'&allowitemid='+$("#allowitemid").val()+'&party_type='+$("#party_type").val();
@@ -82,15 +82,15 @@ function submitrom(){
                         window.location.replace("index.php?option=<?php echo $redirecturl; ?>");
                     });
                 }else{
-                    $("#statuspopupbtn").text("Submit");
+                    $("#statuspopupbtn").text(<?php echo json_encode(__('Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                     $("#statuspopupbtn").removeClass("disabled");
                     swal({
-                        title: "Oops...",
+                        title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         text: res.main_res.message,
                         type: "error",
                         showCancelButton: true,
                         showConfirmButton: false,
-                        cancelButtonText: "Ok",
+                        cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         confirmButtonClass: "btn-danger",
                         closeOnCancel: false
                     });
@@ -103,7 +103,7 @@ function submitrom(){
 
         <div class="modal-header">
             <h5 class="modal-title"><?php echo viewtitle($new_table); ?> </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
 
         <div class="modal-body" >
@@ -113,26 +113,26 @@ function submitrom(){
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                     <div class="form-group row" >
                         <div class="col-lg-6 w-full" <?php echo $table == "estimates"?"style='pointer-events: none; opacity: 0.7;'":""; ?>>
-                            <span>Customers</span>
-                            <select aria-label="Vender" class="form-control js-example-basic-multiple"  id="kt_select2_41" name="vender" multiple="multiple">
+                            <span><?= __('Customers'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Vender'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-multiple"  id="kt_select2_41" name="vender" multiple="multiple">
                                 <?php foreach ($vendors as $key => $cus) {  ?>
                                     <option  <?php if($selected_documents['party_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?> </option>
                                 <?php } ?>
                             </select>
                             <?php if(count((array)$quotationlist) !=0 || count((array)$purchase_orderslist) !=0){ ?>
-                            <span class="text-danger f-14">Already Created documents</span>
+                            <span class="text-danger f-14"><?= __('Already Created documents'); ?></span>
                             <?php } ?>
                         </div>
                     <div class="col-lg-6 ">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Enquiries</h5>
+                                <h5><?= __('Enquiries'); ?></h5>
                             </div>
 
                         <div class="card-body">
                             <table class="f-12" style="width: 100%;">
-                                <tr><th scope="col">Item</th><th scope="col" class="text-right">Order Qty</th> <th scope="col" class="text-right">Pending Qty</th></tr>
+                                <tr><th scope="col"><?= __('Item'); ?></th><th scope="col" class="text-right"><?= __('Order Qty'); ?></th> <th scope="col" class="text-right"><?= __('Pending Qty'); ?></th></tr>
                             <?php $btndisbale ="disabled"; foreach($requisitions as $qt_item){
                                 if($qt_item['pending_qty'] > 0){
                                     $btndisabled ="";
@@ -159,7 +159,7 @@ function submitrom(){
                             <div class="col-lg-6 ">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Estimates</h5>
+                                <h5><?= __('Estimates'); ?></h5>
                             </div>
                             <div class="card-body p-0">
                                 <div class="card-block accordion-block color-accordion-block">
@@ -192,7 +192,7 @@ function submitrom(){
                     <div class="col-lg-6 ">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Sales Orders</h5>
+                                <h5><?= __('Sales Orders'); ?></h5>
                             </div>
                             <div class="card-body">
                                 <div class="card-block accordion-block color-accordion-block">
@@ -224,26 +224,26 @@ function submitrom(){
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                     <div class="form-group row" >
                         <div class="col-lg-6 w-full" <?php echo $table == "quotations"?"style='pointer-events: none; opacity: 0.7;'":""; ?>>
-                            <span>Vendors</span>
-                            <select aria-label="Vender" class="form-control js-example-basic-multiple"  id="kt_select2_41_2" name="vender" multiple="multiple">
+                            <span><?= __('Vendors'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Vender'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-multiple"  id="kt_select2_41_2" name="vender" multiple="multiple">
                                 <?php foreach ($vendors as $key => $cus) {  ?>
                                     <option  <?php if($selected_documents['party_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?> </option>
                                 <?php } ?>
                             </select>
                             <?php if(count((array)$quotationlist) !=0 || count((array)$purchase_orderslist) !=0){ ?>
-                            <span class="text-danger f-14">Already Created documents</span>
+                            <span class="text-danger f-14"><?= __('Already Created documents'); ?></span>
                             <?php } ?>
                         </div>
                     <div class="col-lg-6 ">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Requisitions</h5>
+                                <h5><?= __('Requisitions'); ?></h5>
                             </div>
 
                         <div class="card-body">
                             <table class="f-12" style="width: 100%;">
-                                <tr><th scope="col">Item</th><th scope="col" class="text-right">Order Qty</th> <th scope="col" class="text-right">Pending Qty</th></tr>
+                                <tr><th scope="col"><?= __('Item'); ?></th><th scope="col" class="text-right"><?= __('Order Qty'); ?></th> <th scope="col" class="text-right"><?= __('Pending Qty'); ?></th></tr>
                             <?php $btndisbale ="disabled"; foreach($requisitions as $qt_item){
                                 if($qt_item['pending_qty'] > 0){
                                     $btndisbale ="";
@@ -269,7 +269,7 @@ function submitrom(){
                             <div class="col-lg-6 ">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Quotations</h5>
+                                <h5><?= __('Quotations'); ?></h5>
                             </div>
                             <div class="card-body p-0">
                                 <div class="card-block accordion-block color-accordion-block">
@@ -302,7 +302,7 @@ function submitrom(){
                     <div class="col-lg-6 ">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Purchase Orders</h5>
+                                <h5><?= __('Purchase Orders'); ?></h5>
                             </div>
                             <div class="card-body">
                                 <div class="card-block accordion-block color-accordion-block">
@@ -344,8 +344,8 @@ function submitrom(){
             <input type="hidden" name="user_id" id='user_id' value="<?php echo $_SESSION['userid']; ?>">
             <input type="hidden" name="party_type" id='party_type' value="<?php echo $_POST['party_type']; ?>">
 
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light <?php echo $btndisbale; ?>"  id="statuspopupbtn" onclick="submitrom()" >Submit</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light <?php echo $btndisbale; ?>"  id="statuspopupbtn" onclick="submitrom()" ><?= __('Submit'); ?></button>
         </div>
 
     </form>

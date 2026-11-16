@@ -43,19 +43,19 @@ if ($_GET['Rid']) {
                 <div class="form-group row">
                     <span class="col-sm-2 col-form-label"><?= __('Customer Name') ?></span>
                     <div class="col-sm-4">
-                        <input aria-label="Customer Name" type="text" class="form-control" name="customer_name" value="<?= htmlspecialchars($customerData['display_name']) ?>" readonly>
+                        <input aria-label="<?= htmlspecialchars(__('Customer Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="customer_name" value="<?= htmlspecialchars($customerData['display_name']) ?>" readonly>
                         <input type="hidden" name="customer_id" value="<?= $rid ?>">
                     </div>
                     <span class="col-sm-2 col-form-label"><?= __('Billing Month') ?></span>
                     <div class="col-sm-4">
-                        <input aria-label="Billing Month" type="month" class="form-control" name="billing_month" value="<?= $_GET['month'] ?>" readonly>
+                        <input aria-label="<?= htmlspecialchars(__('Billing Month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="billing_month" value="<?= $_GET['month'] ?>" readonly>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <span class="col-sm-2 col-form-label"><?= __('Total Working Days') ?></span>
                     <div class="col-sm-4">
-                        <input aria-label="Total Working Days" type="number" name="total_working_days" class="form-control" value="<?php echo $billingData['total_working_days'] ?? ''; ?>" required>
+                        <input aria-label="<?= htmlspecialchars(__('Total Working Days'), ENT_QUOTES, 'UTF-8'); ?>" type="number" name="total_working_days" class="form-control" value="<?php echo $billingData['total_working_days'] ?? ''; ?>" required>
                     </div>
                 </div>
 
@@ -79,12 +79,12 @@ if ($_GET['Rid']) {
                                         <input type="hidden" name="billing_details_id[]" value="<?= $row['id'] ?>">
                                         <td>
                                             <input type="hidden" name="emp_id[]" value="<?= $row['emp_id'] ?>">
-                                            <input aria-label="Emp Name[]" type="text" class="form-control" name="emp_name[]" value="<?= htmlspecialchars($row['emp_name']) ?>" readonly>
+                                            <input aria-label="<?= htmlspecialchars(__('Emp Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="emp_name[]" value="<?= htmlspecialchars($row['emp_name']) ?>" readonly>
                                         </td>
-                                        <td><input aria-label="Lop Days[]" type="number" name="lop_days[]" class="form-control" value="<?= $row['lop_days'] ?>" min="0" required></td>
-                                        <td><input aria-label="Customer Billing[]" type="number" step="0.01" name="customer_billing[]" class="form-control" value="<?= $row['customer_billing'] ?>" required></td>
-                                        <td><input aria-label="Actual Billing[]" type="number" step="0.01" name="actual_billing[]" class="form-control" value="<?= $row['actual_billing'] ?>" required></td>
-                                        <td><input aria-label="Client Pay[]" type="number" step="0.01" name="client_pay[]" class="form-control" value="<?= $row['client_pay'] ?>" required></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Lop Days'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" name="lop_days[]" class="form-control" value="<?= $row['lop_days'] ?>" min="0" required></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Customer Billing'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" step="0.01" name="customer_billing[]" class="form-control" value="<?= $row['customer_billing'] ?>" required></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Actual Billing'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" step="0.01" name="actual_billing[]" class="form-control" value="<?= $row['actual_billing'] ?>" required></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Client Pay'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" step="0.01" name="client_pay[]" class="form-control" value="<?= $row['client_pay'] ?>" required></td>
                                     </tr>
                             <?php } ?>
                             <?php } else {
@@ -95,12 +95,12 @@ if ($_GET['Rid']) {
                                     <tr>
                                         <td>
                                             <input type="hidden" name="emp_id[]" value="<?= $empId ?>">
-                                            <input aria-label="Emp Name[]" type="text" class="form-control" name="emp_name[]" value="<?= $empName ?>" readonly>
+                                            <input aria-label="<?= htmlspecialchars(__('Emp Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="emp_name[]" value="<?= $empName ?>" readonly>
                                         </td>
-                                        <td><input aria-label="Lop Days[]" type="number" name="lop_days[]" class="form-control" min="0" required></td>
-                                        <td><input aria-label="Customer Billing[]" type="number" step="0.01" name="customer_billing[]" class="form-control" required></td>
-                                        <td><input aria-label="Actual Billing[]" type="number" step="0.01" name="actual_billing[]" class="form-control" required></td>
-                                        <td><input aria-label="Client Pay[]" type="number" step="0.01" name="client_pay[]" class="form-control" required></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Lop Days'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" name="lop_days[]" class="form-control" min="0" required></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Customer Billing'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" step="0.01" name="customer_billing[]" class="form-control" required></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Actual Billing'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" step="0.01" name="actual_billing[]" class="form-control" required></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Client Pay'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" step="0.01" name="client_pay[]" class="form-control" required></td>
                                     </tr>
                                 <?php }
                             }  ?>
