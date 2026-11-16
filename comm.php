@@ -4411,13 +4411,18 @@ function __($input_label){
 	$input_label = trim((string)$input_label);
 	if(isset($_SESSION['application_language_translations']) && is_array($_SESSION['application_language_translations'])){
 		if(isset($_SESSION['application_language_translations'][$input_label]) && trim((string)$_SESSION['application_language_translations'][$input_label]) !== ''){
-			$input_label = $_SESSION['application_language_translations'][$input_label][$_SESSION['selected_application_languages']];
+			$translated_label = $_SESSION['application_language_translations'][$input_label][$_SESSION['selected_application_languages'] ?? ''] ?? '';
+			// an empty cell means this language has no translation yet: keep the English text instead of showing a blank label
+			if(trim((string)$translated_label) !== ''){
+				$input_label = $translated_label;
+			}
 		}else{
 			$dynamic_label = "";
 			$strtoary = explode(" ", $input_label);
 			foreach ($strtoary as $labvalue) {
 				if(isset($_SESSION['application_language_translations'][$labvalue]) && trim((string)$_SESSION['application_language_translations'][$labvalue]) !== ''){
-					$dynamic_label .= " ".$_SESSION['application_language_translations'][$labvalue][$_SESSION['selected_application_languages']];
+					$translated_word = $_SESSION['application_language_translations'][$labvalue][$_SESSION['selected_application_languages'] ?? ''] ?? '';
+					$dynamic_label .= " ".(trim((string)$translated_word) !== '' ? $translated_word : $labvalue);
 				}else{
 					$dynamic_label .= " ".$labvalue;
 				}

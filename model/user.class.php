@@ -338,7 +338,17 @@ class userClass{
 			$langtranquery = "SELECT ".$implodedfieldnamestr." FROM application_language_translations WHERE is_active = 0";
 			$langtranres = $callConfig->getAllRows($langtranquery);
 			foreach($langtranres as $langtr){
-				$application_language_translations[$langtr->$default_application_languages]= $langtr;
+				$translation_key = $langtr->$default_application_languages;
+				if(isset($application_language_translations[$translation_key])){
+					// duplicate English word: fill only the cells that are still empty
+					foreach($langtr as $translation_field => $translation_value){
+						if(trim((string)($application_language_translations[$translation_key]->$translation_field ?? '')) === '' && trim((string)$translation_value) !== ''){
+							$application_language_translations[$translation_key]->$translation_field = $translation_value;
+						}
+					}
+				}else{
+					$application_language_translations[$translation_key]= $langtr;
+				}
 			}
 		}
 		$return['default_application_languages'] = $default_application_languages;
