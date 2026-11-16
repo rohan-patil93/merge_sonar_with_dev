@@ -104,6 +104,12 @@ define("SAMEPARTNUMBERALLOWED", "Y");
 
 define('JWT_SECRET_KEY', 'infisuite_technologies_jwt_secret_key');
 define('JWT_ALGORITHM', 'HS256');
+
+define('DATA_ENCRYPTION_KEY', 'infisuite_technologies_secret_key');
+
+define('DATA_ENCRYPTION_ONOFF', 'Y'); // Y - yeas, N- No
+
+define('DATA_ENCRYPTION_TABLE_FIELDS',array('employees'=>array('adhar_no','passport','driving_licence','pan_number','pf_no','pf_uan','pran_no','esi_no','gosi_number'),'customers'=>array('phone','pan_no','gstin','customer_tax_reg_no','cst_reg_no'),'vendors'=>array('phone','mobile','tin_number','vat_number','bank_account_name','bank_name','bank_account_no','ifsc_code','bank_address','bank_post_code','bank_beneficiary_name','vendor_tax_reg_no','cst_reg_no','pan_no','gstin','duns_no','routing_wire_Code','swift_bic_code','iban_code','bank_query_person_name','bank_query_contact_no','bank_query_email_id','other_contact_information','company_registration_country','tan_number','msme_number'),'contracts'=>array('transaction_no', 'oem_registration_number', 'oem_distributor_name', 'start_date', 'end_date', 'contract_owner_name', 'contract_owner_email', 'contract_owner_number', 'rt_number', 'invoice_number'),'job_posting_candidates'=>array('candidate_phone')));
 ###################### Same Invoice Same sku/part number code Settings ##################################
 
 ###################### Default Accounts #################################
