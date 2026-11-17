@@ -28,7 +28,7 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
 ?>
 <script type="text/javascript">
      $(document).on('click', '#checkall1', function() {
-          alert('haii');
+          alert(<?php echo json_encode(__('haii'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
 
     });
      function chackd(e){
@@ -52,7 +52,7 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
     <?php if($content !=''){ ?>
   <div class="alert alert-warning alert-dismissible">
       <strong><?php echo $content; ?></strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
   </div>
         <?php } ?>
 
@@ -60,11 +60,11 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
 
 
                                             <div class="card-header">
-    <h5>Stock Transfer</h5>
+    <h5><?= __('Stock Transfer'); ?></h5>
     <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
     </div>
 </div>
@@ -73,9 +73,9 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
 <form class="kt-form kt-form--fit kt-margin-b-20" action="" method="post">
     <div class="row kt-margin-b-20">
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-            <span class="form-label"><?php echo "Location"; ?>:</span>
-            <select aria-label="Vendor" class="form-control form-select js-example-basic-single" id="kt_select2_41" name="vendor_id">
-                <option value=""> All Location </option>
+            <span class="form-label"><?php echo __("Location"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_41" name="vendor_id">
+                <option value=""> <?= __('All Location'); ?> </option>
                 <?php foreach($datalocation as $location){ ?>
                 <option  <?php if($ress['vendor_id'] == $location['id'] ){ ?> selected <?php
 } ?> value="<?php echo $location['id']; ?>"><?php echo $location['location_description']; ?></option>
@@ -84,9 +84,9 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
             </select>
         </div>
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-            <span class="form-label"><?php echo "Item Category"; ?>:</span>
-            <select aria-label="Category" class="form-control form-select js-example-basic-single" id="kt_select2_42" name="category_id">
-                <option value=""> All Categories </option>
+            <span class="form-label"><?php echo __("Item Category"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_42" name="category_id">
+                <option value=""> <?= __('All Categories'); ?> </option>
                 <?php foreach($datacat as $selectcat){ ?>
                 <option  <?php if($ress['category_id'] == $selectcat['id'] ){ ?> selected <?php
 } ?> value="<?php echo $selectcat['id']; ?>"><?php echo $selectcat['category_description']; ?></option>
@@ -94,9 +94,9 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
             </select>
         </div>
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-            <span class="form-label"><?php echo "Cost Center"; ?>:</span>
-            <select aria-label="Cost Center" class="form-control form-select js-example-basic-single" id="kt_select2_43" name="cost_center_id">
-                <option value=""> All Cost Center </option>
+            <span class="form-label"><?php echo __("Cost Center"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Cost Center'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_43" name="cost_center_id">
+                <option value=""> <?= __('All Cost Center'); ?> </option>
                 <?php foreach($datacost as $selectcost){ ?>
                 <option   <?php if($ress['cost_center_id'] == $selectcost['id'] ){ ?> selected <?php
 } ?> value="<?php echo $selectcost['id']; ?>"><?php echo $selectcost['cost_center_name']; ?></option>
@@ -108,11 +108,11 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
 
             <div class="row">
                 <div class="col-lg-6">
-                    <span class="form-label">Start Date</span>
-                <input aria-label="From" type="date" class="form-control kt-input" name="from" placeholder="From" data-col-index="5" />
+                    <span class="form-label"><?= __('Start Date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control kt-input" name="from" placeholder="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" data-col-index="5" />
                 </div><div class="col-lg-6">
-<span class="form-label">End Date</span>
-                <input aria-label="To" type="date" class="form-control kt-input" name="to" placeholder="To" data-col-index="5" />
+<span class="form-label"><?= __('End Date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control kt-input" name="to" placeholder="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" data-col-index="5" />
             </div>
         </div>
         </div>
@@ -126,14 +126,14 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
             <button class="btn btn-primary btn-brand--icon" id="kt_search">
                 <span>
                     <i class="la la-search"></i>
-                    <span>Search</span>
+                    <span><?= __('Search'); ?></span>
                 </span>
             </button>
             &nbsp;&nbsp;
             <button class="btn btn-secondary btn-secondary--icon" id="kt_reset">
                 <span>
                     <i class="la la-close"></i>
-                    <span>Reset</span>
+                    <span><?= __('Reset'); ?></span>
                 </span>
             </button>
         </div>
@@ -147,13 +147,13 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
             <thead>
                 <tr>
 
-                    <th scope="col">ID</th>
-                    <th scope="col">Transaction Number</th>
-                    <th scope="col">Transaction Date</th>
-                    <th scope="col">Transfer Location</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Genrate Stock Return</th>
-                    <th scope="col">Quality Check</th>
+                    <th scope="col"><?= __('ID'); ?></th>
+                    <th scope="col"><?= __('Transaction Number'); ?></th>
+                    <th scope="col"><?= __('Transaction Date'); ?></th>
+                    <th scope="col"><?= __('Transfer Location'); ?></th>
+                    <th scope="col"><?= __('Total'); ?></th>
+                    <th scope="col"><?= __('Genrate Stock Return'); ?></th>
+                    <th scope="col"><?= __('Quality Check'); ?></th>
 
                 </tr>
             </thead>
@@ -172,13 +172,13 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
                     <td>
                         <a  target="_blank" href="<?php echo $grrn_row; ?>" >
                         <button class="btn btn-info btn-brand--icon" id="kt_search_2">
-                            <span>Genrate Stock Transfer</span>
+                            <span><?= __('Genrate Stock Transfer'); ?></span>
                         </button></a>
                     </td>
                     <td>
                         <a  target="_blank" href="<?php echo $grrn_row; ?>" >
                         <button class="btn btn-info btn-brand--icon" id="kt_search_3">
-                            <span>Genrate Stock Transfer</span>
+                            <span><?= __('Genrate Stock Transfer'); ?></span>
                         </button></a>
                     </td>
                 </tr>

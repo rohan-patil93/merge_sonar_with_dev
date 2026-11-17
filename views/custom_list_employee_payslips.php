@@ -36,21 +36,21 @@ if(empty($_SESSION['is_data']['pay_area_config'])){
                             <div class="col-lg-3">
                             <div class="col bg-light-primary ">
                                 <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-                                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['pay_area_config']['display_logo'] : $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                                    <img class="img-fluid img-120" src="uploads/all/<?php echo $_SESSION['is_data']['pay_area_config'] == 1 ? $_SESSION['pay_area_config']['display_logo'] : $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                                 </span>
                                 <span class="text-dark-75 font-weight-bolder font-size-h3"><?php echo $company_name; ?></span>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <h4 class="card-label text-center f-w-700"><?php echo $title; ?> <?php echo date("M Y",strtotime($pay_month_year)); ?> </br><small class="f-10">Name : <?php echo $_SESSION['display_name']; ?> | |  Date & Time : <?php echo date("d-m-Y H:i:s"); ?></small></h4>
+                            <h4 class="card-label text-center f-w-700"><?php echo $title; ?> <?php echo date("M Y",strtotime($pay_month_year)); ?> </br><small class="f-10"><?= __('Name'); ?> : <?php echo $_SESSION['display_name']; ?> <?= htmlspecialchars(__('| | Date & Time'), ENT_QUOTES, 'UTF-8'); ?> : <?php echo date("d-m-Y H:i:s"); ?></small></h4>
 
                         </div>
                         <div class="col-lg-3">
                             <form method="post" action="#">
                                 <div class="input-group input-group-button">
-                                    <input aria-label="Pay Month Year" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input"  class="form-control form-control-sm width1" style="font-size: 18px;height: 48px !important;padding: 10px 15px;">
+                                    <input aria-label="<?= htmlspecialchars(__('Pay Month Year'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input"  class="form-control form-control-sm width1" style="font-size: 18px;height: 48px !important;padding: 10px 15px;">
                                     <button type="submit" name="get_ecr_summary" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                                        Submit
+                                        <?= __('Submit'); ?>
                                     </button> </div>
                                 </form>
                             </div>
@@ -61,18 +61,18 @@ if(empty($_SESSION['is_data']['pay_area_config'])){
                     <table id="basic-btn" class="table table-striped table-bordered nowrap">
                         <thead>
                         <tr role="row" style="background-color: #f7f7f7;">
-                            <th scope="col">Employee Id</th>
-                            <th scope="col">Employee Code</th>
-                            <th scope="col">Employee Name</th>
-                            <th scope="col">Date Of Joining</th>
-                            <th scope="col">Date of Leaving</th>
-                            <th scope="col">Number of Working Days</th>
+                            <th scope="col"><?= __('Employee Id'); ?></th>
+                            <th scope="col"><?= __('Employee Code'); ?></th>
+                            <th scope="col"><?= __('Employee Name'); ?></th>
+                            <th scope="col"><?= __('Date Of Joining'); ?></th>
+                            <th scope="col"><?= __('Date of Leaving'); ?></th>
+                            <th scope="col"><?= __('Number of Working Days'); ?></th>
 
-                            <th scope="col">Total Gross</th>
-                            <th scope="col">Total Deductions</th>
-                            <th scope="col">Net Payable</th>
-                            <th scope="col">View Details</th>
-                            <th scope="col">View Payslip</th>
+                            <th scope="col"><?= __('Total Gross'); ?></th>
+                            <th scope="col"><?= __('Total Deductions'); ?></th>
+                            <th scope="col"><?= __('Net Payable'); ?></th>
+                            <th scope="col"><?= __('View Details'); ?></th>
+                            <th scope="col"><?= __('View Payslip'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,10 +89,10 @@ if(empty($_SESSION['is_data']['pay_area_config'])){
                                     <th scope="col" style="text-align: right;"><?php echo $pys_data['deduction_amount']; ?></th>
                                     <th scope="col" style="text-align: right;"><?php echo $pys_data['net']; ?></th>
 
-                                    <th scope="col"><a href="index.php?option=COM_INSERT_ONBOARDING_EMPLOYEES?Rid=empid:<?php echo $pys_data['employee_id']; ?>"  class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Employee Details" target="_blank"><i class="flaticon-eye"> </i> </a></th>
+                                    <th scope="col"><a href="index.php?option=COM_INSERT_ONBOARDING_EMPLOYEES?Rid=empid:<?php echo $pys_data['employee_id']; ?>"  class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" target="_blank"><i class="flaticon-eye"> </i> </a></th>
                                     <th scope="col">
 
-<a class="btn btn-primary waves-effect waves-light" href="index.php?option=COM_LIST_PAYSLIP_TEMPLATE3&month=<?php echo $pay_month;?>&year=<?php echo $pay_year;?>&employe_id=<?php echo $pys_data['employee_id']; ?>" target="_blank">Payslip</a>
+<a class="btn btn-primary waves-effect waves-light" href="index.php?option=COM_LIST_PAYSLIP_TEMPLATE3&month=<?php echo $pay_month;?>&year=<?php echo $pay_year;?>&employe_id=<?php echo $pys_data['employee_id']; ?>" target="_blank"><?= __('Payslip'); ?></a>
 
                                         </div>
                                     </th>

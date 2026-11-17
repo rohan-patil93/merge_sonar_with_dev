@@ -9,8 +9,8 @@
  <script type="text/javascript" src="assets/bower_components/jquery/js/jquery.min.js"></script>
  <div class="row mt-3">
    <div class="col-lg-7 col-md-12 col-sm-12 col-12">
-     <h3 class="f-w-600 mb-0">Payroll Dashboard</h3>
-     <p>Overview of payroll operations and compliance</p>
+     <h3 class="f-w-600 mb-0"><?= __('Payroll Dashboard'); ?></h3>
+     <p><?= __('Overview of payroll operations and compliance'); ?></p>
    </div>
 
  </div>
@@ -23,7 +23,7 @@
              <i class="far fa-user f-24 text-primary"></i>
            </span>
            <div class="d-inline-block">
-             <span class="f-12 f-w-600">Employees in Payroll</span>
+             <span class="f-12 f-w-600"><?= __('Employees in Payroll'); ?></span>
              <h4 class="f-28 f-w-600"><?php echo $data['total_employees'] ?? 0; ?></h4>
              <i class="ti-arrow-up f-14 text-primary f-w-600"></i>
              <span class="f-14 text-dark f-w-600"> <?php echo $data['detail']['month'] . ' - ' . $data['detail']['year']; ?></span>
@@ -40,7 +40,7 @@
              <i class="fas fa-rupee-sign f-24 text-success"></i>
            </span>
            <div class="d-inline-block">
-             <span class="f-12 f-w-600">Gross Payroll (₹)</span>
+             <span class="f-12 f-w-600"><?= __('Gross Payroll (₹)'); ?></span>
              <h4 class="f-28 f-w-600">₹ <?php echo $data['gross_payroll'] ?? 0; ?></h4>
              <i class="ti-arrow-up f-14 text-primary f-w-600"></i>
              <span class="f-14 text-dark f-w-600"> <?php echo $data['detail']['month'] . ' - ' . $data['detail']['year']; ?></span>
@@ -74,7 +74,7 @@
              <i class="fas fa-briefcase f-24 text-danger"></i>
            </span>
            <div class="d-inline-block">
-             <span class="f-12 f-w-600">Total Deductions (*)</span>
+             <span class="f-12 f-w-600"><?= __('Total Deductions (*)'); ?></span>
              <h4 class="f-28 f-w-600">₹ <?php echo $data['total_deductions'] ?? 0; ?></h4>
              <i class="ti-arrow-up f-14 text-primary f-w-600"></i>
              <span class="f-14 text-dark f-w-600"> <?php echo $data['detail']['month'] . ' - ' . $data['detail']['year']; ?></span>
@@ -91,9 +91,9 @@
              <i class="far fa-clock f-24 text-warning"></i>
            </span>
            <div class="d-inline-block">
-             <span class="f-12 f-w-600">Pending Approvals</span>
+             <span class="f-12 f-w-600"><?= __('Pending Approvals'); ?></span>
              <h4 class="f-28 f-w-600">0</h4>
-             <span class="f-14 f-w-600">Requires your action</span>
+             <span class="f-14 f-w-600"><?= __('Requires your action'); ?></span>
            </div>
          </div>
        </div>
@@ -118,7 +118,7 @@
      <div class="card">
        <div class="card-body">
          <div class="d-flex justify-content-between align-items-center">
-           <h3 class="f-20 f-w-600">Payroll Run Status <span class="f-10">(May 20XX)</span></h3>
+           <h3 class="f-20 f-w-600"><?= __('Payroll Run Status'); ?> <span class="f-10"><?= __('(May 20XX)'); ?></span></h3>
          </div>
          <div class="main-box mt-4">
            <!-- STEPS -->
@@ -126,21 +126,21 @@
 
              <div class="step completed">
                <div class="circle"><i class="fa fa-check"></i></div>
-               <h4>Attendance Locked</h4>
-               <p>09 May 20XX</p>
+               <h4><?= __('Attendance Locked'); ?></h4>
+               <p><?= __('09 May 20XX'); ?></p>
              </div>
 
              <div class="step completed">
                <div class="circle"><i class="fa fa-check"></i></div>
-               <h4>Payroll Processed</h4>
-               <p>10 May 20XX</p>
+               <h4><?= __('Payroll Processed'); ?></h4>
+               <p><?= __('10 May 20XX'); ?></p>
              </div>
 
              <div class="step <?php echo ($show_data_all == 'Y') ? 'completed' : 'active'; ?>">
                <div class="circle">
                  <?php echo ($show_data_all == 'Y') ? '<i class="fa fa-check"></i>' : '3'; ?>
                </div>
-               <h4>Review & Approvals</h4>
+               <h4><?= htmlspecialchars(__('Review & Approvals'), ENT_QUOTES, 'UTF-8'); ?></h4>
                <p><?php echo ($show_data_all == 'Y') ? 'Completed' : 'In Progress'; ?></p>
              </div>
 
@@ -148,7 +148,7 @@
                <div class="circle">
                  <?php echo ($show_data_all == 'Y') ? '<i class="fa fa-check"></i>' : '4'; ?>
                </div>
-               <h4>Payslips Generation</h4>
+               <h4><?= __('Payslips Generation'); ?></h4>
                <p><?php echo ($show_data_all == 'Y') ? 'Completed' : '12 May 20XX'; ?></p>
              </div>
 
@@ -156,7 +156,7 @@
                <div class="circle">
                  <?php echo ($show_data_all == 'Y') ? '<i class="fa fa-check"></i>' : '5'; ?>
                </div>
-               <h4>Bank Transfer</h4>
+               <h4><?= __('Bank Transfer'); ?></h4>
                <p><?php echo ($show_data_all == 'Y') ? 'Completed' : '13 May 20XX'; ?></p>
              </div>
 
@@ -164,7 +164,7 @@
                <div class="circle">
                  <?php echo ($show_data_all == 'Y') ? '<i class="fa fa-check"></i>' : '6'; ?>
                </div>
-               <h4>Statutory Filing</h4>
+               <h4><?= __('Statutory Filing'); ?></h4>
                <p><?php echo ($show_data_all == 'Y') ? 'Completed' : '15 May 20XX'; ?></p>
              </div>
 
@@ -172,7 +172,7 @@
            <!-- CONTENT -->
            <div class="content-box mb-4">
              <div class="left-content">
-               <span>Current Status</span>
+               <span><?= __('Current Status'); ?></span>
                <h2><?php echo $statusTitle; ?></h2>
                <p><?php echo $statusDesc; ?></p>
              </div>
@@ -190,7 +190,7 @@
      <div class="card my-tasks">
        <div class="card-body">
          <div class="d-flex justify-content-between align-items-center">
-           <h3 class="f-20 f-w-600">Payroll Summary <span class="f-10">(May 20XX)</span></h3>
+           <h3 class="f-20 f-w-600"><?= __('Payroll Summary'); ?> <span class="f-10"><?= __('(May 20XX)'); ?></span></h3>
          </div>
          <div class="table-responsive mt-1 height-380">
            <?php
@@ -213,7 +213,7 @@
      <div class="card upcoming-events">
        <div class="card-body">
          <div class="d-flex justify-content-between align-items-center">
-           <h3 class="f-20 f-w-600">Pending Actions</h3>
+           <h3 class="f-20 f-w-600"><?= __('Pending Actions'); ?></h3>
          </div>
          <div class="table-responsive mt-1 height-360">
            <table class="table table-borderless table-sm align-middle pedding-approvals" role="presentation">
@@ -223,7 +223,7 @@
                    <i class="fa fa-calculator f-16 text-success f-w-600"></i>
                  </span>
                </td>
-               <td class="f-12 f-w-600">Reimbursements</td>
+               <td class="f-12 f-w-600"><?= __('Reimbursements'); ?></td>
                <td>
                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">5
                  </span>
@@ -235,7 +235,7 @@
                    <i class="fa fa-calculator f-16 text-danger f-w-600"></i>
                  </span>
                </td>
-               <td class="f-12 f-w-600">Full & Final Settlements</td>
+               <td class="f-12 f-w-600"><?= htmlspecialchars(__('Full & Final Settlements'), ENT_QUOTES, 'UTF-8'); ?></td>
                <td>
                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">3
                  </span>
@@ -247,7 +247,7 @@
                    <i class="fa fa-calculator f-16 text-success f-w-600"></i>
                  </span>
                </td>
-               <td class="f-12 f-w-600">Variable Pay / Bonus</td>
+               <td class="f-12 f-w-600"><?= __('Variable Pay / Bonus'); ?></td>
                <td>
                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">2
                  </span>
@@ -259,7 +259,7 @@
                    <i class="fa fa-calculator f-16 text-primary f-w-600"></i>
                  </span>
                </td>
-               <td class="f-12 f-w-600">Payroll Approvals</td>
+               <td class="f-12 f-w-600"><?= __('Payroll Approvals'); ?></td>
                <td>
                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">6
                  </span>
@@ -271,7 +271,7 @@
                    <i class="fa fa-calculator f-16 text-purple f-w-600"></i>
                  </span>
                </td>
-               <td class="f-12 f-w-600">Loan / Advances</td>
+               <td class="f-12 f-w-600"><?= __('Loan / Advances'); ?></td>
                <td>
                  <span class="img-40 b-radius-15 bg-yellow-50 text-warning f-14 f-w-600 p-2 text-center">2
                  </span>
@@ -287,7 +287,7 @@
      <div class="card my-payslips">
        <div class="card-body mb-4">
          <div class="d-flex justify-content-between align-items-center">
-           <h3 class="f-20 f-w-600">Statutory Compliance <span class="f-10">(May 20XX)</span></h3>
+           <h3 class="f-20 f-w-600"><?= __('Statutory Compliance'); ?> <span class="f-10"><?= __('(May 20XX)'); ?></span></h3>
          </div>
          <div class="table-responsive mt-3 height-290">
            <?php
@@ -301,49 +301,49 @@
 
            <table class="table table-sm align-middle pedding-approvals f-12">
              <tr>
-               <th scope="col">Component</th>
-               <th scope="col">Amount (₹)</th>
-               <th scope="col">Status</th>
-               <th scope="col">Due Date</th>
-               <th scope="col">Paid On</th>
+               <th scope="col"><?= __('Component'); ?></th>
+               <th scope="col"><?= __('Amount (₹)'); ?></th>
+               <th scope="col"><?= __('Status'); ?></th>
+               <th scope="col"><?= __('Due Date'); ?></th>
+               <th scope="col"><?= __('Paid On'); ?></th>
              </tr>
 
              <tr>
-               <th scope="col">Provident Fund (PF)</th>
+               <th scope="col"><?= __('Provident Fund (PF)'); ?></th>
                <td>₹ <?php echo number_format($components['PF'] ?? 0, 2); ?></td>
-               <td><span class="form-label label label-success">Paid</span></td>
+               <td><span class="form-label label label-success"><?= __('Paid'); ?></span></td>
                <td>-</td>
                <td>-</td>
              </tr>
 
              <tr>
-               <th scope="col">ESI</th>
+               <th scope="col"><?= __('ESI'); ?></th>
                <td>₹ <?php echo number_format($components['ESI'] ?? 0, 2); ?></td>
-               <td><span class="form-label label label-success">Paid</span></td>
+               <td><span class="form-label label label-success"><?= __('Paid'); ?></span></td>
                <td>-</td>
                <td>-</td>
              </tr>
 
              <tr>
-               <th scope="col">Professional Tax (PT)</th>
+               <th scope="col"><?= __('Professional Tax (PT)'); ?></th>
                <td>₹ <?php echo number_format($components['PT'] ?? 0, 2); ?></td>
-               <td><span class="form-label label label-success">Paid</span></td>
+               <td><span class="form-label label label-success"><?= __('Paid'); ?></span></td>
                <td>-</td>
                <td>-</td>
              </tr>
 
              <tr>
-               <th scope="col">TDS</th>
+               <th scope="col"><?= __('TDS'); ?></th>
                <td>₹ <?php echo number_format($components['TDS'] ?? 0, 2); ?></td>
-               <td><span class="form-label label label-success">Paid</span></td>
+               <td><span class="form-label label label-success"><?= __('Paid'); ?></span></td>
                <td>-</td>
                <td>-</td>
              </tr>
 
              <tr>
-               <th scope="col">Gratuity</th>
+               <th scope="col"><?= __('Gratuity'); ?></th>
                <td>₹ <?php echo number_format($components['GRATUITY'] ?? 0, 2); ?></td>
-               <td><span class="form-label label label-success">Paid</span></td>
+               <td><span class="form-label label label-success"><?= __('Paid'); ?></span></td>
                <td>-</td>
                <td>-</td>
              </tr>
@@ -356,7 +356,7 @@
      <div class="card my-payslips">
        <div class="card-body">
          <div class="d-flex justify-content-between align-items-center">
-           <h3 class="f-20 f-w-600">Earnings vs Deductions Trend</h3>
+           <h3 class="f-20 f-w-600"><?= __('Earnings vs Deductions Trend'); ?></h3>
          </div>
          <?php
 $allSummary = $data['all_summary'] ?? [];
@@ -451,7 +451,7 @@ $(document).ready(function() {
      <div class="card">
        <div class="card-body">
          <div class="d-flex justify-content-between align-items-center">
-           <h3 class="f-20 f-w-600">Payroll Reports</h3>
+           <h3 class="f-20 f-w-600"><?= __('Payroll Reports'); ?></h3>
          </div>
          <div class="table-responsive mt-2 height-290">
            <table class="table table-borderless table-sm align-middle payroll-reports mb-0" role="presentation">
@@ -464,7 +464,7 @@ $(document).ready(function() {
                </td>
                <td class="f-12 f-w-600">
                  <a href="index.php?option=COM_VIEW_EMPLOYEE_CTC_REPORT" class="text-dark">
-                   Employee's CTC Summary
+                   <?= __('Employee\'s CTC Summary'); ?>
                  </a>
                </td>
                <td>
@@ -482,7 +482,7 @@ $(document).ready(function() {
                </td>
                <td class="f-12 f-w-600">
                  <a href="index.php?option=COM_VIEW_EPF_ECR_REPORT" class="text-dark">
-                   EPF ECR Summary
+                   <?= __('EPF ECR Summary'); ?>
                  </a>
                </td>
                <td>
@@ -500,7 +500,7 @@ $(document).ready(function() {
                </td>
                <td class="f-12 f-w-600">
                  <a href="index.php?option=COM_VIEW_EPF_SUMMARY" class="text-dark">
-                   EPF Summary
+                   <?= __('EPF Summary'); ?>
                  </a>
                </td>
                <td>
@@ -518,7 +518,7 @@ $(document).ready(function() {
                </td>
                <td class="f-12 f-w-600">
                  <a href="index.php?option=COM_VIEW_ESI_SUMMARY" class="text-dark">
-                   ESI Summary
+                   <?= __('ESI Summary'); ?>
                  </a>
                </td>
                <td>
@@ -536,7 +536,7 @@ $(document).ready(function() {
                </td>
                <td class="f-12 f-w-600">
                  <a href="index.php?option=COM_VIEW_PT_SUMMARY" class="text-dark">
-                   Professional Tax Summary
+                   <?= __('Professional Tax Summary'); ?>
                  </a>
                </td>
                <td>
@@ -556,7 +556,7 @@ $(document).ready(function() {
      <div class="card my-payslips">
        <div class="card-body">
          <div class="d-flex justify-content-between align-items-center">
-           <h3 class="f-20 f-w-600">Recent Payroll Runs</h3>
+           <h3 class="f-20 f-w-600"><?= __('Recent Payroll Runs'); ?></h3>
          </div>
          <div class="table-responsive mt-4 height-250">
            <?php
@@ -565,11 +565,11 @@ $(document).ready(function() {
 
            <table class="table table-sm align-middle pedding-approvals f-12">
              <tr>
-               <th scope="col">Payroll Month</th>
-               <th scope="col">Employees</th>
-               <th scope="col">Gross Payroll (₹)</th>
-               <th scope="col">Net Payroll (₹)</th>
-               <th scope="col">Status</th>
+               <th scope="col"><?= __('Payroll Month'); ?></th>
+               <th scope="col"><?= __('Employees'); ?></th>
+               <th scope="col"><?= __('Gross Payroll (₹)'); ?></th>
+               <th scope="col"><?= __('Net Payroll (₹)'); ?></th>
+               <th scope="col"><?= __('Status'); ?></th>
              </tr>
 
              <?php foreach ($allSummary as $row) { ?>
@@ -578,7 +578,7 @@ $(document).ready(function() {
                  <td><?php echo $row['employee_count'] ?? 0; ?></td>
                  <td>₹ <?php echo number_format($row['gross_salary'] ?? 0, 2); ?></td>
                  <td>₹ <?php echo number_format($row['net_payable'] ?? 0, 2); ?></td>
-                 <td><span class="form-label label label-success">Completed</span></td>
+                 <td><span class="form-label label label-success"><?= __('Completed'); ?></span></td>
                </tr>
              <?php } ?>
            </table>
@@ -591,7 +591,7 @@ $(document).ready(function() {
      <div class="card">
        <div class="card-body">
          <div class="d-flex justify-content-between align-items-center">
-           <h3 class="f-20 f-w-600">Important Announcements</h3>
+           <h3 class="f-20 f-w-600"><?= __('Important Announcements'); ?></h3>
          </div>
          <div class="table-responsive mt-3 height-250">
            <table class="table table-borderless table-sm align-middle payroll-reports mb-0 f-12" role="presentation">
@@ -602,10 +602,10 @@ $(document).ready(function() {
                  </span>
                </td>
                <td>
-                 <h6 class="m-0 f-14">3 Probation confirmations pending</h6>
-                 <p class="p-0 f-12 text-muted">Review and confirm</p>
+                 <h6 class="m-0 f-14"><?= __('3 Probation confirmations pending'); ?></h6>
+                 <p class="p-0 f-12 text-muted"><?= __('Review and confirm'); ?></p>
                </td>
-               <td class="text-primary f-w-600">View</td>
+               <td class="text-primary f-w-600"><?= __('View'); ?></td>
              </tr>
              <tr>
                <td>
@@ -614,10 +614,10 @@ $(document).ready(function() {
                  </span>
                </td>
                <td>
-                 <h6 class="m-0 f-14">5 Attendance regularizations pending</h6>
-                 <p class="p-0 f-12 text-muted">Review and approve</p>
+                 <h6 class="m-0 f-14"><?= __('5 Attendance regularizations pending'); ?></h6>
+                 <p class="p-0 f-12 text-muted"><?= __('Review and approve'); ?></p>
                </td>
-               <td class="text-primary f-w-600">View</td>
+               <td class="text-primary f-w-600"><?= __('View'); ?></td>
              </tr>
              <tr>
                <td>
@@ -626,10 +626,10 @@ $(document).ready(function() {
                  </span>
                </td>
                <td class="f-12">
-                 <h6 class="m-0 f-14">2 Documents expiring this month</h6>
-                 <p class="p-0 f-12 text-muted">Take necessary action</p>
+                 <h6 class="m-0 f-14"><?= __('2 Documents expiring this month'); ?></h6>
+                 <p class="p-0 f-12 text-muted"><?= __('Take necessary action'); ?></p>
                </td>
-               <td class="text-primary f-w-600">View</td>
+               <td class="text-primary f-w-600"><?= __('View'); ?></td>
              </tr>
            </table>
          </div>

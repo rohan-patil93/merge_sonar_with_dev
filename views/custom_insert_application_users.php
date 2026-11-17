@@ -123,7 +123,7 @@ $countriesres   = json_decode($countriesres,1);
 	<?php if($error_message !=''){ ?>
 		<div class="alert alert-danger background-danger alert-dismissible">
 			<strong><?php echo $error_message; ?></strong>
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 		</div>
 	<?php } ?>
 	<div class="card-header table-card-header">
@@ -132,7 +132,7 @@ $countriesres   = json_decode($countriesres,1);
 		<div class="card-header-right table-card-header ">
 			<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 				<i class="icofont icofont-reply"></i>
-				Back
+				<?= __('Back'); ?>
 			</a>
 		</div>
 		<?php } ?>
@@ -157,12 +157,12 @@ $countriesres   = json_decode($countriesres,1);
 							<div class="form-group col-lg-4">
 								<label for="user_email" class=""><?= __('User Email') ?></label>
 								<input class="form-control" type="text" id="user_email" name="user_email" value="<?php echo $application_users['user_email']; ?>"  <?php echo $rid!=""?"readonly":""; ?> required>
-								<div style="display: none;color: red;" id="user_email_err"> Please enter User Email </div>
+								<div style="display: none;color: red;" id="user_email_err"> <?= __('Please enter User Email'); ?> </div>
 							</div>
 							<div class="form-group col-lg-4">
 								<label for="user_mobile" class=""><?= __('User Mobile') ?></label>
 								<input class="form-control" type="text" id="user_mobile" name="user_mobile" value="<?php echo $application_users['user_mobile']; ?>">
-								<div style="display: none;color: red;" id="user_mobile_err"> Please enter User Mobile </div>
+								<div style="display: none;color: red;" id="user_mobile_err"> <?= __('Please enter User Mobile'); ?> </div>
 							</div>
 							<?php $disablerole= "";
 							if($application_users['id'] == $_SESSION['userid']){
@@ -190,7 +190,7 @@ $countriesres   = json_decode($countriesres,1);
 							<div class="form-group col-lg-4">
 								<label for="fld_country_id"><?= __('Country') ?></label>
 								<select id="fld_country_id" class="form-select js-example-basic-single"  name="country_id">
-									<option value="" > Select Any One Country</option>
+									<option value="" > <?= __('Select Any One Country'); ?></option>
 									<?php foreach($countriesres as $countries){ ?>
 										<option value="<?php echo  $countries['id']; ?>" <?php echo $application_users['country_id'] == $countries['id']?"selected":""; ?>> <?php echo  $countries['country_name']; ?> </option>
 									<?php } ?>
@@ -199,7 +199,7 @@ $countriesres   = json_decode($countriesres,1);
 							<div class="form-group col-lg-4">
 								<label for="fld_location_id"><?= __('Location') ?></label>
 								<select id="fld_location_id" class="form-select js-example-basic-single"  name="location_id">
-									<option value="" > Select Any one Location</option>
+									<option value="" > <?= __('Select Any one Location'); ?></option>
 									<?php foreach($locations as $location){ ?>
 										<option value="<?php echo  $location['id']; ?>" <?php echo $application_users['location_id'] == $location['id']?"selected":""; ?>> <?php echo  $location['location_name']; ?> </option>
 									<?php } ?>
@@ -220,14 +220,14 @@ $countriesres   = json_decode($countriesres,1);
 			<div class="form-group col-lg-4">
 				<label for="fld_date_format" class="form-label"><?= __('Date Format') ?></label>
 				<select id="fld_date_format" class="form-select js-example-basic-single"  name="date_format">
-			    <option value="">Select Any One </option>
+			    <option value=""><?= __('Select Any One'); ?> </option>
 			    <?php foreach($dateformatlist as $valuedates) { ?>
 			      <option value="<?php echo $valuedates;?>"><?php echo $valuedates; ?></option>
 			    <?php } ?>
 			  </select>
 			</div>
 			<div class="form-group col-lg-4">
-				<span class="form-label d-inline-block fw-bold">Logo </span>
+				<span class="form-label d-inline-block fw-bold"><?= __('Logo'); ?> </span>
 				<div class="col-lg-9 col-xl-6">
 							<div class="profile-pic">
 								<label class="-label" for="image1">
@@ -241,10 +241,10 @@ $countriesres   = json_decode($countriesres,1);
 
 							<div class="image-input image-input-outline" id="kt_image_61">
 								<div class="image-input-wrapper" style="background-image: url('<?php echo $File_Uploads_Path.$application_roled['display_logo']; ?>')"></div>
-								<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar" style="opacity: 0;">
+								<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= htmlspecialchars(__('Change avatar'), ENT_QUOTES, 'UTF-8'); ?>" style="opacity: 0;">
 									<i class="fa fa-pen icon-sm text-muted"></i>
 								</span>
-								<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar"  style="opacity: 0;">
+								<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="<?= htmlspecialchars(__('Cancel avatar'), ENT_QUOTES, 'UTF-8'); ?>"  style="opacity: 0;">
 									<i class="ki ki-bold-close icon-xs text-muted"></i>
 								</span>
 							</div>
@@ -261,7 +261,7 @@ $countriesres   = json_decode($countriesres,1);
 
 					</div>
 					<div class="form-group col-lg-2">
-						<span class="d-inline-block fw-bold" style="margin-bottom:5px">Image</span>
+						<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Image'); ?></span>
 						<div class="col-lg-9 col-xl-6">
 							<div class="profile-pic">
 								<label class="-label" for="image">
@@ -274,10 +274,10 @@ $countriesres   = json_decode($countriesres,1);
 
 							<div class="image-input image-input-outline" id="kt_image_61">
 								<div class="image-input-wrapper" style="background-image: url('<?php echo $File_Uploads_Path.$application_roled['user_photo']; ?>')"></div>
-								<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar" style="opacity: 0;">
+								<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= htmlspecialchars(__('Change avatar'), ENT_QUOTES, 'UTF-8'); ?>" style="opacity: 0;">
 									<i class="fa fa-pen icon-sm text-muted"></i>
 								</span>
-								<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar"  style="opacity: 0;">
+								<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="<?= htmlspecialchars(__('Cancel avatar'), ENT_QUOTES, 'UTF-8'); ?>"  style="opacity: 0;">
 									<i class="ki ki-bold-close icon-xs text-muted"></i>
 								</span>
 							</div>

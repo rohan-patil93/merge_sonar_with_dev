@@ -742,7 +742,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                         $display =  $headers['heddingdislay']==1?"display:none":"";
                                         return '<div class="col-lg-4 box '.$position.'" draggable="true"  data-id="'.$seq.'" >
                                         <div class="" id="heading_div_id" data-order="header_order_position" style="'.$display.'">
-                                        <h1 class="display-4 font-weight-boldest mb-10">INVOICE</h1>
+                                        <h1 class="display-4 font-weight-boldest mb-10">'.__('INVOICE').'</h1>
                                         </div>
                                         </div>';
                                     }elseif($seq == $addres){
@@ -751,7 +751,7 @@ $inputFildsArray = array("No"=>"1","Name"=>"infisuite","Description"=>"software 
                                         return '<div class="col-lg-4 '.$po.' box" draggable="true" data-id="'.$seq.'" >
                                         <div id="address_div_id" data-order="header_order_address" style="'.$display.'" >
                                         <span class="d-flex flex-column align-items-md-end opacity-70">
-                                        <span>Cecilia Chapman, 711-2880 Nulla St, Mankato Mississippi 96522</span>
+                                        <span>'.__('Cecilia Chapman, 711-2880 Nulla St, Mankato Mississippi 96522').'</span>
                                         </span>
                                         </div>
                                         </div>';

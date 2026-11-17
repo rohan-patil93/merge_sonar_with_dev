@@ -168,7 +168,7 @@ function creatInvestor(){
     var new_invesert =$("#new_invesert_id").val();
     console.log(new_invesert);
     if (new_invesert === null || new_invesert =="") {
-        $('#error_msg').text('*Please Select Any Investor Or Please Re-Select Investor');
+        $('#error_msg').text(<?php echo json_encode('*'.__('Please Select Any Investor Or Please Re-Select Investor'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     }else{
         $('#error_msg').text(' ');
 
@@ -209,7 +209,7 @@ function addMoreInvester(maxrows,new_invesert_id,new_invesert_name,new_invesert_
   var antinfocss = "";
   html += '<div class="row" id="deleteid__2"+maxrows+'">';
   html += '<input type="hidden"  name="irid[]"  value=""><input type="hidden"  name="ccuid[]"  value="'+new_invesert_id+'">';
-  html += '<div class="form-group col-lg-3"><input type="hidden" class="form-control" name="distributer_name[]"  value="'+new_invesert_name+'" ><div class="align-middle"><span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" >N</span><div class="d-inline-block width73"><span class="f-12 text-capitalize">'+new_invesert_name+'</span><p class="text-muted m-b-0 text-capitalize">'+new_invesert_type+'</p></div></div></div>';
+  html += '<div class="form-group col-lg-3"><input type="hidden" class="form-control" name="distributer_name[]"  value="'+new_invesert_name+'" ><div class="align-middle"><span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" >N</span><div class="d-inline-block width73"><span class="f-12 text-capitalize">'+new_invesert_name+'</span><p class="text-muted m-b-0 text-capitalize">'+new_invesert_type+'</p></div></div></div>';
 
   html += '<div class="form-group col-lg-1 text-right p-t-15"><input type="hidden" id="old_percentage_temp_'+new_invesert_id+'" value="0"><input type="hidden" name="old_percentage[]" value="0">0%</div>';
 
@@ -231,9 +231,9 @@ html += '<div class="form-group col-lg-1 text-right p-t-15"><span id="new_share_
 
 html += '<div class="form-group col-lg-1 text-right p-t-15"><input type="hidden" class="form-control text-right total_share_class" name="total_share[]" id="total_share_qty_text_'+new_invesert_id+'" value="0"><span id="total_share_qty_label_'+new_invesert_id+'"> 0</span></div>';
 
-html += '<div class="form-group col-lg-1 p-1"><input aria-label="Equity Shares Percentage[]" type="number" class="form-control text-right" name="equity_shares_percentage[]" value="100"></div>';
+html += '<div class="form-group col-lg-1 p-1"><input aria-label="<?= htmlspecialchars(__('Equity Shares Percentage'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control text-right" name="equity_shares_percentage[]" value="100"></div>';
 
-html += '<div class="form-group col-lg-1 p-1"><input aria-label="Preference Shares Percentage[]" type="number" class="form-control text-right" name="preference_shares_percentage[]" value="0"></div></div>';
+html += '<div class="form-group col-lg-1 p-1"><input aria-label="<?= htmlspecialchars(__('Preference Shares Percentage'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control text-right" name="preference_shares_percentage[]" value="0"></div></div>';
 
 $("#addmorediv").append(html);
 var elemdefault = document.querySelector('.js-primary-sm-'+maxrows);
@@ -322,7 +322,7 @@ function calculateDistributionQTY(){
     jQuery.each(validationary, (index, idname) => {
         if($("#"+idname).val() =="" || $("#"+idname).val() ===undefined){
             error = 1;
-            $("#"+idname+"_error").text("Required This Field");
+            $("#"+idname+"_error").text(<?php echo json_encode(__('Required This Field'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }else{
           $("#"+idname+"_error").text(" ");
       }
@@ -373,8 +373,8 @@ function calculateDistributionQTY(){
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -410,7 +410,7 @@ function calculateDistributionQTY(){
 <?php if($error_message !=''){ ?>
     <div class="alert alert-danger background-danger alert-dismissible">
         <strong><?php echo $error_message; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 <?php } ?>
 <form method="post" id="formsubmitid">
@@ -432,17 +432,17 @@ function calculateDistributionQTY(){
 
             <div class="row">
                 <div class="form-group">
-                    <span class="form-label">Valuation Name <span class="text-danger">*</span></span>
-                    <input aria-label="Valuation Name" type="text" class="form-control text-capitalize" name="valuation_name" id="valuation_name" value="<?php echo $companyval['valuation_name']; ?>">
+                    <span class="form-label"><?= __('Valuation Name'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?= htmlspecialchars(__('Valuation Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-capitalize" name="valuation_name" id="valuation_name" value="<?php echo $companyval['valuation_name']; ?>">
                     <span id="valuation_name_error" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <span class="form-label">Valuation Date <span class="text-danger">*</span></span>
-                    <input aria-label="Valuation Date" type="text" class="form-control datepicker" name="valuation_date" id="valuation_date" value="<?php echo $companyval['valuation_date']; ?>">
+                    <span class="form-label"><?= __('Valuation Date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?= htmlspecialchars(__('Valuation Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="valuation_date" id="valuation_date" value="<?php echo $companyval['valuation_date']; ?>">
                     <span id="valuation_date_error" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <span class="form-label">Company Value <span class="text-danger">*</span></span>
+                    <span class="form-label"><?= __('Company Value'); ?> <span class="text-danger">*</span></span>
                     <?php
                     $company_valuationsamt = 0;
                     if($companyval['company_value'] !=""){
@@ -451,12 +451,12 @@ function calculateDistributionQTY(){
                     $company_valuationsamt = $last_company_valuations['company_value'];
                 }
                 ?>
-                <input aria-label="Company Value" type="text" class="form-control text-right autonumber" name="company_value" id="company_value" value="<?php echo $company_valuationsamt; ?>" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>">
+                <input aria-label="<?= htmlspecialchars(__('Company Value'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-right autonumber" name="company_value" id="company_value" value="<?php echo $company_valuationsamt; ?>" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>">
                 <span id="company_value_error" class="text-danger"></span>
 
             </div>
             <div class="form-group">
-                <span class="form-label">Number of Share At The Time Of Valuation <span class="text-danger">*</span></span>
+                <span class="form-label"><?= __('Number of Share At The Time Of Valuation'); ?> <span class="text-danger">*</span></span>
                 <?php
                 $old_share_qty = 0;
                 if($companyval['old_share_qty'] !=""){
@@ -465,13 +465,13 @@ function calculateDistributionQTY(){
                 $old_share_qty = $last_company_valuations['total_share_qty'];
             }
             ?>
-            <input aria-label="Old Share Qty" type="number" class="form-control text-right" name="old_share_qty"  id="old_share_qty" value="<?php echo $old_share_qty; ?>" onblur="calculateShareQTY()">
+            <input aria-label="<?= htmlspecialchars(__('Old Share Qty'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control text-right" name="old_share_qty"  id="old_share_qty" value="<?php echo $old_share_qty; ?>" onblur="calculateShareQTY()">
             <span id="old_share_qty_error" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <span class="form-label">Valuation For % Of Shareholding Including Convertible Pref Shares If Any <span class="text-danger">*</span></span>
+            <span class="form-label"><?= __('Valuation For % Of Shareholding Including Convertible Pref Shares If Any'); ?> <span class="text-danger">*</span></span>
             <div class="input-group mb-0">
-                <input aria-label="Valuation Shareholding" type="text" class="form-control text-right" name="valuation_shareholding" id="valuation_shareholding" value="<?php echo $companyval['valuation_shareholding']; ?>" onblur="calculateShareQTY()">
+                <input aria-label="<?= htmlspecialchars(__('Valuation Shareholding'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-right" name="valuation_shareholding" id="valuation_shareholding" value="<?php echo $companyval['valuation_shareholding']; ?>" onblur="calculateShareQTY()">
                 <span class="input-group-text addon-style">
                     <span class="">%</span>
                 </span>
@@ -480,19 +480,19 @@ function calculateDistributionQTY(){
         </div>
         <div class="form-group">
             <span class="form-label"><?= __('New Share To Be Issue To The New Investor Including Esop') ?></span>
-            <input aria-label="New Share Qty" type="number" class="form-control text-right" name="new_share_qty" id="new_share_qty" onblur="calculateShareQTY()" value="<?php echo $companyval['new_share_qty']; ?>" readonly>
+            <input aria-label="<?= htmlspecialchars(__('New Share Qty'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control text-right" name="new_share_qty" id="new_share_qty" onblur="calculateShareQTY()" value="<?php echo $companyval['new_share_qty']; ?>" readonly>
         </div>
         <div class="form-group col-lg-6">
             <span class="form-label"><?= __('Total Share') ?></span>
-            <input aria-label="Total Share Qty" type="text" class="form-control text-right" name="total_share_qty" readonly="" id="total_share_qty" value="<?php echo $companyval['total_share_qty']; ?>">
+            <input aria-label="<?= htmlspecialchars(__('Total Share Qty'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-right" name="total_share_qty" readonly="" id="total_share_qty" value="<?php echo $companyval['total_share_qty']; ?>">
         </div>
         <div class="form-group col-lg-6">
             <span class="form-label"><?= __('Per Share Value') ?></span>
-            <input aria-label="Per Share Value" type="text" class="form-control text-right autonumber" name="per_share_value" value="<?php echo $companyval['per_share_value']; ?>" id="per_share_value" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>" readonly>
+            <input aria-label="<?= htmlspecialchars(__('Per Share Value'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-right autonumber" name="per_share_value" value="<?php echo $companyval['per_share_value']; ?>" id="per_share_value" data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>" readonly>
         </div>
         <div class="form-group">
             <span class="form-label"><?= __('Notes') ?></span>
-            <textarea aria-label="Notes" class="form-control" name="notes"><?php echo $companyval['notes']; ?></textarea>
+            <textarea aria-label="<?= htmlspecialchars(__('Notes'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="notes"><?php echo $companyval['notes']; ?></textarea>
         </div>
     </div>
     <div>
@@ -515,38 +515,38 @@ function calculateDistributionQTY(){
         <div class="card-header">
           <h5><?= __('CAP Table') ?></h5>
           <div class="card-header-right">
-            <a href="index.php?option=COM_INSERT_COMPANY_CONTRIBUTION_USERS" class="btn btn-success mb-2 desktop-view m-r-10" ><i class="icofont icofont-plus icon-white "></i> Contributors </a>
+            <a href="index.php?option=COM_INSERT_COMPANY_CONTRIBUTION_USERS" class="btn btn-success mb-2 desktop-view m-r-10" ><i class="icofont icofont-plus icon-white "></i> <?= __('Contributors'); ?> </a>
         </div>
     </div>
     <div class="card-body <?php echo ($rid !="")?"":"event_disabled"; ?>" id="cap_table">
         <div id="addmorediv">
             <div class="row">
                 <div class="form-group col-lg-3 f-w-700">
-                    <span >Name</span>
+                    <span ><?= __('Name'); ?></span>
                 </div>
                 <div class="form-group col-lg-1 text-center f-w-700 ">
-                    <span class="d-block">Current </span>(%)
+                    <span class="d-block"><?= __('Current'); ?> </span>(%)
                 </div>
                 <div class="form-group col-lg-1 text-center f-w-700">
-                    <span class="d-block">Old </span>Shares
+                    <span class="d-block"><?= __('Old'); ?> </span><?= __('Shares'); ?>
                 </div>
                 <div class="form-group col-lg-1 text-center f-w-700">
-                    <span class="d-block">Anti</span> Dilution
+                    <span class="d-block"><?= __('Anti'); ?></span> <?= __('Dilution'); ?>
                 </div>
                 <div class="form-group col-lg-1 text-center f-w-700">
-                    <span class="d-block">New </span> (%)
+                    <span class="d-block"><?= __('New'); ?> </span> (%)
                 </div>
                 <div class="form-group col-lg-1 text-center f-w-700">
-                    <span class="d-block">New </span>Shares
+                    <span class="d-block"><?= __('New'); ?> </span><?= __('Shares'); ?>
                 </div>
                 <div class="form-group col-lg-1 text-center f-w-700">
-                    <span class="d-block">Total </span>Shares
+                    <span class="d-block"><?= __('Total'); ?> </span><?= __('Shares'); ?>
                 </div>
                 <div class="form-group col-lg-1 text-center f-w-700">
-                    <span class="d-block">Equity </span>(%)
+                    <span class="d-block"><?= __('Equity'); ?> </span>(%)
                 </div>
                 <div class="form-group col-lg-1 text-center f-w-700">
-                    <span class="d-block">Pref. </span>(%)
+                    <span class="d-block"><?= __('Pref.'); ?> </span>(%)
                 </div>
             </div>
 
@@ -608,10 +608,10 @@ function calculateDistributionQTY(){
 
                <div class="align-middle">
                 <?php if($values['image'] !="") {?>
-                    <img src="uploads/all/<?php echo $values['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                    <img src="uploads/all/<?php echo $values['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                 <?php } else { ?>
 
-                    <span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($values['display_name']); ?></span>
+                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($values['display_name']); ?></span>
                 <?php } ?>
                 <div class="d-inline-block width73">
                     <span class="f-12 text-capitalize"><?php echo $values['display_name']; ?></span>
@@ -642,7 +642,7 @@ function calculateDistributionQTY(){
     <div class="form-group col-lg-1 p-t-15 text-center" <?php echo $antcss; ?>>
         <input type="hidden" name="dilution_seq[]" value="<?php echo $values['id']; ?>">
         <span onclick="dilutionCheck('<?php echo $values['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-          <input aria-label="Checkbox" class="js-primary-sm" type="checkbox" name="dilution[<?php echo $values['id']; ?>]" <?php echo ($dilution=='0')?"checked":"";?> value="0"  id="dilution_<?php echo $values['id']; ?>">
+          <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="js-primary-sm" type="checkbox" name="dilution[<?php echo $values['id']; ?>]" <?php echo ($dilution=='0')?"checked":"";?> value="0"  id="dilution_<?php echo $values['id']; ?>">
       </span>
   </div>
   <div class="form-group col-lg-1 p-t-15 text-center" <?php echo $antinfocss; ?>>
@@ -653,7 +653,7 @@ function calculateDistributionQTY(){
                                        <div class="form-group col-lg-1 p-0">
 
                                         <input type="hidden" id="new_percentage_temp_<?php echo $values['id']; ?>" name="new_percentage[]"  value="<?php echo $new_percentage; ?>">
-                                        <input aria-label="Distribute Percentage[]" type="number" class="form-control text-right distributionqty" name="distribute_percentage[]" id="distribute_percentage_<?php echo $values['id']; ?>" value="<?php echo $distribute_percentage; ?>"  onblur="calculateDistributionQTY()" data-id="<?php echo $values['id']; ?>" <?php echo $percentredonly; ?>>
+                                        <input aria-label="<?= htmlspecialchars(__('Distribute Percentage'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control text-right distributionqty" name="distribute_percentage[]" id="distribute_percentage_<?php echo $values['id']; ?>" value="<?php echo $distribute_percentage; ?>"  onblur="calculateDistributionQTY()" data-id="<?php echo $values['id']; ?>" <?php echo $percentredonly; ?>>
                                     </div>
                                     <div class="form-group col-lg-1 text-right p-t-15">
                                         <span id="new_share_qty_label_<?php echo $values['id']; ?>"> <?php echo $new_shares_qty; ?></span>
@@ -666,10 +666,10 @@ function calculateDistributionQTY(){
                                     <div class="form-group col-lg-1 p-1">
 
 
-                                        <input aria-label="Equity Shares Percentage[]" type="number" class="form-control text-right" name="equity_shares_percentage[]" value="<?php echo $insertval['equity_shares_percentage'] !=""?$insertval['equity_shares_percentage']:100; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Equity Shares Percentage'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control text-right" name="equity_shares_percentage[]" value="<?php echo $insertval['equity_shares_percentage'] !=""?$insertval['equity_shares_percentage']:100; ?>">
                                     </div>
                                     <div class="form-group col-lg-1 p-1">
-                                        <input aria-label="Preference Shares Percentage[]" type="number" class="form-control text-right" name="preference_shares_percentage[]" value="<?php echo $insertval['preference_shares_percentage']!=""?$insertval['preference_shares_percentage']:0.00; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Preference Shares Percentage'), ENT_QUOTES, 'UTF-8'); ?>[]" type="number" class="form-control text-right" name="preference_shares_percentage[]" value="<?php echo $insertval['preference_shares_percentage']!=""?$insertval['preference_shares_percentage']:0.00; ?>">
                                     </div>
                                 </div>
                                 <?php $i++;
@@ -678,7 +678,7 @@ function calculateDistributionQTY(){
                             </div>
                             <div class="row mt-3">
                                 <div class="form-group col-lg-3">
-                                    <span class="f-w-600">Total</span>
+                                    <span class="f-w-600"><?= __('Total'); ?></span>
                                 </div>
                                 <div class="form-group col-lg-1 text-right">
                                     <span class="f-w-600" id="total_oldper"><?php echo customNanAndEmptyValidation(round($oldper,2)); ?></span>
@@ -711,7 +711,7 @@ function calculateDistributionQTY(){
                     <div class="row">
                         <span class="text-danger" id="error_msg"></span>
                         <div class="col-lg-3 done_panel w-full" style="display: none">
-                            <select aria-label="New Invesert" id="new_invesert_id" class="form-control form-select js-example-basic-single" >
+                            <select aria-label="<?= htmlspecialchars(__('New Invesert'), ENT_QUOTES, 'UTF-8'); ?>" id="new_invesert_id" class="form-control form-select js-example-basic-single" >
                               <option value=""><?= __('Select Any One') ?></option>
                               <?php foreach($company_contribution_users as $ccu ) {  ?>
                                 <option value="<?php echo $ccu['id']."-".$ccu['display_name']."-".$contributionutype[$ccu['user_type']];?>" <?php echo (in_array($ccu['id'], $alreadyselectuser))?"disabled":""; ?>><?php echo $ccu['display_name'];?></option>
@@ -725,9 +725,9 @@ function calculateDistributionQTY(){
                     <button type="button" class="btn btn-success waves-effect waves-light float-left col-lg-2" id="addmore_btn" onclick="addMore()"><i class="fa fa-check m-r-10"></i><?= __('Add More') ?></button>
                 </div>
                 <span class="float-end">
-                    <span class="text-danger">Un-Allocated (%) : </span>
+                    <span class="text-danger"><?= __('Un-Allocated (%)'); ?> : </span>
                     <span id="totaldistributionpending"><?php echo 100-round($totaldis,2); ?></span>
-                    <span class="text-warning m-l-20">Total Distributions (%) : </span>
+                    <span class="text-warning m-l-20"><?= __('Total Distributions (%)'); ?> : </span>
                     <span id="totaldistributionqty"><?php echo round($totaldis,2); ?></span></span>
                 </div>
             </div>

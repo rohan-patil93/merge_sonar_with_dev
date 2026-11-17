@@ -217,7 +217,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         if($available_balance >= $petty_cash['amount']){
                             echo $workflowsteps['workflow_btn'];
                         }else{
-                            echo "<span class='text-danger'>Balance Not Available</span>";
+                            echo "<span class='text-danger'>".__('Balance Not Available')."</span>";
                         }
                          ?>
 

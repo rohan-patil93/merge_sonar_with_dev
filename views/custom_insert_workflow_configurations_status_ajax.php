@@ -24,11 +24,11 @@ if($_POST['approval_type'] =='role_levels' || $_POST['approval_type'] =='user_hi
         $actionstatuslist = json_decode($ulractionstatuslist,1);
         ?>
         <div class="form-group row">
-            <div class="col-lg-1 mt-4">Level <span class="form-label badge bg-info "><?php echo $i; ?></span></div>
+            <div class="col-lg-1 mt-4"><?= __('Level'); ?> <span class="form-label badge bg-info "><?php echo $i; ?></span></div>
             <div class="col-lg-2  w-full">
-                <span class="form-label d-block">Status</span>
-                <select aria-label="Status[]" class="form-select js-example-basic-single" name="status[]" >
-                <option value="">Select Any One</option>
+                <span class="form-label d-block"><?= __('Status'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-single" name="status[]" >
+                <option value=""><?= __('Select Any One'); ?></option>
                     <?php foreach($statusrow as $statusrows){ ?>
                         <option value="<?php echo $statusrows['status']; ?>" <?php echo $statusrows['status']==$updatefields[$mk]['status']?"selected":""; ?>><?php echo $statusrows['name'];?></option>
                     <?php } ?>
@@ -36,27 +36,27 @@ if($_POST['approval_type'] =='role_levels' || $_POST['approval_type'] =='user_hi
             </div>
 
             <div class="col-lg-2  w-full">
-                <span class="form-label d-block">Work Flow Field</span>
-                <select aria-label="Work Flow Field[]" class="form-select js-example-basic-single" name="work_flow_field[]" >
-                <option value="">Select Any One</option>
+                <span class="form-label d-block"><?= __('Work Flow Field'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Work Flow Field'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-single" name="work_flow_field[]" >
+                <option value=""><?= __('Select Any One'); ?></option>
                     <?php  foreach($listfields as $fieldkey=>$ros){  ?>
                         <option value="<?php echo $fieldkey; ?>" <?php echo $fieldkey==$updatefields[$mk]['work_flow_field']?"selected":""; ?>><?php echo $ros['lable'];?></option>
                     <?php } ?>
                 </select>
             </div>
             <div class="col-lg-3  w-full">
-                <span class="form-label d-block">Action Status</span>
+                <span class="form-label d-block"><?= __('Action Status'); ?></span>
                 <input type="hidden" name="action_status[]" id="action_status_<?php echo $mk; ?>" value='<?php echo $ulractionstatuslist; ?>'>
                 <input type="hidden" name="action_status_old[]" id="action_status_old_<?php echo $mk; ?>" value='<?php echo $ulractionstatuslist; ?>'>
-                <select aria-label="Select option" class="form-select js-example-basic-single" id="actionstatus_<?php echo $mk; ?>" onchange="selectActionStatus('<?php echo $mk; ?>')" >
-                <option value="">Select Any One</option>
+                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="actionstatus_<?php echo $mk; ?>" onchange="selectActionStatus('<?php echo $mk; ?>')" >
+                <option value=""><?= __('Select Any One'); ?></option>
                     <?php foreach($statusrow as $statusrows){ ?>
                         <option value="<?php echo $statusrows['status']; ?>"> <?php echo $statusrows['name'];?> </option>
                     <?php } ?>
                 </select>
             </div>
             <div class="col-lg-4" >
-                <span class="form-label d-block">Action Seq</span>
+                <span class="form-label d-block"><?= __('Action Seq'); ?></span>
                 <div id="view_action_status_<?php echo $mk; ?>">
                     <?php $num = 1; foreach($actionstatuslist as $actionstatuslists){
                         echo "<span class='form-label label label-md label-primary m-1'>".$num.":".$actionstatuslists."</span>";

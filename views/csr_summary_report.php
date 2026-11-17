@@ -45,7 +45,7 @@ $summary = $result['summary'] ?? [];
               <td align="right"></td>
             </tr>
             <tr>
-              <td>ii) <?= __('On purposes other than (i) above') ?></td>
+              <td><?= __('ii)'); ?> <?= __('On purposes other than (i) above') ?></td>
               <td align="right"></td>
             </tr>
 
@@ -71,7 +71,7 @@ $summary = $result['summary'] ?? [];
               <th scope="col" class="text-end"><?= number_format($fy['spent_from_py'], 2) ?></th>
             </tr>
             <tr>
-              <th scope="col">Balance amount unspent for FY <?= ($fy['year'] - 1) ?>-<?= substr(($fy['year'] - 1), -2) ?></th>
+              <th scope="col"><?= __('Balance amount unspent for FY'); ?> <?= ($fy['year'] - 1) ?>-<?= substr(($fy['year'] - 1), -2) ?></th>
               <th scope="col" class="text-end"><?= number_format($fy['cf_balance_py'], 2) ?></th>
             </tr>
 

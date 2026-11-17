@@ -59,7 +59,7 @@ $stausresult = ViewStatusData();
         });
   }
    function statuspopup(status,id){
-      alert("data"+status+"id:"+id);
+      alert(<?php echo json_encode(__('data'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+status+<?php echo json_encode(__('id').':', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+id);
      var table_name = document.getElementById('table_name').value;
       jQuery.ajax({
             url: "views/custom_insert_status_popup.php",
@@ -116,20 +116,20 @@ $stausresult = ViewStatusData();
                 <div class="form-radio ">
                                 <div class="radio radio-inline">
                                   <label class="form-label">
-                                    <input aria-label="Status" type="radio" name="status" value="0" <?php echo $_POST['status']=='0'?"checked":"";?> onclick="filterApllay('-0')" onkeydown="">
-                                    <i class="helper"></i>Unread
+                                    <input aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="status" value="0" <?php echo $_POST['status']=='0'?"checked":"";?> onclick="filterApllay('-0')" onkeydown="">
+                                    <i class="helper"></i><?= __('Unread'); ?>
                                   </label>
                                 </div>
                                 <div class="radio radio-inline">
                                   <label class="form-label">
-                                    <input aria-label="Status" type="radio" name="status" value="1" <?php echo $_POST['status']=='1'?"checked":"";?> onclick="filterApllay('-0')" onkeydown="">
-                                    <i class="helper"></i>Read
+                                    <input aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="status" value="1" <?php echo $_POST['status']=='1'?"checked":"";?> onclick="filterApllay('-0')" onkeydown="">
+                                    <i class="helper"></i><?= __('Read'); ?>
                                   </label>
                                 </div>
                                 <div class="radio radio-inline">
                                   <label class="form-label">
-                                    <input aria-label="Status" type="radio"  name="status" <?php echo ($_POST['status']=='-1' || !isset($_POST['status']))?"checked":"";?> value="-1" onclick="filterApllay('-0')" onkeydown="">
-                                    <i class="helper"></i>All
+                                    <input aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  name="status" <?php echo ($_POST['status']=='-1' || !isset($_POST['status']))?"checked":"";?> value="-1" onclick="filterApllay('-0')" onkeydown="">
+                                    <i class="helper"></i><?= __('All'); ?>
                                   </label>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@ $stausresult = ViewStatusData();
               <?php foreach($statusjsondecode as $arststuslist){ ?>
                 <button type="button" onclick="filterApllay(<?php echo $arststuslist['status']; ?>)" class="dropdown-item waves-light waves-effect"><?php echo $arststuslist['name']; ?></button>
                 <?php } ?>
-                 <button type="button" onclick="filterApllay()" class="dropdown-item waves-light waves-effect">All</button>
+                 <button type="button" onclick="filterApllay()" class="dropdown-item waves-light waves-effect"><?= __('All'); ?></button>
               </div>
             </div>
        <?php } ?>
@@ -161,7 +161,7 @@ $stausresult = ViewStatusData();
 
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
 
               </div>
@@ -194,7 +194,7 @@ $stausresult = ViewStatusData();
                              }
 }?>
                       <?php } ?>
-                      <th scope=\"col\">Action</th>
+                      <th scope=\"col\"><?= __('Action'); ?></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -230,7 +230,7 @@ $stausresult = ViewStatusData();
                                 $str = "<div style='background: #".$bill[$header['name']].";width: 20px;height: 20px;'>&nbsp;</div>";
                               }elseif( $header['type'] == 'image'){
                                 $bimage = 'uploads/all/'.$bill[$header['name']];
-                                $str = "<img src='$bimage' style='width:35px;' alt='Preview'>";
+                                $str = "<img src='$bimage' style='width:35px;' alt='".htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8')."'>";
                               }else{
                                 $str =  $bill[$header['name']];
 
@@ -285,7 +285,7 @@ $stausresult = ViewStatusData();
                             $view =  "index.php?option=COM_INSERT_IT_DECLARATION&assessment_year=2021-2022&version_no=0";
                           ?>
 
-                              <a href="<?php echo $view; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="view Datails"><i class="fa fa-eye"></i></a>
+                              <a href="<?php echo $view; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('view Datails'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                         </td>
 
                       </tr>
@@ -294,7 +294,7 @@ $stausresult = ViewStatusData();
                   </tbody>
                    <?php }else{ ?>
                     <div class="card-px text-center py-20 m-t-30">
-                        <h2 class="f-40 fw-bolder m-b-30">Hello!</h2>
+                        <h2 class="f-40 fw-bolder m-b-30"><?= __('Hello!'); ?></h2>
                         <p class="text-muted f-16 fw-bold m-b-30"><?php echo $empty_data; ?></p>
 
                     </div>

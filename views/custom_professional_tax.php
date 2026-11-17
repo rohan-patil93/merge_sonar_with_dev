@@ -29,11 +29,11 @@ foreach($lolcationdatasdata as $locationn){
 ?>
 <div class="card card-custom gutter-b">
 <div class="card-header">
-    <h5>Professional Tax</h5>
-    <span>This tax is lived on an exployee's incoe by the state Government. Tax slabs differ  ineach state.</span>
+    <h5><?= __('Professional Tax'); ?></h5>
+    <span><?= __('This tax is lived on an exployee\'s incoe by the state Government. Tax slabs differ ineach state.'); ?></span>
     <div class="card-header-right">
-            <button type="button" onclick="dynamiciptpopup('custom_insert_professional_tax.php','')" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"><i class="icofont icofont-plus icon-white"></i>  Professional Tax  </button>
-            <button type="button" onclick="dynamiciptpopup('custom_insert_professional_tax_exemptions.php','')" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"><i class="icofont icofont-plus icon-white"></i>  Professional Tax Exemptions</button>
+            <button type="button" onclick="dynamiciptpopup('custom_insert_professional_tax.php','')" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"><i class="icofont icofont-plus icon-white"></i>  <?= __('Professional Tax'); ?>  </button>
+            <button type="button" onclick="dynamiciptpopup('custom_insert_professional_tax_exemptions.php','')" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"><i class="icofont icofont-plus icon-white"></i>  <?= __('Professional Tax Exemptions'); ?></button>
     </div>
 </div>
 
@@ -61,7 +61,7 @@ foreach($lolcationdatasdata as $locationn){
              <hr>
             <div class="row">
                 <div class="col-md-6">
-                    <span class="font-weight-bold font-size-lg text-muted">PT Number</span>
+                    <span class="font-weight-bold font-size-lg text-muted"><?= __('PT Number'); ?></span>
                 </div>
                 <div class="col-md-5">
                     <span class="font-weight-bold f-w-700 float-right font-size-lg text-muted"><?php echo $value['pt_number']; ?></span>
@@ -70,7 +70,7 @@ foreach($lolcationdatasdata as $locationn){
             <hr>
             <div class="row">
                 <div class="col-md-6">
-                    <span class="font-weight-bold font-size-lg text-muted">Location</span>
+                    <span class="font-weight-bold font-size-lg text-muted"><?= __('Location'); ?></span>
                 </div>
                 <div class="col-md-5">
                     <span class="font-weight-bold f-w-700 float-right font-size-lg text-muted"><?php echo $locationsrray[$value['work_location_id']]; ?></span>
@@ -79,7 +79,7 @@ foreach($lolcationdatasdata as $locationn){
             <hr>
             <div class="row">
                 <div class="col-md-6">
-                    <span class="font-weight-bold font-size-lg text-muted">State</span>
+                    <span class="font-weight-bold font-size-lg text-muted"><?= __('State'); ?></span>
                 </div>
                 <div class="col-md-5">
                     <span class="font-weight-bold f-w-700 float-right font-size-lg text-muted"><?php echo $statearray[$value['state_id']]; ?></span>
@@ -88,7 +88,7 @@ foreach($lolcationdatasdata as $locationn){
             <hr>
             <div class="row">
                 <div class="col-md-6">
-                    <span class="font-weight-bold font-size-lg text-muted">Deduction Cycle</span>
+                    <span class="font-weight-bold font-size-lg text-muted"><?= __('Deduction Cycle'); ?></span>
                 </div>
                 <div class="col-md-5">
                     <span class="font-weight-bold  f-w-700 float-right font-size-lg text-muted"><?php echo "-"; ?></span>

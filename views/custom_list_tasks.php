@@ -4,9 +4,9 @@
                                     <div class="alert alert-light alert-elevate fade show" role="alert">
                                         <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
                                         <div class="alert-text">
-                                            Kanban JavaScript UI widget for web developers
+                                            <?= __('Kanban JavaScript UI widget for web developers'); ?>
                                             <br>
-                                            For more info please visit the plugin's <a class="kt-link kt-font-bold" href="https:
+                                            <?= __('For more info please visit the plugin\'s'); ?> <a class="kt-link kt-font-bold" href="https:
                                         </div>
                                     </div>
                                 </div>

@@ -109,7 +109,7 @@ function checkAll(ele) {
     <div class="container-fluid ">
         <div class="card card-custom card-sticky j-content" id="kt_page_sticky_card">
             <div class="card-header">
-                <h5><?php echo "Application Monthly Lock";  ?></h5>
+                <h5><?php echo __("Application Monthly Lock");  ?></h5>
                 <div class="header-right card-header-right">
                     <a  href="javascript:history.go(-1)" class="btn btn-primary waves-effect waves-ligh"> <i class="ti-arrow-left text-white" aria-hidden="true"></i> <?= __('Back') ?></a>
                 </div>
@@ -121,23 +121,23 @@ function checkAll(ele) {
                             <div class="form-group col-lg-6">
                                 <label class="form-label" for="lock_type"><?= __('Lock Type') ?>&nbsp;<span class="requried">*</span></label>
                                 <div id="frist" class="mt-2">
-                                    <select class="form-control form-select js-example-basic-single" id="lock_type" onchange="vendorsshow(this.value)" name="lock_type" aria-label="Lock Type">
-                                        <option value=""> Select Any one </option>
+                                    <select class="form-control form-select js-example-basic-single" id="lock_type" onchange="vendorsshow(this.value)" name="lock_type" aria-label="<?= htmlspecialchars(__('Lock Type'), ENT_QUOTES, 'UTF-8'); ?>">
+                                        <option value=""> <?= __('Select Any one'); ?> </option>
                                         <?php $listtype = array('0'=>"Month Wise Lock", '1'=>"Vendor Wise Lock");
                                          foreach ($listtype as  $lkey=>$listlock) {  ?>
                                             <option <?php if($lkey == $role['lock_type'] ){ ?> selected <?php } ?> value="<?php echo $lkey; ?>"><?php echo htmlspecialchars(__($listlock)); ?></option>
                                         <?php  } ?>
                                     </select>
                                 </div>
-                                <div style="display: none;color: red;" id="lock_type_err"> Please Select Lock Type </div>
+                                <div style="display: none;color: red;" id="lock_type_err"> <?= __('Please Select Lock Type'); ?> </div>
                             </div>
                             <?php $lom =""; if($role['year']!="" && $role['month']!=""){
                                 $lom = date("Y-m",strtotime($role['year']."-".$role['month']."-01"));
                             }   ?>
                             <div class="form-group col-lg-6">
                                 <label class="form-label" for="month"><?= __('Month Lock') ?>&nbsp;<span class="requried">*</span></label>
-                                <input type="month" name="month" value="<?php echo $lom; ?>" id="month" class="form-control mt-2" aria-label="Month Lock">
-                                <div style="display: none;color: red;" id="month_err"> Please Enter Month Lock</div>
+                                <input type="month" name="month" value="<?php echo $lom; ?>" id="month" class="form-control mt-2" aria-label="<?= htmlspecialchars(__('Month Lock'), ENT_QUOTES, 'UTF-8'); ?>">
+                                <div style="display: none;color: red;" id="month_err"> <?= __('Please Enter Month Lock'); ?></div>
                             </div>
 
 
@@ -145,7 +145,7 @@ function checkAll(ele) {
                             <div class="form-group row col-lg-12" id="locktype" <?php if(count((array)$checkven)>0){ echo "";
                             }else{ ?>  style="display:none;" <?php } ?>>
 
-                                <div class="col-lg-9 mb-3"> <span class="form-label fw-bold font-weight-bold"> Vendors </span> </div>
+                                <div class="col-lg-9 mb-3"> <span class="form-label fw-bold font-weight-bold"> <?= __('Vendors'); ?> </span> </div>
                                 <div class="col-lg-3 mb-3">
                                     <div class="checkbox-zoom zoom-primary mt-1">
                                         <label class="form-label" for="check_all_vendors">

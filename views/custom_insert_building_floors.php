@@ -77,7 +77,7 @@ $all_building_floors=$result['all_building_floors'];
         $(".space_edit_field_"+cabinseq).removeClass("event_disabled");
         $("#active_floor_space_id").val(cabinseq);
         $("#floor_cabin").html('');
-        $("#floor_cabin").html('<img id="image" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="Details">');
+        $("#floor_cabin").html('<img id="image" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">');
         var defaultCropData = {
           x: parseInt($("#x_size_"+cabinseq).val()),   // Default x-coordinate
           y: parseInt($("#y_size_"+cabinseq).val()),   // Default y-coordinate
@@ -163,7 +163,7 @@ $all_building_floors=$result['all_building_floors'];
 </script>
 <div class="modal-header">
     <h4 class="modal-title"><?= __('Building Floor') ?></h4>
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
     <div class="col-lg-12 mb-4 courier ">
@@ -171,7 +171,7 @@ $all_building_floors=$result['all_building_floors'];
             <?php foreach($all_building_floors  as $abf){ ?>
             <li class="nav-item">
                 <button type="button" class="nav-link position-relative text-center p-2 cursor-pointer border-0 bg-transparent <?php echo $abf['id'] == $building_floors['id']?"active":""; ?>" onclick="getBuildingFoolSpaceDetails('<?php echo $abf['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="<?= __('Click To Open Building Floor Plans') ?>">
-                   <img src="uploads/building_floors/<?php echo $abf['floor_image']; ?>" style="width: 100px; height: 100px;" alt="Attachment Preview">
+                   <img src="uploads/building_floors/<?php echo $abf['floor_image']; ?>" style="width: 100px; height: 100px;" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="text-info f-14 f-w-700"><?php echo htmlspecialchars(__($abf['floor_name'] ?? '')); ?></span>
                 </button>
             </li>
@@ -212,28 +212,28 @@ $all_building_floors=$result['all_building_floors'];
             <div class="row mt-2">
                 <div class="col-lg-3 all_edit_field space_edit_field_<?php echo $cabincnt; ?> <?php echo $event_disabled; ?>">
                     <span id="error_cabin_name_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?= __('Please Enter Required Fields') ?></span>
-                    <input aria-label="Input field" class="form-control" type="text" id="cabin_name_<?php echo $cabincnt; ?>" value="<?php echo $cabin['cabin_name']; ?>">
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="cabin_name_<?php echo $cabincnt; ?>" value="<?php echo $cabin['cabin_name']; ?>">
                     <input class="form-control" type="hidden" id="building_floor_cabin_id_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['id']; ?>">
                 </div>
                 <div class="col-lg-3 w-full all_edit_field space_edit_field_<?php echo $cabincnt; ?> <?php echo $event_disabled; ?>">
                     <span id="error_space_type_id_<?php echo $cabincnt; ?>" class="text-danger all_error" style="display:none"><?= __('Please Enter Required Fields') ?></span>
-                    <select aria-label="Select option" class="js-example-basic-single" id="space_type_id_<?php echo $cabincnt; ?>"  name="space_type_id">
+                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" id="space_type_id_<?php echo $cabincnt; ?>"  name="space_type_id">
                         <?php foreach($space_types as $stytpe){ ?>
                         <option value="<?php echo $stytpe['id']; ?>" <?php echo $cabin['space_type_id']==$stytpe['id']?"selected":""; ?>><?php echo htmlspecialchars(__($stytpe['space_type_name'] ?? '')); ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="col-lg-1">
-                    <input aria-label="Input field" class="form-control" type="text" id="x_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['x_size']; ?>" readonly>
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="x_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['x_size']; ?>" readonly>
                 </div>
                 <div class="col-lg-1">
-                    <input aria-label="Input field" class="form-control" type="text" id="y_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['y_size']; ?>" readonly>
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="y_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['y_size']; ?>" readonly>
                 </div>
                 <div class="col-lg-1">
-                    <input aria-label="Input field" class="form-control" type="text" id="width_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['width']; ?>" readonly>
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="width_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['width']; ?>" readonly>
                 </div>
                 <div class="col-lg-1">
-                    <input aria-label="Input field" class="form-control" type="text" id="height_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['height']; ?>" readonly>
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="height_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['height']; ?>" readonly>
                 </div>
                 <div class="col-lg-2">
                  <span class="all_save_btn cursor-pointer" id="save_btn_<?php echo $cabincnt; ?>" onclick="lockFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $cabin['id']!=""?"style='display:none'":""; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Save') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-save"></i> <?= __('Save') ?></span>
@@ -256,7 +256,7 @@ $all_building_floors=$result['all_building_floors'];
         <button class="btn btn-success m-t-20 col-lg-2" id="addRows" type="button" onclick="addMorefloorSpaces()"><i class="fa fa-plus m-r-5"></i><?= __('Add More Cabin') ?></button>
         <div class="row mt-5">
             <div id="floor_cabin">
-                <img id="image_2" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="Details">
+                <img id="image_2" src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">
             </div>
         </div>
     </div>

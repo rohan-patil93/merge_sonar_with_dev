@@ -21,10 +21,10 @@ $report  = $result['report_res'] ?? array();
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5>Stationery Items Report</h5>
+      <h5><?= __('Stationery Items Report'); ?></h5>
       <div class="card-header-right">
         <a href="javascript:history.go(-1)" class="btn btn-light btn-sm">
-          <i class="icofont icofont-reply"></i> Back
+          <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
         </a>
       </div>
     </div>
@@ -35,9 +35,9 @@ $report  = $result['report_res'] ?? array();
 
         <div class="row align-items-end">
           <div class="col-lg-4 col-md-6 form-group">
-            <span>Item Name</span>
-            <select aria-label="Item []" name="item_id[]" class="form-control js-example-basic-single" style="width:100%" multiple>
-              <option value="">All Items</option>
+            <span><?= __('Item Name'); ?></span>
+            <select aria-label="<?= htmlspecialchars(__('Item'), ENT_QUOTES, 'UTF-8'); ?> []" name="item_id[]" class="form-control js-example-basic-single" style="width:100%" multiple>
+              <option value=""><?= __('All Items'); ?></option>
               <?php foreach ($items as $it) {
                $selected = in_array($it['id'], $selected_items) ? 'selected' : '';  ?>
                 <option value="<?php echo $it['id']; ?>" <?php echo $selected; ?>>
@@ -48,18 +48,18 @@ $report  = $result['report_res'] ?? array();
           </div>
 
           <div class="col-lg-3 col-md-4 form-group">
-            <span>From Date</span>
-            <input aria-label="From Date" type="date" name="from_date" id="from_date" class="form-control" value="<?php echo htmlspecialchars($from_date); ?>" required>
+            <span><?= __('From Date'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="from_date" id="from_date" class="form-control" value="<?php echo htmlspecialchars($from_date); ?>" required>
           </div>
 
           <div class="col-lg-3 col-md-4 form-group">
-            <span>To Date</span>
-            <input aria-label="To Date" type="date" name="to_date" id="to_date" class="form-control"  value="<?php echo htmlspecialchars($to_date); ?>" required>
+            <span><?= __('To Date'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="to_date" id="to_date" class="form-control"  value="<?php echo htmlspecialchars($to_date); ?>" required>
           </div>
 
           <div class="col-lg-2 col-md-3 form-group">
             <button type="submit" class="btn btn-primary w-100">
-              <i class="icofont icofont-search"></i> Search
+              <i class="icofont icofont-search"></i> <?= __('Search'); ?>
             </button>
           </div>
         </div>
@@ -73,12 +73,12 @@ $report  = $result['report_res'] ?? array();
         <table class="table table-hover">
             <thead class="bg-primary">
                 <tr>
-                    <th scope="col">Transaction No</th>
-                    <th scope="col">Transaction Date</th>
-                    <th scope="col">Supplier</th>
-                    <th scope="col">Item Name</th>
-                    <th scope="col">Qty</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col"><?= __('Transaction No'); ?></th>
+                    <th scope="col"><?= __('Transaction Date'); ?></th>
+                    <th scope="col"><?= __('Supplier'); ?></th>
+                    <th scope="col"><?= __('Item Name'); ?></th>
+                    <th scope="col"><?= __('Qty'); ?></th>
+                    <th scope="col"><?= __('Amount'); ?></th>
                 </tr>
             </thead>
 

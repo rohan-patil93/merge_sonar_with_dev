@@ -64,16 +64,16 @@ function amcVisitListRenderActionIcons($row, $section)
     $assignUrl = 'index.php?option=COM_ASSIGN_CONTRACT_AMC_TECHNICIANS&contract_id=' . $contractId;
     $action = $row['action'] ?? 'view';
     ?>
-    <a href="<?php echo $scheduleUrl; ?>" title="View Schedules" class="m-r-10"><i class="ti-eye text-info f-16"></i></a>
+    <a href="<?php echo $scheduleUrl; ?>" title="<?= htmlspecialchars(__('View Schedules'), ENT_QUOTES, 'UTF-8'); ?>" class="m-r-10"><i class="ti-eye text-info f-16"></i></a>
     <?php if ($section == 'today' || $section == 'next_7_days') { ?>
         <?php if ($action == 'assign') { ?>
-<a href="<?php echo $assignUrl; ?>" title="Assign" class="m-r-10"><i class="ti-user text-primary f-16"></i></a>
+<a href="<?php echo $assignUrl; ?>" title="<?= htmlspecialchars(__('Assign'), ENT_QUOTES, 'UTF-8'); ?>" class="m-r-10"><i class="ti-user text-primary f-16"></i></a>
 <?php } ?>
         <?php if ($section == 'today' && $action == 'start') { ?>
-        <a href="<?php echo $scheduleUrl; ?>" title="Start" class="m-r-10"><i class="ti-control-play text-warning f-16"></i></a>
+        <a href="<?php echo $scheduleUrl; ?>" title="<?= htmlspecialchars(__('Start'), ENT_QUOTES, 'UTF-8'); ?>" class="m-r-10"><i class="ti-control-play text-warning f-16"></i></a>
         <?php } ?>
         <?php if ($section == 'today' && $action == 'finish') { ?>
-        <a href="<?php echo $scheduleUrl; ?>" title="Finish" class="m-r-10"><i class="ti-check text-success f-16"></i></a>
+        <a href="<?php echo $scheduleUrl; ?>" title="<?= htmlspecialchars(__('Finish'), ENT_QUOTES, 'UTF-8'); ?>" class="m-r-10"><i class="ti-check text-success f-16"></i></a>
         <?php } ?>
     <?php } ?>
     <?php
@@ -115,10 +115,10 @@ function amcVisitListRenderPagination($section, $locId, $page, $totalPages, $sea
     $start = max(1, $page - 2);
     $end = min($totalPages, $page + 2);
     ?>
-    <nav class="mt-2" aria-label="Visit list pagination">
+    <nav class="mt-2" aria-label="<?= htmlspecialchars(__('Visit list pagination'), ENT_QUOTES, 'UTF-8'); ?>">
         <ul class="pagination pagination-sm mb-0 justify-content-end flex-wrap">
             <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
-                <a class="page-link" href="<?php echo htmlspecialchars(amcVisitListPageUrl($section, $locId, max(1, $page - 1), $search), ENT_QUOTES, 'UTF-8'); ?>">Prev</a>
+                <a class="page-link" href="<?php echo htmlspecialchars(amcVisitListPageUrl($section, $locId, max(1, $page - 1), $search), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Prev'); ?></a>
             </li>
             <?php if ($start > 1) { ?>
             <li class="page-item"><a class="page-link" href="<?php echo htmlspecialchars(amcVisitListPageUrl($section, $locId, 1, $search), ENT_QUOTES, 'UTF-8'); ?>">1</a></li>
@@ -138,7 +138,7 @@ function amcVisitListRenderPagination($section, $locId, $page, $totalPages, $sea
             <li class="page-item"><a class="page-link" href="<?php echo htmlspecialchars(amcVisitListPageUrl($section, $locId, $totalPages, $search), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $totalPages; ?></a></li>
             <?php } ?>
             <li class="page-item <?php echo ($page >= $totalPages) ? 'disabled' : ''; ?>">
-                <a class="page-link" href="<?php echo htmlspecialchars(amcVisitListPageUrl($section, $locId, min($totalPages, $page + 1), $search), ENT_QUOTES, 'UTF-8'); ?>">Next</a>
+                <a class="page-link" href="<?php echo htmlspecialchars(amcVisitListPageUrl($section, $locId, min($totalPages, $page + 1), $search), ENT_QUOTES, 'UTF-8'); ?>"><?= __('Next'); ?></a>
             </li>
         </ul>
     </nav>
@@ -161,10 +161,10 @@ function amcVisitListRenderPagination($section, $locId, $page, $totalPages, $sea
                     <?php if ($locId != '') { ?>
                     <input type="hidden" name="LOCID" value="<?php echo htmlspecialchars($locId, ENT_QUOTES, 'UTF-8'); ?>">
                     <?php } ?>
-                    <input aria-label="Search" type="text" name="search" class="form-control form-control-sm" value="<?php echo htmlspecialchars($search, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Search contract, vendor/dept, asset, planned date..." style="min-width: 280px;">
-                    <button type="submit" class="btn btn-sm btn-primary">Search</button>
+                    <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="search" class="form-control form-control-sm" value="<?php echo htmlspecialchars($search, ENT_QUOTES, 'UTF-8'); ?>" placeholder="<?= htmlspecialchars(__('Search contract, vendor/dept, asset, planned date...'), ENT_QUOTES, 'UTF-8'); ?>" style="min-width: 280px;">
+                    <button type="submit" class="btn btn-sm btn-primary"><?= __('Search'); ?></button>
                 </form>
-                <button type="button" class="btn btn-sm"><i class="icofont icofont-reply"></i> Back</button>
+                <button type="button" class="btn btn-sm"><i class="icofont icofont-reply"></i> <?= __('Back'); ?></button>
             </div>
         </div>
         <div class="card-body table-responsive">
@@ -172,12 +172,12 @@ function amcVisitListRenderPagination($section, $locId, $page, $totalPages, $sea
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Contract</th>
-                        <th scope="col">Vendor/Dept</th>
-                        <th scope="col">Asset</th>
-                        <th scope="col">Planned Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col"><?= __('Contract'); ?></th>
+                        <th scope="col"><?= __('Vendor/Dept'); ?></th>
+                        <th scope="col"><?= __('Asset'); ?></th>
+                        <th scope="col"><?= __('Planned Date'); ?></th>
+                        <th scope="col"><?= __('Status'); ?></th>
+                        <th scope="col"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody>

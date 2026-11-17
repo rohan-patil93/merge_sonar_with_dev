@@ -20,16 +20,16 @@ $items = $data['items'] ?? [];
         <div class="col-lg-8">
             <div class="card shadow border-0">
                 <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0"><i class="ti-qr-code me-2 text-primary"></i> Fill Details for QR Code Generation
+                    <h5 class="mb-0"><i class="ti-qr-code me-2 text-primary"></i> <?= __('Fill Details for QR Code Generation'); ?>
                     </h5>
                     <a href="javascript:history.go(-1)" class="btn btn-outline-primary btn-sm">
-                        <i class="icofont icofont-reply"></i> Back
+                        <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
                     </a>
                 </div>
                 <div class="card-body p-4">
                     <div class="progress mb-4" style="height:25px;border-radius:50px;">
                         <div class="progress-bar bg-success text-white" id="formProgress"
-                            style="width:33.3%;border-radius:50px;">Step 1/3</div>
+                            style="width:33.3%;border-radius:50px;"><?= __('Step 1/3'); ?></div>
                     </div>
 
                     <form id="assetForm" onsubmit="return false;">
@@ -39,8 +39,8 @@ $items = $data['items'] ?? [];
                             <h5 class="fw-bold text-secondary mb-3"><i class="ti-map me-2 text-primary"></i> <?= __('Location & Building') ?></h5>
                             <div class="row g-3">
                                 <div class="col-md-6 w-full">
-                                    <span class="form-label">Location <span class="text-danger">*</span></span>
-                                    <select aria-label="Location" class="form-select js-example-basic-single required" id="location" name="location"
+                                    <span class="form-label"><?= __('Location'); ?> <span class="text-danger">*</span></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single required" id="location" name="location"
                                         onchange="onLocationChange(this.value)">
                                         <option value=""><?= __('Select Location') ?></option>
                                         <?php foreach ($locations as $loc): ?>
@@ -54,8 +54,8 @@ $items = $data['items'] ?? [];
                                 </div>
 
                                 <div class="col-md-6  w-full">
-                                    <span class="form-label">Building <span class="text-danger">*</span></span>
-                                    <select aria-label="Building" class="form-select js-example-basic-single required" id="building" name="building"
+                                    <span class="form-label"><?= __('Building'); ?> <span class="text-danger">*</span></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Building'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single required" id="building" name="building"
                                         onchange="onBuildingChange(this.value)">
                                         <option value=""><?= __('Select Building') ?></option>
                                     </select>
@@ -63,7 +63,7 @@ $items = $data['items'] ?? [];
 
                                 <div class="col-md-6 w-full">
                                     <span class="form-label"><?= __('Floor') ?></span>
-                                    <select aria-label="Floor" class="form-select js-example-basic-single " id="floor" name="floor"
+                                    <select aria-label="<?= htmlspecialchars(__('Floor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " id="floor" name="floor"
                                         onchange="onFloorChange(this.value)">
                                         <option value=""><?= __('Select Floor') ?></option>
                                     </select>
@@ -71,7 +71,7 @@ $items = $data['items'] ?? [];
 
                                 <div class="col-md-6 w-full">
                                     <span class="form-label"><?= __('Space') ?></span>
-                                    <select aria-label="Space" class="form-select js-example-basic-single " id="space" name="space"
+                                    <select aria-label="<?= htmlspecialchars(__('Space'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " id="space" name="space"
                                         onchange="updatePreview()">
                                         <option value=""><?= __('Select Space') ?></option>
                                     </select>
@@ -83,7 +83,7 @@ $items = $data['items'] ?? [];
                             <h5 class="fw-bold text-secondary mb-3"><i class="ti-package me-2 text-primary"></i> <?= __('Select Type / Asset') ?></h5>
 
                             <div class="mb-3">
-                                <span class="form-label d-block">What do you want to generate?<span
+                                <span class="form-label d-block"><?= __('What do you want to generate?'); ?><span
                                         class="text-danger">*</span></span>
                                 <div>
                                     <div class="form-check form-check-inline">
@@ -97,14 +97,14 @@ $items = $data['items'] ?? [];
                                         <label class="form-check-label" for="typeItem"><?= __('Items') ?></label>
                                     </div>
                                 </div>
-                                <div class="invalid-feedback">Please choose a type.</div>
+                                <div class="invalid-feedback"><?= __('Please choose a type.'); ?></div>
                             </div>
 
                             <!-- Asset fields -->
                             <div class="row g-3 mb-4 d-none" id="assetFields">
                                 <div class="col-md-6 w-full">
-                                    <span class="form-label">Asset <span class="text-danger">*</span></span>
-                                    <select aria-label="Asset Description" class="form-select js-example-basic-single" id="assetDesc" name="asset_description"
+                                    <span class="form-label"><?= __('Asset'); ?> <span class="text-danger">*</span></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Asset Description'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="assetDesc" name="asset_description"
                                         onchange="onAssetChange(this.value)">
                                         <option value=""><?= __('Select Asset') ?></option>
                                         <?php foreach ($assets as $a): ?>
@@ -116,19 +116,19 @@ $items = $data['items'] ?? [];
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <div class="invalid-feedback">Please choose an asset.</div>
+                                    <div class="invalid-feedback"><?= __('Please choose an asset.'); ?></div>
                                 </div>
                                 <div class="col-md-6">
                                     <span class="form-label"><?= __('Asset Code') ?></span>
-                                    <input aria-label="Asset Code" type="text" class="form-control" id="assetCode" name="asset_code" readonly value="<?= $editRow ? htmlspecialchars($editRow['asset_code']) : '' ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Asset Code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="assetCode" name="asset_code" readonly value="<?= $editRow ? htmlspecialchars($editRow['asset_code']) : '' ?>">
                                 </div>
                             </div>
 
                             <!-- Item fields -->
                             <div class="row g-3 mb-4 d-none" id="itemFields">
                                 <div class="col-md-6 w-full">
-                                    <span class="form-label">Item <span class="text-danger">*</span></span>
-                                    <select aria-label="Item Name" class="form-select js-example-basic-single" id="itemName" name="item_name"
+                                    <span class="form-label"><?= __('Item'); ?> <span class="text-danger">*</span></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Item Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="itemName" name="item_name"
                                         onchange="onItemChange(this.value)">
                                         <option value=""><?= __('Select Item') ?></option>
                                         <?php foreach ($items as $it): ?>
@@ -140,11 +140,11 @@ $items = $data['items'] ?? [];
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <div class="invalid-feedback">Please choose an item.</div>
+                                    <div class="invalid-feedback"><?= __('Please choose an item.'); ?></div>
                                 </div>
                                 <div class="col-md-6">
                                     <span class="form-label"><?= __('SKU') ?></span>
-                                    <input aria-label="Sku" type="text" class="form-control" id="sku" name="sku" readonly value="<?= $editRow ? htmlspecialchars($editRow['sku']) : '' ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Sku'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="sku" name="sku" readonly value="<?= $editRow ? htmlspecialchars($editRow['sku']) : '' ?>">
                                 </div>
                             </div>
 
@@ -155,7 +155,7 @@ $items = $data['items'] ?? [];
                             <h5 class="fw-bold text-secondary mb-3"><i class="ti-notepad me-2 text-primary"></i>
                                 <?= __('Additional Notes') ?></h5>
                             <div class="mb-4">
-                                <textarea aria-label="Any additional details..." class="form-control" id="remarks" name="remarks" rows="5"
+                                <textarea aria-label="<?= htmlspecialchars(__('Any additional details...'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="remarks" name="remarks" rows="5"
                                     placeholder="<?= __('Any additional details...') ?>"><?= $editRow ? htmlspecialchars($editRow['remarks']) : '' ?></textarea>
                             </div>
                         </div>
@@ -177,7 +177,7 @@ $items = $data['items'] ?? [];
         <!-- preview column -->
         <div class="col-lg-4">
             <div class="card shadow border-0 h-100">
-                <div class="card-header bg-primary text-white fw-bold" id="previewHeader">Live Details Preview</div>
+                <div class="card-header bg-primary text-white fw-bold" id="previewHeader"><?= __('Live Details Preview'); ?></div>
                 <div class="card-body custom-scroll" id="previewCard">
                     <p class="text-muted"><?= __('Fill the form to see details in preview of every step...') ?></p>
                 </div>
@@ -187,8 +187,8 @@ $items = $data['items'] ?? [];
                         <?php if ($editRow && $editRow['qr_code']){ ?>
                             <div class="text-center mb-3">
                                 <img src="uploads/all/<?= htmlspecialchars($editRow['qr_code']) ?>"
-                                    alt="QR Code" style="max-width:140px;">
-                                <div class="small text-muted mt-1">Existing QR</div>
+                                    alt="<?= htmlspecialchars(__('QR Code'), ENT_QUOTES, 'UTF-8'); ?>" style="max-width:140px;">
+                                <div class="small text-muted mt-1"><?= __('Existing QR'); ?></div>
                             </div>
                             <?php } ?>
 
@@ -579,21 +579,21 @@ $items = $data['items'] ?? [];
             if (resJson.status && resJson.status.toLowerCase() == 'sucess') {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Success',
+                    title: <?php echo json_encode(__('Success'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     text: resJson.message || 'Saved successfully!',
                     allowOutsideClick: false,
                     allowEscapeKey: false,
-                    confirmButtonText: 'OK',
+                    confirmButtonText: <?php echo json_encode(__('OK'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 }).then(() => window.location.reload());
             } else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error',
+                    title: <?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     text: resJson.message || 'Failed to save.'
                 });
             }
         } catch (err) {
-            Swal.fire({ icon: 'error', title: 'Error', text: err.message });
+            Swal.fire({ icon: 'error', title: <?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, text: err.message });
         } finally {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;

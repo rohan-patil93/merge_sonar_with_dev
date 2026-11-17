@@ -25,7 +25,7 @@
 
          htmlRows += '<td class="w-full"><select aria-label="<?php echo __('Name[]'); ?>" class="form-select js-example-basic-single mileagename" name="name[]">';
                 <?php foreach($vehicleTypes as $vtype){ ?>
-                htmlRows += '<option value="<?php echo $vtype['genc_detail_code']; ?>"><?php echo $vtype['genc_detail_name']; ?></option>';
+                htmlRows += '<option value="<?php echo $vtype['genc_detail_code']; ?>"><?php echo __($vtype['genc_detail_name']); ?></option>';
                 <?php } ?>
         htmlRows += '</select></td>';
 
@@ -99,7 +99,7 @@ function cehckalredayavailablename(valu){
                         <td class="w-full event_disabled">
                             <select aria-label="<?php echo __('Name[]'); ?>" class="form-select js-example-basic-single mileagename" name="name[]">
                                 <?php foreach($vehicleTypes as $vtype){ ?>
-                                <option value="<?php echo $vtype['genc_detail_code']; ?>" <?php echo $inst['name']==$vtype['genc_detail_code']?"selected":""; ?>><?php echo $vtype['genc_detail_name']; ?></option>
+                                <option value="<?php echo $vtype['genc_detail_code']; ?>" <?php echo $inst['name']==$vtype['genc_detail_code']?"selected":""; ?>><?php echo __($vtype['genc_detail_name']); ?></option>
                                 <?php } ?>
                             </select>
 

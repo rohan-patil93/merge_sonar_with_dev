@@ -16,7 +16,7 @@ $statuse = ViewStatusData();
 ?>
 <div class="card">
     <div class="card-header">
-        <h5>Sales Orders Details</h5>
+        <h5><?= __('Sales Orders Details'); ?></h5>
     </div>
     <input type="hidden" id="transaction_option_name" value='<?php echo $_POST['option']; ?>'>
     <div class="card-body table-responsive">
@@ -24,8 +24,8 @@ $statuse = ViewStatusData();
     <table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" >
         <thead>
             <tr>
-                <th scope="col" >Transaction No.</th>
-                <th scope="col">Transaction Date</th>
+                <th scope="col" ><?= __('Transaction No.'); ?></th>
+                <th scope="col"><?= __('Transaction Date'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -46,7 +46,7 @@ $statuse = ViewStatusData();
                             <td  class="p-1 w-b-w-s "><?php echo $tableslist[0]['party_name']; ?></td>
                         </tr>
                         <tr>
-                            <td  class="p-1">Statuse</td>
+                            <td  class="p-1"><?= __('Statuse'); ?></td>
                             <td  class="p-1"><span class="form-label label label-md" style="color:<?php echo $statuse[$tableslist[0]['current_status']]['color']; ?>; background-color:<?php echo $statuse[$tableslist[0]['current_status']]['background_color']; ?>;"><?php echo $status_progress[$tableslist[0]['current_status']]['name']; ?></span></td>
                         </tr>
                     </table>
@@ -54,7 +54,7 @@ $statuse = ViewStatusData();
                 <td class="align-top">
                     <table style="width: 100%;">
                         <thead>
-                            <tr><th scope="col" class="p-1">Item</th><th scope="col" class="text-right p-1">Quantity</th><th scope="col" class="text-right p-1">Pending Quantity</th><th scope="col" class="text-right p-1">Amount</th><th scope="col" class="text-right p-1">Tax</th><th scope="col" class="text-right p-1">Total</th></tr>
+                            <tr><th scope="col" class="p-1"><?= __('Item'); ?></th><th scope="col" class="text-right p-1"><?= __('Quantity'); ?></th><th scope="col" class="text-right p-1"><?= __('Pending Quantity'); ?></th><th scope="col" class="text-right p-1"><?= __('Amount'); ?></th><th scope="col" class="text-right p-1"><?= __('Tax'); ?></th><th scope="col" class="text-right p-1"><?= __('Total'); ?></th></tr>
                         </thead>
                         <tbody>
                         <?php foreach($tableslist as $tableslist1){?>
@@ -77,7 +77,7 @@ $statuse = ViewStatusData();
     </table>
     <?php }else{ ?>
         <div class="card-px text-center ">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Invoices</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Invoices'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>

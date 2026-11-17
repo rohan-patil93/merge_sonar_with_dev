@@ -8,10 +8,10 @@ $response = $return['amc_details'];
 <!-- Pradeep HTML Start here -->
 <div class="card">
     <div class="card-header">
-        <h5>Account Management</h5>
+        <h5><?= __('Account Management'); ?></h5>
         <div class="card-header-right">
             <a href="index.php?option=COM_INSERT_AMC_ACCOUNT_DETAILS" class="btn btn-success mb-2 desktop-view">
-                <i class="icofont icofont-plus icon-white "></i>  Account
+                <i class="icofont icofont-plus icon-white "></i>  <?= __('Account'); ?>
             </a>
 
         </div>
@@ -27,23 +27,23 @@ $response = $return['amc_details'];
                     <span class="input-group-text addon-style">
                         <span class=""><i class="fa fa-search"></i></span>
                     </span>
-                    <input aria-label="Serach By Account Name" type="text" class="form-control" placeholder="Serach By Account Name">
+                    <input aria-label="<?= htmlspecialchars(__('Serach By Account Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="<?= htmlspecialchars(__('Serach By Account Name'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
             </div>
         </div>
         <div class="table-responsive mt-3">
             <table class="table table-bordered table-sm f-12">
                 <tr class="f-14">
-                    <th scope="col">SL NO</th>
-                    <th scope="col">Account Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">State</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Pin No</th>
-                    <th scope="col">Phone No</th>
-                    <th scope="col">GST No</th>
-                    <th scope="col">Account Group</th>
-                    <th scope="col">Edit</th>
+                    <th scope="col"><?= __('SL NO'); ?></th>
+                    <th scope="col"><?= __('Account Name'); ?></th>
+                    <th scope="col"><?= __('Address'); ?></th>
+                    <th scope="col"><?= __('State'); ?></th>
+                    <th scope="col"><?= __('City'); ?></th>
+                    <th scope="col"><?= __('Pin No'); ?></th>
+                    <th scope="col"><?= __('Phone No'); ?></th>
+                    <th scope="col"><?= __('GST No'); ?></th>
+                    <th scope="col"><?= __('Account Group'); ?></th>
+                    <th scope="col"><?= __('Edit'); ?></th>
                 </tr>
                 <?php $i=1;foreach ($response as $row) { ?>
                     <tr>

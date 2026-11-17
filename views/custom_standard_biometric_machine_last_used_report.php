@@ -35,14 +35,14 @@ if (count((array)$result)>0) {
 <div class="page-body biometric-machine-last-used-report">
     <div class="card">
         <div class="card-header">
-            <h5>Biometric Machine Last Used Report</h5>
+            <h5><?= __('Biometric Machine Last Used Report'); ?></h5>
             <div class="card-header-right">
                 <div class="dropdown-primary dropdown open">
                     <button class="btn btn-primary dropdown-toggle waves-light" type="button" data-bs-toggle="dropdown">
-                        More
+                        <?= __('More'); ?>
                     </button>
                     <div class="dropdown-menu p-0">
-                        <a class="dropdown-item" href="custom_view_download.php?page=BiometricMachineLastUsedReport&format=csv" target="_blank">CSV</a>
+                        <a class="dropdown-item" href="custom_view_download.php?page=BiometricMachineLastUsedReport&format=csv" target="_blank"><?= __('CSV'); ?></a>
                     </div>
                 </div>
             </div>
@@ -52,9 +52,9 @@ if (count((array)$result)>0) {
             <form method="post" action="">
                 <div class="row align-items-end">
                     <div class="col-md-4 mb-3">
-                        <span class="form-label">Machine</span>
-                        <select aria-label="Machine Number" class="form-control js-biometric-machine-filter js-example-basic-single" name="machine_number">
-                            <option value="">All Machines</option>
+                        <span class="form-label"><?= __('Machine'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Machine Number'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-biometric-machine-filter js-example-basic-single" name="machine_number">
+                            <option value=""><?= __('All Machines'); ?></option>
                             <?php foreach ($machineOptions as $machineOption) {
                                 $optionMachineNumber = (string)($machineOption['MachineNumber'] ?? '');
                                 if ($optionMachineNumber == '') {
@@ -70,7 +70,7 @@ if (count((array)$result)>0) {
                         </select>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <button type="submit" class="btn btn-info w-100">Search</button>
+                        <button type="submit" class="btn btn-info w-100"><?= __('Search'); ?></button>
                     </div>
                 </div>
             </form>
@@ -91,14 +91,14 @@ if (count((array)$result)>0) {
                 <table class="table table-hover biometric-machine-last-used-table">
                     <thead>
                         <tr>
-                            <th scope="col">Sl No</th>
-                            <th scope="col">Machine Name</th>
-                            <th scope="col">Machine Number</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">InOutIndicator</th>
-                            <th scope="col">Latest Date Time</th>
-                            <th scope="col">Last Employee Code</th>
-                            <th scope="col">Last Employee Name</th>
+                            <th scope="col"><?= __('Sl No'); ?></th>
+                            <th scope="col"><?= __('Machine Name'); ?></th>
+                            <th scope="col"><?= __('Machine Number'); ?></th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('InOutIndicator'); ?></th>
+                            <th scope="col"><?= __('Latest Date Time'); ?></th>
+                            <th scope="col"><?= __('Last Employee Code'); ?></th>
+                            <th scope="col"><?= __('Last Employee Name'); ?></th>
 
                         </tr>
                     </thead>
@@ -185,7 +185,7 @@ if (count((array)$result)>0) {
                         } else {
                             ?>
                             <tr>
-                                <td colspan="9" class="text-center">No Data Available</td>
+                                <td colspan="9" class="text-center"><?= __('No Data Available'); ?></td>
                             </tr>
                             <?php
                         }

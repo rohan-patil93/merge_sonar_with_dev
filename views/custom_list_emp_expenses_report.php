@@ -57,17 +57,17 @@ if ($admin_type == '3') {
 <div class="page-body">
 	<div class="card">
 		<div class="card-header">
-			<h5>Employee Expenses Report</h5>
+			<h5><?= __('Employee Expenses Report'); ?></h5>
 			<div class="card-header-right">
 				<div class="dropdown-primary dropdown open">
-					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="empExpensesReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="empExpensesReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
 					<div class="dropdown-menu p-0" aria-labelledby="empExpensesReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employee%20Expenses%20Report" target="_blank" rel="noopener noreferrer">CSV</a>
+						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employee%20Expenses%20Report" target="_blank" rel="noopener noreferrer"><?= __('CSV'); ?></a>
 					</div>
 				</div>
 				<button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
 					<i class="icofont icofont-reply" aria-hidden="true"></i>
-					Back
+					<?= __('Back'); ?>
 				</button>
 			</div>
 		</div>
@@ -75,8 +75,8 @@ if ($admin_type == '3') {
 			<div class="row">
 				<?php if ($admin_type != '3') { ?>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="emp_id">Employees</label>
-					<select class="form-control js-example-basic-multiple" id="emp_id" name="emp_id[]" multiple="multiple" style="width:100%" aria-label="Emp Id">
+					<label for="emp_id"><?= __('Employees'); ?></label>
+					<select class="form-control js-example-basic-multiple" id="emp_id" name="emp_id[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Emp Id'), ENT_QUOTES, 'UTF-8'); ?>">
 						<?php if (!empty($employees)) {
 							foreach ($employees as $emp_row) {
 								$eid = is_array($emp_row) ? ($emp_row['id'] ?? '') : ($emp_row->id ?? '');
@@ -92,32 +92,32 @@ if ($admin_type == '3') {
 				<?php } ?>
 
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="from_date">From Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="From Date">
+					<label for="from_date"><?= __('From Date'); ?> <span class="text-danger">*</span></label>
+					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="to_date">To Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="To Date">
+					<label for="to_date"><?= __('To Date'); ?> <span class="text-danger">*</span></label>
+					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="status">Status</label>
-					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="Status">
-						<option value="2">Draft</option>
-						<option value="0">Active</option>
-						<option value="199">Approved</option>
+					<label for="status"><?= __('Status'); ?></label>
+					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>">
+						<option value="2"><?= __('Draft'); ?></option>
+						<option value="0"><?= __('Active'); ?></option>
+						<option value="199"><?= __('Approved'); ?></option>
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="expense_type">Expense Type</label>
-					<select class="form-control js-example-basic-multiple" id="expense_type" name="expense_type[]" multiple="multiple" style="width:100%" aria-label="Expense Type">
-						<option value="0">Expense</option>
-						<option value="1">Mileage</option>
-						<option value="2">Per Diem</option>
+					<label for="expense_type"><?= __('Expense Type'); ?></label>
+					<select class="form-control js-example-basic-multiple" id="expense_type" name="expense_type[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Expense Type'), ENT_QUOTES, 'UTF-8'); ?>">
+						<option value="0"><?= __('Expense'); ?></option>
+						<option value="1"><?= __('Mileage'); ?></option>
+						<option value="2"><?= __('Per Diem'); ?></option>
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="getEmpExpensesReportBtn" aria-label="Search">&nbsp;</label>
-					<button type="button" class="btn btn-primary form-control" id="getEmpExpensesReportBtn">Search</button>
+					<label for="getEmpExpensesReportBtn" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">&nbsp;</label>
+					<button type="button" class="btn btn-primary form-control" id="getEmpExpensesReportBtn"><?= __('Search'); ?></button>
 				</div>
 			</div>
 			<div class="row mt-3 custom-scroll" id="Tablecontent" style="height:500px"></div>
@@ -168,7 +168,7 @@ if ($admin_type == '3') {
 
 		var statuses = eerFilterIds($("#status").val());
 		var expenseTypes = eerFilterIds($("#expense_type").val());
-		var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Loading..."></div>';
+		var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
 		$("#Tablecontent").html(loader);
 
 		$.ajax({
@@ -186,14 +186,14 @@ if ($admin_type == '3') {
 				$("#Tablecontent").html(response);
 			},
 			error: function () {
-				$("#Tablecontent").html('<div class="col-12"><p class="text-danger mb-0">Unable to load Employee Expenses Report.</p></div>');
+				$("#Tablecontent").html('<div class="col-12"><p class="text-danger mb-0"><?= htmlspecialchars(__('Unable to load Employee Expenses Report.'), ENT_QUOTES, 'UTF-8'); ?></p></div>');
 			}
 		});
 	}
 
 	$(document).ready(function () {
 		$(".js-example-basic-multiple").select2({
-			placeholder: "All",
+			placeholder: <?php echo json_encode(__('All'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 			allowClear: true,
 			width: "100%"
 		});

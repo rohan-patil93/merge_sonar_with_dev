@@ -35,24 +35,24 @@ $feasibility_requirements = $result['feasibility_requirements'];
     <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h5>Contacts <small class="f-12 text-info">(<?php echo fromDate($from_date)." To ".fromDate($to_date); ?>)</small></h5>
+                <h5><?= __('Contacts'); ?> <small class="f-12 text-info">(<?php echo fromDate($from_date)." To ".fromDate($to_date); ?>)</small></h5>
                 <div class="card-header-right">
-                    <button type="button" class="btn btn-success mb-2 desktop-view leadsidebar "  onclick="leadPageCall('CONTACT')"><i class="icofont icofont-plus icon-white "></i> Contact </button>
+                    <button type="button" class="btn btn-success mb-2 desktop-view leadsidebar "  onclick="leadPageCall('CONTACT')"><i class="icofont icofont-plus icon-white "></i> <?= __('Contact'); ?> </button>
                 </div>
             </div>
             <div class="card-body">
                 <?php if(count((array)$crm_contacts) !=0){ ?>
                 <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                     <thead>
-                        <tr><th scope="col">Name</th>
-                            <th scope="col">Number</th>
-                            <th scope="col">Originator</th>
+                        <tr><th scope="col"><?= __('Name'); ?></th>
+                            <th scope="col"><?= __('Number'); ?></th>
+                            <th scope="col"><?= __('Originator'); ?></th>
 
-                            <th scope="col">Last Action</th>
-                            <th scope="col">Feasibility Check</th>
-                            <th scope="col">Feasibility Stause</th>
+                            <th scope="col"><?= __('Last Action'); ?></th>
+                            <th scope="col"><?= __('Feasibility Check'); ?></th>
+                            <th scope="col"><?= __('Feasibility Stause'); ?></th>
 
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Status'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,9 +64,9 @@ $feasibility_requirements = $result['feasibility_requirements'];
                             <td  class="p-2">
                                 <div class="align-middle">
                                   <?php if($crmleads['image']) { ?>
-                                      <img src="uploads/all/<?php echo $crmleads['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                      <img src="uploads/all/<?php echo $crmleads['image']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                   <?php } else { ?>
-                                      <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($crmleads['display_name']); ?></span>
+                                      <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($crmleads['display_name']); ?></span>
                                   <?php } ?>
                                   <div class="d-inline-block width73">
                                       <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('CONTACT','<?php echo $crmleads['id']; ?>')"><h6><?php echo $crmleads['display_name']; ?></h6></button>
@@ -85,9 +85,9 @@ $feasibility_requirements = $result['feasibility_requirements'];
                                 if($crmleads['feasibility_check'] =="Y"){
                                     if($feasibility_requirement['current_status'] =="199"){
                                         if($feasibility_requirement['sales_order_id'] !=""){
-                                            echo "Closed/SO Created";
+                                            echo __('Closed/SO Created');
                                         }else{
-                                            echo "Closed/SO Pending";
+                                            echo __('Closed/SO Pending');
                                         }
                                     }else{
                                         echo "Open";
@@ -154,9 +154,9 @@ $feasibility_requirements = $result['feasibility_requirements'];
                                <td  class="p-2">
                                 <div class="align-middle">
                                   <?php  if($reocrdarray['3']) { ?>
-                                      <img src="uploads/all/<?php echo $reocrdarray['3']; ?>"  class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                      <img src="uploads/all/<?php echo $reocrdarray['3']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                   <?php } else { ?>
-                                      <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($reocrdarray['1']); ?></span>
+                                      <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($reocrdarray['1']); ?></span>
                                   <?php } ?>
                                   <div class="d-inline-block width73">
                                       <button type="button" !" class="leadsidebar text-primary" onclick="leadPageCall('LEAD','<?php echo $reocrdarray['0']; ?>')"><h6><?php echo $reocrdarray['1']; ?></h6></button>

@@ -110,7 +110,7 @@ $itemres = json_decode($itemres,1);
         htmlRows += '<td><label class="kt-checkbox"> <input aria-label="<?php echo __('Checkbox'); ?>"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
         htmlRows += '<td><input aria-label="<?php echo __('Input field'); ?>" class="form-control" type="text" value="'+count+'" > </td>';
         htmlRows += '<td><select aria-label="<?php echo __('Product Code[]'); ?>" class="form-control"  name= "productCode[]" id="productCode_'+count+'" onchange="quantityCheck(this.id)"> <option value="0"> <?php echo __('Select Any Prodcut'); ?> </option><?php foreach ($itemres as  $item) {  ?>      <option  value = <?php echo $item[id]; ?>><?php echo $item[name]; ?> </option> <?php
-} ?><option  value = "+add"> <b> + ADD </b></option> </select> </td>';
+} ?><option  value = "+add"> <b> + <?= htmlspecialchars(__('ADD'), ENT_QUOTES, 'UTF-8'); ?> </b></option> </select> </td>';
         htmlRows += '<td><textarea aria-label="<?php echo __('Product Name[]'); ?>" name="productName[]" id="productName_'+count+'" class="form-control"></textarea></td>';
         htmlRows += '<td><input aria-label="<?php echo __('Quantity[]'); ?>" type="text" name="quantity[]" id="quantity_'+count+'" class="form-control quantity amount" onblur="quantityCheck(this.id)" autocomplete="off"></td>';
         htmlRows += '<td><input aria-label="<?php echo __('Price[]'); ?>" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" autocomplete="off"></td>';
@@ -259,10 +259,10 @@ function calculateTotal(){
                             text: <?php echo json_encode(__('Do you want to change the quantity to')); ?>+parseFloat(data)+" ?",
                             type: "warning",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, change!",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, change!'), ENT_QUOTES, 'UTF-8'); ?>",
                             confirmButtonClass: "btn btn-danger",
                             showCancelButton: true,
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, proceed",
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, proceed'), ENT_QUOTES, 'UTF-8'); ?>",
                             cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {

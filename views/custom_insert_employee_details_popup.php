@@ -77,7 +77,7 @@ $bankdetails = array('bank_id','bank_link','bank_account_no');
                         type: "error",
                         showCancelButton: true,
                         showConfirmButton: false,
-                        cancelButtonText: "Ok",
+                        cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         confirmButtonClass: "btn-danger",
                         closeOnCancel: false
                     });
@@ -88,11 +88,11 @@ $bankdetails = array('bank_id','bank_link','bank_account_no');
 
                     swal({
                         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                        text: 'Email Id Already Used :'+returnres.email_repeated,
+                        text: <?php echo json_encode(__('Email Id Already Used').' :', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+returnres.email_repeated,
                         type: "error",
                         showCancelButton: true,
                         showConfirmButton: false,
-                        cancelButtonText: "Ok",
+                        cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         confirmButtonClass: "btn-danger",
                         closeOnCancel: false
                     });
@@ -102,12 +102,12 @@ $bankdetails = array('bank_id','bank_link','bank_account_no');
 
                     swal({
                         title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-                        text: 'Employee Successfully Inserted '+biometric_code+' - Do You Want Define The Salary',
+                        text: <?php echo json_encode(__('Employee Successfully Inserted').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+biometric_code+' - Do You Want Define The Salary',
                         type: "info",
                         showCancelButton: true,
                         confirmButtonClass: "btn-danger",
-                        confirmButtonText: "Yes",
-                        cancelButtonText: "No",
+                        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         closeOnConfirm: true,
                         closeOnCancel: true
                     },
@@ -135,7 +135,7 @@ $bankdetails = array('bank_id','bank_link','bank_account_no');
 </style>
 <div class="modal-header">
     <h4 class="modal-title"><?= __('View Employee details') ?></h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 
 <div class="modal-body j-pro">
@@ -291,7 +291,7 @@ if($key == "bank_id"){ $employee_detail = $banks[$employee_detail]['bank_name'];
                                 <?php }
 }
 if($exper=="0"){
-                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> No Experience Details</h4></td</tr>";
+                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> ".__('No Experience Details')."</h4></td</tr>";
                                     } ?>
                             </tbody>
                         </table>
@@ -319,7 +319,7 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                                  ?>
                                     <tr>
                                         <td><?php echo $valueinstitute; ?></td>
-                                        <td><?php echo $type[0]['genc_detail_name']; ?></td>
+                                        <td><?php echo __($type[0]['genc_detail_name']); ?></td>
                                         <td><?php echo $employee_details['start_date'][$k2y]; ?></td>
                                         <td><?php echo $employee_details['end_date'][$k2y]; ?></td>
                                         <td><?php echo $employee_details['score'][$k2y]; ?></td>
@@ -327,7 +327,7 @@ $type = filterArrayValue($edutypedata,"genc_detail_code",$employee_details['educ
                                 <?php }
 }
 if($qualifi=="0"){
-                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> No Qualification Details</h4></td</tr>";
+                                        echo "<tr><td colspan='5' class='text-center'><h4><i class='ti-help-alt'></i> ".__('No Qualification Details')."</h4></td</tr>";
                                     } ?>
                             </tbody>
                         </table>
@@ -357,7 +357,7 @@ if($qualifi=="0"){
                                 <?php }
 }
 if($depend=="0"){
-                                        echo "<tr><td colspan='3' class='text-center'><h4><i class='ti-help-alt'></i> No Dependents Details</h4></td</tr>";
+                                        echo "<tr><td colspan='3' class='text-center'><h4><i class='ti-help-alt'></i> ".__('No Dependents Details')."</h4></td</tr>";
                                     } ?>
 
                             </tbody>
@@ -390,7 +390,7 @@ if($depend=="0"){
                                     <?php } ?>
                                     <?php }
                                     if($emrg=="0"){
-                                        echo "<tr><td colspan='4' class='text-center'><h4><i class='ti-help-alt'></i> No Emergency Contact</h4></td</tr>";
+                                        echo "<tr><td colspan='4' class='text-center'><h4><i class='ti-help-alt'></i> ".__('No Emergency Contact')."</h4></td</tr>";
                                     }
 
                                      ?>

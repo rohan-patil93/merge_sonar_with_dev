@@ -263,7 +263,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                 <div class="row">
                     <div class="col-md-4 form-group">
                         <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Document Type') ?> <span class="text-danger">*</span></span>
-                        <select name="document_type_id" class="form-control js-example-basic-single" required aria-label="Document Type Id">
+                        <select name="document_type_id" class="form-control js-example-basic-single" required aria-label="<?= htmlspecialchars(__('Document Type Id'), ENT_QUOTES, 'UTF-8'); ?>">
                             <option value=""><?= __('Select Document Type') ?></option>
                             <?php if (count((array)$documentTypes) > 0) {
                                 foreach ($documentTypes as $typeRow) {
@@ -280,13 +280,13 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                     </div>
                     <div class="col-md-4 form-group">
                         <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Document Name') ?> <span class="text-danger">*</span></span>
-                        <input type="text" name="document_name" class="form-control" value="<?php echo dmText($selectedDocumentName); ?>" required aria-label="Document Name">
+                        <input type="text" name="document_name" class="form-control" value="<?php echo dmText($selectedDocumentName); ?>" required aria-label="<?= htmlspecialchars(__('Document Name'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-md-12">
-                        <span class="form-label d-block mb-2">Files <span class="text-danger">*</span></span>
+                        <span class="form-label d-block mb-2"><?= __('Files'); ?> <span class="text-danger">*</span></span>
                         <div id="documentFileRows">
                             <?php if (count((array)$fileRows) > 0) {
                                 foreach ($fileRows as $fileIndex => $fileRow) {
@@ -296,15 +296,15 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                                     <div class="row document-file-row mb-2">
                                         <div class="col-md-4 form-group">
                                             <input type="hidden" name="file_id[]" value="<?php echo dmText($fileRow['id'] ?? ''); ?>">
-                                            <input type="text" name="file_name[]" class="form-control" placeholder="<?= __('File Name') ?>" value="<?php echo dmText($fileRow['file_name'] ?? ''); ?>" required aria-label="File Name">
+                                            <input type="text" name="file_name[]" class="form-control" placeholder="<?= __('File Name') ?>" value="<?php echo dmText($fileRow['file_name'] ?? ''); ?>" required aria-label="<?= htmlspecialchars(__('File Name'), ENT_QUOTES, 'UTF-8'); ?>">
                                         </div>
                                         <div class="col-md-4 form-group">
-                                            <input type="file" name="document_file[]" class="form-control" <?php echo $hasStoredFile ? '' : 'required'; ?> aria-label="Document File">
+                                            <input type="file" name="document_file[]" class="form-control" <?php echo $hasStoredFile ? '' : 'required'; ?> aria-label="<?= htmlspecialchars(__('Document File'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <input type="hidden" name="file[]" value="<?php echo dmText($fileRow['file'] ?? ''); ?>">
                                             <input type="hidden" name="actual_file_name[]" value="<?php echo dmText($fileRow['actual_file_name'] ?? ''); ?>">
                                             <?php if ($hasStoredFile) { ?>
                                                 <small class="text-muted d-block mt-1">
-                                                    Current:
+                                                    <?= __('Current'); ?>:
                                                     <a target="_blank" href="<?php echo dmText($uploadDir . ($fileRow['file'] ?? '')); ?>" download>
                                                         <?php echo dmText($fileRow['actual_file_name'] ?? $fileRow['file']); ?>
                                                     </a>
@@ -327,7 +327,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                         <button type="submit" name="submit" value="<?php echo $isEdit ? 'update' : 'insert'; ?>" class="btn btn-success">
                             <?= __('Save') ?>
                         </button>
-                        <a href="index.php?option=<?php echo dmText($listOption); ?>" class="btn btn-secondary">Cancel</a>
+                        <a href="index.php?option=<?php echo dmText($listOption); ?>" class="btn btn-secondary"><?= __('Cancel'); ?></a>
                     </div>
                 </div>
             </form>
@@ -387,12 +387,12 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
     function submitDynamicWorkflow(table_name, transaction_id, current_status, next_status, old_status_name, new_status_name) {
         swal({
             title: "<?php echo ucwords((string)($_SESSION['config']['name'] ?? '')); ?>",
-            text: "Please note the status of the document will change to " + new_status_name,
+            text: <?php echo json_encode(__('Please note the status of the document will change to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> + new_status_name,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: false
         },
         function () {
@@ -417,12 +417,12 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
                         });
                     } else {
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -456,10 +456,10 @@ if (isset($_POST['submit']) && $_POST['submit'] != '' && $errorMessage != '') {
             + '<div class="row document-file-row mb-2">'
             + '<div class="col-md-4 form-group">'
             + '<input type="hidden" name="file_id[]" value="">'
-            + '<input type="text" name="file_name[]" class="form-control" placeholder="<?= __('File Name') ?>" required aria-label="File Name">'
+            + '<input type="text" name="file_name[]" class="form-control" placeholder="<?= __('File Name') ?>" required aria-label="<?= htmlspecialchars(__('File Name'), ENT_QUOTES, 'UTF-8'); ?>">'
             + '</div>'
             + '<div class="col-md-4 form-group">'
-            + '<input type="file" name="document_file[]" class="form-control" required aria-label="Document File">'
+            + '<input type="file" name="document_file[]" class="form-control" required aria-label="<?= htmlspecialchars(__('Document File'), ENT_QUOTES, 'UTF-8'); ?>">'
             + '<input type="hidden" name="file[]" value="">'
             + '<input type="hidden" name="actual_file_name[]" value="">'
             + '</div>'

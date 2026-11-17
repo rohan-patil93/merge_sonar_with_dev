@@ -34,11 +34,11 @@ $selectdata = $data['table_filed'];
 <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
 	<div class="card card-custom">
 		<div class="card-header table-card-header">
-			<h5><?php echo "Api Filed Mapping";  ?></h5>
+			<h5><?php echo __("Api Filed Mapping");  ?></h5>
 			<div class="card-header-right table-card-header ">
 				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 					<i class="icofont icofont-reply" aria-hidden="true"></i>
-					Back
+					<?= __('Back'); ?>
 				</a>
 		</div>
 	</div>
@@ -46,7 +46,7 @@ $selectdata = $data['table_filed'];
 		<div class="row">
 			<div class="col-lg-3">
 				<label class="form-label" for="transaction_table"><?= __('Transaction') ?></label>
-				<select class="form-select js-example-basic-single" name="transaction_table" id="transaction_table" onchange="gettTransactionIDRecords()" aria-label="Transaction">
+				<select class="form-select js-example-basic-single" name="transaction_table" id="transaction_table" onchange="gettTransactionIDRecords()" aria-label="<?= htmlspecialchars(__('Transaction'), ENT_QUOTES, 'UTF-8'); ?>">
              		<option value=""><?= __('Select Any One') ?></option>
                 	<?php foreach($all_api_masters as $dmt) {  ?>
                    <option value="<?php echo $dmt['id']; ?>"><?php echo $dmt['api_service_provider']." (".$dmt['api_name'].")";?></option>
@@ -76,7 +76,7 @@ $selectdata = $data['table_filed'];
 				</div>
 				<div class="col-4">
 					<select class="form-select js-example-basic-single" name="select[]" id="select_field_<?php echo $idx; ?>" aria-label="Mapping for <?php echo htmlspecialchars($edidump); ?>">
-						<option value="0">Select Any one</option>
+						<option value="0"><?= __('Select Any one'); ?></option>
 						<?php foreach ($selectdata as  $fstt=>$select_list) {
 							$select = strtolower(str_replace("_"," ",$select_list['Field']));
 							if($select != 'id'){

@@ -28,12 +28,12 @@ $emailgroupdata = json_decode($emailgroupdata,1);
             <div class="container-fluid">
                 <div class="card card-custom ">
                   <div class="card-header table-card-header mb-2">
-                   <h5>Email Group</h5>
+                   <h5><?= __('Email Group'); ?></h5>
                    <div class="card-header-right table-card-header ">
-                    <button type="button" class=" btn btn-success" onclick="dynamicinsertpopup('COM_INSERT_EMAIL_GROUPS','')"><i class="icofont icofont-plus icon-white "></i>Email Group </button>
+                    <button type="button" class=" btn btn-success" onclick="dynamicinsertpopup('COM_INSERT_EMAIL_GROUPS','')"><i class="icofont icofont-plus icon-white "></i><?= __('Email Group'); ?> </button>
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                       <i class="icofont icofont-reply"></i>
-                      Back
+                      <?= __('Back'); ?>
                     </a>
                   </div>
                 </div>
@@ -60,13 +60,13 @@ $rid = deocdeId("id:".$email['id']);
                                     <div class="d-flex flex-column mr-auto">
                                         <!--begin: Title-->
                                         <a href="#" class="card-title text-hover-primary font-weight-bolder font-size-h5 text-dark mb-1"><?php echo ucwords($email['name']); ?> </a>
-                                        <span class="text-muted font-weight-bold">Owner of the group <?php echo ucwords($email['owner']); ?></span>
+                                        <span class="text-muted font-weight-bold"><?= __('Owner of the group'); ?> <?php echo ucwords($email['owner']); ?></span>
                                         <!--end::Title-->
                                     </div>
                                     <!--end::Info-->
                                     <!--begin::Toolbar-->
                                     <div class="card-toolbar mb-auto">
-                                        <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                        <div class="dropdown dropdown-inline" data-toggle="tooltip" title="<?= htmlspecialchars(__('Quick actions'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="left">
                                             <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                 <i class="fa fa-ellipsis-h"></i>
                                             </a>
@@ -77,12 +77,12 @@ $rid = deocdeId("id:".$email['id']);
 
                                                     <li class="navi-item ml-2">
                                                         <button type="button" onclick="dynamicinsertpopup('COM_INSERT_EMAIL_GROUPS','<?php echo $rid; ?>')"  class="navi-link btn p-0 border-0 bg-transparent text-left" style="cursor: pointer;">
-                                                        <span class="navi-text"><i class="fa fa-edit"></i>Edit</span>
+                                                        <span class="navi-text"><i class="fa fa-edit"></i><?= __('Edit'); ?></span>
                                                         </button>
                                                     </li>
                                                     <li class="navi-item ml-2">
                                                         <button type="button" onclick="dynamicinsertpopup('COM_INSERT_EMAIL_GROUP_EMAILS','<?php echo $rid; ?>')" class="navi-link btn p-0 border-0 bg-transparent text-left" style="cursor: pointer;">
-                                                            <span class="navi-text"><i class="fa fa-user-plus"></i> Insert Member</span>
+                                                            <span class="navi-text"><i class="fa fa-user-plus"></i> <?= __('Insert Member'); ?></span>
                                                         </button>
                                                     </li>
                                                 </ul>
@@ -96,7 +96,7 @@ $rid = deocdeId("id:".$email['id']);
                                 <div class="d-flex flex-wrap">
                                     <!--begin: Item-->
                                     <div class="mr-12 d-flex flex-column mb-7 text-left">
-                                        <span class="d-block font-weight-bold mb-0">Start Date</span>
+                                        <span class="d-block font-weight-bold mb-0"><?= __('Start Date'); ?></span>
                                         <span class="font-weight-bold btn-upper btn-text f-12"><?php echo date("d M, y", strtotime($email['start_date'])); ?></span>
                                     </div>
                                     <!--end::Item-->
@@ -105,7 +105,7 @@ $rid = deocdeId("id:".$email['id']);
                                     <!--end::Item-->
                                     <!--begin::Item-->
                                     <div class="d-flex flex-column flex-lg-fill mb-7 text-right">
-                                        <span class="font-weight-bolder mb-0">Members</span>
+                                        <span class="font-weight-bolder mb-0"><?= __('Members'); ?></span>
 
                                         <div class="symbol-group symbol-hover">
                                             <div class="symbol-group symbol-hove ml-2r">
@@ -145,10 +145,10 @@ $rid = deocdeId("id:".$email['id']);
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <a href="#" class="font-weight-bolder text-primary ml-2"><?php echo $email['count'] ?> Tasks</a>
+                                        <a href="#" class="font-weight-bolder text-primary ml-2"><?php echo $email['count'] ?> <?= __('Tasks'); ?></a>
                                     </div>
                                     <?php $uu = "index.php?option=COM_LIST_EMAIL_GROUP_EMAIL&RID=".deocdeId($email['id']); ?>
-                                    <a href="<?php echo $uu; ?>" class="col-lg-4">    <button type="button" class="btn btn-primary btn-sm text-uppercase font-weight-bolder mt-5 mt-sm-0 mr-auto mr-sm-0 ml-sm-auto">details</button> </a>
+                                    <a href="<?php echo $uu; ?>" class="col-lg-4">    <button type="button" class="btn btn-primary btn-sm text-uppercase font-weight-bolder mt-5 mt-sm-0 mr-auto mr-sm-0 ml-sm-auto"><?= __('details'); ?></button> </a>
 
                                 </div>
                                 </div>

@@ -28,7 +28,7 @@ $all_users_json = htmlspecialchars(json_encode($all_users), ENT_QUOTES, 'UTF-8')
 <div class="container-fluid mt-4">
     <div class="row">
         <div class="col-12">
-            <h2 class="mb-4">Mobile User Status Dashboard</h2>
+            <h2 class="mb-4"><?= __('Mobile User Status Dashboard'); ?></h2>
         </div>
     </div>
 
@@ -40,7 +40,7 @@ $all_users_json = htmlspecialchars(json_encode($all_users), ENT_QUOTES, 'UTF-8')
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <p class="text-muted mb-2 fw-500">All Users</p>
+                            <p class="text-muted mb-2 fw-500"><?= __('All Users'); ?></p>
                             <h3 class="mb-0 fw-bold text-primary"><?php echo $total_users; ?></h3>
                         </div>
                         <div class="stats-icon">
@@ -48,7 +48,7 @@ $all_users_json = htmlspecialchars(json_encode($all_users), ENT_QUOTES, 'UTF-8')
                         </div>
                     </div>
                     <p class="text-muted mt-3 mb-0 small">
-                        <i class="fas fa-info-circle"></i> Click to view all users
+                        <i class="fas fa-info-circle"></i> <?= __('Click to view all users'); ?>
                     </p>
                 </div>
             </div>
@@ -60,7 +60,7 @@ $all_users_json = htmlspecialchars(json_encode($all_users), ENT_QUOTES, 'UTF-8')
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <p class="text-muted mb-2 fw-500">Mobile Logged-In Users</p>
+                            <p class="text-muted mb-2 fw-500"><?= __('Mobile Logged-In Users'); ?></p>
                             <h3 class="mb-0 fw-bold text-success"><?php echo $mobile_users_count; ?></h3>
                         </div>
                         <div class="stats-icon">
@@ -68,7 +68,7 @@ $all_users_json = htmlspecialchars(json_encode($all_users), ENT_QUOTES, 'UTF-8')
                         </div>
                     </div>
                     <p class="text-muted mt-3 mb-0 small">
-                        <i class="fas fa-check-circle"></i> Already using mobile app
+                        <i class="fas fa-check-circle"></i> <?= __('Already using mobile app'); ?>
                     </p>
                 </div>
             </div>
@@ -80,7 +80,7 @@ $all_users_json = htmlspecialchars(json_encode($all_users), ENT_QUOTES, 'UTF-8')
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <p class="text-muted mb-2 fw-500">Need to Login Mobile</p>
+                            <p class="text-muted mb-2 fw-500"><?= __('Need to Login Mobile'); ?></p>
                             <h3 class="mb-0 fw-bold text-warning"><?php echo $needs_mobile_count; ?></h3>
                         </div>
                         <div class="stats-icon">
@@ -88,7 +88,7 @@ $all_users_json = htmlspecialchars(json_encode($all_users), ENT_QUOTES, 'UTF-8')
                         </div>
                     </div>
                     <p class="text-muted mt-3 mb-0 small">
-                        <i class="fas fa-arrow-right"></i> Need to activate on mobile
+                        <i class="fas fa-arrow-right"></i> <?= __('Need to activate on mobile'); ?>
                     </p>
                 </div>
             </div>
@@ -100,11 +100,11 @@ $all_users_json = htmlspecialchars(json_encode($all_users), ENT_QUOTES, 'UTF-8')
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-light p-3">
-                    <h5 class="mb-0" id="tableTitle">User Details</h5>
+                    <h5 class="mb-0" id="tableTitle"><?= __('User Details'); ?></h5>
                 </div>
                 <div class="card-body p-0 custom-scroll" id="userDetailsTable" style="height: 400px; overflow-y: auto;">
                     <p class="text-center text-muted p-4">
-                        <i class="fas fa-arrow-up"></i> Click on a card above to view user details
+                        <i class="fas fa-arrow-up"></i> <?= __('Click on a card above to view user details'); ?>
                     </p>
                 </div>
             </div>

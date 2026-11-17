@@ -9,26 +9,26 @@ $employees = (isset($filter_res['employees']) && is_array($filter_res['employees
 <div class="page-body">
 	<div class="card">
 		<div class="card-header">
-			<h5>Project Employee Task Report</h5>
+			<h5><?= __('Project Employee Task Report'); ?></h5>
 			<div class="card-header-right">
 				<div class="dropdown-primary dropdown open">
-					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="projectEmpTaskReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="projectEmpTaskReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
 					<div class="dropdown-menu p-0" aria-labelledby="projectEmpTaskReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Project%20Employee%20Task%20Report" target="_blank" rel="noopener noreferrer">CSV</a>
+						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Project%20Employee%20Task%20Report" target="_blank" rel="noopener noreferrer"><?= __('CSV'); ?></a>
 					</div>
 				</div>
 				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
 					<i class="icofont icofont-reply" aria-hidden="true"></i>
-					Back
+					<?= __('Back'); ?>
 				</a>
 			</div>
 		</div>
 		<div class="card-body p-4">
 			<div class="row">
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="project_id">Project</label>
-					<select class="form-control js-example-basic-single" id="project_id" name="project_id" style="width:100%" aria-label="Project">
-						<option value="">All Projects</option>
+					<label for="project_id"><?= __('Project'); ?></label>
+					<select class="form-control js-example-basic-single" id="project_id" name="project_id" style="width:100%" aria-label="<?= htmlspecialchars(__('Project'), ENT_QUOTES, 'UTF-8'); ?>">
+						<option value=""><?= __('All Projects'); ?></option>
 						<?php if (!empty($projects)) {
 							foreach($projects as $project_row){
 								$pid = is_array($project_row) ? ($project_row['id'] ?? '') : ($project_row->id ?? '');
@@ -40,9 +40,9 @@ $employees = (isset($filter_res['employees']) && is_array($filter_res['employees
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="employee_id">Employee</label>
-					<select class="form-control js-example-basic-single" id="employee_id" name="employee_id" style="width:100%" aria-label="Employee">
-						<option value="">All Employees</option>
+					<label for="employee_id"><?= __('Employee'); ?></label>
+					<select class="form-control js-example-basic-single" id="employee_id" name="employee_id" style="width:100%" aria-label="<?= htmlspecialchars(__('Employee'), ENT_QUOTES, 'UTF-8'); ?>">
+						<option value=""><?= __('All Employees'); ?></option>
 						<?php if (!empty($employees)) {
 							foreach($employees as $employee_row){
 								$eid = is_array($employee_row) ? ($employee_row['id'] ?? '') : ($employee_row->id ?? '');
@@ -54,21 +54,21 @@ $employees = (isset($filter_res['employees']) && is_array($filter_res['employees
 					</select>
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="from_date">From Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="" aria-label="From Date">
+					<label for="from_date"><?= __('From Date'); ?> <span class="text-danger">*</span></label>
+					<input class="form-control" type="date" name="from_date" id="from_date" value="" aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="to_date">To Date <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="" aria-label="To Date">
+					<label for="to_date"><?= __('To Date'); ?> <span class="text-danger">*</span></label>
+					<input class="form-control" type="date" name="to_date" id="to_date" value="" aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
 				</div>
 				<div class="col-lg-3 col-md-6 form-group">
-					<label for="getProjectEmployeeTaskReportBtn" aria-label="Search"><span class="visually-hidden">Search</span>&nbsp;</label>
-					<button type="button" class="btn btn-primary form-control" id="getProjectEmployeeTaskReportBtn">Search</button>
+					<label for="getProjectEmployeeTaskReportBtn" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"><span class="visually-hidden"><?= __('Search'); ?></span>&nbsp;</label>
+					<button type="button" class="btn btn-primary form-control" id="getProjectEmployeeTaskReportBtn"><?= __('Search'); ?></button>
 				</div>
 			</div>
 			<div class="row mt-3 custom-scroll" id="tableContent" style="height:500px">
 				<div class="col-12">
-					<p class="text-muted mb-0">Select a date range and click Search to view project employee tasks.</p>
+					<p class="text-muted mb-0"><?= __('Select a date range and click Search to view project employee tasks.'); ?></p>
 				</div>
 			</div>
 		</div>
@@ -108,7 +108,7 @@ $employees = (isset($filter_res['employees']) && is_array($filter_res['employees
 				return;
 			}
 
-			var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" alt="Loading..." style="width: 300px;"></div>';
+			var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" alt="<?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?>" style="width: 300px;"></div>';
 			$("#tableContent").html(loader);
 
 			$.ajax({
@@ -130,7 +130,7 @@ $employees = (isset($filter_res['employees']) && is_array($filter_res['employees
 					});
 				},
 				error: function () {
-					$("#tableContent").html('<div class="col-12"><p class="text-danger mb-0">Unable to load project employee task report.</p></div>');
+					$("#tableContent").html('<div class="col-12"><p class="text-danger mb-0"><?= htmlspecialchars(__('Unable to load project employee task report.'), ENT_QUOTES, 'UTF-8'); ?></p></div>');
 				}
 			});
 		});

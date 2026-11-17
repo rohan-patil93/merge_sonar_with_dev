@@ -11,10 +11,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header table-card-header mb-3">
-                    <h5> Employee Lists </h5>
+                    <h5> <?= __('Employee Lists'); ?> </h5>
                     <div class="card-header-right table-card-header mb-2">
-                        <span class="form-label  col-form-label m-r-20">Employee List</span>
-                        <select aria-label="Hid Userid" class="form-select js-example-basic-single " id="hid_userid" onchange="emplyeetree(this.value)">
+                        <span class="form-label  col-form-label m-r-20"><?= __('Employee List'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Hid Userid'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " id="hid_userid" onchange="emplyeetree(this.value)">
                             <?php foreach($jsondecode as $dt){ ?>
                                 <option value="<?php echo $dt['id']; ?>" <?php echo $dt['id']==$_SESSION['userid']?"selected":"";  ?>><?php echo $dt['display_name']; ?></option>
 
@@ -22,7 +22,7 @@
                         </select>
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                             <i class="icofont icofont-reply"></i>
-                            Back
+                            <?= __('Back'); ?>
                         </a>
                     </div>
                 </div>

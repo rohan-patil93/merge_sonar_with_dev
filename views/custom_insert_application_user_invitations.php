@@ -30,11 +30,11 @@ if(isset($_POST['submit'])){
     			<!--begin::Portlet-->
     			<div class="card card-custom card-sticky" id="kt_page_sticky_card">
                   <div class="card-header mb-3">
-                      <h5> Invite Vendor</h5>
+                      <h5> <?= __('Invite Vendor'); ?></h5>
                       <div class="card-header-right">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply" aria-hidden="true"></i>
-                                Back
+                                <?= __('Back'); ?>
                               </a>
                       </div>
                   </div>
@@ -43,41 +43,41 @@ if(isset($_POST['submit'])){
     					<div class="form-group row ml-20 mr-20">
     						<div class="form-group col-lg-6">
     							<label for="user_name"><?= __('User Name') ?>&nbsp;<span class="requried">*</span></label>
-    								<input class="form-control"  type="text"  id="user_name" name="user_name"  value="" aria-label="User Name">
+    								<input class="form-control"  type="text"  id="user_name" name="user_name"  value="" aria-label="<?= htmlspecialchars(__('User Name'), ENT_QUOTES, 'UTF-8'); ?>">
 
-    							<div style="display: none;color: red;" id="user_name_err"> Please enter User Name </div>
+    							<div style="display: none;color: red;" id="user_name_err"> <?= __('Please enter User Name'); ?> </div>
     						</div>
 
     						<div class="form-group col-lg-6">
     							<label for="first_name"><?= __('First Name') ?>&nbsp;<span class="requried">*</span></label>
 
-    								<input class="form-control"  type="text"  id="first_name" name="first_name"  value="" aria-label="First Name">
+    								<input class="form-control"  type="text"  id="first_name" name="first_name"  value="" aria-label="<?= htmlspecialchars(__('First Name'), ENT_QUOTES, 'UTF-8'); ?>">
 
-    							<div style="display: none;color: red;" id="first_name_err"> Please enter First Name </div>
+    							<div style="display: none;color: red;" id="first_name_err"> <?= __('Please enter First Name'); ?> </div>
     						</div>
 
     						<div class="form-group col-lg-6">
     							<label for="last_name"><?= __('Last Name') ?></label>
 
-    								<input class="form-control"  type="text"  id="last_name" name="last_name"  value="" aria-label="Last Name">
+    								<input class="form-control"  type="text"  id="last_name" name="last_name"  value="" aria-label="<?= htmlspecialchars(__('Last Name'), ENT_QUOTES, 'UTF-8'); ?>">
 
-    							<div style="display: none;color: red;" id="last_name_err"> Please enter Last Name </div>
+    							<div style="display: none;color: red;" id="last_name_err"> <?= __('Please enter Last Name'); ?> </div>
     						</div>
 
     						<div class="form-group col-lg-6">
     							<label for="user_email"><?= __('Email') ?></label>
 
-    								<input class="form-control"  type="text"  id="user_email" name="user_email"  value="" aria-label="User Email">
+    								<input class="form-control"  type="text"  id="user_email" name="user_email"  value="" aria-label="<?= htmlspecialchars(__('User Email'), ENT_QUOTES, 'UTF-8'); ?>">
 
-    							<div style="display: none;color: red;" id="user_email_err"> Please enter Email </div>
+    							<div style="display: none;color: red;" id="user_email_err"> <?= __('Please enter Email'); ?> </div>
     						</div>
 
     						<div class="form-group col-lg-6">
     							<label for="user_mobile"><?= __('Mobile') ?></label>
 
-    								<input class="form-control"  type="text"  id="user_mobile" name="user_mobile"  value="" aria-label="User Mobile">
+    								<input class="form-control"  type="text"  id="user_mobile" name="user_mobile"  value="" aria-label="<?= htmlspecialchars(__('User Mobile'), ENT_QUOTES, 'UTF-8'); ?>">
 
-    							<div style="display: none;color: red;" id="user_mobile_err"> Please enter Mobile </div>
+    							<div style="display: none;color: red;" id="user_mobile_err"> <?= __('Please enter Mobile'); ?> </div>
     						</div>
     						<input type="hidden" name="user_type" value="3">
     					</div>

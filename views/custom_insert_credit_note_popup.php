@@ -19,7 +19,7 @@ $credit_notes = $result['credit_notes'];
         var error = 0;
         $.each(checkemtyary , function(index, val) {
              if($("#"+val).val() ==""){
-                 $("#"+val+"_error").text('Required This Field');
+                 $("#"+val+"_error").text(<?php echo json_encode(__('Required This Field'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                  error = 1;
              }else{
                  $("#"+val+"_error").text(' ');
@@ -47,45 +47,45 @@ $credit_notes = $result['credit_notes'];
 </script>
 <div class="modal-header">
     <h4 class="modal-title"><?= __('Credit Note') ?></h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body p-r-50 p-l-50">
     <div class="row">
         <div class="col-lg-6">
             <div class="row">
-                <span class="col-lg-6">Number <span class="float-end">:</span></span>
+                <span class="col-lg-6"><?= __('Number'); ?> <span class="float-end">:</span></span>
                 <span class="col-lg-6 text-left"><?php echo $rental_invoices['transaction_number'];?></span>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="row">
-                <span class="col-lg-6">Reference Type <span class="float-end">:</span></span>
-                <span class="col-lg-6 text-left">Rental Invoices</span>
+                <span class="col-lg-6"><?= __('Reference Type'); ?> <span class="float-end">:</span></span>
+                <span class="col-lg-6 text-left"><?= __('Rental Invoices'); ?></span>
             </div>
         </div>
         <div class="col-lg-6  mt-2">
             <div class="row">
-                <span class="col-lg-6">Date <span class="float-end">:</span></span>
+                <span class="col-lg-6"><?= __('Date'); ?> <span class="float-end">:</span></span>
                 <span class="col-lg-6 text-left"><?php echo fromDate($rental_invoices['transaction_date']);?></span>
             </div>
         </div>
 
         <div class="col-lg-6 mt-2">
             <div class="row">
-                <span class="col-lg-6">Due Date <span class="float-end">:</span></span>
+                <span class="col-lg-6"><?= __('Due Date'); ?> <span class="float-end">:</span></span>
                 <span class="col-lg-6 text-left"><?php echo fromDate();?></span>
             </div>
         </div>
 
         <div class="col-lg-6 mt-2">
             <div class="row">
-                <span class="col-lg-6">Originater <span class="float-end">:</span></span>
+                <span class="col-lg-6"><?= __('Originater'); ?> <span class="float-end">:</span></span>
                 <span class="col-lg-6 text-left"><?php echo $_SESSION['users'][$rental_invoices['originator']];?></span>
             </div>
         </div>
         <div class="col-lg-6 mt-2">
             <div class="row">
-                <span class="col-lg-6">Tenant Name <span class="float-end">:</span></span>
+                <span class="col-lg-6"><?= __('Tenant Name'); ?> <span class="float-end">:</span></span>
                 <span class="col-lg-6 text-left"><?php echo $rental_invoices['party_name'];?></span>
             </div>
         </div>
@@ -112,8 +112,8 @@ $credit_notes = $result['credit_notes'];
 <?php } ?>
     <div class="row mt-5">
         <div class="form-group col-lg-6">
-            <span class="col-lg-4">Account</span>
-            <select aria-label="Account Code"  class="form-select js-example-basic-single" name="account_code" id="popup_account_code" >
+            <span class="col-lg-4"><?= __('Account'); ?></span>
+            <select aria-label="<?= htmlspecialchars(__('Account Code'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single" name="account_code" id="popup_account_code" >
                 <option value=""><?= __('Select Any One') ?></option>
                 <?php foreach ($chart_of_accounts as $coc) { ?>
                     <option  value="<?php echo $coc['account_code']; ?>"><?php echo $coc['account_name']."(".$coc['account_code'].")"; ?></option>
@@ -123,12 +123,12 @@ $credit_notes = $result['credit_notes'];
         </div>
         <div class="col-lg-6 form-group">
             <span class="form-label"><?= __('Amount') ?></span>
-            <input aria-label="Amount" type="text" class="form-control text-right" name="amount"  id="popup_amount" value="">
+            <input aria-label="<?= htmlspecialchars(__('Amount'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-right" name="amount"  id="popup_amount" value="">
             <span class="text-danger" id="popup_amount_error"></span>
         </div>
         <div class="form-group col-lg-12">
-            <span class="col-lg-4">Comment</span>
-            <textarea aria-label="Comment" type="text" class="form-control" name="comment" id="popup_comment" ></textarea>
+            <span class="col-lg-4"><?= __('Comment'); ?></span>
+            <textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="comment" id="popup_comment" ></textarea>
             <span class="text-danger" id="popup_comment_error"></span>
         </div>
 

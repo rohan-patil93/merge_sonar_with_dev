@@ -71,7 +71,7 @@ if($note_type_res['id'] !=""){
         var error = 0;
         $.each(checkemtyary , function(index, val) {
              if($("#"+val).val() ==""){
-                 $("#"+val+"_error").text('Required This Field');
+                 $("#"+val+"_error").text(<?php echo json_encode(__('Required This Field'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                  error = 1;
              }else{
                  $("#"+val+"_error").text(' ');
@@ -113,9 +113,9 @@ if($note_type_res['id'] !=""){
             });
         }
         if(ref_type ==""){
-            $("#reference_type_error").text('Required This Field');
+            $("#reference_type_error").text(<?php echo json_encode(__('Required This Field'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }else if(ref_id ==""){
-            $("#reference_invoice_error").text('Required This Field');
+            $("#reference_invoice_error").text(<?php echo json_encode(__('Required This Field'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }else{
             window.location.href='index.php?option='+insertoption+'&ref_type='+ref_type+'&ref_id='+ref_id;
         }
@@ -128,12 +128,12 @@ function AddMorecdnote(){
     mxid = mxid+1;
     html +='<div class="row" id="rowid_'+mxid+'">';
 
-    html +='<input type="hidden" name="old_id[]" value=""><div class="form-group col-lg-4"><select aria-label="Account Code[]"  class="form-select js-example-basic-single" name="account_code[]" required><option value=""><?= __('Select Any One') ?></option><?php foreach ($chart_of_accounts as $coc) { ?><option  value="<?php echo $coc['account_code']; ?>" ><?php echo $coc['account_name']."(".$coc['account_code'].")"; ?></option><?php
+    html +='<input type="hidden" name="old_id[]" value=""><div class="form-group col-lg-4"><select aria-label="<?= htmlspecialchars(__('Account Code'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="form-select js-example-basic-single" name="account_code[]" required><option value=""><?= __('Select Any One') ?></option><?php foreach ($chart_of_accounts as $coc) { ?><option  value="<?php echo $coc['account_code']; ?>" ><?php echo $coc['account_name']."(".$coc['account_code'].")"; ?></option><?php
 } ?></select></div>';
 
-    html +='<div class="col-lg-3 form-group"><input aria-label="Item Price[]" type="text" class="form-control text-right item_price" name="item_price[]"  value="<?php echo $dcn['item_price']; ?>" onblur="calculateTotal()" required></div>';
+    html +='<div class="col-lg-3 form-group"><input aria-label="<?= htmlspecialchars(__('Item Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control text-right item_price" name="item_price[]"  value="<?php echo $dcn['item_price']; ?>" onblur="calculateTotal()" required></div>';
 
-    html +='<div class="form-group col-lg-4"><textarea aria-label="Description[]" type="text" class="form-control" name="description[]" ><?php echo $dcn['description']; ?></textarea></div>';
+    html +='<div class="form-group col-lg-4"><textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="description[]" ><?php echo $dcn['description']; ?></textarea></div>';
     html +='<div class="form-group col-lg-1 text-center"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRow('+mxid+')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></div>';
 
     html +='</div>';
@@ -174,12 +174,12 @@ function deletRow(id){
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: "Please note the status of the document will change to "+new_status_name,
+            text: <?php echo json_encode(__('Please note the status of the document will change to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+new_status_name,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: false
         },
         function(){
@@ -206,12 +206,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -231,7 +231,7 @@ if($_SESSION['config']['debit_credit_note_creation_days'] !="" && $_SESSION['con
     	$debitcreadmsg = "You cannot create a Debit/Credit Note. The allowed period of {$debit_credit_note_creation_days} days has expired.";
     	echo "<div class='alert alert-danger alert-dismissible'>
                 <strong>{$debitcreadmsg}</strong>
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='".htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8')."'></button>
             </div>";
     }
 }
@@ -369,8 +369,8 @@ if(count((array)$credit_notes) != 0){ ?>
     <form method="post" style="<?php echo $dyncss; ?>">
         <div class="row mt-5">
             <div class="form-group col-lg-4">
-                <span class="form-label">Reference Type</span>
-                <select aria-label="Ref Type"  class="form-select js-example-basic-single" name="ref_type" id="ref_type" onchange="getRefranceTableList('ref_type')">
+                <span class="form-label"><?= __('Reference Type'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Ref Type'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single" name="ref_type" id="ref_type" onchange="getRefranceTableList('ref_type')">
                     <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach ($referencetypes as $reftype) { ?>
                         <option  value="<?php echo $reftype; ?>" <?php echo $_GET['ref_type'] == $reftype?"selected":""; ?>><?php echo ucwords(str_replace("_"," ",($reftype))); ?></option>
@@ -379,8 +379,8 @@ if(count((array)$credit_notes) != 0){ ?>
                 <span class="text-danger" id="reference_type_error"></span>
             </div>
             <div class="form-group col-lg-4">
-                <span class="form-label">Reference invoice</span>
-                <select aria-label="Ref"  class="form-select js-example-basic-single" name="ref_id" id="ref_id" onchange="getRefranceTableList('ref_id')">
+                <span class="form-label"><?= __('Reference invoice'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Ref'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single" name="ref_id" id="ref_id" onchange="getRefranceTableList('ref_id')">
                     <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach ($all_transactions as $coc) { ?>
                         <option  value="<?php echo $coc['id']; ?>"  <?php echo $_GET['ref_id'] == $coc['id']?"selected":""; ?>><?php echo $coc['transaction_number']; ?></option>
@@ -389,8 +389,8 @@ if(count((array)$credit_notes) != 0){ ?>
                 <span class="text-danger" id="reference_invoice_error"></span>
             </div>
             <div class="form-group col-lg-4">
-                <span class="form-label">Transaction Date</span>
-                 <input aria-label="Transaction Date" type="text" class="form-control datepicker" name="transaction_date"  value="<?php echo $_GET['transaction_date']; ?>" required>
+                <span class="form-label"><?= __('Transaction Date'); ?></span>
+                 <input aria-label="<?= htmlspecialchars(__('Transaction Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="transaction_date"  value="<?php echo $_GET['transaction_date']; ?>" required>
 
             </div>
         </div>
@@ -399,16 +399,16 @@ if(count((array)$credit_notes) != 0){ ?>
         <?php if($_GET['ref_id'] !=""){ ?>
             <div class="row" >
            <div class="form-group col-lg-4">
-             <span class="form-label">Account <span class="text-danger">*</span></span>
+             <span class="form-label"><?= __('Account'); ?> <span class="text-danger">*</span></span>
            </div>
            <div class="form-group col-lg-3 w-full" >
-             <span class="form-label d-block">Amount<span class="text-danger">*</span></span>
+             <span class="form-label d-block"><?= __('Amount'); ?><span class="text-danger">*</span></span>
            </div>
            <div class="form-group col-lg-4 w-full" >
-             <span class="form-label d-block">Comment<span class="text-danger">*</span></span>
+             <span class="form-label d-block"><?= __('Comment'); ?><span class="text-danger">*</span></span>
            </div>
            <div class="form-group col-lg-1 w-full" >
-              <span class="form-label d-block"> Remove </span>
+              <span class="form-label d-block"> <?= __('Remove'); ?> </span>
             </div>
         </div>
             <div id="addmorerows">
@@ -421,7 +421,7 @@ if(count((array)$credit_notes) != 0){ ?>
                 <div class="row" id="rowid_<?php echo $mk; ?>">
                     <input type="hidden" name="old_id[]" value="<?php echo $dcn['id']; ?>">
                     <div class="form-group col-lg-4">
-                        <select aria-label="Account Code[]"  class="form-select js-example-basic-single" name="account_code[]" required>
+                        <select aria-label="<?= htmlspecialchars(__('Account Code'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="form-select js-example-basic-single" name="account_code[]" required>
                             <option value=""><?= __('Select Any One') ?></option>
                             <?php foreach ($chart_of_accounts as $coc) { ?>
                                 <option  value="<?php echo $coc['account_code']; ?>" <?php echo $dcn['account_code'] == $coc['account_code']?"selected":""; ?>><?php echo $coc['account_name']."(".$coc['account_code'].")"; ?></option>
@@ -429,10 +429,10 @@ if(count((array)$credit_notes) != 0){ ?>
                         </select>
                     </div>
                     <div class="col-lg-3 form-group">
-                        <input aria-label="Item Price[]" type="text" class="form-control text-right item_price" name="item_price[]"  value="<?php echo $dcn['item_price']; ?>" onblur="calculateTotal()" required>
+                        <input aria-label="<?= htmlspecialchars(__('Item Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control text-right item_price" name="item_price[]"  value="<?php echo $dcn['item_price']; ?>" onblur="calculateTotal()" required>
                     </div>
                     <div class="form-group col-lg-4">
-                        <textarea aria-label="Description[]" type="text" class="form-control" name="description[]" ><?php echo $dcn['description']; ?></textarea>
+                        <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="description[]" ><?php echo $dcn['description']; ?></textarea>
                     </div>
                      <div class="form-group col-lg-1 text-center">
                         <i class="ti-trash"  onclick="deletRow('<?php echo $mk; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Remove') ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
@@ -445,7 +445,7 @@ if(count((array)$credit_notes) != 0){ ?>
             <div class="col-lg-4">
                 <button class="btn btn-success" type="button" onclick="AddMorecdnote()"><?= __('+ Add More') ?></button>
             </div>
-            <div class="col-lg-3 text-right f-w-700">Total</div>
+            <div class="col-lg-3 text-right f-w-700"><?= __('Total'); ?></div>
             <div class="col-lg-4 text-right f-w-700" id="totalamounttext"><?php echo $totalamt; ?></div>
         </div>
         <div class="p-0 mt-5">

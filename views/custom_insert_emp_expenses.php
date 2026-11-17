@@ -155,7 +155,7 @@ function itemChange(valuu,val_id,seq){
           var perdiamarrayjson = JSON.parse($("#perdiamarrayjson").val());
           var newStringars = perdiamarrayjson[val_id]['amount']
         }
-        $("#amount_popup_span_"+seq+"_"+id).text(" (Rs. "+newStringars+")");
+        $("#amount_popup_span_"+seq+"_"+id).text(<?php echo json_encode(' '.__('(Rs.').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+newStringars+")");
         $("#amount_popup_"+seq+"_"+id).val(newStringars);
    }
    function calucateamount(seq){
@@ -266,13 +266,13 @@ function itemChange(valuu,val_id,seq){
     htmlRows += '</div>';
 
     htmlRows += '<div class="mileage_css_'+seqs+'  mt-2" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter KM') ?>" placeholder="0.00">';
-    htmlRows += '<label for="" class="mb-1">KM <span class="text-danger">*</span><span id="amount_popup_span_'+seqs+'_mileage" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>';
+    htmlRows += '<label for="" class="mb-1"><?= htmlspecialchars(__('KM'), ENT_QUOTES, 'UTF-8'); ?> <span class="text-danger">*</span><span id="amount_popup_span_'+seqs+'_mileage" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>';
     htmlRows += '<input type="hidden" name="rate_mileage[]" class="form-control text-right " value="<?php echo $sub_details['rate'];?>"  id="amount_popup__2"+seqs+'_mileage" >';
     htmlRows += '<input aria-label="Qty Mileage[]" type="text" name="qty_mileage[]"  onblur="calucateamount('+seqs+')" class="form-control text-right decimalnumberallowe mileage_req"  id="qty_popup__2"+seqs+'_mileage" value="">';
     htmlRows += '</div>';
 
     htmlRows += '<div class="Perdiem_css_'+seqs+'  mt-2" style="display:none" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Days') ?>" placeholder="0.00">';
-    htmlRows += '<label for="" class="mb-1">Days <span class="text-danger">*</span><span id="amount_popup_span__2"+seqs+'_perd" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>';
+    htmlRows += '<label for="" class="mb-1"><?= htmlspecialchars(__('Days'), ENT_QUOTES, 'UTF-8'); ?> <span class="text-danger">*</span><span id="amount_popup_span__2"+seqs+'_perd" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>';
     htmlRows += '<input type="hidden" name="rate_perd[]"  class="form-control text-right" value="<?php echo $sub_details['rate'];?>"  id="amount_popup__3"+seqs+'_perd" >';
     htmlRows += '<input aria-label="Qty Perd[]" type="text" name="qty_perd[]"  onblur="calucateamount('+seqs+')" class="form-control text-right decimalnumberallowe Perdiem_req"  id="qty_popup__3"+seqs+'_perd" value="">';
     htmlRows += '</div>';
@@ -280,16 +280,16 @@ function itemChange(valuu,val_id,seq){
 
 
     htmlRows += '<td>';
-    htmlRows += '<input aria-label="Walmart" type="text" name="merchant_name[]" class="form-control" placeholder="<?= __('Walmart') ?>" value="<?php echo $sub_details['merchant_name']; ?>">';
+    htmlRows += '<input aria-label="<?= htmlspecialchars(__('Walmart'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="merchant_name[]" class="form-control" placeholder="<?= __('Walmart') ?>" value="<?php echo $sub_details['merchant_name']; ?>">';
     htmlRows += '<label for="" class="mt-2"><?= __('Tax') ?></label><input type="text"  class="form-control text-right rowamt_mileage tax_row decimalnumberallowe" onblur="calucateamount('+seqs+')" value="0" name="tax[]" id="tax_popup_'+seqs+'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter Tax') ?>" placeholder="0.00">';
     htmlRows += '</td>';
     htmlRows += '<td>';
-    htmlRows += '<input aria-label="Bill No[]" type="text" name="bill_no[]" class="form-control" value="">';
+    htmlRows += '<input aria-label="<?= htmlspecialchars(__('Bill No'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="bill_no[]" class="form-control" value="">';
     htmlRows += '<label for="" class="mt-2"><?= __('Total') ?></label><input type="text"  class="form-control text-right rowamt_mileage" value="" name="amount[]" id="total_popup_'+seqs+'" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Total Expense') ?>" placeholder="0.00" readonly>';
     htmlRows += '</td>';
 
     htmlRows += '<td>';
-    htmlRows += '<select aria-label="Payment Mode[]" class="form-control js-example-basic-single" name="payment_mode[]"><option value=""><?= __('Select Any One') ?></option>';
+    htmlRows += '<select aria-label="<?= htmlspecialchars(__('Payment Mode'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control js-example-basic-single" name="payment_mode[]"><option value=""><?= __('Select Any One') ?></option>';
         <?php foreach($Payment_mode  as  $Paymentkey => $Payment_mode112){ ?>
             htmlRows += '<option value="<?php echo $Paymentkey; ?>" <?php echo $sub_details['payment_mode']==$Paymentkey?"selected":"" ;?>><?php echo $Payment_mode112; ?></option>';
         <?php } ?>
@@ -317,12 +317,12 @@ function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,nex
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: "Please note the status of the document will change to "+new_status_name,
+            text: <?php echo json_encode(__('Please note the status of the document will change to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+new_status_name,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: false
         },
         function(){
@@ -349,12 +349,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -389,7 +389,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                 }
 
             ?>
-            <a href="index.php?option=COM_VIEW_EMP_EXPENSES&Rid=<?php echo $_GET['Rid']; ?>" class="text-primary" target="_blank"><i class="ti ti-eye text-primary"></i> Report</a>
+            <a href="index.php?option=COM_VIEW_EMP_EXPENSES&Rid=<?php echo $_GET['Rid']; ?>" class="text-primary" target="_blank"><i class="ti ti-eye text-primary"></i> <?= __('Report'); ?></a>
             <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i> <?= __('Back') ?> </button>
         </div>
     </div>
@@ -407,7 +407,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
             <div class="col-lg-3">
                 <div class="form-group">
                     <span class="form-label d-block"><?= __('Trip Name') ?></span>
-                    <select aria-label="Trip" class="form-select js-example-basic-single" name="trip_id" id="trip_id" onchange="selectTrips()">
+                    <select aria-label="<?= htmlspecialchars(__('Trip'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="trip_id" id="trip_id" onchange="selectTrips()">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach($trips as $trp){ ?>
                         <option value="<?php echo $trp['id'];?>" data-id="<?php echo $trp['trip_name']."||".$trp['transaction_no']."||".fromDate($trp['transaction_date'])."||".customeNumberFormate($trp['budget_amount']); ?>"   <?php echo (($_GET['TRIPID'] !="" && $_GET['TRIPID'] == $trp['id']) || $emp_expenses['trip_id']==$trp['id'])?"selected":"";?> ><?php echo $trp['transaction_no']." (".$trp['trip_name'].")"; ?></option>
@@ -417,25 +417,25 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
             </div>
             <div class="col-lg-2">
                 <span class="form-label"><?= __('Transaction Date') ?></span>
-                <input aria-label="Trans Expense Date" class="form-control datepicker" type="text" name="trans_expense_date" value="<?php echo fromDate($emp_expenses['expense_date']);?>">
+                <input aria-label="<?= htmlspecialchars(__('Trans Expense Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text" name="trans_expense_date" value="<?php echo fromDate($emp_expenses['expense_date']);?>">
             </div>
             <div class="col-lg-2">
                 <span class="form-label"><?= __('Transaction Number') ?></span>
-                <input aria-label="Expense Code" class="form-control" type="text" name="expense_code" value="<?php echo $emp_expenses['expense_code'];?>" readonly>
+                <input aria-label="<?= htmlspecialchars(__('Expense Code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="expense_code" value="<?php echo $emp_expenses['expense_code'];?>" readonly>
             </div>
 
 
             <div class="col-lg-2">
                 <span class="form-label text-right"><?= __('Amount') ?></span>
-                <input aria-label="Parent Amount" class="form-control text-right" type="text" name="parent_amount" id="parent_amount" value="<?php echo $emp_expenses['amount'];?>" readonly>
+                <input aria-label="<?= htmlspecialchars(__('Parent Amount'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right" type="text" name="parent_amount" id="parent_amount" value="<?php echo $emp_expenses['amount'];?>" readonly>
             </div>
             <div class="col-lg-1">
                 <span class="form-label text-right"><?= __('Tax') ?></span>
-                <input aria-label="Parent Tax Amount" class="form-control text-right" type="text" name="parent_tax_amount" id="parent_tax_amount" value="<?php echo $emp_expenses['tax_amount'];?>" readonly>
+                <input aria-label="<?= htmlspecialchars(__('Parent Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right" type="text" name="parent_tax_amount" id="parent_tax_amount" value="<?php echo $emp_expenses['tax_amount'];?>" readonly>
             </div>
             <div class="col-lg-2">
                 <span class="form-label text-right"><?= __('Total') ?></span>
-                <input aria-label="Parent Total Amount" class="form-control text-right" type="text" name="parent_total_amount" id="parent_total_amount" value="<?php echo $emp_expenses['total_amount'];?>" readonly>
+                <input aria-label="<?= htmlspecialchars(__('Parent Total Amount'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right" type="text" name="parent_total_amount" id="parent_total_amount" value="<?php echo $emp_expenses['total_amount'];?>" readonly>
             </div>
             <div class="col-lg-8 trip_details" style="display: none;">
                 <div class=" mt-3">
@@ -503,7 +503,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                           foreach($expense_typelist as $expense_typelkey => $expense_typel){ ?>
                                             <div class="radio radio-outline radio-inline" onclick="checkFuntion('<?php echo $seqs; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                                 <label class="form-label">
-                                                    <input aria-label="Radio option" type="radio"  <?php echo ($sub_details['expense_type']==$expense_typelkey)?"checked":""; ?> name="expense_type_<?php echo $seqs; ?>" id="gender-1_2" value="<?php echo $expense_typelkey; ?>" >
+                                                    <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  <?php echo ($sub_details['expense_type']==$expense_typelkey)?"checked":""; ?> name="expense_type_<?php echo $seqs; ?>" id="gender-1_2" value="<?php echo $expense_typelkey; ?>" >
                                                     <i class="helper"></i><?php echo $expense_typel; ?>
                                                 </label>
                                             </div>
@@ -513,11 +513,11 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     <div class="row  m-t-15">
                                         <div class=" col-lg-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Expense Date') ?>">
                                             <label for="expense_date_<?php echo $seqs; ?>"><?= __('Date of Spend') ?> <span class="text-danger">*</span></label>
-                                            <input aria-label="Expense Date[]" type="text" id="expense_date_<?php echo $seqs; ?>" name="expense_date[]" class="form-control datepicker dateexpens expens_req mileage_req Perdiem_req" onchange="changedateexpense(this.value,'<?php echo $seqs; ?>')" placeholder="" value="<?php echo fromDate($sub_details['expense_date']); ?>" required>
+                                            <input aria-label="<?= htmlspecialchars(__('Expense Date'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" id="expense_date_<?php echo $seqs; ?>" name="expense_date[]" class="form-control datepicker dateexpens expens_req mileage_req Perdiem_req" onchange="changedateexpense(this.value,'<?php echo $seqs; ?>')" placeholder="" value="<?php echo fromDate($sub_details['expense_date']); ?>" required>
                                         </div>
                                         <div class="col-lg-7 expens_css_<?php echo $seqs; ?> w-full" style="<?php echo $expens_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Category') ?>">
                                             <label for="select_category_exp_<?php echo $seqs; ?>" class="d-block"><?= __('Category') ?> <span class="text-danger">*</span></label>
-                                            <select aria-label="Select option" class="form-control form-select js-example-basic-single expens_req" id="select_category_exp_<?php echo $seqs; ?>" name="category_exp[]"  >
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single expens_req" id="select_category_exp_<?php echo $seqs; ?>" name="category_exp[]"  >
                                                <option value=""><?= __('Select Any One') ?></option>
                                                 <?php foreach($datacat as $dataca){
 
@@ -536,7 +536,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                         </div>
                                         <div class="col-lg-7 mileage_css_<?php echo $seqs; ?> w-full" style="<?php echo $mileage_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Mileage') ?>">
                                              <label for="select_category_mileage_<?php echo $seqs; ?>" class="d-block"><?= __('Mileage') ?> <span class="text-danger">*</span></label>
-                                            <select aria-label="Select option" class="form-control form-select js-example-basic-single mileage_req" id="select_category_mileage_<?php echo $seqs; ?>" name="category_mileage[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'<?php echo $seqs; ?>')" >
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single mileage_req" id="select_category_mileage_<?php echo $seqs; ?>" name="category_mileage[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'<?php echo $seqs; ?>')" >
                                                    <option value=""><?= __('Select Any One') ?></option>
                                                    <?php foreach($mileageslist as $mileageslists){ ?>
                                                     <option value="<?php echo $mileageslists['id']; ?>" <?php echo $sub_details['category_id']==$mileageslists['id'] ? "selected":"" ;?>><?php echo $vehicle_types[$mileageslists['name']]." (".$mileageslists['amount'].")"; ?></option>
@@ -545,7 +545,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                         </div>
                                         <div class="col-lg-7 Perdiem_css_<?php echo $seqs; ?> w-full" style="<?php echo $Perdiem_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Select Perdiem') ?>">
                                             <label for="select_category_perd_<?php echo $seqs; ?>" class="d-block"><?= __('Per Diem') ?> <span class="text-danger">*</span></label>
-                                             <select aria-label="Select option" class="form-control form-select js-example-basic-single Perdiem_req" id="select_category_perd_<?php echo $seqs; ?>" name="category_perd[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'<?php echo $seqs; ?>')"  >
+                                             <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single Perdiem_req" id="select_category_perd_<?php echo $seqs; ?>" name="category_perd[]" onchange="itemChange(this.options[this.selectedIndex].text,this.value,'<?php echo $seqs; ?>')"  >
                                                     <option value=""><?= __('Select Any One') ?></option>
                                                 <?php foreach($perdiamarray as $perdieam){ ?>
                                                     <option value="<?php echo $perdieam['id']; ?>" <?php echo $sub_details['category_id']==$perdieam['id'] ? "selected":"" ;?>><?php echo $countries[$perdieam['name']]." (".$perdieam['amount'].")"; ?></option>
@@ -556,7 +556,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
 
                                     <div class="m-t-15 ">
                                         <label for="select_trip_transaction_table_<?php echo $seqs; ?>" class="d-block"><?= __('Trip Slot') ?></label>
-                                        <select aria-label="Select option" class="form-control form-select js-example-basic-single trip_transaction_table" id="select_trip_transaction_table_<?php echo $seqs; ?>" name="trip_transaction_table[]"  >
+                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single trip_transaction_table" id="select_trip_transaction_table_<?php echo $seqs; ?>" name="trip_transaction_table[]"  >
                                             <option value=""><?= __('Select Any One') ?></option>
                                            <?php  if(count((array)$local_trips) !=0){ ?>
                                             <optgroup label="Journey">
@@ -593,37 +593,37 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     </div>
                                 </td>
                                 <td>
-                                    <input aria-label="Enter purpose" type="text" name="description[]" class="form-control expens_req mileage_req Perdiem_req" placeholder="<?= __('Enter purpose') ?>" value="<?php echo $sub_details['description']; ?>" id="description_<?php echo $seqs; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Enter purpose'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="description[]" class="form-control expens_req mileage_req Perdiem_req" placeholder="<?= __('Enter purpose') ?>" value="<?php echo $sub_details['description']; ?>" id="description_<?php echo $seqs; ?>">
 
                                     <div class="expens_css_<?php echo $seqs; ?> mt-2" style="<?php echo $expens_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter Amount') ?>" placeholder="0.00">
                                         <label for="" class="mb-1"><?= __('Amount') ?> <span class="text-danger">*</span></label>
-                                        <input aria-label="Rate Exp[]" type="text" name="rate_exp[]" class="form-control text-right rate_exp_row decimalnumberallowe expens_req" value="<?php echo $sub_details['rate'];?>" onblur="calucateamount('<?php echo $seqs; ?>')" id="amount_popup_<?php echo $seqs; ?>_exp" >
+                                        <input aria-label="<?= htmlspecialchars(__('Rate Exp'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="rate_exp[]" class="form-control text-right rate_exp_row decimalnumberallowe expens_req" value="<?php echo $sub_details['rate'];?>" onblur="calucateamount('<?php echo $seqs; ?>')" id="amount_popup_<?php echo $seqs; ?>_exp" >
                                         <input type="hidden" name="qty_exp[]" value="1"  class="form-control text-right " readonly id="qty_popup_<?php echo $seqs; ?>_exp" >
                                     </div>
                                     <div class="mileage_css_<?php echo $seqs; ?>  mt-2" style="<?php echo $mileage_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter KM') ?>" placeholder="0.00">
-                                        <label for="" class="mb-1">KM <span class="text-danger">*</span><span id="amount_popup_span_<?php echo $seqs; ?>_mileage" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>
+                                        <label for="" class="mb-1"><?= __('KM'); ?> <span class="text-danger">*</span><span id="amount_popup_span_<?php echo $seqs; ?>_mileage" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>
                                         <input type="hidden" name="rate_mileage[]" class="form-control text-right " value="<?php echo $sub_details['rate'];?>"  id="amount_popup_<?php echo $seqs; ?>_mileage" >
-                                        <input aria-label="Qty Mileage[]" type="text" name="qty_mileage[]"  onblur="calucateamount('<?php echo $seqs; ?>')" class="form-control text-right decimalnumberallowe mileage_req"  id="qty_popup_<?php echo $seqs; ?>_mileage" value="<?php echo $sub_details['qty'];?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Qty Mileage'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="qty_mileage[]"  onblur="calucateamount('<?php echo $seqs; ?>')" class="form-control text-right decimalnumberallowe mileage_req"  id="qty_popup_<?php echo $seqs; ?>_mileage" value="<?php echo $sub_details['qty'];?>">
                                     </div>
                                     <div class="Perdiem_css_<?php echo $seqs; ?>  mt-2" style="<?php echo $Perdiem_css; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Days') ?>" placeholder="0.00">
-                                        <label for="" class="mb-1">Days <span class="text-danger">*</span><span id="amount_popup_span_<?php echo $seqs; ?>_perd" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>
+                                        <label for="" class="mb-1"><?= __('Days'); ?> <span class="text-danger">*</span><span id="amount_popup_span_<?php echo $seqs; ?>_perd" class="text-primary f-10"><?php echo "Rs. ".customeummarmonyformate($sub_details['rate']);?></span></label>
                                         <input type="hidden" name="rate_perd[]"  class="form-control text-right" value="<?php echo $sub_details['rate'];?>"  id="amount_popup_<?php echo $seqs; ?>_perd" >
-                                        <input aria-label="Qty Perd[]" type="text" name="qty_perd[]"  onblur="calucateamount('<?php echo $seqs; ?>')" class="form-control text-right decimalnumberallowe Perdiem_req"  id="qty_popup_<?php echo $seqs; ?>_perd" value="<?php echo $sub_details['qty'];?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Qty Perd'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="qty_perd[]"  onblur="calucateamount('<?php echo $seqs; ?>')" class="form-control text-right decimalnumberallowe Perdiem_req"  id="qty_popup_<?php echo $seqs; ?>_perd" value="<?php echo $sub_details['qty'];?>">
                                     </div>
                                 </td>
                                 <td>
-                                    <input aria-label="Walmart" type="text" name="merchant_name[]" class="form-control" placeholder="<?= __('Walmart') ?>" value="<?php echo $sub_details['merchant_name']; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Walmart'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="merchant_name[]" class="form-control" placeholder="<?= __('Walmart') ?>" value="<?php echo $sub_details['merchant_name']; ?>">
                                     <label for="" class="mt-2"><?= __('Tax') ?></label>
-                                    <input aria-label="Input field" type="text"  class="form-control text-right rowamt_mileage tax_row decimalnumberallowe" onblur="calucateamount('<?php echo $seqs; ?>')" value="<?php echo $sub_details['tax_amount']!=""?$sub_details['tax_amount']:"0";?>" name="tax[]" id="tax_popup_<?php echo $seqs; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter Tax') ?>" placeholder="0.00">
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control text-right rowamt_mileage tax_row decimalnumberallowe" onblur="calucateamount('<?php echo $seqs; ?>')" value="<?php echo $sub_details['tax_amount']!=""?$sub_details['tax_amount']:"0";?>" name="tax[]" id="tax_popup_<?php echo $seqs; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Please Enter Tax') ?>" placeholder="0.00">
                                 </td>
 
                                 <td>
-                                    <input aria-label="Bill No[]" type="text" name="bill_no[]" class="form-control" value="<?php echo $sub_details['bill_no']; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Bill No'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="bill_no[]" class="form-control" value="<?php echo $sub_details['bill_no']; ?>">
                                     <label for="" class="mt-2"><?= __('Total') ?></label>
-                                    <input aria-label="Input field" type="text"  class="form-control text-right rowamt_mileage event_disabled" value="<?php echo $sub_details['expense_amount'];?>" name="amount[]" id="total_popup_<?php echo $seqs; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Total Expense') ?>" placeholder="0.00"  required>
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control text-right rowamt_mileage event_disabled" value="<?php echo $sub_details['expense_amount'];?>" name="amount[]" id="total_popup_<?php echo $seqs; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Total Expense') ?>" placeholder="0.00"  required>
                                 </td>
                                 <td>
-                                    <select aria-label="Payment Mode[]" class="form-control js-example-basic-single" name="payment_mode[]">
+                                    <select aria-label="<?= htmlspecialchars(__('Payment Mode'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control js-example-basic-single" name="payment_mode[]">
                                           <option value=""><?= __('Select Any One') ?></option>
                                         <?php foreach($Payment_mode  as  $Paymentkey => $Payment_mode11){ ?>
                                             <option value="<?php echo $Paymentkey; ?>" <?php echo $sub_details['payment_mode']==$Paymentkey?"selected":"" ;?>><?php echo $Payment_mode11; ?></option>
@@ -632,7 +632,7 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                                     <div class=" m-t-30">
                                         <label class="upload-btn cursor-pointer">
                                             <i class="fa fa-upload"></i>
-                                            <input aria-label="Bill File[]" type="file" accept="image/*" name="bill_file[]" style="display:none" onchange="previewImage(this,'<?php echo $seqs; ?>')">
+                                            <input aria-label="<?= htmlspecialchars(__('Bill File'), ENT_QUOTES, 'UTF-8'); ?>[]" type="file" accept="image/*" name="bill_file[]" style="display:none" onchange="previewImage(this,'<?php echo $seqs; ?>')">
                                         </label>
                                         <a href="<?php echo $File_Uploads_Path.$sub_details['bill_file']; ?>" style="pointer-events: auto;font-weight: bold;opacity: 1;" download>
                                         <img src="<?php echo $File_Uploads_Path.$sub_details['bill_file']; ?>" alt="" class="preview_<?php echo $seqs; ?>" style="width:30px; height:30px; <?php echo $sub_details['bill_file']!=""?"":"display:none"?>"></a>
@@ -676,7 +676,7 @@ function submitempexpenseform(){
     $(".expens_req").removeClass('bg-danger');
     $(".mileage_req").removeClass('bg-danger');
     $(".Perdiem_req").removeClass('bg-danger');
-    var msg = "Please Select Or Enter ";
+    var msg = <?php echo json_encode(__('Please Select Or Enter').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
    var retunval = 0;
    $('.row_sequince').each(function(){
         var seq = $(this).val();
@@ -753,7 +753,7 @@ function deleteRow(el) {
     if (tbody.querySelectorAll(".expenseRow").length > 1) {
         row.remove();
     } else {
-        alert("At least one row is required.");
+        alert(<?php echo json_encode(__('At least one row is required.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     }
 }
 

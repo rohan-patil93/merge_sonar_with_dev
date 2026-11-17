@@ -78,14 +78,14 @@ if (isset($_POST['applyform']) && $_POST['applyform'] == 'apply') {
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Transport Gateway Report</h5>
+            <h5><?= __('Transport Gateway Report'); ?></h5>
             <div class="card-header-right">
                 <div class="dropdown-primary dropdown open">
                     <button class="btn btn-primary dropdown-toggle waves-light" type="button" data-bs-toggle="dropdown">
-                        More
+                        <?= __('More'); ?>
                     </button>
                     <div class="dropdown-menu p-0">
-                        <a class="dropdown-item" href="custom_view_download.php?page=TransportGatewayReport&format=csv" target="_blank">CSV</a>
+                        <a class="dropdown-item" href="custom_view_download.php?page=TransportGatewayReport&format=csv" target="_blank"><?= __('CSV'); ?></a>
 
                     </div>
                 </div>
@@ -96,25 +96,25 @@ if (isset($_POST['applyform']) && $_POST['applyform'] == 'apply') {
             <form method="post" action="">
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <span class="form-label">From Date</span>
-                        <input aria-label="From Date" type="date" name="from_date" class="form-control" value="<?php echo htmlspecialchars($from_date, ENT_QUOTES, 'UTF-8'); ?>">
+                        <span class="form-label"><?= __('From Date'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="from_date" class="form-control" value="<?php echo htmlspecialchars($from_date, ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="col-md-3 mb-3">
-                        <span class="form-label">From Time</span>
-                        <input aria-label="From Time" type="time" name="from_time" class="form-control" value="<?php echo htmlspecialchars($from_time, ENT_QUOTES, 'UTF-8'); ?>">
+                        <span class="form-label"><?= __('From Time'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('From Time'), ENT_QUOTES, 'UTF-8'); ?>" type="time" name="from_time" class="form-control" value="<?php echo htmlspecialchars($from_time, ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="col-md-3 mb-3">
-                        <span class="form-label">To Date</span>
-                        <input aria-label="To Date" type="date" name="to_date" class="form-control" value="<?php echo htmlspecialchars($to_date, ENT_QUOTES, 'UTF-8'); ?>">
+                        <span class="form-label"><?= __('To Date'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" name="to_date" class="form-control" value="<?php echo htmlspecialchars($to_date, ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="col-md-3 mb-3">
-                        <span class="form-label">To Time</span>
-                        <input aria-label="To Time" type="time" name="to_time" class="form-control" value="<?php echo htmlspecialchars($to_time, ENT_QUOTES, 'UTF-8'); ?>">
+                        <span class="form-label"><?= __('To Time'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('To Time'), ENT_QUOTES, 'UTF-8'); ?>" type="time" name="to_time" class="form-control" value="<?php echo htmlspecialchars($to_time, ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="col-md-3 mb-3">
-                        <span class="form-label">Vehicle</span>
-                        <select aria-label="Vehicle Number" class="form-control js-example-basic-single" name="vehicle_number" >
-                            <option value="">All Vehicles</option>
+                        <span class="form-label"><?= __('Vehicle'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Vehicle Number'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="vehicle_number" >
+                            <option value=""><?= __('All Vehicles'); ?></option>
                             <?php foreach ($vehicleOptions as $vehicle) {
                                 $vehicleNo = (string)($vehicle['vehicle_reg_no'] ?? '');
                                 if ($vehicleNo == '') {
@@ -134,9 +134,9 @@ if (isset($_POST['applyform']) && $_POST['applyform'] == 'apply') {
                         </select>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <span class="form-label">Employee</span>
-                        <select aria-label="Employee" class="form-control js-example-basic-single" name="employee_id" >
-                            <option value="">All Employees</option>
+                        <span class="form-label"><?= __('Employee'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Employee'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="employee_id" >
+                            <option value=""><?= __('All Employees'); ?></option>
                             <?php foreach ($employeeOptions as $employee) {
                                 $empId = (string)($employee['id'] ?? '');
                                 if ($empId == '') {
@@ -155,7 +155,7 @@ if (isset($_POST['applyform']) && $_POST['applyform'] == 'apply') {
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" name="applyform" value="apply" class="btn btn-info">Search</button>
+                        <button type="submit" name="applyform" value="apply" class="btn btn-info"><?= __('Search'); ?></button>
                     </div>
                 </div>
             </form>
@@ -178,22 +178,22 @@ if (isset($_POST['applyform']) && $_POST['applyform'] == 'apply') {
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Sl No</th>
-                                <th scope="col">Vehicle Number</th>
-                                <th scope="col">Gate-OutDate-Time</th>
-                                <th scope="col">Gate-InDate-Time</th>
-                                <th scope="col">Gate-Out Purpose</th>
-                                <th scope="col">Driver/Person Name</th>
-                                <th scope="col">Other Members(If Any)</th>
-                                <th scope="col">Order By</th>
-                                <th scope="col">Location</th>
-                                <th scope="col">Panel Name</th>
-                                <th scope="col">Out-Reading</th>
-                                <th scope="col">In-Reading</th>
-                                <th scope="col">Drive Duration</th>
-                                <th scope="col">Drive Running</th>
-                                <th scope="col">Remark</th>
-                                <th scope="col">Method Type</th>
+                                <th scope="col"><?= __('Sl No'); ?></th>
+                                <th scope="col"><?= __('Vehicle Number'); ?></th>
+                                <th scope="col"><?= __('Gate-OutDate-Time'); ?></th>
+                                <th scope="col"><?= __('Gate-InDate-Time'); ?></th>
+                                <th scope="col"><?= __('Gate-Out Purpose'); ?></th>
+                                <th scope="col"><?= __('Driver/Person Name'); ?></th>
+                                <th scope="col"><?= __('Other Members(If Any)'); ?></th>
+                                <th scope="col"><?= __('Order By'); ?></th>
+                                <th scope="col"><?= __('Location'); ?></th>
+                                <th scope="col"><?= __('Panel Name'); ?></th>
+                                <th scope="col"><?= __('Out-Reading'); ?></th>
+                                <th scope="col"><?= __('In-Reading'); ?></th>
+                                <th scope="col"><?= __('Drive Duration'); ?></th>
+                                <th scope="col"><?= __('Drive Running'); ?></th>
+                                <th scope="col"><?= __('Remark'); ?></th>
+                                <th scope="col"><?= __('Method Type'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -295,7 +295,7 @@ if (isset($_POST['applyform']) && $_POST['applyform'] == 'apply') {
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="16" class="text-center">No Data Available</td>
+                                    <td colspan="16" class="text-center"><?= __('No Data Available'); ?></td>
                                 </tr>
                                 <?php
                             }

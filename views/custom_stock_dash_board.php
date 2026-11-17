@@ -10,8 +10,8 @@
                         <div class="flex-grow-1 card-spacer pb-0">
                             <div class="d-flex justify-content-between align-items-center flex-wrap">
                                 <div class="mr-2">
-                                    <a href="#" class="text-dark-75 text-hover-primary font-weight-bolder font-size-h3">Inventory</a>
-                                    <div class="text-muted font-size-lg font-weight-bold pt-2">Month Wise Balance</div>
+                                    <a href="#" class="text-dark-75 text-hover-primary font-weight-bolder font-size-h3"><?= __('Inventory'); ?></a>
+                                    <div class="text-muted font-size-lg font-weight-bold pt-2"><?= __('Month Wise Balance'); ?></div>
                                 </div>
                                 <div class="font-weight-bolder font-size-h3 text-primary">$24,500</div>
                             </div>
@@ -30,7 +30,7 @@
                 <div class="card card-custom gutter-b">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Stock Balance By Age</h3>
+                            <h3 class="card-label"><?= __('Stock Balance By Age'); ?></h3>
                         </div>
                     </div>
                     <div class="card-body">
@@ -46,7 +46,7 @@
                 <div class="card card-custom gutter-b">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Stock Balance By Movment</h3>
+                            <h3 class="card-label"><?= __('Stock Balance By Movment'); ?></h3>
                         </div>
                     </div>
                     <div class="card-body">
@@ -62,7 +62,7 @@
                 <div class="card card-custom gutter-b">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Balance By Warehouse</h3>
+                            <h3 class="card-label"><?= __('Balance By Warehouse'); ?></h3>
                         </div>
                     </div>
                     <div class="card-body">
@@ -78,7 +78,7 @@
                 <div class="card card-custom gutter-b">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Balance By Category</h3>
+                            <h3 class="card-label"><?= __('Balance By Category'); ?></h3>
                         </div>
                     </div>
                     <div class="card-body">
@@ -96,7 +96,7 @@
                     <div class="card-header h-auto">
                         <!--begin::Title-->
                         <div class="card-title py-5">
-                            <h3 class="card-label">Avarage Cost</h3>
+                            <h3 class="card-label"><?= __('Avarage Cost'); ?></h3>
                         </div>
                         <!--end::Title-->
                     </div>
@@ -114,7 +114,7 @@
                 <div class="card card-custom gutter-b">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Purchases vs Sales</h3>
+                            <h3 class="card-label"><?= __('Purchases vs Sales'); ?></h3>
                         </div>
                     </div>
                     <div class="card-body">

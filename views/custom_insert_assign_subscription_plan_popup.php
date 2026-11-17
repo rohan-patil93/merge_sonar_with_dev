@@ -46,9 +46,9 @@ foreach($bulkdata as $bulkd){
 </script>
 <div class="modal-header">
     <h5 class="modal-title text-center">
-        Employees List
+        <?= __('Employees List'); ?>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
 </div>
 <div class="modal-body" data-scroll="true" data-height="500" style="height: 500px;">
@@ -60,7 +60,7 @@ foreach($bulkdata as $bulkd){
           <div class="col-lg-9"></div>
           <div class="col-lg-3">
                   <div class="input-group input-group-button mb-3">
-                    <input aria-label="Search The Name" type="text" id="filter1111" class="form-control form-control-sm width1"  placeholder="<?= __('Search The Name') ?>" data-bs-toggle="tooltip" data-placement="bottom" title="Search The Name">
+                    <input aria-label="<?= htmlspecialchars(__('Search The Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter1111" class="form-control form-control-sm width1"  placeholder="<?= __('Search The Name') ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search The Name'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="input-group-text addon-style">
                         <span class=""><i class="ti-search"></i></span>
                     </span>
@@ -69,7 +69,7 @@ foreach($bulkdata as $bulkd){
         </div>
                 <div class="col-lg-12 row custom-scroll" style="height: 400px;">
                     <div class="col-lg-3 virticalline " >
-                        <div class="f-w-600 m-b-10 text-center ">A to F </div>
+                        <div class="f-w-600 m-b-10 text-center "><?= __('A to F'); ?> </div>
             <div id="results">
                         <?php foreach ($one as $key => $value) { ?>
                       <div class=" card-sub ui-sortable-handle p-2 results">
@@ -77,9 +77,9 @@ foreach($bulkdata as $bulkd){
                         <div class="align-middle p-1 position-relative">
 
                             <?php if($value['image']!="") { ?>
-                                <img src="uploads/all/<?php echo $value['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $value['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
-                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $value['display_name']; ?>"><?php echo initials($value['display_name']); ?></span>
+                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $value['display_name']; ?>"><?php echo initials($value['display_name']); ?></span>
                             <?php } ?>
                             <div class="d-inline-block width73">
                                 <a href="#!" class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6>
@@ -90,7 +90,7 @@ foreach($bulkdata as $bulkd){
 
  <div class="checkbox-fade fade-in-primary float-right">
                                       <label class="form-label">
-                                        <input aria-label="Checkbox" type="checkbox" value="<?php echo $value['id']; ?>" id="getuserid_<?php echo $value['id']; ?>" onchange="assignedUserlicens('<?php echo $value['id']; ?>')">
+                                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="<?php echo $value['id']; ?>" id="getuserid_<?php echo $value['id']; ?>" onchange="assignedUserlicens('<?php echo $value['id']; ?>')">
                                         <span class="cr position-absolute top-0">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -104,21 +104,21 @@ foreach($bulkdata as $bulkd){
                   </div>
               </div>
               <div class="col-lg-3 virticalline ">
-                <div class="f-w-600 m-b-10 text-center">G to L </div>
+                <div class="f-w-600 m-b-10 text-center"><?= __('G to L'); ?> </div>
                 <div id="results_2">
                 <?php foreach ($two as $key => $value) { ?>
                     <div class=" card-sub ui-sortable-handle p-2">
                         <div class="align-middle p-1">
                             <?php if($value['image']!="") { ?>
-                                <img src="uploads/all/<?php echo $value['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $value['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
-                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $value['display_name']; ?>"><?php echo initials($value['display_name']); ?></span>
+                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $value['display_name']; ?>"><?php echo initials($value['display_name']); ?></span>
                             <?php } ?>
                             <div class="d-inline-block width73">
                                 <a href="#!" class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6></a>
                                  <div class="checkbox-fade fade-in-primary float-right">
                                       <label class="form-label">
-                                        <input aria-label="Checkbox" type="checkbox" value="">
+                                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="">
                                         <span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -133,15 +133,15 @@ foreach($bulkdata as $bulkd){
                 <?php } ?>
               </div></div>
               <div class="col-lg-3 virticalline ">
-                <div class="f-w-600 m-b-10 text-center">M to R </div>
+                <div class="f-w-600 m-b-10 text-center"><?= __('M to R'); ?> </div>
                 <div id="results_3">
                 <?php foreach ($tree as $key => $value) { ?>
                     <div class=" card-sub ui-sortable-handle p-2">
                         <div class="align-middle p-1">
                             <?php if($value['image']!="") { ?>
-                                <img src="uploads/all/<?php echo $value['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $value['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
-                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $value['display_name']; ?>"><?php echo initials($value['display_name']); ?></span>
+                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $value['display_name']; ?>"><?php echo initials($value['display_name']); ?></span>
                             <?php } ?>
                             <div class="d-inline-block width73">
                                 <a href="#!" class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6></a>
@@ -152,15 +152,15 @@ foreach($bulkdata as $bulkd){
                 <?php } ?>
               </div></div>
               <div class="col-lg-3 ">
-                <div class="f-w-600 m-b-10 text-center">S to Z </div>
+                <div class="f-w-600 m-b-10 text-center"><?= __('S to Z'); ?> </div>
                 <div id="results_4">
                 <?php foreach ($four as $key => $value) { ?>
                     <div class=" card-sub ui-sortable-handle p-2">
                         <div class="align-middle p-1">
                             <?php if($value['image']!="") { ?>
-                                <img src="uploads/all/<?php echo $value['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="Attachment Preview">
+                                <img src="uploads/all/<?php echo $value['image']; ?>" class="img-radius img-40 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                             <?php } else { ?>
-                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $value['display_name']; ?>"><?php echo initials($value['display_name']); ?></span>
+                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $value['display_name']; ?>"><?php echo initials($value['display_name']); ?></span>
                             <?php } ?>
                             <div class="d-inline-block width73">
                                 <a href="#!" class="text-dark text-capitalize"><h6 class="mb-1"><?php echo $value['display_name']; ?></h6></a>

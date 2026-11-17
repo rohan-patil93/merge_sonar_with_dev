@@ -54,7 +54,7 @@ if(isset($_POST['editform']) && $_POST['editform'] != ""){
                 <input type="hidden" name="toc_id" id="toc_id" value="<?php echo $toc_id; ?>">
                 <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mt-2" onclick="addtocheader()" >
                  <?php if($tocheaderssingle['id'] !="" && $tocheaderssingle['id'] !="0"){ echo __('Update Header');
-}else{ echo "<i class='fa fa-plus'></i> Add Header";
+}else{ echo "<i class='fa fa-plus'></i> ".__('Add Header')."";
 } ?></button>
              </div>
          </div>

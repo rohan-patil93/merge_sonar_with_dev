@@ -29,11 +29,11 @@ function assetaccept(assetid,id,admin_budddy){
     <div class="container-fluid">
         <div class="card card-custom ">
       <div class="card-header table-card-header mb-2">
-       <h5>Asset Alloation List</h5>
+       <h5><?= __('Asset Alloation List'); ?></h5>
        <div class="card-header-right table-card-header ">
         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
           <i class="icofont icofont-reply"></i>
-          Back
+          <?= __('Back'); ?>
         </a>
       </div>
     </div>
@@ -45,12 +45,12 @@ function assetaccept(assetid,id,admin_budddy){
             <tr>
                 <th scope="col">
                 </th>
-                <th scope="col">Asset Code</th>
-                <th scope="col">Asset Name</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Remarks</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
+                <th scope="col"><?= __('Asset Code'); ?></th>
+                <th scope="col"><?= __('Asset Name'); ?></th>
+                <th scope="col"><?= __('End Date'); ?></th>
+                <th scope="col"><?= __('Remarks'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
+                <th scope="col"><?= __('Action'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -69,7 +69,7 @@ function assetaccept(assetid,id,admin_budddy){
                     </td>
                         <td>
                         <?php if($list_asset['allocation_type'] == "0"){ ?>
-                        <button class="btn btn-primary" type="button"  onclick="assetaccept('<?php echo $list_asset['id']; ?>','<?php echo $list_asset['emp_asset_id']; ?>','<?php echo $list_asset['admin_buddy']; ?>')">View</button>
+                        <button class="btn btn-primary" type="button"  onclick="assetaccept('<?php echo $list_asset['id']; ?>','<?php echo $list_asset['emp_asset_id']; ?>','<?php echo $list_asset['admin_buddy']; ?>')"><?= __('View'); ?></button>
             <?php } ?>
                         </td>
                 </tr>

@@ -23,9 +23,9 @@ $list_project = array('0'=>'Work Space','1'=>'Project Type', '2'=>'Projeject Set
             type: "POST",
             success:function(data){
                 console.log(data);
-                var msg = 'Project Work Space Inserted Successfully';
+                var msg = <?php echo json_encode(__('Project Work Space Inserted Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
                 if(id!=""){
-                    msg = 'Project Work Space Updated Successfully';
+                    msg = <?php echo json_encode(__('Project Work Space Updated Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
                 }
                 tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',msg,'');
                 window.location.reload();
@@ -42,8 +42,8 @@ $list_project = array('0'=>'Work Space','1'=>'Project Type', '2'=>'Projeject Set
 <div class="modal-header">
     <h5 class="modal-title"> <?php if($_POST['id']!=""){ echo "Edit";
 }else{ echo "Create";
-} ?> Work Space</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+} ?> <?= __('Work Space'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <form class="kt-form kt-form--label-right" action="" id="submitnextform" method="post">
     <div class="modal-body" >
@@ -54,11 +54,11 @@ $list_project = array('0'=>'Work Space','1'=>'Project Type', '2'=>'Projeject Set
                     <div class="row " id="checknext0" >
                         <div class="col-lg-5 mx-auto" >
                             <div class="form-group mt-4 w-full">
-                                <span class="f-w-600 mb-2"> Work Space</span></br>
-                                <input aria-label="Work Space" class="form-control " type="work_space" placeholder="" name="work_space" id="work_space" value="<?php echo $data['name']; ?>">
+                                <span class="f-w-600 mb-2"> <?= __('Work Space'); ?></span></br>
+                                <input aria-label="<?= htmlspecialchars(__('Work Space'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " type="work_space" placeholder="" name="work_space" id="work_space" value="<?php echo $data['name']; ?>">
                             </div>
                             <input type="hidden" name="id" id="id" value="<?php echo $data['id']; ?>">
-                            <button class="btn btn-primary waves-effect waves-light float-end p-2" type="button" onclick="submitdrom()" >Save</button>
+                            <button class="btn btn-primary waves-effect waves-light float-end p-2" type="button" onclick="submitdrom()" ><?= __('Save'); ?></button>
                         </div>
                     </div>
                 </div>

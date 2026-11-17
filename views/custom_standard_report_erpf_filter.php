@@ -11,20 +11,20 @@
 </script>
   <div class="col-lg-4">
     <input type="hidden" id="backdate_limit" value="1360">
-    <span class="form-label"> Start Date</span>
+    <span class="form-label"> <?= __('Start Date'); ?></span>
     <div class="input-group custom-date">
         <span class="input-group-text addon-style" id="basic-addon3">
             <span class=""><i class="fa fa-calendar"></i></span>
         </span>
-        <input aria-label="Start Date" type="text" class="form-control datepicker" name="start_date" id="date_of_grant" onchange="enddatechange()" value="<?php echo $from_date; ?>" required>
+        <input aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="start_date" id="date_of_grant" onchange="enddatechange()" value="<?php echo $from_date; ?>" required>
     </div>
   </div>
   <div class="col-lg-4">
-    <span class="form-label"> End Date</span>
+    <span class="form-label"> <?= __('End Date'); ?></span>
     <div class="input-group custom-date">
         <span class="input-group-text addon-style" id="basic-addon3_2">
             <span class=""><i class="fa fa-calendar"></i></span>
         </span>
-        <input aria-label="To Date" type="text" class="form-control datepicker" name="to_date" id="date_of_end" value="<?php echo $to_date; ?>" required>
+        <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="to_date" id="date_of_end" value="<?php echo $to_date; ?>" required>
     </div>
   </div>

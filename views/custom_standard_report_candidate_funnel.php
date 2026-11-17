@@ -46,14 +46,14 @@ $_SESSION['download_data'] = $cssdata;
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="">Candidate Funnel</h5>
+      <h5 class=""><?= __('Candidate Funnel'); ?></h5>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate Funnel" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate Funnel" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate Funnel" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate Funnel" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -80,8 +80,8 @@ $_SESSION['download_data'] = $cssdata;
       </nav>
     </div>
       <div class="mt-5">
-        <h3 class="text-primary"><i class="ti-hand-point-right"></i> Ready to go? Just select a job opening to see the details.</h3>
-        <p>We'll show you the history of all the candidates for the job opening; where they got stuck, where they ended up, all of it.</p>
+        <h3 class="text-primary"><i class="ti-hand-point-right"></i> <?= __('Ready to go? Just select a job opening to see the details.'); ?></h3>
+        <p><?= __('We\'ll show you the history of all the candidates for the job opening; where they got stuck, where they ended up, all of it.'); ?></p>
       </div>
     </div>
   </div>
@@ -106,21 +106,21 @@ $_SESSION['download_data'] = $cssdata;
             </div>
             <div class="col-lg-3">
               <h4 class="f-w-600 text-success mb-2"><?php echo $result['viewed']; ?></h4>
-              <p class="f-12 mb-0">POSTING VIEWS</p>
+              <p class="f-12 mb-0"><?= __('POSTING VIEWS'); ?></p>
             </div>
             <div class="col-lg-1 text-center">
               <i  class="fa fa-user f-24 text-success border p-2 img-radius"></i>
             </div>
             <div class="col-lg-3">
               <h4 class="f-w-600 text-success mb-2"> <?php echo count((array)$result['candidates']); ?> <span class="f-w-300 text-muted f-14"></span></h4>
-              <p class="f-12 mb-0">TOTAL CANDIDATES</p>
+              <p class="f-12 mb-0"><?= __('TOTAL CANDIDATES'); ?></p>
             </div>
             <div class="col-lg-1 text-center">
               <i class="fa fa-calendar f-24 text-success border p-2 img-radius"></i>
             </div>
             <div class="col-lg-3">
               <h4 class="f-w-600 text-success mb-2"> <?php echo $result['candidates']['0']['created_date'] !=""?trim(notificationdatesdiff($result['candidates']['0']['created_date'],'N'),","):"-"; ?></h4>
-              <p class="f-12 mb-0">LAST APPLIED</p>
+              <p class="f-12 mb-0"><?= __('LAST APPLIED'); ?></p>
             </div>
           </div>
         </div>
@@ -129,8 +129,8 @@ $_SESSION['download_data'] = $cssdata;
         <div class="float-left">
         <div class="d-inline-block m-r-10 align-top"><i class="fa fa-check-circle text-success f-24"></i></div>
           <div class="d-inline-block">
-          <h4 class="text-success f-w-600">Active Status Workflow</h4>
-          <p>This shows how all candidates to this job opening have progressed through the status workflow.</p>
+          <h4 class="text-success f-w-600"><?= __('Active Status Workflow'); ?></h4>
+          <p><?= __('This shows how all candidates to this job opening have progressed through the status workflow.'); ?></p>
           </div>
          </div>
         </div>
@@ -138,8 +138,8 @@ $_SESSION['download_data'] = $cssdata;
             <div class="float-">
             <h4 class="f-w-600 mb-0"> <?php if($hirec=='0'){ echo "Zero";
 } else{ echo $hirec;
-} ?> Hire(s)</h4>
-            <p>Average time to hire is <?php echo $result['average']; ?> days.</p>
+} ?> <?= __('Hire(s)'); ?></h4>
+            <p><?= __('Average time to hire is'); ?> <?php echo $result['average']; ?> <?= __('days.'); ?></p>
             </div>
           </div>
       </div>
@@ -162,7 +162,7 @@ $_SESSION['download_data'] = $cssdata;
           <div class="col-lg-3">
             <div class="bg-gray p-4">
               <h5><?php echo $castatus['action_label']; ?></h5>
-              <p class="mb-0"><i class="fa fa-clock-o"></i> Last Applied <?php echo $result['candidates']['0']['created_date'] !=""?trim(notificationdatesdiff($result['candidates']['0']['created_date'],'N'),","):"-"; ?></p>
+              <p class="mb-0"><i class="fa fa-clock-o"></i> <?= __('Last Applied'); ?> <?php echo $result['candidates']['0']['created_date'] !=""?trim(notificationdatesdiff($result['candidates']['0']['created_date'],'N'),","):"-"; ?></p>
             </div>
             <?php if($cntcnad != $j){ ?>
             <div class="text-center">
@@ -177,9 +177,9 @@ $_SESSION['download_data'] = $cssdata;
 
               <div class="color bg-success" style="width: <?php echo customNanAndEmptyValidation($stnor_p); ?>%; <?php if($st_p>27){ echo "color: #FFFFFF;";
 }?>">
-                <p class="mb-0"><i class="fa fa-user"></i> <?php echo customNanAndEmptyValidation($st_count);  ?> Candidate (<?php echo customNanAndEmptyValidation($st_p); ?>% of Total All-Time)</p>
-                <p class="mb-0"><i class="fa fa-sign-in"></i> <?php echo $strej_count;  ?> (<?php echo $st_count !=0?customNanAndEmptyValidation(round((($strej_count)/$st_count)*100)):0; ?>%) SET TO NOT HIRED FROM THIS STATUS</p>
-                <p class="mb-0"><i class="fa fa-sign-in"></i> <?php echo $sthold_count;  ?> (<?php echo $st_count !=0?customNanAndEmptyValidation(round((($sthold_count)/$st_count)*100)):0; ?>%) SET TO BE HOLD</p>
+                <p class="mb-0"><i class="fa fa-user"></i> <?php echo customNanAndEmptyValidation($st_count);  ?> <?= __('Candidate ('); ?><?php echo customNanAndEmptyValidation($st_p); ?><?= __('% of Total All-Time)'); ?></p>
+                <p class="mb-0"><i class="fa fa-sign-in"></i> <?php echo $strej_count;  ?> (<?php echo $st_count !=0?customNanAndEmptyValidation(round((($strej_count)/$st_count)*100)):0; ?><?= __('%) SET TO NOT HIRED FROM THIS STATUS'); ?></p>
+                <p class="mb-0"><i class="fa fa-sign-in"></i> <?php echo $sthold_count;  ?> (<?php echo $st_count !=0?customNanAndEmptyValidation(round((($sthold_count)/$st_count)*100)):0; ?><?= __('%) SET TO BE HOLD'); ?></p>
 
               </div>
               <?php if($sthold_count>0){ ?>
@@ -200,8 +200,8 @@ $_SESSION['download_data'] = $cssdata;
       <div class="mt-5">
         <div class="d-inline-block m-r-10 align-top"><i class="fa fa-times-circle text-danger f-24"></i></div>
         <div class="d-inline-block">
-          <h4 class="text-danger f-w-600">'Not Hired Because...' </h4>
-          <p>This shows where all inactive candidates ended up in your status workflow.</p>
+          <h4 class="text-danger f-w-600"><?= __('\'Not Hired Because...\''); ?> </h4>
+          <p><?= __('This shows where all inactive candidates ended up in your status workflow.'); ?></p>
         </div>
       </div>
 
@@ -221,7 +221,7 @@ $_SESSION['download_data'] = $cssdata;
         <div class="col-lg-3">
           <div class="bg-gray p-3">
             <h5><?php echo $result['hold_rejection'][$keyrej]; ?></h5>
-            <p> Active for  <?php echo trim(notificationdatesdiff($ccd,'N',$upd),","); ?> - Average</p>
+            <p> <?= __('Active for'); ?>  <?php echo trim(notificationdatesdiff($ccd,'N',$upd),","); ?> - <?= __('Average'); ?></p>
           </div>
           <div class="text-center">
             <div class="dropdown-primary dropdown open">
@@ -232,8 +232,8 @@ $_SESSION['download_data'] = $cssdata;
         <div class="col-lg-9">
           <div class="bar multi-color">
             <div class="color bg-danger" style="width: 100%;color: #FFFFFF;">
-              <p class="mb-0"><i class="fa fa-user"></i> <?php echo $cand_count; ?> Candidate (100% of Total All-Time)</p>
-              <p class="mb-0"><i class="fa fa-sign-in"></i> <?php echo $ccrej; ?>  (<?php echo round(($ccrej/$cand_count)*100) ?>%) SET TO NOT HIRED</p>
+              <p class="mb-0"><i class="fa fa-user"></i> <?php echo $cand_count; ?> <?= __('Candidate (100% of Total All-Time)'); ?></p>
+              <p class="mb-0"><i class="fa fa-sign-in"></i> <?php echo $ccrej; ?>  (<?php echo round(($ccrej/$cand_count)*100) ?><?= __('%) SET TO NOT HIRED'); ?></p>
             </div>
           </div>
         </div>
@@ -241,7 +241,7 @@ $_SESSION['download_data'] = $cssdata;
       <?php } ?>
     <?php }else{?>
       <div class="card-px text-center py-20 m-t-30">
-                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Candidates </p>
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Candidates'); ?> </p>
                     <div class="text-center px-4">
                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                     </div>

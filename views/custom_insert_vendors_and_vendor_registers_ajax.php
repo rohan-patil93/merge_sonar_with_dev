@@ -199,7 +199,7 @@ $items = $result['items'];
 
 function answerYesOrNo($answ)
 {
-    $return = "<span class='text-danger'>Pending<span>";
+    $return = "<span class='text-danger'>".__('Pending')."<span>";
     if ($answ == "Y") {
         $return = "Yes";
     } elseif ($answ == "N") {
@@ -228,15 +228,15 @@ $locations = $result['locations'];
 <?php if ($_POST['edittype'] == 'SendVerificationProfile') {
     $notsendtoapprove = 0; ?>
     <div class="modal-header">
-        <h5 class="modal-title">Vendor details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title"><?= __('Vendor details'); ?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
     <div class="modal-body">
         <div class="row">
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Profile Completion</h5>
+                        <h5><?= __('Profile Completion'); ?></h5>
                         <div class="card-header-right">
 
                         </div>
@@ -261,7 +261,7 @@ $locations = $result['locations'];
                                         <th scope="col" style="text-align: right;">
                                             <div class="d-flex align-items-center w-100px w-sm-120px flex-column ">
                                                 <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                    <span class="f-12 f-w-600">Completion </span>
+                                                    <span class="f-12 f-w-600"><?= __('Completion'); ?> </span>
                                                     <span class="f-12 f-w-600"><?php echo round($percentage); ?>%</span>
                                                 </div>
                                                 <div class="col-md-12">
@@ -338,7 +338,7 @@ $locations = $result['locations'];
                         <div class="s-caption  text-primary"><i class="ti-list f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo count((array) $transaction_activity_schedule); ?></h5>
-                            <p class="m-b-0 f-12">Total Task</p>
+                            <p class="m-b-0 f-12"><?= __('Total Task'); ?></p>
                         </div>
                     </div>
                     <div class="col-3 b-l-default text-center">
@@ -346,7 +346,7 @@ $locations = $result['locations'];
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo count((array) $transactionactivityschedule[ST_ACTIVE]); ?>
                             </h5>
-                            <p class="m-b-0 f-12">Yet To Start</p>
+                            <p class="m-b-0 f-12"><?= __('Yet To Start'); ?></p>
                         </div>
                     </div>
                     <div class="col-3 b-l-default text-center">
@@ -355,7 +355,7 @@ $locations = $result['locations'];
                             <h5 class="f-w-700 m-b-0">
                                 <?php echo count((array) $transactionactivityschedule['PENDDING_TASK']); ?>
                             </h5>
-                            <p class="m-b-0  f-12">In Progress</p>
+                            <p class="m-b-0  f-12"><?= __('In Progress'); ?></p>
                         </div>
                     </div>
                     <div class="col-3 b-l-default text-center">
@@ -364,14 +364,14 @@ $locations = $result['locations'];
                             <h5 class="f-w-700 m-b-0">
                                 <?php echo count((array) $transactionactivityschedule['SEND_FOR_APPROVE']); ?>
                             </h5>
-                            <p class="m-b-0 f-12">Ready For Review</p>
+                            <p class="m-b-0 f-12"><?= __('Ready For Review'); ?></p>
                         </div>
                     </div>
                 </div>
                 <div class="">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Pending Tasks</h5>
+                            <h5><?= __('Pending Tasks'); ?></h5>
                             <div class="card-header-right">
 
                             </div>
@@ -380,43 +380,43 @@ $locations = $result['locations'];
                             <?php
                             if ($vendor_questions['terms_conditions']['1'] != "Y" || $vendor_questions['terms_conditions']['2'] != "Y") {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Accept Terms And Conditions In Questions Tab');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Accept Terms And Conditions In Questions Tab').'');
                             }
                             if ($vendordetail['pan_no'] == "" && in_array('PAN',(array)$popuprdv)) {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Provide PAN No.');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Provide PAN No.').'');
                             }
                             if ($vendordetail['gstin'] == "" && in_array('GSTIN',(array)$popuprdv)) {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Provide GSTIN No.');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Provide GSTIN No.').'');
                             }
                             if ($vendordetail['bank_account_no'] == "" && in_array('BANK',(array)$popuprdv)) {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Provide Bank Account No.');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Provide Bank Account No.').'');
                             }
                             if ($vendordetail['ifsc_code'] == "" && in_array('BANK',(array)$popuprdv)) {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Provide IFSC Code');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Provide IFSC Code').'');
                             }
                             if ($vendordetail['msme_register_yes_no'] == "Y" && $vendordetail['msme_number'] == "") {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Provide MSME Number');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Provide MSME Number').'');
                             }
                             if ($vendordetail['billing_address'] == "") {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Provide Billing Address');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Provide Billing Address').'');
                             }
                             if ($vendordetail['shipping_address'] == "") {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Provide Shipping Address');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Provide Shipping Address').'');
                             }
                             if ($vendordetail['billing_post_code'] == "") {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Provide Billing Post Code');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Provide Billing Post Code').'');
                             }
                             if ($vendordetail['shipping_post_code'] == "") {
                                 $notsendtoapprove = 1;
-                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> Please Provide Shipping Post Code');
+                                $pendingtask[] = array('task_name' => '<span class="text-danger">*</span> '.__('Please Provide Shipping Post Code').'');
                             }
                             ?>
                             <?php if (count((array) $pendingtask) != 0) { ?>
@@ -429,7 +429,7 @@ $locations = $result['locations'];
                                 </table>
                             <?php } else { ?>
                                 <div class="card-px text-center py-20 mt-2">
-                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Pending Tasks
+                                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Pending Tasks'); ?>
                                     </p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png"
@@ -445,10 +445,10 @@ $locations = $result['locations'];
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
         <?php if ($notsendtoapprove == 0) { ?>
             <button type="button" class="btn btn-primary waves-effect waves-light UpdateSendVerificationProfileStatus" id="popsubmitforreview_btn"
-                >Submit For Review</button>
+                ><?= __('Submit For Review'); ?></button>
         <?php } else {
             echo "<span class='text-danger'><i class='ti-alert'></i>" . $_SESSION['error_message']['9126'] . "</span>";
         } ?>
@@ -521,35 +521,34 @@ $locations = $result['locations'];
                 <button type="button" class="btn btn-primary m-r-20 m-b-20 checkVendorValidationEmpty">
                     <i class="ti-check"></i> <?php echo $submitText; ?>
                 </button>
-                <span class="text-danger terms_conditions d-none" >* Please Accept Terms And Conditions In
-                    Questions Tab</span>
+                <span class="text-danger terms_conditions d-none" >* <?= __('Please Accept Terms And Conditions In Questions Tab'); ?></span>
             </div>
             <div class="card-block">
 
                 <div class="vendor-form-content">
 
-                    <h5 class="text-primary mb-3 border-bottom pb-2">Business Information</h5>
+                    <h5 class="text-primary mb-3 border-bottom pb-2"><?= __('Business Information'); ?></h5>
                     <div class="row">
                         <?php
 
                         $fieldaccesright = $vafield['business_information'];
                         ?>
                         <div class="form-group  col-lg-6">
-                            <span class="form-label">Company Name <span class="text-danger">*</span></span>
-                            <input aria-label="Input field" class="form-control checkCompanyNameAllReadyAvilableOrNot <?php echo $isAdd ? '' : 'custom_readonly'; ?>" type="text"
+                            <span class="form-label"><?= __('Company Name'); ?> <span class="text-danger">*</span></span>
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control checkCompanyNameAllReadyAvilableOrNot <?php echo $isAdd ? '' : 'custom_readonly'; ?>" type="text"
                                 id="company" name="company"
                                 value="<?php echo $vendordetail['company']; ?>" autocomplete="off" <?php echo $isAdd ? '' : 'readonly'; ?> required>
                             <span class="text-danger f-12 d-none" id="allreadycompanyname" ><span
-                                    id="companynameerror" class="f-w-600"> </span> Company Name Already Register</span>
-                            <div class="d-none text-danger" id="company_name_err"> Please Enter Company Name </div>
+                                    id="companynameerror" class="f-w-600"> </span> <?= __('Company Name Already Register'); ?></span>
+                            <div class="d-none text-danger" id="company_name_err"> <?= __('Please Enter Company Name'); ?> </div>
                         </div>
                         <?php
                         if ($fieldaccesright['field']['website_url'] != "NA") {
                             $accessreadonly = $fieldaccesright['field']['website_url'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-6 form-group ">
-                                <span class="form-label">Corporate Website</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="website_url"
+                                <span class="form-label"><?= __('Corporate Website'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="website_url"
                                     name="website_url" value="<?php echo $vendordetail['website_url']; ?>" autocomplete="off">
                             </div>
                             <?php
@@ -558,8 +557,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['company_trading_name'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-6 form-group ">
-                                <span class="form-label">DBA(Trading Name)</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="company_trading_name"
+                                <span class="form-label"><?= __('DBA(Trading Name)'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="company_trading_name"
                                     name="company_trading_name" value="<?php echo $vendordetail['company_trading_name']; ?>"
                                     autocomplete="off">
                             </div>
@@ -569,8 +568,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['company_subsidiary_division'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-6 form-group ">
-                                <span class="form-label">Subsidiary / Division Of</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text"
+                                <span class="form-label"><?= __('Subsidiary / Division Of'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text"
                                     id="company_subsidiary_division" name="company_subsidiary_division"
                                     value="<?php echo $vendordetail['company_subsidiary_division']; ?>" autocomplete="off">
                             </div>
@@ -580,13 +579,13 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['first_name'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-2 ">
-                                <span class="form-label">First Name <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('First Name'); ?> <span class="text-danger">*</span></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="first_name"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="first_name"
                                         name="first_name" value="<?php echo $vendordetail['first_name']; ?>" autocomplete="off"
                                         required>
                                 </div>
-                                <div class="d-none text-danger" id="first_name_err"> Please Enter First Name </div>
+                                <div class="d-none text-danger" id="first_name_err"> <?= __('Please Enter First Name'); ?> </div>
                             </div>
                             <?php
                         }
@@ -594,13 +593,13 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['middle_name'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-2">
-                                <span class="form-label">Middle Name</span>
+                                <span class="form-label"><?= __('Middle Name'); ?></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="middle_name"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="middle_name"
                                         name="middle_name" value="<?php echo $vendordetail['middle_name']; ?>"
                                         autocomplete="off">
                                 </div>
-                                <div class="d-none text-danger" id="middle_name_err"> Please enter middle name </div>
+                                <div class="d-none text-danger" id="middle_name_err"> <?= __('Please enter middle name'); ?> </div>
                             </div>
                             <?php
                         }
@@ -608,46 +607,46 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['last_name'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-2">
-                                <span class="form-label">Last Name <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Last Name'); ?> <span class="text-danger">*</span></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="last_name"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="last_name"
                                         name="last_name" value="<?php echo $vendordetail['last_name']; ?>" autocomplete="off"
                                         required>
                                 </div>
-                                <div class="d-none text-danger" id="last_name_err"> Please Enter Last Name </div>
+                                <div class="d-none text-danger" id="last_name_err"> <?= __('Please Enter Last Name'); ?> </div>
                             </div>
                             <?php
                         }
                         ?>
                         <div class="form-group col-lg-3">
-                            <span class="form-label">Email <span class="text-danger">*</span></span>
+                            <span class="form-label"><?= __('Email'); ?> <span class="text-danger">*</span></span>
                             <div class="kt-input-icon">
-                                <input aria-label="Input field" class="form-control checkalreadyavailableornotcustomerorvendordetails  <?php echo ($vendordetail['email'] == "") ? '' : 'custom_readonly'; ?>" id="email" name="email" type="email" data-type="EMAIL"
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control checkalreadyavailableornotcustomerorvendordetails  <?php echo ($vendordetail['email'] == "") ? '' : 'custom_readonly'; ?>" id="email" name="email" type="email" data-type="EMAIL"
                                     value="<?php echo $vendordetail['email']; ?>" autocomplete="off" <?php echo ($vendordetail['email'] == "") ? '' : 'readonly'; ?> required>
                             </div>
                             <span class="text-danger f-14 d-none" id="emailerror" ></span>
-                            <div class="d-none text-danger" id="email_err"> Please Enter Email </div>
+                            <div class="d-none text-danger" id="email_err"> <?= __('Please Enter Email'); ?> </div>
                         </div>
                         <?php
                         if ($fieldaccesright['field']['phone'] != "NA") {
                             $accessreadonly = $fieldaccesright['field']['phone'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-3">
-                                <span class="form-label">Phone</span>
+                                <span class="form-label"><?= __('Phone'); ?></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="number" id="phone"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="number" id="phone"
                                         name="phone" value="<?php echo $vendordetail['phone']; ?>" autocomplete="off">
                                 </div>
-                                <div class="d-none text-danger" id="phone_err"> Please enter phone </div>
+                                <div class="d-none text-danger" id="phone_err"> <?= __('Please enter phone'); ?> </div>
                             </div>
                         <?php }
                         if ($fieldaccesright['field']['vendor_type_id'] != "NA") {
                             $accessreadonly = $fieldaccesright['field']['vendor_type_id'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-3">
-                                <span class="form-label">Vendor Type</span>
+                                <span class="form-label"><?= __('Vendor Type'); ?></span>
                                 <div class="kt-input-icon">
-                                    <select aria-label="Vendor Type"  name="vendor_type_id"     class="form-select js-example-basic-single selectVendorTypes">
+                                    <select aria-label="<?= htmlspecialchars(__('Vendor Type'), ENT_QUOTES, 'UTF-8'); ?>"  name="vendor_type_id"     class="form-select js-example-basic-single selectVendorTypes">
                                         <?php foreach ($vendor_types as $vendortypes) { ?>
                                             <option <?php echo ($vendordetail['vendor_type_id'] == $vendortypes['id'] || ($vendordetail['vendor_type_id'] == "" && $vendordetail['vendor_type_id'] == 2)) ? 'selected' : '' ?> value="<?php echo $vendortypes['id']; ?>">
                                                 <?php echo $vendortypes['type_name']; ?>
@@ -656,36 +655,36 @@ $locations = $result['locations'];
                                     </select>
 
                                 </div>
-                                <div class="d-none text-danger" id="vendor_type_id_err"> Please Vendor Type </div>
+                                <div class="d-none text-danger" id="vendor_type_id_err"> <?= __('Please Vendor Type'); ?> </div>
                             </div>
                         <?php }
                         if ($fieldaccesright['field']['service_types'] != "NA") {
                             $accessreadonly = $fieldaccesright['field']['service_types'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-3">
-                                <span class="form-label">Service Type</span>
+                                <span class="form-label"><?= __('Service Type'); ?></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?> " type="text" id="service_types"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?> " type="text" id="service_types"
                                         name="service_types" value="<?php echo $vendordetail['service_types']; ?>" autocomplete="off">
 
                                 </div>
-                                <div class="d-none text-danger" id="phone_err_2"> Please Service Types</div>
+                                <div class="d-none text-danger" id="phone_err_2"> <?= __('Please Service Types'); ?></div>
                             </div>
                         <?php }
                          if ($fieldaccesright['field']['bp_code'] != "NA") {
                             $accessreadonly = $fieldaccesright['field']['bp_code'] != "E" ? "custom_readonly" : "";
                             ?>
                         <div class="form-group col-lg-3">
-                            <span class="form-label">BP Code</span>
-                            <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bp_code" name="bp_code" value="<?php echo $vendordetail['bp_code']; ?>" autocomplete="off">
+                            <span class="form-label"><?= __('BP Code'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bp_code" name="bp_code" value="<?php echo $vendordetail['bp_code']; ?>" autocomplete="off">
                         </div>
                         <?php }
                         if ($fieldaccesright['field']['location_id'] != "NA") {
                             $accessreadonly = $fieldaccesright['field']['location_id'] != "E" ? "custom_readonly" : "";
                             ?>
                         <div class="form-group col-lg-3">
-                            <span class="form-label">Locations</span>
-                            <select aria-label="Location []"  name="location_id[]" class="form-select js-example-basic-multiple" multiple>
+                            <span class="form-label"><?= __('Locations'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?> []"  name="location_id[]" class="form-select js-example-basic-multiple" multiple>
                                 <?php $locationsid = json_decode($vendordetail['location_id'] ,1);
                                      foreach($locations as $locval) { ?>
                                     <option <?php echo (in_array($locval['id'],(array)$locationsid))?'selected':''; ?> value="<?php echo $locval['id']; ?>"><?php echo $locval['location_name']; ?></option>
@@ -697,48 +696,48 @@ $locations = $result['locations'];
             <?php if($vendordetail['id'] == ''){ ?>
             <div class="form-group row ml-20 mr-20">
                 <div class="form-group col-lg-3  w-full  notrequird3rdpartyvendortype <?php echo ($vendordetail['vendor_type_id'] != 1)?"d-none":""; ?>">
-                    <span class="form-label  d-block">HR Connect</span>
+                    <span class="form-label  d-block"><?= __('HR Connect'); ?></span>
                      <span class="d-block error-message text-danger"></span>
-                    <select aria-label="Hr Connect" class="form-control js-example-basic-single 3rdpartyvendortypeselect
+                    <select aria-label="<?= htmlspecialchars(__('Hr Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single 3rdpartyvendortypeselect
                     " name="hr_connect" >
-                        <option value="">Not Applicable</option>
+                        <option value=""><?= __('Not Applicable'); ?></option>
                         <?php foreach($vendor_hr_application_users as $auser){  ?>
                             <option value="<?php echo $auser['id']; ?>"><?php echo $auser['display_name']; ?></option>
                             <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-3  w-full  notrequird3rdpartyvendortype <?php echo ($vendordetail['vendor_type_id'] != 1)?"d-none":""; ?>">
-                    <span class="form-label  d-block">Finance Connect</span>
-                    <select aria-label="Finance Connect" class="form-control js-example-basic-single all_connect_check 3rdpartyvendortypeselect" name="finance_connect" >
-                        <option value="">Not Applicable</option>
+                    <span class="form-label  d-block"><?= __('Finance Connect'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Finance Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single all_connect_check 3rdpartyvendortypeselect" name="finance_connect" >
+                        <option value=""><?= __('Not Applicable'); ?></option>
                         <?php foreach($vendor_finanace_application_users as $auser){  ?>
                             <option value="<?php echo $auser['id']; ?>"><?php echo $auser['display_name']; ?></option>
                             <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-3  w-full ">
-                    <span class="form-label  d-block">Admin Connect &nbsp;<span class="requried">*</span></span>
-                    <select aria-label="Admin Connect" class="form-control js-example-basic-single all_connect_check" id="user_admin_connect" name="admin_connect" >
+                    <span class="form-label  d-block"><?= __('Admin Connect'); ?> &nbsp;<span class="requried">*</span></span>
+                    <select aria-label="<?= htmlspecialchars(__('Admin Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single all_connect_check" id="user_admin_connect" name="admin_connect" >
                         <?php foreach($vendor_admin_application_users as $auser){  ?>
                             <option value="<?php echo $auser['id']; ?>" <?php echo $_SESSION['userid'] == $auser['id']?"selected":""?>><?php echo $auser['display_name']; ?></option>
                             <?php } ?>
-                            <option value="" >Not Applicable</option>
+                            <option value="" ><?= __('Not Applicable'); ?></option>
                     </select>
-                    <div class="d-none text-danger" id="user_admin_connect_err"> Please Select Admin Connect </div>
+                    <div class="d-none text-danger" id="user_admin_connect_err"> <?= __('Please Select Admin Connect'); ?> </div>
                 </div>
                 <div class="form-group col-lg-3  w-full  notrequird3rdpartyvendortype <?php echo ($vendordetail['vendor_type_id'] != 1)?"d-none":""; ?>">
-                    <span class="form-label  d-block">Project Connect</span>
-                    <select aria-label="Project Connect" class="form-control js-example-basic-single all_connect_check 3rdpartyvendortypeselect" name="project_connect" >
-                        <option value="">Not Applicable</option>
+                    <span class="form-label  d-block"><?= __('Project Connect'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Project Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single all_connect_check 3rdpartyvendortypeselect" name="project_connect" >
+                        <option value=""><?= __('Not Applicable'); ?></option>
                         <?php foreach($vendor_project_application_users as $auser){  ?>
                             <option value="<?php echo $auser['id']; ?>"><?php echo $auser['display_name']; ?></option>
                             <?php } ?>
                     </select>
                 </div>
                 <div class="form-group col-lg-3  w-full ">
-                    <span class="form-label  d-block">Location Connect</span>
-                    <select aria-label="Location Connect" class="form-control js-example-basic-single all_connect_check " name="location_connect" >
-                        <option value="">Not Applicable</option>
+                    <span class="form-label  d-block"><?= __('Location Connect'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Location Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single all_connect_check " name="location_connect" >
+                        <option value=""><?= __('Not Applicable'); ?></option>
                          <?php foreach($vendor_location_application_users as $auser){  ?>
                           <option value="<?php echo $auser['id']; ?>" <?php echo $_SESSION['userid'] == $auser['id']?"selected":""?>><?php echo $auser['display_name']; ?></option>
                             <?php } ?>
@@ -746,18 +745,18 @@ $locations = $result['locations'];
                     </select>
                 </div>
                 <div class="form-group col-lg-3  w-full notrequird3rdpartyvendortype <?php echo ($vendordetail['vendor_type_id'] != 1)?"d-none":""; ?>">
-                    <span class="form-label">Purchase Connect</span>
-                   <select aria-label="Purchase Connect" class="form-control js-example-basic-single all_connect_check 3rdpartyvendortypeselect" name="purchase_connect" >
-                         <option value="">Not Applicable</option>
+                    <span class="form-label"><?= __('Purchase Connect'); ?></span>
+                   <select aria-label="<?= htmlspecialchars(__('Purchase Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single all_connect_check 3rdpartyvendortypeselect" name="purchase_connect" >
+                         <option value=""><?= __('Not Applicable'); ?></option>
                       <?php foreach($vendor_purchase_application_users as $auser){  ?>
                             <option value="<?php echo $auser['id']; ?>" ><?php echo $auser['display_name']; ?></option>
                             <?php } ?>
                     </select>
                 </div>
                  <div class="form-group col-lg-3 w-full <?php echo $eventdisbale; ?>" >
-                    <span class="form-label  d-block">Legal Connect</span>
-                       <select aria-label="Legal Connect" class="form-control js-example-basic-single all_connect_check " name="legal_connect" >
-                        <option value="">Not Applicable</option>
+                    <span class="form-label  d-block"><?= __('Legal Connect'); ?></span>
+                       <select aria-label="<?= htmlspecialchars(__('Legal Connect'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single all_connect_check " name="legal_connect" >
+                        <option value=""><?= __('Not Applicable'); ?></option>
                       <?php foreach($vendor_legal_application_users as $auser){
                         $selected = "";
                         if($vendor_registration_requests['legal_connect'] == $auser['id']){
@@ -774,7 +773,7 @@ $locations = $result['locations'];
                     </div>
 
 
-                    <h5 class="text-primary mb-3 border-bottom pb-2 mt-4">GST & Billing Details</h5>
+                    <h5 class="text-primary mb-3 border-bottom pb-2 mt-4"><?= htmlspecialchars(__('GST & Billing Details'), ENT_QUOTES, 'UTF-8'); ?></h5>
                     <div id="gst-tab-details">
                         <?php
                         if (count((array) $customer_vendor_gst_billing_details) == '0') {
@@ -788,10 +787,10 @@ $locations = $result['locations'];
                                         value="<?php echo $cvgst['id']; ?>">
                                     <div class="row">
                                         <div class="col-lg-6 p-r-5 w-full f-left" >
-                                            <span class="form-label d-block">GST Registration type</span>
-                                            <select aria-label="Select option" id="gsttype_<?php echo $mkseq; ?>" name="gsttype[]"
+                                            <span class="form-label d-block"><?= __('GST Registration type'); ?></span>
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" id="gsttype_<?php echo $mkseq; ?>" name="gsttype[]"
                                                 class="form-select js-example-basic-single">
-                                                <option value="">Select Any One</option>
+                                                <option value=""><?= __('Select Any One'); ?></option>
                                                 <?php foreach ($gstregistrationtype as $gstkey => $gstregtype) { ?>
                                                     <option <?php echo $cvgst['gsttype'] == $gstkey ? 'selected' : '' ?>
                                                         value="<?php echo $gstkey; ?>"><?php echo $gstregtype; ?></option>
@@ -799,27 +798,27 @@ $locations = $result['locations'];
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-6 f-left" >
-                                            <span class="form-label">GST No.</span>
+                                            <span class="form-label"><?= __('GST No.'); ?></span>
                                             <div class="kt-input-icon">
-                                                <input aria-label="Gstin[]" class="form-control checkalreadyavailableornotcustomerorvendordetails" type="text" id="gstin" name="gstin[]" data-type="GSTIN" value="<?php echo $cvgst['gstin']; ?>" >
+                                                <input aria-label="<?= htmlspecialchars(__('Gstin'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control checkalreadyavailableornotcustomerorvendordetails" type="text" id="gstin" name="gstin[]" data-type="GSTIN" value="<?php echo $cvgst['gstin']; ?>" >
                                                 <span class="text-danger f-14 gstinerror" style="display:none"></span>
                                             </div>
 
-                                            <div class="d-none text-danger" id="gstin_err"> Please enter GST IN </div>
+                                            <div class="d-none text-danger" id="gstin_err"> <?= __('Please enter GST IN'); ?> </div>
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <span class="form-label">Billing Adderss</span>
+                                            <span class="form-label"><?= __('Billing Adderss'); ?></span>
                                             <div class="kt-input-icon">
-                                                <textarea aria-label="Billing Adderss" type="text" class="form-control" placeholder="Billing Adderss"
+                                                <textarea aria-label="<?= htmlspecialchars(__('Billing Adderss'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="<?= htmlspecialchars(__('Billing Adderss'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     name="billing_address[]"
                                                     id="billing_address_<?php echo $mkseq; ?>"><?php echo $cvgst['billing_address']; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-3 w-full">
-                                            <span class="form-label">Country</span>
-                                            <select aria-label="Select option" id="billing_country_<?php echo $mkseq; ?>"
+                                            <span class="form-label"><?= __('Country'); ?></span>
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" id="billing_country_<?php echo $mkseq; ?>"
                                                 class="form-select js-example-basic-single selectedcategory" name="billing_country[]" data-element_id="billing_state_<?php echo $mkseq; ?>" data-table_name="states" data-field_name="country_id" data-targetelement = "selectedbillcountry">
-                                                <option value="">Select Any One</option>
+                                                <option value=""><?= __('Select Any One'); ?></option>
                                                 <?php foreach ($countrieslist as $countryvalue) { ?>
                                                     <option <?php echo $cvgst['billing_country'] == $countryvalue['id'] ? 'selected' : '' ?> value="<?php echo $countryvalue['id']; ?>">
                                                         <?php echo $countryvalue['country_name']; ?>
@@ -828,10 +827,10 @@ $locations = $result['locations'];
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-3  w-full">
-                                            <span class="form-label">State</span>
-                                            <select aria-label="Select option" id="billing_state_<?php echo $mkseq; ?>" name="billing_state[]"
+                                            <span class="form-label"><?= __('State'); ?></span>
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" id="billing_state_<?php echo $mkseq; ?>" name="billing_state[]"
                                                 class="form-select js-example-basic-single selectedcategory" data-element_id="billing_city_<?php echo $mkseq; ?>" data-table_name="cities" data-field_name="state_id" data-targetelement = "selectedbillstate">
-                                                <option value="">Select Any One</option>
+                                                <option value=""><?= __('Select Any One'); ?></option>
                                                 <?php foreach ($states as $states1) { ?>
                                                     <option <?php echo $cvgst['billing_state'] == $states1['id'] ? 'selected' : '' ?>
                                                         value="<?php echo $states1['id']; ?>"><?php echo $states1['state_name']; ?>
@@ -841,10 +840,10 @@ $locations = $result['locations'];
 
                                         </div>
                                         <div class="form-group col-lg-3 p-r-5  w-full">
-                                            <span class="form-label">City/Town</span>
-                                            <select aria-label="Select option" id="billing_city_<?php echo $mkseq; ?>" name="billing_city[]"
+                                            <span class="form-label"><?= __('City/Town'); ?></span>
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" id="billing_city_<?php echo $mkseq; ?>" name="billing_city[]"
                                                 class="form-select js-example-basic-single selectedcategory" data-element_id="" data-table_name="city" data-field_name="" data-targetelement = "selectedbillcity">
-                                                <option value="">Select Any One</option>
+                                                <option value=""><?= __('Select Any One'); ?></option>
                                                 <?php foreach ($cities as $cities1) { ?>
                                                     <option <?php echo $cvgst['billing_city'] == $cities1['id'] ? 'selected' : '' ?>
                                                         value="<?php echo $cities1['id']; ?>"><?php echo $cities1['city_name']; ?>
@@ -853,29 +852,29 @@ $locations = $result['locations'];
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-3 p-r-5">
-                                            <span class="form-label">Pincode</span>
-                                            <input aria-label="Pincode" class="form-control" placeholder="Pincode" type="number"
+                                            <span class="form-label"><?= __('Pincode'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Pincode'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" placeholder="<?= htmlspecialchars(__('Pincode'), ENT_QUOTES, 'UTF-8'); ?>" type="number"
                                                 id="billing_post_code_<?php echo $mkseq; ?>" name="billing_post_code[]"
                                                 value="<?php echo $cvgst['billing_post_code']; ?>">
 
                                         </div>
                                         <div class="form-group col-lg-3 p-r-5 f-right">
-                                            <span class="form-label">Contact Person</span>
-                                            <input aria-label="Contact Person" class="form-control" placeholder="Contact Person" type="text" id=""
+                                            <span class="form-label"><?= __('Contact Person'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Contact Person'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" placeholder="<?= htmlspecialchars(__('Contact Person'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id=""
                                                 name="contact_person[]" value="<?php echo $cvgst['contact_person']; ?>">
 
                                         </div>
                                         <div class="form-group col-lg-3 p-r-5  f-right">
-                                            <span class="form-label">Mobile</span>
+                                            <span class="form-label"><?= __('Mobile'); ?></span>
                                             <div class="kt-input-icon">
-                                                <input aria-label="Mobile[]" class="form-control" type="number" id="mobile" name="mobile[]"
+                                                <input aria-label="<?= htmlspecialchars(__('Mobile'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" type="number" id="mobile" name="mobile[]"
                                                     value="<?php echo $cvgst['mobile']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-3 p-r-5  f-right">
-                                            <span class="form-label">Fax</span>
+                                            <span class="form-label"><?= __('Fax'); ?></span>
                                             <div class="kt-input-icon">
-                                                <input aria-label="Fax[]" class="form-control" type="number" id="fax" name="fax[]"
+                                                <input aria-label="<?= htmlspecialchars(__('Fax'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" type="number" id="fax" name="fax[]"
                                                     value="<?php echo $cvgst['fax']; ?>">
                                             </div>
                                         </div>
@@ -888,39 +887,38 @@ $locations = $result['locations'];
                                             <span class="form-label d-block"></span>
                                             <div class="border-checkbox-section  ">
                                                 <div class="border-checkbox-group border-checkbox-group-primary m-t-30">
-                                                    <input aria-label="Input field" class="border-checkbox cloneShipping" data-seq="<?php echo $mkseq; ?>"  type="checkbox"
+                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox cloneShipping" data-seq="<?php echo $mkseq; ?>"  type="checkbox"
                                                         id="checkbox<?php echo $mkseq; ?>"
                                                         >
                                                     <label class="form-label border-checkbox-label"
-                                                        for="checkbox<?php echo $mkseq; ?>">My shipping address is the same as
-                                                        my billing address</label>
+                                                        for="checkbox<?php echo $mkseq; ?>"><?= __('My shipping address is the same as my billing address'); ?></label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 d-flex flex-column justify-content-between  text-right">
-                                            <span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Cliek To Remove" class="cursor-pointer removeGSTDiv" data-gstdiv="<?php echo $mkseq; ?>" >
-                                                <i class="ti-trash text-danger"></i> Remove
+                                            <span data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Cliek To Remove'), ENT_QUOTES, 'UTF-8'); ?>" class="cursor-pointer removeGSTDiv" data-gstdiv="<?php echo $mkseq; ?>" >
+                                                <i class="ti-trash text-danger"></i> <?= __('Remove'); ?>
                                             </span>
                                             <div class="form-group ">
-                                                <input aria-label="Is Default" type="radio" id="test" name="is_default"
+                                                <input aria-label="<?= htmlspecialchars(__('Is Default'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" id="test" name="is_default"
                                                     value="<?php echo $mkseq - 1; ?>" <?php echo ($cvgst['is_default'] == 'Y') || ($mkseq - 1 == 0) ? 'checked' : ''; ?>>
-                                                <span>Make Default</span>
+                                                <span><?= __('Make Default'); ?></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group col-lg-12">
-                                            <span class="form-label">Shipping Adderss</span>
+                                            <span class="form-label"><?= __('Shipping Adderss'); ?></span>
                                             <div class="kt-input-icon">
-                                                <textarea aria-label="Street" type="text" class="form-control" placeholder="Street"
+                                                <textarea aria-label="<?= htmlspecialchars(__('Street'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="<?= htmlspecialchars(__('Street'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     name="shipping_address[]"
                                                     id="shipping_address_<?php echo $mkseq; ?>"><?php echo $cvgst['shipping_address']; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-3  w-full">
-                                            <span class="form-label">Country</span>
-                                            <select aria-label="Select option" id="shipping_country_<?php echo $mkseq; ?>"
+                                            <span class="form-label"><?= __('Country'); ?></span>
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" id="shipping_country_<?php echo $mkseq; ?>"
                                                 class="form-select js-example-basic-single selectedcategory" name="shipping_country[]" data-element_id="shipping_state_<?php echo $mkseq; ?>" data-table_name="states" data-field_name="country_id" data-targetelement = "selectedshipcountry" >
-                                                <option value="">Select Any One</option>
+                                                <option value=""><?= __('Select Any One'); ?></option>
                                                 <?php foreach ($countrieslist as $countryvalue) { ?>
                                                     <option <?php echo $cvgst['shipping_country'] == $countryvalue['id'] ? 'selected' : '' ?> value="<?php echo $countryvalue['id']; ?>">
                                                         <?php echo $countryvalue['country_name']; ?>
@@ -929,10 +927,10 @@ $locations = $result['locations'];
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-3 w-full">
-                                            <span class="form-label">State</span>
-                                            <select aria-label="Select option" id="shipping_state_<?php echo $mkseq; ?>" name="shipping_state[]"
+                                            <span class="form-label"><?= __('State'); ?></span>
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" id="shipping_state_<?php echo $mkseq; ?>" name="shipping_state[]"
                                                 class="form-select js-example-basic-single selectedcategory" data-element_id="shipping_city_<?php echo $mkseq; ?>" data-table_name="cities" data-field_name="state_id" data-targetelement = "selectedshipstate" >
-                                                <option value="">Select Any One</option>
+                                                <option value=""><?= __('Select Any One'); ?></option>
                                                 <?php foreach ($states as $states1) { ?>
                                                     <option <?php echo $cvgst['shipping_state'] == $states1['id'] ? 'selected' : '' ?>
                                                         value="<?php echo $states1['id']; ?>"><?php echo $states1['state_name']; ?>
@@ -942,10 +940,10 @@ $locations = $result['locations'];
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-3 p-r-5 w-full">
-                                            <span class="form-label">City/Town</span>
-                                            <select aria-label="Select option" id="shipping_city_<?php echo $mkseq; ?>" name="shipping_city[]"
+                                            <span class="form-label"><?= __('City/Town'); ?></span>
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" id="shipping_city_<?php echo $mkseq; ?>" name="shipping_city[]"
                                                 class="form-select js-example-basic-single selectedcategory" data-element_id="" data-table_name="city" data-field_name="" data-targetelement = "selectedshipcity" >
-                                                <option value="">Select Any One</option>
+                                                <option value=""><?= __('Select Any One'); ?></option>
                                                 <?php foreach ($cities as $cities1) { ?>
                                                     <option <?php echo $cvgst['shipping_city'] == $cities1['id'] ? 'selected' : '' ?>
                                                         value="<?php echo $cities1['id']; ?>"><?php echo $cities1['city_name']; ?>
@@ -954,8 +952,8 @@ $locations = $result['locations'];
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-3">
-                                            <span class="form-label">Pincode</span>
-                                            <input aria-label="Pincode" class="form-control" placeholder="Pincode" type="number"
+                                            <span class="form-label"><?= __('Pincode'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Pincode'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" placeholder="<?= htmlspecialchars(__('Pincode'), ENT_QUOTES, 'UTF-8'); ?>" type="number"
                                                 id="shipping_post_code_<?php echo $mkseq; ?>" name="shipping_post_code[]"
                                                 value="<?php echo $cvgst['shipping_post_code']; ?>">
                                         </div>
@@ -966,8 +964,7 @@ $locations = $result['locations'];
                         } ?>
                     </div>
                     <div class="">
-                        <button class="btn btn-success  col-lg-4 addMoreGSTBillingDetails"  type="button">+ Add
-                            More GST & Billing Details</button>
+                        <button class="btn btn-success  col-lg-4 addMoreGSTBillingDetails"  type="button">+ <?= htmlspecialchars(__('Add More GST & Billing Details'), ENT_QUOTES, 'UTF-8'); ?></button>
                     </div>
                 </div>
 
@@ -975,7 +972,7 @@ $locations = $result['locations'];
                 <?php
                 $fieldaccesright = $vafield['company_information'];
                 if ($fieldaccesright['access'] != "NA") { ?>
-                    <h5 class="text-primary mb-3 border-bottom pb-2 mt-4">Company Information</h5>
+                    <h5 class="text-primary mb-3 border-bottom pb-2 mt-4"><?= __('Company Information'); ?></h5>
                     <div class="row ">
                         <?php
                         $fieldaccesright = $vafield['company_information'];
@@ -983,9 +980,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['vendor_tax_reg_no'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-4 optional-field mb-2" >
-                                <span class="form-label">Tax/Vat Reg.No.</span>
+                                <span class="form-label"><?= __('Tax/Vat Reg.No.'); ?></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="vendor_tax_reg_no"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="vendor_tax_reg_no"
                                         name="vendor_tax_reg_no" value="<?php echo $vendordetail['vendor_tax_reg_no']; ?>"
                                         autocomplete="off">
                                 </div>
@@ -996,9 +993,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['business_type'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4 w-full <?php echo $accessreadonly; ?>">
-                                <span class="form-label">Legal Structure</span>
-                                <select aria-label="Business Type" class="form-select js-example-basic-single" name="business_type">
-                                    <option value="">Select Any One</option>
+                                <span class="form-label"><?= __('Legal Structure'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Business Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="business_type">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                                     <?php foreach ($company_types as $ctype) { ?>
                                         <option <?php echo $vendordetail['business_type'] == $ctype['id'] ? 'selected' : '' ?>
                                             value="<?php echo $ctype['id']; ?>"><?php echo $ctype['company_type_name']; ?></option>
@@ -1011,9 +1008,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['duns_no'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-4 form-group optional-field">
-                                <span class="form-label">DUNS</span>
+                                <span class="form-label"><?= __('DUNS'); ?></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="duns_no"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="duns_no"
                                         name="duns_no" value="<?php echo $vendordetail['duns_no']; ?>" autocomplete="off">
                                 </div>
                             </div>
@@ -1023,9 +1020,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['company_registration_number'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-4 mb-2" >
-                                <span class="form-label">Company Registration Number</span>
+                                <span class="form-label"><?= __('Company Registration Number'); ?></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text"
                                         name="company_registration_number"
                                         value="<?php echo $vendordetail['company_registration_number']; ?>" autocomplete="off">
                                 </div>
@@ -1036,9 +1033,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['company_registration_country'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4 w-full <?php echo $accessreadonly; ?>">
-                                <span class="form-label">Company Registration Country</span>
-                                <select aria-label="Company Registration Country" class="form-select js-example-basic-single" name="company_registration_country">
-                                    <option value="">Select Any One</option>
+                                <span class="form-label"><?= __('Company Registration Country'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Company Registration Country'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="company_registration_country">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                                     <?php foreach ($countrieslist as $countryvalue) { ?>
                                         <option <?php echo $vendordetail['company_registration_country'] == $countryvalue['id'] ? 'selected' : '' ?> value="<?php echo $countryvalue['id']; ?>">
                                             <?php echo $countryvalue['country_name']; ?>
@@ -1052,9 +1049,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['payment_terms'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-4 w-full <?php echo $accessreadonly; ?>">
-                                <span class="form-label">Payment Terms</span>
-                                <select aria-label="Payment Terms" name="payment_terms" class="form-control form-select js-example-basic-single">
-                                    <option value="">Select Any One</option>
+                                <span class="form-label"><?= __('Payment Terms'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Payment Terms'), ENT_QUOTES, 'UTF-8'); ?>" name="payment_terms" class="form-control form-select js-example-basic-single">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                                     <?php foreach ($payment_terms as $payt) { ?>
                                         <option value="<?php echo $payt['id']; ?>" <?php echo $vendordetail['payment_terms'] == $payt['id'] ? 'selected' : ''; ?>>
                                             <?php echo $payt['payment_term_name']; ?>
@@ -1074,15 +1071,15 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['pan_no'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-4 form-group">
-                                <span class="form-label">PAN No. <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('PAN No.'); ?> <span class="text-danger">*</span></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control checkalreadyavailableornotcustomerorvendordetails <?php echo $accessreadonly; ?>" data-type="PAN_NO" type="text" id="pan_no" name="pan_no"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control checkalreadyavailableornotcustomerorvendordetails <?php echo $accessreadonly; ?>" data-type="PAN_NO" type="text" id="pan_no" name="pan_no"
                                         value="<?php echo $vendordetail['pan_no']; ?>" autocomplete="off">
                                     <span class="text-danger f-12"><?php if($vendordetail['pan_no'] !=""){ echo $vendor_verifications['PAN']['status'] == "Y" ? $_SESSION['error_message']['9136'] : "PAN verification is pending";
 } ?></span>
                                 </div>
                                 <span class="text-danger f-14 d-block" id="pannoerror" ></span>
-                                <div class="d-none text-danger" id="pan_no_err"> Please Enter PAN No. </div>
+                                <div class="d-none text-danger" id="pan_no_err"> <?= __('Please Enter PAN No.'); ?> </div>
                             </div>
                             <?php
                         }
@@ -1092,9 +1089,9 @@ $locations = $result['locations'];
 
                             ?>
                             <div class="col-lg-4 form-group optional-field">
-                                <span class="form-label">TAN No. </span>
+                                <span class="form-label"><?= __('TAN No.'); ?> </span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="tan_number"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="tan_number"
                                         name="tan_number" value="<?php echo $vendordetail['tan_number']; ?>" autocomplete="off">
 
                                 </div>
@@ -1102,8 +1099,8 @@ $locations = $result['locations'];
                             <?php
                         } ?>
                         <div class="col-lg-4 form-group">
-                            <span class="form-label d-block">Subsidiary Vendor Check</span>
-                            <input aria-label="Subsidiary Vendor Check" type="checkbox" class="js-switch-vendor" value="Y" name="subsidiary_vendor_check"
+                            <span class="form-label d-block"><?= __('Subsidiary Vendor Check'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Subsidiary Vendor Check'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-switch-vendor" value="Y" name="subsidiary_vendor_check"
                                 id="subsidiary_vendor_check" <?php echo $vendordetail['subsidiary_vendor_check'] == "Y" ? "checked" : ""; ?>>
                         </div>
 
@@ -1112,8 +1109,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['msme_number'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-4 form-group <?php echo $accessreadonly; ?>">
-                                <span class="form-label d-block">Udyam Registration/MSME</span>
-                                <input aria-label="Msme Register Yes No" type="checkbox" class="js-switch-vendor msme_register_yes_no" value="Y" name="msme_register_yes_no"
+                                <span class="form-label d-block"><?= __('Udyam Registration/MSME'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Msme Register Yes No'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-switch-vendor msme_register_yes_no" value="Y" name="msme_register_yes_no"
                                     id="msme_register_yes_no" <?php echo $vendordetail['msme_register_yes_no'] == "Y" ? "checked" : ""; ?> >
                             </div>
                             <?php
@@ -1124,9 +1121,9 @@ $locations = $result['locations'];
 
                             ?>
                             <div class="col-lg-4 form-group <?php echo $vendordetail['msme_register_yes_no'] == "Y" ? "" : "d-none"; ?>" id="msme_number_id" >
-                                <span class="form-label">Udyam Registration/MSME Number <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('Udyam Registration/MSME Number'); ?> <span class="text-danger">*</span></span>
                                 <div class="kt-input-icon ">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="msme_number"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="msme_number"
                                         name="msme_number" value="<?php echo $vendordetail['msme_number']; ?>" autocomplete="off">
                                     <?php echo $vendor_verifications['MSME']['status'] == "Y" ? "The MSME number is valid." : ""; ?>
                                 </div>
@@ -1137,9 +1134,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['incoterm_id'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4 w-full <?php echo $accessreadonly; ?>">
-                                <span class="form-label">ENCO Terms/ Shipping Terms</span>
-                                <select aria-label="Incoterm" class="form-select js-example-basic-single" name="incoterm_id">
-                                    <option value="">Select Any One</option>
+                                <span class="form-label"><?= __('ENCO Terms/ Shipping Terms'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Incoterm'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="incoterm_id">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                                     <?php foreach ($incoterms as $incotermvalue) { ?>
                                         <option <?php echo $vendordetail['incoterm_id'] == $incotermvalue['id'] ? 'selected' : '' ?>
                                             value="<?php echo $incotermvalue['id']; ?>"><?php echo $incotermvalue['incoterm_name']; ?>
@@ -1153,14 +1150,14 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['image'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-4 <?php echo $accessreadonly; ?>">
-                                <span class="form-label">Logo</span>
+                                <span class="form-label"><?= __('Logo'); ?></span>
                                 <div class="col-lg-9 col-xl-6 ">
                                     <div class="profile-pic">
                                         <label class="-label" for="display_logo">
-                                            <span> <i class="fa fa-camera"></i> &nbsp; Change Image</span>
+                                            <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image'); ?></span>
                                         </label>
                                         <input type="file" name="image" id="display_logo" accept=".png, .jpg, .jpeg" />
-                                        <img src="<?php echo "uploads/all/".$vendordetail['image'] ; ?>" id="outputdisplay_logo" width="200" alt="Logo" />
+                                        <img src="<?php echo "uploads/all/".$vendordetail['image'] ; ?>" id="outputdisplay_logo" width="200" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                                         <input type="hidden" name="hid_image" value="<?php echo $vendordetail['image'] ;  ?>">
                                     </div>
                                 </div>
@@ -1173,7 +1170,7 @@ $locations = $result['locations'];
                 <?php
                 $fieldaccesright = $vafield['bank_information'];
                 if ($fieldaccesright['access'] != "NA") { ?>
-                    <h5 class="text-primary mb-3 border-bottom pb-2 mt-4">Banking Information</h5>
+                    <h5 class="text-primary mb-3 border-bottom pb-2 mt-4"><?= __('Banking Information'); ?></h5>
                     <div class="row ">
                         <?php
                         $fieldaccesright = $vafield['bank_information'];
@@ -1181,8 +1178,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_name'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Bank name <span class="text-danger">*</span></span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_name"
+                                <span class="form-label"><?= __('Bank name'); ?> <span class="text-danger">*</span></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_name"
                                     name="bank_name" value="<?php echo $vendordetail['bank_name']; ?>">
                             </div>
                             <?php
@@ -1191,8 +1188,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_address'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-8">
-                                <span class="form-label">Bank Address</span>
-                                <textarea aria-label="Text area" type="text" class="form-control <?php echo $accessreadonly; ?>"
+                                <span class="form-label"><?= __('Bank Address'); ?></span>
+                                <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control <?php echo $accessreadonly; ?>"
                                     name="bank_address"><?php echo $vendordetail['bank_address']; ?></textarea>
                             </div>
                             <?php
@@ -1201,10 +1198,10 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_country'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-3 w-full <?php echo $accessreadonly; ?>">
-                                <span class="form-label">Country</span>
-                                <select aria-label="Bank Country" class="form-select js-example-basic-single selectedcategory" name="bank_country" id="bank_country" data-element_id="bank_state" data-table_name="states" data-field_name="country_id" data-targetelement = "selectedshipcountry"
+                                <span class="form-label"><?= __('Country'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Bank Country'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single selectedcategory" name="bank_country" id="bank_country" data-element_id="bank_state" data-table_name="states" data-field_name="country_id" data-targetelement = "selectedshipcountry"
                                     >
-                                    <option value="">Select Any One</option>
+                                    <option value=""><?= __('Select Any One'); ?></option>
                                     <?php foreach ($countrieslist as $countryvalue) { ?>
                                         <option <?php echo $vendordetail['bank_country'] == $countryvalue['id'] ? 'selected' : '' ?>
                                             value="<?php echo $countryvalue['id']; ?>"><?php echo $countryvalue['country_name']; ?>
@@ -1218,10 +1215,10 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_state'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-3  w-full <?php echo $accessreadonly; ?>">
-                                <span class="form-label">State</span>
-                                <select aria-label="Bank State" name="bank_state" id="bank_state" class="form-select js-example-basic-single selectedcategory"
+                                <span class="form-label"><?= __('State'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Bank State'), ENT_QUOTES, 'UTF-8'); ?>" name="bank_state" id="bank_state" class="form-select js-example-basic-single selectedcategory"
                                 data-element_id="bank_city" data-table_name="cities" data-field_name="state_id" data-targetelement = "selectedbillstate">
-                                    <option value="">Select Any One</option>
+                                    <option value=""><?= __('Select Any One'); ?></option>
                                     <?php foreach ($states as $states1) { ?>
                                         <option <?php echo $vendordetail['bank_state'] == $states1['id'] ? 'selected' : '' ?>
                                             value="<?php echo $states1['id']; ?>"><?php echo $states1['state_name']; ?></option>
@@ -1234,9 +1231,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_city'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-3 w-full <?php echo $accessreadonly; ?>">
-                                <span class="form-label">City/Town</span>
-                                <select aria-label="Bank City" name="bank_city" id="bank_city" class="form-select js-example-basic-single selectedcategory" data-element_id="" data-table_name="city" data-field_name="" data-targetelement = "selectedbillcity">
-                                    <option value="">Select Any One</option>
+                                <span class="form-label"><?= __('City/Town'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Bank City'), ENT_QUOTES, 'UTF-8'); ?>" name="bank_city" id="bank_city" class="form-select js-example-basic-single selectedcategory" data-element_id="" data-table_name="city" data-field_name="" data-targetelement = "selectedbillcity">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                                     <?php foreach ($cities as $cities1) { ?>
                                         <option <?php echo $vendordetail['bank_city'] == $cities1['id'] ? 'selected' : '' ?>
                                             value="<?php echo $cities1['id']; ?>"><?php echo $cities1['city_name']; ?></option>
@@ -1249,8 +1246,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_post_code'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-3">
-                                <span class="form-label">Pincode</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" placeholder="Pincode" type="text"
+                                <span class="form-label"><?= __('Pincode'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" placeholder="<?= htmlspecialchars(__('Pincode'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                     id="bank_post_code" name="bank_post_code"
                                     value="<?php echo $vendordetail['bank_post_code']; ?>">
                             </div>
@@ -1260,8 +1257,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_beneficiary_name'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Company Bank Beneficiary Name </span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_beneficiary_name"
+                                <span class="form-label"><?= __('Company Bank Beneficiary Name'); ?> </span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_beneficiary_name"
                                     name="bank_beneficiary_name" value="<?php echo $vendordetail['bank_beneficiary_name']; ?>">
                             </div>
                             <?php
@@ -1270,8 +1267,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_account_no'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Bank Account Number <span class="text-danger">*</span></span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="number" id="bank_account_no"
+                                <span class="form-label"><?= __('Bank Account Number'); ?> <span class="text-danger">*</span></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="number" id="bank_account_no"
                                     name="bank_account_no" value="<?php echo $vendordetail['bank_account_no']; ?>">
                                 <span
                                     class="text-danger f-12"><?php if($vendordetail['bank_account_no'] !=""){ echo $vendor_verifications['BANK']['status'] == "Y" ? $_SESSION['error_message']['9140'] : "Bank Account verification is pending";
@@ -1283,9 +1280,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['account_type'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4 w-full <?php echo $accessreadonly; ?>">
-                                <span class="form-label">Type Of Bank Account</span>
-                                <select aria-label="Account Type" name="account_type" id="account_type" class="form-select js-example-basic-single">
-                                    <option value="">Select Any One</option>
+                                <span class="form-label"><?= __('Type Of Bank Account'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Account Type'), ENT_QUOTES, 'UTF-8'); ?>" name="account_type" id="account_type" class="form-select js-example-basic-single">
+                                    <option value=""><?= __('Select Any One'); ?></option>
                                     <?php foreach ($bank_acoount_type as $batypekey => $batypeval) { ?>
                                         <option <?php echo $vendordetail['account_type'] == $batypekey ? 'selected' : '' ?>
                                             value="<?php echo $batypekey; ?>"><?php echo $batypeval; ?></option>
@@ -1298,9 +1295,9 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['ifsc_code'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="col-lg-4 form-group">
-                                <span class="form-label">IFSC Code <span class="text-danger">*</span></span>
+                                <span class="form-label"><?= __('IFSC Code'); ?> <span class="text-danger">*</span></span>
                                 <div class="kt-input-icon">
-                                    <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="ifsc_code"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="ifsc_code"
                                         name="ifsc_code" value="<?php echo $vendordetail['ifsc_code']; ?>" autocomplete="off">
                                 </div>
                             </div>
@@ -1310,8 +1307,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['routing_aba_dfi_ach'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4 optional-field">
-                                <span class="form-label">Routing-ABA/DFI/ACH</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="routing_aba_dfi_ach"
+                                <span class="form-label"><?= __('Routing-ABA/DFI/ACH'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="routing_aba_dfi_ach"
                                     name="routing_aba_dfi_ach" value="<?php echo $vendordetail['routing_aba_dfi_ach']; ?>">
                             </div>
                             <?php
@@ -1320,8 +1317,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['routing_wire_Code'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4 optional-field">
-                                <span class="form-label">Routing Wire Code</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="routing_wire_Code"
+                                <span class="form-label"><?= __('Routing Wire Code'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="routing_wire_Code"
                                     name="routing_wire_Code" value="<?php echo $vendordetail['routing_wire_Code']; ?>">
                             </div>
                             <?php
@@ -1330,8 +1327,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['swift_bic_code'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4 optional-field">
-                                <span class="form-label">SWIFT/BIC Code</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="swift_bic_code"
+                                <span class="form-label"><?= __('SWIFT/BIC Code'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="swift_bic_code"
                                     name="swift_bic_code" value="<?php echo $vendordetail['swift_bic_code']; ?>">
                             </div>
                             <?php
@@ -1340,8 +1337,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['iban_code'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4 optional-field">
-                                <span class="form-label">IBAN</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="iban_code"
+                                <span class="form-label"><?= __('IBAN'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="iban_code"
                                     name="iban_code" value="<?php echo $vendordetail['iban_code']; ?>">
                             </div>
                             <?php
@@ -1350,8 +1347,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_query_person_name'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Contact Person Name (Bank related queries)</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_person_name"
+                                <span class="form-label"><?= __('Contact Person Name (Bank related queries)'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_person_name"
                                     name="bank_query_person_name" value="<?php echo $vendordetail['bank_query_person_name']; ?>">
                             </div>
                             <?php
@@ -1360,8 +1357,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_query_contact_no'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Contact no</span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_contact_no"
+                                <span class="form-label"><?= __('Contact no'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_contact_no"
                                     name="bank_query_contact_no" value="<?php echo $vendordetail['bank_query_contact_no']; ?>">
                             </div>
                             <?php
@@ -1370,8 +1367,8 @@ $locations = $result['locations'];
                             $accessreadonly = $fieldaccesright['field']['bank_query_email_id'] != "E" ? "custom_readonly" : "";
                             ?>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Contact Email </span>
-                                <input aria-label="Input field" class="form-control <?php echo $accessreadonly; ?>" type="email" id="bank_query_email_id"
+                                <span class="form-label"><?= __('Contact Email'); ?> </span>
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="email" id="bank_query_email_id"
                                     name="bank_query_email_id" value="<?php echo $vendordetail['bank_query_email_id']; ?>">
                             </div>
                         <?php } ?>
@@ -1388,15 +1385,15 @@ $locations = $result['locations'];
                     if ($fieldaccesright['field']['other_contact_information'] != "NA") {
                         $accessreadonly = $fieldaccesright['field']['other_contact_information'] != "E" ? "custom_readonly" : "";
                         ?>
-                        <h5 class="text-primary mb-3 border-bottom pb-2 mt-4">Other Contact Information</h5>
+                        <h5 class="text-primary mb-3 border-bottom pb-2 mt-4"><?= __('Other Contact Information'); ?></h5>
                         <table class="table table-hover <?php echo $accessreadonly; ?>">
 
                             <thead>
                                 <tr>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Number</th>
-                                    <th scope="col">Email Id</th>
+                                    <th scope="col"><?= __('Type'); ?></th>
+                                    <th scope="col"><?= __('Name'); ?></th>
+                                    <th scope="col"><?= __('Number'); ?></th>
+                                    <th scope="col"><?= __('Email Id'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1406,17 +1403,17 @@ $locations = $result['locations'];
                                             <?php echo $vcival; ?>
                                         </td>
                                         <td>
-                                            <input aria-label="Input field" class="form-control" type="text"
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text"
                                                 name="other_contact_information[<?php echo $vcikey; ?>][name]"
                                                 value="<?php echo $other_contact_information[$vcikey]['name']; ?>">
                                         </td>
                                         <td>
-                                            <input aria-label="Enter number" class="form-control" type="number"
+                                            <input aria-label="<?= htmlspecialchars(__('Enter number'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="number"
                                                 name="other_contact_information[<?php echo $vcikey; ?>][number]"
                                                 value="<?php echo $other_contact_information[$vcikey]['number']; ?>">
                                         </td>
                                         <td>
-                                            <input aria-label="Email address" class="form-control" type="email"
+                                            <input aria-label="<?= htmlspecialchars(__('Email address'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="email"
                                                 name="other_contact_information[<?php echo $vcikey; ?>][email_id]"
                                                 value="<?php echo $other_contact_information[$vcikey]['email_id']; ?>">
                                         </td>
@@ -1440,16 +1437,16 @@ $locations = $result['locations'];
                             <?php } ?>
 
                     </div>
-                <h4 class="mb-10 font-weight-bold text-dark">Documents</h4>
+                <h4 class="mb-10 font-weight-bold text-dark"><?= __('Documents'); ?></h4>
                     <div class="form-group col-lg-12">
                         <table class="table table-bordered " id="addDocuments">
                             <tr>
-                                <th scope="col" class="" style="width: 5%;">Sl NO</th>
-                                <th scope="col" class="" style="width: 30%;">Doc Name</th>
-                                <th scope="col" class="" style="width: 20%;"> Start Date</th>
-                                <th scope="col" class="thheader" style="width: 20%;">End Date </th>
-                                <th scope="col" class="thheader" style="width: 20%;">Upl</th>
-                                <th scope="col" class="thheader" style="width: 5%;">Down</th>
+                                <th scope="col" class="" style="width: 5%;"><?= __('Sl NO'); ?></th>
+                                <th scope="col" class="" style="width: 30%;"><?= __('Doc Name'); ?></th>
+                                <th scope="col" class="" style="width: 20%;"> <?= __('Start Date'); ?></th>
+                                <th scope="col" class="thheader" style="width: 20%;"><?= __('End Date'); ?> </th>
+                                <th scope="col" class="thheader" style="width: 20%;"><?= __('Upl'); ?></th>
+                                <th scope="col" class="thheader" style="width: 5%;"><?= __('Down'); ?></th>
                             </tr>
                         <?php $k=0;
                         if(count((array)$vendor_documents) == '0'){
@@ -1463,26 +1460,26 @@ $locations = $result['locations'];
                             </td>
 
                             <td class="p-1 w-full">
-                                <select aria-label="Doc Document []" name="doc_document_id[]" class="form-control form-select js-example-basic-single">
+                                <select aria-label="<?= htmlspecialchars(__('Doc Document'), ENT_QUOTES, 'UTF-8'); ?> []" name="doc_document_id[]" class="form-control form-select js-example-basic-single">
                                     <?php foreach ($document_lists as $doclist) { ?>
                                         <option value="<?php echo $doclist['id']; ?>" <?php echo $doclist['id'] == $inst['document_id'] ? 'selected' : ''; ?>><?php echo $doclist['document_name']; ?></option>
                                     <?php } ?>
                                 </select>
                             </td>
                             <td class="p-1">
-                                <input aria-label="Doc From Date[]" type="text" name="doc_from_date[]" class="form-control datepicker "  value="<?php echo fromDate($inst['from_date']); ?>"  autocomplete="off">
+                                <input aria-label="<?= htmlspecialchars(__('Doc From Date'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="doc_from_date[]" class="form-control datepicker "  value="<?php echo fromDate($inst['from_date']); ?>"  autocomplete="off">
                             </td>
                             <td class="p-1">
-                                <input aria-label="Doc To Date[]" type="text" name="doc_to_date[]" class="form-control datepicker"  value="<?php echo fromDate($inst['to_date']); ?>" autocomplete="off">
+                                <input aria-label="<?= htmlspecialchars(__('Doc To Date'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="doc_to_date[]" class="form-control datepicker"  value="<?php echo fromDate($inst['to_date']); ?>" autocomplete="off">
                             </td>
                             <td class="p-1">
-                                <input aria-label="Doc Filename[]" type="file" name="doc_filename[]" class="form-control"/>
+                                <input aria-label="<?= htmlspecialchars(__('Doc Filename'), ENT_QUOTES, 'UTF-8'); ?>[]" type="file" name="doc_filename[]" class="form-control"/>
                                 <input type="hidden" name="hidden_doc_filename[]" value="<?php echo $inst['filename']; ?>"/>
                             </td>
                             <td class="p-1">
                                 <?php if($inst['filename']!=''){ ?>
                                     <div class="col-lg-3">
-                                        <a href="<?php echo $document_uploads_Path."/".$inst['filename']; ?>" data-toggle="tooltip" title="Download" target="_blank" >
+                                        <a href="<?php echo $document_uploads_Path."/".$inst['filename']; ?>" data-toggle="tooltip" title="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" target="_blank" >
                                             <i class="ti-cloud-down f-20 text-warning f-30 f-w-800"></i>
                                         </a>
                                     </div>
@@ -1494,7 +1491,7 @@ $locations = $result['locations'];
                     </table>
                     <div class="row mt-2">
                         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                            <button class="btn btn-success float-left addDocumentRows" type="button">+ Add More</button>
+                            <button class="btn btn-success float-left addDocumentRows" type="button">+ <?= __('Add More'); ?></button>
                         </div>
                     </div>
                 </div>
@@ -1506,50 +1503,49 @@ $locations = $result['locations'];
 
                 $fieldaccesright = $vafield['questions'];
                 if ($fieldaccesright['access'] != "NA" && $transaction_table == "vendor_registers") { ?>
-                    <h5 class="text-primary mb-3 border-bottom pb-2 mt-4">Vendor Questions</h5>
+                    <h5 class="text-primary mb-3 border-bottom pb-2 mt-4"><?= __('Vendor Questions'); ?></h5>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card-body <?php echo $accessreadonly; ?>">
                                 <?php if($vendordetail['vendor_type_id'] == '1' || $vendordetail['vendor_type_id'] ==""){ //3 party show only ?>
-                                <div class="f-15 f-w-600 text-info mb-2" style="clear: both;">Vendor Related Questions</div>
+                                <div class="f-15 f-w-600 text-info mb-2" style="clear: both;"><?= __('Vendor Related Questions'); ?></div>
                                 <div class="row mt-2">
-                                    <h6>A) Previously have you or any of your subsidiaries ever associated with
-                                        <?php echo ucwords($_SESSION['config']['name']); ?> (USA or any other region)?
+                                    <h6><?= __('A) Previously have you or any of your subsidiaries ever associated with'); ?>
+                                        <?php echo ucwords($_SESSION['config']['name']); ?> <?= __('(USA or any other region)?'); ?>
                                     </h6>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[radio Associate]" type="radio" class="onchangeAssociatedAnswer" name="vendor_questions[radio_associate]" value="Y" <?php echo $vendor_questions['radio_associate'] == "Y" ? "checked" : ""; ?>>
-                                                <i class="helper"></i>Yes
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[radio Associate]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" class="onchangeAssociatedAnswer" name="vendor_questions[radio_associate]" value="Y" <?php echo $vendor_questions['radio_associate'] == "Y" ? "checked" : ""; ?>>
+                                                <i class="helper"></i><?= __('Yes'); ?>
                                             </label>
                                         </div>
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[radio Associate]" type="radio" class="onchangeAssociatedAnswer" name="vendor_questions[radio_associate]" value="N" <?php echo ($vendor_questions['radio_associate'] == "N" || $vendor_questions['radio_associate'] == "") ? "checked" : ""; ?>>
-                                                <i class="helper"></i>No
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[radio Associate]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" class="onchangeAssociatedAnswer" name="vendor_questions[radio_associate]" value="N" <?php echo ($vendor_questions['radio_associate'] == "N" || $vendor_questions['radio_associate'] == "") ? "checked" : ""; ?>>
+                                                <i class="helper"></i><?= __('No'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="associated_team form-group mt-2 <?php echo $vendor_questions['radio_associate'] == "Y" ? "" : "d-none"; ?>" >
-                                    <span class="form-label">Please provide details</span>
-                                    <textarea aria-label="Vendor Questions[associated Team Detail]" type="text" name="vendor_questions[associated_team_detail]"
+                                    <span class="form-label"><?= __('Please provide details'); ?></span>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Vendor Questions[associated Team Detail]'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="vendor_questions[associated_team_detail]"
                                         class="form-control"><?php echo $vendor_questions['associated_team_detail']; ?></textarea>
                                 </div>
                                 <div class="row mt-2">
-                                    <h6>B) Does your company has a quality system ?(If Answer is Yes Then attachs the Quality
-                                        Certificates)</h6>
+                                    <h6><?= __('B) Does your company has a quality system ?(If Answer is Yes Then attachs the Quality Certificates)'); ?></h6>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[quality System]" type="radio" class="onchangeVRQAnswer" name="vendor_questions[quality_system]" value="Y" <?php echo $vendor_questions['quality_system'] == "Y" ? "checked" : ""; ?>>
-                                                <i class="helper"></i>Yes
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[quality System]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" class="onchangeVRQAnswer" name="vendor_questions[quality_system]" value="Y" <?php echo $vendor_questions['quality_system'] == "Y" ? "checked" : ""; ?>>
+                                                <i class="helper"></i><?= __('Yes'); ?>
                                             </label>
                                         </div>
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[quality System]" type="radio" class="onchangeVRQAnswer" name="vendor_questions[quality_system]" value="N" <?php echo ($vendor_questions['quality_system'] == "N" || $vendor_questions['quality_system'] == "") ? "checked" : ""; ?>>
-                                                <i class="helper"></i>No
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[quality System]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" class="onchangeVRQAnswer" name="vendor_questions[quality_system]" value="N" <?php echo ($vendor_questions['quality_system'] == "N" || $vendor_questions['quality_system'] == "") ? "checked" : ""; ?>>
+                                                <i class="helper"></i><?= __('No'); ?>
                                             </label>
                                         </div>
                                     </div>
@@ -1560,20 +1556,20 @@ $locations = $result['locations'];
                                             <span class="form-label">1</span>
                                         </div>
                                         <div class="form-group col-lg-5">
-                                            <span class="form-label">Certificate Name</span>
-                                            <input aria-label="Vendor Questions[quality System Certificate][name][1]" class="form-control" type="text"
+                                            <span class="form-label"><?= __('Certificate Name'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Vendor Questions[quality System Certificate][name][1]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text"
                                                 name="vendor_questions[quality_system_certificate][name][1]"
                                                 value="<?php echo $vendor_questions['quality_system_certificate']['name']['1']; ?>">
                                         </div>
                                         <div class="form-group col-lg-3">
-                                            <span class="form-label">Effective From Date</span>
-                                            <input aria-label="Vendor Questions[quality System Certificate][fromdate][1]" class="form-control datepicker" type="text"
+                                            <span class="form-label"><?= __('Effective From Date'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Vendor Questions[quality System Certificate][fromdate][1]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text"
                                                 name="vendor_questions[quality_system_certificate][fromdate][1]"
                                                 value="<?php echo fromDate($vendor_questions['quality_system_certificate']['fromdate']['1']); ?>">
                                         </div>
                                         <div class="form-group col-lg-3">
-                                            <span class="form-label">Effective To Date</span>
-                                            <input aria-label="Vendor Questions[quality System Certificate][todate][1]" class="form-control datepicker" type="text"
+                                            <span class="form-label"><?= __('Effective To Date'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Vendor Questions[quality System Certificate][todate][1]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text"
                                                 name="vendor_questions[quality_system_certificate][todate][1]"
                                                 value="<?php echo fromDate($vendor_questions['quality_system_certificate']['todate']['1']); ?>">
                                         </div>
@@ -1583,27 +1579,27 @@ $locations = $result['locations'];
                                             <span class="form-label">2</span>
                                         </div>
                                         <div class="form-group col-lg-5">
-                                            <span class="form-label">Certificate Name</span>
-                                            <input aria-label="Vendor Questions[quality System Certificate][name][2]" class="form-control" type="text"
+                                            <span class="form-label"><?= __('Certificate Name'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Vendor Questions[quality System Certificate][name][2]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text"
                                                 name="vendor_questions[quality_system_certificate][name][2]"
                                                 value="<?php echo $vendor_questions['quality_system_certificate']['name']['2']; ?>">
                                         </div>
                                         <div class="form-group col-lg-3">
-                                            <span class="form-label">Effective From Date</span>
-                                            <input aria-label="Vendor Questions[quality System Certificate][fromdate][2]" class="form-control datepicker" type="text"
+                                            <span class="form-label"><?= __('Effective From Date'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Vendor Questions[quality System Certificate][fromdate][2]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text"
                                                 name="vendor_questions[quality_system_certificate][fromdate][2]"
                                                 value="<?php echo fromDate($vendor_questions['quality_system_certificate']['fromdate']['2']); ?>">
                                         </div>
                                         <div class="form-group col-lg-3">
-                                            <span class="form-label">Effective To Date</span>
-                                            <input aria-label="Vendor Questions[quality System Certificate][todate][2]" class="form-control datepicker" type="text"
+                                            <span class="form-label"><?= __('Effective To Date'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Vendor Questions[quality System Certificate][todate][2]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" type="text"
                                                 name="vendor_questions[quality_system_certificate][todate][2]"
                                                 value="<?php echo fromDate($vendor_questions['quality_system_certificate']['todate']['2']); ?>">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="f-15 f-w-600 text-info mb-2 mt-2" style="clear: both;">Small Business Registerd
+                                <div class="f-15 f-w-600 text-info mb-2 mt-2" style="clear: both;"><?= __('Small Business Registerd'); ?>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-lg-10">
@@ -1613,7 +1609,7 @@ $locations = $result['locations'];
                                             ?>
                                             <div class="checkbox-fade fade-in-primary">
                                                 <label class="form-label">
-                                                    <input aria-label="Checkbox" type="checkbox" value="Y"
+                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="Y"
                                                         name="vendor_questions[small_business_registerd][<?php echo $keybuss; ?>]"
                                                         <?php echo $vendor_questions['small_business_registerd'][$keybuss] == "Y" ? "checked" : ""; ?>>
                                                     <span class="cr">
@@ -1626,8 +1622,8 @@ $locations = $result['locations'];
                                     </div>
                                     <div class="col-lg-2">
                                         <div class="form-group">
-                                            <span class="form-label">Others</span>
-                                            <input aria-label="Vendor Questions[small Business Registerd][100]" class="form-control" type="text"
+                                            <span class="form-label"><?= __('Others'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Vendor Questions[small Business Registerd][100]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text"
                                                 name="vendor_questions[small_business_registerd][100]"
                                                 value="<?php echo $vendor_questions['small_business_registerd']['100']; ?>">
                                         </div>
@@ -1638,14 +1634,14 @@ $locations = $result['locations'];
                                     <div class="col-lg-6">
                                         <div class="row">
                                             <div class="form-group col-lg-6">
-                                                <span class="form-label">Unique Entity</span>
-                                                <input aria-label="Vendor Questions[small Business Registerd][101]" class="form-control" type="text"
+                                                <span class="form-label"><?= __('Unique Entity'); ?></span>
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[small Business Registerd][101]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text"
                                                     name="vendor_questions[small_business_registerd][101]"
                                                     value="<?php echo $vendor_questions['small_business_registerd']['101']; ?>">
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                <span class="form-label">Cage Code</span>
-                                                <input aria-label="Vendor Questions[small Business Registerd][102]" class="form-control" type="text"
+                                                <span class="form-label"><?= __('Cage Code'); ?></span>
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[small Business Registerd][102]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text"
                                                     name="vendor_questions[small_business_registerd][102]"
                                                     value="<?php echo $vendor_questions['small_business_registerd']['102']; ?>">
                                             </div>
@@ -1654,299 +1650,253 @@ $locations = $result['locations'];
                                 </div>
 
                             <?php } //3 party show only ?>
-                                <div class="f-15 f-w-600 text-info mb-2" style="clear: both;">Supply Chain Responsibility</div>
+                                <div class="f-15 f-w-600 text-info mb-2" style="clear: both;"><?= __('Supply Chain Responsibility'); ?></div>
                                 <div class="row mt-2">
-                                    <h6>1) Is Your Company a Member of RBA ( Responsible Business Alliance)</h6>
+                                    <h6><?= __('1) Is Your Company a Member of RBA ( Responsible Business Alliance)'); ?></h6>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][1]" type="radio" value="Y"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][1]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y"
                                                     name="vendor_questions[supply_Chain_responsibility][1]" <?php echo $vendor_questions['supply_Chain_responsibility']['1'] == "Y" ? "checked" : ""; ?>>
-                                                <i class="helper"></i>Yes
+                                                <i class="helper"></i><?= __('Yes'); ?>
                                             </label>
                                         </div>
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][1]" type="radio" value="N"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][1]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                     name="vendor_questions[supply_Chain_responsibility][1]" <?php echo ($vendor_questions['supply_Chain_responsibility']['1'] == "N" || $vendor_questions['supply_Chain_responsibility']['1'] == "") ? "checked" : ""; ?>>
-                                                <i class="helper"></i>No
+                                                <i class="helper"></i><?= __('No'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <h6>2) Are all employees of your company atleast 18 years of age</h6>
+                                    <h6><?= __('2) Are all employees of your company atleast 18 years of age'); ?></h6>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][2]" type="radio" value="Y"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][2]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y"
                                                     name="vendor_questions[supply_Chain_responsibility][2]" <?php echo $vendor_questions['supply_Chain_responsibility']['2'] == "Y" ? "checked" : ""; ?>>
-                                                <i class="helper"></i>Yes
+                                                <i class="helper"></i><?= __('Yes'); ?>
                                             </label>
                                         </div>
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][2]" type="radio" value="N"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][2]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                     name="vendor_questions[supply_Chain_responsibility][2]" <?php echo ($vendor_questions['supply_Chain_responsibility']['2'] == "N" || $vendor_questions['supply_Chain_responsibility']['2'] == "") ? "checked" : ""; ?>>
-                                                <i class="helper"></i>No
+                                                <i class="helper"></i><?= __('No'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <h6>3) Does Your Company has 1 Employee? If "Yes" Skip To No. 7 If "No" Go To Question No. 4
+                                    <h6><?= __('3) Does Your Company has 1 Employee? If "Yes" Skip To No. 7 If "No" Go To Question No. 4'); ?>
                                     </h6>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][3]" type="radio" value="Y" class="onchangeSupplyChainResponsibilityAnswer" data-seqval="3"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][3]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y" class="onchangeSupplyChainResponsibilityAnswer" data-seqval="3"
                                                     name="vendor_questions[supply_Chain_responsibility][3]" <?php echo $vendor_questions['supply_Chain_responsibility']['2'] == "Y" ? "checked" : ""; ?> >
-                                                <i class="helper"></i>Yes
+                                                <i class="helper"></i><?= __('Yes'); ?>
                                             </label>
                                         </div>
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][3]" type="radio" value="N"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][3]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                     name="vendor_questions[supply_Chain_responsibility][3]" <?php echo ($vendor_questions['supply_Chain_responsibility']['3'] == "N" || $vendor_questions['supply_Chain_responsibility']['3'] == "") ? "checked" : ""; ?> class="onchangeSupplyChainResponsibilityAnswer" data-seqval="3">
-                                                <i class="helper"></i>No
+                                                <i class="helper"></i><?= __('No'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row supplychainresponsibility_4 mt-2">
-                                    <h6>4) Do you have hourly employees that works at manufacturer facility? For the purpose of
-                                        this
-                                        form, hourly employees are employees that are subject to local laws governing overtime
-                                        pay
-                                        or subject to hourly increased or decreased in compensation based on volume of product
-                                        if
-                                        Yes (Please answer a, b and c, if No then skip to Question no 5)</h6>
+                                    <h6><?= __('4) Do you have hourly employees that works at manufacturer facility? For the purpose of this form, hourly employees are employees that are subject to local laws governing overtime pay or subject to hourly increased or decreased in compensation based on volume of product if Yes (Please answer a, b and c, if No then skip to Question no 5)'); ?></h6>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][4]" type="radio" class="onchangeWorkManufracturerFacilityAnswer" value="Y"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][4]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" class="onchangeWorkManufracturerFacilityAnswer" value="Y"
                                                     name="vendor_questions[supply_Chain_responsibility][4]"  <?php echo $vendor_questions['supply_Chain_responsibility']['4'] == "Y" ? "checked" : ""; ?>>
-                                                <i class="helper"></i>Yes
+                                                <i class="helper"></i><?= __('Yes'); ?>
                                             </label>
                                         </div>
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][4]" type="radio" value="N" class="onchangeWorkManufracturerFacilityAnswer"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][4]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N" class="onchangeWorkManufracturerFacilityAnswer"
                                                     name="vendor_questions[supply_Chain_responsibility][4]"
                                                      <?php echo ($vendor_questions['supply_Chain_responsibility']['4'] == "N" || $vendor_questions['supply_Chain_responsibility']['4'] == "") ? "checked" : ""; ?>>
-                                                <i class="helper"></i>No
+                                                <i class="helper"></i><?= __('No'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="m-l-20 work_manufacturer_facility supplychainresponsibility_4 mt-2 <?php echo $vendor_questions['supply_Chain_responsibility'][4] == "Y" ? "" : "d-none"; ?>" >
                                     <div class="row">
-                                        <h6>a) Do all hourly workers work less than 60 hours per week?</h6>
+                                        <h6><?= __('a) Do all hourly workers work less than 60 hours per week?'); ?></h6>
                                         <div class="form-radio">
                                             <div class="radio radio-inline">
                                                 <label class="form-label">
-                                                    <input aria-label="Vendor Questions[supply Chain Responsibility][4 A]" type="radio" value="Y"
+                                                    <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][4 A]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y"
                                                         name="vendor_questions[supply_Chain_responsibility][4_a]" <?php echo $vendor_questions['supply_Chain_responsibility']['4_a'] == "Y" ? "checked" : ""; ?>>
-                                                    <i class="helper"></i>Yes
+                                                    <i class="helper"></i><?= __('Yes'); ?>
                                                 </label>
                                             </div>
                                             <div class="radio radio-inline">
                                                 <label class="form-label">
-                                                    <input aria-label="Vendor Questions[supply Chain Responsibility][4 A]" type="radio" value="N"
+                                                    <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][4 A]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                         name="vendor_questions[supply_Chain_responsibility][4_a]" <?php echo ($vendor_questions['supply_Chain_responsibility']['4_a'] == "N" || $vendor_questions['supply_Chain_responsibility']['4_a'] == "") ? "checked" : ""; ?>>
-                                                    <i class="helper"></i>No
+                                                    <i class="helper"></i><?= __('No'); ?>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mt-2">
-                                        <h6>b) Do you have a policy prohibiting forced, involuntory, indentured, trafficked, or
-                                            slave labor?</h6>
+                                        <h6><?= __('b) Do you have a policy prohibiting forced, involuntory, indentured, trafficked, or slave labor?'); ?></h6>
                                         <div class="form-radio">
                                             <div class="radio radio-inline">
                                                 <label class="form-label">
-                                                    <input aria-label="Vendor Questions[supply Chain Responsibility][4 B]" type="radio" value="Y"
+                                                    <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][4 B]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y"
                                                         name="vendor_questions[supply_Chain_responsibility][4_b]" <?php echo $vendor_questions['supply_Chain_responsibility']['4_b'] == "Y" ? "checked" : ""; ?>>
-                                                    <i class="helper"></i>Yes
+                                                    <i class="helper"></i><?= __('Yes'); ?>
                                                 </label>
                                             </div>
                                             <div class="radio radio-inline">
                                                 <label class="form-label">
-                                                    <input aria-label="Vendor Questions[supply Chain Responsibility][4 B]" type="radio" value="N"
+                                                    <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][4 B]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                         name="vendor_questions[supply_Chain_responsibility][4_b]" <?php echo ($vendor_questions['supply_Chain_responsibility']['4_b'] == "N" || $vendor_questions['supply_Chain_responsibility']['4_b'] == "") ? "checked" : ""; ?>>
-                                                    <i class="helper"></i>No
+                                                    <i class="helper"></i><?= __('No'); ?>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mt-2">
-                                        <h6>c) Do you expect your supplier to have a policy prohibiting forced, involuntory,
-                                            indentured, trafficked, or slave labor</h6>
+                                        <h6><?= __('c) Do you expect your supplier to have a policy prohibiting forced, involuntory, indentured, trafficked, or slave labor'); ?></h6>
                                         <div class="form-radio">
                                             <div class="radio radio-inline">
                                                 <label class="form-label">
-                                                    <input aria-label="Vendor Questions[supply Chain Responsibility][4 C]" type="radio" value="Y"
+                                                    <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][4 C]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y"
                                                         name="vendor_questions[supply_Chain_responsibility][4_c]" <?php echo $vendor_questions['supply_Chain_responsibility']['4_c'] == "Y" ? "checked" : ""; ?>>
-                                                    <i class="helper"></i>Yes
+                                                    <i class="helper"></i><?= __('Yes'); ?>
                                                 </label>
                                             </div>
                                             <div class="radio radio-inline">
                                                 <label class="form-label">
-                                                    <input aria-label="Vendor Questions[supply Chain Responsibility][4 C]" type="radio" value="N"
+                                                    <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][4 C]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                         name="vendor_questions[supply_Chain_responsibility][4_c]" <?php echo ($vendor_questions['supply_Chain_responsibility']['4_c'] == "N" || $vendor_questions['supply_Chain_responsibility']['4_c'] == "") ? "checked" : ""; ?>>
-                                                    <i class="helper"></i>No
+                                                    <i class="helper"></i><?= __('No'); ?>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row supplychainresponsibility_5 mt-2 <?php echo ($vendor_questions['supply_Chain_responsibility'][4] == "N" || $vendor_questions['supply_Chain_responsibility'][4] == "") ? "" : "d-none"; ?>" >
-                                    <h6>5) Do You retain or hold your employees original passport or other original personal
-                                        identification documents?</h6>
+                                    <h6><?= __('5) Do You retain or hold your employees original passport or other original personal identification documents?'); ?></h6>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][5]" type="radio" value="Y"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][5]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y"
                                                     name="vendor_questions[supply_Chain_responsibility][5]"
                                                     class="onchangeHoldOriginalPassportAnswer" <?php echo $vendor_questions['supply_Chain_responsibility']['5'] == "Y" ? "checked" : ""; ?>>
-                                                <i class="helper"></i>Yes
+                                                <i class="helper"></i><?= __('Yes'); ?>
                                             </label>
                                         </div>
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][5]" type="radio" value="N"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][5]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                     name="vendor_questions[supply_Chain_responsibility][5]" checked="checked"
                                                     class="onchangeHoldOriginalPassportAnswer" <?php echo ($vendor_questions['supply_Chain_responsibility']['5'] == "N" || $vendor_questions['supply_Chain_responsibility']['5'] == "") ? "checked" : ""; ?>>
-                                                <i class="helper"></i>No
+                                                <i class="helper"></i><?= __('No'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="m-l-20 hold_original_passport supplychainresponsibility_5 mt-2 <?php echo ($vendor_questions['supply_Chain_responsibility'][4] == "N" || $vendor_questions['supply_Chain_responsibility'][4] == "" && $vendor_questions['supply_Chain_responsibility'][5] == "Y") ? "" : "d-none"; ?>" >
                                     <div class="row">
-                                        <h6>a) Do you return original passport or other original personal identification
-                                            documents
-                                            upon the employee's request?</h6>
+                                        <h6><?= __('a) Do you return original passport or other original personal identification documents upon the employee\'s request?'); ?></h6>
                                         <div class="form-radio">
                                             <div class="radio radio-inline">
                                                 <label class="form-label">
-                                                    <input aria-label="Vendor Questions[supply Chain Responsibility][5 A]" type="radio" value="Y"
+                                                    <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][5 A]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y"
                                                         name="vendor_questions[supply_Chain_responsibility][5_a]" <?php echo $vendor_questions['supply_Chain_responsibility']['5_a'] == "Y" ? "checked" : ""; ?>>
-                                                    <i class="helper"></i>Yes
+                                                    <i class="helper"></i><?= __('Yes'); ?>
                                                 </label>
                                             </div>
                                             <div class="radio radio-inline">
                                                 <label class="form-label">
-                                                    <input aria-label="Vendor Questions[supply Chain Responsibility][5 A]" type="radio" value="N"
+                                                    <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][5 A]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                         name="vendor_questions[supply_Chain_responsibility][5_a]" <?php echo ($vendor_questions['supply_Chain_responsibility']['5_a'] == "N" || $vendor_questions['supply_Chain_responsibility']['5_a'] == "") ? "checked" : ""; ?>>
-                                                    <i class="helper"></i>No
+                                                    <i class="helper"></i><?= __('No'); ?>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row supplychainresponsibility_6 mt-2">
-                                    <h6>6) Do any employee have to reimburse recruitment fee to your company?</h6>
+                                    <h6><?= __('6) Do any employee have to reimburse recruitment fee to your company?'); ?></h6>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][6]" type="radio" value="Y"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][6]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y"
                                                     name="vendor_questions[supply_Chain_responsibility][6]" <?php echo $vendor_questions['supply_Chain_responsibility']['6'] == "Y" ? "checked" : ""; ?>>
-                                                <i class="helper"></i>Yes
+                                                <i class="helper"></i><?= __('Yes'); ?>
                                             </label>
                                         </div>
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][6]" type="radio" value="N"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][6]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                     name="vendor_questions[supply_Chain_responsibility][6]" <?php echo ($vendor_questions['supply_Chain_responsibility']['6'] == "N" || $vendor_questions['supply_Chain_responsibility']['6'] == "") ? "checked" : ""; ?>>
-                                                <i class="helper"></i>No
+                                                <i class="helper"></i><?= __('No'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row supplychainresponsibility_7 mt-2 <?php echo $vendor_questions['supply_Chain_responsibility'][3] == "N" ? "" : "d-none"; ?>" >
-                                    <h6>7) Is your company (or your sub-contractor) in Xinjiang Uygur Autonomous Regision (XUAR)
+                                    <h6><?= __('7) Is your company (or your sub-contractor) in Xinjiang Uygur Autonomous Regision (XUAR)'); ?>
                                     </h6>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][7]" type="radio" value="Y"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][7]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="Y"
                                                     name="vendor_questions[supply_Chain_responsibility][7]" <?php echo $vendor_questions['supply_Chain_responsibility']['7'] == "Y" ? "checked" : ""; ?>>
-                                                <i class="helper"></i>Yes
+                                                <i class="helper"></i><?= __('Yes'); ?>
                                             </label>
                                         </div>
                                         <div class="radio radio-inline">
                                             <label class="form-label">
-                                                <input aria-label="Vendor Questions[supply Chain Responsibility][7]" type="radio" value="N"
+                                                <input aria-label="<?= htmlspecialchars(__('Vendor Questions[supply Chain Responsibility][7]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="N"
                                                     name="vendor_questions[supply_Chain_responsibility][7]" <?php echo ($vendor_questions['supply_Chain_responsibility']['7'] == "N" || $vendor_questions['supply_Chain_responsibility']['7'] == "") ? "checked" : ""; ?>>
-                                                <i class="helper"></i>No
+                                                <i class="helper"></i><?= __('No'); ?>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="f-15 f-w-600 text-info mb-2 text-center" style="clear: both;">Terms & Conditions
+                                <div class="f-15 f-w-600 text-info mb-2 text-center" style="clear: both;"><?= htmlspecialchars(__('Terms & Conditions'), ENT_QUOTES, 'UTF-8'); ?>
                                 </div>
-                                <span class="d-block">1. Providing information in the "Vendor Information Form" does not
-                                    constitute
-                                    acceptance as an approved & registered vendor. The registration of vendor is the sole
-                                    discretion
-                                    of AM/NS India.</span>
-                                <span class="d-block mt-2">2. Failure to enter all of the mandatory information will not enable
-                                    us
-                                    to post your vendor file to our database..</span>
-                                <span class="d-block mt-2">3. Being a registered vendor does NOT guarantee the receipt of
-                                    notification for all applicable solicitations or invitation to offer or the award of any
-                                    purchase contract or award of any invitation for bid or request for proposal or request for
-                                    qualifications.</span>
-                                <span class="d-block mt-2">4. Vendor is responsible for the content of the information and its
-                                    vendors responsibility to keep all information current and provide any subsequent up dates,
-                                    additional information as and when required and when desired by AM/NS India.</span>
-                                <span class="d-block mt-2">5. AM/NS India reserves the rights to evaluate the vendor on
-                                    periodical
-                                    basis and decide the continuation / discontinuation of business with them based on the
-                                    evaluation report.</span>
-                                <span class="d-block mt-2">6. Representative of AM/NS India OR their nominated agency has the
-                                    right
-                                    to visit vendors premises for the verification of information with a prior intimation to
-                                    them.</span>
-                                <span class="d-block mt-2">7. At later date if it is found that the information furnished is
-                                    untrue,
-                                    inaccurate, not current, or is incomplete, we reserve the right to suspend or terminate the
-                                    registration and recover the dues (if any) from you</span>
+                                <span class="d-block"><?= htmlspecialchars(__('1. Providing information in the "Vendor Information Form" does not constitute acceptance as an approved & registered vendor. The registration of vendor is the sole discretion of AM/NS India.'), ENT_QUOTES, 'UTF-8'); ?></span>
+                                <span class="d-block mt-2"><?= __('2. Failure to enter all of the mandatory information will not enable us to post your vendor file to our database..'); ?></span>
+                                <span class="d-block mt-2"><?= __('3. Being a registered vendor does NOT guarantee the receipt of notification for all applicable solicitations or invitation to offer or the award of any purchase contract or award of any invitation for bid or request for proposal or request for qualifications.'); ?></span>
+                                <span class="d-block mt-2"><?= __('4. Vendor is responsible for the content of the information and its vendors responsibility to keep all information current and provide any subsequent up dates, additional information as and when required and when desired by AM/NS India.'); ?></span>
+                                <span class="d-block mt-2"><?= __('5. AM/NS India reserves the rights to evaluate the vendor on periodical basis and decide the continuation / discontinuation of business with them based on the evaluation report.'); ?></span>
+                                <span class="d-block mt-2"><?= __('6. Representative of AM/NS India OR their nominated agency has the right to visit vendors premises for the verification of information with a prior intimation to them.'); ?></span>
+                                <span class="d-block mt-2"><?= __('7. At later date if it is found that the information furnished is untrue, inaccurate, not current, or is incomplete, we reserve the right to suspend or terminate the registration and recover the dues (if any) from you'); ?></span>
 
                                 <div class="border-checkbox-section mt-4">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input aria-label="Checkbox" class="border-checkbox" type="checkbox" <?php echo $vendor_questions['terms_conditions']['1'] == "Y" ? "checked" : ""; ?>
+                                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox" type="checkbox" <?php echo $vendor_questions['terms_conditions']['1'] == "Y" ? "checked" : ""; ?>
                                             id="termsandcondition_1" value="Y" name="vendor_questions[terms_conditions][1]">
                                         <label class="form-label border-checkbox-label f-w-600" for="termsandcondition_1">
-                                            <span class="d-block">I / We have read the terms & conditions and privacy
-                                                policy.</span>
-                                            <span class="d-block">I/We hereby declare my / our acceptance for the same and
-                                                certify
-                                                that the information submitted in this vendor registration application is true
-                                                and
-                                                correct to the best of my/our knowledge.</span>
-                                            <span class="d-block">I / We further understand that any false statements observed
-                                                at
-                                                the later stage may result in denial or revocation of our vendor registration
-                                                with
-                                                AM/NS India group.</span></label>
+                                            <span class="d-block"><?= htmlspecialchars(__('I / We have read the terms & conditions and privacy policy.'), ENT_QUOTES, 'UTF-8'); ?></span>
+                                            <span class="d-block"><?= __('I/We hereby declare my / our acceptance for the same and certify that the information submitted in this vendor registration application is true and correct to the best of my/our knowledge.'); ?></span>
+                                            <span class="d-block"><?= __('I / We further understand that any false statements observed at the later stage may result in denial or revocation of our vendor registration with AM/NS India group.'); ?></span></label>
                                     </div>
                                 </div>
 
                                 <div class="border-checkbox-section mt-2">
                                     <div class="border-checkbox-group border-checkbox-group-primary">
-                                        <input aria-label="Checkbox" class="border-checkbox" type="checkbox" <?php echo $vendor_questions['terms_conditions']['2'] == "Y" ? "checked" : ""; ?>
+                                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="border-checkbox" type="checkbox" <?php echo $vendor_questions['terms_conditions']['2'] == "Y" ? "checked" : ""; ?>
                                             id="termsandcondition_2" value="Y" name="vendor_questions[terms_conditions][2]">
                                         <label class="form-label border-checkbox-label f-w-600" for="termsandcondition_2">
-                                            <span class="d-block">I / We agree, covenant and undertake that I / We have reviewed
-                                                the
-                                                policies of AMNSIL.</span>
-                                            <span class="d-block">I / We will comply with the principles contained in these
-                                                Policies
-                                                and these Policies will continue to be applicable and binding on the me/us, to
-                                                the
-                                                extent relevant.</span></label>
+                                            <span class="d-block"><?= __('I / We agree, covenant and undertake that I / We have reviewed the policies of AMNSIL.'); ?></span>
+                                            <span class="d-block"><?= __('I / We will comply with the principles contained in these Policies and these Policies will continue to be applicable and binding on the me/us, to the extent relevant.'); ?></span></label>
                                     </div>
                                 </div>
                             </div>
@@ -1959,8 +1909,7 @@ $locations = $result['locations'];
             <button type="button" class="btn btn-primary m-r-20 m-b-20 checkVendorValidationEmpty">
                 <i class="ti-check"></i> <?php echo $submitText; ?>
             </button>
-            <span class="text-danger terms_conditions d-none" >* Please Accept Terms And Conditions In
-                Questions Tab</span>
+            <span class="text-danger terms_conditions d-none" >* <?= __('Please Accept Terms And Conditions In Questions Tab'); ?></span>
 
         </form>
     </div>
@@ -1975,7 +1924,7 @@ $locations = $result['locations'];
                     <tr>
                         <th scope="col" colspan="3" class="text-center" style="">
                             <?php if($_SESSION['config']['display_logo']!=""){ ?>
-                                <img class="img-fluid img-100" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="Theme-Logo" />
+                                <img class="img-fluid img-100" src="uploads/all/<?php echo $_SESSION['config']['display_logo']; ?>" alt="<?= htmlspecialchars(__('Theme-Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                             <?php }else { ?>
                               <div class="symbol symbol-50 symbol-lg-120 symbol-primary ">
                                   <span class="font-size-h3 symbol-label font-weight-boldest img-90 p-20 f-40"
@@ -1983,67 +1932,67 @@ $locations = $result['locations'];
                               </div>
                               <?php } ?>
                         </th>
-                        <th scope="col" colspan="3" class="h3 text-center">Vendor/BP Request Form</th>
+                        <th scope="col" colspan="3" class="h3 text-center"><?= __('Vendor/BP Request Form'); ?></th>
                     </tr>
                 </thead>
                 <tr>
-                    <th scope="col" colspan="6" class="f-w-600 text-start">Microchip Legal Entity:- <?php echo $vendordetail['company'] ?? '-'; ?></th>
+                    <th scope="col" colspan="6" class="f-w-600 text-start"><?= __('Microchip Legal Entity'); ?>:- <?php echo $vendordetail['company'] ?? '-'; ?></th>
                 </tr>
                 <tr>
-                    <th scope="col" colspan="6" class="f-w-600 text-start">Microchip Requester:-</th>
+                    <th scope="col" colspan="6" class="f-w-600 text-start"><?= __('Microchip Requester'); ?>:-</th>
                 </tr>
                 <tr style="background-color: #eeeeee;">
-                    <th scope="col" colspan="3" class="text-left f-w-600 f-16">Business Information:</th>
-                    <th scope="col" colspan="3" class="text-left f-w-600 f-16">Required</th>
+                    <th scope="col" colspan="3" class="text-left f-w-600 f-16"><?= __('Business Information'); ?>:</th>
+                    <th scope="col" colspan="3" class="text-left f-w-600 f-16"><?= __('Required'); ?></th>
                 </tr>
                 <tr>
                     <td colspan="3" class="f-14">
-                        Company / Name <span class="f-10">(Legal Name)</span>*: <?php echo $vendordetail['company']; ?>
+                        <?= __('Company / Name'); ?> <span class="f-10"><?= __('(Legal Name)'); ?></span>*: <?php echo $vendordetail['company']; ?>
                     </td>
                     <td colspan="3" class="f-14">
-                        Corporate Website: <?php echo $vendordetail['website_url']; ?>
+                        <?= __('Corporate Website'); ?>: <?php echo $vendordetail['website_url']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3" class="f-14">
-                        DBA <span class="f-10">(Doing business as or trading name)</span>*: <?php echo $vendordetail['company_trading_name']; ?>
+                        <?= __('DBA'); ?> <span class="f-10"><?= __('(Doing business as or trading name)'); ?></span>*: <?php echo $vendordetail['company_trading_name']; ?>
                     </td>
                     <td colspan="3" class="f-14">
-                        Subsidiary or Division of: <?php echo $vendordetail['company_subsidiary_division']; ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="f-14">
-                        First Name: <?php echo $vendordetail['first_name']!=""?$vendordetail['first_name']:"-"; ?>
-                    </td>
-                    <td colspan="2" class="f-14">
-                        Middle Name: <?php echo $vendordetail['middle_name']!=""?$vendordetail['middle_name']:"-"; ?>
-                    </td>
-                    <td colspan="2" class="f-14">
-                        Last Name: <?php echo $vendordetail['last_name']!=""?$vendordetail['last_name']:"-"; ?>
+                        <?= __('Subsidiary or Division of'); ?>: <?php echo $vendordetail['company_subsidiary_division']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        Email: <?php echo $vendordetail['email']; ?>
+                        <?= __('First Name'); ?>: <?php echo $vendordetail['first_name']!=""?$vendordetail['first_name']:"-"; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Phone: <?php echo $vendordetail['phone']!=""?$vendordetail['phone']:"-"; ?>
+                        <?= __('Middle Name'); ?>: <?php echo $vendordetail['middle_name']!=""?$vendordetail['middle_name']:"-"; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                         Vendor Type: <?php echo $vendor_types[$vendordetail['vendor_type_id']]['type_name'];
+                        <?= __('Last Name'); ?>: <?php echo $vendordetail['last_name']!=""?$vendordetail['last_name']:"-"; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="f-14">
+                        <?= __('Email'); ?>: <?php echo $vendordetail['email']; ?>
+                    </td>
+                    <td colspan="2" class="f-14">
+                        <?= __('Phone'); ?>: <?php echo $vendordetail['phone']!=""?$vendordetail['phone']:"-"; ?>
+                    </td>
+                    <td colspan="2" class="f-14">
+                         <?= __('Vendor Type'); ?>: <?php echo $vendor_types[$vendordetail['vendor_type_id']]['type_name'];
                          ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        Service Types: <?php echo $vendordetail['service_types']; ?>
+                        <?= __('Service Types'); ?>: <?php echo $vendordetail['service_types']; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        BP Code: <?php echo $vendordetail['bp_code']!=""?$vendordetail['bp_code']:"-"; ?>
+                        <?= __('BP Code'); ?>: <?php echo $vendordetail['bp_code']!=""?$vendordetail['bp_code']:"-"; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Location: <?php $locationsid = json_decode($vendordetail['location_id'] ,1);
+                        <?= __('Location'); ?>: <?php $locationsid = json_decode($vendordetail['location_id'] ,1);
                          foreach($locationsid as $locid){ echo $locations[$locid]['location_name'].", ";
 } ?>
                     </td>
@@ -2051,179 +2000,179 @@ $locations = $result['locations'];
 
                 <tr>
                     <td colspan="6" class="f-14">
-                        1) Remit to Address*: <?php echo $vendordetail['billing_address']; ?>
+                        <?= __('1) Remit to Address'); ?>*: <?php echo $vendordetail['billing_address']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        City*: <?php echo isset($citieslist[$vendordetail['billing_city']]) ? $citieslist[$vendordetail['billing_city']] : $vendordetail['billing_city']; ?>
+                        <?= __('City'); ?>*: <?php echo isset($citieslist[$vendordetail['billing_city']]) ? $citieslist[$vendordetail['billing_city']] : $vendordetail['billing_city']; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Province / State*: <?php echo isset($stateslist[$vendordetail['billing_state']]) ? $stateslist[$vendordetail['billing_state']] : $vendordetail['billing_state']; ?>
+                        <?= __('Province / State'); ?>*: <?php echo isset($stateslist[$vendordetail['billing_state']]) ? $stateslist[$vendordetail['billing_state']] : $vendordetail['billing_state']; ?>
                     </td>
                     <td style="f-14">
-                        Postal / Zip Code*: <?php echo $vendordetail['billing_post_code']; ?>
+                        <?= __('Postal / Zip Code'); ?>*: <?php echo $vendordetail['billing_post_code']; ?>
                     </td>
                     <td class="f-14">
-                        Country*: <?php echo isset($countrylist[$vendordetail['billing_country']]) ? $countrylist[$vendordetail['billing_country']] : $vendordetail['billing_country']; ?>
+                        <?= __('Country'); ?>*: <?php echo isset($countrylist[$vendordetail['billing_country']]) ? $countrylist[$vendordetail['billing_country']] : $vendordetail['billing_country']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        2) Order Address*: <?php echo $vendordetail['shipping_address']; ?>
+                        <?= __('2) Order Address'); ?>*: <?php echo $vendordetail['shipping_address']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        City*: <?php echo isset($citieslist[$vendordetail['shipping_city']]) ? $citieslist[$vendordetail['shipping_city']] : $vendordetail['shipping_city']; ?>
+                        <?= __('City'); ?>*: <?php echo isset($citieslist[$vendordetail['shipping_city']]) ? $citieslist[$vendordetail['shipping_city']] : $vendordetail['shipping_city']; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Province / State*: <?php echo isset($stateslist[$vendordetail['shipping_state']]) ? $stateslist[$vendordetail['shipping_state']] : $vendordetail['shipping_state']; ?>
+                        <?= __('Province / State'); ?>*: <?php echo isset($stateslist[$vendordetail['shipping_state']]) ? $stateslist[$vendordetail['shipping_state']] : $vendordetail['shipping_state']; ?>
                     </td>
                     <td class="f-14">
-                        Postal / Zip Code*: <?php echo $vendordetail['shipping_post_code']; ?>
+                        <?= __('Postal / Zip Code'); ?>*: <?php echo $vendordetail['shipping_post_code']; ?>
                     </td>
                     <td class="f-14">
-                        Country*: <?php echo isset($countrylist[$vendordetail['shipping_country']]) ? $countrylist[$vendordetail['shipping_country']] : $vendordetail['shipping_country']; ?>
+                        <?= __('Country'); ?>*: <?php echo isset($countrylist[$vendordetail['shipping_country']]) ? $countrylist[$vendordetail['shipping_country']] : $vendordetail['shipping_country']; ?>
                     </td>
                 </tr>
                 <tr style="background-color: #eeeeee;">
                     <th scope="col" colspan="6" class="f-14">
-                        Company Information
+                        <?= __('Company Information'); ?>
                     </th>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        Tax / VAT <span class="f-10">(Specify Type)</span>*: <?php echo $vendordetail['vendor_tax_reg_no']; ?>
+                        <?= __('Tax / VAT'); ?> <span class="f-10"><?= __('(Specify Type)'); ?></span>*: <?php echo $vendordetail['vendor_tax_reg_no']; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Legal Structure <span class="f-10"></span>*: <?php echo isset($company_types[$vendordetail['business_type']]) ? $company_types[$vendordetail['business_type']]['company_type_name'] : $vendordetail['business_type']; ?>
+                        <?= __('Legal Structure'); ?> <span class="f-10"></span>*: <?php echo isset($company_types[$vendordetail['business_type']]) ? $company_types[$vendordetail['business_type']]['company_type_name'] : $vendordetail['business_type']; ?>
                     </td>
                     <td class="f-14">
-                        Country: <?php echo isset($countrylist[$vendordetail['company_registration_country']]) ? $countrylist[$vendordetail['company_registration_country']] : $vendordetail['company_registration_country']; ?>
+                        <?= __('Country'); ?>: <?php echo isset($countrylist[$vendordetail['company_registration_country']]) ? $countrylist[$vendordetail['company_registration_country']] : $vendordetail['company_registration_country']; ?>
                     </td>
                     <td class="f-14">
-                        DUNS: <?php echo $vendordetail['duns_no']; ?>
+                        <?= __('DUNS'); ?>: <?php echo $vendordetail['duns_no']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        Company Registration: <?php echo $vendordetail['company_registration_number']; ?>
+                        <?= __('Company Registration'); ?>: <?php echo $vendordetail['company_registration_number']; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Company Registration Country: <?php echo isset($countrylist[$vendordetail['company_registration_country']]) ? $countrylist[$vendordetail['company_registration_country']] : $vendordetail['company_registration_country']; ?>
+                        <?= __('Company Registration Country'); ?>: <?php echo isset($countrylist[$vendordetail['company_registration_country']]) ? $countrylist[$vendordetail['company_registration_country']] : $vendordetail['company_registration_country']; ?>
                     </td>
                     <td class="f-14">
-                        Payment Term: <?php echo isset($payment_terms[$vendordetail['payment_terms']]) ? $payment_terms[$vendordetail['payment_terms']]['payment_term_name'] : $vendordetail['payment_terms']; ?>
+                        <?= __('Payment Term'); ?>: <?php echo isset($payment_terms[$vendordetail['payment_terms']]) ? $payment_terms[$vendordetail['payment_terms']]['payment_term_name'] : $vendordetail['payment_terms']; ?>
                     </td>
                     <td class="f-14">
-                        INCO Terms / Shipping Terms <span class="f-10">(Point of)</span>: <?php echo isset($incoterms[$vendordetail['incoterm_id']]) ? $incoterms[$vendordetail['incoterm_id']]['incoterm_name'] : $vendordetail['incoterm_id']; ?>
+                        <?= __('INCO Terms / Shipping Terms'); ?> <span class="f-10"><?= __('(Point of)'); ?></span>: <?php echo isset($incoterms[$vendordetail['incoterm_id']]) ? $incoterms[$vendordetail['incoterm_id']]['incoterm_name'] : $vendordetail['incoterm_id']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        PAN No*: <?php echo emptytextdashShow($vendordetail['pan_no']); ?>
+                        <?= __('PAN No'); ?>*: <?php echo emptytextdashShow($vendordetail['pan_no']); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        GSTIN No*: <?php echo emptytextdashShow($vendordetail['gstin']); ?>
+                        <?= __('GSTIN No'); ?>*: <?php echo emptytextdashShow($vendordetail['gstin']); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        TAN No: <?php echo emptytextdashShow($vendordetail['tan_number']); ?>
+                        <?= __('TAN No'); ?>: <?php echo emptytextdashShow($vendordetail['tan_number']); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3" class="f-14">
-                        MSME Registered: <?php echo $vendordetail['msme_register_yes_no'] == 'Y' ? 'Yes' : 'No'; ?>
+                        <?= __('MSME Registered'); ?>: <?php echo $vendordetail['msme_register_yes_no'] == 'Y' ? 'Yes' : 'No'; ?>
                     </td>
                     <td colspan="3" class="f-14">
-                        MSME Number: <?php echo $vendordetail['msme_register_yes_no'] == 'Y' ? emptytextdashShow($vendordetail['msme_number']) : 'N/A'; ?>
+                        <?= __('MSME Number'); ?>: <?php echo $vendordetail['msme_register_yes_no'] == 'Y' ? emptytextdashShow($vendordetail['msme_number']) : 'N/A'; ?>
                     </td>
                 </tr>
                 <tr style="background-color: #eeeeee;">
                     <th scope="col" colspan="6" class="f-14">
-                        Company EFT / ACH / Wire Banking Information <span style="font-size:12px;">(Please attach support): </span>
+                        <?= __('Company EFT / ACH / Wire Banking Information'); ?> <span style="font-size:12px;"><?= __('(Please attach support)'); ?>: </span>
                     </th>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        Bank Name: <?php echo emptytextdashShow($vendordetail['bank_name']); ?>
+                        <?= __('Bank Name'); ?>: <?php echo emptytextdashShow($vendordetail['bank_name']); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Country: <?php echo isset($countrylist[$vendordetail['bank_country']]) ? $countrylist[$vendordetail['bank_country']] : emptytextdashShow($vendordetail['bank_country']); ?>
+                        <?= __('Country'); ?>: <?php echo isset($countrylist[$vendordetail['bank_country']]) ? $countrylist[$vendordetail['bank_country']] : emptytextdashShow($vendordetail['bank_country']); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Remit Currency <span class="f-10">: <?php echo emptytextdashShow($vendordetail['currency_id']); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="f-14">
-                        Bank Address: <?php echo emptytextdashShow($vendordetail['bank_address']); ?>
-                    </td>
-                    <td colspan="2" class="f-14">
-                        City / Province / State: <?php echo isset($citieslist[$vendordetail['bank_city']]) ? $citieslist[$vendordetail['bank_city']] : emptytextdashShow($vendordetail['bank_city']); ?> / <?php echo isset($stateslist[$vendordetail['bank_state']]) ? $stateslist[$vendordetail['bank_state']] : emptytextdashShow($vendordetail['bank_state']); ?>
-                    </td>
-                    <td colspan="2" class="f-14">
-                        Postal / Zip Code: <?php echo emptytextdashShow($vendordetail['bank_post_code']); ?>
+                        <?= __('Remit Currency'); ?> <span class="f-10">: <?php echo emptytextdashShow($vendordetail['currency_id']); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        Company Bank Beneficiary Name <span class="f-10">(Name to appear on payment)</span>: <?php echo emptytextdashShow($vendordetail['bank_beneficiary_name']); ?>
+                        <?= __('Bank Address'); ?>: <?php echo emptytextdashShow($vendordetail['bank_address']); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Bank Account Number: <?php echo emptytextdashShow($vendordetail['bank_account_no']); ?>
+                        <?= __('City / Province / State'); ?>: <?php echo isset($citieslist[$vendordetail['bank_city']]) ? $citieslist[$vendordetail['bank_city']] : emptytextdashShow($vendordetail['bank_city']); ?> / <?php echo isset($stateslist[$vendordetail['bank_state']]) ? $stateslist[$vendordetail['bank_state']] : emptytextdashShow($vendordetail['bank_state']); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Type of Bank Account: <?php echo isset($bank_acoount_type[$vendordetail['account_type']]) ? $bank_acoount_type[$vendordetail['account_type']] : emptytextdashShow($vendordetail['account_type']); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="f-14">
-                        IFSC Code: <?php echo emptytextdashShow($vendordetail['ifsc_code']); ?>
-                    </td>
-                    <td colspan="2" class="f-14">
-                        SWIFT/BIC Code: <?php echo emptytextdashShow($vendordetail['swift_bic_code']); ?>
-                    </td>
-                    <td colspan="2" class="f-14">
-                        IBAN: <?php echo emptytextdashShow($vendordetail['iban_code']); ?>
+                        <?= __('Postal / Zip Code'); ?>: <?php echo emptytextdashShow($vendordetail['bank_post_code']); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        Routing - ABA / DFI # / Sort Code <span class="f-10">(ACH)</span>: <?php echo emptytextdashShow($vendordetail['routing_aba_dfi_ach']); ?>
+                        <?= __('Company Bank Beneficiary Name'); ?> <span class="f-10"><?= __('(Name to appear on payment)'); ?></span>: <?php echo emptytextdashShow($vendordetail['bank_beneficiary_name']); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Routing - Wire Code: <?php echo $vendordetail['routing_wire_Code']; ?>
+                        <?= __('Bank Account Number'); ?>: <?php echo emptytextdashShow($vendordetail['bank_account_no']); ?>
+                    </td>
+                    <td colspan="2" class="f-14">
+                        <?= __('Type of Bank Account'); ?>: <?php echo isset($bank_acoount_type[$vendordetail['account_type']]) ? $bank_acoount_type[$vendordetail['account_type']] : emptytextdashShow($vendordetail['account_type']); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="f-14">
+                        <?= __('IFSC Code'); ?>: <?php echo emptytextdashShow($vendordetail['ifsc_code']); ?>
+                    </td>
+                    <td colspan="2" class="f-14">
+                        <?= __('SWIFT/BIC Code'); ?>: <?php echo emptytextdashShow($vendordetail['swift_bic_code']); ?>
+                    </td>
+                    <td colspan="2" class="f-14">
+                        <?= __('IBAN'); ?>: <?php echo emptytextdashShow($vendordetail['iban_code']); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="f-14">
+                        <?= __('Routing - ABA / DFI # / Sort Code'); ?> <span class="f-10"><?= __('(ACH)'); ?></span>: <?php echo emptytextdashShow($vendordetail['routing_aba_dfi_ach']); ?>
+                    </td>
+                    <td colspan="2" class="f-14">
+                        <?= __('Routing - Wire Code'); ?>: <?php echo $vendordetail['routing_wire_Code']; ?>
                     </td>
                     <td class="f-14">
-                        Swift / BIC Code: <?php echo $vendordetail['swift_bic_code']; ?>
+                        <?= __('Swift / BIC Code'); ?>: <?php echo $vendordetail['swift_bic_code']; ?>
                     </td>
                     <td class="f-14">
-                        IBAN <span class="f-10">(if Applicable)</span>: <?php echo $vendordetail['iban_code']; ?>
+                        <?= __('IBAN'); ?> <span class="f-10"><?= __('(if Applicable)'); ?></span>: <?php echo $vendordetail['iban_code']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        Contact within your company for Banking Questions: <?php echo $vendordetail['bank_query_person_name']; ?>
+                        <?= __('Contact within your company for Banking Questions'); ?>: <?php echo $vendordetail['bank_query_person_name']; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        *Tel #: <?php echo $vendordetail['bank_query_contact_no']; ?>
+                        *<?= __('Tel #'); ?>: <?php echo $vendordetail['bank_query_contact_no']; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        Email Address: <?php echo$vendordetail['bank_query_email_id']; ?>
+                        <?= __('Email Address'); ?>: <?php echo$vendordetail['bank_query_email_id']; ?>
                     </td>
                 </tr>
 
                 <tr style="background-color: #eeeeee;">
                     <th scope="col" colspan="6" class="f-14">
-                        Contact Information:
+                        <?= __('Contact Information'); ?>:
                     </th>
                 </tr>
                 <tr>
-                    <th scope="col" style="text-align: left;" colspan="2">Type</th>
-                    <th scope="col" style="text-align: left;">Name</th>
-                    <th scope="col" style="text-align: left;">Number</th>
-                    <th scope="col" style="text-align: left;">Email</th>
+                    <th scope="col" style="text-align: left;" colspan="2"><?= __('Type'); ?></th>
+                    <th scope="col" style="text-align: left;"><?= __('Name'); ?></th>
+                    <th scope="col" style="text-align: left;"><?= __('Number'); ?></th>
+                    <th scope="col" style="text-align: left;"><?= __('Email'); ?></th>
                 </tr>
                 <?php foreach($vendor_contact_info_type as $vcikey=>$vcival){ ?>
                     <tr>
@@ -2247,21 +2196,20 @@ $locations = $result['locations'];
             <?php if($transaction_table == "vendor_registers"){ ?>
                 <tr style="background-color: #eeeeee;">
                     <th scope="col" colspan="6" class="f-14">
-                        All Vendors to Reply:
+                        <?= __('All Vendors to Reply'); ?>:
                     </th>
                 </tr>
                 <tr>
                     <th scope="col" colspan="6" class="f-14">
-                        Quality System:
+                        <?= __('Quality System'); ?>:
                     </th>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        <?php echo answerYesOrNo($vendor_questions['quality_system']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                        <?php echo answerYesOrNo($vendor_questions['quality_system']) == 'No' ? '☑' : '☐'; ?> No
-                        Does your company have a quality system? if yes, please provide type and expiration. **Attach copy of certificates when submitting vendor request form.
+                        <?php echo answerYesOrNo($vendor_questions['quality_system']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                        <?php echo answerYesOrNo($vendor_questions['quality_system']) == 'No' ? '☑' : '☐'; ?> <?= __('No Does your company have a quality system? if yes, please provide type and expiration. **Attach copy of certificates when submitting vendor request form.'); ?>
                         <?php if ($vendor_questions['quality_system'] == 'Y') { ?>
-                            <br><strong>Certificate Details:</strong>
+                            <br><strong><?= __('Certificate Details'); ?>:</strong>
                             <?php for ($i = 1; $i <= 2; $i++) {
                                 if (!empty($vendor_questions['quality_system_certificate']['name'][$i])) { ?>
                                     <br><?php echo $i; ?>. <?php echo $vendor_questions['quality_system_certificate']['name'][$i]; ?>
@@ -2273,177 +2221,166 @@ $locations = $result['locations'];
                 </tr>
                 <tr>
                     <th scope="col" colspan="6" class="f-14">
-                        Small Business Registered:
+                        <?= __('Small Business Registered'); ?>:
                     </th>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        Self Certified: <?php echo ($vendor_questions['small_business_registerd']['1'] == 'Y') ? '☑' : '☐'; ?>
+                        <?= __('Self Certified'); ?>: <?php echo ($vendor_questions['small_business_registerd']['1'] == 'Y') ? '☑' : '☐'; ?>
                     </td>
                     <td class="f-14">
-                        Sam.gov Registered: <?php echo ($vendor_questions['small_business_registerd']['2'] == 'Y') ? '☑' : '☐'; ?>
+                        <?= __('Sam.gov Registered'); ?>: <?php echo ($vendor_questions['small_business_registerd']['2'] == 'Y') ? '☑' : '☐'; ?>
                     </td>
                     <td class="font-size: 15px; border: 1px solid #eeeeee; text-align: left; font-weight: bold; white-space: normal;">
-                        Not Applicable: <?php echo (empty($vendor_questions['small_business_registerd'])) ? '☑' : '☐'; ?>
+                        <?= __('Not Applicable'); ?>: <?php echo (empty($vendor_questions['small_business_registerd'])) ? '☑' : '☐'; ?>
                     </td>
                     <td class="f-14">
-                        Unique Entity : <?php echo $vendor_questions['small_business_registerd']['101']; ?>
+                        <?= __('Unique Entity'); ?> : <?php echo $vendor_questions['small_business_registerd']['101']; ?>
                     </td>
                     <td class="f-14">
-                        Cage Code: <?php echo $vendor_questions['small_business_registerd']['102']; ?>
+                        <?= __('Cage Code'); ?>: <?php echo $vendor_questions['small_business_registerd']['102']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td class="f-14">
-                        Small Disadvantaged: <?php echo ($vendor_questions['small_business_registerd']['3'] == 'Y') ? '☑' : '☐'; ?>
+                        <?= __('Small Disadvantaged'); ?>: <?php echo ($vendor_questions['small_business_registerd']['3'] == 'Y') ? '☑' : '☐'; ?>
                     </td>
                     <td class="f-14">
-                        Women Owned: <?php echo ($vendor_questions['small_business_registerd']['4'] == 'Y') ? '☑' : '☐'; ?>
+                        <?= __('Women Owned'); ?>: <?php echo ($vendor_questions['small_business_registerd']['4'] == 'Y') ? '☑' : '☐'; ?>
                     </td>
                     <td class="font-size: 15px; border: 1px solid #eeeeee; text-align: left; font-weight: bold; white-space: normal;">
-                        Veteran Owned: <?php echo ($vendor_questions['small_business_registerd']['5'] == 'Y') ? '☑' : '☐'; ?>
+                        <?= __('Veteran Owned'); ?>: <?php echo ($vendor_questions['small_business_registerd']['5'] == 'Y') ? '☑' : '☐'; ?>
                     </td>
                     <td class="f-14">
-                        Service-Disabled Veteran: <?php echo ($vendor_questions['small_business_registerd']['6'] == 'Y') ? '☑' : '☐'; ?>
+                        <?= __('Service-Disabled Veteran'); ?>: <?php echo ($vendor_questions['small_business_registerd']['6'] == 'Y') ? '☑' : '☐'; ?>
                     </td>
                     <td class="f-14">
-                        Small Business: <?php echo ($vendor_questions['small_business_registerd']['7'] == 'Y') ? '☑' : '☐'; ?>
+                        <?= __('Small Business'); ?>: <?php echo ($vendor_questions['small_business_registerd']['7'] == 'Y') ? '☑' : '☐'; ?>
                     </td>
                     <td class="f-14">
-                        Other: <?php echo $vendor_questions['small_business_registerd']['100']; ?>
+                        <?= __('Other'); ?>: <?php echo $vendor_questions['small_business_registerd']['100']; ?>
                     </td>
                 </tr>
                 <tr>
                     <th scope="col" colspan="6" class="f-14">
-                        Supply Chain Responsibility:
+                        <?= __('Supply Chain Responsibility'); ?>:
                     </th>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        1) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['1']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['1']) == 'No' ? '☑' : '☐'; ?> No
-                        is your company a member of the RBA (Responsible Business Alliance)?
+                        1) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['1']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['1']) == 'No' ? '☑' : '☐'; ?> <?= __('No is your company a member of the RBA (Responsible Business Alliance)?'); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        2) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['2']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['2']) == 'No' ? '☑' : '☐'; ?> No
-                        Are all employees of your company at least 18 years of age?
+                        2) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['2']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['2']) == 'No' ? '☑' : '☐'; ?> <?= __('No Are all employees of your company at least 18 years of age?'); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        3) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['3']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['3']) == 'No' ? '☑' : '☐'; ?> No
-                        Does your business have only 1 employee? if "Yes" skip no. 7. if "No" go to question no. 4.
+                        3) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['3']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['3']) == 'No' ? '☑' : '☐'; ?> <?= __('No Does your business have only 1 employee? if "Yes" skip no. 7. if "No" go to question no. 4.'); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        <p>4) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4']) == 'No' ? '☑' : '☐'; ?> No
-                        Do you have hourly employees that work at a manufacturing facility? For the purposes of this form, hourly employees are employees that are subject to local laws governing overtime pay or subject to hourly increase or decrease in compensation based on volume of production. If "Yes", please answer "a.", "b.", and "c." below. If "No," skip to question no. 5.</p>
+                        <p>4) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4']) == 'No' ? '☑' : '☐'; ?> <?= __('No Do you have hourly employees that work at a manufacturing facility? For the purposes of this form, hourly employees are employees that are subject to local laws governing overtime pay or subject to hourly increase or decrease in compensation based on volume of production. If "Yes", please answer "a.", "b.", and "c." below. If "No," skip to question no. 5.'); ?></p>
                         <?php if ($vendor_questions['supply_Chain_responsibility']['4'] == 'Y') { ?>
-                            <p class="margin-left: 20px;">a). <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_a']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                            <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_a']) == 'No' ? '☑' : '☐'; ?> No
-                            Do all hourly workers work less than 60 hours per week?</p>
-                            <p class="margin-left: 20px;">b). <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_b']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                            <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_b']) == 'No' ? '☑' : '☐'; ?> No
-                            Do you have a policy prohibiting forced, involuntary, indentured, trafficked, or slave labor?</p>
-                            <p class="margin-left: 20px;">c). <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_c']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                            <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_c']) == 'No' ? '☑' : '☐'; ?> No
-                            Do you expect your suppliers to have a policy prohibiting forced, involuntary, indentured, trafficked, or slave labor?</p>
+                            <p class="margin-left: 20px;">a). <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_a']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                            <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_a']) == 'No' ? '☑' : '☐'; ?> <?= __('No Do all hourly workers work less than 60 hours per week?'); ?></p>
+                            <p class="margin-left: 20px;">b). <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_b']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                            <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_b']) == 'No' ? '☑' : '☐'; ?> <?= __('No Do you have a policy prohibiting forced, involuntary, indentured, trafficked, or slave labor?'); ?></p>
+                            <p class="margin-left: 20px;">c). <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_c']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                            <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['4_c']) == 'No' ? '☑' : '☐'; ?> <?= __('No Do you expect your suppliers to have a policy prohibiting forced, involuntary, indentured, trafficked, or slave labor?'); ?></p>
                         <?php } ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        <p>5) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5']) == 'No' ? '☑' : '☐'; ?> No
-                        Do you retain or hold your employees' original passports or other original personal identification documents? If "Yes", please answer "a." below. If "No", skip to question no. 6.</p>
+                        <p>5) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5']) == 'No' ? '☑' : '☐'; ?> <?= __('No Do you retain or hold your employees\' original passports or other original personal identification documents? If "Yes", please answer "a." below. If "No", skip to question no. 6.'); ?></p>
                         <?php if ($vendor_questions['supply_Chain_responsibility']['5'] == 'Y') { ?>
-                            <p class="margin-left: 20px;">a). <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5_a']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                            <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5_a']) == 'No' ? '☑' : '☐'; ?> No
-                            Do you return original passports or other original personal identification documents upon the employee's request?</p>
+                            <p class="margin-left: 20px;">a). <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5_a']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                            <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['5_a']) == 'No' ? '☑' : '☐'; ?> <?= __('No Do you return original passports or other original personal identification documents upon the employee\'s request?'); ?></p>
                         <?php } ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        <p>6) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['6']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['6']) == 'No' ? '☑' : '☐'; ?> No
-                        Do any employees have to reimburse recruitment fees to your company?</p>
+                        <p>6) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['6']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['6']) == 'No' ? '☑' : '☐'; ?> <?= __('No Do any employees have to reimburse recruitment fees to your company?'); ?></p>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        <p>7) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['7']) == 'Yes' ? '☑' : '☐'; ?> Yes
-                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['7']) == 'No' ? '☑' : '☐'; ?> No
-                        Is your company (or your sub-contractor) in the Xinjiang Uygur Autonomous Region (XUAR)?</p>
+                        <p>7) <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['7']) == 'Yes' ? '☑' : '☐'; ?> <?= __('Yes'); ?>
+                        <?php echo answerYesOrNo($vendor_questions['supply_Chain_responsibility']['7']) == 'No' ? '☑' : '☐'; ?> <?= __('No Is your company (or your sub-contractor) in the Xinjiang Uygur Autonomous Region (XUAR)?'); ?></p>
                     </td>
                 </tr>
                 <tr>
                     <th scope="col" colspan="6" class="f-14">
-                        Additional documentation required, where applicable:
+                        <?= __('Additional documentation required, where applicable'); ?>:
                     </th>
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
                         <p>
                             <span class="width:5px; height: 5px; border-radius: 100%; background: #000000; margin-right: 10px; margin-left: 20px; display: inline-block; vertical-align: middle;"></span>
-                            Banking Details on Company letterhead (matching information provided on page 1) - Required.
+                            <?= __('Banking Details on Company letterhead (matching information provided on page 1) - Required.'); ?>
                         </p>
                         <p>
                             <span class="width:5px; height: 5px; border-radius: 100%; background: #000000; margin-right: 10px; margin-left: 20px; display: inline-block; vertical-align: middle;"></span>
-                            USA Businesses - Current W9 (Dated within the previous 12 months) - Required.
+                            <?= __('USA Businesses - Current W9 (Dated within the previous 12 months) - Required.'); ?>
                         </p>
                         <p>
                             <span class="width:5px; height: 5px; border-radius: 100%; background: #000000; margin-right: 10px; margin-left: 20px; display: inline-block; vertical-align: middle;"></span>
-                            Quote/contract/SOW – Where Applicable
+                            <?= __('Quote/contract/SOW – Where Applicable'); ?>
                         </p>
                         <p>
                             <span class="width:5px; height: 5px; border-radius: 100%; background: #000000; margin-right: 10px; margin-left: 20px; display: inline-block; vertical-align: middle;"></span>
-                            ISO90xx, AS9xxs, or other Quality Systems information - Where applicable
+                            <?= __('ISO90xx, AS9xxs, or other Quality Systems information - Where applicable'); ?>
                         </p>
                         <p>
                             <span class="width:5px; height: 5px; border-radius: 100%; background: #000000; margin-right: 10px; margin-left: 20px; display: inline-block; vertical-align: middle;"></span>
-                            Businesses located outside of the USA - Current W-8BEN-E, (Dated within the previous 12 months) - Where applicable.
+                            <?= __('Businesses located outside of the USA - Current W-8BEN-E, (Dated within the previous 12 months) - Where applicable.'); ?>
                         </p>
                         <p>
                             <span class="width:5px; height: 5px; border-radius: 100%; background: #000000; margin-right: 10px; margin-left: 20px; display: inline-block; vertical-align: middle;"></span>
-                            Local Tax Documents – BIR, Por Por, ITA, PAN, GST - Where applicable.
+                            <?= __('Local Tax Documents – BIR, Por Por, ITA, PAN, GST - Where applicable.'); ?>
                         </p>
                     </td>
                 </tr>
             <?php } ?>
                 <tr>
                     <td colspan="6" class="f-14">
-                        Comments/Special instructions: <?php echo$vendordetail['vendor_other_notes']; ?>
+                        <?= __('Comments/Special instructions'); ?>: <?php echo$vendordetail['vendor_other_notes']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3" class="f-14">
-                        *Name : <?php echo $vendordetail['first_name'] . ' ' . $vendordetail['last_name']; ?>
+                        *<?= __('Name'); ?> : <?php echo $vendordetail['first_name'] . ' ' . $vendordetail['last_name']; ?>
                     </td>
                     <td colspan="3" class="f-14">
-                        *Title : <?php echo $vendordetail['title']; ?>
+                        *<?= __('Title'); ?> : <?php echo $vendordetail['title']; ?>
                     </td>
                 </tr>
                 <tr>
                     <td  class="f-14">
-                        *Signature or digital signature:
+                        *<?= __('Signature or digital signature'); ?>:
                     </td>
                     <td colspan="2" class="f-14">
                         <?php if($vendordetail['signature'] !=""){
                             ?>
-                            <img class="img-100" src='uploads/all/<?php echo htmlspecialchars($vendordetail['signature']); ?>' alt="signature" />
+                            <img class="img-100" src='uploads/all/<?php echo htmlspecialchars($vendordetail['signature']); ?>' alt="<?= htmlspecialchars(__('signature'), ENT_QUOTES, 'UTF-8'); ?>" />
                         <?php }elseif($vendordetail['user_id'] == $_SESSION['userid']){ ?>
-                            <span class="form-label label label-primary vendoresignpopup cursor-pointer">Click To eSign</span>
+                            <span class="form-label label label-primary vendoresignpopup cursor-pointer"><?= __('Click To eSign'); ?></span>
                         <?php } ?>
                     </td>
                     <td  class="f-14">
-                        *Date:
+                        *<?= __('Date'); ?>:
                     </td>
                     <td colspan="2" class="f-14">
                         <?php echo $vendordetail['signature_date'] !=""?fromDate($vendordetail['signature_date']):"-"; ?>
@@ -2451,13 +2388,13 @@ $locations = $result['locations'];
                 </tr>
                 <tr>
                     <td colspan="6" class="f-14">
-                        Return the completed/signed form to the original <b>Requester</b> and <b><?php echo $_SESSION['config']['admin_email'] ?></b>
+                        <?= __('Return the completed/signed form to the original'); ?> <b><?= __('Requester'); ?></b> <?= __('and'); ?> <b><?php echo $_SESSION['config']['admin_email'] ?></b>
                     </td>
                 </tr>
             </table>
         </div>
          <button class="btn waves-effect waves-light btn-grd-success mt-3 printDivVendor" >
-            <i class="fa fa-print"></i>  Print
+            <i class="fa fa-print"></i>  <?= __('Print'); ?>
         </button>
     </div>
 
@@ -2467,13 +2404,13 @@ $locations = $result['locations'];
 
 <input type="hidden" id="customer_vendor_gst_billing_details_cnt" value="<?php echo count((array) $customer_vendor_gst_billing_details) ?? 1; ?>">
 <div class="d-none" id='gsttype_id'>
-    <option value="">Select Any One</option>
+    <option value=""><?= __('Select Any One'); ?></option>
     <?php foreach ($gstregistrationtype as $gstkey => $gstregtype) { ?>
         <option <?php echo $customers['gsttype'] == $gstkey ? 'selected' : '' ?> value="<?php echo $gstkey; ?>"><?php echo $gstregtype; ?></option>
     <?php } ?>
 </div>
 <div class="d-none" id='countrieslist_id'>
-    <option value="">Select Any One</option>
+    <option value=""><?= __('Select Any One'); ?></option>
     <?php foreach ($countrieslist as $countryvalue) { ?>
         <option value="<?php echo $countryvalue['id']; ?>"><?php echo $countryvalue['country_name']; ?></option>
     <?php } ?>

@@ -83,7 +83,7 @@ foreach ($account_groups as $ag) {
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <span class="form-label d-inline-block fw-bold"><?php echo __('Service Name'); ?></span>
-                                <select name="account_group_id" class="form-control js-example-basic-single" title="Account Group Id" aria-label="Account Group Id">
+                                <select name="account_group_id" class="form-control js-example-basic-single" title="<?= htmlspecialchars(__('Account Group Id'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Account Group Id'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <option value="0"><?php echo __('Select Any One'); ?></option>
                                     <?php foreach ($ag_list as $id => $group_name): ?>
                                         <option value="<?php echo $id; ?>"
@@ -105,7 +105,7 @@ foreach ($account_groups as $ag) {
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <span class="form-label d-inline-block fw-bold"><?php echo __('Payable/Reciveable'); ?></span>
-                                <select name="payble_or_reciveable" class="form-control js-example-basic-single" title="Payble Or Reciveable" aria-label="Payble Or Reciveable">
+                                <select name="payble_or_reciveable" class="form-control js-example-basic-single" title="<?= htmlspecialchars(__('Payble Or Reciveable'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Payble Or Reciveable'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <option><?php echo __('Select Any One'); ?></option>
                                     <?php foreach ($gcd_list as $genc_detail_code => $genc_detail_name): ?>
                                         <option value="<?php echo $genc_detail_code; ?>"

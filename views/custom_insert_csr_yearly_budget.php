@@ -111,9 +111,9 @@ if ($rid != '') {
                                     <td><?php echo $i++; ?></td>
                                     <td>
                                         <?php if ($_SESSION['user_image'][$row['created_by']] != ""): ?>
-                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="User Profile">
+                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$row['created_by']]; ?>" class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php else: ?>
-                                            <span alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
+                                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center"><?php echo initials($_SESSION['users'][$row['created_by']]); ?></span>
                                         <?php endif; ?>
                                         <span class='mt-2 ml-2'><?php echo $_SESSION['users'][$row['created_by']]; ?></span>
                                     </td>

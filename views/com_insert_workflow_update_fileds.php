@@ -45,7 +45,7 @@ if($_POST['approval_type'] =='custom_process'){
 	<h5 class="modal-title">
 		<?= __('Update Status') ?>
 	</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 
 <?php if($_POST['type'] == "aprove_updatefields"){

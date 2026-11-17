@@ -159,8 +159,8 @@ function addstatickRows123(){
   processtylelabel(pro);
  function processtylelabel(value){
 if(value == "O" || value == "I"){
-  $(".labelprocess").text("Joining Date");
-}else if(value == "E"){ $(".labelprocess").text("Leaving Date"); }else{ $(".labelprocess").text(""); }
+  $(".labelprocess").text(<?php echo json_encode(__('Joining Date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
+}else if(value == "E"){ $(".labelprocess").text(<?php echo json_encode(__('Leaving Date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>); }else{ $(".labelprocess").text(""); }
 }
 
 function submittasksettings(){
@@ -281,11 +281,11 @@ function selectReviewOnCheck(){
                     <div class="row">
                       <div class="col-lg-6 mb-1 ">
                         <span class="form-label"><?= __('Compliances Name') ?> *</span>
-                        <input aria-label="Task Name" type="text" class="form-control" name="task_name" value="<?php echo $compliancedetail['task_name']; ?>" />
+                        <input aria-label="<?= htmlspecialchars(__('Task Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="task_name" value="<?php echo $compliancedetail['task_name']; ?>" />
                       </div>
                       <div class="col-lg-3 mb-1 ">
                         <span class="form-label"><?= __('Module Groupe') ?></span>
-                        <select aria-label="Module Group" name="module_group_id" class="form-control form-select js-example-basic-single" onchange="selectGroupModul(this.value)">
+                        <select aria-label="<?= htmlspecialchars(__('Module Group'), ENT_QUOTES, 'UTF-8'); ?>" name="module_group_id" class="form-control form-select js-example-basic-single" onchange="selectGroupModul(this.value)">
                           <option value=""><?= __('Select Any One') ?></option>
                           <?php foreach($_SESSION['module_setup_groups'] as $module_setup_groups ) { ?>
                             <option value="<?php echo $module_setup_groups['id'];?>" <?php if($module_setup_groups['id'] == $compliancedetail['module_group_id']){ ?>selected <?php
@@ -295,7 +295,7 @@ function selectReviewOnCheck(){
                       </div>
                       <div class="col-lg-3 mb-1 ">
                         <span class="form-label"><?= __('Module') ?></span>
-                        <select aria-label="Module" name="module_id" class="form-control form-select js-example-basic-single" id="module_id">
+                        <select aria-label="<?= htmlspecialchars(__('Module'), ENT_QUOTES, 'UTF-8'); ?>" name="module_id" class="form-control form-select js-example-basic-single" id="module_id">
                           <option value=""><?= __('Select Any One') ?></option>
                           <?php foreach ($module_setupres as $module_setu) { ?>
                             <option value="<?php echo $module_setu['id'];?>" <?php if($module_setu['id'] == $compliancedetail['module_id']){ ?>selected <?php
@@ -308,7 +308,7 @@ function selectReviewOnCheck(){
                   <div class="col-lg-6">
                     <span class="form-label col-lg-3"><?= __('Category') ?></span>
                     <div class="col-lg-9">
-                      <select aria-label="Process" name="process_id" class="form-control form-select js-example-basic-single" id="select_category" onchange="selectCategroy()">
+                      <select aria-label="<?= htmlspecialchars(__('Process'), ENT_QUOTES, 'UTF-8'); ?>" name="process_id" class="form-control form-select js-example-basic-single" id="select_category" onchange="selectCategroy()">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php
                         foreach ($task_list as $task){
@@ -322,7 +322,7 @@ function selectReviewOnCheck(){
                   <div class="col-lg-6">
                     <span class="form-label col-lg-3"><?= __('Sub Category') ?></span>
                     <div class="col-lg-9">
-                      <select aria-label="Sub Cat" name="sub_cat_id" class="form-control form-select js-example-basic-single" id="select_sub_category">
+                      <select aria-label="<?= htmlspecialchars(__('Sub Cat'), ENT_QUOTES, 'UTF-8'); ?>" name="sub_cat_id" class="form-control form-select js-example-basic-single" id="select_sub_category">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php
                         foreach ($sub_category as $task){
@@ -338,7 +338,7 @@ function selectReviewOnCheck(){
                   <div class="col-lg-6">
                     <span class="form-label col-lg-3"><?= __('Act') ?></span>
                     <div class="col-lg-9">
-                      <select aria-label="Act" name="act_id" class="form-control form-select js-example-basic-single" id="select_act" onchange="selectAct()">
+                      <select aria-label="<?= htmlspecialchars(__('Act'), ENT_QUOTES, 'UTF-8'); ?>" name="act_id" class="form-control form-select js-example-basic-single" id="select_act" onchange="selectAct()">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php
                         foreach ($act_categories as $act_cate){
@@ -352,7 +352,7 @@ function selectReviewOnCheck(){
                   <div class="col-lg-6">
                     <span class="form-label col-lg-3"><?= __('Sub Act') ?></span>
                     <div class="col-lg-9">
-                      <select aria-label="Sub Act" name="sub_act_id" class="form-control form-select js-example-basic-single" id="select_sub_act">
+                      <select aria-label="<?= htmlspecialchars(__('Sub Act'), ENT_QUOTES, 'UTF-8'); ?>" name="sub_act_id" class="form-control form-select js-example-basic-single" id="select_sub_act">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php
                         foreach ($sub_act_categories as $task){
@@ -368,24 +368,24 @@ function selectReviewOnCheck(){
                   <div class="col-lg-6">
                     <div class="checkbox-fade fade-in-primary  mt-4" onclick="selectReviewOnCheck()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                       <label class="form-label">
-                        <input aria-label="Review" type="checkbox" value="Y" name="review" id="reviewoncheck"  <?php echo $compliancedetail['review'] == "Y"?"checked":""; ?>>
+                        <input aria-label="<?= htmlspecialchars(__('Review'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="Y" name="review" id="reviewoncheck"  <?php echo $compliancedetail['review'] == "Y"?"checked":""; ?>>
                         <span class="cr">
                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                         </span>
-                        <span>Review</span>
+                        <span><?= __('Review'); ?></span>
                       </label>
                     </div>
                   </div>
                   <div class="col-lg-6" id="reviewshow" style="<?php echo $compliancedetail['review']=="Y"?'':'display:none'; ?>">
                     <span class="form-label"><?= __('Review Process') ?></span>
                     <div class="col-lg-9">
-                      <select aria-label="Review Process" name="review_process" class="form-control form-select js-example-basic-single">
+                      <select aria-label="<?= htmlspecialchars(__('Review Process'), ENT_QUOTES, 'UTF-8'); ?>" name="review_process" class="form-control form-select js-example-basic-single">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php
                          foreach ($buddy_list as $emptypes) {
                           ?>
                           <option value="<?php echo $emptypes['genc_detail_code'];?>" <?php if($emptypes['genc_detail_code'] == $compliancedetail['review_process']){ ?>selected <?php
-} ?> ><?php echo $emptypes['genc_detail_name'];?></option>
+} ?> ><?php echo __($emptypes['genc_detail_name']);?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -395,24 +395,24 @@ function selectReviewOnCheck(){
                   <div class="col-lg-6">
                     <div class="checkbox-fade fade-in-primary  mt-4" onclick="selectEscalatiOnCheck()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                       <label class="form-label">
-                        <input aria-label="Escalation" type="checkbox" value="Y" name="escalation" id="escalationcheck" <?php echo $compliancedetail['escalation'] == "Y"?"checked":""; ?>>
+                        <input aria-label="<?= htmlspecialchars(__('Escalation'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="Y" name="escalation" id="escalationcheck" <?php echo $compliancedetail['escalation'] == "Y"?"checked":""; ?>>
                         <span class="cr">
                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                         </span>
-                        <span>Escalation Review</span>
+                        <span><?= __('Escalation Review'); ?></span>
                       </label>
                     </div>
                   </div>
                   <div class="col-lg-6" id="escalationreviewshow" style="<?php echo $compliancedetail['escalation']=="Y"?'':'display:none'; ?>">
                     <span class="form-label"><?= __('Escalation Process') ?></span>
                     <div class="col-lg-9">
-                      <select aria-label="Escalation Process" name="escalation_process" class="form-control form-select js-example-basic-single">
+                      <select aria-label="<?= htmlspecialchars(__('Escalation Process'), ENT_QUOTES, 'UTF-8'); ?>" name="escalation_process" class="form-control form-select js-example-basic-single">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php
                          foreach ($buddy_list as $empthyp) {
                           ?>
                           <option value="<?php echo $empthyp['genc_detail_code'];?>" <?php if($empthyp['genc_detail_code'] == $compliancedetail['escalation_process']){ ?>selected <?php
-} ?> ><?php echo $empthyp['genc_detail_name'];?></option>
+} ?> ><?php echo __($empthyp['genc_detail_name']);?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -421,16 +421,16 @@ function selectReviewOnCheck(){
                 <div class="row mt-2">
                     <div class="col-lg-3">
                         <span class="form-label"><?= __('Critical Compliance') ?></span></br>
-                        <input aria-label="Critical Compliance" type="checkbox" class="js-switch" name="critical_compliance" value="Y" <?php echo $compliancedetail['critical_compliance'] == "Y"?"checked":""; ?>/>
+                        <input aria-label="<?= htmlspecialchars(__('Critical Compliance'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-switch" name="critical_compliance" value="Y" <?php echo $compliancedetail['critical_compliance'] == "Y"?"checked":""; ?>/>
                     </div>
                     <div class="col-lg-5">
                     <span class="form-label"><?= __('Description') ?></span>
-                    <textarea aria-label="Description" style="overflow:auto" class="form-control form-control-lg" name="description" > <?php echo $compliancedetail['description']; ?> </textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" style="overflow:auto" class="form-control form-control-lg" name="description" > <?php echo $compliancedetail['description']; ?> </textarea>
                   </div>
                 <div class="col-lg-4">
                     <span class="form-label"><?= __('Email Template') ?></span>
                     <div class="">
-                      <select aria-label="Email Content" name="email_content_id" class="form-select js-example-basic-single" id="email_template">
+                      <select aria-label="<?= htmlspecialchars(__('Email Content'), ENT_QUOTES, 'UTF-8'); ?>" name="email_content_id" class="form-select js-example-basic-single" id="email_template">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach ($emaildata as $email) {  ?>
                           <option value="<?php echo $email['id'];?>" <?php if($compliancedetail['email_content_id'] == $email['id']){ ?>selected <?php
@@ -445,27 +445,27 @@ function selectReviewOnCheck(){
                         <span class="form-label"><?= __('Set recurrence') ?></span>
                         <div class="col-lg-3 row">
                           <span class="form-label col-lg-6 f-w-600"><?= __('Repeat Every') ?></span>
-                          <div class="col-lg-6"><input aria-label="Action No" type="text" class="form-control col-lg-2" name="action_no" value="1" readonly/></div>
+                          <div class="col-lg-6"><input aria-label="<?= htmlspecialchars(__('Action No'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control col-lg-2" name="action_no" value="1" readonly/></div>
                         </div>
                       <div class="col-lg-3">
-                         <select aria-label="Action Frequency" name="action_frequency" class="form-control form-select js-example-basic-single" id="selectscehduleaction" onchange="scehduleaction()">
+                         <select aria-label="<?= htmlspecialchars(__('Action Frequency'), ENT_QUOTES, 'UTF-8'); ?>" name="action_frequency" class="form-control form-select js-example-basic-single" id="selectscehduleaction" onchange="scehduleaction()">
                           <?php foreach ($due_list as $due) {    ?>
                             <option value="<?php echo $due['genc_detail_code'];?>" <?php if($compliancedetail['action_frequency'] == $due['genc_detail_code']){ ?>selected <?php
-} ?> ><?php echo $due['genc_detail_name'];?></option>
+} ?> ><?php echo __($due['genc_detail_name']);?></option>
                           <?php } ?>
                         </select>
                     </div>
                     <div class="col-lg-6" id="monthlyschedule" style="<?php echo $compliancedetail['action_frequency']=="MN"?'':'display:none'; ?>">
                         <div class="row">
                           <span class="form-label col-lg-2 f-w-600"><?= __('On Day') ?></span>
-                          <div class="col-lg-4"><input aria-label="On The Day" type="number" class="form-control col-lg-4" name="on_the_day" value="<?php echo $compliancedetail['on_the_day']; ?>" ></div>
+                          <div class="col-lg-4"><input aria-label="<?= htmlspecialchars(__('On The Day'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control col-lg-4" name="on_the_day" value="<?php echo $compliancedetail['on_the_day']; ?>" ></div>
                         </div>
                     </div>
                     <div class="col-lg-6" id="yearlyschedule" style="<?php echo $compliancedetail['action_frequency']=="YR"?'':'display:none'; ?>">
                         <div class="row">
                             <span class="form-label col-lg-3 f-w-600"><?= __('On Month') ?></span>
                             <div class="col-lg-4">
-                                <select aria-label="On The Month" name="on_the_month"  style="width:150px;" class="form-control form-select js-example-basic-single">
+                                <select aria-label="<?= htmlspecialchars(__('On The Month'), ENT_QUOTES, 'UTF-8'); ?>" name="on_the_month"  style="width:150px;" class="form-control form-select js-example-basic-single">
                                   <?php foreach ($montharray as $mont=>$montname) {    ?>
                                     <option value="<?php echo $mont;?>" <?php if($mont == $compliancedetail['on_the_month']){ ?>selected <?php
 } ?> ><?php echo $montname;?></option>
@@ -473,7 +473,7 @@ function selectReviewOnCheck(){
                                 </select>
                             </div>
                             <div class="col-lg-4">
-                                <input aria-label="On The Day Year" type="text" class="form-control col-lg-4" name="on_the_day_year" value="<?php echo $compliancedetail['on_the_day_year']; ?>" />
+                                <input aria-label="<?= htmlspecialchars(__('On The Day Year'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control col-lg-4" name="on_the_day_year" value="<?php echo $compliancedetail['on_the_day_year']; ?>" />
                             </div>
                         </div>
                     </div>
@@ -481,7 +481,7 @@ function selectReviewOnCheck(){
                         <div class="row">
                             <span class="form-label col-lg-3 f-w-600"><?= __('On Week Day') ?></span>
                             <div class="col-lg-4">
-                                <select aria-label="On The Week" name="on_the_week"  style="width:150px;" class="form-control form-select js-example-basic-single">
+                                <select aria-label="<?= htmlspecialchars(__('On The Week'), ENT_QUOTES, 'UTF-8'); ?>" name="on_the_week"  style="width:150px;" class="form-control form-select js-example-basic-single">
                                   <?php foreach ($weekdays as $weekkey=>$weekvalue) {    ?>
                                     <option value="<?php echo $weekkey;?>" <?php if($weekkey == $compliancedetail['on_the_week']){ ?>selected <?php
 } ?> ><?php echo $weekvalue;?></option>
@@ -524,7 +524,7 @@ function selectReviewOnCheck(){
                     ?>
                     <div class="row sfitemRow" id="static_div_<?php echo $m; ?>" style="margin-top: 10px;">
                       <div class="col-lg-9">
-                        <input aria-label="Input field" type="text" class="form-control"  id="static_value_<?php echo $m; ?>"  name="checklist[]" value="<?php echo $checkvalue['name']; ?>">
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  id="static_value_<?php echo $m; ?>"  name="checklist[]" value="<?php echo $checkvalue['name']; ?>">
                       </div>
                       <div class="col-lg-3 m-t-10">
                         <input type="hidden" value="0" id="static_delete_value_<?php echo $m; ?>" >

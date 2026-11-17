@@ -32,7 +32,7 @@ function submitform(){
     <h5 class="modal-title">
         <?php echo htmlspecialchars(__($compliancetaskhistory['name'] ?? '')); ?>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closebutnfunction()"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" onclick="closebutnfunction()"></button>
 </div>
 <div class="modal-body" >
     <form class="kt-form kt-form--label-right" action="" id="frmsubmit" method="post">
@@ -40,7 +40,7 @@ function submitform(){
             <div class="form-group row">
                 <div class="col-lg-12">
                     <span><?php echo htmlspecialchars(__($check_list[$_POST['aryposition']]['name'] ?? '')); ?></span>
-                    <textarea aria-label="Comment" class="form-control" name="comment" id="comment"></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Comment'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="comment" id="comment"></textarea>
                 </div>
             </div>
         </div>

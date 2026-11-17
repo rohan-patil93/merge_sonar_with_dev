@@ -10,7 +10,7 @@ function addsaldata(val){
         calucationstocat();
     }else{
         $('#'+val+"check").val(0);
-        alert('shankar');
+        alert(<?php echo json_encode(__('shankar'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         $('#'+val).remove();
         addandremove('REMOVE',val);
         calucationstocat();
@@ -372,7 +372,7 @@ function monthlytoyearlycat(val,id){
                                                      <tr  id="<?php echo $value['id']; ?>" >
                                                         <td style="width: 30%">
                                                             <div class="form-group col-lg-11" >
-                                                                <input aria-label="Input field" type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']."(".$value['code'].")"; ?>" name="name[]">
+                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control itemRow f-w-800" readonly value="<?php echo $value['name']."(".$value['code'].")"; ?>" name="name[]">
                                                                 <input type="hidden" class="form-control" readonly id="id_<?php echo $value['id'];?>" value="<?php echo $value['id']; ?>" name="id[]">
                                                             </div>
                                                         </td>
@@ -383,7 +383,7 @@ function monthlytoyearlycat(val,id){
                                                                  if($placevalue[$value['id']]['component_number']==""){ $component_number=$value['calculation_number'];
                                                                 } ?>
                                                                <div class="input-group input-group-button">
-                                                                <input aria-label="Input field" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo$value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" aria-describedby="basic-addon2"/>
+                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" <?php echo $read_only; ?> onblur="monthlytoyearlycat(this.value,<?php echo$value['id'] ?>)" class="form-control text-right width1" value="<?php echo $component_number; ?>" name="calucation[]" aria-describedby="basic-addon2"/>
                                                                 <button class="btn btn-primary w-100PX" type="button"><?php echo $codedetail; ?> </button>
                                                             </div>
                                                         </div>
@@ -417,7 +417,7 @@ function monthlytoyearlycat(val,id){
                                                             <div class="input-group">
                                                                 <input type="hidden" name="<?php echo $value['code']; ?>" value="<?php echo $ddcode; ?>" id="<?php echo $value['code']; ?>" >
 
-                                                                <input aria-label="Input field" type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   $placevalue[$value['id']]['yearly_amount']; ?>" class="form-control text-right width1"placeholder="0.00">
+                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" readonly id="y_amount_<?php echo $value['id'] ?>" name="yearly_amount[]"  value ="<?php echo   $placevalue[$value['id']]['yearly_amount']; ?>" class="form-control text-right width1"placeholder="0.00">
 
                                                                 <button type="button" class="mt-6" onclick="dynamicinformationopup(<?php echo "'".$note."'"; ?>)">&nbsp;<i class="fa fa-info-circle f-14"></i></button>
 

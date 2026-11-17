@@ -170,7 +170,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
             }
 
         });
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#feasibilitySlides").html(loader);
         // Append as JSON string
         formData.append('requirement_json', JSON.stringify(requirementData));
@@ -239,15 +239,15 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
         // Optional: more specific messages based on error type
         if (!customMessage) {
             if (status === 'timeout') {
-                errorMessage = "The request timed out. Please check your internet connection.";
+                errorMessage = <?php echo json_encode(__('The request timed out. Please check your internet connection.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             } else if (status === 'parsererror') {
-                errorMessage = "Failed to parse server response. Please try again.";
+                errorMessage = <?php echo json_encode(__('Failed to parse server response. Please try again.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             } else if (xhr.status >= 500) {
-                errorMessage = "Server error. Please contact support or try again later.";
+                errorMessage = <?php echo json_encode(__('Server error. Please contact support or try again later.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             } else if (status === 'abort') {
-                errorMessage = "Request was aborted.";
+                errorMessage = <?php echo json_encode(__('Request was aborted.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             } else {
-                errorMessage = "An error occurred while processing your request.";
+                errorMessage = <?php echo json_encode(__('An error occurred while processing your request.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             }
         }
 
@@ -267,7 +267,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
     }
 
     function showFeasibilityReport(feasibility_id) {
-        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#dynamic_popupxxl").html(loader);
         jQuery.ajax({
             url: "views/custom_view_feasibility_report.php",
@@ -284,7 +284,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
     }
 
     function withOutSaving(page, rid = '', lead_id = '') {
-        var loader = '<div class="text-center" id="loader-show_3"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show_3"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#feasibilitySlides").html(loader);
 
         $.ajax({
@@ -334,7 +334,7 @@ if ($feasibility_requirement_res['id'] != '' && $feasibility_requirement_res['cu
                     page: 'reOpenFeasibility',
                     feasibility_id: feasibility_id
                 }, function(resp) {
-                    swal(appName, "Feasibility reopened successfully.", "success");
+                    swal(appName, <?php echo json_encode(__('Feasibility reopened successfully.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "success");
                     setTimeout(() => withOutSaving('custom_insert_feasibility_requirements', '', feasibility_id), 1500);
                 });
             }

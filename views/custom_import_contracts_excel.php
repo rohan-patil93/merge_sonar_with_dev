@@ -71,7 +71,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
 								<h6><span class="cc-section-num">1</span><i class="icofont icofont-file-excel" aria-hidden="true"></i> <?php echo __('Download Template'); ?></h6>
 							</div>
 							<div class="alert alert-info mb-3">
-								Download the workbook with <strong>Contracts</strong>, <strong>Locations</strong>, <strong>Assets</strong>, <strong>Milestones</strong>, and live <strong>Ref_*</strong> sheets. Fill data sheets only; copy dropdown values from Ref sheets.
+								<?= __('Download the workbook with'); ?> <strong><?= __('Contracts'); ?></strong>, <strong><?= __('Locations'); ?></strong>, <strong><?= __('Assets'); ?></strong>, <strong><?= __('Milestones'); ?></strong><?= __(', and live'); ?> <strong><?= __('Ref_'); ?>*</strong> <?= __('sheets. Fill data sheets only; copy dropdown values from Ref sheets.'); ?>
 							</div>
 							<button type="button" class="btn btn-primary" id="cex-download-template-btn-2">
 								<i class="fa fa-download" aria-hidden="true"></i> <?php echo __('Download Template'); ?>
@@ -124,8 +124,8 @@ $_SESSION['apply_js']['multiselest'] = 1;
 													<th scope="col">payment_plan</th>
 													<th scope="col">billing_cycle</th>
 													<th scope="col">contract_amount</th>
-													<th scope="col">ok</th>
-													<th scope="col">error</th>
+													<th scope="col"><?= __('ok'); ?></th>
+													<th scope="col"><?= __('error'); ?></th>
 												</tr>
 											</thead>
 											<tbody></tbody>
@@ -141,8 +141,8 @@ $_SESSION['apply_js']['multiselest'] = 1;
 													<th scope="col">location_name</th>
 													<th scope="col">service_start_date</th>
 													<th scope="col">service_end_date</th>
-													<th scope="col">ok</th>
-													<th scope="col">error</th>
+													<th scope="col"><?= __('ok'); ?></th>
+													<th scope="col"><?= __('error'); ?></th>
 												</tr>
 											</thead>
 											<tbody></tbody>
@@ -159,8 +159,8 @@ $_SESSION['apply_js']['multiselest'] = 1;
 													<th scope="col">asset_code</th>
 													<th scope="col">service_frequency</th>
 													<th scope="col">visits_per_interval</th>
-													<th scope="col">ok</th>
-													<th scope="col">error</th>
+													<th scope="col"><?= __('ok'); ?></th>
+													<th scope="col"><?= __('error'); ?></th>
 												</tr>
 											</thead>
 											<tbody></tbody>
@@ -176,8 +176,8 @@ $_SESSION['apply_js']['multiselest'] = 1;
 													<th scope="col">milestone_name</th>
 													<th scope="col">milestone_date</th>
 													<th scope="col">milestone_amount</th>
-													<th scope="col">ok</th>
-													<th scope="col">error</th>
+													<th scope="col"><?= __('ok'); ?></th>
+													<th scope="col"><?= __('error'); ?></th>
 												</tr>
 											</thead>
 											<tbody></tbody>

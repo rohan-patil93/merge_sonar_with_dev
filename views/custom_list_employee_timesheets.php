@@ -265,40 +265,40 @@ console.log(JSON.stringify(id));
                     <div class="card card-custom " id="kt_page_sticky_card">
                         <div class="card-header">
                             <div class="card-title col-lg-12 row">
-                                <h3 class="card-label col-lg-2">Employee List</h3>
+                                <h3 class="card-label col-lg-2"><?= __('Employee List'); ?></h3>
 
 
                                 <div class="col-lg-1">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Filter</button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Filter'); ?></button>
                                 </div>
 
 
 <div class="form-group  col-lg-2">
-    <label for="example-date-input-from" class="col-4 col-form-label">From</label>
+    <label for="example-date-input-from" class="col-4 col-form-label"><?= __('From'); ?></label>
     <div class="col-10">
-        <input aria-label="Fromdatetimesheet" class="form-control" type="date" name="fromdatetimesheet" value="<?php echo isset($_POST['fromdatetimesheet'])?$_POST['fromdatetimesheet']:date("Y-m-d", strtotime('monday this week', strtotime(date('Y-m-d')))); ?>" id="example-date-input-from">
+        <input aria-label="<?= htmlspecialchars(__('Fromdatetimesheet'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="fromdatetimesheet" value="<?php echo isset($_POST['fromdatetimesheet'])?$_POST['fromdatetimesheet']:date("Y-m-d", strtotime('monday this week', strtotime(date('Y-m-d')))); ?>" id="example-date-input-from">
     </div>
 </div>
 <div class="form-group  col-lg-2">
-    <label for="example-date-input-to" class="col-4 col-form-label">To</label>
+    <label for="example-date-input-to" class="col-4 col-form-label"><?= __('To'); ?></label>
     <div class="col-10">
-        <input aria-label="Todatetimesheet" class="form-control" type="date" name="todatetimesheet" value="<?php echo isset($_POST['todatetimesheet'])?$_POST['todatetimesheet']:date("Y-m-d", strtotime('sunday this week', strtotime(date('Y-m-d')))); ?>" id="example-date-input-to">
+        <input aria-label="<?= htmlspecialchars(__('Todatetimesheet'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="todatetimesheet" value="<?php echo isset($_POST['todatetimesheet'])?$_POST['todatetimesheet']:date("Y-m-d", strtotime('sunday this week', strtotime(date('Y-m-d')))); ?>" id="example-date-input-to">
     </div>
 </div>
 <div class="form-group  col-lg-2">
-    <label for="exampleSelectd"  class="col-5 col-form-label">Display By</label>
+    <label for="exampleSelectd"  class="col-5 col-form-label"><?= __('Display By'); ?></label>
     <div class="col-10">
-        <select aria-label="Displayby" class="form-control" name="displayby" id="exampleSelectd">
-            <option value="0" <?PHP echo $_POST['displayby']==0?"selected":""; ?>>All</option>
-            <option value="1" <?PHP echo $_POST['displayby']==1?"selected":""; ?>>Submited</option>
-            <option value='2' <?PHP echo $_POST['displayby']==2?"selected":""; ?>>Not Submited</option>
+        <select aria-label="<?= htmlspecialchars(__('Displayby'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="displayby" id="exampleSelectd">
+            <option value="0" <?PHP echo $_POST['displayby']==0?"selected":""; ?>><?= __('All'); ?></option>
+            <option value="1" <?PHP echo $_POST['displayby']==1?"selected":""; ?>><?= __('Submited'); ?></option>
+            <option value='2' <?PHP echo $_POST['displayby']==2?"selected":""; ?>><?= __('Not Submited'); ?></option>
         </select>
     </div>
 </div>
 <div class="col-lg-2">
     <input type="hidden" id="filterby" name="filterby">
-    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
-    <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="sendallnotify()">Send Notify</button>
+    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
+    <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" onclick="sendallnotify()"><?= __('Send Notify'); ?></button>
 </div>
 </div>
 </div>
@@ -313,8 +313,8 @@ console.log(JSON.stringify(id));
         <div class="card card-custom col-lg-12">
             <div class="row" style="display: none">
                 <div class="form-group col-lg-3 mt-10 mb-10"  id="bulkcategory" style="display: none">
-                    <span>Transfer Category</span>
-                    <select aria-label="Bulkchangecategory" onchange="showbulkchangefilter(this.value);" id="bulkchangecategory" name="bulkchangecategory" class="form-control" >
+                    <span><?= __('Transfer Category'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Bulkchangecategory'), ENT_QUOTES, 'UTF-8'); ?>" onchange="showbulkchangefilter(this.value);" id="bulkchangecategory" name="bulkchangecategory" class="form-control" >
                         <?php
                         foreach ($bulkchangecategory as $filter) {
                             ?>
@@ -322,7 +322,7 @@ console.log(JSON.stringify(id));
 } ?> value="<?php echo $filter['application_tablename']."|".$filter['application_table_fieldname'].'|'.$filter['id'].'|'.$filter['update_employees_fieldname'].'|'.$filter['insert_history_tablename'];?>"><?php echo $filter['category_name'];?></option>
                         <?php } ?>
                     </select>
-                    <span class="form-text text-muted">Select Bulk Transfer Category</span>
+                    <span class="form-text text-muted"><?= __('Select Bulk Transfer Category'); ?></span>
 
                 </div>
 
@@ -330,16 +330,16 @@ console.log(JSON.stringify(id));
 
                 </div>
                 <div class="col-lg-3 mt-10 mb-10" id="effectdate" style="display: none">
-                    <span>Effective From</span>
+                    <span><?= __('Effective From'); ?></span>
                     <div class="input-group date">
-                        <input aria-label="Effective Date" type="text" class="form-control"  id="kt_datepicker_4_1"  name="effective_date" />
+                        <input aria-label="<?= htmlspecialchars(__('Effective Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  id="kt_datepicker_4_1"  name="effective_date" />
                         <div class="input-group-append">
                             <span class="input-group-text">
                                 <i class="la la-calendar-check-o"></i>
                             </span>
                         </div>
                     </div>
-                    <span class="form-text text-muted">Enter Effective From</span>
+                    <span class="form-text text-muted"><?= __('Enter Effective From'); ?></span>
 
                 </div>
                 <div class="col-lg-2 mt-10 mb-10">
@@ -350,7 +350,7 @@ console.log(JSON.stringify(id));
                     <input type="hidden" id="bulkmove_empids">
                     <input type="hidden" id="bulkchange_categoryid">
                     <input type="hidden" id="bulkmove_toid">
-                    <button id="previewbtn"  style="display: none" class="btn btn-primary btn-shadow-hover font-weight-bold mt-8" onclick="bulkconfirmpopup()">Preview</button>
+                    <button id="previewbtn"  style="display: none" class="btn btn-primary btn-shadow-hover font-weight-bold mt-8" onclick="bulkconfirmpopup()"><?= __('Preview'); ?></button>
 
                 </div>
 
@@ -367,18 +367,18 @@ console.log(JSON.stringify(id));
                             <th scope="col" class="py-0 min-w-50px text-center">
                                 <div class="checkbox-inline">
                             <label class="checkbox checkbox-success">
-                            <input aria-label="Ect All" type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()" onkeydown="">
+                            <input aria-label="<?= htmlspecialchars(__('Ect All'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()" onkeydown="">
                             <span></span></label>
                             <input type="hidden" name="" id="val_select_all" value="0">
                         </div>
                             </th>
-                            <th scope="col">NAME </th>
-                            <th scope="col">Department  </th>
-                            <th scope="col">Designation  </th>
-                        <th scope="col">Location Id   </th>
-                            <th scope="col">Job Title  </th>
-                            <th scope="col">CoastCenter </th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('NAME'); ?> </th>
+                            <th scope="col"><?= __('Department'); ?>  </th>
+                            <th scope="col"><?= __('Designation'); ?>  </th>
+                        <th scope="col"><?= __('Location Id'); ?>   </th>
+                            <th scope="col"><?= __('Job Title'); ?>  </th>
+                            <th scope="col"><?= __('CoastCenter'); ?> </th>
+                            <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -396,7 +396,7 @@ console.log(JSON.stringify(id));
                                     <td class="text-center pr-0">
                                         <div class="checkbox-inline">
                                             <label class="checkbox checkbox-success">
-                                            <input aria-label="Checkbox" type="checkbox"  class="itemRow checkbox1" name="checkbox" value="<?php echo $empvalue['id']; ?>">
+                                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"  class="itemRow checkbox1" name="checkbox" value="<?php echo $empvalue['id']; ?>">
                                             <span></span></label>
                                         </div>
                                     </td>
@@ -406,7 +406,7 @@ console.log(JSON.stringify(id));
                                             width: 50px;
                                             height: auto;
                                             border-radius: 50%;
-                                            " alt="Attachment Preview">
+                                            " alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
                                             <div class="symbol symbol-40 symbol-circle symbol-primary" data-toggle="tooltip" title="" data-original-title="<?php echo $empvalue['display_name']; ?>">
                                                 <span class="symbol-label font-size-h5 font-weight-boldest"><?php echo initials($empvalue['display_name']); ?></span>
@@ -430,7 +430,7 @@ console.log(JSON.stringify(id));
     <td class="text-center pr-0">
         <div class="checkbox-inline">
         <label class="checkbox checkbox-success">
-        <input aria-label="Checkbox" type="checkbox" class="itemRow checkbox1" name="checkbox" value="<?php echo $empvalue['id']; ?>">
+        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow checkbox1" name="checkbox" value="<?php echo $empvalue['id']; ?>">
         <span></span></label>
         </div>
     </td>
@@ -440,7 +440,7 @@ console.log(JSON.stringify(id));
                                             width: 50px;
                                             height: auto;
                                             border-radius: 50%;
-                                            " alt="Attachment Preview">
+                                            " alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php } else { ?>
                                             <div class="symbol symbol-40 symbol-circle symbol-primary" data-toggle="tooltip" title="" data-original-title="<?php echo $empvalue['display_name']; ?>">
                                                 <span class="symbol-label font-size-h5 font-weight-boldest"><?php echo initials($empvalue['display_name']); ?></span>
@@ -458,7 +458,7 @@ console.log(JSON.stringify(id));
 <td class="pr-0">
 <?php  if(!isset($projecttimesheets[$empvalue['id']])){ ?>
 
-    <button class="btn btn-success font-size-sm float-right" onclick="notifyuser(<?php echo $empvalue['id']; ?>)">Notify</button>
+    <button class="btn btn-success font-size-sm float-right" onclick="notifyuser(<?php echo $empvalue['id']; ?>)"><?= __('Notify'); ?></button>
 
 <?php  }  ?>
 </td>

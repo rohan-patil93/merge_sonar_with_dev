@@ -39,24 +39,24 @@ if(in_array(ASSET_USER_ROLE,(array)$_SESSION['role_ids'])){ // employee screen
                 <th scope="col">
                     <div class="checkbox-fade fade-in-primary">
                         <label class="checkbox checkbox-success">
-                            <input aria-label="Ectall Checks" type="checkbox" id="selectall_checks" class="itemRow" onclick="selectallcheck()" onkeydown="">
+                            <input aria-label="<?= htmlspecialchars(__('Ectall Checks'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="selectall_checks" class="itemRow" onclick="selectallcheck()" onkeydown="">
                             <span class="cr">
                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                             </span>
-                        </label> All
+                        </label> <?= __('All'); ?>
                     </div>
                 </th>
-                <th scope="col">Asset Code</th>
-                <th scope="col">Asset Name</th>
-                <th scope="col">Categroty</th>
-                <th scope="col">Location </th>
-                <th scope="col">Asset Satus</th>
-                <th scope="col">Condition</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Remarks</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('Asset Code'); ?></th>
+                <th scope="col"><?= __('Asset Name'); ?></th>
+                <th scope="col"><?= __('Categroty'); ?></th>
+                <th scope="col"><?= __('Location'); ?> </th>
+                <th scope="col"><?= __('Asset Satus'); ?></th>
+                <th scope="col"><?= __('Condition'); ?></th>
+                <th scope="col"><?= __('End Date'); ?></th>
+                <th scope="col"><?= __('Remarks'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
 
-                <th scope="col">Action</th>
+                <th scope="col"><?= __('Action'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -66,7 +66,7 @@ if(in_array(ASSET_USER_ROLE,(array)$_SESSION['role_ids'])){ // employee screen
                         <td class="text-center">
                             <div class="checkbox-fade fade-in-primary" >
                                 <label class="checkbox checkbox-success">
-                                    <input aria-label="Checkbox" type="checkbox" class="itemRow checkboxassets" name="checkassets[<?php echo $list_asset['id']; ?>]" value="<?php echo $list_asset['id']; ?>" onchange="selectcheck()">
+                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow checkboxassets" name="checkassets[<?php echo $list_asset['id']; ?>]" value="<?php echo $list_asset['id']; ?>" onchange="selectcheck()">
                                     <span class="cr">
                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
@@ -85,9 +85,9 @@ if(in_array(ASSET_USER_ROLE,(array)$_SESSION['role_ids'])){ // employee screen
                     </td>
                         <td>
                             <?php if($list_asset['allocation_type']==0){ ?>
-                            <button class="btn btn-primary" type="button"  onclick="assetaccept('<?php echo $list_asset['id']; ?>','<?php echo $list_asset['emp_asset_id']; ?>')">View</button>
+                            <button class="btn btn-primary" type="button"  onclick="assetaccept('<?php echo $list_asset['id']; ?>','<?php echo $list_asset['emp_asset_id']; ?>')"><?= __('View'); ?></button>
                         <?php }else{  ?>
-                            <button class="btn btn-success" type="button"  onclick="extraassetattributesreqquest('<?php echo $list_asset['id']; ?>','<?php echo $list_asset['emp_asset_id']; ?>','<?php echo $list_asset['category_id']; ?>','<?php echo $list_asset['emp_attribute']; ?>')">Extra</button>
+                            <button class="btn btn-success" type="button"  onclick="extraassetattributesreqquest('<?php echo $list_asset['id']; ?>','<?php echo $list_asset['emp_asset_id']; ?>','<?php echo $list_asset['category_id']; ?>','<?php echo $list_asset['emp_attribute']; ?>')"><?= __('Extra'); ?></button>
                         <?php } ?>
                         </td>
                 </tr>
@@ -111,24 +111,24 @@ foreach($details['employees'] as $employee){
                 <th scope="col">
                     <div class="checkbox-fade fade-in-primary">
                         <label class="checkbox checkbox-success">
-                            <input aria-label="Ectall Checks" type="checkbox" id="selectall_checks_2" class="itemRow" onclick="selectallcheck()" onkeydown="">
+                            <input aria-label="<?= htmlspecialchars(__('Ectall Checks'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="selectall_checks_2" class="itemRow" onclick="selectallcheck()" onkeydown="">
                             <span class="cr">
                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                             </span>
-                        </label> All
+                        </label> <?= __('All'); ?>
                     </div>
                 </th>
-                <th scope="col">Asset Code</th>
-                <th scope="col">Asset Name</th>
-                <th scope="col">Categroty</th>
-                <th scope="col">Location </th>
-                <th scope="col">Allocated To</th>
-                <th scope="col">Asset Satus</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Model</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">Condition</th>
-                <th scope="col">Status</th>
+                <th scope="col"><?= __('Asset Code'); ?></th>
+                <th scope="col"><?= __('Asset Name'); ?></th>
+                <th scope="col"><?= __('Categroty'); ?></th>
+                <th scope="col"><?= __('Location'); ?> </th>
+                <th scope="col"><?= __('Allocated To'); ?></th>
+                <th scope="col"><?= __('Asset Satus'); ?></th>
+                <th scope="col"><?= __('Brand'); ?></th>
+                <th scope="col"><?= __('Model'); ?></th>
+                <th scope="col"><?= __('Serial Number'); ?></th>
+                <th scope="col"><?= __('Condition'); ?></th>
+                <th scope="col"><?= __('Status'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -140,7 +140,7 @@ foreach($details['employees'] as $employee){
                         <td class="text-center">
                             <div class="checkbox-fade fade-in-primary" >
                                 <label class="checkbox checkbox-success">
-                                    <input aria-label="Checkbox" type="checkbox" class="itemRow checkboxassets" name="checkassets[<?php echo $list_asset['id']; ?>]" value="<?php echo $list_asset['id']; ?>" onchange="selectcheck()">
+                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow checkboxassets" name="checkassets[<?php echo $list_asset['id']; ?>]" value="<?php echo $list_asset['id']; ?>" onchange="selectcheck()">
                                     <span class="cr">
                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>
@@ -170,7 +170,7 @@ foreach($details['employees'] as $employee){
 <?php } else { ?>
 
 <div class="card-px text-center ">
-    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Assets</p>
+    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Assets'); ?></p>
     <div class="text-center px-4">
         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
     </div>

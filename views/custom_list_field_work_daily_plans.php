@@ -25,19 +25,19 @@ $application_users = $result['application_users'];
          JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
      ) ?>'>
     <div class="alert alert-light alert-dismissible">
-        <strong>This function is used for maintaining <strong>Field Work</strong>. * represents mandatory fields.</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong>This function is used for maintaining <strong><?= __('Field Work'); ?></strong><?= __('. * represents mandatory fields.'); ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
     <div class="card">
         <div class="card-header">
-            <h5>Field Work Daily Plans</h5>
+            <h5><?= __('Field Work Daily Plans'); ?></h5>
             <div class="card-header-right">
                 <a href="index.php?option=COM_INSERT_FIELD_WORK_DAILY_PLANS" class="btn btn-success mb-2 desktop-view">
                   <i class="icofont icofont-plus icon-white "></i>
-              User Work Daily Plans            </a>
+              <?= __('User Work Daily Plans'); ?>            </a>
               <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -50,9 +50,9 @@ $application_users = $result['application_users'];
                  if($admin_type != '2'){ ?>
 
                     <div class="form-group col-lg-6">
-                        <span>Manager<span class="text-danger">*</span></span>
-                        <select aria-label="Manager []" class="form-select js-example-basic-single" id="manager_id" name="manager_id[]" multiple="multiple" >
-                            <option value="0"> Select Any one </option>
+                        <span><?= __('Manager'); ?><span class="text-danger">*</span></span>
+                        <select aria-label="<?= htmlspecialchars(__('Manager'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single" id="manager_id" name="manager_id[]" multiple="multiple" >
+                            <option value="0"> <?= __('Select Any one'); ?> </option>
                             <?php foreach ($application_users as $row): ?>
                                 <option value="<?php echo $row['id']; ?>">
                                     <?php echo $row['display_name']; ?>
@@ -64,9 +64,9 @@ $application_users = $result['application_users'];
                 <?php } ?>
 
                 <div class="form-group col-lg-6">
-                    <span>User <span class="text-danger">*</span></span>
-                    <select aria-label="User []" class="form-select js-example-basic-single" id="user_id" name="user_id[]" multiple="multiple">
-                        <option value="0"> Select Any one </option>
+                    <span><?= __('User'); ?> <span class="text-danger">*</span></span>
+                    <select aria-label="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-select js-example-basic-single" id="user_id" name="user_id[]" multiple="multiple">
+                        <option value="0"> <?= __('Select Any one'); ?> </option>
 
                     </select>
                     <div class="d-none text-danger" id="user_id_err"></div>
@@ -76,18 +76,18 @@ $application_users = $result['application_users'];
                 <?php  } ?>
 
                 <div class="col-lg-4 col-xs-6 form-group">
-                    <span>From Date <span class="text-danger">*</span></span>
-                    <input aria-label="From Date" class="form-control" type="date" name="from_date" id="from_date" value="" >
+                    <span><?= __('From Date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="from_date" id="from_date" value="" >
                     <div class="d-none text-danger" id="from_date_err"></div>
                 </div>
                 <div class="col-lg-4 col-xs-4 form-group">
-                    <span>To Date <span class="text-danger">*</span></span>
-                    <input aria-label="To Date" class="form-control" type="date" name="to_date" id="to_date" value="">
+                    <span><?= __('To Date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="to_date" id="to_date" value="">
                     <div class="d-none text-danger" id="to_date_err"></div>
                 </div>
                 <div class="col-lg-4 col-xs-6 form-group ">
                     <span> &nbsp;</span>
-                    <button type="button" class="btn btn-primary form-control " id="getDataButton">Search</button>
+                    <button type="button" class="btn btn-primary form-control " id="getDataButton"><?= __('Search'); ?></button>
                 </div>
             </div>
 
@@ -98,14 +98,14 @@ $application_users = $result['application_users'];
                     <table class="table table-striped table-bordered nowrap dataTable" id="fiedWorkTable">
                         <thead>
                             <tr>
-                                <th scope="col">Sl No.</th>
-                                <th scope="col">User</th>
-                                <th scope="col">Location Name</th>
-                                <th scope="col">Latitude </th>
-                                <th scope="col">Longitude </th>
-                                <th scope="col">From Date</th>
-                                <th scope="col">To Date</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Sl No.'); ?></th>
+                                <th scope="col"><?= __('User'); ?></th>
+                                <th scope="col"><?= __('Location Name'); ?></th>
+                                <th scope="col"><?= __('Latitude'); ?> </th>
+                                <th scope="col"><?= __('Longitude'); ?> </th>
+                                <th scope="col"><?= __('From Date'); ?></th>
+                                <th scope="col"><?= __('To Date'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>

@@ -18,7 +18,7 @@ if($api_data && $api_data['status'] == 'success'){
 <div class="page-body">
     <div class="card issue-list-card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5>Sub Contract Work Order Issues</h5>
+            <h5><?= __('Sub Contract Work Order Issues'); ?></h5>
             <span class="badge badge-primary issue-count-badge"><?php echo count((array)$issues_list); ?></span>
         </div>
         <div class="card-body">
@@ -32,17 +32,17 @@ if($api_data && $api_data['status'] == 'success'){
                 <table class="table table-hover table-bordered issue-list-table nowrap">
                     <thead>
                         <tr>
-                            <th scope="col">Sl No.</th>
-                            <th scope="col">Issue No</th>
-                            <th scope="col">Issue Date</th>
-                            <th scope="col">Ref No</th>
-                            <th scope="col">Vendor</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Request Warehouse</th>
-                            <th scope="col">Party Warehouse</th>
-                            <th scope="col">Total Amount</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('Sl No.'); ?></th>
+                            <th scope="col"><?= __('Issue No'); ?></th>
+                            <th scope="col"><?= __('Issue Date'); ?></th>
+                            <th scope="col"><?= __('Ref No'); ?></th>
+                            <th scope="col"><?= __('Vendor'); ?></th>
+                            <th scope="col"><?= __('Product'); ?></th>
+                            <th scope="col"><?= __('Request Warehouse'); ?></th>
+                            <th scope="col"><?= __('Party Warehouse'); ?></th>
+                            <th scope="col"><?= __('Total Amount'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,7 +74,7 @@ if($api_data && $api_data['status'] == 'success'){
                                 <td class="text-right"><?php echo number_format($row['work_order_total_amount'] ?? 0, 2); ?></td>
                                 <td><span class="badge <?php echo $status_class; ?>"><?php echo $status_label; ?></span></td>
                                 <td>
-                                    <a class="issue-action-link" target="_blank" href="index.php?option=COM_VIEW_SUB_CONTRACT_WORK_ORDER_ISSUES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="View Details">
+                                    <a class="issue-action-link" target="_blank" href="index.php?option=COM_VIEW_SUB_CONTRACT_WORK_ORDER_ISSUES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <i class="fa fa-eye p-2 b-radius-5"></i>
                                     </a>
                                 </td>
@@ -84,8 +84,8 @@ if($api_data && $api_data['status'] == 'success'){
                             <tr>
                                 <td colspan="11">
                                     <div class="issue-empty-state text-center">
-                                        <p class="text-muted mb-2">No issue records found</p>
-                                        <img src="assets/images/work.png" alt="No records" class="issue-empty-image">
+                                        <p class="text-muted mb-2"><?= __('No issue records found'); ?></p>
+                                        <img src="assets/images/work.png" alt="<?= htmlspecialchars(__('No records'), ENT_QUOTES, 'UTF-8'); ?>" class="issue-empty-image">
                                     </div>
                                 </td>
                             </tr>

@@ -59,7 +59,7 @@ foreach($kralist as $kralist){ ?>
                                         <option value=""><?php echo __('Select Any One'); ?></option>
                                         <?php foreach ($frequencyllist as  $frequency) { ?>
                                             <option <?php if($res['assessment_frequency'] == $frequency['genc_detail_code']){ ?> selected <?php
-} ?> value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo $frequency['genc_detail_name']; ?></option>
+} ?> value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo __($frequency['genc_detail_name']); ?></option>
                                         <?php } ?>
                                     </select>
                                 </td>

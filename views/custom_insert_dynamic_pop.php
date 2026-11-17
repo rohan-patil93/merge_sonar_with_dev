@@ -39,7 +39,7 @@
 
   <div class="modal-header">
       <h5 class="modal-title"><?php echo htmlspecialchars(__($_POST['title'] ?? '')); ?> </h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <button type="button" class="close" data-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
           <i aria-hidden="true" class="ki ki-close"></i>
       </button>
   </div>
@@ -50,7 +50,7 @@
               <div class="form-group row">
                   <div class="col-lg-12">
                       <span><?php echo htmlspecialchars(__($_POST['field_title'] ?? '')); ?> </span>
-                      <textarea aria-label="Filed" class="form-control" name="filed" id="filed"></textarea>
+                      <textarea aria-label="<?= htmlspecialchars(__('Filed'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="filed" id="filed"></textarea>
                   </div>
 
               </div>

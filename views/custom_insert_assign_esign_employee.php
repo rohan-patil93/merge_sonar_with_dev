@@ -50,8 +50,8 @@ $empcos = json_decode($empres,1);
 
 ?>
 <div class="modal-header">
-    <h5 class="modal-title">Assign Employees</h5>
-    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+    <h5 class="modal-title"><?= __('Assign Employees'); ?></h5>
+    <button type="button" class="close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
         <i aria-hidden="true" class="ki ki-close"></i>X
     </button>
 </div>
@@ -60,9 +60,9 @@ $empcos = json_decode($empres,1);
 
     <div class="row kt-margin-b-20 mb-2" >
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Cost Center"; ?>:</span>
-            <select aria-label="Cost Center Pp" class="form-select js-example-basic-single" id="cost_center_pp" name="">
-                <option value=""> All  </option>
+            <span><?php echo __("Cost Center"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Cost Center Pp'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="cost_center_pp" name="">
+                <option value=""> <?= __('All'); ?>  </option>
                 <?php foreach($empcos as $cos){ $emp_cos[$cos['id']]= $cos['cost_center_name']; ?>
                 <option   <?php if($ress['cost_center_pp'] == $cos['id'] ){ ?> selected <?php
 } ?> value="<?php echo $cos['id']; ?>"><?php echo $cos['cost_center_name']; ?></option>
@@ -70,9 +70,9 @@ $empcos = json_decode($empres,1);
             </select>
         </div>
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Vendors"; ?>:</span>
-            <select aria-label="Vendor" class="form-select js-example-basic-single" id="vendor" name="">
-                <option value=""> All  </option>
+            <span><?php echo __("Vendors"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="vendor" name="">
+                <option value=""> <?= __('All'); ?>  </option>
                 <?php foreach($empven as $ven){ $emp_ven[$ven['id']]= $ven['display_name']; ?>
                 <option   <?php if($ress['vendor'] == $ven['id'] ){ ?> selected <?php
 } ?> value="<?php echo $ven['id']; ?>"><?php echo $ven['display_name']; ?></option>
@@ -80,9 +80,9 @@ $empcos = json_decode($empres,1);
             </select>
         </div>
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Department"; ?>:</span>
-            <select aria-label="Vendor" class="form-select js-example-basic-single" id="department" name="vendor_id">
-                <option value=""> All  </option>
+            <span><?php echo __("Department"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="department" name="vendor_id">
+                <option value=""> <?= __('All'); ?>  </option>
                 <?php foreach($empdep as $dep){ $emp_dep[$dep['id']]= $dep['department_name'];  ?>
                 <option  <?php if($ress['department'] == $dep['id'] ){ ?> selected <?php
 } ?> value="<?php echo $dep['id']; ?>"><?php echo $dep['department_name']; ?></option>
@@ -90,9 +90,9 @@ $empcos = json_decode($empres,1);
             </select>
         </div>
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-            <span><?php echo "Designation"; ?>:</span>
-            <select aria-label="Category" class="form-select js-example-basic-single" id="designation" name="category_id">
-                <option value=""> All  </option>
+            <span><?php echo __("Designation"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="designation" name="category_id">
+                <option value=""> <?= __('All'); ?>  </option>
                 <?php foreach($empdes as $des){  $emp_des[$des['id']]= $des['designation_name'];  ?>
                 <option  <?php if($ress['designation'] == $des['id'] ){ ?> selected <?php
 } ?> value="<?php echo $des['id']; ?>"><?php echo $des['designation_name']; ?></option>
@@ -100,9 +100,9 @@ $empcos = json_decode($empres,1);
             </select>
         </div>
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile mt-2">
-            <span><?php echo "Location"; ?>:</span>
-            <select aria-label="Location" class="form-select js-example-basic-single" id="location" name="">
-                <option value=""> All  </option>
+            <span><?php echo __("Location"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="location" name="">
+                <option value=""> <?= __('All'); ?>  </option>
                 <?php foreach($emploc as $loc){ $emp_loc[$loc['id']]= $loc['location_name']; ?>
                 <option   <?php if($ress['location'] == $loc['id'] ){ ?> selected <?php
 } ?> value="<?php echo $loc['id']; ?>"><?php echo $loc['location_name']; ?></option>
@@ -112,9 +112,9 @@ $empcos = json_decode($empres,1);
 
 
         <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile mt-2">
-            <span><?php echo "Assign Emloyees"; ?>:</span>
-            <select aria-label="Check List" class="form-select js-example-basic-single" id="check_list" name="">
-                <option value=""> All  </option>
+            <span><?php echo __("Assign Emloyees"); ?>:</span>
+            <select aria-label="<?= htmlspecialchars(__('Check List'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="check_list" name="">
+                <option value=""> <?= __('All'); ?>  </option>
                 <?php $empass= array('1'=>'Assign Employees','2'=>"Unassign Employees");
                 foreach($empass as $empass_id=>$ass){ ?>
                 <option   <?php if($ress['check_list'] == $empass_id){ ?> selected <?php
@@ -168,7 +168,7 @@ $empcos = json_decode($empres,1);
                             <tr>
                                 <td>
                                     <label class="kt-checkbox">
-                                    <input aria-label="Input field" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>)" class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo "checked";
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" onclick="toinsertandpdateesignemployeeonlyone(<?php echo $row['id']; ?>)" class="itemRow" name="checkbox1" <?php if(in_array($row['id'],(array)$emp_sign)){ echo "checked";
 }?> id="checkbox_<?php echo $row['id']; ?>" type="checkbox" value="<?php echo $row['id']; ?>" onkeydown="">  <span> </span> </label>
                                 </td>
                                 <td><?php echo $i; ?></td>
@@ -206,11 +206,11 @@ $empcos = json_decode($empres,1);
         var mtid =document.getElementById('eba');
         if(id == "" || len == "" || mtid =="" ){
             console.log("work");
-            alert("check");
+            alert(<?php echo json_encode(__('check'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Please contact your Admin for '
+                title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                text: <?php echo json_encode(__('Please contact your Admin for').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
             });
         }else{
         jQuery.ajax({
@@ -232,7 +232,7 @@ $empcos = json_decode($empres,1);
     }
 
     function submitrom(){
-        alert("Hai");
+        alert(<?php echo json_encode(__('Hai'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         var len=0;
         var favorite = [];
         $.each($("input[name='checkbox1']:checked"), function(){

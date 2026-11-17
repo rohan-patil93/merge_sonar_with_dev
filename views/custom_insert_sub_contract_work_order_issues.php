@@ -281,11 +281,11 @@ if(isset($_POST['search_issue_materials']) && isset($_POST['subcontract_work_ord
                                     $pending   = (float)($item['pending_qty'] ?? 0);
                                     $item_qty  = (float)($item['item_quantity'] ?? 0);
                                     if($pending == $item_qty) {
-                                        echo '<span class="badge bg-warning">Pending</span>';
+                                        echo '<span class="badge bg-warning">'.__('Pending').'</span>';
                                     } elseif($pending > 0 && $pending < $item_qty) {
-                                        echo '<span class="badge bg-info">Partially Issued</span>';
+                                        echo '<span class="badge bg-info">'.__('Partially Issued').'</span>';
                                     } else {
-                                        echo '<span class="badge bg-success">Issued</span>';
+                                        echo '<span class="badge bg-success">'.__('Issued').'</span>';
                                     }
                                 ?>
                             </td>

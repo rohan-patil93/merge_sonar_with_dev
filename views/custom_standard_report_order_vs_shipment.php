@@ -20,14 +20,14 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5>Order vs Shipment (Delivery) Report</h5>
+        <h5><?= __('Order vs Shipment (Delivery) Report'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdown-2">
-                    <a class="dropdown-item" href="custom_view_download.php?page=OrdervsShipment&format=csv" target="_blank">CSV</a>
-                    <a class="dropdown-item" href="custom_view_download.php?page=OrdervsShipment&format=excel" target="_blank">Excel</a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=OrdervsShipment&format=csv" target="_blank"><?= __('CSV'); ?></a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=OrdervsShipment&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -44,8 +44,8 @@ $_SESSION['download_data'] = [];
             <table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mp">
                 <thead>
                     <tr>
-                        <th scope="col">Order Info</th>
-                        <th scope="col">Delivery Orders</th>
+                        <th scope="col"><?= __('Order Info'); ?></th>
+                        <th scope="col"><?= __('Delivery Orders'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,30 +57,30 @@ $_SESSION['download_data'] = [];
                             <td>
                                 <table role="presentation">
                                     <tr>
-                                        <td class="p-1">Order No.</td>
+                                        <td class="p-1"><?= __('Order No.'); ?></td>
                                         <td class="p-1 text-primary cursor-pointer"
                                             onclick="openBucketModal('<?= htmlspecialchars($tableslist[0]['sales_id']) ?>>','SO','<?= $tableslist[0]['so_no']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                             <?= $tableslist[0]['so_no']; ?>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="p-1">Date</td>
+                                        <td class="p-1"><?= __('Date'); ?></td>
                                         <td class="p-1"><?= fromDate($tableslist[0]['so_date']); ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="p-1">Customer</td>
+                                        <td class="p-1"><?= __('Customer'); ?></td>
                                         <td class="p-1"><?= $tableslist[0]['party_name']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="p-1">Order Qty</td>
+                                        <td class="p-1"><?= __('Order Qty'); ?></td>
                                         <td class="p-1" class="text-right"><?= customeummarmonyformate($tableslist[0]['so_qty']); ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="p-1">Order Amount</td>
+                                        <td class="p-1"><?= __('Order Amount'); ?></td>
                                         <td class="p-1" class="text-right"><?= customeummarmonyformate($tableslist[0]['so_amount']); ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="p-1">Requested By</td>
+                                        <td class="p-1"><?= __('Requested By'); ?></td>
                                         <td class="p-1"><?= $_SESSION['users'][$tableslist[0]['so_requested_by']] ?? '-'; ?></td>
                                     </tr>
                                 </table>
@@ -89,13 +89,13 @@ $_SESSION['download_data'] = [];
                                 <table style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="p-1">DO No</th>
-                                            <th scope="col" class="p-1">Date</th>
-                                            <th scope="col" class="p-1">Party</th>
-                                            <th scope="col" class="text-right">DO Qty</th>
-                                            <th scope="col" class="text-right">DO Amount</th>
-                                            <th scope="col" class="p-1">Requested By</th>
-                                            <th scope="col" class="text-right">Qty Variance</th>
+                                            <th scope="col" class="p-1"><?= __('DO No'); ?></th>
+                                            <th scope="col" class="p-1"><?= __('Date'); ?></th>
+                                            <th scope="col" class="p-1"><?= __('Party'); ?></th>
+                                            <th scope="col" class="text-right"><?= __('DO Qty'); ?></th>
+                                            <th scope="col" class="text-right"><?= __('DO Amount'); ?></th>
+                                            <th scope="col" class="p-1"><?= __('Requested By'); ?></th>
+                                            <th scope="col" class="text-right"><?= __('Qty Variance'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -143,7 +143,7 @@ $_SESSION['download_data'] = [];
             </table>
         <?php } else { ?>
             <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
@@ -165,9 +165,9 @@ $_SESSION['download_data'] = [];
             '&transaction_no=' + encodeURIComponent(transaction_no);
 
         var $content = $('#bucketModal .modal-content');
-        $content.html('<div class="modal-header py-2"><h6 class="modal-title">Loading…</h6>' +
+        $content.html('<div class="modal-header py-2"><h6 class="modal-title"><?= htmlspecialchars(__('Loading…'), ENT_QUOTES, 'UTF-8'); ?></h6>' +
             '<button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>' +
-            '<div class="modal-body py-4 text-center text-muted">Fetching records…</div>');
+            '<div class="modal-body py-4 text-center text-muted"><?= htmlspecialchars(__('Fetching records…'), ENT_QUOTES, 'UTF-8'); ?></div>');
         $content.load(url, function() {
             var modal = new bootstrap.Modal(document.getElementById('bucketModal'));
             modal.show();

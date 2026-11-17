@@ -44,11 +44,11 @@
 			<div class="col-lg-12">
 				<div class="card card-custom card-sticky" id="kt_page_sticky_card">
 					<div class="card-header mb-3">
-						<h5>Assets Request</h5>
+						<h5><?= __('Assets Request'); ?></h5>
 						<div class="card-header-right">
 							<a href="javascript:void(0)" onclick="history.go(-1)" role="button" class="btn waves-effect waves-light">
 								<i class="icofont icofont-reply"></i>
-								Back
+								<?= __('Back'); ?>
 							</a>
 						</div>
 					</div>
@@ -58,16 +58,16 @@
 							<table id="basic-btn" class="table table-striped table-bordered nowrap">
 								<thead>
 									<tr>
-										<th scope="col">User</th>
-										<th scope="col">Asset Category</th>
-										<th scope="col">Request Date</th>
-										<th scope="col">Description</th>
-										<th scope="col">Location</th>
-										<th scope="col">Required From</th>
-										<th scope="col">Required To</th>
-										<th scope="col">Request qty</th>
-										<th scope="col">Transfers qty</th>
-										<th scope="col">Action</th>
+										<th scope="col"><?= __('User'); ?></th>
+										<th scope="col"><?= __('Asset Category'); ?></th>
+										<th scope="col"><?= __('Request Date'); ?></th>
+										<th scope="col"><?= __('Description'); ?></th>
+										<th scope="col"><?= __('Location'); ?></th>
+										<th scope="col"><?= __('Required From'); ?></th>
+										<th scope="col"><?= __('Required To'); ?></th>
+										<th scope="col"><?= __('Request qty'); ?></th>
+										<th scope="col"><?= __('Transfers qty'); ?></th>
+										<th scope="col"><?= __('Action'); ?></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -96,7 +96,7 @@
 						</div>
 						<?php }else{ ?>
 							<div class="card-px text-center ">
-								<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Asset Requists</p>
+								<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Asset Requists'); ?></p>
 								<div class="text-center px-4">
 									<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 								</div>

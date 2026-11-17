@@ -67,7 +67,7 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 	<div class="col-md-5">
 			<form method="post" action="#">
 				<div class="form-group row">
-					<label for="example-month-input" class="col-2 f-w-700 mt-3 form-label">Month</label>
+					<label for="example-month-input" class="col-2 f-w-700 mt-3 form-label"><?= __('Month'); ?></label>
 					<div class="col-7">
 						<input class="form-control" type="month" name="pay_month_year" value="<?php echo $pay_year."-".$pay_month?>"  id="example-month-input" />
 					</div>
@@ -107,7 +107,7 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 	<div class="card card-custom">
 		<div class="card-header flex-wrap border-0 pt-4 pb-0 pl-5 mx-auto">
 			<div class="card-title">
-				<h3 class="card-label text-center">EPF-ECR Report for <?php echo $pay_month_year; ?>
+				<h3 class="card-label text-center"><?= __('EPF-ECR Report for'); ?> <?php echo $pay_month_year; ?>
 			</h3>
 			</div>
 		</div>
@@ -119,12 +119,12 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 						<table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" aria-describedby="kt_datatable_info" style="width: 1236px;">
 							<thead>
 								<tr role="row" bgcolor="#f7f7f7">
-									<th scope="col">Employee ID</th>
-									<th scope="col">Insurance Person Name</th>
-									<th scope="col">Paid Days</th>
+									<th scope="col"><?= __('Employee ID'); ?></th>
+									<th scope="col"><?= __('Insurance Person Name'); ?></th>
+									<th scope="col"><?= __('Paid Days'); ?></th>
 									<th scope="col"><?php echo __('Total Monthly Wages'); ?></th>
-									<th scope="col">Reason Code For Zero Working Days</th>
-									<th scope="col">Last Working Days</th>
+									<th scope="col"><?= __('Reason Code For Zero Working Days'); ?></th>
+									<th scope="col"><?= __('Last Working Days'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -135,7 +135,7 @@ $vurl = API."?mode=togetsumofempsalaryoncomponentid&company_id=".$company_id."&e
 									<th scope="col"><?php echo $esi_data['employee_name']; ?></th>
 									<th scope="col"><?php echo $esi_data['total_no_of_working_days']; ?></th>
 									<th scope="col"><?php echo $esi_data['emp_basic']; ?></th>
-									<th scope="col">---TBD---</th>
+									<th scope="col">---<?= __('TBD'); ?>---</th>
 									<th scope="col"><?php echo $esi_data['date_of_leaving']; ?></th>
 								</tr>
 

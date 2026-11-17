@@ -18,7 +18,7 @@ $locations = $result['locations'];
         maxrows = maxrows+1;
         rowid = "floor_row_id_"+maxrows;
         var htmlrows = '<div class="row" id="'+rowid+'">';
-        htmlrows += '<div class="form-group col-lg-6"><input aria-label="Floor Name[]" class="form-control" type="text" name="floor_name[]" value=""> <input class="form-control" type="hidden" name="building_floors_id[]" value="" > </div>';
+        htmlrows += '<div class="form-group col-lg-6"><input aria-label="<?= htmlspecialchars(__('Floor Name'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" type="text" name="floor_name[]" value=""> <input class="form-control" type="hidden" name="building_floors_id[]" value="" > </div>';
         htmlrows += '<div class="form-group col-lg-4"><input aria-label="Floor Image" class="form-control onchangeimagepreview" data-id="imagepreview_'+maxrows+'" type="file" name="floor_image" value="" accept=".jpg,.png"><input class="form-control" type="hidden" name="old_floor_image[]" value="" ></div>';
 
         htmlrows += '<div class="form-group col-lg-1"><img src="uploads/all/no-image.jpg" class="img-40" id="imagepreview__2"+maxrows+'" alt="Attachment Preview" />  </div>';
@@ -110,7 +110,7 @@ $locations = $result['locations'];
 </script>
 <div class="modal-header  ">
     <h5 class="modal-title"> <?= __('Building Floors') ?></h5>
-    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="Close" onclick="closeInsertBuilding('B')"></button>
+    <button type="button" class="btn-close btn_white" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" onclick="closeInsertBuilding('B')"></button>
 </div>
 <div class="modal-body p-l-50 p-r-50 p-t-50">
     <form method="post" id="insertbuildings" enctype="multipart/form-data">
@@ -120,12 +120,12 @@ $locations = $result['locations'];
                 <div class="form-group col-lg-6">
                     <span  class="form-label"><?= __('Building Name') ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
-                    <input aria-label="Building Name" class="form-control requried_field" type="text" id="building_name" name="building_name" value="<?php echo $buildings['building_name']; ?>">
+                    <input aria-label="<?= htmlspecialchars(__('Building Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" type="text" id="building_name" name="building_name" value="<?php echo $buildings['building_name']; ?>">
                 </div>
                 <div class="form-group col-lg-6">
                     <span  class="form-label"><?= __('Custodian') ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
-                    <select aria-label="Originator[]" class="js-example-basic-multiple requried_field" name="originator[]" multiple>
+                    <select aria-label="<?= htmlspecialchars(__('Originator'), ENT_QUOTES, 'UTF-8'); ?>[]" class="js-example-basic-multiple requried_field" name="originator[]" multiple>
                         <?php
                         $originator = json_decode($buildings['originator'],1);
                         foreach($building_admin_application_users as $baau){ ?>
@@ -136,7 +136,7 @@ $locations = $result['locations'];
                 <div class="form-group col-lg-6">
                     <span  class="form-label"><?= __('Location') ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
-                    <select aria-label="Location" class="js-example-basic-single requried_field" name="location_id">
+                    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single requried_field" name="location_id">
                         <option value=""><?= __('Select Any One') ?></option>
                         <?php foreach($locations as $loc){ ?>
                         <option value="<?php echo $loc['id']; ?>" <?php echo $loc['id']==$buildings['location_id']?"selected":""; ?>><?php echo htmlspecialchars(__($loc['location_name'] ?? '')); ?></option>
@@ -146,7 +146,7 @@ $locations = $result['locations'];
                 <div class="form-group col-lg-6">
                     <span  class="form-label"><?= __('Address') ?> <span class="text-danger">*</span></span>
                     <span class="d-block error-message text-danger"></span>
-                    <textarea aria-label="Building Address" class="form-control requried_field" id="building_address" name="building_address" ><?php echo $buildings['building_address']; ?></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Building Address'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field" id="building_address" name="building_address" ><?php echo $buildings['building_address']; ?></textarea>
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@ $locations = $result['locations'];
                         <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                     </label>
                     <input type="file" name="building_image" id="building_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                    <img src="<?php echo "uploads/all/".$buildings['building_image'] ; ?>" id="outputbuilding_image" width="200" alt="Attachment Preview" />
+                    <img src="<?php echo "uploads/all/".$buildings['building_image'] ; ?>" id="outputbuilding_image" width="200" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                     <input type="hidden" name="old_image" value="<?php echo $buildings['building_image'] ;  ?>">
                 </div>
             </div>
@@ -181,10 +181,10 @@ $locations = $result['locations'];
         <div class="row" id="floor_row_id_<?php echo $mk; ?>">
             <div class="form-group col-lg-6">
                 <input class="form-control" type="hidden" name="building_floors_id[]" value="<?php echo $bf['id']; ?>" >
-                <input aria-label="Floor Name[]" class="form-control" type="text" name="floor_name[]" value="<?php echo $bf['floor_name']; ?>">
+                <input aria-label="<?= htmlspecialchars(__('Floor Name'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" type="text" name="floor_name[]" value="<?php echo $bf['floor_name']; ?>">
             </div>
             <div class="form-group col-lg-4">
-                <input aria-label="Input field" class="form-control onchangeimagepreview" data-id="imagepreview_<?php echo $mk; ?>" type="file" name="floor_image" value="" accept=".jpg,.png">
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control onchangeimagepreview" data-id="imagepreview_<?php echo $mk; ?>" type="file" name="floor_image" value="" accept=".jpg,.png">
                 <input class="form-control " type="hidden" name="old_floor_image[]" value="<?php echo $bf['floor_image']; ?>" >
 
             </div>
@@ -193,7 +193,7 @@ $locations = $result['locations'];
                 <a href="uploads/building_floors/<?php echo $bf['floor_image']; ?>" class="text-primary" download>
                     <img src="uploads/building_floors/<?php echo $bf['floor_image']; ?>" class="img-40" id="imagepreview_<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Download Floor plan') ?>" alt="<?= __('Download Floor plan') ?>" /></a>
                 <?php }else{  ?>
-                <img class="img-40" src="" id="imagepreview_<?php echo $mk; ?>" alt="Attachment Preview" />
+                <img class="img-40" src="" id="imagepreview_<?php echo $mk; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                 <?php } ?>
             </div>
             <div class="form-group col-lg-1 text-center">

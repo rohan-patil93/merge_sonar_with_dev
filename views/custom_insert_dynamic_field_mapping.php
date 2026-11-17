@@ -46,7 +46,7 @@ $_SESSION['apply_js']['multiselest'] = 1;
                     <i class="ti-settings"></i>
                 </div>
                 <div class="step-icon  bg-primary"></div>
-                <div class="font-size-lg mt-1 ">Step 1</div>
+                <div class="font-size-lg mt-1 "><?= __('Step 1'); ?></div>
 
             </div>
             <div class="col-lg-4">
@@ -87,11 +87,11 @@ $_SESSION['apply_js']['multiselest'] = 1;
 
                         <div class="form-group row col-lg-12">
                             <label class="col-4">
-                                <input aria-label="Input field" class="form-control form-control-solid" type="text" value="<?php echo $edidump; ?>" />
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-control-solid" type="text" value="<?php echo $edidump; ?>" />
                                 <input class="form-control form-control-solid" type="hidden" name="filed[]" value="<?php echo $filed; ?>" />
                             </label>
                                 <div class="col-4">
-                                    <select aria-label="Ect[]" class="form-select js-example-basic-single" name="select[]">
+                                    <select aria-label="<?= htmlspecialchars(__('Ect'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-single" name="select[]">
                                         <option value="0"><?= __('Select Any One') ?></option>
                                         <?php foreach ($selectdata as  $select) {
                                             if($select != 'id'){

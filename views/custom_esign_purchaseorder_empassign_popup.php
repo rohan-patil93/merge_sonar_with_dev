@@ -21,10 +21,10 @@ $job  = $data['job'];
  		var mpc_item_id = $("#mpc_item_id").val();
 		if(vrc_id == "" || vrc_item_id == "" || mpc_id == "" || mpc_item_id == ""){
 			swal.fire({
-				text: "Please fill in required fields",
+				text: <?php echo json_encode(__('Please fill in required fields'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 				type: "danger",
 				buttonsStyling: false,
-				confirmButtonText: "<i class='la la-hand-o-down'></i>Yes, close!",
+				confirmButtonText: "<i class='la la-hand-o-down'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
 				confirmButtonClass: "btn btn-danger"
 			});
 
@@ -39,14 +39,14 @@ $job  = $data['job'];
 		 	//var msg = <?php echo "'".$_SESSION['error_message']['9025']."'" ?>;
 				//window.location.reload();
 			swal.fire({
-	title: "Record has been saved successfully ",
-	text: "Do you want to reload? ",
+	title: <?php echo json_encode(__('Record has been saved successfully').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+	text: <?php echo json_encode(__('Do you want to reload?').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 	type: "success",
 	buttonsStyling: false,
-	confirmButtonText: "Yes, Reload! ",
+	confirmButtonText: <?php echo json_encode(__('Yes, Reload!').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 	confirmButtonClass: "btn btn-success",
 	showCancelButton: true,
-	cancelButtonText: " No, continue",
+	cancelButtonText: <?php echo json_encode(' '.__('No, continue'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 	cancelButtonClass: "btn btn-warning"
 }).then(function(result) {
 	if (result.value) {
@@ -60,7 +60,7 @@ $job  = $data['job'];
 	}
 </script>
 <div class="modal-header">
-	<h5 class="modal-title"> Assign Employee</h5>
+	<h5 class="modal-title"> <?= __('Assign Employee'); ?></h5>
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>" onclick="closebutnfunction()"></button>
 	</div>
 	<div class="modal-body" >
@@ -69,20 +69,20 @@ $job  = $data['job'];
 				<div class="form-group row">
 					<div class="row col-lg-12">
 						<div class="col-lg-6 form-group">
-							<label for="vrc_name">Vendor Rate Card</label>
-							<input type="text" name="vrc_name" id="vrc_name" readonly value="<?php echo $data['vrcmain']['transaction_number']; ?>" class="form-control vcs" aria-label="Vendor Rate Card">
+							<label for="vrc_name"><?= __('Vendor Rate Card'); ?></label>
+							<input type="text" name="vrc_name" id="vrc_name" readonly value="<?php echo $data['vrcmain']['transaction_number']; ?>" class="form-control vcs" aria-label="<?= htmlspecialchars(__('Vendor Rate Card'), ENT_QUOTES, 'UTF-8'); ?>">
 							<input type="hidden" name="vrc_id" id="vrc_id"  value="<?php echo $data['vrcmain']['id']; ?>" class="form-control vcs">
 						</div>
 
 						 <div class="col-lg-6 form-group">
 							<?php if($_POST['type'] == 'vrc'){ ?>
-								<label for="vrc_item_name">Rate Card job Title</label>
-								<input type="text" name="vrc_item_name" id="vrc_item_name" readonly value="<?php echo $job[$data['sub_vrc']['item_id']]." ( ".$data['sub_vrc']['min_exp']." - ".$data['sub_vrc']['max_exp']." ) - ".customeummarmonyformate($data['sub_vrc']['item_price']); ?>" class="form-control vcs" aria-label="Rate Card job Title">
+								<label for="vrc_item_name"><?= __('Rate Card job Title'); ?></label>
+								<input type="text" name="vrc_item_name" id="vrc_item_name" readonly value="<?php echo $job[$data['sub_vrc']['item_id']]." ( ".$data['sub_vrc']['min_exp']." - ".$data['sub_vrc']['max_exp']." ) - ".customeummarmonyformate($data['sub_vrc']['item_price']); ?>" class="form-control vcs" aria-label="<?= htmlspecialchars(__('Rate Card job Title'), ENT_QUOTES, 'UTF-8'); ?>">
 							<input type="hidden" name="vrc_item_id" id="vrc_item_id" readonly value="<?php echo $data['sub_vrc']['id']; ?>" class="form-control ">
 							<?php } ?>
 							<?php if($_POST['type'] == 'mpc'){ ?>
-								<label for="vrc_item_id">Rate Card job Title</label>
-								<select class="form-select js-example-basic-single vcs" name="vrc_item_id" id="vrc_item_id" aria-label="Rate Card job Title">
+								<label for="vrc_item_id"><?= __('Rate Card job Title'); ?></label>
+								<select class="form-select js-example-basic-single vcs" name="vrc_item_id" id="vrc_item_id" aria-label="<?= htmlspecialchars(__('Rate Card job Title'), ENT_QUOTES, 'UTF-8'); ?>">
 								<?php foreach($data['sub_vrc'] as $mpc_item ){ ?>
 									<option value="<?php echo $mpc_item['id']; ?>"> <?php echo $job[$mpc_item['item_id']]." ( ".$mpc_item['min_exp']." - ".$mpc_item['max_exp']." ) - ".customeummarmonyformate($mpc_item['item_price']); ?></option>
 								<?php } ?>
@@ -90,19 +90,19 @@ $job  = $data['job'];
 							<?php } ?>
 						</div>
 						<div class="col-lg-6 form-group">
-							<label for="mpc_name">Purchase order</label>
-							<input type="text" name="mpc_name" id="mpc_name" readonly value="<?php echo $data['mpcmain']['transaction_number']; ?>" class="form-control vcs" aria-label="Purchase order">
+							<label for="mpc_name"><?= __('Purchase order'); ?></label>
+							<input type="text" name="mpc_name" id="mpc_name" readonly value="<?php echo $data['mpcmain']['transaction_number']; ?>" class="form-control vcs" aria-label="<?= htmlspecialchars(__('Purchase order'), ENT_QUOTES, 'UTF-8'); ?>">
 							<input type="hidden" name="mpc_id" id="mpc_id"  value="<?php echo $data['mpcmain']['id']; ?>" class="form-control">
 						</div>
 						 <div class="col-lg-6 form-group">
 							<?php if($_POST['type'] == 'mpc'){ ?>
-								<label for="mpc_item_name">PO Job Title</label>
-								<input type="text" name="mpc_item_name" id="mpc_item_name" readonly value="<?php echo $job[$data['sub_mpc']['item_id']]." ( ".$data['sub_mpc']['min_exp']." - ".$data['sub_mpc']['max_exp']." ) - ".customeummarmonyformate($data['sub_mpc']['item_price']); ?>" class="form-control vcs" aria-label="PO Job Title">
+								<label for="mpc_item_name"><?= __('PO Job Title'); ?></label>
+								<input type="text" name="mpc_item_name" id="mpc_item_name" readonly value="<?php echo $job[$data['sub_mpc']['item_id']]." ( ".$data['sub_mpc']['min_exp']." - ".$data['sub_mpc']['max_exp']." ) - ".customeummarmonyformate($data['sub_mpc']['item_price']); ?>" class="form-control vcs" aria-label="<?= htmlspecialchars(__('PO Job Title'), ENT_QUOTES, 'UTF-8'); ?>">
 							<input type="hidden" name="mpc_item_id" id="mpc_item_id" readonly value="<?php echo $data['sub_mpc']['id']; ?>" class="form-control ">
 							<?php } ?>
 							 <?php if($_POST['type'] == 'vrc'){ ?>
-							 		<label for="mpc_item_id">PO Job Title</label>
-							 		<select class="form-select js-example-basic-single vcs" name="mpc_item_id" id="mpc_item_id" aria-label="PO Job Title">
+							 		<label for="mpc_item_id"><?= __('PO Job Title'); ?></label>
+							 		<select class="form-select js-example-basic-single vcs" name="mpc_item_id" id="mpc_item_id" aria-label="<?= htmlspecialchars(__('PO Job Title'), ENT_QUOTES, 'UTF-8'); ?>">
 								<?php foreach($data['sub_mpc'] as $mpc_item ){ ?>
 									<option value="<?php echo $mpc_item['id']; ?>"> <?php echo $job[$mpc_item['item_id']]." ( ".$mpc_item['min_exp']." - ".$mpc_item['max_exp']." ) - ".customeummarmonyformate($mpc_item['item_price']); ?></option>
 								<?php } ?>
@@ -110,13 +110,13 @@ $job  = $data['job'];
 							 <?php } ?>
 						</div>
 						<div class="col-lg-6 form-group">
-							<label for="valid_from">Valid From</label>
-							<input type="text" name="valid_from" id="valid_from"  value="<?php echo $data['mpcmain']['effective_from_date']; ?>" class="form-control datepicker vcs" aria-label="Valid From">
+							<label for="valid_from"><?= __('Valid From'); ?></label>
+							<input type="text" name="valid_from" id="valid_from"  value="<?php echo $data['mpcmain']['effective_from_date']; ?>" class="form-control datepicker vcs" aria-label="<?= htmlspecialchars(__('Valid From'), ENT_QUOTES, 'UTF-8'); ?>">
 
 						</div>
 						<div class="col-lg-6 form-group">
-							<label for="valid_to">Valid To</label>
-							<input type="text" name="valid_to" id="valid_to"  value="<?php echo $data['mpcmain']['effective_to_date']; ?>" class="form-control datepicker vcs" aria-label="Valid To">
+							<label for="valid_to"><?= __('Valid To'); ?></label>
+							<input type="text" name="valid_to" id="valid_to"  value="<?php echo $data['mpcmain']['effective_to_date']; ?>" class="form-control datepicker vcs" aria-label="<?= htmlspecialchars(__('Valid To'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 					</div>
 				</div>
@@ -124,7 +124,7 @@ $job  = $data['job'];
 			<div class="modal-footer">
 				 <input type="hidden" name="emp_id" value="<?php echo $_POST['emp_id']; ?>">
 				<button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal" onclick="closebutnfunction()"><?php echo __('Close'); ?></button>
-				<button type="button" class="btn btn-primary mr-2" onclick="submitrom()" >Submit</button>
+				<button type="button" class="btn btn-primary mr-2" onclick="submitrom()" ><?= __('Submit'); ?></button>
 			</div>
 		</form>
 	</div>

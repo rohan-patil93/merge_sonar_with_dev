@@ -289,7 +289,7 @@ function getnamelist(){
                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo __('Add Questions'); ?></button>
                         <div class="dropdown-menu">
                             <?php  foreach ($qustion_types as $key => $value) { ?>
-                               <button type="button" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo $value['genc_detail_name']; ?>')" class="dropdown-item">  <?php echo $value['genc_detail_name']; ?></button>
+                               <button type="button" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo __($value['genc_detail_name']); ?>')" class="dropdown-item">  <?php echo __($value['genc_detail_name']); ?></button>
                             <?php } ?>
                          </div>
                       </div>

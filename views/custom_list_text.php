@@ -27,7 +27,7 @@ $selectdata = json_decode($item_data,1);
                                             <i class="kt-font-brand flaticon2-line-chart"></i>
                                         </span>
                                         <h3 class="kt-portlet__head-title">
-                                            General Ledger
+                                            <?= __('General Ledger'); ?>
                                         </h3>
                                     </div>
                                     <div class="kt-portlet__head-toolbar">
@@ -35,7 +35,7 @@ $selectdata = json_decode($item_data,1);
                                              <a target="_blank" href="index.php?option=COM_QO_PRINT&rid=<?php echo $rid; ?>&table=<?php echo $table_name; ?>&title=<?php echo urlencode($title); ?>" class="btn btn-clean kt-margin-r-10"> <i class="flaticon2-print"></i></a>
                                             <a href="#" class="btn btn-clean btn-icon-sm">
                                                 <i class="la la-long-arrow-left"></i>
-                                                Back
+                                                <?= __('Back'); ?>
                                             </a>
                                             &nbsp;
 
@@ -51,7 +51,7 @@ $selectdata = json_decode($item_data,1);
                                                 <div class="row align-items-center">
                                                     <div class="col-md-3 kt-margin-b-20-tablet-and-mobile">
                                                         <div class="kt-input-icon kt-input-icon--left">
-                                                            <input aria-label="Search..." type="text" class="form-control" placeholder="Search..." id="generalSearch">
+                                                            <input aria-label="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="<?= htmlspecialchars(__('Search...'), ENT_QUOTES, 'UTF-8'); ?>" id="generalSearch">
                                                             <span class="kt-input-icon__icon kt-input-icon__icon--left">
                                                                 <span><i class="la la-search"></i></span>
                                                             </span>
@@ -61,11 +61,11 @@ $selectdata = json_decode($item_data,1);
                                                     <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
                                                         <div class="kt-form__group kt-form__group--inline">
                                                             <div class="kt-form__label">
-                                                                <span>Account</span>
+                                                                <span><?= __('Account'); ?></span>
                                                             </div>
                                                             <div class="kt-form__control">
-                                                                <select aria-label="Account Code[]" class="form-control kt-select2" id="kt_select2_3" name="account_code[]" multiple="multiple">
-                                                                    <option value=""> Select Any one </option>
+                                                                <select aria-label="<?= htmlspecialchars(__('Account Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control kt-select2" id="kt_select2_3" name="account_code[]" multiple="multiple">
+                                                                    <option value=""> <?= __('Select Any one'); ?> </option>
                                                                     <?php foreach ($selectdata as $selectkey => $selectvalue) {  ?>
                                                                             <option <?php if(in_array($selectkey, $mulcheck)){ ?> selected <?php
 } ?> value="<?php echo $selectvalue['account_code']; ?>"><?php echo $selectvalue['account_name']; ?></option>
@@ -77,15 +77,15 @@ $selectdata = json_decode($item_data,1);
                                                     <div class="col-md-3 kt-margin-b-20-tablet-and-mobile">
                                                         <div class="kt-form__group kt-form__group--inline">
                                                             <div class="kt-form__label">
-                                                                <span>Dates:</span>
+                                                                <span><?= __('Dates'); ?>:</span>
                                                             </div>
                                                             <div class="kt-form__control">
                                                                 <div class="input-daterange input-group" id="kt_datepicker_5">
-                                                                    <input aria-label="From" type="text" class="form-control kt-input" name="from" autocomplete="off" placeholder="From" data-col-index="5" />
+                                                                    <input aria-label="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control kt-input" name="from" autocomplete="off" placeholder="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" data-col-index="5" />
                                                                     <div class="input-group-append">
                                                                         <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
                                                                     </div>
-                                                                    <input aria-label="To" type="text" class="form-control kt-input" autocomplete="off"  name="to" placeholder="To" data-col-index="5" />
+                                                                    <input aria-label="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control kt-input" autocomplete="off"  name="to" placeholder="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" data-col-index="5" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -98,7 +98,7 @@ $selectdata = json_decode($item_data,1);
                                                                 <span>
                                                                     <i class="la la-arrow-circle-o-right"></i>
 
-                                                                    <span>GO</span>
+                                                                    <span><?= __('GO'); ?></span>
                                                                 </span>
                                                             </button>
                                                         </div>

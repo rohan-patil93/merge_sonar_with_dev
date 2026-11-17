@@ -233,8 +233,8 @@ function getnamelist(){
 <div class="d-flex flex-column-fluid">
    <div class="container-fluid">
          <div class="alert alert-warning alert-dismissible">
-            <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong><?php echo "This function is used for maintaining <strong>".__('Display Attributes')."</strong>".__('. * represents mandatory fields.').""; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
          </div>
           <div class="row">
       <div class="col-lg-12">
@@ -244,7 +244,7 @@ function getnamelist(){
          <div class="card-header-right table-card-header">
                <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                   <i class="ki ki-long-arrow-back icon-xs"></i>
-                  Back
+                  <?= __('Back'); ?>
                </a>
             </div>
 
@@ -283,10 +283,10 @@ function getnamelist(){
                                  <label for="assessment_start_date" class="font-weight-bolder"><?php echo $display_tag; ?> <?= __('Date Range') ?> <span class="text-danger">*</span></label>
                                  <div class='row' id='kt_daterangepicker_survey'>
 								   <div class="col-lg-6">
-										<input type='text' class="form-control datepicker" id="assessment_start_date" name="assessment_start_date" value="<?php echo $assessment_details['assessment_start_date']; ?>" aria-label="Assessment Start Date">
+										<input type='text' class="form-control datepicker" id="assessment_start_date" name="assessment_start_date" value="<?php echo $assessment_details['assessment_start_date']; ?>" aria-label="<?= htmlspecialchars(__('Assessment Start Date'), ENT_QUOTES, 'UTF-8'); ?>">
 									</div>
 									<div class="col-lg-6">
-										<input type='text' class="form-control datepicker" id="assessment_end_date" name="assessment_end_date" value="<?php echo $assessment_details['assessment_end_date']; ?>" aria-label="Assessment End Date">
+										<input type='text' class="form-control datepicker" id="assessment_end_date" name="assessment_end_date" value="<?php echo $assessment_details['assessment_end_date']; ?>" aria-label="<?= htmlspecialchars(__('Assessment End Date'), ENT_QUOTES, 'UTF-8'); ?>">
 									</div>
 								 <!--  <input type='date' class="form-control"  name="assessment_date" placeholder="Select date &amp; time range" value="<?php echo $assessment_date; ?> " / aria-label="Select date &amp;amp; time range"> -->
 
@@ -295,13 +295,13 @@ function getnamelist(){
                               <div class="form-group mt-3">
                                  <label for="allocated_time" class="font-weight-bolder"><?php echo $display_tag; ?> <?= __('Duration In Minutes') ?> <span class="text-danger">*</span></label>
                                  <div class='input-group'>
-                                    <input type='number' class="form-control" id="allocated_time" name="allocated_time" placeholder="<?= __('Total Minutes') ?>" value="<?php echo $allocated_time; ?>" aria-label="Total Minutes">
+                                    <input type='number' class="form-control" id="allocated_time" name="allocated_time" placeholder="<?= __('Total Minutes') ?>" value="<?php echo $allocated_time; ?>" aria-label="<?= htmlspecialchars(__('Total Minutes'), ENT_QUOTES, 'UTF-8'); ?>">
                                  </div>
                               </div>
                               <div class="form-group">
                                  <label for="kt_select2_48" class="col-form-label font-weight-bolder"><?php echo $display_tag; ?> <?= __('Initiator') ?></label>
                                  <select class="form-select js-example-basic-single" id="kt_select2_48" name="assessment_initiator" aria-label="Assessment <?= __('Initiator') ?>">
-                                    <option> Select any one</option>
+                                    <option> <?= __('Select any one'); ?></option>
                                     <?php $assessment_init =  $assessment_details['assessment_initiator']!="" ? $assessment_details['assessment_initiator'] :$_SESSION['emp_id'];
                                     foreach ($employee_list as $value) { ?>
                                        <option value="<?php echo $value['id'];?>" <?php if($value['id'] == $assessment_init){ ?>selected <?php } ?> ><?php echo $value['display_name']; ?></option>
@@ -318,7 +318,7 @@ function getnamelist(){
                               </div>
                               <div class="form-group">
                                  <label for="kt_select2_43" class="col-form-label font-weight-bolder"><?= __('Who can see the results') ?></label>
-                                 <select class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple" aria-label="Who Can See The Results">
+                                 <select class="form-select js-example-basic-multiple" id="kt_select2_43" name="who_can_see_the_results[]" multiple="multiple" aria-label="<?= htmlspecialchars(__('Who Can See The Results'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <?php foreach ($employee_list as $value) { $key=$value['id']; ?>
                                     <option <?php if(in_array($key,(array)$who_can_see_id)){ ?> selected <?php } ?> value="<?php echo $key;?>"><?php echo $value['display_name']; ?></option>
                                  <?php } ?>

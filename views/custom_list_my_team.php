@@ -21,10 +21,10 @@ foreach($empdata['designations'] as $designation){
    <div class="container-fluid j-pro pt-0">
       <div class="card-sticky j-content" id="kt_page_sticky_card">
         <div class="card-header">
-            <h5>My Team</h5>
+            <h5><?= __('My Team'); ?></h5>
             <div class="card-header-right">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                    <i class="icofont icofont-reply"></i>Back
+                    <i class="icofont icofont-reply"></i><?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -32,7 +32,7 @@ foreach($empdata['designations'] as $designation){
             <div class="card-body">
                 <?php if(isset($teams['reproter']['id'])){  $report =$teams['reproter'] ; ?>
                 <div class="row">
-                           <h4>Reporting Manager</h4>
+                           <h4><?= __('Reporting Manager'); ?></h4>
                            <div class="col-xl-3 col-md-6">
                               <div class="card sale-card ">
                                  <div class="card-header">
@@ -41,7 +41,7 @@ foreach($empdata['designations'] as $designation){
                                  <div class="card-block text-center">
                                     <div data-label="40%" class="radial-bar custom-radial-bar radial-bar-40 radial-bar-lg radial-bar-danger mt-0 mb-2">
                                        <?php if($report['image']!=""){ ?>
-                                       <img src="uploads/all/<?php echo $report['image']; ?>" alt="Details" class="img-radius img-80">
+                                       <img src="uploads/all/<?php echo $report['image']; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-80">
                                           <?php } ?>
                                     </div>
                                     <div class="row">
@@ -61,7 +61,7 @@ foreach($empdata['designations'] as $designation){
             <?php }
 if(count((array)$teams['teams']) != 0){ ?>
                         <div class="mt-10">
-                          <h4>Teams</h4>
+                          <h4><?= __('Teams'); ?></h4>
                            <div class="row">
 <?php foreach ($teams['teams'] as $team) {  ?>
 
@@ -73,7 +73,7 @@ if(count((array)$teams['teams']) != 0){ ?>
             <div class="card-block text-center">
                 <div data-label="<?php echo initials($team['display_name']); ?>" class="radial-bar custom-radial-bar radial-bar-40 radial-bar-lg radial-bar-danger mt-0 mb-2">
             <?php if($team['image']!=""){ ?>
-              <img src="uploads/all/<?php echo $team['image']; ?>" alt="Attachment Preview">
+              <img src="uploads/all/<?php echo $team['image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
             <?php } ?>
 
                 </div>
@@ -101,7 +101,7 @@ if($report['phone'] !=""){ ?>
             <?php }else{ ?>
               <div class="accordion-desc custom-scroll p-0 ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" style="height: 400px;" id="ui-id-2" aria-labelledby="ui-id-1" role="tabpanel" aria-hidden="false">
                 <div class="card-px text-center ">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Team</p>
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Team'); ?></p>
                   <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                   </div>

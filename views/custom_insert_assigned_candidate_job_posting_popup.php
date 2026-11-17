@@ -62,8 +62,8 @@ include_once '../comm.php';
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: true,
             closeOnCancel: true
         },
@@ -81,8 +81,8 @@ include_once '../comm.php';
     }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Assign Job Postings</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Assign Job Postings'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body ">
 
@@ -90,7 +90,7 @@ include_once '../comm.php';
   <div class="card">
   <table id="new-cons" class="table table-bordered table-xs">
     <thead>
-      <tr><th scope="col">#</th><th scope="col"><?= __('Job Posting') ?></th><th scope="col">HR ShortListed</th><th scope="col">HM ShortListed</th></tr>
+      <tr><th scope="col">#</th><th scope="col"><?= __('Job Posting') ?></th><th scope="col"><?= __('HR ShortListed'); ?></th><th scope="col"><?= __('HM ShortListed'); ?></th></tr>
     </thead>
     <tbody>
       <?php $activejobpost = "N"; $mk=1; $jobpostingids= array(); if(count((array)$result3) !=0){  foreach($result3 as $resulttable){
@@ -117,7 +117,7 @@ include_once '../comm.php';
       </tr>
      <?php $mk++;
 }
-}else{ echo "<tr><td colspan='4' class='text-center'>No Apply Any job Post</td></tr>";
+}else{ echo "<tr><td colspan='4' class='text-center'>".__('No Apply Any job Post')."</td></tr>";
 } ?>
     </tbody>
   </table>
@@ -126,9 +126,9 @@ include_once '../comm.php';
     <form id="candidatesform" method="post" >
         <div class="row ">
             <div class="form-group col-lg-3 w-full">
-                <span class="form-label">Job Posting <span class="requried">*</span></span>
+                <span class="form-label"><?= __('Job Posting'); ?> <span class="requried">*</span></span>
                 <span class="d-block error-message text-danger"></span>
-                <select aria-label="Job Posting" class="form-control js-example-basic-single requried_field" name="job_posting_id" >
+                <select aria-label="<?= htmlspecialchars(__('Job Posting'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="job_posting_id" >
                     <option value=""><?= __('Select Any One') ?></option>
               <?php foreach($job_postingslist as $res){ if(!in_array($res['id'], (array)$job_postings)){ ?>
                 <option value="<?php echo $res['id']; ?>" <?php echo $_POST['job_posting_id'] == $res['id']?"selected":"";?>><?php echo $res['job_name']."- ".$res['job_number']; ?></option>
@@ -137,24 +137,24 @@ include_once '../comm.php';
             </select>
             </div>
             <div class="form-group col-lg-2">
-                <span class="form-label">First Name <span class="requried">*</span></span>
+                <span class="form-label"><?= __('First Name'); ?> <span class="requried">*</span></span>
                 <span class="d-block error-message text-danger"></span>
-                <input aria-label="First Name" class="form-control notemptyclass text-capitalize requried_field"  type="text" name="first_name"  value="<?php echo $result['first_name']; ?>" readonly="">
+                <input aria-label="<?= htmlspecialchars(__('First Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control notemptyclass text-capitalize requried_field"  type="text" name="first_name"  value="<?php echo $result['first_name']; ?>" readonly="">
             </div>
             <div class="form-group col-lg-2">
-                <span class="form-label">Last Name <span class="requried">*</span></span>
+                <span class="form-label"><?= __('Last Name'); ?> <span class="requried">*</span></span>
                 <span class="d-block error-message text-danger"></span>
-                <input aria-label="Last Name" class="form-control notemptyclass text-capitalize requried_field"  type="text"  name="last_name" value="<?php echo $result['last_name']; ?>" readonly="">
+                <input aria-label="<?= htmlspecialchars(__('Last Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control notemptyclass text-capitalize requried_field"  type="text"  name="last_name" value="<?php echo $result['last_name']; ?>" readonly="">
             </div>
             <div class="form-group col-lg-2">
-                <span class="form-label">Phone <span class="requried">*</span></span>
+                <span class="form-label"><?= __('Phone'); ?> <span class="requried">*</span></span>
                 <span class="d-block error-message text-danger"></span>
-                <input aria-label="Phone" class="form-control notemptyclass requried_field"  type="number"  name="phone" value="<?php echo $result['phone']; ?>" readonly="">
+                <input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control notemptyclass requried_field"  type="number"  name="phone" value="<?php echo $result['phone']; ?>" readonly="">
             </div>
             <div class="form-group col-lg-3">
-                <span class="form-label">Email Id <span class="requried">*</span></span>
+                <span class="form-label"><?= __('Email Id'); ?> <span class="requried">*</span></span>
                 <span class="d-block error-message text-danger"></span>
-                <input aria-label="Email" class="form-control notemptyclass requried_field"  type="email"  name="email_id" value="<?php echo $result['email_id']; ?>" readonly="">
+                <input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control notemptyclass requried_field"  type="email"  name="email_id" value="<?php echo $result['email_id']; ?>" readonly="">
             </div>
 
          </div>

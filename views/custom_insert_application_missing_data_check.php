@@ -65,10 +65,10 @@ echo "<pre>"; print_r($result);echo "</pre>";
 		var id = 'rowapplicationemptytransactions_'+maxsar;
 	    var html ="";
 	    html += '<div class="row mt-3" id="'+id+'">';
-	    html += '<div class="col-lg-3"><select name="transaction_table[]" class="form-control form-select js-example-basic-single" id="transaction_table_'+maxsar+'"  onchange="getTransactionTable('+maxsar+')" aria-label="Transaction Table"><option value="">Select Any One </option><?php foreach($transaction_table as $tableval) {  ?><option value="<?php echo $tableval; ?>"><?php echo $tableval;?></option><?php } ?></select></div>';
-	    html += '<div class="col-lg-2"><select name="option_type[]" class="form-control form-select js-example-basic-single" aria-label="Option Type"> <?php foreach($option_type as $optkey=>$optype) {  ?><option value="<?php echo $optkey; ?>" <?php echo $optkey ==$ttj['transaction_table']?"selected":""; ?>><?php echo $optype;?></option><?php } ?></select></div>';
+	    html += '<div class="col-lg-3"><select name="transaction_table[]" class="form-control form-select js-example-basic-single" id="transaction_table_'+maxsar+'"  onchange="getTransactionTable('+maxsar+')" aria-label="Transaction Table"><option value=""><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach($transaction_table as $tableval) {  ?><option value="<?php echo $tableval; ?>"><?php echo $tableval;?></option><?php } ?></select></div>';
+	    html += '<div class="col-lg-2"><select name="option_type[]" class="form-control form-select js-example-basic-single" aria-label="<?= htmlspecialchars(__('Option Type'), ENT_QUOTES, 'UTF-8'); ?>"> <?php foreach($option_type as $optkey=>$optype) {  ?><option value="<?php echo $optkey; ?>" <?php echo $optkey ==$ttj['transaction_table']?"selected":""; ?>><?php echo $optype;?></option><?php } ?></select></div>';
 
-	    html += '<div class="col-lg-3"><select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="Application Message Code"><option value="">Select Any One </option><?php foreach($application_messages as $amessage) {  ?><option <?php if($amessage['message_number']=='9097'){ echo "selected";
+	    html += '<div class="col-lg-3"><select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="<?= htmlspecialchars(__('Application Message Code'), ENT_QUOTES, 'UTF-8'); ?>"><option value=""><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach($application_messages as $amessage) {  ?><option <?php if($amessage['message_number']=='9097'){ echo "selected";
 	    } ?>  value="<?php echo $amessage['message_number']; ?>" ><?php echo preg_replace("/\s+/", " ", $amessage['message_number']." - ".$amessage['message_description']);?></option><?php } ?></select></div>';
 
 	    html += '<div class="col-lg-3"><textarea type="text" class="form-control" name="extra_message[]" id="extra_message_'+maxsar+'" aria-label="Extra Message"></textarea> </div>';
@@ -96,7 +96,7 @@ echo "<pre>"; print_r($result);echo "</pre>";
 </script>
 <div class="card custom-card ">
     <div class="card-header">
-        <h5> Empty Transactions </h5>
+        <h5> <?= __('Empty Transactions'); ?> </h5>
         <div class="card-header-right table-card-header">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back') ?></a>
         </div>
@@ -106,8 +106,8 @@ echo "<pre>"; print_r($result);echo "</pre>";
     	<div class="row">
 	    	<div class="form-group col-lg-5">
 		        <span class="form-label d-inline-block fw-bold"><?= __('Module Setup') ?> </span>
-		        <select name="module_setup_id" class="form-control form-select js-example-basic-single" aria-label="Module Setup Id">
-		            <option value="">Select Any One </option>
+		        <select name="module_setup_id" class="form-control form-select js-example-basic-single" aria-label="<?= htmlspecialchars(__('Module Setup Id'), ENT_QUOTES, 'UTF-8'); ?>">
+		            <option value=""><?= __('Select Any One'); ?> </option>
 		            <?php foreach($module_setup as $mods) {  ?>
 		              <option value="<?php echo $mods['module_id']; ?>" <?php echo $mods['module_id'] ==$application_empty_transactions['module_setup_id']?"selected":""; ?>><?php echo $mods['display_name'];?></option>
 		            <?php } ?>
@@ -118,8 +118,8 @@ echo "<pre>"; print_r($result);echo "</pre>";
 	        </div>
 	        <div class="form-group col-lg-5">
 	          	<span class="form-label d-inline-block fw-bold"> <?= __('Option') ?> <span class="text-danger">*</span></span>
-	          	<select name="page_option" class="form-control form-select js-example-basic-single" aria-label="Page Option">
-		            <option value="">Select Any One </option>
+	          	<select name="page_option" class="form-control form-select js-example-basic-single" aria-label="<?= htmlspecialchars(__('Page Option'), ENT_QUOTES, 'UTF-8'); ?>">
+		            <option value=""><?= __('Select Any One'); ?> </option>
 		            <?php foreach($application_pages as $optionkey=>$val) {  ?>
 		              <option value="<?php echo $optionkey; ?>" <?php echo $optionkey ==$application_empty_transactions['page_option']?"selected":""; ?>><?php echo $val;?></option>
 		            <?php } ?>
@@ -151,33 +151,33 @@ echo "<pre>"; print_r($result);echo "</pre>";
 	    	?>
 			    <div class="row mt-2" id="<?php echo $rowid; ?>">
 			    	<div class="col-lg-3">
-			    		<select name="transaction_table[]"  id="transaction_table_<?php echo $im; ?>" class="form-control form-select js-example-basic-single" onchange="getTransactionTable('<?php echo $im; ?>')" aria-label="Transaction Table">
-				            <option value="">Select Any One </option>
+			    		<select name="transaction_table[]"  id="transaction_table_<?php echo $im; ?>" class="form-control form-select js-example-basic-single" onchange="getTransactionTable('<?php echo $im; ?>')" aria-label="<?= htmlspecialchars(__('Transaction Table'), ENT_QUOTES, 'UTF-8'); ?>">
+				            <option value=""><?= __('Select Any One'); ?> </option>
 				            <?php foreach($transaction_table as $tableval) {  ?>
 				              <option value="<?php echo $tableval; ?>" <?php echo $tableval ==$ttj['transaction_table']?"selected":""; ?>><?php echo $tableval;?></option>
 				            <?php } ?>
 				        </select>
 			    	</div>
 			    	<div class="col-lg-2">
-			    		<select name="option_type[]" class="form-control form-select js-example-basic-single" aria-label="Option Type">
+			    		<select name="option_type[]" class="form-control form-select js-example-basic-single" aria-label="<?= htmlspecialchars(__('Option Type'), ENT_QUOTES, 'UTF-8'); ?>">
 				            <?php foreach($option_type as $optkey=>$optype) {  ?>
 				              <option value="<?php echo $optkey; ?>" <?php echo $optkey ==$ttj['option_type']?"selected":""; ?>><?php echo $optype;?></option>
 				            <?php } ?>
 				        </select>
 			    	</div>
 			    	<div class="col-lg-3">
-			    		<select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="Application Message Code">
-				            <option value="">Select Any One </option>
+			    		<select name="application_message_code[]" class="form-control form-select js-example-basic-single" aria-label="<?= htmlspecialchars(__('Application Message Code'), ENT_QUOTES, 'UTF-8'); ?>">
+				            <option value=""><?= __('Select Any One'); ?> </option>
 				            <?php foreach($application_messages as $amessage) {  ?>
 				              <option value="<?php echo $amessage['message_number']; ?>" <?php echo $amessage['message_number'] ==$ttj['application_message_code']?"selected":""; ?>><?php echo $amessage['message_number']." - ".$amessage['message_description'];?></option>
 				            <?php } ?>
 				        </select>
 			    	</div>
 			    	<div class="col-lg-3">
-			    		<textarea type="text" class="form-control" name="extra_message[]" id="extra_message_<?php echo $im; ?>" aria-label="Extra Message"><?php echo $ttj['extra_message']; ?></textarea>
+			    		<textarea type="text" class="form-control" name="extra_message[]" id="extra_message_<?php echo $im; ?>" aria-label="<?= htmlspecialchars(__('Extra Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $ttj['extra_message']; ?></textarea>
 			    	</div>
 			    	<div class="col-lg-1">
-			    		<i role="button" tabindex="0" aria-label="Remove" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Remove" onclick="removeRow('<?php echo $rowid; ?>')"></i>
+			    		<i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-trash text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Remove'), ENT_QUOTES, 'UTF-8'); ?>" onclick="removeRow('<?php echo $rowid; ?>')"></i>
 			    	</div>
 			    </div>
 			<?php $im++;

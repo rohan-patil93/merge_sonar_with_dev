@@ -21,24 +21,24 @@ $application_users = $result['application_users'] ?? array();
 
 <div class="fwdp-page">
     <div class="alert alert-info alert-dismissible fwdp-alert">
-        <strong>This function is used for maintaining <strong>Field Work</strong>. * represents mandatory fields.</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong>This function is used for maintaining <strong><?= __('Field Work'); ?></strong><?= __('. * represents mandatory fields.'); ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 
     <div class="fwdp-header">
         <div>
-            <h1 class="fwdp-title">Field Work Daily Plans Map View</h1>
-            <p class="fwdp-subtitle">Review visit status and open routes on Google Maps</p>
+            <h1 class="fwdp-title"><?= __('Field Work Daily Plans Map View'); ?></h1>
+            <p class="fwdp-subtitle"><?= __('Review visit status and open routes on Google Maps'); ?></p>
         </div>
         <div class="fwdp-header-actions">
             <a href="index.php?option=COM_LIST_FIELD_WORK_DAILY_PLANS_NEW" class="fwdp-btn fwdp-btn-outline desktop-view">
-                Daily Plans List
+                <?= __('Daily Plans List'); ?>
             </a>
             <a href="index.php?option=COM_VIEW_MAP_POINTS_NEW" class="fwdp-btn fwdp-btn-outline desktop-view">
-                Live Map View
+                <?= __('Live Map View'); ?>
             </a>
             <a href="javascript:history.go(-1)" class="fwdp-btn desktop-view">
-                <i class="icofont icofont-reply" aria-hidden="true"></i> Back
+                <i class="icofont icofont-reply" aria-hidden="true"></i> <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -46,9 +46,9 @@ $application_users = $result['application_users'] ?? array();
     <div class="fwdp-card">
         <div class="row g-3">
             <div class="form-group col-lg-5">
-                <label for="user_id" class="fwdp-label">User <span class="text-danger">*</span></label>
-                <select class="form-select js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" aria-label="User Id">
-                    <option value="0">Select Any one</option>
+                <label for="user_id" class="fwdp-label"><?= __('User'); ?> <span class="text-danger">*</span></label>
+                <select class="form-select js-example-basic-multiple" id="user_id" name="user_id[]" multiple="multiple" aria-label="<?= htmlspecialchars(__('User Id'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <option value="0"><?= __('Select Any one'); ?></option>
                     <?php if (!empty($application_users)) {
                         foreach ($application_users as $row) { ?>
                             <option value="<?php echo htmlspecialchars((string)($row['id'] ?? ''), ENT_QUOTES); ?>">
@@ -61,19 +61,19 @@ $application_users = $result['application_users'] ?? array();
             </div>
 
             <div class="col-lg-3 col-xs-4 form-group">
-                <label for="from_date" class="fwdp-label">From Date <span class="text-danger">*</span></label>
-                <input class="form-control" type="date" name="from_date" id="from_date" value="" aria-label="From Date">
+                <label for="from_date" class="fwdp-label"><?= __('From Date'); ?> <span class="text-danger">*</span></label>
+                <input class="form-control" type="date" name="from_date" id="from_date" value="" aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="d-none text-danger" id="from_date_err"></div>
             </div>
             <div class="col-lg-3 col-xs-4 form-group">
-                <label for="to_date" class="fwdp-label">To Date <span class="text-danger">*</span></label>
-                <input class="form-control" type="date" name="to_date" id="to_date" value="" aria-label="To Date">
+                <label for="to_date" class="fwdp-label"><?= __('To Date'); ?> <span class="text-danger">*</span></label>
+                <input class="form-control" type="date" name="to_date" id="to_date" value="" aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="d-none text-danger" id="to_date_err"></div>
             </div>
 
             <div class="col-lg-1 col-xs-4 form-group">
-                <label for="getDataButton" class="fwdp-label" aria-label="Search"><span class="visually-hidden">Search</span>&nbsp;</label>
-                <button type="button" class="fwdp-btn fwdp-btn-primary form-control" id="getDataButton">Search</button>
+                <label for="getDataButton" class="fwdp-label" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"><span class="visually-hidden"><?= __('Search'); ?></span>&nbsp;</label>
+                <button type="button" class="fwdp-btn fwdp-btn-primary form-control" id="getDataButton"><?= __('Search'); ?></button>
             </div>
         </div>
 
@@ -83,14 +83,14 @@ $application_users = $result['application_users'] ?? array();
                     <table class="table fwdp-table" id="fiedWorkTable">
                         <thead>
                             <tr>
-                                <th scope="col">S No.</th>
-                                <th scope="col">User</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Visited</th>
-                                <th scope="col">Extra</th>
-                                <th scope="col">Pending</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('S No.'); ?></th>
+                                <th scope="col"><?= __('User'); ?></th>
+                                <th scope="col"><?= __('Email'); ?></th>
+                                <th scope="col"><?= __('Date'); ?></th>
+                                <th scope="col"><?= __('Visited'); ?></th>
+                                <th scope="col"><?= __('Extra'); ?></th>
+                                <th scope="col"><?= __('Pending'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -106,33 +106,33 @@ $application_users = $result['application_users'] ?? array();
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content fwdp-map-modal">
             <div class="modal-header">
-                <h5 class="modal-title" id="mapModalLabel">Map View</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="mapModalLabel"><?= __('Map View'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <div class="modal-body p-0">
                 <div class="fwdp-map-legend" id="fwdpMapLegend">
-                    <span class="fwdp-legend-item"><span class="fwdp-dot fwdp-dot-visited"></span> Visited</span>
-                    <span class="fwdp-legend-item"><span class="fwdp-dot fwdp-dot-extra"></span> Extra</span>
-                    <span class="fwdp-legend-item"><span class="fwdp-dot fwdp-dot-pending"></span> Not Visited</span>
+                    <span class="fwdp-legend-item"><span class="fwdp-dot fwdp-dot-visited"></span> <?= __('Visited'); ?></span>
+                    <span class="fwdp-legend-item"><span class="fwdp-dot fwdp-dot-extra"></span> <?= __('Extra'); ?></span>
+                    <span class="fwdp-legend-item"><span class="fwdp-dot fwdp-dot-pending"></span> <?= __('Not Visited'); ?></span>
                 </div>
                 <div class="fwdp-map-body">
                     <div id="fwdpMap" class="fwdp-map-canvas"></div>
-                    <div id="fwdpMapEmpty" class="fwdp-map-empty" style="display:none;">Map key not configured.</div>
+                    <div id="fwdpMapEmpty" class="fwdp-map-empty" style="display:none;"><?= __('Map key not configured.'); ?></div>
                     <div id="fwdpMapDistance" class="fwdp-map-distance" style="display:none;"></div>
                 </div>
                 <div class="fwdp-map-selected">
-                    <span class="fwdp-label">Route Summary</span>
-                    <p id="fwdpSelectedAddress">Select a row and open the map to view visit points.</p>
+                    <span class="fwdp-label"><?= __('Route Summary'); ?></span>
+                    <p id="fwdpSelectedAddress"><?= __('Select a row and open the map to view visit points.'); ?></p>
                     <div id="fwdpRouteSummary" class="fwdp-route-summary" style="display:none;"></div>
                     <div id="fwdpNavActions" class="fwdp-nav-actions" style="display:none;">
                         <a id="fwdpOpenGoogleNav" href="#" target="_blank" rel="noopener noreferrer" class="fwdp-btn fwdp-btn-primary">
-                            <i class="fas fa-directions" aria-hidden="true"></i> Open in Google Maps
+                            <i class="fas fa-directions" aria-hidden="true"></i> <?= __('Open in Google Maps'); ?>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="fwdp-btn" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="fwdp-btn" data-bs-dismiss="modal"><?= __('Close'); ?></button>
             </div>
         </div>
     </div>

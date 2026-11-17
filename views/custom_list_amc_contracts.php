@@ -40,27 +40,27 @@ if (($_SESSION['amc_schedule_warning'] ?? '') != '') {
 <div class="page-body">
     <div class="card proj-progress-card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
-            <h5 class="mb-0">Contracts</h5>
+            <h5 class="mb-0"><?= __('Contracts'); ?></h5>
             <div class="d-flex align-items-center gap-2 flex-wrap">
                 <ul class="nav md-tabs infisuite_tab mb-0">
                     <li class="nav-item">
                         <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#contracts_active" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            Active
+                            <?= __('Active'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo (int) $active_count; ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#contracts_inactive" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                            Inactive
+                            <?= __('Inactive'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo (int) $inactive_count; ?></span>
                         </a>
                     </li>
                 </ul>
                 <a href="index.php?option=COM_INSERT_AMC_CONTRACT" class="btn btn-success btn-sm desktop-view">
-                    <i class="icofont icofont-plus icon-white"></i> Add Contract
+                    <i class="icofont icofont-plus icon-white"></i> <?= __('Add Contract'); ?>
                 </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light btn-sm desktop-view">
-                    <i class="icofont icofont-reply"></i> Back
+                    <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -72,16 +72,16 @@ if (($_SESSION['amc_schedule_warning'] ?? '') != '') {
                     <table class="table table-hover table-sm f-12">
                         <thead>
                             <tr>
-                                <th scope="col">S.No.</th>
-                                <th scope="col">Contract Name</th>
-                                <th scope="col">Contract No.</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Party</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('S.No.'); ?></th>
+                                <th scope="col"><?= __('Contract Name'); ?></th>
+                                <th scope="col"><?= __('Contract No.'); ?></th>
+                                <th scope="col"><?= __('Type'); ?></th>
+                                <th scope="col"><?= __('Party'); ?></th>
+                                <th scope="col"><?= __('Start Date'); ?></th>
+                                <th scope="col"><?= __('End Date'); ?></th>
+                                <th scope="col"><?= __('Amount'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,9 +99,9 @@ if (($_SESSION['amc_schedule_warning'] ?? '') != '') {
                                         <td><?php echo htmlspecialchars($row['transaction_no'] ?? '-'); ?></td>
                                         <td>
                                             <?php if ($isAmc) { ?>
-                                                <span class="badge bg-info">AMC</span>
+                                                <span class="badge bg-info"><?= __('AMC'); ?></span>
                                             <?php } else { ?>
-                                                <span class="badge bg-secondary">Standard</span>
+                                                <span class="badge bg-secondary"><?= __('Standard'); ?></span>
                                             <?php } ?>
                                         </td>
                                         <td>
@@ -116,7 +116,7 @@ if (($_SESSION['amc_schedule_warning'] ?? '') != '') {
                                         <td><?php echo isset($row['contract_amount']) && $row['contract_amount'] !== '' ? htmlspecialchars($row['contract_amount']) : '-'; ?></td>
                                         <td><?php echo htmlspecialchars(contractCurrentStatusLabel($row['current_status'] ?? 0, $row['cancel_status'] ?? 'N')); ?></td>
                                         <td>
-                                            <a href="index.php?option=COM_INSERT_AMC_CONTRACT&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="Open Contract">
+                                            <a href="index.php?option=COM_INSERT_AMC_CONTRACT&Rid=<?php echo deocdeId('id:' . $row['id']); ?>" title="<?= htmlspecialchars(__('Open Contract'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <i class="fa fa-edit btn-warning p-2 b-radius-5"></i>
                                             </a>
                                         </td>

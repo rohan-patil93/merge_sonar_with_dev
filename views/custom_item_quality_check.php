@@ -41,7 +41,7 @@ $title = viewTitle($_GET['option']);
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -55,11 +55,11 @@ $title = viewTitle($_GET['option']);
                                         <div class="kt-section kt-section--first">
                                             <div class="kt-section__body">
                                                 <div class="form-group  row">
-                                                    <span class="col-xl-3 col-lg-3 col-form-label">Sieral<span class="requried"></span></span>
+                                                    <span class="col-xl-3 col-lg-3 col-form-label"><?= __('Sieral'); ?><span class="requried"></span></span>
                                                     <div class="col-lg-9 col-xl-6">
                                                         <div class="input-group">
-                                                            <select aria-label="Item" class="form-control js-example-basic-single" id="select_qc_item" name= "item_id" onchange="GetSelectedTextValue(this.value)" >
-                                                                <option > Select Any One </option>
+                                                            <select aria-label="<?= htmlspecialchars(__('Item'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="select_qc_item" name= "item_id" onchange="GetSelectedTextValue(this.value)" >
+                                                                <option > <?= __('Select Any One'); ?> </option>
                                                                 <?php foreach ($itemresponse as $key => $item) { ?>
                                                                     <option  <?php if( $item_id == $item['id']){ ?> selected <?php
 } ?> value = <?php echo $item['id']; ?>  ><?php echo $item['item_name']; ?></option>
@@ -75,7 +75,7 @@ $title = viewTitle($_GET['option']);
                                                     <span class="col-xl-3 col-lg-3 col-form-label"></span>
                                                     <div class="col-lg-9 col-xl-6">
                                                     <div class="input-group">
-                                                    <h4>    No specifications found in this item        </h4>
+                                                    <h4>    '.__('No specifications found in this item').'        </h4>
                                                     <span></span>
                                                     </div>
                                                     </div>
@@ -83,11 +83,11 @@ $title = viewTitle($_GET['option']);
                                                 }
                                                 ?>
                                                 <div class="form-group  row">
-                                                <span class="col-xl-3 col-lg-3 col-form-label">Sku<span class="requried"></span></span>
+                                                <span class="col-xl-3 col-lg-3 col-form-label"><?= __('Sku'); ?><span class="requried"></span></span>
                                                 <div class="col-lg-9 col-xl-6">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-bolt" aria-hidden="true"></i></span></div>
-                                                        <input aria-label="Sku" class="form-control" type="text" name="sku" value="<?php echo $specresponse['sku']; ?>">
+                                                        <input aria-label="<?= htmlspecialchars(__('Sku'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="sku" value="<?php echo $specresponse['sku']; ?>">
                                                         <input type="hidden" name="item_id" value="<?php echo $item_id; ?>">
                                                         <input type="hidden" name="att_ids" value="<?php echo $nums; ?>">
                                                         <input type="hidden" name="spec_id" value="<?php echo $specresponse['id']; ?>">
@@ -103,7 +103,7 @@ $title = viewTitle($_GET['option']);
                                                         <div class="col-lg-9 col-xl-6">
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend"><span class="input-group-text"><i class="la la-bolt" aria-hidden="true"></i></span></div>
-                                                                <input aria-label="Input field" class="form-control" type="text" name="<?php echo  $attdata['attribute_name']; ?>" value="">
+                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="<?php echo  $attdata['attribute_name']; ?>" value="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -112,7 +112,7 @@ $title = viewTitle($_GET['option']);
                                                         <span class="col-xl-3 col-lg-3 col-form-label"><?php echo $attdata['attribute_name']; ?><span class="requried"></span></span>
                                                         <div class="col-lg-9 col-xl-6">
                                                             <div class="input-group">
-                                                                <select aria-label="Select option" class="form-control" id="select_qc_attr_<?php echo $attdata['attribute_name']; ?>" name= "<?php echo  $attdata['attribute_name']; ?>">
+                                                                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="select_qc_attr_<?php echo $attdata['attribute_name']; ?>" name= "<?php echo  $attdata['attribute_name']; ?>">
                                                                     <?php $dispay_value = explode(",",  $attdata['specifications']);
                                                                     foreach ($dispay_value as $key => $value) { ?>
                                                                         <option  <?php if( $role['value'] == $value){ ?> selected <?php
@@ -131,7 +131,7 @@ $title = viewTitle($_GET['option']);
                                                                 <?php $radio_value = explode(",",  $attdata['specifications']);
                                                                 foreach ($radio_value as $radio) { ?>
                                                                     <label class="kt-radio">
-                                                                        <input aria-label="Radio option" type="radio" name="<?php echo  $attdata['attribute_name']; ?>" value = <?php echo $radio; ?> >  <?php echo $radio; ?>
+                                                                        <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="<?php echo  $attdata['attribute_name']; ?>" value = <?php echo $radio; ?> >  <?php echo $radio; ?>
                                                                         <span></span>
                                                                     </label>
                                                                 <?php } ?>

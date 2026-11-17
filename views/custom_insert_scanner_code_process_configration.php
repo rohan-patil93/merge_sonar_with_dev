@@ -279,7 +279,7 @@ document.getElementById('addFieldBtn').addEventListener('click', function() {
 
 function fetchTableFields(tableName) {
     const container = document.getElementById('fieldMappingContainer');
-    container.innerHTML = '<div class="text-center p-3"><i class="fa fa-spinner fa-spin"></i> Loading table fields...</div>';
+    container.innerHTML = '<div class="text-center p-3"><i class="fa fa-spinner fa-spin"></i> <?= htmlspecialchars(__('Loading table fields...'), ENT_QUOTES, 'UTF-8'); ?></div>';
 
     $.ajax({
         url: "ajax.php",

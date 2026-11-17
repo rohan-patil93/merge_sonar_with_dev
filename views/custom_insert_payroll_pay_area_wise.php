@@ -94,7 +94,7 @@ foreach($payrolldatas as $payrolldata){
             }
           },
           error: function(){
-            swal('<?php echo ucwords($_SESSION['config']['name']); ?>', 'Something went wrong. Please try again.', 'error');
+            swal('<?php echo ucwords($_SESSION['config']['name']); ?>', <?php echo json_encode(__('Something went wrong. Please try again.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'error');
           }
         });
       }

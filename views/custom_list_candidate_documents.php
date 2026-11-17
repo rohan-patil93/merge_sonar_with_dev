@@ -60,10 +60,10 @@ $parentdocuments  = json_decode($parentdocuments,1);
                             //text: ;,
                             type: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
                             confirmButtonClass: "btn btn-danger",
                             showCancelButton: false,
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                             cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
               if (result.value) {
@@ -186,7 +186,7 @@ $parentdocuments  = json_decode($parentdocuments,1);
        <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
         <div class=" card-custom " id="kt_page_sticky_card">
          <div class="card-header table-card-header">
-          <h5>  Required Documents</h5>
+          <h5>  <?= __('Required Documents'); ?></h5>
      </div>
      <div class="card-body">
        <div class="row">
@@ -264,10 +264,10 @@ $parentdocuments  = json_decode($parentdocuments,1);
      <div class="d-flex font-weight-bold">
        <?php if($value['current_status'] != ST_APPROVED){ ?>
          <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5"  style=" height:0px; ">
-           <label class="btn-hover-text-primary mt-1 <?php ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File" aria-label="Upload File">
+           <label class="btn-hover-text-primary mt-1 <?php ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= htmlspecialchars(__('Uploade File'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Upload File'), ENT_QUOTES, 'UTF-8'); ?>">
 
              <i class="ti-clip" style="font-size: 20px;"></i>
-             <input aria-label="File upload" type="file" name="image_<?php echo $value['id']; ?>" />
+             <input aria-label="<?= htmlspecialchars(__('File upload'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="image_<?php echo $value['id']; ?>" />
              <input type="hidden" name="hidimage_<?php echo $value['id']; ?>" value="<?php echo $value['document_shared']; ?>"/>
            </label>
 
@@ -286,8 +286,8 @@ $parentdocuments  = json_decode($parentdocuments,1);
       <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
 
 
-        <div class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)"  name="status" id="status" value="<?php echo ST_APPROVED; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Approved</div>
-        <div class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"  name="status" id="status_2" value="<?php echo ST_REJECTED; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Rejected</div>
+        <div class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)"  name="status" id="status" value="<?php echo ST_APPROVED; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Approved'); ?></div>
+        <div class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"  name="status" id="status_2" value="<?php echo ST_REJECTED; ?>)" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Rejected'); ?></div>
       </div>
     </div>
 
@@ -320,7 +320,7 @@ $parentdocuments  = json_decode($parentdocuments,1);
 }
 }else{
 
-  echo '<div class="text-center"><h4 class="text-info"><i class="fa fa-warning"></i> No Required Documents</h
+  echo '<div class="text-center"><h4 class="text-info"><i class="fa fa-warning"></i> '.__('No Required Documents').'</h
   4></div>';
 }  ?>
 </div>
@@ -331,7 +331,7 @@ $parentdocuments  = json_decode($parentdocuments,1);
     <div class="col-lg-4">
      <input type="hidden" name="candidate_id" value="<?php echo $candidate_id;  ?>" />
      <input type="hidden" name="submit" value="submit" />
-     <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Submit</button>
+     <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i><?= __('Submit'); ?></button>
    </div>
  </div>
 </div>

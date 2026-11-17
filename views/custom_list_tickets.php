@@ -104,7 +104,7 @@ function updateticketdetails(id,filed_name,value,pri=''){
         if(emp[1]!=""){
           $(".emp_id"+id).html('<img src="uploads/all/'+emp[1]+'"   class="img-radius img-50 align-top m-r-15" data-fallback="\"   alt="Attachment Preview" />');
         }else{
-            $(".emp_id"+id).html('<span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" >'+emp[2]+'</span>');
+            $(".emp_id"+id).html('<span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" >'+emp[2]+'</span>');
         }
     }
     if(filed_name == 'priority'){
@@ -141,14 +141,14 @@ function chnagessttts(){
 <div class="page-body p-2">
     <div class="card table-card">
         <div class="card-header">
-            <h5>Tickets </h5>
+            <h5><?= __('Tickets'); ?> </h5>
             <div class="card-header-right">
                 <?php  if(in_array('2',$_SESSION['role_ids'])){  ?>
-                <button type="button" class="btn btn-primary waves-effect" onclick="addtaskpopup()"><i class="ti-plus text-white"></i> Add Task</button>
+                <button type="button" class="btn btn-primary waves-effect" onclick="addtaskpopup()"><i class="ti-plus text-white"></i> <?= __('Add Task'); ?></button>
             <?php } ?>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
             </div>
         </div>
@@ -157,34 +157,34 @@ function chnagessttts(){
   <form method="post" action="">
             <div class="row card-body pt-0 mt-0">
                 <div class="col-lg-2">
-                    <span class="form-label col-form-label">Status</span>
-                    <select aria-label="Current Status" class="form-control form-select js-example-basic-single" name="current_status">
-                     <option value="">All</option>
+                    <span class="form-label col-form-label"><?= __('Status'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Current Status'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="current_status">
+                     <option value=""><?= __('All'); ?></option>
                      <?php foreach($statusjsondecode as $arststuslist){ ?>
                          <option value="<?php echo $arststuslist['status']; ?>" <?php echo $arststuslist['status']==$_POST['current_status']?"selected":""; ?>><?php echo $arststuslist['name']; ?></option>
                      <?php } ?>
                  </select>
              </div>
              <div class="col-lg-2">
-                <span class="form-label col-form-label">Priority</span>
-                <select aria-label="Priority" class="form-control form-select js-example-basic-single" name="priority">
-                    <option value="">All</option>
-                    <option <?php echo $_POST['priority']=='2'?"selected":""; ?> value="2">High</option>
-                    <option <?php echo $_POST['priority']=='0'?"selected":""; ?> value="0">Low</option>
-                    <option <?php echo $_POST['priority']=='1'?"selected":""; ?> value="1">Medium</option>
+                <span class="form-label col-form-label"><?= __('Priority'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Priority'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="priority">
+                    <option value=""><?= __('All'); ?></option>
+                    <option <?php echo $_POST['priority']=='2'?"selected":""; ?> value="2"><?= __('High'); ?></option>
+                    <option <?php echo $_POST['priority']=='0'?"selected":""; ?> value="0"><?= __('Low'); ?></option>
+                    <option <?php echo $_POST['priority']=='1'?"selected":""; ?> value="1"><?= __('Medium'); ?></option>
                 </select>
             </div>
             <div class="col-lg-2">
-                <span class="form-label col-form-label">From</span>
-                <input aria-label="Filterfromdate" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo $_POST['filterfromdate']; ?>">
+                <span class="form-label col-form-label"><?= __('From'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Filterfromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo $_POST['filterfromdate']; ?>">
             </div>
             <div class="col-lg-2">
-                <span class="form-label col-form-label">To</span>
-                <input aria-label="Filtertodate" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo $_POST['filtertodate']; ?>">
+                <span class="form-label col-form-label"><?= __('To'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Filtertodate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo $_POST['filtertodate']; ?>">
             </div>
             <div class="col-lg-2">
                 <span class="form-label col-form-label"></span>
-                <button  type="submit" class="btn waves-effect waves-light hor-grd btn-grd-success d-block w-100 m-t-15">Search</button>
+                <button  type="submit" class="btn waves-effect waves-light hor-grd btn-grd-success d-block w-100 m-t-15"><?= __('Search'); ?></button>
             </div>
         </div>
     </form>
@@ -193,13 +193,13 @@ function chnagessttts(){
             <thead>
                 <tr>
                     <th scope=\"col\">#</th>
-                    <th scope=\"col\">Ticket ID</th>
-                    <th scope=\"col\">Ticket Subject</th>
-                    <th scope=\"col\">Created Date</th>
-                    <th scope=\"col\">Last Reply</th>
-                    <th scope=\"col\">Priority</th>
-                    <th scope=\"col\">Status</th>
-                    <th scope=\"col\">Actions</th>
+                    <th scope=\"col\"><?= __('Ticket ID'); ?></th>
+                    <th scope=\"col\"><?= __('Ticket Subject'); ?></th>
+                    <th scope=\"col\"><?= __('Created Date'); ?></th>
+                    <th scope=\"col\"><?= __('Last Reply'); ?></th>
+                    <th scope=\"col\"><?= __('Priority'); ?></th>
+                    <th scope=\"col\"><?= __('Status'); ?></th>
+                    <th scope=\"col\"><?= __('Actions'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -225,9 +225,9 @@ function chnagessttts(){
                             <div class="dropdown-success dropdown open">
                                 <button class="btn <?php echo $bg_color; ?> dropdown-toggle waves-effect waves-light btn-round priority<?php echo $projecttasklists['id']; ?>" type="button" id="dropdown-3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" <?php echo $projecttasklists['client_id'] == $_SESSION['userid']?'':'disabled'; ?>><?php echo $priority; ?></button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown-3" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                    <button type="button" class="dropdown-item waves-light waves-effect d-block"  onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','0','High')">High</button>
-                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','1','Medium')">Medium</button>
-                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','2','Low')">Low</button>
+                                    <button type="button" class="dropdown-item waves-light waves-effect d-block"  onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','0','High')"><?= __('High'); ?></button>
+                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','1','Medium')"><?= __('Medium'); ?></button>
+                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','2','Low')"><?= __('Low'); ?></button>
                                 </div>
                             </div>
                         </td>
@@ -240,9 +240,9 @@ function chnagessttts(){
                      </td>
                      <td>
                         <div class="dropdown-success dropdown open">
-                            <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-3_2" data-bs-toggle="dropdown"  <?php echo ($projecttasklists['current_status'] <= '3' && $projecttasklists['client_id'] == $_SESSION['userid'])?'':'disabled'; ?> aria-haspopup="true" aria-expanded="true">Edit</button>
+                            <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-3_2" data-bs-toggle="dropdown"  <?php echo ($projecttasklists['current_status'] <= '3' && $projecttasklists['client_id'] == $_SESSION['userid'])?'':'disabled'; ?> aria-haspopup="true" aria-expanded="true"><?= __('Edit'); ?></button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-3" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="addtaskpopup('<?php echo $projecttasklists['id']; ?>')">Edit</button>
+                                <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="addtaskpopup('<?php echo $projecttasklists['id']; ?>')"><?= __('Edit'); ?></button>
                             </div>
                         </div>
                     </td>
@@ -253,7 +253,7 @@ function chnagessttts(){
 
 <tr><td colspan="12">
 
-                                        <h4 class='p-40 text-center'><i class='fa fa-warning text-warning'></i> No Tickets Available</h4>
+                                        <h4 class='p-40 text-center'><i class='fa fa-warning text-warning'></i> <?= __('No Tickets Available'); ?></h4>
                           </td> </tr>
 
         <?php     } ?>
@@ -264,34 +264,34 @@ function chnagessttts(){
   <form method="post" action="">
             <div class="row card-body pt-0 mt-0">
                 <div class="col-lg-2">
-                    <span class="form-label col-form-label">Status</span>
-                    <select aria-label="Current Status" class="form-control form-select js-example-basic-single" name="current_status">
-                     <option value="">All</option>
+                    <span class="form-label col-form-label"><?= __('Status'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Current Status'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="current_status">
+                     <option value=""><?= __('All'); ?></option>
                      <?php foreach($statusjsondecode as $arststuslist){ ?>
                          <option value="<?php echo $arststuslist['status']; ?>" <?php echo $arststuslist['status']==$_POST['current_status']?"selected":""; ?>><?php echo $arststuslist['name']; ?></option>
                      <?php } ?>
                  </select>
              </div>
              <div class="col-lg-2">
-                <span class="form-label col-form-label">Priority</span>
-                <select aria-label="Priority" class="form-control form-select js-example-basic-single" name="priority">
-                    <option value="">All</option>
-                    <option <?php echo $_POST['priority']=='2'?"selected":""; ?> value="2">High</option>
-                    <option <?php echo $_POST['priority']=='0'?"selected":""; ?> value="0">Low</option>
-                    <option <?php echo $_POST['priority']=='1'?"selected":""; ?> value="1">Medium</option>
+                <span class="form-label col-form-label"><?= __('Priority'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Priority'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="priority">
+                    <option value=""><?= __('All'); ?></option>
+                    <option <?php echo $_POST['priority']=='2'?"selected":""; ?> value="2"><?= __('High'); ?></option>
+                    <option <?php echo $_POST['priority']=='0'?"selected":""; ?> value="0"><?= __('Low'); ?></option>
+                    <option <?php echo $_POST['priority']=='1'?"selected":""; ?> value="1"><?= __('Medium'); ?></option>
                 </select>
             </div>
             <div class="col-lg-2">
-                <span class="form-label col-form-label">From</span>
-                <input aria-label="Filterfromdate" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo $_POST['filterfromdate']; ?>">
+                <span class="form-label col-form-label"><?= __('From'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Filterfromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo $_POST['filterfromdate']; ?>">
             </div>
             <div class="col-lg-2">
-                <span class="form-label col-form-label">To</span>
-                <input aria-label="Filtertodate" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo $_POST['filtertodate']; ?>">
+                <span class="form-label col-form-label"><?= __('To'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Filtertodate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo $_POST['filtertodate']; ?>">
             </div>
             <div class="col-lg-2">
                 <span class="form-label col-form-label"></span>
-                <button  type="submit" class="btn waves-effect waves-light hor-grd btn-grd-success d-block w-100 m-t-15">Search</button>
+                <button  type="submit" class="btn waves-effect waves-light hor-grd btn-grd-success d-block w-100 m-t-15"><?= __('Search'); ?></button>
             </div>
         </div>
     </form>
@@ -300,13 +300,13 @@ function chnagessttts(){
             <thead>
                 <tr>
                     <th scope=\"col\">#</th>
-                    <th scope=\"col\">Ticket ID</th>
-                    <th scope=\"col\">Ticket Subject</th>
-                    <th scope=\"col\">Created Date</th>
-                    <th scope=\"col\">Last Reply</th>
-                    <th scope=\"col\">Priority</th>
-                    <th scope=\"col\">Status</th>
-                    <th scope=\"col\">Actions</th>
+                    <th scope=\"col\"><?= __('Ticket ID'); ?></th>
+                    <th scope=\"col\"><?= __('Ticket Subject'); ?></th>
+                    <th scope=\"col\"><?= __('Created Date'); ?></th>
+                    <th scope=\"col\"><?= __('Last Reply'); ?></th>
+                    <th scope=\"col\"><?= __('Priority'); ?></th>
+                    <th scope=\"col\"><?= __('Status'); ?></th>
+                    <th scope=\"col\"><?= __('Actions'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -333,9 +333,9 @@ function chnagessttts(){
                             <div class="dropdown-success dropdown open">
                                 <button class="btn <?php echo $bg_color; ?> dropdown-toggle waves-effect waves-light btn-round priority<?php echo $projecttasklists['id']; ?>" disabled type="button" id="dropdown-3_3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ><?php echo $priority; ?></button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown-3" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                    <button type="button" class="dropdown-item waves-light waves-effect d-block"  onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','0','High')">High</button>
-                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','1','Medium')">Medium</button>
-                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','2','Low')">Low</button>
+                                    <button type="button" class="dropdown-item waves-light waves-effect d-block"  onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','0','High')"><?= __('High'); ?></button>
+                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','1','Medium')"><?= __('Medium'); ?></button>
+                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','2','Low')"><?= __('Low'); ?></button>
                                 </div>
                             </div>
                         </td>
@@ -348,9 +348,9 @@ function chnagessttts(){
                      </td>
                      <td>
                         <div class="dropdown-success dropdown open">
-                            <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-3_4" data-bs-toggle="dropdown"  disabled  aria-haspopup="true" aria-expanded="true">Edit</button>
+                            <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-3_4" data-bs-toggle="dropdown"  disabled  aria-haspopup="true" aria-expanded="true"><?= __('Edit'); ?></button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-3" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="addtaskpopup('<?php echo $projecttasklists['id']; ?>')">Edit</button>
+                                <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="addtaskpopup('<?php echo $projecttasklists['id']; ?>')"><?= __('Edit'); ?></button>
                             </div>
                         </div>
                     </td>
@@ -361,7 +361,7 @@ function chnagessttts(){
 
 <tr><td colspan="12">
 
-                                        <h4 class='p-40 text-center'><i class='fa fa-warning text-warning'></i> No Tickets Available</h4>
+                                        <h4 class='p-40 text-center'><i class='fa fa-warning text-warning'></i> <?= __('No Tickets Available'); ?></h4>
                           </td> </tr>
 
         <?php     } ?>
@@ -404,7 +404,7 @@ switch($dash['current_status']){
                     <div class="card-body">
                         <div class="align-items-center m-b-30">
                             <div class="col p-l-0">
-                                <h6 class="m-b-5">Open Tickets</h6>
+                                <h6 class="m-b-5"><?= __('Open Tickets'); ?></h6>
                             </div>
                         </div>
                         <div class="align-items-center text-left">
@@ -433,7 +433,7 @@ switch($dash['current_status']){
                     <div class="card-body">
                         <div class="align-items-center m-b-30">
                             <div class="col p-l-0">
-                                <h6 class="m-b-5">In-progress Tickets</h6>
+                                <h6 class="m-b-5"><?= __('In-progress Tickets'); ?></h6>
                             </div>
                         </div>
                         <div class="align-items-center text-left">
@@ -463,7 +463,7 @@ switch($dash['current_status']){
                         <div class="align-items-center m-b-30">
 
                             <div class="col p-l-0">
-                                <h6 class="m-b-5">Fixed Tickets</h6>
+                                <h6 class="m-b-5"><?= __('Fixed Tickets'); ?></h6>
 
                             </div>
                         </div>
@@ -495,7 +495,7 @@ switch($dash['current_status']){
                         <div class="align-items-center m-b-30">
 
                             <div class="col p-l-0">
-                                <h6 class="m-b-5">Close Tickets</h6>
+                                <h6 class="m-b-5"><?= __('Close Tickets'); ?></h6>
 
                             </div>
                         </div>
@@ -524,58 +524,58 @@ switch($dash['current_status']){
         <form method="post" action="">
             <div class="row card-body pt-0 mt-0">
                 <div class="col-lg-2 form-group">
-                    <span class="form-label col-form-label">Employee</span>
-                    <select aria-label="Emp" class="form-select js-example-basic-single col-sm-12" name="emp_id">
-                        <option value="">Select Employee</option>
+                    <span class="form-label col-form-label"><?= __('Employee'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Emp'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single col-sm-12" name="emp_id">
+                        <option value=""><?= __('Select Employee'); ?></option>
                         <?php foreach($emplist as $list22){ ?>
                             <option value="<?php echo $list22['id']; ?>" <?php echo $list22['id']==$_POST['emp_id']?"selected":""; ?>><?php echo $list22['display_name'];?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="col-lg-2 form-group">
-                    <span class="form-label col-form-label">Status</span>
-                    <select aria-label="Current Status" class="form-control form-select js-example-basic-single" name="current_status">
-                     <option value="">All</option>
+                    <span class="form-label col-form-label"><?= __('Status'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Current Status'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="current_status">
+                     <option value=""><?= __('All'); ?></option>
                      <?php foreach($statusjsondecode as $arststuslist){ ?>
                          <option value="<?php echo $arststuslist['status']; ?>" <?php echo $arststuslist['status']==$_POST['current_status']?"selected":""; ?>><?php echo $arststuslist['name']; ?></option>
                      <?php } ?>
                  </select>
              </div>
              <div class="col-lg-2 form-group">
-                <span class="form-label col-form-label">Priority</span>
-                <select aria-label="Priority" class="form-control form-select js-example-basic-single" name="priority">
-                    <option value="">All</option>
-                    <option <?php echo $_POST['priority']=='2'?"selected":""; ?> value="2">High</option>
-                    <option <?php echo $_POST['priority']=='0'?"selected":""; ?> value="0">Low</option>
-                    <option <?php echo $_POST['priority']=='1'?"selected":""; ?> value="1">Medium</option>
+                <span class="form-label col-form-label"><?= __('Priority'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Priority'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="priority">
+                    <option value=""><?= __('All'); ?></option>
+                    <option <?php echo $_POST['priority']=='2'?"selected":""; ?> value="2"><?= __('High'); ?></option>
+                    <option <?php echo $_POST['priority']=='0'?"selected":""; ?> value="0"><?= __('Low'); ?></option>
+                    <option <?php echo $_POST['priority']=='1'?"selected":""; ?> value="1"><?= __('Medium'); ?></option>
                 </select>
             </div>
             <div class="col-lg-2 form-group">
-                <span class="form-label col-form-label">From</span>
-                <input aria-label="Filterfromdate" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo $_POST['filterfromdate']; ?>">
+                <span class="form-label col-form-label"><?= __('From'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Filterfromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo $_POST['filterfromdate']; ?>">
             </div>
             <div class="col-lg-2 form-group">
-                <span class="form-label col-form-label">To</span>
-                <input aria-label="Filtertodate" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo $_POST['filtertodate']; ?>">
+                <span class="form-label col-form-label"><?= __('To'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Filtertodate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo $_POST['filtertodate']; ?>">
             </div>
             <div class="col-lg-1">
-                <button  type="submit" class="btn btn-primary m-t-45 btn-md">Search</button>
+                <button  type="submit" class="btn btn-primary m-t-45 btn-md"><?= __('Search'); ?></button>
             </div>
         </div>
-    </form>ss
+    </form><?= __('ss'); ?>
     <div class="table-responsive dt-responsive p-3">
         <table id="basic-btn_3" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
                     <th scope=\"col\">#</th>
-                    <th scope=\"col\">Ticket ID</th>
-                    <th scope=\"col\">Ticket Subject</th>
-                    <th scope=\"col\">Assigned Staff</th>
-                    <th scope=\"col\">Created Date</th>
-                    <th scope=\"col\">Last Reply</th>
-                    <th scope=\"col\">Priority</th>
-                    <th scope=\"col\">Status</th>
-                    <th scope=\"col\">Actions</th>
+                    <th scope=\"col\"><?= __('Ticket ID'); ?></th>
+                    <th scope=\"col\"><?= __('Ticket Subject'); ?></th>
+                    <th scope=\"col\"><?= __('Assigned Staff'); ?></th>
+                    <th scope=\"col\"><?= __('Created Date'); ?></th>
+                    <th scope=\"col\"><?= __('Last Reply'); ?></th>
+                    <th scope=\"col\"><?= __('Priority'); ?></th>
+                    <th scope=\"col\"><?= __('Status'); ?></th>
+                    <th scope=\"col\"><?= __('Actions'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -601,14 +601,14 @@ switch($dash['current_status']){
                                 <span class="emp_id<?php echo $projecttasklists['id'];?>" style="display:<?php echo $projecttasklists['emp_id']=='0'?'none':'';?>">
                                 <?php  $empdata = filterArrayValue($emplist,'id',$projecttasklists['emp_id']);
                                 if($empdata[0]['image']!="") {?>
-                                    <img src="uploads/all/<?php echo $empdata[0]['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                    <img src="uploads/all/<?php echo $empdata[0]['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php } else { ?>
-                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empdata[0]['display_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empdata[0]['display_name']); ?></span>
                                 <?php } ?>
                                 </span>
                                 <div class="d-inline-block">
-                                    <select aria-label="Select option" class="form-select js-example-basic-single col-sm-12" onchange="updateticketdetails('<?php echo $projecttasklists['id'] ?>','emp_id',this.value)">
-                                        <option>Select Any One</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single col-sm-12" onchange="updateticketdetails('<?php echo $projecttasklists['id'] ?>','emp_id',this.value)">
+                                        <option><?= __('Select Any One'); ?></option>
                                         <?php foreach($emplist as $list2){ ?>
                                             <option value="<?php echo $list2['id'].'||'.$list2['image'].'||'.initials($list2['display_name']).'||'.$list2['user_id']; ?>" <?php echo $list2['id']==$projecttasklists['emp_id']?"selected":""; ?>><?php echo $list2['display_name'];?></option>
                                         <?php } ?>
@@ -624,9 +624,9 @@ switch($dash['current_status']){
                             <div class="dropdown-success dropdown open">
                                 <button class="btn <?php echo $bg_color; ?> dropdown-toggle waves-effect waves-light btn-round priority<?php echo $projecttasklists['id']; ?>" type="button" id="dropdown-3_5" data-bs-toggle="dropdown" aria-haspopup="true" <?php echo $projecttasklists['client_id'] == $_SESSION['userid']?'':'disabled'; ?> aria-expanded="true"><?php echo $priority; ?></button>
                                 <div class="dropdown-menu" aria-labelledby="dropdown-3" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                    <button type="button" class="dropdown-item waves-light waves-effect d-block"  onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','0','High')">High</button>
-                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','1','Medium')">Medium</button>
-                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','2','Low')">Low</button>
+                                    <button type="button" class="dropdown-item waves-light waves-effect d-block"  onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','0','High')"><?= __('High'); ?></button>
+                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','1','Medium')"><?= __('Medium'); ?></button>
+                                    <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="updateticketdetails('<?php echo $projecttasklists['id'] ?>','priority','2','Low')"><?= __('Low'); ?></button>
                                 </div>
                             </div>
                         </td>
@@ -639,9 +639,9 @@ switch($dash['current_status']){
                      </td>
                      <td>
                         <div class="dropdown-success dropdown open">
-                            <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-3_6" data-bs-toggle="dropdown"  <?php echo ($projecttasklists['current_status'] <= '3' && $projecttasklists['client_id'] == $_SESSION['userid'])?'':'disabled'; ?> aria-haspopup="true" aria-expanded="true">Edit</button>
+                            <button class="btn btn-success dropdown-toggle waves-effect waves-light btn-round" type="button" id="dropdown-3_6" data-bs-toggle="dropdown"  <?php echo ($projecttasklists['current_status'] <= '3' && $projecttasklists['client_id'] == $_SESSION['userid'])?'':'disabled'; ?> aria-haspopup="true" aria-expanded="true"><?= __('Edit'); ?></button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-3" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="addtaskpopup('<?php echo $projecttasklists['id']; ?>')">Edit</button>
+                                <button type="button" class="dropdown-item waves-light waves-effect d-block" onclick="addtaskpopup('<?php echo $projecttasklists['id']; ?>')"><?= __('Edit'); ?></button>
                             </div>
                         </div>
                     </td>
@@ -652,7 +652,7 @@ switch($dash['current_status']){
 
 <tr><td colspan="12">
 
-                                        <h4 class='p-40 text-center'><i class='fa fa-warning text-warning'></i> No Tickets Available</h4>
+                                        <h4 class='p-40 text-center'><i class='fa fa-warning text-warning'></i> <?= __('No Tickets Available'); ?></h4>
                           </td> </tr>
 
         <?php     } ?>

@@ -129,8 +129,8 @@ function submitattendance(month,year,monthstartday,pay_area_id){
           type: "info",
           showCancelButton: true,
           confirmButtonClass: "btn-danger",
-          confirmButtonText: "Submit",
-          cancelButtonText: "Don't Submit",
+          confirmButtonText: <?php echo json_encode(__('Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+          cancelButtonText: <?php echo json_encode(__('Don\'t Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
           closeOnConfirm: true,
           closeOnCancel: true
         },
@@ -223,16 +223,16 @@ function getWorkAttendanceLogs(yearmonth){
     <?php if($success_messages !="" ){?>
          <div class="alert alert-info alert-dismissible">
               <strong><?php echo $success_messages; ?> </strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
           </div>
     <?php } ?>
     <div class="card card-custom mb-5 ">
       <div class="card-header">
-        <h5>Work Attendance</h5>
+        <h5><?= __('Work Attendance'); ?></h5>
         <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
             <i class="icofont icofont-reply"></i>
-            Back
+            <?= __('Back'); ?>
           </a>
         </div>
       </div>
@@ -246,7 +246,7 @@ function getWorkAttendanceLogs(yearmonth){
                   <div class="form-group row">
                     <div class="col-10">
                       <input type="hidden" name="monthstartday" id="monthstartday" value="<?php echo $_SESSION['config']['default_payroll_day']; ?>">
-                      <input aria-label="Att Month Year" class="form-control" type="month" name="att_month_year" value="<?php echo $yearr."-".$mnth?>"  id="att_month_year" />
+                      <input aria-label="<?= htmlspecialchars(__('Att Month Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="att_month_year" value="<?php echo $yearr."-".$mnth?>"  id="att_month_year" />
 
                     </div>
                   </div>
@@ -256,7 +256,7 @@ function getWorkAttendanceLogs(yearmonth){
                 <ul class="nav md-tabs infisuite_tab mt-2 ml-2">
                 <li class="nav-item">
                   <a class="nav-link <?php echo $selected_pay_area_id == '' ? 'active' : ''; ?>"data-bs-toggle="tab" href="#tab0" data-id="" role="tab">
-                         ALL
+                         <?= __('ALL'); ?>
                   </a>
                 </li>
                   <?php
@@ -287,14 +287,14 @@ function getWorkAttendanceLogs(yearmonth){
               <div class="form-radio">
                 <div class="radio radio-inline">
                   <label class="form-label">
-                    <input aria-label="Recordtype" type="radio" name="recordtype" <?php echo $_POST['recordtype']=='discrepancy'?"checked":"";?> class="d-none" value="discrepancy"/>
-                    <i class="helper"></i>Discrepancy Records
+                    <input aria-label="<?= htmlspecialchars(__('Recordtype'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="recordtype" <?php echo $_POST['recordtype']=='discrepancy'?"checked":"";?> class="d-none" value="discrepancy"/>
+                    <i class="helper"></i><?= __('Discrepancy Records'); ?>
                   </label>
                 </div>
                 <div class="radio radio-inline">
                   <label class="form-label">
-                    <input aria-label="Recordtype" type="radio" name="recordtype" <?php echo $_POST['recordtype']!='discrepancy'?"checked":"";?> value="all" class="d-none"/>
-                    <i class="helper"></i>All Records
+                    <input aria-label="<?= htmlspecialchars(__('Recordtype'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="recordtype" <?php echo $_POST['recordtype']!='discrepancy'?"checked":"";?> value="all" class="d-none"/>
+                    <i class="helper"></i><?= __('All Records'); ?>
                   </label>
                 </div>
               </div>
@@ -308,7 +308,7 @@ function getWorkAttendanceLogs(yearmonth){
 
 
             <div class="col-lg-3">
-              <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="ti-filter"></i> Apply Search</button>
+              <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="ti-filter"></i> <?= __('Apply Search'); ?></button>
             </div>
           </form>
           <div class="row mb-5">
@@ -335,16 +335,16 @@ function getWorkAttendanceLogs(yearmonth){
                 $btndisable = "disabled";
               }
             ?>
-            <button type="submit" class="btn btn-primary waves-effect waves-light <?php echo $btndisable; ?>" id="download_btn"  onclick="donloadall()"   data-container="body" data-toggle="tooltip" data-placement="bottom" title=""> <span id="download_icon"><?php echo isset($work_attendance_log['D'])?'<i class="ti-check"></i>':'<i class="ti-cloud-down"></i>'; ?></span> Download CSV <span class="badge bg-warning text-white">1</span></button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light <?php echo $btndisable; ?>" id="download_btn"  onclick="donloadall()"   data-container="body" data-toggle="tooltip" data-placement="bottom" title=""> <span id="download_icon"><?php echo isset($work_attendance_log['D'])?'<i class="ti-check"></i>':'<i class="ti-cloud-down"></i>'; ?></span> <?= __('Download CSV'); ?> <span class="badge bg-warning text-white">1</span></button>
 
-            <a href="index.php?option=COM_INSERT_SWAP_IN_OUT&TYPE=withoutattendancesetting&yearmonth=<?php echo $yearmonth; ?>" type="submit" class="btn btn-primary waves-effect waves-light <?php echo isset($work_attendance_log['D'])?'':'disabled'; ?> <?php echo $btndisable; ?>" id="import_btn"  data-container="body" data-toggle="tooltip" data-placement="bottom" title=""> <?php echo isset($work_attendance_log['I'])?'<i class="ti-check"></i>':'<i class="ti-cloud-up"></i>'; ?> Upload <span class="badge bg-warning text-white">2</span></a>
+            <a href="index.php?option=COM_INSERT_SWAP_IN_OUT&TYPE=withoutattendancesetting&yearmonth=<?php echo $yearmonth; ?>" type="submit" class="btn btn-primary waves-effect waves-light <?php echo isset($work_attendance_log['D'])?'':'disabled'; ?> <?php echo $btndisable; ?>" id="import_btn"  data-container="body" data-toggle="tooltip" data-placement="bottom" title=""> <?php echo isset($work_attendance_log['I'])?'<i class="ti-check"></i>':'<i class="ti-cloud-up"></i>'; ?> <?= __('Upload'); ?> <span class="badge bg-warning text-white">2</span></a>
             <?php $Rrid = deocdeId("id:".$work_attendance_log['I']['import_swap_in_out_id']); ?>
 
-            <a href="index.php?option=COM_INSERT_SWAP_IN_OUT&TYPE=withoutattendancesetting&yearmonth=<?php echo $yearmonth; ?>&Rid=<?php echo $Rrid; ?>"  class="btn btn-primary waves-effect waves-light <?php echo isset($work_attendance_log['I'])?'':'disabled'; ?> <?php echo $btndisable; ?>" id="review_btn">  <?php echo isset($work_attendance_log['R'])?'<i class="ti-check"></i>':'<i class="ti-cloud-down"></i>'; ?> Review <span class="badge bg-warning text-white">3</span></a>
+            <a href="index.php?option=COM_INSERT_SWAP_IN_OUT&TYPE=withoutattendancesetting&yearmonth=<?php echo $yearmonth; ?>&Rid=<?php echo $Rrid; ?>"  class="btn btn-primary waves-effect waves-light <?php echo isset($work_attendance_log['I'])?'':'disabled'; ?> <?php echo $btndisable; ?>" id="review_btn">  <?php echo isset($work_attendance_log['R'])?'<i class="ti-check"></i>':'<i class="ti-cloud-down"></i>'; ?> <?= __('Review'); ?> <span class="badge bg-warning text-white">3</span></a>
 
-           <button type="submit" class="btn btn-primary waves-effect waves-light  submitattendancess <?php echo $btndisable; ?>"  onclick="submitattendance('<?php echo $mnth; ?>','<?php echo $yearr; ?>','<?php echo $timesheetstartdate; ?>','<?php echo $_POST['pay_area_id']; ?>')"   data-container="body" data-toggle="tooltip" data-placement="bottom" title="Please check the data before submit, Once you submit the data you cannot make any changes here."> <?php echo isset($work_attendance_log['S'])?'<i class="ti-check"></i>':'<i class="ti-thumb-up"></i>'; ?> Submit Attendance <span class="badge bg-warning text-white">4</span> </button>
+           <button type="submit" class="btn btn-primary waves-effect waves-light  submitattendancess <?php echo $btndisable; ?>"  onclick="submitattendance('<?php echo $mnth; ?>','<?php echo $yearr; ?>','<?php echo $timesheetstartdate; ?>','<?php echo $_POST['pay_area_id']; ?>')"   data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Please check the data before submit, Once you submit the data you cannot make any changes here.'), ENT_QUOTES, 'UTF-8'); ?>"> <?php echo isset($work_attendance_log['S'])?'<i class="ti-check"></i>':'<i class="ti-thumb-up"></i>'; ?> <?= __('Submit Attendance'); ?> <span class="badge bg-warning text-white">4</span> </button>
 
-           <button type="submit" class="btn btn-info waves-effect waves-light <?php echo count((array)$work_attendance_log) =='0'?"disabled":""; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Attendance Logs" onclick="getWorkAttendanceLogs('<?php echo $yearmonth; ?>')"><i class="ti-time"></i> </button>
+           <button type="submit" class="btn btn-info waves-effect waves-light <?php echo count((array)$work_attendance_log) =='0'?"disabled":""; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Attendance Logs'), ENT_QUOTES, 'UTF-8'); ?>" onclick="getWorkAttendanceLogs('<?php echo $yearmonth; ?>')"><i class="ti-time"></i> </button>
 
 
          </div></div>
@@ -352,7 +352,7 @@ function getWorkAttendanceLogs(yearmonth){
           <div class=" mt-4 work-entry">
           <table class="table table-bordered">
                 <tr>
-              <th scope="col" rowspan="2">Work Entries</th>
+              <th scope="col" rowspan="2"><?= __('Work Entries'); ?></th>
               <th scope="col" colspan="32" class="f-14" >
                 <?php echo date('d-M-y',strtotime($firstdate))." To ".date('d-M-y',strtotime($lastdate)); ?>
               </th>
@@ -374,9 +374,9 @@ function getWorkAttendanceLogs(yearmonth){
                 <div class="align-middle float-left ml-2">
                 <span class="f-12"><?php echo $mk; ?></span>
                   <?php if($elist['image']!=""){?>
-                    <img src="uploads/all/<?php echo $elist['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                    <img src="uploads/all/<?php echo $elist['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                   <?php }else{ ?>
-                    <span  alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($elist['display_name']); ?></span>
+                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($elist['display_name']); ?></span>
                   <?php } ?>
                   <div class="d-inline-block">
                     <p class="f-10"><?php echo $elist['emp_code']." - ".$elist['display_name']; ?></p>

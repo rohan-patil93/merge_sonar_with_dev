@@ -33,14 +33,14 @@ $_SESSION['download_data'] = array();
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="f-30">Time Off Used</h5>
+      <h5 class="f-30"><?= __('Time Off Used'); ?></h5>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Time Off Used Report" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Time Off Used Report" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Time Off Used Report" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Time Off Used Report" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -51,20 +51,20 @@ $_SESSION['download_data'] = array();
           <div class="row col-lg-12 ">
         <div class="col-lg-2">
           <div class="form-group">
-            <input aria-label="Fromdate" class="form-control datepicker" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
-} ?> placeholder="From Date" >
+            <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
+} ?> placeholder="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" >
           </div>
         </div>
         <div class="col-lg-2">
           <div class="form-group">
-            <input aria-label="Input field" class="form-control datepicker" <?php if($todate!=""){ ?>  value="<?php echo $todate; ?>" <?php
-} ?> name="todate" type="text" placeholder="To Date">
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" <?php if($todate!=""){ ?>  value="<?php echo $todate; ?>" <?php
+} ?> name="todate" type="text" placeholder="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
           </div>
         </div>
         <?php include_once 'views/custom_standard_report_hr_employee_filter.php'; ?>
         <div class="col-lg-2 mt-1">
           <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-            Apply
+            <?= __('Apply'); ?>
           </button>
           <input type="hidden" name="submit" value="applyform">
         </div>
@@ -80,13 +80,13 @@ $_SESSION['download_data'] = array();
         <?php if(count((array)$emp_details)>0){ ?>
         <table class="table tabe-hover table-sm">
           <tr style="background-color: #eeeeee;">
-            <th scope="col">Name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Date(s) Off</th>
-            <th scope="col">Requested</th>
-            <th scope="col">Approved  </th>
-            <th scope="col">Notes</th>
-            <th scope="col">Time Off Days</th>
+            <th scope="col"><?= __('Name'); ?></th>
+            <th scope="col"><?= __('Category'); ?></th>
+            <th scope="col"><?= __('Date(s) Off'); ?></th>
+            <th scope="col"><?= __('Requested'); ?></th>
+            <th scope="col"><?= __('Approved'); ?>  </th>
+            <th scope="col"><?= __('Notes'); ?></th>
+            <th scope="col"><?= __('Time Off Days'); ?></th>
           </tr>
           <?php $old_id=0; $total =0;
           foreach($emp_details as $emdata ){
@@ -98,7 +98,7 @@ $_SESSION['download_data'] = array();
               <?php if($old_id != $new_id){ $old_id = $new_id;  ?>
               <div class="d-inline-block align-middle">
                 <?php if($emdata['image']!=""){ ?>
-                  <img src="uploads/module/hr.webp" alt="user" class="img-radius img-40 align-top m-r-15">
+                  <img src="uploads/module/hr.webp" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15">
                 <?php }else{ ?>
                   <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  mt-1"><?php echo initials($emdata['display_name']); ?></span>
                 <?php } ?>
@@ -125,13 +125,13 @@ $_SESSION['download_data'] = array();
             <td></td>
             <td></td>
             <td></td>
-            <td>Total</td>
+            <td><?= __('Total'); ?></td>
             <th scope="col" class="text-right"><?php echo number_format($total, 2, '.', ','); ?> </th>
           </tr>
         </table>
       <?php }else{ ?>
         <div class="card-px text-center py-20 m-t-30">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
         <div class="text-center px-4">
           <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
         </div>

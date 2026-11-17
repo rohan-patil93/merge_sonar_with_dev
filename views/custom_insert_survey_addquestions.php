@@ -22,7 +22,7 @@ include_once '../comm.php';
 
 		var survey_question = document.getElementById('survey_question').value;
 		if(survey_question.trim() == ''){
-			swal(<?php echo json_encode(__('Validation Error')); ?>, 'Question text is required.', 'error');
+			swal(<?php echo json_encode(__('Validation Error')); ?>, <?php echo json_encode(__('Question text is required.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'error');
 			return;
 		}
 		var require_response = document.getElementById('require_response').checked == true ? '0' : '1';
@@ -47,14 +47,14 @@ include_once '../comm.php';
 				}
 			}
 			if(nonemptyOptions < 2){
-				swal(<?php echo json_encode(__('Validation Error')); ?>, 'Please enter at least 2 options.', 'error');
+				swal(<?php echo json_encode(__('Validation Error')); ?>, <?php echo json_encode(__('Please enter at least 2 options.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'error');
 				return;
 			}
 		}
 		if(qtype == '2'){
 			var scaleVal = survey_question_option.length > 0 ? parseInt(survey_question_option[0], 10) : 0;
 			if(isNaN(scaleVal) || scaleVal <= 0){
-				swal(<?php echo json_encode(__('Validation Error')); ?>, 'Rating scale must be greater than 0.', 'error');
+				swal(<?php echo json_encode(__('Validation Error')); ?>, <?php echo json_encode(__('Rating scale must be greater than 0.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'error');
 				return;
 			}
 		}

@@ -31,7 +31,7 @@ $list = json_decode($response,1);
                 <span class="kt-portlet__head-icon">
                     <i class="kt-font-brand flaticon2-line-chart"></i>
                 </span>
-                <h3 class="card-label">&nbsp;<?php echo "Job Postings";  ?> </h3>
+                <h3 class="card-label">&nbsp;<?php echo __("Job Postings");  ?> </h3>
 
 
             </div>
@@ -44,18 +44,18 @@ $list = json_decode($response,1);
 
     <div class="form-group row">
         <div class="col-lg-2">
-            <span  class="col-form-label">Start Date</span>
-            <input aria-label="Select date" class="form-control" type="date" value="<?php echo isset($_POST['start_date'])?$_POST['start_date']:date('Y-m-d', strtotime('first day of this month')); ?>" name="start_date" id="example-date-input-from">
+            <span  class="col-form-label"><?= __('Start Date'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" value="<?php echo isset($_POST['start_date'])?$_POST['start_date']:date('Y-m-d', strtotime('first day of this month')); ?>" name="start_date" id="example-date-input-from">
         </div>
         <div class="col-lg-2">
-            <span  class="col-form-label">End Date</span>
-            <input aria-label="End Date" class="form-control" type="date"  name="end_date"  value="<?php echo isset($_POST['end_date'])?$_POST['end_date']:date('Y-m-d', strtotime('last day of this month')); ?>" id="example-date-input-to">
+            <span  class="col-form-label"><?= __('End Date'); ?></span>
+            <input aria-label="<?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date"  name="end_date"  value="<?php echo isset($_POST['end_date'])?$_POST['end_date']:date('Y-m-d', strtotime('last day of this month')); ?>" id="example-date-input-to">
         </div>
         <div class="col-lg-2">
-            <span  class="col-form-label">Location</span>
+            <span  class="col-form-label"><?= __('Location'); ?></span>
 
-                <select aria-label="Location" class="form-control kt-select2 select2-hidden-accessible" id="kt_select2_42" name="location" data-select2-id="kt_select2_42_2" tabindex="-1">
-        <option value="">Select Location</option>
+                <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt-select2 select2-hidden-accessible" id="kt_select2_42" name="location" data-select2-id="kt_select2_42_2" tabindex="-1">
+        <option value=""><?= __('Select Location'); ?></option>
     <?php    foreach($location as $location){  ?>
             <option value='<?php echo $location['id']; ?>' <?php echo $_POST['location']==$location['id']?"selected":""; ?>><?php echo $location['location_name']; ?></option>";
     <?php     }
@@ -64,16 +64,16 @@ $list = json_decode($response,1);
 
 </div>
         <div class="col-lg-2">
-            <span  class="col-form-label">Department</span>
-        <select aria-label="Department" class="form-control kt-select2 select2-hidden-accessible" id="kt_select2_42_3" name="department" data-select2-id="kt_select2_42_4" tabindex="-1">
-            <option value="">Select Department</option>
+            <span  class="col-form-label"><?= __('Department'); ?></span>
+        <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt-select2 select2-hidden-accessible" id="kt_select2_42_3" name="department" data-select2-id="kt_select2_42_4" tabindex="-1">
+            <option value=""><?= __('Select Department'); ?></option>
     <?php    foreach($departments as $departments){  ?>
             <option value='<?php echo $departments['id']; ?>'  <?php echo $_POST['department']==$departments['id']?"selected":""; ?>><?php echo $departments['department_name']; ?></option>";
     <?php     }
 ?>
                 </select></div>
-        <div class="col-lg-2 mt-10"><button type="submit" id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="filter" value="filter"><i class="la la-check"></i>Filter</button></div>
-        <div class="col-lg-2 mt-8"><b>Total Job :</b>  <?php echo $list['totaljob']; ?> </br> <b>Total Candidates :</b> <?php echo $list['totalcndided']; ?></div>
+        <div class="col-lg-2 mt-10"><button type="submit" id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="filter" value="filter"><i class="la la-check"></i><?= __('Filter'); ?></button></div>
+        <div class="col-lg-2 mt-8"><b><?= __('Total Job'); ?> :</b>  <?php echo $list['totaljob']; ?> </br> <b><?= __('Total Candidates'); ?> :</b> <?php echo $list['totalcndided']; ?></div>
 </form>
     </div>
 
@@ -82,15 +82,15 @@ $list = json_decode($response,1);
                 <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1">
                     <thead>
                         <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Job Title</th>
-                            <th scope="col">Posting Date</th>
-                            <th scope="col">Published Date</th>
-                            <th scope="col">Candidates Applied</th>
-                            <th scope="col">Shortlist</th>
-                            <th scope="col">Interview Process</th>
-                            <th scope="col">Offer Released</th>
-                            <th scope="col">Offer Accepted</th>
+                            <th scope="col"><?= __('Id'); ?></th>
+                            <th scope="col"><?= __('Job Title'); ?></th>
+                            <th scope="col"><?= __('Posting Date'); ?></th>
+                            <th scope="col"><?= __('Published Date'); ?></th>
+                            <th scope="col"><?= __('Candidates Applied'); ?></th>
+                            <th scope="col"><?= __('Shortlist'); ?></th>
+                            <th scope="col"><?= __('Interview Process'); ?></th>
+                            <th scope="col"><?= __('Offer Released'); ?></th>
+                            <th scope="col"><?= __('Offer Accepted'); ?></th>
 
                         </tr>
                     </thead>
@@ -107,7 +107,7 @@ $list = json_decode($response,1);
                             <td><?php echo $list['total_candidate']; ?></td>
                             <td><?php echo $list['shortlistcnt']; ?></td>
                             <td>
-<lable type="button"  data-toggle="popover" title="INTERVIEW PROCESS" data-html="true"
+<lable type="button"  data-toggle="popover" title="<?= htmlspecialchars(__('INTERVIEW PROCESS'), ENT_QUOTES, 'UTF-8'); ?>" data-html="true"
 
 data-content="<?php foreach($list['in_procees_list'] as $key => $nnaems){
      echo $nnaems['name']." - ".$nnaems['cnt'].'</br>';

@@ -198,8 +198,8 @@ $erp = json_decode($erp_data,1);
 				type: "success",
 				showCancelButton: true,
 				confirmButtonClass: "btn-danger",
-				confirmButtonText: "Yes",
-				cancelButtonText: "No",
+				confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+				cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 				closeOnConfirm: true,
 				closeOnCancel: true
 			},
@@ -253,8 +253,8 @@ $erp = json_decode($erp_data,1);
 					type: "success",
 					showCancelButton: false,
 					confirmButtonClass: "btn-danger",
-					confirmButtonText: "Yes",
-					cancelButtonText: "No",
+					confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+					cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 					closeOnConfirm: true,
 					closeOnCancel: true
 				},
@@ -389,12 +389,12 @@ $erp = json_decode($erp_data,1);
 			<div class="col-lg-12">
 				<div class="card">
 					<div class="card-header table-card-header">
-						<h5><?= __("Bulk Time Sheet Approval") ?></h5> <i role="button" tabindex="0" aria-label="Take A Tour" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Take A Tour"></i>
+						<h5><?= __("Bulk Time Sheet Approval") ?></h5> <i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Take A Tour'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Take A Tour'), ENT_QUOTES, 'UTF-8'); ?>"></i>
 						<div class="card-header-right table-card-header ">
 
 							<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 								<i class="icofont icofont-reply"></i>
-								Back
+								<?= __('Back'); ?>
 							</a>
 						</div>
 					</div>
@@ -452,7 +452,7 @@ $erp = json_decode($erp_data,1);
 												<!--	<h6 class="m-b-0 text-c-blue"><?php echo customeummarmonyformate($ttcount/100000); ?> L Vs <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L</h6> -->
 												<h6 class="m-b-0 text-c-blue"><a onclick="cvppopup('Current',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'apv_list')" >
 				<?php echo customeummarmonyformate($ttcount/100000); ?> L
-				</a> Vs <a onclick="cvppopup('Previous',<?php echo "'".customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000)." Lac'"; ?>,'last_pre_list')" > <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L </a></h6>
+				</a> <?= __('Vs'); ?> <a onclick="cvppopup('Previous',<?php echo "'".customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000)." Lac'"; ?>,'last_pre_list')" > <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L </a></h6>
 			<input type="hidden" name="apv_list" id="apv_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="apv_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_hrs'=>'billable_hrs','billable_amount'=>'billable_amount')); ?>' >
 			<input type="hidden" id="last_pre_list" value='<?php echo json_encode($last_pre_list); ?>' >
@@ -463,7 +463,7 @@ $erp = json_decode($erp_data,1);
 											<?php $total_vs_p = ((($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'] ?? 0)) > 0) ? number_format((($ttcount / (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'] ?? 0))) * 100), 0) : 0; ?>
 											<div class="row align-items-center m-b-15">
 												<div class="col-auto">
-													<p class="m-b-0 text-muted">Utilizations</p>
+													<p class="m-b-0 text-muted"><?= __('Utilizations'); ?></p>
 												</div>
 
 											</div>
@@ -482,13 +482,13 @@ $erp = json_decode($erp_data,1);
 													<i class="fa fa-clock-o text-c-green f-30"></i>
 												</div>
 												<div class="col p-l-0">
-													<h6 class="m-b-5 f-14">Budget Vs Actuals</h6>
+													<h6 class="m-b-5 f-14"><?= __('Budget Vs Actuals'); ?></h6>
 												<!---	<h6 class="m-b-0 text-c-green"><?php echo $total_budget_hrs; ?> H Vs <?php echo $total_billabe_hrs; ?> H</h6> -->
 
 											<h6 class="m-b-0 text-c-green">
 			<a onclick="cvppopup('Budget',<?php echo "'".$total_budget_hrs." Hrs'"; ?>,'bg_hr_list')" >
 				<?php echo $total_budget_hrs; ?> H </a>
-			 Vs <a onclick="cvppopup('Actuals',<?php echo "'".$total_billabe_hrs." Hrs'"; ?>,'bg_hr_list')" >
+			 <?= __('Vs'); ?> <a onclick="cvppopup('Actuals',<?php echo "'".$total_billabe_hrs." Hrs'"; ?>,'bg_hr_list')" >
 				<?php echo $total_billabe_hrs; ?> H </a>
 			</h6>
 			<input type="hidden" name="bg_hr_list" id="bg_hr_list" value='<?php echo json_encode($emp_sub); ?>' >
@@ -497,7 +497,7 @@ $erp = json_decode($erp_data,1);
 											</div>
 											<?php $total_hors_p = (!empty($total_budget_hrs) && $total_budget_hrs > 0) ? number_format((($total_billabe_hrs / $total_budget_hrs) * 100), 0) : 0; ?>											<div class="row align-items-center m-b-15">
 												<div class="col-auto">
-													<p class="m-b-0 text-muted">Current Month Efforts</p>
+													<p class="m-b-0 text-muted"><?= __('Current Month Efforts'); ?></p>
 												</div>
 
 											</div>
@@ -516,11 +516,11 @@ $erp = json_decode($erp_data,1);
 													<i class="far fa fa-coffee text-c-red f-30"></i>
 												</div>
 												<div class="col p-l-0">
-													<h6 class="m-b-5">Budget Vs Utilization</h6>
+													<h6 class="m-b-5"><?= __('Budget Vs Utilization'); ?></h6>
 												<!--	<h6 class="m-b-0 text-c-red"><?php echo customeummarmonyformate($total_budget_amount/100000); ?> L Vs <?php echo customeummarmonyformate($ttcount/100000); ?> L</h6> --->
 												<h6 class="m-b-0 text-c-red">
 			 <a onclick="cvppopup('Budget',<?php echo "'".customeummarmonyformate($total_budget_amount/100000)." Lac'"; ?>,'bg_ut_list')" >
-			<?php echo customeummarmonyformate($total_budget_amount/100000); ?> L</a> Vs  <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'bg_ut_list')" >  <?php echo customeummarmonyformate($ttcount/100000); ?> L </a></h6>
+			<?php echo customeummarmonyformate($total_budget_amount/100000); ?> L</a> <?= __('Vs'); ?>  <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'bg_ut_list')" >  <?php echo customeummarmonyformate($ttcount/100000); ?> L </a></h6>
 			<input type="hidden" name="bg_ut_list" id="bg_ut_list" value='<?php echo json_encode($emp_sub); ?>' >
 			<input type="hidden"  id="bg_ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','budgeted_amount'=>'budgeted_amount','billable_amount'=>'billable_amount')); ?>' >
 												</div>
@@ -529,7 +529,7 @@ $erp = json_decode($erp_data,1);
 
 											<div class="row align-items-center m-b-15">
 												<div class="col-auto">
-													<p class="m-b-0 text-muted">Current Month Utilized</p>
+													<p class="m-b-0 text-muted"><?= __('Current Month Utilized'); ?></p>
 												</div>
 
 											</div>
@@ -550,18 +550,18 @@ $erp = json_decode($erp_data,1);
 													<i class="fa fa-thumbs-up text-c-yellow f-30"></i>
 												</div>
 												<div class="col p-l-0">
-													<h6 class="m-b-5">Utilization Vs Approved</h6>
+													<h6 class="m-b-5"><?= __('Utilization Vs Approved'); ?></h6>
 												<!---	<h6 class="m-b-0 text-c-yellow"> <?php echo customeummarmonyformate($ttcount/100000); ?> L  Vs <?php echo customeummarmonyformate($apv_billable_amount/100000); ?> L</h6> -->
 													<h6 class="m-b-0 text-c-yellow">
 				 <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'ut_list')" >
-				<?php echo customeummarmonyformate($ttcount/100000); ?> L </a> Vs<a onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000)." Lac'"; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </a></h6>
+				<?php echo customeummarmonyformate($ttcount/100000); ?> L </a> <?= __('Vs'); ?><a onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000)." Lac'"; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </a></h6>
 			<input type="hidden" name="bg_hr_list" id="ut_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_amount'=>'billable_amount','utilize'=>'Status')); ?>' >
 												</div>
 											</div>
 											<div class="row align-items-center m-b-15">
 												<div class="col-auto">
-													<p class="m-b-0 text-muted">Current Month Approved</p>
+													<p class="m-b-0 text-muted"><?= __('Current Month Approved'); ?></p>
 												</div>
 
 											</div>
@@ -589,9 +589,9 @@ $erp = json_decode($erp_data,1);
 					<div class="row col-lg-12">
 					<div class="card-header border-0 col-lg-3">
 						<h5 class="card-title align-items-start flex-column float-left">
-							Billing Info Details
+							<?= __('Billing Info Details'); ?>
 							<span class="text-muted mt-3 font-weight-bold
-											font-size-sm">Billable : <?php echo $billables_count; ?> Members, Nonbillable : <?php echo $employee_count-$billables_count; ?> Members</span>&nbsp; &nbsp; &nbsp; </h5>
+											font-size-sm"><?= __('Billable'); ?> : <?php echo $billables_count; ?> <?= __('Members, Nonbillable'); ?> : <?php echo $employee_count-$billables_count; ?> <?= __('Members'); ?></span>&nbsp; &nbsp; &nbsp; </h5>
 					</div>
 					<div class="col-lg-8 p-20">
 							<form method="post" action=""  name="myForm" enctype="multipart/form-data" class="row">
@@ -637,12 +637,12 @@ $erp = json_decode($erp_data,1);
 								<ul class="nav  md-tabs infisuite_tab">
 									<li class="nav-item" name="approved_tab">
 										<a class="nav-link py-2 px-4"
-										data-bs-toggle="tab" href="#kt_tab_pane_11_2">Approved &nbsp;<span class="lable-round"><?php echo $apv_count; ?></span>
+										data-bs-toggle="tab" href="#kt_tab_pane_11_2"><?= __('Approved'); ?> &nbsp;<span class="lable-round"><?php echo $apv_count; ?></span>
 										</a>
 									</li>
 									<li class="nav-item" name="approval_pending_tab"> <a class="nav-link py-2
 										px-4 active" data-bs-toggle="tab"
-										href="#kt_tab_pane_11_3">Approvals Pending &nbsp;<span class="lable-round"><?php echo $sba_count; ?></span></a>
+										href="#kt_tab_pane_11_3"><?= __('Approvals Pending'); ?> &nbsp;<span class="lable-round"><?php echo $sba_count; ?></span></a>
 									</li>
 								</ul>
 							</div>
@@ -663,11 +663,11 @@ $erp = json_decode($erp_data,1);
 								<?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH'];
 								} ?>
 								<span class="radio nav-item d-inline-block fw-bold" name="all_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active';
-								} ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo "All"; ?></a> </span>
+								} ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo __("All"); ?></a> </span>
 								<span class="radio nav-item d-inline-block fw-bold" name="billale_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-warning waves-effect waves-light <?php if($gtnvk==1){ echo 'active';
-								} ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Billable"; ?></a> </span>
+								} ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Billable"); ?></a> </span>
 								<span class="radio nav-item d-inline-block fw-bold" name="nonbillable_tab" style="margin-bottom:5px"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?php if($gtnvk==0){ echo 'active';
-								} ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo "Non-billable"; ?></a> </span>
+								} ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Non-billable"); ?></a> </span>
 							</div>
 						</div>
 					</div>
@@ -831,7 +831,7 @@ $llablecolor = lableandleave($k);
 												<?php if(count((array)$apv)>0){  ?>
 													<tr>
 														<td></td>
-														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> Total </span></td>
+														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> <?= __('Total'); ?> </span></td>
 														<td></td>
 														<td></td>
 														<td class="text-right">
@@ -1039,7 +1039,7 @@ $llablecolor = lableandleave($k);
 												<?php if(count((array)$sba)>0){ ?>
 													<tr>
 														<td></td>
-														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> Total </span></td>
+														<td ><span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"> <?= __('Total'); ?> </span></td>
 														<td></td>
 														<td></td>
 														<td class="text-right">
@@ -1159,7 +1159,7 @@ $llablecolor = lableandleave($k);
 								<i class="fa fa-group text-c-green f-30"></i>
 							</h2>
 							<h3 class="text-facebook f-w-700"><?php echo count((array)$vendors); ?></h3>
-							<p class="m-b-0 m-t-15">Vendors</p>
+							<p class="m-b-0 m-t-15"><?= __('Vendors'); ?></p>
 						</div>
 					</div>
 					<div class="col-lg-4 card social-card">
@@ -1170,7 +1170,7 @@ $llablecolor = lableandleave($k);
 							<?php ?>
 							<h3 class="text-facebook f-w-700"><?php echo count((array)$employees); ?></h3>
 
-							<p class="m-b-0 m-t-15">Resources</p>
+							<p class="m-b-0 m-t-15"><?= __('Resources'); ?></p>
 						</div>
 					</div>
 					<div class="col-lg-4 card social-card">
@@ -1180,7 +1180,7 @@ $llablecolor = lableandleave($k);
 							</h2>
 							<h3 class="text-facebook f-w-700"><?php echo $totalleaveallowvrc."/".$totalleaveadaysemployee; ?></h3>
 
-							<p class="m-b-0 m-t-15">Leaves</p>
+							<p class="m-b-0 m-t-15"><?= __('Leaves'); ?></p>
 						</div>
 					</div>
 					<!-- <div class="col-lg-12 col-md-12">

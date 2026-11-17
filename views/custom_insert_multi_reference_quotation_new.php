@@ -111,7 +111,7 @@ $dynamic_reference_tables_reference_document_type = $result['dynamic_reference_t
                 error:function (){}
             });
         }else{
-            var emptyload = '<div class="card-px text-center "><p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Please Select Transaction</p><div class="text-center px-4"><img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;"></div></div>';
+            var emptyload = '<div class="card-px text-center "><p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= htmlspecialchars(__('Please Select Transaction'), ENT_QUOTES, 'UTF-8'); ?></p><div class="text-center px-4"><img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;"></div></div>';
             $("#transaction_item_list").html(emptyload);
         }
     }

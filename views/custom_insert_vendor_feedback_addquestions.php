@@ -60,26 +60,26 @@ include_once '../comm.php';
 <div class="col-lg-12" id="<?php echo $question_id;?>">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"><?php echo $_GET['question_title']; ?></h5>
-         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
     <div class="card-body">
         <div class="form-group text-left">
-            <span>Question Text: <span class="text-danger">*</span></span>
-            <textarea aria-label="Survey Question" id="survey_question" name="survey_question" class="form-control" placeholder=""> </textarea>
+            <span><?= __('Question Text'); ?>: <span class="text-danger">*</span></span>
+            <textarea aria-label="<?= htmlspecialchars(__('Survey Question'), ENT_QUOTES, 'UTF-8'); ?>" id="survey_question" name="survey_question" class="form-control" placeholder=""> </textarea>
         </div>
         <div class="form-group text-left">
             <div class="checkbox-inline">
                 <?php if($_GET['type']==1 || $_GET['type']==3)    { ?>
                     <label class="checkbox checkbox-primary">
-                        <input aria-label="Allow Multiple Selections" type="checkbox" name="allow_multiple_selections" id="allow_multiple_selections" />
+                        <input aria-label="<?= htmlspecialchars(__('Allow Multiple Selections'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="allow_multiple_selections" id="allow_multiple_selections" />
                         <span></span>
-                        Allow multiple selections
+                        <?= __('Allow multiple selections'); ?>
                     </label>
                 <?php } ?>
                 <label class="checkbox checkbox-primary">
-                    <input aria-label="Require Response" type="checkbox" value="require_response" id="require_response">
+                    <input aria-label="<?= htmlspecialchars(__('Require Response'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="require_response" id="require_response">
                     <span></span>
-                    Require a Response
+                    <?= __('Require a Response'); ?>
                 </label>
             </div>
         </div>
@@ -89,7 +89,7 @@ include_once '../comm.php';
                     <div class="col-lg-1"></div>
                     <div class="col-lg-8">
                         <div class="input-group input-icon-right">
-                        <input aria-label="Option" type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option">
+                        <input aria-label="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text addon-style">
     <span class=""><button type="button" class="btn p-0 border-0 bg-transparent fa fa-trash" onclick="deloptionrows('s1rowid1')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>    </span>
 </span></div>
@@ -99,7 +99,7 @@ include_once '../comm.php';
                     <div class="col-lg-1"></div>
                     <div class="col-lg-8">
                         <div class="input-group input-icon-right">
-                        <input aria-label="Option" type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="Option">
+                        <input aria-label="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control display-inline width1" name="survey_question_option[]"  placeholder="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>">
                         <span class="input-group-text addon-style">
     <span class=""><button type="button" class="btn p-0 border-0 bg-transparent fa fa-trash" onclick="deloptionrows('s1rowid2')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>    </span>
 </span></div>
@@ -107,12 +107,12 @@ include_once '../comm.php';
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-success"  onclick="addoptionrows()" id="addRows" type="button">+ Add More Options</button>
+                <button class="btn btn-success"  onclick="addoptionrows()" id="addRows" type="button">+ <?= __('Add More Options'); ?></button>
             </div>
         <?php } ?>
         <?php if($_GET['type']==2)    { ?>
             <div class="form-group text-left mt-10">
-                <span>Scale from 1 to: <span class="text-danger">*</span></span>
+                <span><?= __('Scale from 1 to'); ?>: <span class="text-danger">*</span></span>
                 <input aria-label="10" type="number" name="survey_question_option[]"  class="form-control" placeholder="10">
             </div>
         <?php } ?>
@@ -121,8 +121,8 @@ include_once '../comm.php';
         <?php } ?>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary mr-2" onclick="questionsubmit()" >Save</button>
+        <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?= __('Close'); ?></button>
+        <button type="button" class="btn btn-primary mr-2" onclick="questionsubmit()" ><?= __('Save'); ?></button>
 
     </div>
 

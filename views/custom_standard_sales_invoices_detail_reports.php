@@ -41,15 +41,15 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
     <div class="card">
         <div class="card-header">
             <h5 class="">
-                Sales Invoice Detail Report
+                <?= __('Sales Invoice Detail Report'); ?>
             </h5>
             <div class="card-header-right">
                 <div class="dropdown-primary dropdown open">
                     <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                     <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
                         data-dropdown-out="fadeOut">
-                        <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=<?php echo str_replace("_", " ", $transaction_table); ?>" target="_blank">CSV</a>
+                        <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=<?php echo str_replace("_", " ", $transaction_table); ?>" target="_blank"><?= __('CSV'); ?></a>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                         <input type="hidden" name="pick_date" id="pick_date" value="<?php echo $pick_date; ?>">
                         <input type="hidden" name="shortcode_date" id="shortcode_date"
                             value="<?php echo $shortcode; ?>">
-                        <span class="form-label">Select Date Range</span>
+                        <span class="form-label"><?= __('Select Date Range'); ?></span>
                         <div class="btn-group dropdown-split-primary" style="width: 100%;">
                             <button type="button" class="btn btn-primary" style="width: 80%;height: 40px;">
                                 <i class="ti-calendar"></i> <span id="btn_date"><?php echo $pick_date; ?></span>
@@ -71,50 +71,45 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                                 class="btn btn-primary dropdown-toggle dropdown-toggle-split waves-effect waves-light"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                 style="width: 20%;height: 40px;">
-                                <span class="visually-hidden">Toggle</span>
+                                <span class="visually-hidden"><?= __('Toggle'); ?></span>
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item <?php echo $shortcode == "TD" ? "active" : ""; ?>" id="TD"
                                     href="#!"
-                                    onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date('Y-m-d')); ?>','<?php echo fromDate(date('Y-m-d')); ?>')">Today</a>
+                                    onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date('Y-m-d')); ?>','<?php echo fromDate(date('Y-m-d')); ?>')"><?= __('Today'); ?></a>
                                 <a class="dropdown-item <?php echo $shortcode == 'YD' ? 'active' : ''; ?>" id="YD"
                                     href="#!"
-                                    onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime('-1 day'))); ?>','<?php echo fromDate(date('Y-m-d', strtotime('-1 day'))); ?>')">Yesterday</a>
+                                    onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d', strtotime('-1 day'))); ?>','<?php echo fromDate(date('Y-m-d', strtotime('-1 day'))); ?>')"><?= __('Yesterday'); ?></a>
                                 <a class="dropdown-item <?php echo $shortcode == 'TW' ? 'active' : ''; ?>" id="TW"
                                     href="#!"
-                                    onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date('Y-m-d', strtotime('monday this week'))); ?>','<?php echo fromDate(date('Y-m-d', strtotime('sunday this week'))); ?>')">This
-                                    Week</a>
+                                    onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date('Y-m-d', strtotime('monday this week'))); ?>','<?php echo fromDate(date('Y-m-d', strtotime('sunday this week'))); ?>')"><?= __('This Week'); ?></a>
                                 <a class="dropdown-item <?php echo $shortcode == 'TM' ? 'active' : ''; ?>" id="TM"
                                     href="#!"
-                                    onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date('Y-m-01')); ?>','<?php echo fromDate(date('Y-m-t')); ?>')">This
-                                    Month</a>
+                                    onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date('Y-m-01')); ?>','<?php echo fromDate(date('Y-m-t')); ?>')"><?= __('This Month'); ?></a>
                                 <a class="dropdown-item <?php echo $shortcode == 'TY' ? 'active' : ''; ?>" id="TY"
                                     href="#!"
-                                    onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date('Y-01-01')); ?>','<?php echo fromDate(date('Y-12-31')); ?>')">This
-                                    Year</a>
+                                    onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date('Y-01-01')); ?>','<?php echo fromDate(date('Y-12-31')); ?>')"><?= __('This Year'); ?></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item <?php echo $shortcode == 'PM' ? 'active' : ''; ?>" id="PM"
                                     href="#!"
-                                    onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date('Y-m-01', strtotime('last month'))); ?>','<?php echo fromDate(date('Y-m-t', strtotime('last month'))); ?>')">Previous
-                                    Month</a>
+                                    onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date('Y-m-01', strtotime('last month'))); ?>','<?php echo fromDate(date('Y-m-t', strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
                                 <a class="dropdown-item <?php echo $shortcode == 'PY' ? 'active' : ''; ?>" id="PY"
                                     href="#!"
-                                    onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date('Y-01-01', strtotime('last year'))); ?>','<?php echo fromDate(date('Y-12-31', strtotime('last year'))); ?>')">Previous
-                                    Year</a>
+                                    onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date('Y-01-01', strtotime('last year'))); ?>','<?php echo fromDate(date('Y-12-31', strtotime('last year'))); ?>')"><?= __('Previous Year'); ?></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item <?php echo $shortcode == 'CD' ? 'active' : ''; ?>" id="CD"
-                                    href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')">Custom Date</a>
+                                    href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')"><?= __('Custom Date'); ?></a>
                             </div>
                         </div>
 
                         <div class="row mt-2" style="display: <?php echo $shortcode == 'CD' ? '' : 'none'; ?>"
                             id="custome_date">
                             <div class="col-lg-6">
-                                <input aria-label="From" type="text" class="form-control datepicker" name="from" id="from_date"
+                                <input aria-label="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="from" id="from_date"
                                     value="<?php echo fromDate($from_date); ?>">
                             </div>
                             <div class="col-lg-6">
-                                <input aria-label="To" type="text" class="form-control datepicker" name="to" id="to_date"
+                                <input aria-label="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="to" id="to_date"
                                     value="<?php echo fromDate($to_date); ?>">
                             </div>
                         </div>
@@ -122,7 +117,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
                     <div class="col-lg-2 mt-1">
                         <span class="form-label"> &nbsp; </span>
                         <button type="submit" name="applyform" value="apply" class="mt-4 btn btn-info waves-effect waves-light input-group-text">
-                            Apply
+                            <?= __('Apply'); ?>
                         </button>
                         <input type="hidden" name="submit" value="applyform">
                     </div>
@@ -138,29 +133,29 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">SI no</th>
-                <th scope="col">SI Date</th>
-                <th scope="col">Ref Trans No</th>
-                <th scope="col">Ref Trans Date</th>
-                <th scope="col">Ref Doc No</th>
-                <th scope="col">Ref Doc Date</th>
-                <th scope="col">Party Name</th>
-                <th scope="col">Part Number</th>
-                <th scope="col">Item Name</th>
-                <th scope="col">Item Desc</th>
-                <th scope="col" class="text-right">Quantity</th>
-                <th scope="col">UOM</th>
-                <th scope="col" class="text-right">Rate</th>
-                <th scope="col" class="text-right">value</th>
-                <th scope="col" class="text-right">CGST</th>
-                <th scope="col" class="text-right">SGST</th>
+                <th scope="col"><?= __('SI no'); ?></th>
+                <th scope="col"><?= __('SI Date'); ?></th>
+                <th scope="col"><?= __('Ref Trans No'); ?></th>
+                <th scope="col"><?= __('Ref Trans Date'); ?></th>
+                <th scope="col"><?= __('Ref Doc No'); ?></th>
+                <th scope="col"><?= __('Ref Doc Date'); ?></th>
+                <th scope="col"><?= __('Party Name'); ?></th>
+                <th scope="col"><?= __('Part Number'); ?></th>
+                <th scope="col"><?= __('Item Name'); ?></th>
+                <th scope="col"><?= __('Item Desc'); ?></th>
+                <th scope="col" class="text-right"><?= __('Quantity'); ?></th>
+                <th scope="col"><?= __('UOM'); ?></th>
+                <th scope="col" class="text-right"><?= __('Rate'); ?></th>
+                <th scope="col" class="text-right"><?= __('value'); ?></th>
+                <th scope="col" class="text-right"><?= __('CGST'); ?></th>
+                <th scope="col" class="text-right"><?= __('SGST'); ?></th>
 
-                <th scope="col" class="text-right">IGST</th>
-                <th scope="col" class="text-right">Discount</th>
-                <th scope="col" class="text-right">Additional charges</th>
-                 <th scope="col" class="text-right">Sub Total</th>
-                <th scope="col" class="text-right">Total</th>
-                <th scope="col" >Status</th>
+                <th scope="col" class="text-right"><?= __('IGST'); ?></th>
+                <th scope="col" class="text-right"><?= __('Discount'); ?></th>
+                <th scope="col" class="text-right"><?= __('Additional charges'); ?></th>
+                 <th scope="col" class="text-right"><?= __('Sub Total'); ?></th>
+                <th scope="col" class="text-right"><?= __('Total'); ?></th>
+                <th scope="col" ><?= __('Status'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -241,7 +236,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
 <?php }else{ ?>
 
     <div class="card-px text-center ">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Transactions</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Transactions'); ?></p>
         <div class="text-center px-4">
             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
         </div>

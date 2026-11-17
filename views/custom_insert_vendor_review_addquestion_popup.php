@@ -54,18 +54,18 @@ function questionsubmit(){
 }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">ADD / Update Question </h5>
-    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('ADD / Update Question'); ?> </h5>
+    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body p-5" >
     <form action="" method="post" class="" id="form">
         <div class="form-group row">
             <div class="col-lg-12">
-                <span>Question Type </span>
+                <span><?= __('Question Type'); ?> </span>
                 <?php foreach($qtype as $qkey=>$type){?>
                     <b>
                         <div class="<?php echo $option_cat;?>-group required float-left ml-2">
-                                  <input aria-label="Radio option" type="radio" onclick="changequestiontype(this.value)" value="<?php echo $qkey;?>" name="question_type"   <?php  if($qkey == $resqtype){ echo  'Checked';
+                                  <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" onclick="changequestiontype(this.value)" value="<?php echo $qkey;?>" name="question_type"   <?php  if($qkey == $resqtype){ echo  'Checked';
 } ?> onkeydown="">
                                   <label for="q1"><?php echo $type; ?> </label> </div>
                             </b>
@@ -76,8 +76,8 @@ function questionsubmit(){
             <input type="hidden" name="change_id" id="change_id" value="<?php echo $_POST['change_id']; ?>">
             <div class="mt-3">
                 <div class="form-group text-left">
-                    <span>Question Text: <span class="text-danger">*</span></span>
-                    <textarea aria-label="Please Enter Question" id="question" name="question" class="form-control" placeholder="Please Enter Question"><?php echo $ques['question']; ?> </textarea>
+                    <span><?= __('Question Text'); ?>: <span class="text-danger">*</span></span>
+                    <textarea aria-label="<?= htmlspecialchars(__('Please Enter Question'), ENT_QUOTES, 'UTF-8'); ?>" id="question" name="question" class="form-control" placeholder="<?= htmlspecialchars(__('Please Enter Question'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $ques['question']; ?> </textarea>
                 </div>
                 <div id="quse_4" <?php  if($resqtype!=4){ ?> style="display:none;" <?php
 } ?>>
@@ -86,8 +86,8 @@ function questionsubmit(){
                 <div id="quse_2" <?php  if($resqtype!=2){ ?> style="display:none;" <?php
 } ?> >
                     <div class="form-group text-left mt-10">
-                        <span>Scale from 1 to: <span class="text-danger">*</span></span>
-                        <input aria-label="Question Option[2][0]" type="number" name="question_option[2][0]" value="<?php echo $opt['0'] ?>" class="form-control" placeholder="10">
+                        <span><?= __('Scale from 1 to'); ?>: <span class="text-danger">*</span></span>
+                        <input aria-label="<?= htmlspecialchars(__('Question Option[2][0]'), ENT_QUOTES, 'UTF-8'); ?>" type="number" name="question_option[2][0]" value="<?php echo $opt['0'] ?>" class="form-control" placeholder="10">
                     </div>
                 </div>
                 <div id="quse_3" <?php  if($resqtype!=3){ ?> style="display:none;" <?php
@@ -103,7 +103,7 @@ function questionsubmit(){
         <div class="col-lg-1"></div>
         <div class="col-lg-8">
             <div class="input-group input-icon-right">
-                <input aria-label="Input field" type="text" class="form-control display-inline width1 crow" name="question_option[3][<?php echo $kkey; ?>]"  value="<?php echo $op; ?>" placeholder="Option">
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control display-inline width1 crow" name="question_option[3][<?php echo $kkey; ?>]"  value="<?php echo $op; ?>" placeholder="<?= htmlspecialchars(__('Option'), ENT_QUOTES, 'UTF-8'); ?>">
                 <span class="input-group-text addon-style">
                     <span class=""><i class="fa fa-trash" onclick="deloptionrows('s1rowid<?php echo $kkey; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>    </span>
                 </span>
@@ -114,14 +114,14 @@ function questionsubmit(){
 
 </div>
         <div class="form-group">
-            <button class="btn btn-success"  onclick="addoptionrows()" id="addRows" type="button">+ Add More Options</button>
+            <button class="btn btn-success"  onclick="addoptionrows()" id="addRows" type="button">+ <?= __('Add More Options'); ?></button>
         </div>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary mr-2" onclick="questionsubmit()" >Save</button>
+    <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary mr-2" onclick="questionsubmit()" ><?= __('Save'); ?></button>
 </div>
     </form>
 </div>

@@ -39,11 +39,11 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
 
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
         <div class="col-lg-2 mt-1">
           <span class="form-label"> &nbsp; </span>
             <button type="submit" name="applyform" value="apply" class=" mt-3 btn btn-info waves-effect waves-light input-group-text mt-0">
-                Apply
+                <?= __('Apply'); ?>
               </button>
             <input type="hidden" name="submit" value="applyform">
           </div>
@@ -69,20 +69,20 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
       <div class="table-responsive mt-3">
         <table class="table table-hover">
           <tr style="background-color: #eeeeee;">
-            <th scope="col" colspan="6" class="text-center" > PRODUCT IN </th>
-            <th scope="col" colspan="4" class="text-center" > PRODUCT OUT </th>
+            <th scope="col" colspan="6" class="text-center" > <?= __('PRODUCT IN'); ?> </th>
+            <th scope="col" colspan="4" class="text-center" > <?= __('PRODUCT OUT'); ?> </th>
           </tr>
           <tr style="background-color: #eeeeee;">
-            <th scope="col"> DATE </th>
-            <th scope="col"> TRANSACTIONS </th>
-            <th scope="col">RECEIVED FROM </th>
-            <th scope="col">ITEM NAME </th>
-            <th scope="col" class="text-right">QUANTITY </th>
-            <th scope="col" class="text-right">TOTAL</th>
-            <th scope="col"> DATE </th>
-            <th scope="col"> TRANSACTIONS </th>
-            <th scope="col">DISPERSED TO </th>
-            <th scope="col" class="text-right">QTY DISPERSED  </th>
+            <th scope="col"> <?= __('DATE'); ?> </th>
+            <th scope="col"> <?= __('TRANSACTIONS'); ?> </th>
+            <th scope="col"><?= __('RECEIVED FROM'); ?> </th>
+            <th scope="col"><?= __('ITEM NAME'); ?> </th>
+            <th scope="col" class="text-right"><?= __('QUANTITY'); ?> </th>
+            <th scope="col" class="text-right"><?= __('TOTAL'); ?></th>
+            <th scope="col"> <?= __('DATE'); ?> </th>
+            <th scope="col"> <?= __('TRANSACTIONS'); ?> </th>
+            <th scope="col"><?= __('DISPERSED TO'); ?> </th>
+            <th scope="col" class="text-right"><?= __('QTY DISPERSED'); ?>  </th>
           </tr>
           <?php $sl=1; if(count((array)$result['data'])>0){
            foreach($result['data'] as $data ){
@@ -90,7 +90,7 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
           ?>
           <tr>
             <td><?php echo fromDate($data['document_date_time']); ?></td>
-            <td><span class="" href="">Opening Balance  </span></td>
+            <td><span class="" href=""><?= __('Opening Balance'); ?>  </span></td>
             <td ><?php echo viewTitle($data['document_type']); ?></td>
             <td class=""><?php echo $data['item_name']; ?></td>
             <td class="text-right"><?php echo $data['in_qty']; ?></td>
@@ -109,7 +109,7 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
           <tr>
             <td colspan="10">
               <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

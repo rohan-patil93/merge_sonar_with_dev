@@ -58,12 +58,12 @@
     <div class="container-fluid">
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
-                <h5> Hold Salaries </h5>
+                <h5> <?= __('Hold Salaries'); ?> </h5>
                 <div class="card-header-right">
                     <form class="kt-form" id="kt_form" method="post" action="" >
                         <div class="input-group input-group-button">
-                            <input aria-label="From Date" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">  <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-                                Submit
+                            <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="month" name="from_date" value="<?php echo $from_cur_year."-".$from_cur_month?>"  id="att_month_year"  class="form-control form-control-sm width1" style="font-size: 14px;height: 40px !important;padding: 10px 15px;">  <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
+                                <?= __('Submit'); ?>
                             </button>
                         </div>
                     </form>
@@ -73,7 +73,7 @@
                 <div class="text-right">
                     <div id="genratepayroll">
                             <button type="button" id="genrateparoll" onclick="genratepayroll()" class="btn btn-primary" style="display:none;" >
-                                Genrate Payroll
+                                <?= __('Genrate Payroll'); ?>
                             </button>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                             <th scope="col" class="text-center">
                                 <div class="checkbox-fade fade-in-primary ">
                      <label class="form-label">
-                        <input aria-label="Check All"  id="checkAll"  type="checkbox" value="1" onclick="clickall(this.value)" onkeydown="">
+                        <input aria-label="<?= htmlspecialchars(__('Check All'), ENT_QUOTES, 'UTF-8'); ?>"  id="checkAll"  type="checkbox" value="1" onclick="clickall(this.value)" onkeydown="">
                         <span class="cr">
                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                        </span>
@@ -93,16 +93,16 @@
                 </div>
                             </th>
                             <th scope="col">
-                                    Employee
+                                    <?= __('Employee'); ?>
                             </th>
                             <th scope="col">
-                                    Email
+                                    <?= __('Email'); ?>
                             </th>
                             <th scope="col">
-                                    Pay Area
+                                    <?= __('Pay Area'); ?>
                             </th>
                             <th scope="col">
-                                    Month - Year
+                                    <?= __('Month - Year'); ?>
                             </th>
                         </tr>
                         </thead>
@@ -112,7 +112,7 @@
                             <td class="text-center">
                                 <div class="checkbox-fade fade-in-primary ">
                       <label class="form-label">
-                        <input aria-label="Checkbox" type="checkbox" class="itemRow" value="<?php echo $dat['emp_id']; ?>" id="check_<?php echo $i; ?>" type="checkbox" name="checkbox1" onchange="checkoncetime()">
+                        <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow" value="<?php echo $dat['emp_id']; ?>" id="check_<?php echo $i; ?>" type="checkbox" name="checkbox1" onchange="checkoncetime()">
                         <span class="cr">
                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                         </span>
@@ -120,7 +120,7 @@
                   </div>
                             </td>
                             <td>
-                                    <img src="uploads/all/<?php echo $dat['image'];  ?>" class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                    <img src="uploads/all/<?php echo $dat['image'];  ?>" class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <a class="cursor-pointer" >
                                         <?php echo $dat['display_name'];  ?>
                                         <?php echo $dat['emp_code'];  ?>
@@ -150,8 +150,8 @@
 
                 <?php }else{ ?>
                     <div class="card-px text-center py-20 m-t-30">
-                        <h2 class="f-40 fw-bolder m-b-30">Hello!</h2>
-                        <p class="text-muted f-16 fw-bold m-b-30">There are no records found.</p>
+                        <h2 class="f-40 fw-bolder m-b-30"><?= __('Hello!'); ?></h2>
+                        <p class="text-muted f-16 fw-bold m-b-30"><?= __('There are no records found.'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>

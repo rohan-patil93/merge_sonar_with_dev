@@ -27,32 +27,32 @@ foreach($domain_registrations as $domreg){
     <div class="container-fluid">
         <div class="card card-custom card-sticky">
             <div class="card-header">
-                <h5>Invite Users</h5>
+                <h5><?= __('Invite Users'); ?></h5>
                 <div class="card-header-right">
                     <a  href="index.php?option=COM_LIST_CONFIG_PRINT_INVOICES"  class="btn btn-warning mb-2 desktop-view">
-                        <i class="icofont icofont-list icon-white"> Print Config</i>
+                        <i class="icofont icofont-list icon-white"> <?= __('Print Config'); ?></i>
                     </a>
                     <a href="index.php?option=COM_LIST_ITEM_CATEGORIES"  class="btn btn-info mb-2 desktop-view">
-                        <i class="icofont icofont-list icon-white"> Item Cat</i>
+                        <i class="icofont icofont-list icon-white"> <?= __('Item Cat'); ?></i>
                     </a>
                     <a  href="index.php?option=COM_LIST_ITEMS"  class="btn btn-secondary mb-2 desktop-view">
-                        <i class="icofont icofont-list icon-white"> Items</i>
+                        <i class="icofont icofont-list icon-white"> <?= __('Items'); ?></i>
                     </a>
                     <a  href="index.php?option=COM_LIST_HSN_AND_SAC_CODES"  class="btn btn-warning mb-2 desktop-view">
-                        <i class="icofont icofont-list icon-white"> HSN Code</i>
+                        <i class="icofont icofont-list icon-white"> <?= __('HSN Code'); ?></i>
                     </a>
                     <a  href="index.php?option=COM_LIST_SALES_INVOICES"  class="btn btn-primary mb-2 desktop-view">
-                        <i class="icofont icofont-list icon-white"> Customer Inv</i>
+                        <i class="icofont icofont-list icon-white"> <?= __('Customer Inv'); ?></i>
                     </a>
                     <a href="index.php?option=COM_LIST_CUSTOMERS"  class="btn btn-info mb-2 desktop-view">
-                        <i class="icofont icofont-list icon-white"> Customers</i>
+                        <i class="icofont icofont-list icon-white"> <?= __('Customers'); ?></i>
                     </a>
                     <a  href="index.php?option=COM_INSERT_REGISTERED_GROUPS"  class="btn btn-success mb-2 desktop-view">
-                        <i class="icofont icofont-plus icon-white"> Invite User</i>
+                        <i class="icofont icofont-plus icon-white"> <?= __('Invite User'); ?></i>
                     </a>
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -63,7 +63,7 @@ foreach($domain_registrations as $domreg){
           <div class="col-lg-9"></div>
           <div class="col-lg-3">
                   <div class="input-group input-group-button mb-3">
-                    <input aria-label="Search The Name" type="text" id="filter1111" class="form-control form-control-sm width1"  placeholder="Search The Name" data-bs-toggle="tooltip" data-placement="bottom" title="Search The Name">
+                    <input aria-label="<?= htmlspecialchars(__('Search The Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter1111" class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search The Name'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search The Name'), ENT_QUOTES, 'UTF-8'); ?>">
                     <span class="input-group-text addon-style">
                         <span class=""><i class="ti-search"></i></span>
                     </span>
@@ -92,7 +92,7 @@ foreach($domain_registrations as $domreg){
 
                                             </div>
                                         </div>
-                                        <h6 class="pt-badge f-10" style="background-color: #ffe066; color:#FFFFFF">Active</h6>
+                                        <h6 class="pt-badge f-10" style="background-color: #ffe066; color:#FFFFFF"><?= __('Active'); ?></h6>
                                     </div>
                                 </div>
                             </a>
@@ -101,7 +101,7 @@ foreach($domain_registrations as $domreg){
 }
 }else{ ?>
                             <div class="card-px text-center ">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Invititations </p>
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Invititations'); ?> </p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                     </div>

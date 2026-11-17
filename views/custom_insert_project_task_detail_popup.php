@@ -339,7 +339,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
           success:function(data){
             console.log(data);
             $('#activty').val('');
-            var str ='<div class=" mt-2"> <span class="user-name  float-left m-r-5">'+initial+'</span><span class="f-14 f-w-600">'+fullname+'</span>'+activty+'</br><span class="text-muted f-12 m-l-50"> 1 min ago </span> </div> <div style="clear:both;"></div>';
+            var str ='<div class=" mt-2"> <span class="user-name  float-left m-r-5">'+initial+'</span><span class="f-14 f-w-600">'+fullname+'</span>'+activty+'</br><span class="text-muted f-12 m-l-50"> <?= htmlspecialchars(__('1 min ago'), ENT_QUOTES, 'UTF-8'); ?> </span> </div> <div style="clear:both;"></div>';
             console.log(str);
             $('#someactydetail').prepend(str);
 
@@ -918,7 +918,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                    <select aria-label="<?php echo __('Action Frequency'); ?>" name="action_frequency" class="form-control form-select js-example-basic-single" id="selectscehduleaction" onchange="scehduleaction()">
                      <?php foreach ((array)$data['task_frequency'] as $due) {    ?>
                       <option value="<?php echo $due['genc_detail_code'];?>" <?php if($compliancedetail['action_frequency'] == $due['genc_detail_code']){ ?>selected <?php
-} ?> ><?php echo $due['genc_detail_name'];?></option>
+} ?> ><?php echo __($due['genc_detail_name']);?></option>
                     <?php } ?>
 
                   </select>
@@ -1099,7 +1099,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                   <input aria-label="<?php echo __('Image'); ?>" type="file" id="imageInput" name="image" >
                   <input type="hidden" name="task_id" value="<?php echo $task_id; ?>">
                   <input type="hidden" name="page" value="<?php echo __('fileattachupload'); ?>">
-                  <input class="btn btn-primary mt-2 float-right" type="submit" value="Upload">
+                  <input class="btn btn-primary mt-2 float-right" type="submit" value="<?= htmlspecialchars(__('Upload'), ENT_QUOTES, 'UTF-8'); ?>">
                 </form>
                 </div>
               </div>

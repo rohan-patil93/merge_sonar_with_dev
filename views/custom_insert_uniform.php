@@ -30,7 +30,7 @@ $editData = $data['item'] ?? array();
 </style>
 
     <div class="card ">
-        <div class="card-header"><h5 class="mb-4 text-primary">Add Uniform Stock</h5></div>
+        <div class="card-header"><h5 class="mb-4 text-primary"><?= __('Add Uniform Stock'); ?></h5></div>
         <div class="card-body">
 
             <form method="post" id="uniformForm">
@@ -39,8 +39,8 @@ $editData = $data['item'] ?? array();
                     <!-- Location -->
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
-                            <span class="form-label">Location</span>
-                            <select aria-label="Location" name="location_id" id="location_id" class="form-control select2" required>
+                            <span class="form-label"><?= __('Location'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" name="location_id" id="location_id" class="form-control select2" required>
                                 <?php foreach ((array)$data['locations'] as $loc) { ?>
                                     <option value="<?php echo $loc['id']; ?>"
                                         <?php
@@ -59,8 +59,8 @@ $editData = $data['item'] ?? array();
                     <!-- Category (readonly) -->
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
-                            <span class="form-label">Category</span>
-                            <input aria-label="Input field" type="text" class="form-control" value="<?php echo $data['category_name']; ?>" readonly>
+                            <span class="form-label"><?= __('Category'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?php echo $data['category_name']; ?>" readonly>
                             <input type="hidden" name="category_id" id="category_id" value="<?php echo $data['category_id']; ?>">
                         </div>
                     </div>
@@ -69,31 +69,15 @@ $editData = $data['item'] ?? array();
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
-                            <span class="form-label">Item Name</span>
-                            <input aria-label="Enter item name" type="text" name="item_name" id="item_name" class="form-control" placeholder="Enter item name" value="<?php echo $rid!="" ? $editData['item_name'] : ""; ?>" required onblur="checkItemName()">
+                            <span class="form-label"><?= __('Item Name'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Enter item name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="item_name" id="item_name" class="form-control" placeholder="<?= htmlspecialchars(__('Enter item name'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $rid!="" ? $editData['item_name'] : ""; ?>" required onblur="checkItemName()">
                         </div>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
-                            <span class="form-label">Description</span>
-                            <textarea aria-label="Description" type="text" name="description" class="form-control" placeholder="Description"><?php echo $editData['description'] ?? ''; ?></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div class="form-group">
-                            <span class="form-label">Quantity</span>
-                            <input aria-label="Available Qty" type="number" name="available_qty" class="form-control" min="0" value="<?php echo $editData['available_qty'] ?? ''; ?>" required placeholder="0">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div class="form-group">
-                            <span class="form-label">Minimum Quantity</span>
-                            <input aria-label="Minmum Qty" type="number" name="minmum_qty" class="form-control" min="0" placeholder="0" value="<?php echo $editData['minmum_qty'] ?? ''; ?>">
+                            <span class="form-label"><?= __('Description'); ?></span>
+                            <textarea aria-label="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="description" class="form-control" placeholder="<?= htmlspecialchars(__('Description'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $editData['description'] ?? ''; ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -101,9 +85,25 @@ $editData = $data['item'] ?? array();
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
-                            <span class="form-label">Color</span>
-                            <select aria-label="Color" name="color" class="form-control select2" required>
-                                <option value="">Select Color</option>
+                            <span class="form-label"><?= __('Quantity'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Available Qty'), ENT_QUOTES, 'UTF-8'); ?>" type="number" name="available_qty" class="form-control" min="0" value="<?php echo $editData['available_qty'] ?? ''; ?>" required placeholder="0">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <span class="form-label"><?= __('Minimum Quantity'); ?></span>
+                            <input aria-label="<?= htmlspecialchars(__('Minmum Qty'), ENT_QUOTES, 'UTF-8'); ?>" type="number" name="minmum_qty" class="form-control" min="0" placeholder="0" value="<?php echo $editData['minmum_qty'] ?? ''; ?>">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <span class="form-label"><?= __('Color'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Color'), ENT_QUOTES, 'UTF-8'); ?>" name="color" class="form-control select2" required>
+                                <option value=""><?= __('Select Color'); ?></option>
                                 <?php foreach ($data['colors'] as $c) { ?>
                                     <option value="<?php echo $c['genc_detail_code']; ?>"
                                         <?php echo ($rid!="" && $editData['color']==$c['genc_detail_code']) ? "selected" : ""; ?>>
@@ -116,9 +116,9 @@ $editData = $data['item'] ?? array();
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
-                            <span class="form-label">Size</span>
-                            <select aria-label="Size" name="size" class="form-control select2" required>
-                                <option value="">Select Size</option>
+                            <span class="form-label"><?= __('Size'); ?></span>
+                            <select aria-label="<?= htmlspecialchars(__('Size'), ENT_QUOTES, 'UTF-8'); ?>" name="size" class="form-control select2" required>
+                                <option value=""><?= __('Select Size'); ?></option>
                                 <?php foreach ($data['sizes'] as $s) { ?>
                                     <option value="<?php echo $s['genc_detail_code']; ?>"
                                         <?php echo ($rid!="" && $editData['size']==$s['genc_detail_code']) ? "selected" : ""; ?>>
@@ -133,7 +133,7 @@ $editData = $data['item'] ?? array();
 
                 <div class="text-start">
                     <button type="submit" class="btn btn-primary px-5 py-2">
-                        <i class="fa fa-check-circle me-2"></i> Save Stock
+                        <i class="fa fa-check-circle me-2"></i> <?= __('Save Stock'); ?>
                     </button>
                 </div>
 
@@ -168,7 +168,7 @@ $editData = $data['item'] ?? array();
                 }
             },
             error: function() {
-                alert("Failed to save stock");
+                alert(<?php echo json_encode(__('Failed to save stock'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             }
         });
     });

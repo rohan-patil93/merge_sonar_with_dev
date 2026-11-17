@@ -17,7 +17,7 @@ $earnings = json_decode($cr_data,1);
         htmlRows += '<div class="row align-items-center sfitemRow" id="static_div_'+count+'" style="margin-top: 10px;"><div class="col-lg-3"><select aria-label="Earning Component []" class="form-control form-select js-example-basic-single" name="earning_component_id[]" id="earning_component_id_'+count+'"><option value=""><?= __('Select Any One') ?></option><?php foreach($earnings as $earn){ ?><option  value="<?php echo $earn['id']; ?>"> <?php echo $earn['name']; ?></option><?php
 } ?></select></div>';
          htmlRows += '<div class="col-lg-3"><input aria-label="Transaction Date[]" type="text"class="form-control datepicker"  id="transaction_date_'+count+'"  value=""   name="transaction_date[]"> </div>';
-        htmlRows += '<div class="col-lg-3"><input aria-label="0.00" type="text" class="form-control text-right"  id="amount_'+count+'"  value=""  name="amount[]" placeholder="0.00"> </div><div class="col-lg-2"><textarea aria-label="Comments" name="comments" ></textarea></div>';
+        htmlRows += '<div class="col-lg-3"><input aria-label="0.00" type="text" class="form-control text-right"  id="amount_'+count+'"  value=""  name="amount[]" placeholder="0.00"> </div><div class="col-lg-2"><textarea aria-label="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>" name="comments" ></textarea></div>';
         htmlRows += '<div class="col-lg-1"><input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)"><?= __('Delete') ?></button></div></div>';
         console.log(htmlRows);
         $('#append_staticks').append(htmlRows);
@@ -30,7 +30,7 @@ $earnings = json_decode($cr_data,1);
 
     <h5 class="text-white"><?= __('Currency Convertor') ?></h5>
 
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
 </div>
 
@@ -41,16 +41,16 @@ $earnings = json_decode($cr_data,1);
                 <div id='append_statick'>
                     <div class="row align-items-center" style="margin-top: 10px;">
                         <div class="col-lg-3">
-                            <span><b>Earning Component</b></span>
+                            <span><b><?= __('Earning Component'); ?></b></span>
                         </div>
                         <div class="col-lg-3">
-                            <span><b>Transaction Date</b></span>
+                            <span><b><?= __('Transaction Date'); ?></b></span>
                         </div>
                         <div class="col-lg-3">
-                            <span><b>Amount</b></span>
+                            <span><b><?= __('Amount'); ?></b></span>
                         </div>
                         <div class="col-lg-2">
-                            <span><b>Comments</b></span>
+                            <span><b><?= __('Comments'); ?></b></span>
                         </div>
                         <div class="col-lg-1">
                             <span><b></b></span>
@@ -60,7 +60,7 @@ $earnings = json_decode($cr_data,1);
                     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10" id="append_staticks">
                         <div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
                             <div class="col-lg-3">
-                                <select aria-label="Earning Component []" class="form-control form-select js-example-basic-single" name="earning_component_id[]" id="earning_component_id_<?php echo $i; ?>">
+                                <select aria-label="<?= htmlspecialchars(__('Earning Component'), ENT_QUOTES, 'UTF-8'); ?> []" class="form-control form-select js-example-basic-single" name="earning_component_id[]" id="earning_component_id_<?php echo $i; ?>">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($earnings as $earn){ ?>
                                         <option <?php if($data['earning_component_id'] == $earn['id']){ echo "selected";
@@ -70,13 +70,13 @@ $earnings = json_decode($cr_data,1);
                             </div>
                             <?php $fromdate = $data['transaction_date']!="" ? $data['transaction_date'] : date("Y-m-d") ; ?>
                             <div class="col-lg-3">
-                                <input aria-label="Input field" type="text"class="form-control datepicker"  id="transaction_date_<?php echo $i; ?>"  value="<?php echo fromDate($fromdate); ?>"   name="transaction_date[]">
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"class="form-control datepicker"  id="transaction_date_<?php echo $i; ?>"  value="<?php echo fromDate($fromdate); ?>"   name="transaction_date[]">
                             </div>
                             <div class="col-lg-3">
-                                <input aria-label="Input field" type="text" class="form-control text-right"  id="amount_<?php echo $i; ?>"  value="<?php echo $data['amount']; ?>"  name="amount[]" placeholder="0.00">
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-right"  id="amount_<?php echo $i; ?>"  value="<?php echo $data['amount']; ?>"  name="amount[]" placeholder="0.00">
                             </div>
                             <div class="col-lg-2">
-                                <textarea aria-label="Comments" name="comments" ><?php echo $data['comments']; ?></textarea>
+                                <textarea aria-label="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>" name="comments" ><?php echo $data['comments']; ?></textarea>
                             </div>
                             <div class="col-lg-1">
                                 <input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >

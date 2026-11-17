@@ -51,7 +51,7 @@ function gradechange(val){
         success:function(data){
         console.log(data);
 
-        $("#grade").html("<select aria-label='Pay Template' class='form-control' name='pay_template'>"+data+"</select>");
+        $("#grade").html("<select aria-label='<?= htmlspecialchars(__('Pay Template'), ENT_QUOTES, 'UTF-8'); ?>' class='form-control' name='pay_template'>"+data+"</select>");
         },
         error:function (){}
     });
@@ -76,7 +76,7 @@ function gradechange(val){
                                 <div class="col-lg-3 form-group">
                                     <span class="form-label d-block"><?= __('Job Grade') ?></span>
                                      <span class="d-block error-message text-danger"></span>
-                                    <select aria-label="Job Grade" class="form-select js-example-basic-single requried_field" name="job_grade" id="job_grade" onchange="gradechange(this.value)">
+                                    <select aria-label="<?= htmlspecialchars(__('Job Grade'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single requried_field" name="job_grade" id="job_grade" onchange="gradechange(this.value)">
                                         <option value=""><?= __('Select Any One') ?></option>
                                         <?php foreach ($grade as  $gra) { ?>
                                         <option  <?php if($data['job_grade'] == $gra['id'] ){  ?> selected <?php
@@ -88,7 +88,7 @@ function gradechange(val){
                                 <div class="form-group col-lg-3">
                                     <span class="form-label"><?= __('Pay template') ?> </span>
                                      <span class="d-block error-message text-danger"></span>
-                                    <select aria-label="Pay Template" class="form-select js-example-basic-single requried_field" name="pay_template" id="grade">
+                                    <select aria-label="<?= htmlspecialchars(__('Pay Template'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single requried_field" name="pay_template" id="grade">
                                         <option value=""><?= __('Select Any One') ?></option>
 
                                         <?php foreach ($tempdata as  $temp) { ?>
@@ -102,7 +102,7 @@ function gradechange(val){
 
                                     <span class="form-label"><?= __('Expected CTC') ?> <span class="text-danger">*</span></span>
                                      <span class="d-block error-message text-danger"></span>
-                                     <input aria-label="Input field" type="text" class="form-control text-right requried_field"  value="<?php echo $data['expected_ctc']; ?>"  name="expected_ctc" id="expected_ctc"  />
+                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-right requried_field"  value="<?php echo $data['expected_ctc']; ?>"  name="expected_ctc" id="expected_ctc"  />
                                 </div>
 
                                 <?php
@@ -112,13 +112,13 @@ function gradechange(val){
                                 <div class="form-group col-lg-2">
                                     <span class="form-label"><?= __('Joining Date') ?><span class="text-danger">*</span></span>
                                     <span class="d-block error-message text-danger"></span>
-                                       <input aria-label="Input field" type="text" class="form-control datepicker requried_field"  value="<?php echo $reporting_date; ?>"  name="reporting_date"  id="kt_datepicker_4_1" />
+                                       <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker requried_field"  value="<?php echo $reporting_date; ?>"  name="reporting_date"  id="kt_datepicker_4_1" />
 
                                 </div>
                                 <div class="form-group col-lg-2" >
                                       <span class="form-label"><?= __('LoI validity') ?><span class="text-danger">*</span></span>
                                       <span class="d-block error-message text-danger"></span>
-                                      <input aria-label="Input field" type="text" class="form-control datepicker requried_field"  value="<?php echo $offer_validity; ?>"  name="offer_validity"  id="kt_datepicker_4_2" />
+                                      <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker requried_field"  value="<?php echo $offer_validity; ?>"  name="offer_validity"  id="kt_datepicker_4_2" />
                                 </div>
                             </div>
                              <div class="row">

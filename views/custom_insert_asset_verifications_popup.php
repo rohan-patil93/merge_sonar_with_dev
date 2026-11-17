@@ -24,7 +24,7 @@ function verificationSubmitdetails(){
     var validation = 0;
     $.each(notemtyarry, function(key, fieldid) {
         if($("#"+fieldid).val() ==""){
-            $("#errormessage_"+fieldid).text("Field Is Requerd");
+            $("#errormessage_"+fieldid).text(<?php echo json_encode(__('Field Is Requerd'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             validation = 1;
         }else{
             $("#errormessage_"+fieldid).text("");
@@ -48,22 +48,22 @@ function verificationSubmitdetails(){
 }
 </script>
 <div class="modal-header">
-    <h4 class="modal-title">Verify Asset</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Verify Asset'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <?php if($alredyverfyinpro != 0){ $btndisable = "disabled";?>
     <div class="alert alert-danger background-danger alert-dismissible">
-        <strong class="f-16"><?php echo $alredyverfyinpro; ?> - Assets Already Verification In Process</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong class="f-16"><?php echo $alredyverfyinpro; ?> - <?= __('Assets Already Verification In Process'); ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
     <?php } ?>
     <form id="assetverificationform" method="post">
         <input type="hidden" name="asset_id" value="<?php echo $_POST['assetid']; ?>">
         <div class="row">
             <div class="col-lg-4 from-group w-full">
-                <span class="form-label d-block">Verify Asset User</span>
-                <select aria-label="Verification User"  class="form-select js-example-basic-single " name="verification_user_id" id="user_id" >
+                <span class="form-label d-block"><?= __('Verify Asset User'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Verification User'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="verification_user_id" id="user_id" >
                     <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach ($users as $userlist) { ?>
                         <option value="<?php echo $userlist['id']; ?>" ><?php echo ucwords($userlist['display_name']); ?></option>
@@ -72,13 +72,13 @@ function verificationSubmitdetails(){
                 <span id="errormessage_user_id" class="text-danger emtmsg"></span>
             </div>
             <div class="col-lg-4 from-group">
-                <span class="form-label">Start Date</span>
-                <input aria-label="Start Date Time" class="form-control" type="datetime-local" name="start_date_time" id="start_date_time">
+                <span class="form-label"><?= __('Start Date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Start Date Time'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="datetime-local" name="start_date_time" id="start_date_time">
                 <span id="errormessage_start_date_time" class="text-danger emtmsg"></span>
             </div>
             <div class="col-lg-4 from-group">
-                <span class="form-label">End Date</span>
-                <input aria-label="End Date Time" class="form-control" type="datetime-local" name="end_date_time" id="end_date_time">
+                <span class="form-label"><?= __('End Date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('End Date Time'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="datetime-local" name="end_date_time" id="end_date_time">
                 <span id="errormessage_end_date_time" class="text-danger emtmsg"></span>
             </div>
         </div>
@@ -101,10 +101,10 @@ function verificationSubmitdetails(){
                     <tr class="<?php echo isset($asset_verifications[$list_asset['id']])?"bg-danger text-white":"";?>">
                         <td scope="row"><?php echo $mm; ?></td>
                         <td class="tabledit-view-mode" style="pointer-events: none;"><span class="tabledit-span"><?php echo $list_asset['asset_code']; ?></span>
-                            <input aria-label="Asset Code[]" class="tabledit-input form-control input-sm" type="text" name="asset_code[]" value="<?php echo $list_asset['asset_code']; ?>" style="display:none;">
+                            <input aria-label="<?= htmlspecialchars(__('Asset Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="tabledit-input form-control input-sm" type="text" name="asset_code[]" value="<?php echo $list_asset['asset_code']; ?>" style="display:none;">
                         </td>
                         <td class="tabledit-view-mode"><span class="tabledit-span"><?php echo $list_asset['asset_description']; ?></span>
-                            <input aria-label="Asset Description[]" class="tabledit-input form-control input-sm" type="text" name="asset_description[]" value="<?php echo $list_asset['asset_description']; ?>" style="display:none;">
+                            <input aria-label="<?= htmlspecialchars(__('Asset Description'), ENT_QUOTES, 'UTF-8'); ?>[]" class="tabledit-input form-control input-sm" type="text" name="asset_description[]" value="<?php echo $list_asset['asset_description']; ?>" style="display:none;">
                         </td>
                         <td class="tabledit-view-mode"><span class="tabledit-span"><?php echo $locations[$list_asset['asset_location']]; ?></span>
                         </td>

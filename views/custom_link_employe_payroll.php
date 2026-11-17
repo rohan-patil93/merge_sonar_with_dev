@@ -30,20 +30,20 @@ $paydata = $empalldata['pay_area_employees'];
   <div class="container-fluid">
     <div class="card card-custom mb-5 ">
       <div class="card-header">
-        <h5>Link Payroll</h5>
+        <h5><?= __('Link Payroll'); ?></h5>
         <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
             <i class="icofont icofont-reply"></i>
-            Back
+            <?= __('Back'); ?>
           </a>
         </div>
       </div>
       <div class="card-body">
         <div class="row col-lg-12">
          <div class="form-group col-lg-6">
-              <span>Pay Area </span>
-              <select aria-label="Pay Area" class="js-example-basic-single" name="pay_area_id" id="pay_area_id">
-                <option value=""> Select Role</option>
+              <span><?= __('Pay Area'); ?> </span>
+              <select aria-label="<?= htmlspecialchars(__('Pay Area'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="pay_area_id" id="pay_area_id">
+                <option value=""> <?= __('Select Role'); ?></option>
                 <?php foreach($payrr['pay_areas'] as $pay_areas){ ?>
                   <option <?php if($paydata['pay_area_id'] == $pay_areas['id']){ echo "selected";
 }  ?> value="<?php echo $pay_areas['id'] ?>"><?php echo $pay_areas['name'] ?></option>
@@ -55,7 +55,7 @@ $paydata = $empalldata['pay_area_employees'];
       </div>
       <div class="text-right p-3">
         <button class="btn btn-primary" onclick="savepayrollemployee(<?php echo $shift['id']; ?>)" >
-          Save
+          <?= __('Save'); ?>
         </button>
       </div>
     </div>

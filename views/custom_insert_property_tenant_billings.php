@@ -170,7 +170,7 @@ if(isset($_POST['submittenantbills'])){
 					error:function (){}
 				});
 			}else{
-				swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Utility Amount Is Required", "error");
+				swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Utility Amount Is Required'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
 			}
 		}
 		function closePopUp(rowid){
@@ -268,7 +268,7 @@ if(isset($_POST['submittenantbills'])){
 																$redonlytext = $extrlebl = '';
 																if($bd['transaction_table']=='property_owner_detail_areas' || $bd['utility_bill_auto_and_fix']=='F'){
 																	$redonlytext = 'readonly';
-																	$extrlebl = "<span>Rent (".$bd['monthly_rent'].")+ Tax (".$bd['rent_tax'].")</span>";
+																	$extrlebl = "<span>".__('Rent (')."".$bd['monthly_rent'].")+ Tax (".$bd['rent_tax'].")</span>";
 																}
 																?>
 																<tr>
@@ -528,7 +528,7 @@ if(isset($_POST['submittenantbills'])){
 																	$redonlytext = $extrlebl = '';
 																	if($bd['transaction_table']=='property_owner_detail_areas' || $bd['utility_bill_auto_and_fix']=='F'){
 																		$redonlytext = 'readonly';
-																		$extrlebl = "<span>Rent (".$bd['monthly_rent'].")+ Tax (".$bd['rent_tax'].")</span>";
+																		$extrlebl = "<span>".__('Rent (')."".$bd['monthly_rent'].")+ Tax (".$bd['rent_tax'].")</span>";
 																	}
 																	?>
 																	<tr>

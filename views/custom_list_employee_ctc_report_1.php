@@ -48,14 +48,14 @@ $payslip_data = $payslip_list['payslip_data'];
 		<div class="col-md-4">
 			<form method="post" action="#">
 				<div class="form-group row">
-					<label for="example-date-input-from" class="col-2 col-form-label">From</label>
+					<label for="example-date-input-from" class="col-2 col-form-label"><?= __('From'); ?></label>
 					<div class="col-10">
 						<input class="form-control" type="date" name="fromdate" value="<?php echo date('Y-m-d');?>" id="example-date-input-from" />
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label for="example-date-input-to" class="col-2 col-form-label">To</label>
+					<label for="example-date-input-to" class="col-2 col-form-label"><?= __('To'); ?></label>
 					<div class="col-10">
 						<input class="form-control" type="date" name="todate" value="<?php echo date('Y-m-d');?>" id="example-date-input-to" />
 					</div>
@@ -87,8 +87,8 @@ $payslip_data = $payslip_list['payslip_data'];
 <div<div class="card card-custom">
 		<div class="card-header flex-wrap border-0 pt-4 pb-0 pl-5 mx-auto">
 			<div class="card-title">
-				<h3 class="card-label text-center">Employee's CTC Details
-				<span class="d-block text-muted pt-2 font-size-sm">Contribution period from <?php echo date("d/m/Y", strtotime($from_date)); ?> to <?php echo date("d/m/Y", strtotime($to_date)); ?></span></h3>
+				<h3 class="card-label text-center"><?= __('Employee\'s CTC Details'); ?>
+				<span class="d-block text-muted pt-2 font-size-sm"><?= __('Contribution period from'); ?> <?php echo date("d/m/Y", strtotime($from_date)); ?> <?= __('to'); ?> <?php echo date("d/m/Y", strtotime($to_date)); ?></span></h3>
 				</div>
 			</div>
 			<div class="card-body">
@@ -100,8 +100,8 @@ $payslip_data = $payslip_list['payslip_data'];
 							<table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" role="grid" aria-describedby="kt_datatable_info" style="width: 1236px;">
 								<thead>
 									<tr role="row" bgcolor="#f7f7f7">
-										<th scope="col">Employee ID</th>
-									<th scope="col">Employee Name</th>
+										<th scope="col"><?= __('Employee ID'); ?></th>
+									<th scope="col"><?= __('Employee Name'); ?></th>
 									<?php
 									foreach ($category_list as $cat_value) {
 										?>
@@ -117,7 +117,7 @@ $payslip_data = $payslip_list['payslip_data'];
 
 									<?php
 									foreach ($component_list as $component_value) { ?>
-										<th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 47px;" aria-label="Record ID: activate to sort column ascending"><?php echo $component_value['component_name']; ?></th>
+										<th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 47px;" aria-label="<?= htmlspecialchars(__('Record ID: activate to sort column ascending'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $component_value['component_name']; ?></th>
 										<?php
 									} ?>
 
@@ -151,7 +151,7 @@ $payslip_data = $payslip_list['payslip_data'];
 					</div>
 					<div class="row">
 						<div class="col-sm-12 col-md-5">
-							<div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">Showing 1 to 10 of 50 entries
+							<div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite"><?= __('Showing 1 to 10 of 50 entries'); ?>
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-7">

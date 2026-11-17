@@ -40,7 +40,7 @@ function submitTenantOpeningbalance(){
 	          showCancelButton: true,
 	          confirmButtonClass: "btn-danger",
 	          confirmButtonText: <?php echo json_encode(__('Submit')); ?>,
-	          cancelButtonText: "Don't Submit",
+	          cancelButtonText: <?php echo json_encode(__('Don\'t Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
 	          closeOnConfirm: true,
 	          closeOnCancel: true
 	        },

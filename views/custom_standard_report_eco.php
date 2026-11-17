@@ -1,15 +1,15 @@
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="f-30">EEO-1</h5>
-      <h6 class="mt-4"><?php echo count((array)$result['emp_data']); ?> Active Employees</h6>
+      <h5 class="f-30"><?= __('EEO-1'); ?></h5>
+      <h6 class="mt-4"><?php echo count((array)$result['emp_data']); ?> <?= __('Active Employees'); ?></h6>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
         <?php include_once 'views/custom_standard_report_hr_employee_filter.php'; ?>
         <div class="col-lg-2 mt-1">
           <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-            Apply
+            <?= __('Apply'); ?>
           </button>
           <input type="hidden" name="submit" value="applyform">
         </div>
@@ -35,39 +35,39 @@
       <div class="table-responsive mt-3">
         <table class="table table-hover table-bordered">
           <tr style="text-align: center;" class="align-middle">
-            <th scope="col" rowspan="6">Job Categories</th>
+            <th scope="col" rowspan="6"><?= __('Job Categories'); ?></th>
             <th scope="col" colspan="15" class="text-center">
-              <span>Number of Employees</span>
-              <span class="d-block">(Report employees in only one category)</span>
+              <span><?= __('Number of Employees'); ?></span>
+              <span class="d-block"><?= __('(Report employees in only one category)'); ?></span>
             </th>
           </tr>
           <tr style="text-align: center;">
-            <th scope="col" colspan="15">Race/Ethnicity</th>
+            <th scope="col" colspan="15"><?= __('Race/Ethnicity'); ?></th>
           </tr>
           <tr class="center">
-            <th scope="col" class="text-center" colspan="2" rowspan="2">Hispanic or Latino</th>
-            <th scope="col" class="text-center" colspan="12">Not-Hispanic or Latino</th>
-            <th scope="col" class="text-center align-middle" rowspan="3">Total Col A-N</th>
+            <th scope="col" class="text-center" colspan="2" rowspan="2"><?= __('Hispanic or Latino'); ?></th>
+            <th scope="col" class="text-center" colspan="12"><?= __('Not-Hispanic or Latino'); ?></th>
+            <th scope="col" class="text-center align-middle" rowspan="3"><?= __('Total Col A-N'); ?></th>
           </tr>
           <tr>
-            <th scope="col" class="text-center" colspan="6">Male</th>
-            <th scope="col" class="text-center" colspan="6">Female</th>
+            <th scope="col" class="text-center" colspan="6"><?= __('Male'); ?></th>
+            <th scope="col" class="text-center" colspan="6"><?= __('Female'); ?></th>
           </tr>
           <tr style="text-align: center;">
-            <th scope="col" class="align-middle">Male</th>
-            <th scope="col" class="align-middle">Female</th>
-            <th scope="col" class="align-middle">White</th>
-            <th scope="col" class="align-middle">Black or<br />African<br />American</th>
-            <th scope="col" class="align-middle">Native<br />Hawaiian or<br />Other<br />Pacific<br />Islander</th>
-            <th scope="col" class="align-middle">Asian</th>
-            <th scope="col" class="align-middle">American<br />Indian or<br />Alaska<br />Native</th>
-            <th scope="col" class="align-middle">Two or<br />more<br />races</th>
-            <th scope="col" class="align-middle">White</th>
-            <th scope="col" class="align-middle">Black or<br />African<br />American</th>
-            <th scope="col" class="align-middle">Native<br />Hawaiian or<br />Other<br />Pacific<br />Islander</th>
-            <th scope="col" class="align-middle">Asian</th>
-            <th scope="col" class="align-middle">American<br />Indian or<br />Alaska<br />Native</th>
-            <th scope="col" class="align-middle">Two or<br />more<br />races</th>
+            <th scope="col" class="align-middle"><?= __('Male'); ?></th>
+            <th scope="col" class="align-middle"><?= __('Female'); ?></th>
+            <th scope="col" class="align-middle"><?= __('White'); ?></th>
+            <th scope="col" class="align-middle"><?= __('Black or'); ?><br /><?= __('African'); ?><br /><?= __('American'); ?></th>
+            <th scope="col" class="align-middle"><?= __('Native'); ?><br /><?= __('Hawaiian or'); ?><br /><?= __('Other'); ?><br /><?= __('Pacific'); ?><br /><?= __('Islander'); ?></th>
+            <th scope="col" class="align-middle"><?= __('Asian'); ?></th>
+            <th scope="col" class="align-middle"><?= __('American'); ?><br /><?= __('Indian or'); ?><br /><?= __('Alaska'); ?><br /><?= __('Native'); ?></th>
+            <th scope="col" class="align-middle"><?= __('Two or'); ?><br /><?= __('more'); ?><br /><?= __('races'); ?></th>
+            <th scope="col" class="align-middle"><?= __('White'); ?></th>
+            <th scope="col" class="align-middle"><?= __('Black or'); ?><br /><?= __('African'); ?><br /><?= __('American'); ?></th>
+            <th scope="col" class="align-middle"><?= __('Native'); ?><br /><?= __('Hawaiian or'); ?><br /><?= __('Other'); ?><br /><?= __('Pacific'); ?><br /><?= __('Islander'); ?></th>
+            <th scope="col" class="align-middle"><?= __('Asian'); ?></th>
+            <th scope="col" class="align-middle"><?= __('American'); ?><br /><?= __('Indian or'); ?><br /><?= __('Alaska'); ?><br /><?= __('Native'); ?></th>
+            <th scope="col" class="align-middle"><?= __('Two or'); ?><br /><?= __('more'); ?><br /><?= __('races'); ?></th>
           </tr>
           <tr style="text-align: center;">
             <th scope="col">A</th>
@@ -87,7 +87,7 @@
             <th scope="col">O</th>
           </tr>
           <tr>
-            <th scope="col">Executive/Senior Level Officials and Managers</th>
+            <th scope="col"><?= __('Executive/Senior Level Officials and Managers'); ?></th>
             <td style="text-align: center;"></td>
             <td style="text-align: center;"></td>
             <td style="text-align: center;">4</td>
@@ -105,7 +105,7 @@
             <td style="text-align: center;">9</td>
           </tr>
           <tr>
-            <th scope="col">First/Mid Level Officials and Managers</th>
+            <th scope="col"><?= __('First/Mid Level Officials and Managers'); ?></th>
             <td style="text-align: center;">1</td>
             <td style="text-align: center;"></td>
             <td style="text-align: center;">5</td>

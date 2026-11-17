@@ -349,9 +349,9 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                            <input type="hidden" name="maxid" value="<?php echo $maxid+1; ?>">
 
 <div class="card-header ">
-                                                <h5>Job Posting</h5>
+                                                <h5><?= __('Job Posting'); ?></h5>
 
-                               <button type="button" data-toggle="tooltip" onclick="introJs().start()" data-original-title="Help Text" id="kt_quick_cart_toggle" class="btn p-0 border-0 bg-transparent fa fa-info-circle" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                               <button type="button" data-toggle="tooltip" onclick="introJs().start()" data-original-title="<?= htmlspecialchars(__('Help Text'), ENT_QUOTES, 'UTF-8'); ?>" id="kt_quick_cart_toggle" class="btn p-0 border-0 bg-transparent fa fa-info-circle" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
 
                                <button type="button" onclick="proceduressteps()" class="btn p-0 border-0 bg-transparent fa fa-question-circle" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
 
@@ -363,11 +363,11 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                            <div class="col-8">
                             <div class="row mt-2">
                               <div class="col-lg-6" data-step="1" data-intro="Hello world">
-                                 <span class="form-label ">Job Title</span>
+                                 <span class="form-label "><?= __('Job Title'); ?></span>
                                  <div>
 
- <select aria-label="Job Title" class="js-example-data-array col-sm-12 selectjobtitle" onchange="selectJobTitle()"  name="job_title">
-         <option value="-1">Select Job Title</option>
+ <select aria-label="<?= htmlspecialchars(__('Job Title'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-data-array col-sm-12 selectjobtitle" onchange="selectJobTitle()"  name="job_title">
+         <option value="-1"><?= __('Select Job Title'); ?></option>
                                           <?php foreach($title_list as  $title_listrow){ ?>
                                              <option value="<?php echo $title_listrow['id']; ?>"  <?php echo $jobpostlist['job_code']==$title_listrow['id']?"selected":""; ?> ><?php echo $title_listrow['job_title']; ?></option>
                                           <?php } ?>
@@ -376,32 +376,32 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                                  </div>
                               </div>
                              <div class="col-lg-6" data-step="2" data-intro="Job number">
-                              <span class="form-label mt-1">Job Number</span>
+                              <span class="form-label mt-1"><?= __('Job Number'); ?></span>
                               <div class="">
-                                 <input aria-label="Input field" class="form-control" type="text" value="<?php echo $jobpostlist['job_number']!=""?$jobpostlist['job_number']:$jobnumber; ?>"  name="job_number" id="" readonly="readonly">
+                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="<?php echo $jobpostlist['job_number']!=""?$jobpostlist['job_number']:$jobnumber; ?>"  name="job_number" id="" readonly="readonly">
                               </div>
                            </div>
                            </div>
 
                            <div class="row mt-2">
                               <div class="col-lg-12" data-step="3" data-intro="Post Name">
-                              <span class="form-label mt-1">Name</span>
+                              <span class="form-label mt-1"><?= __('Name'); ?></span>
                               <div class="">
-                                 <input aria-label="Job Name" class="form-control" type="text" name="job_name" value="<?php echo $jobpostlist['job_name']; ?>" id="job_name">
+                                 <input aria-label="<?= htmlspecialchars(__('Job Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="job_name" value="<?php echo $jobpostlist['job_name']; ?>" id="job_name">
                               </div>
                            </div>
                              <div class="col-lg-12" data-step="4" data-intro="Location">
 
-                              <span class="form-label mt-1">Location</span>
+                              <span class="form-label mt-1"><?= __('Location'); ?></span>
                             <div >
-                                    <select aria-label="Location" class="dcdfvdffgbfgb form-control kt-select2" id="kt_select2_1" name="location" onchange="selectoptions('locations','location_name',this.value,'location')">
+                                    <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="dcdfvdffgbfgb form-control kt-select2" id="kt_select2_1" name="location" onchange="selectoptions('locations','location_name',this.value,'location')">
 
 
-                                             <option value="-1">Select location</option>
+                                             <option value="-1"><?= __('Select location'); ?></option>
 <?php foreach($location_list as $location_listrow){ ?>
          <option value="<?php echo $location_listrow['id']; ?>"  <?php echo $jobpostlist['location_id']==$location_listrow['id']?"selected":""; ?>><?php echo $location_listrow['location_name']; ?></option>
 <?php } ?>
-<option value="-0">Other</option>
+<option value="-0"><?= __('Other'); ?></option>
 
 </select>
 
@@ -414,12 +414,12 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
 
                             <div class="row mt-2">
                               <div class="col-lg-6" data-step="5" data-intro="Request By">
-                              <span class="form-label mt-1">Requested By   <?php $request = isset($jobpostlist['requested_by'])?$jobpostlist['requested_by']:$_SESSION['userid']; ?>
+                              <span class="form-label mt-1"><?= __('Requested By'); ?>   <?php $request = isset($jobpostlist['requested_by'])?$jobpostlist['requested_by']:$_SESSION['userid']; ?>
     </span>
                              <div >
 
-                         <select aria-label="Requested By"   class=" form-control kt-select2" id="kt_select2_5" name="requested_by">
-                                         <option value="-1">Select Requested</option>
+                         <select aria-label="<?= htmlspecialchars(__('Requested By'), ENT_QUOTES, 'UTF-8'); ?>"   class=" form-control kt-select2" id="kt_select2_5" name="requested_by">
+                                         <option value="-1"><?= __('Select Requested'); ?></option>
 
 <?php
             foreach($user_list as $user_listrow){ ?>
@@ -431,18 +431,18 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                            </div>
                              <div class="col-lg-6" data-step="6" data-intro="Requested Date">
 
-                              <span class=" form-label mt-1">Requested Date</span>
+                              <span class=" form-label mt-1"><?= __('Requested Date'); ?></span>
                               <div class="">
-                                 <input aria-label="Select date" class="form-control" type="date" value="<?php echo $jobpostlist['requested_date']!=""?$jobpostlist['requested_date']:date('Y-m-d'); ?>" name="requested_date" id="example-date-input-1" />
+                                 <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" value="<?php echo $jobpostlist['requested_date']!=""?$jobpostlist['requested_date']:date('Y-m-d'); ?>" name="requested_date" id="example-date-input-1" />
                               </div>
                            </div>
                            </div>
                                 <div class="row mt-2">
                               <div class="col-lg-6" data-step="7" data-intro="Recruitment Manager">
-                              <span class="form-label mt-1">Recruitment Manager </span>
+                              <span class="form-label mt-1"><?= __('Recruitment Manager'); ?> </span>
                               <div >
-                                    <select aria-label="Recruitment By" class=" form-control kt-select2" id="kt_select2_8" name="recruitment_by">
-                                           <option value="-1">Select Recruitment</option>
+                                    <select aria-label="<?= htmlspecialchars(__('Recruitment By'), ENT_QUOTES, 'UTF-8'); ?>" class=" form-control kt-select2" id="kt_select2_8" name="recruitment_by">
+                                           <option value="-1"><?= __('Select Recruitment'); ?></option>
                           <?php foreach($user_list as $user_listrow){ ?>
             <option value="<?php echo $user_listrow['id']; ?>"  <?php echo $jobpostlist['recruitment_manager']==$user_listrow['id']?"selected":""; ?> ><?php echo $user_listrow['display_name']; ?></option>
             <?php } ?>
@@ -452,28 +452,28 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                            </div>
                              <div class="col-lg-6" data-step="8" data-intro="Recruitment Date">
 
-                              <span class=" form-label mt-1">Recruitment Date</span>
+                              <span class=" form-label mt-1"><?= __('Recruitment Date'); ?></span>
                               <div class="">
-                                 <input aria-label="Select date" class="form-control" type="date" value="<?php echo $jobpostlist['required_date']!=""?$jobpostlist['required_date']:date('Y-m-d'); ?>" name="recruitment_date" id="example-date-input-to" />
+                                 <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" value="<?php echo $jobpostlist['required_date']!=""?$jobpostlist['required_date']:date('Y-m-d'); ?>" name="recruitment_date" id="example-date-input-to" />
                               </div>
                            </div>
                            </div>
 
                            <div class="row mt-2">
-                              <span class="col-8 form-label mt-1">Year of Experience</span>
+                              <span class="col-8 form-label mt-1"><?= __('Year of Experience'); ?></span>
                               <div class="col-12">
                                  <div class="row">
                                     <div class="col-6">
-                                       <select aria-label="Min Experience" class="form-control kt-select2" id="" name="min_experience">
-                                          <option value="0">Select Min Exp</option>
+                                       <select aria-label="<?= htmlspecialchars(__('Min Experience'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt-select2" id="" name="min_experience">
+                                          <option value="0"><?= __('Select Min Exp'); ?></option>
                                           <?php for($m=1;$m<=10;$m++){ ?>
                                           <option value="<?php echo $m; ?>" <?php echo number_format($jobpostlist['min_exp'])==$m?"selected":""; ?>><?php echo $m; ?></option>
                                           <?php } ?>
                                        </select>
                                     </div>
                                     <div class="col-6">
-                                       <select aria-label="Max Experience" class="form-control" id="" name="max_experience">
-                                          <option value="1">Select Max Exp</option>
+                                       <select aria-label="<?= htmlspecialchars(__('Max Experience'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="" name="max_experience">
+                                          <option value="1"><?= __('Select Max Exp'); ?></option>
                                              <?php for($m=1;$m<=10;$m++){ ?>
                                           <option value="<?php echo $m; ?>" <?php echo number_format($jobpostlist['max_exp'])==$m?"selected":""; ?>><?php echo $m; ?></option>
                                           <?php } ?>
@@ -483,29 +483,29 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                               </div>
                            </div>
                                   <div class="row mt-2">
-                                      <span class="col-8 form-label mt-1">Job Responsibility</span>
+                                      <span class="col-8 form-label mt-1"><?= __('Job Responsibility'); ?></span>
                                       <div class="col-12">
-                                          <textarea aria-label="Job Responsibility" class="form-control" placeholder="" name="job_responsibility" style="height: 80px;"><?php echo $jobpostlist['job_responsibility'];?></textarea>
+                                          <textarea aria-label="<?= htmlspecialchars(__('Job Responsibility'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" placeholder="" name="job_responsibility" style="height: 80px;"><?php echo $jobpostlist['job_responsibility'];?></textarea>
                                       </div>
                                   </div>
                           </div>
                                   <div class="row mt-2">
-                                      <span class="col-8 form-label mt-1">Showcase Your Brand</span>
-                              <span class="col-8 mb-4">Add a video to tell your brand's story and show candidates what it is like to work at your company</span>
+                                      <span class="col-8 form-label mt-1"><?= __('Showcase Your Brand'); ?></span>
+                              <span class="col-8 mb-4"><?= __('Add a video to tell your brand\'s story and show candidates what it is like to work at your company'); ?></span>
                                       <div class="col-8">
 
-                                 <input aria-label="Video Url" class="form-control" type="text" name="video_url"   id="video_url" value="<?php echo $jobpostlist['video_url']; ?>" placeholder="Eg. https://www.youtube.com/">
+                                 <input aria-label="<?= htmlspecialchars(__('Video Url'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="video_url"   id="video_url" value="<?php echo $jobpostlist['video_url']; ?>" placeholder="<?= htmlspecialchars(__('Eg. https://www.youtube.com/'), ENT_QUOTES, 'UTF-8'); ?>">
                                  <div id="videoextrafileds" >
                                  </div>
                                  <button type="button" onclick="addvideoextrafileds()" class="btn btn-outline-success mt-2">
-                                    <i class="fas fa-plus"></i> Priview Video
+                                    <i class="fas fa-plus"></i> <?= __('Priview Video'); ?>
                                  </button>
 
                                  <div class="accordion accordion-toggle-arrow mt-4" id="accordionExample4">
                                     <div class="card">
                                        <div class="card-header" id="headingOne4">
                                           <div class="card-title" data-toggle="collapse" data-target="#collapseOne4">
-                                             <i class="far fa-lightbulb"></i> Ideas for videos that you can add
+                                             <i class="far fa-lightbulb"></i> <?= __('Ideas for videos that you can add'); ?>
                                           </div>
                                        </div>
                                        <div id="collapseOne4" class="collapse" data-parent="#accordionExample4">
@@ -516,49 +516,49 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                                  </div>
                                       </div>
                                   </div>
-                                  <h2 class="text-dark font-weight-bold mt-10 mb-2 mr-5">Applications</h2>
+                                  <h2 class="text-dark font-weight-bold mt-10 mb-2 mr-5"><?= __('Applications'); ?></h2>
                            <hr>
 
-                           <h4 class="mt-5">Screening Questions</h4>
-                           <h6 class="font-weight-normal mb-4">You can ask some questions before the candidates apply to your job!</h6>
+                           <h4 class="mt-5"><?= __('Screening Questions'); ?></h4>
+                           <h6 class="font-weight-normal mb-4"><?= __('You can ask some questions before the candidates apply to your job!'); ?></h6>
                            <div class="col-lg-8">
                   <?php $ij=1; if(isset($jobpostlist['question'])){ $question = json_decode($jobpostlist['question'],1); foreach($question as $question){ ?>
                  <div class="row rows<?php echo $ij; ?>">
 
-                  <input aria-label="Question[]" class="form-control mt-2 col-lg-10" type="text" name="question[]" value="<?php echo $question; ?>" placeholder="Eg. Tell me about yourself"><i title="Delete Question" onclick="deleteQuestion(<?php echo $ij; ?>>)" class="text-dark-50 flaticon-delete col-lg-2 mt-4" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                  <input aria-label="<?= htmlspecialchars(__('Question'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control mt-2 col-lg-10" type="text" name="question[]" value="<?php echo $question; ?>" placeholder="<?= htmlspecialchars(__('Eg. Tell me about yourself'), ENT_QUOTES, 'UTF-8'); ?>"><i title="<?= htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>" onclick="deleteQuestion(<?php echo $ij; ?>>)" class="text-dark-50 flaticon-delete col-lg-2 mt-4" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
 
                     </div>     <?php $ij++;
 }
 }else{ ?>
  <div class="row rows1">
-                  <input aria-label="Eg. Tell me about yourself" class="form-control mt-2 col-lg-10" type="text" name="question[]" value="" placeholder="Eg. Tell me about yourself" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><button type="button" title="Delete Question" onclick="deleteQuestion(1)" class="btn p-0 border-0 bg-transparent text-dark-50 flaticon-delete col-lg-2 mt-4" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                  <input aria-label="<?= htmlspecialchars(__('Eg. Tell me about yourself'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control mt-2 col-lg-10" type="text" name="question[]" value="" placeholder="<?= htmlspecialchars(__('Eg. Tell me about yourself'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><button type="button" title="<?= htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>" onclick="deleteQuestion(1)" class="btn p-0 border-0 bg-transparent text-dark-50 flaticon-delete col-lg-2 mt-4" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                     </div>
 <?php } ?>
                            <div id="videoquestiontextfileds" >
                            </div>
                             <button type="button" onclick="addQuestionsTextFileds()" class="btn btn-outline-success mt-2">
-                               <i class="fas fa-plus"></i> Add Question
+                               <i class="fas fa-plus"></i> <?= __('Add Question'); ?>
                            </button>
                      </div>
-                           <h4 class="text-dark font-weight-bold mt-10 mb-2 mr-5">Targeting</h4>
+                           <h4 class="text-dark font-weight-bold mt-10 mb-2 mr-5"><?= __('Targeting'); ?></h4>
                            <hr>
                            <div class="row">
                               <div class="col-8">
                                  <div class="row">
                                     <div class="col-6">
-                                       <span class="form-label mt-1">Department Department</span>
-                                       <select aria-label="Department Name" class="form-control" id="" onchange="selectoptions('departments','department_name',this.value,'department_name')" name="department_name">
-                                          <option value="-1">Select</option>
+                                       <span class="form-label mt-1"><?= __('Department Department'); ?></span>
+                                       <select aria-label="<?= htmlspecialchars(__('Department Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="" onchange="selectoptions('departments','department_name',this.value,'department_name')" name="department_name">
+                                          <option value="-1"><?= __('Select'); ?></option>
                                          <?php foreach($department_list as $department_listrow){ ?>
    <option value="<?php echo $department_listrow['id']; ?>"  <?php echo $jobpostlist['department_id']==$department_listrow['id']?"selected":""; ?>><?php echo $department_listrow['department_name']; ?></option>
                                          <?php } ?>
-                                         <option value="-0">Other</option>
+                                         <option value="-0"><?= __('Other'); ?></option>
                                        </select>
                                     </div>
                                     <div class="col-6">
-                                       <span class="form-label mt-1">Job Level</span>
-                                       <select aria-label="Job Level" class="form-control" id="" name="job_level">
-                                          <option value="-1">Select job Level</option>
+                                       <span class="form-label mt-1"><?= __('Job Level'); ?></span>
+                                       <select aria-label="<?= htmlspecialchars(__('Job Level'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="" name="job_level">
+                                          <option value="-1"><?= __('Select job Level'); ?></option>
                                           <?php foreach($joblevel_list as $joblevel_list){ ?>
 
       <option value="<?php echo $joblevel_list['id']; ?>" <?php echo $jobpostlist['job_level_id']==$joblevel_list['id']?"selected":""; ?>><?php echo $joblevel_list['job_grade_name']; ?></option>
@@ -573,9 +573,9 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                               <div class="col-8">
                                  <div class="row">
                                     <div class="col-6">
-                                       <span class="form-label mt-1">Job Selection Process</span>
-                                     <select aria-label="Job Selection Process" class="form-control" id="" name="job_selection_process">
-                                          <option value="">Select Job Selection process</option>
+                                       <span class="form-label mt-1"><?= __('Job Selection Process'); ?></span>
+                                     <select aria-label="<?= htmlspecialchars(__('Job Selection Process'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="" name="job_selection_process">
+                                          <option value=""><?= __('Select Job Selection process'); ?></option>
                                           <?php foreach($jobselection_process_list as $jobselection_process_listroe){ ?>
 <option value="<?php echo $jobselection_process_listroe['id']; ?>" <?php echo $jobpostlist['job_selection_process']==$jobselection_process_listroe['id']?"selected":""; ?>><?php echo $jobselection_process_listroe['process_name']; ?></option>
 
@@ -583,9 +583,9 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                                        </select>
                                     </div>
                                     <div class="col-6">
-                                    <span class="form-label mt-1">Number Of Employees</span>
+                                    <span class="form-label mt-1"><?= __('Number Of Employees'); ?></span>
                                     <div class="">
-                                       <input aria-label="Input field" class="form-control" type="text" value="<?php echo $jobpostlist['no_of_resources']; ?>" name="number_of_employee" id="number_of_employee" placeholder="Eg: 4" />
+                                       <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="<?php echo $jobpostlist['no_of_resources']; ?>" name="number_of_employee" id="number_of_employee" placeholder="<?= htmlspecialchars(__('Eg: 4'), ENT_QUOTES, 'UTF-8'); ?>" />
                                     </div>
                                     </div>
 
@@ -595,20 +595,20 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                            </div>
  <div class="row">
                               <div class="col-8">
-                                  <span class="form-label mt-1">Annual Salary(Rs.)</span>
+                                  <span class="form-label mt-1"><?= __('Annual Salary(Rs.)'); ?></span>
                                  <div class="row">
                                        <div class="col-lg-4">
-                                        <span >Min Salary</span>
-                                       <input aria-label="Input field" class="form-control inr_amount" type="text" value="<?php echo $jobpostlist['min_salary']; ?>" name="min_salary" placeholder="eg. 4,000,000"  />
+                                        <span ><?= __('Min Salary'); ?></span>
+                                       <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control inr_amount" type="text" value="<?php echo $jobpostlist['min_salary']; ?>" name="min_salary" placeholder="<?= htmlspecialchars(__('eg. 4,000,000'), ENT_QUOTES, 'UTF-8'); ?>"  />
                                     </div>
 
                                     <div class="col-lg-4">
-                                        <span >Max Salary</span>
-                                       <input aria-label="Input field" class="form-control inr_amount" type="text" value="<?php echo $jobpostlist['max_salary']; ?>" onblur="maxamountemplye(this.value)" name="max_salary" placeholder="eg. 4,000,000" />
+                                        <span ><?= __('Max Salary'); ?></span>
+                                       <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control inr_amount" type="text" value="<?php echo $jobpostlist['max_salary']; ?>" onblur="maxamountemplye(this.value)" name="max_salary" placeholder="<?= htmlspecialchars(__('eg. 4,000,000'), ENT_QUOTES, 'UTF-8'); ?>" />
                                     </div>
                                      <div class="col-lg-4">
-                                        <span >Total Salary</span>
-                                       <input aria-label="Input field" class="form-control inr_amount" type="text" value="<?php echo $jobpostlist['total_resource_cost']; ?>"  name="annual_salary"  id="annual_salary" >
+                                        <span ><?= __('Total Salary'); ?></span>
+                                       <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control inr_amount" type="text" value="<?php echo $jobpostlist['total_resource_cost']; ?>"  name="annual_salary"  id="annual_salary" >
                                     </div>
                                  </div>
                               </div>
@@ -617,9 +617,9 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
 <div class="col-lg-8">
    <div class="row">
        <div class="col-6">
-            <span class="form-label mt-1"> Esgin Budget</span>
-            <select aria-label="Esgin Budget" class="form-control" id="" name="esgin_budget">
-               <option value="">Select Esgin Budget</option>
+            <span class="form-label mt-1"> <?= __('Esgin Budget'); ?></span>
+            <select aria-label="<?= htmlspecialchars(__('Esgin Budget'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="" name="esgin_budget">
+               <option value=""><?= __('Select Esgin Budget'); ?></option>
                <?php foreach($esginbudget_list as $esginbudget_list){ ?>
 <option value="<?php echo $esginbudget_list['id']; ?>"  <?php echo $jobpostlist['esgin_budget_approval_id']==$esginbudget_list['id']?"selected":""; ?>><?php echo $esginbudget_list['transaction_number']; ?></option>
 
@@ -627,21 +627,21 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
             </select>
          </div>
     <div class="col-6">
-                                       <span class="form-label mt-1">Employment Type</span>
+                                       <span class="form-label mt-1"><?= __('Employment Type'); ?></span>
                                     <div class="radio-inline">
 
-                                    <label class="radio"> <input aria-label="Radio option" type="radio" <?php echo $jobpostlist['employment_type']=='2'?"checked":"";?> name="employment_type" value="2"> <span></span>Contract</label>
+                                    <label class="radio"> <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php echo $jobpostlist['employment_type']=='2'?"checked":"";?> name="employment_type" value="2"> <span></span><?= __('Contract'); ?></label>
 
-                                    <label class="radio"> <input aria-label="Employment Type" type="radio" name="employment_type" <?php echo $jobpostlist['employment_type']=='1'?"checked":"";?> value="1">   <span></span>Regular</label>
+                                    <label class="radio"> <input aria-label="<?= htmlspecialchars(__('Employment Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="employment_type" <?php echo $jobpostlist['employment_type']=='1'?"checked":"";?> value="1">   <span></span><?= __('Regular'); ?></label>
                                              </div>
                                     </div>
 </div></div></div>
                <div class="col-12 mt-3">
                                  <div class="checkbox-inline">
                                     <label class="checkbox checkbox-outline checkbox-success">
-                                       <input aria-label="Candidate Show Status" type="checkbox" name="candidate_show_status" <?php echo $jobpostlist['candidate_show_status']=="0"?"checked":"";?>  />
+                                       <input aria-label="<?= htmlspecialchars(__('Candidate Show Status'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="candidate_show_status" <?php echo $jobpostlist['candidate_show_status']=="0"?"checked":"";?>  />
                                        <span></span>
-                                       <b>Don't show this to candidates</b>
+                                       <b><?= __('Don\'t show this to candidates'); ?></b>
                                        <p></p>
                                     </label>
                                  </div>
@@ -649,37 +649,37 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
                            <div class="row">
 
                               <div class="col-12">
-                                 <h6 class="mt-5">Employee Mode</h6>
+                                 <h6 class="mt-5"><?= __('Employee Mode'); ?></h6>
                                  <input type="hidden" name="employee_mode" id="employee_mode" value="<?php echo $jobpostlist['employment_mode']; ?>">
                                  <ul class="post-job">
                                     <li>
                                        <a class="btn <?php echo $jobpostlist['employment_mode']=="1"?"btn-info":"btn-outline-info"; ?> coursetype"  data-id="1">
                                           <i class="far fa-user-circle mb-4"></i>
-                                          <h6>Full Time</h6>
+                                          <h6><?= __('Full Time'); ?></h6>
                                        </a>
                                     </li>
                                     <li>
                                        <a class="btn <?php echo $jobpostlist['employment_mode']=="2"?"btn-info":"btn-outline-info"; ?> coursetype" data-id="2">
                                           <i class="fas fa-chart-pie mb-4"></i>
-                                          <h6>Part Time</h6>
+                                          <h6><?= __('Part Time'); ?></h6>
                                        </a>
                                     </li>
                                     <li>
                                        <a class="btn <?php echo $jobpostlist['employment_mode']=="3"?"btn-info":"btn-outline-info"; ?> coursetype" data-id="3">
                                           <i class="fas fa-user-graduate mb-4"></i>
-                                          <h6>Distance Learning Program</h6>
+                                          <h6><?= __('Distance Learning Program'); ?></h6>
                                        </a>
                                     </li>
                                     <li>
                                        <a class="btn <?php echo $jobpostlist['employment_mode']=="4"?"btn-info":"btn-outline-info"; ?> coursetype" data-id="4">
                                           <i class="far fa-user-circle mb-4"></i>
-                                          <h6>Executive Program</h6>
+                                          <h6><?= __('Executive Program'); ?></h6>
                                        </a>
                                     </li>
                                     <li>
                                        <a class="btn <?php echo $jobpostlist['employment_mode']=="5"?"btn-info":"btn-outline-info"; ?> coursetype" data-id="5">
                                           <i class="far fa-user-circle mb-4"></i>
-                                          <h6>Certification</h6>
+                                          <h6><?= __('Certification'); ?></h6>
                                        </a>
                                     </li>
                                  </ul>
@@ -687,13 +687,13 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
 
 
 <div class="col-12">
-   <h2 class="text-dark font-weight-bold mt-10 mb-2 mr-5">Job Tags</h2>
+   <h2 class="text-dark font-weight-bold mt-10 mb-2 mr-5"><?= __('Job Tags'); ?></h2>
    <hr>
 </div>
                               <div class="col-12">
 
       <div class="">
-         <select aria-label="Job Tag[]" class="form-control select2" id="kt_select2_11" multiple="multiple" name="job_tag[]">
+         <select aria-label="<?= htmlspecialchars(__('Job Tag'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control select2" id="kt_select2_11" multiple="multiple" name="job_tag[]">
           <?php foreach($tagslist as $tagslists){  ?>
 
             <option  selected><?php echo $tagslists['tages']; ?></option>
@@ -707,21 +707,21 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
 
                               <div class="col-12 mt-5">
                                  <div class="py-2 px-4 boost">
-                                    <h5><i class="far fa-user-circle mb-4 mr-3"></i>Job Description</h5>
+                                    <h5><i class="far fa-user-circle mb-4 mr-3"></i><?= __('Job Description'); ?></h5>
                                     <hr>
                                     <div class="col-12 mt-3">
                                        <div class="checkbox-inline">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                       <textarea aria-label="Summa" class="summernote" name="summa" id="kt_summernote_1"><?php echo base64_decode($jobpostlist['job_desc']); ?></textarea>
+                                       <textarea aria-label="<?= htmlspecialchars(__('Summa'), ENT_QUOTES, 'UTF-8'); ?>" class="summernote" name="summa" id="kt_summernote_1"><?php echo base64_decode($jobpostlist['job_desc']); ?></textarea>
 
                                     </div>
                                        </div>
                                     </div>
                                  </div>
                                  <div class="mt-5">
-                                     <button class="btn btn-primary" name="post_job" value="exit">Post Job</button>
-                                    <button class="btn btn-outline-primary" name="post_job" value="post">Post Job and add another job</button>
-                                    <button class="btn btn-link">Cancel</button>
+                                     <button class="btn btn-primary" name="post_job" value="exit"><?= __('Post Job'); ?></button>
+                                    <button class="btn btn-outline-primary" name="post_job" value="post"><?= __('Post Job and add another job'); ?></button>
+                                    <button class="btn btn-link"><?= __('Cancel'); ?></button>
                                  </div>
                               </div>
                            </div>
@@ -731,7 +731,7 @@ $jobnumber = toGetApplicationSerialNumber('job_postings');
 
                      <div class="col-4">
                         <div class="few">
-                           <h5>Few Guidelines</h5>
+                           <h5><?= __('Few Guidelines'); ?></h5>
                            <div id="noteguidelines"><?php echo base64_decode($jobpostlist['job_desc']);   ?></div>
                         </div>
                      </div>
@@ -754,7 +754,7 @@ $text = array("Job Title"=>"Job title list please select any one","Job Number"=>
 <div id="kt_quick_cart" class="offcanvas offcanvas-right p-10">
          <!--begin::Header-->
          <div class="offcanvas-header d-flex align-items-center justify-content-between pb-7" style="" kt-hidden-height="46">
-            <h4 class="font-weight-bold m-0">Help Text</h4>
+            <h4 class="font-weight-bold m-0"><?= __('Help Text'); ?></h4>
             <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_cart_close">
                <i class="ki ki-close icon-xs text-muted"></i>
             </a>
@@ -788,8 +788,8 @@ $text = array("Job Title"=>"Job title list please select any one","Job Number"=>
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Enter Option</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel"><?= __('Enter Option'); ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>

@@ -1,7 +1,7 @@
 <div class="col-lg-<?php echo $dynamiccollg!=''?$dynamiccollg:'4'?>">
   <nav class="all-employee">
     <ul>
-      <li class="d-block border dropbtn"><a href="#">All Employees</a>
+      <li class="d-block border dropbtn"><a href="#"><?= __('All Employees'); ?></a>
         <ul>
           <?php foreach($menus as $mkey=>$menu){ ?>
             <li><a href="#"><?php echo $menu['name']; ?> <i class="ti-angle-right float-end f-12 m-t-5"></i></a>
@@ -11,7 +11,7 @@
                   <li>
                     <div class="border-checkbox-section">
                       <div class="border-checkbox-group border-checkbox-group-primary">
-                        <input aria-label="Input field" <?php if(in_array($fkey,(array)$_POST[$mkey])){ echo "checked";
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" <?php if(in_array($fkey,(array)$_POST[$mkey])){ echo "checked";
 } ?> class="border-checkbox" name="<?php echo $mkey; ?>[]" value="<?php echo $fkey;?>" type="checkbox" id="<?php echo $mkey."_".$fkey; ?>">
                         <label class="form-label border-checkbox-label" for="<?php echo $mkey."_".$fkey; ?>"><?php echo $menuvalue;?></label>
                       </div>

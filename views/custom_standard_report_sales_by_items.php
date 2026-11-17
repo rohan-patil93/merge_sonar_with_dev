@@ -36,11 +36,11 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
 
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Age Profile" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
         <div class="col-lg-2 mt-1">
           <span class="form-label"> &nbsp; </span>
             <button type="submit" name="applyform" value="apply" class=" mt-3 btn btn-info waves-effect waves-light input-group-text mt-0">
-                Apply
+                <?= __('Apply'); ?>
               </button>
             <input type="hidden" name="submit" value="applyform">
           </div>
@@ -67,11 +67,11 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
         <table class="table table-hover">
           <tr style="background-color: #eeeeee;">
             <th scope="col"># </th>
-            <th scope="col">ITEM NAME </th>
-            <th scope="col">SKU</th>
-            <th scope="col" class="text-right">QUANTITY SALES</th>
-            <th scope="col" class="text-right">AMOUNT</th>
-            <th scope="col" class="text-right">AVERAGE PRICE</th>
+            <th scope="col"><?= __('ITEM NAME'); ?> </th>
+            <th scope="col"><?= __('SKU'); ?></th>
+            <th scope="col" class="text-right"><?= __('QUANTITY SALES'); ?></th>
+            <th scope="col" class="text-right"><?= __('AMOUNT'); ?></th>
+            <th scope="col" class="text-right"><?= __('AVERAGE PRICE'); ?></th>
           </tr>
           <?php $sl=1; if(count((array)$result['data'])>0){
            foreach($result['data'] as $data ){
@@ -95,7 +95,7 @@ $_SESSION['apply_js']['standart_report_hrr']=1;
           <tr>
             <td colspan="9">
               <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

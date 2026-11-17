@@ -166,15 +166,15 @@ $users_res = $res['users_res'];
         // Optional: more specific messages based on error type
         if (!customMessage) {
             if (status === 'timeout') {
-                errorMessage = "The request timed out. Please check your internet connection.";
+                errorMessage = <?php echo json_encode(__('The request timed out. Please check your internet connection.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             } else if (status === 'parsererror') {
-                errorMessage = "Failed to parse server response. Please try again.";
+                errorMessage = <?php echo json_encode(__('Failed to parse server response. Please try again.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             } else if (xhr.status >= 500) {
-                errorMessage = "Server error. Please contact support or try again later.";
+                errorMessage = <?php echo json_encode(__('Server error. Please contact support or try again later.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             } else if (status === 'abort') {
-                errorMessage = "Request was aborted.";
+                errorMessage = <?php echo json_encode(__('Request was aborted.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             } else {
-                errorMessage = "An error occurred while processing your request.";
+                errorMessage = <?php echo json_encode(__('An error occurred while processing your request.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             }
         }
 

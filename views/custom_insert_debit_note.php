@@ -96,7 +96,7 @@ $itemres = json_decode($itemres,1);
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><label class="kt-checkbox"> <input aria-label="Checkbox"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
+        htmlRows += '<td><label class="kt-checkbox"> <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
         htmlRows += '<td><select aria-label="Product Code[]" class="form-control"  name= "productCode[]" id="productCode_'+count+'" > <option value="0"><?= __('Select Any Prodcut') ?></option><?php foreach ($itemres as  $item) {  ?>      <option  value = <?php echo $item[id]; ?>><?php echo $item[name]; ?> </option> <?php
 } ?><option  value = "+add"> <b><?= __('+ ADD') ?></b></option> </select> </td>';
         htmlRows += '<td><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control"></textarea></td>';
@@ -143,7 +143,7 @@ $itemres = json_decode($itemres,1);
     });
     $(document).on('click', '.deleteInvoice', function(){
         var id = $(this).attr("id");
-        if(confirm("Are you sure you want to remove this?")){
+        if(confirm(<?php echo json_encode(__('Are you sure you want to remove this?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>)){
             $.ajax({
                 url:"action.php",
                 method:"POST",
@@ -244,14 +244,14 @@ function calculateTotal(){
                     console.log(quantity);
                     if (parseFloat(data) < quantity){
                         swal.fire({
-                            title: "Quantity on hand "+parseFloat(data),
-                            text: "Do you want to change the quantity to "+parseFloat(data)+" ?",
+                            title: <?php echo json_encode(__('Quantity on hand').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+parseFloat(data),
+                            text: <?php echo json_encode(__('Do you want to change the quantity to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+parseFloat(data)+" ?",
                             type: "warning",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, change!",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, change!'), ENT_QUOTES, 'UTF-8'); ?>",
                             confirmButtonClass: "btn btn-danger",
                             showCancelButton: true,
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, proceed",
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, proceed'), ENT_QUOTES, 'UTF-8'); ?>",
                             cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {
@@ -276,7 +276,7 @@ function calculateTotal(){
                                         <div class="kt-portlet__head">
                                             <div class="kt-portlet__head-label">
                                                 <h3 class="kt-portlet__head-title">
-                                                    Customer DEBIT NOTE
+                                                    <?= __('Customer DEBIT NOTE'); ?>
                                                 </h3>
                                             </div>
                                             <div class="kt-portlet__head-toolbar">
@@ -287,14 +287,14 @@ function calculateTotal(){
                                             <div class="btn-group">
                                                 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Genrate') ?></button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">New Version</a>
-                                                    <a class="dropdown-item" href="#">Sale order</a>
-                                                    <a class="dropdown-item" href="#">Invoice</a>
+                                                    <a class="dropdown-item" href="#"><?= __('New Version'); ?></a>
+                                                    <a class="dropdown-item" href="#"><?= __('Sale order'); ?></a>
+                                                    <a class="dropdown-item" href="#"><?= __('Invoice'); ?></a>
                                                 </div>
                                             </div>
                                                 <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
                                                     <i class="la la-arrow-left"></i>
-                                                    <span class="kt-hidden-mobile">Back</span>
+                                                    <span class="kt-hidden-mobile"><?= __('Back'); ?></span>
                                                 </a>
                                             </div>
                                         </div>
@@ -304,8 +304,8 @@ function calculateTotal(){
                                             <div class="kt-portlet__body">
                                                 <div class="form-group row">
                                                     <div class="col-lg-4">
-                                                        <span class="">Customer:</span>
-                                                        <select aria-label="Party" class="form-control" id="kt_select2_11" name= "party_id" onchange="GetSelectedTextValue(this.value)" >
+                                                        <span class=""><?= __('Customer'); ?>:</span>
+                                                        <select aria-label="<?= htmlspecialchars(__('Party'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_select2_11" name= "party_id" onchange="GetSelectedTextValue(this.value)" >
                                                                 <option><?= __('Select Any Customer') ?></option>
                                                                 <?php foreach ($cusresponse as $key => $cus) {  ?>
                                                                 <option  <?php if($cus_id == $cus['id']){ ?> selected  <?php
@@ -315,22 +315,22 @@ function calculateTotal(){
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <span>Customer Name:</span>
-                                                        <input aria-label="Party Name" readonly class="form-control"  type='text' id="party_name" name="party_name"    value="<?php echo $cusdata['name']; ?>" />
+                                                        <span><?= __('Customer Name'); ?>:</span>
+                                                        <input aria-label="<?= htmlspecialchars(__('Party Name'), ENT_QUOTES, 'UTF-8'); ?>" readonly class="form-control"  type='text' id="party_name" name="party_name"    value="<?php echo $cusdata['name']; ?>" />
 
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div style="float: left;width: 50% ;padding: 3px;">
-                                                            <span>Tax Number:</span>
+                                                            <span><?= __('Tax Number'); ?>:</span>
                                                             <div class="input-group">
-                                                                <input aria-label="Party Tax Number" type='text' id="party_tax_number" name="party_tax_number" class="form-control" readonly value="<?php echo $cusdata['tax_number']; ?>" />
+                                                                <input aria-label="<?= htmlspecialchars(__('Party Tax Number'), ENT_QUOTES, 'UTF-8'); ?>" type='text' id="party_tax_number" name="party_tax_number" class="form-control" readonly value="<?php echo $cusdata['tax_number']; ?>" />
 
                                                             </div>
                                                         </div>
                                                         <div style="float: left;width: 50%;padding: 3px;">
-                                                            <span class="">Phone:</span>
+                                                            <span class=""><?= __('Phone'); ?>:</span>
                                                             <div class="kt-input-icon kt-input-icon--right">
-                                                                <input aria-label="Party Phone" type='text' id="party_phone" name="party_phone" class="form-control" readonly value="<?php echo $cusdata['phone']; ?>" />
+                                                                <input aria-label="<?= htmlspecialchars(__('Party Phone'), ENT_QUOTES, 'UTF-8'); ?>" type='text' id="party_phone" name="party_phone" class="form-control" readonly value="<?php echo $cusdata['phone']; ?>" />
                                                                 <input type='hidden'  name="company_id" class="form-control" readonly value="<?php echo $_SESSION['company_id']; ?>" />
 
                                                             </div>
@@ -339,21 +339,21 @@ function calculateTotal(){
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-lg-4">
-                                                        <span class="">Invoice Mail To:</span>
-                                                        <input aria-label="Party Email" type='text' class="form-control" id="party_email" readonly name="party_email"  value="<?php echo $cusdata['email']; ?>"/>
+                                                        <span class=""><?= __('Invoice Mail To'); ?>:</span>
+                                                        <input aria-label="<?= htmlspecialchars(__('Party Email'), ENT_QUOTES, 'UTF-8'); ?>" type='text' class="form-control" id="party_email" readonly name="party_email"  value="<?php echo $cusdata['email']; ?>"/>
                                                     </div>
 
                                                     <div class="col-lg-4">
-                                                        <span>Billed Address:</span>
+                                                        <span><?= __('Billed Address'); ?>:</span>
                                                         <div class="kt-input-icon kt-input-icon--right">
-                                                            <textarea aria-label="Enter your address" type="text" name="party_address" id="party_address" class="form-control" placeholder="<?= __('Enter your address') ?>"></textarea>
+                                                            <textarea aria-label="<?= htmlspecialchars(__('Enter your address'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="party_address" id="party_address" class="form-control" placeholder="<?= __('Enter your address') ?>"></textarea>
 
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <span>Ship To Address:</span>
+                                                        <span><?= __('Ship To Address'); ?>:</span>
                                                         <div class="kt-input-icon kt-input-icon--right">
-                                                            <textarea aria-label="Enter your address" type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="<?= __('Enter your address') ?>"></textarea>
+                                                            <textarea aria-label="<?= htmlspecialchars(__('Enter your address'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="party_ship_adderss" name='party_ship_adderss' placeholder="<?= __('Enter your address') ?>"></textarea>
 
                                                         </div>
                                                     </div>
@@ -361,9 +361,9 @@ function calculateTotal(){
                                                 <div class="form-group row">
                                                     <div class="col-lg-4">
                                                         <div style="float: left;width: 33%;padding: 3px;">
-                                                            <span class="">Payment Terms:</span>
+                                                            <span class=""><?= __('Payment Terms'); ?>:</span>
                                                             <div class="kt-input-icon kt-input-icon--right">
-                                                                <select aria-label="Payment Terms" class="form-control" id="kt_select2_11_2" name="payment_terms" id="party_payment_terms">
+                                                                <select aria-label="<?= htmlspecialchars(__('Payment Terms'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_select2_11_2" name="payment_terms" id="party_payment_terms">
                                                                 <option value="0"><?= __('Select Any Place') ?></option>
                                                                 <?php foreach ($posresponse as $key => $pos) {  ?>
                                                                     <option   value ="<?php echo $pos['id']; ?>" > <?php echo $pos['id']; ?> </option>
@@ -374,9 +374,9 @@ function calculateTotal(){
                                                             </div>
                                                         </div>
                                                         <div style="float: left;width: 33% ;padding: 3px;">
-                                                            <span>Tax Rate:</span>
+                                                            <span><?= __('Tax Rate'); ?>:</span>
                                                             <div class="input-group">
-                                                                <select aria-label="Tax" class="form-control" id="kt_select2_11_3" name= "tax"  >
+                                                                <select aria-label="<?= htmlspecialchars(__('Tax'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_select2_11_3" name= "tax"  >
                                                                 <option><?= __('Select Any Tax Rate') ?></option>
                                                                 <?php foreach ($taxres as $key => $tax) {  ?>
                                                                 <option  value ="<?php echo $tax['name']; ?>"> <?php echo $tax['name']; ?> </option>
@@ -387,9 +387,9 @@ function calculateTotal(){
                                                         </div>
 
                                                         <div style="float: left;width: 33%;padding: 3px;">
-                                                            <span class="">Place Of Supply</span>
+                                                            <span class=""><?= __('Place Of Supply'); ?></span>
                                                             <div class="kt-input-icon kt-input-icon--right" >
-                                                                <select aria-label="Place Of Supply" class="form-control" id="kt_select2_11_4" name="place_of_supply">
+                                                                <select aria-label="<?= htmlspecialchars(__('Place Of Supply'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="kt_select2_11_4" name="place_of_supply">
                                                                 <option value="0"><?= __('Select Any Place') ?></option>
                                                                 <?php foreach ($posresponse as $key => $pos) {  ?>
                                                                     <option   value ="<?php echo $pos['description']; ?>"> <?php echo $pos['description']; ?> </option>
@@ -400,40 +400,40 @@ function calculateTotal(){
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div style="float: left;width: 33%;padding: 3px;">
-                                                            <span class="">Estimate Prefix:</span>
+                                                            <span class=""><?= __('Estimate Prefix'); ?>:</span>
                                                             <div class="kt-input-icon kt-input-icon--right">
                                                                 <input type="hidden" id='invoicePre' value="<?php echo $_SESSION['configdata']['invoice_perfix']; ?>">
-                                                                <input aria-label="Custom text" class="form-control" type='text' onBlur="changeinvoicenumber(this.value)" placeholder="<?= __('Custom text') ?>" value='<?php echo $inoicePrefix; ?>' name="invoice_pre" <?php if($inoicePrefix!=''){ ?>  disabled="disabled" <?php
+                                                                <input aria-label="<?= htmlspecialchars(__('Custom text'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type='text' onBlur="changeinvoicenumber(this.value)" placeholder="<?= __('Custom text') ?>" value='<?php echo $inoicePrefix; ?>' name="invoice_pre" <?php if($inoicePrefix!=''){ ?>  disabled="disabled" <?php
 } ?>  />
                                                             </div>
                                                         </div>
                                                         <div style="float: left;width: 33% ;padding: 3px;">
-                                                            <span>Estimate Number:</span>
+                                                            <span><?= __('Estimate Number'); ?>:</span>
                                                             <div class="input-group">
                                                                 <input class="form-control" type='hidden' id="ord_no" value='<?php echo $invoicenumber; ?>' name="invoice_serial_number"/>
-                                                            <input aria-label="Inv No"  class="form-control" type='text' id="inv_no" value='<?php  echo $inoicePrefix."/".$invoicenumber; ?>' readonly  name="invoice_number" id="invoicenumber" />
+                                                            <input aria-label="<?= htmlspecialchars(__('Inv No'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" type='text' id="inv_no" value='<?php  echo $inoicePrefix."/".$invoicenumber; ?>' readonly  name="invoice_number" id="invoicenumber" />
 
                                                             </div>
                                                         </div>
                                                         <div style="float: left;width: 33%;padding: 3px;">
-                                                            <span class="">Estimate Date:</span>
+                                                            <span class=""><?= __('Estimate Date'); ?>:</span>
                                                             <div class="kt-input-icon kt-input-icon--right">
-                                                                <input aria-label="Input field"  class="form-control" type='text' onchange="invoicePrefixchange(this.value)" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3"  />
+                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" type='text' onchange="invoicePrefixchange(this.value)" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3"  />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <div style="float: left;width: 50% ;padding: 3px;">
-                                                            <span>Order Number:</span>
+                                                            <span><?= __('Order Number'); ?>:</span>
                                                             <div class="input-group">
-                                                                <input aria-label="Order Number"  class="form-control" type='text' id="" value=''  name="order_number" />
+                                                                <input aria-label="<?= htmlspecialchars(__('Order Number'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" type='text' id="" value=''  name="order_number" />
 
                                                             </div>
                                                         </div>
                                                         <div style="float: left;width: 50%;padding: 3px;">
-                                                            <span class="">Order Date:</span>
+                                                            <span class=""><?= __('Order Date'); ?>:</span>
                                                             <div class="kt-input-icon kt-input-icon--right">
-                                                                <input aria-label="Input field"  class="form-control" type='text' value='<?php  echo $from; ?>' name="order_at" id="kt_datepicker_4_3_1" />
+                                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" type='text' value='<?php  echo $from; ?>' name="order_at" id="kt_datepicker_4_3_1" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -448,7 +448,7 @@ function calculateTotal(){
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
                             <h3 class="kt-portlet__head-title">
-                                 Item(s)
+                                 <?= __('Item(s)'); ?>
                             </h3>
                         </div>
                     </div>
@@ -463,7 +463,7 @@ function calculateTotal(){
                                         <tr>
                                             <th scope="col" class="thheader" style="width: 2%;">
                                                 <label class="kt-checkbox">
-                                                    <input aria-label="Check All" id="checkAll"  type="checkbox">
+                                                    <input aria-label="<?= htmlspecialchars(__('Check All'), ENT_QUOTES, 'UTF-8'); ?>" id="checkAll"  type="checkbox">
                                                     <span></span>
                                                 </label>
                                             </th>
@@ -477,10 +477,10 @@ function calculateTotal(){
 
                                         </tr>
                                         <tr>
-                                            <td><label class="kt-checkbox"><input aria-label="Checkbox" class="form-control itemRow" type="checkbox"> <span></span> </label></td>
+                                            <td><label class="kt-checkbox"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox"> <span></span> </label></td>
 
                                             <td>
-                                                <select aria-label="Product Code[]" class="form-control"  name= "productCode[]" id="productCode_1">
+                                                <select aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control"  name= "productCode[]" id="productCode_1">
                                                     <option value="0"><?= __('Select Any Prodcut') ?></option>
                                                     <?php foreach ($itemres as $item) {  ?>
                                                     <option  value = <?php echo $item['id'] ?>   > <?php echo $item['name']; ?> </option>
@@ -489,16 +489,16 @@ function calculateTotal(){
                                                 </select>
 
                                             </td>
-                                            <td><textarea aria-label="Product Name[]"  name="productName[]" id="productName_1" class="form-control"></textarea></td>
+                                            <td><textarea aria-label="<?= htmlspecialchars(__('Product Name'), ENT_QUOTES, 'UTF-8'); ?>[]"  name="productName[]" id="productName_1" class="form-control"></textarea></td>
                                             <td>
-                                                <input aria-label="Quantity[]" type="text" name="quantity[]" id="quantity_1" class="form-control amount"  autocomplete="off">
+                                                <input aria-label="<?= htmlspecialchars(__('Quantity'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="quantity[]" id="quantity_1" class="form-control amount"  autocomplete="off">
                                             </td>
                                             <td>
-                                                <input aria-label="Price[]" type="text" name="price[]" id="price_1" class="form-control price amount" autocomplete="off">
+                                                <input aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="price[]" id="price_1" class="form-control price amount" autocomplete="off">
                                             </td>
 
                                             <td>
-                                                <select aria-label="Tax[]" class="form-control"  name= "tax[]" id="tax_1"  >
+                                                <select aria-label="<?= htmlspecialchars(__('Tax'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control"  name= "tax[]" id="tax_1"  >
                                                     <option value="0"><?= __('Select Any Tax Rate') ?></option>
                                                     <?php foreach ($taxres as $key => $tax) {  ?>
                                                     <option  <?php if($_SESSION['configdata']['default_tax_rate'] == $tax['id']){ ?> selected  <?php
@@ -507,7 +507,7 @@ function calculateTotal(){
                                                 </select>
                                                 <input type="hidden" name="ptax_amount[]" id="ptax_amount_1">
                                             </td>
-                                            <td><input aria-label="Amount[]" type="text" name="amount[]" id="amount_1_2" class="form-control amount" autocomplete="off"></td>
+                                            <td><input aria-label="<?= htmlspecialchars(__('Amount'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="amount[]" id="amount_1_2" class="form-control amount" autocomplete="off"></td>
 
                                         </tr>
                                     </table>
@@ -522,20 +522,20 @@ function calculateTotal(){
                                     <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer balance">
                                         <tr>
                                             <th scope="col" class="amount"><span><?= __('Sub Total') ?></span></th>
-                                            <td><span><input aria-label="Subtotal" value="" type="text" class="form-control amount" name="subTotal" id="subTotal" placeholder="<?= __('Subtotal') ?>"></span></td>
+                                            <td><span><input aria-label="<?= htmlspecialchars(__('Subtotal'), ENT_QUOTES, 'UTF-8'); ?>" value="" type="text" class="form-control amount" name="subTotal" id="subTotal" placeholder="<?= __('Subtotal') ?>"></span></td>
                                         </tr>
 
                                         <tr>
                                             <th scope="col" class="amount"><span><?= __('Tax Amount') ?></span></th>
                                             <td><span >
-                                                <input aria-label="Tax Amount" value="" type="text" class="form-control amount" name="taxRate" id="taxAmount" placeholder="<?= __('Tax Amount') ?>">
+                                                <input aria-label="<?= htmlspecialchars(__('Tax Amount'), ENT_QUOTES, 'UTF-8'); ?>" value="" type="text" class="form-control amount" name="taxRate" id="taxAmount" placeholder="<?= __('Tax Amount') ?>">
                                                 <input  type="hidden" class="form-control amount" placeholder="<?= __('Value') ?>" name="gdam" id="gdam">
                                             </span></td>
                                         </tr>
 
                                         <tr>
                                             <th scope="col" class="amount" ><span><?= __('Grand Total') ?></span></th>
-                                            <td><input aria-label="Grand Total" value="" type="text" class="form-control amount" name="grandtotaol" id="grandtotal" placeholder="<?= __('Grand Total') ?>"></td>
+                                            <td><input aria-label="<?= htmlspecialchars(__('Grand Total'), ENT_QUOTES, 'UTF-8'); ?>" value="" type="text" class="form-control amount" name="grandtotaol" id="grandtotal" placeholder="<?= __('Grand Total') ?>"></td>
                                         </tr>
 
 
@@ -554,17 +554,17 @@ function calculateTotal(){
                                         <?php if(isset($_GET['Rid']) && $_GET['Rid'] !='' && $_GET['copy'] != '1'){ ?>
                                                 <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                                                 <input type="hidden" name="submit" value="Update" />
-                                                <button id="kt_llogin_signup_submit" class="btn btn-brand" ><i class="la la-check"></i>Upadate</button>
-                                                <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                                                <button id="kt_llogin_signup_submit" class="btn btn-brand" ><i class="la la-check"></i><?= __('Upadate'); ?></button>
+                                                <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?= __('Cancel'); ?></button>
                                         <?php } else{ ?>
                                                 <input type="hidden" name="submit" value="Add" />
-                                                <button id="kt_login_signin_submit_3" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i>Save & exit</button>
-                                                <button id="kt_login_signin_submit_4" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i>Save & continue</button>
-                                                <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i>Cancel</button>
+                                                <button id="kt_login_signin_submit_3" class="btn btn-brand"   name="submit_value" value="exit"><i class="la la-check"></i><?= htmlspecialchars(__('Save & exit'), ENT_QUOTES, 'UTF-8'); ?></button>
+                                                <button id="kt_login_signin_submit_4" class="btn btn-brand"   name="submit_value" value="continue"><i class="la la-check-circle"></i><?= htmlspecialchars(__('Save & continue'), ENT_QUOTES, 'UTF-8'); ?></button>
+                                                <button type="reset" class="btn btn-secondary" ><i class="la la-close"></i><?= __('Cancel'); ?></button>
                                         <?php } ?>
                                     </div>
                                     <div class="col-lg-6 kt-align-right">
-                                        <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                                        <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?= __('Delete'); ?></button>
                                     </div>
                                 </div>
                             </div>

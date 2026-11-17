@@ -26,16 +26,16 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5> Cancelled / Amended Orders Report</h5>
+        <h5> <?= __('Cancelled / Amended Orders Report'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=CancelledAmendedOrders&format=csv" target="_blank">CSV</a>
+                        href="custom_view_download.php?page=CancelledAmendedOrders&format=csv" target="_blank"><?= __('CSV'); ?></a>
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=CancelledAmendedOrders&format=excel" target="_blank">Excel</a>
+                        href="custom_view_download.php?page=CancelledAmendedOrders&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -50,19 +50,19 @@ $_SESSION['download_data'] = [];
             <table class="table table-separate table-head-custom table-checkable data-table">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-right">SL No</th>
-                        <th scope="col">Order No</th>
-                        <th scope="col">Order Date</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col" class="text-right">Original Amount</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Amendment No</th>
-                        <th scope="col">Amended Date</th>
-                        <th scope="col" class="text-right">Revised Amount</th>
-                        <th scope="col" class="text-right">% Change</th>
-                        <th scope="col">Reason</th>
-                        <th scope="col">Amended By</th>
-                        <th scope="col">Cancelled Date</th>
+                        <th scope="col" class="text-right"><?= __('SL No'); ?></th>
+                        <th scope="col"><?= __('Order No'); ?></th>
+                        <th scope="col"><?= __('Order Date'); ?></th>
+                        <th scope="col"><?= __('Customer'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Original Amount'); ?></th>
+                        <th scope="col"><?= __('Status'); ?></th>
+                        <th scope="col"><?= __('Amendment No'); ?></th>
+                        <th scope="col"><?= __('Amended Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Revised Amount'); ?></th>
+                        <th scope="col" class="text-right"><?= __('% Change'); ?></th>
+                        <th scope="col"><?= __('Reason'); ?></th>
+                        <th scope="col"><?= __('Amended By'); ?></th>
+                        <th scope="col"><?= __('Cancelled Date'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,7 +112,7 @@ $_SESSION['download_data'] = [];
             </table>
         <?php } else { ?>
             <div class="text-center py-4">
-                <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> No Data Available</p>
+                <p class="text-muted f-16 fw-bold"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

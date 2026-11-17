@@ -61,7 +61,7 @@ foreach ($crm_feasibilities as $item) {
     <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h5>Feasibilities <small class="f-12 text-info">(<?php echo fromDate($from_date) . " To " . fromDate($to_date); ?>)</small></h5>
+                <h5><?= __('Feasibilities'); ?> <small class="f-12 text-info">(<?php echo fromDate($from_date) . " To " . fromDate($to_date); ?>)</small></h5>
 
             </div>
 
@@ -69,22 +69,22 @@ foreach ($crm_feasibilities as $item) {
             <div class="card-body custom-scroll" style="min-height: 1000px; max-height: 1000px;">
                 <ul class="nav md-tabs infisuite_tab mb-3" id="feasibilityTabs">
                     <li class="nav-item">
-                        <a class="nav-link active" id="open-tab" data-bs-toggle="tab" href="#open" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Feasibility Open
+                        <a class="nav-link active" id="open-tab" data-bs-toggle="tab" href="#open" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Feasibility Open'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$feasibility_open); ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="closed-tab" data-bs-toggle="tab" href="#closed" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Feasibility Closed
+                        <a class="nav-link" id="closed-tab" data-bs-toggle="tab" href="#closed" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Feasibility Closed'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$feasibility_closed); ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="so-not-gen-tab" data-bs-toggle="tab" href="#so-not-gen" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">SO Not Generated
+                        <a class="nav-link" id="so-not-gen-tab" data-bs-toggle="tab" href="#so-not-gen" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('SO Not Generated'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$so_not_generated); ?></span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="so-gen-tab" data-bs-toggle="tab" href="#so-gen" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">SO Generated
+                        <a class="nav-link" id="so-gen-tab" data-bs-toggle="tab" href="#so-gen" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('SO Generated'); ?>
                             <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$so_generated); ?></span>
                         </a>
                     </li>
@@ -106,10 +106,10 @@ foreach ($crm_feasibilities as $item) {
                                 <table class="table  table-sm">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Feasibility Title</th>
-                                            <th scope="col">Contact</th>
-                                            <th scope="col">Last Action</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col"><?= __('Feasibility Title'); ?></th>
+                                            <th scope="col"><?= __('Contact'); ?></th>
+                                            <th scope="col"><?= __('Last Action'); ?></th>
+                                            <th scope="col"><?= __('Status'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -12,8 +12,8 @@ $result = json_decode($apires,1);
     $user_items = $result['user_items'];
     ?>
 <div class="modal-header">
-    <h4 class="modal-title">Users</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Users'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
     <?php if(count((array)$user_items)!=0){ ?>
@@ -21,7 +21,7 @@ $result = json_decode($apires,1);
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">User Name</th>
+                <th scope="col"><?= __('User Name'); ?></th>
             </tr>
         </thead>
         <body>
@@ -36,7 +36,7 @@ $result = json_decode($apires,1);
     </table>
     <?php }else{ ?>
         <div class="card-px text-center ">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Users</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Users'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
@@ -48,8 +48,8 @@ $result = json_decode($apires,1);
     ?>
 
 <div class="modal-header">
-    <h4 class="modal-title">Vendors</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Vendors'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
     <?php if(count((array)$vendor_items)!=0){ ?>
@@ -57,9 +57,9 @@ $result = json_decode($apires,1);
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Vendor Name</th>
-                <th scope="col">Part No</th>
-                <th scope="col">Part Name</th>
+                <th scope="col"><?= __('Vendor Name'); ?></th>
+                <th scope="col"><?= __('Part No'); ?></th>
+                <th scope="col"><?= __('Part Name'); ?></th>
             </tr>
         </thead>
         <body>
@@ -76,7 +76,7 @@ $result = json_decode($apires,1);
     </table>
     <?php }else{ ?>
         <div class="card-px text-center ">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Vendors</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Vendors'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
@@ -86,8 +86,8 @@ $result = json_decode($apires,1);
 <?php }elseif($usertype == "C"){
     $customer_items = $result['customer_items']; ?>
 <div class="modal-header">
-    <h4 class="modal-title">Customers</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Customers'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body m-l-50 m-r-50">
     <?php if(count((array)$customer_items)!=0){ ?>
@@ -95,9 +95,9 @@ $result = json_decode($apires,1);
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Vendor Name</th>
-                <th scope="col">Part No</th>
-                <th scope="col">Part Name</th>
+                <th scope="col"><?= __('Vendor Name'); ?></th>
+                <th scope="col"><?= __('Part No'); ?></th>
+                <th scope="col"><?= __('Part Name'); ?></th>
             </tr>
         </thead>
         <body>
@@ -114,7 +114,7 @@ $result = json_decode($apires,1);
     </table>
     <?php }else{ ?>
         <div class="card-px text-center ">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Vendors</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Vendors'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
@@ -125,5 +125,5 @@ $result = json_decode($apires,1);
 
 <?php } ?>
 <div class="modal-footer" >
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
 </div>

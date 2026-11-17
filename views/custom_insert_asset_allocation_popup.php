@@ -80,7 +80,7 @@ function submitdetails(){
             	console.log(data);
                 var res = JSON.parse(data);
                 if(res.error=="404"){
-                	alert("oops Employee not found");
+                	alert(<?php echo json_encode(__('oops Employee not found'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 }else{
                 	//$('#kt_modal_KTDatatable_remote').modal("hide");
                 $('#kt_modal_dynamic_popup2').modal("hide");
@@ -95,8 +95,8 @@ function submitdetails(){
 </script>
 
 <div class="modal-header">
-	<h4 class="modal-title">Asset Allocation</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<h4 class="modal-title"><?= __('Asset Allocation'); ?></h4>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
 	<div class="">
@@ -167,18 +167,18 @@ function submitdetails(){
 				<div class="form-radio">
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_e">
-				        <input type="radio" id="allocation_type_e"  name="allocation_type" value="E" onclick="selectAllocationType()" style="display: none;" checked aria-label="Allocation Type">
+				        <input type="radio" id="allocation_type_e"  name="allocation_type" value="E" onclick="selectAllocationType()" style="display: none;" checked aria-label="<?= htmlspecialchars(__('Allocation Type'), ENT_QUOTES, 'UTF-8'); ?>">
 				        <i class="helper"></i><?= __('User') ?></label>
 				    </div>
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_cc">
-				        <input type="radio" id="allocation_type_cc" name="allocation_type"  value="CC" onclick="selectAllocationType()"  style="display: none;" aria-label="Allocation Type">
+				        <input type="radio" id="allocation_type_cc" name="allocation_type"  value="CC" onclick="selectAllocationType()"  style="display: none;" aria-label="<?= htmlspecialchars(__('Allocation Type'), ENT_QUOTES, 'UTF-8'); ?>">
 				        <i class="helper"></i><?= __('Cost Centers') ?>
 				      </label>
 				    </div>
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_d">
-				        <input type="radio" id="allocation_type_d" name="allocation_type"  value="D" onclick="selectAllocationType()" style="display: none;" aria-label="Allocation Type">
+				        <input type="radio" id="allocation_type_d" name="allocation_type"  value="D" onclick="selectAllocationType()" style="display: none;" aria-label="<?= htmlspecialchars(__('Allocation Type'), ENT_QUOTES, 'UTF-8'); ?>">
 				        <i class="helper"></i><?= __('Departments') ?>
 				      </label>
 				    </div>
@@ -188,7 +188,7 @@ function submitdetails(){
 		<div class="row">
 			<div class="form-group col-lg-4 select_caost_center w-full" style="display:none">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Cost Center') ?> <span class="requried">*</span></span>
-				<select class="form-select js-example-basic-single " name="coast_center_id" aria-label="Coast Center Id">
+				<select class="form-select js-example-basic-single " name="coast_center_id" aria-label="<?= htmlspecialchars(__('Coast Center Id'), ENT_QUOTES, 'UTF-8'); ?>">
 						<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach ($costcenters as $costcenter){ ?>
 					<option  value="<?php echo $costcenter['id']; ?>" ><?php echo ucwords($costcenter['cost_center_name']); ?></option>
@@ -197,7 +197,7 @@ function submitdetails(){
 			</div>
 			<div class="form-group col-lg-4 select_dept w-full" style="display:none">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Department') ?> <span class="requried">*</span></span>
-				<select class="form-select js-example-basic-single " name="departent_id" aria-label="Departent Id">
+				<select class="form-select js-example-basic-single " name="departent_id" aria-label="<?= htmlspecialchars(__('Departent Id'), ENT_QUOTES, 'UTF-8'); ?>">
 						<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach ($departments as $departments){ ?>
 					<option  value="<?php echo $departments['id']; ?>"><?php echo ucwords($departments['department_name']); ?></option>
@@ -207,7 +207,7 @@ function submitdetails(){
 			<div class="form-group col-lg-4 w-full" >
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('User') ?> <span class="requried">*</span></span>
 				<span class="d-block error-message text-danger"></span>
-				<select class="form-select js-example-basic-single requried_field" name="select_user_id" aria-label="Select User Id">
+				<select class="form-select js-example-basic-single requried_field" name="select_user_id" aria-label="<?= htmlspecialchars(__('Select User Id'), ENT_QUOTES, 'UTF-8'); ?>">
 						<option value=""><?= __('Select Any One') ?></option>
 				<?php foreach ($application_users as $ausr){ ?>
 					<option  value="<?php echo $ausr['id']; ?>" ><?php echo ucwords($ausr['display_name']); ?></option>
@@ -217,25 +217,25 @@ function submitdetails(){
 			<div class="form-group col-lg-4">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Start date') ?> <span class="requried text-danger">*</span></span>
 				<span class="d-block error-message text-danger"></span>
-				<input type="text" class="form-control datepicker requried_field" id="start_date"  name="start_date" value="<?php echo fromDate(); ?>" aria-label="Start Date">
+				<input type="text" class="form-control datepicker requried_field" id="start_date"  name="start_date" value="<?php echo fromDate(); ?>" aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>">
 			</div>
 			<div class="form-group col-lg-4">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('End date') ?> <span class="requried text-danger">*</span></span>
 				<span class="d-block error-message text-danger"></span>
-				<input type="text" class="form-control datepicker requried_field" id="end_date" name="end_date" aria-label="End Date">
+				<input type="text" class="form-control datepicker requried_field" id="end_date" name="end_date" aria-label="<?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>">
 			</div>
 			<div class=" col-lg-5" >
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('How Do You Want The Asset To be Delivered?') ?><span class="requried">*</span></span>
 				<div class="form-radio">
 				<div class="radio radio-inline">
                       <label class="form-label">
-                        <input type="radio" name="asset_deliver" value="S" style="display:none;" <?php echo ($request['asset_deliver']=="S" || $request['asset_deliver']=="")?"checked":"";?> aria-label="Asset Deliver">
+                        <input type="radio" name="asset_deliver" value="S" style="display:none;" <?php echo ($request['asset_deliver']=="S" || $request['asset_deliver']=="")?"checked":"";?> aria-label="<?= htmlspecialchars(__('Asset Deliver'), ENT_QUOTES, 'UTF-8'); ?>">
                         <i class="helper"></i><?= __('Self Pickup') ?>
                       </label>
                     </div>
                     <div class="radio radio-inline">
                       <label class="form-label">
-                        <input type="radio" name="asset_deliver" value="D" style="display:none" <?php echo $request['asset_deliver']=="D"?"checked":"";?> aria-label="Asset Deliver">
+                        <input type="radio" name="asset_deliver" value="D" style="display:none" <?php echo $request['asset_deliver']=="D"?"checked":"";?> aria-label="<?= htmlspecialchars(__('Asset Deliver'), ENT_QUOTES, 'UTF-8'); ?>">
                         <i class="helper"></i><?= __('Deliver Through Logistics Partner') ?>
                       </label>
                     </div>
@@ -243,7 +243,7 @@ function submitdetails(){
 			</div>
 			<div class="form-group col-lg-7">
 				<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Remarks') ?> </span>
-				<textarea type="text" class="form-control" id="remarks" rows="4" cols="50" name="remarks" aria-label="Remarks"></textarea>
+				<textarea type="text" class="form-control" id="remarks" rows="4" cols="50" name="remarks" aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
 			</div>
 		</div>
 	</div>

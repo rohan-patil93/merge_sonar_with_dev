@@ -57,7 +57,7 @@ $stausresult = ViewStatusData();
                     <div class="card card-custom " id="kt_page_sticky_card">
                         <div class="card-header">
                             <div class="card-title">
-                                <h3 class="card-label">&nbsp;<?php echo $display_tag; ?> Overview  </h3>
+                                <h3 class="card-label">&nbsp;<?php echo $display_tag; ?> <?= __('Overview'); ?>  </h3>
                             </div>
 
                         </div>
@@ -77,12 +77,12 @@ $stausresult = ViewStatusData();
                                             <div class="card-body d-flex flex-column">
                                                 <div class="d-flex align-items-center justify-content-between flex-grow-1">
                                                     <div class="mr-2">
-                                                        <h6><?php echo $display_tag; ?> Completion Rate</h6>
+                                                        <h6><?php echo $display_tag; ?> <?= __('Completion Rate'); ?></h6>
                                                     </div>
                                                 </div>
                                                 <div class="pt-8">
                                                     <div class="d-flex align-items-center justify-content-between mb-3">
-                                                        <div class="text-muted font-weight-bold mr-2">Average</div>
+                                                        <div class="text-muted font-weight-bold mr-2"><?= __('Average'); ?></div>
                                                         <div class="text-muted font-weight-bold"><?php echo $surveyData['rate']; ?></div>
                                                     </div>
                                                     <div class="progress bg-light-warning progress-xs">
@@ -101,11 +101,11 @@ $stausresult = ViewStatusData();
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col" style="width: 20%;">Name </th>
-                                                    <th scope="col">Created Date </th>
-                                                    <th scope="col">Expiry Date </th>
-                                                    <th scope="col">Questions </th>
-                                                    <th scope="col">Status </th>
+                                                    <th scope="col" style="width: 20%;"><?= __('Name'); ?> </th>
+                                                    <th scope="col"><?= __('Created Date'); ?> </th>
+                                                    <th scope="col"><?= __('Expiry Date'); ?> </th>
+                                                    <th scope="col"><?= __('Questions'); ?> </th>
+                                                    <th scope="col"><?= __('Status'); ?> </th>
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
@@ -129,15 +129,15 @@ $stausresult = ViewStatusData();
 
                                                     <td class="text-right" style="width: 14%;">
                                                         <?php if($empvalue['completionrate']== ST_INACTIVE) { ?>
-                                                            <button type="button" class="btn btn-<?php echo $empvalue['completionratecolor']; ?>">Expired</button>
+                                                            <button type="button" class="btn btn-<?php echo $empvalue['completionratecolor']; ?>"><?= __('Expired'); ?></button>
                                                         <?php }
                                                         elseif($empvalue['completionrate']== ST_COMPLETE) {
                                                         $emp_id = deocdeId("emp_id:".$_SESSION['emp_id']);
                                                          ?>
-                                                            <a class="btn btn-<?php echo $empvalue['completionratecolor']; ?>" href="index.php?option=COM_VIEW_SURVEY_RESULT&Pid=<?php echo $survey_id;?>&Eid=<?php echo $emp_id;?>&CAT=<?php echo $_GET['CAT'];?>">  View   </a>
+                                                            <a class="btn btn-<?php echo $empvalue['completionratecolor']; ?>" href="index.php?option=COM_VIEW_SURVEY_RESULT&Pid=<?php echo $survey_id;?>&Eid=<?php echo $emp_id;?>&CAT=<?php echo $_GET['CAT'];?>">  <?= __('View'); ?>   </a>
                                                         <?php }
                                                         else { ?>
-                                                            <a class="btn btn-<?php echo $empvalue['completionratecolor']; ?>" href="index.php?option=COM_INSERT_SURVEY_RESPONSE&Rid=<?php echo $survey_id;?>&CAT=<?php echo $_GET['CAT'];?>">Start  </a>
+                                                            <a class="btn btn-<?php echo $empvalue['completionratecolor']; ?>" href="index.php?option=COM_INSERT_SURVEY_RESPONSE&Rid=<?php echo $survey_id;?>&CAT=<?php echo $_GET['CAT'];?>"><?= __('Start'); ?>  </a>
                                                         <?php } ?>
                                                         </td>
                                                     </tr>
@@ -151,7 +151,7 @@ $stausresult = ViewStatusData();
                                         <input type="hidden" id="survey_qtypes" value="<?php echo $survey_qtypes; ?>">
                                         <input type="hidden" id="survey_qtype_names" value="<?php echo $survey_qtype_names; ?>">
                                         <div id="survey_overview_chart" class="d-flex justify-content-center"></div>
-                                        <h3 class="font-weight-bolder text-center"> <?php echo $display_tag; ?> Types</h3>
+                                        <h3 class="font-weight-bolder text-center"> <?php echo $display_tag; ?> <?= __('Types'); ?></h3>
 
                                     </div>
 

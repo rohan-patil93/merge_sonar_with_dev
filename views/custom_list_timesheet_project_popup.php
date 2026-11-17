@@ -34,9 +34,9 @@ $project_tasks = $projectdata['project_tasks'];
  <!--begin: Modal Popup -->
  <div class="modal-header">
    <h5 class="modal-title text-center">
-      Add Timesheet Entry
+      <?= __('Add Timesheet Entry'); ?>
    </h5>
-   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+   <button type="button" class="close" data-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
       <i aria-hidden="true" class="ki ki-close"></i>
    </button>
 </div>
@@ -45,22 +45,22 @@ $project_tasks = $projectdata['project_tasks'];
 
                                              <div class="modal-body">
                                                 <div class="form-group row mb-2">
-                                                   <span class="col-12 col-form-label">Date</span>
+                                                   <span class="col-12 col-form-label"><?= __('Date'); ?></span>
                                                    <div class="col-12">
-                                                      <input aria-label="Select date" type="text" name="timesheet_date" class="form-control" id="kt_datepicker_1" placeholder="Select date" value="<?php echo fromDate($projectdetails['created_date']); ?>">
+                                                      <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="timesheet_date" class="form-control" id="kt_datepicker_1" placeholder="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo fromDate($projectdetails['created_date']); ?>">
                                                    </div>
                                                 </div>
                                                 <div class="form-group row mb-2">
-                                                   <span class="col-12 col-form-label">Project Name</span>
+                                                   <span class="col-12 col-form-label"><?= __('Project Name'); ?></span>
                                                    <div class="col-12">
-                                                      <input aria-label="Input field" class="form-control" type="text" value="<?php echo $projectdetails['name'];?>" placeholder="Project Name" id="project_name" readonly >
+                                                      <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="<?php echo $projectdetails['name'];?>" placeholder="<?= htmlspecialchars(__('Project Name'), ENT_QUOTES, 'UTF-8'); ?>" id="project_name" readonly >
                                                       <input  type="hidden" value="<?php echo $projectdetails['id'];?>" id="project_id" >
                                                    </div>
                                                 </div>
                                                 <div class="form-group row mb-2">
-                                                   <span class="col-12 col-form-label">Task Name</span>
+                                                   <span class="col-12 col-form-label"><?= __('Task Name'); ?></span>
                                                    <div class="col-12">
-                                                      <select aria-label="Param" class="form-control" id="task_id" name="param">
+                                                      <select aria-label="<?= htmlspecialchars(__('Param'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="task_id" name="param">
                                                           <?php foreach($project_tasks as $tasks=>$taskdata){
                                                             ?>
                                                             <option value="<?php echo $tasks; ?>"><?php echo $taskdata['task_name']; ?></option>
@@ -69,9 +69,9 @@ $project_tasks = $projectdata['project_tasks'];
                                                    </div>
                                                 </div>
                                                 <div class="form-group row mb-2">
-                                                    <span class="col-12 col-form-label">Time Spent</span>
+                                                    <span class="col-12 col-form-label"><?= __('Time Spent'); ?></span>
                                                    <div class="col-12">
-                                                      <input aria-label="TOTAL TIME IN MINUTES" class="form-control" type="text" value="" placeholder="TOTAL TIME IN MINUTES" id="time_spent">
+                                                      <input aria-label="<?= htmlspecialchars(__('TOTAL TIME IN MINUTES'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" value="" placeholder="<?= htmlspecialchars(__('TOTAL TIME IN MINUTES'), ENT_QUOTES, 'UTF-8'); ?>" id="time_spent">
                                                    </div>
 
                                                 </div>
@@ -79,23 +79,23 @@ $project_tasks = $projectdata['project_tasks'];
                                                    <div class="col-12">
                                                       <div class="checkbox-list">
                                                          <label class="checkbox checkbox-outline checkbox-outline-2x checkbox-primary">
-                                                            <input aria-label="Checkboxes1" type="checkbox" name="Checkboxes1" id="is_billable">
+                                                            <input aria-label="<?= htmlspecialchars(__('Checkboxes1'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="Checkboxes1" id="is_billable">
                                                             <span></span>
-                                                            Billable
+                                                            <?= __('Billable'); ?>
                                                          </label>
                                                       </div>
                                                    </div>
                                                 </div>
                                                 <div class="form-group row mb-2">
-                                                   <span class="col-12 col-form-label">Notes</span>
+                                                   <span class="col-12 col-form-label"><?= __('Notes'); ?></span>
                                                    <div class="col-12">
-                                                      <textarea aria-label="Add Notes" class="form-control" name="notes" placeholder="Add Notes" id="notes" rows="3"></textarea>
+                                                      <textarea aria-label="<?= htmlspecialchars(__('Add Notes'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="notes" placeholder="<?= htmlspecialchars(__('Add Notes'), ENT_QUOTES, 'UTF-8'); ?>" id="notes" rows="3"></textarea>
                                                    </div>
                                                 </div>
                                                 <div class="form-group row mb-2">
-                                                   <span class="col-12 col-form-label">Users</span>
+                                                   <span class="col-12 col-form-label"><?= __('Users'); ?></span>
                                                    <div class="col-12">
-                                                      <select aria-label="Param" class="form-control" id="emp_id" name="param">
+                                                      <select aria-label="<?= htmlspecialchars(__('Param'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="emp_id" name="param">
                                                          <option value="<?php echo $_SESSION['userid']; ?>"><?php echo $_SESSION['employee']['display_name']; ?></option>
                                                          <?php foreach($projectusers as $puserid=>$pusers){
                                                             ?>
@@ -107,8 +107,8 @@ $project_tasks = $projectdata['project_tasks'];
                                              </div>
 
                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary font-weight-bold" onclick="addtimesheetentry();">Save</button>
-                                                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary font-weight-bold" onclick="addtimesheetentry();"><?= __('Save'); ?></button>
+                                                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal"><?= __('Close'); ?></button>
 
                                              </div>
                                           </div>

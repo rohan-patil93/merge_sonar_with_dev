@@ -83,37 +83,37 @@ if (!empty($_SESSION['upload_msg'])) {
 ?>
 <div class="card contract-import-container">
     <div class="card-header table-card-header">
-        <h5>Contracts List</h5>
+        <h5><?= __('Contracts List'); ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
         </div>
     </div>
     <div class="card-body">
         <?php if (!empty($files_info)): ?>
         <div class="alert alert-info mb-3">
-            <h6><i class="fa fa-file"></i> Import File Information:</h6>
+            <h6><i class="fa fa-file"></i> <?= __('Import File Information'); ?>:</h6>
             <?php foreach ($files_info as $file): ?>
             <p class="mb-1">
-                <strong>File:</strong> <?php echo htmlspecialchars($file['file_name']); ?>
+                <strong><?= __('File'); ?>:</strong> <?php echo htmlspecialchars($file['file_name']); ?>
                 <span class="text-muted">(<?php echo htmlspecialchars($file['original_file_name']); ?>)</span><br>
-                <strong>Type:</strong> <?php echo htmlspecialchars($file['import_type']); ?> |
-                <strong>Source:</strong> <?php echo htmlspecialchars($file['source_type']); ?>
+                <strong><?= __('Type'); ?>:</strong> <?php echo htmlspecialchars($file['import_type']); ?> |
+                <strong><?= __('Source'); ?>:</strong> <?php echo htmlspecialchars($file['source_type']); ?>
             </p>
             <?php endforeach; ?>
         </div>
         <?php endif; ?>
         <?php if (!empty($insertion_results)): ?>
         <div class="alert alert-success mb-3">
-            <h6><i class="fa fa-check-circle"></i> Processing Results:</h6>
+            <h6><i class="fa fa-check-circle"></i> <?= __('Processing Results'); ?>:</h6>
             <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="card bg-success text-white mb-2">
                         <div class="card-body text-center p-2">
                             <h4><?php echo $insertion_results['contracts_processed'] ?? 0; ?></h4>
-                            <small>Total Processed</small>
+                            <small><?= __('Total Processed'); ?></small>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-info text-white mb-2">
                         <div class="card-body text-center p-2">
                             <h4><?php echo $insertion_results['new_contracts'] ?? 0; ?></h4>
-                            <small>New Contracts</small>
+                            <small><?= __('New Contracts'); ?></small>
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-warning text-white mb-2">
                         <div class="card-body text-center p-2">
                             <h4><?php echo $insertion_results['skipped_contracts'] ?? 0; ?></h4>
-                            <small>Skipped Contracts</small>
+                            <small><?= __('Skipped Contracts'); ?></small>
                         </div>
                     </div>
                 </div>
@@ -137,7 +137,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-secondary text-white mb-2">
                         <div class="card-body text-center p-2">
                             <h4><?php echo $insertion_results['recharges_inserted'] ?? 0; ?></h4>
-                            <small>Recharges Added</small>
+                            <small><?= __('Recharges Added'); ?></small>
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-primary text-white mb-2">
                         <div class="card-body text-center p-2">
                             <h4><?php echo $insertion_results['skipped_non_renewals'] ?? 0; ?></h4>
-                            <small>Skipped Recharges</small>
+                            <small><?= __('Skipped Recharges'); ?></small>
                         </div>
                     </div>
                 </div>
@@ -153,14 +153,14 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-danger text-white mb-2">
                         <div class="card-body text-center p-2">
                             <h4><?php echo $insertion_results['failed'] ?? 0; ?></h4>
-                            <small>Failed</small>
+                            <small><?= __('Failed'); ?></small>
                         </div>
                     </div>
                 </div>
             </div>
             <?php if (!empty($result['errors'])): ?>
             <div class="mt-2">
-                <h6><i class="fa fa-exclamation-triangle"></i> Errors:</h6>
+                <h6><i class="fa fa-exclamation-triangle"></i> <?= __('Errors'); ?>:</h6>
                 <ul class="mb-0">
                     <?php foreach ($result['errors'] as $error): ?>
                     <li class="text-danger"><?php echo htmlspecialchars($error); ?></li>
@@ -173,7 +173,7 @@ if (!empty($_SESSION['upload_msg'])) {
 
         <?php if (!empty($result['error_message'])): ?>
         <div class="alert alert-danger mb-3">
-            <h6><i class="fa fa-exclamation-triangle"></i> Error:</h6>
+            <h6><i class="fa fa-exclamation-triangle"></i> <?= __('Error'); ?>:</h6>
             <p class="mb-0"><?php echo htmlspecialchars($result['error_message']); ?></p>
         </div>
         <?php endif; ?>
@@ -189,7 +189,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-primary text-white">
                         <div class="card-body">
                             <h5><?php echo $validation_summary['total_rows']; ?></h5>
-                            <p>Total Rows</p>
+                            <p><?= __('Total Rows'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -197,7 +197,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-info text-white">
                         <div class="card-body">
                             <h5><?php echo $contract_summary['total_contract_rows'] ?? 0; ?></h5>
-                            <p>Contract Rows</p>
+                            <p><?= __('Contract Rows'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -205,7 +205,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-success text-white">
                         <div class="card-body">
                             <h5><?php echo $contract_summary['valid_contract_rows'] ?? 0; ?></h5>
-                            <p>Valid Contracts</p>
+                            <p><?= __('Valid Contracts'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-secondary text-white">
                         <div class="card-body">
                             <h5><?php echo $recharge_summary['total_recharge_rows'] ?? 0; ?></h5>
-                            <p>Recharge Rows</p>
+                            <p><?= __('Recharge Rows'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -221,7 +221,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-success text-white">
                         <div class="card-body">
                             <h5><?php echo $recharge_summary['valid_recharge_rows'] ?? 0; ?></h5>
-                            <p>Valid Recharges</p>
+                            <p><?= __('Valid Recharges'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-warning text-white">
                         <div class="card-body">
                             <h5><?php echo $recharge_summary['duplicate_recharge_rows'] ?? 0; ?></h5>
-                            <p>Duplicate Recharges</p>
+                            <p><?= __('Duplicate Recharges'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -237,7 +237,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-danger text-white">
                         <div class="card-body">
                             <h5><?php echo $contract_summary['empty_field_contract_rows'] ?? 0; ?></h5>
-                            <p>Contracts with Empty feilds</p>
+                            <p><?= __('Contracts with Empty feilds'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -245,7 +245,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-danger text-white">
                         <div class="card-body">
                             <h5><?php echo $recharge_summary['empty_field_recharge_rows'] ?? 0; ?></h5>
-                            <p>Recharges with Empty fields</p>
+                            <p><?= __('Recharges with Empty fields'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -253,7 +253,7 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="card bg-danger text-white">
                         <div class="card-body">
                             <h5><?php echo $recharge_summary['not_valid_recharge_rows'] ?? 0; ?></h5>
-                            <p>No Valid Renewal Recharges</p>
+                            <p><?= __('No Valid Renewal Recharges'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -262,34 +262,34 @@ if (!empty($_SESSION['upload_msg'])) {
             <?php endif; ?>
 
             <div class="alert alert-info">
-                <strong>Legend:</strong>
-                <span class="badge bg-danger">Red rows</span> have empty fields or no valid renewal |
-                <span class="badge bg-warning">Yellow rows</span> are duplicate contracts |
-                <span class="badge bg-info">Blue rows</span> are duplicate recharges |
-                <span class="badge bg-success">Green rows</span> are valid for processing
+                <strong><?= __('Legend'); ?>:</strong>
+                <span class="badge bg-danger"><?= __('Red rows'); ?></span> <?= __('have empty fields or no valid renewal |'); ?>
+                <span class="badge bg-warning"><?= __('Yellow rows'); ?></span> <?= __('are duplicate contracts |'); ?>
+                <span class="badge bg-info"><?= __('Blue rows'); ?></span> <?= __('are duplicate recharges |'); ?>
+                <span class="badge bg-success"><?= __('Green rows'); ?></span> <?= __('are valid for processing'); ?>
             </div>
 
             <?php if (!empty($contract_rows)): ?>
             <div class="card mb-4">
                 <div class="card-header bg-info text-white">
-                    <h5 class="mb-0">Contract Rows (<?php echo count($contract_rows); ?>)</h5>
-                    <small>These rows will create new contracts</small>
+                    <h5 class="mb-0"><?= __('Contract Rows ('); ?><?php echo count($contract_rows); ?>)</h5>
+                    <small><?= __('These rows will create new contracts'); ?></small>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover table-sm">
                             <thead class="f-14" style="background-color: #eeeeee;">
                                 <tr>
-                                    <th scope="col">Sr.No</th>
-                                    <th scope="col">Contract Name</th>
-                                    <th scope="col">Circuit ID</th>
-                                    <th scope="col">RT Number</th>
-                                    <th scope="col">Invoice Number</th>
-                                    <th scope="col">Party Type</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Row Status</th>
+                                    <th scope="col"><?= __('Sr.No'); ?></th>
+                                    <th scope="col"><?= __('Contract Name'); ?></th>
+                                    <th scope="col"><?= __('Circuit ID'); ?></th>
+                                    <th scope="col"><?= __('RT Number'); ?></th>
+                                    <th scope="col"><?= __('Invoice Number'); ?></th>
+                                    <th scope="col"><?= __('Party Type'); ?></th>
+                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                    <th scope="col"><?= __('End Date'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
+                                    <th scope="col"><?= __('Row Status'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -301,13 +301,13 @@ if (!empty($_SESSION['upload_msg'])) {
 
                                     if ($row['row_status'] == 'empty_fields') {
                                         $rowClass = 'table-danger';
-                                        $statusBadge = '<span class="badge bg-danger">Empty Fields</span>';
+                                        $statusBadge = '<span class="badge bg-danger">'.__('Empty Fields').'</span>';
                                     } elseif ($row['row_status'] == 'duplicate') {
                                         $rowClass = 'table-warning';
-                                        $statusBadge = '<span class="badge bg-warning">Duplicate</span>';
+                                        $statusBadge = '<span class="badge bg-warning">'.__('Duplicate').'</span>';
                                     } else {
                                         $rowClass = 'table-success';
-                                        $statusBadge = '<span class="badge bg-success">Valid</span>';
+                                        $statusBadge = '<span class="badge bg-success">'.__('Valid').'</span>';
                                     }
 
 
@@ -338,22 +338,22 @@ if (!empty($_SESSION['upload_msg'])) {
             <?php if (!empty($recharge_rows)): ?>
             <div class="card mb-4">
                 <div class="card-header bg-secondary text-white">
-                    <h5 class="mb-0">Recharge Rows (<?php echo count($recharge_rows); ?>)</h5>
-                    <small>These rows will create recharges for existing contracts</small>
+                    <h5 class="mb-0"><?= __('Recharge Rows ('); ?><?php echo count($recharge_rows); ?>)</h5>
+                    <small><?= __('These rows will create recharges for existing contracts'); ?></small>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover table-sm">
                             <thead class="f-14" style="background-color: #eeeeee;">
                                 <tr>
-                                    <th scope="col">Sr.No</th>
-                                    <th scope="col">Circuit ID</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Validity</th>
-                                    <th scope="col">Total Payable</th>
-                                    <th scope="col">Row Status</th>
+                                    <th scope="col"><?= __('Sr.No'); ?></th>
+                                    <th scope="col"><?= __('Circuit ID'); ?></th>
+                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                    <th scope="col"><?= __('End Date'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
+                                    <th scope="col"><?= __('Validity'); ?></th>
+                                    <th scope="col"><?= __('Total Payable'); ?></th>
+                                    <th scope="col"><?= __('Row Status'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -365,16 +365,16 @@ if (!empty($_SESSION['upload_msg'])) {
 
                                     if ($row['row_status'] == 'empty_fields') {
                                         $rowClass = 'table-danger';
-                                        $statusBadge = '<span class="badge bg-danger">Empty Fields</span>';
+                                        $statusBadge = '<span class="badge bg-danger">'.__('Empty Fields').'</span>';
                                     } elseif ($row['row_status'] == 'duplicate_recharge') {
                                         $rowClass = 'table-info';
-                                        $statusBadge = '<span class="badge bg-info">Duplicate Recharge</span>';
+                                        $statusBadge = '<span class="badge bg-info">'.__('Duplicate Recharge').'</span>';
                                     } elseif ($row['row_status'] == 'no_valid_renewal') {
                                         $rowClass = 'table-danger';
-                                        $statusBadge = '<span class="badge bg-danger">No Valid Renewal</span>';
+                                        $statusBadge = '<span class="badge bg-danger">'.__('No Valid Renewal').'</span>';
                                     } else {
                                         $rowClass = 'table-success';
-                                        $statusBadge = '<span class="badge bg-success">Valid</span>';
+                                        $statusBadge = '<span class="badge bg-success">'.__('Valid').'</span>';
                                     }
 
                                     echo "<tr class='{$rowClass
@@ -402,8 +402,8 @@ if (!empty($_SESSION['upload_msg'])) {
 
             <?php if (empty($contract_rows) && empty($recharge_rows)): ?>
             <div class="alert alert-warning">
-                <h5>No Data Available</h5>
-                <p>No contract or recharge data found for validation.</p>
+                <h5><?= __('No Data Available'); ?></h5>
+                <p><?= __('No contract or recharge data found for validation.'); ?></p>
             </div>
             <?php endif; ?>
             <div class="text-right mt-3">
@@ -422,31 +422,31 @@ if (!empty($_SESSION['upload_msg'])) {
                 <!-- Status message -->
                 <div class="alert <?php echo $can_process ? 'alert-success' : 'alert-warning'; ?> mb-3">
                     <?php if ($can_process): ?>
-                        <i class="fa fa-check-circle"></i> <strong>Ready to Process:</strong> All <?php echo $total_valid; ?> rows are valid and ready for processing.
+                        <i class="fa fa-check-circle"></i> <strong><?= __('Ready to Process'); ?>:</strong> <?= __('All'); ?> <?php echo $total_valid; ?> <?= __('rows are valid and ready for processing.'); ?>
                     <?php else: ?>
-                        <i class="fa fa-exclamation-triangle"></i> <strong>Cannot Process:</strong>
+                        <i class="fa fa-exclamation-triangle"></i> <strong><?= __('Cannot Process'); ?>:</strong>
                         <?php if ($total_empty > 0): ?>
-                            Found <?php echo $total_empty_contracts; ?> contracts and <?php echo $total_empty_recharges; ?> recharges with empty fields.
+                            <?= __('Found'); ?> <?php echo $total_empty_contracts; ?> <?= __('contracts and'); ?> <?php echo $total_empty_recharges; ?> <?= __('recharges with empty fields.'); ?>
                         <?php endif; ?>
                         <?php if ($total_duplicate_recharges > 0): ?>
-                            <?php echo $total_empty > 0 ? ' Also found' : 'Found'; ?> <?php echo $total_duplicate_recharges; ?> duplicate recharges.
+                            <?php echo $total_empty > 0 ? ' Also found' : 'Found'; ?> <?php echo $total_duplicate_recharges; ?> <?= __('duplicate recharges.'); ?>
                         <?php endif; ?>
                         <?php if ($total_no_valid_renewal > 0): ?>
-                            <?php echo ($total_empty > 0 || $total_duplicate_recharges > 0) ? ' Also found' : 'Found'; ?> <?php echo $total_no_valid_renewal; ?> recharges with no valid renewal. Please remove these recharges before processing.
+                            <?php echo ($total_empty > 0 || $total_duplicate_recharges > 0) ? ' Also found' : 'Found'; ?> <?php echo $total_no_valid_renewal; ?> <?= __('recharges with no valid renewal. Please remove these recharges before processing.'); ?>
                         <?php endif; ?>
                         <?php if ($total_valid == 0): ?>
-                            No valid rows found to process.
+                            <?= __('No valid rows found to process.'); ?>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
 
                 <?php if ($can_process): ?>
                     <button type="submit" class="btn btn-success btn-lg">
-                        <i class="fa fa-check"></i> Process All Valid Rows (<?php echo $total_valid; ?>)
+                        <i class="fa fa-check"></i> <?= __('Process All Valid Rows ('); ?><?php echo $total_valid; ?>)
                     </button>
                 <?php else: ?>
                     <button type="button" class="btn btn-secondary btn-lg" disabled>
-                        <i class="fa fa-times"></i> Cannot Process - Fix Issues First
+                        <i class="fa fa-times"></i> <?= __('Cannot Process - Fix Issues First'); ?>
                     </button>
                 <?php endif; ?>
             </div>

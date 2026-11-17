@@ -31,7 +31,7 @@
         if(old_password==confirm_password && emty == 0){
             errorr = 1;
         //Old password and confirm password are not same
-              $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3027]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+              $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3027]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button></div>');
         }
 
         if(new_password == confirm_password){
@@ -47,10 +47,10 @@
                 if(data.status == '404'){
                    // tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger  pt-2 pb-2','animated flipInX','animated flipOutX','old password not match!','error');
                 //code Old password entered is incorrect
-                $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3026]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3026]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button></div>');
 
                 }else if(data.status == "fail"){
-                      $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14">'+data.message+'</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+                      $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14">'+data.message+'</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button></div>');
 
                     //tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger  pt-2 pb-2','animated flipInX','animated flipOutX',,'Error');
                 }else{
@@ -62,7 +62,7 @@
         });
         }
         }else{
-             $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3028]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+             $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3028]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button></div>');
 
           //  tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger  pt-2 pb-2','animated flipInX','animated flipOutX','Both Value Not Same','');
         }

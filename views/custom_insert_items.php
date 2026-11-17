@@ -249,7 +249,7 @@ foreach($categroylist as $catlist){
                                             <?php foreach ($result['costing_type'] as $ctype) { ?>
                                                 <option value="<?php echo $ctype['genc_detail_code']; ?>" <?php if ($items['default_costing_type'] == $ctype['genc_detail_code']) {
                                                        echo __('selected');
-                                                   } ?>><?php echo $ctype['genc_detail_name'] ?></option>
+                                                   } ?>><?php echo __($ctype['genc_detail_name']) ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -1333,7 +1333,7 @@ foreach($categroylist as $catlist){
 
         // Step 1: Missing field popup
         if (missingFields.length > 0) {
-            var message = "Please select <strong>" + missingFields.join("</strong> and <strong>") + "</strong> before submitting.<br>Otherwise your SKU code will not be generated correctly.";
+            var message = "<?= htmlspecialchars(__('Please select'), ENT_QUOTES, 'UTF-8'); ?> <strong>" + missingFields.join("</strong> <?= htmlspecialchars(__('and'), ENT_QUOTES, 'UTF-8'); ?> <strong>") + "</strong> <?= htmlspecialchars(__('before submitting.'), ENT_QUOTES, 'UTF-8'); ?><br><?= htmlspecialchars(__('Otherwise your SKU code will not be generated correctly.'), ENT_QUOTES, 'UTF-8'); ?>";
             document.getElementById("validationMessage").innerHTML = message;
 
             var validationModal = new bootstrap.Modal(document.getElementById('validationModal'));
@@ -1370,7 +1370,7 @@ foreach($categroylist as $catlist){
             }
 
             if (changedFields.length > 0) {
-                var msg = "You changed <strong>" + changedFields.join("</strong>, <strong>") + "</strong>.<br>Your SKU will be different.";
+                var msg = "<?= htmlspecialchars(__('You changed'), ENT_QUOTES, 'UTF-8'); ?> <strong>" + changedFields.join("</strong>, <strong>") + "</strong>.<br><?= htmlspecialchars(__('Your SKU will be different.'), ENT_QUOTES, 'UTF-8'); ?>";
                 document.getElementById("skuChangeMessage").innerHTML = msg;
 
                 var skuChangeModal = new bootstrap.Modal(document.getElementById('skuChangeModal'));

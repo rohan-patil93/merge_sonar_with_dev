@@ -27,7 +27,7 @@ $frequencyllist = $kipandkradetails['task_frequency_list'];
         htmlRows += '<td><input aria-label="Name[]" type="text" name="name[]" class="form-control" value="" id="name_'+count+'"></td> ';
         htmlRows += '<td><textarea aria-label="Descrption[]" class="form-control" name="descrption[]" id="descrption_'+count+'"></textarea></td>';
         htmlRows += '<td><input aria-label="Short Code[]" type="text" name="short_code[]" class="form-control" value="" id="short_code_'+count+'"></td>';
-       htmlRows += '<td><select aria-label="Frequency[]" class="form-control js-example-basic-single" name="frequency[]" id="frequency_'+count+'" ><option value="0">Select Any One</option><?php foreach ($frequencyllist as  $frequency) { ?><option value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo $frequency['genc_detail_name']; ?></option><?php
+       htmlRows += '<td><select aria-label="Frequency[]" class="form-control js-example-basic-single" name="frequency[]" id="frequency_'+count+'" ><option value="0"><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option><?php foreach ($frequencyllist as  $frequency) { ?><option value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo __($frequency['genc_detail_name']); ?></option><?php
 } ?></select></td>';
 
        htmlRows += '<td> <input aria-label="Mandatory[]" class="js-single'+count+'"  type="checkbox" onclick="mvaluechange('+count+')" id="mandatory_'+count+'"   value="0"  name="mandatory[]" onkeydown=""><span></span></label></span></td>';
@@ -94,8 +94,8 @@ $frequencyllist = $kipandkradetails['task_frequency_list'];
 </script>
 
 <div class="modal-header">
-    <h5 class="modal-title">Tasks</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Tasks'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <input type="hidden" id="KRA_ID" value="<?php echo  $_POST['kpi_id']; //name kpi but value kra ... ?>">
 <input type="hidden" id="row_id" value="<?php echo  $_POST['row']; //name kpi but value kra ... ?>">
@@ -105,11 +105,11 @@ $frequencyllist = $kipandkradetails['task_frequency_list'];
             <table class="table table-striped- table-bordered table-hover table-checkable  no-footer"  id="invoiceItem123">
                 <tr>
                     <th scope="col" class="thheader " style="width: 5%;"></th>
-                    <th scope="col" class="text-center" style="width: 25%;">Name</th>
-                    <th scope="col" class="thheader text-center" style="width: 30%;">Descrption</th>
-                    <th scope="col" class="thheader text-center" style="width: 15%;">Short Code</th>
-                    <th scope="col" class="thheader text-center" style="width: 15%;">Frequency</th>
-                    <th scope="col" class="thheader text-center" style="width: 10%;">Mandatory</th>
+                    <th scope="col" class="text-center" style="width: 25%;"><?= __('Name'); ?></th>
+                    <th scope="col" class="thheader text-center" style="width: 30%;"><?= __('Descrption'); ?></th>
+                    <th scope="col" class="thheader text-center" style="width: 15%;"><?= __('Short Code'); ?></th>
+                    <th scope="col" class="thheader text-center" style="width: 15%;"><?= __('Frequency'); ?></th>
+                    <th scope="col" class="thheader text-center" style="width: 10%;"><?= __('Mandatory'); ?></th>
 
                 </tr>
                 <?php
@@ -127,27 +127,27 @@ $frequencyllist = $kipandkradetails['task_frequency_list'];
 
                         </td>
                         <td>
-                            <input aria-label="Name[]" type="text" name="name[]" class="form-control" value="<?php echo $td['task_name'] ?>" id="name_<?php echo $count; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="name[]" class="form-control" value="<?php echo $td['task_name'] ?>" id="name_<?php echo $count; ?>">
                         </td>
                         <td>
-                            <textarea aria-label="Descrption[]" class="form-control" name="descrption[]"  id="descrption_<?php echo $count; ?>"><?php echo $td['description'] ?></textarea>
+                            <textarea aria-label="<?= htmlspecialchars(__('Descrption'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" name="descrption[]"  id="descrption_<?php echo $count; ?>"><?php echo $td['description'] ?></textarea>
                         </td>
                         <td>
-                            <input aria-label="Short Code[]" type="text" name="short_code[]" class="form-control" value="<?php echo $td['task_shot_code'] ?>" id="short_code_<?php echo $count; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Short Code'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="short_code[]" class="form-control" value="<?php echo $td['task_shot_code'] ?>" id="short_code_<?php echo $count; ?>">
                         </td>
                         <td>
-                            <select aria-label="Frequency[]" class="form-control js-example-basic-single" name="frequency[]" id="frequency_<?php echo $count; ?>" >
-                                <option value="0">Select Any One</option>
+                            <select aria-label="<?= htmlspecialchars(__('Frequency'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control js-example-basic-single" name="frequency[]" id="frequency_<?php echo $count; ?>" >
+                                <option value="0"><?= __('Select Any One'); ?></option>
                                 <?php foreach ($frequencyllist as  $frequency) { ?>
                                     <option <?php if($td['task_frequency'] == $frequency['genc_detail_code']){ ?> selected <?php
-} ?> value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo $frequency['genc_detail_name']; ?></option>
+} ?> value="<?php echo $frequency['genc_detail_code']; ?>"><?php echo __($frequency['genc_detail_name']); ?></option>
                                 <?php } ?>
 
                             </select>
 
                         </td>
                         <td class="text-center">
-                            <input aria-label="Checkbox"  class="js-switch" type="checkbox" onclick="mvaluechange(<?php echo $count; ?>)" id="mandatory_<?php echo $count; ?>" <?php   if($td['mandatory'] == '1'){ ?> checked <?php
+                            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>"  class="js-switch" type="checkbox" onclick="mvaluechange(<?php echo $count; ?>)" id="mandatory_<?php echo $count; ?>" <?php   if($td['mandatory'] == '1'){ ?> checked <?php
 } ?>  value = "1"  name="mandatory[]" onkeydown="" />
                         </td>
                         </tr>
@@ -155,7 +155,7 @@ $frequencyllist = $kipandkradetails['task_frequency_list'];
 }  ?>
                     </table>
                     <div class="row align-items-center" >
-                        <button class="btn btn-success col-lg-2  m-l-10" id="addRows" type="button" onclick="addmoreRows()">+ Add More</button>
+                        <button class="btn btn-success col-lg-2  m-l-10" id="addRows" type="button" onclick="addmoreRows()">+ <?= __('Add More'); ?></button>
 
                     </div>
                 </div>
@@ -166,9 +166,9 @@ $frequencyllist = $kipandkradetails['task_frequency_list'];
             <input type="hidden" name="table" id="table" value="<?php echo $table; ?>">
             <input type="hidden" name="kpi_id" id="kpi_id" value="<?php echo $_POST['id']; ?>">
             <input type="hidden" name="page" value="dis_submit">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
             <?php if($_POST['table'] !="employee_kpi_tasks"){ ?>
-                <button type="button" class="btn btn-primary" onclick="submitrom()" >Submit</button>
+                <button type="button" class="btn btn-primary" onclick="submitrom()" ><?= __('Submit'); ?></button>
             <?php } ?>
         </div>
 

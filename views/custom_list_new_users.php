@@ -26,7 +26,7 @@
     }
     function DynamicPagerefrash(id=""){
         var option = $("#ajaxrefrashpagename").val();
-        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#dynamicpageshow').html(htmloader);
         jQuery.ajax({
             url: "views/custom_inbox_page_redirection.php",
@@ -54,7 +54,7 @@
            if(subtabid !=""){
                $(".activesubtab_"+subtabid).addClass("active");
            }
-           var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+           var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $('#dynamicpageshow').html(htmloader);
            jQuery.ajax({
             url: "views/custom_inbox_page_redirection.php",
@@ -101,12 +101,12 @@ $i=1; $k=1; $totfield = $totnotemptyfield = 0;
                             <div class="d-flex">
                                 <div class="flex-shrink-0 m-r-30 m-l-25 mt-lg-0 mt-3">
                                     <div class="symbol symbol-50 symbol-lg-120">
-                                        <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="Details"/>
+                                        <img src="../uploads/all/<?php echo $_SESSION['user']['user_photo']; ?>" class="img-120 " alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>"/>
                                     </div>
                                     <div class="d-flex align-items-center w-100px w-sm-120px flex-column mt-3 ">
 
                                         <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                            <span class="f-12 f-w-600">Profile </span>
+                                            <span class="f-12 f-w-600"><?= __('Profile'); ?> </span>
                                             <span class="f-12 f-w-600"><?php echo $pp; ?>%</span>
                                         </div>
                                         <div class="col-md-12">
@@ -150,7 +150,7 @@ $i=1; $k=1; $totfield = $totnotemptyfield = 0;
                                     <div class=" col-sm-1  text-right">
                                         <i class="ti-mobile f-16 text-primary"></i>
                                     </div>
-                                    <span class="col-sm-3  f-w-600">Phone Number</span>
+                                    <span class="col-sm-3  f-w-600"><?= __('Phone Number'); ?></span>
                                     <span class="col-sm-1">:</span>
                                     <div class="col-sm-6">
                                         <span ><?php echo $_SESSION['user']['user_mobile']; ?></span>
@@ -162,7 +162,7 @@ if($_SESSION['user']['reports_to']!="" && $_SESSION['user']['reports_to']!="0"){
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-right">
                                             <i class="ti-user text-primary f-16"></i>
                                     </div>
-                                    <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600">Reports To</span>
+                                    <span class="col-lg-3 col-md-3 col-sm-3 col-3 f-w-600"><?= __('Reports To'); ?></span>
                                     <span class="col-lg-1 col-md-1 col-sm-1 col-1">:</span>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                         <span ><?php echo $_SESSION['users'][$_SESSION['user']['reports_to']]; ?></span>
@@ -256,7 +256,7 @@ if($_SESSION['user']['reports_to']!="" && $_SESSION['user']['reports_to']!="0"){
                                          <div class="row">
                                             <div class="col-lg-11"></div>
                                             <div class="col-lg-1 text-right">
-                                                <button type="button" class="btn p-0 border-0 bg-transparent ti-reload m-r-10 text-primary" onclick="DynamicPagerefrash()" data-bs-toggle="tooltip" data-placement="bottom" title="Refrash Page" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                                <button type="button" class="btn p-0 border-0 bg-transparent ti-reload m-r-10 text-primary" onclick="DynamicPagerefrash()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Refrash Page'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                             </div>
                                         </div>
                                         <div id="dynamicpageshow">

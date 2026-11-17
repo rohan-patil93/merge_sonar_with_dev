@@ -24,14 +24,14 @@ foreach($result['data'] as $candida){
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="f-30">Candidates by Disability and Gender</h5>
+      <h5 class="f-30"><?= __('Candidates by Disability and Gender'); ?></h5>
       <div class="card-header-right">
        <div class="dropdown-primary dropdown open">
-        <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+        <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
         <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-         <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate by Disability and Gender" target="_blank" >CSV</a>
-         <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate by Disability and Gender" target="_blank">Excel</a>
+         <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate by Disability and Gender" target="_blank" ><?= __('CSV'); ?></a>
+         <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Candidate by Disability and Gender" target="_blank"><?= __('Excel'); ?></a>
        </div>
      </div>
    </div>
@@ -51,12 +51,12 @@ foreach($result['data'] as $candida){
             $nod = $data['1']['gc'];
           } ?>
           <div class="col-lg-12 f-w-600">
-            <p class="mb-0 f-w-600">No, I don't have a disability</p>
+            <p class="mb-0 f-w-600"><?= __('No, I don\'t have a disability'); ?></p>
           </div>
           <div class="col-lg-3">
             <div class="bg-gray p-4">
-              <p class="mb-0"> Total : <?php echo $data['1']['ma']+$data['1']['fm']; ?> </p>
-              <p class="mb-0"> Male : <?php echo $data['1']['ma']; ?> Female :  <?php echo $data['1']['fm']; ?> </p>
+              <p class="mb-0"> <?= __('Total'); ?> : <?php echo $data['1']['ma']+$data['1']['fm']; ?> </p>
+              <p class="mb-0"> <?= __('Male'); ?> : <?php echo $data['1']['ma']; ?> <?= __('Female'); ?> :  <?php echo $data['1']['fm']; ?> </p>
             </div>
           </div>
           <div class="col-lg-9">
@@ -80,12 +80,12 @@ foreach($result['data'] as $candida){
           }
           ?>
           <div class="col-lg-12 mb-2">
-             <p class="mb-0 f-w-600">Yes, I have a disability (or previously had a disability)</p>
+             <p class="mb-0 f-w-600"><?= __('Yes, I have a disability (or previously had a disability)'); ?></p>
           </div>
           <div class="col-lg-3">
             <div class="bg-gray p-4">
-              <p class="mb-0"> Total : <?php echo $data['0']['ma']+$data['0']['fm']; ?> </p>
-              <p class="mb-0"> Male : <?php echo $data['0']['ma']; ?> Female :  <?php echo $data['0']['fm']; ?> </p>
+              <p class="mb-0"> <?= __('Total'); ?> : <?php echo $data['0']['ma']+$data['0']['fm']; ?> </p>
+              <p class="mb-0"> <?= __('Male'); ?> : <?php echo $data['0']['ma']; ?> <?= __('Female'); ?> :  <?php echo $data['0']['fm']; ?> </p>
             </div>
           </div>
           <div class="col-lg-9">
@@ -109,12 +109,12 @@ foreach($result['data'] as $candida){
           ?>
 
           <div class="col-lg-12 mb-2">
-             <p class="mb-0 f-w-600">Decline to answer</p>
+             <p class="mb-0 f-w-600"><?= __('Decline to answer'); ?></p>
           </div>
           <div class="col-lg-3">
             <div class="bg-gray p-4">
-              <p class="mb-0"> Total : <?php echo $data['3']['ma']+$data['3']['fm']; ?> </p>
-              <p class="mb-0"> Male : <?php echo $data['3']['ma']; ?> Female :  <?php echo $data['3']['fm']; ?> </p>
+              <p class="mb-0"> <?= __('Total'); ?> : <?php echo $data['3']['ma']+$data['3']['fm']; ?> </p>
+              <p class="mb-0"> <?= __('Male'); ?> : <?php echo $data['3']['ma']; ?> <?= __('Female'); ?> :  <?php echo $data['3']['fm']; ?> </p>
             </div>
           </div>
           <div class="col-lg-9">
@@ -137,10 +137,10 @@ foreach($result['data'] as $candida){
               $female_c = $data['0']['fm']+$data['1']['fm']+$data['3']['fm'];
             echo date('M d, Y', strtotime($fromdate))." - " .date('M d, Y', strtotime($todate)); ?>
           </h4>
-          <h5 class="mt-3">Total Job Candidates <span class="f-30 f-w-600"><?php echo $total_count; ?></span></h5>
+          <h5 class="mt-3"><?= __('Total Job Candidates'); ?> <span class="f-30 f-w-600"><?php echo $total_count; ?></span></h5>
           <?php if($total_count == 0){ ?>
             <div class="d-block text-center total-job">
-              <span class="text-muted"><i class="fa fa-venus-mars d-block f-24"></i> Gender</span>
+              <span class="text-muted"><i class="fa fa-venus-mars d-block f-24"></i> <?= __('Gender'); ?></span>
             </div>
           <?php }else{ ?>
               <div class="m-t-20" style="text-align: -webkit-center;">
@@ -148,19 +148,19 @@ foreach($result['data'] as $candida){
                 </div>
               </div>
           <?php } ?>
-         <p class="mt-4 text-center"> Male : <?php echo $male_c !=""?$male_c:"0"; ?> Female :  <?php echo $female_c !=""?$female_c:"0"; ?> </p>
-          <p class="mt-4 text-center">Only jobs with an AA/EEO Job Category can be included in this report.</p>
+         <p class="mt-4 text-center"> <?= __('Male'); ?> : <?php echo $male_c !=""?$male_c:"0"; ?> <?= __('Female'); ?> :  <?php echo $female_c !=""?$female_c:"0"; ?> </p>
+          <p class="mt-4 text-center"><?= __('Only jobs with an AA/EEO Job Category can be included in this report.'); ?></p>
         </div>
       </div>
     </div>
     <div class="table-responsive">
       <table class="table table-hover">
         <tr style="background-color: #eeeeee;">
-          <th scope="col">Disabilities</th>
-          <th scope="col">Male</th>
-          <th scope="col">Female</th>
-          <th scope="col">Count</th>
-          <th scope="col">Hired Count</th>
+          <th scope="col"><?= __('Disabilities'); ?></th>
+          <th scope="col"><?= __('Male'); ?></th>
+          <th scope="col"><?= __('Female'); ?></th>
+          <th scope="col"><?= __('Count'); ?></th>
+          <th scope="col"><?= __('Hired Count'); ?></th>
         </tr>
         <?php
           $csv = array();
@@ -172,7 +172,7 @@ foreach($result['data'] as $candida){
         <?php if(count((array)$data)>0){?>
           <?php if($data['1']['gc']!=0){ ?>
             <tr style="background-color: #eeeeee;">
-              <th scope="col">No, I don't have a disability</th>
+              <th scope="col"><?= __('No, I don\'t have a disability'); ?></th>
               <th scope="col"><?php echo $data['1']['ma']; ?></th>
               <th scope="col"><?php echo $data['1']['fm']; ?></th>
               <th scope="col"><?php echo $data['1']['gc']; ?></th>
@@ -181,7 +181,7 @@ foreach($result['data'] as $candida){
           <?php } ?>
           <?php if($data['0']['gc']!=0){ ?>
             <tr style="background-color: #eeeeee;">
-              <th scope="col">Yes, I have a disability</th>
+              <th scope="col"><?= __('Yes, I have a disability'); ?></th>
               <th scope="col"><?php echo $data['0']['ma']; ?></th>
               <th scope="col"><?php echo $data['0']['fm']; ?></th>
               <th scope="col"><?php echo $data['0']['gc']; ?></th>
@@ -190,7 +190,7 @@ foreach($result['data'] as $candida){
           <?php } ?>
           <?php if($data['3']['gc']!=0){ ?>
             <tr style="background-color: #eeeeee;">
-              <th scope="col">Decline to answer</th>
+              <th scope="col"><?= __('Decline to answer'); ?></th>
               <th scope="col"><?php echo $data['3']['ma']; ?></th>
               <th scope="col"><?php echo $data['3']['fm']; ?></th>
               <th scope="col"><?php echo $data['3']['gc']; ?></th>
@@ -202,7 +202,7 @@ foreach($result['data'] as $candida){
             <td colspan="5">
 
               <div class="card-px text-center py-20 m-t-30">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Candidates</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Candidates'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

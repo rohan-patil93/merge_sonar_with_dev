@@ -17,13 +17,13 @@ $_SESSION['download_data'] = array();
 
 <div class="card">
 	<div class="card-header">
-		<h5 class="f-30">Vender & Vendor Register Report</h5>
+		<h5 class="f-30"><?= htmlspecialchars(__('Vender & Vendor Register Report'), ENT_QUOTES, 'UTF-8'); ?></h5>
 		<div class="card-header-right">
 			<div class="dropdown-primary dropdown open">
-				<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+				<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
 				<div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
-					<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=<?php echo $transaction_table; ?>" target="_blank" >CSV</a>
-					<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=<?php echo $transaction_table; ?>" target="_blank">Excel</a>
+					<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=<?php echo $transaction_table; ?>" target="_blank" ><?= __('CSV'); ?></a>
+					<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=<?php echo $transaction_table; ?>" target="_blank"><?= __('Excel'); ?></a>
 				</div>
 			</div>
 		</div>
@@ -32,26 +32,26 @@ $_SESSION['download_data'] = array();
 		<form method="post" action="" id="typeForm">
 	        <div class="row ">
 	          	<div class="col-lg-2 mb-2 w-full">
-	            	<label for="transaction_table" class="form-label d-block">Transaction Type</label>
+	            	<label for="transaction_table" class="form-label d-block"><?= __('Transaction Type'); ?></label>
 	            	<select id="transaction_table" class="form-select js-example-basic-single" name="transaction_table"  >
-	              		<option value="vendors" <?php echo ($transaction_table == 'vendors') ? 'selected' : ''; ?>>Vendors</option>
+	              		<option value="vendors" <?php echo ($transaction_table == 'vendors') ? 'selected' : ''; ?>><?= __('Vendors'); ?></option>
 	              		<option value="vendor_registers" <?php echo ($transaction_table == 'vendor_registers') ? 'selected' : ''; ?>>
-	                Vendor Registers</option>
+	                <?= __('Vendor Registers'); ?></option>
 	            	</select>
 	          	</div>
 	          	<div class="col-lg-2 mb-2 w-full">
-	            	<label for="vendor_types_id" class="form-label d-block">Vendor Types</label>
+	            	<label for="vendor_types_id" class="form-label d-block"><?= __('Vendor Types'); ?></label>
 	            	<select id="vendor_types_id" class="form-select js-example-basic-single" name="vendor_types_id"  >
-	            		<option value="">All Vendor Types</option>
+	            		<option value=""><?= __('All Vendor Types'); ?></option>
 	              		<?php foreach($vendor_types as $vt){ ?>
 	              		<option value="<?php echo $vt['id']; ?>" <?php echo ($_POST['vendor_types_id'] == $vt['id']) ? 'selected' : ''; ?>><?php echo $vt['type_name']; ?></option>
 	              		<?php } ?>
 	            	</select>
 	          	</div>
 	          	<div class="col-lg-2 mb-2 w-full">
-	            	<label for="location_id" class="form-label d-block">Locations</label>
+	            	<label for="location_id" class="form-label d-block"><?= __('Locations'); ?></label>
 	            	<select id="location_id" class="form-select js-example-basic-single" name="location_id"  >
-	            		<option value="">All Locations</option>
+	            		<option value=""><?= __('All Locations'); ?></option>
 	            		<?php foreach($locations as $loc){ ?>
 	              		<option value="<?php echo $loc['id']; ?>" <?php echo ($_POST['location_id'] == $loc['id']) ? 'selected' : ''; ?>><?php echo $loc['location_name']; ?></option>
 	              		<?php } ?>
@@ -59,16 +59,16 @@ $_SESSION['download_data'] = array();
 	            	</select>
 	          	</div>
 	          	<div class="col-lg-2 mb-2 w-full">
-	            	<label for="vendor_connect_user" class="form-label d-block">User Connect</label>
+	            	<label for="vendor_connect_user" class="form-label d-block"><?= __('User Connect'); ?></label>
 	            	<select id="vendor_connect_user" class="form-select js-example-basic-single" name="vendor_connect_user"  >
-	              		<option value="">All User Connect</option>
+	              		<option value=""><?= __('All User Connect'); ?></option>
 	            		<?php foreach($application_users as $au){ ?>
 	              		<option value="<?php echo $au['id']; ?>" <?php echo ($_POST['vendor_connect_user'] == $au['id']) ? 'selected' : ''; ?>><?php echo $au['display_name']; ?></option>
 	              		<?php } ?>
 	            	</select>
 	          	</div>
 	          	<div class="col-lg-2 mb-2 w-full">
-	            	<button type="submit" class="btn btn-primary mt-4">Filter Apply</button>
+	            	<button type="submit" class="btn btn-primary mt-4"><?= __('Filter Apply'); ?></button>
 	          	</div>
 	        </div>
 	    </form>
@@ -84,55 +84,55 @@ $_SESSION['download_data'] = array();
           		<thead>
 	          		<tr bgcolor="#eeeeee">
 			            <th scope="col"># </th>
-			            <th scope="col">First Name</th>
-						<th scope="col">Middle Name</th>
-						<th scope="col">Last Name</th>
-						<th scope="col">Email</th>
-						<th scope="col">Phone</th>
-						<th scope="col">Mobile</th>
-						<th scope="col">Company</th>
-						<th scope="col">Location</th>
-						<th scope="col">Business Size</th>
-						<th scope="col">TIN Number</th>
-						<th scope="col">VAR Number</th>
-						<th scope="col">Display Name</th>
-						<th scope="col">Billing Address</th>
-						<th scope="col">Billing City</th>
-						<th scope="col">Billing State</th>
-						<th scope="col">Billing Post code</th>
-						<th scope="col">Billing Country</th>
-						<th scope="col">Shipping Address</th>
-						<th scope="col">Shipping City</th>
-						<th scope="col">Shipping State</th>
-						<th scope="col">Shipping Post code</th>
-						<th scope="col">Shipping Country</th>
-						<th scope="col">Bank Account Name</th>
-						<th scope="col">Bank Name</th>
-						<th scope="col">Bank Account No</th>
-						<th scope="col">IFSC Code</th>
-						<th scope="col">Bank Address</th>
-						<th scope="col">Website URL</th>
-						<th scope="col">Vendor PO Notes</th>
-						<th scope="col">Vendor Other Notes</th>
-						<th scope="col">Pan No</th>
-						<th scope="col">GST No</th>
-						<th scope="col">HR Connect</th>
-						<th scope="col">Finance Connect</th>
-						<th scope="col">Purchase Connect</th>
-						<th scope="col">Admin Connect</th>
-						<th scope="col">Project Connect</th>
-						<th scope="col">Location Connect</th>
-						<th scope="col">Legal Connect</th>
-						<th scope="col">Bank Country</th>
-						<th scope="col">Bank State</th>
-						<th scope="col">Bank City</th>
-						<th scope="col">Bank Post Code</th>
-						<th scope="col">Bank Beneficiary Name</th>
-						<th scope="col">TAN Number</th>
-						<th scope="col">MSME Number</th>
-						<th scope="col">Reference Vendor Code</th>
-						<th scope="col">Short Name</th>
-						<th scope="col">BP Code</th>
+			            <th scope="col"><?= __('First Name'); ?></th>
+						<th scope="col"><?= __('Middle Name'); ?></th>
+						<th scope="col"><?= __('Last Name'); ?></th>
+						<th scope="col"><?= __('Email'); ?></th>
+						<th scope="col"><?= __('Phone'); ?></th>
+						<th scope="col"><?= __('Mobile'); ?></th>
+						<th scope="col"><?= __('Company'); ?></th>
+						<th scope="col"><?= __('Location'); ?></th>
+						<th scope="col"><?= __('Business Size'); ?></th>
+						<th scope="col"><?= __('TIN Number'); ?></th>
+						<th scope="col"><?= __('VAR Number'); ?></th>
+						<th scope="col"><?= __('Display Name'); ?></th>
+						<th scope="col"><?= __('Billing Address'); ?></th>
+						<th scope="col"><?= __('Billing City'); ?></th>
+						<th scope="col"><?= __('Billing State'); ?></th>
+						<th scope="col"><?= __('Billing Post code'); ?></th>
+						<th scope="col"><?= __('Billing Country'); ?></th>
+						<th scope="col"><?= __('Shipping Address'); ?></th>
+						<th scope="col"><?= __('Shipping City'); ?></th>
+						<th scope="col"><?= __('Shipping State'); ?></th>
+						<th scope="col"><?= __('Shipping Post code'); ?></th>
+						<th scope="col"><?= __('Shipping Country'); ?></th>
+						<th scope="col"><?= __('Bank Account Name'); ?></th>
+						<th scope="col"><?= __('Bank Name'); ?></th>
+						<th scope="col"><?= __('Bank Account No'); ?></th>
+						<th scope="col"><?= __('IFSC Code'); ?></th>
+						<th scope="col"><?= __('Bank Address'); ?></th>
+						<th scope="col"><?= __('Website URL'); ?></th>
+						<th scope="col"><?= __('Vendor PO Notes'); ?></th>
+						<th scope="col"><?= __('Vendor Other Notes'); ?></th>
+						<th scope="col"><?= __('Pan No'); ?></th>
+						<th scope="col"><?= __('GST No'); ?></th>
+						<th scope="col"><?= __('HR Connect'); ?></th>
+						<th scope="col"><?= __('Finance Connect'); ?></th>
+						<th scope="col"><?= __('Purchase Connect'); ?></th>
+						<th scope="col"><?= __('Admin Connect'); ?></th>
+						<th scope="col"><?= __('Project Connect'); ?></th>
+						<th scope="col"><?= __('Location Connect'); ?></th>
+						<th scope="col"><?= __('Legal Connect'); ?></th>
+						<th scope="col"><?= __('Bank Country'); ?></th>
+						<th scope="col"><?= __('Bank State'); ?></th>
+						<th scope="col"><?= __('Bank City'); ?></th>
+						<th scope="col"><?= __('Bank Post Code'); ?></th>
+						<th scope="col"><?= __('Bank Beneficiary Name'); ?></th>
+						<th scope="col"><?= __('TAN Number'); ?></th>
+						<th scope="col"><?= __('MSME Number'); ?></th>
+						<th scope="col"><?= __('Reference Vendor Code'); ?></th>
+						<th scope="col"><?= __('Short Name'); ?></th>
+						<th scope="col"><?= __('BP Code'); ?></th>
 	          		</tr>
 	          	</thead>
 	          	<tbody>
@@ -202,7 +202,7 @@ $_SESSION['download_data'] = array();
 	  				<tr>
 			            <td colspan="50">
 			              	<div class="card-px text-center py-20 m-t-30">
-			                	<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+			                	<p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
 			                	<div class="text-center px-4">
 			                  		<img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
 			                	</div>

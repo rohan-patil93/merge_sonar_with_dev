@@ -66,9 +66,9 @@ if($_POST['edittype'] == "dependancy"){
       }
         foreach ((array)$depen as $depe) { ?>
          <tr>
-          <td><input aria-label="Dependent Name[]" type="text" name="dependent_name[]" class="form-control " value="<?php echo $depe['dependent_name']; ?>" autocomplete="off">  </td>
+          <td><input aria-label="<?= htmlspecialchars(__('Dependent Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="dependent_name[]" class="form-control " value="<?php echo $depe['dependent_name']; ?>" autocomplete="off">  </td>
           <td>
-           <select aria-label="Dependent Relationship Type[]" class="form-select js-example-basic-single" name="dependent_relationship_type[]" >
+           <select aria-label="<?= htmlspecialchars(__('Dependent Relationship Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-single" name="dependent_relationship_type[]" >
             <option value="0"><?= __('Select Any One') ?></option>
             <?php foreach ((array)$relationlist as $relationlistkey => $reladata) {   ?>
               <option   <?php if($depe['dependent_relationship_type']== $relationlistkey){  ?> selected <?php
@@ -77,10 +77,10 @@ if($_POST['edittype'] == "dependancy"){
           </select>
         </td>
         <td>
-            <input aria-label="Dependent Date Of Birth[]" type="text" name="dependent_date_of_birth[]" class="form-control datepicker" value="<?php echo $depe['dependent_date_of_birth']; ?>" autocomplete="off">  </td>
-            <td><input aria-label="Occupation[]" type="text" name="occupation[]" class="form-control " value="<?php echo $depe['occupation']; ?>" autocomplete="off">  </td>
+            <input aria-label="<?= htmlspecialchars(__('Dependent Date Of Birth'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="dependent_date_of_birth[]" class="form-control datepicker" value="<?php echo $depe['dependent_date_of_birth']; ?>" autocomplete="off">  </td>
+            <td><input aria-label="<?= htmlspecialchars(__('Occupation'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="occupation[]" class="form-control " value="<?php echo $depe['occupation']; ?>" autocomplete="off">  </td>
 
-              <td><input aria-label="Income[]" type="text" name="income[]" class="form-control " value="<?php echo $depe['income']; ?>" autocomplete="off">  </td>
+              <td><input aria-label="<?= htmlspecialchars(__('Income'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="income[]" class="form-control " value="<?php echo $depe['income']; ?>" autocomplete="off">  </td>
 
             <td><i class="fa fa-trash text-danger"></i></td>
               </tr>
@@ -100,11 +100,11 @@ if($_POST['edittype'] == "dependancy"){
         <div class="col-xl-4 col-md-6">
             <div class="card social-res-card">
                 <div class="card-body">
-                    <p class="m-b-0 f-w-600">Name</p>
+                    <p class="m-b-0 f-w-600"><?= __('Name'); ?></p>
                     <p><?php echo $depe['dependent_name']; ?></p>
-                    <p class="m-b-0 f-w-600">Relationship</p>
+                    <p class="m-b-0 f-w-600"><?= __('Relationship'); ?></p>
                        <p><?php echo $relationlist[$depe['dependent_relationship_type']]; ?></p>
-                       <p class="m-b-0 f-w-600">Date Of Birth</p>
+                       <p class="m-b-0 f-w-600"><?= __('Date Of Birth'); ?></p>
                        <p><?php echo $depe['dependent_date_of_birth']; ?></p>
                 </div>
             </div>
@@ -135,13 +135,13 @@ if($_POST['edittype'] == "dependancy"){
             foreach ((array)$awards as $awd) { ?>
              <tr>
               <td>
-                  <input aria-label="Award Name[]" type="text" name="award_name[]" class="form-control " autocomplete="off" value="<?php echo $awd['award_name']; ?>">
+                  <input aria-label="<?= htmlspecialchars(__('Award Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="award_name[]" class="form-control " autocomplete="off" value="<?php echo $awd['award_name']; ?>">
               </td>
               <td>
-                  <input aria-label="Award Description[]" type="text" name="award_description[]" class="form-control" value="<?php echo $awd['award_description']; ?>" autocomplete="off">
+                  <input aria-label="<?= htmlspecialchars(__('Award Description'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="award_description[]" class="form-control" value="<?php echo $awd['award_description']; ?>" autocomplete="off">
               </td>
               <td>
-                  <input aria-label="Award Year[]" type="month" name="award_year[]" class="form-control " value="<?php echo $awd['award_year']; ?>" >
+                  <input aria-label="<?= htmlspecialchars(__('Award Year'), ENT_QUOTES, 'UTF-8'); ?>[]" type="month" name="award_year[]" class="form-control " value="<?php echo $awd['award_year']; ?>" >
               </td>
               <td><i class="fa fa-trash text-danger"></i></td>
             </tr>
@@ -162,11 +162,11 @@ if($_POST['edittype'] == "dependancy"){
         <div class="col-xl-4 col-md-6">
             <div class="card social-res-card">
                 <div class="card-body">
-                    <p class="m-b-0 f-w-600">Award Name</p>
+                    <p class="m-b-0 f-w-600"><?= __('Award Name'); ?></p>
                     <p><?php echo $awardd['award_name']; ?></p>
-                    <p class="m-b-0 f-w-600">Description</p>
+                    <p class="m-b-0 f-w-600"><?= __('Description'); ?></p>
                        <p><?php echo $awardd['award_description']; ?></p>
-                       <p class="m-b-0 f-w-600">Award Year</p>
+                       <p class="m-b-0 f-w-600"><?= __('Award Year'); ?></p>
                        <p><?php echo $awardd['award_year']; ?></p>
                 </div>
             </div>
@@ -185,7 +185,7 @@ if($_POST['edittype'] == "dependancy"){
              <div class="form-group pb-3">
                 <span class="form-label"><?= __('Skills') ?></span>
                 <div class="tags_add">
-                  <input aria-label="Skills" type="text" name="skills" class="form-control" value="<?php echo $emplode; ?>" data-role="tagsinput">
+                  <input aria-label="<?= htmlspecialchars(__('Skills'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="skills" class="form-control" value="<?php echo $emplode; ?>" data-role="tagsinput">
                 </div>
               </div>
         </form>
@@ -210,9 +210,9 @@ if($_POST['editsubmit'] == "edit"){ ?>
      <div class="form-group col-lg-4">
       <span class="form-label"><?= __('Total Experiance') ?></span>
       <div class="input-group input-icon-right input-group-button">
-       <input aria-label="Total Experiance" class="form-control width1"  type="text"  id="total_experiance" name="total_experiance"  value="<?php echo $candidates['total_experiance']; ?>">
+       <input aria-label="<?= htmlspecialchars(__('Total Experiance'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control width1"  type="text"  id="total_experiance" name="total_experiance"  value="<?php echo $candidates['total_experiance']; ?>">
        <span class="input-group-text addon-style">
-                        <span class="">Months</span>
+                        <span class=""><?= __('Months'); ?></span>
                     </span>
      </div>
    </div>
@@ -233,16 +233,16 @@ if($_POST['editsubmit'] == "edit"){ ?>
     $k=1;
       foreach ((array)$exper as $mm=> $expe) { ?>
        <tr id="removedworkexperiance<?php echo $mm; ?>">
-        <td><input aria-label="Company Name[]" type="text" name="company_name[]" class="form-control " autocomplete="off" value="<?php echo $expe['company_name']; ?>">  </td>
-        <td><input aria-label="Job Descrption[]" type="text" name="job_descrption[]" class="form-control" value="<?php echo $expe['job_descrption']; ?>" autocomplete="off">  </td>
-        <td><input aria-label="Work From[]" type="text" name="work_from[]" class="form-control datepicker" value="<?php echo $expe['work_from']; ?>" autocomplete="off">  </td>
-        <td><input aria-label="Work To[]" type="text" name="work_to[]" class="form-control datepicker" value="<?php echo $expe['work_to']; ?>"autocomplete="off">  </td>
+        <td><input aria-label="<?= htmlspecialchars(__('Company Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="company_name[]" class="form-control " autocomplete="off" value="<?php echo $expe['company_name']; ?>">  </td>
+        <td><input aria-label="<?= htmlspecialchars(__('Job Descrption'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="job_descrption[]" class="form-control" value="<?php echo $expe['job_descrption']; ?>" autocomplete="off">  </td>
+        <td><input aria-label="<?= htmlspecialchars(__('Work From'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="work_from[]" class="form-control datepicker" value="<?php echo $expe['work_from']; ?>" autocomplete="off">  </td>
+        <td><input aria-label="<?= htmlspecialchars(__('Work To'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="work_to[]" class="form-control datepicker" value="<?php echo $expe['work_to']; ?>"autocomplete="off">  </td>
         <td>
 
             <div class="image-input image-input-empty image-input-outline" id="kt_image_5" >
              <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Upload') ?>" style="left:-5px;top:-15px;">
               <span><i class="fa fa-upload"></i></span>
-              <input aria-label="Dyanamic File" type="file" name="dyanamic_file" class="qualification_file"/>
+              <input aria-label="<?= htmlspecialchars(__('Dyanamic File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="dyanamic_file" class="qualification_file"/>
               <input type="hidden" name="hidden_file[]" value="<?php echo $expe['compay_file']; ?>"/>
             </label>
             <?php if($expe['compay_file']!=''){ ?>
@@ -327,9 +327,9 @@ if($_POST['editsubmit'] == "edit"){ ?>
            }
         foreach ((array)$insts as $kk=>$inst){  ?>
          <tr id="removeeducation<?php echo $kk; ?>">
-          <td><input aria-label="Institute Name[]" type="text" name="institute_name[]" class="form-control" value="<?php echo $inst['institute_name']; ?>" autocomplete="off">  </td>
+          <td><input aria-label="<?= htmlspecialchars(__('Institute Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="institute_name[]" class="form-control" value="<?php echo $inst['institute_name']; ?>" autocomplete="off">  </td>
           <td>
-           <select aria-label="Education Type[]" class="form-select js-example-basic-single" name="education_type[]" >
+           <select aria-label="<?= htmlspecialchars(__('Education Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-single" name="education_type[]" >
             <option value="0"><?= __('Select Any One') ?></option>
             <?php foreach ((array)$edutypedata as $educode=> $edutype) {   ?>
               <option  <?php if($inst['education_type']== $educode){  ?> selected <?php
@@ -337,16 +337,16 @@ if($_POST['editsubmit'] == "edit"){ ?>
             <?php   } ?>
           </select>
         </td>
-        <td><input aria-label="Start Date[]" type="text" name="start_date[]" class="form-control datepicker"  value="<?php echo $inst['start_date']; ?>"  autocomplete="off">  </td>
-        <td><input aria-label="End Date[]" type="text" name="end_date[]" class="form-control datepicker"   value="<?php echo $inst['end_date']; ?>" autocomplete="off">  </td>
-        <td><input aria-label="Score[]" type="text" name="score[]" class="form-control "  value="<?php echo $inst['score']; ?>"  autocomplete="off">  </td>
-         <td><input aria-label="Subject[]" type="text" name="subject[]" class="form-control "  value="<?php echo $inst['subject']; ?>"  autocomplete="off">  </td>
+        <td><input aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="start_date[]" class="form-control datepicker"  value="<?php echo $inst['start_date']; ?>"  autocomplete="off">  </td>
+        <td><input aria-label="<?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="end_date[]" class="form-control datepicker"   value="<?php echo $inst['end_date']; ?>" autocomplete="off">  </td>
+        <td><input aria-label="<?= htmlspecialchars(__('Score'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="score[]" class="form-control "  value="<?php echo $inst['score']; ?>"  autocomplete="off">  </td>
+         <td><input aria-label="<?= htmlspecialchars(__('Subject'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="subject[]" class="form-control "  value="<?php echo $inst['subject']; ?>"  autocomplete="off">  </td>
         <td>
 
             <div class="image-input image-input-empty image-input-outline" id="kt_image_5_2" >
              <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="<?= __('Upload') ?>" >
               <span><i class="fa fa-upload"></i></span>
-              <input aria-label="Dyanamic File" type="file" name="dyanamic_file" class="qualification_file" />
+              <input aria-label="<?= htmlspecialchars(__('Dyanamic File'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="dyanamic_file" class="qualification_file" />
               <input type="hidden" name="hidden_qualification_file[]" value="<?php echo $inst['qualification_file']; ?>"/>
             </label>
              <?php if($inst['qualification_file']!=''){ ?>

@@ -58,13 +58,13 @@
               <div class="page-body">
                   <div class="card">
                       <div class="card-header ">
-                          <h5>Vendor Feedback Setup</h5>
+                          <h5><?= __('Vendor Feedback Setup'); ?></h5>
                           <div class="card-header-right">
                               <a href="index.php?option=COM_INSERT_VENDOR_FEEDBACK_SETUP" class="btn btn-success mb-2 desktop-view">
               <i class="icofont icofont-plus icon-white "></i>
-                Vendor Feedback Setup            </a>
+                <?= __('Vendor Feedback Setup'); ?>            </a>
                               <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                                  <i class="icofont icofont-reply"></i> Back
+                                  <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
                               </a>
                           </div>
                     </div>
@@ -75,12 +75,12 @@
                                 <tr>
                                     <th scope="col"></th>
                                     <th scope="col">#</th>
-                                    <th scope="col">Vendor Review Name</th>
-                                    <th scope="col">Version</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Multiple Times</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col"><?= __('Vendor Review Name'); ?></th>
+                                    <th scope="col"><?= __('Version'); ?></th>
+                                    <th scope="col"><?= __('Start Date'); ?></th>
+                                    <th scope="col"><?= __('End Date'); ?></th>
+                                    <th scope="col"><?= __('Multiple Times'); ?></th>
+                                    <th scope="col"><?= __('Status'); ?></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>

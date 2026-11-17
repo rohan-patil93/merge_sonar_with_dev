@@ -27,20 +27,20 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
 <div class="card">
     <div class="card-header  row">
         <div class="col-lg-3">
-            <h5>Top-Up Requests</h5>
+            <h5><?= __('Top-Up Requests'); ?></h5>
         </div>
         <div class="col-lg-9 text-right">
-            <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS" class="btn btn-success mb-2 desktop-view mt-2"  target="_blank"> <i class="icofont icofont-plus icon-white "></i> Top-Up Requests</a>
+            <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS" class="btn btn-success mb-2 desktop-view mt-2"  target="_blank"> <i class="icofont icofont-plus icon-white "></i> <?= __('Top-Up Requests'); ?></a>
 
             <ul class="nav md-tabs infisuite_tab mt-2 ml-2 mb-3 float-right">
                 <li class="nav-item">
-                    <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#topup1" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Top-Up Request <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$topuprequest[ST_ACTIVE]);?></span></a>
+                    <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#topup1" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Top-Up Request'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$topuprequest[ST_ACTIVE]);?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#topup2" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Inprocess<span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$topuprequest['inprocess']);?></span></a>
+                    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#topup2" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Inprocess'); ?><span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$topuprequest['inprocess']);?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#topup3" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> Approved <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$topuprequest[ST_APPROVED]);?></span></a>
+                    <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#topup3" role="tab" aria-selected="true" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?= __('Approved'); ?> <span class="form-label label label-xs label-success m-l-10"><?php echo count((array)$topuprequest[ST_APPROVED]);?></span></a>
                 </li>
             </ul>
         </div>
@@ -53,11 +53,11 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Requester Name</th>
-                                <th scope="col">Transaction Date</th>
-                                <th scope="col">Petty Cash Box Name</th>
-                                <th scope="col" class="text-right">TopUp Amount</th>
-                                <th scope="col" class="text-center">Action</th>
+                                <th scope="col"><?= __('Requester Name'); ?></th>
+                                <th scope="col"><?= __('Transaction Date'); ?></th>
+                                <th scope="col"><?= __('Petty Cash Box Name'); ?></th>
+                                <th scope="col" class="text-right"><?= __('TopUp Amount'); ?></th>
+                                <th scope="col" class="text-center"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,7 +70,7 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
                                     <td class="p-2 text-right"><?php echo customeummarmonyformate($ptb['request_amount']); ?></td>
 
                                     <td class="p-2 text-center">
-                                        <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS&Rid=<?php echo deocdeId("id:".$ptb['id']);?>" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-sm m-l-5" data-bs-toggle="tooltip" data-bs-original-title="Edit Details"><i class="fa fa-edit"></i></a>
+                                        <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS&Rid=<?php echo deocdeId("id:".$ptb['id']);?>" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-sm m-l-5" data-bs-toggle="tooltip" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
                                 <?php  $m++;
@@ -79,7 +79,7 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
                         </table>
                     <?php }else{?>
                         <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Top-Up Requests</p>
+                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Top-Up Requests'); ?></p>
                             <div class="text-center px-4">
                                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                             </div>
@@ -92,12 +92,12 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Requester Name</th>
-                                <th scope="col">Transaction Date</th>
-                                <th scope="col">Petty Cash Box Name</th>
-                                <th scope="col" class="text-right">TopUp Amount</th>
-                                <th scope="col">Status</th>
-                                <th scope="col" class="text-center">Action</th>
+                                <th scope="col"><?= __('Requester Name'); ?></th>
+                                <th scope="col"><?= __('Transaction Date'); ?></th>
+                                <th scope="col"><?= __('Petty Cash Box Name'); ?></th>
+                                <th scope="col" class="text-right"><?= __('TopUp Amount'); ?></th>
+                                <th scope="col"><?= __('Status'); ?></th>
+                                <th scope="col" class="text-center"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,7 +113,7 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
                                 </td>
 
                                 <td class="p-2 text-center">
-                                    <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS&Rid=<?php echo deocdeId("id:".$ptb['id']);?>" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-sm m-l-5" data-bs-toggle="tooltip" data-bs-original-title="View Details"><i class="fa fa-eye"></i></a>
+                                    <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS&Rid=<?php echo deocdeId("id:".$ptb['id']);?>" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-sm m-l-5" data-bs-toggle="tooltip" data-bs-original-title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                             <?php  $m++;
@@ -122,7 +122,7 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
                     </table>
                 <?php }else{ ?>
                     <div class="card-px text-center py-20 m-t-30">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Top-Up Requests</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Top-Up Requests'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>
@@ -135,12 +135,12 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Requester Name</th>
-                            <th scope="col">Transaction Date</th>
-                            <th scope="col">Petty Cash Box Name</th>
-                            <th scope="col" class="text-right">TopUp Amount</th>
-                            <th scope="col">Status</th>
-                            <th scope="col" class="text-center">Action</th>
+                            <th scope="col"><?= __('Requester Name'); ?></th>
+                            <th scope="col"><?= __('Transaction Date'); ?></th>
+                            <th scope="col"><?= __('Petty Cash Box Name'); ?></th>
+                            <th scope="col" class="text-right"><?= __('TopUp Amount'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col" class="text-center"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -156,7 +156,7 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
                                 </td>
 
                                 <td class="p-2 text-center">
-                                    <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS&Rid=<?php echo deocdeId("id:".$ptb['id']);?>" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-sm m-l-5" data-bs-toggle="tooltip" data-bs-original-title="View Details"><i class="fa fa-eye"></i></a>
+                                    <a href="index.php?option=COM_INSERT_PETTY_CASH_BOX_TOPUP_REQUESTS&Rid=<?php echo deocdeId("id:".$ptb['id']);?>" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-sm m-l-5" data-bs-toggle="tooltip" data-bs-original-title="<?= htmlspecialchars(__('View Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
                             <?php  $m++;
@@ -165,7 +165,7 @@ foreach($petty_cash_box_topup_requests as $pcbtr){
                     </table>
                 <?php }else{ ?>
                     <div class="card-px text-center py-20 m-t-30">
-                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Top-Up Requests</p>
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Top-Up Requests'); ?></p>
                         <div class="text-center px-4">
                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                         </div>

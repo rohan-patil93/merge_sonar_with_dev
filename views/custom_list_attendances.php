@@ -69,11 +69,11 @@ $key_details = json_decode($cudata,1);
         <div class="card card-custom mb-5 j-content">
 
 <div class="card-header">
-    <h5>Work Entry</h5>
+    <h5><?= __('Work Entry'); ?></h5>
     <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
     </div>
 </div>
@@ -87,7 +87,7 @@ $key_details = json_decode($cudata,1);
                             <div class="ml-12">
                                 <div class="form-group row">
                                     <div class="col-10">
-                                        <input aria-label="Att Month Year" class="form-control" type="month" name="att_month_year" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
+                                        <input aria-label="<?= htmlspecialchars(__('Att Month Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="att_month_year" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
                                         <input class="form-control" type="hidden" name="shiftkeys" value="<?php echo $cudata;?>"  id="shiftkeys" />
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@ $key_details = json_decode($cudata,1);
 
                             </div>
                             <div class="mr-2">
-                                <button type="button" onclick="getnamelist('All Employees');" class="btn btn-primary waves-effect waves-light">Generate For All</button>
+                                <button type="button" onclick="getnamelist('All Employees');" class="btn btn-primary waves-effect waves-light"><?= __('Generate For All'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@ $key_details = json_decode($cudata,1);
                             <input type="hidden" name="attendancemonth" id="attendancemonth" value="<?php echo date('Y-m-d');?>">
                             <input type="hidden" name="process_type" id="process_type" value="1">
                             <div class="dropdown mr-1">
-                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Select Employees </button>
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Select Employees'); ?> </button>
 
                             </div>
                             <div class="dropdown mr-1 mt-3">
@@ -123,13 +123,13 @@ $key_details = json_decode($cudata,1);
 <div class="radio radio-inline">
   <label class="form-label">
     <input aria-label="Ios2" type="radio" name="radios2"/>
-    <i class="helper"></i>Discrepancy Records
+    <i class="helper"></i><?= __('Discrepancy Records'); ?>
   </label>
 </div>
 <div class="radio radio-inline">
   <label class="form-label">
     <input aria-label="Ios2" type="radio" name="radios2"/>
-    <i class="helper"></i>All Records
+    <i class="helper"></i><?= __('All Records'); ?>
   </label>
 </div>
 </div>
@@ -161,8 +161,8 @@ $key_details = json_decode($cudata,1);
 
 
 <div class="alert alert-info icons-alert alert-dismissible">
-    <p><strong>Please Select Employees</strong> </p>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <p><strong><?= __('Please Select Employees'); ?></strong> </p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 
 </div>

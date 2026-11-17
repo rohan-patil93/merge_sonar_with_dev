@@ -172,32 +172,32 @@ $listgroup = $spfulljson['group'];
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title">Quality Check</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Quality Check'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <form  action="" id="submitnextform" method="post">
 <div class="modal-body p-5">
     <div class="row">
-        <div class="col-lg-2"><span class="f-w-600">Product:</span></div>
+        <div class="col-lg-2"><span class="f-w-600"><?= __('Product'); ?>:</span></div>
         <div class="col-lg-2 "><?php echo $data['item']['item_name']; ?></div>
         <div class="col-lg-4">
 
         </div>
-        <div class="col-lg-2"><span class="f-w-600">Date:</span></div>
+        <div class="col-lg-2"><span class="f-w-600"><?= __('Date'); ?>:</span></div>
         <div class="col-lg-2 float-right">
             <span class="float-right"> <?php echo fromDate(); ?> </span>
         </div>
-        <div class="col-lg-2"><span class="f-w-600">SKU:</span></div>
+        <div class="col-lg-2"><span class="f-w-600"><?= __('SKU'); ?>:</span></div>
         <div class="col-lg-2"><?php echo $data['item']['sku']; ?></div>
         <div class="col-lg-4"></div>
-        <div class="col-lg-2"><span class="f-w-600">QC Inspector:</span></div>
+        <div class="col-lg-2"><span class="f-w-600"><?= __('QC Inspector'); ?>:</span></div>
         <div class="col-lg-2">
             <span style="float:right !important;"><?php echo ucwords($_SESSION['user']['display_name']); ?></span>
         </div>
         <div class="col-lg-12 mt-1">
             <div class="float-right">
-                <button class="btn btn-primary"> Save </button>
-                <button class="btn btn-primary"> Submit Quality Check </button>
+                <button class="btn btn-primary"> <?= __('Save'); ?> </button>
+                <button class="btn btn-primary"> <?= __('Submit Quality Check'); ?> </button>
             </div>
         </div>
     </div>
@@ -224,10 +224,10 @@ $listgroup = $spfulljson['group'];
                         <table class="table table-hover m-b-0" style="width: 100%;">
                             <tr>
                                 <th scope="col" style="width: 5%;">#</th>
-                                <th scope="col" style="width: 48%;"> Name <?php echo $tabs['serial_no']; ?> </th>
-                                <th scope="col" class="text-center" style="width: 20%;">Type</th>
+                                <th scope="col" style="width: 48%;"> <?= __('Name'); ?> <?php echo $tabs['serial_no']; ?> </th>
+                                <th scope="col" class="text-center" style="width: 20%;"><?= __('Type'); ?></th>
 
-                                <th scope="col" style="width: 20%;">Remarks</th>
+                                <th scope="col" style="width: 20%;"><?= __('Remarks'); ?></th>
                                 <th scope="col" style="width: 1%;"></th>
                             </tr>
                             <?php $m=1; foreach ($listgroup as $lisgroup) { ?>
@@ -258,7 +258,7 @@ $listgroup = $spfulljson['group'];
     <?php $mn=1; foreach ($selectdata as $selectkey => $selectvalue) {
             $id = "chk"."_".$slid."_".$spj_id."_".$mn;
      ?>
-        <input aria-label="Input field" onclick="viewstatuspfr(<?php echo $selectkey.",'".$valid."','".$displayval."','E'"; ?>)" type="radio" <?php if($resdata[$slid][$spj_id]==$selectkey){ echo "checked";
+        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" onclick="viewstatuspfr(<?php echo $selectkey.",'".$valid."','".$displayval."','E'"; ?>)" type="radio" <?php if($resdata[$slid][$spj_id]==$selectkey){ echo "checked";
 } ?> name="item_attribute_res[<?php echo $listval['id']; ?>][<?php echo $att['id']; ?>]" value='<?php echo $selectkey; ?>' id='<?php echo $id; ?>' onkeydown="" />
     <label for="<?php echo $id; ?>"><?php echo $selectvalue; ?></label>
     <?php  $mn++;
@@ -275,7 +275,7 @@ $listgroup = $spfulljson['group'];
             $id = "ran"."_".$slid."_".$spj_id."_".$mn;
      ?>
 
-        <input aria-label="Input field" onclick="viewstatuspfr(<?php echo $i.",'".$valid."','".$displayval."','R'"; ?>)" type="radio" <?php if($resdata[$slid][$spj_id]==$i){ echo "checked";
+        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" onclick="viewstatuspfr(<?php echo $i.",'".$valid."','".$displayval."','R'"; ?>)" type="radio" <?php if($resdata[$slid][$spj_id]==$i){ echo "checked";
 } ?> name="item_attribute_res[<?php echo $listval['id']; ?>][<?php echo $att['id']; ?>]" value='<?php echo $i; ?>' id='<?php echo $id; ?>' onkeydown="" />
     <label for="<?php echo $id; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo $selectdata[$i-1]; ?>"><?php echo $i+1; ?></label>
     <?php  $mn++;
@@ -290,7 +290,7 @@ $listgroup = $spfulljson['group'];
             $id = "ran"."_".$slid."_".$spj_id."_".$mn;
      ?>
 
-        <input aria-label="Input field" onclick="viewstatuspfr(<?php echo $i.",'".$valid."','".$displayval."','R'"; ?>)" type="radio" <?php if($resdata[$slid][$spj_id]==$i){ echo "checked";
+        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" onclick="viewstatuspfr(<?php echo $i.",'".$valid."','".$displayval."','R'"; ?>)" type="radio" <?php if($resdata[$slid][$spj_id]==$i){ echo "checked";
 } ?> name="item_attribute_res[<?php echo $listval['id']; ?>][<?php echo $att['id']; ?>]" value='<?php echo $i; ?>' id='<?php echo $id; ?>' onkeydown="" />
     <label for="<?php echo $id; ?>"><?php echo $i; ?></label>
     <?php  $mn++;
@@ -307,14 +307,14 @@ $listgroup = $spfulljson['group'];
     <input type="hidden" name="" id="<?php echo $max_id; ?>" value="<?php echo $selectdata['max']; ?>">
 
     <div class="w-full">
-        <input aria-label="Enter number" type="number" class="form-control" onblur="viewstatuspfr(this.value,<?php echo "'".$valid."','".$displayval."','C'"; ?>)" value="<?php $resdata[$slid][$spj_id]; ?>"  name="item_attribute_res[<?php echo $listval['id']; ?>][<?php echo $att['id']; ?>]">
+        <input aria-label="<?= htmlspecialchars(__('Enter number'), ENT_QUOTES, 'UTF-8'); ?>" type="number" class="form-control" onblur="viewstatuspfr(this.value,<?php echo "'".$valid."','".$displayval."','C'"; ?>)" value="<?php $resdata[$slid][$spj_id]; ?>"  name="item_attribute_res[<?php echo $listval['id']; ?>][<?php echo $att['id']; ?>]">
     </div>
-    <span>Range <?php echo $selectdata['min']." - ".$selectdata['max']; ?></span>
+    <span><?= __('Range'); ?> <?php echo $selectdata['min']." - ".$selectdata['max']; ?></span>
 <?php } ?>
                                         </td>
 
                                         <td style="width: 20%;">
-                                            <textarea aria-label="Remarks" class="form-control" placeholder="Remarks" name="item_attribute_remarks[<?php echo $listval['id']; ?>][<?php echo $att['id']; ?>]"  ><?php echo $resremarkdata[$slid][$spj_id]; ?></textarea>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" placeholder="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>" name="item_attribute_remarks[<?php echo $listval['id']; ?>][<?php echo $att['id']; ?>]"  ><?php echo $resremarkdata[$slid][$spj_id]; ?></textarea>
                                         </td>
                                         <td style="width: 1%;">
                                             <input type="hidden" name="item_attribute_pass[<?php echo $listval['id']; ?>][<?php echo $att['id']; ?>]" value="0" id="<?php echo $displayval."_val"; ?>">
@@ -349,9 +349,9 @@ $listgroup = $spfulljson['group'];
     <input type="hidden" name="table" id="table" value="<?php echo $_POST['table']; ?>">
 
     <input type="hidden" name="tranid" id="tranid" value="<?php echo $_POST['tranid']; ?>">    <input type="hidden" name="item_id" id="item_id" value="<?php echo $_POST['item_id']; ?>">
-    <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal">Cancel</button>
-    <button type="button" class="btn btn-primary" onclick="submitrom()" >Save </button>
-    <button type="button" class="btn btn-primary" onclick="submitromquality()" >Submit Quality Check </button>
+    <button type="button" class="btn btn-default waves-effect" data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
+    <button type="button" class="btn btn-primary" onclick="submitrom()" ><?= __('Save'); ?> </button>
+    <button type="button" class="btn btn-primary" onclick="submitromquality()" ><?= __('Submit Quality Check'); ?> </button>
 </div>
 </form>
 <script type="text/javascript" src="assets/bower_components/select2/js/select2.full.min.js"></script>

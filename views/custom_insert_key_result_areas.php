@@ -68,10 +68,10 @@ foreach($kpilistres as $kpilistre){
         htmlRows += '<tr>';
         htmlRows += '<td class="p-2"><div class="checkbox-fade fade-in-primary m-0"><label class="form-label"><input aria-label="<?php echo __('Checkbox'); ?>" class="form-control itemRow" type="checkbox"> <span class="cr  m-0"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
         htmlRows += '<td class="p-2"><input aria-label="<?php echo __('Name['); ?>" type="text" name="name['+kpi_id+'][]"  class="form-control"   autocomplete="off"> </td>';
-        htmlRows += '<td><select aria-label="<?php echo __('Model['); ?>" class="form-control form-select js-example-basic-single" name="model['+kpi_id+'][]" ><option value="0"><?php echo __('Select Any One'); ?></option><?php foreach ($modellist as  $model) { ?><option value="<?php echo $model['genc_detail_code']; ?>"><?php echo $model['genc_detail_name']; ?></option><?php
+        htmlRows += '<td><select aria-label="<?php echo __('Model['); ?>" class="form-control form-select js-example-basic-single" name="model['+kpi_id+'][]" ><option value="0"><?php echo __('Select Any One'); ?></option><?php foreach ($modellist as  $model) { ?><option value="<?php echo $model['genc_detail_code']; ?>"><?php echo __($model['genc_detail_name']); ?></option><?php
 } ?></select></td>';
 
-        htmlRows += '<td class="p-2"><select aria-label="<?php echo __('Uom['); ?>" class="form-control form-select js-example-basic-single" name="uom['+kpi_id+'][]" ><option value="0"><?php echo __('Select Any One'); ?></option><?php foreach ($upmllist as  $uom) { ?><option value="<?php echo $uom['genc_detail_code']; ?>"><?php echo $uom['genc_detail_name']; ?></option><?php
+        htmlRows += '<td class="p-2"><select aria-label="<?php echo __('Uom['); ?>" class="form-control form-select js-example-basic-single" name="uom['+kpi_id+'][]" ><option value="0"><?php echo __('Select Any One'); ?></option><?php foreach ($upmllist as  $uom) { ?><option value="<?php echo $uom['genc_detail_code']; ?>"><?php echo __($uom['genc_detail_name']); ?></option><?php
 } ?></select></td>';
 
         htmlRows += '<td class="p-2"><input aria-label="<?php echo __('Weightage['); ?>" type="text text-right" name="weightage['+kpi_id+'][]"  onblur="weightagecheck('+kpi_id+')" class="form-control amount weightage_'+kpi_id+' text-right" value="0" autocomplete="off"><input type="hidden" name="kpi_tasks_ids['+kpi_id+'][]" id="kpi_tasks_ids_'+kpi_id+count+'" value=""></td>';
@@ -348,7 +348,7 @@ function getOldKRA(id){
                                         <option value="0"><?php echo __('Select Any One'); ?></option>
                                         <?php foreach ($modellist as  $model) { ?>
                                             <option <?php if($res['model'] == $model['genc_detail_code']){ ?> selected <?php
-} ?>  value="<?php echo $model['genc_detail_code']; ?>"><?php echo $model['genc_detail_name']; ?></option>
+} ?>  value="<?php echo $model['genc_detail_code']; ?>"><?php echo __($model['genc_detail_name']); ?></option>
                                         <?php } ?>
 
                                     </select>
@@ -358,7 +358,7 @@ function getOldKRA(id){
                                         <option value="0"><?php echo __('Select Any One'); ?></option>
                                         <?php foreach ($upmllist as  $uom) { ?>
                                             <option <?php if($res['uom'] == $uom['genc_detail_code']){ ?> selected <?php
-} ?> value="<?php echo $uom['genc_detail_code']; ?>"><?php echo $uom['genc_detail_name']; ?></option>
+} ?> value="<?php echo $uom['genc_detail_code']; ?>"><?php echo __($uom['genc_detail_name']); ?></option>
                                         <?php } ?>
 
                                     </select>

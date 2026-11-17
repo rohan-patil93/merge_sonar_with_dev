@@ -57,15 +57,15 @@ function submitGenerateEmployee(submit_employee_type){
                                             <?php $mk =1; foreach($taskerr as $erroruser){ echo " ".$mk.") ".ucwords($_SESSION['users'][$erroruser]); $mk++;
 } ?>
                                         </strong>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                                     </div>
                                 <?php }   $event_disabled = "event_disabled";
 } ?>
                                 <div class="card-header table-card-header">
-                                    <h5>Generate Employee </h5>
+                                    <h5><?= __('Generate Employee'); ?> </h5>
                                     <div class="card-header-right table-card-header ">
                                         <?php if($candidatesdetails['employee_id']!=""){?>
-                                            <span class="form-label label label-md label-primary">EMP - <?php echo $generateemp['emp_code']." - ".$generateemp['display_name'];?></span>
+                                            <span class="form-label label label-md label-primary"><?= __('EMP'); ?> - <?php echo $generateemp['emp_code']." - ".$generateemp['display_name'];?></span>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@ function submitGenerateEmployee(submit_employee_type){
                                                 <div class="col-12 col-form-label">
                                                     <div class="checkbox-fade fade-in-primary">
                                                         <label class="form-label">
-                                                            <input aria-label="Document[]" type="checkbox"   checked  disabled="disabled"name="document[]" value="<?php echo $details['id']; ?>" />
+                                                            <input aria-label="<?= htmlspecialchars(__('Document'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox"   checked  disabled="disabled"name="document[]" value="<?php echo $details['id']; ?>" />
                                                             <span class="cr">
                                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                             </span>
@@ -90,31 +90,31 @@ function submitGenerateEmployee(submit_employee_type){
                                             </div>
                                             <?php if($_SESSION['user_type'] != 4){ ?>
                                                 <div class="form-group col-lg-6" >
-                                                    <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+                                                    <label for="exampleDropdownFormEmail1" class="form-label"><?= __('Email address'); ?></label>
                                                     <span class="d-block error-message text-danger"></span>
                                                     <input type="email" name="email" class="form-control requried_field" id="exampleDropdownFormEmail1" value="<?php echo $candidatesdetails['email_id']; ?>" placeholder="email@example.com"  readonly/>
                                                 </div>
                                                 <div class="form-group col-lg-6 ">
-                                                    <label for="exampleDropdownFormEmail1" class="form-label">Employee Type</label>
-                                                    <select aria-label="Etype" name="etype" class="form-control js-example-basic-single">
-                                                        <option value="0">Select Any One</option>
-                                                        <option value="1">Regular </option>
-                                                        <option selected value="2">Contract </option>
+                                                    <label for="exampleDropdownFormEmail1" class="form-label"><?= __('Employee Type'); ?></label>
+                                                    <select aria-label="<?= htmlspecialchars(__('Etype'), ENT_QUOTES, 'UTF-8'); ?>" name="etype" class="form-control js-example-basic-single">
+                                                        <option value="0"><?= __('Select Any One'); ?></option>
+                                                        <option value="1"><?= __('Regular'); ?> </option>
+                                                        <option selected value="2"><?= __('Contract'); ?> </option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-lg-6">
-                                                    <label for="exampleDropdownFormEmail1" class="form-label">Work Order</label>
-                                                    <select aria-label="Workorder" name="workorder" class="form-control js-example-basic-single">
-                                                        <option value="0">Select Any One</option>
+                                                    <label for="exampleDropdownFormEmail1" class="form-label"><?= __('Work Order'); ?></label>
+                                                    <select aria-label="<?= htmlspecialchars(__('Workorder'), ENT_QUOTES, 'UTF-8'); ?>" name="workorder" class="form-control js-example-basic-single">
+                                                        <option value="0"><?= __('Select Any One'); ?></option>
                                                         <?php foreach($vendor_details as $vendor){ ?>
                                                             <option value="<?php echo $vendor['id']; ?>"><?php echo $vendor['transaction_number']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-lg-6">
-                                                    <label for="exampleDropdownFormEmail1" class="form-label">ESign </label>
-                                                    <select aria-label="Esign" name="esign" class="form-control js-example-basic-single">
-                                                        <option value="0">Select Any One</option>
+                                                    <label for="exampleDropdownFormEmail1" class="form-label"><?= __('ESign'); ?> </label>
+                                                    <select aria-label="<?= htmlspecialchars(__('Esign'), ENT_QUOTES, 'UTF-8'); ?>" name="esign" class="form-control js-example-basic-single">
+                                                        <option value="0"><?= __('Select Any One'); ?></option>
                                                         <?php foreach($esign_details as $esign){ ?>
                                                             <option value="<?php echo $esign['id']; ?>"><?php echo $esign['transaction_number']; ?></option>
                                                         <?php } ?>
@@ -122,9 +122,9 @@ function submitGenerateEmployee(submit_employee_type){
                                                 </div>
                                                 <div class="col-lg-6 position-relative">
                                                     <div class="mt-2">
-                                                        <span class="col-form-label">Admin Buddy </span>
-                                                        <select aria-label="Admin Buddy" class="form-select js-example-basic-single " name="admin_buddy">
-                                                            <option value="">Select Any One</option>
+                                                        <span class="col-form-label"><?= __('Admin Buddy'); ?> </span>
+                                                        <select aria-label="<?= htmlspecialchars(__('Admin Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " name="admin_buddy">
+                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                             <?php foreach($employees as $employees1){?>
                                                                 <option value="<?php echo $employees1['id']; ?>" <?php echo $generateemp['admin_buddy'] == $employees1['id']?"selected":""?>><?php echo $employees1['display_name']; ?></option>
                                                             <?php } ?>
@@ -133,10 +133,10 @@ function submitGenerateEmployee(submit_employee_type){
                                                 </div>
                                                 <div class="col-lg-6 position-relative">
                                                     <div class="mt-2">
-                                                        <span class="col-form-label">HR Buddy <span class="text-danger">*</span></span>
+                                                        <span class="col-form-label"><?= __('HR Buddy'); ?> <span class="text-danger">*</span></span>
                                                         <span class="d-block error-message text-danger"></span>
-                                                        <select aria-label="Hr Buddy" class="form-select js-example-basic-single requried_field" name="hr_buddy " required="">
-                                                            <option value="">Select Any One</option>
+                                                        <select aria-label="<?= htmlspecialchars(__('Hr Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single requried_field" name="hr_buddy " required="">
+                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                             <?php foreach($employees as $employees1){?>
                                                                 <option value="<?php echo $employees1['id']; ?>" <?php echo $generateemp['hr_buddy'] == $employees1['id']?"selected":""?>><?php echo $employees1['display_name']; ?></option>
                                                             <?php } ?>
@@ -145,9 +145,9 @@ function submitGenerateEmployee(submit_employee_type){
                                                 </div>
                                                 <div class="col-lg-6 position-relative">
                                                     <div class="mt-2">
-                                                        <span class="col-form-label">Finance Buddy </span>
-                                                        <select aria-label="Finance Buddy" class="form-select js-example-basic-single " name="finance_buddy">
-                                                            <option value="">Select Any One</option>
+                                                        <span class="col-form-label"><?= __('Finance Buddy'); ?> </span>
+                                                        <select aria-label="<?= htmlspecialchars(__('Finance Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " name="finance_buddy">
+                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                             <?php foreach($employees as $employees1){?>
                                                                 <option value="<?php echo $employees1['id']; ?>" <?php echo $generateemp['finance_buddy'] == $employees1['id']?"selected":""?>><?php echo $employees1['display_name']; ?></option>
                                                             <?php } ?>
@@ -156,9 +156,9 @@ function submitGenerateEmployee(submit_employee_type){
                                                 </div>
                                                 <div class="col-lg-6 position-relative">
                                                     <div class="mt-2">
-                                                        <span class="col-form-label">Project Buddy </span>
-                                                        <select aria-label="Project Buddy" class="form-select js-example-basic-single " name="project_buddy">
-                                                            <option value="">Select Any One</option>
+                                                        <span class="col-form-label"><?= __('Project Buddy'); ?> </span>
+                                                        <select aria-label="<?= htmlspecialchars(__('Project Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " name="project_buddy">
+                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                             <?php foreach($employees as $employees1){?>
                                                                 <option value="<?php echo $employees1['id']; ?>" <?php echo $generateemp['project_buddy'] == $employees1['id']?"selected":""?>><?php echo $employees1['display_name']; ?></option>
                                                             <?php } ?>
@@ -167,9 +167,9 @@ function submitGenerateEmployee(submit_employee_type){
                                                 </div>
                                                 <div class="col-lg-6 position-relative">
                                                     <div class="mt-2">
-                                                        <span class="col-form-label">Location Buddy </span>
-                                                        <select aria-label="Loc Buddy" class="form-select js-example-basic-single " name="loc_buddy">
-                                                            <option value="">Select Any One</option>
+                                                        <span class="col-form-label"><?= __('Location Buddy'); ?> </span>
+                                                        <select aria-label="<?= htmlspecialchars(__('Loc Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " name="loc_buddy">
+                                                            <option value=""><?= __('Select Any One'); ?></option>
                                                             <?php foreach($employees as $employees1){?>
                                                                 <option value="<?php echo $employees1['id']; ?>" <?php echo $generateemp['loc_buddy'] == $employees1['id']?"selected":""?>><?php echo $employees1['display_name']; ?></option>
                                                             <?php } ?>
@@ -191,8 +191,8 @@ function submitGenerateEmployee(submit_employee_type){
                                                 <input type="hidden" name="submit_create_employee" value="submit" />
                                                                                             <input type="hidden" name="submit_employee" id="submit_employee" value="UE" />
 
-                                                <button type="button" class="btn btn-primary"  onclick="submitGenerateEmployee('E')" <?php echo $disable; ?> >Generate Employee </button>
-                                                <button type="button" class="btn btn-primary m-l-20" onclick="submitGenerateEmployee('UE')" <?php echo $disable; ?>>Generate User AND Employee </button>
+                                                <button type="button" class="btn btn-primary"  onclick="submitGenerateEmployee('E')" <?php echo $disable; ?> ><?= __('Generate Employee'); ?> </button>
+                                                <button type="button" class="btn btn-primary m-l-20" onclick="submitGenerateEmployee('UE')" <?php echo $disable; ?>><?= __('Generate User AND Employee'); ?> </button>
 
                                             </div>
                                         </div>

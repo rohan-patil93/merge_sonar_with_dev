@@ -25,13 +25,13 @@ $_SESSION['download_data'] = array();
 
 <div class="card">
   <div class="card-header">
-    <h5>Open Sales Orders (Backlog Report)</h5>
+    <h5><?= __('Open Sales Orders (Backlog Report)'); ?></h5>
     <div class="card-header-right">
       <div class="dropdown-primary dropdown open">
-        <button class="btn btn-primary dropdown-toggle waves-light" type="button" data-bs-toggle="dropdown">More</button>
+        <button class="btn btn-primary dropdown-toggle waves-light" type="button" data-bs-toggle="dropdown"><?= __('More'); ?></button>
         <div class="dropdown-menu p-0">
-          <a class="dropdown-item" href="custom_view_download.php?page=OpenSalesOrders&format=csv" target="_blank">CSV</a>
-          <a class="dropdown-item" href="custom_view_download.php?page=OpenSalesOrders&format=excel" target="_blank">Excel</a>
+          <a class="dropdown-item" href="custom_view_download.php?page=OpenSalesOrders&format=csv" target="_blank"><?= __('CSV'); ?></a>
+          <a class="dropdown-item" href="custom_view_download.php?page=OpenSalesOrders&format=excel" target="_blank"><?= __('Excel'); ?></a>
         </div>
       </div>
     </div>
@@ -48,8 +48,8 @@ $_SESSION['download_data'] = array();
       <table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc">
         <thead>
           <tr>
-            <th scope="col">Sales Order Info</th>
-            <th scope="col">Items</th>
+            <th scope="col"><?= __('Sales Order Info'); ?></th>
+            <th scope="col"><?= __('Items'); ?></th>
           </tr>
         </thead>
         <tbody>
@@ -60,12 +60,12 @@ $_SESSION['download_data'] = array();
             <tr>
               <td>
                 <table role="presentation">
-                  <tr><td class="p-1">SO No.</td><td class="p-1"><?php echo $tableslist[0]['so_no']; ?></td></tr>
-                  <tr><td class="p-1">SO Date</td><td class="p-1"><?php echo fromDate($tableslist[0]['so_date']); ?></td></tr>
-                  <tr><td class="p-1">Customer</td><td class="p-1"><?php echo $tableslist[0]['customer_name']; ?></td></tr>
-                  <tr><td class="p-1">Reference No.</td><td class="p-1"><?php echo $tableslist[0]['reference_no'] ?? '-'; ?></td></tr>
+                  <tr><td class="p-1"><?= __('SO No.'); ?></td><td class="p-1"><?php echo $tableslist[0]['so_no']; ?></td></tr>
+                  <tr><td class="p-1"><?= __('SO Date'); ?></td><td class="p-1"><?php echo fromDate($tableslist[0]['so_date']); ?></td></tr>
+                  <tr><td class="p-1"><?= __('Customer'); ?></td><td class="p-1"><?php echo $tableslist[0]['customer_name']; ?></td></tr>
+                  <tr><td class="p-1"><?= __('Reference No.'); ?></td><td class="p-1"><?php echo $tableslist[0]['reference_no'] ?? '-'; ?></td></tr>
                   <tr>
-                    <td class="p-1">Status</td>
+                    <td class="p-1"><?= __('Status'); ?></td>
                     <td class="p-1">
                       <span class="form-label label label-md"
                         style="color:<?php echo $statuse[$tableslist[0]['status_id']]['color'] ?? 'white'; ?>;
@@ -74,7 +74,7 @@ $_SESSION['download_data'] = array();
                       </span>
                     </td>
                   </tr>
-                  <tr><td class="p-1">Expected Delivery</td><td class="p-1"><?php echo $tableslist[0]['expected_delivery_date'] ?? '-'; ?></td></tr>
+                  <tr><td class="p-1"><?= __('Expected Delivery'); ?></td><td class="p-1"><?php echo $tableslist[0]['expected_delivery_date'] ?? '-'; ?></td></tr>
                 </table>
               </td>
 
@@ -82,13 +82,13 @@ $_SESSION['download_data'] = array();
                 <table style="width: 100%;">
                   <thead>
                     <tr>
-                      <th scope="col" class="p-1">Item</th>
-                      <th scope="col" class="text-right p-1">Ordered Qty</th>
-                      <th scope="col" class="text-right p-1">Delivered Qty</th>
-                      <th scope="col" class="text-right p-1">Pending Qty</th>
-                      <th scope="col" class="text-right p-1">Amount</th>
-                      <th scope="col" class="text-right p-1">Tax</th>
-                      <th scope="col" class="text-right p-1">Total</th>
+                      <th scope="col" class="p-1"><?= __('Item'); ?></th>
+                      <th scope="col" class="text-right p-1"><?= __('Ordered Qty'); ?></th>
+                      <th scope="col" class="text-right p-1"><?= __('Delivered Qty'); ?></th>
+                      <th scope="col" class="text-right p-1"><?= __('Pending Qty'); ?></th>
+                      <th scope="col" class="text-right p-1"><?= __('Amount'); ?></th>
+                      <th scope="col" class="text-right p-1"><?= __('Tax'); ?></th>
+                      <th scope="col" class="text-right p-1"><?= __('Total'); ?></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -132,7 +132,7 @@ $_SESSION['download_data'] = array();
       </table>
     <?php } else { ?>
       <div class="card-px text-center py-20 m-t-30">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
         <div class="text-center px-4">
           <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
         </div>

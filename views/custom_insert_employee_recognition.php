@@ -309,7 +309,7 @@ function statuspopup(status,id){
                                                             <?php if($userdetail['image'] !=""){?>
                                                                 <img src="uploads/all/<?php echo $userdetail['image']; ?>"  class="img-radius img-40 align-top m-r-5" style="display: inline-block;" alt="<?= __('User Profile') ?>">
                                                             <?php } else { ?>
-                                                                <span  alt="user" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center" style="display: inline-block;"><?php echo initials($userdetail['display_name']); ?></span>
+                                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center" style="display: inline-block;"><?php echo initials($userdetail['display_name']); ?></span>
                                                             <?php } ?>
                                                                 <div class="d-inline-block width73 text-primary">
                                                                     <p class="text-muted m-b-0 mt-2"><?php echo $userdetail['display_name']; ?></p>
@@ -323,7 +323,7 @@ function statuspopup(status,id){
                                                             <?php if($empdetail['image'] !=""){?>
                                                                 <img src="uploads/all/<?php echo $empdetail['image']; ?>"  class="img-radius img-40 align-top m-r-5" style="display: inline-block;" alt="<?= __('Attachment Preview') ?>">
                                                             <?php } else { ?>
-                                                                <span  alt="user" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center" style="display: inline-block;"><?php echo initials($empdetail['display_name']); ?></span>
+                                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-5 custom_txt_round pt-1 f-12 text-center" style="display: inline-block;"><?php echo initials($empdetail['display_name']); ?></span>
                                                             <?php } ?>
                                                                 <div class="d-inline-block width73 text-primary">
                                                                     <p class="text-muted m-b-0 mt-2"><?php echo $empdetail['display_name']; ?></p>

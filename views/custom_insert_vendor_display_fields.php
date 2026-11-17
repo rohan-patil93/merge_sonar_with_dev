@@ -117,19 +117,19 @@ $Rid = $vendor_display_fields['id'];
     <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
       <strong><?php echo $error_message; ?></strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
   <?php } ?>
   <div class="card-header" id="custom-popup">
-    <h5> Access Rights </h5>
+    <h5> <?= __('Access Rights'); ?> </h5>
   </div>
   <div class="card-body">
      <form method="post">
       <div class="row">
         <div class="form-group col-lg-4">
-          <span class="form-label">Role</span>
-          <select aria-label="Role Short Code" class="form-control js-example-basic-single selecteRole" name="role_short_code"  required>
-            <option value="">Select Any One</option>
+          <span class="form-label"><?= __('Role'); ?></span>
+          <select aria-label="<?= htmlspecialchars(__('Role Short Code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single selecteRole" name="role_short_code"  required>
+            <option value=""><?= __('Select Any One'); ?></option>
             <?php
             $getroleid = $vendor_display_fields['role_short_code'] !=""?$vendor_display_fields['role_short_code']:$_GET['ROLE'];
             foreach($application_roles as $applicationroles){?>
@@ -141,7 +141,7 @@ $Rid = $vendor_display_fields['id'];
     <?php if($_GET['ROLE'] !=""){ ?>
       <ul class="nav nav-tabs md-tabs infisuite_tab">
         <li class="nav-item">
-          <a class="nav-link active" data-bs-toggle="tab" href="#candidate_form" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="icofont icofont-ui-user "></i> Vendor Form</a>
+          <a class="nav-link active" data-bs-toggle="tab" href="#candidate_form" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="icofont icofont-ui-user "></i> <?= __('Vendor Form'); ?></a>
         </li>
 
       </ul>
@@ -155,11 +155,11 @@ $Rid = $vendor_display_fields['id'];
             $candfieldgrpaccess = $candidateaccess[$headingkey]['access'] != ""?$candidateaccess[$headingkey]['access']:"0";
             $candfieldgrpaccesslabel ="Access Varies";
             if($candfieldgrpaccess == "NA"){
-              $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> No Access";
+              $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> ".__('No Access')."";
             }elseif($candfieldgrpaccess == "E"){
-              $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> Edit";
+              $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> ".__('Edit')."";
             }elseif($candfieldgrpaccess == "V"){
-              $candfieldgrpaccesslabel ="<i class='ti-eye'></i> View Only";
+              $candfieldgrpaccesslabel ="<i class='ti-eye'></i> ".__('View Only')."";
             }
             ?>
             <div class="col-lg-4">
@@ -176,11 +176,11 @@ $Rid = $vendor_display_fields['id'];
                  <div class="col-lg-3 text-right <?php echo $headingkey == 'business_information'?"custom_readonly":""; ?>">
                   <input type="hidden" name="fieldgrpaccess[<?php echo $headingkey; ?>][access]" id="fieldgrpaccess-hidden-<?php echo $headingkey; ?>" value="<?php echo $candfieldgrpaccess; ?>">
 
-                  <i class="accessFormSetting ti-lock empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'NA'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="No Access" data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mj; ?>"  data-type="NA" id="field_noaccess-<?php echo $headingkey; ?>"></i>
+                  <i class="accessFormSetting ti-lock empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'NA'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('No Access'), ENT_QUOTES, 'UTF-8'); ?>" data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mj; ?>"  data-type="NA" id="field_noaccess-<?php echo $headingkey; ?>"></i>
 
-                  <i class="accessFormSetting ti-pencil ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'E'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit" data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mj; ?>"  data-type="E" id="field_edit-<?php echo $headingkey; ?>"></i>
+                  <i class="accessFormSetting ti-pencil ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'E'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>" data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mj; ?>"  data-type="E" id="field_edit-<?php echo $headingkey; ?>"></i>
 
-                  <i class="accessFormSetting ti-eye ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'V'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Only" data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mj; ?>"  data-type="V" id="field_viewonly-<?php echo $headingkey; ?>"></i>
+                  <i class="accessFormSetting ti-eye ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'V'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Only'), ENT_QUOTES, 'UTF-8'); ?>" data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mj; ?>"  data-type="V" id="field_viewonly-<?php echo $headingkey; ?>"></i>
 
                 </div>
               </div>
@@ -191,11 +191,11 @@ $Rid = $vendor_display_fields['id'];
                <?php $mm=1; foreach($profilereadinesval['fields'] as $profilereadines=>$accesval){
                 $candfieldgrpaccess = $candidateaccess[$headingkey]['field'][$profilereadines] != ""?$candidateaccess[$headingkey]['field'][$profilereadines]:"E";
                 if($candfieldgrpaccess == "NA"){
-                  $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> No Access";
+                  $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> ".__('No Access')."";
                 }elseif($candfieldgrpaccess == "V"){
-                  $candfieldgrpaccesslabel ="<i class='ti-eye'></i> View Only";
+                  $candfieldgrpaccesslabel ="<i class='ti-eye'></i> ".__('View Only')."";
                 }else{
-                  $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> Edit";
+                  $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> ".__('Edit')."";
                 }
                 ?>
                 <tr class="field-<?php echo $profilereadines."-".$mm."-div"; ?>">
@@ -208,12 +208,12 @@ $Rid = $vendor_display_fields['id'];
                 <th scope="col" class="text-right">
                   <input type="hidden" name="fieldgrpaccess[<?php echo $headingkey; ?>][field][<?php echo $profilereadines; ?>]" class="fieldgrpaccess-hidden-<?php echo $headingkey; ?>" id="fieldaccess-hidden-<?php echo $profilereadines."-".$mm; ?>" value="<?php echo $candfieldgrpaccess; ?>">
 
-                  <i class="accessFormfieldSetting ti-lock allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "NA"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="No Access"
+                  <i class="accessFormfieldSetting ti-lock allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "NA"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('No Access'), ENT_QUOTES, 'UTF-8'); ?>"
                   data-fieldname="<?php echo $profilereadines; ?>"  data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mm; ?>"  data-type="NA"  id="field_noaccess-<?php echo $profilereadines."-".$mm; ?>"></i>
 
-                  <i class="accessFormfieldSetting ti-pencil ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "E"?"text-warning":""?> <?php echo in_array($profilereadines,$noteditable)?"custom_readonly":""; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Edit" data-fieldname="<?php echo $profilereadines; ?>"  data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mm; ?>"  data-type="E" id="field_edit-<?php echo $profilereadines."-".$mm; ?>"></i>
+                  <i class="accessFormfieldSetting ti-pencil ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "E"?"text-warning":""?> <?php echo in_array($profilereadines,$noteditable)?"custom_readonly":""; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>" data-fieldname="<?php echo $profilereadines; ?>"  data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mm; ?>"  data-type="E" id="field_edit-<?php echo $profilereadines."-".$mm; ?>"></i>
 
-                  <i class="accessFormfieldSetting ti-eye ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "V"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Only" data-fieldname="<?php echo $profilereadines; ?>"  data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mm; ?>"  data-type="V" id="field_viewonly-<?php echo $profilereadines."-".$mm; ?>"></i>
+                  <i class="accessFormfieldSetting ti-eye ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "V"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Only'), ENT_QUOTES, 'UTF-8'); ?>" data-fieldname="<?php echo $profilereadines; ?>"  data-fieldgrpname="<?php echo $headingkey; ?>"  data-seq="<?php echo $mm; ?>"  data-type="V" id="field_viewonly-<?php echo $profilereadines."-".$mm; ?>"></i>
 
                 </th>
               </tr>
@@ -242,15 +242,15 @@ $Rid = $vendor_display_fields['id'];
               </div>
               <div class="col-lg-4">
                 <span id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-label">
-                  <?php echo $dashboardaccess == "Y"?"<i class='ti-unlock'></i> Access":"<i class='ti-lock  text-danger'></i> No Access"?>
+                  <?php echo $dashboardaccess == "Y"?"<i class='ti-unlock'></i> ".__('Access')."":"<i class='ti-lock  text-danger'></i> ".__('No Access').""?>
                 </span>
               </div>
               <div class="col-lg-1 text-right">
                 <input type="hidden" name="dashboard_field_list[<?php echo $dashboardcoulnmname;?>][access]" id="dash-hidden-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>"  value="<?php echo $dashboardaccess;?>">
 
-                <i class=" <?php echo $dashboardaccess == "N"?"d-none":""?> accessDashSetting ti-lock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="No Access"  data-fieldgrpname="<?php echo $dashboardcoulnmname; ?>"  data-seq="<?php echo $mk; ?>"  data-type="noaccess" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-access"></i>
+                <i class=" <?php echo $dashboardaccess == "N"?"d-none":""?> accessDashSetting ti-lock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('No Access'), ENT_QUOTES, 'UTF-8'); ?>"  data-fieldgrpname="<?php echo $dashboardcoulnmname; ?>"  data-seq="<?php echo $mk; ?>"  data-type="noaccess" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-access"></i>
 
-                <i class="<?php echo $dashboardaccess == "Y"?"d-none":""?> accessDashSetting ti-unlock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Access"  data-fieldgrpname="<?php echo $dashboardcoulnmname; ?>"  data-seq="<?php echo $mk; ?>"  data-type="access" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-noaccess" ></i>
+                <i class="<?php echo $dashboardaccess == "Y"?"d-none":""?> accessDashSetting ti-unlock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Access'), ENT_QUOTES, 'UTF-8'); ?>"  data-fieldgrpname="<?php echo $dashboardcoulnmname; ?>"  data-seq="<?php echo $mk; ?>"  data-type="access" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-noaccess" ></i>
               </div>
             </div>
           </div>
@@ -262,11 +262,11 @@ $Rid = $vendor_display_fields['id'];
 </div>
 <div class="card-footer pt-0">
   <input type="hidden" name="Rid" value="<?php echo $Rid; ?>">
-  <button class="input-group-text addon-style cursor-pointer" name="submit_access_right" >Submit</button>
+  <button class="input-group-text addon-style cursor-pointer" name="submit_access_right" ><?= __('Submit'); ?></button>
 </div>
 <?php }else{ ?>
           <div class="card-px text-center py-20 mt-2">
-            <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> Please Select Role </p>
+            <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('Please Select Role'); ?> </p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>

@@ -10,7 +10,7 @@ $table_name = isset($_GET['table_name']) ? $_GET['table_name'] : (isset($_POST['
 $field_data_json = isset($_POST['field_data']) ? $_POST['field_data'] : '{}';
 
 if (empty($verification_type) || empty($record_id) || empty($action_type) || empty($table_name)) {
-    echo '<div class="alert alert-danger">Missing required parameters for verification</div>';
+    echo '<div class="alert alert-danger">'.__('Missing required parameters for verification').'</div>';
     exit;
 }
 
@@ -73,7 +73,7 @@ $verification_config = array(
 );
 
 if (!isset($verification_config[$verification_type])) {
-    echo '<div class="alert alert-danger">Invalid verification type</div>';
+    echo '<div class="alert alert-danger">'.__('Invalid verification type').'</div>';
     exit;
 }
 
@@ -114,10 +114,10 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
     <div class="modal-body">
         <div class="mb-3">
             <p class="text-muted mb-0">
-                <strong>Company:</strong> <?= htmlspecialchars($company_name); ?> |
-                <strong>Action:</strong> <?= htmlspecialchars(ucfirst($action_type)); ?>
+                <strong><?= __('Company'); ?>:</strong> <?= htmlspecialchars($company_name); ?> |
+                <strong><?= __('Action'); ?>:</strong> <?= htmlspecialchars(ucfirst($action_type)); ?>
                 <?php if ($is_verified) { ?>
-                    | <span class="badge bg-success"><i class="fa fa-check"></i> Already Verified</span>
+                    | <span class="badge bg-success"><i class="fa fa-check"></i> <?= __('Already Verified'); ?></span>
                 <?php } ?>
             </p>
         </div>
@@ -130,16 +130,16 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                     <div class="row align-items-center">
                         <div class="col">
                             <h5 class="alert-heading mb-1">
-                                <i class="fa fa-check-circle"></i> Previous Completed Verification Data
+                                <i class="fa fa-check-circle"></i> <?= __('Previous Completed Verification Data'); ?>
                             </h5>
                             <p class="mb-0">
-                                This <?= strtolower($config['title']); ?> was successfully verified on
+                                <?= __('This'); ?> <?= strtolower($config['title']); ?> <?= __('was successfully verified on'); ?>
                                 <?= date('d M Y, h:i A', strtotime($current_verification['verification_datetime'])); ?>
                             </p>
                         </div>
                         <div class="col-auto">
                             <button type="button" class="btn btn-outline-primary btn-sm js-show-current-data">
-                                <i class="fa fa-eye"></i> View Details
+                                <i class="fa fa-eye"></i> <?= __('View Details'); ?>
                             </button>
                         </div>
                     </div>
@@ -152,16 +152,16 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                         if ($verification_type == 'gst' && $current_verification) {
                             if (isset($record['gstin']) && !empty($record['gstin'])) { ?>
                                 <div class="col-md-6 mb-3">
-                                    <span class="form-label fw-bold">GST Number</span>
-                                    <input aria-label="Input field" type="text" class="form-control" value="<?= htmlspecialchars($record['gstin']); ?>" readonly>
+                                    <span class="form-label fw-bold"><?= __('GST Number'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars($record['gstin']); ?>" readonly>
                                 </div>
                             <?php }
 
                             // Show verification details
                             if (isset($current_verification['verification_datetime']) && !empty($current_verification['verification_datetime'])) { ?>
                                 <div class="col-md-6 mb-3">
-                                    <span class="form-label fw-bold">Verification Date</span>
-                                    <input aria-label="Input field" type="text" class="form-control" value="<?= htmlspecialchars(date('d M Y, h:i A', strtotime($current_verification['verification_datetime']))); ?>" readonly>
+                                    <span class="form-label fw-bold"><?= __('Verification Date'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars(date('d M Y, h:i A', strtotime($current_verification['verification_datetime']))); ?>" readonly>
                                 </div>
                             <?php }  ?>
                             <?php
@@ -171,7 +171,7 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                                 if (!empty($current_value)) { ?>
                                     <div class="col-md-4 mb-3">
                                         <span class="form-label fw-bold"><?= htmlspecialchars($field_config['label']); ?></span>
-                                        <input aria-label="Input field" type="text" class="form-control" value="<?= htmlspecialchars($current_value); ?>" readonly>
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars($current_value); ?>" readonly>
                                     </div>
                                 <?php }
                             }
@@ -181,7 +181,7 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                                 if (!empty($current_value)) { ?>
                                     <div class="col-md-4 mb-3">
                                         <span class="form-label fw-bold"><?= htmlspecialchars($field_config['label']); ?></span>
-                                        <input aria-label="Input field" type="text" class="form-control" value="<?= htmlspecialchars($current_value); ?>" readonly>
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars($current_value); ?>" readonly>
                                     </div>
                                 <?php }
                             }
@@ -204,39 +204,39 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <span class="form-label">
-                                    Company Email <span class="text-danger">*</span>
+                                    <?= __('Company Email'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="Enter company email address" type="email"
+                                <input aria-label="<?= htmlspecialchars(__('Enter company email address'), ENT_QUOTES, 'UTF-8'); ?>" type="email"
                                        class="form-control"
                                        name="email"
                                        id="company_email"
-                                       placeholder="Enter company email address"
+                                       placeholder="<?= htmlspecialchars(__('Enter company email address'), ENT_QUOTES, 'UTF-8'); ?>"
                                        required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <span class="form-label">
-                                    PAN Number <span class="text-danger">*</span>
+                                    <?= __('PAN Number'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="ABCDE1234F" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control js-format-pan-input"
                                        name="pan_no"
                                        id="pan_number"
-                                       placeholder="ABCDE1234F"
+                                       placeholder="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>"
                                        maxlength="10"
                                        required>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <span class="form-label">
-                                    Company Name <span class="text-danger">*</span>
+                                    <?= __('Company Name'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="Enter company name" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('Enter company name'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control js-check-company-name"
                                        name="company"
                                        id="company_name"
-                                       placeholder="Enter company name"
+                                       placeholder="<?= htmlspecialchars(__('Enter company name'), ENT_QUOTES, 'UTF-8'); ?>"
                                        required>
                                 <div id="allreadycompanyname" class="alert alert-warning mt-2 company-name-warning">
-                                    <i class="fa fa-exclamation-triangle"></i> Company name already exists. Please use a different name.
+                                    <i class="fa fa-exclamation-triangle"></i> <?= __('Company name already exists. Please use a different name.'); ?>
                                 </div>
                             </div>
                         </div>
@@ -245,37 +245,37 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <span class="form-label">
-                                    IFSC Code <span class="text-danger">*</span>
+                                    <?= __('IFSC Code'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="SBIN0001234" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control js-format-ifsc-input"
                                        name="ifsc_code"
                                        id="ifsc_code"
-                                       placeholder="SBIN0001234"
+                                       placeholder="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>"
                                        maxlength="11"
                                        required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <span class="form-label">
-                                    Bank Account Number <span class="text-danger">*</span>
+                                    <?= __('Bank Account Number'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="Enter account number" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control js-format-bank-account-input"
                                        name="bank_account_no"
                                        id="bank_account_no"
-                                       placeholder="Enter account number"
+                                       placeholder="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>"
                                        maxlength="18"
                                        required>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <span class="form-label">
-                                    Bank Name
+                                    <?= __('Bank Name'); ?>
                                 </span>
-                                <input aria-label="Enter bank name (optional)" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('Enter bank name (optional)'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control"
                                        name="bank_name"
                                        id="bank_name"
-                                       placeholder="Enter bank name (optional)">
+                                       placeholder="<?= htmlspecialchars(__('Enter bank name (optional)'), ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                         </div>
                     <?php } elseif ($verification_type == 'tan') { ?>
@@ -283,13 +283,13 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <span class="form-label">
-                                    TAN Number <span class="text-danger">*</span>
+                                    <?= __('TAN Number'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="ABCD12345E" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control js-format-tan-input"
                                        name="tan_number"
                                        id="tan_number"
-                                       placeholder="ABCD12345E"
+                                       placeholder="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>"
                                        maxlength="10"
                                        required>
                             </div>
@@ -299,13 +299,13 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <span class="form-label">
-                                    MSME/Udyam Number <span class="text-danger">*</span>
+                                    <?= __('MSME/Udyam Number'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="UDYAM-XX-00-0000000" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control js-format-msme-input"
                                        name="msme_number"
                                        id="msme_number"
-                                       placeholder="UDYAM-XX-00-0000000"
+                                       placeholder="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>"
                                        maxlength="19"
                                        required>
                             </div>
@@ -315,13 +315,13 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <span class="form-label">
-                                    GST Number <span class="text-danger">*</span>
+                                    <?= __('GST Number'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="22AAAAA0000A1Z5" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control js-format-gst-input js-check-gst-availability"
                                        name="gstin"
                                        id="gstin"
-                                       placeholder="22AAAAA0000A1Z5"
+                                       placeholder="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>"
                                        maxlength="15"
                                        required>
                             </div>
@@ -340,7 +340,7 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                                             <span class="text-danger">*</span>
                                         <?php } ?>
                                     </span>
-                                    <input aria-label="Input field" type="<?= $field_type; ?>"
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="<?= $field_type; ?>"
                                            class="form-control"
                                            name="<?= $field_name; ?>"
                                            id="<?= $field_name; ?>"
@@ -368,13 +368,13 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
 
                     <?php if ($verification_type == 'pan') { ?>
 
-                        <h6>Enter New PAN Number :</h6>
+                        <h6><?= __('Enter New PAN Number'); ?> :</h6>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <span class="form-label">
-                                    Company Email <span class="text-danger">*</span>
+                                    <?= __('Company Email'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="Email" type="email"
+                                <input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" type="email"
                                        class="form-control"
                                        name="email"
                                        id="company_email_2"
@@ -383,9 +383,9 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                             </div>
                             <div class="col-md-6 mb-3">
                                 <span class="form-label">
-                                    Company Name <span class="text-danger">*</span>
+                                    <?= __('Company Name'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="Company" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('Company'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control"
                                        name="company"
                                        id="company_name_2"
@@ -394,13 +394,13 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                             </div>
                             <div class="col-md-12 mb-3">
                                 <span class="form-label">
-                                    New PAN Number <span class="text-danger">*</span>
+                                    <?= __('New PAN Number'); ?> <span class="text-danger">*</span>
                                 </span>
-                                <input aria-label="ABCDE1234F" type="text"
+                                <input aria-label="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                        class="form-control js-format-pan-input"
                                        name="pan_no"
                                        id="pan_number_2"
-                                       placeholder="ABCDE1234F"
+                                       placeholder="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>"
                                        maxlength="10"
                                        required>
                             </div>
@@ -408,105 +408,105 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                     <?php } else { ?>
 
                         <?php if ($verification_type == 'bank') { ?>
-                            <h6>Enter New Bank Details:</h6>
+                            <h6><?= __('Enter New Bank Details'); ?>:</h6>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <span class="form-label">
-                                        New Bank Name
+                                        <?= __('New Bank Name'); ?>
                                     </span>
-                                    <input aria-label="Enter bank name (optional)" type="text"
+                                    <input aria-label="<?= htmlspecialchars(__('Enter bank name (optional)'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                            class="form-control"
                                            name="bank_name"
                                            id="bank_name_2"
-                                           placeholder="Enter bank name (optional)">
+                                           placeholder="<?= htmlspecialchars(__('Enter bank name (optional)'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <span class="form-label">
-                                        New IFSC Code <span class="text-danger">*</span>
+                                        <?= __('New IFSC Code'); ?> <span class="text-danger">*</span>
                                     </span>
-                                    <input aria-label="SBIN0001234" type="text"
+                                    <input aria-label="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                            class="form-control js-format-ifsc-input"
                                            name="ifsc_code"
                                            id="ifsc_code_2"
-                                           placeholder="SBIN0001234"
+                                           placeholder="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>"
                                            maxlength="11"
                                            required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <span class="form-label">
-                                        New Bank Account Number <span class="text-danger">*</span>
+                                        <?= __('New Bank Account Number'); ?> <span class="text-danger">*</span>
                                     </span>
-                                    <input aria-label="Enter account number" type="text"
+                                    <input aria-label="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                            class="form-control js-format-bank-account-input"
                                            name="bank_account_no"
                                            id="bank_account_no_2"
-                                           placeholder="Enter account number"
+                                           placeholder="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>"
                                            maxlength="18"
                                            required>
                                 </div>
                             </div>
                         <?php } elseif ($verification_type == 'tan') { ?>
-                            <h6>Enter New TAN Number:</h6>
+                            <h6><?= __('Enter New TAN Number'); ?>:</h6>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <span class="form-label">
-                                        New TAN Number <span class="text-danger">*</span>
+                                        <?= __('New TAN Number'); ?> <span class="text-danger">*</span>
                                     </span>
-                                    <input aria-label="ABCD12345E" type="text"
+                                    <input aria-label="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                            class="form-control js-format-tan-input"
                                            name="tan_number"
                                            id="tan_number_2"
-                                           placeholder="ABCD12345E"
+                                           placeholder="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>"
                                            maxlength="10"
                                            required>
                                 </div>
                             </div>
                         <?php } elseif ($verification_type == 'msme') { ?>
-                            <h6>Enter New MSME Number:</h6>
+                            <h6><?= __('Enter New MSME Number'); ?>:</h6>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <span class="form-label">
-                                        New MSME/Udyam Number <span class="text-danger">*</span>
+                                        <?= __('New MSME/Udyam Number'); ?> <span class="text-danger">*</span>
                                     </span>
-                                    <input aria-label="UDYAM-XX-00-0000000" type="text"
+                                    <input aria-label="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                            class="form-control js-format-msme-input"
                                            name="msme_number"
                                            id="msme_number_2"
-                                           placeholder="UDYAM-XX-00-0000000"
+                                           placeholder="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>"
                                            maxlength="19"
                                            required>
                                 </div>
                             </div>
                         <?php } elseif ($verification_type == 'gst') { ?>
-                            <h6>Enter New GST Number:</h6>
+                            <h6><?= __('Enter New GST Number'); ?>:</h6>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <span class="form-label">
-                                        New GST Number <span class="text-danger">*</span>
+                                        <?= __('New GST Number'); ?> <span class="text-danger">*</span>
                                     </span>
-                                    <input aria-label="22AAAAA0000A1Z5" type="text"
+                                    <input aria-label="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                            class="form-control js-format-gst-input js-check-gst-availability"
                                            name="gstin"
                                            id="gstin_2"
-                                           placeholder="22AAAAA0000A1Z5"
+                                           placeholder="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>"
                                            maxlength="15"
                                            required>
                                 </div>
                             </div>
                         <?php } else { ?>
-                            <h6>Enter New Information:</h6>
+                            <h6><?= __('Enter New Information'); ?>:</h6>
                             <div class="row">
                                 <?php foreach ($config['fields'] as $field_name => $field_config) {
                                     $field_type = isset($field_config['type']) ? $field_config['type'] : 'text';
                                     ?>
                                     <div class="col-md-6 mb-3">
                                         <span class="form-label">
-                                            New <?= htmlspecialchars($field_config['label']); ?>
+                                            <?= __('New'); ?> <?= htmlspecialchars($field_config['label']); ?>
                                             <?php if ($field_config['required']) { ?>
                                                 <span class="text-danger">*</span>
                                             <?php } ?>
                                         </span>
-                                        <input aria-label="Input field" type="<?= $field_type; ?>"
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="<?= $field_type; ?>"
                                                class="form-control"
                                                name="<?= $field_name; ?>"
                                                id="<?= $field_name; ?>"
@@ -522,219 +522,219 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
 
                 <?php if ($verification_type == 'pan') { ?>
                     <div id="pan_verification_fields" class="verification-fields mt-4 verification-fields-section">
-                        <h6><i class="fa fa-search"></i> Verification Results</h6>
+                        <h6><i class="fa fa-search"></i> <?= __('Verification Results'); ?></h6>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <span class="form-label">Verified Name</span>
-                                <input aria-label="Pan Verified Name" type="text" class="form-control" id="pan_verified_name" readonly>
+                                <span class="form-label"><?= __('Verified Name'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Pan Verified Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="pan_verified_name" readonly>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <span class="form-label">PAN Type</span>
-                                <input aria-label="Pan Verified Type" type="text" class="form-control" id="pan_verified_type" readonly>
+                                <span class="form-label"><?= __('PAN Type'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Pan Verified Type'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="pan_verified_type" readonly>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <span class="form-label">PAN Status</span>
-                                <input aria-label="Pan Verified Status" type="text" class="form-control" id="pan_verified_status" readonly>
+                                <span class="form-label"><?= __('PAN Status'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Pan Verified Status'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="pan_verified_status" readonly>
                             </div>
                         </div>
                     </div>
 
                     <!-- Confirmation Section -->
                     <div id="pan_confirmation_section" class="confirmation-section mt-4 confirmation-section-hidden">
-                        <h6><i class="fa fa-check-circle text-success"></i> PAN Verification Completed</h6>
-                        <p>PAN details have been successfully verified and saved.</p>
+                        <h6><i class="fa fa-check-circle text-success"></i> <?= __('PAN Verification Completed'); ?></h6>
+                        <p><?= __('PAN details have been successfully verified and saved.'); ?></p>
                     </div>
                 <?php } elseif ($verification_type == 'bank') { ?>
                     <div id="bank_verification_fields" class="verification-fields mt-4 verification-fields-section">
-                        <h6><i class="fa fa-search"></i> Bank Verification Results</h6>
+                        <h6><i class="fa fa-search"></i> <?= __('Bank Verification Results'); ?></h6>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Verified IFSC</span>
-                                <input aria-label="Bank Verified Ifsc" type="text" class="form-control" id="bank_verified_ifsc" readonly>
+                                <span class="form-label"><?= __('Verified IFSC'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Bank Verified Ifsc'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="bank_verified_ifsc" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Verified Account</span>
-                                <input aria-label="Bank Verified Account" type="text" class="form-control" id="bank_verified_account" readonly>
+                                <span class="form-label"><?= __('Verified Account'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Bank Verified Account'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="bank_verified_account" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Account Holder Name</span>
-                                <input aria-label="Bank Verified Name" type="text" class="form-control" id="bank_verified_name" readonly>
+                                <span class="form-label"><?= __('Account Holder Name'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Bank Verified Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="bank_verified_name" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Verification Status</span>
-                                <input aria-label="Bank Verified Status" type="text" class="form-control" id="bank_verified_status" readonly>
+                                <span class="form-label"><?= __('Verification Status'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Bank Verified Status'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="bank_verified_status" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Bank Name</span>
-                                <input aria-label="Bank Verified Bank Name" type="text" class="form-control" id="bank_verified_bank_name" readonly>
+                                <span class="form-label"><?= __('Bank Name'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Bank Verified Bank Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="bank_verified_bank_name" readonly>
                             </div>
                         </div>
                     </div>
 
                     <!-- Manual Confirmation Section -->
                     <div id="bank_manual_confirmation_section" class="confirmation-section mt-4 manual-confirmation-section">
-                        <h6><i class="fa fa-exclamation-triangle text-warning"></i> Confirm Bank Details</h6>
-                        <p>Please confirm the bank account details are correct:</p>
+                        <h6><i class="fa fa-exclamation-triangle text-warning"></i> <?= __('Confirm Bank Details'); ?></h6>
+                        <p><?= __('Please confirm the bank account details are correct'); ?>:</p>
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <strong>IFSC Code:</strong> <span id="confirm_ifsc_display"></span>
+                                <strong><?= __('IFSC Code'); ?>:</strong> <span id="confirm_ifsc_display"></span>
                             </div>
                             <div class="col-md-3">
-                                <strong>Account Number:</strong> <span id="confirm_account_display"></span>
+                                <strong><?= __('Account Number'); ?>:</strong> <span id="confirm_account_display"></span>
                             </div>
                             <div class="col-md-3">
-                                <strong>Account Holder:</strong> <span id="confirm_name_display"></span>
+                                <strong><?= __('Account Holder'); ?>:</strong> <span id="confirm_name_display"></span>
                             </div>
                             <div class="col-md-3">
-                                <strong>Bank Name:</strong> <span id="confirm_bank_name_display"></span>
+                                <strong><?= __('Bank Name'); ?>:</strong> <span id="confirm_bank_name_display"></span>
                             </div>
                         </div>
                         <div class="d-flex justify-content-end gap-2">
                             <button type="button" class="btn btn-secondary js-cancel-bank-confirmation">
-                                <i class="fa fa-times"></i> Cancel
+                                <i class="fa fa-times"></i> <?= __('Cancel'); ?>
                             </button>
                             <button type="button" class="btn btn-success js-confirm-bank-details">
-                                <i class="fa fa-check"></i> Confirm & Save
+                                <i class="fa fa-check"></i> <?= htmlspecialchars(__('Confirm & Save'), ENT_QUOTES, 'UTF-8'); ?>
                             </button>
                         </div>
                     </div>
 
                     <!-- Confirmation Section -->
                     <div id="bank_confirmation_section" class="confirmation-section mt-4 confirmation-section-hidden">
-                        <h6><i class="fa fa-check-circle text-success"></i> Bank Verification Completed</h6>
-                        <p>Bank account details have been successfully verified and saved.</p>
+                        <h6><i class="fa fa-check-circle text-success"></i> <?= __('Bank Verification Completed'); ?></h6>
+                        <p><?= __('Bank account details have been successfully verified and saved.'); ?></p>
                     </div>
                 <?php } elseif ($verification_type == 'tan') { ?>
                     <div id="tan_verification_fields" class="verification-fields mt-4 verification-fields-section">
-                        <h6><i class="fa fa-search"></i> TAN Verification Results</h6>
+                        <h6><i class="fa fa-search"></i> <?= __('TAN Verification Results'); ?></h6>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Verified TAN Number</span>
-                                <input aria-label="Tan Verified Number" type="text" class="form-control" id="tan_verified_number" readonly>
+                                <span class="form-label"><?= __('Verified TAN Number'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Tan Verified Number'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="tan_verified_number" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Company Name</span>
-                                <input aria-label="Tan Verified Company" type="text" class="form-control" id="tan_verified_company" readonly>
+                                <span class="form-label"><?= __('Company Name'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Tan Verified Company'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="tan_verified_company" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">TAN Status</span>
-                                <input aria-label="Tan Verified Status" type="text" class="form-control" id="tan_verified_status" readonly>
+                                <span class="form-label"><?= __('TAN Status'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Tan Verified Status'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="tan_verified_status" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Verification Status</span>
-                                <input aria-label="Tan Verification Status" type="text" class="form-control" id="tan_verification_status" readonly>
+                                <span class="form-label"><?= __('Verification Status'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Tan Verification Status'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="tan_verification_status" readonly>
                             </div>
                         </div>
                     </div>
 
                     <!-- Confirmation Section -->
                     <div id="tan_confirmation_section" class="confirmation-section mt-4 confirmation-section-hidden">
-                        <h6><i class="fa fa-check-circle text-success"></i> TAN Verification Completed</h6>
-                        <p>TAN details have been successfully verified and saved.</p>
+                        <h6><i class="fa fa-check-circle text-success"></i> <?= __('TAN Verification Completed'); ?></h6>
+                        <p><?= __('TAN details have been successfully verified and saved.'); ?></p>
                     </div>
                 <?php } elseif ($verification_type == 'msme') { ?>
                     <div id="msme_verification_fields" class="verification-fields mt-4 verification-fields-section">
-                        <h6><i class="fa fa-search"></i> MSME Verification Results</h6>
+                        <h6><i class="fa fa-search"></i> <?= __('MSME Verification Results'); ?></h6>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Enterprise Name</span>
-                                <input aria-label="Msme Verified Enterprise Name" type="text" class="form-control" id="msme_verified_enterprise_name" readonly>
+                                <span class="form-label"><?= __('Enterprise Name'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Msme Verified Enterprise Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="msme_verified_enterprise_name" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Major Activity</span>
-                                <input aria-label="Msme Verified Major Activity" type="text" class="form-control" id="msme_verified_major_activity" readonly>
+                                <span class="form-label"><?= __('Major Activity'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Msme Verified Major Activity'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="msme_verified_major_activity" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Organization Type</span>
-                                <input aria-label="Msme Verified Organization Type" type="text" class="form-control" id="msme_verified_organization_type" readonly>
+                                <span class="form-label"><?= __('Organization Type'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Msme Verified Organization Type'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="msme_verified_organization_type" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Social Category</span>
-                                <input aria-label="Msme Verified Social Category" type="text" class="form-control" id="msme_verified_social_category" readonly>
+                                <span class="form-label"><?= __('Social Category'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Msme Verified Social Category'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="msme_verified_social_category" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Commencement Date</span>
-                                <input aria-label="Msme Verified Commencement Date" type="text" class="form-control" id="msme_verified_commencement_date" readonly>
+                                <span class="form-label"><?= __('Commencement Date'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Msme Verified Commencement Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="msme_verified_commencement_date" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">DIC Name</span>
-                                <input aria-label="Msme Verified Dic Name" type="text" class="form-control" id="msme_verified_dic_name" readonly>
+                                <span class="form-label"><?= __('DIC Name'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Msme Verified Dic Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="msme_verified_dic_name" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Registration Date</span>
-                                <input aria-label="Msme Verified Registration Date" type="text" class="form-control" id="msme_verified_registration_date" readonly>
+                                <span class="form-label"><?= __('Registration Date'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Msme Verified Registration Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="msme_verified_registration_date" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Verification Status</span>
-                                <input aria-label="Msme Verified Status" type="text" class="form-control" id="msme_verified_status" readonly>
+                                <span class="form-label"><?= __('Verification Status'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Msme Verified Status'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="msme_verified_status" readonly>
                             </div>
                         </div>
                     </div>
 
                     <!-- MSME Manual Confirmation Section -->
                     <div id="msme_manual_confirmation_section" class="confirmation-section mt-4 manual-confirmation-section">
-                        <h6><i class="fa fa-exclamation-triangle text-warning"></i> MSME Verification Result</h6>
+                        <h6><i class="fa fa-exclamation-triangle text-warning"></i> <?= __('MSME Verification Result'); ?></h6>
                         <div id="msme_comparison_content"></div>
                         <div class="d-flex justify-content-end gap-2 mt-3">
                             <button type="button" class="btn btn-secondary js-cancel-msme-confirmation">
-                                <i class="fa fa-times"></i> Cancel
+                                <i class="fa fa-times"></i> <?= __('Cancel'); ?>
                             </button>
                             <button type="button" class="btn btn-success js-proceed-msme-save">
-                                <i class="fa fa-check"></i> Yes, Proceed
+                                <i class="fa fa-check"></i> <?= __('Yes, Proceed'); ?>
                             </button>
                         </div>
                     </div>
 
                     <!-- Confirmation Section -->
                     <div id="msme_confirmation_section" class="confirmation-section mt-4 confirmation-section-hidden">
-                        <h6><i class="fa fa-check-circle text-success"></i> MSME Verification Completed</h6>
-                        <p>MSME details have been successfully verified and saved.</p>
+                        <h6><i class="fa fa-check-circle text-success"></i> <?= __('MSME Verification Completed'); ?></h6>
+                        <p><?= __('MSME details have been successfully verified and saved.'); ?></p>
                     </div>
                 <?php } elseif ($verification_type == 'gst') { ?>
                     <div id="gst_verification_fields" class="verification-fields mt-4 verification-fields-section">
-                        <h6><i class="fa fa-search"></i> GST Verification Results</h6>
+                        <h6><i class="fa fa-search"></i> <?= __('GST Verification Results'); ?></h6>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Legal Name</span>
-                                <input aria-label="Gstin Legal Name" type="text" class="form-control" id="gstin_legal_name" readonly>
+                                <span class="form-label"><?= __('Legal Name'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Gstin Legal Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_legal_name" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Trade Name</span>
-                                <input aria-label="Gstin Trade Name" type="text" class="form-control" id="gstin_trade_name" readonly>
+                                <span class="form-label"><?= __('Trade Name'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Gstin Trade Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_trade_name" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Registration Status</span>
-                                <input aria-label="Gstin Registration Status" type="text" class="form-control" id="gstin_registration_status" readonly>
+                                <span class="form-label"><?= __('Registration Status'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Gstin Registration Status'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_registration_status" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Taxpayer Type</span>
-                                <input aria-label="Gstin Taxpayer Type" type="text" class="form-control" id="gstin_taxpayer_type" readonly>
+                                <span class="form-label"><?= __('Taxpayer Type'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Gstin Taxpayer Type'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_taxpayer_type" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Business Nature</span>
-                                <input aria-label="Gstin Business Nature" type="text" class="form-control" id="gstin_business_nature" readonly>
+                                <span class="form-label"><?= __('Business Nature'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Gstin Business Nature'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_business_nature" readonly>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <span class="form-label">Registration Date</span>
-                                <input aria-label="Gstin Registration Date" type="text" class="form-control" id="gstin_registration_date" readonly>
+                                <span class="form-label"><?= __('Registration Date'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Gstin Registration Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_registration_date" readonly>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <span class="form-label">Business Address</span>
-                                <textarea aria-label="Gstin Business Address" class="form-control" id="gstin_business_address" rows="2" readonly></textarea>
+                                <span class="form-label"><?= __('Business Address'); ?></span>
+                                <textarea aria-label="<?= htmlspecialchars(__('Gstin Business Address'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="gstin_business_address" rows="2" readonly></textarea>
                             </div>
                         </div>
                     </div>
 
                     <!-- GST Company Comparison Section -->
                     <div id="gst_company_comparison_section" class="confirmation-section mt-4 manual-confirmation-section">
-                        <h6><i class="fa fa-exclamation-triangle text-warning"></i> GST Verification Result</h6>
+                        <h6><i class="fa fa-exclamation-triangle text-warning"></i> <?= __('GST Verification Result'); ?></h6>
                         <div id="gst_comparison_content"></div>
                     </div>
 
                     <!-- Confirmation Section -->
                     <div id="gst_confirmation_section" class="confirmation-section mt-4 confirmation-section-hidden">
-                        <h6><i class="fa fa-check-circle text-success"></i> GST Verification Completed</h6>
-                        <p>GST details have been successfully verified and saved.</p>
+                        <h6><i class="fa fa-check-circle text-success"></i> <?= __('GST Verification Completed'); ?></h6>
+                        <p><?= __('GST details have been successfully verified and saved.'); ?></p>
                     </div>
                 <?php } ?>
 
@@ -743,71 +743,71 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                     <div class="col-12">
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-secondary js-close-modal">
-                                <i class="fa fa-times"></i> Cancel
+                                <i class="fa fa-times"></i> <?= __('Cancel'); ?>
                             </button>
                             <?php if ($verification_type == 'pan') { ?>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary js-verify-pan btn-hidden" id="verify_pan_btn">
-                                        <i class="fa fa-search"></i> Verify PAN
+                                        <i class="fa fa-search"></i> <?= __('Verify PAN'); ?>
                                     </button>
                                     <button type="button" class="btn btn-warning js-toggle-edit btn-hidden" id="pan_edit_btn" data-type="pan">
-                                        <i class="fa fa-edit"></i> Change Info
+                                        <i class="fa fa-edit"></i> <?= __('Change Info'); ?>
                                     </button>
                                 </div>
                             <?php } elseif ($verification_type == 'bank') { ?>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary js-verify-bank btn-hidden" id="verify_bank_btn">
-                                        <i class="fa fa-search"></i> Verify Bank Account
+                                        <i class="fa fa-search"></i> <?= __('Verify Bank Account'); ?>
                                     </button>
                                     <button type="button" class="btn btn-warning js-toggle-edit btn-hidden" id="bank_edit_btn" data-type="bank">
-                                        <i class="fa fa-edit"></i> Change Info
+                                        <i class="fa fa-edit"></i> <?= __('Change Info'); ?>
                                     </button>
                                 </div>
                             <?php } elseif ($verification_type == 'tan') { ?>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary js-verify-tan btn-hidden" id="verify_tan_btn">
-                                        <i class="fa fa-search"></i> Verify TAN
+                                        <i class="fa fa-search"></i> <?= __('Verify TAN'); ?>
                                     </button>
                                     <button type="button" class="btn btn-warning js-toggle-edit btn-hidden" id="tan_edit_btn" data-type="tan">
-                                        <i class="fa fa-edit"></i> Change Info
+                                        <i class="fa fa-edit"></i> <?= __('Change Info'); ?>
                                     </button>
                                 </div>
                             <?php } elseif ($verification_type == 'msme') { ?>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary js-verify-msme btn-hidden" id="verify_msme_btn">
-                                        <i class="fa fa-search"></i> Verify MSME
+                                        <i class="fa fa-search"></i> <?= __('Verify MSME'); ?>
                                     </button>
                                     <button type="button" class="btn btn-warning js-toggle-edit btn-hidden" id="msme_edit_btn" data-type="msme">
-                                        <i class="fa fa-edit"></i> Change Info
+                                        <i class="fa fa-edit"></i> <?= __('Change Info'); ?>
                                     </button>
                                 </div>
                             <?php } elseif ($verification_type == 'gst' && $action_type == 'add_new') { ?>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary js-verify-gst-new btn-hidden" id="verify_gst_new_btn">
-                                        <i class="fa fa-search"></i> Verify New GST
+                                        <i class="fa fa-search"></i> <?= __('Verify New GST'); ?>
                                     </button>
                                     <button type="button" class="btn btn-warning js-toggle-edit btn-hidden" id="gst_new_edit_btn" data-type="gst_new">
-                                        <i class="fa fa-edit"></i> Change Info
+                                        <i class="fa fa-edit"></i> <?= __('Change Info'); ?>
                                     </button>
                                 </div>
                             <?php } elseif ($verification_type == 'gst') { ?>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary js-verify-gst btn-hidden" id="verify_gst_btn">
-                                        <i class="fa fa-search"></i> Verify GST
+                                        <i class="fa fa-search"></i> <?= __('Verify GST'); ?>
                                     </button>
                                     <button type="button" class="btn btn-warning js-toggle-edit btn-hidden" id="gst_edit_btn" data-type="gst">
-                                        <i class="fa fa-edit"></i> Change Info
+                                        <i class="fa fa-edit"></i> <?= __('Change Info'); ?>
                                     </button>
                                 </div>
                             <?php } else { ?>
                                 <button type="button" class="btn btn-primary js-save-verification-data">
                                     <i class="fa fa-save"></i>
                                     <?php if ($action_type == 'insert') { ?>
-                                        Save & Verify
+                                        <?= htmlspecialchars(__('Save & Verify'), ENT_QUOTES, 'UTF-8'); ?>
                                     <?php } elseif ($action_type == 'change') { ?>
-                                        Update & Re-verify
+                                        <?= htmlspecialchars(__('Update & Re-verify'), ENT_QUOTES, 'UTF-8'); ?>
                                     <?php } else { ?>
-                                        Save
+                                        <?= __('Save'); ?>
                                     <?php } ?>
                                 </button>
                             <?php } ?>
@@ -822,21 +822,21 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                 if (!empty($existing_gst)) { ?>
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h6 class="mb-0"><i class="fa fa-list"></i> Current GST Information</h6>
+                            <h6 class="mb-0"><i class="fa fa-list"></i> <?= __('Current GST Information'); ?></h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <span class="form-label fw-bold">Current GST Number</span>
+                                    <span class="form-label fw-bold"><?= __('Current GST Number'); ?></span>
                                     <div class="input-group">
-                                        <input aria-label="Input field" type="text" class="form-control" value="<?= htmlspecialchars($existing_gst); ?>" readonly>
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars($existing_gst); ?>" readonly>
                                     </div>
                                 </div>
 
                                 <?php if ($is_verified && $current_verification) { ?>
                                     <div class="col-md-6 mb-3">
-                                        <span class="form-label fw-bold">Verification Date</span>
-                                        <input aria-label="Input field" type="text" class="form-control"
+                                        <span class="form-label fw-bold"><?= __('Verification Date'); ?></span>
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"
                                                value="<?= date('d M Y, h:i A', strtotime($current_verification['verification_datetime'])); ?>"
                                                readonly>
                                     </div>
@@ -846,8 +846,7 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                             <?php if ($is_verified) { ?>
                                 <div class="alert alert-success mt-3">
                                     <i class="fa fa-info-circle"></i>
-                                    <strong>Note:</strong> This GST number is already verified and active.
-                                    You can add additional GST numbers for different business locations below.
+                                    <strong><?= __('Note'); ?>:</strong> <?= __('This GST number is already verified and active. You can add additional GST numbers for different business locations below.'); ?>
                                 </div>
                             <?php } ?>
                         </div>
@@ -855,14 +854,14 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                 <?php } else { ?>
                     <div class="alert alert-warning mb-4">
                         <i class="fa fa-exclamation-triangle"></i>
-                        <strong>No existing GST number found.</strong> This will be your first GST number.
+                        <strong><?= __('No existing GST number found.'); ?></strong> <?= __('This will be your first GST number.'); ?>
                     </div>
                 <?php } ?>
 
 
                 <div class="card">
                     <div class="card-header">
-                        <h6 class="mb-0"><i class="fa fa-plus"></i> Add New GST Number</h6>
+                        <h6 class="mb-0"><i class="fa fa-plus"></i> <?= __('Add New GST Number'); ?></h6>
                     </div>
                     <div class="card-body">
                         <form id="verificationForm_3" method="post">
@@ -876,13 +875,13 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <span class="form-label">
-                                        New GST Number <span class="text-danger">*</span>
+                                        <?= __('New GST Number'); ?> <span class="text-danger">*</span>
                                     </span>
-                                    <input aria-label="22AAAAA0000A1Z5" type="text"
+                                    <input aria-label="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                            class="form-control js-format-gst-input js-check-gst-availability"
                                            name="gstin"
                                            id="gstin_3"
-                                           placeholder="22AAAAA0000A1Z5"
+                                           placeholder="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>"
                                            maxlength="15"
                                            required>
                                 </div>
@@ -891,49 +890,49 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
 
                         <!-- GST Verification Fields for Add New -->
                         <div id="gst_verification_fields_new" class="verification-fields mt-4 gst-verification-fields-new">
-                            <h6><i class="fa fa-search"></i> New GST Verification Results</h6>
+                            <h6><i class="fa fa-search"></i> <?= __('New GST Verification Results'); ?></h6>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <span class="form-label">Legal Name</span>
-                                    <input aria-label="Gstin Legal Name New" type="text" class="form-control" id="gstin_legal_name_new" readonly>
+                                    <span class="form-label"><?= __('Legal Name'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Gstin Legal Name New'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_legal_name_new" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <span class="form-label">Trade Name</span>
-                                    <input aria-label="Gstin Trade Name New" type="text" class="form-control" id="gstin_trade_name_new" readonly>
+                                    <span class="form-label"><?= __('Trade Name'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Gstin Trade Name New'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_trade_name_new" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <span class="form-label">Registration Status</span>
-                                    <input aria-label="Gstin Registration Status New" type="text" class="form-control" id="gstin_registration_status_new" readonly>
+                                    <span class="form-label"><?= __('Registration Status'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Gstin Registration Status New'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_registration_status_new" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <span class="form-label">Taxpayer Type</span>
-                                    <input aria-label="Gstin Taxpayer Type New" type="text" class="form-control" id="gstin_taxpayer_type_new" readonly>
+                                    <span class="form-label"><?= __('Taxpayer Type'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Gstin Taxpayer Type New'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_taxpayer_type_new" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <span class="form-label">Business Nature</span>
-                                    <input aria-label="Gstin Business Nature New" type="text" class="form-control" id="gstin_business_nature_new" readonly>
+                                    <span class="form-label"><?= __('Business Nature'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Gstin Business Nature New'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_business_nature_new" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <span class="form-label">Registration Date</span>
-                                    <input aria-label="Gstin Registration Date New" type="text" class="form-control" id="gstin_registration_date_new" readonly>
+                                    <span class="form-label"><?= __('Registration Date'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Gstin Registration Date New'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="gstin_registration_date_new" readonly>
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                    <span class="form-label">Business Address</span>
-                                    <textarea aria-label="Gstin Business Address New" class="form-control" id="gstin_business_address_new" rows="2" readonly></textarea>
+                                    <span class="form-label"><?= __('Business Address'); ?></span>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Gstin Business Address New'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="gstin_business_address_new" rows="2" readonly></textarea>
                                 </div>
                             </div>
                         </div>
 
                         <!-- GST Company Comparison Section for Add New -->
                         <div id="gst_company_comparison_section_new" class="confirmation-section mt-4 gst-comparison-section-new">
-                            <h6><i class="fa fa-exclamation-triangle text-warning"></i> New GST Verification Result</h6>
+                            <h6><i class="fa fa-exclamation-triangle text-warning"></i> <?= __('New GST Verification Result'); ?></h6>
                             <div id="gst_comparison_content_new"></div>
                         </div>
 
                         <!-- Confirmation Section for Add New -->
                         <div id="gst_confirmation_section_new" class="confirmation-section mt-4 gst-confirmation-section-new">
-                            <h6><i class="fa fa-check-circle text-success"></i> New GST Verification Completed</h6>
-                            <p>New GST details have been successfully verified and saved.</p>
+                            <h6><i class="fa fa-check-circle text-success"></i> <?= __('New GST Verification Completed'); ?></h6>
+                            <p><?= __('New GST details have been successfully verified and saved.'); ?></p>
                         </div>
                     </div>
                 </div>

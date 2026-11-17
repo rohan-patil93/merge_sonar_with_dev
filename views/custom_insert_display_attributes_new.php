@@ -22,7 +22,7 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
         window.location = "index?option=COM_INSERT_DISPLAY_ATTRIBUTES_NEW&TNAME="+tablename;
     }
     function cllViewPageFunction(pagetype){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#viewpageid").html(loader);
         jQuery.ajax({
             url: "views/custom_insert_display_attributes_new_view_page.php",
@@ -39,7 +39,7 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
     <div class="card-header">
         <h5><?= __('Display Attributes') ?></h5>
         <div class="card-header-right">
-            <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i>Back</button>
+            <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i><?= __('Back'); ?></button>
         </div>
     </div>
     <div class="card-body">
@@ -49,7 +49,7 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                     <div class="card-body">
                         <div class="form-group">
                             <span class="form-label d-block"><?= __('Select Table') ?></span>
-                            <select aria-label="Table Name" class="form-select js-example-basic-single" name="table_name"  onchange="selectTableName(this.value)">
+                            <select aria-label="<?= htmlspecialchars(__('Table Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="table_name"  onchange="selectTableName(this.value)">
                                    <option value="0"><?= __('Select Any One') ?></option>
                                    <?php foreach ($table_list as $tablename) {  ?>
                                        <option value="<?php echo $tablename; ?>" <?php echo $mastertablename == $tablename?"selected":"";?>> <?php echo ucwords(str_replace('_',' ',$tablename)); ?></option>
@@ -75,20 +75,20 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                 <div class="tab-pane card-body active p-0" id="tabtable" role="tabpanel">
                                     <div class="form-group">
                                         <span class="form-label d-block"><?= __('List Page Option') ?></span>
-                                        <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                     <div class="form-group">
                                         <span class="form-label d-block"><?= __('List Page Title') ?></span>
-                                        <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-6">
                                             <span class="form-label d-block"><?= __('Sequence No') ?></span>
-                                            <input aria-label="Mandatory" type="checkbox" value="0" name="mandatory"  class="display js-primary-sm" <?php echo  $editfield['mandatory']=='0'?"checked":""; ?> >
+                                            <input aria-label="<?= htmlspecialchars(__('Mandatory'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="0" name="mandatory"  class="display js-primary-sm" <?php echo  $editfield['mandatory']=='0'?"checked":""; ?> >
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <span class="form-label d-block"><?= __('Start Series') ?></span>
-                                            <select aria-label="Table Name" class="form-select js-example-basic-single" name="table_name"  onchange="selectTableName(this.value)">
+                                            <select aria-label="<?= htmlspecialchars(__('Table Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="table_name"  onchange="selectTableName(this.value)">
                                                    <option value="0"><?= __('Select Any One') ?></option>
                                                    <?php foreach ($startseries as $ss) {  ?>
                                                        <option value="<?php echo $ss['short_code']; ?>" <?php echo $mastertablename == $ss['short_code']?"selected":"";?>> <?php echo $ss['label']; ?></option>
@@ -101,7 +101,7 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                         <div class="card-body row">
                                             <span class="col-lg-8"><?php echo $mtf['display_name']; ?></span>
                                             <div class="col-lg-2">
-                                                <input aria-label="Checkbox" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
+                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
                                             </div>
                                             <div class="col-lg-2">
                                                 <i class="ti-pencil m-l-10"></i>
@@ -116,7 +116,7 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                         <div class="card-body row">
                                             <span class="col-lg-8"><?php echo $mtf['display_name']; ?></span>
                                             <div class="col-lg-2">
-                                                <input aria-label="Checkbox" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
+                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
                                             </div>
                                             <div class="col-lg-2">
                                                 <i class="ti-pencil m-l-10"></i>
@@ -128,11 +128,11 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                 <div class="tab-pane card-body p-0" id="tabform" role="tabpanel">
                                     <div class="form-group">
                                         <span class="form-label d-block"><?= __('Insert Page Option') ?></span>
-                                        <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                     <div class="form-group">
                                         <span class="form-label d-block"><?= __('Insert Page Title') ?></span>
-                                        <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
 
                                         <?php foreach($mastertablefield as $keyfield=>$mtf){ ?>
@@ -140,7 +140,7 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                         <div class="card-body row">
                                             <span class="col-lg-8"><?php echo $mtf['display_name']; ?></span>
                                             <div class="col-lg-2">
-                                                <input aria-label="Checkbox" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
+                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
                                             </div>
                                             <div class="col-lg-2">
                                                 <i class="ti-pencil m-l-10"></i>
@@ -152,18 +152,18 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                 <div class="tab-pane card-body p-0" id="tabview" role="tabpanel">
                                     <div class="form-group">
                                         <span class="form-label d-block"><?= __('View Page Option') ?></span>
-                                        <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                     <div class="form-group">
                                         <span class="form-label d-block"><?= __('View Page Title') ?></span>
-                                        <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                                     </div>
                                         <?php foreach($mastertablefield as $keyfield=>$mtf){ ?>
                                     <div class="card">
                                         <div class="card-body row">
                                             <span class="col-lg-8"><?php echo $mtf['display_name']; ?></span>
                                             <div class="col-lg-2">
-                                                <input aria-label="Checkbox" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
+                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
                                             </div>
                                             <div class="col-lg-2">
                                                 <i class="ti-pencil m-l-10"></i>
@@ -195,31 +195,31 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                         <div class="row">
                             <div class="form-group">
                                 <span class="form-label d-block"><?= __('Display Name') ?></span>
-                                <input aria-label="Display Name" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
+                                <input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_name" value="<?php echo $editfield['display_name']; ?>">
                             </div>
                             <div class="form-group w-full">
-                                <span class="form-label d-block">Type</span>
-                                <select aria-label="Type[]" class="form-select js-example-basic-single"  onchange="Getinserttype(this.id,this.value)" name= "type[]">
+                                <span class="form-label d-block"><?= __('Type'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-single"  onchange="Getinserttype(this.id,this.value)" name= "type[]">
                                     <?php foreach ($filed_array as $typekey => $typevalue) {?>
                                         <option value ="<?php echo $typekey; ?>"  <?php echo $editfield['type'] == $typekey?"selected":"";?>><?php echo $typevalue; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Display Position</span>
-                                <input aria-label="Display Position" class="form-control" type="text" name="display_position" value="<?php echo $editfield['display_position']; ?>">
+                                <span class="form-label d-block"><?= __('Display Position'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Display Position'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="display_position" value="<?php echo $editfield['display_position']; ?>">
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label d-block">Mandatory</span>
-                                <input aria-label="Mandatory" type="checkbox" value="0" name="mandatory"  class="display js-primary-sm" <?php echo  $editfield['mandatory']=='0'?"checked":""; ?> >
+                                <span class="form-label d-block"><?= __('Mandatory'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Mandatory'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="0" name="mandatory"  class="display js-primary-sm" <?php echo  $editfield['mandatory']=='0'?"checked":""; ?> >
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="form-label d-block">Filter (Search)</span>
-                                <input aria-label="Mandatory" type="checkbox" value="0" name="mandatory"  class="display js-primary-sm" <?php echo  $editfield['mandatory']=='0'?"checked":""; ?> >
+                                <span class="form-label d-block"><?= __('Filter (Search)'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Mandatory'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="0" name="mandatory"  class="display js-primary-sm" <?php echo  $editfield['mandatory']=='0'?"checked":""; ?> >
                             </div>
                             <div class="form-group w-full">
-                                <span class="form-label d-block">Width Class</span>
-                                <select aria-label="Insert View Width[]" class="form-select js-example-basic-single" id="select_insert_view_width" name= "insert_view_width[]">
+                                <span class="form-label d-block"><?= __('Width Class'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Insert View Width'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-single" id="select_insert_view_width" name= "insert_view_width[]">
                                     <?php for($i=1; $i<13;$i++){
                                         $view_type = "col-lg-".$i; ?>
                                         <option  value = "<?php echo $i; ?>" <?php if($editfield['insert_view_width']== $i){ ?> selected <?php
@@ -228,54 +228,54 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                 </select>
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Placeholder</span>
-                                <input aria-label="Placeholder" class="form-control" type="text" name="placeholder" value="<?php echo $editfield['placeholder']; ?>">
+                                <span class="form-label d-block"><?= __('Placeholder'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Placeholder'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="placeholder" value="<?php echo $editfield['placeholder']; ?>">
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Errer Message</span>
-                                <input aria-label="Errer Message" class="form-control" type="text" name="errer_message" value="<?php echo $editfield['errer_message']; ?>">
+                                <span class="form-label d-block"><?= __('Errer Message'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Errer Message'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="errer_message" value="<?php echo $editfield['errer_message']; ?>">
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Upload Image Size</span>
+                                <span class="form-label d-block"><?= __('Upload Image Size'); ?></span>
                                 <div class="input-group input-group-button">
-                                    <input aria-label="Upload Image Size" class="form-control width1" type="text" name="upload_image_size" value="<?php echo $editfield['upload_image_size']; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Upload Image Size'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control width1" type="text" name="upload_image_size" value="<?php echo $editfield['upload_image_size']; ?>">
                                      <span class="input-group-text addon-style">
-                                        <span class="">Bytes</span>
+                                        <span class=""><?= __('Bytes'); ?></span>
                                     </span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Upload Image Witdh</span>
+                                <span class="form-label d-block"><?= __('Upload Image Witdh'); ?></span>
                                 <div class="input-group input-group-button">
-                                <input aria-label="Upload Image Width" class="form-control width1" type="text" name="upload_image_width" value="<?php echo $editfield['upload_image_width']; ?>">
+                                <input aria-label="<?= htmlspecialchars(__('Upload Image Width'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control width1" type="text" name="upload_image_width" value="<?php echo $editfield['upload_image_width']; ?>">
                                  <span class="input-group-text addon-style">
-                                        <span class="">PX</span>
+                                        <span class=""><?= __('PX'); ?></span>
                                     </span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Upload Image Height</span>
-                                <input aria-label="Upload Image Height" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
+                                <span class="form-label d-block"><?= __('Upload Image Height'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Upload Image Height'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Date Selection Previous Days</span>
-                                <input aria-label="Upload Image Height" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
+                                <span class="form-label d-block"><?= __('Date Selection Previous Days'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Upload Image Height'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Date Selection Feature Days</span>
-                                <input aria-label="Upload Image Height" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
+                                <span class="form-label d-block"><?= __('Date Selection Feature Days'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Upload Image Height'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Min Number</span>
-                                <input aria-label="Upload Image Height" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
+                                <span class="form-label d-block"><?= __('Min Number'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Upload Image Height'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
                             </div>
                             <div class="form-group">
-                                <span class="form-label d-block">Max Number</span>
-                                <input aria-label="Upload Image Height" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
+                                <span class="form-label d-block"><?= __('Max Number'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Upload Image Height'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="upload_image_height" value="<?php echo $editfield['upload_image_height']; ?>">
                             </div>
                             <div class="form-group w-full">
-                                <span class="form-label d-block">Accordion</span>
-                                <select aria-label="Accordions[]" class="form-select js-example-basic-single"  id="accordion"  name= "accordions[]">
+                                <span class="form-label d-block"><?= __('Accordion'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Accordions'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-single"  id="accordion"  name= "accordions[]">
                                     <?php foreach ($accordion_array as $akey => $aarray) { ?>
                                         <option value = "<?php echo $akey; ?>" <?php if($editfield['accordions'] == $akey) { ?> selected <?php
 } ?> ><?php echo $aarray; ?></option>
@@ -283,8 +283,8 @@ $startseries = array(array('short_code'=>"1",'label'=>'Start 1 To Till'),array('
                                 </select>
                             </div>
                             <div class="form-group w-full">
-                                <span class="form-label d-block">Wizard</span>
-                                <select aria-label="Insert View Wizard[]" class="form-select js-example-basic-single" id="select_insert_view_wizard" name= "insert_view_wizard[]">
+                                <span class="form-label d-block"><?= __('Wizard'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Insert View Wizard'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-single" id="select_insert_view_wizard" name= "insert_view_wizard[]">
                                     <?php for($i=1; $i<11;$i++){
                                         $view_type = $i."- Wizard"; ?>
                                         <option  value = "<?php echo $i; ?>" <?php if($editfield['insert_view_wizard']== $i){ ?> selected <?php

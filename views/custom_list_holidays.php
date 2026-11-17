@@ -3,7 +3,7 @@
     <div class="card-custom">
       <div class="card-header">
         <div class="card-title">
-          <h5 class="card-label">Holidays</h5>
+          <h5 class="card-label"><?= __('Holidays'); ?></h5>
         </div>
         <div class="card-toolbar card-header-right">
            <input type="hidden" name="calendar_cat" id="calendar_cat" value="60">

@@ -17,10 +17,10 @@ foreach ($all_application_users as $all_application_user){
 <script type="text/javascript">
     function userChangeActivationType(userid,companyid){
         var status = "";
-        var msg = "User Deactivated Successfully";
+        var msg = <?php echo json_encode(__('User Deactivated Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
         if($("#useractiveType_"+userid).is(':checked')){
             status = '0';
-            var msg = "User Active Successfully";
+            var msg = <?php echo json_encode(__('User Active Successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
         }
          $.ajax({
             url: "ajax.php",
@@ -44,13 +44,13 @@ foreach ($all_application_users as $all_application_user){
             <div class="col-lg-12">
                 <div class="page-header-title">
                     <div class="d-inline">
-                        <h5 class="f-24">User List</h5>
+                        <h5 class="f-24"><?= __('User List'); ?></h5>
                         <div class="page-header-breadcrumb mt-2">
                             <ul class=" breadcrumb breadcrumb-title">
                                 <li class="breadcrumb-item">
                                     <a href="index.php"><i class="fa fa-home"></i></a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">User List</a> </li>
+                                <li class="breadcrumb-item"><a href="#"><?= __('User List'); ?></a> </li>
                             </ul>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ foreach ($all_application_users as $all_application_user){
     <div class="card-header">
         <div class="card-header-right">
             <div class="input-group input-group-button mb-3">
-                <input aria-label="Search The Name" type="text" id="filter1111" class="form-control form-control-sm width1"  placeholder="Search The Name" data-bs-toggle="tooltip" data-placement="bottom" title="Search The Name">
+                <input aria-label="<?= htmlspecialchars(__('Search The Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter1111" class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search The Name'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search The Name'), ENT_QUOTES, 'UTF-8'); ?>">
                 <span class="input-group-text addon-style m-0">
                     <span class="form-label m-t-5"><i class="ti-search f-w-600 text-white"></i></span>
                 </span>
@@ -89,9 +89,9 @@ foreach ($all_application_users as $all_application_user){
                                     <a href="<?php echo string_to_ascii('PAGE=CUSTOM_VIEW_COMPLIANCE_USERS&EID='.$applicationusers['id']); ?>">
                                         <div class="align-middle">
                                             <?php if($applicationusers['user_photo'] !="") {?>
-                                                <img src="uploads/all/<?php echo $applicationusers['user_photo']; ?>"  class="img-radius img-50 align-top m-r-15" alt="User Profile">
+                                                <img src="uploads/all/<?php echo $applicationusers['user_photo']; ?>"  class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($applicationusers['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($applicationusers['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
                                                 <h6 ><?php echo $applicationusers['display_name']; ?></h6>
@@ -103,10 +103,10 @@ foreach ($all_application_users as $all_application_user){
                                         <div class="row mt-1 d-block">
                                              <div class="col-lg-6 d-inline-block">
 
-                                                    <span class="form-label label label-md label-primary " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Used Count"><?php echo count((array)$allusercnt[$applicationusers['company_id']]); ?></span>
+                                                    <span class="form-label label label-md label-primary " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Used Count'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo count((array)$allusercnt[$applicationusers['company_id']]); ?></span>
                                                 </div>
                                                 <div class="col-lg-6  text-right d-inline-block float-right">
-                                                    <input aria-label="Checkbox" type="checkbox" id="useractiveType_<?php echo $applicationusers['id']; ?>" class="js-small position-absolute float-right"  <?php echo $applicationusers['user_activated']=="Y"?"checked":"" ?> onchange="userChangeActivationType('<?php echo $applicationusers['id'];?>','<?php echo $applicationusers['company_id'];?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Category Activation Switch">
+                                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="useractiveType_<?php echo $applicationusers['id']; ?>" class="js-small position-absolute float-right"  <?php echo $applicationusers['user_activated']=="Y"?"checked":"" ?> onchange="userChangeActivationType('<?php echo $applicationusers['id'];?>','<?php echo $applicationusers['company_id'];?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Category Activation Switch'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -117,7 +117,7 @@ foreach ($all_application_users as $all_application_user){
                         <?php } ?>
                         <?php } else { ?>
                                 <div class="card-px text-center py-20 m-t-30">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> No Users </p>
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class='ti-alert text-warning'></i> <?= __('No Users'); ?> </p>
                                     <div class="text-center px-4">
                                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                   </div>

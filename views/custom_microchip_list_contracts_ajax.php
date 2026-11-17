@@ -35,7 +35,7 @@ if ($is_pdf) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Microchip Contracts - InfiSuite</title>
+  <title><?= __('Microchip Contracts - InfiSuite'); ?></title>
     <meta charset="UTF-8">
     <style type="text/css">
         body { font-family: Arial, sans-serif; font-size: 9px; margin: 0; padding: 10px; color: #333; }
@@ -53,11 +53,11 @@ if ($is_pdf) {
     </style>
 </head>
 <body>
-    <h3>Contracts List</h3>
+    <h3><?= __('Contracts List'); ?></h3>
     <?php if ($company_name != "") { ?>
-        <p class="meta">Company: <?php echo htmlspecialchars($company_name); ?> | Generated: <?php echo $generated_at; ?></p>
+        <p class="meta"><?= __('Company'); ?>: <?php echo htmlspecialchars($company_name); ?> <?= __('| Generated'); ?>: <?php echo $generated_at; ?></p>
     <?php } else { ?>
-        <p class="meta">Generated: <?php echo $generated_at; ?></p>
+        <p class="meta"><?= __('Generated'); ?>: <?php echo $generated_at; ?></p>
     <?php } ?>
 <?php }
 
@@ -66,19 +66,19 @@ if(count((array)($contracts)) != 0){  ?>
     <thead>
         <tr>
             <th scope="col" class="p-2">#</th>
-            <th scope="col" class="p-2">Contract No.</th>
-            <th scope="col" class="p-2">Contract Name</th>
-            <th scope="col" class="p-2">Vendor</th>
-            <th scope="col" class="p-2">Start Date</th>
-            <th scope="col" class="p-2">End Date</th>
+            <th scope="col" class="p-2"><?= __('Contract No.'); ?></th>
+            <th scope="col" class="p-2"><?= __('Contract Name'); ?></th>
+            <th scope="col" class="p-2"><?= __('Vendor'); ?></th>
+            <th scope="col" class="p-2"><?= __('Start Date'); ?></th>
+            <th scope="col" class="p-2"><?= __('End Date'); ?></th>
 
-            <th scope="col" class="p-2">Services</th>
-            <th scope="col" class="p-2">Location</th>
-            <th scope="col" class="p-2">Department</th>
+            <th scope="col" class="p-2"><?= __('Services'); ?></th>
+            <th scope="col" class="p-2"><?= __('Location'); ?></th>
+            <th scope="col" class="p-2"><?= __('Department'); ?></th>
 
-            <th scope="col" class="p-2">Payment Terms</th>
-            <th scope="col" class="p-2">Status</th>
-            <th scope="col" class="p-2">Approval Status</th>
+            <th scope="col" class="p-2"><?= __('Payment Terms'); ?></th>
+            <th scope="col" class="p-2"><?= __('Status'); ?></th>
+            <th scope="col" class="p-2"><?= __('Approval Status'); ?></th>
         </tr>
     </thead>
     <tbody >
@@ -135,15 +135,15 @@ if(count((array)($contracts)) != 0){  ?>
                 <?php
                 if ($contra['end_date'] && new DateTime($contra['end_date']) < $contracttodaydate) {
                    if ($is_pdf) {
-                        echo '<span class="badge badge-expired">Expired</span>';
+                        echo '<span class="badge badge-expired">'.__('Expired').'</span>';
                     } else {
-                        echo '<span class="form-label label label-danger">Expired</span>';
+                        echo '<span class="form-label label label-danger">'.__('Expired').'</span>';
                     }
                 }else{
                     if ($is_pdf) {
-                        echo '<span class="badge badge-active">Active</span>';
+                        echo '<span class="badge badge-active">'.__('Active').'</span>';
                     } else {
-                        echo '<span class="form-label label label-info">Active</span>';
+                        echo '<span class="form-label label label-info">'.__('Active').'</span>';
                     }
                 }
                 ?>
@@ -166,10 +166,10 @@ if(count((array)($contracts)) != 0){  ?>
 </table>
 <?php if (!$is_pdf) { ?>
 <div class="mt-5  custom-scroll height-75" >
-    <nav aria-label="Page navigation example p-2" >
+    <nav aria-label="<?= htmlspecialchars(__('Page navigation example p-2'), ENT_QUOTES, 'UTF-8'); ?>" >
         <ul class="pagination">
           <li class="page-item <?php echo ($current_page =="1" || $current_page =="")?"disabled":""; ?>">
-              <a class="page-link dynamicContractSelectPage"  data-current_status = "" data-current_page="<?php echo $current_page-1; ?>" href="#!" tabindex="-1" >Previous</a>
+              <a class="page-link dynamicContractSelectPage"  data-current_status = "" data-current_page="<?php echo $current_page-1; ?>" href="#!" tabindex="-1" ><?= __('Previous'); ?></a>
           </li>
         <?php
           for ($i = 1; $i <= $total_pages; $i++){
@@ -181,7 +181,7 @@ if(count((array)($contracts)) != 0){  ?>
             <?php } ?>
 
             <li class="page-item <?php echo ($total_pages <= $current_page)?"disabled":""; ?>">
-                <a class="page-link dynamicContractSelectPage"  data-current_status = "" data-current_page="<?php echo $current_page+1; ?>"  href="#!" tabindex="-1">Next</a>
+                <a class="page-link dynamicContractSelectPage"  data-current_status = "" data-current_page="<?php echo $current_page+1; ?>"  href="#!" tabindex="-1"><?= __('Next'); ?></a>
             </li>
         </ul>
     </nav>
@@ -190,10 +190,10 @@ if(count((array)($contracts)) != 0){  ?>
 
 <?php  }else{
     if ($is_pdf) { ?>
-    <p class="empty-msg">No Contracts</p>
+    <p class="empty-msg"><?= __('No Contracts'); ?></p>
 <?php } else { ?>
     <div class="card-px text-center py-20 mt-2">
-        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Contracts </p>
+        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Contracts'); ?> </p>
         <div class="text-center px-4">
             <img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
         </div>

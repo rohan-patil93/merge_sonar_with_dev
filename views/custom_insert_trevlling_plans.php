@@ -61,42 +61,42 @@ function h($s)
 
     <div class="card">
         <div class="card-header">
-            <h5>New Trip</h5>
+            <h5><?= __('New Trip'); ?></h5>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group m-l-5">
-                        <span class="form-label">Transaction No.</span>
-                        <input aria-label="Transaction No" type="text" class="form-control b-radius-5" name="transaction_no" value="<?= h($trip_res['transaction_no']) ?>"  readonly>
+                        <span class="form-label"><?= __('Transaction No.'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Transaction No'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control b-radius-5" name="transaction_no" value="<?= h($trip_res['transaction_no']) ?>"  readonly>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group m-l-5">
-                        <span class="form-label">Transaction Date</span>
-                        <input aria-label="Transaction Date" type="date" class="form-control b-radius-5" name="transaction_date" value="<?= h($trip_res['transaction_date']) ?>"   readonly>
+                        <span class="form-label"><?= __('Transaction Date'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Transaction Date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control b-radius-5" name="transaction_date" value="<?= h($trip_res['transaction_date']) ?>"   readonly>
                     </div>
                 </div>
                 <div class="col-lg-4"></div>
 
                 <div class="col-lg-4">
                     <div class="form-group m-l-5">
-                        <span class="form-label">Trip Name <b class="text-danger">*</b></span>
-                        <input aria-label="Trip Name" type="text" class="form-control b-radius-5" name="trip_name" value="<?= h($trip_res['trip_name']) ?>"   minlength="3" maxlength="120" pattern="^[\w\s\-'\.&(),/]+$" required>
+                        <span class="form-label"><?= __('Trip Name'); ?> <b class="text-danger">*</b></span>
+                        <input aria-label="<?= htmlspecialchars(__('Trip Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control b-radius-5" name="trip_name" value="<?= h($trip_res['trip_name']) ?>"   minlength="3" maxlength="120" pattern="^[\w\s\-'\.&(),/]+$" required>
                     </div>
                 </div>
 
 
                 <div class="col-lg-4">
                     <div class="form-group m-l-5">
-                        <span class="form-label d-block">Trip Type <b class="text-danger">*</b></span>
+                        <span class="form-label d-block"><?= __('Trip Type'); ?> <b class="text-danger">*</b></span>
                         <?php if (count((array)$trip_types) > 0) {
                             foreach ($trip_types as $row) { ?>
 
                                 <div class="radio radio-inline">
                                     <label class="form-label mb-0">
-                                        <input aria-label="Trip Type" type="radio" name="trip_type" value="<?php echo $row['genc_detail_code']; ?>" <?= $trip_res['trip_type'] == $row['genc_detail_code']  ? 'checked' : ''; ?>>
-                                        <?php echo $row['genc_detail_name'] ?>
+                                        <input aria-label="<?= htmlspecialchars(__('Trip Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="trip_type" value="<?php echo $row['genc_detail_code']; ?>" <?= $trip_res['trip_type'] == $row['genc_detail_code']  ? 'checked' : ''; ?>>
+                                        <?php echo __($row['genc_detail_name']) ?>
                                     </label>
                                 </div>
 
@@ -109,17 +109,17 @@ function h($s)
                 <!-- Business Purpose -->
                 <div class="col-lg-4">
                     <div class="form-group m-l-5">
-                        <span class="form-label">Business Purpose</span>
-                        <textarea aria-label="Trip Purpose" class="form-control" name="trip_purpose"><?= h($trip_res['trip_purpose']) ?></textarea>
+                        <span class="form-label"><?= __('Business Purpose'); ?></span>
+                        <textarea aria-label="<?= htmlspecialchars(__('Trip Purpose'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="trip_purpose"><?= h($trip_res['trip_purpose']) ?></textarea>
                     </div>
                 </div>
 
                 <!-- Project -->
                 <div class="col-lg-4">
                     <div class="form-group m-l-5">
-                        <span class="form-label">Project</span>
-                        <select aria-label="Project" class="form-select js-example-basic-single" name="project_id" style="-webkit-appearance:auto;-moz-appearance:auto;appearance:auto;">
-                            <option value=""> Select Any one </option>
+                        <span class="form-label"><?= __('Project'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Project'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="project_id" style="-webkit-appearance:auto;-moz-appearance:auto;appearance:auto;">
+                            <option value=""> <?= __('Select Any one'); ?> </option>
                             <?php if (count((array)$projects_res) > 0) {
                                 foreach ($projects_res as $value) {  ?>
                                     <option value="<?php echo $value['id']; ?>" <?php echo $trip_res['project_id'] == $value['id'] ? 'selected' : '' ?>> <?php echo  $value['project_name']; ?></option>
@@ -132,7 +132,7 @@ function h($s)
                 <!-- Budget -->
                 <div class="col-lg-2">
                     <div class="form-group m-l-5">
-                        <span class="form-label">Budget Amount</span>
+                        <span class="form-label"><?= __('Budget Amount'); ?></span>
                         <div class="input-group">
                             <span class="input-group-text addon-style"><i class="fa fa-inr"></i></span>
                             <input aria-label="0.00" type="number" step="any" min="0" class="form-control" name="budget_amount" placeholder="0.00" value="<?= h($trip_res['budget_amount'] ?? ''); ?>">
@@ -143,7 +143,7 @@ function h($s)
                 <!-- Final Amount -->
                 <div class="col-lg-2">
                     <div class="form-group m-l-5">
-                        <span class="form-label">Final Amount</span>
+                        <span class="form-label"><?= __('Final Amount'); ?></span>
                         <div class="input-group">
                             <span class="input-group-text addon-style"><i class="fa fa-dollar-sign"></i></span>
                             <input aria-label="0.00" type="number" step="any" min="0" class="form-control" name="final_amount" placeholder="0.00" value="<?= h($trip_res['final_amount'] ?? ''); ?>">
@@ -154,9 +154,9 @@ function h($s)
 
                 <div class="col-lg-4">
                     <div class="form-group m-l-5">
-                        <span class="form-label">Client</span>
-                        <select aria-label="Customer" class="form-control js-example-basic-single" name="customer_id" style="-webkit-appearance:auto;-moz-appearance:auto;appearance:auto;">
-                            <option value=""> Select Any one </option>
+                        <span class="form-label"><?= __('Client'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Customer'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="customer_id" style="-webkit-appearance:auto;-moz-appearance:auto;appearance:auto;">
+                            <option value=""> <?= __('Select Any one'); ?> </option>
                             <?php if (count((array)$clients_res) > 0) {
                                 foreach ($clients_res as $value) {  ?>
                                     <option value="<?php echo $value['id']; ?>" <?php echo $trip_res['customer_id'] == $value['id'] ? 'selected' : '' ?>> <?php echo  $value['display_name']; ?></option>
@@ -170,7 +170,7 @@ function h($s)
         </div>
 
         <div class="card-header mt-1">
-            <h5 class="f-w-600">Trip Itinerary</h5>
+            <h5 class="f-w-600"><?= __('Trip Itinerary'); ?></h5>
         </div>
         <div class="card-body">
 
@@ -181,8 +181,8 @@ function h($s)
                         <?php if (count((array)$journey_types) > 0) {
                             foreach ($journey_types as $row) { ?>
                                 <label class="radio radio-inline d-inline-block">
-                                    <input aria-label="Journey Type" type="radio" name="journey_type" class="journey-radio" value="<?php echo $row['genc_detail_code'] ?>" data-target=".sec-<?php echo $row['genc_detail_code'] ?>" <?= $journey_selected == $row['genc_detail_code']  ? 'checked' : ''; ?>>
-                                    <i class="helper"></i> <?php echo $row['genc_detail_name'] ?>
+                                    <input aria-label="<?= htmlspecialchars(__('Journey Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="journey_type" class="journey-radio" value="<?php echo $row['genc_detail_code'] ?>" data-target=".sec-<?php echo $row['genc_detail_code'] ?>" <?= $journey_selected == $row['genc_detail_code']  ? 'checked' : ''; ?>>
+                                    <i class="helper"></i> <?php echo __($row['genc_detail_name']) ?>
                                 </label>
 
                         <?php    }
@@ -200,30 +200,30 @@ function h($s)
                             <thead>
                                 <tr style="background-color: #eeeeee;">
                                     <th scope="col">#</th>
-                                    <th scope="col">Mode</th>
-                                    <th scope="col">Depart From</th>
-                                    <th scope="col">Arrive At</th>
-                                    <th scope="col">Departure Date</th>
-                                    <th scope="col">Departure Time</th>
-                                    <th scope="col">Description</th>
+                                    <th scope="col"><?= __('Mode'); ?></th>
+                                    <th scope="col"><?= __('Depart From'); ?></th>
+                                    <th scope="col"><?= __('Arrive At'); ?></th>
+                                    <th scope="col"><?= __('Departure Date'); ?></th>
+                                    <th scope="col"><?= __('Departure Time'); ?></th>
+                                    <th scope="col"><?= __('Description'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>1</td>
                                     <td class="w-full">
-                                        <select aria-label="Itinerary[0][travel Mode]" class="form-select js-example-basic-single" name="itinerary[0][travel_mode]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Itinerary[0][travel Mode]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="itinerary[0][travel_mode]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php if (count((array)$domestic_modes) > 0) {
                                                 foreach ($domestic_modes as $value) {  ?>
-                                                    <option value="<?php echo $value['genc_detail_code']; ?>" <?php echo $drt0['travel_mode'] == $value['genc_detail_code'] ? 'selected' : '' ?>> <?php echo  $value['genc_detail_name']; ?></option>
+                                                    <option value="<?php echo $value['genc_detail_code']; ?>" <?php echo $drt0['travel_mode'] == $value['genc_detail_code'] ? 'selected' : '' ?>> <?php echo  __($value['genc_detail_name']); ?></option>
                                             <?php }
                                             } ?>
                                         </select>
                                     </td>
                                     <td class="w-full">
-                                        <select aria-label="Itinerary[0][origin Location]" class="form-select js-example-basic-single city-select" name="itinerary[0][origin_location]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Itinerary[0][origin Location]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="itinerary[0][origin_location]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php if (count((array)$cities) > 0) {
                                                 foreach ($cities as $value) {  ?>
                                                     <option value="<?php echo $value['id']; ?>" <?php echo $drt0['origin_location'] == $value['id'] ? 'selected' : '' ?>> <?php echo  $value['city_name']; ?></option>
@@ -232,8 +232,8 @@ function h($s)
                                         </select>
                                     </td>
                                     <td class="w-full">
-                                        <select aria-label="Itinerary[0][destination Location]" class="form-select js-example-basic-single city-select" name="itinerary[0][destination_location]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Itinerary[0][destination Location]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="itinerary[0][destination_location]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php if (count((array)$cities) > 0) {
                                                 foreach ($cities as $value) {  ?>
                                                     <option value="<?php echo $value['id']; ?>" <?php echo $drt0['destination_location'] == $value['id'] ? 'selected' : '' ?>> <?php echo  $value['city_name']; ?></option>
@@ -241,9 +241,9 @@ function h($s)
                                             } ?>
                                         </select>
                                     </td>
-                                    <td><input aria-label="Itinerary[0][departure Date]" type="date" class="form-control" name="itinerary[0][departure_date]" value="<?php echo  $drt0['departure_date'] ?? ''; ?>" min="<?php echo date('Y-m-d'); ?>"></td>
-                                    <td><input aria-label="Itinerary[0][departure Time]" type="time" class="form-control" name="itinerary[0][departure_time]" value="<?php echo  $drt0['departure_time'] ?? ''; ?>" ></td>
-                                    <td><textarea aria-label="Itinerary[0][trip Purpose]" class="form-control" name="itinerary[0][trip_purpose]"><?php echo  $drt0['trip_purpose'] ?? ''; ?></textarea></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Itinerary[0][departure Date]'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="itinerary[0][departure_date]" value="<?php echo  $drt0['departure_date'] ?? ''; ?>" min="<?php echo date('Y-m-d'); ?>"></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Itinerary[0][departure Time]'), ENT_QUOTES, 'UTF-8'); ?>" type="time" class="form-control" name="itinerary[0][departure_time]" value="<?php echo  $drt0['departure_time'] ?? ''; ?>" ></td>
+                                    <td><textarea aria-label="<?= htmlspecialchars(__('Itinerary[0][trip Purpose]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="itinerary[0][trip_purpose]"><?php echo  $drt0['trip_purpose'] ?? ''; ?></textarea></td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -261,14 +261,14 @@ function h($s)
                             <thead>
                                 <tr style="background-color: #eeeeee;">
                                     <th scope="col">#</th>
-                                    <th scope="col">Mode</th>
-                                    <th scope="col">Depart From</th>
-                                    <th scope="col">Arrive At</th>
-                                    <th scope="col">Departure Date</th>
-                                    <th scope="col">Departure Time</th>
-                                    <th scope="col">Return Date</th>
-                                    <th scope="col">Return Time</th>
-                                    <th scope="col">Description</th>
+                                    <th scope="col"><?= __('Mode'); ?></th>
+                                    <th scope="col"><?= __('Depart From'); ?></th>
+                                    <th scope="col"><?= __('Arrive At'); ?></th>
+                                    <th scope="col"><?= __('Departure Date'); ?></th>
+                                    <th scope="col"><?= __('Departure Time'); ?></th>
+                                    <th scope="col"><?= __('Return Date'); ?></th>
+                                    <th scope="col"><?= __('Return Time'); ?></th>
+                                    <th scope="col"><?= __('Description'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -276,18 +276,18 @@ function h($s)
                                 <tr>
                                     <td>1</td>
                                     <td class="w-full">
-                                        <select aria-label="Itinerary[0][travel Mode]" class="form-select js-example-basic-single" name="itinerary[0][travel_mode]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Itinerary[0][travel Mode]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="itinerary[0][travel_mode]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php if (count((array)$domestic_modes) > 0) {
                                                 foreach ($domestic_modes as $value) {  ?>
-                                                    <option value="<?php echo $value['genc_detail_code']; ?>" <?php echo $drt0['travel_mode'] == $value['genc_detail_code'] ? 'selected' : '' ?>> <?php echo  $value['genc_detail_name']; ?></option>
+                                                    <option value="<?php echo $value['genc_detail_code']; ?>" <?php echo $drt0['travel_mode'] == $value['genc_detail_code'] ? 'selected' : '' ?>> <?php echo  __($value['genc_detail_name']); ?></option>
                                             <?php }
                                             } ?>
                                         </select>
                                     </td>
                                     <td class="w-full">
-                                        <select aria-label="Itinerary[0][origin Location]" class="form-select js-example-basic-single city-select" name="itinerary[0][origin_location]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Itinerary[0][origin Location]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="itinerary[0][origin_location]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php if (count((array)$cities) > 0) {
                                                 foreach ($cities as $value) {  ?>
                                                     <option value="<?php echo $value['id']; ?>" <?php echo $drt0['origin_location'] == $value['id'] ? 'selected' : '' ?>> <?php echo  $value['city_name']; ?></option>
@@ -296,8 +296,8 @@ function h($s)
                                         </select>
                                     </td>
                                     <td class="w-full">
-                                        <select aria-label="Itinerary[0][destination Location]" class="form-select js-example-basic-single city-select" name="itinerary[0][destination_location]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Itinerary[0][destination Location]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="itinerary[0][destination_location]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php if (count((array)$cities) > 0) {
                                                 foreach ($cities as $value) {  ?>
                                                     <option value="<?php echo $value['id']; ?>" <?php echo $drt0['destination_location'] == $value['id'] ? 'selected' : '' ?>> <?php echo  $value['city_name']; ?></option>
@@ -305,11 +305,11 @@ function h($s)
                                             } ?>
                                         </select>
                                     </td>
-                                    <td><input aria-label="Itinerary[0][departure Date]" type="date" class="form-control" name="itinerary[0][departure_date]" id="round_dep_date" value="<?php echo  $drt0['departure_date'] ?? ''; ?>" min="<?php echo date('Y-m-d'); ?>"></td>
-                                    <td><input aria-label="Itinerary[0][departure Time]" type="time" class="form-control" name="itinerary[0][departure_time]" value="<?php echo  $drt0['departure_time'] ?? ''; ?>" ></td>
-                                    <td><input aria-label="Itinerary[0][return Date]" type="date" class="form-control" name="itinerary[0][return_date]" id="round_ret_date" value="<?php echo  $drt0['return_date'] ?? ''; ?>" min="<?php echo date('Y-m-d'); ?>"></td>
-                                    <td><input aria-label="Itinerary[0][return Time]" type="time" class="form-control" name="itinerary[0][return_time]" value="<?php echo  $drt0['return_time'] ?? ''; ?>" ></td>
-                                    <td><textarea aria-label="Itinerary[0][trip Purpose]" class="form-control" name="itinerary[0][trip_purpose]"><?php echo  $drt0['trip_purpose'] ?? ''; ?></textarea></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Itinerary[0][departure Date]'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="itinerary[0][departure_date]" id="round_dep_date" value="<?php echo  $drt0['departure_date'] ?? ''; ?>" min="<?php echo date('Y-m-d'); ?>"></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Itinerary[0][departure Time]'), ENT_QUOTES, 'UTF-8'); ?>" type="time" class="form-control" name="itinerary[0][departure_time]" value="<?php echo  $drt0['departure_time'] ?? ''; ?>" ></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Itinerary[0][return Date]'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="itinerary[0][return_date]" id="round_ret_date" value="<?php echo  $drt0['return_date'] ?? ''; ?>" min="<?php echo date('Y-m-d'); ?>"></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Itinerary[0][return Time]'), ENT_QUOTES, 'UTF-8'); ?>" type="time" class="form-control" name="itinerary[0][return_time]" value="<?php echo  $drt0['return_time'] ?? ''; ?>" ></td>
+                                    <td><textarea aria-label="<?= htmlspecialchars(__('Itinerary[0][trip Purpose]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="itinerary[0][trip_purpose]"><?php echo  $drt0['trip_purpose'] ?? ''; ?></textarea></td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -327,13 +327,13 @@ function h($s)
                             <thead>
                                 <tr style="background-color: #eeeeee;">
                                     <th scope="col">#</th>
-                                    <th scope="col">Mode</th>
-                                    <th scope="col">Depart From</th>
-                                    <th scope="col">Arrive At</th>
-                                    <th scope="col">Departure Date</th>
-                                    <th scope="col">Departure Time</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Mode'); ?></th>
+                                    <th scope="col"><?= __('Depart From'); ?></th>
+                                    <th scope="col"><?= __('Arrive At'); ?></th>
+                                    <th scope="col"><?= __('Departure Date'); ?></th>
+                                    <th scope="col"><?= __('Departure Time'); ?></th>
+                                    <th scope="col"><?= __('Description'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody id="itinMultiBody">
@@ -343,18 +343,18 @@ function h($s)
                                         <tr>
                                             <td class="leg-no"><?= $i + 1 ?></td>
                                             <td class="w-full">
-                                                <select aria-label="Select option" class="form-select js-example-basic-single" name="itinerary[<?= $i ?>][travel_mode]">
-                                                    <option value=""> Select Any one </option>
+                                                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="itinerary[<?= $i ?>][travel_mode]">
+                                                    <option value=""> <?= __('Select Any one'); ?> </option>
                                                     <?php foreach ((array)$domestic_modes as $value): ?>
                                                         <option value="<?= $value['genc_detail_code'] ?>" <?= ($leg['travel_mode'] ?? null) == $value['genc_detail_code'] ? 'selected' : '' ?>>
-                                                            <?= htmlspecialchars($value['genc_detail_name']) ?>
+                                                            <?= htmlspecialchars(__($value['genc_detail_name'])) ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </td>
                                             <td class="w-full">
-                                                <select aria-label="Select option" class="form-select js-example-basic-single city-select" name="itinerary[<?= $i ?>][origin_location]">
-                                                    <option value=""> Select Any one </option>
+                                                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="itinerary[<?= $i ?>][origin_location]">
+                                                    <option value=""> <?= __('Select Any one'); ?> </option>
                                                     <?php foreach ((array)$cities as $value): ?>
                                                         <option value="<?= $value['id'] ?>" <?= ($leg['origin_location'] ?? null) == $value['id'] ? 'selected' : '' ?>>
                                                             <?= htmlspecialchars($value['city_name']) ?>
@@ -363,8 +363,8 @@ function h($s)
                                                 </select>
                                             </td>
                                             <td class="w-full">
-                                                <select aria-label="Select option" class="form-select js-example-basic-single city-select" name="itinerary[<?= $i ?>][destination_location]">
-                                                    <option value=""> Select Any one </option>
+                                                <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="itinerary[<?= $i ?>][destination_location]">
+                                                    <option value=""> <?= __('Select Any one'); ?> </option>
                                                     <?php foreach ((array)$cities as $value): ?>
                                                         <option value="<?= $value['id'] ?>" <?= ($leg['destination_location'] ?? null) == $value['id'] ? 'selected' : '' ?>>
                                                             <?= htmlspecialchars($value['city_name']) ?>
@@ -372,9 +372,9 @@ function h($s)
                                                     <?php endforeach; ?>
                                                 </select>
                                             </td>
-                                            <td><input aria-label="Select date" type="date" class="form-control" name="itinerary[<?= $i ?>][departure_date]" value="<?= htmlspecialchars($leg['departure_date'] ?? '') ?>" min="<?php echo date('Y-m-d'); ?>"></td>
-                                            <td><input aria-label="Input field" type="time" class="form-control" name="itinerary[<?= $i ?>][departure_time]" value="<?= htmlspecialchars(substr($leg['departure_time'] ?? '', 0, 5)) ?>" ></td>
-                                            <td><textarea aria-label="Text area" class="form-control" name="itinerary[<?= $i ?>][trip_purpose]"><?= htmlspecialchars($leg['trip_purpose'] ?? '') ?></textarea></td>
+                                            <td><input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="itinerary[<?= $i ?>][departure_date]" value="<?= htmlspecialchars($leg['departure_date'] ?? '') ?>" min="<?php echo date('Y-m-d'); ?>"></td>
+                                            <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="time" class="form-control" name="itinerary[<?= $i ?>][departure_time]" value="<?= htmlspecialchars(substr($leg['departure_time'] ?? '', 0, 5)) ?>" ></td>
+                                            <td><textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="itinerary[<?= $i ?>][trip_purpose]"><?= htmlspecialchars($leg['trip_purpose'] ?? '') ?></textarea></td>
                                             <td class="text-center"><i class="fa fa-trash text-danger itin-remove" style="cursor:pointer"></i></td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -382,18 +382,18 @@ function h($s)
                                     <tr>
                                         <td class="leg-no">1</td>
                                         <td class="w-full">
-                                            <select aria-label="Itinerary[0][travel Mode]" class="form-select js-example-basic-single" name="itinerary[0][travel_mode]">
-                                                <option value=""> Select Any one </option>
+                                            <select aria-label="<?= htmlspecialchars(__('Itinerary[0][travel Mode]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="itinerary[0][travel_mode]">
+                                                <option value=""> <?= __('Select Any one'); ?> </option>
                                                 <?php if (count((array)$domestic_modes) > 0) {
                                                     foreach ($domestic_modes as $value) {  ?>
-                                                        <option value="<?php echo $value['genc_detail_code']; ?>"> <?php echo  $value['genc_detail_name']; ?></option>
+                                                        <option value="<?php echo $value['genc_detail_code']; ?>"> <?php echo  __($value['genc_detail_name']); ?></option>
                                                 <?php }
                                                 } ?>
                                             </select>
                                         </td>
                                         <td class="w-full">
-                                            <select aria-label="Itinerary[0][origin Location]" class="form-select js-example-basic-single city-select" name="itinerary[0][origin_location]">
-                                                <option value=""> Select Any one </option>
+                                            <select aria-label="<?= htmlspecialchars(__('Itinerary[0][origin Location]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="itinerary[0][origin_location]">
+                                                <option value=""> <?= __('Select Any one'); ?> </option>
                                                 <?php if (count((array)$cities) > 0) {
                                                     foreach ($cities as $value) {  ?>
                                                         <option value="<?php echo $value['id']; ?>"> <?php echo  $value['city_name']; ?></option>
@@ -402,8 +402,8 @@ function h($s)
                                             </select>
                                         </td>
                                         <td class="w-full">
-                                            <select aria-label="Itinerary[0][destination Location]" class="form-select js-example-basic-single city-select" name="itinerary[0][destination_location]">
-                                                <option value=""> Select Any one </option>
+                                            <select aria-label="<?= htmlspecialchars(__('Itinerary[0][destination Location]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="itinerary[0][destination_location]">
+                                                <option value=""> <?= __('Select Any one'); ?> </option>
                                                 <?php if (count((array)$cities) > 0) {
                                                     foreach ($cities as $value) {  ?>
                                                         <option value="<?php echo $value['id']; ?>"> <?php echo  $value['city_name']; ?></option>
@@ -411,9 +411,9 @@ function h($s)
                                                 } ?>
                                             </select>
                                         </td>
-                                        <td><input aria-label="Itinerary[0][departure Date]" type="date" class="form-control" name="itinerary[0][departure_date]" min="<?php echo date('Y-m-d'); ?>"></td>
-                                        <td><input aria-label="Itinerary[0][departure Time]" type="time" class="form-control" name="itinerary[0][departure_time]" ></td>
-                                        <td><textarea aria-label="Itinerary[0][trip Purpose]" class="form-control" name="itinerary[0][trip_purpose]"></textarea></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Itinerary[0][departure Date]'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="itinerary[0][departure_date]" min="<?php echo date('Y-m-d'); ?>"></td>
+                                        <td><input aria-label="<?= htmlspecialchars(__('Itinerary[0][departure Time]'), ENT_QUOTES, 'UTF-8'); ?>" type="time" class="form-control" name="itinerary[0][departure_time]" ></td>
+                                        <td><textarea aria-label="<?= htmlspecialchars(__('Itinerary[0][trip Purpose]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="itinerary[0][trip_purpose]"></textarea></td>
                                         <td class="text-center"><i class="fa fa-trash text-danger itin-remove" style="cursor:pointer"></i></td>
                                     </tr>
                                 <?php endif; ?>
@@ -423,7 +423,7 @@ function h($s)
                                 <tr>
                                     <td colspan="7">
                                         <button type="button" id="btnAddItin" class="btn btn-primary">
-                                            <i class="fa fa-plus"></i> City
+                                            <i class="fa fa-plus"></i> <?= __('City'); ?>
                                         </button>
                                     </td>
                                 </tr>
@@ -434,18 +434,18 @@ function h($s)
             </div>
 
             <!-- HOTEL -->
-            <h4 class="mt-2">Hotel</h4>
+            <h4 class="mt-2"><?= __('Hotel'); ?></h4>
 
             <div class="table-responsive mt-1 ">
                 <table class="table table-hover" id="tblHotels">
                     <thead>
                         <tr style="background-color: #eeeeee;">
-                            <th scope="col">Location</th>
-                            <th scope="col">Hotel Name</th>
-                            <th scope="col">Check-In</th>
-                            <th scope="col">Check-Out</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('Location'); ?></th>
+                            <th scope="col"><?= __('Hotel Name'); ?></th>
+                            <th scope="col"><?= __('Check-In'); ?></th>
+                            <th scope="col"><?= __('Check-Out'); ?></th>
+                            <th scope="col"><?= __('Description'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody id="hotelBody">
@@ -453,8 +453,8 @@ function h($s)
                             <?php foreach ($trip_hotels_list as $i => $h): ?>
                                 <tr>
                                     <td class="w-full">
-                                        <select aria-label="Select option" class="form-select js-example-basic-single city-select" name="hotel[<?= $i ?>][location]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="hotel[<?= $i ?>][location]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php foreach ((array)$cities as $value): ?>
                                                 <option value="<?= $value['id'] ?>" <?= ($h['location'] ?? null) == $value['id'] ? 'selected' : '' ?>>
                                                     <?= htmlspecialchars($value['city_name']) ?>
@@ -462,10 +462,10 @@ function h($s)
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
-                                    <td><input aria-label="Input field" type="text" class="form-control" name="hotel[<?= $i ?>][hotel_name]" value="<?= htmlspecialchars($h['hotel_name'] ?? '') ?>"></td>
-                                    <td><input aria-label="Select date" type="date" class="form-control" name="hotel[<?= $i ?>][check_in]" value="<?= htmlspecialchars($h['check_in'] ?? '') ?>" min="<?php echo date('Y-m-d'); ?>"></td>
-                                    <td><input aria-label="Select date" type="date" class="form-control" name="hotel[<?= $i ?>][check_out]" value="<?= htmlspecialchars($h['check_out'] ?? '') ?>" min="<?php echo date('Y-m-d'); ?>"></td>
-                                    <td><textarea aria-label="Text area" class="form-control" name="hotel[<?= $i ?>][description]"><?= htmlspecialchars($h['description'] ?? '') ?></textarea></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="hotel[<?= $i ?>][hotel_name]" value="<?= htmlspecialchars($h['hotel_name'] ?? '') ?>"></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="hotel[<?= $i ?>][check_in]" value="<?= htmlspecialchars($h['check_in'] ?? '') ?>" min="<?php echo date('Y-m-d'); ?>"></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="hotel[<?= $i ?>][check_out]" value="<?= htmlspecialchars($h['check_out'] ?? '') ?>" min="<?php echo date('Y-m-d'); ?>"></td>
+                                    <td><textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="hotel[<?= $i ?>][description]"><?= htmlspecialchars($h['description'] ?? '') ?></textarea></td>
                                     <td class="text-center"><i class="fa fa-trash text-danger hotel-remove" style="cursor:pointer"></i></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -473,8 +473,8 @@ function h($s)
                             <tr>
 
                                 <td class="w-full">
-                                    <select aria-label="Hotel[0][location]" class="form-select js-example-basic-single city-select" name="hotel[0][location]">
-                                        <option value=""> Select Any one </option>
+                                    <select aria-label="<?= htmlspecialchars(__('Hotel[0][location]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="hotel[0][location]">
+                                        <option value=""> <?= __('Select Any one'); ?> </option>
                                         <?php if (count((array)$cities) > 0) {
                                             foreach ($cities as $value) {  ?>
                                                 <option value="<?php echo $value['id']; ?>"> <?php echo  $value['city_name']; ?></option>
@@ -482,11 +482,11 @@ function h($s)
                                         } ?>
                                     </select>
                                 </td>
-                                <td><input aria-label="Hotel[0][hotel Name]" type="text" class="form-control" name="hotel[0][hotel_name]" value=""></td>
+                                <td><input aria-label="<?= htmlspecialchars(__('Hotel[0][hotel Name]'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="hotel[0][hotel_name]" value=""></td>
 
-                                <td><input aria-label="Hotel[0][check In]" type="date" class="form-control" name="hotel[0][check_in]" value="" min="<?php echo date('Y-m-d'); ?>"></td>
-                                <td><input aria-label="Hotel[0][check Out]" type="date" class="form-control" name="hotel[0][check_out]" value="" min="<?php echo date('Y-m-d'); ?>"></td>
-                                <td><textarea aria-label="Hotel[0][description]" class="form-control" name="hotel[0][description]"></textarea></td>
+                                <td><input aria-label="<?= htmlspecialchars(__('Hotel[0][check In]'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="hotel[0][check_in]" value="" min="<?php echo date('Y-m-d'); ?>"></td>
+                                <td><input aria-label="<?= htmlspecialchars(__('Hotel[0][check Out]'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="hotel[0][check_out]" value="" min="<?php echo date('Y-m-d'); ?>"></td>
+                                <td><textarea aria-label="<?= htmlspecialchars(__('Hotel[0][description]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="hotel[0][description]"></textarea></td>
                                 <td class="text-center"><i class="fa fa-trash text-danger hotel-remove" style="cursor:pointer"></i></td>
                             </tr>
                         <?php endif; ?>
@@ -496,7 +496,7 @@ function h($s)
                         <tr>
                             <td colspan="6">
                                 <button type="button" id="btnAddHotel" class="btn btn-primary">
-                                    <i class="fa fa-plus"></i> Hotel
+                                    <i class="fa fa-plus"></i> <?= __('Hotel'); ?>
                                 </button>
                             </td>
                         </tr>
@@ -505,21 +505,21 @@ function h($s)
             </div>
 
             <!-- CAR RENT -->
-            <h4 class="mt-4">Local</h4>
+            <h4 class="mt-4"><?= __('Local'); ?></h4>
 
             <div class="table-responsive mt-1">
                 <table class="table table-hover" id="tblCars">
                     <thead>
                         <tr style="background-color: #eeeeee;">
-                            <th scope="col">Mode</th>
-                            <th scope="col">Pick-Up Location</th>
-                            <th scope="col">Drop Location</th>
-                            <th scope="col">Pick-Up</th>
-                            <th scope="col">Drop</th>
-                            <th scope="col">Car Type</th>
-                            <th scope="col">Driver Needed</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('Mode'); ?></th>
+                            <th scope="col"><?= __('Pick-Up Location'); ?></th>
+                            <th scope="col"><?= __('Drop Location'); ?></th>
+                            <th scope="col"><?= __('Pick-Up'); ?></th>
+                            <th scope="col"><?= __('Drop'); ?></th>
+                            <th scope="col"><?= __('Car Type'); ?></th>
+                            <th scope="col"><?= __('Driver Needed'); ?></th>
+                            <th scope="col"><?= __('Description'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody id="carBody">
@@ -527,18 +527,18 @@ function h($s)
                             <?php foreach ($local_trips_list as $i => $c): ?>
                                 <tr>
                                     <td class="w-full">
-                                        <select aria-label="Select option" class="form-select js-example-basic-single" name="car[<?= $i ?>][travel_mode]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="car[<?= $i ?>][travel_mode]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php foreach ((array)$local_modes as $value): ?>
                                                 <option value="<?= $value['genc_detail_code'] ?>" <?= ($c['travel_mode'] ?? null) == $value['genc_detail_code'] ? 'selected' : '' ?>>
-                                                    <?= htmlspecialchars($value['genc_detail_name']) ?>
+                                                    <?= htmlspecialchars(__($value['genc_detail_name'])) ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
                                     <td class="w-full">
-                                        <select aria-label="Select option" class="form-select js-example-basic-single city-select" name="car[<?= $i ?>][from_location]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="car[<?= $i ?>][from_location]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php foreach ((array)$cities as $value): ?>
                                                 <option value="<?= $value['id'] ?>" <?= ($c['from_location'] ?? null) == $value['id'] ? 'selected' : '' ?>>
                                                     <?= htmlspecialchars($value['city_name']) ?>
@@ -547,8 +547,8 @@ function h($s)
                                         </select>
                                     </td>
                                     <td class="w-full">
-                                        <select aria-label="Select option" class="form-select js-example-basic-single city-select" name="car[<?= $i ?>][to_location]">
-                                            <option value=""> Select Any one </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="car[<?= $i ?>][to_location]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
                                             <?php foreach ((array)$cities as $value): ?>
                                                 <option value="<?= $value['id'] ?>" <?= ($c['to_location'] ?? null) == $value['id'] ? 'selected' : '' ?>>
                                                     <?= htmlspecialchars($value['city_name']) ?>
@@ -556,47 +556,47 @@ function h($s)
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
-                                    <td><input aria-label="Input field" type="datetime-local" class="form-control" name="car[<?= $i ?>][pickup_at]" value="<?= htmlspecialchars(!empty($c['pickup_at']) ? date('Y-m-d\TH:i', strtotime($c['pickup_at'])) : '') ?>"></td>
-                                    <td><input aria-label="Input field" type="datetime-local" class="form-control" name="car[<?= $i ?>][dropoff_at]" value="<?= htmlspecialchars(!empty($c['dropoff_at']) ? date('Y-m-d\TH:i', strtotime($c['dropoff_at'])) : '') ?>"></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="datetime-local" class="form-control" name="car[<?= $i ?>][pickup_at]" value="<?= htmlspecialchars(!empty($c['pickup_at']) ? date('Y-m-d\TH:i', strtotime($c['pickup_at'])) : '') ?>"></td>
+                                    <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="datetime-local" class="form-control" name="car[<?= $i ?>][dropoff_at]" value="<?= htmlspecialchars(!empty($c['dropoff_at']) ? date('Y-m-d\TH:i', strtotime($c['dropoff_at'])) : '') ?>"></td>
                                     <td class="w-full">
-                                        <select aria-label="Select option" class="form-select js-example-basic-single" name="car[<?= $i ?>][car_type]">
-                                            <option value=""> Select Any one </option>
-                                            <option value="Small" <?= ($c['car_type'] ?? '') === 'Small'  ? 'selected' : '' ?>>Small</option>
-                                            <option value="Medium" <?= ($c['car_type'] ?? '') === 'Medium' ? 'selected' : '' ?>>Medium</option>
-                                            <option value="Large" <?= ($c['car_type'] ?? '') === 'Large'  ? 'selected' : '' ?>>Large</option>
+                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="car[<?= $i ?>][car_type]">
+                                            <option value=""> <?= __('Select Any one'); ?> </option>
+                                            <option value="Small" <?= ($c['car_type'] ?? '') === 'Small'  ? 'selected' : '' ?>><?= __('Small'); ?></option>
+                                            <option value="Medium" <?= ($c['car_type'] ?? '') === 'Medium' ? 'selected' : '' ?>><?= __('Medium'); ?></option>
+                                            <option value="Large" <?= ($c['car_type'] ?? '') === 'Large'  ? 'selected' : '' ?>><?= __('Large'); ?></option>
                                         </select>
                                     </td>
                                     <td>
 
                                         <div class="form-radio radio">
                                             <label class="form-label me-2">
-                                                <input aria-label="Radio option" type="radio" name="car[<?= $i ?>][driver_needed]" value="0" <?= (isset($c['driver_needed']) && $c['driver_needed'] == '0') ? 'checked' : '' ?>><i class="helper"></i> Yes
+                                                <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="car[<?= $i ?>][driver_needed]" value="0" <?= (isset($c['driver_needed']) && $c['driver_needed'] == '0') ? 'checked' : '' ?>><i class="helper"></i> <?= __('Yes'); ?>
                                             </label>
                                             <label class="form-label">
-                                                <input aria-label="Radio option" type="radio" name="car[<?= $i ?>][driver_needed]" value="1" <?= (isset($c['driver_needed']) && $c['driver_needed'] == '1') ? 'checked' : '' ?>> <i class="helper"></i> No
+                                                <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="car[<?= $i ?>][driver_needed]" value="1" <?= (isset($c['driver_needed']) && $c['driver_needed'] == '1') ? 'checked' : '' ?>> <i class="helper"></i> <?= __('No'); ?>
                                             </label>
                                         </div>
                                     </td>
-                                    <td><textarea aria-label="Text area" class="form-control" name="car[<?= $i ?>][trip_purpose]"><?= htmlspecialchars($c['trip_purpose'] ?? '') ?></textarea></td>
+                                    <td><textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="car[<?= $i ?>][trip_purpose]"><?= htmlspecialchars($c['trip_purpose'] ?? '') ?></textarea></td>
                                     <td class="text-center"><i class="fa fa-trash text-danger car-remove" style="cursor:pointer"></i></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
                                 <td class="w-full">
-                                    <select aria-label="Car[0][travel Mode]" class="form-select js-example-basic-single" name="car[0][travel_mode]">
-                                        <option value=""> Select Any one </option>
+                                    <select aria-label="<?= htmlspecialchars(__('Car[0][travel Mode]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="car[0][travel_mode]">
+                                        <option value=""> <?= __('Select Any one'); ?> </option>
                                         <?php if (count((array)$local_modes) > 0) {
                                             foreach ($local_modes as $value) {  ?>
-                                                <option value="<?php echo $value['genc_detail_code']; ?>"> <?php echo  $value['genc_detail_name']; ?></option>
+                                                <option value="<?php echo $value['genc_detail_code']; ?>"> <?php echo  __($value['genc_detail_name']); ?></option>
                                         <?php }
                                         } ?>
                                     </select>
                                 </td>
 
                                 <td class="w-full">
-                                    <select aria-label="Car[0][from Location]" class="form-select js-example-basic-single city-select" name="car[0][from_location]">
-                                        <option value=""> Select Any one </option>
+                                    <select aria-label="<?= htmlspecialchars(__('Car[0][from Location]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="car[0][from_location]">
+                                        <option value=""> <?= __('Select Any one'); ?> </option>
                                         <?php if (count((array)$cities) > 0) {
                                             foreach ($cities as $value) {  ?>
                                                 <option value="<?php echo $value['id']; ?>"> <?php echo  $value['city_name']; ?></option>
@@ -605,8 +605,8 @@ function h($s)
                                     </select>
                                 </td>
                                 <td class="w-full">
-                                    <select aria-label="Car[0][to Location]" class="form-select js-example-basic-single city-select" name="car[0][to_location]">
-                                        <option value=""> Select Any one </option>
+                                    <select aria-label="<?= htmlspecialchars(__('Car[0][to Location]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single city-select" name="car[0][to_location]">
+                                        <option value=""> <?= __('Select Any one'); ?> </option>
                                         <?php if (count((array)$cities) > 0) {
                                             foreach ($cities as $value) {  ?>
                                                 <option value="<?php echo $value['id']; ?>"> <?php echo  $value['city_name']; ?></option>
@@ -614,31 +614,31 @@ function h($s)
                                         } ?>
                                     </select>
                                 </td>
-                                <td><input aria-label="Car[0][pickup At]" type="datetime-local" class="form-control" name="car[0][pickup_at]" value=""></td>
-                                <td><input aria-label="Car[0][dropoff At]" type="datetime-local" class="form-control" name="car[0][dropoff_at]" value=""></td>
+                                <td><input aria-label="<?= htmlspecialchars(__('Car[0][pickup At]'), ENT_QUOTES, 'UTF-8'); ?>" type="datetime-local" class="form-control" name="car[0][pickup_at]" value=""></td>
+                                <td><input aria-label="<?= htmlspecialchars(__('Car[0][dropoff At]'), ENT_QUOTES, 'UTF-8'); ?>" type="datetime-local" class="form-control" name="car[0][dropoff_at]" value=""></td>
                                 <td class="w-full">
-                                    <select aria-label="Car[0][car Type]" class="form-select js-example-basic-single" name="car[0][car_type]">
+                                    <select aria-label="<?= htmlspecialchars(__('Car[0][car Type]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="car[0][car_type]">
 
-                                        <option value=""> Select Any one </option>
-                                        <option value="Small"> Small </option>
-                                        <option value="Medium"> Medium </option>
-                                        <option value="Large"> Large </option>
+                                        <option value=""> <?= __('Select Any one'); ?> </option>
+                                        <option value="Small"> <?= __('Small'); ?> </option>
+                                        <option value="Medium"> <?= __('Medium'); ?> </option>
+                                        <option value="Large"> <?= __('Large'); ?> </option>
 
                                     </select>
                                 </td>
                                 <td>
                                     <div class="form-radio radio ">
                                         <label class="form-label me-2">
-                                            <input aria-label="Car[0][driver Needed]" type="radio" name="car[0][driver_needed]" value="0">
-                                            <i class="helper"></i>Yes
+                                            <input aria-label="<?= htmlspecialchars(__('Car[0][driver Needed]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="car[0][driver_needed]" value="0">
+                                            <i class="helper"></i><?= __('Yes'); ?>
                                         </label>
                                         <label class="form-label">
-                                            <input aria-label="Car[0][driver Needed]" type="radio" name="car[0][driver_needed]" value="1">
-                                            <i class="helper"></i>No
+                                            <input aria-label="<?= htmlspecialchars(__('Car[0][driver Needed]'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="car[0][driver_needed]" value="1">
+                                            <i class="helper"></i><?= __('No'); ?>
                                         </label>
                                     </div>
                                 </td>
-                                <td><textarea aria-label="Car[0][trip Purpose]" class="form-control" name="car[0][trip_purpose]"></textarea></td>
+                                <td><textarea aria-label="<?= htmlspecialchars(__('Car[0][trip Purpose]'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="car[0][trip_purpose]"></textarea></td>
                                 <td class="text-center"><i class="fa fa-trash text-danger car-remove" style="cursor:pointer"></i></td>
                             </tr>
                         <?php endif; ?>
@@ -648,7 +648,7 @@ function h($s)
                         <tr>
                             <td colspan="9">
                                 <button type="button" id="btnAddCar" class="btn btn-primary">
-                                    <i class="fa fa-plus"></i> Local Rental
+                                    <i class="fa fa-plus"></i> <?= __('Local Rental'); ?>
                                 </button>
                             </td>
                         </tr>
@@ -660,12 +660,12 @@ function h($s)
                 <div class="col-lg-12">
                     <?php if (empty($rid)) { ?>
                         <button type="submit" name="submit" value="insert" class="btn btn-primary mt-2">
-                            <i class="fa fa-save"></i> Save
+                            <i class="fa fa-save"></i> <?= __('Save'); ?>
                         </button>
                     <?php } else { ?>
                         <input type="hidden" name="trip_id" value="<?= (int)$rid ?>" />
                         <button type="submit" name="submit" value="update" class="btn btn-primary mt-2">
-                            <i class="fa fa-save"></i> Save
+                            <i class="fa fa-save"></i> <?= __('Save'); ?>
                         </button>
                     <?php } ?>
 
@@ -722,7 +722,7 @@ function h($s)
             <select aria-label="Itinerary[${idx}][travel Mode]" class="form-select js-example-basic-single" name="itinerary[${idx}][travel_mode]">
               <option value=""> Select Any one </option>
               <?php foreach((array)$domestic_modes as $v){ ?>
-                <option value="<?= $v['genc_detail_code'] ?>"><?= htmlspecialchars($v['genc_detail_name']) ?></option>
+                <option value="<?= $v['genc_detail_code'] ?>"><?= htmlspecialchars(__($v['genc_detail_name'])) ?></option>
               <?php } ?>
             </select>
           </td>
@@ -789,7 +789,7 @@ function h($s)
             <select aria-label="Car[${idx}][travel Mode]" class="form-select js-example-basic-single" name="car[${idx}][travel_mode]">
               <option value=""> Select Any one </option>
               <?php foreach((array)$local_modes as $v){ ?>
-                <option value="<?= $v['genc_detail_code'] ?>"><?= htmlspecialchars($v['genc_detail_name']) ?></option>
+                <option value="<?= $v['genc_detail_code'] ?>"><?= htmlspecialchars(__($v['genc_detail_name'])) ?></option>
               <?php } ?>
             </select>
           </td>
@@ -1040,7 +1040,7 @@ function initCitySelect($ctx) {
     console.log('init city select', this.name);
     $(this).select2({
       width: '100%',
-      placeholder: 'Select a city',
+      placeholder: <?php echo json_encode(__('Select a city'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
       allowClear: true,
       minimumInputLength: 2,      // start after 2 chars
       ajax: {

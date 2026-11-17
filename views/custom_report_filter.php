@@ -83,9 +83,9 @@ $comparator_array = array('=','!=','>','>=','<','<=');
             type: "POST",
             success:function(data){
                 console.log(data);
-                    $("#field_id").html("<select aria-label='Field Name' class='form-control form-select js-example-basic-single' id ='field_name' name='field_name'>"+data+"</select>");
-                    $("#label_id").html("<select aria-label='Value' class='form-control form-select js-example-basic-single' id='value' name='value'>"+data+"</select>");
-                    $("#order_by").html("<select aria-label='Order By' class='form-control form-select js-example-basic-single' id='order_by' name='order_by'>"+data+"</select>");
+                    $("#field_id").html("<select aria-label='<?= htmlspecialchars(__('Field Name'), ENT_QUOTES, 'UTF-8'); ?>' class='form-control form-select js-example-basic-single' id ='field_name' name='field_name'>"+data+"</select>");
+                    $("#label_id").html("<select aria-label='<?= htmlspecialchars(__('Value'), ENT_QUOTES, 'UTF-8'); ?>' class='form-control form-select js-example-basic-single' id='value' name='value'>"+data+"</select>");
+                    $("#order_by").html("<select aria-label='<?= htmlspecialchars(__('Order By'), ENT_QUOTES, 'UTF-8'); ?>' class='form-control form-select js-example-basic-single' id='order_by' name='order_by'>"+data+"</select>");
                     $("#drop").val(data);
                     $("#dis_custom_sql").val('');
 
@@ -143,14 +143,14 @@ $comparator_array = array('=','!=','>','>=','<','<=');
             success: function(response) {
                 console.log(response);
                 swal.fire({
-                            title: "Record has been saved successfully ",
-                            text: "Do you want to close ? ",
+                            title: <?php echo json_encode(__('Record has been saved successfully').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                            text: <?php echo json_encode(__('Do you want to close ?').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             type: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
                             confirmButtonClass: "btn btn-danger",
                             showCancelButton: true,
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                             cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {
@@ -218,7 +218,7 @@ $comparator_array = array('=','!=','>','>=','<','<=');
         htmlRows += '</div>';
 
         htmlRows += '<div class="col-lg-3">';
-        htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)">Delete</button>';
+        htmlRows += ' <input type="hidden" value="0" id="static_delete_value_'+count+'" ><button class="btn btn-warning" id="'+count+'" type="button" onclick="deleteRows(this.id)"><?= htmlspecialchars(__('Delete'), ENT_QUOTES, 'UTF-8'); ?></button>';
         htmlRows += '</div>';
         htmlRows += '</div>';
         $('#append_statick').append(htmlRows);
@@ -234,7 +234,7 @@ function addRows123() {
         htmlRows += '<td><select aria-label="Comparator[]" class="form-control form-select js-example-basic-single" id="comparator__2"+count+'" name= "comparator[]"  ><?php foreach ($comparator_array as $dd) {  ?><option  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php
 } ?> </select></td>';
         htmlRows += '<td><input aria-label="Whrvalue[]" type="text" id="whrvalue__2"+count+'" name="whrvalue[]"  class="form-control amount" ></td>';
-        htmlRows += '<td><select aria-label="Operand[]" class="form-control form-select js-example-basic-single "  id="operand__2"+count+'"  name= "operand[]" id=""  >    <option value="AND"> AND </option><option  value = "OR"> OR </option>    </select></td>';
+        htmlRows += '<td><select aria-label="Operand[]" class="form-control form-select js-example-basic-single "  id="operand__2"+count+'"  name= "operand[]" id=""  >    <option value="AND"> <?= htmlspecialchars(__('AND'), ENT_QUOTES, 'UTF-8'); ?> </option><option  value = "OR"> OR </option>    </select></td>';
         htmlRows += '<td><input type="hidden" id="delete_value__2"+count+'" value="0"><button class="btn btn-warning" id="'+count+'" type="button" onclick="deletestatickRows(this.id)">Delete</button></td>';
         htmlRows += '</tr>';
         console.log(htmlRows);
@@ -274,10 +274,10 @@ function addRows123() {
 
     <div class="modal-header">
                         <h5 class="modal-title">
-                            Field Datasource
-                            <small>&nbsp;&nbsp;  Field: </b>&nbsp; <?php echo $field; ?> </small>
+                            <?= __('Field Datasource'); ?>
+                            <small>&nbsp;&nbsp;  <?= __('Field'); ?>: </b>&nbsp; <?php echo $field; ?> </small>
                         </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                     </div>
                     <div class="modal-body" >
 
@@ -289,14 +289,14 @@ function addRows123() {
                                 <div class="col-lg-2">
                                     <label class="kt-radio kt-radio--solid">
                                         <input type="hidden"  id='type_value' value="<?php echo $attribute_type; ?>"  name="type_value">
-                                    <input aria-label="Type" type="radio"  id='type' value="custom_sql"  name="type" <?php if($attribute_type != 'static' ){ ?> checked="checked" <?php
-} ?> onchange="difftype(this.value)"> From Table <span></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  id='type' value="custom_sql"  name="type" <?php if($attribute_type != 'static' ){ ?> checked="checked" <?php
+} ?> onchange="difftype(this.value)"> <?= __('From Table'); ?> <span></span>
                                     </label>
                                 </div>
                                 <div class="col-lg-2">
                                     <label class="kt-radio kt-radio--solid">
-                                        <input aria-label="Type" type="radio" id="type_2"  value="static"  name="type"  <?php if($attribute_type == 'static' ){ ?> checked="checked" <?php
-} ?> onchange="difftype(this.value)"> Static values<span></span>
+                                        <input aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" id="type_2"  value="static"  name="type"  <?php if($attribute_type == 'static' ){ ?> checked="checked" <?php
+} ?> onchange="difftype(this.value)"> <?= __('Static values'); ?><span></span>
                                     </label>
                                 </div>
 
@@ -305,9 +305,9 @@ function addRows123() {
 } ?> >
                             <div class="row align-items-center" style="margin-top: 10px;">
                                 <div class="col-lg-3">
-                                    <span>Table</span>
-                                     <select aria-label="Table Name" class="form-control form-select js-example-basic-single" id="table_name" name= "table_name" onchange="Getfields(this.value)">
-                                         <option value="">Select Table Name</option>
+                                    <span><?= __('Table'); ?></span>
+                                     <select aria-label="<?= htmlspecialchars(__('Table Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="table_name" name= "table_name" onchange="Getfields(this.value)">
+                                         <option value=""><?= __('Select Table Name'); ?></option>
                                            <?php foreach ($showtables1 as $key => $data) {  ?>
                                                <option   value = <?php echo $data ?> <?php if($table_name_field == $data){ echo "selected";
 } ?>   > <?php echo ucwords(str_replace('_',' ',$data)); ?> </option>
@@ -315,10 +315,10 @@ function addRows123() {
                                     </select>
                                 </div>
                                 <div class="col-lg-2">
-                                    <span>value Filed</span>
+                                    <span><?= __('value Filed'); ?></span>
                                     <div id='field_id'>
-                                     <select aria-label="Field Name" class="form-control form-select js-example-basic-single" id='field_name_2' name="field_name">
-                                           <option value="-1">Select Filed</option>
+                                     <select aria-label="<?= htmlspecialchars(__('Field Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id='field_name_2' name="field_name">
+                                           <option value="-1"><?= __('Select Filed'); ?></option>
                                            <?php foreach ($view['list'] as  $list) { ?>
                                                <option value="<?php echo $list; ?>" <?php if($view['value_field'] == $list){ echo "selected";
 } ?> ><?php echo $list; ?></option>
@@ -327,10 +327,10 @@ function addRows123() {
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
-                                    <span>Lable Filed</span>
+                                    <span><?= __('Lable Filed'); ?></span>
                                     <div id='label_id'>
-                                         <select aria-label="Value" class="form-control form-select js-example-basic-single" id="value_2" name="value">
-                                               <option value="-1">Select Filed</option>
+                                         <select aria-label="<?= htmlspecialchars(__('Value'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="value_2" name="value">
+                                               <option value="-1"><?= __('Select Filed'); ?></option>
                                                <?php foreach ($view['list'] as  $list) { ?>
                                                <option value="<?php echo $list; ?>" <?php if($view['display_field'] == $list){ echo "selected";
 } ?> ><?php echo $list; ?></option>
@@ -340,11 +340,11 @@ function addRows123() {
                                     </div>
                                 </div>
 <div class="col-lg-2" id='order_check_order'>
-                                    <span>Order By Field</span>
+                                    <span><?= __('Order By Field'); ?></span>
                                     <div >
                                         <input type="hidden" name="drop" id="drop" value="<?php echo $duplicate; ?>">
-                                         <select aria-label="Order By" class="form-control form-select js-example-basic-single" id="order_by_2" name="order_by">
-                                               <option value="-1">Select Filed</option>
+                                         <select aria-label="<?= htmlspecialchars(__('Order By'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="order_by_2" name="order_by">
+                                               <option value="-1"><?= __('Select Filed'); ?></option>
                                                <?php foreach ($view['list'] as  $list) { ?>
                                                <option value="<?php echo $list; ?>" <?php if($view_details['order_by'] == $list){ echo "selected";
 } ?> ><?php echo $list; ?></option>
@@ -354,12 +354,12 @@ function addRows123() {
                                     </div>
                                 </div>
                                 <div class="col-lg-2" id='order_check_soft'>
-                                    <span>Sort</span>
+                                    <span><?= __('Sort'); ?></span>
                                     <div>
-                                         <select aria-label="Sort" class="form-control form-select js-example-basic-single" id="sort" name="sort">
-                                               <option  value="ASC">ASC</option>
+                                         <select aria-label="<?= htmlspecialchars(__('Sort'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="sort" name="sort">
+                                               <option  value="ASC"><?= __('ASC'); ?></option>
                                                <option  <?php if($view_details['sort'] == 'DESC'){ echo "selected";
-} ?>  value="DESC">DESC</option>
+} ?>  value="DESC"><?= __('DESC'); ?></option>
                                         </select>
                                     </div>
                                 </div>
@@ -371,11 +371,11 @@ function addRows123() {
                                 <div class="col-lg-7">
                                     <table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItemffff">
                                             <tr>
-                                                <th scope="col" class="" style="width: 15%;">Field</th>
-                                                <th scope="col" class="thheader" style="width: 5%;">Comparator</th>
-                                                <th scope="col" class="thheader" style="width: 15%;">Value</th>
-                                                <th scope="col" class="thheader" style="width: 5%;">oprandes</th>
-                                                <th scope="col" class="thheader" style="width: 5%;">Delete</th>
+                                                <th scope="col" class="" style="width: 15%;"><?= __('Field'); ?></th>
+                                                <th scope="col" class="thheader" style="width: 5%;"><?= __('Comparator'); ?></th>
+                                                <th scope="col" class="thheader" style="width: 15%;"><?= __('Value'); ?></th>
+                                                <th scope="col" class="thheader" style="width: 5%;"><?= __('oprandes'); ?></th>
+                                                <th scope="col" class="thheader" style="width: 5%;"><?= __('Delete'); ?></th>
                                             </tr>
                                             <?php if(count((array)$tr)>0){
                                                 $count = 1;
@@ -384,7 +384,7 @@ function addRows123() {
 
                                                 <tr id="qur_div_<?php echo $count; ?>" >
                                                     <td>
-                                                        <select aria-label="Select option" class="form-control fitemRow form-select js-example-basic-single" id="whrfield_<?php echo $count; ?>" name= "whrfield[]" >
+                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fitemRow form-select js-example-basic-single" id="whrfield_<?php echo $count; ?>" name= "whrfield[]" >
                                                             <?php foreach ($view['list'] as  $list) { ?>
                                                                    <option value="<?php echo $list; ?>" <?php if($td['drop_field'] == $list){ echo "selected";
 } ?> ><?php echo $list; ?></option>
@@ -392,7 +392,7 @@ function addRows123() {
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <select aria-label="Select option" class="form-control form-select js-example-basic-single" id="comparator_<?php echo $count; ?>" name= "comparator[]"  >
+                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="comparator_<?php echo $count; ?>" name= "comparator[]"  >
                                                         <?php foreach ($comparator_array as $dd) {  ?>
                                                             <option  <?php if($td['drop_condition'] == $dd){ echo "selected";
 } ?>  value = "<?php echo $dd; ?>"> <?php echo $dd; ?> </option> <?php
@@ -400,18 +400,18 @@ function addRows123() {
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input aria-label="Input field" type="text" value="<?php echo $td['drop_value']?>" id="whrvalue_<?php echo $count; ?>" name="whrvalue[]"  class="form-control amount"  >
+                                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" value="<?php echo $td['drop_value']?>" id="whrvalue_<?php echo $count; ?>" name="whrvalue[]"  class="form-control amount"  >
                                                     </td>
                                                     <td>
-                                                        <select aria-label="Select option" class="form-control form-select js-example-basic-single"  id="operand_<?php echo $count; ?>"  name= "operand[]" id=""  >
-                                                            <option value="AND"> AND </option>
+                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single"  id="operand_<?php echo $count; ?>"  name= "operand[]" id=""  >
+                                                            <option value="AND"> <?= __('AND'); ?> </option>
                                                             <option <?php if($td['drop_condition'] == $dd){ echo "selected";
-} ?>  value = "OR"> OR </option>
+} ?>  value = "OR"> <?= __('OR'); ?> </option>
                                                         </select>
                                                     </td>
                                                     <td>
                                                         <input type="hidden" value="0" id="delete_value_<?php echo $count; ?>" >
-                                                        <button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)">Delete</button>
+                                                        <button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)"><?= __('Delete'); ?></button>
                                                     </td>
                                                 </tr>
                                             <?php $count++; ?>
@@ -420,16 +420,16 @@ function addRows123() {
                                     </table>
                                 </div>
                                 <div class="col-lg-5">
-                                        <span>Select Query</span>
+                                        <span><?= __('Select Query'); ?></span>
                                         <div class="kt-input-icon">
-                                            <textarea aria-label="Dis Custom Sql" class="form-control"  type="text" id="dis_custom_sql" name="dis_custom_sql" style="height: 80px;" value=""> <?php echo urldecode($view['content']); ?></textarea>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Dis Custom Sql'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text" id="dis_custom_sql" name="dis_custom_sql" style="height: 80px;" value=""> <?php echo urldecode($view['content']); ?></textarea>
                                         </div>
                                 </div>
                             </div>
 
                         <div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
-                                <button class="btn btn-success col-lg-2" id="addRows" type="button" onclick="addRows123()">+ Add More</button>&nbsp;&nbsp;
-                                <button type="button" class="btn btn-primary col-lg-2" onclick="createselectquery()">Bulid Query</button>&nbsp;&nbsp;
+                                <button class="btn btn-success col-lg-2" id="addRows" type="button" onclick="addRows123()">+ <?= __('Add More'); ?></button>&nbsp;&nbsp;
+                                <button type="button" class="btn btn-primary col-lg-2" onclick="createselectquery()"><?= __('Bulid Query'); ?></button>&nbsp;&nbsp;
 
                             </div>
 
@@ -441,10 +441,10 @@ function addRows123() {
                             <div id='append_statick'>
                                 <div class="row align-items-center" style="margin-top: 10px;">
                                     <div class="col-lg-3">
-                                        <span><b>value</b></span>
+                                        <span><b><?= __('value'); ?></b></span>
                                     </div>
                                     <div class="col-lg-3">
-                                        <span><b>Lable</b></span>
+                                        <span><b><?= __('Lable'); ?></b></span>
                                     </div>
                                     <div class="col-lg-3">
                                         <span><b></b></span>
@@ -455,14 +455,14 @@ function addRows123() {
                                     foreach($static_str as $key => $sstr){ ?>
                                 <div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
                                     <div class="col-lg-3">
-                                        <input aria-label="Input field" type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $key; ?>"  name="type">
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $key; ?>"  name="type">
                                     </div>
                                     <div class="col-lg-3">
-                                        <input aria-label="Input field" type="text"class="form-control"  id="static_lable_<?php echo $i; ?>"  value="<?php echo $sstr; ?>"  name="type">
+                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"class="form-control"  id="static_lable_<?php echo $i; ?>"  value="<?php echo $sstr; ?>"  name="type">
                                     </div>
                                     <div class="col-lg-3">
                                         <input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
-                                        <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)">Delete</button>
+                                        <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)"><?= __('Delete'); ?></button>
                                     </div>
                                 </div>
                             <?php $i++;
@@ -470,20 +470,20 @@ function addRows123() {
 } else{ ?>
                                 <div class="row align-items-center sfitemRow" id="static_div_1" style="margin-top: 10px;">
                                     <div class="col-lg-3">
-                                        <input aria-label="Type" type="text" class="form-control"  id="static_value_1"  value=""  name="type">
+                                        <input aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  id="static_value_1"  value=""  name="type">
                                     </div>
                                     <div class="col-lg-3">
-                                        <input aria-label="Type" type="text"class="form-control"  id="static_lable_1"  value=""  name="type">
+                                        <input aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>" type="text"class="form-control"  id="static_lable_1"  value=""  name="type">
                                     </div>
                                     <div class="col-lg-3">
                                         <input type="hidden" value="0" id="static_delete_value_1" >
-                                        <button class="btn btn-warning" id="1" type="button" onclick="deleteRows(this.id)">Delete</button>
+                                        <button class="btn btn-warning" id="1" type="button" onclick="deleteRows(this.id)"><?= __('Delete'); ?></button>
                                     </div>
                                 </div>
                             <?php } ?>
                             </div>
                             <div class="row align-items-center" style="margin-top: 10px;">
-                                <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRows123()">+ Add More</button>&nbsp;&nbsp;
+                                <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRows123()">+ <?= __('Add More'); ?></button>&nbsp;&nbsp;
                             </div>
                         </div>
                         <!----------- defalut start ----------->
@@ -498,8 +498,8 @@ function addRows123() {
                 <input type="hidden" name="field" id='field' value="<?php echo $field; ?>">
                 <input type="hidden" name="report_id" id='report_id' value="<?php echo $report_id; ?>">
                 <input type="hidden" name="page" value="dis_submit">
-                <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitrom()" >Submit</button>
+                <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
+                <button type="button" class="btn btn-primary waves-effect waves-light" onclick="submitrom()" ><?= __('Submit'); ?></button>
             </div>
 
     </form>

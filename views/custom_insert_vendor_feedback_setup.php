@@ -152,7 +152,7 @@ function addCategoryName() {
              console.log("jdonpare:"+result);
             console.log("last id:"+result.LASTID);
             tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Category is added successfully','');
-            var str = '<div class="mt-3" id="cat_id_'+result.LASTID+'"><div class=" col-lg-12 row" style="clear: both;"> <div class="col-lg-10 f-15 f-w-600 p-2 text-info"><input aria-label="Category" class="cat_1" type="text"  name="category" value="'+category_name+'" onblur="updatedetail('+result.LASTID+')" ></div> <div class="col-lg-2 text-right"><button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addQuestion('+result.LASTID+')"><i class="icofont icofont-plus icon-white "></i>Questions</button></div> </div> <div class="m-l-15 " id="cat_que_id_'+result.LASTID+'"></div>';
+            var str = '<div class="mt-3" id="cat_id_'+result.LASTID+'"><div class=" col-lg-12 row" style="clear: both;"> <div class="col-lg-10 f-15 f-w-600 p-2 text-info"><input aria-label="Category" class="cat_1" type="text"  name="category" value="'+category_name+'" onblur="updatedetail('+result.LASTID+')" ></div> <div class="col-lg-2 text-right"><button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addQuestion('+result.LASTID+')"><i class="icofont icofont-plus icon-white "></i><?= htmlspecialchars(__('Questions'), ENT_QUOTES, 'UTF-8'); ?></button></div> </div> <div class="m-l-15 " id="cat_que_id_'+result.LASTID+'"></div>';
             $('#cate').append(str);
 
             closebtn();
@@ -190,31 +190,31 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
     <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
 <?php } ?>
         <form method="post" id="dataform" action="">
         <div class="card">
             <div class="card-header">
-                <h5>Vendor Feedback Setup</h5>
+                <h5><?= __('Vendor Feedback Setup'); ?></h5>
                 <div class="card-header-right">
                     <?php if($_GET['Rid']!=""){ ?>
-                    <button class="btn btn-warning" type="button" onclick="createnewversion(<?php  echo $rid; ?>)"><i class="icofont icofont-plus icon-white "></i> New Version </button>
+                    <button class="btn btn-warning" type="button" onclick="createnewversion(<?php  echo $rid; ?>)"><i class="icofont icofont-plus icon-white "></i> <?= __('New Version'); ?> </button>
                     <?php if( $setup['current_status'] !="52"){ ?>
-                    <button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addPublish('<?php echo $i; ?>')"></i>Publish</button>
+                    <button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addPublish('<?php echo $i; ?>')"></i><?= __('Publish'); ?></button>
                      <div class="popup-publish design-sec text-white" style="right: 0; display: none;background-color: #2ed8b6;">
-                            <div class="text-left mb-1 f-w-600 f-16" style="text-align: left;">Publish
+                            <div class="text-left mb-1 f-w-600 f-16" style="text-align: left;"><?= __('Publish'); ?>
                             <button type="button" class="float-end member-close design-close btn text-white" onclick="closebtnpublish()"><i class="ti-close"></i></button>
                             </div>
                             <div class="form-group w-full mt-2 row" style="text-align: left;">
-                                <div class="col-lg-12">Publish Date </div>
+                                <div class="col-lg-12"><?= __('Publish Date'); ?> </div>
                                 <div class="col-lg-12">
-                                    <input aria-label="Publish Date" type="text" class="form-control datepicker" id="publish_date" name="publish_date">
+                                    <input aria-label="<?= htmlspecialchars(__('Publish Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" id="publish_date" name="publish_date">
                                     <input type="hidden" class="form-control " id="publish_by" name="publish_by" value="<?php echo $_SESSION['userid']; ?>">
 
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary float-right mt-2" onclick="Updatepublish()"> Publish</button>
+                            <button type="button" class="btn btn-primary float-right mt-2" onclick="Updatepublish()"> <?= __('Publish'); ?></button>
                         </div>
                     <?php } ?>
                 <?php } ?>
@@ -223,64 +223,64 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
             <div class="card-body" style="padding: 15px 12%; <?php echo ( $setup['current_status'] =="52")?"pointer-events: none; opacity: 0.7;":"";?>">
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Vendor Review Name</span>
-                        <input aria-label="Plan Name" type="text" class="form-control" name="plan_name" value="<?php echo $setup['feedback_name']; ?>" required>
+                        <span class="form-label"><?= __('Vendor Review Name'); ?></span>
+                        <input aria-label="<?= htmlspecialchars(__('Plan Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="plan_name" value="<?php echo $setup['feedback_name']; ?>" required>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Version</span>
+                        <span class="form-label"><?= __('Version'); ?></span>
                         <?php $version_no = $setup['version_no'] !="" ? $setup['version_no'] : '0.1'; ?>
-                        <input aria-label="Version Nos" type="text" class="form-control" name="version_nos" value="<?php echo $version_no; ?>" readonly>
+                        <input aria-label="<?= htmlspecialchars(__('Version Nos'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="version_nos" value="<?php echo $version_no; ?>" readonly>
 
                         <input type="hidden" name="version_no" value="<?php echo $version_no; ?>">
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Can feedback be submitted multiple times?</span>
+                        <span class="form-label"><?= __('Can feedback be submitted multiple times?'); ?></span>
                         <?php $multiple_time = $setup['allow_multiple_times']!="" ? $setup['allow_multiple_times']: 0; ?>
                         <div class="radio radio-outline  mt-1">
                             <label class="radio radio-inline">
-                                <input aria-label="Radio option" type="radio" <?php if($multiple_time==0){ ?>checked <?php
+                                <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php if($multiple_time==0){ ?>checked <?php
 } ?>   name="multiple_time" value='0'>
-                                <span></span>Yes
+                                <span></span><?= __('Yes'); ?>
                             </label>
                              <label class="radio radio-inline">
-                                <input aria-label="Radio option" type="radio"  <?php if($multiple_time==1){ ?>checked <?php
+                                <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  <?php if($multiple_time==1){ ?>checked <?php
 } ?>  name="multiple_time" value='1'>
-                                <span></span>No
+                                <span></span><?= __('No'); ?>
                             </label>
                         </div>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Feedback Start Date</span>
+                        <span class="form-label"><?= __('Feedback Start Date'); ?></span>
                         <div class="input-group custom-date">
                             <span class="input-group-text addon-style" id="basic-addon3">
                                 <span class=""><i class="fa fa-calendar"></i></span>
                             </span>
-                            <input aria-label="Start Date" type="text" class="form-control datepicker" name="start_date" id="date_of_grant" value="<?php echo fromDate($setup['start_date']); ?>" required>
+                            <input aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="start_date" id="date_of_grant" value="<?php echo fromDate($setup['start_date']); ?>" required>
                         </div>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Feedback End Date</span>
+                        <span class="form-label"><?= __('Feedback End Date'); ?></span>
                         <div class="input-group custom-date">
                             <span class="input-group-text addon-style" id="basic-addon3_2">
                                 <span class=""><i class="fa fa-calendar"></i></span>
                             </span>
-                            <input aria-label="To Date" type="text" class="form-control datepicker" name="to_date"  value="<?php echo fromDate($setup['end_date']); ?>"  value="">
+                            <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="to_date"  value="<?php echo fromDate($setup['end_date']); ?>"  value="">
                         </div>
                     </div>
 
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Notes</span>
-                        <textarea aria-label="Note" class="form-control" name="note"><?php echo $setup['description']; ?></textarea>
+                        <span class="form-label"><?= __('Notes'); ?></span>
+                        <textarea aria-label="<?= htmlspecialchars(__('Note'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="note"><?php echo $setup['description']; ?></textarea>
                     </div>
                     <div class="form-group col-lg-12" style="margin:0px;">
-                        <span class="form-label">Please select the applicable criteria for vendors:</span>
+                        <span class="form-label"><?= __('Please select the applicable criteria for vendors'); ?>:</span>
                     </div>
                      <div class="form-group col-lg-4">
-                        <span class="form-label">Location</span>
-                        <select aria-label="Applicable Locations[]" class="form-select js-example-basic-multiple" multiple="multiple" name="applicable_locations[]">
+                        <span class="form-label"><?= __('Location'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Applicable Locations'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" multiple="multiple" name="applicable_locations[]">
                             <option <?php if(in_array(0,(array)$allow_locselect)){ echo "selected";
-} ?> value="0">ALL</option>
+} ?> value="0"><?= __('ALL'); ?></option>
                             <?php foreach($result['locations'] as $list){?>
                                 <option <?php if(in_array($list['id'],(array)$allow_locselect)){ echo "selected";
 } ?> value="<?php echo  $list['id']; ?>"><?php echo  $list['name']; ?></option>
@@ -288,10 +288,10 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                         </select>
                     </div>
                      <div class="form-group col-lg-4">
-                        <span class="form-label">Vendors</span>
-                        <select aria-label="Applicable Vendors[]" class="form-select js-example-basic-multiple" multiple="multiple" name="applicable_vendors[]">
+                        <span class="form-label"><?= __('Vendors'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Applicable Vendors'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" multiple="multiple" name="applicable_vendors[]">
                             <option <?php if(in_array(0,(array)$allow_venselect)){ echo "selected";
-} ?> value="0">ALL</option>
+} ?> value="0"><?= __('ALL'); ?></option>
                             <?php foreach($result['vendors'] as $list){?>
                                 <option <?php if(in_array($list['id'],(array)$allow_venselect)){ echo "selected";
 } ?> value="<?php echo  $list['id']; ?>"><?php echo  $list['name']; ?></option>
@@ -299,13 +299,13 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                         </select>
                     </div>
                     <div class="form-group col-lg-12" style="margin:0px;">
-                        <span class="form-label">Who are the users who can provide feedback :</span>
+                        <span class="form-label"><?= __('Who are the users who can provide feedback'); ?> :</span>
                     </div>
                      <div class="form-group col-lg-4">
-                        <span class="form-label">Location</span>
-                        <select aria-label="Provide Locations[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_locations[]">
+                        <span class="form-label"><?= __('Location'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Provide Locations'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_locations[]">
                             <option <?php if(in_array(0,(array)$provide_locselect)){ echo "selected";
-} ?> value="0">ALL</option>
+} ?> value="0"><?= __('ALL'); ?></option>
                             <?php foreach($result['locations'] as $list){?>
                                 <option <?php if(in_array($list['id'],(array)$provide_locselect)){ echo "selected";
 } ?> value="<?php echo  $list['id']; ?>"><?php echo  $list['name']; ?></option>
@@ -313,10 +313,10 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                         </select>
                     </div>
                      <div class="form-group col-lg-4">
-                        <span class="form-label">Department</span>
-                        <select aria-label="Provide Departments[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_departments[]">
+                        <span class="form-label"><?= __('Department'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Provide Departments'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_departments[]">
                             <option <?php if(in_array(0,(array)$provide_depselect)){ echo "selected";
-} ?> value="0">ALL</option>
+} ?> value="0"><?= __('ALL'); ?></option>
                             <?php foreach($result['departments'] as $list){?>
                                 <option <?php if(in_array($list['id'],(array)$provide_depselect)){ echo "selected";
 } ?> value="<?php echo  $list['id']; ?>"><?php echo  $list['name']; ?></option>
@@ -324,10 +324,10 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Designations</span>
-                        <select aria-label="Provide Designations[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_designations[]">
+                        <span class="form-label"><?= __('Designations'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Provide Designations'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_designations[]">
                             <option <?php if(in_array(0,(array)$provide_desselect)){ echo "selected";
-} ?> value="0">ALL</option>
+} ?> value="0"><?= __('ALL'); ?></option>
                             <?php foreach($result['designations'] as $list){?>
                                 <option <?php if(in_array($list['id'],(array)$provide_desselect)){ echo "selected";
 } ?> value="<?php echo  $list['id']; ?>"><?php echo  $list['name']; ?></option>
@@ -335,10 +335,10 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                         </select>
                     </div>
                      <div class="form-group col-lg-4">
-                        <span class="form-label">Role</span>
-                        <select aria-label="Provide Roles[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_roles[]">
+                        <span class="form-label"><?= __('Role'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Provide Roles'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_roles[]">
                             <option <?php if(in_array(0,(array)$provide_roleselect)){ echo "selected";
-} ?> value="0">ALL</option>
+} ?> value="0"><?= __('ALL'); ?></option>
                             <?php foreach($result['application_roles'] as $list){?>
                                 <option <?php if(in_array($list['id'],(array)$provide_roleselect)){ echo "selected";
 } ?> value="<?php echo  $list['id']; ?>"><?php echo  $list['name']; ?></option>
@@ -346,10 +346,10 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
-                        <span class="form-label">Employees</span>
-                        <select aria-label="Provide Employees[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_employees[]">
+                        <span class="form-label"><?= __('Employees'); ?></span>
+                        <select aria-label="<?= htmlspecialchars(__('Provide Employees'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" multiple="multiple" name="provide_employees[]">
                             <option <?php if(in_array(0,(array)$provide_empselect)){ echo "selected";
-} ?> value="0">ALL</option>
+} ?> value="0"><?= __('ALL'); ?></option>
                             <?php foreach($result['employees'] as $list){?>
                                 <option <?php if(in_array($list['id'],(array)$provide_empselect)){ echo "selected";
 } ?> value="<?php echo  $list['id']; ?>"><?php echo  $list['name']; ?></option>
@@ -359,7 +359,7 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                      <?php if(!isset($_GET['Rid']) && $_GET['Rid']==""){ ?>
                      <div class="form-group col-lg-12">
                         <input type="hidden" name="submitvendorsetup" value="submitvendorsetup">
-                         <button class="btn btn-primary  float-right"> Next </button>
+                         <button class="btn btn-primary  float-right"> <?= __('Next'); ?> </button>
 
                      </div>
                     </form>
@@ -370,20 +370,20 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
         <?php if($_GET['Rid']!=""){ ?>
         <div class="card" style="<?php echo ( $setup['current_status'] =="52")?"pointer-events: none; opacity: 0.7;":"";?>">
             <div class="card-header">
-                <h5>Review Category and Questions</h5>
+                <h5><?= __('Review Category and Questions'); ?></h5>
                 <div class="card-header-right">
-                     <button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addCategory('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white "></i>Category</button>
+                     <button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addCategory('<?php echo $i; ?>')"><i class="icofont icofont-plus icon-white "></i><?= __('Category'); ?></button>
                      <div class="popup-member design-sec" style="right: 0; display: none;">
-                            <div class="text-left mb-1 f-w-600 f-16" style="text-align: left;">Review Category
+                            <div class="text-left mb-1 f-w-600 f-16" style="text-align: left;"><?= __('Review Category'); ?>
                             <button type="button" class="float-end member-close design-close" onclick="closebtn()"><i class="ti-close"></i></button>
                             </div>
                             <div class="form-group w-full mt-2 row" style="text-align: left;">
-                                <div class="col-lg-12">Category Name </div>
+                                <div class="col-lg-12"><?= __('Category Name'); ?> </div>
                                 <div class="col-lg-12">
-                                    <input aria-label="Category Name" type="text" class="form-control" id="category_name" name="category_name">
+                                    <input aria-label="<?= htmlspecialchars(__('Category Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="category_name" name="category_name">
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary float-right mt-2" onclick="addCategoryName()"> Save</button>
+                            <button type="button" class="btn btn-primary float-right mt-2" onclick="addCategoryName()"> <?= __('Save'); ?></button>
                         </div>
                 </div>
             </div>
@@ -397,12 +397,12 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                         <div class="mt-3" id="cat_id_<?php echo $cat['id']; ?>">
                             <div class="row" style="clear: both;">
                                 <div class="col-lg-10 col-md-10 col-sm-12 col-12 f-15 f-w-600 p-0 text-info">
-                                     <input aria-label="Category" class="cat_1" type="text"  name="category"
+                                     <input aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="cat_1" type="text"  name="category"
                                       value="<?php echo $cat['category_name']; ?>" onblur="updatedetail('category_name', <?php echo $cat['id']; ?> ,this.value)" >
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-12 col-12 text-end p-0 mt-2">
                                     <button type="button" class="btn btn-success waves-effect waves-light" onclick="addQuestion(<?php echo $cat['id']; ?>)">
-                                        <i class="icofont icofont-plus icon-white"></i>Questions
+                                        <i class="icofont icofont-plus icon-white"></i><?= __('Questions'); ?>
                                     </button>
                                 </div>
                             </div>
@@ -420,7 +420,7 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                                             <?php
                                             $optionlist= json_decode($val['question_option'],1);
                                             if($val['options_display_type']==4){ ?>
-                                                <textarea aria-label="Text area" id="" class="form-control mb-2" readonly></textarea>
+                                                <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" id="" class="form-control mb-2" readonly></textarea>
                                             <?php } ?>
                                             <?php
                                             if($val['options_display_type']==2){ ?>
@@ -436,7 +436,7 @@ input.cat_1:focus { outline: aqua; border: 1px solid #ccc;}
                                             <?php   foreach ($optionlist as $option){ ?>
                                                 <b class="mr-10 d-inline-block">
                                                     <div class="radio-group required">
-                                                        <input aria-label="Radio option" type="radio" value="<?php echo $option;?>" name="response" >
+                                                        <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" value="<?php echo $option;?>" name="response" >
                                                         <label class="f-w-500" for="q1"><?php echo $option;  ?> </label>
                                                     </div>
                                                 </b>

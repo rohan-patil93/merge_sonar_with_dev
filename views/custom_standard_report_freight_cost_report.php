@@ -21,16 +21,16 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5>Freight Cost Report</h5>
+        <h5><?= __('Freight Cost Report'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown-2"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    More
+                    <?= __('More'); ?>
                 </button>
                 <div class="dropdown-menu p-0">
-                    <a class="dropdown-item" href="custom_view_download.php?page=FreightCostReport&format=csv" target="_blank">CSV</a>
-                    <a class="dropdown-item" href="custom_view_download.php?page=FreightCostReport&format=excel" target="_blank">Excel</a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=FreightCostReport&format=csv" target="_blank"><?= __('CSV'); ?></a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=FreightCostReport&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -44,13 +44,13 @@ $_SESSION['download_data'] = [];
             <table class="table table-separate table-head-custom table-checkable data-table">
                 <thead>
                     <tr>
-                        <th scope="col">S.No</th>
-                        <th scope="col">Transaction No</th>
-                        <th scope="col">Transaction Date</th>
-                        <th scope="col">Customer / Party</th>
-                        <th scope="col" class="text-right">Shipping Amount (₹)</th>
-                        <th scope="col" class="text-right">Shipping Tax Amount (₹)</th>
-                        <th scope="col" class="text-right">Total Freight (₹)</th>
+                        <th scope="col"><?= __('S.No'); ?></th>
+                        <th scope="col"><?= __('Transaction No'); ?></th>
+                        <th scope="col"><?= __('Transaction Date'); ?></th>
+                        <th scope="col"><?= __('Customer / Party'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Shipping Amount (₹)'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Shipping Tax Amount (₹)'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Freight (₹)'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,7 +96,7 @@ $_SESSION['download_data'] = [];
                     $_SESSION['download_data'] = $csv_data;
                     ?>
                     <tr class="fw-bold">
-                        <td colspan="4" class="text-end">Grand Total</td>
+                        <td colspan="4" class="text-end"><?= __('Grand Total'); ?></td>
                         <td class="text-right"><?php echo customeummarmonyformate($grand_base); ?></td>
                         <td class="text-right"><?php echo customeummarmonyformate($grand_tax); ?></td>
                         <td class="text-right"><?php echo customeummarmonyformate($grand_total); ?></td>
@@ -106,7 +106,7 @@ $_SESSION['download_data'] = [];
         <?php } else { ?>
             <div class="text-center py-4">
                 <p class="text-muted f-16 fw-bold">
-                    <i class="ti-alert text-warning"></i> No Data Available
+                    <i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?>
                 </p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">

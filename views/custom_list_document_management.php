@@ -45,13 +45,13 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Document Management</h5>
+            <h5><?= __('Document Management'); ?></h5>
             <div class="card-header-right">
                 <a href="index.php?option=<?php echo dmListText($insertOption); ?>" class="btn btn-success waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-plus" aria-hidden="true"></i> Add
+                    <i class="icofont icofont-plus" aria-hidden="true"></i> <?= __('Add'); ?>
                 </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-                    <i class="icofont icofont-reply" aria-hidden="true"></i> Back
+                    <i class="icofont icofont-reply" aria-hidden="true"></i> <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -60,9 +60,9 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                 <input type="hidden" name="option" value="<?php echo dmListText($listOption); ?>">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 form-group">
-                        <label for="document_type_id">Document Type</label>
-                        <select name="document_type_id" id="document_type_id" class="form-control js-example-basic-single" aria-label="Document Type">
-                            <option value="">All Types</option>
+                        <label for="document_type_id"><?= __('Document Type'); ?></label>
+                        <select name="document_type_id" id="document_type_id" class="form-control js-example-basic-single" aria-label="<?= htmlspecialchars(__('Document Type'), ENT_QUOTES, 'UTF-8'); ?>">
+                            <option value=""><?= __('All Types'); ?></option>
                             <?php if (count((array)$documentTypes) > 0) {
                                 foreach ($documentTypes as $typeRow) {
                                     $typeRow = is_array($typeRow) ? $typeRow : (array)$typeRow;
@@ -77,12 +77,12 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                         </select>
                     </div>
                     <div class="col-lg-3 col-md-6 form-group">
-                        <label for="document_name">Document Name</label>
-                        <input type="text" name="document_name" id="document_name" class="form-control" value="<?php echo dmListText($documentName); ?>" placeholder="Search document name" aria-label="Document Name">
+                        <label for="document_name"><?= __('Document Name'); ?></label>
+                        <input type="text" name="document_name" id="document_name" class="form-control" value="<?php echo dmListText($documentName); ?>" placeholder="<?= htmlspecialchars(__('Search document name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Document Name'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="col-lg-3 col-md-6 form-group">
-                        <label for="searchBtn" aria-label="Search">&nbsp;</label>
-                        <button type="submit" id="searchBtn" class="btn btn-primary form-control">Search</button>
+                        <label for="searchBtn" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">&nbsp;</label>
+                        <button type="submit" id="searchBtn" class="btn btn-primary form-control"><?= __('Search'); ?></button>
                     </div>
                 </div>
             </form>
@@ -91,12 +91,12 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Sr. No.</th>
-                            <th scope="col">Document Type</th>
-                            <th scope="col">Document Name</th>
-                            <th scope="col">Files</th>
-                            <th scope="col">Created Date</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('Sr. No.'); ?></th>
+                            <th scope="col"><?= __('Document Type'); ?></th>
+                            <th scope="col"><?= __('Document Name'); ?></th>
+                            <th scope="col"><?= __('Files'); ?></th>
+                            <th scope="col"><?= __('Created Date'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,7 +115,7 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                                     <td><?php echo dmListText($createdDate); ?></td>
                                     <td>
                                         <a href="index.php?option=<?php echo dmListText($insertOption); ?>&Rid=<?php echo urlencode($editRid); ?>" class="btn btn-primary btn-sm">
-                                            Edit
+                                            <?= __('Edit'); ?>
                                         </a>
                                     </td>
                                 </tr>
@@ -124,7 +124,7 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                             }
                         } else { ?>
                             <tr>
-                                <td colspan="6" class="text-center text-muted">No documents found</td>
+                                <td colspan="6" class="text-center text-muted"><?= __('No documents found'); ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -134,7 +134,7 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
             <?php if ($totalPages > 1) { ?>
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <span class="text-muted">
-                        Showing page <?php echo $page; ?> of <?php echo $totalPages; ?> (<?php echo $total; ?> records)
+                        <?= __('Showing page'); ?> <?php echo $page; ?> <?= __('of'); ?> <?php echo $totalPages; ?> (<?php echo $total; ?> <?= __('records)'); ?>
                     </span>
                     <div>
                         <?php if ($page > 1) {
@@ -149,7 +149,7 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                                 $prevParams['document_name'] = $documentName;
                             }
                         ?>
-                            <a href="<?php echo dmListText(dmListPageUrl($prevParams)); ?>" class="btn btn-outline-primary btn-sm">Previous</a>
+                            <a href="<?php echo dmListText(dmListPageUrl($prevParams)); ?>" class="btn btn-outline-primary btn-sm"><?= __('Previous'); ?></a>
                         <?php } ?>
                         <?php if ($page < $totalPages) {
                             $nextParams = array(
@@ -163,7 +163,7 @@ $successMessage = isset($_GET['msg']) ? trim((string)$_GET['msg']) : '';
                                 $nextParams['document_name'] = $documentName;
                             }
                         ?>
-                            <a href="<?php echo dmListText(dmListPageUrl($nextParams)); ?>" class="btn btn-outline-primary btn-sm ms-2">Next</a>
+                            <a href="<?php echo dmListText(dmListPageUrl($nextParams)); ?>" class="btn btn-outline-primary btn-sm ms-2"><?= __('Next'); ?></a>
                         <?php } ?>
                     </div>
                 </div>

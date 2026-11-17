@@ -361,10 +361,10 @@ function calculateTotal(){
                             text: <?php echo json_encode(__('Do you want to change the quantity to')); ?>+parseFloat(data)+" ?",
                             type: "warning",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, change!",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, change!'), ENT_QUOTES, 'UTF-8'); ?>",
                             confirmButtonClass: "btn btn-danger",
                             showCancelButton: true,
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, proceed",
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, proceed'), ENT_QUOTES, 'UTF-8'); ?>",
                             cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {
@@ -483,7 +483,7 @@ function calculateTotal(){
                 <option value="0"> <?php echo __('Select Any Term'); ?> </option>
             <?php foreach ($posresponsept as $key => $pos) {  ?>
                 <option   <?php if($table1['payment_terms'] == $pos['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo $pos['genc_detail_name']; ?> </option>
+} ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo __($pos['genc_detail_name']); ?> </option>
             <?php } ?>
             </select>
         </div>
@@ -510,7 +510,7 @@ function calculateTotal(){
             <option value="0"> <?php echo __('Select Any Place'); ?> </option>
             <?php foreach ($posresponse as $key => $pos) {  ?>
                 <option   <?php if($table1['place_of_supply'] == $pos['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo $pos['genc_detail_name']; ?> </option>
+} ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo __($pos['genc_detail_name']); ?> </option>
             <?php } ?>
             </select>
         </div>
@@ -607,7 +607,7 @@ function calculateTotal(){
             <option value="0"> <?php echo __('Select Any UOM'); ?>  </option>
             <?php foreach ($uomlist as $uom) {  ?>
                  <option   <?php if($tab2['uom'] == $uom['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo $uom['genc_detail_name']; ?> </option>
+} ?>  value ="<?php echo $uom['genc_detail_code']; ?>" > <?php echo __($uom['genc_detail_name']); ?> </option>
             <?php } ?>
         </select>
 

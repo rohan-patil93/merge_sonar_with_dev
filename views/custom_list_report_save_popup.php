@@ -46,10 +46,10 @@ foreach($row as $rowdata){
             success: function(response) {
                 console.log(response);
                 swal.fire({
-                    title: "Folder is moved successfully",
+                    title: <?php echo json_encode(__('Folder is moved successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     type: "success",
                     buttonsStyling: false,
-                    confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+                    confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
                     confirmButtonClass: "btn btn-success",
                     showCancelButton: false
 
@@ -78,8 +78,8 @@ foreach($row as $rowdata){
 </script>
 <div class="modal-header bg-primary" style="background-image: none;">
     <span id="backid" class="m-t-5">  </span> &nbsp;
-    <h5 class="modal-title" id="title"> Move To Folder </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title" id="title"> <?= __('Move To Folder'); ?> </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
     <div class="modal-body" >
         <form class="kt-form kt-form--label-right" action="" method="post">
@@ -107,10 +107,10 @@ foreach($row as $rowdata){
                 </div>
             </div>
             <div class="modal-footer pt-4 d-block">
-                <button type="button" class="btn btn-success mr-2 float-left" onclick="createfloder(<?php echo $_POST['report_id']; ?>)" ><i class="ti-plus m-r-5"></i> Create Folder</button>
+                <button type="button" class="btn btn-success mr-2 float-left" onclick="createfloder(<?php echo $_POST['report_id']; ?>)" ><i class="ti-plus m-r-5"></i> <?= __('Create Folder'); ?></button>
                 <input type="hidden" name="status" id='report_id' value="<?php echo $_POST['report_id']; ?>">
 
-                <button type="button" class="btn btn-primary mr-2 float-right" onclick="submitrom()" >Move To Folder</button>
+                <button type="button" class="btn btn-primary mr-2 float-right" onclick="submitrom()" ><?= __('Move To Folder'); ?></button>
             </div>
         </form>
     </div>

@@ -18,33 +18,33 @@ $schedulesUrl = 'index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=' 
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
             <div>
-                <h5 class="mb-0">Manage Checklist — <?php echo $contractName; ?></h5>
+                <h5 class="mb-0"><?= __('Manage Checklist —'); ?> <?php echo $contractName; ?></h5>
                 <?php if ($transactionNo != '') { ?>
-                    <small class="text-muted">Transaction No: <?php echo $transactionNo; ?></small>
+                    <small class="text-muted"><?= __('Transaction No'); ?>: <?php echo $transactionNo; ?></small>
                 <?php } ?>
             </div>
             <div class="d-flex flex-wrap gap-2">
-                <a href="<?php echo $schedulesUrl; ?>" class="btn btn-outline-info btn-sm">View Schedules</a>
-                <button type="button" class="btn  btn-sm"><i class="icofont icofont-reply"></i>Back</button>
+                <a href="<?php echo $schedulesUrl; ?>" class="btn btn-outline-info btn-sm"><?= __('View Schedules'); ?></a>
+                <button type="button" class="btn  btn-sm"><i class="icofont icofont-reply"></i><?= __('Back'); ?></button>
             </div>
         </div>
         <div class="card-body">
             <?php if ($contractIsCancelled) { ?>
                 <div class="alert alert-danger mb-3" role="alert">
-                    This contract has been cancelled. Checklist items cannot be changed.
+                    <?= __('This contract has been cancelled. Checklist items cannot be changed.'); ?>
                     <?php if (!empty($contract['cancel_reason'])) { ?>
-                        <span class="d-block mt-1"><strong>Reason:</strong> <?php echo htmlspecialchars($contract['cancel_reason'], ENT_QUOTES, 'UTF-8'); ?></span>
+                        <span class="d-block mt-1"><strong><?= __('Reason'); ?>:</strong> <?php echo htmlspecialchars($contract['cancel_reason'], ENT_QUOTES, 'UTF-8'); ?></span>
                     <?php } ?>
                 </div>
             <?php } elseif (!$contractIsApproved) { ?>
                 <div class="alert alert-warning mb-3" role="alert">
-                    This contract is not approved yet. You can review the checklist below, but changes are disabled until approval is complete.
+                    <?= __('This contract is not approved yet. You can review the checklist below, but changes are disabled until approval is complete.'); ?>
                 </div>
             <?php } else { ?>
                 <div class="alert alert-info mb-3 f-12" role="alert">
-                    Define checklist items for all service visits on this contract. Technicians must complete every item before finishing a visit.
+                    <?= __('Define checklist items for all service visits on this contract. Technicians must complete every item before finishing a visit.'); ?>
                     <?php if ($checklistIsDefault) { ?>
-                        <span class="d-block mt-1">Showing default items — save to customize for this contract.</span>
+                        <span class="d-block mt-1"><?= __('Showing default items — save to customize for this contract.'); ?></span>
                     <?php } ?>
                 </div>
             <?php } ?>
@@ -57,27 +57,27 @@ $schedulesUrl = 'index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=' 
                     <div class="d-flex align-items-start gap-2 mb-2 contract-amc-checklist-row">
                         <div class="flex-grow-1">
                             <input type="hidden" name="existing_checklist_ids[]" value="<?php echo htmlspecialchars($itemId, ENT_QUOTES, 'UTF-8'); ?>">
-                            <input aria-label="Checklist Items[]" type="text" name="checklist_items[]" class="form-control form-control-sm" value="<?php echo htmlspecialchars($itemName, ENT_QUOTES, 'UTF-8'); ?>" <?php echo $canExecute ? '' : 'readonly'; ?> required>
+                            <input aria-label="<?= htmlspecialchars(__('Checklist Items'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="checklist_items[]" class="form-control form-control-sm" value="<?php echo htmlspecialchars($itemName, ENT_QUOTES, 'UTF-8'); ?>" <?php echo $canExecute ? '' : 'readonly'; ?> required>
                         </div>
                         <?php if ($canExecute) { ?>
-                        <button type="button" class="btn btn-sm btn-outline-danger contract-amc-checklist-remove-btn" title="Remove item">
+                        <button type="button" class="btn btn-sm btn-outline-danger contract-amc-checklist-remove-btn" title="<?= htmlspecialchars(__('Remove item'), ENT_QUOTES, 'UTF-8'); ?>">
                             <i class="ti-trash"></i>
                         </button>
                         <?php } ?>
                     </div>
                     <?php }
                     } else { ?>
-                    <p class="text-muted mb-0 f-12">No checklist items.</p>
+                    <p class="text-muted mb-0 f-12"><?= __('No checklist items.'); ?></p>
                     <?php } ?>
                 </div>
 
                 <?php if ($canExecute) { ?>
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 border-top pt-3">
                     <button type="button" class="btn btn-outline-primary btn-sm" id="contractAmcChecklistAddBtn">
-                        <i class="ti-plus me-1"></i> Add Item
+                        <i class="ti-plus me-1"></i> <?= __('Add Item'); ?>
                     </button>
                     <button type="button" class="btn btn-primary" id="saveContractAmcChecklistBtn">
-                        <i class="ti-save me-1"></i> Save Checklist
+                        <i class="ti-save me-1"></i> <?= __('Save Checklist'); ?>
                     </button>
                 </div>
                 <?php } ?>
@@ -99,7 +99,7 @@ window.addEventListener("load", function() {
             '<input type="hidden" name="existing_checklist_ids[]" value="' + idVal + '">' +
             '<input aria-label="Checklist Items[]" type="text" name="checklist_items[]" class="form-control form-control-sm" value="' + val + '" required>' +
             '</div>' +
-            '<button type="button" class="btn btn-sm btn-outline-danger contract-amc-checklist-remove-btn" title="Remove item">' +
+            '<button type="button" class="btn btn-sm btn-outline-danger contract-amc-checklist-remove-btn" title="<?= htmlspecialchars(__('Remove item'), ENT_QUOTES, 'UTF-8'); ?>">' +
             '<i class="ti-trash"></i></button></div>';
         $("#contractAmcChecklistContainer").append(row);
     }

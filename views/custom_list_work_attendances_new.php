@@ -58,16 +58,16 @@ if ($_SESSION['insert_msg'] != "") {
     <?php if ($success_messages != "") { ?>
       <div class="alert alert-info alert-dismissible">
         <strong><?php echo $success_messages; ?> </strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
       </div>
     <?php } ?>
     <div class="card card-custom mb-5 ">
       <div class="card-header">
-        <h5>Work Attendance</h5>
+        <h5><?= __('Work Attendance'); ?></h5>
         <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
             <i class="icofont icofont-reply"></i>
-            Back
+            <?= __('Back'); ?>
           </a>
         </div>
       </div>
@@ -81,7 +81,7 @@ if ($_SESSION['insert_msg'] != "") {
                   <div class="form-group row">
                     <div class="col-10">
 
-                      <input aria-label="Att Month Year" class="form-control" type="month" name="att_month_year" value="<?php echo $yearr . "-" . $mnth ?>" id="att_month_year" />
+                      <input aria-label="<?= htmlspecialchars(__('Att Month Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="att_month_year" value="<?php echo $yearr . "-" . $mnth ?>" id="att_month_year" />
                     </div>
                   </div>
                 </div>
@@ -92,14 +92,14 @@ if ($_SESSION['insert_msg'] != "") {
                 <div class="form-radio">
                   <div class="radio radio-inline">
                     <label class="form-label">
-                      <input aria-label="Recordtype" type="radio" name="recordtype" <?php echo $_POST['recordtype'] == 'discrepancy' ? "checked" : ""; ?> class="d-none" value="discrepancy" />
-                      <i class="helper"></i>Discrepancy Records
+                      <input aria-label="<?= htmlspecialchars(__('Recordtype'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="recordtype" <?php echo $_POST['recordtype'] == 'discrepancy' ? "checked" : ""; ?> class="d-none" value="discrepancy" />
+                      <i class="helper"></i><?= __('Discrepancy Records'); ?>
                     </label>
                   </div>
                   <div class="radio radio-inline">
                     <label class="form-label">
-                      <input aria-label="Recordtype" type="radio" name="recordtype" <?php echo $_POST['recordtype'] != 'discrepancy' ? "checked" : ""; ?> value="all" class="d-none" />
-                      <i class="helper"></i>All Records
+                      <input aria-label="<?= htmlspecialchars(__('Recordtype'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="recordtype" <?php echo $_POST['recordtype'] != 'discrepancy' ? "checked" : ""; ?> value="all" class="d-none" />
+                      <i class="helper"></i><?= __('All Records'); ?>
                     </label>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ if ($_SESSION['insert_msg'] != "") {
             <div class="col-lg-2">
 
             </div>
-            <div class="col-lg-2"> <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="ti-filter"></i> Apply Search</button></div>
+            <div class="col-lg-2"> <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="ti-filter"></i> <?= __('Apply Search'); ?></button></div>
         </form>
         <div class="row mb-5">
           <div class="col-lg-3"></div>
@@ -137,9 +137,9 @@ if ($_SESSION['insert_msg'] != "") {
           <a href="custom_csv_emp_attendance_download.php?month=<?php echo $yearr . '-' . str_pad($mnth, 2, '0', STR_PAD_LEFT); ?>"
              class="btn btn-primary waves-effect waves-light"
              target="_blank">
-            <i class="ti-download"></i> Download CSV
+            <i class="ti-download"></i> <?= __('Download CSV'); ?>
           </a>
-          <button type="submit" class="btn btn-primary waves-effect waves-light  submitattendancess <?php echo $btndisable; ?>" onclick="submitattendance('<?php echo $mnth; ?>','<?php echo $yearr; ?>','<?php echo $timesheetstartdate; ?>')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Please check the data before submit, Once you submit the data you cannot make any changes here."> <?php echo isset($response['S']) ? '<i class="ti-check"></i>' : '<i class="ti-thumb-up"></i>'; ?> Submit Attendance <span class="badge bg-warning text-white">4</span> </button>
+          <button type="submit" class="btn btn-primary waves-effect waves-light  submitattendancess <?php echo $btndisable; ?>" onclick="submitattendance('<?php echo $mnth; ?>','<?php echo $yearr; ?>','<?php echo $timesheetstartdate; ?>')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Please check the data before submit, Once you submit the data you cannot make any changes here.'), ENT_QUOTES, 'UTF-8'); ?>"> <?php echo isset($response['S']) ? '<i class="ti-check"></i>' : '<i class="ti-thumb-up"></i>'; ?> <?= __('Submit Attendance'); ?> <span class="badge bg-warning text-white">4</span> </button>
 
 
         </div>
@@ -200,11 +200,11 @@ if ($_SESSION['insert_msg'] != "") {
       </style>
       <div class="card">
         <div class="card-header">
-          <h5>Work Entries</h5>
+          <h5><?= __('Work Entries'); ?></h5>
           <div class="text-center">
             <!-- Example: 01-Jan-26 to 31-Jan-26 -->
             <?= date('d-M-y', strtotime($response['month_start'])) ?>
-            to
+            <?= __('to'); ?>
             <?= date('d-M-y', strtotime($response['month_end'])) ?>
           </div>
         </div>
@@ -214,7 +214,7 @@ if ($_SESSION['insert_msg'] != "") {
             <table class="table table-bordered attendance-table mb-0">
               <thead>
                 <tr>
-                  <th scope="col" class="sticky-col">Employee</th>
+                  <th scope="col" class="sticky-col"><?= __('Employee'); ?></th>
                   <th scope="col" class="text-center">P</th>
                   <th scope="col" class="text-center">A</th>
 
@@ -252,9 +252,9 @@ if ($_SESSION['insert_msg'] != "") {
                         <div class="align-middle float-left ml-2">
                           <span class="f-12"><?php echo $mk++; ?></span>
                           <?php if ($empData['employee']['image'] != "") { ?>
-                            <img src="uploads/all/<?php echo $empData['employee']['image']; ?>" class="img-radius img-30 align-top m-r-15" alt="Attachment Preview">
+                            <img src="uploads/all/<?php echo $empData['employee']['image']; ?>" class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                           <?php } else { ?>
-                            <span alt="user" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center"><?php echo initials($empData['employee']['name']); ?></span>
+                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center"><?php echo initials($empData['employee']['name']); ?></span>
                           <?php } ?>
                           <div class="d-inline-block">
                             <p class="f-10"><?php echo $empData['employee']['emp_code'] . " - " . $empData['employee']['name']; ?></p>
@@ -364,7 +364,7 @@ if ($_SESSION['insert_msg'] != "") {
 
                   <tr>
                     <td colspan="40" class="text-center text-muted p-4">
-                      No employees found for selected month
+                      <?= __('No employees found for selected month'); ?>
                     </td>
                   </tr>
                 <?php } ?>
@@ -425,8 +425,8 @@ function submitattendance(month, year, monthstartday) {
       type: "info",
       showCancelButton: true,
       confirmButtonClass: "btn-danger",
-      confirmButtonText: "Submit",
-      cancelButtonText: "Don't Submit",
+      confirmButtonText: <?php echo json_encode(__('Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+      cancelButtonText: <?php echo json_encode(__('Don\'t Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
       closeOnConfirm: true,
       closeOnCancel: true
     },

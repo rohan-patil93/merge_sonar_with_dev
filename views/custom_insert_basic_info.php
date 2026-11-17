@@ -61,7 +61,7 @@ $vafield = json_decode($vendor_display_fields['field_list'],1);
       var status = "";
       var color = "";
       if(billable==0){ billable =1; status = "Non Billable"; color="red";  }else{ billable = 0; status = "Billable";  }
-      $(".modallabel").text("Billable OR Non-Billable");
+      $(".modallabel").text(<?php echo json_encode(__('Billable OR Non-Billable'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
       $(".modal_view_employee_name").text(name);
       $(".modal_view_status").text(status);
       $("#emp_id").val(id);
@@ -79,7 +79,7 @@ function changeonsite(id,name){
       var status = "";
       var color = "";
       if(onsite==0){ onsite =1;  status = "Off Site"; color="red"; }else{ onsite = 0; status = "On Site";}
-      $(".modallabel").text("On Site OR Off Site");
+      $(".modallabel").text(<?php echo json_encode(__('On Site OR Off Site'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
       $(".modal_view_employee_name").text(name);
       $(".modal_view_status").text(status);
       $("#emp_id").val(id);
@@ -115,9 +115,9 @@ function save_statuse_bilable_onsite(){
 
 <div class="modal-header">
     <h5 class="modal-title">
-        Basic Info
+        <?= __('Basic Info'); ?>
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 
 <?php } ?>
@@ -139,28 +139,28 @@ function save_statuse_bilable_onsite(){
                      <li class="nav-item ">
                         <a class="nav-link active besic-info-txt-start" id="home-tab-5" data-bs-toggle="tab" href="#home-5" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                        <span class="nav-text">Basic Info</span>
+                        <span class="nav-text"><?= __('Basic Info'); ?></span>
                         </a>
                           <div class="slide"></div>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link besic-info-txt-start" id="home-tab-6" data-bs-toggle="tab" href="#home-6" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                        <span class="nav-text">My Team</span>
+                        <span class="nav-text"><?= __('My Team'); ?></span>
                         </a>
                           <div class="slide"></div>
                      </li>
                      <li class="nav-item">
                       <a class="nav-link besic-info-txt-start" id="home-tab-7" data-bs-toggle="tab" href="#home-7"  role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                        <span class="nav-text">Calendar</span>
+                        <span class="nav-text"><?= __('Calendar'); ?></span>
                         </a>
                          <div class="slide"></div>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link besic-info-txt-start" id="home-tab-9" data-bs-toggle="tab" href="#home-9" onclick="displayitemdata('COM_LIST_EMP_ASSETS', 'display_side_assets')"  role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                        <span class="nav-text">Assets</span>
+                        <span class="nav-text"><?= __('Assets'); ?></span>
 
                         </a>
                         <div class="slide"></div>
@@ -169,7 +169,7 @@ function save_statuse_bilable_onsite(){
                       <?php if(in_array('8',(array)$_SESSION['module_list']) || $data['employee_type'] == '1'){ ?>
                     <li class="nav-item">
                         <a class="nav-link besic-info-txt-start" id="home-tab-70" data-bs-toggle="tab" href="#home-70" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                        <span class="nav-text">Pay<?php ?> </span>
+                        <span class="nav-text"><?= __('Pay'); ?><?php ?> </span>
                         </a>
                           <div class="slide"></div>
                      </li>
@@ -189,7 +189,7 @@ function save_statuse_bilable_onsite(){
                             if($fieldaccesright['access'] !="NA"){ ?>
                            <li class="nav-item">
                               <a class="nav-link active"   data-bs-toggle="tab" href="#kt_tab_pane_1" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                              <span class="nav-text">Basic Info</span>
+                              <span class="nav-text"><?= __('Basic Info'); ?></span>
                               </a>
                            </li>
                          <?php } ?>
@@ -198,7 +198,7 @@ function save_statuse_bilable_onsite(){
                             if($fieldaccesright['access'] !="NA"){ ?>
                            <li class="nav-item">
                               <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_2" role="tab"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                <span class="nav-text">Work</span>
+                                <span class="nav-text"><?= __('Work'); ?></span>
                               </a>
                            </li>
                           <?php } ?>
@@ -208,7 +208,7 @@ function save_statuse_bilable_onsite(){
                            <li class="nav-item">
                               <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_3" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                              <span class="nav-text">Personal</span>
+                              <span class="nav-text"><?= __('Personal'); ?></span>
                               </a>
                            </li>
                            <?php } ?>
@@ -217,7 +217,7 @@ function save_statuse_bilable_onsite(){
                             if($fieldaccesright['field']['employee_experiances']!="NA"){ ?>
                            <li class="nav-item">
                               <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_4" onclick="displayitemdata('COM_LIST_EMP_WORK_EXPERIENCES', 'display_wrok')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                              <span class="nav-text">Employment History</span>
+                              <span class="nav-text"><?= __('Employment History'); ?></span>
                               </a>
                            </li>
                            <?php } ?>
@@ -226,7 +226,7 @@ function save_statuse_bilable_onsite(){
                             if($fieldaccesright['field']['employee_qualifications']!="NA"){ ?>
                            <li class="nav-item">
                               <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_5"  onclick="displayitemdata('COM_LIST_EMP_EDUCATIONS', 'display_education')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                              <span class="nav-text">Education Details</span>
+                              <span class="nav-text"><?= __('Education Details'); ?></span>
                               </a>
                            </li>
                            <?php } ?>
@@ -236,7 +236,7 @@ function save_statuse_bilable_onsite(){
                            <li class="nav-item">
                               <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_6" onclick="displayitemdata('COM_LIST_EMP_DEPENDENTS', 'display_dependents')"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                              <span class="nav-text">Dependent</span>
+                              <span class="nav-text"><?= __('Dependent'); ?></span>
                               </a>
                            </li>
                            <?php } ?>
@@ -246,19 +246,19 @@ function save_statuse_bilable_onsite(){
                            <li class="nav-item">
                               <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_7" onclick="displayitemdata('COM_LIST_EMP_CONTACTS', 'display_contacts')" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
 
-                              <span class="nav-text">Emergency Contact</span>
+                              <span class="nav-text"><?= __('Emergency Contact'); ?></span>
                               </a>
                            </li>
                            <?php } ?>
                             <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                 <span class="nav-text">Personal Details</span>
+                                 <span class="nav-text"><?= __('Personal Details'); ?></span>
                               </a>
                               <div class="dropdown-menu dropdown-menu-right">
                                 <?php
                                 $fieldaccesright = $vafield['proof_details'];
                                 if($fieldaccesright['field']['proof_details']!="NA"){ ?>
-                                 <a class="  dropdown-item" href="#kt_tab_pane_9"   data-bs-toggle="tab" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Identity Cards</a>
+                                 <a class="  dropdown-item" href="#kt_tab_pane_9"   data-bs-toggle="tab" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Identity Cards'); ?></a>
                                <?php } ?>
                                <?php
                                 $fieldaccesright = $vafield['emp_visa'];
@@ -443,13 +443,13 @@ function save_statuse_bilable_onsite(){
                                                    if($fieldaccesright['field']['total_experiance']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Total Experience') ?></th>
-                                                      <td><?php echo emptytextdashShow($data['total_experiance']); ?> - Year(s)</td>
+                                                      <td><?php echo emptytextdashShow($data['total_experiance']); ?> - <?= __('Year(s)'); ?></td>
                                                    </tr>
                                                    <?php }
                                                    if($fieldaccesright['field']['relevant_experience']!="NA"){  ?>
                                                    <tr>
                                                       <th scope="row"><?= __('Relevant Experience') ?></th>
-                                                      <td><?php echo emptytextdashShow($data['relevant_experience']); ?> - Year(s)</td>
+                                                      <td><?php echo emptytextdashShow($data['relevant_experience']); ?> - <?= __('Year(s)'); ?></td>
                                                    </tr>
 
                                                    <?php }
@@ -459,18 +459,18 @@ function save_statuse_bilable_onsite(){
                                                       <td>
                                                          <div class="radio radio-outline mt-1">
                                                             <label class="radio radio-inline">
-                                                            <input aria-label="Employee Type" readonly type="radio" name="employee_type" <?php if($data['employee_type'] == '1') {?> checked="checked" <?php
+                                                            <input aria-label="<?= htmlspecialchars(__('Employee Type'), ENT_QUOTES, 'UTF-8'); ?>" readonly type="radio" name="employee_type" <?php if($data['employee_type'] == '1') {?> checked="checked" <?php
 }else{ echo "disabled";
 } ?> value="1" />
                                                             <span></span>
-                                                            Permanent
+                                                            <?= __('Permanent'); ?>
                                                             </label>
                                                             <label class="radio radio-inline">
-                                                            <input aria-label="Radio option" readonly type="radio"  <?php if($data['employee_type'] == '2') {?> checked="checked" <?php
+                                                            <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" readonly type="radio"  <?php if($data['employee_type'] == '2') {?> checked="checked" <?php
 }else{ echo "disabled";
 } ?> name="employee_type" value="2" />
                                                             <span></span>
-                                                            Contract
+                                                            <?= __('Contract'); ?>
                                                             </label>
                                                          </div>
                                                       </td>
@@ -482,18 +482,18 @@ function save_statuse_bilable_onsite(){
                                                       <td>
                                                          <div class="radio radio-outline  ">
                                                             <label class="radio radio-inline">
-                                                            <input aria-label="Billable" readonly  name="billable" type="radio" <?php if($data['billable'] == 0) {?> checked="checked" <?php
+                                                            <input aria-label="<?= htmlspecialchars(__('Billable'), ENT_QUOTES, 'UTF-8'); ?>" readonly  name="billable" type="radio" <?php if($data['billable'] == 0) {?> checked="checked" <?php
 }else{ echo "disabled";
 } ?> value="0" />
                                                             <span></span>
-                                                            Yes
+                                                            <?= __('Yes'); ?>
                                                             </label>
                                                             <label class="radio radio-inline">
-                                                            <input aria-label="Billable" readonly type="radio"  name="billable" <?php if($data['billable'] == 1) {?> checked="checked" <?php
+                                                            <input aria-label="<?= htmlspecialchars(__('Billable'), ENT_QUOTES, 'UTF-8'); ?>" readonly type="radio"  name="billable" <?php if($data['billable'] == 1) {?> checked="checked" <?php
 }else{ echo "disabled";
 } ?> name="employee_type" value="1" />
                                                             <span></span>
-                                                            No
+                                                            <?= __('No'); ?>
                                                             </label>
                                                          </div>
                                                       </td>
@@ -704,14 +704,14 @@ function save_statuse_bilable_onsite(){
                               <div id="display_wrok">
 
                                <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                               </div>
                               </div>
                            </div>
                            <div class="tab-pane fade" id="kt_tab_pane_5" role="tabpanel" aria-labelledby="kt_tab_pane_5">
                               <div id="display_education">
                                  <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                               </div>
                               </div>
                            </div>
@@ -720,7 +720,7 @@ function save_statuse_bilable_onsite(){
                               <div id="display_dependents">
 
                                <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                               </div>
                               </div>
                            </div>
@@ -729,12 +729,12 @@ function save_statuse_bilable_onsite(){
                               <div id="display_contacts">
 
                                <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                               </div>
                               </div>
                            </div>
                            <div class="tab-pane fade" id="kt_tab_pane_8" role="tabpanel" aria-labelledby="kt_tab_pane_8">
-                              Other
+                              <?= __('Other'); ?>
                            </div>
                            <div class="tab-pane fade" id="kt_tab_pane_9" role="tabpanel" aria-labelledby="kt_tab_pane_9">
                               <form class="form j-pro">
@@ -758,14 +758,14 @@ function save_statuse_bilable_onsite(){
                                           <tr>
                                              <td scope="row">1</td>
                                              <td>
-                                                 <input aria-label="Input field" type="text" name="" disabled class="form-control" value="Aadhar Card">
+                                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Aadhar Card">
                                              </td>
                                              <td>
-                                                <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['adhar_no']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['adhar_no']; ?>" disabled>
                                              </td>
 
                                              <td>
-                                                <input aria-label="Input field" type="text" name="" disabled class="form-control" value="<?php echo ""; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="<?php echo ""; ?>" disabled>
                                              </td>
                                           </tr>
                                           <?php }
@@ -773,14 +773,14 @@ function save_statuse_bilable_onsite(){
                                           <tr>
                                              <td scope="row">2</td>
                                              <td>
-                                                   <input aria-label="Input field" type="text" name="" disabled class="form-control" value="Passport" disabled>
+                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Passport" disabled>
                                              </td>
                                              <td>
-                                                <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['passport']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['passport']; ?>" disabled>
                                              </td>
 
                                              <td>
-                                                <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['passport_expiry_date']!="0000-00-00"?$data['passport_expiry_date']:""; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['passport_expiry_date']!="0000-00-00"?$data['passport_expiry_date']:""; ?>" disabled>
                                              </td>
                                           </tr>
                                          <?php }
@@ -788,14 +788,14 @@ function save_statuse_bilable_onsite(){
                                           <tr>
                                              <td scope="row">3</td>
                                              <td>
-                                                   <input aria-label="Input field" type="text" name="" disabled class="form-control" value="Driving">
+                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Driving">
                                              </td>
                                              <td>
-                                                <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['driving_licence']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['driving_licence']; ?>" disabled>
                                              </td>
 
                                              <td>
-                                                <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['driving_licence_expiry_date']!="0000-00-00"?$data['driving_licence_expiry_date']:""; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['driving_licence_expiry_date']!="0000-00-00"?$data['driving_licence_expiry_date']:""; ?>" disabled>
                                              </td>
                                           </tr>
                                           <?php }
@@ -803,14 +803,14 @@ function save_statuse_bilable_onsite(){
                                           <tr>
                                              <td scope="row">4</td>
                                              <td>
-                                                   <input aria-label="Input field" type="text" name="" disabled class="form-control" value="Pan Number">
+                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Pan Number">
                                              </td>
                                              <td>
-                                                <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['pan_number']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['pan_number']; ?>" disabled>
                                              </td>
 
                                              <td>
-                                                <input aria-label="Input field" type="text"  disabled name="" class="form-control" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  disabled name="" class="form-control" disabled>
                                              </td>
                                           </tr>
                                           <?php }
@@ -818,14 +818,14 @@ function save_statuse_bilable_onsite(){
                                           <tr>
                                              <td scope="row">5</td>
                                              <td>
-                                                   <input aria-label="Input field" type="text" name="" disabled class="form-control" value="PF Number">
+                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="PF Number">
                                              </td>
                                              <td>
-                                                <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['pf_no']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['pf_no']; ?>" disabled>
                                              </td>
 
                                              <td>
-                                                <input aria-label="Input field" type="text" disabled name="" class="form-control" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" disabled name="" class="form-control" disabled>
                                              </td>
                                           </tr>
                                           <?php }
@@ -833,14 +833,14 @@ function save_statuse_bilable_onsite(){
                                            <tr>
                                              <td scope="row">6</td>
                                              <td>
-                                                   <input aria-label="Input field" type="text" name="" disabled class="form-control" value="UAN Number">
+                                                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="UAN Number">
                                              </td>
                                              <td>
-                                                <input aria-label="Input field" type="text" name="" class="form-control" value="<?php echo $data['pf_uan']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['pf_uan']; ?>" disabled>
                                              </td>
 
                                              <td>
-                                                <input aria-label="Input field" type="text" disabled name="" class="form-control" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" disabled name="" class="form-control" disabled>
                                              </td>
                                           </tr>
                                         <?php } ?>
@@ -854,7 +854,7 @@ function save_statuse_bilable_onsite(){
                               <div id="display_visa">
 
                                <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                               </div>
                               </div>
                            </div>
@@ -862,7 +862,7 @@ function save_statuse_bilable_onsite(){
                               <div id="display_skill">
 
                                <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                               </div>
                               </div>
                            </div>
@@ -872,7 +872,7 @@ function save_statuse_bilable_onsite(){
                               <?php if(isset($teams['reproter']['id'])){  $report =$teams['reproter'] ; ?>
                         <div class="row">
 
-                           <h4 class="f-w-700 mb-2"> Reporting Manager </h4>
+                           <h4 class="f-w-700 mb-2"> <?= __('Reporting Manager'); ?> </h4>
                            <div class="col-xl-3 col-md-6">
                               <div class="card sale-card ">
                                  <div class="card-header">
@@ -882,7 +882,7 @@ function save_statuse_bilable_onsite(){
 
                                     <div data-label="<?php echo initials($report['display_name']); ?>" class="radial-bar custom-radial-bar radial-bar-40 radial-bar-lg radial-bar-danger mt-0 mb-2">
                                     <?php if($report['image']!=""){ ?>
-                                      <img src="uploads/all/<?php echo $report['image']; ?>" alt="Attachment Preview">
+                                      <img src="uploads/all/<?php echo $report['image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <?php } ?>
 
                                         </div>
@@ -909,7 +909,7 @@ function save_statuse_bilable_onsite(){
                         <?php }
                         if(count((array)$teams['teams']) !=0){ ?>
                         <div class="mt-10">
-                          <h4 class="f-w-700 mb-2">Teams</h4>
+                          <h4 class="f-w-700 mb-2"><?= __('Teams'); ?></h4>
 
 
                            <div class="row">
@@ -926,7 +926,7 @@ function save_statuse_bilable_onsite(){
             <div class="card-block text-center">
                 <div data-label="<?php echo initials($team['display_name']); ?>" class="radial-bar custom-radial-bar radial-bar-40 radial-bar-lg radial-bar-danger mt-0 mb-2">
             <?php if($team['image']!=""){ ?>
-              <img src="uploads/all/<?php echo $team['image']; ?>" alt="Attachment Preview">
+              <img src="uploads/all/<?php echo $team['image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
             <?php } ?>
 
                 </div>
@@ -945,7 +945,7 @@ function save_statuse_bilable_onsite(){
                 <div class="row">
                     <div class="col-6">
                         <div class="s-cont d-inline-block">
-    <input aria-label="Checkbox" type="checkbox" class="js-success-sm" <?php if($team['on_off_site']==0){ echo "checked";
+    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-success-sm" <?php if($team['on_off_site']==0){ echo "checked";
 } ?> onchange="changeonsite(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;<span style="font-size: 12px;
  <?php if($team['on_off_site']==1){ echo "color: red";
 } ?>" class="col-form-label onsite_lable<?php echo $team['id']; ?>">
@@ -959,12 +959,12 @@ function save_statuse_bilable_onsite(){
                     <div class="col-6 b-l-default">
                         <div class="s-cont d-inline-block">
 
-            <input aria-label="Checkbox" type="checkbox" class="js-primary-sm" <?php if($team['billable']=='0'){ echo "checked";
+            <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-primary-sm" <?php if($team['billable']=='0'){ echo "checked";
 } ?> onchange="changebillable(<?php echo $team['id']; ?>,'<?php echo ucwords($team['display_name']);?>')" value="1"/>&nbsp;&nbsp;
 
             <span style="font-size: 12px; <?php if($team['billable']=='1'){ echo "color: red";
 } ?>" class="col-form-label billable_lable<?php echo $team['id']; ?>" >
- <?php if($team['billable']=='1'){ echo "Non Billable";
+ <?php if($team['billable']=='1'){ echo __('Non Billable');
 }else{ echo "Billable";
 } ?> </span>
 
@@ -984,7 +984,7 @@ function save_statuse_bilable_onsite(){
                         </div>
                         <?php }else{  ?>
             <div class="card-px text-center ">
-              <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Team</p>
+              <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Team'); ?></p>
               <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
               </div>
@@ -999,27 +999,27 @@ function save_statuse_bilable_onsite(){
                         </div>
 
                         <div class="tab-pane fade" id="home-8" role="tabpanel" aria-labelledby="home-tab-8">
-                            Goals
+                            <?= __('Goals'); ?>
                          </div>
                      <div class="tab-pane fade" id="home-9" role="tabpanel" aria-labelledby="home-tab-9">
                         <div id="display_side_assets">
 
                            <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                            </div>
                         </div>
                      </div>
                      <div class="tab-pane fade" id="home-19" role="tabpanel" aria-labelledby="home-tab-19">
                         <div id="display_side_work_order">
                            <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                            </div>
                         </div>
                      </div>
                      <div class="tab-pane fade" id="home-22" role="tabpanel" aria-labelledby="home-tab-19">
                         <div id="display_side_esign">
                            <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                            </div>
                         </div>
                      </div>
@@ -1028,10 +1028,10 @@ function save_statuse_bilable_onsite(){
                           <?php  include_once 'custom_list_employee_events.php'; ?>
                       </div>
                       <div class="tab-pane fade" id="home-11" role="tabpanel" aria-labelledby="home-tab-11">
-                        Travel
+                        <?= __('Travel'); ?>
                       </div>
                       <div class="tab-pane fade" id="home-12" role="tabpanel" aria-labelledby="home-tab-12">
-                        Clamis
+                        <?= __('Clamis'); ?>
                       </div>
 
                        <div class="tab-pane fade" id="home-70" role="tabpanel" aria-labelledby="home-tab-70">
@@ -1042,7 +1042,7 @@ function save_statuse_bilable_onsite(){
 
                             <div class="card card-custom gutter-b card-stretch">
                                  <div class="card-header border-0">
-                                    <h3 class="card-title">My Documents</h3>
+                                    <h3 class="card-title"><?= __('My Documents'); ?></h3>
 
                                  </div>
                                  <div class="card-body">
@@ -1056,13 +1056,13 @@ function save_statuse_bilable_onsite(){
                               </div>
                       </div>
                       <div class="tab-pane fade" id="home-14" role="tabpanel" aria-labelledby="home-tab-14">
-                        Leaves
+                        <?= __('Leaves'); ?>
                       </div>
                       <div class="tab-pane fade" id="home-15" role="tabpanel" aria-labelledby="home-tab-15">
                         <div id="display_side_performance">
 
                            <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                            </div>
                         </div>
                       </div>
@@ -1070,7 +1070,7 @@ function save_statuse_bilable_onsite(){
                         <div id="display_side_performance_2">
 
                            <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                            <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                            </div>
                         </div>
                       </div>
@@ -1092,8 +1092,8 @@ function save_statuse_bilable_onsite(){
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title modallabel" id="exampleModalLabel">Effort Share Status</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title modallabel" id="exampleModalLabel"><?= __('Effort Share Status'); ?></h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
       </div>
 
 
@@ -1104,11 +1104,11 @@ function save_statuse_bilable_onsite(){
       <div class="modal-body">
         <div class="alert alert-custom alert-default" role="alert">
           <div class="row" style="width: 100%;">
-             <span class="col-lg-4"><b>Employee name : </b></span>
+             <span class="col-lg-4"><b><?= __('Employee name'); ?> : </b></span>
              <div class="col-lg-8 ">
                 <p class="modal_view_employee_name"></p>
              </div>
-             <span class="col-lg-4"><b>Status : </b></span>
+             <span class="col-lg-4"><b><?= __('Status'); ?> : </b></span>
              <div class="col-lg-8 ">
                 <p class="modal_view_status"></p>
              </div>

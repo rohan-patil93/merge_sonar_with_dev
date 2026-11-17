@@ -69,7 +69,7 @@ function assignemployeelistnew(pay_area_id){
 
             <a target="_blank"  href="index.php?option=COM_INSERT_DYNAMIC_IMPORT&table=<?php echo $table; ?>"  class="btn btn-primary mb-2 desktop-view">
             <i class="icofont icofont-cloud-upload icon-white"></i>
-            <?php echo "Import";  ?>
+            <?php echo __("Import");  ?>
           </a>
 
             <a href="index.php?option=<?php echo $insert; ?>" class="btn btn-success mb-2 desktop-view">
@@ -78,7 +78,7 @@ function assignemployeelistnew(pay_area_id){
             </a>
               <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
           </div>
             </a>
@@ -106,7 +106,7 @@ function assignemployeelistnew(pay_area_id){
                     }
 }?>
                   <?php } ?>
-                  <th scope="col">Action</th>
+                  <th scope="col"><?= __('Action'); ?></th>
                 </tr>
               </thead>
               <tbody>
@@ -137,7 +137,7 @@ function assignemployeelistnew(pay_area_id){
                           $str = "<div style='background: #".$bill[$header['name']].";width: 20px;height: 20px;'>&nbsp;</div>";
                         }elseif( $header['type'] == 'image'){
                           $bimage = 'uploads/all/'.$bill[$header['name']];
-                          $str = "<img src='$bimage' style='width:35px;' alt='Preview'>";
+                          $str = "<img src='$bimage' style='width:35px;' alt='".htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8')."'>";
                         }else{
                           $str =  $bill[$header['name']];
 
@@ -191,8 +191,8 @@ function assignemployeelistnew(pay_area_id){
 
                 $view =  "index.php?option=".$view_page."&Rid=".$rid
                 ?>
-                <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="Edit Datails" ><i class="fa fa-edit"></i></a>
-                <div class="btn btn-icon btn-primary btn-circle mr-2" onclick="assignemployeelistnew(<?php echo $trid; ?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Allocate Resources" aria-label="Allocate Resources" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-user"></i></div>
+                <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="<?= htmlspecialchars(__('Edit Datails'), ENT_QUOTES, 'UTF-8'); ?>" ><i class="fa fa-edit"></i></a>
+                <div class="btn btn-icon btn-primary btn-circle mr-2" onclick="assignemployeelistnew(<?php echo $trid; ?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-user"></i></div>
               </td>
 
             </tr>
@@ -202,7 +202,7 @@ function assignemployeelistnew(pay_area_id){
           </tbody>
         <?php }else{ ?>
             <div class="card-px text-center py-20 m-t-30">
-                  <h2 class="f-40 fw-bolder m-b-30">Hello!</h2>
+                  <h2 class="f-40 fw-bolder m-b-30"><?= __('Hello!'); ?></h2>
                   <p class="text-muted f-16 fw-bold m-b-30"><?php echo $empty_data; ?></p>
                   <button type="button" onclick="dynamicinsertpopup(<?php echo "'".$insert."'"; ?>)" class=" btn btn-success  ">
                   <i class="icofont icofont-plus icon-white "></i>

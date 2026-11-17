@@ -71,7 +71,7 @@ var mk = 1000;
         htmlrows += '<div class="row" id="deleteidvesting_'+mk+'"><div class="form-group col-lg-4"><input aria-label="<?php echo __('Vesting Date['); ?>" type="text" class="form-control datepicker vesategdatpicker_'+maxrows+'" name="vesting_date['+maxrows+'][]" value="" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></div><div class="form-group col-lg-3"><input aria-label="<?php echo __('Vesting Percentage['); ?>" type="number" class="form-control text-right vestingpercentage_'+maxrows+' vesategpercentage" name="vesting_percentage['+maxrows+'][]"  onblur="calculateVestingPercentage('+maxrows+')"></div><div class="form-group col-lg-4"><input aria-label="<?php echo __('Till Date['); ?>" type="text" class="form-control datepicker vesategetilldate_'+maxrows+'" name="till_date['+maxrows+'][]" ></div><div class="form-group col-lg-1"><button type="button" class="btn p-0 border-0 bg-transparent ti-trash" onclick="deletRowVestage('+mk+','+maxrows+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div>  </div></div>';
 
 
-        htmlrows += '<div class="card-footer pt-0"><input type="hidden" name="vesting_schedule_seq[]" value="'+mk+'"><button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addMore('+mk+')"><i class="fa fa-check m-r-10"></i>Add More</button><button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="closePopUp()"> <?php echo __('Done'); ?></button><span class="float-end m-t-20"> <span class="text-danger"><?php echo __('Un-Schedule (%) :'); ?> </span><span id="totaldistributionpending_'+maxrows+'">0</span><span class="text-warning m-l-20"><?php echo __('Total (%) :'); ?> </span><span id="totaldistributionqty_'+maxrows+'">0</span></span></div>';
+        htmlrows += '<div class="card-footer pt-0"><input type="hidden" name="vesting_schedule_seq[]" value="'+mk+'"><button type="button" class="btn btn-success waves-effect waves-light float-left  m-r-10" onclick="addMore('+mk+')"><i class="fa fa-check m-r-10"></i><?= htmlspecialchars(__('Add More'), ENT_QUOTES, 'UTF-8'); ?></button><button type="button" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" onclick="closePopUp()"> <?php echo __('Done'); ?></button><span class="float-end m-t-20"> <span class="text-danger"><?php echo __('Un-Schedule (%) :'); ?> </span><span id="totaldistributionpending_'+maxrows+'">0</span><span class="text-warning m-l-20"><?php echo __('Total (%) :'); ?> </span><span id="totaldistributionqty_'+maxrows+'">0</span></span></div>';
 
         htmlrows += '</div></div>';
         htmlrows += '</td>';
@@ -208,7 +208,7 @@ function closePopUp(rowid){
     if(error ==0){
         $(".custom-popup-open").hide();
     }else{
-       swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Please fill out all required fields.", "error");
+       swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Please fill out all required fields.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
     }
   }
 function calculateVestingPercentage(rowid){

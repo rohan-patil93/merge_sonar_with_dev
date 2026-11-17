@@ -49,13 +49,13 @@ $mopdulesetup = json_decode($mopdule_setup,1);
      	var count = $(".itemRow").length;
      	var htmlRows = '';
         htmlRows += '<tr class="itemRow cardid'+count+'">';
-        htmlRows += '<td><div class="row"><div class="col-lg-2"><span class="deleteiconcustom text-danger f-22" onclick="deleteitem('+count+')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span></div><div class="col-lg-10"><input type="hidden" name="rid[]" ><input type="text" name="field_name[]"  class="form-control"  required aria-label="Field Name"></div></div></td>';
-        htmlRows += '<td><input type="text" name="menu_path[]"  class="form-control" aria-label="Menu Path"></td>';
-        htmlRows += '<td><input type="text" name="reference_field_name[]" class="form-control"  required aria-label="Reference Field Name"></td>';
-        htmlRows += '<td><textarea  name="help_text[]" class="form-control" required aria-label="Help Text"></textarea></td>';
-        htmlRows += '<td> <select class="form-select js-example-basic-single"  name="field_type[]" aria-label="Field Type"><?php foreach($filed_array as $key=>$value){ ?>
+        htmlRows += '<td><div class="row"><div class="col-lg-2"><span class="deleteiconcustom text-danger f-22" onclick="deleteitem('+count+')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span></div><div class="col-lg-10"><input type="hidden" name="rid[]" ><input type="text" name="field_name[]"  class="form-control"  required aria-label="<?= htmlspecialchars(__('Field Name'), ENT_QUOTES, 'UTF-8'); ?>"></div></div></td>';
+        htmlRows += '<td><input type="text" name="menu_path[]"  class="form-control" aria-label="<?= htmlspecialchars(__('Menu Path'), ENT_QUOTES, 'UTF-8'); ?>"></td>';
+        htmlRows += '<td><input type="text" name="reference_field_name[]" class="form-control"  required aria-label="<?= htmlspecialchars(__('Reference Field Name'), ENT_QUOTES, 'UTF-8'); ?>"></td>';
+        htmlRows += '<td><textarea  name="help_text[]" class="form-control" required aria-label="<?= htmlspecialchars(__('Help Text'), ENT_QUOTES, 'UTF-8'); ?>"></textarea></td>';
+        htmlRows += '<td> <select class="form-select js-example-basic-single"  name="field_type[]" aria-label="<?= htmlspecialchars(__('Field Type'), ENT_QUOTES, 'UTF-8'); ?>"><?php foreach($filed_array as $key=>$value){ ?>
 <option value="<?php echo $key; ?>"  <?php echo $respons['field_type']==$key?"selected":""; ?>><?php echo $value; ?></option><?php } ?></select></td>';
-   htmlRows += '<td><input type="text" name="sequence[]"  class="form-control"  required aria-label="Sequence"></td>';
+   htmlRows += '<td><input type="text" name="sequence[]"  class="form-control"  required aria-label="<?= htmlspecialchars(__('Sequence'), ENT_QUOTES, 'UTF-8'); ?>"></td>';
    htmlRows += '<td><input type="checkbox" class="js-switch'+count+'" name="display['+count+']" value="1" / aria-label="Display[&#039;+count+&#039;]"></td>';
         htmlRows += '</tr>';
         $('#toureaddmore').append(htmlRows);
@@ -83,7 +83,7 @@ function deleteitem(cardid){
 	<div class="container-fluid ">
 		<div class="card card-custom card-sticky " id="kt_page_sticky_card">
 			<div class="card-header">
-				<h5><?= __('Take A Tours') ?></h5><i role="button" tabindex="0" aria-label="Go Toure" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Go Toure"></i>
+				<h5><?= __('Take A Tours') ?></h5><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>"></i>
 				<div class="card-header-right">
 				       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                      <i class="icofont icofont-reply"></i> <?= __('Back') ?></a>
@@ -95,15 +95,15 @@ function deleteitem(cardid){
 <div class="row">
 	<span class="col-lg-2 f-w-700  d-inline-block" style="margin-bottom:5px"><?= __('Select table name') ?></span>
 	<div class="col-lg-3">
-	  <select class="form-select js-example-basic-single" name="application_table_name" onchange="selecttablename(this.value)" aria-label="Application Table Name">
-			<option value = "0"> Select Any One</option>
+	  <select class="form-select js-example-basic-single" name="application_table_name" onchange="selecttablename(this.value)" aria-label="<?= htmlspecialchars(__('Application Table Name'), ENT_QUOTES, 'UTF-8'); ?>">
+			<option value = "0"> <?= __('Select Any One'); ?></option>
 			<?php foreach ($showtables as $data) {  ?>
 				<option  <?php if($resarray[0]['application_table_name'] == $data['application_table_name']){ ?> selected  <?php } ?> value = <?php echo $data['application_table_name'] ?>   > <?php echo ucwords(str_replace('_',' ',$data['application_table_name'])); ?> </option>
 		<?php	} ?>
 				<option value = "-1"  <?php echo $_GET['table']=="-1"?"selected":""?>><?= __('Other Table') ?></option>
 		</select>
 		<?php if($_GET['table']=="-1"){ ?>
-		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="Enter Table/Page Name"> <?php } ?>
+		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="<?= htmlspecialchars(__('Enter Table/Page Name'), ENT_QUOTES, 'UTF-8'); ?>"> <?php } ?>
 
 	</div>
 
@@ -131,18 +131,18 @@ function deleteitem(cardid){
 	  <tr class="itemRow">
 		<td>
 			<input type="hidden" name="rid[]" value="<?php echo $respons['id']; ?>">
-	  		<input type="text" name="field_name[]" id="field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['field_name']; ?>"  readonly aria-label="Field Name">
+	  		<input type="text" name="field_name[]" id="field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['field_name']; ?>"  readonly aria-label="<?= htmlspecialchars(__('Field Name'), ENT_QUOTES, 'UTF-8'); ?>">
 	  	</td>
 	  	<td>
-	  		<input type="text" name="menu_path[]" id="menu_path<?php echo $i; ?>" class="form-control" value="<?php echo $respons['menu_path']; ?>" aria-label="Menu Path">
+	  		<input type="text" name="menu_path[]" id="menu_path<?php echo $i; ?>" class="form-control" value="<?php echo $respons['menu_path']; ?>" aria-label="<?= htmlspecialchars(__('Menu Path'), ENT_QUOTES, 'UTF-8'); ?>">
 	  	</td>
 		<td>
-	  		<input type="text" name="reference_field_name[]" id="reference_field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['reference_field_name']; ?>" aria-label="Reference Field Name">
+	  		<input type="text" name="reference_field_name[]" id="reference_field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['reference_field_name']; ?>" aria-label="<?= htmlspecialchars(__('Reference Field Name'), ENT_QUOTES, 'UTF-8'); ?>">
 	  	</td>
-		<td><textarea  name="help_text[]" class="form-control" aria-label="Help Text"><?php echo $respons['help_text']; ?></textarea></td>
+		<td><textarea  name="help_text[]" class="form-control" aria-label="<?= htmlspecialchars(__('Help Text'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $respons['help_text']; ?></textarea></td>
 		<td>
 
- <select class="form-select js-example-basic-single" id="" name="field_type[]"  id="field_type<?php echo $i; ?>" aria-label="Field Type">
+ <select class="form-select js-example-basic-single" id="" name="field_type[]"  id="field_type<?php echo $i; ?>" aria-label="<?= htmlspecialchars(__('Field Type'), ENT_QUOTES, 'UTF-8'); ?>">
 
                <?php foreach($filed_array as $key=>$value){ ?>
 <option value="<?php echo $key; ?>"  <?php echo $respons['field_type']==$key?"selected":""; ?>><?php echo $value; ?></option>
@@ -152,10 +152,10 @@ function deleteitem(cardid){
 
 	  	</td>
 	  	<td>
-	  		<input type="text" name="sequence[]" id="sequence<?php echo $i; ?>" class="form-control" value="<?php echo $respons['sequence']; ?>" aria-label="Sequence">
+	  		<input type="text" name="sequence[]" id="sequence<?php echo $i; ?>" class="form-control" value="<?php echo $respons['sequence']; ?>" aria-label="<?= htmlspecialchars(__('Sequence'), ENT_QUOTES, 'UTF-8'); ?>">
 	  	</td>
 	  	<td>
-	  		<input type="checkbox" class="js-switch" name="display[<?php echo $i; ?>]" value="1" <?php echo $respons['display']=='1'?"checked":""; ?>  / aria-label="Input">
+	  		<input type="checkbox" class="js-switch" name="display[<?php echo $i; ?>]" value="1" <?php echo $respons['display']=='1'?"checked":""; ?>  / aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 
 	  	</td>
 

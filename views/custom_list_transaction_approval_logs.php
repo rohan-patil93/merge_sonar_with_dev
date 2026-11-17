@@ -18,11 +18,11 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
 ?>
 <script type="text/javascript">
      $(document).on('click', '#checkall1', function() {
-          alert('haii');
+          alert(<?php echo json_encode(__('haii'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
 
     });
      function chackd(val){
-        alert("ravi");
+        alert(<?php echo json_encode(__('ravi'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         alert(val);
          var dcheck = document.getelementbyid('d_check_all').value;
          var checkboxes = document.getelementbyid('row').value;
@@ -56,7 +56,7 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
                                     <i class="kt-font-brand flaticon-list-2"></i>
                                 </span>
                                 <h3 class="kt-portlet__head-title">
-                                    <?php echo "Approval Logs";  ?>
+                                    <?php echo __("Approval Logs");  ?>
                                 </h3>
 
                             </div>
@@ -66,7 +66,7 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
                                         <div class="dropdown dropdown-inline">
                                             <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
                                                     <i class="la la-arrow-left"></i>
-                                                    <span class="kt-hidden-mobile">Back</span>
+                                                    <span class="kt-hidden-mobile"><?= __('Back'); ?></span>
                                                 </a>
                                         </div>
 
@@ -94,26 +94,26 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
         <div class="col-xl-12">
             <div class="kt-form__group kt-form__group--inline">
                 <div class="kt-form__label kt-form__label-no-wrap">
-                    <span class="kt-font-bold kt-font-danger-">Selected
-                        <span id="kt_datatable_selected_number">0</span> records:</span>
+                    <span class="kt-font-bold kt-font-danger-"><?= __('Selected'); ?>
+                        <span id="kt_datatable_selected_number">0</span> <?= __('records'); ?>:</span>
                 </div>
                 <div class="kt-form__control">
                     <div class="btn-toolbar">
                         <div class="dropdown">
                             <button type="button" class="btn btn-brand btn-sm dropdown-toggle" data-toggle="dropdown">
-                                Update status
+                                <?= __('Update status'); ?>
                             </button>
                             <div class="dropdown-menu">
-                                <button class="dropdown-item" name="status" id="status" value="<?php echo ST_APPROVED; ?>">Approved</button>
-                                <button class="dropdown-item" name="status" id="status_2" value="<?php echo ST_SEND_BACK; ?>">Send Back</button>
-                                <button class="dropdown-item" name="status" id="status_3" value="<?php echo ST_REJECTED; ?>">Reject</button>
+                                <button class="dropdown-item" name="status" id="status" value="<?php echo ST_APPROVED; ?>"><?= __('Approved'); ?></button>
+                                <button class="dropdown-item" name="status" id="status_2" value="<?php echo ST_SEND_BACK; ?>"><?= __('Send Back'); ?></button>
+                                <button class="dropdown-item" name="status" id="status_3" value="<?php echo ST_REJECTED; ?>"><?= __('Reject'); ?></button>
                             </div>
                         </div>
                         &nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-sm btn-danger" type="button" disabled id="kt_datatable_delete_all">Delete All</button>
+                        <button class="btn btn-sm btn-danger" type="button" disabled id="kt_datatable_delete_all"><?= __('Delete All'); ?></button>
                         &nbsp;&nbsp;&nbsp;
                         <a href="">
-                        <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#kt_modal_fetch_id">Fetch Selected Records</button></a>
+                        <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#kt_modal_fetch_id"><?= __('Fetch Selected Records'); ?></button></a>
                         <input type="hidden" name="table" value="<?php echo $button['table']; ?>">
                     </div>
                 </div>
@@ -127,17 +127,17 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
                 <tr>
                     <th scope="col"><label class="kt-checkbox">
 
-                        <input aria-label="Checkall1"  type="checkbox"  id="checkall1" value="0" onclick="chackd(this.value )" onkeydown="">  <span> </span> </label>
+                        <input aria-label="<?= htmlspecialchars(__('Checkall1'), ENT_QUOTES, 'UTF-8'); ?>"  type="checkbox"  id="checkall1" value="0" onclick="chackd(this.value )" onkeydown="">  <span> </span> </label>
                     </th>
-                    <th scope="col">Transaction No</th>
-                    <th scope="col">Transaction Date</th>
-                    <th scope="col">Originator</th>
-                    <th scope="col">Sub Total</th>
-                    <th scope="col">Discount </th>
-                    <th scope="col">Shipping </th>
-                    <th scope="col">Tax </th>
-                    <th scope="col">Budget </th>
-                    <th scope="col">Action </th>
+                    <th scope="col"><?= __('Transaction No'); ?></th>
+                    <th scope="col"><?= __('Transaction Date'); ?></th>
+                    <th scope="col"><?= __('Originator'); ?></th>
+                    <th scope="col"><?= __('Sub Total'); ?></th>
+                    <th scope="col"><?= __('Discount'); ?> </th>
+                    <th scope="col"><?= __('Shipping'); ?> </th>
+                    <th scope="col"><?= __('Tax'); ?> </th>
+                    <th scope="col"><?= __('Budget'); ?> </th>
+                    <th scope="col"><?= __('Action'); ?> </th>
                 </tr>
             </thead>
             <tbody>
@@ -148,7 +148,7 @@ $content = $data['help_text']!='' ? $data['help_text'] : "Help Test";
                         <div>
 
                         <label class="kt-checkbox">
-                            <input aria-label="Input field"  name="check[<?php echo $i; ?>]" id="check" type="checkbox" value="yes">
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  name="check[<?php echo $i; ?>]" id="check" type="checkbox" value="yes">
                             <span> </span>
                         </label>
                         </div>

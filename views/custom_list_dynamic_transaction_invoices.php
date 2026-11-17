@@ -43,14 +43,14 @@ $statuse = ViewStatusData();
     <table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" >
         <tr>
             <th scope="col"></th>
-            <th scope="col">Transaction No.</th>
-            <th scope="col">Transaction Date</th>
-            <th scope="col">Originator</th>
-            <th scope="col">Party Name</th>
-            <th scope="col" class="text-right">Amount</th>
-            <th scope="col" class="text-right">Tax</th>
-            <th scope="col" class="text-right">Total</th>
-            <th scope="col">Status</th>
+            <th scope="col"><?= __('Transaction No.'); ?></th>
+            <th scope="col"><?= __('Transaction Date'); ?></th>
+            <th scope="col"><?= __('Originator'); ?></th>
+            <th scope="col"><?= __('Party Name'); ?></th>
+            <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+            <th scope="col" class="text-right"><?= __('Tax'); ?></th>
+            <th scope="col" class="text-right"><?= __('Total'); ?></th>
+            <th scope="col"><?= __('Status'); ?></th>
         </tr>
     <?php foreach($transactiontables as $trans_id=>$tableslist){ ?>
         <tr class="main">
@@ -74,7 +74,7 @@ $statuse = ViewStatusData();
                     <div class="col-lg-8">
                         <table class="table table-td-6">
                             <thead>
-                                <tr><th scope="col">Item</th><th scope="col" class="text-right">Quantity</th><th scope="col" class="text-right">Pending Quantity</th><th scope="col" class="text-right">Amount</th><th scope="col" class="text-right">Tax</th><th scope="col" class="text-right">Total</th></tr>
+                                <tr><th scope="col"><?= __('Item'); ?></th><th scope="col" class="text-right"><?= __('Quantity'); ?></th><th scope="col" class="text-right"><?= __('Pending Quantity'); ?></th><th scope="col" class="text-right"><?= __('Amount'); ?></th><th scope="col" class="text-right"><?= __('Tax'); ?></th><th scope="col" class="text-right"><?= __('Total'); ?></th></tr>
                             </thead>
                             <tbody>
                                 <?php foreach($tableslist as $tableslist1){?>
@@ -96,7 +96,7 @@ $statuse = ViewStatusData();
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                             <div class="card-header">
-                                <h5>Order Summary</h5>
+                                <h5><?= __('Order Summary'); ?></h5>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-6 p-t-20 text-center">
@@ -105,10 +105,10 @@ $statuse = ViewStatusData();
                         </div>
                             <div class="card-body">
                                 <table class="table table-sm mb-0">
-                                    <tr><th scope="col">Sub Total </th><td style="text-align: right;"><?php echo customeummarmonyformateifine($tableslist[0]['amount']); ?></td></tr>
-                                    <tr><th scope="col">Discount </th><td style="text-align: right;"><?php echo customeummarmonyformateifine($tableslist[0]['discount_amount']); ?></td></tr>
-                                    <tr><th scope="col">Tax</th><td style="text-align: right;"><?php echo customeummarmonyformateifine($tableslist[0]['tax_amount']); ?></td></tr>
-                                    <tr class="bg-primary"><th scope="col">Total</th><td style="text-align: right;"><span class="f-18"><?php echo customeummarmonyformateifine($tableslist[0]['total_amount']); ?></span></td></tr>
+                                    <tr><th scope="col"><?= __('Sub Total'); ?> </th><td style="text-align: right;"><?php echo customeummarmonyformateifine($tableslist[0]['amount']); ?></td></tr>
+                                    <tr><th scope="col"><?= __('Discount'); ?> </th><td style="text-align: right;"><?php echo customeummarmonyformateifine($tableslist[0]['discount_amount']); ?></td></tr>
+                                    <tr><th scope="col"><?= __('Tax'); ?></th><td style="text-align: right;"><?php echo customeummarmonyformateifine($tableslist[0]['tax_amount']); ?></td></tr>
+                                    <tr class="bg-primary"><th scope="col"><?= __('Total'); ?></th><td style="text-align: right;"><span class="f-18"><?php echo customeummarmonyformateifine($tableslist[0]['total_amount']); ?></span></td></tr>
                                 </table>
                             </div>
 
@@ -116,9 +116,9 @@ $statuse = ViewStatusData();
                     </div>
                     <div class="col-lg-1">
 
-                                <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$tableslist[0]['id']);?>" class="d-block text-primary f-16 mt-1" target="_blank"><i class="ti-eye"></i> View</a>
+                                <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>&Rid=<?php echo deocdeId('id:'.$tableslist[0]['id']);?>" class="d-block text-primary f-16 mt-1" target="_blank"><i class="ti-eye"></i> <?= __('View'); ?></a>
 
-                                <a  href="index.php?option=COM_QO_PRINT&rid=<?php echo $tableslist[0]['id']; ?>&table=<?php echo $optiondetails['application_table_name']; ?>&title=<?php echo ucwords(str_replace("_"," ",($optiondetails['application_table_name']))); ?>" class="d-block  text-primary f-16 mt-1" target="_blank"><i class="ti-link"></i> View Invoice</a>
+                                <a  href="index.php?option=COM_QO_PRINT&rid=<?php echo $tableslist[0]['id']; ?>&table=<?php echo $optiondetails['application_table_name']; ?>&title=<?php echo ucwords(str_replace("_"," ",($optiondetails['application_table_name']))); ?>" class="d-block  text-primary f-16 mt-1" target="_blank"><i class="ti-link"></i> <?= __('View Invoice'); ?></a>
                     </div>
                 </div>
             </td>
@@ -127,7 +127,7 @@ $statuse = ViewStatusData();
     </table>
     <?php }else{ ?>
         <div class="card-px text-center ">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Invoices</p>
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Invoices'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>

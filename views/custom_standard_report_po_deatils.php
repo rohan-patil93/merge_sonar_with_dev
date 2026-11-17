@@ -50,13 +50,13 @@ $to_date = $to_date != "" ? fromDate($to_date) : "";
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h4 class="">PO Details Report</h4>
+      <h4 class=""><?= __('PO Details Report'); ?></h4>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=PO Details" target="_blank">CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=PO Details" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=PO Details" target="_blank"><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=PO Details" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -67,8 +67,8 @@ $to_date = $to_date != "" ? fromDate($to_date) : "";
         <div class="row col-lg-12">
 
           <div class="col-lg-3">
-            <span class="form-label">Select Vendors</span>
-            <select aria-label="Vendor Ids[]" name="vendor_ids[]" class="form-control js-example-basic-multiple" multiple>
+            <span class="form-label"><?= __('Select Vendors'); ?></span>
+            <select aria-label="<?= htmlspecialchars(__('Vendor Ids'), ENT_QUOTES, 'UTF-8'); ?>[]" name="vendor_ids[]" class="form-control js-example-basic-multiple" multiple>
               <?php
               foreach ($vendors as $vendor) {
                 $selected = in_array($vendor['id'], (array)$_POST['vendor_ids'] ?? []) ? 'selected' : '';
@@ -78,27 +78,27 @@ $to_date = $to_date != "" ? fromDate($to_date) : "";
             </select>
           </div>
           <div class="col-lg-3">
-            <span class="form-label"> Start Date</span>
+            <span class="form-label"> <?= __('Start Date'); ?></span>
             <div class="input-group custom-date">
               <span class="input-group-text addon-style" id="basic-addon3">
                 <span class=""><i class="fa fa-calendar"></i></span>
               </span>
-              <input aria-label="Start Date" type="text" class="form-control datepicker" name="start_date" id="date_of_grant" onchange="enddatechange()" value="<?php echo $from_date; ?>" required>
+              <input aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="start_date" id="date_of_grant" onchange="enddatechange()" value="<?php echo $from_date; ?>" required>
             </div>
           </div>
           <div class="col-lg-3">
-            <span class="form-label"> End Date</span>
+            <span class="form-label"> <?= __('End Date'); ?></span>
             <div class="input-group custom-date">
               <span class="input-group-text addon-style" id="basic-addon3_2">
                 <span class=""><i class="fa fa-calendar"></i></span>
               </span>
-              <input aria-label="To Date" type="text" class="form-control datepicker" name="to_date" id="date_of_end" value="<?php echo $to_date; ?>" required>
+              <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="to_date" id="date_of_end" value="<?php echo $to_date; ?>" required>
             </div>
           </div>
           <div class="col-lg-2 mt-1">
             <span class="form-label"> &nbsp; </span>
             <button type="submit" name="applyform" value="apply" class="mt-3 btn btn-info waves-effect waves-light input-group-text mt-0">
-              Apply
+              <?= __('Apply'); ?>
             </button>
             <input type="hidden" name="submit" value="applyform">
           </div>
@@ -115,17 +115,17 @@ $to_date = $to_date != "" ? fromDate($to_date) : "";
         <table class="table table-hover">
           <tr style="background-color: #eeeeee;">
             <th scope="col">#</th>
-            <th scope="col">PO Number</th>
-            <th scope="col">PO Date</th>
-            <th scope="col">Vendor Name</th>
+            <th scope="col"><?= __('PO Number'); ?></th>
+            <th scope="col"><?= __('PO Date'); ?></th>
+            <th scope="col"><?= __('Vendor Name'); ?></th>
 
 
-            <th scope="col">Item Name</th>
-            <th scope="col" class="text-right">Item Quantity</th>
-            <th scope="col" class="text-right">Pending Quantity</th>
-            <th scope="col" class="text-right">Received Quantity</th>
-            <th scope="col" class="text-right">Item Price</th>
-            <th scope="col" class="text-right">Item Total Amount</th>
+            <th scope="col"><?= __('Item Name'); ?></th>
+            <th scope="col" class="text-right"><?= __('Item Quantity'); ?></th>
+            <th scope="col" class="text-right"><?= __('Pending Quantity'); ?></th>
+            <th scope="col" class="text-right"><?= __('Received Quantity'); ?></th>
+            <th scope="col" class="text-right"><?= __('Item Price'); ?></th>
+            <th scope="col" class="text-right"><?= __('Item Total Amount'); ?></th>
 
           </tr>
 
@@ -169,7 +169,7 @@ $to_date = $to_date != "" ? fromDate($to_date) : "";
             <tr>
               <td colspan="15">
                 <div class="card-px text-center py-20 m-t-30">
-                  <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data Available</p>
+                  <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?></p>
                   <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                   </div>

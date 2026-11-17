@@ -33,15 +33,15 @@ function mlFormatDate($value) {
 
 function mlStatusBadge($status) {
     $s = (string)$status;
-    if ($s === '0')   { return '<span class="badge badge-warning">Pending</span>';
+    if ($s === '0')   { return '<span class="badge badge-warning">'.__('Pending').'</span>';
 }
-    if ($s === '199') { return '<span class="badge badge-success">Approved</span>';
+    if ($s === '199') { return '<span class="badge badge-success">'.__('Approved').'</span>';
 }
-    if ($s === '30' || $s === '20' || $s === '201') { return '<span class="badge badge-danger">Rejected</span>';
+    if ($s === '30' || $s === '20' || $s === '201') { return '<span class="badge badge-danger">'.__('Rejected').'</span>';
 }
-    if ($s === '40') { return '<span class="badge badge-secondary">Cancelled</span>';
+    if ($s === '40') { return '<span class="badge badge-secondary">'.__('Cancelled').'</span>';
 }
-    return '<span class="badge badge-secondary">Unknown</span>';
+    return '<span class="badge badge-secondary">'.__('Unknown').'</span>';
 }
 ?>
 
@@ -51,22 +51,22 @@ function mlStatusBadge($status) {
     <div class="manager-leaves-shell card">
         <div class="card-header manager-leaves-header">
             <div>
-                <h4 class="mb-1">Manager Team Leaves</h4>
-                <p class="mb-0 text-muted">Direct reports by approval manager with active leave requests</p>
+                <h4 class="mb-1"><?= __('Manager Team Leaves'); ?></h4>
+                <p class="mb-0 text-muted"><?= __('Direct reports by approval manager with active leave requests'); ?></p>
             </div>
             <a href="javascript:history.go(-1)" class="btn btn-outline-secondary btn-sm">
-                <i class="icofont icofont-reply"></i> Back
+                <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
             </a>
         </div>
 
         <div class="card-body">
             <div class="manager-leaves-stats">
                 <div class="stat-tile">
-                    <div class="stat-label">Team Employees</div>
+                    <div class="stat-label"><?= __('Team Employees'); ?></div>
                     <div class="stat-value"><?php echo $employees_count; ?></div>
                 </div>
                 <div class="stat-tile">
-                    <div class="stat-label">Leave Rows</div>
+                    <div class="stat-label"><?= __('Leave Rows'); ?></div>
                     <div class="stat-value" id="stat-total"><?php echo $total; ?></div>
                 </div>
 
@@ -75,16 +75,16 @@ function mlStatusBadge($status) {
             <div class="manager-leaves-filters">
                 <div class="row g-2">
                     <div class="col-lg-4 col-md-6">
-                        <input aria-label="Search by employee, code, leave Type, Special Request" type="text" id="filter-keyword" class="form-control" placeholder="Search by employee, code, leave Type, Special Request">
+                        <input aria-label="<?= htmlspecialchars(__('Search by employee, code, leave Type, Special Request'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter-keyword" class="form-control" placeholder="<?= htmlspecialchars(__('Search by employee, code, leave Type, Special Request'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="col-lg-3 col-md-3">
-                        <input aria-label="Leave from date" type="date" id="filter-from" class="form-control" title="Leave from date">
+                        <input aria-label="<?= htmlspecialchars(__('Leave from date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" id="filter-from" class="form-control" title="<?= htmlspecialchars(__('Leave from date'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="col-lg-3 col-md-3">
-                        <input aria-label="Leave to date" type="date" id="filter-to" class="form-control" title="Leave to date">
+                        <input aria-label="<?= htmlspecialchars(__('Leave to date'), ENT_QUOTES, 'UTF-8'); ?>" type="date" id="filter-to" class="form-control" title="<?= htmlspecialchars(__('Leave to date'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="col-lg-2 col-md-12 d-grid">
-                        <button class="btn btn-light border" type="button" data-action="clear-leave-filters">Clear Filters</button>
+                        <button class="btn btn-light border" type="button" data-action="clear-leave-filters"><?= __('Clear Filters'); ?></button>
                     </div>
                 </div>
             </div>
@@ -93,16 +93,16 @@ function mlStatusBadge($status) {
                 <table class="table table-hover manager-leaves-table" id="manager-team-leaves-table">
                     <thead>
                         <tr>
-                            <th scope="col">Employee</th>
-                            <th scope="col">Emp Code</th>
-                            <th scope="col">Leave Type</th>
-                            <th scope="col">Leave From</th>
-                            <th scope="col">Leave To</th>
-                            <th scope="col">Days</th>
-                            <th scope="col">Applied On</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Special Request</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('Employee'); ?></th>
+                            <th scope="col"><?= __('Emp Code'); ?></th>
+                            <th scope="col"><?= __('Leave Type'); ?></th>
+                            <th scope="col"><?= __('Leave From'); ?></th>
+                            <th scope="col"><?= __('Leave To'); ?></th>
+                            <th scope="col"><?= __('Days'); ?></th>
+                            <th scope="col"><?= __('Applied On'); ?></th>
+                            <th scope="col"><?= __('Status'); ?></th>
+                            <th scope="col"><?= __('Special Request'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody id="manager-team-leaves-tbody">
@@ -153,7 +153,7 @@ function mlStatusBadge($status) {
                                                 data-status="199"
                                                 data-empid="<?php echo (int)$row['employee_id']; ?>"
                                                 data-leaveid="<?php echo (int)$row['employee_leave_id']; ?>"
-                                            >Approve</button>
+                                            ><?= __('Approve'); ?></button>
                                             <button
                                                 type="button"
                                                 class="btn btn-danger btn-sm"
@@ -161,7 +161,7 @@ function mlStatusBadge($status) {
                                                 data-status="30"
                                                 data-empid="<?php echo (int)$row['employee_id']; ?>"
                                                 data-leaveid="<?php echo (int)$row['employee_leave_id']; ?>"
-                                            >Reject</button>
+                                            ><?= __('Reject'); ?></button>
                                             <button
                                                 type="button"
                                                 class="btn btn-secondary btn-sm"
@@ -169,7 +169,7 @@ function mlStatusBadge($status) {
                                                 data-status="40"
                                                 data-empid="<?php echo (int)$row['employee_id']; ?>"
                                                 data-leaveid="<?php echo (int)$row['employee_leave_id']; ?>"
-                                            >Cancle</button>
+                                            ><?= __('Cancle'); ?></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -180,7 +180,7 @@ function mlStatusBadge($status) {
             </div>
 
             <div id="manager-team-leaves-empty" class="manager-leaves-empty <?php echo empty((array)$rows) ? '' : 'd-none'; ?>">
-                No leave records found.
+                <?= __('No leave records found.'); ?>
             </div>
         </div>
     </div>

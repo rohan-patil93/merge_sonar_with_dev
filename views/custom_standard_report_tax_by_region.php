@@ -24,16 +24,16 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5>Tax Report (GST/VAT/Sales Tax by Region)</h5>
+        <h5><?= __('Tax Report (GST/VAT/Sales Tax by Region)'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown-2"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    More
+                    <?= __('More'); ?>
                 </button>
                 <div class="dropdown-menu p-0">
-                    <a class="dropdown-item" href="custom_view_download.php?page=TaxReportByRegion&format=csv" target="_blank">CSV</a>
-                    <a class="dropdown-item" href="custom_view_download.php?page=TaxReportByRegion&format=excel" target="_blank">Excel</a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=TaxReportByRegion&format=csv" target="_blank"><?= __('CSV'); ?></a>
+                    <a class="dropdown-item" href="custom_view_download.php?page=TaxReportByRegion&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -47,14 +47,14 @@ $_SESSION['download_data'] = [];
             <table class="table table-separate table-head-custom table-checkable data-table">
                 <thead>
                     <tr>
-                        <th scope="col">S.No</th>
-                        <th scope="col">Region / Location</th>
-                        <th scope="col" class="text-right">Total Taxable Amount (₹)</th>
-                        <th scope="col" class="text-right">Total Tax Amount (₹)</th>
-                        <th scope="col" class="text-right">Average Tax Rate (%)</th>
-                        <th scope="col" class="text-right">Total Invoices</th>
-                        <th scope="col" class="text-right">Total Items</th>
-                        <th scope="col" class="text-right">Total Tax Lines</th>
+                        <th scope="col"><?= __('S.No'); ?></th>
+                        <th scope="col"><?= __('Region / Location'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Taxable Amount (₹)'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Tax Amount (₹)'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Average Tax Rate (%)'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Invoices'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Items'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total Tax Lines'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,7 +92,7 @@ $_SESSION['download_data'] = [];
         <?php } else { ?>
             <div class="text-center py-4">
                 <p class="text-muted f-16 fw-bold">
-                    <i class="ti-alert text-warning"></i> No Data Available
+                    <i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?>
                 </p>
                 <div class="text-center px-4">
                     <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">

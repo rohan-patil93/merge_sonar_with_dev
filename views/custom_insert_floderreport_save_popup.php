@@ -32,7 +32,7 @@ foreach($row as $rowdata){
                     title: <?php echo json_encode(__('Folder is create successfully')); ?>,
                     type: "success",
                     buttonsStyling: false,
-                    confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+                    confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
                     confirmButtonClass: "btn btn-success",
                     showCancelButton: false
 

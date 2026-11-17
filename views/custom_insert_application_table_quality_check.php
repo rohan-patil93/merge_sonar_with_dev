@@ -284,7 +284,7 @@ foreach($items as $item){
 
     foreach($meantableitemlist as $itm_id=>$qytvalue){
         if(isset($reftableitemlist[$itm_id]['pending_qty']) && $qytvalue > $reftableitemlist[$itm_id]['pending_qty']){
-            $_GET['error_messages'] .= $reftableitemlist[$itm_id]['item_name']." - ".$_SESSION['error_message'][6030]." - (Qty - ".round($reftableitemlist[$itm_id]['pending_qty']).") Please Checked </br>";
+            $_GET['error_messages'] .= $reftableitemlist[$itm_id]['item_name']." - ".$_SESSION['error_message'][6030]." - (Qty - ".round($reftableitemlist[$itm_id]['pending_qty'])."".__(') Please Checked')." </br>";
         }
     }
 }
@@ -380,10 +380,10 @@ function currencychange(val,old_val){
              exchangerate();
             }else{
                 swal({
-                    title: "6010 : Please Define Exchange Rate",
+                    title: <?php echo json_encode(__('6010 : Please Define Exchange Rate'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     type: "warning",
                     buttonsStyling: false,
-                    confirmButtonText: "OK",
+                    confirmButtonText: <?php echo json_encode(__('OK'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     confirmButtonClass: "btn btn-danger"
                 })
             }
@@ -644,7 +644,7 @@ $(document).on('blur', "#amountPaid", function(){
 });
 $(document).on('click', '.deleteInvoice', function(){
     var id = $(this).attr("id");
-    if(confirm("Are you sure you want to remove this?")){
+    if(confirm(<?php echo json_encode(__('Are you sure you want to remove this?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>)){
         $.ajax({
             url:"action.php",
             method:"POST",
@@ -967,18 +967,18 @@ function calculateTotal(){
             if(arr2[k]['amount']){
                 //console.log('check: '+k+ ' percentage - '+arr2[k]['id']+' cal:'+arr2[k]['amount'])
                 if(old_state != change_state){
-                    str+= "<tr><td class='p-2'> IGST @ "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
+                    str+= "<tr><td class='p-2'> <?= htmlspecialchars(__('IGST @'), ENT_QUOTES, 'UTF-8'); ?> "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
                     str+= "<td class='p-2 text-end'>  <span id='dis_taxRateid'>"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"</span>  <input  type='hidden' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"''> </td></tr>";
                 }else{
-                    str+= "<tr><td class='p-2'> CGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                    str+= "<tr><td class='p-2'> <?= htmlspecialchars(__('CGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                     str+= "<td class='p-2 text-end'> <span id='dis_taxRateid'>"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"</span> <input  type='hidden' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
-                     str+= "<tr><td class='p-2'> SGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                     str+= "<tr><td class='p-2'> <?= htmlspecialchars(__('SGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                     str+= "<td class='p-2 text-end'> <span id='dis_taxRateid'>"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"</span> <input  type='hidden' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
                 }
                  totaltax+=parseFloat(arr2[k]['tax_amount']);
             }
     }
-    str +='<tr><td class="p-2">Total Tax</td><td class="text-end p-2"><span id="dis_taxRateid">'+totaltax+'</span> </td></tr>';
+    str +='<tr><td class="p-2"><?= htmlspecialchars(__('Total Tax'), ENT_QUOTES, 'UTF-8'); ?></td><td class="text-end p-2"><span id="dis_taxRateid">'+totaltax+'</span> </td></tr>';
 
     totaltax  = parseFloat(totaltax).toFixed(2);
     $('#taxAmount').val(totaltax);
@@ -1093,11 +1093,11 @@ function checkqtyvalidation(fid){
             var decoderes = JSON.parse(data);
             if(parseInt(decoderes.pending_qty) < parseInt(quantity)){
                 swal({
-                    title: "Quantity alert ",
-                    text: "6030 : Quantity cannot be more than "+decoderes.pending_qty,
+                    title: <?php echo json_encode(__('Quantity alert').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                    text: <?php echo json_encode(__('6030 : Quantity cannot be more than').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+decoderes.pending_qty,
                     type: "warning",
                     buttonsStyling: false,
-                    confirmButtonText: "OK",
+                    confirmButtonText: <?php echo json_encode(__('OK'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     confirmButtonClass: "btn btn-danger",
                     }, function () {
                         $('#quantity_'+id).val(decoderes.pending_qty);
@@ -1123,14 +1123,14 @@ function quantityCheck(fid){
                 //console.log(quantity);
                 if (parseFloat(data) < quantity){
                     swal({
-                        title: "Quantity on hand "+parseFloat(data),
-                        text: "6020 : Do you want to change the quantity to "+parseFloat(data)+" ?",
+                        title: <?php echo json_encode(__('Quantity on hand').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+parseFloat(data),
+                        text: <?php echo json_encode(__('6020 : Do you want to change the quantity to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+parseFloat(data)+" ?",
                         type: "warning",
                         buttonsStyling: false,
-                        confirmButtonText: "Yes, change!",
+                        confirmButtonText: <?php echo json_encode(__('Yes, change!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         confirmButtonClass: "btn btn-danger",
                         showCancelButton: true,
-                        cancelButtonText: " No, proceed",
+                        cancelButtonText: <?php echo json_encode(' '.__('No, proceed'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         cancelButtonClass: "btn btn-default"
                     }).then(function(result) {
                         if (result.value) {
@@ -1227,12 +1227,12 @@ function submitDynamicWorkflowPopUp(table_name,transaction_id,current_status,nex
 function submitDynamicWorkflow(table_name,transaction_id,current_status,next_status,old_status_name,new_status_name){
     swal({
             title: "<?php echo ucwords($_SESSION['config']['name']); ?>",
-            text: "Please note the status of the document will change to "+new_status_name,
+            text: <?php echo json_encode(__('Please note the status of the document will change to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+new_status_name,
             type: "info",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
+            confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             closeOnConfirm: false
         },
         function(){
@@ -1256,12 +1256,12 @@ function submitDynamicWorkflow(table_name,transaction_id,current_status,next_sta
                         });
                     }else{
                         swal({
-                            title: "Oops...",
+                            title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             text: res.transaction_update.message,
                             type: "error",
                             showCancelButton: true,
                             showConfirmButton: false,
-                            cancelButtonText: "Ok",
+                            cancelButtonText: <?php echo json_encode(__('Ok'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             confirmButtonClass: "btn-danger",
                             closeOnCancel: false
                         });
@@ -1282,13 +1282,13 @@ function viewApprovalAllUsers(id){
     <?php if($_GET['error'] !=''){ ?>
         <div class="alert alert-warning alert-dismissible">
             <strong><?php echo $_GET['error']." : ".$_SESSION['error_message'][$_GET['error']]; ?> </strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
 <?php } ?>
 <?php if($_GET['error_messages'] !="" && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE || $copy == 0)){  $disable = "disabled"; ?>
      <div class="alert alert-danger alert-dismissible">
             <strong><?php echo $_GET['error_messages']; ?> </strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
 <?php } ?>
     <div class="row">
@@ -1335,13 +1335,13 @@ function viewApprovalAllUsers(id){
                     <div class="kt-portlet__head ">
                         <div class="card-header table-card-header">
                             <div class="row">
-                            <h5 class="col-lg-8">Products / Services</h5>
+                            <h5 class="col-lg-8"><?= __('Products / Services'); ?></h5>
                             <div class="card-header-right table-card-header col-lg-4 text-right">
                                 <div class="w-full">
-                                    <select class="form-control form-select js-example-basic-single " id="taxtype" name= "tax_type" onchange="calculateTotal()" aria-label="Tax Type">
-                                            <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php } ?> value="E"> Exclusive </option>
-                                            <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php } ?> value="I"> Inclusive </option>
-                                            <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php } ?> value="O"> Out Of scope </option>
+                                    <select class="form-control form-select js-example-basic-single " id="taxtype" name= "tax_type" onchange="calculateTotal()" aria-label="<?= htmlspecialchars(__('Tax Type'), ENT_QUOTES, 'UTF-8'); ?>">
+                                            <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php } ?> value="E"> <?= __('Exclusive'); ?> </option>
+                                            <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php } ?> value="I"> <?= __('Inclusive'); ?> </option>
+                                            <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php } ?> value="O"> <?= __('Out Of scope'); ?> </option>
                                     </select>
                                 </div>
                             </div>
@@ -1368,17 +1368,17 @@ function viewApprovalAllUsers(id){
                            <div>
                                 <div style="float: left;width: 48%;padding: 1%;">
                                     <label for="notes" class=""><?= __('Internal Note(s)') ?> </label>
-                                    <textarea style="height: 120px;" name="notes" id="notes" class="form-control" aria-label="Notes"><?php echo $table1['notes']; ?></textarea>
+                                    <textarea style="height: 120px;" name="notes" id="notes" class="form-control" aria-label="<?= htmlspecialchars(__('Notes'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $table1['notes']; ?></textarea>
                                 </div>
                                 <div style="float: left;width: 48%;padding: 1%;">
                                     <label for="printing_notes" class=""><?= __('Printing Note(s)') ?> </label>
-                                    <textarea style="height: 120px;" name="printing_notes" id="printing_notes" class="form-control" aria-label="Printing Notes"><?php echo $table1['printing_notes']; ?></textarea>
+                                    <textarea style="height: 120px;" name="printing_notes" id="printing_notes" class="form-control" aria-label="<?= htmlspecialchars(__('Printing Notes'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $table1['printing_notes']; ?></textarea>
                                 </div>
                             </div>
                             <?php if($small_sub == 0  ){ ?>
                             <div style="margin-top: 10px;clear:both;">
                                 <label for="comments" class=""><?= __('Comment(s)') ?></label>
-                                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" aria-label="Comments"><?php echo $comments; ?></textarea>
+                                <textarea style="height: 120px;" name="comments" class="form-control" id="comments" aria-label="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $comments; ?></textarea>
                             </div>
                             <div class="btn-group" style="margin-top: 10px;float: right;">
                                      <button id="kt_llogin_signup_submit"  class="btn btn-brand" ><?= __('Submit1') ?></button>
@@ -1403,14 +1403,14 @@ function viewApprovalAllUsers(id){
                             <tr>
                                 <th scope="col" class="amount text-start p-2 ">
                                     <div class="form-radio">
-                                    <span>Discount </span>
+                                    <span><?= __('Discount'); ?> </span>
                                     <div class="radio radio-inline m-0">
                                         <label class="d-inline-block m-l-5">
-                                            <input type="radio"  name="discount_type" id="disType" onclick="calculateTotal()" onkeydown="if(event.key==='Enter'||event.key===' '){calculateTotal();}" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> aria-label="Discount Type">
+                                            <input type="radio"  name="discount_type" id="disType" onclick="calculateTotal()" onkeydown="if(event.key==='Enter'||event.key===' '){calculateTotal();}" value="A" <?php echo $table1['discount_type'] == 'A'?"checked":""; ?> aria-label="<?= htmlspecialchars(__('Discount Type'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <i class="helper" aria-hidden="true"></i><?php echo $_SESSION['config']['currency_symbol']; ?>
                                         </label>
                                         <label class="m-l-10 d-inline-block">
-                                            <input type="radio" name="discount_type" id="disType" onclick="calculateTotal()" onkeydown="if(event.key==='Enter'||event.key===' '){calculateTotal();}" value="P" <?php echo ($table1['discount_type'] == 'P' || $table1['discount_type'] =="")?"checked":""; ?> aria-label="Discount Type">
+                                            <input type="radio" name="discount_type" id="disType" onclick="calculateTotal()" onkeydown="if(event.key==='Enter'||event.key===' '){calculateTotal();}" value="P" <?php echo ($table1['discount_type'] == 'P' || $table1['discount_type'] =="")?"checked":""; ?> aria-label="<?= htmlspecialchars(__('Discount Type'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <i class="helper" aria-hidden="true"></i> %
                                         </label>
                                     </div>
@@ -1423,7 +1423,7 @@ function viewApprovalAllUsers(id){
                                             <option <?php if($table1['discount_type'] == 'A'){ ?> selected <?php } ?> value="A"><?= __('Amount') ?></option>
                                         </select>
                                     </div> -->
-                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right" placeholder="<?= __('Enter value') ?>" name="discount_value" id="disValue" aria-label="Enter value">
+                                    <input value="<?php echo $table1['discount_value']; ?>" type="text" class="form-control amount mt-2 text-right" placeholder="<?= __('Enter value') ?>" name="discount_value" id="disValue" aria-label="<?= htmlspecialchars(__('Enter value'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </th>
                                 <td class="p-2 align-middle text-right">
                                     <span id="dis_discountid">
@@ -1436,9 +1436,9 @@ function viewApprovalAllUsers(id){
                             <?php if($table_name != 'bills'){ ?>
                             <tr>
                                 <th scope="col" class="amount text-start p-2">
-                                    <span >Shipping</span>
+                                    <span ><?= __('Shipping'); ?></span>
                                     <div class="">
-                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" aria-label="Shipping Tax">
+                                        <select class="form-select js-example-basic-single"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" aria-label="<?= htmlspecialchars(__('Shipping Tax'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <option value="0"><?= __('Tax') ?></option>
                                             <?php foreach ($taxres as $key => $tax) {  ?>
                                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
@@ -1449,7 +1449,7 @@ function viewApprovalAllUsers(id){
                                 </th>
                                 <td class="p-2 align-middle">
                                     <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="<?php echo $table1['shipping_tax_amount']; ?>">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?= __('shipping Amount') ?>" aria-label="shipping Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?= __('shipping Amount') ?>" aria-label="<?= htmlspecialchars(__('shipping Amount'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </td>
                             </tr>
                         <?php } ?>
@@ -1463,7 +1463,7 @@ function viewApprovalAllUsers(id){
                                     foreach ($distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
                                     <?php if($table1['tax_state'] == 'S'){ ?>
                                     <tr>
-                                        <td class="p-2">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>
+                                        <td class="p-2">  <?= __('CGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?= __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?>
                                         </td>
                                         <td class="text-end p-2">
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']/2); ?></span>
@@ -1471,7 +1471,7 @@ function viewApprovalAllUsers(id){
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2">  SGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>
+                                        <td class="p-2">  <?= __('SGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?= __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?>
                                         </td>
                                         <td class="text-end p-2">
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']/2); ?></span>
@@ -1480,7 +1480,7 @@ function viewApprovalAllUsers(id){
                                     </tr>
                                 <?php } else{  ?>
                                     <tr>
-                                        <td class="p-2">  IGST @ <?php echo customeummarmonyformate($ktax['percentage']); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?>
+                                        <td class="p-2">  <?= __('IGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']); ?><?= __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?>
                                         </td>
                                         <td class="text-end p-2">
                                             <span id="dis_taxRateid"><?php echo customeummarmonyformateifine($ktax['tax_amount']); ?></span>
@@ -1491,7 +1491,7 @@ function viewApprovalAllUsers(id){
                             <?php }
                             } ?>
                                         <tr>
-                                            <td class="p-2">Total Tax</td>
+                                            <td class="p-2"><?= __('Total Tax'); ?></td>
                                             <td class="text-end p-2"><span id="dis_taxRateid"><?php echo customeummarmonyformateifine($tattax); ?></span> </td>
                                         </tr>
                                     </tbody>
@@ -1503,11 +1503,11 @@ function viewApprovalAllUsers(id){
                                 <th scope="col" class="amount p-2">
                                     <div>
                                         <div style="float: left;width: 50%;padding: 10px;">
-                                            <span >TDS</span>
+                                            <span ><?= __('TDS'); ?></span>
                                         </div>
                                         <div style="float: left;width: 50%;padding: 3px;">
-                                            <select class="form-control"  name="shipping_tax" id="tds_tax" onchange="calculateTotal()" aria-label="Shipping Tax">
-                                                <option value="0"> Select Any Tax Rate </option>
+                                            <select class="form-control"  name="shipping_tax" id="tds_tax" onchange="calculateTotal()" aria-label="<?= htmlspecialchars(__('Shipping Tax'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                <option value="0"> <?= __('Select Any Tax Rate'); ?> </option>
                                                 <?php foreach ($tdstaxres as $key => $tax) {  ?>
                                                 <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php } ?> value = <?php echo $key; ?>   > <?php echo $tax; ?> </option>
                                                 <?php } ?>
@@ -1518,15 +1518,15 @@ function viewApprovalAllUsers(id){
                                 <td>
                                     <input type="hidden" name="shipping_tax_amount" id="tds_tax_amount" value="0">
                                     <input  value=""   type="hidden" class="form-control amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?= __('TDS Amount') ?>">
-                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="<?= __('TDS Amount') ?>" aria-label="TDS Amount">
+                                    <input  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="tds_amount" onblur="calculateTotal()" placeholder="<?= __('TDS Amount') ?>" aria-label="<?= htmlspecialchars(__('TDS Amount'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </td>
                             </tr>
                         <?php } ?>
                             <tr>
                                 <th scope="col" class="amount p-2 text-start " >
-                                    <span>Grand Total</span>
-                                    <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
-                                    <input  type="hidden" class="form-control amount" placeholder="value" name="div_amount_total" id="div_amount_total">
+                                    <span><?= __('Grand Total'); ?></span>
+                                    <input  type="hidden" class="form-control amount" placeholder="<?= htmlspecialchars(__('value'), ENT_QUOTES, 'UTF-8'); ?>" name="gdam" id="gdam">
+                                    <input  type="hidden" class="form-control amount" placeholder="<?= htmlspecialchars(__('value'), ENT_QUOTES, 'UTF-8'); ?>" name="div_amount_total" id="div_amount_total">
                                     <input  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="<?= __('Tax Amount') ?>">
                                 </th>
                                 <th scope="col" class="p-2 text-right">
@@ -1536,11 +1536,11 @@ function viewApprovalAllUsers(id){
                             </tr>
                             <tr style="display: none;">
                                 <th scope="col" class="amount" ><span ><?= __('Amount Paid') ?></span></th>
-                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="<?= __('Amount Paid') ?>" aria-label="Amount Paid"></td>
+                                <td><input value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="<?= __('Amount Paid') ?>" aria-label="<?= htmlspecialchars(__('Amount Paid'), ENT_QUOTES, 'UTF-8'); ?>"></td>
                             </tr>
                             <tr style="display: none;">
                                 <td  ><span ><?= __('Amount Due') ?></span></td>
-                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?= __('Amount Due') ?>" aria-label="Amount Due"></td>
+                                <td><input value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?= __('Amount Due') ?>" aria-label="<?= htmlspecialchars(__('Amount Due'), ENT_QUOTES, 'UTF-8'); ?>"></td>
                             </tr>
                             <?php if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != '0'){ $css = "";
                             }else{ $css = 'style="display: none;"';
@@ -1556,10 +1556,10 @@ function viewApprovalAllUsers(id){
                                         </tr>
                                         <tr>
                                             <!-- <td><input value="<?php echo $table1['currency_rate']; ?>" type="text" readonly  class="form-control amount" name="" id="ex_rate" aria-label="Input"></td> -->
-                                            <td><input value="<?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_sub_total" aria-label="Input"></td>
-                                            <td><input value="<?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_tax" aria-label="Input"></td>
-                                            <td><input value="<?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_discount" aria-label="Input"></td>
-                                            <td> <input value="<?php echo customeummarmonyformate($table1['grand_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_grand_total" aria-label="Input"> </td>
+                                            <td><input value="<?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_sub_total" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                                            <td><input value="<?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_tax" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                                            <td><input value="<?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_discount" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                                            <td> <input value="<?php echo customeummarmonyformate($table1['grand_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_grand_total" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"> </td>
                                         </tr>
                                     </table>
                                 </td>

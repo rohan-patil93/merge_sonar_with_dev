@@ -79,7 +79,7 @@ if (!empty($_SESSION['upload_msg'])) {
         <h5><?= __('Contracts Import') ?></h5>
         <div class="card-header-right table-card-header ">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                <i class="icofont icofont-reply"></i> Back
+                <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -89,7 +89,7 @@ if (!empty($_SESSION['upload_msg'])) {
                 <div class="form-group col-lg-4">
                     <span class="form-label"><?= __('File Name') ?></span>
                     <div>
-                        <input aria-label="Enter Upload File Name" class="form-control" type="text" id="file_name" name="file_name" value="" placeholder="<?= __('Enter Upload File Name') ?>" required>
+                        <input aria-label="<?= htmlspecialchars(__('Enter Upload File Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="file_name" name="file_name" value="" placeholder="<?= __('Enter Upload File Name') ?>" required>
                     </div>
                 </div>
                 <div class="form-group col-lg-4">
@@ -97,14 +97,14 @@ if (!empty($_SESSION['upload_msg'])) {
                     <div class="form-radio">
                         <div class="radio radio-inline">
                           <label class="form-label">
-                            <input aria-label="Import Type" type="radio" id="import_type_customer" name="import_type" value="customer" checked>
-                            <i class="helper"></i>Customer
+                            <input aria-label="<?= htmlspecialchars(__('Import Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" id="import_type_customer" name="import_type" value="customer" checked>
+                            <i class="helper"></i><?= __('Customer'); ?>
                           </label>
                         </div>
                         <div class="radio radio-inline">
                           <label class="form-label">
-                            <input aria-label="Import Type" type="radio" id="import_type_vendor" name="import_type" value="vendor">
-                            <i class="helper"></i>Vendor
+                            <input aria-label="<?= htmlspecialchars(__('Import Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" id="import_type_vendor" name="import_type" value="vendor">
+                            <i class="helper"></i><?= __('Vendor'); ?>
                           </label>
                         </div>
                     </div>
@@ -112,7 +112,7 @@ if (!empty($_SESSION['upload_msg'])) {
                 <div class="form-group col-lg-4">
                     <span class="form-label"><?= __('CSV File:') ?></span>
                     <div>
-                        <input aria-label="Csv File" class="form-control" type="file" id="csv_file" name="csv_file" accept=".csv" required>
+                        <input aria-label="<?= htmlspecialchars(__('Csv File'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="file" id="csv_file" name="csv_file" accept=".csv" required>
                     </div>
                 </div>
             </div>

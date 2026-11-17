@@ -24,18 +24,18 @@ if(count((array)$rows) > 0){
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col">Sl.No</th>
-				<th scope="col">Name</th>
-				<th scope="col">Contact No.</th>
-				<th scope="col">Government ID</th>
-				<th scope="col">Coming From</th>
-				<th scope="col">Purpose</th>
-				<th scope="col">Whom to Meet</th>
-				<th scope="col">Card No.</th>
-				<th scope="col">In Time</th>
-				<th scope="col">Out Time</th>
-				<th scope="col">Security Sign</th>
-				<th scope="col">Remarks</th>
+				<th scope="col"><?= __('Sl.No'); ?></th>
+				<th scope="col"><?= __('Name'); ?></th>
+				<th scope="col"><?= __('Contact No.'); ?></th>
+				<th scope="col"><?= __('Government ID'); ?></th>
+				<th scope="col"><?= __('Coming From'); ?></th>
+				<th scope="col"><?= __('Purpose'); ?></th>
+				<th scope="col"><?= __('Whom to Meet'); ?></th>
+				<th scope="col"><?= __('Card No.'); ?></th>
+				<th scope="col"><?= __('In Time'); ?></th>
+				<th scope="col"><?= __('Out Time'); ?></th>
+				<th scope="col"><?= __('Security Sign'); ?></th>
+				<th scope="col"><?= __('Remarks'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -96,7 +96,7 @@ if(count((array)$rows) > 0){
 </div>
 <?php }else{ ?>
 <div class="card-px text-center py-20 mt-2">
-	<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Visitors Movements </p>
+	<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Visitors Movements'); ?> </p>
 	<div class="text-center px-4">
 		<img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
 	</div>

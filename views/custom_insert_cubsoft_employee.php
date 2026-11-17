@@ -110,10 +110,10 @@ if($emp_id=="" && $_GET['ECD']!="" && COMPANY_LDAP=='Y' ){?>
             text:'<?php echo $_SESSION['error_message']['9042']; ?>',
             type: "success",
             buttonsStyling: false,
-            confirmButtonText: "Yes, close! ",
+            confirmButtonText: <?php echo json_encode(__('Yes, close!').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             confirmButtonClass: "btn btn-success",
             showCancelButton: true,
-            cancelButtonText: " No, continue",
+            cancelButtonText: <?php echo json_encode(' '.__('No, continue'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
             cancelButtonClass: "btn btn-warning"
         }).then(function(result) {
             if(!result.value) {
@@ -214,10 +214,10 @@ th{
                 title: <?= json_encode(__('Please Enter Employee Code')) ?>,
                 type: "success",
                 buttonsStyling: false,
-                confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+                confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
                 confirmButtonClass: "btn btn-info",
                 showCancelButton: false,
-                cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                 cancelButtonClass: "btn btn-default"
             });
         }
@@ -263,7 +263,7 @@ th{
                                 <th scope="row"><?= __('Employee Code') ?></th>
                                 <td>
                                     <div class="input-group" style="margin-bottom: auto;">
-                                        <input aria-label="Emp Code" type="text" class="form-control vcs" id="emp_code" name="emp_code" value="<?php echo $emp['emp_code'] ?>">
+                                        <input aria-label="<?= htmlspecialchars(__('Emp Code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" id="emp_code" name="emp_code" value="<?php echo $emp['emp_code'] ?>">
 
                                         <button type="button" class="btn p-0 border-0 bg-transparent input-group-text addon-style" id="basic-addon3" onclick="ldadataconnect()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                             <button type="button" class="btn p-0 border-0 bg-transparent " onclick="ldadataconnect()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti ti-search"></i></button>
@@ -291,7 +291,7 @@ th{
                             <th scope="row"><?= __('Employee Code') ?></th>
                             <td>
                                 <div class="input-group" style="margin-bottom: auto;">
-                                    <input aria-label="Emp Code" type="text" class="form-control vcs" id="emp_code_2" name="emp_code" value="<?php echo $emp['emp_code'] ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Emp Code'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" id="emp_code_2" name="emp_code" value="<?php echo $emp['emp_code'] ?>">
                                         <span class="input-group-text addon-style" id="basic-addon3_2">
                                             <button type="button" class="btn p-0 border-0 bg-transparent " onclick="ldadataconnect()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti ti-search"></i></button>
                                         </span>
@@ -300,56 +300,56 @@ th{
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Email Id') ?></th>
-                            <td><input aria-label="Email" type="text" class="form-control vcs" name="email_id"  value="<?php echo $emp['email_id'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" name="email_id"  value="<?php echo $emp['email_id'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('First Name') ?></th>
-                            <td><input aria-label="First Name" type="text" class="form-control vcs" name="first_name"  value="<?php echo $emp['first_name'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('First Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" name="first_name"  value="<?php echo $emp['first_name'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Middle Name') ?></th>
-                            <td><input aria-label="Middle Name" type="text" class="form-control vcs" name="middle_name"  value="<?php echo $emp['middle_name'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Middle Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" name="middle_name"  value="<?php echo $emp['middle_name'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Last Name') ?></th>
-                            <td><input aria-label="Last Name" type="text" class="form-control vcs" name="last_name"  value="<?php echo $emp['last_name'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Last Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" name="last_name"  value="<?php echo $emp['last_name'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Display Name') ?></th>
-                            <td><input aria-label="Display Name" type="text" class="form-control vcs" name="display_name"  value="<?php echo $emp['display_name'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" name="display_name"  value="<?php echo $emp['display_name'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Mobile Number') ?></th>
-                            <td><input aria-label="Phone" type="text" class="form-control vcs" name="phone"  value="<?php echo $emp['phone'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" name="phone"  value="<?php echo $emp['phone'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Gender') ?></th>
                             <td>
                                 <div class="radio radio-outline vcs  mt-1">
 
-                                    <label class="radio radio-inline"> <input aria-label="Radio option" type="radio" <?php if($emp['gender']=='F'){ echo "checked";
+                                    <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php if($emp['gender']=='F'){ echo "checked";
 } ?> name="gender" value="F">    <span></span><?= __('FEMALE') ?> </label>
 
-                                    <label class="radio radio-inline"> <input aria-label="Radio option" type="radio"  <?php if($emp['gender']=='M'){ echo "checked";
+                                    <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  <?php if($emp['gender']=='M'){ echo "checked";
 } ?> name="gender" value="M">    <span></span><?= __('MALE') ?> </label>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Date Of Birth') ?></th>
-                            <td><input aria-label="Date Of Birth" type="text" class="form-control datepicker vcs" name="date_of_birth" value="<?php echo $emp['date_of_birth'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Date Of Birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker vcs" name="date_of_birth" value="<?php echo $emp['date_of_birth'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Total Experiance') ?></th>
-                            <td><input aria-label="Total Experiance" type="text" class="form-control vcs" name="total_experiance"  value="<?php echo $emp['total_experiance'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Total Experiance'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" name="total_experiance"  value="<?php echo $emp['total_experiance'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Skill Set') ?></th>
-                            <td><input aria-label="Skill Set" type="text" class="form-control vcs" name="skill_set"  value="<?php echo $emp['skill_set'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Skill Set'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control vcs" name="skill_set"  value="<?php echo $emp['skill_set'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Career Start Date') ?></th>
-                            <td><input aria-label="First Working Date" type="text" class="form-control datepicker vcs" name="first_working_date" value="<?php echo $emp['first_working_date'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('First Working Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker vcs" name="first_working_date" value="<?php echo $emp['first_working_date'] ?>"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -371,10 +371,10 @@ th{
                             <td>
                                 <div class="radio radio-outline vcs  mt-1">
 
-                                    <label class="radio radio-inline"> <input aria-label="Radio option" type="radio" <?php if($emp['employee_type']=='1'){ echo "checked";
+                                    <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php if($emp['employee_type']=='1'){ echo "checked";
 } ?> name="employee_type" value="1">     <span></span><?= __('Permanent') ?> </label>
 
-                                    <label class="radio radio-inline"> <input aria-label="Radio option" type="radio"  <?php if($emp['employee_type']!='1'){ echo "checked";
+                                    <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  <?php if($emp['employee_type']!='1'){ echo "checked";
 } ?> name="employee_type" value="2">    <span></span><?= __('Contract') ?> </label>
                                 </div>
                             </td>
@@ -382,7 +382,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('Location') ?></th>
                             <td>
-                                <select aria-label="Location" class="form-select js-example-basic-single" name="location_id">
+                                <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="location_id">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['locations'] as $location){ ?>
                                         <option <?php if($emp['location_id']== $location['id']){ echo "selected";
@@ -394,7 +394,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('Job Title') ?></th>
                             <td>
-                                <select aria-label="Job Title" class="form-select js-example-basic-single" name="job_title_id">
+                                <select aria-label="<?= htmlspecialchars(__('Job Title'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="job_title_id">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['job_titles'] as $job_title){ ?>
                                         <option <?php if($emp['job_title_id']== $job_title['id']){ echo "selected";
@@ -406,7 +406,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('Department') ?></th>
                             <td>
-                                <select aria-label="Department" class="form-select js-example-basic-single" name="department_id">
+                                <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="department_id">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['departments'] as $department){ ?>
                                         <option <?php if($emp['department_id']== $department['id']){ echo "selected";
@@ -418,7 +418,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('Designation') ?></th>
                             <td>
-                                <select aria-label="Designation" class="form-select js-example-basic-single" name="designation_id">
+                                <select aria-label="<?= htmlspecialchars(__('Designation'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="designation_id">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['designations'] as $designation){ ?>
                                         <option <?php if($emp['designation_id']== $designation['id']){ echo "selected";
@@ -430,7 +430,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('Cost Center') ?></th>
                             <td>
-                                <select aria-label="Cost Center" class="form-select js-example-basic-single" name="cost_center_id">
+                                <select aria-label="<?= htmlspecialchars(__('Cost Center'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="cost_center_id">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['cost_centers'] as $designation){ ?>
                                         <option <?php if($emp['cost_center_id']== $designation['id']){ echo "selected";
@@ -442,7 +442,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('Vendor') ?></th>
                             <td>
-                                <select aria-label="Vendor" class="form-select js-example-basic-single" name="vendor_id">
+                                <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="vendor_id">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['vendors'] as $vendor){ ?>
                                         <option <?php if($emp['vendor_id']== $vendor['id']){ echo "selected";
@@ -453,17 +453,17 @@ th{
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Joining Date') ?></th>
-                            <td><input aria-label="Joining Date" type="text" class="form-control datepicker vcs" name="joining_date" value="<?php echo $emp['joining_date'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Joining Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker vcs" name="joining_date" value="<?php echo $emp['joining_date'] ?>"></td>
                         </tr>
                         <tr>
                             <th scope="row"><?= __('Date Of Leaving') ?></th>
-                            <td><input aria-label="Date Of Leaving" type="text" class="form-control datepicker vcs" name="date_of_leaving" value="<?php echo $emp['date_of_leaving'] ?>"></td>
+                            <td><input aria-label="<?= htmlspecialchars(__('Date Of Leaving'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker vcs" name="date_of_leaving" value="<?php echo $emp['date_of_leaving'] ?>"></td>
                         </tr>
                         <tr>
                             <?php $allbillable = array('0'=>'Billable', '1'=>'Non-Billable', '2'=>'Mile Stone'); ?>
                             <th scope="row"><?= __('Billable') ?></th>
                             <td>
-                                <select aria-label="Billable" class="form-select js-example-basic-single" onchange="billablechange(this.value)" name="billable" id="billable">
+                                <select aria-label="<?= htmlspecialchars(__('Billable'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" onchange="billablechange(this.value)" name="billable" id="billable">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($allbillable as $billkey=>$bill){ ?>
                                         <option value="<?php echo $billkey; ?>" <?php if($emp['billable']==$billkey){ echo "selected";
@@ -478,7 +478,7 @@ th{
                             <?php $arraybillable = array('1'=>'Fixed', '2'=>'Timeline Material' ); ?>
                             <th scope="row"><?= __('Billable Type') ?></th>
                             <td>
-                                <select aria-label="Billable Type" class="form-select js-example-basic-single" name="billable_type" id="billable_type_2">
+                                <select aria-label="<?= htmlspecialchars(__('Billable Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="billable_type" id="billable_type_2">
                                     <option <?php if($emp['billable_type']==''){ echo "selected";
 } ?>  value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($arraybillable as $billkey=>$bill){ ?>
@@ -494,7 +494,7 @@ th{
                             <?php $arraynonbillable = array('3'=>'Bufer', '4'=>'Non-Billable'); ?>
                             <th scope="row"><?= __('Non Billable Type') ?></th>
                             <td>
-                                <select aria-label="Nonbillable Type" class="form-select js-example-basic-single" name="nonbillable_type" id="nonbillable_type_2">
+                                <select aria-label="<?= htmlspecialchars(__('Nonbillable Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="nonbillable_type" id="nonbillable_type_2">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($arraynonbillable as $billkey=>$bill){ ?>
                                         <option value="<?php echo $billkey; ?>" <?php if($emp['billable_type']==$billkey){ echo "selected";
@@ -508,7 +508,7 @@ th{
                             <?php $skiltypes = array('1'=>'Technical', '2'=>'Non-Technical'); ?>
                             <th scope="row"><?= __('Skill') ?></th>
                             <td>
-                                <select aria-label="Skil Type" class="form-select js-example-basic-single" name="skil_type" id="skil_type">
+                                <select aria-label="<?= htmlspecialchars(__('Skil Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="skil_type" id="skil_type">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($skiltypes as $billkey=>$bill){ ?>
                                         <option value="<?php echo $billkey; ?>" <?php if($emp['skil_type']==$billkey){ echo "selected";
@@ -521,7 +521,7 @@ th{
                             <tr>
                                 <th scope="row"><?= __('Role') ?></th>
                                 <td>
-                                    <select aria-label="Approval Role[]" class="form-select js-example-basic-multiple" name="approval_role[]">
+                                    <select aria-label="<?= htmlspecialchars(__('Approval Role'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple" name="approval_role[]">
                                         <option value=""><?= __('Select Any One') ?></option>
                                         <?php  $userrole = json_decode($user['role_id'],1);
                                         foreach($employe_data['application_roles'] as $aprole){ ?>
@@ -534,7 +534,7 @@ th{
                             <tr>
                                 <th scope="row"><?= __('Reporting Manager') ?></th>
                                 <td>
-                                    <select aria-label="Approval Manager" class="form-select js-example-basic-single" name="approval_manager">
+                                    <select aria-label="<?= htmlspecialchars(__('Approval Manager'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="approval_manager">
                                         <option value=""><?= __('Select Any One') ?></option>
                                         <?php foreach($employe_data['application_users'] as $apusers){ ?>
                                             <option <?php if($user['approval_manager']== $apusers['id']){ echo "selected";
@@ -546,7 +546,7 @@ th{
                             <tr>
                                 <th scope="row"><?= __('Approving Manager') ?></th>
                                 <td>
-                                    <select aria-label="Reporting Manager" class="form-select js-example-basic-single" name="reporting_manager_id">
+                                    <select aria-label="<?= htmlspecialchars(__('Reporting Manager'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="reporting_manager_id">
                                         <option value=""><?= __('Select Any One') ?></option>
                                         <?php foreach($employe_data['application_users'] as $apusers){ ?>
                                             <option <?php if($user['reports_to']== $apusers['id']){ echo "selected";
@@ -559,7 +559,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('HR Buddy') ?></th>
                             <td>
-                                <select aria-label="Hr Buddy" class="form-select js-example-basic-single" name="hr_buddy">
+                                <select aria-label="<?= htmlspecialchars(__('Hr Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="hr_buddy">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['employee_list'] as $apusers){ ?>
                                         <option <?php if($buddy['hr_buddy']== $apusers['id']){ echo "selected";
@@ -571,7 +571,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('Finance Buddy') ?></th>
                             <td>
-                                <select aria-label="Finance Buddy" class="form-select js-example-basic-single" name="finance_buddy">
+                                <select aria-label="<?= htmlspecialchars(__('Finance Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="finance_buddy">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['employee_list'] as $apusers){ ?>
                                         <option <?php if($buddy['finance_buddy']== $apusers['id']){ echo "selected";
@@ -583,7 +583,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('Admin Buddy') ?></th>
                             <td>
-                                <select aria-label="Admin Buddy" class="form-select js-example-basic-single" name="admin_buddy">
+                                <select aria-label="<?= htmlspecialchars(__('Admin Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="admin_buddy">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['employee_list'] as $apusers){ ?>
                                         <option <?php if($buddy['admin_buddy']== $apusers['id']){ echo "selected";
@@ -595,7 +595,7 @@ th{
                         <tr>
                             <th scope="row"><?= __('Location  Buddy') ?></th>
                             <td>
-                                <select aria-label="Loc Buddy" class="form-select js-example-basic-single" name="loc_buddy">
+                                <select aria-label="<?= htmlspecialchars(__('Loc Buddy'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="loc_buddy">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($employe_data['employee_list'] as $apusers){ ?>
                                         <option <?php if($buddy['loc_buddy']== $apusers['id']){ echo "selected";

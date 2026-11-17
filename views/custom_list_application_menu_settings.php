@@ -53,7 +53,7 @@ foreach ($menu_data as $menu) {
                                             <!--end::Svg Icon-->
                                         </span>
                                     </span>
-                                    <span class="navi-text font-weight-bolder font-size-lg">APPLICATION SETTINGS</span>
+                                    <span class="navi-text font-weight-bolder font-size-lg"><?= __('APPLICATION SETTINGS'); ?></span>
                                 </a>
                             </div>
                             <!--end:Item-->
@@ -142,7 +142,7 @@ foreach ($menu_data as $menu) {
                                 <!--end::Info-->
                                 <!--begin::Users-->
                                 <div class="symbol-group symbol-hover py-2">
-                                    <div class="symbol symbol-30 symbol-light-primary" data-toggle="tooltip" data-placement="top" title="New user" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                    <div class="symbol symbol-30 symbol-light-primary" data-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('New user'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                         <span class="symbol-label font-weight-bold">
                                             <i class="fa flaticon2-plus font-size-sm"></i>
                                         </span>

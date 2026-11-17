@@ -54,16 +54,16 @@ $emp_pf_list = json_decode($configesponse,1);
         <div class="col-md-4">
             <form method="post" action="#">
                 <div class="form-group row">
-                    <label for="example-date-input-from" class="col-2 col-form-label">From</label>
+                    <label for="example-date-input-from" class="col-2 col-form-label"><?= __('From'); ?></label>
                     <div class="col-10">
-                        <input aria-label="Fromdate" class="form-control" type="date" name="fromdate" value="<?php echo date('Y-m-d');?>" id="example-date-input-from" />
+                        <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="fromdate" value="<?php echo date('Y-m-d');?>" id="example-date-input-from" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="example-date-input-to" class="col-2 col-form-label">To</label>
+                    <label for="example-date-input-to" class="col-2 col-form-label"><?= __('To'); ?></label>
                     <div class="col-10">
-                        <input aria-label="Todate" class="form-control" type="date" name="todate" value="<?php echo date('Y-m-d');?>" id="example-date-input-to" />
+                        <input aria-label="<?= htmlspecialchars(__('Todate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="todate" value="<?php echo date('Y-m-d');?>" id="example-date-input-to" />
                     </div>
                 </div>
 
@@ -93,8 +93,8 @@ $emp_pf_list = json_decode($configesponse,1);
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-4 pb-0 pl-5 mx-auto">
             <div class="card-title">
-                <h3 class="card-label text-center">EPF Summary
-                    <span class="d-block text-muted pt-2 font-size-sm">Contribution period from <?php echo date("d/m/Y", strtotime($from_date)); ?> to <?php echo date("d/m/Y", strtotime($to_date)); ?></span></h3>
+                <h3 class="card-label text-center"><?= __('EPF Summary'); ?>
+                    <span class="d-block text-muted pt-2 font-size-sm"><?= __('Contribution period from'); ?> <?php echo date("d/m/Y", strtotime($from_date)); ?> <?= __('to'); ?> <?php echo date("d/m/Y", strtotime($to_date)); ?></span></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -106,25 +106,25 @@ $emp_pf_list = json_decode($configesponse,1);
                             <table class="table table-bordered table-hover table-checkable mt-10 dataTable no-footer dtr-inline" id="kt_datatable" aria-describedby="kt_datatable_info" style="width: 1236px;">
                                 <thead>
                                     <tr role="row" style="background-color: #f7f7f7;">
-                                        <th scope="col">Employee ID</th>
-                                        <th scope="col">Employee Name</th>
-                                        <th scope="col">PF Account Number</th>
-                                        <th scope="col">PF Wages</th>
-                                        <th scope="col" colspan="2" rowspan="1">Employee's Contribution</th>
-                                        <th scope="col" colspan="4" rowspan="1">Employer's Contribution</th>
-                                        <th scope="col">Total Contribution</th>
+                                        <th scope="col"><?= __('Employee ID'); ?></th>
+                                        <th scope="col"><?= __('Employee Name'); ?></th>
+                                        <th scope="col"><?= __('PF Account Number'); ?></th>
+                                        <th scope="col"><?= __('PF Wages'); ?></th>
+                                        <th scope="col" colspan="2" rowspan="1"><?= __('Employee\'s Contribution'); ?></th>
+                                        <th scope="col" colspan="4" rowspan="1"><?= __('Employer\'s Contribution'); ?></th>
+                                        <th scope="col"><?= __('Total Contribution'); ?></th>
                                     </tr>
                                     <tr role="row">
                                         <th scope="col"></th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>
-                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 47px;" aria-label="Record ID: activate to sort column ascending">PF Amount</th>
-                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 38px;" aria-label="Order ID: activate to sort column ascending">VPF Amount</th>
-                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 60px;" aria-label="Country: activate to sort column ascending">PF Amount</th>
-                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 72px;" aria-label="Ship City: activate to sort column ascending">EPS Amount</th>
-                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 77px;" aria-label="Ship Address: activate to sort column ascending">EDLI</th>
-                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 77px;" aria-label="PF admin Charges: pf admin Charges">PF Admin Charges</th>
+                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 47px;" aria-label="<?= htmlspecialchars(__('Record ID: activate to sort column ascending'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('PF Amount'); ?></th>
+                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 38px;" aria-label="<?= htmlspecialchars(__('Order ID: activate to sort column ascending'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('VPF Amount'); ?></th>
+                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 60px;" aria-label="<?= htmlspecialchars(__('Country: activate to sort column ascending'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('PF Amount'); ?></th>
+                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 72px;" aria-label="<?= htmlspecialchars(__('Ship City: activate to sort column ascending'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('EPS Amount'); ?></th>
+                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 77px;" aria-label="<?= htmlspecialchars(__('Ship Address: activate to sort column ascending'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('EDLI'); ?></th>
+                                        <th scope="col" class="sorting" tabindex="0" aria-controls="kt_datatable" rowspan="1" colspan="1" style="width: 77px;" aria-label="<?= htmlspecialchars(__('PF admin Charges: pf admin Charges'), ENT_QUOTES, 'UTF-8'); ?>"><?= __('PF Admin Charges'); ?></th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -156,7 +156,7 @@ $emp_pf_list = json_decode($configesponse,1);
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite">Showing 1 to 10 of 50 entries
+                            <div class="dataTables_info" id="kt_datatable_info" role="status" aria-live="polite"><?= __('Showing 1 to 10 of 50 entries'); ?>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-7">

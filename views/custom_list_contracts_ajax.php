@@ -43,7 +43,7 @@ if ($is_pdf) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Contracts - InfiSuite</title>
+  <title><?= __('Contracts - InfiSuite'); ?></title>
     <meta charset="UTF-8">
     <style type="text/css">
         body { font-family: Arial, sans-serif; font-size: 9px; margin: 0; padding: 10px; color: #333; }
@@ -61,11 +61,11 @@ if ($is_pdf) {
     </style>
 </head>
 <body>
-    <h3>Contracts List</h3>
+    <h3><?= __('Contracts List'); ?></h3>
     <?php if ($company_name != "") { ?>
-        <p class="meta">Company: <?php echo htmlspecialchars($company_name); ?> | Generated: <?php echo $generated_at; ?></p>
+        <p class="meta"><?= __('Company'); ?>: <?php echo htmlspecialchars($company_name); ?> <?= __('| Generated'); ?>: <?php echo $generated_at; ?></p>
     <?php } else { ?>
-        <p class="meta">Generated: <?php echo $generated_at; ?></p>
+        <p class="meta"><?= __('Generated'); ?>: <?php echo $generated_at; ?></p>
     <?php } ?>
 <?php }
 
@@ -74,22 +74,22 @@ if(count((array)($contracts)) != 0){  ?>
     <thead>
         <tr>
             <th scope="col" class="p-2">#</th>
-            <th scope="col" class="p-2">Contract No.</th>
-            <th scope="col" class="p-2">Contract Type</th>
-            <th scope="col" class="p-2">Contract Name</th>
-            <th scope="col" class="p-2">New / Renewal</th>
-            <th scope="col" class="p-2">Vendor</th>
-            <th scope="col" class="p-2">Start Date</th>
-            <th scope="col" class="p-2">End Date</th>
-            <th scope="col" class="p-2">Agreements Type</th>
-            <th scope="col" class="p-2">Services</th>
-            <th scope="col" class="p-2">Location</th>
-            <th scope="col" class="p-2">Department</th>
-            <th scope="col" class="p-2">Contract Category</th>
-            <th scope="col" class="p-2">Payment Terms</th>
-            <th scope="col" class="p-2">Contract Status</th>
-            <th scope="col" class="p-2">Approval Status</th>
-            <th scope="col" class="p-2">View Schedule</th>
+            <th scope="col" class="p-2"><?= __('Contract No.'); ?></th>
+            <th scope="col" class="p-2"><?= __('Contract Type'); ?></th>
+            <th scope="col" class="p-2"><?= __('Contract Name'); ?></th>
+            <th scope="col" class="p-2"><?= __('New / Renewal'); ?></th>
+            <th scope="col" class="p-2"><?= __('Vendor'); ?></th>
+            <th scope="col" class="p-2"><?= __('Start Date'); ?></th>
+            <th scope="col" class="p-2"><?= __('End Date'); ?></th>
+            <th scope="col" class="p-2"><?= __('Agreements Type'); ?></th>
+            <th scope="col" class="p-2"><?= __('Services'); ?></th>
+            <th scope="col" class="p-2"><?= __('Location'); ?></th>
+            <th scope="col" class="p-2"><?= __('Department'); ?></th>
+            <th scope="col" class="p-2"><?= __('Contract Category'); ?></th>
+            <th scope="col" class="p-2"><?= __('Payment Terms'); ?></th>
+            <th scope="col" class="p-2"><?= __('Contract Status'); ?></th>
+            <th scope="col" class="p-2"><?= __('Approval Status'); ?></th>
+            <th scope="col" class="p-2"><?= __('View Schedule'); ?></th>
         </tr>
     </thead>
     <tbody >
@@ -158,9 +158,9 @@ if(count((array)($contracts)) != 0){  ?>
             </td>
             <td>
                 <?php if ($isAmc) { ?>
-                    <span class="badge <?php echo $is_pdf ? 'badge-amc' : 'bg-info'; ?>">AMC</span>
+                    <span class="badge <?php echo $is_pdf ? 'badge-amc' : 'bg-info'; ?>"><?= __('AMC'); ?></span>
                 <?php } else { ?>
-                    <span class="badge <?php echo $is_pdf ? 'badge-standard' : 'bg-secondary'; ?>">Standard</span>
+                    <span class="badge <?php echo $is_pdf ? 'badge-standard' : 'bg-secondary'; ?>"><?= __('Standard'); ?></span>
                 <?php } ?>
             </td>
             <td class="p-2"><?php echo $contra['contract_name']!=""?$contra['contract_name']:"-"; ?></td>
@@ -169,7 +169,7 @@ if(count((array)($contracts)) != 0){  ?>
                     <?php if ($is_pdf) { ?>
                         <?php echo htmlspecialchars($renewalColumnText); ?>
                     <?php } else { ?>
-                        <span class="badge bg-warning">Renewal</span>
+                        <span class="badge bg-warning"><?= __('Renewal'); ?></span>
                         <?php if ($parentInRenewalMap) { ?>
                             <br><a class="text-primary" href="index.php?option=COM_INSERT_CONTRACTS&Rid=<?php echo deocdeId("id:".$parentContractId); ?>"><?php echo htmlspecialchars($parentLabel); ?></a>
                         <?php } elseif ($parentLabel != '-') { ?>
@@ -177,9 +177,9 @@ if(count((array)($contracts)) != 0){  ?>
                         <?php } ?>
                     <?php } ?>
                 <?php } elseif ($is_pdf) { ?>
-                    New
+                    <?= __('New'); ?>
                 <?php } else { ?>
-                    <span class="badge bg-secondary">New</span>
+                    <span class="badge bg-secondary"><?= __('New'); ?></span>
                 <?php } ?>
             </td>
             <td class="p-2"><?php echo $vendors[$contra['party_id']]['company']!=""?$vendors[$contra['party_id']]['company']:"-"; ?></td>
@@ -200,21 +200,21 @@ if(count((array)($contracts)) != 0){  ?>
                 <?php
                 if ($cancel_status) {
                     if ($is_pdf) {
-                        echo '<span class="badge badge-expired">Cancelled</span>';
+                        echo '<span class="badge badge-expired">'.__('Cancelled').'</span>';
                     } else {
-                        echo '<span class="form-label label label-danger">Cancelled</span>';
+                        echo '<span class="form-label label label-danger">'.__('Cancelled').'</span>';
                     }
                 } elseif ($contra['end_date'] && new DateTime($contra['end_date']) < $contracttodaydate) {
                     if ($is_pdf) {
-                        echo '<span class="badge badge-expired">Expired</span>';
+                        echo '<span class="badge badge-expired">'.__('Expired').'</span>';
                     } else {
-                        echo '<span class="form-label label label-danger">Expired</span>';
+                        echo '<span class="form-label label label-danger">'.__('Expired').'</span>';
                     }
                 } else {
                     if ($is_pdf) {
-                        echo '<span class="badge badge-active">Active</span>';
+                        echo '<span class="badge badge-active">'.__('Active').'</span>';
                     } else {
-                        echo '<span class="form-label label label-info">Active</span>';
+                        echo '<span class="form-label label label-info">'.__('Active').'</span>';
                     }
                 }
                 ?>
@@ -230,7 +230,7 @@ if(count((array)($contracts)) != 0){  ?>
                 <?php if ($is_pdf) { ?>
                     <?php echo $isAmc ? "AMC" : "—"; ?>
                 <?php } elseif ($isAmc) { ?>
-                <a href="index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=<?php echo (int) $contra['id']; ?>" title="View Schedules" class="m-r-10">
+                <a href="index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=<?php echo (int) $contra['id']; ?>" title="<?= htmlspecialchars(__('View Schedules'), ENT_QUOTES, 'UTF-8'); ?>" class="m-r-10">
                     <i class="ti-calendar text-info f-16"></i>
                 </a>
                 <?php } ?>
@@ -246,10 +246,10 @@ if(count((array)($contracts)) != 0){  ?>
 </table>
 <?php if (!$is_pdf) { ?>
 <div class="mt-5  custom-scroll height-75" >
-    <nav aria-label="Page navigation example p-2" >
+    <nav aria-label="<?= htmlspecialchars(__('Page navigation example p-2'), ENT_QUOTES, 'UTF-8'); ?>" >
         <ul class="pagination">
           <li class="page-item <?php echo ($current_page =="1" || $current_page =="")?"disabled":""; ?>">
-              <a class="page-link dynamicContractSelectPage"  data-current_status = "" data-current_page="<?php echo $current_page-1; ?>" href="#!" tabindex="-1" >Previous</a>
+              <a class="page-link dynamicContractSelectPage"  data-current_status = "" data-current_page="<?php echo $current_page-1; ?>" href="#!" tabindex="-1" ><?= __('Previous'); ?></a>
           </li>
         <?php
           for ($i = 1; $i <= $total_pages; $i++){
@@ -261,7 +261,7 @@ if(count((array)($contracts)) != 0){  ?>
             <?php } ?>
 
             <li class="page-item <?php echo ($total_pages <= $current_page)?"disabled":""; ?>">
-                <a class="page-link dynamicContractSelectPage"  data-current_status = "" data-current_page="<?php echo $current_page+1; ?>"  href="#!" tabindex="-1">Next</a>
+                <a class="page-link dynamicContractSelectPage"  data-current_status = "" data-current_page="<?php echo $current_page+1; ?>"  href="#!" tabindex="-1"><?= __('Next'); ?></a>
             </li>
         </ul>
     </nav>
@@ -270,10 +270,10 @@ if(count((array)($contracts)) != 0){  ?>
 
 <?php  }else{
     if ($is_pdf) { ?>
-    <p class="empty-msg">No Contracts</p>
+    <p class="empty-msg"><?= __('No Contracts'); ?></p>
 <?php } else { ?>
     <div class="card-px text-center py-20 mt-2">
-        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Contracts </p>
+        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> <?= __('No Contracts'); ?> </p>
         <div class="text-center px-4">
             <img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
         </div>

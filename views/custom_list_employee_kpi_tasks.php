@@ -52,7 +52,7 @@ function statuspopup(status,id,table_name,auth,task=""){
          }
          Swal.fire({
              icon: 'error',
-             title: 'Oops...',
+             title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
              text: auth
          })
      }
@@ -63,11 +63,11 @@ function statuspopup(status,id,table_name,auth,task=""){
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header table-card-header">
-                    <h5>Pending Tasks</h5>
+                    <h5><?= __('Pending Tasks'); ?></h5>
                     <div class="card-header-right table-card-header ">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                             <i class="icofont icofont-reply"></i>
-                            Back
+                            <?= __('Back'); ?>
                         </a>
                     </div>
                 </div>
@@ -102,7 +102,7 @@ if(!empty($kpi_data_list)){
                                   <div class="to-do-list">
                                       <div class="checkbox-fade fade-in-primary" onclick="statuspopup('<?php echo $task['status_list'][0]['status']; ?>','<?php echo $Notification_Table_Id; ?>','<?php echo $Notification_Table; ?>','<?php echo $task['view_status']=="0"?"0":$_SESSION['error_message'][$task['view_status']]; ?>','task')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                           <label class="form-label check-task " id="checkstausid<?php echo $Notification_Table_Id; ?>">
-                                              <input aria-label="Checkbox" type="checkbox"  value="" id="checkstausinput<?php echo $Notification_Table_Id; ?>" >
+                                              <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox"  value="" id="checkstausinput<?php echo $Notification_Table_Id; ?>" >
                                               <span class="cr ">
                                                   <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                               </span>
@@ -113,7 +113,7 @@ if(!empty($kpi_data_list)){
                 <?php } ?>
                 <?php } else {
 
-                                        echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i> No Task Available</h4>";
+                                        echo "<h4 class='p-40 text-center'><i class='fa fa-warning'></i> ".__('No Task Available')."</h4>";
                                 } ?>
 
                         </div>

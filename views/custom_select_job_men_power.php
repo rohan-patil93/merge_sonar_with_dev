@@ -96,7 +96,7 @@ $stausresult = ViewStatusData();
         <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
         <div class="alert-text"><?php echo $content; ?></div>
         <div class="alert-close">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                 <span aria-hidden="true"><i class="ki ki-close"></i></span>
             </button>
         </div>
@@ -135,7 +135,7 @@ $stausresult = ViewStatusData();
                                      }
 }?>
                             <?php } ?>
-                            <th scope=\"col\">Action</th>
+                            <th scope=\"col\"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -168,7 +168,7 @@ $stausresult = ViewStatusData();
                                             $str = "<div style='background: #".$bill[$header['name']].";width: 20px;height: 20px;'>&nbsp;</div>";
                                         }elseif( $header['type'] == 'image'){
                                             $bimage = 'uploads/all/'.$bill[$header['name']];
-                                            $str = "<img src='$bimage' style='width:35px;' alt='Preview'>";
+                                            $str = "<img src='$bimage' style='width:35px;' alt='".htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8')."'>";
                                         }else{
                                             $str =  $bill[$header['name']];
 

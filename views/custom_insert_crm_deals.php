@@ -37,7 +37,7 @@ foreach($deal_with_contacts_list as $dlcontct){
     function submitLeadForm(){
         var validations = ajaxFormSubmitValidation();
         if(validations == 0){
-            $(".sbt_loading_en_dis").text("Please Wait........");
+            $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             $(".sbt_loading_en_dis").attr("disabled", true);
             var crm_lead_id = $("#crm_lead_id").val();
             var formData = new FormData();
@@ -76,7 +76,7 @@ foreach($deal_with_contacts_list as $dlcontct){
                             }
                     }else{
                         tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',jsonres.res.message,'');
-                        $(".sbt_loading_en_dis").text("Submit");
+                        $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                         $(".sbt_loading_en_dis").attr("disabled", false);
                     }
                 }
@@ -131,14 +131,14 @@ foreach($deal_with_contacts_list as $dlcontct){
                     <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Deal Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-12 form-group w-full">
-                            <span class="form-label">Deal Name<span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Deal Name'); ?><span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
                             <input aria-label="deal_name" class="form-control requried_field" type="text" name="deal_name" placeholder="<?= __('Deal Name') ?>" value="<?php echo $transaction['deal_name']; ?>">
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Originator <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Originator'); ?> <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Originator" class="form-control js-example-basic-single requried_field" name="originator">
+                            <select aria-label="<?= htmlspecialchars(__('Originator'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="originator">
                                 <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['originator'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
@@ -146,9 +146,9 @@ foreach($deal_with_contacts_list as $dlcontct){
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Source Type <span class="requried text-danger">*</span></span>
+                            <span class="form-label"><?= __('Source Type'); ?> <span class="requried text-danger">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Source Type" class="form-control js-example-basic-single requried_field" name="source_type">
+                            <select aria-label="<?= htmlspecialchars(__('Source Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="source_type">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($crm_general_codes['SOURCETYPE'] as $lsval){ ?>
                                     <option value="<?php echo $lsval['value']; ?>" <?php echo $transaction['source_type'] == $lsval['value']?"selected":"";?>><?php echo $lsval['label']; ?></option>
@@ -156,9 +156,9 @@ foreach($deal_with_contacts_list as $dlcontct){
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Company <span class="requried text-danger">*</span></span>
+                            <span class="form-label"><?= __('Company'); ?> <span class="requried text-danger">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Crm Company" class="form-control js-example-basic-single requried_field" name="crm_company_id" onchange="getCRMContactLst(this.value)">
+                            <select aria-label="<?= htmlspecialchars(__('Crm Company'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="crm_company_id" onchange="getCRMContactLst(this.value)">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($crm_companies as $comp){ ?>
                                     <option value="<?php echo $comp['id']; ?>" <?php echo $transaction['crm_company_id'] == $comp['id']?"selected":"";?>><?php echo $comp['company_name']; ?></option>
@@ -166,9 +166,9 @@ foreach($deal_with_contacts_list as $dlcontct){
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Primary Contact <span class="requried text-danger">*</span></span>
+                            <span class="form-label"><?= __('Primary Contact'); ?> <span class="requried text-danger">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Crm Contact" class="form-control js-example-basic-single requried_field" name="crm_contact_id" id="crm_contact_id">
+                            <select aria-label="<?= htmlspecialchars(__('Crm Contact'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="crm_contact_id" id="crm_contact_id">
                                 <option value=""><?= __('Select Any One') ?></option>
                                 <?php foreach($deal_with_contacts_list as $cont){ ?>
                                     <option value="<?php echo $cont['id']; ?>" <?php echo $transaction['crm_contact_id'] == $cont['id']?"selected":"";?>><?php echo $cont['display_name']; ?></option>
@@ -177,17 +177,17 @@ foreach($deal_with_contacts_list as $dlcontct){
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label"><?= __('Deal Total Budget') ?></span>
-                            <input aria-label="Total Budget" class="form-control" type="number" name="total_budget" placeholder="<?= __('Total Budget') ?>" value="<?php echo $transaction['total_budget']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Total Budget'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="number" name="total_budget" placeholder="<?= __('Total Budget') ?>" value="<?php echo $transaction['total_budget']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Due Date <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Due Date'); ?> <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Due Date" class="form-control datepicker requried_field" type="text" name="due_date" placeholder="<?= __('Due Date') ?>" value="<?php echo fromDate($transaction['due_date']); ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Due Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker requried_field" type="text" name="due_date" placeholder="<?= __('Due Date') ?>" value="<?php echo fromDate($transaction['due_date']); ?>">
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Expected Close Date <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Expected Close Date'); ?> <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Expected Close Date" class="form-control requried_field datepicker" type="text" name="expected_close_date" placeholder="<?= __('Expected Close Date') ?>" value="<?php echo fromDate($transaction['expected_close_date']); ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Expected Close Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field datepicker" type="text" name="expected_close_date" placeholder="<?= __('Expected Close Date') ?>" value="<?php echo fromDate($transaction['expected_close_date']); ?>">
                         </div>
                         <div class="col-lg-6">
                             <span class="form-label"><?= __('Image') ?></span>
@@ -197,7 +197,7 @@ foreach($deal_with_contacts_list as $dlcontct){
                                         <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                                     </label>
                                     <input type="file" name="image" id="display_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                                    <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="Attachment Preview" />
+                                    <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                                     <input type="hidden" name="hid_image" value="<?php echo $transaction['image'] ;  ?>">
                                 </div>
                             </div>
@@ -205,7 +205,7 @@ foreach($deal_with_contacts_list as $dlcontct){
                         <div class="col-lg-12 form-group">
                             <span class="form-label"><?= __('Description') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Remark" name="remark" placeholder="<?= __('Remark') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
+                                <textarea aria-label="<?= htmlspecialchars(__('Remark'), ENT_QUOTES, 'UTF-8'); ?>" name="remark" placeholder="<?= __('Remark') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
                             </div>
                         </div>
                    </div>

@@ -89,7 +89,7 @@ $job_titles = json_decode($configesponse,1);
     <div class="card-header-right">
           <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
     </div>
 </div>
@@ -103,7 +103,7 @@ $job_titles = json_decode($configesponse,1);
 
                    <span class="col-lg-2 col-form-label text-lg-right"><?= __('Job Title:') ?></span>
                   <div class="col-lg-3">
-                     <select aria-label="Job Title" class="form-control form-select js-example-basic-single" name="job_title">
+                     <select aria-label="<?= htmlspecialchars(__('Job Title'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="job_title">
                         <option><?= __('Select Any One') ?></option>
                         <?php foreach($job_titles as $job_title){ ?>
                            <option <?php if($role['job_title'] == $job_title['id']){ ?> selected <?php
@@ -113,7 +113,7 @@ $job_titles = json_decode($configesponse,1);
                   </div>
                   <span class="col-lg-2 col-form-label text-lg-right"><?= __('Contract Type:') ?></span>
                   <div class="col-lg-3">
-                     <select aria-label="Contract Type" class="form-control form-select js-example-basic-single" name="contract_type">
+                     <select aria-label="<?= htmlspecialchars(__('Contract Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="contract_type">
                         <option><?= __('Select Any One') ?></option>
                         <?php foreach($contract_types as $contract_type){ ?>
                            <option <?php if($role['contract_type'] == $contract_type['id']){ ?> selected <?php
@@ -132,7 +132,7 @@ $job_titles = json_decode($configesponse,1);
                         <span class="nav-icon">
                            <i class="flaticon2-chat-1"></i>
                         </span>
-                        <span class="nav-text">Information</span>
+                        <span class="nav-text"><?= __('Information'); ?></span>
                      </a>
                   </li>
                   <li class="nav-item">
@@ -140,7 +140,7 @@ $job_titles = json_decode($configesponse,1);
                         <span class="nav-icon">
                            <i class="flaticon2-console"></i>
                         </span>
-                        <span class="nav-text">Work Permit</span>
+                        <span class="nav-text"><?= __('Work Permit'); ?></span>
                      </a>
                   </li>
 
@@ -149,33 +149,33 @@ $job_titles = json_decode($configesponse,1);
                   <div class="tab-pane fade show active " id="home-1" role="tabpanel" aria-labelledby="home-tab-1">
                      <div class="col-lg-12 row mt-3">
                         <div class="col-lg-6">
-                           <h3> Salary and Advantages</h3>
+                           <h3> <?= __('Salary and Advantages'); ?></h3>
                            <div class="form-group row mt-3">
                               <span class="form-label text-lg-left"><?= __('Wage:') ?></span>
                               <div class="">
-                               <input aria-label="Wage" type="text" class="form-control" placeholder="" name="wage" value="<?php echo $role['wage']; ?>" />
+                               <input aria-label="<?= htmlspecialchars(__('Wage'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" placeholder="" name="wage" value="<?php echo $role['wage']; ?>" />
                               </div>
                            </div>
                            <div class="form-group row">
                               <div class="col-lg-12">
                                <span class="form-label"><?= __('Advantages:') ?></span>
-                                    <textarea aria-label="Advantages" class="form-control" rows="7" name="advantages"><?php echo $role['advantages']; ?></textarea>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Advantages'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" rows="7" name="advantages"><?php echo $role['advantages']; ?></textarea>
                               </div>
                            </div>
                         </div>
                         <div class="col-lg-6">
-                           <h3> Duration</h3>
+                           <h3> <?= __('Duration'); ?></h3>
                            <div class="form-group row mt-3">
                               <span class="form-label"><?= __('Trial Period Duration:') ?></span>
                               <div class="col-lg-5">
                                  <?php $date_pic = fromDate($role['trial_period_duration_from']); ?>
-                                 <input aria-label="Trial Period Duration From" type="date" class="form-control" name="trial_period_duration_from" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_31" />
+                                 <input aria-label="<?= htmlspecialchars(__('Trial Period Duration From'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="trial_period_duration_from" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_31" />
                               </div>
-                              <div class="col-lg-2 mt-3 form-label text-center">TO</div>
+                              <div class="col-lg-2 mt-3 form-label text-center"><?= __('TO'); ?></div>
                               <div class="col-lg-5">
 
                                     <?php $date_pic = fromDate($role['trial_period_duration_to']); ?>
-                                    <input aria-label="Trial Period Duration To" type="date" class="form-control" name="trial_period_duration_to"  value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_32" />
+                                    <input aria-label="<?= htmlspecialchars(__('Trial Period Duration To'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="trial_period_duration_to"  value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_32" />
 
 
                               </div>
@@ -185,14 +185,14 @@ $job_titles = json_decode($configesponse,1);
                               <div class="col-lg-5">
 
                                     <?php $date_pic = fromDate($role['duration_from']); ?>
-                                    <input aria-label="Duration From" type="date" class="form-control" name="duration_from" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_33" />
+                                    <input aria-label="<?= htmlspecialchars(__('Duration From'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="duration_from" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_33" />
 
                               </div>
-                              <div class="col-lg-2 mt-3 form-label text-center">TO</div>
+                              <div class="col-lg-2 mt-3 form-label text-center"><?= __('TO'); ?></div>
                               <div class="col-lg-5">
 
                                     <?php $date_pic = fromDate($role['duration_to']); ?>
-                                    <input aria-label="Duration To" type="date" class="form-control" name="duration_to" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_34" />
+                                    <input aria-label="<?= htmlspecialchars(__('Duration To'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="duration_to" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_34" />
 
 
                               </div>
@@ -200,7 +200,7 @@ $job_titles = json_decode($configesponse,1);
                            <div class="form-group row mt-3">
                               <span class="col-lg-4 col-form-label text-lg-left"><?= __('Working Schedules:') ?></span>
                               <div class="col-lg-8">
-                                 <select aria-label="Working Schedule" class="form-control form-select js-example-basic-single" name="working_schedule">
+                                 <select aria-label="<?= htmlspecialchars(__('Working Schedule'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" name="working_schedule">
                                     <option><?= __('Select Any One') ?></option>
                                     <?php foreach($working_schedules as $working_schedule){ ?>
                                        <option <?php if($role['working_schedule'] == $working_schedule['id']){ ?> selected <?php
@@ -217,11 +217,11 @@ $job_titles = json_decode($configesponse,1);
                         <div class="form-group row mt-3">
                            <span class="col-lg-2 col-form-label text-lg-right"><?= __('Visa No:') ?></span>
                            <div class="col-lg-3">
-                            <input aria-label="Visa No" type="text" class="form-control" name="visa_no" placeholder="" value="<?php echo $role['visa_no']; ?>" />
+                            <input aria-label="<?= htmlspecialchars(__('Visa No'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="visa_no" placeholder="" value="<?php echo $role['visa_no']; ?>" />
                            </div>
                            <span class="col-lg-2 col-form-label text-lg-right"><?= __('Work Permit No:') ?></span>
                            <div class="col-lg-3">
-                            <input aria-label="Work Permit No" type="text" class="form-control" name="work_permit_no" value="<?php echo $role['work_permit_no']; ?>" />
+                            <input aria-label="<?= htmlspecialchars(__('Work Permit No'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="work_permit_no" value="<?php echo $role['work_permit_no']; ?>" />
                            </div>
                         </div>
                         <div class="form-group row mt-3">
@@ -229,7 +229,7 @@ $job_titles = json_decode($configesponse,1);
                            <div class="col-lg-3">
                                  <div class="input-group date">
                                     <?php $date_pic = fromDate($role['visa_expire']); ?>
-                                    <input aria-label="Visa Expire" type="date" class="form-control" name="visa_expire" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_34_2" />
+                                    <input aria-label="<?= htmlspecialchars(__('Visa Expire'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control" name="visa_expire" value="<?php echo  $date_pic; ?>"  name="<?php echo $key; ?>"  id="kt_datepicker_34_2" />
 
                                  </div>
                            </div>
@@ -237,7 +237,7 @@ $job_titles = json_decode($configesponse,1);
                      </div>
                   </div>
                   <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="profile-tab-3">
-                     Conten 3
+                     <?= __('Conten 3'); ?>
                   </div>
                </div>
             </div>
@@ -253,17 +253,17 @@ $job_titles = json_decode($configesponse,1);
                   <input type="hidden" name="submit" value="Update" />
 
                   <button id="kt_llogin_signup_submit" <?php if($status_res == '1'){ ?> disabled="disabled" <?php
-} ?> class="btn btn-primary mr-2" ><i class="la la-check"></i>Upadate</button>
+} ?> class="btn btn-primary mr-2" ><i class="la la-check"></i><?= __('Upadate'); ?></button>
                <?php }else{ ?>
                <input type="hidden" name="vendor_id" value="<?php echo $data['vendor_id'] ?>" />
                   <input type="hidden" name="candidate_id" value="<?php echo $data['id'] ?>" />
                <input type="hidden" name="submit" value="Add" />
-               <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i>Save</button>
-               <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i>Cancel</button>
+               <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="submit_value" value="exit"><i class="la la-check"></i><?= __('Save'); ?></button>
+               <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2" ><i class="la la-close"></i><?= __('Cancel'); ?></button>
                <?php } ?>
             </div>
             <div class="col-lg-3 text-right">
-               <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+               <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?= __('Delete'); ?></button>
             </div>
          </div>
       </div>

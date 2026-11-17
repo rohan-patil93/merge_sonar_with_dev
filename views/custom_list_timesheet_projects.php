@@ -31,13 +31,13 @@ function addtimesheet(projectid) {
             <span class="kt-portlet__head-icon">
                <i class="kt-font-brand flaticon2-line-chart"></i>
             </span>
-            <h3 class="card-label">&nbsp;<?php echo "Projects";  ?> </h3>
+            <h3 class="card-label">&nbsp;<?php echo __("Projects");  ?> </h3>
          </div>
          <div class="kt-portlet__head-toolbar">
             <div class="card-toolbar">
                   <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                      <i class="ki ki-long-arrow-back icon-xs"></i>
-                     Back
+                     <?= __('Back'); ?>
                   </a>
                &nbsp;
             </div>
@@ -54,25 +54,25 @@ function addtimesheet(projectid) {
                                  <th scope="col" data-field="RecordID" class="datatable-cell-center datatable-cell datatable-cell-check">
                                     <span style="width: 20px;">
                                        <label class="checkbox checkbox-single checkbox-all">
-                                          <input aria-label="Checkbox" type="checkbox">&nbsp;<span></span>
+                                          <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox">&nbsp;<span></span>
                                        </label>
                                     </span>
                                  </th>
                                  <th scope="col" data-field="OrderID" class="datatable-cell datatable-cell-sort">
-                                    <span style="width: 126px;">Date</span>
+                                    <span style="width: 126px;"><?= __('Date'); ?></span>
                                  </th>
                                  <th scope="col" data-field="Country" class="datatable-cell datatable-cell-sort">
-                                    <span style="width: 126px;">Project</span>
+                                    <span style="width: 126px;"><?= __('Project'); ?></span>
                                  </th>
                                  <th scope="col" data-field="ShipAddress" class="datatable-cell datatable-cell-sort">
-                                    <span style="width: 126px;">Customer</span>
+                                    <span style="width: 126px;"><?= __('Customer'); ?></span>
                                  </th>
 
                                  <th scope="col" data-field="Type" data-autohide-disabled="false" class="datatable-cell datatable-cell-sort"style="text-align:center;">
-                                    <span style="width: 126px;">Time</span>
+                                    <span style="width: 126px;"><?= __('Time'); ?></span>
                                  </th>
                                  <th scope="col" data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort">
-                                    <span style="width: 125px;">Billing Start</span>
+                                    <span style="width: 125px;"><?= __('Billing Start'); ?></span>
                                  </th>
                                  <th scope="col" data-field="Actions" data-autohide-disabled="false" class="datatable-cell-left datatable-cell datatable-cell-sort" style="text-align:center;">
                                     <span style="width: 50px;"></span>
@@ -87,17 +87,17 @@ function addtimesheet(projectid) {
                                  <td class="datatable-cell-center datatable-cell datatable-cell-check" data-field="RecordID" aria-label="1">
                                     <span style="width: 20px;">
                                        <label class="checkbox checkbox-single">
-                                          <input aria-label="Checkbox" type="checkbox" value="1">&nbsp;<span></span>
+                                          <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="1">&nbsp;<span></span>
                                        </label>
                                     </span>
                                  </td>
                                  <td data-field="OrderID" aria-label="64616-103" class="datatable-cell">
                                     <span style="width: 126px;"><?php echo date('d M Y', strtotime($proj['created_date'])); ?></span>
                                  </td>
-                                 <td data-field="Country" aria-label="Brazil" class="datatable-cell" style="padding: 0px !important;">
+                                 <td data-field="Country" aria-label="<?= htmlspecialchars(__('Brazil'), ENT_QUOTES, 'UTF-8'); ?>" class="datatable-cell" style="padding: 0px !important;">
                                     <span style="width: 126px;"><?php echo $proj['name']; ?></span>
                                  </td>
-                                 <td data-field="ShipAddress" aria-label="698 Oriole Pass" class="datatable-cell">
+                                 <td data-field="ShipAddress" aria-label="<?= htmlspecialchars(__('698 Oriole Pass'), ENT_QUOTES, 'UTF-8'); ?>" class="datatable-cell">
                                     <span style="width: 126px;"><?php echo $proj['customer_id']; ?></span>
                                  </td>
 
@@ -106,10 +106,10 @@ function addtimesheet(projectid) {
                                        <span class="font-weight-bold text-danger"><?php $projectid = $proj['id']; echo date('H:i:s', strtotime($proj['created_date'])); ?></span>
                                     </span>
                                  </td>
-                                 <td class="datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="null">
+                                 <td class="datatable-cell" data-field="Actions" data-autohide-disabled="false" aria-label="<?= htmlspecialchars(__('null'), ENT_QUOTES, 'UTF-8'); ?>">
 
                                     <button type="button" class="btn btn-primary" onclick="addtimesheet('<?php echo $projectid; ?>');">
-                                       Add Timesheet
+                                       <?= __('Add Timesheet'); ?>
                                     </button>
 
                                  </td>

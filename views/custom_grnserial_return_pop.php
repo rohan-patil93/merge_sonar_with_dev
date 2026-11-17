@@ -42,7 +42,7 @@ if($item_daata['tracking_type'] == 2){
 		var chk = $(":checkbox:checked").length;
 		var qty = $("#qty_val").val();
 		var tck =1;
-		alert("chk :"+chk+"qty"+qty);
+		alert(<?php echo json_encode(__('chk').' :', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+chk+<?php echo json_encode(__('qty'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+qty);
 		if(chk > qty){
 			tck =2;
 			///$('#cck_'+id).attr('checked', false);

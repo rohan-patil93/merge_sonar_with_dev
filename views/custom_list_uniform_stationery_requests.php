@@ -31,10 +31,10 @@ $rows = $data['requests'] ?? [];
 
     <div class="card">
         <div class="card-header d-flex justify-content-between">
-        <div class="section-title">Stationery Requests</div>
+        <div class="section-title"><?= __('Stationery Requests'); ?></div>
 
             <a href="custom_insert_uniform.php" class="btn btn-primary btn-sm">
-                <i class="fa fa-plus"></i> New Request
+                <i class="fa fa-plus"></i> <?= __('New Request'); ?>
             </a>
         </div>
 
@@ -43,13 +43,13 @@ $rows = $data['requests'] ?? [];
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Request No</th>
-                        <th scope="col">Employee</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Request Date</th>
-                        <th scope="col">Required Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col" style="width: 90px;">Action</th>
+                        <th scope="col"><?= __('Request No'); ?></th>
+                        <th scope="col"><?= __('Employee'); ?></th>
+                        <th scope="col"><?= __('Location'); ?></th>
+                        <th scope="col"><?= __('Request Date'); ?></th>
+                        <th scope="col"><?= __('Required Date'); ?></th>
+                        <th scope="col"><?= __('Status'); ?></th>
+                        <th scope="col" style="width: 90px;"><?= __('Action'); ?></th>
                     </tr>
                 </thead>
 
@@ -81,7 +81,7 @@ $rows = $data['requests'] ?? [];
 
                     <tr>
                         <td colspan="7" class="text-center text-muted">
-                            No Records Found
+                            <?= __('No Records Found'); ?>
                         </td>
                     </tr>
 
@@ -107,13 +107,13 @@ function viewRequest(id) {
 function deleteRequest(id) {
 
     Swal.fire({
-        title: "Delete Request?",
-        text: "Are you sure you want to delete this request?",
+        title: <?php echo json_encode(__('Delete Request?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+        text: <?php echo json_encode(__('Are you sure you want to delete this request?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#d33",
         cancelButtonColor: "#3085d6",
-        confirmButtonText: "Yes, Delete"
+        confirmButtonText: <?php echo json_encode(__('Yes, Delete'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
     })
     .then((result) => {
         if (result.isConfirmed) {
@@ -129,12 +129,12 @@ function deleteRequest(id) {
                     let r = JSON.parse(res);
 
                     if (r.status === "success") {
-                        Swal.fire("Deleted!", r.msg, "success");
+                        Swal.fire(<?php echo json_encode(__('Deleted!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, r.msg, "success");
 
                         // optional remove row instantly
                         $("#row" + id).fadeOut();
                     } else {
-                        Swal.fire("Error!", r.msg, "error");
+                        Swal.fire(<?php echo json_encode(__('Error!'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, r.msg, "error");
                     }
                 }
             });

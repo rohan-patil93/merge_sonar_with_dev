@@ -62,7 +62,7 @@ $cur_month = date('m');
                 <div class="col-lg-6">
                     <div class="align-items-center border-0">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="font-weight-bolder text-dark font-size-h1">Timesheet Summary</span>
+                            <span class="font-weight-bolder text-dark font-size-h1"><?= __('Timesheet Summary'); ?></span>
                         </h3>
                     </div>
                 </div>
@@ -76,7 +76,7 @@ $cur_month = date('m');
                             <div class="ml-12">
                                 <div class="form-group row">
                                     <div class="col-10">
-                                        <input aria-label="Att Month Year" class="form-control" type="month" name="att_month_year" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
+                                        <input aria-label="<?= htmlspecialchars(__('Att Month Year'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="month" name="att_month_year" value="<?php echo $cur_year."-".$cur_month?>"  id="att_month_year" />
                                         <input class="form-control" type="hidden" name="shiftkeys" value="<?php echo $cudata;?>"  id="shiftkeys" />
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@ $cur_month = date('m');
 
                             </div>
                             <div class="mr-2">
-                                <button type="button" onclick="getnamelist('All Employees');" class="btn btn-primary">Generate For All</button>
+                                <button type="button" onclick="getnamelist('All Employees');" class="btn btn-primary"><?= __('Generate For All'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@ $cur_month = date('m');
                             <input type="hidden" name="attendancemonth" id="attendancemonth" value="<?php echo date('Y-m-d');?>">
                             <input type="hidden" name="process_type" id="process_type" value="1">
                             <div class="dropdown mr-1">
-                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i>Select Employees </button>
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" onclick="showpopup();"><i class="flaticon2-hourglass-1"></i><?= __('Select Employees'); ?> </button>
 
                             </div>
                             <div class="dropdown mr-1 mt-3">
@@ -111,12 +111,12 @@ $cur_month = date('m');
                                     <label class="radio">
                                         <input aria-label="Ios2" type="radio" name="radios2"/>
                                         <span></span>
-                                        Discrepancy Records
+                                        <?= __('Discrepancy Records'); ?>
                                     </label>
                                     <label class="radio">
                                         <input aria-label="Ios2" type="radio" name="radios2"/>
                                         <span></span>
-                                        All Records
+                                        <?= __('All Records'); ?>
                                     </label> </div>
                                 </div>
                             </div>
@@ -132,14 +132,14 @@ $cur_month = date('m');
                         <span class="label label-inline label-light-success font-weight-bold">
                         B</span>
                      </span>
-                     <span class="text-dark-50 font-weight-bolder font-size-base mr-3">&nbsp;Billable</span>
+                     <span class="text-dark-50 font-weight-bolder font-size-base mr-3">&nbsp;<?= __('Billable'); ?></span>
                   </div>
 
                   <div class="btn btn-icon w-auto btn-clean d-inline-flex align-items-center btn-sm px-2 mr-2">
                      <span class="symbol symbol-35 symbol-info">
-                      <span class="label label-inline label-light-warning font-weight-bold">NB</span>
+                      <span class="label label-inline label-light-warning font-weight-bold"><?= __('NB'); ?></span>
                    </span>
-                   <span class="text-dark-50 font-weight-bolder font-size-base mr-3">&nbsp;Non Billable</span>
+                   <span class="text-dark-50 font-weight-bolder font-size-base mr-3">&nbsp;<?= __('Non Billable'); ?></span>
                 </div>
 
 
@@ -151,9 +151,9 @@ $cur_month = date('m');
         <div id="attendance_table" class="p-5">
         <div class="alert alert-custom alert-notice alert-light-primary fade show" role="alert">
     <div class="alert-icon"><i class="flaticon-warning"></i></div>
-    <div class="alert-text">Please Select Employees</div>
+    <div class="alert-text"><?= __('Please Select Employees'); ?></div>
     <div class="alert-close">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
             <span aria-hidden="true"><i class="ki ki-close"></i></span>
         </button>
     </div>

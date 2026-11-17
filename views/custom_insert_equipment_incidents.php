@@ -76,7 +76,7 @@ $equipments = $result['equipments'];
                                 <span> <i class="fa fa-camera"></i> &nbsp; <?php echo __('Change Image'); ?></span>
                             </label>
                             <input type="file" name="qr_image" id="qr_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                            <img src="<?php echo "uploads/all/".$buildings['qr_image'] ; ?>" id="outputdisplay_logo" width="200" alt="Logo" />
+                            <img src="<?php echo "uploads/all/".$buildings['qr_image'] ; ?>" id="outputdisplay_logo" width="200" alt="<?= htmlspecialchars(__('Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
                             <input type="hidden" name="hid_image" value="<?php echo $buildings['qr_image'] ;  ?>">
                         </div>
                     </div>
@@ -109,7 +109,7 @@ $equipments = $result['equipments'];
                                         <span> <i class="fa fa-camera"></i> &nbsp; <?php echo __('Change Image'); ?></span>
                                     </label>
                                     <input type="file" name="image_1" id="equipment_image_1" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                                    <img src="<?php echo "uploads/all/".$buildings['image_1'] ; ?>" id="outputequipment_image_1" width="200" alt="Attachment Preview" />
+                                    <img src="<?php echo "uploads/all/".$buildings['image_1'] ; ?>" id="outputequipment_image_1" width="200" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                                     <input type="hidden" name="hid_image_1" value="<?php echo $buildings['image_1'] ;  ?>">
                                 </div>
                             </div>
@@ -122,7 +122,7 @@ $equipments = $result['equipments'];
                                         <span> <i class="fa fa-camera"></i> &nbsp; <?php echo __('Change Image'); ?></span>
                                     </label>
                                     <input type="file" name="image_2" id="equipment_image_2" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                                    <img src="<?php echo "uploads/all/".$buildings['image_2'] ; ?>" id="outputequipment_image_2" width="200" alt="Attachment Preview" />
+                                    <img src="<?php echo "uploads/all/".$buildings['image_2'] ; ?>" id="outputequipment_image_2" width="200" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                                     <input type="hidden" name="hid_image_2" value="<?php echo $buildings['image_2'] ;  ?>">
                                 </div>
                             </div>

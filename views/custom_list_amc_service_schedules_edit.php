@@ -63,7 +63,7 @@ function formatServiceDate($service_date) {
     <div class="card">
         <!-- Modal Header -->
         <div class="card-header">
-            <h5 >Update Service Details</h5>
+            <h5 ><?= __('Update Service Details'); ?></h5>
         </div>
 
         <form id="serviceDetailsForm" method="post">
@@ -73,12 +73,12 @@ function formatServiceDate($service_date) {
                 <input type="hidden" id="registration_id" name="registration_id" value="<?php echo $amc_service_schedules['registration_id'] ?? ''; ?>">
                 <!-- Service Date -->
                 <div class="form-group col-md-4">
-                    <label for="serviceDate" class="form-label">Service Date</label>
+                    <label for="serviceDate" class="form-label"><?= __('Service Date'); ?></label>
                     <?php
                     $formatted = formatServiceDate($amc_service_schedules['service_date']);
                     ?>
 
-                    <input aria-label="Input field"
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"
                         type="<?php echo $formatted['type']; ?>"
                         class="form-control"
                         id="serviceDate"
@@ -89,9 +89,9 @@ function formatServiceDate($service_date) {
 
                 <!-- Service Type -->
                 <div class="form-group col-md-4">
-                    <label for="paymentType" class="form-label">Payment/Service Type</label>
+                    <label for="paymentType" class="form-label"><?= __('Payment/Service Type'); ?></label>
                     <select class="form-select js-example-basic-single" id="paymentType" name="payment_type" onchange="toggleServiceCharge()">
-                        <option value="0">Select Any One</option>
+                        <option value="0"><?= __('Select Any One'); ?></option>
                         <?php foreach ($gc_details as $key => $value){ ?>
                             <option value="<?php echo $key; ?>" <?php echo (isset($amc_service_schedules['payment_type']) && $amc_service_schedules['payment_type'] == $key) ? 'selected' : ''; ?>>
                                 <?php echo $value; ?>
@@ -102,25 +102,25 @@ function formatServiceDate($service_date) {
 
                 <!-- Service Charge -->
                 <div class="form-group col-md-4" id='serviceChargeContainer'>
-                    <label for="serviceCharge" class="form-label">Service Charge</label>
+                    <label for="serviceCharge" class="form-label"><?= __('Service Charge'); ?></label>
                     <input type="number" step="0.01" class="form-control text-right" id="serviceCharge" name="service_charge" placeholder="0.00" value="<?php echo $amc_service_schedules['service_charge'] ?? ''; ?>">
                 </div>
 
                 <!-- Service Expenditure -->
                 <div class="form-group col-md-4">
-                    <label for="serviceExpenditure" class="form-label">Service Expenditure</label>
+                    <label for="serviceExpenditure" class="form-label"><?= __('Service Expenditure'); ?></label>
                     <input type="number" step="0.01" class="form-control text-right" id="serviceExpenditure" name="service_expenditure" placeholder="0.00" value="<?php echo $amc_service_schedules['service_expenditure'] ?? ''; ?>">
                 </div>
 
 
                 <div class="form-group col-md-4">
-                    <label for="travelExpenditure" class="form-label">Travel Expenditure (TA/DA)</label>
+                    <label for="travelExpenditure" class="form-label"><?= __('Travel Expenditure (TA/DA)'); ?></label>
                     <input type="number" step="0.01" class="form-control text-right" id="travelExpenditure" name="ta_or_da" placeholder="0.00" value="<?php echo $amc_service_schedules['ta_or_da'] ?? ''; ?>">
                 </div>
                 <div class="form-group col-md-4">
-                    <span class="form-label">Service Name</span>
-                    <select aria-label="Account Group" name="account_group_id" class="form-control js-example-basic-single" id='accountGroupId' onchange="updateGroups(this)" data-technician-id="<?php echo $amc_service_schedules['technician_id'] ?? ''; ?>">
-                        <option value="0">Select Any One</option>
+                    <span class="form-label"><?= __('Service Name'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Account Group'), ENT_QUOTES, 'UTF-8'); ?>" name="account_group_id" class="form-control js-example-basic-single" id='accountGroupId' onchange="updateGroups(this)" data-technician-id="<?php echo $amc_service_schedules['technician_id'] ?? ''; ?>">
+                        <option value="0"><?= __('Select Any One'); ?></option>
                         <?php foreach ($ag_details as $key => $value): ?>
                             <option value="<?php echo $key; ?>" <?php echo (isset($amc_service_schedules['account_group_id']) && $amc_service_schedules['account_group_id'] == $key) ? 'selected' : ''; ?>>
                                 <?php echo $value; ?>
@@ -129,16 +129,16 @@ function formatServiceDate($service_date) {
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <span class="form-label">Service Company</span>
-                    <select aria-label="Technician" name="technician_id" class="form-control js-example-basic-single" id='selectTech'>
-                        <option value="0">Select Any One</option>
+                    <span class="form-label"><?= __('Service Company'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Technician'), ENT_QUOTES, 'UTF-8'); ?>" name="technician_id" class="form-control js-example-basic-single" id='selectTech'>
+                        <option value="0"><?= __('Select Any One'); ?></option>
                     </select>
                 </div>
 
                 <!-- Service Reports -->
                 <div class="form-group col-md-4">
-                    <label for="serviceReports" class="form-label">Service Reports</label>
-                    <textarea class="form-control" id="serviceReports" name="service_reports" rows="2" placeholder="Enter report details"><?php echo $amc_service_schedules['service_reports'] ;?>  </textarea>
+                    <label for="serviceReports" class="form-label"><?= __('Service Reports'); ?></label>
+                    <textarea class="form-control" id="serviceReports" name="service_reports" rows="2" placeholder="<?= htmlspecialchars(__('Enter report details'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $amc_service_schedules['service_reports'] ;?>  </textarea>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -150,14 +150,14 @@ function formatServiceDate($service_date) {
                             ?>
                             <div class="col-md-12 d-flex align-items-start checklist-item mb-2">
                                 <div class="form-check me-2 mt-2">
-                                    <input aria-label="Checkbox" class="form-check-input checklist-status"
+                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-check-input checklist-status"
                                         type="checkbox"
                                         name="checklist_status[<?php echo $item_id; ?>]"
                                         value="1" <?php echo $itemStatus ? 'checked readonly' : ''; ?>>
                                 </div>
                                 <div class="form-group flex-grow-1 me-2">
                                     <input type="hidden" name="existing_checklist_ids[]" value="<?php echo htmlspecialchars($item_id); ?>" >
-                                    <input aria-label="Checklist Items[]" type="text"
+                                    <input aria-label="<?= htmlspecialchars(__('Checklist Items'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text"
                                         name="checklist_items[]"
                                         class="form-control checklist-text"
                                         value="<?php echo htmlspecialchars($itemText); ?>" readonly>
@@ -165,7 +165,7 @@ function formatServiceDate($service_date) {
                                 <div class="form-group flex-grow-1 me-2">
                                     <input type="hidden" name="new_checklist_ids[]" value="<?php echo $newId; ?>" >
 
-                                    <textarea aria-label="Enter Remarks" name="checklist_remarks[]" class="form-control checklist-text fill"  placeholder="Enter Remarks"><?php echo htmlspecialchars($remarks); ?></textarea>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Enter Remarks'), ENT_QUOTES, 'UTF-8'); ?>" name="checklist_remarks[]" class="form-control checklist-text fill"  placeholder="<?= htmlspecialchars(__('Enter Remarks'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($remarks); ?></textarea>
                                 </div>
 
                             </div>
@@ -176,7 +176,7 @@ function formatServiceDate($service_date) {
             </div>
             <!-- Modal Footer -->
             <div class="card-footer">
-                <button type="submit" name="save" value="SAVE" class="btn btn-primary" >Save Changes</button>
+                <button type="submit" name="save" value="SAVE" class="btn btn-primary" ><?= __('Save Changes'); ?></button>
             </div>
         </form>
     </div>
@@ -204,7 +204,7 @@ function formatServiceDate($service_date) {
                 if (data) {
                 const response = JSON.parse(data);
                 const techSelect = $('#selectTech');
-                techSelect.empty().append('<option value="0">Select Any One</option>');
+                techSelect.empty().append('<option value="0"><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option>');
 
                 response.forEach(function(row) {
                     const selected = (row.id == technicianId) ? 'selected' : '';

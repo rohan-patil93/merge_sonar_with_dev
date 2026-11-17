@@ -314,10 +314,10 @@ function duedate(){
              exchangerate();
             }else{
                 swal.fire({
-                            title: "6010 : Please Define Exchange Rate",
+                            title: <?php echo json_encode(__('6010 : Please Define Exchange Rate'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             type: "warning",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
                             confirmButtonClass: "btn btn-danger"
                         })
             }
@@ -524,14 +524,14 @@ function duedate(){
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><label class="kt-checkbox"> <input aria-label="Checkbox"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
+        htmlRows += '<td><label class="kt-checkbox"> <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
         htmlRows += '<td id="other_'+count+'"><select aria-label="Product Code[]" class="form-control"  name= "productCode[]" id="productCode__2"+count+'" onchange="itemChange(this.value,'+count+')" > <option value="0"> <?= __('Select Any Category') ?> </option><?php foreach ($itemres as  $item) {  ?>      <option  value = <?php echo $item['id']; ?>><?php echo $item['account_code']; ?> </option> <?php
-} ?><option  value = "-1"> Other</option> </select> <input type="hidden" name="item_name[]" id="item_name__2"+count+'" class="form-control"> </td>';
+} ?><option  value = "-1"> <?= htmlspecialchars(__('Other'), ENT_QUOTES, 'UTF-8'); ?></option> </select> <input type="hidden" name="item_name[]" id="item_name__2"+count+'" class="form-control"> </td>';
         htmlRows += '<td><textarea aria-label="Product Name[]" name="productName[]" id="productName_'+count+'" class="form-control"></textarea></td> ';
         htmlRows += '<td> <input type="hidden" name="quantity[]" id="quantity__2"+count+'"    class="form-control amount" value="1"> <input aria-label="Price[]" type="text" name="price[]" id="price_'+count+'" class="form-control price amount" autocomplete="off"><div style="display: none;color: red;" id="price_err_'+count+'"> Enter Rate</div></td>';
-        htmlRows += '<td><select aria-label="Tax[]" class="form-control"  name= "tax[]" id="tax_'+count+'"> <option value="0"> Select Any Tax Rate </option><?php foreach ($taxres as $key => $tax) {  ?>      <option <?php if($_SESSION[configdata][default_tax_rate] == $key){ ?> selected  <?php
+        htmlRows += '<td><select aria-label="Tax[]" class="form-control"  name= "tax[]" id="tax_'+count+'"> <option value="0"> <?= htmlspecialchars(__('Select Any Tax Rate'), ENT_QUOTES, 'UTF-8'); ?> </option><?php foreach ($taxres as $key => $tax) {  ?>      <option <?php if($_SESSION[configdata][default_tax_rate] == $key){ ?> selected  <?php
 } ?> value = <?php echo $key?>><?php echo $tax; ?> </option> <?php
-} ?>  </select><div style="display: none;color: red;" id="tax_err_'+count+'"> Enter Tax</div>';
+} ?>  </select><div style="display: none;color: red;" id="tax_err_'+count+'"> <?= htmlspecialchars(__('Enter Tax'), ENT_QUOTES, 'UTF-8'); ?></div>';
 
         htmlRows += '<input type="hidden" name="dis_ptax_amount[]" value="" readonly class="form-control price amount" id="dis_ptax_amount_'+count+'"><input type="hidden" name="pdiscount_amount[]" value="" readonly class="form-control price amount" id="pdiscount_amount_'+count+'"><input type="hidden" readonly name="p_amount[]" id="p_amount_'+count+'" class="form-control price amount"><input type="hidden" readonly name="ptax_amount[]" id="ptax_amount_'+count+'" class="form-control price amount"><input type="hidden" readonly name="amount[]" id="amount__2"+count+'" class="form-control price amount">  <input type="hidden" name="dis_amount[]" readonly id="dis_amount_'+count+'" class="form-control amount" value=""></td>';
 
@@ -571,7 +571,7 @@ function duedate(){
     });
     $(document).on('click', '.deleteInvoice', function(){
         var id = $(this).attr("id");
-        if(confirm("Are you sure you want to remove this?")){
+        if(confirm(<?php echo json_encode(__('Are you sure you want to remove this?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>)){
             $.ajax({
                 url:"action.php",
                 method:"POST",
@@ -805,12 +805,12 @@ function calculateTotal(){
     for( var k =0 ; k < arr2.length; k++){
 
             if(old_state != change_state){
-                str+= "<tr><td style='width: 67%;text-align:right;'> IGST @ "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
+                str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('IGST @'), ENT_QUOTES, 'UTF-8'); ?> "+arr2[k]['id']+"% on "+arr2[k]['amount']+"</td>";
                 str+= "<td>  <input aria-label="Tax Amount"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(arr2[k]['tax_amount']).toFixed(2)+"''> </td></tr>";
             }else{
-                str+= "<tr><td style='width: 67%;text-align:right;'> CGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('CGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                 str+= "<td>  <input aria-label="Tax Amount"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
-                 str+= "<tr><td style='width: 67%;text-align:right;'> SGST @ "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
+                 str+= "<tr><td style='width: 67%;text-align:right;'> <?= htmlspecialchars(__('SGST @'), ENT_QUOTES, 'UTF-8'); ?> "+parseFloat(arr2[k]['id']/2)+"% on "+arr2[k]['amount']+"</td>";
                 str+= "<td>  <input aria-label="Tax Amount"  type='text' class='form-control amount' name='dis_taxRate'  readonly placeholder='Tax Amount' value='"+parseFloat(parseFloat(arr2[k]['tax_amount']/2)).toFixed(2)+"''> </td></tr>";
             }
 
@@ -895,11 +895,11 @@ function calculateTotal(){
     var quantity_old = $('#quantity_old_'+id).val();
     if (parseFloat(quantity_old) < parseFloat(quantity)){
         swal.fire({
-            title: "Quantity alert ",
-            text: "6030 : Quantity cannot be more than "+quantity_old,
+            title: <?php echo json_encode(__('Quantity alert').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            text: <?php echo json_encode(__('6030 : Quantity cannot be more than').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+quantity_old,
             type: "warning",
             buttonsStyling: false,
-            confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
             confirmButtonClass: "btn btn-danger",
         }).then(function(result) {
 
@@ -927,14 +927,14 @@ function calculateTotal(){
                     console.log(quantity);
                     if (parseFloat(data) < quantity){
                         swal.fire({
-                            title: "Quantity on hand "+parseFloat(data),
-                            text: "6020 : Do you want to change the quantity to "+parseFloat(data)+" ?",
+                            title: <?php echo json_encode(__('Quantity on hand').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+parseFloat(data),
+                            text: <?php echo json_encode(__('6020 : Do you want to change the quantity to').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+parseFloat(data)+" ?",
                             type: "warning",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, change!",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, change!'), ENT_QUOTES, 'UTF-8'); ?>",
                             confirmButtonClass: "btn btn-danger",
                             showCancelButton: true,
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, proceed",
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, proceed'), ENT_QUOTES, 'UTF-8'); ?>",
                             cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {
@@ -961,7 +961,7 @@ function calculateTotal(){
         <div class="alert-icon"><i class="flaticon-warning"></i></div>
         <div class="alert-text">    <?php echo $_GET['error']." : ".$_SESSION['error_message'][$_GET['error']]; ?>   </div>
         <div class="alert-close">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                 <span aria-hidden="true"><i class="la la-close"></i></span>
             </button>
         </div>
@@ -1050,19 +1050,19 @@ function calculateTotal(){
    $tran_no =  $table1['qo_number'];
  ?>
 <div class="form-group col-lg-2">
-    <span>Transaction Number</span>
+    <span><?= __('Transaction Number'); ?></span>
     <div class="input-group">
         <input class="form-control" type='hidden' id="ord_no" value='<?php echo $invoicenumber; ?>' name="invoice_serial_number"/>
-    <input aria-label="Inv No"  class="form-control" readonly type='text' id="inv_no" value='<?php echo $table1['transaction_number']; ?>'   name="invoice_number" id="invoice_number" />
+    <input aria-label="<?= htmlspecialchars(__('Inv No'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" readonly type='text' id="inv_no" value='<?php echo $table1['transaction_number']; ?>'   name="invoice_number" id="invoice_number" />
 
     </div>
 </div>
 
 <div class="form-group col-lg-2">
-    <span class="">Transaction Date</span>
+    <span class=""><?= __('Transaction Date'); ?></span>
     <div class="input-group date">
         <?php $from = fromDate($table1['qo_date']); ?>
-        <input aria-label="Input field"  class="form-control" type='text' onblur="duedate()" autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3"  />
+        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" type='text' onblur="duedate()" autocomplete="off" value='<?php  echo $from; ?>' name="invoiced_at" id="kt_datepicker_4_3"  />
         <div class="input-group-append">
             <span class="input-group-text"> <i class="la la-calendar"></i></span>
          </div>
@@ -1070,21 +1070,21 @@ function calculateTotal(){
 </div>
 <?php if($table_name == 'requisitions'){ ?>
 <div class="form-group col-lg-4">
-    <span class="">Originator <span class="requried">*</span></span>
-    <select aria-label="Customer" class="form-control" id="customer_id" name= "customer_id" onchange="GetSelectedTextValueEmployee(this.value)" >
-            <option value="0"> Select Any EMployee </option>
+    <span class=""><?= __('Originator'); ?> <span class="requried">*</span></span>
+    <select aria-label="<?= htmlspecialchars(__('Customer'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="customer_id" name= "customer_id" onchange="GetSelectedTextValueEmployee(this.value)" >
+            <option value="0"> <?= __('Select Any EMployee'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
             <option  <?php if($table1['customer_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['first_name']," ".$cus['middle_name']."".$cus['last_name']; ?>
             </option>
         <?php } ?>
     </select>
-    <div style="display: none;color: red;" id="<?php echo 'customer_id_err'; ?>"> Please Select Employee  </div>
+    <div style="display: none;color: red;" id="<?php echo 'customer_id_err'; ?>"> <?= __('Please Select Employee'); ?>  </div>
 </div>
 <div class="form-group col-lg-4">
-    <span> Cost Center <span class="requried">*</span></span>
-    <select aria-label="Cost Center" class="form-control" id="cost_center" name="cost_center">
-            <option value="0"> Select any  </option>
+    <span> <?= __('Cost Center'); ?> <span class="requried">*</span></span>
+    <select aria-label="<?= htmlspecialchars(__('Cost Center'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="cost_center" name="cost_center">
+            <option value="0"> <?= __('Select any'); ?>  </option>
             <?php foreach ($costs as  $k1 =>$pos) {  ?>
                 <optgroup label="<?php echo $k1; ?>">
 
@@ -1095,62 +1095,62 @@ function calculateTotal(){
             </optgroup>
         <?php } ?>
         </select>
-        <div style="display: none;color: red;" id="<?php echo 'cost_center_err'; ?>"> Please enter Cost Center  </div>
+        <div style="display: none;color: red;" id="<?php echo 'cost_center_err'; ?>"> <?= __('Please enter Cost Center'); ?>  </div>
 </div>
 <?php } else {?>
 <div class="form-group col-lg-4">
-    <span class="">Vendor <span class="requried">*</span></span>
-    <select aria-label="Customer" class="form-control" id="customer_id_2" name= "customer_id" onchange="GetSelectedTextValue(this.value)" >
-            <option value="0"> Select Any Vendor </option>
+    <span class=""><?= __('Vendor'); ?> <span class="requried">*</span></span>
+    <select aria-label="<?= htmlspecialchars(__('Customer'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="customer_id_2" name= "customer_id" onchange="GetSelectedTextValue(this.value)" >
+            <option value="0"> <?= __('Select Any Vendor'); ?> </option>
             <?php foreach ($cusresponse as $key => $cus) {  ?>
             <option  <?php if($table1['customer_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id'] ?>   >      <?php echo $cus['display_name']; ?>
             </option>
         <?php } ?>
     </select>
-     <div style="display: none;color: red;" id="<?php echo 'customer_id_err_2'; ?>"> Please Select Vendor  </div>
+     <div style="display: none;color: red;" id="<?php echo 'customer_id_err_2'; ?>"> <?= __('Please Select Vendor'); ?>  </div>
 </div>
 
 <?php } ?>
 <div class="form-group col-lg-4">
-    <span>Name</span>
-    <input aria-label="Customer Name" readonly class="form-control"  type='text' id="customer_name" name="customer_name"    value="<?php echo $table1['customer_name']; ?>" />
+    <span><?= __('Name'); ?></span>
+    <input aria-label="<?= htmlspecialchars(__('Customer Name'), ENT_QUOTES, 'UTF-8'); ?>" readonly class="form-control"  type='text' id="customer_name" name="customer_name"    value="<?php echo $table1['customer_name']; ?>" />
      <input readonly class="form-control"  type='hidden' id="cost_center_2" name="cost_center"    value="<?php echo $table1['cost_center']; ?>" />
 
 </div>
 
 <div class="form-group col-lg-2">
-    <span>Tax Number</span>
+    <span><?= __('Tax Number'); ?></span>
     <div class="input-group">
-        <input aria-label="Customer Tax Number" type='text' id="customer_tax_number" name="customer_tax_number" class="form-control" readonly value="<?php echo $table1['customer_tax_number']; ?>" />
+        <input aria-label="<?= htmlspecialchars(__('Customer Tax Number'), ENT_QUOTES, 'UTF-8'); ?>" type='text' id="customer_tax_number" name="customer_tax_number" class="form-control" readonly value="<?php echo $table1['customer_tax_number']; ?>" />
     </div>
 </div>
 
 <div class="form-group col-lg-2">
-    <span class="">Phone</span>
+    <span class=""><?= __('Phone'); ?></span>
     <div class="kt-input-icon kt-input-icon--right">
-        <input aria-label="Customer Phone" type='text' id="customer_phone" name="customer_phone" class="form-control" readonly value="<?php echo $table1['customer_phone']; ?>" />
+        <input aria-label="<?= htmlspecialchars(__('Customer Phone'), ENT_QUOTES, 'UTF-8'); ?>" type='text' id="customer_phone" name="customer_phone" class="form-control" readonly value="<?php echo $table1['customer_phone']; ?>" />
         <input type='hidden'  name="company_id" class="form-control" readonly value="<?php echo $_SESSION['company_id']; ?>" />
     </div>
 </div>
 
 <div class="form-group col-lg-4">
-    <span class=""> Mail To</span>
-    <input aria-label="Customer Email" type='text' class="form-control" id="customer_email" readonly name="customer_email"  value="<?php echo $table1['customer_email']; ?>"/>
+    <span class=""> <?= __('Mail To'); ?></span>
+    <input aria-label="<?= htmlspecialchars(__('Customer Email'), ENT_QUOTES, 'UTF-8'); ?>" type='text' class="form-control" id="customer_email" readonly name="customer_email"  value="<?php echo $table1['customer_email']; ?>"/>
 </div>
 
 <div class="form-group col-lg-4">
-    <span>Billing Address</span>
+    <span><?= __('Billing Address'); ?></span>
     <div class="kt-input-icon kt-input-icon--right">
-        <textarea aria-label="Enter your address" type="text" name="customer_address" id="customer_address" class="form-control" placeholder="<?= __('Enter your address') ?>"><?php echo $table1['customer_address'] ?></textarea>
+        <textarea aria-label="<?= htmlspecialchars(__('Enter your address'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="customer_address" id="customer_address" class="form-control" placeholder="<?= __('Enter your address') ?>"><?php echo $table1['customer_address'] ?></textarea>
 
     </div>
 </div>
 
 <div class="form-group col-lg-4">
-    <span>Shipping Address</span>
+    <span><?= __('Shipping Address'); ?></span>
     <div class="kt-input-icon kt-input-icon--right">
-        <textarea aria-label="Enter your address" type="text" class="form-control" id="customer_ship_adderss" name='customer_ship_adderss' placeholder="<?= __('Enter your address') ?>"><?php echo $table1['customer_address'] ?></textarea>
+        <textarea aria-label="<?= htmlspecialchars(__('Enter your address'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="customer_ship_adderss" name='customer_ship_adderss' placeholder="<?= __('Enter your address') ?>"><?php echo $table1['customer_address'] ?></textarea>
 
     </div>
 </div>
@@ -1158,10 +1158,10 @@ function calculateTotal(){
 
     <?php $table1['place_of_supply'] = $table1['place_of_supply'] !='' ? $table1['place_of_supply'] : $location_state; ?>
     <div style="float: left;width: 33%;padding: 3px;">
-        <span class="">Place Of Supply <span class="requried">*</span></span>
+        <span class=""><?= __('Place Of Supply'); ?> <span class="requried">*</span></span>
         <div class="kt-input-icon kt-input-icon--right" >
-            <select aria-label="Place Of Supply" class="form-control" name="place_of_supply" id="customer_place_of_supply" onchange="displaytaxes()">
-            <option value="0"> Select Any Place </option>
+            <select aria-label="<?= htmlspecialchars(__('Place Of Supply'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" name="place_of_supply" id="customer_place_of_supply" onchange="displaytaxes()">
+            <option value="0"> <?= __('Select Any Place'); ?> </option>
             <?php foreach ($posresponse as $key => $pos) {  ?>
                 <option   <?php if($table1['place_of_supply'] == $pos['id']){ ?>selected <?php
 } ?>  value ="<?php echo $pos['id']; ?>" > <?php echo $pos['state_name']; ?> </option>
@@ -1169,17 +1169,17 @@ function calculateTotal(){
             </select>
 
             <input type="hidden" name="old_place" id="old_place" value="<?php echo $location_state;?>">
-             <div style="display: none;color: red;" id="<?php echo 'customer_place_of_supply_err'; ?>"> Please enter Place Of Supply</div>
+             <div style="display: none;color: red;" id="<?php echo 'customer_place_of_supply_err'; ?>"> <?= __('Please enter Place Of Supply'); ?></div>
         </div>
     </div>
 
  <?php
         $table1['currency_id'] =  $table1['currency_id'] !="" ? $table1['currency_id'] : $_SESSION['config']['default_currency_id'];?>
 <div  class="form-group col-lg-3">
-    <span class="">Currency</span>
+    <span class=""><?= __('Currency'); ?></span>
     <div class="kt-input-icon kt-input-icon--right" >
-        <select aria-label="Select option" class="form-control" onchange="currencychange(this.value,<?php echo  $_SESSION['config']['default_currency_id'];  ?>)"  name="currency_id" id="currency_id">
-        <option value="0"> Select Any Currency </option>
+        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" onchange="currencychange(this.value,<?php echo  $_SESSION['config']['default_currency_id'];  ?>)"  name="currency_id" id="currency_id">
+        <option value="0"> <?= __('Select Any Currency'); ?> </option>
         <?php
         foreach ($cr_data as  $crpos) {  ?>
             <option  <?php if($table1['currency_id'] == $crpos['id']){ ?> selected  <?php
@@ -1191,56 +1191,56 @@ function calculateTotal(){
 </div>
 
 <div class="form-group col-lg-1">
-    <span class="">Ex Rate</span>
+    <span class=""><?= __('Ex Rate'); ?></span>
 
-    <input aria-label="Currency Rate" type='text' class="form-control" id="currency_rate" onchange="exchangerate()"  name="currency_rate"  value="<?php echo customeummarmonyformate($table1['currency_rate']); ?>"/>
+    <input aria-label="<?= htmlspecialchars(__('Currency Rate'), ENT_QUOTES, 'UTF-8'); ?>" type='text' class="form-control" id="currency_rate" onchange="exchangerate()"  name="currency_rate"  value="<?php echo customeummarmonyformate($table1['currency_rate']); ?>"/>
     <?php $orgi = $table1['originator'] != "" ? $table1['originator'] : $_SESSION['userid']; ?>
     <input type="hidden" name="originator" value = <?php echo $orgi; ?> >
 </div>
 
 <div class="form-group col-lg-4">
     <div style="float: left;width: 50%;padding: 3px;">
-        <span class="">Payment Terms</span>
+        <span class=""><?= __('Payment Terms'); ?></span>
         <div class="kt-input-icon kt-input-icon--right">
-             <select aria-label="Payment Terms" class="form-control"  name="payment_terms" onchange="duedate()" id="customer_payment_terms">
-                <option value="0"> Select Any Term </option>
+             <select aria-label="<?= htmlspecialchars(__('Payment Terms'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  name="payment_terms" onchange="duedate()" id="customer_payment_terms">
+                <option value="0"> <?= __('Select Any Term'); ?> </option>
             <?php foreach ($posresponsept as $key => $pos) {  ?>
                 <option   <?php if($table1['payment_terms'] == $pos['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo $pos['genc_detail_name']; ?> </option>
+} ?>  value ="<?php echo $pos['genc_detail_code']; ?>" > <?php echo __($pos['genc_detail_name']); ?> </option>
             <?php } ?>
             </select>
         </div>
     </div>
 
     <div style="float: left;width: 50% ;padding: 3px;">
-        <span>Due Date:</span>
+        <span><?= __('Due Date'); ?>:</span>
           <?php $duee = $table1['due_date'] !='' ?  fromDate($table1['due_date']) :  ''; ?>
-        <input aria-label="Due Date" type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly />
+        <input aria-label="<?= htmlspecialchars(__('Due Date'), ENT_QUOTES, 'UTF-8'); ?>" type='text' class="form-control" id="due_date"   name="due_date"  value=" <?php  echo $duee; ?>" readonly />
     </div>
 </div>
 <div class="form-group col-lg-4">
-     <span class="">Payment Method</span>
+     <span class=""><?= __('Payment Method'); ?></span>
         <div class="kt-input-icon kt-input-icon--right">
-             <select aria-label="Payment Method" class="form-control"  name="payment_method" id="payment_method">
-                <option value="0"> Select Any Payment Method </option>
+             <select aria-label="<?= htmlspecialchars(__('Payment Method'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  name="payment_method" id="payment_method">
+                <option value="0"> <?= __('Select Any Payment Method'); ?> </option>
             <?php foreach ($paymentmethod_data as $method) {  ?>
                 <option   <?php if($table1['payment_method'] == $method['genc_detail_code']){ ?>selected <?php
-} ?>  value ="<?php echo $method['genc_detail_code']; ?>" > <?php echo $method['genc_detail_name']; ?> </option>
+} ?>  value ="<?php echo $method['genc_detail_code']; ?>" > <?php echo __($method['genc_detail_name']); ?> </option>
             <?php } ?>
             </select>
         </div>
 </div>
 <div class="form-group col-lg-4">
     <div style="float: left;width: 50% ;padding: 3px;">
-        <span>Document Ref No:</span>
-        <input aria-label="Doc Ref No" type='text' class="form-control" id="doc_ref_no"   name="doc_ref_no"  value="<?php  echo $table1['doc_ref_no']; ?>"  />
+        <span><?= __('Document Ref No'); ?>:</span>
+        <input aria-label="<?= htmlspecialchars(__('Doc Ref No'), ENT_QUOTES, 'UTF-8'); ?>" type='text' class="form-control" id="doc_ref_no"   name="doc_ref_no"  value="<?php  echo $table1['doc_ref_no']; ?>"  />
     </div>
 
     <div style="float: left;width: 50% ;padding: 3px;">
-        <span>Document Ref Date:</span>
+        <span><?= __('Document Ref Date'); ?>:</span>
         <div class="input-group date">
         <?php $doc = $table1['doc_ref_date'] !='' ? fromDate($table1['doc_ref_date']) :  ''; ?>
-        <input aria-label="Input field"  class="form-control" type='text' onblur="duedate()" autocomplete="off" value='<?php  echo $doc; ?>' name="doc_ref_date" id="kt_datepicker_31"  />
+        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-control" type='text' onblur="duedate()" autocomplete="off" value='<?php  echo $doc; ?>' name="doc_ref_date" id="kt_datepicker_31"  />
         <div class="input-group-append">
             <span class="input-group-text"> <i class="la la-calendar"></i></span>
          </div>
@@ -1254,16 +1254,16 @@ function calculateTotal(){
 <!--begin::Page second part -->
 
 <div class="kt-portlet__head">
-        <div class="kt-portlet__head-label"><h3 class="kt-portlet__head-title"> Category</h3></div>
+        <div class="kt-portlet__head-label"><h3 class="kt-portlet__head-title"> <?= __('Category'); ?></h3></div>
     <div class="kt-portlet__head-label" style="float: right;">
          <div class="form-group col-lg-12">
-            <select aria-label="Tax Type" class="form-control" id="taxtype" name= "tax_type" onchange="calculateTotal()" >
+            <select aria-label="<?= htmlspecialchars(__('Tax Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="taxtype" name= "tax_type" onchange="calculateTotal()" >
                     <option  <?php if($table1['taxtype'] == 'E'){ ?>selected <?php
-} ?> value="E"> Exclusive </option>
+} ?> value="E"> <?= __('Exclusive'); ?> </option>
                     <option  <?php if($table1['taxtype'] == 'I'){ ?>selected <?php
-} ?> value="I"> Inclusive </option>
+} ?> value="I"> <?= __('Inclusive'); ?> </option>
                     <option  <?php if($table1['taxtype'] == 'O'){ ?>selected <?php
-} ?> value="O"> Out Of scope </option>
+} ?> value="O"> <?= __('Out Of scope'); ?> </option>
             </select>
         </div>
      </div>
@@ -1277,7 +1277,7 @@ function calculateTotal(){
 <tr>
     <th scope="col" class="thheader" style="width: 2%;">
             <label class="kt-checkbox">
-                <input aria-label="Check All" id="checkAll"  type="checkbox">
+                <input aria-label="<?= htmlspecialchars(__('Check All'), ENT_QUOTES, 'UTF-8'); ?>" id="checkAll"  type="checkbox">
                 <span></span>
             </label>
     </th>
@@ -1295,45 +1295,45 @@ function calculateTotal(){
  foreach ($table2 as $tab2) {?>
 <tr>
     <td>
-        <label class="kt-checkbox"><input aria-label="Checkbox" class="form-control itemRow" type="checkbox"> <span></span> </label>
+        <label class="kt-checkbox"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox"> <span></span> </label>
     </td>
 
     <td id='other_<?php echo $i; ?>'>
         <?php if($tab2['item_id'] >= 0){ ?>
-        <select aria-label="Product Code[]" class="form-control"  name= "productCode[]" onchange="itemChange(this.value,<?php echo $i; ?>)" id="productCode_<?php echo $i; ?>">
-            <option value="0"> Select Any Category  </option>
+        <select aria-label="<?= htmlspecialchars(__('Product Code'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control"  name= "productCode[]" onchange="itemChange(this.value,<?php echo $i; ?>)" id="productCode_<?php echo $i; ?>">
+            <option value="0"> <?= __('Select Any Category'); ?>  </option>
             <?php foreach ($itemres as $item) {  ?>
             <option <?php if($tab2['item_id'] == $item['id']){ ?>selected <?php
 } ?> value = <?php echo $item['id']; ?>   > <?php echo $item['account_code']; ?>
             <?php } ?>
-            </option> <option value="-1">Other</option>
+            </option> <option value="-1"><?= __('Other'); ?></option>
         </select>
         <input type="hidden" name="item_name[]" class="form-control" value="<?php echo $tab2['item_name']; ?>">
     <?php }else { ?>
-        <input aria-label="Item Name[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
+        <input aria-label="<?= htmlspecialchars(__('Item Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="item_name[]" id="item_name_<?php echo $i; ?>" class="form-control" value="<?php echo $tab2['item_name']; ?>" autocomplete="off">
         <input type="hidden" name="productCode[]" class="form-control" value="<?php echo $tab2['item_id']; ?>">
     <?php } ?>
     </td>
     <td>
-        <textarea aria-label="Product Name[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control"><?php echo $tab2['description']; ?></textarea>
+        <textarea aria-label="<?= htmlspecialchars(__('Product Name'), ENT_QUOTES, 'UTF-8'); ?>[]"  name="productName[]" id="productName_<?php echo $i; ?>" class="form-control"><?php echo $tab2['description']; ?></textarea>
     </td>
 
 
     <td>
         <input type="hidden" name="quantity[]" id="quantity_<?php echo $i; ?>"    class="form-control amount" value="1">
-        <input aria-label="Price[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off">
+        <input aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="price[]" id="price_<?php echo $i; ?>" class="form-control price amount" value="<?php echo number_format($tab2['item_price'],2, '.', ''); ?>" autocomplete="off">
 
-        <div style="display: none;color: red;" id="<?php echo 'price_err_'.$i; ?>"> Enter Rate</div>
+        <div style="display: none;color: red;" id="<?php echo 'price_err_'.$i; ?>"> <?= __('Enter Rate'); ?></div>
     </td>
     <td>
-        <select aria-label="Tax[]" class="form-control"  name= "tax[]" id="tax_<?php echo $i; ?>"  >
-            <option value="0"> Select Any Tax Rate </option>
+        <select aria-label="<?= htmlspecialchars(__('Tax'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control"  name= "tax[]" id="tax_<?php echo $i; ?>"  >
+            <option value="0"> <?= __('Select Any Tax Rate'); ?> </option>
             <?php foreach ($taxres as $key => $tax) {  ?>
             <option  <?php if($tab2['tax_id'] == $key){ ?> selected  <?php
 } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
             <?php } ?>
         </select>
-        <div style="display: none;color: red;" id="<?php echo 'tax_err_'.$i; ?>"> Enter Tax</div>
+        <div style="display: none;color: red;" id="<?php echo 'tax_err_'.$i; ?>"> <?= __('Enter Tax'); ?></div>
 
         <input type="hidden" name="dis_ptax_amount[]" value="<?php echo customeummarmonyformate($tab2['tax_amount']); ?>" readonly class="form-control price amount" id="dis_ptax_amount_<?php echo $i; ?>">
         <input type="hidden" name="pdiscount_amount[]" value="<?php echo customeummarmonyformate($tab2['tax_amount']); ?>" readonly class="form-control price amount" id="pdiscount_amount_<?php echo $i; ?>">
@@ -1362,18 +1362,18 @@ function calculateTotal(){
     <div style="float: left;width: 50%; padding: 15px;">
        <div>
             <div style="float: left;width: 48%;padding: 1%;">
-                <span class="">Internal Note(s) </span>
-                <textarea aria-label="Notes" style="height: 120px;" name="notes" class="form-control" ><?php echo $table1['notes']; ?></textarea>
+                <span class=""><?= __('Internal Note(s)'); ?> </span>
+                <textarea aria-label="<?= htmlspecialchars(__('Notes'), ENT_QUOTES, 'UTF-8'); ?>" style="height: 120px;" name="notes" class="form-control" ><?php echo $table1['notes']; ?></textarea>
             </div>
             <div style="float: left;width: 48%;padding: 1%;">
-                <span class="">Printing Note(s) </span>
-                <textarea aria-label="Printing Notes" style="height: 120px;" name="printing_notes" class="form-control" ><?php echo $table1['printing_notes']; ?></textarea>
+                <span class=""><?= __('Printing Note(s)'); ?> </span>
+                <textarea aria-label="<?= htmlspecialchars(__('Printing Notes'), ENT_QUOTES, 'UTF-8'); ?>" style="height: 120px;" name="printing_notes" class="form-control" ><?php echo $table1['printing_notes']; ?></textarea>
             </div>
         </div>
           <?php if($small_sub == 0  ){ ?>
             <div style="margin-top: 10px;clear:both;">
-                <span class="">Comment(s)</span>
-                <textarea aria-label="Comments" style="height: 120px;" name="comments" class="form-control" id="comments" ><?php echo $comments; ?></textarea>
+                <span class=""><?= __('Comment(s)'); ?></span>
+                <textarea aria-label="<?= htmlspecialchars(__('Comments'), ENT_QUOTES, 'UTF-8'); ?>" style="height: 120px;" name="comments" class="form-control" id="comments" ><?php echo $comments; ?></textarea>
             </div>
             <div class="btn-group" style="margin-top: 10px;float: right;">
                      <button id="kt_llogin_signup_submit"  class="btn btn-brand" ><?= __('Submit') ?></button>
@@ -1387,7 +1387,7 @@ function calculateTotal(){
         <div class="card">
             <div class="card-header" id="headingTwo21">
                 <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo21" aria-expanded="false" aria-controls="collapseTwo21">
-                    Comments
+                    <?= __('Comments'); ?>
                 </div>
             </div>
             <div id="collapseTwo21" class="collapse" aria-labelledby="headingTwo21" data-parent="#accordionExample2_bills">
@@ -1408,7 +1408,7 @@ function calculateTotal(){
                                 </div>
                                 <div class="kt-timeline-v2__item-text  kt-padding-top-5">
                                     <b> <?php echo date("M d, Y g:i A", strtotime($lists['response_date'])); ?></b>
-                                    <?php echo " ".$_SESSION['users'][$lists['user_id']]." with Status "; ?><span style="color: <?php echo "#".$stausresult[$lists['response_type']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$lists['response_type']]['background_color']); ?>;" class="kt-badge  kt-badge--inline kt-badge--pill"><?php if($lists['response_type'] == 0){ echo "Yet to respond";
+                                    <?php echo " ".$_SESSION['users'][$lists['user_id']]." with Status "; ?><span style="color: <?php echo "#".$stausresult[$lists['response_type']]['color']; ?>;    background:  <?php echo "#".strval($stausresult[$lists['response_type']]['background_color']); ?>;" class="kt-badge  kt-badge--inline kt-badge--pill"><?php if($lists['response_type'] == 0){ echo __('Yet to respond');
 }else{ echo $stausresult[$lists['response_type']]['name'];
 }?></span>
                                    <?php echo "</br>".$lists['comments']; ?>
@@ -1430,42 +1430,42 @@ function calculateTotal(){
     <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
         <tr>
             <th scope="col" class="amount"><span><?= __('Sub Total') ?></span></th>
-            <td><span><input aria-label="Input field"  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="<?= __('Subtotal') ?>" >
+            <td><span><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subTotal" id="dis_subTotal" placeholder="<?= __('Subtotal') ?>" >
             <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subTotal" id="subTotal" placeholder="<?= __('Subtotal') ?>" ></span></td>
         </tr>
          <tr>
             <th scope="col" class="amount">
                 <div>
                     <div style="float: left;width: 33%;padding: 10px;">
-                        <span >Discount </span>
+                        <span ><?= __('Discount'); ?> </span>
                     </div>
                     <div style="float: left;width: 33%;padding: 3px;">
-                        <select aria-label="Discount Type" class="form-control" id="disType" name="discount_type" onchange="calculateTotal()">
+                        <select aria-label="<?= htmlspecialchars(__('Discount Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="disType" name="discount_type" onchange="calculateTotal()">
                             <option value="P"><?= __('Percentage') ?></option>
                             <option <?php if($table1['discount_type'] == 'A'){ ?> selected <?php
 } ?> value="A"><?= __('Amount') ?></option>
                         </select>
                     </div>
                     <div style="float: left;width: 33%;padding:3px;" >
-                        <input aria-label="Input field" value="<?php echo number_format($table1['discount_value'],2); ?>" type="text" class="form-control amount" placeholder="value" name="discount_value" id="disValue" >
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo number_format($table1['discount_value'],2); ?>" type="text" class="form-control amount" placeholder="<?= htmlspecialchars(__('value'), ENT_QUOTES, 'UTF-8'); ?>" name="discount_value" id="disValue" >
 
                     </div>
                 </div>
             </th>
             <td><span >
-                <input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="text" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="<?= __('Discount Amount') ?>">
-                 <input aria-label="Input field" value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="<?= __('Discount Amount') ?>">
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo customeummarmonyformate($table1['discount_amount']); ?>"  readonly type="text" class="form-control amount" name="dis_discount_amount" id="dis_discount"  placeholder="<?= __('Discount Amount') ?>">
+                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo $table1['discount_amount']; ?>"  readonly type="hidden" class="form-control amount" name="discount_amount" id="discount" placeholder="<?= __('Discount Amount') ?>">
             </span></td>
         </tr>
         <tr>
             <th scope="col" class="amount">
                 <div>
                     <div style="float: left;width: 50%;padding: 10px;">
-                        <span >Shipping</span>
+                        <span ><?= __('Shipping'); ?></span>
                     </div>
                     <div style="float: left;width: 50%;padding: 3px;">
-                        <select aria-label="Shipping Tax" class="form-control"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" >
-                            <option value="0"> Select Any Tax Rate </option>
+                        <select aria-label="<?= htmlspecialchars(__('Shipping Tax'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  name="shipping_tax" id="shipping_tax" onchange="calculateTotal()" >
+                            <option value="0"> <?= __('Select Any Tax Rate'); ?> </option>
                             <?php foreach ($taxres as $key => $tax) {  ?>
                             <option  <?php if($table1['shipping_tax'] == $key){ ?> selected  <?php
 } ?> value = <?php echo $key ?>   > <?php echo $tax; ?> </option>
@@ -1476,7 +1476,7 @@ function calculateTotal(){
             </th>
             <td><span >
                 <input type="hidden" name="shipping_tax_amount" id="shipping_tax_amount" value="0">
-                <input aria-label="Input field"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?= __('shipping Amount') ?>">
+                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  value="<?php echo $table1['shipping_amount']; ?>"   type="text" class="form-control amount" name="shipping_amount" id="shipping_amount" onblur="calculateTotal()" placeholder="<?= __('shipping Amount') ?>">
             </span></td>
         </tr>
 
@@ -1488,17 +1488,17 @@ function calculateTotal(){
                         foreach ($distax as $ktax) { ?>
                         <?php if($table1['tax_state'] == 'S'){ ?>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            </td>
+                            <td style="width: 67%;text-align:right;">  <?= __('CGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?= __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            </td>
                         </tr>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  CGST @ <?php echo customeummarmonyformate($ktax['percentage']/2); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            </td>
+                            <td style="width: 67%;text-align:right;">  <?= __('CGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']/2); ?><?= __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  value="<?php echo customeummarmonyformate($ktax['tax_amount']/2); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            </td>
                         </tr>
                     <?php } else{?>
                         <tr>
-                            <td style="width: 67%;text-align:right;">  IGST @ <?php echo customeummarmonyformate($ktax['percentage']); ?>% on <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
-                            <td>  <input aria-label="Input field"  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            </td>
+                            <td style="width: 67%;text-align:right;">  <?= __('IGST @'); ?> <?php echo customeummarmonyformate($ktax['percentage']); ?><?= __('% on'); ?> <?php echo customeummarmonyformate($ktax['amount']); ?> :               </td>
+                            <td>  <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  value="<?php echo customeummarmonyformate($ktax['tax_amount']); ?>" type="text" class="form-control amount" name="dis_taxRate" id="" readonly placeholder="<?= __('Tax Amount') ?>">            </td>
                         </tr>
                     <?php }?>
                         <?php } ?>
@@ -1509,18 +1509,18 @@ function calculateTotal(){
         <tr>
         <tr>
             <th scope="col" class="amount" ><span><?= __('Grand Total') ?></span></th>
-             <input  type="hidden" class="form-control amount" placeholder="value" name="gdam" id="gdam">
-              <input  type="hidden" class="form-control amount" placeholder="value" name="div_amount_total" id="div_amount_total">
-             <input aria-label="Input field"  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="<?= __('Tax Amount') ?>">
-            <td><input aria-label="Input field"  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="<?= __('Grand Total') ?>"><input aria-label="Input field"  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="<?= __('Grand Total') ?>"></td>
+             <input  type="hidden" class="form-control amount" placeholder="<?= htmlspecialchars(__('value'), ENT_QUOTES, 'UTF-8'); ?>" name="gdam" id="gdam">
+              <input  type="hidden" class="form-control amount" placeholder="<?= htmlspecialchars(__('value'), ENT_QUOTES, 'UTF-8'); ?>" name="div_amount_total" id="div_amount_total">
+             <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  value="<?php echo $table1['tax_amount']; ?>" type="hidden" class="form-control amount" name="taxRate" id="taxAmount" readonly placeholder="<?= __('Tax Amount') ?>">
+            <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  value="<?php echo customeummarmonyformate($table1['grand_total']); ?>" type="text" class="form-control amount" name="dis_grandtotal" id="dis_grandtotal" readonly placeholder="<?= __('Grand Total') ?>"><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  value="<?php echo $table1['grand_total']; ?>" type="hidden" class="form-control amount" name="grandtotal" id="grandtotal" readonly placeholder="<?= __('Grand Total') ?>"></td>
         </tr>
         <tr style="display: none;">
             <th scope="col" class="amount" ><span><?= __('Amount Paid') ?></span></th>
-            <td><input aria-label="Amount Paid" value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="<?= __('Amount Paid') ?>"></td>
+            <td><input aria-label="<?= htmlspecialchars(__('Amount Paid'), ENT_QUOTES, 'UTF-8'); ?>" value="" type="text" class="form-control amount" name="amountPaid" id="amountPaid" placeholder="<?= __('Amount Paid') ?>"></td>
         </tr>
         <tr style="display: none;">
-            <td  ><span >Amount Due</span></td>
-            <td><input aria-label="Amount Due" value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?= __('Amount Due') ?>"></td>
+            <td  ><span ><?= __('Amount Due'); ?></span></td>
+            <td><input aria-label="<?= htmlspecialchars(__('Amount Due'), ENT_QUOTES, 'UTF-8'); ?>" value="" type="text" class="form-control amount" name="amountDue" id="amountDue" placeholder="<?= __('Amount Due') ?>"></td>
         </tr>
         <?php if($table1['currency_id'] != $_SESSION['config']['default_currency_id'] && $table1['currency_id'] != ''){ $css = "";
 }else{ $css = 'style="display: none;"';
@@ -1537,10 +1537,10 @@ function calculateTotal(){
                     </tr>
                     <tr>
 
-                        <td><input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_sub_total" ></td>
-                        <td><input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_tax" ></td>
-                        <td><input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_discount" ></td>
-                        <td> <input aria-label="Input field" value="<?php echo customeummarmonyformate($table1['grand_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_grand_total"> </td>
+                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo customeummarmonyformate($table1['sub_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_sub_total" ></td>
+                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo customeummarmonyformate($table1['tax_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_tax" ></td>
+                        <td><input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo customeummarmonyformate($table1['discount_amount']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_discount" ></td>
+                        <td> <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" value="<?php echo customeummarmonyformate($table1['grand_total']*$table1['currency_rate']); ?>" type="text" readonly class="form-control amount" name="" id="ex_grand_total"> </td>
                     </tr>
                 </table>
             </td>
@@ -1586,7 +1586,7 @@ $disable = ''; if(!in_array($table1['current_status'], (array)$check_array)){ $d
                     <div class="card">
                         <div class="card-header" id="headingTwo2">
                             <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                Transaction Timeline
+                                <?= __('Transaction Timeline'); ?>
                             </div>
                         </div>
                         <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample2_bills2">

@@ -16,7 +16,7 @@ $url = API."?mode=gettenantcustomers&admin_type=".$_SESSION['admin_type'];
       filterapplay();
     }
     function filterapplay(reset=""){
-      var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+      var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
       $("#formview").html(loader);
       if(reset !="Y"){
         var postarray = $("#filterfrom").serialize();
@@ -194,8 +194,8 @@ function selectTableType(type){
   </script>
   <div class="card-body">
     <div class="text-center p-3 b-radius-10" style="background: #e6efff;">
-      <h3 class="mt-3 f-w-600">Browse Tenant  </h3>
-      <p class="text-muted f-w-500">Filter your search to focus on Tenant & Properties</p>
+      <h3 class="mt-3 f-w-600"><?= __('Browse Tenant'); ?>  </h3>
+      <p class="text-muted f-w-500"><?= htmlspecialchars(__('Filter your search to focus on Tenant & Properties'), ENT_QUOTES, 'UTF-8'); ?></p>
       <ul class="alphabet-filetr bg-white p-2 border b-radius-10 mt-4 mb-4">
        <li><button type="button" class="d-inline-block active activealpha" id="activealpha" !" onclick="selectAlphabet('')">All</button></li>
        <li><button type="button" class="d-inline-block activealpha" id="activealphaA" !" onclick="selectAlphabet('A')">A</button></li>

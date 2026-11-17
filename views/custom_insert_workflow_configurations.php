@@ -97,7 +97,7 @@ $mopdulesetup = $getresult['module_setup'];
 function subProcessType($val){
     $wh1 = $wh1 ?? '';
     $listval = $listval ?? [];
-    $option = "<option value=''>Select Any</option>";
+    $option = "<option value=''>".__('Select Any')."</option>";
 
     if($val=="user"){
         $list = getList('application_users');
@@ -170,7 +170,7 @@ $stausresult = ViewStatusData();
             type: "POST",
             success:function(data){
                 var data  = JSON.parse(data);
-                var rows = '<tr class="wharerow'+whmax+' allremove"><td><button type="button" class="btn p-0 border-0 bg-transparent ti ti-trash text-danger" onclick="deletewhererow('+whmax+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td><td><select aria-label="Wherefield[]"  class="kt-dual-listbox form-select js-example-basic-single criteria_fields" onchange="wherefiledfun(this.value,'+whmax+')"  name="wherefield[]">'+data.option+'</select></td><td><div class="operationfileds'+whmax+'"><select aria-label="Whereoperators[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]"  onchange="buildQueryr()"><option value="="> = </option><option value="!=">!=</option><option value=">"> > </option><option value="<"> < </option><option value=">="> >= </option><option value="<="> <= </option></select></div></td><td><div class="textorfeild'+whmax+'"><input aria-label="Whvaluedata[]" class="form-control whvaluedata" id="" type="text" name="whvaluedata[]" onblur="buildQueryr()"></div></td><td><select aria-label="Whereconditions[]"  class="kt-dual-listbox form-select js-example-basic-single whereconditions"    name="whereconditions[]" onchange="buildQueryr()"><option value="AND">AND  </option><option value="OR">OR</option></select></td></tr>';
+                var rows = '<tr class="wharerow'+whmax+' allremove"><td><button type="button" class="btn p-0 border-0 bg-transparent ti ti-trash text-danger" onclick="deletewhererow('+whmax+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button></td><td><select aria-label="Wherefield[]"  class="kt-dual-listbox form-select js-example-basic-single criteria_fields" onchange="wherefiledfun(this.value,'+whmax+')"  name="wherefield[]">'+data.option+'</select></td><td><div class="operationfileds'+whmax+'"><select aria-label="<?= htmlspecialchars(__('Whereoperators'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]"  onchange="buildQueryr()"><option value="="> = </option><option value="!=">!=</option><option value=">"> > </option><option value="<"> < </option><option value=">="> >= </option><option value="<="> <= </option></select></div></td><td><div class="textorfeild'+whmax+'"><input aria-label="<?= htmlspecialchars(__('Whvaluedata'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control whvaluedata" id="" type="text" name="whvaluedata[]" onblur="buildQueryr()"></div></td><td><select aria-label="<?= htmlspecialchars(__('Whereconditions'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="kt-dual-listbox form-select js-example-basic-single whereconditions"    name="whereconditions[]" onchange="buildQueryr()"><option value="AND"><?= htmlspecialchars(__('AND'), ENT_QUOTES, 'UTF-8'); ?>  </option><option value="OR"><?= htmlspecialchars(__('OR'), ENT_QUOTES, 'UTF-8'); ?></option></select></td></tr>';
                 $(".wherecondition").append(rows);
                 $(".js-example-basic-single").select2();
                 $(".js-example-disabled-results").select2();
@@ -186,14 +186,14 @@ $stausresult = ViewStatusData();
         var splitval = val.split("-");
         var list = ["checkbox","radio","select","auto_select","multi_select"];
         if(jQuery.inArray(splitval[2], textdorpdownlist) != -1){
-            var rowdrop = '<select aria-label="Whereoperators[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]" onchange="buildQueryr()"><option value="is"> IS </option><option value="isnot">Is Not</option><option value="contains">Contains</option><option value="does_not_contains">Does Not Contains</option></select>';
+            var rowdrop = '<select aria-label="<?= htmlspecialchars(__('Whereoperators'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]" onchange="buildQueryr()"><option value="is"> <?= htmlspecialchars(__('IS'), ENT_QUOTES, 'UTF-8'); ?> </option><option value="isnot"><?= htmlspecialchars(__('Is Not'), ENT_QUOTES, 'UTF-8'); ?></option><option value="contains"><?= htmlspecialchars(__('Contains'), ENT_QUOTES, 'UTF-8'); ?></option><option value="does_not_contains"><?= htmlspecialchars(__('Does Not Contains'), ENT_QUOTES, 'UTF-8'); ?></option></select>';
             $(".operationfileds"+no).html(rowdrop);
             $(".js-example-basic-single").select2();
             $(".js-example-disabled-results").select2();
         }else{
 
 
-            var rowdrop = '<select aria-label="Whereoperators[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]"  onchange="buildQueryr()"><option value="="> = </option><option value="!=">!=</option><option value=">"> > </option><option value="<"> < </option><option value=">="> >= </option><option value="<="> <= </option></select>';
+            var rowdrop = '<select aria-label="<?= htmlspecialchars(__('Whereoperators'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]"  onchange="buildQueryr()"><option value="="> = </option><option value="!=">!=</option><option value=">"> > </option><option value="<"> < </option><option value=">="> >= </option><option value="<="> <= </option></select>';
             $(".operationfileds"+no).html(rowdrop);
             $(".js-example-basic-single").select2();
             $(".js-example-disabled-results").select2();
@@ -214,10 +214,10 @@ $stausresult = ViewStatusData();
                 }
             });
         }else if(splitval[2] == "date_pick"){
-            var rows = '<input aria-label="Whvaluedata[]" class="form-control whvaluedata" id="" onblur="buildQueryr()" type="date" name="whvaluedata[]">';
+            var rows = '<input aria-label="<?= htmlspecialchars(__('Whvaluedata'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control whvaluedata" id="" onblur="buildQueryr()" type="date" name="whvaluedata[]">';
             $(".textorfeild"+no).html(rows);
         }else{
-            var rows = '<input aria-label="Whvaluedata[]" class="form-control whvaluedata" id="" onblur="buildQueryr()" type="text" name="whvaluedata[]">';
+            var rows = '<input aria-label="<?= htmlspecialchars(__('Whvaluedata'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control whvaluedata" id="" onblur="buildQueryr()" type="text" name="whvaluedata[]">';
             $(".textorfeild"+no).html(rows);
         }
         buildQueryr()
@@ -447,15 +447,15 @@ function selectActionStatus(seq){
     <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
     <?php } ?>
             <div class="card-header">
-                <h5>Workflow</h5>
+                <h5><?= __('Workflow'); ?></h5>
                 <div class="card-header-right">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                         <i class="icofont icofont-reply"></i>
-                        Back
+                        <?= __('Back'); ?>
                     </a>
                 </div>
             </div>
@@ -467,54 +467,54 @@ function selectActionStatus(seq){
                         <div class="row">
                             <div class="row">
                                  <div class="form-group col-lg-4 w-full">
-                                      <span class="form-label">Module</span>
-                                      <select aria-label="Module Setup" class="form-select js-example-basic-single" id="module_setup_id" name="module_setup_id">
+                                      <span class="form-label"><?= __('Module'); ?></span>
+                                      <select aria-label="<?= htmlspecialchars(__('Module Setup'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="module_setup_id" name="module_setup_id">
                                         <?php foreach($mopdulesetup as $modulesetup){ ?>
                                           <option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $workflowlist['module_setup_id'] == $modulesetup['module_id']?"selected":""; ?>><?php echo $modulesetup['module_name']; ?></option>
                                         <?php } ?>
                                       </select>
                                     </div>
                                 <div class="form-group col-lg-4">
-                                    <span class="form-label">Process Type</span>
-                                    <select aria-label="Process Type" class="form-select js-example-basic-single process_type" name="process_type" >
-                                        <option value="0" data-select2-id="2"> Select Any One</option>
+                                    <span class="form-label"><?= __('Process Type'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Process Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single process_type" name="process_type" >
+                                        <option value="0" data-select2-id="2"> <?= __('Select Any One'); ?></option>
                                         <?php foreach($pagenamesrow as $process){ ?>
                                             <option value="<?php echo $process['application_table_name']; ?>" <?php echo $workflowlist['process_type']==$process['application_table_name']?"selected":"" ?> ><?php echo $process['page_title']==""?ucwords(str_replace("_"," ",($process['application_table_name']))):$process['page_title']; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <span class="form-label">Process Name</span>
-                                    <input aria-label="Process Name" class="form-control"  type="text" name="process_name" value="<?php echo $workflowlist['process_name']; ?>">
+                                    <span class="form-label"><?= __('Process Name'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Process Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text" name="process_name" value="<?php echo $workflowlist['process_name']; ?>">
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <span class="form-label">Description</span>
-                                    <textarea aria-label="Process Description" class="form-control " name="process_description"><?php echo $workflowlist['process_description']; ?></textarea>
+                                    <span class="form-label"><?= __('Description'); ?></span>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Process Description'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " name="process_description"><?php echo $workflowlist['process_description']; ?></textarea>
                             </div>
 
                             <div class="form-group col-lg-4">
-                                <span class="form-label">When To Exicute</span></br>
+                                <span class="form-label"><?= __('When To Exicute'); ?></span></br>
                                 <div class="checkbox-fade fade-in-primary">
                                     <label class="form-label">
-                                        <input aria-label="When To Exicute[]" type="checkbox" name="when_to_exicute[]" value="record_create" <?php  echo (in_array("record_create", $when_to_exicute) || !isset($_GET['Rid']))?"checked":""; ?>>
+                                        <input aria-label="<?= htmlspecialchars(__('When To Exicute'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox" name="when_to_exicute[]" value="record_create" <?php  echo (in_array("record_create", $when_to_exicute) || !isset($_GET['Rid']))?"checked":""; ?>>
                                         <span class="cr">
                                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
-                                        <span>Record Creation</span>
+                                        <span><?= __('Record Creation'); ?></span>
                                     </label>
                                     <label class="form-label m-l-20">
-                                        <input aria-label="When To Exicute[]" type="checkbox"  name="when_to_exicute[]" value="record_edit" <?php  echo (in_array("record_edit", $when_to_exicute))?"checked":""; ?>>
+                                        <input aria-label="<?= htmlspecialchars(__('When To Exicute'), ENT_QUOTES, 'UTF-8'); ?>[]" type="checkbox"  name="when_to_exicute[]" value="record_edit" <?php  echo (in_array("record_edit", $when_to_exicute))?"checked":""; ?>>
                                         <span class="cr">
                                             <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
-                                        <span>Record Edit</span>
+                                        <span><?= __('Record Edit'); ?></span>
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group col-lg-4">
-                                <span class="form-label">Priority</span>
+                                <span class="form-label"><?= __('Priority'); ?></span>
 
-                                <input aria-label="Process Priority" class="form-control"  type="text" name="process_priority" value="<?php echo $workflowlist['process_priority']; ?>">
+                                <input aria-label="<?= htmlspecialchars(__('Process Priority'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text" name="process_priority" value="<?php echo $workflowlist['process_priority']; ?>">
                             </div>
 
                         </div>
@@ -523,7 +523,7 @@ function selectActionStatus(seq){
                                 <div class="card-block accordion-block">
                                     <div class="accordion-box ui-accordion ui-widget ui-helper-reset" id="single-open" role="tablist">
 
-                                        <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"><i class="ti-settings"></i> Criteria</a>
+                                        <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"><i class="ti-settings"></i> <?= __('Criteria'); ?></a>
                                         <div class="accordion-desc mt-2">
                                             <div class="row mt-2 ">
                                                 <input type="hidden" id="criteria_qeury" name="criteria_sql" type="hidden" value="<?php echo urldecode($workflowlist['criteria_sql']); ?>">
@@ -531,10 +531,10 @@ function selectActionStatus(seq){
                                                     <thead>
                                                         <tr>
                                                             <th scope="col" class=""></th>
-                                                            <th scope="col" class="" >Field </th>
-                                                            <th scope="col"> Operators</th>
-                                                            <th scope="col" class="" >Value</th>
-                                                            <th scope="col" class="" >Condition</th>
+                                                            <th scope="col" class="" ><?= __('Field'); ?> </th>
+                                                            <th scope="col"> <?= __('Operators'); ?></th>
+                                                            <th scope="col" class="" ><?= __('Value'); ?></th>
+                                                            <th scope="col" class="" ><?= __('Condition'); ?></th>
                                                         </tr> </thead>
                                                         <tbody class="wherecondition">
                                                             <?php
@@ -548,7 +548,7 @@ function selectActionStatus(seq){
                                                             <tr class="wharerow<?php echo $key;?> allremove">
                                                                 <td><i class="ti ti-trash text-danger" onclick="deletewhererow('<?php echo $key;?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></td>
                                                                 <td>
-                                                                    <select aria-label="Select option"  class="kt-dual-listbox form-select js-example-basic-single criteria_fields" onchange="wherefiledfun(this.value,'<?php echo $key; ?>')"  name="wherefield[]" onchange="buildQueryr()">
+                                                                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>"  class="kt-dual-listbox form-select js-example-basic-single criteria_fields" onchange="wherefiledfun(this.value,'<?php echo $key; ?>')"  name="wherefield[]" onchange="buildQueryr()">
                                                                         <?php foreach($listfields as $keyy=>$aray){
                                                                             $valuefield = $keyy."-".$workflowlist['process_type']."-".$aray['type'];
                                                                             ?>
@@ -558,7 +558,7 @@ function selectActionStatus(seq){
                                                                 </td>
                                                                 <td>
                                                                     <div class="operationfileds<?php echo $key; ?>">
-                                                                        <select aria-label="Whereoperators[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]" onchange="buildQueryr()">
+                                                                        <select aria-label="<?= htmlspecialchars(__('Whereoperators'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="kt-dual-listbox form-select js-example-basic-single whereoperators" name="whereoperators[]" onchange="buildQueryr()">
                                                                             <?php if(in_array($criteria['field_type'], $textdorpdownlist)){ $operationarr= $operationarraystring;
 }else{ $operationarr =$operationarrayno;
 } foreach($operationarr as $valoperationarrayno){ ?>
@@ -572,40 +572,40 @@ function selectActionStatus(seq){
                                                                         <?php if(in_array($criteria['field_type'], $list)){
                                                                             $listval = dyanamicselectdata($criteria['table_name'],$criteria['field_name']);
                                                                             ?>
-                                                                            <select aria-label="Select option"  class="kt-dual-listbox form-select js-example-basic-multiple whvaluedata" name="whvaluedata[<?php echo $key; ?>][]" onchange="buildQueryr()" multiple required>
+                                                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>"  class="kt-dual-listbox form-select js-example-basic-multiple whvaluedata" name="whvaluedata[<?php echo $key; ?>][]" onchange="buildQueryr()" multiple required>
                                                                                 <?php
                                                                                 foreach($listval as $keys=>$aray){ ?>
                                                                                     <option value='<?php echo $keys; ?>' <?php echo  in_array($keys, $criteria['whvaluedata'])?"selected":""; ?>><?php echo $aray; ?></option>
                                                                                 <?php     } ?>
                                                                             </select>
                                                                         <?php }elseif($criteria['field_type'] == "date_pick"){ ?>
-                                                                            <input aria-label="Whvaluedata[]" class="form-control whvaluedata" id="" type="date" name="whvaluedata[]" value="<?php echo $criteria['whvaluedata']; ?>" onblur="buildQueryr()">
+                                                                            <input aria-label="<?= htmlspecialchars(__('Whvaluedata'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control whvaluedata" id="" type="date" name="whvaluedata[]" value="<?php echo $criteria['whvaluedata']; ?>" onblur="buildQueryr()">
                                                                         <?php }else{ ?>
-                                                                            <input aria-label="Whvaluedata[]" class="form-control whvaluedata" id="" type="text" name="whvaluedata[]" value="<?php echo $criteria['whvaluedata']; ?>" onblur="buildQueryr()">
+                                                                            <input aria-label="<?= htmlspecialchars(__('Whvaluedata'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control whvaluedata" id="" type="text" name="whvaluedata[]" value="<?php echo $criteria['whvaluedata']; ?>" onblur="buildQueryr()">
                                                                         <?php } ?>
                                                                     </div>
                                                                 </td>
-                                                                <td><select aria-label="Whereconditions[]"  class="kt-dual-listbox form-select js-example-basic-single whereconditions" name="whereconditions[]" onchange="buildQueryr()">
-                                                                    <option value="AND" <?php echo $criteria['whereconditions']=='AND'?"selected":""; ?>>AND  </option>
-                                                                    <option value="OR" <?php echo $criteria['whereconditions']=='OR'?"selected":""; ?>>OR</option>
+                                                                <td><select aria-label="<?= htmlspecialchars(__('Whereconditions'), ENT_QUOTES, 'UTF-8'); ?>[]"  class="kt-dual-listbox form-select js-example-basic-single whereconditions" name="whereconditions[]" onchange="buildQueryr()">
+                                                                    <option value="AND" <?php echo $criteria['whereconditions']=='AND'?"selected":""; ?>><?= __('AND'); ?>  </option>
+                                                                    <option value="OR" <?php echo $criteria['whereconditions']=='OR'?"selected":""; ?>><?= __('OR'); ?></option>
                                                                 </select>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
                                             </table>
-                                            <button type="button" class="btn btn-info waves-effect waves-light col-lg-2" onclick="whereClouseSet()"><i class="ti-plus"></i> Add Criteria</button>
+                                            <button type="button" class="btn btn-info waves-effect waves-light col-lg-2" onclick="whereClouseSet()"><i class="ti-plus"></i> <?= __('Add Criteria'); ?></button>
                                         </div>
                                     </div>
 
-                            <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"><i class="ti-user"></i> Who Should Approve</a>
+                            <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"><i class="ti-user"></i> <?= __('Who Should Approve'); ?></a>
                                     <div class="accordion-desc mt-2">
                                         <?php $roleprecesstypearray = array('user'=>'User','email_groups'=>'Email Group','access_levels'=>'Access Levels','role_levels'=>'Employement Role','manager'=>'Manager','Managers_Manager'=>'Managers Manager','individual_employee_role'=>'Individual Employee Role','buddy'=>'Buddy','individual_employee_role'=>'Individual Employee Role','user_hierarchical'=>'User Hierarchical','custom_process'=>'Custom Process');    ?>
                                         <div class="row mt-4">
                                             <div class="col-lg-3 form-group w-full">
-                                                <span class="form-label d-block">Approval Type</span>
-                                                <select aria-label="Approval Type" class="form-select js-example-basic-single approval_type" name="approval_type" onchange="selectapprovetypefun(this.value,<?php echo $rid; ?>)" >
-                                                    <option value="">Select Any</option>
+                                                <span class="form-label d-block"><?= __('Approval Type'); ?></span>
+                                                <select aria-label="<?= htmlspecialchars(__('Approval Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single approval_type" name="approval_type" onchange="selectapprovetypefun(this.value,<?php echo $rid; ?>)" >
+                                                    <option value=""><?= __('Select Any'); ?></option>
                                                     <?php foreach($roleprecesstypearray as $key=>$val){ ?>
                                                         <option value="<?php echo $key; ?>" <?php echo $workflowlist['approval_type']==$key?"selected":""; ?>> <?php echo $val; ?></option>
                                                     <?php } ?>
@@ -615,8 +615,8 @@ function selectActionStatus(seq){
                                             $showsublist = ["user","email_groups","access_levels","role_levels","user_hierarchical","buddy","individual_employee_role"];
                                             ?>
                                             <div class="col-lg-3 form-group w-full" id="sub_approve_type" style="display:<?php echo (in_array($workflowlist['approval_type'], $showsublist) && $workflowlist['approval_type']!="" )?"":"none"?>">
-                                                <span class="form-label d-block">Sub Type</span>
-                                                <select aria-label="Sub Approve Type" class="form-select js-example-basic-single sub_approve_type" name="sub_approve_type" onchange="updateaApproveStatus('<?php echo $rid; ?>')">
+                                                <span class="form-label d-block"><?= __('Sub Type'); ?></span>
+                                                <select aria-label="<?= htmlspecialchars(__('Sub Approve Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single sub_approve_type" name="sub_approve_type" onchange="updateaApproveStatus('<?php echo $rid; ?>')">
 
                                                     <?php $sublist = subProcessType($workflowlist['approval_type']);
                                                     foreach($sublist as $keyk=>$aray){  ?>
@@ -633,27 +633,27 @@ function selectActionStatus(seq){
                                                 <div class="form-radio">
                                                     <div class="radio radio-inline">
                                                         <label class="form-label">
-                                                            <input aria-label="Approval Process" type="radio" name="approval_process" value="A" class="d-none" <?php echo $workflowlist['approval_process']=="A"?"checked":""; ?> onchange="approvalProcess(this.value)">
-                                                            <i class="helper"></i>Anyone
+                                                            <input aria-label="<?= htmlspecialchars(__('Approval Process'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="approval_process" value="A" class="d-none" <?php echo $workflowlist['approval_process']=="A"?"checked":""; ?> onchange="approvalProcess(this.value)">
+                                                            <i class="helper"></i><?= __('Anyone'); ?>
                                                         </label>
                                                     </div>
                                                     <div class="radio radio-inline">
                                                         <label class="form-label">
-                                                            <input aria-label="Approval Process" type="radio" name="approval_process" value="E"  class="d-none" <?php echo $workflowlist['approval_process']=="E" || $workflowlist['approval_process']==""?"checked":""; ?> onchange="approvalProcess(this.value)">
-                                                            <i class="helper"></i>Everyone
+                                                            <input aria-label="<?= htmlspecialchars(__('Approval Process'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="approval_process" value="E"  class="d-none" <?php echo $workflowlist['approval_process']=="E" || $workflowlist['approval_process']==""?"checked":""; ?> onchange="approvalProcess(this.value)">
+                                                            <i class="helper"></i><?= __('Everyone'); ?>
                                                         </label>
                                                     </div>
                                                     <div class="radio radio-inline">
                                                         <label class="form-label">
-                                                            <input aria-label="Approval Process" type="radio" name="approval_process" value="M" class="d-none" <?php echo $workflowlist['approval_process']=="M"?"checked":""; ?> onchange="approvalProcess(this.value)">
-                                                            <i class="helper"></i>Minimum
+                                                            <input aria-label="<?= htmlspecialchars(__('Approval Process'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="approval_process" value="M" class="d-none" <?php echo $workflowlist['approval_process']=="M"?"checked":""; ?> onchange="approvalProcess(this.value)">
+                                                            <i class="helper"></i><?= __('Minimum'); ?>
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 row" >
                                                 <div class="col-lg-2 minimum" style="display:<?php echo (!in_array($workflowlist['approval_type'], $showsublistanyall) && $workflowlist['approval_process']=='M')?"":"none"; ?>">
-                                                    <input aria-label="Minimum" class="form-control " id="minimums" type="text" name="minimum" value="<?php echo $workflowlist['minimum']; ?>" placeholder="Eg. 11">
+                                                    <input aria-label="<?= htmlspecialchars(__('Minimum'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " id="minimums" type="text" name="minimum" value="<?php echo $workflowlist['minimum']; ?>" placeholder="<?= htmlspecialchars(__('Eg. 11'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -667,16 +667,16 @@ function selectActionStatus(seq){
                                     </div>
 
 
-                                    <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"> <i class="ti-thumb-up"></i> Action's Upon Approve</a>
+                                    <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"> <i class="ti-thumb-up"></i> <?= __('Action\'s Upon Approve'); ?></a>
                                     <div class="accordion-desc mt-2">
 
                                         <div class="row form-group">
-                                            <span>Configration Action After Final Approval</span>
+                                            <span><?= __('Configration Action After Final Approval'); ?></span>
                                             <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afteraprovassigntask',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-notepad"></i></div>
-                                                        <p class="text-facebook f-w-700">Assign Task</p>
+                                                        <p class="text-facebook f-w-700"><?= __('Assign Task'); ?></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -684,7 +684,7 @@ function selectActionStatus(seq){
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-email"></i></div>
-                                                        <p class="text-facebook f-w-700">Email Notification</p>
+                                                        <p class="text-facebook f-w-700"><?= __('Email Notification'); ?></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -692,7 +692,7 @@ function selectActionStatus(seq){
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-link"></i></div>
-                                                        <p class="text-facebook f-w-700">Call Webhooks</p>
+                                                        <p class="text-facebook f-w-700"><?= __('Call Webhooks'); ?></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -706,16 +706,16 @@ function selectActionStatus(seq){
                                             </div>
                                         </div>
                                     </div>
-                                    <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"> <i class="ti-thumb-down"></i> Action's Upon Reject</a>
+                                    <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"> <i class="ti-thumb-down"></i> <?= __('Action\'s Upon Reject'); ?></a>
                                     <div class="accordion-desc mt-2">
 
                                         <div class="row form-group">
-                                            <span>Configration Action After Rejection</span>
+                                            <span><?= __('Configration Action After Rejection'); ?></span>
                                             <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afterrejectionassigntask',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-notepad"></i></div>
-                                                        <p class="text-facebook f-w-700">Assign Task</p>
+                                                        <p class="text-facebook f-w-700"><?= __('Assign Task'); ?></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -723,7 +723,7 @@ function selectActionStatus(seq){
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-email"></i></div>
-                                                        <p class="text-facebook f-w-700">Email Notification</p>
+                                                        <p class="text-facebook f-w-700"><?= __('Email Notification'); ?></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -731,7 +731,7 @@ function selectActionStatus(seq){
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-link"></i></div>
-                                                        <p class="text-facebook f-w-700">Call Webhooks</p>
+                                                        <p class="text-facebook f-w-700"><?= __('Call Webhooks'); ?></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -747,7 +747,7 @@ function selectActionStatus(seq){
                                     </div>
 
 
-                        <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"> <i class="ti-email"></i>  Approval Feilds </a>
+                        <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"> <i class="ti-email"></i>  <?= __('Approval Feilds'); ?> </a>
                         <div class="accordion-desc mt-2">
                             <?php
                             $divarray = (count((array)$listfields)/2);
@@ -759,9 +759,9 @@ function selectActionStatus(seq){
                                     <table class="table table-xs">
                                        <thead>
                                                <tr>
-                                                   <th scope="col">Label</th>
-                                                   <th scope="col">Sequence</th>
-                                                   <th scope="col">Action</th>
+                                                   <th scope="col"><?= __('Label'); ?></th>
+                                                   <th scope="col"><?= __('Sequence'); ?></th>
+                                                   <th scope="col"><?= __('Action'); ?></th>
                                                </tr>
                                        </thead>
                                        <tbody>
@@ -774,10 +774,10 @@ function selectActionStatus(seq){
                                                  <?php echo $liastapprove['lable']; ?>
                                             </td>
                                             <td>
-                                                 <input aria-label="Input field" type="text" class="form-control form-control-lg" name="display_postion[<?php echo $fieldname; ?>]" value="<?php echo $approvefield_list[$fieldname]['display_postion']!=""?$approvefield_list[$fieldname]['display_postion']:$liastapprove['display_postion']; ?>" >
+                                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg" name="display_postion[<?php echo $fieldname; ?>]" value="<?php echo $approvefield_list[$fieldname]['display_postion']!=""?$approvefield_list[$fieldname]['display_postion']:$liastapprove['display_postion']; ?>" >
                                             </td>
                                             <td>
-                                                <input aria-label="Checkbox" type="checkbox" class="js-switch" <?php echo $approvefield_list[$fieldname]['approveshow']=="Y"?"checked":""; ?> name="approveshow[<?php echo $fieldname; ?>]"  value="Y" />
+                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-switch" <?php echo $approvefield_list[$fieldname]['approveshow']=="Y"?"checked":""; ?> name="approveshow[<?php echo $fieldname; ?>]"  value="Y" />
                                             </td>
                                           </tr>
                                          <?php } ?>
@@ -790,9 +790,9 @@ function selectActionStatus(seq){
                                     <table class="table m-0 table-xs">
                                        <thead>
                                                <tr>
-                                                   <th scope="col">Label</th>
-                                                   <th scope="col">Sequence</th>
-                                                   <th scope="col">Action</th>
+                                                   <th scope="col"><?= __('Label'); ?></th>
+                                                   <th scope="col"><?= __('Sequence'); ?></th>
+                                                   <th scope="col"><?= __('Action'); ?></th>
                                                </tr>
                                        </thead>
                                        <tbody>
@@ -805,10 +805,10 @@ function selectActionStatus(seq){
                                                  <?php echo $liastapprove['lable']; ?>
                                             </td>
                                             <td>
-                                                 <input aria-label="Input field" type="text" class="form-control form-control-lg" name="display_postion[<?php echo $fieldname; ?>]" value="<?php echo $approvefield_list[$fieldname]['display_postion']!=""?$approvefield_list[$fieldname]['display_postion']:$liastapprove['display_postion']; ?>" >
+                                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg" name="display_postion[<?php echo $fieldname; ?>]" value="<?php echo $approvefield_list[$fieldname]['display_postion']!=""?$approvefield_list[$fieldname]['display_postion']:$liastapprove['display_postion']; ?>" >
                                             </td>
                                             <td>
-                                                <input aria-label="Checkbox" type="checkbox" class="js-switch" <?php echo $approvefield_list[$fieldname]['approveshow']=="Y"?"checked":""; ?> name="approveshow[<?php echo $fieldname; ?>]"  value="Y" />
+                                                <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="js-switch" <?php echo $approvefield_list[$fieldname]['approveshow']=="Y"?"checked":""; ?> name="approveshow[<?php echo $fieldname; ?>]"  value="Y" />
                                             </td>
                                           </tr>
                                          <?php } ?>
@@ -820,12 +820,12 @@ function selectActionStatus(seq){
                         </div>
 
 
-                                    <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"> <i class="ti-email"></i> Messages</a>
+                                    <a class="accordion-msg waves-effect waves-dark f-14 f-w-600"> <i class="ti-email"></i> <?= __('Messages'); ?></a>
                                     <div class="accordion-desc mt-2">
                                         <div class="row mb-4">
-                                            <div class="col-lg-4 text-center"><button type="button" class="btn p-0 border-0 bg-transparent form-label label label-lg label-primary" onclick="getfield('T')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Process Fields</button></div>
-                                            <div class="col-lg-4 text-center"><button type="button" class="btn p-0 border-0 bg-transparent form-label label label-lg label-primary" onclick="getfield('S')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Session Fields</button></div>
-                                            <div class="col-lg-4 text-center"><button type="button" class="btn p-0 border-0 bg-transparent form-label label label-lg label-primary" onclick="getfield('E')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Employee Fields</button></div>
+                                            <div class="col-lg-4 text-center"><button type="button" class="btn p-0 border-0 bg-transparent form-label label label-lg label-primary" onclick="getfield('T')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Process Fields'); ?></button></div>
+                                            <div class="col-lg-4 text-center"><button type="button" class="btn p-0 border-0 bg-transparent form-label label label-lg label-primary" onclick="getfield('S')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Session Fields'); ?></button></div>
+                                            <div class="col-lg-4 text-center"><button type="button" class="btn p-0 border-0 bg-transparent form-label label label-lg label-primary" onclick="getfield('E')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Employee Fields'); ?></button></div>
                                         </div>
                                         <div class="row mb-4 card">
 
@@ -834,7 +834,7 @@ function selectActionStatus(seq){
                                                     $valuefields = "{[".$workflowlist['process_type'].".".$keyy."]}";
                                                     ?>
                                                     <p id="fieldspro_<?php echo $nmt;?>" class="d-none"><?php echo $valuefields; ?></p>
-                                                    <span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldspro_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo ucwords($aray['lable']); ?> <i class="ti-layers"></i></span>
+                                                    <span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldspro_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo ucwords($aray['lable']); ?> <i class="ti-layers"></i></span>
                                                 <?php $nmt++;
 }    ?>
                                             </div>
@@ -843,7 +843,7 @@ function selectActionStatus(seq){
                                                     $valuefields = "{[employee.".$keyy."]}";
                                                     ?>
                                                     <p id="fieldsemp_<?php echo $nm0;?>" class="d-none"><?php echo $valuefields; ?></p>
-                                                    <span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldsemp_<?php echo $nm0;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
+                                                    <span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldsemp_<?php echo $nm0;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
                                                 <?php $nm0++;
 }    ?>
                                             </div>
@@ -852,11 +852,11 @@ function selectActionStatus(seq){
                                                 <div class="col-lg-12 col-xl-12 mt-4">
                                                                 <ul class="nav nav-tabs md-tabs">
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link active" data-bs-toggle="tab" href="#homeuser" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">User</a>
+                                                                        <a class="nav-link active" data-bs-toggle="tab" href="#homeuser" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('User'); ?></a>
                                                                         <div class="slide"></div>
                                                                     </li>
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link" data-bs-toggle="tab" href="#profileemployee" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Employee</a>
+                                                                        <a class="nav-link" data-bs-toggle="tab" href="#profileemployee" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Employee'); ?></a>
                                                                         <div class="slide"></div>
                                                                     </li>
                                                                 </ul>
@@ -867,7 +867,7 @@ function selectActionStatus(seq){
                                                     $valuefields = "{[session_user.".$keyy."]}";
                                                     ?>
                                                     <p id="fieldssesiuser_<?php echo $nmt;?>" class="d-none"><?php echo $valuefields; ?></p>
-                                                    <span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldssesiuser_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
+                                                    <span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldssesiuser_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
                                                 <?php $nmt++;
 }    ?>
                                                                     </div>
@@ -876,7 +876,7 @@ function selectActionStatus(seq){
                                                     $valuefields = "{[session_employee.".$keyy."]}";
                                                     ?>
                                                     <p id="fieldssesiemp_<?php echo $nmt;?>" class="d-none"><?php echo $valuefields; ?></p>
-                                                    <span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldssesiemp_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="Click Copy To used" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
+                                                    <span class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600" onclick="copyfiled('#fieldssesiemp_<?php echo $nmt;?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
                                                 <?php $nmt++;
 }    ?>
                                                                     </div>
@@ -887,24 +887,24 @@ function selectActionStatus(seq){
                                         </div>
                                         <div class="row form-group">
                                             <div class="form-group col-lg-6">
-                                                <span>Submit/Approve</span>
-                                                <textarea aria-label="Approve Message" class="form-control " name="approve_message"><?php echo $transaction_message_res['approve_message']; ?></textarea>
+                                                <span><?= __('Submit/Approve'); ?></span>
+                                                <textarea aria-label="<?= htmlspecialchars(__('Approve Message'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " name="approve_message"><?php echo $transaction_message_res['approve_message']; ?></textarea>
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                <span>Reject</span>
-                                                <textarea aria-label="Reject Message" class="form-control " name="reject_message"><?php echo $transaction_message_res['reject_message']; ?></textarea>
+                                                <span><?= __('Reject'); ?></span>
+                                                <textarea aria-label="<?= htmlspecialchars(__('Reject Message'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " name="reject_message"><?php echo $transaction_message_res['reject_message']; ?></textarea>
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                <span>Send Back</span>
-                                                <textarea aria-label="Sendback Message" class="form-control " name="sendback_message"><?php echo $transaction_message_res['sendback_message']; ?></textarea>
+                                                <span><?= __('Send Back'); ?></span>
+                                                <textarea aria-label="<?= htmlspecialchars(__('Sendback Message'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " name="sendback_message"><?php echo $transaction_message_res['sendback_message']; ?></textarea>
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                <span>Completed Workflow</span>
-                                                <textarea aria-label="Completed Workflow Message" class="form-control " name="completed_workflow_message"><?php echo $transaction_message_res['completed_workflow_message']; ?></textarea>
+                                                <span><?= __('Completed Workflow'); ?></span>
+                                                <textarea aria-label="<?= htmlspecialchars(__('Completed Workflow Message'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " name="completed_workflow_message"><?php echo $transaction_message_res['completed_workflow_message']; ?></textarea>
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                <span>Information</span>
-                                                <textarea aria-label="Employee Message" class="form-control " name="employee_message"><?php echo $transaction_message_res['employee_message']; ?></textarea>
+                                                <span><?= __('Information'); ?></span>
+                                                <textarea aria-label="<?= htmlspecialchars(__('Employee Message'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " name="employee_message"><?php echo $transaction_message_res['employee_message']; ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -918,7 +918,7 @@ function selectActionStatus(seq){
                         <div class="col-lg-9">
                             <input type="hidden" name="submit" value="Add">
                             <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i> <?php if(isset($_GET['Rid'])){ echo "Save";
-}else{ echo "Add Criteria";
+}else{ echo __('Add Criteria');
 }?>  </button>
                         </div>
                     </div>

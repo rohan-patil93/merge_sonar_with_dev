@@ -22,13 +22,13 @@ $today = date('Y-m-d');
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col">Sl.No</th>
-				<th scope="col">Employee name</th>
-				<th scope="col">Project name</th>
-				<th scope="col">Task name</th>
-				<th scope="col">Planned start</th>
-				<th scope="col">Plan finish date</th>
-				<th scope="col">Status</th>
+				<th scope="col"><?= __('Sl.No'); ?></th>
+				<th scope="col"><?= __('Employee name'); ?></th>
+				<th scope="col"><?= __('Project name'); ?></th>
+				<th scope="col"><?= __('Task name'); ?></th>
+				<th scope="col"><?= __('Planned start'); ?></th>
+				<th scope="col"><?= __('Plan finish date'); ?></th>
+				<th scope="col"><?= __('Status'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -73,7 +73,7 @@ $today = date('Y-m-d');
 							<?php if($image != ""){ ?>
 								<img alt="" src="uploads/all/<?php echo $image; ?>" class="img-radius img-40 align-top m-r-15" data-onerror-src="uploads/all/no-image.jpg">
 							<?php } else { ?>
-								<span alt="user image" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($display_name); ?></span>
+								<span alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($display_name); ?></span>
 							<?php } ?>
 							<div class="d-inline-block width73 text-primary">
 								<h6 class="mb-0"><?php echo ($display_name != '') ? $display_name : '-'; ?></h6>
@@ -101,7 +101,7 @@ $today = date('Y-m-d');
 				<tr>
 					<td colspan="7" class="text-center text-muted">
 					<div class="card-px text-center py-20 mt-2">
-	<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Project Employee Tasks found </p>
+	<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Project Employee Tasks found'); ?> </p>
 	<div class="text-center px-4">
 		<img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
 	</div>

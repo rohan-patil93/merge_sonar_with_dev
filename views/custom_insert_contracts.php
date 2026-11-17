@@ -1968,7 +1968,7 @@ if (count((array) $milestones) > 0) {
         echo $workflowsteps['current_status_ribbon'];
     } ?>
     <div class="card-header">
-        <h5>Contracts
+        <h5><?= __('Contracts'); ?>
             <?php if (!empty($formData['contract_type'])): ?>
                 <span class="float-end ms-2 px-3 py-1 bg-light border rounded-pill text-primary fw-bold"
                     style="font-size: 0.85rem; vertical-align: middle; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
@@ -1978,7 +1978,7 @@ if (count((array) $milestones) > 0) {
         </h5>
         <div class="card-header-right table-card-header">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 me-5 desktop-view">
-                <i class="icofont icofont-reply"></i>Back
+                <i class="icofont icofont-reply"></i><?= __('Back'); ?>
             </a>
             <?php if ($show_contract_type_toggle && empty($contract_form_locked) && !$amc_is_cancelled): ?>
             <?php endif; ?>
@@ -1990,11 +1990,11 @@ if (count((array) $milestones) > 0) {
                 <?php if (!$is_renewed && !$is_renew_mode): ?>
                     <button type="button" class="btn btn-primary mb-2 desktop-view renew-contract-btn"
                         onclick="renewContractBTN()">
-                        Renew
+                        <?= __('Renew'); ?>
                     </button>
                 <?php endif; ?>
                 <button type="button" class="btn btn-danger mb-2 ms-1 desktop-view" onclick="showCancelModal()">
-                    Cancel Contract
+                    <?= __('Cancel Contract'); ?>
                 </button>
             <?php endif; ?>
         </div>
@@ -2037,18 +2037,18 @@ if (count((array) $milestones) > 0) {
                         <div class="flex-grow-1 px-4 py-3">
                             <div class="d-flex justify-content-between align-items-center mb-1">
                                 <h5 class="mb-0 text-danger fw-bold uppercase tracking-wider" style="letter-spacing: 1px;">
-                                    Contract Cancelled</h5>
-                                <span class="badge bg-danger rounded-pill px-3 py-2">Inactive</span>
+                                    <?= __('Contract Cancelled'); ?></h5>
+                                <span class="badge bg-danger rounded-pill px-3 py-2"><?= __('Inactive'); ?></span>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-8">
-                                    <p class="mb-0 text-muted small"><strong class="text-dark">Reason:</strong>
+                                    <p class="mb-0 text-muted small"><strong class="text-dark"><?= __('Reason'); ?>:</strong>
                                         <span
                                             class="ms-1"><?= htmlspecialchars($formData['cancel_reason'] ?? 'Not specified') ?></span>
                                     </p>
                                 </div>
                                 <div class="col-md-4 text-md-end">
-                                    <p class="mb-0 text-muted small"><strong class="text-dark">Date:</strong>
+                                    <p class="mb-0 text-muted small"><strong class="text-dark"><?= __('Date'); ?>:</strong>
                                         <span
                                             class="ms-1"><?= !empty($formData['cancel_date']) ? fromDate($formData['cancel_date']) : 'N/A' ?></span>
                                     </p>
@@ -2062,8 +2062,8 @@ if (count((array) $milestones) > 0) {
         <?php if ($show_contract_type_toggle): ?>
             <div class="row mb-0 contract-type-toggle-row">
                 <div class="col-lg-12">
-                    <span class="form-label d-block mb-2 fw-bold">Contract Type</span>
-                    <div class="contract-type-icon-grid" role="radiogroup" aria-label="Contract Type">
+                    <span class="form-label d-block mb-2 fw-bold"><?= __('Contract Type'); ?></span>
+                    <div class="contract-type-icon-grid" role="radiogroup" aria-label="<?= htmlspecialchars(__('Contract Type'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php /* OLD static Standard/AMC radios (kept for reference)
    <div class="contract-type-icon-card">
        <input type="radio" name="page_contract_type" id="page_contract_type_standard" value="standard" class="contract-type-icon-input" aria-label="Standard Contract" <?= !$is_amc_mode ? 'checked' : '' ?>>
@@ -2119,7 +2119,7 @@ if (count((array) $milestones) > 0) {
             <div class="row mb-2">
                 <div class="col-lg-12">
                     <div class="alert alert-warning mb-0" role="alert">
-                        No contract types assigned to your user. Please contact the administrator.
+                        <?= __('No contract types assigned to your user. Please contact the administrator.'); ?>
                     </div>
                 </div>
             </div>
@@ -2139,26 +2139,25 @@ if (count((array) $milestones) > 0) {
                     <ul class="nav md-tabs infisuite_tab mb-2 unified-edit-tabs">
                         <li onclick="updateUrlParameter('TAB1',1);" class="nav-item"><a
                                 class="nav-link <?= ($activeTab === 1) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill"
-                                href="#contractdetails">Contract Details</a></li>
+                                href="#contractdetails"><?= __('Contract Details'); ?></a></li>
                         <?php if (in_array('document', (array) $userPermissions)): ?>
                             <li onclick="updateUrlParameter('TAB1',2);" class="nav-item"><a
-                                    class="nav-link <?= ($activeTab === 2) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill" href="#documents">Documents</a>
+                                    class="nav-link <?= ($activeTab === 2) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill" href="#documents"><?= __('Documents'); ?></a>
                             </li>
                         <?php endif; ?>
                         <?php if (in_array('associated', (array) $userPermissions)): ?>
                             <li onclick="updateUrlParameter('TAB1',3);" class="nav-item"><a
                                     class="nav-link <?= ($activeTab === 3) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill"
-                                    href="#associatedcontract">Associated
-                                    Contract</a></li><?php endif; ?>
+                                    href="#associatedcontract"><?= __('Associated Contract'); ?></a></li><?php endif; ?>
                         <?php if (in_array('permission', (array) $userPermissions)): ?>
                             <li onclick="updateUrlParameter('TAB1',4);" class="nav-item"><a
                                     class="nav-link <?= ($activeTab === 4) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill"
-                                    href="#permissions">Permissions</a>
+                                    href="#permissions"><?= __('Permissions'); ?></a>
                             </li><?php endif; ?>
                         <?php if (in_array('activity', (array) $userPermissions)): ?>
                             <li onclick="updateUrlParameter('TAB1',5);" class="nav-item"><a
                                     class="nav-link <?= ($activeTab === 5) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill"
-                                    href="#activities">Activities</a>
+                                    href="#activities"><?= __('Activities'); ?></a>
                             </li><?php endif; ?>
                     </ul>
                 </div>
@@ -2210,13 +2209,13 @@ if (count((array) $milestones) > 0) {
                                                     if (url == '') { return; }
 
                                                     swal({
-                                                        title: "Convert Contract Type",
+                                                        title: <?php echo json_encode(__('Convert Contract Type'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                                                         text: msg,
                                                         type: "warning",
                                                         showCancelButton: true,
                                                         confirmButtonClass: "btn-danger",
-                                                        confirmButtonText: "Yes",
-                                                        cancelButtonText: "No",
+                                                        confirmButtonText: <?php echo json_encode(__('Yes'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                                                        cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                                                         closeOnConfirm: true
                                                     }, function (isConfirm) {
                                                         if (isConfirm) {
@@ -2230,7 +2229,7 @@ if (count((array) $milestones) > 0) {
                                     <?php if (empty($contract_form_locked) && !$amc_is_cancelled): ?>
                                         <?php if ($amc_is_renew_mode): ?>
                                             <button type="button" class="btn btn-primary btn-sm cc-btn-submit">
-                                                <i class="fa fa-refresh"></i> Renew Contract
+                                                <i class="fa fa-refresh"></i> <?= __('Renew Contract'); ?>
                                             </button>
                                         <?php else: ?>
                                         <?php endif; ?>
@@ -2243,7 +2242,7 @@ if (count((array) $milestones) > 0) {
                                     role="alert">
                                     <strong><?= htmlspecialchars($notification['message']) ?></strong>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
+                                        aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                                 </div>
                             <?php endif; ?>
 
@@ -2253,60 +2252,59 @@ if (count((array) $milestones) > 0) {
                                         <a href="#" class="cc-wizard-step active" data-step="0">
                                             <span class="cc-step-number">1</span>
                                             <div class="cc-step-info">
-                                                <div class="cc-step-title">Contract Details</div>
-                                                <div class="cc-step-desc">Basic contract information</div>
+                                                <div class="cc-step-title"><?= __('Contract Details'); ?></div>
+                                                <div class="cc-step-desc"><?= __('Basic contract information'); ?></div>
                                             </div>
                                         </a>
                                         <a href="#" class="cc-wizard-step cc-amc-only" data-step="1"
                                             data-wizard-mode="amc">
                                             <span class="cc-step-number">2</span>
                                             <div class="cc-step-info">
-                                                <div class="cc-step-title">Locations &amp; Assets</div>
-                                                <div class="cc-step-desc">Locations, assets &amp; service periods</div>
+                                                <div class="cc-step-title"><?= htmlspecialchars(__('Locations & Assets'), ENT_QUOTES, 'UTF-8'); ?></div>
+                                                <div class="cc-step-desc"><?= htmlspecialchars(__('Locations, assets & service periods'), ENT_QUOTES, 'UTF-8'); ?></div>
                                             </div>
                                         </a>
                                         <a href="#" class="cc-wizard-step" data-step="2">
                                             <span class="cc-step-number">3</span>
                                             <div class="cc-step-info">
-                                                <div class="cc-step-title">Commercials</div>
-                                                <div class="cc-step-desc">Contract amount &amp; billing</div>
+                                                <div class="cc-step-title"><?= __('Commercials'); ?></div>
+                                                <div class="cc-step-desc"><?= htmlspecialchars(__('Contract amount & billing'), ENT_QUOTES, 'UTF-8'); ?></div>
                                             </div>
                                         </a>
                                         <a href="#" class="cc-wizard-step cc-amc-only" data-step="3"
                                             data-wizard-mode="amc">
                                             <span class="cc-step-number">4</span>
                                             <div class="cc-step-info">
-                                                <div class="cc-step-title">Service Setup</div>
-                                                <div class="cc-step-desc">Reminders &amp; service rules</div>
+                                                <div class="cc-step-title"><?= __('Service Setup'); ?></div>
+                                                <div class="cc-step-desc"><?= htmlspecialchars(__('Reminders & service rules'), ENT_QUOTES, 'UTF-8'); ?></div>
                                             </div>
                                         </a>
                                         <a href="#" class="cc-wizard-step cc-amc-only" data-step="4"
                                             data-wizard-mode="amc">
                                             <span class="cc-step-number">5</span>
                                             <div class="cc-step-info">
-                                                <div class="cc-step-title">Escalations</div>
-                                                <div class="cc-step-desc">Escalation configuration</div>
+                                                <div class="cc-step-title"><?= __('Escalations'); ?></div>
+                                                <div class="cc-step-desc"><?= __('Escalation configuration'); ?></div>
                                             </div>
                                         </a>
                                         <a href="#" class="cc-wizard-step cc-amc-only" data-step="5"
                                             data-wizard-mode="amc">
                                             <span class="cc-step-number">6</span>
                                             <div class="cc-step-info">
-                                                <div class="cc-step-title">Gate Entry &amp; Service Completion</div>
-                                                <div class="cc-step-desc">Entry &amp; exit requirements</div>
+                                                <div class="cc-step-title"><?= htmlspecialchars(__('Gate Entry & Service Completion'), ENT_QUOTES, 'UTF-8'); ?></div>
+                                                <div class="cc-step-desc"><?= htmlspecialchars(__('Entry & exit requirements'), ENT_QUOTES, 'UTF-8'); ?></div>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="cc-sidebar-box help-box">
-                                        <h6><i class="icofont icofont-question-circle"></i> Need Help?</h6>
+                                        <h6><i class="icofont icofont-question-circle"></i> <?= __('Need Help?'); ?></h6>
                                         <p class="mb-0">
                                             <?= $amc_is_renew_mode ? __(__('Review renewal dates and amount, then click Renew Contract to create the new AMC period and schedules.')) : __(__('Complete all wizard sections, then use Submit Contract to save and generate the service schedule.')) ?>
                                         </p>
                                     </div>
                                     <div class="cc-sidebar-box amc-box cc-sidebar-amc-box cc-amc-only">
-                                        <h6><i class="icofont icofont-file-document"></i> AMC Contract</h6>
-                                        <p class="mb-0">Location-based asset mapping, service schedules, and escalation
-                                            rules.</p>
+                                        <h6><i class="icofont icofont-file-document"></i> <?= __('AMC Contract'); ?></h6>
+                                        <p class="mb-0"><?= __('Location-based asset mapping, service schedules, and escalation rules.'); ?></p>
                                     </div>
                                 </aside>
 
@@ -2314,16 +2312,16 @@ if (count((array) $milestones) > 0) {
                                     <div class="cc-section <?= $step13DisabledClass ?>" id="cc-step-1" data-step="0">
                                         <div class="cc-section-header">
                                             <h6><span class="cc-section-num">1</span><i
-                                                    class="icofont icofont-file-document"></i> Contract Details</h6>
+                                                    class="icofont icofont-file-document"></i> <?= __('Contract Details'); ?></h6>
                                         </div>
                                         <div class="row g-3">
                                             <div class="col-md-4"
                                                 style="<?= $fieldDisplay['parent_contract_id']['style'] ?>">
-                                                <span class="form-label">Parent/Associated Contract
+                                                <span class="form-label"><?= __('Parent/Associated Contract'); ?>
                                                     <?= $fieldDisplay['parent_contract_id']['star'] ?></span>
                                                 <select class="form-control js-example-basic-single"
                                                     name="parent_contract_id"
-                                                    <?= $fieldDisplay['parent_contract_id']['required'] ?> title="<?= __('Parent Contract Id') ?>" aria-label="Parent Contract Id">
+                                                    <?= $fieldDisplay['parent_contract_id']['required'] ?> title="<?= __('Parent Contract Id') ?>" aria-label="<?= htmlspecialchars(__('Parent Contract Id'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value="0"><?= __('Select Associated Contract') ?></option>
                                                     <?php
                                                     $parentContractOptions = (array) ($contracts ?? []);
@@ -2349,49 +2347,49 @@ if (count((array) $milestones) > 0) {
                                             </div>
                                             <div class="col-md-4"
                                                 style="<?= $fieldDisplay['contract_name']['style'] ?>">
-                                                <span class="form-label">Contract Name
+                                                <span class="form-label"><?= __('Contract Name'); ?>
                                                     <?= $fieldDisplay['contract_name']['star'] ?></span>
                                                 <input type="text" class="form-control" name="contract_name"
                                                     placeholder="<?= __('Enter contract name') ?>"
                                                     value="<?= htmlspecialchars($formData['contract_name'] ?? '') ?>"
                                                     <?= $fieldDisplay['contract_name']['required'] ?>
-                                                    <?= $amc_renew_readonly ?> title="<?= __('Enter contract name') ?>" aria-label="Enter contract name">
+                                                    <?= $amc_renew_readonly ?> title="<?= __('Enter contract name') ?>" aria-label="<?= htmlspecialchars(__('Enter contract name'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4"
                                                 style="<?= $fieldDisplay['transaction_no']['style'] ?>">
-                                                <span class="form-label">Contract Number
+                                                <span class="form-label"><?= __('Contract Number'); ?>
                                                     <?= $fieldDisplay['transaction_no']['star'] ?></span>
                                                 <input type="text" class="form-control" name="transaction_no"
                                                     placeholder="<?= __('Auto-generated') ?>"
                                                     value="<?= htmlspecialchars($formData['transaction_no'] ?? '') ?>"
-                                                    readonly title="<?= __('Auto-generated') ?>" aria-label="Auto-generated">
+                                                    readonly title="<?= __('Auto-generated') ?>" aria-label="<?= htmlspecialchars(__('Auto-generated'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
-                                                <span class="form-label">RT Number
+                                                <span class="form-label"><?= __('RT Number'); ?>
                                                     <?= $fieldDisplay['rt_number']['star'] ?></span>
                                                 <input type="text" class="form-control" name="rt_number"
                                                     placeholder="<?= __('Enter RT Number') ?>"
                                                     value="<?= htmlspecialchars($formData['rt_number'] ?? '') ?>"
-                                                    <?= $fieldDisplay['rt_number']['required'] ?> <?= $amc_renew_readonly ?? '' ?> title="<?= __('Enter RT Number') ?>" aria-label="Enter RT Number">
+                                                    <?= $fieldDisplay['rt_number']['required'] ?> <?= $amc_renew_readonly ?? '' ?> title="<?= __('Enter RT Number') ?>" aria-label="<?= htmlspecialchars(__('Enter RT Number'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
-                                                <span class="form-label">Invoice Number
+                                                <span class="form-label"><?= __('Invoice Number'); ?>
                                                     <?= $fieldDisplay['invoice_number']['star'] ?></span>
                                                 <input type="text" class="form-control" name="invoice_number"
                                                     placeholder="<?= __('Enter Invoice Number') ?>"
                                                     value="<?= htmlspecialchars($formData['invoice_number'] ?? '') ?>"
-                                                    <?= $fieldDisplay['invoice_number']['required'] ?> title="<?= __('Enter Invoice Number') ?>" aria-label="Enter Invoice Number">
+                                                    <?= $fieldDisplay['invoice_number']['required'] ?> title="<?= __('Enter Invoice Number') ?>" aria-label="<?= htmlspecialchars(__('Enter Invoice Number'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
-                                                <span class="form-label">Business Code
+                                                <span class="form-label"><?= __('Business Code'); ?>
                                                     <?= $fieldDisplay['business_code']['star'] ?></span>
                                                 <input type="text" class="form-control" name="business_code"
                                                     placeholder="<?= __('Enter Business Code') ?>"
                                                     value="<?= htmlspecialchars($formData['business_code'] ?? '') ?>"
-                                                    <?= $fieldDisplay['business_code']['required'] ?> title="<?= __('Enter Business Code') ?>" aria-label="Enter Business Code">
+                                                    <?= $fieldDisplay['business_code']['required'] ?> title="<?= __('Enter Business Code') ?>" aria-label="<?= htmlspecialchars(__('Enter Business Code'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
-                                                <span class="form-label">Department <span
+                                                <span class="form-label"><?= __('Department'); ?> <span
                                                         class="text-danger">*</span></span>
                                                 <?php if ($amc_is_renew_mode && !empty($formData['department_id'])) { ?>
                                                     <input type="hidden" name="department_id"
@@ -2399,7 +2397,7 @@ if (count((array) $milestones) > 0) {
                                                 <?php } ?>
                                                 <select class="form-control js-example-basic-single"
                                                     name="<?= $amc_is_renew_mode ? 'department_id_display' : 'department_id' ?>"
-                                                    id="amc_contract_department_id" <?= $amc_renew_disabled ?> title="<?= __('Select') ?>" aria-label="Select">
+                                                    id="amc_contract_department_id" <?= $amc_renew_disabled ?> title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select Department') ?></option>
                                                     <?php if (count((array) $departments) > 0) {
                                                         foreach ($departments as $dept) { ?>
@@ -2412,13 +2410,13 @@ if (count((array) $milestones) > 0) {
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Contract Category') ?></span>
                                                 <select class="form-control js-example-basic-single"
-                                                    name="type_of_contract_id" <?= $amc_renew_disabled ?> title="<?= __('Type Of Contract Id') ?>" aria-label="Type Of Contract Id">
+                                                    name="type_of_contract_id" <?= $amc_renew_disabled ?> title="<?= __('Type Of Contract Id') ?>" aria-label="<?= htmlspecialchars(__('Type Of Contract Id'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select Category') ?></option>
                                                     <?php if (count((array) $contractTypes) > 0) {
                                                         foreach ($contractTypes as $type) { ?>
                                                             <option value="<?= htmlspecialchars($type['genc_detail_code']) ?>"
                                                                 <?= (isset($formData['type_of_contract_id']) && (string) $formData['type_of_contract_id'] == (string) ($type['genc_detail_code'] ?? '')) ? 'selected' : '' ?>>
-                                                                <?= htmlspecialchars($type['genc_detail_name']) ?>
+                                                                <?= htmlspecialchars(__($type['genc_detail_name'])) ?>
                                                             </option>
                                                         <?php }
                                                     } ?>
@@ -2427,7 +2425,7 @@ if (count((array) $milestones) > 0) {
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Payment Terms') ?></span>
                                                 <select class="form-control js-example-basic-single"
-                                                    name="contract_payment_terms" <?= $amc_renew_disabled ?> title="<?= __('Contract Payment Terms') ?>" aria-label="Contract Payment Terms">
+                                                    name="contract_payment_terms" <?= $amc_renew_disabled ?> title="<?= __('Contract Payment Terms') ?>" aria-label="<?= htmlspecialchars(__('Contract Payment Terms'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select Payment Terms') ?></option>
                                                     <?php if (count((array) $payment_terms) > 0) {
                                                         foreach ($payment_terms as $term) {
@@ -2447,31 +2445,31 @@ if (count((array) $milestones) > 0) {
                                             <?php $contract_services_contact_section = 'services';
                                             include __DIR__ . '/_contract_services_contact_fields.php'; ?>
                                             <div class="col-md-12">
-                                                <span class="form-label d-block">Party Type <span
+                                                <span class="form-label d-block"><?= __('Party Type'); ?> <span
                                                         class="text-danger">*</span></span>
                                                 <div class="radio radio-outline radio-inline">
                                                     <input id="amc_customer" type="radio" <?= $amc_is_renew_mode ? '' : 'name="party_type"' ?> value="customer"
                                                         <?= $amc_party_type == 'customer' ? 'checked' : '' ?>
-                                                        <?= $amc_renew_disabled ?> title="<?= __('Party Type') ?>" aria-label="Party Type">
+                                                        <?= $amc_renew_disabled ?> title="<?= __('Party Type') ?>" aria-label="<?= htmlspecialchars(__('Party Type'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <label class="form-label align-top"
                                                         for="amc_customer"><?= __('Customer') ?></label>
                                                 </div>
                                                 <div class="radio radio-outline radio-inline ms-3">
                                                     <input id="amc_vendor" type="radio" <?= $amc_is_renew_mode ? '' : 'name="party_type"' ?> value="vendor" <?= ($amc_party_type != 'customer' && $amc_party_type != 'inhouse') ? 'checked' : '' ?>
-                                                        <?= $amc_renew_disabled ?> title="<?= __('Party Type') ?>" aria-label="Party Type">
+                                                        <?= $amc_renew_disabled ?> title="<?= __('Party Type') ?>" aria-label="<?= htmlspecialchars(__('Party Type'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <label class="form-label align-top" for="amc_vendor"><?= __('Vendor') ?></label>
                                                 </div>
                                                 <div class="radio radio-outline radio-inline ms-3 cc-amc-only">
                                                     <input id="amc_inhouse" type="radio" <?= $amc_is_renew_mode ? '' : 'name="party_type"' ?> value="inhouse"
                                                         <?= $amc_party_type == 'inhouse' ? 'checked' : '' ?>
-                                                        <?= $amc_renew_disabled ?> title="<?= __('Party Type') ?>" aria-label="Party Type">
+                                                        <?= $amc_renew_disabled ?> title="<?= __('Party Type') ?>" aria-label="<?= htmlspecialchars(__('Party Type'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <label class="form-label align-top"
                                                         for="amc_inhouse"><?= __('In-house') ?></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-12" id="amc_party_name_box"
                                                 style="<?= $amc_is_inhouse ? 'display:none;' : '' ?>">
-                                                <span class="form-label">Party Name <span
+                                                <span class="form-label"><?= __('Party Name'); ?> <span
                                                         class="text-danger amc-party-required">*</span></span>
                                                 <?php if ($amc_is_renew_mode) { ?>
                                                     <input type="hidden" name="party_type"
@@ -2486,7 +2484,7 @@ if (count((array) $milestones) > 0) {
                                                     name="<?= $amc_is_renew_mode ? 'party_id_display' : 'party_id' ?>"
                                                     id="amc_party_id"
                                                     data-selected="<?= htmlspecialchars($amc_party_id) ?>"
-                                                    <?= $amc_renew_disabled ?> title="<?= __('Select') ?>" aria-label="Select">
+                                                    <?= $amc_renew_disabled ?> title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select a Party') ?></option>
                                                     <?php if (count((array) $customers) > 0) {
                                                         foreach ($customers as $partyRow) {
@@ -2518,45 +2516,42 @@ if (count((array) $milestones) > 0) {
                                                     style="box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); border-left: 4px solid #4e73df !important;">
                                                     <h6 class="mb-3 text-primary border-bottom pb-2"
                                                         style="font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 700;">
-                                                        <i class="fa fa-user-circle me-1"></i> Party Details
+                                                        <i class="fa fa-user-circle me-1"></i> <?= __('Party Details'); ?>
                                                     </h6>
                                                     <div class="row">
                                                         <div class="col-md-6 mb-2">
                                                             <small class="text-muted d-block text-uppercase"
-                                                                style="font-size: 0.65rem; font-weight: 600;">Name</small>
+                                                                style="font-size: 0.65rem; font-weight: 600;"><?= __('Name'); ?></small>
                                                             <span id="preview-party-name"
                                                                 class="fw-bold text-dark small">—</span>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <small class="text-muted d-block text-uppercase"
-                                                                style="font-size: 0.65rem; font-weight: 600;">Email</small>
+                                                                style="font-size: 0.65rem; font-weight: 600;"><?= __('Email'); ?></small>
                                                             <span id="preview-party-email"
                                                                 class="fw-bold text-dark small">—</span>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <small class="text-muted d-block text-uppercase"
-                                                                style="font-size: 0.65rem; font-weight: 600;">Phone</small>
+                                                                style="font-size: 0.65rem; font-weight: 600;"><?= __('Phone'); ?></small>
                                                             <span id="preview-party-phone"
                                                                 class="fw-bold text-dark small">—</span>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <small class="text-muted d-block text-uppercase"
-                                                                style="font-size: 0.65rem; font-weight: 600;">BP
-                                                                Code</small>
+                                                                style="font-size: 0.65rem; font-weight: 600;"><?= __('BP Code'); ?></small>
                                                             <span id="preview-bp-code"
                                                                 class="fw-bold text-dark small">—</span>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <small class="text-muted d-block text-uppercase"
-                                                                style="font-size: 0.65rem; font-weight: 600;">Billing
-                                                                Address</small>
+                                                                style="font-size: 0.65rem; font-weight: 600;"><?= __('Billing Address'); ?></small>
                                                             <span id="preview-billing-address"
                                                                 class="fw-bold text-dark small">—</span>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <small class="text-muted d-block text-uppercase"
-                                                                style="font-size: 0.65rem; font-weight: 600;">Shipping
-                                                                Address</small>
+                                                                style="font-size: 0.65rem; font-weight: 600;"><?= __('Shipping Address'); ?></small>
                                                             <span id="preview-shipping-address"
                                                                 class="fw-bold text-dark small">—</span>
                                                         </div>
@@ -2564,7 +2559,7 @@ if (count((array) $milestones) > 0) {
                                                 </div>
                                                 <button type="button" class="btn btn-sm btn-outline-primary mt-2"
                                                     id="unified-add-party-btn"><i class="fa fa-plus-circle me-1"></i>
-                                                    Add New Party</button>
+                                                    <?= __('Add New Party'); ?></button>
                                             </div>
                                             <?php
                                             $amc_show_customer_connect = $is_amc_mode && $amc_party_type != 'customer' && $amc_party_type != 'inhouse';
@@ -2575,7 +2570,7 @@ if (count((array) $milestones) > 0) {
                                                 <span class="form-label"><?= __('Customer Connect (Facility Manager)') ?></span>
                                                 <select class="form-control js-example-basic-single"
                                                     name="customer_connect_id" id="amc_customer_connect_id"
-                                                    data-selected="<?= htmlspecialchars($amc_customer_connect_id) ?>" title="<?= __('Customer Connect Id') ?>" aria-label="Customer Connect Id">
+                                                    data-selected="<?= htmlspecialchars($amc_customer_connect_id) ?>" title="<?= __('Customer Connect Id') ?>" aria-label="<?= htmlspecialchars(__('Customer Connect Id'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select Customer Connect') ?></option>
                                                     <?php if (count((array) $users) > 0) {
                                                         foreach ($users as $connectRow) {
@@ -2589,15 +2584,14 @@ if (count((array) $milestones) > 0) {
                                                         <?php }
                                                     } ?>
                                                 </select>
-                                                <div class="form-text amc-field-help-text mb-1">Site contact who
-                                                    confirms vendor visits after job completion</div>
+                                                <div class="form-text amc-field-help-text mb-1"><?= __('Site contact who confirms vendor visits after job completion'); ?></div>
                                             </div>
                                             <div class="col-md-4 cc-amc-only" id="amc_default_employee_box"
                                                 style="<?= $amc_is_inhouse ? '' : 'display:none;' ?>">
                                                 <span class="form-label"><?= __('Default Employee') ?></span>
                                                 <select class="form-control js-example-basic-single"
                                                     name="amc_default_employee_id" id="amc_default_employee_id"
-                                                    data-selected="<?= htmlspecialchars($amc_default_employee_id) ?>" title="<?= __('Amc Default Employee Id') ?>" aria-label="Amc Default Employee Id">
+                                                    data-selected="<?= htmlspecialchars($amc_default_employee_id) ?>" title="<?= __('Amc Default Employee Id') ?>" aria-label="<?= htmlspecialchars(__('Amc Default Employee Id'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select Employee (optional)') ?></option>
                                                 </select>
                                             </div>
@@ -2605,42 +2599,42 @@ if (count((array) $milestones) > 0) {
                                                 <span class="form-label"><?= __('Contract Owner Name') ?></span>
                                                 <input type="text" class="form-control" name="contract_owner_name"
                                                     placeholder="<?= __('Enter contract owner name') ?>"
-                                                    value="<?= htmlspecialchars($formData['contract_owner_name'] ?? '') ?>" title="<?= __('Enter contract owner name') ?>" aria-label="Enter contract owner name">
+                                                    value="<?= htmlspecialchars($formData['contract_owner_name'] ?? '') ?>" title="<?= __('Enter contract owner name') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner name'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Contract Owner Email') ?></span>
                                                 <input type="email" class="form-control" name="contract_owner_email"
                                                     placeholder="<?= __('Enter contract owner email') ?>"
-                                                    value="<?= htmlspecialchars($formData['contract_owner_email'] ?? '') ?>" title="<?= __('Enter contract owner email') ?>" aria-label="Enter contract owner email">
+                                                    value="<?= htmlspecialchars($formData['contract_owner_email'] ?? '') ?>" title="<?= __('Enter contract owner email') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner email'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Contract Owner Contact') ?></span>
                                                 <input type="tel" class="form-control" name="contract_owner_number"
                                                     placeholder="<?= __('Enter contract owner contact number') ?>"
-                                                    value="<?= htmlspecialchars($formData['contract_owner_number'] ?? '') ?>" title="<?= __('Enter contract owner contact number') ?>" aria-label="Enter contract owner contact number">
+                                                    value="<?= htmlspecialchars($formData['contract_owner_number'] ?? '') ?>" title="<?= __('Enter contract owner contact number') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner contact number'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <?php $contract_services_contact_section = 'contact_persons';
                                             include __DIR__ . '/_contract_services_contact_fields.php'; ?>
                                             <div class="col-md-4">
-                                                <span class="form-label">Effective(Start) Date <span
+                                                <span class="form-label"><?= __('Effective(Start) Date'); ?> <span
                                                         class="text-danger">*</span></span>
                                                 <input type="text"
                                                     class="form-control startdatepicker_2 rangedatepicker " data-id="2"
                                                     name="start_date"
                                                     value="<?= $amc_renew_start_display != '' ? htmlspecialchars($amc_renew_start_display) : (!empty($formData['start_date']) ? fromDate($formData['start_date']) : '') ?>"
-                                                    autocomplete="off" <?= $amc_is_renew_mode ? 'readonly style="background-color:#f8f9fa;"' : '' ?> title="<?= __('Start Date') ?>" aria-label="Start Date">
+                                                    autocomplete="off" <?= $amc_is_renew_mode ? 'readonly style="background-color:#f8f9fa;"' : '' ?> title="<?= __('Start Date') ?>" aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>">
 
                                             </div>
 
 
                                             <div class="col-md-4">
-                                                <span class="form-label">Expiration(End) Date <span
+                                                <span class="form-label"><?= __('Expiration(End) Date'); ?> <span
                                                         class="text-danger">*</span></span>
                                                 <input type="text"
                                                     class="form-control amc-end-datepicker enddatepicker_2"
                                                     name="end_date"
                                                     value="<?= $amc_renew_end_display != '' ? htmlspecialchars($amc_renew_end_display) : (!empty($formData['end_date']) ? fromDate($formData['end_date']) : '') ?>"
-                                                    autocomplete="off" title="<?= __('End Date') ?>" aria-label="End Date">
+                                                    autocomplete="off" title="<?= __('End Date') ?>" aria-label="<?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <?php $contract_agreement_section = 'extended';
                                             $contract_agreement_locations_section = 'Y';
@@ -2648,18 +2642,18 @@ if (count((array) $milestones) > 0) {
                                             <div class="col-md-12">
                                                 <span class="form-label"><?= __('Contract Description') ?></span>
                                                 <textarea class="form-control" name="description" rows="3"
-                                                    placeholder="<?= __('Enter contract description') ?>" title="<?= __('Enter contract description') ?>" aria-label="Enter contract description"><?= htmlspecialchars($formData['description'] ?? '') ?></textarea>
+                                                    placeholder="<?= __('Enter contract description') ?>" title="<?= __('Enter contract description') ?>" aria-label="<?= htmlspecialchars(__('Enter contract description'), ENT_QUOTES, 'UTF-8'); ?>"><?= htmlspecialchars($formData['description'] ?? '') ?></textarea>
                                             </div>
                                             <div class="col-md-12">
                                                 <span class="form-label"><?= __('Contract Document') ?></span>
                                                 <div class="cc-upload-zone">
                                                     <i class="icofont icofont-cloud-upload"></i>
-                                                    <p>Click to upload or drag and drop</p>
+                                                    <p><?= __('Click to upload or drag and drop'); ?></p>
                                                     <small class="text-muted cc-upload-filename"></small>
                                                 </div>
                                                 <input type="file" id="amc_contract_document"
                                                     name="additional_document_file[]" class="d-none"
-                                                    accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png" multiple title="<?= __('Additional Document File') ?>" aria-label="Additional Document File">
+                                                    accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png" multiple title="<?= __('Additional Document File') ?>" aria-label="<?= htmlspecialchars(__('Additional Document File'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <div id="amc_additional_file_buttons"
                                                     class="cc-uploaded-files mt-2 d-flex flex-column gap-2">
                                                     <?php
@@ -2712,13 +2706,11 @@ if (count((array) $milestones) > 0) {
                                                 <input type="hidden" name="all_additional_documents"
                                                     id="amc_all_additional_documents"
                                                     value="<?= htmlspecialchars($amc_saved_documents) ?>">
-                                                <small class="text-muted d-block mt-1">PDF, Word, Excel, Images (Max
-                                                    10MB each)</small>
+                                                <small class="text-muted d-block mt-1"><?= __('PDF, Word, Excel, Images (Max 10MB each)'); ?></small>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="cc-amc-banner cc-amc-only">
-                                                    <i class="icofont icofont-check-circled"></i> AMC Enabled —
-                                                    Location-based asset mapping and service scheduling are active.
+                                                    <i class="icofont icofont-check-circled"></i> <?= __('AMC Enabled — Location-based asset mapping and service scheduling are active.'); ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -2727,11 +2719,10 @@ if (count((array) $milestones) > 0) {
                                     <div class="cc-section cc-amc-sections cc-amc-only" id="cc-step-2" data-step="1">
                                         <div class="cc-section-header">
                                             <h6><span class="cc-section-num">2</span><i
-                                                    class="icofont icofont-location-pin"></i> Locations, Assets &amp;
-                                                Service Periods</h6>
+                                                    class="icofont icofont-location-pin"></i> <?= htmlspecialchars(__('Locations, Assets & Service Periods'), ENT_QUOTES, 'UTF-8'); ?></h6>
                                             <button type="button" class="btn btn-outline-primary btn-sm"
                                                 id="amc-add-location-btn">
-                                                <i class="icofont icofont-plus"></i> Add Location
+                                                <i class="icofont icofont-plus"></i> <?= __('Add Location'); ?>
                                             </button>
                                         </div>
                                         <div id="amc_locations_container"></div>
@@ -2740,35 +2731,33 @@ if (count((array) $milestones) > 0) {
                                     <div class="cc-section <?= $step13DisabledClass ?>" id="cc-step-3" data-step="2">
                                         <div class="cc-section-header">
                                             <h6><span class="cc-section-num">3</span><i
-                                                    class="icofont icofont-money"></i> Commercials</h6>
+                                                    class="icofont icofont-money"></i> <?= __('Commercials'); ?></h6>
                                         </div>
                                         <div class="row g-3">
                                             <div class="col-md-4">
-                                                <span class="form-label">Contract Amount <span
+                                                <span class="form-label"><?= __('Contract Amount'); ?> <span
                                                         class="text-danger">*</span></span>
                                                 <input type="number" step="any" class="form-control text-end"
                                                     name="contract_amount" id="amc_contract_amount"
                                                     placeholder="<?= __('Enter Contract Amount') ?>"
-                                                    value="<?= htmlspecialchars($formData['contract_amount'] ?? '') ?>" title="<?= __('Enter Contract Amount') ?>" aria-label="Enter Contract Amount">
+                                                    value="<?= htmlspecialchars($formData['contract_amount'] ?? '') ?>" title="<?= __('Enter Contract Amount') ?>" aria-label="<?= htmlspecialchars(__('Enter Contract Amount'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-8">
-                                                <span class="form-label d-block">Payment Plan</span>
+                                                <span class="form-label d-block"><?= __('Payment Plan'); ?></span>
                                                 <div class="cc-inline-radios">
                                                     <span><input type="radio" name="amc_payment_mode"
-                                                            value="billing_cycle" <?= $amc_saved_payment_mode !== 'milestones' ? 'checked' : '' ?> title="<?= __('Amc Payment Mode') ?>" aria-label="Amc Payment Mode"> Billing Cycle</span>
+                                                            value="billing_cycle" <?= $amc_saved_payment_mode !== 'milestones' ? 'checked' : '' ?> title="<?= __('Amc Payment Mode') ?>" aria-label="<?= htmlspecialchars(__('Amc Payment Mode'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('Billing Cycle'); ?></span>
                                                     <span><input type="radio" name="amc_payment_mode"
-                                                            value="milestones" <?= $amc_saved_payment_mode === 'milestones' ? 'checked' : '' ?> title="<?= __('Amc Payment Mode') ?>" aria-label="Amc Payment Mode"> Milestones</span>
+                                                            value="milestones" <?= $amc_saved_payment_mode === 'milestones' ? 'checked' : '' ?> title="<?= __('Amc Payment Mode') ?>" aria-label="<?= htmlspecialchars(__('Amc Payment Mode'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('Milestones'); ?></span>
                                                 </div>
                                             </div>
                                             <?php if ($is_renew_mode): ?>
                                                 <div class="col-md-12 cc-renewal-history-panel"
                                                     id="renewal-amount-history-panel">
-                                                    <div class="cc-renewal-history-header">Renewal Amount History</div>
-                                                    <p class="cc-renewal-history-subtitle text-muted small mb-2">Shown
-                                                        during renewal — compares each period vs the previous year.</p>
+                                                    <div class="cc-renewal-history-header"><?= __('Renewal Amount History'); ?></div>
+                                                    <p class="cc-renewal-history-subtitle text-muted small mb-2"><?= __('Shown during renewal — compares each period vs the previous year.'); ?></p>
                                                     <div id="renewal-amount-history-list"></div>
-                                                    <p class="text-muted small mb-0">Current year trend updates when you
-                                                        change Contract Amount.</p>
+                                                    <p class="text-muted small mb-0"><?= __('Current year trend updates when you change Contract Amount.'); ?></p>
                                                 </div>
                                             <?php endif; ?>
                                             <div class="col-md-12 unified-billing-cycle-block amc-billing-cycle-block">
@@ -2776,7 +2765,7 @@ if (count((array) $milestones) > 0) {
                                                     <div class="col-md-4">
                                                         <span class="form-label"><?= __('Billing Cycle') ?></span>
                                                         <select class="form-control js-example-basic-single"
-                                                            name="amc_billing_cycle" id="unified_billing_cycle" title="<?= __('Amc Billing Cycle') ?>" aria-label="Amc Billing Cycle">
+                                                            name="amc_billing_cycle" id="unified_billing_cycle" title="<?= __('Amc Billing Cycle') ?>" aria-label="<?= htmlspecialchars(__('Amc Billing Cycle'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <option value="monthly"
                                                                 <?= $amc_saved_billing_cycle === 'monthly' ? 'selected' : '' ?>><?= __('Monthly') ?></option>
                                                             <option value="quarterly"
@@ -2792,13 +2781,13 @@ if (count((array) $milestones) > 0) {
                                                         <input type="number" class="form-control text-end"
                                                             name="amc_billing_day" id="unified_billing_day"
                                                             value="<?= htmlspecialchars((string) $amc_saved_billing_day) ?>"
-                                                            min="1" max="31" title="<?= __('Amc Billing Day') ?>" aria-label="Amc Billing Day">
+                                                            min="1" max="31" title="<?= __('Amc Billing Day') ?>" aria-label="<?= htmlspecialchars(__('Amc Billing Day'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 unified-milestones-block amc-milestones-block"
                                                 id="unified-milestones-editor">
-                                                <span class="form-label d-block">Milestones</span>
+                                                <span class="form-label d-block"><?= __('Milestones'); ?></span>
                                                 <div id="unified-milestone-container">
                                                     <?php
                                                     $unifiedMilestoneIdx = 0;
@@ -2815,16 +2804,16 @@ if (count((array) $milestones) > 0) {
                                                                     name="milestone_name_<?= $unifiedMilestoneIdx ?>"
                                                                     class="form-control milestone-name"
                                                                     placeholder="<?= __('Milestone Name') ?>"
-                                                                    value="<?= htmlspecialchars($mName) ?>" title="<?= __('Milestone Name') ?>" aria-label="Milestone Name">
+                                                                    value="<?= htmlspecialchars($mName) ?>" title="<?= __('Milestone Name') ?>" aria-label="<?= htmlspecialchars(__('Milestone Name'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                 <input type="text"
                                                                     name="milestone_date_<?= $unifiedMilestoneIdx ?>"
                                                                     class="form-control datepicker milestone-date"
-                                                                    placeholder="<?= __('Date') ?>" value="<?= htmlspecialchars($mDate) ?>" title="<?= __('Date') ?>" aria-label="Date">
+                                                                    placeholder="<?= __('Date') ?>" value="<?= htmlspecialchars($mDate) ?>" title="<?= __('Date') ?>" aria-label="<?= htmlspecialchars(__('Date'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                 <input type="number" step="any"
                                                                     name="milestone_price_<?= $unifiedMilestoneIdx ?>"
                                                                     class="form-control milestone-price text-end"
                                                                     placeholder="<?= __('Price') ?>"
-                                                                    value="<?= htmlspecialchars($mPrice) ?>" title="<?= __('Price') ?>" aria-label="Price">
+                                                                    value="<?= htmlspecialchars($mPrice) ?>" title="<?= __('Price') ?>" aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                 <button type="button"
                                                                     class="btn btn-danger btn-sm remove-milestone"
                                                                     title="<?= __('Remove milestone') ?>">&times;</button>
@@ -2837,13 +2826,13 @@ if (count((array) $milestones) > 0) {
                                                         <div class="milestone-row mb-2 d-flex align-items-center gap-2">
                                                             <input type="text" name="milestone_name_1"
                                                                 class="form-control milestone-name"
-                                                                placeholder="<?= __('Milestone Name') ?>" title="<?= __('Milestone Name') ?>" aria-label="Milestone Name">
+                                                                placeholder="<?= __('Milestone Name') ?>" title="<?= __('Milestone Name') ?>" aria-label="<?= htmlspecialchars(__('Milestone Name'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <input type="text" name="milestone_date_1"
                                                                 class="form-control datepicker milestone-date"
-                                                                placeholder="<?= __('Date') ?>" title="<?= __('Date') ?>" aria-label="Date">
+                                                                placeholder="<?= __('Date') ?>" title="<?= __('Date') ?>" aria-label="<?= htmlspecialchars(__('Date'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <input type="number" step="any" name="milestone_price_1"
                                                                 class="form-control milestone-price text-end"
-                                                                placeholder="<?= __('Price') ?>" title="<?= __('Price') ?>" aria-label="Price">
+                                                                placeholder="<?= __('Price') ?>" title="<?= __('Price') ?>" aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <button type="button"
                                                                 class="btn btn-danger btn-sm remove-milestone"
                                                                 title="<?= __('Remove milestone') ?>">&times;</button>
@@ -2854,13 +2843,13 @@ if (count((array) $milestones) > 0) {
                                                     id="unified-add-milestone"><?= __('+ Add Milestone') ?></button>
                                                 <div id="unified-milestones-total-row"
                                                     class="mt-3 p-2 border rounded bg-light d-flex justify-content-between align-items-center">
-                                                    <span class="fw-semibold">Total</span>
+                                                    <span class="fw-semibold"><?= __('Total'); ?></span>
                                                     <span class="fw-bold" id="unified-milestones-total">0.00</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 unified-billing-schedule-block"
                                                 id="unified-billing-schedule-block">
-                                                <span class="form-label d-block">Billing Schedule</span>
+                                                <span class="form-label d-block"><?= __('Billing Schedule'); ?></span>
 
                                                 <div class="table-responsive">
                                                     <table class="table table-sm table-bordered align-middle mb-0"
@@ -2896,7 +2885,7 @@ if (count((array) $milestones) > 0) {
                                                         </tbody>
                                                         <tfoot>
                                                             <tr class="table-light fw-semibold">
-                                                                <td>Total</td>
+                                                                <td><?= __('Total'); ?></td>
                                                                 <td class="text-end"
                                                                     id="unified-billing-schedule-total">
                                                                     <?= number_format($billingScheduleTotal, 2, '.', '') ?>
@@ -2908,9 +2897,8 @@ if (count((array) $milestones) > 0) {
                                                 </div>
                                                 <p id="unified-billing-schedule-hint"
                                                     class="text-muted small mt-2 mb-0<?= ($amc_saved_payment_mode !== 'milestones' && count((array) $milestones) > 0) ? ' d-none' : '' ?>">
-                                                    Set <strong>Effective(Start) Date</strong> and
-                                                    <strong>Expiration(End) Date</strong> in Contract Details to
-                                                    generate the billing schedule.
+                                                    <?= __('Set'); ?> <strong><?= __('Effective(Start) Date'); ?></strong> <?= __('and'); ?>
+                                                    <strong><?= __('Expiration(End) Date'); ?></strong> <?= __('in Contract Details to generate the billing schedule.'); ?>
                                                 </p>
                                             </div>
                                         </div>
@@ -2921,16 +2909,16 @@ if (count((array) $milestones) > 0) {
                                             <div class="cc-section h-100 mb-0 cc-amc-only" id="cc-step-4" data-step="3">
                                                 <div class="cc-section-header">
                                                     <h6><span class="cc-section-num">4</span><i
-                                                            class="icofont icofont-settings"></i> Service Setup</h6>
+                                                            class="icofont icofont-settings"></i> <?= __('Service Setup'); ?></h6>
                                                 </div>
-                                                <span class="form-label d-block">Service Reminder</span>
+                                                <span class="form-label d-block"><?= __('Service Reminder'); ?></span>
                                                 <div class="cc-inline-checks">
                                                     <span><input type="checkbox" name="reminder_days[]" value="7"
-                                                            <?= in_array('7', $amc_saved_reminder_days, true) ? 'checked' : '' ?> title="<?= __('Reminder Days') ?>" aria-label="Reminder Days"> 7 days before</span>
+                                                            <?= in_array('7', $amc_saved_reminder_days, true) ? 'checked' : '' ?> title="<?= __('Reminder Days') ?>" aria-label="<?= htmlspecialchars(__('Reminder Days'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('7 days before'); ?></span>
                                                     <span><input type="checkbox" name="reminder_days[]" value="15"
-                                                            <?= in_array('15', $amc_saved_reminder_days, true) ? 'checked' : '' ?> title="<?= __('Reminder Days') ?>" aria-label="Reminder Days"> 15 days before</span>
+                                                            <?= in_array('15', $amc_saved_reminder_days, true) ? 'checked' : '' ?> title="<?= __('Reminder Days') ?>" aria-label="<?= htmlspecialchars(__('Reminder Days'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('15 days before'); ?></span>
                                                     <span><input type="checkbox" name="reminder_days[]" value="30"
-                                                            <?= in_array('30', $amc_saved_reminder_days, true) ? 'checked' : '' ?> title="<?= __('Reminder Days') ?>" aria-label="Reminder Days"> 30 days before</span>
+                                                            <?= in_array('30', $amc_saved_reminder_days, true) ? 'checked' : '' ?> title="<?= __('Reminder Days') ?>" aria-label="<?= htmlspecialchars(__('Reminder Days'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('30 days before'); ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -2938,10 +2926,10 @@ if (count((array) $milestones) > 0) {
                                             <div class="cc-section h-100 mb-0 cc-amc-only" id="cc-step-5" data-step="4">
                                                 <div class="cc-section-header">
                                                     <h6><span class="cc-section-num">5</span><i
-                                                            class="icofont icofont-warning"></i> Escalations</h6>
+                                                            class="icofont icofont-warning"></i> <?= __('Escalations'); ?></h6>
                                                     <button type="button" class="btn btn-outline-primary btn-sm"
                                                         id="amc-add-escalation-btn">
-                                                        <i class="icofont icofont-plus"></i> Add Escalation
+                                                        <i class="icofont icofont-plus"></i> <?= __('Add Escalation'); ?>
                                                     </button>
                                                 </div>
                                                 <div id="amc-escalation-container">
@@ -2952,7 +2940,7 @@ if (count((array) $milestones) > 0) {
                                                         ?>
                                                         <div class="cc-escalation-level"
                                                             data-esc-idx="<?= (int) $escIdx ?>">
-                                                            <span class="level-badge">Level <?= (int) $escIdx + 1 ?></span>
+                                                            <span class="level-badge"><?= __('Level'); ?> <?= (int) $escIdx + 1 ?></span>
                                                             <div class="row g-2 align-items-center">
                                                                 <div class="col-auto text-muted small">
                                                                     <?= htmlspecialchars($amc_condition_labels[$condition] ?? $amc_condition_labels['not_started']) ?>
@@ -2965,13 +2953,13 @@ if (count((array) $milestones) > 0) {
                                                                         class="form-control form-control-sm amc-esc-hours text-end"
                                                                         name="amc_escalation_config[<?= (int) $escIdx ?>][hours]"
                                                                         value="<?= $hours ?>" min="1" max="720"
-                                                                        style="width:70px;" title="<?= __('Input') ?>" aria-label="Input">
+                                                                        style="width:70px;" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                 </div>
-                                                                <div class="col-auto text-muted small">hours, Notify</div>
+                                                                <div class="col-auto text-muted small"><?= __('hours, Notify'); ?></div>
                                                                 <div class="col-md-5">
                                                                     <select
                                                                         class="form-control form-control-sm js-example-basic-single amc-esc-notify"
-                                                                        name="amc_escalation_config[<?= (int) $escIdx ?>][notify_role]" title="<?= __('Select') ?>" aria-label="Select">
+                                                                        name="amc_escalation_config[<?= (int) $escIdx ?>][notify_role]" title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                         <?php foreach ($amc_notify_roles as $roleKey => $roleLabel): ?>
                                                                             <option value="<?= htmlspecialchars($roleKey) ?>"
                                                                                 <?= $notifyRole === $roleKey ? 'selected' : '' ?>>
@@ -2998,46 +2986,42 @@ if (count((array) $milestones) > 0) {
                                             <div class="cc-section h-100 mb-0 cc-amc-only" id="cc-step-6" data-step="5">
                                                 <div class="cc-section-header">
                                                     <h6><span class="cc-section-num">6</span><i
-                                                            class="icofont icofont-lock"></i> Gate Entry &amp; Service
-                                                        Completion</h6>
+                                                            class="icofont icofont-lock"></i> <?= htmlspecialchars(__('Gate Entry & Service Completion'), ENT_QUOTES, 'UTF-8'); ?></h6>
                                                 </div>
                                                 <div class="form-group mb-3">
-                                                    <span class="form-label d-block">Gate entry required for service
-                                                        execution?</span>
+                                                    <span class="form-label d-block"><?= __('Gate entry required for service execution?'); ?></span>
                                                     <div class="cc-inline-radios">
                                                         <span><input type="radio" name="gate_entry" value="yes"
-                                                                <?= $amc_saved_gate_entry !== 'no' ? 'checked' : '' ?> title="<?= __('Gate Entry') ?>" aria-label="Gate Entry">
-                                                            Yes</span>
+                                                                <?= $amc_saved_gate_entry !== 'no' ? 'checked' : '' ?> title="<?= __('Gate Entry') ?>" aria-label="<?= htmlspecialchars(__('Gate Entry'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                            <?= __('Yes'); ?></span>
                                                         <span><input type="radio" name="gate_entry" value="no"
-                                                                <?= $amc_saved_gate_entry === 'no' ? 'checked' : '' ?> title="<?= __('Gate Entry') ?>" aria-label="Gate Entry">
-                                                            No</span>
+                                                                <?= $amc_saved_gate_entry === 'no' ? 'checked' : '' ?> title="<?= __('Gate Entry') ?>" aria-label="<?= htmlspecialchars(__('Gate Entry'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                            <?= __('No'); ?></span>
                                                     </div>
                                                 </div>
-                                                <span class="form-label d-block">Service Completion
-                                                    Requirements</span>
+                                                <span class="form-label d-block"><?= __('Service Completion Requirements'); ?></span>
                                                 <div class="cc-inline-checks d-flex flex-column gap-2">
                                                     <span><input type="checkbox" name="completion_req[]"
-                                                            value="service_report" <?= in_array('service_report', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="Completion Req">
-                                                        Service Report upload mandatory</span>
+                                                            value="service_report" <?= in_array('service_report', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="<?= htmlspecialchars(__('Completion Req'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                        <?= __('Service Report upload mandatory'); ?></span>
                                                     <span><input type="checkbox" name="completion_req[]"
-                                                            value="technician_signoff" <?= in_array('technician_signoff', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="Completion Req">
-                                                        Technician Sign-off</span>
+                                                            value="technician_signoff" <?= in_array('technician_signoff', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="<?= htmlspecialchars(__('Completion Req'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                        <?= __('Technician Sign-off'); ?></span>
                                                     <span><input type="checkbox" name="completion_req[]"
-                                                            value="customer_signoff" <?= in_array('customer_signoff', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="Completion Req">
-                                                        Customer Sign-off</span>
+                                                            value="customer_signoff" <?= in_array('customer_signoff', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="<?= htmlspecialchars(__('Completion Req'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                        <?= __('Customer Sign-off'); ?></span>
                                                     <span><input type="checkbox" name="completion_req[]"
-                                                            value="photo_upload" <?= in_array('photo_upload', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="Completion Req">
-                                                        Photo Upload</span>
+                                                            value="photo_upload" <?= in_array('photo_upload', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="<?= htmlspecialchars(__('Completion Req'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                        <?= __('Photo Upload'); ?></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="cc-section cc-summary-section h-100 mb-0">
                                                 <div class="cc-section-header">
-                                                    <h6><i class="icofont icofont-chart-pie"></i> Summary</h6>
+                                                    <h6><i class="icofont icofont-chart-pie"></i> <?= __('Summary'); ?></h6>
                                                 </div>
-                                                <div id="amc-summary-content" class="small text-muted">Fill the form
-                                                    sections above to see a summary before submit.</div>
+                                                <div id="amc-summary-content" class="small text-muted"><?= __('Fill the form sections above to see a summary before submit.'); ?></div>
                                             </div>
                                         </div>
                                     </div>
@@ -3046,11 +3030,11 @@ if (count((array) $milestones) > 0) {
                                         <?php if (empty($contract_form_locked) && !$amc_is_cancelled): ?>
                                             <?php if ($amc_is_renew_mode): ?>
                                                 <button type="button" class="btn btn-primary cc-btn-submit">
-                                                    <i class="fa fa-refresh"></i> Renew Contract
+                                                    <i class="fa fa-refresh"></i> <?= __('Renew Contract'); ?>
                                                 </button>
                                             <?php else: ?>
                                                 <button type="button" class="btn btn-primary cc-btn-submit">
-                                                    <i class="icofont icofont-check"></i> Submit Contract
+                                                    <i class="icofont icofont-check"></i> <?= __('Submit Contract'); ?>
                                                 </button>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -3075,21 +3059,21 @@ if (count((array) $milestones) > 0) {
 
                 <template id="amc-escalation-level-template">
                     <div class="cc-escalation-level" data-esc-idx="">
-                        <span class="level-badge">Level 1</span>
+                        <span class="level-badge"><?= __('Level 1'); ?></span>
                         <div class="row g-2 align-items-center">
                             <div class="col-auto">
-                                <select class="form-select form-select-sm amc-esc-condition" title="<?= __('Select') ?>" aria-label="Select">
+                                <select class="form-select form-select-sm amc-esc-condition" title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <option value="not_started"><?= __('If service not started within') ?></option>
                                     <option value="not_completed"><?= __('If service not completed within') ?></option>
                                 </select>
                             </div>
                             <div class="col-auto">
                                 <input type="number" class="form-control form-control-sm amc-esc-hours text-end"
-                                    value="4" min="1" max="720" style="width:70px;" title="<?= __('Input') ?>" aria-label="Input">
+                                    value="4" min="1" max="720" style="width:70px;" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
-                            <div class="col-auto text-muted small">hours, Notify</div>
+                            <div class="col-auto text-muted small"><?= __('hours, Notify'); ?></div>
                             <div class="col-md-5">
-                                <select class="form-select form-select-sm js-example-basic-single amc-esc-notify" title="<?= __('Select') ?>" aria-label="Select">
+                                <select class="form-select form-select-sm js-example-basic-single amc-esc-notify" title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <option value="service_manager"><?= __('Service Manager') ?></option>
                                     <option value="regional_manager"><?= __('Regional Manager') ?></option>
                                     <option value="contract_owner"><?= __('Contract Owner') ?></option>
@@ -3125,7 +3109,7 @@ if (count((array) $milestones) > 0) {
                                     <tbody>
                                         <tr>
                                             <td style="min-width: 220px;">
-                                                <select class="form-select js-example-basic-single amc-location-select" title="<?= __('Select') ?>" aria-label="Select">
+                                                <select class="form-select js-example-basic-single amc-location-select" title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select Location') ?></option>
                                                     <?php if (count((array) $locations) > 0) {
                                                         foreach ($locations as $location) {
@@ -3137,8 +3121,8 @@ if (count((array) $milestones) > 0) {
                                                     } ?>
                                                 </select>
                                             </td>
-                                            <td><input type="date" class="form-control    amc-loc-service-start" title="<?= __('Input') ?>" aria-label="Input"></td>
-                                            <td><input type="date" class="form-control  amc-loc-service-end" title="<?= __('Input') ?>" aria-label="Input"></td>
+                                            <td><input type="date" class="form-control    amc-loc-service-start" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                                            <td><input type="date" class="form-control  amc-loc-service-end" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -3149,9 +3133,9 @@ if (count((array) $milestones) > 0) {
                                     <div class="d-flex flex-wrap gap-2 align-items-end">
                                         <div class="d-flex flex-wrap gap-2 align-items-end amc-add-by-category-wrap">
                                             <div style="min-width:160px;">
-                                                <span class="form-label f-12 mb-1">Category</span>
+                                                <span class="form-label f-12 mb-1"><?= __('Category'); ?></span>
                                                 <select
-                                                    class="form-select form-select-sm js-example-basic-single amc-bulk-category-select" title="<?= __('Select') ?>" aria-label="Select">
+                                                    class="form-select form-select-sm js-example-basic-single amc-bulk-category-select" title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select category') ?></option>
                                                     <?php if (count((array) $amc_asset_categories) > 0) {
                                                         foreach ($amc_asset_categories as $catRow) {
@@ -3165,11 +3149,11 @@ if (count((array) $milestones) > 0) {
                                             </div>
                                             <button type="button"
                                                 class="btn btn-outline-primary btn-sm amc-add-by-category-btn">
-                                                <i class="icofont icofont-plus"></i> Add by category
+                                                <i class="icofont icofont-plus"></i> <?= __('Add by category'); ?>
                                             </button>
                                         </div>
                                         <button type="button" class="btn btn-primary btn-sm amc-add-asset-btn">
-                                            <i class="icofont icofont-plus"></i> Add Asset
+                                            <i class="icofont icofont-plus"></i> <?= __('Add Asset'); ?>
                                         </button>
                                     </div>
                                 </div>
@@ -3198,31 +3182,31 @@ if (count((array) $milestones) > 0) {
                 <template id="amc-asset-row-template">
                     <tr class="amc-asset-row">
                         <td style="min-width: 160px;">
-                            <select class="form-select js-example-basic-single amc-asset-select" title="<?= __('Select') ?>" aria-label="Select">
+                            <select class="form-select js-example-basic-single amc-asset-select" title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <option value=""><?= __('Select location first') ?></option>
                             </select>
                         </td>
-                        <td><input type="text" class="form-control amc-asset-name" readonly placeholder="<?= __('Asset Name') ?>" title="<?= __('Asset Name') ?>" aria-label="Asset Name">
+                        <td><input type="text" class="form-control amc-asset-name" readonly placeholder="<?= __('Asset Name') ?>" title="<?= __('Asset Name') ?>" aria-label="<?= htmlspecialchars(__('Asset Name'), ENT_QUOTES, 'UTF-8'); ?>">
                         </td>
-                        <td><input type="text" class="form-control amc-asset-category" readonly placeholder="<?= __('Category') ?>" title="<?= __('Category') ?>" aria-label="Category">
+                        <td><input type="text" class="form-control amc-asset-category" readonly placeholder="<?= __('Category') ?>" title="<?= __('Category') ?>" aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>">
                         </td>
                         <td style="min-width: 160px;">
-                            <select class="form-select js-example-basic-single amc-service-frequency-select" title="<?= __('Select') ?>" aria-label="Select">
+                            <select class="form-select js-example-basic-single amc-service-frequency-select" title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <option value=""><?= __('Select Frequency') ?></option>
                                 <?php foreach ($amc_service_frequencies as $freq) {
                                     $fr = is_array($freq) ? $freq : json_decode(json_encode($freq), true); ?>
                                     <option value="<?= htmlspecialchars($fr['genc_detail_code'] ?? '') ?>">
-                                        <?= htmlspecialchars($fr['genc_detail_name'] ?? '') ?>
+                                        <?= htmlspecialchars(__($fr['genc_detail_name']) ?? '') ?>
                                     </option>
                                 <?php } ?>
                             </select>
                         </td>
                         <td style="min-width: 90px;">
                             <input type="number" class="form-control amc-visits-per-interval text-end" min="1" max="31"
-                                value="1" title="<?= __('Visits per interval') ?>" aria-label="Visits per interval">
+                                value="1" title="<?= __('Visits per interval') ?>" aria-label="<?= htmlspecialchars(__('Visits per interval'), ENT_QUOTES, 'UTF-8'); ?>">
                         </td>
-                        <td><input type="date" class="form-control amc-asset-service-start" readonly tabindex="-1" title="<?= __('Input') ?>" aria-label="Input"></td>
-                        <td><input type="date" class="form-control amc-asset-service-end" readonly tabindex="-1" title="<?= __('Input') ?>" aria-label="Input"></td>
+                        <td><input type="date" class="form-control amc-asset-service-start" readonly tabindex="-1" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                        <td><input type="date" class="form-control amc-asset-service-end" readonly tabindex="-1" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
                         <td class="text-center text-nowrap">
                             <?php if ($amc_is_edit): ?>
                                 <span class="amc-schedule-actions">
@@ -3239,7 +3223,7 @@ if (count((array) $milestones) > 0) {
                     <tr class="amc-asset-slots-row d-none">
                         <td colspan="8" class="bg-light py-2">
                             <div class="amc-slot-config small">
-                                <span class="text-muted me-2 amc-slot-config-label">Visit slots:</span>
+                                <span class="text-muted me-2 amc-slot-config-label"><?= __('Visit slots'); ?>:</span>
                                 <div class="amc-slot-fields d-flex flex-wrap gap-2 align-items-end"></div>
                             </div>
                         </td>
@@ -3250,12 +3234,12 @@ if (count((array) $milestones) > 0) {
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Planned Schedule — <span id="amcHistoryAssetLabel"></span></h5>
+                                <h5 class="modal-title"><?= __('Planned Schedule —'); ?> <span id="amcHistoryAssetLabel"></span></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                    aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                             </div>
                             <div class="modal-body custom-scroll" id="amcAssetHistoryBody" style="max-height: 600px;">
-                                <p class="text-center text-muted mb-0">Loading schedule…</p>
+                                <p class="text-center text-muted mb-0"><?= __('Loading schedule…'); ?></p>
                             </div>
                         </div>
                     </div>
@@ -3265,9 +3249,9 @@ if (count((array) $milestones) > 0) {
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Service Calendar — <span id="amcCalendarAssetLabel"></span></h5>
+                                <h5 class="modal-title"><?= __('Service Calendar —'); ?> <span id="amcCalendarAssetLabel"></span></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                    aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                             </div>
                             <div class="modal-body custom-scroll" style="max-height: 600px;">
                                 <div id="amc-service-calendar"></div>
@@ -3357,7 +3341,7 @@ if (count((array) $milestones) > 0) {
                                                     class="form-control document-file-input" multiple accept=".pdf,.xls,.xlsx"
                                                     data-document-id="<?= $document['id'] ?>"
                                                     data-document-name="<?= htmlspecialchars($document['document_name']) ?>"
-                                                    <?= $disabledAttr ?> title="<?= __('Input') ?>" aria-label="Input">
+                                                    <?= $disabledAttr ?> title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <!-- File buttons container -->
                                                 <div id="file_buttons_<?= $document['id'] ?>" class="d-flex gap-1">
                                                     <?php foreach ($matchedDocuments as $docDetail): ?>
@@ -3379,7 +3363,7 @@ if (count((array) $milestones) > 0) {
                                                     <?php endforeach; ?>
                                                 </div>
                                             </div>
-                                            <small class="text-muted">PDF, Excel (Max 10MB each)</small>
+                                            <small class="text-muted"><?= __('PDF, Excel (Max 10MB each)'); ?></small>
 
                                             <!-- Single hidden input to store all files for this document type -->
                                             <input type="hidden" name="all_documents_<?= $document['id'] ?>"
@@ -3443,8 +3427,7 @@ if (count((array) $milestones) > 0) {
                                         </table>
                                     <?php else: ?>
                                         <div class="card-px text-center ">
-                                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No
-                                                Associated Contract</p>
+                                            <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Associated Contract'); ?></p>
                                             <div class="text-center px-4">
                                                 <img class="mw-100 mh-300px mx-h-300 mx-height-300" alt=""
                                                     src="assets/images/work.png">
@@ -3467,10 +3450,10 @@ if (count((array) $milestones) > 0) {
                                     <div class="row">
                                         <div class="col-lg-6 mb-3">
                                             <div class="form-group w-full">
-                                                <span class="form-label d-block">Select Location <span
+                                                <span class="form-label d-block"><?= __('Select Location'); ?> <span
                                                         class="text-danger">*</span></span>
                                                 <select class="form-select js-example-basic-single"
-                                                    id="permissionLocationSelect" title="<?= __('Select') ?>" aria-label="Select">
+                                                    id="permissionLocationSelect" title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select Location') ?></option>
                                                     <?php if (!empty($locations)): ?>
                                                         <?php foreach ($locations as $loc):
@@ -3484,16 +3467,15 @@ if (count((array) $milestones) > 0) {
                                                         <?php endforeach; ?>
                                                     <?php endif; ?>
                                                 </select>
-                                                <small class="text-muted permission-edit-user-hint d-none">Location cannot be
-                                                    changed when editing an existing permission.</small>
+                                                <small class="text-muted permission-edit-user-hint d-none"><?= __('Location cannot be changed when editing an existing permission.'); ?></small>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <div class="form-group w-full">
-                                                <span class="form-label d-block">Select User <span
+                                                <span class="form-label d-block"><?= __('Select User'); ?> <span
                                                         class="text-danger">*</span></span>
                                                 <select class="form-select js-example-basic-single" name="selected_user"
-                                                    id="permissionUserSelect" required title="<?= __('Selected User') ?>" aria-label="Selected User">
+                                                    id="permissionUserSelect" required title="<?= __('Selected User') ?>" aria-label="<?= htmlspecialchars(__('Selected User'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __('Select User') ?></option>
                                                     <?php
                                                     $assignedUsers = array_column($permissionDetails ?? [], 'user');
@@ -3512,14 +3494,13 @@ if (count((array) $milestones) > 0) {
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
-                                                <small class="text-muted permission-edit-user-hint d-none">User cannot be
-                                                    changed when editing an existing permission.</small>
+                                                <small class="text-muted permission-edit-user-hint d-none"><?= __('User cannot be changed when editing an existing permission.'); ?></small>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-12 mb-3">
                                             <div class="form-group">
-                                                <span class="form-label d-block">Select Contract Permission</span>
+                                                <span class="form-label d-block"><?= __('Select Contract Permission'); ?></span>
                                                 <div class="form-group">
                                                     <?php
                                                     $permissionTypes = ['edit', 'document', 'activity', 'associated', 'permission', 'observer'];
@@ -3527,9 +3508,9 @@ if (count((array) $milestones) > 0) {
                                                         ?>
                                                         <div class="checkbox-section d-inline-block me-3">
                                                             <input class="form-check-input" type="checkbox" name="permissions[]"
-                                                                value="<?= $perm ?>" id="<?= $perm ?>" title="<?= __('Permissions') ?>" aria-label="Permissions">
+                                                                value="<?= $perm ?>" id="<?= $perm ?>" title="<?= __('Permissions') ?>" aria-label="<?= htmlspecialchars(__('Permissions'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <label class="form-check-label" for="<?= $perm ?>">
-                                                                <?= ucfirst($perm) ?> Permission
+                                                                <?= ucfirst($perm) ?> <?= __('Permission'); ?>
                                                             </label>
                                                         </div>
                                                     <?php endforeach; ?>
@@ -3539,23 +3520,21 @@ if (count((array) $milestones) > 0) {
 
                                         <div class="col-lg-12 mb-3 d-none" id="documentPermissionsSection">
                                             <div class="form-group">
-                                                <span class="form-label d-block">Select Document
-                                                    Permissions</span>
+                                                <span class="form-label d-block"><?= __('Select Document Permissions'); ?></span>
                                                 <div class="form-group">
                                                     <?php if (!empty($documents)): ?>
                                                         <?php foreach ($documents as $doc): ?>
                                                             <div class="checkbox-section d-inline-block me-3">
                                                                 <input class="form-check-input doc-checkbox" type="checkbox"
                                                                     name="document_permissions[]" value="<?= $doc['id'] ?>"
-                                                                    id="doc-<?= $doc['id'] ?>" title="<?= __('Document Permissions') ?>" aria-label="Document Permissions">
+                                                                    id="doc-<?= $doc['id'] ?>" title="<?= __('Document Permissions') ?>" aria-label="<?= htmlspecialchars(__('Document Permissions'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                 <label class="form-check-label" for="doc-<?= $doc['id'] ?>">
                                                                     <?= htmlspecialchars($doc['document_name'] ?? $doc['name'] ?? "Document {$doc['id']}") ?>
                                                                 </label>
                                                             </div>
                                                         <?php endforeach; ?>
                                                     <?php else: ?>
-                                                        <p class="text-muted">No documents available. Please add
-                                                            documents first.</p>
+                                                        <p class="text-muted"><?= __('No documents available. Please add documents first.'); ?></p>
                                                     <?php endif; ?>
                                                 </div>
                                             </div>
@@ -3656,7 +3635,7 @@ if (count((array) $milestones) > 0) {
                                                             ?>
                                                             <button type="button" class="btn btn-sm btn-warning edit-permission-btn"
                                                                 data-permission="<?= htmlspecialchars(json_encode($permissionWithLoc)) ?>">
-                                                                <i class="fa fa-edit"></i> Edit
+                                                                <i class="fa fa-edit"></i> <?= __('Edit'); ?>
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -3693,11 +3672,9 @@ if (count((array) $milestones) > 0) {
                                                     </h6>
                                                 </a>
                                                 <p class="text-muted m-b-0">
-                                                    The contract activity
-                                                    "<strong><?= strtoupper($activity['activity'] ?? 'ACTIVITY') ?></strong>"
-                                                    was updated on
+                                                    <?= __('The contract activity "'); ?><strong><?= strtoupper($activity['activity'] ?? 'ACTIVITY') ?></strong><?= __('" was updated on'); ?>
                                                     <?= date('m/d/Y', strtotime($activity['activity_date'] ?? 'now')) ?>
-                                                    at
+                                                    <?= __('at'); ?>
                                                     <?= date('H:i:s', strtotime($activity['activity_date'] ?? 'now')) ?>.
 
                                                 </p>
@@ -3711,8 +3688,7 @@ if (count((array) $milestones) > 0) {
                                         </div>
                                         <div class="col p-l-5">
                                             <h6><?= __('No Activity Found') ?></h6>
-                                            <p class="text-muted m-b-0">There are no recorded activities for
-                                                this contract.</p>
+                                            <p class="text-muted m-b-0"><?= __('There are no recorded activities for this contract.'); ?></p>
                                         </div>
                                     </div>
                                 <?php endif; ?>
@@ -3729,9 +3705,9 @@ if (count((array) $milestones) > 0) {
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addPartyModalLabel">Add New <span id="partyTypeText">Party</span>
+                        <h5 class="modal-title" id="addPartyModalLabel"><?= __('Add New'); ?> <span id="partyTypeText"><?= __('Party'); ?></span>
                         </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                     </div>
                     <div class="modal-body">
                         <form id="addPartyForm" method="POST" class="add-party-form">
@@ -3741,52 +3717,52 @@ if (count((array) $milestones) > 0) {
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group mb-3">
-                                        <span class="form-label d-block"><span id="partyTypeText2">Party</span> Name
+                                        <span class="form-label d-block"><span id="partyTypeText2"><?= __('Party'); ?></span> <?= __('Name'); ?>
                                             <span class="text-danger">*</span></span>
                                         <input type="text" name="party_name" class="form-control"
-                                            placeholder="<?= __('Enter party name') ?>" required title="<?= __('Enter party name') ?>" aria-label="Enter party name">
+                                            placeholder="<?= __('Enter party name') ?>" required title="<?= __('Enter party name') ?>" aria-label="<?= htmlspecialchars(__('Enter party name'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <span class="form-label d-block">Email <span
+                                        <span class="form-label d-block"><?= __('Email'); ?> <span
                                                 class="text-danger">*</span></span>
                                         <input type="email" name="email" class="form-control" placeholder="<?= __('Enter email') ?>"
-                                            required title="<?= __('Enter email') ?>" aria-label="Enter email">
+                                            required title="<?= __('Enter email') ?>" aria-label="<?= htmlspecialchars(__('Enter email'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <span class="form-label d-block">Phone <span
+                                        <span class="form-label d-block"><?= __('Phone'); ?> <span
                                                 class="text-danger">*</span></span>
                                         <input type="text" name="phone" class="form-control"
-                                            placeholder="<?= __('Enter phone number') ?>" required title="<?= __('Enter phone number') ?>" aria-label="Enter phone number">
+                                            placeholder="<?= __('Enter phone number') ?>" required title="<?= __('Enter phone number') ?>" aria-label="<?= htmlspecialchars(__('Enter phone number'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="form-group mb-3">
-                                        <span class="form-label d-block">Company <span
+                                        <span class="form-label d-block"><?= __('Company'); ?> <span
                                                 class="text-danger">*</span></span>
                                         <input type="text" name="company" class="form-control"
-                                            placeholder="<?= __('Enter company name') ?>" required title="<?= __('Enter company name') ?>" aria-label="Enter company name">
+                                            placeholder="<?= __('Enter company name') ?>" required title="<?= __('Enter company name') ?>" aria-label="<?= htmlspecialchars(__('Enter company name'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <span class="form-label d-block">Address <span
+                                        <span class="form-label d-block"><?= __('Address'); ?> <span
                                                 class="text-danger">*</span></span>
                                         <textarea name="address" class="form-control" rows="3"
-                                            placeholder="<?= __('Enter address') ?>" required title="<?= __('Enter address') ?>" aria-label="Enter address"></textarea>
+                                            placeholder="<?= __('Enter address') ?>" required title="<?= __('Enter address') ?>" aria-label="<?= htmlspecialchars(__('Enter address'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <span class="form-label d-block">BP Code <span
+                                        <span class="form-label d-block"><?= __('BP Code'); ?> <span
                                                 class="text-danger">*</span></span>
                                         <input type="text" name="bp_code" class="form-control"
-                                            placeholder="<?= __('Enter BP Code') ?>" required title="<?= __('Enter BP Code') ?>" aria-label="Enter BP Code">
+                                            placeholder="<?= __('Enter BP Code') ?>" required title="<?= __('Enter BP Code') ?>" aria-label="<?= htmlspecialchars(__('Enter BP Code'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
                                 </div>
                             </div>
 
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Cancel') ?></button>
-                            <button type="submit" class="btn btn-primary"> Add <span id="partyTypeText3"></span> Party
+                            <button type="submit" class="btn btn-primary"> <?= __('Add'); ?> <span id="partyTypeText3"></span> <?= __('Party'); ?>
                             </button>
                         </form>
                     </div>
@@ -3802,14 +3778,14 @@ if (count((array) $milestones) > 0) {
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="rechargeModalLabel"><?= __('Select Recharge Plan') ?></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                         </div>
                         <form id="rechargeForm">
                             <div class="modal-body">
                                 <div class="form-group mb-3  w-full">
-                                    <label for="subscriptionType" class="form-label d-block">Select Plan</label>
+                                    <label for="subscriptionType" class="form-label d-block"><?= __('Select Plan'); ?></label>
                                     <select class="form-select js-example-basic-single" id="subscriptionType"
-                                        name="subscription_type" title="<?= __('Subscription Type') ?>" aria-label="Subscription Type">
+                                        name="subscription_type" title="<?= __('Subscription Type') ?>" aria-label="<?= htmlspecialchars(__('Subscription Type'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <option value="30"><?= __('Monthly') ?></option>
                                         <option value="90"><?= __('Quarterly') ?></option>
                                         <option value="180"><?= __('Half Yearly') ?></option>
@@ -3818,10 +3794,10 @@ if (count((array) $milestones) > 0) {
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label for="activationDate" class="form-label d-block">Activation Date <span
+                                    <label for="activationDate" class="form-label d-block"><?= __('Activation Date'); ?> <span
                                             class="text-danger">*</span></label>
                                     <input type="date" id="activationDate" name="activation_date" class="form-control"
-                                        required title="<?= __('Activation Date') ?>" aria-label="Activation Date">
+                                        required title="<?= __('Activation Date') ?>" aria-label="<?= htmlspecialchars(__('Activation Date'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <input type="hidden" name="contract_id" value="<?= $contract_id ?>">
@@ -3842,7 +3818,7 @@ if (count((array) $milestones) > 0) {
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="rechargeHistoryModalLabel"><?= __('Recharge History') ?></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                         </div>
                         <div class="modal-body">
                             <div class="table-responsive">
@@ -3876,25 +3852,25 @@ if (count((array) $milestones) > 0) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editConfirmationModalLabel"><?= __('Save Options') ?></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                     </div>
                     <div class="modal-body">
-                        <p>How would you like to save these changes?</p>
+                        <p><?= __('How would you like to save these changes?'); ?></p>
                         <div class="d-grid gap-2">
                             <button type="button" class="btn btn-outline-primary text-start"
                                 onclick="submitWithOption('Amendment')">
-                                <strong>1. Amendment</strong><br>
-                                <small>Create an Amendment for this contract.</small>
+                                <strong><?= __('1. Amendment'); ?></strong><br>
+                                <small><?= __('Create an Amendment for this contract.'); ?></small>
                             </button>
                             <button type="button" class="btn btn-outline-warning text-start"
                                 onclick="submitWithOption('Addendum')">
-                                <strong>2. Addendum</strong><br>
-                                <small>Create an Addendum for this contract.</small>
+                                <strong><?= __('2. Addendum'); ?></strong><br>
+                                <small><?= __('Create an Addendum for this contract.'); ?></small>
                             </button>
                             <button type="button" class="btn btn-outline-secondary text-start"
                                 onclick="submitWithOption('SaveUpdate')">
-                                <strong>3. Save & Update</strong><br>
-                                <small>Standard update of current contract data.</small>
+                                <strong><?= htmlspecialchars(__('3. Save & Update'), ENT_QUOTES, 'UTF-8'); ?></strong><br>
+                                <small><?= __('Standard update of current contract data.'); ?></small>
                             </button>
                         </div>
                     </div>
@@ -3909,15 +3885,15 @@ if (count((array) $milestones) > 0) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="cancelContractModalLabel"><?= __('Cancel Contract') ?></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to cancel this contract? This action cannot be undone.</p>
+                        <p><?= __('Are you sure you want to cancel this contract? This action cannot be undone.'); ?></p>
                         <div class="form-group">
-                            <label for="cancel_reason">Reason for Cancellation <span
+                            <label for="cancel_reason"><?= __('Reason for Cancellation'); ?> <span
                                     class="text-danger">*</span></label>
                             <textarea class="form-control" id="cancel_reason" rows="3"
-                                placeholder="<?= __('Please enter the reason...') ?>" title="<?= __('Please enter the reason...') ?>" aria-label="Please enter the reason..."></textarea>
+                                placeholder="<?= __('Please enter the reason...') ?>" title="<?= __('Please enter the reason...') ?>" aria-label="<?= htmlspecialchars(__('Please enter the reason...'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

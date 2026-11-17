@@ -15,11 +15,11 @@ function valueemtpydash($val){
         <div class="col-sm-12">
             <div class="card j-pro">
                 <div class="card-header">
-                    <h5>Salary Components</h5>
+                    <h5><?= __('Salary Components'); ?></h5>
                     <div class="card-header-right">
                         <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                             <i class="icofont icofont-reply"></i>
-                            Back
+                            <?= __('Back'); ?>
                         </a>
                     </div>
                 </div>
@@ -27,40 +27,40 @@ function valueemtpydash($val){
                     <table id="new-cons" class="table table-striped table-bordered nowrap">
                         <thead>
                             <tr>
-                                <th scope="col">Emp Code</th>
+                                <th scope="col"><?= __('Emp Code'); ?></th>
                                 <th scope="col">display_name</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Middle Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Joining Sate</th>
-                                <th scope="col">Designation</th>
-                                <th scope="col">Department Name</th>
-                                <th scope="col">Verticals Name</th>
-                                <th scope="col">band Name</th>
-                                <th scope="col">level Name</th>
-                                <th scope="col">location Name</th>
-                                <th scope="col">role Name</th>
-                                <th scope="col">job Title</th>
-                                <th scope="col">employment Category</th><th scope="col">employee Type</th>
-                                <th scope="col">email Id</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">Marital Status</th>
-                                <th scope="col">Wedding Date</th>
-                                <th scope="col">Date Of Birth</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Father Name</th>
-                                <th scope="col">Spouse Name</th>
-                                <th scope="col">Blood Group</th>
-                                <th scope="col">Pan Number</th>
-                                <th scope="col">Pan Issue Date</th>
-                                <th scope="col">PF UAN</th>
-                                <th scope="col">P UAN  Issue Date</th>
-                                <th scope="col">PF No.</th>
-                                <th scope="col">PF Issue Date</th>
-                                <th scope="col">Nationality</th>
-                                <th scope="col">Disability</th>
-                                <th scope="col">Company Cost Yearly</th>
-                                <th scope="col">Company Cost Monthly</th>
+                                <th scope="col"><?= __('First Name'); ?></th>
+                                <th scope="col"><?= __('Middle Name'); ?></th>
+                                <th scope="col"><?= __('Last Name'); ?></th>
+                                <th scope="col"><?= __('Joining Sate'); ?></th>
+                                <th scope="col"><?= __('Designation'); ?></th>
+                                <th scope="col"><?= __('Department Name'); ?></th>
+                                <th scope="col"><?= __('Verticals Name'); ?></th>
+                                <th scope="col"><?= __('band Name'); ?></th>
+                                <th scope="col"><?= __('level Name'); ?></th>
+                                <th scope="col"><?= __('location Name'); ?></th>
+                                <th scope="col"><?= __('role Name'); ?></th>
+                                <th scope="col"><?= __('job Title'); ?></th>
+                                <th scope="col"><?= __('employment Category'); ?></th><th scope="col"><?= __('employee Type'); ?></th>
+                                <th scope="col"><?= __('email Id'); ?></th>
+                                <th scope="col"><?= __('Gender'); ?></th>
+                                <th scope="col"><?= __('Marital Status'); ?></th>
+                                <th scope="col"><?= __('Wedding Date'); ?></th>
+                                <th scope="col"><?= __('Date Of Birth'); ?></th>
+                                <th scope="col"><?= __('Role'); ?></th>
+                                <th scope="col"><?= __('Father Name'); ?></th>
+                                <th scope="col"><?= __('Spouse Name'); ?></th>
+                                <th scope="col"><?= __('Blood Group'); ?></th>
+                                <th scope="col"><?= __('Pan Number'); ?></th>
+                                <th scope="col"><?= __('Pan Issue Date'); ?></th>
+                                <th scope="col"><?= __('PF UAN'); ?></th>
+                                <th scope="col"><?= __('P UAN Issue Date'); ?></th>
+                                <th scope="col"><?= __('PF No.'); ?></th>
+                                <th scope="col"><?= __('PF Issue Date'); ?></th>
+                                <th scope="col"><?= __('Nationality'); ?></th>
+                                <th scope="col"><?= __('Disability'); ?></th>
+                                <th scope="col"><?= __('Company Cost Yearly'); ?></th>
+                                <th scope="col"><?= __('Company Cost Monthly'); ?></th>
                                 <?php foreach($unique as $names){ ?>
                                     <?php if($_GET['MONTH']==1){ ?><th scope="col"><?php echo $names."_Month"; ?></th> <?php
 } ?>

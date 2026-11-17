@@ -27,7 +27,7 @@ $company_with_contacts = $res['company_with_contacts'];
 ?>
 <script type="text/javascript">
     function pageCallHistories(rid){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#crmleadhistories").html(loader);
         jQuery.ajax({
             url: "views/custom_insert_crm_lead_histories.php",
@@ -42,7 +42,7 @@ $company_with_contacts = $res['company_with_contacts'];
     function submitLeadForm(){
         var validations = ajaxFormSubmitValidation();
         if(validations == 0){
-            $(".sbt_loading_en_dis").text("Please Wait........");
+            $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             $(".sbt_loading_en_dis").attr("disabled", true);
             var crm_lead_id = $("#crm_lead_id").val();
             var formData = new FormData();
@@ -81,7 +81,7 @@ $company_with_contacts = $res['company_with_contacts'];
                             }
                     }else{
                         tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',jsonres.res.message,'');
-                        $(".sbt_loading_en_dis").text("Submit");
+                        $(".sbt_loading_en_dis").text(<?php echo json_encode(__('Submit'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                         $(".sbt_loading_en_dis").attr("disabled", false);
                     }
                 }
@@ -177,14 +177,14 @@ $company_with_contacts = $res['company_with_contacts'];
                     <h5 class="f-18 f-w-600 bg-gray p-2"><?= __('Campaign Information') ?></h5>
                     <div class="row mt-3">
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Campaign Name<span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Campaign Name'); ?><span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
                             <input aria-label="campaign_name" class="form-control requried_field" type="text" name="campaign_name" placeholder="<?= __('Campaign Name') ?>" value="<?php echo $transaction['campaign_name']; ?>">
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Originator <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Originator'); ?> <span class="requried">*</span></span>
                              <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Originator" class="form-control js-example-basic-single requried_field" name="originator">
+                            <select aria-label="<?= htmlspecialchars(__('Originator'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="originator">
                                 <option value=""><?= __('Select Any One') ?></option>
                                <?php foreach($application_users as $uval){ ?>
                                     <option value="<?php echo $uval['id']; ?>" <?php echo ($transaction['originator'] == $uval['id'] || ($transaction['originator'] == "" && $_SESSION['userid']== $uval['id']))?"selected":"";?>><?php echo $uval['display_name']; ?></option>
@@ -192,18 +192,18 @@ $company_with_contacts = $res['company_with_contacts'];
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Campaign Type <span class="requried text-danger">*</span></span>
+                            <span class="form-label"><?= __('Campaign Type'); ?> <span class="requried text-danger">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Crm Campaign Type" class="form-control js-example-basic-single requried_field" name="crm_campaign_type">
+                            <select aria-label="<?= htmlspecialchars(__('Crm Campaign Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="crm_campaign_type">
                                 <?php foreach($crm_general_codes['CAMPAIGNTYPE'] as $lsval){ ?>
                                     <option value="<?php echo $lsval['value']; ?>" <?php echo $transaction['crm_campaign_type'] == $lsval['value']?"selected":"";?>><?php echo $lsval['label']; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="col-lg-6 form-group w-full">
-                            <span class="form-label">Campaign Objective <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Campaign Objective'); ?> <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <select aria-label="Campaign Objective" class="form-control js-example-basic-single requried_field" name="campaign_objective">
+                            <select aria-label="<?= htmlspecialchars(__('Campaign Objective'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single requried_field" name="campaign_objective">
                                 <?php foreach($crm_general_codes['CAMPAIGNOBJECTIVES'] as $lsval){ ?>
                                     <option value="<?php echo $lsval['value']; ?>" <?php echo $transaction['campaign_objective'] == $lsval['value']?"selected":"";?>><?php echo $lsval['label']; ?></option>
                                 <?php } ?>
@@ -211,32 +211,32 @@ $company_with_contacts = $res['company_with_contacts'];
                         </div>
 
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">Start Sate <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('Start Sate'); ?> <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="Start Date" class="form-control startdatepicker requried_field" type="text" name="campaign_start_date" placeholder="<?= __('Start Date') ?>" value="<?php echo $transaction['campaign_start_date']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control startdatepicker requried_field" type="text" name="campaign_start_date" placeholder="<?= __('Start Date') ?>" value="<?php echo $transaction['campaign_start_date']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
-                            <span class="form-label">End Date <span class="requried">*</span></span>
+                            <span class="form-label"><?= __('End Date'); ?> <span class="requried">*</span></span>
                             <span class="d-block error-message text-danger"></span>
-                            <input aria-label="End Date" class="form-control requried_field enddatepicker" type="text" name="campaign_end_date" placeholder="<?= __('End Date') ?>" value="<?php echo $transaction['campaign_end_date']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control requried_field enddatepicker" type="text" name="campaign_end_date" placeholder="<?= __('End Date') ?>" value="<?php echo $transaction['campaign_end_date']; ?>">
                         </div>
                         <div class="col-lg-6 form-group">
                             <span class="form-label"><?= __('Total Budget') ?></span>
-                            <input aria-label="Total Budget" class="form-control" type="number" name="total_budget" placeholder="<?= __('Total Budget') ?>" value="<?php echo $transaction['total_budget']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Total Budget'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="number" name="total_budget" placeholder="<?= __('Total Budget') ?>" value="<?php echo $transaction['total_budget']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Redirect URL') ?></span>
-                            <input aria-label="Website URL" class="form-control " type="text" name="redirect_url" placeholder="<?= __('Website URL') ?>" value="<?php echo $transaction['redirect_url']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Website URL'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control " type="text" name="redirect_url" placeholder="<?= __('Website URL') ?>" value="<?php echo $transaction['redirect_url']; ?>">
                         </div>
 
                          <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Contact Email Id') ?></span>
 
-                            <input aria-label="Contact Email" class="form-control" type="email" name="contact_email_id" placeholder="<?= __('Contact Email') ?>" value="<?php echo $transaction['contact_email_id']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Contact Email'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="email" name="contact_email_id" placeholder="<?= __('Contact Email') ?>" value="<?php echo $transaction['contact_email_id']; ?>">
                         </div>
                         <div class="col-lg-6  form-group">
                             <span class="form-label"><?= __('Contact No.') ?></span>
-                            <input aria-label="Contact No." class="form-control" type="phone" name="contact_no" placeholder="<?= __('Contact No.') ?>" value="<?php echo $transaction['contact_no']; ?>">
+                            <input aria-label="<?= htmlspecialchars(__('Contact No.'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="phone" name="contact_no" placeholder="<?= __('Contact No.') ?>" value="<?php echo $transaction['contact_no']; ?>">
                         </div>
                         <div class="col-lg-6">
                             <span class="form-label"><?= __('Image') ?></span>
@@ -246,7 +246,7 @@ $company_with_contacts = $res['company_with_contacts'];
                                         <span> <i class="fa fa-camera"></i> &nbsp; <?= __('Change Image') ?></span>
                                     </label>
                                     <input type="file" name="image" id="display_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                                    <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="Attachment Preview" />
+                                    <img src="<?php echo "uploads/all/".$transaction['image'] ; ?>" id="outputdisplay_image" width="200" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>" />
                                     <input type="hidden" name="hid_image" value="<?php echo $transaction['image'] ;  ?>">
                                 </div>
                             </div>
@@ -254,7 +254,7 @@ $company_with_contacts = $res['company_with_contacts'];
                         <div class="col-lg-12 form-group">
                             <span class="form-label"><?= __('Description') ?></span>
                             <div class="grow-wrap">
-                                <textarea aria-label="Remark" name="remark" placeholder="<?= __('Remark') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
+                                <textarea aria-label="<?= htmlspecialchars(__('Remark'), ENT_QUOTES, 'UTF-8'); ?>" name="remark" placeholder="<?= __('Remark') ?>" class="border form-control" rows="3" oninput="this.parentNode.dataset.replicatedValue = this.value"><?php echo $transaction['remark']; ?></textarea>
                             </div>
                         </div>
                    </div>

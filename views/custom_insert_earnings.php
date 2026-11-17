@@ -158,7 +158,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
             <h5><?= __('Earnings') ?></h5>
             <div class="card-header-right table-card-header ">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                    <i class="icofont icofont-reply"></i>Back
+                    <i class="icofont icofont-reply"></i><?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -168,31 +168,31 @@ $_SESSION['apply_js']['multiselest'] = '1';
                     <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
                         <div class="row j-content">
                             <div class="form-group col-lg-6">
-                                <span>Category Check</span>
-                                <select aria-label="Category" class="form-select js-example-basic-single" id="kt_select2_41" name="category_id">
+                                <span><?= __('Category Check'); ?></span>
+                                <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="kt_select2_41" name="category_id">
                                     <option value="0"><?= __('Select Any one Category') ?></option>
                                     <?php foreach($salary_categories as $salary_categorie){ ?>
                                         <option value="<?php echo $salary_categorie['id']; ?>" <?php if($role['category_id']==$salary_categorie['id'] ){ echo "selected";
 } ?>> <?php echo $salary_categorie['name']; ?> </option>
                                     <?php } ?>
                                 </select>
-                                <div style="display: none;color: red;" id="category_id_err"> Please Select Category </div>
+                                <div style="display: none;color: red;" id="category_id_err"> <?= __('Please Select Category'); ?> </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="">Earnings Name</span>
-                                <input aria-label="Name" class="form-control" type="text" id="name" name="name" value="<?php echo $role['name']; ?>">
-                                <div style="display: none;color: red;" id="name_err"> Please enter Earnings Name </div>
+                                <span class=""><?= __('Earnings Name'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="name" name="name" value="<?php echo $role['name']; ?>">
+                                <div style="display: none;color: red;" id="name_err"> <?= __('Please enter Earnings Name'); ?> </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="">Earnings System Code</span>
+                                <span class=""><?= __('Earnings System Code'); ?></span>
                                 <div id="code_text" <?php if($show_text == 'N'){ ?> style="display: none;" <?php
 } ?>>
-                            <input aria-label="Input field" class="form-control" <?php if(in_array($role['code'],(array)$fixedcd)){ echo "readonly";
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" <?php if(in_array($role['code'],(array)$fixedcd)){ echo "readonly";
 } ?> type="text" id="code" name="code"  value="<?php echo $role['code']; ?>">
                             </div>
                                 <div id="code_select" <?php if($show_select == 'N'){ ?> style="display: none;" <?php
 } ?> >
-                                <select aria-label="Code Select" class="form-control js-example-basic-single" name="code_select" id="code_2" onchange="othervalchange(this.value)" >
+                                <select aria-label="<?= htmlspecialchars(__('Code Select'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" name="code_select" id="code_2" onchange="othervalchange(this.value)" >
                                     <option value=""><?= __('Select Any') ?></option>
                                     <?php foreach($show_fixed as $keyfix=>$fixed){ ?>
                                         <option value="<?php echo $keyfix; ?>"><?php echo $fixed; ?></option>
@@ -201,65 +201,65 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                 </select>
                                 </div>
 
-                                <div style="display: none;color: red;" id="code_err"> Please enter Earnings System Code </div>
+                                <div style="display: none;color: red;" id="code_err"> <?= __('Please enter Earnings System Code'); ?> </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span class="">Printed on Payslip as </span>
-                                <input aria-label="Payslip Name" class="form-control" type="text" id="payslip_name" name="payslip_name" value="<?php echo $role['payslip_name']; ?>">
-                                <div style="display: none;color: red;" id="payslip_name_err"> Please enter Printed on Payslip as  </div>
+                                <span class=""><?= __('Printed on Payslip as'); ?> </span>
+                                <input aria-label="<?= htmlspecialchars(__('Payslip Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="payslip_name" name="payslip_name" value="<?php echo $role['payslip_name']; ?>">
+                                <div style="display: none;color: red;" id="payslip_name_err"> <?= __('Please enter Printed on Payslip as'); ?>  </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span>Calculation Type</span>
+                                <span><?= __('Calculation Type'); ?></span>
                                 <div class="radio radio-outline  mt-1">
                                     <?php $ctct =  array('A' => 'Amount', 'P'=>'Percentage', 'F'=>'Formula', 'L'=>'Link', 'N'=>'None');
                                         foreach ($ctct as $ckey => $ct) { ?>
-                                            <label class="radio radio-inline"> <input aria-label="Calculation Type" type="radio" onclick="calculationtype(this.value)" name="calculation_type" <?php if($role['calculation_type']==$ckey){ echo "checked";
+                                            <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Calculation Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" onclick="calculationtype(this.value)" name="calculation_type" <?php if($role['calculation_type']==$ckey){ echo "checked";
 } ?> value="<?php echo $ckey; ?>" onkeydown="">    <span></span><?php echo $ct; ?> </label>
 
                                         <?php } ?>
 
 
                                 </div>
-                                <div style="display: none;color: red;" id="calculation_type_err"> Please Select Calculation Type </div>
+                                <div style="display: none;color: red;" id="calculation_type_err"> <?= __('Please Select Calculation Type'); ?> </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span>Calculation Mode</span>
+                                <span><?= __('Calculation Mode'); ?></span>
                                 <div class="radio radio-outline  mt-1">
 
-                                    <label class="radio radio-inline"> <input aria-label="Calculation Mode" type="radio" checked="" name="calculation_mode" value="ADD" <?php if($role['calculation_mode']=='ADD'){ echo "checked";
-} ?>>    <span></span>ADD </label>
-                                    <label class="radio radio-inline"> <input aria-label="Calculation Mode" type="radio" name="calculation_mode" value="MINUS" <?php if($role['calculation_mode']=='MINUS'){ echo "checked";
-} ?>>    <span></span>MINUS </label>
-                                    <label class="radio radio-inline"> <input aria-label="Calculation Mode" type="radio" name="calculation_mode" value="STATIC" <?php if($role['calculation_mode']=='STATIC'){ echo "checked";
-} ?>>    <span></span>Static </label>
+                                    <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Calculation Mode'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" checked="" name="calculation_mode" value="ADD" <?php if($role['calculation_mode']=='ADD'){ echo "checked";
+} ?>>    <span></span><?= __('ADD'); ?> </label>
+                                    <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Calculation Mode'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="calculation_mode" value="MINUS" <?php if($role['calculation_mode']=='MINUS'){ echo "checked";
+} ?>>    <span></span><?= __('MINUS'); ?> </label>
+                                    <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Calculation Mode'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="calculation_mode" value="STATIC" <?php if($role['calculation_mode']=='STATIC'){ echo "checked";
+} ?>>    <span></span><?= __('Static'); ?> </label>
                                 </div>
-                                <div style="display: none;color: red;" id="calculation_mode_err"> Please Select Calculation Mode </div>
+                                <div style="display: none;color: red;" id="calculation_mode_err"> <?= __('Please Select Calculation Mode'); ?> </div>
                             </div>
                             <div id="CTTAPN" class="col-lg-12 row" <?php if($role['calculation_type']=="F" ){ ?> style="display: none;" <?php
 } ?>>
                                 <div class="form-group col-lg-6">
-                                    <span class="">Value</span>
-                                    <input aria-label="Calculation Number" class="form-control" type="text" id="calculation_number" name="calculation_number" value="<?php echo $role['calculation_number']; ?>">
-                                    <div style="display: none;color: red;" id="calculation_number_err"> Please enter Value </div>
+                                    <span class=""><?= __('Value'); ?></span>
+                                    <input aria-label="<?= htmlspecialchars(__('Calculation Number'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" id="calculation_number" name="calculation_number" value="<?php echo $role['calculation_number']; ?>">
+                                    <div style="display: none;color: red;" id="calculation_number_err"> <?= __('Please enter Value'); ?> </div>
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <span>Calculation Base</span>
-                                    <select aria-label="Calculation Category" class="form-select js-example-basic-single" id="kt_select2_42" name="calculation_category">
+                                    <span><?= __('Calculation Base'); ?></span>
+                                    <select aria-label="<?= htmlspecialchars(__('Calculation Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="kt_select2_42" name="calculation_category">
                                         <option value="0"><?= __('Select Any one Calculation Base') ?></option>
                                         <?php foreach($codes as $code){ ?>
                                             <option <?php if($role['calculation_category']==$code['code']){ echo "selected";
 } ?> value="<?php echo $code['code']; ?>"><?php echo $code['code']; ?></option>
                                         <?php } ?>
                                     </select>
-                                    <div style="display: none;color: red;" id="calculation_category_err"> Please Select Calculation Base </div>
+                                    <div style="display: none;color: red;" id="calculation_category_err"> <?= __('Please Select Calculation Base'); ?> </div>
                                 </div>
                             </div>
                             <div class="col-lg-12" id="CTTL"  <?php if($role['calculation_type']!="L"){ ?> style="display: none;" <?php
 } ?>>
                                 <div class="form-group col-lg-6">
-                                    <span>Calculation Link</span>
+                                    <span><?= __('Calculation Link'); ?></span>
                                     <?php $links = array('PF'=>'Provident Fund', 'ESI'=>'ESI', 'PTX'=>'Professional Tax', 'GU'=>'Gratuity','EMPLOYERPF'=>'Employer Provident Fund','EMPLOYERESI'=>'Employer ESI', 'SPA'=>'SPA'); ?>
-                                    <select aria-label="Calculation Link" class="form-select js-example-basic-single" id="kt_select2_42_2" name="calculation_link">
+                                    <select aria-label="<?= htmlspecialchars(__('Calculation Link'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" id="kt_select2_42_2" name="calculation_link">
                                         <option value="0"><?= __('Select Any one Calculation Link') ?></option>
                                         <?php foreach($links as $clink=>$link){ ?>
                                             <option <?php if($role['calculation_link']==$clink){ echo "selected";
@@ -270,7 +270,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
                             </div>
                             <div class="form-group col-lg-12" id="CTTF" <?php if($role['calculation_type']!="F"){ ?> style="display: none;" <?php
 } ?> >
-                                <span>Formula</span>
+                                <span><?= __('Formula'); ?></span>
                                 <div class="row align-items-center" style="margin-top: 10px;padding: 3px;">
                                 <div class="col-lg-8">
                                     <table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem">
@@ -292,9 +292,9 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                                 <tr id="qur_div_<?php echo $count; ?>" >
                                                     <td id='other_<?php echo $count; ?>'>
                                                         <?php if(is_numeric($td['lcode'])){ ?>
-                                                            <input aria-label="Lcode[]" type="text" class="form-control fitemRow" name= "lcode[]"  id="lcode_<?php echo $count; ?>" value="<?php echo $td['lcode']; ?>" >
+                                                            <input aria-label="<?= htmlspecialchars(__('Lcode'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control fitemRow" name= "lcode[]"  id="lcode_<?php echo $count; ?>" value="<?php echo $td['lcode']; ?>" >
                                                          <?php }else{ ?>
-                                                        <select aria-label="Select option" class="form-control fitemRow form-select js-example-basic-single" id="lcode_<?php echo $count; ?>" name= "lcode[]" onchange="chekother(this.value,<?php echo $count; ?>)" >
+                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control fitemRow form-select js-example-basic-single" id="lcode_<?php echo $count; ?>" name= "lcode[]" onchange="chekother(this.value,<?php echo $count; ?>)" >
                                                             <option value=""><?= __('Select') ?></option>
                                                             <?php foreach ($codes as  $code) { ?>
                                                                    <option value="<?php echo $code['code']; ?>" <?php if($td['lcode'] == $code['code']){ echo "selected";
@@ -306,7 +306,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                                     </td>
                                                     <td>
 
-                                                        <select aria-label="Select option" class="form-control form-select js-example-basic-single" id="loperand_<?php echo $count; ?>" name= "loperand[]"  >
+                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="loperand_<?php echo $count; ?>" name= "loperand[]"  >
                                                             <option value=""><?= __('Select') ?></option>
                                                         <?php foreach ($operators as $dd) {  ?>
                                                             <option  <?php if($td['loperand'] == $dd){ echo "selected";
@@ -317,9 +317,9 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                                     </td>
                                                     <td id='rother_<?php echo $count; ?>'>
                                                         <?php if(is_numeric($td['rcode'])){ ?>
-                                                            <input aria-label="Rcode[]" type="text" class="form-control" name= "rcode[]"  id="rcode_<?php echo $count; ?>" value="<?php echo $td['rcode']; ?>" >
+                                                            <input aria-label="<?= htmlspecialchars(__('Rcode'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name= "rcode[]"  id="rcode_<?php echo $count; ?>" value="<?php echo $td['rcode']; ?>" >
                                                          <?php }else{ ?>
-                                                        <select aria-label="Select option" class="form-control  form-select js-example-basic-single" id="rcode_<?php echo $count; ?>" name= "rcode[]" onchange="chekother(this.value,<?php echo $count; ?>)"  >
+                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control  form-select js-example-basic-single" id="rcode_<?php echo $count; ?>" name= "rcode[]" onchange="chekother(this.value,<?php echo $count; ?>)"  >
                                                             <option value=""><?= __('Select') ?></option>
                                                             <?php foreach ($codes as  $code) { ?>
                                                                    <option value="<?php echo $code['code']; ?>" <?php if($td['rcode'] == $code['code']){ echo "selected";
@@ -330,7 +330,7 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                                         <?php } ?>
                                                     </td>
                                                     <td>
-                                                        <select aria-label="Select option" class="form-control form-select js-example-basic-single" id="roperand_<?php echo $count; ?>" name= "roperand[]"  >
+                                                        <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="roperand_<?php echo $count; ?>" name= "roperand[]"  >
                                                             <option value=""><?= __('Select') ?></option>
                                                             <?php foreach ($operators as $dd) {  ?>
                                                             <option  <?php if($td['roperand'] == $dd){ echo "selected";
@@ -352,59 +352,59 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                 <button type="button" class="btn btn-primary col-lg-4" onclick="createFormula()"><?= __('Bulid Formula') ?></button>
                                 </div>
                                 <div class="col-lg-4">
-                                        <span>Show Formula</span>
+                                        <span><?= __('Show Formula'); ?></span>
                                         <div class="kt-input-icon">
-                                            <textarea aria-label="Calculation Formula" class="form-control"  type="text" id="dis_formula" name="calculation_formula" style="height: 80px;" value=""> <?php echo $role['calculation_formula']; ?></textarea>
+                                            <textarea aria-label="<?= htmlspecialchars(__('Calculation Formula'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text" id="dis_formula" name="calculation_formula" style="height: 80px;" value=""> <?php echo $role['calculation_formula']; ?></textarea>
                                         </div>
                                 </div>
                             </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span>Display Seq</span>
+                                <span><?= __('Display Seq'); ?></span>
                                 <div>
-                                    <input aria-label="Display Seq" class="form-control text-right" id="" type="text" name="display_seq" value="<?php echo $role['display_seq']; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Display Seq'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right" id="" type="text" name="display_seq" value="<?php echo $role['display_seq']; ?>">
 
                                 </div>
                             </div>
                             <div class="form-group col-lg-3">
-                                <span>Taxable</span>
+                                <span><?= __('Taxable'); ?></span>
                                 <div class="radio radio-outline  mt-1">
 
-                                    <label class="radio radio-inline"> <input aria-label="Taxable" type="radio" checked="" name="taxable" value="0" <?php if($role['taxable']=='0'){ echo "checked";
-} ?>>    <span></span>Yes </label>
+                                    <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Taxable'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" checked="" name="taxable" value="0" <?php if($role['taxable']=='0'){ echo "checked";
+} ?>>    <span></span><?= __('Yes'); ?> </label>
 
-                                    <label class="radio radio-inline"> <input aria-label="Taxable" type="radio" name="taxable" value="1" <?php if($role['taxable']=='1'){ echo "checked";
-} ?>>    <span></span>No </label>
+                                    <label class="radio radio-inline"> <input aria-label="<?= htmlspecialchars(__('Taxable'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="taxable" value="1" <?php if($role['taxable']=='1'){ echo "checked";
+} ?>>    <span></span><?= __('No'); ?> </label>
                                 </div>
-                                <div style="display: none;color: red;" id="taxable_err"> Please Select Taxable </div>
+                                <div style="display: none;color: red;" id="taxable_err"> <?= __('Please Select Taxable'); ?> </div>
                             </div>
                             <div class="form-group col-lg-3">
-                                <span>Taxable Limit</span>
+                                <span><?= __('Taxable Limit'); ?></span>
                                 <div>
-                                    <input aria-label="Taxable Limit" class="form-control text-right" id="" type="text" name="taxable_limit" value="<?php echo $role['taxable_limit']; ?>">
-
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-3">
-                                <span>Min Range</span>
-                                <div>
-                                    <input aria-label="Min Range" class="form-control text-right" id="" type="text" name="min_range" value="<?php echo $role['min_range']; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Taxable Limit'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right" id="" type="text" name="taxable_limit" value="<?php echo $role['taxable_limit']; ?>">
 
                                 </div>
                             </div>
                             <div class="form-group col-lg-3">
-                                <span>Max Range</span>
+                                <span><?= __('Min Range'); ?></span>
                                 <div>
-                                    <input aria-label="Max Range" class="form-control text-right" id="" type="text" name="max_range" value="<?php echo $role['max_range']; ?>">
+                                    <input aria-label="<?= htmlspecialchars(__('Min Range'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right" id="" type="text" name="min_range" value="<?php echo $role['min_range']; ?>">
+
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-3">
+                                <span><?= __('Max Range'); ?></span>
+                                <div>
+                                    <input aria-label="<?= htmlspecialchars(__('Max Range'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right" id="" type="text" name="max_range" value="<?php echo $role['max_range']; ?>">
 
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <span>Notes</span>
+                                <span><?= __('Notes'); ?></span>
                                 <div class="kt-radio-inline">
-                                    <textarea aria-label="Note" type="text" class="form-control " rows="5" cols="5" id="note" name="note"><?php echo $role['note']; ?></textarea>
+                                    <textarea aria-label="<?= htmlspecialchars(__('Note'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control " rows="5" cols="5" id="note" name="note"><?php echo $role['note']; ?></textarea>
                                 </div>
-                                <div style="display: none;color: red;" id="note_err"> Please Select Notes </div>
+                                <div style="display: none;color: red;" id="note_err"> <?= __('Please Select Notes'); ?> </div>
                             </div>
                             <input type="hidden" name="in_date_pic" value="">
                             <input type="hidden" name="in_currency_fileds" value="">
@@ -421,13 +421,13 @@ $_SESSION['apply_js']['multiselest'] = '1';
                                   $to= toDate($role['to_date']);?>
                         <div class="row ml- mr-20  j-datebutoon ">
                             <div class="col-lg-6  col-xs-12 form-group">
-                                <span>From Date</span>
-                                <input aria-label="From Date" class="form-control" type="date" name="from_date" value="<?php echo $from; ?>" readonly="">
+                                <span><?= __('From Date'); ?></span>
+                                <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="from_date" value="<?php echo $from; ?>" readonly="">
                             </div>
                             <div class="col-lg-6  col-xs-12 form-group">
-                                <span>To Date</span>
+                                <span><?= __('To Date'); ?></span>
 
-                                <input aria-label="To Date" class="form-control" type="date" name="to_date" value="<?php echo $to; ?>">
+                                <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="to_date" value="<?php echo $to; ?>">
                             </div>
                         </div>
                         <div class="card-footer j-datebutoon j-wrapper-60p">
@@ -437,17 +437,17 @@ $_SESSION['apply_js']['multiselest'] = '1';
 
                                     <input type="hidden" name="hid" value=<?php echo $rid; ?> />
                                         <input type="hidden" name="submit" value="Update" />
-                                    <button id="kt_llogin_signup_submit" class="btn btn-primary mr-2" ><i class="la la-check"></i>Upadate</button>
+                                    <button id="kt_llogin_signup_submit" class="btn btn-primary mr-2" ><i class="la la-check"></i><?= __('Upadate'); ?></button>
                                 <?php }else{ ?>
                                     <input type="hidden" name="submit" value="Add">
-                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i>Save &amp; exit</button>
-                                    <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="continue"><i class="la la-check-circle"></i>Save &amp; continue</button>
+                                    <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="exit"><i class="la la-check"></i><?= htmlspecialchars(__('Save & exit'), ENT_QUOTES, 'UTF-8'); ?></button>
+                                    <button id="kt_login_signin_submit_continue" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2" name="submit_value" value="continue"><i class="la la-check-circle"></i><?= htmlspecialchars(__('Save & continue'), ENT_QUOTES, 'UTF-8'); ?></button>
 
                                 <?php } ?>
-                                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2"><i class="la la-close"></i>Cancel</button>
+                                    <button type="reset" class="btn btn-light-primary font-weight-bolder mr-2"><i class="la la-close"></i><?= __('Cancel'); ?></button>
                                 </div>
                                 <div class="col-lg-3 text-right">
-                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i>Delete</button>
+                                    <button type="reset" disabled="disabled" class="btn btn-danger"><i class="la la-trash"></i><?= __('Delete'); ?></button>
                                 </div>
                             </div>
                         </div>

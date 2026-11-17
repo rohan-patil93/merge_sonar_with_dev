@@ -17,17 +17,17 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5>AR Aging Report (due/overdue receivables)</h5>
+      <h5><?= __('AR Aging Report (due/overdue receivables)'); ?></h5>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
           <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
             data-dropdown-out="fadeOut">
             <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=PO Details"
-              target="_blank">CSV</a>
+              target="_blank"><?= __('CSV'); ?></a>
             <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=PO Details"
-              target="_blank">Excel</a>
+              target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -36,11 +36,11 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
       <form method="post" action="">
         <div class="row col-lg-12 align-items-end">
           <div class="col-lg-6 mb-2">
-            <span class="form-label">Date <label for="date" class="text-danger">*</span></label>
+            <span class="form-label"><?= __('Date'); ?> <label for="date" class="text-danger">*</span></label>
             <input type="date" class="form-control" name="date" id="date" required>
           </div>
           <div class="col-lg-2">
-            <button type="submit" name="applyform" value="apply" class="btn btn-info">Search</button>
+            <button type="submit" name="applyform" value="apply" class="btn btn-info"><?= __('Search'); ?></button>
           </div>
         </div>
       </form>
@@ -54,20 +54,20 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
         <thead>
           <tr style="background-color: #eeeeee;">
             <th scope="col">#</th>
-            <th scope="col">Vendor Name</th>
-            <th scope="col">Invoice No.</th>
-            <th scope="col">Invoice Date</th>
-            <th scope="col">Due Date</th>
-            <th scope="col" class="text-end">Invoice Amount (₹)</th>
-            <th scope="col" class="text-end">Paid (₹)</th>
-            <th scope="col" class="text-end">Outstanding (₹)</th>
-            <th scope="col" class="text-end">Days Overdue</th>
-            <th scope="col" class="text-end">0–30 Days</th>
-            <th scope="col" class="text-end">31–60 Days</th>
-            <th scope="col" class="text-end">61–90 Days</th>
-            <th scope="col" class="text-end">91–180 Days</th>
-            <th scope="col" class="text-end">181+ Days</th>
-            <th scope="col">Status</th>
+            <th scope="col"><?= __('Vendor Name'); ?></th>
+            <th scope="col"><?= __('Invoice No.'); ?></th>
+            <th scope="col"><?= __('Invoice Date'); ?></th>
+            <th scope="col"><?= __('Due Date'); ?></th>
+            <th scope="col" class="text-end"><?= __('Invoice Amount (₹)'); ?></th>
+            <th scope="col" class="text-end"><?= __('Paid (₹)'); ?></th>
+            <th scope="col" class="text-end"><?= __('Outstanding (₹)'); ?></th>
+            <th scope="col" class="text-end"><?= __('Days Overdue'); ?></th>
+            <th scope="col" class="text-end"><?= __('0–30 Days'); ?></th>
+            <th scope="col" class="text-end"><?= __('31–60 Days'); ?></th>
+            <th scope="col" class="text-end"><?= __('61–90 Days'); ?></th>
+            <th scope="col" class="text-end"><?= __('91–180 Days'); ?></th>
+            <th scope="col" class="text-end"><?= __('181+ Days'); ?></th>
+            <th scope="col"><?= __('Status'); ?></th>
           </tr>
         </thead>
         <tbody>
@@ -106,7 +106,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
           } else { ?>
             <tr>
               <td colspan="15" class="text-center text-muted fw-bold">
-                <i class="ti-alert text-warning"></i> No Data Available
+                <i class="ti-alert text-warning"></i> <?= __('No Data Available'); ?>
               </td>
             </tr>
           <?php } ?>

@@ -82,7 +82,7 @@ $get_option = $_REQUEST['option'];
 <script type="text/javascript">
 	//$(document).ready(function(){
 		$(document).on('click', '#checkall1', function() {
-			alert('haii');
+			alert(<?php echo json_encode(__('haii'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
 	  // $(".itemRow").prop("checked", this.checked);
 
 	});
@@ -117,7 +117,7 @@ $get_option = $_REQUEST['option'];
 			});
 		}
 		function filterSubmitForm(){
-			var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+			var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     		$("#filterpageshow").html(loader);
 			var frmdetails = $("#filterformid").serialize();
 			jQuery.ajax({
@@ -171,12 +171,12 @@ $get_option = $_REQUEST['option'];
 <div class="card" >
 
 	<div class="card-header">
-		<h5>Approved <?php echo $rr_data['page_title']!="" ? $rr_data['page_title'] : ucwords($_REQUEST['table']); ?></h5>
+		<h5><?= __('Approved'); ?> <?php echo $rr_data['page_title']!="" ? $rr_data['page_title'] : ucwords($_REQUEST['table']); ?></h5>
 		<?php if($_POST['ajaxpage'] != 'Y'){ ?>
 		<div class="card-header-right">
 			<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
 				<i class="icofont icofont-reply"></i>
-				Back
+				<?= __('Back'); ?>
 			</a>
 		</div>
 		<?php } ?>
@@ -188,8 +188,8 @@ $get_option = $_REQUEST['option'];
 				<div class="row kt-margin-b-20">
 					<div class="col-lg-2 kt-margin-b-10-tablet-and-mobile mb-2">
 						<!-- <label  class="form-label"><?php echo $cus_list['lable']; ?>:</label> -->
-						<select class="form-control form-select js-example-basic-single"  name="vendor_id" aria-label="Vendor Id">
-							<option value=""> All <?php echo $cus_list['lable']; ?> </option>
+						<select class="form-control form-select js-example-basic-single"  name="vendor_id" aria-label="<?= htmlspecialchars(__('Vendor Id'), ENT_QUOTES, 'UTF-8'); ?>">
+							<option value=""> <?= __('All'); ?> <?php echo $cus_list['lable']; ?> </option>
 							<?php foreach ($selectdata as $selectkey => $selectvalue) {  ?>
 								<option  <?php if($ress['vendor_id'] == $selectkey  ){ ?> selected <?php } ?> value="<?php echo $selectkey; ?>"><?php echo $selectvalue; ?></option>
 							<?php  } ?>
@@ -197,10 +197,10 @@ $get_option = $_REQUEST['option'];
 					</div>
 					<div class="col-lg-2 kt-margin-b-10-tablet-and-mobile mb-2">
 						<!-- <label  class="form-label"><?php ?>:</label> -->
-						<select class="form-control form-select js-example-basic-single" id="kt_select2_42" name="opex_cpex" aria-label="Opex Cpex">
-							<option value=""> All CAPEX / OPEX </option>
+						<select class="form-control form-select js-example-basic-single" id="kt_select2_42" name="opex_cpex" aria-label="<?= htmlspecialchars(__('Opex Cpex'), ENT_QUOTES, 'UTF-8'); ?>">
+							<option value=""> <?= __('All CAPEX / OPEX'); ?> </option>
 							<?php foreach($capexopex as $selectcat){ ?>
-								<option  <?php if($ress['opex_cpex'] == $selectcat['genc_detail_code'] ){ ?> selected <?php } ?> value="<?php echo $selectcat['genc_detail_code']; ?>"><?php echo $selectcat['genc_detail_name']; ?></option>
+								<option  <?php if($ress['opex_cpex'] == $selectcat['genc_detail_code'] ){ ?> selected <?php } ?> value="<?php echo $selectcat['genc_detail_code']; ?>"><?php echo __($selectcat['genc_detail_name']); ?></option>
 							<?php } ?>
 						</select>
 					</div>
@@ -231,31 +231,31 @@ $get_option = $_REQUEST['option'];
 								<input type="hidden" name="shortcode_date" id="shortcode_date" value="TD">
 							<div class="btn-group dropdown-split-primary" style="width: 100%;">
 							    <button type="button" class="btn btn-primary" style="width: 80%;height: 40px;"><i class="ti-calendar"></i>
-							    	<span id="btn_date">This Month</span>
+							    	<span id="btn_date"><?= __('This Month'); ?></span>
 							    </button>
 							    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 20%;height: 40px;">
-							        <span class="visually-hidden">Toggle primary</span>
+							        <span class="visually-hidden"><?= __('Toggle primary'); ?></span>
 							    </button>
 							    <div class="dropdown-menu">
-							       	<a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TD"?"active":"";?> empty_active" id="TD" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')">Today</a>
-							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week')));?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday ')));?>')">This Week</a>
-							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TM"?"active":"";?> empty_active" id="TM" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')">This Month</a>
-							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TY"?"active":"";?> empty_active" id="TY" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')">This Year</a>
+							       	<a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TD"?"active":"";?> empty_active" id="TD" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')"><?= __('Today'); ?></a>
+							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week')));?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday ')));?>')"><?= __('This Week'); ?></a>
+							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TM"?"active":"";?> empty_active" id="TM" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')"><?= __('This Month'); ?></a>
+							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TY"?"active":"";?> empty_active" id="TY" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')"><?= __('This Year'); ?></a>
 							        <div class="dropdown-divider"></div>
-							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>')">Yesterday</a>
-							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')">Previous Week</a>
-							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PM"?"active":"";?> empty_active" id="PM" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01",strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t",strtotime('last month'))); ?>')">Previous Month</a>
-							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PY"?"active":"";?> empty_active" id="PY" href="#!" onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date("Y-01-01",strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31",strtotime('last year'))); ?>')">Previous Year</a>
+							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>')"><?= __('Yesterday'); ?></a>
+							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')"><?= __('Previous Week'); ?></a>
+							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PM"?"active":"";?> empty_active" id="PM" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01",strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t",strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
+							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PY"?"active":"";?> empty_active" id="PY" href="#!" onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date("Y-01-01",strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31",strtotime('last year'))); ?>')"><?= __('Previous Year'); ?></a>
 							        <div class="dropdown-divider"></div>
-							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="CD"?"active":""; ?> empty_active" id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')">Custom Date</a>
+							        <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="CD"?"active":""; ?> empty_active" id="CD" href="#!" onclick="dynamicSelectDateRange('CD','Custom Date')"><?= __('Custom Date'); ?></a>
 							    </div>
 							</div>
 							<div class="row mt-2" style="display: none" id="custome_date">
 							    <div  class="col-lg-6">
-									<input type="text" class="form-control filterdynamic datepicker" name="from" id="from_date" value="<?php echo $from_date; ?>" aria-label="From">
+									<input type="text" class="form-control filterdynamic datepicker" name="from" id="from_date" value="<?php echo $from_date; ?>" aria-label="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>">
 								</div>
 								<div class="col-lg-6">
-									<input type="text" class="form-control filterdynamic datepicker" name="to" id="to_date" value="<?php echo $to_date; ?>" aria-label="To">
+									<input type="text" class="form-control filterdynamic datepicker" name="to" id="to_date" value="<?php echo $to_date; ?>" aria-label="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>">
 								</div>
 							</div>
 						</div>
@@ -279,7 +279,7 @@ $get_option = $_REQUEST['option'];
 						<button class="btn btn-primary btn-brand--icon" id="kt_search" onclick="filterSubmitForm()" type="button" style="height:40px;">
 							<span class="f-12">
 								<i class="ti-search m-r-2"></i>
-								<span>Search</span>
+								<span><?= __('Search'); ?></span>
 							</span>
 						</button>
 					</div>
@@ -291,7 +291,7 @@ $get_option = $_REQUEST['option'];
 				<div class="card-body" id="filterpageshow">
 					<?php ?>
 					<div class="card-px text-center ">
-							<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> Please Apply Filter</p>
+							<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('Please Apply Filter'); ?></p>
 							<div class="text-center px-4">
 								<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
 							</div>

@@ -56,7 +56,7 @@ if($item_daata['tracking_type'] == 2){
                 var value = $('#serial_no_'+k).val();
                 if( value == ""){
                     check = 'F';
-                    message = "Please fill the serial number ";
+                    message = <?php echo json_encode(__('Please fill the serial number').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
                     break;
                 }
                 data += '&serial_'+k+'='+value;
@@ -71,7 +71,7 @@ if($item_daata['tracking_type'] == 2){
                 value = $('#qty_val_'+k).val();
                 if( value == "" && lot ==""){
                     check = 'F';
-                    message = "Please fill the Lot number ";
+                    message = <?php echo json_encode(__('Please fill the Lot number').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
                     break;
                 }
                 data += '&lot_'+k+'='+lot+'&lotvalue_'+k+'='+value;
@@ -79,7 +79,7 @@ if($item_daata['tracking_type'] == 2){
             }
             if(count != qty){
                 check = 'F';
-                 message = "Please check qty is qual to lot qty and requried lot name";
+                 message = <?php echo json_encode(__('Please check qty is qual to lot qty and requried lot name'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
             }
             data_count = loopcount;
         }
@@ -96,13 +96,13 @@ if($item_daata['tracking_type'] == 2){
                     console.log(response);
                     $('#kt_modal_KTDatatable_remote').modal('hide');
                     Swal.fire({
-                        title: "Comments Updated ",
+                        title: <?php echo json_encode(__('Comments Updated').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         type: "success",
                         buttonsStyling: false,
-                        confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                        confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
                         confirmButtonClass: "btn btn-danger",
                         showCancelButton: true,
-                        cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                        cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                         cancelButtonClass: "btn btn-default"
                     }).then(function(result) {
                         if (result.value) {
@@ -123,10 +123,10 @@ if($item_daata['tracking_type'] == 2){
 </script>
     <div class="modal-header">
                         <h5 class="modal-title">
-                            Serial No
-                            <small>&nbsp;&nbsp; <b>Transaction Type: </b>&nbsp; <?php echo viewtitle($table); ?>  </small>
+                            <?= __('Serial No'); ?>
+                            <small>&nbsp;&nbsp; <b><?= __('Transaction Type'); ?>: </b>&nbsp; <?php echo viewtitle($table); ?>  </small>
                         </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
 
                         </button>
                     </div>
@@ -138,9 +138,9 @@ if($item_daata['tracking_type'] == 2){
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                     <?php for($i=1; $i<$qty+1; $i++){?>
                         <div class="form-group row">
-                            <label for="example-text-input" class="col-3 col-form-label">Serial Number <?php echo $i; ?></label>
+                            <label for="example-text-input" class="col-3 col-form-label"><?= __('Serial Number'); ?> <?php echo $i; ?></label>
                             <div class="col-6">
-                                <input aria-label="Input field" type="text" class="form-control"  id="serial_no_<?php echo $i; ?>" name="serial_no" value="<?php echo $serialnos[$i-1]; ?>">
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  id="serial_no_<?php echo $i; ?>" name="serial_no" value="<?php echo $serialnos[$i-1]; ?>">
                             </div>
 
                         </div>
@@ -151,10 +151,10 @@ if($item_daata['tracking_type'] == 2){ ?>
                 <div id='append_statick'>
                 <div class="row align-items-center" style="margin-top: 10px;">
                     <div class="col-lg-3">
-                        <span><b>Lot Number</b></span>
+                        <span><b><?= __('Lot Number'); ?></b></span>
                     </div>
                     <div class="col-lg-3">
-                        <span><b>Qty</b></span>
+                        <span><b><?= __('Qty'); ?></b></span>
                     </div>
                     <div class="col-lg-3">
                         <span><b></b></span>
@@ -164,21 +164,21 @@ if($item_daata['tracking_type'] == 2){ ?>
                     <?php for($i=1; $i<count((array)$serialnos)+1; $i++){ ?>
                     <div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
                         <div class="col-lg-3">
-                            <input aria-label="Input field" type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot']; ?>"  name="type">
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  id="static_value_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot']; ?>"  name="type">
                         </div>
                         <div class="col-lg-3">
-                            <input aria-label="Input field" type="text"class="form-control"  id="qty_val_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot_value']; ?>"  name="type">
+                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"class="form-control"  id="qty_val_<?php echo $i; ?>"  value="<?php echo $serialnos[$i-1]['lot_value']; ?>"  name="type">
                         </div>
                         <div class="col-lg-3">
                             <input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >
-                            <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)">Delete</button>
+                            <button class="btn btn-warning" id="<?php echo $i; ?>" type="button" onclick="deleteRows(this.id)"><?= __('Delete'); ?></button>
                         </div>
                     </div>
                     <?php } ?>
                 </div>
                 </div>
                 <div class="m-l-5 m-t-5" style="margin-top: 10px;">
-                    <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRows123()">+ Add More</button>&nbsp;&nbsp;
+                    <button class="btn btn-success" id="addstatickRows" type="button" onclick="addstatickRows123()">+ <?= __('Add More'); ?></button>&nbsp;&nbsp;
                 </div>
 
                 <?php } ?>
@@ -195,8 +195,8 @@ if($item_daata['tracking_type'] == 2){ ?>
                 <input type="hidden" name="item_id" id='item_id' value="<?php echo $item_id; ?>">
                 <input type="hidden" name="type" id='type' value="<?php echo $item_daata['tracking_type']; ?>">
                 <input type="hidden" name="random" id='random' value="<?php echo $_POST['random']; ?>">
-                <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btn-bold btn-upper btn-font-sm" onclick="submitrom()" >Submit</button>
+                <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-sm" data-bs-dismiss="modal"><?= __('Close'); ?></button>
+                <button type="button" class="btn btn-primary btn-bold btn-upper btn-font-sm" onclick="submitrom()" ><?= __('Submit'); ?></button>
             </div>
 
     </form>

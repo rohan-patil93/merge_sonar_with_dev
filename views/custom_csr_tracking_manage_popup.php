@@ -105,19 +105,19 @@ $rowCounter = 0;
                             <td><?php echo $rowCounter; ?></td>
                             <td>
                                 <input type="hidden" name="tracking_id[<?php echo $rowCounter; ?>]" value="<?php echo $rowId; ?>">
-                                <input type="text" class="form-control" name="tracking_name[<?php echo $rowCounter; ?>]" value="<?php echo csrTrackingManageText($trackingRow['tracking_name'] ?? ''); ?>" <?php echo $disabledAttr; ?> aria-label="Input">
+                                <input type="text" class="form-control" name="tracking_name[<?php echo $rowCounter; ?>]" value="<?php echo csrTrackingManageText($trackingRow['tracking_name'] ?? ''); ?>" <?php echo $disabledAttr; ?> aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                             </td>
                             <td>
-                                <textarea class="form-control" name="description[<?php echo $rowCounter; ?>]" <?php echo $disabledAttr; ?> aria-label="Textarea"><?php echo csrTrackingManageText($trackingRow['description'] ?? ''); ?></textarea>
+                                <textarea class="form-control" name="description[<?php echo $rowCounter; ?>]" <?php echo $disabledAttr; ?> aria-label="<?= htmlspecialchars(__('Textarea'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo csrTrackingManageText($trackingRow['description'] ?? ''); ?></textarea>
                             </td>
                             <td>
-                                <input type="date" class="form-control csr-track-start-date" data-row="<?php echo $rowCounter; ?>" name="start_date[<?php echo $rowCounter; ?>]" value="<?php echo csrTrackingManageText($trackingRow['start_date'] ?? ''); ?>" <?php echo $disabledAttr; ?> aria-label="Input">
+                                <input type="date" class="form-control csr-track-start-date" data-row="<?php echo $rowCounter; ?>" name="start_date[<?php echo $rowCounter; ?>]" value="<?php echo csrTrackingManageText($trackingRow['start_date'] ?? ''); ?>" <?php echo $disabledAttr; ?> aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="csr_track_end_date_<?php echo $rowCounter; ?>" name="end_date[<?php echo $rowCounter; ?>]" value="<?php echo csrTrackingManageText($trackingRow['end_date'] ?? ''); ?>" <?php echo $disabledAttr; ?> aria-label="Input">
+                                <input type="date" class="form-control" id="csr_track_end_date_<?php echo $rowCounter; ?>" name="end_date[<?php echo $rowCounter; ?>]" value="<?php echo csrTrackingManageText($trackingRow['end_date'] ?? ''); ?>" <?php echo $disabledAttr; ?> aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                             </td>
                             <td>
-                                <input type="number" min="0" class="form-control text_align_right" name="tracking_budget[<?php echo $rowCounter; ?>]" value="<?php echo csrTrackingManageText($trackingRow['tracking_budget'] ?? ''); ?>" <?php echo $disabledAttr; ?> aria-label="Input">
+                                <input type="number" min="0" class="form-control text_align_right" name="tracking_budget[<?php echo $rowCounter; ?>]" value="<?php echo csrTrackingManageText($trackingRow['tracking_budget'] ?? ''); ?>" <?php echo $disabledAttr; ?> aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                             </td>
                         </tr>
                         <?php }

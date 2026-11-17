@@ -24,10 +24,10 @@ if($_POST['submit'] == 'reply'){
 
 
             <div class="card-header table-card-header">
-                <h5> Queries</h5>
+                <h5> <?= __('Queries'); ?></h5>
                 <div class="card-header-right table-card-header ">
                     <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                        <i class="icofont icofont-reply"></i>Back
+                        <i class="icofont icofont-reply"></i><?= __('Back'); ?>
                     </a>
                 </div>
             </div>

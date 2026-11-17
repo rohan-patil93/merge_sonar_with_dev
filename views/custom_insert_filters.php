@@ -99,7 +99,7 @@ if($emp_list_names!="") {
           <select aria-label="<?php echo __('Filterfor'); ?>" onchange="showfilter(this.value);" id="filterfor" name="filterfor" class="form-control form-select js-example-basic-single">
             <?php foreach ($filter_list as $filter) { ?>
               <option <?php if($selectedoption==$filter['genc_detail_code']) {?> selected <?php
-} ?> value="<?php echo $filter['genc_detail_code'];?>"><?php echo $filter['genc_detail_name'];?></option>
+} ?> value="<?php echo $filter['genc_detail_code'];?>"><?php echo __($filter['genc_detail_name']);?></option>
             <?php } ?>
           </select>
         </div>

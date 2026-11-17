@@ -73,7 +73,7 @@ function matchingResult($post,$candidate){
           <div class="card table-responsive">
             <table class="table table-hover m-b-0 " style="font-size:13px;">
               <thead>
-                <tr><th scope="col">#</th><th scope="col">Name</th><th scope="col">Email ID</th><th scope="col">Phone No</th><th scope="col">Location</th><th scope="col">Ratting</th><th scope="col">Action</th></tr>
+                <tr><th scope="col">#</th><th scope="col"><?= __('Name'); ?></th><th scope="col"><?= __('Email ID'); ?></th><th scope="col"><?= __('Phone No'); ?></th><th scope="col"><?= __('Location'); ?></th><th scope="col"><?= __('Ratting'); ?></th><th scope="col"><?= __('Action'); ?></th></tr>
               </thead>
               <tbody>
                 <?php $mk=1; foreach($candidates as $candidate){
@@ -97,9 +97,9 @@ function matchingResult($post,$candidate){
                         </div>
                     </td>
                     <td>
-                      <a href="index.php?option=COM_INSERT_VENDORS&Rid=<?php echo deocdeId("id:".$candidate['id']); ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit Details"><i class="fa fa-edit"></i></a>
-                      <a href="index.php?option=COM_INSERT_VENDORS&Rid=<?php echo deocdeId("id:".$candidate['id']); ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Survey Histories"><i class="ti-eye"></i></a>
-                      <a href="index.php?option=COM_INSERT_VENDORS&Rid=<?php echo deocdeId("id:".$candidate['id']); ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Survey"><i class="ti-write"></i></a>
+                      <a href="index.php?option=COM_INSERT_VENDORS&Rid=<?php echo deocdeId("id:".$candidate['id']); ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit"></i></a>
+                      <a href="index.php?option=COM_INSERT_VENDORS&Rid=<?php echo deocdeId("id:".$candidate['id']); ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Survey Histories'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye"></i></a>
+                      <a href="index.php?option=COM_INSERT_VENDORS&Rid=<?php echo deocdeId("id:".$candidate['id']); ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('Survey'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-write"></i></a>
                     </td>
                   </tr>
                   <?php $mk++;
@@ -125,9 +125,9 @@ function matchingResult($post,$candidate){
           <?php if($candidate['image'] != ""){
             $dispath = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/candidates/".$candidate['id']."/".$candidate['image'];
             ?>
-            <img src="<?php echo $dispath; ?>" class="img-radius img-50" alt="User">
+            <img src="<?php echo $dispath; ?>" class="img-radius img-50" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
           <?php }else{ ?>
-            <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($candidate['company']); ?></span>
+            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($candidate['company']); ?></span>
           <?php } ?>
 
         </div>
@@ -164,16 +164,16 @@ function matchingResult($post,$candidate){
     </div>
     <div class="col-lg-12 row" style="min-height: 200px;">
     <div class="col-lg-3 ">
-      <span class="f-12 f-w-600  mb-0">Email</span>
+      <span class="f-12 f-w-600  mb-0"><?= __('Email'); ?></span>
     </div>
     <div class="col-lg-9 ">
       <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['email'] !=""?$candidate['email'] : "-"; ?></span>
     </div>
      <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600  mb-0">Phone</span>
+      <span class="f-12 f-w-600  mb-0"><?= __('Phone'); ?></span>
     </div>
      <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600 mb-0">Location</span>
+      <span class="f-12 f-w-600 mb-0"><?= __('Location'); ?></span>
     </div>
     <div class="col-lg-6 mt-1">
       <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['phone'] !=""?$candidate['phone'] : "-"; ?></span>
@@ -182,10 +182,10 @@ function matchingResult($post,$candidate){
       <span class="f-12 f-w-600 text-muted mb-0"><?php echo $locationslist[$candidate['location_id']] !=""?$locationslist[$candidate['location_id']]:"-"; ?></span>
     </div>
      <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600  mb-0">GST No</span>
+      <span class="f-12 f-w-600  mb-0"><?= __('GST No'); ?></span>
     </div>
      <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600 mb-0">Tax Registation No</span>
+      <span class="f-12 f-w-600 mb-0"><?= __('Tax Registation No'); ?></span>
     </div>
     <div class="col-lg-6 mt-1">
       <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['gstin'] !=""?$candidate['gstin'] : "-"; ?></span>
@@ -194,10 +194,10 @@ function matchingResult($post,$candidate){
       <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['vendor_tax_reg_no'] !=""?$candidate['vendor_tax_reg_no'] : "-"; ?></span>
     </div>
      <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600  mb-0">CST Registation No</span>
+      <span class="f-12 f-w-600  mb-0"><?= __('CST Registation No'); ?></span>
     </div>
      <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600 mb-0">PAN No</span>
+      <span class="f-12 f-w-600 mb-0"><?= __('PAN No'); ?></span>
     </div>
     <div class="col-lg-6 mt-1">
       <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['cst_reg_no'] !=""?$candidate['cst_reg_no'] : "-"; ?></span>
@@ -206,7 +206,7 @@ function matchingResult($post,$candidate){
       <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['pan_no'] !=""?$candidate['pan_no'] : "-"; ?></span>
     </div>
     <div class="col-lg-3 mt-1 mb-2">
-      Ratting
+      <?= __('Ratting'); ?>
     </div>
     <div class="col-lg-9 mt-1 mb-2">
       <div class="rating f-12 text-warning d-inline-block">
@@ -215,7 +215,7 @@ function matchingResult($post,$candidate){
             <i class="fa fa-star f-12" <?php if($n>$vendor_rate[$candidate['id']]){ ?> style= "color: #b7aeae"; <?php
 } ?>></i>
         <?php } ?>
-        <?php } else { echo "<span class='text-danger'>Yet To Rate</span>";
+        <?php } else { echo "<span class='text-danger'>".__('Yet To Rate')."</span>";
 } ?>
         </div>
     </div>
@@ -226,13 +226,13 @@ function matchingResult($post,$candidate){
    <div class="col-lg-12 text-center">
 
 
-      <div class="position-relative d-inline-block job cursor-pointer " onclick="appliedvendorfeedback('<?php echo $candidate['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Provide Feedback" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+      <div class="position-relative d-inline-block job cursor-pointer " onclick="appliedvendorfeedback('<?php echo $candidate['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Provide Feedback'), ENT_QUOTES, 'UTF-8'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
         <i class="fa fa-edit m-l-15 f-16 text-danger"></i>
         <span class="badge bg-c-red"></span>
       </div>
       <div class="position-relative d-inline-block">
        <?php $emailcnt = $email_logs[$candidate['email_id']][17]; echo ($emailcnt !='0' && $emailcnt !='')?"<i class='fa fa-check text-info position-absolute mt-4 m-l-20 f-10'></i>":""; ?>
-      <i class="fa fa-history m-l-15 text-danger f-16 cursor-pointer"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="View Feedback History" onclick="vendorhistories('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','17')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+      <i class="fa fa-history m-l-15 text-danger f-16 cursor-pointer"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Feedback History'), ENT_QUOTES, 'UTF-8'); ?>" onclick="vendorhistories('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','17')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
     </div>
 
   </div>
@@ -246,7 +246,7 @@ function matchingResult($post,$candidate){
 }else{ ?>
  <div clas="card">
   <div class="card-px text-center py-20 m-t-30">
-    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Vendors </p>
+    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Vendors'); ?> </p>
     <div class="text-center px-4">
       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
     </div>

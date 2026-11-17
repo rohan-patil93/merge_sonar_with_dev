@@ -103,7 +103,7 @@
             favorite.push($(this).val());
         });
         alert(favorite);
-        alert("My favourite sports are: " + favorite.join(", "));
+        alert(<?php echo json_encode(__('My favourite sports are').': ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?> + favorite.join(", "));
 
       //alert("data");
      var table_name = 'project_timesheets';
@@ -310,14 +310,14 @@
 						<div class="card-body d-flex flex-column">
 							<!--begin::Stats-->
 							<div class="flex-grow-1">
-								<div class="text-dark-50 font-weight-bold">Utilization</div>
+								<div class="text-dark-50 font-weight-bold"><?= __('Utilization'); ?></div>
 								<div class="font-weight-bolder font-size-h3"><?php echo customeummarmonyformate($ttcount/100000); ?> L</div>
 							</div>
 							<!--end::Stats-->
 							<!--begin::Progress-->
 							<?php $total_p = $total_budget_amount > 0 ? number_format((($ttcount/$total_budget_amount)*100),2) : '0.00'; ?>
 							<div class="d-flex align-items-center justify-content-between">
-								<div class="text-muted font-weight-bold mr-2">Utilized</div>
+								<div class="text-muted font-weight-bold mr-2"><?= __('Utilized'); ?></div>
 								<div class="text-muted font-weight-bold"><?php echo $total_p; ?>%</div>
 							</div>
 							<div class="progress progress-xs">
@@ -334,14 +334,14 @@
 						<div class="card-body d-flex flex-column">
 							<!--begin::Stats-->
 							<div class="flex-grow-1">
-								<div class="text-dark-50 font-weight-bold">Efforts</div>
+								<div class="text-dark-50 font-weight-bold"><?= __('Efforts'); ?></div>
 								<div class="font-weight-bolder font-size-h3"><?php echo $total_billabe_hrs; ?> H</div>
 							</div>
 							<!--end::Stats-->
 							<!--begin::Progress-->
 							<?php $total_hors_p = number_format((($total_billabe_hrs/$total_budget_hrs)*100),2); ?>
 							<div class="d-flex align-items-center justify-content-between">
-								<div class="text-muted font-weight-bold mr-2">Efforts</div>
+								<div class="text-muted font-weight-bold mr-2"><?= __('Efforts'); ?></div>
 								<div class="text-muted font-weight-bold"><?php echo $total_hors_p; ?>%</div>
 							</div>
 							<div class="progress progress-xs">
@@ -359,14 +359,14 @@
 						<div class="card-body d-flex flex-column">
 							<!--begin::Stats-->
 							<div class="flex-grow-1">
-								<div class="text-dark-50 font-weight-bold">Current Vs Previous</div>
-								<div class="font-weight-bolder font-size-h4"> <?php echo customeummarmonyformate($ttcount/100000); ?> L Vs <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L</div>
+								<div class="text-dark-50 font-weight-bold"><?= __('Current Vs Previous'); ?></div>
+								<div class="font-weight-bolder font-size-h4"> <?php echo customeummarmonyformate($ttcount/100000); ?> <?= __('L Vs'); ?> <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L</div>
 							</div>
 							<!--end::Stats-->
 							<!--begin::Progress-->
 							<?php $total_vs_p = number_format((($ttcount/($lmonth['billable_amount']+$lmonth['nonbillable_amount']) )*100),2); ?>
 							<div class="d-flex align-items-center justify-content-between">
-								<div class="text-muted font-weight-bold mr-2">Utilized</div>
+								<div class="text-muted font-weight-bold mr-2"><?= __('Utilized'); ?></div>
 								<div class="text-muted font-weight-bold"><?php echo $total_vs_p; ?>%</div>
 							</div>
 							<div class="progress progress-xs">
@@ -383,14 +383,14 @@
 						<div class="card-body d-flex flex-column">
 							<!--begin::Stats-->
 							<div class="flex-grow-1">
-								<div class="text-dark-50 font-weight-bold">Approved</div>
+								<div class="text-dark-50 font-weight-bold"><?= __('Approved'); ?></div>
 								<div class="font-weight-bolder font-size-h3"><?php echo customeummarmonyformate($apv_billable_amount/100000); ?> L</div>
 							</div>
 							<!--end::Stats-->
 							<!--begin::Progress-->
 							<?php $total_apv_p = number_format((($apv_billable_amount/$ttcount)*100),2); ?>
 							<div class="d-flex align-items-center justify-content-between">
-								<div class="text-muted font-weight-bold mr-2">Approved</div>
+								<div class="text-muted font-weight-bold mr-2"><?= __('Approved'); ?></div>
 								<div class="text-muted font-weight-bold"><?php echo $total_apv_p; ?>%</div>
 							</div>
 							<div class="progress progress-xs">
@@ -417,7 +417,7 @@
 									<!--end::Svg Icon-->
 								</span>
 								<div class="text-dark font-weight-bolder font-size-h4 mt-3"><?php echo count((array)$vendors); ?></div>
-								<a href="#" class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"> Vendors</a>
+								<a href="#" class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"> <?= __('Vendors'); ?></a>
 							</div>
 						</div>
 					</div>
@@ -436,7 +436,7 @@
 									<!--end::Svg Icon-->
 								</span>
 								<div class="text-dark font-weight-bolder font-size-h4 mt-3"><?php echo count((array)$employees); ?> </div>
-								<a href="#" class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"> Mangers</a>
+								<a href="#" class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"> <?= __('Mangers'); ?></a>
 							</div>
 						</div>
 					</div>
@@ -454,7 +454,7 @@
 									<!--end::Svg Icon-->
 								</span>
 								<div class="text-dark font-weight-bolder font-size-h4 mt-3"><?php echo "10/6"; ?> </div>
-								<a href="#" class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"> Leaves</a>
+								<a href="#" class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"> <?= __('Leaves'); ?></a>
 							</div>
 						</div>
 					</div>
@@ -561,7 +561,7 @@
 														<?php $approved_emp_name = !empty($sb['reporting_manger']) ? $sb['reporting_manger'] : (!empty($sb['employee_name']) ? $sb['employee_name'] : ('Employee ' . $sb['employee_id'])); ?>
 														<label for="approved_emp_<?php echo $sb['employee_id']; ?>" class="checkbox checkbox-success" aria-label="Select <?php echo htmlspecialchars($approved_emp_name, ENT_QUOTES); ?>">
 														<input type="checkbox" id="approved_emp_<?php echo $sb['employee_id']; ?>" class="" checked name="" disabled value="<?php echo $sb['employee_id']; ?>" aria-label="Select <?php echo htmlspecialchars($approved_emp_name, ENT_QUOTES); ?>">
-														<span></span><span class="sr-only">Select <?php echo htmlspecialchars($approved_emp_name, ENT_QUOTES); ?></span></label>
+														<span></span><span class="sr-only"><?= __('Select'); ?> <?php echo htmlspecialchars($approved_emp_name, ENT_QUOTES); ?></span></label>
 													</div>
 												</td>
 											</tr>
@@ -650,7 +650,7 @@
 														<?php $pending_emp_name = !empty($sb['reporting_manger']) ? $sb['reporting_manger'] : (!empty($sb['employee_name']) ? $sb['employee_name'] : ('Employee ' . $sb['employee_id'])); ?>
 														<label for="pending_emp_<?php echo $sb['employee_id']; ?>" class="checkbox checkbox-success" aria-label="Select <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?>">
 														<input type="checkbox" id="pending_emp_<?php echo $sb['employee_id']; ?>" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>" aria-label="Select <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?>">
-														<span></span><span class="sr-only">Select <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?></span></label>
+														<span></span><span class="sr-only"><?= __('Select'); ?> <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?></span></label>
 													</div>
 												</td>
 											</tr>
@@ -676,7 +676,7 @@
 					<div class="card-header border-0 pt-5">
 						<div class="card-title">
 							<div class="card-label">
-								<div class="font-weight-bolder">Last 6 Months Utilization</div>
+								<div class="font-weight-bolder"><?= __('Last 6 Months Utilization'); ?></div>
 								<div class="font-size-sm text-muted mt-2"><?php echo customeummarmonyformate($ltotal); ?></div>
 							</div>
 						</div>
@@ -696,7 +696,7 @@
 							<div class="d-flex align-items-center justify-content-between mb-10">
 								<div class="d-flex align-items-center mr-2">
 									<div>
-										<a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder">Last Month Budget</a>
+										<a href="#" class="font-size-h6 text-dark-75 text-hover-primary font-weight-bolder"><?= __('Last Month Budget'); ?></a>
 										<div class="font-size-sm text-muted font-weight-bold mt-1">
 											<?php echo date('M-Y',strtotime($lmonth['period'])); ?>
 										</div>

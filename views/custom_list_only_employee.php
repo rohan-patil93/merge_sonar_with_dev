@@ -73,7 +73,7 @@ if($i !=0 && $i!=""){
                                             <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
                                                 <?php if( $_SESSION['employee']['image']!=""){ ?>
                                                 <div class="symbol symbol-50 symbol-lg-120">
-                                                    <img src="uploads/all/<?php echo $_SESSION['employee']['image']; ?>" alt="Details" class="img-120" />
+                                                    <img src="uploads/all/<?php echo $_SESSION['employee']['image']; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>" class="img-120" />
                                                 </div>
                                             <?php }else{ ?>
                                                 <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
@@ -81,7 +81,7 @@ if($i !=0 && $i!=""){
                                                 </div>
                                             <?php } ?>
                                                 <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                                            <span class="f-12 f-w-600">Profile </span>
+                                                            <span class="f-12 f-w-600"><?= __('Profile'); ?> </span>
                                                             <span class="f-12 f-w-600"><?php echo $pp; ?>%</span>
                                                         </div>
                                                         <div class="col-md-12">
@@ -119,9 +119,9 @@ if($i !=0 && $i!=""){
                                             if($clock_data['clock_out'] !='' || count((array)$clock_data) == 0){
 
                                         ?>
-                                        <button type="button" onclick="checkinattendence('You have clocked in')" class="btn btn-primary font-weight-bold btn-pill" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;<?php echo $check_out_display; ?> </div> </div> "> Check-in &nbsp; <i class='icon-lg far fa-clock'></i></button>
+                                        <button type="button" onclick="checkinattendence('You have clocked in')" class="btn btn-primary font-weight-bold btn-pill" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;<?php echo $check_out_display; ?> </div> </div> "> <?= __('Check-in'); ?> &nbsp; <i class='icon-lg far fa-clock'></i></button>
                                         <?php }else{?>
-                                        <button type="button" onclick="checkinattendence('You have clocked out')" class="btn btn-success font-weight-bold btn-pill" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;00:00:00  </div> </div> "> Check-Out &nbsp; <i class='icon-lg far fa-clock'></i></button>
+                                        <button type="button" onclick="checkinattendence('You have clocked out')" class="btn btn-success font-weight-bold btn-pill" data-toggle="popover" data-placement="bottom"  data-html="true" data-content="<div class='p-4 font-weight-bold'> <div>  Check-in &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<?php echo $check_in_display; ?>  </div> <div>Check-out &nbsp;-&nbsp;00:00:00  </div> </div> "> <?= __('Check-Out'); ?> &nbsp; <i class='icon-lg far fa-clock'></i></button>
                                         <?php } ?>
 
 
@@ -141,7 +141,7 @@ if($i !=0 && $i!=""){
                                                             <i class="ti-location-pin f-14 text-primary"></i>&nbsp;<?php echo $location['location_name'];?></a>
                                                         </div>
                                                         <div class="btn-group max-w-100px">
-                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Key Skills</button>
+                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Key Skills'); ?></button>
                                                             <div class="dropdown-menu">
                                                                 <?php foreach ($empskills as $eskill) {
                                                                     $irat = $skill[$eskill['skill_id']]['max_ratting']/5;
@@ -161,10 +161,10 @@ if($i !=0 && $i!=""){
                                                                 </a>
                                                                 <?php } ?>
                                                                 <div class="dropdown-divider"></div>
-                                                                <button type="button" class="dropdown-item" onclick="dynamicinsertpopup('COM_INSERT_EMP_SKILLS')">+ Add New</button>
+                                                                <button type="button" class="dropdown-item" onclick="dynamicinsertpopup('COM_INSERT_EMP_SKILLS')">+ <?= __('Add New'); ?></button>
                                                             </div>
                                                         </div>
-                                                        <span class="font-weight-bold text-dark-50 mt-1"><b>About Me : </b><?php echo  $_SESSION['employee']['about_me'];?></span>
+                                                        <span class="font-weight-bold text-dark-50 mt-1"><b><?= __('About Me'); ?> : </b><?php echo  $_SESSION['employee']['about_me'];?></span>
                                                     </div>
 
 

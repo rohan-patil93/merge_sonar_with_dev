@@ -50,14 +50,14 @@ $alpha =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="f-30">Approved Hours</h5>
+      <h5 class="f-30"><?= __('Approved Hours'); ?></h5>
       <div class="card-header-right">
         <div class="dropdown-primary dropdown open">
-          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+          <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
           <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut" style="">
 
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=EEO-1 Report" target="_blank" >CSV</a>
-            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=EEO-1 Report" target="_blank">Excel</a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=EEO-1 Report" target="_blank" ><?= __('CSV'); ?></a>
+            <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=EEO-1 Report" target="_blank"><?= __('Excel'); ?></a>
           </div>
         </div>
       </div>
@@ -68,20 +68,20 @@ $alpha =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
           <div class="row col-lg-12 ">
         <div class="col-lg-2">
           <div class="form-group">
-            <input aria-label="Fromdate" class="form-control datepicker" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
-} ?> placeholder="From Date" >
+            <input aria-label="<?= htmlspecialchars(__('Fromdate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" name="fromdate" type="text" <?php if($fromdate!=""){ ?>  value="<?php echo $fromdate; ?>" <?php
+} ?> placeholder="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" >
           </div>
         </div>
         <div class="col-lg-2">
           <div class="form-group">
-            <input aria-label="Input field" class="form-control datepicker" <?php if($todate!=""){ ?>  value="<?php echo $todate; ?>" <?php
-} ?> name="todate" type="text" placeholder="To Date">
+            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker" <?php if($todate!=""){ ?>  value="<?php echo $todate; ?>" <?php
+} ?> name="todate" type="text" placeholder="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
           </div>
         </div>
         <?php include_once 'views/custom_standard_report_hr_employee_filter.php'; ?>
         <div class="col-lg-2 mt-1">
           <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text mt-0">
-            Apply
+            <?= __('Apply'); ?>
           </button>
           <input type="hidden" name="submit" value="applyform">
         </div>
@@ -96,37 +96,16 @@ $alpha =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
       <div class="table-responsive mt-3">
         <table class="table tabe-hover table-sm">
           <tr style="background-color: #eeeeee;">
-            <th scope=\"col\">Name</th>
-            <th scope=\"col\">Date</th>
-            <th scope=\"col\">Reg Rate</th>
-            <th scope=\"col\">Reg Hours</th>
-            <th scope=\"col\">OT Rate</th>
-            <th scope=\"col\">OT Hours</th>
-            <th scope=\"col\">Total</th>
+            <th scope=\"col\"><?= __('Name'); ?></th>
+            <th scope=\"col\"><?= __('Date'); ?></th>
+            <th scope=\"col\"><?= __('Reg Rate'); ?></th>
+            <th scope=\"col\"><?= __('Reg Hours'); ?></th>
+            <th scope=\"col\"><?= __('OT Rate'); ?></th>
+            <th scope=\"col\"><?= __('OT Hours'); ?></th>
+            <th scope=\"col\"><?= __('Total'); ?></th>
           </tr>
           <tr>
-            <td colspan="7"><a class="text-primary" href="">Barnet, Cheryl</a></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>04/15/2023</td>
-            <td></td>
-            <td>11.0000</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>04/15/2023</td>
-            <td></td>
-            <td>11.0000</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="7"><a class="text-primary" href="">Barnet, Cheryl</a></td>
+            <td colspan="7"><a class="text-primary" href=""><?= __('Barnet, Cheryl'); ?></a></td>
           </tr>
           <tr>
             <td></td>
@@ -147,13 +126,34 @@ $alpha =  array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             <td></td>
           </tr>
           <tr>
+            <td colspan="7"><a class="text-primary" href=""><?= __('Barnet, Cheryl'); ?></a></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>04/15/2023</td>
+            <td></td>
+            <td>11.0000</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>04/15/2023</td>
+            <td></td>
+            <td>11.0000</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <th scope=\"col\">Total29.0000 hours</th>
+            <th scope=\"col\"><?= __('Total29.0000 hours'); ?></th>
           </tr>
         </table>
       </div>

@@ -9,11 +9,11 @@ $customers = $response['cust_details'];
 <!-- Pradeep HTML Start here -->
 <div class="card">
     <div class="card-header">
-        <h4>AMC Customer Details</h4>
+        <h4><?= __('AMC Customer Details'); ?></h4>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn btn-primary waves-effect waves-light mb-2 desktop-view">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -23,13 +23,13 @@ $customers = $response['cust_details'];
         <div class="table-responsive mt-3">
             <table class="table table-bordered table-sm f-12">
                 <tr class="f-14">
-                    <th scope="col">SL NO</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Mobile</th>
-                    <th scope="col">Addresss</th>
-                    <th scope="col">Pincode</th>
-                    <th scope="col">Edit</th>
+                    <th scope="col"><?= __('SL NO'); ?></th>
+                    <th scope="col"><?= __('Customer Name'); ?></th>
+                    <th scope="col"><?= __('Email'); ?></th>
+                    <th scope="col"><?= __('Mobile'); ?></th>
+                    <th scope="col"><?= __('Addresss'); ?></th>
+                    <th scope="col"><?= __('Pincode'); ?></th>
+                    <th scope="col"><?= __('Edit'); ?></th>
                 </tr>
                 <?php $i = 1;
                 foreach ($customers as $row) { ?>

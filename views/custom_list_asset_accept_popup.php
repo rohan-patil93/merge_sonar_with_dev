@@ -90,7 +90,7 @@ function submitextension(){
             console.log(data);
                 var res = JSON.parse(data);
                 if(res.error=="404"){
-                    alert("Oops Admin buddy Not Found");
+                    alert(<?php echo json_encode(__('Oops Admin buddy Not Found'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
                 }else{
                     $('#kt_modal_dynamic_popup2').modal("hide");
                 }
@@ -101,8 +101,8 @@ function submitextension(){
 <?php if($_POST['extra']=='Y'){?>
 
 <div class="modal-header">
-    <h4 class="modal-title">Asset Extension</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Asset Extension'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body ">
     <div >
@@ -112,45 +112,45 @@ function submitextension(){
         <div class="card p-2 mt-2">
             <div class="row">
         <div class=" col-lg-4 " >
-                <span>Extension Type</span>
+                <span><?= __('Extension Type'); ?></span>
                 <div class="form-radio">
                 <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Extension Type" type="radio" name="extension_type" class="extension_type" value="D" style="display:none;" onclick="checkextendtype()"  checked onkeydown="">
-                        <i class="helper"></i>Extend Date
+                        <input aria-label="<?= htmlspecialchars(__('Extension Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="extension_type" class="extension_type" value="D" style="display:none;" onclick="checkextendtype()"  checked onkeydown="">
+                        <i class="helper"></i><?= __('Extend Date'); ?>
                       </label>
                     </div>
                     <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Extension Type" type="radio" name="extension_type" value="A" class="extension_type" onclick="checkextendtype()" style="display:none" onkeydown="">
-                        <i class="helper"></i>Extend Attributes
+                        <input aria-label="<?= htmlspecialchars(__('Extension Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="extension_type" value="A" class="extension_type" onclick="checkextendtype()" style="display:none" onkeydown="">
+                        <i class="helper"></i><?= __('Extend Attributes'); ?>
                       </label>
                     </div>
                  </div>
             </div>
     <div class=" col-lg-4 " >
-                <span>How Do You Want The Asset To be Delivered?<span class="requried">*</span></span>
+                <span><?= __('How Do You Want The Asset To be Delivered?'); ?><span class="requried">*</span></span>
                 <div class="form-radio">
                 <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Asset Deliver" type="radio" name="asset_deliver" value="S" style="display:none;" checked>
-                        <i class="helper"></i>Self Pickup
+                        <input aria-label="<?= htmlspecialchars(__('Asset Deliver'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="asset_deliver" value="S" style="display:none;" checked>
+                        <i class="helper"></i><?= __('Self Pickup'); ?>
                       </label>
                     </div>
                     <div class="radio radio-inline">
                       <label class="form-label">
-                        <input aria-label="Asset Deliver" type="radio" name="asset_deliver" value="D" style="display:none" >
-                        <i class="helper"></i>Deliver Through Logistics Partner
+                        <input aria-label="<?= htmlspecialchars(__('Asset Deliver'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="asset_deliver" value="D" style="display:none" >
+                        <i class="helper"></i><?= __('Deliver Through Logistics Partner'); ?>
                       </label>
                     </div>
                  </div>
             </div>
                 <div class="form-group col-lg-4 ext_date">
-                    <span>Extend date</span>
-                    <input aria-label="Extension Date" type="text" class="form-control datepicker" id="extension_date"  name="extension_date" value="">
+                    <span><?= __('Extend date'); ?></span>
+                    <input aria-label="<?= htmlspecialchars(__('Extension Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" id="extension_date"  name="extension_date" value="">
                 </div>
                 <div class="form-group col-lg-4 ext_attr" style="display: none">
-                    <span>Extend Attributes</span></br>
+                    <span><?= __('Extend Attributes'); ?></span></br>
                         <?php
                     $explodeattribute = explode(",",$_POST['attribute']);
                     foreach($attributes as $asset_attributes){
@@ -173,14 +173,14 @@ function submitextension(){
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitextension()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitextension()"><?= __('Submit'); ?></button>
 </div>
 
 <?php }else{  ?>
 <div class="modal-header">
-    <h4 class="modal-title">Asset Allocation</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h4 class="modal-title"><?= __('Asset Allocation'); ?></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
     <div class="">
@@ -190,15 +190,15 @@ function submitextension(){
     <table  class="table table-striped table-bordered nowrap">
         <thead>
             <tr>
-                <th scope="col">Asset Code</th>
-                <th scope="col">Asset Name</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Model</th>
-                <th scope="col">Serial Number</th>
-                <th scope="col">Location </th>
+                <th scope="col"><?= __('Asset Code'); ?></th>
+                <th scope="col"><?= __('Asset Name'); ?></th>
+                <th scope="col"><?= __('Brand'); ?></th>
+                <th scope="col"><?= __('Model'); ?></th>
+                <th scope="col"><?= __('Serial Number'); ?></th>
+                <th scope="col"><?= __('Location'); ?> </th>
 
-                <th scope="col">Satus</th>
-                <th scope="col">Condition</th>
+                <th scope="col"><?= __('Satus'); ?></th>
+                <th scope="col"><?= __('Condition'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -219,8 +219,8 @@ function submitextension(){
                         <td><?php echo $ass_status[$list_asset['asset_status']]; ?></td>
 
                         <td>
-                            <select aria-label="Conditions"  class="form-select js-example-basic-single " name="conditions">
-                                <option value="">Select Any One</option>
+                            <select aria-label="<?= htmlspecialchars(__('Conditions'), ENT_QUOTES, 'UTF-8'); ?>"  class="form-select js-example-basic-single " name="conditions">
+                                <option value=""><?= __('Select Any One'); ?></option>
                                 <?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>
                                     <option  value="<?php echo $ass_conditiokey; ?>" <?php echo $ass_conditiokey == $list_asset['conditions']?"selected":""; ?>><?php echo ucwords($ass_conditio); ?></option>
                                 <?php } ?>
@@ -236,12 +236,12 @@ function submitextension(){
     <div class="card p-2 mt-2">
         <div class="row">
             <div class="form-group col-lg-3">
-                <span>Received date</span>
-                <input aria-label="Received Date" type="text" class="form-control datepicker" id="received_date"  name="received_date" value="">
+                <span><?= __('Received date'); ?></span>
+                <input aria-label="<?= htmlspecialchars(__('Received Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" id="received_date"  name="received_date" value="">
             </div>
             <div class="form-group col-lg-9">
-                <span>Note</span>
-                <textarea aria-label="Received Note" type="text" class="form-control" id="received_note" rows="4" cols="50" name="received_note" ></textarea>
+                <span><?= __('Note'); ?></span>
+                <textarea aria-label="<?= htmlspecialchars(__('Received Note'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="received_note" rows="4" cols="50" name="received_note" ></textarea>
             </div>
         </div>
     </div>
@@ -249,9 +249,9 @@ function submitextension(){
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails('1')">Accept</button>
-    <button type="button" class="btn btn-danger waves-effect waves-light"  onclick="submitdetails('2')">Reject</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light"  onclick="submitdetails('1')"><?= __('Accept'); ?></button>
+    <button type="button" class="btn btn-danger waves-effect waves-light"  onclick="submitdetails('2')"><?= __('Reject'); ?></button>
 </div>
 <?php } ?>
 

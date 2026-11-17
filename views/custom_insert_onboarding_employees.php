@@ -295,7 +295,7 @@ function addEmpEducationsRows(){
 	 htmlRows += '<tr id="'+rowid+'">';
 
 	 htmlRows += '<td class="p-2"><input type="text" name="institute_name[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Institute Name'); ?>">  </td>';
-	 htmlRows += '<td class="w-full p-2"><select class="form-control form-select js-example-basic-single" name="education_type[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($education_type as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo $edutype['genc_detail_name']; ?></option> <?php } ?></select> </td>';
+	 htmlRows += '<td class="w-full p-2"><select class="form-control form-select js-example-basic-single" name="education_type[]" > <option value=""> <?php echo __('Select Any One'); ?></option> <?php foreach ($education_type as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo __($edutype['genc_detail_name']); ?></option> <?php } ?></select> </td>';
 	 htmlRows += '<td  class="p-2"><input type="text" name="start_date[]"  class="form-control datepicker"  autocomplete="off" placeholder="<?php echo __('Enter Start date'); ?>"> </td>';
 	 htmlRows += '<td  class="p-2"><input type="txet" name="end_date[]"  class="form-control datepicker"   autocomplete="off" placeholder="<?php echo __('Enter End Date'); ?>">  </td>';
 	 htmlRows += '<td  class="p-2"><input type="text" name="score[]"  class="form-control " autocomplete="off" placeholder="<?php echo __('Enter Score'); ?>">  </td>';
@@ -710,7 +710,7 @@ function insertReleive(){
 			 					<option value="0"><?php echo __('Select Any One'); ?></option>
 			 					<?php foreach($result['termination_type'] as $termination_types){ ?>
 			 						<option <?php if($data_termination['termination_type']==$termination_types['genc_detail_code']){ echo __('selected');
-			 						} ?> value="<?php echo $termination_types['genc_detail_code']; ?>"><?php echo $termination_types['genc_detail_name']; ?></option>
+			 						} ?> value="<?php echo $termination_types['genc_detail_code']; ?>"><?php echo __($termination_types['genc_detail_name']); ?></option>
 			 					<?php } ?>
 			 				</select>
 			 			</div>

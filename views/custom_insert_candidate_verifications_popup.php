@@ -32,7 +32,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
         var pan_no = $("#pan_no_popup").val();
         var transaction_table = '<?php echo $transaction_table; ?>';
         var transaction_id = '<?php echo $transaction_id; ?>';
-        var htmloader = 'Loading... <i class="fa fa-spinner fa-spin"></i> ';
+        var htmloader = '<?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?> <i class="fa fa-spinner fa-spin"></i> ';
         $('#'+btn_id).html(htmloader);
         $('#'+btn_id).addClass("disabled");
         $('#'+tab_id).attr('class', 'fa fa-spinner fa-spin f-30 align-middle');
@@ -51,7 +51,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                         pangstlist +='<tbody>';
 
                         if(res.isValid == true && res.panStatusCode == 'E'){
-                            var htmloader = '<i class="ti-check-box"></i>  Check PAN';
+                            var htmloader = '<i class="ti-check-box"></i>  <?= htmlspecialchars(__('Check PAN'), ENT_QUOTES, 'UTF-8'); ?>';
                             $('#'+btn_id).html(htmloader);
                             $('#'+tab_id).attr('class', 'ti-check-box f-30 align-middle');
                             $('#'+btn_id).removeClass('btn-danger');
@@ -123,7 +123,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
         var adhaar_no_popup = $("#adhaar_no_popup").val();
         var transaction_table = '<?php echo $transaction_table; ?>';
         var transaction_id = '<?php echo $vendor_id; ?>';
-        var htmloader = 'Loading... <i class="fa fa-spinner fa-spin"></i> ';
+        var htmloader = '<?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?> <i class="fa fa-spinner fa-spin"></i> ';
         $('#'+btn_id).html(htmloader);
         $('.adhaar_verification_error').text('');
         $('#'+btn_id).addClass("disabled");
@@ -140,7 +140,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                     if(res && res.response_code =="200"){
                         if(res.result.verified == true){
                             $('.adhaar_verification_error').text('<?php echo $_SESSION['error_message']['9139']; ?>');
-                            var htmloader = '<i class="ti-check-box"></i>  Verified Successfully';
+                            var htmloader = '<i class="ti-check-box"></i>  <?= htmlspecialchars(__('Verified Successfully'), ENT_QUOTES, 'UTF-8'); ?>';
                             $('#'+btn_id).html(htmloader);
                             $('#'+tab_id).attr('class', 'ti-check-box f-30 align-middle');
                             $('#'+btn_id).removeClass('btn-danger');
@@ -200,7 +200,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
 </script>
 <div class="modal-header">
     <h5 class="modal-title"><?= __('Verifications') ?></h5>
-    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body m-l-20 m-r-20">
     <div class="row">
@@ -246,7 +246,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                             <span class="form-label"><?= __('PAN Number') ?></span>
                             <?php echo $candidates['pan_number'] ==""?"<span class='text-danger d-block f-12'><?= __('Please Update PAN Number') ?></span>":""; ?>
                             <div class="input-group input-group-button mb-0">
-                                <input aria-label="Pan No Popup" type="text" class="form-control width1" id="pan_no_popup" value="<?php  echo $candidates['pan_number']; ?>" autocomplete="off" readonly>
+                                <input aria-label="<?= htmlspecialchars(__('Pan No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="pan_no_popup" value="<?php  echo $candidates['pan_number']; ?>" autocomplete="off" readonly>
                                 <button class="btn <?php echo $class; ?>" type="button" id="btn_pan_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
                             </div>
                             <span class="f-12 text-danger pan_verification_error" ><?php echo $spanmsg; ?></span>
@@ -319,7 +319,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                         <span class="form-label d-block"><?= __('Aadhaar Number') ?></span>
                         <?php echo $candidates['adhar_no'] ==""?"<span class='text-danger d-block f-12'><?= __('Please Update Aadhaar Number') ?></span>":""; ?>
                         <div class="input-group input-group-button mb-0">
-                               <input aria-label="Adhaar No Popup" type="text" class="form-control width1" id="adhaar_no_popup" value="<?php  echo $candidates['adhar_no']; ?>" autocomplete="off" readonly>
+                               <input aria-label="<?= htmlspecialchars(__('Adhaar No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="adhaar_no_popup" value="<?php  echo $candidates['adhar_no']; ?>" autocomplete="off" readonly>
                             <button class="btn <?php echo $class; ?>" type="button" id="btn_adhaar_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
                         </div>
                         <span class="f-12 text-danger adhaar_verification_error"><?php echo $spanmsg; ?></span>
@@ -343,7 +343,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                                 <div class="card-body text-center p-0">
                                     <h2 class="text-facebook m-b-5">
                                         <?php if(in_array(strtolower(pathinfo($clist['attachment_name'], PATHINFO_EXTENSION)), $imageExtensions)){ ?>
-                                            <img src="<?php echo $path; ?>" style="height: 100px; width: 100px;" alt="Details">
+                                            <img src="<?php echo $path; ?>" style="height: 100px; width: 100px;" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                         <?php }else{  ?>
                                                 <i class="ti-file f-80 text-mute"></i>
                                         <?php } ?>

@@ -10,11 +10,11 @@ $employee_res = $data['employee_res'] ?? array();
 <script src="assets/js/custom_stationery_items_employee_wise_issuance.js"></script>
 <div class="card">
     <div class="card-header">
-        <h5> Stationery Employee-wise Issuance Details</h5>
+        <h5> <?= __('Stationery Employee-wise Issuance Details'); ?></h5>
         <div class="card-header-right">
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -22,8 +22,8 @@ $employee_res = $data['employee_res'] ?? array();
         <div class="row align-items-end">
 
             <div class="col-lg-4">
-                <span>Employees</span>
-                <select aria-label="Employee Ids" class="form-control js-example-basic-single" multiple id="employee_ids">
+                <span><?= __('Employees'); ?></span>
+                <select aria-label="<?= htmlspecialchars(__('Employee Ids'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" multiple id="employee_ids">
                     <?php
                     if(!empty($employee_res)){
                         foreach($employee_res as $emp){
@@ -35,13 +35,13 @@ $employee_res = $data['employee_res'] ?? array();
                         }
                     }
                     ?>
-                    <option value="999999">Others</option>
+                    <option value="999999"><?= __('Others'); ?></option>
                 </select>
             </div>
 
             <div class="col-lg-2">
                 <button type="button" class="btn btn-primary" id="search_employee_issuance">
-                    Search
+                    <?= __('Search'); ?>
                 </button>
             </div>
 

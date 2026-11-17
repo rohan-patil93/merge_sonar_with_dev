@@ -52,14 +52,14 @@
                     console.log(data);
                     if(data){
                         swal.fire({
-                            title: "Record has been Updated successfully ",
-                            text: "Do you want to close ? ",
+                            title: <?php echo json_encode(__('Record has been Updated successfully').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                            text: <?php echo json_encode(__('Do you want to close ?').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             type: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
                             confirmButtonClass: "btn btn-danger",
                             showCancelButton: false,
-                            cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                             cancelButtonClass: "btn btn-default"
                         }).then(function(result) {
                             if (result.value) {
@@ -72,7 +72,7 @@
                 error:function (){}
             });
         }else{
-            alert("Please Select At leaset one");
+            alert(<?php echo json_encode(__('Please Select At leaset one'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         }
     }
     function checkall(){
@@ -130,7 +130,7 @@
                 <ul class="card card-custom card-stretch">
                     <li class="kt-nav__item">
                         <a href="#" class="kt-nav__link" data-action="list" data-type="inbox">
-                            <img style="width:25px; height:25px; margin:0 11px 0 0;" src="assets/media/users/300_16.jpg" alt="User Profile"> <span class="kt-nav__link-text"><?php echo $users[$_SESSION['userid']]['name'] ?></span>
+                            <img style="width:25px; height:25px; margin:0 11px 0 0;" src="assets/media/users/300_16.jpg" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>"> <span class="kt-nav__link-text"><?php echo $users[$_SESSION['userid']]['name'] ?></span>
                             </span>
                         </a>
                     </li>
@@ -282,7 +282,7 @@
                                             </div>
                                             <div class="kt-todo__datetime" data-toggle="view">
                                                 <?php $days = dateDiffInDays($list['request_date']);
-                                                    if($days == 0){ echo "To day";
+                                                    if($days == 0){ echo __('To day');
 }
                                                     elseif($days < 7){ echo $days ." days ago";
 }

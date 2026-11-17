@@ -4,9 +4,9 @@
 
     <div class="alert alert-custom alert-white shadow-lg fade show mb-5" role="alert">
         <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-        <div class="alert-text">This function is used for maintaining <strong>Candidates</strong>. * represents mandatory fields.</div>
+        <div class="alert-text">This function is used for maintaining <strong><?= __('Candidates'); ?></strong><?= __('. * represents mandatory fields.'); ?></div>
         <div class="alert-close">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
                 <span aria-hidden="true"><i class="ki ki-close"></i></span>
             </button>
         </div>
@@ -27,7 +27,7 @@
                         &nbsp;
                                                 <a href="javascript:history.go(-1)" class="btn btn-light-primary font-weight-bolder mr-2">
                             <i class="ki ki-long-arrow-back icon-xs"></i>
-                            Back
+                            <?= __('Back'); ?>
                         </a>
 
 
@@ -219,7 +219,7 @@
 
                         <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="<?= __('Change avatar') ?>">
                             <i class="fa fa-pen icon-sm text-muted"></i>
-                            <input aria-label="Image" type="file" name="image" id="image" accept=".png, .jpg, .jpeg">
+                            <input aria-label="<?= htmlspecialchars(__('Image'), ENT_QUOTES, 'UTF-8'); ?>" type="file" name="image" id="image" accept=".png, .jpg, .jpeg">
                         <input type="hidden" name="hidimage" value="">
                         </label>
 
@@ -234,7 +234,7 @@
             <div class="form-group col-lg-12">
         <span><?= __('First Name') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="First Name" class="form-control"  type="text"  id="first_name" name="first_name"  value="">
+            <input aria-label="<?= htmlspecialchars(__('First Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="first_name" name="first_name"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
         <div style="display: none;color: red;" id="first_name_err"> <?= __('Please enter First Name') ?> </div>
@@ -243,7 +243,7 @@
             <div class="form-group col-lg-12">
         <span><?= __('Middle Name') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Middle Name" class="form-control"  type="text"  id="middle_name" name="middle_name"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Middle Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="middle_name" name="middle_name"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
         <div style="display: none;color: red;" id="middle_name_err"> <?= __('Please enter Middle Name') ?> </div>
@@ -252,7 +252,7 @@
             <div class="form-group col-lg-12">
         <span><?= __('Last Name') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Last Name" class="form-control"  type="text"  id="last_name" name="last_name"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Last Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="last_name" name="last_name"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
         <div style="display: none;color: red;" id="last_name_err"> <?= __('Please enter Last Name') ?> </div>
@@ -261,7 +261,7 @@
             <div class="form-group col-lg-12">
         <span><?= __('Display Name') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Display Name" class="form-control"  type="text"  id="display_name" name="display_name"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Display Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="display_name" name="display_name"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
         <div style="display: none;color: red;" id="display_name_err"> <?= __('Please enter Display Name') ?> </div>
@@ -276,7 +276,7 @@
                                     <div class="form-group col-lg-12">
             <span><?= __('Address') ?></span>
             <div class="kt-radio-inline">
-            <textarea aria-label="Address" type="text" class="form-control" id="address" name="address" ></textarea>
+            <textarea aria-label="<?= htmlspecialchars(__('Address'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="address" name="address" ></textarea>
             </div>
             <div style="display: none;color: red;" id="address_err"> <?= __('Please Select Address') ?> </div>
         </div>
@@ -285,7 +285,7 @@
             <div class="form-group col-lg-6">
         <span><?= __('Post Code') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Post Code" class="form-control"  type="text"  id="post_code" name="post_code"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Post Code'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="post_code" name="post_code"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
         <div style="display: none;color: red;" id="post_code_err"> <?= __('Please enter Post Code') ?> </div>
@@ -294,7 +294,7 @@
             <div class="form-group col-lg-6">
         <span><?= __('Phone') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Phone" class="form-control"  type="text"  id="phone" name="phone"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="phone" name="phone"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
         <div style="display: none;color: red;" id="phone_err"> <?= __('Please enter Phone') ?> </div>
@@ -303,10 +303,10 @@
             <div class="form-group col-lg-12">
         <span><?= __('Email') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Email" class="form-control"  type="text"  id="email_id" name="email_id"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="email_id" name="email_id"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="email_id_err"> Please enter Email </div>
+        <div style="display: none;color: red;" id="email_id_err"> <?= __('Please enter Email'); ?> </div>
     </div>
 
                         </div>
@@ -319,16 +319,16 @@
             <span><?= __('Gender') ?></span>
             <div class="radio-inline">
 
-            <label class="radio"> <input aria-label="Gender" type="radio"   name="gender" value='F'>    <span></span>F </label>
+            <label class="radio"> <input aria-label="<?= htmlspecialchars(__('Gender'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"   name="gender" value='F'>    <span></span>F </label>
 
-            <label class="radio"> <input aria-label="Gender" type="radio"   name="gender" value='M'>    <span></span>M </label>
+            <label class="radio"> <input aria-label="<?= htmlspecialchars(__('Gender'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"   name="gender" value='M'>    <span></span>M </label>
                         </div>
-            <div style="display: none;color: red;" id="gender_err"> Please Select Gender </div>
+            <div style="display: none;color: red;" id="gender_err"> <?= __('Please Select Gender'); ?> </div>
         </div>
 
                         <div class="form-group col-lg-6">
         <span><?= __('Marital Status') ?></span>
-        <select aria-label="Marital Status" class="form-control kt-select2" id="kt_select2_41" name="marital_status">
+        <select aria-label="<?= htmlspecialchars(__('Marital Status'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt-select2" id="kt_select2_41" name="marital_status">
             <option value=""> <?= __('Select Any one Marital Status') ?></option>
 
                 <option  value="M"><?= __('Married') ?></option>
@@ -337,7 +337,7 @@
                 <option  value="S"><?= __('Single') ?></option>
             </optgroup>
             </select>
-        <div style="display: none;color: red;" id="marital_status_err"> Please Select Marital Status </div>
+        <div style="display: none;color: red;" id="marital_status_err"> <?= __('Please Select Marital Status'); ?> </div>
     </div>
 
 
@@ -345,7 +345,7 @@
             <span><?= __('Date Of Birth') ?></span>
 
                 <div class="input-group date">
-                                        <input aria-label="Date Of Birth" type="text" class="form-control"  value="11/09/2020"  name="date_of_birth"  id="kt_datepicker_31" />
+                                        <input aria-label="<?= htmlspecialchars(__('Date Of Birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="11/09/2020"  name="date_of_birth"  id="kt_datepicker_31" />
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="la la-calendar"></i>
@@ -358,10 +358,10 @@
             <div class="form-group col-lg-6">
         <span><?= __('Hiring Source') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Hiring Source" class="form-control"  type="text"  id="hiring_source" name="hiring_source"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Hiring Source'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="hiring_source" name="hiring_source"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="hiring_source_err"> Please enter Hiring Source </div>
+        <div style="display: none;color: red;" id="hiring_source_err"> <?= __('Please enter Hiring Source'); ?> </div>
     </div>
 
                         </div>
@@ -373,24 +373,24 @@
                                 <div class="form-group col-lg-6">
         <span><?= __('Total Experiance') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Total Experiance" class="form-control"  type="text"  id="total_experiance" name="total_experiance"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Total Experiance'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="total_experiance" name="total_experiance"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="total_experiance_err"> Please enter Total Experiance </div>
+        <div style="display: none;color: red;" id="total_experiance_err"> <?= __('Please enter Total Experiance'); ?> </div>
     </div>
 
             <div class="form-group col-lg-6">
         <span><?= __('Notice Period') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Notice Period" class="form-control"  type="text"  id="notice_period" name="notice_period"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Notice Period'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="notice_period" name="notice_period"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="notice_period_err"> Please enter Notice Period </div>
+        <div style="display: none;color: red;" id="notice_period_err"> <?= __('Please enter Notice Period'); ?> </div>
     </div>
 
                         <div class="form-group col-lg-6">
         <span><?= __('Negotiatable') ?></span>
-        <select aria-label="Np Negotiatable" class="form-control kt-select2" id="kt_select2_42" name="np_negotiatable">
+        <select aria-label="<?= htmlspecialchars(__('Np Negotiatable'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control kt-select2" id="kt_select2_42" name="np_negotiatable">
             <option value=""> <?= __('Select Any one Negotiatable') ?></option>
 
                 <option  value="1"><?= __('NO') ?></option>
@@ -399,17 +399,17 @@
                 <option  selected  value="0"><?= __('YES') ?></option>
             </optgroup>
             </select>
-        <div style="display: none;color: red;" id="np_negotiatable_err"> Please Select Negotiatable </div>
+        <div style="display: none;color: red;" id="np_negotiatable_err"> <?= __('Please Select Negotiatable'); ?> </div>
     </div>
 
 
             <div class="form-group col-lg-6">
         <span><?= __('Candidate Experiances') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Candidate Experiances" class="form-control"  type="text"  id="candidate_experiances" name="candidate_experiances"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Candidate Experiances'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="candidate_experiances" name="candidate_experiances"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="candidate_experiances_err"> Please enter Candidate Experiances </div>
+        <div style="display: none;color: red;" id="candidate_experiances_err"> <?= __('Please enter Candidate Experiances'); ?> </div>
     </div>
 
                         </div>
@@ -421,10 +421,10 @@
                                 <div class="form-group col-lg-6">
         <span><?= __('Candidate Qualifications') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Candidate Qualifications" class="form-control"  type="text"  id="candidate_qualifications" name="candidate_qualifications"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Candidate Qualifications'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="candidate_qualifications" name="candidate_qualifications"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="candidate_qualifications_err"> Please enter Candidate Qualifications </div>
+        <div style="display: none;color: red;" id="candidate_qualifications_err"> <?= __('Please enter Candidate Qualifications'); ?> </div>
     </div>
 
                         </div>
@@ -436,10 +436,10 @@
                                 <div class="form-group col-lg-6">
         <span><?= __('Employee Dependents') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Employee Dependents" class="form-control"  type="text"  id="employee_dependents" name="employee_dependents"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Employee Dependents'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="employee_dependents" name="employee_dependents"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="employee_dependents_err"> Please enter Employee Dependents </div>
+        <div style="display: none;color: red;" id="employee_dependents_err"> <?= __('Please enter Employee Dependents'); ?> </div>
     </div>
 
                         </div>
@@ -451,55 +451,55 @@
                                 <div class="form-group col-lg-6">
         <span><?= __('Employee Contacts') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Employee Contacts" class="form-control"  type="text"  id="employee_contacts" name="employee_contacts"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Employee Contacts'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="employee_contacts" name="employee_contacts"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="employee_contacts_err"> Please enter Employee Contacts </div>
+        <div style="display: none;color: red;" id="employee_contacts_err"> <?= __('Please enter Employee Contacts'); ?> </div>
     </div>
 
             <div class="form-group col-lg-6">
         <span><?= __('Current Location') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Current Location" class="form-control"  type="text"  id="current_location" name="current_location"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Current Location'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="current_location" name="current_location"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="current_location_err"> Please enter Current Location </div>
+        <div style="display: none;color: red;" id="current_location_err"> <?= __('Please enter Current Location'); ?> </div>
     </div>
 
             <div class="form-group col-lg-6">
         <span><?= __('Reason For Change') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Reason For Change" class="form-control"  type="text"  id="reason_for_change" name="reason_for_change"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Reason For Change'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="reason_for_change" name="reason_for_change"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="reason_for_change_err"> Please enter Reason For Change </div>
+        <div style="display: none;color: red;" id="reason_for_change_err"> <?= __('Please enter Reason For Change'); ?> </div>
     </div>
 
             <div class="form-group col-lg-6">
         <span><?= __('Relocate') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Relocate" class="form-control"  type="text"  id="relocate" name="relocate"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Relocate'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="relocate" name="relocate"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="relocate_err"> Please enter Relocate </div>
+        <div style="display: none;color: red;" id="relocate_err"> <?= __('Please enter Relocate'); ?> </div>
     </div>
 
             <div class="form-group col-lg-6">
         <span><?= __('Current Ctc') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Current Ctc" class="form-control"  type="text"  id="current_ctc" name="current_ctc"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Current Ctc'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="current_ctc" name="current_ctc"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="current_ctc_err"> Please enter Current Ctc </div>
+        <div style="display: none;color: red;" id="current_ctc_err"> <?= __('Please enter Current Ctc'); ?> </div>
     </div>
 
             <div class="form-group col-lg-6">
         <span><?= __('Expected Ctc') ?></span>
         <div class="input-group input-icon-right">
-            <input aria-label="Expected Ctc" class="form-control"  type="text"  id="expected_ctc" name="expected_ctc"  value="">
+            <input aria-label="<?= htmlspecialchars(__('Expected Ctc'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="text"  id="expected_ctc" name="expected_ctc"  value="">
             <div class="input-group-append"><span class="input-group-text"><span><i class="la la-adn"></i></span></span></div>
         </div>
-        <div style="display: none;color: red;" id="expected_ctc_err"> Please enter Expected Ctc </div>
+        <div style="display: none;color: red;" id="expected_ctc_err"> <?= __('Please enter Expected Ctc'); ?> </div>
     </div>
 
                         </div>

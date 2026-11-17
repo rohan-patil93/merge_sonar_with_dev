@@ -48,11 +48,11 @@ $title = 'User Assigned Contract Types';
                         <div class="card-header-right table-card-header col-lg-6 text-right">
                             <a href="index.php?option=COM_INSERT_USER_ASSIGNED_CONTRACT_TYPES" class="btn btn-success mb-2 desktop-view">
                                 <i class="icofont icofont-plus icon-white"></i>
-                                Assign Types
+                                <?= __('Assign Types'); ?>
                             </a>
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -60,10 +60,10 @@ $title = 'User Assigned Contract Types';
                         <table id="basic-btn" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">User</th>
-                                    <th scope="col">Assigned Types</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Id'); ?></th>
+                                    <th scope="col"><?= __('User'); ?></th>
+                                    <th scope="col"><?= __('Assigned Types'); ?></th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,13 +78,13 @@ $title = 'User Assigned Contract Types';
                                             <td><?php echo htmlspecialchars((string) ($rowArr['user_name'] ?? '')); ?></td>
                                             <td><?php echo htmlspecialchars((string) ($rowArr['type_names'] ?? '')); ?></td>
                                             <td class="uact-list-actions">
-                                                <a href="index.php?option=COM_INSERT_USER_ASSIGNED_CONTRACT_TYPES&Rid=<?php echo htmlspecialchars($editRid); ?>" class="btn btn-sm btn-primary" title="Edit">
+                                                <a href="index.php?option=COM_INSERT_USER_ASSIGNED_CONTRACT_TYPES&Rid=<?php echo htmlspecialchars($editRid); ?>" class="btn btn-sm btn-primary" title="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <form method="post" action="" class="js-uact-delete-form">
                                                     <input type="hidden" name="action" value="delete">
                                                     <input type="hidden" name="rid" value="<?php echo $rowId; ?>">
-                                                    <button type="submit" class="btn btn-sm btn-danger" title="Delete">
+                                                    <button type="submit" class="btn btn-sm btn-danger" title="<?= htmlspecialchars(__('Delete'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
@@ -93,7 +93,7 @@ $title = 'User Assigned Contract Types';
                                     <?php }
                                 } else { ?>
                                     <tr>
-                                        <td colspan="4" class="text-center">No assignments found.</td>
+                                        <td colspan="4" class="text-center"><?= __('No assignments found.'); ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -126,19 +126,19 @@ $title = 'User Assigned Contract Types';
                 e.preventDefault();
                 var form = this;
                 if (typeof swal !== 'function') {
-                    if (window.confirm('Delete this assignment?')) {
+                    if (window.confirm(<?php echo json_encode(__('Delete this assignment?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>)) {
                         form.submit();
                     }
                     return false;
                 }
                 swal({
-                    title: 'Are you sure?',
-                    text: 'Delete this assignment?',
+                    title: <?php echo json_encode(__('Are you sure?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                    text: <?php echo json_encode(__('Delete this assignment?'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonClass: 'btn-danger',
-                    confirmButtonText: 'Yes, delete',
-                    cancelButtonText: 'No',
+                    confirmButtonText: <?php echo json_encode(__('Yes, delete'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+                    cancelButtonText: <?php echo json_encode(__('No'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     closeOnConfirm: true,
                     closeOnCancel: true
                 }, function (isConfirm) {

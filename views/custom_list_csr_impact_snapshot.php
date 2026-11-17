@@ -20,15 +20,15 @@ $impactSnapshots = $impactData['impact_snapshots'] ?? array();
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>CSR Impact Snapshot</h5>
+            <h5><?= __('CSR Impact Snapshot'); ?></h5>
             <div class="card-header-right">
                 <a href="index.php?option=COM_INSERT_CSR_IMPACT_SNAPSHOT" class="btn btn-success mb-2 desktop-view">
                     <i class="icofont icofont-plus icon-white"></i>
-                    Impact Snapshot
+                    <?= __('Impact Snapshot'); ?>
                 </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -37,16 +37,16 @@ $impactSnapshots = $impactData['impact_snapshots'] ?? array();
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Sr. No</th>
-                            <th scope="col">Financial Year</th>
-                            <th scope="col">Project</th>
-                            <th scope="col" class="text-end">Student Supported</th>
-                            <th scope="col" class="text-end">Villages Covered</th>
-                            <th scope="col" class="text-end">Health Camps</th>
-                            <th scope="col" class="text-end">Trees Planted</th>
-                            <th scope="col" class="text-end">Women Benefited</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('Sr. No'); ?></th>
+                            <th scope="col"><?= __('Financial Year'); ?></th>
+                            <th scope="col"><?= __('Project'); ?></th>
+                            <th scope="col" class="text-end"><?= __('Student Supported'); ?></th>
+                            <th scope="col" class="text-end"><?= __('Villages Covered'); ?></th>
+                            <th scope="col" class="text-end"><?= __('Health Camps'); ?></th>
+                            <th scope="col" class="text-end"><?= __('Trees Planted'); ?></th>
+                            <th scope="col" class="text-end"><?= __('Women Benefited'); ?></th>
+                            <th scope="col"><?= __('Date'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +75,7 @@ $impactSnapshots = $impactData['impact_snapshots'] ?? array();
                         <?php } else { ?>
                             <tr>
                                 <td colspan="10" class="text-center">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Records'); ?></p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px no-record-img" alt="" src="assets/images/work.png">
                                     </div>

@@ -41,7 +41,7 @@ function setcompliance(){
         }
     });
     if (assetid.length === 0) {
-        alert("please select Minimum one Compliance");
+        alert(<?php echo json_encode(__('please select Minimum one Compliance'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         return false;
     }
     console.log(assetid);
@@ -64,13 +64,13 @@ function setcompliance(){
      <div class="page-body">
     <div class="card">
         <div class="card-header ">
-            <h5>Compliance Selection</h5>
+            <h5><?= __('Compliance Selection'); ?></h5>
             <div class="card-header-right">
                 <button type="button" onclick="setcompliance()" class="btn btn-success ">
-                Set Compliance
+                <?= __('Set Compliance'); ?>
                 </button>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-                  <i class="icofont icofont-reply"></i> Back
+                  <i class="icofont icofont-reply"></i> <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -82,16 +82,16 @@ function setcompliance(){
                 <th scope="col">
                     <div class="checkbox-fade fade-in-primary">
                         <label class="checkbox checkbox-success">
-                            <input aria-label="Ectall Checks" type="checkbox" id="selectall_checks" class="itemRow" onclick="selectallcheck()" onkeydown="">
+                            <input aria-label="<?= htmlspecialchars(__('Ectall Checks'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" id="selectall_checks" class="itemRow" onclick="selectallcheck()" onkeydown="">
                             <span class="cr">
                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                             </span>
-                        </label> All
+                        </label> <?= __('All'); ?>
                     </div>
                 </th>
-                <th scope="col">Compliance Name</th>
-                <th scope="col">Action Frequency</th>
-                <th scope="col">Critical Compliance</th>
+                <th scope="col"><?= __('Compliance Name'); ?></th>
+                <th scope="col"><?= __('Action Frequency'); ?></th>
+                <th scope="col"><?= __('Critical Compliance'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -100,7 +100,7 @@ function setcompliance(){
                         <td class="text-center">
                             <div class="checkbox-fade fade-in-primary" >
                                 <label class="checkbox checkbox-success">
-                                    <input aria-label="Checkbox" type="checkbox" class="itemRow checkboxassets" name="checkassets[<?php echo $compliancelist['id']; ?>]" value="<?php echo $compliancelist['id']; ?>" onchange="selectcheck()">
+                                    <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" class="itemRow checkboxassets" name="checkassets[<?php echo $compliancelist['id']; ?>]" value="<?php echo $compliancelist['id']; ?>" onchange="selectcheck()">
                                     <span class="cr">
                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                     </span>

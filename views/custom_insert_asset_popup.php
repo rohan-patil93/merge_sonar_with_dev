@@ -147,7 +147,7 @@ function selectAssetCategory(){
        		if(res.asset_attributes !=""){
         		$("#listattributes").html(res.asset_attributes);
         	}else{
-        		$("#listattributes").html("<span class='text-danger'><i class='ti-alert'></i>  Attributes Not Define</span>");
+        		$("#listattributes").html("<span class='text-danger'><i class='ti-alert'></i>  <?= htmlspecialchars(__('Attributes Not Define'), ENT_QUOTES, 'UTF-8'); ?></span>");
         	}
         	returnDepreciation();
         }
@@ -166,7 +166,7 @@ function getscrapPrice(){
 	var asset_cost = $("#asset_cost").val();
 	var disposal_proceeds = $("#disposal_proceeds").val();
 	if(asset_cost =="" || asset_cost =="0"){
-		swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Please Enter Purchase Price", "error");
+		swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Please Enter Purchase Price'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
 		return;
 	}
 	var grandtotal = 0;
@@ -209,8 +209,8 @@ function getDepreciationMethod(){
 }
 </script>
 <div class="modal-header">
-	<h4 class="modal-title">Add Assets</h4>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<h4 class="modal-title"><?= __('Add Assets'); ?></h4>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
 	<div class="">
@@ -222,16 +222,16 @@ function getDepreciationMethod(){
 					<div class="form-group col-lg-6">
 						<span class="form-label d-inline-block fw-bold"><?= __('Name') ?><span class="requried text-danger">*</span></span>
 						<span class="d-block error-message text-danger"></span>
-						<input class="form-control requried_field"  type="text"  id="asset_description" name="asset_description"  value="<?php echo $assetsdeatil['asset_description']; ?>" aria-label="Asset Description">
+						<input class="form-control requried_field"  type="text"  id="asset_description" name="asset_description"  value="<?php echo $assetsdeatil['asset_description']; ?>" aria-label="<?= htmlspecialchars(__('Asset Description'), ENT_QUOTES, 'UTF-8'); ?>">
 					</div>
 					<div class="form-group col-lg-6">
 						<span class="form-label d-inline-block fw-bold"><?= __('Code') ?></span>
-						<input class="form-control"  type="text"  id="asset_code" name="asset_code"  value="<?php echo $assetsdeatil['asset_code']; ?>" readonly aria-label="Asset Code">
+						<input class="form-control"  type="text"  id="asset_code" name="asset_code"  value="<?php echo $assetsdeatil['asset_code']; ?>" readonly aria-label="<?= htmlspecialchars(__('Asset Code'), ENT_QUOTES, 'UTF-8'); ?>">
 					</div>
 					<div class="form-group col-lg-6 w-full">
 						<span class="form-label d-inline-block fw-bold"><?= __('Category') ?><span class="requried text-danger">*</span></span>
 						<span class="d-block error-message text-danger"></span>
-						<select  class="form-select js-example-basic-single requried_field" name="category_id" id="asset_category_id" onchange="selectAssetCategory()" aria-label="Category Id">
+						<select  class="form-select js-example-basic-single requried_field" name="category_id" id="asset_category_id" onchange="selectAssetCategory()" aria-label="<?= htmlspecialchars(__('Category Id'), ENT_QUOTES, 'UTF-8'); ?>">
 							<option value=""><?= __('Select Any One') ?></option>
 							<?php foreach ($assetcategory as $assetcategor) { ?>
 								<option value="<?php echo $assetcategor['id']; ?>" <?php echo $assetcategor['id'] == $assetsdeatil['category_id']?"selected":""; ?> ><?php echo ucwords($assetcategor['category_description']); ?></option>
@@ -241,7 +241,7 @@ function getDepreciationMethod(){
 					<div class="form-group col-lg-6 w-full">
 						<span class="form-label d-inline-block fw-bold"><?= __('Location') ?> <span class="requried text-danger">*</span></span>
 						<span class="d-block error-message text-danger"></span>
-						<select  class="form-select js-example-basic-single requried_field" name="asset_location" aria-label="Asset Location">
+						<select  class="form-select js-example-basic-single requried_field" name="asset_location" aria-label="<?= htmlspecialchars(__('Asset Location'), ENT_QUOTES, 'UTF-8'); ?>">
 							<option value=""><?= __('Select Any One') ?></option>
 							<?php foreach ($locations as $location) { ?>
 								<option location value="<?php echo $location['id']; ?>" <?php echo $location['id'] == $assetsdeatil['asset_location']?"selected":""; ?>><?php echo ucwords($location['location_name']); ?></option>
@@ -251,7 +251,7 @@ function getDepreciationMethod(){
 					<div class="form-group col-lg-6 w-full">
 						<span class="form-label d-inline-block fw-bold"><?= __('Status') ?> <span class="requried text-danger">*</span></span>
 						<span class="d-block error-message text-danger"></span>
-						<select  class="form-select js-example-basic-single requried_field" name="status" aria-label="Status">
+						<select  class="form-select js-example-basic-single requried_field" name="status" aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>">
 							<?php foreach ($ass_status as $ass_statukey=>$ass_statu) { ?>
 								<option  value="<?php echo $ass_statukey; ?>" <?php echo ($ass_statukey == $assetsdeatil['asset_status'] || ($assetsdeatil['asset_status'] == '' && $assetsdeatil['asset_status'] == '1'))?"selected":""; ?>><?php echo ucwords($ass_statu); ?></option>
 							<?php } ?>
@@ -260,7 +260,7 @@ function getDepreciationMethod(){
 					<div class="form-group col-lg-6 w-full">
 						<label class="form-label"><?= __('Asset Custodian') ?> <span class="requried text-danger">*</span></label>
 						<span class="d-block error-message text-danger"></span>
-						<select  class="form-select js-example-basic-single requried_field" name="asset_custodian" aria-label="Asset Custodian">
+						<select  class="form-select js-example-basic-single requried_field" name="asset_custodian" aria-label="<?= htmlspecialchars(__('Asset Custodian'), ENT_QUOTES, 'UTF-8'); ?>">
 							<option value=""><?= __('Select Any One') ?></option>
 							<?php foreach ($users as $userlist) { ?>
 							<option value="<?php echo $userlist['id']; ?>" <?php echo ($assetsdeatil['asset_custodian'] == $userlist['id'] || ($assetsdeatil['asset_custodian'] =="" && $userlist['id'] == $_SESSION['userid']))?"selected":"";?>><?php echo ucwords($userlist['display_name']); ?></option>
@@ -270,7 +270,7 @@ function getDepreciationMethod(){
 					<div class="form-group col-lg-6">
 						<label class="form-label"><?= __('Warranty Expiry Date') ?> <span class="requried text-danger">*</span></label>
 						<span class="d-block error-message text-danger"></span>
-						<input class="form-control datepicker requried_field"  type="text"  id="warranty_expiry_date" name="warranty_expiry_date"  value="<?php echo  $assetsdeatil['warranty_expiry_date']!=""?fromDate($assetsdeatil['warranty_expiry_date']):""; ?>" aria-label="Warranty Expiry Date">
+						<input class="form-control datepicker requried_field"  type="text"  id="warranty_expiry_date" name="warranty_expiry_date"  value="<?php echo  $assetsdeatil['warranty_expiry_date']!=""?fromDate($assetsdeatil['warranty_expiry_date']):""; ?>" aria-label="<?= htmlspecialchars(__('Warranty Expiry Date'), ENT_QUOTES, 'UTF-8'); ?>">
 					</div>
 					<div class="form-group col-lg-6 mb-0">
 					<label><?= __('Attributes') ?></label>
@@ -282,7 +282,7 @@ function getDepreciationMethod(){
 							?>
 							<div class="checkbox-fade fade-in-primary mt-2">
 	                          	<label class="form-label">
-	                            	<input type="checkbox" name="attribute[]" <?php echo $checked; ?> value="<?php echo $asset_attributes['id']; ?>" aria-label="Attribute">
+	                            	<input type="checkbox" name="attribute[]" <?php echo $checked; ?> value="<?php echo $asset_attributes['id']; ?>" aria-label="<?= htmlspecialchars(__('Attribute'), ENT_QUOTES, 'UTF-8'); ?>">
 		                            <span class="cr">
 		                              <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
 		                            </span>
@@ -294,13 +294,13 @@ function getDepreciationMethod(){
 					</div>
 					<?php if($assetsdeatil['qr_code'] !=""){ ?>
 					<div class=" form-group col-lg-6">
-						<span class="form-label d-block">QR Code</span>
+						<span class="form-label d-block"><?= __('QR Code'); ?></span>
 						<img src="<?php echo "uploads/equipments/qr_code/".$assetsdeatil['qr_code'] ; ?>" class="img-100"  width="200" onerror="this.src='uploads/all/no-image.jpg';"/>
 					</div>
 					<?php }
 					if($assetsdeatil['id'] !=""){ ?>
 					<div class=" form-group col-lg-6">
-						<span class="form-label d-block">Barcode </span>
+						<span class="form-label d-block"><?= __('Barcode'); ?> </span>
 
 						<img src="<?php echo "barcode/barcode.php?text=".$assetsdeatil['asset_code'].'-'.$assetsdeatil['asset_description']; ?>" width="300" onerror="this.src='uploads/all/no-image.jpg';"/>
 					</div>
@@ -315,9 +315,9 @@ function getDepreciationMethod(){
 						<?php if($assetsdeatil['asset_img'] !=""){ ?>
 							<div class="drop-zone__thumb"  style="background-image: url(<?php echo $File_Uploads_Path.$assetsdeatil['asset_img']; ?>)"></div>
 						<?php  }else{ ?>
-							<span class="drop-zone__prompt">Drop file here or click to upload</span>
+							<span class="drop-zone__prompt"><?= __('Drop file here or click to upload'); ?></span>
 						<?php } ?>
-						<input type="file" name="asset_img" class="drop-zone__input" id="popattachment" aria-label="Asset Img">
+						<input type="file" name="asset_img" class="drop-zone__input" id="popattachment" aria-label="<?= htmlspecialchars(__('Asset Img'), ENT_QUOTES, 'UTF-8'); ?>">
 					</div>
 				</div>
 	        </div>
@@ -333,19 +333,19 @@ function getDepreciationMethod(){
 						<div class="row">
 		                	<div class="form-group col-lg-6">
 								<label class="form-label"><?= __('Brand Name') ?></label>
-								<input class="form-control"  type="text"  id="brand" name="brand"  value="<?php echo $assetsdeatil['brand']; ?>" aria-label="Brand">
+								<input class="form-control"  type="text"  id="brand" name="brand"  value="<?php echo $assetsdeatil['brand']; ?>" aria-label="<?= htmlspecialchars(__('Brand'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
 							<div class="form-group col-lg-6">
 								<label class="form-label"><?= __('Model Number') ?></label>
-								<input class="form-control"  type="text"  name="model"  value="<?php echo $assetsdeatil['model']; ?>" aria-label="Model">
+								<input class="form-control"  type="text"  name="model"  value="<?php echo $assetsdeatil['model']; ?>" aria-label="<?= htmlspecialchars(__('Model'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
 							<div class="form-group col-lg-6">
 								<label class="form-label"><?= __('Serial Number') ?></label>
-								<input class="form-control"  type="text"  id="serial_no" name="serial_no"  value="<?php echo $assetsdeatil['serial_no']; ?>" aria-label="Serial No">
+								<input class="form-control"  type="text"  id="serial_no" name="serial_no"  value="<?php echo $assetsdeatil['serial_no']; ?>" aria-label="<?= htmlspecialchars(__('Serial No'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
 							<div class="form-group col-lg-6 w-full">
 								<label class="form-label"><?= __('Condition') ?></label>
-								<select  class="form-select js-example-basic-single " name="conditions" aria-label="Conditions">
+								<select  class="form-select js-example-basic-single " name="conditions" aria-label="<?= htmlspecialchars(__('Conditions'), ENT_QUOTES, 'UTF-8'); ?>">
 									<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($ass_condition as $ass_conditiokey=>$ass_conditio) { ?>
 									<option  value="<?php echo $ass_conditiokey; ?>" <?php echo $ass_conditiokey == $assetsdeatil['conditions']?"selected":""; ?>><?php echo ucwords($ass_conditio); ?></option>
@@ -354,7 +354,7 @@ function getDepreciationMethod(){
 							</div>
 							<div class="form-group col-lg-6 w-full">
 								<span class="form-label d-inline-block fw-bold"><?= __('Linked Asset') ?></span>
-								<select  class="form-select js-example-basic-single " name="Parent_asset" aria-label="Parent Asset">
+								<select  class="form-select js-example-basic-single " name="Parent_asset" aria-label="<?= htmlspecialchars(__('Parent Asset'), ENT_QUOTES, 'UTF-8'); ?>">
 										<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($assets_list as $assets_list) { ?>
 									<option  value="<?php echo $assets_list['id']; ?>" <?php echo $assets_list['id'] == $assetsdeatil['Parent_asset']?"selected":""; ?>><?php echo $assets_list['asset_code']." - ".ucwords($assets_list['asset_description']); ?></option>
@@ -363,19 +363,19 @@ function getDepreciationMethod(){
 							</div>
 							<div class="form-group col-lg-6">
 								<span class="form-label d-inline-block fw-bold"><?= __('Description') ?></span>
-								<textarea type="text" class="form-control" id="long_description" rows="4" cols="50" name="long_description" aria-label="Long Description"><?php echo $assetsdeatil['long_description']; ?></textarea>
+								<textarea type="text" class="form-control" id="long_description" rows="4" cols="50" name="long_description" aria-label="<?= htmlspecialchars(__('Long Description'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $assetsdeatil['long_description']; ?></textarea>
 							</div>
 							<div class="col-lg-6">
 								<span class="form-label d-inline-block fw-bold"><?= __('Ownership') ?></span>
 								<div class="form-radio">
 								    <div class="radio radio-inline">
 								      <label class="form-label">
-								        <input type="radio" class="ownership1" <?php echo ($assetsdeatil['ownership']=="S" || $assetsdeatil['ownership']=="")?"checked":""; ?>  name="ownership" value="S" style="display: none;" onchange="checkOwnership()" aria-label="Ownership">
+								        <input type="radio" class="ownership1" <?php echo ($assetsdeatil['ownership']=="S" || $assetsdeatil['ownership']=="")?"checked":""; ?>  name="ownership" value="S" style="display: none;" onchange="checkOwnership()" aria-label="<?= htmlspecialchars(__('Ownership'), ENT_QUOTES, 'UTF-8'); ?>">
 								        <i class="helper"></i><?= __('Self') ?> </label>
 								    </div>
 								    <div class="radio radio-inline">
 								      <label class="form-label">
-								        <input type="radio" class="ownership1" name="ownership" value="P" <?php echo $assetsdeatil['ownership']=="P"?"checked":""; ?> style="display: none;" onchange="checkOwnership()" aria-label="Ownership">
+								        <input type="radio" class="ownership1" name="ownership" value="P" <?php echo $assetsdeatil['ownership']=="P"?"checked":""; ?> style="display: none;" onchange="checkOwnership()" aria-label="<?= htmlspecialchars(__('Ownership'), ENT_QUOTES, 'UTF-8'); ?>">
 								        <i class="helper"></i><?= __('Partner') ?>
 								      </label>
 								    </div>
@@ -383,7 +383,7 @@ function getDepreciationMethod(){
 							</div>
 							<div class="form-group col-lg-6 ownerships w-full" style="display:<?php echo ($assetsdeatil['ownership']=="S" || $assetsdeatil['ownership']=="")?"none":""; ?>">
 								<span class="form-label d-inline-block fw-bold"><?= __('Partner Vendor') ?></span>
-								<select class="form-select js-example-basic-single " name="vendor" aria-label="Vendor">
+								<select class="form-select js-example-basic-single " name="vendor" aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>">
 									<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($vendors as $vendors1){ ?>
 									<option  value="<?php echo $vendors1['id']; ?>" <?php echo $vendors1['id'] == $assetsdeatil['rented_from']?"selected":""; ?>><?php echo ucwords($vendors1['display_name']); ?></option>
@@ -404,32 +404,32 @@ function getDepreciationMethod(){
 				    	<div class="row">
 		                	<div class="form-group col-lg-6">
 								<span class="form-label d-inline-block fw-bold"><?= __('PO Number') ?></span>
-								<input class="form-control"  type="text"  id="po_number" name="po_number"  value="<?php echo $assetsdeatil['po_number']; ?>" aria-label="Po Number">
+								<input class="form-control"  type="text"  id="po_number" name="po_number"  value="<?php echo $assetsdeatil['po_number']; ?>" aria-label="<?= htmlspecialchars(__('Po Number'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
 							<div class="form-group col-lg-6">
 								<span class="form-label d-inline-block fw-bold"><?= __('PO Date') ?></span>
-								<input class="form-control datepicker"  type="text"  id="po_date" name="po_date"  value="<?php echo  $assetsdeatil['po_date']!=""?fromDate($assetsdeatil['po_date']):""; ?>" aria-label="Po Date">
+								<input class="form-control datepicker"  type="text"  id="po_date" name="po_date"  value="<?php echo  $assetsdeatil['po_date']!=""?fromDate($assetsdeatil['po_date']):""; ?>" aria-label="<?= htmlspecialchars(__('Po Date'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
 							<div class="form-group col-lg-6">
 								<span class="form-label d-inline-block fw-bold"><?= __('Invoice Number') ?></span>
-								<input class="form-control"  type="text"  id="invoice_number" name="invoice_number"  value="<?php echo $assetsdeatil['invoice_number']; ?>" aria-label="Invoice Number">
+								<input class="form-control"  type="text"  id="invoice_number" name="invoice_number"  value="<?php echo $assetsdeatil['invoice_number']; ?>" aria-label="<?= htmlspecialchars(__('Invoice Number'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
 							<div class="form-group col-lg-6">
 								<span class="form-label d-inline-block fw-bold"><?= __('Invoice Date') ?></span>
-								<input class="form-control datepicker"  type="text"  id="Invoice_date" name="Invoice_date" value="<?php echo  $assetsdeatil['Invoice_date']!=""?fromDate($assetsdeatil['Invoice_date']):""; ?>" aria-label="Invoice Date">
+								<input class="form-control datepicker"  type="text"  id="Invoice_date" name="Invoice_date" value="<?php echo  $assetsdeatil['Invoice_date']!=""?fromDate($assetsdeatil['Invoice_date']):""; ?>" aria-label="<?= htmlspecialchars(__('Invoice Date'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
 							<div class="form-group col-lg-6">
 								<span class="form-label d-inline-block fw-bold"><?= __('Purchase Number') ?></span>
-								<input class="form-control "  type="text"  id="purchase_number" name="purchase_number"  value="<?php echo $assetsdeatil['purchase_number']; ?>" aria-label="Purchase Number">
+								<input class="form-control "  type="text"  id="purchase_number" name="purchase_number"  value="<?php echo $assetsdeatil['purchase_number']; ?>" aria-label="<?= htmlspecialchars(__('Purchase Number'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
 							<div class="form-group col-lg-6">
 								<span class="form-label d-inline-block fw-bold"><?= __('Purchase Date') ?> <span class="requried text-danger">*</span></span>
 								<span class="d-block error-message text-danger"></span>
-								<input class="form-control datepicker requried_field"  type="text"  id="purchase_date" name="purchase_date"  value="<?php echo  $assetsdeatil['purchase_date']!=""?fromDate($assetsdeatil['purchase_date']):""; ?>" aria-label="Purchase Date">
+								<input class="form-control datepicker requried_field"  type="text"  id="purchase_date" name="purchase_date"  value="<?php echo  $assetsdeatil['purchase_date']!=""?fromDate($assetsdeatil['purchase_date']):""; ?>" aria-label="<?= htmlspecialchars(__('Purchase Date'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
 							<div class="form-group col-lg-6 w-full">
 								<span class="form-label  d-inline-block fw-bold"><?= __('Vendor') ?></span>
-								<select class="form-select js-example-basic-single " name="vendor" aria-label="Vendor">
+								<select class="form-select js-example-basic-single " name="vendor" aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>">
 									<option value=""><?= __('Select Any One') ?></option>
 								<?php foreach ($vendors as $vendors1) { ?>
 									<option  value="<?php echo $vendors1['id']; ?>" <?php echo $vendors1['id'] == $assetsdeatil['vendor']?"selected":""; ?>><?php echo ucwords($vendors1['display_name']); ?></option>
@@ -439,7 +439,7 @@ function getDepreciationMethod(){
 							<div class="form-group col-lg-6">
 								<span class="form-label d-inline-block fw-bold"><?= __('Purchase Price') ?> <span class="requried text-danger">*</span></span>
 								<span class="d-block error-message text-danger"></span>
-								<input class="form-control text-right requried_field"  type="text"  id="asset_cost" name="asset_cost"  value="<?php echo $assetsdeatil['asset_cost']; ?>" onblur="getscrapPrice()" aria-label="Asset Cost">
+								<input class="form-control text-right requried_field"  type="text"  id="asset_cost" name="asset_cost"  value="<?php echo $assetsdeatil['asset_cost']; ?>" onblur="getscrapPrice()" aria-label="<?= htmlspecialchars(__('Asset Cost'), ENT_QUOTES, 'UTF-8'); ?>">
 							</div>
                     	</div>
 				    </div>
@@ -448,7 +448,7 @@ function getDepreciationMethod(){
 		</div>
 	     <div class="card-block accordion-block color-accordion-block">
             <div class="color-accordion" id="color-accordion">
-                <a class="accordion-msg b-none waves-effect waves-light bg-gray">Finanacial information</a>
+                <a class="accordion-msg b-none waves-effect waves-light bg-gray"><?= __('Finanacial information'); ?></a>
                 <div class="accordion-desc">
                 	<div class="row">
 	                   	<!-- <div class="form-group col-lg-6">
@@ -457,34 +457,34 @@ function getDepreciationMethod(){
 						</div> -->
 						<div class="form-group col-lg-6">
 							<span class="form-label d-inline-block fw-bold"><?= __('Capitalization Date') ?></span>
-							<input class="form-control datepicker"  type="text"  id="capitalization_date" name="capitalization_date"  value="<?php echo $assetsdeatil['capitalization_date'] !=""?fromDate($assetsdeatil['capitalization_date']):""; ?>"  onchange="returnDepreciation()" aria-label="Capitalization Date">
+							<input class="form-control datepicker"  type="text"  id="capitalization_date" name="capitalization_date"  value="<?php echo $assetsdeatil['capitalization_date'] !=""?fromDate($assetsdeatil['capitalization_date']):""; ?>"  onchange="returnDepreciation()" aria-label="<?= htmlspecialchars(__('Capitalization Date'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 						<div class="form-group col-lg-3">
 							<span class="form-label d-inline-block fw-bold"><?= __('Scrap Price') ?></span>
-							<input class="form-control text-right"  type="text"  id="disposal_proceeds" name="disposal_proceeds"  value="<?php echo $assetsdeatil['disposal_proceeds']; ?>" onblur="getscrapPrice(this.value)" aria-label="Disposal Proceeds">
+							<input class="form-control text-right"  type="text"  id="disposal_proceeds" name="disposal_proceeds"  value="<?php echo $assetsdeatil['disposal_proceeds']; ?>" onblur="getscrapPrice(this.value)" aria-label="<?= htmlspecialchars(__('Disposal Proceeds'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 						<div class="form-group col-lg-3">
 							<span class="form-label d-inline-block fw-bold"><?= __('Book Value') ?></span>
-							<input class="form-control text-right"  type="text"  id="depn_rate" name="depn_rate"  value="<?php echo $assetsdeatil['depn_rate']; ?>" readonly aria-label="Depn Rate">
+							<input class="form-control text-right"  type="text"  id="depn_rate" name="depn_rate"  value="<?php echo $assetsdeatil['depn_rate']; ?>" readonly aria-label="<?= htmlspecialchars(__('Depn Rate'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 						<div class="form-group col-lg-6 w-full" style="">
 							<span class="form-label d-inline-block fw-bold"><?= __('Depreciation methods') ?> <span class="requried">*</span></span>
-							<select class="form-select js-example-basic-single " name="depreciation_method"  id="depreciation_method" onchange="getDepreciationMethod()" aria-label="Depreciation Method">
+							<select class="form-select js-example-basic-single " name="depreciation_method"  id="depreciation_method" onchange="getDepreciationMethod()" aria-label="<?= htmlspecialchars(__('Depreciation Method'), ENT_QUOTES, 'UTF-8'); ?>">
 							<option value=""><?= __('Select Any One') ?></option>
 							<?php foreach($depreciation_method as $dm) {
 								$disable =''; if($dm['genc_detail_code'] == 'PU'){ $disable = 'disabled';
 								} ?>
-									<option value="<?php echo $dm['genc_detail_code']; ?>" <?php echo $assetsdeatil['depreciation_method'] ==$dm['genc_detail_code']?"selected":""; ?> <?php echo $disable;?>><?php echo $dm['genc_detail_name'];?></option>
+									<option value="<?php echo $dm['genc_detail_code']; ?>" <?php echo $assetsdeatil['depreciation_method'] ==$dm['genc_detail_code']?"selected":""; ?> <?php echo $disable;?>><?php echo __($dm['genc_detail_name']);?></option>
 								<?php } ?>
 							</select>
 						</div>
 						<div class="form-group col-lg-3" style="pointer-events:none; opacity:0.7">
 							<span class="form-label d-inline-block fw-bold"><?= __('Duration') ?></span>
-							<input class="form-control text-right"  type="number"  id="duration" name="duration"  value="<?php echo $assetsdeatil['duration']; ?>" onblur="getDepreciationMethod()" aria-label="Duration">
+							<input class="form-control text-right"  type="number"  id="duration" name="duration"  value="<?php echo $assetsdeatil['duration']; ?>" onblur="getDepreciationMethod()" aria-label="<?= htmlspecialchars(__('Duration'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 						<div class="form-group col-lg-3" style="pointer-events:none; opacity:0.7">
 							<span class="form-label d-inline-block fw-bold"><?= __('End Of life') ?></span>
-							<input class="form-control datepicker"  type="text"  id="end_of_life" name="end_of_life"  value="<?php echo  $assetsdeatil['end_of_life']!=""?fromDate($assetsdeatil['end_of_life']):""; ?>" onblur="getDepreciationMethod()" aria-label="End Of Life">
+							<input class="form-control datepicker"  type="text"  id="end_of_life" name="end_of_life"  value="<?php echo  $assetsdeatil['end_of_life']!=""?fromDate($assetsdeatil['end_of_life']):""; ?>" onblur="getDepreciationMethod()" aria-label="<?= htmlspecialchars(__('End Of Life'), ENT_QUOTES, 'UTF-8'); ?>">
 						</div>
 						<?php /** ?>
 						<div class="form-group col-lg-4 w-full" style="pointer-events:none; opacity:0.7">
@@ -550,7 +550,7 @@ function getDepreciationMethod(){
 
 
                 </div>
-                 <a class="accordion-msg b-none waves-effect waves-light bg-gray">Custom Fields</a>
+                 <a class="accordion-msg b-none waves-effect waves-light bg-gray"><?= __('Custom Fields'); ?></a>
                 <div class="accordion-desc">
 
                 	<div class="row newfield">
@@ -566,7 +566,7 @@ function getDepreciationMethod(){
                 		 ?>
                         <div class="form-group col-lg-6">
 							<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Manufacturing Date') ?></span>
-							<input class="form-control <?php echo $clss; ?>  fieldname"  type="<?php echo $types; ?>"   name="fieldvalue[]"  value="<?php echo $custom_fields['fieldvalue']; ?>" aria-label="Fieldvalue">
+							<input class="form-control <?php echo $clss; ?>  fieldname"  type="<?php echo $types; ?>"   name="fieldvalue[]"  value="<?php echo $custom_fields['fieldvalue']; ?>" aria-label="<?= htmlspecialchars(__('Fieldvalue'), ENT_QUOTES, 'UTF-8'); ?>">
 							<input  type="hidden" class="fieldname"  name="fieldname[]"  value="<?php echo $custom_fields['fieldname']; ?>">
 							<input  type="hidden" class="fieldname"  name="fieldtype[]"  value="<?php echo $custom_fields['fieldtype']; ?>">
 						</div>
@@ -575,12 +575,12 @@ function getDepreciationMethod(){
 				 	<div class="row">
 				 		<div class="col-lg-4 form-group">
 					 		<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Enter Field Name') ?></span>
-					 		<input class="form-control "  type="text"  id="ent_field_name" aria-label="Input">
+					 		<input class="form-control "  type="text"  id="ent_field_name" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 							<span class="text-danger" id="fileserrormess"></span>
 						</div>
 						<div class="col-lg-4 form-group w-full">
 					 		<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Type') ?></span>
-							<select  class="form-select js-example-basic-single " id="slct_field_type" aria-label="Select">
+							<select  class="form-select js-example-basic-single " id="slct_field_type" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
 									<option value="text"><?= __('Text') ?></option>
 									<option value="number"><?= __('Number') ?></option>
 									<option value="date"><?= __('Date') ?></option>
@@ -608,12 +608,12 @@ function getDepreciationMethod(){
 function returnDepreciation(){
 	var category_id = $("#asset_category_id").val();
 	if(category_id =="" || category_id =="0"){
-		swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Please Select Asset Category", "error");
+		swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Please Select Asset Category'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
 		return;
 	}
 	var capitalization_date = $("#capitalization_date").val();
 	if(asset_cost =="" || asset_cost =="0"){
-		swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Please Enter Purchase Price", "error");
+		swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Please Enter Purchase Price'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
 		return;
 	}
 	var depn_rate = $("#depn_rate").val();
@@ -681,7 +681,7 @@ function addnewfields(){
 	if(ent_field_name==""){
 		//alert("hi");
 		$("#ent_field_name").val("");
-		$("#fileserrormess").text("Please Enter Field Name");
+		$("#fileserrormess").text(<?php echo json_encode(__('Please Enter Field Name'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
 		return false;
 	}
 // var newfield = "";
@@ -697,11 +697,11 @@ function addnewfields(){
 //    });
 //  if(newfield != "N"){
 	if(slct_field_type == "number"){
-		var html = '<div class="form-group col-lg-6"><label>'+ent_field_name+'</label><input class="form-control text-right"  type="number"  name="fieldvalue[]" aria-label="Fieldvalue"><input  type="hidden" class="fieldname"  name="fieldname[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="fieldtype[]"  value="number"></div>';
+		var html = '<div class="form-group col-lg-6"><label>'+ent_field_name+'</label><input class="form-control text-right"  type="number"  name="fieldvalue[]" aria-label="<?= htmlspecialchars(__('Fieldvalue'), ENT_QUOTES, 'UTF-8'); ?>"><input  type="hidden" class="fieldname"  name="fieldname[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="fieldtype[]"  value="number"></div>';
 	}else if(slct_field_type == "date"){
-		var html = '<div class="form-group col-lg-6"><label>'+ent_field_name+'</label><input class="form-control datepicker"  type="text"  name="fieldvalue[]" aria-label="Fieldvalue"><input  type="hidden" class="fieldname"  name="fieldname[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="fieldtype[]"  value="date"></div>';
+		var html = '<div class="form-group col-lg-6"><label>'+ent_field_name+'</label><input class="form-control datepicker"  type="text"  name="fieldvalue[]" aria-label="<?= htmlspecialchars(__('Fieldvalue'), ENT_QUOTES, 'UTF-8'); ?>"><input  type="hidden" class="fieldname"  name="fieldname[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="fieldtype[]"  value="date"></div>';
 	}else{
-		var html = '<div class="form-group col-lg-6"><label>'+ent_field_name+'</label><input class="form-control "  type="text"  name="fieldvalue[]" aria-label="Fieldvalue"><input  type="hidden" class="fieldname"  name="fieldname[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="fieldtype[]"  value="text"></div>';
+		var html = '<div class="form-group col-lg-6"><label>'+ent_field_name+'</label><input class="form-control "  type="text"  name="fieldvalue[]" aria-label="<?= htmlspecialchars(__('Fieldvalue'), ENT_QUOTES, 'UTF-8'); ?>"><input  type="hidden" class="fieldname"  name="fieldname[]"  value="'+ent_field_name+'"><input  type="hidden" class="fieldname"  name="fieldtype[]"  value="text"></div>';
 	}
 	$(".newfield").append(html);
 	$( ".datepicker" ).datepicker({

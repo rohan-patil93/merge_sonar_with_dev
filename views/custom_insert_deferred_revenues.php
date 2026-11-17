@@ -86,7 +86,7 @@ function getscrapPrice(valu){
 <?php if($error_message !=''){ ?>
         <div class="alert alert-danger background-danger alert-dismissible">
             <strong><?php echo $error_message; ?></strong>
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
 <?php } ?>
 
@@ -94,7 +94,7 @@ function getscrapPrice(valu){
     <div class="card-header">
         <h5><?= __('Deferred Revenues') ?></h5>
         <div class="card-header-right table-card-header">
-            <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i>Back</button>
+            <button type="button" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?></button>
         </div>
     </div>
     <div class="card-body">
@@ -103,39 +103,39 @@ function getscrapPrice(valu){
             <input type="hidden" name="depreciation_method"  id="depreciation_method" value="SL">
                 <div class="form-group col-lg-3">
                 <span class="form-label"><?= __('Deferred Revenue Name') ?></span>
-                <input aria-label="Deferred Revenue Name" class="form-control text-right"  type="text"  id="deferred_revenue_name" name="deferred_revenue_name"  value="<?php echo $deferred_revenues['deferred_revenue_name']; ?>">
+                <input aria-label="<?= htmlspecialchars(__('Deferred Revenue Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right"  type="text"  id="deferred_revenue_name" name="deferred_revenue_name"  value="<?php echo $deferred_revenues['deferred_revenue_name']; ?>">
             </div>
                <div class="form-group col-lg-3">
                 <span class="form-label"><?= __('Original Amount') ?></span>
-                <input aria-label="Original Amount" class="form-control text-right"  type="text"  id="original_amount" name="original_amount"  value="<?php echo $deferred_revenues['original_amount']; ?>"  onblur="getscrapPrice(this.value)">
+                <input aria-label="<?= htmlspecialchars(__('Original Amount'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right"  type="text"  id="original_amount" name="original_amount"  value="<?php echo $deferred_revenues['original_amount']; ?>"  onblur="getscrapPrice(this.value)">
             </div>
             <div class="form-group col-lg-3">
                 <span class="form-label"><?= __('Acquisition Date') ?></span>
-                <input aria-label="Acquisition Date" class="form-control datepicker"  type="text"  id="acquisition_date" name="acquisition_date"  value="<?php echo $deferred_revenues['acquisition_date'] !=""?fromDate($deferred_revenues['acquisition_date']):""; ?>" onchange="getDepreciationMethod()">
+                <input aria-label="<?= htmlspecialchars(__('Acquisition Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker"  type="text"  id="acquisition_date" name="acquisition_date"  value="<?php echo $deferred_revenues['acquisition_date'] !=""?fromDate($deferred_revenues['acquisition_date']):""; ?>" onchange="getDepreciationMethod()">
             </div>
 
             <div class="form-group col-lg-3">
                 <span class="form-label"><?= __('Scrap Amount') ?></span>
-                <input aria-label="Scrap Amount" class="form-control text-right "  type="text"  id="scrap_amount" name="scrap_amount"   value="<?php echo $deferred_revenues['scrap_amount']; ?>" onblur="getscrapPrice(this.value)">
+                <input aria-label="<?= htmlspecialchars(__('Scrap Amount'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right "  type="text"  id="scrap_amount" name="scrap_amount"   value="<?php echo $deferred_revenues['scrap_amount']; ?>" onblur="getscrapPrice(this.value)">
             </div>
 
             <div class="form-group col-lg-3">
                 <span class="form-label"><?= __('Deferred Revenue Amount') ?></span>
-                <input aria-label="Deferred Revenue Amount" class="form-control text-right"  type="text"  id="deferred_revenue_amount" name="deferred_revenue_amount"  value="<?php echo $deferred_revenues['deferred_revenue_amount']; ?>" onblur="getDepreciationMethod()" readonly>
+                <input aria-label="<?= htmlspecialchars(__('Deferred Revenue Amount'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control text-right"  type="text"  id="deferred_revenue_amount" name="deferred_revenue_amount"  value="<?php echo $deferred_revenues['deferred_revenue_amount']; ?>" onblur="getDepreciationMethod()" readonly>
             </div>
 
             <div class="form-group col-lg-1">
                 <span class="form-label"><?= __('Duration') ?></span>
-                <input aria-label="Duration" class="form-control"  type="number"  id="duration" name="duration"  value="<?php echo $deferred_revenues['duration']!=""?$deferred_revenues['duration']:1; ?>" onblur="getDepreciationMethod()">
+                <input aria-label="<?= htmlspecialchars(__('Duration'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control"  type="number"  id="duration" name="duration"  value="<?php echo $deferred_revenues['duration']!=""?$deferred_revenues['duration']:1; ?>" onblur="getDepreciationMethod()">
             </div>
             <div class="form-group col-lg-2">
                 <span class="form-label"><?= __('End Of life') ?></span>
-                <input aria-label="End Deferred Revenue Date" class="form-control datepicker"  type="text"  id="end_deferred_revenue_date" name="end_deferred_revenue_date"  value="<?php echo  $deferred_revenues['end_deferred_revenue_date']!=""?fromDate($deferred_revenues['end_deferred_revenue_date']):""; ?>" readonly>
+                <input aria-label="<?= htmlspecialchars(__('End Deferred Revenue Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control datepicker"  type="text"  id="end_deferred_revenue_date" name="end_deferred_revenue_date"  value="<?php echo  $deferred_revenues['end_deferred_revenue_date']!=""?fromDate($deferred_revenues['end_deferred_revenue_date']):""; ?>" readonly>
             </div>
 
             <div class="form-group col-lg-3 w-full">
                 <span class="form-label d-block"><?= __('Deferred Revenue Account') ?></span>
-                <select aria-label="Deferred Revenue Account" name="deferred_revenue_account" class="form-control form-select js-example-basic-single" required>
+                <select aria-label="<?= htmlspecialchars(__('Deferred Revenue Account'), ENT_QUOTES, 'UTF-8'); ?>" name="deferred_revenue_account" class="form-control form-select js-example-basic-single" required>
                     <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach($chart_of_accounts as $coa) {  ?>
                         <option value="<?php echo $coa['id']; ?>" <?php echo $deferred_revenues['deferred_revenue_account'] ==$coa['id']?"selected":""; ?>><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option>
@@ -144,7 +144,7 @@ function getscrapPrice(valu){
             </div>
             <div class="form-group col-lg-3 w-full">
                 <span class="form-label d-block"><?= __('Revenue Account') ?></span>
-                <select aria-label="Revenue Account" name="revenue_account" class="form-control form-select js-example-basic-single" required>
+                <select aria-label="<?= htmlspecialchars(__('Revenue Account'), ENT_QUOTES, 'UTF-8'); ?>" name="revenue_account" class="form-control form-select js-example-basic-single" required>
                     <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach($chart_of_accounts as $coa) {  ?>
                         <option value="<?php echo $coa['id']; ?>" <?php echo $deferred_revenues['revenue_account'] ==$coa['id']?"selected":""; ?>><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option>
@@ -153,7 +153,7 @@ function getscrapPrice(valu){
             </div>
             <div class="form-group col-lg-3 w-full">
                 <span class="form-label d-block"><?= __('Journal') ?></span>
-                <select aria-label="Journal" name="Journal" class="form-control form-select js-example-basic-single" required>
+                <select aria-label="<?= htmlspecialchars(__('Journal'), ENT_QUOTES, 'UTF-8'); ?>" name="Journal" class="form-control form-select js-example-basic-single" required>
                     <option value=""><?= __('Select Any One') ?></option>
                     <?php foreach($chart_of_accounts as $coa) {  ?>
                         <option value="<?php echo $coa['id']; ?>" <?php echo $deferred_revenues['Journal'] ==$coa['id']?"selected":""; ?>><?php echo $coa['account_name']." (".$coa['account_code'].")";?></option>

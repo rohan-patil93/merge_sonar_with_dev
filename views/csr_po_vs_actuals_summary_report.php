@@ -84,7 +84,7 @@ $_SESSION['download_data'] = [];
                                 <th scope="col" class="csr-sticky-col csr-sticky-partner text-center bg-primary"><?= __('PO Details') ?></th>
                                 <?php foreach ($normalizedFyList as $fyRow) { ?>
                                     <th scope="col" colspan="3" class="bg-primary text-white text-center">
-                                        FY <?= $fyRow['text']; ?>
+                                        <?= __('FY'); ?> <?= $fyRow['text']; ?>
                                     </th>
                                 <?php } ?>
                                 <th scope="col" colspan="5" class="bg-primary text-white text-center"><?= __('Total Spent & Unspent Amt. (incl GST)') ?></th>

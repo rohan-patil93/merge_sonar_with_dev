@@ -47,13 +47,13 @@ $stausresult = ViewStatusData();
 </script>
 <div class="card">
     <div class="card-header">
-        <h5> Payments</h5>
+        <h5> <?= __('Payments'); ?></h5>
         <div class="card-header-right table-card-header">
            <a href="index?option=COM_INSERT_PAYMENTS" class="btn btn-success mb-2 desktop-view">
-              <i class="icofont icofont-plus icon-white "></i> Payments</a>
+              <i class="icofont icofont-plus icon-white "></i> <?= __('Payments'); ?></a>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
           </div>
         </div>
@@ -62,9 +62,9 @@ $stausresult = ViewStatusData();
         <div class="row">
             <input type="hidden" name="option" value="<?php echo $_GET['option']; ?>">
              <div class="form-group col-lg-3  w-full" id='transaction_vendors' >
-                <span class="form-label">Vendor </span>
-                <select aria-label="Vendor" class="form-control form-select js-example-basic-single" id="vendor_id" name="vendor_id" >
-                    <option value=""> Select Any Vendor </option>
+                <span class="form-label"><?= __('Vendor'); ?> </span>
+                <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="vendor_id" name="vendor_id" >
+                    <option value=""> <?= __('Select Any Vendor'); ?> </option>
                     <?php foreach ($vendorlist as $cus) {  ?>
                         <option  <?php if($_GET['vendor_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id']; ?>   > <?php echo $cus['display_name'].' ('.$cus['company'].')'; ?>
@@ -74,9 +74,9 @@ $stausresult = ViewStatusData();
                 <span class="messages"></span>
             </div>
             <div class="form-group col-lg-3 w-full" id='transaction_customers' >
-                <span class="form-label">Customer </span>
-                <select aria-label="Customer" class="form-control form-select js-example-basic-single" id="customer_id" name="customer_id">
-                    <option value=""> Select Any Customer </option>
+                <span class="form-label"><?= __('Customer'); ?> </span>
+                <select aria-label="<?= htmlspecialchars(__('Customer'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="customer_id" name="customer_id">
+                    <option value=""> <?= __('Select Any Customer'); ?> </option>
                     <?php foreach ($customers as $cus){  ?>
                         <option  <?php if($_GET['customer_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id']; ?>   > <?php echo $cus['display_name'].' ('.$cus['company'].')'; ?>
@@ -86,9 +86,9 @@ $stausresult = ViewStatusData();
                 <span class="messages"></span>
             </div>
             <div class="form-group col-lg-3 w-full" id='transaction_employess' >
-                <span class="form-label">Employees </span>
-                <select aria-label="Employee" class="form-control form-select js-example-basic-single" id="employee_id" name="employee_id" >
-                    <option value=""> Select Any Employee </option>
+                <span class="form-label"><?= __('Employees'); ?> </span>
+                <select aria-label="<?= htmlspecialchars(__('Employee'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="employee_id" name="employee_id" >
+                    <option value=""> <?= __('Select Any Employee'); ?> </option>
                     <?php foreach ($employees as $cus){  ?>
                         <option  <?php if($_GET['employee_id'] == $cus['id']){ ?> selected  <?php
 } ?> value = <?php echo $cus['id']; ?>   > <?php echo $cus['display_name']; ?>
@@ -98,12 +98,12 @@ $stausresult = ViewStatusData();
                 <span class="messages"></span>
             </div>
             <div class="col-lg-2 form-group form-validation-class">
-                <span class="form-label">Name/Date/ref_no/etc </span>
-                <input aria-label="Filter Text" class="form-control" type="text" name="filter_text"  id="filter_text" value="<?php echo $_GET['filter_text']; ?>" >
+                <span class="form-label"><?= __('Name/Date/ref_no/etc'); ?> </span>
+                <input aria-label="<?= htmlspecialchars(__('Filter Text'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="filter_text"  id="filter_text" value="<?php echo $_GET['filter_text']; ?>" >
                  <span class="messages"></span>
             </div>
             <div class="col-lg-1">
-               <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-t-30" name="filterbtn" value="filterbtn">Search</button>
+               <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 m-t-30" name="filterbtn" value="filterbtn"><?= __('Search'); ?></button>
             </div>
 
         </div>
@@ -125,15 +125,15 @@ $stausresult = ViewStatusData();
                         <table class="table table-hover m-b-0" style="font-size:13px;">
                           <tbody>
                                 <tr>
-                                  <th scope="col" class="p-2">Number <span class="form-label label" style="color: <?php echo $stausresult[$pay['current_status']]['color']; ?>;    background:  <?php echo $stausresult[$pay['current_status']]['background_color']; ?>; border-color: <?php echo $stausresult[$pay['current_status']]['background_color']; ?>;"><?php echo $stausresult[$pay['current_status']]['name']; ?></span></th>
+                                  <th scope="col" class="p-2"><?= __('Number'); ?> <span class="form-label label" style="color: <?php echo $stausresult[$pay['current_status']]['color']; ?>;    background:  <?php echo $stausresult[$pay['current_status']]['background_color']; ?>; border-color: <?php echo $stausresult[$pay['current_status']]['background_color']; ?>;"><?php echo $stausresult[$pay['current_status']]['name']; ?></span></th>
                                   <td class="text-right p-2 "> <a href="index?option=COM_INSERT_PAYMENTS&Rid=<?php echo deocdeId("id:".$pay['id']);?>" class="text-primary"><i class="fa fa-edit"></i>  <?php echo $pay['transaction_no']; ?></a></td>
                                 </tr>
                                 <tr>
-                                  <th scope="col" class="p-2">Transaction Date</th>
+                                  <th scope="col" class="p-2"><?= __('Transaction Date'); ?></th>
                                   <td class="text-right p-2 w-b-w-s"><?php echo fromDate($pay['payment_date']); ?></td>
                                 </tr>
                                 <tr>
-                                  <th scope="col" class="p-2">Part Name</th>
+                                  <th scope="col" class="p-2"><?= __('Part Name'); ?></th>
                                   <td class="text-right p-2 text-capitalize w-b-w-s"><?php
                                   $partynameli = json_decode($pay['party_id'],1);
                                   foreach($partynameli as $partyid){
@@ -147,48 +147,48 @@ $stausresult = ViewStatusData();
                                    ?></td>
                                 </tr>
                                 <tr >
-                                  <th scope="col" class="p-2" >Payment
+                                  <th scope="col" class="p-2" ><?= __('Payment'); ?>
                                   </th>
                                   <td class="text-right p-2 text-capitalize"><?php echo $pay['payment_type']; ?></td>
                                 </tr>
                                 <tr>
-                                  <th scope="col" class="p-2">Ref No.</th>
+                                  <th scope="col" class="p-2"><?= __('Ref No.'); ?></th>
                                   <td class="text-right p-2"><?php echo $pay['ref_no']!=""?$pay['ref_no']:"-"; ?></td>
                                 </tr>
                                 <tr>
-                                  <th scope="col" class="p-2">Due Date</th>
+                                  <th scope="col" class="p-2"><?= __('Due Date'); ?></th>
                                   <td class="text-right p-2"><?php echo fromDate($pay['due_date']); ?></td>
                                 </tr>
                                 <tr>
-                                  <th scope="col" class="p-2">Total</th>
+                                  <th scope="col" class="p-2"><?= __('Total'); ?></th>
                                   <td class="text-right p-2"><?php echo customeummarmonyformate($pay['amount']); ?></td>
                               </tr>
                                <tr>
-                                  <th scope="col" class="p-2">Un-Allocated Amount</th>
+                                  <th scope="col" class="p-2"><?= __('Un-Allocated Amount'); ?></th>
                                   <td class="text-right p-2"><?php echo customeummarmonyformate($pay['unallocated_amount']); ?></td>
                               </tr>
                               <tr>
-                                  <th scope="col" class="p-2">Allocated Amount</th>
+                                  <th scope="col" class="p-2"><?= __('Allocated Amount'); ?></th>
                                   <td class="text-right p-2 text-danger"><?php echo customeummarmonyformate($pay['allocated_amount']); ?></td>
                               </tr>
                               <tr>
-                                  <th scope="col" class="p-2" >Transactions</th>
+                                  <th scope="col" class="p-2" ><?= __('Transactions'); ?></th>
                                   <td class="text-right p-2 text-primary" id="custom-popup"><span class="cursor-pointer" onclick="opentTenantUtilityPopUp('<?php echo $pay['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-eye"></i> <?php echo count((array)$payment_allocations[$pay['id']]); ?></span>
 
                                     <div class="custom-popup-open open_popup_tenant_billing_<?php echo $pay['id']; ?> text-start" style="width: 333px;  display: none;">
                                       <div class="card">
                                         <div class="card-header">
-                                          <h5>Payment History</h5>
+                                          <h5><?= __('Payment History'); ?></h5>
                                           <div class="card-header-right">
-                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closePopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                                           </div>
                                         </div>
                                          <div class="card-body">
                                             <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                                               <thead>
                                                 <tr>
-                                                  <th scope="col" class="p-1" style="width: 60%;">Number</th>
-                                                  <th scope="col" class="p-1 text-right" style="width: 40%;">Paid Amount</th>
+                                                  <th scope="col" class="p-1" style="width: 60%;"><?= __('Number'); ?></th>
+                                                  <th scope="col" class="p-1 text-right" style="width: 40%;"><?= __('Paid Amount'); ?></th>
                                                 </tr>
                                               </thead>
                                               <tbody>

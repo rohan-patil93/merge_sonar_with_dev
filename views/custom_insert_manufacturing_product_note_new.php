@@ -117,7 +117,7 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
 } </option>";
               }
             } else {
-              echo "<option value=''>No Work Orders Found</option>";
+              echo "<option value=''>".__('No Work Orders Found')."</option>";
             }
             ?>
           </select>
@@ -286,27 +286,27 @@ $plannedQty = floatval($data['work_order']['work_order_item_qty'] ?? 0);
               if ($status === null || $status === '') {
                 // Not Started
                 echo '<button type="submit" name="action" value="start" class="btn btn-success btn-sm px-3">
-                      <i class="bi bi-play-circle me-1"></i> Start
+                      <i class="bi bi-play-circle me-1"></i> '.__('Start').'
                     </button>';
               } elseif ($status == 0) {
                 // Started
                 echo '<button type="submit" name="action" value="hold" class="btn btn-warning btn-sm px-3 text-white">
-                      <i class="bi bi-pause-circle me-1"></i> Hold
+                      <i class="bi bi-pause-circle me-1"></i> '.__('Hold').'
                     </button>
                     <button type="submit" name="action" value="complete" class="btn btn-primary btn-sm px-3">
-                      <i class="bi bi-check2-circle me-1"></i> Complete
+                      <i class="bi bi-check2-circle me-1"></i> '.__('Complete').'
                     </button>';
               } elseif ($status == 1) {
                 // On Hold
                 echo '<button type="submit" name="action" value="start" class="btn btn-success btn-sm px-3">
-                      <i class="bi bi-play-circle me-1"></i> Resume
+                      <i class="bi bi-play-circle me-1"></i> '.__('Resume').'
                     </button>
                     <button type="submit" name="action" value="complete" class="btn btn-primary btn-sm px-3">
-                      <i class="bi bi-check2-circle me-1"></i> Complete
+                      <i class="bi bi-check2-circle me-1"></i> '.__('Complete').'
                     </button>';
               } elseif ($status == 199) {
                 // Completed → No buttons
-                echo '<span class="badge bg-success p-2"><i class="bi bi-check2-circle me-1"></i> Work Completed</span>';
+                echo '<span class="badge bg-success p-2"><i class="bi bi-check2-circle me-1"></i> '.__('Work Completed').'</span>';
               }
               ?>
               <input type="hidden" name="submit" value="save_status">

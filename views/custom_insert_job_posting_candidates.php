@@ -138,10 +138,10 @@ $userlist = json_decode($userlist,1);
                         text: mms,
                         type: "success",
                         buttonsStyling: false,
-                        confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                        confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
                         confirmButtonClass: "btn btn-primary",
                         showCancelButton: false,
-                        cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                        cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                         cancelButtonClass: "btn btn-danger"
                     }).then(function(result) {
                         if (result.value) {

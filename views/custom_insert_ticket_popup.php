@@ -107,13 +107,13 @@ $company = $_SESSION['company'];
                     if (json.status && (json.status.toLowerCase() === 'success' || json.status.toLowerCase() === 'sucess')) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Success',
+                            title: <?php echo json_encode(__('Success'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             text: <?php echo json_encode(__('Ticket saved successfully!')); ?>
                         }).then(() => location.reload());
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error',
+                            title: <?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                             text: json.message
                         });
                     }
@@ -121,7 +121,7 @@ $company = $_SESSION['company'];
                     console.error("⚠️ Failed to parse response:", e, response);
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error',
+                        title: <?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                         text: <?php echo json_encode(__('Invalid API response')); ?>
                     });
                 }
@@ -130,7 +130,7 @@ $company = $_SESSION['company'];
                 console.error("❌ AJAX Error:", err);
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error',
+                    title: <?php echo json_encode(__('Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                     text: <?php echo json_encode(__('Failed to reach API')); ?>
                 });
             }

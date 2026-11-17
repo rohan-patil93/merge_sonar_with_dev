@@ -35,8 +35,8 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
     }
 </script>
 <div class="modal-header  ">
-    <h5 class="modal-title">API Hits Response</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('API Hits Response'); ?></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body">
 <?php if($api_hits['response_status'] =="200"){ ?>
@@ -47,9 +47,9 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
                 <table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" id="htmlajaxapihits">
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">Transaction No.</th>
-                        <th scope="col">Transaction Date</th>
-                        <th scope="col" class="text-right">Total</th>
+                        <th scope="col"><?= __('Transaction No.'); ?></th>
+                        <th scope="col"><?= __('Transaction Date'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total'); ?></th>
                     </tr>
                 <?php foreach($api_hits_response_details as $trans_id=>$tableslist){
                     $arychunks = array_chunk($tableslist['Ledger_Entries'], 2);
@@ -73,7 +73,7 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
                                 <div class="col-lg-12">
                                     <table class="table table-td-6">
                                         <thead>
-                                            <tr><th scope="col">Transaction No.</th><th scope="col">Party_Name</th><th scope="col" class="text-right">Total</th></tr>
+                                            <tr><th scope="col"><?= __('Transaction No.'); ?></th><th scope="col"><?= __('Party_Name'); ?></th><th scope="col" class="text-right"><?= __('Total'); ?></th></tr>
                                         </thead>
                                         <tbody>
                                             <?php
@@ -100,12 +100,12 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
                 <table class="table table-separate table-head-custom table-checkable data-table custom_asign_emp_mpc" id="htmlajaxapihits_2">
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">Transaction No.</th>
-                        <th scope="col">Transaction Date</th>
-                        <th scope="col">Party Name</th>
-                        <th scope="col" class="text-right">Amount</th>
-                        <th scope="col" class="text-right">Tax</th>
-                        <th scope="col" class="text-right">Total</th>
+                        <th scope="col"><?= __('Transaction No.'); ?></th>
+                        <th scope="col"><?= __('Transaction Date'); ?></th>
+                        <th scope="col"><?= __('Party Name'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Amount'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Tax'); ?></th>
+                        <th scope="col" class="text-right"><?= __('Total'); ?></th>
                     </tr>
                 <?php foreach($api_hits_response_details as $trans_id=>$tableslist){
                     if($tableslist['Voucher_Amount']!=""){
@@ -136,7 +136,7 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
                                 <div class="col-lg-9">
                                     <table class="table table-td-6">
                                         <thead>
-                                            <tr><th scope="col">Item</th><th scope="col">SKU</th><th scope="col" class="text-right">Quantity</th><th scope="col" class="text-right">Amount</th><th scope="col" class="text-right">Total</th></tr>
+                                            <tr><th scope="col"><?= __('Item'); ?></th><th scope="col"><?= __('SKU'); ?></th><th scope="col" class="text-right"><?= __('Quantity'); ?></th><th scope="col" class="text-right"><?= __('Amount'); ?></th><th scope="col" class="text-right"><?= __('Total'); ?></th></tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach($tableslist['Item_Entries'] as $tableslist1){?>
@@ -157,15 +157,15 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                         <div class="card-header">
-                                            <h5>Order Summary</h5>
+                                            <h5><?= __('Order Summary'); ?></h5>
                                         </div>
                                     </div>
                                     </div>
                                         <div class="card-body">
                                             <table class="table table-sm mb-0">
-                                                <tr><th scope="col">Sub Total </th><td style="text-align: right;"><?php echo $invtotalamt-$totaltax; ?></td></tr>
-                                                <tr><th scope="col">Tax</th><td style="text-align: right;"><?php echo $totaltax; ?></td></tr>
-                                                <tr class="bg-primary"><th scope="col">Total</th><td style="text-align: right;"><span class="f-18"><?php echo $invtotalamt; ?></span></td></tr>
+                                                <tr><th scope="col"><?= __('Sub Total'); ?> </th><td style="text-align: right;"><?php echo $invtotalamt-$totaltax; ?></td></tr>
+                                                <tr><th scope="col"><?= __('Tax'); ?></th><td style="text-align: right;"><?php echo $totaltax; ?></td></tr>
+                                                <tr class="bg-primary"><th scope="col"><?= __('Total'); ?></th><td style="text-align: right;"><span class="f-18"><?php echo $invtotalamt; ?></span></td></tr>
                                             </table>
                                         </div>
 
@@ -191,7 +191,7 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
                                 <?php echo $keyfield; ?>
                             </th>
                             <?php } ?>
-                            <th scope="col">Status</th>
+                            <th scope="col"><?= __('Status'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -221,7 +221,7 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>API Requist</h5>
+                        <h5><?= __('API Requist'); ?></h5>
                         <div class="card-header-right table-card-header ">
                         </div>
                     </div>
@@ -233,7 +233,7 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>API Response</h5>
+                        <h5><?= __('API Response'); ?></h5>
                         <div class="card-header-right table-card-header ">
                         </div>
                     </div>
@@ -247,7 +247,7 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
 
     <?php }else{ ?>
         <div class="card-px text-center ">
-            <p class="text-danger f-16 fw-bold m-b-30"><i class="ti ti-alert text-danger"></i> Oops Wrong Response</p>
+            <p class="text-danger f-16 fw-bold m-b-30"><i class="ti ti-alert text-danger"></i> <?= __('Oops Wrong Response'); ?></p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
@@ -255,15 +255,15 @@ $api_hits_response_details = $api_hits_response_details123[$api_code];
     <?php } ?>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" >Close</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal" ><?= __('Close'); ?></button>
     <?php if($api_masters['api_type'] == "R"){ ?>
-     <button type="button" class="btn btn-primary waves-effect waves-light" onclick="checkAPIDataValidateORNot('<?php echo $api_hit_id; ?>','C')"> Check Validations </button>
-    <button type="button" class="btn btn-primary waves-effect waves-light" id="insertemployeedetails_btn" onclick="checkAPIDataValidateORNot('<?php echo $api_hit_id; ?>','S')"> Sync With Database </button>
+     <button type="button" class="btn btn-primary waves-effect waves-light" onclick="checkAPIDataValidateORNot('<?php echo $api_hit_id; ?>','C')"> <?= __('Check Validations'); ?> </button>
+    <button type="button" class="btn btn-primary waves-effect waves-light" id="insertemployeedetails_btn" onclick="checkAPIDataValidateORNot('<?php echo $api_hit_id; ?>','S')"> <?= __('Sync With Database'); ?> </button>
         <?php } ?>
 </div>
 <script type="text/javascript">
     function checkAPIDataValidateORNot(api_hit_id,checkstatus){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#htmlajaxapihits").html(loader);
         $.ajax({
             url: "ajax.php",

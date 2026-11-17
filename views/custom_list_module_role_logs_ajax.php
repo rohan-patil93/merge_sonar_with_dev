@@ -21,13 +21,13 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Sr. No</th>
-                <th scope="col">User</th>
-                <th scope="col">Action</th>
-                <th scope="col">Module</th>
-                <th scope="col">Role</th>
-                <th scope="col">Modified By</th>
-                <th scope="col">Modified At</th>
+                <th scope="col"><?= __('Sr. No'); ?></th>
+                <th scope="col"><?= __('User'); ?></th>
+                <th scope="col"><?= __('Action'); ?></th>
+                <th scope="col"><?= __('Module'); ?></th>
+                <th scope="col"><?= __('Role'); ?></th>
+                <th scope="col"><?= __('Modified By'); ?></th>
+                <th scope="col"><?= __('Modified At'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -60,7 +60,7 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
                 }
             }else{ ?>
                 <tr>
-                    <td colspan="7" class="text-center text-muted">No Module Role Logs found</td>
+                    <td colspan="7" class="text-center text-muted"><?= __('No Module Role Logs found'); ?></td>
                 </tr>
             <?php } ?>
         </tbody>

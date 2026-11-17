@@ -219,16 +219,16 @@ foreach ($defalut_fields as $dfield) {
                     <div class="card card-custom" id="kt_page_sticky_card">
                         <div class="card-header">
                             <div class="card-title">
-                                <h5 class="card-label">Employee List</h5>
+                                <h5 class="card-label"><?= __('Employee List'); ?></h5>
 
                             </div>
                         </div>
                         <div class="card-body row">
                             <div class="col-lg-1 mt-3">
-                                <button type="button" class="btn btn-warning" onclick="showpopup();"><i class="ti-filter"></i>Filter</button>
+                                <button type="button" class="btn btn-warning" onclick="showpopup();"><i class="ti-filter"></i><?= __('Filter'); ?></button>
                             </div>
                             <div class="col-lg-5 mt-3">
-                                <select aria-label="Displayattributes[]" class="form-select js-example-basic-multiple-limit_custom" name="displayattributes[]" multiple="multiple">
+                                <select aria-label="<?= htmlspecialchars(__('Displayattributes'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-select js-example-basic-multiple-limit_custom" name="displayattributes[]" multiple="multiple">
                                     <?php $jd=0; foreach ($employees_fieldlist as $fkey => $fieldvalue) {
 
                                         if(in_array($fkey, $defalut_fields)){ $jd++;
@@ -242,7 +242,7 @@ foreach ($defalut_fields as $dfield) {
                             </div>
                             <div class="col-lg-2 mt-3">
                                 <input type="hidden" id="filterby" name="filterby">
-                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply">Apply</button>
+                                <button id="kt_login_signin_submit" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"  name="applyform" value="apply"><?= __('Apply'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -255,8 +255,8 @@ foreach ($defalut_fields as $dfield) {
         <div class="card card-custom">
             <div class="row" style="display: none">
                 <div class="form-group col-lg-3 mt-10 mb-10"  id="bulkcategory" style="display: none">
-                    <span>Transfer Category</span>
-                    <select aria-label="Bulkchangecategory" onchange="showbulkchangefilter(this.value);" id="bulkchangecategory" name="bulkchangecategory" class="form-control" >
+                    <span><?= __('Transfer Category'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Bulkchangecategory'), ENT_QUOTES, 'UTF-8'); ?>" onchange="showbulkchangefilter(this.value);" id="bulkchangecategory" name="bulkchangecategory" class="form-control" >
                         <?php
                         foreach ($bulkchangecategory as $filter) {
                             ?>
@@ -264,7 +264,7 @@ foreach ($defalut_fields as $dfield) {
 } ?> value="<?php echo $filter['application_tablename']."|".$filter['application_table_fieldname'].'|'.$filter['id'].'|'.$filter['update_employees_fieldname'].'|'.$filter['insert_history_tablename'];?>"><?php echo $filter['category_name'];?></option>
                         <?php } ?>
                     </select>
-                    <span class="form-text text-muted">Select Bulk Transfer Category</span>
+                    <span class="form-text text-muted"><?= __('Select Bulk Transfer Category'); ?></span>
 
                 </div>
 
@@ -272,16 +272,16 @@ foreach ($defalut_fields as $dfield) {
 
                 </div>
                 <div class="col-lg-3 mt-10 mb-10" id="effectdate" style="display: none">
-                    <span>Effective From</span>
+                    <span><?= __('Effective From'); ?></span>
                     <div class="input-group date">
-                        <input aria-label="Effective Date" type="text" class="form-control"  id="kt_datepicker_4_1"  name="effective_date" />
+                        <input aria-label="<?= htmlspecialchars(__('Effective Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  id="kt_datepicker_4_1"  name="effective_date" />
                         <div class="input-group-append">
                             <span class="input-group-text">
                                 <i class="la la-calendar-check-o"></i>
                             </span>
                         </div>
                     </div>
-                    <span class="form-text text-muted">Enter Effective From</span>
+                    <span class="form-text text-muted"><?= __('Enter Effective From'); ?></span>
 
                 </div>
                 <div class="col-lg-2 mt-10 mb-10">
@@ -292,7 +292,7 @@ foreach ($defalut_fields as $dfield) {
                     <input type="hidden" id="bulkmove_empids">
                     <input type="hidden" id="bulkchange_categoryid">
                     <input type="hidden" id="bulkmove_toid">
-                    <button id="previewbtn"  style="display: none" class="btn btn-primary btn-shadow-hover font-weight-bold mt-8" onclick="bulkconfirmpopup()">Preview</button>
+                    <button id="previewbtn"  style="display: none" class="btn btn-primary btn-shadow-hover font-weight-bold mt-8" onclick="bulkconfirmpopup()"><?= __('Preview'); ?></button>
                 </div>
             </div>
         </div>
@@ -302,10 +302,10 @@ foreach ($defalut_fields as $dfield) {
                 <div class="row" >
                     <ul class="nav  md-tabs infisuite_tab mb-2 ">
                         <li class="nav-item">
-                            <a class="nav-link <?php echo (!isset($_GET['vtype']) || $_GET['vtype']=="list")?"active":""; ?>"  href="index.php?option=COM_LIST_EMPLOYEE_FILTER&vtype=list" role="tab"> <i class="fa fa-navicon"></i> List</a>
+                            <a class="nav-link <?php echo (!isset($_GET['vtype']) || $_GET['vtype']=="list")?"active":""; ?>"  href="index.php?option=COM_LIST_EMPLOYEE_FILTER&vtype=list" role="tab"> <i class="fa fa-navicon"></i> <?= __('List'); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $_GET['vtype']=="grid"?"active":""; ?>"  href="index.php?option=COM_LIST_EMPLOYEE_FILTER&vtype=grid" role="tab"> <i class="fa fa-building"></i> Grid</a>
+                            <a class="nav-link <?php echo $_GET['vtype']=="grid"?"active":""; ?>"  href="index.php?option=COM_LIST_EMPLOYEE_FILTER&vtype=grid" role="tab"> <i class="fa fa-building"></i> <?= __('Grid'); ?></a>
                         </li>
 
                     </ul>
@@ -329,7 +329,7 @@ foreach ($defalut_fields as $dfield) {
         <?php if($empvalue['image']!="") { ?>
 
                             <div data-label="40%" class="radial-bar radial-bar-lg radial-bar-0  radial-bar-danger">
-                                <img src="uploads/all/<?php echo $empvalue['image']; ?>" alt="User">
+                                <img src="uploads/all/<?php echo $empvalue['image']; ?>" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
         <?php }else{  ?>
  <div data-label="<?php echo initials($empvalue['display_name']); ?>" class="radial-bar custom-radial-bar radial-bar-0 radial-bar-lg radial-bar-danger"></div>
@@ -369,9 +369,9 @@ foreach ($defalut_fields as $dfield) {
                             <table id="new-cons" class="table table-striped table-bordered nowrap">
                             <thead>
                                 <tr>
-                                    <th scope="col">SN</th>
+                                    <th scope="col"><?= __('SN'); ?></th>
 
-                                    <th scope="col">Name </th>
+                                    <th scope="col"><?= __('Name'); ?> </th>
 
                                     <?php foreach ($employees_fieldlist as $empkey => $empfield) {
                                         if(in_array($empkey, $defalut_fields))  { ?>
@@ -380,7 +380,7 @@ foreach ($defalut_fields as $dfield) {
                                              </th>
                                     <?php } ?>
                                     <?php } ?>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"><?= __('Action'); ?></th>
                                     </tr>
 
                                     </thead>
@@ -394,9 +394,9 @@ foreach ($defalut_fields as $dfield) {
                                                 <td><?php echo $serialno; ?></td>
                                                 <td >
                                             <?php if($empvalue['image']!="") { ?>
-                                                <img src="uploads/all/<?php echo $empvalue['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="Attachment Preview">
+                                                <img src="uploads/all/<?php echo $empvalue['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             <?php } else { ?>
-                                                <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empvalue['display_name']); ?></span>
+                                                <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empvalue['display_name']); ?></span>
                                             <?php } ?>
     <button type="button" class="cursor-pointer" onclick="getBasicInfoPopUp(<?php echo $empvalue['id'];?>)"><?php echo strtoupper($empvalue['display_name']); ?></button>
                                                 </td>
@@ -419,7 +419,7 @@ foreach ($defalut_fields as $dfield) {
                                                 <td>
 
                                                    <a href="index.php?option=COM_INSERT_ONBOARDING_EMPLOYEES&Rid=<?php echo deocdeId("id:".$empvalue['id']); ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="Edit Datails <?php echo $empvalue['id']; ?>" ><i class="fa fa-edit"></i></a>
-                                                                    <button type="button" onclick="getBasicInfoPopUp(<?php echo $empvalue['id'];?>)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="view Datails"><i class="fa fa-eye"></i></button>
+                                                                    <button type="button" onclick="getBasicInfoPopUp(<?php echo $empvalue['id'];?>)" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="<?= htmlspecialchars(__('view Datails'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye"></i></button>
                                                 </td>
                                                 </tr>
 

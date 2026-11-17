@@ -8,7 +8,7 @@ $_SESSION['apply_js']['calender']='1';
 <div class="page-body">
   <div class="card">
     <div class="card-header">
-      <h5 class="f-30">Time Off Schedule</h5>
+      <h5 class="f-30"><?= __('Time Off Schedule'); ?></h5>
       <input type="hidden" name="calendar_cat" id="calendar_cat" value="101">
       <div id='calendar'></div>
     </div>
@@ -28,20 +28,20 @@ $_SESSION['apply_js']['calender']='1';
         <?php if(count((array)$emp_details) !=0){ ?>
         <table class="table table-hover table-sm">
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">From</th>
-            <th scope="col">To</th>
-            <th scope="col">Type</th>
-            <th scope="col">Leave Days</th>
-            <th scope="col">Status</th>
-            <th scope="col">Notes</th>
+            <th scope="col"><?= __('Name'); ?></th>
+            <th scope="col"><?= __('From'); ?></th>
+            <th scope="col"><?= __('To'); ?></th>
+            <th scope="col"><?= __('Type'); ?></th>
+            <th scope="col"><?= __('Leave Days'); ?></th>
+            <th scope="col"><?= __('Status'); ?></th>
+            <th scope="col"><?= __('Notes'); ?></th>
           </tr>
           <?php foreach($emp_details as $emdata ){ ?>
           <tr>
             <td>
                <div class="d-inline-block align-middle">
                 <?php if($emdata['image']!=""){ ?>
-                  <img src="uploads/module/hr.webp" alt="user" class="img-radius img-40 align-top m-r-15">
+                  <img src="uploads/module/hr.webp" alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15">
                 <?php }else{ ?>
                   <span class="img-radius img-50 align-top m-r-10 custom_txt_round custom_txt_round-2 p-2 f-1 text-center bg-white text-black  mt-1"><?php echo initials($emdata['display_name']); ?></span>
                 <?php } ?>
@@ -55,14 +55,14 @@ $_SESSION['apply_js']['calender']='1';
             <td><?php echo fromDate($emdata['leave_to']); ?></td>
             <td><?php echo $result['leave_type'][$emdata['leave_type_id']]; ?></td>
             <td><?php echo $emdata['leave_days']; ?></td>
-            <td>Approved</td>
+            <td><?= __('Approved'); ?></td>
             <td><?php echo $emdata['special_request']; ?></td>
           </tr>
         <?php } ?>
         </table>
         <?php }else{ ?>
         <div class="card-px text-center py-20 m-t-30">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Data</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Data'); ?></p>
         <div class="text-center px-4">
           <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
         </div>

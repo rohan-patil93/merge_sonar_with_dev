@@ -15,20 +15,20 @@ $survey_qtype_names = implode('|',(array)array_keys($surveyData['survey_qtypes']
 <div class="d-flex flex-column-fluid">
    <div class="container-fluid">
         <div class="alert alert-warning alert-dismissible">
-            <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong><?php echo "This function is used for maintaining <strong>".__('Display Attributes')."</strong>".__('. * represents mandatory fields.').""; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
         <div class="row">
       <div class="col-lg-12">
          <div class="card">
             <div class="card-header table-card-header">
-               <h5><?php echo $display_tag; ?> Overview </h5>
+               <h5><?php echo $display_tag; ?> <?= __('Overview'); ?> </h5>
             <div class="card-header-right table-card-header ">
                 <a href="index.php?option=COM_INSERT_EXIT_INTERVIEWS"  class=" btn btn-success  ">
                         <i class="icofont icofont-plus icon-white "></i>
-                        Create Exit interview </a>
+                        <?= __('Create Exit interview'); ?> </a>
 
-                  <button type="button" class="btn waves-effect waves-light btn-inverse btn-outline-inverse"><i class="icofont icofont-reply"></i>Back</button>
+                  <button type="button" class="btn waves-effect waves-light btn-inverse btn-outline-inverse"><i class="icofont icofont-reply"></i><?= __('Back'); ?></button>
             </div>
          </div>
                         <div class="card-body">
@@ -38,13 +38,13 @@ $survey_qtype_names = implode('|',(array)array_keys($surveyData['survey_qtypes']
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col" style="width: 20%;">Name </th>
-                                                    <th scope="col">Start Date </th>
-                                                    <th scope="col">End Date </th>
-                                                    <th scope="col">Questions </th>
-                                                    <th scope="col">Responses </th>
-                                                    <th scope="col">Completion Rate </th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col" style="width: 20%;"><?= __('Name'); ?> </th>
+                                                    <th scope="col"><?= __('Start Date'); ?> </th>
+                                                    <th scope="col"><?= __('End Date'); ?> </th>
+                                                    <th scope="col"><?= __('Questions'); ?> </th>
+                                                    <th scope="col"><?= __('Responses'); ?> </th>
+                                                    <th scope="col"><?= __('Completion Rate'); ?> </th>
+                                                    <th scope="col"><?= __('Action'); ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>

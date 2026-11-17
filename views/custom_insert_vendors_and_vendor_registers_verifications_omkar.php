@@ -287,13 +287,13 @@ function showNotificationIcon($status)
             <!-- Step <?php echo $step_counter; ?>: PAN Verification -->
                 <div class="step-header">
                     <?php if ($is_verified): ?>
-                        <h3><i class="fa fa-check-circle text-success"></i> PAN Card Verification - Completed</h3>
-                        <p class="text-success">Your PAN has been successfully verified on
+                        <h3><i class="fa fa-check-circle text-success"></i> <?= __('PAN Card Verification - Completed'); ?></h3>
+                        <p class="text-success"><?= __('Your PAN has been successfully verified on'); ?>
                             <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['PAN']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
-                        <h3><i class="fa fa-id-card text-primary"></i> PAN Card Verification</h3>
-                        <p>Enter your PAN card number to verify your identity and business details</p>
+                        <h3><i class="fa fa-id-card text-primary"></i> <?= __('PAN Card Verification'); ?></h3>
+                        <p><?= __('Enter your PAN card number to verify your identity and business details'); ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -303,47 +303,46 @@ function showNotificationIcon($status)
                             <!-- Verified PAN Inputs (Non-editable) -->
                             <div class="verified-section border rounded p-3 bg-light shadow-sm">
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">PAN Number</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('PAN Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['pan_no'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input" aria-label="Input">
+                                        tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">Company Name</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('Company Name'); ?></span>
                                     <input type="text" id="company_name_verified" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['company'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input" aria-label="Input">
+                                        tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
-                                    <i class="fa fa-lock"></i> This verification is completed and cannot be edited.
-                                    Contact the administrator if changes are needed.
+                                    <i class="fa fa-lock"></i> <?= __('This verification is completed and cannot be edited. Contact the administrator if changes are needed.'); ?>
                                 </small>
                             </div>
                         <?php else: ?>
                             <!-- PAN Input Form (Editable) -->
                             <div class="form-group">
-                                <span class="form-label d-inline-block fw-bold">Company Name</span>
+                                <span class="form-label d-inline-block fw-bold"><?= __('Company Name'); ?></span>
                                 <input type="text" onblur="checkCompanyNameAllReadyAvilableOrNot()" class="form-control"
-                                    id="company_name" placeholder="Enter company name"
-                                    value="<?php echo $vendordetail['company'] ?? ''; ?>" title="Enter company name" aria-label="Enter company name">
+                                    id="company_name" placeholder="<?= htmlspecialchars(__('Enter company name'), ENT_QUOTES, 'UTF-8'); ?>"
+                                    value="<?php echo $vendordetail['company'] ?? ''; ?>" title="<?= htmlspecialchars(__('Enter company name'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter company name'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="text-danger f-12" id="allreadycompanyname" style="display:none">
-                                    Company Name Already Register
+                                    <?= __('Company Name Already Register'); ?>
                                 </span>
                             </div>
 
                             <div class="form-group">
-                                <span class="form-label d-inline-block fw-bold">PAN Number <span class="text-danger">*</span></span>
+                                <span class="form-label d-inline-block fw-bold"><?= __('PAN Number'); ?> <span class="text-danger">*</span></span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="pan_number" placeholder="ABCDE1234F"
+                                    <input type="text" class="form-control" id="pan_number" placeholder="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatPANInput(this)" maxlength="10" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['pan_no'] ?? ''; ?>" title="ABCDE1234F" aria-label="ABCDE1234F">
+                                        value="<?php echo $vendordetail['pan_no'] ?? ''; ?>" title="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
                                 </div>
-                                <small class="text-muted">Format: ABCDE1234F (5 letters, 4 digits, 1 letter)</small>
+                                <small class="text-muted"><?= __('Format: ABCDE1234F (5 letters, 4 digits, 1 letter)'); ?></small>
                             </div>
 
                             <div class="form-group">
@@ -351,7 +350,7 @@ function showNotificationIcon($status)
                                     <div class="col-lg-12">
                                         <button type="button" class="btn btn-secondary btn-sm" id="pan_edit_btn"
                                             onclick="toggleEdit('pan')">
-                                            Change Info
+                                            <?= __('Change Info'); ?>
                                         </button>
                                     </div>
                                 </div>
@@ -360,7 +359,7 @@ function showNotificationIcon($status)
                             <!-- Hidden verify button for internal use -->
                             <button type="button" class="btn btn-primary" id="verify_pan_btn" onclick="verifyPAN()"
                                 style="display: none;">
-                                <i class="fa fa-search"></i> Verify PAN
+                                <i class="fa fa-search"></i> <?= __('Verify PAN'); ?>
                             </button>
                         <?php endif; ?>
 
@@ -368,26 +367,26 @@ function showNotificationIcon($status)
 
                     <div class="col-md-6">
                         <div id="pan_verification_fields" class="verification-fields">
-                            <h5><i class="fa fa-info-circle"></i> PAN Verification Details</h5>
+                            <h5><i class="fa fa-info-circle"></i> <?= __('PAN Verification Details'); ?></h5>
                             <div class="row">
                                 <div class="col-12 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Verified Name</span>
-                                    <input type="text" class="form-control custom_readonly" id="pan_verified_name" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Verified Name'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="pan_verified_name" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">PAN Type</span>
-                                    <input type="text" class="form-control custom_readonly" id="pan_verified_type" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('PAN Type'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="pan_verified_type" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Status</span>
-                                    <input type="text" class="form-control custom_readonly" id="pan_verified_status" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Status'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="pan_verified_status" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                         </div>
 
                         <div id="pan_confirmation_section" class="confirmation-section">
-                            <h6><i class="fa fa-check-circle text-success"></i> PAN Verification Completed</h6>
-                            <p class="mb-0">PAN details have been successfully verified and match your records.</p>
+                            <h6><i class="fa fa-check-circle text-success"></i> <?= __('PAN Verification Completed'); ?></h6>
+                            <p class="mb-0"><?= __('PAN details have been successfully verified and match your records.'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -397,13 +396,13 @@ function showNotificationIcon($status)
             <!-- Step <?php echo $step_counter; ?>: GST Verification -->
                 <div class="step-header">
                     <?php if ($is_verified): ?>
-                        <h3><i class="fa fa-check-circle text-success"></i> GST Number Verification - Completed</h3>
-                        <p class="text-success">Your GST has been successfully verified on
+                        <h3><i class="fa fa-check-circle text-success"></i> <?= __('GST Number Verification - Completed'); ?></h3>
+                        <p class="text-success"><?= __('Your GST has been successfully verified on'); ?>
                             <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['GSTIN']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
-                        <h3><i class="fa fa-building text-primary"></i> GST Number Verification</h3>
-                        <p>Verify your GST registration details and business information</p>
+                        <h3><i class="fa fa-building text-primary"></i> <?= __('GST Number Verification'); ?></h3>
+                        <p><?= __('Verify your GST registration details and business information'); ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -413,39 +412,38 @@ function showNotificationIcon($status)
                             <!-- Verified GST Inputs (Non-editable) -->
                             <div class="verified-section border rounded p-3 bg-light shadow-sm">
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">GST Number</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('GST Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['gstin'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input" aria-label="Input">
+                                        tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">Verification Date</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('Verification Date'); ?></span>
                                     <input type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['GSTIN']['verification_datetime'])
                                         ? date('d M Y, h:i A', strtotime($vendor_verifications['GSTIN']['verification_datetime']))
-                                        : ''; ?>" readonly tabindex="-1" title="Input" aria-label="Input">
+                                        : ''; ?>" readonly tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
-                                    <i class="fa fa-lock"></i> This verification is completed and cannot be edited.
-                                    Contact the administrator if changes are needed.
+                                    <i class="fa fa-lock"></i> <?= __('This verification is completed and cannot be edited. Contact the administrator if changes are needed.'); ?>
                                 </small>
                             </div>
 
                         <?php else: ?>
                             <!-- GST Input Form (Editable) -->
                             <div class="form-group">
-                                <span class="form-label d-inline-block fw-bold">GST Number <span class="text-danger">*</span></span>
+                                <span class="form-label d-inline-block fw-bold"><?= __('GST Number'); ?> <span class="text-danger">*</span></span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="gstin" placeholder="22AAAAA0000A1Z5"
+                                    <input type="text" class="form-control" id="gstin" placeholder="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatGSTInput(this)" maxlength="15" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['gstin'] ?? ''; ?>" title="22AAAAA0000A1Z5" aria-label="22AAAAA0000A1Z5">
+                                        value="<?php echo $vendordetail['gstin'] ?? ''; ?>" title="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
                                 </div>
                                 <small class="text-muted">
-                                    Format: 15 characters (2 digits + 10 PAN + 1 digit + 1 letter + 1 digit/letter)
+                                    <?= __('Format: 15 characters (2 digits + 10 PAN + 1 digit + 1 letter + 1 digit/letter)'); ?>
                                 </small>
                             </div>
 
@@ -455,13 +453,13 @@ function showNotificationIcon($status)
                                         class="col-lg-<?php echo in_array('GSTIN', $required_document_verifications) ? '12' : '6'; ?>">
                                         <button type="button" class="btn btn-secondary btn-sm" id="gst_edit_btn"
                                             onclick="toggleEdit('gst')">
-                                            Change Info
+                                            <?= __('Change Info'); ?>
                                         </button>
                                     </div>
                                     <?php if (!in_array('GSTIN', $required_document_verifications)): ?>
                                         <div class="col-lg-6">
                                             <button type="button" class="btn btn-info btn-sm" onclick="skipStep('gst')">
-                                                Skip This Step
+                                                <?= __('Skip This Step'); ?>
                                             </button>
                                         </div>
                                     <?php endif; ?>
@@ -470,8 +468,7 @@ function showNotificationIcon($status)
                                     <div class="row mt-2">
                                         <div class="col-lg-12">
                                             <small class="text-muted">
-                                                If you don't have GST registration, you can skip this step and continue with the
-                                                verification process.
+                                                <?= __('If you don\'t have GST registration, you can skip this step and continue with the verification process.'); ?>
                                             </small>
                                         </div>
                                     </div>
@@ -481,7 +478,7 @@ function showNotificationIcon($status)
                             <!-- Hidden verify button for internal use -->
                             <button type="button" class="btn btn-primary" id="verify_gst_btn" onclick="verifyGST()"
                                 style="display: none;">
-                                <i class="fa fa-search"></i> Verify GST
+                                <i class="fa fa-search"></i> <?= __('Verify GST'); ?>
                             </button>
 
                             <!-- GST Address Options -->
@@ -494,45 +491,45 @@ function showNotificationIcon($status)
 
                     <div class="col-md-6">
                         <div id="gst_verification_fields" class="verification-fields">
-                            <h5><i class="fa fa-info-circle"></i> GST Verification Details</h5>
+                            <h5><i class="fa fa-info-circle"></i> <?= __('GST Verification Details'); ?></h5>
                             <div class="row">
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Legal Name</span>
-                                    <input type="text" class="form-control custom_readonly" id="gstin_legal_name" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Legal Name'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="gstin_legal_name" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Trade Name</span>
-                                    <input type="text" class="form-control custom_readonly" id="gstin_trade_name" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Trade Name'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="gstin_trade_name" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Registration Status</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Registration Status'); ?></span>
                                     <input type="text" class="form-control custom_readonly" id="gstin_registration_status"
-                                        readonly title="Input" aria-label="Input">
+                                        readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Taxpayer Type</span>
-                                    <input type="text" class="form-control custom_readonly" id="gstin_taxpayer_type" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Taxpayer Type'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="gstin_taxpayer_type" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Business Nature</span>
-                                    <input type="text" class="form-control custom_readonly" id="gstin_business_nature" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Business Nature'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="gstin_business_nature" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Registration Date</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Registration Date'); ?></span>
                                     <input type="text" class="form-control custom_readonly" id="gstin_registration_date"
-                                        readonly title="Input" aria-label="Input">
+                                        readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-12 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Business Address</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Business Address'); ?></span>
                                     <textarea class="form-control custom_readonly" id="gstin_business_address" rows="2"
-                                        readonly title="Textarea" aria-label="Textarea"></textarea>
+                                        readonly title="<?= htmlspecialchars(__('Textarea'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Textarea'), ENT_QUOTES, 'UTF-8'); ?>"></textarea>
                                 </div>
                             </div>
                         </div>
 
                         <div id="gst_confirmation_section" class="confirmation-section">
-                            <h6><i class="fa fa-check-circle text-success"></i> GST Verification Completed</h6>
-                            <p class="mb-0">GST details have been successfully verified and business information retrieved.</p>
+                            <h6><i class="fa fa-check-circle text-success"></i> <?= __('GST Verification Completed'); ?></h6>
+                            <p class="mb-0"><?= __('GST details have been successfully verified and business information retrieved.'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -542,13 +539,13 @@ function showNotificationIcon($status)
             <!-- Step <?php echo $step_counter; ?>: Bank Verification -->
                 <div class="step-header">
                     <?php if ($is_verified): ?>
-                        <h3><i class="fa fa-check-circle text-success"></i> Bank Account Verification - Completed</h3>
-                        <p class="text-success">Your Bank Account has been successfully verified on
+                        <h3><i class="fa fa-check-circle text-success"></i> <?= __('Bank Account Verification - Completed'); ?></h3>
+                        <p class="text-success"><?= __('Your Bank Account has been successfully verified on'); ?>
                             <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['BANK']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
-                        <h3><i class="fa fa-university text-primary"></i> Bank Account Verification</h3>
-                        <p>Verify your bank account details for secure transactions</p>
+                        <h3><i class="fa fa-university text-primary"></i> <?= __('Bank Account Verification'); ?></h3>
+                        <p><?= __('Verify your bank account details for secure transactions'); ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -558,53 +555,52 @@ function showNotificationIcon($status)
                             <!-- Verified Bank Inputs (Non-editable) -->
                             <div class="verified-section border rounded p-3 bg-light shadow-sm">
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">IFSC Code</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('IFSC Code'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input" aria-label="Input">
+                                        tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">Bank Account Number</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('Bank Account Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input" aria-label="Input">
+                                        tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">Verification Date</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('Verification Date'); ?></span>
                                     <input type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['BANK']['verification_datetime'])
                                         ? date('d M Y, h:i A', strtotime($vendor_verifications['BANK']['verification_datetime']))
-                                        : ''; ?>" readonly tabindex="-1" title="Input" aria-label="Input">
+                                        : ''; ?>" readonly tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
-                                    <i class="fa fa-lock"></i> This verification is completed and cannot be edited.
-                                    Contact the administrator if changes are needed.
+                                    <i class="fa fa-lock"></i> <?= __('This verification is completed and cannot be edited. Contact the administrator if changes are needed.'); ?>
                                 </small>
                             </div>
 
                         <?php else: ?>
                             <!-- Bank Input Form (Editable) -->
                             <div class="form-group mb-3">
-                                <span class="form-label d-inline-block fw-bold">IFSC Code <span class="text-danger">*</span></span>
+                                <span class="form-label d-inline-block fw-bold"><?= __('IFSC Code'); ?> <span class="text-danger">*</span></span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="ifsc_code" placeholder="SBIN0001234"
+                                    <input type="text" class="form-control" id="ifsc_code" placeholder="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatIFSCInput(this)" maxlength="11" style="text-transform: uppercase;"
-                                        value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>" title="SBIN0001234" aria-label="SBIN0001234">
+                                        value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>" title="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
                                 </div>
-                                <small class="text-muted">Format: ABCD0123456 (4 letters + 0 + 6 digits/letters)</small>
+                                <small class="text-muted"><?= __('Format: ABCD0123456 (4 letters + 0 + 6 digits/letters)'); ?></small>
                             </div>
 
                             <div class="form-group mb-3">
-                                <span class="form-label d-inline-block fw-bold">Bank Account Number <span class="text-danger">*</span></span>
+                                <span class="form-label d-inline-block fw-bold"><?= __('Bank Account Number'); ?> <span class="text-danger">*</span></span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="bank_account_no" placeholder="Enter account number"
+                                    <input type="text" class="form-control" id="bank_account_no" placeholder="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatBankAccountInput(this)"
-                                        value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>" title="Enter account number" aria-label="Enter account number">
+                                        value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>" title="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -617,13 +613,13 @@ function showNotificationIcon($status)
                                         class="col-lg-<?php echo in_array('BANK', $required_document_verifications) ? '12' : '6'; ?>">
                                         <button type="button" class="btn btn-secondary btn-sm" id="bank_edit_btn"
                                             onclick="toggleEdit('bank')">
-                                            Change Info
+                                            <?= __('Change Info'); ?>
                                         </button>
                                     </div>
                                     <?php if (!in_array('BANK', $required_document_verifications)): ?>
                                         <div class="col-lg-6">
                                             <button type="button" class="btn btn-info btn-sm" onclick="skipStep('bank')">
-                                                Skip This Step
+                                                <?= __('Skip This Step'); ?>
                                             </button>
                                         </div>
                                     <?php endif; ?>
@@ -632,8 +628,7 @@ function showNotificationIcon($status)
                                     <div class="row mt-2">
                                         <div class="col-lg-12">
                                             <small class="text-muted">
-                                                If you don't have bank account details ready, you can skip this step and continue with
-                                                the verification process.
+                                                <?= __('If you don\'t have bank account details ready, you can skip this step and continue with the verification process.'); ?>
                                             </small>
                                         </div>
                                     </div>
@@ -643,7 +638,7 @@ function showNotificationIcon($status)
                             <!-- Hidden verify button for internal use -->
                             <button type="button" class="btn btn-primary" id="verify_bank_btn" onclick="verifyBank()"
                                 style="display: none;">
-                                <i class="fa fa-search"></i> Verify Bank Account
+                                <i class="fa fa-search"></i> <?= __('Verify Bank Account'); ?>
                             </button>
                         <?php endif; ?>
 
@@ -651,30 +646,30 @@ function showNotificationIcon($status)
 
                     <div class="col-md-6">
                         <div id="bank_verification_fields" class="verification-fields">
-                            <h5><i class="fa fa-info-circle"></i> Bank Verification Details</h5>
+                            <h5><i class="fa fa-info-circle"></i> <?= __('Bank Verification Details'); ?></h5>
                             <div class="row">
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">IFSC Code</span>
-                                    <input type="text" class="form-control custom_readonly" id="bank_verified_ifsc" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('IFSC Code'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="bank_verified_ifsc" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Account Number</span>
-                                    <input type="text" class="form-control custom_readonly" id="bank_verified_account" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Account Number'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="bank_verified_account" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Beneficiary Name</span>
-                                    <input type="text" class="form-control custom_readonly" id="bank_verified_name" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Beneficiary Name'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="bank_verified_name" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Verification Status</span>
-                                    <input type="text" class="form-control custom_readonly" id="bank_verified_status" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Verification Status'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="bank_verified_status" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                         </div>
 
                         <div id="bank_confirmation_section" class="confirmation-section">
-                            <h6><i class="fa fa-check-circle text-success"></i> Bank Verification Completed</h6>
-                            <p class="mb-0">Bank account details have been successfully verified.</p>
+                            <h6><i class="fa fa-check-circle text-success"></i> <?= __('Bank Verification Completed'); ?></h6>
+                            <p class="mb-0"><?= __('Bank account details have been successfully verified.'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -684,13 +679,13 @@ function showNotificationIcon($status)
             <!-- Step <?php echo $step_counter; ?>: MSME Verification -->
                 <div class="step-header">
                     <?php if ($is_verified): ?>
-                        <h3><i class="fa fa-check-circle text-success"></i> MSME/Udyam Registration Verification - Completed</h3>
-                        <p class="text-success">Your MSME has been successfully verified on
+                        <h3><i class="fa fa-check-circle text-success"></i> <?= __('MSME/Udyam Registration Verification - Completed'); ?></h3>
+                        <p class="text-success"><?= __('Your MSME has been successfully verified on'); ?>
                             <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['MSME']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
-                        <h3><i class="fa fa-industry text-primary"></i> MSME/Udyam Registration Verification</h3>
-                        <p>Verify your MSME/Udyam registration details</p>
+                        <h3><i class="fa fa-industry text-primary"></i> <?= __('MSME/Udyam Registration Verification'); ?></h3>
+                        <p><?= __('Verify your MSME/Udyam registration details'); ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -700,38 +695,37 @@ function showNotificationIcon($status)
                             <!-- Verified MSME Inputs (Non-editable) -->
                             <div class="verified-section border rounded p-3 bg-light shadow-sm">
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">MSME/Udyam Registration Number</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('MSME/Udyam Registration Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['msme_number'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input" aria-label="Input">
+                                        tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">Verification Date</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('Verification Date'); ?></span>
                                     <input type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['MSME']['verification_datetime'])
                                         ? date('d M Y, h:i A', strtotime($vendor_verifications['MSME']['verification_datetime']))
-                                        : ''; ?>" readonly tabindex="-1" title="Input" aria-label="Input">
+                                        : ''; ?>" readonly tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
-                                    <i class="fa fa-lock"></i> This verification is completed and cannot be edited.
-                                    Contact the administrator if changes are needed.
+                                    <i class="fa fa-lock"></i> <?= __('This verification is completed and cannot be edited. Contact the administrator if changes are needed.'); ?>
                                 </small>
                             </div>
 
                         <?php else: ?>
                             <!-- MSME Input Form (Editable) -->
                             <div class="form-group">
-                                <span class="form-label d-inline-block fw-bold">MSME/Udyam Registration Number</span>
+                                <span class="form-label d-inline-block fw-bold"><?= __('MSME/Udyam Registration Number'); ?></span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="msme_number" placeholder="UDYAM-XX-00-0000000"
+                                    <input type="text" class="form-control" id="msme_number" placeholder="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatMSMEInput(this)" maxlength="19" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['msme_number'] ?? ''; ?>" title="UDYAM-XX-00-0000000" aria-label="UDYAM-XX-00-0000000">
+                                        value="<?php echo $vendordetail['msme_number'] ?? ''; ?>" title="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
                                 </div>
-                                <small class="text-muted">Format: UDYAM-XX-00-0000000</small>
+                                <small class="text-muted"><?= __('Format: UDYAM-XX-00-0000000'); ?></small>
                             </div>
 
                             <div class="form-group">
@@ -740,13 +734,13 @@ function showNotificationIcon($status)
                                         class="col-lg-<?php echo in_array('MSME', $required_document_verifications) ? '12' : '6'; ?>">
                                         <button type="button" class="btn btn-secondary btn-sm" id="msme_edit_btn"
                                             onclick="toggleEdit('msme')">
-                                            Change Info
+                                            <?= __('Change Info'); ?>
                                         </button>
                                     </div>
                                     <?php if (!in_array('MSME', $required_document_verifications)): ?>
                                         <div class="col-lg-6">
                                             <button type="button" class="btn btn-info btn-sm" onclick="skipStep('msme')">
-                                                Skip This Step
+                                                <?= __('Skip This Step'); ?>
                                             </button>
                                         </div>
                                     <?php endif; ?>
@@ -755,8 +749,7 @@ function showNotificationIcon($status)
                                     <div class="row mt-2">
                                         <div class="col-lg-12">
                                             <small class="text-muted">
-                                                If you don't have MSME/Udyam registration, you can skip this step and continue with the
-                                                verification process.
+                                                <?= __('If you don\'t have MSME/Udyam registration, you can skip this step and continue with the verification process.'); ?>
                                             </small>
                                         </div>
                                     </div>
@@ -766,7 +759,7 @@ function showNotificationIcon($status)
                             <!-- Hidden verify button for internal use -->
                             <button type="button" class="btn btn-primary" id="verify_msme_btn" onclick="verifyMSME()"
                                 style="display: none;">
-                                <i class="fa fa-search"></i> Verify MSME
+                                <i class="fa fa-search"></i> <?= __('Verify MSME'); ?>
                             </button>
                         <?php endif; ?>
 
@@ -774,53 +767,53 @@ function showNotificationIcon($status)
 
                     <div class="col-md-6">
                         <div id="msme_verification_fields" class="verification-fields">
-                            <h5><i class="fa fa-info-circle"></i> MSME Verification Details</h5>
+                            <h5><i class="fa fa-info-circle"></i> <?= __('MSME Verification Details'); ?></h5>
                             <div class="row">
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Enterprise Name</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Enterprise Name'); ?></span>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_enterprise_name"
-                                        readonly title="Input" aria-label="Input">
+                                        readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Major Activity</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Major Activity'); ?></span>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_major_activity"
-                                        readonly title="Input" aria-label="Input">
+                                        readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Organization Type</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Organization Type'); ?></span>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_organization_type"
-                                        readonly title="Input" aria-label="Input">
+                                        readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Social Category</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Social Category'); ?></span>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_social_category"
-                                        readonly title="Input" aria-label="Input">
+                                        readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Commencement Date</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Commencement Date'); ?></span>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_commencement_date"
-                                        readonly title="Input" aria-label="Input">
+                                        readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">DIC Name</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('DIC Name'); ?></span>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_dic_name"
-                                        readonly title="Input" aria-label="Input">
+                                        readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Registration Date</span>
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Registration Date'); ?></span>
                                     <input type="text" class="form-control custom_readonly" id="msme_verified_registration_date"
-                                        readonly title="Input" aria-label="Input">
+                                        readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                                 <div class="col-6 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Status</span>
-                                    <input type="text" class="form-control custom_readonly" id="msme_verified_status" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Status'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="msme_verified_status" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                         </div>
 
                         <div id="msme_confirmation_section" class="confirmation-section">
-                            <h6><i class="fa fa-check-circle text-success"></i> MSME Verification Completed</h6>
-                            <p class="mb-0">MSME registration details have been successfully verified.</p>
+                            <h6><i class="fa fa-check-circle text-success"></i> <?= __('MSME Verification Completed'); ?></h6>
+                            <p class="mb-0"><?= __('MSME registration details have been successfully verified.'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -830,13 +823,13 @@ function showNotificationIcon($status)
             <!-- Step <?php echo $step_counter; ?>: TAN Verification -->
                 <div class="step-header">
                     <?php if ($is_verified): ?>
-                        <h3><i class="fa fa-check-circle text-success"></i> TAN Number Verification - Completed</h3>
-                        <p class="text-success">Your TAN has been successfully verified on
+                        <h3><i class="fa fa-check-circle text-success"></i> <?= __('TAN Number Verification - Completed'); ?></h3>
+                        <p class="text-success"><?= __('Your TAN has been successfully verified on'); ?>
                             <?php echo date('d M Y, h:i A', strtotime($vendor_verifications['TAN']['verification_datetime'])); ?>
                         </p>
                     <?php else: ?>
-                        <h3><i class="fa fa-file-text text-primary"></i> TAN Number Verification</h3>
-                        <p>Verify your Tax Deduction Account Number</p>
+                        <h3><i class="fa fa-file-text text-primary"></i> <?= __('TAN Number Verification'); ?></h3>
+                        <p><?= __('Verify your Tax Deduction Account Number'); ?></p>
                     <?php endif; ?>
                 </div>
 
@@ -846,38 +839,37 @@ function showNotificationIcon($status)
                             <!-- Verified TAN Inputs (Non-editable) -->
                             <div class="verified-section border rounded p-3 bg-light shadow-sm">
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">TAN Number</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('TAN Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
                                         value="<?php echo htmlspecialchars($vendordetail['tan_number'] ?? ''); ?>" readonly
-                                        tabindex="-1" title="Input" aria-label="Input">
+                                        tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <span class="form-label fw-bold d-inline-block">Verification Date</span>
+                                    <span class="form-label fw-bold d-inline-block"><?= __('Verification Date'); ?></span>
                                     <input type="text" class="form-control custom_readonly" value="<?php echo !empty($vendor_verifications['TAN']['verification_datetime'])
                                         ? date('d M Y, h:i A', strtotime($vendor_verifications['TAN']['verification_datetime']))
-                                        : ''; ?>" readonly tabindex="-1" title="Input" aria-label="Input">
+                                        : ''; ?>" readonly tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <small class="text-muted d-block mt-2">
-                                    <i class="fa fa-lock"></i> This verification is completed and cannot be edited.
-                                    Contact the administrator if changes are needed.
+                                    <i class="fa fa-lock"></i> <?= __('This verification is completed and cannot be edited. Contact the administrator if changes are needed.'); ?>
                                 </small>
                             </div>
 
                         <?php else: ?>
                             <!-- TAN Input Form (Editable) -->
                             <div class="form-group">
-                                <span class="form-label d-inline-block fw-bold">TAN Number</span>
+                                <span class="form-label d-inline-block fw-bold"><?= __('TAN Number'); ?></span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="tan_number" placeholder="ABCD12345E"
+                                    <input type="text" class="form-control" id="tan_number" placeholder="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatTANInput(this)" maxlength="10" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['tan_number'] ?? ''; ?>" title="ABCD12345E" aria-label="ABCD12345E">
+                                        value="<?php echo $vendordetail['tan_number'] ?? ''; ?>" title="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
                                 </div>
-                                <small class="text-muted">Format: ABCD12345E (4 letters + 5 digits + 1 letter)</small>
+                                <small class="text-muted"><?= __('Format: ABCD12345E (4 letters + 5 digits + 1 letter)'); ?></small>
                             </div>
 
                             <div class="form-group">
@@ -886,13 +878,13 @@ function showNotificationIcon($status)
                                         class="col-lg-<?php echo in_array('TAN', $required_document_verifications) ? '12' : '6'; ?>">
                                         <button type="button" class="btn btn-secondary btn-sm" id="tan_edit_btn"
                                             onclick="toggleEdit('tan')">
-                                            Change Info
+                                            <?= __('Change Info'); ?>
                                         </button>
                                     </div>
                                     <?php if (!in_array('TAN', $required_document_verifications)): ?>
                                         <div class="col-lg-6">
                                             <button type="button" class="btn btn-info btn-sm" onclick="skipStep('tan')">
-                                                Skip This Step
+                                                <?= __('Skip This Step'); ?>
                                             </button>
                                         </div>
                                     <?php endif; ?>
@@ -901,8 +893,7 @@ function showNotificationIcon($status)
                                     <div class="row mt-2">
                                         <div class="col-lg-12">
                                             <small class="text-muted">
-                                                If you don't have a TAN number, you can skip this step and continue with the
-                                                verification process.
+                                                <?= __('If you don\'t have a TAN number, you can skip this step and continue with the verification process.'); ?>
                                             </small>
                                         </div>
                                     </div>
@@ -912,7 +903,7 @@ function showNotificationIcon($status)
                             <!-- Hidden verify button for internal use -->
                             <button type="button" class="btn btn-primary" id="verify_tan_btn" onclick="verifyTAN()"
                                 style="display: none;">
-                                <i class="fa fa-search"></i> Verify TAN
+                                <i class="fa fa-search"></i> <?= __('Verify TAN'); ?>
                             </button>
                         <?php endif; ?>
 
@@ -920,23 +911,23 @@ function showNotificationIcon($status)
 
                     <div class="col-md-6">
                         <div id="tan_verification_fields" class="verification-fields">
-                            <h5><i class="fa fa-info-circle"></i> TAN Verification Details</h5>
+                            <h5><i class="fa fa-info-circle"></i> <?= __('TAN Verification Details'); ?></h5>
                             <div class="row">
                                 <div class="col-12 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Company Name</span>
-                                    <input type="text" class="form-control custom_readonly" id="tan_verified_company" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Company Name'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="tan_verified_company" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 
                                 </div>
                                 <div class="col-12 form-group">
-                                    <span class="form-label d-inline-block fw-bold">Verification Status</span>
-                                    <input type="text" class="form-control custom_readonly" id="tan_verified_status" readonly title="Input" aria-label="Input">
+                                    <span class="form-label d-inline-block fw-bold"><?= __('Verification Status'); ?></span>
+                                    <input type="text" class="form-control custom_readonly" id="tan_verified_status" readonly title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                         </div>
 
                         <div id="tan_confirmation_section" class="confirmation-section">
-                            <h6><i class="fa fa-check-circle text-success"></i> TAN Verification Completed</h6>
-                            <p class="mb-0">TAN details have been successfully verified.</p>
+                            <h6><i class="fa fa-check-circle text-success"></i> <?= __('TAN Verification Completed'); ?></h6>
+                            <p class="mb-0"><?= __('TAN details have been successfully verified.'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -952,12 +943,12 @@ function showNotificationIcon($status)
     <!-- Navigation Buttons -->
     <div class="navigation-buttons">
         <button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()" style="display: none;">
-            <i class="fa fa-arrow-left"></i> Previous
+            <i class="fa fa-arrow-left"></i> <?= __('Previous'); ?>
         </button>
 
         <div>
             <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">
-                Next <i class="fa fa-arrow-right"></i>
+                <?= __('Next'); ?> <i class="fa fa-arrow-right"></i>
             </button>
         </div>
     </div>
@@ -1079,13 +1070,13 @@ function showNotificationIcon($status)
         $('#pan_number, #company_name').prop('readonly', true);
         $('#pan_verification_fields').show();
         $('#pan_confirmation_section').show();
-        $('#verify_pan_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Already Verified').prop('disabled', true);
-        $('#pan_edit_btn').text('Already Verified').removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
+        $('#verify_pan_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> <?= htmlspecialchars(__('Already Verified'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', true);
+        $('#pan_edit_btn').text(<?php echo json_encode(__('Already Verified'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
 
-        $('#pan_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> PAN Already Verified');
+        $('#pan_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> <?= htmlspecialchars(__('PAN Already Verified'), ENT_QUOTES, 'UTF-8'); ?>');
         $('#pan_confirmation_section p').html('This PAN has been previously verified on ' + (data.verification_datetime || 'a previous date') + '.');
 
-        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> This verification was completed previously and cannot be modified.</div>';
+        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> <?= htmlspecialchars(__('This verification was completed previously and cannot be modified.'), ENT_QUOTES, 'UTF-8'); ?></div>';
         $('#pan_confirmation_section').after(restrictionMsg);
     }
 
@@ -1096,13 +1087,13 @@ function showNotificationIcon($status)
         $('#gstin').prop('readonly', true);
         $('#gst_verification_fields').show();
         $('#gst_confirmation_section').show();
-        $('#verify_gst_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Already Verified').prop('disabled', true);
-        $('#gst_edit_btn').text('Already Verified').removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
+        $('#verify_gst_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> <?= htmlspecialchars(__('Already Verified'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', true);
+        $('#gst_edit_btn').text(<?php echo json_encode(__('Already Verified'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
 
-        $('#gst_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> GST Already Verified');
+        $('#gst_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> <?= htmlspecialchars(__('GST Already Verified'), ENT_QUOTES, 'UTF-8'); ?>');
         $('#gst_confirmation_section p').html('This GST has been previously verified on ' + (data.verification_datetime || 'a previous date') + '.');
 
-        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> This verification was completed previously and cannot be modified.</div>';
+        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> <?= htmlspecialchars(__('This verification was completed previously and cannot be modified.'), ENT_QUOTES, 'UTF-8'); ?></div>';
         $('#gst_confirmation_section').after(restrictionMsg);
     }
 
@@ -1113,13 +1104,13 @@ function showNotificationIcon($status)
         $('#ifsc_code, #bank_account_no').prop('readonly', true);
         $('#bank_verification_fields').show();
         $('#bank_confirmation_section').show();
-        $('#verify_bank_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Already Verified').prop('disabled', true);
-        $('#bank_edit_btn').text('Already Verified').removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
+        $('#verify_bank_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> <?= htmlspecialchars(__('Already Verified'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', true);
+        $('#bank_edit_btn').text(<?php echo json_encode(__('Already Verified'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
 
-        $('#bank_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> Bank Already Verified');
+        $('#bank_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> <?= htmlspecialchars(__('Bank Already Verified'), ENT_QUOTES, 'UTF-8'); ?>');
         $('#bank_confirmation_section p').html('This bank account has been previously verified on ' + (data.verification_datetime || 'a previous date') + '.');
 
-        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> This verification was completed previously and cannot be modified.</div>';
+        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> <?= htmlspecialchars(__('This verification was completed previously and cannot be modified.'), ENT_QUOTES, 'UTF-8'); ?></div>';
         $('#bank_confirmation_section').after(restrictionMsg);
     }
 
@@ -1130,13 +1121,13 @@ function showNotificationIcon($status)
         $('#msme_number').prop('readonly', true);
         $('#msme_verification_fields').show();
         $('#msme_confirmation_section').show();
-        $('#verify_msme_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Already Verified').prop('disabled', true);
-        $('#msme_edit_btn').text('Already Verified').removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
+        $('#verify_msme_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> <?= htmlspecialchars(__('Already Verified'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', true);
+        $('#msme_edit_btn').text(<?php echo json_encode(__('Already Verified'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
 
-        $('#msme_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> MSME Already Verified');
+        $('#msme_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> <?= htmlspecialchars(__('MSME Already Verified'), ENT_QUOTES, 'UTF-8'); ?>');
         $('#msme_confirmation_section p').html('This MSME has been previously verified on ' + (data.verification_datetime || 'a previous date') + '.');
 
-        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> This verification was completed previously and cannot be modified.</div>';
+        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> <?= htmlspecialchars(__('This verification was completed previously and cannot be modified.'), ENT_QUOTES, 'UTF-8'); ?></div>';
         $('#msme_confirmation_section').after(restrictionMsg);
     }
 
@@ -1147,13 +1138,13 @@ function showNotificationIcon($status)
         $('#tan_number').prop('readonly', true);
         $('#tan_verification_fields').show();
         $('#tan_confirmation_section').show();
-        $('#verify_tan_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Already Verified').prop('disabled', true);
-        $('#tan_edit_btn').text('Already Verified').removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
+        $('#verify_tan_btn').removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> <?= htmlspecialchars(__('Already Verified'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', true);
+        $('#tan_edit_btn').text(<?php echo json_encode(__('Already Verified'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success').prop('disabled', true);
 
-        $('#tan_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> TAN Already Verified');
+        $('#tan_confirmation_section h6').html('<i class="fa fa-check-circle text-success"></i> <?= htmlspecialchars(__('TAN Already Verified'), ENT_QUOTES, 'UTF-8'); ?>');
         $('#tan_confirmation_section p').html('This TAN has been previously verified on ' + (data.verification_datetime || 'a previous date') + '.');
 
-        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> This verification was completed previously and cannot be modified.</div>';
+        var restrictionMsg = '<div class="verification-restriction-notice"><i class="fa fa-info-circle"></i> <?= htmlspecialchars(__('This verification was completed previously and cannot be modified.'), ENT_QUOTES, 'UTF-8'); ?></div>';
         $('#tan_confirmation_section').after(restrictionMsg);
     }
 
@@ -1178,10 +1169,10 @@ function showNotificationIcon($status)
             });
 
             if (hasReadonlyInputs) {
-                button.text('Change Info').removeClass('btn-warning').addClass('btn-success');
+                button.text(<?php echo json_encode(__('Change Info'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success');
                 console.log(section + ' button set to readonly state (success)');
             } else {
-                button.text('Change Info').removeClass('btn-success').addClass('btn-warning');
+                button.text(<?php echo json_encode(__('Change Info'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-success').addClass('btn-warning');
                 console.log(section + ' button set to editable state (warning)');
             }
         });
@@ -1572,7 +1563,7 @@ function showNotificationIcon($status)
 
             resetCurrentStepVerificationStatus();
 
-            button.text('Change Info').removeClass('btn-success').addClass('btn-warning');
+            button.text(<?php echo json_encode(__('Change Info'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-success').addClass('btn-warning');
             console.log('Button changed to Change Info (editable mode)');
         } else {
             console.log('Disabling editing mode...');
@@ -1583,7 +1574,7 @@ function showNotificationIcon($status)
                     $(this).prop('disabled', true);
                 }
             });
-            button.text('Change Info').removeClass('btn-warning').addClass('btn-success');
+            button.text(<?php echo json_encode(__('Change Info'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success');
             console.log('Button changed to Change Info (readonly mode)');
         }
     }
@@ -1603,7 +1594,7 @@ function showNotificationIcon($status)
 
         if (stepType === 'pan') {
             $('#pan_confirmation_section').hide();
-            $('#verify_pan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify PAN').prop('disabled', false);
+            $('#verify_pan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify PAN'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#pan_verified_name').val('');
             $('#pan_verified_type').val('');
             $('#pan_verified_status').val('');
@@ -1613,7 +1604,7 @@ function showNotificationIcon($status)
         } else if (stepType === 'gstin') {
             $('#gst_confirmation_section').hide();
             $('#gst_address_options').hide();
-            $('#verify_gst_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify GST').prop('disabled', false);
+            $('#verify_gst_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify GST'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#gstin_legal_name').val('');
             $('#gstin_trade_name').val('');
             $('#gstin_registration_status').val('');
@@ -1626,7 +1617,7 @@ function showNotificationIcon($status)
             console.log('GST verification status reset');
         } else if (stepType === 'bank') {
             $('#bank_confirmation_section').hide();
-            $('#verify_bank_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify Bank Account').prop('disabled', false);
+            $('#verify_bank_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify Bank Account'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#bank_verified_ifsc').val('');
             $('#bank_verified_account').val('');
             $('#bank_verified_name').val('');
@@ -1638,7 +1629,7 @@ function showNotificationIcon($status)
             console.log('Bank verification status reset');
         } else if (stepType === 'msme') {
             $('#msme_confirmation_section').hide();
-            $('#verify_msme_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify MSME').prop('disabled', false);
+            $('#verify_msme_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify MSME'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#msme_verified_enterprise_name').val('');
             $('#msme_verified_major_activity').val('');
             $('#msme_verified_organization_type').val('');
@@ -1650,7 +1641,7 @@ function showNotificationIcon($status)
             console.log('MSME verification status reset');
         } else if (stepType === 'tan') {
             $('#tan_confirmation_section').hide();
-            $('#verify_tan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify TAN').prop('disabled', false);
+            $('#verify_tan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify TAN'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#tan_verified_company').val('');
             $('#tan_verified_status').val('');
             console.log('TAN verification status reset');
@@ -1673,7 +1664,7 @@ function showNotificationIcon($status)
         if (stepType === 'pan') {
             $('#pan_verification_fields').hide();
             $('#pan_confirmation_section').hide();
-            $('#verify_pan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify PAN').prop('disabled', false);
+            $('#verify_pan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify PAN'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#pan_verified_name').val('');
             $('#pan_verified_type').val('');
             $('#pan_verified_status').val('');
@@ -1684,7 +1675,7 @@ function showNotificationIcon($status)
             $('#gst_verification_fields').hide();
             $('#gst_confirmation_section').hide();
             $('#gst_address_options').hide();
-            $('#verify_gst_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify GST').prop('disabled', false);
+            $('#verify_gst_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify GST'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#gstin_legal_name').val('');
             $('#gstin_trade_name').val('');
             $('#gstin_registration_status').val('');
@@ -1698,7 +1689,7 @@ function showNotificationIcon($status)
         } else if (stepType === 'bank') {
             $('#bank_verification_fields').hide();
             $('#bank_confirmation_section').hide();
-            $('#verify_bank_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify Bank Account').prop('disabled', false);
+            $('#verify_bank_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify Bank Account'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#bank_verified_ifsc').val('');
             $('#bank_verified_account').val('');
             $('#bank_verified_name').val('');
@@ -1711,7 +1702,7 @@ function showNotificationIcon($status)
         } else if (stepType === 'msme') {
             $('#msme_verification_fields').hide();
             $('#msme_confirmation_section').hide();
-            $('#verify_msme_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify MSME').prop('disabled', false);
+            $('#verify_msme_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify MSME'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#msme_verified_enterprise_name').val('');
             $('#msme_verified_major_activity').val('');
             $('#msme_verified_organization_type').val('');
@@ -1724,7 +1715,7 @@ function showNotificationIcon($status)
         } else if (stepType === 'tan') {
             $('#tan_verification_fields').hide();
             $('#tan_confirmation_section').hide();
-            $('#verify_tan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> Verify TAN').prop('disabled', false);
+            $('#verify_tan_btn').removeClass('btn-success').addClass('btn-primary').html('<i class="fa fa-search"></i> <?= htmlspecialchars(__('Verify TAN'), ENT_QUOTES, 'UTF-8'); ?>').prop('disabled', false);
             $('#tan_verified_company').val('');
             $('#tan_verified_status').val('');
             console.log('TAN verification reset');
@@ -1750,7 +1741,7 @@ function showNotificationIcon($status)
         }
 
         $("#pan_number, #company_name").prop('readonly', true);
-        $("#verify_pan_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Verifying...');
+        $("#verify_pan_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> <?= htmlspecialchars(__('Verifying...'), ENT_QUOTES, 'UTF-8'); ?>');
         $("#pan_verification_fields").show();
         $("#pan_verified_name, #pan_verified_type, #pan_verified_status").val("Verifying...");
 
@@ -1780,9 +1771,9 @@ function showNotificationIcon($status)
                         verificationSteps.pan.data = result;
 
                         $("#pan_confirmation_section").show();
-                        $("#verify_pan_btn").removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Verified');
+                        $("#verify_pan_btn").removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> <?= htmlspecialchars(__('Verified'), ENT_QUOTES, 'UTF-8'); ?>');
                         $("#pan_number, #company_name").prop('readonly', true);
-                        $("#pan_edit_btn").text('Change Info').removeClass('btn-warning').addClass('btn-success');
+                        $("#pan_edit_btn").text(<?php echo json_encode(__('Change Info'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success');
                         $("#pan_verified_name, #pan_verified_type, #pan_verified_status").prop('readonly', true).addClass('custom_readonly');
 
                         var company_name_entered = company_name.toLowerCase().trim();
@@ -1844,11 +1835,11 @@ function showNotificationIcon($status)
                             verificationSteps.pan.nameMatch = false;
 
                             $("#pan_confirmation_section").removeClass('confirmation-section').addClass('alert alert-warning');
-                            $("#pan_confirmation_section h6").html('<i class="fa fa-exclamation-triangle text-warning"></i> PAN Verification Done - Data Mismatch');
+                            $("#pan_confirmation_section h6").html('<i class="fa fa-exclamation-triangle text-warning"></i> <?= htmlspecialchars(__('PAN Verification Done - Data Mismatch'), ENT_QUOTES, 'UTF-8'); ?>');
                             $("#pan_confirmation_section p").html('PAN details have been retrieved but company name does not match. Please verify the information is correct before proceeding.');
                             showNotification("Verification completed but company name doesn't match with PAN holder name. Please check the data.", "warning");
                             $("#pan_number").closest('.input-group').find('.status-icon').html('<i class="fa fa-exclamation-triangle text-warning"></i>');
-                            $("#verify_pan_btn").removeClass('btn-success').addClass('btn-warning').html('<i class="fa fa-exclamation-triangle"></i> Data Mismatch');
+                            $("#verify_pan_btn").removeClass('btn-success').addClass('btn-warning').html('<i class="fa fa-exclamation-triangle"></i> <?= htmlspecialchars(__('Data Mismatch'), ENT_QUOTES, 'UTF-8'); ?>');
                         }
 
                     } else {
@@ -1883,7 +1874,7 @@ function showNotificationIcon($status)
 
         console.log('GST Verification: Locking input');
         $("#gstin").prop('readonly', true);
-        $("#verify_gst_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Verifying...');
+        $("#verify_gst_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> <?= htmlspecialchars(__('Verifying...'), ENT_QUOTES, 'UTF-8'); ?>');
 
         $("#gst_verification_fields").show();
         $("#gstin_legal_name").val("Verifying...");
@@ -1941,7 +1932,7 @@ function showNotificationIcon($status)
                         $("#gstin_business_address").val(address);
 
                         $("#gstin").prop('readonly', true);
-                        $("#gst_edit_btn").text('Change Info').removeClass('btn-warning').addClass('btn-success');
+                        $("#gst_edit_btn").text(<?php echo json_encode(__('Change Info'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success');
 
                         $("#gstin_legal_name, #gstin_trade_name, #gstin_registration_status, #gstin_taxpayer_type, #gstin_business_nature, #gstin_registration_date, #gstin_business_address").prop('readonly', true).addClass('custom_readonly');
 
@@ -1996,13 +1987,13 @@ function showNotificationIcon($status)
                             verificationSteps.gst.nameMatch = false;
 
                             $("#gst_confirmation_section").removeClass('confirmation-section').addClass('alert alert-warning');
-                            $("#gst_confirmation_section h6").html('<i class="fa fa-exclamation-triangle text-warning"></i> GST Verification Done - Data Mismatch');
+                            $("#gst_confirmation_section h6").html('<i class="fa fa-exclamation-triangle text-warning"></i> <?= htmlspecialchars(__('GST Verification Done - Data Mismatch'), ENT_QUOTES, 'UTF-8'); ?>');
                             $("#gst_confirmation_section p").html('GST details have been retrieved but company name does not match. Please verify the information is correct before proceeding.');
 
                             showNotification("Verification completed but company name doesn't match with GST records. Please check the data.", "warning");
                             $("#gstin").closest('.input-group').find('.status-icon').html('<i class="fa fa-exclamation-triangle text-warning"></i>');
 
-                            $("#verify_gst_btn").removeClass('btn-success').addClass('btn-warning').html('<i class="fa fa-exclamation-triangle"></i> Data Mismatch');
+                            $("#verify_gst_btn").removeClass('btn-success').addClass('btn-warning').html('<i class="fa fa-exclamation-triangle"></i> <?= htmlspecialchars(__('Data Mismatch'), ENT_QUOTES, 'UTF-8'); ?>');
                         }
 
                     } else {
@@ -2050,7 +2041,7 @@ function showNotificationIcon($status)
 
         console.log('Bank Verification: Locking inputs');
         $("#ifsc_code, #bank_account_no").prop('readonly', true);
-        $("#verify_bank_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Verifying...');
+        $("#verify_bank_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> <?= htmlspecialchars(__('Verifying...'), ENT_QUOTES, 'UTF-8'); ?>');
 
         $("#bank_verification_fields").show();
         $("#bank_verified_ifsc").val("Verifying...");
@@ -2086,11 +2077,11 @@ function showNotificationIcon($status)
                         verificationSteps.bank.data = result;
 
                         $("#bank_confirmation_section").show();
-                        $("#verify_bank_btn").removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Verified');
+                        $("#verify_bank_btn").removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> <?= htmlspecialchars(__('Verified'), ENT_QUOTES, 'UTF-8'); ?>');
 
                         console.log('Bank verification successful - making input fields readonly');
                         $("#ifsc_code, #bank_account_no").prop('readonly', true);
-                        $("#bank_edit_btn").text('Change Info').removeClass('btn-warning').addClass('btn-success');
+                        $("#bank_edit_btn").text(<?php echo json_encode(__('Change Info'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).removeClass('btn-warning').addClass('btn-success');
 
                         $("#bank_verified_ifsc, #bank_verified_account, #bank_verified_name, #bank_verified_status").prop('readonly', true).addClass('custom_readonly');
 
@@ -2151,7 +2142,7 @@ function showNotificationIcon($status)
         }
 
         $("#msme_number").prop('readonly', true);
-        $("#verify_msme_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Verifying...');
+        $("#verify_msme_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> <?= htmlspecialchars(__('Verifying...'), ENT_QUOTES, 'UTF-8'); ?>');
 
         $("#msme_verification_fields").show();
         $("#msme_verified_enterprise_name").val("Verifying...");
@@ -2193,7 +2184,7 @@ function showNotificationIcon($status)
                         verificationSteps.msme.data = result;
 
                         $("#msme_confirmation_section").show();
-                        $("#verify_msme_btn").removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Verified');
+                        $("#verify_msme_btn").removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> <?= htmlspecialchars(__('Verified'), ENT_QUOTES, 'UTF-8'); ?>');
 
                         console.log('MSME verification successful');
 
@@ -2257,7 +2248,7 @@ function showNotificationIcon($status)
         }
 
         $("#tan_number").prop('readonly', true);
-        $("#verify_tan_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Verifying...');
+        $("#verify_tan_btn").prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> <?= htmlspecialchars(__('Verifying...'), ENT_QUOTES, 'UTF-8'); ?>');
 
         $("#tan_verification_fields").show();
         $("#tan_verified_company").val("Verifying...");
@@ -2287,7 +2278,7 @@ function showNotificationIcon($status)
                         verificationSteps.tan.data = result;
 
                         $("#tan_confirmation_section").show();
-                        $("#verify_tan_btn").removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> Verified');
+                        $("#verify_tan_btn").removeClass('btn-primary').addClass('btn-success').html('<i class="fa fa-check"></i> <?= htmlspecialchars(__('Verified'), ENT_QUOTES, 'UTF-8'); ?>');
 
                         var company_name_entered = ($("#company_name").val() || $("#company_name_verified").val() || "").toLowerCase().trim();
                         var tan_company_name = (result.result.user_full_name || "").toLowerCase().trim();
@@ -2324,13 +2315,13 @@ function showNotificationIcon($status)
                             verificationSteps.tan.nameMatch = false;
 
                             $("#tan_confirmation_section").removeClass('confirmation-section').addClass('alert alert-warning');
-                            $("#tan_confirmation_section h6").html('<i class="fa fa-exclamation-triangle text-warning"></i> TAN Verification Done - Data Mismatch');
+                            $("#tan_confirmation_section h6").html('<i class="fa fa-exclamation-triangle text-warning"></i> <?= htmlspecialchars(__('TAN Verification Done - Data Mismatch'), ENT_QUOTES, 'UTF-8'); ?>');
                             $("#tan_confirmation_section p").html('TAN details have been retrieved but company name does not match. Please verify the information is correct before proceeding.');
 
                             showNotification("Verification completed but company name doesn't match with TAN company name. Please check the data.", "warning");
                             $("#tan_number").closest('.input-group').find('.status-icon').html('<i class="fa fa-exclamation-triangle text-warning"></i>');
 
-                            $("#verify_tan_btn").removeClass('btn-success').addClass('btn-warning').html('<i class="fa fa-exclamation-triangle"></i> Data Mismatch');
+                            $("#verify_tan_btn").removeClass('btn-success').addClass('btn-warning').html('<i class="fa fa-exclamation-triangle"></i> <?= htmlspecialchars(__('Data Mismatch'), ENT_QUOTES, 'UTF-8'); ?>');
                         }
 
                     } else {
@@ -2377,7 +2368,7 @@ function showNotificationIcon($status)
 
         var notification = $('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
             '<i class="' + iconClass + '"></i> ' + message +
-            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>' +
             '</div>');
 
         $('#notification-container').append(notification);
@@ -2391,17 +2382,17 @@ function showNotificationIcon($status)
         var addressOptionsHtml = `
         <div class="row">
             <div class="col-lg-12">
-                <h6><i class="fa fa-map-marker"></i> Address Options</h6>
-                <p class="text-muted">Use the GST registered address for billing/shipping?</p>
+                <h6><i class="fa fa-map-marker"></i> <?= htmlspecialchars(__('Address Options'), ENT_QUOTES, 'UTF-8'); ?></h6>
+                <p class="text-muted"><?= htmlspecialchars(__('Use the GST registered address for billing/shipping?'), ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <h6>Use for Billing Address</h6>
+                        <h6><?= htmlspecialchars(__('Use for Billing Address'), ENT_QUOTES, 'UTF-8'); ?></h6>
                         <button type="button" class="btn btn-primary btn-sm" onclick="useGSTAddress('billing')">
-                            <i class="fa fa-copy"></i> Use GST Address
+                            <i class="fa fa-copy"></i> <?= htmlspecialchars(__('Use GST Address'), ENT_QUOTES, 'UTF-8'); ?>
                         </button>
                     </div>
                 </div>
@@ -2409,9 +2400,9 @@ function showNotificationIcon($status)
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <h6>Use for Shipping Address</h6>
+                        <h6><?= htmlspecialchars(__('Use for Shipping Address'), ENT_QUOTES, 'UTF-8'); ?></h6>
                         <button type="button" class="btn btn-primary btn-sm" onclick="useGSTAddress('shipping')">
-                            <i class="fa fa-copy"></i> Use GST Address
+                            <i class="fa fa-copy"></i> <?= htmlspecialchars(__('Use GST Address'), ENT_QUOTES, 'UTF-8'); ?>
                         </button>
                     </div>
                 </div>
@@ -2476,7 +2467,7 @@ function showNotificationIcon($status)
 
         var notification = $('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
             '<i class="' + iconClass + '"></i> ' + message +
-            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>' +
             '</div>');
 
         $('#notification-container').append(notification);

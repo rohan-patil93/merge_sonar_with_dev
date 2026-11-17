@@ -39,7 +39,7 @@ if($_POST['submit'] == 'query'){
  <div class="card acc-bgc">
   <div class="card-header" id="headingOne6">
    <div class="card-title scale_active collapsed f-16 f-w-600" data-bs-toggle="collapse"  aria-expanded="false" aria-controls="collapseOne6"  data-target="#collapseOne6" href="#collapseOne6">
-    Queries </div>
+    <?= __('Queries'); ?> </div>
 </div>
 <div id="collapseOne6" class="collapse" data-parent="#accordionExample6_query">
      <div class="card-body">
@@ -50,13 +50,13 @@ if($_POST['submit'] == 'query'){
                     <?php foreach ($querytypelist as $querytype) { ?>
                          <div class="radio radio-inline">
                               <label class="form-label">
-                                   <input aria-label="Query Type" type="radio" name="query_type" value="<?php echo $querytype['genc_detail_code']; ?>" id="imp" checked>
-                                   <i class="helper"></i><?php echo $querytype['genc_detail_name']; ?>
+                                   <input aria-label="<?= htmlspecialchars(__('Query Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="query_type" value="<?php echo $querytype['genc_detail_code']; ?>" id="imp" checked>
+                                   <i class="helper"></i><?php echo __($querytype['genc_detail_name']); ?>
                               </label>
                          </div>
                     <?php } ?>
                     </div>
-                   <textarea aria-label="Query Text" name="query_text" class="form-control" required></textarea>
+                   <textarea aria-label="<?= htmlspecialchars(__('Query Text'), ENT_QUOTES, 'UTF-8'); ?>" name="query_text" class="form-control" required></textarea>
                    <input type="hidden" name="submit" value="query">
                    <input type="hidden" name="company_id" value="<?php echo $_SESSION['company_id']; ?>">
                    <input type="hidden" name="trno" value="<?php echo $data['transaction_number']; ?>">
@@ -65,7 +65,7 @@ if($_POST['submit'] == 'query'){
                    <input type="hidden" name="created_by" value="<?php echo $_SESSION['userid']; ?>">
                    <input type="hidden" name="send_id" value="<?php echo $data['originator']; ?>">
                    <input type="hidden" name="new_reply" value="N">
-                   <button class="btn btn-info" style="margin-top: 10px;">Submit New Query</button>
+                   <button class="btn btn-info" style="margin-top: 10px;"><?= __('Submit New Query'); ?></button>
 
                </div>
           </form>
@@ -87,9 +87,9 @@ if($_POST['submit'] == 'query'){
                                              <div class="col-lg-3">
                                                   <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder pr-6">
                                                        <?php if($_SESSION['user_image'][$list['created_by']]!=""){ ?>
-                                                       <span class="col-auto text-end update-meta p-r-0"> <img src="uploads/all/<?php echo $_SESSION['user_image'][$list['created_by']]; ?>" alt="User" class="img-radius img-40 align-top m-r-15 update-icon" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_SESSION['users'][$list['created_by']]; ?>" aria-label="<?php echo $_SESSION['users'][$list['created_by']]; ?>">  </span>
+                                                       <span class="col-auto text-end update-meta p-r-0"> <img src="uploads/all/<?php echo $_SESSION['user_image'][$list['created_by']]; ?>" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-15 update-icon" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_SESSION['users'][$list['created_by']]; ?>" aria-label="<?php echo $_SESSION['users'][$list['created_by']]; ?>">  </span>
                                                         <?php }else{ ?>
-                                                            <span  alt="user" class="img-radius align-top custom_txt_workentry f-14 text-center" style=" height: 70px;line-height: 70px; width: 70px;" ><?php echo initials( $_SESSION['users'][$list['created_by']]); ?></span>
+                                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-14 text-center" style=" height: 70px;line-height: 70px; width: 70px;" ><?php echo initials( $_SESSION['users'][$list['created_by']]); ?></span>
                                                             <?php } ?>
                                                   </a>
                                                   <p class="f-12 mt-2"> <?php echo $_SESSION['users'][$list['created_by']]; ?></p>
@@ -114,7 +114,7 @@ if($_POST['submit'] == 'query'){
                                     </span>
                                     <?php if($replay_display == 'Y'){ ?>
                                         <p>
-                                             <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 btn-sm" onclick="replyquery(this.id)" id="<?php echo $k; ?>">Reply</button></p>
+                                             <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 btn-sm" onclick="replyquery(this.id)" id="<?php echo $k; ?>"><?= __('Reply'); ?></button></p>
                                         <?php } ?>
                                    </p>
                               </div>
@@ -131,13 +131,13 @@ if($_POST['submit'] == 'query'){
                                    <div class="kt-notes__content kt-notes__content2">
                                         <div class="kt-notes__section">
                                              <div class="kt-notes__info">
-                                                  <span class="f-w-600 f-16 text-success">Reply &nbsp;<?php echo $m; ?>:&nbsp;</span>
+                                                  <span class="f-w-600 f-16 text-success"><?= __('Reply'); ?> &nbsp;<?php echo $m; ?>:&nbsp;</span>
                                                   <a href="#" class="kt-notes__title">
                                                        <div class="align-middle">
                                                             <?php if($_SESSION['user_image'][$answer['created_by']]!=""){?>
-                                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$answer['created_by']]; ?>"   class="img-radius img-40 align-top" alt="User Profile">
+                                                            <img src="uploads/all/<?php echo $_SESSION['user_image'][$answer['created_by']]; ?>"   class="img-radius img-40 align-top" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php }else{ ?>
-                                                            <span  alt="user" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$answer['created_by']]); ?></span>
+                                                            <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top custom_txt_workentry f-12 text-center" ><?php echo initials($_SESSION['users'][$answer['created_by']]); ?></span>
                                                             <?php } ?>
                                                             <div class="d-inline-block width73">
                                                                  <h6> <?php echo $_SESSION['users'][$answer['created_by']]; ?> - <?php echo date('M d, Y', strtotime($answer['created_date'])); ?></h6>
@@ -161,7 +161,7 @@ if($_POST['submit'] == 'query'){
      <div style="margin-top: 5px; display: none" id="reply_<?php echo $k; ?>">
           <form action="" method="post">
                <div>
-                   <textarea aria-label="Query Text" type="text" class="form-control" name="query_text" required></textarea>
+                   <textarea aria-label="<?= htmlspecialchars(__('Query Text'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="query_text" required></textarea>
                </div>
                <div style="margin-top: 3px;">
                    <input type="hidden" name="parent_query" value="<?php echo $list['id']; ?>">
@@ -174,7 +174,7 @@ if($_POST['submit'] == 'query'){
                    <input type="hidden" name="created_by" value="<?php echo $_SESSION['userid']; ?>">
                    <input type="hidden" name="send_id" value="<?php echo $list['created_by']; ?>">
                    <input type="hidden" name="submit" value="query">
-                   <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 mt-2">Submit</button>
+                   <button class="btn btn-primary btn-shadow-hover font-weight-bold mr-2 mt-2"><?= __('Submit'); ?></button>
                </div>
           </form>
      </div>
@@ -184,7 +184,7 @@ if($_POST['submit'] == 'query'){
 
 <?php }else{ ?>
   <div class="card-px text-center ">
-    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert"></i> No Queries</p>
+    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti ti-alert"></i> <?= __('No Queries'); ?></p>
     <div class="text-center px-4">
       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
     </div>

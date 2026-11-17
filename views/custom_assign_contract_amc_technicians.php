@@ -72,7 +72,7 @@ $schedulesUrl = 'index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=' 
                         <div class="accordion-item mb-2 border rounded shadow-sm">
                             <h2 class="accordion-header" id="<?php echo $locHeadingId; ?>">
                                 <button class="accordion-button collapsed fw-semibold text-primary bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $locCollapseId; ?>" aria-expanded="false" aria-controls="<?php echo $locCollapseId; ?>">
-                                    <i class="ti-location-pin me-2"></i><?php echo $locName; ?> (<?php echo $assetCount; ?> asset<?php echo $assetCount == 1 ? '' : 's'; ?>)
+                                    <i class="ti-location-pin me-2"></i><?php echo $locName; ?> (<?php echo $assetCount; ?> <?= __('asset'); ?><?php echo $assetCount == 1 ? '' : 's'; ?>)
                                 </button>
                             </h2>
                             <div id="<?php echo $locCollapseId; ?>" class="accordion-collapse collapse" aria-labelledby="<?php echo $locHeadingId; ?>">
@@ -84,7 +84,7 @@ $schedulesUrl = 'index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=' 
                                         <div class="d-flex flex-wrap align-items-end gap-2 mb-3 p-2 bg-light rounded border">
                                             <div class="flex-grow-1" style="min-width:220px;">
                                                 <span class="form-label f-12 mb-1 d-inline-block fw-bold"><?= __("Apply to all assets at this location") ?></span>
-                                                <select class="form-control js-example-basic-single amc-loc-bulk-assignee-select" data-loc-id="<?php echo $locId; ?>" aria-label="Select">
+                                                <select class="form-control js-example-basic-single amc-loc-bulk-assignee-select" data-loc-id="<?php echo $locId; ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value=""><?= __("Select") ?> <?php echo strtolower(__($assigneeLabel)); ?></option>
                                                     <?php
                                                     $bulkList = $isInhouse ? $employees : $technicians;
@@ -136,7 +136,7 @@ $schedulesUrl = 'index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=' 
                                                         <td><?php echo $pendingCount; ?></td>
                                                         <td>
                                                             <?php if ($canExecute) { ?>
-                                                            <select name="<?php echo $assigneeField; ?>[<?php echo $assetRowId; ?>]" class="form-control js-example-basic-single amc-asset-assignee-select" data-loc-id="<?php echo $locId; ?>" data-asset-id="<?php echo $assetRowId; ?>" aria-label="Select">
+                                                            <select name="<?php echo $assigneeField; ?>[<?php echo $assetRowId; ?>]" class="form-control js-example-basic-single amc-asset-assignee-select" data-loc-id="<?php echo $locId; ?>" data-asset-id="<?php echo $assetRowId; ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                 <option value=""><?= __("Select") ?> <?php echo strtolower(__($assigneeLabel)); ?></option>
                                                                 <?php if (count((array)$assigneeList) > 0) {
                                                                     foreach ($assigneeList as $aid => $aname) { ?>
@@ -170,7 +170,7 @@ $schedulesUrl = 'index.php?option=COM_VIEW_CONTRACT_AMC_SCHEDULES&contract_id=' 
                     <?php if ($canExecute) { ?>
                     <div class="border-top pt-3 mt-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
                         <div class="form-check mb-0">
-                            <input class="form-check-input" type="checkbox" name="propagate_pending" id="propagatePendingVisits" value="1" checked aria-label="Propagate Pending">
+                            <input class="form-check-input" type="checkbox" name="propagate_pending" id="propagatePendingVisits" value="1" checked aria-label="<?= htmlspecialchars(__('Propagate Pending'), ENT_QUOTES, 'UTF-8'); ?>">
                             <label class="form-check-label f-12" for="propagatePendingVisits"><?= __("Update pending visits without overrides") ?></label>
                         </div>
                         <button type="button" class="btn btn-primary" id="saveContractAmcTechniciansBtn">

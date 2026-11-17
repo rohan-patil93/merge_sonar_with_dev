@@ -57,7 +57,7 @@ foreach ($vdata as  $vite) {
                                             <div class="col-md-9">
                                                 <div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
                                                     <div class="d-flex flex-column px-0">
-                                                        <h5 class="display-4 font-weight-boldest mb-10"><?php echo "TAX INVOICE"; ?></h5>
+                                                        <h5 class="display-4 font-weight-boldest mb-10"><?php echo __("TAX INVOICE"); ?></h5>
                                                     </div>
                                                     <div class="d-flex flex-column align-items-md-end px-0">
                                                         <?php $print_img ='uploads/all/'.$config['display_logo'];?>
@@ -77,23 +77,23 @@ foreach ($vdata as  $vite) {
                                                         <span class="font-weight-bolder mb-2"> <?php if($table == 'requisitions') { echo "Employee";
 } else {  echo "Vendor";
 }  ?> :&nbsp;&nbsp;<?php echo $data['party_id']; ?> - <?php echo $data['party_name']; ?></span>
-                                <span class="font-weight-bolder mb-2">Email&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;<?php echo $data['party_email']; ?></span>
-                                <span class="font-weight-bolder mb-2">Phone&nbsp;&nbsp; :&nbsp;&nbsp;<?php echo $data['party_phone']; ?> </span>
-                                <span class="font-weight-bolder mb-2">Taxes&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;<?php echo $data['party_tax_number']; ?> </span>
+                                <span class="font-weight-bolder mb-2"><?= __('Email'); ?>&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;<?php echo $data['party_email']; ?></span>
+                                <span class="font-weight-bolder mb-2"><?= __('Phone'); ?>&nbsp;&nbsp; :&nbsp;&nbsp;<?php echo $data['party_phone']; ?> </span>
+                                <span class="font-weight-bolder mb-2"><?= __('Taxes'); ?>&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;<?php echo $data['party_tax_number']; ?> </span>
                                                     </div>
                                                     <div class="d-flex flex-column flex-root">
-                                                        <span class="font-weight-bolder mb-2"> Billing Adderss:</span>
+                                                        <span class="font-weight-bolder mb-2"> <?= __('Billing Adderss'); ?>:</span>
                                 <span class="font-weight-bolder mb-2"> <?php echo $data['party_address']; ?>  </span>
                                 <span class="font-weight-bolder mb-2"> &nbsp;</span>
-                                <span class="font-weight-bolder mb-2"> Shiping Adderss :</span>
+                                <span class="font-weight-bolder mb-2"> <?= __('Shiping Adderss'); ?> :</span>
                                 <span class="font-weight-bolder mb-2"> <?php echo $data['party_ship_adderss']; ?>  </span>
                                                     </div>
                                                     <div class="d-flex flex-column flex-root">
-                                                        <span class="font-weight-bolder mb-2">Transaction Date&nbsp;:&nbsp;&nbsp;<?php echo $data['transaction_date']; ?> </span>
-                                <span class="font-weight-bolder mb-2">Currency &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo $curre['currency_list']; ?></span>
-                                <span class="font-weight-bolder mb-2"> Currency Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo customeummarmonyformate($data['currency_rate']); ?> </span>
-                                <span class="font-weight-bolder mb-2">Payment Terms &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo $data['payment_terms']; ?> </span>
-                                <span class="font-weight-bolder mb-2">Place Of Supply &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo $data['place_of_supply']; ?> </span>
+                                                        <span class="font-weight-bolder mb-2"><?= __('Transaction Date'); ?>&nbsp;:&nbsp;&nbsp;<?php echo $data['transaction_date']; ?> </span>
+                                <span class="font-weight-bolder mb-2"><?= __('Currency'); ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo $curre['currency_list']; ?></span>
+                                <span class="font-weight-bolder mb-2"> <?= __('Currency Rate'); ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo customeummarmonyformate($data['currency_rate']); ?> </span>
+                                <span class="font-weight-bolder mb-2"><?= __('Payment Terms'); ?> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo $data['payment_terms']; ?> </span>
+                                <span class="font-weight-bolder mb-2"><?= __('Place Of Supply'); ?> &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<?php echo $data['place_of_supply']; ?> </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,18 +107,18 @@ foreach ($vdata as  $vite) {
                                                         <thead>
                                                             <tr>
                                         <th scope="col" style="width: 2%;"># &nbsp;&nbsp;</th>
-                                        <th scope="col" style="width: 5%;">SKU</th>
-                                        <th scope="col" style="width: 5%;">NAME</th>
-                                        <th scope="col" style="width: 7%;">DESCRIPTION</th>
+                                        <th scope="col" style="width: 5%;"><?= __('SKU'); ?></th>
+                                        <th scope="col" style="width: 5%;"><?= __('NAME'); ?></th>
+                                        <th scope="col" style="width: 7%;"><?= __('DESCRIPTION'); ?></th>
                                         <?php $col=7; if($table != 'requisitions'){  $col=8;?>
-                                        <th scope="col" style="width: 5%;"> VENDOR ITEM</th>
+                                        <th scope="col" style="width: 5%;"> <?= __('VENDOR ITEM'); ?></th>
                                         <?php } ?>
-                                        <th scope="col" class="align_center" style="width: 4%;">UOM</th>
-                                        <th scope="col" class="align_center" style="width: 4%;">QTY</th>
-                                        <th scope="col" class="align_center" style="width: 5%;">RATE</th>
-                                        <th scope="col" class="align_center" style="width: 5%;">AMOUNT</th>
-                                        <th scope="col" class="align_center" style="width: 5%;">TAX AMOUNT</th>
-                                        <th scope="col" class="align_center" style="width: 7%;">TOTAL AMOUNT</th>
+                                        <th scope="col" class="align_center" style="width: 4%;"><?= __('UOM'); ?></th>
+                                        <th scope="col" class="align_center" style="width: 4%;"><?= __('QTY'); ?></th>
+                                        <th scope="col" class="align_center" style="width: 5%;"><?= __('RATE'); ?></th>
+                                        <th scope="col" class="align_center" style="width: 5%;"><?= __('AMOUNT'); ?></th>
+                                        <th scope="col" class="align_center" style="width: 5%;"><?= __('TAX AMOUNT'); ?></th>
+                                        <th scope="col" class="align_center" style="width: 7%;"><?= __('TOTAL AMOUNT'); ?></th>
                                     </tr>
                                                         </thead>
                                                         <tbody>
@@ -141,7 +141,7 @@ foreach ($vdata as  $vite) {
                                 <?php $i++;
 } ?>
                                     <tr>
-                                        <td colspan="<?php echo $col; ?>" class="align_right">TOTAL&nbsp;:&nbsp;&nbsp;</td>
+                                        <td colspan="<?php echo $col; ?>" class="align_right"><?= __('TOTAL'); ?>&nbsp;:&nbsp;&nbsp;</td>
                                         <td class="kt-font-danger kt-font-lg  align_center"><?php echo customeummarmonyformate ($data['amount']); ?></td>
                                         <td class="kt-font-danger kt-font-lg align_center"><?php echo customeummarmonyformate ($data['tax_amount']); ?></td>
                                         <td class="kt-font-danger kt-font-lg align_right"><?php echo customeummarmonyformate ($data['amount']+$data['tax_amount']); ?></td>
@@ -162,8 +162,8 @@ foreach ($vdata as  $vite) {
                                                     <table>
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col" style="width: 20%;">DISCOUNT </th>
-                                                                <th scope="col" style="width: 20%;">TOTAL AMOUNT</th>
+                                                                <th scope="col" style="width: 20%;"><?= __('DISCOUNT'); ?> </th>
+                                                                <th scope="col" style="width: 20%;"><?= __('TOTAL AMOUNT'); ?></th>
 
                                                             </tr>
                                                         </thead>
@@ -179,7 +179,7 @@ foreach ($vdata as  $vite) {
                                             </div>
                                             <div class=" col-lg-12" >
                                                 <div class="col-lg-12" style="text-align: center;">
-                                                 <h5 class="text-success">Notes: <?php echo  numberToWordFormateRupees($data['total_amount']);  ?> </h5>
+                                                 <h5 class="text-success"><?= __('Notes'); ?>: <?php echo  numberToWordFormateRupees($data['total_amount']);  ?> </h5>
                                                     </div>
                                             </div>
                                         </div>
@@ -188,8 +188,8 @@ foreach ($vdata as  $vite) {
                                         <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
                                             <div class="col-md-9">
                                                 <div class="d-flex justify-content-between">
-                                                    <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.print();">Download Invoice</button>
-                                                    <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print Invoice</button>
+                                                    <button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.print();"><?= __('Download Invoice'); ?></button>
+                                                    <button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();"><?= __('Print Invoice'); ?></button>
                                                 </div>
                                             </div>
                                         </div>

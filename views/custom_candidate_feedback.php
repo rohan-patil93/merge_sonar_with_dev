@@ -44,7 +44,7 @@ foreach ($qustion_types as $qtype) {
       <h5 class="modal-title">
         <?= __("Candidate Feed Back") ?>
       </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
     <div class="modal-body1" >
       <form method="post" id="myform" name="myform" action="">

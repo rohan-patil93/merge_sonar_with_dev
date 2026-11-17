@@ -67,10 +67,10 @@ foreach($status_progresss as $status_progress){
                 title: msg,
                 type: "success",
                 buttonsStyling: false,
-                confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, Submit!",
+                confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, Submit!'), ENT_QUOTES, 'UTF-8'); ?>",
                 confirmButtonClass: "btn btn-success",
                 showCancelButton: true,
-                cancelButtonText: "<i class='la la-hand-o-right'></i> No, Stop",
+                cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, Stop'), ENT_QUOTES, 'UTF-8'); ?>",
                 cancelButtonClass: "btn btn-danger"
             }).then(function(result) {
                 if (result.value) {
@@ -110,10 +110,10 @@ foreach($status_progresss as $status_progress){
                     title: msg,
                     type: "success",
                     buttonsStyling: false,
-                    confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+                    confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
                     confirmButtonClass: "btn btn-info",
                     showCancelButton: false,
-                    cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                    cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                     cancelButtonClass: "btn btn-default"
                 }).then(function(result) {
                     if (result.value) {
@@ -269,10 +269,10 @@ function select_all_approval(){
                         title: msg,
                         type: "success",
                         buttonsStyling: false,
-                        confirmButtonText: "<i class='la la-hand-o-up'></i>OK",
+                        confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('OK'), ENT_QUOTES, 'UTF-8'); ?>",
                         confirmButtonClass: "btn btn-info",
                         showCancelButton: false,
-                        cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                        cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                         cancelButtonClass: "btn btn-default"
                     });
                 }
@@ -305,12 +305,12 @@ function select_all_approval(){
             <div class="card">
 
                 <div class="card-header table-card-header">
-                      <h5>Weekly Bulk TimeSheet Approval</h5><button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="Take A Tour" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                      <h5><?= __('Weekly Bulk TimeSheet Approval'); ?></h5><button type="button" class="btn p-0 border-0 bg-transparent ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Take A Tour'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                       <div class="card-header-right table-card-header ">
 
                      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
     </div>
     </div>

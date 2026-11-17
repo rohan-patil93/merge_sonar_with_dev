@@ -99,15 +99,15 @@ foreach($statuslist as $statuslist){
         count++;
         var htmlRows = '';
         htmlRows += '<tr>';
-        htmlRows += '<td><label class="kt-checkbox"> <input aria-label="Checkbox"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
-        htmlRows += '<td><input aria-label="Name[]" type="text" class="form-control" name="name[]" value=""></td> ';
-        htmlRows += '<td><input aria-label="Email[]" type="text" class="form-control" name="email[]" value=""> </td>';
-        htmlRows += '<td><input aria-label="Phone[]" type="text" class="form-control" name="phone[]" value=""></td>';
-        htmlRows += '<td><select aria-label="Process[]" class="form-control" name="process[]" ><option value="0">Select Any One</option>    <?php foreach ($spdata as  $sp) { ?><option  value="<?php echo $sp[id]; ?>"><?php echo $sp[select_name]; ?></option><?php
+        htmlRows += '<td><label class="kt-checkbox"> <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>"  class="itemRow" type="checkbox">  <span> </span> </label> </td>';
+        htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Name'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="name[]" value=""></td> ';
+        htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Email'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="email[]" value=""> </td>';
+        htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" class="form-control" name="phone[]" value=""></td>';
+        htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Process'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" name="process[]" ><option value="0"><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option>    <?php foreach ($spdata as  $sp) { ?><option  value="<?php echo $sp[id]; ?>"><?php echo $sp[select_name]; ?></option><?php
 } ?></select></td>';
-        htmlRows += '<td><textarea aria-label="Remarks[]" class="form-control" name="remarks[]" ></textarea> </td>';
-        htmlRows += '<td><select aria-label="Status[]" class="form-control" name="status[]"><option value="0">Select Any One</option><option value="0">Active</option></select></td>';
-        htmlRows += '<td><a herf="#" class="btn btn-primary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> Infrom </a></td onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">';
+        htmlRows += '<td><textarea aria-label="<?= htmlspecialchars(__('Remarks'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" name="remarks[]" ></textarea> </td>';
+        htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control" name="status[]"><option value="0"><?= htmlspecialchars(__('Select Any One'), ENT_QUOTES, 'UTF-8'); ?></option><option value="0"><?= htmlspecialchars(__('Active'), ENT_QUOTES, 'UTF-8'); ?></option></select></td>';
+        htmlRows += '<td><a herf="#" class="btn btn-primary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <?= htmlspecialchars(__('Infrom'), ENT_QUOTES, 'UTF-8'); ?> </a></td onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">';
         htmlRows += '</tr>';
         $('#invoiceItem').append(htmlRows);
     }
@@ -134,10 +134,10 @@ foreach($statuslist as $statuslist){
                         text: mms,
                         type: "success",
                         buttonsStyling: false,
-                        confirmButtonText: "<i class='la la-hand-o-up'></i>Yes, close!",
+                        confirmButtonText: "<i class='la la-hand-o-up'></i><?= htmlspecialchars(__('Yes, close!'), ENT_QUOTES, 'UTF-8'); ?>",
                         confirmButtonClass: "btn btn-primary",
                         showCancelButton: false,
-                        cancelButtonText: "<i class='la la-hand-o-right'></i> No, continue",
+                        cancelButtonText: "<i class='la la-hand-o-right'></i> <?= htmlspecialchars(__('No, continue'), ENT_QUOTES, 'UTF-8'); ?>",
                         cancelButtonClass: "btn btn-danger"
                     }).then(function(result) {
                         if (result.value) {
@@ -166,14 +166,14 @@ foreach($statuslist as $statuslist){
                 <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm" enctype="multipart/form-data">
                     <div class="" id="kt_page_sticky_card">
                         <div class="card-header mb-3">
-                            <h5>Job Posting Applicants</h5>
+                            <h5><?= __('Job Posting Applicants'); ?></h5>
                             <div class="card-header-right">
                                 <?php if($_SESSION['user_type'] !=3){ ?>
-                                    <a href="index.php?option=COM_INSERT_JOB_POSTINGS" class="btn btn-success "> <i class="icofont icofont-plus icon-white"></i>New Job Posting</a>
+                                    <a href="index.php?option=COM_INSERT_JOB_POSTINGS" class="btn btn-success "> <i class="icofont icofont-plus icon-white"></i><?= __('New Job Posting'); ?></a>
                                 <?php } ?>
                                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                     <i class="icofont icofont-reply"></i>
-                                    Back
+                                    <?= __('Back'); ?>
                                 </a>
                             </div>
                         </div>
@@ -183,22 +183,22 @@ foreach($statuslist as $statuslist){
                                     <ul class="nav md-tabs infisuite_tab">
                                         <li class="nav-item">
                                             <a class="nav-link f-w-600 <?php if($aciveid=="-1"){ echo "active";
-} ?>" data-bs-toggle="tab" href="#total" role="tab" aria-selected="true">Total Jobs</a>
+} ?>" data-bs-toggle="tab" href="#total" role="tab" aria-selected="true"><?= __('Total Jobs'); ?></a>
                                             <div class="slide"></div>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link f-w-600 <?php if($aciveid=='0' || $aciveid==''){ echo "active";
-} ?>"  data-bs-toggle="tab" href="#open" role="tab" aria-selected="false"> Open Jobs </a>
+} ?>"  data-bs-toggle="tab" href="#open" role="tab" aria-selected="false"> <?= __('Open Jobs'); ?> </a>
                                             <div class="slide"></div>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link f-w-600 <?php if($aciveid==1){ echo "active";
-} ?>" data-bs-toggle="tab" href="#close" role="tab" aria-selected="false"> Close Jobs </a>
+} ?>" data-bs-toggle="tab" href="#close" role="tab" aria-selected="false"> <?= __('Close Jobs'); ?> </a>
                                             <div class="slide"></div>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link f-w-600 <?php if($aciveid==2){ echo "active";
-} ?>" data-bs-toggle="tab" href="#hold" role="tab" aria-selected="false"> Hold Jobs </a>
+} ?>" data-bs-toggle="tab" href="#hold" role="tab" aria-selected="false"> <?= __('Hold Jobs'); ?> </a>
                                             <div class="slide"></div>
                                         </li>
                                     </ul>
@@ -230,16 +230,16 @@ foreach($statuslist as $statuslist){
                                                         </div>
                                                         <div class="card-block text-center">
                                                             <div data-label="40%" class="radial-bar radial-bar-40 radial-bar-lg radial-bar-danger">
-                                                                <img src="uploads/all/<?php echo $uimg; ?>" alt="User">
+                                                                <img src="uploads/all/<?php echo $uimg; ?>" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-6">
                                                                     <?php if($res['job_status']==1){ ?>
-                                                                        <div class="s-caption bg-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Closed"></div>
+                                                                        <div class="s-caption bg-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>"></div>
                                                                     <?php }elseif($res['job_status']==2){ ?>
-                                                                        <div class="s-caption bg-warning" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Hold"></div>
+                                                                        <div class="s-caption bg-warning" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Hold'), ENT_QUOTES, 'UTF-8'); ?>"></div>
                                                                     <?php }else{ ?>
-                                                                        <div class="s-caption bg-info" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Open"></div>
+                                                                        <div class="s-caption bg-info" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Open'), ENT_QUOTES, 'UTF-8'); ?>"></div>
                                                                     <?php } ?>
                                                                     <div class="s-cont d-inline-block">
                                                                         <h5 class="f-w-700 m-b-0 f-14"><?php echo initials($code[$res['job_code']]); ?></h5>
@@ -247,7 +247,7 @@ foreach($statuslist as $statuslist){
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6 b-l-default">
-                                                                    <a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo  deocdeId($nridw); ?>" class="btn btn-info waves-effect waves-light  f-12">view</a>
+                                                                    <a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo  deocdeId($nridw); ?>" class="btn btn-info waves-effect waves-light  f-12"><?= __('view'); ?></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -257,7 +257,7 @@ foreach($statuslist as $statuslist){
 }
                                             }else{ ?>
                                     <div class="card-px text-center py-20 m-t-30">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Jobs Posting </p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                         </div>
@@ -294,16 +294,16 @@ foreach($statuslist as $statuslist){
                                                         </div>
                                                         <div class="card-block text-center">
                                                             <div data-label="40%" class="radial-bar radial-bar-40 radial-bar-lg radial-bar-danger">
-                                                                <img src="uploads/all/<?php echo $uimg; ?>" alt="User">
+                                                                <img src="uploads/all/<?php echo $uimg; ?>" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-6">
                                                                     <?php if($res['job_status']==1){ ?>
-                                                                        <div class="s-caption bg-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Closed"></div>
+                                                                        <div class="s-caption bg-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>"></div>
                                                                     <?php }elseif($res['job_status']==2){ ?>
-                                                                        <div class="s-caption bg-warning" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Hold"></div>
+                                                                        <div class="s-caption bg-warning" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Hold'), ENT_QUOTES, 'UTF-8'); ?>"></div>
                                                                     <?php }else{ ?>
-                                                                        <div class="s-caption bg-info" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Open"></div>
+                                                                        <div class="s-caption bg-info" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Open'), ENT_QUOTES, 'UTF-8'); ?>"></div>
                                                                     <?php } ?>
                                                                     <div class="s-cont d-inline-block">
                                                                         <h5 class="f-w-700 m-b-0 f-14"><?php echo initials($code[$res['job_code']]); ?></h5>
@@ -311,7 +311,7 @@ foreach($statuslist as $statuslist){
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6 b-l-default">
-                                                                    <a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo  deocdeId($nridw); ?>" class="btn btn-info waves-effect waves-light  f-12">view</a>
+                                                                    <a href="index.php?option=COM_LIST_JOB_POSTING_CANDIDATE&Rid=<?php echo  deocdeId($nridw); ?>" class="btn btn-info waves-effect waves-light  f-12"><?= __('view'); ?></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -322,7 +322,7 @@ foreach($statuslist as $statuslist){
 }
                                             }else{ ?>
                                     <div class="card-px text-center py-20 m-t-30">
-                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Jobs Posting </p>
+                                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Jobs Posting'); ?> </p>
                                         <div class="text-center px-4">
                                             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                                         </div>

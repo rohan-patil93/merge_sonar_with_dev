@@ -38,7 +38,7 @@ $account_groups = $result['account_groups'];
         if($chartofaccountssingle['lock_and_unlock_user_id'] == $_SESSION['userid']){
    ?>
       <span class="pcoded-badge label label-primary  cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="clickChartOfAccountLockAndUnlock('N','<?php echo $chartofaccountssingle['id']; ?>')"><i class="ti-unlock"></i> <?= __('Click To Unlock') ?></span>
-  <?php }else{ echo "<span class='text-danger'>Chart Of Account is locked. ".$_SESSION['error_message']['9002']."</span>";
+  <?php }else{ echo "<span class='text-danger'>".__('Chart Of Account is locked.')." ".$_SESSION['error_message']['9002']."</span>";
   }
   } ?>
 </div>
@@ -228,7 +228,7 @@ $account_groups = $result['account_groups'];
                                 <label class="form-label"><?php echo $cc['cost_center_name']; ?></label>
                               </div>
                               <div class="form-group  col-lg-3">
-                                 <input type="number"  class="form-control balance_cnt_text"  name="opening_balance[<?php echo $loc['id']; ?>][<?php echo $dep['id']; ?>][<?php echo $cc['id']; ?>]" value="0" onblur="updatebalanceamount()" aria-label="Opening Balance" />
+                                 <input type="number"  class="form-control balance_cnt_text"  name="opening_balance[<?php echo $loc['id']; ?>][<?php echo $dep['id']; ?>][<?php echo $cc['id']; ?>]" value="0" onblur="updatebalanceamount()" aria-label="<?= htmlspecialchars(__('Opening Balance'), ENT_QUOTES, 'UTF-8'); ?>" />
                               </div>
                             </div>
                             <?php

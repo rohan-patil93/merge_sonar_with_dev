@@ -32,7 +32,7 @@ $dcurr = $_POST['dcurr'];
 
     <h5 class="text-white"><?= __('Currency Convertor') ?></h5>
 
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 
 </div>
 
@@ -62,7 +62,7 @@ $dcurr = $_POST['dcurr'];
                     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10" id="append_staticks">
                         <div class="row align-items-center sfitemRow" id="static_div_<?php echo $i; ?>" style="margin-top: 10px;">
                             <div class="col-lg-3">
-                                <select aria-label="From Currency[]" class="form-control form-select js-example-basic-single" name="from_currency[]" id="from_currency_<?php echo $i; ?>">
+                                <select aria-label="<?= htmlspecialchars(__('From Currency'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="from_currency[]" id="from_currency_<?php echo $i; ?>">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($currency as $currenc){ ?>
                                         <option <?php if($dcurr == $currenc['id']){ echo "selected";
@@ -71,7 +71,7 @@ $dcurr = $_POST['dcurr'];
                                 </select>
                             </div>
                             <div class="col-lg-3">
-                                <select aria-label="To Currency[]" class="form-control form-select js-example-basic-single" name="to_currency[]" id="to_currency_<?php echo $i; ?>">
+                                <select aria-label="<?= htmlspecialchars(__('To Currency'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="to_currency[]" id="to_currency_<?php echo $i; ?>">
                                     <option value=""><?= __('Select Any One') ?></option>
                                     <?php foreach($currency as $currenc){ ?>
                                         <option   value="<?php echo $currenc['id']; ?>"> <?php echo $currenc['currency_name']." - ".$currenc['currency_short_code']; ?></option>
@@ -79,10 +79,10 @@ $dcurr = $_POST['dcurr'];
                                 </select>
                             </div>
                             <div class="col-lg-3">
-                                <input aria-label="Input field" type="text" class="form-control text-right"  id="ex_rate_<?php echo $i; ?>"  value=""  name="ex_rate[]" placeholder="0.00">
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control text-right"  id="ex_rate_<?php echo $i; ?>"  value=""  name="ex_rate[]" placeholder="0.00">
                             </div>
                             <div class="col-lg-2">
-                                <input aria-label="Input field" type="text"class="form-control datepicker"  id="ex_date_<?php echo $i; ?>"  value="<?php echo fromDate($fromdate); ?>"   name="ex_date[]">
+                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"class="form-control datepicker"  id="ex_date_<?php echo $i; ?>"  value="<?php echo fromDate($fromdate); ?>"   name="ex_date[]">
                             </div>
                             <div class="col-lg-1">
                                 <input type="hidden" value="0" id="static_delete_value_<?php echo $i; ?>" >

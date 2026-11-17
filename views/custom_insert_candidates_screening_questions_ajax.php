@@ -58,7 +58,7 @@ if($gettype =="QuestionsAnswers"){
     </form>
     <div class="row">
         <button type="button" onclick="addQuestionsTextFileds()" class="btn btn-success col-lg-4 btn-sm mt-2">
-           <i class="fas fa-plus"></i> Add Question
+           <i class="fas fa-plus"></i> <?= __('Add Question'); ?>
         </button>
         <div class="col-lg-4"></div>
         <button type="button" onclick="AIStartSceening('<?php echo $candidate_id; ?>','<?php echo $job_posting_id; ?>')" class="btn btn-primary col-lg-4 btn-sm mt-2 float-right">

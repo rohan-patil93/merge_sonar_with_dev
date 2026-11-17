@@ -104,21 +104,21 @@ $stausresult = statusData(TBL_EDIMASTER);
 									<div class="kt-section kt-section--first">
 										<div class="kt-section__body">
 											<div class="form-group  row">
-												<span class="col-xl-3 col-lg-3 col-form-label">EDI Name <span class="requried">*</span></span>
+												<span class="col-xl-3 col-lg-3 col-form-label"><?= __('EDI Name'); ?> <span class="requried">*</span></span>
 												<div class="col-lg-9 col-xl-6">
 													<div class="input-group">
 														<div class="input-group-prepend"><span class="input-group-text"><i class="la la-user" aria-hidden="true"></i></span></div>
-														<input aria-label="EDI Name" class="form-control" type="text" name="EDI_Name" value=<?php echo $role['EDI_Name']; ?>>
+														<input aria-label="<?= htmlspecialchars(__('EDI Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="EDI_Name" value=<?php echo $role['EDI_Name']; ?>>
 													</div>
 												</div>
 											</div>
 
 											<div class="form-group  row">
-												<span class="col-xl-3 col-lg-3 col-form-label">Type<span class="requried">*</span></span>
+												<span class="col-xl-3 col-lg-3 col-form-label"><?= __('Type'); ?><span class="requried">*</span></span>
 												<div class="col-lg-9 col-xl-6">
 													<div class="input-group">
 														<div class="input-group-prepend"><span class="input-group-text"><i class="la la-tasks" aria-hidden="true"></i></span></div>
-														<input aria-label="EDI Type" class="form-control" type="text" name="EDI_Type" value=<?php echo $role['EDI_Type']; ?>>
+														<input aria-label="<?= htmlspecialchars(__('EDI Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="EDI_Type" value=<?php echo $role['EDI_Type']; ?>>
 													</div>
 												</div>
 											</div>
@@ -127,22 +127,22 @@ $stausresult = statusData(TBL_EDIMASTER);
 												<div class="col-9">
 													<div class="kt-radio-inline">
 														<label class="kt-radio">
-															<input aria-label="EDI Type" type="radio" checked="checked" name="EDI_Type" value="Only Upload"> Only Upload
+															<input aria-label="<?= htmlspecialchars(__('EDI Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" checked="checked" name="EDI_Type" value="Only Upload"> <?= __('Only Upload'); ?>
 															<span></span>
 														</label>
 														<label class="kt-radio">
-															<input aria-label="EDI Type" type="radio"  name="EDI_Type" value="Upload With Confirm"> Upload With Confirm
+															<input aria-label="<?= htmlspecialchars(__('EDI Type'), ENT_QUOTES, 'UTF-8'); ?>" type="radio"  name="EDI_Type" value="Upload With Confirm"> <?= __('Upload With Confirm'); ?>
 															<span></span>
 														</label>
 													</div>
 												</div>
 											</div>
 											<div class="form-group  row">
-												<span class="col-xl-3 col-lg-3 col-form-label">File Type <span class="requried">*</span></span>
+												<span class="col-xl-3 col-lg-3 col-form-label"><?= __('File Type'); ?> <span class="requried">*</span></span>
 												<div class="col-lg-9 col-xl-6">
 													<div class="input-group">
 														<div class="input-group-prepend"><span class="input-group-text"><i class="la la-upload" aria-hidden="true"></i></span></div>
-														<input aria-label="EDI File Type" class="form-control" type="text" name="EDI_File_Type" value=<?php echo $role['EDI_File_Type']; ?>>
+														<input aria-label="<?= htmlspecialchars(__('EDI File Type'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="EDI_File_Type" value=<?php echo $role['EDI_File_Type']; ?>>
 													</div>
 												</div>
 											</div>
@@ -151,7 +151,7 @@ $stausresult = statusData(TBL_EDIMASTER);
 												<div class="col-lg-9 col-xl-6">
 													<div class="input-group">
 														<div class="input-group-prepend"><span class="input-group-text"><i class="la la-group" aria-hidden="true"></i></span></div>
-														<input aria-label="EDI Delimiter" class="form-control" type="text" name="EDI_Delimiter" value=<?php echo $role['EDI_Delimiter']; ?>>
+														<input aria-label="<?= htmlspecialchars(__('EDI Delimiter'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="EDI_Delimiter" value=<?php echo $role['EDI_Delimiter']; ?>>
 													</div>
 												</div>
 											</div>
@@ -160,7 +160,7 @@ $stausresult = statusData(TBL_EDIMASTER);
 												<div class="col-lg-9 col-xl-6">
 													<div class="input-group">
 														<div class="input-group-prepend"><span class="input-group-text"><i class="la la-group" aria-hidden="true"></i></span></div>
-														<input aria-label="EDI String Separator" class="form-control" type="text" name="EDI_String_Separator" value=<?php echo $role['EDI_String_Separator']; ?>>
+														<input aria-label="<?= htmlspecialchars(__('EDI String Separator'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="text" name="EDI_String_Separator" value=<?php echo $role['EDI_String_Separator']; ?>>
 													</div>
 												</div>
 											</div>
@@ -175,7 +175,7 @@ $stausresult = statusData(TBL_EDIMASTER);
 																<i class="la la-calendar-check-o"></i>
 															</span>
 														</div>
-														<input aria-label="From Date" type="text" class="form-control" name="From_Date" value="<?php echo $from; ?>"  id="kt_datepicker_4_3" />
+														<input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" name="From_Date" value="<?php echo $from; ?>"  id="kt_datepicker_4_3" />
 													</div>
 												</div>
 											</div>
@@ -188,16 +188,16 @@ $stausresult = statusData(TBL_EDIMASTER);
 																<i class="la la-calendar-check-o"></i>
 															</span>
 														</div>
-														<input aria-label="To Date" type="text" class="form-control"  name="To_Date" value="<?php echo $to; ?>"  id="kt_datepicker_4_3_1" />
+														<input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  name="To_Date" value="<?php echo $to; ?>"  id="kt_datepicker_4_3_1" />
 													</div>
 												</div>
 											</div>
 											<div class="form-group  row">
-												<span class="col-xl-3 col-lg-3 col-sm-12">Status</span>
+												<span class="col-xl-3 col-lg-3 col-sm-12"><?= __('Status'); ?></span>
 												<div class="col-lg-9 col-xl-6">
 													<?php foreach($stausresult as $key=>$radio){ ?>
 													<label class="kt-radio">
-														<input aria-label="Radio option" type="radio" <?php if($role['Current_Status'] == $key){?> checked="checked" <?php } ?> value=<?php echo $key; ?>  name="Current_Status"> <?php echo $radio; ?>
+														<input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" <?php if($role['Current_Status'] == $key){?> checked="checked" <?php } ?> value=<?php echo $key; ?>  name="Current_Status"> <?php echo $radio; ?>
 														<span></span>
 													</label>
 												<?php } ?>

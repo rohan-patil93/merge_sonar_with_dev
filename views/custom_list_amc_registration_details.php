@@ -36,15 +36,15 @@ foreach ($gc_details as $row) {
 <!-- Pradeep HTML Start here -->
 <div class="card">
     <div class="card-header">
-        <h4>AMC Register Details</h4>
+        <h4><?= __('AMC Register Details'); ?></h4>
         <div class="card-header-right">
             <a href="index.php?option=COM_INSERT_AMC_REGISTRATION_DETAILS" class="btn  btn-success waves-effect waves-light mb-2 desktop-view text-white">
                 <i class="icofont icofont-plus text-white"></i>
-                AMC Register
+                <?= __('AMC Register'); ?>
             </a>
             <a href="javascript:history.go(-1)" class="btn  waves-effect waves-light mb-2 desktop-view">
                 <i class="icofont icofont-reply"></i>
-                Back
+                <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -54,19 +54,19 @@ foreach ($gc_details as $row) {
         <div class="table-responsive mt-3">
             <table class="table  table-sm f-12">
                 <tr class="f-14">
-                    <th scope="col">SL NO</th>
-                    <th scope="col">AMC Name</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Customer/Vendor Name</th>
-                    <th scope="col">Activation Date</th>
-                    <th scope="col">Deactivation Date</th>
-                    <th scope="col">Payment Type</th>
-                    <th scope="col">Service Charge</th>
-                    <th scope="col">Service On</th>
-                    <th scope="col">No. Of Services</th>
-                    <th scope="col">Service Name</th>
-                    <th scope="col">Service Company</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"><?= __('SL NO'); ?></th>
+                    <th scope="col"><?= __('AMC Name'); ?></th>
+                    <th scope="col"><?= __('Product Name'); ?></th>
+                    <th scope="col"><?= __('Customer/Vendor Name'); ?></th>
+                    <th scope="col"><?= __('Activation Date'); ?></th>
+                    <th scope="col"><?= __('Deactivation Date'); ?></th>
+                    <th scope="col"><?= __('Payment Type'); ?></th>
+                    <th scope="col"><?= __('Service Charge'); ?></th>
+                    <th scope="col"><?= __('Service On'); ?></th>
+                    <th scope="col"><?= __('No. Of Services'); ?></th>
+                    <th scope="col"><?= __('Service Name'); ?></th>
+                    <th scope="col"><?= __('Service Company'); ?></th>
+                    <th scope="col"><?= __('Action'); ?></th>
                 </tr>
                 <?php $i = 1;
                 foreach ($response as $row) { ?>
@@ -103,7 +103,7 @@ foreach ($gc_details as $row) {
 
                                 <a class="btn btn-primary f-14 b-radius-5 f-w-600"
                                     href="index.php?option=COM_LIST_AMC_SERVICE_SCHEDULES&Rid=<?php echo deocdeId('id:' . $row['id']); ?>">
-                                    View
+                                    <?= __('View'); ?>
                                 </a>
                             <?php   } else { ?>
                                 <a class="text-primary m-r-5" target="_blank"
@@ -111,7 +111,7 @@ foreach ($gc_details as $row) {
                                     <i class="fa fa-edit btn-warning p-2 b-radius-5"></i>
                                 </a>
 
-                                <button type="button" class="btn-success f-14 b-radius-5 f-w-600" onclick="confirmSchedule(<?php echo $row['id']; ?>)">Schedule</button>
+                                <button type="button" class="btn-success f-14 b-radius-5 f-w-600" onclick="confirmSchedule(<?php echo $row['id']; ?>)"><?= __('Schedule'); ?></button>
                             <?php   }
                             ?>
 
@@ -130,15 +130,15 @@ foreach ($gc_details as $row) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="confirmScheduleLabel">Confirm Schedule Creation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="confirmScheduleLabel"><?= __('Confirm Schedule Creation'); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to create the service schedule?
+                <?= __('Are you sure you want to create the service schedule?'); ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="confirmBtn">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
+                <button type="button" class="btn btn-primary" id="confirmBtn"><?= __('Confirm'); ?></button>
             </div>
         </div>
     </div>

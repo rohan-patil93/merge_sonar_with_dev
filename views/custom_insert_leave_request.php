@@ -202,7 +202,7 @@ if($timeprint == '1' && $maxtimeshow >= '1'){
                         $("#kt_login_signin_submit").css("pointer-events","none");
                     }
                     $('#leave_days').val(datas.final_appllay_leave_count);
-                    $(".hilidayorweekend").html('<span class="form-label label label-md bg-danger d-block">Weeckend Days  <span class="float-end">'+datas.weeckendandnumberdate+'</span></span><span class="form-label label label-md bg-danger d-block mt-2">Holidays  <span class="float-end">'+datas.holidaysnumberdate+'</span></span><span class="form-label label label-md bg-info mt-2 d-block">Available Leaves  <span class="float-end">'+datas.availabe_leaves+'</span></span>');
+                    $(".hilidayorweekend").html('<span class="form-label label label-md bg-danger d-block"><?= htmlspecialchars(__('Weeckend Days'), ENT_QUOTES, 'UTF-8'); ?>  <span class="float-end">'+datas.weeckendandnumberdate+'</span></span><span class="form-label label label-md bg-danger d-block mt-2"><?= htmlspecialchars(__('Holidays'), ENT_QUOTES, 'UTF-8'); ?>  <span class="float-end">'+datas.holidaysnumberdate+'</span></span><span class="form-label label label-md bg-info mt-2 d-block"><?= htmlspecialchars(__('Available Leaves'), ENT_QUOTES, 'UTF-8'); ?>  <span class="float-end">'+datas.availabe_leaves+'</span></span>');
 
                 },
                 error:function (){}
@@ -250,7 +250,7 @@ if($timeprint == '1' && $maxtimeshow >= '1'){
                 $(".halfdayselect option[value='1']").prop('disabled',true);
                 $(".halfdayselect option[value='2']").prop('disabled',true);
             }
-            $(".hilidayorweekend").html('<span class="form-label label label-md bg-info ml-2">Available leaves - '+availablelv+'</span>');
+            $(".hilidayorweekend").html('<span class="form-label label label-md bg-info ml-2"><?= htmlspecialchars(__('Available leaves'), ENT_QUOTES, 'UTF-8'); ?> - '+availablelv+'</span>');
         });
     }
     <?php if($_POST['leave_type_id']!="" || $employee_leaves['leave_type_id']){ ?>

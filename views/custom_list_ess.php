@@ -26,7 +26,7 @@ foreach($process_doc as $list_doc){
     function displayitemdata(option,id,vll){
 
 
-      var html = '<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+      var html = '<div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $(".removedataajax").html(html);
       if(option!='COM_LIST_MY_TEAM'){
           $.ajax({
@@ -120,7 +120,7 @@ foreach($process_doc as $list_doc){
                                             include_once "view_roll_back1.php";
                                          }else{  ?>
                                         <div style="display: block;  margin-left: auto;  margin-right: auto;  width: 40%;">
-                                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview">
+                                                    <img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 </div>
 
 

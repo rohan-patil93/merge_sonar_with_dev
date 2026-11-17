@@ -130,7 +130,7 @@ if(isset($_GET['PID'] )) {
 <div class="d-flex flex-column-fluid">
     <div class="container-fluid">
         <div class="alert alert-warning alert-dismissible">
-            <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
+            <strong><?php echo "This function is used for maintaining <strong>".__('Display Attributes')."</strong>".__('. * represents mandatory fields.').""; ?></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php echo __('Close'); ?>"></button>
         </div>
         <div class="row">

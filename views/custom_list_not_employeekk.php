@@ -26,7 +26,7 @@
                                    <?php
                                    $dis_name = $_SESSION['employee']['display_name']!=""?$_SESSION['employee']['display_name']:$_SESSION['display_name'];
                                    if($_SESSION['employee']['image']!=""){ ?>
-                                     <img src="<?php echo "uploads/all/".$_SESSION['employee']['image']; ?>" class=" img-120 user-img b-radius-10" alt="User">
+                                     <img src="<?php echo "uploads/all/".$_SESSION['employee']['image']; ?>" class=" img-120 user-img b-radius-10" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                                  <?php }else{ ?>
                                   <span class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-1 text-center bg-white text-black  mt-2"><?php echo initials($dis_name); ?></span>
                               <?php } ?>
@@ -43,9 +43,9 @@
                         <div>
                             <div class="float-right cover-btn">
                                 <button type="button" class="btn btn-primary m-r-20 m-b-20"><i class="icofont icofont-plus"></i>
-                                Follow</button>
+                                <?= __('Follow'); ?></button>
                                 <button type="button" class="btn btn-primary m-b-20" ><i class="icofont icofont-ui-messaging"></i>
-                                Message</button>
+                                <?= __('Message'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
         <div class="tab-header card">
             <ul class="nav  md-tabs infisuite_tab" id="mytab">
                 <li class="nav-item p-10">
-                    <a class="nav-link f-w-600 active" data-bs-toggle="tab" href="#personal" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Personal Info</a>
+                    <a class="nav-link f-w-600 active" data-bs-toggle="tab" href="#personal" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Personal Info'); ?></a>
                 </li>
                 <li class="nav-item p-10">
                     <button type="button" class="nav-link f-w-600" data-bs-toggle="tab" location" role="tab" onclick="displayitemdata('COM_LIST_EMP_WORK_ORDER', 'display_side_work_order')">User Location</button>

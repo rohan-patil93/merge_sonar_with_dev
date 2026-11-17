@@ -114,7 +114,7 @@ $disabledbtn = "";
             <span class="form-label d-block"><?php echo __('Message'); ?></span>
             <span class="text-danger">
                 <?php
-                    echo "This transaction cannot be cancelled because it has a reference.</br>";
+                    echo "".__('This transaction cannot be cancelled because it has a reference.')."</br>";
                     foreach($ref_transaction as $transa => $trans){
                         echo htmlspecialchars($transa, ENT_QUOTES)." - ".htmlspecialchars($trans['transaction_number'] ?? '', ENT_QUOTES)."(".(isset($trans['transaction_date']) ? fromDate($trans['transaction_date']) : '').")</br>";
                     }

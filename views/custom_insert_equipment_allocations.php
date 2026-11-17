@@ -403,7 +403,7 @@ foreach($equipments_res as $etr){
 
 <div class="row mt-5">
     <div id="floor_cabin_2">
-        <img  src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="Attachment Preview">
+        <img  src="uploads/building_floors/<?php echo $building_floors['floor_image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
         <?php
         $cabincnt = 0;
         foreach($equipment_allocations as $ealloc){  $cabincnt++;

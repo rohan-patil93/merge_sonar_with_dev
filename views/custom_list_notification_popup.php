@@ -9,13 +9,13 @@ if(isset($_POST['page']) && $_POST['page']!=""){
 ?>
                   <ul class="nav md-tabs infisuite_tab tabs mb-2">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#home1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Action</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#home1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Action'); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#information1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Information</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#information1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Information'); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#logs1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">Logs</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#logs1" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?= __('Logs'); ?></a>
                         </li>
                     </ul>
 
@@ -54,7 +54,7 @@ if($aci == 0){?>
             <a href="javascript:;" class="kt-notification__item">
                 <div class="kt-notification__item-details">
                     <div class="kt-notification__item-title">
-                        All caught up!  No new notifications.
+                        <?= __('All caught up! No new notifications.'); ?>
                     </div>
 
                 </div>
@@ -96,7 +96,7 @@ if($aci == 0){?>
             <a href="javascript:;" class="kt-notification__item">
                 <div class="kt-notification__item-details">
                     <div class="kt-notification__item-title">
-                        All caught up!  No new notifications.
+                        <?= __('All caught up! No new notifications.'); ?>
                     </div>
 
                 </div>

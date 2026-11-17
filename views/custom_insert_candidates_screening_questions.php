@@ -44,7 +44,7 @@ $job_posting_candidates = $result['job_posting_candidates'];
 }**/
 
 function getScreeningResponse(job_posting_candidate_id){
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Loading"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Loading'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#screeningresponse').html(htmloader);
     $.ajax({
         url: "views/custom_insert_candidates_screening_questions_ajax.php",
@@ -60,7 +60,7 @@ function startScreening(candidate_id,job_posting_id){
     var company_id = '<?php echo $_SESSION['company_id']; ?>';
     var data_name = '<?php echo $_SESSION['DB_NAME']; ?>';
     var user_id = '<?php echo $_SESSION['userid']; ?>';
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Loading"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Loading'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#screeningresponse').html(htmloader);
     $.ajax({
         url: "apis/recruitstac_screening_questions.php",
@@ -76,7 +76,7 @@ function startScreening(candidate_id,job_posting_id){
 
 function approvedstartScreening(screening_id){
 
-    $("#ai_spproved_and_start").text("Please Wait........");
+    $("#ai_spproved_and_start").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     $("#ai_spproved_and_start").addClass("disabled");
     var company_id = '<?php echo $_SESSION['company_id']; ?>';
     var data_name = '<?php echo $_SESSION['DB_NAME']; ?>';
@@ -86,7 +86,7 @@ function approvedstartScreening(screening_id){
         type: "POST",
         data: 'company_id='+company_id+'&data_name='+data_name+'&user_id='+user_id+'&screening_id='+screening_id,
         success: function(response) {
-            $("#ai_spproved_and_start").text("Screening started successfully");
+            $("#ai_spproved_and_start").text(<?php echo json_encode(__('Screening started successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             var res = jQuery.parseJSON(response);
             console.log(res);
             tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Screening started successfully.','');
@@ -95,7 +95,7 @@ function approvedstartScreening(screening_id){
     });
 }
 function createManualQuestions(candidate_id,job_posting_id){
-    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Loading"></div>';
+    var htmloader = '<div class="text-center"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Loading'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $('#screeningresponse').html(htmloader);
     $.ajax({
         url: "views/custom_insert_candidates_screening_questions_ajax.php",
@@ -123,7 +123,7 @@ var max = 500;
     }
 
    function AIStartSceening(candidate_id,job_posting_id){
-        $("#ai_spproved_and_start").text("Please Wait........");
+        $("#ai_spproved_and_start").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
         $("#ai_spproved_and_start").addClass("disabled");
         var company_id = '<?php echo $_SESSION['company_id']; ?>';
         var data_name = '<?php echo $_SESSION['DB_NAME']; ?>';
@@ -176,10 +176,10 @@ var max = 500;
                                     if($jpc['is_active'] == "0"){
                                         if($jpc['screening_status'] == "N"){
                                             ?>
-                                            <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="form-label label label-primary text-white cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create Manual Questions') ?>"  onclick="createManualQuestions('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"> <i class="ti-plus"></i> Ques. </span>
+                                            <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="form-label label label-primary text-white cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create Manual Questions') ?>"  onclick="createManualQuestions('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"> <i class="ti-plus"></i> <?= __('Ques.'); ?> </span>
 
 
-                                            <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="form-label label label-primary text-white cursor-pointer" id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create AI Questions') ?>"  onclick="startScreening('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"><i class="ti-light-bulb"></i>AI Question Gen.</span>
+                                            <span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="form-label label label-primary text-white cursor-pointer" id="ai_generate_job_description" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= __('Click Here to Create AI Questions') ?>"  onclick="startScreening('<?php echo $jpc['candidate_id']; ?>','<?php echo $jpc['job_posting_id']; ?>')"><i class="ti-light-bulb"></i><?= __('AI Question Gen.'); ?></span>
                                             <?php
                                         }else{
                                              echo "Active";
@@ -205,9 +205,9 @@ var max = 500;
           		<div class="card-block" id="screeningresponse">
             		  <div class="row " style=" height: 400px;">
                             <div class="card-px text-center py-20 mt-2">
-                                <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> Please Select Job Postings </p>
+                                <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('Please Select Job Postings'); ?> </p>
                                 <div class="text-center px-4">
-                                  <img class="mw-100 mh-300px" alt="No Data" src="assets/images/work.png" style="max-height: 300px!important;">
+                                  <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__('No Data'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-height: 300px!important;">
                               </div>
                           </div>
                     </div>

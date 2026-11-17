@@ -18,24 +18,24 @@ $survey_qtype_names = implode('|',array_keys((array)$surveyData['survey_qtypes']
 <script src="assets/js/custom_list_survey_setup.js"></script>
 <div class="card">
     <div class="alert alert-warning alert-dismissible">
-        <strong><?php echo "This function is used for maintaining <strong>Display Attributes</strong>. * represents mandatory fields."; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong><?php echo "This function is used for maintaining <strong>".__('Display Attributes')."</strong>".__('. * represents mandatory fields.').""; ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
     <div class="card-header table-card-header">
-        <h5><?php echo $display_tag; ?> Overview</h5>
+        <h5><?php echo $display_tag; ?> <?= __('Overview'); ?></h5>
         <div class="card-header-right table-card-header ">
             <?php if($_GET['CAT'] == '2'){ ?>
                 <a href="index.php?option=COM_INSERT_SURVEY_SETUP&CAT=2"  class=" btn btn-success  ">
                     <i class="icofont icofont-plus icon-white "></i>
-                Create Poll </a>
+                <?= __('Create Poll'); ?> </a>
             <?php }else{ ?>
                 <a href="index.php?option=COM_INSERT_SURVEY_SETUP"  class=" btn btn-success  ">
                     <i class="icofont icofont-plus icon-white "></i>
-                Create Survay </a>
+                <?= __('Create Survay'); ?> </a>
             <?php } ?>
             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
               <i class="icofont icofont-reply"></i>
-              Back
+              <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -54,12 +54,12 @@ $survey_qtype_names = implode('|',array_keys((array)$surveyData['survey_qtypes']
                         <div class="card-body d-flex flex-column">
                             <div class="d-flex align-items-center justify-content-between flex-grow-1">
                                 <div class="mr-2">
-                                    <h6><?php echo $display_tag; ?> Completion Rate</h6>
+                                    <h6><?php echo $display_tag; ?> <?= __('Completion Rate'); ?></h6>
                                 </div>
                             </div>
                             <div class="pt-8">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <div class="text-muted font-weight-bold mr-2">Average</div>
+                                    <div class="text-muted font-weight-bold mr-2"><?= __('Average'); ?></div>
                                     <div class="text-muted font-weight-bold"><?php echo $surveyData['rate']; ?></div>
                                 </div>
                                 <div class="progress bg-light-warning progress-xs">
@@ -76,13 +76,13 @@ $survey_qtype_names = implode('|',array_keys((array)$surveyData['survey_qtypes']
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col" style="width: 20%;">Name </th>
-                        <th scope="col">Start Date </th>
-                        <th scope="col">End Date </th>
-                        <th scope="col">Questions </th>
-                        <th scope="col">Responses </th>
-                        <th scope="col">Completion Rate </th>
-                        <th scope="col">Action </th>
+                        <th scope="col" style="width: 20%;"><?= __('Name'); ?> </th>
+                        <th scope="col"><?= __('Start Date'); ?> </th>
+                        <th scope="col"><?= __('End Date'); ?> </th>
+                        <th scope="col"><?= __('Questions'); ?> </th>
+                        <th scope="col"><?= __('Responses'); ?> </th>
+                        <th scope="col"><?= __('Completion Rate'); ?> </th>
+                        <th scope="col"><?= __('Action'); ?> </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,7 +101,7 @@ $survey_qtype_names = implode('|',array_keys((array)$surveyData['survey_qtypes']
                         <td class="text-right" style="width: 14%;">
                             <button type="button" class="btn btn-<?php echo $empvalue['completionratecolor']; ?>"><?php echo $empvalue['completionrate']; ?></button></td>
                             <td class="text-right" style="width: 14%;">
-                                <a target="_blank" href="index.php?option=COM_INSERT_SURVEY_RESPONSE&Rid=<?php echo $survey_id;?>&CAT=<?php echo $_GET['CAT'];?>"><button type="button" class="btn btn-primary">Reponse</button></a></td>
+                                <a target="_blank" href="index.php?option=COM_INSERT_SURVEY_RESPONSE&Rid=<?php echo $survey_id;?>&CAT=<?php echo $_GET['CAT'];?>"><button type="button" class="btn btn-primary"><?= __('Reponse'); ?></button></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

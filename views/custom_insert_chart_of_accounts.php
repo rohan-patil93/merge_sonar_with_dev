@@ -83,7 +83,7 @@ foreach($chart_of_accounts as $finanacerepogrp){
     var maxrows = 1000;
     function editFinanaceGrp(id="",pargrp="", account_type = "", account_group = ""){
         maxrows= maxrows+1;
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#insertform").html(loader);
         $.ajax({
             url: "views/custom_insert_chart_of_accounts_ajax.php",
@@ -115,7 +115,7 @@ foreach($chart_of_accounts as $finanacerepogrp){
 
     }
     function GetViewReport(){
-        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
         $("#viewtable").html(loader);
         $.ajax({
             url: "views/custom_insert_chart_of_accounts_table.php",
@@ -191,7 +191,7 @@ function updatebalanceamount(){
         loopvalue = (loopvalue !="0" && loopvalue !="")?loopvalue:0;
         totalbalance = parseFloat(totalbalance)+parseFloat(loopvalue);
     });
-    $("#balance_cnt_label").text("Total : "+totalbalance);
+    $("#balance_cnt_label").text(<?php echo json_encode(__('Total').' : ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+totalbalance);
     $("#opening_balance").val(totalbalance);
     console.log(totalbalance);
 }

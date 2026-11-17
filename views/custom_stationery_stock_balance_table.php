@@ -27,16 +27,16 @@ $_SESSION['download_data'] = [];
 
 <div class="card">
     <div class="card-header">
-        <h5>Stationery Stock Balance</h5>
+        <h5><?= __('Stationery Stock Balance'); ?></h5>
         <div class="card-header-right">
             <div class="dropdown-primary dropdown open">
                 <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                 <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=StationeryStockBalance&format=csv" target="_blank">CSV</a>
+                        href="custom_view_download.php?page=StationeryStockBalance&format=csv" target="_blank"><?= __('CSV'); ?></a>
                     <a class="dropdown-item waves-light waves-effect"
-                        href="custom_view_download.php?page=StationeryStockBalance&format=excel" target="_blank">Excel</a>
+                        href="custom_view_download.php?page=StationeryStockBalance&format=excel" target="_blank"><?= __('Excel'); ?></a>
                 </div>
             </div>
         </div>
@@ -45,12 +45,12 @@ $_SESSION['download_data'] = [];
         <div class="table-responsive">
             <table class="table table-hover">
                 <tr>
-                    <th scope="col">Sl No</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Current Stock</th>
-                    <th scope="col">Minimum Stock</th>
+                    <th scope="col"><?= __('Sl No'); ?></th>
+                    <th scope="col"><?= __('Location'); ?></th>
+                    <th scope="col"><?= __('Category'); ?></th>
+                    <th scope="col"><?= __('Item'); ?></th>
+                    <th scope="col"><?= __('Current Stock'); ?></th>
+                    <th scope="col"><?= __('Minimum Stock'); ?></th>
                 </tr>
 
                 <?php
@@ -83,11 +83,11 @@ $_SESSION['download_data'] = [];
                         <td colspan="6">
                             <div class="text-center">
                                 <p class="text-muted f-16 fw-bold m-b-30">
-                                    <i class="fa fa-warning"></i> No Records
+                                    <i class="fa fa-warning"></i> <?= __('No Records'); ?>
                                 </p>
                                 <div class="text-center px-4">
                                     <img class="mw-100 empty-img-300"
-                                         src="assets/images/work.png" alt="Preview">
+                                         src="assets/images/work.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                         </td>

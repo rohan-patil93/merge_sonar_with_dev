@@ -9,22 +9,22 @@ $filteredData = json_decode($response, true)['csr_contractors'] ?? [];
 
     <div class="card proj-progress-card">
         <div class="card-header">
-            <h5>CSR Contractors</h5>
+            <h5><?= __('CSR Contractors'); ?></h5>
             <div class="card-header-right">
                 <?php if($_SESSION['working_role_short_code'] != 'CSR_CREATER'){ ?>
                 <button type="button" name="sync"value="sync"
                         id="syncBtn"class="btn btn-primary mb-2 m-r-10">
-                    Sync
+                    <?= __('Sync'); ?>
                 </button>
 
                 <?php } ?>
                 <a href="index.php?option=COM_INSERT_CSR_CONTRACTOR_REGISTATIONS" class="btn btn-success mb-2 desktop-view">
                     <i class="icofont icofont-plus icon-white"></i>
-                    Contractor
+                    <?= __('Contractor'); ?>
                 </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
@@ -33,12 +33,12 @@ $filteredData = json_decode($response, true)['csr_contractors'] ?? [];
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">S.No.</th>
-                            <th scope="col">Contractor Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">GST</th>
-                            <th scope="col">Action</th>
+                            <th scope="col"><?= __('S.No.'); ?></th>
+                            <th scope="col"><?= __('Contractor Name'); ?></th>
+                            <th scope="col"><?= __('Email'); ?></th>
+                            <th scope="col"><?= __('Phone'); ?></th>
+                            <th scope="col"><?= __('GST'); ?></th>
+                            <th scope="col"><?= __('Action'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,7 +64,7 @@ $filteredData = json_decode($response, true)['csr_contractors'] ?? [];
                         <?php }
                         } else {
                             echo '<tr> <td colspan="6" class="text-center">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
+                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> '.__('No Records').'</p>
                                     <div class="text-center px-4">
                                         <img class="mw-100 mh-300px no-record-img" alt="" src="assets/images/work.png" >
                                     </div>

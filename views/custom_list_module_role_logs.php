@@ -10,30 +10,30 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
 <div class="page-body">
     <div class="card">
         <div class="card-header">
-            <h5>Module Role Logs</h5>
+            <h5><?= __('Module Role Logs'); ?></h5>
             <div class="card-header-right">
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                 </a>
             </div>
         </div>
         <div class="card-body p-4">
             <div class="row">
                 <div class="col-lg-3 col-md-6 form-group">
-                    <span>From Date <span class="text-danger">*</span></span>
-                    <input aria-label="From Date" class="form-control" type="date" name="from_date" id="from_date" value="">
+                    <span><?= __('From Date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="from_date" id="from_date" value="">
                     <div style="display: none;color: red;" id="from_date_err"></div>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
-                    <span>To Date <span class="text-danger">*</span></span>
-                    <input aria-label="To Date" class="form-control" type="date" name="to_date" id="to_date" value="">
+                    <span><?= __('To Date'); ?> <span class="text-danger">*</span></span>
+                    <input aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="to_date" id="to_date" value="">
                     <div style="display: none;color: red;" id="to_date_err"></div>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
-                    <span>User</span>
-                    <select aria-label="Filter User" class="form-control js-example-basic-single" id="filter_user_id" name="filter_user_id" style="width:100%">
-                        <option value="">All Users</option>
+                    <span><?= __('User'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Filter User'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="filter_user_id" name="filter_user_id" style="width:100%">
+                        <option value=""><?= __('All Users'); ?></option>
                         <?php if(count((array)$session_users) > 0){
                             foreach($session_users as $uid => $uname){ ?>
                                 <option value="<?php echo $uid; ?>"><?php echo htmlspecialchars($uname); ?></option>
@@ -42,9 +42,9 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
-                    <span>Module</span>
-                    <select aria-label="Filter Module" class="form-control js-example-basic-single" id="filter_module_id" name="filter_module_id" style="width:100%">
-                        <option value="">All Modules</option>
+                    <span><?= __('Module'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Filter Module'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="filter_module_id" name="filter_module_id" style="width:100%">
+                        <option value=""><?= __('All Modules'); ?></option>
                         <?php if(count((array)$filter_modules) > 0){
                             foreach($filter_modules as $module_row){
                                 $module_id = is_array($module_row) ? $module_row['module_id'] : $module_row->module_id;
@@ -56,9 +56,9 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
-                    <span>Role</span>
-                    <select aria-label="Filter Role" class="form-control js-example-basic-single" id="filter_role_id" name="filter_role_id" style="width:100%">
-                        <option value="">All Roles</option>
+                    <span><?= __('Role'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Filter Role'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="filter_role_id" name="filter_role_id" style="width:100%">
+                        <option value=""><?= __('All Roles'); ?></option>
                         <?php if(count((array)$filter_roles) > 0){
                             foreach($filter_roles as $role_row){
                                 $role_id = is_array($role_row) ? $role_row['id'] : $role_row->id;
@@ -70,17 +70,17 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
-                    <span>Action</span>
-                    <select aria-label="Action" class="form-control js-example-basic-single" id="action" name="action" style="width:100%">
-                        <option value="">All Actions</option>
-                        <option value="Assigned">Assigned</option>
-                        <option value="Removed">Removed</option>
+                    <span><?= __('Action'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Action'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="action" name="action" style="width:100%">
+                        <option value=""><?= __('All Actions'); ?></option>
+                        <option value="Assigned"><?= __('Assigned'); ?></option>
+                        <option value="Removed"><?= __('Removed'); ?></option>
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
-                    <span>Modified By</span>
-                    <select aria-label="Action By" class="form-control js-example-basic-single" id="action_by" name="action_by" style="width:100%">
-                        <option value="">All</option>
+                    <span><?= __('Modified By'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Action By'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control js-example-basic-single" id="action_by" name="action_by" style="width:100%">
+                        <option value=""><?= __('All'); ?></option>
                         <?php if(count((array)$session_users) > 0){
                             foreach($session_users as $uid => $uname){ ?>
                                 <option value="<?php echo $uid; ?>"><?php echo htmlspecialchars($uname); ?></option>
@@ -90,12 +90,12 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
                 </div>
                 <div class="col-lg-3 col-md-6 form-group">
                     <span>&nbsp;</span>
-                    <button type="button" class="btn btn-primary form-control" id="getModuleRoleLogsBtn">Search</button>
+                    <button type="button" class="btn btn-primary form-control" id="getModuleRoleLogsBtn"><?= __('Search'); ?></button>
                 </div>
             </div>
             <div class="row mt-3  custom-scroll" id="TableContent" style="height:500px">
                 <div class="col-12">
-                    <p class="text-muted mb-0">Select a date range and click Search to view module role logs.</p>
+                    <p class="text-muted mb-0"><?= __('Select a date range and click Search to view module role logs.'); ?></p>
                 </div>
             </div>
         </div>
@@ -122,18 +122,18 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
             var isValid = true;
 
             if(fromDate == ""){
-                $("#from_date_err").text("Please select From Date").show();
+                $("#from_date_err").text(<?php echo json_encode(__('Please select From Date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
                 isValid = false;
             }
             if(toDate == ""){
-                $("#to_date_err").text("Please select To Date").show();
+                $("#to_date_err").text(<?php echo json_encode(__('Please select To Date'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>).show();
                 isValid = false;
             }
             if(!isValid){
                 return;
             }
 
-            var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+            var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
             $("#TableContent").html(loader);
 
             $.ajax({
@@ -152,7 +152,7 @@ $session_users = isset($_SESSION['users']) ? $_SESSION['users'] : array();
                     $("#TableContent").html(response);
                 },
                 error: function () {
-                    $("#TableContent").html('<div class="col-12"><p class="text-danger mb-0">Unable to load module role logs.</p></div>');
+                    $("#TableContent").html('<div class="col-12"><p class="text-danger mb-0"><?= htmlspecialchars(__('Unable to load module role logs.'), ENT_QUOTES, 'UTF-8'); ?></p></div>');
                 }
             });
         });

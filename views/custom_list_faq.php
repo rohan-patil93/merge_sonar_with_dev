@@ -35,7 +35,7 @@ foreach($faqcontents as $faqcontent){
              <div class="col-lg-12">
               <div class="card version">
                <div class="card-header borderless">
-                <h5>Frequently Asked Questions</h5>
+                <h5><?= __('Frequently Asked Questions'); ?></h5>
              </div>
              <div class="card-block">
 

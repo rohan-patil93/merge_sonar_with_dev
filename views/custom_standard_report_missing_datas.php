@@ -24,18 +24,18 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
   </script>
 <div class="card" >
     <div class="card-header">
-        <h5>Missing / Completion Transaction</h5>
+        <h5><?= __('Missing / Completion Transaction'); ?></h5>
         <div class="card-header-right">
-            <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i>Back</button>
+            <button type="button" class="btn waves-effect waves-light"><i class="icofont icofont-reply"></i><?= __('Back'); ?></button>
         </div>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-lg-4">
                 <div class="form-group">
-                    <span class="form-label d-block">Select Table</span>
-                    <select aria-label="Table Name" class="form-select js-example-basic-single" name="table_name"  onchange="selectTableName(this.value)">
-                           <option value="0"> Select Any One</option>
+                    <span class="form-label d-block"><?= __('Select Table'); ?></span>
+                    <select aria-label="<?= htmlspecialchars(__('Table Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="table_name"  onchange="selectTableName(this.value)">
+                           <option value="0"> <?= __('Select Any One'); ?></option>
                            <?php foreach ($table_list as $tablename) {
                                if(in_array($tablename, (array)$showtableonly)){
                                ?>
@@ -46,7 +46,7 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
                 </div>
             </div>
       <div class="col-lg-2">
-           <span class="form-label label label-lg label-warning float-left m-t-30 text-center"><span class="f-14">Total Records : <?php echo count((array)$transactionres); ?> </span></span>
+           <span class="form-label label label-lg label-warning float-left m-t-30 text-center"><span class="f-14"><?= __('Total Records'); ?> : <?php echo count((array)$transactionres); ?> </span></span>
       </div>
         </div>
   </div>
@@ -56,7 +56,7 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
       <div class="col-lg-8">
         <div class="card" >
             <div class="card-header">
-                <h5>Missing / Completion Transaction</h5>
+                <h5><?= __('Missing / Completion Transaction'); ?></h5>
                 <div class="card-header-right">
                 </div>
             </div>
@@ -65,8 +65,8 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
         <div class="row custom-scroll" style="height: 500px">
             <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                 <thead>
-                    <tr><th scope="col" style="width: 40%;">Transaction Name </th>
-                        <th scope="col" style="width: 60%;">Progress</th>
+                    <tr><th scope="col" style="width: 40%;"><?= __('Transaction Name'); ?> </th>
+                        <th scope="col" style="width: 60%;"><?= __('Progress'); ?></th>
                     </tr>
                 </thead>
                   <tbody>
@@ -91,7 +91,7 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
                               <td class="p-2">
 
                             <div class="align-middle">
-                                    <span  alt="user" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($transaction['display_name']); ?></span>
+                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-40 align-top m-r-10 custom_txt_round pt-1 f-12 text-center"><?php echo initials($transaction['display_name']); ?></span>
                                 <div class="d-inline-block width73 text-primary">
                                     <h6 class="mb-0"><?php echo $transaction['display_name']; ?></h6>
                                 </div>
@@ -99,17 +99,17 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
                               </td>
                               <td class="p-2">
                                   <div class="bar multi-color" style="min-height:40px" onclick="NewMessageAdded('<?php echo $transaction['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                                  <div class="color bg-success" style="width: <?php echo round($completionper); ?>%;background-color:#82bac7 !important; min-height:40px">Completion - <?php echo round($completionper); ?>%</div>
-                                  <div class="color bg-success" style="width: <?php echo 100-round($completionper); ?>%;background-color:#cf9eb5 !important; min-height:40px">Missing - <?php echo 100-round($completionper); ?>%</div>
+                                  <div class="color bg-success" style="width: <?php echo round($completionper); ?>%;background-color:#82bac7 !important; min-height:40px"><?= __('Completion'); ?> - <?php echo round($completionper); ?>%</div>
+                                  <div class="color bg-success" style="width: <?php echo 100-round($completionper); ?>%;background-color:#cf9eb5 !important; min-height:40px"><?= __('Missing'); ?> - <?php echo 100-round($completionper); ?>%</div>
 
                               </div>
 
                   <div class="custom-popup-open cardpopup_<?php echo $transaction['id']; ?> text-start" style="left: 0px; top: 90px;">
                     <div class="card">
                         <div class="card-header">
-                          <h5>Missing / Completion : <?php echo $transaction['display_name']; ?></h5>
+                          <h5><?= __('Missing / Completion'); ?> : <?php echo $transaction['display_name']; ?></h5>
                           <div class="card-header-right">
-                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closedPopupcompliance22()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Closed" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
+                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closedPopupcompliance22()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
                           </div>
                         </div>
                         <div class="card-body">
@@ -117,7 +117,7 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
                               <div class="col-lg-6">
                                 <div class="card">
                                   <div class="card-header">
-                                    <h5>Completion</h5>
+                                    <h5><?= __('Completion'); ?></h5>
                                     <div class="card-header-right">
                                     <span class="form-label label label-lg label-primary"><?php echo count((array)$missingfieldary); ?></span>
                                 </div>
@@ -134,7 +134,7 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
                               <div class="col-lg-6">
                                 <div class="card">
                                   <div class="card-header">
-                                      <h5>Missing</h5>
+                                      <h5><?= __('Missing'); ?></h5>
                                       <div class="card-header-right">
                                           <span class="form-label label label-lg label-danger"><?php echo count((array)$complitionfieldary); ?></span>
                                       </div>
@@ -161,7 +161,7 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
         </div>
     <?php }else{?>
               <div class="card-px text-center py-20 mt-2">
-                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Data </p>
+                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Data'); ?> </p>
                     <div class="text-center px-4">
                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                     </div>
@@ -173,7 +173,7 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
           <div class="col-lg-4">
             <div class="card" >
               <div class="card-header">
-                  <h5>Missing Field Count</h5>
+                  <h5><?= __('Missing Field Count'); ?></h5>
                   <div class="card-header-right">
                       <span class="form-label label label-lg label-primary"><?php echo count((array)$transactionres[0]); ?></span>
                   </div>
@@ -182,8 +182,8 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
               <div class="card-body custom-scroll" style="height: 530px">
                   <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_2">
                     <thead>
-                        <tr><th scope="col" style="width: 30%;">Field</th>
-                            <th scope="col" style="width: 80%;">Progress</th>
+                        <tr><th scope="col" style="width: 30%;"><?= __('Field'); ?></th>
+                            <th scope="col" style="width: 80%;"><?= __('Progress'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -197,8 +197,8 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
               <td class="w-b-w-s p-2"><?php echo ucwords(str_replace('_',' ',$filedkey)); ?> </td>
               <td class="p-2">
                   <div class="bar multi-color" style="min-height:30px">
-                      <div class="color bg-success" style="width: <?php echo round($completionperr); ?>%;background-color:#82bac7 !important; min-height:30px"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Completion"><?php echo round($completionperr); ?>%</div>
-                      <div class="color bg-success" style="width: <?php echo 100-round($completionperr); ?>%;background-color:#cf9eb5 !important; min-height:30px"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Missing"><?php echo 100-round($completionperr); ?>%</div>
+                      <div class="color bg-success" style="width: <?php echo round($completionperr); ?>%;background-color:#82bac7 !important; min-height:30px"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Completion'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo round($completionperr); ?>%</div>
+                      <div class="color bg-success" style="width: <?php echo 100-round($completionperr); ?>%;background-color:#cf9eb5 !important; min-height:30px"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Missing'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo 100-round($completionperr); ?>%</div>
                   </div>
               </td>
             </tr>
@@ -211,7 +211,7 @@ $notcheckfield = array('id','company_id','is_active','current_status','status_da
               </div>
             <?php }else{ ?>
               <div class="card-px text-center py-20 mt-2">
-                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> No Data </p>
+                    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Data'); ?> </p>
                     <div class="text-center px-4">
                       <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                     </div>

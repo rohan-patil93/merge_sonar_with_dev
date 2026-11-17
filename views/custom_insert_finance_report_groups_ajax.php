@@ -128,7 +128,7 @@ if(isset($_POST['id']) && $_POST['id'] !=""){
     <input type="hidden" name="Rid" id="Rid" value="<?php echo $frgres['id']; ?>">
     <button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold mt-2" onclick="addFinaanceAccGrp()" >
    <?php if($frgres['id'] !="" && $frgres['id'] !="0"){ echo __('Update Group');
-}else{ echo "<i class='fa fa-plus'></i> Add Group";
+}else{ echo "<i class='fa fa-plus'></i> ".__('Add Group')."";
 } ?>
 
   </button></div>

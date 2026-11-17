@@ -30,24 +30,24 @@ $to_date = date('Y-m-d');
          JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
      ) ?>'>
     <div class="alert alert-info alert-dismissible fwdp-alert">
-        <strong>This function is used for maintaining <strong>Field Work</strong>. * represents mandatory fields.</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong>This function is used for maintaining <strong><?= __('Field Work'); ?></strong><?= __('. * represents mandatory fields.'); ?></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
     </div>
 
     <div class="fwdp-header">
         <div>
-            <h1 class="fwdp-title">Field Work Daily Plans</h1>
-            <p class="fwdp-subtitle">Search and manage planned field visit locations</p>
+            <h1 class="fwdp-title"><?= __('Field Work Daily Plans'); ?></h1>
+            <p class="fwdp-subtitle"><?= __('Search and manage planned field visit locations'); ?></p>
         </div>
         <div class="fwdp-header-actions">
             <a href="index.php?option=<?= $fwdpInsertOption ?>" class="fwdp-btn fwdp-btn-primary desktop-view">
-                <i class="icofont icofont-plus" aria-hidden="true"></i> User Work Daily Plans
+                <i class="icofont icofont-plus" aria-hidden="true"></i> <?= __('User Work Daily Plans'); ?>
             </a>
             <a href="index.php?option=COM_LIST_FIELD_WORK_USER_MAP_POINTS_NEW" class="fwdp-btn fwdp-btn-outline desktop-view">
-                <i class="fas fa-map" aria-hidden="true"></i> Map Points
+                <i class="fas fa-map" aria-hidden="true"></i> <?= __('Map Points'); ?>
             </a>
             <a href="javascript:history.go(-1)" class="fwdp-btn desktop-view">
-                <i class="icofont icofont-reply" aria-hidden="true"></i> Back
+                <i class="icofont icofont-reply" aria-hidden="true"></i> <?= __('Back'); ?>
             </a>
         </div>
     </div>
@@ -57,9 +57,9 @@ $to_date = date('Y-m-d');
             <?php if ($admin_type != '3') {
                 if ($admin_type != '2') { ?>
                     <div class="form-group col-lg-6">
-                        <label for="manager_id" class="fwdp-label">Manager</label>
-                        <select class="form-select js-example-basic-single" id="manager_id" name="manager_id[]" multiple="multiple" aria-label="Manager Id">
-                            <option value="0">Select Any one</option>
+                        <label for="manager_id" class="fwdp-label"><?= __('Manager'); ?></label>
+                        <select class="form-select js-example-basic-single" id="manager_id" name="manager_id[]" multiple="multiple" aria-label="<?= htmlspecialchars(__('Manager Id'), ENT_QUOTES, 'UTF-8'); ?>">
+                            <option value="0"><?= __('Select Any one'); ?></option>
                             <?php if (count((array)$application_users) > 0) {
                                 foreach ($application_users as $row) { ?>
                                     <option value="<?php echo $row['id']; ?>">
@@ -73,9 +73,9 @@ $to_date = date('Y-m-d');
                 <?php } ?>
 
                 <div class="form-group col-lg-6">
-                    <label for="user_id" class="fwdp-label">User</label>
-                    <select class="form-select js-example-basic-single" id="user_id" name="user_id[]" multiple="multiple" aria-label="User Id">
-                        <option value="0">Select Any one</option>
+                    <label for="user_id" class="fwdp-label"><?= __('User'); ?></label>
+                    <select class="form-select js-example-basic-single" id="user_id" name="user_id[]" multiple="multiple" aria-label="<?= htmlspecialchars(__('User Id'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <option value="0"><?= __('Select Any one'); ?></option>
                     </select>
                     <div class="d-none text-danger" id="user_id_err"></div>
                 </div>
@@ -84,18 +84,18 @@ $to_date = date('Y-m-d');
             <?php } ?>
 
             <div class="col-lg-4 col-xs-6 form-group">
-                <label for="from_date" class="fwdp-label">From Date <span class="text-danger">*</span></label>
-                <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $from_date; ?>" aria-label="From Date">
+                <label for="from_date" class="fwdp-label"><?= __('From Date'); ?> <span class="text-danger">*</span></label>
+                <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $from_date; ?>" aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="d-none text-danger" id="from_date_err"></div>
             </div>
             <div class="col-lg-4 col-xs-4 form-group">
-                <label for="to_date" class="fwdp-label">To Date <span class="text-danger">*</span></label>
-                <input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $to_date; ?>" aria-label="To Date">
+                <label for="to_date" class="fwdp-label"><?= __('To Date'); ?> <span class="text-danger">*</span></label>
+                <input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $to_date; ?>" aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="d-none text-danger" id="to_date_err"></div>
             </div>
             <div class="col-lg-4 col-xs-6 form-group">
-                <label for="getDataButton" class="fwdp-label" aria-label="Search"><span class="visually-hidden">Search</span>&nbsp;</label>
-                <button type="button" class="fwdp-btn fwdp-btn-primary form-control" id="getDataButton">Search</button>
+                <label for="getDataButton" class="fwdp-label" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"><span class="visually-hidden"><?= __('Search'); ?></span>&nbsp;</label>
+                <button type="button" class="fwdp-btn fwdp-btn-primary form-control" id="getDataButton"><?= __('Search'); ?></button>
             </div>
         </div>
 
@@ -105,14 +105,14 @@ $to_date = date('Y-m-d');
                     <table class="table fwdp-table" id="fiedWorkTable">
                         <thead>
                             <tr>
-                                <th scope="col">Sl No.</th>
-                                <th scope="col">User</th>
-                                <th scope="col">Location Name</th>
-                                <th scope="col">Latitude</th>
-                                <th scope="col">Longitude</th>
-                                <th scope="col">From Date</th>
-                                <th scope="col">To Date</th>
-                                <th scope="col">Action</th>
+                                <th scope="col"><?= __('Sl No.'); ?></th>
+                                <th scope="col"><?= __('User'); ?></th>
+                                <th scope="col"><?= __('Location Name'); ?></th>
+                                <th scope="col"><?= __('Latitude'); ?></th>
+                                <th scope="col"><?= __('Longitude'); ?></th>
+                                <th scope="col"><?= __('From Date'); ?></th>
+                                <th scope="col"><?= __('To Date'); ?></th>
+                                <th scope="col"><?= __('Action'); ?></th>
                             </tr>
                         </thead>
                         <tbody>

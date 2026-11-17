@@ -298,7 +298,7 @@ function calculateStockValue(){
     }
     $("#stock_value").val(disValue1);
     if(parseFloat(annual_ctc) < parseFloat(disValue1)){
-        swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Stock Value cannot be more than "+annual_ctc+", Please check", "error");
+        swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Stock Value cannot be more than').' ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+annual_ctc+<?php echo json_encode(__(', Please check'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
         var value = $("#value").val(0);
         calculateStockValue();
     }

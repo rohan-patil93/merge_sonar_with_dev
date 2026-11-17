@@ -53,7 +53,7 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
 ?>
 <script type="text/javascript">
         $(document).on('click', '#checkall1', function() {
-            alert('haii');
+            alert(<?php echo json_encode(__('haii'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
 
     });
         function chackd(e){
@@ -78,7 +78,7 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
 
                     <div class="alert alert-warning alert-dismissible">
                         <strong><?php echo $content; ?></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
                     </div>
                 <?php } ?>
                 <div class="card card-custom card-sticky" id="kt_page_sticky_card">
@@ -88,7 +88,7 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
                         <div class="card-header-right">
                             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                                 <i class="icofont icofont-reply"></i>
-                                Back
+                                <?= __('Back'); ?>
                             </a>
                         </div>
                     </div>
@@ -99,8 +99,8 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
                                 <div class="row kt-margin-b-20">
                                     <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
                                         <span  class="form-label"><?php echo $cus_list['lable']; ?>:</span>
-                                        <select aria-label="Vendor" class="form-control form-select js-example-basic-single" id="kt_select2_41" name="vendor_id">
-                                            <option value=""> All <?php echo $cus_list['lable']; ?> </option>
+                                        <select aria-label="<?= htmlspecialchars(__('Vendor'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_41" name="vendor_id">
+                                            <option value=""> <?= __('All'); ?> <?php echo $cus_list['lable']; ?> </option>
                                                 <?php foreach ($selectdata as $selectkey => $selectvalue) {  ?>
                                                     <option  <?php if($ress['vendor_id'] == $selectkey  ){ ?> selected <?php
 } ?> value="<?php echo $selectkey; ?>"><?php echo $selectvalue; ?></option>
@@ -108,9 +108,9 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
                                         </select>
                                     </div>
                                     <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
-                                        <span  class="form-label"><?php echo "Item Category"; ?>:</span>
-                                        <select aria-label="Category" class="form-control form-select js-example-basic-single" id="kt_select2_42" name="category_id">
-                                            <option value=""> All Categories </option>
+                                        <span  class="form-label"><?php echo __("Item Category"); ?>:</span>
+                                        <select aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_42" name="category_id">
+                                            <option value=""> <?= __('All Categories'); ?> </option>
                                             <?php foreach($datacat as $selectcat){ ?>
                                                 <option  <?php if($ress['category_id'] == $selectcat['id'] ){ ?> selected <?php
 } ?> value="<?php echo $selectcat['id']; ?>"><?php echo $selectcat['category_description']; ?></option>
@@ -118,9 +118,9 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
                                         </select>
                                     </div>
                                     <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile">
-                                        <span  class="form-label"><?php echo "Cost Center"; ?>:</span>
-                                        <select aria-label="Cost Center" class="form-control form-select js-example-basic-single" id="kt_select2_43" name="cost_center_id">
-                                            <option value=""> All Cost Center </option>
+                                        <span  class="form-label"><?php echo __("Cost Center"); ?>:</span>
+                                        <select aria-label="<?= htmlspecialchars(__('Cost Center'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control form-select js-example-basic-single" id="kt_select2_43" name="cost_center_id">
+                                            <option value=""> <?= __('All Cost Center'); ?> </option>
                                             <?php foreach($datacost as $selectcost){ ?>
                                                 <option   <?php if($ress['cost_center_id'] == $selectcost['id'] ){ ?> selected <?php
 } ?> value="<?php echo $selectcost['id']; ?>"><?php echo $selectcost['cost_center_name']; ?></option>
@@ -131,11 +131,11 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
 
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <span class="form-label">Start Date</span>
-                                                <input aria-label="From" type="date" class="form-control kt-input" name="from" placeholder="From" data-col-index="5" />
+                                                <span class="form-label"><?= __('Start Date'); ?></span>
+                                                <input aria-label="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control kt-input" name="from" placeholder="<?= htmlspecialchars(__('From'), ENT_QUOTES, 'UTF-8'); ?>" data-col-index="5" />
                                             </div><div class="col-lg-6">
-                                                <span class="form-label">End Date</span>
-                                                <input aria-label="To" type="date" class="form-control kt-input" name="to" placeholder="To" data-col-index="5" />
+                                                <span class="form-label"><?= __('End Date'); ?></span>
+                                                <input aria-label="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" type="date" class="form-control kt-input" name="to" placeholder="<?= htmlspecialchars(__('To'), ENT_QUOTES, 'UTF-8'); ?>" data-col-index="5" />
                                             </div>
                                         </div>
                                     </div>
@@ -149,14 +149,14 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
                                         <button class="btn btn-primary btn-brand--icon" id="kt_search">
                                             <span>
                                                 <i class="la la-search"></i>
-                                                <span>Search</span>
+                                                <span><?= __('Search'); ?></span>
                                             </span>
                                         </button>
                                         &nbsp;&nbsp;
                                         <button class="btn btn-secondary btn-secondary--icon" id="kt_reset">
                                             <span>
                                                 <i class="la la-close"></i>
-                                                <span>Reset</span>
+                                                <span><?= __('Reset'); ?></span>
                                             </span>
                                         </button>
                                     </div>
@@ -168,14 +168,14 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
                                     <table class="table table-striped- table-bordered table-hover table-checkable" style="margin-top: 15px;" id="kt_table_11">
                                         <thead>
                                             <tr>
-                                                <th scope=\"col\">ID</th>
+                                                <th scope=\"col\"><?= __('ID'); ?></th>
                                                 <th scope=\"col\"><?php echo $cus_list['lable']; ?></th>
-                                                <th scope=\"col\">Transaction Number</th>
-                                                <th scope=\"col\">Transaction Date</th>
-                                                <th scope=\"col\">Total</th>
-                                                <th scope=\"col\">Status</th>
-                                                <th scope=\"col\">Genrate <?php echo $rr_data['genrate_next_level']; ?> </th>
-                                                <th scope=\"col\">View</th>
+                                                <th scope=\"col\"><?= __('Transaction Number'); ?></th>
+                                                <th scope=\"col\"><?= __('Transaction Date'); ?></th>
+                                                <th scope=\"col\"><?= __('Total'); ?></th>
+                                                <th scope=\"col\"><?= __('Status'); ?></th>
+                                                <th scope=\"col\"><?= __('Genrate'); ?> <?php echo $rr_data['genrate_next_level']; ?> </th>
+                                                <th scope=\"col\"><?= __('View'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -191,17 +191,17 @@ $selectdata = dyanamicselectdata($table_name,'party_id');
                                                     <td><?php echo $row['transaction_number']; ?></td>
                                                     <td><?php echo fromDate($row['transaction_date']); ?></td>
                                                     <td><?php echo customeummarmonyformate($row['total_amount']); ?></td>
-                                                    <td><span class="form-label badge badge-inverse-primary" style="background-color: <?php echo '#'.$stausresult[$row['current_status']]['background_color'];?> color:#4f2424" >Approved</span></td>
+                                                    <td><span class="form-label badge badge-inverse-primary" style="background-color: <?php echo '#'.$stausresult[$row['current_status']]['background_color'];?> color:#4f2424" ><?= __('Approved'); ?></span></td>
                                                     <td>
                                                         <a  target="_blank" href="<?php echo $view; ?>" >
                                                             <button class="btn btn-primary btn-brand--icon" id="kt_search_2">
-                                                                <span>Genrate <?php echo $rr_data['genrate_next_level']; ?></span>
+                                                                <span><?= __('Genrate'); ?> <?php echo $rr_data['genrate_next_level']; ?></span>
                                                             </button></a>
                                                         </td>
                                                     <td>
                                                         <a  target="_blank" href="<?php echo $view; ?>" >
                                                             <button class="btn btn-primary btn-brand--icon" id="kt_search_3">
-                                                                <span>Genrate <?php echo $rr_data['genrate_next_level']; ?></span>
+                                                                <span><?= __('Genrate'); ?> <?php echo $rr_data['genrate_next_level']; ?></span>
                                                             </button></a>
                                                         </td>
                                                     </td>

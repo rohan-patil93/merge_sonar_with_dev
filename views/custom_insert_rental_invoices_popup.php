@@ -150,7 +150,7 @@ function submitTenantBillss(property_tenant_billing_id,type,extrform="",billtype
 			error:function (){}
 		});
 	}else{
-		swal("<?php echo ucwords($_SESSION['config']['name']); ?>", "Utility Amount Is Required", "error");
+		swal("<?php echo ucwords($_SESSION['config']['name']); ?>", <?php echo json_encode(__('Utility Amount Is Required'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, "error");
 	}
 }
 

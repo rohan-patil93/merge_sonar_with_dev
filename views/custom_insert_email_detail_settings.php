@@ -9,7 +9,7 @@
                                 <div class="card-block">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <h3 class="">Email Settings</h3>
+                                            <h3 class=""><?= __('Email Settings'); ?></h3>
                                         </div>
                                     </div>
                                     <div class="row form-group mt-3">
@@ -17,8 +17,8 @@
                                             <label for=""><?= __('Name') ?></label>
                                         </div>
                                         <div class="col-lg-9">
-                                            <input aria-label="Mukesh Kumar" class="form-control" type="" name="" placeholder="<?= __('Mukesh Kumar') ?>">
-                                            <span class="f-12 text-muted">Name of email thatwill be used in the ticket replies</span>
+                                            <input aria-label="<?= htmlspecialchars(__('Mukesh Kumar'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="" name="" placeholder="<?= __('Mukesh Kumar') ?>">
+                                            <span class="f-12 text-muted"><?= __('Name of email thatwill be used in the ticket replies'); ?></span>
                                         </div>
                                     </div>
                                     <div class="row form-group mt-3">
@@ -27,7 +27,7 @@
                                         </div>
                                         <div class="col-lg-9">
                                             <input aria-label="suppoet@gmail.com" class="form-control" type="" name="" placeholder="suppoet@gmail.com">
-                                            <span class="f-12 text-muted">Name of email thatwill be used in the ticket replies</span>
+                                            <span class="f-12 text-muted"><?= __('Name of email thatwill be used in the ticket replies'); ?></span>
                                         </div>
                                     </div>
                                     <div class="row form-group mt-3">
@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="col-lg-9">
                                             <input aria-label="suppoet@gmail.com" class="form-control" type="" name="" placeholder="suppoet@gmail.com">
-                                            <span class="f-12 text-muted">Name of email thatwill be used in the ticket replies</span>
+                                            <span class="f-12 text-muted"><?= __('Name of email thatwill be used in the ticket replies'); ?></span>
                                         </div>
                                     </div>
                                     <div class="row form-group mt-3">
@@ -44,12 +44,12 @@
                                             <label for=""><?= __('Asign to Group') ?></label>
                                         </div>
                                         <div class="col-lg-9">
-                                            <select aria-label="Select option">
+                                            <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 <option></option>
                                                 <option></option>
                                                 <option></option>
                                             </select>
-                                            <span class="f-12 text-muted">Name of email thatwill be used in the ticket replies</span>
+                                            <span class="f-12 text-muted"><?= __('Name of email thatwill be used in the ticket replies'); ?></span>
                                         </div>
                                     </div>
                                     <div class="row form-group mt-4">
@@ -65,7 +65,7 @@
                         <div class="col-lg-3">
                             <div class="card">
                                 <div class="card-block">
-                                    test
+                                    <?= __('test'); ?>
                                 </div>
                             </div>
                         </div>

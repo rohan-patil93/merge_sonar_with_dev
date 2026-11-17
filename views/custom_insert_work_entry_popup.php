@@ -35,13 +35,13 @@ foreach($key_details as $key_details){
         var leave_days =  $('#leave_days').val();
         var leave_type_id = $(".leave_type_id").val();
         if(leave_type_id =="-1" && leavetype == '2'){
-            $("#notedaysremaining").text("*Please Select Leave Category");
+            $("#notedaysremaining").text(<?php echo json_encode('*'.__('Please Select Leave Category'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
             return true;
         }
         if((Number(availablelave) < Number(leave_days)) && leavetype == '2'){
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 text: '<?php echo $_SESSION['error_message'][8008]; ?>',
             })
         }else{
@@ -132,7 +132,7 @@ foreach($key_details as $key_details){
                     $("#notedaysremaining").text("<?php echo $_SESSION['error_message'][8008]; ?>");
 
                 }else{
-                    $("#notedaysremaining").text("*Available Leave Is : "+respons.available_leaves);
+                    $("#notedaysremaining").text(<?php echo json_encode('*'.__('Available Leave Is').' : ', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>+respons.available_leaves);
                 }
                 if(respons.halfday == '0'){
                     $('input[name="start_half_day"]').attr("disabled", false);
@@ -163,7 +163,7 @@ foreach($key_details as $key_details){
                     if(Number(availablelave) < Number(data)){
                         Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: <?php echo json_encode(__('Oops...'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
                 text: '<?php echo $_SESSION['error_message'][8008]; ?>',
             })
                     }
@@ -241,8 +241,8 @@ $workinghrs = houreConvertRounvalue($h.':'.$i);
 $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
 ?>
 <div class="modal-header">
-    <h5 class="modal-title">Attendance Info </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"><?= __('Attendance Info'); ?> </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body" >
     <div class="row">
@@ -251,14 +251,14 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                 <div class="col-xl-7 col-md-12">
                     <div class="card latest-update-card">
                         <div class="card-header">
-                            <h5>Attendance Info<span class="form-label badge bg-primary p-2 m-l-5"><i class='ti-user'></i> <?php echo $_REQUEST['emp_name'];?> </span></h5>
+                            <h5><?= __('Attendance Info'); ?><span class="form-label badge bg-primary p-2 m-l-5"><i class='ti-user'></i> <?php echo $_REQUEST['emp_name'];?> </span></h5>
                         </div>
                         <div class="card-block mt-4">
                             <div class="card proj-progress-card p-3">
                                 <div class="row">
-                                    <h6>Punch In At</h6>
+                                    <h6><?= __('Punch In At'); ?></h6>
                                     <h5 class="m-b-30 f-w-700"><?php if($attendancedata[$lastkey]['clock_out']!=''){ echo date('d M Y h:i:A',strtotime($attendancedata[0]['attendace_date'].' '.$attendancedata[0]['clock_in']));
-}else{ echo 'Punch In Time Missing';
+}else{ echo __('Punch In Time Missing');
 } ?></h5>
                                 </div>
                             </div>
@@ -268,22 +268,22 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                             </div>
                             <div class="card proj-progress-card p-3">
                                 <div class="row">
-                                    <h6>Punch Out At</h6>
+                                    <h6><?= __('Punch Out At'); ?></h6>
                                     <h5 class="m-b-30 f-w-700"><?php if($attendancedata[$lastkey]['clock_out']!=''){ echo date('d M Y h:i:A',strtotime($attendancedata[$lastkey]['attendace_date'].' '.$attendancedata[$lastkey]['clock_out']));
-}else{ echo 'Punch Out Time Missing';
+}else{ echo __('Punch Out Time Missing');
 }?></h5>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="card proj-progress-card p-3 col-lg-6">
                                     <div class="row">
-                                        <h6>Brack</h6>
-                                        <h5 class="m-b-30 f-w-700"><?php echo $breackhrs; ?> Hrs</h5>
+                                        <h6><?= __('Brack'); ?></h6>
+                                        <h5 class="m-b-30 f-w-700"><?php echo $breackhrs; ?> <?= __('Hrs'); ?></h5>
                                     </div>
                                 </div>
                                 <div class="card proj-progress-card p-3 col-lg-6">
                                     <div class="row">
-                                        <h6>OverTime</h6>
+                                        <h6><?= __('OverTime'); ?></h6>
                                         <h5 class="m-b-30 f-w-700">
                                             <?php
                                             if(strtotime($workinghrs) > strtotime($minworkinghrs)){
@@ -307,7 +307,7 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                 <div class="col-xl-5 col-md-12">
                     <div class="card latest-update-card">
                         <div class="card-header">
-                            <h5>Activity</h5>
+                            <h5><?= __('Activity'); ?></h5>
                         </div>
                         <div class="card-block custom-scroll" style="height:500px;">
                             <div class="">
@@ -320,7 +320,7 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                                                 <i class="ti-shift-right bg-c-green update-icon"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Punch In At</h6></a>
+                                                <a href="#!"><h6><?= __('Punch In At'); ?></h6></a>
                                                 <p class="text-muted m-b-0"><?php echo $attendresult['clock_in']; ?></p>
                                             </div>
                                         </div>
@@ -329,7 +329,7 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                                                 <i class="ti-shift-left f-w-600 bg-c-green update-icon"></i>
                                             </div>
                                             <div class="col p-l-5">
-                                                <a href="#!"><h6>Punch out At</h6></a>
+                                                <a href="#!"><h6><?= __('Punch out At'); ?></h6></a>
                                                 <p class="text-muted m-b-0"><?php echo $attendresult['clock_out']==""?"--:--:--":$attendresult['clock_out']; ?></p>
                                             </div>
                                         </div>
@@ -337,7 +337,7 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                                     } echo '</div>';
 }else{ ?>
                                         <div class="new-task">
-                                            <h4 class="p-10 text-center"><i class="fa fa-warning"></i> No Activity Available</h4>
+                                            <h4 class="p-10 text-center"><i class="fa fa-warning"></i> <?= __('No Activity Available'); ?></h4>
                                         </div>
                                     <?php    }    ?>
                                 </div>
@@ -352,13 +352,13 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                         <form class="kt-form kt-form--label-right" action="" id="popformsubmit" method="post">
                             <div class="card latest-update-card">
                                 <div class="card-header">
-                                    <h5>Time Sheets</h5>
+                                    <h5><?= __('Time Sheets'); ?></h5>
                                 </div>
                                 <div class="form-group row p-l-15 p-r-15">
                                     <?php foreach($key_details as $key_detail){ ?>
                                         <div class="col-lg-12 mt-3">
                                             <span><?php echo $key_detail['task_name'];?></span>
-                                            <input aria-label="Popbillablehorse[]" type="text" name="popbillablehorse[]"  class="form-control" value="<?php echo $key_detail['billable_hrs'];?>">
+                                            <input aria-label="<?= htmlspecialchars(__('Popbillablehorse'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="popbillablehorse[]"  class="form-control" value="<?php echo $key_detail['billable_hrs'];?>">
                                             <input type="hidden" name="poptimesheetid[]"  class="form-control" value="<?php echo $key_detail['id'];?>">
                                             <input type="hidden" name="popbillablehorseold[]" class="form-control" value="<?php echo $key_detail['billable_hrs'];?>">
                                             <input type="hidden" name="timesheet_date[]" class="form-control" value="<?php echo $key_detail['timesheet_date'];?>">
@@ -366,7 +366,7 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                                     <?php }  ?>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-primary m-r-10 float-right mb-2"  onclick="submitrom()" >Submit</button>
+                                    <button type="button" class="btn btn-primary m-r-10 float-right mb-2"  onclick="submitrom()" ><?= __('Submit'); ?></button>
                                 </div>
                             </div>
                         </form>
@@ -377,25 +377,25 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                         <form class="kt-form kt-form--label-right" action="" id="popupformattendace" method="post">
                             <div class="card latest-update-card">
                                 <div class="card-header">
-                                    <h5>Employee Working Details</h5>
+                                    <h5><?= __('Employee Working Details'); ?></h5>
                                 </div>
                                 <div class="form-radio p-2">
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="Presentcheck" type="radio" name="presentcheck" <?php echo $leavedetails['attendance_type']==""?"checked":""?> class="d-none" value="3" onclick="checkabsentorpresent('3')" onkeydown="">
-                                            <i class="helper"></i>Present
+                                            <input aria-label="<?= htmlspecialchars(__('Presentcheck'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="presentcheck" <?php echo $leavedetails['attendance_type']==""?"checked":""?> class="d-none" value="3" onclick="checkabsentorpresent('3')" onkeydown="">
+                                            <i class="helper"></i><?= __('Present'); ?>
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="Presentcheck" type="radio" name="presentcheck"  <?php echo $leavedetails['attendance_type']=="1"?"checked":""?> class="d-none" value="1" onclick="checkabsentorpresent('1')" onkeydown="">
-                                            <i class="helper"></i>Absent
+                                            <input aria-label="<?= htmlspecialchars(__('Presentcheck'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="presentcheck"  <?php echo $leavedetails['attendance_type']=="1"?"checked":""?> class="d-none" value="1" onclick="checkabsentorpresent('1')" onkeydown="">
+                                            <i class="helper"></i><?= __('Absent'); ?>
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label class="form-label">
-                                            <input aria-label="Presentcheck" type="radio" name="presentcheck" <?php echo $leavedetails['attendance_type']=="2"?"checked":""?> class="d-none" value="2" onclick="checkabsentorpresent('0')" onkeydown="">
-                                            <i class="helper"></i>Leave
+                                            <input aria-label="<?= htmlspecialchars(__('Presentcheck'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" name="presentcheck" <?php echo $leavedetails['attendance_type']=="2"?"checked":""?> class="d-none" value="2" onclick="checkabsentorpresent('0')" onkeydown="">
+                                            <i class="helper"></i><?= __('Leave'); ?>
                                         </label>
                                     </div>
                                 </div>
@@ -406,22 +406,22 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                                             $formdate = $leavedetails['leave_from'] !=""?$leavedetails['leave_from']:$_POST['timesheet_date'];
                                             $todate = $leavedetails['leave_to'] !=""?$leavedetails['leave_to']:$_POST['timesheet_date'];
                                             ?>
-                                            <span class="form-label">Start Date(s)</span>
-                                            <input aria-label="Input field" type="text"  class="form-control datepicker"  value="<?php echo  fromDate($formdate); ?>"  name="absent_from"  id="kt_datepicker_absent_from" />
+                                            <span class="form-label"><?= __('Start Date(s)'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control datepicker"  value="<?php echo  fromDate($formdate); ?>"  name="absent_from"  id="kt_datepicker_absent_from" />
                                         </div>
                                     </div>
                                     <div class="p-2 row">
                                         <div class="col-lg-12">
-                                            <span class="form-label">End Date(s)</span>
-                                            <input aria-label="Input field" type="text" class="form-control datepicker"  value="<?php echo  fromDate($todate); ?>"  name="absent_to"  id="kt_datepicker_32" />
+                                            <span class="form-label"><?= __('End Date(s)'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker"  value="<?php echo  fromDate($todate); ?>"  name="absent_to"  id="kt_datepicker_32" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="leaveaployeeform" style="display: <?php echo $leavedetails['attendance_type']=="2"?"":"none"?>">
                                     <div class=" p-2">
-                                        <span class="form-label">Leave Category</span></br>
-                                        <select aria-label="Leave Type" class="col-lg-12 form-control form-select js-example-basic-single leave_type_id"  name="leave_type_id" data-val="<?php echo $role['half_day']; ?>" onchange="selectleavetype(this.value,'<?php echo $_POST['emp_id']; ?>','<?php echo $_POST['year']; ?>','<?php echo $_POST['month']; ?>')">
-                                            <option value="-1"> Select Any one</option>
+                                        <span class="form-label"><?= __('Leave Category'); ?></span></br>
+                                        <select aria-label="<?= htmlspecialchars(__('Leave Type'), ENT_QUOTES, 'UTF-8'); ?>" class="col-lg-12 form-control form-select js-example-basic-single leave_type_id"  name="leave_type_id" data-val="<?php echo $role['half_day']; ?>" onchange="selectleavetype(this.value,'<?php echo $_POST['emp_id']; ?>','<?php echo $_POST['year']; ?>','<?php echo $_POST['month']; ?>')">
+                                            <option value="-1"> <?= __('Select Any one'); ?></option>
                                             <?php foreach ($cate as $cat) {  ?>
                                                 <option <?php if($cat['id'] == $leavedetails['leave_type_id'] ){ ?> selected <?php
 } ?> value="<?php echo $cat['id']; ?>"><?php echo $cat['name']; ?></option>
@@ -435,34 +435,34 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                                             $formdate = $leavedetails['leave_from'] !=""?$leavedetails['leave_from']:$_POST['timesheet_date'];
                                             $todate = $leavedetails['leave_to'] !=""?$leavedetails['leave_to']:$_POST['timesheet_date'];
                                             ?>
-                                            <span class="form-label">Start Date(s)</span>
-                                            <input aria-label="Input field" type="text" onchange="tocheckdays()" class="form-control datepicker"  value="<?php echo  fromDate($formdate); ?>"  name="leave_from"  id="kt_datepicker_31" />
+                                            <span class="form-label"><?= __('Start Date(s)'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" onchange="tocheckdays()" class="form-control datepicker"  value="<?php echo  fromDate($formdate); ?>"  name="leave_from"  id="kt_datepicker_31" />
                                         </div>
                                         <div class="col-lg-5">
                                             <div class="checkbox-fade fade-in-primary mt-4">
                                                 <label class="form-label">
-                                                    <input aria-label="Start Half Day" type="checkbox" value="0" name="start_half_day" <?php echo $leavedetails['start_half_day'] =="0"?"checked":""; ?>>
+                                                    <input aria-label="<?= htmlspecialchars(__('Start Half Day'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="0" name="start_half_day" <?php echo $leavedetails['start_half_day'] =="0"?"checked":""; ?>>
                                                     <span class="cr">
                                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                     </span>
-                                                    <span class="f-w-600">Half Day</span>
+                                                    <span class="f-w-600"><?= __('Half Day'); ?></span>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="p-2 row">
                                         <div class="col-lg-7">
-                                            <span class="form-label">End Date(s)</span>
-                                            <input aria-label="Input field" type="text" onchange="tocheckdays()" class="form-control datepicker"  value="<?php echo  fromDate($todate); ?>"  name="leave_to"  id="kt_datepicker_32_2" />
+                                            <span class="form-label"><?= __('End Date(s)'); ?></span>
+                                            <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" onchange="tocheckdays()" class="form-control datepicker"  value="<?php echo  fromDate($todate); ?>"  name="leave_to"  id="kt_datepicker_32_2" />
                                         </div>
                                         <div class="col-lg-5">
                                             <div class="checkbox-fade fade-in-primary mt-4">
                                                 <label class="form-label">
-                                                    <input aria-label="End Half Day" type="checkbox" value="0" name="end_half_day" <?php echo $leavedetails['end_half_day'] =="0"?"checked":""; ?>>
+                                                    <input aria-label="<?= htmlspecialchars(__('End Half Day'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="0" name="end_half_day" <?php echo $leavedetails['end_half_day'] =="0"?"checked":""; ?>>
                                                     <span class="cr">
                                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                     </span>
-                                                    <span class="f-w-600">Half Day</span>
+                                                    <span class="f-w-600"><?= __('Half Day'); ?></span>
                                                 </label>
                                             </div>
                                         </div>
@@ -473,7 +473,7 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
                                     <input type="hidden" name="attendance_date" value="<?php echo $_POST['timesheet_date']; ?>">
                                     <input type="hidden" id="availablelave" value="0">
                                     <input type="hidden" id="leave_days" value="1">
-                                    <button type="button"  <?php echo $_POST['svaetype']!="insert"?"disabled":""; ?> class="btn btn-primary m-r-10 float-right mb-2" onclick="submitromattendace()" >Submit</button>
+                                    <button type="button"  <?php echo $_POST['svaetype']!="insert"?"disabled":""; ?> class="btn btn-primary m-r-10 float-right mb-2" onclick="submitromattendace()" ><?= __('Submit'); ?></button>
                                 </div>
                             </div>
                         </form>
@@ -483,7 +483,7 @@ $minworkinghrs = $_REQUEST['workinghrs'] !=""?$_REQUEST['workinghrs']:'8:00:00';
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Cancel'); ?></button>
         </div>
 
     </div>

@@ -14,15 +14,15 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
     <div class="card">
         <div class="card-header">
             <h5 class="">
-                Day Stock Balance
+                <?= __('Day Stock Balance'); ?>
             </h5>
             <div class="card-header-right">
                 <div class="dropdown-primary dropdown open">
                     <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="dropdown-2"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</button>
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
                     <div class="dropdown-menu p-0" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
                         data-dropdown-out="fadeOut">
-                        <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Day Stock Balance" target="_blank">CSV</a>
+                        <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Day Stock Balance" target="_blank"><?= __('CSV'); ?></a>
                     </div>
                 </div>
             </div>
@@ -32,12 +32,12 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
             <form method="post" action="" id="datedelectpostform">
                 <div class="row ">
                     <div class="col-lg-4">
-                        <input aria-label="Balance Date" type="text" class="form-control datepicker" name="balance_date" id="balance_date" value="<?php echo fromDate($balance_date); ?>">
+                        <input aria-label="<?= htmlspecialchars(__('Balance Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="balance_date" id="balance_date" value="<?php echo fromDate($balance_date); ?>">
                     </div>
                     <div class="col-lg-2">
                         <span class="form-label"> &nbsp; </span>
                         <button type="submit" name="applyform" value="apply" class="btn btn-info waves-effect waves-light input-group-text">
-                            Apply
+                            <?= __('Apply'); ?>
                         </button>
                         <input type="hidden" name="submit" value="applyform">
                     </div>
@@ -53,13 +53,13 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">SKU</th>
-                <th scope="col">Item Name</th>
-                <th scope="col">Last Stock Update Date</th>
-                <th scope="col">Opening Qty</th>
-                <th scope="col">In Qty</th>
-                <th scope="col">Out Qty</th>
-                <th scope="col">Closing Qty</th>
+                <th scope="col"><?= __('SKU'); ?></th>
+                <th scope="col"><?= __('Item Name'); ?></th>
+                <th scope="col"><?= __('Last Stock Update Date'); ?></th>
+                <th scope="col"><?= __('Opening Qty'); ?></th>
+                <th scope="col"><?= __('In Qty'); ?></th>
+                <th scope="col"><?= __('Out Qty'); ?></th>
+                <th scope="col"><?= __('Closing Qty'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -89,7 +89,7 @@ $_SESSION['apply_js']['standart_report_hrr'] = 1;
 <?php }else{ ?>
 
     <div class="card-px text-center ">
-        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Stock</p>
+        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Stock'); ?></p>
         <div class="text-center px-4">
             <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
         </div>

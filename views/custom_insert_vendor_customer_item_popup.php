@@ -34,25 +34,25 @@ $party_table_detail = $result['party_table_detail'];
     }
 </script>
 <div class="modal-header">
-    <h5 class="modal-title"> Vendor Items </h5>
-    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal" aria-label="Close"></button>
+    <h5 class="modal-title"> <?= __('Vendor Items'); ?> </h5>
+    <button type="button" class="btn-close btn_white"  data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 </div>
 <div class="modal-body" >
     <form id="item_form" method="post">
         <div class="row">
             <div class="form-group col-lg-6">
                 <div>
-                    <span class="form-label">Item SKU <span class="text-danger">*</span></span>
+                    <span class="form-label"><?= __('Item SKU'); ?> <span class="text-danger">*</span></span>
                     <span class="col-lg-6 float-end  text-right"><?php echo $items['sku'];?></span>
                 </div>
-                <input aria-label="Sku" type="text" class="form-control datepicker" name="sku" id="sku" value="<?php echo $party_table_detail['vendor_part_no'] !=""?$party_table_detail['vendor_part_no']:$items['sku'];?>">
+                <input aria-label="<?= htmlspecialchars(__('Sku'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="sku" id="sku" value="<?php echo $party_table_detail['vendor_part_no'] !=""?$party_table_detail['vendor_part_no']:$items['sku'];?>">
             </div>
             <div class="form-group col-lg-6">
                 <div>
-                    <span class="form-label">Item Name <span class="text-danger">*</span></span>
+                    <span class="form-label"><?= __('Item Name'); ?> <span class="text-danger">*</span></span>
                     <span class="col-lg-6 float-end text-right"><?php echo $items['item_name'];?></span>
                 </div>
-                <input aria-label="Item Name" type="text" class="form-control datepicker" name="item_name" id="item_name" value="<?php echo $party_table_detail['vendor_part_name'] !=""?$party_table_detail['vendor_part_name']:$items['item_name'];?>">
+                <input aria-label="<?= htmlspecialchars(__('Item Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="item_name" id="item_name" value="<?php echo $party_table_detail['vendor_part_name'] !=""?$party_table_detail['vendor_part_name']:$items['item_name'];?>">
             </div>
         </div>
         <input type="hidden" name="transaction_table" value="<?php echo $_POST['transaction_table']; ?>">
@@ -65,6 +65,6 @@ $party_table_detail = $result['party_table_detail'];
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary waves-effect waves-light " onclick="insertVendorCustomerItems()">Submit</button>
+    <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal"><?= __('Close'); ?></button>
+    <button type="button" class="btn btn-primary waves-effect waves-light " onclick="insertVendorCustomerItems()"><?= __('Submit'); ?></button>
 </div>

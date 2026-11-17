@@ -10,7 +10,7 @@
                     <span class="input-group-text addon-style">
                         <span class=""><i class="ti-location-arrow"></i></span>
                     </span>
-                    <select aria-label="Select option" class="form-control">
+                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
                         <option><?= __('Select Point') ?></option>
                         <option><?= __('Noida') ?></option>
                         <option><?= __('Delhi') ?></option>
@@ -24,7 +24,7 @@
                     <span class="input-group-text addon-style">
                         <span class=""><i class="ti-location-pin"></i></span>
                     </span>
-                    <select aria-label="Select option" class="form-control">
+                    <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control">
                         <option><?= __('Select Point') ?></option>
                         <option><?= __('Noida') ?></option>
                         <option><?= __('Delhi') ?></option>
@@ -38,7 +38,7 @@
                     <span class="input-group-text addon-style">
                         <span class=""><i class="ti-time"></i></span>
                     </span>
-                    <input aria-label="Select date" class="form-control" type="date" name="">
+                    <input aria-label="<?= htmlspecialchars(__('Select date'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" type="date" name="">
                 </div>
             </div>
             <div class="col-lg-6 m-b-10">
@@ -85,28 +85,28 @@
         <div class="row no-gutters p-3">
             <div class="col-lg-3 col-md-3 text-center">
                 <div class="route-count-img">
-                    <img src="assets/images/demo/bus-booking/route.png" alt="Preview">
+                    <img src="assets/images/demo/bus-booking/route.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
                 <h4 class="f-w-700 mt-3 f-30">100</h4>
                 <h5 class="text-uppercase text-gray"><?= __('ROUTES') ?></h5>
             </div>
             <div class="col-lg-3 col-md-3 text-center">
                 <div class="route-count-img">
-                    <img src="assets/images/demo/bus-booking/ticket.png" alt="Preview">
+                    <img src="assets/images/demo/bus-booking/ticket.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
                 <h4 class="f-w-700 mt-3 f-30"><strong>60 <?= __('SEC') ?></strong></h4>
                 <h5 class="text-uppercase text-gray"><?= __('INSTANT E-TICKET & REFUND') ?></h5>
             </div>
             <div class="col-lg-3 col-md-3 text-center">
                 <div class="route-count-img">
-                    <img src="assets/images/demo/bus-booking/customer.png" alt="Preview">
+                    <img src="assets/images/demo/bus-booking/customer.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
                 <h4 class="f-w-700 mt-3 f-30"><strong>12500</strong></h4>
                 <h5 class="text-uppercase text-gray"><?= __('Happy customers') ?></h5>
             </div>
             <div class="col-lg-3 col-md-3 text-center">
                 <div class="route-count-img">
-                    <img src="assets/images/demo/bus-booking/24.png" alt="Preview">
+                    <img src="assets/images/demo/bus-booking/24.png" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
                 <h4 class="f-w-700 mt-3 f-30"><strong>24/7</strong></h4>
                 <h5 class="text-uppercase text-gray"><?= __('customer care') ?></h5>

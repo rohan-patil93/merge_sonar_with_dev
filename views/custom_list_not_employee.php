@@ -16,7 +16,7 @@ $jsondecodeuserlist = $jsondecodeuserlist[0];
 <script>
 
  function displayitemdata(page){
-    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#personaldataget").html(loader);
   jQuery.ajax({
     url: "views/new_from.php",
@@ -31,7 +31,7 @@ $jsondecodeuserlist = $jsondecodeuserlist[0];
 }
 
  function displayitemviewdata(page){
-   var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+   var loader = '<div class="text-center" id="loader-show_2"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#personaldataget").html(loader);
   jQuery.ajax({
     url: "views/new_view.php",
@@ -46,7 +46,7 @@ $jsondecodeuserlist = $jsondecodeuserlist[0];
 }
 
 function displayitemdatalist(option){
- var loader = '<div class="text-center" id="loader-show_3"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+ var loader = '<div class="text-center" id="loader-show_3"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#personaldataget").html(loader);
  $.ajax({
    url: "views/view_roll_back1.php",
@@ -60,7 +60,7 @@ function displayitemdatalist(option){
  });
 }
 function displaychangepassword(option){
-   var loader = '<div class="text-center" id="loader-show_4"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="Preview"></div>';
+   var loader = '<div class="text-center" id="loader-show_4"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
     $("#personaldataget").html(loader);
  $.ajax({
    url: "views/"+option+".php",
@@ -88,7 +88,7 @@ function displaychangepassword(option){
 
 
                  if($jsondecodeuserlist['user_photo']!=""){ ?>
-                   <img src="<?php echo "uploads/all/".$jsondecodeuserlist['user_photo']; ?>" class=" img-120 user-img b-radius-10" alt="User">
+                   <img src="<?php echo "uploads/all/".$jsondecodeuserlist['user_photo']; ?>" class=" img-120 user-img b-radius-10" alt="<?= htmlspecialchars(__('User'), ENT_QUOTES, 'UTF-8'); ?>">
                  <?php }else{ ?>
                   <span class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-1 text-center bg-white text-black  mt-2"><?php echo initials($dis_name); ?></span>
                 <?php } ?>
@@ -104,9 +104,9 @@ function displaychangepassword(option){
               <div>
                 <div class="float-right cover-btn">
                   <button type="button" class="btn btn-primary m-r-20 m-b-20"><i class="icofont icofont-plus"></i>
-                  Follow</button>
+                  <?= __('Follow'); ?></button>
                   <button type="button" class="btn btn-primary m-b-20" ><i class="icofont icofont-ui-messaging"></i>
-                  Message</button>
+                  <?= __('Message'); ?></button>
                 </div>
               </div>
             </div>
@@ -122,12 +122,12 @@ function displaychangepassword(option){
     <div class="tab-header card">
       <ul class="nav  md-tabs infisuite_tab" id="mytab">
         <li class="nav-item p-10">
-          <a class="nav-link f-w-600 <?php echo $_GET['tab']!="cp"?"active":""; ?>" data-bs-toggle="tab" href="#personal" role="tab" onclick="displayitemdata('COM_INSERT_APPLICATION_USERS')">Personal Info</a>
+          <a class="nav-link f-w-600 <?php echo $_GET['tab']!="cp"?"active":""; ?>" data-bs-toggle="tab" href="#personal" role="tab" onclick="displayitemdata('COM_INSERT_APPLICATION_USERS')"><?= __('Personal Info'); ?></a>
         </li>
 
 
         <li class="nav-item p-10">
-          <a class="nav-link f-w-600 <?php echo $_GET['tab']=="cp"?"active":""; ?>" data-bs-toggle="tab" href="#Passwordchange" onclick="displaychangepassword('custom_change_password')" role="tab" >Change Password</a>
+          <a class="nav-link f-w-600 <?php echo $_GET['tab']=="cp"?"active":""; ?>" data-bs-toggle="tab" href="#Passwordchange" onclick="displaychangepassword('custom_change_password')" role="tab" ><?= __('Change Password'); ?></a>
         </li>
       </ul>
     </div>

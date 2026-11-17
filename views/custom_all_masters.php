@@ -8,7 +8,7 @@ $datas = json_decode($emailgroupdata,1);
     <div class="container-fluid">
         <div class="alert alert-warning alert-dismissible">
             <strong><?= __("This function is used for maintaining") ?> <strong><?= __("Display Attributes") ?></strong>. <?= __("* represents mandatory fields.") ?></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
         </div>
         <div class="row">
             <div class="col-lg-12">

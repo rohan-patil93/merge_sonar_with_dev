@@ -97,7 +97,7 @@ $select_value_json = json_encode($select_value);
 </div>
 
 <div class="modal-header">
-  <h5 class="modal-title">Filter Options</h5>
+  <h5 class="modal-title"><?= __('Filter Options'); ?></h5>
   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
 </div>
 
@@ -106,16 +106,16 @@ $select_value_json = json_encode($select_value);
     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
       <div class="row">
         <div class="col-lg-6">
-          <label for="filterfor">Include</label>
+          <label for="filterfor"><?= __('Include'); ?></label>
           <input type="hidden" name="filterlist" id="filterlist" value="">
           <input type="hidden" name="filter_id" id="filter_id" value="<?php echo $filter_id; ?>">
           <input type="hidden" name="tablename" id="tablename" value="<?php echo $filter_table; ?>">
-          <select id="filterfor" name="filterfor" class="form-control form-select js-example-basic-single filter-bulktransfer-filterfor" aria-label="Include">
+          <select id="filterfor" name="filterfor" class="form-control form-select js-example-basic-single filter-bulktransfer-filterfor" aria-label="<?= htmlspecialchars(__('Include'), ENT_QUOTES, 'UTF-8'); ?>">
             <?php
             if(count((array)$filter_list) > 0){
              foreach ($filter_list as $filter) {
               ?>
-              <option <?php if($selectedoption==$filter['genc_detail_name']) {?> selected <?php } ?> value="<?php echo $filter['genc_detail_code'];?>"><?php echo $filter['genc_detail_name'];?></option>
+              <option <?php if($selectedoption==$filter['genc_detail_name']) {?> selected <?php } ?> value="<?php echo $filter['genc_detail_code'];?>"><?php echo __($filter['genc_detail_name']);?></option>
             <?php
              }
             } ?>
@@ -129,10 +129,10 @@ $select_value_json = json_encode($select_value);
         <div class="col-lg-12">
           <div class="bg-white rounded row mt-4 <?php if($selectedoption !== 'Only Some Employees') { ?>filter-bulktransfer-hidden-container<?php } ?>" id="filtershow">
             <div class="col-lg-6">
-              <span class="font-weight-bold">Filter <?php echo htmlspecialchars($filter_table); ?> by</span>
+              <span class="font-weight-bold"><?= __('Filter'); ?> <?php echo htmlspecialchars($filter_table); ?> <?= __('by'); ?></span>
               <i class="fas fa-user icon-nm pl-40" aria-hidden="true"></i>
               <span class="font-weight-bold">
-                <span id="matches_count"><?php echo $emp_count;?> </span> Matches
+                <span id="matches_count"><?php echo $emp_count;?> </span> <?= __('Matches'); ?>
               </span>
             </div>
             <div class="col-lg-6">
@@ -291,7 +291,7 @@ $select_value_json = json_encode($select_value);
      maxlimit = result.count;
     }
 
-    var imagelist = '  <span class="font-weight-bold d-block">Employees</span> <div class="text-start"><div class="symbol-group symbol-hover justify-content-center">';
+    var imagelist = '  <span class="font-weight-bold d-block"><?= htmlspecialchars(__('Employees'), ENT_QUOTES, 'UTF-8'); ?></span> <div class="text-start"><div class="symbol-group symbol-hover justify-content-center">';
     for (var k = 0; k < maxlimit; k++) {
      var imgpath = 'uploads/all/' + result.details[k].image;
      if (result.details[k].image != '') {
@@ -357,7 +357,7 @@ $select_value_json = json_encode($select_value);
    var filterlistVal = document.getElementById('filterlist').value;
    if (!filterlistVal || filterlistVal.trim() == '') {
     if (typeof swal === 'function') {
-     swal('Validation Error', 'Please select at least one filter criteria.', 'error');
+     swal(<?php echo json_encode(__('Validation Error'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, <?php echo json_encode(__('Please select at least one filter criteria.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>, 'error');
     }
     return;
    }

@@ -14,15 +14,15 @@ if($_SESSION['admin_type'] == '1'){
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
-          <h5>Customer List</h5>
+          <h5><?= __('Customer List'); ?></h5>
            <div class="card-header-right">
               <a href="index.php?option=COM_INSERT_CUSTOMERS" class="btn btn-success mb-2 desktop-view">
               <i class="icofont icofont-plus icon-white text-white"></i>
-                Customer
+                <?= __('Customer'); ?>
             </a>
                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                     <i class="icofont icofont-reply"></i>
-                    Back
+                    <?= __('Back'); ?>
                   </a>
           </div>
         </div>
@@ -68,7 +68,7 @@ if($_SESSION['admin_type'] == '1'){
                     <div class="dropdown-menu" aria-labelledby="dropdown-2"
                       data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                       <a class="dropdown-item waves-light waves-effect"
-                      href="index.php?option=COM_INSERT_CUSTOMERS&Rid=<?php echo $rid; ?>">Edit</a>
+                      href="index.php?option=COM_INSERT_CUSTOMERS&Rid=<?php echo $rid; ?>"><?= __('Edit'); ?></a>
 
 
                     </div>
@@ -76,13 +76,13 @@ if($_SESSION['admin_type'] == '1'){
                 </div>
               </div>
               <div class="row">
-                <span class="col-lg-4 f-12">Contact Person </span>
+                <span class="col-lg-4 f-12"><?= __('Contact Person'); ?> </span>
                 <span class="col-lg-8 f-12"><?php echo $vendorslist['first_name']; ?> </span>
-                <span class="col-lg-4 f-12">Vendor Since</span>
+                <span class="col-lg-4 f-12"><?= __('Vendor Since'); ?></span>
                 <span class="col-lg-8 f-12"><?php echo fromDate($vendorslist['vendor_since']); ?> </span>
-                <span class="col-lg-4 f-12">Email </span>
+                <span class="col-lg-4 f-12"><?= __('Email'); ?> </span>
                 <span class="col-lg-8 f-12"><?php echo $vendorslist['email']; ?> </span>
-                <span class="col-lg-4 f-12">Phone </span>
+                <span class="col-lg-4 f-12"><?= __('Phone'); ?> </span>
                 <span class="col-lg-8 f-12"><?php echo $vendorslist['phone']; ?> </span>
               </div>
             </div>
@@ -93,7 +93,7 @@ if($_SESSION['admin_type'] == '1'){
 }
 }else{ ?>
             <div class="card-px text-center ">
-                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Customers</p>
+                <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Customers'); ?></p>
                 <div class="text-center px-4">
                   <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>

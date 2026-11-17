@@ -66,7 +66,7 @@ foreach ($salarycatdata as $cate) {
                         var divToPrint =document.getElementById('printarea');
                         var newWin=window.open('','Print-Window');
                         newWin.document.open();
-                        newWin.document.write('<html lang="en"><head><title>Candidate Offer</title></head><body onload="window.print()">'+divToPrint.outerHTML+'</body></html>');
+                        newWin.document.write('<html lang="en"><head><title><?= htmlspecialchars(__('Candidate Offer'), ENT_QUOTES, 'UTF-8'); ?></title></head><body onload="window.print()">'+divToPrint.outerHTML+'</body></html>');
                         newWin.document.close();
                     }
                     function signpopup(status,id){
@@ -138,7 +138,7 @@ foreach ($salarycatdata as $cate) {
                         <li class="nav-item">
                             <a class="nav-link active" data-bs-toggle="tab"  role="tab" aria-selected="false"   href="#join-candidate" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                 <span class="nav-icon"><i class="fa fa-user"></i> </span>&nbsp;
-                                <span class="nav-text">Join Candidate</span>
+                                <span class="nav-text"><?= __('Join Candidate'); ?></span>
                             </a>
                             <div class="slide"></div>
                         </li>
@@ -146,7 +146,7 @@ foreach ($salarycatdata as $cate) {
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab"  href="#offer-detail" role="tab" aria-selected="false"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                     <span class="nav-icon"><i class="fa fa-file"></i> </span>&nbsp;
-                                    <span class="nav-text">Offer Detail</span>
+                                    <span class="nav-text"><?= __('Offer Detail'); ?></span>
                                 </a>
                                 <div class="slide"></div>
                             </li>
@@ -154,14 +154,14 @@ foreach ($salarycatdata as $cate) {
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#additional-benefits" role="tab" aria-selected="false"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                 <span class="nav-icon"><i class="fa fa-cubes"></i></span>&nbsp;
-                                <span class="nav-text">Additional Benefits</span>
+                                <span class="nav-text"><?= __('Additional Benefits'); ?></span>
                             </a>
                             <div class="slide"></div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#advantage" role="tab" aria-selected="false"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                 <span class="nav-icon"><i class=" ti-gift"></i></span>&nbsp;
-                                <span class="nav-text">Advantages</span>
+                                <span class="nav-text"><?= __('Advantages'); ?></span>
                             </a>
                             <div class="slide"></div>
                         </li>
@@ -169,7 +169,7 @@ foreach ($salarycatdata as $cate) {
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#offer-letter" role="tab" aria-selected="false"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                     <span class="nav-icon"><i class="fa fa-file"></i></span>&nbsp;
-                                    <span class="nav-text">Offer Letter</span>
+                                    <span class="nav-text"><?= __('Offer Letter'); ?></span>
                                 </a>
                                 <div class="slide"></div>
                             </li>
@@ -178,7 +178,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#congratulation" role="tab" aria-selected="false"  onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                     <span class="nav-icon"><i class="fa fa-thumbs-up"></i></span>&nbsp;
-                                    <span class="nav-text">Congratulation</span>
+                                    <span class="nav-text"><?= __('Congratulation'); ?></span>
                                 </a>
                                 <div class="slide"></div>
                             </li>
@@ -199,25 +199,25 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                 <?php } ?>
                                 <div class="col-lg-8 p-l-50 p-r-50">
                                     <div class="bg-join Congrats">
-                                        <h4 class="text-primary text-capitalize"><span>Dear</span> <?php echo $data['display_name']; ?></h4>
+                                        <h4 class="text-primary text-capitalize"><span><?= __('Dear'); ?></span> <?php echo $data['display_name']; ?></h4>
                                         <p class="mt-5">
                                             <?php echo $catdetails['1']['content']; ?>
                                         </p>
-                                        <div class="dropdown dropdown-inline float-right" data-toggle="tooltip" title="Memebr Profile" data-placement="top">
+                                        <div class="dropdown dropdown-inline float-right" data-toggle="tooltip" title="<?= htmlspecialchars(__('Memebr Profile'), ENT_QUOTES, 'UTF-8'); ?>" data-placement="top">
                                             <a href="#" class="d-flex align-items-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
                                                 <div class="d-flex flex-column text-right">
-                                                    <span class="text-muted font-weight-bold mr-3">HR Manager</span>
+                                                    <span class="text-muted font-weight-bold mr-3"><?= __('HR Manager'); ?></span>
                                                     <span class="font-weight-bold mr-3"><?php echo $_SESSION['users'][$data['hr_connect']]; ?></span>
                                                 </div>
                                                 <div class="symbol symbol-circle symbol-50 mr-3  m-l-10">
-                                                    <img src="<?php echo $diplay_image."/".$hrempdata['image']; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="Attachment Preview">
+                                                    <img src="<?php echo $diplay_image."/".$hrempdata['image']; ?>" class="img-radius img-50 align-top m-r-15  mt-3" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <img src="<?php echo $diplay_image."/".$catdetails['1']['image']; ?>" class="w-100" alt="Attachment Preview">
+                                    <img src="<?php echo $diplay_image."/".$catdetails['1']['image']; ?>" class="w-100" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
                             </div>
                         </div>
@@ -236,7 +236,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                         <div class="row">
                                             <div class="col-lg-2"><i class="ti-user icon-40-blue"></i></div>
                                             <div class="col-lg-10">
-                                                <h4>Designation</h4>
+                                                <h4><?= __('Designation'); ?></h4>
                                                 <span><?php echo $jobcodedata['job_title']; ?></span>
                                                 <p><?php echo $_SESSION['config']['name'];?></p>
                                             </div>
@@ -244,22 +244,22 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                         <div class="row">
                                             <div class="col-lg-2"><i class="fas fa-rupee-sign icon-40-blue"></i></div>
                                             <div class="col-lg-10">
-                                                <h4>Annual CTC</h4>
+                                                <h4><?= __('Annual CTC'); ?></h4>
                                                 <span>
                                                     <?php echo customeummarmonyformate($salarydata['ctc_yearly']); ?>
                                                 </span>
-                                                <p>View your offer letter for a details</p>
+                                                <p><?= __('View your offer letter for a details'); ?></p>
                                             </div>
                                         </div>
                                         <ul class="nav md-tabs mb-5 mt-10 graph-join infisuite_tab">
                                             <li class="nav-item btnwidth">
                                                 <a class="nav-link active " data-bs-toggle="tab" href="#graph" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                                    <span class="nav-text">Graph</span>
+                                                    <span class="nav-text"><?= __('Graph'); ?></span>
                                                 </a>
                                             </li>
                                             <li class="nav-item btnwidth">
                                                 <a class="nav-link " data-bs-toggle="tab" href="#join-table" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                                                    <span class="nav-text">Table</span>
+                                                    <span class="nav-text"><?= __('Table'); ?></span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -276,7 +276,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                     <div class="card card-custom card-stretch gutter-b">
                                                         <div class="card-header border-0">
                                                             <h4 class="card-title align-items-start flex-column text-dark">
-                                                                Compensation Structure
+                                                                <?= __('Compensation Structure'); ?>
                                                                 <span class="text-muted mt-3 font-weight-bold font-size-sm"></span>
                                                             </h4>
                                                         </div>
@@ -285,9 +285,9 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                                 <table class="table table-borderless table-vertical-center">
                                                                     <thead>
                                                                         <tr class="bg-primary text-white">
-                                                                            <th scope="col" class="p-2 font-weight-bolder font-size-h6 " style="min-width: 150px">COMPONENTS</th>
-                                                                            <th scope="col" class="p-2 font-weight-bolder font-size-h6 text-right" style="min-width: 70px">MONTHLY CTC</th>
-                                                                            <th scope="col" class="p-2 font-weight-bolder font-size-h6 text-right" style="min-width: 70px">YEARLY CTC</th>
+                                                                            <th scope="col" class="p-2 font-weight-bolder font-size-h6 " style="min-width: 150px"><?= __('COMPONENTS'); ?></th>
+                                                                            <th scope="col" class="p-2 font-weight-bolder font-size-h6 text-right" style="min-width: 70px"><?= __('MONTHLY CTC'); ?></th>
+                                                                            <th scope="col" class="p-2 font-weight-bolder font-size-h6 text-right" style="min-width: 70px"><?= __('YEARLY CTC'); ?></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -342,7 +342,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                                         <img src="<?php echo $diplay_image."/".$subcat3['image']; ?>" alt="" class="mw-100 w-200px img-120">
                                                                     </div>
                                                                     <div class="text-center mt-2">
-                                                                        <button type="button" onclick="dynamicinformationopup(<?php echo $subcat3['id']; ?>)"  class="btn font-weight-bolder btn-sm btn-primary mr-2">Quick View</button>
+                                                                        <button type="button" onclick="dynamicinformationopup(<?php echo $subcat3['id']; ?>)"  class="btn font-weight-bolder btn-sm btn-primary mr-2"><?= __('Quick View'); ?></button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="text-center mt-5 mb-md-0 mb-lg-5 mb-md-0 mb-lg-5 mb-lg-0 mb-5 d-flex flex-column">
@@ -354,12 +354,12 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                             </div>
                                                         </div>
                                                     <?php } ?>
-                                                    <?php } else { echo '<div class="text-center"><h4 class="text-info"><i class="fa fa-warning"></i> No Additional Benefits</h4></div>';
+                                                    <?php } else { echo '<div class="text-center"><h4 class="text-info"><i class="fa fa-warning"></i> '.__('No Additional Benefits').'</h4></div>';
 } ?>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 mt-6">
-                                                <img src="<?php echo $diplay_image."/".$catdetails['3']['image']; ?>" class="w-100" alt="Attachment Preview">
+                                                <img src="<?php echo $diplay_image."/".$catdetails['3']['image']; ?>" class="w-100" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -400,7 +400,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
 
                                                                     </div>
                                                                     <div class="col-lg-6">
-                                                                        <img class="w-100" src="<?php echo $diplay_image."/".$subcat4['image']; ?>" alt="Attachment Preview">
+                                                                        <img class="w-100" src="<?php echo $diplay_image."/".$subcat4['image']; ?>" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
 
                                                                     </div>
                                                                 </div>
@@ -417,7 +417,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                     <div class="col-lg-6">
                                                         <div class="card card-custom card-stretch" id="kt_page_stretched_card">
                                                             <div class="card-header">
-                                                                <h5>Offer</h5>
+                                                                <h5><?= __('Offer'); ?></h5>
                                                                 <div class="card-header-right">
                                                                 </div>
                                                             </div>
@@ -428,10 +428,10 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                                     <?php if($_SESSION['user_type'] != '4'){ ?>
                                                                         <div class="invoice-btn-section clearfix d-print-none" style="margin-top:5px;">
                                                                             <button class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printDiv');">
-                                                                                <i class="fa fa-print"></i> &nbsp Print Offer Latter
+                                                                                <i class="fa fa-print"></i> &nbsp <?= __('Print Offer Latter'); ?>
                                                                             </button>
                                                                             <button class="btn waves-effect waves-light btn-grd-info"  onclick="convertHTMLToPDF();">
-                                                                                <i class="fa fa-download"></i> &nbsp Download Offer Latter
+                                                                                <i class="fa fa-download"></i> &nbsp <?= __('Download Offer Latter'); ?>
                                                                             </button>
                                                                         </div>
                                                                     <?php } ?>
@@ -450,9 +450,9 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                         <?php }      ?>
                                                         <div class="card card-custom wave wave-animate-slow mb-8 mb-lg-0 offer-letter">
                                                             <?php if($candiddata['current_status']== ST_APPROVED){ ?>
-                                                                <div class="ribbon ribbon-top-right"><span class="color-info">Accepted</span></div>
+                                                                <div class="ribbon ribbon-top-right"><span class="color-info"><?= __('Accepted'); ?></span></div>
                                                             <?php }elseif($candiddata['current_status']== ST_REJECTED){ ?>
-                                                                <div class="ribbon ribbon-top-right"><span class="color-danger">Decline</span></div>
+                                                                <div class="ribbon ribbon-top-right"><span class="color-danger"><?= __('Decline'); ?></span></div>
                                                             <?php } ?>
                                                             <div class="card-body">
                                                                 <div class="d-flex align-items-center p-3">
@@ -461,7 +461,7 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                                     </div>
                                                                     <div class=" flex-column">
                                                                         <a href="#" class="text-dark text-hover-primary f-w-700 font-weight-bold font-size-h4 mb-3">
-                                                                            Offer Letter Validity
+                                                                            <?= __('Offer Letter Validity'); ?>
                                                                         </a>
                                                                         <div class="text-dark-75"><?php echo date('M d, Y',strtotime($data['offer_validity'])); ?></div>
                                                                     </div>
@@ -471,9 +471,9 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                                         <span class="far fa-calendar-alt f-40 mr-15"></span>
                                                                     </div>
                                                                     <div class=" flex-column">
-                                                                        <a href="#" class="text-dark text-hover-primary f-w-700 font-weight-bold font-size-h4 mb-3">Join Date
+                                                                        <a href="#" class="text-dark text-hover-primary f-w-700 font-weight-bold font-size-h4 mb-3"><?= __('Join Date'); ?>
                                                                         </a>
-                                                                        <div class="text-dark-75">On or before <?php echo date('M d, Y',strtotime($data['reporting_date'])); ?></div>
+                                                                        <div class="text-dark-75"><?= __('On or before'); ?> <?php echo date('M d, Y',strtotime($data['reporting_date'])); ?></div>
                                                                     </div>
                                                                 </div>
                                                                 <?php if($candiddata['current_status']==ST_LOIACCEPTED || $candiddata['current_status']==ST_LOIREJECTED){ ?>
@@ -491,8 +491,8 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                                                             ?>
                                                                         </div>
                                                                         <div class=" flex-column">
-                                                                            <a href="#" class="text-dark text-hover-primary f-w-700 font-weight-bold font-size-h4 mb-3"><?php if($candiddata['current_status']==ST_LOIACCEPTED){ echo "Offer Accepted";
-}elseif($candiddata['current_status']== ST_LOIREJECTED){  echo "Offer Decline";
+                                                                            <a href="#" class="text-dark text-hover-primary f-w-700 font-weight-bold font-size-h4 mb-3"><?php if($candiddata['current_status']==ST_LOIACCEPTED){ echo __('Offer Accepted');
+}elseif($candiddata['current_status']== ST_LOIREJECTED){  echo __('Offer Decline');
 }?>
                                                                         </a>
                                                                         <div class="text-dark-75"><?php echo date('M d, Y',strtotime($candhistrydata['status_date'])); ?></div>
@@ -515,13 +515,13 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                          <span class="text-danger d-block"><?php echo $errormsg; ?> </span>
                                          <button class="btn waves-effect waves-light btn-grd-primary  mt-2  <?php echo $notauthclass; ?>" type="button"
                                              onclick="signpopup(<?php echo ST_APPROVED; ?>,<?php echo $candidate_id; ?>)"  <?php echo $notauth; ?>>
-                                             Accept
+                                             <?= __('Accept'); ?>
                                          </button>
                                          <button class="btn waves-effect waves-light btn-grd-danger  mt-2 <?php echo $notauthclass; ?>" type="button"   onclick="statuspopup(<?php echo ST_LOIREJECTED; ?>, <?php echo $candidate_id; ?>)" <?php echo $notauth; ?>>
-                                             Decline
+                                             <?= __('Decline'); ?>
                                          </button>
                                          <button class="btn waves-effect waves-light btn-grd-warning  mt-2 " type="button" onclick="clarityquery()" >
-                                             Query
+                                             <?= __('Query'); ?>
                                          </button>
                                      </div>
                                      <div class="row">
@@ -536,13 +536,13 @@ if($candiddata['current_status'] == ST_LOIACCEPTED){ ?>
                                 <div class="row">
                                     <div class="col-lg-7">
                                         <div class="Congrats">
-                                            <h2>Congratulations <?php echo $data['display_name']; ?> </h2>
-                                            <h3>Welcome!</h3>
-                                            <p> We choose our new team members carefully and we’re proud to welcome you, with all of your talents and ideas and faults.</p><p>     Yes, faults — making mistakes is an important part of growth, and we hope you’ll never worry about trying to be perfect on the job.</p>
+                                            <h2><?= __('Congratulations'); ?> <?php echo $data['display_name']; ?> </h2>
+                                            <h3><?= __('Welcome!'); ?></h3>
+                                            <p> <?= __('We choose our new team members carefully and we’re proud to welcome you, with all of your talents and ideas and faults.'); ?></p><p>     <?= __('Yes, faults — making mistakes is an important part of growth, and we hope you’ll never worry about trying to be perfect on the job.'); ?></p>
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
-                                        <img src="uploads/all/congrats.jpg" style="width:500px;" alt="Attachment Preview">
+                                        <img src="uploads/all/congrats.jpg" style="width:500px;" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
                                 </div>
                             </div>
