@@ -635,7 +635,7 @@ $locations = $result['locations'];
                                 <span class="form-label"><?= __('Phone'); ?></span>
                                 <div class="kt-input-icon">
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="number" id="phone"
-                                        name="phone" value="<?php echo $vendordetail['phone']; ?>" autocomplete="off">
+                                        name="phone" value="<?php echo dynamicDataDecode($vendordetail['phone']); ?>" autocomplete="off">
                                 </div>
                                 <div class="d-none text-danger" id="phone_err"> <?= __('Please enter phone'); ?> </div>
                             </div>
@@ -983,7 +983,7 @@ $locations = $result['locations'];
                                 <span class="form-label"><?= __('Tax/Vat Reg.No.'); ?></span>
                                 <div class="kt-input-icon">
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="vendor_tax_reg_no"
-                                        name="vendor_tax_reg_no" value="<?php echo $vendordetail['vendor_tax_reg_no']; ?>"
+                                        name="vendor_tax_reg_no" value="<?php echo dynamicDataDecode($vendordetail['vendor_tax_reg_no']); ?>"
                                         autocomplete="off">
                                 </div>
                             </div>
@@ -1011,7 +1011,7 @@ $locations = $result['locations'];
                                 <span class="form-label"><?= __('DUNS'); ?></span>
                                 <div class="kt-input-icon">
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="duns_no"
-                                        name="duns_no" value="<?php echo $vendordetail['duns_no']; ?>" autocomplete="off">
+                                        name="duns_no" value="<?php echo dynamicDataDecode($vendordetail['duns_no']); ?>" autocomplete="off">
                                 </div>
                             </div>
                             <?php
@@ -1074,7 +1074,7 @@ $locations = $result['locations'];
                                 <span class="form-label"><?= __('PAN No.'); ?> <span class="text-danger">*</span></span>
                                 <div class="kt-input-icon">
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control checkalreadyavailableornotcustomerorvendordetails <?php echo $accessreadonly; ?>" data-type="PAN_NO" type="text" id="pan_no" name="pan_no"
-                                        value="<?php echo $vendordetail['pan_no']; ?>" autocomplete="off">
+                                        value="<?php echo dynamicDataDecode($vendordetail['pan_no']); ?>" autocomplete="off">
                                     <span class="text-danger f-12"><?php if($vendordetail['pan_no'] !=""){ echo $vendor_verifications['PAN']['status'] == "Y" ? $_SESSION['error_message']['9136'] : "PAN verification is pending";
 } ?></span>
                                 </div>
@@ -1092,7 +1092,7 @@ $locations = $result['locations'];
                                 <span class="form-label"><?= __('TAN No.'); ?> </span>
                                 <div class="kt-input-icon">
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="tan_number"
-                                        name="tan_number" value="<?php echo $vendordetail['tan_number']; ?>" autocomplete="off">
+                                        name="tan_number" value="<?php echo dynamicDataDecode($vendordetail['tan_number']); ?>" autocomplete="off">
 
                                 </div>
                             </div>
@@ -1124,7 +1124,7 @@ $locations = $result['locations'];
                                 <span class="form-label"><?= __('Udyam Registration/MSME Number'); ?> <span class="text-danger">*</span></span>
                                 <div class="kt-input-icon ">
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="msme_number"
-                                        name="msme_number" value="<?php echo $vendordetail['msme_number']; ?>" autocomplete="off">
+                                        name="msme_number" value="<?php echo dynamicDataDecode($vendordetail['msme_number']); ?>" autocomplete="off">
                                     <?php echo $vendor_verifications['MSME']['status'] == "Y" ? "The MSME number is valid." : ""; ?>
                                 </div>
                             </div>
@@ -1180,7 +1180,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-4">
                                 <span class="form-label"><?= __('Bank name'); ?> <span class="text-danger">*</span></span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_name"
-                                    name="bank_name" value="<?php echo $vendordetail['bank_name']; ?>">
+                                    name="bank_name" value="<?php echo dynamicDataDecode($vendordetail['bank_name']); ?>">
                             </div>
                             <?php
                         }
@@ -1190,7 +1190,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-8">
                                 <span class="form-label"><?= __('Bank Address'); ?></span>
                                 <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control <?php echo $accessreadonly; ?>"
-                                    name="bank_address"><?php echo $vendordetail['bank_address']; ?></textarea>
+                                    name="bank_address"><?php echo dynamicDataDecode($vendordetail['bank_address']); ?></textarea>
                             </div>
                             <?php
                         }
@@ -1249,7 +1249,7 @@ $locations = $result['locations'];
                                 <span class="form-label"><?= __('Pincode'); ?></span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" placeholder="<?= htmlspecialchars(__('Pincode'), ENT_QUOTES, 'UTF-8'); ?>" type="text"
                                     id="bank_post_code" name="bank_post_code"
-                                    value="<?php echo $vendordetail['bank_post_code']; ?>">
+                                    value="<?php echo dynamicDataDecode($vendordetail['bank_post_code']); ?>">
                             </div>
                             <?php
                         }
@@ -1259,7 +1259,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-4">
                                 <span class="form-label"><?= __('Company Bank Beneficiary Name'); ?> </span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_beneficiary_name"
-                                    name="bank_beneficiary_name" value="<?php echo $vendordetail['bank_beneficiary_name']; ?>">
+                                    name="bank_beneficiary_name" value="<?php echo dynamicDataDecode($vendordetail['bank_beneficiary_name']); ?>">
                             </div>
                             <?php
                         }
@@ -1269,7 +1269,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-4">
                                 <span class="form-label"><?= __('Bank Account Number'); ?> <span class="text-danger">*</span></span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="number" id="bank_account_no"
-                                    name="bank_account_no" value="<?php echo $vendordetail['bank_account_no']; ?>">
+                                    name="bank_account_no" value="<?php echo dynamicDataDecode($vendordetail['bank_account_no']); ?>">
                                 <span
                                     class="text-danger f-12"><?php if($vendordetail['bank_account_no'] !=""){ echo $vendor_verifications['BANK']['status'] == "Y" ? $_SESSION['error_message']['9140'] : "Bank Account verification is pending";
 } ?></span>
@@ -1298,7 +1298,7 @@ $locations = $result['locations'];
                                 <span class="form-label"><?= __('IFSC Code'); ?> <span class="text-danger">*</span></span>
                                 <div class="kt-input-icon">
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="ifsc_code"
-                                        name="ifsc_code" value="<?php echo $vendordetail['ifsc_code']; ?>" autocomplete="off">
+                                        name="ifsc_code" value="<?php echo dynamicDataDecode($vendordetail['ifsc_code']); ?>" autocomplete="off">
                                 </div>
                             </div>
                             <?php
@@ -1319,7 +1319,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-4 optional-field">
                                 <span class="form-label"><?= __('Routing Wire Code'); ?></span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="routing_wire_Code"
-                                    name="routing_wire_Code" value="<?php echo $vendordetail['routing_wire_Code']; ?>">
+                                    name="routing_wire_Code" value="<?php echo dynamicDataDecode($vendordetail['routing_wire_Code']); ?>">
                             </div>
                             <?php
                         }
@@ -1329,7 +1329,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-4 optional-field">
                                 <span class="form-label"><?= __('SWIFT/BIC Code'); ?></span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="swift_bic_code"
-                                    name="swift_bic_code" value="<?php echo $vendordetail['swift_bic_code']; ?>">
+                                    name="swift_bic_code" value="<?php echo dynamicDataDecode($vendordetail['swift_bic_code']); ?>">
                             </div>
                             <?php
                         }
@@ -1339,7 +1339,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-4 optional-field">
                                 <span class="form-label"><?= __('IBAN'); ?></span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="iban_code"
-                                    name="iban_code" value="<?php echo $vendordetail['iban_code']; ?>">
+                                    name="iban_code" value="<?php echo dynamicDataDecode($vendordetail['iban_code']); ?>">
                             </div>
                             <?php
                         }
@@ -1349,7 +1349,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-4">
                                 <span class="form-label"><?= __('Contact Person Name (Bank related queries)'); ?></span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_person_name"
-                                    name="bank_query_person_name" value="<?php echo $vendordetail['bank_query_person_name']; ?>">
+                                    name="bank_query_person_name" value="<?php echo dynamicDataDecode($vendordetail['bank_query_person_name']); ?>">
                             </div>
                             <?php
                         }
@@ -1359,7 +1359,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-4">
                                 <span class="form-label"><?= __('Contact no'); ?></span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_contact_no"
-                                    name="bank_query_contact_no" value="<?php echo $vendordetail['bank_query_contact_no']; ?>">
+                                    name="bank_query_contact_no" value="<?php echo dynamicDataDecode($vendordetail['bank_query_contact_no']); ?>">
                             </div>
                             <?php
                         }
@@ -1369,7 +1369,7 @@ $locations = $result['locations'];
                             <div class="form-group col-lg-4">
                                 <span class="form-label"><?= __('Contact Email'); ?> </span>
                                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="email" id="bank_query_email_id"
-                                    name="bank_query_email_id" value="<?php echo $vendordetail['bank_query_email_id']; ?>">
+                                    name="bank_query_email_id" value="<?php echo dynamicDataDecode($vendordetail['bank_query_email_id']); ?>">
                             </div>
                         <?php } ?>
                     </div>
@@ -1977,7 +1977,7 @@ $locations = $result['locations'];
                         <?= __('Email'); ?>: <?php echo $vendordetail['email']; ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        <?= __('Phone'); ?>: <?php echo $vendordetail['phone']!=""?$vendordetail['phone']:"-"; ?>
+                        <?= __('Phone'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['phone'], 'mobile'); ?>
                     </td>
                     <td colspan="2" class="f-14">
                          <?= __('Vendor Type'); ?>: <?php echo $vendor_types[$vendordetail['vendor_type_id']]['type_name'];
@@ -2043,7 +2043,7 @@ $locations = $result['locations'];
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        <?= __('Tax / VAT'); ?> <span class="f-10"><?= __('(Specify Type)'); ?></span>*: <?php echo $vendordetail['vendor_tax_reg_no']; ?>
+                        <?= __('Tax / VAT'); ?> <span class="f-10"><?= __('(Specify Type)'); ?></span>*: <?php echo renderSensitiveDataWithToggle($vendordetail['vendor_tax_reg_no'], 'gst'); ?>
                     </td>
                     <td colspan="2" class="f-14">
                         <?= __('Legal Structure'); ?> <span class="f-10"></span>*: <?php echo isset($company_types[$vendordetail['business_type']]) ? $company_types[$vendordetail['business_type']]['company_type_name'] : $vendordetail['business_type']; ?>
@@ -2052,7 +2052,7 @@ $locations = $result['locations'];
                         <?= __('Country'); ?>: <?php echo isset($countrylist[$vendordetail['company_registration_country']]) ? $countrylist[$vendordetail['company_registration_country']] : $vendordetail['company_registration_country']; ?>
                     </td>
                     <td class="f-14">
-                        <?= __('DUNS'); ?>: <?php echo $vendordetail['duns_no']; ?>
+                        <?= __('DUNS'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['duns_no'], 'text'); ?>
                     </td>
                 </tr>
                 <tr>
@@ -2071,13 +2071,13 @@ $locations = $result['locations'];
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        <?= __('PAN No'); ?>*: <?php echo emptytextdashShow($vendordetail['pan_no']); ?>
+                        <?= __('PAN No'); ?>*: <?php echo renderSensitiveDataWithToggle($vendordetail['pan_no'], 'pan'); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        <?= __('GSTIN No'); ?>*: <?php echo emptytextdashShow($vendordetail['gstin']); ?>
+                        <?= __('GSTIN No'); ?>*: <?php echo renderSensitiveDataWithToggle($vendordetail['gstin'], 'gst'); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        <?= __('TAN No'); ?>: <?php echo emptytextdashShow($vendordetail['tan_number']); ?>
+                        <?= __('TAN No'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['tan_number'], 'gst'); ?>
                     </td>
                 </tr>
                 <tr>
@@ -2085,7 +2085,7 @@ $locations = $result['locations'];
                         <?= __('MSME Registered'); ?>: <?php echo $vendordetail['msme_register_yes_no'] == 'Y' ? 'Yes' : 'No'; ?>
                     </td>
                     <td colspan="3" class="f-14">
-                        <?= __('MSME Number'); ?>: <?php echo $vendordetail['msme_register_yes_no'] == 'Y' ? emptytextdashShow($vendordetail['msme_number']) : 'N/A'; ?>
+                        <?= __('MSME Number'); ?>: <?php echo $vendordetail['msme_register_yes_no'] == 'Y' ? renderSensitiveDataWithToggle($vendordetail['msme_number'], 'gst') : 'N/A'; ?>
                     </td>
                 </tr>
                 <tr style="background-color: #eeeeee;">
@@ -2095,7 +2095,7 @@ $locations = $result['locations'];
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        <?= __('Bank Name'); ?>: <?php echo emptytextdashShow($vendordetail['bank_name']); ?>
+                        <?= __('Bank Name'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['bank_name'], 'text'); ?>
                     </td>
                     <td colspan="2" class="f-14">
                         <?= __('Country'); ?>: <?php echo isset($countrylist[$vendordetail['bank_country']]) ? $countrylist[$vendordetail['bank_country']] : emptytextdashShow($vendordetail['bank_country']); ?>
@@ -2106,21 +2106,21 @@ $locations = $result['locations'];
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        <?= __('Bank Address'); ?>: <?php echo emptytextdashShow($vendordetail['bank_address']); ?>
+                        <?= __('Bank Address'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['bank_address'], 'text'); ?>
                     </td>
                     <td colspan="2" class="f-14">
                         <?= __('City / Province / State'); ?>: <?php echo isset($citieslist[$vendordetail['bank_city']]) ? $citieslist[$vendordetail['bank_city']] : emptytextdashShow($vendordetail['bank_city']); ?> / <?php echo isset($stateslist[$vendordetail['bank_state']]) ? $stateslist[$vendordetail['bank_state']] : emptytextdashShow($vendordetail['bank_state']); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        <?= __('Postal / Zip Code'); ?>: <?php echo emptytextdashShow($vendordetail['bank_post_code']); ?>
+                        <?= __('Postal / Zip Code'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['bank_post_code'], 'text'); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        <?= __('Company Bank Beneficiary Name'); ?> <span class="f-10"><?= __('(Name to appear on payment)'); ?></span>: <?php echo emptytextdashShow($vendordetail['bank_beneficiary_name']); ?>
+                        <?= __('Company Bank Beneficiary Name'); ?> <span class="f-10"><?= __('(Name to appear on payment)'); ?></span>: <?php echo renderSensitiveDataWithToggle($vendordetail['bank_beneficiary_name'], 'text'); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        <?= __('Bank Account Number'); ?>: <?php echo emptytextdashShow($vendordetail['bank_account_no']); ?>
+                        <?= __('Bank Account Number'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['bank_account_no'], 'bank_account'); ?>
                     </td>
                     <td colspan="2" class="f-14">
                         <?= __('Type of Bank Account'); ?>: <?php echo isset($bank_acoount_type[$vendordetail['account_type']]) ? $bank_acoount_type[$vendordetail['account_type']] : emptytextdashShow($vendordetail['account_type']); ?>
@@ -2128,13 +2128,13 @@ $locations = $result['locations'];
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        <?= __('IFSC Code'); ?>: <?php echo emptytextdashShow($vendordetail['ifsc_code']); ?>
+                        <?= __('IFSC Code'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['ifsc_code'], 'ifsc'); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        <?= __('SWIFT/BIC Code'); ?>: <?php echo emptytextdashShow($vendordetail['swift_bic_code']); ?>
+                        <?= __('SWIFT/BIC Code'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['swift_bic_code'], 'ifsc'); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        <?= __('IBAN'); ?>: <?php echo emptytextdashShow($vendordetail['iban_code']); ?>
+                        <?= __('IBAN'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['iban_code'], 'bank_account'); ?>
                     </td>
                 </tr>
                 <tr>
@@ -2142,21 +2142,21 @@ $locations = $result['locations'];
                         <?= __('Routing - ABA / DFI # / Sort Code'); ?> <span class="f-10"><?= __('(ACH)'); ?></span>: <?php echo emptytextdashShow($vendordetail['routing_aba_dfi_ach']); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        <?= __('Routing - Wire Code'); ?>: <?php echo $vendordetail['routing_wire_Code']; ?>
+                        <?= __('Routing - Wire Code'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['routing_wire_Code'], 'ifsc'); ?>
                     </td>
                     <td class="f-14">
-                        <?= __('Swift / BIC Code'); ?>: <?php echo $vendordetail['swift_bic_code']; ?>
+                        <?= __('Swift / BIC Code'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['swift_bic_code'], 'ifsc'); ?>
                     </td>
                     <td class="f-14">
-                        <?= __('IBAN'); ?> <span class="f-10"><?= __('(if Applicable)'); ?></span>: <?php echo $vendordetail['iban_code']; ?>
+                        <?= __('IBAN'); ?> <span class="f-10"><?= __('(if Applicable)'); ?></span>: <?php echo renderSensitiveDataWithToggle($vendordetail['iban_code'], 'bank_account'); ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="f-14">
-                        <?= __('Contact within your company for Banking Questions'); ?>: <?php echo $vendordetail['bank_query_person_name']; ?>
+                        <?= __('Contact within your company for Banking Questions'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['bank_query_person_name'], 'text'); ?>
                     </td>
                     <td colspan="2" class="f-14">
-                        *<?= __('Tel #'); ?>: <?php echo $vendordetail['bank_query_contact_no']; ?>
+                        *<?= __('Tel #'); ?>: <?php echo renderSensitiveDataWithToggle($vendordetail['bank_query_contact_no'], 'mobile'); ?>
                     </td>
                     <td colspan="2" class="f-14">
                         <?= __('Email Address'); ?>: <?php echo$vendordetail['bank_query_email_id']; ?>

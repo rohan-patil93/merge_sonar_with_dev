@@ -128,11 +128,11 @@ if(!function_exists('render_employee_ctc_table')){
                             <td><?php echo valueemtpydash($rows['Department']); ?></td>
                             <td><?php echo valueemtpydash($rows['Designation']); ?></td>
                             <td><?php echo valueemtpydash($rows['Job Title']); ?></td>
-                            <td><?php echo $rows['pan_number']; ?></td>
-                            <td><?php echo $rows['pf_uan']; ?></td>
+                            <td><?php echo renderSensitiveDataWithToggle($rows['pan_number'], 'pan'); ?></td>
+                            <td><?php echo renderSensitiveDataWithToggle($rows['pf_uan'], 'uan_number'); ?></td>
                             <td><?php echo $banks[$rows['bank_id']]; ?></td>
                             <td><?php echo $rows['bank_link']; ?></td>
-                            <td><?php echo $rows['bank_account_no']; ?></td>
+                            <td><?php echo renderSensitiveDataWithToggle($rows['bank_account_no'], 'bank_account', false); ?></td>
                             <td class="text-right"><?php echo valueemtpydash($rows['Total Days']); ?></td>
                             <td class="text-right"><?php echo valueemtpydash($rows['Payable Days']); ?></td>
                             <?php foreach((array)$unique as $names1){

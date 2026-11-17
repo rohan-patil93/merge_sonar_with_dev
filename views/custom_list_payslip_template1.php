@@ -285,7 +285,7 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
                                         <span class="mr-15 font-weight-bold "><?= __('Account Number'); ?>:</span>
-                                        <span class="text-right"><?php echo $payslip_data_list['bank_account_no']; ?></span>
+                                        <span class="text-right"><?php echo renderSensitiveDataWithToggle($payslip_data_list['bank_account_no'], 'bank_account', false); ?></span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
                                         <span class="mr-15 font-weight-bold"><?= __('PF A/C'); ?>:</span>
@@ -293,11 +293,11 @@ $org_location =  $org_details['location_city'] . ", " .$org_details['location_po
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
                                         <span class="mr-15 font-weight-bold"><?= __('UAN'); ?>:</span>
-                                        <span class="text-right"><?php echo $payslip_data_list['pf_uan']; ?></span>
+                                        <span class="text-right"><?php echo renderSensitiveDataWithToggle($payslip_data_list['pf_uan'], 'uan_number'); ?></span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
                                         <span class="mr-15 font-weight-bold"><?= __('PAN'); ?>:</span>
-                                        <span class="text-right"><?php echo $payslip_data_list['pan_number']; ?></span>
+                                        <span class="text-right"><?php echo renderSensitiveDataWithToggle($payslip_data_list['pan_number'], 'pan'); ?></span>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column text-md-right">

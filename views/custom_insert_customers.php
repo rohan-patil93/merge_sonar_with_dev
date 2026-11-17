@@ -931,7 +931,7 @@ function toggleRowLock(button) {
 											</tr>
 											<tr>
 												<th scope="row"><?= __('Contact') ?></th>
-												<td><?php echo $customers['mobile']; ?></td>
+												<td><?php echo renderSensitiveDataWithToggle($customers['mobile'], 'mobile', false); ?></td>
 											</tr>
 											<tr>
 												<th scope="row"><?= __('Email') ?></th>
@@ -939,7 +939,7 @@ function toggleRowLock(button) {
 											</tr>
 											<tr>
 												<th scope="row"><?= __('Phone') ?></th>
-												<td><?php echo emptytextdashShow($customers['phone']); ?></td>
+												<td><?php echo renderSensitiveDataWithToggle($customers['phone'], 'mobile'); ?></td>
 											</tr>
 
 										</tbody>
@@ -1068,19 +1068,19 @@ function toggleRowLock(button) {
 											</tr>
 											<tr>
 												<th scope="row"><?= __('GSTIN') ?></th>
-												<td><?php echo emptytextdashShow($customers['gstin']); ?></td>
+												<td><?php echo renderSensitiveDataWithToggle($customers['gstin'], 'gst'); ?></td>
 											</tr>
 											<tr>
 												<th scope="row"><?= __('Tax Reg.No.') ?></th>
-												<td><?php echo emptytextdashShow($customers['customer_tax_reg_no']); ?></td>
+												<td><?php echo renderSensitiveDataWithToggle($customers['customer_tax_reg_no'], 'gst'); ?></td>
 											</tr>
 											<tr>
 												<th scope="row"><?= __('CST Reg.No') ?></th>
-												<td><?php echo emptytextdashShow($customers['cst_reg_no']); ?></td>
+												<td><?php echo renderSensitiveDataWithToggle($customers['cst_reg_no'], 'gst'); ?></td>
 											</tr>
 											<tr>
 												<th scope="row"><?= __('PAN') ?></th>
-												<td><?php echo emptytextdashShow($customers['pan_no']); ?></td>
+												<td><?php echo renderSensitiveDataWithToggle($customers['pan_no'], 'pan'); ?></td>
 											</tr>
 										</tbody>
 									</table>
@@ -1117,7 +1117,7 @@ function toggleRowLock(button) {
 											</tr>
 											<tr>
 												<th scope="row"><?= __('Contact Person Mobile') ?></th>
-												<td><?php echo emptytextdashShow($customers['mobile']); ?></td>
+												<td><?php echo renderSensitiveDataWithToggle($customers['mobile'], 'mobile', false); ?></td>
 											</tr>
 
 										</tbody>
@@ -1224,7 +1224,7 @@ function toggleRowLock(button) {
 								<div class="form-group col-lg-3">
 									<span class="form-label"><?= __('Phone') ?></span>
 									<div class="kt-input-icon">
-										<input class="form-control" type="number" id="phone" name="phone" value="<?php echo $customers['phone']; ?>" title="<?= __('Phone') ?>" aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>">
+										<input class="form-control" type="number" id="phone" name="phone" value="<?php echo dynamicDataDecode($customers['phone']); ?>" title="<?= __('Phone') ?>" aria-label="<?= htmlspecialchars(__('Phone'), ENT_QUOTES, 'UTF-8'); ?>">
 									</div>
 									<div style="display: none;color: red;" id="phone_err"> <?= __('Please enter phone'); ?> </div>
 								</div>
@@ -1493,19 +1493,19 @@ function toggleRowLock(button) {
 									<div class="col-lg-6" style="margin-bottom: 2rem;">
 										<span class="form-label"><?= __('Tax Reg. No.') ?></span>
 										<div class="kt-input-icon">
-											<input class="form-control" type="text" id="customer_tax_reg_no" name="customer_tax_reg_no" value="<?php echo $customers['customer_tax_reg_no']; ?>" title="<?= __('Customer Tax Reg No') ?>" aria-label="<?= htmlspecialchars(__('Customer Tax Reg No'), ENT_QUOTES, 'UTF-8'); ?>">
+											<input class="form-control" type="text" id="customer_tax_reg_no" name="customer_tax_reg_no" value="<?php echo dynamicDataDecode($customers['customer_tax_reg_no']); ?>" title="<?= __('Customer Tax Reg No') ?>" aria-label="<?= htmlspecialchars(__('Customer Tax Reg No'), ENT_QUOTES, 'UTF-8'); ?>">
 										</div>
 									</div>
 									<div class="col-lg-6" style="margin-bottom: 2rem;">
 										<span class="form-label"><?= __('VAT/CST Reg. No.') ?></span>
 										<div class="kt-input-icon">
-											<input class="form-control" type="text" id="cst_reg_no" name="cst_reg_no" value="<?php echo $customers['cst_reg_no']; ?>" title="<?= __('Cst Reg No') ?>" aria-label="<?= htmlspecialchars(__('Cst Reg No'), ENT_QUOTES, 'UTF-8'); ?>">
+											<input class="form-control" type="text" id="cst_reg_no" name="cst_reg_no" value="<?php echo dynamicDataDecode($customers['cst_reg_no']); ?>" title="<?= __('Cst Reg No') ?>" aria-label="<?= htmlspecialchars(__('Cst Reg No'), ENT_QUOTES, 'UTF-8'); ?>">
 										</div>
 									</div>
 									<div class="col-lg-6" style="margin-bottom: 2rem;">
 										<span class="form-label"><?= __('PAN No.') ?></span>
 										<div class="kt-input-icon">
-											<input class="form-control" type="text" id="pan_no" name="pan_no" onblur="checkalreadyavailableornotcustomerorvendordetails('PAN_NO')" value="<?php echo $customers['pan_no']; ?>" title="<?= __('Pan No') ?>" aria-label="<?= htmlspecialchars(__('Pan No'), ENT_QUOTES, 'UTF-8'); ?>">
+											<input class="form-control" type="text" id="pan_no" name="pan_no" onblur="checkalreadyavailableornotcustomerorvendordetails('PAN_NO')" value="<?php echo dynamicDataDecode($customers['pan_no']); ?>" title="<?= __('Pan No') ?>" aria-label="<?= htmlspecialchars(__('Pan No'), ENT_QUOTES, 'UTF-8'); ?>">
 										</div>
 										<span class="text-danger f-14" id="pannoerror"  style="display:none"></span>
 										<div style="display: none;color: red;" id="pan_no_err"> <?= __('Please Enter PAN No.'); ?> </div>

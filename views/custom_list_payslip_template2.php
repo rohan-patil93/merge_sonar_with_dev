@@ -189,7 +189,7 @@ $org_location =  $org_details['location'];
                             <tbody>
                                 <tr class="font-weight-bolder">
                                     <td><?php echo $payslip_data_list['bank']; ?></td>
-                                    <td><?php echo $payslip_data_list['bank_account_no']; ?></td>
+                                    <td><?php echo renderSensitiveDataWithToggle($payslip_data_list['bank_account_no'], 'bank_account', false); ?></td>
 
                                     <td class="text-danger font-size-h3 font-weight-boldest"><?php echo $payslip_data_list['net'];?></td>
                                 </tr>

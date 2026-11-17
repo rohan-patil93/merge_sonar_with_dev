@@ -591,7 +591,7 @@ foreach($feedbackreportresult as $feedbackreportresult){  ?>
 
                    <input type="hidden" name="candidate_name" id="candidate_name" value="<?php echo $jobcand['candidate_name']; ?>">
                    <input type="hidden" name="candidate_email" id="candidate_email" value="<?php echo $jobcand['candidate_email']; ?>">
-                   <input type="hidden" name="candidate_phone" id="candidate_phone" value="<?php echo $jobcand['candidate_phone']; ?>">
+                   <input type="hidden" name="candidate_phone" id="candidate_phone" value="<?php echo dynamicDataDecode($jobcand['candidate_phone']); ?>">
                    <input type="hidden" name="created_by" id="created_by" value="<?php echo $_SESSION['userid']; ?>">
                    <div class="<?php echo $recruitment_manager == $_SESSION['userid']?"":"event_disabled"; ?>" >
                   <div class="mt-2">
@@ -753,7 +753,7 @@ foreach($feedbackreportresult as $feedbackreportresult){  ?>
        <div class="mt-2">
          <h6><?= __('Phone'); ?>
           <i class="ti-mobile float-right"></i></h6>
-          <span>+91 <?php echo $jobcand['candidate_phone']; ?></span>
+          <span>+91 <?php echo renderSensitiveDataWithToggle($jobcand['candidate_phone'], 'mobile'); ?></span>
 
         </div>
         <div class="mt-2">

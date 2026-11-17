@@ -180,7 +180,7 @@ foreach($alldata['castes'] as $maritalstatus1){
             </tr>
             <tr>
                 <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Contact Number'); ?></th>
-                <td colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo $data['phone']; ?></td>
+                <td colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?php echo renderSensitiveDataWithToggle($data['phone'], 'mobile', false); ?></td>
                 <th scope="col" colspan="2" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;"><?= __('Emergency Contact Number'); ?></th>
                 <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;font-size:10px; text-align: left;">
                     <?php echo $data['emergency_contact_number']; ?>

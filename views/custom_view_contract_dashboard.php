@@ -517,7 +517,7 @@ function getLatestContracts($contracts, $limit = 15)
                                                     <span class="form-label label label-danger"><?= __('Expired'); ?></span>
                                                 <?php endif; ?>
                                             </td>
-                                            <td><?= htmlspecialchars($contract['transaction_no'] ?? 'Not Provided') ?></td>
+                                            <td><?= renderSensitiveDataWithToggle($contract['transaction_no'] ?? '', 'text') ?></td>
                                            <?php  ?>
 
                                             <td>

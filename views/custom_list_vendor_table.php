@@ -83,7 +83,7 @@ function matchingResult($post,$candidate){
 
                     <td><?php echo $candidate['display_name']; ?></td>
                     <td><?php echo $candidate['email_id']; ?></td>
-                    <td><?php echo DynamicPhoneNumberFormt($candidate['phone']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($candidate['phone'], 'mobile'); ?></td>
                     <td><?php echo $locationslist[$candidate['location_id']]; ?></td>
 
                     <td>
@@ -176,7 +176,7 @@ function matchingResult($post,$candidate){
       <span class="f-12 f-w-600 mb-0"><?= __('Location'); ?></span>
     </div>
     <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['phone'] !=""?$candidate['phone'] : "-"; ?></span>
+      <span class="f-12 f-w-600 text-muted mb-0"><?php echo renderSensitiveDataWithToggle($candidate['phone'], 'mobile'); ?></span>
     </div>
     <div class="col-lg-6 mt-1">
       <span class="f-12 f-w-600 text-muted mb-0"><?php echo $locationslist[$candidate['location_id']] !=""?$locationslist[$candidate['location_id']]:"-"; ?></span>
@@ -188,10 +188,10 @@ function matchingResult($post,$candidate){
       <span class="f-12 f-w-600 mb-0"><?= __('Tax Registation No'); ?></span>
     </div>
     <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['gstin'] !=""?$candidate['gstin'] : "-"; ?></span>
+      <span class="f-12 f-w-600 text-muted mb-0"><?php echo renderSensitiveDataWithToggle($candidate['gstin'], 'gst'); ?></span>
     </div>
     <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['vendor_tax_reg_no'] !=""?$candidate['vendor_tax_reg_no'] : "-"; ?></span>
+      <span class="f-12 f-w-600 text-muted mb-0"><?php echo renderSensitiveDataWithToggle($candidate['vendor_tax_reg_no'], 'gst'); ?></span>
     </div>
      <div class="col-lg-6 mt-1">
       <span class="f-12 f-w-600  mb-0"><?= __('CST Registation No'); ?></span>
@@ -200,10 +200,10 @@ function matchingResult($post,$candidate){
       <span class="f-12 f-w-600 mb-0"><?= __('PAN No'); ?></span>
     </div>
     <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['cst_reg_no'] !=""?$candidate['cst_reg_no'] : "-"; ?></span>
+      <span class="f-12 f-w-600 text-muted mb-0"><?php echo renderSensitiveDataWithToggle($candidate['cst_reg_no'], 'gst'); ?></span>
     </div>
     <div class="col-lg-6 mt-1">
-      <span class="f-12 f-w-600 text-muted mb-0"><?php echo $candidate['pan_no'] !=""?$candidate['pan_no'] : "-"; ?></span>
+      <span class="f-12 f-w-600 text-muted mb-0"><?php echo renderSensitiveDataWithToggle($candidate['pan_no'], 'pan'); ?></span>
     </div>
     <div class="col-lg-3 mt-1 mb-2">
       <?= __('Ratting'); ?>

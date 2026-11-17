@@ -158,7 +158,7 @@ if($_GET['viewcheck']==1){
             <tr>
                 <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('PAN'); ?></th>
                 <td colspan="2" style="border: #CCCCCC solid 3px; text-align: left;">
-                    <?php echo $payslip_data_list['pan_number']; ?>
+                    <?php echo renderSensitiveDataWithToggle($payslip_data_list['pan_number'], 'pan'); ?>
                 </td>
                 <th scope="col"style="border: #CCCCCC solid 3px; text-align: left;"><?= __('LOP'); ?></th>
                 <th scope="col" class="text-end" colspan="2" style="border: #CCCCCC solid 3px;">
@@ -168,12 +168,12 @@ if($_GET['viewcheck']==1){
             <tr>
                 <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('Bank Account Number'); ?></th>
                 <td colspan="2" style="border: #CCCCCC solid 3px; text-align: left;">
-                    <?php echo $payslip_data_list['bank_account_no']; ?>
+                    <?php echo renderSensitiveDataWithToggle($payslip_data_list['bank_account_no'], 'bank_account', false); ?>
                 </td>
 
                 <th scope="col" style="border: #CCCCCC solid 3px; text-align: left;"><?= __('PF UAN'); ?></th>
                 <th scope="col" class="text-end" colspan="2" style="border: #CCCCCC solid 3px;">
-                    <?php echo $payslip_data_list['pf_uan']; ?>
+                    <?php echo renderSensitiveDataWithToggle($payslip_data_list['pf_uan'], 'uan_number'); ?>
                 </th>
             </tr>
             <tr>

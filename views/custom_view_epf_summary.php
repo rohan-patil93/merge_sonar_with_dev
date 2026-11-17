@@ -85,7 +85,7 @@ if(!function_exists('render_epf_summary_table')){
                             <tr role="row" class="odd">
                                 <th scope="col"><?php echo valueemtpydash($first_row['emp_code']); ?></th>
                                 <th scope="col"><?php echo valueemtpydash($first_row['Employee_Name']); ?></th>
-                                <th scope="col"><?php echo valueemtpydash($first_row['pf_uan']); ?></th>
+                                <th scope="col"><?php echo renderSensitiveDataWithToggle($first_row['pf_uan'], 'uan_number'); ?></th>
                                 <th scope="col" class="text-right"><?php echo valueemtpydash(customeummarmonyformate($first_row['epf_base_amount'])); ?></th>
                                 <th scope="col" class="text-right"><?php echo valueemtpydash(customeummarmonyformate($first_row['pf_salary_component_actual'])); ?></th>
                                 <td class="">-</td>

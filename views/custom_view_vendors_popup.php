@@ -208,7 +208,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Phone'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['phone']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['phone'], 'mobile'); ?></td>
                 </tr>
                 <?php
                    }
@@ -264,7 +264,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Mobile'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['mobile']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['mobile'], 'mobile'); ?></td>
                 </tr>
                 <?php
                    }
@@ -323,7 +323,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col" style="width: 40%;"><?= __('Tax/Vat Reg.No.'); ?></th>
-                    <td style="width: 60%;"><?php echo emptytextdashShow($vendordetail['vendor_tax_reg_no']); ?></td>
+                    <td style="width: 60%;"><?php echo renderSensitiveDataWithToggle($vendordetail['vendor_tax_reg_no'], 'gst'); ?></td>
                 </tr>
                 <?php
                    }
@@ -339,7 +339,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('DUNS No.'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['duns_no']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['duns_no'], 'text'); ?></td>
                 </tr>
                 <?php
                    }
@@ -388,7 +388,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col" style="width: 40%;"><?= __('Bank Name'); ?></th>
-                    <td style="width: 60%;"><?php echo emptytextdashShow($vendordetail['bank_name']); ?></td>
+                    <td style="width: 60%;"><?php echo renderSensitiveDataWithToggle($vendordetail['bank_name'], 'text'); ?></td>
                 </tr>
                 <?php
                    }
@@ -396,7 +396,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Bank Address'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['bank_address']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['bank_address'], 'text'); ?></td>
                 </tr>
                 <?php
                    }
@@ -428,7 +428,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Pincode'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['bank_post_code']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['bank_post_code'], 'text'); ?></td>
                 </tr>
                 <?php
                    }
@@ -436,7 +436,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Company Bank Beneficiary Name'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['bank_beneficiary_name']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['bank_beneficiary_name'], 'text'); ?></td>
                 </tr>
                 <?php
                    }
@@ -444,7 +444,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Bank Account Number'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['bank_account_no']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['bank_account_no'], 'bank_account'); ?></td>
                 </tr>
                 <?php
                    }
@@ -468,7 +468,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Routing Wire Code'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['routing_wire_Code']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['routing_wire_Code'], 'ifsc'); ?></td>
                 </tr>
                 <?php
                    }
@@ -476,7 +476,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('SWIFT/BIC Code'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['swift_bic_code']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['swift_bic_code'], 'ifsc'); ?></td>
                 </tr>
                 <?php
                    }
@@ -484,7 +484,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('IBAN'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['iban_code']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['iban_code'], 'bank_account'); ?></td>
                 </tr>
                 <?php
                    }
@@ -492,7 +492,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Contact Person Name (Bank related queries)'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['bank_query_person_name']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['bank_query_person_name'], 'text'); ?></td>
                 </tr>
                 <?php
                    }
@@ -500,7 +500,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Contact no'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['bank_query_contact_no']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['bank_query_contact_no'], 'mobile'); ?></td>
                 </tr>
                 <?php
                    }
@@ -508,7 +508,7 @@ function convertHTMLToPDF() {
                 ?>
                 <tr>
                     <th scope="col"><?= __('Contact Email'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['bank_query_email_id']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['bank_query_email_id'], 'email'); ?></td>
                 </tr>
                 <?php } ?>
             </table>
@@ -606,7 +606,7 @@ if($fieldaccesright['field']['gsttype']!="NA"){ ?>
 if($fieldaccesright['field']['gstin']!="NA"){ ?>
                 <tr>
                     <th scope="col" style="text-align: left;"><?= __('GSTIN'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['gstin']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['gstin'], 'gst'); ?></td>
                 </tr>
                 <td><?php echo emptytextdashShow($vendorslist[$vendordetail['parent_vendor']]['display_name']); ?></td>
                 <?php }
@@ -619,13 +619,13 @@ if($fieldaccesright['field']['vendor_po_notes']!="NA"){ ?>
 if($fieldaccesright['field']['cst_reg_no']!="NA"){ ?>
                 <tr>
                     <th scope="col" style="text-align: left;"><?= __('CST Reg.No'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['cst_reg_no']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['cst_reg_no'], 'gst'); ?></td>
                 </tr>
                 <?php }
 if($fieldaccesright['field']['pan_no']!="NA"){ ?>
                 <tr>
                     <th scope="col" style="text-align: left;"><?= __('PAN No.'); ?></th>
-                    <td><?php echo emptytextdashShow($vendordetail['pan_no']); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($vendordetail['pan_no'], 'pan'); ?></td>
                 </tr>
                 <?php }
 if($fieldaccesright['field']['tds_apply']!="NA"){ ?>

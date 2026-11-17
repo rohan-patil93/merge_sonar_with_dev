@@ -761,7 +761,7 @@ function save_statuse_bilable_onsite(){
                                                  <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Aadhar Card">
                                              </td>
                                              <td>
-                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['adhar_no']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo dynamicDataDecode($data['adhar_no']); ?>" disabled>
                                              </td>
 
                                              <td>
@@ -776,7 +776,7 @@ function save_statuse_bilable_onsite(){
                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Passport" disabled>
                                              </td>
                                              <td>
-                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['passport']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo dynamicDataDecode($data['passport']); ?>" disabled>
                                              </td>
 
                                              <td>
@@ -791,7 +791,7 @@ function save_statuse_bilable_onsite(){
                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Driving">
                                              </td>
                                              <td>
-                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['driving_licence']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo dynamicDataDecode($data['driving_licence']); ?>" disabled>
                                              </td>
 
                                              <td>
@@ -806,7 +806,7 @@ function save_statuse_bilable_onsite(){
                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Pan Number">
                                              </td>
                                              <td>
-                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['pan_number']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo dynamicDataDecode($data['pan_number']); ?>" disabled>
                                              </td>
 
                                              <td>
@@ -821,7 +821,7 @@ function save_statuse_bilable_onsite(){
                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="PF Number">
                                              </td>
                                              <td>
-                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['pf_no']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo dynamicDataDecode($data['pf_no']); ?>" disabled>
                                              </td>
 
                                              <td>
@@ -836,7 +836,7 @@ function save_statuse_bilable_onsite(){
                                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="UAN Number">
                                              </td>
                                              <td>
-                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo $data['pf_uan']; ?>" disabled>
+                                                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" class="form-control" value="<?php echo dynamicDataDecode($data['pf_uan']); ?>" disabled>
                                              </td>
 
                                              <td>

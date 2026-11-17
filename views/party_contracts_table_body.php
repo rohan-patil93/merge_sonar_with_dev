@@ -26,7 +26,7 @@ if (!function_exists('party_contracts_render_rows')) {
                 <tr>
                     <td><?php echo $i++; ?></td>
                     <td><?php echo htmlspecialchars($row['contract_name'] ?? '-'); ?></td>
-                    <td><?php echo htmlspecialchars($row['transaction_no'] ?? '-'); ?></td>
+                    <td><?php echo renderSensitiveDataWithToggle($row['transaction_no'] ?? '', 'text'); ?></td>
                     <td><?php echo $amcBadge; ?></td>
                     <td><?php echo $nextVisit; ?></td>
                     <td><?php echo $overdue; ?></td>

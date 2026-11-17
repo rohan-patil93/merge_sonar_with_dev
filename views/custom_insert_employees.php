@@ -1183,7 +1183,7 @@ if(count((array)$emerge_details)>0){
                                      <input aria-label="<?php echo __('Input field'); ?>" type="text" name="" disabled class="form-control" value="<?php echo __('Adhar Card'); ?>">
                                  </td>
                                  <td>
-                                    <input aria-label="<?php echo __('Adhar No'); ?>" type="text" name="adhar_no" class="form-control" value="<?php echo $data['adhar_no']; ?>" >
+                                    <input aria-label="<?php echo __('Adhar No'); ?>" type="text" name="adhar_no" class="form-control" value="<?php echo dynamicDataDecode($data['adhar_no']); ?>" >
                                  </td>
                                  <td>
                                     <input aria-label="<?php echo __('Adhar Issue Date'); ?>" type="text" name="adhar_issue_date" class="form-control datepicker" value="<?php echo $data['adhar_issue_date']!="0000-00-00"?$data['adhar_issue_date']:""; ?>" >
@@ -1198,7 +1198,7 @@ if(count((array)$emerge_details)>0){
                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" name="" disabled class="form-control" value="<?php echo __('Passport'); ?>" disabled>
                                  </td>
                                  <td>
-                                    <input aria-label="<?php echo __('Passport'); ?>" type="text" name="passport" class="form-control" value="<?php echo $data['passport']; ?>" >
+                                    <input aria-label="<?php echo __('Passport'); ?>" type="text" name="passport" class="form-control" value="<?php echo dynamicDataDecode($data['passport']); ?>" >
                                  </td>
                                  <td>
                                     <input aria-label="<?php echo __('Passport Issue Date'); ?>" type="text" name="passport_issue_date" class="form-control datepicker" value="<?php echo $data['passport_issue_date']!="0000-00-00"?$data['passport_issue_date']:""; ?>" >
@@ -1214,7 +1214,7 @@ if(count((array)$emerge_details)>0){
                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" name="" disabled class="form-control" value="<?php echo __('Driving'); ?>">
                                  </td>
                                  <td>
-                                    <input aria-label="<?php echo __('Driving Licence'); ?>" type="text" name="driving_licence" class="form-control" value="<?php echo $data['driving_licence']; ?>" >
+                                    <input aria-label="<?php echo __('Driving Licence'); ?>" type="text" name="driving_licence" class="form-control" value="<?php echo dynamicDataDecode($data['driving_licence']); ?>" >
                                  </td>
                                  <td>
                                     <input aria-label="<?php echo __('Driving Licence Issue Date'); ?>" type="text" name="driving_licence_issue_date" class="form-control datepicker" value="<?php echo $data['driving_licence_issue_date']!="0000-00-00"?$data['driving_licence_issue_date']:""; ?>" >
@@ -1229,7 +1229,7 @@ if(count((array)$emerge_details)>0){
                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" name="" disabled class="form-control" value="<?php echo __('Pan Number'); ?>">
                                  </td>
                                  <td>
-                                    <input aria-label="<?php echo __('Pan Number'); ?>" type="text" name="pan_number" class="form-control" value="<?php echo $data['pan_number']; ?>" >
+                                    <input aria-label="<?php echo __('Pan Number'); ?>" type="text" name="pan_number" class="form-control" value="<?php echo dynamicDataDecode($data['pan_number']); ?>" >
                                  </td>
                                  <td>
                                     <input aria-label="<?php echo __('Pan Issue Date'); ?>" type="text" name="pan_issue_date" class="form-control datepicker" value="<?php echo $data['pan_issue_date']!="0000-00-00"?$data['pan_issue_date']:""; ?>" >
@@ -1244,7 +1244,7 @@ if(count((array)$emerge_details)>0){
                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" name="" disabled class="form-control" value="<?php echo __('PF Number'); ?>">
                                  </td>
                                  <td>
-                                    <input aria-label="<?php echo __('Pf No'); ?>" type="text" name="pf_no" class="form-control" value="<?php echo $data['pf_no']; ?>" >
+                                    <input aria-label="<?php echo __('Pf No'); ?>" type="text" name="pf_no" class="form-control" value="<?php echo dynamicDataDecode($data['pf_no']); ?>" >
                                  </td>
                                  <td>
                                     <input aria-label="<?php echo __('Pf Issue Date'); ?>" type="text" name="pf_issue_date" class="form-control datepicker" value="<?php echo $data['pf_issue_date']!="0000-00-00"?$data['pf_issue_date']:""; ?>" >
@@ -1259,7 +1259,7 @@ if(count((array)$emerge_details)>0){
                                        <input aria-label="<?php echo __('Input field'); ?>" type="text" name="" disabled class="form-control" value="<?php echo __('UAN Number'); ?>">
                                  </td>
                                  <td>
-                                    <input aria-label="<?php echo __('Pf Uan'); ?>" type="text" name="pf_uan" class="form-control" value="<?php echo $data['pf_uan']; ?>" >
+                                    <input aria-label="<?php echo __('Pf Uan'); ?>" type="text" name="pf_uan" class="form-control" value="<?php echo dynamicDataDecode($data['pf_uan']); ?>" >
                                  </td>
                                  <td>
                                     <input aria-label="<?php echo __('Pf Uan Issue Date'); ?>" type="text" name="pf_uan_issue_date" class="form-control datepicker" value="<?php echo $data['pf_uan_issue_date']!="0000-00-00"?$data['  pf_uan_issue_date']:""; ?>" >

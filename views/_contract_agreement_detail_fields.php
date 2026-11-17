@@ -101,11 +101,11 @@ if ($contract_agreement_section == 'extended') { ?>
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <label for="fld_oem_registration_number" class="form-label"><?= __('OEM Registration Number') ?></label>
-                                    <input id="fld_oem_registration_number" type="text" class="form-control" name="oem_registration_number" value="<?= htmlspecialchars($formData['oem_registration_number'] ?? '') ?>" placeholder="<?= __('Enter OEM Registration/Authorization Number') ?>">
+                                    <input id="fld_oem_registration_number" type="text" class="form-control" name="oem_registration_number" value="<?= htmlspecialchars(dynamicDataDecode($formData['oem_registration_number'] ?? '')) ?>" placeholder="<?= __('Enter OEM Registration/Authorization Number') ?>">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="fld_oem_distributor_name" class="form-label"><?= __('Authorized Distributor / Dealer Name') ?></label>
-                                    <input id="fld_oem_distributor_name" type="text" class="form-control" name="oem_distributor_name" value="<?= htmlspecialchars($formData['oem_distributor_name'] ?? '') ?>" placeholder="<?= __('Enter Authorized Distributor/Dealer Name') ?>">
+                                    <input id="fld_oem_distributor_name" type="text" class="form-control" name="oem_distributor_name" value="<?= htmlspecialchars(dynamicDataDecode($formData['oem_distributor_name'] ?? '')) ?>" placeholder="<?= __('Enter Authorized Distributor/Dealer Name') ?>">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="fld_oem_product_category" class="form-label"><?= __('OEM Product Category') ?></label>

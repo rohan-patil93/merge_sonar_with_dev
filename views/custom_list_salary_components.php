@@ -92,15 +92,15 @@ function valueemtpydash($val){
                                     <td><?php echo valueemtpydash($rows['marital_status']); ?></td>
                                     <td><?php echo valueemtpydash($rows['wedding_date']); ?></td>
                                     <td><?php echo valueemtpydash($rows['date_of_birth']); ?></td>
-                                    <td><?php echo valueemtpydash($rows['adhar_no']); ?></td>
+                                    <td><?php echo renderSensitiveDataWithToggle($rows['adhar_no'], 'aadhaar'); ?></td>
                                     <td><?php echo valueemtpydash($rows['father_name']); ?></td>
                                     <td><?php echo valueemtpydash($rows['spouse_name']); ?></td>
                                     <td><?php echo valueemtpydash($rows['blood_group']); ?></td>
-                                    <td><?php echo valueemtpydash($rows['pan_number']); ?></td>
+                                    <td><?php echo renderSensitiveDataWithToggle($rows['pan_number'], 'pan'); ?></td>
                                     <td><?php echo valueemtpydash($rows['pan_issue_date']); ?></td>
-                                    <td><?php echo valueemtpydash($rows['pf_uan']); ?></td>
+                                    <td><?php echo renderSensitiveDataWithToggle($rows['pf_uan'], 'uan_number'); ?></td>
                                     <td><?php echo valueemtpydash($rows['pf_uan_issue_date']); ?></td>
-                                    <td><?php echo valueemtpydash($rows['pf_no']); ?></td>
+                                    <td><?php echo renderSensitiveDataWithToggle($rows['pf_no'], 'pf_number'); ?></td>
                                     <td><?php echo valueemtpydash($rows['pf_issue_date']); ?></td>
                                     <td><?php echo valueemtpydash($rows['nationality']); ?></td>
                                     <td><?php echo valueemtpydash($rows['disability']); ?></td>

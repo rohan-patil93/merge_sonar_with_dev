@@ -90,7 +90,7 @@ if(!function_exists('render_epf_ecr_table')){
                             ?>
                             <tr role="row" class="odd">
                                 <th scope="col"><?php echo valueemtpydash($ecr_data['emp_code']); ?></th>
-                                <th scope="col"><?php echo valueemtpydash($ecr_data['pf_uan']); ?></th>
+                                <th scope="col"><?php echo renderSensitiveDataWithToggle($ecr_data['pf_uan'], 'uan_number'); ?></th>
                                 <th scope="col"><?php echo valueemtpydash($ecr_data['Employee_Name']); ?></th>
                                 <th scope="col" class="text-right"><?php echo valueemtpydash($ecr_data['epf_employee_contribution']); ?></th>
                                 <th scope="col" class="text-right"><?php echo valueemtpydash($ecr_data['epf_employer_contribution']); ?></th>

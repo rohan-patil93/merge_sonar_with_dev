@@ -526,31 +526,6 @@ $bank_work_flow = "Y";
 	            <?php }?>
            </tbody>
         </table>
-	<script type="text/javascript">
-	if (typeof toggleSensitiveDataVisibility !== 'function') {
-		function toggleSensitiveDataVisibility(btn) {
-			var parent = btn.closest ? btn.closest('.sensitive-data-container') : btn.parentElement;
-			if (!parent) return;
-			var target = parent.querySelector ? parent.querySelector('.sensitive-data-text') : null;
-			if (!target) return;
-
-			var isMasked = target.getAttribute('data-state') !== 'unmasked';
-			if (isMasked) {
-				target.textContent = target.getAttribute('data-unmasked') || '';
-				target.setAttribute('data-state', 'unmasked');
-				btn.classList.remove('fa-eye', 'ti-eye');
-				btn.classList.add('fa-eye-slash');
-				btn.setAttribute('title', 'Click to hide sensitive information');
-			} else {
-				target.textContent = target.getAttribute('data-masked') || '';
-				target.setAttribute('data-state', 'masked');
-				btn.classList.remove('fa-eye-slash');
-				btn.classList.add('fa-eye');
-				btn.setAttribute('title', 'Click to view sensitive information');
-			}
-		}
-	}
-	</script>
    <?php }elseif($_POST['pagetype'] =="experience_details" || $_POST['showpagetype'] =="experience_details"){
 		$fieldaccesright = $vafield['experience_details'];
 	if(count((array)$emp_work_experiences) !="0"){

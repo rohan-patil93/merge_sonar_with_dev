@@ -117,7 +117,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                             <span class="form-label"><?= __('PAN Number'); ?></span>
                             <?php echo $vendordetail['pan_no'] ==""?"<span class='text-danger d-block f-12'>".__('Please Update PAN Number')."</span>":""; ?>
                             <div class="input-group input-group-button mb-0">
-                                <input aria-label="<?= htmlspecialchars(__('Pan No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="pan_no_popup" value="<?php  echo $vendordetail['pan_no']; ?>" autocomplete="off" readonly>
+                                <input aria-label="<?= htmlspecialchars(__('Pan No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="pan_no_popup" value="<?php  echo dynamicDataDecode($vendordetail['pan_no']); ?>" autocomplete="off" readonly>
                                 <button class="btn <?php echo $class; ?>" type="button" id="btn_pan_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
                             </div>
                             <span class="f-12 text-danger pan_verification_error" ><?php echo $spanmsg; ?></span>
@@ -210,7 +210,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                             <span class="form-label"><?= __('GSTN Number'); ?></span>
                             <?php echo $vendordetail['gstin'] ==""?"<span class='text-danger d-block f-12'>".__('Please Update GSTIN Number')."</span>":""; ?>
                             <div class="input-group input-group-button mb-0">
-                                <input aria-label="<?= htmlspecialchars(__('Gstn No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="gstn_no_popup" value="<?php  echo $vendordetail['gstin']; ?>" autocomplete="off" readonly>
+                                <input aria-label="<?= htmlspecialchars(__('Gstn No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1" id="gstn_no_popup" value="<?php  echo dynamicDataDecode($vendordetail['gstin']); ?>" autocomplete="off" readonly>
                                 <button class="btn <?php echo $class; ?>" type="button" id="btn_gstn_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
                             </div>
                             <span class="f-12 text-danger gstn_verification_error"><?php echo $spanmsg; ?></span>
@@ -291,7 +291,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                             <tr>
                                 <th scope="col"  class="p-2"><?= __('Mobile'); ?></th>
                                 <td  class="p-2">:</td>
-                                <td class="w-b-w-s p-2"><?php echo emptytextdashShow($vendordetail['mobile']); ?></td>
+                                <td class="w-b-w-s p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['mobile'], 'mobile'); ?></td>
                                 <td class="w-b-w-s text-danger p-2"><?php echo $api_response_details['result']['gstnDetailed']['principalPlaceAddress']['mobile']; ?></td>
 
                             </tr>
@@ -446,7 +446,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                             <span class="form-label"><?= __('TAN Number'); ?></span>
                             <?php echo $vendordetail['tan_number'] ==""?"<span class='text-danger d-block f-12'>".__('Please Update Tan Number')."</span>":""; ?>
                                <div class="input-group input-group-button mb-0">
-                                <input aria-label="<?= htmlspecialchars(__('Tan No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1"  id="tan_no_popup" value="<?php  echo $vendordetail['tan_number']; ?>" autocomplete="off" readonly>
+                                <input aria-label="<?= htmlspecialchars(__('Tan No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1"  id="tan_no_popup" value="<?php  echo dynamicDataDecode($vendordetail['tan_number']); ?>" autocomplete="off" readonly>
                                 <button class="btn <?php echo $class; ?>" type="button" id="btn_tan_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
                             </div>
                             <span class="f-12 text-danger tan_verification_error"><?php echo $spanmsg; ?></span>
@@ -537,13 +537,13 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                         <div class="col-lg-5">
                             <span class="form-label"><?= __('IFSC code'); ?></span>
                             <?php echo $vendordetail['ifsc_code'] ==""?"<span class='text-danger d-block f-12'>".__('Please Update IFSC Code')."</span>":""; ?>
-                            <input aria-label="<?= htmlspecialchars(__('Ifsc Code Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="ifsc_code_popup" value="<?php  echo $vendordetail['ifsc_code']; ?>"  readonly>
+                            <input aria-label="<?= htmlspecialchars(__('Ifsc Code Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" id="ifsc_code_popup" value="<?php  echo dynamicDataDecode($vendordetail['ifsc_code']); ?>"  readonly>
                         </div>
                            <div class="col-lg-7">
                                <span class="form-label"><?= __('Bank Account Number'); ?></span>
                                <?php echo $vendordetail['bank_account_no'] ==""?"<span class='text-danger d-block f-12'>".__('Please Update Tan Number')."</span>":""; ?>
                                <div class="input-group input-group-button mb-0">
-                                <input aria-label="<?= htmlspecialchars(__('Bank Account No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1"  id="bank_account_no_popup" value="<?php  echo $vendordetail['bank_account_no']; ?>" autocomplete="off" readonly>
+                                <input aria-label="<?= htmlspecialchars(__('Bank Account No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1"  id="bank_account_no_popup" value="<?php  echo dynamicDataDecode($vendordetail['bank_account_no']); ?>" autocomplete="off" readonly>
                                 <button class="btn <?php echo $class; ?>" type="button" id="btn_bank_account_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
                             </div>
                             <span class="f-12 text-danger bank_verification_error"><?php echo $spanmsg; ?></span>
@@ -618,7 +618,7 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                            <span class="form-label"><?= __('Udyam Registration/MSME Number'); ?></span>
                            <?php echo $vendordetail['msme_number'] ==""?"<span class='text-danger d-block f-12'>".__('Please Update MSME Number')."</span>":""; ?>
                            <div class="input-group input-group-button mb-0">
-                            <input aria-label="<?= htmlspecialchars(__('Msme No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1"  id="msme_no_popup" value="<?php  echo $vendordetail['msme_number']; ?>" autocomplete="off" readonly>
+                            <input aria-label="<?= htmlspecialchars(__('Msme No Popup'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control width1"  id="msme_no_popup" value="<?php  echo dynamicDataDecode($vendordetail['msme_number']); ?>" autocomplete="off" readonly>
                             <button class="btn <?php echo $class; ?>" type="button" id="btn_msme_no_popup" onclick="<?php echo $onclickfun; ?>" <?php echo $disbled_btn; ?>><?php echo $label; ?></button>
                         </div>
                         <span class="f-12 text-danger msme_verification_error"><?php echo $spanmsg; ?></span>

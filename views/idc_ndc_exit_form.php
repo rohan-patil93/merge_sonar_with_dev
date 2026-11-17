@@ -87,13 +87,13 @@ $signature = $data['signature'] ?? [];
             <th scope="col"><?= __('Address with pin code'); ?></th>
             <td><?php echo htmlspecialchars($employee['address'] ?? '-'); ?></td>
             <th scope="col"><?= htmlspecialchars(__('Bank A/C Number & IFSC code'), ENT_QUOTES, 'UTF-8'); ?></th>
-            <td><?php echo htmlspecialchars(($employee['bank_account_no'] ?? '-') . ' ' . ($employee['ifsc_code'] ?? '')); ?></td>
+            <td><?php echo renderSensitiveDataWithToggle($employee['bank_account_no'] ?? '', 'bank_account', false) . ' ' . renderSensitiveDataWithToggle($employee['ifsc_code'] ?? '', 'ifsc', false); ?></td>
         </tr>
         <tr>
             <th scope="col"><?= __('Personal Email ID'); ?></th>
             <td><?php echo htmlspecialchars($employee['email_id'] ?? '-'); ?></td>
             <th scope="col"><?= __('Mobile Number'); ?></th>
-            <td><?php echo htmlspecialchars($employee['phone'] ?? '-'); ?></td>
+            <td><?php echo renderSensitiveDataWithToggle($employee['phone'] ?? '', 'mobile', false); ?></td>
         </tr>
         <tr>
             <th scope="col" colspan="4"><?= __('Please select the appropriate process'); ?>:</th>

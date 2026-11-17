@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if(isset($_GET['ajaxpage']) && $_GET['ajaxpage']!=""){
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
@@ -177,11 +177,11 @@ if( $payslip_data_list['display_type'][$i] ==0 || ($payslip_data_list['display_t
                                             </div>
                                             <div class="d-flex justify-content-between mb-3">
                                                 <span class="mr-15 font-weight-bold"><?= __('UAN'); ?>:</span>
-                                                <span class="text-right"><?php echo $payslip_data_list['pf_uan']; ?></span>
+                                                <span class="text-right"><?php echo renderSensitiveDataWithToggle($payslip_data_list['pf_uan'], 'uan_number'); ?></span>
                                             </div>
                                             <div class="d-flex justify-content-between mb-3">
                                                 <span class="mr-15 font-weight-bold"><?= __('PAN'); ?>:</span>
-                                                <span class="text-right"><?php echo $payslip_data_list['pan_number']; ?></span>
+                                                <span class="text-right"><?php echo renderSensitiveDataWithToggle($payslip_data_list['pan_number'], 'pan'); ?></span>
                                             </div>
                                             <div class="d-flex justify-content-between mb-3">
                                                 <span class="mr-15 font-weight-bold"><?= __('ESI'); ?>:</span>

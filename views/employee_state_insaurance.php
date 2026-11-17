@@ -33,7 +33,7 @@ $dcarray = array('M'=>'Month','Y'=>'Year');
                                                     <div class="col-md-6">
                                                         <hr>
                                                         <span class="font-size-lg font-weight-bold text-muted"><?= __('ESI Number'); ?></span>
-                                                        <span class="f-w-700 font-weight-bold float-right font-size-lg"><?php echo $esdata['esi_no']; ?></span>
+                                                        <span class="f-w-700 font-weight-bold float-right font-size-lg"><?php echo renderSensitiveDataWithToggle($esdata['esi_no'], 'pf_number'); ?></span>
                                                         <hr>
                                                         <span class="font-size-lg font-weight-bold text-muted"><?= __('Deductions Cycle'); ?></span>
                                                         <span class="f-w-700 font-weight-bold float-right "><?php echo $dcarray[$esdata['deduction_cycle']]; ?></span>

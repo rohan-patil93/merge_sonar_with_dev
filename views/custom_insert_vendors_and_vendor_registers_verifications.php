@@ -148,7 +148,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('PAN Number'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['pan_no'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['pan_no'] ?? '')); ?>" readonly
                                         tabindex="-1">
                                 </div>
 
@@ -208,7 +208,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="input-group">
                                     <input aria-label="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control pan-input text-uppercase" id="pan_number" placeholder="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>"
                                         maxlength="10"
-                                        value="<?php echo $vendordetail['pan_no'] ?? ''; ?>">
+                                        value="<?php echo dynamicDataDecode($vendordetail['pan_no'] ?? ''); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -322,7 +322,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('GST Number'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['gstin'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['gstin'] ?? '')); ?>" readonly
                                         tabindex="-1">
                                 </div>
 
@@ -345,7 +345,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="input-group">
                                     <input aria-label="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control gst-input text-uppercase" id="gstin" placeholder="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>"
                                         maxlength="15"
-                                        value="<?php echo $vendordetail['gstin'] ?? ''; ?>">
+                                        value="<?php echo dynamicDataDecode($vendordetail['gstin'] ?? ''); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -502,14 +502,14 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('IFSC Code'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['ifsc_code'] ?? '')); ?>" readonly
                                         tabindex="-1">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('Bank Name'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['bank_name'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['bank_name'] ?? '')); ?>" readonly
                                         tabindex="-1">
                                 </div>
 
@@ -534,7 +534,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('Bank Account Number'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['bank_account_no'] ?? '')); ?>" readonly
                                         tabindex="-1">
                                 </div>
 
@@ -568,7 +568,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                             <div class="form-group mb-3">
                                 <span class="form-label"><?= __('Bank Name'); ?> <span class="text-danger">*</span></span>
                                 <input aria-label="<?= htmlspecialchars(__('Enter bank name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control bank-name-input" id="bank_name" placeholder="<?= htmlspecialchars(__('Enter bank name'), ENT_QUOTES, 'UTF-8'); ?>"
-                                    value="<?php echo htmlspecialchars($vendordetail['bank_name'] ?? ''); ?>">
+                                    value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['bank_name'] ?? '')); ?>">
                             </div>
 
                             <div class="form-group mb-3">
@@ -576,7 +576,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="input-group">
                                     <input aria-label="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control ifsc-input text-uppercase" id="ifsc_code" placeholder="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>"
                                         maxlength="11"
-                                        value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>">
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['ifsc_code'] ?? '')); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -588,7 +588,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <span class="form-label"><?= __('Bank Account Number'); ?> <span class="text-danger">*</span></span>
                                 <div class="input-group">
                                     <input aria-label="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control bank-account-input" id="bank_account_no" placeholder="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>"
-                                        value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>">
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['bank_account_no'] ?? '')); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -722,7 +722,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('MSME/Udyam Registration Number'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['msme_number'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['msme_number'] ?? '')); ?>" readonly
                                         tabindex="-1">
                                 </div>
 
@@ -745,7 +745,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="input-group">
                                     <input aria-label="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control msme-input text-uppercase" id="msme_number" placeholder="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>"
                                         maxlength="19"
-                                        value="<?php echo $vendordetail['msme_number'] ?? ''; ?>">
+                                        value="<?php echo dynamicDataDecode($vendordetail['msme_number'] ?? ''); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -903,7 +903,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold"><?= __('TAN Number'); ?></span>
                                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['tan_number'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['tan_number'] ?? '')); ?>" readonly
                                         tabindex="-1">
                                 </div>
 
@@ -926,7 +926,7 @@ if (isset($vendordetail['vendor_verifications']) && !empty($vendordetail['vendor
                                 <div class="input-group">
                                     <input aria-label="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control tan-input text-uppercase" id="tan_number" placeholder="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>"
                                         maxlength="10"
-                                        value="<?php echo $vendordetail['tan_number'] ?? ''; ?>">
+                                        value="<?php echo dynamicDataDecode($vendordetail['tan_number'] ?? ''); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>

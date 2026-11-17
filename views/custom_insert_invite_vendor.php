@@ -155,7 +155,7 @@ if($vendor_registration_requests['id'] !=""){
                 <div class="col-lg-4 form-group bothhidemsme d-none" id="msme_number_id" >
                     <span class="form-label d-block"><?php echo __('Udyam Registration/MSME Number'); ?></span>
                     <input aria-label="<?php echo __('Input field'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="msme_number"
-                            name="msme_number" value="<?php echo $vendordetail['msme_number']; ?>" autocomplete="off">
+                            name="msme_number" value="<?php echo dynamicDataDecode($vendordetail['msme_number']); ?>" autocomplete="off">
                 </div>
 
 

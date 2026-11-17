@@ -2361,7 +2361,7 @@ if (count((array) $milestones) > 0) {
                                                     <?= $fieldDisplay['transaction_no']['star'] ?></span>
                                                 <input type="text" class="form-control" name="transaction_no"
                                                     placeholder="<?= __('Auto-generated') ?>"
-                                                    value="<?= htmlspecialchars($formData['transaction_no'] ?? '') ?>"
+                                                    value="<?= htmlspecialchars(dynamicDataDecode($formData['transaction_no'] ?? '')) ?>"
                                                     readonly title="<?= __('Auto-generated') ?>" aria-label="<?= htmlspecialchars(__('Auto-generated'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
@@ -2369,7 +2369,7 @@ if (count((array) $milestones) > 0) {
                                                     <?= $fieldDisplay['rt_number']['star'] ?></span>
                                                 <input type="text" class="form-control" name="rt_number"
                                                     placeholder="<?= __('Enter RT Number') ?>"
-                                                    value="<?= htmlspecialchars($formData['rt_number'] ?? '') ?>"
+                                                    value="<?= htmlspecialchars(dynamicDataDecode($formData['rt_number'] ?? '')) ?>"
                                                     <?= $fieldDisplay['rt_number']['required'] ?> <?= $amc_renew_readonly ?? '' ?> title="<?= __('Enter RT Number') ?>" aria-label="<?= htmlspecialchars(__('Enter RT Number'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
@@ -2377,7 +2377,7 @@ if (count((array) $milestones) > 0) {
                                                     <?= $fieldDisplay['invoice_number']['star'] ?></span>
                                                 <input type="text" class="form-control" name="invoice_number"
                                                     placeholder="<?= __('Enter Invoice Number') ?>"
-                                                    value="<?= htmlspecialchars($formData['invoice_number'] ?? '') ?>"
+                                                    value="<?= htmlspecialchars(dynamicDataDecode($formData['invoice_number'] ?? '')) ?>"
                                                     <?= $fieldDisplay['invoice_number']['required'] ?> title="<?= __('Enter Invoice Number') ?>" aria-label="<?= htmlspecialchars(__('Enter Invoice Number'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
@@ -2599,19 +2599,19 @@ if (count((array) $milestones) > 0) {
                                                 <span class="form-label"><?= __('Contract Owner Name') ?></span>
                                                 <input type="text" class="form-control" name="contract_owner_name"
                                                     placeholder="<?= __('Enter contract owner name') ?>"
-                                                    value="<?= htmlspecialchars($formData['contract_owner_name'] ?? '') ?>" title="<?= __('Enter contract owner name') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner name'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    value="<?= htmlspecialchars(dynamicDataDecode($formData['contract_owner_name'] ?? '')) ?>" title="<?= __('Enter contract owner name') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner name'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Contract Owner Email') ?></span>
                                                 <input type="email" class="form-control" name="contract_owner_email"
                                                     placeholder="<?= __('Enter contract owner email') ?>"
-                                                    value="<?= htmlspecialchars($formData['contract_owner_email'] ?? '') ?>" title="<?= __('Enter contract owner email') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner email'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    value="<?= htmlspecialchars(dynamicDataDecode($formData['contract_owner_email'] ?? '')) ?>" title="<?= __('Enter contract owner email') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner email'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Contract Owner Contact') ?></span>
                                                 <input type="tel" class="form-control" name="contract_owner_number"
                                                     placeholder="<?= __('Enter contract owner contact number') ?>"
-                                                    value="<?= htmlspecialchars($formData['contract_owner_number'] ?? '') ?>" title="<?= __('Enter contract owner contact number') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner contact number'), ENT_QUOTES, 'UTF-8'); ?>">
+                                                    value="<?= htmlspecialchars(dynamicDataDecode($formData['contract_owner_number'] ?? '')) ?>" title="<?= __('Enter contract owner contact number') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner contact number'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <?php $contract_services_contact_section = 'contact_persons';
                                             include __DIR__ . '/_contract_services_contact_fields.php'; ?>
@@ -3410,7 +3410,7 @@ if (count((array) $milestones) > 0) {
                                                     </tr>
                                                     <tr>
                                                         <td class="py-3 px-5 text-gray-700">
-                                                            <?= htmlspecialchars($contract['transaction_no']) ?>
+                                                            <?= renderSensitiveDataWithToggle($contract['transaction_no'], 'text') ?>
                                                         </td>
                                                         <td class="py-3 px-5 text-gray-700">
                                                             <?= htmlspecialchars($contract['contract_name']) ?>

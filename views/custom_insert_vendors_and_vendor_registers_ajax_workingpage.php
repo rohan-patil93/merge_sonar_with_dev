@@ -582,7 +582,7 @@ if ($isAdd) : ?>
                 <div class="form-group col-lg-3">
                     <span class="form-label">Phone</span>
                     <div class="kt-input-icon">
-                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="number" id="phone" name="phone" value="<?php echo $vendordetail['phone']; ?>" autocomplete="off">
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="number" id="phone" name="phone" value="<?php echo dynamicDataDecode($vendordetail['phone']); ?>" autocomplete="off">
                     </div>
                     <div style="display: none;color: red;" id="phone_err"> Please enter phone </div>
                 </div>
@@ -762,7 +762,7 @@ if ($isAdd) : ?>
                 <div class="col-lg-4" style="margin-bottom: 2rem;">
                     <span class="form-label">Tax/Vat Reg.No.</span>
                     <div class="kt-input-icon">
-                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="vendor_tax_reg_no" name="vendor_tax_reg_no" value="<?php echo $vendordetail['vendor_tax_reg_no']; ?>" autocomplete="off">
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="vendor_tax_reg_no" name="vendor_tax_reg_no" value="<?php echo dynamicDataDecode($vendordetail['vendor_tax_reg_no']); ?>" autocomplete="off">
                     </div>
                 </div>
                 <?php
@@ -787,7 +787,7 @@ if ($isAdd) : ?>
                 <div class="col-lg-4 form-group" >
                     <span class="form-label">DUNS Id</span>
                     <div class="kt-input-icon">
-                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="duns_no" name="duns_no" value="<?php echo $vendordetail['duns_no']; ?>" autocomplete="off">
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="duns_no" name="duns_no" value="<?php echo dynamicDataDecode($vendordetail['duns_no']); ?>" autocomplete="off">
                     </div>
                 </div>
                 <?php
@@ -843,7 +843,7 @@ if ($isAdd) : ?>
                 <div class="col-lg-4 form-group" >
                     <span class="form-label">PAN No. <span class="text-danger">*</span></span>
                     <div class="kt-input-icon">
-                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="pan_no" name="pan_no" onblur="checkalreadyavailableornotcustomerorvendordetails('PAN_NO')" value="<?php echo $vendordetail['pan_no']; ?>" autocomplete="off">
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="pan_no" name="pan_no" onblur="checkalreadyavailableornotcustomerorvendordetails('PAN_NO')" value="<?php echo dynamicDataDecode($vendordetail['pan_no']); ?>" autocomplete="off">
                         <span class="text-danger f-12"><?php echo $vendor_verifications['PAN']['status'] =="Y"?$_SESSION['error_message']['9136']:"PAN verification is pending"; ?></span>
                     </div>
                     <span class="text-danger f-14" id="pannoerror"  style="display:none"></span>
@@ -857,7 +857,7 @@ if ($isAdd) : ?>
                 <div class="col-lg-4 form-group" >
                     <span class="form-label">TAN No. </span>
                     <div class="kt-input-icon">
-                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="tan_number" name="tan_number" value="<?php echo $vendordetail['tan_number']; ?>" autocomplete="off">
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="tan_number" name="tan_number" value="<?php echo dynamicDataDecode($vendordetail['tan_number']); ?>" autocomplete="off">
 
                     </div>
                 </div>
@@ -884,7 +884,7 @@ if ($isAdd) : ?>
                 <div class="col-lg-4 form-group" id="msme_number_id" <?php echo $vendordetail['msme_register_yes_no'] =="Y"?"":"style='display:none'"; ?>>
                     <span class="form-label">Udyam Registration/MSME Number <span class="text-danger">*</span></span>
                     <div class="kt-input-icon ">
-                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="msme_number" name="msme_number" value="<?php echo $vendordetail['msme_number']; ?>" autocomplete="off">
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="msme_number" name="msme_number" value="<?php echo dynamicDataDecode($vendordetail['msme_number']); ?>" autocomplete="off">
                     </div>
                 </div>
                 <?php
@@ -931,7 +931,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-4">
                     <span class="form-label">Bank name <span class="text-danger">*</span></span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_name" name="bank_name" value="<?php echo $vendordetail['bank_name']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_name" name="bank_name" value="<?php echo dynamicDataDecode($vendordetail['bank_name']); ?>" >
                 </div>
                 <?php
                        }
@@ -940,7 +940,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-8">
                     <span class="form-label">Bank Address</span>
-                    <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control <?php echo $accessreadonly; ?>" name="bank_address"><?php echo $vendordetail['bank_address']; ?></textarea>
+                    <textarea aria-label="<?= htmlspecialchars(__('Text area'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control <?php echo $accessreadonly; ?>" name="bank_address"><?php echo dynamicDataDecode($vendordetail['bank_address']); ?></textarea>
                 </div>
                 <?php
                        }
@@ -991,7 +991,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-3" >
                     <span  class="form-label">Pincode</span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" placeholder="<?= htmlspecialchars(__('Pincode'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="bank_post_code" name="bank_post_code" value="<?php echo $vendordetail['bank_post_code']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" placeholder="<?= htmlspecialchars(__('Pincode'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="bank_post_code" name="bank_post_code" value="<?php echo dynamicDataDecode($vendordetail['bank_post_code']); ?>" >
                 </div>
                 <?php
                        }
@@ -1000,7 +1000,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-4">
                     <span class="form-label">Company Bank Beneficiary Name </span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_beneficiary_name" name="bank_beneficiary_name" value="<?php echo $vendordetail['bank_beneficiary_name']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_beneficiary_name" name="bank_beneficiary_name" value="<?php echo dynamicDataDecode($vendordetail['bank_beneficiary_name']); ?>" >
                 </div>
                 <?php
                        }
@@ -1009,7 +1009,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-4">
                     <span class="form-label">Bank Account Number <span class="text-danger">*</span></span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="number" id="bank_account_no" name="bank_account_no" value="<?php echo $vendordetail['bank_account_no']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="number" id="bank_account_no" name="bank_account_no" value="<?php echo dynamicDataDecode($vendordetail['bank_account_no']); ?>" >
                     <span class="text-danger f-12"><?php echo $vendor_verifications['BANK']['status'] =="Y"?$_SESSION['error_message']['9140']:"Bank Account verification is pending"; ?></span>
                 </div>
                 <?php
@@ -1034,7 +1034,7 @@ if ($isAdd) : ?>
                 <div class="col-lg-4 form-group" >
                     <span class="form-label">IFSC Code <span class="text-danger">*</span></span>
                     <div class="kt-input-icon">
-                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="ifsc_code" name="ifsc_code" value="<?php echo $vendordetail['ifsc_code']; ?>" autocomplete="off">
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="ifsc_code" name="ifsc_code" value="<?php echo dynamicDataDecode($vendordetail['ifsc_code']); ?>" autocomplete="off">
                     </div>
                 </div>
                 <?php
@@ -1053,7 +1053,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-4">
                     <span class="form-label">Routing Wire Code</span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="routing_wire_Code" name="routing_wire_Code" value="<?php echo $vendordetail['routing_wire_Code']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="routing_wire_Code" name="routing_wire_Code" value="<?php echo dynamicDataDecode($vendordetail['routing_wire_Code']); ?>" >
                 </div>
                 <?php
                        }
@@ -1062,7 +1062,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-4">
                     <span class="form-label">SWIFT/BIC Code</span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="swift_bic_code" name="swift_bic_code" value="<?php echo $vendordetail['swift_bic_code']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="swift_bic_code" name="swift_bic_code" value="<?php echo dynamicDataDecode($vendordetail['swift_bic_code']); ?>" >
                 </div>
                 <?php
                        }
@@ -1071,7 +1071,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-4">
                     <span class="form-label">IBAN</span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="iban_code" name="iban_code" value="<?php echo $vendordetail['iban_code']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="iban_code" name="iban_code" value="<?php echo dynamicDataDecode($vendordetail['iban_code']); ?>" >
                 </div>
                 <?php
                        }
@@ -1080,7 +1080,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-4">
                     <span class="form-label">Contact Person Name (Bank related queries)</span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_person_name" name="bank_query_person_name" value="<?php echo $vendordetail['bank_query_person_name']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_person_name" name="bank_query_person_name" value="<?php echo dynamicDataDecode($vendordetail['bank_query_person_name']); ?>" >
                 </div>
                 <?php
                        }
@@ -1089,7 +1089,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-4">
                     <span class="form-label">Contact no</span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_contact_no" name="bank_query_contact_no" value="<?php echo $vendordetail['bank_query_contact_no']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="bank_query_contact_no" name="bank_query_contact_no" value="<?php echo dynamicDataDecode($vendordetail['bank_query_contact_no']); ?>" >
                 </div>
                 <?php
                        }
@@ -1098,7 +1098,7 @@ if ($isAdd) : ?>
                 ?>
                 <div class="form-group col-lg-4">
                     <span class="form-label">Contact Email </span>
-                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="email" id="bank_query_email_id" name="bank_query_email_id" value="<?php echo $vendordetail['bank_query_email_id']; ?>" >
+                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="email" id="bank_query_email_id" name="bank_query_email_id" value="<?php echo dynamicDataDecode($vendordetail['bank_query_email_id']); ?>" >
                 </div>
                 <?php } ?>
             </div>
@@ -1174,7 +1174,7 @@ if ($isAdd) : ?>
             <div class="col-lg-4 form-group" >
                     <span class="form-label">CST Reg.No</span>
                     <div class="kt-input-icon">
-                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="cst_reg_no" name="cst_reg_no" value="<?php echo $vendordetail['cst_reg_no']; ?>" >
+                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control <?php echo $accessreadonly; ?>" type="text" id="cst_reg_no" name="cst_reg_no" value="<?php echo dynamicDataDecode($vendordetail['cst_reg_no']); ?>" >
                     </div>
                 </div>
                 <?php
@@ -1915,7 +1915,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Contact Person Contact</th>
-                            <td class="p-2"><?php echo $vendordetail['phone']; ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['phone'], 'mobile'); ?></td>
                         </tr>
                         <?php
                                }
@@ -1931,7 +1931,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Phone</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['phone']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['phone'], 'mobile'); ?></td>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -1956,7 +1956,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Vendor Tax Reg. No.</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['vendor_tax_reg_no']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['vendor_tax_reg_no'], 'gst'); ?></td>
                         </tr>
                         <?php
                                }
@@ -1972,7 +1972,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">DUNS No.</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['duns_no']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['duns_no'], 'text'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2004,7 +2004,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">GSTN No.</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['gstin']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['gstin'], 'gst'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2012,7 +2012,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">PAN No</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['pan_no']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['pan_no'], 'pan'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2020,7 +2020,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">TAN No</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['tan_number']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['tan_number'], 'gst'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2100,7 +2100,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Contact Person Mobile</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['mobile']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['mobile'], 'mobile'); ?></td>
                         </tr>
                         <?php } ?>
                     </tbody>
@@ -2183,7 +2183,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Bank name</th>
-                            <td class="address-basic p-2"><?php echo emptytextdashShow($vendordetail['bank_name']); ?></td>
+                            <td class="address-basic p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['bank_name'], 'text'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2191,7 +2191,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Bank Address</th>
-                            <td class="p-2 w-b-w-s"><?php echo emptytextdashShow($vendordetail['bank_address']); ?></td>
+                            <td class="p-2 w-b-w-s"><?php echo renderSensitiveDataWithToggle($vendordetail['bank_address'], 'text'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2223,7 +2223,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Pincode</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['bank_post_code']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['bank_post_code'], 'text'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2231,7 +2231,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Company Bank Beneficiary Name</th>
-                            <td class="p-2 w-b-w-s"><?php echo emptytextdashShow($vendordetail['bank_beneficiary_name']); ?></td>
+                            <td class="p-2 w-b-w-s"><?php echo renderSensitiveDataWithToggle($vendordetail['bank_beneficiary_name'], 'text'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2239,7 +2239,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Bank Account Number</th>
-                            <td class="p-2 w-b-w-s"><?php echo emptytextdashShow($vendordetail['bank_account_no']); ?></td>
+                            <td class="p-2 w-b-w-s"><?php echo renderSensitiveDataWithToggle($vendordetail['bank_account_no'], 'bank_account'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2263,7 +2263,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Routing Wire Code</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['routing_wire_Code']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['routing_wire_Code'], 'ifsc'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2271,7 +2271,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">SWIFT/BIC Code</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['swift_bic_code']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['swift_bic_code'], 'ifsc'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2279,7 +2279,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">IBAN</th>
-                            <td class="p-2"><?php echo emptytextdashShow($vendordetail['iban_code']); ?></td>
+                            <td class="p-2"><?php echo renderSensitiveDataWithToggle($vendordetail['iban_code'], 'bank_account'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2287,7 +2287,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Contact Person Name (Bank related queries)</th>
-                            <td class="p-2 w-b-w-s"><?php echo emptytextdashShow($vendordetail['bank_query_person_name']); ?></td>
+                            <td class="p-2 w-b-w-s"><?php echo renderSensitiveDataWithToggle($vendordetail['bank_query_person_name'], 'text'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2295,7 +2295,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Contact no</th>
-                            <td class="p-2 w-b-w-s"><?php echo emptytextdashShow($vendordetail['bank_query_contact_no']); ?></td>
+                            <td class="p-2 w-b-w-s"><?php echo renderSensitiveDataWithToggle($vendordetail['bank_query_contact_no'], 'mobile'); ?></td>
                         </tr>
                         <?php
                                }
@@ -2303,7 +2303,7 @@ if ($isAdd) : ?>
                         ?>
                         <tr>
                             <th scope="row" class="p-2">Contact Email</th>
-                            <td class="p-2 w-b-w-s"><?php echo emptytextdashShow($vendordetail['bank_query_email_id']); ?></td>
+                            <td class="p-2 w-b-w-s"><?php echo renderSensitiveDataWithToggle($vendordetail['bank_query_email_id'], 'email'); ?></td>
                         </tr>
                         <?php } ?>
                     </tbody>

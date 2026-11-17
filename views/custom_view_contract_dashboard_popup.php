@@ -66,7 +66,7 @@ function isExpired($dateString)
                                 <span class="form-label label label-danger"><?= __('Expired'); ?></span>
                             <?php endif; ?>
                         </td>
-                        <td><?= htmlspecialchars($contract['transaction_no'] ?? 'Not Provided') ?></td>
+                        <td><?= renderSensitiveDataWithToggle($contract['transaction_no'] ?? '', 'text') ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

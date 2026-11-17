@@ -73,7 +73,7 @@ if(!function_exists('render_esi_summary_table')){
                             <tr role="row" class="odd">
                                 <th scope="col"><?php echo valueemtpydash($ecr_data['emp_code']); ?></th>
                                 <th scope="col"><?php echo valueemtpydash($ecr_data['Employee_Name']); ?></th>
-                                <th scope="col"><?php echo valueemtpydash($ecr_data['esi_no']); ?></th>
+                                <th scope="col"><?php echo renderSensitiveDataWithToggle($ecr_data['esi_no'], 'pf_number'); ?></th>
                                 <th scope="col" class="text-right"><?php echo valueemtpydash($ecr_data['esi_employee_contribution']); ?></th>
                                 <th scope="col" class="text-right"><?php echo valueemtpydash(customeummarmonyformate($ecr_data['pf_salary_component_actual'])); ?></th>
                                 <th scope="col" class="text-right"><?php echo valueemtpydash($ecr_data['esi_employer_contribution']); ?></th>

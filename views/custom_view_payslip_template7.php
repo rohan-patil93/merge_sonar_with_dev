@@ -99,7 +99,7 @@ function customePayslipNumberFormate($number){
             <tr>
                 <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('PAN'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">
-                    <?php echo $payslip_data_list['pan_number']; ?>
+                    <?php echo renderSensitiveDataWithToggle($payslip_data_list['pan_number'], 'pan'); ?>
                 </td>
                 <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('LOP'); ?></th>
                 <th scope="col" class="text-end" style="padding: 5px !important;border: 1px solid #cccccc; ">
@@ -109,12 +109,12 @@ function customePayslipNumberFormate($number){
             <tr>
                 <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('Bank Account Number'); ?></th>
                 <td style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;">
-                    <?php echo $payslip_data_list['bank_account_no']; ?>
+                    <?php echo renderSensitiveDataWithToggle($payslip_data_list['bank_account_no'], 'bank_account', false); ?>
                 </td>
 
                 <th scope="col" style="padding: 5px !important;border: 1px solid #cccccc; text-align: left;"><?= __('PF UAN'); ?></th>
                 <th scope="col" class="text-end" style="padding: 5px !important;border: 1px solid #cccccc; ">
-                    <?php echo $payslip_data_list['pf_uan']; ?>
+                    <?php echo renderSensitiveDataWithToggle($payslip_data_list['pf_uan'], 'uan_number'); ?>
                 </th>
             </tr>
             <tr>

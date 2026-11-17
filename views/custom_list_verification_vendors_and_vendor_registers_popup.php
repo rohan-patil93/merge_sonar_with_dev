@@ -153,7 +153,7 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
                             if (isset($record['gstin']) && !empty($record['gstin'])) { ?>
                                 <div class="col-md-6 mb-3">
                                     <span class="form-label fw-bold"><?= __('GST Number'); ?></span>
-                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars($record['gstin']); ?>" readonly>
+                                    <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= htmlspecialchars(dynamicDataDecode($record['gstin'])); ?>" readonly>
                                 </div>
                             <?php }
 

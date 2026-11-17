@@ -50,7 +50,7 @@ $data = $response['data'] ?? array();
                             <td><?= $daa['display_name']; ?></td>
                             <td><?= $daa['assessment_year']; ?></td>
                             <td><?= $daa['document_name']; ?></td>
-                            <td><?= $daa['pan_number']; ?></td>
+                            <td><?= renderSensitiveDataWithToggle($daa['pan_number'], 'pan'); ?></td>
                             <td>
                                 <a class="btn btn-info" href="/uploads/xqwave/documents/<?= $daa['file']; ?>"><?= __('View') ?></a>
 

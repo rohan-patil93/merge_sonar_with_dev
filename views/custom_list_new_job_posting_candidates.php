@@ -91,7 +91,7 @@ $stausresult = ViewStatusData();
                                 <td class="text-capitalize"><?php  echo $res['job_name']." - ".$res['job_number']; ?></td>
                                 <td class="text-capitalize"><?php  echo $res['display_name']; ?></td>
                                 <td><?php  echo $res['candidate_email']; ?></td>
-                                <td><?php  echo $res['candidate_phone']; ?></td>
+                                <td><?php echo renderSensitiveDataWithToggle($res['candidate_phone'], 'mobile'); ?></td>
                                 <td>
                                     <?php if($res['shortlisted']=='0'){ ?>
                                         <span class="label label-lg label-success label-inline mr-2"><?= __('Shortlisted'); ?></span>

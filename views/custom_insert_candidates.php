@@ -420,7 +420,7 @@ function assignedCandidateFiletr(cand_id){
                 ?>
                 <div class="col-lg-4 form-group">
                   <span class="form-label f-w-600"><?= __('Phone') ?></span>
-                  <p class="contact_detailsL"> <?php echo DynamicPhoneNumberFormt($candidates['phone']); ?> </p>
+                  <p class="contact_detailsL"> <?php echo renderSensitiveDataWithToggle($candidates['phone'], 'mobile', false); ?> </p>
                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control contact_detailsT <?php echo $readonly; ?>"  data-type="text" type="text"  id="phone" name="phone"  value="<?php echo $candidates['phone']; ?>" style="display: none">
                 </div>
                 <?php }
@@ -618,7 +618,7 @@ function assignedCandidateFiletr(cand_id){
                 ?>
                 <div class="col-lg-4 form-group">
                   <span class="form-label f-w-600"><?= __('Pan Number') ?></span>
-                  <p class="personal_detailsL"> <?php echo $candidates['pan_number']; ?> </p>
+                  <p class="personal_detailsL"> <?php echo renderSensitiveDataWithToggle($candidates['pan_number'], 'pan'); ?> </p>
                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control personal_detailsT <?php echo $readonly; ?>"  type="text" data-type="text" id="pan_number" name="pan_number"   value="<?php echo $candidates['pan_number']; ?>" style="display: none">
                 </div>
                 <?php }
@@ -636,7 +636,7 @@ function assignedCandidateFiletr(cand_id){
                 ?>
                 <div class="col-lg-4 form-group">
                   <span class="form-label f-w-600"><?= __('Adhar Number') ?></span>
-                  <p class="personal_detailsL"> <?php echo $candidates['adhar_no']; ?> </p>
+                  <p class="personal_detailsL"> <?php echo renderSensitiveDataWithToggle($candidates['adhar_no'], 'aadhaar'); ?> </p>
                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control personal_detailsT <?php echo $readonly; ?>"  type="text"  data-type="text" id="adhar_no" name="adhar_no"   value="<?php echo $candidates['adhar_no']; ?>" style="display: none">
                 </div>
                 <?php }

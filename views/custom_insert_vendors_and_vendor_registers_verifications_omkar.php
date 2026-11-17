@@ -305,7 +305,7 @@ function showNotificationIcon($status)
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold d-inline-block"><?= __('PAN Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['pan_no'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['pan_no'] ?? '')); ?>" readonly
                                         tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
@@ -337,7 +337,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="pan_number" placeholder="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatPANInput(this)" maxlength="10" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['pan_no'] ?? ''; ?>" title="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>">
+                                        value="<?php echo dynamicDataDecode($vendordetail['pan_no'] ?? ''); ?>" title="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('ABCDE1234F'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -414,7 +414,7 @@ function showNotificationIcon($status)
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold d-inline-block"><?= __('GST Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['gstin'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['gstin'] ?? '')); ?>" readonly
                                         tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
@@ -437,7 +437,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="gstin" placeholder="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatGSTInput(this)" maxlength="15" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['gstin'] ?? ''; ?>" title="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>">
+                                        value="<?php echo dynamicDataDecode($vendordetail['gstin'] ?? ''); ?>" title="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('22AAAAA0000A1Z5'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -557,14 +557,14 @@ function showNotificationIcon($status)
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold d-inline-block"><?= __('IFSC Code'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['ifsc_code'] ?? '')); ?>" readonly
                                         tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold d-inline-block"><?= __('Bank Account Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['bank_account_no'] ?? '')); ?>" readonly
                                         tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
@@ -587,7 +587,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="ifsc_code" placeholder="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatIFSCInput(this)" maxlength="11" style="text-transform: uppercase;"
-                                        value="<?php echo htmlspecialchars($vendordetail['ifsc_code'] ?? ''); ?>" title="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>">
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['ifsc_code'] ?? '')); ?>" title="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('SBIN0001234'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -600,7 +600,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="bank_account_no" placeholder="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatBankAccountInput(this)"
-                                        value="<?php echo htmlspecialchars($vendordetail['bank_account_no'] ?? ''); ?>" title="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>">
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['bank_account_no'] ?? '')); ?>" title="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Enter account number'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -697,7 +697,7 @@ function showNotificationIcon($status)
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold d-inline-block"><?= __('MSME/Udyam Registration Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['msme_number'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['msme_number'] ?? '')); ?>" readonly
                                         tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
@@ -720,7 +720,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="msme_number" placeholder="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatMSMEInput(this)" maxlength="19" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['msme_number'] ?? ''; ?>" title="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>">
+                                        value="<?php echo dynamicDataDecode($vendordetail['msme_number'] ?? ''); ?>" title="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('UDYAM-XX-00-0000000'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
@@ -841,7 +841,7 @@ function showNotificationIcon($status)
                                 <div class="form-group mb-3">
                                     <span class="form-label fw-bold d-inline-block"><?= __('TAN Number'); ?></span>
                                     <input type="text" class="form-control custom_readonly"
-                                        value="<?php echo htmlspecialchars($vendordetail['tan_number'] ?? ''); ?>" readonly
+                                        value="<?php echo htmlspecialchars(dynamicDataDecode($vendordetail['tan_number'] ?? '')); ?>" readonly
                                         tabindex="-1" title="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                                 </div>
 
@@ -864,7 +864,7 @@ function showNotificationIcon($status)
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="tan_number" placeholder="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>"
                                         oninput="formatTANInput(this)" maxlength="10" style="text-transform: uppercase;"
-                                        value="<?php echo $vendordetail['tan_number'] ?? ''; ?>" title="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>">
+                                        value="<?php echo dynamicDataDecode($vendordetail['tan_number'] ?? ''); ?>" title="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('ABCD12345E'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="input-group-text status-icon">
                                         <i class="fa fa-clock-o text-muted"></i>
                                     </span>
