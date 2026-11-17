@@ -310,6 +310,10 @@ class configClass
 				}
 			}
 			//Rohan Encryption code
+			// escape after encryption: encrypted values are base64url (unchanged by escaping), all other values must stay escaped
+			if(!is_null($values)){
+				$values = mysqli_real_escape_string($this->con,(string)$values);
+			}
 			if(is_numeric($values)){
 				$values=$values;
 				if($values['0']==0){
