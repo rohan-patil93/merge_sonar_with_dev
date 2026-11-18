@@ -835,8 +835,8 @@ if ($method == 'post') {
 			if (move_uploaded_file($_FILES[$image]["tmp_name"], $file_uploads_path . $newfilename)) {
 				$res[$image] = $newfilename;
 			}/*else{
-			   echo "<br> Nooo";
-		   }*/
+			 echo "<br> Nooo";
+		 }*/
 		}
 		if (ob_get_length()) {
 			ob_clean();
