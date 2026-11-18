@@ -235,7 +235,7 @@
 										<div class="kt-todo__actions kt-todo__actions--expanded">
 											<div class="kt-todo__check">
 												<label aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
-													<input type="checkbox" name="checkall" onclick="checkall()" id="checkall" value="0">
+													<input type="checkbox" name="checkall" onclick="checkall()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" id="checkall" value="0">
 
 													<span></span>
 												</label>
@@ -258,12 +258,12 @@
 												<div class="kt-todo__actions">
 													<label aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
 														<input type="hidden" id="checked_<?php echo $j; ?>" value="0">
-														<input type="checkbox" onclick="singlecheck(this.id,<?php echo $j; ?>)" id="check_<?php echo $j; ?>"  value="<?php echo  $list['transaction_id']; ?>">
+														<input type="checkbox" onclick="singlecheck(this.id,<?php echo $j; ?>)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" id="check_<?php echo $j; ?>"  value="<?php echo  $list['transaction_id']; ?>">
 														<span></span>
 													</label>
 												</div>
 											</div>
-											<div class="kt-todo__details"  onclick="ajaxview(<?php echo $list['transaction_id'];  ?>,<?php echo"'".$list['transaction_type']."'";  ?>)">
+											<div class="kt-todo__details" role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="ajaxview(<?php echo $list['transaction_id'];  ?>,<?php echo"'".$list['transaction_type']."'";  ?>)">
 												<div class="kt-todo__message">
 													<span class="kt-todo__subject"><?php echo $list['customer_name']." - ".$list['transaction_number'] ;?></span>
 												</div>

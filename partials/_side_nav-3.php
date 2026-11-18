@@ -270,29 +270,29 @@ function menudisplaytop($menuarray, $type)
         <ul class="nav-right float-right">
             <li class="header-notification m-r-8" data-bs-toggle="tooltip" data-placement="bottom" title=""
                 data-bs-original-title="Inbox">
-                <div class="dropdown-primary" onclick="location.href='index.php?option=COM_LIST_INBOX';">
+                <a class="dropdown-primary d-block" style="text-decoration:none;color:inherit;" href="index.php?option=COM_LIST_INBOX">
                     <div class="" data-bs-toggle="dropdown">
                         <i class="ti-email text-white"></i>
                         <span class="badge bg-c-green customcount">2</span>
                     </div>
-                </div>
+                </a>
             </li>
             <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title=""
                 data-bs-original-title="Announcement">
-                <div class="dropdown-primary" onclick="location.href='index.php?option=COM_VIEW_ANNOUNCEMENTS';">
+                <a class="dropdown-primary d-block" style="text-decoration:none;color:inherit;" href="index.php?option=COM_VIEW_ANNOUNCEMENTS">
                     <div class="" data-bs-toggle="dropdown">
                         <i class="ti-announcement"></i>
                     </div>
-                </div>
+                </a>
             </li>
             <li class="header-notification" data-bs-toggle="tooltip" data-placement="bottom" title=""
                 data-bs-original-title="Setting">
-                <div class="dropdown-primary"
-                    onclick="location.href='index.php?option=COM_LIST_APPLICATION_MENU_SETTINGS';">
+                <a class="dropdown-primary d-block" style="text-decoration:none;color:inherit;"
+                    href="index.php?option=COM_LIST_APPLICATION_MENU_SETTINGS">
                     <div class="" data-bs-toggle="dropdown">
                         <i class="ti-settings"></i>
                     </div>
-                </div>
+                </a>
             </li>
 
         </ul>

@@ -66,7 +66,7 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 				</tr>
 				<?php $parenttb = 1; foreach($property_owners as $po){
 					?>
-					<tr class="main" onclick="openSubTable('<?php echo $parenttb; ?>','firstlevelchildcheck','firstlevelchildhideshow')">
+					<tr class="main" onclick="openSubTable('<?php echo $parenttb; ?>','firstlevelchildcheck','firstlevelchildhideshow')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
 						<td class="cursor-pointer">
 							<i class="ti-angle-double-down" ></i>
 							<input type="hidden" id="firstlevelchildcheck_<?php echo $parenttb; ?>" value="0">
@@ -103,7 +103,7 @@ $property_owner_detail_areas = $result['property_owner_detail_areas'];
 								$parentchildtb = 1;
 									foreach($pods as $pod){
 								?>
-									<tr onclick="openSubTable('<?php echo $parentchildtb; ?>','secondlevelchildcheck','secondlevelchildhideshow')">
+									<tr onclick="openSubTable('<?php echo $parentchildtb; ?>','secondlevelchildcheck','secondlevelchildhideshow')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
 										<td class="cursor-pointer">
 											<i class="ti-angle-double-down" ></i>
 											<input type="hidden" id="secondlevelchildcheck_<?php echo $parentchildtb; ?>" value="0">

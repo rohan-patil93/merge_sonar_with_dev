@@ -80,7 +80,7 @@ function updateApplicationTickets(rid,status){
 				<!-- <td class="p-2"><?php echo $at['completion_datetime'] !=""?fromDate($at['completion_datetime']):"-"; ?></td> -->
 				<td class="p-2 text-center">
 					<?php if($at['attachment']!=""){ ?>
-						<a onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Attachments Preview'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye"></i></a>
+						<button type="button" class="border-0 bg-transparent p-0" style="color:inherit;cursor:pointer;" onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Attachments Preview'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Attachments Preview'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye"></i></button>
 					<?php }else{ echo " - ";
 					} ?>
 				</td>
@@ -142,7 +142,7 @@ function updateApplicationTickets(rid,status){
 				<!-- <td class="p-2"><?php echo $at['completion_datetime'] !=""?fromDate($at['completion_datetime']):"-"; ?></td> -->
 				<td class="p-2 text-center">
 					<?php if($at['attachment']!=""){ ?>
-						<a onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Attachments Preview'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye"></i></a>
+						<button type="button" class="border-0 bg-transparent p-0" style="color:inherit;cursor:pointer;" onclick="dynamicFilePriviews('uploads/all/<?php echo $at['attachment']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Attachments Preview'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Attachments Preview'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye"></i></button>
 					<?php }else{ echo " - ";
 					} ?>
 				</td>

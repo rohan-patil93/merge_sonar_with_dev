@@ -619,7 +619,7 @@ $stausresult = ViewStatusData();
 										<div class="radio radio-inline">
 											<label class="form-label">
 												<input type="radio" name="work_level_type" value="user_hierarchical"
-													onclick="selectWorkflowLevel()" <?php echo $workflowconfiguration['work_level_type'] == "user_hierarchical" ? "checked" : ""; ?> aria-label="<?= htmlspecialchars(__('Work Level Type'), ENT_QUOTES, 'UTF-8'); ?>">
+													onclick="selectWorkflowLevel()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php echo $workflowconfiguration['work_level_type'] == "user_hierarchical" ? "checked" : ""; ?> aria-label="<?= htmlspecialchars(__('Work Level Type'), ENT_QUOTES, 'UTF-8'); ?>">
 												<i class="helper"></i> <?= __('Hierarchical'); ?>
 											</label>
 											<label class="form-label">

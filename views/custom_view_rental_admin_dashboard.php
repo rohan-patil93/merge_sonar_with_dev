@@ -361,7 +361,7 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
         </div>
     </div>
     <div class="" id="biilingrent">
-    <?php include "custom_insert_property_tenant_billings.php";?>
+    <?php include_once "custom_insert_property_tenant_billings.php";?>
     </div>
 
 <div class="row">
@@ -1012,10 +1012,10 @@ function OpenInsertRentalInvoicePopUp(billtype=""){
         <div class="width-77">
             <div class="row">
                 <div class="col-lg-12" >
-                    <?php include 'views/custom_rental_aging_and_projection_reports.php'; ?>
+                    <?php include_once 'views/custom_rental_aging_and_projection_reports.php'; ?>
                 </div>
                 <div class="col-lg-12" >
-                    <?php include 'views/custom_list_rental_invoices_table.php'; ?>
+                    <?php include_once 'views/custom_list_rental_invoices_table.php'; ?>
                 </div>
 
             </div>

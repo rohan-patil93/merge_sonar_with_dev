@@ -159,7 +159,7 @@ function getIPAddress(){
                             <div class="card-block">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h3 class="text-center"><i class="icofont icofont-lock text-primary f-80"></i></h3>
+                                        <h3 class="text-center"><i class="icofont icofont-lock text-primary f-80"></i><span class="sr-only">Lock Screen</span></h3>
                                     </div>
                                 </div>
                                               <?php

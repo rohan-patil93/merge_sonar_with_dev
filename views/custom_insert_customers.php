@@ -1406,7 +1406,7 @@ function toggleRowLock(button) {
 											<span class="form-label d-block"></span>
 											<div class="border-checkbox-section  ">
 		                                      	<div class="border-checkbox-group border-checkbox-group-primary m-t-30">
-		                                        	<input class="border-checkbox" type="checkbox" id="checkbox<?php echo $mkseq; ?>" onclick="cloneShipping(this,'<?php echo $mkseq; ?>')" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+		                                        	<input class="border-checkbox" type="checkbox" id="checkbox<?php echo $mkseq; ?>" onclick="cloneShipping(this,'<?php echo $mkseq; ?>')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 		                                        	<label class="form-label border-checkbox-label" for="checkbox<?php echo $mkseq; ?>"><?= __('My shipping address is the same as my billing address') ?></label>
 		                                      	</div>
 		                                    </div>

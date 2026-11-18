@@ -2137,25 +2137,25 @@ if (count((array) $milestones) > 0) {
             <div class="row mb-2">
                 <div class="col-lg-12">
                     <ul class="nav md-tabs infisuite_tab mb-2 unified-edit-tabs">
-                        <li onclick="updateUrlParameter('TAB1',1);" class="nav-item"><a
+                        <li class="nav-item"><a onclick="updateUrlParameter('TAB1',1);"
                                 class="nav-link <?= ($activeTab === 1) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill"
                                 href="#contractdetails"><?= __('Contract Details'); ?></a></li>
                         <?php if (in_array('document', (array) $userPermissions)): ?>
-                            <li onclick="updateUrlParameter('TAB1',2);" class="nav-item"><a
+                            <li class="nav-item"><a onclick="updateUrlParameter('TAB1',2);"
                                     class="nav-link <?= ($activeTab === 2) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill" href="#documents"><?= __('Documents'); ?></a>
                             </li>
                         <?php endif; ?>
                         <?php if (in_array('associated', (array) $userPermissions)): ?>
-                            <li onclick="updateUrlParameter('TAB1',3);" class="nav-item"><a
+                            <li class="nav-item"><a onclick="updateUrlParameter('TAB1',3);"
                                     class="nav-link <?= ($activeTab === 3) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill"
                                     href="#associatedcontract"><?= __('Associated Contract'); ?></a></li><?php endif; ?>
                         <?php if (in_array('permission', (array) $userPermissions)): ?>
-                            <li onclick="updateUrlParameter('TAB1',4);" class="nav-item"><a
+                            <li class="nav-item"><a onclick="updateUrlParameter('TAB1',4);"
                                     class="nav-link <?= ($activeTab === 4) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill"
                                     href="#permissions"><?= __('Permissions'); ?></a>
                             </li><?php endif; ?>
                         <?php if (in_array('activity', (array) $userPermissions)): ?>
-                            <li onclick="updateUrlParameter('TAB1',5);" class="nav-item"><a
+                            <li class="nav-item"><a onclick="updateUrlParameter('TAB1',5);"
                                     class="nav-link <?= ($activeTab === 5) ? 'active' : '' ?> <?= $observerClass ?>" data-bs-toggle="pill"
                                     href="#activities"><?= __('Activities'); ?></a>
                             </li><?php endif; ?>

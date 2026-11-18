@@ -8,7 +8,7 @@ $saidnav = $_SESSION['application_menu_LN'];
 include_once "../includes/controller.php";
 $dispage = str_replace("views/", '', $disptemp);
 ?>
-<head><?php include_once "../partials/_head.php" ?>
+<head><title>Infistaq | Home</title><?php include_once "../partials/_head.php" ?></head>
 <div class="modal-header modal-header text-white p-25 header-bg" style="border-top-right-radius: 20px; border-top-left-radius: 20px;">
     <h4 class="modal-title"><?php echo $_GET['title']; ?></h4>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>

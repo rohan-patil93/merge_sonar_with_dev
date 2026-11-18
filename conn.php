@@ -1,5 +1,5 @@
 <?php
-@include 'dbconfig.php';
+@include_once 'dbconfig.php';
 
 try {
     $conn = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, MAINDB, PORT);

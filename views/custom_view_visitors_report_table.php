@@ -44,7 +44,7 @@ $_SESSION['download_data'] = $cssdata;
 <div class="report-title-card report-card">
     <div class="row align-items-center">
         <div class="col-md-4">
-            <img src="uploads/all/file_1704095913_659270a975d4a.png" class="report-logo" alt="<?= htmlspecialchars(__('Infisuite Logo'), ENT_QUOTES, 'UTF-8'); ?>" onerror="this.src='https://placehold.co/120x40/f8fafc/475569?text=Infisuite'">
+            <img src="uploads/all/file_1704095913_659270a975d4a.png" class="report-logo" alt="<?= htmlspecialchars(__('Infisuite Logo'), ENT_QUOTES, 'UTF-8'); ?>" data-onerror-src="https://placehold.co/120x40/f8fafc/475569?text=Infisuite">
             <span class="text-muted small"><?= __('Enterprise Access System'); ?></span>
         </div>
         <div class="col-md-8 text-md-end text-start mt-md-0 mt-3">
@@ -131,7 +131,7 @@ $_SESSION['download_data'] = $cssdata;
                             <div class="text-center">
                                 <p class="text-muted f-16 fw-bold mb-3"><i class="fa fa-exclamation-triangle"></i> <?= __('No visitor logs found for the selected filter.'); ?></p>
                                 <div class="text-center px-4">
-                                    <img class="empty-img-300" alt="<?= htmlspecialchars(__('No records'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" onerror="this.style.display='none'">
+                                    <img class="empty-img-300" alt="<?= htmlspecialchars(__('No records'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" data-onerror-hide="true">
                                 </div>
                             </div>
                         </td>

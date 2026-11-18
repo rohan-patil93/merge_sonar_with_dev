@@ -317,7 +317,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="kt-widget7__button">
-                                                    <a class="btn btn-brand" href="#" role="button"><?= __('All Feeds'); ?></a>
+                                                    <button type="button" class="btn btn-brand"><?= __('All Feeds'); ?></button>
                                                 </div>
                                             </div>
 

@@ -1,11 +1,13 @@
 <script>
-/* Image fallback: replaces the former inline onerror="this.src='...'" handlers (same behaviour; stops if the fallback itself fails). */
+/* Image fallback: replaces the former inline onerror="this.src='...'" / onerror="this.style.display='none'" handlers (same behaviour; stops if the fallback itself fails). */
 document.addEventListener('error', function (e) {
-    var t = e.target, fb = t && t.tagName === 'IMG' ? t.getAttribute('data-onerror-src') : null;
+    var t = e.target;
+    if (!t || t.tagName !== 'IMG') { return; }
+    var fb = t.getAttribute('data-onerror-src');
     if (fb && t.getAttribute('src') !== fb) { t.src = fb; }
+    if (t.getAttribute('data-onerror-hide') === 'true') { t.style.display = 'none'; }
 }, true);
 </script>
-<title>Infistaq | Home</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -151,4 +153,3 @@ document.addEventListener('error', function (e) {
 
     <script type="text/javascript" src="assets/bower_components/jquery/js/jquery.min.js"></script>
     <script type="text/javascript" src="assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
-</head>

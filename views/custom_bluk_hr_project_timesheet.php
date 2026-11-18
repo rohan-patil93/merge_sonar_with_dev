@@ -588,7 +588,7 @@
 												<th scope="col" class="py-0 min-w-50px text-center">
 													<div class="checkbox-inline">
 														<label for="select_all" class="checkbox checkbox-success" aria-label="<?= __("Select all pending approvals") ?>">
-														<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()" aria-label="<?= __("Select all pending approvals") ?>">
+														<input type="checkbox" id="select_all" class="itemRow" onclick="tocheckallboxes()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" aria-label="<?= __("Select all pending approvals") ?>">
 														<span></span><span class="sr-only"><?= __("Select all pending approvals") ?></span></label>
 														<input type="hidden" name="" id="val_select_all" value="0">
 													</div>
@@ -649,7 +649,7 @@
 													<div class="checkbox-inline">
 														<?php $pending_emp_name = !empty($sb['reporting_manger']) ? $sb['reporting_manger'] : (!empty($sb['employee_name']) ? $sb['employee_name'] : ('Employee ' . $sb['employee_id'])); ?>
 														<label for="pending_emp_<?php echo $sb['employee_id']; ?>" class="checkbox checkbox-success" aria-label="Select <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?>">
-														<input type="checkbox" id="pending_emp_<?php echo $sb['employee_id']; ?>" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>" aria-label="Select <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?>">
+														<input type="checkbox" id="pending_emp_<?php echo $sb['employee_id']; ?>" onclick="tocheckdrodown()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>" aria-label="Select <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?>">
 														<span></span><span class="sr-only"><?= __('Select'); ?> <?php echo htmlspecialchars($pending_emp_name, ENT_QUOTES); ?></span></label>
 													</div>
 												</td>

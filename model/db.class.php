@@ -232,13 +232,9 @@ class configClass
 					}
 				}
 				//Rohan Encryption code
-				if(is_numeric($values) && preg_match('/^[1-9][0-9]*$/', $values)){
-					$values=$values;
-				}elseif(is_null($values)){
+				if(is_null($values) || $values == ""){
 					$values="";
-				}elseif($values == ""){
-					$values="";
-				}else{
+				}elseif(!(is_numeric($values) && preg_match('/^[1-9][0-9]*$/', $values))){
 					$values="'".$values."'";
 				}
 				if($values !=''){
@@ -315,7 +311,6 @@ class configClass
 				$values = mysqli_real_escape_string($this->con,(string)$values);
 			}
 			if(is_numeric($values)){
-				$values=$values;
 				if($values['0']==0){
 					$values="'".$values."'";
 				}
@@ -863,7 +858,7 @@ public function random_code()
 
 		return strtolower(str_replace(' ','+',$string));
 		}
-		function dynamicDataEncode($data){
+		public function dynamicDataEncode($data){
 		if(DATA_ENCRYPTION_ONOFF == 'Y'){
 			$key = hash('sha256', DATA_ENCRYPTION_KEY, true);
 			$iv = random_bytes(16);

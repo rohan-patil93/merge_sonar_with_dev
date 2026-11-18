@@ -60,14 +60,14 @@
                                             <label for="chrPassword" class="visually-hidden">Password</label>
                                             <input class="form-control p-3 b-radius-5 f-w-600 text-muted bg-gray" type="password" name="chrPassword" id="chrPassword" required="" placeholder="password" aria-label="Password">
                                         </div>
-                                        <a class="float-right f-w-600 text-primary forgot-pwd-open" onclick="fergotpassworddisplay()">Forgot Password?</a>
+                                        <button type="button" class="float-right f-w-600 text-primary forgot-pwd-open border-0 bg-transparent p-0" style="cursor:pointer;" onclick="fergotpassworddisplay()">Forgot Password?</button>
                                         <div class="form-group">
 										<input class="form-control" type="hidden"  name="ip" value="<?php echo getIPAddress();?>" >
                                       <input class="form-control" type="hidden"  name="browser" value="<?php echo getBrowser();?>" >
                                       <input type="hidden" name="submit" value="Login" />
                                             <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-4 ">Sign In</button>
                                         </div>
-                                        <p class="text-muted f-w-600">Not a Member yet? <a class="text-primary" onclick="registerform()">Sign up</a></p>
+                                        <p class="text-muted f-w-600">Not a Member yet? <button type="button" class="text-primary border-0 bg-transparent p-0 align-baseline" style="font:inherit;cursor:pointer;" onclick="registerform()">Sign up</button></p>
                                     </div>
 									</form>
                                 </div>
@@ -97,7 +97,7 @@
                                       <input type="hidden" name="submit" value="signup" />
                                             <button type="submit" class="btn btn-primary waves-effect waves-light w-100 mt-3">Sign Up</button>
                                         </div>
-                                        <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <a class="text-primary" onclick="loginpagedisplay()">Sign In</a></p>
+                                        <p class="text-muted f-w-600 text-center sign-in-click">Already A Member <button type="button" class="text-primary border-0 bg-transparent p-0 align-baseline" style="font:inherit;cursor:pointer;" onclick="loginpagedisplay()">Sign In</button></p>
                                     </div>
 									</form>
                                 </div>

@@ -65,7 +65,7 @@ $module_setup = $result['module_setup'];
       foreach($resultlist as $resultlist){
         if($jj == '0'){  $i= 2;  ?>
           <div class="col-lg-3 col-md-6 col-sm-6 col-12 hideall addmore" style="display: none">
-            <div class="card card-custom cursor-pointer card-stretch" onclick="addrolemodal()">
+            <div class="card card-custom cursor-pointer card-stretch" role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" onclick="addrolemodal()">
               <div class="card-header">
                 <div class="card-title">
                   <img alt="" style="width: 100%;" src="assets/images/role_edite.png">

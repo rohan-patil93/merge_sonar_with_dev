@@ -225,13 +225,13 @@
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
 
-									<input type="radio"  id='spacer' value="custom_sql"  name="type" checked="checked" onclick="difftype(this.id)" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
+									<input type="radio"  id='spacer' value="custom_sql"  name="type" checked="checked" onclick="difftype(this.id)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>">
 									<?= __("spacer") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="text"  value="static"  name="type" onclick="difftype(this.id)" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("Test") ?> <span></span>
+										<input type="radio" id="text"  value="static"  name="type" onclick="difftype(this.id)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" aria-label="<?= htmlspecialchars(__('Type'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("Test") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
@@ -253,18 +253,18 @@
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
 
-									<input type="radio"  id='insert' value="insert" onclick="viewtype(this.id)"  name="view" checked="checked" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>">
+									<input type="radio"  id='insert' value="insert" onclick="viewtype(this.id)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"  name="view" checked="checked" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>">
 									<?= __("Insert") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="list"  value="list" onclick="viewtype(this.id)"  name="view" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("List") ?> <span></span>
+										<input type="radio" id="list"  value="list" onclick="viewtype(this.id)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"  name="view" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("List") ?> <span></span>
 									</label>
 								</div>
 								<div class="col-lg-2">
 									<label class="kt-radio kt-radio--solid">
-										<input type="radio" id="all"  value="all" onclick="viewtype(this.id)"  name="view" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("All") ?> <span></span>
+										<input type="radio" id="all"  value="all" onclick="viewtype(this.id)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"  name="view" aria-label="<?= htmlspecialchars(__('View'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __("All") ?> <span></span>
 									</label>
 								</div>
 								<input type="hidden" id="view_value" value="insert">
@@ -360,7 +360,7 @@
 									</tr>
 
 							</table>
-							<table>
+							<table role="presentation">
 								<tr>
 										<td > <?= __("Total") ?></td>
 										<td > <input type="text" class="form-control" id="total"  name="" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>

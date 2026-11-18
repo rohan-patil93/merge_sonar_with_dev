@@ -136,7 +136,7 @@ foreach ($menu_data as $menu) {
                                 <!--begin::Info-->
                                 <div class="d-flex align-items-center mr-2 py-2">
                                     <!--begin::Title-->
-                                    <h6 class="font-weight-bold mb-0 mr-10" aria-hidden="true"></h6>
+                                    <div class="h6 font-weight-bold mb-0 mr-10" aria-hidden="true"></div>
                                     <!--end::Title-->
                                 </div>
                                 <!--end::Info-->

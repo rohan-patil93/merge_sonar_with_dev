@@ -1064,7 +1064,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                 <div class="row <?php echo $has_service_tags ? 'd-view-block' : 'd-none'; ?>"
                                                     id="serviceTagControls">
                                                     <div class="form-group col-md-4">
-                                                        <span class="vl-label"><i class="fa fa-users text-muted me-1"></i> <?= __('Group Size (How many visitors?)'); ?></span>
+                                                        <label class="vl-label" for="service_tag_count"><i class="fa fa-users text-muted me-1"></i> <?= __('Group Size (How many visitors?)'); ?></label>
                                                         <input type="number" min="1" step="1" class="form-control"
                                                             name="service_tag_count" id="service_tag_count"
                                                             placeholder="<?= htmlspecialchars(__('e.g. 3'), ENT_QUOTES, 'UTF-8'); ?>"
@@ -2135,7 +2135,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     </p>
                                                     <div class="text-center px-4">
                                                         <img class="visitor-empty-img" alt="<?= htmlspecialchars(__('Empty list'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png"
-                                                            onerror="this.style.display='none'">
+                                                            data-onerror-hide="true">
                                                     </div>
                                                 </div>
                                             </td>

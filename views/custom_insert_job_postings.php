@@ -405,12 +405,12 @@ $joblevel_list = $results['job_grade'];
            <div class="form-radio d-inline-block align-middle">
             <div class="radio radio-inline">
               <label class="form-label">
-                <input type="radio" <?php echo $jobpostlist['posting_type']=='1'?"checked":"";?> name="posting_type" value="1" onclick="cehckPostigType()"><i class="helper"></i><?php echo __('Internal'); ?>
+                <input type="radio" <?php echo $jobpostlist['posting_type']=='1'?"checked":"";?> name="posting_type" value="1" onclick="cehckPostigType()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"><i class="helper"></i><?php echo __('Internal'); ?>
             </label>
         </div>
         <div class="radio radio-inline">
           <label class="form-label">
-           <input type="radio" name="posting_type" <?php echo $jobpostlist['posting_type']=='2'?"checked":"";?> value="2" onclick="cehckPostigType()">
+           <input type="radio" name="posting_type" <?php echo $jobpostlist['posting_type']=='2'?"checked":"";?> value="2" onclick="cehckPostigType()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
            <i class="helper"></i><?php echo __('External'); ?>
        </label>
    </div>

@@ -1355,13 +1355,13 @@ function insertReleive(){
 		<?php } ?>
 		</div>
 		<div class="tab-pane fade" id="home-7" role="tabpanel" aria-labelledby="home-tab-7">
-			<?php include 'custom_list_calendor.php'; ?>
+			<?php include_once 'custom_list_calendor.php'; ?>
 		</div>
 		<div class="tab-pane fade" id="home-att" role="tabpanel" aria-labelledby="home-tab-att">
-			<?php include 'custom_view_monthly_attendance.php'; ?>
+			<?php include_once 'custom_view_monthly_attendance.php'; ?>
 		</div>
 		<div class="tab-pane fade" id="home-70" role="tabpanel" aria-labelledby="home-tab-70">
-	          <?php include "custom_basic_info_pay.php";   ?>
+	          <?php include_once "custom_basic_info_pay.php";   ?>
 		</div>
 	</div>
 

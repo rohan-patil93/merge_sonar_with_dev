@@ -1,7 +1,7 @@
     <div class="width-800 m-auto" id="printDiv" style="width: 800px; display: block; margin: 0 auto !important; background: #ffffff;">
 
 
-            <table style="width: 100%; border-collapse: collapse; border: 1px solid #cccccc; font-family: 'Tahoma';">
+            <table role="presentation" style="width: 100%; border-collapse: collapse; border: 1px solid #cccccc; font-family: 'Tahoma';">
                 <thead>
                     <tr>
                         <td style="width: 30%; border: 1px solid #cccccc; vertical-align: top; padding: 5px;">

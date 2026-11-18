@@ -311,7 +311,7 @@ function emptyCheck($valu)
                 </div>
             </div>
 
-            <table style="width:100%;margin-top: 5px;">
+            <table role="presentation" style="width:100%;margin-top: 5px;">
                 <tr>
                     <td class="" style="width:50%;">
                         <div class=""
@@ -394,7 +394,7 @@ function emptyCheck($valu)
 
                 <?php } ?>
             </table>
-            <table style="width:99%;margin-top:5px;">
+            <table role="presentation" style="width:99%;margin-top:5px;">
                 <tr>
                     <td style="width:60%;vertical-align: top;">
                         <div class=""

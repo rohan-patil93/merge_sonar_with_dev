@@ -17023,11 +17023,11 @@ return $insert_data;
 	{
 		global $callConfig;
 		$sendstatus = 1;
-		if ($workflow->after_approval_email != "" and $type = "approve") {
+		if ($workflow->after_approval_email != "" and $type == "approve") {
 			$emailcontain_id = $workflow->after_approval_email;
 			$emailtype = $workflow->send_aproval_email_to;
 			$sendstatus = 0;
-		} elseif ($workflow->after_rejection_email != "" and $type = "reject") {
+		} elseif ($workflow->after_rejection_email != "" and $type == "reject") {
 			$emailcontain_id = $workflow->after_rejection_email;
 			$emailtype = $workflow->send_rejection_email_to;
 			$sendstatus = 0;

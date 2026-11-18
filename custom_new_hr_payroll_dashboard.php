@@ -219,7 +219,7 @@
            <h3 class="f-20 f-w-600">Pending Actions</h3>
          </div>
          <div class="table-responsive mt-1 height-360">
-           <table class="table table-borderless table-sm align-middle pedding-approvals">
+           <table role="presentation" class="table table-borderless table-sm align-middle pedding-approvals">
              <tr>
                <td>
                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">
@@ -456,7 +456,7 @@ $(document).ready(function() {
            <h3 class="f-20 f-w-600">Payroll Reports</h3>
          </div>
          <div class="table-responsive mt-2 height-290">
-           <table class="table table-borderless table-sm align-middle payroll-reports mb-0">
+           <table role="presentation" class="table table-borderless table-sm align-middle payroll-reports mb-0">
 
              <tr>
                <td>
@@ -594,7 +594,7 @@ $(document).ready(function() {
            <h3 class="f-20 f-w-600">Important Announcements</h3>
          </div>
          <div class="table-responsive mt-3 height-250">
-           <table class="table table-borderless table-sm align-middle payroll-reports mb-0 f-12">
+           <table role="presentation" class="table table-borderless table-sm align-middle payroll-reports mb-0 f-12">
              <tr>
                <td>
                  <span class="user-icon-40 b-radius-15 bg-green-50 f-14 f-w-600 text-center">

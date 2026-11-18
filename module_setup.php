@@ -154,7 +154,7 @@ foreach($modulelinklists as $linking){
 						<div class="col-lg-2 position-relative" >
 							<div class="card social-card">
 								<div class="inputGroup text-center ">
-			<input class="module_selections" id="optionget<?php echo $modul['module_id']; ?>" name="module_id[]" type="checkbox" <?php echo isset($activemodule[$modul['module_id']])?"checked":""; ?> value="<?php echo $modul['module_id']; ?>" <?php if(isset($linkingmodules[$modul['module_id']])){ ?> onclick="chieldModuleSelection('<?php echo $modul['module_id']; ?>')" <?php } ?>>
+			<input class="module_selections" id="optionget<?php echo $modul['module_id']; ?>" name="module_id[]" type="checkbox" <?php echo isset($activemodule[$modul['module_id']])?"checked":""; ?> value="<?php echo $modul['module_id']; ?>" <?php if(isset($linkingmodules[$modul['module_id']])){ ?> onclick="chieldModuleSelection('<?php echo $modul['module_id']; ?>')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php } ?>>
 									<label for="optionget<?php echo $modul['module_id']; ?>" class="text-center fixheght">
 										<span class="text-facebook">
 											<?php if($modul['module_logo'] !=""){ ?>

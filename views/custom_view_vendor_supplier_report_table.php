@@ -110,7 +110,7 @@ $_SESSION['download_data'] = $export_data;
                             <div class="text-center">
                                 <p class="text-muted f-16 fw-bold mb-3"><i class="fa fa-exclamation-triangle"></i> <?= __('No vendor or supplier profiles matching search query found.'); ?></p>
                                 <div class="text-center px-4">
-                                    <img class="empty-img-300" alt="<?= htmlspecialchars(__('No records'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-width: 150px; opacity: 0.5;" onerror="this.style.display='none'">
+                                    <img class="empty-img-300" alt="<?= htmlspecialchars(__('No records'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-width: 150px; opacity: 0.5;" data-onerror-hide="true">
                                 </div>
                             </div>
                         </td>

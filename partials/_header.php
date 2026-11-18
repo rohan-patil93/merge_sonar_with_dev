@@ -464,12 +464,12 @@
         </li>
 
 
-    <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Notifications'); ?>" onclick="getNotificationList()">
+    <li class="header-notification  m-r-10"  data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Notifications'); ?>">
         <div class="dropdown-primary dropdown">
-            <div class="displayChatbox dropdown-toggle" data-bs-toggle="dropdown">
+            <button type="button" class="displayChatbox dropdown-toggle border-0 bg-transparent p-0" style="color:inherit;font:inherit;" data-bs-toggle="dropdown" onclick="getNotificationList()">
                 <i class="ti-bell"></i>
                 <span class="badge bg-c-red"><?php echo $inboxcount['notificaton_cnt']; ?></span>
-            </div>
+            </button>
         </div>
     </li>
 
@@ -478,12 +478,12 @@
             <span class="" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="ti-headphone-alt"></i></span>
             <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                 <?php if($_SESSION['admin_type'] !='1'){ ?>
-                    <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('NT')"><?php echo __('New Ticket'); ?></a>
+                    <button type="button" class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('NT')"><?php echo __('New Ticket'); ?></button>
 
-                <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('LT')"><?php echo __('My Tickets'); ?></a>
+                <button type="button" class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('LT')"><?php echo __('My Tickets'); ?></button>
                 <?php  } ?>
                 <?php if($_SESSION['admin_type'] =='1'){ ?>
-                <a class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('PT')"><?php echo __('Tickets Submitted To Me'); ?></a>
+                <button type="button" class="dropdown-item waves-light waves-effect"  onclick="getApplicationTickets('PT')"><?php echo __('Tickets Submitted To Me'); ?></button>
                 <?php } ?>
             </div>
         </div>
@@ -572,8 +572,8 @@
                         </a>
                     </li>
                 <?php } ?>
-                <li onclick="location.href='index.php?option=com_logout';">
-                    <a href="#!" class="text-danger">
+                <li>
+                    <a href="index.php?option=com_logout" class="text-danger">
                         <i class="ti-power-off"></i> <?php echo __('Logout'); ?>
                     </a>
                 </li>

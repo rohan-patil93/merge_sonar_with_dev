@@ -244,8 +244,6 @@ class demoClass extends userClass{
 						$res=$callConfig->getAllRows($sql);
 						$display_postion = 10;
 						$data1 = $data = array();
-						$gte = array();
-						$data['company_id'] = $gte['company_id'];
 						foreach($res as $dsfvdgv){
 							$postvalue = $dsfvdgv->COLUMN_NAME;
 							$data1[$postvalue]['display_postion'] = $display_postion;

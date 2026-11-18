@@ -46,10 +46,10 @@
 					<div class="card-header mb-3">
 						<h5><?= __('Assets Request'); ?></h5>
 						<div class="card-header-right">
-							<a href="javascript:void(0)" onclick="history.go(-1)" role="button" class="btn waves-effect waves-light">
+							<button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light">
 								<i class="icofont icofont-reply"></i>
 								<?= __('Back'); ?>
-							</a>
+							</button>
 						</div>
 					</div>
 					<div class="card-body">

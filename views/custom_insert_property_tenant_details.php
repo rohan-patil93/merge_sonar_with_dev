@@ -691,10 +691,10 @@ if($property_tenant_details['parent_id'] !="0" && $property_tenant_details['orig
 						<table class="table table-hover " width="100%">
 							<thead>
 								<tr>
-									<td><?php echo __('Area Name/Area/Rate'); ?></td>
-									<td class=""><?php echo __('Manually Rent'); ?></td>
-									<td class="text-right"><?php echo __('Discount'); ?></td>
-									<td class="text-right"><?php echo __('Rent (Monthly)'); ?></td>
+									<th scope="col"><?php echo __('Area Name/Area/Rate'); ?></th>
+									<th scope="col" class=""><?php echo __('Manually Rent'); ?></th>
+									<th scope="col" class="text-right"><?php echo __('Discount'); ?></th>
+									<th scope="col" class="text-right"><?php echo __('Rent (Monthly)'); ?></th>
 								</tr>
 							</thead>
 							<tbody>

@@ -2737,7 +2737,7 @@ if ($userData['user_photo'] != '') {
               </div>
               <div class="items tablesec" style="margin-top: .5rem;">
                 <div class="table-responsive">
-                  <table class="table bordered mb-10"
+                  <table role="presentation" class="table bordered mb-10"
                     style="border-style: <?php echo $borderstyle; ?>; border-color: <?php echo $bordercolor; ?>; border-width: <?php echo $borderwidth; ?>px;">
                     <thead>
                       <tr class="">

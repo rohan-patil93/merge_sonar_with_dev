@@ -1044,7 +1044,7 @@ function addslabrows(){
                                               </div>
                                               <div class="row">
                                                <div class="col-lg-6">
-                                                <a href="#"  onclick="setenable('epf')" class="btn btn-bg-light" id="epf">Enable</a>
+                                                <button type="button" onclick="setenable('epf')" class="btn btn-bg-light" id="epf">Enable</button>
                                                 <input type="hidden" name="pf_checked" id="pf_checked" value="0">
                                               </div>
                                             </div>
@@ -1124,8 +1124,7 @@ function addslabrows(){
                     </div>
                   </div>
                   <div class="col-xl-6 mt-10">
-                   <a href="#"  onclick="setenable('esi')" class="btn btn-bg-light" id="esi">Enable</a>
-
+                   <button type="button" onclick="setenable('esi')" class="btn btn-bg-light" id="esi">Enable</button>
                    <input type="hidden" name="esi_checked" id="esi_checked"  value="0">
                  </div>
                </div>
@@ -1231,7 +1230,7 @@ function addslabrows(){
 
            </div>
            <div class="">
-             <a href="#"  onclick="setenable('pt')" class="btn btn-bg-light" id="pt">Enable</a>
+             <button type="button" onclick="setenable('pt')" class="btn btn-bg-light" id="pt">Enable</button>
 
              <input type="hidden" name="pt_checked" id="pt_checked"  value="0" >
            </div>
@@ -1285,7 +1284,7 @@ function addslabrows(){
 
             </div>
             <div class="">
-             <a href="#"  onclick="setenable('lwf')" class="btn btn-bg-light" id="lwf">Enable</a>
+             <button type="button" onclick="setenable('lwf')" class="btn btn-bg-light" id="lwf">Enable</button>
 
              <input type="hidden" name="lwf_checked" id="lwf_checked"  value="0">
            </div>
@@ -1370,8 +1369,7 @@ function addslabrows(){
                 </div>
                 </div>
                 <div class="col-xl-6 mt-10">
-                   <a href="#"  onclick="setenable('esi')" class="btn btn-bg-light" id="esi">Enable</a>
-
+                   <button type="button" onclick="setenable('esi')" class="btn btn-bg-light" id="esi">Enable</button>
                    <input type="hidden" name="esi_checked" id="esi_checked"  value="0">
                 </div>
              </div>
@@ -1555,9 +1553,9 @@ function addslabrows(){
     <div class="tab-content mt-5" id="myTabContent">
       <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
         <div class="text-right">
-          <a href="#" onclick="showpopup('Earning','','system_earnings');" class="btn btn-success waves-effect waves-light">
+          <button type="button" onclick="showpopup('Earning','','system_earnings');" class="btn btn-success waves-effect waves-light">
             <i class="ti-plus"></i> New Earning
-          </a>
+          </button>
         </div>
         <div class="row mt-2">
           <div class="col-xl-5">

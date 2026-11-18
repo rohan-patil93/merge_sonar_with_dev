@@ -483,7 +483,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                     <div class="col-xl-4 col-md-6">
                         <div class="card social-card">
                             <div class="card-body text-center p-0">
-                                <h2 class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></h2>
+                                <h2 class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i><span class="sr-only"><?= __('Today\'s Leads'); ?></span></h2>
                                 <h3 class="text-facebook f-w-700"><?php echo $dashboard_cnt['today_crm_lead_cnt']!=""?$dashboard_cnt['today_crm_lead_cnt']:0; ?></h3>
                                 <p><?= __('Today\'s Leads'); ?></p>
                             </div>
@@ -492,7 +492,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                     <div class="col-xl-4 col-md-6 ">
                         <div class="card social-card">
                             <div class="card-body text-center p-0">
-                                <h2 class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></h2>
+                                <h2 class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i><span class="sr-only"><?= __('Today\'s Contacts'); ?></span></h2>
                                 <h3 class="text-facebook f-w-700"><?php echo $dashboard_cnt['today_crm_contacts_cnt']!=""?$dashboard_cnt['today_crm_contacts_cnt']:0; ?></h3>
                                 <p><?= __('Today\'s Contacts'); ?></p>
                             </div>
@@ -501,7 +501,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                     <div class="col-xl-4 col-md-6">
                         <div class="card social-card">
                             <div class="card-body text-center p-0">
-                                <h2 class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i></h2>
+                                <h2 class="text-facebook m-b-5"><i class="ti-user f-24 text-mute"></i><span class="sr-only"><?= __('Today\'s Deals'); ?></span></h2>
                                 <h3 class="text-facebook f-w-700"><?php echo $dashboard_cnt['today_crm_deals_cnt']!=""?$dashboard_cnt['today_crm_deals_cnt']:0; ?></h3>
                                 <p><?= __('Today\'s Deals'); ?></p>
                             </div>
@@ -637,7 +637,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
 </div>
 		<div class="tab-content tabs">
             <div class="tab-pane card-body p-0 active active_crm_home active_all_class" id="home-tab" role="tabpanel">
-                <?php include "views/custom_view_crm_home_dashboards.php"; ?>
+                <?php include_once "views/custom_view_crm_home_dashboards.php"; ?>
             </div>
 			<div class="tab-pane card-body p-0 dynamictabviews active_all_class" id="lead-tab" role="tabpanel" >
                  <?php ?>

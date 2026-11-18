@@ -83,7 +83,7 @@ foreach ($roledata as $roles) {
 			<?php $i++;
 			}	?>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" onclick="redirectpage('COM_INSERT_ROLE_PERMISSIONS')" href=""> <?= __("All") ?> </a>
+				<button type="button" class="nav-link" data-toggle="tab" onclick="redirectpage('COM_INSERT_ROLE_PERMISSIONS')"> <?= __("All") ?> </button>
 			</li>
 
 		</ul>

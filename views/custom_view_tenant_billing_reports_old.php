@@ -74,7 +74,7 @@ $opening_balance_inv = $result['opening_balance_inv'];
                 <td class="p-2"><?php echo $property_owners[$ptd['property_owner_id']]; ?></td>
                 <td class="p-2"><?php echo $property_owner_details[$ptd['property_owner_detail_id']]; ?></td>
                 <td class="p-2" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Opening Balance'), ENT_QUOTES, 'UTF-8'); ?>">
-                  <table>
+                  <table role="presentation">
                     <tr>
                 <?php
                     $obinvoice = $opening_balance_inv[$ptd['property_tenant_detail_id']];

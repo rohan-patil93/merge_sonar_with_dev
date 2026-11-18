@@ -386,6 +386,7 @@ if($timeprint == '1' && $maxtimeshow >= '17'){
 	echo "CSS Ending - ".date('m/d/Y h:i:s a')."</br>";
 }
 ?>
+</head>
 <body>
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">

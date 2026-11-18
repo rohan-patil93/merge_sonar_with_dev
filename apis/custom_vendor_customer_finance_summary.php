@@ -654,7 +654,7 @@ $financeshowtabmodule = array(4);
                 <tr bgcolor="#eeeeee">
                   <th scope="col" colspan="9">
                     <table class="table table-bordered table-sm f-13 text-white">
-                      <tr class="header-row" onclick="toggleTable(this)">
+                      <tr class="header-row" onclick="toggleTable(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTable(this);}">
                         <th scope="col" colspan="5" class="f-14 text-dark cursor-pointer">
                           <i class="ti-angle-right m-r-10 arrow"></i>
                           <i class="fa fa-book m-r-5"></i> Ledger Statement — Aperture Science

@@ -51,7 +51,7 @@
   <div class="card">
     <h1>Token Invalid or Expired</h1>
     <p>Your access token is invalid or has expired. Please login again to continue.</p>
-    <a onclick="location.href='index.php?option=com_logout';" class="button">Go to Login</a>
+    <a href="index.php?option=com_logout" class="button">Go to Login</a>
   </div>
 </body>
 </html>

@@ -167,18 +167,18 @@ function submitdetails(){
 				<div class="form-radio">
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_e">
-				        <input type="radio" id="allocation_type_e"  name="allocation_type" value="E" onclick="selectAllocationType()" style="display: none;" checked aria-label="<?= htmlspecialchars(__('Allocation Type'), ENT_QUOTES, 'UTF-8'); ?>">
+				        <input type="radio" id="allocation_type_e"  name="allocation_type" value="E" onclick="selectAllocationType()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" style="display: none;" checked aria-label="<?= htmlspecialchars(__('Allocation Type'), ENT_QUOTES, 'UTF-8'); ?>">
 				        <i class="helper"></i><?= __('User') ?></label>
 				    </div>
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_cc">
-				        <input type="radio" id="allocation_type_cc" name="allocation_type"  value="CC" onclick="selectAllocationType()"  style="display: none;" aria-label="<?= htmlspecialchars(__('Allocation Type'), ENT_QUOTES, 'UTF-8'); ?>">
+				        <input type="radio" id="allocation_type_cc" name="allocation_type"  value="CC" onclick="selectAllocationType()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"  style="display: none;" aria-label="<?= htmlspecialchars(__('Allocation Type'), ENT_QUOTES, 'UTF-8'); ?>">
 				        <i class="helper"></i><?= __('Cost Centers') ?>
 				      </label>
 				    </div>
 				    <div class="radio radio-inline">
 				      <label class="form-label" for="allocation_type_d">
-				        <input type="radio" id="allocation_type_d" name="allocation_type"  value="D" onclick="selectAllocationType()" style="display: none;" aria-label="<?= htmlspecialchars(__('Allocation Type'), ENT_QUOTES, 'UTF-8'); ?>">
+				        <input type="radio" id="allocation_type_d" name="allocation_type"  value="D" onclick="selectAllocationType()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" style="display: none;" aria-label="<?= htmlspecialchars(__('Allocation Type'), ENT_QUOTES, 'UTF-8'); ?>">
 				        <i class="helper"></i><?= __('Departments') ?>
 				      </label>
 				    </div>

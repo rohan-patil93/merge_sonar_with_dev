@@ -1015,7 +1015,7 @@ if($register_data['current_status'] !=""){
   <label class="form-label">
     <input type="checkbox" style="display:none" <?php if($register_data['shipping_address']==$register_data['billing_address'] && $rowid!="") { echo 'checked';
     } else { echo '';
-    } ?> id="is_same" onclick="sameaddress()" title="Input" aria-label="Input">
+    } ?> id="is_same" onclick="sameaddress()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" title="Input" aria-label="Input">
     <span class="cr">
       <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
     </span><span>

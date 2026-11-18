@@ -476,7 +476,7 @@ $due_date_period_list = $result['period_list'];
 
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Profile Readiness</a>
                 <div class="accordion-desc p-0">
-                  <table class="table table-hover table-md">
+                  <table role="presentation" class="table table-hover table-md">
                     <tbody>
                       <?php foreach ($profilereadiness as $keylabel => $profilereadines) {
                         $complete_field = $total_field = 0;
@@ -547,7 +547,7 @@ $due_date_period_list = $result['period_list'];
                    ?>
              <a class="accordion-msg b-none waves-effect waves-light f-w-700"><i class="fa fa-folder"></i> <?php echo ucwords(strtolower($parentdocuments['document_name'])); ?></a>
              <div class="accordion-desc p-0">
-               <table class="table table-hover m-b-0 " style="font-size:13px;">
+               <table role="presentation" class="table table-hover m-b-0 " style="font-size:13px;">
                  <tbody>
                    <?php foreach ($vdata_details as $details){
                      $candidatedocument = $checkl[$details['id']];
@@ -618,7 +618,7 @@ $due_date_period_list = $result['period_list'];
                                <div class="card-header">
                                  <h5><?php echo ucwords($details['document_name']); ?> Request</h5>
                                  <div class="card-header-right">
-                                   <i class="ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Close"></i>
+                                   <button type="button" class="ti-close border-0 bg-transparent p-0" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Close" aria-label="Close"></button>
                                  </div>
                                </div>
                                <div class="card-body">
@@ -696,7 +696,7 @@ $due_date_period_list = $result['period_list'];
                             ; ?> of <?php echo $complitedtask[$key1] != "" ? $complitedtask[$key1] : "0"; ?> Completed</span>
                           </a>
                           <div class="accordion-desc">
-                            <table class="table table-hover">
+                            <table role="presentation" class="table table-hover">
                               <tbody>
                                 <?php foreach ($transactionactivityschedule as $tas) { ?>
                                   <tr id="custom-popup-tas-<?php echo $tas['id']; ?>">
@@ -709,8 +709,8 @@ $due_date_period_list = $result['period_list'];
                                           </h6>
                                         </a>
                                       <?php } else { ?>
-                                        <h6 role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="mb-0 f-14" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i
-                                            class="ti-check-box"></i> <?php echo $tas['task_name']; ?></h6>
+                                        <h6 class="mb-0 f-14"><button type="button" class="border-0 bg-transparent p-0 text-start" style="font:inherit;color:inherit;cursor:pointer;" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i
+                                            class="ti-check-box"></i> <?php echo $tas['task_name']; ?></button></h6>
                                       <?php } ?>
                                     </td>
                                     <td align="center" class="statusid_<?php echo $tas['id']; ?>">
@@ -732,7 +732,7 @@ $due_date_period_list = $result['period_list'];
                                               </div>
                                             </div>
                                             <div class="card-body">
-                                              <table width="100%">
+                                              <table role="presentation" width="100%">
                                                 <tbody>
 
                                                   <?php
@@ -878,7 +878,7 @@ $due_date_period_list = $result['period_list'];
                ;?> of <?php echo $linkcomplitedtask[$key1] !=""?$linkcomplitedtask[$key1]:"0";?> Completed</span>
              </a>
              <div class="accordion-desc">
-               <table class="table table-hover">
+               <table role="presentation" class="table table-hover">
                  <tbody>
                    <?php foreach($transactionactivityschedule11 as $tas){
                      ?>
@@ -889,7 +889,7 @@ $due_date_period_list = $result['period_list'];
                            <!--    <a href="<?php echo $tas['page_url']; ?>" target="_blank"><h6 class="mb-0 f-14" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i class="ti-new-window"></i> <?php echo $tas['task_name']; ?></h6></a> -->
                            <a href="<?php echo $tas['page_url'];  ?>" target="_blank" onclick="UpdateTransactionActivitySchedule1('<?php echo $tas['id']; ?>')" class="text-primary"><h6 class="mb-0 f-14" ><i class="ti-new-window"></i> <?php echo $tas['task_name']; ?></h6></a>
                          <?php  }else{ ?>
-                           <h6 class="mb-0 f-14" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i class="ti-check-box"></i> <?php echo $tas['task_name']; ?></h6>
+                           <h6 class="mb-0 f-14"><button type="button" class="border-0 bg-transparent p-0 text-start" style="font:inherit;color:inherit;cursor:pointer;" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i class="ti-check-box"></i> <?php echo $tas['task_name']; ?></button></h6>
                          <?php } ?>
                        </td>
                        <td align="center" class="statusid_<?php echo $tas['id']; ?>">
@@ -915,7 +915,7 @@ $due_date_period_list = $result['period_list'];
        <?php **/ ?>
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Policies And Procedures</a>
                 <div class="accordion-desc">
-                  <table class="table table-hover">
+                  <table role="presentation" class="table table-hover">
                     <tbody>
                       <tr>
                         <td>
@@ -1166,8 +1166,8 @@ $due_date_period_list = $result['period_list'];
                                                <button class="label label-sm label-success" style="height: 18px; border-radius: 30px;"  type="button" data-content="<?php echo $value[$current_status]['name']; ?>"></button>
                                                <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                                  <?php if($value['current_status'] == 0){ ?>
-                                                   <div class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)"  name="status" id="status" value="<?php echo ST_APPROVED; ?>)">Approved</div>
-                                                   <div class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"  name="status" id="status" value="<?php echo ST_REJECTED; ?>)">Rejected</div>
+                                                   <button type="button" class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)" name="status" value="<?php echo ST_APPROVED; ?>">Approved</button>
+                                                   <button type="button" class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)" name="status" value="<?php echo ST_REJECTED; ?>">Rejected</button>
                                                  <?php } ?>
                                                </div>
                                              </div>

@@ -506,9 +506,9 @@ $erp = json_decode($erp_data,1);
                 </div>
                 <div class="col p-l-0">
                     <h6 class="m-b-5 f-14"><?= __("Current Vs Previous") ?></h6>
-                    <h6 class="m-b-0 text-c-blue"><a onclick="cvppopup('Current',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'apv_list')" >
+                    <h6 class="m-b-0 text-c-blue"><button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Current',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'apv_list')" >
 				<?php echo customeummarmonyformate($ttcount/100000); ?> L
-				</a> <?= __('Vs'); ?> <a onclick="cvppopup('Previous',<?php echo "'".customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000)." Lac'"; ?>,'last_pre_list')" > <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L </a></h6>
+				</button> <?= __('Vs'); ?> <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Previous',<?php echo "'".customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000)." Lac'"; ?>,'last_pre_list')" > <?php echo customeummarmonyformate(($lmonth['billable_amount']+$lmonth['nonbillable_amount'])/100000); ?> L </button></h6>
 			<input type="hidden" name="apv_list" id="apv_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="apv_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_hrs'=>'billable_hrs','billable_amount'=>'billable_amount')); ?>' >
 			<input type="hidden" id="last_pre_list" value='<?php echo json_encode((array)$last_pre_list); ?>' >
@@ -541,10 +541,10 @@ $erp = json_decode($erp_data,1);
                 <div class="col p-l-0">
                     <h6 class="m-b-5 f-14 "><?= __("Budget Vs Actuals") ?></h6>
 			<h6 class="m-b-0 text-c-green">
-			<a onclick="cvppopup('Budget',<?php echo "'".$total_budget_hrs." Hrs'"; ?>,'bg_hr_list')" >
-				<?php echo $total_budget_hrs; ?> H </a>
-			 <?= __('Vs'); ?> <a onclick="cvppopup('Actuals',<?php echo "'".$total_billabe_hrs." Hrs'"; ?>,'bg_hr_list')" >
-				<?php echo $total_billabe_hrs; ?> H </a>
+			<button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Budget',<?php echo "'".$total_budget_hrs." Hrs'"; ?>,'bg_hr_list')" >
+				<?php echo $total_budget_hrs; ?> H </button>
+			 <?= __('Vs'); ?> <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Actuals',<?php echo "'".$total_billabe_hrs." Hrs'"; ?>,'bg_hr_list')" >
+				<?php echo $total_billabe_hrs; ?> H </button>
 			</h6>
 			<input type="hidden" name="bg_hr_list" id="bg_hr_list" value='<?php echo json_encode($emp_sub); ?>' >
 			<input type="hidden"  id="bg_hr_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','budget_hrs'=>'budget_hrs','billable_hrs'=>'billable_hrs')); ?>' >
@@ -587,8 +587,8 @@ if ($total_budget_hrs > 0) {
                 <div class="col p-l-0">
                     <h6 class="m-b-5 f-14"><?= __('Budget Vs Utilization'); ?></h6>
                     <h6 class="m-b-0 text-c-red">
-			 <a onclick="cvppopup('Budget',<?php echo "'".customeummarmonyformate($total_budget_amount/100000)." Lac'"; ?>,'bg_ut_list')" >
-			<?php echo customeummarmonyformate($total_budget_amount/100000); ?> L</a> <?= __('Vs'); ?>  <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'bg_ut_list')" >  <?php echo customeummarmonyformate($ttcount/100000); ?> L </a></h6>
+			 <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Budget',<?php echo "'".customeummarmonyformate($total_budget_amount/100000)." Lac'"; ?>,'bg_ut_list')" >
+			<?php echo customeummarmonyformate($total_budget_amount/100000); ?> L</button> <?= __('Vs'); ?>  <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'bg_ut_list')" >  <?php echo customeummarmonyformate($ttcount/100000); ?> L </button></h6>
 			<input type="hidden" name="bg_hr_list" id="bg_ut_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="bg_ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','budgeted_amount'=>'budgeted_amount','billable_amount'=>'billable_amount')); ?>' >
                 </div>
@@ -618,8 +618,8 @@ if ($total_budget_hrs > 0) {
                 <div class="col p-l-0">
                     <h6 class="m-b-5 f-14"><?= __('Utilization Vs Approved'); ?></h6>
                     <h6 class="m-b-0 text-c-yellow">
-				 <a onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'ut_list')" >
-				<?php echo customeummarmonyformate($ttcount/100000); ?> L </a> <?= __('Vs'); ?><a onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000)." Lac'"; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </a></h6>
+				 <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000)." Lac'"; ?>,'ut_list')" >
+				<?php echo customeummarmonyformate($ttcount/100000); ?> L </button> <?= __('Vs'); ?><button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000)." Lac'"; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </button></h6>
 			<input type="hidden" name="bg_hr_list" id="ut_list" value='<?php echo json_encode($apv_list); ?>' >
 			<input type="hidden"  id="ut_list_ths" value='<?php echo json_encode(array('employee_name'=>'employee_name','job_title'=>'job_title','billable_amount'=>'billable_amount','utilize'=>'Status')); ?>' >
                 </div>
@@ -752,7 +752,7 @@ if ($total_budget_hrs > 0) {
 								<button class="btn btn-primary dropdown-toggle font-size-sm" style="color: <?php echo "#".$stausresult['10']['color']; ?>;    background:  <?php echo "#".strval($stausresult['10']['background_color']); ?>; border-color: <?php echo "#".strval($stausresult['10']['background_color']); ?>;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo $statu_progress['10']['name']; ?> </button>
 								<div class="dropdown-menu" id="dropdownlist_<?php echo $fid; ?>">
 									<div class="dropdown-item cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="statuspopup('101','2')" name="status" id="status" value="101"><?php echo $statu_progress['101']['action_label']; ?>  </div>
-									<div class="dropdown-item cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="statuspopup('20','2')" name="status" id="status" value="20"><?php echo $statu_progress['20']['action_label']; ?>  </div>
+									<div class="dropdown-item cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="statuspopup('20','2')" name="status" id="status_20" value="20"><?php echo $statu_progress['20']['action_label']; ?>  </div>
 								</div>
 
 							</div>
@@ -969,7 +969,7 @@ if($sb['vrc_purchase_uom']=='PD'){
 													<th scope="col" class=" min-w-50px text-center">
 														<div class="checkbox-fade fade-in-primary">
 															<label class="checkbox checkbox-success">
-																<input type="checkbox" aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>" id="select_all" class="itemRow" onclick="tocheckallboxes()">
+																<input type="checkbox" aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>" id="select_all" class="itemRow" onclick="tocheckallboxes()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
 																<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>
@@ -1076,7 +1076,7 @@ $vrcbbg_color= lableandbgcolor($vrcsb_bp);
 												<td class="text-center pr-0">
 													<div class="checkbox-fade fade-in-primary">
 														<label class="checkbox checkbox-success">
-															<input type="checkbox" aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" onclick="tocheckdrodown()" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>">
+															<input type="checkbox" aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>" onclick="tocheckdrodown()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" class="itemRow checkbox1" name="checkbox1" value="<?php echo $sb['employee_id']; ?>">
 															<span class="cr">
                                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                         </span>

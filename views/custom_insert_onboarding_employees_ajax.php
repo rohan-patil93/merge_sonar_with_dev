@@ -970,7 +970,7 @@ $bank_work_flow = "Y";
 		   	<div class="col-xl-6 mt-2" >
 		        <span class="form-label d-inline-block fw-bold"><?php echo __('Division'); ?> </span>
 		        <div class="<?php echo $readonlycheck; ?>">
-			        <select aria-label="<?= htmlspecialchars(__('Designation id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" onclick="tochangedeparment(this.value)" name="designation_id">
+			        <select aria-label="<?= htmlspecialchars(__('Designation id'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" onclick="tochangedeparment(this.value)" onkeydown="if(event.key==='Enter'){tochangedeparment(this.value);}" name="designation_id">
 					  	<option value=""><?php echo __('Select Any One'); ?></option>
 					  	<?php foreach ($divisions as $desigs) {
 					    ?>
@@ -1113,7 +1113,7 @@ $bank_work_flow = "Y";
 			    ?>
 			      <div class="radio radio-inline">
 			       <label class="form-label <?php echo $text_color_ety; ?>">
-			         <input type="radio" onclick="employeementtypepopup(<?php echo $employee_id.",".$emptypes['genc_detail_code'];?>)" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php } ?> value="<?php echo $emptypes['genc_detail_code'];?>" style="display:none"/>
+			         <input type="radio" onclick="employeementtypepopup(<?php echo $employee_id.",".$emptypes['genc_detail_code'];?>)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php } ?> value="<?php echo $emptypes['genc_detail_code'];?>" style="display:none"/>
 			         <i class="helper"></i><?php echo __($emptypes['genc_detail_name']);?> </label>
 			       </div>
 			    <?php } ?>
@@ -1183,7 +1183,7 @@ $bank_work_flow = "Y";
 			 ?>
 			    <div class="radio radio-inline">
 			     	<label class="form-label">
-			       		<input onclick="showmarriagedate(this.value);" type="radio" name="marital_status" <?php if($data['marital_status'] == $marital_stat['id']) {?> checked="checked" <?php } ?> value="<?php echo $marital_stat['id']; ?>" style="display:none"/>
+			       		<input onclick="showmarriagedate(this.value);" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" type="radio" name="marital_status" <?php if($data['marital_status'] == $marital_stat['id']) {?> checked="checked" <?php } ?> value="<?php echo $marital_stat['id']; ?>" style="display:none"/>
 			       		<i class="helper"></i>
 			       		<?php echo $marital_stat['marital_status_name']; ?>
 			     	</label>
@@ -1247,8 +1247,8 @@ $bank_work_flow = "Y";
 			   foreach ($yesno as $ynkey=>$yn) {
 			    ?>
 			    <div class="radio radio-inline">
-			     	<label class="form-label" onclick="selectDisability()">
-			       	<input type="radio" name="disability" id="disability" <?php if($data['disability'] == $ynkey || ($data['disability'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
+			     	<label class="form-label">
+			       	<input type="radio" name="disability" id="disability" onclick="selectDisability()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php if($data['disability'] == $ynkey || ($data['disability'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
 			       	<i class="helper"></i>
 			       	<?php echo $yn; ?>
 			     	</label>

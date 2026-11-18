@@ -177,14 +177,14 @@
                 <table width="100%" border="1" bordercolor="#cccccc" cellpadding="5" cellspacing="0" style="border-collapse: collapse; font-size: 10px;">
                     <thead>
                         <tr style="font-weight: bold; text-align: center; border: 1px solid #cccccc;">
-                            <td width="5%" style="border: 1px solid #cccccc;">#</td>
-                            <td width="12%" style="border: 1px solid #cccccc;"><?= __('Item Code'); ?></td>
-                            <td width="35%" style="border: 1px solid #cccccc;"><?= __('Description'); ?></td>
-                            <td width="13%" style="border: 1px solid #cccccc;"><?= __('HSN/SAC'); ?></td>
-                            <td width="8%" style="border: 1px solid #cccccc;"><?= __('UOM'); ?></td>
-                            <td width="7%" style="border: 1px solid #cccccc;"><?= __('QTY.'); ?></td>
-                            <td width="12%" style="border: 1px solid #cccccc;"><?= __('Unit Description'); ?></td>
-                            <td width="8%" style="border: 1px solid #cccccc;"><?= __('Remarks'); ?></td>
+                            <th scope="col" width="5%" style="border: 1px solid #cccccc;">#</th>
+                            <th scope="col" width="12%" style="border: 1px solid #cccccc;"><?= __('Item Code'); ?></th>
+                            <th scope="col" width="35%" style="border: 1px solid #cccccc;"><?= __('Description'); ?></th>
+                            <th scope="col" width="13%" style="border: 1px solid #cccccc;"><?= __('HSN/SAC'); ?></th>
+                            <th scope="col" width="8%" style="border: 1px solid #cccccc;"><?= __('UOM'); ?></th>
+                            <th scope="col" width="7%" style="border: 1px solid #cccccc;"><?= __('QTY.'); ?></th>
+                            <th scope="col" width="12%" style="border: 1px solid #cccccc;"><?= __('Unit Description'); ?></th>
+                            <th scope="col" width="8%" style="border: 1px solid #cccccc;"><?= __('Remarks'); ?></th>
                         </tr>
                     </thead>
                     <tbody>

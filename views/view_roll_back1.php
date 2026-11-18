@@ -291,9 +291,9 @@ if($viewtime ==1 ){
               <div class="dropdown-menu" aria-labelledby="dropdown-5"
               data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
               <?php foreach($statusjsondecode as $arststuslist){ ?>
-                <a onclick="dynamicFilterTable('<?php echo $arststuslist['status']; ?>')" class="dropdown-item waves-light waves-effect" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $arststuslist['name']; ?></a>
+                <button type="button" onclick="dynamicFilterTable('<?php echo $arststuslist['status']; ?>')" class="dropdown-item waves-light waves-effect"><?php echo $arststuslist['name']; ?></button>
                 <?php } ?>
-                 <a onclick="dynamicFilterTable('-1')" class="dropdown-item waves-light waves-effect" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $arststuslist['name']; ?></a>
+                 <button type="button" onclick="dynamicFilterTable('-1')" class="dropdown-item waves-light waves-effect"><?php echo $arststuslist['name']; ?></button>
               </div>
             </div>
        <?php } ?>
