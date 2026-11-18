@@ -1,5 +1,11 @@
 <?php
-$contract_services_contact_section = $contract_services_contact_section ?? '';
+if (!function_exists('render_contract_services_contact_fields')) {
+function render_contract_services_contact_fields($ctx) {
+$contract_services_contact_section = $ctx['contract_services_contact_section'] ?? '';
+$formData = $ctx['formData'] ?? array();
+$fieldDisplay = $ctx['fieldDisplay'] ?? array();
+$amc_renew_disabled = $ctx['amc_renew_disabled'] ?? '';
+$contract_services = $ctx['contract_services'] ?? array();
 $selectedcontractservices = array();
 if (!empty($formData['contract_services_id'])) {
     $selectedcontractservices = json_decode($formData['contract_services_id'], true);
@@ -68,4 +74,7 @@ if (!empty($formData['contact_persons'])) {
                                 <i class="fa fa-plus-circle me-1"></i> <?= __('Add More Contact Person') ?>
                             </button>
                         </div>
-<?php } ?>
+<?php }
+}
+}
+?>

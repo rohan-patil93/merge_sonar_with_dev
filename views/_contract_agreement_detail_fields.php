@@ -1,5 +1,14 @@
 <?php
-$contract_agreement_section = $contract_agreement_section ?? '';
+if (!function_exists('render_contract_agreement_detail_fields')) {
+function render_contract_agreement_detail_fields($ctx) {
+$contract_agreement_section = $ctx['contract_agreement_section'] ?? '';
+$contract_agreement_locations_section = $ctx['contract_agreement_locations_section'] ?? '';
+$fieldDisplay = $ctx['fieldDisplay'] ?? array();
+$genc = $ctx['genc'] ?? array();
+$des = $ctx['des'] ?? array();
+$locations = $ctx['locations'] ?? array();
+$selectedLocations = $ctx['selectedLocations'] ?? array();
+$formData = $ctx['formData'] ?? array();
 ?>
 <?php if ($contract_agreement_section == 'classification') { ?>
                         <div class="col-md-4" style="<?= $fieldDisplay['typeofaggrements']['style'] ?>">
@@ -113,4 +122,7 @@ if ($contract_agreement_section == 'extended') { ?>
                                 </div>
                             </div>
                         </div>
-<?php } ?>
+<?php }
+}
+}
+?>

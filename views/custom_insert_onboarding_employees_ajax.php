@@ -1,5 +1,5 @@
 <?php
-if($_POST['ajaxcallemployee'] =="Y"){
+if(isset($_POST['ajaxcallemployee']) && $_POST['ajaxcallemployee'] =="Y"){
 	$employee_id = $_POST['employee_id'];
 	include_once '../includes/session.php';
 	include_once '../dbconfig.php';
@@ -9,6 +9,16 @@ if($_POST['ajaxcallemployee'] =="Y"){
 	$result = json_decode($response,1);
 	$data = $result['employees'];
 }
+if (!function_exists('render_onboarding_employees_ajax_section')) {
+function render_onboarding_employees_ajax_section($ctx) {
+$result = $ctx['result'] ?? array();
+$data = $ctx['data'] ?? array();
+$employee_id = $ctx['employee_id'] ?? '';
+$text_color_ety = $ctx['text_color_ety'] ?? '';
+$text_color_ebi = $ctx['text_color_ebi'] ?? '';
+$text_color_gen = $ctx['text_color_gen'] ?? '';
+$read_only_ln = $ctx['read_only_ln'] ?? '';
+$job_titles = $ctx['job_titles'] ?? array();
 $employees_display_fields = $result['employees_display_fields'];
 $vafield = json_decode($employees_display_fields['field_list'],1);
 $departments = $result['departments'];
@@ -2129,3 +2139,19 @@ $bank_work_flow = "Y";
 
 <?php } ?>
 <?php } //INSERT part End ?>
+<?php
+}
+}
+if (empty($onboarding_employees_ajax_define_only)) {
+	render_onboarding_employees_ajax_section(array(
+		'result' => $result ?? array(),
+		'data' => $data ?? array(),
+		'employee_id' => $employee_id ?? '',
+		'text_color_ety' => $text_color_ety ?? '',
+		'text_color_ebi' => $text_color_ebi ?? '',
+		'text_color_gen' => $text_color_gen ?? '',
+		'read_only_ln' => $read_only_ln ?? '',
+		'job_titles' => $job_titles ?? array(),
+	));
+}
+?>

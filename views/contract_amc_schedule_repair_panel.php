@@ -158,6 +158,8 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                     <?php
 
+                    include_once __DIR__ . '/contract_amc_schedule_repair_line_row.php';
+
                     $lineIdx = 0;
 
                     $repairItems = $repairItems ?? array();
@@ -172,7 +174,12 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                             }
 
-                            include __DIR__ . '/contract_amc_schedule_repair_line_row.php';
+                            render_contract_amc_schedule_repair_line_row(array(
+                                'line' => $line,
+                                'isRepairEditable' => $isRepairEditable ?? false,
+                                'repairItems' => $repairItems,
+                                'lineIdx' => $lineIdx,
+                            ));
 
                             $lineIdx++;
 
@@ -182,7 +189,12 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                         $line = array();
 
-                        include_once __DIR__ . '/contract_amc_schedule_repair_line_row.php';
+                        render_contract_amc_schedule_repair_line_row(array(
+                            'line' => $line,
+                            'isRepairEditable' => $isRepairEditable ?? false,
+                            'repairItems' => $repairItems,
+                            'lineIdx' => $lineIdx,
+                        ));
 
                         $lineIdx = 1;
 

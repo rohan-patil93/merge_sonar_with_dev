@@ -58,6 +58,19 @@ function replaceNetTabAndsinglequote($string)
 
 
 $bank_work_flow = "Y";
+$onboarding_employees_ajax_define_only = true;
+include_once __DIR__ . '/custom_insert_onboarding_employees_ajax.php';
+$onboarding_employees_ajax_define_only = false;
+$onboarding_employees_ajax_ctx = array(
+	'result' => $result ?? array(),
+	'data' => $data ?? array(),
+	'employee_id' => $employee_id ?? '',
+	'text_color_ety' => $text_color_ety ?? '',
+	'text_color_ebi' => $text_color_ebi ?? '',
+	'text_color_gen' => $text_color_gen ?? '',
+	'read_only_ln' => $read_only_ln ?? '',
+	'job_titles' => $job_titles ?? array(),
+);
 ?>
 <script type="text/javascript">
 	function editEmployeeProfile(pagetype = "", edittype = "", loadpage = "", loadpagebtn = "", formname = "", transaction_table) {
@@ -835,11 +848,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "basic_information";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -869,11 +878,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "work_details";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -903,11 +908,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "personal_details";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -936,11 +937,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "bank_details";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -969,11 +966,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 											<?php
 											$_POST['edittype'] = "VIEW";
 											$_POST['showpagetype'] = "bank_details";
-											if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-												include "views/custom_insert_onboarding_employees_ajax.php";
-											} else {
-												include "custom_insert_onboarding_employees_ajax.php";
-											}
+											render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 											unset($_POST['edittype']);
 											unset($_POST['showpagetype']);
 											?>
@@ -1004,11 +997,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "employee_buddies";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -1039,11 +1028,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "employee_access";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -1075,11 +1060,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "employee_other_access";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -1111,11 +1092,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "proof_details";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -1145,11 +1122,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "experience_details";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -1179,11 +1152,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "employee_qualifications";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -1213,11 +1182,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "employee_dependents";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -1247,11 +1212,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "employee_contacts";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -1281,11 +1242,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "emp_visa";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>
@@ -1315,11 +1272,7 @@ $accessbtnclass = $accessbtnclasssuccess = "btn-danger disabled";
 										<?php
 										$_POST['edittype'] = "VIEW";
 										$_POST['showpagetype'] = "emp_skills";
-										if (file_exists('views/custom_insert_onboarding_employees_ajax.php')) {
-											include "views/custom_insert_onboarding_employees_ajax.php";
-										} else {
-											include "custom_insert_onboarding_employees_ajax.php";
-										}
+										render_onboarding_employees_ajax_section($onboarding_employees_ajax_ctx);
 										unset($_POST['edittype']);
 										unset($_POST['showpagetype']);
 										?>

@@ -2440,10 +2440,28 @@ if (count((array) $milestones) > 0) {
                                             </div>
 
 
-                                            <?php $contract_agreement_section = 'classification';
-                                            include __DIR__ . '/_contract_agreement_detail_fields.php'; ?>
+                                            <?php
+                                            include_once __DIR__ . '/_contract_agreement_detail_fields.php';
+                                            include_once __DIR__ . '/_contract_services_contact_fields.php';
+                                            $contract_agreement_section = 'classification';
+                                            render_contract_agreement_detail_fields(array(
+                                                'contract_agreement_section' => $contract_agreement_section,
+                                                'contract_agreement_locations_section' => $contract_agreement_locations_section ?? '',
+                                                'fieldDisplay' => $fieldDisplay ?? array(),
+                                                'genc' => $genc ?? array(),
+                                                'des' => $des ?? array(),
+                                                'locations' => $locations ?? array(),
+                                                'selectedLocations' => $selectedLocations ?? array(),
+                                                'formData' => $formData ?? array(),
+                                            )); ?>
                                             <?php $contract_services_contact_section = 'services';
-                                            include __DIR__ . '/_contract_services_contact_fields.php'; ?>
+                                            render_contract_services_contact_fields(array(
+                                                'contract_services_contact_section' => $contract_services_contact_section,
+                                                'formData' => $formData ?? array(),
+                                                'fieldDisplay' => $fieldDisplay ?? array(),
+                                                'amc_renew_disabled' => $amc_renew_disabled ?? '',
+                                                'contract_services' => $contract_services ?? array(),
+                                            )); ?>
                                             <div class="col-md-12">
                                                 <span class="form-label d-block"><?= __('Party Type'); ?> <span
                                                         class="text-danger">*</span></span>
@@ -2614,7 +2632,13 @@ if (count((array) $milestones) > 0) {
                                                     value="<?= htmlspecialchars(dynamicDataDecode($formData['contract_owner_number'] ?? '')) ?>" title="<?= __('Enter contract owner contact number') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner contact number'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <?php $contract_services_contact_section = 'contact_persons';
-                                            include __DIR__ . '/_contract_services_contact_fields.php'; ?>
+                                            render_contract_services_contact_fields(array(
+                                                'contract_services_contact_section' => $contract_services_contact_section,
+                                                'formData' => $formData ?? array(),
+                                                'fieldDisplay' => $fieldDisplay ?? array(),
+                                                'amc_renew_disabled' => $amc_renew_disabled ?? '',
+                                                'contract_services' => $contract_services ?? array(),
+                                            )); ?>
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Effective(Start) Date'); ?> <span
                                                         class="text-danger">*</span></span>
@@ -2638,7 +2662,16 @@ if (count((array) $milestones) > 0) {
                                             </div>
                                             <?php $contract_agreement_section = 'extended';
                                             $contract_agreement_locations_section = 'Y';
-                                            include __DIR__ . '/_contract_agreement_detail_fields.php'; ?>
+                                            render_contract_agreement_detail_fields(array(
+                                                'contract_agreement_section' => $contract_agreement_section,
+                                                'contract_agreement_locations_section' => $contract_agreement_locations_section,
+                                                'fieldDisplay' => $fieldDisplay ?? array(),
+                                                'genc' => $genc ?? array(),
+                                                'des' => $des ?? array(),
+                                                'locations' => $locations ?? array(),
+                                                'selectedLocations' => $selectedLocations ?? array(),
+                                                'formData' => $formData ?? array(),
+                                            )); ?>
                                             <div class="col-md-12">
                                                 <span class="form-label"><?= __('Contract Description') ?></span>
                                                 <textarea class="form-control" name="description" rows="3"

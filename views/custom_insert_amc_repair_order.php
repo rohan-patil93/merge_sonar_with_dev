@@ -204,6 +204,7 @@ if ($scheduleVendorLabel == '') {
                         </thead>
                         <tbody id="amcRepairLinesBody">
                             <?php
+                            include_once __DIR__ . '/contract_amc_schedule_repair_line_row.php';
                             $lineIdx = 0;
                             $repairContractAssets = $contractAssets;
 
@@ -211,12 +212,22 @@ if ($scheduleVendorLabel == '') {
                             if (count((array)$lines) > 0) {
                                 foreach ($lines as $line) {
                                     $line = is_array($line) ? $line : (array) $line;
-                                    include __DIR__ . '/contract_amc_schedule_repair_line_row.php';
+                                    render_contract_amc_schedule_repair_line_row(array(
+                                        'line' => $line,
+                                        'isRepairEditable' => $isRepairEditable ?? false,
+                                        'repairItems' => $repairItems ?? array(),
+                                        'lineIdx' => $lineIdx,
+                                    ));
                                     $lineIdx++;
                                 }
                             } elseif ($isRepairEditable) {
                                 $line = array();
-                                include_once __DIR__ . '/contract_amc_schedule_repair_line_row.php';
+                                render_contract_amc_schedule_repair_line_row(array(
+                                    'line' => $line,
+                                    'isRepairEditable' => $isRepairEditable ?? false,
+                                    'repairItems' => $repairItems ?? array(),
+                                    'lineIdx' => $lineIdx,
+                                ));
                             }
                             ?>
                         </tbody>

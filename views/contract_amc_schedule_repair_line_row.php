@@ -1,6 +1,13 @@
 <?php
 
-$line = is_array($line ?? null) ? $line : array();
+if (!function_exists('render_contract_amc_schedule_repair_line_row')) {
+function render_contract_amc_schedule_repair_line_row($ctx) {
+$line = $ctx['line'] ?? null;
+$isRepairEditable = $ctx['isRepairEditable'] ?? false;
+$repairItems = $ctx['repairItems'] ?? array();
+$lineIdx = $ctx['lineIdx'] ?? 0;
+
+$line = is_array($line) ? $line : array();
 
 $rowEditable = !empty($isRepairEditable);
 
@@ -127,3 +134,7 @@ $lineItemId = (int) ($line['item_id'] ?? 0);
     <?php } ?>
 
 </tr>
+<?php
+}
+}
+?>
