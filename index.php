@@ -376,9 +376,10 @@ if(isset($_SESSION['work_module_setup_id']) && $_SESSION['work_module_setup_id']
     $_GET['CAT'] = POLL_CAT_ID;
 }
 
+$html_dir = (isset($_SESSION['selected_application_languages']) && $_SESSION['selected_application_languages'] == 'arabic') ? 'rtl' : 'ltr';
 ?>
 <!DOCTYPE html>
-<html lang="en" <?php echo $_SESSION['selected_application_languages']=='arabic'?'dir="rtl"':''; ?>>
+<html lang="en" dir="<?php echo $html_dir; ?>">
 <head>
 <title>InfiSuite | Home</title>
 <?php  include_once "partials/_head.php";

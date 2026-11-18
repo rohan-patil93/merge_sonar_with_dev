@@ -160,6 +160,15 @@ $joblevel_list = $results['job_grade'];
         $("#coursetype" + id).addClass("text-white");
         $("#employee_mode").val(id);
     }
+    $(document).on("click", ".coursetypeemty", function () {
+        coursetypefun($(this).data("id"));
+    });
+    $(document).on("keydown", ".coursetypeemty", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            coursetypefun($(this).data("id"));
+        }
+    });
     function deleteQuestion(id) {
         $(".rows" + id).remove();
     }
@@ -461,10 +470,6 @@ $joblevel_list = $results['job_grade'];
                                                             <label class="form-label">
                                                                 <input type="radio" <?php echo $jobpostlist['posting_type'] == '1' ? "checked" : ""; ?>
                                                                     name="posting_type" value="1"
-                                                                    onclick="cehckPostigType()"><i
-                                                                    class="helper"></i><?php echo __('Internal'); ?>
-                                                                <input type="radio" <?php echo $jobpostlist['posting_type'] == '1' ? "checked" : ""; ?>
-                                                                    name="posting_type" value="1"
                                                                     onclick="cehckPostigType()"
                                                                     onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"><i
                                                                     class="helper"></i><?php echo __('Internal'); ?>
@@ -472,8 +477,6 @@ $joblevel_list = $results['job_grade'];
                                                         </div>
                                                         <div class="radio radio-inline">
                                                             <label class="form-label">
-                                                                <input type="radio" name="posting_type" <?php echo $jobpostlist['posting_type'] == '2' ? "checked" : ""; ?>
-                                                                    value="2" onclick="cehckPostigType()">
                                                                 <input type="radio" name="posting_type" <?php echo $jobpostlist['posting_type'] == '2' ? "checked" : ""; ?>
                                                                     value="2" onclick="cehckPostigType()"
                                                                     onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
@@ -486,10 +489,10 @@ $joblevel_list = $results['job_grade'];
 
                                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10 w-full"
                                                     id="departmentshow" <?php echo $jobpostlist['posting_type'] == '1' ? "" : "style='display:none'"; ?>>
-                                                    <label class="form-label mt-1">
+                                                    <label for="jp_department_name" class="form-label mt-1">
                                                         <?php echo __('Department'); ?></label>
                                                     <select class="form-select js-example-basic-single form-control"
-                                                        id=""
+                                                        id="jp_department_name"
                                                         onchange="selectoptions('departments','department_name',this.value,'department_name')"
                                                         name="department_name"
                                                         aria-label="<?php echo __('Department Name'); ?>">
@@ -503,10 +506,10 @@ $joblevel_list = $results['job_grade'];
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10 w-full"
                                                     id="customershow" <?php echo $jobpostlist['posting_type'] == '2' ? "" : "style='display:none'"; ?>>
-                                                    <label class="form-label mt-1">
+                                                    <label for="jp_customer_id" class="form-label mt-1">
                                                         <?php echo __('Customer'); ?></label>
                                                     <select class="form-select js-example-basic-single form-control"
-                                                        id="" name="customer_id"
+                                                        id="jp_customer_id" name="customer_id"
                                                         aria-label="<?php echo __('Customer Id'); ?>">
                                                         <option value="-1"><?php echo __('Select Any One'); ?></option>
                                                         <?php foreach ($customers as $customer) { ?>
@@ -522,10 +525,10 @@ $joblevel_list = $results['job_grade'];
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-4 col-sm-12 col-12 m-b-10">
-                                                    <label
+                                                    <label for="jp_job_level"
                                                         class="form-label mt-1"><?php echo __('Job Level'); ?></label>
                                                     <select class="form-select js-example-basic-single form-control"
-                                                        id="" name="job_level"
+                                                        id="jp_job_level" name="job_level"
                                                         aria-label="<?php echo __('Job Level'); ?>">
                                                         <option value="-1"><?php echo __('Select job Level'); ?>
                                                         </option>
@@ -574,8 +577,8 @@ $joblevel_list = $results['job_grade'];
                                     </div>
                                     <div class="row m-b-10">
                                         <div class="col-12">
-                                            <label
-                                                class="form-label mt-1"><?php echo __('Annual Salary('); ?><?php echo $_SESSION['config']['currency_symbol']; ?>)</label>
+                                            <span
+                                                class="form-label d-block mt-1"><?php echo __('Annual Salary('); ?><?php echo $_SESSION['config']['currency_symbol']; ?>)</span>
                                             <div class="row">
                                                 <div class="col-lg-4 m-b-10">
                                                     <label for="fld_min_salary"
@@ -624,9 +627,9 @@ $joblevel_list = $results['job_grade'];
                                         <div class="col-lg-8">
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12 m-b-10">
-                                                    <label class="form-label mt-1">
+                                                    <label for="jp_esgin_budget" class="form-label mt-1">
                                                         <?php echo __('Esgin Budget'); ?></label>
-                                                    <select class="form-select js-example-basic-single" id=""
+                                                    <select class="form-select js-example-basic-single" id="jp_esgin_budget"
                                                         name="esgin_budget"
                                                         aria-label="<?php echo __('Esgin Budget'); ?>">
                                                         <option value=""><?php echo __('Select Esgin Budget'); ?>
@@ -638,8 +641,8 @@ $joblevel_list = $results['job_grade'];
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                                    <label
-                                                        class="form-label mt-1"><?php echo __('Employment Type'); ?></label>
+                                                    <span
+                                                        class="form-label d-block mt-1"><?php echo __('Employment Type'); ?></span>
                                                     <div class="form-radio d-inline-block align-middle">
                                                         <div class="radio radio-inline">
                                                             <label class="form-label">
@@ -658,12 +661,12 @@ $joblevel_list = $results['job_grade'];
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-12 m-b-10">
-                                                    <label class="form-label mt-1">
+                                                    <label for="jp_candidate_mandatory_field" class="form-label mt-1">
                                                         <?php echo __('Candidate Mandatory Field Value'); ?> </label>
                                                     <?php
                                                     $candidate_mandatory_field = json_decode($jobpostlist['candidate_mandatory_field'], 1);
                                                     ?>
-                                                    <select class="form-select js-example-basic-multiple" id=""
+                                                    <select class="form-select js-example-basic-multiple" id="jp_candidate_mandatory_field"
                                                         name="candidate_mandatory_field[]" multiple
                                                         aria-label="<?php echo __('Candidate Mandatory Field'); ?>">
                                                         <?php foreach ($mandetorycandidatevalue as $fkey => $fval) { ?>
@@ -696,37 +699,37 @@ $joblevel_list = $results['job_grade'];
                                             <input type="hidden" name="employee_mode" id="employee_mode"
                                                 value="<?php echo $jobpostlist['employment_mode']; ?>">
                                             <ul class="post-job">
-                                                <li onclick="coursetypefun(1)">
+                                                <li>
                                                     <a class="btn <?php echo $jobpostlist['employment_mode'] == "1" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
-                                                        id="coursetype1" data-id="1">
+                                                        id="coursetype1" data-id="1" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Full Time'); ?></h6>
                                                     </a>
                                                 </li>
-                                                <li onclick="coursetypefun(2)">
+                                                <li>
                                                     <a class="btn <?php echo $jobpostlist['employment_mode'] == "2" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
-                                                        id="coursetype2" data-id="2">
+                                                        id="coursetype2" data-id="2" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Part Time'); ?></h6>
                                                     </a>
                                                 </li>
-                                                <li onclick="coursetypefun(3)">
+                                                <li>
                                                     <a class="btn <?php echo $jobpostlist['employment_mode'] == "3" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
-                                                        id="coursetype3" data-id="3">
+                                                        id="coursetype3" data-id="3" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Distance Learning Program'); ?></h6>
                                                     </a>
                                                 </li>
-                                                <li onclick="coursetypefun(4)">
+                                                <li>
                                                     <a class="btn <?php echo $jobpostlist['employment_mode'] == "4" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
-                                                        id="coursetype4" data-id="4">
+                                                        id="coursetype4" data-id="4" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Executive Program'); ?></h6>
                                                     </a>
                                                 </li>
-                                                <li onclick="coursetypefun(5)">
+                                                <li>
                                                     <a class="btn <?php echo $jobpostlist['employment_mode'] == "5" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
-                                                        id="coursetype5" data-id="5">
+                                                        id="coursetype5" data-id="5" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Certification'); ?></h6>
                                                     </a>
@@ -765,14 +768,14 @@ $joblevel_list = $results['job_grade'];
                                         <div class="col-lg-12">
                                             <div class="row rows<?php echo $ij; ?> mt-2">
                                                 <div class="col-lg-5">
-                                                    <label class="form-label"><?php echo __('Questions'); ?></label>
+                                                    <span class="form-label d-block"><?php echo __('Questions'); ?></span>
                                                 </div>
                                                 <div class="col-lg-1">
-                                                    <label class="form-label"><?php echo __('Mandatory'); ?></label>
+                                                    <span class="form-label d-block"><?php echo __('Mandatory'); ?></span>
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <label
-                                                        class="form-label"><?php echo __('Accepted Answer'); ?></label>
+                                                    <span
+                                                        class="form-label d-block"><?php echo __('Accepted Answer'); ?></span>
                                                 </div>
                                                 <div class="col-lg-2">
 
@@ -812,7 +815,10 @@ $joblevel_list = $results['job_grade'];
                                                             aria-label="<?php echo __('Eg. Yes,No'); ?>">
                                                     </div>
                                                     <div class="col-lg-2">
-                                                        <i title="<?php echo __('Delete Question'); ?>"
+                                                        <i role="button" tabindex="0"
+                                                            aria-label="<?php echo htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>"
+                                                            title="<?php echo __('Delete Question'); ?>"
+                                                            onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
                                                             onclick="deleteQuestion(<?php echo $ij; ?>)"
                                                             class="fa fa-trash text-danger cursor-pointer"></i>
                                                     </div>

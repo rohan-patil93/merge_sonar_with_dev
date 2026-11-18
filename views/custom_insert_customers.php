@@ -1582,11 +1582,6 @@ if ($customers['image'] != '') {
 														<input class="border-checkbox" type="checkbox"
 															id="checkbox<?php echo $mkseq; ?>"
 															onclick="cloneShipping(this,'<?php echo $mkseq; ?>')"
-															title="<?= __('Input') ?>"
-															aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
-														<input class="border-checkbox" type="checkbox"
-															id="checkbox<?php echo $mkseq; ?>"
-															onclick="cloneShipping(this,'<?php echo $mkseq; ?>')"
 															onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"
 															title="<?= __('Input') ?>"
 															aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">

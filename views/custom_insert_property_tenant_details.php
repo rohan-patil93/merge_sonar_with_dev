@@ -708,10 +708,6 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 								<table class="table table-hover " width="100%">
 									<thead>
 										<tr>
-											<td><?php echo __('Area Name/Area/Rate'); ?></td>
-											<td class=""><?php echo __('Manually Rent'); ?></td>
-											<td class="text-right"><?php echo __('Discount'); ?></td>
-											<td class="text-right"><?php echo __('Rent (Monthly)'); ?></td>
 											<th scope="col"><?php echo __('Area Name/Area/Rate'); ?></th>
 											<th scope="col" class=""><?php echo __('Manually Rent'); ?></th>
 											<th scope="col" class="text-right"><?php echo __('Discount'); ?></th>
@@ -793,14 +789,15 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 
 						</div>
 						<div class="form-group col-lg-12 mt-2">
-							<label class="form-label"><?php echo __('Lease Period'); ?> <span
-									class="text-danger">*</span></label>
+							<span class="form-label d-block"><?php echo __('Lease Period'); ?> <span
+									class="text-danger">*</span></span>
 							<div class="row">
 								<div class="col-lg-5" <?php echo $un_lockdyncss; ?>>
 									<span class="d-block error-message text-danger"></span>
 									<input type="text"
 										class="form-control startdatepicker_1 rangedatepicker requried_field"
 										data-id="1" name="lease_period_start_date" id="lease_period_start_date"
+										aria-label="<?= htmlspecialchars(__('Lease Period Start Date'), ENT_QUOTES, 'UTF-8'); ?>"
 										value="<?php echo fromDate($property_tenant_details['lease_period_start_date']); ?>"
 										onchange="rentFreePeriodDays()" <?php echo $property_tenant_details['un_lock_tenant_date'] != "" ? "readonly" : ""; ?>>
 								</div>
@@ -809,26 +806,27 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 									<span class="d-block error-message text-danger"></span>
 									<input type="text" class="form-control enddatepicker_1 requried_field"
 										name="lease_period_end_date" id="lease_period_end_date"
+										aria-label="<?= htmlspecialchars(__('Lease Period End Date'), ENT_QUOTES, 'UTF-8'); ?>"
 										value="<?php echo fromDate($property_tenant_details['lease_period_end_date']); ?>"
 										onchange="rentFreePeriodDays()">
 								</div>
 							</div>
 						</div>
 						<div class="form-group col-lg-5">
-							<label class="form-label"><?php echo __('Rent Free Period'); ?></label>
+							<label for="rent_free_period_day" class="form-label"><?php echo __('Rent Free Period'); ?></label>
 							<div class="input-group input-group-button ">
 								<input type="number" name="rent_free_period_day" id="rent_free_period_day"
 									class="form-control form-control-sm width1 text-right"
 									value="<?php echo $property_tenant_details['rent_free_period_day'] != "" ? $property_tenant_details['rent_free_period_day'] : 0; ?>"
 									onblur="rentFreePeriodDays()">
 								<span class="input-group-text addon-style">
-									<label class=""><?php echo __('Days'); ?></label>
+									<span><?php echo __('Days'); ?></span>
 								</span>
 							</div>
 						</div>
 						<div class="col-lg-2 text-center"></div>
 						<div class="form-group col-lg-5">
-							<label class="form-label"><?php echo __('Rent Commencement Date'); ?> <span
+							<label for="rent_commencement_date" class="form-label"><?php echo __('Rent Commencement Date'); ?> <span
 									class="text-danger">*</span></label>
 							<input type="text" class="form-control " name="rent_commencement_date"
 								id="rent_commencement_date"
@@ -840,78 +838,78 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 								value="<?php echo $_SESSION['config']['system_start_date']; ?>" readonly>
 						</div>
 						<div class="form-group col-lg-5">
-							<label class="form-label"><?php echo __('Rent Escalation After'); ?> </label>
+							<label for="rent_escalation_after_month" class="form-label"><?php echo __('Rent Escalation After'); ?> </label>
 							<div class="input-group input-group-button ">
-								<input type="number" name="rent_escalation_after_month"
+								<input type="number" id="rent_escalation_after_month" name="rent_escalation_after_month"
 									class="form-control form-control-sm width1 text-right"
 									value="<?php echo $property_tenant_details['rent_escalation_after_month']; ?>">
 								<span class="input-group-text addon-style">
-									<label class=""><?php echo __('Month'); ?></label>
+									<span><?php echo __('Month'); ?></span>
 								</span>
 							</div>
 						</div>
 						<div class="col-lg-2 text-center"> </div>
 						<div class="form-group col-lg-5">
-							<label class="form-label"><?php echo __('Rent Escalation Percentage'); ?> </label>
+							<label for="rent_escalation_percentage" class="form-label"><?php echo __('Rent Escalation Percentage'); ?> </label>
 							<div class="input-group input-group-button ">
-								<input type="number" name="rent_escalation_percentage"
+								<input type="number" id="rent_escalation_percentage" name="rent_escalation_percentage"
 									class="form-control form-control-sm width1 text-right"
 									value="<?php echo $property_tenant_details['rent_escalation_percentage']; ?>">
 								<span class="input-group-text addon-style">
-									<label class=""> % </label>
+									<span> % </span>
 								</span>
 							</div>
 						</div>
 						<div class="form-group col-lg-5">
-							<label class="form-label"><?php echo __('Notice Period'); ?> </label>
+							<label for="notice_period" class="form-label"><?php echo __('Notice Period'); ?> </label>
 							<div class="input-group input-group-button ">
-								<input type="number" name="notice_period"
+								<input type="number" id="notice_period" name="notice_period"
 									class="form-control form-control-sm width1 text-right"
 									value="<?php echo $property_tenant_details['notice_period']; ?>">
 								<span class="input-group-text addon-style">
-									<label class=""><?php echo __('Days'); ?></label>
+									<span><?php echo __('Days'); ?></span>
 								</span>
 							</div>
 						</div>
 						<div class="col-lg-2 text-center"> </div>
 						<div class="form-group col-lg-5">
-							<label class="form-label "><?php echo __('Security Deposit'); ?></label>
-							<input type="number" class="form-control text-right " name="security_deposit"
+							<label for="security_deposit" class="form-label "><?php echo __('Security Deposit'); ?></label>
+							<input type="number" id="security_deposit" class="form-control text-right " name="security_deposit"
 								value="<?php echo $property_tenant_details['security_deposit']; ?>">
 						</div>
 
 
 
 						<div class="form-group col-lg-5">
-							<label class="form-label"><?php echo __('Locking Period Tenant'); ?></label>
+							<label for="locking_period_tenant" class="form-label"><?php echo __('Locking Period Tenant'); ?></label>
 							<div class="input-group input-group-button ">
-								<input type="number" name="locking_period_tenant"
+								<input type="number" id="locking_period_tenant" name="locking_period_tenant"
 									class="form-control form-control-sm width1 text-right"
 									value="<?php echo $property_tenant_details['locking_period_tenant']; ?>">
 								<span class="input-group-text addon-style">
-									<label class=""><?php echo __('Month'); ?></label>
+									<span><?php echo __('Month'); ?></span>
 								</span>
 							</div>
 						</div>
 						<div class="col-lg-2 text-center"> </div>
 						<div class="form-group col-lg-5">
-							<label class="form-label"><?php echo __('Locking Period Landlord'); ?></label>
+							<label for="locking_period_landlord" class="form-label"><?php echo __('Locking Period Landlord'); ?></label>
 							<div class="input-group input-group-button ">
-								<input type="number" name="locking_period_landlord"
+								<input type="number" id="locking_period_landlord" name="locking_period_landlord"
 									class="form-control form-control-sm width1 text-right"
 									value="<?php echo $property_tenant_details['locking_period_landlord']; ?>">
 								<span class="input-group-text addon-style">
-									<label class=""><?php echo __('Month'); ?></label>
+									<span><?php echo __('Month'); ?></span>
 								</span>
 							</div>
 						</div>
 						<div class="form-group col-lg-5">
-							<label class="form-label"><?php echo __('Rent Bill To Be Raise'); ?> <span
+							<label for="rent_bill_to_be_raise" class="form-label"><?php echo __('Rent Bill To Be Raise'); ?> <span
 									class="text-danger">*</span></label>
 							<div class="row">
 								<div class="col-lg-6">
 									<span class="d-block error-message text-danger"></span>
-									<select name="rent_bill_to_be_raise"
+									<select id="rent_bill_to_be_raise" name="rent_bill_to_be_raise"
 										class="form-control form-select js-example-basic-single f-14 requried_field">
 										<?php for ($r = 1; $r <= 31; $r++) { ?>
 											<option value="<?php echo $r; ?>" <?php echo $r == $property_tenant_details['rent_bill_to_be_raise'] ? "selected" : ""; ?>>
@@ -921,7 +919,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 								</div>
 								<div class="col-lg-6">
 									<span class="d-block error-message text-danger"></span>
-									<select name="rent_bill_to_be_raise_type"
+									<select id="rent_bill_to_be_raise_type" name="rent_bill_to_be_raise_type"
+										aria-label="<?= htmlspecialchars(__('Rent Bill To Be Raise Type'), ENT_QUOTES, 'UTF-8'); ?>"
 										class="form-control form-select js-example-basic-single requried_field">
 										<?php foreach ($rentbilltoberaise as $rbr) { ?>
 											<option value="<?php echo $rbr['genc_detail_code']; ?>" <?php echo $property_tenant_details['rent_bill_to_be_raise_type'] == $rbr['genc_detail_code'] ? "selected" : ""; ?>><?php echo __($rbr['genc_detail_name']); ?></option>
@@ -932,11 +931,11 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 						</div>
 						<div class="col-lg-2 text-center"> </div>
 						<div class="form-group col-lg-5">
-							<label class="form-label"><?php echo __('Due Bill To Be Raise'); ?> <span
+							<label for="due_bill_to_be_raise_type" class="form-label"><?php echo __('Due Bill To Be Raise'); ?> <span
 									class="text-danger">*</span></label>
 							<div class="row">
 								<div class="col-lg-6">
-									<select name="due_bill_to_be_raise_type"
+									<select id="due_bill_to_be_raise_type" name="due_bill_to_be_raise_type"
 										class="form-control form-select js-example-basic-single"
 										onchange="dueBillToBeRaiseType(this.value)">
 										<option value="DY" <?php echo $property_tenant_details['due_bill_to_be_raise_type'] == 'DY' ? "selected" : ""; ?>><?php echo __('Days'); ?></option>
@@ -948,10 +947,11 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 										<input type="number"
 											name="due_bill_to_be_raise<?php echo ($property_tenant_details['due_bill_to_be_raise_type'] == 'DY' || $property_tenant_details['due_bill_to_be_raise_type'] == '') ? '' : '_hide'; ?>"
 											class="form-control form-control-sm width1 text-right"
+											aria-label="<?= htmlspecialchars(__('Due Bill To Be Raise Days'), ENT_QUOTES, 'UTF-8'); ?>"
 											value="<?php echo $property_tenant_details['due_bill_to_be_raise'] != "" ? $property_tenant_details['due_bill_to_be_raise'] : "0"; ?>"
 											id="due_bill_to_be_raise_dy_text">
 										<span class="input-group-text addon-style">
-											<label class=""><?php echo __('Days'); ?></label>
+											<span><?php echo __('Days'); ?></span>
 										</span>
 									</div>
 								</div>
@@ -959,6 +959,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 									<select
 										name="due_bill_to_be_raise<?php echo $property_tenant_details['due_bill_to_be_raise_type'] == 'DT' ? '' : '_hide'; ?>"
 										class="form-control form-select js-example-basic-single f-14"
+										aria-label="<?= htmlspecialchars(__('Due Bill To Be Raise Date'), ENT_QUOTES, 'UTF-8'); ?>"
 										id="due_bill_to_be_raise_dt_select">
 										<?php for ($r = 1; $r <= 31; $r++) { ?>
 											<option value="<?php echo $r; ?>" <?php echo $r == $property_tenant_details['due_bill_to_be_raise'] ? "selected" : ""; ?>>
@@ -971,17 +972,17 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 							</div>
 						</div>
 						<div class="form-group col-lg-5">
-							<label class="form-label d-block"><?php echo __('GST Added'); ?> </label>
+							<span class="form-label d-block"><?php echo __('GST Added'); ?> </span>
 							<div class="form-radio">
-								<div class="radio radio-inline" onclick="checkGSTAdded('0')">
+								<div class="radio radio-inline">
 									<label class="form-label">
-										<input type="radio" name="gst_added" value="0" <?php echo $property_tenant_details['gst_added'] == '0' ? "checked" : ""; ?>>
+										<input type="radio" name="gst_added" value="0" onclick="checkGSTAdded('0')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php echo $property_tenant_details['gst_added'] == '0' ? "checked" : ""; ?>>
 										<i class="helper"></i><?php echo __('Yes'); ?>
 									</label>
 								</div>
-								<div class="radio radio-inline" onclick="checkGSTAdded('')">
+								<div class="radio radio-inline">
 									<label class="form-label">
-										<input type="radio" name="gst_added" value="" <?php echo $property_tenant_details['gst_added'] == '' ? "checked" : ""; ?>>
+										<input type="radio" name="gst_added" value="" onclick="checkGSTAdded('')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php echo $property_tenant_details['gst_added'] == '' ? "checked" : ""; ?>>
 										<i class="helper"></i><?php echo __('No'); ?>
 									</label>
 								</div>
@@ -989,8 +990,8 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 						</div>
 						<div class="col-lg-2 text-center"> </div>
 						<div class="form-group  col-lg-5" id="checkgstadded_hsn_code" <?php echo $property_tenant_details['gst_added'] == '0' ? "" : "style='display:none'"; ?>>
-							<label class="form-label d-block"><?php echo __('GST HSN Code'); ?> </label>
-							<select name="hsn_and_sac_code_id" class="form-control js-data-example-ajax-hsncodes"
+							<label for="hsn_and_sac_code_id" class="form-label d-block"><?php echo __('GST HSN Code'); ?> </label>
+							<select id="hsn_and_sac_code_id" name="hsn_and_sac_code_id" class="form-control js-data-example-ajax-hsncodes"
 								data-tablename="hsn_and_sac_codes" data-fieldsname="code_description"
 								data-fieldsname1="code" data-fieldsname2="code_description" data-fieldsname3="gst"
 								data-category="id">
@@ -1027,17 +1028,17 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 
 
 						<div class="form-group col-lg-5">
-							<label class="form-label d-block"><?php echo __('Rental Invoice To Be Raised'); ?> </label>
+							<span class="form-label d-block"><?php echo __('Rental Invoice To Be Raised'); ?> </span>
 							<div class="form-radio">
 								<div class="radio radio-inline">
 									<label class="form-label">
-										<input type="radio" name="rental_invoice_to_be_raised" value="Y" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == '' || $property_tenant_details['rental_invoice_to_be_raised'] == 'Y') ? "checked" : ""; ?> onclick="checkRentalInvoiceRaised('Y')">
+										<input type="radio" name="rental_invoice_to_be_raised" value="Y" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == '' || $property_tenant_details['rental_invoice_to_be_raised'] == 'Y') ? "checked" : ""; ?> onclick="checkRentalInvoiceRaised('Y')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
 										<i class="helper"></i><?php echo __('Yes'); ?>
 									</label>
 								</div>
 								<div class="radio radio-inline">
 									<label class="form-label">
-										<input type="radio" name="rental_invoice_to_be_raised" value="N" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == 'N') ? "checked" : ""; ?> onclick="checkRentalInvoiceRaised('N')">
+										<input type="radio" name="rental_invoice_to_be_raised" value="N" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == 'N') ? "checked" : ""; ?> onclick="checkRentalInvoiceRaised('N')" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
 										<i class="helper"></i><?php echo __('No'); ?>
 									</label>
 								</div>
@@ -1045,7 +1046,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
 						</div>
 						<div class="col-lg-2 text-center"> </div>
 						<div class="col-lg-5 " id="checkrentalinvoiceraised_rental_stop_date" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == 'N') ? "" : "style='display:none'"; ?>>
-							<label class="form-label d-block"><?php echo __('Rental Invoice Stoped From'); ?> </label>
+							<label for="rental_invoice_stoped_from" class="form-label d-block"><?php echo __('Rental Invoice Stoped From'); ?> </label>
 							<input type="month" class="form-control" name="rental_invoice_stoped_from"
 								value="<?php echo $property_tenant_details['rental_invoice_stoped_from'] != "" ? $property_tenant_details['rental_invoice_stoped_from'] : date('Y-m'); ?>"
 								id="rental_invoice_stoped_from">

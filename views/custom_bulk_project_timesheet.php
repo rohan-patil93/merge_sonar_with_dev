@@ -519,24 +519,18 @@ $erp = json_decode($erp_data, 1);
 												</div>
 												<div class="col p-l-0">
 													<h6 class="m-b-5 f-14"><?= __("Current Vs Previous") ?></h6>
-													<h6 class="m-b-0 text-c-blue"><a
+													<h6 class="m-b-0 text-c-blue"><button type="button"
+															class="p-0 border-0 bg-transparent align-baseline"
+															style="font:inherit;color:inherit;cursor:pointer;"
 															onclick="cvppopup('Current',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . " Lac'"; ?>,'apv_list')">
-															<h6 class="m-b-0 text-c-blue"><button type="button"
-																	class="p-0 border-0 bg-transparent align-baseline"
-																	style="font:inherit;color:inherit;cursor:pointer;"
-																	onclick="cvppopup('Current',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . " Lac'"; ?>,'apv_list')">
-																	<?php echo customeummarmonyformate($ttcount / 100000); ?>
-																	L
-														</a> <?= __('Vs'); ?> <a
+															<?php echo customeummarmonyformate($ttcount / 100000); ?>
+															L
+														</button> <?= __('Vs'); ?> <button type="button"
+															class="p-0 border-0 bg-transparent align-baseline"
+															style="font:inherit;color:inherit;cursor:pointer;"
 															onclick="cvppopup('Previous',<?php echo "'" . customeummarmonyformate(($lmonth['billable_amount'] + $lmonth['nonbillable_amount']) / 100000) . " Lac'"; ?>,'last_pre_list')">
 															<?php echo customeummarmonyformate(($lmonth['billable_amount'] + $lmonth['nonbillable_amount']) / 100000); ?>
-															L </a></h6>
-													</button> <?= __('Vs'); ?> <button type="button"
-														class="p-0 border-0 bg-transparent align-baseline"
-														style="font:inherit;color:inherit;cursor:pointer;"
-														onclick="cvppopup('Previous',<?php echo "'" . customeummarmonyformate(($lmonth['billable_amount'] + $lmonth['nonbillable_amount']) / 100000) . " Lac'"; ?>,'last_pre_list')">
-														<?php echo customeummarmonyformate(($lmonth['billable_amount'] + $lmonth['nonbillable_amount']) / 100000); ?>
-														L </button></h6>
+															L </button></h6>
 													<input type="hidden" name="apv_list" id="apv_list"
 														value='<?php echo json_encode($apv_list); ?>'>
 													<input type="hidden" id="apv_list_ths"
@@ -575,12 +569,6 @@ $erp = json_decode($erp_data, 1);
 												<div class="col p-l-0">
 													<h6 class="m-b-5 f-14 "><?= __("Budget Vs Actuals") ?></h6>
 													<h6 class="m-b-0 text-c-green">
-														<a
-															onclick="cvppopup('Budget',<?php echo "'" . $total_budget_hrs . " Hrs'"; ?>,'bg_hr_list')">
-															<?php echo $total_budget_hrs; ?> H </a>
-														<?= __('Vs'); ?> <a
-															onclick="cvppopup('Actuals',<?php echo "'" . $total_billabe_hrs . " Hrs'"; ?>,'bg_hr_list')">
-															<?php echo $total_billabe_hrs; ?> H </a>
 														<button type="button"
 															class="p-0 border-0 bg-transparent align-baseline"
 															style="font:inherit;color:inherit;cursor:pointer;"
@@ -636,25 +624,18 @@ $erp = json_decode($erp_data, 1);
 												<div class="col p-l-0">
 													<h6 class="m-b-5 f-14"><?= __('Budget Vs Utilization'); ?></h6>
 													<h6 class="m-b-0 text-c-red">
-														<a
+														<button type="button"
+															class="p-0 border-0 bg-transparent align-baseline"
+															style="font:inherit;color:inherit;cursor:pointer;"
 															onclick="cvppopup('Budget',<?php echo "'" . customeummarmonyformate($total_budget_amount / 100000) . " Lac'"; ?>,'bg_ut_list')">
 															<?php echo customeummarmonyformate($total_budget_amount / 100000); ?>
-															L</a> <?= __('Vs'); ?> <a
+															L</button> <?= __('Vs'); ?> <button type="button"
+															class="p-0 border-0 bg-transparent align-baseline"
+															style="font:inherit;color:inherit;cursor:pointer;"
 															onclick="cvppopup('Utilization',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . " Lac'"; ?>,'bg_ut_list')">
 															<?php echo customeummarmonyformate($ttcount / 100000); ?> L
-														</a>
+														</button>
 													</h6>
-													<button type="button"
-														class="p-0 border-0 bg-transparent align-baseline"
-														style="font:inherit;color:inherit;cursor:pointer;"
-														onclick="cvppopup('Budget',<?php echo "'" . customeummarmonyformate($total_budget_amount / 100000) . " Lac'"; ?>,'bg_ut_list')">
-														<?php echo customeummarmonyformate($total_budget_amount / 100000); ?>
-														L</button> <?= __('Vs'); ?> <button type="button"
-														class="p-0 border-0 bg-transparent align-baseline"
-														style="font:inherit;color:inherit;cursor:pointer;"
-														onclick="cvppopup('Utilization',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . " Lac'"; ?>,'bg_ut_list')">
-														<?php echo customeummarmonyformate($ttcount / 100000); ?> L
-													</button></h6>
 													<input type="hidden" name="bg_hr_list" id="bg_ut_list"
 														value='<?php echo json_encode($apv_list); ?>'>
 													<input type="hidden" id="bg_ut_list_ths"
@@ -687,25 +668,18 @@ $erp = json_decode($erp_data, 1);
 												<div class="col p-l-0">
 													<h6 class="m-b-5 f-14"><?= __('Utilization Vs Approved'); ?></h6>
 													<h6 class="m-b-0 text-c-yellow">
-														<a
+														<button type="button"
+															class="p-0 border-0 bg-transparent align-baseline"
+															style="font:inherit;color:inherit;cursor:pointer;"
 															onclick="cvppopup('Utilization',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . " Lac'"; ?>,'ut_list')">
 															<?php echo customeummarmonyformate($ttcount / 100000); ?> L
-														</a> <?= __('Vs'); ?><a
+														</button> <?= __('Vs'); ?><button type="button"
+															class="p-0 border-0 bg-transparent align-baseline"
+															style="font:inherit;color:inherit;cursor:pointer;"
 															onclick="cvppopup('Approved',<?php echo "'" . customeummarmonyformate($apv_billable_amount / 100000) . " Lac'"; ?>,'ut_list')">
 															<?php echo $apv_billable_amount != "0" ? customeummarmonyformate($apv_billable_amount / 100000) : 0; ?>
-															L </a>
+															L </button>
 													</h6>
-													<button type="button"
-														class="p-0 border-0 bg-transparent align-baseline"
-														style="font:inherit;color:inherit;cursor:pointer;"
-														onclick="cvppopup('Utilization',<?php echo "'" . customeummarmonyformate($ttcount / 100000) . " Lac'"; ?>,'ut_list')">
-														<?php echo customeummarmonyformate($ttcount / 100000); ?> L
-													</button> <?= __('Vs'); ?><button type="button"
-														class="p-0 border-0 bg-transparent align-baseline"
-														style="font:inherit;color:inherit;cursor:pointer;"
-														onclick="cvppopup('Approved',<?php echo "'" . customeummarmonyformate($apv_billable_amount / 100000) . " Lac'"; ?>,'ut_list')">
-														<?php echo $apv_billable_amount != "0" ? customeummarmonyformate($apv_billable_amount / 100000) : 0; ?>
-														L </button></h6>
 													<input type="hidden" name="bg_hr_list" id="ut_list"
 														value='<?php echo json_encode($apv_list); ?>'>
 													<input type="hidden" id="ut_list_ths"
@@ -887,13 +861,6 @@ $erp = json_decode($erp_data, 1);
 																	onclick="statuspopup('101','2')" name="status"
 																	id="status" value="101">
 																	<?php echo $statu_progress['101']['action_label']; ?>
-																</div>
-																<div class="dropdown-item cursor-pointer" role="button"
-																	tabindex="0"
-																	onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"
-																	onclick="statuspopup('20','2')" name="status"
-																	id="status" value="20">
-																	<?php echo $statu_progress['20']['action_label']; ?>
 																</div>
 																<div class="dropdown-item cursor-pointer" role="button"
 																	tabindex="0"
@@ -1215,10 +1182,6 @@ $erp = json_decode($erp_data, 1);
 																					<input type="checkbox"
 																						aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>"
 																						id="select_all" class="itemRow"
-																						onclick="tocheckallboxes()">
-																					<input type="checkbox"
-																						aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>"
-																						id="select_all" class="itemRow"
 																						onclick="tocheckallboxes()"
 																						onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
 																					<span class="cr">
@@ -1366,12 +1329,6 @@ $erp = json_decode($erp_data, 1);
 																						<div class="checkbox-fade fade-in-primary">
 																							<label
 																								class="checkbox checkbox-success">
-																								<input type="checkbox"
-																									aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>"
-																									onclick="tocheckdrodown()"
-																									class="itemRow checkbox1"
-																									name="checkbox1"
-																									value="<?php echo $sb['employee_id']; ?>">
 																								<input type="checkbox"
 																									aria-label="<?= htmlspecialchars(__('Select row'), ENT_QUOTES, 'UTF-8'); ?>"
 																									onclick="tocheckdrodown()"

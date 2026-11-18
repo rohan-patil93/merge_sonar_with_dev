@@ -140,7 +140,7 @@ include_once("new_from_submit.php");
 											<div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
 												<?php if( $_SESSION['employee']['image']!=""){ ?>
 												<div class="symbol symbol-50 symbol-lg-120">
-													<img src="uploads/all/<?php echo $_SESSION['employee']['image']; ?>" alt="image" />
+													<img src="uploads/all/<?php echo $_SESSION['employee']['image']; ?>" alt="Employee profile" />
 												</div>
 											<?php }else{ ?>
 												<div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
@@ -229,7 +229,7 @@ include_once("new_from_submit.php");
 																</a>
 																<?php } ?>
 																<div class="dropdown-divider"></div>
-																<a class="dropdown-item" href="#" onclick="dynamicinsertpopup('COM_INSERT_EMP_SKILLS')">+ Add New</a>
+																<button type="button" class="dropdown-item" onclick="dynamicinsertpopup('COM_INSERT_EMP_SKILLS')">+ Add New</button>
 															</div>
 														</div>
 														<?php if($shift['shift_name']!=""){ ?>
@@ -251,7 +251,7 @@ include_once("new_from_submit.php");
 														        <div class="col-lg-2 float-left">
                                                             			<span class="switch switch-outline switch-icon switch-success">
                                                             				<label>
-                                                            					<input type="checkbox" onclick="checkempfoodoption(<?php echo $food_option['id'].",".$_SESSION['emp_id']; ?>)" value="<?php echo $food_option['id']; ?>"  name="" <?php if(in_array($food_option['id'],$emp_food)){ ?> checked <?php } ?> >
+                                                            					<input type="checkbox" onclick="checkempfoodoption(<?php echo $food_option['id'].",".$_SESSION['emp_id']; ?>)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" value="<?php echo $food_option['id']; ?>"  name="" <?php if(in_array($food_option['id'],$emp_food)){ ?> checked <?php } ?> >
                                                             					<span></span><span class="col-form-label"><?php echo $food_option['food_option']; ?></span>
                                                             				</label>
                                                             			</span>
@@ -262,7 +262,7 @@ include_once("new_from_submit.php");
 														    <span class="switch switch-outline switch-icon switch-success">
                                                             				<label>
                                                             					
-                                                            					<input type="checkbox" onclick="checkemptransportrequest(<?php echo $_SESSION['emp_id'].",".$emptransport['id']; ?>)" value="<?php echo $emptransport['id']; ?>"  name="" <?php if($emptransport['id']!=""){ ?> checked <?php } ?> >
+                                                            					<input type="checkbox" onclick="checkemptransportrequest(<?php echo $_SESSION['emp_id'].",".$emptransport['id']; ?>)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" value="<?php echo $emptransport['id']; ?>"  name="" <?php if($emptransport['id']!=""){ ?> checked <?php } ?> >
                                                             					<span></span><span class="col-form-label">Transport Requests </span>
                                                             				</label>
                                                             			</span>
@@ -305,7 +305,7 @@ include_once("new_from_submit.php");
 													if(count($nav['child'])>0){ 
 												?>
 												<li class="nav-item dropdown">
-												        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+												        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" onkeydown="if(event.key===' '){event.preventDefault();this.click();}">
 												            <?php echo $nav['Label']; ?>
 												        </a>
 

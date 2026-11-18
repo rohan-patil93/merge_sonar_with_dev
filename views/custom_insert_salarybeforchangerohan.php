@@ -660,13 +660,11 @@ $sal_emp_id = $salarydata['employee_id'] != "" ? $salarydata['employee_id'] : $_
                                                                     value="<?php echo in_array($addsaldata, (array) $checkdata) ? 1 : 0; ?>">
                                                                 <input type="checkbox" <?php if (in_array($addsaldata, (array) $checkdata)) {
                                                                     echo __('checked ');
-                                                                } ?>             <?php if (in_array($addsaldata, (array) $mandatroy)) {
-                                                                                  echo __('disabled');
-                                                                              } ?> name="Checkboxes1"
-                                                                    onclick="addsaldata(<?php echo "'" . $addsaldata . "'"; ?>)">
+                                                                } ?> <?php if (in_array($addsaldata, (array) $mandatroy)) {
+                                                                    echo __('disabled');
                                                                 } ?> name="Checkboxes1"
-                                                                onclick="addsaldata(<?php echo "'" . $addsaldata . "'"; ?>)"
-                                                                onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
+                                                                    onclick="addsaldata(<?php echo "'" . $addsaldata . "'"; ?>)"
+                                                                    onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
                                                                 <span class="cr">
                                                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                                 </span>

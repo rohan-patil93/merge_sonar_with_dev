@@ -298,14 +298,6 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<td style="width:1%">#</td>
-													<td style="width:40%"><?= __('Customer'); ?></td>
-													<td style="width:14%"><?= __('Amount'); ?> </td>
-													<td style="width:14%"><?= __('Paid'); ?> </td>
-													<td style="width:15%"><?= __('Due'); ?> </td>
-													<td style="width:15%"><?= __('Status'); ?></td>
-													<td style="width:15%" class="kt-align-right"><?= __('Total'); ?>
-													</td>
 													<th scope="col" style="width:1%">#</th>
 													<th scope="col" style="width:40%"><?= __('Customer'); ?></th>
 													<th scope="col" style="width:14%"><?= __('Amount'); ?> </th>
@@ -435,13 +427,6 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<td style="width:1%">#</td>
-													<td style="width:40%"><?= __('Application'); ?></td>
-													<td style="width:14%"><?= __('Sales'); ?></td>
-													<td style="width:15%"><?= __('Change'); ?></td>
-													<td style="width:15%"><?= __('Status'); ?></td>
-													<td style="width:15%" class="kt-align-right"><?= __('Total'); ?>
-													</td>
 													<th scope="col" style="width:1%">#</th>
 													<th scope="col" style="width:40%"><?= __('Application'); ?></th>
 													<th scope="col" style="width:14%"><?= __('Sales'); ?></th>
