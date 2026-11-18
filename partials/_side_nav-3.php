@@ -270,7 +270,8 @@ function menudisplaytop($menuarray, $type)
         <ul class="nav-right float-right">
             <li class="header-notification m-r-8" data-bs-toggle="tooltip" data-placement="bottom" title=""
                 data-bs-original-title="Inbox">
-                <a class="dropdown-primary d-block" style="text-decoration:none;color:inherit;" href="index.php?option=COM_LIST_INBOX">
+                <a class="dropdown-primary d-block" style="text-decoration:none;color:inherit;"
+                    href="index.php?option=COM_LIST_INBOX">
                     <div class="" data-bs-toggle="dropdown">
                         <i class="ti-email text-white"></i>
                         <span class="badge bg-c-green customcount">2</span>
@@ -279,7 +280,8 @@ function menudisplaytop($menuarray, $type)
             </li>
             <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title=""
                 data-bs-original-title="Announcement">
-                <a class="dropdown-primary d-block" style="text-decoration:none;color:inherit;" href="index.php?option=COM_VIEW_ANNOUNCEMENTS">
+                <a class="dropdown-primary d-block" style="text-decoration:none;color:inherit;"
+                    href="index.php?option=COM_VIEW_ANNOUNCEMENTS">
                     <div class="" data-bs-toggle="dropdown">
                         <i class="ti-announcement"></i>
                     </div>

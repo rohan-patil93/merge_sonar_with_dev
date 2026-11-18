@@ -540,7 +540,8 @@ $stausresult = ViewStatusData();
 		<?php if ($error_message != '') { ?>
 			<div class="alert alert-danger background-danger alert-dismissible">
 				<strong><?php echo $error_message; ?></strong>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button>
 			</div>
 		<?php } ?>
 		<div class="card-header">
@@ -572,7 +573,8 @@ $stausresult = ViewStatusData();
 								<div class="form-group col-lg-12">
 									<span class="form-label d-inline-block fw-bold"><?= __('Process Name'); ?></span>
 									<select class="form-select js-example-basic-single process_name" name="process_name"
-										id="process_name" onchange="selectProcessName(this.value)" aria-label="<?= htmlspecialchars(__('Process Name'), ENT_QUOTES, 'UTF-8'); ?>">
+										id="process_name" onchange="selectProcessName(this.value)"
+										aria-label="<?= htmlspecialchars(__('Process Name'), ENT_QUOTES, 'UTF-8'); ?>">
 										<option value="0"><?= __('Select Any One'); ?></option>
 										<?php foreach ($pagenamesrow as $process) { ?>
 											<option value="<?php echo $process['application_table_name']; ?>" <?php echo $prefillProcess == $process['application_table_name'] ? "selected" : "" ?>>
@@ -585,7 +587,8 @@ $stausresult = ViewStatusData();
 									style="<?php echo ($prefillProcess == 'document_management') ? '' : 'display:none;'; ?>">
 									<span class="form-label d-inline-block fw-bold"><?= __('Document Type'); ?></span>
 									<select class="form-select js-example-basic-single" name="document_type_id"
-										id="document_type_id" aria-label="<?= htmlspecialchars(__('Document Type Id'), ENT_QUOTES, 'UTF-8'); ?>">
+										id="document_type_id"
+										aria-label="<?= htmlspecialchars(__('Document Type Id'), ENT_QUOTES, 'UTF-8'); ?>">
 										<?php if (count((array) $documentTypes) > 0) {
 											foreach ($documentTypes as $docType) {
 												$docType = is_array($docType) ? $docType : (array) $docType;
@@ -603,12 +606,14 @@ $stausresult = ViewStatusData();
 								</div>
 								<div class="form-group col-lg-12">
 									<span class="form-label d-inline-block fw-bold"><?= __('Description'); ?></span>
-									<textarea class="form-control "
-										name="process_description" aria-label="<?= htmlspecialchars(__('Process Description'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $workflowconfiguration['process_description']; ?></textarea>
+									<textarea class="form-control " name="process_description"
+										aria-label="<?= htmlspecialchars(__('Process Description'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $workflowconfiguration['process_description']; ?></textarea>
 								</div>
 								<div class="form-group col-lg-12">
-									<span class="form-label d-inline-block fw-bold"><?= __('Workflow Trigger Status'); ?></span>
-									<select class="form-select js-example-basic-single" name="workflow_trigger_status" aria-label="<?= htmlspecialchars(__('Workflow Trigger Status'), ENT_QUOTES, 'UTF-8'); ?>">
+									<span
+										class="form-label d-inline-block fw-bold"><?= __('Workflow Trigger Status'); ?></span>
+									<select class="form-select js-example-basic-single" name="workflow_trigger_status"
+										aria-label="<?= htmlspecialchars(__('Workflow Trigger Status'), ENT_QUOTES, 'UTF-8'); ?>">
 										<?php foreach ($stausresult as $statukey => $statusvalue) { ?>
 											<option value="<?php echo $statukey; ?>" <?php echo $workflowconfiguration['workflow_trigger_status'] == $statukey ? "selected" : "" ?>><?php echo $statusvalue['name']; ?></option>
 										<?php } ?>
@@ -619,17 +624,22 @@ $stausresult = ViewStatusData();
 										<div class="radio radio-inline">
 											<label class="form-label">
 												<input type="radio" name="work_level_type" value="user_hierarchical"
-													onclick="selectWorkflowLevel()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" <?php echo $workflowconfiguration['work_level_type'] == "user_hierarchical" ? "checked" : ""; ?> aria-label="<?= htmlspecialchars(__('Work Level Type'), ENT_QUOTES, 'UTF-8'); ?>">
+													onclick="selectWorkflowLevel()"
+													onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}"
+													<?php echo $workflowconfiguration['work_level_type'] == "user_hierarchical" ? "checked" : ""; ?>
+													aria-label="<?= htmlspecialchars(__('Work Level Type'), ENT_QUOTES, 'UTF-8'); ?>">
 												<i class="helper"></i> <?= __('Hierarchical'); ?>
 											</label>
 											<label class="form-label">
 												<input type="radio" name="work_level_type" value="role_levels"
-													onchange="selectWorkflowLevel()" <?php echo $workflowconfiguration['work_level_type'] == "role_levels" ? "checked" : ""; ?> aria-label="<?= htmlspecialchars(__('Work Level Type'), ENT_QUOTES, 'UTF-8'); ?>">
+													onchange="selectWorkflowLevel()" <?php echo $workflowconfiguration['work_level_type'] == "role_levels" ? "checked" : ""; ?>
+													aria-label="<?= htmlspecialchars(__('Work Level Type'), ENT_QUOTES, 'UTF-8'); ?>">
 												<i class="helper"></i> <?= __('Role Level'); ?>
 											</label>
 											<label class="form-label">
 												<input type="radio" name="work_level_type" value="custom_process"
-													onchange="selectWorkflowLevel()" <?php echo ($workflowconfiguration['work_level_type'] == "custom_process" || $workflowconfiguration['work_level_type'] == "") ? "checked" : ""; ?> aria-label="<?= htmlspecialchars(__('Work Level Type'), ENT_QUOTES, 'UTF-8'); ?>">
+													onchange="selectWorkflowLevel()" <?php echo ($workflowconfiguration['work_level_type'] == "custom_process" || $workflowconfiguration['work_level_type'] == "") ? "checked" : ""; ?>
+													aria-label="<?= htmlspecialchars(__('Work Level Type'), ENT_QUOTES, 'UTF-8'); ?>">
 												<i class="helper"></i> <?= __('Custom WorkFlow'); ?>
 											</label>
 										</div>
@@ -638,10 +648,12 @@ $stausresult = ViewStatusData();
 								<div class="form-group col-lg-12">
 									<span class="form-label d-inline-block fw-bold"><?= __('Workflow Level'); ?></span>
 									<select class="form-select js-example-basic-single" name="workflow_level"
-										id="select_workflow_level" onchange="selectWorkflowLevel('remove')" aria-label="<?= htmlspecialchars(__('Workflow Level'), ENT_QUOTES, 'UTF-8'); ?>">
+										id="select_workflow_level" onchange="selectWorkflowLevel('remove')"
+										aria-label="<?= htmlspecialchars(__('Workflow Level'), ENT_QUOTES, 'UTF-8'); ?>">
 										<?php for ($m = 0; $m <= 30; $m++) { ?>
 											<option value="<?php echo $m; ?>" <?php echo $workflowconfiguration['workflow_level'] == $m ? "selected" : "" ?>>
-												<?php echo $m . "- Level" ?></option>
+												<?php echo $m . "- Level" ?>
+											</option>
 										<?php } ?>
 
 									</select>
@@ -649,7 +661,8 @@ $stausresult = ViewStatusData();
 								<div class="form-group col-lg-12">
 									<span class="form-label d-block"><?= __('Transaction Owner'); ?></span>
 									<select class="form-select js-example-basic-single fieldlist"
-										name="transaction_owner_field" aria-label="<?= htmlspecialchars(__('Transaction Owner Field'), ENT_QUOTES, 'UTF-8'); ?>">
+										name="transaction_owner_field"
+										aria-label="<?= htmlspecialchars(__('Transaction Owner Field'), ENT_QUOTES, 'UTF-8'); ?>">
 										<option value="0" data-select2-id="2"> <?= __('Select Any One'); ?></option>
 										<?php foreach ($listfields as $feldname => $listfield) { ?>
 											<option value="<?php echo $feldname; ?>" <?php echo $workflowconfiguration['transaction_owner_field'] == $feldname ? "selected" : "" ?>> <?php echo $listfield['lable']; ?> </option>
@@ -659,10 +672,12 @@ $stausresult = ViewStatusData();
 								<?php /**/ ?>
 								<div class="form-group col-lg-12">
 									<span class="form-label d-block"><?= __('Transaction Owner Type'); ?></span>
-									<select class="form-select js-example-basic-single" name="transaction_owner_type" aria-label="<?= htmlspecialchars(__('Transaction Owner Type'), ENT_QUOTES, 'UTF-8'); ?>">
+									<select class="form-select js-example-basic-single" name="transaction_owner_type"
+										aria-label="<?= htmlspecialchars(__('Transaction Owner Type'), ENT_QUOTES, 'UTF-8'); ?>">
 										<?php foreach ($ownertype as $keyval => $values) { ?>
 											<option value="<?php echo $keyval; ?>" <?php echo $workflowconfiguration['transaction_owner_type'] == $keyval ? "selected" : "" ?>>
-												<?php echo $values; ?> </option>
+												<?php echo $values; ?>
+											</option>
 										<?php } ?>
 									</select>
 								</div>
@@ -680,17 +695,21 @@ $stausresult = ViewStatusData();
 									<span class="form-label d-block"><?= __('Follow Up'); ?></span>
 									<input type="checkbox" class="js-switch" value="Y" name="follow_up" id="follow_up"
 										<?php echo $workflowconfiguration['follow_up'] == "Y" ? "checked" : ""; ?>
-										onchange="followUp()" aria-label="<?= htmlspecialchars(__('Follow Up'), ENT_QUOTES, 'UTF-8'); ?>">
+										onchange="followUp()"
+										aria-label="<?= htmlspecialchars(__('Follow Up'), ENT_QUOTES, 'UTF-8'); ?>">
 								</div>
 								<div class="form-group col-lg-6 followup">
 									<span class="form-label d-inline-block fw-bold"><?= __('Days'); ?></span>
-									<input type="number" class="form-control" name="follow_up_day" placeholder="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>"
-										value="<?php echo $workflowconfiguration['follow_up_day']; ?>" aria-label="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>">
+									<input type="number" class="form-control" name="follow_up_day"
+										placeholder="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>"
+										value="<?php echo $workflowconfiguration['follow_up_day']; ?>"
+										aria-label="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>">
 								</div>
 								<div class="form-group col-lg-6 followup">
 									<span class="form-label d-inline-block fw-bold"><?= __('Follow Up Email'); ?></span>
 									<select class="form-select js-example-basic-single"
-										name="follow_up_email_content_ref_id" aria-label="<?= htmlspecialchars(__('Follow Up Email Content Ref Id'), ENT_QUOTES, 'UTF-8'); ?>">
+										name="follow_up_email_content_ref_id"
+										aria-label="<?= htmlspecialchars(__('Follow Up Email Content Ref Id'), ENT_QUOTES, 'UTF-8'); ?>">
 										<option value="0"> <?= __('Select Any One'); ?></option>
 										<?php foreach ($email_content as $emailcontent) { ?>
 											<option value="<?php echo $emailcontent['template_reference_id']; ?>" <?php echo $workflowconfiguration['follow_up_email_content_ref_id'] == $emailcontent['template_reference_id'] ? "selected" : "" ?>><?php echo $emailcontent['template_name']; ?> </option>
@@ -701,17 +720,22 @@ $stausresult = ViewStatusData();
 									<span class="form-label d-block"><?= __('Escalation'); ?></span>
 									<input type="checkbox" class="js-switch" value="Y" name="escalation" id="escalation"
 										<?php echo $workflowconfiguration['escalation'] == "Y" ? "checked" : ""; ?>
-										onchange="Escalation()" aria-label="<?= htmlspecialchars(__('Escalation'), ENT_QUOTES, 'UTF-8'); ?>">
+										onchange="Escalation()"
+										aria-label="<?= htmlspecialchars(__('Escalation'), ENT_QUOTES, 'UTF-8'); ?>">
 								</div>
 								<div class="form-group col-lg-6 escalationclass">
 									<span class="form-label d-inline-block fw-bold"><?= __('Days'); ?></span>
-									<input type="number" class="form-control" name="escalation_day" placeholder="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>"
-										value="<?php echo $workflowconfiguration['escalation_day']; ?>" aria-label="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>">
+									<input type="number" class="form-control" name="escalation_day"
+										placeholder="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>"
+										value="<?php echo $workflowconfiguration['escalation_day']; ?>"
+										aria-label="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>">
 								</div>
 								<div class="form-group col-lg-6 escalationclass">
-									<span class="form-label d-inline-block fw-bold"><?= __('Escalation Email'); ?></span>
+									<span
+										class="form-label d-inline-block fw-bold"><?= __('Escalation Email'); ?></span>
 									<select class="form-select js-example-basic-single"
-										name="escalation_email_content_ref_id" aria-label="<?= htmlspecialchars(__('Escalation Email Content Ref Id'), ENT_QUOTES, 'UTF-8'); ?>">
+										name="escalation_email_content_ref_id"
+										aria-label="<?= htmlspecialchars(__('Escalation Email Content Ref Id'), ENT_QUOTES, 'UTF-8'); ?>">
 										<option value="0"> <?= __('Select Any One'); ?></option>
 										<?php foreach ($email_content as $emailcontent) { ?>
 											<option value="<?php echo $emailcontent['template_reference_id']; ?>" <?php echo $workflowconfiguration['escalation_email_content_ref_id'] == $emailcontent['template_reference_id'] ? "selected" : "" ?>><?php echo $emailcontent['template_name']; ?> </option>
@@ -721,13 +745,15 @@ $stausresult = ViewStatusData();
 								<div class="form-group col-lg-4">
 									<span class="form-label d-block"><?= __('Auto Forward'); ?></span>
 									<input type="checkbox" class="js-switch" value="Y" name="auto_forward"
-										id="auto_forward" <?php echo $workflowconfiguration['auto_forward'] == "Y" ? "checked" : ""; ?>
-										onchange="autoForward()" aria-label="<?= htmlspecialchars(__('Auto Forward'), ENT_QUOTES, 'UTF-8'); ?>">
+										id="auto_forward" <?php echo $workflowconfiguration['auto_forward'] == "Y" ? "checked" : ""; ?> onchange="autoForward()"
+										aria-label="<?= htmlspecialchars(__('Auto Forward'), ENT_QUOTES, 'UTF-8'); ?>">
 								</div>
 								<div class="form-group col-lg-8 autoforward_class">
 									<span class="form-label d-inline-block fw-bold"><?= __('Days'); ?></span>
-									<input type="number" class="form-control" name="auto_forward_day" placeholder="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>"
-										value="<?php echo $workflowconfiguration['auto_forward_day']; ?>" aria-label="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>">
+									<input type="number" class="form-control" name="auto_forward_day"
+										placeholder="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>"
+										value="<?php echo $workflowconfiguration['auto_forward_day']; ?>"
+										aria-label="<?= htmlspecialchars(__('Day'), ENT_QUOTES, 'UTF-8'); ?>">
 								</div>
 							</div>
 						</div>
@@ -747,15 +773,22 @@ $stausresult = ViewStatusData();
 								$j = 1;
 								foreach ($criteria as $criterias) { ?>
 									<div class="form-group col-lg-4" id="deletdiv_<?php echo $j; ?>">
-										<span class="form-label d-inline-block fw-bold"><?= __('Criteria'); ?>-<?php echo $j; ?> </span>
-										<span class="float-right"><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Deletecriteria'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-close text-danger f-12"
+										<span
+											class="form-label d-inline-block fw-bold"><?= __('Criteria'); ?>-<?php echo $j; ?>
+										</span>
+										<span class="float-right"><i role="button" tabindex="0"
+												aria-label="<?= htmlspecialchars(__('Deletecriteria'), ENT_QUOTES, 'UTF-8'); ?>"
+												onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+												class="ti-close text-danger f-12"
 												onclick="deletecriteria('deletdiv_<?php echo $j; ?>')"></i></span>
 										<div <?php echo $criterias != "-1" ? 'style="pointer-events: none; opacity: 0.6;"' : ""; ?>>
 											<select class="form-select js-example-basic-single selectcriteria"
-												name="criteria[]" aria-label="<?= htmlspecialchars(__('Criteria'), ENT_QUOTES, 'UTF-8'); ?>">
+												name="criteria[]"
+												aria-label="<?= htmlspecialchars(__('Criteria'), ENT_QUOTES, 'UTF-8'); ?>">
 												<?php foreach ($customselectfieldarray as $trans_table => $customselectfield) { ?>
 													<option value="<?php echo $trans_table; ?>" <?php echo $criterias == $trans_table ? "selected" : "" ?>>
-														<?php echo $customselectfield; ?></option>
+														<?php echo $customselectfield; ?>
+													</option>
 												<?php } ?>
 											</select>
 										</div>
@@ -764,7 +797,8 @@ $stausresult = ViewStatusData();
 								} ?>
 							</div>
 							<button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold"
-								onclick="addMoreCriteria()"><i class="ti-plus"></i> <?= __('Add More Criteria'); ?></button>
+								onclick="addMoreCriteria()"><i class="ti-plus"></i>
+								<?= __('Add More Criteria'); ?></button>
 
 						</div>
 					</div>
@@ -792,16 +826,19 @@ $stausresult = ViewStatusData();
 				<div class="row">
 					<div class="form-group col-lg-1 text-center">
 						<span class="form-label d-block"><?= __('DOA'); ?></span>
-						<input type="checkbox" class="js-switch" name="doa" <?php echo $workflowconfiguration['doa'] == '0' || $workflowconfiguration['doa'] == '' ? "checked" : "" ?> onchange="checkDOA(this.checked)" value="0" / aria-label="<?= htmlspecialchars(__('Doa'), ENT_QUOTES, 'UTF-8'); ?>">
+						<input type="checkbox" class="js-switch" name="doa" <?php echo $workflowconfiguration['doa'] == '0' || $workflowconfiguration['doa'] == '' ? "checked" : "" ?> onchange="checkDOA(this.checked)"
+							value="0" / aria-label="<?= htmlspecialchars(__('Doa'), ENT_QUOTES, 'UTF-8'); ?>">
 					</div>
 					<div class="form-group col-lg-4 doatriger w-full"
 						style="<?php echo $workflowconfiguration['doa'] == '0' || $workflowconfiguration['doa'] == '' ? "" : "display:none" ?>">
 						<span class="form-label d-block"><?= __('DOA Trigger Field'); ?></span>
-						<select class="form-select js-example-basic-single fieldlist" name="doa_trigger_field" aria-label="<?= htmlspecialchars(__('Doa Trigger Field'), ENT_QUOTES, 'UTF-8'); ?>">
+						<select class="form-select js-example-basic-single fieldlist" name="doa_trigger_field"
+							aria-label="<?= htmlspecialchars(__('Doa Trigger Field'), ENT_QUOTES, 'UTF-8'); ?>">
 							<option value="0"> <?= __('Select Any One'); ?></option>
 							<?php foreach ($listfields as $feldname => $listfield) { ?>
 								<option value="<?php echo $feldname; ?>" <?php echo $workflowconfiguration['doa_trigger_field'] == $feldname ? "selected" : "" ?>>
-									<?php echo $listfield['lable']; ?> </option>
+									<?php echo $listfield['lable']; ?>
+								</option>
 							<?php } ?>
 						</select>
 					</div>
@@ -834,7 +871,7 @@ $stausresult = ViewStatusData();
 														class="f-18"><?php echo $roleprecesstypearray[$approvalprocess['approval_type']]; ?></span>
 													<span
 														class="d-block tetx-dark mt-1"><?php echo $sublist[$approvalprocess['sub_approve_type']]; ?></span>
-											</span>L<?php echo $i; ?>
+												</span>L<?php echo $i; ?>
 											</span>L<?php echo $i; ?>
 											<?php if ($i < $workflowconfiguration['workflow_level']) { ?>
 												<i class="ti-arrow-down d-block m-0"></i>
@@ -868,7 +905,8 @@ $stausresult = ViewStatusData();
 													$uniquetablevalue[$tablevalue[0]] = $tablevalue[2];
 													$uniquetablevaluefield[$incnumber] .= $tablevalue[0] . "_" . $tablevalue[2];
 													?>
-													<span class="d-block mt-2  mb-2"><?php echo $mk . " : " . $tablevalue[1]; ?></span>
+													<span
+														class="d-block mt-2  mb-2"><?php echo $mk . " : " . $tablevalue[1]; ?></span>
 													<?php $mk++;
 												} ?>
 												</label>
@@ -890,16 +928,19 @@ $stausresult = ViewStatusData();
 												<div class="input-group input-group-button">
 													<input class="form-control autonumber width1"
 														name="doa_amount[<?php echo $incnumber; ?>][<?php echo $i; ?>]" type="text"
-														value="<?php echo $doa_amount[$i]['end_doa']; ?>" placeholder="<?= htmlspecialchars(__('Eg. 0'), ENT_QUOTES, 'UTF-8'); ?>"
+														value="<?php echo $doa_amount[$i]['end_doa']; ?>"
+														placeholder="<?= htmlspecialchars(__('Eg. 0'), ENT_QUOTES, 'UTF-8'); ?>"
 														data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>"
-														id="pendingcriteria_<?php echo $incnumber . $i; ?>" <?php echo ($wfdetail['final_approval'] < $i && $wfdetail['final_approval'] != "") ? "disabled" : ""; ?> aria-label="<?= htmlspecialchars(__('Eg. 0'), ENT_QUOTES, 'UTF-8'); ?>">
+														id="pendingcriteria_<?php echo $incnumber . $i; ?>" <?php echo ($wfdetail['final_approval'] < $i && $wfdetail['final_approval'] != "") ? "disabled" : ""; ?>
+														aria-label="<?= htmlspecialchars(__('Eg. 0'), ENT_QUOTES, 'UTF-8'); ?>">
 													<span class="input-group-text form-radio p-0">
 														<div class="radio radio-inline m-0">
 															<label class="form-label">
 																<input type="radio" name="final_approval_<?php echo $incnumber; ?>"
 																	id="pendingcriteriachek_<?php echo $incnumber . $i; ?>"
 																	onchange="finalApprovalstage(<?php echo $incnumber; ?>,<?php echo $i; ?>,<?php echo $workflowconfiguration['workflow_level']; ?>)"
-																	value="<?php echo $i; ?>" <?php echo ($wfdetail['final_approval'] == $i || $wfdetail['final_approval'] == "") ? "checked" : ""; ?> aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+																	value="<?php echo $i; ?>" <?php echo ($wfdetail['final_approval'] == $i || $wfdetail['final_approval'] == "") ? "checked" : ""; ?>
+																	aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 																<i class="helper"></i>
 															</label>
 														</div>
@@ -940,25 +981,32 @@ $stausresult = ViewStatusData();
 							$valuefields = "{[" . $workflowconfiguration['process_name'] . "." . $keyy . "]}";
 							?>
 							<p id="fieldspro_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-							<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+							<span role="button" tabindex="0"
+								onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+								class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 								onclick="copyfiled('#fieldspro_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-								data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>" style="margin-bottom:5px"><?php echo ucwords($aray['lable']); ?> <i
+								data-placement="bottom"
+								title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
+								style="margin-bottom:5px"><?php echo ucwords($aray['lable']); ?> <i
 									class="ti-layers"></i></span>
 							<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 								onclick="copyfiled('#fieldspro_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-								data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($aray['lable']); ?> <i
-									class="ti-layers"></i></button>
+								data-placement="bottom"
+								title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($aray['lable']); ?>
+								<i class="ti-layers"></i></button>
 							<?php $nmt++;
 						} ?>
 					</div>
 					<div class="col-lg-12 " id="employee_fields" style="display:none">
 						<ul class="nav nav-tabs md-tabs">
 							<li class="nav-item">
-								<a class="nav-link active" data-bs-toggle="tab" href="#homeuser" role="tab"><?= __('User'); ?></a>
+								<a class="nav-link active" data-bs-toggle="tab" href="#homeuser"
+									role="tab"><?= __('User'); ?></a>
 								<div class="slide"></div>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" data-bs-toggle="tab" href="#profileemployee" role="tab"><?= __('Employee'); ?></a>
+								<a class="nav-link" data-bs-toggle="tab" href="#profileemployee"
+									role="tab"><?= __('Employee'); ?></a>
 								<div class="slide"></div>
 							</li>
 						</ul>
@@ -969,14 +1017,18 @@ $stausresult = ViewStatusData();
 									$valuefields = "{[application_users." . $keyy . "]}";
 									?>
 									<p id="fieldsappuser_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-									<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+									<span role="button" tabindex="0"
+										onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+										class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 										onclick="copyfiled('#fieldsappuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-										data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
-											class="ti-layers"></i></span>
+										data-placement="bottom"
+										title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
+										style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
 									<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 										onclick="copyfiled('#fieldsappuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-										data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($keyy); ?> <i
-											class="ti-layers"></i></button>
+										data-placement="bottom"
+										title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($keyy); ?>
+										<i class="ti-layers"></i></button>
 									<?php $nmt++;
 								} ?>
 							</div>
@@ -986,14 +1038,18 @@ $stausresult = ViewStatusData();
 									$valuefields = "{[employees." . $keyy . "]}";
 									?>
 									<p id="fieldsemp_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-									<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+									<span role="button" tabindex="0"
+										onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+										class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 										onclick="copyfiled('#fieldsemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-										data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
-											class="ti-layers"></i></span>
+										data-placement="bottom"
+										title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
+										style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
 									<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 										onclick="copyfiled('#fieldsemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-										data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($keyy); ?> <i
-											class="ti-layers"></i></button>
+										data-placement="bottom"
+										title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($keyy); ?>
+										<i class="ti-layers"></i></button>
 									<?php $nmt++;
 								} ?>
 							</div>
@@ -1003,11 +1059,13 @@ $stausresult = ViewStatusData();
 						<div class="col-lg-12 col-xl-12 mt-4">
 							<ul class="nav nav-tabs md-tabs">
 								<li class="nav-item">
-									<a class="nav-link active" data-bs-toggle="tab" href="#homeuser" role="tab"><?= __('User'); ?></a>
+									<a class="nav-link active" data-bs-toggle="tab" href="#homeuser"
+										role="tab"><?= __('User'); ?></a>
 									<div class="slide"></div>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" data-bs-toggle="tab" href="#profileemployee" role="tab"><?= __('Employee'); ?></a>
+									<a class="nav-link" data-bs-toggle="tab" href="#profileemployee"
+										role="tab"><?= __('Employee'); ?></a>
 									<div class="slide"></div>
 								</li>
 							</ul>
@@ -1017,15 +1075,21 @@ $stausresult = ViewStatusData();
 									foreach ($_SESSION['user'] as $keyy => $aray) {
 										$valuefields = "{[session_user." . $keyy . "]}";
 										?>
-										<p id="fieldssesiuser_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-										<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+										<p id="fieldssesiuser_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?>
+										</p>
+										<span role="button" tabindex="0"
+											onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+											class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 											onclick="copyfiled('#fieldssesiuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-											data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
+											data-placement="bottom"
+											title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
+											style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
 												class="ti-layers"></i></span>
 										<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 											onclick="copyfiled('#fieldssesiuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-											data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($keyy); ?> <i
-												class="ti-layers"></i></button>
+											data-placement="bottom"
+											title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($keyy); ?>
+											<i class="ti-layers"></i></button>
 										<?php $nmt++;
 									} ?>
 								</div>
@@ -1035,14 +1099,19 @@ $stausresult = ViewStatusData();
 										$valuefields = "{[session_employee." . $keyy . "]}";
 										?>
 										<p id="fieldssesiemp_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-										<span role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
+										<span role="button" tabindex="0"
+											onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+											class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
 											onclick="copyfiled('#fieldssesiemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-											data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>" style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
+											data-placement="bottom"
+											title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
+											style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
 												class="ti-layers"></i></span>
 										<button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
 											onclick="copyfiled('#fieldssesiemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
-											data-placement="bottom" title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($keyy); ?> <i
-												class="ti-layers"></i></button>
+											data-placement="bottom"
+											title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo ucwords($keyy); ?>
+											<i class="ti-layers"></i></button>
 										<?php $nmt++;
 									} ?>
 								</div>
@@ -1056,14 +1125,16 @@ $stausresult = ViewStatusData();
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
-									<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Submit/Approve'); ?></span>
-									<textarea class="form-control "
-										name="approve_message" aria-label="<?= htmlspecialchars(__('Approve Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['approve_message']; ?></textarea>
+									<span class="d-inline-block fw-bold"
+										style="margin-bottom:5px"><?= __('Submit/Approve'); ?></span>
+									<textarea class="form-control " name="approve_message"
+										aria-label="<?= htmlspecialchars(__('Approve Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['approve_message']; ?></textarea>
 								</div>
 								<div class="form-group">
-									<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Submit/Approve Informations'); ?></span>
-									<textarea class="form-control "
-										name="approve_message_information" aria-label="<?= htmlspecialchars(__('Approve Message Information'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['approve_message_information']; ?></textarea>
+									<span class="d-inline-block fw-bold"
+										style="margin-bottom:5px"><?= __('Submit/Approve Informations'); ?></span>
+									<textarea class="form-control " name="approve_message_information"
+										aria-label="<?= htmlspecialchars(__('Approve Message Information'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['approve_message_information']; ?></textarea>
 								</div>
 							</div>
 						</div>
@@ -1072,29 +1143,34 @@ $stausresult = ViewStatusData();
 						<div class="card">
 							<div class="card-body">
 								<div class="form-group">
-									<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Reject'); ?></span>
-									<textarea class="form-control "
-										name="reject_message" aria-label="<?= htmlspecialchars(__('Reject Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['reject_message']; ?></textarea>
+									<span class="d-inline-block fw-bold"
+										style="margin-bottom:5px"><?= __('Reject'); ?></span>
+									<textarea class="form-control " name="reject_message"
+										aria-label="<?= htmlspecialchars(__('Reject Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['reject_message']; ?></textarea>
 								</div>
 								<div class="form-group">
-									<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Send Back'); ?></span>
-									<textarea class="form-control "
-										name="sendback_message" aria-label="<?= htmlspecialchars(__('Sendback Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['sendback_message']; ?></textarea>
+									<span class="d-inline-block fw-bold"
+										style="margin-bottom:5px"><?= __('Send Back'); ?></span>
+									<textarea class="form-control " name="sendback_message"
+										aria-label="<?= htmlspecialchars(__('Sendback Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['sendback_message']; ?></textarea>
 								</div>
 								<div class="form-group">
-									<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Completed Workflow'); ?></span>
-									<textarea class="form-control "
-										name="completed_workflow_message" aria-label="<?= htmlspecialchars(__('Completed Workflow Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['completed_workflow_message']; ?></textarea>
+									<span class="d-inline-block fw-bold"
+										style="margin-bottom:5px"><?= __('Completed Workflow'); ?></span>
+									<textarea class="form-control " name="completed_workflow_message"
+										aria-label="<?= htmlspecialchars(__('Completed Workflow Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['completed_workflow_message']; ?></textarea>
 								</div>
 								<div class="form-group">
-									<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Call Back'); ?></span>
-									<textarea class="form-control "
-										name="callback" aria-label="<?= htmlspecialchars(__('Callback'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['callback']; ?></textarea>
+									<span class="d-inline-block fw-bold"
+										style="margin-bottom:5px"><?= __('Call Back'); ?></span>
+									<textarea class="form-control " name="callback"
+										aria-label="<?= htmlspecialchars(__('Callback'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['callback']; ?></textarea>
 								</div>
 								<div class="form-group ">
-									<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Information'); ?></span>
-									<textarea class="form-control "
-										name="employee_message" aria-label="<?= htmlspecialchars(__('Employee Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['employee_message']; ?></textarea>
+									<span class="d-inline-block fw-bold"
+										style="margin-bottom:5px"><?= __('Information'); ?></span>
+									<textarea class="form-control " name="employee_message"
+										aria-label="<?= htmlspecialchars(__('Employee Message'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $transaction_message_res['employee_message']; ?></textarea>
 								</div>
 							</div>
 						</div>
@@ -1105,7 +1181,8 @@ $stausresult = ViewStatusData();
 	<?php } ?>
 	<div class="card">
 		<div class="card-footer">
-			<button class="btn btn-primary mr-2" name="submit" value="submit"><i class="la la-check"></i><?= __('Save'); ?></button>
+			<button class="btn btn-primary mr-2" name="submit" value="submit"><i
+					class="la la-check"></i><?= __('Save'); ?></button>
 		</div>
 	</div>
 </form>
