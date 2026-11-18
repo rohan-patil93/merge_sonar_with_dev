@@ -102,7 +102,7 @@ function getTransactionInvoiceList(){
                 <div class="card-body text-center p-2">
 
                     <p class="m-b-30 bg-c-blue lbl-card custom-limit-text" style="--linehide: 1;">
-                    <?php echo $applicationmenu['Label']; ?> &nbsp;&nbsp; <span class="spanicon" id="spanicon_<?php echo $mmk; ?>"><?php echo $iconimg; ?></span></p>
+                    <?php echo __($applicationmenu['Label']); ?> &nbsp;&nbsp; <span class="spanicon" id="spanicon_<?php echo $mmk; ?>"><?php echo $iconimg; ?></span></p>
                     <?php if($pendding_action[$applicationmenu['application_table_name']] !=0){?>
                     <div class="show-num bg-danger"><i class="fa fa-envelope"></i> <?php echo $pendding_action[$applicationmenu['application_table_name']]; ?></div>
                     <?php } ?>

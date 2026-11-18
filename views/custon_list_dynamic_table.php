@@ -83,13 +83,13 @@ $total_pages = $dynamictableres['total_pages'];
                       <?php foreach ($dis as $header) {
                           $after = isset($header['add_custom_field']) && $header['add_custom_field']!='' ? $header['add_custom_field'] :2;
                           ?>
-                            <th scope="col"><?php echo $header['lable']; ?></th>
+                            <th scope="col"><?php echo __($header['lable']); ?></th>
                             <?php if($after == 1){
                               $afterdata=dyanamicafterdata($table, $header['name']);
                               if($afterdata['display'] != 'insert'){
                                 $afterfield[$header['name']] =  $afterdata['value'];
                              ?>
-                              <th scope="col"><?php echo  $afterdata['lable']; ?></th>
+                              <th scope="col"><?php echo  __($afterdata['lable']); ?></th>
                              <?php } else{
                                 $afterfield[$header['name']] =  '#no#';
                              }

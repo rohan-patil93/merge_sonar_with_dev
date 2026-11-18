@@ -335,7 +335,7 @@ if($viewtime ==1 ){
             <?php if($list['insert_page_type'] ==2 && !in_array($table,$noinsertview)){?>
             <a target="_blank"  href="<?php echo $link; ?>"  class="btn btn-success mb-2 desktop-view" <?php echo $insert_permissionbtn; ?>>
              <i class="icofont icofont-plus icon-white"></i>
-              <?php echo $title;  ?>
+              <?php echo __($title);  ?>
             </a>
             <a target="_blank"  href="<?php echo $link; ?>"  class="mb-2 mob-import" <?php echo $permission_importbtn; ?>>
              <button class="btn btn-primary btn-outline-primary btn-icon m-l-10"><i class="icon-plus text-primary"></i></button>
@@ -346,12 +346,12 @@ if($viewtime ==1 ){
               <?php if($page_details['insert_page_type']  == '2'){  ?>
             <a href="#top" onclick="dynamicInsertPopUpNew(<?php echo "'".$insert."'"; ?>)" class="btn btn-success mb-2 desktop-view" <?php echo $insert_permissionbtn; ?>>
               <i class="icofont icofont-plus icon-white"></i>
-              <?php echo $title;  ?>
+              <?php echo __($title);  ?>
             </button>
           <?php }else{  ?>
             <a href="#top" onclick="dynamicinsertpopup(<?php echo "'".$insert."'"; ?>)" class="btn btn-success mb-2 desktop-view" <?php echo $insert_permissionbtn; ?>>
               <i class="icofont icofont-plus icon-white"></i>
-              <?php echo $title;  ?>
+              <?php echo __($title);  ?>
             </button>
           <?php } ?>
 
@@ -362,7 +362,7 @@ if($viewtime ==1 ){
             <?php }else{  ?>
             <a href="<?php echo $link; ?>"  class="btn btn-success mb-2 desktop-view" <?php echo $insert_permissionbtn; ?>>
               <i class="icofont icofont-plus icon-white " ></i>
-              <?php echo $title;  ?>
+              <?php echo __($title);  ?>
             </a>
             <a href="<?php echo $link; ?>"  class="mb-2 mob-import" <?php echo $permission_importbtn; ?>>
               <button class="btn btn-primary btn-outline-primary btn-icon m-l-10"><i class="icon-plus text-primary"></i></button>

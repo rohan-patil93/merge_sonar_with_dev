@@ -250,7 +250,7 @@ function getEnquiryVendororCustomerPartyDetailspopup(party_id,part_table=''){
             <div class="col-lg-3">
                 <div class="card sale-card mb-2">
                     <div class="card-header pb-mob">
-                        <h5><?php echo $_POST['menu_label']; ?></h5>
+                        <h5><?php echo __($_POST['menu_label']); ?></h5>
                         <div class="card-header-right custom-right-header">
                             <a href="index.php?option=<?php echo $optiondetails['insert_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars(__('Add').' '.$_POST['menu_label'], ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?php echo htmlspecialchars(__('Add').' '.$_POST['menu_label'], ENT_QUOTES, 'UTF-8'); ?>" <?php echo $insert_permissionbtn; ?>> <i class="icofont icofont-plus icon-dark"></i> </a>
                             <a href="index.php?option=<?php echo $optiondetails['list_page_name']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('List'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?php echo htmlspecialchars($_POST['menu_label'].' '.__('List'), ENT_QUOTES, 'UTF-8'); ?>"<?php echo $permission_listbtn; ?>> <i class="ti ti-timer icon-dark"></i></a>
@@ -392,11 +392,11 @@ if($totaldoc != 0 && $totaldoc !=""){
                 <div class="col-lg-9">
                     <ul class="nav md-tabs infisuite_tab mb-2">
                         <li class="nav-item">
-                            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfdocuments" role="tab" aria-selected="true"><?php echo $_POST['menu_label']; ?></a>
+                            <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#selfdocuments" role="tab" aria-selected="true"><?php echo __($_POST['menu_label']); ?></a>
                         </li>
                         <?php  foreach($generatedocs as $trnstabkey=>$gdocs){ ?>
                             <li class="nav-item">
-                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tabsopen" role="tab" aria-selected="true" onclick="openApprovedPage('<?php echo $trnstabkey; ?>','<?php echo $table_name; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"><?php echo "Approved ".ucwords(str_replace('_',' ',$trnstabkey)); ?>
+                                <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#tabsopen" role="tab" aria-selected="true" onclick="openApprovedPage('<?php echo $trnstabkey; ?>','<?php echo $table_name; ?>')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"><?php echo __("Approved ".ucwords(str_replace('_',' ',$trnstabkey))); ?>
                                 <!-- <span class="label label-xs label-success m-l-10"><?php echo count((array)$gdocs);?></span>-->
 </a>                            </li>
                         <?php } ?>
@@ -462,7 +462,7 @@ if($totaldoc != 0 && $totaldoc !=""){
                         <div class="tab-content tabs custom-scroll" style="max-height: 1000px;">
                             <div class="tab-pane card-body active p-0" id="itemcategory" role="tabpanel">
                                 <div class="card-header">
-                                    <h5><?php echo $itemcatname; ?></h5>
+                                    <h5><?php echo __($itemcatname); ?></h5>
                                     <div class="card-header-right table-card-header">
                       <div class="input-group input-group-button mb-0" >
                                     <input type="text" id="dynamicfilterhideshow_category" data-id='categoryfilter' data-type="tr" class="form-control form-control-sm width1 dynamicfilterhideshow"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">

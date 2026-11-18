@@ -418,8 +418,8 @@
                 </li>
         <?php } **/?>
         <?php if(in_array(ADMIN_ROLE,(array)$_SESSION['role_ids'])){ ?>
-        <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Display Attributes">
-            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Display Attributes" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_DISPLAY_ATTRIBUTES';">
+        <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Display Attributes'), ENT_QUOTES, 'UTF-8'); ?>">
+            <div class="dropdown-primary" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Display Attributes'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_DISPLAY_ATTRIBUTES';">
                 <div class="" data-bs-toggle="dropdown">
                     <i class="ti-tablet"></i>
                 </div>
@@ -428,8 +428,8 @@
 
 
 
-        <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="Settings">
-            <div class="dropdown-primary" role="button" tabindex="0" aria-label="Settings" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_APPLICATION_MENU_SETTINGS';">
+        <li class="header-notification m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Settings'), ENT_QUOTES, 'UTF-8'); ?>">
+            <div class="dropdown-primary" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Settings'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="location.href='index.php?option=COM_LIST_APPLICATION_MENU_SETTINGS';">
                 <div class="" data-bs-toggle="dropdown">
                     <i class="ti-settings" ></i>
                 </div>
@@ -689,7 +689,7 @@ if($_SESSION['user_activated'] == 'Y'){ ?>
 <ul class="<!--nav-left--> nav-left">
          <?php if($user['user_type'] !=4 && $user['user_type'] !=3 && $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_logo'] !=""){ ?>
     <li class="nav-item has-megamenu">
-    <a class="nav-link  text-primary f-w-600" href="index.php" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_name'];?> Home">
+    <a class="nav-link  text-primary f-w-600" href="index.php" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __($_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_name']); ?> Home">
        <img src="uploads/all/<?php echo $_SESSION['module_setp'][$_SESSION['work_module_setup_id']]['module_logo'];?>" class="img-40" alt="" >
 
     </a>
@@ -827,7 +827,7 @@ if (count((array)$topnavcenter) >0 && in_array('TNC', (array)$_SESSION['role_nav
                                 <ul class="list-unstyled">
                                     <?php foreach ($listnav['child'] as  $list) {?>
                                         <li style="padding: 0px !important;"><a href="index.php?option=<?php echo $list['Page_Name']; ?>">
-                                          <?php echo ucwords($list['Label']); ?>
+                                          <?php echo ucwords(__($list['Label'])); ?>
                                       </a></li>
                                   <?php } ?>
                               </ul>
