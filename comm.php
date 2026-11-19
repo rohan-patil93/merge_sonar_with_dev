@@ -27,8 +27,9 @@ function encodeId($id)
 function initials($str)
 {
 	$ret = '';
-	foreach (explode(' ', $str) as $word)
+	foreach (explode(' ', $str) as $word) {
 		$ret .= strtoupper($word[0]);
+	}
 	if (strlen($ret) > 2) {
 		$ret = substr($ret, 0, 1) . substr($ret, -1);
 	}
@@ -39,7 +40,7 @@ function toGetUserDetais()
 	$url = API . "?mode=userdetails&userid=" . $_SESSION['userid'];
 	$res = callAPI($url);
 	return json_decode($res, 1);
-	
+
 }
 function candidatedetais($email)
 {
@@ -123,7 +124,7 @@ function imageupload($jnt, $imagename, $hidimage, $exname = "")
 			}
 
 		}
-		$res = move_uploaded_file($_FILES[$imagename]['tmp_name'], $path . $name);
+		move_uploaded_file($_FILES[$imagename]['tmp_name'], $path . $name);
 	}
 	return $name;
 }
@@ -674,7 +675,7 @@ function toGETNavDetailslastest($type)
 {
 	$array = array();
 	$menu = $_SESSION['application_menu'];
-	foreach ($menu as $key => $value) {
+	foreach ($menu as $value) {
 		if ($value['menu_location'] == $type && $value['parent_menu'] == 0) {
 			$child = getParentidmenus($value['id'], 1);
 			$array[$value['id']]['id'] = $value['id'];
@@ -725,7 +726,7 @@ function toGETNavDetails($type)
 {
 	$menu = $_SESSION['application_menu'];
 
-	foreach ($menu as $key => $value) {
+	foreach ($menu as $value) {
 		if ($value['menu_location'] == $type && $value['parent_menu'] == 0) {
 
 			if ($_SESSION['config']['role_permission'] == 0) {
@@ -824,10 +825,8 @@ function checkPremission($name)
 	if (isset($_SESSION['role_permission'][$table][$type]) && $_SESSION['role_permission'][$table][$type] == 0) {
 		$return = 1;
 	}
-	if ($return == 0) {
-		if (isset($_SESSION['role_page_permission'][$name]) && $_SESSION['role_page_permission'][$name]['permission_list'] == 0) {
-			$return = 1;
-		}
+	if ($return == 0 && isset($_SESSION['role_page_permission'][$name]) && $_SESSION['role_page_permission'][$name]['permission_list'] == 0) {
+		$return = 1;
 	}
 
 	//approval check
@@ -844,7 +843,6 @@ function checkPremissionlastet($name)
 	$return = 0;
 	foreach ($_SESSION['application_pages'] as $value) {
 		if ($value['list_page_name'] == $name || $value['insert_page_name'] == $name || $value['edit_page_name'] == $name || $value['view_page_name'] == $name) {
-			$table = $value['application_table_name'];
 			if ($value['list_page_name'] == $name) {
 				$lname = $value['list_page_name'];
 				$type = 'permission_list';
@@ -883,7 +881,7 @@ function getParentidmenus($pid, $len)
 {
 	$menu = $_SESSION['application_menu'];
 	$array1 = array();
-	foreach ($menu as $key => $value) {
+	foreach ($menu as $value) {
 
 		$res = 1;
 		if ($value['parent_menu'] == $pid && $_SESSION['config']['role_permission'] == 0) {
@@ -915,7 +913,7 @@ function getParentidmenuscheck($pid, $len)
 {
 	$array1 = array();
 	$menu = $_SESSION['application_menu'];
-	foreach ($menu as $key => $value) {
+	foreach ($menu as $value) {
 		if ($value['parent_menu'] == $pid) {
 			$array1[$value['id']]['id'] = $value['id'];
 			$array1[$value['id']]['Label'] = $value['menu_label'];
@@ -990,9 +988,6 @@ function notificationdatesdiff($date, $cond = "", $ladate = "")
 	$minutes = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60) / 60);
 	// To get the minutes, subtract it with years,
 // months, seconds, hours and minutes
-	$seconds = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60 - $minutes * 60));
-	// Print the result
-//printf("%d years, %d months, %d days, %d hours, "	. "%d minutes, %d seconds",$years, $months, $days, $hours, $minutes, $seconds);
 	$str = '';
 	if ($years > 0) {
 		$str .= $years . " years, ";
@@ -1069,8 +1064,9 @@ function numberToWordFormateRupees($number)
 				$words[floor($number / 10) * 10]
 				. " " . $words[$number % 10] . " "
 				. $digits[$counter] . $plural . " " . $hundred;
-		} else
+		} else {
 			$str[] = null;
+		}
 	}
 	$str = array_reverse((array) $str);
 	$result = implode('', (array) $str);
@@ -1204,7 +1200,7 @@ function NotificationRead($id)
 	$data = array('read_status' => 1);
 	$data = urlencode(json_encode($data));
 	$vurl = API . "?mode=notification_read&id=" . encodeId($id);
-	$res = callAPI($vurl);
+	callAPI($vurl);
 }
 function fiscalmonth($month)
 {
@@ -1239,7 +1235,7 @@ function Insertqueries($post)
 	unset($dats['trno']);
 	unset($dats['send_id']);
 	$url = API . "?mode=adddata&table=" . TBL_TRANSACTION_QUERIES . "&method=post";
-	$response = file_post_contents($url, $dats, 'insert');
+	file_post_contents($url, $dats, 'insert');
 	$post['user_id'] = $_SESSION['userid'];
 	$notiurrl = API . "?mode=querynotificationandemail&method=post";
 	return file_post_contents($notiurrl, $post, 'insert');
@@ -1263,8 +1259,8 @@ function insertatchments($data)
 
 function validategstin($gstNumber)
 {
-	$GSTINFORMAT_REGEX = "/[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}/";
-	if (preg_match($GSTINFORMAT_REGEX, $gstNumber)) {
+	$gstinformat_regex = '/\d{2}[a-zA-Z]{5}\d{4}[a-zA-Z][1-9A-Za-z]Z[0-9a-zA-Z]/';
+	if (preg_match($gstinformat_regex, $gstNumber)) {
 		if (gst_error_check($gstNumber) == $gstNumber) {
 			return 1;
 		} else {
@@ -1277,14 +1273,14 @@ function validategstin($gstNumber)
 }
 function gst_error_check($gst_number)
 {
-	$GSTN_CODEPOINT_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	$gstn_codepoint_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	$input = str_split($gst_number);
 	$inputChars = $input;
 	unset($inputChars[14]);
 	$factor = 2;
 	$sum = 0;
 	$checkCodePoint = 0;
-	$cpChars = str_split($GSTN_CODEPOINT_CHARS);
+	$cpChars = str_split($gstn_codepoint_chars);
 	$mod = count((array) $cpChars);
 	for ($i = count((array) $inputChars) - 1; $i >= 0; $i--) {
 		$codePoint = -1;
@@ -1295,7 +1291,6 @@ function gst_error_check($gst_number)
 		}
 		$digit = $factor * $codePoint;
 		$factor = ($factor == 2) ? 1 : 2;
-		$x = ($digit % $mod);
 		$digit = (int) ($digit / $mod) + (int) ($digit % $mod);
 		$sum += $digit;
 	}
@@ -1309,7 +1304,6 @@ function emaildatareplaceNew($data, $val)
 	foreach ($data as $fieldkey => $result) {
 		$inputFildsArray["{" . trim($fieldkey) . "}"] = trim($result);
 	}
-	$str = "";
 	foreach ($inputFildsArray as $key => $value) {
 		$repl = str_replace(trim($key), trim($value), trim($val));
 		$val = $repl;
@@ -1414,7 +1408,7 @@ function toupdateuserconfirmedbasicinfo()
 	$updata = array();
 	$updata['confirmed_basic_ino'] = '0';
 	$url = API . "?mode=updaterowtabledata&rid=" . $_SESSION['userid'] . "&table=" . TBL_USERS . "&method=post";
-	$response = file_post_contents($url, $updata, 'update');
+	file_post_contents($url, $updata, 'update');
 }
 function toupdateemployee($name)
 {
@@ -1423,8 +1417,7 @@ function toupdateemployee($name)
 	$updata['image'] = $name;
 	$url = API . "?mode=updaterowtabledata&rid=" . $_SESSION['emp_id'] . "&table=employees&method=post";
 	///echo $url; exit;
-	$response = file_post_contents($url, $updata, 'update');
-	return $response;
+	return file_post_contents($url, $updata, 'update');
 }
 function todisplaystatuslist($data)
 {
@@ -1442,7 +1435,6 @@ function todisplaystatuslist($data)
 		if ($checkcurrent_status == ST_INACTIVE || $checkcurrent_status == ST_DRAFT) {
 			$checkcurrent_status = -1;
 		}
-		$wlcount = count((array) $wlist);
 		$cw = 1;
 		$ork = 0;
 		foreach ($wlist as $pwlist) {
@@ -1529,7 +1521,7 @@ function todisplaytimeline($data)
 	$vdata_details = callAPI($vurl);
 	$vdata_details = json_decode($vdata_details, 1);
 	$dis_str = '';
-	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-6" id="accordionExample2">                    
+	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-6" id="accordionExample2">
 		<div class="card latest-update-card acc-bgc">
 		<div class="card-header" id="headingTwo2">
 		<div class="card-title scale_active collapsed f-16 f-w-600" data-bs-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2" href="#collapseTwo2">
@@ -1538,7 +1530,7 @@ function todisplaytimeline($data)
 		</div>
 		<div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordionExample2">';
 	$dis_str .= '
-		<div class="latest-update-card">                                            
+		<div class="latest-update-card">
             <div class="card-block">
                 <div class="" style=""><div class="" style="">
                     <div class="latest-update-box custom-scroll" style="height:400px">';
@@ -1552,7 +1544,7 @@ function todisplaytimeline($data)
 		}
 		$dis_str .= '  </div>
                             <div class="col p-l-5">
-                               
+
                                 <p class="text-muted m-b-0"><span style="font-size:14px;">' . $_SESSION['users'][$vdvalue['user_id']] . '&nbsp; Record Status Updated to ' . $_SESSION['status'][$vdvalue['status_value']]['name'] . '</span></br>' . date("M d, Y g:i A", strtotime($vdvalue['action_date'])) . '</p>
                             </div>
                         </div>';
@@ -1564,13 +1556,12 @@ function todiplaycomments($data)
 {
 
 	$appruser_list_data = togetaprovaluserlist($data['table'], $data['value_id']);
-	$appruser_list = $appruser_list_data['user'];
 	$appruser_data = $appruser_list_data['details'];
 	$dis_str = '';
 	if (count((array) $appruser_data) > 0) {
 		$stausresult = ViewStatusData();
 
-		$dis_str .= '<div class="col-lg-6">  
+		$dis_str .= '<div class="col-lg-6">
 			<div class="accordion accordion-solid mt-2 accordion-toggle-arrow" id="accordionComments">
 			<div class="card acc-bgc">
 			<div class="card-header acc-bgc" id="headingTwo21">
@@ -1581,7 +1572,7 @@ function todiplaycomments($data)
 			<div id="collapseTwo21" class="collapse" aria-labelledby="headingTwo21" data-parent="#accordionComments">';
 
 		$dis_str .= '
-		<div class="latest-update-card">                                            
+		<div class="latest-update-card">
             <div class="card-block">
                 <div class="" style=""><div class="" style="">
                     <div class="latest-update-box">';
@@ -1623,7 +1614,7 @@ function todisplaytracking($data)
 	$vdata_details = callAPI($vurl);
 	$vdata_details = json_decode($vdata_details, 1);
 	$dis_str = '';
-	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-6" id="accordionExample4">                    
+	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-6" id="accordionExample4">
 		<div class="card latest-update-card acc-bgc">
 		<div class="card-header" id="headingTwo2">
 		<div class="card-title scale_active collapsed f-16 f-w-600" data-bs-toggle="collapse" data-target="#collapseTwo6" aria-expanded="false" aria-controls="collapseTwo6" href="#collapseTwo6">
@@ -1658,10 +1649,10 @@ function todisplaytracking($data)
 		}
 	} else {
 		$dis_str .= '<div class="card-px text-center ">
-		<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>   
+		<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> No Records</p>
 		<div class="text-center px-4">
 			<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-		</div>   
+		</div>
 	</div>';
 	}
 	$dis_str .= '<div>';
@@ -1682,7 +1673,7 @@ function todisplaycandidateofferhistroy($data)
 	$candhistrydata = callAPI($candhistryurl);
 	$vdata_details = json_decode($candhistrydata, 1);
 	$dis_str = '';
-	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-12" id="accordionOfferHistory">                    
+	$dis_str .= '<div class="accordion accordion-solid mt-2 accordion-toggle-arrow col-lg-12" id="accordionOfferHistory">
 		<div class="card latest-update-card acc-bgc">
 		<div class="card-header " id="headingTwo2">
 		<div class="card-title collapsed f-16 f-w-600" data-bs-toggle="collapse" data-target="#collapseTwo88" aria-expanded="false" aria-controls="collapseTwo88" href="#collapseTwo88">
@@ -1691,7 +1682,7 @@ function todisplaycandidateofferhistroy($data)
 		</div>
 		<div id="collapseTwo88" class="collapse" aria-labelledby="headingTwo88" data-parent="#accordionOfferHistory">';
 	$dis_str .= '
-		<div class="latest-update-card">                                            
+		<div class="latest-update-card">
 		<div class="card-block">
 		<div class="" style=""><div class="" style="">
 		<div class="latest-update-box">';
@@ -1836,7 +1827,7 @@ function fileUplodingUi($fileuploading)
 		}
 		$uploadedimagepath = "uploads/attachments/" . $result['actual_file_name'];
 
-		$images .= '<div class="delete' . $result['id'] . ' dz-preview dz-processing dz-image-preview   dz-success dz-complete ">  <div class="dz-image"><img data-dz-thumbnail="" alt="' . $result['file_name'] . '" src="' . $imge_path . '" style="height: 120px; width: 100%;"></div>  <div class="dz-details">    <div class="dz-size"></div>    <div class="dz-filename"><a href="' . $uploadedimagepath . '" target="_blank"><span data-dz-name="">' . $result['file_name'] . '</span></a></div>  </div>  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span></div>  <div class="dz-error-message"><span data-dz-error-message=""></span></div>  <div class="dz-success-mark">    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Check</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>      </g>    </svg>  </div> 
+		$images .= '<div class="delete' . $result['id'] . ' dz-preview dz-processing dz-image-preview   dz-success dz-complete ">  <div class="dz-image"><img data-dz-thumbnail="" alt="' . $result['file_name'] . '" src="' . $imge_path . '" style="height: 120px; width: 100%;"></div>  <div class="dz-details">    <div class="dz-size"></div>    <div class="dz-filename"><a href="' . $uploadedimagepath . '" target="_blank"><span data-dz-name="">' . $result['file_name'] . '</span></a></div>  </div>  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span></div>  <div class="dz-error-message"><span data-dz-error-message=""></span></div>  <div class="dz-success-mark">    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">      <title>Check</title>      <defs></defs>      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>      </g>    </svg>  </div>
 			<a class="dz-remove" onclick="removeattachfile(' . $result['id'] . ',\'' . $result['actual_file_name'] . '\')" data-dz-remove="">Remove file</a></div>';
 	}
 	$message .= '<div class="form-group col-lg-12 row" ' . $validationfunction . '><div class="form-group col-lg-' . $dropwidthwidth . '" ' . $validation_style . '>
@@ -1883,9 +1874,9 @@ function fileUplodingUi($fileuploading)
 	}
 	$message .= '<input type="hidden" id="application_table_name" value="' . $fileuploading['application_table_name'] . '">
 		<input type="hidden" id="transaction_id" value="' . $fileuploading['transaction_id'] . '">
-<input type="hidden" id="file_size" value="' . $fileuploading['file_size'] . '"> <input type="hidden" id="file_limit" value="' . $fileuploading['file_limit'] . '"> 
+<input type="hidden" id="file_size" value="' . $fileuploading['file_size'] . '"> <input type="hidden" id="file_limit" value="' . $fileuploading['file_limit'] . '">
 <input type="hidden" id="max_file_upload_message" value="' . $_SESSION['error_message']['3023'] . ' ' . $fileuploading['file_limit'] . ' file(s)">
-<input type="hidden" id="validation_message" value="' . $_SESSION['error_message']['3023'] . '">		 
+<input type="hidden" id="validation_message" value="' . $_SESSION['error_message']['3023'] . '">
  <input type="hidden" id="transaction_number" value="' . $transaction_number . '"></div>';
 	echo $message;
 }
@@ -1986,8 +1977,9 @@ function filterArrayValue($array, $columnsname, $filter)
 {
 	$matches = array();
 	foreach ($array as $a) {
-		if ($a[$columnsname] == $filter)
+		if ($a[$columnsname] == $filter) {
 			$matches[] = $a;
+		}
 	}
 	return $matches;
 }
@@ -2003,15 +1995,11 @@ function permisions($role_data, $option)
 	$option = strtolower($option);
 	$array = (explode("_", $option, 3));
 	$return = $role_data[$array[2]];
-	if ($array[1] == "insert") {
-		if ($return['permission_insert'] == 1 && $return['permission_update'] == 1) {
-			header("Location: index.php?option=com_404");
-		}
+	if ($array[1] == "insert" && $return['permission_insert'] == 1 && $return['permission_update'] == 1) {
+		header("Location: index.php?option=com_404");
 	}
-	if ($array[1] == "list") {
-		if ($return['permission_view'] == 1) {
-			header("Location: index.php?option=com_404");
-		}
+	if ($array[1] == "list" && $return['permission_view'] == 1) {
+		header("Location: index.php?option=com_404");
 	}
 	return $return;
 }
@@ -2214,18 +2202,6 @@ function checkTableName($name)
 	foreach ($_SESSION['application_pages'] as $value) {
 		if ($value['list_page_name'] == $name || $value['insert_page_name'] == $name || $value['edit_page_name'] == $name || $value['view_page_name'] == $name) {
 			$table = $value['application_table_name'];
-			if ($value['list_page_name'] == $name) {
-				$type = 'permission_list';
-			}
-			if ($value['insert_page_name'] == $name) {
-				$type = 'permission_insert';
-			}
-			if ($value['edit_page_name'] == $name) {
-				$type = 'permission_update';
-			}
-			if ($value['view_page_name'] == $name) {
-				$type = 'permission_list';
-			}
 		}
 	}
 	return $table;
@@ -2242,7 +2218,6 @@ function dyanamicreferFunc($val, $filed_name, $table)
 }
 function customeummarmonyformateround($number)
 {
-	$num = $_SESSION['configdata']['number_format'] != '' ? $_SESSION['configdata']['number_format'] : 2;
 	$return = number_format($number, 0, '.', ',');
 	return $return != '0.00' ? $return : '-';
 }
@@ -2416,16 +2391,14 @@ function nearestDateFirstShowone($arry, $field)
 {
 	$nearstartholiday = array();
 	$nearendholiday = array();
-	$holdyadate = array();
-	foreach ($arry as $key => $value) {
+	foreach ($arry as $value) {
 		if (strtotime(date('Y') . '-' . date('m-d', strtotime($value[$field]))) >= strtotime(date("Y-m-d"))) {
 			$nearstartholiday[] = $value;
 		} else {
 			$nearendholiday[] = $value;
 		}
 	}
-	$resultary = array_merge($nearstartholiday, $nearendholiday);
-	return $resultary;
+	return array_merge($nearstartholiday, $nearendholiday);
 }
 
 
@@ -2444,7 +2417,6 @@ function todisplayWorkflowstatuslist($data)
 	if (count((array) $wlist) > 0) {
 		$dis_str .= '<div class="p-3"><div class="breadcrumb">';
 		$checkcurrent_status = $data['current_status'];
-		$wlcount = count((array) $wlist);
 		$cw = 1;
 		$ork = 0;
 		$activearray = array();
@@ -2461,17 +2433,6 @@ function todisplayWorkflowstatuslist($data)
 			if ($pwlist['action_label'] != "") {
 				$orcolor = "";
 				$oricon = "";
-				/**	if($ork==1){
-						$orcolor = "text-warning";
-						$oricon = '<i class="far fa-hourglass text-warning"></i> &nbsp;';
-						$ork = 0;
-					}
-					if($checkcurrent_status == $pwlist['status']){
-						$orcolor = "text-primary";
-						$oricon = '<i class="far fa-check-circle text-success"></i> &nbsp;';
-						$ork = 1;
-					}
-					**/
 				$username = "";
 				if ($pwlist['status'] != '0' && $pwlist['status'] != '10') { //not created by show only
 					if ($logres[$pwlist['status']] != "") {
@@ -2973,9 +2934,7 @@ function getWorkflowStatus($table_name, $transaction_no, $current_status, $devic
 		$dis_str .= '</ul>';
 
 		if ($current_status != ST_APPROVED && $current_status != ST_REJECTED) {
-			if ($device_type == "MOBILE") {
-
-			} else {
+			if ($device_type != "MOBILE") {
 				$workflow_btn .= '<div class="btn-group workflow-btn mt-4" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title=".btn-xlg">';
 			}
 			if ($current_status == ST_ACTIVE || $current_status == ST_SEND_BACK || $current_status == ST_CALLBACK || $workflow_details['workflow_trigger_status'] == $current_status) {  //Active Time Show Button
@@ -3098,7 +3057,7 @@ function resequenceMenuList($ary)
 				} else {
 					$recall[$keyid] = $values;
 				}
-				if (count($recall) > 0) {
+				if (!empty($recall)) {
 					foreach ($recall as $rkeyid => $rvalues) {
 						if (count($data) == $k) {
 							$runcnt = 0;
@@ -3123,7 +3082,6 @@ function resequenceMenuList($ary)
 
 function resequenceMenuListWorking($data)
 {
-	$temarray = $data;
 	$menucnt = 18;
 	$runcnt = 0;
 	$recall = array();
@@ -3142,7 +3100,7 @@ function resequenceMenuListWorking($data)
 		} else {
 			$recall[$keyid] = $values;
 		}
-		if (count($recall) > 0) {
+		if (!empty($recall)) {
 			foreach ($recall as $rkeyid => $rvalues) {
 				if (count($data) == $k) {
 					$runcnt = 0;
@@ -3192,8 +3150,7 @@ function dateyearcalucates($date1, $date2 = "")
 	$days = $interval->d;
 
 	// Calculate the difference with decimals
-	$decimalYears = round($years + ($months / 12) + ($days / 365), 1);
-	return $decimalYears;
+	return round($years + ($months / 12) + ($days / 365), 1);
 }
 function getApplicationEmptyTransactions($option)
 {
@@ -3236,7 +3193,7 @@ function getAssessmentYear()
 }
 function calculateStringCalculation($string)
 {
-	$parts = preg_split('/(\+|\=|-|\*|%|\/)/', $string, -1, PREG_SPLIT_DELIM_CAPTURE);
+	$parts = preg_split('/([+=*%\/-])/', $string, -1, PREG_SPLIT_DELIM_CAPTURE);
 	$return = null;
 	$operator = null;
 	if (in_array('%', (array) $parts)) {
@@ -3312,12 +3269,14 @@ function getPagePermision($option = "", $transaction_table = "", $transaction_ty
 function accountingAmontFormat($amount, $symbol = 0)
 {
 	if ($symbol == 0) {
-		if ($amount < 0)
+		if ($amount < 0) {
 			return '(' . customeNumberFormate(abs($amount)) . ')';
+		}
 		return customeNumberFormate($amount);
 	} else {
-		if ($amount < 0)
+		if ($amount < 0) {
 			return '(' . customeummarmonyformate(abs($amount)) . ')';
+		}
 		return customeummarmonyformate($amount);
 	}
 }
@@ -3371,10 +3330,7 @@ function decodeString($encoded)
 {
 	$decoded = urldecode($encoded);
 	$originalReversed = strrev($decoded);
-	$originalString = substr($originalReversed, 2, -2); // Remove 7 chars from start and end
-	// Ensure the decoded string is below 50 characters
-	//return (strlen($originalString) < 50) ? $originalString : "Error: Decoded string exceeds 50 characters!";
-	return $originalString;
+	return substr($originalReversed, 2, -2); // Remove 7 chars from start and end
 }
 function crmLastActivity($crmld, $created_date)
 {
@@ -3550,12 +3506,10 @@ function vendorAmcTrackerGetVisitCellDisplay($planned, $actualStart)
 	$hasActual = ($actualStart != '');
 	$actualTs = $hasActual ? strtotime($actualStart) : false;
 	$isFuture = ($plannedDate > $today);
-	if ($hasActual && $actualTs !== false) {
-		if (date('Y-m-d', $actualTs) < $plannedDate) {
-			$hasActual = false;
-			$actualStart = '';
-			$actualTs = false;
-		}
+	if ($hasActual && $actualTs !== false && date('Y-m-d', $actualTs) < $plannedDate) {
+		$hasActual = false;
+		$actualStart = '';
+		$actualTs = false;
 	}
 	$isOverdue = ($plannedDate < $today) && !$hasActual;
 
@@ -3674,12 +3628,12 @@ function renderApprovalDiscussionSection($transaction_table, $transaction_id)
 	$url = API . "?mode=getApprovalDiscussionMessages&transaction_table=" . $transaction_table . "&transaction_id=" . $transaction_id;
 	$response = callAPI($url);
 	$result = json_decode($response, 1);
-	if ($result['can_view'] != true) {
+	if (empty($result['can_view'])) {
 		return $html;
 	}
 
 	$messages = $result['messages'] ?? array();
-	$can_post = ($result['can_post'] == true) ? 1 : 0;
+	$can_post = !empty($result['can_post']) ? 1 : 0;
 	$current_user_id = $_SESSION['userid'];
 	$message_count = count((array) $messages);
 	$last_message_id = 0;
@@ -3691,7 +3645,7 @@ function renderApprovalDiscussionSection($transaction_table, $transaction_id)
 		}
 	}
 
-	if ($approval_discussion_assets_loaded == false) {
+	if (!$approval_discussion_assets_loaded) {
 		$html .= '<link rel="stylesheet" type="text/css" href="css/approval_discussion.css">';
 		$html .= '<script type="text/javascript" src="js/approval_discussion.js"></script>';
 		$approval_discussion_assets_loaded = true;
@@ -3732,7 +3686,7 @@ function renderApprovalDiscussionSection($transaction_table, $transaction_id)
 				$bubble_class = $is_current ? 'chat-bubble-out' : 'chat-bubble-in';
 				$row_class = $is_current ? 'chat-row-out' : 'chat-row-in';
 				$html .= '<div class="chat-row ' . $row_class . '" data-message-id="' . (int) $msg['id'] . '">';
-				if ($is_current == false) {
+				if (!$is_current) {
 					$html .= '<div class="chat-sender-name">' . htmlspecialchars($msg['sender_name'], ENT_QUOTES, 'UTF-8') . '</div>';
 				}
 				$html .= '<div class="chat-bubble ' . $bubble_class . '">' . nl2br(htmlspecialchars($msg['message_text'], ENT_QUOTES, 'UTF-8')) . '</div>';
@@ -3791,7 +3745,8 @@ function formatCsrSummaryAmount($amount)
 		'label' => $label
 	);
 }
-function dynamicDataDecode($encodedData){
+function dynamicDataDecode($encodedData)
+{
 	$key = hash('sha256', DATA_ENCRYPTION_KEY, true);
 	$data = base64_decode(
 		strtr($encodedData, '-_', '+/'),
@@ -3799,651 +3754,658 @@ function dynamicDataDecode($encodedData){
 	);
 	$iv = substr($data, 0, 16);
 	$encrypted = substr($data, 16);
-	return openssl_decrypt($encrypted,'AES-256-CBC',$key,OPENSSL_RAW_DATA,$iv);
+	return openssl_decrypt($encrypted, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
 }
 
 
 if (!function_exists('getAllSupportedSensitiveTypes')) {
-    function getAllSupportedSensitiveTypes() {
-        return [
-            'email' => [
-                'key' => 'email',
-                'name' => 'Email Address',
-                'sample_original' => 'rohan@gmail.com',
-                'show_first' => 1,
-                'show_last' => 0,
-                'mask_char' => '*',
-                'preserve_domain' => 1,
-                'preserve_separators' => 1,
-                'default_pattern' => 'r****@gmail.com',
-                'description' => 'User or contact email address'
-            ],
-            'pan' => [
-                'key' => 'pan',
-                'name' => 'PAN Number',
-                'sample_original' => 'ABCDE1234F',
-                'show_first' => 2,
-                'show_last' => 2,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => 'AB******4F',
-                'description' => 'Income Tax Permanent Account Number (10 alphanumeric)'
-            ],
-            'gst' => [
-                'key' => 'gst',
-                'name' => 'GST Number',
-                'sample_original' => '27ABCDE1234F1Z5',
-                'show_first' => 2,
-                'show_last' => 3,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => '27**********1Z5',
-                'description' => 'Goods & Services Tax Identification Number (15 alphanumeric)'
-            ],
-            'mobile' => [
-                'key' => 'mobile',
-                'name' => 'Mobile Number',
-                'sample_original' => '9876543210',
-                'show_first' => 2,
-                'show_last' => 2,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => '98******10',
-                'description' => '10-digit mobile or contact phone number'
-            ],
-            'aadhaar' => [
-                'key' => 'aadhaar',
-                'name' => 'Aadhaar Number',
-                'sample_original' => '123456789012',
-                'show_first' => 0,
-                'show_last' => 4,
-                'mask_char' => 'X',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => 'XXXX XXXX 9012',
-                'description' => '12-digit Indian National Identity Number'
-            ],
-            'bank_account' => [
-                'key' => 'bank_account',
-                'name' => 'Bank Account Number',
-                'sample_original' => '1234567890123456',
-                'show_first' => 0,
-                'show_last' => 4,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => '************3456',
-                'description' => 'Customer or vendor bank account number'
-            ],
-            'ifsc' => [
-                'key' => 'ifsc',
-                'name' => 'IFSC Code',
-                'sample_original' => 'HDFC0001234',
-                'show_first' => 5,
-                'show_last' => 0,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => 'ABCD0******',
-                'description' => 'Indian Financial System Code (11 alphanumeric)'
-            ],
-            'passport' => [
-                'key' => 'passport',
-                'name' => 'Passport Number',
-                'sample_original' => 'A1234567',
-                'show_first' => 1,
-                'show_last' => 1,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => 'A******7',
-                'description' => 'Passport identification code (8 alphanumeric)'
-            ],
-            'driving_licence' => [
-                'key' => 'driving_licence',
-                'name' => 'Driving Licence',
-                'sample_original' => 'DL-1420110012345',
-                'show_first' => 2,
-                'show_last' => 4,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => 'DL*********2345',
-                'description' => 'Driving Licence registration number'
-            ],
-            'pf_number' => [
-                'key' => 'pf_number',
-                'name' => 'PF Number',
-                'sample_original' => 'MH/BAN/0012345/000/0001234',
-                'show_first' => 2,
-                'show_last' => 4,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => 'MH/BAN/0012345/000/****234',
-                'description' => 'Provident Fund member account number'
-            ],
-            'uan_number' => [
-                'key' => 'uan_number',
-                'name' => 'UAN Number',
-                'sample_original' => '100912345678',
-                'show_first' => 2,
-                'show_last' => 2,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => '10********78',
-                'description' => 'Universal Account Number (12 digits)'
-            ],
-            'gosi_number' => [
-                'key' => 'gosi_number',
-                'name' => 'GOSI Number',
-                'sample_original' => '123456789',
-                'show_first' => 2,
-                'show_last' => 2,
-                'mask_char' => '*',
-                'preserve_domain' => 0,
-                'preserve_separators' => 1,
-                'default_pattern' => '12*****89',
-                'description' => 'General Organization for Social Insurance number (9 digits)'
-            ]
-        ];
-    }
+	function getAllSupportedSensitiveTypes()
+	{
+		return [
+			'email' => [
+				'key' => 'email',
+				'name' => 'Email Address',
+				'sample_original' => 'rohan@gmail.com',
+				'show_first' => 1,
+				'show_last' => 0,
+				'mask_char' => '*',
+				'preserve_domain' => 1,
+				'preserve_separators' => 1,
+				'default_pattern' => 'r****@gmail.com',
+				'description' => 'User or contact email address'
+			],
+			'pan' => [
+				'key' => 'pan',
+				'name' => 'PAN Number',
+				'sample_original' => 'ABCDE1234F',
+				'show_first' => 2,
+				'show_last' => 2,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => 'AB******4F',
+				'description' => 'Income Tax Permanent Account Number (10 alphanumeric)'
+			],
+			'gst' => [
+				'key' => 'gst',
+				'name' => 'GST Number',
+				'sample_original' => '27ABCDE1234F1Z5',
+				'show_first' => 2,
+				'show_last' => 3,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => '27**********1Z5',
+				'description' => 'Goods & Services Tax Identification Number (15 alphanumeric)'
+			],
+			'mobile' => [
+				'key' => 'mobile',
+				'name' => 'Mobile Number',
+				'sample_original' => '9876543210',
+				'show_first' => 2,
+				'show_last' => 2,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => '98******10',
+				'description' => '10-digit mobile or contact phone number'
+			],
+			'aadhaar' => [
+				'key' => 'aadhaar',
+				'name' => 'Aadhaar Number',
+				'sample_original' => '123456789012',
+				'show_first' => 0,
+				'show_last' => 4,
+				'mask_char' => 'X',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => 'XXXX XXXX 9012',
+				'description' => '12-digit Indian National Identity Number'
+			],
+			'bank_account' => [
+				'key' => 'bank_account',
+				'name' => 'Bank Account Number',
+				'sample_original' => '1234567890123456',
+				'show_first' => 0,
+				'show_last' => 4,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => '************3456',
+				'description' => 'Customer or vendor bank account number'
+			],
+			'ifsc' => [
+				'key' => 'ifsc',
+				'name' => 'IFSC Code',
+				'sample_original' => 'HDFC0001234',
+				'show_first' => 5,
+				'show_last' => 0,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => 'ABCD0******',
+				'description' => 'Indian Financial System Code (11 alphanumeric)'
+			],
+			'passport' => [
+				'key' => 'passport',
+				'name' => 'Passport Number',
+				'sample_original' => 'A1234567',
+				'show_first' => 1,
+				'show_last' => 1,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => 'A******7',
+				'description' => 'Passport identification code (8 alphanumeric)'
+			],
+			'driving_licence' => [
+				'key' => 'driving_licence',
+				'name' => 'Driving Licence',
+				'sample_original' => 'DL-1420110012345',
+				'show_first' => 2,
+				'show_last' => 4,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => 'DL*********2345',
+				'description' => 'Driving Licence registration number'
+			],
+			'pf_number' => [
+				'key' => 'pf_number',
+				'name' => 'PF Number',
+				'sample_original' => 'MH/BAN/0012345/000/0001234',
+				'show_first' => 2,
+				'show_last' => 4,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => 'MH/BAN/0012345/000/****234',
+				'description' => 'Provident Fund member account number'
+			],
+			'uan_number' => [
+				'key' => 'uan_number',
+				'name' => 'UAN Number',
+				'sample_original' => '100912345678',
+				'show_first' => 2,
+				'show_last' => 2,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => '10********78',
+				'description' => 'Universal Account Number (12 digits)'
+			],
+			'gosi_number' => [
+				'key' => 'gosi_number',
+				'name' => 'GOSI Number',
+				'sample_original' => '123456789',
+				'show_first' => 2,
+				'show_last' => 2,
+				'mask_char' => '*',
+				'preserve_domain' => 0,
+				'preserve_separators' => 1,
+				'default_pattern' => '12*****89',
+				'description' => 'General Organization for Social Insurance number (9 digits)'
+			]
+		];
+	}
 }
 
 if (!function_exists('normalizeSensitiveDataType')) {
-    function normalizeSensitiveDataType($type) {
-        $type = strtolower(trim((string)$type));
-        $type = str_replace(['-', ' '], '_', $type);
+	function normalizeSensitiveDataType($type)
+	{
+		$type = strtolower(trim((string) $type));
+		$type = str_replace(['-', ' '], '_', $type);
 
-        $map = [
-            'email_id' => 'email',
-            'mail' => 'email',
-            'user_email' => 'email',
-            'bank_query_email_id' => 'email',
-            'contract_owner_email' => 'email',
-            'pan_card' => 'pan',
-            'pan_number' => 'pan',
-            'pan_no' => 'pan',
-            'gstin' => 'gst',
-            'gst_number' => 'gst',
-            'gst_no' => 'gst',
-            'customer_tax_reg_no' => 'gst',
-            'cst_reg_no' => 'gst',
-            'tin_number' => 'gst',
-            'vat_number' => 'gst',
-            'vendor_tax_reg_no' => 'gst',
-            'tan_number' => 'gst',
-            'msme_number' => 'gst',
-            'phone' => 'mobile',
-            'phone_number' => 'mobile',
-            'phone_no' => 'mobile',
-            'contact_number' => 'mobile',
-            'mobile_no' => 'mobile',
-            'user_mobile' => 'mobile',
-            'candidate_phone' => 'mobile',
-            'contract_owner_number' => 'mobile',
-            'bank_query_contact_no' => 'mobile',
-            'aadhar' => 'aadhaar',
-            'adhar_no' => 'aadhaar',
-            'aadhaar_no' => 'aadhaar',
-            'aadhaar_number' => 'aadhaar',
-            'uid' => 'aadhaar',
-            'account' => 'bank_account',
-            'account_number' => 'bank_account',
-            'bank_acc' => 'bank_account',
-            'bank_acc_no' => 'bank_account',
-            'bank_account_no' => 'bank_account',
-            'account_no' => 'bank_account',
-            'iban_code' => 'bank_account',
-            'ifsc_code' => 'ifsc',
-            'routing_wire_code' => 'ifsc',
-            'swift_bic_code' => 'ifsc',
-            'passport_no' => 'passport',
-            'passport_number' => 'passport',
-            'driving_license' => 'driving_licence',
-            'drivinglicense' => 'driving_licence',
-            'drivinglicence' => 'driving_licence',
-            'dl' => 'driving_licence',
-            'dl_no' => 'driving_licence',
-            'dl_number' => 'driving_licence',
-            'driving_licence_number' => 'driving_licence',
-            'driving_license_number' => 'driving_licence',
-            'pf_no' => 'pf_number',
-            'pf' => 'pf_number',
-            'pfno' => 'pf_number',
-            'provident_fund' => 'pf_number',
-            'provident_fund_no' => 'pf_number',
-            'epf' => 'pf_number',
-            'epf_no' => 'pf_number',
-            'epf_number' => 'pf_number',
-            'esi_no' => 'pf_number',
-            'uan' => 'uan_number',
-            'uan_no' => 'uan_number',
-            'pf_uan' => 'uan_number',
-            'pf_uan_no' => 'uan_number',
-            'pran_no' => 'uan_number',
-            'gosi' => 'gosi_number',
-            'gosi_no' => 'gosi_number'
-        ];
+		$map = [
+			'email_id' => 'email',
+			'mail' => 'email',
+			'user_email' => 'email',
+			'bank_query_email_id' => 'email',
+			'contract_owner_email' => 'email',
+			'pan_card' => 'pan',
+			'pan_number' => 'pan',
+			'pan_no' => 'pan',
+			'gstin' => 'gst',
+			'gst_number' => 'gst',
+			'gst_no' => 'gst',
+			'customer_tax_reg_no' => 'gst',
+			'cst_reg_no' => 'gst',
+			'tin_number' => 'gst',
+			'vat_number' => 'gst',
+			'vendor_tax_reg_no' => 'gst',
+			'tan_number' => 'gst',
+			'msme_number' => 'gst',
+			'phone' => 'mobile',
+			'phone_number' => 'mobile',
+			'phone_no' => 'mobile',
+			'contact_number' => 'mobile',
+			'mobile_no' => 'mobile',
+			'user_mobile' => 'mobile',
+			'candidate_phone' => 'mobile',
+			'contract_owner_number' => 'mobile',
+			'bank_query_contact_no' => 'mobile',
+			'aadhar' => 'aadhaar',
+			'adhar_no' => 'aadhaar',
+			'aadhaar_no' => 'aadhaar',
+			'aadhaar_number' => 'aadhaar',
+			'uid' => 'aadhaar',
+			'account' => 'bank_account',
+			'account_number' => 'bank_account',
+			'bank_acc' => 'bank_account',
+			'bank_acc_no' => 'bank_account',
+			'bank_account_no' => 'bank_account',
+			'account_no' => 'bank_account',
+			'iban_code' => 'bank_account',
+			'ifsc_code' => 'ifsc',
+			'routing_wire_code' => 'ifsc',
+			'swift_bic_code' => 'ifsc',
+			'passport_no' => 'passport',
+			'passport_number' => 'passport',
+			'driving_license' => 'driving_licence',
+			'drivinglicense' => 'driving_licence',
+			'drivinglicence' => 'driving_licence',
+			'dl' => 'driving_licence',
+			'dl_no' => 'driving_licence',
+			'dl_number' => 'driving_licence',
+			'driving_licence_number' => 'driving_licence',
+			'driving_license_number' => 'driving_licence',
+			'pf_no' => 'pf_number',
+			'pf' => 'pf_number',
+			'pfno' => 'pf_number',
+			'provident_fund' => 'pf_number',
+			'provident_fund_no' => 'pf_number',
+			'epf' => 'pf_number',
+			'epf_no' => 'pf_number',
+			'epf_number' => 'pf_number',
+			'esi_no' => 'pf_number',
+			'uan' => 'uan_number',
+			'uan_no' => 'uan_number',
+			'pf_uan' => 'uan_number',
+			'pf_uan_no' => 'uan_number',
+			'pran_no' => 'uan_number',
+			'gosi' => 'gosi_number',
+			'gosi_no' => 'gosi_number'
+		];
 
-        return $map[$type] ?? $type;
-    }
+		return $map[$type] ?? $type;
+	}
 }
 
 if (!function_exists('isSensitiveDataDateEffective')) {
-    function isSensitiveDataDateEffective($fromDate, $toDate) {
-        $today = date('Y-m-d');
-        if (!empty($fromDate) && $fromDate !== '0000-00-00') {
-            if ($today < $fromDate) {
-                return false;
-            }
-        }
-        if (!empty($toDate) && $toDate !== '0000-00-00') {
-            if ($today > $toDate) {
-                return false;
-            }
-        }
-        return true;
-    }
+	function isSensitiveDataDateEffective($fromDate, $toDate)
+	{
+		$today = date('Y-m-d');
+		if (!empty($fromDate) && $fromDate !== '0000-00-00' && $today < $fromDate) {
+			return false;
+		}
+		if (!empty($toDate) && $toDate !== '0000-00-00' && $today > $toDate) {
+			return false;
+		}
+		return true;
+	}
 }
 
 if (!function_exists('maskValueDynamically')) {
-    function maskValueDynamically($value, $type, array $config = []) {
-        if ($value === '' || $value === null) {
-            return '';
-        }
-        $valStr = (string)$value;
-        $normType = normalizeSensitiveDataType($type);
+	function maskValueDynamically($value, $type, array $config = [])
+	{
+		if ($value === '' || $value === null) {
+			return '';
+		}
+		$valStr = (string) $value;
+		$normType = normalizeSensitiveDataType($type);
 
-        $defaults = getAllSupportedSensitiveTypes()[$normType] ?? [
-            'show_first' => 2,
-            'show_last' => 2,
-            'mask_char' => '*',
-            'preserve_domain' => 1,
-            'preserve_separators' => 1
-        ];
+		$defaults = getAllSupportedSensitiveTypes()[$normType] ?? [
+			'show_first' => 2,
+			'show_last' => 2,
+			'mask_char' => '*',
+			'preserve_domain' => 1,
+			'preserve_separators' => 1
+		];
 
-        $showFirst = isset($config['show_first']) ? (int)$config['show_first'] : (int)$defaults['show_first'];
-        $showLast  = isset($config['show_last'])  ? (int)$config['show_last']  : (int)$defaults['show_last'];
-        $maskChar  = !empty($config['mask_char']) ? substr($config['mask_char'], 0, 1) : $defaults['mask_char'];
-        $preserveDomain = isset($config['preserve_domain']) ? (bool)$config['preserve_domain'] : (bool)$defaults['preserve_domain'];
-        $preserveSeparators = isset($config['preserve_separators']) ? (bool)$config['preserve_separators'] : (bool)$defaults['preserve_separators'];
+		$showFirst = isset($config['show_first']) ? (int) $config['show_first'] : (int) $defaults['show_first'];
+		$showLast = isset($config['show_last']) ? (int) $config['show_last'] : (int) $defaults['show_last'];
+		$maskChar = !empty($config['mask_char']) ? substr($config['mask_char'], 0, 1) : $defaults['mask_char'];
+		$preserveDomain = isset($config['preserve_domain']) ? (bool) $config['preserve_domain'] : (bool) $defaults['preserve_domain'];
+		$preserveSeparators = isset($config['preserve_separators']) ? (bool) $config['preserve_separators'] : (bool) $defaults['preserve_separators'];
 
-        if (!empty($config['masking_pattern'])) {
-            $pat = $config['masking_pattern'];
-            if ($normType === 'email' && strpos($pat, '@') !== false) {
-                list($pUser, $pDomain) = explode('@', $pat, 2);
-                if (strpos($pDomain, '*') !== false || strpos($pDomain, 'X') !== false || strpos($pDomain, 'x') !== false) {
-                    $preserveDomain = false;
-                }
-                $firstMask = strcspn($pUser, '*Xx');
-                if ($firstMask < strlen($pUser)) {
-                    $showFirst = $firstMask;
-                }
-            }
-        }
+		if (!empty($config['masking_pattern'])) {
+			$pat = $config['masking_pattern'];
+			if ($normType === 'email' && strpos($pat, '@') !== false) {
+				list($pUser, $pDomain) = explode('@', $pat, 2);
+				if (strpos($pDomain, '*') !== false || strpos($pDomain, 'X') !== false || strpos($pDomain, 'x') !== false) {
+					$preserveDomain = false;
+				}
+				$firstMask = strcspn($pUser, '*Xx');
+				if ($firstMask < strlen($pUser)) {
+					$showFirst = $firstMask;
+				}
+			}
+		}
 
-        // 1. Specialized Email Handling
-        if ($normType === 'email' && strpos($valStr, '@') !== false) {
-            list($username, $domain) = explode('@', $valStr, 2);
-            $uLen = strlen($username);
+		// 1. Specialized Email Handling
+		if ($normType === 'email' && strpos($valStr, '@') !== false) {
+			list($username, $domain) = explode('@', $valStr, 2);
+			$uLen = strlen($username);
 
-            $uFirst = max(0, $showFirst);
-            $uLast  = max(0, $showLast);
+			$uFirst = max(0, $showFirst);
+			$uLast = max(0, $showLast);
 
-            if ($uFirst + $uLast >= $uLen) {
-                $uFirst = min($uFirst, max(1, $uLen - 1));
-                $uLast  = min($uLast, max(0, $uLen - $uFirst - 1));
-            }
+			if ($uFirst + $uLast >= $uLen) {
+				$uFirst = min($uFirst, max(1, $uLen - 1));
+				$uLast = min($uLast, max(0, $uLen - $uFirst - 1));
+			}
 
-            $uMaskCount = max(1, $uLen - $uFirst - $uLast);
-            $prefix = substr($username, 0, $uFirst);
-            $suffix = ($uLast > 0) ? substr($username, -$uLast) : '';
-            $maskedUser = $prefix . str_repeat($maskChar, $uMaskCount) . $suffix;
+			$uMaskCount = max(1, $uLen - $uFirst - $uLast);
+			$prefix = substr($username, 0, $uFirst);
+			$suffix = ($uLast > 0) ? substr($username, -$uLast) : '';
+			$maskedUser = $prefix . str_repeat($maskChar, $uMaskCount) . $suffix;
 
-            if ($preserveDomain) {
-                return $maskedUser . '@' . $domain;
-            } else {
-                if (strpos($domain, '.') !== false) {
-                    $lastDot = strrpos($domain, '.');
-                    $dName = substr($domain, 0, $lastDot);
-                    $dExt  = substr($domain, $lastDot);
-                    $dMaskCount = max(3, strlen($dName));
-                    if (!empty($config['masking_pattern']) && strpos($config['masking_pattern'], '@') !== false) {
-                        list(, $pD) = explode('@', $config['masking_pattern'], 2);
-                        $starMatches = preg_match_all('/[\*Xx]/', $pD);
-                        if ($starMatches > 0) {
-                            $dMaskCount = $starMatches;
-                        }
-                    }
-                    return $maskedUser . '@' . str_repeat($maskChar, $dMaskCount) . $dExt;
-                } else {
-                    return $maskedUser . '@' . str_repeat($maskChar, strlen($domain));
-                }
-            }
-        }
+			if ($preserveDomain) {
+				return $maskedUser . '@' . $domain;
+			} else {
+				if (strpos($domain, '.') !== false) {
+					$lastDot = strrpos($domain, '.');
+					$dName = substr($domain, 0, $lastDot);
+					$dExt = substr($domain, $lastDot);
+					$dMaskCount = max(3, strlen($dName));
+					if (!empty($config['masking_pattern']) && strpos($config['masking_pattern'], '@') !== false) {
+						list(, $pD) = explode('@', $config['masking_pattern'], 2);
+						$starMatches = preg_match_all('/[\*Xx]/', $pD);
+						if ($starMatches > 0) {
+							$dMaskCount = $starMatches;
+						}
+					}
+					return $maskedUser . '@' . str_repeat($maskChar, $dMaskCount) . $dExt;
+				} else {
+					return $maskedUser . '@' . str_repeat($maskChar, strlen($domain));
+				}
+			}
+		}
 
-        // 2. Aadhaar with Spaced Formatting Support
-        if ($normType === 'aadhaar') {
-            $clean = preg_replace('/[^0-9]/', '', $valStr);
-            $len = strlen($clean);
-            if ($len === 12) {
-                $sFirst = max(0, $showFirst);
-                $sLast  = max(0, $showLast);
-                if ($sFirst + $sLast >= 12) {
-                    $sFirst = min($sFirst, 11);
-                    $sLast  = min($sLast, max(0, 12 - $sFirst - 1));
-                }
-                $maskCount = max(0, 12 - $sFirst - $sLast);
-                $pre = ($sFirst > 0) ? substr($clean, 0, $sFirst) : '';
-                $suf = ($sLast > 0) ? substr($clean, -$sLast) : '';
-                $masked12 = $pre . str_repeat($maskChar, $maskCount) . $suf;
+		// 2. Aadhaar with Spaced Formatting Support
+		if ($normType === 'aadhaar') {
+			$clean = preg_replace('/\D/', '', $valStr);
+			$len = strlen($clean);
+			if ($len === 12) {
+				$sFirst = max(0, $showFirst);
+				$sLast = max(0, $showLast);
+				if ($sFirst + $sLast >= 12) {
+					$sFirst = min($sFirst, 11);
+					$sLast = min($sLast, max(0, 12 - $sFirst - 1));
+				}
+				$maskCount = max(0, 12 - $sFirst - $sLast);
+				$pre = ($sFirst > 0) ? substr($clean, 0, $sFirst) : '';
+				$suf = ($sLast > 0) ? substr($clean, -$sLast) : '';
+				$masked12 = $pre . str_repeat($maskChar, $maskCount) . $suf;
 
-                if ($preserveSeparators) {
-                    return substr($masked12, 0, 4) . ' ' . substr($masked12, 4, 4) . ' ' . substr($masked12, 8, 4);
-                } else {
-                    return $masked12;
-                }
-            }
-        }
+				if ($preserveSeparators) {
+					return substr($masked12, 0, 4) . ' ' . substr($masked12, 4, 4) . ' ' . substr($masked12, 8, 4);
+				} else {
+					return $masked12;
+				}
+			}
+		}
 
-        // 3. Universal Dynamic Formula for All Other Types (PAN, GST, Mobile, etc.)
-        $len = strlen($valStr);
-        if ($len === 0) {
-            return '';
-        }
+		// 3. Universal Dynamic Formula for All Other Types (PAN, GST, Mobile, etc.)
+		$len = strlen($valStr);
+		if ($len === 0) {
+			return '';
+		}
 
-        $sFirst = max(0, $showFirst);
-        $sLast  = max(0, $showLast);
+		$sFirst = max(0, $showFirst);
+		$sLast = max(0, $showLast);
 
-        if ($sFirst + $sLast >= $len) {
-            $sFirst = min($sFirst, max(1, $len - 1));
-            $sLast  = min($sLast, max(0, $len - $sFirst - 1));
-        }
+		if ($sFirst + $sLast >= $len) {
+			$sFirst = min($sFirst, max(1, $len - 1));
+			$sLast = min($sLast, max(0, $len - $sFirst - 1));
+		}
 
-        // Formula: Mask character count = Total characters - showFirst - showLast
-        $maskCount = max(0, $len - $sFirst - $sLast);
-        $prefix = ($sFirst > 0) ? substr($valStr, 0, $sFirst) : '';
-        $suffix = ($sLast > 0)  ? substr($valStr, -$sLast)  : '';
+		// Formula: Mask character count = Total characters - showFirst - showLast
+		$maskCount = max(0, $len - $sFirst - $sLast);
+		$prefix = ($sFirst > 0) ? substr($valStr, 0, $sFirst) : '';
+		$suffix = ($sLast > 0) ? substr($valStr, -$sLast) : '';
 
-        return $prefix . str_repeat($maskChar, $maskCount) . $suffix;
-    }
+		return $prefix . str_repeat($maskChar, $maskCount) . $suffix;
+	}
 }
 
 if (!function_exists('maskSensitiveValue')) {
-    function maskSensitiveValue($value, $type, $pattern = null) {
-        if ($value === '' || $value === null) {
-            return '';
-        }
-        $normType = normalizeSensitiveDataType($type);
-        $allTypes = getAllSupportedSensitiveTypes();
-        $config = $allTypes[$normType] ?? [
-            'show_first' => 2,
-            'show_last' => 2,
-            'mask_char' => '*',
-            'preserve_domain' => 1
-        ];
+	function maskSensitiveValue($value, $type, $pattern = null)
+	{
+		if ($value === '' || $value === null) {
+			return '';
+		}
+		$normType = normalizeSensitiveDataType($type);
+		$allTypes = getAllSupportedSensitiveTypes();
+		$config = $allTypes[$normType] ?? [
+			'show_first' => 2,
+			'show_last' => 2,
+			'mask_char' => '*',
+			'preserve_domain' => 1
+		];
 
-        if (!empty($pattern)) {
-            $config['masking_pattern'] = $pattern;
-            if ($normType === 'email' && strpos($pattern, '@') !== false) {
-                list($pUser, $pDomain) = explode('@', $pattern, 2);
-                $firstMask = strcspn($pUser, '*Xx');
-                $config['show_first'] = ($firstMask < strlen($pUser)) ? $firstMask : 1;
-                $config['show_last']  = 0;
-                $config['preserve_domain'] = (strpos($pDomain, '*') === false && strpos($pDomain, 'X') === false);
-            } else {
-                $maskChar = (strpos($pattern, 'X') !== false) ? 'X' : '*';
-                $config['mask_char'] = $maskChar;
+		if (!empty($pattern)) {
+			$config['masking_pattern'] = $pattern;
+			if ($normType === 'email' && strpos($pattern, '@') !== false) {
+				list($pUser, $pDomain) = explode('@', $pattern, 2);
+				$firstMask = strcspn($pUser, '*Xx');
+				$config['show_first'] = ($firstMask < strlen($pUser)) ? $firstMask : 1;
+				$config['show_last'] = 0;
+				$config['preserve_domain'] = (strpos($pDomain, '*') === false && strpos($pDomain, 'X') === false);
+			} else {
+				$maskChar = (strpos($pattern, 'X') !== false) ? 'X' : '*';
+				$config['mask_char'] = $maskChar;
 
-                if (preg_match('/^([^' . preg_quote($maskChar, '/') . ']+)[' . preg_quote($maskChar, '/') . ']+([^' . preg_quote($maskChar, '/') . ']+)$/', $pattern, $m)) {
-                    $config['show_first'] = strlen($m[1]);
-                    $config['show_last']  = strlen($m[2]);
-                } elseif (preg_match('/^[\*Xx]+([A-Za-z0-9]+)$/', $pattern, $m)) {
-                    $config['show_first'] = 0;
-                    $config['show_last']  = strlen($m[1]);
-                } elseif (preg_match('/^([A-Za-z0-9]+)[\*Xx]+$/', $pattern, $m)) {
-                    $config['show_first'] = strlen($m[1]);
-                    $config['show_last']  = 0;
-                }
-            }
-        }
+				if (preg_match('/^([^' . preg_quote($maskChar, '/') . ']+)[' . preg_quote($maskChar, '/') . ']+([^' . preg_quote($maskChar, '/') . ']+)$/', $pattern, $m)) {
+					$config['show_first'] = strlen($m[1]);
+					$config['show_last'] = strlen($m[2]);
+				} elseif (preg_match('/^[\*Xx]+([A-Za-z0-9]+)$/', $pattern, $m)) {
+					$config['show_first'] = 0;
+					$config['show_last'] = strlen($m[1]);
+				} elseif (preg_match('/^([A-Za-z0-9]+)[\*Xx]+$/', $pattern, $m)) {
+					$config['show_first'] = strlen($m[1]);
+					$config['show_last'] = 0;
+				}
+			}
+		}
 
-        return maskValueDynamically($value, $normType, $config);
-    }
+		return maskValueDynamically($value, $normType, $config);
+	}
 }
 
 if (!function_exists('getSensitiveDataPolicy')) {
-    function getSensitiveDataPolicy($company_id = null, $force_refresh = false) {
-        if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
-            @session_start();
-        }
+	function getSensitiveDataPolicy($company_id = null, $force_refresh = false)
+	{
+		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+			@session_start();
+		}
 
-        if ($company_id === null) {
-            $company_id = $_SESSION['company_id'] ?? 1;
-        }
-        $company_id = (int)$company_id;
+		if ($company_id === null) {
+			$company_id = $_SESSION['company_id'] ?? 1;
+		}
+		$company_id = (int) $company_id;
 
-        // Check session cache if force refresh is not requested
-        if (!$force_refresh && isset($_SESSION['sensitive_data_policy'][$company_id])) {
-            $cached = $_SESSION['sensitive_data_policy'][$company_id];
-            if (!empty($cached['policy_active'])) {
-                $isEffective = isSensitiveDataDateEffective($cached['from_date'] ?? null, $cached['to_date'] ?? null);
-                if (!$isEffective) {
-                    $cached['policy_active'] = false;
-                    $_SESSION['sensitive_data_policy'][$company_id] = $cached;
-                }
-            }
-            return $cached;
-        }
+		// Check session cache if force refresh is not requested
+		if (!$force_refresh && isset($_SESSION['sensitive_data_policy'][$company_id])) {
+			$cached = $_SESSION['sensitive_data_policy'][$company_id];
+			if (!empty($cached['policy_active'])) {
+				$isEffective = isSensitiveDataDateEffective($cached['from_date'] ?? null, $cached['to_date'] ?? null);
+				if (!$isEffective) {
+					$cached['policy_active'] = false;
+					$_SESSION['sensitive_data_policy'][$company_id] = $cached;
+				}
+			}
+			return $cached;
+		}
 
-        // Default empty policy structure
-        $policy = [
-            'success' => true,
-            'company_id' => $company_id,
-            'policy_active' => false,
-            'policy_id' => null,
-            'policy_name' => '',
-            'from_date' => null,
-            'to_date' => null,
-            'cached_at' => time(),
-            'restrictions' => []
-        ];
+		// Default empty policy structure
+		$policy = [
+			'success' => true,
+			'company_id' => $company_id,
+			'policy_active' => false,
+			'policy_id' => null,
+			'policy_name' => '',
+			'from_date' => null,
+			'to_date' => null,
+			'cached_at' => time(),
+			'restrictions' => []
+		];
 
-        // 1. Fetch via API if available (Standard ERP flow - accesses only via api.php)
-        if (defined('API') && function_exists('callAPI')) {
-            $apiUrl = API . "?mode=get_sensitive_data_policy&company_id=" . $company_id . "&method=get";
-            $apiRes = callAPI($apiUrl);
-            $apiData = json_decode($apiRes, true);
-            if (!empty($apiData) && isset($apiData['success']) && $apiData['success']) {
-                $policy = $apiData;
-                $policy['cached_at'] = time();
-                $_SESSION['sensitive_data_policy'][$company_id] = $policy;
-                return $policy;
-            }
-        }
+		// 1. Fetch via API if available (Standard ERP flow - accesses only via api.php)
+		if (defined('API') && function_exists('callAPI')) {
+			$apiUrl = API . "?mode=get_sensitive_data_policy&company_id=" . $company_id . "&method=get";
+			$apiRes = callAPI($apiUrl);
+			$apiData = json_decode($apiRes, true);
+			if (!empty($apiData) && isset($apiData['success']) && $apiData['success']) {
+				$policy = $apiData;
+				$policy['cached_at'] = time();
+				$_SESSION['sensitive_data_policy'][$company_id] = $policy;
+				return $policy;
+			}
+		}
 
-        // Cache the policy in session
-        $_SESSION['sensitive_data_policy'][$company_id] = $policy;
-        return $policy;
-    }
+		// Cache the policy in session
+		$_SESSION['sensitive_data_policy'][$company_id] = $policy;
+		return $policy;
+	}
 }
 
 if (!function_exists('refreshSensitiveDataPolicy')) {
-    function refreshSensitiveDataPolicy($company_id = null) {
-        if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
-            @session_start();
-        }
-        if ($company_id === null) {
-            $company_id = $_SESSION['company_id'] ?? 1;
-        }
-        $company_id = (int)$company_id;
+	function refreshSensitiveDataPolicy($company_id = null)
+	{
+		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+			@session_start();
+		}
+		if ($company_id === null) {
+			$company_id = $_SESSION['company_id'] ?? 1;
+		}
+		$company_id = (int) $company_id;
 
-        if (isset($_SESSION['sensitive_data_policy'][$company_id])) {
-            unset($_SESSION['sensitive_data_policy'][$company_id]);
-        }
-        return getSensitiveDataPolicy($company_id, true);
-    }
+		if (isset($_SESSION['sensitive_data_policy'][$company_id])) {
+			unset($_SESSION['sensitive_data_policy'][$company_id]);
+		}
+		return getSensitiveDataPolicy($company_id, true);
+	}
 }
 
 if (!function_exists('applyDynamicSensitiveDataRestriction')) {
-    function applyDynamicSensitiveDataRestriction($value, $type = 'text', $action = 'mask') {
-        // If caller explicitly requested 'show', return original value
-        if ($action === 'show') {
-            return ['applied' => true, 'value' => (string)$value];
-        }
-        if ($value === '' || $value === null) {
-            return ['applied' => true, 'value' => ''];
-        }
+	function applyDynamicSensitiveDataRestriction($value, $type = 'text', $action = 'mask')
+	{
+		// If caller explicitly requested 'show', return original value
+		if ($action === 'show') {
+			return ['applied' => true, 'value' => (string) $value];
+		}
+		if ($value === '' || $value === null) {
+			return ['applied' => true, 'value' => ''];
+		}
 
-        if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
-            @session_start();
-        }
+		if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+			@session_start();
+		}
 
-        $company_id = $_SESSION['company_id'] ?? null;
-        if (empty($company_id)) {
-            return ['applied' => false];
-        }
+		$company_id = $_SESSION['company_id'] ?? null;
+		if (empty($company_id)) {
+			return ['applied' => false];
+		}
 
-        // Retrieve cached policy from session
-        $policy = getSensitiveDataPolicy($company_id);
-        if (empty($policy) || empty($policy['policy_active'])) {
-            return ['applied' => false];
-        }
+		// Retrieve cached policy from session
+		$policy = getSensitiveDataPolicy($company_id);
+		if (empty($policy) || empty($policy['policy_active'])) {
+			return ['applied' => false];
+		}
 
-        $normType = normalizeSensitiveDataType($type);
+		$normType = normalizeSensitiveDataType($type);
 
-        // If this data type is not defined in policy restrictions, fall back to legacy behavior
-        if (!isset($policy['restrictions'][$normType])) {
-            return ['applied' => false];
-        }
+		// If this data type is not defined in policy restrictions, fall back to legacy behavior
+		if (!isset($policy['restrictions'][$normType])) {
+			return ['applied' => false];
+		}
 
-        $restriction = $policy['restrictions'][$normType];
-        $isRestricted = !empty($restriction['is_restricted']);
+		$restriction = $policy['restrictions'][$normType];
+		$isRestricted = !empty($restriction['is_restricted']);
 
-        if ($isRestricted) {
-            $masked = maskValueDynamically($value, $normType, $restriction);
-            return ['applied' => true, 'value' => $masked];
-        } else {
-            // Restriction disabled for this type -> preserve original unmasked value!
-            return ['applied' => true, 'value' => (string)$value];
-        }
-    }
+		if ($isRestricted) {
+			$masked = maskValueDynamically($value, $normType, $restriction);
+			return ['applied' => true, 'value' => $masked];
+		} else {
+			// Restriction disabled for this type -> preserve original unmasked value!
+			return ['applied' => true, 'value' => (string) $value];
+		}
+	}
 }
-function sensitiveDataEncoded($value, $type = 'text', $showFirst = 2, $showLast = 2, $action = 'mask'){
-    $value = (string) $value;
-    // Return original value when decode/show is requested.
-    // Use this only when the caller is authorized.
-    if ($action === 'show') {
-        return $value;
-    }
-    if ($value === '') {
-        return '';
-    }
+function sensitiveDataEncoded($value, $type = 'text', $showFirst = 2, $showLast = 2, $action = 'mask')
+{
+	$value = (string) $value;
+	// Return original value when decode/show is requested.
+	// Use this only when the caller is authorized.
+	if ($action === 'show') {
+		return $value;
+	}
+	if ($value === '') {
+		return '';
+	}
 
-    // Dynamic Sensitive Data Restriction Policy check
-    if (function_exists('applyDynamicSensitiveDataRestriction')) {
-        $policyResult = applyDynamicSensitiveDataRestriction($value, $type, $action);
-        if (!empty($policyResult['applied'])) {
-            return $policyResult['value'];
-        }
-    }
+	// Dynamic Sensitive Data Restriction Policy check
+	if (function_exists('applyDynamicSensitiveDataRestriction')) {
+		$policyResult = applyDynamicSensitiveDataRestriction($value, $type, $action);
+		if (!empty($policyResult['applied'])) {
+			return $policyResult['value'];
+		}
+	}
 
-    // For email, mask only the username and preserve the domain.
-    if ($type === 'email' && strpos($value, '@') !== false) {
-        list($username, $domain) = explode('@', $value, 2);
-        $value = $username;
-        $length = strlen($value);
-        $showFirst = max(0, (int) $showFirst);
-        $showLast = max(0, (int) $showLast);
-        if ($showFirst + $showLast >= $length) {
-            $showFirst = min($showFirst, max(0, $length - 1));
-            $showLast = min($showLast, max(0, $length - $showFirst - 1));
-        }
-        $masked = substr($value, 0, $showFirst)
-            . str_repeat('X', max(0, $length - $showFirst - $showLast))
-            . ($showLast > 0 ? substr($value, -$showLast) : '');
+	// For email, mask only the username and preserve the domain.
+	if ($type === 'email' && strpos($value, '@') !== false) {
+		list($username, $domain) = explode('@', $value, 2);
+		$value = $username;
+		$length = strlen($value);
+		$showFirst = max(0, (int) $showFirst);
+		$showLast = max(0, (int) $showLast);
+		if ($showFirst + $showLast >= $length) {
+			$showFirst = min($showFirst, max(0, $length - 1));
+			$showLast = min($showLast, max(0, $length - $showFirst - 1));
+		}
+		$masked = substr($value, 0, $showFirst)
+			. str_repeat('X', max(0, $length - $showFirst - $showLast))
+			. ($showLast > 0 ? substr($value, -$showLast) : '');
 
-        return $masked . '@' . $domain;
-    }
-    // Phone, text, account numbers, and other values.
-    $length = strlen($value);
-    $showFirst = max(0, (int) $showFirst);
-    $showLast = max(0, (int) $showLast);
-    if ($showFirst + $showLast >= $length) {
-        return $value;
-    }
-    return substr($value, 0, $showFirst).str_repeat('X', $length - $showFirst - $showLast).($showLast > 0 ? substr($value, -$showLast) : '');
+		return $masked . '@' . $domain;
+	}
+	// Phone, text, account numbers, and other values.
+	$length = strlen($value);
+	$showFirst = max(0, (int) $showFirst);
+	$showLast = max(0, (int) $showLast);
+	if ($showFirst + $showLast >= $length) {
+		return $value;
+	}
+	return substr($value, 0, $showFirst) . str_repeat('X', $length - $showFirst - $showLast) . ($showLast > 0 ? substr($value, -$showLast) : '');
 }
 
 if (!function_exists('renderSensitiveDataWithToggle')) {
-    /**
-     * Renders a sensitive data value with masking and an interactive eye toggle icon.
-     * When clicked, the eye icon toggles the field between masked and unmasked (decoded).
-     *
-     * @param string|null $encodedOrRawValue Encrypted or raw sensitive value
-     * @param string $type Sensitive data type (e.g. 'aadhaar', 'pan', 'mobile', 'passport', etc.)
-     * @param bool $isEncoded Whether the input is encrypted with dynamicDataEncode (default true)
-     * @return string HTML output with value and toggle icon
-     */
-    function renderSensitiveDataWithToggle($encodedOrRawValue, $type = 'text', $isEncoded = true) {
-        $rawValue = $isEncoded ? dynamicDataDecode($encodedOrRawValue) : $encodedOrRawValue;
-        if (empty($rawValue) && !empty($encodedOrRawValue)) {
-            $rawValue = $encodedOrRawValue;
-        }
-        $rawValue = trim((string)$rawValue);
-        if ($rawValue === '' || $rawValue === '-') {
-            return '-';
-        }
+	/**
+	 * Renders a sensitive data value with masking and an interactive eye toggle icon.
+	 * When clicked, the eye icon toggles the field between masked and unmasked (decoded).
+	 *
+	 * @param string|null $encodedOrRawValue Encrypted or raw sensitive value
+	 * @param string $type Sensitive data type (e.g. 'aadhaar', 'pan', 'mobile', 'passport', etc.)
+	 * @param bool $isEncoded Whether the input is encrypted with dynamicDataEncode (default true)
+	 * @return string HTML output with value and toggle icon
+	 */
+	function renderSensitiveDataWithToggle($encodedOrRawValue, $type = 'text', $isEncoded = true)
+	{
+		$rawValue = $isEncoded ? dynamicDataDecode($encodedOrRawValue) : $encodedOrRawValue;
+		if (empty($rawValue) && !empty($encodedOrRawValue)) {
+			$rawValue = $encodedOrRawValue;
+		}
+		$rawValue = trim((string) $rawValue);
+		if ($rawValue === '' || $rawValue === '-') {
+			return '-';
+		}
 
-        $maskedValue = sensitiveDataEncoded($rawValue, $type);
+		$maskedValue = sensitiveDataEncoded($rawValue, $type);
 
-        // Format 12-digit raw Aadhaar with 4-4-4 spacing for clean visual alignment
-        $displayRaw = $rawValue;
-        $normType = normalizeSensitiveDataType($type);
-        if ($normType === 'aadhaar') {
-            $clean12 = preg_replace('/[^0-9]/', '', $rawValue);
-            if (strlen($clean12) === 12) {
-                $displayRaw = substr($clean12, 0, 4) . ' ' . substr($clean12, 4, 4) . ' ' . substr($clean12, 8, 4);
-            }
-        }
+		// Format 12-digit raw Aadhaar with 4-4-4 spacing for clean visual alignment
+		$displayRaw = $rawValue;
+		$normType = normalizeSensitiveDataType($type);
+		if ($normType === 'aadhaar') {
+			$clean12 = preg_replace('/\D/', '', $rawValue);
+			if (strlen($clean12) === 12) {
+				$displayRaw = substr($clean12, 0, 4) . ' ' . substr($clean12, 4, 4) . ' ' . substr($clean12, 8, 4);
+			}
+		}
 
-        // If not masked (or masking equals raw), show directly without toggle icon
-        if ($maskedValue === $displayRaw || $maskedValue === $rawValue) {
-            return htmlspecialchars($displayRaw);
-        }
+		// If not masked (or masking equals raw), show directly without toggle icon
+		if ($maskedValue === $displayRaw || $maskedValue === $rawValue) {
+			return htmlspecialchars($displayRaw);
+		}
 
-        return '<span class="sensitive-data-container d-inline-flex align-items-center">'
-             . '<span class="sensitive-data-text font-monospace" data-masked="' . htmlspecialchars($maskedValue) . '" data-unmasked="' . htmlspecialchars($displayRaw) . '" data-state="masked">' . htmlspecialchars($maskedValue) . '</span>'
-             . '<i class="fa fa-eye ms-2 text-primary cursor-pointer toggle-sensitive-btn" title="Click to view sensitive information" style="cursor: pointer; font-size: 14px;" onclick="toggleSensitiveDataVisibility(this)"></i>'
-             . '</span>';
-    }
+		return '<span class="sensitive-data-container d-inline-flex align-items-center">'
+			. '<span class="sensitive-data-text font-monospace" data-masked="' . htmlspecialchars($maskedValue) . '" data-unmasked="' . htmlspecialchars($displayRaw) . '" data-state="masked">' . htmlspecialchars($maskedValue) . '</span>'
+			. '<i class="fa fa-eye ms-2 text-primary cursor-pointer toggle-sensitive-btn" title="Click to view sensitive information" style="cursor: pointer; font-size: 14px;" onclick="toggleSensitiveDataVisibility(this)"></i>'
+			. '</span>';
+	}
 }
-function __($input_label){
-	if(!is_scalar($input_label)){
+function __($input_label)
+{
+	if (!is_scalar($input_label)) {
 		return $input_label;
 	}
-	$input_label = trim((string)$input_label);
-	if(isset($_SESSION['application_language_translations']) && is_array($_SESSION['application_language_translations'])){
-		if(isset($_SESSION['application_language_translations'][$input_label]) && trim((string)$_SESSION['application_language_translations'][$input_label]) !== ''){
+	$input_label = trim((string) $input_label);
+	if (isset($_SESSION['application_language_translations']) && is_array($_SESSION['application_language_translations'])) {
+		if (isset($_SESSION['application_language_translations'][$input_label]) && trim((string) $_SESSION['application_language_translations'][$input_label]) !== '') {
 			$translated_label = $_SESSION['application_language_translations'][$input_label][$_SESSION['selected_application_languages'] ?? ''] ?? '';
 			// an empty cell means this language has no translation yet: keep the English text instead of showing a blank label
-			if(trim((string)$translated_label) !== ''){
+			if (trim((string) $translated_label) !== '') {
 				$input_label = $translated_label;
 			}
-		}else{
+		} else {
 			$dynamic_label = "";
 			$strtoary = explode(" ", $input_label);
 			foreach ($strtoary as $labvalue) {
-				if(isset($_SESSION['application_language_translations'][$labvalue]) && trim((string)$_SESSION['application_language_translations'][$labvalue]) !== ''){
+				if (isset($_SESSION['application_language_translations'][$labvalue]) && trim((string) $_SESSION['application_language_translations'][$labvalue]) !== '') {
 					$translated_word = $_SESSION['application_language_translations'][$labvalue][$_SESSION['selected_application_languages'] ?? ''] ?? '';
-					$dynamic_label .= " ".(trim((string)$translated_word) !== '' ? $translated_word : $labvalue);
-				}else{
-					$dynamic_label .= " ".$labvalue;
+					$dynamic_label .= " " . (trim((string) $translated_word) !== '' ? $translated_word : $labvalue);
+				} else {
+					$dynamic_label .= " " . $labvalue;
 				}
 			}
 			$input_label = $dynamic_label;

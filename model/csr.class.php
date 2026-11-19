@@ -13,7 +13,7 @@ class CSRClass
             $var = "%0" . $le . "d";
             $transaction_no = $query_res->pre_fix . sprintf($var, $query_res->serial_number + 1) . $query_res->post_fix;
             if (isset($query_res->id)) {
-                $update = $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $query_res->serial_number + 1), 'id', $query_res->id);
+                $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS, array('serial_number' => $query_res->serial_number + 1), 'id', $query_res->id);
             }
 
         } else {
@@ -29,7 +29,7 @@ class CSRClass
             $updated_by = $get['user_id'];
 
             $query = "UPDATE csr_proposal_data  SET is_active = 1 , updated_date='" . $updated_date . "', updated_by='" . $updated_by . "'  WHERE id= '". $id ."'";
-            $res = $callConfig->executeQuery($query);
+            $callConfig->executeQuery($query);
         }
         if ($get['rid'] != "") {
             $query = "
@@ -127,27 +127,11 @@ public function getCommitteMembers($get)
     AND aumr.is_active='0'";
     return $callConfig->getAllRows($query);
 }
-// function getCsrData($get)
-// {
-//     global $callConfig;
-//     $id = $get['id'];
-//     $table = $get['table'];
-//     $query = "SELECT cpd.* FROM transaction_approval_logs tal
-//     LEFT JOIN " . $table . " cpd ON cpd.id = tal.transaction_id
-//     WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='" . $table . "'
-//     AND tal.company_id='" . $get['company_id'] . "'
-//     AND cpd.is_active='0'";
-//     $res = $callConfig->getAllRows($query);
-//     return $res;
-// }
-//changing this function
-
     public function getCsrData($get){
         global $callConfig;
         $return = array();
         $id = $get['id'] ?? '';
         $current_status = $get['current_status'] ?? '';
-        $table = $get['table'] ?? '';
 
         $query = "SELECT cpd.id, cpd.date, cpd.project_start_date, cpd.project_end_date, cpd.subject, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal 
         LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id 
@@ -163,13 +147,6 @@ public function getCommitteMembers($get)
         }
         $return['total_records'] = $total_records;
 
-        // changed by koti
-        // $pending_approval_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal
-        // LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id
-        // WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_proposal_data'
-        // AND (tal.response_type = 0 OR tal.response_type IS NULL) AND tal.previous_status = cpd.current_status
-        // AND tal.company_id='" . $get['company_id'] . "'
-        // AND cpd.is_active='0' AND cpd.current_status='" . $current_status . "'";
         $pending_approval_query = "SELECT cpd.id, cpd.subject, cpd.project_start_date, cpd.project_end_date, cpd.date, cpd.institue_name, cpd.created_by, cpd.total_budget_grand_total, cpd.current_status, cpd.tracking_status FROM transaction_approval_logs tal 
         LEFT JOIN csr_proposal_data cpd ON cpd.id = tal.transaction_id 
         WHERE tal.user_id = '" . $id . "' AND tal.transaction_table='csr_proposal_data'
@@ -332,8 +309,6 @@ public function getApprovedMembers($get)
 public function getCsrSetting($get)
 {
     global $callConfig;
-    $id = $get['id'];
-    $table = $get['table'];
     $query = "SELECT * FROM  csr_setting WHERE company_id='" . $get['company_id'] . "' AND is_active='0'";
     return $callConfig->getRow($query);
 }
@@ -538,8 +513,7 @@ public function updateFieldWorkDailyPlans($get)
         $query = "UPDATE " . $table . "  SET is_active = NULL , updated_date='" . $updated_date . "', updated_by='" . $updated_by . "'  WHERE id = '" . $rid . "'";
     }
 
-    $res = $callConfig->executeQuery($query);
-    return $res;
+    return $callConfig->executeQuery($query);
 }
 
 public function getApplicationUsersData($get)
@@ -682,7 +656,6 @@ public function getUsersMapPointsData($get){
         $return = array();
         $userid = $get['userid'];
         $date = $get['date'];
-        $user_field_work_type = $get['user_field_work_type'];
         $query1 = "SELECT user_id,  plan_date, plan_longitude as lng, plan_latitude as lat , plan_location as name  From field_work_daily_plans Where user_id='" . $userid . "' AND plan_date='" . $date . "' AND company_id='" . $get['company_id'] . "' AND is_active =0 ";
         $query1 = $callConfig->getAllRows($query1);
         $assignedLocations  = array();
@@ -1031,7 +1004,9 @@ public function getUsersMapPointsData($get){
 
         foreach ($mainTables as $tableName => $rows) {
 
-            if (count((array)$rows) == 0) continue;
+            if (count((array)$rows) == 0) {
+                continue;
+            }
             $ids = array_column($rows, $primaryKey);
             $idsList = implode(',', array_map('intval', $ids));
             $existingRows = array();
@@ -1060,20 +1035,16 @@ public function getUsersMapPointsData($get){
 
                 if (isset($existingRows[$pkValue]) && $existingRows[$pkValue] != '') {
 
-                    if (!empty($existingRows[$pkValue][$timestampColumn]) && !empty($timestampValue)) {
-                        if ($existingRows[$pkValue][$timestampColumn] < $timestampValue) {
-                            $set = [];
-                            foreach ($escapedRow as $column => $value) {
-                                $set[] = "`$column` = $value";
-                            }
-                            $setClause = implode(", ", $set);
-                            $updateQuery = "UPDATE `$tableName` SET $setClause WHERE `$primaryKey` = '$pkValue'";
-
-                            $res =  $callConfig->executeQuery($updateQuery);
-                            $return[$tableName]['updateQuery'.'_'.$key] = $res;
-
-
+                    if (!empty($existingRows[$pkValue][$timestampColumn]) && !empty($timestampValue) && $existingRows[$pkValue][$timestampColumn] < $timestampValue) {
+                        $set = [];
+                        foreach ($escapedRow as $column => $value) {
+                            $set[] = "`$column` = $value";
                         }
+                        $setClause = implode(", ", $set);
+                        $updateQuery = "UPDATE `$tableName` SET $setClause WHERE `$primaryKey` = '$pkValue'";
+
+                        $res =  $callConfig->executeQuery($updateQuery);
+                        $return[$tableName]['updateQuery'.'_'.$key] = $res;
                     }
                 } else {
                     $columns = implode(", ", array_keys($escapedRow));
@@ -1178,7 +1149,7 @@ public function getUsersMapPointsData($get){
                                 $columns = implode(", ", array_keys($escapedUserRow));
                                 $values = implode(", ", array_values($escapedUserRow));
                                 $insertUserQuery = "INSERT INTO notification_users ($columns) VALUES ($values)";
-                                $res = $callConfig->executeQueryString($insertUserQuery);
+                                $callConfig->executeQueryString($insertUserQuery);
                             }
                         }
                     }
@@ -1332,7 +1303,9 @@ public function getUsersMapPointsData($get){
             // default: updated_date for others
         ];
         foreach ($data as $table => $rows) {
-            if (empty($rows)) continue;
+            if (empty($rows)) {
+                continue;
+            }
             // notifications: only insert if not exists
             if ($table === 'notifications') {
                 $existingIds = array_column(
@@ -1389,7 +1362,9 @@ public function getUsersMapPointsData($get){
         $company_id = $get['company_id'];
         $from_db = $get['data_name'];
         $to_db = $get['target_db'] ?? '';
-        if ($table == '') return ['response' => []];
+        if ($table == '') {
+            return ['response' => []];
+        }
 
         // Get last sync time from sync_logs
         $syncQuery = "SELECT last_sync_time FROM sync_logs 
@@ -1433,7 +1408,9 @@ public function getUsersMapPointsData($get){
         $return  = array();
         $table = $get['table_name'];
         $data = json_decode($post['data'], true);
-        if (empty($data['response'])) return ['status' => 'No data'];
+        if (empty($data['response'])) {
+            return ['status' => 'No data'];
+        }
         $dateFieldMap = [
             'transaction_approval_logs' => 'response_date',
             'notification_user' => 'read_datetime',
@@ -2040,7 +2017,9 @@ public function getUsersMapPointsData($get){
             $cf_previous = $carry_forward_prev;
             $spent_from_py = 0; // (no separate tagging yet — can add later)
             $cf_balance_py = $cf_previous - $spent_from_py;
-            if ($cf_balance_py < 0) $cf_balance_py = 0;
+            if ($cf_balance_py < 0) {
+                $cf_balance_py = 0;
+            }
 
             $remaining_unspent = $current_unspent + $cf_balance_py;
 
@@ -2908,7 +2887,11 @@ public function getUsersMapPointsData($get){
             }
             $total_tracking = (int)$project_row->total_tracking;
             $completed_tracking = (int)$project_row->completed_tracking;
-            $progress = $total_tracking > 0 ? round(($completed_tracking / $total_tracking) * 100) : ((int)$project_row->tracking_status == 1 ? 100 : 0);
+            if ($total_tracking > 0) {
+                $progress = round(($completed_tracking / $total_tracking) * 100);
+            } else {
+                $progress = ((int)$project_row->tracking_status == 1) ? 100 : 0;
+            }
             $progress = min(max($progress, 0), 100);
             $status_label = 'On Track';
             $status_class = 'btn-success';
@@ -2928,7 +2911,13 @@ public function getUsersMapPointsData($get){
             $project_row->progress = $progress;
             $project_row->status_label = $status_label;
             $project_row->status_class = $status_class;
-            $project_row->progress_class = $status_class == 'btn-danger' ? 'progress-bar-danger' : ($status_class == 'btn-warning' ? 'bg-warning' : 'progress-bar-success');
+            if ($status_class == 'btn-danger') {
+                $project_row->progress_class = 'progress-bar-danger';
+            } elseif ($status_class == 'btn-warning') {
+                $project_row->progress_class = 'bg-warning';
+            } else {
+                $project_row->progress_class = 'progress-bar-success';
+            }
             $project_row->has_tracking = 1;
             $projects[] = $project_row;
         }
@@ -3088,9 +3077,9 @@ public function getUsersMapPointsData($get){
             $project_year = trim((string)$project_row->financial_year);
             $project_year_keys = array($project_year);
 
-            if (preg_match('/^([0-9]{4})-([0-9]{4})$/', $project_year, $matches)) {
+            if (preg_match('/^(\d{4})-(\d{4})$/', $project_year, $matches)) {
                 $project_year_keys[] = $matches[1] . '-' . substr($matches[2], -2);
-            } elseif (preg_match('/^([0-9]{4})-([0-9]{2})$/', $project_year, $matches)) {
+            } elseif (preg_match('/^(\d{4})-(\d{2})$/', $project_year, $matches)) {
                 $project_year_keys[] = $matches[1] . '-20' . $matches[2];
             }
 
@@ -3776,12 +3765,12 @@ public function getUsersMapPointsData($get){
 
         $return['today_date_label'] = date('d M Y');
         $return['greeting'] = $this->getDailyOpsGreeting();
-        $return['map_data'] = $this->getDailyOpsMapPoints($get, $today, $company_id, $user_id, $admin_type, $user_wh, $user_wh_alias);
+        $return['map_data'] = $this->getDailyOpsMapPoints($today, $company_id, $admin_type, $user_wh, $user_wh_alias);
 
         return $return;
     }
 
-    public function getDailyOpsMapPoints($get, $today, $company_id, $user_id, $admin_type, $user_wh, $user_wh_alias){
+    public function getDailyOpsMapPoints($today, $company_id, $admin_type, $user_wh, $user_wh_alias){
         global $callConfig;
 
         $role = 'admin';
@@ -4371,7 +4360,6 @@ public function getUsersMapPointsData($get){
         }
         if (count((array)$location_agg) > 0) {
             foreach ($location_agg as $loc_row) {
-                $status = 'Not Started';
                 $has_completed = 0;
                 $has_process = 0;
                 $has_not_started = 0;

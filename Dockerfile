@@ -11,21 +11,18 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install intl \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd zip \
+    && docker-php-ext-install mysqli pdo pdo_mysql \
     && rm -rf /var/lib/apt/lists/*
-
-RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Composer binary
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY ./apache2/infi.conf /etc/apache2/conf-available/infi.conf
 
-RUN a2enconf infi.conf
-
-RUN a2enmod rewrite \
-    && a2enmod ssl
-
-RUN rm -f /var/www/html/index.html
+RUN a2enconf infi.conf \
+    && a2enmod rewrite \
+    && a2enmod ssl \
+    && rm -f /var/www/html/index.html
 
 COPY --chown=www-data:www-data . /var/www/html/
 

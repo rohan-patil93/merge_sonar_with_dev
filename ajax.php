@@ -93,10 +93,10 @@ if ($page == 'custom_query_join'&& $_POST['table']!='') {
 	$tables = json_decode($_POST['table'],1);
 	$data = json_decode($_POST['data'],1);
 	$i=0; $str='';
-	if(count($tables)>0){
+	if(!empty($tables)){
 		$str = "SELECT * FROM ";
 		foreach ($tables as $table) {
-			if(count($data)>0 && count($tables)>1 && $i >0){
+			if(!empty($data) && count($tables)>1 && $i >0){
 				$dat = $data[$table];
 				if($dat['left_field']!=''){
 					$str.= $dat['join']." ".$table." ON ".$table.".".$dat['left_field']." = ".$dat['right_field']." " ;
@@ -450,10 +450,10 @@ if($page == 'insertpayrollexcludd'){
 	$str ="";
 	$str.='<tr id="excluded_'.$emda['id'].'">
             <td class="pr-0">
-              <div class="d-flex align-items-center">  
-                <div class="symbol symbol-40 symbol-light-primary flex-shrink-0">           
-                  <span class="symbol-label font-size-h4 font-weight-bold">'.initials($emda['display_name']).'</span>       
-                </div>              
+              <div class="d-flex align-items-center">
+                <div class="symbol symbol-40 symbol-light-primary flex-shrink-0">
+                  <span class="symbol-label font-size-h4 font-weight-bold">'.initials($emda['display_name']).'</span>
+                </div>
               </div>
             </td>            <td class="pl-0">
               <span class="text-muted font-weight-bold text-muted d-block">'.$emda['emp_code'].'</span>
@@ -910,14 +910,14 @@ if($page=='formsurveyquestions'){
 				<div class="col-lg-1"></div>
 				<div class="col-lg-8">
 				<div class="input-group input-icon-right">
-				
+
 		<input type="text" class="form-control display-inline width1" name="survey_question_option'.$value_id.'[]"  placeholder="Option" value="'.$opvalue.'">
 		<span class="input-group-text addon-style">
 			<span class=""><i class="ti-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i> </span>
 		</span>
 
-				
-				
+
+
 				</div>
 				</div>
 				</div>
@@ -933,7 +933,7 @@ if($page=='formsurveyquestions'){
 		if($value['type']==2)	{
 			$display_question .= '	<div class="form-group text-left mt-10">
 			<label>Scale from 1 to: <span class="text-danger">*</span></label>
-			<input type="number" name="survey_question_option'.$value_id.'[]"  class="form-control" placeholder="'.$options[0].'" value="'.$options[0].'" > 
+			<input type="number" name="survey_question_option'.$value_id.'[]"  class="form-control" placeholder="'.$options[0].'" value="'.$options[0].'" >
 			</div>';
 		}
 		if($value['type']==4)	{
@@ -1050,7 +1050,7 @@ if($page=='formassessmentquestions'){
 		<div class="modal-header" >
 		<h5 class="modal-title" id="exampleModalLabel">'.$title.'</h5>
 		<i aria-hidden="true" class="ti-trash close text-white"  data-dismiss="modal" aria-label="Close" onclick="deletequestion('."'".$qkey."'".')"></i>
-			
+
 		</div>
 		<div class="card-body mt-3">
 		<div class="form-group text-left row">
@@ -1088,16 +1088,16 @@ if($page=='formassessmentquestions'){
 					<input type="hidden" name="allow_multiple_selections'.$value_id.'" id="allow_multiple_selections'.$value_id.'" value="1" />';
 				}
 				$display_question .= '
-				
-				</div><div class="col-lg-8"> 
-				
-							 <div class="input-group input-group-button"> 
+
+				</div><div class="col-lg-8">
+
+							 <div class="input-group input-group-button">
 		<input type="text" class="form-control display-inline width1" name="assessment_question_option'.$value_id.'['.$opkey.']"  placeholder="Option" value="'.$opvalue.'">
 		<span class="input-group-text addon-style">
 			<span class=""><i class="ti-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i> </span>
 		</span>
 	</div>
-				
+
 				</div>';
 				$display_question .= '</div>';
 			}
@@ -1344,7 +1344,7 @@ if($page == "elementordesign"){
 	<div class="col-6">
 	<span class="switch switch-icon">
 	<label>
-	<input type="checkbox" data-id="'.$_POST['id'].'" class="elementory_labelandinputtype" data-elementory_id="inputbox'.$_POST['id'].'" data-label="inputlabel'.$_POST['id'].'" data-div="divbox'.$_POST['id'].'"  
+	<input type="checkbox" data-id="'.$_POST['id'].'" class="elementory_labelandinputtype" data-elementory_id="inputbox'.$_POST['id'].'" data-label="inputlabel'.$_POST['id'].'" data-div="divbox'.$_POST['id'].'"
 	name="labelandinputineline['.$_POST['increment'].']" />
 	<span></span>
 	</label>
@@ -1472,8 +1472,8 @@ if($page == "elementordesign"){
 	</div>
 	</div></div></div></div>';
 	$inputtype ='<div class="divbox'.$_POST['id'].'  col-lg-6 mt-5" id="divid'.$_POST['id'].'" >
-	<label class="textcapital col-form-label text-lg-right inputlabel'.$_POST['id'].'"><span class="labletext'.$_POST['id'].'">labe</span><span class="text-danger labletextrequerd'.$_POST['id'].'" style="display:none"  > * </span></label>	
-	<div class="inputtypediv'.$_POST['id'].'" >			
+	<label class="textcapital col-form-label text-lg-right inputlabel'.$_POST['id'].'"><span class="labletext'.$_POST['id'].'">labe</span><span class="text-danger labletextrequerd'.$_POST['id'].'" style="display:none"  > * </span></label>
+	<div class="inputtypediv'.$_POST['id'].'" >
 	<input type="text"  class="form-control form-control-lg inputbox'.$_POST['id'].'" name="inputtype'.$_POST['id'].'" placeholder="" />
 	</div></div>';
 
@@ -1793,7 +1793,7 @@ if($page=='formcandidatefeedbackquestions'){
 		<div class="modal-header" >
 		<h5 class="modal-title" id="exampleModalLabel">'.$title.'</h5>
 		<i aria-hidden="true" class="ti-trash close text-white"  data-dismiss="modal" aria-label="Close" onclick="deletequestion('."'".$qkey."'".')"></i>
-		
+
 		</div>
 		<div class="card-body mt-3">
 		<div class="row col-lg-12">
@@ -1854,7 +1854,7 @@ if($page=='formcandidatefeedbackquestions'){
 		if($value['type']==2)	{
 			$display_question .= '	<div class="form-group text-left mt-10">
 			<label>Scale from 1 to: <span class="text-danger">*</span></label>
-			<input type="number" name="survey_question_option'.$value_id.'[]"  class="form-control" placeholder="'.$options[0].'" value="'.$options[0].'" > 
+			<input type="number" name="survey_question_option'.$value_id.'[]"  class="form-control" placeholder="'.$options[0].'" value="'.$options[0].'" >
 			</div>';
 		}
 		if($value['type']==4)	{
@@ -1961,36 +1961,6 @@ if($page=="selectfiledlists"){
 	}
 	echo json_encode(array('option'=>$option));
 }
-/**
-if($page=="selecttablenamefiledlist"){
-$return = array();
-$aray = explode(",",$_POST['table']);
-$option = "";
-$returntable = "";
-foreach($aray as $aray){
-	$option .= '<div class="col-lg-3 tablenameclass'.$aray.'"><label>'.$aray.'</label><select class="form-select js-example-basic-multiple tablefiledsselect" onchange="buildQuery()" data-table="'.$aray.'" name="tablefiledsselect['.$aray.'][]" multiple>';
-		$res = getListAttributes($aray);
-		foreach($res  as $ress){
-			$option .= "<option value='".$aray.".".$ress['Field']."'>".$ress['Field']."</option>";
-		}
-		$option .="</select></div>";
-}
-echo json_encode(array('option'=>$option));
-}
-
-if($page=="selectfiledlists"){
-	$return = array();
-	$aray = explode(",",$_POST['table']);
-	$option = "";
-	foreach($aray as $aray){
-			$res = getListAttributes($aray);
-			foreach($res  as $ress){
-				$option .= "<option value='".$aray.".".$ress['Field']."'>".$aray.".".$ress['Field']."</option>";
-			}
-	}
-	echo json_encode(array('option'=>$option));
-}
-**/
 if($page=="selectworkflowfiledlist"){
 $option = "";
 	$wh1["where"] = array('is_active'=>0,'company_id'=>$_SESSION['company_id'],'application_table_name'=>$_POST['table_name']);
@@ -2919,7 +2889,7 @@ if($page=="reportfloderlist"){
 				<a href="javascript:void(0)">
 					'.
 					  $value['page_name'].'
-					  </a> 
+					  </a>
 				</div>
 				<div class=" col-lg-1" onclick="listchangebase('.$value['id'].','.$page_name.')">
 					<a href="javascript:void(0)"><i class="ti-angle-down"></i></a>
@@ -3478,7 +3448,7 @@ if($page == 'customunassignprjecttaskdetails'){
 	$cudata = callAPI($curl);
 	$cudata = json_decode($cudata,1);
 	$str = '';
-	if(count($cudata)>0){
+	if(!empty($cudata)){
 		foreach ($cudata as  $data) {
 			$str.= "<option value = '".$data['id']."'>".$data['task_name']."</option>";
 		}
@@ -3732,7 +3702,7 @@ if($page=="getesopplansbuckets"){
 	$vesting_detail = json_decode($res['vesting_schedule'],1);
 
 
-	$html = '<div id="addmorediv-1"> 
+	$html = '<div id="addmorediv-1">
 			<div class="row">
 				<div class="form-group col-lg-4">
 					<label>Allocation Date <span class="text-danger">*</span></label>
@@ -3977,7 +3947,7 @@ if($page == "storepdfsendmail"){
 	# Be aware! The magic number (file signature) is not 100% reliable solution to validate PDF files
 	# Moreover, if you get Base64 from an untrusted source, you must sanitize the PDF contents
 	if (strpos($bin, '%PDF') !== 0) {
-	  throw new Exception('Missing the PDF file signature');
+	  throw new InvalidArgumentException('Missing the PDF file signature');
 	}
 	# Write the PDF contents to a local file
 	file_put_contents('uploads/rental_invoices/'.time().'_file.pdf', $bin);
@@ -4588,7 +4558,7 @@ if($page=="searchstationery"){
 					</td>
 					<td>
 						<span class="label label-warning">'.$data['status']['couriers'][$down['current_status']].'</span></br>
-					   <span class="text-muted f-14 f-w-600">'.$data['deliver_types'][$down['deliver_type']].'</span> 
+					   <span class="text-muted f-14 f-w-600">'.$data['deliver_types'][$down['deliver_type']].'</span>
 					</td>
 					<td>
 						<button class="btn waves-effect waves-light btn-primary" onclick="cartviewreqlist('.$request_no.')" >
@@ -4763,13 +4733,13 @@ if($page=='searchtransportbus'){
 		                    </div>
 		                </div>
 		            </div>
-		            <input type="hidden" name="" id="view_location_'.$route['id'].'" value="1"> 
+		            <input type="hidden" name="" id="view_location_'.$route['id'].'" value="1">
 		            <div class="card-body" style="display: none;" id="dis_location_'.$route['id'].'" >
 		                <div class="row col-lg-12">';
 		                    foreach((array)$data['transport_schedule'][$route['id']] as $transport_schedule){
 		    $html.= '                 <div class="col-lg-4 p-2">'.$transport_schedule['stop_name'].' </div>
 		                        <div class="col-lg-2">
-		                            <button onclick="viewrequest('.$transport_schedule['id'].')" class="btn btn-info" style="font-size: 12px; padding: 5px;" > 
+		                            <button onclick="viewrequest('.$transport_schedule['id'].')" class="btn btn-info" style="font-size: 12px; padding: 5px;" >
 		                            Request </button>
 		                        </div>';
 		                     }
@@ -5235,8 +5205,6 @@ if($page == "updateapplicationusers"){
 		}else{
 			$_POST['user_photo'] = $_POST['old_user_photo'];
 		}
-	}elseif($_POST['formtype'] == "application_user_module_roles"){
-	}elseif($_POST['formtype'] == "remove_application_user_module_roles"){
 	}
 	$_POST['user_id'] = $_SESSION['userid'];
 	$_POST['company_id'] = $_SESSION['company_id'];
@@ -5386,7 +5354,6 @@ if($page == "gettransactionactivityschedulecheckList"){
 	$transaction_table = $transaction_activity_schedule['transaction_table'];
 	if($requerdcnt <= $alldone && $mandatory == '0' && ($transaction_activity_schedule['approval_user_id'] == $_SESSION['userid'] || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] && $transaction_activity_schedule['current_status'] == ST_SEND_BACK && ($transaction_table == 'employees' || $transaction_table == 'vendor_registers' || $transaction_table == 'vendors')) || ($transaction_activity_schedule['assigned_to'] == $_SESSION['userid'] && $transaction_table != 'vendor_registers' && $transaction_table != 'vendors' && $transaction_table != 'employees'))){
 		$workflow_btn = $workflowsteps['workflow_btn'];
-	}else{
 	}
 	$html .= '<div class="card">'.$workflowsteps['current_status_ribbon'];
 	$html .= '<div class="card-header"><h5>Declaration</h5><div class="card-header-right  table-card-header m-r-50">'.$workflow_btn.'</div></div>';
@@ -5553,10 +5520,10 @@ if($page == 'addupdatequestionfeddback'){
     if($_POST['question_type']==3){
     	$str.='<div class="">';
 	    foreach ($_POST['question_option']['3'] as $option){
-	    	$str.='<b> 
+	    	$str.='<b>
 	        <div class="radio-group required float-left ml-2">
 	            <input type="radio" value="" name="response" >
-	            <label for="q1">'.$option.' </label> 
+	            <label for="q1">'.$option.' </label>
 	        </div>
 	    	</b>';
 		}
@@ -5695,7 +5662,6 @@ if($page == "insertapplicationtickets"){
 		if(move_uploaded_file($_FILES['file']["tmp_name"], $File_Uploads_Path.$newfilename)){
 			$_POST['attachment'] = $newfilename;
 		}
-	}else{
 	}
 	$_POST['company_id']=$_SESSION['company_id'];
 	$_POST['user_id']=$_SESSION['userid'];
@@ -5976,10 +5942,10 @@ if($page == "getemployeelistwithbuildingdetailfilter"){
 		}
 	}else{
 		$str.= '<div class="card-px text-center py-20 m-t-30">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Employees</p>   
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Employees</p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-            </div>   
+            </div>
         </div>';
     }
 	echo $str;
@@ -6119,10 +6085,10 @@ if($page == "getenquiryvendororcustomer"){
 		}
 	}else{
 		$str.= '<div class="card-px text-center py-20 m-t-30">
-            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No '.ucwords($_POST['searchvendorcustomertype']).'</p>   
+            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No '.ucwords($_POST['searchvendorcustomertype']).'</p>
             <div class="text-center px-4">
                 <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-            </div>   
+            </div>
         </div>';
     }
 	echo $str;
@@ -7264,7 +7230,7 @@ if($page == "getmultireferencepagedetails"){
 			$tables .="<td class='p-2'>
 			<input type='hidden' name='old_transaction_item_table_id[".$drtres['id']."]'  value='".$alreday_selected_transaction_item_id[$drtres['id']]."'>
 			<input type='hidden' name='old_transaction_item_tax_table_id[".$drtres['id']."]'  value='".$alreday_selected_transaction_item_tax_id[$drtres['id']]."'>
-			
+
 
 			<div class='checkbox-fade fade-in-primary'>
                       <label class='form-label'>
@@ -8017,8 +7983,12 @@ if ($page == 'refresh_vehicle_table') {
 		$entry_time = $vehicle['entry_time'] ?? null;
 		$exit_time = $vehicle['exit_time'] ?? null;
 
-		if ($entry_time === '00:00:00') $entry_time = null;
-		if ($exit_time === '00:00:00') $exit_time = null;
+		if ($entry_time === '00:00:00') {
+			$entry_time = null;
+		}
+		if ($exit_time === '00:00:00') {
+			$exit_time = null;
+		}
 
 		if ($method_type == 'exit_first') {
 			if (!empty($entry_time) && !empty($exit_time)) {
@@ -8038,7 +8008,9 @@ if ($page == 'refresh_vehicle_table') {
 			}
 		}
 
-		if ($duration < 0) $duration = abs($duration);
+		if ($duration < 0) {
+			$duration = abs($duration);
+		}
 		return $duration >= 60 ? floor($duration / 60) . 'h ' . ($duration % 60) . 'm' : $duration . 'm';
 	}
 
@@ -8062,8 +8034,12 @@ if ($page == 'refresh_vehicle_table') {
 			$out_time = $vehicle['exit_time'] ?? null;
 			$record_date = $vehicle['entry_date'] ?? $vehicle['exit_date'] ?? null;
 
-			if ($in_time === '00:00:00') $in_time = null;
-			if ($out_time === '00:00:00') $out_time = null;
+			if ($in_time === '00:00:00') {
+				$in_time = null;
+			}
+			if ($out_time === '00:00:00') {
+				$out_time = null;
+			}
 
 			if ($method_type == 'exit_first') {
 				$is_complete = !empty($in_time) && !empty($out_time);
