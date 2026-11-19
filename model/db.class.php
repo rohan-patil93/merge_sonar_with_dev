@@ -47,25 +47,27 @@ class configClass
 		}
 		public function selectQuery_two($tablename1,$tablename2,$fields1,$fields2,$where,$order,$start,$limit)
 		{
-
-		if(count($fields1)>1)
-		$fields1=implode(",",$fields1);
-		elseif(count($fields2)>1)
-		$fields2=implode(",",$fields2);
-		else
-
-		$query=DBSELECT.$fields1.','.$fields2.DBFROM.$tablename1.','.$tablename2;
-		if($where!="")
-		$query.=DBWHR.$where;
-		if($order!="")
-		$query.=DB_ORDER.$order;
-		if($limit!="")
-		{
-			if($start=="")
-			$start=0;
-			$query.=DB_LMT.$start.",".$limit;
-		}
-		return $query;
+			if(count($fields1)>1) {
+				$fields1=implode(",",$fields1);
+			} elseif(count($fields2)>1) {
+				$fields2=implode(",",$fields2);
+			} else {
+				$query=DBSELECT.$fields1.','.$fields2.DBFROM.$tablename1.','.$tablename2;
+			}
+			if($where!="") {
+				$query.=DBWHR.$where;
+			}
+			if($order!="") {
+				$query.=DB_ORDER.$order;
+			}
+			if($limit!="")
+			{
+				if($start=="") {
+					$start=0;
+				}
+				$query.=DB_LMT.$start.",".$limit;
+			}
+			return $query;
 		}
 
 		public function configConnection($db="",$extra="")
@@ -277,10 +279,12 @@ class configClass
 			}
 
 			$query=DBSELECT.$fields.DBFROM.$tablename;
-			if($where!="")
-			$query.=' '.DBWHR.$where." IN(".$field_ids.")";
-			if($order!="")
-			$query.=DB_ORDER.$order;
+			if($where!="") {
+				$query.=' '.DBWHR.$where." IN(".$field_ids.")";
+			}
+			if($order!="") {
+				$query.=DB_ORDER.$order;
+			}
 			return $query;
 
 		}
@@ -356,8 +360,9 @@ class configClass
 
 		public function deleteRecord($tablename,$where){
 		$query=DBDEL.DBFROM.$tablename;
-		if($where!="")
-		$query.=DBWHR.$where;
+		if($where!="") {
+			$query.=DBWHR.$where;
+		}
 		$res = configClass::executeQuery($query);
 		return $res['UpdatedRes'];
 		}
@@ -384,8 +389,9 @@ class configClass
 		}
 		if($limit!="")
 		{
-			if($start=="")
-			$start=0;
+			if($start=="") {
+				$start=0;
+			}
 			$query.=DB_LMT.$start.",".$limit;
 		}
 		return $query;
@@ -508,14 +514,16 @@ class configClass
 		{
 			if($_FILES[$imagename]['name']!="")
 			{
-				if($width!="")
-				$thumb_newwidth=$width;
-				else
-				$thumb_newwidth=150;
-				if($height!="")
-				$thumb_newheight=$height;
-				else
-				$thumb_newheight=150;
+				if($width!="") {
+					$thumb_newwidth=$width;
+				} else {
+					$thumb_newwidth=150;
+				}
+				if($height!="") {
+					$thumb_newheight=$height;
+				} else {
+					$thumb_newheight=150;
+				}
 				$ext=explode(".",$_FILES[$imagename]['name']);
 				$name=$jnt.'_'.time().uniqid().'.'.$ext[1];
 				move_uploaded_file($_FILES[$imagename]['tmp_name'],$path.$name);
