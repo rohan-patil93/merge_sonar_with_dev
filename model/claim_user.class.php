@@ -71,7 +71,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 				$employeessql = "SELECT emp.id, emp.user_id FROM employees emp WHERE emp.company_id = '".$get['company_id']."' AND emp.finance_buddy = '".$get['emp_id']."' AND emp.is_active = 0 ";
 				$employeesres = $callConfig->getAllRows($employeessql);
 				$returnarray = array();
-				$$returnarray['sql'] = $employeessql;
+				$returnarray['sql'] = $employeessql;
 				$returnarray['employees_cnt'] = count((array)$employeesres);
 				$empidlist = array();
 				foreach($employeesres as $empdetails){
@@ -118,7 +118,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 
 			$employeessql = "SELECT emp.id, emp.user_id FROM employees emp WHERE emp.company_id = '".$get['company_id']."' AND emp.is_active = 0 ".$employeecondition;
 			$employeesres = $callConfig->getAllRows($employeessql);
-			$$returnarray['sql'] = $employeessql;
+			$returnarray['sql'] = $employeessql;
 			$returnarray['employees_cnt'] = count((array)$employeesres);
 			$empidlist = array();
 			foreach($employeesres as $empdetails){

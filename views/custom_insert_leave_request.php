@@ -341,7 +341,7 @@ function submitEmployeeLeave(){
                 ?>
                 <div class="card card-custom " id="kt_page_sticky_card">
                     <div class="card-header table-card-header ">
-                        <h5><?php echo __('Leave Request'); ?> <?php if($rowid!=""){ ?> <span class="form-label label label-primary"> <i class="fa fa-user"></i> <?php echo ucwords($$empdata[$leave_details['employee_id']]['display_name']); ?></span> <?php
+                        <h5><?php echo __('Leave Request'); ?> <?php if($rowid!=""){ ?> <span class="form-label label label-primary"> <i class="fa fa-user"></i> <?php echo ucwords($empdata[$leave_details['employee_id']]['display_name']); ?></span> <?php
 } ?> </h5>
                         <div class="card-header-right">
                             <?php  echo $workflowsteps['workflow_btn']; ?>

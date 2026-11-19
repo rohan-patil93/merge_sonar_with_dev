@@ -28641,7 +28641,7 @@ return $retarray;
 			$return['selected_documents'] = $selected_documentsres;
 
 
-			if (($get['table'] == 'enquiries' || $get['table'] == 'estimates' || $get['table'] == 'sales_orders') && ($get['new_table'] == 'requisitions' || $$get['new_table'] == 'quotations' || $get['new_table'] == 'purchase_orders')) {
+			if (($get['table'] == 'enquiries' || $get['table'] == 'estimates' || $get['table'] == 'sales_orders') && ($get['new_table'] == 'requisitions' || $get['new_table'] == 'quotations' || $get['new_table'] == 'purchase_orders')) {
 				$pending_qty = "qti.pending_order_qty as pending_qty";
 				$item_quantity = "qti.item_quantity as item_quantity";
 			} else {
@@ -28689,7 +28689,7 @@ return $retarray;
 			$selected_documentsres = $callConfig->getRow($selected_documentssql);
 			$return['selected_documents'] = $selected_documentsres;
 
-			if (($get['table'] == 'enquiries' || $get['table'] == 'estimates' || $get['table'] == 'sales_orders') && ($get['new_table'] == 'requisitions' || $$get['new_table'] == 'quotations' || $get['new_table'] == 'purchase_orders')) {
+			if (($get['table'] == 'enquiries' || $get['table'] == 'estimates' || $get['table'] == 'sales_orders') && ($get['new_table'] == 'requisitions' || $get['new_table'] == 'quotations' || $get['new_table'] == 'purchase_orders')) {
 				$pending_qty = "qti.pending_order_qty as pending_qty";
 				$item_quantity = "qti.item_quantity as item_quantity";
 			} else {

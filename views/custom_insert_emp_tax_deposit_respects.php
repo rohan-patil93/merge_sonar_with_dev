@@ -34,7 +34,7 @@ $selectdatas = array('1'=>'Single Row ', '2'=>'Multiple Rows (Import file)');
                                 for($i=1; $i<6; $i++) {
                                     $vew = $sty."-".($sty+1);
                             ?>
-                                <option value="<?php echo $vew; ?>" <?php echo $vew ==$row['assessment_year']?"selected":""; ?>><?php echo $$vew; ?></option>
+                                <option value="<?php echo $vew; ?>" <?php echo $vew ==$row['assessment_year']?"selected":""; ?>><?php echo $vew; ?></option>
                             <?php $sty++;
 } ?>
                         </select>
