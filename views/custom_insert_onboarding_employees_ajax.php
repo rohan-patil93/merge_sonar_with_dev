@@ -1505,7 +1505,7 @@ $bank_work_flow = "Y";
 					  	<option value=""><?php echo __('Select Any One'); ?></option>
 					  	<?php foreach ((array)$job_titles as $job_title) {
 					    ?>
-					    	<option <?php if($data['job_title_id'] == $job_title['id']){ ?> selected <?php } ?> value="<?php echo $desigs['id']; ?>" >
+					    	<option <?php if($data['job_title_id'] == $job_title['id']){ ?> selected <?php } ?> value="<?php echo $job_title['id']; ?>" >
 					      	<?php echo __($job_title['job_title']); ?>
 					    	</option>
 					  <?php } ?>
