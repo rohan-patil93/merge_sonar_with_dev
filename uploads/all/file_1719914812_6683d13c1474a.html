@@ -67,13 +67,13 @@
             // document.getElementById('header').style.display = 'none';
              //document.getElementById('footer').style.display = 'none';
              document.body.innerHTML = printContents;
-         
+
              window.print();
-         
+
              document.body.innerHTML = originalContents;
         }
     </script>
-    
+
 </head>
 
 <body>
@@ -107,7 +107,7 @@
                                         <span class="input-group-text search-close">
 										<i class="feather icon-x input-group-text"></i>
 									</span>
-                                        <input type="text" class="form-control" placeholder="Enter Keyword">
+                                        <input type="text" class="form-control" placeholder="Enter Keyword" aria-label="Enter Keyword">
                                         <span class="input-group-text search-btn">
 										<i class="feather icon-search input-group-text"></i>
 									</span>
@@ -120,7 +120,7 @@
                             </a>
                             </li>
                         </ul>
-                            
+
                         <ul class="nav-right">
                             <li class="header-notification">
                                 <div class="dropdown-primary dropdown">
@@ -136,7 +136,7 @@
                                         <li>
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0">
-                                                    <img class="img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                                                    <img class="img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h5 class="notification-user">John Doe</h5>
@@ -148,7 +148,7 @@
                                         <li>
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0">
-                                                    <img class="img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                                                    <img class="img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h5 class="notification-user">Joseph William</h5>
@@ -160,7 +160,7 @@
                                         <li>
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0">
-                                                    <img class="img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                                                    <img class="img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h5 class="notification-user">Sara Soudein</h5>
@@ -184,7 +184,7 @@
 
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-bs-toggle="dropdown">
-                                        <img src="../files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                                        <img src="../files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile">
                                         <span>John Doe</span>
                                         <i class="feather icon-chevron-down"></i>
                                     </div>
@@ -223,7 +223,7 @@
                                 </div>
                             </li>
                         </ul>
-                        
+
                     </div>
                 </div>
             </nav>
@@ -238,7 +238,7 @@
                                 </a>
                                 <div class="right-icon-control">
                                     <div class="input-group input-group-button">
-                                        <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search Friend">
+                                        <input type="text" id="search-friends" name="footer-email" class="form-control" placeholder="Search Friend" aria-label="Search Friend">
                                         <button class="btn btn-primary waves-effect waves-light" type="button">
                                             <i class="feather icon-search"></i>
                                         </button>
@@ -248,7 +248,7 @@
                             <div class="main-friend-list">
                                 <div class="media userlist-box waves-effect waves-light" data-id="1" data-status="online" data-username="Josephin Doe">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image ">
+                                                <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder">
                                                 <div class="live-status bg-success"></div>
                                             </a>
                                     <div class="media-body">
@@ -257,7 +257,7 @@
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="2" data-status="online" data-username="Lary Doe">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                                <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder">
                                                 <div class="live-status bg-success"></div>
                                             </a>
                                     <div class="media-body">
@@ -266,7 +266,7 @@
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="3" data-status="online" data-username="Alice">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                                                <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder">
                                                 <div class="live-status bg-success"></div>
                                             </a>
                                     <div class="media-body">
@@ -275,7 +275,7 @@
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="4" data-status="offline" data-username="Alia">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                                                <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder">
                                                 <div class="live-status bg-default"></div>
                                             </a>
                                     <div class="media-body">
@@ -284,7 +284,7 @@
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="5" data-status="offline" data-username="Suzen">
                                     <a class="media-left" href="#!">
-                                                <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                                <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder">
                                                 <div class="live-status bg-default"></div>
                                             </a>
                                     <div class="media-body">
@@ -309,7 +309,7 @@
                     <div class="d-flex chat-messages">
                         <a class="media-left photo-table" href="#!">
                             <div class="flex-shrink-0">
-                                <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder">
                             </div>
                         </a>
                         <div class="flex-grow-1 chat-menu-content">
@@ -330,7 +330,7 @@
                     <div class="d-flex chat-messages">
                         <a class="media-left photo-table" href="#!">
                             <div class="flex-shrink-0">
-                                <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder">
                             </div>
                         </a>
                         <div class="media-body chat-menu-content">
@@ -344,7 +344,7 @@
                 <div class="chat-reply-box">
                     <div class="right-icon-control">
                         <div class="input-group input-group-button">
-                            <input type="text" class="form-control" placeholder="Write hear . . ">
+                            <input type="text" class="form-control" placeholder="Write hear . . " aria-label="Write message">
                             <button class="btn btn-primary waves-effect waves-light" type="button">
                                 <i class="feather icon-message-circle"></i>
                             </button>
@@ -588,7 +588,7 @@
                                             </li>
 
 
-                                            </li>
+
                                             <li class=" ">
                                                 <a href="modal.html" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Modal</span>
@@ -1194,7 +1194,7 @@
         									</span>
                                             <span class="pcoded-mtext">To-Do</span>
                                         </a>
-                                        
+
                                     </li>
 
 
@@ -1323,7 +1323,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                                
+
                             </div>
                         </div>
                     </nav>
@@ -1345,7 +1345,7 @@
                                                         </td>
                                                         <td width="50%" colspan="4">
                                                             <div class="table-responsive">
-                                                                <table class="table">
+                                                                <table class="table" role="presentation">
                                                                     <tr>
                                                                         <td>TO</td>
                                                                         <td align="right">
@@ -1466,7 +1466,7 @@
                                                         </td>
                                                         <td colspan="4">
                                                             <div class="table-responsive">
-                                                                <table class="table">
+                                                                <table class="table" role="presentation">
                                                                     <tr>
                                                                         <th scope="col" width="50%">TOTAL</th>
                                                                         <th scope="col" width="50%" class="text-right">
@@ -1523,11 +1523,11 @@
                                                     </tr>
                                                 </table>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="card-body">
                                             <button type="button" class="btn btn-primary font-weight-bolder mr-3 mr-sm-14 my-1" onclick="printDiv('printableArea')" >Print Payslip</button>
                                         </div>
-                                    </div>    
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1619,9 +1619,9 @@
     <script type="text/javascript" src="../files/bower_components/select2/js/select2.full.min.js"></script>
     <script type="text/javascript" src="../files/bower_components/multiselect/js/jquery.multi-select.js"></script>
     <script type="text/javascript" src="../files/assets/pages/advance-elements/select2-custom.js"></script>
-    
 
-    
+
+
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function(){
         /////// Prevent closing from click inside dropdown
@@ -1640,7 +1640,7 @@
         $('.counting').each(function() {
           var $this = $(this),
               countTo = $this.attr('data-count');
-          
+
           $({ countNum: $this.text()}).animate({
             countNum: countTo
           },
@@ -1657,8 +1657,8 @@
               //alert('finished');
             }
 
-          });  
-          
+          });
+
 
         });
     </script>

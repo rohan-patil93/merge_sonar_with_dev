@@ -29,7 +29,7 @@ jobs:
             -Dsonar.projectKey=infisuite-php-main-branch
             -Dsonar.projectName=infisuite-php-main-branch
             -Dsonar.sources=.
-            -Dsonar.exclusions=vendor/**,dompdf/**,phpqrcode/**,htmltopdfconverterTCPDF/**,assets/**,captcha/css/**,captcha/fonts/**,captcha/images/**,model/SMTP/**,scratch/**,**/*.min.js,**/node_modules/**,**/.next/**,**/dist/**,**/build/**,**/coverage/**,**/*.map,Dockerfile
+            -Dsonar.exclusions=vendor/**,dompdf/**,phpqrcode/**,htmltopdfconverterTCPDF/**,assets/**,captcha/css/**,captcha/fonts/**,captcha/images/**,model/SMTP/**,scratch/**,uploads/**,**/*.min.js,**/node_modules/**,**/.next/**,**/dist/**,**/build/**,**/coverage/**,**/*.map,Dockerfile
             -Dsonar.php.coverage.reportPaths=coverage/coverage.xml
             
       - name: SonarQube Quality Gate
