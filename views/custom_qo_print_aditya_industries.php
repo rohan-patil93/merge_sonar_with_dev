@@ -391,7 +391,7 @@ function emptyCheck($valu){
                             <?php  if(count((array)$distax)){
                                     $tattax = 0;
                                     foreach((array)$distax as $ktax){  $tattax +=$ktax['tax_amount']; ?>
-                                    <?php 
+                                    <?php
                                         if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>
                                     <tr>
                                         <th scope="col" class="f-14 text-start"><?php echo $split_1_name; ?>  @ <?php echo $ktax['percentage']*$split_1; ?>%</th>

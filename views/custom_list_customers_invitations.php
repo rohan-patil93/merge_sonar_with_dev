@@ -20,22 +20,22 @@ foreach($useruresponse as $useruresponse1){
 
 ?>
 <script type="text/javascript">
-	function resendrequest(val){
-		$.ajax({
-	        url: "ajax.php",
-	        data:'page=resenduserdetails&id='+val,
-	        type: "POST",
-	        success:function(data){
-	        console.log(data);
-	         tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Invitation Send To User Successfully','');
-	        },
-	        error:function (){}
-    	});
+    function resendrequest(val){
+        $.ajax({
+            url: "ajax.php",
+            data:'page=resenduserdetails&id='+val,
+            type: "POST",
+            success:function(data){
+            console.log(data);
+             tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Invitation Send To User Successfully','');
+            },
+            error:function (){}
+        });
 
-	}
-	function dynamicinsertpopup(option){
-		//alert("insert");
-		jQuery.ajax({
+    }
+    function dynamicinsertpopup(option){
+        //alert("insert");
+        jQuery.ajax({
             url: "views/new_from.php",
             data:'option='+option,
             type: "POST",
@@ -45,7 +45,7 @@ foreach($useruresponse as $useruresponse1){
             },
             error:function (){}
         });
-	}
+    }
    function statuspopup(status,id){
       //alert("data");
      var table_name = document.getElementById('table_name').value;
@@ -61,32 +61,32 @@ foreach($useruresponse as $useruresponse1){
         });
    }
 
-	function displaystausdrop(id,table,status_id){
-		//alert("id");
-		$.ajax({
-	        url: "ajax.php",
-	        data:'page=current_status_drop&id='+id+'&current_status='+status_id+'&table='+table,
-	        type: "POST",
-	        success:function(data){
-	        	console.log(data);
-	            $("#dropdownlist_"+id).html(data);
-	        },
-	        error:function (){}
-    	});
+    function displaystausdrop(id,table,status_id){
+        //alert("id");
+        $.ajax({
+            url: "ajax.php",
+            data:'page=current_status_drop&id='+id+'&current_status='+status_id+'&table='+table,
+            type: "POST",
+            success:function(data){
+                console.log(data);
+                $("#dropdownlist_"+id).html(data);
+            },
+            error:function (){}
+        });
 
-	}
+    }
 function listUserType(){
-	var reg_invoit = $('input[name="reg_invoit"]:checked').val();
+    var reg_invoit = $('input[name="reg_invoit"]:checked').val();
         if(reg_invoit=='1'){
             $(".register").show();
-			      $(".invited").hide();
+                  $(".invited").hide();
         }else if(reg_invoit=='2'){
             $(".invited").show();
-			      $(".register").hide();
+                  $(".register").hide();
         }else{
-			      $(".invited").show();
-			      $(".register").show();
-		}
+                  $(".invited").show();
+                  $(".register").show();
+        }
 }
 
 </script>
@@ -101,23 +101,23 @@ function listUserType(){
           <h5><?= __('Customers'); ?></h5>
           <div class="card-header-right table-card-header ">
           <div class="radio radio-inline">
-					  <label class="form-label">
-						<input type="radio" name="reg_invoit" value="0" checked onchange="listUserType()">
-						<?= __('All'); ?>
-					  </span>
+                      <label class="form-label">
+                        <input type="radio" name="reg_invoit" value="0" checked onchange="listUserType()">
+                        <?= __('All'); ?>
+                      </span>
           </div>
-					<div class="radio radio-inline">
-					  <label class="form-label">
-						<input type="radio" name="reg_invoit" value="1" onchange="listUserType()">
-						<?= __('Active'); ?>
-					  </span>
-					</div>
-					<div class="radio radio-inline">
-					  <label class="form-label">
-						<input type="radio" name="reg_invoit" value="2" onchange="listUserType()">
-						<?= __('Invited'); ?>
-					  </span>
-					</div>
+                    <div class="radio radio-inline">
+                      <label class="form-label">
+                        <input type="radio" name="reg_invoit" value="1" onchange="listUserType()">
+                        <?= __('Active'); ?>
+                      </span>
+                    </div>
+                    <div class="radio radio-inline">
+                      <label class="form-label">
+                        <input type="radio" name="reg_invoit" value="2" onchange="listUserType()">
+                        <?= __('Invited'); ?>
+                      </span>
+                    </div>
           <a href="index.php?option=COM_INSERT_INVITE_CUSTOMERS" class="btn btn-success mb-2 desktop-view">
             <i class="icofont icofont-plus icon-white text-white"></i>
             <?= __('Invite Customer'); ?>
@@ -153,7 +153,7 @@ function listUserType(){
                   $image = $applicationuser['image'];
                 }
 
-			?>
+            ?>
 
       <div class="col-lg-3 custom-ribbon-accordian cursor-pointer  position-relative <?php echo $classadded; ?>" >
 

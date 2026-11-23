@@ -242,16 +242,16 @@ function submitassessment(){
       <div class="card card-custom card-sticky" id="kt_page_sticky_card">
 
 
-	 <div class="card-header mb-3">
-						<h5> <?php echo htmlspecialchars(__($assessment_details['assessment_name'] ?? '')); ?></h5>
-						<div class="card-header-right">
-							<div class="countdown float-right">
+     <div class="card-header mb-3">
+                        <h5> <?php echo htmlspecialchars(__($assessment_details['assessment_name'] ?? '')); ?></h5>
+                        <div class="card-header-right">
+                            <div class="countdown float-right">
             <span class="fas fa-stopwatch"><b><?= __('Timing Remaining') ?> </b></span>
             <div id="duration"> </div>
             <div id="timerdisplay" class="font-weight-bold font-size-h3 text-danger"> <?= __('Not Yet Start') ?></div>
           </div>
-			</div>
-		</div>
+            </div>
+        </div>
 <form method="post" id="myform" name="myform" action="">
 <div class="row">
 
@@ -272,7 +272,7 @@ function submitassessment(){
 
         foreach ($display_questions as $questionid=>$val) {
           $value_id++;
-			$addcss = "";
+            $addcss = "";
           $dispnext = "";
           if($questionid!=1) {  $addcss = "style='display:none'";
           }
@@ -282,7 +282,7 @@ function submitassessment(){
           ?>
           <input type="hidden" name="value_id[]" value="<?php echo $questionid;?>">
           <input type="hidden" name="queid<?php echo $questionid?>" value="<?php echo $display_questions[$questionid]['queid'];?>">
-			<div class="col-md-5" id="disdiv<?php echo $questionid;?>" <?php echo $addcss;?>>
+            <div class="col-md-5" id="disdiv<?php echo $questionid;?>" <?php echo $addcss;?>>
             <div class="q-a">
               <input type="hidden" name="questionid<?php echo $questionid;?>" value="<?php echo $questionid;?>">
 
@@ -310,7 +310,7 @@ function submitassessment(){
                 <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if($display_questions[$questionid]['require_response']=="1") echo "required"; ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $answer;?></textarea>
                 <?php
               }
-			?>
+            ?>
               <div class="card-footer mt-5">
                 <?php if ($total_q!=$questionid){ ?>
                   <a href="#top" id="save" <?php echo $dispnext; ?> onclick="callnext('<?php echo $questionid+1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-success font-weight-bold float-left"><?= __('Next') ?> <i class="fas fa-chevron-right"> </i></a>

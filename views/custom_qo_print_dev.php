@@ -485,7 +485,7 @@ function emptyCheck($valu)
                                 $tattax = 0;
                                 foreach ((array) $distax as $ktax) {
                                     $tattax += $ktax['tax_amount']; ?>
-                                    <?php 
+                                    <?php
                                             if ($transaction['originator_state_id'] == $transaction['supplier_state_id']) { ?>
                                         <tr>
                                             <td style="padding-top: 5px;font-size: 12px;text-align: left;">

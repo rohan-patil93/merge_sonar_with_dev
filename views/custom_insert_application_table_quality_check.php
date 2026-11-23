@@ -237,7 +237,7 @@ foreach($items as $item){
             if($rpdata['discount_type'] == 'A'){
                 $newproductamount = ($productamount / $subt_amount) * $rpdata['discount_amount'];
             }
-			$totaldiscountamt +=$newproductamount;
+            $totaldiscountamt +=$newproductamount;
             $productamount = $productamount-$newproductamount;
             if(isset($distax[$tax_val]['amount'])){
                 $distax[$tax_val]['amount'] =  $productamount;

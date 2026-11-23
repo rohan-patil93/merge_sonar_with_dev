@@ -262,7 +262,7 @@ foreach ($cusresponse_dump as $custt) {
             <th scope="col" class="" width="15%"><?= __('Account') ?> <span class="requried"></span></th>
             <th scope="col" class="" width="15%"><?= __('Description') ?></th>
             <th scope="col" class="thheader text-start" width="15%"><?= __('Name') ?> </th>
-            <th scope="col" class="thheader text-start" width="15%"><?= __('Location') ?> 
+            <th scope="col" class="thheader text-start" width="15%"><?= __('Location') ?>
             </th>
             <th scope="col" class="thheader text-start" width="15%"><?= __('Debits') ?></th>
             <th scope="col" class="thheader text-start" width="15%"><?= __('Credits') ?>

@@ -57,8 +57,8 @@ $fyRows = $return ?? array();
             <div id="poRowsWrapper">
                 <?php
                 if(count((array)$poData) =='0'){
-						$poData[] = array();
-				}
+                        $poData[] = array();
+                }
                 if (count((array)$poData) > 0) {
                     foreach ($poData as $i => $row) {
                         $index = $i + 1;

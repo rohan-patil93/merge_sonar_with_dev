@@ -62,13 +62,13 @@ $(document).ready(function () {
 
         // Employee validation
         if (employee_id == 0) {
-        	tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger','animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select employee')) ?>, '');
+            tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger','animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select employee')) ?>, '');
             valid = false;
         }
 
         // Month validation
         if (!month) {
-        	tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger','animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select month')) ?>, '');
+            tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger','animated flipInX', 'animated flipOutX', <?= json_encode(__('Please select month')) ?>, '');
             valid = false;
         }
 

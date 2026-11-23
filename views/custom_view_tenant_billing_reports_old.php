@@ -16,7 +16,7 @@ $opening_balance_inv = $result['opening_balance_inv'];
 ?>
 <div class="card">
     <form method="post">
-	<div class="card-header  row">
+    <div class="card-header  row">
 
         <div class="col-lg-6">
             <h5><?= __('Tenant Invoice Reports'); ?></h5>
@@ -24,7 +24,7 @@ $opening_balance_inv = $result['opening_balance_inv'];
         <div class="col-lg-2">
             <div class="form-group w-full table-card-header">
                 <span class="form-label  d-inline-block fw-bold"><?= __('Start Date'); ?><span class="text-danger">*</span></span>
-				<input aria-label="<?= htmlspecialchars(__('Start month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
+                <input aria-label="<?= htmlspecialchars(__('Start month'), ENT_QUOTES, 'UTF-8'); ?>" type="month" class="form-control" name="start_month"  value="<?php echo $start_month; ?>" >
             </div>
         </div>
         <div class="col-lg-2">
@@ -37,7 +37,7 @@ $opening_balance_inv = $result['opening_balance_inv'];
              <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary m-t-30" name="searchfilter"> <?= __('Search'); ?></button>
         </div>
         <div class="col-lg-1">
-         	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?></a>
+             <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?></a>
          </div>
 
     </div>

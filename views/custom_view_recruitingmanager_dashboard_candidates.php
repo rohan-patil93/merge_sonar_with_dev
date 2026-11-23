@@ -1,45 +1,45 @@
 <script>
 function createFolder(){
-	 $.ajax({
-	    url: "ajax.php",
-	    type: "POST",
-	    data: 'page=createrecruitingmanagerdashboardcandidatesfolder',
-	    success: function(response){
-	    	var data = JSON.parse(response);
-	    	if(data.status == "Success"){
-	    		tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',data.message,'');
-	       	 	location.reload();
-	    	}else{
-				tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',data.message,'');
-	    	}
-	    }
-	});
+     $.ajax({
+        url: "ajax.php",
+        type: "POST",
+        data: 'page=createrecruitingmanagerdashboardcandidatesfolder',
+        success: function(response){
+            var data = JSON.parse(response);
+            if(data.status == "Success"){
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',data.message,'');
+                    location.reload();
+            }else{
+                tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',data.message,'');
+            }
+        }
+    });
 }
 
 function submitResumeFiles(){
-	var formData = new FormData();
-	formData.append('page', 'uploadresumefiles');
-	var files = $('#resumes_files')[0].files;
-	if (files && files.length > 0) {
-		$.each(files, function (i, file) {
-		    formData.append('resumes_files[]', file);
-		});
-		$.ajax({
-		    url: 'ajax.php',
-		    type: 'POST',
-		    data: formData,
-		    processData: false,
-		    contentType: false,
-		    success: function (response) {
-		        console.log(response);
-		        tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('File uploaded successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
-		       	 location.reload();
-		    }
-		});
-	} else {
-		tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',<?php echo json_encode(__('Please select at least one file.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
-	    return false;
-	}
+    var formData = new FormData();
+    formData.append('page', 'uploadresumefiles');
+    var files = $('#resumes_files')[0].files;
+    if (files && files.length > 0) {
+        $.each(files, function (i, file) {
+            formData.append('resumes_files[]', file);
+        });
+        $.ajax({
+            url: 'ajax.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log(response);
+                tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('File uploaded successfully'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
+                    location.reload();
+            }
+        });
+    } else {
+        tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',<?php echo json_encode(__('Please select at least one file.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
+        return false;
+    }
 }
 
 function AddCandidate(){
@@ -61,32 +61,32 @@ function AddCandidate(){
 }
 
 function getCandidateList(candidate_ids){
-	var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+    var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
     $('#dynamic_popup1').html(loader);
-	$("#kt_modal_dynamic_popup").modal("show");
-	jQuery.ajax({
-		url: "views/custom_view_recruitingmanager_dashboard_candidate_popup.php",
-		data:'candidate_ids='+candidate_ids,
-		type: "POST",
-		success:function(data){
-			$('#dynamic_popup1').html(data);
-		},
-		error:function (){}
-	});
+    $("#kt_modal_dynamic_popup").modal("show");
+    jQuery.ajax({
+        url: "views/custom_view_recruitingmanager_dashboard_candidate_popup.php",
+        data:'candidate_ids='+candidate_ids,
+        type: "POST",
+        success:function(data){
+            $('#dynamic_popup1').html(data);
+        },
+        error:function (){}
+    });
 }
 function SynchCandidateFolder(){
-	var company_id = '<?php echo $_SESSION['company_id']; ?>';
-	var data_name = '<?php echo $_SESSION['DB_NAME']; ?>';
-	var user_id = '<?php echo $_SESSION['userid']; ?>';
+    var company_id = '<?php echo $_SESSION['company_id']; ?>';
+    var data_name = '<?php echo $_SESSION['DB_NAME']; ?>';
+    var user_id = '<?php echo $_SESSION['userid']; ?>';
 
-	$("#ai_synch_candidate_folder").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
+    $("#ai_synch_candidate_folder").text(<?php echo json_encode(__('Please Wait........'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>);
     $("#ai_synch_candidate_folder").addClass("disabled");
     $.ajax({
         url: "apis/recruitstac_folder_uploaded_files_with_ai.php",
         type: "POST",
         data:'company_id='+company_id+'&data_name='+data_name+'&user_id='+user_id,
         success: function(response) {
-        	console.log(response);
+            console.log(response);
             tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?php echo json_encode(__('Folder files scanned successfully. Candidates created successfully.'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,'');
             location.reload();
         }
@@ -99,139 +99,139 @@ function SynchCandidateFolder(){
 }
 </script>
 <div class="row">
-	<div class="col-lg-7">
-		<div class="card ">
-			<div class="card-header">
-				<h5><?= __('Candidates'); ?></h5>
-			</div>
-			<div class="card-body">
-				<div class="row ">
-					<div class="col-lg-4">
-						<div class="card prod-p-card card-primary mb-0">
-							<div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['total_candidate_ids']; ?>')">
-								<div class="row align-items-center">
-									<div class="col">
-										<h7 class="m-b-5 text-white"><?= __('Total Candidate'); ?></h7>
-										<h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo $candidate_dashboard['total_candidates']; ?></h3>
-									</div>
-									<div class="col-auto">
-										<i class="fas fa-money-bill-alt text-c-blue f-18" style="width:30px;height:30px;padding:9px 0;font-size:12px;"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-						<button type="button" class="btn btn-success btn-sm  mt-2" onclick="AddCandidate()"> <i class="icofont icofont-plus icon-white"></i> <?= __('Candidate'); ?> </button>
-					</div>
-					<div class="col-lg-4">
-						<div class="card prod-p-card card-success mb-0">
-							<div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['linked_candidate_ids']; ?>')">
-								<div class="row align-items-center">
-									<div class="col">
-										<h7 class="m-b-5 text-white"><?= __('Linked Job Postings'); ?></h7>
-										<h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo $candidate_dashboard['linked_candidates']; ?></h3>
-									</div>
-									<div class="col-auto">
-										<i class="fas fa-money-bill-alt text-c-blue f-18" style="width:30px;height:30px;padding:9px 0;font-size:12px;"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-						<a href="index.php?option=COM_LIST_CANDIDATES" class="btn btn-warning btn-sm  mt-2"> <i class="ti ti-timer icon-white"></i><?= __('History'); ?></a>
-					</div>
-					<div class="col-lg-4">
-						<div class="card prod-p-card card-danger mb-0">
-							<div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['unlinked_candidate_ids']; ?>')">
-								<div class="row align-items-center">
-									<div class="col">
-										<h7 class="m-b-5 text-white"><?= __('Un-link Job Posting'); ?></h7>
-										<h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo $candidate_dashboard['unlinked_candidates']; ?></h3>
-									</div>
-									<div class="col-auto">
-										<i class="fas fa-money-bill-alt text-c-blue f-18" style="width:30px;height:30px;padding:9px 0;font-size:12px;"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-						<button type="button" class="btn btn-success btn-sm mt-2" onclick="SynchCandidateFolder()"> <i class="icofont icofont-plus icon-white"></i> <span id="ai_synch_candidate_folder"><?= __('Synch Resume Fld'); ?></span></button>
-					</div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	<div class="col-lg-5">
-		<div class="card sale-card mb-2 ">
-			<div class="card-header">
-				<h5><?= __('Candidates'); ?></h5>
-				<div class="card-header-right table-card-header ">
-				<div class="input-group input-icon-right input-group-button datepickershow_hr_detailT" style="">
-              		<input class="form-control width1" type="file" id="resumes_files" name="resumes_files[]" accept="image/*" multiple aria-label="<?= htmlspecialchars(__('Resume files'), ENT_QUOTES, 'UTF-8'); ?>">
-                	<span class="input-group-text addon-style" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Upload resumes'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="submitResumeFiles()">
-                    	<i class="ti-upload"></i>
-                  	</span>
+    <div class="col-lg-7">
+        <div class="card ">
+            <div class="card-header">
+                <h5><?= __('Candidates'); ?></h5>
+            </div>
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-lg-4">
+                        <div class="card prod-p-card card-primary mb-0">
+                            <div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['total_candidate_ids']; ?>')">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h7 class="m-b-5 text-white"><?= __('Total Candidate'); ?></h7>
+                                        <h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo $candidate_dashboard['total_candidates']; ?></h3>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-money-bill-alt text-c-blue f-18" style="width:30px;height:30px;padding:9px 0;font-size:12px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success btn-sm  mt-2" onclick="AddCandidate()"> <i class="icofont icofont-plus icon-white"></i> <?= __('Candidate'); ?> </button>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card prod-p-card card-success mb-0">
+                            <div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['linked_candidate_ids']; ?>')">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h7 class="m-b-5 text-white"><?= __('Linked Job Postings'); ?></h7>
+                                        <h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo $candidate_dashboard['linked_candidates']; ?></h3>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-money-bill-alt text-c-blue f-18" style="width:30px;height:30px;padding:9px 0;font-size:12px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="index.php?option=COM_LIST_CANDIDATES" class="btn btn-warning btn-sm  mt-2"> <i class="ti ti-timer icon-white"></i><?= __('History'); ?></a>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card prod-p-card card-danger mb-0">
+                            <div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['unlinked_candidate_ids']; ?>')">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h7 class="m-b-5 text-white"><?= __('Un-link Job Posting'); ?></h7>
+                                        <h3 class="m-b-0 f-w-700 text-white f-22 mt-3"><?php echo $candidate_dashboard['unlinked_candidates']; ?></h3>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-money-bill-alt text-c-blue f-18" style="width:30px;height:30px;padding:9px 0;font-size:12px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success btn-sm mt-2" onclick="SynchCandidateFolder()"> <i class="icofont icofont-plus icon-white"></i> <span id="ai_synch_candidate_folder"><?= __('Synch Resume Fld'); ?></span></button>
+                    </div>
                 </div>
             </div>
-			</div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card sale-card mb-2 ">
+            <div class="card-header">
+                <h5><?= __('Candidates'); ?></h5>
+                <div class="card-header-right table-card-header ">
+                <div class="input-group input-icon-right input-group-button datepickershow_hr_detailT" style="">
+                      <input class="form-control width1" type="file" id="resumes_files" name="resumes_files[]" accept="image/*" multiple aria-label="<?= htmlspecialchars(__('Resume files'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <span class="input-group-text addon-style" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Upload resumes'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="submitResumeFiles()">
+                        <i class="ti-upload"></i>
+                      </span>
+                </div>
+            </div>
+            </div>
 
-			<div class="card-body" >
-				<div class=" custom-scroll" style=" height: 150px;">
-				<?php
-				$folder = "uploads/candidate_resume_with_rm/resume_rm_" . $_SESSION['userid'] . "/";
-				if (is_dir($folder)) {
-				    $files = glob($folder . "*");
-				    usort($files, function ($a, $b) {
-				        return filemtime($b) - filemtime($a);
-				    });
-				?>
-				<table>
+            <div class="card-body" >
+                <div class=" custom-scroll" style=" height: 150px;">
+                <?php
+                $folder = "uploads/candidate_resume_with_rm/resume_rm_" . $_SESSION['userid'] . "/";
+                if (is_dir($folder)) {
+                    $files = glob($folder . "*");
+                    usort($files, function ($a, $b) {
+                        return filemtime($b) - filemtime($a);
+                    });
+                ?>
+                <table>
 <thead style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><tr><th scope="col"><?= __('File'); ?></th><th scope="col"><?= __('Modified'); ?></th></tr></thead>
-				<?php
-				$im=1;
-				foreach ($files as $file) {
-				    if (is_file($file)) {
-				?>
-				    <tr>
-				        <td class="w-b-w-s p-1">
-				            <a href="<?php echo $file; ?>" class="text-primary" download><span class="f-12"><?php echo $im.". ".htmlspecialchars(basename($file)); ?></span></a>
-				        </td>
-				        <td>
-				        	<span class="f-12"><?php echo date("d-M-Y h:i:s A", filemtime($file)); ?></span>
-				        </td>
-				    </tr>
-				<?php
-				    }
-				$im++;
-				}
-				?>
-				</table>
-				<?php
-				} else {
-				?>
-				<div class="card-block text-center">
-				    <p><i class="fa-alert text-danger"></i> <?= __('Folder Not Created Please Create'); ?></p>
-				    <img class="img-fluid" src="assets/images/122.png" alt="" />
+                <?php
+                $im=1;
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                ?>
+                    <tr>
+                        <td class="w-b-w-s p-1">
+                            <a href="<?php echo $file; ?>" class="text-primary" download><span class="f-12"><?php echo $im.". ".htmlspecialchars(basename($file)); ?></span></a>
+                        </td>
+                        <td>
+                            <span class="f-12"><?php echo date("d-M-Y h:i:s A", filemtime($file)); ?></span>
+                        </td>
+                    </tr>
+                <?php
+                    }
+                $im++;
+                }
+                ?>
+                </table>
+                <?php
+                } else {
+                ?>
+                <div class="card-block text-center">
+                    <p><i class="fa-alert text-danger"></i> <?= __('Folder Not Created Please Create'); ?></p>
+                    <img class="img-fluid" src="assets/images/122.png" alt="" />
 
-				    <div class="row mt-2">
-				        <div class="col-lg-12 p-0">
-				            <button type="button" class="btn btn-warning" onclick="createFolder('100')">
-				                <i class="ti ti-timer icon-white"></i> <?= __('Folder'); ?>
-				            </button>
-				        </div>
-				    </div>
-				</div>
+                    <div class="row mt-2">
+                        <div class="col-lg-12 p-0">
+                            <button type="button" class="btn btn-warning" onclick="createFolder('100')">
+                                <i class="ti ti-timer icon-white"></i> <?= __('Folder'); ?>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-				<?php } ?>
-			</div>
+                <?php } ?>
+            </div>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
-	<div class="col-lg-12">
-		<div class="card ">
-			<div class="card-header">
-				<h5><?= __('AI Generated Candidates'); ?></h5>
-			</div>
-			<div class="card-body">
-				<div class="row mt-4">
+    <div class="col-lg-12">
+        <div class="card ">
+            <div class="card-header">
+                <h5><?= __('AI Generated Candidates'); ?></h5>
+            </div>
+            <div class="card-body">
+                <div class="row mt-4">
                     <div class="col-2 text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['total_candidate_ids']; ?>')">
                         <div class="s-caption  text-primary"><i class="ti-list f-20"></i></div>
                         <div class="s-cont d-inline-block">
@@ -276,165 +276,165 @@ function SynchCandidateFolder(){
                     </div>
                 </div>
             </div>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 <div class="row">
-	<div class="col-lg-3">
-		<div class="card mb-2">
-			<div class="card-header">
-				<h5><?= __('Today Added Candidated'); ?> <span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo count((array)$candidate_dashboard_today['created_today']); ?></span></h5>
-			</div>
-			<div class="card-body">
-				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate" data-id="candidatefilter" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
-		            <span class="input-group-text addon-style">
-		                <span class=""><span class="ti-search text-white mt-2"></span></span>
-		            </span>
-		        </div>
-		        <div class="custom-scroll" style=" height: 450px;">
-					<?php if(COUNT((array)$candidate_dashboard_today['created_today']) != 0){
-							foreach($candidate_dashboard_today['created_today'] as $canres){
-					?>
-					<div class="align-middle p-1" id="candidatefilter">
-	              		<span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
-	              		<div class="d-inline-block width73">
-	              			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
-	              			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
-	              			<p class="text-muted m-b-0"><?php echo $canres['created_date']; ?></p>
-	              		</div>
-	              	</div>
-					<?php } ?>
-					<?php }else{ ?>
-					<div class="card-px text-center ">
-						<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
-						<div class="text-center px-4">
-							<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-						</div>
-					</div>
-					<?php } ?>
-				</div>
-			</div>
+    <div class="col-lg-3">
+        <div class="card mb-2">
+            <div class="card-header">
+                <h5><?= __('Today Added Candidated'); ?> <span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo count((array)$candidate_dashboard_today['created_today']); ?></span></h5>
+            </div>
+            <div class="card-body">
+                <div class="input-group input-group-button mt-2">
+                    <input type="text" id="dynamicfilterhideshow_candidate" data-id="candidatefilter" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <span class="input-group-text addon-style">
+                        <span class=""><span class="ti-search text-white mt-2"></span></span>
+                    </span>
+                </div>
+                <div class="custom-scroll" style=" height: 450px;">
+                    <?php if(COUNT((array)$candidate_dashboard_today['created_today']) != 0){
+                            foreach($candidate_dashboard_today['created_today'] as $canres){
+                    ?>
+                    <div class="align-middle p-1" id="candidatefilter">
+                          <span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
+                          <div class="d-inline-block width73">
+                              <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
+                              <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
+                              <p class="text-muted m-b-0"><?php echo $canres['created_date']; ?></p>
+                          </div>
+                      </div>
+                    <?php } ?>
+                    <?php }else{ ?>
+                    <div class="card-px text-center ">
+                        <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
+                        <div class="text-center px-4">
+                            <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
 
-		</div>
-	</div>
-	<div class="col-lg-3">
-		<div class="card mb-2">
-			<div class="card-header">
-				<h5><?= __('Today Screening Started'); ?><span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_start_today']); ?></span>
-				</h5>
-			</div>
-			<div class="card-body">
-				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate1" data-id="candidatefilter1" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
-		            <span class="input-group-text addon-style">
-		                <span class=""><span class="ti-search text-white mt-2"></span></span>
-		            </span>
-		        </div>
-		        <div class="custom-scroll" style=" height: 450px;">
-				<?php if(COUNT((array)$candidate_dashboard_today['screening_start_today']) != 0){
-						foreach($candidate_dashboard_today['screening_start_today'] as $canres){
-				?>
-				<div class="align-middle p-1" id="candidatefilter1">
-              		<span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
-              		<div class="d-inline-block width73">
-              			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
-              			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
-              			<p class="text-muted m-b-0"><?php echo $canres['screening_start_datetime']; ?></p>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card mb-2">
+            <div class="card-header">
+                <h5><?= __('Today Screening Started'); ?><span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_start_today']); ?></span>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="input-group input-group-button mt-2">
+                    <input type="text" id="dynamicfilterhideshow_candidate1" data-id="candidatefilter1" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <span class="input-group-text addon-style">
+                        <span class=""><span class="ti-search text-white mt-2"></span></span>
+                    </span>
+                </div>
+                <div class="custom-scroll" style=" height: 450px;">
+                <?php if(COUNT((array)$candidate_dashboard_today['screening_start_today']) != 0){
+                        foreach($candidate_dashboard_today['screening_start_today'] as $canres){
+                ?>
+                <div class="align-middle p-1" id="candidatefilter1">
+                      <span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
+                      <div class="d-inline-block width73">
+                          <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
+                          <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
+                          <p class="text-muted m-b-0"><?php echo $canres['screening_start_datetime']; ?></p>
 
-              		</div>
-              	</div>
-				<?php } ?>
-				<?php }else{ ?>
-				<div class="card-px text-center ">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
-					<div class="text-center px-4">
-						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-					</div>
-				</div>
-				<?php } ?>
-			</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-3">
-		<div class="card mb-2">
-			<div class="card-header">
-				<h5><?= __('Today Screening Completed'); ?><span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_end_today']); ?></span>
-				</h5>
-			</div>
-			<div class="card-body">
-				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate2" data-id="candidatefilter2" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
-		            <span class="input-group-text addon-style">
-		                <span class=""><span class="ti-search text-white mt-2"></span></span>
-		            </span>
-		        </div>
-		        <div class="custom-scroll" style=" height: 450px;">
-				<?php if(COUNT((array)$candidate_dashboard_today['screening_end_today']) != 0){
-						foreach($candidate_dashboard_today['screening_end_today'] as $canres){
-				?>
-				<div class="align-middle p-1" id="candidatefilter2">
-              		<span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
-              		<div class="d-inline-block width73">
-              			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class=" text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
-              			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
-              			<p class="text-muted m-b-0"><?php echo $canres['screening_end_datetime']; ?></p>
+                      </div>
+                  </div>
+                <?php } ?>
+                <?php }else{ ?>
+                <div class="card-px text-center ">
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
+                    <div class="text-center px-4">
+                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card mb-2">
+            <div class="card-header">
+                <h5><?= __('Today Screening Completed'); ?><span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['screening_end_today']); ?></span>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="input-group input-group-button mt-2">
+                    <input type="text" id="dynamicfilterhideshow_candidate2" data-id="candidatefilter2" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <span class="input-group-text addon-style">
+                        <span class=""><span class="ti-search text-white mt-2"></span></span>
+                    </span>
+                </div>
+                <div class="custom-scroll" style=" height: 450px;">
+                <?php if(COUNT((array)$candidate_dashboard_today['screening_end_today']) != 0){
+                        foreach($candidate_dashboard_today['screening_end_today'] as $canres){
+                ?>
+                <div class="align-middle p-1" id="candidatefilter2">
+                      <span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
+                      <div class="d-inline-block width73">
+                          <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class=" text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
+                          <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
+                          <p class="text-muted m-b-0"><?php echo $canres['screening_end_datetime']; ?></p>
 
-              		</div>
-              	</div>
-				<?php } ?>
-				<?php }else{ ?>
-				<div class="card-px text-center ">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
-					<div class="text-center px-4">
-						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-					</div>
-				</div>
-				<?php } ?>
-			</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-3">
-		<div class="card mb-2">
-			<div class="card-header">
-				<h5><?= __('Today AI Approved'); ?><span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['ai_shortlisted_today']); ?></span>
-				</h5>
-			</div>
-			<div class="card-body ">
-				<div class="input-group input-group-button mt-2">
-		            <input type="text" id="dynamicfilterhideshow_candidate3" data-id="candidatefilter3" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
-		            <span class="input-group-text addon-style">
-		                <span class=""><span class="ti-search text-white mt-2"></span></span>
-		            </span>
-		        </div>
-		        <div class="custom-scroll" style=" height: 450px;">
-				<?php if(COUNT((array)$candidate_dashboard_today['ai_shortlisted_today']) != 0){
-						foreach($candidate_dashboard_today['ai_shortlisted_today'] as $canres){
-				?>
-				<div class="align-middle p-1" id="candidatefilter3">
-              		<span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
-              		<div class="d-inline-block width73">
-              			<a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
-              			<p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
-              			<p class="text-muted m-b-0"><?php echo $canres['ai_summary']!=""?$canres['ai_summary']:"-"; ?></p>
+                      </div>
+                  </div>
+                <?php } ?>
+                <?php }else{ ?>
+                <div class="card-px text-center ">
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
+                    <div class="text-center px-4">
+                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card mb-2">
+            <div class="card-header">
+                <h5><?= __('Today AI Approved'); ?><span class="label label-xs label-primary text-white m-l-10" style="background-color:  !important"><?php echo COUNT((array)$candidate_dashboard_today['ai_shortlisted_today']); ?></span>
+                </h5>
+            </div>
+            <div class="card-body ">
+                <div class="input-group input-group-button mt-2">
+                    <input type="text" id="dynamicfilterhideshow_candidate3" data-id="candidatefilter3" data-type="div" class="form-control form-control-sm width1 dynamicfilterhideshow" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <span class="input-group-text addon-style">
+                        <span class=""><span class="ti-search text-white mt-2"></span></span>
+                    </span>
+                </div>
+                <div class="custom-scroll" style=" height: 450px;">
+                <?php if(COUNT((array)$candidate_dashboard_today['ai_shortlisted_today']) != 0){
+                        foreach($candidate_dashboard_today['ai_shortlisted_today'] as $canres){
+                ?>
+                <div class="align-middle p-1" id="candidatefilter3">
+                      <span  alt="<?= htmlspecialchars(__('user image'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" data-toggle="tooltip" title="" data-original-title="<?php echo $canres['display_name']; ?>"><?php echo initials($canres['display_name']); ?></span>
+                      <div class="d-inline-block width73">
+                          <a href="index.php?option=COM_INSERT_CANDIDATE&Rid=<?php echo deocdeId("id:".$canres['id']); ?>" class="text-capitalize text-primary" onclick="getBasicInfoPopUp(<?php echo $canres['id']; ?>)" ><h6 class="mb-1"><?php echo $canres['display_name']; ?></h6></a>
+                          <p class="text-muted m-b-0"><?php echo $canres['email_id']!="" ? $canres['email_id'] : "&nbsp;"; ?></p>
+                          <p class="text-muted m-b-0"><?php echo $canres['ai_summary']!=""?$canres['ai_summary']:"-"; ?></p>
 
-              		</div>
-              	</div>
-				<?php } ?>
-				<?php }else{ ?>
-				<div class="card-px text-center ">
-					<p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
-					<div class="text-center px-4">
-						<img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-					</div>
-				</div>
-				<?php } ?>
-			</div>
-			</div>
-		</div>
-	</div>
+                      </div>
+                  </div>
+                <?php } ?>
+                <?php }else{ ?>
+                <div class="card-px text-center ">
+                    <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Candidates'); ?> </p>
+                    <div class="text-center px-4">
+                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

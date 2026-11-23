@@ -4,8 +4,8 @@ include_once '../dbconfig.php';
 include_once '../comm.php';
 ?>
 <script type="text/javascript">
-	function addmoreRows() {
-		 var count = $(".itemRow123").length;
+    function addmoreRows() {
+         var count = $(".itemRow123").length;
          count++;
         var htmlRows = '';
         htmlRows += '<tr class="itemRow123">';
@@ -19,130 +19,130 @@ include_once '../comm.php';
 
         htmlRows += '</tr>';
         $('#invoiceItem123').append(htmlRows);
-	}
-	function submitrom(){
-		//alert("ravi");
-		//var arr = [];
-		/*arr["name"]= new Array();
-		arr["descrption"]= new Array();
-		arr["short_code"]= new Array();
-		arr["frequency"]= new Array();
-		arr["mandatory"]= new Array();*/
-		//arr['kpi_id'] = $('#kpi_id').val();
-		var str = 'kpi_id='+$('#kpi_id').val();
-		var i=0;
-		$("[id^='name_']").each(function() {
+    }
+    function submitrom(){
+        //alert("ravi");
+        //var arr = [];
+        /*arr["name"]= new Array();
+        arr["descrption"]= new Array();
+        arr["short_code"]= new Array();
+        arr["frequency"]= new Array();
+        arr["mandatory"]= new Array();*/
+        //arr['kpi_id'] = $('#kpi_id').val();
+        var str = 'kpi_id='+$('#kpi_id').val();
+        var i=0;
+        $("[id^='name_']").each(function() {
         var id = $(this).attr('id');
         id = id.replace("name_",'');
-		alert(id);
-		/*arr['name'][i] = $('#name_'+id).val();
-		arr['descrption'][i] = $('#descrption_'+id).val();
-		arr['short_code'][i] = $('#short_code_'+id).val();
-		arr['frequency'][i] = $('#frequency_'+id).val();
-		arr['mandatory'][i] = $('#mandatory_'+id).val();*/
-		i++;
-		str += '&name_'+id+'='+$('#name_'+id).val()+'&descrption_'+id+'='+$('#descrption_'+id).val()+'&short_code_'+id+'='+$('#short_code_'+id).val()+'&frequency_'+id+'='+$('#frequency_'+id).val()+'&mandatory_'+id+'='+$('#mandatory_'+id).val();
-	  	});
-	  	str += '&count='+i;
-		console.log(str);
-	  /*	console.log(arr.toString());
-  		var myJSON1 = JSON.stringify(arr);
-  		console.log(myJSON1);*/
-	    $.ajax({
-	        url: "ajax.php",
-	        type: "POST",
-	        data: 'page=task_submit&data'+str,
-	        success: function(response) {
-	        	console.log(response);
-	            //$('.success').html(response);
-	            swal.fire({
-							title: "<?php echo __('Record has been saved successfully'); ?> ",
-							text: "<?php echo __('Do you want to close ?'); ?> ",
-							type: "success",
-							buttonsStyling: false,
-							confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, close!'); ?>",
-							confirmButtonClass: "btn btn-danger",
-							showCancelButton: true,
-							cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, continue'); ?>",
-							cancelButtonClass: "btn btn-default"
-						}).then(function(result) {
-							if (result.value) {
-								$('#kt_modal_KTDatatable_remote').modal('hide');
-							}
-						});
+        alert(id);
+        /*arr['name'][i] = $('#name_'+id).val();
+        arr['descrption'][i] = $('#descrption_'+id).val();
+        arr['short_code'][i] = $('#short_code_'+id).val();
+        arr['frequency'][i] = $('#frequency_'+id).val();
+        arr['mandatory'][i] = $('#mandatory_'+id).val();*/
+        i++;
+        str += '&name_'+id+'='+$('#name_'+id).val()+'&descrption_'+id+'='+$('#descrption_'+id).val()+'&short_code_'+id+'='+$('#short_code_'+id).val()+'&frequency_'+id+'='+$('#frequency_'+id).val()+'&mandatory_'+id+'='+$('#mandatory_'+id).val();
+          });
+          str += '&count='+i;
+        console.log(str);
+      /*    console.log(arr.toString());
+          var myJSON1 = JSON.stringify(arr);
+          console.log(myJSON1);*/
+        $.ajax({
+            url: "ajax.php",
+            type: "POST",
+            data: 'page=task_submit&data'+str,
+            success: function(response) {
+                console.log(response);
+                //$('.success').html(response);
+                swal.fire({
+                            title: "<?php echo __('Record has been saved successfully'); ?> ",
+                            text: "<?php echo __('Do you want to close ?'); ?> ",
+                            type: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "<i class='la la-hand-o-up'></i><?php echo __('Yes, close!'); ?>",
+                            confirmButtonClass: "btn btn-danger",
+                            showCancelButton: true,
+                            cancelButtonText: "<i class='la la-hand-o-right'></i> <?php echo __('No, continue'); ?>",
+                            cancelButtonClass: "btn btn-default"
+                        }).then(function(result) {
+                            if (result.value) {
+                                $('#kt_modal_KTDatatable_remote').modal('hide');
+                            }
+                        });
 
-	        }
-	    });
-	}
+            }
+        });
+    }
 </script>
 
 <div class="modal-header">
-						<h5 class="modal-title">
-							<?php echo __('Goals'); ?>
-							<small>&nbsp;&nbsp; <b><?php echo __('Table'); ?>: </b>&nbsp; <?php echo $table; ?> <b> &nbsp;&nbsp; <?php echo __('Field'); ?>: </b>&nbsp; <?php echo $field; ?> </small>
-						</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body" >
-						<div class="row align-items-center" style="margin-top: 10px;padding: 3px;">
-								<div class="col-lg-12">
-									<table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem123">
-											<tr>
-												<th scope="col" class="" width="25%"><?php echo __('Indicator Name'); ?></th>
-												<th scope="col" class="thheader" width="30%"><?php echo __('Weightage'); ?></th>
-												<th scope="col" class="thheader" width="15%"><?php echo __('model'); ?></th>
-												<th scope="col" class="thheader" width="15%"><?php echo __('Frequency'); ?></th>
-												<th scope="col" class="thheader" width="15%"><?php echo __('traget'); ?></th>
-												<th scope="col" class="thheader" width="5%"></th>
-											</tr>
-											<?php /*if(count((array)$tr)>0){
-												$count = 1;
-												foreach ($tr as $td) {*/?>
+                        <h5 class="modal-title">
+                            <?php echo __('Goals'); ?>
+                            <small>&nbsp;&nbsp; <b><?php echo __('Table'); ?>: </b>&nbsp; <?php echo $table; ?> <b> &nbsp;&nbsp; <?php echo __('Field'); ?>: </b>&nbsp; <?php echo $field; ?> </small>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo __('Close'); ?>">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" >
+                        <div class="row align-items-center" style="margin-top: 10px;padding: 3px;">
+                                <div class="col-lg-12">
+                                    <table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem123">
+                                            <tr>
+                                                <th scope="col" class="" width="25%"><?php echo __('Indicator Name'); ?></th>
+                                                <th scope="col" class="thheader" width="30%"><?php echo __('Weightage'); ?></th>
+                                                <th scope="col" class="thheader" width="15%"><?php echo __('model'); ?></th>
+                                                <th scope="col" class="thheader" width="15%"><?php echo __('Frequency'); ?></th>
+                                                <th scope="col" class="thheader" width="15%"><?php echo __('traget'); ?></th>
+                                                <th scope="col" class="thheader" width="5%"></th>
+                                            </tr>
+                                            <?php /*if(count((array)$tr)>0){
+                                                $count = 1;
+                                                foreach ($tr as $td) {*/?>
 
 
-												<tr class="itemRow123" id="qur_div_<?php echo $count; ?>"  >
-													<td>
-														<input type="text" name="name[]" class="form-control" value="" id="name_1" aria-label="<?php echo __('Name'); ?>">
-													</td>
-													<td>
-														<textarea class="form-control" name="descrption[]" id="descrption_1" aria-label="<?php echo __('Description'); ?>"></textarea>
-													</td>
-													<td>
-														<input type="text" name="short_code[]" class="form-control" value="" id="short_code_1" aria-label="<?php echo __('Short Code'); ?>">
-													</td>
-													<td>
-														<input type="text" name="frequency[]" class="form-control" value="" id="frequency_1" aria-label="<?php echo __('Frequency'); ?>">
-													</td>
-													<td>
-														<select class="form-control" name="mandatory[]" id="mandatory_1" aria-label="<?php echo __('Mandatory'); ?>">
-															<option value="0"> <?php echo __('NO'); ?></option>
-															<option value="1"> <?php echo __('Yes'); ?></option>
-														</select>
-													</td>
-													<td>
-														<input type="hidden" value="0" id="delete_value_<?php echo $count; ?>" >
-														<button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)"><?php echo __('Delete'); ?></button>
-													</td>
-												</tr>
-											<?php/* $count++;  } }*/ ?>
-									</table>
-									<div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
-								<button class="btn btn-success" id="addRows" type="button" onclick="addmoreRows()">+ <?php echo __('Add More'); ?></button>&nbsp;&nbsp;
+                                                <tr class="itemRow123" id="qur_div_<?php echo $count; ?>"  >
+                                                    <td>
+                                                        <input type="text" name="name[]" class="form-control" value="" id="name_1" aria-label="<?php echo __('Name'); ?>">
+                                                    </td>
+                                                    <td>
+                                                        <textarea class="form-control" name="descrption[]" id="descrption_1" aria-label="<?php echo __('Description'); ?>"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="short_code[]" class="form-control" value="" id="short_code_1" aria-label="<?php echo __('Short Code'); ?>">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="frequency[]" class="form-control" value="" id="frequency_1" aria-label="<?php echo __('Frequency'); ?>">
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" name="mandatory[]" id="mandatory_1" aria-label="<?php echo __('Mandatory'); ?>">
+                                                            <option value="0"> <?php echo __('NO'); ?></option>
+                                                            <option value="1"> <?php echo __('Yes'); ?></option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" value="0" id="delete_value_<?php echo $count; ?>" >
+                                                        <button class="btn btn-warning" id="<?php echo $count; ?>" type="button" onclick="deletestatickRows(this.id)"><?php echo __('Delete'); ?></button>
+                                                    </td>
+                                                </tr>
+                                            <?php/* $count++;  } }*/ ?>
+                                    </table>
+                                    <div class="row align-items-center" style="margin-top: 10px;margin-left: 2px;">
+                                <button class="btn btn-success" id="addRows" type="button" onclick="addmoreRows()">+ <?php echo __('Add More'); ?></button>&nbsp;&nbsp;
 
-							</div>
-								</div>
-				<!--end: Search Form -->
-			</div>
-		</div>
-			<div class="modal-footer">
-				<?php print_r($_POST); ?>
-				<input type="hidden" name="kpi_id" id="kpi_id" value="<?php echo $_POST['id']; ?>">
-				<input type="hidden" name="page" value="dis_submit">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo __('Close'); ?></button>
-				<button type="button" class="btn btn-primary" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
-			</div>
-	</form>
+                            </div>
+                                </div>
+                <!--end: Search Form -->
+            </div>
+        </div>
+            <div class="modal-footer">
+                <?php print_r($_POST); ?>
+                <input type="hidden" name="kpi_id" id="kpi_id" value="<?php echo $_POST['id']; ?>">
+                <input type="hidden" name="page" value="dis_submit">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo __('Close'); ?></button>
+                <button type="button" class="btn btn-primary" onclick="submitrom()" ><?php echo __('Submit'); ?></button>
+            </div>
+    </form>
 </div>
 <!-- local datatable modal -->

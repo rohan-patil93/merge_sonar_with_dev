@@ -37,7 +37,7 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
         $tringselect = 0;
     }
     if(($tringselect=="" || $tringselect=="0")){
-       	$url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
+           $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
     }else{
       $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&selectvalue=".$tringselect."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
     }

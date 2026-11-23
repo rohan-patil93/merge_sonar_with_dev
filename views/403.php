@@ -28,7 +28,7 @@ body {
 .container h1 {
   font-family: var(--font-header);
   font-size: calc(4rem + 2vw);
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 .container p {
   text-transform: uppercase;

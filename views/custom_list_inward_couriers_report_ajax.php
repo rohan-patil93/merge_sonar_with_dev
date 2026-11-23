@@ -22,98 +22,98 @@ $cssdata = array();
 if(count((array)$rows) > 0){
 ?>
 <div class="col-12 table-responsive">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th scope="col"><?= __('Sl.No'); ?></th>
-				<th scope="col"><?= __('Coming Date'); ?></th>
-				<th scope="col"><?= __('Coming Time'); ?></th>
-				<th scope="col"><?= __('Tracking No'); ?></th>
-				<th scope="col"><?= __('Vehicle No'); ?></th>
-				<th scope="col"><?= __('Coming From'); ?></th>
-				<th scope="col"><?= __('To Address'); ?></th>
-				<th scope="col"><?= __('Description of Materials'); ?></th>
-				<th scope="col"><?= __('Qty.'); ?></th>
-				<th scope="col"><?= __('Brought By Name'); ?></th>
-				<th scope="col"><?= __('Received By Name'); ?></th>
-				<th scope="col"><?= __('Received Date'); ?></th>
-				<th scope="col"><?= __('Received Time'); ?></th>
-				<th scope="col"><?= __('Security Sign'); ?></th>
-				<th scope="col"><?= __('Remarks'); ?></th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php
-				$i = 1;
-				foreach($rows as $row){
-					$coming_date = isset($row['coming_date']) ? $row['coming_date'] : '';
-					$coming_time = isset($row['coming_time']) ? $row['coming_time'] : '';
-					$tracking_no_val = isset($row['tracking_no']) ? $row['tracking_no'] : '';
-					$vehicle_no = isset($row['vehicle_no']) ? $row['vehicle_no'] : '';
-					$coming_from = isset($row['coming_from']) ? $row['coming_from'] : '';
-					$to_address = isset($row['to_address']) ? $row['to_address'] : '';
-					$description = isset($row['description']) ? $row['description'] : '';
-					$qty = isset($row['qty']) ? $row['qty'] : '';
-					$brought_by_name = isset($row['brought_by_name']) ? $row['brought_by_name'] : '';
-					$received_by_name = isset($row['received_by_name']) ? $row['received_by_name'] : '';
-					$received_date = isset($row['received_date']) ? $row['received_date'] : '';
-					$received_time = isset($row['received_time']) ? $row['received_time'] : '';
-					$security_sign = isset($row['security_sign']) ? $row['security_sign'] : '';
-					$remarks = isset($row['remarks']) ? $row['remarks'] : '';
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"><?= __('Sl.No'); ?></th>
+                <th scope="col"><?= __('Coming Date'); ?></th>
+                <th scope="col"><?= __('Coming Time'); ?></th>
+                <th scope="col"><?= __('Tracking No'); ?></th>
+                <th scope="col"><?= __('Vehicle No'); ?></th>
+                <th scope="col"><?= __('Coming From'); ?></th>
+                <th scope="col"><?= __('To Address'); ?></th>
+                <th scope="col"><?= __('Description of Materials'); ?></th>
+                <th scope="col"><?= __('Qty.'); ?></th>
+                <th scope="col"><?= __('Brought By Name'); ?></th>
+                <th scope="col"><?= __('Received By Name'); ?></th>
+                <th scope="col"><?= __('Received Date'); ?></th>
+                <th scope="col"><?= __('Received Time'); ?></th>
+                <th scope="col"><?= __('Security Sign'); ?></th>
+                <th scope="col"><?= __('Remarks'); ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                $i = 1;
+                foreach($rows as $row){
+                    $coming_date = isset($row['coming_date']) ? $row['coming_date'] : '';
+                    $coming_time = isset($row['coming_time']) ? $row['coming_time'] : '';
+                    $tracking_no_val = isset($row['tracking_no']) ? $row['tracking_no'] : '';
+                    $vehicle_no = isset($row['vehicle_no']) ? $row['vehicle_no'] : '';
+                    $coming_from = isset($row['coming_from']) ? $row['coming_from'] : '';
+                    $to_address = isset($row['to_address']) ? $row['to_address'] : '';
+                    $description = isset($row['description']) ? $row['description'] : '';
+                    $qty = isset($row['qty']) ? $row['qty'] : '';
+                    $brought_by_name = isset($row['brought_by_name']) ? $row['brought_by_name'] : '';
+                    $received_by_name = isset($row['received_by_name']) ? $row['received_by_name'] : '';
+                    $received_date = isset($row['received_date']) ? $row['received_date'] : '';
+                    $received_time = isset($row['received_time']) ? $row['received_time'] : '';
+                    $security_sign = isset($row['security_sign']) ? $row['security_sign'] : '';
+                    $remarks = isset($row['remarks']) ? $row['remarks'] : '';
 
-					$coming_date_display = ($coming_date != '' && $coming_date != '0000-00-00') ? fromDate($coming_date) : '-';
-					$received_date_display = ($received_date != '' && $received_date != '0000-00-00') ? fromDate($received_date) : '-';
-					$coming_time_display = ($coming_time != '') ? $coming_time : '-';
-					$received_time_display = ($received_time != '') ? $received_time : '-';
+                    $coming_date_display = ($coming_date != '' && $coming_date != '0000-00-00') ? fromDate($coming_date) : '-';
+                    $received_date_display = ($received_date != '' && $received_date != '0000-00-00') ? fromDate($received_date) : '-';
+                    $coming_time_display = ($coming_time != '') ? $coming_time : '-';
+                    $received_time_display = ($received_time != '') ? $received_time : '-';
 
-					$cssdata[] = array(
-						'Sl.No' => $i,
-						'Coming Date' => $coming_date_display,
-						'Coming Time' => $coming_time_display,
-						'Tracking No' => $tracking_no_val,
-						'Vehicle No' => $vehicle_no,
-						'Coming From' => $coming_from,
-						'To Address' => $to_address,
-						'Description of Materials' => $description,
-						'Qty.' => $qty,
-						'Brought By Name' => $brought_by_name,
-						'Received By Name' => $received_by_name,
-						'Received Date' => $received_date_display,
-						'Received Time' => $received_time_display,
-						'Security Sign' => $security_sign,
-						'Remarks' => $remarks
-					);
-			?>
-				<tr>
-					<td><?php echo $i; ?></td>
-					<td><?php echo htmlspecialchars($coming_date_display); ?></td>
-					<td><?php echo htmlspecialchars($coming_time_display); ?></td>
-					<td><?php echo ($tracking_no_val != '') ? htmlspecialchars($tracking_no_val) : '-'; ?></td>
-					<td><?php echo ($vehicle_no != '') ? htmlspecialchars($vehicle_no) : ''; ?></td>
-					<td><?php echo ($coming_from != '') ? htmlspecialchars($coming_from) : '-'; ?></td>
-					<td><?php echo ($to_address != '') ? htmlspecialchars($to_address) : '-'; ?></td>
-					<td><?php echo ($description != '') ? htmlspecialchars($description) : '-'; ?></td>
-					<td><?php echo ($qty != '') ? htmlspecialchars($qty) : '-'; ?></td>
-					<td><?php echo ($brought_by_name != '') ? htmlspecialchars($brought_by_name) : '-'; ?></td>
-					<td><?php echo ($received_by_name != '') ? htmlspecialchars($received_by_name) : '-'; ?></td>
-					<td><?php echo htmlspecialchars($received_date_display); ?></td>
-					<td><?php echo htmlspecialchars($received_time_display); ?></td>
-					<td><?php echo ($security_sign != '') ? htmlspecialchars($security_sign) : ''; ?></td>
-					<td><?php echo ($remarks != '') ? htmlspecialchars($remarks) : '-'; ?></td>
-				</tr>
-			<?php
-					$i++;
-				}
-				$_SESSION['download_data'] = $cssdata;
-			?>
-		</tbody>
-	</table>
+                    $cssdata[] = array(
+                        'Sl.No' => $i,
+                        'Coming Date' => $coming_date_display,
+                        'Coming Time' => $coming_time_display,
+                        'Tracking No' => $tracking_no_val,
+                        'Vehicle No' => $vehicle_no,
+                        'Coming From' => $coming_from,
+                        'To Address' => $to_address,
+                        'Description of Materials' => $description,
+                        'Qty.' => $qty,
+                        'Brought By Name' => $brought_by_name,
+                        'Received By Name' => $received_by_name,
+                        'Received Date' => $received_date_display,
+                        'Received Time' => $received_time_display,
+                        'Security Sign' => $security_sign,
+                        'Remarks' => $remarks
+                    );
+            ?>
+                <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo htmlspecialchars($coming_date_display); ?></td>
+                    <td><?php echo htmlspecialchars($coming_time_display); ?></td>
+                    <td><?php echo ($tracking_no_val != '') ? htmlspecialchars($tracking_no_val) : '-'; ?></td>
+                    <td><?php echo ($vehicle_no != '') ? htmlspecialchars($vehicle_no) : ''; ?></td>
+                    <td><?php echo ($coming_from != '') ? htmlspecialchars($coming_from) : '-'; ?></td>
+                    <td><?php echo ($to_address != '') ? htmlspecialchars($to_address) : '-'; ?></td>
+                    <td><?php echo ($description != '') ? htmlspecialchars($description) : '-'; ?></td>
+                    <td><?php echo ($qty != '') ? htmlspecialchars($qty) : '-'; ?></td>
+                    <td><?php echo ($brought_by_name != '') ? htmlspecialchars($brought_by_name) : '-'; ?></td>
+                    <td><?php echo ($received_by_name != '') ? htmlspecialchars($received_by_name) : '-'; ?></td>
+                    <td><?php echo htmlspecialchars($received_date_display); ?></td>
+                    <td><?php echo htmlspecialchars($received_time_display); ?></td>
+                    <td><?php echo ($security_sign != '') ? htmlspecialchars($security_sign) : ''; ?></td>
+                    <td><?php echo ($remarks != '') ? htmlspecialchars($remarks) : '-'; ?></td>
+                </tr>
+            <?php
+                    $i++;
+                }
+                $_SESSION['download_data'] = $cssdata;
+            ?>
+        </tbody>
+    </table>
 </div>
 <?php }else{ ?>
 <div class="card-px text-center py-20 mt-2">
-	<p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Inward Couriers'); ?> </p>
-	<div class="text-center px-4">
-		<img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
-	</div>
+    <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?= __('No Inward Couriers'); ?> </p>
+    <div class="text-center px-4">
+        <img class="mw-100 mh-300px mx-height-300" alt="" src="assets/images/work.png">
+    </div>
 </div>
 <?php } ?>

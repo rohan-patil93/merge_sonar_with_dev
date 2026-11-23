@@ -891,7 +891,7 @@ if($list['current_status'] == ST_APPROVED && ($table_name =="supplier_bills" || 
                             <a href="#!" role="button" onclick="viewAllRecord('<?php echo $optiondetails['application_table_name']; ?>',<?php echo ST_DRAFT; ?>)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" class=" b-b-primary text-primary float-right"><?= __('View all'); ?></a>
                         </div>
                         <div class="card-body">
-                            <?php 
+                            <?php
                              $mm = 1; if(count((array)$draftres) !=0){ foreach($draftres as $activeres1){ if($mm == 4){ break;
                              } ?>
                             <div class="row mt-3 pb-3" style="border-bottom:1px dashed #cccccc;">

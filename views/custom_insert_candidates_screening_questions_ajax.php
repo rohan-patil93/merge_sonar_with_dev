@@ -22,7 +22,7 @@ if($gettype =="QuestionsAnswers"){
         </tr>
     <?php $seq=1; foreach($candidate_screening_questions_and_answers as $qa){ ?>
         <tr>
-        	<td><?php echo $seq; ?></td>
+            <td><?php echo $seq; ?></td>
             <td class="p-2">
                 <p class="text-primar  w-b-w-s"><?php echo $qa['questions']; ?></p>
             </td>

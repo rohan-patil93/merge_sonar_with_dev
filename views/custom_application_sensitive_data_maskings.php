@@ -831,12 +831,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </td>
                 <td>
-                    <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first" 
+                    <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first"
                            name="custom_type_show_first[]" value="\${sFirst}"
                            oninput="updateRowPreview('\${key}')">
                 </td>
                 <td>
-                    <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last" 
+                    <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last"
                            name="custom_type_show_last[]" value="\${sLast}"
                            oninput="updateRowPreview('\${key}')">
                 </td>

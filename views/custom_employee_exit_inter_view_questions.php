@@ -41,7 +41,7 @@ function formsubmit(){
       type: "POST",
       success:function(data){
         console.log(data);
-		$('#kt_modal_KTDatatable_remote1').modal("hide");
+        $('#kt_modal_KTDatatable_remote1').modal("hide");
       },
       error:function (){}
   });
@@ -65,7 +65,7 @@ function formsubmit(){
       <input type="hidden" id="response_start_time" name="response_start_time" value="<?php echo date('H:i:s'); ?>">
       <?php
       $value_id = 0;
-	if(count((array)$display_questions)>0){
+    if(count((array)$display_questions)>0){
       foreach ($display_questions as $questionid=>$val) {
         $value_id++;
         $selectedoption = json_decode($answer[$questionid],1);
@@ -111,8 +111,8 @@ function formsubmit(){
        </div>
      <?php }
      }else{ ?>
-		<div class="f-24 text-danger text-center"><?php echo $_SESSION['error_message']['8009']; ?> </div>
-	<?php } ?>
+        <div class="f-24 text-danger text-center"><?php echo $_SESSION['error_message']['8009']; ?> </div>
+    <?php } ?>
    </div>
   </form>
 </div>

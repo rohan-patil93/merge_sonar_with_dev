@@ -28,13 +28,13 @@ if($_SESSION['insert_msg'] !=""){
 ?>
 <script type="text/javascript" src="../assets/js/custom_list_contracts.js"></script>
 <script type="text/javascript">
-	<?php if(isset($_GET['CTYPE'])){ ?>
-	document.onreadystatechange = function(){
-	    if(document.readyState == "complete") {
-		$("#hide_current_page").val(1);
-		getContractList();
-	}
-	}
+    <?php if(isset($_GET['CTYPE'])){ ?>
+    document.onreadystatechange = function(){
+        if(document.readyState == "complete") {
+        $("#hide_current_page").val(1);
+        getContractList();
+    }
+    }
 <?php } ?>
 </script>
 <div class="card">

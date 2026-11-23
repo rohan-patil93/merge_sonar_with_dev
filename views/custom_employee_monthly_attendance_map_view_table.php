@@ -7,13 +7,13 @@ $employee_id = $_POST['employee_id'] ?? 0;
 $month       = $_POST['month'] ?? '';
 
 if (!$employee_id || !$month) {
-	echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
-	exit;
+    echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
+    exit;
 }
 // Call API
 $url = API . "?mode=getEmployeesAttendanceData&method=get"
-	. "&employee_id={$employee_id}"
-	. "&month={$month}";
+    . "&employee_id={$employee_id}"
+    . "&month={$month}";
 $response = callAPI($url);
 $response = json_decode($response, true);
 $attendance = $response['attendance_data'] ?? array();
@@ -60,26 +60,26 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
 ?>
 
 <div class="col-12">
-	<div class="card">
-		<div class="card-header">
-			<h5><?= __('Employee Attendance Report') ?> (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
-		</div>
+    <div class="card">
+        <div class="card-header">
+            <h5><?= __('Employee Attendance Report') ?> (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
+        </div>
 
-		<div class="card-body">
+        <div class="card-body">
 
-			<div class="table-responsive">
-				<table class="table table-bordered table-hover">
-					<thead>
-						<tr>
-							<th scope="col" width="5%"><?= __('S.No') ?></th>
-							<th scope="col"><?= __('Attendance Date') ?></th>
-							<th scope="col"><?= __('Clock In') ?></th>
-							<th scope="col"><?= __('Clock Out') ?></th>
-							<th scope="col"><?= __('Status') ?></th>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" width="5%"><?= __('S.No') ?></th>
+                            <th scope="col"><?= __('Attendance Date') ?></th>
+                            <th scope="col"><?= __('Clock In') ?></th>
+                            <th scope="col"><?= __('Clock Out') ?></th>
+                            <th scope="col"><?= __('Status') ?></th>
                             <th scope="col"></th>
-						</tr>
-					</thead>
-					 <tbody>
+                        </tr>
+                    </thead>
+                     <tbody>
                         <?php
                         $i = 1;
                         foreach (new DatePeriod($start, new DateInterval('P1D'), $end) as $dateObj):
@@ -196,11 +196,11 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                         <?php endforeach; ?>
                     </tbody>
 
-				</table>
-			</div>
+                </table>
+            </div>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 <div class="modal fade" id="attendanceLocationModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">

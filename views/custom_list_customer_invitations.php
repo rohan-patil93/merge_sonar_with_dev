@@ -50,22 +50,22 @@ if(isset($_SESSION['message']) && $_SESSION['message'] !=""){
 
 ?>
 <script type="text/javascript">
-	function resendrequest(val){
-		$.ajax({
-	        url: "ajax.php",
-	        data:'page=resenduserdetails&id='+val,
-	        type: "POST",
-	        success:function(data){
-	        console.log(data);
-	         tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Invitation Send To User Successfully','');
-	        },
-	        error:function (){}
-    	});
+    function resendrequest(val){
+        $.ajax({
+            url: "ajax.php",
+            data:'page=resenduserdetails&id='+val,
+            type: "POST",
+            success:function(data){
+            console.log(data);
+             tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX','Invitation Send To User Successfully','');
+            },
+            error:function (){}
+        });
 
-	}
-	function dynamicinsertpopup(option){
-		//alert("insert");
-		jQuery.ajax({
+    }
+    function dynamicinsertpopup(option){
+        //alert("insert");
+        jQuery.ajax({
             url: "views/new_from.php",
             data:'option='+option,
             type: "POST",
@@ -75,7 +75,7 @@ if(isset($_SESSION['message']) && $_SESSION['message'] !=""){
             },
             error:function (){}
         });
-	}
+    }
    function statuspopup(status,id){
       //alert("data");
      var table_name = document.getElementById('table_name').value;
@@ -91,32 +91,32 @@ if(isset($_SESSION['message']) && $_SESSION['message'] !=""){
         });
    }
 
-	function displaystausdrop(id,table,status_id){
-		//alert("id");
-		$.ajax({
-	        url: "ajax.php",
-	        data:'page=current_status_drop&id='+id+'&current_status='+status_id+'&table='+table,
-	        type: "POST",
-	        success:function(data){
-	        	console.log(data);
-	            $("#dropdownlist_"+id).html(data);
-	        },
-	        error:function (){}
-    	});
+    function displaystausdrop(id,table,status_id){
+        //alert("id");
+        $.ajax({
+            url: "ajax.php",
+            data:'page=current_status_drop&id='+id+'&current_status='+status_id+'&table='+table,
+            type: "POST",
+            success:function(data){
+                console.log(data);
+                $("#dropdownlist_"+id).html(data);
+            },
+            error:function (){}
+        });
 
-	}
+    }
 function listUserType(){
-	var reg_invoit = $('input[name="reg_invoit"]:checked').val();
+    var reg_invoit = $('input[name="reg_invoit"]:checked').val();
         if(reg_invoit=='1'){
             $(".register").show();
-			      $(".invited").hide();
+                  $(".invited").hide();
         }else if(reg_invoit=='2'){
             $(".invited").show();
-			      $(".register").hide();
+                  $(".register").hide();
         }else{
-			      $(".invited").show();
-			      $(".register").show();
-		}
+                  $(".invited").show();
+                  $(".register").show();
+        }
 }
 
 </script>
@@ -131,29 +131,29 @@ function listUserType(){
           <h5><?= __('Vendors'); ?></h5>
           <div class="card-header-right table-card-header ">
           <div class="radio radio-inline">
-					  <label class="form-label">
-						<input type="radio" name="reg_invoit" value="0" checked onchange="listUserType()">
-						<?= __('All'); ?>
-					  </span>
+                      <label class="form-label">
+                        <input type="radio" name="reg_invoit" value="0" checked onchange="listUserType()">
+                        <?= __('All'); ?>
+                      </span>
           </div>
-					<div class="radio radio-inline">
-					  <label class="form-label">
-						<input type="radio" name="reg_invoit" value="1" onchange="listUserType()">
-						<?= __('Active'); ?>
-					  </span>
-					</div>
-					<div class="radio radio-inline">
-					  <label class="form-label">
-						<input type="radio" name="reg_invoit" value="2" onchange="listUserType()">
-						<?= __('Invited'); ?>
-					  </span>
-					</div>
+                    <div class="radio radio-inline">
+                      <label class="form-label">
+                        <input type="radio" name="reg_invoit" value="1" onchange="listUserType()">
+                        <?= __('Active'); ?>
+                      </span>
+                    </div>
+                    <div class="radio radio-inline">
+                      <label class="form-label">
+                        <input type="radio" name="reg_invoit" value="2" onchange="listUserType()">
+                        <?= __('Invited'); ?>
+                      </span>
+                    </div>
 
       <?php /*if(in_array(SUPERADMIN,$_SESSION['roles'])){  ?>
-  				<a  href="<?php echo string_to_ascii('PAGE=CUSTOM_INSERT_APPLICATION_USER_INVITATIONS'); ?>" class="btn btn-primary mb-2 desktop-view">
-  				  <i class="icofont icofont-plus icon-white text-white"></i>
-  					Invite User
-  				</a>
+                  <a  href="<?php echo string_to_ascii('PAGE=CUSTOM_INSERT_APPLICATION_USER_INVITATIONS'); ?>" class="btn btn-primary mb-2 desktop-view">
+                    <i class="icofont icofont-plus icon-white text-white"></i>
+                      Invite User
+                  </a>
         <?php }else{ */?>
 
 <a href="index.php?option=COM_INSERT_INVITE_VENDOR" class="btn btn-success mb-2 desktop-view">
@@ -161,8 +161,8 @@ function listUserType(){
             <?= __('Invite Vendor'); ?>
           </a>
       <?php  // } ?>
-	</div>
-			</div>
+    </div>
+            </div>
 
         <div class="row p-4">
           <?php
@@ -179,16 +179,16 @@ function listUserType(){
                 $applicationuser = $applicationusers[$vendorslist['user_id']];
                 $vendorregisters11 = $vendorregisters[$vendorslist['user_id']];
                 $stausresult = $_SESSION['status'][$vendorslist['current_status']];
-        				if(count((array)$applicationuser) != 0){
-        					$ribbon =  "Active";
-        					$classadded = "register";
+                        if(count((array)$applicationuser) != 0){
+                            $ribbon =  "Active";
+                            $classadded = "register";
                   $tven =2;
                   $url = "index?option=COM_INSERT_VENDORS&VTYPE=V&Rid=".deocdeId('id:'.$applicationuser['id']);
                   $displayname =$applicationuser['display_name'];
                   $first_name = $applicationuser['first_name'];
                   $company_name = $applicationuser['company'];
                   $image = $applicationuser['image'];
-        				}elseif(count((array)$vendorregisters11) != 0){
+                        }elseif(count((array)$vendorregisters11) != 0){
                   $ribbon =  "Register";
                   $classadded = "register";
                   $url = "index?option=COM_INSERT_VENDORS&VTYPE=VR&Rid=".deocdeId('id:'.$vendorregisters11['id']);
@@ -198,14 +198,14 @@ function listUserType(){
                   $company_name = $vendorregisters11['company'];
                   $image = $applicationuser['image'];
                 }else{
-        					$ribbon = "Invited";
-        					$classadded = "invited";
+                            $ribbon = "Invited";
+                            $classadded = "invited";
                   $tven =0;
                   $displayname =$vendorslist['display_name'];
                   $first_name = $vendorslist['first_name'];
                   $company_name = $vendorregisters11['company_name'];
-        				}
-			?>
+                        }
+            ?>
 
       <div class="col-lg-3 custom-ribbon-accordian cursor-pointer  position-relative <?php echo $classadded; ?>" >
 

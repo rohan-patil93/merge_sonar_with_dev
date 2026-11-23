@@ -93,7 +93,7 @@ $top_oldest = $admindashboardd['top_oldest'];
 <script>
 
 /**
-	function displaypopupdetailslist(option){
+    function displaypopupdetailslist(option){
  $.ajax({
    url: "views/view_roll_back1.php",
    data:'option='+option,
