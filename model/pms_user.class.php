@@ -45,7 +45,7 @@ class pmsUserClass extends userClass{
 			$insert_heade .= "('".$get['company_id']."','".$get['id']."','".$empd->id."','".$organization_goal_id."','".$psres->self_assessment_start_date."','".$psres->self_assessment_end_date."' ,'0','".ST_ACTIVE."','".$get['user_id']."','".date('Y-m-d h:i:s')."'),";
 		}
 		$insertsql = rtrim($insert_heade, ',');
-		$res = $callConfig->executeQuery($insertsql);
+		$callConfig->executeQuery($insertsql);
 
 		$update_transaction = array("publish"=>"Y","updated_by"=>$get['user_id'],"updated_date"=>date('Y-m-d h:i:s'));
 		$res =$callConfig->updateRecord('performance_appraisal_setups',$update_transaction,'id',$get['id']);
@@ -215,7 +215,6 @@ class pmsUserClass extends userClass{
 		if($get['ajaxyearlist'] == "Y"){   //admin_type
 			$condition = "";
 			if($get['self'] =="Y"){
-				$empid = $get['emp_id'];
 				$condition = " AND employee_id = '".$get['emp_id']."'";
 			}else{
 				$condition = " AND employee_id IN (".$empid.")";
@@ -895,7 +894,7 @@ public function getOrganizationGoals($get){
 			$employee_ids = json_decode($goalres->employee_ids,1);
 			foreach($employee_ids as $emp_id){
 				$insert_array = array('company_id'=>$post['company_id'], 'employee_id'=>$emp_id,'goal_id'=>$post['rid'],'percentage_of_completion'=>0,'is_active'=>0,'current_status'=>0,'created_by'=>$post['userid'],'created_date'=>date('Y-m-d h:i:s'));
-					$insert = $callConfig->insertRecord('employee_goals',$insert_array);
+				$callConfig->insertRecord('employee_goals',$insert_array);
 			}
 			$updatearray = array('share'=>0,'share_datetime'=>date('Y-m-d h:i:s'));
 			$callConfig->updateRecord('goals',$updatearray,'id',$post['rid']);

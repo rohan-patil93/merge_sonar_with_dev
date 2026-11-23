@@ -1874,7 +1874,7 @@ $html .= "</div>";
                     $data['code'] = 'RQ' . $lastCodeNumber;
                     $data['created_by'] = $user_id;
                     $data['created_date'] = $updated_date;
-                    $response = $callConfig->insertRecord('feasibility_fields', $data);
+                    $callConfig->insertRecord('feasibility_fields', $data);
                     $return['insertrecord'][] = $data;
                 }
             }

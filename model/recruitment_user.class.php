@@ -58,9 +58,6 @@ class recruitmentUserClass extends userClass
 		foreach ($candidatesres as $ckey => $cval) {
 			$emailarray["candidates." . $ckey] = $cval;
 		}
-		$rm_users_sql = "SELECT * FROM application_users WHERE company_id = '" . $get['company_id'] . "'  AND is_active = 0 AND id='" . $candidatesres->rm_id . "'";
-		$rm_users_res = $callConfig->getRow($rm_users_sql);
-
 		$rm_users_sql = "SELECT id,display_name,user_email FROM application_users WHERE company_id = '" . $get['company_id'] . "'  AND is_active = 0 AND id='" . $candidatesres->rm_id . "'";
 		$rm_users_res = $callConfig->getRow($rm_users_sql);
 
@@ -464,8 +461,7 @@ return $returnary;
 		/*--------- All Recently Un-Published 3 Job Details ---------------- */
 		$recent_unpublishsql = "SELECT id, requested_date, job_number, job_name,current_status, updated_date FROM `job_postings` WHERE company_id = '" . $get['company_id'] . "' " . $whr . " AND current_status = " . ST_UNPUBLISH . " AND is_active = 0  ORDER BY updated_date DESC LIMIT 0,3";
 		$return['recent_unpublish']['name'] = "Recently Un-Published";
-		$recent_unpublish = array();
-		$recent_publish = $callConfig->getAllRows($recent_unpublishsql);
+		$recent_unpublish = $callConfig->getAllRows($recent_unpublishsql);
 		$return['recent_unpublish']['data'] = $recent_unpublish;
 		$countsql = "SELECT count(id) cc FROM `job_postings` WHERE company_id = '" . $get['company_id'] . "' " . $whr . " AND current_status = " . ST_UNPUBLISH . " AND is_active = 0";
 		$return['recent_unpublish']['name'] = "Recently Un-Published ";
@@ -585,7 +581,6 @@ return $returnary;
 			$return['candidate_screening_questions_and_answers'] = $candidate_screening_questions_and_answersres;
 
 		} elseif ($get['gettype'] == "ManualQuestions") {
-			$candidate_id = $get['candidate_id'];
 			$job_posting_id = $get['job_posting_id'];
 			$job_postingssql = "SELECT * FROM job_postings jp WHERE jp.company_id = '" . $get['company_id'] . "' AND jp.id = '" . $job_posting_id . "'  AND jp.is_active =0";
 			$job_postingsres = $callConfig->getRow($job_postingssql);

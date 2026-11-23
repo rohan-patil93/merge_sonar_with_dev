@@ -640,7 +640,7 @@ $emp_expensescntsql = "SELECT count(*) as total_bill_cnt, sum(if(current_status=
 
             foreach (['domestic_round_trips', 'trip_hotels', 'local_trips'] as $tbl) {
                 $upd = ['is_active' => 1, 'updated_by' => $user_id, 'updated_date' => $now];
-                $res = $callConfig->updateRecord($tbl, $upd, 'trip_id', $trip_id);
+                $callConfig->updateRecord($tbl, $upd, 'trip_id', $trip_id);
             }
 
             // 3) reinsert current POST children

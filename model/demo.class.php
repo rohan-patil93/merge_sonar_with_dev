@@ -180,50 +180,6 @@ class demoClass extends userClass{
 			echo '<a href="http://www.tickday.infistaq.com/uploads/rental_invoices/'.$filename.'.pdf" download>'.$filename.'</a>';
 			$output = $dompdf->output();
 			file_put_contents($sFilePath, $output);
-
-
-
-
-			/**$dompdf = new Dompdf();
-			$dompdf->loadHtml($content);
-			$dompdf->render();
-			$output = $dompdf->output();
-			$filename = "Test_invoice".time();
-			$sFilePath = '/home/infistaq/live_infistaq_com/uploads/rental_invoices/'.$filename.'.pdf';
-			echo '<a href="http://www.tickday.infistaq.com/uploads/rental_invoices/'.$filename.'.pdf" download>'.$filename.'</a>';
-			file_put_contents($sFilePath, $output);
-			**//**
-			$options = new Options();
-			$options->set('isHtml5ParserEnabled', true);
-			$options->set('isPhpEnabled', true);
-
-			$dompdf = new Dompdf($options);
-			// Set image-related options
-			$dompdf->set_option('dpi', 300); // Dots Per Inch
-			$dompdf->set_option('isPhpEnabled', true); // Enable PHP rendering
-			$dompdf->set_option('isHtml5ParserEnabled', true); // Enable HTML5 parsing
-			$dompdf->set_option('isPhpEnabled', true); // Enable PHP in HTML
-			$dompdf->set_option('isPhpEnabled', true); // Enable embedded PHP scripts
-
-			// Load HTML to dompdf
-			$dompdf->loadHtml($content);
-
-			// Set paper size (optional)
-			$dompdf->setPaper('A4', 'portrait');
-
-			// Render PDF
-			$dompdf->render();
-
-			// Output PDF to the browser
-			//$dompdf->stream('output.pdf', array('Attachment' => 0));
-			$filename = "Test_invoice".time();
-			$sFilePath = '/home/infistaq/live_infistaq_com/uploads/rental_invoices/'.$filename.'.pdf';
-			echo '<a href="http://www.tickday.infistaq.com/uploads/rental_invoices/'.$filename.'.pdf" download>'.$filename.'</a>';
-			//$dompdf->stream($sFilePath, array('Attachment' => 0));
-			$output = $dompdf->output();
-
-			file_put_contents($sFilePath, $output);
-			**/
 		}
 		//http://www.tickday.infistaq.com//api.php/?mode=generatetenantinvoicePDF&page_option=&data_name=infistaq_infisuite_2&user_id=1&company_id=1&module_id=&module_group_id=&ipaddress=59.95.107.153
 		public function generateTenantInvoicePDF($get,$rid=""){
@@ -294,48 +250,6 @@ class demoClass extends userClass{
 				echo "$totalcnt == ".$totalcnt;
 				print_r($return);
 		}
-/**
-		public function generateTenantInvoicePDF11($get,$rid=""){
-			global $callConfig;
-			if($rid ==""){
-			$rid = $get['rid'];
-			}
-			$configsql = "SELECT * FROM config WHERE company_id = '".$get['company_id']."' AND is_active =0";
-			$configres=$callConfig->getRow($configsql);
-
-			// Create an instance of the Dompdf class
-			$options = new Options();
-			$options->set('chroot', realpath(''));
-			$dompdf = new Dompdf($options);
-			//$realpath = realpath("uploads/all/".$configres->display_logo);
-			//echo $realpath;
-			// Load HTML content
-			//$html = file_get_contents('path/to/your/html-file.html');
-$html = '<img style="width:150px; " class="logo" src="assets/images/sign-in/infistaq_logo.png" alt="logo">';
-echo "step 1";
-
-
-
-			// Load the HTML to dompdf
-			echo $html;
-			$dompdf->loadHtml($html);
-			// Set paper size (optional)
-			$dompdf->setPaper('A4', 'portrait');
-			// Render PDF (first pass to get the total number of pages)
-			$dompdf->render();
-			$filename = "Test_invoice".time();
-			$sFilePath = '/home/infistaq/live_infistaq_com/uploads/rental_invoices/'.$filename.'.pdf';
-			if(file_exists('assets/images/sign-in/infistaq_logo.png')){
-				echo "file is available";
-			}else{
-				echo "file not availble";
-			}
-			echo '<a href="http://www.tickday.infistaq.com/uploads/rental_invoices/'.$filename.'.pdf" download>'.$filename.'</a>';
-			$output = $dompdf->output();
-			file_put_contents($sFilePath, $output);
-
-		}
-**/
 
 
 

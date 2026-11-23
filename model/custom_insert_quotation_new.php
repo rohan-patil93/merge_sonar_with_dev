@@ -15,12 +15,10 @@ if($_POST['add_mandatory_str'] !=""){
     $add_mandatory_exp = explode(',', $_POST['add_mandatory_str']);
     foreach ($add_mandatory_exp as $key => $value) {
         $add_data[$value] = $_POST[$value];
-        if(count($in_date_pic)>0){
-            if(in_array($value, $in_date_pic)){
-                $date_at = str_replace('/"', '-', $_POST[$value]);
-                $date_at =  date('Y-m-d', strtotime($date_at));
-                $add_data[$value] = $date_at;
-            }
+        if (count($in_date_pic) > 0 && in_array($value, $in_date_pic)) {
+            $date_at = str_replace('/"', '-', $_POST[$value]);
+            $date_at =  date('Y-m-d', strtotime($date_at));
+            $add_data[$value] = $date_at;
         }
     }
     $_POST['additional_attributes'] = json_encode($add_data,true);
@@ -1370,9 +1368,7 @@ function viewApprovalAllUsers(id= ""){
                     </a>
 
                     <?php
-                    if($_GET['error_messages'] && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)){
-                    }else{
-
+                    if(!($_GET['error_messages'] && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE))){
                         echo $rtable_name ==""?$workflowsteps['workflow_btn']:"";
                     }
                    /** if($rtable_name =="" AND $table1['current_status'] == ST_APPROVED AND $table_name =='requisitions'){

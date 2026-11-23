@@ -1238,51 +1238,6 @@ class spaceUserClass extends userClass{
 		global $callConfig;
 		$return['get'] =$get;
 
-
-
-/**
-
-		$transaction_table = "goods_receipt_notes";
-		$sql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND current_status = 199 AND is_active = 0";
-		$building_res=$callConfig->getAllRows($sql);
-		$return['building_res'] = $building_res;
-		$return['building_id_sql'] = $sql;
-		foreach($building_res as $detail){
-			$return['goods_receipt_notes'][] = $this->tocreatejounalvoucherbaseallcases($transaction_table,$detail->id);
-		}
-
-		$transaction_table = "purchase_invoices";
-		$sql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND current_status = 199 AND is_active = 0";
-		$building_res=$callConfig->getAllRows($sql);
-		$return['supplier_bills_res'] = $building_res;
-		$return['supplier_bills_sql'] = $sql;
-		foreach($building_res as $detail){
-			$return['purchase_invoices'][] = $this->tocreatejounalvoucherbaseallcases($transaction_table,$detail->id);
-		}
-
-
-		$transaction_table = "delivery_orders";
-		$sql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND current_status = 199 AND is_active = 0";
-		$building_res=$callConfig->getAllRows($sql);
-		$return['building_res'] = $building_res;
-		$return['building_id_sql'] = $sql;
-		foreach($building_res as $detail){
-			$return['delivery_orders'][] = $this->tocreatejounalvoucherbaseallcases($transaction_table,$detail->id);
-		}
-
-		$transaction_table = "sales_invoices";
-		$sql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND current_status = 199 AND is_active = 0";
-		$building_res=$callConfig->getAllRows($sql);
-		$return['supplier_bills_res'] = $building_res;
-		$return['supplier_bills_sql'] = $sql;
-		foreach($building_res as $detail){
-			$return['sales_invoices'][] = $this->tocreatejounalvoucherbaseallcases($transaction_table,$detail->id);
-		}
-**/
-
-
-
-
 		echo "<pre>"; print_r($return);
 	}
 }

@@ -107,16 +107,13 @@ class uniformClass extends userClass{
 	    $job_grade_color = null;
 
 	    // if job grade is ON
-	    if($cfg_jobgrade == "Y"){
-	        // get job grade row
-	        if(!empty($logged_emp->job_grade_id)){
-	            $q2 = "SELECT id, job_grade_name, uniform_color
-	                   FROM job_grade
-	                   WHERE id='{$logged_emp->job_grade_id}'
-	                   AND company_id='{$company_id}' AND is_active=0";
-	            $job_grade = $callConfig->getRow($q2);
-	            $job_grade_color = $job_grade ? $job_grade->uniform_color : null;
-	        }
+	    if ($cfg_jobgrade == "Y" && !empty($logged_emp->job_grade_id)) {
+	        $q2 = "SELECT id, job_grade_name, uniform_color
+	               FROM job_grade
+	               WHERE id='{$logged_emp->job_grade_id}'
+	               AND company_id='{$company_id}' AND is_active=0";
+	        $job_grade = $callConfig->getRow($q2);
+	        $job_grade_color = $job_grade ? $job_grade->uniform_color : null;
  		}
 
 	        // get employee uniform mapping

@@ -356,7 +356,7 @@ class hrUserClass extends userClass{
                 $date = $start->format('Y-m-d');
                 $dy = $start->format('l');
                 if($emp['joining_date'] >= $date || ($emp['date_of_leaving'] <= $date && $emp['date_of_leaving'] !="")){
-
+                    // Employee not yet joined or has left
                 }elseif(in_array($date,(array)$holidaysdatas)){
         //holidays
                 }elseif(isset($absentarray[$ky][$date])){
@@ -1054,136 +1054,6 @@ class hrUserClass extends userClass{
         return $detals;
 
     }
-    /*function  tocreateprocesstaskintotaskdatail($get){
-        global $callConfig;
-        $query = "SELECT * FROM process_task_settings WHERE company_id = ".$get['company_id']."  AND process_type = '".$get['process_type']."' AND is_active = 0";
-        $return['process_query'] = $query;
-        $tasks = $callConfig->getAllRows($query);
-        $return['process_data'] = $tasks;
-        $table_array = array('VR'=>'vendors');
-        $user_array = array('hr_connect', 'finance_connect', 'admin_connect','project_connect', 'location_connect', 'esop_connect', 'legal_connect');
-        if(count((array)$tasks)>0){
-
-            $module_query = "SELECT module_name,module_description FROM module_setup WHERE module_id = ".$get['module_group_id'];
-            $module = $callConfig->getRow($module_query);
-            $return['module_query'] = $module_query;
-            $return['module_data'] = $module;
-            $work_spqusery = "SELECT id FROM project_work_spaces WHERE company_id = '".$get['company_id']."' AND  name = '".$module->module_name."' AND is_active = 0";
-            $work_spaces = $callConfig->getRow($work_spqusery);
-            $return['work_spaces_query'] = $work_spqusery;
-            $return['work_spaces_data'] = $work_spaces;
-            if($work_spaces->id!=""){
-                $work_spaces_id = $work_spaces->id;
-            }else{
-                $insert_array = array('company_id'=>$get['company_id'],'name'=>$module->module_name, 'is_active'=>0,'current_status'=>0,'created_by'=>$post['created_by'],'created_by'=>$post['created_by']);
-                $work_res=$callConfig->insertRecord('project_work_spaces',$insert_array);
-                $work_spaces_id = $work_res['LASTID'];
-            }
-            $return['work_spaces_id'] = $work_spaces_id;
-            foreach($tasks as $task){
-                $project_query = "SELECT id FROM projects WHERE company_id = '".$get['company_id']."' AND project_work_space_id = ".$work_spaces_id." AND  project_name = '".$task->task_name."' AND is_active = 0";
-                $pdata = $callConfig->getRow($project_query);
-                $return['project_query'] = $project_query;
-                $return['project_data'] = $pdata;
-                if($pdata->id!=""){
-                    $project_id = $work_spaces->id;
-                }else{
-                    $insert_array = array('company_id'=>$get['company_id'],'project_work_space_id'=>$work_spaces_id,'project_name'=>$task->task_name, 'project_type'=>2, 'planned_start'=>date('Y-m-d') ,'is_active'=>0,'current_status'=>0,'created_by'=>$post['created_by'],'created_by'=>$post['created_by']);
-                    $project_res=$callConfig->insertRecord('projects',$insert_array);
-                    $project_id = $project_res['LASTID'];
-                    //$table_name = $table_array[$task->process_type];
-                }
-                $return['project_id'] = $project_id;
-                $team_query = "SELECT id, user_id FROM project_teams WHERE company_id = '".$get['company_id']."' AND project_id = ".$project_id." AND is_active = 0";
-                $listteams = $callConfig->getAllRows($team_query);
-                $teams = array();
-                if (!empty($listteams)) {
-                    foreach((array)$listteams as $listteam){
-                        $teams[] = $listteam->user_id;
-                    }
-                }
-                $return['project_old_team'] = $teams;
-                $userquery = "SELECT * FROM application_users WHERE company_id = '".$get['company_id']."' AND id = ".$get['transaction_id']." AND is_active = 0";
-                    $userdata = $callConfig->getRow($userquery);
-                    $new_teams = array();
-                foreach((array)$user_array as $user_filed){
-                    $userlist_members[$user_filed] = $userdata->$user_filed;
-                    if($userdata->$user_filed !="" && !in_array($userdata->$user_filed,(array)$teams)){
-                        $new_teams[] = $userdata->$user_filed;
-                    }
-                }
-                $return['project_new_team'] = $new_teams;
-                if(count((array)$new_teams)>0){
-                    foreach((array)$new_teams as $new_team){
-                        $insert_array = array('company_id'=>$get['company_id'],'project_id'=>$project_id,'role_id'=>2, 'user_id'=>$new_team ,'is_active'=>0,'current_status'=>0,'created_by'=>$post['created_by'],'created_by'=>$post['created_by']);
-                        $project_teamres=$callConfig->insertRecord('project_teams',$insert_array);
-                    }
-                }
-                $taskdata = $get;
-                $taskdata['project_id'] = $project_id;
-                $taskdata['task_name'] = $task->task_name." - ".$userdata->display_name;
-                $taskdata['assigner'] =  $get['user_id'];
-                $taskdata['assigen_id'] =  $get['user_id'];
-                $taskdata['checklist'] =  $task->check_list;
-                $taskdata['checkuser'] = $userlist_members;
-                $return['taskdata'] = $taskdata;
-                $return['task'][] = $this->toaddprojecttaskdetailsbyproceetime($taskdata);
-            }
-        }
-        return $return;
-    }
-    public function toaddprojecttaskdetailsbyproceetime($get){
-        global $callConfig;
-        $notification_message = '';
-        $notuser2 = array(); $notuser1 = array();
-        $insert_array = array('company_id'=>$get['company_id'],'project_id'=>$get['project_id'],'project_phase_id'=>2, 'task_type'=>2, 'task_name'=>$get['task_name'], 'planned_start'=>date('Y-m-d'), 'assigen_id'=>$get['assigner'], 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
-        $res = $callConfig->insertRecord('project_task_details',$insert_array);
-        $task_id = $res['LASTID'];
-        $return['task_id'] = $task_id;
-        $transaction_number = $get['project_id'];
-        $checklist = json_decode($get['checklist'],1);
-        $check_user = $get['checkuser'];
-        $fecharry = array('HB'=>'hr_connect','AB'=>'admin_connect','FB'=>'finance_connect','PB'=>'project_connect','LEGAL_BUDDY'=>'legal_connect','LB'=>'location_connect');
-        if(count((array)$checklist)>0){
-            foreach($checklist as $check){
-                $insert_array = array('company_id'=>$get['company_id'],'    application_tablename'=>'project_task_details','transaction_id'=>$task_id, 'check_name'=>$check['name'], 'planned_start'=>date('Y-m-d'), 'assign_id'=>$get['transaction_id'],'approval_id'=>$check_user[$fecharry[$check['approval_to']]], 'ref_data'=> json_encode($check), 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
-                $checkres = $callConfig->insertRecord('application_check_lists',$insert_array);
-                $return['checkres'][] = $checkres;
-            }
-        }
-        $whatsup = 'N';
-         $assgnuser = $callConfig->getRow("SELECT display_name FROM application_users WHERE id=".$get['user_id']);
-        $msg1 = " Task ".$get['task_name']." is updated : Comments added  by ".$assgnuser->display_name;
-        $msg2 = $msg1;
-        $notuser1[] = $get['user_id'];
-        $notuser1[] = $get['assigen_id'];
-        if(!isset($get['activity_type'])){
-            $project = $callConfig->getRow("SELECT project_name,assigner_id FROM projects WHERE id=".$get['project_id']);
-            $transaction_number = $get['project_id'];
-            $user = $callConfig->getRow("SELECT display_name FROM application_users WHERE id=".$get['assigen_id']);
-            $insert_arr =  array('company_id'=>$get['company_id'],'project_id'=>$get['project_id'],'project_task_id'=>$task_id, 'project_role_id'=>2,'user_id'=>$get['transaction_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
-            $restwo = $callConfig->insertRecord('project_task_teams',$insert_arr);
-            $insert_arr['project_role_id'] = 1;
-            $insert_arr['user_id'] = $project->assigner_id;
-            $restwo = $callConfig->insertRecord('project_task_teams',$insert_arr);
-            $msg1 = "Task ".$get['task_name']." is assigned to you";
-            $msg2 = "New task ".$get['task_name']." is created. Assign by ".$user->display_name;
-            $query = "SELECT user_id FROM project_teams WHERE company_id =".$get['company_id']." AND role_id !=2 AND project_id = ".$get['project_id']."  AND is_active = 0";
-            $lists = $callConfig->getAllRows($query);
-            foreach($lists as $list){
-                $notuser2[] = $list->user_id;
-            }
-        }
-
-        $email_content_id =37;
-        $notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$transaction_number, 'application_table_name'=>'project_task_details', 'type'=>'INFORMATION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_PROJECT_KANBAN&TAB=3&RID='.$transaction_number,'module_setup_id'=>25, 'whatsup'=>$whatsup);
-
-        $ss = $this->tosendnotifiations($notdata1);
-        //$rss = $this->tosendnotifiations($notdata2);
-        $senddata = array('session_company_id'=>$get['company_id'],'email_content_id'=>$email_content_id, 'project_name'=>$project->project_name,'user_display_name'=>$user->display_name,'cc_users'=>$notuser2,'to_users'=>$notuser1,'task_name'=>$get['task_name'],'assigners_name'=>$assgnuser->display_name);
-        $res = $this->emailsendmediater($senddata);
-        return $return;
-    }*/
     public function insertcustomerinvitation($get,$post){
         global $callConfig;
         $return = array();
@@ -2929,7 +2799,7 @@ class hrUserClass extends userClass{
                 $date = $start->format('Y-m-d');
                 $dy = $start->format('l');
                 if($emp['joining_date'] >= $date || ($emp['date_of_leaving'] <= $date && $emp['date_of_leaving'] !="")){
-
+                    // Employee not yet joined or has left
                 }elseif(in_array($date,(array)$holidaysdatas)){
                 //holidays
                 }elseif(isset($absentarray[$ky][$date])){

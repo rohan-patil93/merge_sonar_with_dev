@@ -15825,10 +15825,7 @@ ORDER BY emp.joining_date, `emp`.`display_name`,stcom.component_id ASC";
                 $returnresultarray['leave_span'] = $leave_type_levels->leave_span;
             }
             if ($availabeleaves < $finalappllayleavecount) {   // exced leave yes or not
-                if ($emp_leave_balances->exceed_leave_balance == '1') {
-                    $returnresultarray['leaveaplye'] = '0';
-                    $returnresultarray['unpaid_days'] = $finalappllayleavecount;
-                } elseif ($emp_leave_balances->exceed_leave_balance == '2') {
+                if ($emp_leave_balances->exceed_leave_balance == '1' || $emp_leave_balances->exceed_leave_balance == '2') {
                     $returnresultarray['leaveaplye'] = '0';
                     $returnresultarray['unpaid_days'] = $finalappllayleavecount;
                 } else {

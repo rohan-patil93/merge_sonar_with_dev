@@ -69,7 +69,7 @@ class surveyPollUserClass extends userClass
 			$s_id = $res['LASTID'];
 			foreach($shared_ids1 as $ids){
 				$response_array = array('company_id'=>$main['company_id'],'is_active'=>'0','created_by'=>$main['created_by'],'created_date'=>$main['created_date'],'employee_id'=>$ids['id_value'],'survey_id'=>$s_id,'category'=>$main['category']);
-				$res=$callConfig->insertRecord(TBL_SURVEY_RESPONSES,$response_array);
+				$callConfig->insertRecord(TBL_SURVEY_RESPONSES,$response_array);
 			}
 			foreach ($quesion_data as $value) {
 				$value['survey_id'] = $s_id;
@@ -86,7 +86,7 @@ class surveyPollUserClass extends userClass
 		} else {
 
 			$array = array('company_id'=>$main['company_id'],'is_active'=>'0','updated_by'=>$main['updated_by'],'updated_date'=>$main['updated_date']);
-			$res=$callConfig->updateRecord($table_setup,$main,'id',$rowid);
+			$callConfig->updateRecord($table_setup,$main,'id',$rowid);
     		// two update querys - qustiontable and option table is_aactive=1
 			$setisactive = array('is_active'=>'1');
 			$qrespons=$callConfig->updateRecord($table_questions,$setisactive,'survey_id',$rowid);
@@ -94,7 +94,7 @@ class surveyPollUserClass extends userClass
 			$qrespons=$callConfig->updateRecord(TBL_SURVEY_RESPONSES,$setisactive,'survey_id',$rowid);
 			foreach($shared_ids1 as $ids){
 				$response_array = array('company_id'=>$main['company_id'],'is_active'=>'0','created_by'=>$main['created_by'],'created_date'=>$main['created_date'],'employee_id'=>$ids['id_value'],'survey_id'=>$rowid,'category'=>$main['category']);
-				$res=$callConfig->insertRecord(TBL_SURVEY_RESPONSES,$response_array);
+				$callConfig->insertRecord(TBL_SURVEY_RESPONSES,$response_array);
 			}
 			foreach ($quesion_data as $key => $value) {
     			//if(qustionid!='') thn update is_active=0 and values questintabe
@@ -109,7 +109,7 @@ class surveyPollUserClass extends userClass
     				unset($value['rid']);
     				$quesion_array = array_merge($value,$array);
     				if($question_id!=''){
-    					$qres=$callConfig->updateRecord($table_questions,$quesion_array,'id',$question_id);
+    					$callConfig->updateRecord($table_questions,$quesion_array,'id',$question_id);
     					$answer_array = array_merge($survey_question_option,$array);
     					$qrespons=$callConfig->updateRecord($table_options,$answer_array,'question_id',$question_id);
     				}else{

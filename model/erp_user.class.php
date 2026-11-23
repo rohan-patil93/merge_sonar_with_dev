@@ -1109,11 +1109,9 @@ GROUP BY tl.item_id";
                 //reverse coneversion
                 $convsql = "SELECT id,conversion_ratio FROM uom_conversions WHERE company_id = '".$get['company_id']."' AND  parent_uom_id = '".$child_uom_id."' AND child_uom_id = '".$parent_uom_id."' AND is_active = 0";
                 $convresd = $callConfig->getRow($convsql);
-                if($convresd->id !=""){
-                    if($convresd->conversion_ratio !="0" && $convresd->conversion_ratio !=""){
-                        $len['in_qty'] = $post['in_qty']/$convresd->conversion_ratio;
-                        $len['in_value'] = $itemres->item_amount/$convresd->conversion_ratio;
-                    }
+                if($convresd->id !="" && $convresd->conversion_ratio !="0" && $convresd->conversion_ratio !=""){
+                    $len['in_qty'] = $post['in_qty']/$convresd->conversion_ratio;
+                    $len['in_value'] = $itemres->item_amount/$convresd->conversion_ratio;
                 }
             }
             if($transaction_table=="dekittings"){
@@ -2880,11 +2878,6 @@ GROUP BY tl.item_id";
             $whereCompany = " AND so.company_id = '" . $get['company_id'] . "'";
         }
         switch ($category) {
-            case 'monthly':
-                $groupBy = "DATE_FORMAT(so.transaction_date, '%Y-%m')";
-                $selectPeriod = $groupBy . " AS period";
-                break;
-
             case 'quaterly':
                 $groupBy = "CONCAT(YEAR(so.transaction_date), '-Q', QUARTER(so.transaction_date))";
                 $selectPeriod = $groupBy . " AS period";
@@ -2895,9 +2888,11 @@ GROUP BY tl.item_id";
                 $selectPeriod = $groupBy . " AS period";
                 break;
 
+            case 'monthly':
             default:
                 $groupBy = "DATE_FORMAT(so.transaction_date, '%Y-%m')";
                 $selectPeriod = $groupBy . " AS period";
+                break;
         }
 
         $sql = "SELECT {$selectPeriod}, COUNT(so.id) AS total_orders, SUM(so.total_amount) AS total_sales, SUM(so.tax_amount) AS total_tax, SUM(so.discount_amount) AS total_discount, AVG(so.total_amount) AS avg_order_value FROM sales_orders so WHERE so.is_active = '0' {$whereCompany} {$whereDate} GROUP BY {$groupBy} ORDER BY so.transaction_date ASC ";

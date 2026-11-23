@@ -450,14 +450,9 @@ class rentalUserClass extends userClass
 							$monthlyrant[$keyyy] = ($hlfmonthperday * $rentcommencementdate_totalday) + $poda['rent'];
 							$per_sq_ft_with_discount[$keyyy] = $poda['per_sq_ft_with_discount'];
 						}
-					} elseif ($monthincreas == 2 && $rent_bill_to_be_raise_type == "S") {
+					} elseif ($monthincreas == 2 && ($rent_bill_to_be_raise_type == "S" || $rent_bill_to_be_raise_type == "N")) {
 						$monthlyrant[$keyyy] = $poda['rent'];
 						$per_sq_ft_with_discount[$keyyy] = $poda['per_sq_ft_with_discount'];
-						//}
-					} elseif ($monthincreas == 2 && $rent_bill_to_be_raise_type == "N") {
-						$monthlyrant[$keyyy] = $poda['rent'];
-						$per_sq_ft_with_discount[$keyyy] = $poda['per_sq_ft_with_discount'];
-						//}
 					}
 					if ($monthlyrant[$keyyy] == "") {
 						$monthlyrant[$keyyy] = $poda['rent'];

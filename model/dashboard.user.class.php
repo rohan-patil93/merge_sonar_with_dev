@@ -401,24 +401,10 @@ class dashboardUserClass{
 	       AND leave_from BETWEEN '{$start_date}' AND '{$end_date}'
 	       AND is_active = 0 ";
 	       $row = $callConfig->getRow($query);
-	       $used_leave_this_month =  $my_pending_tasks = isset($row->total)? (float)$row->total : 0;
+	       $used_leave_this_month = isset($row->total) ? (float)$row->total : 0;
 	       $return['used_leave_this_month'] = $used_leave_this_month;
 
 	    	  //  My Leave Requests (Last 5)
-	       $query = "
-	       SELECT
-	       id,
-	       leave_type_id,
-	       leave_from,
-	       leave_to,
-	       leave_days,
-	       current_status
-	       FROM employee_leaves
-	       WHERE company_id = {$company_id}
-	       AND employee_id = {$emp_id}
-	       AND is_active = 0
-	       ORDER BY created_date DESC
-	       LIMIT 5 ";
 	       $query = "
 			    SELECT
 			        el.id,

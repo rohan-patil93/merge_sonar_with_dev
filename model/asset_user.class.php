@@ -973,8 +973,6 @@ public function insertAsset($post){
 			$returnresult['assetupdate'][]  =$assetupdate;
 			$assetupdatearray = array('asset_location'=>$post['location_id'],'conditions'=>$post['candition'],'asset_status'=>$post['status'],'allocation_status'=>'Y','user_id'=>$emp_id);
 			$returnresult['history'][] = $this->insertAssetTransaction($post,$table,$res,$assetupdatearray);
-			$useriid = (object) array('user_id' => '');
-			$user_ids = array('0'=>$useriid->user_id);
 			$user_ids = array('0'=>$emp_id);
 			$msg = "Asset Allocate ".$res['LASTID'];
 			$option = "COM_LIST_ASSET_ALLOCATIONS";
@@ -993,7 +991,6 @@ public function insertAsset($post){
 				}else{
 					$msg = "Asset Successfully Rejected";
 				}
-				$user_ids = array('0'=>$select_user_id,'1'=>$post['user_id']);
 				$option = "";
 				$notdataa = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$asset_id,'application_table_name'=>'user_assets', 'type'=>'ACTION', 'notification_users'=>$select_user_id,'option'=>$option);
 				$this->tosendnotifiations($notdataa);

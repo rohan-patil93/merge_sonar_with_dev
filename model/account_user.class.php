@@ -3,121 +3,121 @@ require_once "dompdf/autoload.inc.php";
 use Dompdf\Dompdf;
 use Dompdf\Options;
 class accountUserClass extends userClass{
-	public function getFinanaceReportGroups($get){
-    	global $callConfig;
-    	$return = array();
-    	$chartofaccountssql = "SELECT id,account_name,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND parent_account_code = 0 AND is_active =0";
-    	$chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
-    	$return['chart_of_accounts']= $chartofaccountsres;
-    	$financereportgroupssql = "SELECT * FROM `finance_report_groups` WHERE company_id = ".$get['company_id']." AND finance_report_id = '".$get['fr_id']."' AND is_active =0 ORDER BY display_priority ASC";
-    	$financereportgroupsres = $callConfig->getAllRows($financereportgroupssql);
-    	$return['finance_report_groups']= $financereportgroupsres;
+    public function getFinanaceReportGroups($get){
+        global $callConfig;
+        $return = array();
+        $chartofaccountssql = "SELECT id,account_name,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND parent_account_code = 0 AND is_active =0";
+        $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
+        $return['chart_of_accounts']= $chartofaccountsres;
+        $financereportgroupssql = "SELECT * FROM `finance_report_groups` WHERE company_id = ".$get['company_id']." AND finance_report_id = '".$get['fr_id']."' AND is_active =0 ORDER BY display_priority ASC";
+        $financereportgroupsres = $callConfig->getAllRows($financereportgroupssql);
+        $return['finance_report_groups']= $financereportgroupsres;
 
-		$financereportssql = "SELECT id,report_name, description FROM `finance_reports` WHERE company_id = ".$get['company_id']." AND id = '".$get['fr_id']."' AND is_active =0";
-    	$financereportgroupsres = $callConfig->getRow($financereportssql);
-    	$return['finance_reports']= $financereportgroupsres;
-    	if($get['Rid'] !=""){
-    		$financereportgroupssqll = "SELECT * FROM `finance_report_groups` WHERE company_id = ".$get['company_id']." AND id = '".$get['Rid']."' AND is_active =0 ";
-    		$financereportgroupsress = $callConfig->getRow($financereportgroupssqll);
-    		$return['finance_report_groups_edit']= $financereportgroupsress;
-    		if($financereportgroupsress->chart_of_account_codes !="" && $financereportgroupsress->chart_of_account_codes!='null'){
-    			$imlpod = implode("','",json_decode($financereportgroupsress->chart_of_account_codes,1));
-    			$get['chart_of_account_codes'] = "'".$imlpod."'";
-    		}
+        $financereportssql = "SELECT id,report_name, description FROM `finance_reports` WHERE company_id = ".$get['company_id']." AND id = '".$get['fr_id']."' AND is_active =0";
+        $financereportgroupsres = $callConfig->getRow($financereportssql);
+        $return['finance_reports']= $financereportgroupsres;
+        if($get['Rid'] !=""){
+            $financereportgroupssqll = "SELECT * FROM `finance_report_groups` WHERE company_id = ".$get['company_id']." AND id = '".$get['Rid']."' AND is_active =0 ";
+            $financereportgroupsress = $callConfig->getRow($financereportgroupssqll);
+            $return['finance_report_groups_edit']= $financereportgroupsress;
+            if($financereportgroupsress->chart_of_account_codes !="" && $financereportgroupsress->chart_of_account_codes!='null'){
+                $imlpod = implode("','",json_decode($financereportgroupsress->chart_of_account_codes,1));
+                $get['chart_of_account_codes'] = "'".$imlpod."'";
+            }
 
-    		$return['selectedaccountlist'] = $this->selectChartOfAccont($get);
-    	}
-		return $return;
+            $return['selectedaccountlist'] = $this->selectChartOfAccont($get);
+        }
+        return $return;
     }
     public function selectChartOfAccont($get){
-    	global $callConfig;
-    	$chartofaccountssql = "SELECT id,account_name,parent_account_code,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND (parent_account_code IN('".$get['chart_of_account_codes']."') OR account_code IN('".$get['chart_of_account_codes']."')) AND is_active =0";
-    	$chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
-    	$return['chart_of_accounts_sql']= $chartofaccountssql;
-    	$chartofaccounts = array();
-    	$accode = array();
-    	$chartofaccountsparent = array();
-    	foreach($chartofaccountsres as $chartofaccountsre){
-    		$accode[$chartofaccountsre->account_code] = $chartofaccountsre->account_code;
-    		if($chartofaccountsre->parent_account_code =='0'){
-    			$chartofaccountsparent[] = $chartofaccountsre;
-			}else{
-    			$chartofaccounts[$chartofaccountsre->parent_account_code][] = $chartofaccountsre;
-    		}
-    	}
-    	$implode = implode("','",$accode);
-    	$usedaccontcdesql = "SELECT frcoa.id,frcoa.finance_report_group_id,frcoa.chart_of_account_code, coa.group_name,coa.short_code FROM finance_report_chart_of_account frcoa, finance_report_groups coa WHERE frcoa.company_id = ".$get['company_id']." AND frcoa.company_id = coa.company_id AND frcoa.finance_report_group_id = coa.id AND chart_of_account_code IN('".$implode."') AND frcoa.finance_report_group_id != '".$get['Rid']."'  AND frcoa.is_active = coa.is_active AND frcoa.is_active =0 ";
-    	$usedaccontcderes = $callConfig->getAllRows($usedaccontcdesql);
-    	foreach($usedaccontcderes as $chartofaccountsre){
-    		$usedaccontcdelist[$chartofaccountsre->chart_of_account_code] = $chartofaccountsre;
-		}
+        global $callConfig;
+        $chartofaccountssql = "SELECT id,account_name,parent_account_code,account_code FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND (parent_account_code IN('".$get['chart_of_account_codes']."') OR account_code IN('".$get['chart_of_account_codes']."')) AND is_active =0";
+        $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
+        $return['chart_of_accounts_sql']= $chartofaccountssql;
+        $chartofaccounts = array();
+        $accode = array();
+        $chartofaccountsparent = array();
+        foreach($chartofaccountsres as $chartofaccountsre){
+            $accode[$chartofaccountsre->account_code] = $chartofaccountsre->account_code;
+            if($chartofaccountsre->parent_account_code =='0'){
+                $chartofaccountsparent[] = $chartofaccountsre;
+            }else{
+                $chartofaccounts[$chartofaccountsre->parent_account_code][] = $chartofaccountsre;
+            }
+        }
+        $implode = implode("','",$accode);
+        $usedaccontcdesql = "SELECT frcoa.id,frcoa.finance_report_group_id,frcoa.chart_of_account_code, coa.group_name,coa.short_code FROM finance_report_chart_of_account frcoa, finance_report_groups coa WHERE frcoa.company_id = ".$get['company_id']." AND frcoa.company_id = coa.company_id AND frcoa.finance_report_group_id = coa.id AND chart_of_account_code IN('".$implode."') AND frcoa.finance_report_group_id != '".$get['Rid']."'  AND frcoa.is_active = coa.is_active AND frcoa.is_active =0 ";
+        $usedaccontcderes = $callConfig->getAllRows($usedaccontcdesql);
+        foreach($usedaccontcderes as $chartofaccountsre){
+            $usedaccontcdelist[$chartofaccountsre->chart_of_account_code] = $chartofaccountsre;
+        }
 
-		$groupaccountsql = "SELECT id,chart_of_account_code,finance_report_group_id FROM finance_report_chart_of_account WHERE company_id = ".$get['company_id']." AND finance_report_group_id = '".$get['Rid']."' AND is_active =0";
-    	$groupaccountres = $callConfig->getAllRows($groupaccountsql);
-    	foreach($groupaccountres as $groupaccount){
-    		$groupaccountlist[$groupaccount->chart_of_account_code] = $groupaccount;
-		}
-		$return['finance_report_chart_of_account']= $groupaccountlist;
-    	$return['chart_of_accounts_already_used']= $usedaccontcdelist;
-    	$return['chart_of_accounts_parent']= $chartofaccountsparent;
-    	$return['chart_of_accounts_child']= $chartofaccounts;
-    	return $return;
+        $groupaccountsql = "SELECT id,chart_of_account_code,finance_report_group_id FROM finance_report_chart_of_account WHERE company_id = ".$get['company_id']." AND finance_report_group_id = '".$get['Rid']."' AND is_active =0";
+        $groupaccountres = $callConfig->getAllRows($groupaccountsql);
+        foreach($groupaccountres as $groupaccount){
+            $groupaccountlist[$groupaccount->chart_of_account_code] = $groupaccount;
+        }
+        $return['finance_report_chart_of_account']= $groupaccountlist;
+        $return['chart_of_accounts_already_used']= $usedaccontcdelist;
+        $return['chart_of_accounts_parent']= $chartofaccountsparent;
+        $return['chart_of_accounts_child']= $chartofaccounts;
+        return $return;
     }
     public function insertFinanaceReportGroups($get,$post){
-    	global $callConfig;
-    	$return =array();
-    	$return['post'] = $post;
-    	$encodedata = "";
-    	if($post['chart_of_account_code'] !=""){
-    		$encodedata = json_encode($post['chart_of_account_codes']);
-    	}
-    	$implode = "";
-    	if($post['chart_of_account_code'] !=""){
-    		$implode = implode("','",$post['chart_of_account_code']);
-    	}
-    	$return['implode'] = $implode;
-    	$fr_id = $post['fr_id'];
-    	$footer_total = $post['footer_total']=='0'?"0":"1";
-    	if($post['Rid']!=""){
+        global $callConfig;
+        $return =array();
+        $return['post'] = $post;
+        $encodedata = "";
+        if($post['chart_of_account_code'] !=""){
+            $encodedata = json_encode($post['chart_of_account_codes']);
+        }
+        $implode = "";
+        if($post['chart_of_account_code'] !=""){
+            $implode = implode("','",$post['chart_of_account_code']);
+        }
+        $return['implode'] = $implode;
+        $fr_id = $post['fr_id'];
+        $footer_total = $post['footer_total']=='0'?"0":"1";
+        if($post['Rid']!=""){
 
-    		$insert_array = array('group_name'=>$post['group_name'],'footer_total'=>$footer_total,'finance_report_id'=>$fr_id,'short_code'=>$post['short_code'],'display_priority'=> $post['display_priority'],'parent_group_id'=>$post['parent_group_id'],'chart_of_account_codes'=>$encodedata,'calculation_formula'=>$post['calculation_formula'],'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
-    		$res=$callConfig->updateRecord('finance_report_groups',$insert_array,'id',$post['Rid']);
-    		$return['res'] = $res;
-    		$updatearray = array('is_active'=>null,'to_date'=>date('Y-m-d'),'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
-    		$whrcon = "(finance_report_group_id ='".$post['Rid']."' OR chart_of_account_code IN('".$implode."')) AND is_active='0'";
-			$callConfig->updateRecord('finance_report_chart_of_account',$updatearray,'','',$whrcon);
-	 		$return['whrcon'] = $whrcon;
-    		foreach($post['chart_of_account_code'] as $acountid){
-    			$insertarray = array('company_id'=>$get['company_id'],'finance_report_group_id'=>$post['Rid'],'chart_of_account_code'=>$acountid,'assigned_date'=>date('Y-m-d'),'from_date'=>date('Y-m-d'),'to_date'=>date('Y-'.'12-31'),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-    			$insertdata=$callConfig->insertRecord('finance_report_chart_of_account',$insertarray);
-    			$return['frcoa'][] = $insertdata;
-    		}
-    	}else{
-    		$insert_array = array('company_id'=>$get['company_id'],'footer_total'=>$footer_total,'finance_report_id'=>$fr_id,'group_name'=>$post['group_name'],'short_code'=>$post['short_code'],'display_priority'=> $post['display_priority'],'parent_group_id'=>$post['parent_group_id'],'chart_of_account_codes'=>$encodedata,'calculation_formula'=>$post['calculation_formula'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-    		$insert_data=$callConfig->insertRecord('finance_report_groups',$insert_array);
-    		$return['res'] = $insert_data;
+            $insert_array = array('group_name'=>$post['group_name'],'footer_total'=>$footer_total,'finance_report_id'=>$fr_id,'short_code'=>$post['short_code'],'display_priority'=> $post['display_priority'],'parent_group_id'=>$post['parent_group_id'],'chart_of_account_codes'=>$encodedata,'calculation_formula'=>$post['calculation_formula'],'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
+            $res=$callConfig->updateRecord('finance_report_groups',$insert_array,'id',$post['Rid']);
+            $return['res'] = $res;
+            $updatearray = array('is_active'=>null,'to_date'=>date('Y-m-d'),'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
+            $whrcon = "(finance_report_group_id ='".$post['Rid']."' OR chart_of_account_code IN('".$implode."')) AND is_active='0'";
+            $callConfig->updateRecord('finance_report_chart_of_account',$updatearray,'','',$whrcon);
+             $return['whrcon'] = $whrcon;
+            foreach($post['chart_of_account_code'] as $acountid){
+                $insertarray = array('company_id'=>$get['company_id'],'finance_report_group_id'=>$post['Rid'],'chart_of_account_code'=>$acountid,'assigned_date'=>date('Y-m-d'),'from_date'=>date('Y-m-d'),'to_date'=>date('Y-'.'12-31'),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
+                $insertdata=$callConfig->insertRecord('finance_report_chart_of_account',$insertarray);
+                $return['frcoa'][] = $insertdata;
+            }
+        }else{
+            $insert_array = array('company_id'=>$get['company_id'],'footer_total'=>$footer_total,'finance_report_id'=>$fr_id,'group_name'=>$post['group_name'],'short_code'=>$post['short_code'],'display_priority'=> $post['display_priority'],'parent_group_id'=>$post['parent_group_id'],'chart_of_account_codes'=>$encodedata,'calculation_formula'=>$post['calculation_formula'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
+            $insert_data=$callConfig->insertRecord('finance_report_groups',$insert_array);
+            $return['res'] = $insert_data;
 
-    		$updatearray = array('is_active'=>null,'to_date'=>date('Y-m-d'),'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
-    		$whrcon = "(finance_report_group_id ='".$post['Rid']."' OR chart_of_account_code IN('".$implode."')) AND is_active='0'";
-			$updateres = $callConfig->updateRecord('finance_report_chart_of_account',$updatearray,'','',$whrcon);
+            $updatearray = array('is_active'=>null,'to_date'=>date('Y-m-d'),'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
+            $whrcon = "(finance_report_group_id ='".$post['Rid']."' OR chart_of_account_code IN('".$implode."')) AND is_active='0'";
+            $callConfig->updateRecord('finance_report_chart_of_account',$updatearray,'','',$whrcon);
 
-			foreach($post['chart_of_account_code'] as $acountid){
-    			$insertarray = array('company_id'=>$get['company_id'],'finance_report_group_id'=>$insert_data['LASTID'],'chart_of_account_code'=>$acountid,'assigned_date'=>date('Y-m-d'),'from_date'=>date('Y-m-d'),'to_date'=>date('Y-'.'12-31'),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-    			$insertdata=$callConfig->insertRecord('finance_report_chart_of_account',$insertarray);
-    		}
-    	}
-		return $return;
+            foreach($post['chart_of_account_code'] as $acountid){
+                $insertarray = array('company_id'=>$get['company_id'],'finance_report_group_id'=>$insert_data['LASTID'],'chart_of_account_code'=>$acountid,'assigned_date'=>date('Y-m-d'),'from_date'=>date('Y-m-d'),'to_date'=>date('Y-'.'12-31'),'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
+                $callConfig->insertRecord('finance_report_chart_of_account',$insertarray);
+            }
+        }
+        return $return;
     }
     public function getChartOfAccounts($get){
-    	global $callConfig;
-    	$return = array();
-    	$chartofaccountssql = "SELECT * FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY parent_account_code ASC";
-    	$chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
-    	$return['chart_of_accounts']= $chartofaccountsres;
+        global $callConfig;
+        $return = array();
+        $chartofaccountssql = "SELECT * FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND is_active =0 ORDER BY parent_account_code ASC";
+        $chartofaccountsres = $callConfig->getAllRows($chartofaccountssql);
+        $return['chart_of_accounts']= $chartofaccountsres;
 
-    	$financereportgroupssql = "SELECT id,account_type_name FROM `account_type` WHERE company_id = ".$get['company_id']." AND is_active =0";
-    	$financereportgroupsres = $callConfig->getAllRows($financereportgroupssql);
-    	$return['account_type']= $financereportgroupsres;
+        $financereportgroupssql = "SELECT id,account_type_name FROM `account_type` WHERE company_id = ".$get['company_id']." AND is_active =0";
+        $financereportgroupsres = $callConfig->getAllRows($financereportgroupssql);
+        $return['account_type']= $financereportgroupsres;
 
         $taxessql = "SELECT id,tax_name FROM `taxes` WHERE company_id = ".$get['company_id']." AND is_active =0";
         $taxesres = $callConfig->getAllRows($taxessql);
@@ -144,35 +144,35 @@ class accountUserClass extends userClass{
         $return['cost_centers']= $cost_centersres;
 
 
-    	if($get['Rid'] !=""){
-    		$financereportgroupssqll = "SELECT * FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND id = '".$get['Rid']."' AND is_active =0 ";
-    		$financereportgroupsress = $callConfig->getRow($financereportgroupssqll);
-    		$return['chart_of_accounts_single']= $financereportgroupsress;
-    	}
+        if($get['Rid'] !=""){
+            $financereportgroupssqll = "SELECT * FROM `chart_of_accounts` WHERE company_id = ".$get['company_id']." AND id = '".$get['Rid']."' AND is_active =0 ";
+            $financereportgroupsress = $callConfig->getRow($financereportgroupssqll);
+            $return['chart_of_accounts_single']= $financereportgroupsress;
+        }
 
         $accountgroupsssql = "SELECT id,group_name,parent_group_id,pl_yn,tb_seq,bs_seq,accsec_section_id FROM `account_groups` WHERE company_id = " . $get['company_id'] . " AND is_active =0";
         $accountgroupsres = $callConfig->getAllRows($accountgroupsssql);
         $return['account_groups'] = $accountgroupsres;
 
-		return $return;
+        return $return;
     }
     public function insertChartOfAccounts($get,$post){
-    	global $callConfig;
-    	$return =array();
-    	$return['post'] = $post;
+        global $callConfig;
+        $return =array();
+        $return['post'] = $post;
 
         $allow_posting = ($post['allow_posting'] =="0")?0:1;
          $allow_manual_entries = ($post['allow_manual_entries'] =="0")?0:1;
-    	if($post['Rid']!=""){
-    		$insert_array = array('account_code'=>$post['account_code'],'account_name'=>$post['account_name'],'account_short_name'=> $post['account_short_name'],'account_type'=>$post['account_type'],'parent_account_code'=>$post['parent_account_code'],'display_priority'=>$post['display_priority'],'tax_id'=>$post['tax_id'],'currency_id'=>$post['currency_id'],'journal_id'=>$post['journal_id'],'reconciliation'=>$post['reconciliation'],'allow_posting'=>$allow_posting,'allow_manual_entries'=>$allow_manual_entries,'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'),'accgro_group_id' => $post['account_groups']);
-    		$res=$callConfig->updateRecord('chart_of_accounts',$insert_array,'id',$post['Rid']);
-    		$return['res'] = $res;
-    	}else{
+        if($post['Rid']!=""){
+            $insert_array = array('account_code'=>$post['account_code'],'account_name'=>$post['account_name'],'account_short_name'=> $post['account_short_name'],'account_type'=>$post['account_type'],'parent_account_code'=>$post['parent_account_code'],'display_priority'=>$post['display_priority'],'tax_id'=>$post['tax_id'],'currency_id'=>$post['currency_id'],'journal_id'=>$post['journal_id'],'reconciliation'=>$post['reconciliation'],'allow_posting'=>$allow_posting,'allow_manual_entries'=>$allow_manual_entries,'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'),'accgro_group_id' => $post['account_groups']);
+            $res=$callConfig->updateRecord('chart_of_accounts',$insert_array,'id',$post['Rid']);
+            $return['res'] = $res;
+        }else{
             $accountcode = $this->setAccountCode($get, $post);
             $post['account_code'] = $accountcode['account_code'];
-    		$insert_array = array('company_id'=>$get['company_id'],'account_code'=>$post['account_code'],'account_name'=>$post['account_name'],'account_short_name'=> $post['account_short_name'],'account_type'=>$post['account_type'],'parent_account_code'=>$post['parent_account_code'],'display_priority'=>$post['display_priority'],'tax_id'=>$post['tax_id'],'currency_id'=>$post['currency_id'],'journal_id'=>$post['journal_id'],'reconciliation'=>$post['reconciliation'],'allow_posting'=>$allow_posting,'allow_manual_entries'=>$allow_manual_entries,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'accgro_group_id' => $post['account_groups']);
-    		$insert_data=$callConfig->insertRecord('chart_of_accounts',$insert_array);
-    		$return['res'] = $insert_data;
+            $insert_array = array('company_id'=>$get['company_id'],'account_code'=>$post['account_code'],'account_name'=>$post['account_name'],'account_short_name'=> $post['account_short_name'],'account_type'=>$post['account_type'],'parent_account_code'=>$post['parent_account_code'],'display_priority'=>$post['display_priority'],'tax_id'=>$post['tax_id'],'currency_id'=>$post['currency_id'],'journal_id'=>$post['journal_id'],'reconciliation'=>$post['reconciliation'],'allow_posting'=>$allow_posting,'allow_manual_entries'=>$allow_manual_entries,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'),'accgro_group_id' => $post['account_groups']);
+            $insert_data=$callConfig->insertRecord('chart_of_accounts',$insert_array);
+            $return['res'] = $insert_data;
              //Open  account balance
 
             if($insert_data['status'] =='sucess'){
@@ -202,109 +202,107 @@ class accountUserClass extends userClass{
             }
 
              //Close account balance
-       	}
+           }
 
-		return $return;
+        return $return;
     }
     public function insertTOCHeaders($get,$post){
-    	global $callConfig;
-    	$return =array();
-    	$return['post'] = $post;
-    	$encodedata = $post['header_contain'];
-    	if($post['Rid']!=""){
-    	     $insert_array = array('parent_toc_header_id'=>$post['parent_toc_header_id'],'text_of_content_id'=>$post['toc_id'],'header_name'=>$post['header_name'],'display_priority'=> $post['display_priority'],'header_contain'=>$encodedata,'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
-    		$res=$callConfig->updateRecord('toc_headers',$insert_array,'id',$post['Rid']);
-    		$return['res'] = $res;
-    	}else{
-    		$insert_array = array('company_id'=>$get['company_id'],'parent_toc_header_id'=>$post['parent_toc_header_id'],'text_of_content_id'=>$post['toc_id'],'header_name'=>$post['header_name'],'display_priority'=> $post['display_priority'],'header_contain'=>$encodedata,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
-    		$insert_data=$callConfig->insertRecord('toc_headers',$insert_array);
-    		$return['res'] = $insert_data;
-    	}
-		return $return;
+        global $callConfig;
+        $return =array();
+        $return['post'] = $post;
+        $encodedata = $post['header_contain'];
+        if($post['Rid']!=""){
+             $insert_array = array('parent_toc_header_id'=>$post['parent_toc_header_id'],'text_of_content_id'=>$post['toc_id'],'header_name'=>$post['header_name'],'display_priority'=> $post['display_priority'],'header_contain'=>$encodedata,'updated_by'=>$get['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
+            $res=$callConfig->updateRecord('toc_headers',$insert_array,'id',$post['Rid']);
+            $return['res'] = $res;
+        }else{
+            $insert_array = array('company_id'=>$get['company_id'],'parent_toc_header_id'=>$post['parent_toc_header_id'],'text_of_content_id'=>$post['toc_id'],'header_name'=>$post['header_name'],'display_priority'=> $post['display_priority'],'header_contain'=>$encodedata,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id'],'created_date'=>date('Y-m-d H:i:s'));
+            $insert_data=$callConfig->insertRecord('toc_headers',$insert_array);
+            $return['res'] = $insert_data;
+        }
+        return $return;
     }
- 	public function getTOCHeader($get){
-    	global $callConfig;
-    	$returnarray = array();
-    	$codition = "";
-    	if($get['id'] != ""){
-    		$codition .= " AND id = '".$get['id']."'";
-    		$tocheaderssql = "SELECT id, parent_toc_header_id, header_name, display_priority, header_contain FROM toc_headers WHERE company_id = '".$get['company_id']."' ".$codition." AND is_active = 0";
-			$tocheadersres = $callConfig->getRow($tocheaderssql);
-			$returnarray['toc_headers_single'] = $tocheadersres;
-    	}elseif($get['popup'] =="Y"){
+     public function getTOCHeader($get){
+        global $callConfig;
+        $returnarray = array();
+        $codition = "";
+        if($get['id'] != ""){
+            $codition .= " AND id = '".$get['id']."'";
+            $tocheaderssql = "SELECT id, parent_toc_header_id, header_name, display_priority, header_contain FROM toc_headers WHERE company_id = '".$get['company_id']."' ".$codition." AND is_active = 0";
+            $tocheadersres = $callConfig->getRow($tocheaderssql);
+            $returnarray['toc_headers_single'] = $tocheadersres;
+        }
+        $toc_headerssql = "SELECT id, parent_toc_header_id, header_name, display_priority, header_contain,header_type FROM toc_headers WHERE company_id = '".$get['company_id']."' AND text_of_content_id= '".$get['EID']."'  AND is_active = 0";
+        $toc_headersres = $callConfig->getAllRows($toc_headerssql);
+        $returnarray['toc_headers'] = $toc_headersres;
 
-    	}
-    	$toc_headerssql = "SELECT id, parent_toc_header_id, header_name, display_priority, header_contain,header_type FROM toc_headers WHERE company_id = '".$get['company_id']."' AND text_of_content_id= '".$get['EID']."'  AND is_active = 0";
-		$toc_headersres = $callConfig->getAllRows($toc_headerssql);
-		$returnarray['toc_headers'] = $toc_headersres;
+        $textofcontentssql = "SELECT id, toc_name,description FROM text_of_contents WHERE company_id = '".$get['company_id']."' AND id= '".$get['EID']."' AND is_active = 0";
+        $textofcontentsres = $callConfig->getRow($textofcontentssql);
+        $returnarray['text_of_contents'] = $textofcontentsres;
 
-		$textofcontentssql = "SELECT id, toc_name,description FROM text_of_contents WHERE company_id = '".$get['company_id']."' AND id= '".$get['EID']."' AND is_active = 0";
-		$textofcontentsres = $callConfig->getRow($textofcontentssql);
-		$returnarray['text_of_contents'] = $textofcontentsres;
+        $create_documents_fieldssql = "SELECT id, apply_table_name, application_table_name, display_field, value_field, label,preview_value,field_type FROM create_documents_fields WHERE company_id = '".$get['company_id']."' AND apply_table_name = 'toc_headers'  AND is_active = 0";
+        $createdocumentsfieldsres = $callConfig->getAllRows($create_documents_fieldssql);
+        $returnarray['create_documents_fields'] = $createdocumentsfieldsres;
 
-		$create_documents_fieldssql = "SELECT id, apply_table_name, application_table_name, display_field, value_field, label,preview_value,field_type FROM create_documents_fields WHERE company_id = '".$get['company_id']."' AND apply_table_name = 'toc_headers'  AND is_active = 0";
-		$createdocumentsfieldsres = $callConfig->getAllRows($create_documents_fieldssql);
-		$returnarray['create_documents_fields'] = $createdocumentsfieldsres;
-
-		return $returnarray;
+        return $returnarray;
 
     }
     public function getTextOfContentReports($get){
-    	global $callConfig;
-    	if($get['inputformreport'] =="Y"){
-	    	$text_of_contentssql = "SELECT id, toc_name FROM text_of_contents WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-			$text_of_contentsres = $callConfig->getAllRows($text_of_contentssql);
-			$returnarray['text_of_contents'] = $text_of_contentsres;
+        global $callConfig;
+        if($get['inputformreport'] =="Y"){
+            $text_of_contentssql = "SELECT id, toc_name FROM text_of_contents WHERE company_id = '".$get['company_id']."' AND is_active = 0";
+            $text_of_contentsres = $callConfig->getAllRows($text_of_contentssql);
+            $returnarray['text_of_contents'] = $text_of_contentsres;
 
-			$auditsql = "SELECT id, audit_name FROM audit WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-			$auditres = $callConfig->getAllRows($auditsql);
-			$returnarray['audit'] = $auditres;
+            $auditsql = "SELECT id, audit_name FROM audit WHERE company_id = '".$get['company_id']."' AND is_active = 0";
+            $auditres = $callConfig->getAllRows($auditsql);
+            $returnarray['audit'] = $auditres;
 
 
-		}else{
-			$auditsql = "SELECT * FROM audit WHERE company_id = '".$get['company_id']."' AND id = '".$get['audit_id']."' AND is_active = 0";
-			$auditres = $callConfig->getRow($auditsql);
-			$returnarray['audit'] = $auditres;
+        }else{
+            $auditsql = "SELECT * FROM audit WHERE company_id = '".$get['company_id']."' AND id = '".$get['audit_id']."' AND is_active = 0";
+            $auditres = $callConfig->getRow($auditsql);
+            $returnarray['audit'] = $auditres;
 
-			$customerssql = "SELECT * FROM customers WHERE company_id = '".$get['company_id']."' AND id = '".$auditres->customer_id."' AND is_active = 0";
-			$customersres = $callConfig->getRow($customerssql);
-			$returnarray['customers'] = $customersres;
+            $customerssql = "SELECT * FROM customers WHERE company_id = '".$get['company_id']."' AND id = '".$auditres->customer_id."' AND is_active = 0";
+            $customersres = $callConfig->getRow($customerssql);
+            $returnarray['customers'] = $customersres;
 
-			$create_documents_fieldssql = "SELECT id, apply_table_name, application_table_name,  display_field, value_field, label,preview_value,field_type FROM create_documents_fields WHERE company_id = '".$get['company_id']."' AND apply_table_name = 'toc_headers'  AND is_active = 0";
-			$createdocumentsfieldsres = $callConfig->getAllRows($create_documents_fieldssql);
-			$returnarray['create_documents_fields'] = $createdocumentsfieldsres;
-		}
-    	$toc_headerssql = "SELECT id, parent_toc_header_id, header_name, display_priority, header_contain,header_type FROM toc_headers WHERE company_id = '".$get['company_id']."' AND text_of_content_id= '".$get['toc_id']."'  AND is_active = 0";
-		$toc_headersres = $callConfig->getAllRows($toc_headerssql);
-		$returnarray['toc_headers'] = $toc_headersres;
+            $create_documents_fieldssql = "SELECT id, apply_table_name, application_table_name,  display_field, value_field, label,preview_value,field_type FROM create_documents_fields WHERE company_id = '".$get['company_id']."' AND apply_table_name = 'toc_headers'  AND is_active = 0";
+            $createdocumentsfieldsres = $callConfig->getAllRows($create_documents_fieldssql);
+            $returnarray['create_documents_fields'] = $createdocumentsfieldsres;
+        }
+        $toc_headerssql = "SELECT id, parent_toc_header_id, header_name, display_priority, header_contain,header_type FROM toc_headers WHERE company_id = '".$get['company_id']."' AND text_of_content_id= '".$get['toc_id']."'  AND is_active = 0";
+        $toc_headersres = $callConfig->getAllRows($toc_headerssql);
+        $returnarray['toc_headers'] = $toc_headersres;
 
-		$create_documents_fieldssql = "SELECT id, apply_table_name, application_table_name,  display_field, value_field, label,preview_value,field_type FROM create_documents_fields WHERE company_id = '".$get['company_id']."' AND apply_table_name = 'toc_headers'  AND is_active = 0";
-		$createdocumentsfieldsres = $callConfig->getAllRows($create_documents_fieldssql);
-		$stringfields = array();
-		$tables = array();
-		$tablesresult = array();
-	 	foreach($toc_headersres as $tocheadersres){
-	 		$contents = urldecode(json_decode($tocheadersres->header_contain,1));
-			foreach($createdocumentsfieldsres as $cdf){
-				if($cdf->field_type == '2' || $cdf->field_type == '3'){
-					$replacekey = strtolower(str_replace(' ', '_', $cdf->label));
-   					$matchstring = "{[".$replacekey."]}";
-					if(substr_count($contents,$matchstring) !=0)
-					{
-						$stringfields[$tocheadersres->id][] = $cdf;
-						$tables[$cdf->application_table_name] = $cdf->application_table_name;
-					}
-				}
-			}
-	 	}
-	 	foreach($tables as $table){
-	 		$valuefieldsql = "SELECT * FROM ".$table." WHERE company_id = '".$get['company_id']."' AND is_active = 0";
-			$valuefieldres = $callConfig->getAllRows($valuefieldsql);
-			$tablesresult[$table]= $valuefieldres;
-	 	}
-		$returnarray['tablesresult']  = $tablesresult;
-		$returnarray['stringfields']  = $stringfields;
-		return $returnarray;
+        $create_documents_fieldssql = "SELECT id, apply_table_name, application_table_name,  display_field, value_field, label,preview_value,field_type FROM create_documents_fields WHERE company_id = '".$get['company_id']."' AND apply_table_name = 'toc_headers'  AND is_active = 0";
+        $createdocumentsfieldsres = $callConfig->getAllRows($create_documents_fieldssql);
+        $stringfields = array();
+        $tables = array();
+        $tablesresult = array();
+         foreach($toc_headersres as $tocheadersres){
+             $contents = urldecode(json_decode($tocheadersres->header_contain,1));
+            foreach($createdocumentsfieldsres as $cdf){
+                if($cdf->field_type == '2' || $cdf->field_type == '3'){
+                    $replacekey = strtolower(str_replace(' ', '_', $cdf->label));
+                       $matchstring = "{[".$replacekey."]}";
+                    if(substr_count($contents,$matchstring) !=0)
+                    {
+                        $stringfields[$tocheadersres->id][] = $cdf;
+                        $tables[$cdf->application_table_name] = $cdf->application_table_name;
+                    }
+                }
+            }
+         }
+         foreach($tables as $table){
+             $valuefieldsql = "SELECT * FROM ".$table." WHERE company_id = '".$get['company_id']."' AND is_active = 0";
+            $valuefieldres = $callConfig->getAllRows($valuefieldsql);
+            $tablesresult[$table]= $valuefieldres;
+         }
+        $returnarray['tablesresult']  = $tablesresult;
+        $returnarray['stringfields']  = $stringfields;
+        return $returnarray;
     }
     public function getFinanaceReports($get){
         global $callConfig;
@@ -753,83 +751,83 @@ class accountUserClass extends userClass{
         return $return;
     }
     public function togetbudgetuserdeailsaccount($post){
-		global $callConfig;
-		$query = "SELECT * FROM chart_of_accounts WHERE account_code IN (SELECT account_code FROM gl_account_users WHERE user_id = ".$post['user_id'].")";
-		$data = $callConfig->getAllRows($query);
-		$group_ids = array();
-		foreach ($data as $value) {
-			$return [$value->accgro_group_id][] = (array)$value;
-			$group_ids[] = $value->accgro_group_id;
-		}
-		$group_ids = implode(",", (array)$group_ids);
-		$query2 = "SELECT id,group_name,parent_group_id,accsec_section_id FROM account_groups WHERE id in(".$group_ids.")";
-		$data2 = $callConfig->getAllRows($query2);
-		$account_section = array();
-		foreach ($data2 as  $value2) {
-			$returns1  = (array)$value2;
-			$returns1['details'] = $return[$value2->id];
-			$returns[$value2->accsec_section_id][] = $returns1;
-			$account_section[] = $value2->accsec_section_id;
-		}
+        global $callConfig;
+        $query = "SELECT * FROM chart_of_accounts WHERE account_code IN (SELECT account_code FROM gl_account_users WHERE user_id = ".$post['user_id'].")";
+        $data = $callConfig->getAllRows($query);
+        $group_ids = array();
+        foreach ($data as $value) {
+            $return [$value->accgro_group_id][] = (array)$value;
+            $group_ids[] = $value->accgro_group_id;
+        }
+        $group_ids = implode(",", (array)$group_ids);
+        $query2 = "SELECT id,group_name,parent_group_id,accsec_section_id FROM account_groups WHERE id in(".$group_ids.")";
+        $data2 = $callConfig->getAllRows($query2);
+        $account_section = array();
+        foreach ($data2 as  $value2) {
+            $returns1  = (array)$value2;
+            $returns1['details'] = $return[$value2->id];
+            $returns[$value2->accsec_section_id][] = $returns1;
+            $account_section[] = $value2->accsec_section_id;
+        }
 
-		$account_section = implode(",", (array)$account_section);
-		$query3 = "SELECT id,section_name,section_description FROM account_sections WHERE id in(".$account_section.")";
-		$data3 = $callConfig->getAllRows($query3);
-		foreach ($data3 as  $value3) {
-			$main[$value3->id] = (array)$value3;
-			$main[$value3->id]['data'] = $returns [$value3->id];
-		}
+        $account_section = implode(",", (array)$account_section);
+        $query3 = "SELECT id,section_name,section_description FROM account_sections WHERE id in(".$account_section.")";
+        $data3 = $callConfig->getAllRows($query3);
+        foreach ($data3 as  $value3) {
+            $main[$value3->id] = (array)$value3;
+            $main[$value3->id]['data'] = $returns [$value3->id];
+        }
 
-		$query3 = "SELECT cc.id, cc.cost_center_name, cc.cost_center_type FROM cost_centers cc, user_cost_centers ucc WHERE cc.company_id = ucc.company_id AND cc.company_id = ".$post['company_id']." AND cc.id = ucc.cost_center_id AND ucc.user_id = ".$post['user_id']." AND ucc.is_active =0 AND cc.is_active = 0";
-		$cost_centers = $callConfig->getAllRows($query3);
-		if($post['fiscal_year']!="" && $post['cost_center']!="" ){
-			$query = "SELECT * FROM account_budgets WHERE company_id = ".$post['company_id']." AND fiscal_year = '".$post['fiscal_year']."' AND cost_center_id =".$post['cost_center']." AND  is_active = 0";
-			$account_budgets = $callConfig->getRow($query);
-			$querys = "SELECT * FROM budget WHERE company_id = ".$post['company_id']." AND fiscal_year = '".$post['fiscal_year']."' AND cost_center_id =".$post['cost_center']."  AND  is_active = 0";
-			$budget = $callConfig->getAllRows($querys);
-		}
-		return array('main'=>$main, 'cost_centers'=>$cost_centers, 'account_budgets'=>$account_budgets, 'budget'=>$budget, 'account_budget_query'=>$query, 'budget_query'=>$querys);
-	}
-	public function budgetinsertaccount($get,$post){
-		global $callConfig;
-		$whrqu= "UPDATE account_budgets SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year']."' AND is_active = 0";
-		$callConfig->executeQuery($whrqu);
-		$whrqu= "UPDATE budget SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year']."' AND is_active = 0";
-		$callConfig->executeQuery($whrqu);
+        $query3 = "SELECT cc.id, cc.cost_center_name, cc.cost_center_type FROM cost_centers cc, user_cost_centers ucc WHERE cc.company_id = ucc.company_id AND cc.company_id = ".$post['company_id']." AND cc.id = ucc.cost_center_id AND ucc.user_id = ".$post['user_id']." AND ucc.is_active =0 AND cc.is_active = 0";
+        $cost_centers = $callConfig->getAllRows($query3);
+        if($post['fiscal_year']!="" && $post['cost_center']!="" ){
+            $query = "SELECT * FROM account_budgets WHERE company_id = ".$post['company_id']." AND fiscal_year = '".$post['fiscal_year']."' AND cost_center_id =".$post['cost_center']." AND  is_active = 0";
+            $account_budgets = $callConfig->getRow($query);
+            $querys = "SELECT * FROM budget WHERE company_id = ".$post['company_id']." AND fiscal_year = '".$post['fiscal_year']."' AND cost_center_id =".$post['cost_center']."  AND  is_active = 0";
+            $budget = $callConfig->getAllRows($querys);
+        }
+        return array('main'=>$main, 'cost_centers'=>$cost_centers, 'account_budgets'=>$account_budgets, 'budget'=>$budget, 'account_budget_query'=>$query, 'budget_query'=>$querys);
+    }
+    public function budgetinsertaccount($get,$post){
+        global $callConfig;
+        $whrqu= "UPDATE account_budgets SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year']."' AND is_active = 0";
+        $callConfig->executeQuery($whrqu);
+        $whrqu= "UPDATE budget SET is_active = NULL , updated_by = ".$get['user_id']." WHERE company_id= '".$get['company_id']."' AND  cost_center_id='".$post['cost_center_id']."' AND fiscal_year='".$post['fiscal_year']."' AND is_active = 0";
+        $callConfig->executeQuery($whrqu);
 
-		$insert_array = array('company_id'=>$get['company_id'],'budget_name'=>$post['budget_name'],'user_id'=>$post['user_id'],'budget_created'=>$post['inveral'],'budget_version'=>$post['budget_version'],'cost_center_id'=>$post['cost_center_id'],'fiscal_year'=>$post['fiscal_year'],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id']);
-		$res[]=$callConfig->insertRecord('account_budgets',$insert_array);
-		foreach ($post['data'] as $value) {
-			$value['company_id'] = $get['company_id'];
-			$value['budget_version'] = $post['budget_version'];
-			$value['budget_date'] = $post['budget_date'];
-			$value['budget_created'] = $post['inveral'];
-			$value['cost_center_id'] = $post['cost_center_id'];
-			$value['fiscal_year'] = $post['fiscal_year'];
-			$value['user_id'] = $post['user_id'];
-			$value['is_active'] = 0;
-			$value['created_by'] = $post['user_id'];
-			$value['current_status'] = 0;
-			$value['action_if_exceed_yearly'] = $post['action_if_exceed_yearly'];
-			$value['action_if_exceed_quaterly'] = $post['action_if_exceed_quaterly'];
-			$value['action_if_exceed_halfyearly'] = $post['action_if_exceed_halfyearly'];
-			$value['action_if_exceed_month'] = $post['action_if_exceed_month'];
-			$res[]=$callConfig->insertRecord('budget',$value);
-		}
-		return $res;
-	}
-	public function insertorupdatebudgetaccount($post){
-		global $callConfig;
-		$whr1="company_id= '".$post['company_id']."' and budget_version='".$post['budget_version']."' and cost_center_id='".$post['cost_center_id']."' and account_code='".$post['account_code']."' and fiscal_year='".$post['fiscal_year']."'";
-		$query2 = $callConfig->selectQuery('budget','*',$whr1,'','','');
-		$data = $callConfig->getRow($query2);
-		if($data->id !=''){
-			$res=$callConfig->updateRecord('budget',$post,'id',$data->id);
-		}else{
-			$res=$callConfig->insertRecord('budget',$post);
-		}
-		return $res;
-	}
+        $insert_array = array('company_id'=>$get['company_id'],'budget_name'=>$post['budget_name'],'user_id'=>$post['user_id'],'budget_created'=>$post['inveral'],'budget_version'=>$post['budget_version'],'cost_center_id'=>$post['cost_center_id'],'fiscal_year'=>$post['fiscal_year'],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id']);
+        $res[]=$callConfig->insertRecord('account_budgets',$insert_array);
+        foreach ($post['data'] as $value) {
+            $value['company_id'] = $get['company_id'];
+            $value['budget_version'] = $post['budget_version'];
+            $value['budget_date'] = $post['budget_date'];
+            $value['budget_created'] = $post['inveral'];
+            $value['cost_center_id'] = $post['cost_center_id'];
+            $value['fiscal_year'] = $post['fiscal_year'];
+            $value['user_id'] = $post['user_id'];
+            $value['is_active'] = 0;
+            $value['created_by'] = $post['user_id'];
+            $value['current_status'] = 0;
+            $value['action_if_exceed_yearly'] = $post['action_if_exceed_yearly'];
+            $value['action_if_exceed_quaterly'] = $post['action_if_exceed_quaterly'];
+            $value['action_if_exceed_halfyearly'] = $post['action_if_exceed_halfyearly'];
+            $value['action_if_exceed_month'] = $post['action_if_exceed_month'];
+            $res[]=$callConfig->insertRecord('budget',$value);
+        }
+        return $res;
+    }
+    public function insertorupdatebudgetaccount($post){
+        global $callConfig;
+        $whr1="company_id= '".$post['company_id']."' and budget_version='".$post['budget_version']."' and cost_center_id='".$post['cost_center_id']."' and account_code='".$post['account_code']."' and fiscal_year='".$post['fiscal_year']."'";
+        $query2 = $callConfig->selectQuery('budget','*',$whr1,'','','');
+        $data = $callConfig->getRow($query2);
+        if($data->id !=''){
+            $res=$callConfig->updateRecord('budget',$post,'id',$data->id);
+        }else{
+            $res=$callConfig->insertRecord('budget',$post);
+        }
+        return $res;
+    }
     public function getJournalVouchers($get){
         global $callConfig;
         $return= $partylist = array();
@@ -1140,7 +1138,7 @@ class accountUserClass extends userClass{
         }
 
         $sql = "UPDATE account_balances SET closing_balance = closing_balance + ".$amountChange.",opening_balance = opening_balance + ".$amountChange." WHERE company_id ='".$company_id."' AND finance_year = '".$financeyear."' AND account_code = '".$accountId."' AND balance_date > '".$entryDate."' AND is_active = 0";
-        $updateaccres = $callConfig->executeQuery($sql);
+        $callConfig->executeQuery($sql);
         $return['update_all_record'] = $sql;
 //account_balances End
 
@@ -1161,16 +1159,13 @@ class accountUserClass extends userClass{
             $updateddebitamt = $oldDebitAmount +$debitAmount;
             $updatedcreditamt = $oldCreditAmount +$creditAmount;
 
-            $oldAmountChange = $isDebit ? $oldDebitAmount - $oldCreditAmount : $oldCreditAmount - $oldDebitAmount;
-
-
             // Update the balance for the existing entry
             $updatedBalance = $existingEntry1->closing_balance + $amountChange;
 
             $sql = "UPDATE account_balances_details SET closing_balance = '".$updatedBalance."', debit_amount = '".$updateddebitamt."',credit_amount = '".$updatedcreditamt."'
                     WHERE company_id ='".$company_id."' AND id = '".$existingEntry1->id."'";
 
-            $updateaccres = $callConfig->executeQuery($sql);
+            $callConfig->executeQuery($sql);
             $return['account_balances_details_balances_details'] = $sql;
 
             // Update amountChange to reflect the difference for future updates
@@ -1782,7 +1777,6 @@ GROUP BY  coa.account_code, coa.account_name, coa.parent_account_code, coa.compa
         return $return;
     }
     public function getFinanceialYear($trans_date){
-        $returnary = array();
         if(date("m",strtotime($trans_date)) >= 4){
             $shortstartyear = date("y",strtotime($trans_date));
             $shortendyear = (date("y",strtotime($trans_date))+1);

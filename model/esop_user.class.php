@@ -279,7 +279,7 @@ class esopUserClass extends userClass{
 			$inseruser['updated_date']=date('Y-m-d h:i:s');
 			$inseruser['updated_by']=$post['user_id'];
 			$company_contribution_user_id = $post['company_contribution_user_id'];
-			$res1= $callConfig->updateRecord('company_contribution_users',$insertary,'id',$company_contribution_user_id);
+			$callConfig->updateRecord('company_contribution_users',$insertary,'id',$company_contribution_user_id);
 		}else{
 			$inseruser['user_id']=$userid;
 			$inseruser['is_active']=0;

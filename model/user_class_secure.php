@@ -5,7 +5,6 @@ use Dompdf\Options;
 class userClass{
 	public function checkAdmin($post) {
 		global $callConfig;
-		$login_type = 'N';
 	   $where="user_email='?'  and is_active ='0'";
 	   if($post['zqr_connect'] !=""){
 	   		$where .=" AND zqr_connect = '?'";

@@ -342,16 +342,14 @@ class pettyCashUserClass extends userClass
 						$beforepcbres = $callConfig->getAllRows($beforepcbsql);
 						$seq = 1;
 						foreach ($beforepcbres as $bres) {
-							if ($seq == 1) {
-								if ($bres->balance_date != $pcbrres->transaction_date) {
+							if ($seq == 1 && $bres->balance_date != $pcbrres->transaction_date) {
 
-									$closing_balance = ($balancetype === '-')
-										? (float) $bres->opening_balance - (float) $pcbrres->total_amount
-										: (float) $bres->opening_balance + (float) $pcbrres->total_amount;
-									$insertcust = array('company_id' => $post['company_id'], 'pt_owner_id' => $pcbrres->party_id, 'pc_box_id' => $pcbrres->ref_id, 'balance_date' => $pcbrres->transaction_date, 'debit_amount' => $pcbrres->total_amount, 'credit_amount' => 0, 'opening_balance' => $bres->opening_balance, 'closing_balance' => $closing_balance, 'is_active' => 0, 'current_status' => 0, 'created_by' => $post['user_id'], 'created_date' => date("Y-m-d H:i:s"));
-									$pc_balance = $callConfig->insertRecord('petty_cash_balances', $insertcust);
-									$return['beforsamedate'][] = $samedate;
-								}
+								$closing_balance = ($balancetype === '-')
+									? (float) $bres->opening_balance - (float) $pcbrres->total_amount
+									: (float) $bres->opening_balance + (float) $pcbrres->total_amount;
+								$insertcust = array('company_id' => $post['company_id'], 'pt_owner_id' => $pcbrres->party_id, 'pc_box_id' => $pcbrres->ref_id, 'balance_date' => $pcbrres->transaction_date, 'debit_amount' => $pcbrres->total_amount, 'credit_amount' => 0, 'opening_balance' => $bres->opening_balance, 'closing_balance' => $closing_balance, 'is_active' => 0, 'current_status' => 0, 'created_by' => $post['user_id'], 'created_date' => date("Y-m-d H:i:s"));
+								$callConfig->insertRecord('petty_cash_balances', $insertcust);
+								$return['beforsamedate'][] = $samedate;
 							}
 							$updatequery = "UPDATE petty_cash_balances SET opening_balance= opening_balance" . $balancetype . $pcbrres->total_amount . ", closing_balance= closing_balance" . $balancetype . $pcbrres->total_amount . " WHERE id = '" . $bres->id . "'";
 							$samedate = $callConfig->executeQuery($updatequery);
@@ -375,7 +373,6 @@ class pettyCashUserClass extends userClass
 						$return['pc_balance_already_after_date_insert_symb'] = $balancetype;
 
 					}
-				} else {
 				}
 			} else {
 				$return['not_inside'] = "Y";

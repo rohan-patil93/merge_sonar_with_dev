@@ -52,7 +52,6 @@ class aicallUserClass extends userClass{
 			$return['candidates'] = $rowdata;
 		}elseif($gettype == "getsinglecandidates"){
 			$candidate_id = $get['candidate_id'];
-			$job_postings = $get['job_postings'];
 			$query = "SELECT can.id, can.first_name, can.last_name, can.display_name, can.address, can.phone, can.email_id FROM candidates can WHERE id = '".$candidate_id."' AND is_active = 0";
 			$rowdata = $callConfig->getrow($query);
 			$return['candidate'] = $rowdata;
@@ -141,13 +140,6 @@ class aicallUserClass extends userClass{
 	public function startCandidateScreeningQuestionsAndAnswers($get, $post){
 		global $callConfig;
 		$return = array();
-/**
-		$query = "SELECT * FROM api_hits can WHERE id = 613";
-		$rowdata = $callConfig->getrow($query);
-		$decores = $api_response_details = json_decode(urldecode($rowdata->api_response_details),1);
-		print_r($api_response_details);
-
-**/
 		$decores = json_decode($post['data'],1);
 		$insertarray = array('company_id'=>$_POST['company_id'],'application_table'=>'candidate_screening_questions_and_answers','transaction_id'=>'','api_master_id'=>1000,'api_url'=>'abc','api_request_parameters'=>json_encode((array)$get),'request_date_time'=>date("Y-m-d H:i:s"),
 			'api_response_details'=>urlencode(json_encode($decores)),'is_active'=>'0','current_status'=>'0','created_date'=>date("Y-m-d H:i:s"),'created_by'=>$_POST['user_id'],'response_status'=>200);

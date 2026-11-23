@@ -841,7 +841,13 @@ class purchasingUserClass extends userClass{
                 'pan_no' => $work_order_details->pan_no
             ));
 
-            $party_name = $work_order_details->party_name != '' ? $work_order_details->party_name : ($work_order_details->vendor_company != '' ? $work_order_details->vendor_company : $work_order_details->vendor_display_name);
+            if ($work_order_details->party_name != '') {
+                $party_name = $work_order_details->party_name;
+            } elseif ($work_order_details->vendor_company != '') {
+                $party_name = $work_order_details->vendor_company;
+            } else {
+                $party_name = $work_order_details->vendor_display_name;
+            }
 
             $postdata = array(
                 'company_id' => $get['company_id'],

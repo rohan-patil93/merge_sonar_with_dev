@@ -758,7 +758,7 @@ class manufacturingUserClass extends userClass{
 			$bomchildoperationlist = (array)($boms['child_operations'] ?? array());
 			foreach($bomchildoperationlist as $bomchildoperation){
 				$postdata = array('company_id'=>$get['company_id'],'transaction_id'=>$rid,'manufacturing_operation_id'=>$bomchildoperation->manufacturing_operation_id,'operation_time'=>$bomchildoperation->operation_time,'operation_manpower'=>$bomchildoperation->operation_manpower,'operation_note'=>$bomchildoperation->operation_note,'is_active'=>0,'current_status'=>0,'created_date'=>date('Y-m-d H:i:s'),'created_by'=>$get['user_id']);
-				$res=$callConfig->insertRecord('manufacturing_work_order_operations',$postdata);
+				$callConfig->insertRecord('manufacturing_work_order_operations',$postdata);
 			}
 		}
 	}

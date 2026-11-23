@@ -7556,9 +7556,7 @@ class reactClass extends userClass
 				}
 				$endDate = $c['end_date'] ?? '';
 				$isExpired = ($endDate != '' && new DateTime($endDate) < $today);
-				if ($type == 'expired' && $isExpired) {
-					$filtered[] = $c;
-				} elseif ($type == 'active' && ($endDate == '' || new DateTime($endDate) >= $today)) {
+				if (($type == 'expired' && $isExpired) || ($type == 'active' && ($endDate == '' || new DateTime($endDate) >= $today))) {
 					$filtered[] = $c;
 				}
 			}

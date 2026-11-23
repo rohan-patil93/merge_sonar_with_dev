@@ -88,10 +88,8 @@ class manfacturingForecastUserClass extends userClass
 
         $forecastHeader = $callConfig->getRow("SELECT * FROM manufacturing_forecast WHERE company_id='{$company_id}' AND year='{$year}' AND is_active=0 LIMIT 1");
         $editableStatuses = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '', null);
-        if (!empty($forecastHeader->id)) {
-            if (!in_array($forecastHeader->current_status, $editableStatuses)) {
-                return array(array('status' => 'fail', 'message' => 'Approved forecast cannot be edited.'));
-            }
+        if (!empty($forecastHeader->id) && !in_array($forecastHeader->current_status, $editableStatuses)) {
+            return array(array('status' => 'fail', 'message' => 'Approved forecast cannot be edited.'));
         }
 
         if (!empty($forecastHeader->id)) {
@@ -2751,7 +2749,13 @@ class manfacturingForecastUserClass extends userClass
 
             // 2. Update manufacturing_work_orders
             $total_completed_qty = $current_completed_qty + $session_completed_qty;
-            $work_log_status = ($production_type === 'HOLD') ? 1 : (($total_completed_qty >= $ordered_qty) ? 199 : 0);
+            if ($production_type === 'HOLD') {
+                $work_log_status = 1;
+            } elseif ($total_completed_qty >= $ordered_qty) {
+                $work_log_status = 199;
+            } else {
+                $work_log_status = 0;
+            }
             $wo_update = array(
                 'work_log_status' => $work_log_status,
                 'completed_qty' => $total_completed_qty
