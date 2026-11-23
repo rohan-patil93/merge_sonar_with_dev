@@ -1,4 +1,5 @@
 <?php
+defined('API_SALARY_TEMPLATE') || define('API_SALARY_TEMPLATE', '?mode=gettabledetailswithconditions&table=salary_template&data=');
 $_SESSION['apply_js']['multiselest'] = 1;
 $cand_detaail = $data;
 if($cand_detaail['id']!=""){
@@ -45,7 +46,7 @@ if($_GET['Rid']!="" || $_GET['SEid']!="" || $_GET['SCid']!=""){
         $rid = $main_id['1'];
         $datawr["where"] = array('is_active'=> '0','id'=>$main_id['1']);
         $costdata = urlencode(json_encode($datawr));
-        $url = API."?mode=gettabledetailswithconditions&table=salary_template&data=".$costdata;
+        $url = API.API_SALARY_TEMPLATE.$costdata;
         $salarydata = callAPI($url);
         $salarydata = json_decode($salarydata,1);
         $salarydata = $salarydata[0];
@@ -59,7 +60,7 @@ if($_GET['Rid']!="" || $_GET['SEid']!="" || $_GET['SCid']!=""){
         $main_id = explode(":",$main_ids);
         $datawr["where"] = array('is_active'=> '0','employee_id'=>$main_id['1']);
         $costdata = urlencode(json_encode($datawr));
-        $url = API."?mode=gettabledetailswithconditions&table=salary_template&data=".$costdata;
+        $url = API.API_SALARY_TEMPLATE.$costdata;
         $salarydata = callAPI($url);
         $salarydata = json_decode($salarydata,1);
         $salarydata = $salarydata[0];
@@ -67,7 +68,7 @@ if($_GET['Rid']!="" || $_GET['SEid']!="" || $_GET['SCid']!=""){
     if($_GET['SCid']!=""){
         $datawr["where"] = array('is_active'=> '0','candidate_id'=>$_GET['SCid']);
         $costdata = urlencode(json_encode($datawr));
-        $url = API."?mode=gettabledetailswithconditions&table=salary_template&data=".$costdata;
+        $url = API.API_SALARY_TEMPLATE.$costdata;
         $salarydata = callAPI($url);
         $salarydata = json_decode($salarydata,1);
         $salarydata = $salarydata[0];
@@ -859,7 +860,6 @@ return month_amount;
                                     <?php $j=1; foreach ($data as  $dat) {
                                         if(in_array($dat['id'], (array)$checkmainids)){
                                             $maincss ="";
-                                        }else{
                                         }
                                         ?>
                                         <table <?php echo $maincss; ?> id="invoiceItem<?php echo  $dat['id']; ?>">
@@ -1000,7 +1000,7 @@ return month_amount;
     </div>
 </div>
 </div>
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog"  tabindex="-1" aria-hidden="true"  role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade"  tabindex="-1" aria-hidden="true"  aria-hidden="true">
     <div class="modal-dialog " >
         <div class="modal-content" >
 
@@ -1052,7 +1052,7 @@ return month_amount;
                         </div>
                     </div>
                     <div  class="col-lg-12" style="page-break-before: always;">
-                        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;" role="presentation">
+                        <table style="border: 1px solid #000;width: 100%;padding: 5px; margin: 20px 0px; margin-left: auto; margin-right: auto;">
                             <tr style="height: 50px;border: 1px solid #000;">
                                 <td style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;" class="f-w-600" ><?php echo __('Name'); ?> </td>
                                 <td  style="border:1px solid #000;padding: 5px; font-weight: bold;font-size: 16px;"colspan="2">&nbsp;<?php echo   $emp_data['display_name']." (".$emp_data['emp_code'].")"; ?></td>

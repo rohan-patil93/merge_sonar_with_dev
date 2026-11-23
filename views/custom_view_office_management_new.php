@@ -144,7 +144,7 @@ input.qtyminus { width:25px; height:25px;}
                                 </button>
                             </div>
                             <div class="modal fade" id="courier-out-Modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog">
                                     <div class="modal-content align-left">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><?= __('Courier in'); ?></h4>
@@ -221,11 +221,11 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                                         </th>
                                         <th scope="col">
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -239,11 +239,11 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -257,11 +257,11 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                                         </td>
                                         <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -275,7 +275,7 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -301,11 +301,11 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                                         </th>
                                         <th scope="col">
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -319,11 +319,11 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -337,11 +337,11 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                                         </td>
                                         <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -355,7 +355,7 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -381,11 +381,11 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                                         </th>
                                         <th scope="col">
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -399,11 +399,11 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -417,11 +417,11 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-success"><?= __('In Progress'); ?></span>
                                         </td>
                                         <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="../files/assets/images/avatar-4.jpg" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -435,7 +435,7 @@ input.qtyminus { width:25px; height:25px;}
                                             <span class="form-label label label-danger"><?= __('Rejected'); ?></span>
                                         </td>
                                         <td>
-                                            <button class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
+                                            <button type="button" class="btn waves-effect waves-light btn-primary"><i class="feather icon-edit-1"></i></button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -455,7 +455,7 @@ input.qtyminus { width:25px; height:25px;}
                             <span class="ti-shopping-cart m-r-5"></span>&nbsp; (<span id="cartval"><?php echo $data['cart_count']; ?></span>)
                         </button>
                         <div class="modal fade" id="create-product-modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog">
                                 <div class="modal-content align-left">
                                     <div class="modal-header">
                                         <h4 class="modal-title"><?= __('Sell new product'); ?></h4>
@@ -539,7 +539,7 @@ input.qtyminus { width:25px; height:25px;}
         <div class="" style="background: #B0DC00 url(../assets/images/city.png);
             width:100%;height:250px;background-repeat:no-repeat;background-position:100% 50px;background-size: 500px auto;border-radius: 15px;">
             <h3 class="f-w-600 pt-5 f-30 m-l-50"><?= __('We are working'); ?><br /><?= __('to boost lovely mood'); ?></h3>
-            <button class="btn btn-inverse waves-effect waves-light m-l-50 mt-4"><?= __('Create a Store'); ?></button>
+            <button type="button" class="btn btn-inverse waves-effect waves-light m-l-50 mt-4"><?= __('Create a Store'); ?></button>
         </div>
         <div class="card mt-4">
             <div class="card-header">

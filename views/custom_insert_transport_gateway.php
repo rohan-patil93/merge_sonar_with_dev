@@ -710,8 +710,8 @@ $visitPurposes = [
 </div>
 
 <!-- Exit Modal -->
-<div class="modal fade" id="exitModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="exitModal" tabindex="-1">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><i class="ti-export"></i> <?= __('Record Vehicle Exit'); ?></h4>
@@ -814,8 +814,8 @@ $visitPurposes = [
     </div>
 </div>
 
-<div class="modal fade" id="printSlipModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="printSlipModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><i class="ti-printer"></i> <?= __('Visitor Gate Pass'); ?></h4>

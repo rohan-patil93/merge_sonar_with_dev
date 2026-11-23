@@ -149,7 +149,7 @@ foreach($data['project_teams'] as $pteam){
               type: "POST",
               success:function(data){
                 console.log("Responce:"+data);
-               htmlRows ='<div class="col-lg-12 row" id="ptphdiv_'+data+'"><div class="col-lg-8 mt-3 itemRow"><input aria-label="Phase[]" type="text" name="phase[]" id="phase_'+data+'" value=""  onclick="updatephasettusval('+data+',1111,this.value)" class="form-control" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> </div><div class="col-lg-1 mt-4"> <button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger cursor-pointer" onclick="updatephasettusval('+data+',2222,1)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button> </div></div>';
+               htmlRows ='<div class="col-lg-12 row" id="ptphdiv_'+data+'"><div class="col-lg-8 mt-3 itemRow"><input aria-label="Phase[]" type="text" name="phase[]" id="phase_'+data+'" value=""  onclick="updatephasettusval('+data+',1111,this.value)" class="form-control"> </div><div class="col-lg-1 mt-4"> <button type="button" class="btn p-0 border-0 bg-transparent ti-trash text-danger cursor-pointer" onclick="updatephasettusval('+data+',2222,1)"></button> </div></div>';
                 $('#AddItem').append(htmlRows);
 
             },
@@ -866,7 +866,7 @@ function saveprojecttype(update_id){
                             <input type="hidden" name="project_type" id="project_type" value="<?php echo $typeval; ?>">
                             <div class="personal-pro mt-5 close counttype <?php if($typeval==$project_type['id']){ echo "bg-pop-active";
 }else{ echo "bg-pop-white";
-} ?> " id="changeprojecttype_<?php echo $project_type['id']; ?>" onclick="changeprojecttype(<?php echo $project_type['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+} ?> " id="changeprojecttype_<?php echo $project_type['id']; ?>" onclick="changeprojecttype(<?php echo $project_type['id']; ?>)">
                                 <div class="row">
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-2">
                                         <div class="d-inline-block">
@@ -973,7 +973,7 @@ function saveprojecttype(update_id){
 
                                         <span class="label label-<?php echo $lable; ?>"><?php echo $disrole[$team['role_id']]['role_name']; ?></span>
 
-                                        <i class="ti-trash text-danger cursor-pointer" onclick="removeteamember(<?php echo $team['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="removeteamember(<?php echo $team['id']; ?>)" aria-label="Remove"><i class="ti-trash text-danger cursor-pointer"></i></button>
                                     </div>
                                     <div class="text-center pt-0">
                                         <div class="mb-2 mt-4 img-center" style="">
@@ -1058,7 +1058,7 @@ function saveprojecttype(update_id){
                             <?php $m=1;
                                 if(count((array)$data['project_phases'])>0){
                                     foreach((array)$data['project_phases'] as $project_phase){ ?>
-                                        <div class="p-2 mt-1 cursor-pointer" style="background-color: #977373;color:#FFFFFF;" onclick="showphase(<?php  echo $project_phase['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                        <div class="p-2 mt-1 cursor-pointer" style="background-color: #977373;color:#FFFFFF;" onclick="showphase(<?php  echo $project_phase['id']; ?>)">
                                             <div class="float-left">
                                                 <h6><?php echo $project_phase['project_phase_name'];  ?> </h6>
                                             </div>
@@ -1069,7 +1069,7 @@ function saveprojecttype(update_id){
                                         <input type="hidden" name="" value="0" id="phasedis_<?php echo $project_phase['id']; ?>">
                                         <div  class="p-10" style="background-color: #FFFFFF; display: none;" id="filephase_<?php echo $project_phase['id']; ?>">
                                                 <?php foreach($emp_phaase_tasks[$project_phase['id']] as $phtas){ ?>
-                                                    <div class="p-1 mt-1 cursor-pointer " style="background-color: #f1eaea;" onclick="showptaskwise(<?php echo $phtas; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                    <div class="p-1 mt-1 cursor-pointer " style="background-color: #f1eaea;" onclick="showptaskwise(<?php echo $phtas; ?>)">
                                                         <?php echo $list_tasks[$phtas]['task_name']. $phtas; ?> &nbsp; &nbsp; &nbsp;
                                                         <span class="label label-md label-info" style=""><?php echo count((array)$task_attachment[$phtas]); ?>  </span>
                                                     </div>
@@ -1382,7 +1382,7 @@ function saveprojecttype(update_id){
                             </div>
                             <?php if(!in_array($sta['status'], (array)$primarystatus)){ ?>
                             <div class="col-lg-1 ">
-                                <i class="ti-trash text-danger  cursor-pointer" onclick="updatetasksttusval(<?php echo $sta['id']; ?>,'is_active','1')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="updatetasksttusval(<?php echo $sta['id']; ?>,'is_active','1')" aria-label="Remove"><i class="ti-trash text-danger cursor-pointer"></i></button>
                             </div>
                             <?php }  ?>
                         </div>
@@ -1409,7 +1409,7 @@ function saveprojecttype(update_id){
                                                 <input aria-label="<?= htmlspecialchars(__('Phase'), ENT_QUOTES, 'UTF-8'); ?>[]" type="text" name="phase[]" id="phase_<?php echo $m; ?>" value="<?php echo $project_phase['project_phase_name'];  ?>"  onclick="updatephasettusval(<?php echo $project_phase['id'] ?>,'project_phase_name',this.value)" class="form-control" onkeydown="">
                                             </div>
                                             <div class="col-lg-1 mt-4">
-                                               <i class="ti-trash text-danger  cursor-pointer" onclick="updatephasettusval(<?php echo $project_phase['id']; ?>,'is_active','1')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                               <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="updatephasettusval(<?php echo $project_phase['id']; ?>,'is_active','1')" aria-label="Remove"><i class="ti-trash text-danger cursor-pointer"></i></button>
                                             </div>
                                         </div>
                                 <?php $m++;

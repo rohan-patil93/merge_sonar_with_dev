@@ -123,7 +123,7 @@ foreach ($_SESSION['employee'] as  $value) {
             <div class="">
 
                 <div class="card d-flex flex-wrap flex-sm-nowrap p-10 mb-1 pt-4 pb-4 mt-3 c-p-0">
-                    <div class="profile-open" onClick="divFunction()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-user"></i></div>
+                    <button type="button" class="profile-open btn border-0 bg-transparent p-0" onclick="divFunction()" aria-label="Toggle"><i class="ti-user"></i></button>
                     <div class="profile-close">
                         <div class="row col-lg-12">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12 p-r-10 d-r-n" style="border-right: 3px dashed #ccc;">
@@ -157,7 +157,7 @@ foreach ($_SESSION['employee'] as  $value) {
                                         </div>
                                         <div class="col-md-12">
                                             <div class="progress progress-xs">
-                                                <div class="progress-bar progress-bar-success" role="progressbar" style="width:  <?php echo $pp; ?>%;" aria-valuenow="<?php echo $pp; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <progress class="progress-bar progress-bar-success" style="width:  <?php echo $pp; ?>%;" value="<?php echo $pp; ?>" max="100"></progress>
                                             </div>
                                         </div>
 
@@ -343,7 +343,7 @@ if($_SESSION['employee']['gender']!=""){?>
                 <!----End --->
 
                 <div class="col-lg-12">
-                    <div class="open_basic_info_other" onClick="div2Function()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-menu"></i></div>
+                    <button type="button" class="open_basic_info_other btn border-0 bg-transparent p-0" onclick="div2Function()" aria-label="Toggle"><i class="ti-menu"></i></button>
                     <div class="card mb-xl-10 c-m-0">
                         <div class="card-body mrgn-card">
                             <!--begin::Navs-->
@@ -473,7 +473,7 @@ if($_SESSION['employee']['gender']!=""){?>
 
 
 
-                <div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+                <div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
                     <div class="modal-dialog modal-xl" >
                         <div class="modal-content"  id="popup2">
                         </div>

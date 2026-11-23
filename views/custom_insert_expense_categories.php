@@ -1,6 +1,7 @@
 <?php
+defined('API_UPDATE_ROW') || define('API_UPDATE_ROW', '?mode=updaterowtabledata&rid=');
 $_SESSION['apply_js']['multiselest'] = "1";
-$File_Uploads_Path =  "uploads/all/";
+$fileUploadsPath =  "uploads/all/";
 $vdata1["where"] = array('company_id'=> $_SESSION['company_id'],'is_active'=>'0','parent_category_id'=>'0');
 $vdata = urlencode(json_encode($vdata1));
 $vurl = API."?mode=gettabledetailswithconditions&table=expense_categories&data=".$vdata;
@@ -47,7 +48,7 @@ if(isset($_POST['submit_save'])){
 }
 function savecategory($postarry){
     $docvalue = $docvalue ?? '';
-    $File_Uploads_Path =  "uploads/all/";
+    $fileUploadsPath =  "uploads/all/";
     $data = array();
     $data['company_id'] = $_SESSION['company_id'];
     $data['parent_category_id'] = $postarry['parent_category_id'];
@@ -59,20 +60,20 @@ function savecategory($postarry){
     $data['receipt_required_limit'] = $postarry['receipt_required_limit'];
     if($_FILES["image_url".$docvalue]["name"]!=''){
         $temp = explode(".", $_FILES["image_url"]["name"]);
-        $Filename=  "file_".time()."_".uniqid();
-        $newfilename = $Filename.'.' .end($temp);
+        $filename=  "file_".time()."_".uniqid();
+        $newfilename = $filename.'.' .end($temp);
         $data['image_url'] = $newfilename;
-        move_uploaded_file($_FILES["image_url"]["tmp_name"], $File_Uploads_Path.$newfilename);
+        move_uploaded_file($_FILES["image_url"]["tmp_name"], $fileUploadsPath.$newfilename);
     }
     else{
         $data['image_url'] = $postarry['hidden_image_url'];
     }
     if($_FILES["policy_document".$docvalue]["name"]!=''){
         $temp = explode(".", $_FILES["policy_document"]["name"]);
-        $Filename=  "file_".time()."_".uniqid();
-        $newfilename = $Filename.'.' .end($temp);
+        $filename=  "file_".time()."_".uniqid();
+        $newfilename = $filename.'.' .end($temp);
         $data['policy_document']= $newfilename;
-        move_uploaded_file($_FILES["policy_document"]["tmp_name"], $File_Uploads_Path.$newfilename);
+        move_uploaded_file($_FILES["policy_document"]["tmp_name"], $fileUploadsPath.$newfilename);
     }
     else{
         $data['policy_document'] = $postarry['hidden_policy_document'];
@@ -81,8 +82,8 @@ function savecategory($postarry){
     if($postarry['rid']!=""){
         $data['updated_date'] = nowDate();
         $data['updated_by'] = $_SESSION['userid'];
-        $url = API."?mode=updaterowtabledata&rid=".$postarry['rid']."&table=expense_categories&method=post";
-        $response = file_post_contents($url, $data, 'update');
+        $url = API.API_UPDATE_ROW.$postarry['rid']."&table=expense_categories&method=post";
+        file_post_contents($url, $data, 'update');
         return deocdeId("id:".$postarry["rid"]);
     }else{
         $data['created_date'] = nowDate();
@@ -113,8 +114,8 @@ if(isset($_POST['submit'])){
             if($rowid !=""){
                 $data['updated_date'] = nowDate();
                 $data['updated_by'] = $_SESSION['userid'];
-                $url = API."?mode=updaterowtabledata&rid=".$rowid."&table=expenses_mileages_perdiem&method=post";
-                $response = file_post_contents($url, $data, 'update');
+                $url = API.API_UPDATE_ROW.$rowid."&table=expenses_mileages_perdiem&method=post";
+                file_post_contents($url, $data, 'update');
             }else{
                 $data['created_date'] = nowDate();
                 $data['created_by'] = $_SESSION['userid'];
@@ -142,8 +143,8 @@ if(isset($_POST['submit'])){
             if($rowid !=""){
                 $data['updated_date'] = nowDate();
                 $data['updated_by'] = $_SESSION['userid'];
-                $url = API."?mode=updaterowtabledata&rid=".$rowid."&table=expenses_mileages_perdiem&method=post";
-                $response = file_post_contents($url, $data, 'update');
+                $url = API.API_UPDATE_ROW.$rowid."&table=expenses_mileages_perdiem&method=post";
+                file_post_contents($url, $data, 'update');
 
             }else{
                 $data['created_date'] = nowDate();
@@ -247,7 +248,7 @@ $type = $_GET['TYPE']!=""?$_GET['TYPE']:"1";
                                                     <span><?php echo __('Image Url'); ?></span>
                                                     <div></div>
                                                     <div class="profile-pic">
-                                                        <?php $logo = $expense_row['image_url']==''?  $File_Uploads_Path.'no-image.jpg':$File_Uploads_Path.$expense_row['image_url']; ?>
+                                                        <?php $logo = $expense_row['image_url']==''?  $fileUploadsPath.'no-image.jpg':$fileUploadsPath.$expense_row['image_url']; ?>
                                                         <label class="-label" for="logo_image">
 
                                                             <span> <i class="fa fa-camera"></i> <?php echo __('&nbsp; Change Image'); ?></span>

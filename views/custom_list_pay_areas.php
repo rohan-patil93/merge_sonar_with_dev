@@ -1,4 +1,6 @@
 <?php
+defined('URL_OPTION_PREFIX') || define('URL_OPTION_PREFIX', 'index.php?option=');
+defined('PARAM_RID') || define('PARAM_RID', '&Rid=');
 if($_POST['option']!=""){
   $_GET['option'] = $_POST['option'];
   include_once '../includes/session.php';
@@ -184,15 +186,15 @@ function assignemployeelistnew(pay_area_id){
               <?php }?>
               <td>
                 <?php
-                $edit = $edit_permission == 1 ? "index.php?option=".$insert."&Rid=".$rid : "javascript:showpermission()";
-                $link_copy = $insert_permission == 1 ? "index.php?option=".$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
-                $edit =  "index.php?option=".$insert."&Rid=".$rid;
-                $link_copy =  "index.php?option=".$insert."&copy=1&Rid=".$rid;
+                $edit = $edit_permission == 1 ? URL_OPTION_PREFIX.$insert.PARAM_RID.$rid : "javascript:showpermission()";
+                $link_copy = $insert_permission == 1 ? URL_OPTION_PREFIX.$insert."&copy=1&Rid=".$rid : "javascript:showpermission()";
+                $edit =  URL_OPTION_PREFIX.$insert.PARAM_RID.$rid;
+                $link_copy =  URL_OPTION_PREFIX.$insert."&copy=1&Rid=".$rid;
 
-                $view =  "index.php?option=".$view_page."&Rid=".$rid
+                $view =  URL_OPTION_PREFIX.$view_page.PARAM_RID.$rid
                 ?>
                 <a href="<?php echo $edit; ?>" class="btn btn-sm btn-clean btn-icon btn-icon-sm"   title="<?= htmlspecialchars(__('Edit Datails'), ENT_QUOTES, 'UTF-8'); ?>" ><i class="fa fa-edit"></i></a>
-                <div class="btn btn-icon btn-primary btn-circle mr-2" onclick="assignemployeelistnew(<?php echo $trid; ?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><i class="ti-user"></i></div>
+                <button type="button" class="btn btn-icon btn-primary btn-circle mr-2" onclick="assignemployeelistnew(<?php echo $trid; ?>)" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Allocate Resources'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-user"></i></button>
               </td>
 
             </tr>
@@ -224,7 +226,7 @@ function assignemployeelistnew(pay_area_id){
 </div>
 </div>
 </div>
-<div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
   <div class="modal-dialog modal-xl" >
     <div class="modal-content"  id="popup2">
 

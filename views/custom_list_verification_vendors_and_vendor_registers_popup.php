@@ -1,12 +1,12 @@
-<?php
+﻿<?php
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
 
-$verification_type = isset($_GET['verification_type']) ? $_GET['verification_type'] : (isset($_POST['verification_type']) ? $_POST['verification_type'] : '');
-$record_id = isset($_GET['record_id']) ? $_GET['record_id'] : (isset($_POST['record_id']) ? $_POST['record_id'] : '');
-$action_type = isset($_GET['action_type']) ? $_GET['action_type'] : (isset($_POST['action_type']) ? $_POST['action_type'] : '');
-$table_name = isset($_GET['table_name']) ? $_GET['table_name'] : (isset($_POST['table_name']) ? $_POST['table_name'] : '');
+$verification_type = $_GET['verification_type'] ?? $_POST['verification_type'] ?? '';
+$record_id = $_GET['record_id'] ?? $_POST['record_id'] ?? '';
+$action_type = $_GET['action_type'] ?? $_POST['action_type'] ?? '';
+$table_name = $_GET['table_name'] ?? $_POST['table_name'] ?? '';
 $field_data_json = isset($_POST['field_data']) ? $_POST['field_data'] : '{}';
 
 if (empty($verification_type) || empty($record_id) || empty($action_type) || empty($table_name)) {
@@ -87,7 +87,7 @@ if ($verification_type == 'gst') {
 $current_verification = isset($vendor_verifications[$verification_key]) ? $vendor_verifications[$verification_key] : null;
 $is_verified = $current_verification && isset($current_verification['status']) && $current_verification['status'] == 'Y';
 
-$company_name = isset($record['company']) ? $record['company'] : (isset($record['display_name']) ? $record['display_name'] : 'Unknown Company');
+$company_name = $record['company'] ?? $record['display_name'] ?? 'Unknown Company';
 ?>
 
 <link rel="stylesheet" href="../assets/css/custom_list_verification_vendors_and_vendor_registers_popup.css">
@@ -100,7 +100,7 @@ $company_name = isset($record['company']) ? $record['company'] : (isset($record[
     <div class="js-table-name"><?= htmlspecialchars($table_name); ?></div>
     <div class="js-is-verified"><?= $is_verified ? 'true' : 'false'; ?></div>
     <div class="js-company-name"><?= htmlspecialchars($company_name); ?></div>
-    <div class="js-company-name-from-record"><?= htmlspecialchars(isset($record['company']) ? $record['company'] : (isset($record['display_name']) ? $record['display_name'] : '')); ?></div>
+    <div class="js-company-name-from-record"><?= htmlspecialchars($record['company'] ?? $record['display_name'] ?? ''); ?></div>
 </div>
 <div class="verification-container">
     <!-- Page Header -->

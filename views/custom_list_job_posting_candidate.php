@@ -53,8 +53,7 @@ if(isset($_POST['post_job'])){
             $error_message = $response['message'];
         }
     }else{
-        if($_POST['submit_value'] == 'exit'){
-        }else{
+        if($_POST['submit_value'] != 'exit'){
       ?>
       <script type="text/javascript">
       document.onreadystatechange = function () {
@@ -186,7 +185,7 @@ function displaystausdrop(id,table,status_id){
 } ?></select></td>';
         htmlRows += '<?php if($_SESSION["user_type"] !=3){ ?><td>&nbsp; </td><td>&nbsp;</textarea> </td>';
         htmlRows += '<td>&nbsp;</textarea> </td><td> <button class="btn btn-primary dropdown-toggle" style="color: <?php echo "#".$stausresult[0]['color']; ?>;    background:  <?php echo "#".strval($stausresult[0]['background_color']); ?>; border-color: <?php echo "#".strval($stausresult[0]['background_color']); ?>;" type="button"  ><?php echo $stausresult[0]['name']; ?> </button></td>';
-        htmlRows += '<td><a herf="#" class="btn btn-secondary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"  onkeypress="if(event.key===\'Enter\'||event.key===\' \')this.click()" role="button"> <?= htmlspecialchars(__('Genrate'), ENT_QUOTES, 'UTF-8'); ?> </a></td> <?php } ?>';
+        htmlRows += '<td><button type="button" class="btn btn-secondary mr-2" disabled data-container="body" data-toggle="popover" data-placement="top" data-content="Create Candidate Details"> <?= htmlspecialchars(__('Genrate'), ENT_QUOTES, 'UTF-8'); ?> </button></td> <?php } ?>';
         htmlRows += '</tr>';
         $('#invoiceItem').append(htmlRows);
     }
@@ -372,7 +371,7 @@ function displaystausdrop(id,table,status_id){
                                         </div>
                                         <div class="col-md-12">
                                             <div class="progress  progress-xs">
-                                                <div class="progress-bar progress-bar-pink " role="progressbar" style="width: <?php echo $pp; ?>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <progress class="progress-bar progress-bar-pink " style="width: <?php echo $pp; ?>%;" value="<?php echo $pp; ?>" max="100"></progress>
                                             </div>
                                         </div>
                                     </div>
@@ -499,7 +498,7 @@ function displaystausdrop(id,table,status_id){
         </div>
         </div>
             </div>
-        <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+        <div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
             <div class="modal-dialog " >
                 <div class="modal-content"  id="popup1">
 

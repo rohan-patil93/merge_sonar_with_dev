@@ -1,6 +1,6 @@
 <?php
 defined('CSS_DISPLAY_NONE') || define('CSS_DISPLAY_NONE', 'display: none');
-defined('DATE_ZERO') || define('DATE_ZERO', DATE_ZERO);
+defined('DATE_ZERO') || define('DATE_ZERO', '0000-00-00');
 if(isset($_POST['ajaxcallemployee']) && $_POST['ajaxcallemployee'] =="Y"){
     $employee_id = $_POST['employee_id'];
     include_once '../includes/session.php';
@@ -102,7 +102,55 @@ $bank_work_flow = "Y";
     }
 </script>
 <?php if($_POST['edittype'] =="VIEW"){ ?>
-    <?php if($_POST['pagetype'] =="basic_information" || $_POST['showpagetype'] =="basic_information"){ ?>
+<?php
+$onbVars = get_defined_vars();
+$pageType = $_POST['pagetype'] ?? ($_POST['showpagetype'] ?? '');
+$viewMap = array (
+  'basic_information' => 'renderOnbViewBasicInformation',
+  'work_details' => 'renderOnbViewWorkDetails',
+  'personal_details' => 'renderOnbViewPersonalDetails',
+  'bank_details' => 'renderOnbViewBankDetails',
+  'proof_details' => 'renderOnbViewProofDetails',
+  'experience_details' => 'renderOnbViewExperienceDetails',
+  'employee_qualifications' => 'renderOnbViewEmployeeQualifications',
+  'employee_dependents' => 'renderOnbViewEmployeeDependents',
+  'employee_contacts' => 'renderOnbViewEmployeeContacts',
+  'employee_buddies' => 'renderOnbViewEmployeeBuddies',
+  'employee_access' => 'renderOnbViewEmployeeAccess',
+  'employee_other_access' => 'renderOnbViewEmployeeOtherAccess',
+  'emp_visa' => 'renderOnbViewEmpVisa',
+  'emp_skills' => 'renderOnbViewEmpSkills',
+);
+if (isset($viewMap[$pageType]) && function_exists($viewMap[$pageType])) {
+    $viewMap[$pageType]($onbVars);
+}
+$editMap = array (
+  'basic_information' => 'renderOnbEditBasicInformation',
+  'work_details' => 'renderOnbEditWorkDetails',
+  'personal_details' => 'renderOnbEditPersonalDetails',
+  'bank_details' => 'renderOnbEditBankDetails',
+  'employee_buddies' => 'renderOnbEditEmployeeBuddies',
+  'employee_other_access' => 'renderOnbEditEmployeeOtherAccess',
+  'employee_access' => 'renderOnbEditEmployeeAccess',
+  'proof_details' => 'renderOnbEditProofDetails',
+  'experience_details' => 'renderOnbEditExperienceDetails',
+  'employee_qualifications' => 'renderOnbEditEmployeeQualifications',
+  'employee_dependents' => 'renderOnbEditEmployeeDependents',
+  'employee_contacts' => 'renderOnbEditEmployeeContacts',
+  'emp_visa' => 'renderOnbEditEmpVisa',
+);
+if (isset($editMap[$pageType]) && function_exists($editMap[$pageType])) {
+    $editMap[$pageType]($onbVars);
+}
+?>
+<?php
+}
+if (!function_exists('renderOnbViewBasicInformation')) {
+function renderOnbViewBasicInformation($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $vafield = $vars['vafield'] ?? null;
+    $data = $vars['data'] ?? null;
+?>
         <?php
                $fieldaccesright = $vafield['basic_information'];
         ?>
@@ -168,7 +216,25 @@ $bank_work_flow = "Y";
               </div>
           <?php } ?>
         </div>
-    <?php }elseif($_POST['pagetype'] =="work_details" || $_POST['showpagetype'] =="work_details"){ ?>
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewWorkDetails')) {
+function renderOnbViewWorkDetails($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $vafield = $vars['vafield'] ?? null;
+    $departments = $vars['departments'] ?? null;
+    $data = $vars['data'] ?? null;
+    $designations = $vars['designations'] ?? null;
+    $divisions = $vars['divisions'] ?? null;
+    $employment_bands = $vars['employment_bands'] ?? null;
+    $employment_levels = $vars['employment_levels'] ?? null;
+    $verticals = $vars['verticals'] ?? null;
+    $locations = $vars['locations'] ?? null;
+    $employeement_types = $vars['employeement_types'] ?? null;
+    $billable = $vars['billable'] ?? null;
+?>
         <?php
                $fieldaccesright = $vafield['work'];
         ?>
@@ -277,7 +343,19 @@ $bank_work_flow = "Y";
               <?php } ?>
 
         </div>
-    <?php }elseif($_POST['pagetype'] =="personal_details" || $_POST['showpagetype'] =="personal_details"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewPersonalDetails')) {
+function renderOnbViewPersonalDetails($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $data = $vars['data'] ?? null;
+    $agecalc = $vars['agecalc'] ?? null;
+    $marital_statuses = $vars['marital_statuses'] ?? null;
+    $gender_details = $vars['gender_details'] ?? null;
+    $blood_groups = $vars['blood_groups'] ?? null;
+    $yesno = $vars['yesno'] ?? null;
         $fieldaccesright = $vafield['personal_details'];
     ?>
         <div class="row">
@@ -360,7 +438,22 @@ $bank_work_flow = "Y";
               </div>
           <?php } ?>
         </div>
-    <?php }elseif($_POST['pagetype'] =="bank_details" || $_POST['showpagetype'] =="bank_details"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewBankDetails')) {
+function renderOnbViewBankDetails($vars) {
+    $bank_work_flow = $vars['bank_work_flow'] ?? null;
+    $emp_banks = $vars['emp_banks'] ?? null;
+    $emp_bank = $vars['emp_bank'] ?? null;
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $visiblebtnstatus = $vars['visiblebtnstatus'] ?? null;
+    $stausresult = $vars['stausresult'] ?? null;
+    $statuse = $vars['statuse'] ?? null;
+    $emp_bank_status = $vars['emp_bank_status'] ?? null;
+    $banks = $vars['banks'] ?? null;
+    $data = $vars['data'] ?? null;
         $fieldaccesright = $vafield['bank_details'];
     ?>
         <div class="row">
@@ -431,7 +524,15 @@ $bank_work_flow = "Y";
           } ?>
         </div>
 
-        <?php }elseif($_POST['pagetype'] =="proof_details" || $_POST['showpagetype'] =="proof_details"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewProofDetails')) {
+function renderOnbViewProofDetails($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $data = $vars['data'] ?? null;
+    $attached_files = $vars['attached_files'] ?? null;
         $fieldaccesright = $vafield['proof_details'];
         $attached_files = json_decode($data['attached_files'],1);
     ?>
@@ -541,7 +642,14 @@ $bank_work_flow = "Y";
                 <?php }?>
            </tbody>
         </table>
-   <?php }elseif($_POST['pagetype'] =="experience_details" || $_POST['showpagetype'] =="experience_details"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewExperienceDetails')) {
+function renderOnbViewExperienceDetails($vars) {
+    $emp_work_experiences = $vars['emp_work_experiences'] ?? null;
+    $expe = $vars['expe'] ?? null;
         $fieldaccesright = $vafield['experience_details'];
     if(count((array)$emp_work_experiences) !="0"){
     ?>
@@ -576,7 +684,15 @@ $bank_work_flow = "Y";
         </div>
     <?php } ?>
 
-   <?php }elseif($_POST['pagetype'] =="employee_qualifications" || $_POST['showpagetype'] =="employee_qualifications"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewEmployeeQualifications')) {
+function renderOnbViewEmployeeQualifications($vars) {
+    $emp_educations = $vars['emp_educations'] ?? null;
+    $emp_edu = $vars['emp_edu'] ?? null;
+    $education_type = $vars['education_type'] ?? null;
         $fieldaccesright = $vafield['employee_qualifications'];
           if(count((array)$emp_educations) !="0"){
     ?>
@@ -612,7 +728,15 @@ $bank_work_flow = "Y";
             </div>
         </div>
     <?php } ?>
-     <?php }elseif($_POST['pagetype'] =="employee_dependents" || $_POST['showpagetype'] =="employee_dependents"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewEmployeeDependents')) {
+function renderOnbViewEmployeeDependents($vars) {
+    $emp_dependents = $vars['emp_dependents'] ?? null;
+    $emp_dep = $vars['emp_dep'] ?? null;
+    $relations = $vars['relations'] ?? null;
         $fieldaccesright = $vafield['employee_dependents'];
     ?>
     <div class="row">
@@ -641,7 +765,15 @@ $bank_work_flow = "Y";
             </div>
         <?php } ?>
     </div>
-    <?php }elseif($_POST['pagetype'] =="employee_contacts" || $_POST['showpagetype'] =="employee_contacts"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewEmployeeContacts')) {
+function renderOnbViewEmployeeContacts($vars) {
+    $emp_contacts = $vars['emp_contacts'] ?? null;
+    $emp_con = $vars['emp_con'] ?? null;
+    $relations = $vars['relations'] ?? null;
         $fieldaccesright = $vafield['employee_contacts'];
     ?>
     <div class="row">
@@ -675,7 +807,17 @@ $bank_work_flow = "Y";
 
 
 
-    <?php }elseif($_POST['pagetype'] =="employee_buddies" || $_POST['showpagetype'] =="employee_buddies"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewEmployeeBuddies')) {
+function renderOnbViewEmployeeBuddies($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $employment_roles = $vars['employment_roles'] ?? null;
+    $data = $vars['data'] ?? null;
+    $application_users = $vars['application_users'] ?? null;
+    $all_employees = $vars['all_employees'] ?? null;
         $fieldaccesright = $vafield['employee_buddies'];
     ?>
         <div class="row">
@@ -724,7 +866,14 @@ $bank_work_flow = "Y";
         </div>
 
 <!-- added by koti start -->
-<?php }elseif($_POST['pagetype'] =="employee_access" || $_POST['showpagetype'] =="employee_access"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewEmployeeAccess')) {
+function renderOnbViewEmployeeAccess($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $data = $vars['data'] ?? null;
         $fieldaccesright = $vafield['employee_access'];
     ?>
         <div class="row">
@@ -755,7 +904,15 @@ $bank_work_flow = "Y";
         </div>
 <!-- added by koti end -->
 
-    <?php }elseif($_POST['pagetype'] =="employee_other_access" || $_POST['showpagetype'] =="employee_other_access"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewEmployeeOtherAccess')) {
+function renderOnbViewEmployeeOtherAccess($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $designations = $vars['designations'] ?? null;
+    $data = $vars['data'] ?? null;
         $fieldaccesright = $vafield['employee_other_access'];  ?>
         <div class="row">
 
@@ -778,7 +935,15 @@ $bank_work_flow = "Y";
               </div>
               <?php }?>
         </div>
-    <?php }elseif($_POST['pagetype'] =="emp_visa" || $_POST['showpagetype'] =="emp_visa"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewEmpVisa')) {
+function renderOnbViewEmpVisa($vars) {
+    $emp_visa = $vars['emp_visa'] ?? null;
+    $emp_v = $vars['emp_v'] ?? null;
+    $countries = $vars['countries'] ?? null;
         $fieldaccesright = $vafield['emp_visa'];
     ?>
     <div class="row">
@@ -810,7 +975,16 @@ $bank_work_flow = "Y";
     <?php } ?>
     </div>
 
-    <?php }elseif($_POST['pagetype'] =="emp_skills" || $_POST['showpagetype'] =="emp_skills"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbViewEmpSkills')) {
+function renderOnbViewEmpSkills($vars) {
+    $emp_skills = $vars['emp_skills'] ?? null;
+    $emp_skil = $vars['emp_skil'] ?? null;
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $skills = $vars['skills'] ?? null;
         $fieldaccesright = $vafield['emp_skills'];
     ?>
     <div class="row">
@@ -848,8 +1022,15 @@ $bank_work_flow = "Y";
 
 
 <?php if($_POST['edittype'] =="INSERT"){ ?>
-    <?php
-    if($_POST['pagetype'] =="basic_information" || $_POST['showpagetype'] =="basic_information"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditBasicInformation')) {
+function renderOnbEditBasicInformation($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $data = $vars['data'] ?? null;
            $fieldaccesright = $vafield['basic_information'];
     ?>
         <div class="row">
@@ -943,7 +1124,32 @@ $bank_work_flow = "Y";
 
         </div>
 
-    <?php }elseif($_POST['pagetype'] =="work_details" || $_POST['showpagetype'] =="work_details"){ ?>
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditWorkDetails')) {
+function renderOnbEditWorkDetails($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $vafield = $vars['vafield'] ?? null;
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $departments = $vars['departments'] ?? null;
+    $data = $vars['data'] ?? null;
+    $designations = $vars['designations'] ?? null;
+    $desigs = $vars['desigs'] ?? null;
+    $divisions = $vars['divisions'] ?? null;
+    $employment_bands = $vars['employment_bands'] ?? null;
+    $employment_ban = $vars['employment_ban'] ?? null;
+    $employment_levels = $vars['employment_levels'] ?? null;
+    $employment_levl = $vars['employment_levl'] ?? null;
+    $verticals = $vars['verticals'] ?? null;
+    $locations = $vars['locations'] ?? null;
+    $employee_id = $vars['employee_id'] ?? null;
+    $employeement_types = $vars['employeement_types'] ?? null;
+    $emptypes = $vars['emptypes'] ?? null;
+    $text_color_ety = $vars['text_color_ety'] ?? null;
+    $text_color_ebi = $vars['text_color_ebi'] ?? null;
+?>
         <?php
                $fieldaccesright = $vafield['work'];
         ?>
@@ -1168,7 +1374,25 @@ $bank_work_flow = "Y";
             </div>
             <?php } ?>
         </div>
-    <?php }elseif($_POST['pagetype'] =="personal_details" || $_POST['showpagetype'] =="personal_details"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditPersonalDetails')) {
+function renderOnbEditPersonalDetails($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $data = $vars['data'] ?? null;
+    $marital_statuses = $vars['marital_statuses'] ?? null;
+    $marital_stat = $vars['marital_stat'] ?? null;
+    $gender_details = $vars['gender_details'] ?? null;
+    $gender_data = $vars['gender_data'] ?? null;
+    $text_color_gen = $vars['text_color_gen'] ?? null;
+    $blood_groups = $vars['blood_groups'] ?? null;
+    $blood_group = $vars['blood_group'] ?? null;
+    $yesno = $vars['yesno'] ?? null;
+    $ynkey = $vars['ynkey'] ?? null;
+    $yn = $vars['yn'] ?? null;
         $fieldaccesright = $vafield['personal_details'];
     ?>
     <div class="row">
@@ -1331,7 +1555,18 @@ $bank_work_flow = "Y";
         </div>
         <?php } ?>
     </div>
-    <?php }elseif($_POST['pagetype'] =="bank_details" || $_POST['showpagetype'] =="bank_details"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditBankDetails')) {
+function renderOnbEditBankDetails($vars) {
+    $bank_work_flow = $vars['bank_work_flow'] ?? null;
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $banks = $vars['banks'] ?? null;
+    $bnk = $vars['bnk'] ?? null;
+    $data = $vars['data'] ?? null;
         $fieldaccesright = $vafield['bank_details'];
     ?>
     <div class="row">
@@ -1368,8 +1603,26 @@ $bank_work_flow = "Y";
         <?php } ?>
     </div>
 
-    <?php }
-    }elseif($_POST['pagetype'] =="employee_buddies" || $_POST['showpagetype'] =="employee_buddies"){
+    <?php } ?>
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditEmployeeBuddies')) {
+function renderOnbEditEmployeeBuddies($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $employment_roles = $vars['employment_roles'] ?? null;
+    $employment_rol = $vars['employment_rol'] ?? null;
+    $data = $vars['data'] ?? null;
+    $application_users = $vars['application_users'] ?? null;
+    $read_only_ln = $vars['read_only_ln'] ?? null;
+    $all_employees = $vars['all_employees'] ?? null;
+    $admin_buddy_res = $vars['admin_buddy_res'] ?? null;
+    $hr_buddy_res = $vars['hr_buddy_res'] ?? null;
+    $finance_buddy_res = $vars['finance_buddy_res'] ?? null;
+    $project_buddy_res = $vars['project_buddy_res'] ?? null;
+    $location_buddy_res = $vars['location_buddy_res'] ?? null;
         $fieldaccesright = $vafield['employee_buddies'];
     ?>
     <div class="row">
@@ -1490,7 +1743,16 @@ $bank_work_flow = "Y";
 
 <!-- added by koti start -->
 <?php
-    }elseif($_POST['pagetype'] =="employee_other_access" || $_POST['showpagetype'] =="employee_other_access"){
+}
+}
+
+if (!function_exists('renderOnbEditEmployeeOtherAccess')) {
+function renderOnbEditEmployeeOtherAccess($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $job_titles = $vars['job_titles'] ?? null;
+    $job_title = $vars['job_title'] ?? null;
+    $data = $vars['data'] ?? null;
         $fieldaccesright = $vafield['employee_other_access']; ?>
         <div class="row">
         <?php if($fieldaccesright['field']['job_title_id']!="NA"){
@@ -1565,7 +1827,15 @@ $bank_work_flow = "Y";
             </div>
         <?php } ?>
 
-    <?php }elseif($_POST['pagetype'] =="employee_access" || $_POST['showpagetype'] =="employee_access"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditEmployeeAccess')) {
+function renderOnbEditEmployeeAccess($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $data = $vars['data'] ?? null;
         $fieldaccesright = $vafield['employee_access'];
 
     ?>
@@ -1673,7 +1943,16 @@ $bank_work_flow = "Y";
 
 <!-- added by koti end -->
 
-    <?php }elseif($_POST['pagetype'] =="proof_details" || $_POST['showpagetype'] =="proof_details"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditProofDetails')) {
+function renderOnbEditProofDetails($vars) {
+    $fieldaccesright = $vars['fieldaccesright'] ?? null;
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $data = $vars['data'] ?? null;
+    $attached_files = $vars['attached_files'] ?? null;
         $fieldaccesright = $vafield['proof_details'];
         $attached_files = json_decode($data['attached_files'],1);
     ?>
@@ -1824,7 +2103,16 @@ $bank_work_flow = "Y";
         </tbody>
     </table>
 
-    <?php }elseif($_POST['pagetype'] =="experience_details" || $_POST['showpagetype'] =="experience_details"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditExperienceDetails')) {
+function renderOnbEditExperienceDetails($vars) {
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $k = $vars['k'] ?? null;
+    $emp_work_experiences = $vars['emp_work_experiences'] ?? null;
+    $expe = $vars['expe'] ?? null;
         $fieldaccesright = $vafield['experience_details'];
         if($fieldaccesright['field']['employee_experiances']!="NA"){
             $readonlycheck = $fieldaccesright['field']['employee_experiances'] !="E"?"custom_readonly":"";
@@ -1894,7 +2182,18 @@ $bank_work_flow = "Y";
         </div>
 
 
-   <?php }elseif($_POST['pagetype'] =="employee_qualifications" || $_POST['showpagetype'] =="employee_qualifications"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditEmployeeQualifications')) {
+function renderOnbEditEmployeeQualifications($vars) {
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $emp_educations = $vars['emp_educations'] ?? null;
+    $mk = $vars['mk'] ?? null;
+    $inst = $vars['inst'] ?? null;
+    $education_type = $vars['education_type'] ?? null;
+    $edutype = $vars['edutype'] ?? null;
         $fieldaccesright = $vafield['employee_qualifications'];
         if($fieldaccesright['field']['employee_qualifications']!="NA"){
             $readonlycheck = $fieldaccesright['field']['employee_qualifications'] !="E"?"custom_readonly":"";
@@ -1973,7 +2272,18 @@ $bank_work_flow = "Y";
         </div>
     </div>
 
-   <?php }elseif($_POST['pagetype'] =="employee_dependents" || $_POST['showpagetype'] =="employee_dependents"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditEmployeeDependents')) {
+function renderOnbEditEmployeeDependents($vars) {
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $emp_dependents = $vars['emp_dependents'] ?? null;
+    $dk = $vars['dk'] ?? null;
+    $depe = $vars['depe'] ?? null;
+    $relations = $vars['relations'] ?? null;
+    $reladata = $vars['reladata'] ?? null;
         $fieldaccesright = $vafield['employee_dependents'];
         $readonlycheck = "";
         if(isset($fieldaccesright['field']['employee_dependents']) && $fieldaccesright['field']['employee_dependents']!="NA"){
@@ -2024,7 +2334,18 @@ $bank_work_flow = "Y";
         </div>
     </div>
 
-   <?php }elseif($_POST['pagetype'] =="employee_contacts" || $_POST['showpagetype'] =="employee_contacts"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditEmployeeContacts')) {
+function renderOnbEditEmployeeContacts($vars) {
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $emp_contacts = $vars['emp_contacts'] ?? null;
+    $ck = $vars['ck'] ?? null;
+    $eno = $vars['eno'] ?? null;
+    $relations = $vars['relations'] ?? null;
+    $reladata = $vars['reladata'] ?? null;
         $fieldaccesright = $vafield['employee_contacts'];
         $readonlycheck = "";
         if(isset($fieldaccesright['field']['employee_contacts']) && $fieldaccesright['field']['employee_contacts']!="NA"){
@@ -2079,7 +2400,18 @@ $bank_work_flow = "Y";
         </div>
     </div>
 
-   <?php }elseif($_POST['pagetype'] =="emp_visa" || $_POST['showpagetype'] =="emp_visa"){
+<?php
+}
+}
+
+if (!function_exists('renderOnbEditEmpVisa')) {
+function renderOnbEditEmpVisa($vars) {
+    $readonlycheck = $vars['readonlycheck'] ?? null;
+    $emp_visa = $vars['emp_visa'] ?? null;
+    $vk = $vars['vk'] ?? null;
+    $visa = $vars['visa'] ?? null;
+    $countries = $vars['countries'] ?? null;
+    $countrys = $vars['countrys'] ?? null;
         $fieldaccesright = $vafield['emp_visa'];
         $readonlycheck = "";
         if(isset($fieldaccesright['field']['emp_visa']) && $fieldaccesright['field']['emp_visa']!="NA"){
@@ -2134,10 +2466,10 @@ $bank_work_flow = "Y";
         </div>
     </div>
 
-<?php } ?>
-<?php } //INSERT part End ?>
 <?php
 }
+}
+
 if (empty($onboarding_employees_ajax_define_only)) {
     render_onboarding_employees_ajax_section(array(
         'result' => $result ?? array(),

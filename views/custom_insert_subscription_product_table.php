@@ -54,8 +54,8 @@ if($_POST['ajaxsub'] =='Y'){
                <td><b><?php echo $companysubscriptionplans['start_date']; ?></b></td>
                   <td><b><?php echo $companysubscriptionplans['end_date']; ?></b></td>
             <td>
-               <i class="ti-notepad" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('History'); ?>" onclick="viewSubscriptonHistory('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i> &nbsp;&nbsp;
-                <i class="ti-user" onclick="AddUserPlans('<?php echo $companysubscriptionplans['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Assign Users Policy'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+               <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="viewSubscriptonHistory('<?php echo $companysubscriptionplans['id']; ?>')" aria-label="<?php echo __('History'); ?>"><i class="ti-notepad" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('History'); ?>"></i></button> &nbsp;&nbsp;
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="AddUserPlans('<?php echo $companysubscriptionplans['id']; ?>')" aria-label="<?php echo __('Assign Users Policy'); ?>"><i class="ti-user" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Assign Users Policy'); ?>"></i></button>
 
             </td>
         </tr>
@@ -120,12 +120,12 @@ if($_POST['ajaxsub'] =='Y'){
                 <input aria-label="<?php echo __('Agreed Price[]'); ?>" type="number" name="agreed_price[]" id="agreed_price_<?php echo $companysubscriptionplans['id']; ?>" class="form-control agreedprice text-right" value="<?php echo $agreed_price; ?>" style="width: 130px;"  readonly>
             </td>
             <td>
-                <i class="ti-trash" onclick="doftDeleteRow('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>&nbsp;
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="doftDeleteRow('<?php echo $companysubscriptionplans['id']; ?>')" aria-label="Action"><i class="ti-trash"></i></button>&nbsp;
               <?php if($subscription_plansdetails['additional_license_lot'] !='0' && $subscription_plansdetails['additional_license_lot'] !=""){ ?>
-                <i class="ti-plus" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Add Additional Subscription'); ?>" onclick="AdditionalSubscription('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>&nbsp;
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="AdditionalSubscription('<?php echo $companysubscriptionplans['id']; ?>')" aria-label="<?php echo __('Add Additional Subscription'); ?>"><i class="ti-plus" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Add Additional Subscription'); ?>"></i></button>&nbsp;
               <?php } ?>
 
-                <i class="ti-notepad" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('History'); ?>" onclick="viewSubscriptonHistory('<?php echo $companysubscriptionplans['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="viewSubscriptonHistory('<?php echo $companysubscriptionplans['id']; ?>')" aria-label="<?php echo __('History'); ?>"><i class="ti-notepad" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('History'); ?>"></i></button>
             </td>
         </tr>
     <?php } ?>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if($_POST['filter'] == "Y"){
   include_once '../includes/session.php';
   include_once '../dbconfig.php';
@@ -187,30 +187,30 @@ function matchingResult($post,$candidate){
    <div class="col-lg-12 text-center">
      <div class="position-relative d-inline-block">
         <?php $emailcnt = $email_logs[$candidate['email_id']][12]; echo ($emailcnt !='0' && $emailcnt !='')?"<i class='fa fa-check text-info position-absolute mt-4 f-10 m-l-5'></i>":""; ?>
-        <i class="ti-mobile text-danger f-18 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Phone Conversation Request <?php echo $emailcnt !=""?" -".$emailcnt:"";?>" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','12')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','12')" aria-label="Action"><i class="ti-mobile text-danger f-18 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Phone Conversation Request <?php echo $emailcnt !=""?" -".$emailcnt:"";?>"></i></button>
       </div>
       <div class="position-relative d-inline-block">
         <?php $emailcnt = $email_logs[$candidate['email_id']][13]; echo ($emailcnt !='0' && $emailcnt !='')?"<i class='fa fa-check text-info position-absolute mt-4 m-l-20 f-10'></i>":""; ?>
-      <i class="ti-themify-favicon m-l-15 text-danger f-18 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Invitation to In-Person Interview <?php echo $emailcnt !=""?" -".$emailcnt:"";?>" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','13')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+      <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','13')" aria-label="Action"><i class="ti-themify-favicon m-l-15 text-danger f-18 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Invitation to In-Person Interview <?php echo $emailcnt !=""?" -".$emailcnt:"";?>"></i></button>
     </div>
     <div class="position-relative d-inline-block">
          <?php $emailcnt = $email_logs[$candidate['email_id']][14]; echo ($emailcnt !='0' && $emailcnt !='')?"<i class='fa fa-check text-info position-absolute mt-4 m-l-20 f-10'></i>":""; ?>
-       <i class="ti-thumb-up m-l-15 text-danger f-18 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Inform Selection <?php echo $emailcnt !=""?" -".$emailcnt:"";?>" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','14')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+       <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','14')" aria-label="Action"><i class="ti-thumb-up m-l-15 text-danger f-18 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Inform Selection <?php echo $emailcnt !=""?" -".$emailcnt:"";?>"></i></button>
     </div>
     <div class="position-relative d-inline-block">
        <?php $emailcnt = $email_logs[$candidate['email_id']][15]; echo ($emailcnt !='0' && $emailcnt !='')?"<i class='fa fa-check text-info position-absolute mt-4 m-l-20 f-10'></i>":""; ?>
-      <i class="ti-thumb-down m-l-15 text-danger f-18 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Regret To Inform <?php echo $emailcnt !=""?" -".$emailcnt:"";?>" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','15')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+      <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','15')" aria-label="Action"><i class="ti-thumb-down m-l-15 text-danger f-18 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Regret To Inform <?php echo $emailcnt !=""?" -".$emailcnt:"";?>"></i></button>
     </div>
     <div class="position-relative d-inline-block">
        <?php $emailcnt = $email_logs[$candidate['email_id']][17]; echo ($emailcnt !='0' && $emailcnt !='')?"<i class='fa fa-check text-info position-absolute mt-4 m-l-20 f-10'></i>":""; ?>
-      <i class="ti-medall m-l-15 text-danger f-18 cursor-pointer"  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Request for References <?php echo $emailcnt !=""?" -".$emailcnt:"";?>" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','17')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+      <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>','17')" aria-label="Action"><i class="ti-medall m-l-15 text-danger f-18 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Request for References <?php echo $emailcnt !=""?" -".$emailcnt:"";?>"></i></button>
     </div>
-      <div class="position-relative d-inline-block job cursor-pointer " onclick="assignedCandidateFiletr('<?php echo $candidate['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Applied Jobs'), ENT_QUOTES, 'UTF-8'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+      <button type="button" class="btn btn-link p-0 border-0 position-relative d-inline-block job cursor-pointer " onclick="assignedCandidateFiletr('<?php echo $candidate['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Applied Jobs'), ENT_QUOTES, 'UTF-8'); ?>">
         <i class="ti-briefcase m-l-15 f-18 text-danger"></i>
         <span class="badge bg-c-red"><?php echo $jobpostingcandidates[$candidate['id']]; ?></span>
-      </div>
+      </button>
 
-      <i class="ti-email m-l-15 f-18 text-danger cursor-pointer"  onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+      <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="sendEmailCandidate('<?php echo $candidate['id']; ?>','<?php echo $candidate['email_id']; ?>')" aria-label="Action"><i class="ti-email m-l-15 f-18 text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
   </div>
 
       </div>

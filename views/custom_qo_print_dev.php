@@ -77,69 +77,48 @@ function currencyFormat($number, $config)
         }
     }
 }
+function formatDevWordSegment($number, $str, $words, $digits)
+{
+    if (!$number) {
+        return null;
+    }
+    $counter = count((array) $str);
+    $plural = ($counter && $number > 9) ? 's' : null;
+    $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+    if ($number < 21) {
+        return $words[$number] . " " . $digits[$counter] . $plural . " " . $hundred;
+    }
+    return $words[floor($number / 10) * 10] . " " . $words[$number % 10] . " " . $digits[$counter] . $plural . " " . $hundred;
+}
+
 function numberToWordFormate($number)
 {
-
     $no = floor($number ?? 0);
     $point = (int) round((($number ?? 0) - $no) * 100);
-    $hundred = null;
     $digits_1 = strlen($no);
     $i = 0;
     $str = array();
     $words = array(
-        '0' => '',
-        '1' => 'one',
-        '2' => 'two',
-        '3' => 'three',
-        '4' => 'four',
-        '5' => 'five',
-        '6' => 'six',
-        '7' => 'seven',
-        '8' => 'eight',
-        '9' => 'nine',
-        '10' => 'ten',
-        '11' => 'eleven',
-        '12' => 'twelve',
-        '13' => 'thirteen',
-        '14' => 'fourteen',
-        '15' => 'fifteen',
-        '16' => 'sixteen',
-        '17' => 'seventeen',
-        '18' => 'eighteen',
-        '19' => 'nineteen',
-        '20' => 'twenty',
-        '30' => 'thirty',
-        '40' => 'forty',
-        '50' => 'fifty',
-        '60' => 'sixty',
-        '70' => 'seventy',
-        '80' => 'eighty',
-        '90' => 'ninety'
+        '0' => '', '1' => 'one', '2' => 'two', '3' => 'three', '4' => 'four',
+        '5' => 'five', '6' => 'six', '7' => 'seven', '8' => 'eight', '9' => 'nine',
+        '10' => 'ten', '11' => 'eleven', '12' => 'twelve', '13' => 'thirteen',
+        '14' => 'fourteen', '15' => 'fifteen', '16' => 'sixteen', '17' => 'seventeen',
+        '18' => 'eighteen', '19' => 'nineteen', '20' => 'twenty', '30' => 'thirty',
+        '40' => 'forty', '50' => 'fifty', '60' => 'sixty', '70' => 'seventy',
+        '80' => 'eighty', '90' => 'ninety'
     );
     $digits = array('', 'hundred', 'thousand', 'lakh', 'crore');
     while ($i < $digits_1) {
         $divider = ($i == 2) ? 10 : 100;
-        $number = floor($no % $divider);
+        $segment = floor($no % $divider);
         $no = floor($no / $divider);
         $i += ($divider == 10) ? 1 : 2;
-        if ($number) {
-            $plural = (($counter = count((array) $str)) && $number > 9) ? 's' : null;
-            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
-            $str[] = ($number < 21) ? $words[$number] .
-                " " . $digits[$counter] . $plural . " " . $hundred
-                :
-                $words[floor($number / 10) * 10]
-                . " " . $words[$number % 10] . " "
-                . $digits[$counter] . $plural . " " . $hundred;
-        } else
-            $str[] = null;
+        $str[] = formatDevWordSegment($segment, $str, $words, $digits);
     }
-    $str = array_reverse((array) $str);
-    $result = implode('', (array) $str);
-    $points = ($point) ?
-        ". " . $words[(int) ($point / 10)] . " " . $words[$point = $point % 10] : '';
+    $result = implode('', array_reverse((array) $str));
+    $points = ($point) ? ". " . $words[(int) ($point / 10)] . " " . $words[$point = $point % 10] : '';
     if ($result != '') {
-        $result = $result . "Rupees  ";
+        $result .= "Rupees  ";
     }
     if ($points != '') {
         $result .= $points . " Paise  ";
@@ -311,9 +290,8 @@ function emptyCheck($valu)
                 </div>
             </div>
 
-            <table role="presentation" style="width:100%;margin-top: 5px;">
-                <tr>
-                    <td class="" style="width:50%;">
+            <div style="display: flex; width: 100%; margin-top: 5px;">
+                <div style="width: 50%;">
                         <div class=""
                             style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
                             <span style="color: #333333;font-size: 12px;font-weight: 500;"><?= __('Billed to'); ?></span>
@@ -338,8 +316,8 @@ function emptyCheck($valu)
                                 </tr>
                             </table>
                         </div>
-                    </td>
-                    <td class="" style="width:50%;">
+                    </div>
+                    <div style="width: 50%;">
                         <div class=""
                             style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
                             <span style="color: #333333;font-size: 12px;font-weight: 500;"><?= __('Shipped to'); ?></span>
@@ -364,9 +342,8 @@ function emptyCheck($valu)
                                 </tr>
                             </table>
                         </div>
-                    </td>
-                <tr>
-            </table>
+                    </div>
+            </div>
             <table style="width:99%;margin:10px 0 0 0;">
                 <tr style="background: #eeeeee;">
                     <th scope="col" style="padding:5px;text-align: left;font-size: 12px;"><?= __('Item Name'); ?></th>
@@ -394,9 +371,9 @@ function emptyCheck($valu)
 
                 <?php } ?>
             </table>
-            <table role="presentation" style="width:99%;margin-top:5px;">
-                <tr>
-                    <td style="width:60%;vertical-align: top;">
+            <div style="width: 99%; margin-top: 5px;">
+                <div style="display: flex; width: 100%;">
+                    <div style="width: 60%; vertical-align: top;">
                         <div class=""
                             style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
                             <h3 style="font-size: 12px;color:#333333;margin: 0;"><?= htmlspecialchars(__('Bank & UPI Detail'), ENT_QUOTES, 'UTF-8'); ?></h3>
@@ -408,7 +385,7 @@ function emptyCheck($valu)
                                     <td style="padding-top: 5px;text-align: left;font-size: 12px;width: 50%;">
                                         <?php echo emptyCheck($bank_accounts['bank_name']); ?>
                                     </td>
-                                    <td rowspan="6" align="center" style="width: 20%;">
+                                    <td rowspan="6" style="text-align: center; width: 20%;">
                                         <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight: 500;"><?= __('Scan to pay via UPI'); ?></h3>
                                         <img src="uploads/all/upi.jpg" style="width:80px;margin: 10px 0 0 0;" alt="">
                                         <p style="font-size: 12px;color:#333333;font-weight: bold;">
@@ -458,8 +435,8 @@ function emptyCheck($valu)
                                 </tr>
                             </table>
                         </div>
-                    </td>
-                    <td style="width:40%;vertical-align: top;">
+                    </div>
+                    <div style="width: 40%; vertical-align: top;">
                         <table style="width: 100%; margin:10px 0 0 0;">
                             <tr>
                                 <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;"><?= __('Sub Total'); ?>
@@ -534,22 +511,6 @@ function emptyCheck($valu)
                                     <?php } ?>
                                 <?php }
                             } ?>
-
-                            <?php /** if($transaction['originator_state_id'] == $transaction['supplier_state_id']){ ?>
-              <tr>
-                 <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">IGST</th>
-                 <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($transaction['tax_amount'],$config); ?></td>
-             </tr>
-             <?php }else{ ?>
-             <tr>
-                 <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">CGST</th>
-                 <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($transaction['tax_amount']/2,$config); ?></td>
-             </tr>
-             <tr>
-                 <th scope="col" style="padding-top: 5px;font-size: 12px;text-align: left;">SGST</th>
-                 <td style="padding-top: 5px;text-align: right;font-size: 12px;"><?php echo currencyFormat($transaction['tax_amount']/2,$config); ?></td>
-             </tr>
-             <?php } **/ ?>
                             <tr style="border-top:1px solid #444444;border-bottom: 1px solid #444444;">
                                 <th scope="col"
                                     style="padding-top: 5px;text-align: left;border-top:1px solid #cccccc;font-weight: 500;">
@@ -568,10 +529,10 @@ function emptyCheck($valu)
                                 <?php echo numberToWordFormate($transaction['total_amount']); ?>
                             </p>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:60%;vertical-align: top;">
+                    </div>
+                </div>
+                <div style="display: flex; width: 100%;">
+                    <div style="width: 60%; vertical-align: top;">
                         <div class=""
                             style="display: block; box-sizing:border-box;background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right: 10px; margin-top:10px;">
                             <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight:bold;"><?= __('Additional Notes'); ?></h3>
@@ -579,8 +540,8 @@ function emptyCheck($valu)
                                 <?php echo emptyCheck($transaction['printing_notes']); ?>
                             </p>
                         </div>
-                    </td>
-                    <td style="width:40%;">
+                    </div>
+                    <div style="width: 40%;">
                         <div style="vertical-align: top;">
                             <span
                                 style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500;"><?= htmlspecialchars(__('For infisuite product & services'), ENT_QUOTES, 'UTF-8'); ?></span>
@@ -588,22 +549,20 @@ function emptyCheck($valu)
                             <span
                                 style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500;"><?= __('Authorised Signature'); ?></span>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <span style="float:inline-end;"><?= htmlspecialchars(__('E. & O.E.'), ENT_QUOTES, 'UTF-8'); ?></span>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+                <div style="width: 100%; text-align: end;">
+                    <span><?= htmlspecialchars(__('E. & O.E.'), ENT_QUOTES, 'UTF-8'); ?></span>
+                </div>
+            </div>
         </div>
         <?php if ($callapi != 'Y') { ?>
         </div>
         <div class="invoice-btn-section clearfix d-print-none" style="margin-top:5px;">
-            <button class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printDiv');">
+            <button type="button" class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printDiv');">
                 <i class="fa fa-print"></i> <?= __('Print'); ?>
             </button>
-            <button class="btn waves-effect waves-light btn-grd-info" onclick="convertHTMLToPDF();">
+            <button type="button" class="btn waves-effect waves-light btn-grd-info" onclick="convertHTMLToPDF();">
                 <i class="fa fa-download"></i> <?= __('Download'); ?>
             </button>
         </div>

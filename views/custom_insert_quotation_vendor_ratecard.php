@@ -1,4 +1,7 @@
 <?php
+defined('API_GET_TABLE') || define('API_GET_TABLE', '?mode=gettabledetails&table=');
+defined('API_GET_TABLE_COND') || define('API_GET_TABLE_COND', '?mode=gettabledetailswithconditions&table=');
+defined('PARAM_DATA') || define('PARAM_DATA', '&data=');
 $option = strtoupper($_GET['option']);
 $list = str_replace('INSERT', 'LIST', $option);
 if($_POST['submit'] == 'query'){
@@ -78,7 +81,7 @@ if(in_array($table_name, $originator_table_withbill)){
     $table1['party_address'] = $locares['location_address'] ." ".$locares['location_city']." ".$locares['location_state']." ".$locares['location_post_code'];
     $table1['party_ship_adderss'] = $locares['location_address'] ." ".$locares['location_city']." ".$locares['location_state']." ".$locares['location_post_code'];
 } else{
-    $cusurl = API."?mode=gettabledetails&table=".TBL_VENDOR;
+    $cusurl = API.API_GET_TABLE.TBL_VENDOR;
     $cusresponse = callAPI($cusurl);
     $cusresponse = json_decode($cusresponse,1);
 }
@@ -99,7 +102,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $vdata1["field"] = "id,transaction_type,user_id,action_log,action_date,status_value";
         $vdata1['order'] = "id DESC";
         $vdata = urlencode(json_encode($vdata1));
-        $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_ACTION_LOG."&data=".$vdata;
+        $vurl = API.API_GET_TABLE_COND.TBL_ACTION_LOG.PARAM_DATA.$vdata;
         $vdata_details = callAPI($vurl);
         $vdata_details = json_decode($vdata_details,1);
 
@@ -274,19 +277,19 @@ $box_url =  API."?mode=gettabledetails&table=petty_cash_boxes";
 $boxlist = callAPI($box_url);
 $boxlist = json_decode($boxlist,1);
 
-$departmentsurl = API."?mode=gettabledetails&table=".TBL_DEPARTMENTS;
+$departmentsurl = API.API_GET_TABLE.TBL_DEPARTMENTS;
 $departmentslist =  callAPI($departmentsurl);
 $departmentslist = json_decode($departmentslist,1);
 
 $crdata["field"] = "id,currency_list";
 $crdata = urlencode(json_encode($crdata));
-$crurl = API."?mode=gettabledetailswithconditions&table=".TBL_CURRENCIES."&data=".$crdata;
+$crurl = API.API_GET_TABLE_COND.TBL_CURRENCIES.PARAM_DATA.$crdata;
 $cr_data = callAPI($crurl);
 $cr_data = json_decode($cr_data, 1);
 $_SESSION['application_table_name'] = $table_name;
 $_SESSION['transaction_id'] = $rid;
 $_SESSION['file_add'][$table_name][$rid]= array();
-    $costcenterurl = API."?mode=gettabledetails&table=".TBL_COST_CENTERS;
+    $costcenterurl = API.API_GET_TABLE.TBL_COST_CENTERS;
 
     $cost = callAPI($costcenterurl);
     $cost = json_decode($cost,1);
@@ -299,7 +302,7 @@ $_SESSION['file_add'][$table_name][$rid]= array();
     $data2["field"] = "cost_center_id";
     $data2["where"] = array('user_id'=> $coos_user_id,'is_active'=> '0');
     $costdata = urlencode(json_encode($data2));
-    $costurl = API."?mode=gettabledetailswithconditions&table=".TBL_USERS_COST_CENTERS."&data=".$costdata;
+    $costurl = API.API_GET_TABLE_COND.TBL_USERS_COST_CENTERS.PARAM_DATA.$costdata;
     $costdata = callAPI($costurl);
     $costress = json_decode($costdata, 1);
     foreach ($costress as  $costres) {
@@ -320,7 +323,7 @@ if($table_name == 'petty_cash' || $table_name == 'bills') {
     $petty_cash_style = "style='display:none;'";
 }
 if(in_array($table_name, $stock_table)){
-    $locations_url = API."?mode=gettabledetails&table=".TBL_LOCATIONS;
+    $locations_url = API.API_GET_TABLE.TBL_LOCATIONS;
     $locations_data = callAPI($locations_url);
     $locations_data = json_decode($locations_data, 1);
 }
@@ -1232,7 +1235,7 @@ function calculateTotal(){
 
         <tr>
             <td colspan="2" >
-                <table role="presentation" class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
+                <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
                     <tbody id='display_tax'>
                         <?php  if(count((array)$taxes)){
                         foreach ($distax as $ktax) { ?>
@@ -1354,7 +1357,7 @@ $disable = ''; if(!in_array($table1['current_status'], $check_array)){ $disable 
 
 </div></div></div></div></div>
 
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" style="max-width: 800px;">
         <div class="modal-content" style="min-height: 50px;width: 800px;" id="popup1">
 

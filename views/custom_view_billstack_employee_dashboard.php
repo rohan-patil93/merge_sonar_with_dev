@@ -97,7 +97,7 @@ function closedPopup(){
   <div class="card-block">
     <div class="width-77">
       <div class="row align-items-center">
-       <div class="d-flex align-items-center col-md mb-2" onclick="dashboardpopup('bill_cnt','Total Number Of Bills','emp_expenses')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+       <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 d-flex align-items-center col-md mb-2" onclick="dashboardpopup('bill_cnt','Total Number Of Bills','emp_expenses')">
 
         <div class="rounded-circle bg-primary p-3 m-r-10">
           <i class="fa fa-user-plus f-20"></i>
@@ -106,10 +106,9 @@ function closedPopup(){
           <a href="#"><div class="card-title f-w-600 f-16"><?php echo count((array)$admindashboardd['bill_cnt'])."+ BillS"?></div>
             <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Bills'); ?></p>
           </a>
-        </div>
-
-      </div>
-      <div class="d-flex align-items-center col-md mb-2" onclick="dashboardpopup('bill_approved','Total Number Of Bills Cleared','emp_expenses')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+        </button>
+</div>
+      <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 d-flex align-items-center col-md mb-2" onclick="dashboardpopup('bill_approved','Total Number Of Bills Cleared','emp_expenses')">
         <div class="rounded-circle bg-primary p-3  m-r-10">
           <i class="fa fa-user-plus f-20"></i>
         </div>
@@ -118,9 +117,9 @@ function closedPopup(){
           <div class="card-title f-w-600 f-16"><?php echo count((array)$admindashboardd['bill_approved'])."+ Bills"?></div>
           <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Bills Cleared'); ?></p>
         </a>
-      </div>
-    </div>
-    <div class="d-flex align-items-center col-md mb-2" onclick="dashboardpopup('pending_approved','Total Number Of Bills Pendding','emp_expenses')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+      </button>
+</div>
+    <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 d-flex align-items-center col-md mb-2" onclick="dashboardpopup('pending_approved','Total Number Of Bills Pendding','emp_expenses')">
       <div class="rounded-circle bg-primary p-3 m-r-10">
         <i class="fa fa-user-plus f-20"></i>
       </div>
@@ -129,30 +128,27 @@ function closedPopup(){
         <div class="card-title f-w-600 f-16"><?php echo count((array)$admindashboardd['pending_approved'])."+ Bills"?></div>
         <p class="card-subtitle text-muted mt-1 f-12"> <?= __('Total Number Of Bills Pendding'); ?></p>
       </a>
-    </div>
-  </div>
+    </button>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="pcoded-inner-content">
-  <!-- Main-body start -->
-  <div class="main-body">
-    <div class="page-wrapper">
-      <!-- Page-body start -->
+  
       <div class="page-body border-bottom">
         <div class="width-77">
           <div class="row">
 
             <div class="col-xl-4 col-md-6 cursor-pointer">
-              <div class="card prod-p-card card-red" onclick="dashboardpopup('unsubmited','Total Number Of Bills Unsubmite','emp_expenses')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+              <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 card prod-p-card card-red" onclick="dashboardpopup('unsubmited','Total Number Of Bills Unsubmite','emp_expenses')">
                 <div class="card-body">
                   <div class="row align-items-center m-b-30">
                     <div class="col">
                       <h6 class="m-b-5 text-white"><?= __('Un-Submited'); ?></h6>
                       <h3 class="m-b-0 f-w-700 text-white"><?php echo $admindashboardd['unsubmited_amt']!=""?customeummarmonyformate($admindashboardd['unsubmited_amt']):"0.00"; ?></h3>
-                    </div>
-                    <div class="col-auto">
+                    </button>
+<div class="col-auto">
                       <i class="ti-help text-c-red f-18 p-2"></i>
                     </div>
                   </div>
@@ -161,14 +157,14 @@ function closedPopup(){
               </div>
             </div>
             <div class="col-xl-4 col-md-6 cursor-pointer">
-              <div class="card prod-p-card card-blue" onclick="dashboardpopup('pending_approved','Total Number Of Bills Pendding','emp_expenses')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+              <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 card prod-p-card card-blue" onclick="dashboardpopup('pending_approved','Total Number Of Bills Pendding','emp_expenses')">
                 <div class="card-body">
                   <div class="row align-items-center m-b-30">
                     <div class="col">
                       <h6 class="m-b-5 text-white"><?= __('Submited'); ?></h6>
                       <h3 class="m-b-0 f-w-700 text-white"><?php echo $admindashboardd['pending_approved_amt']!=""?customeummarmonyformate( $admindashboardd['pending_approved_amt']):"0.00"; ?></h3>
-                    </div>
-                    <div class="col-auto">
+                    </button>
+<div class="col-auto">
                      <i class="ti-thumb-up text-c-blue f-18 p-2"></i>
                    </div>
                  </div>
@@ -177,14 +173,14 @@ function closedPopup(){
              </div>
            </div>
            <div class="col-xl-4 col-md-6 cursor-pointer">
-            <div class="card prod-p-card card-green" onclick="dashboardpopup('bill_approved','Total Number Of Bills Cleared','emp_expenses')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+            <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 card prod-p-card card-green" onclick="dashboardpopup('bill_approved','Total Number Of Bills Cleared','emp_expenses')">
               <div class="card-body">
                 <div class="row align-items-center m-b-30">
                   <div class="col">
                     <h6 class="m-b-5 text-white"> <?= __('Reimbursed'); ?></h6>
                     <h3 class="m-b-0 f-w-700 text-white"><?php echo $admindashboardd['bill_approved_amonut']!=""?customeummarmonyformate($admindashboardd['bill_approved_amonut']):"0.00"; ?></h3>
-                  </div>
-                  <div class="col-auto">
+                  </button>
+<div class="col-auto">
                     <i class="fas fa-money-bill-alt text-c-green f-18 p-2"></i>
                   </div>
                 </div>
@@ -192,89 +188,7 @@ function closedPopup(){
               </div>
             </div>
           </div>
-          <!-- product profit end -->
-        </div>
-      </div>
-    </div>
-
-      <div class="page-body mt-4 border-bottom">
-        <div class="width-77">
-          <div class="row">
-            <h3 class="f-20 mb-3"><?= __('Recet Bills'); ?></h3>
-            <?php if(count((array)$admindashboardd['billsres']) != 0){ foreach($admindashboardd['billsres'] as $billsreslist){
-              $stausresult = $_SESSION['status'][$billsreslist['current_status']];
-              $ridrecengtbils = deocdeId("id:".$billsreslist['id']);
-              ?>
-              <div class="col-xl-3 col-md-12" id="custom-popup" >
-               <div class="card proj-t-card">
-                <div class="card-body">
-                  <div class="row align-items-center" onclick="slidepopupdetails('<?php echo $billsreslist['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
-                    <div class="col-auto">
-                      <i class="fa fa-file f-28"></i>
-                    </div>
-                    <div class="col p-l-0">
-                      <h6 class="m-b-5 f-16"><?php echo $billsreslist['expense_code']; ?></h6>
-                      <h6 class="m-b-0 text-muted f-12"><?= __('Rs.'); ?> <?php echo customeummarmonyformate($billsreslist['amount']); ?></h6>
-                    </div>
-                  </div>
-                  <h6 class="pt-badge f-10" style="background-color: <?php echo $stausresult['background_color'][0] == '#'?$stausresult['background_color']:"#".$stausresult['background_color']; ?>; color:<?php echo $stausresult['color'][0] =='#'?$stausresult['color']:'#'.$stausresult['color']; ?>"><?php echo $statusprogress[$billsreslist['current_status']]?></h6>
-                </div>
-              </div>
-                  <div class="custom-popup-open custom-popup-slide-<?php echo $billsreslist['id']; ?>" style="left: 14px; top: 70px;">
-                      <div class="card">
-                        <div class="card-header">
-                          <h5><?= __('Expense'); ?></h5>
-                          <div class="card-header-right">
-                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closedPopup()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <div class="row align-items-center">
-                            <div class="col-auto">
-                               <i class="fa fa-file f-28"></i>
-                            </div>
-                            <div class="col p-l-0">
-                              <h6 class="m-b-5 f-16"><?php echo $billsreslist['expense_code']; ?></h6>
-                              <h6 class="m-b-0 text-muted f-12"><?= __('Rs.'); ?> <?php echo customeummarmonyformate($billsreslist['amount']); ?></h6>
-                            </div>
-                          </div>
-                          <p class="mt-3 text-muted"><?php echo $billsreslist['description']; ?></p>
-                          <div class="row text-center mt-3">
-                            <div class="col-auto d-flex align-items-center">
-                              <i class="fa fa-subway text-muted m-r-5"></i>
-                              <p class="flex text-black-50 lh-1 mb-0">
-                                <small><?php echo $billsreslist['expense_date']; ?></small>
-                              </p>
-                            </div>
-                            <div class="col-auto d-flex align-items-center">
-                              <i class="fa fa-file text-muted m-r-5"></i>
-                              <p class="flex text-black-50 lh-1 mb-0">
-                                <small><?php echo $billsreslist['reference_date']; ?></small>
-                              </p>
-                            </div>
-                          </div>
-                          <div class="mt-4">
-                            <a href="index.php?option=COM_INSERT_EMP_EXPENSES&Rid=<?php echo $ridrecengtbils; ?>" class="btn btn-primary"><?= __('Edit'); ?></a>
-                         </div>
-                      </div>
-                    </div>
-                  </div>
-
-          </div>
-        <?php  } ?>
-      <?php }else{?>
-        <div class="card-px text-center py-20 m-t-30">
-              <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Recet Bills'); ?></p>
-              <div class="text-center px-4">
-                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-            </div>
-        </div>
-      <?php } ?>
-
-      </div>
-    </div>
-  </div>
-  <!-- Page-body start -->
+          
 
     <div class="page-body mt-4 border-bottom">
       <div class="width-77">

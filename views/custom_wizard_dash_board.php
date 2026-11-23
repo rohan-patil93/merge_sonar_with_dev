@@ -406,13 +406,13 @@
                   <div class="alert-text">
                      <div class="d-flex align-items-center mb-0">
                         <!--begin::Symbol-->
-                       <div class="symbol symbol-35 symbol-success mr-3" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                       <button type="button" class="btn p-0 border-0 bg-transparent symbol symbol-35 symbol-success mr-3" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')">
                                  <?php if($display_photo) {?>
                                  <img src="uploads/all/<?php echo $display_photo; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                  <?php } else { ?>
                                  <span class="symbol-label symbol-success font-weight-bold"><?php echo initials($display_name); ?></span>
                                  <?php } ?>
-                              </div>
+                              </button>
                         <!--end::Symbol-->
                         <!--begin::Text-->
                         <div class="d-flex flex-column font-weight-bold">
@@ -449,13 +449,13 @@
                   <div class="alert-text">
                      <div class="d-flex align-items-center mb-0">
                         <!--begin::Symbol-->
-                       <div class="symbol symbol-35 symbol-success mr-3" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                       <button type="button" class="btn p-0 border-0 bg-transparent symbol symbol-35 symbol-success mr-3" onclick="popupfeedmsg(<?php echo $sender_emp_id;?>,<?php echo $receiver_emp_id;?>,'<?php echo $msg_title;?>')">
                                  <?php if($display_photo) {?>
                                  <img src="uploads/all/<?php echo $display_photo; ?>" alt="<?= htmlspecialchars(__('Details'), ENT_QUOTES, 'UTF-8'); ?>">
                                  <?php } else { ?>
                                  <span class="symbol-label symbol-success font-weight-bold"><?php echo initials($display_name); ?></span>
                                  <?php } ?>
-                              </div>
+                              </button>
                         <!--end::Symbol-->
                         <!--begin::Text-->
                         <div class="d-flex flex-column font-weight-bold">
@@ -501,7 +501,7 @@
 
 
 
- <div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+ <div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog " >
         <div class="modal-content"  id="popup1">
 

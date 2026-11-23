@@ -1,4 +1,7 @@
 <?php
+defined('ATTR_NAME_GROUPS') || define('ATTR_NAME_GROUPS', '" name="groups[');
+defined('ATTR_VAL_EMPTY_GROUP') || define('ATTR_VAL_EMPTY_GROUP', ']" value="');
+defined('ATTR_DATA_GROUP') || define('ATTR_DATA_GROUP', '" data-group="');
 $_SESSION['apply_js']['multiselest'] = 1;
     $rid = encodeId($_GET['Rid']);
     $rid = urldecode($rid);
@@ -384,13 +387,13 @@ if (!empty($groupsData)) {
         foreach ($details as $index => $detail) {
             echo '<tr data-group="group_' . htmlspecialchars($groupId) . '">';
             echo '<td>' . htmlspecialchars($index) . '</td>';
-            echo '<td><input aria-label="Groups" type="text" class="form-control" id="details_group_' . htmlspecialchars($groupId) . '_' . ($index) . '" name="groups[' . htmlspecialchars($groupId) . '][details][' . ($index ) . ']" value="' . htmlspecialchars($detail) . '"></td>';
-            echo '<td><input aria-label="Groups" type="number" class="form-control unit-cost text_align_right" id="unit_cost_group_' . htmlspecialchars($groupId) . '_' . ($index) . '" name="groups[' . htmlspecialchars($groupId) . '][unit_cost][' . ($index ) . ']" value="' . htmlspecialchars($unitCost[$index] ?? '') . '" data-group="group_' . htmlspecialchars($groupId) . '"></td>';
-            echo '<td><input aria-label="Groups" type="number" class="form-control num-units text_align_right" id="num_units_group_' . htmlspecialchars($groupId) . '_' . ($index) . '" name="groups[' . htmlspecialchars($groupId) . '][num_units][' . ($index) . ']" value="' . htmlspecialchars($numUnits[$index] ?? '') . '" data-group="group_' . htmlspecialchars($groupId) . '"></td>';
-            echo '<td><input aria-label="Groups" type="text" class="form-control budget text_align_right" id="budget_group_' . htmlspecialchars($groupId) . '_' . ($index) . '" name="groups[' . htmlspecialchars($groupId) . '][budget][' . ($index) . ']" value="' . htmlspecialchars($budget[$index] ?? '') . '" readonly></td>';
-            echo '<td><input aria-label="Groups" type="number" class="form-control num-months text_align_right" id="num_months_group_' . htmlspecialchars($groupId) . '_' . ($index) . '" name="groups[' . htmlspecialchars($groupId) . '][num_months][' . ($index) . ']" value="' . htmlspecialchars($numMonths[$index] ?? '') . '" data-group="group_' . htmlspecialchars($groupId) . '"></td>';
-            echo '<td><input aria-label="Groups" type="text" class="form-control total-budget text_align_right" id="total_budget_group_' . htmlspecialchars($groupId) . '_' . ($index) . '" name="groups[' . htmlspecialchars($groupId) . '][total_budget][' . ($index) . ']" value="' . htmlspecialchars($totalBudget[$index] ?? '') . '" readonly></td>';
-            echo '<td><input aria-label="Groups" type="text" class="form-control" id="remarks_group_' . htmlspecialchars($groupId) . '_' . ($index) . '" name="groups[' . htmlspecialchars($groupId) . '][remarks][' . ($index) . ']" value="' . htmlspecialchars($remarks[$index] ?? '') . '"></td>';
+            echo '<td><input aria-label="Groups" type="text" class="form-control" id="details_group_' . htmlspecialchars($groupId) . '_' . ($index) . ATTR_NAME_GROUPS . htmlspecialchars($groupId) . '][details][' . ($index ) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($detail) . '"></td>';
+            echo '<td><input aria-label="Groups" type="number" class="form-control unit-cost text_align_right" id="unit_cost_group_' . htmlspecialchars($groupId) . '_' . ($index) . ATTR_NAME_GROUPS . htmlspecialchars($groupId) . '][unit_cost][' . ($index ) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($unitCost[$index] ?? '') . ATTR_DATA_GROUP . htmlspecialchars($groupId) . '"></td>';
+            echo '<td><input aria-label="Groups" type="number" class="form-control num-units text_align_right" id="num_units_group_' . htmlspecialchars($groupId) . '_' . ($index) . ATTR_NAME_GROUPS . htmlspecialchars($groupId) . '][num_units][' . ($index) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($numUnits[$index] ?? '') . ATTR_DATA_GROUP . htmlspecialchars($groupId) . '"></td>';
+            echo '<td><input aria-label="Groups" type="text" class="form-control budget text_align_right" id="budget_group_' . htmlspecialchars($groupId) . '_' . ($index) . ATTR_NAME_GROUPS . htmlspecialchars($groupId) . '][budget][' . ($index) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($budget[$index] ?? '') . '" readonly></td>';
+            echo '<td><input aria-label="Groups" type="number" class="form-control num-months text_align_right" id="num_months_group_' . htmlspecialchars($groupId) . '_' . ($index) . ATTR_NAME_GROUPS . htmlspecialchars($groupId) . '][num_months][' . ($index) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($numMonths[$index] ?? '') . ATTR_DATA_GROUP . htmlspecialchars($groupId) . '"></td>';
+            echo '<td><input aria-label="Groups" type="text" class="form-control total-budget text_align_right" id="total_budget_group_' . htmlspecialchars($groupId) . '_' . ($index) . ATTR_NAME_GROUPS . htmlspecialchars($groupId) . '][total_budget][' . ($index) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($totalBudget[$index] ?? '') . '" readonly></td>';
+            echo '<td><input aria-label="Groups" type="text" class="form-control" id="remarks_group_' . htmlspecialchars($groupId) . '_' . ($index) . ATTR_NAME_GROUPS . htmlspecialchars($groupId) . '][remarks][' . ($index) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($remarks[$index] ?? '') . '"></td>';
             echo '<td ></td>';
             echo '</tr>';
         }
@@ -400,9 +403,9 @@ if (!empty($groupsData)) {
             echo '<td></td>';
             echo '<th scope="col" class="text-center">' . __('Sub Total') . ' (' . htmlspecialchars($groupId) . ')</th>';
             echo '<td></td><td></td>';
-            echo '<td><input aria-label="Groups" type="text" class="form-control budget-subtotal text_align_right" id="budget_sub_total_' . htmlspecialchars($groupId) . '" name="groups[' . htmlspecialchars($groupId) . '][subtotal][' . htmlspecialchars($groupId) . ']" value="' . htmlspecialchars($subtotal[$groupId]) . '" readonly></td>';
+            echo '<td><input aria-label="Groups" type="text" class="form-control budget-subtotal text_align_right" id="budget_sub_total_' . htmlspecialchars($groupId) . ATTR_NAME_GROUPS . htmlspecialchars($groupId) . '][subtotal][' . htmlspecialchars($groupId) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($subtotal[$groupId]) . '" readonly></td>';
             echo '<td></td>';
-            echo '<td><input aria-label="Groups" type="text" class="form-control total-budget-subtotal text_align_right" id="total_budget_sub_total_' . htmlspecialchars($groupId) . '" name="groups[' . htmlspecialchars($groupId) . '][total_subtotal][' . htmlspecialchars($groupId) . ']" value="' . htmlspecialchars($totalSubtotal[$groupId]) . '" readonly></td>';
+            echo '<td><input aria-label="Groups" type="text" class="form-control total-budget-subtotal text_align_right" id="total_budget_sub_total_' . htmlspecialchars($groupId) . ATTR_NAME_GROUPS . htmlspecialchars($groupId) . '][total_subtotal][' . htmlspecialchars($groupId) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($totalSubtotal[$groupId]) . '" readonly></td>';
             echo '<td></td>';
             echo '<td class="text-center"> <i class="fas fa-trash-alt text-danger cursor-pointer remove-row data-delete-group" data-delete-group="group_' . htmlspecialchars($groupId) . '"></i></td>';
             echo '</tr>';
@@ -469,9 +472,9 @@ if (!empty($percent)) {
     foreach ($percent as $payId => $percentValue) {
         echo '<tr>';
         echo '<td>' . ($payId) . '</td>';
-        echo '<td><input aria-label="Payment Schedule Description" type="text" class="form-control" id="payment_schedule_description_' . ($payId) . '" name="payment_schedule_description[' . ($payId ) . ']" value="' . htmlspecialchars($description[$payId] ?? '') . '"></td>';
-        echo '<td><input aria-label="Payment Schedule Percent" type="number" class="form-control percent-input text_align_right" id="percent_' . ($payId) . '" name="payment_schedule_percent[' . ($payId) . ']" value="' . htmlspecialchars($percentValue) . '" data-row="' . $payId . '"></td>';
-        echo '<td><input aria-label="Payment Schedule Amount" type="text" class="form-control amount-input text_align_right" id="amount_' . ($payId + 1) . '" name="payment_schedule_amount[' . ($payId) . ']" value="' . htmlspecialchars($amount[$payId] ?? '') . '" readonly></td>';
+        echo '<td><input aria-label="Payment Schedule Description" type="text" class="form-control" id="payment_schedule_description_' . ($payId) . '" name="payment_schedule_description[' . ($payId ) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($description[$payId] ?? '') . '"></td>';
+        echo '<td><input aria-label="Payment Schedule Percent" type="number" class="form-control percent-input text_align_right" id="percent_' . ($payId) . '" name="payment_schedule_percent[' . ($payId) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($percentValue) . '" data-row="' . $payId . '"></td>';
+        echo '<td><input aria-label="Payment Schedule Amount" type="text" class="form-control amount-input text_align_right" id="amount_' . ($payId + 1) . '" name="payment_schedule_amount[' . ($payId) . ATTR_VAL_EMPTY_GROUP . htmlspecialchars($amount[$payId] ?? '') . '" readonly></td>';
         echo '<td><textarea aria-label="Payment Schedule Deliverables" class="form-control" id="deliverables_' . ($payId) . '" name="payment_schedule_deliverables[' . ($payId) . ']">' . htmlspecialchars($deliverables[$payId] ?? '') . '</textarea></td>';
         echo '<td class="text-center" ><i class="fas fa-trash-alt text-danger cursor-pointer remove-row delete-payment-row" data-delete-payment-row="1" ></i></td>';
         echo '</tr>';
@@ -1910,7 +1913,7 @@ if (!empty($percent)) {
             <?php
             $project_data = json_decode($return['project_data'], true);
             $srNo = 1;
-            foreach ($project_data as $project):
+            foreach ($project_data as $project) {
             ?>
                 <tr>
                     <td><?= $srNo++; ?></td>
@@ -1926,7 +1929,7 @@ if (!empty($percent)) {
 
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            <?php } ?>
         <?php endif; ?>
                                 </tbody>
                             </table>

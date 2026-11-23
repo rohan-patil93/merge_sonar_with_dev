@@ -1,4 +1,5 @@
 <?php
+defined('REGEX_NEWLINES') || define('REGEX_NEWLINES', '/[\r\n]/');
 defined('KEY_PAN_NUMBER') || define('KEY_PAN_NUMBER', 'pan_number');
 defined('KEY_ERROR_MESSAGE') || define('KEY_ERROR_MESSAGE', 'error_message');
 defined('KEY_ADMIN_EMAIL') || define('KEY_ADMIN_EMAIL', 'admin_email');
@@ -63,15 +64,15 @@ $transaction_activity_schedule = $result['transaction_activity_schedule_list'];
                             $('#'+btn_id).addClass('btn-success');
                             $('#'+btn_id).removeAttr("onclick");
 
-                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['display_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.name+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Pan Number') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates[KEY_PAN_NUMBER]); ?></td><td class="p-2 w-b-w-s text-danger">'+res.number+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('First Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['first_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.firstName+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Middle Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['middle_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.middleName+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Last Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['last_name']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.lastName+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace(REGEX_NEWLINES, ' ', $candidates['display_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.name+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Pan Number') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace(REGEX_NEWLINES, ' ', $candidates[KEY_PAN_NUMBER]); ?></td><td class="p-2 w-b-w-s text-danger">'+res.number+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('First Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace(REGEX_NEWLINES, ' ', $candidates['first_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.firstName+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Middle Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace(REGEX_NEWLINES, ' ', $candidates['middle_name']); ?></td><td class="p-2 w-b-w-s text-danger">'+res.middleName+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Last Name') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace(REGEX_NEWLINES, ' ', $candidates['last_name']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.lastName+'</td></tr>';
                             pangstlist +='<tr><th scope="col" class="p-2"><?= __('Gender') ?></th><td class="w-b-w-s p-2">-</td><td class="p-2 w-b-w-s  text-danger">'+res.gender+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Date Of Birth') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['date_of_birth']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.dateOfBirth+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('EmailId') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['email_id']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.emailId+'</td></tr>';
-                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Address') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace('/\r|\n/', ' ', $candidates['address']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.address.fullAddress+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Date Of Birth') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace(REGEX_NEWLINES, ' ', $candidates['date_of_birth']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.dateOfBirth+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('EmailId') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace(REGEX_NEWLINES, ' ', $candidates['email_id']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.emailId+'</td></tr>';
+                            pangstlist +='<tr><th scope="col" class="p-2"><?= __('Address') ?></th><td class="w-b-w-s p-2"><?php echo preg_replace(REGEX_NEWLINES, ' ', $candidates['address']); ?></td><td class="p-2 w-b-w-s  text-danger">'+res.address.fullAddress+'</td></tr>';
                             pangstlist +='<tr><th scope="col" class="p-2"><?= __('Address') ?></th><td class="p-2">-</td><td class="p-2 w-b-w-s text-danger">'+res.address.addressLineOne+'</td></tr>';
                             pangstlist +='<tr><th scope="col" class="p-2"><?= __('Country') ?></th><td class="p-2">-</td><td class="p-2 w-b-w-s  text-danger">'+res.address.country+'</td></tr>';
 

@@ -395,7 +395,7 @@ $sprogress = $statusprogress['full'] ?? array();
                                     $col_date = date('Y-m-d', strtotime("+$i days", strtotime($start_date)));
                                     $col_day_name = date('l', strtotime($col_date));
                                 ?>
-                                    <th scope="col" width="14.28%" class="p-2">
+                                    <th scope="col" style="width: 14.28%;" class="p-2">
                                         <div><?php echo $col_day_name; ?></div>
                                         <small class="text-white-50"><?php echo date('d M', strtotime($col_date)); ?></small>
                                     </th>
@@ -565,7 +565,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <small class="f-w-600">
                                         <?php
                                         $hrs = floatval($submited['billable_hrs'] ?? 0);
-                                        echo $hrs == 8 ? 'Present (8h)' : ($hrs == 4 ? 'Half Day (4h)' : 'Absent');
+                                        $halfOrAbsent = ($hrs == 4) ? 'Half Day (4h)' : 'Absent';
+                                                            echo ($hrs == 8) ? 'Present (8h)' : $halfOrAbsent;
                                         ?>
                                     </small>
                                 </div>
@@ -602,7 +603,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <small class="f-w-600">
                                         <?php
                                         $hrs = floatval($submited['billable_hrs'] ?? 0);
-                                        echo $hrs == 8 ? 'Present (8h)' : ($hrs == 4 ? 'Half Day (4h)' : 'Absent');
+                                        $halfOrAbsent = ($hrs == 4) ? 'Half Day (4h)' : 'Absent';
+                                                            echo ($hrs == 8) ? 'Present (8h)' : $halfOrAbsent;
                                         ?>
                                     </small>
                                 </div>
@@ -638,7 +640,8 @@ $sprogress = $statusprogress['full'] ?? array();
                                     <small class="f-w-600">
                                         <?php
                                         $hrs = floatval($submited['billable_hrs'] ?? 0);
-                                        echo $hrs == 8 ? 'Present (8h)' : ($hrs == 4 ? 'Half Day (4h)' : 'Absent');
+                                        $halfOrAbsent = ($hrs == 4) ? 'Half Day (4h)' : 'Absent';
+                                                            echo ($hrs == 8) ? 'Present (8h)' : $halfOrAbsent;
                                         ?>
                                     </small>
                                 </div>

@@ -1,4 +1,5 @@
 <?php
+defined('CLS_BTN_INFO_WHITE') || define('CLS_BTN_INFO_WHITE', 'btn-info text-white');
 $_SESSION['apply_js']['multiselest'] = '1';
 $_SESSION['apply_js']['textediter'] = '1';
 $_SESSION['apply_js']['inputmask'] = '1';
@@ -589,15 +590,7 @@ $joblevel_list = $results['job_grade'];
                                                         data-a-sign="<?php echo $_SESSION['config']['currency_symbol']; ?>"
                                                         placeholder="<?php echo __('eg. 4,000,000'); ?>" />
                                                 </div>
-                                                <!--  <div class="col-6">
-                                        <label>Min Salary</label>
-                                       <select class="form-control" id="" name="annual_salary" aria-label="Annual Salary">
-                                          <option value="">Min Salary(in lakhs)</option>
-                                             <?php for ($m = 1; $m <= 10; $m++) { ?>
-                                          <option value="<?php echo $m; ?>" <?php echo $jobpostlist['total_resource_cost'] == $m ? "selected" : ""; ?>><?php echo $m; ?></option>
-                                          <?php } ?>
-                                       </select>
-                                    </div> -->
+                                                
                                                 <div class="col-lg-4 m-b-10">
                                                     <label for="fld_max_salary"
                                                         class="form-label"><?php echo __('Max Salary'); ?></label>
@@ -612,7 +605,7 @@ $joblevel_list = $results['job_grade'];
                                                 <div class="col-lg-4 m-b-10">
                                                     <label for="annual_salary"
                                                         class="form-label"><?php echo __('Total Salary'); ?></label>
-                                                    <!--           <input class="form-control inr_amount" type="text" value="<?php echo $jobpostlist['total_resource_cost']; ?>"  name="annual_salary"  id="annual_salary"> -->
+                                                    
 
                                                     <input type="text" class="form-control autonumber inr_amount"
                                                         value="<?php echo $jobpostlist['total_resource_cost']; ?>"
@@ -700,35 +693,35 @@ $joblevel_list = $results['job_grade'];
                                                 value="<?php echo $jobpostlist['employment_mode']; ?>">
                                             <ul class="post-job">
                                                 <li>
-                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "1" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
+                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "1" ? CLS_BTN_INFO_WHITE : "btn-outline-info"; ?> coursetypeemty"
                                                         id="coursetype1" data-id="1" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Full Time'); ?></h6>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "2" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
+                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "2" ? CLS_BTN_INFO_WHITE : "btn-outline-info"; ?> coursetypeemty"
                                                         id="coursetype2" data-id="2" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Part Time'); ?></h6>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "3" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
+                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "3" ? CLS_BTN_INFO_WHITE : "btn-outline-info"; ?> coursetypeemty"
                                                         id="coursetype3" data-id="3" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Distance Learning Program'); ?></h6>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "4" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
+                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "4" ? CLS_BTN_INFO_WHITE : "btn-outline-info"; ?> coursetypeemty"
                                                         id="coursetype4" data-id="4" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Executive Program'); ?></h6>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "5" ? "btn-info text-white" : "btn-outline-info"; ?> coursetypeemty"
+                                                    <a class="btn <?php echo $jobpostlist['employment_mode'] == "5" ? CLS_BTN_INFO_WHITE : "btn-outline-info"; ?> coursetypeemty"
                                                         id="coursetype5" data-id="5" tabindex="0">
                                                         <i class="fa fa-graduation-cap mb-4"></i>
                                                         <h6><?php echo __('Certification'); ?></h6>
@@ -814,14 +807,12 @@ $joblevel_list = $results['job_grade'];
                                                             placeholder="<?php echo __('Eg. Yes,No'); ?>"
                                                             aria-label="<?php echo __('Eg. Yes,No'); ?>">
                                                     </div>
-                                                    <div class="col-lg-2">
-                                                        <i role="button" tabindex="0"
-                                                            aria-label="<?php echo htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>"
+                                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick=""><div class="col-lg-2"> <i aria-label="<?php echo htmlspecialchars(__('Delete Question'), ENT_QUOTES, 'UTF-8'); ?>"
                                                             title="<?php echo __('Delete Question'); ?>"
                                                             onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
                                                             onclick="deleteQuestion(<?php echo $ij; ?>)"
                                                             class="fa fa-trash text-danger cursor-pointer"></i>
-                                                    </div>
+                                                    </div></button>
                                                 </div>
                                                 <?php
                                                 $ij++;
@@ -915,8 +906,7 @@ if(isset($jobpostlist['question'])){
                                                 <div class="col-12 mt-3">
                                                     <div class="checkbox-inline">
                                                         <div class="col-lg-12 col-md-12 col-sm-12">
-                                                            <!--   <textarea class="summernote" name="summa" id="kt_summernote_1" aria-label="Summa"><?php echo base64_decode($jobpostlist['job_desc']); ?></textarea> -->
-
+                                                            
                                                             <textarea class="form-control textediters" name="summa"
                                                                 id="<?php echo $key; ?>"
                                                                 aria-label="<?php echo __('Summa'); ?>"><?php echo base64_decode($jobpostlist['job_desc']); ?></textarea>
@@ -1048,13 +1038,9 @@ $text = array("Job Title" => "Job title list please select any one", "Job Number
 
 
 
-            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"
-                    onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></div>
+            <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick=""><div class="ps__rail-x" style="left: 0px; bottom: 0px;"> <div class="ps__thumb-x" style="left: 0px; width: 0px;"></div></button>
             </div>
-            <div class="ps__rail-y" style="top: 0px; height: 384px; right: -2px;">
-                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 231px;"
-                    onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></div>
+            <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick=""><div class="ps__rail-y" style="top: 0px; height: 384px; right: -2px;"> <div class="ps__thumb-y" style="top: 0px; height: 231px;"></div></button>
             </div>
         </div>
         <!--end::Wrapper-->
@@ -1062,9 +1048,9 @@ $text = array("Job Title" => "Job title list please select any one", "Job Number
     <!--end::Content-->
 </div>
 <!-- Modal-->
-<div class="modal fade" id="exampleModalSizeSm" data-backdrop="static" tabindex="-1" role="dialog"
+<div class="modal fade" id="exampleModalSizeSm" data-backdrop="static" tabindex="-1"
     aria-labelledby="staticBackdrop" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><?php echo __('Enter Option'); ?></h5>

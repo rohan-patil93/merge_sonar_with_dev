@@ -1,5 +1,4 @@
 <?php
-defined('ATTR_TOOLTIP_EMPTY') || define('ATTR_TOOLTIP_EMPTY', '<?= ATTR_TOOLTIP_EMPTY ?>');
 defined('CLS_ACTIVE_SHOW') || define('CLS_ACTIVE_SHOW', 'active show');
 if($_POST['ajaxpagecall'] == "Y"){
     include_once '../includes/session.php';

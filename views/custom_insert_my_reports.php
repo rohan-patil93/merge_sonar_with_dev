@@ -1,4 +1,5 @@
 <?php
+defined('CLS_ACTIVE_SPACE') || define('CLS_ACTIVE_SPACE', ' active');
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
@@ -150,7 +151,7 @@ function addmoreformula(){
     maxformulid++;
     var positions = maxformulid+200;
     var html = '';
-    html += '<div class="card formulareportdiv removeformula_'+maxformulid+'" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><div class="card-header p-2 custom_displayinline row" id="headingOnes'+maxformulid+'" ><div class="card-title collapsed f-14 mt-2 col-lg-10 f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOnes'+maxformulid+'"><?php echo __('Formula Name'); ?></div>    <div class="col-lg-1" onclick="removeformuladiv(\''+maxformulid+'\')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo __('X'); ?></div></div>';
+    html += '<div class="card formulareportdiv removeformula_'+maxformulid+'"><div class="card-header p-2 custom_displayinline row" id="headingOnes'+maxformulid+'" ><div class="card-title collapsed f-14 mt-2 col-lg-10 f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOnes'+maxformulid+'"><?php echo __('Formula Name'); ?></div>    <button type="button" class="btn btn-link p-0 border-0 col-lg-1" onclick="removeformuladiv(\''+maxformulid+'\')"><?php echo __('X'); ?></button></div>';
 
     html += '<div id="collapseOnes'+maxformulid+'" class="collapse" data-parent="#accordionExample5"><div class="card-body"><div class=""><div class="tab-content mt-2" id="myTabContent4"><div class="tab-pane fade show active btn-sm" id="content-1" role="tabpanel" aria-labelledby="content_1">';
 
@@ -344,9 +345,9 @@ function Getinserttype(table,field,type){
                                 <div class="col-lg-6 custom_displayinline" style="display: contents;">
                                     <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php echo ($header['heddingdislay']=='1')?"":"checked"; ?> name="heddingdislay[<?php echo $q; ?>]"  class="heddingdislay js-primary-sm " data-id="<?php echo $q; ?>" ><span></span>
                                     <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
-                                        <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_hedding <?php echo ($header['heddingposition']=='text-left')?' active':''; ?>" value="text-left"><i class="fa fa-align-left text-primary"></i></button>
-                                        <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_hedding  <?php echo ($header['heddingposition']=='text-center')?' active':''; ?>" value="text-center"><i class="fa fa-align-center"></i></button>
-                                        <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_hedding <?php echo ($header['heddingposition']=='text-right')?' active':''; ?>" value="text-right"><i class="fa fa-align-right"></i></button>
+                                        <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_hedding <?php echo ($header['heddingposition']=='text-left')?CLS_ACTIVE_SPACE:''; ?>" value="text-left"><i class="fa fa-align-left text-primary"></i></button>
+                                        <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_hedding  <?php echo ($header['heddingposition']=='text-center')?CLS_ACTIVE_SPACE:''; ?>" value="text-center"><i class="fa fa-align-center"></i></button>
+                                        <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_hedding <?php echo ($header['heddingposition']=='text-right')?CLS_ACTIVE_SPACE:''; ?>" value="text-right"><i class="fa fa-align-right"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -385,9 +386,9 @@ function Getinserttype(table,field,type){
                                   <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php echo ($header['logodislay']=='1')?"":"checked"; ?> name="logodislay[<?php echo $q; ?>]"  class="logodislay js-primary-sm" data-id="<?php echo $q; ?>" >
 
                                   <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_logo <?php echo ($header['logoposition']=='text-left')?' active':''; ?>" value="text-left"><i class="fa fa-align-left text-primary"></i></button>
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_logo <?php echo ($header['logoposition']=='text-center')?' active':''; ?>" value="text-center"><i class="fa fa-align-center text-primary"></i></button>
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_logo <?php echo ($header['logoposition']=='text-right')?' active':''; ?>" value="text-right"><i class="fa fa-align-right text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_logo <?php echo ($header['logoposition']=='text-left')?CLS_ACTIVE_SPACE:''; ?>" value="text-left"><i class="fa fa-align-left text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_logo <?php echo ($header['logoposition']=='text-center')?CLS_ACTIVE_SPACE:''; ?>" value="text-center"><i class="fa fa-align-center text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_logo <?php echo ($header['logoposition']=='text-right')?CLS_ACTIVE_SPACE:''; ?>" value="text-right"><i class="fa fa-align-right text-primary"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -419,9 +420,9 @@ function Getinserttype(table,field,type){
                                 <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox"  <?php echo ($header['addressdislay']=='1')?"":"checked"; ?> name="addressdislay[<?php echo $q; ?>]"  class="addressdislay js-primary-sm" data-id="<?php echo $q; ?>" >
 
                                 <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_address <?php echo ($header['addressposition']=='text-left')?' active':''; ?>" value="text-left"><i class="fa fa-align-left text-primary"></i></button>
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_address <?php echo ($header['addressposition']=='text-center')?' active':''; ?>" value="text-center"><i class="fa fa-align-center text-primary"></i></button>
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_address <?php echo ($header['addressposition']=='text-right')?' active':''; ?>" value="text-right"><i class="fa fa-align-right text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_address <?php echo ($header['addressposition']=='text-left')?CLS_ACTIVE_SPACE:''; ?>" value="text-left"><i class="fa fa-align-left text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_address <?php echo ($header['addressposition']=='text-center')?CLS_ACTIVE_SPACE:''; ?>" value="text-center"><i class="fa fa-align-center text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light header_position_address <?php echo ($header['addressposition']=='text-right')?CLS_ACTIVE_SPACE:''; ?>" value="text-right"><i class="fa fa-align-right text-primary"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -460,7 +461,7 @@ function Getinserttype(table,field,type){
                         <input type="hidden"  name="tablenames[]" value="<?php echo $value['tablenames']; ?>">
                         <input type="hidden"  name="displayfeildname[]"  value="<?php echo $value['displayfeildname']; ?>">
                         <div class="card cursor-pointer">
-                            <i class="ti-files cursor-pointer position-absolute f-10" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Copy To Used'); ?>" style="z-index: 99999" onclick="fieldCopy('fields_<?php echo $value['Field']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                            <button type="button" class="btn btn-link p-0 border-0 position-absolute f-10" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Copy To Used'); ?>" style="z-index: 99999" onclick="fieldCopy('fields_<?php echo $value['Field']; ?>')" aria-label="<?php echo htmlspecialchars(__('Copy To Used'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-files cursor-pointer" aria-hidden="true"></i></button>
                             <div class="card-header p-2 custom_displayinline row" id="headingOnes<?php echo $i; ?>">
                                 <div class="card-title collapsed f-14 mt-2 col-lg-6" data-bs-toggle="collapse" data-bs-target="#collapseOnes<?php echo $i; ?>">
                                     <?php echo ucwords(str_replace("_"," ",$value['displayfeildname'])); ?>
@@ -471,9 +472,9 @@ function Getinserttype(table,field,type){
                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" name="display[<?php echo $i; ?>]"  class="display js-primary-sm" data-id="<?php echo $i; ?>"  <?php echo  $value['display']=='0'?"checked":""; ?> >
 
                                    <div class="btn-group ml-2" role="group" data-bs-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo __('.btn-xlg'); ?>">
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light  positiontable  <?php echo ($value['heddingpositiontable']=='')?' active':''; ?>" data-id="<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Left Align'); ?>"><i class="fa fa-align-left text-primary"></i></button>
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light positiontable <?php echo ($value['heddingpositiontable']=='text-center')?' active':''; ?>" data-id="<?php echo $i; ?>" value="text-center" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Center Aligh'); ?>"><i class="fa fa-align-center text-primary"></i></button>
-                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light positiontable <?php echo ($value['heddingpositiontable']=='text-right')?' active':''; ?>" data-id="<?php echo $i; ?>" value="text-right" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Right Align'); ?>"><i class="fa fa-align-right text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light  positiontable  <?php echo ($value['heddingpositiontable']=='')?CLS_ACTIVE_SPACE:''; ?>" data-id="<?php echo $i; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Left Align'); ?>"><i class="fa fa-align-left text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light positiontable <?php echo ($value['heddingpositiontable']=='text-center')?CLS_ACTIVE_SPACE:''; ?>" data-id="<?php echo $i; ?>" value="text-center" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Center Aligh'); ?>"><i class="fa fa-align-center text-primary"></i></button>
+                                    <button type="button" class="btn btn-light btn-mini waves-effect waves-light positiontable <?php echo ($value['heddingpositiontable']=='text-right')?CLS_ACTIVE_SPACE:''; ?>" data-id="<?php echo $i; ?>" value="text-right" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Right Align'); ?>"><i class="fa fa-align-right text-primary"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -557,9 +558,9 @@ function Getinserttype(table,field,type){
                       <div class="card-title collapsed f-14 mt-2 col-lg-10 f-w-600" data-bs-toggle="collapse" data-bs-target="#collapseOnes<?php echo $mkc; ?>">
                          <?php echo ucwords(str_replace("_"," ", $report_formul['custom_report_heding'])); ?></div>
 
-                         <div class="col-lg-1" onclick="removeformuladiv('<?php echo $mkc; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                         <button type="button" class="btn btn-link p-0 border-0 col-lg-1" onclick="removeformuladiv('<?php echo $mkc; ?>')">
                              <?php echo __('X'); ?>
-                         </div>
+                         </button>
                      </div>
                      <div id="collapseOnes<?php echo $mkc; ?>" class="collapse" data-parent="#accordionExample5">
                       <div class="card-body">
@@ -649,52 +650,32 @@ function Getinserttype(table,field,type){
                 </div>
 
                 <?php
-                function  headerFields($seq, $headers,$id="",$label){
-                    if($id==""){
-                        $hedding = 5;
-                        $logo = 2;
-                        $addres = 3;
-                    }else{
-                        $hedding = $headers['orderhedding'];
-                        $logo = $headers['orderlogo'];
-                        $addres = $headers['addresorder'];
-                    }
+                function headerFields($seq, $headers, $label, $id = ""){
+                    $hedding = ($id == "") ? 5 : ($headers['orderhedding'] ?? 5);
+                    $logo = ($id == "") ? 2 : ($headers['orderlogo'] ?? 2);
+                    $addres = ($id == "") ? 3 : ($headers['addresorder'] ?? 3);
+                    $html = '<div class="col-lg-4  box" draggable="true" data-id="'.$seq.'" ></div>';
                     if($seq == $hedding){
-                        $position = isset($headers['heddingposition'])?$headers['heddingposition']:"";
-                        $display =  $headers['heddingdislay']==1?"display:none":"";
-                        return '<div class="col-lg-4 box '.$position.'" draggable="true"  data-id="'.$seq.'" >
-                        <div class="" id="heading_div_id" data-order="header_order_position" style="'.$display.'">
-                        <h5 class="card-label text-center f-w-700 d-block mb-0">'.$label.'</h5>
-
-                        <span class="f-10 d-block">'.__('From 17-05-2023 To 17-05-2023').'</span>
-                        </div>
-                        </div>';
+                        $position = $headers['heddingposition'] ?? "";
+                        $display = ($headers['heddingdislay'] ?? 0) == 1 ? "display:none" : "";
+                        $html = '<div class="col-lg-4 box '.$position.'" draggable="true"  data-id="'.$seq.'" ><div class="" id="heading_div_id" data-order="header_order_position" style="'.$display.'"><h5 class="card-label text-center f-w-700 d-block mb-0">'.$label.'</h5><span class="f-10 d-block">'.__('From 17-05-2023 To 17-05-2023').'</span></div></div>';
                     }elseif($seq == $addres){
-                        $po = isset($headers['addressposition'])?$headers['addressposition']:"";
-                        $display =  $headers['addressdislay']==1?"display:none":"";
-                        return '<div class="col-lg-4 '.$po.' box" draggable="true" data-id="'.$seq.'" >
-                        <div id="address_div_id" data-order="header_order_address" style="'.$display.'" >
-                        <span class="f-10 f-w-600"><span class="d-block">'.__('Name').' : '.$_SESSION['display_name'].' </span> <span> '.htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8').' : '.date("d-m-Y H:i:s").'</span></span>
-                        </div>
-                        </div>';
+                        $po = $headers['addressposition'] ?? "";
+                        $display = ($headers['addressdislay'] ?? 0) == 1 ? "display:none" : "";
+                        $html = '<div class="col-lg-4 '.$po.' box" draggable="true" data-id="'.$seq.'" ><div id="address_div_id" data-order="header_order_address" style="'.$display.'" ><span class="f-10 f-w-600"><span class="d-block">'.__('Name').' : '.$_SESSION['display_name'].' </span> <span> '.htmlspecialchars(__('Date & Time'), ENT_QUOTES, 'UTF-8').' : '.date("d-m-Y H:i:s").'</span></span></div></div>';
                     }elseif($seq == $logo){
-                        $co = isset($headers['logoposition'])?$headers['logoposition']:"text-right";
-                        $display =  $headers['logodislay']==1?"display:none":"";
-                        return '<div draggable="true" class="col-lg-4 box" data-id="'.$seq.'" >
-                        <div class="align-items-md-end px-0 '.$co.'" id="logo_div_id" data-order="header_order_logo" style="'.$display.'">
-                        <img src="uploads/all/'.$_SESSION['config']['display_logo'].'" class="img-fluid  img-120" alt="'.htmlspecialchars(__('Logo'), ENT_QUOTES).'" />
-                        </div>
-                        </div>';
-                    }else{
-                        return '<div class="col-lg-4  box" draggable="true" data-id="'.$seq.'" ></div>';
+                        $co = $headers['logoposition'] ?? "text-right";
+                        $display = ($headers['logodislay'] ?? 0) == 1 ? "display:none" : "";
+                        $html = '<div draggable="true" class="col-lg-4 box" data-id="'.$seq.'" ><div class="align-items-md-end px-0 '.$co.'" id="logo_div_id" data-order="header_order_logo" style="'.$display.'"><img src="uploads/all/'.$_SESSION['config']['display_logo'].'" class="img-fluid  img-120" alt="'.htmlspecialchars(__('Logo'), ENT_QUOTES).'" /></div></div>';
                     }
+                    return $html;
                 }
                 ?>
                 <div class="row">
                     <?php
                     $label = ucwords(str_replace("_"," ",$role['page_title']));
                     for($i=1; $i<=6; $i++){
-                        echo headerFields($i,$header,$_GET['Rid'],$label);
+                        echo headerFields($i,$header,$label,$_GET['Rid']);
                     }
                     ?>
                 </div>

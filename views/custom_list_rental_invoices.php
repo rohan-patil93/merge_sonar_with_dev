@@ -159,16 +159,16 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
                             <span class="form-label label label-primary d-inline-block fw-bold" style="color: <?php echo $stausresult[$ri['current_status']]['color']; ?>;    background:  <?php echo $stausresult[$ri['current_status']]['background_color']; ?>; border-color: <?php echo $stausresult[$ri['current_status']]['background_color']; ?>;"><?php echo $stausresult[$ri['current_status']]['name']; ?></span>
                           </h5>
                           <div class="card-header-right">
-                            <i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-printer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" onclick="goToAnotherPageAndPrint('<?php echo $ri['id']; ?>','rental_invoices')"></i>
+                            <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" onclick="goToAnotherPageAndPrint('<?php echo $ri['id']; ?>','rental_invoices')"><i class="ti-printer" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Print'), ENT_QUOTES, 'UTF-8'); ?>" ></i></button>
 
-                             <i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-cloud-down" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" onclick="DownloadPDF('<?php echo $ri['id']; ?>','rental_invoices')"></i>
+                             <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" onclick="DownloadPDF('<?php echo $ri['id']; ?>','rental_invoices')"><i class="ti-cloud-down" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Download'), ENT_QUOTES, 'UTF-8'); ?>" ></i></button>
 
 
                             <?php /**if($property_tenant_billings_shared_datetime[$ri['id']]['pdf_name'] !=""){  ?>
                                <a href="/uploads/rental_invoices/<?php echo $property_tenant_billings_shared_datetime[$ri['id']]['pdf_name']; ?>" download><i class="ti-cloud-down" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Download"></i>
                             <?php } **/ ?>
                             <?php if($ri['party_email'] !="" && $property_tenant_billings_shared_datetime[$ri['id']]['id'] !=""){  ?>
-                              <i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-email" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" onclick="renatalInvoiceSend('<?php echo $property_tenant_billings_shared_datetime[$ri['id']]['id']; ?>','<?php echo $ri['ref_bill_type'];?>')"></i>
+                              <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" onclick="renatalInvoiceSend('<?php echo $property_tenant_billings_shared_datetime[$ri['id']]['id']; ?>','<?php echo $ri['ref_bill_type'];?>')"><i class="ti-email" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Send Email'), ENT_QUOTES, 'UTF-8'); ?>" ></i></button>
                             <?php } ?>
                           </div>
                       </div>
@@ -232,10 +232,7 @@ function OpenInsertCreditNotePopUp(rental_inv_id){
                           <a href="index.php?option=COM_INSERT_DEBIT_NOTES&table=rental_invoices&Rid=<?php echo $ri['id']; ?>&TD=<?php echo fromDate(); ?>" class="input-group-text  cursor-pointer float-left btn btn-success btn-sm" > <?= __('Debit Note'); ?></a>
                           <a href="index.php?option=COM_INSERT_CREDIT_NOTES&table=rental_invoices&Rid=<?php echo $ri['id']; ?>&TD=<?php echo fromDate(); ?>"  class="input-group-text cursor-pointer float-right btn btn-danger m-l-5 btn-sm" ><?= __('Credit Note'); ?></a>
                     </div>
-                      <!-- <div class="card-footer pt-0">
-                          <a href="#!" onclick="OpenInsertDebitNotePopUp('<?php echo $ri['id']; ?>')" class="input-group-text  cursor-pointer float-left btn btn-success" > Debit Note</a>
-                          <a href="#!"  onclick="OpenInsertCreditNotePopUp('<?php echo $ri['id']; ?>')" class="input-group-text cursor-pointer float-right btn btn-danger m-l-5" >Credit Note</a>
-                    </div> -->
+                      
                   </div>
               </div>
             <?php }

@@ -117,7 +117,7 @@
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
     <div class="container-fluid">
-        <!--begin::Todo-->
+        <!--begin::Tasks-->
         <div class="d-flex flex-row">
             <!--begin::Aside-->
             <div class="flex-row-auto offcanvas-mobile w-200px w-xxl-275px" id="kt_todo_aside">
@@ -244,14 +244,11 @@
                             </div>
                             <!--end::Info-->
                             <!--begin::Users-->
-                            <div class="symbol-group symbol-hover py-2">
-
-                                <div class="symbol symbol-30 symbol-light-primary" data-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('New user'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                            <button type="button" class="btn text-left bg-transparent border-0 p-0" class="symbol-group symbol-hover py-2"> <div class="symbol symbol-30 symbol-light-primary" data-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars(__('New user'), ENT_QUOTES, 'UTF-8'); ?>">
                                     <span class="symbol-label font-weight-bold">
                                         <i class="fa flaticon2-plus font-size-sm"></i>
                                     </span>
-                                </div>
-                            </div>
+                                </button></div>
                             <!--end::Users-->
                         </div>
                         <!--end::Body-->
@@ -318,7 +315,7 @@
                                                 </div>
                                                 <!--end::Toolbar-->
                                                 <!--begin::Info-->
-                                                <div class="flex-grow-1 mt-1 mr-2" data-toggle="view"   onclick="ajaxview(<?php echo $list['transaction_id'];  ?>,<?php echo"'".$list['transaction_type']."'";  ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                                <button type="button" class="btn text-left bg-transparent border-0 p-0" class="flex-grow-1 mt-1 mr-2" data-toggle="view" onclick="ajaxview(<?php echo $list['transaction_id']; ?>,<?php echo"'".$list['transaction_type']."'"; ?>)">
                                                     <!--begin::Title-->
                                                     <div class="font-weight-bolder mr-2"><?php echo $list['party_name']." - ".$list['transaction_number'] ;?></div>
                                                     <!--end::Title-->
@@ -332,8 +329,7 @@
                                                         <span class="label label-light-primary font-weight-bold label-inline"><?php echo customeummarmonyformate($list['total_amount']); ?></span>
                                                     </div>
                                                     <!--end::Labels-->
-                                                </div>
-                                                <!--end::Info-->
+                                                </button><!--end::Info-->
                                                 <!--begin::Details-->
                                                 <div class="d-flex align-items-center justify-content-end flex-wrap" data-toggle="view">
                                                     <!--begin::Datetime-->
@@ -395,7 +391,7 @@
             </div>
 
         </div>
-        <!--end::Todo-->
+        <!--end::Tasks-->
     </div>
     <!--end::Container-->
 </div>

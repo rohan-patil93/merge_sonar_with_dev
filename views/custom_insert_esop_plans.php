@@ -329,7 +329,7 @@ function calculateVestingPercentage(rowid){
         <div class="card-header">
           <h5><?php echo __('Vesting Schedule'); ?></h5>
           <div class="card-header-right">
-            <i class="ti-close" onclick="closePopUp('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+            <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="closePopUp('<?php echo $i; ?>')" aria-label="<?php echo __('Closed'); ?>"><i class="ti-close" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Closed'); ?>"></i></button>
           </div>
         </div>
         <div class="card-body" id="addmorediv-<?php echo $i; ?>">
@@ -362,7 +362,7 @@ function calculateVestingPercentage(rowid){
                     <div class="form-group col-lg-4">
                        <input aria-label="<?php echo __('Input field'); ?>" type="text" class="form-control datepicker vesategetilldate_<?php echo $i; ?>" name="till_date[<?php echo $i; ?>][]" value="<?php echo $vd['till_date']; ?>" >
                     </div>
-                    <div class="form-group col-lg-1"><i class="ti-trash"  onclick="deletRowVestage('<?php echo $mk; ?>','<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i> </div>
+                    <div class="form-group col-lg-1"><button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="deletRowVestage('<?php echo $mk; ?>','<?php echo $i; ?>')" aria-label="Action"><i class="ti-trash"></i></button> </div>
                 </div>
             <?php  $mk++;
 } ?>
@@ -389,8 +389,8 @@ function calculateVestingPercentage(rowid){
                                 <input aria-label="<?php echo __('Total Discount[]'); ?>" type="text" class="form-control border-0 text-right box-shadow-0"  name="total_discount[]" id="total_discount_<?php echo $i; ?>" value="<?php echo $epb['total_discount']; ?>" readonly>
                             </td>
                             <td class="p-0 text-center pt-2" >
-                                 <i class="ti-trash text-danger mr-5" onclick="deletRow('<?php echo $i; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Removed'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                 <i class="ti-settings  f-20" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Vesting Schedule'); ?>" onclick="openPopUp('<?php echo $i; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                 <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="deletRow('<?php echo $i; ?>')" aria-label="<?php echo __('Removed'); ?>"><i class="ti-trash text-danger mr-5" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Removed'); ?>"></i></button>
+                                 <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="openPopUp('<?php echo $i; ?>')" aria-label="<?php echo __('Vesting Schedule'); ?>"><i class="ti-settings f-20" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Vesting Schedule'); ?>"></i></button>
                             </td>
                         </tr>
                     <?php $i++;
