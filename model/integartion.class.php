@@ -26,15 +26,15 @@ class integartionClass{
 			}
 			$insert_array['job_posting_publish_id'] = $insert['LASTID'];
 			$insert_array['current_status'] = $update_array['current_status'];
-			$insert=$callConfig->updateRecord('job_posting_publish_details',$update_array,'id',$post['publish_id']);
+			$callConfig->updateRecord('job_posting_publish_details',$update_array,'id',$post['publish_id']);
 			if($post['type']=='TRASH'){
 				$crow=$callConfig->getRow("SELECT COUNT(id)  cc FROM job_posting_publish_details WHERE job_post_id =".$post['post_id']." AND is_active = 0 AND current_status!=53");
 				if($crow->cc ==""){
-					$upquery =$callConfig->updateRecord('job_postings',array('current_status'=>53),'id',$post['post_id']);
+					$callConfig->updateRecord('job_postings',array('current_status'=>53),'id',$post['post_id']);
 				}
 			}
 		}
-		$insert = $callConfig->insertRecord('job_posting_publish_detail_histories',$insert_array);
+		$callConfig->insertRecord('job_posting_publish_detail_histories',$insert_array);
 		return $returrara;
 	}
 	public function infisuitejobcandedatesave($post,$get){
@@ -141,7 +141,7 @@ class integartionClass{
 		if($get['type']=='UNPUBLISH'){
 			$recent_unpublishsql = "SELECT id, requested_date, job_number, job_name, no_of_resources, required_date, job_status, current_status, updated_date  FROM `job_postings` WHERE company_id = '".$get['company_id']."' ".$whr." AND current_status = ".ST_UNPUBLISH." AND job_status !='1' AND is_active = 0";
 			$return['name'] = "Recently Un-Published";
-			$recent_publish = $callConfig->getAllRows($recent_unpublishsql);
+			$recent_unpublish = $callConfig->getAllRows($recent_unpublishsql);
 			$return['data'] = $recent_unpublish;
 		}
 		return $return;
@@ -289,7 +289,6 @@ class integartionClass{
 	}
 	public function togetcandidatesources($get){
 		global $callConfig;
-		$query = "SELECT id, job_name, job_number, requested_date,job_status FROM job_postings WHERE company_id=".$get['company_id']." AND job_status = 0 AND is_active =0";
 		$query = "SELECT jp.id, jp.job_code, jp.job_name, jp.job_number, jp.requested_date, jp.job_status, jt.job_title , jt.id job_title_id FROM job_postings jp , job_titles jt WHERE jp.company_id = jt.company_id AND jp.company_id=".$get['company_id']." AND jp.job_code = jt.id AND jp.job_status = 0 AND jp.is_active =0";
 		$job_postings = $callConfig->getAllRows($query);
 		foreach($job_postings as $posts){
@@ -1229,11 +1228,9 @@ public function togetprojectkanbanboarddetails($get){
 			$whr.=" AND planned_finish > ".$now."  AND planned_finish <'".$duedate."' AND current_status !=199";
 		}
 		if($get['filter_due']=='complete'){
-			$duedate = date("Y-m-d" , strtotime('+31 day', strtotime($now)));
 			$whr.="  AND current_status =199";
 		}
 		if($get['filter_due']=='noncomplete'){
-			$duedate = date("Y-m-d" , strtotime('+31 day', strtotime($now)));
 			$whr.="  AND current_status !=199";
 		}
 	}
@@ -1855,7 +1852,7 @@ public function addupdateprojectlabeldata($post,$get){
 	if($row->id !=""){
 		$query = "UPDATE application_labels SET is_active=1 WHERE company_id =".$get['company_id']." AND application_tablename='project_task_details' AND work_id=".$post['project_id']." AND parent_id= ".$post['label_id']." AND is_active = 0";
 		$return['update_query'] =$query;
-		$row = $callConfig->executeQuery($query);
+		$callConfig->executeQuery($query);
 		$rres ="mins";
 	}else{
 		$insert_array = array('company_id'=>$get['company_id'],'module_setup_id'=>25,'application_tablename'=>'project_task_details','parent_id'=>$post['label_id'],'label_name'=>$post['name'],'label_code'=>$post['code'],'work_id'=>$post['project_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
@@ -2042,7 +2039,7 @@ public function toaddupdatetheprojectteamdata($post,$get){
 	}else{
 
 		if($get['table']=='project_teams' && $post['role_id']=="1" && $get['rid']==""){
-			$upquery =$callConfig->updateRecord('projects',array('assigner_id'=>$post['user_id']),'id',$post['project_id']);
+			$callConfig->updateRecord('projects',array('assigner_id'=>$post['user_id']),'id',$post['project_id']);
 		}
 		$user = $callConfig->getRow("SELECT display_name FROM application_users WHERE id=".$post['user_id']);
 		$project = $callConfig->getRow("SELECT project_name FROM projects WHERE id=".$post['project_id']);
@@ -2145,7 +2142,6 @@ public function sendEmailslist($data){
 			// More headers
 		$sender = $data['sender']!="" ? $data['sender']:SUPERADMIN_EMAIL_ID;
 		$headers .= 'From:'.$sender . "\r\n";
-			//$headers .= 'Cc: myboss@example.com' . "\r\n";
 		$subject = ucwords(str_replace('_', ' ', $data['subject']));
 		mail($email,$subject,$data['mesg'],$headers);
 	}
@@ -2969,7 +2965,7 @@ public function addcouriers($post, $get){
 	$ss = $this->tosendnotifiations($notdata1);
 	$rss = $this->tosendnotifiations($notdata2);
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>$email_content_id, 'user_display_name'=>$user->display_name,'courier_company'=>$post['courier_company'],'courier_ref_no'=>$post['courier_ref_no'],'cc_users'=>$notuser2,'to_users'=>$notuser1,'courier_adderss'=>$post['courier_adderss']);
-	$res = $this->emailsendmediater($senddata);
+	$this->emailsendmediater($senddata);
 }
 public function updatecouriers($post, $get){
 	global $callConfig;
@@ -3087,7 +3083,7 @@ public function togetallslectedtrasportdetails($get){
 	$ss = $this->tosendnotifiations($notdata1);
 	$rss = $this->tosendnotifiations($notdata2);
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>43, 'user_display_name'=>$user->display_name,'transport_date'=>$post['transport_date'],'cc_users'=>$notuser2,'to_users'=>$notuser1);
-	$res = $this->emailsendmediater($senddata);
+	$this->emailsendmediater($senddata);
 }
 public function searchcourierdata($get){
 	global $callConfig;
@@ -3321,7 +3317,7 @@ public function addfoodrequest($post, $get){
 	$ss = $this->tosendnotifiations($notdata1);
 	$rss = $this->tosendnotifiations($notdata2);
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>44, 'user_display_name'=>$user->display_name,'start_date'=>$post['start_date'],'stop_date'=>$post['stop_date'],'cc_users'=>$notuser2,'to_users'=>$notuser1);
-	$res = $this->emailsendmediater($senddata);
+	$this->emailsendmediater($senddata);
 }
 
 public function updatefoodrequest($get){
@@ -5032,7 +5028,7 @@ public function toimportthedataintotablesemployeessalary($get){
 
             foreach (['domestic_round_trips', 'trip_hotels', 'local_trips'] as $tbl) {
                 $upd = ['is_active' => 1, 'updated_by' => $user_id, 'updated_date' => $now];
-                $res = $callConfig->updateRecord($tbl, $upd, 'trip_id', $trip_id);
+                $callConfig->updateRecord($tbl, $upd, 'trip_id', $trip_id);
             }
 
             // 3) reinsert current POST children
@@ -5062,7 +5058,7 @@ public function toimportthedataintotablesemployeessalary($get){
                     'created_by'           => $user_id,
                     'created_date'         => $now,
                 ];
-                $res = $callConfig->insertRecord('domestic_round_trips', $rec);
+                $callConfig->insertRecord('domestic_round_trips', $rec);
             }
 
                 // --- Trip Hotels ---
@@ -5084,7 +5080,7 @@ public function toimportthedataintotablesemployeessalary($get){
                     'created_by'     => $user_id,
                     'created_date'   => $now,
                 ];
-                $res = $callConfig->insertRecord('trip_hotels', $rec);
+                $callConfig->insertRecord('trip_hotels', $rec);
             }
             foreach ($non_empty_rows($cars, ['travel_mode', 'from_location', 'to_location', 'pickup_at', 'dropoff_at', 'car_type', 'trip_purpose']) as $c) {
                 $rec = [
@@ -5107,7 +5103,7 @@ public function toimportthedataintotablesemployeessalary($get){
                     'created_by'     => $user_id,
                     'created_date'   => $now,
                 ];
-                $res = $callConfig->insertRecord('local_trips', $rec);
+                $callConfig->insertRecord('local_trips', $rec);
             }
         }else{
         	$serial = $this->toGetApplicationSerialNumber('trips',$get);
@@ -5162,7 +5158,7 @@ public function toimportthedataintotablesemployeessalary($get){
                         'created_by'           => $user_id,
                         'created_date'         => $now,
                     ];
-                    $res = $callConfig->insertRecord('domestic_round_trips', $rec);
+                    $callConfig->insertRecord('domestic_round_trips', $rec);
                 }
 
                 // --- Trip Hotels ---
@@ -5184,7 +5180,7 @@ public function toimportthedataintotablesemployeessalary($get){
                         'created_by'     => $user_id,
                         'created_date'   => $now,
                     ];
-                    $res = $callConfig->insertRecord('trip_hotels', $rec);
+                    $callConfig->insertRecord('trip_hotels', $rec);
                 }
                 foreach ($non_empty_rows($cars, ['travel_mode', 'from_location', 'to_location', 'pickup_at', 'dropoff_at', 'car_type', 'trip_purpose']) as $c) {
                     $rec = [
@@ -5207,7 +5203,7 @@ public function toimportthedataintotablesemployeessalary($get){
                         'created_by'     => $user_id,
                         'created_date'   => $now,
                     ];
-                    $res = $callConfig->insertRecord('local_trips', $rec);
+                    $callConfig->insertRecord('local_trips', $rec);
                 }
             }
         }
@@ -6166,7 +6162,11 @@ public function toimportthedataintotablesemployeessalary($get){
 			}
 		}
 		$required_count = $this->getProcessQcParameterCount($context['mapping']);
-		$qc_status = $complete ? ($failed_count > 0 ? 3 : 2) : ($checked_count > 0 ? 1 : 0);
+		if ($complete) {
+			$qc_status = ($failed_count > 0) ? 3 : 2;
+		} else {
+			$qc_status = ($checked_count > 0) ? 1 : 0;
+		}
 		$callConfig->updateRecord('application_table_quality_check_items', array(
 			'qc_status'=>$qc_status,
 			'required_count'=>$required_count,
@@ -6182,7 +6182,13 @@ public function toimportthedataintotablesemployeessalary($get){
 			$callConfig->executeQuery("UPDATE item_head_quality_check SET is_active = 1 WHERE id = ".intval($old_head->id));
 		}
 		$summary = $this->getProcessQcSummaryData($company_id, $context['process'], $context['tranid'], $context['item_id']);
-		$head_quality_check = ($summary['failed'] > 0) ? 2 : (($summary['total'] > 0 && $summary['pending'] == 0 && $summary['draft'] == 0) ? 1 : 0);
+		if ($summary['failed'] > 0) {
+			$head_quality_check = 2;
+		} elseif ($summary['total'] > 0 && $summary['pending'] == 0 && $summary['draft'] == 0) {
+			$head_quality_check = 1;
+		} else {
+			$head_quality_check = 0;
+		}
 		$callConfig->insertRecord('item_head_quality_check', array(
 			'company_id'=>$company_id,
 			'application_table_name'=>$callConfig->real_escape_string($context['process']),

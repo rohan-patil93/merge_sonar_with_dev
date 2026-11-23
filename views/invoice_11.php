@@ -143,43 +143,43 @@ function emptyCheck($valu){
         <div class="table-responsive">
             <table class="table table-card">
                 <tr>
-                    <td width="20%" class="p-1 border-0" style="vertical-align:top;">
+                    <td class="p-1 border-0" style="vertical-align:top; width: 20%;">
                         <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;" alt="" >
                     </td>
-                    <td width="25%" align="center" class="p-1 border-0 f-12" style="vertical-align:top; padding-right: 40px !important;">
+                    <td class="p-1 border-0 f-12 text-center" style="vertical-align:top; padding-right: 40px !important; width: 25%;">
                         <span><?= __('THANK YOU FOR YOUR ORDER. THIS DOCUMENT IS A RECEIPT OF YOUR PURCHASE.'); ?></span>
                     </td>
-                    <td width="55%" colspan="4" class="border-0 p-1">
+                    <td colspan="4" class="border-0 p-1" style="width: 55%;">
                         <div class="table-responsive">
                             <table role="presentation" class="table">
                                 <tr>
                                     <td class="f-12"><?= __('TO'); ?></td>
-                                    <td class="f-12" align="right">
+                                    <td class="f-12 text-end">
                                         <span><?= __('FIRST NAME'); ?></span>
                                         <span class="m-l-10"><?= __('LAST NAME'); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="f-12"><?= __('CUSTOMER ID'); ?></td>
-                                    <td class="f-12" align="right">
+                                    <td class="f-12 text-end">
                                         <span>12345</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="f-12"><?= __('DATE'); ?></td>
-                                    <td class="f-12" align="right">
+                                    <td class="f-12 text-end">
                                         <span><?= __('DD-MM-YY'); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="f-12"><?= __('ORDER NO'); ?></td>
-                                    <td class="f-12" align="right">
+                                    <td class="f-12 text-end">
                                         <span><?= __('T-TF'); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="f-12"><?= __('NUMBER OF ITEMS'); ?></td>
-                                    <td class="f-12" align="right">
+                                    <td class="f-12 text-end">
                                         <span>3</span>
                                     </td>
                                 </tr>
@@ -191,7 +191,7 @@ function emptyCheck($valu){
                     <td class="p-1 border-0" style="vertical-align:bottom;">
                         <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;" alt="" >
                     </td>
-                    <td align="center" class="p-1 pt-5 border-0 f-12" style="vertical-align:bottom; padding-right: 40px !important;">
+                    <td class="p-1 pt-5 border-0 f-12 text-center" style="vertical-align:bottom; padding-right: 40px !important;">
                         <span><?= __('SAR STUDIO WWW.SAR STUDIO.COM +91 000 000 0000'); ?></span>
                     </td>
                     <td colspan="4" class="p-2 border-0 f-12" style="vertical-align:bottom;">
@@ -201,65 +201,68 @@ function emptyCheck($valu){
                 <tr>
                     <td colspan="6">&nbsp</td>
                 </tr>
-                <tr bgcolor="#eeeeee">
+                <tr style="background-color: #eeeeee;">
                     <th scope="col" class="p-1 f-12"><?= __('ITEM'); ?></th>
                     <th scope="col" class="p-1 f-12"></th>
-                    <th scope="col" class="p-1 f-12" width="20%"><?= __('PRODUCTION DESCRIPTION'); ?></th>
-                    <th scope="col" class="p-1 text-end f-12" width="5%"><?= __('QTY'); ?></th>
-                    <th scope="col" class="text-end p-1 f-12" width="12%"><?= __('UNIT PRICE'); ?> <span class="d-block"><?= __('(INR)'); ?></span></th>
-                    <th scope="col" class="text-end p-1 f-12" width="13%"><?= __('AMOUNT'); ?> <span class="d-block"><?= __('(INR)'); ?></span></th>
+                    <th scope="col" class="p-1 f-12" style="width: 20%;"><?= __('PRODUCTION DESCRIPTION'); ?></th>
+                    <th scope="col" class="p-1 text-end f-12" style="width: 5%;"><?= __('QTY'); ?></th>
+                    <th scope="col" class="text-end p-1 f-12" style="width: 12%;"><?= __('UNIT PRICE'); ?> <span class="d-block"><?= __('(INR)'); ?></span></th>
+                    <th scope="col" class="text-end p-1 f-12" style="width: 13%;"><?= __('AMOUNT'); ?> <span class="d-block"><?= __('(INR)'); ?></span></th>
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
                         <img style="width: 100px; height:85px;" class="img-fluid" src="uploads/all/file_1688986265_64abe2999f741.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
-                    <td align="" class="p-1" style="vertical-align:top;">
+                    <td class="p-1" style="vertical-align:top;">
                     </td>
                     <td class="p-1" style="vertical-align:top;">
                         <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
                         <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
                     </td>
-                    <td class="p-1 f-12" align="right" style="vertical-align:top;">15</td>
-                    <td class="p-1" align="right" style="vertical-align:top;"><b class="f-w-600 f-12">40,000,0000/-</b></td>
-                    <td align="right" style="vertical-align:top;"><b class="f-w-600 f-12">40,000,0000/-</b></td>
+                    <td class="p-1 f-12 text-end" style="vertical-align:top;">15</td>
+                    <td class="p-1 text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000,0000/-</b></td>
+                    <td class="text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000,0000/-</b></td>
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
                         <img style="width: 100px;height: 85px;" class="img-fluid" src="uploads/all/file_1688986555_64abe3bb28d5f.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
-                    <td align="" class="p-1" style="vertical-align:top;">
+                    <td class="p-1" style="vertical-align:top;">
                     </td>
                     <td class="p-1" style="vertical-align:top;">
                         <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
                         <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
                     </td>
-                    <td class="p-1 f-12" align="right" style="vertical-align:top;">12</td>
-                    <td class="p-1" align="right" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
-                    <td align="right" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
+                    <td class="p-1 f-12 text-end" style="vertical-align:top;">12</td>
+                    <td class="p-1 text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
+                    <td class="text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
                         <img style="width: 100px;" class="img-fluid" src="uploads/all/file_1688973992_64abb2a8a5325.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
-                    <td align="" class="p-1" style="vertical-align:top;">
+                    <td class="p-1" style="vertical-align:top;">
                     </td>
                     <td class="p-1" style="vertical-align:top;">
                         <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
                         <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
                     </td>
-                    <td class="p-1" align="right" style="vertical-align:top;">100</td>
-                    <td class="p-1" align="right" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
-                    <td class="p-1" align="right" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
+                    <td class="p-1 text-end" style="vertical-align:top;">100</td>
+                    <td class="p-1 text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
+                    <td class="p-1 text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="center" class="p-1 border-0">
+                    <td colspan="2" class="text-center p-1 border-0">
                         -
                     </td>
                     <td colspan="4" class="border-0 p-1">
                             <table class="table">
                                 <tr>
-                                    <th scope="col" class="f-12 p-0 pt-1 pb-1" width="50%"><?= __('TOTAL'); ?></th>
-                                    <th scope="col" width="50%" class="text-right f-12 p-0 pt-1 pb-1">
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1" style="width: 50%;"><?= __('TOTAL'); ?></th>
+                                    <th scope="col" class="text-right f-12 p-0 pt-1 pb-1" style="width: 50%;">
+                                        <?= __('INR 1,20,000/'); ?>-
+                                    </th>
+                                </tr>
                                         <?= __('INR 1,20,000/'); ?>-
                                     </th>
                                 </tr>
@@ -301,7 +304,7 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="border-0"></td>
-                    <td colspan="" class="text-center border-0 pt-4 f-12" style="padding-right: 40px !important; vertical-align: bottom;">
+                    <td class="text-center border-0 pt-4 f-12" style="padding-right: 40px !important; vertical-align: bottom;">
                         <?= __('REGISTERED OFFICE ADDRESS: 3RD FLOOR, PLOT NO-39 LEFT BHUSURI COLONY KOTHRUD, PUNE-411038'); ?>
                     </td>
                     <td colspan="4" class="border-0 pt-4" style=" vertical-align: bottom;">

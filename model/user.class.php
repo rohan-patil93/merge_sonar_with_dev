@@ -3277,8 +3277,7 @@ class userClass
 
 
 
-        if (!in_array($table_name, $notadded_discount)) {
-            if ($row['discount_amount'] != '0' && $row['discount_amount'] != '') {
+        if (!in_array($table_name, $notadded_discount) && $row['discount_amount'] != '0' && $row['discount_amount'] != '') {
 
                 if ($table_name == 'sales_invoices' || $table_name == 'sales_invoice_cancellations') {
                     if ($config->default_sales_discount_account != "" && $config->default_sales_discount_account != "0") {
@@ -3317,7 +3316,6 @@ class userClass
                 $itemref[$default_purchase_discount_account][] = $jvary;
                 $witemlist[] = $discount_ary;
             }
-        }
 
 
         if (!in_array($table_name, (array) $notadded_additionalcharge)) {
@@ -6387,11 +6385,9 @@ class userClass
         $old_data = $callConfig->getRow($old_query);
         $status = $post['status_values'] != '' ? $post['status_values'] : ST_DRAFT;
         $status_main = $status;
-        if ($type == 'update' && $status > ST_DRAFT) {
-            if ($post['status_old_value'] != $post['current_status']) {
-                $sarray = array('comments' => $post['comments'], 'response_type' => $status, 'user_id' => $post['updated_by'], 'response_date' => date("Y-m-d"), 'table' => 'letters', 'hid' => $post['hid'], 'amount' => 0, 'status_old' => $post['status_old_value'], 'company_id' => $post['company_id']);
-                $status = $this->ToCheckStatusApprovalLog($sarray);
-            }
+        if ($type == 'update' && $status > ST_DRAFT && $post['status_old_value'] != $post['current_status']) {
+            $sarray = array('comments' => $post['comments'], 'response_type' => $status, 'user_id' => $post['updated_by'], 'response_date' => date("Y-m-d"), 'table' => 'letters', 'hid' => $post['hid'], 'amount' => 0, 'status_old' => $post['status_old_value'], 'company_id' => $post['company_id']);
+            $status = $this->ToCheckStatusApprovalLog($sarray);
         }
         $table = 'letters';
 
@@ -7050,10 +7046,8 @@ class userClass
                         $insert = $callConfig->insertRecord('employee_kpi_task_histories', $insert_array);
                     }
                 }
-                if ($goalrow->task_frequency == 'M') {
-                    if (date('d', $i) == $data['default_kpi_monthly_task_day']) {
-                        $insert = $callConfig->insertRecord('employee_kpi_task_histories', $insert_array);
-                    }
+                if ($goalrow->task_frequency == 'M' && date('d', $i) == $data['default_kpi_monthly_task_day']) {
+                    $insert = $callConfig->insertRecord('employee_kpi_task_histories', $insert_array);
                 }
             }
             $returnarr['insert_array'][] = $insert_array;
@@ -9758,20 +9752,18 @@ class userClass
                 break;
             }
         }
-        if ($return_id == 0) {
-            if ($data['fileds']['table_name'] != 'general_code_details') {
-                $whre = "company_id=" . $get['company_id'] . " AND " . $data['fileds']['display_field'] . " ='" . $value . "' AND is_active=0";
-                $pequery = $callConfig->selectQuery($data['fileds']['table_name'], '*', $whre, '', '', '');
-                $pedata = $callConfig->getRow($pequery);
-                if ($pedata->id != "") {
-                    $return_id = $pedata->id;
-                } else {
-                    $inserts_array = array('is_active' => '0', 'current_status' => 0, 'created_by' => $get['user_id'], 'created_date' => date("Y-m-d H:i:s"), 'company_id' => $get['company_id']);
-                    $inserts_array[$data['fileds']['display_field']] = $value;
-                    $inres = $callConfig->insertRecord($data['fileds']['table_name'], $inserts_array);
-                    $return_id = $inres['LASTID'];
-                    $return_array = array('return_id' => $inres['LASTID'], 'value' => $value);
-                }
+        if ($return_id == 0 && $data['fileds']['table_name'] != 'general_code_details') {
+            $whre = "company_id=" . $get['company_id'] . " AND " . $data['fileds']['display_field'] . " ='" . $value . "' AND is_active=0";
+            $pequery = $callConfig->selectQuery($data['fileds']['table_name'], '*', $whre, '', '', '');
+            $pedata = $callConfig->getRow($pequery);
+            if ($pedata->id != "") {
+                $return_id = $pedata->id;
+            } else {
+                $inserts_array = array('is_active' => '0', 'current_status' => 0, 'created_by' => $get['user_id'], 'created_date' => date("Y-m-d H:i:s"), 'company_id' => $get['company_id']);
+                $inserts_array[$data['fileds']['display_field']] = $value;
+                $inres = $callConfig->insertRecord($data['fileds']['table_name'], $inserts_array);
+                $return_id = $inres['LASTID'];
+                $return_array = array('return_id' => $inres['LASTID'], 'value' => $value);
             }
         }
         $return['return_id'] = $return_id;
@@ -11523,15 +11515,13 @@ class userClass
         for ($i = 1; $i < $post['count']; $i++) {
             for ($k = 1; $k < 13; $k++) {
                 $nojobs = "name_" . $i . "_" . $k;
-                if ($post[$nojobs] != "") {
-                    if ($post[$nojobs] != "0") {
-                        $job = "name_" . $i . "_account_code";
-                        $inserts_task = array('company_id' => $get['company_id'], 'vendor_contract_id' => $inres['LASTID'], 'job_title_id' => $post[$job], 'no_of_vacancy' => $post[$nojobs], 'contract_year' => $post['fiscal_year'], 'contract_month' => $k, 'is_active' => '0', 'current_status' => '0', 'created_date' => $post['now_date'], 'created_by' => $post['user_id']);
-                        $inres = $callConfig->insertRecord('vendor_contract_details', $inserts_task);
+                if ($post[$nojobs] != "" && $post[$nojobs] != "0") {
+                    $job = "name_" . $i . "_account_code";
+                    $inserts_task = array('company_id' => $get['company_id'], 'vendor_contract_id' => $inres['LASTID'], 'job_title_id' => $post[$job], 'no_of_vacancy' => $post[$nojobs], 'contract_year' => $post['fiscal_year'], 'contract_month' => $k, 'is_active' => '0', 'current_status' => '0', 'created_date' => $post['now_date'], 'created_by' => $post['user_id']);
+                    $inres = $callConfig->insertRecord('vendor_contract_details', $inserts_task);
 
-                        print_r($inserts_task);
-                        echo "<br>";
-                    }
+                    print_r($inserts_task);
+                    echo "<br>";
                 }
             }
         }
@@ -13728,17 +13718,15 @@ class userClass
         $filt = json_decode(urldecode($post['lists']), 1);
         $notarry = array('table', 'report_id', 'lists', 'submit');
         foreach ($post as $field => $pos) {
-            if (!in_array($field, (array) $notarry)) {
-                if ($data[$field] != "") {
-                    if ($filt[$field] == 'text') {
-                        $str[] = $field . "  LIKE '%" . $data[$field] . "%'";
-                    }
-                    if ($filt[$field] == 'select') {
-                        $str[] = $field . "  = '" . $data[$field] . "'";
-                    }
-                    if ($filt[$field] == 'date_pick') {
-                        $str[] = $field . "  < '" . date("Y-m-d", strtotime($data[$field])) . "'";
-                    }
+            if (!in_array($field, (array) $notarry) && $data[$field] != "") {
+                if ($filt[$field] == 'text') {
+                    $str[] = $field . "  LIKE '%" . $data[$field] . "%'";
+                }
+                if ($filt[$field] == 'select') {
+                    $str[] = $field . "  = '" . $data[$field] . "'";
+                }
+                if ($filt[$field] == 'date_pick') {
+                    $str[] = $field . "  < '" . date("Y-m-d", strtotime($data[$field])) . "'";
                 }
             }
         }
@@ -15782,16 +15770,12 @@ ORDER BY emp.joining_date, `emp`.`display_name`,stcom.component_id ASC";
             $holiday_leave_consume = $emp_leave_balances->holiday_leave_consume + $holidayleave; //extra holidays check added or not
 
             //leave sandwitch leave
-            if ($emp_leave_balances->weekends_between_leave_period == '0') {   //weekend periad status
-                if ($weekend_leave_consume <= $emp_leave_balances->weekend_leave_count) {  // so weekend leaves and limit check
-                    $weeckendandholidayscount += $weekenddaysc;
-                }
+            if ($emp_leave_balances->weekends_between_leave_period == '0' && $weekend_leave_consume <= $emp_leave_balances->weekend_leave_count) {
+                $weeckendandholidayscount += $weekenddaysc;
             }
             //hoplidays
-            if ($emp_leave_balances->holidays_between_leave_period == '0') {
-                if ($holiday_leave_consume <= $emp_leave_balances->holiday_leave_count) {
-                    $weeckendandholidayscount += $holidayleave;
-                }
+            if ($emp_leave_balances->holidays_between_leave_period == '0' && $holiday_leave_consume <= $emp_leave_balances->holiday_leave_count) {
+                $weeckendandholidayscount += $holidayleave;
             }
             $returnresultarray['weeckendandholidayscount'] = $weeckendandholidayscount;
             $returnresultarray['weeckendandnumberdate'] = $weekenddaysc;
@@ -20243,25 +20227,19 @@ emp.display_name";
                         $sql .= "('" . $get['company_id'] . "','" . $row->id . "','" . $empid->id . "','" . $row->task_name . "','" . $row->check_list . "','" . $task_date . "','0','0','" . date('Y-m-d h:i:s') . "','" . $get['user_id'] . "'),";
                     }
                 }
-                if ($row->action_frequency == 'WK') {
-                    if (date('D', $i) == $row->on_the_week) {
-                        foreach ($employeesres as $empid) {
-                            $sql .= "('" . $get['company_id'] . "','" . $row->id . "','" . $empid->id . "','" . $row->task_name . "','" . $row->check_list . "','" . $task_date . "','0','0','" . date('Y-m-d h:i:s') . "','" . $get['user_id'] . "'),";
-                        }
+                if ($row->action_frequency == 'WK' && date('D', $i) == $row->on_the_week) {
+                    foreach ($employeesres as $empid) {
+                        $sql .= "('" . $get['company_id'] . "','" . $row->id . "','" . $empid->id . "','" . $row->task_name . "','" . $row->check_list . "','" . $task_date . "','0','0','" . date('Y-m-d h:i:s') . "','" . $get['user_id'] . "'),";
                     }
                 }
-                if ($row->action_frequency == 'MN') {
-                    if (date('d', $i) == $row->on_the_day) {
-                        foreach ($employeesres as $empid) {
-                            $sql .= "('" . $get['company_id'] . "','" . $row->id . "','" . $empid->id . "','" . $row->task_name . "','" . $row->check_list . "','" . $task_date . "','0','0','" . date('Y-m-d h:i:s') . "','" . $get['user_id'] . "'),";
-                        }
+                if ($row->action_frequency == 'MN' && date('d', $i) == $row->on_the_day) {
+                    foreach ($employeesres as $empid) {
+                        $sql .= "('" . $get['company_id'] . "','" . $row->id . "','" . $empid->id . "','" . $row->task_name . "','" . $row->check_list . "','" . $task_date . "','0','0','" . date('Y-m-d h:i:s') . "','" . $get['user_id'] . "'),";
                     }
                 }
-                if ($row->action_frequency == 'YR') {
-                    if (date('m', $i) == $row->on_the_month && date('d', $i) == $row->on_the_day_year) {
-                        foreach ($employeesres as $empid) {
-                            $sql .= "('" . $get['company_id'] . "','" . $row->id . "','" . $empid->id . "','" . $row->task_name . "','" . $row->check_list . "','" . $task_date . "','0','0','" . date('Y-m-d h:i:s') . "','" . $get['user_id'] . "'),";
-                        }
+                if ($row->action_frequency == 'YR' && date('m', $i) == $row->on_the_month && date('d', $i) == $row->on_the_day_year) {
+                    foreach ($employeesres as $empid) {
+                        $sql .= "('" . $get['company_id'] . "','" . $row->id . "','" . $empid->id . "','" . $row->task_name . "','" . $row->check_list . "','" . $task_date . "','0','0','" . date('Y-m-d h:i:s') . "','" . $get['user_id'] . "'),";
                     }
                 }
             }
@@ -21505,15 +21483,13 @@ emp.display_name";
                 }
             }
 
-            if ($get['filter_text'] != "" && $value['display_list'] == 1) {
-                if (in_array($value['type'], (array) $textfieldapplicable)) {
-                    if ($ftextseq == 1) {
-                        $textcondition .= " " . $key . " LIKE '%" . $get['filter_text'] . "%'";
-                    } else {
-                        $textcondition .= " OR " . $key . " LIKE '%" . $get['filter_text'] . "%'";
-                    }
-                    $ftextseq++;
+            if ($get['filter_text'] != "" && $value['display_list'] == 1 && in_array($value['type'], (array) $textfieldapplicable)) {
+                if ($ftextseq == 1) {
+                    $textcondition .= " " . $key . " LIKE '%" . $get['filter_text'] . "%'";
+                } else {
+                    $textcondition .= " OR " . $key . " LIKE '%" . $get['filter_text'] . "%'";
                 }
+                $ftextseq++;
             }
         }
 
@@ -25375,15 +25351,11 @@ emp.display_name";
                             }
                         }
                     }
-                    if ($docaccesssetupsuser['opex_cpex'] != "") {
-                        if ($transaction->opex_cpex != $docaccesssetupsuser['opex_cpex']) {
-                            $nomatch++;
-                        }
+                    if ($docaccesssetupsuser['opex_cpex'] != "" && $transaction->opex_cpex != $docaccesssetupsuser['opex_cpex']) {
+                        $nomatch++;
                     }
-                    if ($docaccesssetupsuser['amount'] != "" && $docaccesssetupsuser['amount'] != "0") {
-                        if ($transaction->total_amount > $docaccesssetupsuser['amount']) {
-                            $nomatch++;
-                        }
+                    if ($docaccesssetupsuser['amount'] != "" && $docaccesssetupsuser['amount'] != "0" && $transaction->total_amount > $docaccesssetupsuser['amount']) {
+                        $nomatch++;
                     }
                     $item_categorylist = json_decode($docaccesssetupsuser['item_category']);
                     if (count((array) $item_categorylist) != "0") {
@@ -25393,10 +25365,8 @@ emp.display_name";
                         }
                     }
                     $transaction_type = json_decode($docaccesssetupsuser['transaction_type']);
-                    if (count((array) $transaction_type) != "0") {
-                        if (!in_array($transaction->opex_cpex, (array) $transaction_type)) {
-                            $nomatch++;
-                        }
+                    if (count((array) $transaction_type) != "0" && !in_array($transaction->opex_cpex, (array) $transaction_type)) {
+                        $nomatch++;
                     }
                     if ($nomatch == 0) {
                         $infouser_ids[$userid] = $userid;
@@ -25923,11 +25893,9 @@ emp.display_name";
                 //reverse coneversion
                 $convsql = "SELECT id,conversion_ratio FROM uom_conversions WHERE company_id = '" . $get['company_id'] . "' AND  ((parent_uom_id = '" . $parent_uom_id . "' AND child_uom_id = '" . $child_uom_id . "') OR (parent_uom_id = '" . $child_uom_id . "' AND child_uom_id = '" . $parent_uom_id . "'))  AND is_active = 0";
                 $convresd = $callConfig->getRow($convsql);
-                if ($convresd->id != "") {
-                    if ($convresd->conversion_ratio != "0" && $convresd->conversion_ratio != "") {
-                        $len['in_qty'] = $itemres->item_quantity / $convresd->conversion_ratio;
-                        $len['in_value'] = $itemres->item_amount / $convresd->conversion_ratio;
-                    }
+                if ($convresd->id != "" && $convresd->conversion_ratio != "0" && $convresd->conversion_ratio != "") {
+                    $len['in_qty'] = $itemres->item_quantity / $convresd->conversion_ratio;
+                    $len['in_value'] = $itemres->item_amount / $convresd->conversion_ratio;
                 }
             }
 
@@ -27695,13 +27663,11 @@ emp.display_name";
                 $insertcomp[$key] = $post1;
             }
         }
-        if ($insertcompany == '0') {
-            if (isset($post['company_id']) && $post['company_id'] != "") {
-                $insertcomp['updated_by'] = $post['user_id'];
-                $insertcomp['updated_date'] = date('Y-m-d H:i:s');
-                $updaterow = $callConfig->updateRecord('companies', $insertcomp, 'id', $post['company_id']);
-                $return['companies_update'] = $updaterow;
-            }
+        if ($insertcompany == '0' && isset($post['company_id']) && $post['company_id'] != "") {
+            $insertcomp['updated_by'] = $post['user_id'];
+            $insertcomp['updated_date'] = date('Y-m-d H:i:s');
+            $updaterow = $callConfig->updateRecord('companies', $insertcomp, 'id', $post['company_id']);
+            $return['companies_update'] = $updaterow;
         }
 
         $companiestable = array('name', 'liscense_number', 'admin_email', 'tax_number', 'gst_number', 'cin_number', 'tan_number', 'pan_number', 'phone_number', 'fax_number', 'billing_address', 'contact_address', 'enabled', 'display_logo', 'financial_start', 'assessment_year', 'time_zone', 'date_format', 'date_separator', 'percentage_position', 'number_format', 'invoice_perfix', 'invoice_postfix', 'industry', 'location', 'role_permission', 'kpi_mode', 'shift_mode', 'show_leave_member', 'default_currency_id', 'edit_quick_user_image', 'currency_formate', 'archival_start_year_month', 'archival_run_before_month', 'default_language_id', 'default_payment_mode', 'default_pettycash_acct', 'default_cash_acct', 'cit_address', 'default_tax_rate', 'default_payroll_day', 'default_kpi_weekly_task_day', 'default_kpi_monthly_task_day', 'default_inventory_account', 'default_purchase_provision_account', 'default_sales_provision_account', 'default_purchase_difference_account', 'default_tax_account', 'default_purchase_discount_account', 'subscription_info', 'default_role_id', 'annoucements_rights_roleid', 'default_hr', 'default_user_type', 'application_module', 'two_step_verification', 'copy_right', 'default_timesheet_date', 'esign_time_sheet_lock', 'esign_buget_approval_lock', 'leave_carry_forward_date', 'default_country_id', 'phone_number_format', 'default_notice_perieod', 'sundry_debtors_acc', 'sundry_creditors_acc', 'jv_suspense_acc', 'default_bank_account_id');
@@ -27713,13 +27679,11 @@ emp.display_name";
                 $insertcomp[$key] = $post1;
             }
         }
-        if ($insertconfig == '0') {
-            if (isset($post['config_id']) && $post['config_id'] != "") {
-                $insertcomp['updated_by'] = $post['user_id'];
-                $insertcomp['updated_date'] = date('Y-m-d H:i:s');
-                $updaterow = $callConfig->updateRecord('config', $insertcomp, 'id', $post['config_id']);
-                $return['config_update'] = $updaterow;
-            }
+        if ($insertconfig == '0' && isset($post['config_id']) && $post['config_id'] != "") {
+            $insertcomp['updated_by'] = $post['user_id'];
+            $insertcomp['updated_date'] = date('Y-m-d H:i:s');
+            $updaterow = $callConfig->updateRecord('config', $insertcomp, 'id', $post['config_id']);
+            $return['config_update'] = $updaterow;
         }
 
         if ($post['transaction_table'] == "divisions") {
@@ -30959,11 +30923,9 @@ emp.display_name";
         $query = "SELECT otp_number FROM user_otp_authentication WHERE company_id = " . $get['company_id'] . " AND user_id = " . $get['user_id'] . " AND is_active =0";
         $data = $callConfig->getRow($query);
         $return = array('status' => 'fail', 'otp' => $data->otp_number, 'msg' => 'OTP is wrong, Please reenter the OTP');
-        if ($get['otp'] != "") {
-            if ($data->otp_number == $get['otp']) {
-                $return = array('status' => 'success', 'otp' => $data->otp_number, 'msg' => 'OTP is verifed');
-                $this->toupdatemobilenumber($get);
-            }
+        if ($get['otp'] != "" && $data->otp_number == $get['otp']) {
+            $return = array('status' => 'success', 'otp' => $data->otp_number, 'msg' => 'OTP is verifed');
+            $this->toupdatemobilenumber($get);
         }
         return $return;
     }
@@ -31894,22 +31856,20 @@ emp.display_name";
             }
             foreach ($importdata as $idata) {
                 if ($idata[0] != "") {  //id possition
-                    if ($idata[5] != "" && $idata[5] != "0") {
-                        if (!in_array($idata[0], (array) $items)) { // already update open qty
-                            $postupd['updated_date'] = date('Y-m-d H:i:s');
-                            $postupd['updated_by'] = $post['user_id'];
-                            $postupd['opening_quantity'] = $idata[5];
-                            $postupd['opening_quantity_date'] = $system_start_date;
-                            $postupd['warehouse_id'] = 1;
-                            $returnaray['items_update_ary'][] = $postupd;
-                            $res = $callConfig->updateRecord('items', $postupd, 'id', $idata[0]);
-                            $returnaray['items_update'][] = $res;
-                            $mainitem = $this->togetitemvalues($idata[0]);
-                            $day_rate = $this->togetitemwadayrate($idata[0], $post['company_id']);
-                            $len = array('company_id' => $post['company_id'], 'location_id' => 1, 'transaction_warehouse_id' => 1, 'transaction_date' => $system_start_date, 'item_id' => $idata[0], 'document_no' => $idata[0], 'document_type' => 'items', 'document_ref_no' => '', 'in_qty' => $idata[5], 'in_value' => 0, 'item_in_value' => 0, 'reason_id' => '', 'out_qty' => 0, 'out_value' => 0, 'sale_price' => 0, 'sale_value' => 0, 'item_wa_cost' => $day_rate, 'item_st_cost' => $mainitem->purchase_price, 'is_active' => '0', 'current_status' => '0', 'sales_qty' => 0, 'purchase_qty' => 0);
-                            $this->invoiceUpdates('items', $len);
-                            $returnaray['items_ledger'][] = null;
-                        }
+                    if ($idata[5] != "" && $idata[5] != "0" && !in_array($idata[0], (array) $items)) { // already update open qty
+                        $postupd['updated_date'] = date('Y-m-d H:i:s');
+                        $postupd['updated_by'] = $post['user_id'];
+                        $postupd['opening_quantity'] = $idata[5];
+                        $postupd['opening_quantity_date'] = $system_start_date;
+                        $postupd['warehouse_id'] = 1;
+                        $returnaray['items_update_ary'][] = $postupd;
+                        $res = $callConfig->updateRecord('items', $postupd, 'id', $idata[0]);
+                        $returnaray['items_update'][] = $res;
+                        $mainitem = $this->togetitemvalues($idata[0]);
+                        $day_rate = $this->togetitemwadayrate($idata[0], $post['company_id']);
+                        $len = array('company_id' => $post['company_id'], 'location_id' => 1, 'transaction_warehouse_id' => 1, 'transaction_date' => $system_start_date, 'item_id' => $idata[0], 'document_no' => $idata[0], 'document_type' => 'items', 'document_ref_no' => '', 'in_qty' => $idata[5], 'in_value' => 0, 'item_in_value' => 0, 'reason_id' => '', 'out_qty' => 0, 'out_value' => 0, 'sale_price' => 0, 'sale_value' => 0, 'item_wa_cost' => $day_rate, 'item_st_cost' => $mainitem->purchase_price, 'is_active' => '0', 'current_status' => '0', 'sales_qty' => 0, 'purchase_qty' => 0);
+                        $this->invoiceUpdates('items', $len);
+                        $returnaray['items_ledger'][] = null;
                     }
                     $returnaray['array'] = $idata;
                 }
@@ -32850,10 +32810,8 @@ emp.display_name";
         $query = "SELECT otp_number FROM user_otp_authentication WHERE company_id = " . $get['company_id'] . " AND mobile = " . $get['mobile'] . " AND is_active =0";
         $data = $callConfig->getRow($query);
         $return = array('status' => 'fail', 'msg' => 'OTP is wrong, Please reenter the OTP');
-        if ($get['otp'] != "") {
-            if ($data->otp_number == $get['otp']) {
-                $return = array('status' => 'success', 'otp' => $data->otp_number, 'msg' => 'OTP is verifed');
-            }
+        if ($get['otp'] != "" && $data->otp_number == $get['otp']) {
+            $return = array('status' => 'success', 'otp' => $data->otp_number, 'msg' => 'OTP is verifed');
         }
         return $return;
     }

@@ -923,6 +923,7 @@ function addslabrows(){
 
                                        <!--      <span class="form-text text-muted"><?php echo $helptext['payroll'];?> </span>
                                        -->   </div>
+  </div>
 
                                        <!--end::Select-->
                                      </div>
@@ -1083,6 +1084,7 @@ function addslabrows(){
 
                       </div><!--
                       <span class="form-text text-muted"><?php echo $helptext['esi'];?> </span> -->
+                      </div>
 
                     </div>
                     <div class="form-group col-lg-6">
@@ -1093,6 +1095,7 @@ function addslabrows(){
                        <?php } ?>
                     </select><!--
                     <span class="form-text text-muted"><?php echo $helptext['esideduct'];?> </span> -->
+                    </select>
                   </div>
                   <div class="form-group col-lg-6">
                     <span class="d-inline-block fw-bold" style="margin-bottom:5px">Employee Contribution (%):</span>
@@ -1100,6 +1103,7 @@ function addslabrows(){
                       <input type="text" class="form-control"  name="esi_employee_contribution" placeholder="<?php echo $placeholder['esiempc'];?>" title="Esi Employee Contribution" aria-label="Esi Employee Contribution">
                     </div><!--
                     <span class="form-text text-muted"><?php echo $helptext['esiempc'];?> </span> -->
+                    </div>
                   </div>
                   <div class="form-group col-lg-6">
                     <span class="d-inline-block fw-bold" style="margin-bottom:5px">Employer Contribution (%):</span>
@@ -1108,6 +1112,7 @@ function addslabrows(){
 
                     </div><!--
                     <span class="form-text text-muted"><?php echo $helptext['esiemprc'];?> </span> -->
+                    </div>
                   </div>
                   <div class="form-group col-lg-6">
 
@@ -1155,6 +1160,7 @@ function addslabrows(){
 
                       </div><!--
                       <span class="form-text text-muted"><?php echo $helptext['pt'];?> </span> -->
+                      </div>
                     </div>
                     <div class="form-group col-lg-6">
                       <span class="d-inline-block fw-bold" style="margin-bottom:5px">Work Location</span>
@@ -1162,6 +1168,7 @@ function addslabrows(){
                         <input type="text" class="form-control"  placeholder="<?php echo $placeholder['ptloc'];?>" name="work_location_id" title="Work Location Id" aria-label="Work Location Id">
                       </div><!--
                       <span class="form-text text-muted"><?php echo $helptext['ptloc'];?> </span> -->
+                      </div>
                     </div>
 
                     <div class="form-group col-lg-6">
@@ -1173,6 +1180,7 @@ function addslabrows(){
                        <?php } ?>
                       </select><!--
                       <span class="form-text text-muted"><?php echo $helptext['ptstate'];?> </span>    -->
+                      </select>
                     </div>
                     <div class="form-group col-lg-6">
                      <div> <span class="d-inline-block fw-bold" style="margin-bottom:5px">Deduction Cycle</span></div>
@@ -1182,6 +1190,7 @@ function addslabrows(){
                        <?php } ?>
                       </select><!--
                       <span class="form-text text-muted"><?php echo $helptext['ptdeduct'];?> </span> -->
+                      </select>
                     </div>
                     <div class="form-group col-lg-12">
 
@@ -1191,6 +1200,10 @@ function addslabrows(){
                        <th scope="col" class="" width="33%"> Start Range</th>
                        <th scope="col" class="thheader" width="32%">End Range</th>
                        <th scope="col" class="thheader" width="33%">Tax Amount</th>
+                       <th scope="col" style="width: 2%;"></th>
+                       <th scope="col" class="" style="width: 33%;"> Start Range</th>
+                       <th scope="col" class="thheader" style="width: 32%;">End Range</th>
+                       <th scope="col" class="thheader" style="width: 33%;">Tax Amount</th>
                      </tr>
                      <tr>
                        <td>
@@ -1261,6 +1274,7 @@ function addslabrows(){
            <?php } ?>
                       </select><!--
                       <span class="form-text text-muted"><?php echo $helptext['lwfloc'];?> </span> -->
+                      </select>
 
                     </div>
                     <div class="form-group col-lg-6">
@@ -1271,6 +1285,7 @@ function addslabrows(){
                        <?php } ?>
                   </select><!--
                   <span class="form-text text-muted"><?php echo $helptext['lwfdeduct'];?> </span> -->
+                  </select>
 
                 </div>
                 <div class="form-group col-lg-6">
@@ -1315,210 +1330,6 @@ function addslabrows(){
 
 
 
-<!--
-
-       <div class="card">
-          <div class="card-header" id="headingTwo3">
-             <div class="card-title collapsed" data-bs-toggle="collapse" data-target="#collapseTwo3">
-                Employee's State Insurance (ESI)
-             </div>
-          </div>
-          <div id="collapseTwo3" class="collapse" data-parent="#accordionExample3">
-             <div class="card-body accbora my-5">
-                <div class="form-group row">
-                  <div class="form-group col-lg-6">
-                      <label>ESI Number</label>
-                      <div class="input-group input-icon-right">
-                          <input type="text" class="form-control" placeholder="<?php echo $placeholder['esi'];?>" name="esi_no" title="Esi No" aria-label="Esi No">
-
-                      </div>
-                      <span class="form-text text-muted"><?php echo $helptext['esi'];?> </span>
-
-                  </div>
-                  <div class="form-group col-lg-6">
-                    <label>Deduction Cycle</label>
-                    <select id="kt_select2_48" class="form-select js-example-basic-single" name="esi_deduction_cycle" title="Esi Deduction Cycle" aria-label="Esi Deduction Cycle">
-                         <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
-                         <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
-                         <?php } ?>
-                    </select>
-                    <span class="form-text text-muted"><?php echo $helptext['esideduct'];?> </span>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Employee Contribution (%):</label>
-                    <div class="input-group input-icon-right">
-                        <input type="text" class="form-control"  name="esi_employee_contribution" placeholder="<?php echo $placeholder['esiempc'];?>" title="Esi Employee Contribution" aria-label="Esi Employee Contribution">
-                    </div>
-                    <span class="form-text text-muted"><?php echo $helptext['esiempc'];?> </span>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Employer Contribution (%):</label>
-                    <div class="input-group input-icon-right">
-                        <input type="text" class="form-control"  placeholder="<?php echo $placeholder['esiemprc'];?>" name="esi_employer_contribution" title="Esi Employer Contribution" aria-label="Esi Employer Contribution">
-
-                    </div>
-                    <span class="form-text text-muted"><?php echo $helptext['esiemprc'];?> </span>
-                </div>
-                <div class="form-group col-lg-6">
-                  <label>&nbsp;</label>
-                    <div class="radio-inline">
-                      <label class="checkbox">
-                        <input type="checkbox"  name="esi_employer_contribution_in_ctc" value="31" title="Esi Employer Contribution In Ctc" aria-label="Esi Employer Contribution In Ctc">  <span></span> &nbsp; Employer Contribution In CTC
-                      </label>
-                    </div>
-                </div>
-                </div>
-                <div class="col-xl-6 mt-10">
-                   <button type="button" onclick="setenable('esi')" class="btn btn-bg-light" id="esi">Enable</button>
-                   <input type="hidden" name="esi_checked" id="esi_checked"  value="0">
-                </div>
-             </div>
-          </div>
-       </div>
-       <div class="card">
-          <div class="card-header" id="headingThree3">
-             <div class="card-title collapsed" data-bs-toggle="collapse" data-target="#collapseThree3">
-                Professional Tax (PT)
-             </div>
-          </div>
-          <div id="collapseThree3" class="collapse" data-parent="#accordionExample3">
-             <div class="card-body accbora my-5">
-                <div class="form-group row">
-                  <div class="form-group col-lg-6">
-                      <label>PT Number</label>
-                      <div class="input-group input-icon-right">
-                          <input type="text" class="form-control"  name="pt_number" placeholder="<?php echo $placeholder['pt'];?>" title="Pt Number" aria-label="Pt Number">
-
-                      </div>
-                      <span class="form-text text-muted"><?php echo $helptext['pt'];?> </span>
-                  </div>
-                   <div class="form-group col-lg-6">
-                      <label>Work Location</label>
-                      <div class="input-group input-icon-right">
-                          <input type="text" class="form-control"  placeholder="<?php echo $placeholder['ptloc'];?>" name="work_location_id" title="Work Location Id" aria-label="Work Location Id">
-                      </div>
-                      <span class="form-text text-muted"><?php echo $helptext['ptloc'];?> </span>
-                  </div>
-
-                   <div class="form-group col-lg-6">
-                    <input type="hidden" name="pt_state_id" id="pt_state_id">
-                      <label>State</label>
-                     <select id="kt_select2_48" class="form-select js-example-basic-single" name="pt_state_id" title="Pt State Id" aria-label="Pt State Id">
-                         <?php foreach ($statelist as $statevalue)  { ?>
-                         <option value="<?php echo $statevalue['id']; ?>"><?php echo $statevalue['state_name']; ?></option>
-                         <?php } ?>
-                      </select>
-                        <span class="form-text text-muted"><?php echo $helptext['ptstate'];?> </span>
-                   </div>
-                   <div class="form-group col-lg-6">
-                     <div> <label>Deduction Cycle</label></div>
-                      <select id="kt_select2_36" class="form-select js-example-basic-single" name="pt_deduction_cycle" title="Pt Deduction Cycle" aria-label="Pt Deduction Cycle">
-                           <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
-                           <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
-                           <?php } ?>
-                      </select>
-                      <span class="form-text text-muted"><?php echo $helptext['ptdeduct'];?> </span>
-                  </div>
-                   <div class="form-group col-lg-12">
-
-                         <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center" id="slabtable">
-                            <tr>
-                               <th scope="col"  width="2%"></th>
-                               <th scope="col" class="" width="33%"> Start Range</th>
-                               <th scope="col" class="thheader" width="32%">End Range</th>
-                               <th scope="col" class="thheader" width="33%">Tax Amount</th>
-                            </tr>
-                            <tr>
-                               <td>
-                                  <label class="checkbox checkbox-primary"><input class="form-control itemRow" type="checkbox" title="Input" aria-label="Input"> <span></span> </label>
-                               </td>
-                               <td>
-                                    <input type="text" class="form-control" autocomplete="off" name="start_range[]" title="Start Range" aria-label="Start Range">
-                                </td>
-                               <td>
-                                 <input type="text" class="form-control" autocomplete="off" name="end_range[]" title="End Range" aria-label="End Range">
-
-                               </td>
-                               <td>
-                                <input type="text" class="form-control" autocomplete="off" name="tax_amount[]" title="Tax Amount" aria-label="Tax Amount">
-
-                               </td>
-                            </tr>
-                         </table>
-                         <div class="form-group">
-                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-4">
-                               <button class="btn btn-success"  onclick="addslabrows()" id="addRows" type="button">+ Add More</button>
-                               <button class="btn btn-danger " id="removeRows" onclick="removeslabrows()"  type="button">- Delete</button> &nbsp;
-                            </div>
-                         </div>
-                      </div>
-
-                </div>
-                <div class="">
-                   <a href="#"  onclick="setenable('pt')" class="btn btn-bg-light" id="pt">Enable</a>
-
-                   <input type="hidden" name="pt_checked" id="pt_checked"  value="0" >
-                </div>
-             </div>
-          </div>
-       </div>
-       <div class="card">
-          <div class="card-header" id="headingThree4">
-             <div class="card-title collapsed" data-bs-toggle="collapse" data-target="#collapseThree4">
-                Labour Welfare Fund (LWF)
-             </div>
-          </div>
-
-
-
-
-
-
-
-          <div id="collapseThree4" class="collapse" data-parent="#accordionExample3">
-             <div class="card-body accbora my-5">
-                <div class="form-group row">
-                  <div class="form-group col-lg-6">
-                      <div> <label>State</label> </div>
-                      <select id="kt_select2_43" name="lwf_state_id" title="Lwf State Id" aria-label="Lwf State Id">
-                          <option> Select Any One State</option>
-                         <?php foreach ($statelist as $statevalue)  { ?>
-                         <option value="<?php echo $statevalue['id']; ?>"><?php echo $statevalue['state_name']; ?></option>
-                         <?php } ?>
-                      </select>
-                      <span class="form-text text-muted"><?php echo $helptext['lwfloc'];?> </span>
-
-                  </div>
-                  <div class="form-group col-lg-6">
-                  <div><label>Deduction Cycle</label> </div>
-                  <select id="kt_select2_48" class="form-control" name="lwf_deduction_cycle" title="Lwf Deduction Cycle" aria-label="Lwf Deduction Cycle">
-                       <?php foreach ($deduction_cycle as $ckey=>$cycle)  { ?>
-                       <option value="<?php echo $ckey; ?>"><?php echo $cycle ?></option>
-                       <?php } ?>
-                  </select>
-                  <span class="form-text text-muted"><?php echo $helptext['lwfdeduct'];?> </span>
-
-              </div>
-                  <div class="form-group col-lg-6">
-                    <label>Employer Contribution Amount:</label>
-                    <div class="input-group input-icon-right">
-                       <div class="input-group-prepend"><span class="input-group-text"><span>Rs</span></span></div>
-                        <input type="text" class="form-control"  name="lwf_employer_contribution" placeholder="<?php echo $placeholder['lwfrs'];?>" title="Lwf Employer Contribution" aria-label="Lwf Employer Contribution">
-
-                    </div>
-                    <span class="form-text text-muted"><?php echo $helptext['lwfrs'];?> </span>
-
-                </div>
-
-                </div>
-                <div class="">
-                   <a href="#"  onclick="setenable('lwf')" class="btn btn-bg-light" id="lwf">Enable</a>
-
-                   <input type="hidden" name="lwf_checked" id="lwf_checked"  value="0">
-                </div>
-             </div>
-          </div>
-        </div> -->
       </div>
     </div>
     <!--end: Wizard Step 4-->

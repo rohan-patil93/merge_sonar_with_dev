@@ -85,6 +85,10 @@ if ($method == 'post') {
 			exit;
 		}
 
+	if ($mode == "infisuitejobcandedatesave" && ($_POST['extid'] ?? '') != "") {
+		$res = $intiObj->infisuitejobcandedatesave($_POST, $_GET);
+		echo json_encode($res);
+		exit;
 	}
 	if ($mode == "toinsertupdatethejobpostingpublish") {
 		$res = $intiObj->toinsertupdatethejobpostingpublish($_POST, $_GET);
@@ -1778,6 +1782,10 @@ if ($method == 'post') {
 			echo json_encode($res);
 			exit;
 		}
+	if ($mode == "infisuitejobcandedatesave" && ($_POST['extid'] ?? '') != "") {
+		$res = $intiObj->infisuitejobcandedatesave($_GET, $_GET);
+		echo json_encode($res);
+		exit;
 	}
 	if ($mode == 'sendmailwithsmtp') {
 		$details = $userObj->sendmailwithsmtp('shilpa.duttapattanayak@microchip.com', 'Test mail', 'body', '', '');

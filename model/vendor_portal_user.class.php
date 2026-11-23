@@ -119,6 +119,16 @@ class vendorPortelUserClass extends userClass
 			$vendor_registration_requestssql = "SELECT * FROM vendor_registration_requests WHERE company_id = '" . $get['company_id'] . "'  AND (`originator` = '" . $get['user_id'] . "' OR ('" . $get['admin_type'] . "'='1' AND  `share_pdf` = 'Y')) AND is_active = 0";
 			$vendor_registration_requestsres = $callConfig->getAllRows($vendor_registration_requestssql);
 			$return['vendor_registration_requests'] = $vendor_registration_requestsres;
+		if (($get['viewpage'] ?? '') != "popup") {
+			if ($get['rid'] != "") {
+				$vendor_registration_requestssql = "SELECT * FROM vendor_registration_requests WHERE company_id = '" . $get['company_id'] . "' AND id = '" . $get['rid'] . "' AND is_active = 0";
+				$vendor_registration_requestsres = $callConfig->getRow($vendor_registration_requestssql);
+				$return['vendor_registration_requests'] = $vendor_registration_requestsres;
+			} else {
+				$vendor_registration_requestssql = "SELECT * FROM vendor_registration_requests WHERE company_id = '" . $get['company_id'] . "'  AND (`originator` = '" . $get['user_id'] . "' OR ('" . $get['admin_type'] . "'='1' AND  `share_pdf` = 'Y')) AND is_active = 0";
+				$vendor_registration_requestsres = $callConfig->getAllRows($vendor_registration_requestssql);
+				$return['vendor_registration_requests'] = $vendor_registration_requestsres;
+			}
 		}
 		$application_userssql = "SELECT id, display_name FROM application_users WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0 AND JSON_SEARCH(role_id, 'one', '" . VENDOR_LEGAL_ROLE . "') IS NOT NULL ";
 		//(JSON_SEARCH(role_id, 'one', '".VENDOR_MODULE_ADMIN_ROLE."') IS NOT NULL OR
@@ -272,6 +282,7 @@ class vendorPortelUserClass extends userClass
 			$notdataa['type'] = "INFORMATION";
 			$notdataa['notification_users'] = array($post['user_id']);
 			$emails = $this->tosendnotifiations($notdataa);
+			$this->tosendnotifiations($notdataa);
 
 		}
 		return $return;
@@ -926,9 +937,12 @@ class vendorPortelUserClass extends userClass
 						if ($tasks->action_frequency == 'DY') {
 							$days_ago = $transaction_date;
 						} elseif ($tasks->action_frequency == 'WK') {
+						if ($tasks->action_frequency == 'WK') {
 							$day = 7;
 						} elseif ($tasks->action_frequency == 'MON') {
 							$day = 30;
+						} else {
+							$day = 0;
 						}
 						if ($tasks->before_or_after == 'BF') {
 							$day = "-" . $day;
@@ -1112,9 +1126,12 @@ class vendorPortelUserClass extends userClass
 						if ($tasks->action_frequency == 'DY') {
 							$days_ago = $transaction_date;
 						} elseif ($tasks->action_frequency == 'WK') {
+						if ($tasks->action_frequency == 'WK') {
 							$day = 7;
 						} elseif ($tasks->action_frequency == 'MON') {
 							$day = 30;
+						} else {
+							$day = 0;
 						}
 						if ($tasks->before_or_after == 'BF') {
 							$day = "-" . $day;
@@ -1306,6 +1323,7 @@ class vendorPortelUserClass extends userClass
 			} else {
 				$dynmictablersql = "SELECT id,user_id,display_name,created_date,image,email,created_by,company, send_verification_profile_status, verification_profile_users, current_status, send_verification_profile_status, vendor_id, originator, vendor_type_id " . $getvrid . " FROM " . $dashboard_transaction_table . " ven WHERE company_id =  '" . $get['company_id'] . "' AND (`hr_connect` = '" . $get['user_id'] . "' OR `finance_connect`  = '" . $get['user_id'] . "' OR `purchase_connect`= '" . $get['user_id'] . "' OR `admin_connect` = '" . $get['user_id'] . "' OR  `project_connect` = '" . $get['user_id'] . "' OR `location_connect` = '" . $get['user_id'] . "' OR `legal_connect` = '" . $get['user_id'] . "' OR `created_by` = '" . $get['user_id'] . "' OR '" . $get['admin_type'] . "'='1' ) AND is_active = 0" . $extracondi;
 				$vendorres = $callConfig->getAllRows($vendorsql);
+				$vendorres = $callConfig->getAllRows($dynmictablersql);
 				$return['vendors'] = $vendorres;
 				$return['total_vendors'] = count((array) $vendorres);
 				$return['total_record_cnt'] = count((array) $vendorres);

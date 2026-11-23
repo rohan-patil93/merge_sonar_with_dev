@@ -477,6 +477,7 @@ $due_date_period_list = $result['period_list'];
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Profile Readiness</a>
                 <div class="accordion-desc p-0">
                   <table role="presentation" class="table table-hover table-md">
+                  <table class="table table-hover table-md">
                     <tbody>
                       <?php foreach ($profilereadiness as $keylabel => $profilereadines) {
                         $complete_field = $total_field = 0;
@@ -496,6 +497,7 @@ $due_date_period_list = $result['period_list'];
                               <?php echo $keylabel; ?></h6>
                           </td>
                           <td align="right">
+                          <td style="text-align: right;">
                             <div class="d-flex align-items-center w-100px w-sm-120px flex-column ">
                               <div class="d-flex justify-content-between w-100 mt-auto mb-2">
                                 <span class="f-12 f-w-600">Profile </span>
@@ -548,6 +550,7 @@ $due_date_period_list = $result['period_list'];
              <a class="accordion-msg b-none waves-effect waves-light f-w-700"><i class="fa fa-folder"></i> <?php echo ucwords(strtolower($parentdocuments['document_name'])); ?></a>
              <div class="accordion-desc p-0">
                <table role="presentation" class="table table-hover m-b-0 " style="font-size:13px;">
+               <table class="table table-hover m-b-0 " style="font-size:13px;">
                  <tbody>
                    <?php foreach ($vdata_details as $details){
                      $candidatedocument = $checkl[$details['id']];
@@ -584,6 +587,7 @@ $due_date_period_list = $result['period_list'];
                            <span class="label label-md" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
                        </td>
                        <td align="right">
+                       <td style="text-align: right;">
                          <div id="docssatusbtnemt_<?php echo $details['id']; ?>">
 
                          <?php if($candidatedocument['current_status'] =="" || $candidatedocument['current_status'] ==ST_ACTIVE){
@@ -697,6 +701,7 @@ $due_date_period_list = $result['period_list'];
                           </a>
                           <div class="accordion-desc">
                             <table role="presentation" class="table table-hover">
+                            <table class="table table-hover">
                               <tbody>
                                 <?php foreach ($transactionactivityschedule as $tas) { ?>
                                   <tr id="custom-popup-tas-<?php echo $tas['id']; ?>">
@@ -714,6 +719,7 @@ $due_date_period_list = $result['period_list'];
                                       <?php } ?>
                                     </td>
                                     <td align="center" class="statusid_<?php echo $tas['id']; ?>">
+                                    <td style="text-align: center;" class="statusid_<?php echo $tas['id']; ?>">
                                       <?php $stausresultv = $stausresult[$tas['current_status']];
                                       ?>
                                       <span class="label label-success"
@@ -733,6 +739,7 @@ $due_date_period_list = $result['period_list'];
                                             </div>
                                             <div class="card-body">
                                               <table role="presentation" width="100%">
+                                              <table style="width: 100%;">
                                                 <tbody>
 
                                                   <?php
@@ -747,6 +754,7 @@ $due_date_period_list = $result['period_list'];
                                                     ?>
                                                     <tr>
                                                       <td width="90%">
+                                                      <td style="width: 90%;">
                                                         <div class="to-do-list">
                                                           <div class="checkbox-fade fade-in-primary"
                                                             onchange="getTaskCheckList('<?php echo $tas['id']; ?>','<?php echo $keyval; ?>','<?php echo $candidate_id; ?>')">
@@ -767,6 +775,7 @@ $due_date_period_list = $result['period_list'];
                                                         </div>
                                                       </td>
                                                       <td width="10%">
+                                                      <td style="width: 10%;">
                                                         <span class="float_end">
                                                           <?php if ($list['downloadfile'] != "") { ?>
                                                             <a href="<?php echo "uploads/all/" . $list['downloadfile']; ?>"
@@ -879,6 +888,7 @@ $due_date_period_list = $result['period_list'];
              </a>
              <div class="accordion-desc">
                <table role="presentation" class="table table-hover">
+               <table class="table table-hover">
                  <tbody>
                    <?php foreach($transactionactivityschedule11 as $tas){
                      ?>
@@ -893,6 +903,7 @@ $due_date_period_list = $result['period_list'];
                          <?php } ?>
                        </td>
                        <td align="center" class="statusid_<?php echo $tas['id']; ?>">
+                       <td style="text-align: center;" class="statusid_<?php echo $tas['id']; ?>">
                         <?php $stausresultv = $stausresult[$tas['current_status']];
                         ?>
                         <span class="label label-success" style="color: <?php echo "#".$stausresultv['color']; ?>;    background:  <?php echo $stausresultv['background_color']; ?>; border-color: <?php echo $stausresultv['background_color']; ?>;" ><?php echo $stausresultv['name']; ?></span>
@@ -916,6 +927,7 @@ $due_date_period_list = $result['period_list'];
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Policies And Procedures</a>
                 <div class="accordion-desc">
                   <table role="presentation" class="table table-hover">
+                  <table class="table table-hover">
                     <tbody>
                       <tr>
                         <td>
@@ -924,6 +936,8 @@ $due_date_period_list = $result['period_list'];
                         </td>
                         <td align="right"><span class="label label-success">Completed</span></td>
                         <td align="right">
+                        <td style="text-align: right;"><span class="label label-success">Completed</span></td>
+                        <td style="text-align: right;">
                           <div class="dropdown-primary dropdown open">
                             <button class="btn btn-primary dropdown-toggle waves-effect waves-light" type="button"
                               id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -1161,6 +1175,10 @@ $due_date_period_list = $result['period_list'];
                                               </div>
 
                                             <?php } ?>
+                        if(false){
+                          foreach([] as $parentdocuments){
+                            foreach([] as $value){
+                        ?>
                                             <?php if($value['document_shared']!="" AND $_SESSION['user_type']!='4'){ ?>
                                              <div class="dropdown-primary dropdown open" title="<?php if($value['current_status'] == ST_REJECTED){  echo "Rejected"; }elseif($value['current_status'] == ST_APPROVED){ echo "Approved"; }else{  echo "Active"; } ?>">
                                                <button class="label label-sm label-success" style="height: 18px; border-radius: 30px;"  type="button" data-content="<?php echo $value[$current_status]['name']; ?>"></button>
@@ -1207,6 +1225,7 @@ $due_date_period_list = $result['period_list'];
                        </div>
                      </div>
                    <?php   }  */ ?>
+                   <?php   }  ?>
                         <form>
 
                     </div>

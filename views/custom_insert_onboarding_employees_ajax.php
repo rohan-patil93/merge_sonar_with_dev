@@ -533,7 +533,6 @@ $bank_work_flow = "Y";
            </tbody>
         </table>
    <?php }elseif($_POST['pagetype'] =="experience_details" || $_POST['showpagetype'] =="experience_details"){
-		$fieldaccesright = $vafield['experience_details'];
 	if(count((array)$emp_work_experiences) !="0"){
 	?>
 	<div class="card-body border-bottom ">
@@ -568,7 +567,6 @@ $bank_work_flow = "Y";
 	<?php } ?>
 
    <?php }elseif($_POST['pagetype'] =="employee_qualifications" || $_POST['showpagetype'] =="employee_qualifications"){
-		$fieldaccesright = $vafield['employee_qualifications'];
   		if(count((array)$emp_educations) !="0"){
 	?>
 
@@ -604,7 +602,6 @@ $bank_work_flow = "Y";
 	    </div>
 	<?php } ?>
      <?php }elseif($_POST['pagetype'] =="employee_dependents" || $_POST['showpagetype'] =="employee_dependents"){
-		$fieldaccesright = $vafield['employee_dependents'];
 	?>
 	<div class="row">
 		<?php
@@ -633,7 +630,6 @@ $bank_work_flow = "Y";
 		<?php } ?>
 	</div>
     <?php }elseif($_POST['pagetype'] =="employee_contacts" || $_POST['showpagetype'] =="employee_contacts"){
-		$fieldaccesright = $vafield['employee_contacts'];
 	?>
 	<div class="row">
 		<?php
@@ -770,7 +766,6 @@ $bank_work_flow = "Y";
 	      	<?php }?>
 		</div>
 	<?php }elseif($_POST['pagetype'] =="emp_visa" || $_POST['showpagetype'] =="emp_visa"){
-		$fieldaccesright = $vafield['emp_visa'];
 	?>
 	<div class="row">
 		<?php
@@ -1521,7 +1516,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="cover_under_pf"
 	                           value="0"
-	                           <?php if (isset($data['is_muslim']) && $data['is_muslim'] === '0') echo __('checked'); ?>>
+	                           <?php if (isset($data['is_muslim']) && $data['is_muslim'] === '0') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('YES'); ?></label>
 	                </div>
 
@@ -1530,7 +1525,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="cover_under_pf"
 	                           value="1"
-	                           <?php if (isset($data['is_muslim']) && $data['is_muslim'] === '1') echo __('checked'); ?>>
+	                           <?php if (isset($data['is_muslim']) && $data['is_muslim'] === '1') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('NO'); ?></label>
 	                </div>
 	            </div>
@@ -1548,7 +1543,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="cover_under_pf"
 	                           value="0"
-	                           <?php if (isset($data['is_local']) && $data['is_local'] === '0') echo __('checked'); ?>>
+	                           <?php if (isset($data['is_local']) && $data['is_local'] === '0') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('YES'); ?></label>
 	                </div>
 
@@ -1557,7 +1552,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="cover_under_pf"
 	                           value="1"
-	                           <?php if (isset($data['is_local']) && $data['is_local'] === '1') echo __('checked'); ?>>
+	                           <?php if (isset($data['is_local']) && $data['is_local'] === '1') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('NO'); ?></label>
 	                </div>
 	            </div>
@@ -1582,7 +1577,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="cover_under_pf"
 	                           value="0"
-	                           <?php if (isset($data['cover_under_pf']) && $data['cover_under_pf'] === '0') echo __('checked'); ?>>
+	                           <?php if (isset($data['cover_under_pf']) && $data['cover_under_pf'] === '0') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('YES'); ?></label>
 	                </div>
 
@@ -1591,7 +1586,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="cover_under_pf"
 	                           value="1"
-	                           <?php if (isset($data['cover_under_pf']) && $data['cover_under_pf'] === '1') echo __('checked'); ?>>
+	                           <?php if (isset($data['cover_under_pf']) && $data['cover_under_pf'] === '1') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('NO'); ?></label>
 	                </div>
 	            </div>
@@ -1612,7 +1607,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="cover_under_esi"
 	                           value="0"
-	                           <?php if (isset($data['cover_under_esi']) && $data['cover_under_esi'] === '0') echo __('checked'); ?>>
+	                           <?php if (isset($data['cover_under_esi']) && $data['cover_under_esi'] === '0') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('YES'); ?></label>
 	                </div>
 
@@ -1621,7 +1616,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="cover_under_esi"
 	                           value="1"
-	                           <?php if (isset($data['cover_under_esi']) && $data['cover_under_esi'] === '1') echo __('checked'); ?>>
+	                           <?php if (isset($data['cover_under_esi']) && $data['cover_under_esi'] === '1') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('NO'); ?></label>
 	                </div>
 	            </div>
@@ -1642,7 +1637,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="clock_event_type"
 	                           value="Y"
-	                           <?php if (isset($data['clock_event_type']) && $data['clock_event_type'] === 'Y') echo __('checked'); ?>>
+	                           <?php if (isset($data['clock_event_type']) && $data['clock_event_type'] === 'Y') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('YES'); ?></label>
 	                </div>
 
@@ -1651,7 +1646,7 @@ $bank_work_flow = "Y";
 	                           type="radio"
 	                           name="clock_event_type"
 	                           value="N"
-	                           <?php if (isset($data['clock_event_type']) && $data['clock_event_type'] === 'N') echo __('checked'); ?>>
+	                           <?php if (isset($data['clock_event_type']) && $data['clock_event_type'] === 'N') { echo __('checked'); } ?>>
 	                    <label class="form-check-label"><?php echo __('NO'); ?></label>
 	                </div>
 	            </div>

@@ -2574,7 +2574,7 @@ class vMSUserClass extends userClass{
         		}else{
         			$post['timesheetdata'][$i]['updated_date'] = date('Y-m-d H:i:s');
         			$post['timesheetdata'][$i]['updated_by'] = $get['user_id'];
-        			$qresponse=$callConfig->updateRecord(TBL_PROJECT_TIMESHEETS,$post['timesheetdata'][$i],'id',$rowid);
+        			$callConfig->updateRecord(TBL_PROJECT_TIMESHEETS,$post['timesheetdata'][$i],'id',$rowid);
         		}
         	}
         }else{
@@ -2700,11 +2700,9 @@ class vMSUserClass extends userClass{
 			for($i = 0; $i < $datediff+1; $i++){
 				$valda =  date("Y-m-d", strtotime($from . ' + ' . $i . 'day'));
 				$valday = ucwords(date("l", strtotime($from . ' + ' . $i . 'day')));
-				if(in_array($valday, $weekly_working_days)){
-					if(!in_array($valda, $holidaydates[$location->id])){
-						$work_days = $work_days+1;
-						$work_dates[] = $valda;
-					}
+				if(in_array($valday, $weekly_working_days) && !in_array($valda, $holidaydates[$location->id])){
+					$work_days = $work_days+1;
+					$work_dates[] = $valda;
 				}
 			}
 			$return[$location->id] = array('holidaydates'=>$holidaydates[$location->id],'count_hoilydays'=>count($holidaydates[$location->id]),'minimum_hours'=>$minimum_hours_required,'week_days'=>$weekly_working_days,'count_week'=>count($weekly_working_days),'count_working_days'=>$work_days,'work_dates'=>$work_dates);
@@ -3640,7 +3638,6 @@ class vMSUserClass extends userClass{
 		global $callConfig;
 		$valid_from = date('Y-m-d', strtotime(str_replace('/', '-', $post['valid_from'])));
 		$valid_to =  date('Y-m-d', strtotime(str_replace('/', '-', $post['valid_to'])));
-		$return = array('status'=>'Fail','error'=>'9049');
 		$que = "SELECT id,joining_date FROM  employees WHERE emp_id =".$post['emp_id'];
 		$empjoin = $callConfig->getRow($que);
 		if( strtotime($valid_from) < strtotime($empjoin->joining_date)){
@@ -3660,7 +3657,7 @@ class vMSUserClass extends userClass{
 					$dataa = $callConfig->executeQuery($uquey);
 				}
 				$inarray = array('company_id'=>$get['company_id'],'emp_id'=>$post['emp_id'],'vrc_id'=>$post['vrc_id'],'vrc_item_id'=>$post['vrc_item_id'],'work_order_id'=>$post['mpc_id'],'work_order_detail_id'=>$post['mpc_item_id'],'effective_from_date'=>$valid_from,'effective_to_date'=>$valid_to,'is_active'=>'0','current_status'=>'0','created_date'=>date('Y-m-d h:i:s'),'created_by'=>$get['user_id']);
-				$return = $callConfig->insertRecord('emp_work_order',$inarray);
+				$callConfig->insertRecord('emp_work_order',$inarray);
 				$return = array('status'=>'success','error'=>'3000');
 			}
 		}
@@ -5118,10 +5115,8 @@ class vMSUserClass extends userClass{
 		for($i = 0; $i < $datediff + 1; $i++){
 			$valda =  date("Y-m-d", strtotime($from . ' + ' . $i . 'day'));
 			$valday = ucwords(date("l", strtotime($from . ' + ' . $i . 'day')));
-			if(in_array($valday, (array)$working_days)){
-				if(!in_array($valda, (array)$holidays)){
-					$work_days = $work_days+1;
-				}
+			if(in_array($valday, (array)$working_days) && !in_array($valda, (array)$holidays)){
+				$work_days = $work_days+1;
 			}
 		}
 		return $work_days;
@@ -5244,7 +5239,7 @@ class vMSUserClass extends userClass{
 		} else {
 
 			$array = array('company_id'=>$main['company_id'],'is_active'=>'0','updated_by'=>$main['updated_by'],'updated_date'=>$main['updated_date']);
-			$res=$callConfig->updateRecord($table_setup,$main,'id',$rowid);
+			$callConfig->updateRecord($table_setup,$main,'id',$rowid);
     		// two update querys - qustiontable and option table is_aactive=1
 			$setisactive = array('is_active'=>'1');
 			$qrespons=$callConfig->updateRecord($table_questions,$setisactive,'transaction_id',$rowid);
@@ -5262,7 +5257,7 @@ class vMSUserClass extends userClass{
 				unset($value['rid']);
 				$quesion_array = array_merge($value,$array);
 				if($question_id!=''){
-					$qres=$callConfig->updateRecord($table_questions,$quesion_array,'id',$question_id);
+					$callConfig->updateRecord($table_questions,$quesion_array,'id',$question_id);
 					$answer_array = array_merge($survey_question_option,$array);
 					$qrespons=$callConfig->updateRecord($table_options,$answer_array,'question_id',$question_id);
 				}else{
@@ -5734,7 +5729,7 @@ class vMSUserClass extends userClass{
 				$new_ques_id =  $querun['LASTID'];
 				$query = "INSERT INTO `vendor_feedback_setup_question_options`( `company_id`, `transaction_id`, `question_id`, `question_option`, `question_option_icon`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`)  SELECT  `company_id`, ".$new_cat_id.", ".$new_ques_id.", `question_option`, `question_option_icon`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM vendor_feedback_setup_question_options WHERE  question_id =".$qus->id;
 				$allqueries[] = $query;
-				$querun = $callConfig->executeQuery($query);
+				$callConfig->executeQuery($query);
 			}
 		}
 		return array('main'=>$main);
@@ -6120,7 +6115,6 @@ class vMSUserClass extends userClass{
 
         $total_working_day_js = json_decode($attendance_settings->working_days,1);
         $total_working_day = count((array)$total_working_day_js);
-        $totaldays = $total_working_day;
 
         $working_days = json_decode($attendance_settings->working_days,1);
         $leavecnt = 0;
@@ -7057,7 +7051,7 @@ public function  vmssingleemployeedashoard_new($get){
 	                        AND min_exp = '{$min_exp}'
 	                        AND max_exp = '{$max_exp}'
 	                        AND is_active = 0";
-	            $res1 = $callConfig->executeQuery($upquery);
+	            $callConfig->executeQuery($upquery);
 	    		$return['res1'][] = $upquery;
 	        }
 	    }
@@ -7497,14 +7491,6 @@ public function  vmssingleemployeedashoard_new($get){
 
 	                    $notifications[$user_id] = $notifMsg;
 	                    $emails[$user_id] = $emailBody;
-
-	                    // Send Notification
-	                    if (function_exists('sendNotification')) {
-	                    }
-
-	                    // Send Email
-	                    if (function_exists('sendEmail')) {
-	                    }
 	                }
 	            }
 	        }
@@ -8656,7 +8642,13 @@ public function  vmssingleemployeedashoard_new($get){
 	public function getweeklytimesheetentries($get){
 		global $callConfig;
 		$company_id = !empty($get['company_id']) ? intval($get['company_id']) : 1;
-		$empid = !empty($get['empid']) ? intval($get['empid']) : (!empty($get['emp_id']) ? intval($get['emp_id']) : 0);
+		if (!empty($get['empid'])) {
+			$empid = intval($get['empid']);
+		} elseif (!empty($get['emp_id'])) {
+			$empid = intval($get['emp_id']);
+		} else {
+			$empid = 0;
+		}
 
 		if(!empty($get['start_date']) && !empty($get['end_date'])){
 			$start_date = date('Y-m-d', strtotime($get['start_date']));
@@ -8874,10 +8866,33 @@ public function  vmssingleemployeedashoard_new($get){
 
 	public function directapplyweeklyleave($post, $get){
 		global $callConfig;
-		$company_id = !empty($get['company_id']) ? intval($get['company_id']) : (!empty($_SESSION['company_id']) ? intval($_SESSION['company_id']) : 1);
-		$emp_id = !empty($post['emp_id']) ? intval($post['emp_id']) : (!empty($get['emp_id']) ? intval($get['emp_id']) : 0);
-		$date = !empty($post['date']) ? trim($post['date']) : (!empty($get['date']) ? trim($get['date']) : '');
-		$user_id = !empty($get['user_id']) ? intval($get['user_id']) : (!empty($_SESSION['userid']) ? intval($_SESSION['userid']) : 1);
+		$company_id = 1;
+		if (!empty($get['company_id'])) {
+			$company_id = intval($get['company_id']);
+		} elseif (!empty($_SESSION['company_id'])) {
+			$company_id = intval($_SESSION['company_id']);
+		}
+
+		$emp_id = 0;
+		if (!empty($post['emp_id'])) {
+			$emp_id = intval($post['emp_id']);
+		} elseif (!empty($get['emp_id'])) {
+			$emp_id = intval($get['emp_id']);
+		}
+
+		$date = '';
+		if (!empty($post['date'])) {
+			$date = trim($post['date']);
+		} elseif (!empty($get['date'])) {
+			$date = trim($get['date']);
+		}
+
+		$user_id = 1;
+		if (!empty($get['user_id'])) {
+			$user_id = intval($get['user_id']);
+		} elseif (!empty($_SESSION['userid'])) {
+			$user_id = intval($_SESSION['userid']);
+		}
 
 		$start_date = !empty($post['start_date']) ? $post['start_date'] : date('Y-m-d', strtotime('monday this week', strtotime($date)));
 		$end_date = !empty($post['end_date']) ? $post['end_date'] : date('Y-m-d', strtotime('sunday this week', strtotime($date)));

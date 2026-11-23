@@ -567,38 +567,6 @@ class mobileUserClass extends userClass{
 			$list_table[$apdata->list_page_name] = $apdata->application_table_name;
 			$transtables[$apdata->application_table_name] = $apdata->application_table_name;
 		}
-		/**
-		 $approval_query = "SELECT ta.id, ta.module_setup_id, ta.transaction_id, ta.transaction_table FROM transaction_approval_logs ta WHERE ta.company_id = ".$get['company_id']." AND ta.module_setup_id = ".$get['module_id']." AND ta.user_id = ".$get['user_id']." AND ta.response_type != 0";
-		$app_data = $callConfig->getAllRows($approval_query);
-		//print_r($app_data); exit;
-
-		foreach((array)$app_data as $app){
-
-			$query = "SELECT tb.transaction_number, tb.total_amount, tb.transaction_date, tb.current_status, au.display_name originator_name, au.user_photo originator_image, sp.name status_name FROM ".$app->transaction_table."  tb, application_users au, status_progress sp  WHERE tb.id=".$app->transaction_id." AND tb.originator = au.id AND sp.table_name = '".$app->transaction_table."' AND tb.current_status = sp.status";
-			//echo $query; exit;
-			$list_data = $callConfig->getRow($query);
-			print_r($list_data);
-			if($list_data->current_status!=30){
-			    $data=(array)$app;
-				$data['transaction_number']=$list_data->transaction_number;
-				$data['total_amount']=$list_data->total_amount;
-				$data['transaction_date']=$list_data->transaction_date;
-				$data['current_status']=$list_data->current_status;
-				$data['background_color']=$arr_status[$list_data->current_status]['background_color'];
-				$data['text_color']=$arr_status[$list_data->current_status]['color'];
-				$data['status_name']= $list_data->status_name;
-				$data['originator_name']= $list_data->originator_name;
-				$data['originator_initial']= $this->initials($list_data->originator_name);
-				$data['originator_image']= $list_data->originator_image;
-				$all_data[$app->transaction_table][] =$data;
-			}
-
-		}
-
-		**/
-
-
-
 
 		foreach($transtables as $transtab){
 			$approval_query = "SELECT  transtable.id, tal.request_date, tal.response_type, tal.send_back_flag, tal.call_back, transtable.transaction_number, transtable.transaction_date, transtable.originator, transtable.party_name, transtable.amount, transtable.tax_amount, transtable.discount_amount, transtable.total_amount,transtable.shipping_amount, transtable.pending_amount, transtable.cost_center_id, transtable.current_status FROM transaction_approval_logs tal, ".$transtab." transtable WHERE tal.transaction_table = '".$transtab."' AND tal.transaction_id = transtable.id AND  tal.company_id = '".$get['company_id']."' AND tal.company_id = transtable.company_id AND tal.user_id = '".$get['user_id']."' AND tal.send_back_flag = 0 AND tal.response_type != 30 AND tal.call_back = 1 AND tal.response_type !='0' ORDER BY tal.request_date DESC";
@@ -2198,15 +2166,12 @@ class mobileUserClass extends userClass{
 	 	$application_userssql = "SELECT id,display_name, cost_center, location_id, default_warehouse_id, work_station_id, country_id, default_state_id, default_currency_id FROM application_users WHERE company_id = '".$company_id."' AND id = '".$get['user_id']."' AND is_active = 0";
 		$application_usersres =  $callConfig->getRow($application_userssql);
 
-		if($customer_id==''){
-			if($post['customer_ref_id']!=""){
-				$quer = "SELECT * FROM field_work_daily_plans WHERE id=".$post['customer_ref_id'];
-				$cuser = $callConfig->getRow($quer);
-				$insert_array = array('company_id'=>$get['company_id'], 'title'=>$cuser->contact_person, 'display_name'=>$cuser->contact_person, 'phone'=>$cuser->mobile, 'billing_address'=>$cuser->plan_address, 'customer_longitude'=>$cuser->plan_longitude, 'customer_latitude'=>$cuser->plan_latitude, 'current_status'=>'0', 'is_active'=>'0', 'created_by'=>$get['user_id']);
-				$cus_res=$callConfig->insertRecord('customers',$insert_array);
-				$customer_id = $cus_res['LASTID'];
-			}
-
+		if($customer_id=='' && $post['customer_ref_id']!=""){
+			$quer = "SELECT * FROM field_work_daily_plans WHERE id=".$post['customer_ref_id'];
+			$cuser = $callConfig->getRow($quer);
+			$insert_array = array('company_id'=>$get['company_id'], 'title'=>$cuser->contact_person, 'display_name'=>$cuser->contact_person, 'phone'=>$cuser->mobile, 'billing_address'=>$cuser->plan_address, 'customer_longitude'=>$cuser->plan_longitude, 'customer_latitude'=>$cuser->plan_latitude, 'current_status'=>'0', 'is_active'=>'0', 'created_by'=>$get['user_id']);
+			$cus_res=$callConfig->insertRecord('customers',$insert_array);
+			$customer_id = $cus_res['LASTID'];
 		}
 		$customer_userssql = "SELECT id, display_name, email, customer_tax_reg_no, phone, billing_address, shipping_address  FROM customers WHERE company_id = '".$company_id."' AND id = '".$customer_id."' AND is_active = 0";
 		$customer =  $callConfig->getRow($customer_userssql);
@@ -2237,14 +2202,14 @@ class mobileUserClass extends userClass{
 					if($tablefield['type'] != 'function'){
 						$reverkeyvaluearay = array();
 						foreach($tablefield['res'] as $kkey=>$valuu){
-							$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+							$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 							$reverkeyvaluearay[$removewhinewline] = $kkey;
 						}
 						$fieldkeywithvalue[$key] = $reverkeyvaluearay;
 					}else{
 						$reverkeyvaluearay = array();
 						foreach($tablefield as $kkey=>$valuu){
-							$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+							$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 							$reverkeyvaluearay[$removewhinewline] = $kkey;
 						}
 						$fieldkeywithvalue[$key] =  $reverkeyvaluearay;
@@ -3047,8 +3012,6 @@ class mobileUserClass extends userClass{
 		$query = "SELECT id, project_phase_name FROM project_phases WHERE company_id =".$get['company_id']." AND project_id=".$get['project_id']." AND is_active=0";
     	$project_phases = $callConfig->getAllRows($query);
     	$return['project_phases'] = $project_phases;
-    	if($get['rid']!=""){
-    	}
     	return $return;
     }
     public function togetmobiletaskdetailsall($get){
@@ -3283,8 +3246,6 @@ class mobileUserClass extends userClass{
 	}
 	public function mobileuserlogout($get){
 		global $callConfig;
-		$update = "update user_mobile_details set is_active = NULL, updated_by = ".$get['user_id']." where user_id ='".$get['user_id']."' AND is_active = 0";
-		$update_data=$callConfig->executeQuery($update);
 		$update = "update user_mobile_details set is_active = NULL, updated_by = ".$get['user_id']." where user_id ='".$get['user_id']."' AND is_active = 0";
 		$update_data=$callConfig->executeQuery($update);
 		$upquery = "UPDATE appliccation_user_login_tokens SET s_active = NULL, updated_by = ".$get['user_id']." WHERE company_id= ".$get['company_id']." AND user_id = ".$get['user_id']." AND login_type = 'Mobile' AND is_active=0";
@@ -3707,184 +3668,6 @@ class mobileUserClass extends userClass{
 		return $return;
 	}
 
-
-	/**
-	public function insertMobiDynamicMappingTransactions($get, $post){
-		global $callConfig;
-		$return = array();
-		$return['get'] = $get;
-		$return['post'] = $post;
-
-		$transaction_table= $post['transaction_table'];
-		$transaction_date = $this->dateconvertdbformat($post['transaction_date']);
-		$originator= $post['originator'];
-		$party_id= $post['party_id'];
-		$place_of_supply= $post['place_of_supply'];
-		$amount= $post['amount'];
-		$tax_amount= $post['tax_amount'];
-		$total_amount= $_POST['total_amount'];
-		$doc_ref_no= $_POST['doc_ref_no'];
-		$doc_ref_date= $this->dateconvertdbformat($_POST['doc_ref_date']);
-		$ref_type= $_POST['ref_type'];
-		$ref_id= $_POST['ref_id'];
-		$ref_no= $_POST['ref_no'];
-		$ref_date = $this->dateconvertdbformat($_POST['ref_date']);
-
-
-		$ref_table_dmtsql = "SELECT id, page_title, application_table_name,display_table,item_table,tax_table FROM `dynamic_mapping_tables` WHERE company_id = '".$post['company_id']."' AND application_table_name = '".$transaction_table."' AND is_active = 0 AND item_table !='' AND tax_table!=''";
-		$ref_table_dmtres=$callConfig->getRow($ref_table_dmtsql);
-
-		if($ref_table_dmtres->item_table !="" AND $ref_table_dmtres->tax_table !=""){
-
-			$originatorsql = "SELECT * FROM application_users WHERE company_id = '".$post['company_id']."' AND id = '".$originator."' AND is_active = 0";
-			$originatorres=$callConfig->getRow($originatorsql);
-
-
-			$display_attribute_typessql = "SELECT content FROM display_attribute_types WHERE company_id = '".$post['company_id']."' AND application_table_name = '".$transaction_table."' AND field_name = 'party_id'";
-			$parttable_name = $callConfig->getRow($display_attribute_typessql);
-			$qquery = urldecode($parttable_name->content);
-			$explosql = explode("FROM", $qquery); // splite from to get table name and other part get
-			if(isset($explosql[1])){
-				$explosql = explode(" ", trim($explosql[1])); //splite to space only get table name
-			}
-			$partytable = trim($explosql[0]); //get Table name
-			if($partytable !=""){
-				$partysql = "SELECT * FROM ".$partytable." WHERE company_id = ".$post['company_id']." AND id = ".$party_id." AND is_active = 0";
-				$partyres = $callConfig->getRow($partysql);
-			}
-
-
-			$payment_term_historyary[] = array('amount'=>$total_amount,'due_date'=>$transaction_date,'extra_amt'=>'0','extra_date'=>'','percentage'=>'100','tax_amount'=>$tax_amount,'without_tax_amount'=>$total_amount);
-			$payment_term_history = json_encode($payment_term_historyary);
-
-
-
-			if($place_of_supply !=""){
-				$sqlgstbill = "SELECT * FROM `customer_vendor_gst_billing_details` WHERE company_id = ".$post['company_id']." AND id = '".$place_of_supply."' AND is_active = 0";
-				$gstbillres = $callConfig->getRow($sqlgstbill);
-				$party_tax_number = $gstbillres->gstin!=""?$gstbillres->gstin:$partyres->gstin;
-				$party_phone = $gstbillres->phone!=""?$gstbillres->phone:$partyres->phone;
-				$party_address = $gstbillres->billing_address!=""?$gstbillres->billing_address:$partyres->billing_address;
-				$party_ship_adderss = $gstbillres->shipping_address!=""?$gstbillres->shipping_address:$partyres->shipping_address;
-				$supplier_state_id= $gstbillres->shipping_state!=""?$gstbillres->shipping_state:$partyres->shipping_state;
-				$party_email= $gstbillres->email!=""?$gstbillres->email:$partyres->email;
-			}else{
-				$party_tax_number = $partyres->gstin;
-				$party_phone = $partyres->phone;
-				$party_address = $partyres->billing_address;
-				$party_ship_adderss = $partyres->shipping_address;
-				$supplier_state_id=  $partyres->shipping_state;
-				$party_email = $partyres->email;
-			}
-			if($originatorres->default_state_id == $supplier_state_id){
-				$tax_state = "S";
-			}else{
-				$tax_state = "I";
-			}
-			$payment_terms = $partyres->payment_terms!=""?$partyres->payment_terms:1;
-	        $mainfieldsary=array('company_id'=>$post['company_id'],'transaction_date'=>$transaction_date,'transaction_location_id'=>$originatorres->location_id,'transaction_warehouse_id'=>$originatorres->default_warehouse_id,'currency_id'=>$originatorres->default_currency_id,'currency_rate'=>1,'originator'=>$originator,'party_id'=>$partyres->id,'party_name'=>$partyres->company,'party_tax_number'=>$party_tax_number,'party_email'=>$party_email,'party_phone'=>$party_phone,'party_address'=>$party_address,'party_ship_adderss'=>$party_ship_adderss,'place_of_supply'=>$place_of_supply,'payment_terms'=>$payment_terms,'amount'=>$amount,'tax_amount'=>$tax_amount,'total_amount'=>$total_amount,'ref_type'=>$ref_type,'ref_id'=>$ref_id,'ref_no'=>$ref_no,'ref_date'=>$ref_date,'cost_center_id'=>$originatorres->cost_center,'originator_currency_id'=>$originatorres->default_currency_id,'originator_state_id'=>$originatorres->default_state_id,'supplier_state_id'=>$supplier_state_id,'due_date'=>$transaction_date, 'pending_amount'=>$total_amount,'doc_ref_no'=>$doc_ref_no,'doc_ref_date'=>$doc_ref_date,'tax_state'=>$tax_state,'current_status'=>ST_ACTIVE);
-
-	        if($post['discount_amount'] !="" AND $post['discount_amount'] !="0"){
-	        	$mainfieldsary['discount_type'] = 'A';
-	        	$mainfieldsary['discount_value'] = $post['discount_amount'];
-	        	$mainfieldsary['discount_amount'] = $post['discount_amount'];
-	        }
-	        if($post['rounding_off'] !="" AND $post['rounding_off'] !="0"){
-	        	$mainfieldsary['rounding_off'] = $post['rounding_off'];
-	        }
-
-	        //,'payment_term_history'=>$payment_term_history
-	        if($post['rid'] !=""){
-	        	$mainfieldsary['updated_by']=$post['user_id'];
-				$mainfieldsary['updated_date']=date('Y-m-d H:i:s');
-	        	$insert_data=$callConfig->updateRecord($transaction_table,$mainfieldsary,'id',$post['rid']);
-	        	$insert_id = $post['rid'];
-	        	$callConfig->updateRecord($ref_table_dmtres->item_table,array('is_active'=>NULL),'transaction_id',$post['rid']);
-	        	$callConfig->updateRecord($ref_table_dmtres->tax_table,array('is_active'=>NULL),'transaction_id',$post['rid']);
-			}else{
-				$transaction_number = $this->toGetApplicationSerialNumber($transaction_table,$post);
-				$mainfieldsary['transaction_number'] = $transaction_number;
-				$mainfieldsary['is_active']=0;
-				$mainfieldsary['current_status']=0;
-				$mainfieldsary['created_by']=$post['user_id'];
-				$mainfieldsary['created_date']=date('Y-m-d H:i:s');
-				$insert_data=$callConfig->insertRecord($transaction_table,$mainfieldsary);
-				$insert_id = $insert_data['LASTID'];
-				$return['insert_data'] = $insert_data;
-			}
-		}
-
-			if($insert_data['status'] == 'sucess'){
-
-
-
-				foreach($post['items'] as $itemsdetails){
-					$ref_transaction_item_table_id = $itemsdetails['ref_transaction_item_table_id'];
-					$ref_transaction_table_id = $itemsdetails['ref_transaction_table_id'];
-					$itemfieldnames=array('company_id'=>$post['company_id'],'transaction_id'=>$insert_id,'item_id'=>$itemsdetails['item_id'],'item_name'=>$itemsdetails['item_name'],'description'=>$itemsdetails['description'],'purchase_uom'=>$itemsdetails['purchase_uom'],'item_quantity'=>$itemsdetails['item_quantity'],'item_price'=>$itemsdetails['item_price'],'item_amount'=>$itemsdetails['item_amount'],'tax_amount'=>$itemsdetails['tax_amount'],'total_amount'=>$itemsdetails['total_amount'],'pending_qty'=>$itemsdetails['item_quantity'],'transaction_qty'=>$itemsdetails['item_quantity'],'is_active'=>'0','discount_amount'=>$post['discount_amount'],'ref_transaction_item_table_id'=>$ref_transaction_item_table_id,'ref_transaction_table_id'=>$ref_transaction_table_id);
-					if($itemsdetails['rid'] !=""){
-						$itemfieldnames['updated_by']=$post['user_id'];
-						$itemfieldnames['updated_date']=date('Y-m-d H:i:s');
-			        	$childtableres=$callConfig->updateRecord($ref_table_dmtres->item_table,$itemfieldnames,'id',$itemsdetails['rid']);
-			        	$childtableres_id = $itemsdetails['rid'];
-					}else{
-						$itemfieldnames['current_status']=0;
-						$itemfieldnames['created_by']=$post['user_id'];
-						$itemfieldnames['created_date']=date('Y-m-d H:i:s');
-						$childtableres=$callConfig->insertRecord($ref_table_dmtres->item_table,$itemfieldnames);
-						$childtableres_id = $childtableres['LASTID'];
-
-					}
-					$return['item_insert_data'][] = $childtableres;
-
-					//tax related part Insert
-					if($childtableres['status'] == 'sucess' AND $itemsdetails['tax_amount']!="0" AND $itemsdetails['tax_amount']!=""){
-						$taxfield=array('company_id'=>$post['company_id'],'transaction_id'=>$insert_id,'transaction_item_id'=>$itemsdetails['item_id'],'tax_id'=>$itemsdetails['tax_id'],'tax_name'=>$itemsdetails['tax_name'],'amount'=>$itemsdetails['item_amount'],'tax_amount'=>$itemsdetails['tax_amount'],'total_amount'=>$itemsdetails['total_amount'],'tax_value'=>$itemsdetails['percentage'],'is_active'=>'0','transaction_item_row_id'=>$childtableres_id);
-
-						if($itemsdetails['tax_row_rid'] !=""){
-							$taxfield['updated_by']=$post['user_id'];
-							$taxfield['updated_date']=date('Y-m-d H:i:s');
-				        	$childtabletaxres=$callConfig->updateRecord($ref_table_dmtres->tax_table,$taxfield,'id',$itemsdetails['tax_row_rid']);
-						}else{
-							$taxfield['current_status']=0;
-							$taxfield['created_by']=$post['user_id'];
-							$taxfield['created_date']=date('Y-m-d H:i:s');
-							$childtabletaxres=$callConfig->insertRecord($ref_table_dmtres->tax_table,$taxfield);
-						}
-
-						$return['tax_insert_data'][] = $childtabletaxres;
-					}
-					//End tax related part Insert
-				} /**/ /**
-			}
-				/**foreach($post['items_id'] as $seqkey=>$itemid){
-
-					$itemfieldnames=array('company_id'=>$post['company_id'],'transaction_id'=>$insert_id,'item_id'=>$post['item_id'][$seqkey],'item_name'=>$post['item_name'][$seqkey],'description'=>$post['description'][$seqkey],'purchase_uom'=>$post['purchase_uom'][$seqkey],'item_quantity'=>$post['item_quantity'][$seqkey],'item_price'=>$post['item_price'][$seqkey],'item_amount'=>$post['item_amount'][$seqkey],'tax_amount'=>$post['tax_amount'][$seqkey],'discount_amount'=>0,'total_amount'=>$post['total_amount'][$seqkey],'pending_qty'=>$post['item_quantity'][$seqkey],'transaction_qty'=>$post['item_quantity'][$seqkey],'created_by'=>$post['user_id'],'created_date'=>date('Y-m-d H:i:s'),'is_active'=>'0');
-					$childtableres=$callConfig->insertRecord($ref_table_dmtres->item_table,$itemfieldnames);
-
-					if($childtableres['status'] == 'sucess' AND $post['tax_amount']!="0" AND $post['tax_amount']!=""){
-
-						$taxfield=array('company_id'=>$post['company_id'],'transaction_id'=>$insert_id,'transaction_item_id'=>$post['item_id'][$seqkey],'tax_id'=>$post['tax_id'][$seqkey],'tax_name'=>$post['tax_name'][$seqkey],'amount'=>$post['item_amount'][$seqkey],'tax_amount'=>$post['tax_amount'][$seqkey],'total_amount'=>$post['total_amount'][$seqkey],'tax_value'=>$post['percentage'][$seqkey],'is_active'=>'0','current_status'=>'0','transaction_item_row_id'=>$childtableres['LASTID']);
-						// if($tax_flag == "S"){
-						// 	$tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txperc1,'tax_amount'=>$txvalc1,'account_code'=>$split_1_gl_account_code),array('tax_name'=>$split_2_name,'tax_percentage'=>$txperc2,'tax_amount'=>$txvalc1,'account_code'=>$split_2_gl_account_code));
-						// 	$taxfield['tax_split_details'] = json_encode($tax_split_details);
-						// }else{
-						// 	$tax_split_details = array(array('tax_name'=>$split_1_name,'tax_percentage'=>$txperc1,'tax_amount'=>$txvalc1,'account_code'=>$split_1_gl_account_code));
-						// 	$taxfield['tax_split_details'] = json_encode($tax_split_details);
-						// }
-						$itax_id2=$callConfig->insertRecord($ref_table_dmtres->tax_table,$taxfield);
-					}
-					//tax related part Insert
-				}
-				**//**
-
-
-
-
-
-		return $return;
-	}
-**/
 	public function getEmailWithDBAndCompanyID($get){
 		global $callConfig;
 		$user_email = $get['user_email'];
@@ -4088,30 +3871,22 @@ class mobileUserClass extends userClass{
 		$payment_terms_transsql = "SELECT id, transaction_table, transaction_id, party_id, due_date, amount, tax_amount, due_amount, pending_amount FROM payment_term_transactions WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND transaction_table IN('sales_invoices','purchase_invoices')";
 		$payment_terms_transres = $callConfig->getAllRows($payment_terms_transsql);
 		foreach($payment_terms_transres as $paytermtran){
-			if($paytermtran->transaction_table == "purchase_invoices"){
-				if(isset($purchase_invoices[$paytermtran->transaction_id])){
-					$purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-				}
+			if($paytermtran->transaction_table == "purchase_invoices" && isset($purchase_invoices[$paytermtran->transaction_id])){
+				$purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
 			}
-			if($paytermtran->transaction_table == "sales_invoices"){
-				if(isset($sales_invoices[$paytermtran->transaction_id])){
-					$sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-				}
+			if($paytermtran->transaction_table == "sales_invoices" && isset($sales_invoices[$paytermtran->transaction_id])){
+				$sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
 			}
 		}
 		$paymentssql = "SELECT paya.id, pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut  FROM payments pay, payment_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.payment_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
 		$paymentsres1 = $callConfig->getAllRows($paymentssql);
 		$vendor_payments = array();
 		foreach($paymentsres1 as $payterm){
-			if($payterm->transaction_table == "purchase_invoices"){
-				if(isset($purchase_invoices[$payterm->transaction_id])){
-					$purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-				}
+			if($payterm->transaction_table == "purchase_invoices" && isset($purchase_invoices[$payterm->transaction_id])){
+				$purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
 			}
-			if($payterm->transaction_table == "sales_invoices"){
-				if(isset($sales_invoices[$payterm->transaction_id])){
-					$sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-				}
+			if($payterm->transaction_table == "sales_invoices" && isset($sales_invoices[$payterm->transaction_id])){
+				$sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
 			}
 		}
 
@@ -4239,30 +4014,22 @@ public function GETProcurementModulesDashboardSummary($get){
 		$payment_terms_transsql = "SELECT id, transaction_table, transaction_id, party_id, due_date, amount, tax_amount, due_amount, pending_amount, advance_offer_date, advance_offer_amount FROM payment_term_transactions WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND transaction_table IN('sales_invoices','purchase_invoices')";
 		$payment_terms_transres = $callConfig->getAllRows($payment_terms_transsql);
 		foreach($payment_terms_transres as $paytermtran){
-			if($paytermtran->transaction_table == "purchase_invoices"){
-				if(isset($purchase_invoices[$paytermtran->transaction_id])){
-					$purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-				}
+			if($paytermtran->transaction_table == "purchase_invoices" && isset($purchase_invoices[$paytermtran->transaction_id])){
+				$purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
 			}
-			if($paytermtran->transaction_table == "sales_invoices"){
-				if(isset($sales_invoices[$paytermtran->transaction_id])){
-					$sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-				}
+			if($paytermtran->transaction_table == "sales_invoices" && isset($sales_invoices[$paytermtran->transaction_id])){
+				$sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
 			}
 		}
 		$paymentssql = "SELECT paya.id, pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut  FROM payments pay, payment_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.payment_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
 		$paymentsres1 = $callConfig->getAllRows($paymentssql);
 		$vendor_payments = array();
 		foreach($paymentsres1 as $payterm){
-			if($payterm->transaction_table == "purchase_invoices"){
-				if(isset($purchase_invoices[$payterm->transaction_id])){
-					$purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-				}
+			if($payterm->transaction_table == "purchase_invoices" && isset($purchase_invoices[$payterm->transaction_id])){
+				$purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
 			}
-			if($payterm->transaction_table == "sales_invoices"){
-				if(isset($sales_invoices[$payterm->transaction_id])){
-					$sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-				}
+			if($payterm->transaction_table == "sales_invoices" && isset($sales_invoices[$payterm->transaction_id])){
+				$sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
 			}
 		}
 
@@ -4669,189 +4436,6 @@ public function GETProcurementModulesDashboardSummaryBalanceSheets($get){
         ]
     ];
 }
-
-/**
-function GETProcurementModulesDashboardSummaryBalanceSheets($get){
-
-    // STEP 1: Get data (your existing function)
-	$get['balance_date'] = date('Y-m-d',strtotime($get['start_date']));
-    $get['prev_balance_date']   = date('Y-m-d',strtotime($get['end_date']));
-
-	include_once("account_user.class.php");
-	$accountUserClassonobj = new accountUserClass();
-    $result = $accountUserClassonobj->getBalanceSheetReport($get);
-
-  //  $balances = $result['balances'];
-    //$prev_balances = $result['prev_balances'];
-    $balances = json_decode(json_encode($result['balances']), true);
-$prev_balances = json_decode(json_encode($result['prev_balances']), true);
-    // STEP 2: Recursive total calculator
-    $calculateTotals = function($balances){
-        $children = [];
-        $totals = [];
-        foreach ($balances as $row) {
-            $parent = $row['parent_account_code'] ?? 0;
-            $children[$parent][] = $row;
-        }
-        $calc = function($parent) use (&$calc, &$children, &$totals) {
-            $sum = 0;
-            if (!empty($children[$parent])) {
-                foreach ($children[$parent] as $child) {
-
-                    $code = $child['account_code'];
-                    $self = $child['closing_balance'] ?? 0;
-                    $childSum = $calc($code);
-                    $total = $self + $childSum;
-                    $totals[$code] = ($totals[$code] ?? 0) + $total;
-                    $sum += $total;
-                }
-            }
-            return $sum;
-        };
-        $calc(0);
-        return $totals;
-    };
-
-    // STEP 3: Get totals
-    $currentTotals = $calculateTotals($balances);
-    $prevTotals    = $calculateTotals($prev_balances);
-
-    // Safe getter
-    $val = function($arr, $key){
-        return isset($arr[$key]) ? $arr[$key] : 0;
-    };
-    // STEP 4: Final ARRAY (same as your HTML structure)
-    return [
-        "equity_liabilities" => [
-            "shareholders_funds" => [
-                "share_capital" => [
-                    "current" => $val($currentTotals,'30000210'),
-                    "previous" => $val($prevTotals,'30000210')
-                ],
-                "reserves_surplus" => [
-                    "current" => $val($currentTotals,'30000250'),
-                    "previous" => $val($prevTotals,'30000250')
-                ],
-                "share_warrants" => [
-                    "current" => $val($currentTotals,'30000400'),
-                    "previous" => $val($prevTotals,'30000400')
-                ]
-            ],
-            "non_current_liabilities" => [
-                "long_term_borrowings" => [
-                    "current" => $val($currentTotals,'20001100'),
-                    "previous" => $val($prevTotals,'20001100')
-                ],
-                "deferred_tax_liabilities" => [
-                    "current" => $val($currentTotals,'2002200'),
-                    "previous" => $val($prevTotals,'2002200')
-                ],
-                "other_long_term_liabilities" => [
-                    "current" => $val($currentTotals,'2002300'),
-                    "previous" => $val($prevTotals,'2002300')
-                ],
-                "long_term_provisions" => [
-                    "current" => $val($currentTotals,'2002400'),
-                    "previous" => $val($prevTotals,'2002400')
-                ]
-            ],
-
-            "current_liabilities" => [
-                "short_term_borrowings" => [
-                    "current" => $val($currentTotals,'2003100'),
-                    "previous" => $val($prevTotals,'2003100')
-                ],
-                "trade_payables" => [
-                    "current" => $val($currentTotals,'20003500'),
-                    "previous" => $val($prevTotals,'20003500')
-                ],
-                "other_current_liabilities" => [
-                    "current" => $val($currentTotals,'2004000'),
-                    "previous" => $val($prevTotals,'2004000')
-                ],
-                "short_term_provisions" => [
-                    "current" => $val($currentTotals,'2004300'),
-                    "previous" => $val($prevTotals,'2004300')
-                ]
-            ]
-        ],
-
-        "assets" => [
-
-            "non_current_assets" => [
-                "property_plant_equipment" => [
-                    "current" => $val($currentTotals,'10001100'),
-                    "previous" => $val($prevTotals,'10001100')
-                ],
-                "intangible_assets" => [
-                    "current" =>
-                        $val($currentTotals,'10001400') +
-                        $val($currentTotals,'10001500') +
-                        $val($currentTotals,'10001700')
-                    ,
-                    "previous" =>
-                        $val($prevTotals,'10001400') +
-                        $val($prevTotals,'10001500') +
-                        $val($prevTotals,'10001700')
-
-                ],
-                "capital_work_in_progress" => [
-                    "current" => $val($currentTotals,'10001600'),
-                    "previous" => $val($prevTotals,'10001600')
-                ],
-                "intangible_under_dev" => [
-                    "current" => $val($currentTotals,'10001700'),
-                    "previous" => $val($prevTotals,'10001700')
-                ],
-                "non_current_investments" => [
-                    "current" => $val($currentTotals,'10001800'),
-                    "previous" => $val($prevTotals,'10001800')
-                ],
-                "deferred_tax_assets" => [
-                    "current" => $val($currentTotals,'10002400'),
-                    "previous" => $val($prevTotals,'10002400')
-                ],
-                "long_term_loans" => [
-                    "current" => $val($currentTotals,'10002300'),
-                    "previous" => $val($prevTotals,'10002300')
-                ],
-                "other_non_current_assets" => [
-                    "current" => $val($currentTotals,'10002100'),
-                    "previous" => $val($prevTotals,'10002100')
-                ]
-            ],
-
-            "current_assets" => [
-                "current_investments" => [
-                    "current" => $val($currentTotals,'10003100'),
-                    "previous" => $val($prevTotals,'10003100')
-                ],
-                "inventories" => [
-                    "current" => $val($currentTotals,'10003400'),
-                    "previous" => $val($prevTotals,'10003400')
-                ],
-                "trade_receivables" => [
-                    "current" => $val($currentTotals,'10003900'),
-                    "previous" => $val($prevTotals,'10003900')
-                ],
-                "cash_bank_balance" => [
-                    "current" => $val($currentTotals,'10005000'),
-                    "previous" => $val($prevTotals,'10005000')
-                ],
-                "short_term_loans" => [
-                    "current" => $val($currentTotals,'10006000'),
-                    "previous" => $val($prevTotals,'10006000')
-                ],
-                "other_current_assets" => [
-                    "current" => $val($currentTotals,'10008000'),
-                    "previous" => $val($prevTotals,'10008000')
-                ]
-            ]
-        ]
-    ];
-}
-
-**/
 
 //End balance Sheets
 
@@ -5468,8 +5052,6 @@ $creditside = array('credit_notes','payments');
 			$query = "SELECT id, transaction_date, transaction_number FROM $transaction_table  WHERE company_id=$company_id AND doc_ref_no = '".$doc_ref_no."' AND is_active=0 ";
 	        $transaction_details = $callConfig->getRow($query);
 	        $return['GETALREADYADDEDREFRESH'] = $transaction_details;
-
-		}elseif($gettype== "getPaymentTermsResult"){
 
 		}elseif($gettype== "REFTRANSACTIONSTABLES"){
 			$query = "SELECT id, transaction_table, reference_table FROM `dynamic_reference_tables` WHERE company_id = ".$get['company_id']." AND reference_table = '".$transaction_table."' AND is_active = 0";
@@ -6471,7 +6053,6 @@ $creditside = array('credit_notes','payments');
 	    }
 
 	    $new_qty = 0;
-	    $final_cart_id = $cart_id;
 
 	    // cart_type = 1: ADD (increase qty)
 	    if ($cart_type == 1) {
@@ -8169,65 +7750,6 @@ $creditside = array('credit_notes','payments');
 
 		$claimObj=new claimUserClass();
         return $claimObj->insertAndUpdateTrevllingPlans($get, $post);
-
-		/**
-		//echo "<pre>"; print_r($get); print_r($post); exit;
-		$data = json_decode($post['data'],1);
-		//echo "<pre>"; print_r($data); exit;
-		$serial = $this->toGetApplicationSerialNumber('trips',$get);
-		//$data =  $post;
-		//echo "serial".$serial; exit;
-		//print_r($data); exit;
-		$insert_trip = array('company_id'=>$get['company_id'],'transaction_no'=>$serial,'user_id'=>$get['user_id'], 'transaction_date'=>date('Y-m-d'), 'budget_amount'=>'20000', 'trip_name' => $data['trip_name'], 'trip_type' => $data['trip_type'], 'trip_purpose' => $data['work_description'], 'project_id' => $data['project_id'], 'customer_id' => $data['client_id'],  'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id'], 'api_data'=> json_encode($data));
-		//print_r($insert_trip); exit;
-		$res=$callConfig->insertRecord('trips',$insert_trip);
-		//print_r($res); exit;
-		$return = $res;
-		$res['main_insert'] = $insert_trip;
-		$trip_id =$res['LASTID'];
-		$stops = $data['stops'];
-		$rr=1;
-		$array = array('flight_legs'=>'1','car_details'=>'2','bus_details'=>'3','own_vehicle_details'=>'4');
-		foreach((array)$stops as $key=>$stop){
-			$rr =$array[$key];
-			foreach($stop as $val){
-				//foreach($vals as $val){
-				//print_r($vals); echo $key;  exit;
-				if($key =='flight_legs' || ( isset($val['trip_type']) && $val['trip_type'] =='intercity') ){
-					//echo "RRRRRR".$rr."--".$key; print_r($val);
-					$insert_trip_dom = array('company_id'=>$get['company_id'], 'trip_id' => $trip_id, 'user_id' => $get['user_id'], 'journey_type' => $rr, 'origin_location' => $val['from_city_id'], 'destination_location' => $val['to_city_id'],'departure_date' => $val['departure_date'], 'departure_time' => $val['departure_time'],'return_date' => $val['return_date'], 'travel_mode' => $rr, 'return_time' => $val['return_time'],   'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
-					$res['dom_insert'][] = $insert_trip_dom ;
-					$res['dom'][]=$callConfig->insertRecord('domestic_round_trips',$insert_trip_dom);
-				}else{
-					//echo "CCCCC".$rr."--".$key; print_r($val);
-					$departure_date = $val['departure_date'] !="" ? date('Y-m-d H:i:s', strtotime($val['departure_date']." ". $val['departure_time'])) : "";
-					$insert_trip_loc = array('company_id'=>$get['company_id'], 'journey_type'=> $rr,'trip_id' => $trip_id, 'user_id' => $get['user_id'], 'trip_purpose' => $val['trip_purpose'], 'trip_date' => $val['departure_date'], 'from_location' => $val['from_city_id'],'to_location' => $val['to_city_id'],'travel_mode' => $rr, 'pickup_at' => $departure_date,'dropoff_at' => $val['dropoff_at'], 'is_active'=>0,'current_status'=>0,'created_by'=>$get['user_id']);
-					$res['loc_insert'][] = $insert_trip_loc ;
-					$res['loc'][]=$callConfig->insertRecord('local_trips',$insert_trip_loc);
-
-				}
-			}
-			//}
-
-		}
-		foreach((array)$data['accommodations'] as $hotel){
-			$rec = array(
-                    'company_id'     => $get['company_id'],
-                    'trip_id'        => $trip_id,
-				    'hotel_name'     => $hotel['hotel_name'] ?? null,
-				    'check_in'            => $hotel['check_in'] ,
-				    'check_out'           => $hotel['check_out'],
-				    'location'            => $hotel['city_id'] ?? null,
-				    'description'         => $hotel['description'] ?? null,
-                    'is_active'      => 0,
-                    'current_status' => 0,
-                    'created_by'     => $user_id
-                );
-            $res['hotel'][] = $callConfig->insertRecord('trip_hotels', $rec);
-
-		}
-		$return['estimation'] = '20000';
-		**/
 	}
 	public function togettripsdetails($get){
 		global $callConfig;
@@ -8236,35 +7758,7 @@ $creditside = array('credit_notes','payments');
 		return $return;
 	}
 	public function togettripdetailsbasedid($get){
-		global $callConfig;
 		$return['get'] = $get;
-
-
-
-		/**$query = "SELECT id,  `trip_name`, transaction_no,  transaction_date, `trip_type`, `trip_purpose`, `project_id`, `customer_id`, `budget_amount`, `final_amount` FROM trips  WHERE    company_id=".$get['company_id']." AND id=".$get['trip_id']." AND is_active=0";
-		//$return['query'][] = $query;
-        $data = $callConfig->getRow($query);
-        $return['trip'] = $data;
-        $lis = array('1'=>'flight','2'=>'car','3'=>'bus');
-
-        $query ="SELECT id, `trip_id`, `journey_type`, `user_id`, `trip_purpose`, `origin_location`, `destination_location`, `departure_date`, departure_time,`return_date`, return_time,`travel_mode`, `estimated_cost` FROM domestic_round_trips WHERE company_id=".$get['company_id']." AND  trip_id=".$get['trip_id']." AND is_active =0";
-        //$return['query'][] = $query;
-        $data = $callConfig->getAllRows($query);
-        foreach ((array)$data as $row) {
-               $stop[$lis[$row->journey_type]][] = $row;
-        }
-        $query ="SELECT id, `trip_id`, `user_id`, `trip_purpose`, `journey_type`, `trip_date` as departure_date, `from_location` as origin_location, `to_location` as destination_location, `travel_mode`, `estimated_cost`, `pickup_at`, `dropoff_at`, `car_type`, `driver_needed` FROM local_trips WHERE company_id=".$get['company_id']." AND  trip_id=".$get['trip_id']." AND is_active =0";
-        //$return['query'][] = $query;
-        $data = $callConfig->getAllRows($query);
-        foreach ((array)$data as $row) {
-               $stop[$lis[$row->journey_type]][] = $row;
-        }
-        $return['stops'] = $stop;
-        $query ="SELECT id,`trip_id`, `hotel_name`, `check_in`, `check_out`, `location`, `room_type`, `booking_reference`, `cost` , description FROM trip_hotels WHERE company_id=".$get['company_id']." AND  trip_id=".$get['trip_id']." AND is_active =0";
-        //$return['query'][] = $query;
-        $data = $callConfig->getAllRows($query);
-        $return['trip_hotels'] = $data;
-        **/
         return $return;
 	}
 	public function toupdatetripexpencesdetails($get, $post){
@@ -8383,7 +7877,6 @@ $creditside = array('credit_notes','payments');
 
 			$ss = $this->tosendnotifiations($notdata1);
 			$senddata = array('session_company_id'=>$get['company_id'],'email_content_id'=>$email_content_id, 'project_name'=>$project->project_name,'user_display_name'=>$user->display_name,'cc_users'=>$notuser2,'to_users'=>$notuser1,'task_name'=>$post['task_name'],'assigners_name'=>$assgnuser->display_name);
-			$message = "A new comment has been posted on the task: ".$task_data->task_name;
 			$senddata['push_notiction'] = $mobres;
 			return $senddata;
 
@@ -8517,7 +8010,9 @@ $creditside = array('credit_notes','payments');
 		if(in_array($post['field'], $datafiled)){
 			$msg1 =	"Task ".$taskdetails->task_name."  is updated : ".str_replace("_"," ",$post['field'])." ( ".$post['fielddata']." ) is changed.";
 		}
-		$msg1 = "Task ".$taskdetails->task_name." is assigned to ".$taskowner->display_name;
+		if($post['field'] == 'assigen_id' && !empty($taskowner->display_name)){
+			$msg1 = "Task ".$taskdetails->task_name." is assigned to ".$taskowner->display_name;
+		}
 		$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$taskdetails->id, 'application_table_name'=>'project_task_details', 'type'=>'INFORMATION', 'notification_users'=>$notuser,'option'=>'COM_VIEW_PROJECT_KANBAN&RID='.$taskdetails->project_id,'module_setup_id'=>25);
 		$ss = $this->tosendnotifiations($notdata1);
 		$owneuser[$taskowner->id] = $taskowner->id; // taskowner

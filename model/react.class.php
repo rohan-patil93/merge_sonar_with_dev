@@ -1,3 +1,4 @@
+
 <?php
 class reactClass extends userClass{
 	public function dynamicadddatareact($get, $data){
@@ -196,6 +197,8 @@ class reactClass extends userClass{
 			if( isset($rolepermission['role_page_permission'][$name]) && $rolepermission['role_page_permission'][$name]['permission_list'] == 0){
 				$return =1;
 			}
+		if($return == 0 && isset($rolepermission['role_page_permission'][$name]) && $rolepermission['role_page_permission'][$name]['permission_list'] == 0){
+			$return =1;
 		}
 
 	//approval check
@@ -1630,6 +1633,18 @@ class reactClass extends userClass{
 			$details['reminder_days'] = !empty($details['reminder_days']) ? (json_decode($details['reminder_days'], true) ?: array()) : array();
 			$details['completion_rules'] = !empty($details['completion_rules']) ? (json_decode($details['completion_rules'], true) ?: array()) : array();
 			$details['escalation_config'] = !empty($details['escalation_config']) ? (json_decode($details['escalation_config'], true) ?: array()) : array();
+			$details['reminder_days'] = !empty($details['reminder_days']) ? json_decode($details['reminder_days'], true) : array();
+			if (empty($details['reminder_days']) || !is_array($details['reminder_days'])) {
+				$details['reminder_days'] = array();
+			}
+			$details['completion_rules'] = !empty($details['completion_rules']) ? json_decode($details['completion_rules'], true) : array();
+			if (empty($details['completion_rules']) || !is_array($details['completion_rules'])) {
+				$details['completion_rules'] = array();
+			}
+			$details['escalation_config'] = !empty($details['escalation_config']) ? json_decode($details['escalation_config'], true) : array();
+			if (empty($details['escalation_config']) || !is_array($details['escalation_config'])) {
+				$details['escalation_config'] = array();
+			}
 			$return['details'] = $details;
 		}
 
@@ -1646,6 +1661,10 @@ class reactClass extends userClass{
 				if (!isset($assetsByLocation[$locKey])) {
 					$assetsByLocation[$locKey] = array();
 				}
+				$serviceSlots = !empty($asset['service_slots']) ? json_decode($asset['service_slots'], true) : array();
+				if (empty($serviceSlots) || !is_array($serviceSlots)) {
+					$serviceSlots = array();
+				}
 				$assetsByLocation[$locKey][] = array(
 					'id' => $asset['id'] ?? '',
 					'asset_id' => $asset['asset_id'] ?? '',
@@ -1655,6 +1674,7 @@ class reactClass extends userClass{
 					'service_start_date' => $asset['service_start_date'] ?? '',
 					'service_end_date' => $asset['service_end_date'] ?? '',
 					'service_slots' => !empty($asset['service_slots']) ? (json_decode($asset['service_slots'], true) ?: array()) : array(),
+					'service_slots' => $serviceSlots,
 				);
 			}
 		}

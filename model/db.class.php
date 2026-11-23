@@ -156,6 +156,8 @@ class configClass
 				if($type == "SELECT"){
 					preg_match("/FROM\s+([\w\d_]`+)/i", $query, $matches1);
 					preg_match("/FROM\s+([\w\d_]+)/i", $query, $matches2);
+					preg_match("/FROM\s+([\w`]+)/i", $query, $matches1);
+					preg_match("/FROM\s+([\w]+)/i", $query, $matches2);
 					if(!empty($matches1[1])){
 						$table = $matches1[1];
 					}else{
@@ -570,6 +572,7 @@ class configClass
 			$res= mysqli_query($this->con,$query);
 			if (!$res) {
 			}else{
+			if ($res) {
 			   $values=mysqli_fetch_object($res);
 			}
 			return $values;
@@ -591,6 +594,7 @@ class configClass
 			$res=mysqli_query($this->con, $query);
 			if (!$res) {
 			}else{
+			if ($res) {
 				while($rows=mysqli_fetch_object($res)){
 					$values[]=$rows;
 				}

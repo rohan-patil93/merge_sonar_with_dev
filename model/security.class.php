@@ -706,6 +706,22 @@ public function getVisitorsDataBasedOnDate($get)
                     if ($newId > 0) {
                         $post['delivery_company_person'] = $newName; // use inserted value
                     }
+        if (($post['visit_type'] ?? '') === 'delivery' && !empty($post['delivery_company_person']) && $post['delivery_company_person'] === '__new__') {
+            $newName = trim($post['new_delivery_company'] ?? '');
+            if ($newName !== '') {
+                $ins = [
+                    'company_id'        => $company_id,
+                    'option_type'       => 'delivery_company',
+                    'option_value'      => $newName,
+                    'option_label'      => $newName,
+                    'is_active'         => 0,
+                    'created_date'      => date('Y-m-d H:i:s'),
+                    'created_by'        => $user_id ?: null,
+                ];
+                $res = $callConfig->insertRecord('visitor_options', $ins);
+                $newId = (int)($res['LASTID'] ?? 0);
+                if ($newId > 0) {
+                    $post['delivery_company_person'] = $newName; // use inserted value
                 }
             }
         }
@@ -728,6 +744,19 @@ public function getVisitorsDataBasedOnDate($get)
                         'created_by'        => $user_id ?: null,
                     ];
                     $res = $callConfig->insertRecord('visitor_options', $ins);
+        if (($post['visit_type'] ?? '') === 'service' && !empty($post['service_company']) && $post['service_company'] === '__new__') {
+            $newName = trim($post['new_service_company'] ?? '');
+            if ($newName !== '') {
+                $ins = [
+                    'company_id'        => $company_id,
+                    'option_type'       => 'service_company',
+                    'option_value'      => $newName,
+                    'option_label'      => $newName,
+                    'is_active'         => 0,
+                    'created_date'      => date('Y-m-d H:i:s'),
+                    'created_by'        => $user_id ?: null,
+                ];
+                $res = $callConfig->insertRecord('visitor_options', $ins);
                     $newId = (int)($res['LASTID'] ?? 0);
                     if ($newId > 0) {
                         $post['service_company'] = $newName; // use inserted value
@@ -1695,6 +1724,8 @@ public function getVisitorsDataBasedOnDate($get)
             if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
                 $where[] = "DATE(in_datetime) = '{$date}'";
             }
+        if ($date !== '' && preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+            $where[] = "DATE(in_datetime) = '{$date}'";
         }
 
         $whereSql = implode(' AND ', $where);
@@ -2352,6 +2383,9 @@ public function getVisitorsDataBasedOnDate($get)
         $userRow = $callConfig->getRow("SELECT display_name, user_name FROM application_users WHERE id = " .
             $in_security_id);
         $in_guard_name = $userRow ? ($userRow->display_name ?: $userRow->user_name) : '—';
+        if ($userRow) {
+            $in_guard_name = !empty($userRow->display_name) ? $userRow->display_name : $userRow->user_name;
+        }
     }
     $return['in_guard_name'] = $in_guard_name;
 
@@ -2361,6 +2395,9 @@ public function getVisitorsDataBasedOnDate($get)
         $userRow = $callConfig->getRow("SELECT display_name, user_name FROM application_users WHERE id = " .
             $out_security_id);
         $out_guard_name = $userRow ? ($userRow->display_name ?: $userRow->user_name) : '—';
+        if ($userRow) {
+            $out_guard_name = !empty($userRow->display_name) ? $userRow->display_name : $userRow->user_name;
+        }
     }
     $return['out_guard_name'] = $out_guard_name;
 

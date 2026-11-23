@@ -374,6 +374,8 @@ class rentalUserClass extends userClass{
 				if($property_tenant_detailsres->un_lock_tenant_date >= $billinggeneratedate){
 					$billinggeneratedate = $property_tenant_detailsres->un_lock_tenant_date;
 				}
+			if($property_tenant_detailsres->un_lock_tenant_date !="" && $property_tenant_detailsres->lock_tenant =="" && $property_tenant_detailsres->un_lock_tenant_date >= $billinggeneratedate){
+				$billinggeneratedate = $property_tenant_detailsres->un_lock_tenant_date;
 			}
 			$startDate = new DateTime($billinggeneratedate);
 			if($get['extend_agreement_month']!=""){
@@ -480,6 +482,12 @@ class rentalUserClass extends userClass{
 						**/
 
 						}
+					if($rent_escalation_after_month !="" && $rent_escalation_after_month <= $monthincreas && $rent_escalation_percentage !="" && $rent_escalation_percentage !="0" && in_array($monthincreas, (array)$rent_escalation_after_every_month)){
+						$update_rent_escalation_percentage = $rent_escalation_percentage!=""?$rent_escalation_percentage:0;
+						$increase_rent = $monthlyrant[$keyyy]*($update_rent_escalation_percentage/100);
+						$monthlyrant[$keyyy] = $monthlyrant[$keyyy]+$increase_rent;
+						$increase_ret = $per_sq_ft_with_discount[$keyyy]*($update_rent_escalation_percentage/100);
+						$per_sq_ft_with_discount[$keyyy] = $per_sq_ft_with_discount[$keyyy]+$increase_ret;
 					}
 					$perdayrante = $monthlyrant[$keyyy]/$totaldays;
 					$rent_tax = 0;
@@ -2448,6 +2456,7 @@ class rentalUserClass extends userClass{
             }
         } else {
         } /**/
+        }
         return $return;
     }
 
@@ -2765,6 +2774,7 @@ class rentalUserClass extends userClass{
 	                  	$taxData = ['amount' => $post['total_amount'][$key] ?? null,'tax_amount' => $itemData['tax_amount'] ?? null,'total_amount' => $post['total_amount'][$key] ?? null,'updated_date' => date('Y-m-d H:i:s'), 'updated_by' => $post['user_id']];
 	                  	$return['taxdata'][] = $taxData;
 						$resItem = $callConfig->updateRecord('utility_rental_invoice_item_taxes', $taxData, 'id', $post['tax_ids'][$key]);
+						$callConfig->updateRecord('utility_rental_invoice_item_taxes', $taxData, 'id', $post['tax_ids'][$key]);
 	                  }else{
 	                  	$taxData = array('company_id'=>$get['company_id'],'transaction_id'=>$transaction_id,'transaction_item_id'=>$post['item_id'][$key],'tax_id'=>$post['tax_id'][$key],'tax_name'=>$post['tax_name'][$key],'tax_value'=>$post['utility_gst_percentage'][$key],'amount'=>$post['total_amount'][$key],'tax_amount'=>$itemData['tax_amount'] ,'total_amount'=>$post['total_amount'][$key],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
 	                  	$return['taxdata'][] = $taxData;
@@ -2807,6 +2817,7 @@ class rentalUserClass extends userClass{
 	                  	$taxData = ['amount' => $post['total_amount'][$key] ?? null,'tax_amount' => $itemData['tax_amount'] ?? null,'total_amount' => $post['total_amount'][$key] ?? null,'updated_date' => date('Y-m-d H:i:s'), 'updated_by' => $post['user_id']];
 	                  	$return['taxdata'][] = $taxData;
 						$resItem = $callConfig->updateRecord('utility_amc_rental_invoice_item_taxes', $taxData, 'id', $post['tax_ids'][$key]);
+						$callConfig->updateRecord('utility_amc_rental_invoice_item_taxes', $taxData, 'id', $post['tax_ids'][$key]);
 	                  }else{
 	                  	$taxData = array('company_id'=>$get['company_id'],'transaction_id'=>$transaction_id,'transaction_item_id'=>$post['item_id'][$key],'tax_id'=>$post['tax_id'][$key],'tax_name'=>$post['tax_name'][$key],'tax_value'=>$post['utility_gst_percentage'][$key],'amount'=>$post['total_amount'][$key],'tax_amount'=>$itemData['tax_amount'] ,'total_amount'=>$post['total_amount'][$key],'is_active'=>0,'current_status'=>0,'created_by'=>$post['user_id'],'created_date'=>date("Y-m-d H:i:s"));
 	                  	$return['taxdata'][] = $taxData;

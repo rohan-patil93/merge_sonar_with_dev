@@ -83,12 +83,14 @@ $report = array_reverse($report);
 
                     <tr>
                         <td align="right">1</td>
+                        <td class="text-end">1</td>
                         <td><?= __('Profit on sale of immovable property') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right"></td>
+                        <td class="text-end"></td>
                         <td><?= __('( Original Cost - WDV )') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
@@ -105,30 +107,35 @@ $report = array_reverse($report);
 
                     <tr>
                         <td align="right">1</td>
+                        <td class="text-end">1</td>
                         <td><?= __('Premium on shares or debentures') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">2</td>
+                        <td class="text-end">2</td>
                         <td><?= __('Profit on sale of forfeited shares') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">3</td>
+                        <td class="text-end">3</td>
                         <td><?= __('Profit on sale of immovable property') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right"></td>
+                        <td class="text-end"></td>
                         <td><?= __('(Sale Value of Immovable Property - Original Cost)') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">4</td>
+                        <td class="text-end">4</td>
                         <td><?= __('Surplus in P&L on measurement of asset or liability at fair value') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
@@ -141,78 +148,91 @@ $report = array_reverse($report);
 
                     <tr>
                         <td align="right">1</td>
+                        <td class="text-end">1</td>
                         <td><?= __('All the usual Working Charges') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">2</td>
+                        <td class="text-end">2</td>
                         <td><?= __("Director's Remuneration") ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">3</td>
+                        <td class="text-end">3</td>
                         <td><?= __('Bonus or Commission paid to Staff') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">4</td>
+                        <td class="text-end">4</td>
                         <td><?= __('Tax on excess or abnormal profits') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">5</td>
+                        <td class="text-end">5</td>
                         <td><?= __('Tax on business profits imposed for special reasons') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">6</td>
+                        <td class="text-end">6</td>
                         <td><?= __('Interest on Debentures') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">7</td>
+                        <td class="text-end">7</td>
                         <td><?= __('Interest on Loans') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">8</td>
+                        <td class="text-end">8</td>
                         <td><?= __('Expenses on repairs ( other than Capital Expenditure )') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">9</td>
+                        <td class="text-end">9</td>
                         <td><?= __('Contributions made under section 181 ( Bonafide Charitable Trusts )') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">10</td>
+                        <td class="text-end">10</td>
                         <td><?= __('Depreciation') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">11</td>
+                        <td class="text-end">11</td>
                         <td><?= __('Prior period items') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">12</td>
+                        <td class="text-end">12</td>
                         <td><?= __('Legal liability for compensation or damages') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">13</td>
+                        <td class="text-end">13</td>
                         <td><?= __('Insurance Expenses') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
@@ -225,24 +245,28 @@ $report = array_reverse($report);
 
                     <tr>
                         <td align="right">1</td>
+                        <td class="text-end">1</td>
                         <td><?= __('Income Tax') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">2</td>
+                        <td class="text-end">2</td>
                         <td><?= __('Compensations, damages or payments made voluntarily') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">3</td>
+                        <td class="text-end">3</td>
                         <td><?= __('Capital Loss on sale of undertaking or part thereof (Not include losses on sale of asset)') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
 
                     <tr>
                         <td align="right">4</td>
+                        <td class="text-end">4</td>
                         <td><?= __('Expenditure in P&L on measurement of asset or liability at fair value') ?></td>
                         <?php foreach ($report as $r) { ?><td class="text-end"></td><?php } ?>
                     </tr>
@@ -250,6 +274,7 @@ $report = array_reverse($report);
                     <!-- 📊 Net profit as per Section 198 -->
                     <tr>
                         <td align="right"></td>
+                        <td class="text-end"></td>
                         <th scope="col"><?= __('Net profit as per Section 198') ?></th>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end fw-bold"><?= number_format($r['budget']) ?></td>
@@ -259,6 +284,7 @@ $report = array_reverse($report);
                     <!-- 🧮 IN MN. INR -->
                     <tr>
                         <td align="right"></td>
+                        <td class="text-end"></td>
                         <td><?= __('IN MN. INR') ?></td>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end"><?= number_format($r['in_mn'], 2) ?></td>
@@ -268,6 +294,7 @@ $report = array_reverse($report);
                     <!-- 📈 Average Net Profit -->
                     <tr>
                         <td align="right">(!)</td>
+                        <td class="text-end">(!)</td>
                         <th scope="col" class="text-danger"><?= __('Average net profit for last three preceding financial years') ?></th>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end"><?= $r['avg_net_profit'] ? number_format($r['avg_net_profit']) : '-' ?></td>
@@ -277,6 +304,7 @@ $report = array_reverse($report);
                     <!-- 🪙 CSR 2% Amount -->
                     <tr>
                         <td align="right">(!!)</td>
+                        <td class="text-end">(!!)</td>
                         <th scope="col" class="text-danger"><?= __('Amount to be spent on CSR as on March 31 (2% Amt)') ?></th>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end text-danger"><?= number_format($r['two_percent']) ?></td>
@@ -286,6 +314,7 @@ $report = array_reverse($report);
                     <!-- 💸 Amount spent -->
                     <tr>
                         <td align="right">(!!!)</td>
+                        <td class="text-end">(!!!)</td>
                         <th scope="col"><?= __('Amount spent on CSR as on March 31') ?></th>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end "><?= number_format($r['actual_spent']) ?></td>
@@ -295,6 +324,7 @@ $report = array_reverse($report);
                     <!-- 🟥 Unspent / Overspent -->
                     <tr>
                         <td align="right">(!!!!)</td>
+                        <td class="text-end">(!!!!)</td>
                         <th scope="col"><?= __('Amount unspent (+) / Overspent on CSR (-)') ?></th>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end"><?= number_format($r['unspent']) ?></td>
@@ -304,6 +334,7 @@ $report = array_reverse($report);
                     <!-- 🟨 Carry forward -->
                     <tr>
                         <td align="right"></td>
+                        <td class="text-end"></td>
                         <td><?= __('Less : Excess Spent in P.Y. Adjusted in C.Y.') ?></td>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end"><?= number_format($r['carry_forward_used']) ?></td>
@@ -313,6 +344,7 @@ $report = array_reverse($report);
                     <!-- 🧾 Provision -->
                     <tr>
                         <td align="right"><?= __('(iv)'); ?></td>
+                        <td class="text-end"><?= __('(iv)'); ?></td>
                         <th scope="col"><?= __('Amt to be Debited to P&L (Provision amt) as of 31-Mar-') ?><?= $report[0]['year'] ?></th>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end"><?= number_format($r['provision']) ?></td>
@@ -322,6 +354,7 @@ $report = array_reverse($report);
                     <!-- 🟩 Net Amt -->
                     <tr>
                         <td align="right">(v)</td>
+                        <td class="text-end">(v)</td>
                         <th scope="col"><?= __('Net Amt to be Debited to P&L other than Provision amt as of 31-Mar-') ?><?= $report[0]['year'] ?></th>
                         <?php foreach ($report as $r) { ?>
                             <td class="text-end"><?= number_format($r['net_debit']) ?></td>
