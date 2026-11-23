@@ -1,4 +1,8 @@
 <?php
+defined('HDR_LOCATION_OPTION') || define('HDR_LOCATION_OPTION', 'location:index.php?option=');
+defined('API_GET_TABLE') || define('API_GET_TABLE', '?mode=gettabledetails&table=');
+defined('API_GET_TABLE_COND') || define('API_GET_TABLE_COND', '?mode=gettabledetailswithconditions&table=');
+defined('PARAM_DATA') || define('PARAM_DATA', '&data=');
 
 $option = strtoupper($_GET['option']);
 $list = str_replace('INSERT', 'LIST', $option);
@@ -19,9 +23,9 @@ if($_POST['submit1'] == 'Add'){
         if ($_POST['submit_value'] == 'continue'){
                 $LASTID = json_decode($response,1);
                 $nrid = "id:".$LASTID['LASTID'];
-                header("location:index.php?option=".$option."&Rid=".deocdeId($nrid));
+                header(HDR_LOCATION_OPTION.$option."&Rid=".deocdeId($nrid));
             }else{
-                header("location:index.php?option=".$list);
+                header(HDR_LOCATION_OPTION.$list);
             }
     }
 }
@@ -30,7 +34,7 @@ if($_POST['submit1'] == 'Update'){
     $_POST['updated_date'] = nowDate();
     if($_POST['status_values'] == ST_PURCHASE_ORDER_GENRATED){
         $retun_list = toGetpageOptionName('purchase_orders');
-        header("location:index.php?option=".$retun_list['option_url']."&table=".$_POST['table_name']."&Rid=".$_POST['hid']);
+        header(HDR_LOCATION_OPTION.$retun_list['option_url']."&table=".$_POST['table_name']."&Rid=".$_POST['hid']);
     }
     if($_POST['status_values'] == ST_APPROVAL_PENDING){
         $checkurl = API."?mode=tocheckDAO&table=".$_POST['table_name']."&status=".$_POST['status_values']."&amount=".$_POST['grandtotal']."&status_old_value=".$_POST['status_old_value']."&cost_center=".$_POST['cost_center'];
@@ -41,7 +45,7 @@ if($_POST['submit1'] == 'Update'){
         $check_data = callAPI($checkurl);
         $check_data = json_decode($check_data,1);
         if(!isset($check_data['id']) || $check_data['id'] == ''){
-            header("location:index.php?option=".$option."&error=9001&Rid=".deocdeId('id:'.$_POST['hid'])); exit;
+            header(HDR_LOCATION_OPTION.$option."&error=9001&Rid=".deocdeId('id:'.$_POST['hid'])); exit;
         }
     }
     $_POST['file_add'] = $_SESSION['file_add'][$_POST['table_name']][$_POST['hid']];
@@ -49,7 +53,7 @@ if($_POST['submit1'] == 'Update'){
     $url = API."?mode=addinvoietype&table=".$_POST['table_name']."&method=post&type=update";
     $response = file_post_contents($url, $_POST, 'update');
     if ($response) {
-        header("location:index.php?option=".$list);
+        header(HDR_LOCATION_OPTION.$list);
     }
 }
 $originator_tables = array('requisitions', 'petty_cash');
@@ -91,7 +95,7 @@ if(in_array($table_name, (array)$originator_table_withbill)){
     $table1['party_address'] = $locares['location_address'] ." ".$locares['location_city']." ".$locares['location_state']." ".$locares['location_post_code'];
     $table1['party_ship_adderss'] = $locares['location_address'] ." ".$locares['location_city']." ".$locares['location_state']." ".$locares['location_post_code'];
 } else{
-    $cusurl = API."?mode=gettabledetails&table=".TBL_VENDOR;
+    $cusurl = API.API_GET_TABLE.TBL_VENDOR;
     $cusresponse = callAPI($cusurl);
     $cusresponse = json_decode($cusresponse,1);
 }
@@ -111,7 +115,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $vdata1["field"] = "id,transaction_type,user_id,action_log,action_date,status_value";
         $vdata1['order'] = "id DESC";
         $vdata = urlencode(json_encode($vdata1));
-        $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_ACTION_LOG."&data=".$vdata;
+        $vurl = API.API_GET_TABLE_COND.TBL_ACTION_LOG.PARAM_DATA.$vdata;
         $vdata_details = callAPI($vurl);
         $vdata_details = json_decode($vdata_details,1);
 
@@ -275,20 +279,20 @@ $box_url =  API."?mode=gettabledetails&table=petty_cash_boxes";
 $boxlist = callAPI($box_url);
 $boxlist = json_decode($boxlist,1);
 
-$departmentsurl = API."?mode=gettabledetails&table=".TBL_DEPARTMENTS;
+$departmentsurl = API.API_GET_TABLE.TBL_DEPARTMENTS;
 $departmentslist =  callAPI($departmentsurl);
 $departmentslist = json_decode($departmentslist,1);
 
 $crdata["field"] = "id,currency_list";
 $crdata = urlencode(json_encode($crdata));
-$crurl = API."?mode=gettabledetailswithconditions&table=".TBL_CURRENCIES."&data=".$crdata;
+$crurl = API.API_GET_TABLE_COND.TBL_CURRENCIES.PARAM_DATA.$crdata;
 $cr_data = callAPI($crurl);
 $cr_data = json_decode($cr_data, 1);
 $_SESSION['application_table_name'] = $table_name;
 $_SESSION['transaction_id'] = $rid;
 $_SESSION['file_add'][$table_name][$rid]= array();
 
-    $costcenterurl = API."?mode=gettabledetails&table=".TBL_COST_CENTERS;
+    $costcenterurl = API.API_GET_TABLE.TBL_COST_CENTERS;
 
     $cost = callAPI($costcenterurl);
     $cost = json_decode($cost,1);
@@ -301,7 +305,7 @@ $_SESSION['file_add'][$table_name][$rid]= array();
     $data2["field"] = "cost_center_id";
     $data2["where"] = array('user_id'=> $coos_user_id,'is_active'=> '0');
     $costdata = urlencode(json_encode($data2));
-    $costurl = API."?mode=gettabledetailswithconditions&table=".TBL_USERS_COST_CENTERS."&data=".$costdata;
+    $costurl = API.API_GET_TABLE_COND.TBL_USERS_COST_CENTERS.PARAM_DATA.$costdata;
     $costdata = callAPI($costurl);
     $costress = json_decode($costdata, 1);
     foreach ($costress as  $costres) {
@@ -323,7 +327,7 @@ if($table_name == 'petty_cash' || $table_name == 'bills') {
     $petty_cash_style = "style='display:none;'";
 }
 if(in_array($table_name, (array)$stock_table)){
-    $locations_url = API."?mode=gettabledetails&table=".TBL_LOCATIONS;
+    $locations_url = API.API_GET_TABLE.TBL_LOCATIONS;
     $locations_data = callAPI($locations_url);
     $locations_data = json_decode($locations_data, 1);
 }
@@ -1136,9 +1140,7 @@ function calculateTotal(){
                 }
             }else{
                 $commentss = $appruser_data;
-                if($table1['current_status'] == ST_ACTIVE || $table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_SEND_BACK || $table1['current_status'] == ST_QUOTATION_GENERATED || $table1['current_status'] == ST_PURCHASE_ORDER_GENRATED || $table1['current_status'] == ST_APPROVED){
-
-                }else{
+                if(!($table1['current_status'] == ST_ACTIVE || $table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_SEND_BACK || $table1['current_status'] == ST_QUOTATION_GENERATED || $table1['current_status'] == ST_PURCHASE_ORDER_GENRATED || $table1['current_status'] == ST_APPROVED)){
                      $lists = array();
                 }
             }
@@ -1152,26 +1154,19 @@ function calculateTotal(){
 
                 <?php foreach ($lists as $list) {
                     if($list['status'] == ST_QUOTATION_GENERATED ){ ?>
-                    <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'2')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?> </div>
+                    <button type="button" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'2')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?> </button>
                 <?php }elseif( $list['status'] ==  ST_PURCHASE_ORDER_GENRATED || $list['status'] == ST_INVOICE_GENERATED){ ?>
-                    <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'3')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?></div>
+                    <button type="button" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'3')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?></button>
                 <?php }elseif($list['status'] != ST_ACTIVE  && $list['status'] != ST_APPROVAL_PENDING){ ?>
-                    <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'1')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?></div>
+                    <button type="button" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'1')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?></button>
                 <?php }else{?>
-                    <div role="button" tabindex="0" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'4')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?></div>
+                    <button type="button" class="dropdown-item" onclick="changestatus(<?php echo $list['status']; ?>,'4')" name="status" id="status" value="<?php echo $list['status']; ?>"><?php echo $list['action_label']; ?></button>
 
             <?php }
             }?>
             </div>
            <?php  } ?>
         </div>
-       <!--  <div class="btn-group" style="padding: 15px;">
-            <select class="form-control kt-select2" id="status" name="status" aria-label="Status">
-                <?php foreach ($lists as $list) {  ?>
-                    <option  value="<?php echo $selectvalue['name_value']; ?>"><?php echo $list['action_label']; ?></option>
-                <?php  } ?>
-            </select>
-          </div> -->
     <?php } ?>
         <a href="javascript:history.go(-1)" class="btn btn-clean kt-margin-r-10">
             <i class="la la-arrow-left"></i>
@@ -1588,13 +1583,13 @@ function calculateTotal(){
     <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer" style="float: right;">
         <tr>
             <th scope="col" class="amount"><span><?php echo __('Sub Total'); ?></span></th>
-            <td  width="18%">
+            <td style="width: 18%;">
                 <span>
                     <input  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subtotal_debit" id="dis_subtotal_debit" aria-label="<?= htmlspecialchars(__('Dis Subtotal Debit'), ENT_QUOTES, 'UTF-8'); ?>">
                     <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subtotal_debit" id="subtotal_debit"  >
                 </span>
             </td>
-            <td  width="18%">
+            <td style="width: 18%;">
                 <span>
                     <input  type="text" class="form-control amount" readonly value="<?php echo customeummarmonyformate($table1['sub_total']); ?>" name="dis_subtotal_credit" id="dis_subtotal_credit" placeholder="<?php echo __('Subtotal'); ?>" aria-label="<?php echo __('Subtotal'); ?>">
                   <input  type="hidden" class="form-control amount" readonly value="<?php echo $table1['sub_total']; ?>" name="subtotal_credit" id="subtotal_credit" >
@@ -1620,10 +1615,10 @@ function calculateTotal(){
                     <?php } else{?>
 
                         <tr><td style='text-align:right;'> <?= __('IGST @'); ?> <?php echo $takey; ?>% </td>
-                            <td  width='18%'>
+                            <td style="width: 18%;">
                              <input  type='text' class='form-control amount'   readonly  value="<?php echo $ktax['debit_amount']; ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                          </td>
-                         <td  width='18%'>
+                         <td style="width: 18%;">
                            <input  type='text' class='form-control amount' readonly  value="<?php echo $ktax['credit_amount']; ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                        </td></tr>
 
@@ -1785,7 +1780,7 @@ if($rid != ''){
 
 </div></div></div></div>
 
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
             <div class="modal-dialog modal-xl" style="max-width: 800px;">
                 <div class="modal-content" style="min-height: 50px;width: 800px;" id="popup1">
 

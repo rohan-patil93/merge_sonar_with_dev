@@ -1,4 +1,9 @@
-<?php
+﻿<?php
+defined('KEY_ERROR_NO') || define('KEY_ERROR_NO', KEY_ERROR_NO);
+defined('LBL_NO_ACCESS') || define('LBL_NO_ACCESS', LBL_NO_ACCESS);
+defined('LBL_VIEW_ONLY') || define('LBL_VIEW_ONLY', LBL_VIEW_ONLY);
+defined('KEY_ROLE_SHORT_CODE') || define('KEY_ROLE_SHORT_CODE', KEY_ROLE_SHORT_CODE);
+defined('CLS_TEXT_WARNING') || define('CLS_TEXT_WARNING', 'text-warning');
 $rid =  encodeId($_GET['Rid']);
 $cand = explode(':', $rid);
 $Rid = $cand['1'];
@@ -11,12 +16,12 @@ if(isset($_POST['submit_access_right'])){
   $response1 = json_decode($response2,1);
   $response = $response1['result'];
   if($response['status'] == 'fail'){
-    if(isset($_SESSION['error'][$response['error_no']])){
+    if(isset($_SESSION['error'][$response[KEY_ERROR_NO]])){
       $dis_err = explode(",", $response['other']);
       foreach ($dis_err as $va) {
         $dis_er [] = $dis_labels[$va];
       }
-      $error_message = $response['error_no'] ." : ".$_SESSION['error'][$response['error_no']]." : ".implode(", ", (array)$dis_er);
+      $error_message = $response[KEY_ERROR_NO] ." : ".$_SESSION['error'][$response[KEY_ERROR_NO]]." : ".implode(", ", (array)$dis_er);
     }else{
       $error_message = $response['message'];
     }
@@ -120,7 +125,7 @@ $Rid = $employees_display_fields['id'];
       $("#dash-hidden-"+fieldgrpname+"-"+seq).val('Y');
 
        }else{
-        $("#dash-"+fieldgrpname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> <?php echo __('No Access'); ?>");
+        $("#dash-"+fieldgrpname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> <?php echo __(LBL_NO_ACCESS); ?>");
         $("#dash-hidden-"+fieldgrpname+"-"+seq).val('N');
         }
         $(".dash-"+fieldgrpname+"-"+seq).hide();
@@ -134,8 +139,8 @@ $Rid = $employees_display_fields['id'];
     $("#fieldgrpaccess-hidden-"+fieldgrpname).val(type);
     $(".fieldgrpaccess-hidden-"+fieldgrpname).val(type);
     if(type == "NA"){
-      $(".form-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> <?php echo __('No Access'); ?>");
-      $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> <?php echo __('No Access'); ?>");
+      $(".form-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> <?php echo __(LBL_NO_ACCESS); ?>");
+      $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-lock text-danger'></i> <?php echo __(LBL_NO_ACCESS); ?>");
 
       $("#field_noaccess-"+fieldgrpname).addClass("text-warning");
 
@@ -144,8 +149,8 @@ $Rid = $employees_display_fields['id'];
       $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-pencil'></i> <?php echo __('Edit'); ?>");
       $("#field_edit-"+fieldgrpname).addClass("text-warning");
     }else{
-      $(".form-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> <?php echo __('View Only'); ?>");
-      $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> <?php echo __('View Only'); ?>");
+      $(".form-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> <?php echo __(LBL_VIEW_ONLY); ?>");
+      $(".allformfield-"+fieldgrpname+"-label").html("<i class='ti-eye'></i> <?php echo __(LBL_VIEW_ONLY); ?>");
       $("#field_viewonly-"+fieldgrpname).addClass("text-warning");
     }
   }
@@ -157,13 +162,13 @@ $Rid = $employees_display_fields['id'];
 
     $("#fieldgrpaccess-hidden-"+fieldgrpname).val(0);
     if(type == "NA"){
-      $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> <?php echo __('No Access'); ?>");
+      $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-lock text-danger'></i> <?php echo __(LBL_NO_ACCESS); ?>");
       $("#field_noaccess-"+fieldname+"-"+seq).addClass("text-warning");
     }else if(type == "E"){
       $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-pencil'></i> <?php echo __('Edit'); ?>");
       $("#field_edit-"+fieldname+"-"+seq).addClass("text-warning");
     }else{
-      $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-eye'></i> <?php echo __('View Only'); ?>");
+      $("#formfield-"+fieldname+"-"+seq+"-label").html("<i class='ti-eye'></i> <?php echo __(LBL_VIEW_ONLY); ?>");
       $("#field_viewonly-"+fieldname+"-"+seq).addClass("text-warning");
     }
 
@@ -193,10 +198,10 @@ $Rid = $employees_display_fields['id'];
           <select aria-label="<?php echo __('Role Short Code'); ?>" class="form-control js-example-basic-single" name="role_short_code" onchange="selecteRole(this.value)" required>
             <option value=""><?php echo __('Select Any One'); ?></option>
             <?php
-            $application_roles[] = array('role_short_code'=>ADMIN_ROLES,'name'=>'Admin');
-            $getroleid = $employees_display_fields['role_short_code'] !=""?$employees_display_fields['role_short_code']:$_GET['ROLE'];
+            $application_roles[] = array(KEY_ROLE_SHORT_CODE=>ADMIN_ROLES,'name'=>'Admin');
+            $getroleid = $employees_display_fields[KEY_ROLE_SHORT_CODE] !=""?$employees_display_fields[KEY_ROLE_SHORT_CODE]:$_GET['ROLE'];
             foreach($application_roles as $applicationroles){?>
-              <option value="<?php echo $applicationroles['role_short_code'];?>" <?php echo $getroleid == $applicationroles['role_short_code']?"selected":""; ?>><?php echo __($applicationroles['name']);?></option>
+              <option value="<?php echo $applicationroles[KEY_ROLE_SHORT_CODE];?>" <?php echo $getroleid == $applicationroles[KEY_ROLE_SHORT_CODE]?"selected":""; ?>><?php echo __($applicationroles['name']);?></option>
             <?php } ?>
           </select>
         </div>
@@ -218,11 +223,11 @@ $Rid = $employees_display_fields['id'];
             $candfieldgrpaccess = $candidateaccess[$headingkey]['access'] != ""?$candidateaccess[$headingkey]['access']:"0";
             $candfieldgrpaccesslabel = __("Access Varies");
             if($candfieldgrpaccess == "NA"){
-              $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> " . __('No Access');
+              $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> " . __(LBL_NO_ACCESS);
             }elseif($candfieldgrpaccess == "E"){
               $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> " . __('Edit');
             }elseif($candfieldgrpaccess == "V"){
-              $candfieldgrpaccesslabel ="<i class='ti-eye'></i> " . __('View Only');
+              $candfieldgrpaccesslabel ="<i class='ti-eye'></i> " . __(LBL_VIEW_ONLY);
             }
             ?>
             <div class="col-lg-4">
@@ -240,11 +245,11 @@ $Rid = $employees_display_fields['id'];
                  <div class="col-lg-3 text-right <?php echo $headingkey == 'basic_information'?"custom_readonly":""; ?>">
                   <input type="hidden" name="fieldgrpaccess[<?php echo $headingkey; ?>][access]" id="fieldgrpaccess-hidden-<?php echo $headingkey; ?>" value="<?php echo $candfieldgrpaccess; ?>">
 
-                  <i class="ti-lock empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'NA'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('No Access'); ?>" onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','NA')"  id="field_noaccess-<?php echo $headingkey; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                  <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','NA')" aria-label="<?php echo __(LBL_NO_ACCESS); ?>"><i class="ti-lock empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'NA'?CLS_TEXT_WARNING:"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __(LBL_NO_ACCESS); ?>" id="field_noaccess-<?php echo $headingkey; ?>"></i></button>
 
-                  <i class="ti-pencil ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'E'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>"  onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','E')" id="field_edit-<?php echo $headingkey; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                  <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','E')" aria-label="<?php echo __('Edit'); ?>"><i class="ti-pencil ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'E'?CLS_TEXT_WARNING:"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>" id="field_edit-<?php echo $headingkey; ?>"></i></button>
 
-                  <i class="ti-eye ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'V'?"text-warning":"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('View Only'); ?>"  onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','V')" id="field_viewonly-<?php echo $headingkey; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                  <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="accessFormSetting('<?php echo $headingkey; ?>','<?php echo $mj; ?>','V')" aria-label="<?php echo __(LBL_VIEW_ONLY); ?>"><i class="ti-eye ml-2 empty-<?php echo $headingkey; ?> <?php echo $candfieldgrpaccess == 'V'?CLS_TEXT_WARNING:"";?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __(LBL_VIEW_ONLY); ?>" id="field_viewonly-<?php echo $headingkey; ?>"></i></button>
 
                 </div>
               </div>
@@ -255,9 +260,9 @@ $Rid = $employees_display_fields['id'];
                <?php $mm=1; foreach($profilereadinesval['fields'] as $profilereadines=>$accesval){
                 $candfieldgrpaccess = $candidateaccess[$headingkey]['field'][$profilereadines] != ""?$candidateaccess[$headingkey]['field'][$profilereadines]:"E";
                 if($candfieldgrpaccess == "NA"){
-                  $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> " . __('No Access');
+                  $candfieldgrpaccesslabel ="<i class='ti-lock text-danger'></i> " . __(LBL_NO_ACCESS);
                 }elseif($candfieldgrpaccess == "V"){
-                  $candfieldgrpaccesslabel ="<i class='ti-eye'></i> " . __('View Only');
+                  $candfieldgrpaccesslabel ="<i class='ti-eye'></i> " . __(LBL_VIEW_ONLY);
                 }else{
                   $candfieldgrpaccesslabel ="<i class='ti-pencil'></i> " . __('Edit');
                 }
@@ -281,11 +286,11 @@ $Rid = $employees_display_fields['id'];
                 <th scope="col" class="text-right">
                   <input type="hidden" name="fieldgrpaccess[<?php echo $headingkey; ?>][field][<?php echo $profilereadines; ?>]" class="fieldgrpaccess-hidden-<?php echo $headingkey; ?>" id="fieldaccess-hidden-<?php echo $profilereadines."-".$mm; ?>" value="<?php echo $candfieldgrpaccess; ?>">
 
-                  <i class="ti-lock allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "NA"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('No Access'); ?>" onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','NA')"  id="field_noaccess-<?php echo $profilereadines."-".$mm; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                  <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','NA')" aria-label="<?php echo __(LBL_NO_ACCESS); ?>"><i class="ti-lock allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "NA"?CLS_TEXT_WARNING:""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __(LBL_NO_ACCESS); ?>" id="field_noaccess-<?php echo $profilereadines."-".$mm; ?>"></i></button>
 
-                  <i class="ti-pencil ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "E"?"text-warning":""?> <?php echo in_array($profilereadines,$noteditable)?"custom_readonly":""; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>"  onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','E')"  id="field_edit-<?php echo $profilereadines."-".$mm; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                  <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','E')" aria-label="<?php echo __('Edit'); ?>"><i class="ti-pencil ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "E"?CLS_TEXT_WARNING:""?> <?php echo in_array($profilereadines,$noteditable)?"custom_readonly":""; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>" id="field_edit-<?php echo $profilereadines."-".$mm; ?>"></i></button>
 
-                  <i class="ti-eye ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "V"?"text-warning":""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('View Only'); ?>"  onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','V')" <?php echo $candfieldgrpaccess == "V"?"text-warning":""?> id="field_viewonly-<?php echo $profilereadines."-".$mm; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                  <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="accessFormfieldSetting('<?php echo $profilereadines; ?>','<?php echo $headingkey; ?>','<?php echo $mm; ?>','V')" aria-label="<?php echo __(LBL_VIEW_ONLY); ?>"><i class="ti-eye ml-2 allempty-<?php echo $headingkey; ?> emptyfield-<?php echo $profilereadines."-".$mm; ?> <?php echo $candfieldgrpaccess == "V"?CLS_TEXT_WARNING:""?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __(LBL_VIEW_ONLY); ?>" <?php echo $candfieldgrpaccess == "V"?CLS_TEXT_WARNING:""?> id="field_viewonly-<?php echo $profilereadines."-".$mm; ?>"></i></button>
 
                 </th>
               </tr>
@@ -314,15 +319,15 @@ $Rid = $employees_display_fields['id'];
               </div>
               <div class="col-lg-4">
                 <span id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-label">
-                  <?php echo $dashboardaccess == "Y"?"<i class='ti-unlock'></i> " . __('Access'):"<i class='ti-lock  text-danger'></i> " . __('No Access')?>
+                  <?php echo $dashboardaccess == "Y"?"<i class='ti-unlock'></i> " . __('Access'):"<i class='ti-lock  text-danger'></i> " . __(LBL_NO_ACCESS)?>
                 </span>
               </div>
               <div class="col-lg-1 text-right">
                 <input type="hidden" name="dashboard_field_list[<?php echo $dashboardcoulnmname;?>][access]" id="dash-hidden-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>"  value="<?php echo $dashboardaccess;?>">
 
-                <i class="ti-lock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('No Access'); ?>" onclick="accessDashSetting('<?php echo $dashboardcoulnmname; ?>','<?php echo $mk; ?>','noaccess')" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-access" style="<?php echo $dashboardaccess == "N"?"display:none":""?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="accessDashSetting('<?php echo $dashboardcoulnmname; ?>','<?php echo $mk; ?>','noaccess')" aria-label="<?php echo __(LBL_NO_ACCESS); ?>"><i class="ti-lock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __(LBL_NO_ACCESS); ?>" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-access" style="<?php echo $dashboardaccess == "N"?"display:none":""?>"></i></button>
 
-                <i class="ti-unlock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Access'); ?>" onclick="accessDashSetting('<?php echo $dashboardcoulnmname; ?>','<?php echo $mk; ?>','access')" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-noaccess" style="<?php echo $dashboardaccess == "Y"?"display:none":""?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="accessDashSetting('<?php echo $dashboardcoulnmname; ?>','<?php echo $mk; ?>','access')" aria-label="<?php echo __('Access'); ?>"><i class="ti-unlock dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Access'); ?>" id="dash-<?php echo $dashboardcoulnmname; ?>-<?php echo $mk; ?>-noaccess" style="<?php echo $dashboardaccess == "Y"?"display:none":""?>"></i></button>
               </div>
             </div>
           </div>

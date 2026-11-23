@@ -1,4 +1,9 @@
 <?php
+defined('HDR_LOCATION_OPTION') || define('HDR_LOCATION_OPTION', 'location:index.php?option=');
+defined('PARAM_RID') || define('PARAM_RID', '&Rid=');
+defined('PARAM_TABLE') || define('PARAM_TABLE', '&table=');
+defined('API_GET_TABLE_COND') || define('API_GET_TABLE_COND', '?mode=gettabledetailswithconditions&table=');
+defined('PARAM_DATA') || define('PARAM_DATA', '&data=');
 $option = strtoupper($_GET['option']);
 $list = str_replace('INSERT', 'LIST', $option);
 $page_details= toGetTableNameBaseApplicationPagesList('insert_page_name', $_GET['option']);
@@ -14,9 +19,9 @@ if($_POST['submit'] == 'Add'){
         if ($_POST['submit_value'] == 'continue'){
             $LASTID = json_decode($response,1);
             $nrid = "id:".$LASTID['LASTID'];
-            header("location:index.php?option=".$option."&Rid=".deocdeId($nrid));
+            header(HDR_LOCATION_OPTION.$option.PARAM_RID.deocdeId($nrid));
         }else{
-            header("location:index.php?option=".$list);
+            header(HDR_LOCATION_OPTION.$list);
         }
     }
 }
@@ -24,31 +29,31 @@ if($_POST['submit'] == 'Update'){
     $_POST['updated_by'] = $_SESSION['userid'];
     if($_POST['status_values'] ==  ST_QUOTATION_GENERATED){
         $retun_list = toGetpageOptionName('quotations');
-        header("location:index.php?option=".$retun_list['option_url']."&table=".$_POST['table_name']."&Rid=".$_POST['hid']);
+        header(HDR_LOCATION_OPTION.$retun_list['option_url'].PARAM_TABLE.$_POST['table_name'].PARAM_RID.$_POST['hid']);
     }
     if($_POST['status_values'] == ST_PURCHASE_ORDER_GENRATED){
         $retun_list = toGetpageOptionName('purchase_orders');
-        header("location:index.php?option=".$retun_list['option_url']."&table=".$_POST['table_name']."&Rid=".$_POST['hid']);
+        header(HDR_LOCATION_OPTION.$retun_list['option_url'].PARAM_TABLE.$_POST['table_name'].PARAM_RID.$_POST['hid']);
     }
     if($_POST['status_values'] == ST_APPROVAL_PENDING){
         $checkurl = API."?mode=tocheckDAO&table=".$_POST['table_name']."&status=".$_POST['status_values']."&amount=".$_POST['grandtotal']."&status_old_value=".$_POST['status_old_value']."&opex_cpex=".$_POST['opex_cpex']."&category_type=".$_POST['type']."&cost_center=".$_POST['cost_center'];
         $check_data = callAPI($checkurl);
         $check_data = json_decode($check_data,1);
         if(!isset($check_data['id']) || $check_data['id'] == ''){
-            header("location:index.php?option=".$option."&error=9001&Rid=".deocdeId('id:'.$_POST['hid'])); exit;
+            header(HDR_LOCATION_OPTION.$option."&error=9001&Rid=".deocdeId('id:'.$_POST['hid'])); exit;
         }
     }
     $url = API."?mode=addbills&table=".$_POST['table_name']."&method=post&type=update";
     $response = file_post_contents($url, $_POST, 'update');
     if ($response) {
-        header("location:index.php?option=".$list);
+        header(HDR_LOCATION_OPTION.$list);
     }
 }
 $title = viewTitle($_GET['option']);
 $stausresult = statusData($table_name);
 $table2 = array(array('item_id'=>'0'));
 $copy = 0;
-$cusurl = API."?mode=gettabledetails&fid=company_id&rid=".$_SESSION['company_id']."&table=".TBL_USERS;
+$cusurl = API."?mode=gettabledetails&fid=company_id&rid=".$_SESSION['company_id'].PARAM_TABLE.TBL_USERS;
 $cusresponse = callAPI($cusurl);
 $cusresponse = json_decode($cusresponse,1);
 foreach ($cusresponse as  $cust) {
@@ -91,7 +96,7 @@ if(isset($_GET['Rid']) && $_GET['Rid'] !=''){
         $vdata1["field"] = "id,transaction_type,user_id,action_log,action_date,status_value";
         $vdata1['order'] = "id DESC";
         $vdata = urlencode(json_encode($vdata1));
-        $vurl = API."?mode=gettabledetailswithconditions&table=".TBL_ACTION_LOG."&data=".$vdata;
+        $vurl = API.API_GET_TABLE_COND.TBL_ACTION_LOG.PARAM_DATA.$vdata;
         $vdata_details = callAPI($vurl);
         $vdata_details = json_decode($vdata_details,1);
 
@@ -233,7 +238,7 @@ $paymentmethod_data = json_decode($paymentmethod,1);
 
 $crdata["field"] = "id,currency_list";
 $crdata = urlencode(json_encode($crdata));
-$crurl = API."?mode=gettabledetailswithconditions&table=".TBL_CURRENCIES."&data=".$crdata;
+$crurl = API.API_GET_TABLE_COND.TBL_CURRENCIES.PARAM_DATA.$crdata;
 $cr_data = callAPI($crurl);
 $cr_data = json_decode($cr_data, 1);
 if($table_name == 'requisitions'){
@@ -250,7 +255,7 @@ if($table_name == 'requisitions'){
     $data2["field"] = "cost_center_id";
     $data2["where"] = array('user_id'=> $coos_user_id,'is_active'=> '0');
     $costdata = urlencode(json_encode($data2));
-    $costurl = API."?mode=gettabledetailswithconditions&table=".TBL_USERS_COST_CENTERS."&data=".$costdata;
+    $costurl = API.API_GET_TABLE_COND.TBL_USERS_COST_CENTERS.PARAM_DATA.$costdata;
     $costdata = callAPI($costurl);
     $costress = json_decode($costdata, 1);
     foreach ($costress as  $costres) {

@@ -1,4 +1,16 @@
-<?php $_SESSION['apply_js']['multiselest'] = '1';
+<?php
+defined('API_GL_ACCOUNT') || define('API_GL_ACCOUNT', '?mode=getgeneralledger&account_code=');
+defined('PARAM_TO_DATE') || define('PARAM_TO_DATE', '&to_date=');
+defined('PARAM_FROM_DATE') || define('PARAM_FROM_DATE', '&from_date=');
+defined('STR_MON_SUN') || define('STR_MON_SUN', STR_MON_SUN);
+defined('STR_MON_WEEK') || define('STR_MON_WEEK', STR_MON_WEEK);
+defined('STR_MINUS_1_DAY') || define('STR_MINUS_1_DAY', '-1 days');
+defined('STR_PREV_SUN') || define('STR_PREV_SUN', 'previous week sunday');
+defined('STR_PREV_MON') || define('STR_PREV_MON', 'previous week monday');
+defined('STR_LAST_MONTH') || define('STR_LAST_MONTH', 'last month');
+defined('STR_LAST_YEAR') || define('STR_LAST_YEAR', 'last year');
+defined('CSS_COLOR_RED') || define('CSS_COLOR_RED', CSS_COLOR_RED);
+$_SESSION['apply_js']['multiselest'] = '1';
 $_REQUEST['account_code'] =$_POST['account_code'] !=""?$_POST['account_code']:$_REQUEST['account_code'];
 $_REQUEST['from_date'] = $_POST['from_date'] !=""?$_POST['from_date']:$_REQUEST['from_date'];
 $_REQUEST['to_date'] = $_POST['to_date'] !=""?$_POST['to_date']:$_REQUEST['to_date'];
@@ -97,7 +109,7 @@ $_REQUEST['to_date'] = $_POST['to_date'] !=""?$_POST['to_date']:$_REQUEST['to_da
 </script>
 <?php if($_GET['GLT'] =="" || $_GET['GLT'] =="GL"){
 
-$getapi = API."?mode=getgeneralledger&account_code=".$_REQUEST['account_code']."&first_account_code=".$_POST['first_account_code']."&second_account_code=".$_POST['second_account_code']."&third_account_code=".$_POST['third_account_code']."&fourth_account_code=".$_POST['fourth_account_code']."&from_date=".$_REQUEST['from_date']."&to_date=".$_REQUEST['to_date'];
+$getapi = API.API_GL_ACCOUNT.$_REQUEST['account_code']."&first_account_code=".$_POST['first_account_code']."&second_account_code=".$_POST['second_account_code']."&third_account_code=".$_POST['third_account_code']."&fourth_account_code=".$_POST['fourth_account_code'].PARAM_FROM_DATE.$_REQUEST['from_date'].PARAM_TO_DATE.$_REQUEST['to_date'];
 $resapi = callAPI($getapi);
 $result = json_decode($resapi,1);
 $chart_of_accounts = $result['chart_of_accounts'];
@@ -160,12 +172,12 @@ $general_ledger = $result['general_ledger'];
                             </button>
                             <div class="dropdown-menu">
                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TD"?"active":"";?> empty_active" id="TD" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')"><?= __('Today'); ?></a>
-                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week')));?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday ')));?>')"><?= __('This Week'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime(STR_MON_WEEK)));?>','<?php echo fromDate(date("Y-m-d", strtotime(STR_MON_SUN)));?>')"><?= __('This Week'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TM"?"active":"";?> empty_active" id="TM" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')"><?= __('This Month'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TY"?"active":"";?> empty_active" id="TY" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')"><?= __('This Year'); ?></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>')"><?= __('Yesterday'); ?></a>
-                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')"><?= __('Previous Week'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d',strtotime(STR_MINUS_1_DAY))); ?>','<?php echo fromDate(date('Y-m-d',strtotime(STR_MINUS_1_DAY))); ?>')"><?= __('Yesterday'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime(STR_PREV_MON))); ?>','<?php echo fromDate(date('Y-m-d', strtotime(STR_PREV_SUN))); ?>')"><?= __('Previous Week'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PM"?"active":"";?> empty_active" id="PM" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01",strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t",strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PY"?"active":"";?> empty_active" id="PY" href="#!" onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date("Y-01-01",strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31",strtotime('last year'))); ?>')"><?= __('Previous Year'); ?></a>
                                 <div class="dropdown-divider"></div>
@@ -231,9 +243,9 @@ $debitcreditamount =$debitallamount -$creditallamount;
                     <th scope="col" colspan="2" style="font-size:14px;font-family:'Tahoma';font-weight:normal;padding:5px;text-align:left;">
                         <?php echo fromDate($from_date)." To ".fromDate($to_date); ?>
                     </th>
-                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee;text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0)?"color:#f00":""; ?>"><?php echo accountingAmontFormat($last_account_balances['closing_balance'],0); ?></th>
-                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee;text-align: right; <?php echo ($debitcreditamount < 0)?"color:#f00":""; ?>" ><?php echo accountingAmontFormat($debitcreditamount,0); ?></th>
-                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee;text-align: right; <?php echo ($closingbal1 < 0)?"color:#f00":""; ?>"><?php echo accountingAmontFormat($closingbal1,0); ?></th>
+                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee;text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0)?CSS_COLOR_RED:""; ?>"><?php echo accountingAmontFormat($last_account_balances['closing_balance'],0); ?></th>
+                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee;text-align: right; <?php echo ($debitcreditamount < 0)?CSS_COLOR_RED:""; ?>" ><?php echo accountingAmontFormat($debitcreditamount,0); ?></th>
+                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee;text-align: right; <?php echo ($closingbal1 < 0)?CSS_COLOR_RED:""; ?>"><?php echo accountingAmontFormat($closingbal1,0); ?></th>
                 </tr>
                 <tr>
                     <td colspan="7">
@@ -262,7 +274,7 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right;">
                                     -
                                 </td>
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? "color:#f00" : ""; ?>"><?php echo $last_account_balances['closing_balance']!=""?accountingAmontFormat($last_account_balances['closing_balance']):"-"; ?></td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? CSS_COLOR_RED : ""; ?>"><?php echo $last_account_balances['closing_balance']!=""?accountingAmontFormat($last_account_balances['closing_balance']):"-"; ?></td>
                             </tr>
                             <?php
                             $closingbal = $last_account_balances['closing_balance'];
@@ -275,12 +287,12 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 if(in_array($gl['account_type'], array('1', '4'))){
                                     $amountChange = $debit_amount - $credit_amount;
                                     if($credit_amount !=0 && $credit_amount !=""){
-                                        $credit = 'color:#f00';
+                                        $credit = CSS_COLOR_RED;
                                     }
                                 }else{
                                     $amountChange = $credit_amount - $debit_amount;
                                     if($debit_amount !=0 && $debit_amount !=""){
-                                        $debitbg = 'color:#f00';
+                                        $debitbg = CSS_COLOR_RED;
                                     }
                                 }
                                 $closingbal = $closingbal + $amountChange;
@@ -291,16 +303,16 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                     <span style="display: block;"><?php echo $gl['remarks']; ?>
                                 </td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; " onclick="viewJournalVoucher('<?php echo $gl['voucher_id']; ?>')" class="text-primary cursor-pointer" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $gl['voucher_ref_no']; ?></td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; "><button type="button" class="btn btn-link p-0 border-0 text-primary cursor-pointer" onclick="viewJournalVoucher('<?php echo $gl['voucher_id']; ?>')"><?php echo $gl['voucher_ref_no']; ?></button></td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>" >
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? CSS_COLOR_RED : ""; ?> <?php ?>" >
                                     <?php echo ($gl['debit_amount']!="" && $gl['debit_amount']!="0")?accountingAmontFormat($gl['debit_amount']):"-"; ?>
                                 </td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>">
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? CSS_COLOR_RED : ""; ?> <?php ?>">
                                     <?php echo ($gl['credit_amount']!="" && $gl['credit_amount']!="0")?accountingAmontFormat($gl['credit_amount']):"-"; ?>
                                 </td>
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? "color:#f00" : ""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? CSS_COLOR_RED : ""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
                             </tr>
                             <?php } ?>
                         </table>
@@ -330,7 +342,7 @@ $debitcreditamount =$debitallamount -$creditallamount;
 </div>
 <?php }elseif($_GET['GLT'] =="BV"){
 
-$getapi = API."?mode=getgeneralledger&account_code=".$_REQUEST['account_code']."&from_date=".$_REQUEST['from_date']."&to_date=".$_REQUEST['to_date']."&GLT=BV";
+$getapi = API.API_GL_ACCOUNT.$_REQUEST['account_code'].PARAM_FROM_DATE.$_REQUEST['from_date'].PARAM_TO_DATE.$_REQUEST['to_date']."&GLT=BV";
 $resapi = callAPI($getapi);
 $result = json_decode($resapi,1);
 $chart_of_accounts = $result['chart_of_accounts'];
@@ -382,12 +394,12 @@ foreach($bank_accounts as $bacc){
                             </button>
                             <div class="dropdown-menu">
                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TD"?"active":"";?> empty_active" id="TD_2" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')"><?= __('Today'); ?></a>
-                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW_2" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week')));?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday ')));?>')"><?= __('This Week'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW_2" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime(STR_MON_WEEK)));?>','<?php echo fromDate(date("Y-m-d", strtotime(STR_MON_SUN)));?>')"><?= __('This Week'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TM"?"active":"";?> empty_active" id="TM_2" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')"><?= __('This Month'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TY"?"active":"";?> empty_active" id="TY_2" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')"><?= __('This Year'); ?></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD_2" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>')"><?= __('Yesterday'); ?></a>
-                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW_2" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')"><?= __('Previous Week'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD_2" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d',strtotime(STR_MINUS_1_DAY))); ?>','<?php echo fromDate(date('Y-m-d',strtotime(STR_MINUS_1_DAY))); ?>')"><?= __('Yesterday'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW_2" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime(STR_PREV_MON))); ?>','<?php echo fromDate(date('Y-m-d', strtotime(STR_PREV_SUN))); ?>')"><?= __('Previous Week'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PM"?"active":"";?> empty_active" id="PM_2" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01",strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t",strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PY"?"active":"";?> empty_active" id="PY_2" href="#!" onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date("Y-01-01",strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31",strtotime('last year'))); ?>')"><?= __('Previous Year'); ?></a>
                                 <div class="dropdown-divider"></div>
@@ -449,9 +461,9 @@ $debitcreditamount =$debitallamount -$creditallamount;
                     <th scope="col" colspan="2" style="text-align: left;">
                          <?php echo fromDate($from_date)." To ".fromDate($to_date); ?>
                     </th>
-                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? "color:#f00" : ""; ?>"><?php echo accountingAmontFormat($last_account_balances['closing_balance'],0); ?></th>
-                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($debitcreditamount < 0) ? "color:#f00" : ""; ?>" ><?php echo accountingAmontFormat($debitcreditamount,0); ?></th>
-                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($closingbal1 < 0) ? "color:#f00" : ""; ?>"><?php echo accountingAmontFormat($closingbal1,0); ?></th>
+                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? CSS_COLOR_RED : ""; ?>"><?php echo accountingAmontFormat($last_account_balances['closing_balance'],0); ?></th>
+                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($debitcreditamount < 0) ? CSS_COLOR_RED : ""; ?>" ><?php echo accountingAmontFormat($debitcreditamount,0); ?></th>
+                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($closingbal1 < 0) ? CSS_COLOR_RED : ""; ?>"><?php echo accountingAmontFormat($closingbal1,0); ?></th>
                 </tr>
                 <tr>
                     <td colspan="7">
@@ -478,7 +490,7 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right;">
                                     -
                                 </td>
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? "color:#f00" : ""; ?>"><?php echo $last_account_balances['closing_balance']!=""?accountingAmontFormat($last_account_balances['closing_balance']):"-"; ?></td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? CSS_COLOR_RED : ""; ?>"><?php echo $last_account_balances['closing_balance']!=""?accountingAmontFormat($last_account_balances['closing_balance']):"-"; ?></td>
                             </tr>
                             <?php
                             $closingbal = $last_account_balances['closing_balance'];
@@ -491,12 +503,12 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 if(in_array($gl['account_type'], array('1', '4'))){
                                     $amountChange = $debit_amount - $credit_amount;
                                     if($credit_amount !=0 && $credit_amount !=""){
-                                        $credit = 'color:#f00';
+                                        $credit = CSS_COLOR_RED;
                                     }
                                 }else{
                                     $amountChange = $credit_amount - $debit_amount;
                                     if($debit_amount !=0 && $debit_amount !=""){
-                                        $debitbg = 'color:#f00';
+                                        $debitbg = CSS_COLOR_RED;
                                     }
                                 }
                                 $closingbal = $closingbal + $amountChange;
@@ -506,16 +518,16 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;"><?php echo $gl['account_code']; ?> - <?php echo $gl['account_name']; ?>        </td>
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;"><span class="d-block"><?php echo $gl['remarks']; ?></span>
                                 </td>
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; " onclick="viewJournalVoucher('<?php echo $gl['voucher_id']; ?>')" class="text-primary cursor-pointer" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $gl['voucher_ref_no']; ?></td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; "><button type="button" class="btn btn-link p-0 border-0 text-primary cursor-pointer" onclick="viewJournalVoucher('<?php echo $gl['voucher_id']; ?>')"><?php echo $gl['voucher_ref_no']; ?></button></td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>" >
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? CSS_COLOR_RED : ""; ?> <?php ?>" >
                                     <?php echo ($gl['debit_amount']!="" && $gl['debit_amount']!="0")?accountingAmontFormat($gl['debit_amount']):"-"; ?>
                                 </td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>">
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? CSS_COLOR_RED : ""; ?> <?php ?>">
                                     <?php echo ($gl['credit_amount']!="" && $gl['credit_amount']!="0")?accountingAmontFormat($gl['credit_amount']):"-"; ?>
                                 </td>
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? "color:#f00" : ""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? CSS_COLOR_RED : ""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
                             </tr>
                             <?php } ?>
                         </table>
@@ -545,7 +557,7 @@ $debitcreditamount =$debitallamount -$creditallamount;
 </div>
 <?php }elseif($_GET['GLT'] =="CV"){
 
-$getapi = API."?mode=getgeneralledger&account_code=".$_REQUEST['account_code']."&from_date=".$_REQUEST['from_date']."&to_date=".$_REQUEST['to_date']."&GLT=CV";
+$getapi = API.API_GL_ACCOUNT.$_REQUEST['account_code'].PARAM_FROM_DATE.$_REQUEST['from_date'].PARAM_TO_DATE.$_REQUEST['to_date']."&GLT=CV";
 $resapi = callAPI($getapi);
 $result = json_decode($resapi,1);
 $chart_of_accounts = $result['chart_of_accounts'];
@@ -597,12 +609,12 @@ foreach($petty_cash_boxes as $bacc){
                             </button>
                             <div class="dropdown-menu">
                                    <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TD"?"active":"";?> empty_active" id="TD_3" href="#!" onclick="dynamicSelectDateRange('TD','Today','<?php echo fromDate(date("Y-m-d")); ?>','<?php echo fromDate(date("Y-m-d")); ?>')"><?= __('Today'); ?></a>
-                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW_3" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime('monday this week')));?>','<?php echo fromDate(date("Y-m-d", strtotime('monday this sunday ')));?>')"><?= __('This Week'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TW"?"active":"";?> empty_active" id="TW_3" href="#!" onclick="dynamicSelectDateRange('TW','This Week','<?php echo fromDate(date("Y-m-d", strtotime(STR_MON_WEEK)));?>','<?php echo fromDate(date("Y-m-d", strtotime(STR_MON_SUN)));?>')"><?= __('This Week'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TM"?"active":"";?> empty_active" id="TM_3" href="#!" onclick="dynamicSelectDateRange('TM','This Month','<?php echo fromDate(date("Y-m-01")); ?>','<?php echo fromDate(date("Y-m-t")); ?>')"><?= __('This Month'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="TY"?"active":"";?> empty_active" id="TY_3" href="#!" onclick="dynamicSelectDateRange('TY','This Year','<?php echo fromDate(date("Y-01-01")); ?>','<?php echo fromDate(date("Y-12-31")); ?>')"><?= __('This Year'); ?></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD_3" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>','<?php echo fromDate(date('Y-m-d',strtotime("-1 days"))); ?>')"><?= __('Yesterday'); ?></a>
-                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW_3" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime("previous week monday"))); ?>','<?php echo fromDate(date('Y-m-d', strtotime("previous week sunday"))); ?>')"><?= __('Previous Week'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="YD"?"active":"";?> empty_active" id="YD_3" href="#!" onclick="dynamicSelectDateRange('YD','Yesterday','<?php echo fromDate(date('Y-m-d',strtotime(STR_MINUS_1_DAY))); ?>','<?php echo fromDate(date('Y-m-d',strtotime(STR_MINUS_1_DAY))); ?>')"><?= __('Yesterday'); ?></a>
+                                <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PW"?"active":"";?> empty_active" id="PW_3" href="#!" onclick="dynamicSelectDateRange('PW','Previous Week','<?php echo fromDate(date('Y-m-d', strtotime(STR_PREV_MON))); ?>','<?php echo fromDate(date('Y-m-d', strtotime(STR_PREV_SUN))); ?>')"><?= __('Previous Week'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PM"?"active":"";?> empty_active" id="PM_3" href="#!" onclick="dynamicSelectDateRange('PM','Previous Month','<?php echo fromDate(date("Y-m-01",strtotime('last month'))); ?>','<?php echo fromDate(date("Y-m-t",strtotime('last month'))); ?>')"><?= __('Previous Month'); ?></a>
                                 <a class="dropdown-item waves-light waves-effect <?php echo $shortcode=="PY"?"active":"";?> empty_active" id="PY_3" href="#!" onclick="dynamicSelectDateRange('PY','Previous Year','<?php echo fromDate(date("Y-01-01",strtotime('last year'))); ?>','<?php echo fromDate(date("Y-12-31",strtotime('last year'))); ?>')"><?= __('Previous Year'); ?></a>
                                 <div class="dropdown-divider"></div>
@@ -664,9 +676,9 @@ $debitcreditamount =$debitallamount -$creditallamount;
                     <th scope="col" colspan="2" style="text-align: left;">
                          <?php echo fromDate($from_date)." To ".fromDate($to_date); ?>
                     </th>
-                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? "color:#f00" : ""; ?>"><?php echo accountingAmontFormat($last_account_balances['closing_balance'],0); ?></th>
-                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($debitcreditamount < 0) ? "color:#f00" : ""; ?>" ><?php echo accountingAmontFormat($debitcreditamount,0); ?></th>
-                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($closingbal1 < 0) ? "color:#f00" : ""; ?>"><?php echo accountingAmontFormat($closingbal1,0); ?></th>
+                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? CSS_COLOR_RED : ""; ?>"><?php echo accountingAmontFormat($last_account_balances['closing_balance'],0); ?></th>
+                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($debitcreditamount < 0) ? CSS_COLOR_RED : ""; ?>" ><?php echo accountingAmontFormat($debitcreditamount,0); ?></th>
+                    <th scope="col" style="background-color: #cccccc; font-size:14px;font-family:'Tahoma';padding:5px;font-weight:normal;text-transform:uppercase;border:1px solid #eeeeee; text-align: right; <?php echo ($closingbal1 < 0) ? CSS_COLOR_RED : ""; ?>"><?php echo accountingAmontFormat($closingbal1,0); ?></th>
                 </tr>
                 <tr>
                     <td colspan="7">
@@ -693,7 +705,7 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right;">
                                     -
                                 </td>
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? "color:#f00" : ""; ?>"><?php echo $last_account_balances['closing_balance']!=""?accountingAmontFormat($last_account_balances['closing_balance']):"-"; ?></td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($last_account_balances['closing_balance'] < 0) ? CSS_COLOR_RED : ""; ?>"><?php echo $last_account_balances['closing_balance']!=""?accountingAmontFormat($last_account_balances['closing_balance']):"-"; ?></td>
                             </tr>
                             <?php
                             $closingbal = $last_account_balances['closing_balance'];
@@ -706,12 +718,12 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 if(in_array($gl['account_type'], array('1', '4'))){
                                     $amountChange = $debit_amount - $credit_amount;
                                     if($credit_amount !=0 && $credit_amount !=""){
-                                        $credit = 'color:#f00';
+                                        $credit = CSS_COLOR_RED;
                                     }
                                 }else{
                                     $amountChange = $credit_amount - $debit_amount;
                                     if($debit_amount !=0 && $debit_amount !=""){
-                                        $debitbg = 'color:#f00';
+                                        $debitbg = CSS_COLOR_RED;
                                     }
                                 }
                                 $closingbal = $closingbal + $amountChange;
@@ -721,16 +733,16 @@ $debitcreditamount =$debitallamount -$creditallamount;
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;"><?php echo $gl['account_code']; ?> - <?php echo $gl['account_name']; ?>        </td>
                                 <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px;"><span class="d-block"><?php echo $gl['remarks']; ?></span>
                                 </td>
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; " onclick="viewJournalVoucher('<?php echo $gl['voucher_id']; ?>')" class="text-primary cursor-pointer" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $gl['voucher_ref_no']; ?></td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; "><button type="button" class="btn btn-link p-0 border-0 text-primary cursor-pointer" onclick="viewJournalVoucher('<?php echo $gl['voucher_id']; ?>')"><?php echo $gl['voucher_ref_no']; ?></button></td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>" >
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['debit_amount'] < 0) ? CSS_COLOR_RED : ""; ?> <?php ?>" >
                                     <?php echo ($gl['debit_amount']!="" && $gl['debit_amount']!="0")?accountingAmontFormat($gl['debit_amount']):"-"; ?>
                                 </td>
 
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? "color:#f00" : ""; ?> <?php ?>">
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($gl['credit_amount'] < 0) ? CSS_COLOR_RED : ""; ?> <?php ?>">
                                     <?php echo ($gl['credit_amount']!="" && $gl['credit_amount']!="0")?accountingAmontFormat($gl['credit_amount']):"-"; ?>
                                 </td>
-                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? "color:#f00" : ""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
+                                <td style="font-size:14px; font-family:'Tahoma'; font-weight:500; border:1px solid #eeeeee;padding: 5px; text-align: right; <?php echo ($closingbal < 0) ? CSS_COLOR_RED : ""; ?>"> <?php echo ($closingbal!="" && $closingbal!="0")?accountingAmontFormat($closingbal):"-"; ?> </td>
                             </tr>
                             <?php } ?>
                         </table>

@@ -287,7 +287,7 @@ function submitassessment(){
               <input type="hidden" name="questionid<?php echo $questionid;?>" value="<?php echo $questionid;?>">
 
               <span><?php echo $question_type = $questiontypes[$display_questions[$questionid]['options_display_type']]; ?></span>
-              <h4><?php echo htmlspecialchars(__($display_questions[$questionid]['assessment_question'] ?? '')); ?> <?php if($display_questions[$questionid]['require_response']=="1") echo "*"; ?></h4>
+              <h4><?php echo htmlspecialchars(__($display_questions[$questionid]['assessment_question'] ?? '')); ?> <?php if($display_questions[$questionid]['require_response']=="1") { echo "*"; } ?></h4>
               <?php
               if($display_questions[$questionid]['options_display_type']=='MCQ' || $display_questions[$questionid]['options_display_type']=='MCA' ){
                 $optionlist= json_decode($display_questions[$questionid]['assessment_question_option'],1);
@@ -300,14 +300,14 @@ function submitassessment(){
                   }
                   ?>
                   <b> <div class="<?php echo $option_cat;?>-group required">
-                    <input aria-label="<?= htmlspecialchars(__('Response option'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="1") echo "required"; ?> <?php echo in_array($option, (array)$answer)==1 ?  'Checked': '';?> >
+                    <input aria-label="<?= htmlspecialchars(__('Response option'), ENT_QUOTES, 'UTF-8'); ?>" type="<?php echo $option_cat;?>" class="response_option<?php echo $questionid;?>" value="<?php echo $option;?>" name="response_option<?php echo $questionid?>[]"   <?php if($display_questions[$questionid]['require_response']=="1") { echo "required"; } ?> <?php echo in_array($option, (array)$answer)==1 ?  'Checked': '';?> >
                     <label for="q1"><?php echo htmlspecialchars(__($option ?? '')); ?> </label> </div>
                   </b>
                 <?php }
               }elseif($display_questions[$questionid]['options_display_type']== 'FT'){
                 $answer =$answer[0];
                 ?>
-                <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if($display_questions[$questionid]['require_response']=="1") echo "required"; ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $answer;?></textarea>
+                <textarea id="response_option<?php echo $questionid;?>" name="response_option<?php echo $questionid?>[]"  <?php if($display_questions[$questionid]['require_response']=="1") { echo "required"; } ?> class="form-control mt-10 col-md-10" placeholder=""><?php echo $answer;?></textarea>
                 <?php
               }
             ?>
@@ -320,8 +320,6 @@ function submitassessment(){
                 <?php } else {?>
                   <a href="#top" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i><?= __('Previous') ?> </a>
                 <?php } ?>
-
-                <!-- <a href="#" id="clear" onclick="callclear('<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-light-success font-weight-bold float-left">Clear Response</a> -->
                 <?php if ($questionid!=1 && $total_q!=$questionid){ ?>
                   <a href="#top" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i><?= __('Previous') ?> </a>
                 <?php } ?>

@@ -163,7 +163,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                 success:function(data){
                   console.log(data);
                   var otr = $.parseJSON(data);
-                  $('#imagePreview').append('<div class="col-lg-2" id="rem_'+otr.LASTID+'" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><a href="uploads/attachments/'+response1.actual_file_name+'" target="_blank"><i class="ti-file f-30 text-info"></i></a><div> '+response1.file_name+' </div><div class="text-danger cursor-pointer" onclick="removeattacchment('+otr.LASTID+')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <?php echo __('Remove'); ?> </div>');
+                  $('#imagePreview').append('<button type="button" class="btn btn-link p-0 border-0 text-left col-lg-2" id="rem_'+otr.LASTID+'"><a href="uploads/attachments/'+response1.actual_file_name+'" target="_blank"><i class="ti-file f-30 text-info"></i></a><div> '+response1.file_name+' </button><button type="button" class="btn btn-link p-0 border-0 text-left text-danger cursor-pointer" onclick="removeattacchment('+otr.LASTID+')"> <?php echo __('Remove'); ?> </button>');
                 },
                 error:function (){}
               });
@@ -388,7 +388,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
             data = JSON.parse(data);
             if(parent_id =="0"){
               var issefield ="'is_active'";
-            var str='<div class="mt-4" id="chlisttt_'+data.LASTID+'"><h4 class=""><i class="ti-check-box m-r-10"></i> '+val+' <button class="btn border waves-effect waves-light float-end" type="button" onclick="updatecheckitem(1,'+data.LASTID+','+issefield+')" ><?php echo __('Delete'); ?></button></h4><div class="m-l-40"><div class="progress mt-4 mb-2"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div> </div><div id="addcheckitem_'+data.LASTID+'"> </div><button class="btn btn-primary waves-effect waves-light mt-3" onclick="addchecklists(0,'+data.LASTID+')"><?php echo __('Add an Item'); ?></button></div></div>';
+            var str='<div class="mt-4" id="chlisttt_'+data.LASTID+'"><h4 class=""><i class="ti-check-box m-r-10"></i> '+val+' <button class="btn border waves-effect waves-light float-end" type="button" onclick="updatecheckitem(1,'+data.LASTID+','+issefield+')" ><?php echo __('Delete'); ?></button></h4><div class="m-l-40"><div class="progress mt-4 mb-2"><progress class="progress-bar" value="0" max="100"></progress> </div><div id="addcheckitem_'+data.LASTID+'"> </div><button class="btn btn-primary waves-effect waves-light mt-3" onclick="addchecklists(0,'+data.LASTID+')"><?php echo __('Add an Item'); ?></button></div></div>';
             console.log(str);
             $('#addcheckitem').append(str);
           }else{
@@ -618,11 +618,9 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
           </div>
         <?php } ?>
           <!----------------- DESCRPTION --------------------------->
-          <div class="mt-4">
-            <h6 class=""><i class="ti-align-left m-r-20"></i> <?php echo __('Description'); ?></h6>
-            <div class="m-l-40 mt-3 bg-gray" id="hidedescription" onclick="viewdescrption()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+          <button type="button" class="btn btn-link p-0 border-0 text-left mt-4" > <h6><i></i> <?php echo __('Description'); ?></h6> <div id="hidedescription" onclick="viewdescrption()">
               <?php echo $task['description']!="" ? $task['description'] : "Add a more detailed description…"; ?>
-            </div>
+            </button>
             <div class="m-l-40 mt-4" id="description" style="display:none;">
               <textarea aria-label="<?php echo __('Text area'); ?>" class="w-100 mb-2 text-start toptextarea" onblur="updatedetail('description', <?php echo $task_id; ?> ,this.value)" placeholder=""><?php echo $task['description']; ?></textarea>
             </div>
@@ -641,18 +639,10 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
               <div class="float-right">
                 <button class="btn btn-primary" onclick="submitactivty()"> <?php echo __('Save'); ?></button>
               </div>
-              <div id="someacty" class="mt-3">
-                <h7> <?php echo __('Comment History :'); ?></h7>
-                <div id="someactydetail" style="word-wrap: break-word;">
-                  <?php foreach((array)$data['activty'] as $act){
-                    if($act['activity_type']=="activity"){ ?>
-                      <div class=" mt-2" id="comment_<?php echo $act['id']; ?>">
-                        <span class="user-name float-left m-r-5"><?php echo initials($emps[$act['created_by']]['display_name']); ?></span>
-                        <span class="f-14 f-w-600" > <?php echo $emps[$act['created_by']]['display_name']; ?> </span>
-                        <span id="comment_data_<?php echo $act['id']; ?>"><?php echo $act['comments']; ?></span> <span onclick="editcomment(<?php echo $act['id']; ?>>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-edit"></i></span>
+              <button type="button" class="btn btn-link p-0 border-0 text-left mt-3" id="someacty"> <h7> <?php echo __('Comment History :'); ?></h7> <div id="someactydetail" style="word-wrap: break-word;"> <?php foreach((array)$data['activty'] as $act){ if($act['activity_type']=="activity"){ ?> <div id="comment_<?php echo $act['id']; ?>"> <span><?php echo initials($emps[$act['created_by']]['display_name']); ?></span> <span > <?php echo $emps[$act['created_by']]['display_name']; ?> </span> <span id="comment_data_<?php echo $act['id']; ?>"><?php echo $act['comments']; ?></span> <span onclick="editcomment(<?php echo $act['id']; ?>>)"><i class="fa fa-edit"></i></span>
                         </br>
                         <span class="text-muted f-12 m-l-50"> <?php echo  notificationdatesdiff($act['created_date']);  ?></span>
-                      </div>
+                      </button>
                       <div class=" mt-2" id="textarea_comment_<?php echo $act['id']; ?>" style="display: none;">
                         <textarea aria-label="<?php echo __('Text area'); ?>" class="form-control" onblur="updatedynamicfiledtable(this.value, <?php echo $act['id']; ?>, 'comments', 'project_task_activities')" ><?php echo $act['comments']; ?></textarea>
                       </div>
@@ -690,7 +680,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
                     <span class="user-name"><?php echo initials($project_teams[$subtask['assigen_id']]['display_name']); ?></span>
                   <?php } ?>
                     </div>
-                    <div class="col-lg-6 cursor-pointer mt-2" onclick="taskdetailspopup(<?php echo $subtask['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo substr($subtask['task_name'],0,90)."..."; ?></div>
+                    <button type="button" class="btn btn-link p-0 border-0 text-left col-lg-6 cursor-pointer mt-2" onclick="taskdetailspopup(<?php echo $subtask['id']; ?>)"><?php echo substr($subtask['task_name'],0,90)."..."; ?></button>
                     <div class="col-lg-2 " >
                         <?php if($subtask['planned_finish']!=""){ ?>
                           <span class=" p-2  d-inline-block f-12 m-r-5 <?php if(strtotime($subtask['planned_finish'])< strtotime(date('Y-m-d'))){ echo __('exdate');
@@ -739,7 +729,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
               <div class="col-lg-2" id="rem_<?php echo $attach['id']; ?>">
                <a href="uploads/attachments/<?php echo $attach['actual_file_name']; ?>" target="_blank"><i class="ti-file f-30 text-info"></i></a>
                <div> <?php echo $attach['file_name']; ?> </div>
-               <div class="text-danger cursor-pointer" onclick="removeattacchment(<?php echo $attach['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <?php echo __('Remove'); ?> </div>
+               <button type="button" class="btn btn-link p-0 border-0 text-left text-danger cursor-pointer" onclick="removeattacchment(<?php echo $attach['id']; ?>)"> <?php echo __('Remove'); ?> </button>
              </div>
            <?php } ?>
          </div>
@@ -757,7 +747,7 @@ $weekdays = ['Sun'=>'Sunday','Mon'=>'Monday','Tue'=>'Tuesday','Wed'=>'Wednesday'
             </h4>
             <div class="m-l-40">
               <div class="progress mt-4 mb-2">
-                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <progress class="progress-bar" value="0" max="100"></progress>
               </div>
               <div id="addcheckitem_<?php echo $mcheck['id']; ?>">
                 <?php foreach((array)$data['subchecklist'][$mcheck['id']] as $subc){ ?>

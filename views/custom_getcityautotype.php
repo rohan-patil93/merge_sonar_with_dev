@@ -1,11 +1,15 @@
 <?php
+defined('API_CITY_AUTOTYPE') || define('API_CITY_AUTOTYPE', '?mode=getcitydatasautotype&table=');
+defined('PARAM_SELECT_FILED') || define('PARAM_SELECT_FILED', '&selectfiled=');
+defined('PARAM_NAMEWORDS') || define('PARAM_NAMEWORDS', '&namewords=');
+defined('PARAM_EXTRACAT') || define('PARAM_EXTRACAT', '&extracat=');
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
 include_once '../comm.php';
 $page =  $_GET['pagename'];
 if($_GET['tablename'] == "hsn_and_sac_codes"){
     $selectfiledextra = $_GET['fieldsname1'].",".$_GET['fieldsname2'].",".$_GET['fieldsname3'];
-    $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$selectfiledextra;
+    $url1 = API.API_CITY_AUTOTYPE.$_GET['tablename'].PARAM_SELECT_FILED.$_GET['fieldsname'].PARAM_NAMEWORDS.$_GET['q'].PARAM_EXTRACAT.$selectfiledextra;
     $data_details1 = callAPI($url1);
     $values =  json_decode($data_details1,1);
     foreach($values as $row){
@@ -15,7 +19,7 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
     echo json_encode($arrara);
 }elseif($_GET['tablename'] == "chart_of_accounts"){
     $selectfiledextra = "account_code,account_name";
-    $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$selectfiledextra;
+    $url1 = API.API_CITY_AUTOTYPE.$_GET['tablename'].PARAM_SELECT_FILED.$_GET['fieldsname'].PARAM_NAMEWORDS.$_GET['q'].PARAM_EXTRACAT.$selectfiledextra;
     $data_details1 = callAPI($url1);
     $values =  json_decode($data_details1,1);
     foreach($values as $row){
@@ -36,10 +40,10 @@ if($_GET['tablename'] == "hsn_and_sac_codes"){
     }else{
         $tringselect = 0;
     }
-    if(($tringselect=="" || $tringselect=="0")){
-           $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
+    if($tringselect=="" || $tringselect=="0"){
+           $url1 = API.API_CITY_AUTOTYPE.$_GET['tablename'].PARAM_SELECT_FILED.$_GET['fieldsname'].PARAM_NAMEWORDS.$_GET['q'].PARAM_EXTRACAT.$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
     }else{
-      $url1 = API."?mode=getcitydatasautotype&table=".$_GET['tablename']."&selectfiled=".$_GET['fieldsname']."&namewords=".$_GET['q']."&selectvalue=".$tringselect."&extracat=".$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
+      $url1 = API.API_CITY_AUTOTYPE.$_GET['tablename'].PARAM_SELECT_FILED.$_GET['fieldsname'].PARAM_NAMEWORDS.$_GET['q']."&selectvalue=".$tringselect.PARAM_EXTRACAT.$_GET['extracat']."&transaction_date=".$_GET['transaction_date'];
     }
       $data_details1 = callAPI($url1);
       $values =  json_decode($data_details1,1);

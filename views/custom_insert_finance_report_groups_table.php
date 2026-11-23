@@ -34,7 +34,7 @@ if(isset($_POST['pageshow']) && $_POST['pageshow'] =="Y"){
                             $Alevel2 = $financereportgroupsreport[$level1['id']];
                             ?>
                             <tr>
-                                <th scope="col" ><i class="ti-pencil-alt" onclick="editFinanaceGrp('<?php echo $level1['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i></th>
+                                <th scope="col" ><button type="button" class="btn btn-link p-0 border-0" onclick="editFinanaceGrp('<?php echo $level1['id']; ?>')" aria-label="Edit"><i class="ti-pencil-alt"></i></button></th>
                                 <td colspan="2" class="<?php echo count((array)$Alevel2) !='0'?"f-w-700":"NNN"; ?> w-b-w-s"><span class=""><?php echo $i.") ".$level1['group_name']." - ".$level1['short_code']; ?></span></td>
                                 <td><button class="btn bg-primary p-0 pt-1" onclick="editFinanaceGrp(0,'<?php echo $level1['id']; ?>')"><i class="ti-plus text-white m-l-5"></i></button></td>
                             </tr>
@@ -42,7 +42,7 @@ if(isset($_POST['pageshow']) && $_POST['pageshow'] =="Y"){
                         $Alevel3 = $financereportgroupsreport[$level2['id']];
                         ?>
                             <tr>
-                                <th scope="col"> <i class="ti-pencil-alt" onclick="editFinanaceGrp('<?php echo $level2['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i></th>
+                                <th scope="col"> <button type="button" class="btn btn-link p-0 border-0" onclick="editFinanaceGrp('<?php echo $level2['id']; ?>')" aria-label="Edit"><i class="ti-pencil-alt"></i></button></th>
                                 <td  colspan="2" class="<?php echo count((array)$Alevel3) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-20"><?php echo $mk.") ".$level2['group_name']." - ".$level2['short_code']; ?></span></td>
                                 <td><button class="btn bg-primary p-0 pt-1" onclick="editFinanaceGrp(0,'<?php echo $level2['id']; ?>')"><i class="ti-plus text-white m-l-5"></i></button></td>
                             </tr>
@@ -50,7 +50,7 @@ if(isset($_POST['pageshow']) && $_POST['pageshow'] =="Y"){
                             $Alevel4 = $financereportgroupsreport[$level3['id']];
                             ?>
                             <tr>
-                                <th scope="col" ><i class="ti-pencil-alt" onclick="editFinanaceGrp('<?php echo $level3['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i></th>
+                                <th scope="col" ><button type="button" class="btn btn-link p-0 border-0" onclick="editFinanaceGrp('<?php echo $level3['id']; ?>')" aria-label="Edit"><i class="ti-pencil-alt"></i></button></th>
                                 <td colspan="2" class="<?php echo count((array)$Alevel4) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-40"><?php echo $mj.") ".$level3['group_name']." - ".$level3['short_code']; ?></span></td>
                                 <td><button class="btn bg-primary p-0 pt-1"  onclick="editFinanaceGrp(0,'<?php echo $level3['id']; ?>')"><i class="ti-plus text-white m-l-5"></i></button></td>
 
@@ -59,7 +59,7 @@ if(isset($_POST['pageshow']) && $_POST['pageshow'] =="Y"){
                             $Alevel5 = $financereportgroupsreport[$level4['id']];
                             ?>
                             <tr>
-                                <th scope="col" ><i class="ti-pencil-alt" onclick="editFinanaceGrp('<?php echo $level4['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i></th>
+                                <th scope="col" ><button type="button" class="btn btn-link p-0 border-0" onclick="editFinanaceGrp('<?php echo $level4['id']; ?>')" aria-label="Edit"><i class="ti-pencil-alt"></i></button></th>
                                 <td colspan="2" class="<?php echo count((array)$Alevel5) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-60"><?php echo $mm.") ".$level4['group_name']." - ".$level4['short_code']; ?></span></td>
                                 <td><button class="btn bg-primary p-0 pt-1" onclick="editFinanaceGrp(0,'<?php echo $level4['id']; ?>')"><i class="ti-plus text-white m-l-5"></i></button></td>
                             </tr>
@@ -67,7 +67,7 @@ if(isset($_POST['pageshow']) && $_POST['pageshow'] =="Y"){
                             $Alevel6 = $financereportgroupsreport[$level5['id']];
                             ?>
                             <tr>
-                                <th scope="col" ><i class="ti-pencil-alt" onclick="editFinanaceGrp('<?php echo $level5['id']; ?>')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i></th>
+                                <th scope="col" ><button type="button" class="btn btn-link p-0 border-0" onclick="editFinanaceGrp('<?php echo $level5['id']; ?>')" aria-label="Edit"><i class="ti-pencil-alt"></i></button></th>
                                 <td colspan="2" class="<?php echo count((array)$Alevel6) !='0'?"f-w-700":""; ?> w-b-w-s"><span class="m-l-80"><?php echo $jm.") ".$level5['group_name']." - ".$level5['short_code']; ?></span></td>
                                 <td><button class="btn bg-primary p-0 pt-1" onclick="editFinanaceGrp(0,'<?php echo $level5['id']; ?>')"><i class="ti-plus text-white m-l-5"></i></button></td>
                             </tr>

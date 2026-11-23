@@ -125,9 +125,9 @@ foreach($notes as $note){
        <?php foreach($noteslist[0] as $noteslists){ ?>
         <h4 class="f-16 f-w-600 mt-3"><?php echo $noteslists['note_number'].".".$noteslists['note_name'];?>
             <span class="float-right">
-                <i class="ti-pencil-alt m-r-10" data-value="<?php echo $noteslists['description']; ?>" onclick="editeNotes('<?php echo $noteslists['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Edit Note'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
-                <i class="fa fa-plus-square m-r-10" onclick="addChildNotes('<?php echo $noteslists['id']; ?>','<?php echo $noteslists['note_name']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Add Child'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
-                <i class="ti-share" onclick="usedNoteNumber('<?php echo $noteslists['note_number']; ?>','<?php echo $fingrpid; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Used Note'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="editeNotes('<?php echo $noteslists['id']; ?>')" aria-label="<?php echo __('Edit Note'); ?>"><i class="ti-pencil-alt m-r-10" data-value="<?php echo $noteslists['description']; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Edit Note'); ?>"></i></button>
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="addChildNotes('<?php echo $noteslists['id']; ?>','<?php echo $noteslists['note_name']; ?>')" aria-label="<?php echo __('Add Child'); ?>"><i class="fa fa-plus-square m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Add Child'); ?>"></i></button>
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="usedNoteNumber('<?php echo $noteslists['note_number']; ?>','<?php echo $fingrpid; ?>')" aria-label="<?php echo __('Used Note'); ?>"><i class="ti-share" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Used Note'); ?>"></i></button>
             <span>
         </h4>
         <p class="pt-2"><?php echo $noteslists['description'];?></p>
@@ -136,8 +136,8 @@ foreach($notes as $note){
         <?php foreach($noteslist[$noteslists['id']] as $noteslists){ ?>
                 <a class="accordion-msg b-none waves-effect waves-light f-w-600 bg-gray"><?php echo $noteslists['note_number'].".".$noteslists['note_name'];?>
                     <span class="float-right">
-                    <i class="ti-pencil-alt m-r-10" onclick="editeNotes('<?php echo $noteslists['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Edit Note'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
-                     <i class="ti-share" onclick="usedNoteNumber('<?php echo $noteslists['note_number']; ?>','<?php echo $fingrpid; ?>')" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Used Note'); ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></i>
+                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="editeNotes('<?php echo $noteslists['id']; ?>')" aria-label="<?php echo __('Edit Note'); ?>"><i class="ti-pencil-alt m-r-10" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Edit Note'); ?>"></i></button>
+                     <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="usedNoteNumber('<?php echo $noteslists['note_number']; ?>','<?php echo $fingrpid; ?>')" aria-label="<?php echo __('Used Note'); ?>"><i class="ti-share" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo __('Used Note'); ?>"></i></button>
                 <span>
                 </a>
                 <div class="accordion-desc pt-2">

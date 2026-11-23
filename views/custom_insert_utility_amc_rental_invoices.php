@@ -1,4 +1,8 @@
 <?php
+defined('KEY_CURRENT_STATUS') || define('KEY_CURRENT_STATUS', 'current_status');
+defined('LBL_INPUT_FIELD') || define('LBL_INPUT_FIELD', 'Input field');
+defined('KEY_ORIGINATOR_STATE_ID') || define('KEY_ORIGINATOR_STATE_ID', 'originator_state_id');
+defined('KEY_SUPPLIER_STATE_ID') || define('KEY_SUPPLIER_STATE_ID', 'supplier_state_id');
 $_SESSION['apply_js']['multiselest'] = 1;
 
 if (isset($_POST['submitrentalinvoice'])) {
@@ -64,7 +68,7 @@ $operation_symbol = array('+','/','*','%','=');
 
 
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK,'');
-if(in_array($transaction_data['current_status'], (array)$check_array) || ($transaction_data['current_status'] == ST_CALLBACK && $transaction_data['originator'] == $_SESSION['userid'])){
+if(in_array($transaction_data[KEY_CURRENT_STATUS], (array)$check_array) || ($transaction_data[KEY_CURRENT_STATUS] == ST_CALLBACK && $transaction_data['originator'] == $_SESSION['userid'])){
         $disable = "" ;
 }else{
     $disable = "event_disabled" ;
@@ -73,7 +77,7 @@ if(in_array($transaction_data['current_status'], (array)$check_array) || ($trans
 ?>
 
 <script>
-<?php if($transaction_data['current_status'] != ST_APPROVED){ ?>
+<?php if($transaction_data[KEY_CURRENT_STATUS] != ST_APPROVED){ ?>
 window.addEventListener("load", function() {
     $('.allitemsid').each(function(index) {
         var item_id = $(this).val();
@@ -352,13 +356,13 @@ function cancelInvoices(transaction_table,transaction_id){
 <div id="dynamiccanceldiv"><span><?= __('Cancelled Invoice'); ?></span></div>
 <?php } ?>
      <?php
-        $workflowsteps = getWorkflowStatus('utility_amc_rental_invoices',$transaction_data['id'],$transaction_data['current_status']);
+        $workflowsteps = getWorkflowStatus('utility_amc_rental_invoices',$transaction_data['id'],$transaction_data[KEY_CURRENT_STATUS]);
             ?>
     <div class="card-header table-card-header">
         <h5> <?= __('Rental Invoice'); ?></h5>
         <div class="card-header-right table-card-header ">
             <?php   /**
-                if($transaction_data['current_status'] == ST_APPROVED AND $transaction_data['cancel_invoice'] !="Y" && $transaction_data['originator'] ==$_SESSION['userid']){ ?>
+                if($transaction_data[KEY_CURRENT_STATUS] == ST_APPROVED AND $transaction_data['cancel_invoice'] !="Y" && $transaction_data['originator'] ==$_SESSION['userid']){ ?>
                         <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="cancelInvoices('utility_rental_invoices','<?php echo $transaction_id; ?>')">
                             <i class="text-white fa fa-times-circle"></i> &nbsp;Cancel Invoice
                         </button>
@@ -397,11 +401,11 @@ function cancelInvoices(transaction_table,transaction_id){
             </div>
             <div class="col-lg-3 form-group">
                 <label for="originator" class="inline-block mb-1 f-w-600"><?= __('Originator'); ?></label>
-                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= $_SESSION['users'][$transaction_data['originator']]; ?>"  readonly>
+                <input aria-label="<?= htmlspecialchars(__(LBL_INPUT_FIELD), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?= $_SESSION['users'][$transaction_data['originator']]; ?>"  readonly>
             </div>
             <div class="col-lg-3 form-group">
                 <label for="parent_ref_id" class="inline-block mb-1 f-w-600"><?= __('Property Owner'); ?></label>
-                 <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?php echo  $owner_additional_details['owner_company_name']; ?>"  readonly>
+                 <input aria-label="<?= htmlspecialchars(__(LBL_INPUT_FIELD), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control" value="<?php echo  $owner_additional_details['owner_company_name']; ?>"  readonly>
 
             </div>
             <div class="col-lg-3 form-group">
@@ -414,7 +418,7 @@ function cancelInvoices(transaction_table,transaction_id){
             </div>
             <div class="col-lg-3 form-group">
                 <label for="party" class="inline-block mb-1 f-w-600"><?= __('Party/Tenant'); ?></label>
-                <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="<?= htmlspecialchars($transaction_data['party_name'] ?? '') ?>" readonly>
+                <input aria-label="<?= htmlspecialchars(__(LBL_INPUT_FIELD), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control"  value="<?= htmlspecialchars($transaction_data['party_name'] ?? '') ?>" readonly>
             </div>
             <div class="col-lg-3 form-group">
                 <label for="party_email" class="inline-block mb-1 f-w-600"><?= __('Party Email'); ?></label>
@@ -433,15 +437,13 @@ function cancelInvoices(transaction_table,transaction_id){
                 <textarea aria-label="<?= htmlspecialchars(__('Party ship adderss'), ENT_QUOTES, 'UTF-8'); ?>" name="party_ship_adderss" disabled id="party_ship_adderss" Class="form-control"><?= htmlspecialchars($transaction_data['party_ship_adderss'] ?? '') ?> </textarea>
             </div>
 
-           <!--  <input type="hidden" id="originator_state_id" value="<?php echo $transaction_data['originator_state_id']; ?>">
-            <input type="hidden" id="supplier_state_id" value="<?php echo $transaction_data['supplier_state_id']; ?>">
-            -->
+           
             <div class="col-lg-3 form-group">
                 <label for="party_address" class="inline-block mb-1 f-w-600"><?= __('Billing State'); ?></label>
                 <select aria-label="<?= htmlspecialchars(__('Originator state id'), ENT_QUOTES, 'UTF-8'); ?>" name="originator_state_id" id="originator_state_id" class="form-control js-example-basic-single" onchange="calculatetotals()">
                     <option value=""><?= __('Select Any One'); ?></option>
                     <?php foreach($states as $stn){ ?>
-                        <option value="<?php echo $stn['id']; ?>" <?php echo $transaction_data['originator_state_id'] == $stn['id']?"SELECTED":"";?> ><?php echo $stn['state_name']; ?></option>
+                        <option value="<?php echo $stn['id']; ?>" <?php echo $transaction_data[KEY_ORIGINATOR_STATE_ID] == $stn['id']?"SELECTED":"";?> ><?php echo $stn['state_name']; ?></option>
                     <?php } ?>
                 </select>
 
@@ -451,7 +453,7 @@ function cancelInvoices(transaction_table,transaction_id){
                 <select aria-label="<?= htmlspecialchars(__('Supplier state id'), ENT_QUOTES, 'UTF-8'); ?>" name="supplier_state_id"  id="supplier_state_id"  class="form-control js-example-basic-single" onchange="calculatetotals()">
                     <option value=""><?= __('Select Any One'); ?></option>
                     <?php foreach($states as $stn){ ?>
-                        <option value="<?php echo $stn['id']; ?>" <?php echo $transaction_data['supplier_state_id'] == $stn['id']?"SELECTED":"";?> ><?php echo $stn['state_name']; ?></option>
+                        <option value="<?php echo $stn['id']; ?>" <?php echo $transaction_data[KEY_SUPPLIER_STATE_ID] == $stn['id']?"SELECTED":"";?> ><?php echo $stn['state_name']; ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -463,15 +465,15 @@ function cancelInvoices(transaction_table,transaction_id){
         <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter">
                     <thead>
                         <tr>
-                            <th width="5%">#</th>
-                            <th width="15%"><?= __('Utility'); ?></th>
-                            <th width="15%"><?= __('Remark'); ?></th>
-                            <th width="5%"><?= __('Tax'); ?></th>
-                            <th width="5%"><?= __('UOM'); ?></th>
-                            <th width="10%"><?= __('QTY'); ?></th>
-                            <th width="10%"><?= __('Formula'); ?></th>
-                            <th width="10%"><?= __('Rate'); ?></th>
-                            <th width="10%" class="text-right" colspan="5"><?= __('Amount'); ?></th>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 15%;"><?= __('Utility'); ?></th>
+                            <th style="width: 15%;"><?= __('Remark'); ?></th>
+                            <th style="width: 5%;"><?= __('Tax'); ?></th>
+                            <th style="width: 5%;"><?= __('UOM'); ?></th>
+                            <th style="width: 10%;"><?= __('QTY'); ?></th>
+                            <th style="width: 10%;"><?= __('Formula'); ?></th>
+                            <th style="width: 10%;"><?= __('Rate'); ?></th>
+                            <th style="width: 10%;" class="text-right" colspan="5"><?= __('Amount'); ?></th>
 
                         </tr>
                     </thead>
@@ -586,7 +588,7 @@ function cancelInvoices(transaction_table,transaction_id){
                             <td colspan="2" class="border p-2">
                                 <table class="w-100" id="tax_html_table" <?php echo $onetimecheck == "0"?"style='display:none'":""; ?>>
                                  <?php
-                                 if($transaction_data['originator_state_id'] == $transaction_data['supplier_state_id']){ ?>
+                                 if($transaction_data[KEY_ORIGINATOR_STATE_ID] == $transaction_data[KEY_SUPPLIER_STATE_ID]){ ?>
                                         <tr>
                                         <th class="text-start p-2 border">
                                             <span>

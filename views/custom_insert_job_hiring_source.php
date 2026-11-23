@@ -66,38 +66,15 @@
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<?php echo __('Close'); ?>"></button>
     </div>
-    <div class="modal-body">
-        <form class="" action="" method="post">
-            <div class="">
-                <div class="form-group row">
-                    <div class="col-lg-12 row" style="margin-left: 0px;">
-                            <table class="table table-bordered nowrap">
-                                <thead>
-                                    <th scope="col">#</th>
-                                    <th scope="col"><?php echo __('Name'); ?></th>
-                                    <th scope="col" class="text-center"><?php echo __('Action'); ?></th>
-                                </thead>
-                                <?php $m=1; foreach($tabledata as $data){ ?>
-                                <tr>
-                                    <td><?php echo $m; ?></td>
-                                    <td><?php echo $data['name']; ?></td>
-                                    <td class="text-center">
-                                        <div class="btn-group">
-
-                                            <?php if(in_array($data['id'],(array)$pubids)){ ?>
-                                                <?php if($publish[$data['id']]==1){ ?>
-                                            <button onclick="displaystausdrop(<?php echo $jobpost; ?>,<?php echo "'job_postings'"; ?>,<?php echo $result[0]['current_status']; ?>)" class="btn btn-sm btn-success  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'CREATE')" ><?php echo __('Publish'); ?> </button>
-                                            <div class="dropdown-menu" id="dropdownlist">
-                                                <div  onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'MODIFY')" class="dropdown-item" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Republish'); ?></div>
-                                                <div onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'DRAFT')" class="dropdown-item" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Hold'); ?></div>
-                                                <div onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'TRASH')" class="dropdown-item" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Unpublish'); ?></div>
+    <button type="button" class="modal-body"> <form class="" action="" method="post"> <div class=""> <div class="form-group row"> <div class="col-lg-12 row" style="margin-left: 0px;"> <table class="table table-bordered nowrap"> <thead> <th scope="col">#</th> <th scope="col"><?php echo __('Name'); ?></th> <th scope="col" class="text-center"><?php echo __('Action'); ?></th> </thead> <?php $m=1; foreach($tabledata as $data){ ?> <tr> <td><?php echo $m; ?></td> <td><?php echo $data['name']; ?></td> <td class="text-center"> <div class="btn-group"> <?php if(in_array($data['id'],(array)$pubids)){ ?> <?php if($publish[$data['id']]==1){ ?> <button onclick="displaystausdrop(<?php echo $jobpost; ?>,<?php echo "'job_postings'"; ?>,<?php echo $result[0]['current_status']; ?>)" class="btn btn-sm btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'CREATE')" ><?php echo __('Publish'); ?> </button> <div class="dropdown-menu" id="dropdownlist"> <div onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'MODIFY')" class="dropdown-item"><?php echo __('Republish'); ?></button>
+                                                <button type="button" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'DRAFT')" class="dropdown-item"><?php echo __('Hold'); ?></button>
+                                                <button type="button" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'TRASH')" class="dropdown-item"><?php echo __('Unpublish'); ?></button>
                                             </div>
                                             <?php } ?>
                                             <?php if($publish[$data['id']]==2){ ?>
                                             <button onclick="displaystausdrop(<?php echo $jobpost; ?>,<?php echo "'job_postings'"; ?>,<?php echo $result[0]['current_status']; ?>)" class="btn btn-sm btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo __('Hold'); ?> </button>
-                                            <div class="dropdown-menu" id="dropdownlist_2">
-                                                <div class="dropdown-item" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'MODIFY')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Republish'); ?></div>
-                                                <div class="dropdown-item" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'TRASH')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Unpublish'); ?></div>
+                                            <button type="button" class="dropdown-menu" id="dropdownlist_2"> <div class="dropdown-item" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'MODIFY')"><?php echo __('Republish'); ?></button>
+                                                <button type="button" class="dropdown-item" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'TRASH')"><?php echo __('Unpublish'); ?></button>
                                             </div>
                                             <?php } ?>
                                             <?php if($publish[$data['id']]==3){ ?>
@@ -105,8 +82,7 @@
                                             <?php } ?>
                                             <?php }else{?>
                                                 <button onclick="displays(<?php echo $result[0]['current_status']; ?>)" class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><?php echo __('To Be Publish'); ?> </button>
-                                            <div class="dropdown-menu" id="dropdownlist_3">
-                                                <div class="dropdown-item" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'CREATE')" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo __('Publish'); ?></div>
+                                            <button type="button" class="dropdown-menu" id="dropdownlist_3"> <div class="dropdown-item" onclick="shareinfisuitejob(<?php echo $_POST['job_post_id']; ?>,'CREATE')"><?php echo __('Publish'); ?></button>
                                             </div>
                                             <?php } ?>
                                         </div>

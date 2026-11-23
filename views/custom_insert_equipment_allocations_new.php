@@ -1,4 +1,5 @@
 <?php
+defined('ATTR_DISPLAY_NONE_STYLE') || define('ATTR_DISPLAY_NONE_STYLE', ATTR_DISPLAY_NONE_STYLE);
 $_SESSION['apply_js']['multiselest'] = "1";
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
@@ -205,28 +206,21 @@ function addMorefloorSpaces(){
             $cabincnt = 0;
             foreach($asset_allocations as $cabin){  $cabincnt++;
                 $event_disabled = "";
-                if($asset_allocation_id == $cabin['id'] && $asset_allocation_id !=""){
+                if(($asset_allocation_id == $cabin['id'] && $asset_allocation_id !="") || ($asset_id != "" && $asset_allocation_id == "")){
                     $event_disabled ="event_disabled";
                     $editableseq = $cabincnt;
                     $savebtncss = "";
-                    $editbtncss = "style='display:none'";
-                    $addmorebtn = "style='display:none'";
-                    $forecestopedit = "not";
-                }elseif($asset_id != "" && $asset_allocation_id == ""){
-                    $event_disabled ="event_disabled";
-                    $editableseq = $cabincnt;
-                    $savebtncss = "";
-                    $editbtncss = "style='display:none'";
-                    $addmorebtn = "style='display:none'";
+                    $editbtncss = ATTR_DISPLAY_NONE_STYLE;
+                    $addmorebtn = ATTR_DISPLAY_NONE_STYLE;
                     $forecestopedit = "not";
                 }elseif($cabin['id'] !=""){
                     $event_disabled ="event_disabled";
-                    $savebtncss = "style='display:none'";
+                    $savebtncss = ATTR_DISPLAY_NONE_STYLE;
                     $editbtncss = "";
                 }else{
                     $editableseq = $cabincnt;
                     $savebtncss = "";
-                    $editbtncss = "style='display:none'";
+                    $editbtncss = ATTR_DISPLAY_NONE_STYLE;
                 }
 
         ?>
@@ -249,13 +243,11 @@ function addMorefloorSpaces(){
                     <input aria-label="<?php echo __('Input field'); ?>" class="form-control" type="text" id="y_size_<?php echo $cabincnt; ?>"  value="<?php echo $cabin['left_size']; ?>" readonly>
                 </div>
                 <div class="col-lg-2">
-                 <span class="all_save_btn cursor-pointer" id="save_btn_<?php echo $cabincnt; ?>" onclick="lockFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $savebtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Save'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-save"></i> <?php echo __('Save'); ?></span>
+                 <button type="button" class="btn btn-link p-0 border-0 all_save_btn cursor-pointer" id="save_btn_<?php echo $cabincnt; ?>" onclick="lockFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $savebtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Save'); ?>"><i class="ti-save"></i> <?php echo __('Save'); ?></button>
 
-                <span class="all_edit_btn cursor-pointer" id="edit_btn_<?php echo $cabincnt; ?>" onclick="editFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $editbtncss; ?>  data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-edit"></i> <?php echo __('Edit'); ?></span>
+                <button type="button" class="btn btn-link p-0 border-0 all_edit_btn cursor-pointer" id="edit_btn_<?php echo $cabincnt; ?>" onclick="editFloorSpace('<?php echo $cabincnt; ?>')" <?php echo $editbtncss; ?> data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Edit'); ?>"><i class="fa fa-edit"></i> <?php echo __('Edit'); ?></button>
 
-                <span id="allocateequipment_btn_<?php echo $cabincnt; ?>">
-                    <?php if($cabin['id']!=""){ ?>
-                        <span class="cursor-pointer m-l-20 text-danger" onclick="removeEquipmentAllocations('<?php echo $cabin['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="fa fa-trash"></i> <?php echo __('Remove'); ?></span>
+                <button type="button" class="btn btn-link p-0 border-0 cursor-pointer m-l-20 text-danger" id="allocateequipment_btn_<?php echo $cabincnt; ?>"> <?php if($cabin['id']!=""){ ?> <span onclick="removeEquipmentAllocations('<?php echo $cabin['id']; ?>')"><i class="fa fa-trash"></i> <?php echo __('Remove'); ?></button>
                     <?php } ?>
                 </span>
                 <span class="text-danger sub_error d-block" id="submit_error_<?php echo $cabincnt; ?>" ></span>

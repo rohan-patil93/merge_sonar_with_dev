@@ -68,63 +68,48 @@ $url1 = API."?mode=gettabledetailswithconditions&table=display_attributes&data="
 $pagenamesapi = callAPI($url1);
 $pagenamesrow = json_decode($pagenamesapi,1);
 
-function subProcessType($val){
-    $wh1 = $wh1 ?? '';
-    $listval = $listval ?? [];
-    $option = "<option value=''>".__('Select Any')."</option>";
+function getWorkflowTableOptions($table, $labelField){
+    $listval = [];
+    $list = json_decode(getList($table), 1);
+    foreach((array)$list as $lists){
+        $listval[$lists['id']] = $lists[$labelField];
+    }
+    return $listval;
+}
 
-    if($val=="user"){
-        $list = getList('application_users');
-        $list = json_decode($list,1);
-        foreach($list as $lists){
-            $listval[$lists['id']] =  $lists['display_name'];
-        }
-    }elseif($val == 'email_groups'){
-        $list = getList('email_groups');
-        $list = json_decode($list,1);
-        foreach($list as $lists){
-            $listval[$lists['id']] =  $lists['name'];
-        }
-    }elseif($val == 'access_levels'){
-        $list = getList('application_roles');
-        $list = json_decode($list,1);
-        foreach($list as $lists){
-            $listval[$lists['id']] =  $lists['name'];
-        }
-    }elseif($val == 'role_levels' || $val =='user_hierarchical'){
-        $wh1["where"] = array('genc_code'=>"HIERARCHICALLEVEL",'is_active'=>0,'company_id'=>$_SESSION['company_id']);
-        $wh1["field"] = "genc_detail_code ,genc_detail_name";
-        $data1 = urlencode(json_encode($wh1));
-        $url1 = API."?mode=gettabledetailswithconditions&table=general_code_details&data=".$data1;
-        $jsondecode = callAPI($url1);
-        $list = json_decode($jsondecode,1);
-        foreach($list as $lists){
-            if($lists['genc_detail_name'] != "Others"){
-                $listval[$lists['genc_detail_code']] =  $lists['genc_detail_name'];
-            }
-        }
-    }elseif($val == 'buddy'){
-        $wh1["where"] = array('genc_code'=>"EMPLOYEEBUDDIES",'is_active'=>0,'company_id'=>$_SESSION['company_id']);
-        $wh1["field"] = "genc_detail_code ,genc_detail_name";
-        $data1 = urlencode(json_encode($wh1));
-        $url1 = API."?mode=gettabledetailswithconditions&table=general_code_details&data=".$data1;
-        $jsondecode = callAPI($url1);
-        $list = json_decode($jsondecode,1);
-        foreach($list as $lists){
-            if($lists['genc_detail_name'] != "Others"){
-                $listval[$lists['genc_detail_code']] =  $lists['genc_detail_name'];
-            }
-        }
-    }elseif($val == 'individual_employee_role'){
-        $list = getList('employment_roles');
-        $list = json_decode($list,1);
-        foreach($list as $lists){
-            $listval[$lists['id']] =  $lists['role_name'];
+function getWorkflowGencOptions($gencCode){
+    $listval = [];
+    $wh1 = array(
+        "where" => array('genc_code' => $gencCode, 'is_active' => 0, 'company_id' => $_SESSION['company_id']),
+        "field" => "genc_detail_code ,genc_detail_name"
+    );
+    $url1 = API . "?mode=gettabledetailswithconditions&table=general_code_details&data=" . urlencode(json_encode($wh1));
+    $list = json_decode(callAPI($url1), 1);
+    foreach((array)$list as $lists){
+        if($lists['genc_detail_name'] != "Others"){
+            $listval[$lists['genc_detail_code']] = $lists['genc_detail_name'];
         }
     }
-
     return $listval;
+}
 
+function subProcessType($val){
+    $tableMap = [
+        'user' => ['application_users', 'display_name'],
+        'email_groups' => ['email_groups', 'name'],
+        'access_levels' => ['application_roles', 'name'],
+        'individual_employee_role' => ['employment_roles', 'role_name'],
+    ];
+    if(isset($tableMap[$val])){
+        return getWorkflowTableOptions($tableMap[$val][0], $tableMap[$val][1]);
+    }
+    if($val == 'role_levels' || $val == 'user_hierarchical'){
+        return getWorkflowGencOptions("HIERARCHICALLEVEL");
+    }
+    if($val == 'buddy'){
+        return getWorkflowGencOptions("EMPLOYEEBUDDIES");
+    }
+    return [];
 }
 
 ?>
@@ -451,7 +436,7 @@ var showsublistanyall = ["user","manager","Managers_Manager","role_levels","user
                                                             ?>
 
                                                             <tr class="wharerow<?php echo $key;?> allremove">
-                                                                <td><i class="ti ti-trash text-danger" onclick="deletewhererow('<?php echo $key;?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i></td>
+                                                                <td><button type="button" class="btn btn-link p-0 border-0" onclick="deletewhererow('<?php echo $key;?>')" aria-label="Delete"><i class="ti ti-trash text-danger"></i></button></td>
                                                                 <td>
                                                                     <select aria-label="<?= htmlspecialchars(__('Select option'), ENT_QUOTES, 'UTF-8'); ?>"  class="kt-dual-listbox form-select js-example-basic-single criteria_fields" onchange="wherefiledfun(this.value,'<?php echo $key; ?>')"  name="wherefield[]" onchange="buildQueryr()">
                                                                         <?php foreach($listfields as $keyy=>$aray){
@@ -571,48 +556,48 @@ var showsublistanyall = ["user","manager","Managers_Manager","role_levels","user
                                     <div class="accordion-desc mt-2">
                                         <div class="row form-group">
                                             <span><?= __('Configration Action After Each Approval'); ?></span>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="updatefileds('aprove_updatefields',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="updatefileds('aprove_updatefields',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-stack-overflow"></i></div>
                                                         <p class="text-facebook f-w-700"><?= __('Update Status'); ?></p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <span><?= __('Configration Action After Final Approval'); ?></span>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afteraprovassigntask',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="custompopups('afteraprovassigntask',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-notepad"></i></div>
                                                         <p class="text-facebook f-w-700"><?= __('Assign Task'); ?></p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afteraprovalemailnotification',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="custompopups('afteraprovalemailnotification',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-email"></i></div>
                                                         <p class="text-facebook f-w-700"><?= __('Email Notification'); ?></p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afteraprovalwebhook',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="custompopups('afteraprovalwebhook',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-link"></i></div>
                                                         <p class="text-facebook f-w-700"><?= __('Call Webhooks'); ?></p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afteraprovalcallfunction',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="custompopups('afteraprovalcallfunction',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-settings"></i></div>
                                                         <p class="text-facebook f-w-700">call function</p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
                                         </div>
                                     </div>
@@ -620,48 +605,48 @@ var showsublistanyall = ["user","manager","Managers_Manager","role_levels","user
                                     <div class="accordion-desc mt-2">
                                         <div class="row form-group">
                                             <span><?= __('Configration Action After Each Rejection'); ?></span>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="updatefileds('rejection_updatefields',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="updatefileds('rejection_updatefields',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-stack-overflow"></i></div>
                                                         <p class="text-facebook f-w-700"><?= __('Update Status'); ?></p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <span><?= __('Configration Action After Rejection'); ?></span>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afterrejectionassigntask',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="custompopups('afterrejectionassigntask',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-notepad"></i></div>
                                                         <p class="text-facebook f-w-700"><?= __('Assign Task'); ?></p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afterrejectionemailnotification',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="custompopups('afterrejectionemailnotification',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-email"></i></div>
                                                         <p class="text-facebook f-w-700"><?= __('Email Notification'); ?></p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afterrejectionwebhook',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="custompopups('afterrejectionwebhook',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-link"></i></div>
                                                         <p class="text-facebook f-w-700"><?= __('Call Webhooks'); ?></p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6 mt-2" onclick="custompopups('afterrejectioncallfunction',<?php echo $rid; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                            <button type="button" class="col-xl-3 col-md-6 mt-2 btn text-left bg-transparent border-0 p-0" onclick="custompopups('afterrejectioncallfunction',<?php echo $rid; ?>)">
                                                 <div class="card social-card">
                                                     <div class="card-body text-center">
                                                         <div class="text-facebook m-b-20"><i class="ti-settings"></i></div>
                                                         <p class="text-facebook f-w-700">call function</p>
-                                                    </div>
-                                                </div>
+                                                    </button>
+</div>
                                             </div>
                                         </div>
 

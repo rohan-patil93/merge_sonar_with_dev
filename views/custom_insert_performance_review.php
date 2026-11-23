@@ -1,4 +1,6 @@
-<?php
+﻿<?php
+defined('DATE_FMT_FULL_DAY') || define('DATE_FMT_FULL_DAY', 'D, M d, Y');
+defined('DIR_UPLOADS_ALL') || define('DIR_UPLOADS_ALL', 'uploads/all/');
 $rids =  encodeId($_GET['Rid']);
 $rid = urldecode($rids);
 $cand = explode(':', $rid);
@@ -214,7 +216,7 @@ function callInsertApi($insert_main,$insert_sub){
 
    $postdata = array("response_array"=>$insert_main,"response_detail_array"=>$insert_sub);
    $url = API."?mode=saveperformanceresponse&table=performance_responses&method=post";
-   $retunn_inserted_qid = file_post_contents($url,$postdata,'insert');
+   file_post_contents($url,$postdata,'insert');
  header("location:index.php?option=COM_LIST_PERFORMANCE_RESPONSES");
 
 }
@@ -284,7 +286,7 @@ function callInsertApi($insert_main,$insert_sub){
                         <h6 class="text-muted"><?php echo __('Due August 04, 2021'); ?></h6>
                         <h6 class="mt-4"><?php echo __('Analyze Technology gaps in the company.'); ?></h6>
                         <div class="progress mt-4">
-                          <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">10%</div>
+                          <progress class="progress-bar" value="10%" max="100" style="width: 10%;">10%</progress>
                        </div>
                        <div class="custom-comment mt-5">
                         <a href="#"><i class="fas fa-plus-circle"></i> <?php echo __('Add Comment'); ?></a>
@@ -317,7 +319,7 @@ function callInsertApi($insert_main,$insert_sub){
                         <h6 class="text-muted"><?php echo __('Due August 04, 2021'); ?></h6>
                         <h6 class="mt-4"><?php echo __('Analyze Technology gaps in the company.'); ?></h6>
                         <div class="progress mt-4">
-                          <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">10%</div>
+                          <progress class="progress-bar" value="10%" max="100" style="width: 10%;">10%</progress>
                        </div>
                        <div class="custom-comment mt-5">
                         <a href="#"><i class="fas fa-plus-circle"></i> <?php echo __('Add Comment'); ?></a>
@@ -338,10 +340,10 @@ function callInsertApi($insert_main,$insert_sub){
                               <?php if($peerfeedback_count > 0) {
                                 foreach($peerfeedback as $peervalue){
                                  $peer_emp_id = $peervalue['peer_feedback_empid'];
-                                 $updated_date = date('D, M d, Y', strtotime($peervalue['updated_date']));
+                                 $updated_date = date(DATE_FMT_FULL_DAY, strtotime($peervalue['updated_date']));
 
-                                 $start_date = date('D, M d, Y', strtotime($peervalue['created_date']));
-                                 $end_date = date('D, M d, Y', strtotime($assessment[$peervalue['assessment_id']]['assessment_end_date']));
+                                 $start_date = date(DATE_FMT_FULL_DAY, strtotime($peervalue['created_date']));
+                                 $end_date = date(DATE_FMT_FULL_DAY, strtotime($assessment[$peervalue['assessment_id']]['assessment_end_date']));
 
                                  $start = date('Y-m-d', strtotime($assessment[$peervalue['assessment_id']]['assessment_end_date']));
                                  $end = date('Y-m-d', strtotime($peervalue['created_date']))  ;
@@ -363,7 +365,7 @@ function callInsertApi($insert_main,$insert_sub){
                                              <div class="symbol-group symbol-hover">
                                                 <?php if($employees[$peer_emp_id]['image']!=""){ ?>
                                                    <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip">
-                                                      <img src="<?php echo "uploads/all/".$employees[$peer_emp_id]['image']; ?>" alt="<?php echo __('Details'); ?>">
+                                                      <img src="<?php echo DIR_UPLOADS_ALL . $employees[$peer_emp_id]['image']; ?>" alt="<?php echo __('Details'); ?>">
                                                    </div>
                                                 <?php }else{ ?>
                                                    <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" >
@@ -391,7 +393,7 @@ function callInsertApi($insert_main,$insert_sub){
                                           <div class="symbol-group symbol-hover">
                                              <?php if($employees[$peer_emp_id]['image']!=""){ ?>
                                                 <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip">
-                                                   <img src="<?php echo "uploads/all/".$employees[$peer_emp_id]['image']; ?>" alt="<?php echo __('Details'); ?>">
+                                                   <img src="<?php echo DIR_UPLOADS_ALL . $employees[$peer_emp_id]['image']; ?>" alt="<?php echo __('Details'); ?>">
                                                 </div>
                                              <?php }else{ ?>
                                                 <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" >
@@ -447,7 +449,7 @@ function callInsertApi($insert_main,$insert_sub){
                                        <div class="symbol-group symbol-hover">
                                           <?php if($employees[$emp_id]['image']!=""){ ?>
                                              <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip" data-title="<?php echo $employees[$emp_id]['display_name']; ?>">
-                                                <img src="<?php echo "uploads/all/".$employees[$emp_id]['image']; ?>" alt="<?php echo __('Details'); ?>">
+                                                <img src="<?php echo DIR_UPLOADS_ALL . $employees[$emp_id]['image']; ?>" alt="<?php echo __('Details'); ?>">
                                              </div>
                                           <?php }else{ ?>
                                              <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" data-title="<?php echo $employees[$emp_id]['display_name']; ?>" >
@@ -540,7 +542,7 @@ function callInsertApi($insert_main,$insert_sub){
                               <div class="symbol-group symbol-hover">
                                  <?php if($employees[$reports_to]['image']!=""){ ?>
                                     <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip" data-title="<?php echo $employees[$reports_to]['display_name']; ?>">
-                                       <img src="<?php echo "uploads/all/".$employees[$reports_to]['image']; ?>" alt="<?php echo __('Details'); ?>">
+                                       <img src="<?php echo DIR_UPLOADS_ALL . $employees[$reports_to]['image']; ?>" alt="<?php echo __('Details'); ?>">
                                     </div>
                                  <?php }else{ ?>
                                     <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" data-title="<?php echo $employees[$reports_to]['display_name']; ?>">
@@ -665,7 +667,7 @@ function callInsertApi($insert_main,$insert_sub){
                   <div class="symbol-group symbol-hover">
                      <?php if($employees[$review_manager]['image']!=""){ ?>
                         <div class="symbol symbol-45 symbol-circle" data-toggle="tooltip" data-title="<?php echo $employees[$review_manager]['display_name']; ?>">
-                           <img src="<?php echo "uploads/all/".$employees[$review_manager]['image']; ?>" alt="<?php echo __('Details'); ?>">
+                           <img src="<?php echo DIR_UPLOADS_ALL . $employees[$review_manager]['image']; ?>" alt="<?php echo __('Details'); ?>">
                         </div>
                      <?php }else{ ?>
                         <div class="symbol symbol-45 symbol-circle symbol-primary" data-toggle="tooltip" data-title="<?php echo $employees[$review_manager]['display_name']; ?>">

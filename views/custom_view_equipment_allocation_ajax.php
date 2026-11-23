@@ -1,4 +1,6 @@
 <?php
+defined('ATTR_TOOLTIP_EMPTY') || define('ATTR_TOOLTIP_EMPTY', '<?= ATTR_TOOLTIP_EMPTY ?>');
+defined('CLS_ACTIVE_SHOW') || define('CLS_ACTIVE_SHOW', 'active show');
 if($_POST['ajaxpagecall'] == "Y"){
     include_once '../includes/session.php';
     include_once '../dbconfig.php';
@@ -117,921 +119,7 @@ if($_POST['pagetype'] =="IEQ"){
                                                 <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
-                                                <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_name']; ?></h6>
-                                                <span class="m-b-0 f-14 custom-limit-text" style="--linehide: 1;"><?php echo $equip['category_name']; ?></span>
-                                                   <span class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_types_name']; ?></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <div class="align-middle float-left ml-2">
-                                              <?php if($empary['image']!=""){?>
-                                                <img src="uploads/all/<?php echo $empary['image']; ?>" class="img-radius img-30 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
-                                            <?php }else{ ?>
-                                                <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($empary['display_name']); ?></span>
-                                            <?php } ?>
-                                              <div class="d-inline-block">
-                                                <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $empary['display_name']; ?></p>
-                                                <p class="f-10 custom-limit-text" style="--linehide: 1;"><?php echo $empary['emp_code']; ?></p>
-                                              </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="insertEquipmentAllocation('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['building_floor_space_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    <i class="ti-eye cursor-pointer m-l-30 m-r-30" onclick="ShowBuildingFloors('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    <a href="index.php?option=COM_INSERT_ONBOARDING_EMPLOYEES&Rid=<?php echo deocdeId('id:'.$empary['id']); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-user m-0 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" ></i></a>
-
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['equipment_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                    <?php if($equip['seating_equipment']=='Y'){ ?>
-                                        <span class="float-end text-info"><?= __('Seating'); ?></span>
-                                    <?php }else{ ?>
-                                        <span class="float-end text-warning"><?= __('Non-Seating'); ?></span>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-                    <?php }else{ ?>
-                        <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Allocated Equipment'); ?></p>
-                            <div class="text-center px-4">
-                                <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5><?= __('Un-Allocated Equipments'); ?> </h5>
-                    <div class="card-header-right">
-                        <span class="form-label label label-md label-warning"><?php echo count((array)$unallocated_equipments); ?></span>
-                    </div>
-                </div>
-                 <div class="card-body">
-                     <?php if(count((array)$unallocated_equipments) !=0){ ?>
-                    <div class="row">
-                    <?php
-                        $sq = 1;
-                        foreach($unallocated_equipments as $equip){
-                            $equipment_allocat_detail = $equipment_allocat_with_equipment_id[$equip['id']];
-                    ?>
-                        <div class="card col-lg-12">
-                            <div class="card-body">
-                                <div class="row border-bottom">
-                                    <div class="align-middle">
-                                        <?php if($equip['equipment_image'] !="") { ?>
-                                            <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
-                                        <?php } else { ?>
-                                            <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span>
-                                        <?php } ?>
-                                        <div class="d-inline-block width73">
-                                            <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_name']; ?></h6>
-                                            <span class="m-b-0 f-14 custom-limit-text" style="--linehide: 1;"><?php echo $equip['category_name']; ?></span>
-                                               <span class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_types_name']; ?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="insertEquipmentAllocation('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['building_floor_space_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    <i class="ti-eye cursor-pointer m-l-30" onclick="ShowBuildingFloors('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['equipment_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                    <?php if($equip['seating_equipment']=='Y'){ ?>
-                                        <span class="float-end text-info"><?= __('Seating'); ?></span>
-                                    <?php }else{ ?>
-                                        <span class="float-end text-warning"><?= __('Non-Seating'); ?></span>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-                    <?php }else{ ?>
-                        <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Un-Allocated Equipments'); ?></p>
-                            <div class="text-center px-4">
-                                <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5><?= __('Equipments For Which Locations To Be Set'); ?> </h5>
-                    <div class="card-header-right">
-                        <span class="form-label label label-md label-danger"><?php echo count((array)$unlocated_equipments); ?></span>
-                    </div>
-                </div>
-                 <div class="card-body">
-                     <?php if(count((array)$unlocated_equipments) !=0){ ?>
-                    <div class="row">
-                    <?php
-                        $sq = 1;
-                        foreach($unlocated_equipments as $equip){
-                        ?>
-                        <div class="card col-lg-12">
-                            <div class="card-body">
-                                <div class="row border-bottom">
-                                    <div class="align-middle">
-                                        <?php if($equip['equipment_image'] !="") { ?>
-                                            <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
-                                        <?php } else { ?>
-                                            <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span>
-                                        <?php } ?>
-                                        <div class="d-inline-block width73">
-                                            <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_name']; ?></h6>
-                                            <span class="m-b-0 f-14 custom-limit-text" style="--linehide: 1;"><?php echo $equip['category_name']; ?></span>
-                                               <span class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_types_name']; ?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="setLocationEquipments('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Set Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    <?php if($equip['seating_equipment']=='Y'){ ?>
-                                        <span class="float-end text-info"><?= __('Seating'); ?></span>
-                                    <?php }else{ ?>
-                                        <span class="float-end text-warning"><?= __('Non-Seating'); ?></span>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-                    <?php }else{ ?>
-                        <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Equipments For Which Locatons To Be Set'); ?></p>
-                            <div class="text-center px-4">
-                                <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php }elseif($_POST['pagetype'] =="AR"){
-    $buildings = $result['buildings'];
- ?>
-
-                <div class="owl-carousel carousel-box owl-theme">
-                <?php foreach($buildings as $buld){ ?>
-                <div  >
-                    <div class="card cursor-pointer emptycss_building_selectio" id="building_selection_<?php echo $buld['id']; ?>" >
-                        <div class="card-header pb-2">
-                            <h5 class="custom-limit-text" style="--linehide: 1;"><?php echo $buld['building_name']; ?></h5>
-                            <p class="f-w-600 text-muted f-12 custom-limit-text" style="--linehide: 1;"><?php echo $buld['building_address']; ?></p>
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="d-flex align-items-center mb-4">
-                                <div class="w-80px flex-shrink-0 me-2">
-                                    <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
-                                </div>
-                                <div class="m-0">
-                                    <h6 class="fw-bold mb-3 "><?= __('Building Details'); ?></h6>
-                                    <div class="d-flex d-grid gap-3">
-                                        <div class="d-flex flex-column flex-shrink-0 me-1">
-                                            <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['floor_cnt']; ?> <?= __('Floors'); ?></span>
-                                            </span>
-                                            <span class="d-flex align-items-center text-muted fw-bold fs-7">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']; ?> <?= __('Spaces'); ?></span>
-                                            </span>
-                                        </div>
-                                        <div class="d-flex flex-column flex-shrink-0">
-                                            <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['equipments_cnt']; ?> <?= __('Seats'); ?></span>
-                                            </span>
-                                            <span class="d-flex align-items-center text-muted fw-bold fs-7">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['free_equipments']; ?> <?= __('Free'); ?></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="m-0">
-                                <button type="button" class="btn btn-success btn-light me-2 mb-2 f-14" onclick="getEquipemntsWithSeat('AR_SEAT','<?php echo $buld['id']; ?>')"><?= __('Seat Allocation'); ?> </button>
-                                <button type="button" class="btn btn-primary mb-2 f-14" onclick="getBuildingDetails('<?php echo $buld['id']; ?>')"><?= __('Edit Details'); ?></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-
-            <div class="booking-seat"></div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        setTimeout(function(){
-        $('.carousel-box').owlCarousel({
-            items:4,
-            loop:false,
-            autoplay:false,
-            margin: 20,
-            nav:true
-        });
-        },350);
-    });
-</script>
-<script type="text/javascript" src="assets/bower_components/owl.carousel/js/owl.carousel.min.js"></script>
-<script type="text/javascript" src="assets/js/owl-custom.js"></script>
-
-<?php }elseif($_POST['pagetype'] =="AR_SEAT"){
-    $building_floors = $result['building_floors'];
-    $equipment_allocations = $result['equipment_allocations'];
-    $total_allocated_eq = $total_unallocated_eq =  0;
-    foreach($building_floors as $bfloor){
-        foreach($equipment_allocations[$bfloor['id']] as $equal){
-            if($equal['employee_seating'] =="Y"){
-                if($equal['emp_id'] !=""){
-                    $total_allocated_eq++;
-                   }else{
-                    $total_unallocated_eq++;
-                   }
-               }
-        }
-    }
-    ?>
-
-                <div class="card">
-                    <div class="card-body ">
-                        <div class="seat-wrapper-sec">
-                            <div class="card-body ">
-                                <div class="row align-items-center" id="ar_seat_id">
-                                    <div class="col-lg-5">
-                                        <span class="form-label"><?= __('Floors'); ?></span>
-                                    </div>
-                                    <div class="col-lg-7 text-right">
-                                        <div class="d-inline-block m-l-10">
-                                            <button type="button" class="btn waves-effect waves-light btn-primary p-0 img-30 m-r-10"><?php echo $total_allocated_eq; ?></button>
-                                            <span><?= __('Allocated Seat'); ?></span>
-                                        </div>
-                                        <div class="d-inline-block m-l-10 m-l-20">
-                                            <button type="button" class="btn waves-effect waves-light p-0 img-30 m-r-10" style="border: 1px solid;"><?php echo $total_unallocated_eq; ?></button>
-                                            <span><?= __('Free Seat'); ?></span>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <?php if(count((array)$building_floors)){
-                                    foreach($building_floors as $bfloor){
-                                    $total_seating_eq = $total_unseating_eq = $total_allocated_eq = $total_unallocated_eq =  0;
-                                    foreach($equipment_allocations[$bfloor['id']] as $equal){
-                                        if($equal['employee_seating'] =="Y"){
-                                            $total_seating_eq++;
-                                            if($equal['emp_id'] !=""){
-                                                $total_allocated_eq++;
-                                            }else{
-                                                $total_unallocated_eq++;
-                                            }
-                                        }else{
-                                            $total_unseating_eq++;
-                                        }
-                                    }
-                             ?>
-                                <div class="card-body ">
-                                    <div class="row align-items-center" >
-                                        <div class="col-lg-2">
-                                             <h6 class="text-muted mb-0"> <?php echo $bfloor['floor_name']; ?></h6>
-                                        </div>
-                                        <div class="col-lg-10">
-                                        <div class="seat-left-sec">
-                                            <?php if(count((array)$equipment_allocations[$bfloor['id']]) != 0){ ?>
-                                            <ul>
-                                            <?php
-                                                $eacnt = 1;
-                                                foreach($equipment_allocations[$bfloor['id']] as $equal){
-                                                    if($equal['employee_seating'] =="Y"){
-                                                        $allocated = $tooltip =$addtooltip =  "";
-                                                        if($equal['emp_id'] !=""){
-                                                            $allocated = "allocated";
-                                                            $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$employees[$equal['emp_id']]['display_name'].'"';
-                                                        }else{
-                                                            $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.htmlspecialchars(__('Click To Allocate seat'), ENT_QUOTES, 'UTF-8').'"';
-                                                        }
-                                                        ?>
-                                                        <li class="<?php echo $allocated; ?> custom-popup" >
-                                                            <span class="cursor-pointer" onclick="toAllocateEmployee('<?php echo $equal['id']; ?>')" <?php echo $tooltip; ?> tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"> <?php echo $eacnt; ?></span>
-
-                                                            <div class="custom-popup-open to_allocate_employee_<?php echo $equal['id']; ?> text-start" style="right: 34px; top: -80px; width: 280px;">
-
-                                                            </div>
-                                                        </li>
-                                                    <?php }else{ ?>
-                                                         <li class="bg-success">
-                                                              <span class="cursor-pointer" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-bs-toggle="tooltip" data-placement="bottom" title=""  data-bs-original-title="<?= htmlspecialchars(__('Click To Open Menu'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $eacnt; ?></span>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="insertEquipemnt('<?php echo $equal['equipment_id']; ?>')"><?= __('Edit Equipment Details'); ?></button>
-
-                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="insertEquipmentAllocation('<?php echo $equal['building_floor_id']; ?>','<?php echo $equal['building_floor_space_id']; ?>','<?php echo $equal['id']; ?>')" ><?= __('Edit Allocation'); ?></button>
-
-                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="ShowBuildingFloors('<?php echo $equal['building_floor_id']; ?>','<?php echo $equal['id']; ?>')" ><?= __('View Location'); ?></button>
-                                                            <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"  onclick="showEquipmentLogs('<?php echo $equal['equipment_id']; ?>')" ><?= __('View Logs'); ?></button>
-                                                        </div>
-                                                    </li>
-                                                    <?php } ?>
-                                                   <?php $eacnt++;
-} ?>
-                                            </ul>
-                                        <?php }else{ ?>
-                                            <h5 class="text-center"><i class="ti-alert"></i> <?= __('No Equipments'); ?></h5>
-                                        <?php } ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-
-                            <?php } ?>
-                            <?php }else{ ?>
-                                <div class="card-px text-center py-20 m-t-30">
-                                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Floors'); ?></p>
-                                    <div class="text-center px-4">
-                                        <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-
-<?php }elseif($_POST['pagetype'] =="ALLOCATEEMP"){  ?>
-    $selected_employees = $result['selected_employees'];
-    $equipment_allocations = $result['equipment_allocations'];
-    $postemp = $result['emp_id'];
-    $eq_id = $equipment_allocations['id'];
-    $disabled = "";
-    if($postemp !=""){
-        $disabled = 'event_disabled';
-    }
- ?>
-<div class="card">
-    <div class="card-header">
-        <h5><?= __('Employees'); ?></h5>
-        <div class="card-header-right">
-            <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeToAllocateEmployee()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="input-group input-group-button mb-0" >
-                    <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter1111" data-id='categoryfilter' data-type="div" class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
-                    <div class="input-group-text addon-style">
-                        <span class=""><i class="ti-search text-white mt-2"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="custom-scroll" style="max-height: 200px;" >
-            <?php foreach($selected_employees as $emplist){ ?>
-                <div id="results">
-                <div class="row mt-2" >
-                    <div class="col-lg-10">
-                        <div class="align-middle  ">
-                            <?php if($emplist['image']!=""){?>
-                                <img src="uploads/all/<?php echo $emplist['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
-                            <?php }else{ ?>
-                                <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($emplist['display_name']); ?></span>
-                            <?php } ?>
-                            <div class="d-inline-block">
-                                <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $emplist['display_name']; ?>
-                                    <?php if($postemp== $emplist['id']){ ?>
-                                        <i class="ti-check text-success f-14 f-w-700"></i>
-                                    <?php } ?>
-                                </p>
-                                <p class="f-10 mb-0"><?php echo $emplist['emp_code']; ?> </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 d-inline-block">
-                        <?php if($postemp == $emplist['id']){ ?>
-                            <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Seat'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeeSeat('<?php echo $eq_id; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                        <?php }else{  ?>
-                            <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Seat'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeeSeat('<?php echo $eq_id; ?>','<?php echo $emplist['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                        <?php } ?>
-                    </div>
-                </div>
-            </div>
-            <?php } ?>
-        </div>
-    </div>
-</div>
-<?php }elseif($_POST['pagetype'] =="CSA"){
-    $buildings = $result['buildings'];
-
-    ?>
-
-                <div class="owl-carousel carousel-box owl-theme">
-                <?php foreach($buildings as $buld){  ?>
-                <div  >
-                    <div class="card cursor-pointer emptycss_building_selectio" id="building_selection_<?php echo $buld['id']; ?>" >
-                        <div class="card-header pb-2">
-                            <h5 class="custom-limit-text" style="--linehide: 1;"><?php echo $buld['building_name']; ?></h5>
-                            <p class="f-w-600 text-muted f-12 custom-limit-text" style="--linehide: 1;"><?php echo $buld['building_address']; ?></p>
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="d-flex align-items-center mb-4">
-                                <div class="w-80px flex-shrink-0 me-2">
-                                    <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
-                                </div>
-                                <div class="m-0">
-                                    <h6 class="fw-bold mb-3 "><?= __('Building Details'); ?></h6>
-                                    <div class="d-flex d-grid gap-3">
-                                        <div class="d-flex flex-column flex-shrink-0 me-1">
-                                            <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['floor_cnt']; ?> <?= __('Floors'); ?></span>
-                                            </span>
-                                            <span class="d-flex align-items-center text-muted fw-bold fs-7">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']; ?> <?= __('Spaces'); ?></span>
-                                            </span>
-                                        </div>
-                                        <div class="d-flex flex-column flex-shrink-0">
-                                            <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['usedspace_cnt']; ?> <?= __('Allocated'); ?></span>
-                                            </span>
-                                            <span class="d-flex align-items-center text-muted fw-bold fs-7">
-                                                <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']-$buld['usedspace_cnt']; ?> <?= __('Free'); ?></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="m-0 text-center">
-                                <button type="button" class="btn btn-success btn-light me-2 mb-2 f-14" onclick="getEquipemntsWithSeat('CSA_ALLOCATION','<?php echo $buld['id']; ?>')"><?= __('Cubicle Allocation'); ?> </button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-
-            <div class="booking-seat"></div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        setTimeout(function(){
-        $('.carousel-box').owlCarousel({
-            items:4,
-            loop:false,
-            autoplay:false,
-            margin: 20,
-            nav:true
-        });
-        },350);
-    });
-</script>
-<script type="text/javascript" src="assets/bower_components/owl.carousel/js/owl.carousel.min.js"></script>
-<script type="text/javascript" src="assets/js/owl-custom.js"></script>
-
-<?php }elseif($_POST['pagetype'] =="CSA_ALLOCATION"){
-    $buildings = $result['buildings'];
-    $building_floors = $result['building_floors'];
-    $building_floor_spaces = $result['building_floor_spaces'];
-    $building_floor_space_allocations = $result['building_floor_space_allocations'];
-    $reservepool = $result['reservepool'];
-    $empallocatedcnt = $reservecnt = $notallocatedcnt = $inprogresscnt =  0;
-    foreach($building_floors as $bfloor){
-        if(count((array)$building_floor_spaces[$bfloor['id']]) != 0){
-            foreach($building_floor_spaces[$bfloor['id']] as $bfspace){
-                $bfsa_details = $building_floor_space_allocations[$bfspace['id']];
-                if($bfsa_details['current_status'] ==ST_INPROGRESS){
-                    $inprogresscnt++;
-                }elseif($bfsa_details['emp_id'] !=""){
-                    $empallocatedcnt++;
-                }elseif($bfsa_details['reserve_pool_id'] !=""){
-                    $reservecnt++;
-                }else{
-                     $notallocatedcnt++;
-                }
-            }
-        }
-    }
-
-     ?>
-<div class="card">
-    <div class="card-body ">
-
-        <div class="seat-wrapper-sec">
-            <div class="card-body ">
-                <div class="row align-items-center" id="ar_seat_id_2">
-                    <div class="col-lg-4">
-                        <span class="form-label mb-0"><?php echo $buildings['building_name']; ?></span>
-                        <span class="f-12 d-block"><?php echo $buildings['building_address']; ?></span>
-                    </div>
-                    <div class="col-lg-8 text-right">
-                        <div class="d-inline-block m-l-10">
-                            <span class="form-label label label-lg label-danger"><?php echo $inprogresscnt; ?></span>
-
-                            <span class="f-12"><?= __('In-Progress'); ?></span>
-                        </div>
-                        <div class="d-inline-block m-l-10">
-                            <span class="form-label label label-lg label-warning"><?php echo $reservecnt; ?></span>
-
-                            <span class="f-12"><?= __('Reserved'); ?></span>
-                        </div>
-                        <div class="d-inline-block m-l-10">
-                            <span class="form-label label label-lg label-primary" style="background-color: #e4e4e4"><?php echo $empallocatedcnt; ?></span>
-
-                            <span class="f-12" ><?= __('Allocated'); ?></span>
-                        </div>
-                        <div class="d-inline-block m-l-10 m-l-20">
-                            <span class="form-label label label-lg text-dark" style="border: 1px black solid;"><?php echo $notallocatedcnt; ?></span>
-
-                            <span class="f-12"><?= __('Free'); ?></span>
-                        </div>
-                        <div class="d-inline-block m-l-10 m-l-20">
-                            <button type="button" class="btn p-0 border-0 bg-transparent ti-close text-danger cursor-pointer" onclick="closeBookingSeat()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php if(count((array)$building_floors)){
-                $k=1;    foreach($building_floors as $bfloor){
-             ?>
-                <div class="card-body ">
-                    <div class="row align-items-center">
-                        <div class="col-lg-2">
-                             <h6 class="text-muted mb-0"> <?php echo $bfloor['floor_name']; ?></h6>
-                              <button type="button" class="nav-link  p-0 mt-2" data-bs-toggle="tab" week" role="tab" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $bfloor['id']; ?>')"><i class="ti-eye"></i> Floor Plan</button>
-                        </div>
-                        <div class="col-lg-10">
-                        <div class="seat-left-sec">
-                            <?php if(count((array)$building_floor_spaces[$bfloor['id']]) != 0){ ?>
-                            <ul id="tophieghtcheck_<?php echo $k; ?>">
-                            <?php
-                                $eacnt = 1;
-                                foreach($building_floor_spaces[$bfloor['id']] as $bfspace){
-                                    $bfsa_details = $building_floor_space_allocations[$bfspace['id']];
-                                    $allocated = $tooltip = "";
-                                    if($bfsa_details['current_status'] ==ST_INPROGRESS){
-                                        $allocated = "bg-danger";
-                                        $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$bfspace['cabin_name'].' ('.$employees[$bfsa_details['emp_id']]['display_name'].') - Approval Pending"';
-                                    }elseif($bfsa_details['emp_id'] !=""){
-                                        $allocated = "allocated";
-                                        $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$bfspace['cabin_name'].' ('.$employees[$bfsa_details['emp_id']]['display_name'].')"';
-                                    }elseif($bfsa_details['reserve_pool_id'] !=""){
-                                        $allocated = "reserve_allocated";
-                                        $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$bfspace['cabin_name'].' ('.$reservepool[$bfsa_details['reserve_pool_id']]['pool_name'].')"';
-                                    }else{
-                                        $allocated = "free_allocation";
-                                        $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$bfspace['cabin_name'].' : Click To Allocate Cubicle Space"';
-                                    }
-                                    ?>
-                                    <li class="custom-popup" >
-                                        <span class="cursor-pointer comman_allocation <?php echo $allocated; ?>" id="custom_popup_btn_position_<?php echo $bfspace['id']; ?>" onclick="toCubicleSpaceAllocateEmployee('<?php echo $bfspace['id']; ?>',event)" <?php echo $tooltip; ?> style="overflow: hidden;display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient: vertical;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"> <?php echo $bfspace['cabin_name']; ?></span>
-
-
-                                        <div class="empty_popup_template custom-popup-open to_allocate_employee_<?php echo $bfspace['id']; ?> text-start" style="top:auto; left:auto; width: 350px; position: absolute; ">
-
-                                        </div>
-                                    </li>
-                                 <?php $eacnt++;
-} ?>
-                            </ul>
-                        <?php }else{ ?>
-                            <h5 class="text-center"><i class="ti-alert"></i> <?= __('No Cubicle Space'); ?></h5>
-                        <?php } ?>
-                        </div>
-                    </div>
-                </div>
-             </div>
-            <?php $k++;
-} ?>
-            <?php }else{ ?>
-                <div class="card-px text-center py-20 m-t-30">
-                    <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Floors</p>
-                    <div class="text-center px-4">
-                        <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-    </div>
-</div>
-
-<?php }elseif($_POST['pagetype'] =="CSA_ALLOCATION_EMP"){  ?>
-<?php
-    $selected_employees = $result['selected_employees'];
-    $building_floor_spaces = $result['building_floor_spaces'];
-    $building_floor_space_allocations = $result['building_floor_space_allocations'];
-    $bfsa_id = $building_floor_space_allocations['id'];
-    $postemp = $result['emp_id'];
-    $reserve_pool_id =$result['reserve_pool_id'];
-    $bfs_id = $building_floor_spaces['id'];
-    $disabled = $empactive = $reserveactive = "";
-    if($postemp !=""){
-        $disabled = 'event_disabled';
-        $empactive = "active show";
-    }elseif($reserve_pool_id !=""){
-        $disabled = 'event_disabled';
-        $reserveactive = "active show";
-    }else{
-        $empactive = "active show";
-    }
-    $reservepool = $result['reservepool'];
-    $unallocated_building_floor_spaces = $result['unallocated_building_floor_spaces'];
-    $building_floor_id = $building_floor_spaces['building_floor_id'];
-    $assets = $result['assets'];
-    $asset_allocations = $result['asset_allocations'];
- ?>
-<div class="card">
-    <div class="card-body pb-0">
-        <div class="row">
-            <div class="col-lg-10">
-                <ul class="nav md-tabs infisuite_tab">
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo $empactive; ?>" data-bs-toggle="tab" href="#employee_space_allocation" role="tab">
-                            <p class="nav-text mb-0 f-10">Emp</p>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link <?php echo $reserveactive; ?>" id="home-tab-6" data-bs-toggle="tab" href="#reserve_space_allocation" role="tab">
-                        <p class="nav-text mb-0 f-10">Reserve</p>
-                        </a>
-                    </li>
-                    <?php if($postemp !="" && $building_floor_space_allocations['current_status'] !="3"){ ?>
-                    <li class="nav-item ">
-                        <a class="nav-link" id="home-tab-6_2" data-bs-toggle="tab" href="#switch_space_allocation" role="tab" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
-                        <p class="nav-text mb-0 f-10">Switch</p>
-                        </a>
-                    </li>
-                <?php } ?>
-                <li class="nav-item ">
-                        <a class="nav-link " id="home-tab-6_3" data-bs-toggle="tab" href="#assets_list_select" role="tab">
-                        <p class="nav-text mb-0 f-10">Assets</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-lg-2">
-                <button type="button" class="btn p-0 border-0 bg-transparent ti-close" onclick="closeToAllocateEmployee()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"></button>
-            </div>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="tab-content">
-             <div class="tab-pane fade <?php echo $empactive; ?>" id="employee_space_allocation" role="tabpanel">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="input-group input-group-button mb-0" >
-                            <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter1111_2" data-id='categoryfilter_2' data-type="div" class="form-control form-control-sm width1"  placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">
-                            <div class="input-group-text addon-style">
-                                <span class=""><i class="ti-search text-white mt-2"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="custom-scroll" style="max-height: 250px; min-height: 250px;" >
-                    <?php
-                    if(count((array)$selected_employees) != 0){
-                        foreach($selected_employees as $emplist){ ?>
-                            <div id="results_2">
-                                <div class="row mt-2" >
-                                    <div class="col-lg-10">
-                                        <div class="align-middle  ">
-                                            <?php if($emplist['image']!=""){?>
-                                                <img src="uploads/all/<?php echo $emplist['image']; ?>"   class="img-30 align-middle m-r-10 seating_emp_image" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
-                                            <?php }else{ ?>
-                                                <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($emplist['display_name']); ?></span>
-                                            <?php } ?>
-                                            <div class="d-inline-block align-middle">
-                                                <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $emplist['display_name']; ?>
-                                                    <?php if($postemp== $emplist['id']){ ?>
-                                                        <i class="ti-check text-success f-14 f-w-700"></i>
-                                                    <?php } ?>
-                                                </p>
-                                                <p class="f-10 mb-0"><?php echo $emplist['emp_code']; ?> </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 d-inline-block align-middle">
-                                        <?php if($postemp == $emplist['id']){ ?>
-                                            <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                        <?php }else{  ?>
-                                            <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','<?php echo $emplist['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    <?php }else{ ?>
-                        <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Employees</p>
-                            <div class="text-center px-4">
-                                <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-            <div class="tab-pane fade <?php echo $reserveactive; ?>" id="reserve_space_allocation" role="tabpanel">
-                <div class="custom-scroll" style="max-height: 250px; min-height: 250px;" >
-                    <?php
-                    if(count((array)$reservepool) != 0){
-                    foreach($reservepool as $rpoolkey => $rpoolval){ ?>
-                        <div class="row mt-2" >
-                            <div class="col-lg-10">
-                                <div class="align-middle">
-                                    <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($rpoolval['pool_name']); ?></span>
-
-                                    <div class="d-inline-block align-middle">
-                                        <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $rpoolval['pool_name']; ?>
-                                            <?php if($reserve_pool_id== $rpoolkey){ ?>
-                                                <i class="ti-check text-success f-14 f-w-700"></i>
-                                            <?php } ?>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 d-inline-block align-middle">
-                                <?php if($reserve_pool_id == $rpoolkey){ ?>
-                                    <i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                <?php }else{ ?>
-                                    <i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfs_id; ?>','<?php echo $bfsa_id; ?>','','<?php echo $rpoolkey; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    <?php }else{ ?>
-                        <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Pools</p>
-                            <div class="text-center px-4">
-                                <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="switch_space_allocation" role="tabpanel">
-                <div class="custom-scroll" style="max-height: 250px; min-height: 250px;" >
-                    <?php
-                    if(count((array)$unallocated_building_floor_spaces) != 0){
-                        foreach($unallocated_building_floor_spaces as $bfsdata){ ?>
-                            <div id="results555">
-                                <div class="row mt-2" >
-                                    <div class="col-lg-10">
-                                        <div class="align-middle  ">
-                                               <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($bfsdata['cabin_name']); ?></span>
-                                            <div class="d-inline-block align-middle">
-                                                <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $bfsdata['cabin_name']; ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 d-inline-block align-middle">
-                                        <i class="ti-check text-success f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>" onclick="allocateEmployeecubicleSpace('<?php echo $bfsdata['id']; ?>','<?php echo $bfsa_id; ?>','','',0)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    <?php }else{ ?>
-                        <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Spaces</p>
-                            <div class="text-center px-4">
-                                <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="assets_list_select" role="tabpanel">
-                <div class="custom-scroll" style="max-height: 250px; min-height: 250px;" >
-                    <?php
-                    if(count((array)$assets) != 0){
-                        foreach($assets as $bfsdata){ ?>
-                            <div id="results555_2">
-                                <div class="row mt-2" >
-                                    <div class="col-lg-10">
-                                        <div class="align-middle  ">
-                                               <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($bfsdata['asset_description']); ?></span>
-                                            <div class="d-inline-block align-middle">
-                                                <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $bfsdata['asset_description']; ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 d-inline-block align-middle assetallocationwithbtnchnage_<?php echo $bfsdata['id']; ?>" >
-                                    <?php if(isset($asset_allocations[$bfsdata['id']])){ ?>
-                                        <i class="ti-trash text-danger f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Assets'), ENT_QUOTES, 'UTF-8'); ?>"  onclick="insertAssetallocationlist('<?php echo $building_floor_id; ?>','<?php echo $bfs_id; ?>','<?php echo $bfsdata['id']; ?>','<?php echo $asset_allocations[$bfsdata['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                    <?php }else{ ?>
-                                        <i class="ti-check text-success f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Assets'), ENT_QUOTES, 'UTF-8'); ?>"  onclick="insertAssetallocationlist('<?php echo $building_floor_id; ?>','<?php echo $bfs_id; ?>','<?php echo $bfsdata['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                                    <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    <?php }else{ ?>
-                        <div class="card-px text-center py-20 m-t-30">
-                            <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Assets</p>
-                            <div class="text-center px-4">
-                                <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;">
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<?php }elseif($_POST['pagetype'] =="BSEM"){
-    $buildings = $result['buildings'];
-    $building_floors = $result['building_floors'];
-    $building_floor_space_allocations = $result['building_floor_space_allocations'];
-    $select_locations = $result['select_locations'];
-    $allocated_emp =array();
-    foreach($building_floor_space_allocations as $bfsaemp){
-        $allocated_emp[$bfsaemp['emp_id']] = $bfsaemp['emp_id'];
-        $allocated_emp_spaces[$bfsaemp['emp_id']] = $bfsaemp;
-    }
-    $allocated_employees = $unallocated_employees = array();
-    foreach($result['select_employees'] as $emp){
-        if($allocated_emp[$emp['id']] !=""){
-            $allocated_employees[] = $emp;
-        }else{
-            $unallocated_employees[] = $emp;
-        }
-    }
-    ?>
-    <div class="card">
-        <div class="table-card-header">
-            <div class="card-header">
-                <h5>Employees <?php echo $select_locations['location_name'] !=""?"(".ucwords($select_locations['location_name'])." Only)":""; ?></h5>
-                <div class="card-header-right">
-                    <button type="button" onclick="insertEmployeePopUp()" class="btn btn-success mb-2 desktop-view" ><i class="icofont icofont-plus icon-white "></i> Add Employee</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-body">
-            <div class="row">
-
-
-                <div class="col-lg-3 form-group  w-full">
-                    <span class="form-label">Employee</span>
-                     <select aria-label="<?= htmlspecialchars(__('Emp'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="emp_id" onchange="selectSpaceallocatedemployee(this.value)">
-                         <option value=""><?= __('All Employees'); ?></option>
-                        <?php foreach($result['select_employees'] as $emp){ ?>
-                        <option value="<?php echo $emp['id']; ?>" <?php echo $emp['id']==$_POST['emp_id']?"selected":""; ?>><?php echo $emp['display_name']; ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="col-lg-10"></div>
-
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header table-card-header ">
-                    <h5>Allocated Employees </h5>
-                    <div class="card-header-right">
-                        <span class="form-label label label-md label-primary"><?php echo count((array)$allocated_employees); ?></span>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <?php if(count((array)$allocated_employees) !=0){ ?>
-                    <div class="row custom-scroll" style="max-height: 600px; min-height: 600px;">
-                    <?php $sq = 1;
-                        foreach($allocated_employees as $eqa_detail){
-                            ?>
-                        <div class="col-lg-6 spaceallocated_allemp" id="spaceallocated_emp<?php echo $eqa_detail['id']; ?>">
-                            <div class="card ">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="align-middle border-bottom">
-                                            <?php if($eqa_detail['image'] !="") { ?>
-                                                <img src="uploads/all/<?php echo $eqa_detail['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
-                                            <?php } else { ?>
-                                                <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($eqa_detail['display_name']); ?></span>
-                                            <?php } ?>
-                                            <div class="d-inline-block width73">
-                                                <h6 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEmployeePopUp('<?php echo $eqa_detail['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo $eqa_detail['display_name']; ?> <i class="ti-pencil f-12"></i></h6>
+                                                <button type="button" class="btn btn-link p-0 border-0 text-left" onclick="insertEquipemnt('<?php echo $equip['id']; ?>')"><h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_name']; ?></h6> <span class="m-b-0 f-14 custom-limit-text" style="--linehide: 1;"><?php echo $equip['category_name']; ?></span> <span class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_types_name']; ?></span> </div> </div> </div> <div class="col-lg-5"> <div class="align-middle float-left ml-2"> <?php if($empary['image']!=""){?> <img src="uploads/all/<?php echo $empary['image']; ?>" class="img-radius img-30 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>"> <?php }else{ ?> <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($empary['display_name']); ?></span> <?php } ?> <div class="d-inline-block"> <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $empary['display_name']; ?></p> <p class="f-10 custom-limit-text" style="--linehide: 1;"><?php echo $empary['emp_code']; ?></p> </div> </div> </div> </div> <div class="text-center pt-2"> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil-alt cursor-pointer m-r-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-location-pin m-0 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye cursor-pointer m-l-30 m-r-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <a href="index.php?option=COM_INSERT_ONBOARDING_EMPLOYEES&Rid=<?php echo deocdeId('id:'.$empary['id']); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-user m-0 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" ></i></a> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-time cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php if($equip['seating_equipment']=='Y'){ ?> <span class="float-end text-info"><?= __('Seating'); ?></span> <?php }else{ ?> <span class="float-end text-warning"><?= __('Non-Seating'); ?></span> <?php } ?> </div> </div> </div> <?php } ?> </div> <?php }else{ ?> <div class="card-px text-center py-20 m-t-30"> <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Allocated Equipment'); ?></p> <div class="text-center px-4"> <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;"> </div> </div> <?php } ?> </div> </div> </div> <div class="col-lg-4"> <div class="card"> <div class="card-header"> <h5><?= __('Un-Allocated Equipments'); ?> </h5> <div class="card-header-right"> <span class="form-label label label-md label-warning"><?php echo count((array)$unallocated_equipments); ?></span> </div> </div> <div class="card-body"> <?php if(count((array)$unallocated_equipments) !=0){ ?> <div class="row"> <?php $sq = 1; foreach($unallocated_equipments as $equip){ $equipment_allocat_detail = $equipment_allocat_with_equipment_id[$equip['id']]; ?> <div class="card col-lg-12"> <div class="card-body"> <div class="row border-bottom"> <div class="align-middle"> <?php if($equip['equipment_image'] !="") { ?> <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>" class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>"> <?php } else { ?> <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span> <?php } ?> <div class="d-inline-block width73"> <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_name']; ?></h6> <span class="m-b-0 f-14 custom-limit-text" style="--linehide: 1;"><?php echo $equip['category_name']; ?></span> <span class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_types_name']; ?></span> </div> </div> </div> <div class="text-center pt-2"> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil-alt cursor-pointer m-r-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-location-pin m-0 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-time cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php if($equip['seating_equipment']=='Y'){ ?> <span class="float-end text-info"><?= __('Seating'); ?></span> <?php }else{ ?> <span class="float-end text-warning"><?= __('Non-Seating'); ?></span> <?php } ?> </div> </div> </div> <?php } ?> </div> <?php }else{ ?> <div class="card-px text-center py-20 m-t-30"> <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Un-Allocated Equipments'); ?></p> <div class="text-center px-4"> <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;"> </div> </div> <?php } ?> </div> </div> </div> <div class="col-lg-4"> <div class="card"> <div class="card-header"> <h5><?= __('Equipments For Which Locations To Be Set'); ?> </h5> <div class="card-header-right"> <span class="form-label label label-md label-danger"><?php echo count((array)$unlocated_equipments); ?></span> </div> </div> <div class="card-body"> <?php if(count((array)$unlocated_equipments) !=0){ ?> <div class="row"> <?php $sq = 1; foreach($unlocated_equipments as $equip){ ?> <div class="card col-lg-12"> <div class="card-body"> <div class="row border-bottom"> <div class="align-middle"> <?php if($equip['equipment_image'] !="") { ?> <img src="uploads/equipments/<?php echo $equip['equipment_image']; ?>" class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>"> <?php } else { ?> <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equip['equipment_name']); ?></span> <?php } ?> <div class="d-inline-block width73"> <h6 class="mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_name']; ?></h6> <span class="m-b-0 f-14 custom-limit-text" style="--linehide: 1;"><?php echo $equip['category_name']; ?></span> <span class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $equip['equipment_types_name']; ?></span> </div> </div> </div> <div class="text-center pt-2"> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil-alt cursor-pointer m-r-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Set Location'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-location-pin m-0 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Set Location'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-time cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php if($equip['seating_equipment']=='Y'){ ?> <span class="float-end text-info"><?= __('Seating'); ?></span> <?php }else{ ?> <span class="float-end text-warning"><?= __('Non-Seating'); ?></span> <?php } ?> </div> </div> </div> <?php } ?> </div> <?php }else{ ?> <div class="card-px text-center py-20 m-t-30"> <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Equipments For Which Locatons To Be Set'); ?></p> <div class="text-center px-4"> <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;"> </div> </div> <?php } ?> </div> </div> </div> </div> <?php }elseif($_POST['pagetype'] =="AR"){ $buildings = $result['buildings']; ?> <div class="owl-carousel carousel-box owl-theme"> <?php foreach($buildings as $buld){ ?> <div > <div class="card cursor-pointer emptycss_building_selectio" id="building_selection_<?php echo $buld['id']; ?>" > <div class="card-header pb-2"> <h5 class="custom-limit-text" style="--linehide: 1;"><?php echo $buld['building_name']; ?></h5> <p class="f-w-600 text-muted f-12 custom-limit-text" style="--linehide: 1;"><?php echo $buld['building_address']; ?></p> </div> <div class="card-body pt-0"> <div class="d-flex align-items-center mb-4"> <div class="w-80px flex-shrink-0 me-2"> <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>"> </div> <div class="m-0"> <h6 class="fw-bold mb-3 "><?= __('Building Details'); ?></h6> <div class="d-flex d-grid gap-3"> <div class="d-flex flex-column flex-shrink-0 me-1"> <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2"> <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['floor_cnt']; ?> <?= __('Floors'); ?></span> </span> <span class="d-flex align-items-center text-muted fw-bold fs-7"> <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']; ?> <?= __('Spaces'); ?></span> </span> </div> <div class="d-flex flex-column flex-shrink-0"> <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2"> <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['equipments_cnt']; ?> <?= __('Seats'); ?></span> </span> <span class="d-flex align-items-center text-muted fw-bold fs-7"> <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['free_equipments']; ?> <?= __('Free'); ?></span> </span> </div> </div> </div> </div> <div class="m-0"> <button type="button" class="btn btn-success btn-light me-2 mb-2 f-14"><?= __('Seat Allocation'); ?> </button> <button type="button" class="btn btn-primary mb-2 f-14"><?= __('Edit Details'); ?></button> </div> </div> </div> </div> <?php } ?> </div> <div class="booking-seat"></div> <script type="text/javascript"> $(document).ready(function() { setTimeout(function(){ $('.carousel-box').owlCarousel({ items:4, loop:false, autoplay:false, margin: 20, nav:true }); },350); }); </script> <script type="text/javascript" src="assets/bower_components/owl.carousel/js/owl.carousel.min.js"></script> <script type="text/javascript" src="assets/js/owl-custom.js"></script> <?php }elseif($_POST['pagetype'] =="AR_SEAT"){ $building_floors = $result['building_floors']; $equipment_allocations = $result['equipment_allocations']; $total_allocated_eq = $total_unallocated_eq = 0; foreach($building_floors as $bfloor){ foreach($equipment_allocations[$bfloor['id']] as $equal){ if($equal['employee_seating'] =="Y"){ if($equal['emp_id'] !=""){ $total_allocated_eq++; }else{ $total_unallocated_eq++; } } } } ?> <div class="card"> <div class="card-body "> <div class="seat-wrapper-sec"> <div class="card-body "> <div class="row align-items-center" id="ar_seat_id"> <div class="col-lg-5"> <span class="form-label"><?= __('Floors'); ?></span> </div> <div class="col-lg-7 text-right"> <div class="d-inline-block m-l-10"> <button type="button" class="btn waves-effect waves-light btn-primary p-0 img-30 m-r-10"><?php echo $total_allocated_eq; ?></button> <span><?= __('Allocated Seat'); ?></span> </div> <div class="d-inline-block m-l-10 m-l-20"> <button type="button" class="btn waves-effect waves-light p-0 img-30 m-r-10" style="border: 1px solid;"><?php echo $total_unallocated_eq; ?></button> <span><?= __('Free Seat'); ?></span> </div> </div> </div> </div> <?php if(count((array)$building_floors)){ foreach($building_floors as $bfloor){ $total_seating_eq = $total_unseating_eq = $total_allocated_eq = $total_unallocated_eq = 0; foreach($equipment_allocations[$bfloor['id']] as $equal){ if($equal['employee_seating'] =="Y"){ $total_seating_eq++; if($equal['emp_id'] !=""){ $total_allocated_eq++; }else{ $total_unallocated_eq++; } }else{ $total_unseating_eq++; } } ?> <div class="card-body "> <div class="row align-items-center" > <div class="col-lg-2"> <h6 class="text-muted mb-0"> <?php echo $bfloor['floor_name']; ?></h6> </div> <div class="col-lg-10"> <div class="seat-left-sec"> <?php if(count((array)$equipment_allocations[$bfloor['id']]) != 0){ ?> <ul> <?php $eacnt = 1; foreach($equipment_allocations[$bfloor['id']] as $equal){ if($equal['employee_seating'] =="Y"){ $allocated = $tooltip =$addtooltip = ""; if($equal['emp_id'] !=""){ $allocated = "allocated"; $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$employees[$equal['emp_id']]['display_name'].'"'; }else{ $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.htmlspecialchars(__('Click To Allocate seat'), ENT_QUOTES, 'UTF-8').'"'; } ?> <li class="<?php echo $allocated; ?> custom-popup" > <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="Action"><span class="cursor-pointer" <?php echo $tooltip; ?>> <?php echo $eacnt; ?></span></button> <div class="custom-popup-open to_allocate_employee_<?php echo $equal['id']; ?> text-start" style="right: 34px; top: -80px; width: 280px;"> </div> </li> <?php }else{ ?> <li class="bg-success"> <span class="cursor-pointer" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Open Menu'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $eacnt; ?></span> <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"> <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer"><?= __('Edit Equipment Details'); ?></button> <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer" ><?= __('Edit Allocation'); ?></button> <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer" ><?= __('View Location'); ?></button> <button type="button" class="dropdown-item waves-light waves-effect cursor-pointer" ><?= __('View Logs'); ?></button> </div> </li> <?php } ?> <?php $eacnt++; } ?> </ul> <?php }else{ ?> <h5 class="text-center"><i class="ti-alert"></i> <?= __('No Equipments'); ?></h5> <?php } ?> </div> </div> </div> </div> <?php } ?> <?php }else{ ?> <div class="card-px text-center py-20 m-t-30"> <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> <?= __('No Floors'); ?></p> <div class="text-center px-4"> <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;"> </div> </div> <?php } ?> </div> </div> </div> <?php }elseif($_POST['pagetype'] =="ALLOCATEEMP"){ ?> $selected_employees = $result['selected_employees']; $equipment_allocations = $result['equipment_allocations']; $postemp = $result['emp_id']; $eq_id = $equipment_allocations['id']; $disabled = ""; if($postemp !=""){ $disabled = 'event_disabled'; } ?> <div class="card"> <div class="card-header"> <h5><?= __('Employees'); ?></h5> <div class="card-header-right"> <button type="button" class="btn p-0 border-0 bg-transparent ti-close" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>"></button> </div> </div> <div class="card-body"> <div class="row"> <div class="col-lg-12"> <div class="input-group input-group-button mb-0" > <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter1111" data-id='categoryfilter' data-type="div" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> <div class="input-group-text addon-style"> <span class=""><i class="ti-search text-white mt-2"></i></span> </div> </div> </div> </div> <div class="custom-scroll" style="max-height: 200px;" > <?php foreach($selected_employees as $emplist){ ?> <div id="results"> <div class="row mt-2" > <div class="col-lg-10"> <div class="align-middle "> <?php if($emplist['image']!=""){?> <img src="uploads/all/<?php echo $emplist['image']; ?>" class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>"> <?php }else{ ?> <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($emplist['display_name']); ?></span> <?php } ?> <div class="d-inline-block"> <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $emplist['display_name']; ?> <?php if($postemp== $emplist['id']){ ?> <i class="ti-check text-success f-14 f-w-700"></i> <?php } ?> </p> <p class="f-10 mb-0"><?php echo $emplist['emp_code']; ?> </p> </div> </div> </div> <div class="col-lg-2 d-inline-block"> <?php if($postemp == $emplist['id']){ ?> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Click To Un-Allocate Seat'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Seat'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php }else{ ?> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Click To Allocate Seat'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Seat'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php } ?> </div> </div> </div> <?php } ?> </div> </div> </div> <?php }elseif($_POST['pagetype'] =="CSA"){ $buildings = $result['buildings']; ?> <div class="owl-carousel carousel-box owl-theme"> <?php foreach($buildings as $buld){ ?> <div > <div class="card cursor-pointer emptycss_building_selectio" id="building_selection_<?php echo $buld['id']; ?>" > <div class="card-header pb-2"> <h5 class="custom-limit-text" style="--linehide: 1;"><?php echo $buld['building_name']; ?></h5> <p class="f-w-600 text-muted f-12 custom-limit-text" style="--linehide: 1;"><?php echo $buld['building_address']; ?></p> </div> <div class="card-body pt-0"> <div class="d-flex align-items-center mb-4"> <div class="w-80px flex-shrink-0 me-2"> <img src="uploads/all/<?php echo $buld['building_image']; ?>" class="img-radius align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>"> </div> <div class="m-0"> <h6 class="fw-bold mb-3 "><?= __('Building Details'); ?></h6> <div class="d-flex d-grid gap-3"> <div class="d-flex flex-column flex-shrink-0 me-1"> <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2"> <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['floor_cnt']; ?> <?= __('Floors'); ?></span> </span> <span class="d-flex align-items-center text-muted fw-bold fs-7"> <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']; ?> <?= __('Spaces'); ?></span> </span> </div> <div class="d-flex flex-column flex-shrink-0"> <span class="d-flex align-items-center fs-7 fw-bold text-muted mb-2"> <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['usedspace_cnt']; ?> <?= __('Allocated'); ?></span> </span> <span class="d-flex align-items-center text-muted fw-bold fs-7"> <span class="form-label badge bg-gray p-1 mb-0 m-r-5"><i class="ti-angle-right text-muted"></i></span> <span class="text-muted f-12"><?php echo $buld['building_floor_space_cnt']-$buld['usedspace_cnt']; ?> <?= __('Free'); ?></span> </span> </div> </div> </div> </div> <div class="m-0 text-center"> <button type="button" class="btn btn-success btn-light me-2 mb-2 f-14"><?= __('Cubicle Allocation'); ?> </button> </div> </div> </div> </div> <?php } ?> </div> <div class="booking-seat"></div> <script type="text/javascript"> $(document).ready(function() { setTimeout(function(){ $('.carousel-box').owlCarousel({ items:4, loop:false, autoplay:false, margin: 20, nav:true }); },350); }); </script> <script type="text/javascript" src="assets/bower_components/owl.carousel/js/owl.carousel.min.js"></script> <script type="text/javascript" src="assets/js/owl-custom.js"></script> <?php }elseif($_POST['pagetype'] =="CSA_ALLOCATION"){ $buildings = $result['buildings']; $building_floors = $result['building_floors']; $building_floor_spaces = $result['building_floor_spaces']; $building_floor_space_allocations = $result['building_floor_space_allocations']; $reservepool = $result['reservepool']; $empallocatedcnt = $reservecnt = $notallocatedcnt = $inprogresscnt = 0; foreach($building_floors as $bfloor){ if(count((array)$building_floor_spaces[$bfloor['id']]) != 0){ foreach($building_floor_spaces[$bfloor['id']] as $bfspace){ $bfsa_details = $building_floor_space_allocations[$bfspace['id']]; if($bfsa_details['current_status'] ==ST_INPROGRESS){ $inprogresscnt++; }elseif($bfsa_details['emp_id'] !=""){ $empallocatedcnt++; }elseif($bfsa_details['reserve_pool_id'] !=""){ $reservecnt++; }else{ $notallocatedcnt++; } } } } ?> <div class="card"> <div class="card-body "> <div class="seat-wrapper-sec"> <div class="card-body "> <div class="row align-items-center" id="ar_seat_id_2"> <div class="col-lg-4"> <span class="form-label mb-0"><?php echo $buildings['building_name']; ?></span> <span class="f-12 d-block"><?php echo $buildings['building_address']; ?></span> </div> <div class="col-lg-8 text-right"> <div class="d-inline-block m-l-10"> <span class="form-label label label-lg label-danger"><?php echo $inprogresscnt; ?></span> <span class="f-12"><?= __('In-Progress'); ?></span> </div> <div class="d-inline-block m-l-10"> <span class="form-label label label-lg label-warning"><?php echo $reservecnt; ?></span> <span class="f-12"><?= __('Reserved'); ?></span> </div> <div class="d-inline-block m-l-10"> <span class="form-label label label-lg label-primary" style="background-color: #e4e4e4"><?php echo $empallocatedcnt; ?></span> <span class="f-12" ><?= __('Allocated'); ?></span> </div> <div class="d-inline-block m-l-10 m-l-20"> <span class="form-label label label-lg text-dark" style="border: 1px black solid;"><?php echo $notallocatedcnt; ?></span> <span class="f-12"><?= __('Free'); ?></span> </div> <div class="d-inline-block m-l-10 m-l-20"> <button type="button" class="btn p-0 border-0 bg-transparent ti-close text-danger cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button> </div> </div> </div> </div> <?php if(count((array)$building_floors)){ $k=1; foreach($building_floors as $bfloor){ ?> <div class="card-body "> <div class="row align-items-center"> <div class="col-lg-2"> <h6 class="text-muted mb-0"> <?php echo $bfloor['floor_name']; ?></h6> <button type="button" class="nav-link p-0 mt-2" data-bs-toggle="tab" week" role="tab"><i class="ti-eye"></i> Floor Plan</button> </div> <div class="col-lg-10"> <div class="seat-left-sec"> <?php if(count((array)$building_floor_spaces[$bfloor['id']]) != 0){ ?> <ul id="tophieghtcheck_<?php echo $k; ?>"> <?php $eacnt = 1; foreach($building_floor_spaces[$bfloor['id']] as $bfspace){ $bfsa_details = $building_floor_space_allocations[$bfspace['id']]; $allocated = $tooltip = ""; if($bfsa_details['current_status'] ==ST_INPROGRESS){ $allocated = "bg-danger"; $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$bfspace['cabin_name'].' ('.$employees[$bfsa_details['emp_id']]['display_name'].') - Approval Pending"'; }elseif($bfsa_details['emp_id'] !=""){ $allocated = "allocated"; $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$bfspace['cabin_name'].' ('.$employees[$bfsa_details['emp_id']]['display_name'].')"'; }elseif($bfsa_details['reserve_pool_id'] !=""){ $allocated = "reserve_allocated"; $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$bfspace['cabin_name'].' ('.$reservepool[$bfsa_details['reserve_pool_id']]['pool_name'].')"'; }else{ $allocated = "free_allocation"; $tooltip = 'data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.$bfspace['cabin_name'].' : Click To Allocate Cubicle Space"'; } ?> <li class="custom-popup" > <span class="cursor-pointer comman_allocation <?php echo $allocated; ?>" id="custom_popup_btn_position_<?php echo $bfspace['id']; ?>" <?php echo $tooltip; ?> style="overflow: hidden;display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient: vertical;"> <?php echo $bfspace['cabin_name']; ?></span> <div class="empty_popup_template custom-popup-open to_allocate_employee_<?php echo $bfspace['id']; ?> text-start" style="top:auto; left:auto; width: 350px; position: absolute; "> </div> </li> <?php $eacnt++; } ?> </ul> <?php }else{ ?> <h5 class="text-center"><i class="ti-alert"></i> <?= __('No Cubicle Space'); ?></h5> <?php } ?> </div> </div> </div> </div> <?php $k++; } ?> <?php }else{ ?> <div class="card-px text-center py-20 m-t-30"> <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Floors</p> <div class="text-center px-4"> <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;"> </div> </div> <?php } ?> </div> </div> </div> <?php }elseif($_POST['pagetype'] =="CSA_ALLOCATION_EMP"){ ?> <?php $selected_employees = $result['selected_employees']; $building_floor_spaces = $result['building_floor_spaces']; $building_floor_space_allocations = $result['building_floor_space_allocations']; $bfsa_id = $building_floor_space_allocations['id']; $postemp = $result['emp_id']; $reserve_pool_id =$result['reserve_pool_id']; $bfs_id = $building_floor_spaces['id']; $disabled = $empactive = $reserveactive = ""; if($postemp !=""){ $disabled = 'event_disabled'; $empactive = CLS_ACTIVE_SHOW; }elseif($reserve_pool_id !=""){ $disabled = 'event_disabled'; $reserveactive = CLS_ACTIVE_SHOW; }else{ $empactive = CLS_ACTIVE_SHOW; } $reservepool = $result['reservepool']; $unallocated_building_floor_spaces = $result['unallocated_building_floor_spaces']; $building_floor_id = $building_floor_spaces['building_floor_id']; $assets = $result['assets']; $asset_allocations = $result['asset_allocations']; ?> <div class="card"> <div class="card-body pb-0"> <div class="row"> <div class="col-lg-10"> <ul class="nav md-tabs infisuite_tab"> <li class="nav-item"> <a class="nav-link <?php echo $empactive; ?>" data-bs-toggle="tab" href="#employee_space_allocation" role="tab"> <p class="nav-text mb-0 f-10">Emp</p> </a> </li> <li class="nav-item "> <a class="nav-link <?php echo $reserveactive; ?>" id="home-tab-6" data-bs-toggle="tab" href="#reserve_space_allocation" role="tab"> <p class="nav-text mb-0 f-10">Reserve</p> </a> </li> <?php if($postemp !="" && $building_floor_space_allocations['current_status'] !="3"){ ?> <li class="nav-item "> <a class="nav-link" id="home-tab-6_2" data-bs-toggle="tab" href="#switch_space_allocation" role="tab"> <p class="nav-text mb-0 f-10">Switch</p> </a> </li> <?php } ?> <li class="nav-item "> <a class="nav-link " id="home-tab-6_3" data-bs-toggle="tab" href="#assets_list_select" role="tab"> <p class="nav-text mb-0 f-10">Assets</p> </a> </li> </ul> </div> <div class="col-lg-2"> <button type="button" class="btn p-0 border-0 bg-transparent ti-close" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Closed'), ENT_QUOTES, 'UTF-8'); ?>"></button> </div> </div> </div> <div class="card-body"> <div class="tab-content"> <div class="tab-pane fade <?php echo $empactive; ?>" id="employee_space_allocation" role="tabpanel"> <div class="row"> <div class="col-lg-12"> <div class="input-group input-group-button mb-0" > <input aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" type="text" id="filter1111_2" data-id='categoryfilter_2' data-type="div" class="form-control form-control-sm width1" placeholder="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>"> <div class="input-group-text addon-style"> <span class=""><i class="ti-search text-white mt-2"></i></span> </div> </div> </div> </div> <div class="custom-scroll" style="max-height: 250px; min-height: 250px;" > <?php if(count((array)$selected_employees) != 0){ foreach($selected_employees as $emplist){ ?> <div id="results_2"> <div class="row mt-2" > <div class="col-lg-10"> <div class="align-middle "> <?php if($emplist['image']!=""){?> <img src="uploads/all/<?php echo $emplist['image']; ?>" class="img-30 align-middle m-r-10 seating_emp_image" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>"> <?php }else{ ?> <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($emplist['display_name']); ?></span> <?php } ?> <div class="d-inline-block align-middle"> <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $emplist['display_name']; ?> <?php if($postemp== $emplist['id']){ ?> <i class="ti-check text-success f-14 f-w-700"></i> <?php } ?> </p> <p class="f-10 mb-0"><?php echo $emplist['emp_code']; ?> </p> </div> </div> </div> <div class="col-lg-2 d-inline-block align-middle"> <?php if($postemp == $emplist['id']){ ?> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Click To Un-Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php }else{ ?> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php } ?> </div> </div> </div> <?php } ?> <?php }else{ ?> <div class="card-px text-center py-20 m-t-30"> <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Employees</p> <div class="text-center px-4"> <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;"> </div> </div> <?php } ?> </div> </div> <div class="tab-pane fade <?php echo $reserveactive; ?>" id="reserve_space_allocation" role="tabpanel"> <div class="custom-scroll" style="max-height: 250px; min-height: 250px;" > <?php if(count((array)$reservepool) != 0){ foreach($reservepool as $rpoolkey => $rpoolval){ ?> <div class="row mt-2" > <div class="col-lg-10"> <div class="align-middle"> <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($rpoolval['pool_name']); ?></span> <div class="d-inline-block align-middle"> <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $rpoolval['pool_name']; ?> <?php if($reserve_pool_id== $rpoolkey){ ?> <i class="ti-check text-success f-14 f-w-700"></i> <?php } ?> </p> </div> </div> </div> <div class="col-lg-2 d-inline-block align-middle"> <?php if($reserve_pool_id == $rpoolkey){ ?> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Click To Un-Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-close text-danger f-w-700 " data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php }else{ ?> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-check text-success f-w-700 <?php echo $disabled; ?>" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php } ?> </div> </div> <?php } ?> <?php }else{ ?> <div class="card-px text-center py-20 m-t-30"> <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Pools</p> <div class="text-center px-4"> <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;"> </div> </div> <?php } ?> </div> </div> <div class="tab-pane fade" id="switch_space_allocation" role="tabpanel"> <div class="custom-scroll" style="max-height: 250px; min-height: 250px;" > <?php if(count((array)$unallocated_building_floor_spaces) != 0){ foreach($unallocated_building_floor_spaces as $bfsdata){ ?> <div id="results555"> <div class="row mt-2" > <div class="col-lg-10"> <div class="align-middle "> <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($bfsdata['cabin_name']); ?></span> <div class="d-inline-block align-middle"> <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $bfsdata['cabin_name']; ?> </p> </div> </div> </div> <div class="col-lg-2 d-inline-block align-middle"> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-check text-success f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> </div> </div> </div> <?php } ?> <?php }else{ ?> <div class="card-px text-center py-20 m-t-30"> <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Spaces</p> <div class="text-center px-4"> <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;"> </div> </div> <?php } ?> </div> </div> <div class="tab-pane fade" id="assets_list_select" role="tabpanel"> <div class="custom-scroll" style="max-height: 250px; min-height: 250px;" > <?php if(count((array)$assets) != 0){ foreach($assets as $bfsdata){ ?> <div id="results555_2"> <div class="row mt-2" > <div class="col-lg-10"> <div class="align-middle "> <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="align-middle m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($bfsdata['asset_description']); ?></span> <div class="d-inline-block align-middle"> <p class="f-10 mb-0 custom-limit-text" style="--linehide: 1;"><?php echo $bfsdata['asset_description']; ?> </p> </div> </div> </div> <div class="col-lg-2 d-inline-block align-middle assetallocationwithbtnchnage_<?php echo $bfsdata['id']; ?>" > <?php if(isset($asset_allocations[$bfsdata['id']])){ ?> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Click To Un-Allocate Assets'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-trash text-danger f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Un-Allocate Assets'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php }else{ ?> <button type="button" class="btn btn-link p-0 border-0 text-reset" aria-label="<?= htmlspecialchars(__('Click To Allocate Assets'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-check text-success f-w-700" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Click To Allocate Assets'), ENT_QUOTES, 'UTF-8'); ?>"></i></button> <?php } ?> </div> </div> </div> <?php } ?> <?php }else{ ?> <div class="card-px text-center py-20 m-t-30"> <p class="text-muted f-16 fw-bold m-b-30"><i class="ti-alert text-warning"></i> No Assets</p> <div class="text-center px-4"> <img class="mw-100 mh-250px" alt="" src="assets/images/work.png" style="max-height: 250px!important;"> </div> </div> <?php } ?> </div> </div> </div> </div> </div> <?php }elseif($_POST['pagetype'] =="BSEM"){ $buildings = $result['buildings']; $building_floors = $result['building_floors']; $building_floor_space_allocations = $result['building_floor_space_allocations']; $select_locations = $result['select_locations']; $allocated_emp =array(); foreach($building_floor_space_allocations as $bfsaemp){ $allocated_emp[$bfsaemp['emp_id']] = $bfsaemp['emp_id']; $allocated_emp_spaces[$bfsaemp['emp_id']] = $bfsaemp; } $allocated_employees = $unallocated_employees = array(); foreach($result['select_employees'] as $emp){ if($allocated_emp[$emp['id']] !=""){ $allocated_employees[] = $emp; }else{ $unallocated_employees[] = $emp; } } ?> <div class="card"> <div class="table-card-header"> <div class="card-header"> <h5>Employees <?php echo $select_locations['location_name'] !=""?"(".ucwords($select_locations['location_name'])." Only)":""; ?></h5> <div class="card-header-right"> <button type="button" class="btn btn-success mb-2 desktop-view" ><i class="icofont icofont-plus icon-white "></i> Add Employee</button> </div> </div> </div> <div class="card-body"> <div class="row"> <div class="col-lg-3 form-group w-full"> <span class="form-label">Employee</span> <select aria-label="<?= htmlspecialchars(__('Emp'), ENT_QUOTES, 'UTF-8'); ?>" class="js-example-basic-single" name="emp_id" onchange="selectSpaceallocatedemployee(this.value)"> <option value=""><?= __('All Employees'); ?></option> <?php foreach($result['select_employees'] as $emp){ ?> <option value="<?php echo $emp['id']; ?>" <?php echo $emp['id']==$_POST['emp_id']?"selected":""; ?>><?php echo $emp['display_name']; ?></option> <?php } ?> </select> </div> <div class="col-lg-10"></div> </div> </div> </div> <div class="row"> <div class="col-lg-6"> <div class="card"> <div class="card-header table-card-header "> <h5>Allocated Employees </h5> <div class="card-header-right"> <span class="form-label label label-md label-primary"><?php echo count((array)$allocated_employees); ?></span> </div> </div> <div class="card-body"> <?php if(count((array)$allocated_employees) !=0){ ?> <div class="row custom-scroll" style="max-height: 600px; min-height: 600px;"> <?php $sq = 1; foreach($allocated_employees as $eqa_detail){ ?> <div class="col-lg-6 spaceallocated_allemp" id="spaceallocated_emp<?php echo $eqa_detail['id']; ?>"> <div class="card "> <div class="card-body"> <div class="row"> <div class="align-middle border-bottom"> <?php if($eqa_detail['image'] !="") { ?> <img src="uploads/all/<?php echo $eqa_detail['image']; ?>" class="img-radius img-50 align-top m-r-10" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>"> <?php } else { ?> <span aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($eqa_detail['display_name']); ?></span> <?php } ?> <div class="d-inline-block width73"> <h6 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $eqa_detail['display_name']; ?> <i class="ti-pencil f-12"></i></h6></button>
                                                 <p class="m-b-0 custom-limit-text" style="--linehide: 1;"><?php echo $eqa_detail['emp_code']; ?></p>
                                                 <p class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $eqa_detail['email_id']; ?></p>
                                             </div>
@@ -1085,7 +173,7 @@ if($_POST['pagetype'] =="IEQ"){
                                                 <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empdetail['display_name']); ?></span>
                                             <?php } ?>
                                             <div class="d-inline-block width73">
-                                                <h6 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEmployeePopUp('<?php echo $empdetail['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><?php echo $empdetail['display_name']; ?> <i class="ti-pencil f-12"></i></h6>
+                                                <button type="button" class="btn btn-link p-0 border-0 text-left" onclick="insertEmployeePopUp('<?php echo $empdetail['id']; ?>')"><h6 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $empdetail['display_name']; ?> <i class="ti-pencil f-12"></i></h6></button>
                                                 <p class="m-b-0 custom-limit-text" style="--linehide: 1;"><?php echo $empdetail['emp_code']; ?></p>
                                                 <p class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $empdetail['email_id']; ?></p>
                                             </div>
@@ -1216,11 +304,11 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="mt-2 text-center">
 
 
-                                        <i class="ti-user cursor-pointer " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEmployeePopUp('<?php echo $eqa_detail['empp_id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="insertEmployeePopUp('<?php echo $eqa_detail['empp_id']; ?>')" aria-label="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-user cursor-pointer " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="ti-location-pin cursor-pointer m-l-30" onclick="insertEquipmentAllocation('<?php echo $eqa_detail['building_floor_id']; ?>','<?php echo $eqa_detail['building_floor_space_id']; ?>','<?php echo $eqa_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="insertEquipmentAllocation('<?php echo $eqa_detail['building_floor_id']; ?>','<?php echo $eqa_detail['building_floor_space_id']; ?>','<?php echo $eqa_detail['id']; ?>')" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-location-pin cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="ti-eye cursor-pointer m-l-30" onclick="ShowBuildingFloors('<?php echo $eqa_detail['building_floor_id']; ?>','<?php echo $eqa_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Employee Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloors('<?php echo $eqa_detail['building_floor_id']; ?>','<?php echo $eqa_detail['id']; ?>')" aria-label="<?= htmlspecialchars(__('View Employee Location'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Employee Location'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
                                     </div>
                                 </div>
@@ -1271,9 +359,9 @@ if($_POST['pagetype'] =="IEQ"){
                                     <div class="mt-2 text-center">
 
 
-                                        <i class="ti-user cursor-pointer " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEmployeePopUp('<?php echo $empdetail['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="insertEmployeePopUp('<?php echo $empdetail['id']; ?>')" aria-label="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-user cursor-pointer " data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Employee Details'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="ti-location-pin cursor-pointer m-l-30" onclick="setLocationEmployee('<?php echo $empdetail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Set Employee Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="setLocationEmployee('<?php echo $empdetail['id']; ?>')" aria-label="<?= htmlspecialchars(__('Set Employee Location'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-location-pin cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Set Employee Location'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
                                     </div>
                                 </div>
@@ -1402,21 +490,21 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
 
                                     <div class="col-lg-2">
-                                        <i class="fa fa-edit text-primary mb-2 hidebuildingmenu buildingmenu_MFS" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Manage Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"  onclick="getBuildingFoolSpaceDetails('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="getBuildingFoolSpaceDetails('<?php echo $bfloor['id']; ?>')" aria-label="<?= htmlspecialchars(__('Manage Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit text-primary mb-2 hidebuildingmenu buildingmenu_MFS" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Manage Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="fa fa-edit text-primary mb-2 hidebuildingmenu buildingmenu_MFSNEW" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Manage Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"  onclick="getBuildingFoolSpaceDetailsNew('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="getBuildingFoolSpaceDetailsNew('<?php echo $bfloor['id']; ?>')" aria-label="<?= htmlspecialchars(__('Manage Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-edit text-primary mb-2 hidebuildingmenu buildingmenu_MFSNEW" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Manage Cubicle Space'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="ti-widgetized text-primary hidebuildingmenu buildingmenu_AE" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Equipments'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEquipmentAllocation('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="insertEquipmentAllocation('<?php echo $bfloor['id']; ?>')" aria-label="<?= htmlspecialchars(__('Allocate Equipments'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-widgetized text-primary hidebuildingmenu buildingmenu_AE" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Equipments'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="ti-user text-primary hidebuildingmenu buildingmenu_AS" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Seats'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertEquipmentAllocation('<?php echo $bfloor['id']; ?>','','','','','','','AS')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="insertEquipmentAllocation('<?php echo $bfloor['id']; ?>','','','','','','','AS')" aria-label="<?= htmlspecialchars(__('Allocate Seats'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-user text-primary hidebuildingmenu buildingmenu_AS" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Allocate Seats'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_VFD" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Floor Details'), ENT_QUOTES, 'UTF-8'); ?>" onclick="ShowBuildingFloors('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloors('<?php echo $bfloor['id']; ?>')" aria-label="<?= htmlspecialchars(__('View Floor Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye mt-2 text-primary hidebuildingmenu buildingmenu_VFD" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Floor Details'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_VCSPACE" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Cubicle Spaces'), ENT_QUOTES, 'UTF-8'); ?>" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $bfloor['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $bfloor['id']; ?>')" aria-label="<?= htmlspecialchars(__('View Cubicle Spaces'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye mt-2 text-primary hidebuildingmenu buildingmenu_VCSPACE" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Cubicle Spaces'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_ASSETALLOCATION" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Insert Asset Allocations'), ENT_QUOTES, 'UTF-8'); ?>" onclick="insertAssetsAllocation('','<?php echo $bfloor['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="insertAssetsAllocation('','<?php echo $bfloor['id']; ?>','')" aria-label="<?= htmlspecialchars(__('Insert Asset Allocations'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye mt-2 text-primary hidebuildingmenu buildingmenu_ASSETALLOCATION" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('Insert Asset Allocations'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                        <i class="fa fa-eye mt-2 text-primary hidebuildingmenu  buildingmenu_VIEWASSETALLOCATION" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Asset Allocations'), ENT_QUOTES, 'UTF-8'); ?>" onclick="ShowAssetsLocations('<?php echo $bfloor['id']; ?>','')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowAssetsLocations('<?php echo $bfloor['id']; ?>','')" aria-label="<?= htmlspecialchars(__('View Asset Allocations'), ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-eye mt-2 text-primary hidebuildingmenu buildingmenu_VIEWASSETALLOCATION" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?= htmlspecialchars(__('View Asset Allocations'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
                                     </div>
                                 </div>
@@ -1556,14 +644,14 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
                                 </div>
                                 <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="AddAssets('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="AddAssets('<?php echo $equip['id']; ?>')" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil-alt cursor-pointer m-r-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                     <i class="ti-location-pin m-0 m-r-30 cursor-pointer" onclick="insertAssetsAllocation('','<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['asset_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                     <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="insertAssetsAllocation('','<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['asset_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-location-pin m-0 m-r-30 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Allocation'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                    <i class="ti-eye cursor-pointer m-l-30" onclick="ShowAssetsLocations('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowAssetsLocations('<?php echo $equipment_allocat_detail['building_floor_id']; ?>','<?php echo $equipment_allocat_detail['id']; ?>')" aria-label="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-eye cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Location'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
 
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['asset_id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="showEquipmentLogs('<?php echo $equipment_allocat_detail['asset_id']; ?>')" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-time cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
                                 </div>
                             </div>
@@ -1614,11 +702,11 @@ if($_POST['pagetype'] =="IEQ"){
                                     </div>
                                 </div>
                                 <div class="text-center pt-2">
-                                    <i class="ti-pencil-alt cursor-pointer m-r-30" onclick="AddAssets('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="AddAssets('<?php echo $equip['id']; ?>')" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-pencil-alt cursor-pointer m-r-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('Edit Details'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                    <i class="ti-location-pin m-0 cursor-pointer" onclick="setLocationAssets('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Set Location'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="setLocationAssets('<?php echo $equip['id']; ?>')" aria-label="<?= htmlspecialchars(__('Set Location'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-location-pin m-0 cursor-pointer" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('Set Location'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
 
-                                    <i class="ti-time cursor-pointer m-l-30" onclick="showEquipmentLogs('<?php echo $equip['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="showEquipmentLogs('<?php echo $equip['id']; ?>')" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"><i class="ti-time cursor-pointer m-l-30" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>" aria-label="<?= htmlspecialchars(__('View Logs'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -2453,36 +1541,7 @@ foreach($empparentwithchild[$selecteduser] as $empd){ ?>
                         <div class="align-middle mt-3">
                             <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($equp['asset_description']); ?></span>
                             <div class="d-inline-block width73">
-                                <h7 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button" onclick="AddAssets('<?php echo $equp['id']; ?>')"><?php echo $equp['asset_description']; ?> </h7>
-                                <span class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $equp['asset_code'];  ?></span>
-                               </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card" style=" min-height: 500px; max-height: 500px;">
-                    <div class="card-header table-card-header ">
-                        <h5><?= __('Employees'); ?> </h5>
-                        <div class="card-header-right">
-                            <button type="button" onclick="getBuildingDynamicPage('BSEM')" class=" b-b-primary text-primary float-right" data-bs-toggle="tab" costcenter" role="tab" aria-selected="true">View all</button>
-                        </div>
-                    </div>
-                    <div class="card-body" style="height: 300px;">
-                        <?php if(count((array)$employees_list) !=0){ ?>
-                        <div class="row">
-                        <?php $sq = 1;
-                            foreach($employees_list as $empd){
-                                ?>
-                            <div class="align-middle mt-3">
-                                <?php if($empd['image'] !="") { ?>
-                                    <img src="uploads/all/<?php echo $empd['image']; ?>"  class="img-radius img-50 align-top m-r-10" alt="Attachment Preview">
-                                <?php } else { ?>
-                                    <span  alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empd['display_name']); ?></span>
-                                <?php } ?>
-                                <div class="d-inline-block width73">
-                                    <h7 class="mb-0 custom-limit-text " style="--linehide: 1;"><?php echo $empd['display_name']; ?></h7>
+                                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="AddAssets('<?php echo $equp['id']; ?>')" aria-label="Action"><h7 class="mb-0 custom-limit-text text-primary cursor-pointer" style="--linehide: 1;"><?php echo $equp['asset_description']; ?> </h7> <span class="m-b-0 f-12 custom-limit-text" style="--linehide: 1;"><?php echo $equp['asset_code']; ?></span> </div> </div> <?php } ?> </div> </div> </div> <div class="col-lg-4"> <div class="card" style=" min-height: 500px; max-height: 500px;"> <div class="card-header table-card-header "> <h5><?= __('Employees'); ?> </h5> <div class="card-header-right"> <button type="button" class=" b-b-primary text-primary float-right" data-bs-toggle="tab" costcenter" aria-selected="true">View all</button> </div> </div> <div class="card-body" style="height: 300px;"> <?php if(count((array)$employees_list) !=0){ ?> <div class="row"> <?php $sq = 1; foreach($employees_list as $empd){ ?> <div class="align-middle mt-3"> <?php if($empd['image'] !="") { ?> <img src="uploads/all/<?php echo $empd['image']; ?>" class="img-radius img-50 align-top m-r-10" alt="Attachment Preview"> <?php } else { ?> <span alt="user" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center"><?php echo initials($empd['display_name']); ?></span> <?php } ?> <div class="d-inline-block width73"> <h7 class="mb-0 custom-limit-text " style="--linehide: 1;"><?php echo $empd['display_name']; ?></h7></button>
                                    <p class="m-b-0 f-12  custom-limit-text" style="--linehide: 1;"><?php echo $empd['email_id']; ?></p>
                                 </div>
                             </div>
@@ -2607,155 +1666,69 @@ foreach($empparentwithchild[$selecteduser] as $empd){ ?>
                 <div class="card-header">
                     <h5><?php echo $buldd['building_name']; ?></h5>
                     <div class="card-header-right">
-                        <i class="ti-eye allshowbuldicon" onclick="getEquipemntsWithSeat('CSA_ALLOCATION','<?php echo $buldd['id']; ?>')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Click To Open" id="waiticon_<?php echo $buldd['id']; ?>" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
-                        <span class="text-danger allshowbuldwaitmsg" id="waitmsg_<?php echo $buldd['id']; ?>" style="display: none">Please Wait.....</span>
-                    </div>
-                </div>
-                <div class="card-body pt-0">
-                    <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_3">
-                        <thead>
-                            <th scope="col">Floor</th>
-                            <th scope="col" class="text-right">Cubicle</th>
-                            <th scope="col" class="text-right">Aloc</th>
-                            <th scope="col" class="text-right">Res</th>
-                            <th scope="col" class="text-right">Avl</th>
-                            <th scope="col" class="text-right">Cabin</th>
-                            <th scope="col" class="text-right">Inpr</th>
-                            <th scope="col" class="text-right">Aloc</th>
-                            <th scope="col" class="text-right">Res</th>
-                            <th scope="col" class="text-right">Avl</th>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $buildingwithfloors = $building_with_floors[$buldd['id']];
-                        foreach($buildingwithfloors as $floors){
-                            $space_cnt = $allocemp = $allocares =$mngspace = $mngspaceallocation = $mngreservedspace = $inprogresscnt =  0;
-                            foreach($floors_with_spaces[$floors['id']] as $fspaceres){
-                                if($fspaceres['space_type_id'] =="7"){
-                                    $mngspace++;
-                                    if($fspaceres['current_status'] ==ST_INPROGRESS){
-                                        $inprogresscnt++;
-                                    }elseif($fspaceres['emp_id'] !=""){
-                                        $mngspaceallocation++;
-                                    }elseif($fspaceres['reserve_pool_id'] !=""){
-                                        $mngreservedspace++;
-                                    }
-                                }elseif($fspaceres['emp_id'] !=""){
-                                    $allocemp++;
-                                    $space_cnt++;
-                                }elseif($fspaceres['reserve_pool_id'] !=""){
-                                    $allocares++;
-                                    $space_cnt++;
-                                }else{
-                                    $space_cnt++;
-                                }
-
-                            }
-                         ?>
-                            <tr>
-                                <td class="p-2"><?php echo $floors['floor_name']; ?></td>
-                                <td class="p-2 text-right text-warning"><?php echo $space_cnt; ?></td>
-                                <td class="p-2 text-right text-warning"><?php echo $allocemp; ?></td>
-                                <td class="p-2 text-right"><?php echo $allocares; ?></td>
-                                <td class="p-2 text-right text-danger"><?php echo $space_cnt - ($allocemp+$allocares); ?></td>
-                                <td class="p-2 text-right text-warning"><?php echo $mngspace;?></td>
-                                <td class="p-2 text-right text-danger"><?php echo $inprogresscnt;?></td>
-                                <td class="p-2 text-right text-warning"><?php echo $mngspaceallocation;?></td>
-                                <td class="p-2 text-right text-warning"><?php echo $mngreservedspace;?></td>
-                                <td class="p-2 text-right text-warning"><?php echo $mngspace - $mngspaceallocation; ?></td>
-                            </tr>
-                        <?php } ?>
-                        </tbody>
-
-                    </table>
-                </div>
-            </div>
-        <?php } ?>
-        </div>
-
-<!-- { -->
-            <div class="card mt-4" >
-                <div class="card-header">
-                    <h5>Reporting Manager Tree</h5>
-                </div>
-                <div class="card-block custom-scroll " style=" min-height: 440px; max-height: 440px;">
-                    <?php
-                    if($_SESSION['admin_type']=='1'){
-                    $selecteduser = 0;
-                    }else{
-                    $selecteduser = $_SESSION['userid'];
-                    }
-if(count((array)$empparentwithchild[$selecteduser]) != '0'){ ?>
-                    <div class="card-block tree-view">
-                        <div id="basicTree_2">
-                            <ul>
-                                <?php
-foreach($empparentwithchild[$selecteduser] as $empd){ ?>
-
-<li data-jstree='{"opened":true}' class="<?php echo count((array)$empparentwithchild[$empd['id']]) !=0?"text-primary":""; ?>"><?php echo $empd['display_name']." - ".count((array)$empparentwithchild[$empd['id']]); ?>
-    <?php if($empwithallocationposition[$empd['id']]['id'] !=""){ ?>
-    <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="getEquipemntsWithSeat('CSA_ALLOCATION','<?php echo $buldd['id']; ?>')" aria-label="Click To Open"><i class="ti-eye allshowbuldicon" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Click To Open" id="waiticon_<?php echo $buldd['id']; ?>"></i></button>
+                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd['id']]['id']; ?>')" aria-label="Action"><span class="text-danger allshowbuldwaitmsg" id="waitmsg_<?php echo $buldd['id']; ?>" style="display: none">Please Wait.....</span> </div> </div> <div class="card-body pt-0"> <table class="table table-hover m-b-0" style="font-size:13px;" id="categoryfilter_3"> <thead> <th scope="col">Floor</th> <th scope="col" class="text-right">Cubicle</th> <th scope="col" class="text-right">Aloc</th> <th scope="col" class="text-right">Res</th> <th scope="col" class="text-right">Avl</th> <th scope="col" class="text-right">Cabin</th> <th scope="col" class="text-right">Inpr</th> <th scope="col" class="text-right">Aloc</th> <th scope="col" class="text-right">Res</th> <th scope="col" class="text-right">Avl</th> </thead> <tbody> <?php $buildingwithfloors = $building_with_floors[$buldd['id']]; foreach($buildingwithfloors as $floors){ $space_cnt = $allocemp = $allocares =$mngspace = $mngspaceallocation = $mngreservedspace = $inprogresscnt = 0; foreach($floors_with_spaces[$floors['id']] as $fspaceres){ if($fspaceres['space_type_id'] =="7"){ $mngspace++; if($fspaceres['current_status'] ==ST_INPROGRESS){ $inprogresscnt++; }elseif($fspaceres['emp_id'] !=""){ $mngspaceallocation++; }elseif($fspaceres['reserve_pool_id'] !=""){ $mngreservedspace++; } }elseif($fspaceres['emp_id'] !=""){ $allocemp++; $space_cnt++; }elseif($fspaceres['reserve_pool_id'] !=""){ $allocares++; $space_cnt++; }else{ $space_cnt++; } } ?> <tr> <td class="p-2"><?php echo $floors['floor_name']; ?></td> <td class="p-2 text-right text-warning"><?php echo $space_cnt; ?></td> <td class="p-2 text-right text-warning"><?php echo $allocemp; ?></td> <td class="p-2 text-right"><?php echo $allocares; ?></td> <td class="p-2 text-right text-danger"><?php echo $space_cnt - ($allocemp+$allocares); ?></td> <td class="p-2 text-right text-warning"><?php echo $mngspace;?></td> <td class="p-2 text-right text-danger"><?php echo $inprogresscnt;?></td> <td class="p-2 text-right text-warning"><?php echo $mngspaceallocation;?></td> <td class="p-2 text-right text-warning"><?php echo $mngreservedspace;?></td> <td class="p-2 text-right text-warning"><?php echo $mngspace - $mngspaceallocation; ?></td> </tr> <?php } ?> </tbody> </table> </div> </div> <?php } ?> </div> <!-- { --> <div class="card mt-4" > <div class="card-header"> <h5>Reporting Manager Tree</h5> </div> <div class="card-block custom-scroll " style=" min-height: 440px; max-height: 440px;"> <?php if($_SESSION['admin_type']=='1'){ $selecteduser = 0; }else{ $selecteduser = $_SESSION['userid']; } if(count((array)$empparentwithchild[$selecteduser]) != '0'){ ?> <div class="card-block tree-view"> <div id="basicTree_2"> <ul> <?php foreach($empparentwithchild[$selecteduser] as $empd){ ?> <li data-jstree='{"opened":true}' class="<?php echo count((array)$empparentwithchild[$empd['id']]) !=0?"text-primary":""; ?>"><?php echo $empd['display_name']." - ".count((array)$empparentwithchild[$empd['id']]); ?> <?php if($empwithallocationposition[$empd['id']]['id'] !=""){ ?> <span class="ti-location-pin text-primary"></span></button>
     <?php } ?>
     <ul>
      <?php foreach($empparentwithchild[$empd['id']] as $empd1){ ?>
          <li data-jstree='{"opened":false}' class="<?php echo count((array)$empparentwithchild[$empd1['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd1['id']]['display_name']." - ".count((array)$empparentwithchild[$empd1['id']]); ?>
          <?php if($empwithallocationposition[$empd1['id']]['id'] !=""){ ?>
-    <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd1['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd1['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd1['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd1['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
     <?php } ?>
              <ul>
              <?php foreach($empparentwithchild[$empd1['id']] as $empd2){ ?>
                  <li data-jstree='{"opened":false}' class="<?php echo count((array)$empparentwithchild[$empd2['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd2['id']]['display_name']." - ".count((array)$empparentwithchild[$empd2['id']]); ?>
                  <?php if($empwithallocationposition[$empd2['id']]['id'] !=""){ ?>
-                <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd2['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd2['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd2['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd2['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
                 <?php } ?>
                      <ul>
                      <?php foreach($empparentwithchild[$empd2['id']] as $empd3){ ?>
                          <li data-jstree='{"opened":false}'  class="<?php echo count((array)$empparentwithchild[$empd3['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd3['id']]['display_name']." - ".count((array)$empparentwithchild[$empd3['id']]); ?>
                          <?php if($empwithallocationposition[$empd3['id']]['id'] !=""){ ?>
-                        <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd3['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd3['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd3['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd3['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
                         <?php } ?>
                              <ul>
                              <?php foreach($empparentwithchild[$empd3['id']] as $empd4){ ?>
                                  <li data-jstree='{"opened":false}' class="<?php echo count((array)$empparentwithchild[$empd4['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd4['id']]['display_name']." - ".count((array)$empparentwithchild[$empd4['id']]); ?>
                                  <?php if($empwithallocationposition[$empd4['id']]['id'] !=""){ ?>
-                                <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd4['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd4['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd4['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd4['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
                                 <?php } ?>
                                      <ul>
                                      <?php foreach($empparentwithchild[$empd4['id']] as $empd5){ ?>
                                          <li data-jstree='{"opened":false}' class="<?php echo count((array)$empparentwithchild[$empd5['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd5['id']]['display_name']." - ".count((array)$empparentwithchild[$empd5['id']]); ?>
                                          <?php if($empwithallocationposition[$empd5['id']]['id'] !=""){ ?>
-                                        <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd5['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd5['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd5['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd5['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
                                         <?php } ?>
                                              <ul>
                                              <?php foreach($empparentwithchild[$empd5['id']] as $empd6){ ?>
                                                  <li data-jstree='{"opened":false}' class="<?php echo count((array)$empparentwithchild[$empd6['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd6['id']]['display_name']." - ".count((array)$empparentwithchild[$empd6['id']]); ?>
                                                  <?php if($empwithallocationposition[$empd6['id']]['id'] !=""){ ?>
-                                                <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd6['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd6['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                                                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd6['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd6['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
                                                 <?php } ?>
                                                      <ul>
                                                      <?php foreach($empparentwithchild[$empd6['id']] as $empd7){ ?>
                                                          <li data-jstree='{"opened":false}' class="<?php echo count((array)$empparentwithchild[$empd7['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd7['id']]['display_name']." - ".count((array)$empparentwithchild[$empd7['id']]); ?>
                                                          <?php if($empwithallocationposition[$empd7['id']]['id'] !=""){ ?>
-                                                        <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd7['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd7['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd7['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd7['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
                                                         <?php } ?>
 
                                                              <ul>
                                                              <?php foreach($empparentwithchild[$empd7['id']] as $empd8){ ?>
                                                                  <li data-jstree='{"opened":false}' class="<?php echo count((array)$empparentwithchild[$empd8['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd8['id']]['display_name']." - ".count((array)$empparentwithchild[$empd8['id']]); ?>
                                                                  <?php if($empwithallocationposition[$empd8['id']]['id'] !=""){ ?>
-                                                                <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd8['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd8['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                                                                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd8['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd8['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
                                                                 <?php } ?>
                                                                  <ul>
                                                                  <?php foreach($empparentwithchild[$empd8['id']] as $empd9){ ?>
                                                                      <li data-jstree='{"opened":false}' class="<?php echo count((array)$empparentwithchild[$empd9['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd9['id']]['display_name']." - ".count((array)$empparentwithchild[$empd9['id']]); ?>
                                                                      <?php if($empwithallocationposition[$empd9['id']]['id'] !=""){ ?>
-                                                                    <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd9['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd9['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                                                                    <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd9['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd9['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
                                                                     <?php } ?>
                                                                          <ul>
                                                                          <?php foreach($empparentwithchild[$empd9['id']] as $empd10){ ?>
                                                                              <li data-jstree='{"opened":false}' class="<?php echo count((array)$empparentwithchild[$empd10['id']]) !=0?"text-primary":""; ?>"><?php echo $employees_name_list[$empd10['id']]['display_name']." - ".count((array)$empparentwithchild[$empd10['id']]); ?>
                                                                              <?php if($empwithallocationposition[$empd10['id']]['id'] !=""){ ?>
-                                                                                <span  class="ti-location-pin text-primary" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd10['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd10['id']]['id']; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></span>
+                                                                                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="ShowBuildingFloorSpaceAllocations('<?php echo $empwithallocationposition[$empd10['id']]['building_floor_id']; ?>','<?php echo $empwithallocationposition[$empd10['id']]['id']; ?>')" aria-label="Action"><span class="ti-location-pin text-primary"></span></button>
                                                                                 <?php } ?>
                                                                              </li>
                                                                         <?php } ?>

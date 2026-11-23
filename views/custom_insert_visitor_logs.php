@@ -1,4 +1,7 @@
 <?php
+defined('DIR_UPLOADS_VISITORS') || define('DIR_UPLOADS_VISITORS', 'uploads/visitors/');
+defined('HTML_DATA_ICON') || define('HTML_DATA_ICON', '" data-icon="');
+defined('TITLE_VISITOR_PASS') || define('TITLE_VISITOR_PASS', TITLE_VISITOR_PASS);
 if (!function_exists('getBarcodeSVG')) {
     function getBarcodeSVG($text)
     {
@@ -9,7 +12,7 @@ if (!function_exists('getBarcodeSVG')) {
 
         $fullText = '*' . $text . '*';
 
-        $CODE39 = [
+        $code39 = [
             '0' => '000110100',
             '1' => '100100001',
             '2' => '001100001',
@@ -65,7 +68,7 @@ if (!function_exists('getBarcodeSVG')) {
 
         for ($i = 0; $i < strlen($fullText); $i++) {
             $char = $fullText[$i];
-            $pattern = $CODE39[$char] ?? null;
+            $pattern = $code39[$char] ?? null;
             if ($pattern === null)
                 continue;
 
@@ -327,13 +330,13 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
     <?php if (!$editMode): ?>
         <!-- Navigation Tabs for IN/OUT -->
         <ul class="nav nav-pills custom-vms-tabs mb-4" id="vmsTabs">
-            <li class="nav-item" role="presentation">
+            <li class="nav-item">
                 <button class="nav-link active" id="checkin-tab" data-bs-toggle="tab" data-bs-target="#checkin-pane"
                     type="button" role="tab" aria-controls="checkin-pane" aria-selected="true">
                     <i class="fa fa-sign-in-alt me-2"></i><?= __('Gate Check-in (IN)'); ?>
                 </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item">
                 <button class="nav-link" id="checkout-tab" data-bs-toggle="tab" data-bs-target="#checkout-pane"
                     type="button" role="tab" aria-controls="checkout-pane" aria-selected="false">
                     <i class="fa fa-sign-out-alt me-2"></i><?= __('Gate Check-out (OUT)'); ?>
@@ -1462,14 +1465,14 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                                     <table class="table table-hover" id="invoiceItem">
                                                         <tbody>
                                                             <tr>
-                                                                <th scope="col" width="35%" class="p-1"><?= __('Items/Service'); ?></th>
-                                                                <th scope="col" class="thheader p-1" width="30%"><?= __('Description'); ?></th>
+                                                                <th scope="col" style="width: 35%;" class="p-1"><?= __('Items/Service'); ?></th>
+                                                                <th scope="col" class="thheader p-1" style="width: 30%;"><?= __('Description'); ?></th>
                                                                 <?php if (($return['vendor_supplier_document_type'] ?? '') !== 'NOREF'): ?>
-                                                                    <th scope="col" class="thheader p-1 text-right" width="10%"><?= __('QTY'); ?></th>
+                                                                    <th scope="col" class="thheader p-1 text-right" style="width: 10%;"><?= __('QTY'); ?></th>
                                                                 <?php endif; ?>
-                                                                <th scope="col" class="thheader p-1 text-right" width="15%"><?= __('Received Qty'); ?>
+                                                                <th scope="col" class="thheader p-1 text-right" style="width: 15%;"><?= __('Received Qty'); ?>
                                                                     <span class="requried">*</span></th>
-                                                                <th scope="col" class="thheader p-1" width="5%"><?= __('UOM'); ?> <span
+                                                                <th scope="col" class="thheader p-1" style="width: 5%;"><?= __('UOM'); ?> <span
                                                                         class="requried">*</span></th>
                                                             </tr>
                                                             <?php foreach ($visitor_luggages_res as $item): ?>
@@ -2009,7 +2012,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         <?= htmlspecialchars($_SESSION['company_name'] ?? 'INFISUITE') ?>
                                     </div>
                                     <?php
-                                    $titleText = 'VISITOR PASS';
+                                    $titleText = TITLE_VISITOR_PASS;
                                     if ($type === 'delivery')
                                         $titleText = 'DELIVERY PASS';
                                     elseif ($type === 'service')
@@ -2022,7 +2025,7 @@ $noref_uom_res = (array) ($result['noref_uom_res'] ?? []);
                                         $titleText = 'VENDOR/SUPPLIER PASS';
                                     elseif ($type === 'others') {
                                         $specify = trim($return['visit_type_other'] ?? '');
-                                        $titleText = $specify ? strtoupper($specify) . ' PASS' : 'VISITOR PASS';
+                                        $titleText = $specify ? strtoupper($specify) . ' PASS' : TITLE_VISITOR_PASS;
                                     }
                                     ?>
                                     <div class="badge-title" id="badgePreviewTitle">
@@ -2171,7 +2174,7 @@ if ($printMode && $printRid) {
     $prPhone = '';
     $prHost = '—';
     $prCompany = '—';
-    $prTitleText = 'VISITOR PASS';
+    $prTitleText = TITLE_VISITOR_PASS;
 
     // Additional fields for the enhanced card layout
     $prPurpose = '—';
@@ -2198,7 +2201,7 @@ if ($printMode && $printRid) {
 
             if ($prType === 'others') {
                 $specify = trim($pr['visit_type_other'] ?? '');
-                $prTitleText = $specify ? strtoupper($specify) . ' PASS' : 'VISITOR PASS';
+                $prTitleText = $specify ? strtoupper($specify) . ' PASS' : TITLE_VISITOR_PASS;
             }
             break;
         case 'delivery':
@@ -2551,10 +2554,10 @@ if (!empty($delivery_company_res)) {
             </div>
             <div class="modal-body text-center" style="padding: 30px 30px 20px;">
                 <div class="approval-spinner mb-3" style="margin-bottom: 20px;">
-                    <div class="spinner-border text-primary" role="status"
+                    <output class="spinner-border text-primary d-inline-block"
                         style="width: 3rem; height: 3rem; border-width: 0.25em;">
                         <span class="visually-hidden"><?= __('Loading...'); ?></span>
-                    </div>
+                    </output>
                 </div>
                 <div class="approval-status-icon mb-3 d-none" style="margin-bottom: 20px; font-size: 56px;">
                     <i class="fa fa-check-circle text-success" id="statusSuccessIcon" style="display: none;"></i>

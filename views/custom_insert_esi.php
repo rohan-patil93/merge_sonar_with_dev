@@ -466,7 +466,7 @@ if(isset($_POST['submit_pt'])){
                                                                                             <option value="CO" data-select2-id="48"><?php echo __('Colorado'); ?></option>
                                                                                             <option value="ID" data-select2-id="49"><?php echo __('Idaho'); ?></option>
 
-                                                                                        </select><span class="select2 select2-container select2-container--default select2-container--below select2-container--focus" dir="ltr" data-select2-id="1" style="width: 260px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-kt_select2_1-container" aria-controls="select2-kt_select2_1-results"><span class="select2-selection__rendered" id="select2-kt_select2_1-container" role="textbox" aria-readonly="true" title="<?php echo __('Alaska'); ?>"><?php echo __('Basic'); ?></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper"></span></span>
+                                                                                        </select><span class="select2 select2-container select2-container--default select2-container--below select2-container--focus" dir="ltr" data-select2-id="1" style="width: 260px;"><span class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-kt_select2_1-container" aria-controls="select2-kt_select2_1-results"><span class="select2-selection__rendered" id="select2-kt_select2_1-container" aria-readonly="true" title="<?php echo __('Alaska'); ?>"><?php echo __('Basic'); ?></span><span class="select2-selection__arrow" aria-hidden="true"><b aria-hidden="true"></b></span></span></span><span class="dropdown-wrapper"></span></span>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1115,7 +1115,7 @@ if(isset($_POST['submit_pt'])){
             </div>
         </div>
     </div>
-<div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content"  id="popup2">
 

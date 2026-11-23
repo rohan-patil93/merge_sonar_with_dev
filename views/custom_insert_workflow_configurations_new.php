@@ -49,7 +49,6 @@ if (isset($_POST['submit'])) {
     $response = json_decode($respon, 1);
     if ($_POST['Rid'] == "") {
         header("location:index.php?option=COM_INSERT_WORKFLOW_CONFIGURATIONS_NEW&Rid=" . deocdeId("id:" . $response['res']['LASTID']));
-    } else {
     }
 }
 
@@ -563,14 +562,6 @@ $stausresult = ViewStatusData();
                         <div class="card-body">
                             <div class="row">
                                 <!-- <div class="form-group col-lg-3 w-full">
-                            <label class="form-label">Module</label>
-                            <select class="form-select js-example-basic-single" id="module_setup_id" name="module_setup_id" aria-label="Module Setup Id">
-                                <?php foreach ($mopdulesetup as $modulesetup) { ?>
-                                    <option value="<?php echo $modulesetup['module_id']; ?>" <?php echo $workflowlist['module_setup_id'] == $modulesetup['module_id'] ? "selected" : ""; ?>><?php echo $modulesetup['module_name']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div> -->
-                                <div class="form-group col-lg-12">
                                     <span class="form-label d-inline-block fw-bold"><?= __('Process Name'); ?></span>
                                     <select class="form-select js-example-basic-single process_name" name="process_name"
                                         id="process_name" onchange="selectProcessName(this.value)"
@@ -682,16 +673,6 @@ $stausresult = ViewStatusData();
                                     </select>
                                 </div>
                                 <?php /**/ ?>
-                                <!-- <div class="form-group col-lg-12">
-                            <label class="form-label">Email Template</label>
-                            <select class="form-select js-example-basic-single" name="email_content_ref_id" aria-label="Email Content Ref Id">
-                                <option value="0" > Select Any One</option>
-                                <?php foreach ($email_content as $emailcontent) { ?>
-                                    <option value="<?php echo $emailcontent['template_reference_id']; ?>" <?php echo $workflowconfiguration['email_content_ref_id'] == $emailcontent['template_reference_id'] ? "selected" : "" ?> ><?php echo $emailcontent['template_name']; ?>  </option>
-                                <?php } ?>
-                            </select>
-                        </div> -->
-                                <div class="form-group col-lg-12">
                                     <span class="form-label d-block"><?= __('Follow Up'); ?></span>
                                     <input type="checkbox" class="js-switch" value="Y" name="follow_up" id="follow_up"
                                         <?php echo $workflowconfiguration['follow_up'] == "Y" ? "checked" : ""; ?>
@@ -776,11 +757,11 @@ $stausresult = ViewStatusData();
                                         <span
                                             class="form-label d-inline-block fw-bold"><?= __('Criteria'); ?>-<?php echo $j; ?>
                                         </span>
-                                        <span class="float-right"><i role="button" tabindex="0"
+                                        <span class="float-right"><button type="button" class="btn btn-link p-0 border-0" onclick="deletecriteria('deletdiv_<?php echo $j; ?>')" aria-label="Delete"><i
                                                 aria-label="<?= htmlspecialchars(__('Deletecriteria'), ENT_QUOTES, 'UTF-8'); ?>"
                                                 onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
                                                 class="ti-close text-danger f-12"
-                                                onclick="deletecriteria('deletdiv_<?php echo $j; ?>')"></i></span>
+                                                ></i></button></span>
                                         <div <?php echo $criterias != "-1" ? 'style="pointer-events: none; opacity: 0.6;"' : ""; ?>>
                                             <select class="form-select js-example-basic-single selectcriteria"
                                                 name="criteria[]"
@@ -847,7 +828,7 @@ $stausresult = ViewStatusData();
                     <div class="col-lg-3">
                         <div class="table-responsive">
                             <table class="table table-bordered table-sm border-none" style="border: 1px solid #dee2e6;">
-                                <tr align="center" style="border: 1px solid #dee2e6;">
+                                <tr style="text-align: center; border: 1px solid #dee2e6;">
                                     <th scope="col"><?= __('Approval Levels'); ?></th>
                                 </tr>
                                 <tr>
@@ -860,7 +841,7 @@ $stausresult = ViewStatusData();
                                     $approvalprocess = $approval_process[$i];
                                     $sublist = subProcessType($approvalprocess['approval_type'], $getresult);
                                     ?>
-                                    <tr align="center" style="height: 75px;">
+                                    <tr style="text-align: center; height: 75px;">
                                         <td>
                                             <?php ?>
                                             <span class="form-label label label-lg label-primary d-inline-block fw-bold"
@@ -885,12 +866,12 @@ $stausresult = ViewStatusData();
                     <div class="col-lg-9">
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-sm">
-                                <tr align="center">
+                                <tr style="text-align: center;">
                                     <th scope="col" colspan="8">
                                         <?php echo ucwords(str_replace("_", " ", ($workflowconfiguration['process_name']))); ?>
                                     </th>
                                 </tr>
-                                <tr align="center">
+                                <tr style="text-align: center;">
                                     <?php $incnumber = 1;
                                     foreach ($dynamicdoacriteria as $unifieldkey => $dynamicdoacriterias) {
                                         $wfdetail = $wfdetails[$unifieldkey]; ?>
@@ -924,7 +905,7 @@ $stausresult = ViewStatusData();
                                             $wfdetail = $wfdetails[$unifieldkey];
                                             $doa_amount = json_decode($wfdetail['doa_amount'], 1);
                                             ?>
-                                            <th scope="col" align="center">
+                                            <th scope="col" style="text-align: center;">
                                                 <div class="input-group input-group-button">
                                                     <input class="form-control autonumber width1"
                                                         name="doa_amount[<?php echo $incnumber; ?>][<?php echo $i; ?>]" type="text"
@@ -981,14 +962,11 @@ $stausresult = ViewStatusData();
                             $valuefields = "{[" . $workflowconfiguration['process_name'] . "." . $keyy . "]}";
                             ?>
                             <p id="fieldspro_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-                            <span role="button" tabindex="0"
-                                onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
-                                onclick="copyfiled('#fieldspro_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
+                            <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block" onclick="copyfiled('#fieldspro_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                 data-placement="bottom"
                                 title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
                                 style="margin-bottom:5px"><?php echo ucwords($aray['lable']); ?> <i
-                                    class="ti-layers"></i></span>
+                                    class="ti-layers"></i></button>
                             <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
                                 onclick="copyfiled('#fieldspro_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                 data-placement="bottom"
@@ -1017,13 +995,10 @@ $stausresult = ViewStatusData();
                                     $valuefields = "{[application_users." . $keyy . "]}";
                                     ?>
                                     <p id="fieldsappuser_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-                                    <span role="button" tabindex="0"
-                                        onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                        class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
-                                        onclick="copyfiled('#fieldsappuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
+                                    <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block" onclick="copyfiled('#fieldsappuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                         data-placement="bottom"
                                         title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
-                                        style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
+                                        style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></button>
                                     <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
                                         onclick="copyfiled('#fieldsappuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                         data-placement="bottom"
@@ -1038,13 +1013,10 @@ $stausresult = ViewStatusData();
                                     $valuefields = "{[employees." . $keyy . "]}";
                                     ?>
                                     <p id="fieldsemp_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-                                    <span role="button" tabindex="0"
-                                        onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                        class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
-                                        onclick="copyfiled('#fieldsemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
+                                    <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block" onclick="copyfiled('#fieldsemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                         data-placement="bottom"
                                         title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
-                                        style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></span>
+                                        style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i class="ti-layers"></i></button>
                                     <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
                                         onclick="copyfiled('#fieldsemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                         data-placement="bottom"
@@ -1077,14 +1049,11 @@ $stausresult = ViewStatusData();
                                         ?>
                                         <p id="fieldssesiuser_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?>
                                         </p>
-                                        <span role="button" tabindex="0"
-                                            onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                            class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
-                                            onclick="copyfiled('#fieldssesiuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
+                                        <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block" onclick="copyfiled('#fieldssesiuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                             data-placement="bottom"
                                             title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
                                             style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
-                                                class="ti-layers"></i></span>
+                                                class="ti-layers"></i></button>
                                         <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
                                             onclick="copyfiled('#fieldssesiuser_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                             data-placement="bottom"
@@ -1099,14 +1068,11 @@ $stausresult = ViewStatusData();
                                         $valuefields = "{[session_employee." . $keyy . "]}";
                                         ?>
                                         <p id="fieldssesiemp_<?php echo $nmt; ?>" class="d-none"><?php echo $valuefields; ?></p>
-                                        <span role="button" tabindex="0"
-                                            onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
-                                            class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block"
-                                            onclick="copyfiled('#fieldssesiemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
+                                        <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600 d-inline-block" onclick="copyfiled('#fieldssesiemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                             data-placement="bottom"
                                             title="<?= htmlspecialchars(__('Click Copy To used'), ENT_QUOTES, 'UTF-8'); ?>"
                                             style="margin-bottom:5px"><?php echo ucwords($keyy); ?> <i
-                                                class="ti-layers"></i></span>
+                                                class="ti-layers"></i></button>
                                         <button type="button" class="btn btn-info btn-mini waves-effect waves-light m-1 f-w-600"
                                             onclick="copyfiled('#fieldssesiemp_<?php echo $nmt; ?>')" data-bs-toggle="tooltip"
                                             data-placement="bottom"

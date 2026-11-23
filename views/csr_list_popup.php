@@ -1,10 +1,15 @@
 <?php
+defined('KEY_CURRENT_STATUS') || define('KEY_CURRENT_STATUS', 'current_status');
+defined('STATUS_PROGRESS') || define('STATUS_PROGRESS', 'progress');
+defined('STATUS_APPROVED') || define('STATUS_APPROVED', 'approved');
+defined('STATUS_TRACKING') || define('STATUS_TRACKING', 'tracking');
+defined('STATUS_COMPLETED') || define('STATUS_COMPLETED', 'completed');
 $title = $_POST['title'] ?? 'CSR List';
 $count = $_POST['count'] ?? 0;
 $status = $_POST['status'] ?? '';
 $user_id = $_POST['user_id'] ?? '';
 $currentYear = $_POST['year'] ?? '';
-$current_status = $_POST['current_status'] ?? '';
+$current_status = $_POST[KEY_CURRENT_STATUS] ?? '';
 
 include_once '../includes/session.php';
 include_once '../dbconfig.php';
@@ -19,13 +24,13 @@ if($current_status != ''){
         $filtered = $response['total_records'] ?? array();
     } elseif ($status === 'active') {
         $filtered = $response['pending_approvals'] ?? array();
-    } elseif ($status === 'progress') {
+    } elseif ($status === STATUS_PROGRESS) {
         $filtered = $response['approval_inprogress'] ?? array();
-    } elseif ($status === 'approved') {
-        $filtered = $response['approved'] ?? array();
-    } elseif ($status === 'tracking') {
+    } elseif ($status === STATUS_APPROVED) {
+        $filtered = $response[STATUS_APPROVED] ?? array();
+    } elseif ($status === STATUS_TRACKING) {
         $filtered = $response['tracking_inprogress'] ?? array();
-    } elseif ($status === 'completed') {
+    } elseif ($status === STATUS_COMPLETED) {
         $filtered = $response['tracking_completed'] ?? array();
     }
 
@@ -45,15 +50,15 @@ if($current_status != ''){
         if ($currentYear == '') {
             if ($status === 'total') {
                 $filtered[] = $row;
-            } elseif ($status === 'active' && $row['current_status'] == 0) {
+            } elseif ($status === 'active' && $row[KEY_CURRENT_STATUS] == 0) {
                 $filtered[] = $row;
-            } elseif ($status === 'progress' && $row['current_status'] > 0 && $row['current_status'] < 199) {
+            } elseif ($status === STATUS_PROGRESS && $row[KEY_CURRENT_STATUS] > 0 && $row[KEY_CURRENT_STATUS] < 199) {
                 $filtered[] = $row;
-            } elseif ($status === 'approved' && $row['current_status'] == 199) {
+            } elseif ($status === STATUS_APPROVED && $row[KEY_CURRENT_STATUS] == 199) {
                 $filtered[] = $row;
-            } elseif ($status === 'tracking' && $row['current_status'] == 199 && $row['tracking_status'] == 0) {
+            } elseif ($status === STATUS_TRACKING && $row[KEY_CURRENT_STATUS] == 199 && $row['tracking_status'] == 0) {
                 $filtered[] = $row;
-            } elseif ($status === 'completed' && $row['current_status'] == 199 && $row['tracking_status'] == 1) {
+            } elseif ($status === STATUS_COMPLETED && $row[KEY_CURRENT_STATUS] == 199 && $row['tracking_status'] == 1) {
                 $filtered[] = $row;
             }
         }
@@ -61,15 +66,15 @@ if($current_status != ''){
 
             if ($status === 'total') {
                 $filtered[] = $row;
-            } elseif ($status === 'active' && $row['current_status'] == 0) {
+            } elseif ($status === 'active' && $row[KEY_CURRENT_STATUS] == 0) {
                 $filtered[] = $row;
-            } elseif ($status === 'progress' && $row['current_status'] > 0 && $row['current_status'] < 199) {
+            } elseif ($status === STATUS_PROGRESS && $row[KEY_CURRENT_STATUS] > 0 && $row[KEY_CURRENT_STATUS] < 199) {
                 $filtered[] = $row;
-            } elseif ($status === 'approved' && $row['current_status'] == 199) {
+            } elseif ($status === STATUS_APPROVED && $row[KEY_CURRENT_STATUS] == 199) {
                 $filtered[] = $row;
-            } elseif ($status === 'tracking' && $row['current_status'] == 199 && $row['tracking_status'] == 0) {
+            } elseif ($status === STATUS_TRACKING && $row[KEY_CURRENT_STATUS] == 199 && $row['tracking_status'] == 0) {
                 $filtered[] = $row;
-            } elseif ($status === 'completed' && $row['current_status'] == 199 && $row['tracking_status'] == 1) {
+            } elseif ($status === STATUS_COMPLETED && $row[KEY_CURRENT_STATUS] == 199 && $row['tracking_status'] == 1) {
                 $filtered[] = $row;
             }
         }

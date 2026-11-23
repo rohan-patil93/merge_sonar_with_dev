@@ -2,11 +2,8 @@
     style="width: 800px; display: block; margin: 0 auto !important; background: #ffffff;">
 
 
-        <table role="presentation"
-            style="width: 100%; border-collapse: collapse; border: 1px solid #cccccc; font-family: 'Tahoma';">
-            <thead>
-                <tr>
-                    <td style="width: 30%; border: 1px solid #cccccc; vertical-align: top; padding: 5px;">
+        <div style="width: 100%; border: 1px solid #cccccc; font-family: 'Tahoma';"><div style="display: flex; width: 100%; border-bottom: 1px solid #cccccc;">
+                    <div style="width: 30%; border-right: 1px solid #cccccc; padding: 5px;">
                         <h4 style="font-size: 11px; margin: 0; color: #333333; font-weight: 600;">
                             <?= __('Regd. Office'); ?></h4>
                         <h3 style="font-size: 12px; margin: 5px 0 0 0; font-weight: 600;"><?php echo $bill_by_name; ?>
@@ -15,11 +12,11 @@
                             style="font-size: 11px; color: #363636; font-weight: normal;line-height: 17px; margin: 5px 0 0 0;">
                             <?php echo $bill_by_billing_address; ?>
                         </p>
-                    </td>
-                    <td style="width: 40%; border: 1px solid #cccccc; text-align: center; padding: 5px;">
+                    </div>
+<div style="width: 40%; border-right: 1px solid #cccccc; text-align: center; padding: 5px;">
                         <img alt="" src="uploads/all/<?php echo $config['display_logo']; ?>" style="width:80px;">
-                    </td>
-                    <td style="width: 30%;border: 1px solid #cccccc; vertical-align: top; padding: 5px;">
+                    </div>
+<div style="width: 30%; padding: 5px;">
                         <h4 style="font-size: 12px; margin: 0 0 10px 0; font-weight: 600;">
                             <?= __('PURCHASE ORDER(DOM)'); ?></h4>
                         <h6 style="font-size: 11px; margin: 5px 0 0 0; font-weight: 500;"><?= __('PO NO'); ?> :
@@ -28,11 +25,7 @@
                             <?php echo date("d M Y", strtotime($transaction['transaction_date'])); ?></h6>
                         <h6 style="font-size: 11px; margin: 5px 0 0 0; font-weight: 500;"><?= __('PO Value'); ?> :
                             <?php echo currencyFormat($transaction['total_amount'], $config); ?></h6>
-                    </td>
-                </tr>
-            </thead>
-            <tr>
-                <td colspan="2" style="border-right: 1px solid #cccccc; vertical-align: top; padding: 5px;">
+                    </div></div><div style="display: flex; width: 100%; border-bottom: 1px solid #cccccc;"><div style="width: 70%; border-right: 1px solid #cccccc; padding: 5px;">
                     <p style="margin:5px 0; line-height: 15px;">
                         <span style="font-size:11px;color: #363636;"><?= __('Vendor Code'); ?>:</span>
                         <span style="font-size:11px;color: #363636;"><?= __('NA'); ?></span>
@@ -63,90 +56,82 @@
                         <span style="font-size:11px;color: #363636;"><?= __('Email'); ?>:</span>
                         <span style="font-size:11px;color: #363636;"><?= __('NA'); ?></span>
                     </p>
-                </td>
-                <td style="padding: 0 !important; vertical-align: top;">
-                    <table role="presentation" style="width: 100%;">
-                        <tr>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('Your Reference'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('NA'); ?></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #cccccc;">
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= htmlspecialchars(__('Revision No & Date'), ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('NA'); ?></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('State Code'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">36</td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('GSTIN'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?php echo $bill_by_gst_number; ?></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('CIN NO'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('NA'); ?></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('Drug License No.'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('NA'); ?></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('ECC No'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('NA'); ?></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('Range'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('NA'); ?></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('Division'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('NA'); ?></td>
-                        </tr>
-                        <tr>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('Commissionerate'); ?></td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</td>
-                            <td style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
-                                <?= __('NA'); ?></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="border: 1px solid #cccccc; white-space: normal; padding: 5px;">
+                </div><div style="width: 30%; padding: 0;">
+                        <div style="display: flex;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('Your Reference'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('NA'); ?></div>
+                        </div>
+                        <div style="display: flex; border-bottom: 1px solid #cccccc;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= htmlspecialchars(__('Revision No & Date'), ENT_QUOTES, 'UTF-8'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('NA'); ?></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('State Code'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">36</div>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('GSTIN'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?php echo $bill_by_gst_number; ?></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('CIN NO'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('NA'); ?></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('Drug License No.'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('NA'); ?></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('ECC No'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('NA'); ?></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('Range'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('NA'); ?></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('Division'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('NA'); ?></div>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('Commissionerate'); ?></div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">:</div>
+                            <div style="font-size: 11px; color: #363636; font-weight: normal; padding: 5px;">
+                                <?= __('NA'); ?></div>
+                        </div>
+                    </div></div>
+            <div style="border-bottom: 1px solid #cccccc; white-space: normal; padding: 5px;">
                     <p style="font-size: 12px; font-weight: 500; white-space: normal; margin: 0;">
                         <?= __('Please deliver under mentioned materials in good condition subject to terms and conditions printed on the annexure. Quote this order number, item code and your code number in all deliverable challans, bills and correspondence.'); ?>
                     </p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="padding: 0 !important; vertical-align: top;">
+                </div><div style="width: 100%;">
                     <table style="width: 100%">
                         <tr>
                             <th scope="col" style="font-size: 11px; border: 1px solid #cccccc; padding: 5px;">
@@ -185,24 +170,24 @@
                                         <?= __('DelvrySched- NA, Delivery Qty'); ?>-
                                         <?php echo emptyCheck($ta['item_quantity']); ?></p>
                                 </td>
-                                <td align="right" style="border: 1px solid #cccccc; padding: 5px;">
+                                <td style="text-align: right; border: 1px solid #cccccc; padding: 5px;">
                                     <p style="font-size: 11px;"><?php echo emptyCheck($ta['item_quantity']); ?></p>
                                 </td>
-                                <td align="right" style="border: 1px solid #cccccc; padding: 5px;">
+                                <td style="text-align: right; border: 1px solid #cccccc; padding: 5px;">
                                     <p style="font-size: 11px;"><?php echo currencyFormat($ta['item_price'], $config); ?></p>
                                 </td>
-                                <td align="right" style="border: 1px solid #cccccc; padding: 5px;">
+                                <td style="text-align: right; border: 1px solid #cccccc; padding: 5px;">
                                     <p style="font-size: 11px;">
                                         <?php echo currencyFormat($ta['discount_amount'], $config); ?></p>
                                 </td>
-                                <td align="right" style="border: 1px solid #cccccc; padding: 5px;">
+                                <td style="text-align: right; border: 1px solid #cccccc; padding: 5px;">
                                     <p style="font-size: 11px;">
                                         <?php echo emptyCheck($parentrowidwithtax[$ta['id']]['tax_value']); ?></p>
                                 </td>
-                                <td align="right" style="border: 1px solid #cccccc; padding: 5px;">
+                                <td style="text-align: right; border: 1px solid #cccccc; padding: 5px;">
                                     <p style="font-size: 11px;"><?php echo currencyFormat($ta['tax_amount'], $config); ?></p>
                                 </td>
-                                <td align="right" style="border: 1px solid #cccccc; padding: 5px;">
+                                <td style="text-align: right; border: 1px solid #cccccc; padding: 5px;">
                                     <p style="font-size: 11px; margin: 0;">
                                         <?php echo currencyFormat($ta['total_amount'], $config); ?></p>
                                 </td>
@@ -226,19 +211,15 @@
                                             <?= __('Amount'); ?></th>
                                     </tr>
                                     <tr>
-                                        <th scope="col" align="left"
-                                            style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                        <th scope="col" style="text-align: left; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                             <?= __('Sub Total'); ?></th>
-                                        <td align="right"
-                                            style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                        <td style="text-align: right; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                             <?php echo currencyFormat($transaction['amount'], $config); ?></td>
                                     </tr>
                                     <tr>
-                                        <th scope="col" align="left"
-                                            style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                        <th scope="col" style="text-align: left; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                             <?= __('Discount'); ?></th>
-                                        <td align="right"
-                                            style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                        <td style="text-align: right; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                             <?php echo currencyFormat($transaction['discount_amount'], $config); ?></td>
                                     </tr>
 
@@ -246,11 +227,9 @@
                                     if (count((array) $additional_charges) != "0") {
                                         foreach ($additional_charges as $adcharge) { ?>
                                             <tr>
-                                                <th scope="col" align="left"
-                                                    style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                                <th scope="col" style="text-align: left; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                                     <?php echo $adcharge['charge_name']; ?></th>
-                                                <td align="right"
-                                                    style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                                <td style="text-align: right; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                                     <?php echo currencyFormat(($adcharge['shipping_amount'] + $adcharge['shipping_tax_amount']), $config); ?>
                                                 </td>
                                             </tr>
@@ -258,64 +237,56 @@
                                     } ?>
 
                                     <tr>
-                                        <th scope="col" align="left"
-                                            style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                        <th scope="col" style="text-align: left; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                             <?= htmlspecialchars(__('CGST & SGST / IGST'), ENT_QUOTES, 'UTF-8'); ?></th>
-                                        <td align="right"
-                                            style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                        <td style="text-align: right; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                             <?php echo currencyFormat($transaction['tax_amount'], $config); ?></td>
                                     </tr>
                                     <tr>
-                                        <th scope="col" align="left"
-                                            style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                        <th scope="col" style="text-align: left; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                             <?= __('Total PO Value (INR)'); ?></th>
-                                        <td align="right"
-                                            style="font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
+                                        <td style="text-align: right; font-size: 11px;border: 1px solid #cccccc; padding: 5px;">
                                             <?php echo currencyFormat($transaction['total_amount'], $config); ?></td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;">
+                    </table></div><div style="display: flex; width: 100%; border-top: 1px solid #cccccc;"><div style="width: 33%; border-right: 1px solid #cccccc; padding: 5px;" style="border: 1px solid #cccccc; padding: 5px;">
                     <span style="font-size: 11px; font-weight: 600;"><?= __('Value in words'); ?>:</span>
-                </td>
-                <td colspan="2" style="border: 1px solid #cccccc; white-space: normal; padding: 5px;">
+                </div>
+                <div style="width: 67%; border: 1px solid #cccccc; white-space: normal; padding: 5px;">
                     <span style="font-size: 11px;"><?php echo numberToWordFormate($transaction['total_amount']); ?>
                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%; border-top: 1px solid #cccccc;">
+                <div style="width: 33%; border-right: 1px solid #cccccc; padding: 5px;">
                     <span style="font-size: 11px; font-weight: 600;"><?= __('Reverse Charge'); ?>:</span>
-                </td>
-                <td colspan="2" style="border: 1px solid #cccccc; padding: 5px;">
+                </div>
+                <div style="width: 67%; border: 1px solid #cccccc; padding: 5px;">
                     <span style="font-size: 11px;"><?= __('NA'); ?></span>
-                </td>
-            </tr>
+                </div>
+            </div>
 
-            <tr>
-                <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;">
+            <div style="display: flex; width: 100%; border-top: 1px solid #cccccc;">
+                <div style="width: 33%; border-right: 1px solid #cccccc; padding: 5px;">
                     <span style="font-size: 11px; font-weight: 600;"><?= __('Payment Terms'); ?>:</span>
-                </td>
-                <td colspan="2" style="border: 1px solid #cccccc; padding: 5px;">
+                </div>
+                <div style="width: 67%; border: 1px solid #cccccc; padding: 5px;">
                     <span
                         style="font-size: 11px;"><?php echo $payment_terms[$transaction['payment_terms']]['payment_term_name']; ?></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="1" style="border: 1px solid #cccccc; padding: 5px;">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%; border-top: 1px solid #cccccc;">
+                <div style="width: 33%; border-right: 1px solid #cccccc; padding: 5px;">
                     <span style="font-size: 11px; font-weight: 600;"><?= __('Terms of Delivery'); ?>:</span>
-                </td>
-                <td colspan="2" style="border: 1px solid #cccccc; padding: 5px;">
+                </div>
+                <div style="width: 67%; border: 1px solid #cccccc; padding: 5px;">
                     <span style="font-size: 11px;"><?= __('NA'); ?></span>
-                </td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #cccccc; vertical-align: top; padding: 5px;">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%; border-top: 1px solid #cccccc;">
+                <div style="flex: 1; border: 1px solid #cccccc; vertical-align: top; padding: 5px;">
                     <p style="font-size: 11px; margin: 5px 0; white-space: normal;">
                         <span
                             style="font-weight: 600;"><?= htmlspecialchars(__('Billing address & Place of delivery'), ENT_QUOTES, 'UTF-8'); ?>
@@ -331,8 +302,8 @@
                         <span><?= __('Contact No'); ?>:</span>
                         <span><?= __('NA'); ?></span>
                     </p>
-                </td>
-                <td style="border: 1px solid #cccccc; vertical-align: top; padding: 5px;">
+                </div>
+                <div style="flex: 1; border: 1px solid #cccccc; vertical-align: top; padding: 5px;">
                     <p style="font-size: 11px; margin: 5px 0; font-weight: 600;"><?= __('Prepared By'); ?></p>
                     <p style="font-size: 11px; margin: 5px 0;"><?php echo $bill_by['display_name']; ?></p>
                     <p style="font-size: 11px; margin: 5px 0;"><?php echo emptyCheck($bill_by['user_email']); ?></p>
@@ -345,17 +316,17 @@
                         <span><?= __('Time'); ?>:</span>
                         <span><?php echo date("h:m:s"); ?></span>
                     </p>
-                </td>
-                <td style="border: 1px solid #cccccc; vertical-align: top; padding: 5px;">
+                </div>
+                <div style="flex: 1; border: 1px solid #cccccc; vertical-align: top; padding: 5px;">
                     <p style="font-size: 11px; margin: 0;"><?= __('For'); ?> <?php echo $config['name']; ?></p>
                     <p style="font-size: 11px; margin: 0;">&nbsp;</p>
                     <p style="font-size: 11px; margin: 0;">&nbsp;</p>
                     <p style="font-size: 11px; margin: 0;"><?= __('Authorized Signature'); ?></p>
-                </td>
-            </tr>
+                </div>
+            </div>
 
-            <tr style="page-break-before: always; break-before: always;">
-                <td colspan="3" style="border: 1px solid #cccccc; padding: 5px;">
+            <div style="display: flex; width: 100%; border-top: 1px solid #cccccc; page-break-before: always; break-before: always;">
+                <div style="width: 100%; border: 1px solid #cccccc; padding: 5px;">
                     <h6 style="font-size: 12px; margin: 0; font-weight: 600;"><?= __('Additional Item Information'); ?>
                     </h6>
                     <?php $seq = 1;
@@ -363,11 +334,11 @@
                         <p style="font-size: 11px; margin: 5px 0; font-weight: 600;">
                             <?= nl2br(wordwrap(htmlspecialchars($ta['description']), 50, "\n", true)); ?></p>
                     <?php } ?>
-                </td>
-            </tr>
+                </div>
+            </div>
 
-            <tr style="page-break-before: always; break-before: always;">
-                <td colspan="3" style="border: 1px solid #cccccc; white-space: normal; padding: 5px;">
+            <div style="display: flex; width: 100%; border-top: 1px solid #cccccc; page-break-before: always; break-before: always;">
+                <div style="width: 100%; border: 1px solid #cccccc; white-space: normal; padding: 5px;">
                     <h6 style="font-size: 11px; margin: 0 0 10px 0; text-align: center; font-weight: 600;">
                         <?= __('Terms and Conditions'); ?></h6>
                     <p style="font-size: 8px; margin: 5px 0;">
@@ -414,10 +385,10 @@
                     </p>
                     <p style="font-size: 8px; margin: 5px 0;">
                         <?= __('14) Purchase order reference must be quoted on all challans, invoices etc.'); ?></p>
-                </td>
-            </tr>
-            <tr style="page-break-before: always; break-before: always;">
-                <td colspan="3" style="border: 1px solid #cccccc; white-space: normal; padding: 5px;">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%; border-top: 1px solid #cccccc; page-break-before: always; break-before: always;">
+                <div style="width: 100%; border: 1px solid #cccccc; white-space: normal; padding: 5px;">
                     <p style="font-size: 8px; margin: 5px 0;">
                         <?= __('15) Deliveries accepted up to 4.30 pm only on working days.'); ?></p>
                     <p style="font-size: 8px; margin: 5px 0;">
@@ -449,7 +420,6 @@
                     </p>
                     <p style="font-size:8px; margin: 10px 0 0 0; font-weight: 600;">
                         <?= __('ALL WARRANTIES HEREUNDER SHALL ALSO BE CONSTRUED AS CONDITIONS.'); ?></p>
-                </td>
-            </tr>
-        </table>
-</div>
+                </div>
+            </div>
+        </div></div>

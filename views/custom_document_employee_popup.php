@@ -92,11 +92,11 @@ if(isset($_REQUEST['month'])){
     <table class="table table-hover custom_asign_emp_mpc" id="kt_datatable1" >
         <thead >
             <tr>
-                <th scope="col" width="2%">#</th>
-                <th scope="col" width="15%"><?= __('Name') ?> </th>
-                <th scope="col" width="10%"><?= __('Email') ?></th>
-                <th scope="col" width="10%"></th>
-                <th scope="col" width="2%"></th>
+                <th scope="col" style="width: 2%;">#</th>
+                <th scope="col" style="width: 15%;"><?= __('Name') ?> </th>
+                <th scope="col" style="width: 10%;"><?= __('Email') ?></th>
+                <th scope="col" style="width: 10%;"></th>
+                <th scope="col" style="width: 2%;"></th>
             </tr>
         </thead>
         <tbody >
@@ -128,7 +128,7 @@ if(isset($_REQUEST['month'])){
                     </td>
                     <td class="p-2">
                         <p>
-                            <span role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Assignemp'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="f-14 f-w-600  text-danger cursor-pointer" onclick="assignemp(<?php echo $row['id']; ?>)"> <i class="icofont icofont-ui-delete"></i></span>
+                            <button type="button" class="btn btn-link p-0 border-0 f-14 f-w-600  text-danger cursor-pointer" aria-label="<?= htmlspecialchars(__('Assignemp'), ENT_QUOTES, 'UTF-8'); ?>" onclick="assignemp(<?php echo $row['id']; ?>)"><i class="icofont icofont-ui-delete"></i></button>
                         </p>
                     </td>
                 </tr>

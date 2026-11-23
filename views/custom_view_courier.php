@@ -42,7 +42,7 @@
                             </button>
                         </div>
                         <div class="modal fade" id="courier-in-Modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog">
                                 <div class="modal-content align-left">
                                     <div class="modal-header">
                                         <h4 class="modal-title"><?= __('Courier in'); ?></h4>
@@ -83,7 +83,7 @@
                             </button>
                         </div>
                         <div class="modal fade" id="courier-out-Modal" tabindex="-1" style="z-index: 1050; display: none;" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog">
                                 <div class="modal-content align-left">
                                     <div class="modal-header">
                                         <h4 class="modal-title"><?= __('Courier in'); ?></h4>
@@ -167,7 +167,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -185,7 +185,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -203,7 +203,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -247,7 +247,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -265,7 +265,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -283,7 +283,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -327,7 +327,7 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -345,7 +345,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>
@@ -363,7 +363,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td scope="row" style="width: 10%;">
+                                        <td style="width: 10%;">
                                             <img src="assets/images/4.png" class="img-radius img-40" alt="<?= htmlspecialchars(__('User-Profile'), ENT_QUOTES, 'UTF-8'); ?>-">
                                         </td>
                                         <td>

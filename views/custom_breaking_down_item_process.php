@@ -1,4 +1,5 @@
 <?php
+defined('ATTR_SELECTED_EQ') || define('ATTR_SELECTED_EQ', ATTR_SELECTED_EQ);
 $_SESSION['apply_js']['multiselest'] = 1;
 if(isset($_POST['submititem'])){
     $url = API."?mode=insertitems&method=post";
@@ -72,8 +73,10 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
                         <option value="0"><?= __("Select Any one") ?> </option>
                         <?php if (!empty($items) && is_array($items)) {
                             foreach ($items as $itm) {
-                                if (!is_array($itm)) continue;
-                                $selected = (isset($items['breaking_down_item_id']) && isset($itm['id']) && $items['breaking_down_item_id'] == $itm['id']) ? 'selected="selected"' : '';
+                                if (!is_array($itm)) {
+                                continue;
+                            }
+                                $selected = (isset($items['breaking_down_item_id']) && isset($itm['id']) && $items['breaking_down_item_id'] == $itm['id']) ? ATTR_SELECTED_EQ : '';
                         ?>
                             <option value="<?php echo htmlspecialchars((string)($itm['id'] ?? ''), ENT_QUOTES); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars(($itm['sku'] ?? '') . " - " . __($itm['item_name'] ?? ''), ENT_QUOTES); ?></option>
                         <?php   }
@@ -82,7 +85,7 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="breaking_down_item_date"><?= __("Date") ?></label>
-                    <input class="form-control datepicker" type="text" id="breaking_down_item_date" name="breaking_down_item_date" value="<?php echo (!empty($items['breaking_down_item_date']) && function_exists('fromDate')) ? fromDate($items['breaking_down_item_date']) : (!empty($items['breaking_down_item_date']) ? htmlspecialchars($items['breaking_down_item_date'], ENT_QUOTES) : ''); ?>" aria-label="<?= htmlspecialchars(__('Breaking Down Item Date'), ENT_QUOTES, 'UTF-8'); ?>">
+                    <input class="form-control datepicker" type="text" id="breaking_down_item_date" name="breaking_down_item_date" <?php $bdDateFallback = !empty($items['breaking_down_item_date']) ? htmlspecialchars($items['breaking_down_item_date'], ENT_QUOTES) : ''; $bdDateVal = (!empty($items['breaking_down_item_date']) && function_exists('fromDate')) ? fromDate($items['breaking_down_item_date']) : $bdDateFallback; ?> value="<?php echo $bdDateVal; ?>" aria-label="<?= htmlspecialchars(__('Breaking Down Item Date'), ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="parent_quantity"><?= __("Quantity") ?></label>
@@ -109,8 +112,10 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
                             <option value="0"><?= __("Select Any one") ?> </option>
                             <?php if (!empty($items) && is_array($items)) {
                                 foreach ($items as $itm) {
-                                    if (!is_array($itm)) continue;
-                                    $selected = (isset($items['purchase_uom']) && isset($itm['id']) && $items['purchase_uom'] == $itm['id']) ? 'selected="selected"' : '';
+                                    if (!is_array($itm)) {
+                                continue;
+                            }
+                                    $selected = (isset($items['purchase_uom']) && isset($itm['id']) && $items['purchase_uom'] == $itm['id']) ? ATTR_SELECTED_EQ : '';
                             ?>
                                 <option value="<?php echo htmlspecialchars((string)($itm['id'] ?? ''), ENT_QUOTES); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars(($itm['sku'] ?? '') . " - " . __($itm['item_name'] ?? ''), ENT_QUOTES); ?></option>
                             <?php   }
@@ -122,8 +127,10 @@ $unit_of_measurements = isset($result['unit_of_measurements']) && is_array($resu
                             <option value="0"><?= __("Select Any one") ?></option>
                             <?php if (!empty($unit_of_measurements) && is_array($unit_of_measurements)) {
                                 foreach ($unit_of_measurements as $uomr) {
-                                    if (!is_array($uomr)) continue;
-                                    $selected = (isset($items['purchase_uom']) && isset($uomr['id']) && $items['purchase_uom'] == $uomr['id']) ? 'selected="selected"' : '';
+                                    if (!is_array($uomr)) {
+                                    continue;
+                                }
+                                    $selected = (isset($items['purchase_uom']) && isset($uomr['id']) && $items['purchase_uom'] == $uomr['id']) ? ATTR_SELECTED_EQ : '';
                             ?>
                                 <option value="<?php echo htmlspecialchars((string)($uomr['id'] ?? ''), ENT_QUOTES); ?>" <?php echo $selected; ?>><?php echo htmlspecialchars(__($uomr['uom_name'] ?? '') . " - " . ($uomr['uom_short_code'] ?? ''), ENT_QUOTES); ?></option>
                             <?php   }

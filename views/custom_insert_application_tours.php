@@ -1,7 +1,10 @@
 <?php
+defined('KEY_COMPANY_ID') || define('KEY_COMPANY_ID', 'company_id');
+defined('KEY_IS_ACTIVE') || define('KEY_IS_ACTIVE', 'is_active');
+defined('KEY_APP_TABLE_NAME') || define('KEY_APP_TABLE_NAME', 'application_table_name');
 $_SESSION['apply_js']['multiselest'] = '1';
 if(isset($_POST['submittour'])){
-    $_POST['company_id'] = $_SESSION['company_id'];
+    $_POST[KEY_COMPANY_ID] = $_SESSION[KEY_COMPANY_ID];
     $_POST['user_id'] = $_SESSION['userid'];
     $url = API."?mode=insertapplicationtours&method=post";
      $response = file_post_contents($url, $_POST);
@@ -10,7 +13,7 @@ if(isset($_POST['submittour'])){
 
 
 $table_name = (isset($_POST['table_name_txt']))?$_POST['table_name_txt']:$_GET['table'];
-$wh1["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id'],'application_table_name'=>$table_name);
+$wh1["where"] = array(KEY_IS_ACTIVE=>'0',KEY_COMPANY_ID=>$_SESSION[KEY_COMPANY_ID],KEY_APP_TABLE_NAME=>$table_name);
 $wh1['order'] = "sequence ASC";
 $data1 = urlencode(json_encode($wh1));
 $url1 = API."?mode=gettabledetailswithconditions&table=application_tours&data=".$data1;
@@ -26,7 +29,7 @@ $resarray = json_decode($data_details1,1);
 
 
 
-$showtableswh["where"] = array('is_active'=>'0','company_id'=>$_SESSION['company_id']);
+$showtableswh["where"] = array(KEY_IS_ACTIVE=>'0',KEY_COMPANY_ID=>$_SESSION[KEY_COMPANY_ID]);
 $showtableswh["field"] = "DISTINCT application_table_name";
 $showtableswhdecid = urlencode(json_encode($showtableswh));
 $showtablesurl = API."?mode=gettabledetailswithconditions&table=application_tours&data=".$showtableswhdecid;
@@ -35,7 +38,7 @@ $showtables = json_decode($showtables,1);
 
 $filed_array = array('text' => 'Simple Text', 'touchspin' => 'Touch Spin', 'date_pick' => 'Date','month_year'=>'Month','time_pick'=>'Time' ,'color_pick' => 'Color', 'email'=> 'Email','phone'=> 'Phone','number'=> 'Quantity','currency'=> 'Currency', 'password'=> 'Password', 'textarea' => 'Text Area', 'checkbox' => 'Check Box', 'switch' => 'Switch', 'radio' => 'Radio', 'select'=> 'List','auto_select'=>'Auto Select' ,'multi_select'=> 'Multi Select','rating'=>'Rating','image' => 'Photo','editor' => 'Editor','slider'=>'Slider','number_type'=> 'Number','read_only'=> 'Read Only Text','disable_select'=> 'Disable List','hidden'=> 'Hidden', 'serial_no'=>'Serial Number', 'button'=>'Button','array'=>'Array');
 
-$wh5["where"] = array('company_id'=>$_SESSION['company_id'],'is_active'=>'0');
+$wh5["where"] = array(KEY_COMPANY_ID=>$_SESSION[KEY_COMPANY_ID],KEY_IS_ACTIVE=>'0');
 $wh5["field"] = "id,module_id,module_name";
 $data5 = urlencode(json_encode($wh5));
 $url5 = API."?mode=gettabledetailswithconditions&table=module_setup&data=".$data5;
@@ -84,7 +87,7 @@ function deleteitem(cardid){
     <div class="container-fluid ">
         <div class="card card-custom card-sticky " id="kt_page_sticky_card">
             <div class="card-header">
-                <h5><?= __('Take A Tours') ?></h5><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                <h5><?= __('Take A Tours') ?></h5><button type="button" class="btn btn-link p-0 border-0" aria-label="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>" onclick="proceduressteps()"><i class="ti-info-alt f-20 text-primary" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>"></i></button>
                 <div class="card-header-right">
                        <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                      <i class="icofont icofont-reply"></i> <?= __('Back') ?></a>
@@ -99,12 +102,12 @@ function deleteitem(cardid){
       <select class="form-select js-example-basic-single" name="application_table_name" onchange="selecttablename(this.value)" aria-label="<?= htmlspecialchars(__('Application Table Name'), ENT_QUOTES, 'UTF-8'); ?>">
             <option value = "0"> <?= __('Select Any One'); ?></option>
             <?php foreach ($showtables as $data) {  ?>
-                <option  <?php if($resarray[0]['application_table_name'] == $data['application_table_name']){ ?> selected  <?php } ?> value = <?php echo $data['application_table_name'] ?>   > <?php echo ucwords(str_replace('_',' ',$data['application_table_name'])); ?> </option>
+                <option  <?php if($resarray[0][KEY_APP_TABLE_NAME] == $data[KEY_APP_TABLE_NAME]){ ?> selected  <?php } ?> value = <?php echo $data[KEY_APP_TABLE_NAME] ?>   > <?php echo ucwords(str_replace('_',' ',$data[KEY_APP_TABLE_NAME])); ?> </option>
         <?php	} ?>
                 <option value = "-1"  <?php echo $_GET['table']=="-1"?"selected":""?>><?= __('Other Table') ?></option>
         </select>
         <?php if($_GET['table']=="-1"){ ?>
-        <input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="<?= htmlspecialchars(__('Enter Table/Page Name'), ENT_QUOTES, 'UTF-8'); ?>">
+        <input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0][KEY_APP_TABLE_NAME]; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="<?= htmlspecialchars(__('Enter Table/Page Name'), ENT_QUOTES, 'UTF-8'); ?>">
         <?php } ?>
 
     </div>
@@ -119,13 +122,13 @@ function deleteitem(cardid){
 <table class="table table-hover table-custom-responsive"  id="toureaddmore">
     <thead>
       <tr>
-          <th scope="col" width="15%"><?= __('Field Name') ?></th>
-          <th scope="col" width="15%"><?= __('Menu Path') ?></th>
-          <th scope="col" width="15%"><?= __('Ref Field Name') ?></th>
-          <th scope="col" width="30%"><?= __('Help Text') ?></th>
-          <th scope="col" width="15%"><?= __('Field Type') ?></th>
-          <th scope="col" width="5%"><?= __('Sequence') ?></th>
-          <th scope="col" width="5%"><?= __('Display') ?></th>
+          <th scope="col" style="width: 15%;"><?= __('Field Name') ?></th>
+          <th scope="col" style="width: 15%;"><?= __('Menu Path') ?></th>
+          <th scope="col" style="width: 15%;"><?= __('Ref Field Name') ?></th>
+          <th scope="col" style="width: 30%;"><?= __('Help Text') ?></th>
+          <th scope="col" style="width: 15%;"><?= __('Field Type') ?></th>
+          <th scope="col" style="width: 5%;"><?= __('Sequence') ?></th>
+          <th scope="col" style="width: 5%;"><?= __('Display') ?></th>
       </tr>
      </thead>
      <tbody>

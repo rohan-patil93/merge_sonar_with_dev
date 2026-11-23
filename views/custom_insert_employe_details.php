@@ -1,4 +1,9 @@
 <?php
+defined('LBL_CHECKBOX') || define('LBL_CHECKBOX', 'Checkbox');
+defined('LBL_SELECT_ANY_ONE') || define('LBL_SELECT_ANY_ONE', 'Select Any One');
+defined('KEY_RELATION_NAME') || define('KEY_RELATION_NAME', 'relation_name');
+defined('LBL_DATE_OF_BIRTH') || define('LBL_DATE_OF_BIRTH', 'Date Of Birth');
+defined('LBL_ENTER_CONTACT_NAME') || define('LBL_ENTER_CONTACT_NAME', 'Enter Contact Name');
 $_SESSION['apply_js']['wizardjs'] = '1';
 $_SESSION['apply_js']['multiselest'] = '1';
 $company_id = $_SESSION['company_id'];
@@ -163,12 +168,12 @@ function showmarriagedate(value) {
    });
    var htmlRows = '';
    htmlRows += '<tr>';
-   htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
+   htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="<?= htmlspecialchars(__(LBL_CHECKBOX), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
 
    htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Enter Depandent Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="dependent_name[]" placeholder="<?= __('Enter Depandent Name') ?>"  class="form-control " autocomplete="off">  </td>';
-   htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Dependent Relationship Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="dependent_relationship_type[]" > <option value="0"><?= __('Select Any One') ?></option> <?php foreach ($relatypedata as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option> <?php
+   htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Dependent Relationship Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="dependent_relationship_type[]" > <option value="0"><?= __(LBL_SELECT_ANY_ONE) ?></option> <?php foreach ($relatypedata as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo $reladata[KEY_RELATION_NAME]; ?></option> <?php
 } ?></select>  </td>';
-   htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Date Of Birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="dependent_date_of_birth[]"  class="form-control datepicker"   autocomplete="off" placeholder="<?= __('Date Of Birth') ?>">  </td>';
+   htmlRows += '<td><input aria-label="<?= htmlspecialchars(__(LBL_DATE_OF_BIRTH), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="dependent_date_of_birth[]"  class="form-control datepicker"   autocomplete="off" placeholder="<?= __(LBL_DATE_OF_BIRTH) ?>">  </td>';
    htmlRows += '</tr>';
    $('#deptable').append(htmlRows);
    $(".js-example-basic-single").select2();
@@ -188,11 +193,11 @@ function showmarriagedate(value) {
    });
    var htmlRows = '';
    htmlRows += '<tr>';
-   htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
+   htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="<?= htmlspecialchars(__(LBL_CHECKBOX), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
 
 
-   htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Enter Contact Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="contact_name[]"  class="form-control " placeholder="<?= __('Enter Contact Name') ?>"  autocomplete="off"> </td>';
-   htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Contact Relationship'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="contact_relationship[]" > <option value="0"><?= __('Select Any One') ?></option> <?php foreach ($relatypedata as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option> <?php
+   htmlRows += '<td><input aria-label="<?= htmlspecialchars(__(LBL_ENTER_CONTACT_NAME), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="contact_name[]"  class="form-control " placeholder="<?= __(LBL_ENTER_CONTACT_NAME) ?>"  autocomplete="off"> </td>';
+   htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Contact Relationship'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="contact_relationship[]" > <option value="0"><?= __(LBL_SELECT_ANY_ONE) ?></option> <?php foreach ($relatypedata as  $reladata) {   ?> <option   value="<?php echo $reladata['id']; ?>"> <?php echo $reladata[KEY_RELATION_NAME]; ?></option> <?php
 } ?></select>    </td>';
    htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Enter Home Number'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="contact_home_no[]" placeholder="<?= __('Enter Home Number') ?>"  class="form-control "  autocomplete="off">  </td>';
    htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Enter Mobile Number'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="contact_mobile_no[]"  class="form-control "  placeholder="<?= __('Enter Mobile Number') ?>"  autocomplete="off">  </td>';
@@ -216,7 +221,7 @@ function showmarriagedate(value) {
    });
    var htmlRows = '';
    htmlRows += '<tr>';
-   htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
+   htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="<?= htmlspecialchars(__(LBL_CHECKBOX), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
 
    htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Enter Company Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="company_name[]"  placeholder="<?= __('Enter Company Name') ?>" class="form-control " autocomplete="off">  </td>';
    htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Enter Job Description'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="job_descrption[]"  placeholder="<?= __('Enter Job Description') ?>" class="form-control " autocomplete="off">  </td>';
@@ -240,10 +245,10 @@ function showmarriagedate(value) {
    });
    var htmlRows = '';
    htmlRows += '<tr>';
-   htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
+   htmlRows += '<td><div class="checkbox-fade fade-in-primary"><label class="form-label"><input aria-label="<?= htmlspecialchars(__(LBL_CHECKBOX), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span> </label></div></td> ';
 
    htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Enter Instistute name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="institute_name[]"  placeholder="<?= __('Enter Instistute name') ?>" class="form-control " autocomplete="off">  </td>';
-   htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Education Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="education_type[]" > <option value="0"><?= __('Select Any One') ?></option> <?php foreach ($edutypedata as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo __($edutype['genc_detail_name']); ?></option> <?php
+   htmlRows += '<td><select aria-label="<?= htmlspecialchars(__('Education Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="education_type[]" > <option value="0"><?= __(LBL_SELECT_ANY_ONE) ?></option> <?php foreach ($edutypedata as  $edutype) {   ?> <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo __($edutype['genc_detail_name']); ?></option> <?php
 } ?></select> </td>';
    htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Start Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="start_date[]" placeholder="<?= __('Start Date') ?>"  class="form-control datepicker"  autocomplete="off"> <input aria-label="<?= htmlspecialchars(__('End Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="end_date[]"  class="form-control datepicker mt-2"   autocomplete="off" placeholder="<?= __('End Date') ?>">  </td>';
    htmlRows += '<td><input aria-label="<?= htmlspecialchars(__('Enter Score'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="score[]"  class="form-control " placeholder ="<?= htmlspecialchars(__('Enter Score'), ENT_QUOTES, 'UTF-8'); ?>" autocomplete="off">  </td>';
@@ -322,50 +327,7 @@ position: absolute;
 
 </style>
 <div class="d-flex flex-column-fluid ">
- <!--begin::Container-->
- <div class="container-fluid">
-  <?php
-  if($hrconnect_id==0 || $hrconnect_id=="") { ?>
-
-
-       <div class="alert alert-primary alert-dismissible">
-        <strong><?php echo "".__('HR connect is not configured.')."  <strong>".__('Workflow need to be started!')."</strong>"; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
-        </button>
-      </div>
-
-    <?php } else { ?>
-
-
-       <div class="alert alert-primary alert-dismissible">
-        <strong><?php echo "This function is used for maintaining <strong>".__('Display Attributes')."</strong>".__('. * represents mandatory fields.').""; ?></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>">
-        </button>
-      </div>
-    <?php } ?>
-
-     <div class="card">
-      <div class="card-header  ">
-       <h5><?= __('Employee') ?></h5>
-
-                <div class="checkbox-fade fade-in-primary float-right" >
-                 <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-          <i class="icofont icofont-reply"></i>
-          <?= __('Back'); ?>
-        </a>
-
-                          <label class="form-label" style="display:none"><input aria-label="<?= htmlspecialchars(__('Create User'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="create_user" type="checkbox" value="0"> <span class="cr">
-                            <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                          </span><?= __('Create User'); ?>  </label>
-
-                        </div>
-    </div>
-    <div class="card-block j-pro">
-     <div class="row ">
-       <div class="col-md-12">
-         <div id="wizardb">
-           <section>
-            <!-- Verticle Wizard card start -->
+ 
             <div class="card">
               <div class="card-block">
                 <div class="row">
@@ -493,7 +455,7 @@ position: absolute;
        <div  class="mt-2"  >
         <span class="col-form-label"><?= __('Department'); ?> <span class="text-danger">*</span></span>
           <select aria-label="<?= htmlspecialchars(__('Department'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single required"   name="department_id">
-            <option value=""><?= __('Select Any One') ?></option>
+            <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
             <?php foreach ($dept_details as $departments) {
               ?>
               <option  <?php if($departments['id'] == $empdata['department_id']){ echo "selected";
@@ -511,7 +473,7 @@ position: absolute;
        <div  class="mt-2" >
         <span class="col-form-label"><?= __('Repoting to'); ?> <span class="text-danger">*</span></span>
         <select aria-label="<?= htmlspecialchars(__('Reporting Manager'), ENT_QUOTES, 'UTF-8'); ?>"  class ="form-control form-control-lg  form-select js-example-basic-single required" name="reporting_manager_id">
-          <option value=""><?= __('Select Any One') ?></option>
+          <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
 
           <?php foreach ($application_users_details as $application_users) {
 
@@ -531,7 +493,7 @@ position: absolute;
    <?= __('Designation'); ?> <span class="text-danger">*</span>
  </span>
  <select aria-label="<?= htmlspecialchars(__('Designation'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-select js-example-basic-single required" name="designation_id">
-  <option value=""><?= __('Select Any One') ?></option>
+  <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
   <?php foreach ($designations_details as $desigs) {
    ?>
    <option value="<?php echo $desigs['id']; ?>" >
@@ -546,7 +508,7 @@ position: absolute;
  <div  class="mt-2"  >
   <span class="col-form-label"><?= __('Vertical') ?></span>
   <select aria-label="<?= htmlspecialchars(__('Vertical'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" name="vertical_id">
-    <option value=""><?= __('Select Any One') ?></option>
+    <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
     <?php foreach ($verticals_details as $verticals) {
      ?>
      <option value="<?php echo $verticals['id']; ?>" >
@@ -570,7 +532,7 @@ position: absolute;
  <div  class="mt-2"  >
   <span class="col-form-label"><?= __('Role') ?></span> </br>
   <select aria-label="<?= htmlspecialchars(__('Role'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" name="role_id">
-    <option value=""><?= __('Select Any One') ?></option>
+    <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
     <?php foreach ($employment_roles_details as $employment_roles) {
 
      ?>
@@ -636,7 +598,7 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
  <div  class="mt-2" >
   <span class="col-form-label"><?= __('Band'); ?> </span>
   <select aria-label="<?= htmlspecialchars(__('Band'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single" name="band_id" onchange="getBandid(this.value)">
-    <option value=""><?= __('Select Any One') ?></option>
+    <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
     <?php foreach ($employment_bands_details as $employment_bands) {
 
      ?>
@@ -651,7 +613,7 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
  <div  class="mt-2"  >
   <label class="col-form-label"><?= __('Level'); ?>
     <select aria-label="<?= htmlspecialchars(__('Level'), ENT_QUOTES, 'UTF-8'); ?>"  class ="form-control form-control-lg  form-select js-example-basic-single" name="level_id" id="employeement_level">
-      <option value=""><?= __('Select Any One') ?></option>
+      <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
   </select>
 </div>
 </div>
@@ -659,7 +621,7 @@ $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic) ;
  <div  class="mt-2" >
   <span class="col-form-label"><?= __('Work Location'); ?> <span class="text-danger">*</span></span>
 <select aria-label="<?= htmlspecialchars(__('Location'), ENT_QUOTES, 'UTF-8'); ?>"  class ="form-control form-control-lg form-select js-example-basic-single required"  name="location_id">
-  <option value=""><?= __('Select Any One') ?></option>
+  <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
   <?php foreach ($locations_details as $locations) { ?>
 
      <option value="<?php echo $locations['id']; ?>" >
@@ -751,404 +713,7 @@ foreach ($emptypes_details as $emptypes) {
          </div>
        </div>
      </div>
-     <!-- end row-->
-   </div>
-
- </div>
-</fieldset>
-<h3><?= __('Personal') ?></h3>
-<fieldset>
-
-  <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-
-   <?php
-   $text_color_bir= fromDate($data['date_of_birth']) != fromDate($empdata['date_of_birth']) ? 'text-danger':"";
-
-   $display_div_bir = $field_set['DATE_OF_BIRTH']['display'] != 1 ? 'none' : '';
-
-   ?>
-   <div class="row">
-
-    <div class="col-xl-6" >
-     <div class="mt-2" >
-      <span class="col-form-label"><?= __('Date of Birth'); ?> <span class="text-danger">*</span> </span>
-      <div class="">
-       <?php $date_pic1 = fromDate($data['date_of_birth']); ?>
-       <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  type="text" class="form-control form-control-lg datepicker  <?php echo $text_color_bir; ?> required"  value="<?php echo  fromDate(date('Y-m-d')); ?>"  name="date_of_birth"  onchange="checkageemployee(this.value)" />
-
-                                      </div>
-                                    </div>
-
-                                  </div>
-                                  <?php
-                                  $diff =  strtotime(date("Y-m-d")) - strtotime($date_pic1) ;
-
-                                  ?>
-                                  <div class="col-xl-6" style="display: <?php echo $display_div_bir; ?>">
-                                   <div class="mt-2" style="display: <?php echo $display_div_bir; ?>" >
-                                    <span class="col-form-label"><?= __('Age In Years'); ?></span>
-                                    <div class="input-group input-icon-right">
-                                     <input aria-label="<?= htmlspecialchars(__('Age'), ENT_QUOTES, 'UTF-8'); ?>" readonly type="text" id="ageinyear" class="form-control form-control-lg " name="age" placeholder="<?= __('Age') ?>" value="0"/>
-                                   </div>
-                                 </div>
-                               </div>
-                               <?php
-                                $text_color_gen= $data['gender'] != $empdata['gender'] ? 'text-danger':"";
-
-                                $display_div_gen =  '';
-
-                                $text_color_ma= $data['marital_status'] != $empdata['marital_status'] ? 'text-danger':"";
-
-                               $display_div_ma = $field_set['MARITAL_STATUS']['display'] != 1 ? 'none' : '';
-                               ?>
-                               <?php
-                               foreach ($gender_details as $gender_data) {
-                                if($empdata['gender']==$gender_data['genc_detail_code']) {
-                                 $exist_gender = $gender_data['genc_detail_code'];
-                                 break;
-                               }
-                             }
-                             $exist_gender = $exist_gender !='' ? $exist_gender : 'M';
-                             ?>
-                             <div class="col-lg-6" style="display: <?php echo $display_div_gen; ?>">
-                               <div class="mt-2" style="display: <?php echo $display_div_gen; ?>" >
-                                <span class="col-form-label"><?= __('Gender'); ?>  <span class="text-danger">*</span> </span>
-                                <div <?php echo $read_only_gen; ?> class="form-radio  ">
-                                 <?php
-                                 foreach ($gender_details as $gender_data) {
-                                  ?>
-                                  <div class="radio radio-inline">
-                                   <label class="form-label <?php echo $text_color_gen; ?>">
-                                     <input aria-label="<?= htmlspecialchars(__('Radio option'), ENT_QUOTES, 'UTF-8'); ?>" type="radio" class="<?php echo $exist_gender; ?>" <?php if($gender_data['genc_detail_code']==$exist_gender ){ echo "Checked";
-} ?> name="gender"  value="<?php echo $gender_data['genc_detail_code'];?>" style="display:none" />
-                                     <i class="helper"></i>
-                                     <?php echo __($gender_data['genc_detail_name']); ?>
-                                   </label>
-                                 </div>
-                               <?php } ?>
-                             </div>
-                           </div>
-                         </div>
-                         <?php
-                         $text_color_bg= $data['blood_group'] != $empdata['blood_group'] ? 'text-danger':"";
-                         $display_div_bg = $field_set['BLOOD_GROUP']['display'] != 1 ? 'none' : '';
-                         ?>
-
-                         <div class="col-lg-6" style="display: <?php echo $display_div_bg; ?>">
-                           <div class="mt-2" style="display: <?php echo $display_div_bg; ?>" >
-                            <span class="col-form-label"><?= __('Blood Group'); ?></span></br>
-                          <select aria-label="<?= htmlspecialchars(__('Blood Group'), ENT_QUOTES, 'UTF-8'); ?>"  class ="form-select js-example-basic-single" name="blood_group">
-                            <option value=""><?= __('Select Any One') ?></option>
-                            <?php foreach ($blood_groups_details as $blood_groups) {
-
-                             ?>
-                             <option value="<?php echo $blood_groups['id']; ?>" >
-                              <?php echo $blood_groups['blood_group']; ?>
-                            </option>
-                          <?php } ?>
-                        </select>
-                      </div>
-                    </div>
-                    <?php
-                    foreach ($marital_status_details as $marital_data) {
-                      if($empdata['marital_status']==$marital_data['id']) {
-                       $exist_marital_data = $marital_data['marital_status_name'];
-                       break;
-                     }
-                   }
-                   ?>
-                   <div class="col-lg-6" >
-                     <div class="mt-2"  >
-
-                      <span class="col-form-label"><?= __('Marital Status'); ?> <span class="text-danger">*</span></span>
-                      <div  class="form-radio">
-                       <?php
-                       foreach ($marital_status_details as $marital_stat) {
-                        ?>
-                        <div class="radio radio-inline">
-                         <label  class="form-label <?php echo $text_color_ma; ?>">
-                           <input aria-label="<?= htmlspecialchars(__('Marital Status'), ENT_QUOTES, 'UTF-8'); ?>" onclick="showmarriagedate(this.value);" type="radio" name="marital_status" <?php if($marital_stat['id']==1){ echo "Checked";
-} ?>  value="<?php echo $marital_stat['id']; ?>" class="" style="display:none" onkeydown="" />
-                           <i class="helper"></i>
-                           <?php echo $marital_stat['marital_status_name']; ?>
-                         </label>
-                       </div>
-                     <?php } ?>
-                   </div>
-                 </div>
-               </div>
-               <?php
-               $text_color_ms= fromDate($data['wedding_date']) != fromDate($empdata['wedding_date']) ? 'text-danger':"";
-               $display_div_ms = $field_set['MARRIGE_DATE']['display'] != 1 ? 'none' : '';
-               ?>
-               <div class="col-lg-6" style="display: none"  id="marriagedateshow">
-                 <div class="mt-2" style="display: <?php echo $display_div_ms; ?>" >
-                  <span  class="col-form-label"><?= __('Marrige Date'); ?></span>
-                   <?php $date_pic1 = fromDate($data['wedding_date']); ?>
-                   <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text"  class="form-control form-control-lg datepicker <?php echo $text_color_ms; ?>" placeholder="<?= __('Enter Marrige Date') ?>" name="wedding_date" value=""/>
-
-                  </div>
-                </div>
-
-
-                <div class="col-lg-6" >
-                 <div class="mt-2" >
-                  <span class="col-form-label"><?= __('Facebook'); ?>
-                     </span>
-                   <div class="input-group input-group-button">
-                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  type="text" class="form-control form-control-lg width1 <?php echo $text_color_eco; ?>"  placeholder="<?= __('Facebook URL') ?>" name="soc_facebook" value=""/>
-
-                   </div>
-                 </div>
-               </div>
-
-               <div class="col-lg-6" >
-                 <div class="mt-2" >
-                  <span class="col-form-label"><?= __('Twitter'); ?>
-                    </span>
-                   <div class="input-group input-group-button">
-                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>"  type="text" class="form-control form-control-lg width1 <?php echo $text_color_eco; ?>"  placeholder="<?= __('Twitter URL') ?>" name="soc_twitter" value=""/>
-
-                   </div>
-                 </div>
-               </div>
-
-               <div class="col-lg-6" >
-                 <div class="mt-2" >
-                  <span class="col-form-label"><?= __('linkedin'); ?>
-                   </span>
-                   <div class="input-group input-group-button">
-                     <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" <?php echo $read_only_ln; ?> type="text" class="form-control form-control-lg width1 <?php echo $text_color_eco; ?>"  placeholder="<?= __('LinkedIn URL') ?>" name="soc_linkedin" value=""/>
-
-                   </div>
-                 </div>
-               </div>
-
-
-             </div>
-           </div>
-         </fieldset>
-         <?php if(EMPLOYEE_INSERT_FORM_BANK_DETAIL_INSERT == "Y"){ ?>
-         <h3><?= __('Bank Details') ?></h3>
-         <fieldset>
-          <div class="pb-5" data-wizard-type="step-content">
-            <div class="row">
-                <div class="col-xl-6 ">
-                   <span class="col-form-label"><?= __('Bank'); ?></span>
-                    <div class=" wfull">
-                      <select aria-label="<?= htmlspecialchars(__('Bank'), ENT_QUOTES, 'UTF-8'); ?>" class ="form-control form-control-lg form-select js-example-basic-single"  name="bank_id">
-                        <option value=""><?= __('Select Any One') ?></option>
-                        <?php foreach ($banks as $bnk) {  ?>
-                           <option value="<?php echo $bnk['id']; ?>" >
-                            <?php echo $bnk['bank_name']; ?>
-                          </option>
-                        <?php } ?>
-                      </select>
-                   </div>
-                </div>
-                <div class="col-xl-6 " style="display: <?php echo $bankdisplay_div_bir; ?>">
-                   <div class="mt-2" style="display: <?php echo $bankdisplay_div_bir; ?>" >
-                    <span class="col-form-label"><?= __('IFSC Code'); ?></span>
-                    <div class="<?php echo $bankread_only_bir; ?>">
-                      <input aria-label="<?= htmlspecialchars(__('Bank Link'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg"  name="bank_link" value=""/>
-                   </div>
-                 </div>
-                </div>
-                <div class="col-xl-6 " >
-                   <div class="mt-2" >
-                    <span class="col-form-label"><?= __('Account No'); ?></span>
-                    <div class="<?php echo $bankread_only_bir; ?>">
-                      <input aria-label="<?= htmlspecialchars(__('Bank Account No'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg"  name="bank_account_no" value=""/>
-                   </div>
-                 </div>
-                </div>
-            </div>
-        </div>
-        </fieldset>
-      <?php } ?>
-         <h3><?= __('Employment History') ?></h3>
-         <fieldset>
-          <div class="pb-5" data-wizard-type="step-content">
-            <div class="form-group row">
-              <div class="form-group col-lg-12">
-                <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center " id="extable">
-                  <tr>
-                    <th scope="col" style="width: 2%;"></th>
-                    <th scope="col" class="" style="width: 28%;"><?= __('Company Name') ?></th>
-                    <th scope="col" class="thheader" style="width: 28%;"><?= __('Job Description') ?></th>
-                    <th scope="col" class="" style="width: 20%;"><?= __('From / To') ?></th>
-
-                  </tr>
-                  <?php if(count((array)$exp_details)=='0'){
-                          $exp_details[] = array('company_name'=>"");
-                        }
-                        $k=1;
-                        if(count((array)$exp_details)>0){
-                          foreach ($exp_details as $expe){
-
-                    ?>
-                    <tr>
-                      <td>
-                        <div class="checkbox-fade fade-in-primary">
-                          <label class="form-label">
-                          <input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr">
-                            <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                          </span> </label>
-
-                        </div>
-                      </td>
-                      <td>
-                        <input type="hidden" name="expe_rowid[]" class="form-control " value="">
-                        <input aria-label="<?= htmlspecialchars(__('Enter Company Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="company_name[]" class="form-control text-capitalize" placeholder="<?= __('Enter Company Name') ?>"  autocomplete="off" value="">
-                      </td>
-
-                        <td>
-                          <input aria-label="<?= htmlspecialchars(__('Enter Job Description'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="job_descrption[]" class="form-control " value="" autocomplete="off" placeholder="<?= __('Enter Job Description') ?>">
-                        </td>
-
-                        <td>
-                          <input aria-label="<?= htmlspecialchars(__('Enter From Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="work_from[]" class="form-control datepicker"  placeholder="<?= __('Enter From Date') ?>" value="" autocomplete="off">
-                          <input aria-label="<?= htmlspecialchars(__('Enter To Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="work_to[]" class="form-control datepicker mt-2" placeholder="<?= __('Enter To Date') ?>" value="" autocomplete="off">
-                        </td>
-
-
-                      </tr>
-                    <?php } ?>
-                    <?php } ?>
-                  </table>
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <button class="btn btn-danger" id="removeRows_exp" onclick="removeexprows()"  type="button"><?= __('- Delete') ?></button> &nbsp;
-                      <button class="btn btn-success"  onclick="addexpreencerows()" id="addRows_exp" type="button"><?= __('+ Add More') ?></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </fieldset>
-            <h3><?= __('Educational Details') ?></h3>
-            <fieldset>
-             <div class="pb-5" data-wizard-type="step-content" >
-
-              <div class="row">
-                <div class="form-group col-lg-12">
-                  <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center " id="edutable">
-                    <tr>
-                      <th scope="col" style="width: 2%;"></th>
-                      <th scope="col" class="" style="width: 25%;"><?= __('Institute Name') ?></th>
-                      <th scope="col" class="thheader" style="width: 20%;"><?= __('Type') ?></th>
-                      <th scope="col" class="thheader" style="width: 20%;"><?= __('Start Date') ?></th>
-
-                      <th scope="col" class="thheader" style="width: 15%;"><?= __('Score') ?></th>
-                    </tr>
-                    <?php if(count((array)$edu_details)=='0'){
-                      $edu_details[] = array('institute_name'=>"");
-                        }
-if(count((array)$edu_details)>0){
-                     foreach ($edu_details as $inst) { ?>
-                      <tr>
-                        <td>
-
-                         <div class="checkbox-fade fade-in-primary">
-                          <label class="form-label"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr">
-                            <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                          </span> </label>
-
-                        </div>
-
-
-                      </td>
-                      <td>
-                        <input type="hidden" name="institute_rowid[]" class="form-control " value="">
-                        <input aria-label="<?= htmlspecialchars(__('Enter Institute Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="institute_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="<?= __('Enter Institute Name') ?>">  </td>
-                        <td>
-                          <select aria-label="<?= htmlspecialchars(__('Education Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="education_type[]" >
-                            <option value=""><?= __('Select Any One') ?></option>
-                            <?php foreach ($edutypedata as  $edutype) {   ?>
-                              <option   value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo __($edutype['genc_detail_name']); ?></option>
-                            <?php   } ?>
-                            <option value="<?php echo $edutype['genc_detail_code']; ?>"> <?php echo __($edutype['genc_detail_name']); ?></option>
-                          </select>
-                        </td>
-                        <td>
-                          <input aria-label="<?= htmlspecialchars(__('Enter Start Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="start_date[]" class="form-control datepicker"  value=""  autocomplete="off" placeholder="<?= __('Enter Start Date') ?>">
-                          <input aria-label="<?= htmlspecialchars(__('Enter End Date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="end_date[]" class="form-control datepicker mt-2"  placeholder="<?= __('Enter End Date') ?>"  value="" autocomplete="off">
-                        </td>
-
-                        <td><input aria-label="<?= htmlspecialchars(__('Enter Score'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="score[]" class="form-control" placeholder="<?= __('Enter  Score') ?>"  value=""  autocomplete="off">  </td>
-                      </tr>
-                    <?php } ?>
-                    <?php } ?>
-                  </table>
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <button class="btn btn-danger" id="removeRows_edu" onclick="removeedurows()"  type="button"><?= __('- Delete') ?></button> &nbsp;
-                      <button class="btn btn-success" onclick="addedurows()" id="addRows_edu" type="button"><?= __('+ Add More') ?></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </fieldset>
-          <h3><?= __('Dependents') ?></h3>
-          <fieldset>
-           <div class="pb-5" data-wizard-type="step-content" >
-
-            <div class="row">
-              <div class="form-group col-lg-12">
-                <table class="table table-striped- table-bordered table-hover1 table-checkable dataTable no-footer text-center" id="deptable">
-                  <tr>
-                    <th scope="col" style="width: 2%;"></th>
-                    <th scope="col" class="" style="width: 25%;"><?= __('Name') ?></th>
-                    <th scope="col" class="thheader" style="width: 20%;"><?= __('Relationship Type') ?></th>
-                    <th scope="col" class="thheader" style="width: 20%;"><?= __('DOB') ?></th>
-                  </tr>
-                  <?php if(count((array)$dep_details)=='0'){
-                      $dep_details[] = array('institute_name'=>"");
-                    }
-                    if(count((array)$dep_details)>0){
-                      foreach ($dep_details as $depe) { ?>
-                        <tr>
-                          <td>
-                       <div class="checkbox-fade fade-in-primary">
-                        <label class="form-label"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr">
-                          <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                        </span> </label>
-
-                      </div>
-                    </td>
-                    <input type="hidden" name="dependent_rowid[]" class="form-control " value="">
-                    <td><input aria-label="<?= htmlspecialchars(__('Enter Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="dependent_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="<?= __('Enter Name') ?>">  </td>
-                    <td>
-                      <select aria-label="<?= htmlspecialchars(__('Dependent Relationship Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="dependent_relationship_type[]" >
-                        <option value=""><?= __('Select Any One') ?></option>
-                        <?php foreach ($relatypedata as  $reladata) {   ?>
-                          <option    value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option>
-                        <?php   } ?>
-                      </select>
-                    </td>
-                    <td><input aria-label="<?= htmlspecialchars(__('Date Of Birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="dependent_date_of_birth[]" class="form-control datepicker"  value="" placeholder="<?= __('Date Of Birth') ?>" autocomplete="off">  </td>
-                  </tr>
-                <?php } ?>
-                <?php } ?>
-              </table>
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <button class="btn btn-danger " id="removeRows_dep" onclick="removedeprows()"  type="button"><?= __('- Delete') ?></button> &nbsp;
-                  <button class="btn btn-success"  onclick="adddeprows()" id="addRows_dep" type="button"><?= __('+ Add More') ?></button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </fieldset>
-      <h3><?= __('Emergency') ?></h3>
-      <fieldset>
-        <div class="pb-5" data-wizard-type="step-content">
-
-          <!--begin::Section-->
+     
           <div class="row">
             <input type="hidden" name="tmp_id" value="<?php echo $temp_id; ?>">
             <div class="form-group col-lg-12">
@@ -1172,7 +737,7 @@ if(count((array)$edu_details)>0){
 
 
                       <div class="checkbox-fade fade-in-primary">
-                        <label class="form-label"><input aria-label="<?= htmlspecialchars(__('Checkbox'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr">
+                        <label class="form-label"><input aria-label="<?= htmlspecialchars(__(LBL_CHECKBOX), ENT_QUOTES, 'UTF-8'); ?>" class="form-control itemRow" type="checkbox" style="display:none"> <span class="cr">
                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                         </span> </label>
 
@@ -1182,13 +747,13 @@ if(count((array)$edu_details)>0){
                     <input type="hidden" name="contact_rowid[]" class="form-control " value="">
 
                    <td>
-                    <input aria-label="<?= htmlspecialchars(__('Enter Contact Name'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="contact_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="<?= __('Enter Contact Name') ?>">
+                    <input aria-label="<?= htmlspecialchars(__(LBL_ENTER_CONTACT_NAME), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="contact_name[]" class="form-control text-capitalize" value="" autocomplete="off" placeholder="<?= __(LBL_ENTER_CONTACT_NAME) ?>">
                   </td>
                   <td>
                     <select aria-label="<?= htmlspecialchars(__('Contact Relationship'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-basic-single" name="contact_relationship[]" >
-                      <option value=""><?= __('Select Any One') ?></option>
+                      <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
                       <?php foreach ($relatypedata as  $reladata) {   ?>
-                        <option  value="<?php echo $reladata['id']; ?>"> <?php echo $reladata['relation_name']; ?></option>
+                        <option  value="<?php echo $reladata['id']; ?>"> <?php echo $reladata[KEY_RELATION_NAME]; ?></option>
                       <?php   } ?>
                     </select>
                   </td>
@@ -1230,7 +795,7 @@ if(count((array)$edu_details)>0){
                            </thead>
                            <tbody>
                               <tr>
-                                 <td scope="row">1</td>
+                                 <td>1</td>
                                  <td>
                                      <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Adhar Card">
                                  </td>
@@ -1245,7 +810,7 @@ if(count((array)$edu_details)>0){
                                  </td>
                               </tr>
                               <tr>
-                                 <td scope="row">2</td>
+                                 <td>2</td>
                                  <td>
                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Passport" disabled>
                                  </td>
@@ -1261,7 +826,7 @@ if(count((array)$edu_details)>0){
                               </tr>
 
                               <tr>
-                                 <td scope="row">3</td>
+                                 <td>3</td>
                                  <td>
                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Driving">
                                  </td>
@@ -1276,7 +841,7 @@ if(count((array)$edu_details)>0){
                                  </td>
                               </tr>
                               <tr>
-                                 <td scope="row">4</td>
+                                 <td>4</td>
                                  <td>
                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="Pan Number">
                                  </td>
@@ -1291,7 +856,7 @@ if(count((array)$edu_details)>0){
                                  </td>
                               </tr>
                               <tr>
-                                 <td scope="row">5</td>
+                                 <td>5</td>
                                  <td>
                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="PF Number">
                                  </td>
@@ -1306,7 +871,7 @@ if(count((array)$edu_details)>0){
                                  </td>
                               </tr>
                                <tr>
-                                 <td scope="row">6</td>
+                                 <td>6</td>
                                  <td>
                                        <input aria-label="<?= htmlspecialchars(__('Input field'), ENT_QUOTES, 'UTF-8'); ?>" type="text" name="" disabled class="form-control" value="UAN Number">
                                  </td>
@@ -1336,7 +901,7 @@ if(count((array)$edu_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label"><?= __('Admin Buddy'); ?> </span></br>
                     <select aria-label="<?= htmlspecialchars(__('Admin Buddy'), ENT_QUOTES, 'UTF-8'); ?>"  class ="form-select js-example-basic-single " name="admin_buddy">
-                        <option value=""><?= __('Select Any One') ?></option>
+                        <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
                         <?php foreach ($admin_buddy_list as $admin_buddy_res) { ?>
                          <option value="<?php echo $admin_buddy_res['emp_id']; ?>" >
                           <?php echo $admin_buddy_res['display_name']; ?>
@@ -1349,7 +914,7 @@ if(count((array)$edu_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label"><?= __('HR Buddy'); ?> <span class="text-danger">*</span></span></br>
                     <select aria-label="<?= htmlspecialchars(__('Hr Buddy'), ENT_QUOTES, 'UTF-8'); ?>"  class ="form-select js-example-basic-single required" name="hr_buddy">
-                        <option value=""><?= __('Select Any One') ?></option>
+                        <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
                         <?php foreach ($hr_buddy_list as $hr_buddy_res) { ?>
                          <option value="<?php echo $hr_buddy_res['emp_id']; ?>" >
                           <?php echo $hr_buddy_res['display_name']; ?>
@@ -1362,7 +927,7 @@ if(count((array)$edu_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label"><?= __('Finance Buddy'); ?> <span class="text-danger">*</span></span></br>
                     <select aria-label="<?= htmlspecialchars(__('Finance Buddy'), ENT_QUOTES, 'UTF-8'); ?>"  class ="form-select js-example-basic-single required" name="finance_buddy">
-                        <option value=""><?= __('Select Any One') ?></option>
+                        <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
                         <?php foreach ($finance_buddy_list as $finance_buddy_res) { ?>
                          <option value="<?php echo $finance_buddy_res['emp_id']; ?>" >
                           <?php echo $finance_buddy_res['display_name']; ?>
@@ -1375,7 +940,7 @@ if(count((array)$edu_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label"><?= __('Project Buddy'); ?> </span></br>
                     <select aria-label="<?= htmlspecialchars(__('Project Buddy'), ENT_QUOTES, 'UTF-8'); ?>"  class ="form-select js-example-basic-single" name="project_buddy">
-                        <option value=""><?= __('Select Any One') ?></option>
+                        <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
                         <?php foreach ($project_buddy_list as $project_buddy_res) { ?>
                          <option value="<?php echo $project_buddy_res['emp_id']; ?>" >
                           <?php echo $project_buddy_res['display_name']; ?>
@@ -1388,7 +953,7 @@ if(count((array)$edu_details)>0){
                        <div class="mt-2">
                     <span class="col-form-label"><?= __('Location Buddy'); ?></span></br>
                     <select aria-label="<?= htmlspecialchars(__('Loc Buddy'), ENT_QUOTES, 'UTF-8'); ?>"  class ="form-select js-example-basic-single " name="loc_buddy">
-                        <option value=""><?= __('Select Any One') ?></option>
+                        <option value=""><?= __(LBL_SELECT_ANY_ONE) ?></option>
                         <?php foreach ($location_buddy_list as $location_buddy_res) { ?>
                          <option value="<?php echo $location_buddy_res['emp_id']; ?>" >
                           <?php echo $location_buddy_res['display_name']; ?>

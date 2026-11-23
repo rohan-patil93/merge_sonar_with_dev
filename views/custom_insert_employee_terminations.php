@@ -1,4 +1,8 @@
 <?php
+defined('KEY_HR_USER_ID') || define('KEY_HR_USER_ID', 'hr_user_id');
+defined('KEY_CREATED_BY') || define('KEY_CREATED_BY', 'created_by');
+defined('KEY_NOTICE_PERIOD_REQ') || define('KEY_NOTICE_PERIOD_REQ', 'notice_period_required');
+defined('KEY_EXCLUDE_FINAL_SETTLE') || define('KEY_EXCLUDE_FINAL_SETTLE', 'exclude_final_settlement');
 $_SESSION['apply_js']['multiselest'] = 1;
 $getrid = $_GET['Rid'];
 if($getrid!=""){
@@ -22,17 +26,17 @@ $separation_mode = $terminations['separation_mode'];
 $relieve_type = $terminations['termination_type'];
 $emp_display =""; $emp_display_select=""; $manager_display ="readonly"; $manager_display_select = "disabled";
 if($getrid !=""){
-    $hr_user_id = $terminations['hr_user_id'];
+    $hr_user_id = $terminations[KEY_HR_USER_ID];
     $finance_user_id = $terminations['finance_connect'];
     $manager_user_id = $terminations['report_to'];
-    if($_SESSION['userid']!= $emp_termination_data['created_by']){
+    if($_SESSION['userid']!= $emp_termination_data[KEY_CREATED_BY]){
         $emp_display ="readonly";  $emp_display_select ="disabled";
     }
     if($_SESSION['userid']== $manager_user_id){
         $manager_display =""; $manager_display_select="";
     }
 }else{
-    $hr_user_id = $terminations['hr_user_id'];
+    $hr_user_id = $terminations[KEY_HR_USER_ID];
     $finance_user_id = $terminations['finance_connect'];
     $manager_user_id = $terminations['report_to'];
 }
@@ -40,8 +44,8 @@ if($getrid !=""){
 $row ="";
 if(isset($_POST['submitform'])){
     unset($_POST['submitform']);
-    $_POST['notice_period_required'] = isset($_POST['notice_period_required']) ? '1' : '0';
-    $_POST['exclude_final_settlement'] = isset($_POST['exclude_final_settlement']) ? '1' : '0';
+    $_POST[KEY_NOTICE_PERIOD_REQ] = isset($_POST[KEY_NOTICE_PERIOD_REQ]) ? '1' : '0';
+    $_POST[KEY_EXCLUDE_FINAL_SETTLE] = isset($_POST[KEY_EXCLUDE_FINAL_SETTLE]) ? '1' : '0';
     $_POST['releive_date'] = dateconvertdbformat($_POST['employee_leaving_date']);
     $_POST['effective_date'] = dateconvertdbformat($_POST['effective_date']);
     $_POST['employee_leaving_date'] = dateconvertdbformat($_POST['employee_leaving_date']);
@@ -49,7 +53,7 @@ if(isset($_POST['submitform'])){
     $_POST['company_id'] = $_SESSION['company_id'];
     $_POST['is_active'] = '0';
     $_POST['manager_user_id'] = $manager_user_id;
-    $_POST['hr_user_id'] = $hr_user_id;
+    $_POST[KEY_HR_USER_ID] = $hr_user_id;
     $_POST['finance_user_id'] = $finance_user_id;
     if($rowid!=""){
         $row = "&Rid=".$getrid;
@@ -63,7 +67,7 @@ if(isset($_POST['submitform'])){
         $data['to_date'] = date("Y-m-d");
         $_POST['current_status'] ='0';
         $_POST['created_date'] = nowDate();
-        $_POST['created_by'] = $_SESSION['userid'];
+        $_POST[KEY_CREATED_BY] = $_SESSION['userid'];
         $url = API."?mode=savetermination&method=post";
         $response = file_post_contents($url, $_POST, 'insert');
         $response;
@@ -128,7 +132,7 @@ $stausresult = ViewStatusData();
         console.log("Submit Date = "+effective_date);
         var notice = 0;
         var numberofdays = 0;
-        if(document.getElementById('notice_period_required').checked){
+        if(document.getElementById(KEY_NOTICE_PERIOD_REQ).checked){
             notice = parseInt(document.getElementById('noticeperiod').value);
             console.log(notice);
             if(isNaN(notice)){
@@ -385,7 +389,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12 col-form-label">
                                         <div class="checkbox-zoom zoom-primary mt-1">
                                             <label class="checkbox checkbox-outline checkbox-primary">
-                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php echo $emp_display_select; ?> id="notice_period_required" name="notice_period_required" onclick="getleavingdate()" <?php echo $emp_termination_data['notice_period_required']=='1'?'checked':'';?> onkeydown="" />    <span class="cr">
+                                                <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php echo $emp_display_select; ?> id="notice_period_required" name="notice_period_required" onclick="getleavingdate()" <?php echo $emp_termination_data[KEY_NOTICE_PERIOD_REQ]=='1'?'checked':'';?> onkeydown="" />    <span class="cr">
                                                     <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                 </span>
                                                 <span></span>
@@ -442,7 +446,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-12 col-form-label">
                                             <div class="checkbox-zoom zoom-primary mt-1">
                                                 <label class="checkbox checkbox-outline checkbox-primary">
-                                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php echo $emp_display_select; ?>  name="exclude_final_settlement" <?php echo $emp_termination_data['exclude_final_settlement']=='1'?'checked':'';?>/>
+                                                    <input aria-label="<?php echo __('Checkbox'); ?>" type="checkbox" <?php echo $emp_display_select; ?>  name="exclude_final_settlement" <?php echo $emp_termination_data[KEY_EXCLUDE_FINAL_SETTLE]=='1'?'checked':'';?>/>
                                                     <span class="cr">
                                                         <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                     </span>
@@ -459,7 +463,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                         </div>
                                     </div>
                                     <?php $disable = "";
-                                    if($_SESSION['user_id'] == $emp_termination_data['created_by'] || $rowid =="" || $emp_termination_data['current_status']==ST_ACTIVE || $emp_termination_data['current_status']==ST_SEND_BACK){
+                                    if($_SESSION['user_id'] == $emp_termination_data[KEY_CREATED_BY] || $rowid =="" || $emp_termination_data['current_status']==ST_ACTIVE || $emp_termination_data['current_status']==ST_SEND_BACK){
 }else{ $disable = "disabled";
 }
 
@@ -591,33 +595,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- ========= -->
-                                        <div class="form-group row">
-                                            <span class="col-4 col-form-label"></span>
-                                            <div class="col-8 col-form-label">
-                                                <?php foreach($relieve_type as $term=>$termvalue) { ?>
-
-                                                    <div class="checkbox-fade fade-in-primary">
-                                                        <label class="form-label">
-                                                            <input aria-label="<?php echo __('Relieve Type[]'); ?>" type="checkbox" name="relieve_type[]" <?php echo in_array($term,(array)json_decode($emp_termination_data['relieve_type'],1)) ? 'checked':'';?> value="<?php echo $term;?>" />
-                                                            <span class="cr">
-                                                                <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                                            </span>
-                                                            <span> <?php echo __($termvalue ?? ''); ?></span>
-                                                        </label>
-                                                    </div>
-                                                <?php } ?>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="row">
-                                                <input type="hidden" name="emp_id" value="<?php echo $emp_termination_data['emp_id']; ?>">
-                                                <div class="col-lg-12">
-                                                    <button id="kt_login_signin_submit_3" class="btn btn-primary btn-shadow-hover font-weight-bold mr-2"   name="exitform" value="exit" <?php echo $emp_termination_data['settle_on']!=""?"disabled":""; ?> ><i class="la la-check"></i><?= __('Save') ?></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- ========= -->
+                                        
                                         </div>
 
                                 <?php } ?>
@@ -627,7 +605,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                         </div>
                     </div>
                 </div>
-                <?php echo $todisplaythree = todisplaythree(array('table'=>$table_name,'originator'=>$emp_termination_data['created_by'],'id'=>$_GET['Rid'],'dis_query'=>'yes','dis_timeline'=>'yes','dis_comments'=>'yes'));      ?>
+                <?php echo $todisplaythree = todisplaythree(array('table'=>$table_name,'originator'=>$emp_termination_data[KEY_CREATED_BY],'id'=>$_GET['Rid'],'dis_query'=>'yes','dis_timeline'=>'yes','dis_comments'=>'yes'));      ?>
 
             </div>
         </div>
@@ -635,14 +613,14 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
 </div>
 </div>
 
-<div id="kt_modal_KTDatatable_remote" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote" class="modal fade" aria-hidden="true">
     <div class="modal-dialog " >
         <div class="modal-content"  id="popup1">
 
         </div>
     </div>
 </div>
-<div id="kt_modal_KTDatatable_remote1" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_remote1" class="modal fade" aria-hidden="true">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content"  id="popup2">
 
