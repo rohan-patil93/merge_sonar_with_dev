@@ -2440,7 +2440,7 @@ if (count((array) $milestones) > 0) {
                                             include_once __DIR__ . '/_contract_agreement_detail_fields.php';
                                             include_once __DIR__ . '/_contract_services_contact_fields.php';
                                             $contract_agreement_section = 'classification';
-                                            render_contract_agreement_detail_fields(array(
+                                            renderContractAgreementDetailFields(array(
                                                 'contract_agreement_section' => $contract_agreement_section,
                                                 'contract_agreement_locations_section' => $contract_agreement_locations_section ?? '',
                                                 'fieldDisplay' => $fieldDisplay ?? array(),
@@ -2451,7 +2451,7 @@ if (count((array) $milestones) > 0) {
                                                 'formData' => $formData ?? array(),
                                             )); ?>
                                             <?php $contract_services_contact_section = 'services';
-                                            render_contract_services_contact_fields(array(
+                                            renderContractServicesContactFields(array(
                                                 'contract_services_contact_section' => $contract_services_contact_section,
                                                 'formData' => $formData ?? array(),
                                                 'fieldDisplay' => $fieldDisplay ?? array(),
@@ -2628,7 +2628,7 @@ if (count((array) $milestones) > 0) {
                                                     value="<?= htmlspecialchars(dynamicDataDecode($formData['contract_owner_number'] ?? '')) ?>" title="<?= __('Enter contract owner contact number') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner contact number'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <?php $contract_services_contact_section = 'contact_persons';
-                                            render_contract_services_contact_fields(array(
+                                            renderContractServicesContactFields(array(
                                                 'contract_services_contact_section' => $contract_services_contact_section,
                                                 'formData' => $formData ?? array(),
                                                 'fieldDisplay' => $fieldDisplay ?? array(),
@@ -2658,7 +2658,7 @@ if (count((array) $milestones) > 0) {
                                             </div>
                                             <?php $contract_agreement_section = 'extended';
                                             $contract_agreement_locations_section = 'Y';
-                                            render_contract_agreement_detail_fields(array(
+                                            renderContractAgreementDetailFields(array(
                                                 'contract_agreement_section' => $contract_agreement_section,
                                                 'contract_agreement_locations_section' => $contract_agreement_locations_section,
                                                 'fieldDisplay' => $fieldDisplay ?? array(),

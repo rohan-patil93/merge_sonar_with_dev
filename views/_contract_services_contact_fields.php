@@ -1,6 +1,6 @@
 <?php
-if (!function_exists('_contract_services_render_select')) {
-    function _contract_services_render_select($fieldDisplay, $amc_renew_disabled, $contract_services, $selectedcontractservices) {
+if (!function_exists('renderContractServicesSelect')) {
+    function renderContractServicesSelect($fieldDisplay, $amc_renew_disabled, $contract_services, $selectedcontractservices) {
         $selectedSet = array_map('strval', (array)$selectedcontractservices);
 ?>
                         <div class="col-md-12" style="<?= $fieldDisplay['contract_services_id']['style'] ?>">
@@ -20,8 +20,8 @@ if (!function_exists('_contract_services_render_select')) {
     }
 }
 
-if (!function_exists('_contract_services_render_contact_persons')) {
-    function _contract_services_render_contact_persons($contact_persons) {
+if (!function_exists('renderContractServicesContactPersons')) {
+    function renderContractServicesContactPersons($contact_persons) {
 ?>
                         <div class="col-md-12 d-flex flex-column gap-3" id="MoreContactPerson">
                             <?php if (count((array)$contact_persons) > 0) {
@@ -57,8 +57,8 @@ if (!function_exists('_contract_services_render_contact_persons')) {
     }
 }
 
-if (!function_exists('render_contract_services_contact_fields')) {
-    function render_contract_services_contact_fields($ctx) {
+if (!function_exists('renderContractServicesContactFields')) {
+    function renderContractServicesContactFields($ctx) {
         $contract_services_contact_section = $ctx['contract_services_contact_section'] ?? '';
         $formData = $ctx['formData'] ?? array();
         $fieldDisplay = $ctx['fieldDisplay'] ?? array();
@@ -74,9 +74,9 @@ if (!function_exists('render_contract_services_contact_fields')) {
         }
 
         if ($contract_services_contact_section == 'services') {
-            _contract_services_render_select($fieldDisplay, $amc_renew_disabled, $contract_services, $selectedcontractservices);
+            renderContractServicesSelect($fieldDisplay, $amc_renew_disabled, $contract_services, $selectedcontractservices);
         } elseif ($contract_services_contact_section == 'contact_persons') {
-            _contract_services_render_contact_persons($contact_persons);
+            renderContractServicesContactPersons($contact_persons);
         }
     }
 }

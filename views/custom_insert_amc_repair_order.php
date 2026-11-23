@@ -212,7 +212,7 @@ if ($scheduleVendorLabel == '') {
                             if (count((array)$lines) > 0) {
                                 foreach ($lines as $line) {
                                     $line = is_array($line) ? $line : (array) $line;
-                                    render_contract_amc_schedule_repair_line_row(array(
+                                    renderContractAmcScheduleRepairLineRow(array(
                                         'line' => $line,
                                         'isRepairEditable' => $isRepairEditable ?? false,
                                         'repairItems' => $repairItems ?? array(),
@@ -222,7 +222,7 @@ if ($scheduleVendorLabel == '') {
                                 }
                             } elseif ($isRepairEditable) {
                                 $line = array();
-                                render_contract_amc_schedule_repair_line_row(array(
+                                renderContractAmcScheduleRepairLineRow(array(
                                     'line' => $line,
                                     'isRepairEditable' => $isRepairEditable ?? false,
                                     'repairItems' => $repairItems ?? array(),

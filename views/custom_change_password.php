@@ -1,4 +1,7 @@
-<?php    session_start();   ?>
+<?php
+session_start();
+$closeAriaLabel = htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8');
+?>
 
 <script type="text/javascript">
     function submitresetdata(){
@@ -11,27 +14,28 @@
         var confirm_password = $("#confirm_password").val();
          var errorr = 0;
         var emty = 0;
+        var requiredFieldMsg = <?= json_encode(__('Requerd fileds')) ?>;
 
         if(old_password==""){
             errorr = 1;
             emty = 1;
-            $(".old_password").text(<?= json_encode(__('Requerd fileds')) ?>);
+            $(".old_password").text(requiredFieldMsg);
         }
         if(new_password==""){
             errorr = 1;
             emty = 1;
-            $(".new_password").text(<?= json_encode(__('Requerd fileds')) ?>);
+            $(".new_password").text(requiredFieldMsg);
         }
         if(confirm_password==""){
             errorr = 1;
             emty = 1;
-            $(".confirm_password").text(<?= json_encode(__('Requerd fileds')) ?>);
+            $(".confirm_password").text(requiredFieldMsg);
         }
 
         if(old_password==confirm_password && emty == 0){
             errorr = 1;
         //Old password and confirm password are not same
-              $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3027]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button></div>');
+              $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3027]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= $closeAriaLabel; ?>"></button></div>');
         }
 
         if(new_password == confirm_password){
@@ -45,14 +49,12 @@
                 var data = JSON.parse(response);
              console.log(data);
                 if(data.status == '404'){
-                   // tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger  pt-2 pb-2','animated flipInX','animated flipOutX','old password not match!','error');
                 //code Old password entered is incorrect
-                $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3026]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button></div>');
+                $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3026]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= $closeAriaLabel; ?>"></button></div>');
 
                 }else if(data.status == "fail"){
-                      $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14">'+data.message+'</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button></div>');
+                      $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14">'+data.message+'</strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= $closeAriaLabel; ?>"></button></div>');
 
-                    //tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger  pt-2 pb-2','animated flipInX','animated flipOutX',,'Error');
                 }else{
                     tostarnotify('top','right','fa fa-thumbs-up','form-label label label-success','animated flipInX','animated flipOutX',<?= json_encode(__('Password Updated')) ?>,<?= json_encode(__('Success')) ?>);
                     window.location.href = "custom_password_reset_success_page.php";
@@ -62,9 +64,8 @@
         });
         }
         }else{
-             $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3028]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8'); ?>"></button></div>');
+             $("#error_message").html('<div class="alert alert-warning alert-dismissible"><strong class="f-14"><?php echo $_SESSION['error_message'][3028]; ?></strong><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?= $closeAriaLabel; ?>"></button></div>');
 
-          //  tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger  pt-2 pb-2','animated flipInX','animated flipOutX','Both Value Not Same','');
         }
     }
 </script>

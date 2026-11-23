@@ -140,7 +140,7 @@ foreach ($cusresponse_dump as $custt) {
         for (var k = 0; k < arr2.length; k++) {
 
             str += "<tr><td style='text-align:right;'> <?= __('IGST') ?> @ " + arr2[k]['id'] + "% </td>";
-            str += "<td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount'   readonly value='" + parseFloat(arr2[k]['d_tax_amount']).toFixed(2) + "''> </td><td class='mob_amount' width='18%'>  <input  type='text' class='form-control amount' readonly  value='" + parseFloat(arr2[k]['c_tax_amount']).toFixed(2) + "''> </td></tr>";
+            str += "<td class='mob_amount' style='width: 18%;'>  <input  type='text' class='form-control amount'   readonly value='" + parseFloat(arr2[k]['d_tax_amount']).toFixed(2) + "''> </td><td class='mob_amount' style='width: 18%;'>  <input  type='text' class='form-control amount' readonly  value='" + parseFloat(arr2[k]['c_tax_amount']).toFixed(2) + "''> </td></tr>";
 
         }
         $("#display_tax").html(str);
@@ -249,7 +249,7 @@ foreach ($cusresponse_dump as $custt) {
 <div class="table-responsive mb-3">
     <table class="table table-hover" id="invoiceItem">
         <tr>
-            <th scope="col" class="thheader" width="2%">
+            <th scope="col" class="thheader" style="width: 2%;">
                 <div class="checkbox-fade fade-in-primary">
                     <label aria-label="<?= htmlspecialchars(__('Select all'), ENT_QUOTES, 'UTF-8'); ?>" class="kt-checkbox">
                         <input id="checkAll" type="checkbox">
@@ -259,13 +259,13 @@ foreach ($cusresponse_dump as $custt) {
                     </label>
                 </div>
             </th>
-            <th scope="col" class="" width="15%"><?= __('Account') ?> <span class="requried"></span></th>
-            <th scope="col" class="" width="15%"><?= __('Description') ?></th>
-            <th scope="col" class="thheader text-start" width="15%"><?= __('Name') ?> </th>
-            <th scope="col" class="thheader text-start" width="15%"><?= __('Location') ?>
+            <th scope="col" class="" style="width: 15%;"><?= __('Account') ?> <span class="requried"></span></th>
+            <th scope="col" class="" style="width: 15%;"><?= __('Description') ?></th>
+            <th scope="col" class="thheader text-start" style="width: 15%;"><?= __('Name') ?> </th>
+            <th scope="col" class="thheader text-start" style="width: 15%;"><?= __('Location') ?>
             </th>
-            <th scope="col" class="thheader text-start" width="15%"><?= __('Debits') ?></th>
-            <th scope="col" class="thheader text-start" width="15%"><?= __('Credits') ?>
+            <th scope="col" class="thheader text-start" style="width: 15%;"><?= __('Debits') ?></th>
+            <th scope="col" class="thheader text-start" style="width: 15%;"><?= __('Credits') ?>
             </th>
         </tr>
         <?php if (count((array) $table2) > 0) {

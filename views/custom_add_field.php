@@ -324,12 +324,12 @@
                         <div class="col-lg-7">
                             <table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem">
                                     <tr>
-                                        <th scope="col" class="" width="15%"><?= __("Frist Field") ?> </th>
-                                        <th scope="col" class="thheader" width="5%"><?= __("operater") ?></th>
-                                        <th scope="col" class="thheader" width="15%"><?= __("Second Field") ?> </th>
-                                        <th scope="col" class="thheader" width="5%"><?= __("Value") ?></th>
-                                        <th scope="col" class="thheader" width="5%"><?= __("operater") ?></th>
-                                        <th scope="col" class="thheader" width="5%"><?= __("Delete") ?></th>
+                                        <th scope="col" class="" style="width: 15%;"><?= __("Frist Field") ?> </th>
+                                        <th scope="col" class="thheader" style="width: 5%;"><?= __("operater") ?></th>
+                                        <th scope="col" class="thheader" style="width: 15%;"><?= __("Second Field") ?> </th>
+                                        <th scope="col" class="thheader" style="width: 5%;"><?= __("Value") ?></th>
+                                        <th scope="col" class="thheader" style="width: 5%;"><?= __("operater") ?></th>
+                                        <th scope="col" class="thheader" style="width: 5%;"><?= __("Delete") ?></th>
 
                                     </tr>
                                     <tr>
@@ -396,12 +396,12 @@
                         <div class="col-lg-12">
                             <table class="table table-striped- table-bordered table-hover table-checkable  no-footer" style="color: #646c9a;" id="invoiceItem1">
                                     <tr>
-                                        <th scope="col" class="" width="40%"><?= __("Frist Table/Static Field") ?> </th>
-                                        <th scope="col" class="thheader" width="5%"><?= __("operater") ?></th>
-                                        <th scope="col" class="thheader" width="40%"><?= __("Second Table/Static Field") ?> </th>
+                                        <th scope="col" class="" style="width: 40%;"><?= __("Frist Table/Static Field") ?> </th>
+                                        <th scope="col" class="thheader" style="width: 5%;"><?= __("operater") ?></th>
+                                        <th scope="col" class="thheader" style="width: 40%;"><?= __("Second Table/Static Field") ?> </th>
 
-                                        <th scope="col" class="thheader" width="5%"><?= __("operater") ?></th>
-                                        <th scope="col" class="thheader" width="5%"><?= __("Delete") ?></th>
+                                        <th scope="col" class="thheader" style="width: 5%;"><?= __("operater") ?></th>
+                                        <th scope="col" class="thheader" style="width: 5%;"><?= __("Delete") ?></th>
                                     </tr>
                                     <tr>
                                         <td>

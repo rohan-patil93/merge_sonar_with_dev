@@ -10,7 +10,9 @@ if(isset($_POST['submit_sh'])){
     $url = API."?mode=addeployeeshifts&method=post";
     $response = file_post_contents($url, $data, 'insert');
 }
-$vdata1["where"] = array('is_active'=> 0);
+$whereKey = 'where';
+$isActiveKey = 'is_active';
+$vdata1[$whereKey] = array($isActiveKey=> 0);
     $vdata = urlencode(json_encode($vdata1));
     $vurl = API."?mode=gettabledetailswithconditions&table=employees&data=".$vdata;
     $configesponse = callAPI($vurl);
@@ -20,7 +22,7 @@ if(isset($_POST['submit_shift'])){
     $url = API."?mode=tosearchemployee&department=".$_POST['department']."&designation=".$_POST['designation']."&employee=".json_encode($_POST['employee'],1);
     $response = callAPI($url);
     $response = json_decode($response,1);
-    $sfwr["where"] = array('is_active'=> 0);
+    $sfwr[$whereKey] = array($isActiveKey=> 0);
     $sfwre = urlencode(json_encode($sfwr));
 
 }
@@ -29,7 +31,7 @@ if(isset($_POST['submit_shift'])){
     $Shifts = callAPI($vurl);
     $Shifts = json_decode($Shifts,1);
 
-$dpwr["where"] = array('is_active'=> 0);
+$dpwr[$whereKey] = array($isActiveKey=> 0);
 $dpwr = urlencode(json_encode($dpwr));
 $vurl = API."?mode=gettabledetailswithconditions&table=departments&data=".$dpwr;
 $departments = callAPI($vurl);

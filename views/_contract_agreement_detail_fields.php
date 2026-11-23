@@ -1,6 +1,6 @@
 <?php
-if (!function_exists('_contract_agreement_render_classification')) {
-    function _contract_agreement_render_classification($fieldDisplay, $genc, $des, $formData) {
+if (!function_exists('renderContractAgreementClassification')) {
+    function renderContractAgreementClassification($fieldDisplay, $genc, $des, $formData) {
 ?>
                         <div class="col-md-4" style="<?= $fieldDisplay['typeofaggrements']['style'] ?>">
                             <label for="fld_typeofaggrements" class="form-label"><?= __('Type of Agreements '.$fieldDisplay['typeofaggrements']['star']) ?></label>
@@ -32,8 +32,8 @@ if (!function_exists('_contract_agreement_render_classification')) {
     }
 }
 
-if (!function_exists('_contract_agreement_render_locations')) {
-    function _contract_agreement_render_locations($fieldDisplay, $locations, $selectedLocations) {
+if (!function_exists('renderContractAgreementLocations')) {
+    function renderContractAgreementLocations($fieldDisplay, $locations, $selectedLocations) {
 ?>
 <div class="col-md-12 " style="<?= $fieldDisplay['locations']['style'] ?>">
                             <label for="unified_locations_multiselect" class="form-label"><?= __('Locations '.$fieldDisplay['locations']['star']) ?></label>
@@ -53,8 +53,8 @@ if (!function_exists('_contract_agreement_render_locations')) {
     }
 }
 
-if (!function_exists('_contract_agreement_render_extended')) {
-    function _contract_agreement_render_extended($fieldDisplay, $formData) {
+if (!function_exists('renderContractAgreementExtended')) {
+    function renderContractAgreementExtended($fieldDisplay, $formData) {
         $isOemYes = isset($formData['is_oem']) && ($formData['is_oem'] == 'Yes' || $formData['is_oem'] == 'Y');
         $isOemNo = !isset($formData['is_oem']) || empty($formData['is_oem']) || strtoupper($formData['is_oem']) == 'NO' || strtoupper($formData['is_oem']) == 'N';
 ?>
@@ -129,8 +129,8 @@ if (!function_exists('_contract_agreement_render_extended')) {
     }
 }
 
-if (!function_exists('render_contract_agreement_detail_fields')) {
-    function render_contract_agreement_detail_fields($ctx) {
+if (!function_exists('renderContractAgreementDetailFields')) {
+    function renderContractAgreementDetailFields($ctx) {
         $contract_agreement_section = $ctx['contract_agreement_section'] ?? '';
         $contract_agreement_locations_section = $ctx['contract_agreement_locations_section'] ?? '';
         $fieldDisplay = $ctx['fieldDisplay'] ?? array();
@@ -141,13 +141,13 @@ if (!function_exists('render_contract_agreement_detail_fields')) {
         $formData = $ctx['formData'] ?? array();
 
         if ($contract_agreement_section == 'classification') {
-            _contract_agreement_render_classification($fieldDisplay, $genc, $des, $formData);
+            renderContractAgreementClassification($fieldDisplay, $genc, $des, $formData);
         }
         if ($contract_agreement_locations_section == 'Y') {
-            _contract_agreement_render_locations($fieldDisplay, $locations, $selectedLocations);
+            renderContractAgreementLocations($fieldDisplay, $locations, $selectedLocations);
         }
         if ($contract_agreement_section == 'extended') {
-            _contract_agreement_render_extended($fieldDisplay, $formData);
+            renderContractAgreementExtended($fieldDisplay, $formData);
         }
     }
 }

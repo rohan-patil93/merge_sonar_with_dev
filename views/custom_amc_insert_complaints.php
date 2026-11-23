@@ -43,7 +43,9 @@ if(isset($_POST['submit'])){
         $upload_path = 'all'; // folder name inside /uploads/
 
         foreach ($_FILES['complaint_images']['name'] as $key => $original_name) {
-            if (empty($original_name)) continue;
+            if (empty($original_name)) {
+                continue;
+            }
             // Create a temporary $_FILES array for this file
             $_FILES['single_file']['name'] = $_FILES['complaint_images']['name'][$key];
             $_FILES['single_file']['type'] = $_FILES['complaint_images']['type'][$key];
