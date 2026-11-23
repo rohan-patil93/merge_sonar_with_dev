@@ -9,7 +9,7 @@ class integartionClass{
 		$insert = array();
 		if($post['type']=='CREATE'){
 			$insert = $callConfig->insertRecord('job_posting_publish_details',$insert_array);
-			$upquery =$callConfig->updateRecord('job_postings',array('current_status'=>52),'id',$post['post_id']);
+			$callConfig->updateRecord('job_postings',array('current_status'=>52),'id',$post['post_id']);
 			$insert_array['job_posting_publish_id'] = $insert['LASTID'];
 		}else{
 			$update_array = array('current_status'=>'0');
@@ -95,7 +95,7 @@ class integartionClass{
 		$le = $res->doc_no_length;
 		$var = "%0".$le."d";
 		$data = $res->pre_fix.sprintf($var,$res->serial_number+1).$res->post_fix;
-		$update = $callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS,array('serial_number' =>$res->serial_number+1),'id',$res->id);
+		$callConfig->updateRecord(TBL_APPLICATION_SERIAL_NUMBERS,array('serial_number' =>$res->serial_number+1),'id',$res->id);
 		return trim($data);
 	}
 	public function getviewalldetilarecruitmentdashboardineg($get){
@@ -243,7 +243,7 @@ class integartionClass{
 	public function toinsertreportviewdata($get){
 		global $callConfig;
 		$insert_array = array('company_id'=>$get['company_id'],'report_id'=>$get['myreport_id'],'report_date'=>date("Y-m-d"),'activity'=>'Viewed','user_id'=>$get['user_id'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
-		$insert = $callConfig->insertRecord('report_histories',$insert_array);
+		$callConfig->insertRecord('report_histories',$insert_array);
 	}
 	public function togetcandidatebyracegender($get){
 		global $callConfig;
@@ -1120,10 +1120,10 @@ public function submitsprojectinsert($post, $get){
 		$project_id = $result['LASTID'];
 		$res['insert'] = $result;
 		$query = "INSERT INTO `project_phases`(`company_id`, `project_id`, `project_phase_name`, `description`, `is_active`, `current_status`, `created_by`) SELECT `company_id`, ".$project_id.", `project_phase_name`, `description`, `is_active`, `current_status`, ".$get['user_id']." FROM application_project_phases WHERE company_id =".$get['company_id']." AND is_active =0";
-		$phase = $callConfig->executeQuery($query);
+		$callConfig->executeQuery($query);
 
 		$query = "INSERT INTO `project_task_status`( `company_id`, `project_id`, `table_name`, `name`, `status`, `action_label`, `display_priority`, `is_active`, `current_status`, `created_by`) SELECT `company_id`, ".$project_id.", 'project_task_details', `name`, `status`, `action_label`, `display_priority`, `is_active`, `current_status`, ".$get['user_id']." FROM project_status WHERE company_id =".$get['company_id']." AND is_active = 0";
-		$pstatus = $callConfig->executeQuery($query);
+		$callConfig->executeQuery($query);
 
 	$res['project_team'] = $this->toinsertprojectteams($post, $get);
 	return $res['insert'];
@@ -1140,7 +1140,7 @@ public function toinsertprojecttasks($post, $get){
 public function toinsertprojectteams($post, $get){
 	global $callConfig;
 	$query = "UPDATE project_teams SET is_active = 1 WHERE  project_id = ".$post['project_id'];
-	$dataa = $callConfig->executeQuery($query);
+	$callConfig->executeQuery($query);
 	$insert_array = array('company_id'=>$get['company_id'], 'project_id'=>$post['project_id'], 'role_id'=>'1', 'user_id'=>$post['assigner_id'],  'is_active'=>'0', 'current_status'=>'0', 'created_by'=>$get['user_id']);
  	$res[] = $callConfig->insertRecord('project_teams',$insert_array);
 	foreach($post['project_teams'] as $key=>$team){
@@ -1652,7 +1652,7 @@ public function checkandupdatecolorprojecttask($post, $get){
 	$rres ="add";
 	$query = "SELECT * FROM `application_attach_labels` WHERE company_id =".$get['company_id']." AND application_tablename='".$post['application_tablename']."' AND transaction_id=".$post['transaction_id']." AND application_label_id= ".$post['application_label_id']." AND is_active = 0";
 	$row = $callConfig->getRow($query);
-	$upquery = $callConfig->executeQuery("UPDATE `project_task_details` SET  to_date= ".date('Y-m-d')." WHERE id=".$post['transaction_id']);
+	$callConfig->executeQuery("UPDATE `project_task_details` SET  to_date= ".date('Y-m-d')." WHERE id=".$post['transaction_id']);
 	$task_data = $callConfig->getRow("SELECT * FROM project_task_details WHERE id=".$post['transaction_id']);
 	$label_data = $callConfig->getRow("SELECT * FROM application_labels WHERE id=".$post['application_label_id']);
 	if($row->id !=""){
@@ -1675,7 +1675,7 @@ public function checkandupdatecolorprojecttask($post, $get){
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$transaction_number, 'application_table_name'=>'project_task_details', 'type'=>'INFORMATION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_PROJECT_KANBAN&TAB=3&RID='.$task_data->project_id,'module_setup_id'=>25);
 	//$notdata2 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg2, 'transaction_number'=>$project->id, 'application_table_name'=>'project_teams', 'type'=>'INFORMATION', 'notification_users'=>$notuser2,'option'=>'COM_VIEW_PROJECT_KANBAN&TAB=3&RID='.$project->id,'module_setup_id'=>25)
 	if($get['mobile']!='Y'){
-		$ss = $this->tosendnotifiations($notdata1);
+		$this->tosendnotifiations($notdata1);
 	}
 
 	return $return;
@@ -1888,7 +1888,7 @@ public function copynewcard($post, $get){
 			$res_data['checklist'] = $callConfig->executeQuery($query);
 		}
 		if($post['newattachment'] == 'on'){
-			$qurey = "INSERT INTO `application_attachments`(`company_id`, `application_table_name`, `transaction_id`, `temp_id`, `file_name`, `actual_file_name`, `email_attachement`, `file_size_mb`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`) SELECT  `company_id`, `application_table_name`, ".$card_id.", `temp_id`, `file_name`, `actual_file_name`, `email_attachement`, `file_size_mb`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `application_attachments` WHERE transaction_id = '".$post['copycardid']."' AND  application_table_name = 'project_task_details' ";
+			$query = "INSERT INTO `application_attachments`(`company_id`, `application_table_name`, `transaction_id`, `temp_id`, `file_name`, `actual_file_name`, `email_attachement`, `file_size_mb`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date`) SELECT  `company_id`, `application_table_name`, ".$card_id.", `temp_id`, `file_name`, `actual_file_name`, `email_attachement`, `file_size_mb`, `is_active`, `current_status`, `status_date`, `from_date`, `to_date`, `created_date`, `created_by`, `updated_by`, `updated_date` FROM `application_attachments` WHERE transaction_id = '".$post['copycardid']."' AND  application_table_name = 'project_task_details' ";
 			$res_data['attachments'] = $callConfig->executeQuery($query);
 		}
 		return $res_data;
@@ -2023,7 +2023,7 @@ public function toaddupdatetheprojectteamdata($post,$get){
 		$query = "SELECT * FROM project_teams WHERE id = ".$get['rid'];
 		$data = $callConfig->getRow($query);
 		$upquery = "UPDATE project_task_details SET assigen_id = NULL WHERE assigen_id = ".$data->user_id." AND project_id =".$data->project_id." AND current_status !=4 AND is_active = 0";
-		$ress= $callConfig->executeQuery($upquery);
+		$callConfig->executeQuery($upquery);
 		$user = $callConfig->getRow("SELECT display_name FROM application_users WHERE id=".$data->user_id);
 		$project = $callConfig->getRow("SELECT project_name FROM projects WHERE id=".$data->project_id);
 
@@ -2086,7 +2086,7 @@ public function updatestatusdynamicprojecttask($post, $get){
 	$ss = $this->tosendnotifiations($notdataa);
 	$comments = "Update this card ".str_replace("_"," ",$post['field'])." to be ".$post['fielddata'];
 	$insert_array = array('company_id'=>$get['company_id'],'application_table_name'=>'project_task_details','transaction_id'=>$post['update_id'],'activity_type'=>'task_details','filed_name'=>$post['field'],'new_value'=>$post['fielddata'],'comments'=>$comments ,'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
-	$insert = $callConfig->insertRecord('project_task_activities',$insert_array);
+	$callConfig->insertRecord('project_task_activities',$insert_array);
 
 	if($post['table_name'] == 'project_task_details'){
 	$user = $callConfig->getRow("SELECT display_name FROM application_users WHERE id=".$data->assigen_id);
@@ -2136,7 +2136,7 @@ public function sendEmailslist($data){
 	$email_data = array('email_source'=>$data['sender'], 'content'=>$data['content'], 'email_type'=>$data['email_type'], 'is_active'=>0 , 'current_status'=>0,'email_content_ref_id'=>$data['email_content_ref_id'], 'created_by'=>$data['created_by'] ,'created_date'=> date('Y-m-d H:i:s'));
 	foreach ($data['revicer'] as $email) {
 		$email_data['email'] = $email;
-		$email_res=$callConfig->insertRecord($databasename.TBL_EMAIL_LOGS,$email_data);
+		$callConfig->insertRecord($databasename.TBL_EMAIL_LOGS,$email_data);
 		$headers = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 			// More headers
@@ -2392,7 +2392,7 @@ public function toinsertthedataonitemquality($post, $get){
 		$upquery = "UPDATE item_head_quality_check SET is_active=1 WHERE id=".$chkc->id;
 		$row = $callConfig->executeQuery($upquery);
 	}
-	$headinsert = $callConfig->insertRecord('item_head_quality_check',$insert_array);
+	$callConfig->insertRecord('item_head_quality_check',$insert_array);
 
 	return $insert;
 }
@@ -2464,7 +2464,7 @@ public function tocheckandisertthedatafortablequalitycheck($get){
 	$tbda = $callConfig->getRow($query);
 	if($tbda->id==""){
 		$insert_array = array('company_id'=>$get['company_id'],'application_table_name'=>$get['table'],'transaction_id'=>$get['tranid'],'quality_check'=>'0','is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
-		$insert = $callConfig->insertRecord('application_table_quality_check',$insert_array);
+		$callConfig->insertRecord('application_table_quality_check',$insert_array);
 		$query = "SELECT * FROM application_table_quality_check WHERE company_id = ".$get['company_id']." AND application_table_name = '".$get['table']."' AND transaction_id =".$get['tranid']." AND is_active = 0";
 		$tbda = $callConfig->getRow($query);
 	}
@@ -2556,7 +2556,7 @@ public function updateprojectdependencydetail($post, $get){
 	global $callConfig;
 
 	$query = "UPDATE project_task_dependencies set is_active = 1 WHERE company_id = ".$get['company_id']." AND project_id = ".$post['project_id']."  AND project_task_id =".$post['task_id']." AND dependence_task_id NOT IN (".$post['dependency_ids'].") AND is_active = 0";
-	$dataa = $callConfig->executeQuery($query);
+	$callConfig->executeQuery($query);
 	$return['update'] = $query;
 	$query = "SELECT dependence_task_id FROM project_task_dependencies WHERE company_id = ".$get['company_id']." AND project_id = ".$post['project_id']."  AND project_task_id =".$post['task_id']." AND is_active = 0";
 	$datas= $callConfig->getAllRows($query);
@@ -2581,7 +2581,7 @@ public function addupdaterolememberdetail($post, $get){
 	global $callConfig;
 
 	$query = "UPDATE project_task_teams set is_active = 1,updated_by = ".$get['user_id']." WHERE company_id = ".$get['company_id']." AND project_id = ".$post['project_id']."  AND project_task_id =".$post['task_id']." AND project_role_id = ".$post['role_id']." AND user_id NOT IN (".$post['member_ids'].") AND is_active = 0";
-	$dataa = $callConfig->executeQuery($query);
+	$callConfig->executeQuery($query);
 	$return['update'] = $query;
 	$query = "SELECT id,user_id FROM project_task_teams WHERE company_id = ".$get['company_id']." AND project_id = ".$post['project_id']."  AND project_task_id =".$post['task_id']." AND is_active = 0";
 	$datas= $callConfig->getAllRows($query);
@@ -2962,7 +2962,7 @@ public function addcouriers($post, $get){
 	}
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'couriers', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT','module_setup_id'=>25);
 	$notdata2 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg2, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'couriers', 'type'=>'INFORMATION', 'notification_users'=>$notuser2,'option'=>'COM_VIEW_OFFICE_MANAGEMENT','module_setup_id'=>25);
-	$ss = $this->tosendnotifiations($notdata1);
+	$this->tosendnotifiations($notdata1);
 	$rss = $this->tosendnotifiations($notdata2);
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>$email_content_id, 'user_display_name'=>$user->display_name,'courier_company'=>$post['courier_company'],'courier_ref_no'=>$post['courier_ref_no'],'cc_users'=>$notuser2,'to_users'=>$notuser1,'courier_adderss'=>$post['courier_adderss']);
 	$this->emailsendmediater($senddata);
@@ -2991,7 +2991,7 @@ public function updatecouriers($post, $get){
 
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$data->id, 'application_table_name'=>'couriers', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT','module_setup_id'=>25);
 	$notdata2 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg2, 'transaction_number'=>$data->id, 'application_table_name'=>'couriers', 'type'=>'INFORMATION', 'notification_users'=>$notuser2,'option'=>'COM_VIEW_OFFICE_MANAGEMENT','module_setup_id'=>25);
-	$ss = $this->tosendnotifiations($notdata1);
+	$this->tosendnotifiations($notdata1);
 	$rss = $this->tosendnotifiations($notdata2);
 }
 public function togetuserliststationerycart($get){
@@ -3080,7 +3080,7 @@ public function togetallslectedtrasportdetails($get){
 
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=3','module_setup_id'=>25);
 	$notdata2 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg2, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'employee_transport_requests', 'type'=>'INFORMATION', 'notification_users'=>$notuser2,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=3','module_setup_id'=>25);
-	$ss = $this->tosendnotifiations($notdata1);
+	$this->tosendnotifiations($notdata1);
 	$rss = $this->tosendnotifiations($notdata2);
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>43, 'user_display_name'=>$user->display_name,'transport_date'=>$post['transport_date'],'cc_users'=>$notuser2,'to_users'=>$notuser1);
 	$this->emailsendmediater($senddata);
@@ -3240,7 +3240,7 @@ public function updatestationeryrequest($post, $get){
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$req->id, 'application_table_name'=>'stationery_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=2','module_setup_id'=>25);
 	$notuser1[] = $req->user_id;
 	$notuser1[] = $req->request_id;
-	$ss = $this->tosendnotifiations($notdata1);
+	$this->tosendnotifiations($notdata1);
 
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>44, 'user_display_name'=>$user->display_name,'request_no'=>$req->request_no,'status_name'=>$status->name,'cc_users'=>$notuser1,'to_users'=>'');
 	return $this->emailsendmediater($senddata);
@@ -3274,7 +3274,7 @@ public function updatetranspotfrom($get){
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$req->id, 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=3','module_setup_id'=>25);
 	$notuser1[] = $req->created_by;
 	$notuser1[] = $get['user_id'];
-	$ss = $this->tosendnotifiations($notdata1);
+	$this->tosendnotifiations($notdata1);
 
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>43, 'user_display_name'=>$user->display_name,'status_name'=>$status->action_label,'cc_users'=>$notuser1,'to_users'=>'','transport_date'=>$req->transport_date);
 	return $this->emailsendmediater($senddata);
@@ -3314,7 +3314,7 @@ public function addfoodrequest($post, $get){
 
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=4','module_setup_id'=>25);
 	$notdata2 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg2, 'transaction_number'=>$res['LASTID'], 'application_table_name'=>'employee_transport_requests', 'type'=>'INFORMATION', 'notification_users'=>$notuser2,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=4','module_setup_id'=>25);
-	$ss = $this->tosendnotifiations($notdata1);
+	$this->tosendnotifiations($notdata1);
 	$rss = $this->tosendnotifiations($notdata2);
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>44, 'user_display_name'=>$user->display_name,'start_date'=>$post['start_date'],'stop_date'=>$post['stop_date'],'cc_users'=>$notuser2,'to_users'=>$notuser1);
 	$this->emailsendmediater($senddata);
@@ -3339,7 +3339,7 @@ public function updatefoodrequest($get){
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg1, 'transaction_number'=>$req->id, 'application_table_name'=>'employee_transport_requests', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_OFFICE_MANAGEMENT&TAB=3','module_setup_id'=>25);
 	$notuser1[] = $req->created_by;
 	$notuser1[] = $get['user_id'];
-	$ss = $this->tosendnotifiations($notdata1);
+	$this->tosendnotifiations($notdata1);
 
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>45, 'user_display_name'=>$user->display_name,'start_date'=>$req->start_date,'stop_date'=>$req->stop_date,'cc_users'=>$notuser2,'to_users'=>$notuser1);
 	return $this->emailsendmediater($senddata);
@@ -3627,7 +3627,7 @@ public function togetemployeeform16adetails($get){
 
 
 		$insert_array = array('company_id'=>$get['company_id'], 'emp_id'=>$get['empid'], 'assessment_year'=>$get['assessment_year'], 'employee_name'=>$emp->display_name, 'designation'=>$emp->designation_name , 'garden'=>$emp->father_name , 'employee_address'=>$emp->address, 'certificate_no'=>$certificate_no,'certificate_last_update_on'=>$certificate_last_update_on,'employer_address'=>$emp->address, 'pan_deductor'=>$condata->pan_number, 'tan_deductor'=>$condata->tan_number , 'pan_employee'=>$emp->pan_number ,'employee_reference_no'=>$employee_reference_no, 'cit_details'=>$condata->cit_address,'period_from'=>$period_from, 'period_to'=>$period_to, 'quarterly_deduction'=>$quarterly_deduction, 'tax_deposited_respect_adjustment'=>'', 'tax_deposited_respect_challan'=>$tax_deposited_respect_challan, 'place'=>$emp->location_name, 'place_date'=>$certificate_last_update_on, 'is_active'=>'0','current_status'=>'0', 'created_by'=>$get['user_id']);
-		$insert = $callConfig->insertRecord('emp_it_form_16a',$insert_array);
+		$callConfig->insertRecord('emp_it_form_16a',$insert_array);
 		$query = "SELECT * FROM emp_it_form_16a WHERE company_id =".$get['company_id']." AND emp_id=".$get['empid']." AND assessment_year='".$get['assessment_year']."' AND is_active=0";
 		$data = $callConfig->getRow($query);
 
@@ -3683,7 +3683,7 @@ public function assignemptofrom16a($get){
 	$senddata = array('company_id'=>$get['company_id'], 'session_company_id'=>$get['company_id'], 'email_content_id'=>55, 'document_title'=>$get['assement']." - ".$req->document_name,'release_date'=>date('Y-m-d'),'cc_users'=>$notuser2,'to_users'=>$notuser1);
 	$notdata1 = array('company_id'=>$get['company_id'], 'notification_message'=> $msg, 'transaction_number'=>$req->id, 'application_table_name'=>'emp_assign_release_documents', 'type'=>'ACTION', 'notification_users'=>$notuser1,'option'=>'COM_VIEW_DOCUMENTS','module_setup_id'=>25);
 	if(count((array)$notuser1)>0){
-		$ss = $this->tosendnotifiations($notdata1);
+		$this->tosendnotifiations($notdata1);
 		$res = $this->emailsendmediater($senddata);
 	}
 
@@ -3691,7 +3691,7 @@ public function assignemptofrom16a($get){
 	$notdata1['notification_message'] = $msg2;
 	$senddata['to_users'] = $ssuser;
 	if(count((array)$ssuser)>0){
-		$ss = $this->tosendnotifiations($notdata1);
+		$this->tosendnotifiations($notdata1);
 		$res = $this->emailsendmediater($senddata);
 	}
 
@@ -3829,7 +3829,7 @@ public function toimportthedataintotablesemployeessalary($get){
 		foreach($salmap as $keycal=>$sal){
 			$month_sal = $dd->$keycal!=""?$dd->$keycal:0;
 			$saltemp_array = array('company_id'=>$get['company_id'],'salary_template_id'=>$salary_template_id,'component_id'=>$ear[$sal]['id'],'component_name'=>$ear[$sal]['name'],'component_category'=>$ear[$sal]['category_id'],'component_cat_id'=>$ear[$sal]['category_id'],'component_number'=>$month_sal,'component_type'=>$ear[$sal]['calculation_type'],'monthly_amount'=>$month_sal,'yearly_amount'=>$month_sal*12,'is_active'=>'0','current_status'=>0,'created_by'=>$get['user_id']);
-			$insert_data = $callConfig->insertRecord('salary_template_components',$saltemp_array);
+			$callConfig->insertRecord('salary_template_components',$saltemp_array);
 			$saltemp_query[] = $saltemp_array;
 		}
 	}
@@ -3854,7 +3854,7 @@ public function toimportthedataintotablesemployeessalary($get){
 			}else{
 				$insert_array = array('company_id'=>$get['company_id'],'genc_code'=>$code, 'genc_detail_code'=>$genc_detail_code, 'genc_detail_name'=>$post['genc_detail_name'][$key], 'description'=>$post['genc_detail_name'][$key], 'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
 				$return['next_level'][] = $upquery;
-				$insert = $callConfig->insertRecord('general_code_details',$insert_array);
+				$callConfig->insertRecord('general_code_details',$insert_array);
 			}
 		}
 		return $return;
@@ -3873,7 +3873,7 @@ public function toimportthedataintotablesemployeessalary($get){
 		}else{
 			$insert_array = array('company_id'=>$get['company_id'],'genc_code'=>$get['code'], 'role_short_code'=>$get['role'], 'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
 			$return['next_level'][] = $upquery;
-			$insert = $callConfig->insertRecord('general_code_role_permissions',$insert_array);
+			$callConfig->insertRecord('general_code_role_permissions',$insert_array);
 		}
 		return $res;
 	}
@@ -3919,14 +3919,14 @@ public function toimportthedataintotablesemployeessalary($get){
 	  	$return['jsondata'] = $jsondata;
 	  	if($type =='insert'){
 	  		$insert_array = array('company_id'=>$get['company_id'], 'application_table_name'=>$table_name, 'transaction_id' => $transaction_id, 'old_data'=>$jsondata, 'new_data'=>$jempdata, 'is_active'=>'0', 'current_status'=>'0', 'created_by'=>$get['user_id']);
- 			$insert_res = $callConfig->insertRecord('application_table_histories',$insert_array);
+ 			$callConfig->insertRecord('application_table_histories',$insert_array);
 	  	}
 	  	if($type =='update'){
 	  		$squery = "SELECT id FROM  application_table_histories  WHERE company_id = ".$get['company_id']." AND application_table_name= '".$table_name."' AND transaction_id =".$transaction_id." AND new_data IS NULL AND is_active=0";
 	  		$return['squery'] = $squery;
 	  		$aval  = $callConfig->getRow($squery);
 	  		$return['aval'] = $aval;
-	  		$upquery =$callConfig->updateRecord('application_table_histories',array('new_data'=>$jsondata),'id',$aval->id);
+	  		$callConfig->updateRecord('application_table_histories',array('new_data'=>$jsondata),'id',$aval->id);
 	  	}
  		return $return;
  	}

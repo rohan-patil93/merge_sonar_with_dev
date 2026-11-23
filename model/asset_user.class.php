@@ -1258,7 +1258,6 @@ public function insertAsset($post){
 		$return['top']['total'] = $data11->total;
 		$month_start = date('Y-m-01');
 		$mont_last = date('Y-m-t');
-		$last_start = date("Y-m-d", strtotime('-6 month', strtotime($month_start)));
 		$query ="SELECT sum(if(current_status=31,1,0)) allocated, sum(if(current_status=32,1,0)) returned, month(`start_date`) month, year(`start_date`) evyear FROM `user_assets` WHERE `start_date` >= '2022-12-01' AND `start_date` <= '2023-05-31' AND is_active =0 GROUP by month,evyear";
 		$data2 = $callConfig->getAllRows($query);
 		$return['sec'] = $data2;
@@ -1283,9 +1282,9 @@ public function insertAsset($post){
 		}
 		$return['emp_asset'] = $cat;
 		$query = "SELECT ast.asset_code, ast.asset_description, ast.id asset_id, ema.start_date, ema.end_date, ast.current_status, ema.user_id FROM user_assets ema, assets ast WHERE ema.company_id = ast.company_id AND ema.company_id = 1 AND ema.asset_id = ast.id AND ema.current_status = ".ST_ALLOCATE." AND ema.is_active =0 ORDER BY start_date DESC LIMIT 0,10";
-		$return['allocated'] = $callConfig->getAllRows($qurey);
+		$return['allocated'] = $callConfig->getAllRows($query);
 		$query = "SELECT ast.asset_code, ast.asset_description, ast.id asset_id, ema.start_date, ema.end_date, ast.current_status, ema.user_id FROM user_assets ema, assets ast WHERE ema.company_id = ast.company_id AND ema.company_id = 1 AND ema.asset_id = ast.id AND ema.current_status = ".ST_RETURNED." AND ema.is_active =0 ORDER BY start_date DESC LIMIT 0,10";
-		$return['returned'] = $callConfig->getAllRows($qurey);
+		$return['returned'] = $callConfig->getAllRows($query);
 		$query = "SELECT emp.id emp_id, emp.emp_code, emp.display_name, ast.id asset_id, ast.category_id, ast.asset_code, ast.asset_description FROM user_assets eas, employees emp, assets ast WHERE eas.company_id = emp.company_id AND emp.company_id = ast.company_id AND eas.company_id=1 AND eas.user_id = emp.id AND eas.asset_id = ast.id AND emp.date_of_leaving != NULL AND emp.date_of_leaving <= now() AND eas.current_status = ".ST_ALLOCATE." AND emp.is_active = 0 AND eas.is_active =0";
 		$return['pending'] = $callConfig->getAllRows($query);
 		return $return;

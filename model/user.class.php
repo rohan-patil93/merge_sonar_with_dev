@@ -1773,16 +1773,7 @@ class userClass
     }
     public function insertcreaditnoteTables($post)
     {
-        global $callConfig;
-        $fieldnames = array('company_id' => $post['company_id'], 'estimate_number' => $post['invoice_number'], 'estimated_at' => $post['invoiced_at'], 'amount' => $post['invoiced_at'], 'amount' => $post['grandtotaol'], 'currency_code' => 'INR', 'party_id' => $post['party_id'], 'party_name' => $post['party_name'], 'party_email' => $post['party_email'], 'party_tax_number' => $post['party_tax_number'], 'party_phone' => $post['party_phone'], 'party_address' => $post['party_address'], 'party_ship_adderss' => $post['party_ship_adderss'], 'place_of_supply' => $post['place_of_supply'], 'payment_terms' => $post['payment_terms'], 'sub_total' => $post['subTotal'], 'tax_amount' => $post['taxRate']);
-        $es_id = $callConfig->insertRecord(TBL_DEBIT_NOTE, $fieldnames);
-        foreach ($post['productCode'] as $key => $item) {
-            $itemfieldnames = array('estimate_id' => $es_id, 'item_id' => $item, 'name' => $item, 'quantity' => $post['quantity'][$key], 'price' => $post['price'][$key], 'total' => $post['amount'][$key], 'tax' => $post['ptax_amount'][$key], 'description' => $post['productName'][$key]);
-            $item_id = $callConfig->insertRecord(TBL_DEBIT_NOTE_ITEMS, $itemfieldnames);
-            $taxfield = array('estimate_id' => $es_id, 'estimate_item_id' => $item_id, 'tax_id' => 1, 'value' => $post['tax'][$key], 'amount' => $post['ptax_amount'][$key]);
-            $callConfig->insertRecord(TBL_DEBIT_NOTE_ITEM_TAXES, $taxfield);
-        }
-        return $es_id;
+        return $this->insertdebitnoteTables($post);
     }
     public function insertquotationTables($post)
     {
@@ -1799,16 +1790,7 @@ class userClass
     }
     public function insertpurchaseTables($post)
     {
-        global $callConfig;
-        $fieldnames = array('company_id' => $post['company_id'], 'estimate_number' => $post['invoice_number'], 'estimated_at' => $post['invoiced_at'], 'amount' => $post['invoiced_at'], 'amount' => $post['grandtotaol'], 'currency_code' => 'INR', 'party_id' => $post['party_id'], 'party_name' => $post['party_name'], 'party_email' => $post['party_email'], 'party_tax_number' => $post['party_tax_number'], 'party_phone' => $post['party_phone'], 'party_address' => $post['party_address'], 'party_ship_adderss' => $post['party_ship_adderss'], 'place_of_supply' => $post['place_of_supply'], 'payment_terms' => $post['payment_terms'], 'sub_total' => $post['subTotal'], 'tax_amount' => $post['taxRate']);
-        $es_id = $callConfig->insertRecord(TBL_QUOTATIONS, $fieldnames);
-        foreach ($post['productCode'] as $key => $item) {
-            $itemfieldnames = array('estimate_id' => $es_id, 'item_id' => $item, 'name' => $item, 'quantity' => $post['quantity'][$key], 'price' => $post['price'][$key], 'total' => $post['amount'][$key], 'tax' => $post['ptax_amount'][$key], 'description' => $post['productName'][$key]);
-            $item_id = $callConfig->insertRecord(TBL_QUOTATIONS_ITEMS, $itemfieldnames);
-            $taxfield = array('estimate_id' => $es_id, 'estimate_item_id' => $item_id, 'tax_id' => 1, 'value' => $post['tax'][$key], 'amount' => $post['ptax_amount'][$key]);
-            $callConfig->insertRecord(TBL_QUOTATIONS_ITEM_TAXES, $taxfield);
-        }
-        return $es_id;
+        return $this->insertquotationTables($post);
     }
     public function togetnameandphotoonuseridbaseonemailids($post)
     {

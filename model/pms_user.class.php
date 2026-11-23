@@ -452,7 +452,6 @@ public function getPerFormanceAppraisal($get){ //please removed not working code
 
 	}
 	public function insertPerformanceAppraisalQuestions($get,$post){
-		$return = array();
 		global $callConfig;
 		$returnarray = array();
 		$updateset = array("is_active"=>null);

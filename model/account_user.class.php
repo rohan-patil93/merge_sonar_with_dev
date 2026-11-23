@@ -1188,7 +1188,7 @@ class accountUserClass extends userClass{
         }
 
         $sql = "UPDATE account_balances_details SET closing_balance = closing_balance + ".$amountChange." ,opening_balance = opening_balance + ".$amountChange." WHERE company_id ='".$company_id."' AND finance_year = '".$financeyear."' AND account_code = '".$accountId."' AND balance_date > '".$entryDate."' AND location_id = '".$location_id."'  AND department_id = '".$department_id."' AND cost_center_id = '".$cost_center_id."' AND is_active = 0";
-        $updateaccres = $callConfig->executeQuery($sql);
+        $callConfig->executeQuery($sql);
         $return['update_all_record_details'] = $sql;
 //account_balances_details End
 

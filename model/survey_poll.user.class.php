@@ -89,14 +89,14 @@ class surveyPollUserClass extends userClass
 			$callConfig->updateRecord($table_setup,$main,'id',$rowid);
     		// two update querys - qustiontable and option table is_aactive=1
 			$setisactive = array('is_active'=>'1');
-			$qrespons=$callConfig->updateRecord($table_questions,$setisactive,'survey_id',$rowid);
-			$qrespons=$callConfig->updateRecord($table_options,$setisactive,'survey_id',$rowid);
-			$qrespons=$callConfig->updateRecord(TBL_SURVEY_RESPONSES,$setisactive,'survey_id',$rowid);
+			$callConfig->updateRecord($table_questions,$setisactive,'survey_id',$rowid);
+			$callConfig->updateRecord($table_options,$setisactive,'survey_id',$rowid);
+			$callConfig->updateRecord(TBL_SURVEY_RESPONSES,$setisactive,'survey_id',$rowid);
 			foreach($shared_ids1 as $ids){
 				$response_array = array('company_id'=>$main['company_id'],'is_active'=>'0','created_by'=>$main['created_by'],'created_date'=>$main['created_date'],'employee_id'=>$ids['id_value'],'survey_id'=>$rowid,'category'=>$main['category']);
 				$callConfig->insertRecord(TBL_SURVEY_RESPONSES,$response_array);
 			}
-			foreach ($quesion_data as $key => $value) {
+			foreach ($quesion_data as $value) {
     			//if(qustionid!='') thn update is_active=0 and values questintabe
     			//update is_active=0 and valus in option table conditoon survey id and question id
     			//else = insert to table is_active=0

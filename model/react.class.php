@@ -281,9 +281,6 @@ class reactClass extends userClass
 				$type = 'list';
 			}
 			if ($value['insert_page_name'] == $name) {
-				$approvaltype = 'approval';
-			}
-			if ($value['insert_page_name'] == $name) {
 				$type = 'insert';
 			}
 			if ($value['edit_page_name'] == $name) {
@@ -1609,7 +1606,7 @@ class reactClass extends userClass
 
 		$expirySql = "SELECT id, company_id, contract_name, end_date, originator FROM contracts WHERE company_id = " . $get['company_id'] . " AND is_active = 0 AND end_date IS NOT NULL AND DATEDIFF(end_date, '$today') BETWEEN 1 AND $reminderDays ";
 		$expiringContracts = $callConfig->getAllRows($expirySql);
-		$return['expiringContracts'] = $expirySql;
+		$return['expiringContracts'] = $expiringContracts;
 
 		if ($rid != "") {
 			$historySql = "SELECT contract_name,transaction_no, start_date, end_date, parent_contract ,  contract_amount FROM contracts WHERE company_id = " . $get['company_id'] . " AND parent_contract = $rid AND is_active = 0";
@@ -1812,7 +1809,7 @@ class reactClass extends userClass
 
 		$expirySql = "SELECT id, company_id, contract_name, end_date, originator FROM contracts WHERE company_id = " . $get['company_id'] . " AND is_active = 0 AND end_date IS NOT NULL AND DATEDIFF(end_date, '$today') BETWEEN 1 AND $reminderDays ";
 		$expiringContracts = $callConfig->getAllRows($expirySql);
-		$return['expiringContracts'] = $expirySql;
+		$return['expiringContracts'] = $expiringContracts;
 
 		if ($rid != "") {
 			$historySql = "SELECT contract_name,transaction_no, start_date, end_date, parent_contract ,  contract_amount FROM contracts WHERE company_id = " . $get['company_id'] . " AND parent_contract = $rid AND is_active = 0";
@@ -8087,8 +8084,7 @@ class reactClass extends userClass
 		$baseWhere = "c.company_id = {$companyId} AND c.is_active = 0 AND c.current_status != 199{$locWhere} {$admin_or_user_whr}";
 
 		$countSql = "SELECT COUNT(*) AS c FROM complaints c WHERE {$baseWhere}";
-		$countRow = $callConfig->getRow($countSql);
-		$total = (int) ($countRow->c ?? 0);
+		$callConfig->getRow($countSql);
 		return $get;
 	}
 
@@ -8610,7 +8606,6 @@ class reactClass extends userClass
 				}
 				$payload = $this->cexBuildContractImportPayload($contractPreview, $validation, $get, $post);
 				$payload['company_id'] = $companyId;
-				$isAmc = !empty($payload['is_amc_contract']) && $payload['is_amc_contract'] == 'Y';
 				try {
 					$result = $this->importInsertContractReact($get, $payload);
 					$contractResult = $result['contract_result'] ?? array();
@@ -8649,7 +8644,6 @@ class reactClass extends userClass
 			'items' => $summaryItems,
 			'imported_at' => date('Y-m-d H:i:s'),
 		);
-		$check = array('status' => $importStatus, 'import_summary' => json_encode($importSummary));
 		$callConfig->updateRecord('contracts_excel_import_batches', array(
 			'status' => $importStatus,
 			'import_summary' => json_encode($importSummary),

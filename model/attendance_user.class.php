@@ -646,10 +646,8 @@ class attendanceUserClass extends userClass{
             $att_date = $event_date;
             $latt_date = $event_date;
             $check_ni = "09:00:00";
-            if ($in_out_mode == 1) {
-            	if (strtotime($clock_out) < strtotime($check_ni)) {
-					$latt_date = date('Y-m-d', strtotime($latt_date . ' -1 day'));
-				}
+            if ($in_out_mode == 1 && strtotime($clock_out) < strtotime($check_ni)) {
+				$latt_date = date('Y-m-d', strtotime($latt_date . ' -1 day'));
             }
 
             // Step 5: Check for existing record for the same employee + date
@@ -1003,30 +1001,24 @@ class attendanceUserClass extends userClass{
 
             }
 
-            if (($event_date == '' || $event_time == '') && !empty($desc['id'])) {
+            if (($event_date == '' || $event_time == '') && !empty($desc['id']) && isset($id_parts[2])) {
+                $id_ts = strtotime($id_parts[2]);
 
-                if (isset($id_parts[2])) {
+                if ($id_ts !== false) {
 
-                    $id_ts = strtotime($id_parts[2]);
+                    if ($event_date == '') {
 
-                    if ($id_ts !== false) {
+                        $event_date = date('Y-m-d', $id_ts);
 
-                        if ($event_date == '') {
+                    }
 
-                            $event_date = date('Y-m-d', $id_ts);
+                    if ($event_time == '') {
 
-                        }
-
-                        if ($event_time == '') {
-
-                            $event_time = date('H:i:s', $id_ts);
-
-                        }
+                        $event_time = date('H:i:s', $id_ts);
 
                     }
 
                 }
-
             }
 
             if ($event_date == '' || $event_time == '') {
@@ -1423,10 +1415,7 @@ class attendanceUserClass extends userClass{
 
                     // Earlier clock-in wins
                     if ($clock_in != null && $clock_in != '') {
-                        if ($final_clock_in == null || $final_clock_in == '' || $final_clock_in_date == null || $final_clock_in_date == '') {
-                            $final_clock_in = $clock_in;
-                            $final_clock_in_date = $clock_in_date;
-                        } else {
+                        if ($final_clock_in != null && $final_clock_in != '' && $final_clock_in_date != null && $final_clock_in_date != '') {
                             $old_in_ts = strtotime($final_clock_in_date . ' ' . $final_clock_in);
                             $new_in_ts = strtotime($clock_in_date . ' ' . $clock_in);
                             if ($new_in_ts && (!$old_in_ts || $new_in_ts > $old_in_ts)) {
@@ -1438,10 +1427,7 @@ class attendanceUserClass extends userClass{
 
                     // Later clock-out wins
                     if ($clock_out != null && $clock_out != '') {
-                        if ($final_clock_out == null || $final_clock_out == '' || $final_clock_out_date == null || $final_clock_out_date == '') {
-                            $final_clock_out = $clock_out;
-                            $final_clock_out_date = $clock_out_date;
-                        } else {
+                        if ($final_clock_out != null && $final_clock_out != '' && $final_clock_out_date != null && $final_clock_out_date != '') {
                             $old_out_ts = strtotime($final_clock_out_date . ' ' . $final_clock_out);
                             $new_out_ts = strtotime($clock_out_date . ' ' . $clock_out);
                             if ($new_out_ts && (!$old_out_ts || $new_out_ts < $old_out_ts)) {

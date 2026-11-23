@@ -101,41 +101,7 @@ GROUP BY tl.item_id";
     }
 
     public function togetStockValueSummaryRepot($get){
-        global $callConfig;
-        $return['get']= $get;
-        $query = "SELECT it.id item_id,
-        (SELECT iwb.closing_qty
-         FROM item_wa_balances iwb
-         WHERE company_id = it.company_id
-         AND   iwb.item_id = it.id
-         AND     iwb.balance_date < '".$get['from_date']."'
-         ORDER BY balance_date DESC
-         LIMIT 0,1
-         ) open_qty,
-        it.sku,
-        it.item_name,
-        sum(tl.in_qty) in_qty,
-        sum(tl.out_qty) out_qty,
-        (SELECT iwb.closing_qty
-         FROM item_wa_balances iwb
-         WHERE company_id = it.company_id
-         AND   iwb.item_id = it.id
-         AND     iwb.balance_date <= '".$get['to_date']."'
-         ORDER BY balance_date DESC
-         LIMIT 0,1
-        ) clos_qty
-FROM    item_ledger_st tl,
-        items it
-WHERE     tl.company_id = it.company_id
-AND     tl.company_id =".$get['company_id']."
-AND     tl.item_id = it.id
-AND     tl.document_date >= '".$get['from_date']."' AND tl.document_date <= '".$get['to_date']."'
-GROUP BY tl.item_id";
-
-        $return['query'] = $query;
-        $data = $callConfig->getAllRows($query);
-        $return['data']= $data;
-        return $return;
+        return $this->togetstocksummaryrepot($get);
     }
 
     public function togetactivepurchaseorderrepot($get){
@@ -2987,36 +2953,7 @@ GROUP BY tl.item_id";
     }
 
     public function getDebitOrCreditMemoRegisterDetails($get){
-        global $callConfig;
-        $from = '';
-        $to = '';
-        $date = '';
-        if (!empty($get['from_date']) && !empty($get['to_date'])) {
-            $from = date('Y-m-d', strtotime($get['from_date']));
-            $to = date('Y-m-d', strtotime($get['to_date']));
-            $whereDateCredit = " AND c.transaction_date BETWEEN '{$from}' AND '{$to}'";
-            $whereDateDebit = " AND d.transaction_date BETWEEN '{$from}' AND '{$to}'";
-        } elseif (!empty($get['date'])) {
-            $date = date('Y-m-d', strtotime($get['date']));
-            $whereDateCredit = " AND c.transaction_date = '{$date}'";
-            $whereDateDebit = " AND d.transaction_date = '{$date}'";
-        } else {
-            $whereDateCredit = "";
-            $whereDateDebit = "";
-        }
-        $whereCompanyCredit = "";
-        $whereCompanyDebit = "";
-        if (!empty($get['company_id'])) {
-            $whereCompanyCredit = " AND c.company_id = '" . $get['company_id'] . "'";
-            $whereCompanyDebit = " AND d.company_id = '" . $get['company_id'] . "'";
-        }
-        $creditSQL = "SELECT 'Credit Note' AS note_type, c.id, c.company_id, c.transaction_number, c.transaction_date, c.party_name, c.party_tax_number, c.doc_ref_no AS reference_no, c.doc_ref_date AS reference_date, c.amount, c.tax_amount, c.total_amount, c.current_status, s.name AS status_name, s.background_color AS status_bg, s.color AS status_color, c.created_by FROM credit_notes c LEFT JOIN status s ON s.name_value = c.current_status WHERE c.is_active = '0' {$whereCompanyCredit} {$whereDateCredit} ";
-        $debitSQL = "SELECT 'Debit Note' AS note_type, d.id, d.company_id, d.transaction_number, d.transaction_date, d.party_name, d.party_tax_number, d.doc_ref_no AS reference_no, d.doc_ref_date AS reference_date, d.amount, d.tax_amount, d.total_amount, d.current_status, s.name AS status_name, s.background_color AS status_bg, s.color AS status_color, d.created_by FROM debit_notes d LEFT JOIN status s ON s.name_value = d.current_status WHERE d.is_active = '0' {$whereCompanyDebit} {$whereDateDebit} ";
-        $finalSQL = $creditSQL . " UNION ALL " . $debitSQL . " ORDER BY transaction_date DESC, note_type ASC";
-        $res = $callConfig->getAllRows($finalSQL);
-        $result['debit_credit_note_register'] = $res;
-        $result['sql'] = $finalSQL;
-        return $result;
+        return $this->getDebitOrCreditNoteRegisterDetails($get);
     }
 
     public function getCashApplicationReport($get){

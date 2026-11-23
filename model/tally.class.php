@@ -1054,7 +1054,7 @@ class tallyClass extends userClass{
  		foreach($api_hit_api_response_details[$api_code] as $apihitre){  //api Hites response fileds
  			$valuenotavailablefieldary = array();
   			$stringary = array();
-  			$maintransactionary = $transactionitemtaxary = $transactionitemsql = $paymentarray = array();
+  			$maintransactionary = $transactionitemsql = $paymentarray = array();
   			$getstringlist = '';
   			if(isset($transaction[$apihitre['VOUCHERNUMBER']])){
 				$stringary['status'] = 1062;
@@ -1209,14 +1209,14 @@ class tallyClass extends userClass{
 						if($tablefield['type'] != 'function'){
 							$reverkeyvaluearay = array();
 							foreach($tablefield['res'] as $kkey=>$valuu){
-								$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+								$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 								$reverkeyvaluearay[$removewhinewline] = $kkey;
 							}
 							$fieldkeywithvalue[$key] = $reverkeyvaluearay;
 						}else{
 							$reverkeyvaluearay = array();
 							foreach($tablefield as $kkey=>$valuu){
-								$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+								$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 								$reverkeyvaluearay[$removewhinewline] = $kkey;
 							}
 							$fieldkeywithvalue[$key] =  $reverkeyvaluearay;
@@ -1407,14 +1407,14 @@ class tallyClass extends userClass{
 								if($tablefield['type'] != 'function'){
 									$reverkeyvaluearay = array();
 									foreach($tablefield['res'] as $kkey=>$valuu){
-										$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+										$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 										$reverkeyvaluearay[$removewhinewline] = $kkey;
 									}
 									$fieldkeywithvalue[$key] = $reverkeyvaluearay;
 								}else{
 									$reverkeyvaluearay = array();
 									foreach($tablefield as $kkey=>$valuu){
-										$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+										$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 										$reverkeyvaluearay[$removewhinewline] = $kkey;
 									}
 									$fieldkeywithvalue[$key] =  $reverkeyvaluearay;
@@ -1594,14 +1594,14 @@ class tallyClass extends userClass{
 								if($tablefield['type'] != 'function'){
 									$reverkeyvaluearay = array();
 									foreach($tablefield['res'] as $kkey=>$valuu){
-										$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+										$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 										$reverkeyvaluearay[$removewhinewline] = $kkey;
 									}
 									$fieldkeywithvalue[$key] = $reverkeyvaluearay;
 								}else{
 									$reverkeyvaluearay = array();
 									foreach($tablefield as $kkey=>$valuu){
-										$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+										$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 										$reverkeyvaluearay[$removewhinewline] = $kkey;
 									}
 									$fieldkeywithvalue[$key] =  $reverkeyvaluearay;
@@ -1743,14 +1743,14 @@ class tallyClass extends userClass{
 								if($tablefield['type'] != 'function'){
 									$reverkeyvaluearay = array();
 									foreach($tablefield['res'] as $kkey=>$valuu){
-										$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+										$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 										$reverkeyvaluearay[$removewhinewline] = $kkey;
 									}
 									$fieldkeywithvalue[$key] = $reverkeyvaluearay;
 								}else{
 									$reverkeyvaluearay = array();
 									foreach($tablefield as $kkey=>$valuu){
-										$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+										$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 										$reverkeyvaluearay[$removewhinewline] = $kkey;
 									}
 									$fieldkeywithvalue[$key] =  $reverkeyvaluearay;
@@ -1917,14 +1917,14 @@ echo "<pre>cvfcgbfgjh"; print_r($api_hit_api_response_details); exit;
 							if($tablefield['type'] != 'function'){
 								$reverkeyvaluearay = array();
 								foreach($tablefield['res'] as $kkey=>$valuu){
-									$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+									$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 									$reverkeyvaluearay[$removewhinewline] = $kkey;
 								}
 								$fieldkeywithvalue[$key] = $reverkeyvaluearay;
 							}else{
 								$reverkeyvaluearay = array();
 								foreach($tablefield as $kkey=>$valuu){
-									$removewhinewline = preg_replace("/\r|\n/", '', $valuu);
+									$removewhinewline = preg_replace('/[\r\n]/', '', $valuu);
 									$reverkeyvaluearay[$removewhinewline] = $kkey;
 								}
 								$fieldkeywithvalue[$key] =  $reverkeyvaluearay;

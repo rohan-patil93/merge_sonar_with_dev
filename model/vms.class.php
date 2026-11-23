@@ -2379,7 +2379,6 @@ class vMSUserClass extends userClass{
 		}else{
 			if($data['newcreate']=="Y"){
 				$insert_array['is_active']= null;
-				$insert_arrayold = array('is_active'=>null,'updated_by'=>$data['user_id'],'updated_date'=>date('Y-m-d H:i:s'));
 				$where = "id = '".$workcheckdata->id."'";
 				$res=$callConfig->updateRecord("emp_work_order",$insert_array,"","",$where);
 				$returnarray['other_work_order_update'] = 'Y- '.$workcheckdata->id;
@@ -3566,7 +3565,7 @@ class vMSUserClass extends userClass{
 		if($datas->id!=""){
 			$remove_array = array('is_active'=>1,'updated_by'=>$get['user_id']);
 			$where = "id = '".$datas->id."'";
-			$res=$callConfig->updateRecord("employee_buddies",$remove_array,"","",$where);
+			$callConfig->updateRecord("employee_buddies",$remove_array,"","",$where);
 		}
 		$insert_array = array('company_id'=>$get['company_id'],'hr_buddy'=>$post['hr_buddy'],'employee_id'=>$emp_id,'finance_buddy'=>$post['finance_buddy'],'admin_buddy'=>$post['admin_buddy'],'loc_buddy'=>$post['loc_buddy'],'is_active'=>'0','current_status'=>'0','created_by'=>$get['user_id']);
 		return $callConfig->insertRecord('employee_buddies',$insert_array);
@@ -9030,7 +9029,7 @@ public function  vmssingleemployeedashoard_new($get){
 			$post['send_user_id'] = $udata->approval_manager ?? 0;
 		}
 		if(method_exists($this, 'toSendEmailNotificationsBaseDAOdynamic')){
-			$rres = $this->toSendEmailNotificationsBaseDAOdynamic($post);
+			$this->toSendEmailNotificationsBaseDAOdynamic($post);
 		}
 		return array('status' => 'success', 'msg' => 'Timesheet submitted successfully');
 	}

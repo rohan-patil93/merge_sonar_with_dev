@@ -1313,7 +1313,7 @@ class mobileUserClass extends userClass{
      }
      public function multipleimagesapplicationattachments($get,$post){
         global $callConfig;
-        foreach($post['images'] as $key=>$img){
+        foreach($post['images'] as $img){
             $insert_array = array(self::KEY_COMPANY_ID=>$get[self::KEY_COMPANY_ID],'file_name'=>$img,'actual_file_name'=>$img,'file_size_mb'=>0,self::KEY_APPLICATION_TABLE_NAME=>$post[self::KEY_APPLICATION_TABLE_NAME],self::KEY_TRANSACTION_ID=>$post[self::KEY_TRANSACTION_ID],self::KEY_IS_ACTIVE =>'0');
             $res = $callConfig->insertRecord('application_attachments',$insert_array);
         }
@@ -1624,9 +1624,6 @@ class mobileUserClass extends userClass{
         $whr1st="company_id= '".$get[self::KEY_COMPANY_ID]."' AND is_active = '0' and pay_month='".$get['month']."' and pay_year='".$get['year']."' and employee_id='".$get[self::KEY_EMP_ID]."' ";
         $query1st = $callConfig->selectQuery('pay_run_summary','*',$whr1st,'','','');
         $st1 = $callConfig->getRow($query1st);
-        $queryemp = $callConfig->selectQuery('employees','*',$whremp,'','','');
-
-
 
         $query1stm= "SELECT * FROM pay_run_summary_components prsc, earnings ern WHERE prsc.pay_run_summary_id='".$st1->id."' AND prsc.component_id = ern.id AND ern.display_in_payslip = 0 ORDER BY ern.display_seq ASC";
 
@@ -1929,7 +1926,7 @@ class mobileUserClass extends userClass{
         global $callConfig;
         $return = array();
         $userid = $get[self::KEY_USER_ID];
-        $map_date = $get[self::KEY_MAP_DATE]=!"" ? $get[self::KEY_MAP_DATE] : date(self::DATE_FORMAT_YMD);
+        $map_date = $get[self::KEY_MAP_DATE] != "" ? $get[self::KEY_MAP_DATE] : date(self::DATE_FORMAT_YMD);
         $sev_map_date = date(self::DATE_FORMAT_YMD, strtotime('-7 day', strtotime($map_date)));
         $query = "SELECT user_id, map_date, min(`map_time`) clock_in, MAX(`map_time`) clock_out,  map_latitude, map_longitude  FROM `field_work_user_map_points` WHERE company_id =  ".$get[self::KEY_COMPANY_ID]."  AND `user_id` = ".$userid." AND `map_date`>= '".$sev_map_date."' AND `map_date`<= '".$map_date."' AND is_active =0 GROUP BY map_date";
         $data = $callConfig->getAllRows($query);
@@ -2270,7 +2267,6 @@ class mobileUserClass extends userClass{
     }
     public function getMobileReceipts($get){
         global $callConfig;
-        $return = array();
         $resciptlist = $this->getReceipts($get);
         return $resciptlist['payments'];
     }
@@ -2291,7 +2287,6 @@ class mobileUserClass extends userClass{
     public function insertMobileReceipts($get,$post){
         global $callConfig;
 
-        $return = array();
         $post['customer_id'] = array($post['customer_id']);
         $newary = $post;
         $paymentpostdata22 = $post['payment'];
@@ -2954,6 +2949,7 @@ class mobileUserClass extends userClass{
         $project_phases = $callConfig->getAllRows($query);
         $return['project_phases'] = $project_phases;
         if($get['rid']!=""){
+            // Intentionally empty
         }
         return $return;
     }
@@ -3178,14 +3174,7 @@ class mobileUserClass extends userClass{
         return $res_pass;
     }
     public function mobileInitials($str) {
-        $ret = '';
-        foreach (explode(' ', $str) as $word) {
-            $ret .= strtoupper($word[0]);
-        }
-        if(strlen($ret)>2){
-            $ret = substr($ret, 0,1).substr($ret, -1);
-        }
-        return strtoupper($ret);
+        return $this->initials($str);
     }
     public function mobileuserlogout($get){
         global $callConfig;
@@ -3805,29 +3794,21 @@ class mobileUserClass extends userClass{
         $payment_terms_transsql = "SELECT id, transaction_table, transaction_id, party_id, due_date, amount, tax_amount, due_amount, pending_amount FROM payment_term_transactions WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND transaction_table IN('sales_invoices','purchase_invoices')";
         $payment_terms_transres = $callConfig->getAllRows($payment_terms_transsql);
         foreach($payment_terms_transres as $paytermtran){
-            if($paytermtran->transaction_table == "purchase_invoices"){
-                if(isset($purchase_invoices[$paytermtran->transaction_id])){
-                    $purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-                }
+            if($paytermtran->transaction_table == "purchase_invoices" && isset($purchase_invoices[$paytermtran->transaction_id])){
+                $purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
             }
-            if($paytermtran->transaction_table == "sales_invoices"){
-                if(isset($sales_invoices[$paytermtran->transaction_id])){
-                    $sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-                }
+            if($paytermtran->transaction_table == "sales_invoices" && isset($sales_invoices[$paytermtran->transaction_id])){
+                $sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
             }
         }
         $paymentssql = "SELECT paya.id, pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut  FROM payments pay, payment_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.payment_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
         $paymentsres1 = $callConfig->getAllRows($paymentssql);
         foreach($paymentsres1 as $payterm){
-            if($payterm->transaction_table == "purchase_invoices"){
-                if(isset($purchase_invoices[$payterm->transaction_id])){
-                    $purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-                }
+            if($payterm->transaction_table == "purchase_invoices" && isset($purchase_invoices[$payterm->transaction_id])){
+                $purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
             }
-            if($payterm->transaction_table == "sales_invoices"){
-                if(isset($sales_invoices[$payterm->transaction_id])){
-                    $sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-                }
+            if($payterm->transaction_table == "sales_invoices" && isset($sales_invoices[$payterm->transaction_id])){
+                $sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
             }
         }
 
@@ -3955,29 +3936,21 @@ public function GETProcurementModulesDashboardSummary($get){
         $payment_terms_transsql = "SELECT id, transaction_table, transaction_id, party_id, due_date, amount, tax_amount, due_amount, pending_amount, advance_offer_date, advance_offer_amount FROM payment_term_transactions WHERE company_id = '".$get[self::KEY_COMPANY_ID]."' AND is_active = 0 AND transaction_table IN('sales_invoices','purchase_invoices')";
         $payment_terms_transres = $callConfig->getAllRows($payment_terms_transsql);
         foreach($payment_terms_transres as $paytermtran){
-            if($paytermtran->transaction_table == "purchase_invoices"){
-                if(isset($purchase_invoices[$paytermtran->transaction_id])){
-                    $purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-                }
+            if($paytermtran->transaction_table == "purchase_invoices" && isset($purchase_invoices[$paytermtran->transaction_id])){
+                $purchase_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
             }
-            if($paytermtran->transaction_table == "sales_invoices"){
-                if(isset($sales_invoices[$paytermtran->transaction_id])){
-                    $sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
-                }
+            if($paytermtran->transaction_table == "sales_invoices" && isset($sales_invoices[$paytermtran->transaction_id])){
+                $sales_invoices[$paytermtran->transaction_id]->payment_term_transactions[$paytermtran->id] =  $paytermtran;
             }
         }
         $paymentssql = "SELECT paya.id, pay.transaction_type, pay.payment_date, paya.party_id, paya.transaction_table, paya.transaction_id, paya.transaction_no, paya.total_paid_amonut  FROM payments pay, payment_allocations paya WHERE pay.company_id = 1 AND pay.company_id = paya.company_id AND pay.id = paya.payment_id AND pay.is_active = 0 AND pay.current_status = 199 AND paya.transaction_table IN('sales_invoices','purchase_invoices')";
         $paymentsres1 = $callConfig->getAllRows($paymentssql);
         foreach($paymentsres1 as $payterm){
-            if($payterm->transaction_table == "purchase_invoices"){
-                if(isset($purchase_invoices[$payterm->transaction_id])){
-                    $purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-                }
+            if($payterm->transaction_table == "purchase_invoices" && isset($purchase_invoices[$payterm->transaction_id])){
+                $purchase_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
             }
-            if($payterm->transaction_table == "sales_invoices"){
-                if(isset($sales_invoices[$payterm->transaction_id])){
-                    $sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
-                }
+            if($payterm->transaction_table == "sales_invoices" && isset($sales_invoices[$payterm->transaction_id])){
+                $sales_invoices[$payterm->transaction_id]->payments[$payterm->id] =  $payterm;
             }
         }
 
@@ -4723,7 +4696,7 @@ public function GETProcurementVendorLedger($get){
             $return['GETALREADYADDEDREFRESH'] = $transaction_details;
 
         }elseif($gettype== "getPaymentTermsResult"){
-
+            // Intentionally empty
         }elseif($gettype== "REFTRANSACTIONSTABLES"){
             $query = "SELECT id, transaction_table, reference_table FROM `dynamic_reference_tables` WHERE company_id = ".$get[self::KEY_COMPANY_ID]." AND reference_table = '".$transaction_table.self::SQL_QUOTE_AND_IS_ACTIVE_0;
             $queryres = $callConfig->getAllRows($query);
@@ -7314,7 +7287,6 @@ public function GETProcurementVendorLedger($get){
 
     public function toaddprojecttaskdetails($get,$post){
         global $callConfig;
-        $message = '';
         $whatsup = '';
         $notuser2 = array(); $notuser1 = array();
         $post[self::KEY_IS_ACTIVE]=0;
@@ -7469,6 +7441,7 @@ public function GETProcurementVendorLedger($get){
     public function toinsertactivitydata($post,$get){
         global $callConfig;
         if($post[self::KEY_TABLE_NAME]=='projects'){
+            // Intentionally empty
         }
         $comments = "Update this card ".str_replace("_"," ",$post[self::KEY_FIELD])." to be ".$post['fielddata'];
         $insert_array = array(self::KEY_COMPANY_ID=>$get[self::KEY_COMPANY_ID],self::KEY_APPLICATION_TABLE_NAME=>self::TBL_PROJECT_TASK_DETAILS,self::KEY_TRANSACTION_ID=>$post['update_id'],'activity_type'=>'task_details','filed_name'=>$post[self::KEY_FIELD],'new_value'=>$post['fielddata'],'comments'=>$comments ,self::KEY_IS_ACTIVE=>'0',self::KEY_CURRENT_STATUS=>'0',self::KEY_CREATED_BY=>$get[self::KEY_USER_ID]);
@@ -7497,11 +7470,6 @@ public function GETProcurementVendorLedger($get){
             $notuser[$uid->id] = $uid->id;
         }
         $notuser[$get[self::KEY_USER_ID]] = $get[self::KEY_USER_ID];
-        $datafiled = array('task_name');
-        $msg1 =    "Task ".$taskdetails->task_name."  is updated : ".str_replace("_"," ",$post[self::KEY_FIELD])." is changed.";
-        if(in_array($post[self::KEY_FIELD], $datafiled)){
-            $msg1 =    "Task ".$taskdetails->task_name."  is updated : ".str_replace("_"," ",$post[self::KEY_FIELD])." ( ".$post['fielddata']." ) is changed.";
-        }
         $msg1 = "Task ".$taskdetails->task_name." is assigned to ".$taskowner->display_name;
         $notdata1 = array(self::KEY_COMPANY_ID=>$get[self::KEY_COMPANY_ID], 'notification_message'=> $msg1, self::KEY_TRANSACTION_NUMBER=>$taskdetails->id, self::KEY_APPLICATION_TABLE_NAME=>self::TBL_PROJECT_TASK_DETAILS, 'type'=>'INFORMATION', 'notification_users'=>$notuser,'option'=>'COM_VIEW_PROJECT_KANBAN&RID='.$taskdetails->project_id,'module_setup_id'=>25);
         $this->tosendnotifiations($notdata1);

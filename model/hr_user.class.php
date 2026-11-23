@@ -448,7 +448,7 @@ class hrUserClass extends userClass{
         $holidays = "SELECT holiday_date FROM holidays WHERE is_active=0 and company_id=".$data['company_id']." AND MONTH(holiday_date) = '".$month."' AND YEAR(holiday_date) = '".$year."'";
         $holidaysdata = $callConfig->getAllRows($holidays); //holidays
         $holidaysdatas = array();
-        foreach ($holidaysdata as $hkey=>$hvalue){
+        foreach ($holidaysdata as $hvalue){
             $holidaysdatas[] = $hvalue->holiday_date;
         }
         $returnarray['holidaysdatas']  = $holidaysdatas;
@@ -1142,7 +1142,7 @@ class hrUserClass extends userClass{
         $res=$callConfig->insertRecord('employee_terminations',$inserttermination);
 
         $updaterecord = array('date_of_leaving'=>$this->dateconvertdbformat($post['effective_date']));
-        $res1 = $callConfig->updateRecord('employees',$updaterecord,'id',$post['emp_id'],);
+        $callConfig->updateRecord('employees',$updaterecord,'id',$post['emp_id']);
 
         return $res;
     }
@@ -1208,7 +1208,7 @@ class hrUserClass extends userClass{
          $return['post'] = $post;
          $data = json_decode($post['data'],1);
          $insert_array = array('company_id'=>$get['company_id'], 'start_date_time'=>date('Y-m-d h:i:s'), 'command'=> 'cronjob/vms_add_vendors.php' , 'is_active'=>'0', 'current_status'=>'0', 'created_date'=>date('Y-m-d h:i:s'));
-         $ccres = $callConfig->insertRecord('cron_jobs', $insert_array);
+         $callConfig->insertRecord('cron_jobs', $insert_array);
          $outarray = array('id', 'user_id', 'check_import', 'status_date', 'from_date', 'to_date', 'created_by', 'created_date', 'updated_by', 'updated_date', 'old_ref_id', 'vendor_import_date', 'vendor_import_details');
          $insertids = array();
          $resids = array();
@@ -1228,7 +1228,7 @@ class hrUserClass extends userClass{
          $return['resids'] = $resids;
          $return['insertids'] = $insertids;
          $updatequery = "UPDATE cron_jobs SET end_date_time = '".date('Y-m-d h:i:s')."', updated_date ='".date('Y-m-d h:i:s')."'";
-         $uprrr = $callConfig->executeQuery($updatequery);
+         $callConfig->executeQuery($updatequery);
          return $return;
     }
     public function getEmployeeLeaveBalanceReports($get){
@@ -1468,7 +1468,7 @@ class hrUserClass extends userClass{
         $data['eraning_query'] = $query;
         $data['eraning'] = $erans;
         $query = "SELECT * FROM salary_stracture WHERE company_id =".$get['company_id']." AND id=1 AND is_active = 0";
-        $sal = $callConfig->getRow($query);
+        $callConfig->getRow($query);
         $data['salary_stracture'] = $sal;
         return $data;
     }
@@ -1481,7 +1481,7 @@ class hrUserClass extends userClass{
         $data['eraning_query'] = $query;
         $data['eraning'] = $erans;
         $query = "SELECT * FROM salary_stracture WHERE company_id =".$get['company_id']." AND id=1 AND is_active = 0";
-        $sal = $callConfig->getRow($query);
+        $callConfig->getRow($query);
         //--------------ESI List------------//
         $whr="company_id= '".$get['company_id']."' AND is_active=0";
         $esiquery = $callConfig->selectQuery('emp_state_insaurance','*',$whr,'','','');
