@@ -31,49 +31,49 @@ function replacestringwithpreview($data,$val){
 </div>
 <div class="modal-body" >
 <div class="">
-<?php if($_POST['template_id']==2){ ?>
+<?php if ($templateId === 2) { ?>
     <div class="card">
         <div class="card-header">
-            <h5><?php echo replacestringwithpreview($inputFildsArray,$_POST['email_subject']); ?></h5>
+            <h5><?php echo replacestringwithpreview($inputFildsArray, $emailSubject); ?></h5>
             <h6 class="float-end"><?php echo date("h : i A"); ?></h6>
         </div>
     </div>
 <div class="" style="  width: 100%;">
-<table role="presentation"  style="padding:20px;background-color:#f5f5f5;width: 100%;display: inline-block;" align="middle" cellpadding="0" cellspacing="0" border="0">
+<table role="presentation" style="padding: 20px; background-color: #f5f5f5; width: 100%; display: inline-block; border-collapse: collapse;">
         <tr>
         <td style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424;padding:15px 0px;">
-        <img class="fix" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo $_SESSION['config']['display_logo']; ?>" border="0" alt="" />
+        <img class="fix" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
         </td>
         </tr>
         <tr>
         <td>
-        <table role="presentation"  style="padding:10px;background-color:#FFFFFF; width: 100%;display: inline-block;"  >
+        <table role="presentation" style="padding: 10px; background-color: #FFFFFF; width: 100%; display: inline-block; border-collapse: collapse;">
         <tr>
         <td style="padding-left:32px; padding-top:20px; font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424" >
-        <?php  echo replacestringwithpreview($inputFildsArray,$_POST['email_header']);?>
+        <?php  echo replacestringwithpreview($inputFildsArray, $emailHeader);?>
         </td>
         </tr>
         <tr>
         <td style="padding-left:33px; font-size:18px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
-        <?php  echo replacestringwithpreview($inputFildsArray,$_POST['email_sub_header']);?>
+        <?php  echo replacestringwithpreview($inputFildsArray, $emailSubHeader);?>
         </td>
         </tr>
         <tr>
         <td style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
-        <div  style=" width: 100% !important; word-break: break-word;white-space: initial;"><?php echo replacestringwithpreview($inputFildsArray,$_POST['email_content_1']);?> </div>
+        <div  style=" width: 100% !important; word-break: break-word;white-space: initial;"><?php echo replacestringwithpreview($inputFildsArray, $emailContent1);?> </div>
 
         </td>
         </tr>
 
         <tr>
         <td style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;"><div  style=" width: 100% !important; word-break: break-word;white-space: initial;">
-        <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_content_2']);?>
+        <?php echo  replacestringwithpreview($inputFildsArray, $emailContent2);?>
             </div>
         </td>
         </tr>
         <tr>
         <td style="padding:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-        <button style="background-color: #00abfb;border-radius: 0.25rem;text-align: center;font-size: 18px;font-family: sans-serif;font-weight: bold;    padding: 0 30px 0 30px;height: 45px;color: #FFFFFF; border: 1px solid transparent;" ><a style="text-decoration:none;color:#FFF;" ><?php echo replacestringwithpreview($inputFildsArray,$_POST['button_label']);?></a></button>
+        <button type="button" style="background-color: #00abfb; border-radius: 0.25rem; text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px; height: 45px; color: #FFFFFF; border: 1px solid transparent;"><span style="text-decoration: none; color: #FFF;"><?php echo replacestringwithpreview($inputFildsArray, $buttonLabel); ?></span></button>
         </td>
         </tr>
         <tr>
@@ -91,14 +91,14 @@ function replacestringwithpreview($data,$val){
         </td>
         </tr>
         <tr>
-        <td style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;"><?php echo replacestringwithpreview($inputFildsArray,$_POST['email_fotter']);?>
+        <td style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;"><?php echo replacestringwithpreview($inputFildsArray, $emailFooter);?>
         </td>
         </tr>
         </table>
     </div>
 
-<?php  }elseif($_POST['template_id']==1){ ?>
-<style type="text/css">
+<?php } elseif ($templateId === 1) { ?>
+<style>
         .hhml{
             font-family: sans-serif;
             line-height: 1.15;
@@ -144,27 +144,27 @@ function replacestringwithpreview($data,$val){
 <div class="hhml">
     <div class="card">
         <div class="card-header">
-            <h5><?php echo replacestringwithpreview($inputFildsArray,$_POST['email_subject']); ?></h5>
+            <h5><?php echo replacestringwithpreview($inputFildsArray, $emailSubject); ?></h5>
             <h6 class="float-end"><?php echo date("h : i A"); ?></h6>
         </div>
     </div>
 
-    <table role="presentation" width="100%" bgcolor="#f6f8f1" border="0" cellpadding="0" cellspacing="0">
+    <table role="presentation" style="width: 100%; background-color: #f6f8f1; border-collapse: collapse;">
                 <tr>
                 <td>
                 <!--[if (gte mso 9)|(IE)]>
-                <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+                <table role="presentation" style="width: 600px; margin-left: auto; margin-right: auto; border-collapse: collapse;">
                 <tr>
                 <td>
                 <![endif]-->
-                <table role="presentation" bgcolor="#ffffff" class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+                <table role="presentation" class="content" style="background-color: #ffffff; margin-left: auto; margin-right: auto; border-collapse: collapse;">
                 <tr>
-                <td bgcolor="#fofofo" class="header">
-                <table role="presentation" width="70" align="left" border="0" cellpadding="0" cellspacing="0">
+                <td class="header" style="background-color: #f0f0f0;">
+                <table role="presentation" style="width: 70px; border-collapse: collapse;">
                 <tr>
-                <td height="70" style="padding:15px 0px;">
-                <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo $_SESSION['config']['display_logo']; ?>" border="0" alt="" /></br>
-<?php echo $_SESSION['config']['name']; ?>
+                <td style="height: 70px; padding: 15px 0;">
+                <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" /><br>
+<?= htmlspecialchars($companyName, ENT_QUOTES, 'UTF-8'); ?>
             </td>
                 </tr>
                 </table>
@@ -173,17 +173,17 @@ function replacestringwithpreview($data,$val){
                 </tr>
                 <tr>
                 <td class="innerpadding borderbottom">
-                <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
                 <tr>
                 <td class="h2">
-                <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_header']);?>
+                <?php echo  replacestringwithpreview($inputFildsArray, $emailHeader);?>
 
                 </td>
                 </tr>
                 <tr>
                 <td class="bodycopy">
 
-                <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_sub_header']);?>
+                <?php echo  replacestringwithpreview($inputFildsArray, $emailSubHeader);?>
                 </td>
                 </tr>
                 </table>
@@ -191,19 +191,19 @@ function replacestringwithpreview($data,$val){
                 </tr>
                 <tr>
                 <td class="innerpadding borderbottom">
-                <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
                 <tr>
                 <td class="h2">
-                <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_addressed']);?>
+                <?php echo  replacestringwithpreview($inputFildsArray, $emailAddressed);?>
                 </td>
                 </tr>
                 <tr>
                 <td class="bodycopy"><div  style=" width: 100% !important; word-break: break-word;white-space: initial;">
-                <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_content_1']);?></div>
+                <?php echo  replacestringwithpreview($inputFildsArray, $emailContent1);?></div>
                 </td>
                 </tr>
                 <td class="bodycopy"><div  style=" width: 100% !important; word-break: break-word;white-space: initial;">
-                <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_content_2']);?></div>
+                <?php echo  replacestringwithpreview($inputFildsArray, $emailContent2);?></div>
                 </td>
                 </tr>
                 <tr>
@@ -211,7 +211,7 @@ function replacestringwithpreview($data,$val){
                 <table role="presentation">
                 <tr>
                 <td>
-                <button class=" buttonwrapper button"><a target="_blank" href="#"><?= __('View Order') ?></a></button>
+                <a role="button" class="buttonwrapper button" target="_blank" rel="noopener noreferrer" href="#"><?= __('View Order') ?></a>
                 </td>
                 </tr>
                 </table>
@@ -227,45 +227,45 @@ function replacestringwithpreview($data,$val){
                 </tr>
                 <tr>
                 <td style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
-                <?php echo replacestringwithpreview($inputFildsArray,$_POST['email_fotter']);?>
+                <?php echo replacestringwithpreview($inputFildsArray, $emailFooter);?>
 
                 </td>
                 </tr>
                 </table>
         </div>
-<?php  }elseif($_POST['template_id']==3){ ?>
+<?php } elseif ($templateId === 3) { ?>
 <div class="card">
         <div class="card-header">
-            <h5><?php echo replacestringwithpreview($inputFildsArray,$_POST['email_subject']); ?></h5>
+            <h5><?php echo replacestringwithpreview($inputFildsArray, $emailSubject); ?></h5>
             <h6 class="float-end"><?php echo date("h : i A"); ?></h6>
         </div>
     </div>
-    <table role="presentation" width="70%" style="padding:20px;background-color:#f5f5f5;" align="center" cellpadding="0" cellspacing="0" border="0">
+    <table role="presentation" style="width: 70%; padding: 20px; background-color: #f5f5f5; margin-left: auto; margin-right: auto; border-collapse: collapse;">
         <tr>
         <td style="font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424; padding:15px 0px;">
-        <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo $_SESSION['config']['display_logo']; ?>" border="0" alt="" />
+        <img class="fix mb-2" src="<?php echo UPLOADIMGURL; ?>/all/<?php echo htmlspecialchars($displayLogo, ENT_QUOTES, 'UTF-8'); ?>" alt="<?= htmlspecialchars($companyName !== '' ? $companyName : __('Company Logo'), ENT_QUOTES, 'UTF-8'); ?>" />
 
         </td>
         </tr>
         <tr>
         <td>
-        <table role="presentation" width="100%" style="padding:10px;background-color:#FFFFFF;"  >
+        <table role="presentation" style="width: 100%; padding: 10px; background-color: #FFFFFF; border-collapse: collapse;">
         <tr>
         <td style="padding-left:32px; padding-top:20px; font-size:24px; letter-spacing:normal; font-stretch:normal; font-weight:bold; line-height:1.79; color:#252424" >
-                <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_header']);?>
+                <?php echo  replacestringwithpreview($inputFildsArray, $emailHeader);?>
 
         </td>
         </tr>
         <tr>
         <td style="padding-left:33px; font-size:18px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
 
-            <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_sub_header']);?>
+            <?php echo  replacestringwithpreview($inputFildsArray, $emailSubHeader);?>
 
         </td>
         </tr>
         <tr>
         <td style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b" >
-        <div  style=" width: 100% !important; word-break: break-word;white-space: initial;"><?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_content_1']);?> </div>
+        <div  style=" width: 100% !important; word-break: break-word;white-space: initial;"><?php echo  replacestringwithpreview($inputFildsArray, $emailContent1);?> </div>
 
         </td>
         </tr>
@@ -277,7 +277,7 @@ function replacestringwithpreview($data,$val){
         <tr>
         <td style="padding-left:33px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
             <div  style=" width: 100% !important; word-break: break-word;white-space: initial;">
-        <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_content_2']);?></div>
+        <?php echo  replacestringwithpreview($inputFildsArray, $emailContent2);?></div>
 
         </td>
         </tr>
@@ -290,7 +290,7 @@ function replacestringwithpreview($data,$val){
         <tr>
         <td style="padding:15px 0px; font-size:14px; font-stretch:normal; line-height:1.79; letter-spacing:normal; font-weight:normal; color:#5c5b5b;">
 
-        <?php echo  replacestringwithpreview($inputFildsArray,$_POST['email_fotter']);?>
+        <?php echo  replacestringwithpreview($inputFildsArray, $emailFooter);?>
 
         </td>
         </tr>

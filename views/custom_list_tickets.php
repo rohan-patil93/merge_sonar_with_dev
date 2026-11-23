@@ -27,6 +27,7 @@ $data2 = urlencode(json_encode($wh2));
 $url2 = API."?mode=gettabledetailswithconditions&table=employees&data=".$data2;
 $emplist = callAPI($url2);
 $emplist = json_decode($emplist,1);
+$ticketDateFmt = 'd M Y h:i A';
 $stausresult = ViewStatusData();
 
 $ststutwhere["where"] = array('table_name '=>'project_tasks','is_active'=>0,'company_id'=>$_SESSION['company_id']);
@@ -102,9 +103,9 @@ function updateticketdetails(id,filed_name,value,pri=''){
         uid = emp[3];
         $(".emp_id"+id).show();
         if(emp[1]!=""){
-          $(".emp_id"+id).html('<img src="uploads/all/'+emp[1]+'"   class="img-radius img-50 align-top m-r-15" data-fallback="\"   alt="Attachment Preview" />');
+          $(".emp_id"+id).html('<img src="uploads/all/'+emp[1]+'"   class="img-radius img-50 align-top m-r-15" data-fallback=""   alt="Attachment Preview" />');
         }else{
-            $(".emp_id"+id).html('<span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" >'+emp[2]+'</span>');
+            $(".emp_id"+id).html('<span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" >'+emp[2]+'</span>');
         }
     }
     if(filed_name == 'priority'){
@@ -129,8 +130,8 @@ document.onreadystatechange = function () {
   }
 }
 function chnagessttts(){
-    var element = document.getElementById("rowid<?php echo $rid; ?>");
-    $("#rowid<?php echo $rid; ?>").addClass("bg-info");
+    var element = document.getElementById("rowid<?php echo htmlspecialchars($rid, ENT_QUOTES, 'UTF-8'); ?>");
+    $("#rowid<?php echo htmlspecialchars($rid, ENT_QUOTES, 'UTF-8'); ?>").addClass("bg-info");
     element.scrollIntoView();
     element.scrollIntoView(false);
     element.scrollIntoView({block: "end"});
@@ -176,11 +177,11 @@ function chnagessttts(){
             </div>
             <div class="col-lg-2">
                 <span class="form-label col-form-label"><?= __('From'); ?></span>
-                <input aria-label="<?= htmlspecialchars(__('Filterfromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo $_POST['filterfromdate']; ?>">
+                <input aria-label="<?= htmlspecialchars(__('Filterfromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo htmlspecialchars($_POST['filterfromdate'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
             </div>
             <div class="col-lg-2">
                 <span class="form-label col-form-label"><?= __('To'); ?></span>
-                <input aria-label="<?= htmlspecialchars(__('Filtertodate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo $_POST['filtertodate']; ?>">
+                <input aria-label="<?= htmlspecialchars(__('Filtertodate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo htmlspecialchars($_POST['filtertodate'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
             </div>
             <div class="col-lg-2">
                 <span class="form-label col-form-label"></span>
@@ -192,14 +193,14 @@ function chnagessttts(){
         <table id="basic-btn" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
-                    <th scope=\"col\">#</th>
-                    <th scope=\"col\"><?= __('Ticket ID'); ?></th>
-                    <th scope=\"col\"><?= __('Ticket Subject'); ?></th>
-                    <th scope=\"col\"><?= __('Created Date'); ?></th>
-                    <th scope=\"col\"><?= __('Last Reply'); ?></th>
-                    <th scope=\"col\"><?= __('Priority'); ?></th>
-                    <th scope=\"col\"><?= __('Status'); ?></th>
-                    <th scope=\"col\"><?= __('Actions'); ?></th>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= __('Ticket ID'); ?></th>
+                    <th scope="col"><?= __('Ticket Subject'); ?></th>
+                    <th scope="col"><?= __('Created Date'); ?></th>
+                    <th scope="col"><?= __('Last Reply'); ?></th>
+                    <th scope="col"><?= __('Priority'); ?></th>
+                    <th scope="col"><?= __('Status'); ?></th>
+                    <th scope="col"><?= __('Actions'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -216,11 +217,11 @@ function chnagessttts(){
                     }
                     ?>
                     <tr >
-                        <th scope=\"col\"><?php echo $mk;?></th>
+                        <th scope="col"><?php echo $mk;?></th>
                         <td><a href="index.php?option=COM_VIEW_TICKETS&Rid=<?php echo deocdeId($projecttasklists['id']); ?>"><span class="text-primary"><?php echo $projecttasklists['ticket_id']; ?></span></a></td>
                         <td><?php echo $projecttasklists['task_name']; ?></td>
-                        <td><?php echo date('d M Y h:i A',strtotime($projecttasklists['created_date'])); ?></td>
-                        <td><?php echo date('d M Y h:i A',strtotime($projecttasklists['updated_date'])); ?></td>
+                        <td><?php echo date($ticketDateFmt,strtotime($projecttasklists['created_date'])); ?></td>
+                        <td><?php echo date($ticketDateFmt,strtotime($projecttasklists['updated_date'])); ?></td>
                         <td>
                             <div class="dropdown-success dropdown open">
                                 <button class="btn <?php echo $bg_color; ?> dropdown-toggle waves-effect waves-light btn-round priority<?php echo $projecttasklists['id']; ?>" type="button" id="dropdown-3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" <?php echo $projecttasklists['client_id'] == $_SESSION['userid']?'':'disabled'; ?>><?php echo $priority; ?></button>
@@ -283,11 +284,11 @@ function chnagessttts(){
             </div>
             <div class="col-lg-2">
                 <span class="form-label col-form-label"><?= __('From'); ?></span>
-                <input aria-label="<?= htmlspecialchars(__('Filterfromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo $_POST['filterfromdate']; ?>">
+                <input aria-label="<?= htmlspecialchars(__('Filterfromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo htmlspecialchars($_POST['filterfromdate'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
             </div>
             <div class="col-lg-2">
                 <span class="form-label col-form-label"><?= __('To'); ?></span>
-                <input aria-label="<?= htmlspecialchars(__('Filtertodate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo $_POST['filtertodate']; ?>">
+                <input aria-label="<?= htmlspecialchars(__('Filtertodate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo htmlspecialchars($_POST['filtertodate'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
             </div>
             <div class="col-lg-2">
                 <span class="form-label col-form-label"></span>
@@ -299,14 +300,14 @@ function chnagessttts(){
         <table id="basic-btn_2" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
-                    <th scope=\"col\">#</th>
-                    <th scope=\"col\"><?= __('Ticket ID'); ?></th>
-                    <th scope=\"col\"><?= __('Ticket Subject'); ?></th>
-                    <th scope=\"col\"><?= __('Created Date'); ?></th>
-                    <th scope=\"col\"><?= __('Last Reply'); ?></th>
-                    <th scope=\"col\"><?= __('Priority'); ?></th>
-                    <th scope=\"col\"><?= __('Status'); ?></th>
-                    <th scope=\"col\"><?= __('Actions'); ?></th>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= __('Ticket ID'); ?></th>
+                    <th scope="col"><?= __('Ticket Subject'); ?></th>
+                    <th scope="col"><?= __('Created Date'); ?></th>
+                    <th scope="col"><?= __('Last Reply'); ?></th>
+                    <th scope="col"><?= __('Priority'); ?></th>
+                    <th scope="col"><?= __('Status'); ?></th>
+                    <th scope="col"><?= __('Actions'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -324,11 +325,11 @@ function chnagessttts(){
                     }
                     ?>
                     <tr>
-                        <th scope=\"col\"><?php echo $mk;?></th>
+                        <th scope="col"><?php echo $mk;?></th>
                         <td><a href="index.php?option=COM_VIEW_TICKETS&Rid=<?php echo deocdeId($projecttasklists['id']); ?>"><span class="text-primary"><?php echo $projecttasklists['ticket_id']; ?></span></a></td>
                         <td><?php echo $projecttasklists['task_name']; ?></td>
-                        <td><?php echo date('d M Y h:i A',strtotime($projecttasklists['created_date'])); ?></td>
-                        <td><?php echo  date('d M Y h:i A',strtotime($projecttasklists['updated_date'])); ?></td>
+                        <td><?php echo date($ticketDateFmt,strtotime($projecttasklists['created_date'])); ?></td>
+                        <td><?php echo  date($ticketDateFmt,strtotime($projecttasklists['updated_date'])); ?></td>
                         <td>
                             <div class="dropdown-success dropdown open">
                                 <button class="btn <?php echo $bg_color; ?> dropdown-toggle waves-effect waves-light btn-round priority<?php echo $projecttasklists['id']; ?>" disabled type="button" id="dropdown-3_3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ><?php echo $priority; ?></button>
@@ -552,11 +553,11 @@ switch($dash['current_status']){
             </div>
             <div class="col-lg-2 form-group">
                 <span class="form-label col-form-label"><?= __('From'); ?></span>
-                <input aria-label="<?= htmlspecialchars(__('Filterfromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo $_POST['filterfromdate']; ?>">
+                <input aria-label="<?= htmlspecialchars(__('Filterfromdate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filterfromdate" value="<?php echo htmlspecialchars($_POST['filterfromdate'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
             </div>
             <div class="col-lg-2 form-group">
                 <span class="form-label col-form-label"><?= __('To'); ?></span>
-                <input aria-label="<?= htmlspecialchars(__('Filtertodate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo $_POST['filtertodate']; ?>">
+                <input aria-label="<?= htmlspecialchars(__('Filtertodate'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control datepicker" name="filtertodate" value="<?php echo htmlspecialchars($_POST['filtertodate'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
             </div>
             <div class="col-lg-1">
                 <button  type="submit" class="btn btn-primary m-t-45 btn-md"><?= __('Search'); ?></button>
@@ -567,15 +568,15 @@ switch($dash['current_status']){
         <table id="basic-btn_3" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
-                    <th scope=\"col\">#</th>
-                    <th scope=\"col\"><?= __('Ticket ID'); ?></th>
-                    <th scope=\"col\"><?= __('Ticket Subject'); ?></th>
-                    <th scope=\"col\"><?= __('Assigned Staff'); ?></th>
-                    <th scope=\"col\"><?= __('Created Date'); ?></th>
-                    <th scope=\"col\"><?= __('Last Reply'); ?></th>
-                    <th scope=\"col\"><?= __('Priority'); ?></th>
-                    <th scope=\"col\"><?= __('Status'); ?></th>
-                    <th scope=\"col\"><?= __('Actions'); ?></th>
+                    <th scope="col">#</th>
+                    <th scope="col"><?= __('Ticket ID'); ?></th>
+                    <th scope="col"><?= __('Ticket Subject'); ?></th>
+                    <th scope="col"><?= __('Assigned Staff'); ?></th>
+                    <th scope="col"><?= __('Created Date'); ?></th>
+                    <th scope="col"><?= __('Last Reply'); ?></th>
+                    <th scope="col"><?= __('Priority'); ?></th>
+                    <th scope="col"><?= __('Status'); ?></th>
+                    <th scope="col"><?= __('Actions'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -592,7 +593,7 @@ switch($dash['current_status']){
                     }
                     ?>
                     <tr id="rowid<?php echo $projecttasklists['id']; ?>">
-                        <th scope=\"col\"><?php echo $mk;?></th>
+                        <th scope="col"><?php echo $mk;?></th>
                         <td><a href="index.php?option=COM_VIEW_TICKETS&Rid=<?php echo deocdeId($projecttasklists['id']); ?>"><span class="text-primary"><?php echo $projecttasklists['ticket_id']; ?></span></a></td>
                         <td><?php echo $projecttasklists['task_name']; ?></td>
                         <td class="text-left">
@@ -603,7 +604,7 @@ switch($dash['current_status']){
                                 if($empdata[0]['image']!="") {?>
                                     <img src="uploads/all/<?php echo $empdata[0]['image']; ?>"   class="img-radius img-50 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php } else { ?>
-                                    <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empdata[0]['display_name']); ?></span>
+                                    <span  aria-label="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius img-50 align-top m-r-10 custom_txt_round p-2 f-12 text-center" ><?php echo initials($empdata[0]['display_name']); ?></span>
                                 <?php } ?>
                                 </span>
                                 <div class="d-inline-block">
@@ -618,8 +619,8 @@ switch($dash['current_status']){
                         <?php }else{ echo "-- ";
 } ?>
                         </td>
-                        <td><?php echo date('d M Y h:i A',strtotime($projecttasklists['created_date'])); ?></td>
-                        <td><?php echo  date('d M Y h:i A',strtotime($projecttasklists['updated_date'])); ?></td>
+                        <td><?php echo date($ticketDateFmt,strtotime($projecttasklists['created_date'])); ?></td>
+                        <td><?php echo  date($ticketDateFmt,strtotime($projecttasklists['updated_date'])); ?></td>
                         <td>
                             <div class="dropdown-success dropdown open">
                                 <button class="btn <?php echo $bg_color; ?> dropdown-toggle waves-effect waves-light btn-round priority<?php echo $projecttasklists['id']; ?>" type="button" id="dropdown-3_5" data-bs-toggle="dropdown" aria-haspopup="true" <?php echo $projecttasklists['client_id'] == $_SESSION['userid']?'':'disabled'; ?> aria-expanded="true"><?php echo $priority; ?></button>

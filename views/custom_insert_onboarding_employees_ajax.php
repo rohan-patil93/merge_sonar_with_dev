@@ -61,7 +61,7 @@ $agemonth = ($interval->m < 10 && $interval->m >= 0) ? '0'.$interval->m:$interva
 $agecalc = $interval->y.".".$agemonth;
 $bank_work_flow = "Y";
 ?>
-<script type="text/javascript">
+<script>
     function tochangedeparment(){
 
     }
@@ -396,7 +396,7 @@ $bank_work_flow = "Y";
                 <div class="card-px text-center py-20 mt-2">
                     <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No Employee Banks'); ?> </p>
                     <div class="text-center px-4">
-                        <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                        <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__('Work in progress'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-height: 300px!important;">
                     </div>
                 </div>
             <?php } ?>
@@ -562,7 +562,7 @@ $bank_work_flow = "Y";
         <div class="card-px text-center py-20 mt-2">
             <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No Employment History'); ?> </p>
             <div class="text-center px-4">
-                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__('Work in progress'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
         </div>
     <?php } ?>
@@ -599,7 +599,7 @@ $bank_work_flow = "Y";
         <div class="card-px text-center py-20 mt-2">
             <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No Educational Details'); ?> </p>
             <div class="text-center px-4">
-                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__('Work in progress'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
         </div>
     <?php } ?>
@@ -627,7 +627,7 @@ $bank_work_flow = "Y";
             <div class="card-px text-center py-20 mt-2">
                 <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No Dependents'); ?> </p>
                 <div class="text-center px-4">
-                    <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                    <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__('Work in progress'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-height: 300px!important;">
                 </div>
             </div>
         <?php } ?>
@@ -658,7 +658,7 @@ $bank_work_flow = "Y";
         <div class="card-px text-center py-20 mt-2">
             <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No Emergency Contact'); ?> </p>
             <div class="text-center px-4">
-                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__('Work in progress'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
         </div>
     <?php } ?>
@@ -795,7 +795,7 @@ $bank_work_flow = "Y";
         <div class="card-px text-center py-20 mt-2">
             <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No VISA Details'); ?> </p>
             <div class="text-center px-4">
-                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__('Work in progress'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
         </div>
     <?php } ?>
@@ -827,7 +827,7 @@ $bank_work_flow = "Y";
         <div class="card-px text-center py-20 mt-2">
             <p class="text-muted f-16 fw-bold "><i class="ti-alert text-warning"></i> <?php echo __('No Skills'); ?> </p>
             <div class="text-center px-4">
-                <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+                <img class="mw-100 mh-300px" alt="<?= htmlspecialchars(__('Work in progress'), ENT_QUOTES, 'UTF-8'); ?>" src="assets/images/work.png" style="max-height: 300px!important;">
             </div>
         </div>
     <?php } ?>
@@ -924,7 +924,7 @@ $bank_work_flow = "Y";
                             <span> <i class="fa fa-camera"></i> <?php echo __('&nbsp; Change Image'); ?></span>
                         </label>
                         <input type="file" name="profile_image" id="profile_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)"/>
-                        <img alt="" src="<?php echo "uploads/all/".$data['image'] ; ?>" id="outputprofile_image" width="200" data-onerror-src="uploads/all/no-image.jpg"/>
+                        <img alt="<?= htmlspecialchars(__('Employee Photo'), ENT_QUOTES, 'UTF-8'); ?>" src="<?php echo "uploads/all/".$data['image'] ; ?>" id="outputprofile_image" width="200" data-onerror-src="uploads/all/no-image.jpg"/>
                         <input type="hidden" name="old_profile_image" value="<?php echo $data['image'] ;  ?>">
                     </div>
                 </div>
@@ -1119,7 +1119,7 @@ $bank_work_flow = "Y";
                 ?>
                   <div class="radio radio-inline">
                    <label class="form-label <?php echo $text_color_ety; ?>">
-                     <input type="radio" onclick="employeementtypepopup(<?php echo $employee_id.",".$emptypes['genc_detail_code'];?>)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php } ?> value="<?php echo $emptypes['genc_detail_code'];?>" style="display:none"/>
+                     <input aria-label="Employee field" type="radio" onclick="employeementtypepopup(<?php echo $employee_id.",".$emptypes['genc_detail_code'];?>)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" name="employee_type" <?php if($data['employee_type'] == $emptypes['genc_detail_code']) {?> checked="checked" <?php } ?> value="<?php echo $emptypes['genc_detail_code'];?>" style="display:none"/>
                      <i class="helper"></i><?php echo __($emptypes['genc_detail_name']);?> </label>
                    </div>
                 <?php } ?>
@@ -1133,12 +1133,12 @@ $bank_work_flow = "Y";
                 <div class="form-radio <?php echo $readonlycheck; ?>">
                    <div class="radio radio-inline">
                            <label class="form-label <?php echo $text_color_ebi; ?>">
-                         <input type="radio" name="billable" <?php if($data['billable'] ==0) {?> checked="checked" <?php } ?> value="0" style="display:none" />
+                         <input aria-label="Billable" type="radio" name="billable" <?php if($data['billable'] ==0) {?> checked="checked" <?php } ?> value="0" style="display:none" />
                          <i class="helper"></i><?php echo __('Yes'); ?> </label>
                     </div>
                     <div class="radio radio-inline">
                         <label class="form-label <?php echo $text_color_ebi; ?>">
-                           <input type="radio" name="billable" <?php if($data['billable'] ==1) {?> checked="checked" <?php } ?> value="1" style="display:none" />
+                           <input aria-label="Billable" type="radio" name="billable" <?php if($data['billable'] ==1) {?> checked="checked" <?php } ?> value="1" style="display:none" />
                            <i class="helper"></i><?php echo __('No'); ?> </label>
                     </div>
                 </div>
@@ -1171,15 +1171,7 @@ $bank_work_flow = "Y";
                 <input aria-label="<?= htmlspecialchars(__('Date of birth'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control form-control-lg datepicker"  value="<?php echo  ($data['date_of_birth']!="0000-00-00" && $data['date_of_birth']!="")?fromDate($data['date_of_birth']):""; ?>"  name="date_of_birth" placeholder="<?php echo __('Enter Date of Birth'); ?>" onchange="selectdateOfBirth(this.value)" />
             </div>
         </div>
-        <?php } /**if($fieldaccesright['field']['age']!="NA"){
-            $readonlycheck = $fieldaccesright['field']['age'] !="E"?"custom_readonly":"";
-
-              ?>
-        <div class="col-xl-6 mt-2" >
-            <span class="form-label d-inline-block fw-bold"><?php echo __('Age In Years'); ?> </span>
-            <input aria-label="Age" type="text" class="form-control <?php echo $readonlycheck; ?>"  value="<?php echo $agecalc; ?>" name="age" id="age" readonly/>
-        </div>
-        <?php } **/ if($fieldaccesright['field']['marital_status']!="NA"){
+        <?php } // Age field handled in employee profile details if($fieldaccesright['field']['marital_status']!="NA"){
               $readonlycheck = $fieldaccesright['field']['marital_status'] !="E"?"custom_readonly":""; ?>
         <div class="col-xl-6 mt-2" >
             <span class="form-label d-inline-block fw-bold"><?php echo __('Marital Status'); ?></span>
@@ -1189,7 +1181,7 @@ $bank_work_flow = "Y";
              ?>
                 <div class="radio radio-inline">
                      <label class="form-label">
-                           <input onclick="showmarriagedate(this.value);" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" type="radio" name="marital_status" <?php if($data['marital_status'] == $marital_stat['id']) {?> checked="checked" <?php } ?> value="<?php echo $marital_stat['id']; ?>" style="display:none"/>
+                           <input aria-label="Marital Status" onclick="showmarriagedate(this.value);" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}" type="radio" name="marital_status" <?php if($data['marital_status'] == $marital_stat['id']) {?> checked="checked" <?php } ?> value="<?php echo $marital_stat['id']; ?>" style="display:none"/>
                            <i class="helper"></i>
                            <?php echo $marital_stat['marital_status_name']; ?>
                      </label>
@@ -1219,7 +1211,7 @@ $bank_work_flow = "Y";
                 ?>
                 <div class="radio radio-inline">
                      <label class="form-label <?php echo $text_color_gen; ?>">
-                       <input  type="radio" name="gender" <?php if($data['gender'] == $gender_data['genc_detail_code']){ ?>  checked="checked" <?php } ?> value="<?php echo $gender_data['genc_detail_code'];?>" style="display:none"/>
+                       <input aria-label="Gender"  type="radio" name="gender" <?php if($data['gender'] == $gender_data['genc_detail_code']){ ?>  checked="checked" <?php } ?> value="<?php echo $gender_data['genc_detail_code'];?>" style="display:none"/>
                        <i class="helper"></i>
                        <?php echo __($gender_data['genc_detail_name']); ?>
                      </label>
@@ -1267,7 +1259,7 @@ $bank_work_flow = "Y";
               $readonlycheck = $fieldaccesright['field']['disability_percentage'] !="E"?"custom_readonly":""; ?>
         <div class="col-xl-6 mt-2" id="disabilitypercentage_id" style="<?php echo $data['disability'] =="0"?"":"display: none"; ?>">
             <label class="form-label"><?php echo __('Disability percentage'); ?></label>
-            <input type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="" name="disability_percentage" value="<?php echo $data['disability_percentage']; ?>"/>
+            <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="" name="disability_percentage" value="<?php echo $data['disability_percentage']; ?>"/>
         </div>
         <?php }
         if($fieldaccesright['field']['work_textile_industry']!="NA"){
@@ -1280,7 +1272,7 @@ $bank_work_flow = "Y";
                 ?>
                 <div class="radio radio-inline">
                      <label class="form-label">
-                       <input   type="radio" name="work_textile_industry" <?php if($data['work_textile_industry '] == $ynkey || ($data['work_textile_industry'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
+                       <input aria-label="Work Textile Industry"   type="radio" name="work_textile_industry" <?php if($data['work_textile_industry '] == $ynkey || ($data['work_textile_industry'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
                        <i class="helper"></i>
                        <?php echo $yn; ?>
                     </label>
@@ -1299,7 +1291,7 @@ $bank_work_flow = "Y";
                 ?>
                 <div class="radio radio-inline">
                      <label class="form-label">
-                       <input   type="radio" name="physically_challenged_children" <?php if($data['physically_challenged_children'] == $ynkey || ($data['work_textile_industry'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
+                       <input aria-label="Physically Challenged Children"   type="radio" name="physically_challenged_children" <?php if($data['physically_challenged_children'] == $ynkey || ($data['work_textile_industry'] =="" && $ynkey=='1')) {?>  checked="checked" <?php } ?> value="<?php echo $ynkey; ?>" style="display:none"/>
                        <i class="helper"></i>
                        <?php echo $yn; ?>
                      </label>
@@ -1312,21 +1304,21 @@ $bank_work_flow = "Y";
               $readonlycheck = $fieldaccesright['field']['soc_facebook'] !="E"?"custom_readonly":""; ?>
         <div class="col-lg-6 mt-2" >
             <label  class="form-label"><?php echo __('Facebook Link'); ?></label>
-            <input type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Facebook URL'); ?>" name="soc_facebook" value="<?php echo $data['soc_facebook']; ?>"/>
+            <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Facebook URL'); ?>" name="soc_facebook" value="<?php echo $data['soc_facebook']; ?>"/>
         </div>
         <?php }
         if($fieldaccesright['field']['soc_twitter']!="NA"){
               $readonlycheck = $fieldaccesright['field']['soc_twitter'] !="E"?"custom_readonly":""; ?>
         <div class="col-lg-6 mt-2" >
             <label  class="form-label"><?php echo __('Twitter Link'); ?></label>
-            <input type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Twitter URL'); ?>" name="soc_twitter" value="<?php echo $data['soc_twitter']; ?>"/>
+            <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter Twitter URL'); ?>" name="soc_twitter" value="<?php echo $data['soc_twitter']; ?>"/>
         </div>
         <?php }
         if($fieldaccesright['field']['soc_linkedin']!="NA"){
               $readonlycheck = $fieldaccesright['field']['soc_linkedin'] !="E"?"custom_readonly":""; ?>
         <div class="col-lg-6 mt-2" >
             <label  class="form-label"><?php echo __('Linkedin Link'); ?></label>
-            <input type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter LinkedIn URL'); ?>" name="soc_linkedin" value="<?php echo $data['soc_linkedin']; ?>"/>
+            <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  placeholder="<?php echo __('Enter LinkedIn URL'); ?>" name="soc_linkedin" value="<?php echo $data['soc_linkedin']; ?>"/>
         </div>
         <?php } ?>
     </div>
@@ -1355,14 +1347,14 @@ $bank_work_flow = "Y";
               $readonlycheck = $fieldaccesright['field']['bank_link'] !="E"?"custom_readonly":""; ?>
         <div class="col-lg-6 mt-2" >
             <label  class="form-label"><?php echo __('IFSC Code'); ?></label>
-            <input type="text" class="form-control <?php echo $readonlycheck; ?>"  name="bank_link" value="<?php echo $data['bank_link']; ?>" placeholder="<?php echo __('Enter IFSC Code'); ?>"/>
+            <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  name="bank_link" value="<?php echo $data['bank_link']; ?>" placeholder="<?php echo __('Enter IFSC Code'); ?>"/>
         </div>
         <?php }
         if($fieldaccesright['field']['bank_account_no']!="NA"){
               $readonlycheck = $fieldaccesright['field']['bank_account_no'] !="E"?"custom_readonly":""; ?>
         <div class="col-lg-6 mt-2" >
             <label  class="form-label"><?php echo __('Account No'); ?></label>
-            <input type="text" class="form-control <?php echo $readonlycheck; ?>"  name="bank_account_no" value="<?php echo $data['bank_account_no']; ?>" placeholder="<?php echo __('Enter Account No'); ?>"/>
+            <input aria-label="Employee field" type="text" class="form-control <?php echo $readonlycheck; ?>"  name="bank_account_no" value="<?php echo $data['bank_account_no']; ?>" placeholder="<?php echo __('Enter Account No'); ?>"/>
         </div>
         <?php } ?>
     </div>
@@ -1517,7 +1509,7 @@ $bank_work_flow = "Y";
 
                 <div class="<?php echo $readonlycheck; ?>">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Cover Under Pf" class="form-check-input"
                                type="radio"
                                name="cover_under_pf"
                                value="0"
@@ -1526,7 +1518,7 @@ $bank_work_flow = "Y";
                     </div>
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Cover Under Pf" class="form-check-input"
                                type="radio"
                                name="cover_under_pf"
                                value="1"
@@ -1544,7 +1536,7 @@ $bank_work_flow = "Y";
 
                 <div class="<?php echo $readonlycheck; ?>">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Cover Under Pf" class="form-check-input"
                                type="radio"
                                name="cover_under_pf"
                                value="0"
@@ -1553,7 +1545,7 @@ $bank_work_flow = "Y";
                     </div>
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Cover Under Pf" class="form-check-input"
                                type="radio"
                                name="cover_under_pf"
                                value="1"
@@ -1578,7 +1570,7 @@ $bank_work_flow = "Y";
 
                 <div class="<?php echo $readonlycheck; ?>">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Cover Under Pf" class="form-check-input"
                                type="radio"
                                name="cover_under_pf"
                                value="0"
@@ -1587,7 +1579,7 @@ $bank_work_flow = "Y";
                     </div>
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Cover Under Pf" class="form-check-input"
                                type="radio"
                                name="cover_under_pf"
                                value="1"
@@ -1608,7 +1600,7 @@ $bank_work_flow = "Y";
 
                 <div class="<?php echo $readonlycheck; ?>">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Cover Under Esi" class="form-check-input"
                                type="radio"
                                name="cover_under_esi"
                                value="0"
@@ -1617,7 +1609,7 @@ $bank_work_flow = "Y";
                     </div>
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Cover Under Esi" class="form-check-input"
                                type="radio"
                                name="cover_under_esi"
                                value="1"
@@ -1638,7 +1630,7 @@ $bank_work_flow = "Y";
 
                 <div class="<?php echo $readonlycheck; ?>">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Clock Event Type" class="form-check-input"
                                type="radio"
                                name="clock_event_type"
                                value="Y"
@@ -1647,7 +1639,7 @@ $bank_work_flow = "Y";
                     </div>
 
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input"
+                        <input aria-label="Clock Event Type" class="form-check-input"
                                type="radio"
                                name="clock_event_type"
                                value="N"
@@ -1662,7 +1654,7 @@ $bank_work_flow = "Y";
               $readonlycheck = $fieldaccesright['field']['b_machine_id'] !="E"?"custom_readonly":""; ?>
             <div class="col-xl-6 mt-2" >
                 <label class="form-label"><?php echo __('B Machine Id'); ?></label>
-                <input class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" name="b_machine_id" value="<?php echo $data['b_machine_id']; ?>" />
+                <input aria-label="Employee field" class="form-control form-control-lg <?php echo $readonlycheck; ?>" type="text" name="b_machine_id" value="<?php echo $data['b_machine_id']; ?>" />
             </div>
         <?php } ?>
 
@@ -1693,7 +1685,7 @@ $bank_work_flow = "Y";
             <tr class="<?php echo $readonlycheck; ?>">
                 <th class="p-2"><?php echo __('Aadhar Card'); ?></th>
                 <td class="p-2">
-                    <input type="text" name="adhar_no" class="form-control" value="<?php echo dynamicDataDecode($data['adhar_no']); ?>" placeholder="<?php echo __('Enter Aadhar Card'); ?>">
+                    <input aria-label="Adhar No" type="text" name="adhar_no" class="form-control" value="<?php echo dynamicDataDecode($data['adhar_no']); ?>" placeholder="<?php echo __('Enter Aadhar Card'); ?>">
                 </td>
                 <td class="p-2"> - </td>
                 <td class="p-2">
@@ -1711,10 +1703,10 @@ $bank_work_flow = "Y";
             <tr class="<?php echo $readonlycheck; ?>">
                 <th class="p-2"><?php echo __('Passport'); ?></th>
                 <td class="p-2">
-                    <input type="text" name="passport" class="form-control" value="<?php echo dynamicDataDecode($data['passport']); ?>" placeholder="<?php echo __('Enter Passport No.'); ?>">
+                    <input aria-label="Passport" type="text" name="passport" class="form-control" value="<?php echo dynamicDataDecode($data['passport']); ?>" placeholder="<?php echo __('Enter Passport No.'); ?>">
                 </td>
                 <td class="p-2">
-                    <input type="text" name="passport_expiry_date" class="form-control datepicker" value="<?php echo ($data['passport_expiry_date']!="0000-00-00" && $data['passport_expiry_date']!="")?fromDate($data['passport_expiry_date']):""; ?>" placeholder="<?php echo __('Enter Expiry Date'); ?>">
+                    <input aria-label="Passport Expiry Date" type="text" name="passport_expiry_date" class="form-control datepicker" value="<?php echo ($data['passport_expiry_date']!="0000-00-00" && $data['passport_expiry_date']!="")?fromDate($data['passport_expiry_date']):""; ?>" placeholder="<?php echo __('Enter Expiry Date'); ?>">
                 </td>
                 <td class="p-2">
                     <input class="form-control" type="file" id="passport_attachment" value="" accept=".jpg,.png,.pdf">
@@ -1731,10 +1723,10 @@ $bank_work_flow = "Y";
             <tr class="<?php echo $readonlycheck; ?>">
                 <th class="p-2"><?php echo __('Driving Licence'); ?></th>
                 <td class="p-2">
-                    <input type="text" name="driving_licence" class="form-control" value="<?php echo dynamicDataDecode($data['driving_licence']); ?>" placeholder="<?php echo __('Enter Driving Licence'); ?>">
+                    <input aria-label="Driving Licence" type="text" name="driving_licence" class="form-control" value="<?php echo dynamicDataDecode($data['driving_licence']); ?>" placeholder="<?php echo __('Enter Driving Licence'); ?>">
                 </td>
                 <td class="p-2">
-                    <input type="text" name="driving_licence_expiry_date" class="form-control datepicker" value="<?php echo ($data['driving_licence_expiry_date']!="0000-00-00" && $data['driving_licence_expiry_date']!="")?fromDate($data['driving_licence_expiry_date']):""; ?>" placeholder="<?php echo __('Enter Driving Licence Expiry Date'); ?>">
+                    <input aria-label="Driving Licence Expiry Date" type="text" name="driving_licence_expiry_date" class="form-control datepicker" value="<?php echo ($data['driving_licence_expiry_date']!="0000-00-00" && $data['driving_licence_expiry_date']!="")?fromDate($data['driving_licence_expiry_date']):""; ?>" placeholder="<?php echo __('Enter Driving Licence Expiry Date'); ?>">
                 </td>
                 <td class="p-2">
                     <input class="form-control" type="file" id="driving_licence_attachment" value="" accept=".jpg,.png,.pdf">
@@ -1752,7 +1744,7 @@ $bank_work_flow = "Y";
             <tr class="<?php echo $readonlycheck; ?>">
                 <th class="p-2"><?php echo __('PAN Number'); ?></th>
                 <td class="p-2">
-                    <input type="text" name="pan_number" class="form-control" value="<?php echo dynamicDataDecode($data['pan_number']); ?>" placeholder="<?php echo __('Enter PAN Number'); ?>">
+                    <input aria-label="Pan Number" type="text" name="pan_number" class="form-control" value="<?php echo dynamicDataDecode($data['pan_number']); ?>" placeholder="<?php echo __('Enter PAN Number'); ?>">
                 </td>
                 <td class="p-2"> - </td>
                 <td class="p-2">
@@ -1771,7 +1763,7 @@ $bank_work_flow = "Y";
             <tr class="<?php echo $readonlycheck; ?>">
                 <th class="p-2"><?php echo __('PF Number'); ?></th>
                 <td class="p-2">
-                    <input type="text" name="pf_no" class="form-control" value="<?php echo dynamicDataDecode($data['pf_no']); ?>" placeholder="<?php echo __('Enter PF Number'); ?>">
+                    <input aria-label="Pf No" type="text" name="pf_no" class="form-control" value="<?php echo dynamicDataDecode($data['pf_no']); ?>" placeholder="<?php echo __('Enter PF Number'); ?>">
                 </td>
                 <td class="p-2"> - </td>
                 <td class="p-2">
@@ -1790,7 +1782,7 @@ $bank_work_flow = "Y";
             <tr class="<?php echo $readonlycheck; ?>">
                 <th class="p-2"><?php echo __('UAN Number'); ?></th>
                 <td class="p-2">
-                    <input type="text" name="pf_uan" class="form-control" value="<?php echo dynamicDataDecode($data['pf_uan']); ?>" placeholder="<?php echo __('Enter UAN Number'); ?>">
+                    <input aria-label="Pf Uan" type="text" name="pf_uan" class="form-control" value="<?php echo dynamicDataDecode($data['pf_uan']); ?>" placeholder="<?php echo __('Enter UAN Number'); ?>">
                 </td>
                 <td class="p-2"> - </td>
                 <td class="p-2">
@@ -1808,7 +1800,7 @@ $bank_work_flow = "Y";
             <tr class="<?php echo $readonlycheck; ?>">
                 <th class="p-2"><?php echo __('GOSI Number'); ?></th>
                 <td class="p-2">
-                    <input type="text" name="gosi_number" class="form-control" value="<?php echo dynamicDataDecode($data['gosi_number']); ?>" placeholder="<?php echo __('Enter GOSI Number'); ?>">
+                    <input aria-label="Gosi Number" type="text" name="gosi_number" class="form-control" value="<?php echo dynamicDataDecode($data['gosi_number']); ?>" placeholder="<?php echo __('Enter GOSI Number'); ?>">
                 </td>
                 <td class="p-2"> - </td>
                 <td class="p-2">
@@ -1831,11 +1823,11 @@ $bank_work_flow = "Y";
     ?>
     <table class="table <?php echo $readonlycheck; ?>" id="extable">
         <tr>
-            <th width="30%"><?php echo __('Company Name'); ?> <span class="text-danger">*</span></th>
-            <th width="30%"><?php echo __('Job Description'); ?></th>
-            <th width="16%"> <?php echo __('From Date'); ?> <span class="text-danger">*</span></th>
-            <th width="16%"> <?php echo __('To Date'); ?></th>
-            <th width="8%"> <?php echo __('File'); ?> <span class="f-10"><?php echo __('(jpg,pdf)'); ?></span></th>
+            <th  style="width: 30%;"><?php echo __('Company Name'); ?> <span class="text-danger">*</span></th>
+            <th  style="width: 30%;"><?php echo __('Job Description'); ?></th>
+            <th  style="width: 16%;"> <?php echo __('From Date'); ?> <span class="text-danger">*</span></th>
+            <th  style="width: 16%;"> <?php echo __('To Date'); ?></th>
+            <th  style="width: 8%;"> <?php echo __('File'); ?> <span class="f-10"><?php echo __('(jpg,pdf)'); ?></span></th>
         </tr>
         <?php
         $k=1;
@@ -1847,16 +1839,16 @@ $bank_work_flow = "Y";
             <tr id="exp_details_<?php echo $k; ?>">
                 <td class="p-2">
                     <input type="hidden" name="expe_rowid[]" class="form-control" autocomplete="off" value="<?php echo $expe['id']; ?>">
-                    <input type="text" name="company_name[]" class="form-control " autocomplete="off" value="<?php echo $expe['company_name']; ?>" placeholder="<?php echo __('Enter Company Name'); ?>">
+                    <input aria-label="Company Name" type="text" name="company_name[]" class="form-control " autocomplete="off" value="<?php echo $expe['company_name']; ?>" placeholder="<?php echo __('Enter Company Name'); ?>">
                 </td>
                 <td class="p-2">
-                    <input type="text" name="job_descrption[]" class="form-control" value="<?php echo $expe['job_descrption']; ?>" autocomplete="off" placeholder="<?php echo __('Enter Job Description'); ?>">
+                    <input aria-label="Job Descrption" type="text" name="job_descrption[]" class="form-control" value="<?php echo $expe['job_descrption']; ?>" autocomplete="off" placeholder="<?php echo __('Enter Job Description'); ?>">
                 </td>
                 <td class="p-2">
-                    <input type="text d-block" name="work_from[]" class="form-control datepicker"  value="<?php echo ($expe['work_from']!="0000-00-00" && $expe['work_from']!="")?fromDate($expe['work_from']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter From Date'); ?>">
+                    <input aria-label="Work From" type="text d-block" name="work_from[]" class="form-control datepicker"  value="<?php echo ($expe['work_from']!="0000-00-00" && $expe['work_from']!="")?fromDate($expe['work_from']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter From Date'); ?>">
                 </td>
                 <td class="p-2">
-                    <input type="txet" name="work_to[]" class="form-control datepicker" value="<?php echo ($expe['work_to']!="0000-00-00" && $expe['work_to']!="")?fromDate($expe['work_to']):""; ?>"autocomplete="off" placeholder="<?php echo __('Enter To Date'); ?>">
+                    <input aria-label="Work To" type="txet" name="work_to[]" class="form-control datepicker" value="<?php echo ($expe['work_to']!="0000-00-00" && $expe['work_to']!="")?fromDate($expe['work_to']):""; ?>"autocomplete="off" placeholder="<?php echo __('Enter To Date'); ?>">
                 </td>
                 <td class="p-2 w-b-w-s">
                     <div class="row">
@@ -1864,7 +1856,7 @@ $bank_work_flow = "Y";
                             <div class="image-input image-input-empty image-input-outline" id="kt_image_5">
                                  <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Upload'); ?>">
                                   <span><i class="fa fa-upload"></i></span>
-                                  <input type="file" name="work_experience_attachment" class="form-control" onchange="getAttachedFileName(this,'workexperiencefilename_<?php echo $k; ?>')">
+                                  <input aria-label="Work Experience Attachment" type="file" name="work_experience_attachment" class="form-control" onchange="getAttachedFileName(this,'workexperiencefilename_<?php echo $k; ?>')">
                                   <input type="hidden" name="old_work_experience_attachment[]" value="<?php echo $expe['file']; ?>">
                                 </label>
                             </div>
@@ -1902,13 +1894,13 @@ $bank_work_flow = "Y";
 
     <table class="table <?php echo $readonlycheck; ?>" id="edutable">
         <tr>
-            <th class="" width="20%"><?php echo __('Institute Name'); ?> <span class="text-danger">*</span></th>
-            <th class="thheader" width="20%"><?php echo __('Type'); ?> <span class="text-danger">*</span></th>
-            <th class="thheader" width="15%"> <?php echo __('Start Date'); ?> <span class="text-danger">*</span></th>
-            <th class="thheader" width="15%"> <?php echo __('End Date'); ?></th>
-            <th class="thheader" width="10%"><?php echo __('Score'); ?></th>
-            <th width="10%"> <?php echo __('File'); ?> <span class="f-10"><?php echo __('(jpg,pdf)'); ?></span></th>
-            <th width="10%"> </th>
+            <th class=""  style="width: 20%;"><?php echo __('Institute Name'); ?> <span class="text-danger">*</span></th>
+            <th class="thheader"  style="width: 20%;"><?php echo __('Type'); ?> <span class="text-danger">*</span></th>
+            <th class="thheader"  style="width: 15%;"> <?php echo __('Start Date'); ?> <span class="text-danger">*</span></th>
+            <th class="thheader"  style="width: 15%;"> <?php echo __('End Date'); ?></th>
+            <th class="thheader"  style="width: 10%;"><?php echo __('Score'); ?></th>
+            <th  style="width: 10%;"> <?php echo __('File'); ?> <span class="f-10"><?php echo __('(jpg,pdf)'); ?></span></th>
+            <th  style="width: 10%;"> </th>
         </tr>
         <?php
         if(count((array)$emp_educations)=='0'){
@@ -1919,7 +1911,7 @@ $bank_work_flow = "Y";
             <tr id="emp_educations_<?php echo $mk; ?>">
                 <td class="p-2">
                     <input type="hidden" name="institute_rowid[]" class="form-control " autocomplete="off" value="<?php echo $inst['id']; ?>">
-                    <input type="text" name="institute_name[]" class="form-control" value="<?php echo $inst['institute_name']; ?>" autocomplete="off" placeholder="<?php echo __('Enter Institute Name'); ?>">
+                    <input aria-label="Institute Name" type="text" name="institute_name[]" class="form-control" value="<?php echo $inst['institute_name']; ?>" autocomplete="off" placeholder="<?php echo __('Enter Institute Name'); ?>">
                 </td>
                 <td class="w-full p-2">
                     <select class="form-control form-select js-example-basic-single" name="education_type[]" >
@@ -1930,13 +1922,13 @@ $bank_work_flow = "Y";
                     </select>
                 </td>
                 <td class="p-2">
-                    <input type="text" name="start_date[]" class="form-control datepicker" value="<?php echo (!empty($inst['start_date']) && $inst['start_date']!="0000-00-00")?fromDate($inst['start_date']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter Start date'); ?>">
+                    <input aria-label="Start Date" type="text" name="start_date[]" class="form-control datepicker" value="<?php echo (!empty($inst['start_date']) && $inst['start_date']!="0000-00-00")?fromDate($inst['start_date']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter Start date'); ?>">
                 </td>
                 <td class="p-2">
-                    <input type="text" name="end_date[]" class="form-control datepicker" value="<?php echo (!empty($inst['end_date']) && $inst['end_date']!="0000-00-00")?fromDate($inst['end_date']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter End Date'); ?>">
+                    <input aria-label="End Date" type="text" name="end_date[]" class="form-control datepicker" value="<?php echo (!empty($inst['end_date']) && $inst['end_date']!="0000-00-00")?fromDate($inst['end_date']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter End Date'); ?>">
                 </td>
                 <td class="p-2">
-                    <input type="text" name="score[]" class="form-control" value="<?php echo $inst['score'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Score'); ?>">
+                    <input aria-label="Score" type="text" name="score[]" class="form-control" value="<?php echo $inst['score'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Score'); ?>">
                 </td>
                 <td class="p-2 w-b-w-s">
                     <div class="row">
@@ -1944,7 +1936,7 @@ $bank_work_flow = "Y";
                             <div class="image-input image-input-empty image-input-outline" id="kt_image_5">
                                  <label class="btn-hover-text-primary" data-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="<?php echo __('Upload'); ?>">
                                   <span><i class="fa fa-upload"></i></span>
-                                  <input type="file" name="educations_attachment" class="form-control" onchange="getAttachedFileName(this,'educationsfilename_<?php echo $mk; ?>')">
+                                  <input aria-label="Educations Attachment" type="file" name="educations_attachment" class="form-control" onchange="getAttachedFileName(this,'educationsfilename_<?php echo $mk; ?>')">
                                   <input type="hidden" name="old_educations_attachment[]" value="<?php echo $inst['file'] ?? ''; ?>">
                                 </label>
                             </div>
@@ -1981,10 +1973,10 @@ $bank_work_flow = "Y";
     ?>
     <table class="table <?php echo $readonlycheck; ?>" id="deptable">
         <tr>
-            <th width="30%"><?php echo __('Name'); ?> <span class="text-danger">*</span></th>
-            <th width="30%"><?php echo __('Relationship Type'); ?> <span class="text-danger">*</span></th>
-            <th width="30%"><?php echo __('Date Of Birth'); ?></th>
-            <th width="10%"> </th>
+            <th  style="width: 30%;"><?php echo __('Name'); ?> <span class="text-danger">*</span></th>
+            <th  style="width: 30%;"><?php echo __('Relationship Type'); ?> <span class="text-danger">*</span></th>
+            <th  style="width: 30%;"><?php echo __('Date Of Birth'); ?></th>
+            <th  style="width: 10%;"> </th>
         </tr>
         <?php
         if(count((array)$emp_dependents)=='0'){
@@ -1995,7 +1987,7 @@ $bank_work_flow = "Y";
             <tr id="employee_dependents_<?php echo $dk; ?>">
                 <td class="p-2">
                     <input type="hidden" name="dependent_rowid[]" class="form-control" autocomplete="off" value="<?php echo $depe['id'] ?? ''; ?>">
-                    <input type="text" name="dependent_name[]" class="form-control" value="<?php echo $depe['dependent_name'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Dependent Name'); ?>">
+                    <input aria-label="Dependent Name" type="text" name="dependent_name[]" class="form-control" value="<?php echo $depe['dependent_name'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Dependent Name'); ?>">
                 </td>
                 <td class="w-full p-2">
                     <select class="form-control form-select js-example-basic-single" name="dependent_relationship_type[]" >
@@ -2006,7 +1998,7 @@ $bank_work_flow = "Y";
                     </select>
                 </td>
                 <td class="p-2">
-                    <input type="text" name="dependent_date_of_birth[]" class="form-control datepicker" value="<?php echo (!empty($depe['dependent_date_of_birth']) && $depe['dependent_date_of_birth']!="0000-00-00")?fromDate($depe['dependent_date_of_birth']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter Date Of Birth'); ?>">
+                    <input aria-label="Dependent Date Of Birth" type="text" name="dependent_date_of_birth[]" class="form-control datepicker" value="<?php echo (!empty($depe['dependent_date_of_birth']) && $depe['dependent_date_of_birth']!="0000-00-00")?fromDate($depe['dependent_date_of_birth']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter Date Of Birth'); ?>">
                 </td>
                 <td class="p-2">
                     <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="" onclick="removedRow('employee_dependents_<?php echo $dk; ?>')" data-bs-original-title="<?php echo __('Remove'); ?>">
@@ -2032,11 +2024,11 @@ $bank_work_flow = "Y";
     ?>
     <table class="table <?php echo $readonlycheck; ?>" id="emergetable">
         <tr>
-            <th width="25%"><?php echo __('Name'); ?> <span class="text-danger">*</span></th>
-            <th width="25%"><?php echo __('Relationship'); ?> <span class="text-danger">*</span></th>
-            <th width="20%"><?php echo __('Home No'); ?></th>
-            <th width="20%"><?php echo __('Mobile No'); ?></th>
-            <th width="10%"> </th>
+            <th  style="width: 25%;"><?php echo __('Name'); ?> <span class="text-danger">*</span></th>
+            <th  style="width: 25%;"><?php echo __('Relationship'); ?> <span class="text-danger">*</span></th>
+            <th  style="width: 20%;"><?php echo __('Home No'); ?></th>
+            <th  style="width: 20%;"><?php echo __('Mobile No'); ?></th>
+            <th  style="width: 10%;"> </th>
         </tr>
         <?php
         if(count((array)$emp_contacts)=='0'){
@@ -2047,7 +2039,7 @@ $bank_work_flow = "Y";
             <tr id="emp_contacts_<?php echo $ck; ?>">
                 <td class="p-2">
                     <input type="hidden" name="contact_rowid[]" class="form-control" autocomplete="off" value="<?php echo $eno['id'] ?? ''; ?>">
-                    <input type="text" name="contact_name[]" class="form-control" value="<?php echo $eno['contact_name'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Contact Name'); ?>">
+                    <input aria-label="Contact Name" type="text" name="contact_name[]" class="form-control" value="<?php echo $eno['contact_name'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Contact Name'); ?>">
                 </td>
                 <td class="w-full p-2">
                     <select class="form-control form-select js-example-basic-single" name="contact_relationship[]" >
@@ -2058,10 +2050,10 @@ $bank_work_flow = "Y";
                     </select>
                 </td>
                 <td class="p-2">
-                    <input type="text" name="contact_home_no[]" class="form-control" value="<?php echo $eno['contact_home_no'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Contact Home No'); ?>">
+                    <input aria-label="Contact Home No" type="text" name="contact_home_no[]" class="form-control" value="<?php echo $eno['contact_home_no'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Contact Home No'); ?>">
                 </td>
                 <td class="p-2">
-                    <input type="text" name="contact_mobile_no[]" class="form-control" value="<?php echo $eno['contact_mobile_no'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Contact Mobile No'); ?>">
+                    <input aria-label="Contact Mobile No" type="text" name="contact_mobile_no[]" class="form-control" value="<?php echo $eno['contact_mobile_no'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Contact Mobile No'); ?>">
                 </td>
                 <td class="p-2">
                     <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="" onclick="removedRow('emp_contacts_<?php echo $ck; ?>')" data-bs-original-title="<?php echo __('Remove'); ?>">
@@ -2087,11 +2079,11 @@ $bank_work_flow = "Y";
     ?>
     <table class="table <?php echo $readonlycheck; ?>" id="emp_visatable">
         <tr>
-            <th width="30%"><?php echo __('Visa Number'); ?> <span class="text-danger">*</span></th>
-            <th width="30%"><?php echo __('Country'); ?> <span class="text-danger">*</span></th>
-            <th width="15%"><?php echo __('Issue Date'); ?> <span class="text-danger">*</span></th>
-            <th width="15%"><?php echo __('Expiry Date'); ?></th>
-            <th width="10%"> </th>
+            <th  style="width: 30%;"><?php echo __('Visa Number'); ?> <span class="text-danger">*</span></th>
+            <th  style="width: 30%;"><?php echo __('Country'); ?> <span class="text-danger">*</span></th>
+            <th  style="width: 15%;"><?php echo __('Issue Date'); ?> <span class="text-danger">*</span></th>
+            <th  style="width: 15%;"><?php echo __('Expiry Date'); ?></th>
+            <th  style="width: 10%;"> </th>
         </tr>
         <?php
         if(count((array)$emp_visa)=='0'){
@@ -2102,7 +2094,7 @@ $bank_work_flow = "Y";
             <tr id="emp_visa_<?php echo $vk; ?>">
                 <td class="p-2">
                     <input type="hidden" name="visa_rowid[]" class="form-control" autocomplete="off" value="<?php echo $visa['id'] ?? ''; ?>">
-                    <input type="text" name="visa_number[]" class="form-control" value="<?php echo $visa['visa_number'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Visa Number'); ?>">
+                    <input aria-label="Visa Number" type="text" name="visa_number[]" class="form-control" value="<?php echo $visa['visa_number'] ?? ''; ?>" autocomplete="off" placeholder="<?php echo __('Enter Visa Number'); ?>">
                 </td>
                 <td class="w-full p-2">
                     <select class="form-control form-select js-example-basic-single" name="country_id[]" >
@@ -2113,10 +2105,10 @@ $bank_work_flow = "Y";
                     </select>
                 </td>
                 <td class="p-2">
-                    <input type="text" name="visa_issue_date[]" class="form-control datepicker" value="<?php echo (!empty($visa['visa_issue_date']) && $visa['visa_issue_date']!="0000-00-00")?fromDate($visa['visa_issue_date']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter Visa Issue Date'); ?>">
+                    <input aria-label="Visa Issue Date" type="text" name="visa_issue_date[]" class="form-control datepicker" value="<?php echo (!empty($visa['visa_issue_date']) && $visa['visa_issue_date']!="0000-00-00")?fromDate($visa['visa_issue_date']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter Visa Issue Date'); ?>">
                 </td>
                 <td class="p-2">
-                    <input type="text" name="visa_expiry_date[]" class="form-control datepicker" value="<?php echo (!empty($visa['visa_expiry_date']) && $visa['visa_expiry_date']!="0000-00-00")?fromDate($visa['visa_expiry_date']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter Visa Expiry Date'); ?>">
+                    <input aria-label="Visa Expiry Date" type="text" name="visa_expiry_date[]" class="form-control datepicker" value="<?php echo (!empty($visa['visa_expiry_date']) && $visa['visa_expiry_date']!="0000-00-00")?fromDate($visa['visa_expiry_date']):""; ?>" autocomplete="off" placeholder="<?php echo __('Enter Visa Expiry Date'); ?>">
                 </td>
                 <td class="p-2">
                     <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-bs-toggle="tooltip" title="" onclick="removedRow('emp_visa_<?php echo $vk; ?>')" data-bs-original-title="<?php echo __('Remove'); ?>">
@@ -2136,7 +2128,6 @@ $bank_work_flow = "Y";
 <?php } ?>
 <?php } //INSERT part End ?>
 <?php
-}
 }
 if (empty($onboarding_employees_ajax_define_only)) {
     render_onboarding_employees_ajax_section(array(
