@@ -123,7 +123,7 @@ function callnext(qno,currentqno,qtype) {
       if(inputs[i].checked){
         //document.getElementById('summary'+currentqno).style.backgroundColor = '#0BB783' ;
         //document.getElementById('summarytext'+currentqno).style.Color = '#000000' ;
-		  //$('#summarytext'+currentqno).css("color","#000000");
+          //$('#summarytext'+currentqno).css("color","#000000");
       $('#summarytext'+currentqno).addClass("active");
         checkedval.push(inputs[i].value);
 
@@ -135,7 +135,7 @@ function callnext(qno,currentqno,qtype) {
    }else{
      document.getElementById('summary'+currentqno).style.backgroundColor = '#FFFFFF' ;
      //document.getElementById('summarytext'+currentqno).style.Color = '#000000' ;
-	 $('#summarytext'+currentqno).css("color","#000000");
+     $('#summarytext'+currentqno).css("color","#000000");
      delete obj[currentqno];
      console.log(obj);
    }
@@ -146,7 +146,7 @@ function callnext(qno,currentqno,qtype) {
   if(textval.length>0){
     //document.getElementById('summary'+currentqno).style.backgroundColor = '#0BB783' ;
     //document.getElementById('summarytext'+currentqno).style.Color = '#000000' ;
-	//$('#summarytext'+currentqno).css("color","#000000");
+    //$('#summarytext'+currentqno).css("color","#000000");
   $('#summarytext'+currentqno).addClass("active");
     checkedval.push(textval);
 
@@ -235,16 +235,16 @@ function submitsurvey(){
   <div class="container-fluid">
       <div class="card card-custom card-sticky" id="kt_page_sticky_card">
 
-		<div class="card-header mb-3">
-						<h5> <?php echo $survey_details['survey_name']; ?></h5>
-						<div class="card-header-right">
+        <div class="card-header mb-3">
+                        <h5> <?php echo $survey_details['survey_name']; ?></h5>
+                        <div class="card-header-right">
 
-					  <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-								<i class="icofont icofont-reply"></i>
-								<?php echo __('Back'); ?>
-							</a>
-						</div>
-					</div>
+                      <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
+                                <i class="icofont icofont-reply"></i>
+                                <?php echo __('Back'); ?>
+                            </a>
+                        </div>
+                    </div>
     <form method="post"  class="p-4" id="myform" name="myform" action="">
       <div class="row">
 

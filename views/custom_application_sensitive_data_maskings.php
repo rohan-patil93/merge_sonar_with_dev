@@ -323,11 +323,21 @@ if ($isPolicyActive) {
                                             if (isset($currentPolicy['restrictions'][$typeKey])) {
                                                 $cfg = $currentPolicy['restrictions'][$typeKey];
                                                 $isRestricted = (bool)$cfg['is_restricted'];
-                                                if (isset($cfg['show_first'])) $showFirst = (int)$cfg['show_first'];
-                                                if (isset($cfg['show_last']))  $showLast  = (int)$cfg['show_last'];
-                                                if (!empty($cfg['mask_char'])) $maskChar  = $cfg['mask_char'];
-                                                if (isset($cfg['preserve_domain'])) $preserveDomain = (int)$cfg['preserve_domain'];
-                                                if (isset($cfg['preserve_separators'])) $preserveSeparators = (int)$cfg['preserve_separators'];
+                                                if (isset($cfg['show_first'])) {
+                                                    $showFirst = (int)$cfg['show_first'];
+                                                }
+                                                if (isset($cfg['show_last'])) {
+                                                    $showLast  = (int)$cfg['show_last'];
+                                                }
+                                                if (!empty($cfg['mask_char'])) {
+                                                    $maskChar  = $cfg['mask_char'];
+                                                }
+                                                if (isset($cfg['preserve_domain'])) {
+                                                    $preserveDomain = (int)$cfg['preserve_domain'];
+                                                }
+                                                if (isset($cfg['preserve_separators'])) {
+                                                    $preserveSeparators = (int)$cfg['preserve_separators'];
+                                                }
                                             }
 
                                             $sampleMasked = maskValueDynamically($meta['sample_original'], $typeKey, [
@@ -831,12 +841,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </td>
                 <td>
-                    <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first" 
+                    <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-first"
                            name="custom_type_show_first[]" value="\${sFirst}"
                            oninput="updateRowPreview('\${key}')">
                 </td>
                 <td>
-                    <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last" 
+                    <input type="number" min="0" max="10" class="form-control form-control-sm font-monospace rule-show-last"
                            name="custom_type_show_last[]" value="\${sLast}"
                            oninput="updateRowPreview('\${key}')">
                 </td>

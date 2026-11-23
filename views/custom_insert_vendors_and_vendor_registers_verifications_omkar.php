@@ -1378,7 +1378,7 @@ function showNotificationIcon($status)
 
         var skipMessage = `
         <div class="alert alert-info mt-3" id="${stepType}_skip_message">
-            <i class="fa fa-info-circle"></i> ${stepName} verification has been skipped. 
+            <i class="fa fa-info-circle"></i> ${stepName} verification has been skipped.
             You can complete this verification later if needed.
         </div>`;
 

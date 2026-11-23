@@ -1,27 +1,8 @@
 <?php
-if (!function_exists('render_contract_services_contact_fields')) {
-function render_contract_services_contact_fields($ctx) {
-$contract_services_contact_section = $ctx['contract_services_contact_section'] ?? '';
-$formData = $ctx['formData'] ?? array();
-$fieldDisplay = $ctx['fieldDisplay'] ?? array();
-$amc_renew_disabled = $ctx['amc_renew_disabled'] ?? '';
-$contract_services = $ctx['contract_services'] ?? array();
-$selectedcontractservices = array();
-if (!empty($formData['contract_services_id'])) {
-    $selectedcontractservices = json_decode($formData['contract_services_id'], true);
-    if (!is_array($selectedcontractservices)) {
-        $selectedcontractservices = array();
-    }
-}
-$contact_persons = array();
-if (!empty($formData['contact_persons'])) {
-    $contact_persons = json_decode($formData['contact_persons'], true);
-    if (!is_array($contact_persons)) {
-        $contact_persons = array();
-    }
-}
+if (!function_exists('renderContractServicesSelect')) {
+    function renderContractServicesSelect($fieldDisplay, $amc_renew_disabled, $contract_services, $selectedcontractservices) {
+        $selectedSet = array_map('strval', (array)$selectedcontractservices);
 ?>
-<?php if ($contract_services_contact_section == 'services') { ?>
                         <div class="col-md-12" style="<?= $fieldDisplay['contract_services_id']['style'] ?>">
                             <label for="unified_contract_services_multiselect" class="form-label d-block"><?= __('Services '.$fieldDisplay['contract_services_id']['star']) ?></label>
                             <select name="contract_services_id[]" multiple class="form-control js-example-basic-multiple" id="unified_contract_services_multiselect" <?= $fieldDisplay['contract_services_id']['required'] ?> <?= $amc_renew_disabled ?? '' ?> aria-label="<?= __('Contract Services Id') ?>">
@@ -29,21 +10,19 @@ if (!empty($formData['contact_persons'])) {
                                     foreach ($contract_services as $conservRow) {
                                         $conserv = is_array($conservRow) ? $conservRow : json_decode(json_encode($conservRow), true);
                                         $serviceId = $conserv['id'] ?? '';
-                                        $isSelected = false;
-                                        if (count((array)$selectedcontractservices) > 0) {
-                                            foreach ($selectedcontractservices as $selId) {
-                                                if ((string) $selId == (string) $serviceId) {
-                                                    $isSelected = true;
-                                                    break;
-                                                }
-                                            }
-                                        } ?>
+                                        $isSelected = in_array((string)$serviceId, $selectedSet, true); ?>
                                         <option value="<?= htmlspecialchars($serviceId) ?>" <?= $isSelected ? 'selected' : '' ?>><?= htmlspecialchars(__($conserv['service_name'] ?? '')) ?></option>
                                     <?php }
                                 } ?>
                             </select>
                         </div>
-<?php } elseif ($contract_services_contact_section == 'contact_persons') { ?>
+<?php
+    }
+}
+
+if (!function_exists('renderContractServicesContactPersons')) {
+    function renderContractServicesContactPersons($contact_persons) {
+?>
                         <div class="col-md-12 d-flex flex-column gap-3" id="MoreContactPerson">
                             <?php if (count((array)$contact_persons) > 0) {
                                 $mk = 1;
@@ -74,7 +53,31 @@ if (!empty($formData['contact_persons'])) {
                                 <i class="fa fa-plus-circle me-1"></i> <?= __('Add More Contact Person') ?>
                             </button>
                         </div>
-<?php }
+<?php
+    }
 }
+
+if (!function_exists('renderContractServicesContactFields')) {
+    function renderContractServicesContactFields($ctx) {
+        $contract_services_contact_section = $ctx['contract_services_contact_section'] ?? '';
+        $formData = $ctx['formData'] ?? array();
+        $fieldDisplay = $ctx['fieldDisplay'] ?? array();
+        $amc_renew_disabled = $ctx['amc_renew_disabled'] ?? '';
+        $contract_services = $ctx['contract_services'] ?? array();
+        $selectedcontractservices = !empty($formData['contract_services_id']) ? json_decode($formData['contract_services_id'], true) : array();
+        if (!is_array($selectedcontractservices)) {
+            $selectedcontractservices = array();
+        }
+        $contact_persons = !empty($formData['contact_persons']) ? json_decode($formData['contact_persons'], true) : array();
+        if (!is_array($contact_persons)) {
+            $contact_persons = array();
+        }
+
+        if ($contract_services_contact_section == 'services') {
+            renderContractServicesSelect($fieldDisplay, $amc_renew_disabled, $contract_services, $selectedcontractservices);
+        } elseif ($contract_services_contact_section == 'contact_persons') {
+            renderContractServicesContactPersons($contact_persons);
+        }
+    }
 }
 ?>

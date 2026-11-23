@@ -1108,7 +1108,7 @@ function calculateTotal(){
                 <i class="flaticon2-print"></i>
 
          </a>
-         <?php 
+         <?php
             $nmm= ViewStatusValue($table1['current_status']);
             $lists = toGetStatusProgressAction($table_name, $table1['current_status']);
             $lists1 = $lists;

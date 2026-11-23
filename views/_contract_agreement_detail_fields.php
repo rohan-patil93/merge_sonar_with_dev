@@ -1,16 +1,7 @@
 <?php
-if (!function_exists('render_contract_agreement_detail_fields')) {
-function render_contract_agreement_detail_fields($ctx) {
-$contract_agreement_section = $ctx['contract_agreement_section'] ?? '';
-$contract_agreement_locations_section = $ctx['contract_agreement_locations_section'] ?? '';
-$fieldDisplay = $ctx['fieldDisplay'] ?? array();
-$genc = $ctx['genc'] ?? array();
-$des = $ctx['des'] ?? array();
-$locations = $ctx['locations'] ?? array();
-$selectedLocations = $ctx['selectedLocations'] ?? array();
-$formData = $ctx['formData'] ?? array();
+if (!function_exists('renderContractAgreementClassification')) {
+    function renderContractAgreementClassification($fieldDisplay, $genc, $des, $formData) {
 ?>
-<?php if ($contract_agreement_section == 'classification') { ?>
                         <div class="col-md-4" style="<?= $fieldDisplay['typeofaggrements']['style'] ?>">
                             <label for="fld_typeofaggrements" class="form-label"><?= __('Type of Agreements '.$fieldDisplay['typeofaggrements']['star']) ?></label>
                             <select id="fld_typeofaggrements" class="form-control js-example-basic-single" name="typeofaggrements" <?= $fieldDisplay['typeofaggrements']['required'] ?>>
@@ -37,8 +28,13 @@ $formData = $ctx['formData'] ?? array();
                                 } ?>
                             </select>
                         </div>
-<?php }
-if ($contract_agreement_locations_section == 'Y') { ?>
+<?php
+    }
+}
+
+if (!function_exists('renderContractAgreementLocations')) {
+    function renderContractAgreementLocations($fieldDisplay, $locations, $selectedLocations) {
+?>
 <div class="col-md-12 " style="<?= $fieldDisplay['locations']['style'] ?>">
                             <label for="unified_locations_multiselect" class="form-label"><?= __('Locations '.$fieldDisplay['locations']['star']) ?></label>
                             <select name="locations[]" multiple class="form-control js-example-basic-multiple" id="unified_locations_multiselect" <?= $fieldDisplay['locations']['required'] ?>>
@@ -53,8 +49,15 @@ if ($contract_agreement_locations_section == 'Y') { ?>
                             </select>
                         </div>
 
-<?php }
-if ($contract_agreement_section == 'extended') { ?>
+<?php
+    }
+}
+
+if (!function_exists('renderContractAgreementExtended')) {
+    function renderContractAgreementExtended($fieldDisplay, $formData) {
+        $isOemYes = isset($formData['is_oem']) && ($formData['is_oem'] == 'Yes' || $formData['is_oem'] == 'Y');
+        $isOemNo = !isset($formData['is_oem']) || empty($formData['is_oem']) || strtoupper($formData['is_oem']) == 'NO' || strtoupper($formData['is_oem']) == 'N';
+?>
 
                         <div class="col-md-12 cc-amc-only">
                             <p class="text-muted small mb-0"><em><?= __('Locations are configured in Step 2 — Locations, Assets & Service Periods.') ?></em></p>
@@ -98,15 +101,15 @@ if ($contract_agreement_section == 'extended') { ?>
                         <div class="col-md-12" style="<?= $fieldDisplay['is_oem']['style'] ?>">
                             <span class="form-label d-inline-block fw-bold"><?= __('OEM (Original Equipment Manufacturer) '.$fieldDisplay['is_oem']['star']) ?></span>
                             <div class="radio radio-outline radio-inline">
-                                <input id="unified_oem_yes" type="radio" name="is_oem" value="Yes" <?= (isset($formData['is_oem']) && ($formData['is_oem'] == 'Yes' || $formData['is_oem'] == 'Y')) ? 'checked' : '' ?>>
+                                <input id="unified_oem_yes" type="radio" name="is_oem" value="Yes" <?= $isOemYes ? 'checked' : '' ?>>
                                 <label class="form-label align-top" for="unified_oem_yes"><?= __('Yes') ?></label>
                             </div>
                             <div class="radio radio-outline radio-inline ms-3">
-                                <input id="unified_oem_no" type="radio" name="is_oem" value="No" <?= (!isset($formData['is_oem']) || empty($formData['is_oem']) || strtoupper($formData['is_oem']) == 'NO' || strtoupper($formData['is_oem']) == 'N') ? 'checked' : '' ?>>
+                                <input id="unified_oem_no" type="radio" name="is_oem" value="No" <?= $isOemNo ? 'checked' : '' ?>>
                                 <label class="form-label align-top" for="unified_oem_no"><?= __('No') ?></label>
                             </div>
                         </div>
-                        <div class="col-md-12 oem-details <?= (isset($formData['is_oem']) && ($formData['is_oem'] == 'Yes' || $formData['is_oem'] == 'Y')) ? '' : 'd-none' ?>" id="unified_oem_details">
+                        <div class="col-md-12 oem-details <?= $isOemYes ? '' : 'd-none' ?>" id="unified_oem_details">
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <label for="fld_oem_registration_number" class="form-label"><?= __('OEM Registration Number') ?></label>
@@ -122,7 +125,30 @@ if ($contract_agreement_section == 'extended') { ?>
                                 </div>
                             </div>
                         </div>
-<?php }
+<?php
+    }
 }
+
+if (!function_exists('renderContractAgreementDetailFields')) {
+    function renderContractAgreementDetailFields($ctx) {
+        $contract_agreement_section = $ctx['contract_agreement_section'] ?? '';
+        $contract_agreement_locations_section = $ctx['contract_agreement_locations_section'] ?? '';
+        $fieldDisplay = $ctx['fieldDisplay'] ?? array();
+        $genc = $ctx['genc'] ?? array();
+        $des = $ctx['des'] ?? array();
+        $locations = $ctx['locations'] ?? array();
+        $selectedLocations = $ctx['selectedLocations'] ?? array();
+        $formData = $ctx['formData'] ?? array();
+
+        if ($contract_agreement_section == 'classification') {
+            renderContractAgreementClassification($fieldDisplay, $genc, $des, $formData);
+        }
+        if ($contract_agreement_locations_section == 'Y') {
+            renderContractAgreementLocations($fieldDisplay, $locations, $selectedLocations);
+        }
+        if ($contract_agreement_section == 'extended') {
+            renderContractAgreementExtended($fieldDisplay, $formData);
+        }
+    }
 }
 ?>

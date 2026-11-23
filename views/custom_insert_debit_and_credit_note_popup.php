@@ -227,9 +227,9 @@ if($_SESSION['config']['debit_credit_note_creation_days'] !="" && $_SESSION['con
     $debit_credit_note_creation_days =   $_SESSION['config']['debit_credit_note_creation_days'];
     $expiryDate = date('Y-m-d', strtotime($transactions['transaction_date'] . " +{$debit_credit_note_creation_days} days"));
     if(date('Y-m-d') >= $expiryDate){
-    	$dibcreclass =  'event_disabled';
-    	$debitcreadmsg = "You cannot create a Debit/Credit Note. The allowed period of {$debit_credit_note_creation_days} days has expired.";
-    	echo "<div class='alert alert-danger alert-dismissible'>
+        $dibcreclass =  'event_disabled';
+        $debitcreadmsg = "You cannot create a Debit/Credit Note. The allowed period of {$debit_credit_note_creation_days} days has expired.";
+        echo "<div class='alert alert-danger alert-dismissible'>
                 <strong>{$debitcreadmsg}</strong>
                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='".htmlspecialchars(__('Close'), ENT_QUOTES, 'UTF-8')."'></button>
             </div>";

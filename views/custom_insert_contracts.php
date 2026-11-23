@@ -1047,7 +1047,7 @@ function handleContractSubmission()
             header("location:index.php?option=COM_LIST_CONTRACTS");
         }
         ?>
-        <script type="text/javascript">
+        <script>
             document.onreadystatechange = function () {
                 if (document.readyState == "complete") {
                     tostarnotify('top', 'right', 'fa fa-thumbs-up', 'form-label label label-success', 'animated flipInX', 'animated flipOutX', '<?php echo $_SESSION['error_message'][$msgcode]; ?>', '');
@@ -1384,7 +1384,7 @@ function handleAmcContractSubmission($isRenewFlow = false)
                 exit;
             }
             echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=index.php?option=COM_LIST_CONTRACTS">'
-                . '<script type="text/javascript">window.location.replace("index.php?option=COM_LIST_CONTRACTS");</script>'
+                . '<script>window.location.replace("index.php?option=COM_LIST_CONTRACTS");</script>'
                 . '</head><body></body></html>';
             exit;
         }
@@ -1578,7 +1578,7 @@ function handleAmcContractRenewal()
                 exit;
             }
             ?>
-            <script type="text/javascript">
+            <script>
                 window.location.href = 'index.php?option=COM_LIST_CONTRACTS';
             </script>
             <?php
@@ -2060,26 +2060,7 @@ if (count((array) $milestones) > 0) {
                 <div class="col-lg-12">
                     <span class="form-label d-block mb-2 fw-bold"><?= __('Contract Type'); ?></span>
                     <div class="contract-type-icon-grid" role="radiogroup" aria-label="<?= htmlspecialchars(__('Contract Type'), ENT_QUOTES, 'UTF-8'); ?>">
-                        <?php /* OLD static Standard/AMC radios (kept for reference)
-   <div class="contract-type-icon-card">
-       <input type="radio" name="page_contract_type" id="page_contract_type_standard" value="standard" class="contract-type-icon-input" aria-label="Standard Contract" <?= !$is_amc_mode ? 'checked' : '' ?>>
-       <label class="contract-type-icon-label" for="page_contract_type_standard" title="<?= __('Standard Contract') ?>">
-           <span class="contract-type-icon-wrap contract-type-icon-standard">
-               <i class="icofont icofont-law-document" aria-hidden="true"></i>
-           </span>
-           <span class="contract-type-icon-name"><?= __('Standard') ?></span>
-       </label>
-   </div>
-   <div class="contract-type-icon-card">
-       <input type="radio" name="page_contract_type" id="page_contract_type_amc" value="amc" class="contract-type-icon-input" aria-label="AMC Contract" <?= $is_amc_mode ? 'checked' : '' ?>>
-       <label class="contract-type-icon-label" for="page_contract_type_amc" title="<?= __('AMC Contract') ?>">
-           <span class="contract-type-icon-wrap contract-type-icon-amc">
-               <i class="icofont icofont-repair" aria-hidden="true"></i>
-           </span>
-           <span class="contract-type-icon-name"><?= __('AMC') ?></span>
-       </label>
-   </div>
-   */ ?>
+                        <?php // Standard/AMC radios handled dynamically ?>
 
                         <?php if (count((array) $allowedContractTypes) > 0) {
                             foreach ($allowedContractTypes as $ctype) {
@@ -2124,10 +2105,18 @@ if (count((array) $milestones) > 0) {
             <?php
             $requestedTab = isset($_GET['TAB1']) ? (int) $_GET['TAB1'] : 1;
             $allowedTabs = [1];
-            if (in_array('document', (array) $userPermissions)) $allowedTabs[] = 2;
-            if (in_array('associated', (array) $userPermissions)) $allowedTabs[] = 3;
-            if (in_array('permission', (array) $userPermissions)) $allowedTabs[] = 4;
-            if (in_array('activity', (array) $userPermissions)) $allowedTabs[] = 5;
+            if (in_array('document', (array) $userPermissions)) {
+                $allowedTabs[] = 2;
+            }
+            if (in_array('associated', (array) $userPermissions)) {
+                $allowedTabs[] = 3;
+            }
+            if (in_array('permission', (array) $userPermissions)) {
+                $allowedTabs[] = 4;
+            }
+            if (in_array('activity', (array) $userPermissions)) {
+                $allowedTabs[] = 5;
+            }
             $activeTab = in_array($requestedTab, $allowedTabs) ? $requestedTab : 1;
             ?>
             <div class="row mb-2">
@@ -2195,7 +2184,7 @@ if (count((array) $milestones) > 0) {
                                             <i class="icofont icofont-exchange"></i>
                                             <?= htmlspecialchars($convert_button_label) ?>
                                         </button>
-                                        <script type="text/javascript">
+                                        <script>
                                             (function () {
                                                 var btn = document.getElementById('btn-convert-contract-type');
                                                 if (!btn) { return; }
@@ -2345,7 +2334,7 @@ if (count((array) $milestones) > 0) {
                                                 style="<?= $fieldDisplay['contract_name']['style'] ?>">
                                                 <span class="form-label"><?= __('Contract Name'); ?>
                                                     <?= $fieldDisplay['contract_name']['star'] ?></span>
-                                                <input type="text" class="form-control" name="contract_name"
+                                                <input aria-label="Contract Name" type="text" class="form-control" name="contract_name"
                                                     placeholder="<?= __('Enter contract name') ?>"
                                                     value="<?= htmlspecialchars($formData['contract_name'] ?? '') ?>"
                                                     <?= $fieldDisplay['contract_name']['required'] ?>
@@ -2355,7 +2344,7 @@ if (count((array) $milestones) > 0) {
                                                 style="<?= $fieldDisplay['transaction_no']['style'] ?>">
                                                 <span class="form-label"><?= __('Contract Number'); ?>
                                                     <?= $fieldDisplay['transaction_no']['star'] ?></span>
-                                                <input type="text" class="form-control" name="transaction_no"
+                                                <input aria-label="Transaction No" type="text" class="form-control" name="transaction_no"
                                                     placeholder="<?= __('Auto-generated') ?>"
                                                     value="<?= htmlspecialchars(dynamicDataDecode($formData['transaction_no'] ?? '')) ?>"
                                                     readonly title="<?= __('Auto-generated') ?>" aria-label="<?= htmlspecialchars(__('Auto-generated'), ENT_QUOTES, 'UTF-8'); ?>">
@@ -2363,7 +2352,7 @@ if (count((array) $milestones) > 0) {
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('RT Number'); ?>
                                                     <?= $fieldDisplay['rt_number']['star'] ?></span>
-                                                <input type="text" class="form-control" name="rt_number"
+                                                <input aria-label="Rt Number" type="text" class="form-control" name="rt_number"
                                                     placeholder="<?= __('Enter RT Number') ?>"
                                                     value="<?= htmlspecialchars(dynamicDataDecode($formData['rt_number'] ?? '')) ?>"
                                                     <?= $fieldDisplay['rt_number']['required'] ?> <?= $amc_renew_readonly ?? '' ?> title="<?= __('Enter RT Number') ?>" aria-label="<?= htmlspecialchars(__('Enter RT Number'), ENT_QUOTES, 'UTF-8'); ?>">
@@ -2371,7 +2360,7 @@ if (count((array) $milestones) > 0) {
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Invoice Number'); ?>
                                                     <?= $fieldDisplay['invoice_number']['star'] ?></span>
-                                                <input type="text" class="form-control" name="invoice_number"
+                                                <input aria-label="Invoice Number" type="text" class="form-control" name="invoice_number"
                                                     placeholder="<?= __('Enter Invoice Number') ?>"
                                                     value="<?= htmlspecialchars(dynamicDataDecode($formData['invoice_number'] ?? '')) ?>"
                                                     <?= $fieldDisplay['invoice_number']['required'] ?> title="<?= __('Enter Invoice Number') ?>" aria-label="<?= htmlspecialchars(__('Enter Invoice Number'), ENT_QUOTES, 'UTF-8'); ?>">
@@ -2379,7 +2368,7 @@ if (count((array) $milestones) > 0) {
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Business Code'); ?>
                                                     <?= $fieldDisplay['business_code']['star'] ?></span>
-                                                <input type="text" class="form-control" name="business_code"
+                                                <input aria-label="Business Code" type="text" class="form-control" name="business_code"
                                                     placeholder="<?= __('Enter Business Code') ?>"
                                                     value="<?= htmlspecialchars($formData['business_code'] ?? '') ?>"
                                                     <?= $fieldDisplay['business_code']['required'] ?> title="<?= __('Enter Business Code') ?>" aria-label="<?= htmlspecialchars(__('Enter Business Code'), ENT_QUOTES, 'UTF-8'); ?>">
@@ -2440,7 +2429,7 @@ if (count((array) $milestones) > 0) {
                                             include_once __DIR__ . '/_contract_agreement_detail_fields.php';
                                             include_once __DIR__ . '/_contract_services_contact_fields.php';
                                             $contract_agreement_section = 'classification';
-                                            render_contract_agreement_detail_fields(array(
+                                            renderContractAgreementDetailFields(array(
                                                 'contract_agreement_section' => $contract_agreement_section,
                                                 'contract_agreement_locations_section' => $contract_agreement_locations_section ?? '',
                                                 'fieldDisplay' => $fieldDisplay ?? array(),
@@ -2451,7 +2440,7 @@ if (count((array) $milestones) > 0) {
                                                 'formData' => $formData ?? array(),
                                             )); ?>
                                             <?php $contract_services_contact_section = 'services';
-                                            render_contract_services_contact_fields(array(
+                                            renderContractServicesContactFields(array(
                                                 'contract_services_contact_section' => $contract_services_contact_section,
                                                 'formData' => $formData ?? array(),
                                                 'fieldDisplay' => $fieldDisplay ?? array(),
@@ -2611,24 +2600,24 @@ if (count((array) $milestones) > 0) {
                                             </div>
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Contract Owner Name') ?></span>
-                                                <input type="text" class="form-control" name="contract_owner_name"
+                                                <input aria-label="Contract Owner Name" type="text" class="form-control" name="contract_owner_name"
                                                     placeholder="<?= __('Enter contract owner name') ?>"
                                                     value="<?= htmlspecialchars(dynamicDataDecode($formData['contract_owner_name'] ?? '')) ?>" title="<?= __('Enter contract owner name') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner name'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Contract Owner Email') ?></span>
-                                                <input type="email" class="form-control" name="contract_owner_email"
+                                                <input aria-label="Contract Owner Email" type="email" class="form-control" name="contract_owner_email"
                                                     placeholder="<?= __('Enter contract owner email') ?>"
                                                     value="<?= htmlspecialchars(dynamicDataDecode($formData['contract_owner_email'] ?? '')) ?>" title="<?= __('Enter contract owner email') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner email'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Contract Owner Contact') ?></span>
-                                                <input type="tel" class="form-control" name="contract_owner_number"
+                                                <input aria-label="Contract Owner Number" type="tel" class="form-control" name="contract_owner_number"
                                                     placeholder="<?= __('Enter contract owner contact number') ?>"
                                                     value="<?= htmlspecialchars(dynamicDataDecode($formData['contract_owner_number'] ?? '')) ?>" title="<?= __('Enter contract owner contact number') ?>" aria-label="<?= htmlspecialchars(__('Enter contract owner contact number'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
                                             <?php $contract_services_contact_section = 'contact_persons';
-                                            render_contract_services_contact_fields(array(
+                                            renderContractServicesContactFields(array(
                                                 'contract_services_contact_section' => $contract_services_contact_section,
                                                 'formData' => $formData ?? array(),
                                                 'fieldDisplay' => $fieldDisplay ?? array(),
@@ -2650,7 +2639,7 @@ if (count((array) $milestones) > 0) {
                                             <div class="col-md-4">
                                                 <span class="form-label"><?= __('Expiration(End) Date'); ?> <span
                                                         class="text-danger">*</span></span>
-                                                <input type="text"
+                                                <input aria-label="End Date" type="text"
                                                     class="form-control amc-end-datepicker enddatepicker_2"
                                                     name="end_date"
                                                     value="<?= $amc_renew_end_display != '' ? htmlspecialchars($amc_renew_end_display) : (!empty($formData['end_date']) ? fromDate($formData['end_date']) : '') ?>"
@@ -2658,7 +2647,7 @@ if (count((array) $milestones) > 0) {
                                             </div>
                                             <?php $contract_agreement_section = 'extended';
                                             $contract_agreement_locations_section = 'Y';
-                                            render_contract_agreement_detail_fields(array(
+                                            renderContractAgreementDetailFields(array(
                                                 'contract_agreement_section' => $contract_agreement_section,
                                                 'contract_agreement_locations_section' => $contract_agreement_locations_section,
                                                 'fieldDisplay' => $fieldDisplay ?? array(),
@@ -2719,11 +2708,7 @@ if (count((array) $milestones) > 0) {
                                                                             title="Download <?= htmlspecialchars($amc_display_name) ?>">
                                                                             <i class="fa fa-download m-0"></i>
                                                                         </a>
-                                                                        <?php /* Remove disabled — re-enable when delete-on-save is implemented
-                                                                                                                                                                                                       <button type="button" class="btn btn-sm btn-outline-danger amc-remove-additional-document-btn" data-filename="<?= htmlspecialchars($amc_doc_file) ?>" title="Remove <?= htmlspecialchars($amc_display_name) ?>">
-                                                                                                                                                                                                           <i class="fa fa-trash m-0"></i>
-                                                                                                                                                                                                       </button>
-                                                                                                                                                                                                       */ ?>
+                                                                        <?php // Additional document removal handled on save ?>
                                                                     </div>
                                                                 </div>
                                                                 <?php
@@ -2774,9 +2759,9 @@ if (count((array) $milestones) > 0) {
                                             <div class="col-md-8">
                                                 <span class="form-label d-block"><?= __('Payment Plan'); ?></span>
                                                 <div class="cc-inline-radios">
-                                                    <span><input type="radio" name="amc_payment_mode"
+                                                    <span><input aria-label="Amc Payment Mode" type="radio" name="amc_payment_mode"
                                                             value="billing_cycle" <?= $amc_saved_payment_mode !== 'milestones' ? 'checked' : '' ?> title="<?= __('Amc Payment Mode') ?>" aria-label="<?= htmlspecialchars(__('Amc Payment Mode'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('Billing Cycle'); ?></span>
-                                                    <span><input type="radio" name="amc_payment_mode"
+                                                    <span><input aria-label="Amc Payment Mode" type="radio" name="amc_payment_mode"
                                                             value="milestones" <?= $amc_saved_payment_mode === 'milestones' ? 'checked' : '' ?> title="<?= __('Amc Payment Mode') ?>" aria-label="<?= htmlspecialchars(__('Amc Payment Mode'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('Milestones'); ?></span>
                                                 </div>
                                             </div>
@@ -2829,16 +2814,16 @@ if (count((array) $milestones) > 0) {
                                                             $mPrice = $m['milestone_price'] ?? '';
                                                             ?>
                                                             <div class="milestone-row mb-2 d-flex align-items-center gap-2">
-                                                                <input type="text"
+                                                                <input aria-label="Contract input" type="text"
                                                                     name="milestone_name_<?= $unifiedMilestoneIdx ?>"
                                                                     class="form-control milestone-name"
                                                                     placeholder="<?= __('Milestone Name') ?>"
                                                                     value="<?= htmlspecialchars($mName) ?>" title="<?= __('Milestone Name') ?>" aria-label="<?= htmlspecialchars(__('Milestone Name'), ENT_QUOTES, 'UTF-8'); ?>">
-                                                                <input type="text"
+                                                                <input aria-label="Contract input" type="text"
                                                                     name="milestone_date_<?= $unifiedMilestoneIdx ?>"
                                                                     class="form-control datepicker milestone-date"
                                                                     placeholder="<?= __('Date') ?>" value="<?= htmlspecialchars($mDate) ?>" title="<?= __('Date') ?>" aria-label="<?= htmlspecialchars(__('Date'), ENT_QUOTES, 'UTF-8'); ?>">
-                                                                <input type="number" step="any"
+                                                                <input aria-label="Contract input" type="number" step="any"
                                                                     name="milestone_price_<?= $unifiedMilestoneIdx ?>"
                                                                     class="form-control milestone-price text-end"
                                                                     placeholder="<?= __('Price') ?>"
@@ -2853,13 +2838,13 @@ if (count((array) $milestones) > 0) {
                                                         $unifiedMilestoneIdx = 1;
                                                         ?>
                                                         <div class="milestone-row mb-2 d-flex align-items-center gap-2">
-                                                            <input type="text" name="milestone_name_1"
+                                                            <input aria-label="Milestone Name 1" type="text" name="milestone_name_1"
                                                                 class="form-control milestone-name"
                                                                 placeholder="<?= __('Milestone Name') ?>" title="<?= __('Milestone Name') ?>" aria-label="<?= htmlspecialchars(__('Milestone Name'), ENT_QUOTES, 'UTF-8'); ?>">
-                                                            <input type="text" name="milestone_date_1"
+                                                            <input aria-label="Milestone Date 1" type="text" name="milestone_date_1"
                                                                 class="form-control datepicker milestone-date"
                                                                 placeholder="<?= __('Date') ?>" title="<?= __('Date') ?>" aria-label="<?= htmlspecialchars(__('Date'), ENT_QUOTES, 'UTF-8'); ?>">
-                                                            <input type="number" step="any" name="milestone_price_1"
+                                                            <input aria-label="Milestone Price 1" type="number" step="any" name="milestone_price_1"
                                                                 class="form-control milestone-price text-end"
                                                                 placeholder="<?= __('Price') ?>" title="<?= __('Price') ?>" aria-label="<?= htmlspecialchars(__('Price'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <button type="button"
@@ -2942,11 +2927,11 @@ if (count((array) $milestones) > 0) {
                                                 </div>
                                                 <span class="form-label d-block"><?= __('Service Reminder'); ?></span>
                                                 <div class="cc-inline-checks">
-                                                    <span><input type="checkbox" name="reminder_days[]" value="7"
+                                                    <span><input aria-label="Reminder Days" type="checkbox" name="reminder_days[]" value="7"
                                                             <?= in_array('7', $amc_saved_reminder_days, true) ? 'checked' : '' ?> title="<?= __('Reminder Days') ?>" aria-label="<?= htmlspecialchars(__('Reminder Days'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('7 days before'); ?></span>
-                                                    <span><input type="checkbox" name="reminder_days[]" value="15"
+                                                    <span><input aria-label="Reminder Days" type="checkbox" name="reminder_days[]" value="15"
                                                             <?= in_array('15', $amc_saved_reminder_days, true) ? 'checked' : '' ?> title="<?= __('Reminder Days') ?>" aria-label="<?= htmlspecialchars(__('Reminder Days'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('15 days before'); ?></span>
-                                                    <span><input type="checkbox" name="reminder_days[]" value="30"
+                                                    <span><input aria-label="Reminder Days" type="checkbox" name="reminder_days[]" value="30"
                                                             <?= in_array('30', $amc_saved_reminder_days, true) ? 'checked' : '' ?> title="<?= __('Reminder Days') ?>" aria-label="<?= htmlspecialchars(__('Reminder Days'), ENT_QUOTES, 'UTF-8'); ?>"> <?= __('30 days before'); ?></span>
                                                 </div>
                                             </div>
@@ -2978,7 +2963,7 @@ if (count((array) $milestones) > 0) {
                                                                     <input type="hidden"
                                                                         name="amc_escalation_config[<?= (int) $escIdx ?>][condition]"
                                                                         value="<?= htmlspecialchars($condition) ?>">
-                                                                    <input type="number"
+                                                                    <input aria-label="Contract input" type="number"
                                                                         class="form-control form-control-sm amc-esc-hours text-end"
                                                                         name="amc_escalation_config[<?= (int) $escIdx ?>][hours]"
                                                                         value="<?= $hours ?>" min="1" max="720"
@@ -3020,26 +3005,26 @@ if (count((array) $milestones) > 0) {
                                                 <div class="form-group mb-3">
                                                     <span class="form-label d-block"><?= __('Gate entry required for service execution?'); ?></span>
                                                     <div class="cc-inline-radios">
-                                                        <span><input type="radio" name="gate_entry" value="yes"
+                                                        <span><input aria-label="Gate Entry" type="radio" name="gate_entry" value="yes"
                                                                 <?= $amc_saved_gate_entry !== 'no' ? 'checked' : '' ?> title="<?= __('Gate Entry') ?>" aria-label="<?= htmlspecialchars(__('Gate Entry'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?= __('Yes'); ?></span>
-                                                        <span><input type="radio" name="gate_entry" value="no"
+                                                        <span><input aria-label="Gate Entry" type="radio" name="gate_entry" value="no"
                                                                 <?= $amc_saved_gate_entry === 'no' ? 'checked' : '' ?> title="<?= __('Gate Entry') ?>" aria-label="<?= htmlspecialchars(__('Gate Entry'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?= __('No'); ?></span>
                                                     </div>
                                                 </div>
                                                 <span class="form-label d-block"><?= __('Service Completion Requirements'); ?></span>
                                                 <div class="cc-inline-checks d-flex flex-column gap-2">
-                                                    <span><input type="checkbox" name="completion_req[]"
+                                                    <span><input aria-label="Completion Req" type="checkbox" name="completion_req[]"
                                                             value="service_report" <?= in_array('service_report', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="<?= htmlspecialchars(__('Completion Req'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <?= __('Service Report upload mandatory'); ?></span>
-                                                    <span><input type="checkbox" name="completion_req[]"
+                                                    <span><input aria-label="Completion Req" type="checkbox" name="completion_req[]"
                                                             value="technician_signoff" <?= in_array('technician_signoff', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="<?= htmlspecialchars(__('Completion Req'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <?= __('Technician Sign-off'); ?></span>
-                                                    <span><input type="checkbox" name="completion_req[]"
+                                                    <span><input aria-label="Completion Req" type="checkbox" name="completion_req[]"
                                                             value="customer_signoff" <?= in_array('customer_signoff', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="<?= htmlspecialchars(__('Completion Req'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <?= __('Customer Sign-off'); ?></span>
-                                                    <span><input type="checkbox" name="completion_req[]"
+                                                    <span><input aria-label="Completion Req" type="checkbox" name="completion_req[]"
                                                             value="photo_upload" <?= in_array('photo_upload', $amc_saved_completion_rules, true) ? 'checked' : '' ?> title="<?= __('Completion Req') ?>" aria-label="<?= htmlspecialchars(__('Completion Req'), ENT_QUOTES, 'UTF-8'); ?>">
                                                         <?= __('Photo Upload'); ?></span>
                                                 </div>
@@ -3097,7 +3082,7 @@ if (count((array) $milestones) > 0) {
                                 </select>
                             </div>
                             <div class="col-auto">
-                                <input type="number" class="form-control form-control-sm amc-esc-hours text-end"
+                                <input aria-label="Contract input" type="number" class="form-control form-control-sm amc-esc-hours text-end"
                                     value="4" min="1" max="720" style="width:70px;" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
                             </div>
                             <div class="col-auto text-muted small"><?= __('hours, Notify'); ?></div>
@@ -3150,8 +3135,8 @@ if (count((array) $milestones) > 0) {
                                                     } ?>
                                                 </select>
                                             </td>
-                                            <td><input type="date" class="form-control    amc-loc-service-start" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
-                                            <td><input type="date" class="form-control  amc-loc-service-end" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                                            <td><input aria-label="Contract input" type="date" class="form-control    amc-loc-service-start" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                                            <td><input aria-label="Contract input" type="date" class="form-control  amc-loc-service-end" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -3215,9 +3200,9 @@ if (count((array) $milestones) > 0) {
                                 <option value=""><?= __('Select location first') ?></option>
                             </select>
                         </td>
-                        <td><input type="text" class="form-control amc-asset-name" readonly placeholder="<?= __('Asset Name') ?>" title="<?= __('Asset Name') ?>" aria-label="<?= htmlspecialchars(__('Asset Name'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <td><input aria-label="Contract input" type="text" class="form-control amc-asset-name" readonly placeholder="<?= __('Asset Name') ?>" title="<?= __('Asset Name') ?>" aria-label="<?= htmlspecialchars(__('Asset Name'), ENT_QUOTES, 'UTF-8'); ?>">
                         </td>
-                        <td><input type="text" class="form-control amc-asset-category" readonly placeholder="<?= __('Category') ?>" title="<?= __('Category') ?>" aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <td><input aria-label="Contract input" type="text" class="form-control amc-asset-category" readonly placeholder="<?= __('Category') ?>" title="<?= __('Category') ?>" aria-label="<?= htmlspecialchars(__('Category'), ENT_QUOTES, 'UTF-8'); ?>">
                         </td>
                         <td style="min-width: 160px;">
                             <select class="form-select js-example-basic-single amc-service-frequency-select" title="<?= __('Select') ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
@@ -3231,11 +3216,11 @@ if (count((array) $milestones) > 0) {
                             </select>
                         </td>
                         <td style="min-width: 90px;">
-                            <input type="number" class="form-control amc-visits-per-interval text-end" min="1" max="31"
+                            <input aria-label="Contract input" type="number" class="form-control amc-visits-per-interval text-end" min="1" max="31"
                                 value="1" title="<?= __('Visits per interval') ?>" aria-label="<?= htmlspecialchars(__('Visits per interval'), ENT_QUOTES, 'UTF-8'); ?>">
                         </td>
-                        <td><input type="date" class="form-control amc-asset-service-start" readonly tabindex="-1" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
-                        <td><input type="date" class="form-control amc-asset-service-end" readonly tabindex="-1" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                        <td><input aria-label="Contract input" type="date" class="form-control amc-asset-service-start" readonly tabindex="-1" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
+                        <td><input aria-label="Contract input" type="date" class="form-control amc-asset-service-end" readonly tabindex="-1" title="<?= __('Input') ?>" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
                         <td class="text-center text-nowrap">
                             <?php if ($amc_is_edit): ?>
                                 <span class="amc-schedule-actions">
@@ -3366,7 +3351,7 @@ if (count((array) $milestones) > 0) {
                                             class="form-label d-block d-block"><?= htmlspecialchars($document['document_name']) ?></span>
                                         <div class="col-lg-12 mb-3">
                                             <div class="d-flex align-items-center gap-2">
-                                                <input type="file" name="document_file_<?= $document['id'] ?>[]"
+                                                <input aria-label="Document File &lt;?= $document[" type="file" name="document_file_<?= $document['id'] ?>[]"
                                                     class="form-control document-file-input" multiple accept=".pdf,.xls,.xlsx"
                                                     data-document-id="<?= $document['id'] ?>"
                                                     data-document-name="<?= htmlspecialchars($document['document_name']) ?>"
@@ -3458,7 +3443,7 @@ if (count((array) $milestones) > 0) {
                                         <div class="card-px text-center ">
                                             <p class="text-muted f-16 fw-bold m-b-30"><i class="fa fa-warning"></i> <?= __('No Associated Contract'); ?></p>
                                             <div class="text-center px-4">
-                                                <img class="mw-100 mh-300px mx-h-300 mx-height-300" alt=""
+                                                <img class="mw-100 mh-300px mx-h-300 mx-height-300" alt="<?= htmlspecialchars(__('Work in progress'), ENT_QUOTES, 'UTF-8'); ?>"
                                                     src="assets/images/work.png">
                                             </div>
                                         </div>
@@ -3536,7 +3521,7 @@ if (count((array) $milestones) > 0) {
                                                     foreach ($permissionTypes as $perm):
                                                         ?>
                                                         <div class="checkbox-section d-inline-block me-3">
-                                                            <input class="form-check-input" type="checkbox" name="permissions[]"
+                                                            <input aria-label="Permissions" class="form-check-input" type="checkbox" name="permissions[]"
                                                                 value="<?= $perm ?>" id="<?= $perm ?>" title="<?= __('Permissions') ?>" aria-label="<?= htmlspecialchars(__('Permissions'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <label class="form-check-label" for="<?= $perm ?>">
                                                                 <?= ucfirst($perm) ?> <?= __('Permission'); ?>
@@ -3554,7 +3539,7 @@ if (count((array) $milestones) > 0) {
                                                     <?php if (!empty($documents)): ?>
                                                         <?php foreach ($documents as $doc): ?>
                                                             <div class="checkbox-section d-inline-block me-3">
-                                                                <input class="form-check-input doc-checkbox" type="checkbox"
+                                                                <input aria-label="Document Permissions" class="form-check-input doc-checkbox" type="checkbox"
                                                                     name="document_permissions[]" value="<?= $doc['id'] ?>"
                                                                     id="doc-<?= $doc['id'] ?>" title="<?= __('Document Permissions') ?>" aria-label="<?= htmlspecialchars(__('Document Permissions'), ENT_QUOTES, 'UTF-8'); ?>">
                                                                 <label class="form-check-label" for="doc-<?= $doc['id'] ?>">
@@ -3748,21 +3733,21 @@ if (count((array) $milestones) > 0) {
                                     <div class="form-group mb-3">
                                         <span class="form-label d-block"><span id="partyTypeText2"><?= __('Party'); ?></span> <?= __('Name'); ?>
                                             <span class="text-danger">*</span></span>
-                                        <input type="text" name="party_name" class="form-control"
+                                        <input aria-label="Party Name" type="text" name="party_name" class="form-control"
                                             placeholder="<?= __('Enter party name') ?>" required title="<?= __('Enter party name') ?>" aria-label="<?= htmlspecialchars(__('Enter party name'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <span class="form-label d-block"><?= __('Email'); ?> <span
                                                 class="text-danger">*</span></span>
-                                        <input type="email" name="email" class="form-control" placeholder="<?= __('Enter email') ?>"
+                                        <input aria-label="Email" type="email" name="email" class="form-control" placeholder="<?= __('Enter email') ?>"
                                             required title="<?= __('Enter email') ?>" aria-label="<?= htmlspecialchars(__('Enter email'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <span class="form-label d-block"><?= __('Phone'); ?> <span
                                                 class="text-danger">*</span></span>
-                                        <input type="text" name="phone" class="form-control"
+                                        <input aria-label="Phone" type="text" name="phone" class="form-control"
                                             placeholder="<?= __('Enter phone number') ?>" required title="<?= __('Enter phone number') ?>" aria-label="<?= htmlspecialchars(__('Enter phone number'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
                                 </div>
@@ -3771,7 +3756,7 @@ if (count((array) $milestones) > 0) {
                                     <div class="form-group mb-3">
                                         <span class="form-label d-block"><?= __('Company'); ?> <span
                                                 class="text-danger">*</span></span>
-                                        <input type="text" name="company" class="form-control"
+                                        <input aria-label="Company" type="text" name="company" class="form-control"
                                             placeholder="<?= __('Enter company name') ?>" required title="<?= __('Enter company name') ?>" aria-label="<?= htmlspecialchars(__('Enter company name'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
 
@@ -3784,7 +3769,7 @@ if (count((array) $milestones) > 0) {
                                     <div class="form-group mb-3">
                                         <span class="form-label d-block"><?= __('BP Code'); ?> <span
                                                 class="text-danger">*</span></span>
-                                        <input type="text" name="bp_code" class="form-control"
+                                        <input aria-label="Bp Code" type="text" name="bp_code" class="form-control"
                                             placeholder="<?= __('Enter BP Code') ?>" required title="<?= __('Enter BP Code') ?>" aria-label="<?= htmlspecialchars(__('Enter BP Code'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
                                 </div>

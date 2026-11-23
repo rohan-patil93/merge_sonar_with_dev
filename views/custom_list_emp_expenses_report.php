@@ -4,10 +4,10 @@ $_SESSION['apply_js']['multiselest'] = 1;
 $admin_type = 1;
 $role_code = isset($_SESSION['working_role_short_code']) ? $_SESSION['working_role_short_code'] : '';
 if ($role_code == 'EMPLOYEE' || $role_code == 'FIELD_EMPLOYEE') {
-	$admin_type = 3;
+    $admin_type = 3;
 }
 if ($role_code == 'MANAGER' || $role_code == 'FIELD_MANAGER') {
-	$admin_type = 2;
+    $admin_type = 2;
 }
 
 $today = date('Y-m-d');
@@ -17,199 +17,199 @@ $employees = (isset($filter_res['employees']) && is_array($filter_res['employees
 
 $self_emp_id = '';
 if ($admin_type == '3') {
-	if (isset($_SESSION['emp_id']) && $_SESSION['emp_id'] != '') {
-		$self_emp_id = (int)$_SESSION['emp_id'];
-	} elseif (!empty($employees)) {
-		$first = $employees[0];
-		$self_emp_id = is_array($first) ? (int)($first['id'] ?? 0) : (int)($first->id ?? 0);
-	}
+    if (isset($_SESSION['emp_id']) && $_SESSION['emp_id'] != '') {
+        $self_emp_id = (int)$_SESSION['emp_id'];
+    } elseif (!empty($employees)) {
+        $first = $employees[0];
+        $self_emp_id = is_array($first) ? (int)($first['id'] ?? 0) : (int)($first->id ?? 0);
+    }
 }
 ?>
 <style>
-	.eer-summary { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
-	.eer-chip {
-		background: #fff;
-		border: 1px solid #e5e7eb;
-		border-radius: 8px;
-		padding: 10px 14px;
-		min-width: 130px;
-	}
-	.eer-chip-label { display: block; font-size: 12px; color: #6b7280; }
-	.eer-chip-value { display: block; font-size: 18px; font-weight: 700; color: #111827; }
-	.eer-chip-claims .eer-chip-value { color: #0d6efd; }
-	.eer-chip-lines .eer-chip-value { color: #6f42c1; }
-	.eer-chip-total .eer-chip-value { color: #198754; }
-	.eer-chip-tax .eer-chip-value { color: #fd7e14; }
-	.eer-chip-pending .eer-chip-value { color: #dc3545; }
-	.eer-status-badge {
-		display: inline-block;
-		padding: 2px 8px;
-		border-radius: 999px;
-		font-size: 12px;
-		font-weight: 600;
-	}
-	.eer-status-draft { background: #fff3cd; color: #664d03; }
-	.eer-status-active { background: #cfe2ff; color: #084298; }
-	.eer-status-approved { background: #d1e7dd; color: #0f5132; }
-	.eer-bill-link { color: #0d6efd; font-size: 16px; }
-	.eer-bill-disabled { color: #adb5bd; }
+    .eer-summary { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+    .eer-chip {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 10px 14px;
+        min-width: 130px;
+    }
+    .eer-chip-label { display: block; font-size: 12px; color: #6b7280; }
+    .eer-chip-value { display: block; font-size: 18px; font-weight: 700; color: #111827; }
+    .eer-chip-claims .eer-chip-value { color: #0d6efd; }
+    .eer-chip-lines .eer-chip-value { color: #6f42c1; }
+    .eer-chip-total .eer-chip-value { color: #198754; }
+    .eer-chip-tax .eer-chip-value { color: #fd7e14; }
+    .eer-chip-pending .eer-chip-value { color: #dc3545; }
+    .eer-status-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .eer-status-draft { background: #fff3cd; color: #664d03; }
+    .eer-status-active { background: #cfe2ff; color: #084298; }
+    .eer-status-approved { background: #d1e7dd; color: #0f5132; }
+    .eer-bill-link { color: #0d6efd; font-size: 16px; }
+    .eer-bill-disabled { color: #adb5bd; }
 </style>
 <div class="page-body">
-	<div class="card">
-		<div class="card-header">
-			<h5><?= __('Employee Expenses Report'); ?></h5>
-			<div class="card-header-right">
-				<div class="dropdown-primary dropdown open">
-					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="empExpensesReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
-					<div class="dropdown-menu p-0" aria-labelledby="empExpensesReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employee%20Expenses%20Report" target="_blank" rel="noopener noreferrer"><?= __('CSV'); ?></a>
-					</div>
-				</div>
-				<button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-					<i class="icofont icofont-reply" aria-hidden="true"></i>
-					<?= __('Back'); ?>
-				</button>
-			</div>
-		</div>
-		<div class="card-body p-4">
-			<div class="row">
-				<?php if ($admin_type != '3') { ?>
-				<div class="col-lg-3 col-md-6 form-group">
-					<label for="emp_id"><?= __('Employees'); ?></label>
-					<select class="form-control js-example-basic-multiple" id="emp_id" name="emp_id[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Emp Id'), ENT_QUOTES, 'UTF-8'); ?>">
-						<?php if (!empty($employees)) {
-							foreach ($employees as $emp_row) {
-								$eid = is_array($emp_row) ? ($emp_row['id'] ?? '') : ($emp_row->id ?? '');
-								$ename = is_array($emp_row) ? ($emp_row['display_name'] ?? '') : ($emp_row->display_name ?? '');
-						?>
-							<option value="<?php echo htmlspecialchars((string)$eid, ENT_QUOTES); ?>"><?php echo htmlspecialchars((string)$ename, ENT_QUOTES); ?></option>
-						<?php }
-						} ?>
-					</select>
-				</div>
-				<?php } else { ?>
-				<input type="hidden" id="emp_id" name="emp_id" value="<?php echo (int)$self_emp_id; ?>">
-				<?php } ?>
+    <div class="card">
+        <div class="card-header">
+            <h5><?= __('Employee Expenses Report'); ?></h5>
+            <div class="card-header-right">
+                <div class="dropdown-primary dropdown open">
+                    <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="empExpensesReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
+                    <div class="dropdown-menu p-0" aria-labelledby="empExpensesReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                        <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Employee%20Expenses%20Report" target="_blank" rel="noopener noreferrer"><?= __('CSV'); ?></a>
+                    </div>
+                </div>
+                <button type="button" onclick="history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
+                    <i class="icofont icofont-reply" aria-hidden="true"></i>
+                    <?= __('Back'); ?>
+                </button>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="row">
+                <?php if ($admin_type != '3') { ?>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <label for="emp_id"><?= __('Employees'); ?></label>
+                    <select class="form-control js-example-basic-multiple" id="emp_id" name="emp_id[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Emp Id'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <?php if (!empty($employees)) {
+                            foreach ($employees as $emp_row) {
+                                $eid = is_array($emp_row) ? ($emp_row['id'] ?? '') : ($emp_row->id ?? '');
+                                $ename = is_array($emp_row) ? ($emp_row['display_name'] ?? '') : ($emp_row->display_name ?? '');
+                        ?>
+                            <option value="<?php echo htmlspecialchars((string)$eid, ENT_QUOTES); ?>"><?php echo htmlspecialchars((string)$ename, ENT_QUOTES); ?></option>
+                        <?php }
+                        } ?>
+                    </select>
+                </div>
+                <?php } else { ?>
+                <input type="hidden" id="emp_id" name="emp_id" value="<?php echo (int)$self_emp_id; ?>">
+                <?php } ?>
 
-				<div class="col-lg-3 col-md-6 form-group">
-					<label for="from_date"><?= __('From Date'); ?> <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>">
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<label for="to_date"><?= __('To Date'); ?> <span class="text-danger">*</span></label>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<label for="status"><?= __('Status'); ?></label>
-					<select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>">
-						<option value="2"><?= __('Draft'); ?></option>
-						<option value="0"><?= __('Active'); ?></option>
-						<option value="199"><?= __('Approved'); ?></option>
-					</select>
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<label for="expense_type"><?= __('Expense Type'); ?></label>
-					<select class="form-control js-example-basic-multiple" id="expense_type" name="expense_type[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Expense Type'), ENT_QUOTES, 'UTF-8'); ?>">
-						<option value="0"><?= __('Expense'); ?></option>
-						<option value="1"><?= __('Mileage'); ?></option>
-						<option value="2"><?= __('Per Diem'); ?></option>
-					</select>
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<label for="getEmpExpensesReportBtn" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">&nbsp;</label>
-					<button type="button" class="btn btn-primary form-control" id="getEmpExpensesReportBtn"><?= __('Search'); ?></button>
-				</div>
-			</div>
-			<div class="row mt-3 custom-scroll" id="Tablecontent" style="height:500px"></div>
-		</div>
-	</div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <label for="from_date"><?= __('From Date'); ?> <span class="text-danger">*</span></label>
+                    <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>">
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <label for="to_date"><?= __('To Date'); ?> <span class="text-danger">*</span></label>
+                    <input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <label for="status"><?= __('Status'); ?></label>
+                    <select class="form-control js-example-basic-multiple" id="status" name="status[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Status'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <option value="2"><?= __('Draft'); ?></option>
+                        <option value="0"><?= __('Active'); ?></option>
+                        <option value="199"><?= __('Approved'); ?></option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <label for="expense_type"><?= __('Expense Type'); ?></label>
+                    <select class="form-control js-example-basic-multiple" id="expense_type" name="expense_type[]" multiple="multiple" style="width:100%" aria-label="<?= htmlspecialchars(__('Expense Type'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <option value="0"><?= __('Expense'); ?></option>
+                        <option value="1"><?= __('Mileage'); ?></option>
+                        <option value="2"><?= __('Per Diem'); ?></option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <label for="getEmpExpensesReportBtn" aria-label="<?= htmlspecialchars(__('Search'), ENT_QUOTES, 'UTF-8'); ?>">&nbsp;</label>
+                    <button type="button" class="btn btn-primary form-control" id="getEmpExpensesReportBtn"><?= __('Search'); ?></button>
+                </div>
+            </div>
+            <div class="row mt-3 custom-scroll" id="Tablecontent" style="height:500px"></div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
-	function toast(msg) {
-		tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger',
-			'animated flipInX', 'animated flipOutX', msg, '');
-	}
+    function toast(msg) {
+        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger',
+            'animated flipInX', 'animated flipOutX', msg, '');
+    }
 
-	function eerFilterIds(val) {
-		if (val == null || val == '') {
-			return [];
-		}
-		if (!Array.isArray(val)) {
-			val = [val];
-		}
-		return val.filter(function (id) {
-			return id != null && id != '' && id != '0';
-		});
-	}
+    function eerFilterIds(val) {
+        if (val == null || val == '') {
+            return [];
+        }
+        if (!Array.isArray(val)) {
+            val = [val];
+        }
+        return val.filter(function (id) {
+            return id != null && id != '' && id != '0';
+        });
+    }
 
-	function loadEmpExpensesReport() {
-		var fromDate = $("#from_date").val();
-		var toDate = $("#to_date").val();
+    function loadEmpExpensesReport() {
+        var fromDate = $("#from_date").val();
+        var toDate = $("#to_date").val();
 
-		if (fromDate == "") {
-			toast("Please select From Date");
-			return;
-		}
-		if (toDate == "") {
-			toast("Please select To Date");
-			return;
-		}
-		if (toDate < fromDate) {
-			toast("To Date should be greater than or equal to From Date");
-			return;
-		}
+        if (fromDate == "") {
+            toast("Please select From Date");
+            return;
+        }
+        if (toDate == "") {
+            toast("Please select To Date");
+            return;
+        }
+        if (toDate < fromDate) {
+            toast("To Date should be greater than or equal to From Date");
+            return;
+        }
 
-		var empIds = [];
-		<?php if ($admin_type != '3') { ?>
-		empIds = eerFilterIds($("#emp_id").val());
-		<?php } else { ?>
-		empIds = [String($("#emp_id").val())];
-		<?php } ?>
+        var empIds = [];
+        <?php if ($admin_type != '3') { ?>
+        empIds = eerFilterIds($("#emp_id").val());
+        <?php } else { ?>
+        empIds = [String($("#emp_id").val())];
+        <?php } ?>
 
-		var statuses = eerFilterIds($("#status").val());
-		var expenseTypes = eerFilterIds($("#expense_type").val());
-		var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
-		$("#Tablecontent").html(loader);
+        var statuses = eerFilterIds($("#status").val());
+        var expenseTypes = eerFilterIds($("#expense_type").val());
+        var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;" alt="<?= htmlspecialchars(__('Loading...'), ENT_QUOTES, 'UTF-8'); ?>"></div>';
+        $("#Tablecontent").html(loader);
 
-		$.ajax({
-			url: "views/custom_list_emp_expenses_report_ajax.php",
-			type: "POST",
-			data: {
-				from_date: fromDate,
-				to_date: toDate,
-				emp_id: empIds,
-				status: statuses,
-				expense_type: expenseTypes,
-				admin_type: "<?php echo (int)$admin_type; ?>"
-			},
-			success: function (response) {
-				$("#Tablecontent").html(response);
-			},
-			error: function () {
-				$("#Tablecontent").html('<div class="col-12"><p class="text-danger mb-0"><?= htmlspecialchars(__('Unable to load Employee Expenses Report.'), ENT_QUOTES, 'UTF-8'); ?></p></div>');
-			}
-		});
-	}
+        $.ajax({
+            url: "views/custom_list_emp_expenses_report_ajax.php",
+            type: "POST",
+            data: {
+                from_date: fromDate,
+                to_date: toDate,
+                emp_id: empIds,
+                status: statuses,
+                expense_type: expenseTypes,
+                admin_type: "<?php echo (int)$admin_type; ?>"
+            },
+            success: function (response) {
+                $("#Tablecontent").html(response);
+            },
+            error: function () {
+                $("#Tablecontent").html('<div class="col-12"><p class="text-danger mb-0"><?= htmlspecialchars(__('Unable to load Employee Expenses Report.'), ENT_QUOTES, 'UTF-8'); ?></p></div>');
+            }
+        });
+    }
 
-	$(document).ready(function () {
-		$(".js-example-basic-multiple").select2({
-			placeholder: <?php echo json_encode(__('All'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
-			allowClear: true,
-			width: "100%"
-		});
+    $(document).ready(function () {
+        $(".js-example-basic-multiple").select2({
+            placeholder: <?php echo json_encode(__('All'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>,
+            allowClear: true,
+            width: "100%"
+        });
 
-		$("#from_date").on("change", function () {
-			var fromDate = $(this).val();
-			$("#to_date").attr("min", fromDate);
-			if ($("#to_date").val() != "" && $("#to_date").val() < fromDate) {
-				$("#to_date").val(fromDate);
-			}
-		});
+        $("#from_date").on("change", function () {
+            var fromDate = $(this).val();
+            $("#to_date").attr("min", fromDate);
+            if ($("#to_date").val() != "" && $("#to_date").val() < fromDate) {
+                $("#to_date").val(fromDate);
+            }
+        });
 
-		$("#getEmpExpensesReportBtn").on("click", function () {
-			loadEmpExpensesReport();
-		});
+        $("#getEmpExpensesReportBtn").on("click", function () {
+            loadEmpExpensesReport();
+        });
 
-		loadEmpExpensesReport();
-	});
+        loadEmpExpensesReport();
+    });
 </script>

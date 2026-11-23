@@ -174,7 +174,7 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                             }
 
-                            render_contract_amc_schedule_repair_line_row(array(
+                            renderContractAmcScheduleRepairLineRow(array(
                                 'line' => $line,
                                 'isRepairEditable' => $isRepairEditable ?? false,
                                 'repairItems' => $repairItems,
@@ -189,7 +189,7 @@ $isRepairEditable = ($repairEligibility == 'editable');
 
                         $line = array();
 
-                        render_contract_amc_schedule_repair_line_row(array(
+                        renderContractAmcScheduleRepairLineRow(array(
                             'line' => $line,
                             'isRepairEditable' => $isRepairEditable ?? false,
                             'repairItems' => $repairItems,

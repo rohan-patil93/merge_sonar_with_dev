@@ -60,13 +60,13 @@ foreach($crm_deals_graph as $crmstat){
 // $crm_source_types = array();
 // foreach($crm_general_codes as $key=>$crmsource1){
 //     foreach($crmsource1 as $crmsource){
-// 	   $crm_source_types[$key][$crmsource['value']] = $crmsource['label'];
+//        $crm_source_types[$key][$crmsource['value']] = $crmsource['label'];
 //     }
 // }
 // $crm_companies_id_name = $result['crm_companies_id_name'];
 // $leadcode = array();
 // foreach($crm_leadslist as $crm_leads){
-// 	$leadcode[$crm_leads['id']] = $crm_leads['lead_code'];
+//     $leadcode[$crm_leads['id']] = $crm_leads['lead_code'];
 // }
 // $crm_lead_types =$res['crm_lead_types'];
 // $crmleaddetailstypes = array();
@@ -158,16 +158,16 @@ foreach ($feasibility_requirements_expiry_days as $item) {
     function leadPageCall(crm_tab_type,rid="",crm_history_id=""){
         console.log("dsfdsvdfsv");
        //updateUrlParameter('TAB1',crm_tab_type);
-    	var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
-    	$("#htmlsetpage").html(loader);
-    	var url = "";
-    	if(crm_tab_type == "LEAD"){
-    		url = "custom_insert_crm_leads.php";
-    	}else if(crm_tab_type == "CONTACT"){
-    		url = "custom_insert_crm_contacts.php";
-    	}else if(crm_tab_type == "COMPANY"){
-    		url = "custom_insert_crm_companies.php";
-    	}else if(crm_tab_type == "CAPAIGN"){
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+        $("#htmlsetpage").html(loader);
+        var url = "";
+        if(crm_tab_type == "LEAD"){
+            url = "custom_insert_crm_leads.php";
+        }else if(crm_tab_type == "CONTACT"){
+            url = "custom_insert_crm_contacts.php";
+        }else if(crm_tab_type == "COMPANY"){
+            url = "custom_insert_crm_companies.php";
+        }else if(crm_tab_type == "CAPAIGN"){
             url = "custom_insert_crm_campaigns.php";
         }else if(crm_tab_type == "DEALS"){
             url = "custom_insert_crm_deals.php";
@@ -181,15 +181,15 @@ foreach ($feasibility_requirements_expiry_days as $item) {
             success:function(data){
                 $('#htmlsetpage').html(data);
                 $(".js-example-basic-single").select2();
-				$(".js-example-basic-multiple").select2();
+                $(".js-example-basic-multiple").select2();
                 $(".datepicker" ).datepicker({
-					showOn: "both",
-					buttonText: "<i class='ti-calendar text-dark f-20 f-w-800 m-r-10'></i>",
-					dateFormat: DateFormate,
-					changeMonth: true,
-					changeYear: true,
+                    showOn: "both",
+                    buttonText: "<i class='ti-calendar text-dark f-20 f-w-800 m-r-10'></i>",
+                    dateFormat: DateFormate,
+                    changeMonth: true,
+                    changeYear: true,
                     minDate: 0
-				}).next("button.ui-datepicker-trigger").html("<i class='ti-calendar text-dark f-12 f-w-800 m-r-10'></i>");
+                }).next("button.ui-datepicker-trigger").html("<i class='ti-calendar text-dark f-12 f-w-800 m-r-10'></i>");
                 if($(".js-success-sm").length  > 0){
                     var elem = Array.prototype.slice.call(document.querySelectorAll('.js-success-sm'));
                     elem.forEach(function(html) {
@@ -231,9 +231,9 @@ foreach ($feasibility_requirements_expiry_days as $item) {
         });
     }
     function crmupdatestatus(status,crm_lead_id){
-    	console.log(status+" -- "+crm_lead_id);
-    	var transaction_table = "crm_leads";
-    	jQuery.ajax({
+        console.log(status+" -- "+crm_lead_id);
+        var transaction_table = "crm_leads";
+        jQuery.ajax({
             url: "ajax.php",
             data: "page=dynamicupdatestatus&current_status="+status+"&rid="+crm_lead_id+"&transaction_table="+transaction_table,
             type: "POST",
@@ -388,18 +388,18 @@ foreach ($feasibility_requirements_expiry_days as $item) {
     }
 </script>
 <!-- <ul class="nav md-tabs infisuite_tab mb-3" role="tablist">
-	<li class="nav-item">
-		<a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#itemcategory" role="tab" aria-selected="true"><?= __('Leads'); ?><label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$crm_leadslist); ?></label></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true"><?= __('Deals'); ?><label class="form-label label label-xs label-success m-l-10">0</label></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true"><?= __('Contact'); ?><label class="form-label label label-xs label-success m-l-10">0</label></a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true"><?= __('Companies'); ?><label class="form-label label label-xs label-success m-l-10">0</label></a>
-	</li>
+    <li class="nav-item">
+        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#itemcategory" role="tab" aria-selected="true"><?= __('Leads'); ?><label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$crm_leadslist); ?></label></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true"><?= __('Deals'); ?><label class="form-label label label-xs label-success m-l-10">0</label></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true"><?= __('Contact'); ?><label class="form-label label label-xs label-success m-l-10">0</label></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true"><?= __('Companies'); ?><label class="form-label label label-xs label-success m-l-10">0</label></a>
+    </li>
 </ul>
  -->
 
@@ -560,23 +560,23 @@ foreach ($feasibility_requirements_expiry_days as $item) {
     </div>
 </div>
 <div class="row">
-	<div class="col-lg-6">
-		<ul class="nav md-tabs infisuite_tab mb-3">
+    <div class="col-lg-6">
+        <ul class="nav md-tabs infisuite_tab mb-3">
             <li class="nav-item">
                 <a class="nav-link f-w-600 f-12 active_crm_home active active_all_class" data-bs-toggle="tab" href="#home-tab" role="tab" aria-selected="true" onclick="viewAllListPage('home')"><?= __('Home'); ?></a>
             </li>
-			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active_crm_leads active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_leads')"><?= __('Leads'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active_crm_contacts active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_contacts')"><?= __('Contacts'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active_crm_companies active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_companies')"><?= __('Companies'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link f-w-600 f-12 active_crm_deals active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_deals')"><?= __('Deals'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
-			</li>
+            <li class="nav-item">
+                <a class="nav-link f-w-600 f-12 active_crm_leads active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_leads')"><?= __('Leads'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link f-w-600 f-12 active_crm_contacts active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_contacts')"><?= __('Contacts'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link f-w-600 f-12 active_crm_companies active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_companies')"><?= __('Companies'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link f-w-600 f-12 active_crm_deals active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_deals')"><?= __('Deals'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link f-w-600 f-12 active_crm_campaigns active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_campaigns')"> <?= __('Campaign'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
             </li>
@@ -587,7 +587,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 <a class="nav-link f-w-600 f-12 active_crm_feasibilities active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_feasibilities')"><?= __('Feasibility'); ?></a>
             </li>
 
-		</ul>
+        </ul>
     </div>
    <div class="col-lg-3">
         <div class="row mb-2" style="display: none" id="custome_date">
@@ -635,70 +635,70 @@ foreach ($feasibility_requirements_expiry_days as $item) {
     <?php } ?>
     </div>
 </div>
-		<div class="tab-content tabs">
+        <div class="tab-content tabs">
             <div class="tab-pane card-body p-0 active active_crm_home active_all_class" id="home-tab" role="tabpanel">
                 <?php include_once "views/custom_view_crm_home_dashboards.php"; ?>
             </div>
-			<div class="tab-pane card-body p-0 dynamictabviews active_all_class" id="lead-tab" role="tabpanel" >
+            <div class="tab-pane card-body p-0 dynamictabviews active_all_class" id="lead-tab" role="tabpanel" >
                  <?php ?>
 
-        	</div>
-	</div>
+            </div>
+    </div>
 
 
 
 <?php /** ?>
     <div class="col-lg-3 text-right">
-		<button type="button" class="btn btn-primary waves-effect waves-light m-r-10" ><i class="ti-list"></i> <?= __('List'); ?></button>
-		<button type="button" class="btn btn-primary waves-effect waves-light" ><i class="ti-layout-column4-alt"></i> <?= __('Kanban board'); ?></button>
+        <button type="button" class="btn btn-primary waves-effect waves-light m-r-10" ><i class="ti-list"></i> <?= __('List'); ?></button>
+        <button type="button" class="btn btn-primary waves-effect waves-light" ><i class="ti-layout-column4-alt"></i> <?= __('Kanban board'); ?></button>
 
-		<div class="card">
-			<div class="card-header">
-				<h5><?= __('Task'); ?></h5>
-			</div>
-			<div class="card-body">
-				<table class="table table-hover m-b-0" style="font-size:13px;" >
-					<thead>
-						<tr><th><?= __('Lead Code'); ?></th>
-							<th><?= __('Activity'); ?></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php foreach($today_crm_lead_details as $crmld){
-							$meg = "";
-		                    if($crmld['lead_type'] == '2' || $crmld['lead_type'] == '3'){
-		                        $meg .= "<span class='d-block'>".$crmld['date']." ".$crmld['time']."</span>".$crmld['comment'];
-		                    }elseif($crmld['lead_type'] == '4'){
-		                        $meg = "<span class='d-block'>".$crmld['phone']." ".$crmld['time']."</span>".$crmld['sms_text'];
-		                    }elseif($crmld['lead_type'] == '5'){
-		                        $meg .= "<span class='d-block'>".$crmld['recipient_email_id']."</span>".$crmld['sms_text'];
-		                    }elseif($crmld['lead_type'] == '7'){ //meeting
-		                        $member = json_decode($crmld['member'],1);
-		                            //($member);
-		                            $membermsg = "";
-		                            foreach($member as $members){
-		                                $membermsg .= "<span class='m-r-5'>".$_SESSION['users'][$members].",</span>";
-		                            }
-		                        $meg .= "<span class='d-block'>".$crmld['date']." ".$crmld['time']."</span>".$membermsg." <span class='d-block'>".$crmld['comment']."</span>";
-		                    }elseif($crmld['lead_type'] == '8'){ //visit
-		                         $meg .= "<span class='d-block'>".$crmld['date']." ".$crmld['time']."</span>";
-		                         $meg .= "<span class='d-block'>".$crmld['address']." ".$crmld['post_code']."</span>";
-		                         $meg .=$crmld['comment'];
-		                    }else{
-		                         $meg .= $crmld['comment'] !=""?$crmld['comment']:"-";
-		                    }
-							?>
-							<tr>
-								<td><?php echo $leadcode[$crmld['crm_lead_id']]; ?></td>
-								<td class="w-b-w-s"><?php echo $meg; ?></td>
-							</tr>
-					<?php } ?>
-					</tbody>
-				</table>
+        <div class="card">
+            <div class="card-header">
+                <h5><?= __('Task'); ?></h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover m-b-0" style="font-size:13px;" >
+                    <thead>
+                        <tr><th><?= __('Lead Code'); ?></th>
+                            <th><?= __('Activity'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($today_crm_lead_details as $crmld){
+                            $meg = "";
+                            if($crmld['lead_type'] == '2' || $crmld['lead_type'] == '3'){
+                                $meg .= "<span class='d-block'>".$crmld['date']." ".$crmld['time']."</span>".$crmld['comment'];
+                            }elseif($crmld['lead_type'] == '4'){
+                                $meg = "<span class='d-block'>".$crmld['phone']." ".$crmld['time']."</span>".$crmld['sms_text'];
+                            }elseif($crmld['lead_type'] == '5'){
+                                $meg .= "<span class='d-block'>".$crmld['recipient_email_id']."</span>".$crmld['sms_text'];
+                            }elseif($crmld['lead_type'] == '7'){ //meeting
+                                $member = json_decode($crmld['member'],1);
+                                    //($member);
+                                    $membermsg = "";
+                                    foreach($member as $members){
+                                        $membermsg .= "<span class='m-r-5'>".$_SESSION['users'][$members].",</span>";
+                                    }
+                                $meg .= "<span class='d-block'>".$crmld['date']." ".$crmld['time']."</span>".$membermsg." <span class='d-block'>".$crmld['comment']."</span>";
+                            }elseif($crmld['lead_type'] == '8'){ //visit
+                                 $meg .= "<span class='d-block'>".$crmld['date']." ".$crmld['time']."</span>";
+                                 $meg .= "<span class='d-block'>".$crmld['address']." ".$crmld['post_code']."</span>";
+                                 $meg .=$crmld['comment'];
+                            }else{
+                                 $meg .= $crmld['comment'] !=""?$crmld['comment']:"-";
+                            }
+                            ?>
+                            <tr>
+                                <td><?php echo $leadcode[$crmld['crm_lead_id']]; ?></td>
+                                <td class="w-b-w-s"><?php echo $meg; ?></td>
+                            </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
     <?php **/ ?>
 
 <!---------Add Lead Form------------->

@@ -21,7 +21,7 @@ if(isset($_POST['post_job'])){
         $url = API."?mode=insertjobpost&method=post";
         $_POST['company_id'] = $_SESSION['company_id'];
         $_POST['userid'] = $_SESSION['userid'];
-        		$screen_question = array();
+                $screen_question = array();
     foreach($_POST['screening_question_seq'] as $quekey=>$qua){
         $questionlist = array();
         if($_POST['screening_question'][$quekey] !=""){

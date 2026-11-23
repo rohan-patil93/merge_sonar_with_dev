@@ -14,13 +14,13 @@ $employee_id = $_REQUEST['employee_id'] ?? 0;
 $month       = $_REQUEST['month'] ?? '';
 
 if (!$employee_id || !$month) {
-	echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
-	exit;
+    echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
+    exit;
 }
 // Call API
 $url = API . "?mode=getEmployeesAttendanceData&method=get"
-	. "&employee_id={$employee_id}"
-	. "&month={$month}";
+    . "&employee_id={$employee_id}"
+    . "&month={$month}";
 $response = callAPI($url);
 $response = json_decode($response, true);
 $attendance = $response['attendance_data'] ?? array();
@@ -117,23 +117,23 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
 ?>
 
 <div class="col-12">
-	<div class="card">
-		<div class="card-header">
-			<h5><?= __('Employee Attendance Report') ?> (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
-			<?php if (!empty($shift_info)): ?>
-				<span class="text-muted m-l-5">
+    <div class="card">
+        <div class="card-header">
+            <h5><?= __('Employee Attendance Report') ?> (<?= date('F Y', strtotime($month . '-01')); ?>)</h5>
+            <?php if (!empty($shift_info)): ?>
+                <span class="text-muted m-l-5">
                     <i class="fa fa-clock-o"></i>
                     <?= $shift_info['shift_name'] ?? 'N/A'; ?>
                     (<?= $shift_info['clock_in'] ?? '00:00:00'; ?> - <?= $shift_info['clock_out'] ?? '00:00:00'; ?>)
                 </span>
-			<?php endif; ?>
+            <?php endif; ?>
             <span class=" m-l-5"><?= __('Designation') ?> : </span>
             <span class="text-muted m-l-5"><?php echo $employee_name['designation_name']!="" ? $employee_name['designation_name'] : "-";  ?></span>
             <span class=" m-l-5"><?= __('Department') ?> :</span>
             <span class="text-muted m-l-5"><?php echo $employee_name['department_name']!="" ? $employee_name['department_name'] : "-";  ?></span>
             <span class=" m-l-5"><?= __('Location') ?> :</span>
             <span class="text-muted m-l-5"><?php echo $employee_name['location_name']!="" ? $employee_name['location_name'] : "-";  ?></span>
-		</div>
+        </div>
         <div class="m-l-10">
              <span class=" m-l-5"> <?= __('Present Days') ?> :  </span>
             <span class="text-muted m-l-5"> <?php echo  $atdata['P']; ?></span>
@@ -147,28 +147,28 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
             <span class="text-muted m-l-5"><?php echo  $emp_work_days; ?></span>
         </div>
 
-		<div class="card-body">
+        <div class="card-body">
             <input type="hidden" name="company_id" id="company_id" value="<?php echo $_SESSION['company_id']; ?>">
 <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['userid']; ?>">
 <input type="hidden" name="emp_id" id="emp_id" value="<?php echo $employee_id; ?>">
 <input type="hidden" name="clock_in" id="clock_in" value="<?php echo $shift_info['clock_in']; ?>">
 <input type="hidden" name="clock_out" id="clock_out" value="<?php echo $shift_info['clock_out']; ?>">
-			<div class="table-responsive">
-				<table class="table table-bordered table-hover">
-					<thead>
-						<tr>
-							<th scope="col" width="5%"><?= __('S.No') ?></th>
-							<th scope="col"><?= __('Attendance Date') ?></th>
-							<th scope="col"><?= __('Clock In') ?></th>
-							<th scope="col"><?= __('Clock Out') ?></th>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" width="5%"><?= __('S.No') ?></th>
+                            <th scope="col"><?= __('Attendance Date') ?></th>
+                            <th scope="col"><?= __('Clock In') ?></th>
+                            <th scope="col"><?= __('Clock Out') ?></th>
                             <th scope="col"><?= __('Over Time') ?></th>
                             <th scope="col"><?= __('Absenteeism') ?></th>
-							<th scope="col"><?= __('Status') ?></th>
+                            <th scope="col"><?= __('Status') ?></th>
                             <th scope="col"></th>
                              <th scope="col"></th>
-						</tr>
-					</thead>
-					 <tbody>
+                        </tr>
+                    </thead>
+                     <tbody>
                         <?php
                         $i = 1;
                         $over_time = 0;
@@ -350,11 +350,11 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                         </tr>
                     </tbody>
 
-				</table>
-			</div>
+                </table>
+            </div>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 <div class="modal fade" id="timesheet_edit_modal" tabindex="-1" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-xl" role="document">

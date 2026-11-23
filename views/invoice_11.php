@@ -1,5 +1,5 @@
 <?php
-if($_GET['print'] =="Y"){
+if((isset($_GET['print']) && $_GET['print'] === "Y")){
     include_once '../includes/session.php';
     include_once '../dbconfig.php';
     include_once '../comm.php';
@@ -29,8 +29,9 @@ if($_POST['callapi'] =='Y'){
     $_SESSION['pdf_file_name'] = $table;
     $items  = $result['items'];
 }
-$party_additional_details = json_decode($transaction['party_additional_details'],1);
-function currencyFormat($number,$config){
+$party_additional_details = json_decode($transaction['party_additional_details'] ?? '', 1);
+if (!function_exists('currencyFormat')) {
+function currencyFormat($number, $config){
     if($number !=""){
         $expoldform = explode('.',$config['number_format']);
         if($expoldform[0]== 1){
@@ -42,6 +43,8 @@ function currencyFormat($number,$config){
         }
     }
 }
+}
+if (!function_exists('numberToWordFormate')) {
 function numberToWordFormate($number){
 
     $no = floor($number ?? 0);
@@ -75,7 +78,9 @@ function numberToWordFormate($number){
             $words[floor($number / 10) * 10]
             . " " . $words[$number % 10] . " "
             . $digits[$counter] . $plural . " " . $hundred;
-        } else $str[] = null;
+        } else {
+            $str[] = null;
+        }
     }
     $str = array_reverse((array)$str);
     $result = implode('', (array)$str);
@@ -89,6 +94,8 @@ function numberToWordFormate($number){
     }
     return ucwords($result." only");
 }
+}
+if (!function_exists('emptyCheck')) {
 function emptyCheck($valu){
     $value = "";
     if($valu !=""){
@@ -97,6 +104,7 @@ function emptyCheck($valu){
         $value = " - ";
     }
     return $value;
+}
 }
 ?>
 <script>
@@ -120,10 +128,10 @@ function emptyCheck($valu){
     <div class="card-body" id="printableArea">
 
         <!-- Required Fremwork -->
-        <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
-        <style type="text/css">
+        <link rel="stylesheet" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+        <style>
             @media (orientation: portrait) {
                 .container {width: 100%; border: none; padding: 0;}
             }
@@ -143,10 +151,10 @@ function emptyCheck($valu){
         <div class="table-responsive">
             <table class="table table-card">
                 <tr>
-                    <td class="p-1 border-0" style="vertical-align:top; width: 20%;">
-                        <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;" alt="" >
+                    <td class="p-1 border-0" style="width: 20%; vertical-align: top;">
+                        <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width: 100px; height: 34px;" alt="<?= htmlspecialchars(__('SAR Studio Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                     </td>
-                    <td class="p-1 border-0 f-12 text-center" style="vertical-align:top; padding-right: 40px !important; width: 25%;">
+                    <td class="p-1 border-0 f-12" style="width: 25%; text-align: center; vertical-align: top; padding-right: 40px !important;">
                         <span><?= __('THANK YOU FOR YOUR ORDER. THIS DOCUMENT IS A RECEIPT OF YOUR PURCHASE.'); ?></span>
                     </td>
                     <td colspan="4" class="border-0 p-1" style="width: 55%;">
@@ -154,32 +162,32 @@ function emptyCheck($valu){
                             <table role="presentation" class="table">
                                 <tr>
                                     <td class="f-12"><?= __('TO'); ?></td>
-                                    <td class="f-12 text-end">
+                                    <td class="f-12" style="text-align: right;">
                                         <span><?= __('FIRST NAME'); ?></span>
                                         <span class="m-l-10"><?= __('LAST NAME'); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="f-12"><?= __('CUSTOMER ID'); ?></td>
-                                    <td class="f-12 text-end">
+                                    <td class="f-12" style="text-align: right;">
                                         <span>12345</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="f-12"><?= __('DATE'); ?></td>
-                                    <td class="f-12 text-end">
+                                    <td class="f-12" style="text-align: right;">
                                         <span><?= __('DD-MM-YY'); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="f-12"><?= __('ORDER NO'); ?></td>
-                                    <td class="f-12 text-end">
+                                    <td class="f-12" style="text-align: right;">
                                         <span><?= __('T-TF'); ?></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="f-12"><?= __('NUMBER OF ITEMS'); ?></td>
-                                    <td class="f-12 text-end">
+                                    <td class="f-12" style="text-align: right;">
                                         <span>3</span>
                                     </td>
                                 </tr>
@@ -189,9 +197,9 @@ function emptyCheck($valu){
                 </tr>
                 <tr>
                     <td class="p-1 border-0" style="vertical-align:bottom;">
-                        <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width:100px; height: 34px;" alt="" >
+                        <img src="uploads/all/file_1704095913_659270a975d4a.png" style="width: 100px; height: 34px;" alt="<?= htmlspecialchars(__('SAR Studio Logo'), ENT_QUOTES, 'UTF-8'); ?>">
                     </td>
-                    <td class="p-1 pt-5 border-0 f-12 text-center" style="vertical-align:bottom; padding-right: 40px !important;">
+                    <td class="p-1 pt-5 border-0 f-12" style="text-align: center; vertical-align: bottom; padding-right: 40px !important;">
                         <span><?= __('SAR STUDIO WWW.SAR STUDIO.COM +91 000 000 0000'); ?></span>
                     </td>
                     <td colspan="4" class="p-2 border-0 f-12" style="vertical-align:bottom;">
@@ -199,7 +207,7 @@ function emptyCheck($valu){
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="6">&nbsp</td>
+                    <td colspan="6">&nbsp;</td>
                 </tr>
                 <tr style="background-color: #eeeeee;">
                     <th scope="col" class="p-1 f-12"><?= __('ITEM'); ?></th>
@@ -213,56 +221,53 @@ function emptyCheck($valu){
                     <td class="p-1" style="vertical-align:top;">
                         <img style="width: 100px; height:85px;" class="img-fluid" src="uploads/all/file_1688986265_64abe2999f741.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
-                    <td class="p-1" style="vertical-align:top;">
+                    <td class="p-1" style="vertical-align: top;">
                     </td>
                     <td class="p-1" style="vertical-align:top;">
                         <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
                         <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
                     </td>
-                    <td class="p-1 f-12 text-end" style="vertical-align:top;">15</td>
-                    <td class="p-1 text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000,0000/-</b></td>
-                    <td class="text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000,0000/-</b></td>
+                    <td class="p-1 f-12" style="text-align: right; vertical-align: top;">15</td>
+                    <td class="p-1" style="text-align: right; vertical-align: top;"><b class="f-w-600 f-12">40,000,0000/-</b></td>
+                    <td style="text-align: right; vertical-align: top;"><b class="f-w-600 f-12">40,000,0000/-</b></td>
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
                         <img style="width: 100px;height: 85px;" class="img-fluid" src="uploads/all/file_1688986555_64abe3bb28d5f.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
-                    <td class="p-1" style="vertical-align:top;">
+                    <td class="p-1" style="vertical-align: top;">
                     </td>
                     <td class="p-1" style="vertical-align:top;">
                         <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
                         <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
                     </td>
-                    <td class="p-1 f-12 text-end" style="vertical-align:top;">12</td>
-                    <td class="p-1 text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
-                    <td class="text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
+                    <td class="p-1 f-12" style="text-align: right; vertical-align: top;">12</td>
+                    <td class="p-1" style="text-align: right; vertical-align: top;"><b class="f-w-600 f-12">40,000/-</b></td>
+                    <td style="text-align: right; vertical-align: top;"><b class="f-w-600 f-12">40,000/-</b></td>
                 </tr>
                 <tr>
                     <td class="p-1" style="vertical-align:top;">
                         <img style="width: 100px;" class="img-fluid" src="uploads/all/file_1688973992_64abb2a8a5325.jpg" alt="<?= htmlspecialchars(__('item'), ENT_QUOTES, 'UTF-8'); ?>" >
                     </td>
-                    <td class="p-1" style="vertical-align:top;">
+                    <td class="p-1" style="vertical-align: top;">
                     </td>
                     <td class="p-1" style="vertical-align:top;">
                         <span class="d-block f-12"><?= __('BLANKET SOFA'); ?></span>
                         <span class="d-block f-12"><?= __('S-15-F1-BL-15-15, BLANKET SOFA, Sofa 1 Seater, DM1 - Toak Natural, DM2 - Seat Nougat'); ?></span>
                     </td>
-                    <td class="p-1 text-end" style="vertical-align:top;">100</td>
-                    <td class="p-1 text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
-                    <td class="p-1 text-end" style="vertical-align:top;"><b class="f-w-600 f-12">40,000/-</b></td>
+                    <td class="p-1" style="text-align: right; vertical-align: top;">100</td>
+                    <td class="p-1" style="text-align: right; vertical-align: top;"><b class="f-w-600 f-12">40,000/-</b></td>
+                    <td class="p-1" style="text-align: right; vertical-align: top;"><b class="f-w-600 f-12">40,000/-</b></td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="text-center p-1 border-0">
+                    <td colspan="2" class="p-1 border-0" style="text-align: center;">
                         -
                     </td>
                     <td colspan="4" class="border-0 p-1">
                             <table class="table">
                                 <tr>
-                                    <th scope="col" class="f-12 p-0 pt-1 pb-1" style="width: 50%;"><?= __('TOTAL'); ?></th>
-                                    <th scope="col" class="text-right f-12 p-0 pt-1 pb-1" style="width: 50%;">
-                                        <?= __('INR 1,20,000/'); ?>-
-                                    </th>
-                                </tr>
+                                    <th scope="col" class="f-12 p-0 pt-1 pb-1" width="50%"><?= __('TOTAL'); ?></th>
+                                    <th scope="col" width="50%" class="text-right f-12 p-0 pt-1 pb-1">
                                         <?= __('INR 1,20,000/'); ?>-
                                     </th>
                                 </tr>

@@ -8,140 +8,140 @@ $departments = isset($filter_res['departments']) ? $filter_res['departments'] : 
 $today = date('Y-m-d');
 ?>
 <div class="page-body">
-	<div class="card">
-		<div class="card-header">
-			<h5><?= __('Vendors Movements Report'); ?></h5>
-			<div class="card-header-right">
-				<div class="dropdown-primary dropdown open">
-					<button class="btn btn-primary dropdown-toggle waves-light" type="button" id="vendorsMovementsReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
-					<div class="dropdown-menu p-0" aria-labelledby="vendorsMovementsReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-						<a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Vendors Movements Report" target="_blank"><?= __('CSV'); ?></a>
-					</div>
-				</div>
-				<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
-					<i class="icofont icofont-reply"></i>
-					<?= __('Back'); ?>
-				</a>
-			</div>
-		</div>
-		<div class="card-body p-4">
-			<div class="row">
-				<div class="col-lg-3 col-md-6 form-group">
-					<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('From Date'); ?> <span class="text-danger">*</span></span>
-					<input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>">
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('To Date'); ?> <span class="text-danger">*</span></span>
-					<input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Location'); ?></span>
-					<select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%" aria-label="<?= htmlspecialchars(__('Location Id'), ENT_QUOTES, 'UTF-8'); ?>">
-						<option value=""><?= __('All Locations'); ?></option>
-						<?php if(count((array)$locations) > 0){
-							foreach($locations as $loc_row){
-								$lid = is_array($loc_row) ? $loc_row['id'] : $loc_row->id;
-								$lname = is_array($loc_row) ? $loc_row['location_name'] : $loc_row->location_name;
-						?>
-								<option value="<?php echo $lid; ?>"><?php echo htmlspecialchars($lname); ?></option>
-						<?php }
-						} ?>
-					</select>
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Department'); ?></span>
-					<select class="form-control js-example-basic-single" id="department_id" name="department_id" style="width:100%" aria-label="<?= htmlspecialchars(__('Department Id'), ENT_QUOTES, 'UTF-8'); ?>">
-						<option value=""><?= __('All Departments'); ?></option>
-						<?php if(count((array)$departments) > 0){
-							foreach($departments as $dept_row){
-								$did = is_array($dept_row) ? $dept_row['id'] : $dept_row->id;
-								$dname = is_array($dept_row) ? $dept_row['department_name'] : $dept_row->department_name;
-						?>
-								<option value="<?php echo $did; ?>"><?php echo htmlspecialchars($dname); ?></option>
-						<?php }
-						} ?>
-					</select>
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Movement'); ?></span>
-					<select class="form-control js-example-basic-single" id="movement" name="movement" style="width:100%" aria-label="<?= htmlspecialchars(__('Movement'), ENT_QUOTES, 'UTF-8'); ?>">
-						<option value=""><?= __('All'); ?></option>
-						<option value="inside"><?= __('Still Inside'); ?></option>
-						<option value="exited"><?= __('Exited'); ?></option>
-					</select>
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Search'); ?></span>
-					<input class="form-control" type="text" name="search" id="search" placeholder="<?= htmlspecialchars(__('Driver / Mobile / Vehicle / Card'), ENT_QUOTES, 'UTF-8'); ?>" value="" aria-label="<?= htmlspecialchars(__('Driver / Mobile / Vehicle / Card'), ENT_QUOTES, 'UTF-8'); ?>">
-				</div>
-				<div class="col-lg-3 col-md-6 form-group">
-					<span class="d-inline-block fw-bold" style="margin-bottom:5px">&nbsp;</span>
-					<button type="button" class="btn btn-primary form-control" id="getVendorsMovementsReportBtn"><?= __('Search'); ?></button>
-				</div>
-			</div>
-			<div class="row mt-3 custom-scroll" id="tableContent" style="height:500px">
-				<div class="col-12">
-					<p class="text-muted mb-0"><?= __('Select filters and click Search to view vendors movements.'); ?></p>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="card">
+        <div class="card-header">
+            <h5><?= __('Vendors Movements Report'); ?></h5>
+            <div class="card-header-right">
+                <div class="dropdown-primary dropdown open">
+                    <button class="btn btn-primary dropdown-toggle waves-light" type="button" id="vendorsMovementsReportDownload" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('More'); ?></button>
+                    <div class="dropdown-menu p-0" aria-labelledby="vendorsMovementsReportDownload" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                        <a class="dropdown-item waves-light waves-effect" href="custom_view_download.php?page=Vendors Movements Report" target="_blank"><?= __('CSV'); ?></a>
+                    </div>
+                </div>
+                <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view">
+                    <i class="icofont icofont-reply"></i>
+                    <?= __('Back'); ?>
+                </a>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 form-group">
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('From Date'); ?> <span class="text-danger">*</span></span>
+                    <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('From Date'), ENT_QUOTES, 'UTF-8'); ?>">
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('To Date'); ?> <span class="text-danger">*</span></span>
+                    <input class="form-control" type="date" name="to_date" id="to_date" value="<?php echo $today; ?>" aria-label="<?= htmlspecialchars(__('To Date'), ENT_QUOTES, 'UTF-8'); ?>">
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Location'); ?></span>
+                    <select class="form-control js-example-basic-single" id="location_id" name="location_id" style="width:100%" aria-label="<?= htmlspecialchars(__('Location Id'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <option value=""><?= __('All Locations'); ?></option>
+                        <?php if(count((array)$locations) > 0){
+                            foreach($locations as $loc_row){
+                                $lid = is_array($loc_row) ? $loc_row['id'] : $loc_row->id;
+                                $lname = is_array($loc_row) ? $loc_row['location_name'] : $loc_row->location_name;
+                        ?>
+                                <option value="<?php echo $lid; ?>"><?php echo htmlspecialchars($lname); ?></option>
+                        <?php }
+                        } ?>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Department'); ?></span>
+                    <select class="form-control js-example-basic-single" id="department_id" name="department_id" style="width:100%" aria-label="<?= htmlspecialchars(__('Department Id'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <option value=""><?= __('All Departments'); ?></option>
+                        <?php if(count((array)$departments) > 0){
+                            foreach($departments as $dept_row){
+                                $did = is_array($dept_row) ? $dept_row['id'] : $dept_row->id;
+                                $dname = is_array($dept_row) ? $dept_row['department_name'] : $dept_row->department_name;
+                        ?>
+                                <option value="<?php echo $did; ?>"><?php echo htmlspecialchars($dname); ?></option>
+                        <?php }
+                        } ?>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Movement'); ?></span>
+                    <select class="form-control js-example-basic-single" id="movement" name="movement" style="width:100%" aria-label="<?= htmlspecialchars(__('Movement'), ENT_QUOTES, 'UTF-8'); ?>">
+                        <option value=""><?= __('All'); ?></option>
+                        <option value="inside"><?= __('Still Inside'); ?></option>
+                        <option value="exited"><?= __('Exited'); ?></option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px"><?= __('Search'); ?></span>
+                    <input class="form-control" type="text" name="search" id="search" placeholder="<?= htmlspecialchars(__('Driver / Mobile / Vehicle / Card'), ENT_QUOTES, 'UTF-8'); ?>" value="" aria-label="<?= htmlspecialchars(__('Driver / Mobile / Vehicle / Card'), ENT_QUOTES, 'UTF-8'); ?>">
+                </div>
+                <div class="col-lg-3 col-md-6 form-group">
+                    <span class="d-inline-block fw-bold" style="margin-bottom:5px">&nbsp;</span>
+                    <button type="button" class="btn btn-primary form-control" id="getVendorsMovementsReportBtn"><?= __('Search'); ?></button>
+                </div>
+            </div>
+            <div class="row mt-3 custom-scroll" id="tableContent" style="height:500px">
+                <div class="col-12">
+                    <p class="text-muted mb-0"><?= __('Select filters and click Search to view vendors movements.'); ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
-	function toast(msg) {
-		tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger',
-			'animated flipInX', 'animated flipOutX', msg, '');
-	}
+    function toast(msg) {
+        tostarnotify('top', 'right', 'fa fa-thumbs-down', 'form-label label label-danger',
+            'animated flipInX', 'animated flipOutX', msg, '');
+    }
 
-	$(document).ready(function () {
-		$(".js-example-basic-single").select2();
+    $(document).ready(function () {
+        $(".js-example-basic-single").select2();
 
-		$("#from_date").on("change", function () {
-			var fromDate = $(this).val();
-			$("#to_date").attr("min", fromDate);
-			if($("#to_date").val() != "" && $("#to_date").val() < fromDate){
-				$("#to_date").val(fromDate);
-			}
-		});
+        $("#from_date").on("change", function () {
+            var fromDate = $(this).val();
+            $("#to_date").attr("min", fromDate);
+            if($("#to_date").val() != "" && $("#to_date").val() < fromDate){
+                $("#to_date").val(fromDate);
+            }
+        });
 
-		$("#getVendorsMovementsReportBtn").on("click", function () {
-			var fromDate = $("#from_date").val();
-			var toDate = $("#to_date").val();
+        $("#getVendorsMovementsReportBtn").on("click", function () {
+            var fromDate = $("#from_date").val();
+            var toDate = $("#to_date").val();
 
-			if(fromDate == ""){
-				toast("Please select From Date");
-				return;
-			}
-			if(toDate == ""){
-				toast("Please select To Date");
-				return;
-			}
-			if(toDate < fromDate){
-				toast("To Date should be greater than or equal to From Date");
-				return;
-			}
+            if(fromDate == ""){
+                toast("Please select From Date");
+                return;
+            }
+            if(toDate == ""){
+                toast("Please select To Date");
+                return;
+            }
+            if(toDate < fromDate){
+                toast("To Date should be greater than or equal to From Date");
+                return;
+            }
 
-			var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
-			$("#tableContent").html(loader);
+            var loader = '<div class="col-12 text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+            $("#tableContent").html(loader);
 
-			$.ajax({
-				url: "views/custom_list_vendors_movements_report_ajax.php",
-				type: "POST",
-				data: {
-					from_date: fromDate,
-					to_date: toDate,
-					location_id: $("#location_id").val(),
-					department_id: $("#department_id").val(),
-					movement: $("#movement").val(),
-					search: $("#search").val()
-				},
-				success: function (response) {
-					$("#tableContent").html(response);
-				},
-				error: function () {
-					$("#tableContent").html('<div class="col-12"><p class="text-danger mb-0"><?= htmlspecialchars(__('Unable to load vendors movements report.'), ENT_QUOTES, 'UTF-8'); ?></p></div>');
-				}
-			});
-		});
-	});
+            $.ajax({
+                url: "views/custom_list_vendors_movements_report_ajax.php",
+                type: "POST",
+                data: {
+                    from_date: fromDate,
+                    to_date: toDate,
+                    location_id: $("#location_id").val(),
+                    department_id: $("#department_id").val(),
+                    movement: $("#movement").val(),
+                    search: $("#search").val()
+                },
+                success: function (response) {
+                    $("#tableContent").html(response);
+                },
+                error: function () {
+                    $("#tableContent").html('<div class="col-12"><p class="text-danger mb-0"><?= htmlspecialchars(__('Unable to load vendors movements report.'), ENT_QUOTES, 'UTF-8'); ?></p></div>');
+                }
+            });
+        });
+    });
 </script>

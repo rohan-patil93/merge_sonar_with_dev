@@ -43,8 +43,8 @@ $filter_category = $tasks_details['filter_option'];
 <?php
 
 if($emp_list_names!="") {
-  echo '<script type="text/JavaScript">  
-  populatenamelist(); 
+  echo '<script type="text/JavaScript">
+  populatenamelist();
   </script>'
   ;
 }

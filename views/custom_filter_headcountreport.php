@@ -62,8 +62,8 @@ function populatenamelist() {
 </script>
 <?php
 if (!empty($emp_list_names_raw)) {
-    echo '<script type="text/JavaScript">  
-    populatenamelist(); 
+    echo '<script type="text/JavaScript">
+    populatenamelist();
     </script>';
 }
 ?>

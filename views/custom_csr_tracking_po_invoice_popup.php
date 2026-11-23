@@ -14,13 +14,13 @@ if (!$project_id || !$tracking_id || !$doc_type) {
 ?>
 
 <?php
-	if ($doc_type === 'PO') {
-	    include_once 'custom_csr_po_details.php';
-	} elseif ($doc_type === 'INVOICE') {
-	    include_once 'custom_csr_invoice_settlement.php';
-	} else {
-	    echo '<div class="alert alert-warning">' . __('Invalid document type') . '</div>';
-	}
+    if ($doc_type === 'PO') {
+        include_once 'custom_csr_po_details.php';
+    } elseif ($doc_type === 'INVOICE') {
+        include_once 'custom_csr_invoice_settlement.php';
+    } else {
+        echo '<div class="alert alert-warning">' . __('Invalid document type') . '</div>';
+    }
 ?>
 
 

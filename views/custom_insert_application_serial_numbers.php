@@ -7,24 +7,24 @@ $dynamic_mapping_tables = $result['dynamic_mapping_tables'];
 
 ?>
 <script>
-	function selectProcessName(process_name, rid=""){
-		var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
-    	$("#transaction_serial_numbers_templates").html(loader);
-		jQuery.ajax({
-			url: "views/custom_insert_application_serial_number_ajax.php",
-			data:'process_name='+process_name+'&rid='+rid,
-			type: "POST",
-			success:function(data){
-				$("#transaction_serial_numbers_templates").html(data);
-				$(".js-example-basic-single").select2();
-				var elem = Array.prototype.slice.call(document.querySelectorAll('.js-switch-finanaceyear'));
-				elem.forEach(function(html) {
-					var switchery = new Switchery(html, { color: '#4099ff', jackColor: '#fff',size: 'medium' });
-				});
-			},
-			error:function (){}
-		});
-	}
+    function selectProcessName(process_name, rid=""){
+        var loader = '<div class="text-center" id="loader-show"><img src="assets/images/spiner/spiner3.gif" style="width: 300px;"></div>';
+        $("#transaction_serial_numbers_templates").html(loader);
+        jQuery.ajax({
+            url: "views/custom_insert_application_serial_number_ajax.php",
+            data:'process_name='+process_name+'&rid='+rid,
+            type: "POST",
+            success:function(data){
+                $("#transaction_serial_numbers_templates").html(data);
+                $(".js-example-basic-single").select2();
+                var elem = Array.prototype.slice.call(document.querySelectorAll('.js-switch-finanaceyear'));
+                elem.forEach(function(html) {
+                    var switchery = new Switchery(html, { color: '#4099ff', jackColor: '#fff',size: 'medium' });
+                });
+            },
+            error:function (){}
+        });
+    }
 
 
 
@@ -49,7 +49,7 @@ function positionChange(select) {
         const availableValues = optionsList.filter(v => !usedValues.includes(v));
 
         if (availableValues.length > 0) {
- 			$(allSelects[i]).val(availableValues[0]).trigger("change");
+             $(allSelects[i]).val(availableValues[0]).trigger("change");
           //allSelects[i].value = availableValues[0]; // auto replace with first free value
         } else {
           allSelects[i].value = ""; // fallback to blank if nothing left
@@ -139,35 +139,35 @@ function serialNumberPreview() {
             }
         }
         if (fy && financial_year_check && financial_year_position == $m) parts.push(fy);
-	}
+    }
     **/
 
 }
 
 
 function preFixonChange(){
-	if ($('#pre_fix_check').is(':checked')) {
-	    $(".pre_fix_check_css").removeClass("event_disabled");
-	}else{
-	    $(".pre_fix_check_css").addClass("event_disabled");
-	}
-	serialNumberPreview();
+    if ($('#pre_fix_check').is(':checked')) {
+        $(".pre_fix_check_css").removeClass("event_disabled");
+    }else{
+        $(".pre_fix_check_css").addClass("event_disabled");
+    }
+    serialNumberPreview();
 }
 function postFixonChange(){
-	if ($('#post_fix_check').is(':checked')) {
-	   	$(".post_fix_check_css").removeClass("event_disabled");
-	}else{
-	    $(".post_fix_check_css").addClass("event_disabled");
-	}
-	serialNumberPreview();
+    if ($('#post_fix_check').is(':checked')) {
+           $(".post_fix_check_css").removeClass("event_disabled");
+    }else{
+        $(".post_fix_check_css").addClass("event_disabled");
+    }
+    serialNumberPreview();
 }
 function financeYearonChange(){
-	if ($('#financial_year_check').is(':checked')) {
-	    $(".financial_year_check_css").removeClass("event_disabled");
-	}else{
-	    $(".financial_year_check_css").addClass("event_disabled");
-	}
-	serialNumberPreview();
+    if ($('#financial_year_check').is(':checked')) {
+        $(".financial_year_check_css").removeClass("event_disabled");
+    }else{
+        $(".financial_year_check_css").addClass("event_disabled");
+    }
+    serialNumberPreview();
 }
 
 
@@ -208,9 +208,9 @@ function formSubmitBTN(){
     if(error_seq =='0'){
        // console.log("okkkkkkkkkkkkkkkk");
 
-	var process_name = $("#process_name").val();
-	var rid = $("#application_serial_numbers_id").val();
-	var formData = new FormData();
+    var process_name = $("#process_name").val();
+    var rid = $("#application_serial_numbers_id").val();
+    var formData = new FormData();
     formData.append("page", "insertapplicationserialnumbers");
     var dataArray = $("#serial_number_form").serializeArray();
     $(dataArray).each(function(i, field){
@@ -221,10 +221,10 @@ function formSubmitBTN(){
         url: "ajax.php",
         data: formData,
         type: "POST",
-       	contentType: false,
+           contentType: false,
         processData: false,
         success:function(data){
-        	console.log(data);
+            console.log(data);
             var result = JSON.parse(data);
             if(result.res.status =="fail"){
                 tostarnotify('top','right','fa fa-thumbs-down','form-label label label-danger','animated flipInX','animated flipOutX',result.res.message,'');
@@ -245,23 +245,23 @@ function formSubmitBTN(){
 }
 </script>
 <div class="card">
-	<div class="card-header">
+    <div class="card-header">
         <h5><?= __('Transaction Serial Numbers') ?></h5>
         <div class="card-header-right">
-          	<a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?> </a>
+              <a href="javascript:history.go(-1)" class="btn waves-effect waves-light mb-2 desktop-view"><i class="icofont icofont-reply"></i><?= __('Back'); ?> </a>
         </div>
     </div>
-	<div class="card-body">
-		<div class="form-group col-lg-6">
-			<span class="form-label d-inline-block fw-bold"><?= __('Process Name') ?></span>
-			<select aria-label="<?= htmlspecialchars(__('Process name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="process_name" id="process_name" onchange="selectProcessName(this.value)">
-				<option value=""><?= __('Select Any One') ?></option>
-				<?php foreach($dynamic_mapping_tables as $process){ ?>
-					<option value="<?php echo $process['application_table_name']; ?>" <?php echo $workflowconfiguration['process_name']==$process['application_table_name']?"selected":"" ?> ><?php echo ucwords(str_replace("_"," ",($process['application_table_name']))); ?></option>
-				<?php } ?>
-			</select>
-		</div>
-	</div>
+    <div class="card-body">
+        <div class="form-group col-lg-6">
+            <span class="form-label d-inline-block fw-bold"><?= __('Process Name') ?></span>
+            <select aria-label="<?= htmlspecialchars(__('Process name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single" name="process_name" id="process_name" onchange="selectProcessName(this.value)">
+                <option value=""><?= __('Select Any One') ?></option>
+                <?php foreach($dynamic_mapping_tables as $process){ ?>
+                    <option value="<?php echo $process['application_table_name']; ?>" <?php echo $workflowconfiguration['process_name']==$process['application_table_name']?"selected":"" ?> ><?php echo ucwords(str_replace("_"," ",($process['application_table_name']))); ?></option>
+                <?php } ?>
+            </select>
+        </div>
+    </div>
 </div>
 
 <div class="row" id="transaction_serial_numbers_templates"></div>

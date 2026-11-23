@@ -162,8 +162,8 @@ $datas = json_decode($emailgroupdata,1);
           <span class="kt-widget__desc">
               <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['list_page_type']]; ?>;color:#fff;"  data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("List") ?> <?php echo $display[$page['list_page_type']]; ?>"> L </a>
               <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['insert_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("Insert") ?> <?php echo $display[$page['insert_page_type']]; ?>"><?php echo "I"; ?> </a>
-              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['edit_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("Edit") ?> <?php echo $display[$page['edit_page_type']]; ?>"><?php echo "E"; ?>	</a>
-              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['view_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("View") ?> <?php echo $display[$page['view_page_type']]; ?>">V	</a>
+              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['edit_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("Edit") ?> <?php echo $display[$page['edit_page_type']]; ?>"><?php echo "E"; ?>    </a>
+              <a href="#" class="btn btn-icon btn-circle" style="background-color: #<?php echo $discolor[$page['view_page_type']]; ?>;color:#fff;" data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title="" data-original-title="<?= __("View") ?> <?php echo $display[$page['view_page_type']]; ?>">V    </a>
           </span>
       </div>
   </div>
@@ -201,13 +201,13 @@ $datas = json_decode($emailgroupdata,1);
           <i class="ti-list"></i>
           <a href="#" class="kt-widget__value kt-font-brand"><?php echo $total; ?> <?= __("Recards") ?></a>
       </div>
-    								</div>
+                                    </div>
 
-    								<div class="kt-widget__section float-right ml-5">
-    									<a href="index.php?option=<?php echo $page['list_page_name']; ?>"><button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold"><?= __("Details") ?></button></a>
-    								</div>
-    							</div>
-    						</div>
+                                    <div class="kt-widget__section float-right ml-5">
+                                        <a href="index.php?option=<?php echo $page['list_page_name']; ?>"><button type="button" class="btn btn-primary btn-shadow-hover font-weight-bold"><?= __("Details") ?></button></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <?php }?>

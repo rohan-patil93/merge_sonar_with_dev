@@ -7,7 +7,7 @@ $jsondecode = callAPI($url1);
 $jsondecode = json_decode($jsondecode,1);
 ?>
 <style>
-	#tree{
+    #tree{
   width:100%;
   height:100%;
 }
@@ -23,35 +23,35 @@ $jsondecode = json_decode($jsondecode,1);
 }
 </style>
 <div class="page-body">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="card">
-				<div class="card-header table-card-header mb-3">
-					<h5> <?= __("User Lists") ?> </h5>
-					<div class="card-header-right table-card-header mb-2">
-				<span class="form-label  col-form-label m-r-20 d-inline-block fw-bold"><?= __("User List") ?></span>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header table-card-header mb-3">
+                    <h5> <?= __("User Lists") ?> </h5>
+                    <div class="card-header-right table-card-header mb-2">
+                <span class="form-label  col-form-label m-r-20 d-inline-block fw-bold"><?= __("User List") ?></span>
 
 <select aria-label="<?= htmlspecialchars(__('Hid userid'), ENT_QUOTES, 'UTF-8'); ?>" class="form-select js-example-basic-single " id="hid_userid" onchange="usertree(this.value)">
-	<?php foreach($jsondecode as $dt){ ?>
-		<option value="<?php echo $dt['id']; ?>" <?php echo $dt['id']==$_SESSION['userid']?"selected":"";  ?>><?php echo $dt['display_name']; ?></option>
+    <?php foreach($jsondecode as $dt){ ?>
+        <option value="<?php echo $dt['id']; ?>" <?php echo $dt['id']==$_SESSION['userid']?"selected":"";  ?>><?php echo $dt['display_name']; ?></option>
 
-	<?php } ?>
+    <?php } ?>
 </select>
-						<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-							<i class="icofont icofont-reply"></i>
-							<?= __("Back") ?>
-						</a>
-					</div>
-				</div>
-				<div class="card card-custom card-sticky" id="kt_page_sticky_card">
-					<div class="card-body">
-						<div class="form-group row ml-20 mr-20 j-wrapper  ">
+                        <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
+                            <i class="icofont icofont-reply"></i>
+                            <?= __("Back") ?>
+                        </a>
+                    </div>
+                </div>
+                <div class="card card-custom card-sticky" id="kt_page_sticky_card">
+                    <div class="card-body">
+                        <div class="form-group row ml-20 mr-20 j-wrapper  ">
 
-							<div id="tree"/></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <div id="tree"/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

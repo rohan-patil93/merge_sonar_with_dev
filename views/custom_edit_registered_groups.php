@@ -185,18 +185,18 @@ function refrashpage(){
 
 </script>
 <div class="d-flex flex-column-fluid">
-	<div class="container-fluid">
-		<div class="card card-custom card-sticky">
-			<div class="card-header">
-				<h5><?= __('Subscription Plans') ?></h5>
-				<div class="card-header-right">
-					<a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
-						<i class="icofont icofont-reply"></i>
-						<?= __('Back') ?>
-					</a>
-				</div>
-			</div>
-			<div class="card-block">
+    <div class="container-fluid">
+        <div class="card card-custom card-sticky">
+            <div class="card-header">
+                <h5><?= __('Subscription Plans') ?></h5>
+                <div class="card-header-right">
+                    <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
+                        <i class="icofont icofont-reply"></i>
+                        <?= __('Back') ?>
+                    </a>
+                </div>
+            </div>
+            <div class="card-block">
                 <form method="post">
                     <div class="card-body">
                        <div class="card">

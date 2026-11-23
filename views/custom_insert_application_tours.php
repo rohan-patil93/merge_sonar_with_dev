@@ -1,10 +1,10 @@
 <?php
 $_SESSION['apply_js']['multiselest'] = '1';
 if(isset($_POST['submittour'])){
-	$_POST['company_id'] = $_SESSION['company_id'];
-	$_POST['user_id'] = $_SESSION['userid'];
-	$url = API."?mode=insertapplicationtours&method=post";
- 	$response = file_post_contents($url, $_POST);
+    $_POST['company_id'] = $_SESSION['company_id'];
+    $_POST['user_id'] = $_SESSION['userid'];
+    $url = API."?mode=insertapplicationtours&method=post";
+     $response = file_post_contents($url, $_POST);
     $return = json_decode($response,1);
 }
 
@@ -45,9 +45,9 @@ $mopdulesetup = json_decode($mopdule_setup,1);
 ?>
 <script>
 
-	function addmorerow(){
-     	var count = $(".itemRow").length;
-     	var htmlRows = '';
+    function addmorerow(){
+         var count = $(".itemRow").length;
+         var htmlRows = '';
         htmlRows += '<tr class="itemRow cardid'+count+'">';
         htmlRows += '<td><div class="row"><div class="col-lg-2"><span class="deleteiconcustom text-danger f-22" onclick="deleteitem('+count+')" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete VRC Card"><i class="ti-trash"></i></span></div><div class="col-lg-10"><input type="hidden" name="rid[]" ><input type="text" name="field_name[]"  class="form-control"  required aria-label="<?= htmlspecialchars(__('Field Name'), ENT_QUOTES, 'UTF-8'); ?>"></div></div></td>';
         htmlRows += '<td><input type="text" name="menu_path[]"  class="form-control" aria-label="<?= htmlspecialchars(__('Menu Path'), ENT_QUOTES, 'UTF-8'); ?>"></td>';
@@ -63,16 +63,16 @@ $mopdulesetup = json_decode($mopdule_setup,1);
          $(".js-example-basic-single").select2();
         $(".js-example-disabled-results").select2();
         var elemdefault = document.querySelector(".js-switch"+count);
-	 	var switchery = new Switchery(elemdefault, { color: '#d6d6d6', jackColor: '#fff' });
-	}
+         var switchery = new Switchery(elemdefault, { color: '#d6d6d6', jackColor: '#fff' });
+    }
 
 function selecttablename(table){
-	if(table=="-1"){
+    if(table=="-1"){
 
 window.location.href = 'index.php?option=COM_INSERT_APPLICATION_TOURS&table='+table;
-	}else{
-		window.location.href = 'index.php?option=COM_INSERT_APPLICATION_TOURS&table='+table;
-	}
+    }else{
+        window.location.href = 'index.php?option=COM_INSERT_APPLICATION_TOURS&table='+table;
+    }
 }
 
 function deleteitem(cardid){
@@ -81,33 +81,33 @@ function deleteitem(cardid){
 
 </script>
 <div class="d-flex flex-column-fluid">
-	<div class="container-fluid ">
-		<div class="card card-custom card-sticky " id="kt_page_sticky_card">
-			<div class="card-header">
-				<h5><?= __('Take A Tours') ?></h5><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>"></i>
-				<div class="card-header-right">
-				       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
+    <div class="container-fluid ">
+        <div class="card card-custom card-sticky " id="kt_page_sticky_card">
+            <div class="card-header">
+                <h5><?= __('Take A Tours') ?></h5><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-info-alt f-20 text-primary" onclick="proceduressteps()" data-bs-toggle="tooltip" data-placement="bottom" title="<?= htmlspecialchars(__('Go Toure'), ENT_QUOTES, 'UTF-8'); ?>"></i>
+                <div class="card-header-right">
+                       <a href="javascript:history.go(-1)" class="btn waves-effect waves-light">
                      <i class="icofont icofont-reply"></i> <?= __('Back') ?></a>
-				</div>
-			</div>
-			<div class=" card-custom mt-2">
-				<div class="card-body">
+                </div>
+            </div>
+            <div class=" card-custom mt-2">
+                <div class="card-body">
 <form method="post" action="">
 <div class="row">
-	<span class="col-lg-2 f-w-700  d-inline-block" style="margin-bottom:5px"><?= __('Select table name') ?></span>
-	<div class="col-lg-3">
-	  <select class="form-select js-example-basic-single" name="application_table_name" onchange="selecttablename(this.value)" aria-label="<?= htmlspecialchars(__('Application Table Name'), ENT_QUOTES, 'UTF-8'); ?>">
-			<option value = "0"> <?= __('Select Any One'); ?></option>
-			<?php foreach ($showtables as $data) {  ?>
-				<option  <?php if($resarray[0]['application_table_name'] == $data['application_table_name']){ ?> selected  <?php } ?> value = <?php echo $data['application_table_name'] ?>   > <?php echo ucwords(str_replace('_',' ',$data['application_table_name'])); ?> </option>
-		<?php	} ?>
-				<option value = "-1"  <?php echo $_GET['table']=="-1"?"selected":""?>><?= __('Other Table') ?></option>
-		</select>
-		<?php if($_GET['table']=="-1"){ ?>
-		<input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="<?= htmlspecialchars(__('Enter Table/Page Name'), ENT_QUOTES, 'UTF-8'); ?>">
-		<?php } ?>
+    <span class="col-lg-2 f-w-700  d-inline-block" style="margin-bottom:5px"><?= __('Select table name') ?></span>
+    <div class="col-lg-3">
+      <select class="form-select js-example-basic-single" name="application_table_name" onchange="selecttablename(this.value)" aria-label="<?= htmlspecialchars(__('Application Table Name'), ENT_QUOTES, 'UTF-8'); ?>">
+            <option value = "0"> <?= __('Select Any One'); ?></option>
+            <?php foreach ($showtables as $data) {  ?>
+                <option  <?php if($resarray[0]['application_table_name'] == $data['application_table_name']){ ?> selected  <?php } ?> value = <?php echo $data['application_table_name'] ?>   > <?php echo ucwords(str_replace('_',' ',$data['application_table_name'])); ?> </option>
+        <?php	} ?>
+                <option value = "-1"  <?php echo $_GET['table']=="-1"?"selected":""?>><?= __('Other Table') ?></option>
+        </select>
+        <?php if($_GET['table']=="-1"){ ?>
+        <input type="text" name="table_name_txt" class="mt-2" id="table_name_txt" value="<?php echo $resarray[0]['application_table_name']; ?>" placeholder="<?= __('Enter Table/Page Name') ?>" aria-label="<?= htmlspecialchars(__('Enter Table/Page Name'), ENT_QUOTES, 'UTF-8'); ?>">
+        <?php } ?>
 
-	</div>
+    </div>
 
 
 
@@ -118,31 +118,31 @@ function deleteitem(cardid){
 <?php if($table_name !=""){ ?>
 <table class="table table-hover table-custom-responsive"  id="toureaddmore">
     <thead>
-	  <tr>
-		  <th scope="col" width="15%"><?= __('Field Name') ?></th>
-		  <th scope="col" width="15%"><?= __('Menu Path') ?></th>
-		  <th scope="col" width="15%"><?= __('Ref Field Name') ?></th>
-		  <th scope="col" width="30%"><?= __('Help Text') ?></th>
-		  <th scope="col" width="15%"><?= __('Field Type') ?></th>
-		  <th scope="col" width="5%"><?= __('Sequence') ?></th>
-		  <th scope="col" width="5%"><?= __('Display') ?></th>
-	  </tr>
-	 </thead>
-	 <tbody>
-	  <?php $i=0; foreach($resarray as $respons){ ?>
-	  <tr class="itemRow">
-		<td>
-			<input type="hidden" name="rid[]" value="<?php echo $respons['id']; ?>">
-	  		<input type="text" name="field_name[]" id="field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['field_name']; ?>"  readonly aria-label="<?= htmlspecialchars(__('Field Name'), ENT_QUOTES, 'UTF-8'); ?>">
-	  	</td>
-	  	<td>
-	  		<input type="text" name="menu_path[]" id="menu_path<?php echo $i; ?>" class="form-control" value="<?php echo $respons['menu_path']; ?>" aria-label="<?= htmlspecialchars(__('Menu Path'), ENT_QUOTES, 'UTF-8'); ?>">
-	  	</td>
-		<td>
-	  		<input type="text" name="reference_field_name[]" id="reference_field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['reference_field_name']; ?>" aria-label="<?= htmlspecialchars(__('Reference Field Name'), ENT_QUOTES, 'UTF-8'); ?>">
-	  	</td>
-		<td><textarea  name="help_text[]" class="form-control" aria-label="<?= htmlspecialchars(__('Help Text'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $respons['help_text']; ?></textarea></td>
-		<td>
+      <tr>
+          <th scope="col" width="15%"><?= __('Field Name') ?></th>
+          <th scope="col" width="15%"><?= __('Menu Path') ?></th>
+          <th scope="col" width="15%"><?= __('Ref Field Name') ?></th>
+          <th scope="col" width="30%"><?= __('Help Text') ?></th>
+          <th scope="col" width="15%"><?= __('Field Type') ?></th>
+          <th scope="col" width="5%"><?= __('Sequence') ?></th>
+          <th scope="col" width="5%"><?= __('Display') ?></th>
+      </tr>
+     </thead>
+     <tbody>
+      <?php $i=0; foreach($resarray as $respons){ ?>
+      <tr class="itemRow">
+        <td>
+            <input type="hidden" name="rid[]" value="<?php echo $respons['id']; ?>">
+              <input type="text" name="field_name[]" id="field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['field_name']; ?>"  readonly aria-label="<?= htmlspecialchars(__('Field Name'), ENT_QUOTES, 'UTF-8'); ?>">
+          </td>
+          <td>
+              <input type="text" name="menu_path[]" id="menu_path<?php echo $i; ?>" class="form-control" value="<?php echo $respons['menu_path']; ?>" aria-label="<?= htmlspecialchars(__('Menu Path'), ENT_QUOTES, 'UTF-8'); ?>">
+          </td>
+        <td>
+              <input type="text" name="reference_field_name[]" id="reference_field_name<?php echo $i; ?>" class="form-control" value="<?php echo $respons['reference_field_name']; ?>" aria-label="<?= htmlspecialchars(__('Reference Field Name'), ENT_QUOTES, 'UTF-8'); ?>">
+          </td>
+        <td><textarea  name="help_text[]" class="form-control" aria-label="<?= htmlspecialchars(__('Help Text'), ENT_QUOTES, 'UTF-8'); ?>"><?php echo $respons['help_text']; ?></textarea></td>
+        <td>
 
  <select class="form-select js-example-basic-single" id="" name="field_type[]"  id="field_type<?php echo $i; ?>" aria-label="<?= htmlspecialchars(__('Field Type'), ENT_QUOTES, 'UTF-8'); ?>">
 
@@ -152,20 +152,20 @@ function deleteitem(cardid){
 <?php } ?>
             </select>
 
-	  	</td>
-	  	<td>
-	  		<input type="text" name="sequence[]" id="sequence<?php echo $i; ?>" class="form-control" value="<?php echo $respons['sequence']; ?>" aria-label="<?= htmlspecialchars(__('Sequence'), ENT_QUOTES, 'UTF-8'); ?>">
-	  	</td>
-	  	<td>
-	  		<input type="checkbox" class="js-switch" name="display[<?php echo $i; ?>]" value="1" <?php echo $respons['display']=='1'?"checked":""; ?>  / aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
+          </td>
+          <td>
+              <input type="text" name="sequence[]" id="sequence<?php echo $i; ?>" class="form-control" value="<?php echo $respons['sequence']; ?>" aria-label="<?= htmlspecialchars(__('Sequence'), ENT_QUOTES, 'UTF-8'); ?>">
+          </td>
+          <td>
+              <input type="checkbox" class="js-switch" name="display[<?php echo $i; ?>]" value="1" <?php echo $respons['display']=='1'?"checked":""; ?>  / aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>">
 
-	  	</td>
+          </td>
 
 
-	  </tr>
-	<?php  $i++;
-	} ?>
-	 </tbody>
+      </tr>
+    <?php  $i++;
+    } ?>
+     </tbody>
 
 </table>
 
@@ -180,10 +180,10 @@ function deleteitem(cardid){
     </div>
 <?php } ?>
 </form>
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

@@ -11,13 +11,13 @@ $employee_id = $_REQUEST['employee_id'] ?? 0;
 $month       = $_REQUEST['assessment_year'] ?? '';
 
 if (!$employee_id || !$month) {
-	echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
-	exit;
+    echo '<div class="alert alert-danger">' . __('Invalid request') . '</div>';
+    exit;
 }
 // Call API
 $url = API . "?mode=togetdocumentlistfile&method=get"
-	. "&semp_id={$employee_id}"
-	. "&assessment_year={$assessment_year}";
+    . "&semp_id={$employee_id}"
+    . "&assessment_year={$assessment_year}";
 $response = callAPI($url);
 $response = json_decode($response, true);
 
@@ -25,23 +25,23 @@ $data = $response['data'] ?? array();
 ?>
 
 <div class="col-12">
-	<div class="card">
+    <div class="card">
 
 
-		<div class="card-body">
-			<div class="table-responsive">
-				<table class="table table-bordered table-hover">
-					<thead>
-						<tr>
-							<th scope="col" width="5%"><?= __('S.No') ?></th>
-							<th scope="col"><?= __('Employee') ?></th>
-							<th scope="col"><?= __('Assessment Year') ?></th>
-							<th scope="col"><?= __('Document Name') ?></th>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" width="5%"><?= __('S.No') ?></th>
+                            <th scope="col"><?= __('Employee') ?></th>
+                            <th scope="col"><?= __('Assessment Year') ?></th>
+                            <th scope="col"><?= __('Document Name') ?></th>
                             <th scope="col"><?= __('PAN Number') ?></th>
                             <th scope="col"><?= __('View') ?></th>
-						</tr>
-					</thead>
-					 <tbody>
+                        </tr>
+                    </thead>
+                     <tbody>
                         <?php $i=1;
                              foreach ($data as $daa){ ?>
 
@@ -61,9 +61,9 @@ $data = $response['data'] ?? array();
 
                     </tbody>
 
-				</table>
-			</div>
+                </table>
+            </div>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>

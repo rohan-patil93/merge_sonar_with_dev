@@ -566,7 +566,7 @@ function addnewoptionrows(qid) {
                   <div class="form-group row" id="'.$opkey.'">
                   <div class="col-lg-1"></div>
                   <div class="col-lg-8">
-                  <div class="input-group input-group-button"> 
+                  <div class="input-group input-group-button">
                   <input type="text" class="form-control display-inline width1" name="survey_question_option'.$qkey.'[]"  placeholder="'.htmlspecialchars(__('Option'), ENT_QUOTES).'" value="'.$opvalue.'" aria-label="'.htmlspecialchars(__('Option'), ENT_QUOTES).'">
                   <span class="input-group-text addon-style">
                   <span class="" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="'.htmlspecialchars(__('Remove Option'), ENT_QUOTES).'"><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$qkey."'".')"></i></span>
@@ -587,7 +587,7 @@ function addnewoptionrows(qid) {
               if($value['type']==2)   {
                 $display_question .= ' <div class="form-group text-left mt-10">
                 <label for="survey_question_scale_'.$qkey.'">'.__('Scale from 1 to:').' <span class="text-danger">*</span></label>
-                <input type="number" id="survey_question_scale_'.$qkey.'" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value="'.$options[0].'" aria-label="'.htmlspecialchars(__('Scale Option'), ENT_QUOTES).'"> 
+                <input type="number" id="survey_question_scale_'.$qkey.'" name="survey_question_option'.$qkey.'[]" class="form-control border" placeholder="'.$options[0].'" value="'.$options[0].'" aria-label="'.htmlspecialchars(__('Scale Option'), ENT_QUOTES).'">
                 </div>';
               }
               if($value['type']==4)   {

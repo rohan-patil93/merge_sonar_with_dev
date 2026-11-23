@@ -64,7 +64,7 @@ if($row_id!='') {
 
 
 if(isset($_POST['create'])){
-	$assessment_start_date = date('Y-m-d',strtotime($_POST['assessment_start_date']));
+    $assessment_start_date = date('Y-m-d',strtotime($_POST['assessment_start_date']));
    $assessment_start_time = "12:00:00";
    $assessment_end_date = date('Y-m-d',strtotime($_POST['assessment_end_date']));
    $assessment_end_time = "12:00:00";
@@ -282,15 +282,15 @@ function getnamelist(){
                               <div class="form-group mt-3">
                                  <label for="assessment_start_date" class="font-weight-bolder"><?php echo $display_tag; ?> <?= __('Date Range') ?> <span class="text-danger">*</span></label>
                                  <div class='row' id='kt_daterangepicker_survey'>
-								   <div class="col-lg-6">
-										<input type='text' class="form-control datepicker" id="assessment_start_date" name="assessment_start_date" value="<?php echo $assessment_details['assessment_start_date']; ?>" aria-label="<?= htmlspecialchars(__('Assessment Start Date'), ENT_QUOTES, 'UTF-8'); ?>">
-									</div>
-									<div class="col-lg-6">
-										<input type='text' class="form-control datepicker" id="assessment_end_date" name="assessment_end_date" value="<?php echo $assessment_details['assessment_end_date']; ?>" aria-label="<?= htmlspecialchars(__('Assessment End Date'), ENT_QUOTES, 'UTF-8'); ?>">
-									</div>
-								 <!--  <input type='date' class="form-control"  name="assessment_date" placeholder="Select date &amp; time range" value="<?php echo $assessment_date; ?> " / aria-label="Select date &amp;amp; time range"> -->
+                                   <div class="col-lg-6">
+                                        <input type='text' class="form-control datepicker" id="assessment_start_date" name="assessment_start_date" value="<?php echo $assessment_details['assessment_start_date']; ?>" aria-label="<?= htmlspecialchars(__('Assessment Start Date'), ENT_QUOTES, 'UTF-8'); ?>">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type='text' class="form-control datepicker" id="assessment_end_date" name="assessment_end_date" value="<?php echo $assessment_details['assessment_end_date']; ?>" aria-label="<?= htmlspecialchars(__('Assessment End Date'), ENT_QUOTES, 'UTF-8'); ?>">
+                                    </div>
+                                 <!--  <input type='date' class="form-control"  name="assessment_date" placeholder="Select date &amp; time range" value="<?php echo $assessment_date; ?> " / aria-label="Select date &amp;amp; time range"> -->
 
-								</div>
+                                </div>
                               </div>
                               <div class="form-group mt-3">
                                  <label for="allocated_time" class="font-weight-bolder"><?php echo $display_tag; ?> <?= __('Duration In Minutes') ?> <span class="text-danger">*</span></label>
@@ -371,9 +371,9 @@ function getnamelist(){
 
             <div class="modal-header" >
             <h5 class="modal-title" id="exampleModalLabel">'.$title.'</h5>
-            
-			<i aria-hidden="true" class="fa fa-trash close text-white"  data-dismiss="modal" aria-label="Close" onclick="deletequestion('."'".$qkey."'".')"></i>
-            
+
+            <i aria-hidden="true" class="fa fa-trash close text-white"  data-dismiss="modal" aria-label="Close" onclick="deletequestion('."'".$qkey."'".')"></i>
+
             </div>
             <div class="card-body mt-3">
             <div class="form-group text-left row">
@@ -410,15 +410,15 @@ function getnamelist(){
                   }
                   $copvalue = $checkstatus=='checked'? $opvalue : '';
                   $display_question .= '
-                                  
+
                   </div><div class="col-lg-8">
-				         <div class="input-group input-group-button">
+                         <div class="input-group input-group-button">
         <input type="text" class="form-control display-inline width1" name="survey_question_option'.$value_id.'[]"  placeholder="'.__('Option').'" value="'.$opvalue.'" aria-label="Option">
         <span class="input-group-text addon-style">
             <span class=""><i class="fa fa-trash close text-white" onclick="delnewoptionrows('."'".$opkey."'".','."'".$value_id."'".')"></i></span>
         </span>
     </div>
-	 </div>';
+     </div>';
                   $display_question .= '</div>';
 
                }
