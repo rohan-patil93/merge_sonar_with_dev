@@ -1,7 +1,8 @@
-
 <?php
-class reactClass extends userClass{
-	public function dynamicadddatareact($get, $data){
+class reactClass extends userClass
+{
+	public function dynamicadddatareact($get, $data)
+	{
 		global $callConfig;
 
 		$data['company_id'] = $get['company_id'];
@@ -9,49 +10,53 @@ class reactClass extends userClass{
 		$data['current_status'] = '0';
 		$data['created_by'] = $get['user_id'];
 		$data['created_date'] = date("Y-m-d H:i:s");
-		return $callConfig->insertRecord($get['table'],$data);
+		return $callConfig->insertRecord($get['table'], $data);
 	}
-	public function dynamicupdateatareact($get, $data){
+	public function dynamicupdateatareact($get, $data)
+	{
 		global $callConfig;
 		$rid = $get['rid'];
-		$fid = $get['fid'] !='' ? $get['fid'] : 'id';
-		return $callConfig->updateRecord($get['table'],$data,$fid,$rid);
+		$fid = $get['fid'] != '' ? $get['fid'] : 'id';
+		return $callConfig->updateRecord($get['table'], $data, $fid, $rid);
 	}
-	public function dynamicdeletebyridreact($get){
+	public function dynamicdeletebyridreact($get)
+	{
 		global $callConfig;
 		$rid = $get['rid'];
-		$fid = $get['fid'] !='' ? $get['fid'] : 'id';
-		return $callConfig->updateRecord($get['table'],array('is_active'=>null),$fid,$rid);
+		$fid = $get['fid'] != '' ? $get['fid'] : 'id';
+		return $callConfig->updateRecord($get['table'], array('is_active' => null), $fid, $rid);
 	}
-	public function dynamiclistatreact($get){
+	public function dynamiclistatreact($get)
+	{
 		global $callConfig;
-		$whr ='is_active=0';
+		$whr = 'is_active=0';
 		$field = '*';
-		if($_GET['fid'] !='' && $_GET['rid'] !=''){
+		if ($_GET['fid'] != '' && $_GET['rid'] != '') {
 
-			$rid = $_GET['rid'] !='' ? $_GET['rid'] : '';
-			$fid = $_GET['fid'] !='' ? $_GET['fid'] : '';
-			$whr = $fid."='".$rid."'";
+			$rid = $_GET['rid'] != '' ? $_GET['rid'] : '';
+			$fid = $_GET['fid'] != '' ? $_GET['fid'] : '';
+			$whr = $fid . "='" . $rid . "'";
 		}
-		if($_GET['orderby'] !=''){
+		if ($_GET['orderby'] != '') {
 			$orderby = urldecode($_GET['orderby']);
 		}
-		if($_GET['field'] !=''){
+		if ($_GET['field'] != '') {
 
-			$field = $_GET['field'] !='' ? $_GET['field'] : '*';
+			$field = $_GET['field'] != '' ? $_GET['field'] : '*';
 
 		}
-		return $this->getAllTablesData($_GET['table'],'*',$whr,$orderby);
+		return $this->getAllTablesData($_GET['table'], '*', $whr, $orderby);
 	}
-	public function dyanamicautosuggictionselectdata($get){
+	public function dyanamicautosuggictionselectdata($get)
+	{
 		global $callConfig;
-		$query = "SELECT *  FROM `display_attribute_types` WHERE `application_table_name` = '".$get['table']."' AND `field_name` = '".$get['view']."'";
+		$query = "SELECT *  FROM `display_attribute_types` WHERE `application_table_name` = '" . $get['table'] . "' AND `field_name` = '" . $get['view'] . "'";
 		$dis_data = $callConfig->getRow($query);
 		$selet = urldecode($dis_data->content);
-		$query =  explode('ORDER', $selet);
+		$query = explode('ORDER', $selet);
 		$query['0'];
-		$search = " AND ".$dis_data->display_field." LIKE '%".$get['search_key']."%' ";
-		$select = $query['0']." ".$search." ORDER ".$query['1'];
+		$search = " AND " . $dis_data->display_field . " LIKE '%" . $get['search_key'] . "%' ";
+		$select = $query['0'] . " " . $search . " ORDER " . $query['1'];
 		$array['value_field'] = $dis_data->value_field;
 		$array['display_field'] = $dis_data->display_field;
 		$listdata = $callConfig->getAllRows($select);
@@ -60,901 +65,921 @@ class reactClass extends userClass{
 		//print_r($get); exit;*/
 
 	}
-	public function modulelistreact($get){
+	public function modulelistreact($get)
+	{
 		global $callConfig;
 		$whr = "";
-		$module_query = "SELECT module_id,module_name as display_name, display_name as full_name, module_logo FROM module_setup WHERE company_id = ".$get['company_id']." AND linking =1  AND is_active =0 ".$whr;
+		$module_query = "SELECT module_id,module_name as display_name, display_name as full_name, module_logo FROM module_setup WHERE company_id = " . $get['company_id'] . " AND linking =1  AND is_active =0 " . $whr;
 		return $callConfig->getAllRows($module_query);
 	}
-	public function getReactMenuList($get){
+	public function getReactMenuList($get)
+	{
 		global $callConfig;
 		$return = array();
 		$defaultmoduleid = $get['module_id'];
 		$admin_type = $get['admin_type'];
 		$get['defaultmoduleid'] = $defaultmoduleid;
-		$rolepermission = $this->toGetRoledata($get['user_id'],$get);
+		$rolepermission = $this->toGetRoledata($get['user_id'], $get);
 		$rolepermission['role_permission'] = $rolepermission['permission'];
 		$rolepermission['role_page_permission'] = $rolepermission['page_permission'];
 		$rolepermission['role_permission_pages'] = $rolepermission['permission'];
 
-		$query = "SELECT * FROM application_menu WHERE company_id =".$get['company_id']." AND aplication_module = '".$defaultmoduleid."' AND is_active = 0 ORDER BY display_priority ASC";
+		$query = "SELECT * FROM application_menu WHERE company_id =" . $get['company_id'] . " AND aplication_module = '" . $defaultmoduleid . "' AND is_active = 0 ORDER BY display_priority ASC";
 		$application_menu = $callConfig->getAllRows($query);
 		$rolepermission['application_menu'] = $application_menu;
 
-		$whrs = " company_id =".$get['company_id']." AND is_active= 0";
-		$query = $callConfig->selectQuery('application_pages','*',$whrs,'','','');
+		$whrs = " company_id =" . $get['company_id'] . " AND is_active= 0";
+		$query = $callConfig->selectQuery('application_pages', '*', $whrs, '', '', '');
 		$pagesrow = $callConfig->getAllRows($query);
 		$rolepermission['application_pages'] = $pagesrow;
 
-		$return['application_menu_LN'] = $this->toGETNavDetails('LN',$admin_type,$rolepermission);
-		$return['application_menu_TN'] = $this->toGETNavDetails('TN',$admin_type,$rolepermission);
-		$return['application_menu_TNL'] = $this->toGETNavDetails('TNL',$admin_type,$rolepermission);
-		$return['application_menu_TNC'] = $this->toGETNavDetails('TNC',$admin_type,$rolepermission);
-		$return['application_menu_TNR'] = $this->toGETNavDetails('TNR',$admin_type,$rolepermission);
+		$return['application_menu_LN'] = $this->toGETNavDetails('LN', $admin_type, $rolepermission);
+		$return['application_menu_TN'] = $this->toGETNavDetails('TN', $admin_type, $rolepermission);
+		$return['application_menu_TNL'] = $this->toGETNavDetails('TNL', $admin_type, $rolepermission);
+		$return['application_menu_TNC'] = $this->toGETNavDetails('TNC', $admin_type, $rolepermission);
+		$return['application_menu_TNR'] = $this->toGETNavDetails('TNR', $admin_type, $rolepermission);
 		return $return;
 	}
-	public function toGETNavDetails($type,$admin_type,$rolepermission){
-		$menu  = $rolepermission['application_menu'];
+	public function toGETNavDetails($type, $admin_type, $rolepermission)
+	{
+		$menu = $rolepermission['application_menu'];
 
 		foreach ($menu as $key => $value) {
-			if($value->menu_location == $type && $value->parent_menu == 0){
+			if ($value->menu_location == $type && $value->parent_menu == 0) {
 
-				if($admin_type=='0'){
-					if(in_array($value->page_name,(array)$rolepermission['application_no_permission_pages']['option'])){
+				if ($admin_type == '0') {
+					if (in_array($value->page_name, (array) $rolepermission['application_no_permission_pages']['option'])) {
 						$res = 1;
-					}else{
-						$res = $this->checkPremission($value->page_name,$admin_type,$rolepermission);
+					} else {
+						$res = $this->checkPremission($value->page_name, $admin_type, $rolepermission);
 					}
 
-				}else{
+				} else {
 					$res = 1;
 				}
-				$child = $this->getParentidmenus($value->id,1,$admin_type,$rolepermission);
-				if(count((array)$child)>0){
+				$child = $this->getParentidmenus($value->id, 1, $admin_type, $rolepermission);
+				if (count((array) $child) > 0) {
 					$res = 1;
 				}
 			}
-			if($value->menu_location == $type && $value->parent_menu == 0 && $res == 1){
-				$array[$value->id]['id'] =  $value->id;
-				$array[$value->id]['Label'] =  $value->menu_label;
-				$array[$value->id]['Menu_Icon'] =  $value->menu_icon;
-				$array[$value->id]['Page_Name'] =  $value->page_name;
-				$array[$value->id]['dashboard'] =  $value->dashboard;
+			if ($value->menu_location == $type && $value->parent_menu == 0 && $res == 1) {
+				$array[$value->id]['id'] = $value->id;
+				$array[$value->id]['Label'] = $value->menu_label;
+				$array[$value->id]['Menu_Icon'] = $value->menu_icon;
+				$array[$value->id]['Page_Name'] = $value->page_name;
+				$array[$value->id]['dashboard'] = $value->dashboard;
 				$array[$value->id]['child'] = $child;
 			}
 		}
-		if($admin_type=='0'){
+		if ($admin_type == '0') {
 			$array = $this->menurecheck($array);
 		}
 
 		return $array;
 	}
-	public function menurecheck($data){
-		$array= array();
-		foreach($data as $key=>$dat){
-			if(count((array)$dat['child'])>0){
-				foreach($dat['child'] as $ddkey=>$dd){
-					if(count((array)$dd['child'])>0){
-						$array[$key]['id'] =  $dat['id'];
-						$array[$key]['Label'] =  $dat['Label'];
-						$array[$key]['Menu_Icon'] =  $dat['Menu_Icon'];
-						$array[$key]['Page_Name'] =  $dat['Page_Name'];
+	public function menurecheck($data)
+	{
+		$array = array();
+		foreach ($data as $key => $dat) {
+			if (count((array) $dat['child']) > 0) {
+				foreach ($dat['child'] as $ddkey => $dd) {
+					if (count((array) $dd['child']) > 0) {
+						$array[$key]['id'] = $dat['id'];
+						$array[$key]['Label'] = $dat['Label'];
+						$array[$key]['Menu_Icon'] = $dat['Menu_Icon'];
+						$array[$key]['Page_Name'] = $dat['Page_Name'];
 						$array[$key]['dashboard'] = $dat['dashboard'];
-						$array[$key]['child'][$ddkey]=$dd;
-					}else{
-						if($dd['Page_Name']!=""){
-							$array[$key]['id'] =  $dat['id'];
-							$array[$key]['Label'] =  $dat['Label'];
-							$array[$key]['Menu_Icon'] =  $dat['Menu_Icon'];
-							$array[$key]['Page_Name'] =  $dat['Page_Name'];
+						$array[$key]['child'][$ddkey] = $dd;
+					} else {
+						if ($dd['Page_Name'] != "") {
+							$array[$key]['id'] = $dat['id'];
+							$array[$key]['Label'] = $dat['Label'];
+							$array[$key]['Menu_Icon'] = $dat['Menu_Icon'];
+							$array[$key]['Page_Name'] = $dat['Page_Name'];
 							$array[$key]['dashboard'] = $dat['dashboard'];
-							$array[$key]['child'][$ddkey]=$dd;
+							$array[$key]['child'][$ddkey] = $dd;
 						}
 					}
 				}
 
-			}else{
-				if($dat['Page_Name']!=""){
-					$array[$key]=$dat;
+			} else {
+				if ($dat['Page_Name'] != "") {
+					$array[$key] = $dat;
 				}
 			}
 		}
 		return $array;
 	}
 
-	public function checkPremission($name,$admin_type,$rolepermission){
+	public function checkPremission($name, $admin_type, $rolepermission)
+	{
 		$return = 0;
-	//echo  $name; //exit;
-	//echo "<pre>"; print_r($_SESSION['role_permission']);print_r($_SESSION['role_permission']);
-	//rohan added page with paramiter passe tis time not working
-		if(strpos($name,'&')){
+		//echo  $name; //exit;
+		//echo "<pre>"; print_r($_SESSION['role_permission']);print_r($_SESSION['role_permission']);
+		//rohan added page with paramiter passe tis time not working
+		if (strpos($name, '&')) {
 			$explode = explode('&', $name);
 			$name = $explode[0];
 		}
-	//print_r($value);
+		//print_r($value);
 		//	rohan adde
 
-		foreach ($rolepermission['application_pages'] as  $value) {
-			if($value->list_page_name==$name || $value->insert_page_name==$name || $value->edit_page_name==$name || $value->view_page_name==$name){
+		foreach ($rolepermission['application_pages'] as $value) {
+			if ($value->list_page_name == $name || $value->insert_page_name == $name || $value->edit_page_name == $name || $value->view_page_name == $name) {
 				$table = $value->application_table_name;
-				if($value->list_page_name==$name){	$type = 'permission_list';
+				if ($value->list_page_name == $name) {
+					$type = 'permission_list';
 				}
-				if($value->insert_page_name==$name){	$approvaltype = 'permission_approval';
+				if ($value->insert_page_name == $name) {
+					$approvaltype = 'permission_approval';
 				}
-				if($value->insert_page_name==$name){	$type = 'permission_insert';
+				if ($value->insert_page_name == $name) {
+					$type = 'permission_insert';
 				}
-				if($value->edit_page_name==$name){	$type = 'permission_update';
+				if ($value->edit_page_name == $name) {
+					$type = 'permission_update';
 				}
-				if($value->view_page_name==$name){	$type = 'permission_list';
+				if ($value->view_page_name == $name) {
+					$type = 'permission_list';
 				}
 			}
 		}
 
-		if(isset($rolepermission['role_permission'][$table][$type]) && $rolepermission['role_permission'][$table][$type] == 0){
-			$return =1;
+		if (isset($rolepermission['role_permission'][$table][$type]) && $rolepermission['role_permission'][$table][$type] == 0) {
+			$return = 1;
 		}
-		if($return == 0){
-			if( isset($rolepermission['role_page_permission'][$name]) && $rolepermission['role_page_permission'][$name]['permission_list'] == 0){
-				$return =1;
-			}
-		if($return == 0 && isset($rolepermission['role_page_permission'][$name]) && $rolepermission['role_page_permission'][$name]['permission_list'] == 0){
-			$return =1;
+		if ($return == 0 && isset($rolepermission['role_page_permission'][$name]) && $rolepermission['role_page_permission'][$name]['permission_list'] == 0) {
+			$return = 1;
 		}
 
-	//approval check
-		if(isset($rolepermission['role_permission'][$table][$approvaltype]) && $rolepermission['role_permission'][$table][$approvaltype] == 0){
-			$return =1;
+		//approval check
+		if (isset($rolepermission['role_permission'][$table][$approvaltype]) && $rolepermission['role_permission'][$table][$approvaltype] == 0) {
+			$return = 1;
 		}
-	//print_r($_SESSION['role_permission']);
-	//echo $table." -- ".$type." --- ".$return."</br></br>"; //exit;
-	//approval check
+		//print_r($_SESSION['role_permission']);
+		//echo $table." -- ".$type." --- ".$return."</br></br>"; //exit;
+		//approval check
 		return $return;
 	}
 
 
 
-	public function getParentidmenus($pid,$len,$admin_type,$rolepermission){
-		$menu  = $rolepermission['application_menu'];
+	public function getParentidmenus($pid, $len, $admin_type, $rolepermission)
+	{
+		$menu = $rolepermission['application_menu'];
 		$array1 = array();
 		foreach ($menu as $key => $value) {
 
 			$res = 1;
-			if($value->parent_menu == $pid && $admin_type=='0'){
+			if ($value->parent_menu == $pid && $admin_type == '0') {
 				$child = array();
-				$child = $this->getParentidmenuscheck($value->id,$len+1,$admin_type,$rolepermission);
-				if(count((array)$child)>0){
-					$res=1;
-				}else{
-					if(in_array($value->page_name,(array)$rolepermission['application_no_permission_pages']['option'])){
+				$child = $this->getParentidmenuscheck($value->id, $len + 1, $admin_type, $rolepermission);
+				if (count((array) $child) > 0) {
+					$res = 1;
+				} else {
+					if (in_array($value->page_name, (array) $rolepermission['application_no_permission_pages']['option'])) {
 						$res = 1;
-					}else{
-						$res=$this->checkPremission($value->page_name,$admin_type,$rolepermission);
+					} else {
+						$res = $this->checkPremission($value->page_name, $admin_type, $rolepermission);
 					}
 				}
 			}
-			if($value->parent_menu == $pid && $res == 1){
-				$array1[$value->id]['id'] =  $value->id;
-				$array1[$value->id]['Label'] =  $value->menu_label;
-				$array1[$value->id]['Menu_Icon'] =  $value->menu_icon;
-				$array1[$value->id]['Page_Name'] =  $value->page_name;
-				$array1[$value->id]['dashboard'] =  $value->dashboard;
-				$array1[$value->id]['child'] = $this->getParentidmenus($value->id,$len+1,$admin_type,$rolepermission);
+			if ($value->parent_menu == $pid && $res == 1) {
+				$array1[$value->id]['id'] = $value->id;
+				$array1[$value->id]['Label'] = $value->menu_label;
+				$array1[$value->id]['Menu_Icon'] = $value->menu_icon;
+				$array1[$value->id]['Page_Name'] = $value->page_name;
+				$array1[$value->id]['dashboard'] = $value->dashboard;
+				$array1[$value->id]['child'] = $this->getParentidmenus($value->id, $len + 1, $admin_type, $rolepermission);
 			}
 		}
 		return $array1;
 	}
-	public function getParentidmenuscheck($pid,$len,$admin_type,$rolepermission){
-		$menu  = $rolepermission['application_menu'];
+	public function getParentidmenuscheck($pid, $len, $admin_type, $rolepermission)
+	{
+		$menu = $rolepermission['application_menu'];
 		foreach ($menu as $key => $value) {
-			if($value->parent_menu == $pid){
-				$array1[$value->id]['id'] =  $value->id;
-				$array1[$value->id]['Label'] =  $value->menu_label;
-				$array1[$value->id]['Menu_Icon'] =  $value->menu_icon;
-				$array1[$value->id]['Page_Name'] =  $value->page_name;
+			if ($value->parent_menu == $pid) {
+				$array1[$value->id]['id'] = $value->id;
+				$array1[$value->id]['Label'] = $value->menu_label;
+				$array1[$value->id]['Menu_Icon'] = $value->menu_icon;
+				$array1[$value->id]['Page_Name'] = $value->page_name;
 				break;
 			}
 		}
 		return $array1;
 	}
-	public function applicationpagenamedetails($get){
+	public function applicationpagenamedetails($get)
+	{
 		global $callConfig;
 		$name = $get['page_name'];
-		$query = "SELECT id, application_table_name, list_page_name, list_page_type, insert_page_name, insert_page_type, edit_page_name, edit_page_type, view_page_name, view_page_type FROM application_pages WHERE company_id =".$get['company_id']." AND  ( list_page_name = '".$get['page_name']."' OR insert_page_name = '".$get['page_name']."' OR edit_page_name = '".$get['page_name']."' OR view_page_name = '".$get['page_name']."') AND is_active =0";
-			$res = $callConfig->getRow($query);
-			if($res->id !=""){
-				$value = (array)$res;
-				if($value['list_page_name']==$name){	$type = 'list';
-				}
-				if($value['insert_page_name']==$name){	$approvaltype = 'approval';
-				}
-				if($value['insert_page_name']==$name){	$type = 'insert';
-				}
-				if($value['edit_page_name']==$name){	$type = 'update';
-				}
-				if($value['view_page_name']==$name){	$type = 'list';
-				}
-				$return['work_page'] = $type;
-				$return['application_table_name'] = $value['application_table_name'];
-				$page_type = $type."_page_type";
-				$return['page_type'] = $value[$page_type];
-				$pp_name = strtolower(str_replace("COM","CUSTOME",$name));
-				$return['page'] = $pp_name;
-				if($value[$page_type]==2){
-					$disptemp = "views/".$pp_name.".php";
-					$return['page'] = strtolower(str_replace("COM","CUSTOME",$name));
-				}
-				$return['other'] = $value;
-			}else{
-				$disptemp = "views/".$name.".php";
-				$return['page'] = strtolower(str_replace("COM","CUSTOME",$name));
-				}
-				return $return;
+		$query = "SELECT id, application_table_name, list_page_name, list_page_type, insert_page_name, insert_page_type, edit_page_name, edit_page_type, view_page_name, view_page_type FROM application_pages WHERE company_id =" . $get['company_id'] . " AND  ( list_page_name = '" . $get['page_name'] . "' OR insert_page_name = '" . $get['page_name'] . "' OR edit_page_name = '" . $get['page_name'] . "' OR view_page_name = '" . $get['page_name'] . "') AND is_active =0";
+		$res = $callConfig->getRow($query);
+		if ($res->id != "") {
+			$value = (array) $res;
+			if ($value['list_page_name'] == $name) {
+				$type = 'list';
 			}
+			if ($value['insert_page_name'] == $name) {
+				$approvaltype = 'approval';
+			}
+			if ($value['insert_page_name'] == $name) {
+				$type = 'insert';
+			}
+			if ($value['edit_page_name'] == $name) {
+				$type = 'update';
+			}
+			if ($value['view_page_name'] == $name) {
+				$type = 'list';
+			}
+			$return['work_page'] = $type;
+			$return['application_table_name'] = $value['application_table_name'];
+			$page_type = $type . "_page_type";
+			$return['page_type'] = $value[$page_type];
+			$pp_name = strtolower(str_replace("COM", "CUSTOME", $name));
+			$return['page'] = $pp_name;
+			if ($value[$page_type] == 2) {
+				$disptemp = "views/" . $pp_name . ".php";
+				$return['page'] = strtolower(str_replace("COM", "CUSTOME", $name));
+			}
+			$return['other'] = $value;
+		} else {
+			$disptemp = "views/" . $name . ".php";
+			$return['page'] = strtolower(str_replace("COM", "CUSTOME", $name));
+		}
+		return $return;
+	}
 
-			public function insertcontractsreact($get, $post){
-				global $callConfig;
-				$return = [];
-				$return['post'] = $post;
-				$return['get'] = $get;
-				$option = '';
-				$contract_creation_or_updation = "";
-				$locations = '';
-				if (isset($post['locations']) && is_array($post['locations'])) {
-					$locations = json_encode($post['locations']);
+	public function insertcontractsreact($get, $post)
+	{
+		global $callConfig;
+		$return = [];
+		$return['post'] = $post;
+		$return['get'] = $get;
+		$option = '';
+		$contract_creation_or_updation = "";
+		$locations = '';
+		if (isset($post['locations']) && is_array($post['locations'])) {
+			$locations = json_encode($post['locations']);
+		}
+		$contract_services_id = '';
+		if (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) {
+			$contract_services_id = json_encode($post['contract_services_id']);
+		}
+
+		$contact_personsary = array();
+
+		if (isset($post['contact_persons']) && is_array($post['contact_persons'])) {
+			$contact_personsary = array();
+			foreach ($post['contact_persons']['name'] as $key => $conpers) {
+				if ($post['contact_persons']['name'][$key] != "" && $post['contact_persons']['number'][$key] != "") {
+					$contact_personsary[] = array('name' => $post['contact_persons']['name'][$key], 'email' => $post['contact_persons']['email'][$key], 'number' => $post['contact_persons']['number'][$key]);
 				}
-				$contract_services_id = '';
-				if (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) {
-					$contract_services_id = json_encode($post['contract_services_id']);
+			}
+		}
+		$contact_persons = json_encode($contact_personsary);
+
+		$contract_type = 'Contract';
+		if (!empty($post['parent_contract_id']) && $post['parent_contract_id'] != 0) {
+			$contract_type = 'SOW';
+		}
+		$insert_array = array(
+			'contract_name' => $post['contract_name'],
+			'renewal_frequency' => $post['renewal_frequency'],
+			'parent_contract_id' => $post['parent_contract_id'],
+			'contract_type' => $contract_type,
+			'invoice_number' => $post['invoice_number'],
+			'rt_number' => $post['rt_number'],
+			'business_code' => $post['business_code'],
+			'party_type' => $post['party_type'],
+			'contract_owner_name' => $post['contract_owner_name'],
+			'contract_owner_email' => $post['contract_owner_email'],
+			'contract_owner_number' => $post['contract_owner_number'],
+			'party_id' => $post['party_id'],
+			'department_id' => $post['department_id'],
+			'type_of_contract_id' => $post['type_of_contract_id'],
+			'start_date' => $this->dateconvertdbformat($post['start_date']),
+			'end_date' => $this->dateconvertdbformat($post['end_date']),
+			'contract_amount' => $post['contract_amount'],
+			'description' => $post['description'],
+			'additional_notes' => $post['additional_notes'],
+			'termination_condition' => $post['termination_condition'],
+			'contract_status' => $post['contract_status'],
+			'current_status' => 0,
+			'auto_renew' => (isset($post['auto_renew']) && ($post['auto_renew'] == '1' || $post['auto_renew'] == 'on' || $post['auto_renew'] === true || $post['auto_renew'] == 'Y')) ? 'Y' : 'N',
+			'renew_type' => $post['renew_type'],
+			'state' => $post['state'],
+			'isp' => $post['isp'],
+			'paid_by' => $post['paid_by'],
+			'internet_charges' => $post['internet_charges'],
+			'hub_spoc_name' => $post['hub_spoc_name'],
+			'hub_spoc_number' => $post['hub_spoc_number'],
+			'wifi_pass' => $post['wifi_pass'],
+			'wifi_provider' => $post['wifi_provider'],
+			'additional_document' => $post['additional_document'],
+			'contract_payment_terms' => $post['contract_payment_terms'],
+			'typeofaggrements' => $post['typeofaggrements'],
+			'description_id' => $post['description_id'],
+			'locations' => $locations,
+			'is_oem' => (isset($post['is_oem']) && ($post['is_oem'] == 'Yes' || $post['is_oem'] == 'Y')) ? 'Y' : 'N',
+			'oem_registration_number' => $post['oem_registration_number'] ?? '',
+			'oem_distributor_name' => $post['oem_distributor_name'] ?? '',
+			'oem_product_category' => $post['oem_product_category'] ?? '',
+			'cancel_status' => 'N',
+			// LIVE PATCH: convert type
+			'is_amc_contract' => (!empty($post['is_amc_contract']) && in_array($post['is_amc_contract'], array('Y', 'Yes', '1', 1), true)) ? 'Y' : 'N',
+			'contract_services_id' => $contract_services_id,
+			'contact_persons' => $contact_persons
+		);
+
+		if (!empty($post['Rid'])) {
+			$edit_option = $post['edit_option'] ?? 'SaveUpdate';
+			if ($edit_option === '1')
+				$edit_option = 'Amendment';
+			if ($edit_option === '2')
+				$edit_option = 'Addendum';
+
+			if ($edit_option === 'Amendment' || $edit_option === 'Addendum') {  // Amendment/Addendum Contract
+				$original_q = "SELECT * FROM contracts WHERE id = '" . $post['Rid'] . "'";
+				$original_data = (array) $callConfig->getRow($original_q);
+				$final_data = $original_data;
+				foreach ($insert_array as $key => $val) {
+					if ($val !== "" && $val !== null) {
+						$final_data[$key] = $val;
+					}
 				}
-
-				$contact_personsary = array();
-
-				if (isset($post['contact_persons']) && is_array($post['contact_persons'])) {
-					$contact_personsary = array();
-					foreach($post['contact_persons']['name'] as $key=>$conpers){
-						if($post['contact_persons']['name'][$key] !="" && $post['contact_persons']['number'][$key]!=""){
-							$contact_personsary[] =  array('name'=>$post['contact_persons']['name'][$key],'email'=>$post['contact_persons']['email'][$key],'number'=>$post['contact_persons']['number'][$key]);
+				unset($final_data['id']);
+				$final_data['company_id'] = $get['company_id'];
+				$final_data['is_active'] = 0;
+				$final_data['transaction_no'] = $this->toGetApplicationSerialNumber('contracts', $post);
+				$final_data['created_by'] = $get['user_id'];
+				$final_data['originator'] = $get['user_id'];
+				$final_data['created_date'] = date('Y-m-d H:i:s');
+				$final_data['parent_contract_id'] = $post['Rid'];
+				$final_data['parent_contract'] = $post['Rid'];
+				$final_data['contract_type'] = $edit_option;
+				foreach ($final_data as $key => $value) {
+					if ($value === "" || $value === null) {
+						if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'current_status'])) {
+							$final_data[$key] = 0;
+						} elseif (in_array($key, ['contract_amount'])) {
+							$final_data[$key] = 0.00;
+						} elseif (in_array($key, ['start_date', 'end_date'])) {
+							$final_data[$key] = date('Y-m-d');
+						} else {
+							$final_data[$key] = $value ?? '';
 						}
 					}
 				}
-				$contact_persons = json_encode($contact_personsary);
-
-				$contract_type = 'Contract';
-				if (!empty($post['parent_contract_id']) && $post['parent_contract_id'] != 0) {
-					$contract_type = 'SOW';
+				$insert_data = $callConfig->insertRecord('contracts', $final_data);
+				$contract_id = $insert_data['LASTID'];
+				$return['contract_result'] = $insert_data;
+				$return['contract_result11'] = $insert_data;
+				$contract_creation_or_updation = "Created";
+				if ($edit_option === 'Amendment' && ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success')) {
+					$update_original = [
+						'is_active' => null,
+						'contract_status' => 'Expired',
+						'updated_by' => $get['user_id'],
+						'updated_date' => date('Y-m-d H:i:s')
+					];
+					$callConfig->updateRecord('contracts', $update_original, 'id', $post['Rid']);
 				}
-				$insert_array = array(
-					'contract_name' => $post['contract_name'],
-					'renewal_frequency' => $post['renewal_frequency'],
-					'parent_contract_id' => $post['parent_contract_id'],
-					'contract_type' => $contract_type,
-					'invoice_number' => $post['invoice_number'],
-					'rt_number' => $post['rt_number'],
-					'business_code' => $post['business_code'],
-					'party_type' => $post['party_type'],
-					'contract_owner_name' => $post['contract_owner_name'],
-					'contract_owner_email' => $post['contract_owner_email'],
-					'contract_owner_number' => $post['contract_owner_number'],
-					'party_id' => $post['party_id'],
-					'department_id' => $post['department_id'],
-					'type_of_contract_id' => $post['type_of_contract_id'],
-					'start_date' => $this->dateconvertdbformat($post['start_date']),
-					'end_date' => $this->dateconvertdbformat($post['end_date']),
-					'contract_amount' => $post['contract_amount'],
-					'description' => $post['description'],
-					'additional_notes' => $post['additional_notes'],
-					'termination_condition' => $post['termination_condition'],
-					'contract_status' => $post['contract_status'],
-					'current_status' => 0,
-					'auto_renew' => (isset($post['auto_renew']) && ($post['auto_renew'] == '1' || $post['auto_renew'] == 'on' || $post['auto_renew'] === true || $post['auto_renew'] == 'Y')) ? 'Y' : 'N',
-					'renew_type' => $post['renew_type'],
-					'state' => $post['state'],
-					'isp' => $post['isp'],
-					'paid_by' => $post['paid_by'],
-					'internet_charges' => $post['internet_charges'],
-					'hub_spoc_name' => $post['hub_spoc_name'],
-					'hub_spoc_number' => $post['hub_spoc_number'],
-					'wifi_pass' => $post['wifi_pass'],
-					'wifi_provider' => $post['wifi_provider'],
-					'additional_document' => $post['additional_document'],
-					'contract_payment_terms' => $post['contract_payment_terms'],
-					'typeofaggrements' => $post['typeofaggrements'],
-					'description_id' => $post['description_id'],
-					'locations' => $locations,
-					'is_oem' => (isset($post['is_oem']) && ($post['is_oem'] == 'Yes' || $post['is_oem'] == 'Y')) ? 'Y' : 'N',
-					'oem_registration_number' => $post['oem_registration_number'] ?? '',
-					'oem_distributor_name' => $post['oem_distributor_name'] ?? '',
-					'oem_product_category' => $post['oem_product_category'] ?? '',
-					'cancel_status' => 'N',
-					// LIVE PATCH: convert type
-					'is_amc_contract' => (!empty($post['is_amc_contract']) && in_array($post['is_amc_contract'], array('Y', 'Yes', '1', 1), true)) ? 'Y' : 'N',
-					'contract_services_id' => $contract_services_id,
-					'contact_persons' => $contact_persons
-				);
-
-				if (!empty($post['Rid'])) {
-					$edit_option = $post['edit_option'] ?? 'SaveUpdate';
-					if ($edit_option === '1')
-						$edit_option = 'Amendment';
-					if ($edit_option === '2')
-						$edit_option = 'Addendum';
-
-					if ($edit_option === 'Amendment' || $edit_option === 'Addendum') {  // Amendment/Addendum Contract
-						$original_q = "SELECT * FROM contracts WHERE id = '" . $post['Rid'] . "'";
-						$original_data = (array) $callConfig->getRow($original_q);
-						$final_data = $original_data;
-						foreach ($insert_array as $key => $val) {
-							if ($val !== "" && $val !== null) {
-								$final_data[$key] = $val;
-							}
-						}
-						unset($final_data['id']);
-						$final_data['company_id'] = $get['company_id'];
-						$final_data['is_active'] = 0;
-						$final_data['transaction_no'] = $this->toGetApplicationSerialNumber('contracts', $post);
-						$final_data['created_by'] = $get['user_id'];
-						$final_data['originator'] = $get['user_id'];
-						$final_data['created_date'] = date('Y-m-d H:i:s');
-						$final_data['parent_contract_id'] = $post['Rid'];
-						$final_data['parent_contract'] = $post['Rid'];
-						$final_data['contract_type'] = $edit_option;
-						foreach ($final_data as $key => $value) {
-							if ($value === "" || $value === null) {
-								if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'current_status'])) {
-									$final_data[$key] = 0;
-								} elseif (in_array($key, ['contract_amount'])) {
-									$final_data[$key] = 0.00;
-								} elseif (in_array($key, ['start_date', 'end_date'])) {
-									$final_data[$key] = date('Y-m-d');
-								} else {
-									$final_data[$key] = $value ?? '';
-								}
-							}
-						}
-						$insert_data = $callConfig->insertRecord('contracts', $final_data);
-						$contract_id = $insert_data['LASTID'];
-						$return['contract_result'] = $insert_data;
-						$return['contract_result11'] = $insert_data;
-						$contract_creation_or_updation = "Created";
-						if ($edit_option === 'Amendment' && ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success')) {
-							$update_original = [
-								'is_active' => null,
-								'contract_status' => 'Expired',
-								'updated_by' => $get['user_id'],
-								'updated_date' => date('Y-m-d H:i:s')
-							];
-							$callConfig->updateRecord('contracts', $update_original, 'id', $post['Rid']);
-						}
-						if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
-							$related_tables = [
-								'contract_documents',
-								'contract_permissions',
-								'contract_recharge_details',
-								'workflows_contract'
-							];
-							foreach ($related_tables as $table) {
-								$q = "SELECT * FROM {$table} WHERE contract_id = '" . $post['Rid'] . "'";
-								$rows = $callConfig->getAllRows($q);
-								if (!empty($rows)) {
-									foreach ($rows as $row) {
-										$row = (array) $row;
-										unset($row['id']);
-										$row['contract_id'] = $contract_id;
-										$row['created_date'] = date('Y-m-d H:i:s');
-										$row['created_by'] = $get['user_id'];
-										$callConfig->insertRecord($table, $row);
-									}
-								}
-							}
-						}
-					} else {  // Update Contract
-						$insert_array['updated_by'] = $get['user_id'];
-						$insert_array['updated_date'] = date('Y-m-d H:i:s');
-
-						$curr_q = "SELECT contract_type FROM contracts WHERE id = '" . $post['Rid'] . "'";
-						$curr_row = $callConfig->getRow($curr_q);
-						if ($curr_row) {
-							$insert_array['contract_type'] = $curr_row->contract_type;
-						}
-
-						$insert_data = $callConfig->updateRecord('contracts', $insert_array, 'id', $post['Rid']);
-						$contract_id = $post['Rid'];
-						$return['contract_result'] = $insert_data;
-						$contract_creation_or_updation = "Updated";
-					}
-				} else { // Insert Contract
-					$insert_array['company_id'] = $get['company_id'];
-					$insert_array['is_active'] = 0;
-					$insert_array['transaction_no'] = $this->toGetApplicationSerialNumber('contracts', $post);
-					$insert_array['created_by'] = $get['user_id'];
-					$insert_array['originator'] = $get['user_id'];
-					$insert_array['created_date'] = date('Y-m-d H:i:s');
-					$insert_data = $callConfig->insertRecord('contracts', $insert_array);
-					$contract_id = $insert_data['LASTID'];
-					$return['contract_result'] = $insert_data;
-					$contract_creation_or_updation = "Created";
-
-				}
-
-				if($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
-					$selected_location_ids = array();
-					if(isset($post['locations']) && count((array)$post['locations']) > 0){
-						foreach($post['locations'] as $loc_id){
-							if($loc_id != ''){
-								$selected_location_ids[] = (int)$loc_id;
+				if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
+					$related_tables = [
+						'contract_documents',
+						'contract_permissions',
+						'contract_recharge_details',
+						'workflows_contract'
+					];
+					foreach ($related_tables as $table) {
+						$q = "SELECT * FROM {$table} WHERE contract_id = '" . $post['Rid'] . "'";
+						$rows = $callConfig->getAllRows($q);
+						if (!empty($rows)) {
+							foreach ($rows as $row) {
+								$row = (array) $row;
+								unset($row['id']);
+								$row['contract_id'] = $contract_id;
+								$row['created_date'] = date('Y-m-d H:i:s');
+								$row['created_by'] = $get['user_id'];
+								$callConfig->insertRecord($table, $row);
 							}
 						}
 					}
-					$admin_cond = "1=0";
-					if(count((array)$selected_location_ids) > 0){
-						$admin_cond = "(JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL AND location_id IN (".implode(',', $selected_location_ids)."))";
-					}
-					if($insert_array['originator'] !="" && $get['user_id'] !=""){
-						$conditins = " AND (".$admin_cond." OR id = '".$insert_array['originator']."' OR id = '".$get['user_id']."')";
-					}elseif($insert_array['originator'] !=""){
-						$conditins = " AND (".$admin_cond." OR id = '".$insert_array['originator']."')";
-					}elseif($get['user_id'] !=""){
-						$conditins = " AND (".$admin_cond." OR id = '".$get['user_id']."')";
-					}else{
-						$conditins = " AND ".$admin_cond;
-					}
-
-					$seluser = "SELECT id, company_id, user_email, display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0".$conditins;
-					$return['seluser'] = $seluser;
-					$seluserres = $callConfig->getAllRows($seluser);
-					$emailuserdetails = array();
-					foreach($seluserres as $seluser){
-						if($seluser->id == $insert_array['originator']){
-								$originatordetailary = $seluser;
-						}
-						if($seluser->id == $get['user_id']){
-								$updatedby = $seluser;
-						}
-						$emailuserdetails[$seluser->id] = $seluser;
-					}
-					foreach($emailuserdetails as $seluser){
-						$notification_users = array($seluser->id);
-						$emailarray  = $post;
-						$emailarray['user_email_id'] = $seluser->user_email;
-						$emailarray['user_display_name'] = $seluser->display_name;
-						$emailarray['to_company_id'] = $seluser->company_id;
-						$emailarray['session_company_id'] = $seluser->company_id;
-						$emailarray['default_module_id'] = 40;
-						$emailarray['created_by'] = $get['user_id'];
-						$emailarray['contract_creation_or_updation'] = $contract_creation_or_updation;
-						$emailarray['contract_name'] = $insert_array['transaction_no']." - ".$insert_array['contract_name'];
-						$emailarray['contract_user_name'] = $originatordetailary->display_name;
-						$emailarray['contract_update_datetime'] = date('Y-m-d H:i:s');
-						$emailarray['contract_update_by'] = $updatedby->display_name;
-
-						$msg = "Contract ".$insert_array['contract_name']." - ".$insert_array['transaction_no']." has been created successfully.";
-						$notarry = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$contract_id,'application_table_name'=>'contracts','type'=>'INFORMATION', 'notification_users'=>$notification_users,'option'=>$option,'assigner_id'=>$get['user_id']);
-						$sendnotification =$this->sendNotificationAndEmails($notarry,$emailarray,75);
-					}
 				}
-				$control_array = array(
-					'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]),
-					'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]),
-					'documents' => isset($post['document_data']) ? json_encode($post['document_data']) : json_encode([]),
-					'contract_details' => json_encode($insert_array),
-					'version_id' => $post['version_id'] ?? 0,
-					'company_id' => $get['company_id'] ?? 0,
-					'contract_id' => $contract_id,
-					'is_active' => 0,
-					'created_by' => $get['user_id'] ?? 0,
-					'created_date' => date('Y-m-d H:i:s')
-				);
-				$control_insert = $callConfig->insertRecord('contract_version', $control_array);
-				$return['control_version_result'] = $control_insert;
+			} else {  // Update Contract
+				$insert_array['updated_by'] = $get['user_id'];
+				$insert_array['updated_date'] = date('Y-m-d H:i:s');
 
-				// ---- Contract Activity ----
-				$endDate = !empty($post['end_date']) ? $post['end_date'] : 'N/A';
-				if (empty($post['Rid'])) {
-					$activity_text = "Contract Created (Valid until {$endDate})";
-				} else {
-					$edit_option = $post['edit_option'] ?? 'SaveUpdate';
-					if ($edit_option === '1')
-						$edit_option = 'Amendment';
-					if ($edit_option === '2')
-						$edit_option = 'Addendum';
-
-					if ($edit_option === 'Amendment') {
-						$activity_text = "Contract Amended (New Version Created, Valid until {$endDate})";
-					} elseif ($edit_option === 'Addendum') {
-						$activity_text = "Contract Addendum Added (New Version Created, Valid until {$endDate})";
-					} else {
-						$activity_text = "Contract Updated (Standard Save, Valid until {$endDate})";
-					}
-				}
-				$activity_array = array('company_id' => $get['company_id'] ?? 0, 'activity' => $activity_text, 'contract_id' => $contract_id, 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date('Y-m-d H:i:s'));
-				$activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
-				$return['activity_result'] = $activity_insert;
-
-				// Log on Parent Contract if it's an Amendment or Addendum
-				if (!empty($post['Rid']) && ($edit_option === 'Amendment' || $edit_option === 'Addendum')) {
-					$parent_msg = ($edit_option === 'Amendment') ? "Contract Amended (New Version Created, Valid until {$endDate})" : "Contract Addendum Added (New Version Created, Valid until {$endDate})";
-					$parent_activity = array('company_id' => $get['company_id'] ?? 0, 'activity' => $parent_msg, 'contract_id' => $post['Rid'], 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date('Y-m-d H:i:s'));
-					$callConfig->insertRecord('contract_activity', $parent_activity);
+				$curr_q = "SELECT contract_type FROM contracts WHERE id = '" . $post['Rid'] . "'";
+				$curr_row = $callConfig->getRow($curr_q);
+				if ($curr_row) {
+					$insert_array['contract_type'] = $curr_row->contract_type;
 				}
 
-				if (isset($post['milestones']) && is_array($post['milestones']) && count($post['milestones']) > 0) {
-
-					if (!empty($post['Rid'])) {
-						$updateQuery = "UPDATE  contract_milestones SET is_active = NULL, updated_date = '" . date('Y-m-d H:i:s') . "',  updated_by = '" . addslashes($get['user_id']) . "' WHERE transaction_id = '" . addslashes($contract_id) . "'";
-						$callConfig->executeQuery($updateQuery);
-					}
-
-					foreach ($post['milestones'] as $milestone) {
-						if (empty(trim($milestone['milestone_name'] ?? '')))
-							continue;
-						$milestoneData = ['company_id' => $get['company_id'], 'transaction_id' => $contract_id, 'transaction_date' => date('Y-m-d H:i:s'), 'milestone' => trim($milestone['milestone_name']), 'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null, 'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0, 'is_active' => 0, 'current_status' => 0, 'status_date' => date('Y-m-d H:i:s'), 'created_date' => date('Y-m-d H:i:s'), 'created_by' => $get['user_id'], 'updated_by' => $get['user_id'], 'updated_date' => date('Y-m-d H:i:s'),];
-
-						$milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
-						$return['milestone_inserts'][] = $milestoneInsert;
-					}
-
-				} else {
-					$return['milestone_inserts'] = 'No milestones found in POST.';
-				}
-				// LIVE PATCH: convert type
-				if (($insert_array['is_amc_contract'] ?? 'N') == 'N' && !empty($post['Rid'])) {
-					$amcCleanupNow = date('Y-m-d H:i:s');
-					$amcCleanupUser = addslashes($get['user_id'] ?? 0);
-					$amcCleanupContractId = addslashes($contract_id);
-					$callConfig->executeQuery("UPDATE contract_amc_locations SET is_active = NULL, updated_by = '" . $amcCleanupUser . "', updated_date = '" . $amcCleanupNow . "' WHERE contract_id = '" . $amcCleanupContractId . "' AND is_active = 0");
-					$callConfig->executeQuery("UPDATE contract_amc_assets SET is_active = NULL, updated_by = '" . $amcCleanupUser . "', updated_date = '" . $amcCleanupNow . "' WHERE contract_id = '" . $amcCleanupContractId . "' AND is_active = 0");
-					$callConfig->executeQuery("UPDATE contract_amc_service_schedules SET is_active = NULL, updated_by = '" . $amcCleanupUser . "', updated_date = '" . $amcCleanupNow . "' WHERE contract_id = '" . $amcCleanupContractId . "' AND is_active = 0");
-				}
-				$return['commercial_details_result'] = $this->saveContractCommercialDetails($contract_id, $get, $post);
-				return $return;
+				$insert_data = $callConfig->updateRecord('contracts', $insert_array, 'id', $post['Rid']);
+				$contract_id = $post['Rid'];
+				$return['contract_result'] = $insert_data;
+				$contract_creation_or_updation = "Updated";
 			}
-			public function getcontractslistpost($get, $post){
-				return $this->getcontractslist($post);
-			}
-			public function adminOrUserOrFM($get){
-				global $callConfig;
-				$whr = '';
-				if($get['admin_type'] != 1){
-					$whr = " AND (originator = ".$get['user_id']." OR created_by='{$get['user_id']}')";
-				}
+		} else { // Insert Contract
+			$insert_array['company_id'] = $get['company_id'];
+			$insert_array['is_active'] = 0;
+			$insert_array['transaction_no'] = $this->toGetApplicationSerialNumber('contracts', $post);
+			$insert_array['created_by'] = $get['user_id'];
+			$insert_array['originator'] = $get['user_id'];
+			$insert_array['created_date'] = date('Y-m-d H:i:s');
+			$insert_data = $callConfig->insertRecord('contracts', $insert_array);
+			$contract_id = $insert_data['LASTID'];
+			$return['contract_result'] = $insert_data;
+			$contract_creation_or_updation = "Created";
 
-				$permisisql = "SELECT id, contract_id, basic_permissions FROM contract_permissions WHERE company_id =".$get['company_id']." AND user = ".$get['user_id']." AND is_active = 0";
-				$permisires = $callConfig->getAllRows($permisisql);
-				$permision_contract_id = array();
-				foreach($permisires as $perms){
-					$permision_contract_id[$perms->contract_id] = $perms->contract_id;
-				}
+		}
 
-				if(count((array)$permision_contract_id) != 0){
-					$expcanid = implode(',',$permision_contract_id);
-					if($get['admin_type']!=1){
-						$whr = " AND (originator = ".$get['user_id']." OR created_by = ".$get['user_id']." OR id IN(".$expcanid."))";
+		if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
+			$selected_location_ids = array();
+			if (isset($post['locations']) && count((array) $post['locations']) > 0) {
+				foreach ($post['locations'] as $loc_id) {
+					if ($loc_id != '') {
+						$selected_location_ids[] = (int) $loc_id;
 					}
 				}
-				if($get['working_role_short_code']=='CONTRACT_FM_USER'){
-					$whr.=" AND locations LIKE %".$get['location_id']."% ";
-				}
-				return $whr;
+			}
+			$admin_cond = "1=0";
+			if (count((array) $selected_location_ids) > 0) {
+				$admin_cond = "(JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL AND location_id IN (" . implode(',', $selected_location_ids) . "))";
+			}
+			if ($insert_array['originator'] != "" && $get['user_id'] != "") {
+				$conditins = " AND (" . $admin_cond . " OR id = '" . $insert_array['originator'] . "' OR id = '" . $get['user_id'] . "')";
+			} elseif ($insert_array['originator'] != "") {
+				$conditins = " AND (" . $admin_cond . " OR id = '" . $insert_array['originator'] . "')";
+			} elseif ($get['user_id'] != "") {
+				$conditins = " AND (" . $admin_cond . " OR id = '" . $get['user_id'] . "')";
+			} else {
+				$conditins = " AND " . $admin_cond;
 			}
 
-			public function getcontractslist($get){
-				global $callConfig;
-				$return = array();
-				$return['get'] = $get;
-				$admin_or_user_whr = $this->adminOrUserOrFM($get);
-				if($get['api_type'] == "listpage"){
-
-						$paymenttermssql = "SELECT `id`, `payment_term_name` FROM payment_terms WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY payment_term_name ASC";
-						$paymenttermsres = $callConfig->getAllRows($paymenttermssql);
-						$payment_terms = array();
-						foreach($paymenttermsres as $red){
-							$payment_terms[$red->id] = $red;
-						}
-						$return['payment_terms'] = $payment_terms;
-
-						$locationssql = "SELECT `id`, `location_name` FROM locations WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY location_name ASC";
-						$locationsres = $callConfig->getAllRows($locationssql);
-						$locations = array();
-						foreach($locationsres as $red){
-							$locations[$red->id] = $red;
-						}
-						$return['locations'] = $locations;
-
-						$gencsql = "SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY agreement_name ASC";
-						$gencres = $callConfig->getAllRows($gencsql);
-						if (count((array)$gencres) == 0) {
-							$gencsql = "SELECT genc_detail_code, `genc_detail_name` FROM general_code_details WHERE company_id =" . $get['company_id'] . " AND genc_code = 'AGREEMENTS_TYPE' AND is_active = 0";
-							$gencres = $callConfig->getAllRows($gencsql);
-						}
-						$agreement_type = array();
-						foreach($gencres as $red){
-							$agreement_type[$red->genc_detail_code] = $red;
-						}
-						$return['agreement_type'] = $agreement_type;
-						$sql = "SELECT id, department_name FROM departments WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
-						$res = $callConfig->getAllRows($sql);
-						$departments = array();
-						foreach($res as $red){
-							$departments[$red->id] = $red;
-						}
-						$return['departments'] = $departments;
-
-						$gencsql = "SELECT genc_detail_code, `genc_detail_name` FROM general_code_details WHERE company_id =" . $get['company_id'] . " AND genc_code = 'CONTRACT_TYPE' AND is_active = 0";
-						$gencres = $callConfig->getAllRows($gencsql);
-						$contract_types = array();
-						foreach($gencres as $red){
-							$contract_types[$red->genc_detail_code] = $red;
-						}
-						$return['contract_types'] = $contract_types;
-
-						$conservsql = "SELECT id, service_name FROM contract_services WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
-						$conservres = $callConfig->getAllRows($conservsql);
-						$contract_services = array();
-						foreach($conservres as $red){
-							$contract_services[$red->id] = $red;
-						}
-						$return['contract_services'] = $contract_services;
-
-						$vendorssql = "SELECT id, company FROM vendors WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
-						$vendorsres = $callConfig->getAllRows($vendorssql);
-						$vendors = array();
-						foreach($vendorsres as $red){
-							$vendors[$red->id] = $red;
-						}
-						$return['vendors'] = $vendors;
-
-
-						$condition = "";
-						if($get['party_id'] !=""){
-							$condition .= " AND party_id = '".$get['party_id']."'";
-						}
-						if($get['contract_services_id'] !=""){
-							$condition .= " AND JSON_SEARCH(contract_services_id, 'one', '".$get['contract_services_id']."') IS NOT NULL";
-						}
-						if($get['typeofaggrements'] !=""){
-							$condition .= " AND typeofaggrements = '".$get['typeofaggrements']."'";
-						}
-						if($get['locations'] !=""){
-							$condition .= " AND JSON_SEARCH(locations, 'one', '".$get['locations']."') IS NOT NULL";
-						}
-						if($get['department_id'] !=""){
-							$condition .= " AND department_id = '".$get['department_id']."'";
-						}
-						if($get['type_of_contract_id'] !=""){
-							$condition .= " AND type_of_contract_id = '".$get['type_of_contract_id']."'";
-						}
-						if($get['contract_payment_terms'] !=""){
-							$condition .= " AND contract_payment_terms = '".$get['contract_payment_terms']."'";
-						}
-						if($get['transaction_no_and_name'] !=""){
-							$condition .= " AND (transaction_no LIKE '%".$get['transaction_no_and_name']."%' OR contract_name LIKE '%".$get['transaction_no_and_name']."%') ";
-						}
-			 			if($get['is_amc_contract'] !=""){
-							$condition .= " AND is_amc_contract = '".$get['is_amc_contract']."'";
-						}
-
-			 			$cntsql = "SELECT COUNT(id) as cnt FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0".$condition.$admin_or_user_whr;
-			     		$cntres =  $callConfig->getRow($cntsql);
-			     		$return['total_record_cnt'] = $cntres;
-			     		$respons_data_cnt =  ($cntres->cnt!="" && $cntres->cnt !=0)?$cntres->cnt:0;
-				     	$divide_limit = $respons_data_cnt/$get['limit_select'];
-						$total_pages = ceil($respons_data_cnt / $get['limit_select']);
-						$current_page = isset($get['current_page']) ? (int)$get['current_page'] : 1;
-						$current_page = max(1, min($current_page, $total_pages));
-						$start_from = ($current_page - 1) * $get['limit_select'];
-						$return['total_pages'] = $total_pages;
-
-						$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0".$condition.$admin_or_user_whr." LIMIT ".$start_from.", ".$get['limit_select'];
-						$contractsres = $callConfig->getAllRows($contractssql);
-						$return['contractssql'] = $contractssql;
-						$return['contracts'] = $contractsres;
-				}else{
-					$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ".$admin_or_user_whr." ORDER BY id ASC";
-					$contractsres = $callConfig->getAllRows($contractssql);
-					$return['result'] = $contractsres;
+			$seluser = "SELECT id, company_id, user_email, display_name FROM application_users WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0" . $conditins;
+			$return['seluser'] = $seluser;
+			$seluserres = $callConfig->getAllRows($seluser);
+			$emailuserdetails = array();
+			foreach ($seluserres as $seluser) {
+				if ($seluser->id == $insert_array['originator']) {
+					$originatordetailary = $seluser;
 				}
-				return $return;
-			}
-			public function getEditContracts($get)
-			{
-				global $callConfig;
-				$return = array();
-				$rid = $get['rid'];
-				$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND id = '" . $rid . "' AND is_active = 0";
-				$contractsres = $callConfig->getRow($contractssql);
-				$return['result'] = $contractsres;
-				return $return;
-			}
-			public function getuserslistreact($get)
-			{
-				global $callConfig;
-				$return = array();
-				$userssql = "SELECT * FROM application_users WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY id ASC";
-				$useres = $callConfig->getAllRows($userssql);
-				$return['result'] = $useres;
-				return $return;
-			}
-			public function getdocumentlistreact($get)
-			{
-				global $callConfig;
-				$return = array();
-				$contractssql = "SELECT * FROM document_lists WHERE company_id =" . $get['company_id'] . " AND category_id = 5 AND is_active = 0 ORDER BY id ASC";
-				$contractsres = $callConfig->getAllRows($contractssql);
-				$return['result'] = $contractsres;
-				return $return;
-			}
-			public function insertdocumnentreact($get, $post, $files)
-			{
-				global $callConfig;
-				$return = [];
-				$return['get'] = $get;
-				$return['post'] = $post;
-				if (!empty($post['documents_meta'])) {
-					$documentsMeta = json_decode($post['documents_meta'], true);
-					if (json_last_error() !== JSON_ERROR_NONE) {
-						$return['error'] = "Invalid JSON in documents_meta";
-						return $return;
-					}
-					$processedDocumentTypes = [];
-					if (!empty($post['processed_document_types'])) {
-						$processedDocumentTypes = json_decode($post['processed_document_types'], true) ?: [];
-					}
-					foreach ($processedDocumentTypes as $documentTypeId) {
-						$existingQuery = "SELECT id, file_name FROM contract_documents WHERE contract_id = '" . addslashes($post['contract_id']) . "' AND document_list_id = '" . addslashes($documentTypeId) . "' AND is_active = 0";
-						$existingDocs = $callConfig->getAllRows($existingQuery);
-						$keepDocIds = [];
-						foreach ($documentsMeta as $doc) {
-							if ($doc['document_list_id'] == $documentTypeId && !empty($doc['Rid'])) {
-								$keepDocIds[] = $doc['Rid'];
-							}
-						}
-						foreach ($existingDocs as $existingDoc) {
-							if (!in_array($existingDoc->id, $keepDocIds)) {
-								$deleteArray = [
-									'is_active' => null, 'updated_by' => $post['user_id'], 'updated_date' => date('Y-m-d H:i:s')
-								];
-								$deleteRes = $callConfig->updateRecord('contract_documents', $deleteArray, 'id', $existingDoc->id);
-								$return['deleted_results'][] = ['id' => $existingDoc->id, 'file_name' => $existingDoc->file_name, 'result' => $deleteRes];
-
-								$filePath = "./uploads/contracts/" . $existingDoc->file_name;
-								if (file_exists($filePath)) {
-									unlink($filePath);
-								}
-							}
-						}
-					}
-					foreach ($documentsMeta as $index => $doc) {
-						$action = $doc['action'] ?? 'new_upload';
-						if ($action === 'keep_existing' && !empty($doc['Rid'])) {
-							$fileName = $doc['file_name'] ?? null;
-							if ($fileName) {
-								$update_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'updated_by' => $post['user_id'], 'updated_date' => date('Y-m-d H:i:s') ];
-								$res = $callConfig->updateRecord('contract_documents', $update_array, 'id', $doc['Rid']);
-								$return['update_results'][] = ['Rid' => $doc['Rid'], 'result' => $res];
-							}
-						} elseif ($action === 'new_upload') {
-							$fileName = $doc['file_name'] ?? null;
-							if ($fileName) {
-								$insert_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'company_id' => $post['company_id'], 'is_active' => 0, 'created_by' => $post['user_id'], 'created_date' => date('Y-m-d H:i:s') ];
-								$insert_data = $callConfig->insertRecord('contract_documents', $insert_array);
-								$return['insert_results'][] = $insert_data;
-
-								$activity_array = ['company_id' => $get['company_id'] ?? ($post['company_id'] ?? 0), 'activity' => 'Document Upload', 'contract_id' => $post['contract_id'] ?? 0, 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $get['user_id'] ?? ($post['user_id'] ?? 0), 'created_date' => date('Y-m-d H:i:s') ];
-								$activityRes = $callConfig->insertRecord('contract_activity', $activity_array);
-								$return['activity_results'][] = $activityRes;
-							}
-						}
-					}
-				} else {
-					$return['error'] = "No documents_meta found in POST data";
-					return $return;
+				if ($seluser->id == $get['user_id']) {
+					$updatedby = $seluser;
 				}
-				return $return;
+				$emailuserdetails[$seluser->id] = $seluser;
+			}
+			foreach ($emailuserdetails as $seluser) {
+				$notification_users = array($seluser->id);
+				$emailarray = $post;
+				$emailarray['user_email_id'] = $seluser->user_email;
+				$emailarray['user_display_name'] = $seluser->display_name;
+				$emailarray['to_company_id'] = $seluser->company_id;
+				$emailarray['session_company_id'] = $seluser->company_id;
+				$emailarray['default_module_id'] = 40;
+				$emailarray['created_by'] = $get['user_id'];
+				$emailarray['contract_creation_or_updation'] = $contract_creation_or_updation;
+				$emailarray['contract_name'] = $insert_array['transaction_no'] . " - " . $insert_array['contract_name'];
+				$emailarray['contract_user_name'] = $originatordetailary->display_name;
+				$emailarray['contract_update_datetime'] = date('Y-m-d H:i:s');
+				$emailarray['contract_update_by'] = $updatedby->display_name;
+
+				$msg = "Contract " . $insert_array['contract_name'] . " - " . $insert_array['transaction_no'] . " has been created successfully.";
+				$notarry = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $contract_id, 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $notification_users, 'option' => $option, 'assigner_id' => $get['user_id']);
+				$sendnotification = $this->sendNotificationAndEmails($notarry, $emailarray, 75);
+			}
+		}
+		$control_array = array(
+			'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]),
+			'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]),
+			'documents' => isset($post['document_data']) ? json_encode($post['document_data']) : json_encode([]),
+			'contract_details' => json_encode($insert_array),
+			'version_id' => $post['version_id'] ?? 0,
+			'company_id' => $get['company_id'] ?? 0,
+			'contract_id' => $contract_id,
+			'is_active' => 0,
+			'created_by' => $get['user_id'] ?? 0,
+			'created_date' => date('Y-m-d H:i:s')
+		);
+		$control_insert = $callConfig->insertRecord('contract_version', $control_array);
+		$return['control_version_result'] = $control_insert;
+
+		// ---- Contract Activity ----
+		$endDate = !empty($post['end_date']) ? $post['end_date'] : 'N/A';
+		if (empty($post['Rid'])) {
+			$activity_text = "Contract Created (Valid until {$endDate})";
+		} else {
+			$edit_option = $post['edit_option'] ?? 'SaveUpdate';
+			if ($edit_option === '1')
+				$edit_option = 'Amendment';
+			if ($edit_option === '2')
+				$edit_option = 'Addendum';
+
+			if ($edit_option === 'Amendment') {
+				$activity_text = "Contract Amended (New Version Created, Valid until {$endDate})";
+			} elseif ($edit_option === 'Addendum') {
+				$activity_text = "Contract Addendum Added (New Version Created, Valid until {$endDate})";
+			} else {
+				$activity_text = "Contract Updated (Standard Save, Valid until {$endDate})";
+			}
+		}
+		$activity_array = array('company_id' => $get['company_id'] ?? 0, 'activity' => $activity_text, 'contract_id' => $contract_id, 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date('Y-m-d H:i:s'));
+		$activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
+		$return['activity_result'] = $activity_insert;
+
+		// Log on Parent Contract if it's an Amendment or Addendum
+		if (!empty($post['Rid']) && ($edit_option === 'Amendment' || $edit_option === 'Addendum')) {
+			$parent_msg = ($edit_option === 'Amendment') ? "Contract Amended (New Version Created, Valid until {$endDate})" : "Contract Addendum Added (New Version Created, Valid until {$endDate})";
+			$parent_activity = array('company_id' => $get['company_id'] ?? 0, 'activity' => $parent_msg, 'contract_id' => $post['Rid'], 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date('Y-m-d H:i:s'));
+			$callConfig->insertRecord('contract_activity', $parent_activity);
+		}
+
+		if (isset($post['milestones']) && is_array($post['milestones']) && count($post['milestones']) > 0) {
+
+			if (!empty($post['Rid'])) {
+				$updateQuery = "UPDATE  contract_milestones SET is_active = NULL, updated_date = '" . date('Y-m-d H:i:s') . "',  updated_by = '" . addslashes($get['user_id']) . "' WHERE transaction_id = '" . addslashes($contract_id) . "'";
+				$callConfig->executeQuery($updateQuery);
 			}
 
-/**
-	public function insertdocumnentreact($get, $post, $files)
+			foreach ($post['milestones'] as $milestone) {
+				if (empty(trim($milestone['milestone_name'] ?? '')))
+					continue;
+				$milestoneData = ['company_id' => $get['company_id'], 'transaction_id' => $contract_id, 'transaction_date' => date('Y-m-d H:i:s'), 'milestone' => trim($milestone['milestone_name']), 'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null, 'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0, 'is_active' => 0, 'current_status' => 0, 'status_date' => date('Y-m-d H:i:s'), 'created_date' => date('Y-m-d H:i:s'), 'created_by' => $get['user_id'], 'updated_by' => $get['user_id'], 'updated_date' => date('Y-m-d H:i:s'),];
+
+				$milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
+				$return['milestone_inserts'][] = $milestoneInsert;
+			}
+
+		} else {
+			$return['milestone_inserts'] = 'No milestones found in POST.';
+		}
+		// LIVE PATCH: convert type
+		if (($insert_array['is_amc_contract'] ?? 'N') == 'N' && !empty($post['Rid'])) {
+			$amcCleanupNow = date('Y-m-d H:i:s');
+			$amcCleanupUser = addslashes($get['user_id'] ?? 0);
+			$amcCleanupContractId = addslashes($contract_id);
+			$callConfig->executeQuery("UPDATE contract_amc_locations SET is_active = NULL, updated_by = '" . $amcCleanupUser . "', updated_date = '" . $amcCleanupNow . "' WHERE contract_id = '" . $amcCleanupContractId . "' AND is_active = 0");
+			$callConfig->executeQuery("UPDATE contract_amc_assets SET is_active = NULL, updated_by = '" . $amcCleanupUser . "', updated_date = '" . $amcCleanupNow . "' WHERE contract_id = '" . $amcCleanupContractId . "' AND is_active = 0");
+			$callConfig->executeQuery("UPDATE contract_amc_service_schedules SET is_active = NULL, updated_by = '" . $amcCleanupUser . "', updated_date = '" . $amcCleanupNow . "' WHERE contract_id = '" . $amcCleanupContractId . "' AND is_active = 0");
+		}
+		$return['commercial_details_result'] = $this->saveContractCommercialDetails($contract_id, $get, $post);
+		return $return;
+	}
+	public function getcontractslistpost($get, $post)
+	{
+		return $this->getcontractslist($post);
+	}
+	public function adminOrUserOrFM($get)
+	{
+		global $callConfig;
+		$whr = '';
+		if ($get['admin_type'] != 1) {
+			$whr = " AND (originator = " . $get['user_id'] . " OR created_by='{$get['user_id']}')";
+		}
+
+		$permisisql = "SELECT id, contract_id, basic_permissions FROM contract_permissions WHERE company_id =" . $get['company_id'] . " AND user = " . $get['user_id'] . " AND is_active = 0";
+		$permisires = $callConfig->getAllRows($permisisql);
+		$permision_contract_id = array();
+		foreach ($permisires as $perms) {
+			$permision_contract_id[$perms->contract_id] = $perms->contract_id;
+		}
+
+		if (count((array) $permision_contract_id) != 0) {
+			$expcanid = implode(',', $permision_contract_id);
+			if ($get['admin_type'] != 1) {
+				$whr = " AND (originator = " . $get['user_id'] . " OR created_by = " . $get['user_id'] . " OR id IN(" . $expcanid . "))";
+			}
+		}
+		if ($get['working_role_short_code'] == 'CONTRACT_FM_USER') {
+			$whr .= " AND locations LIKE %" . $get['location_id'] . "% ";
+		}
+		return $whr;
+	}
+
+	public function getcontractslist($get)
 	{
 		global $callConfig;
 		$return = array();
+		$return['get'] = $get;
+		$admin_or_user_whr = $this->adminOrUserOrFM($get);
+		if ($get['api_type'] == "listpage") {
 
+			$paymenttermssql = "SELECT `id`, `payment_term_name` FROM payment_terms WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY payment_term_name ASC";
+			$paymenttermsres = $callConfig->getAllRows($paymenttermssql);
+			$payment_terms = array();
+			foreach ($paymenttermsres as $red) {
+				$payment_terms[$red->id] = $red;
+			}
+			$return['payment_terms'] = $payment_terms;
+
+			$locationssql = "SELECT `id`, `location_name` FROM locations WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY location_name ASC";
+			$locationsres = $callConfig->getAllRows($locationssql);
+			$locations = array();
+			foreach ($locationsres as $red) {
+				$locations[$red->id] = $red;
+			}
+			$return['locations'] = $locations;
+
+			$gencsql = "SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY agreement_name ASC";
+			$gencres = $callConfig->getAllRows($gencsql);
+			if (count((array) $gencres) == 0) {
+				$gencsql = "SELECT genc_detail_code, `genc_detail_name` FROM general_code_details WHERE company_id =" . $get['company_id'] . " AND genc_code = 'AGREEMENTS_TYPE' AND is_active = 0";
+				$gencres = $callConfig->getAllRows($gencsql);
+			}
+			$agreement_type = array();
+			foreach ($gencres as $red) {
+				$agreement_type[$red->genc_detail_code] = $red;
+			}
+			$return['agreement_type'] = $agreement_type;
+			$sql = "SELECT id, department_name FROM departments WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
+			$res = $callConfig->getAllRows($sql);
+			$departments = array();
+			foreach ($res as $red) {
+				$departments[$red->id] = $red;
+			}
+			$return['departments'] = $departments;
+
+			$gencsql = "SELECT genc_detail_code, `genc_detail_name` FROM general_code_details WHERE company_id =" . $get['company_id'] . " AND genc_code = 'CONTRACT_TYPE' AND is_active = 0";
+			$gencres = $callConfig->getAllRows($gencsql);
+			$contract_types = array();
+			foreach ($gencres as $red) {
+				$contract_types[$red->genc_detail_code] = $red;
+			}
+			$return['contract_types'] = $contract_types;
+
+			$conservsql = "SELECT id, service_name FROM contract_services WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
+			$conservres = $callConfig->getAllRows($conservsql);
+			$contract_services = array();
+			foreach ($conservres as $red) {
+				$contract_services[$red->id] = $red;
+			}
+			$return['contract_services'] = $contract_services;
+
+			$vendorssql = "SELECT id, company FROM vendors WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
+			$vendorsres = $callConfig->getAllRows($vendorssql);
+			$vendors = array();
+			foreach ($vendorsres as $red) {
+				$vendors[$red->id] = $red;
+			}
+			$return['vendors'] = $vendors;
+
+
+			$condition = "";
+			if ($get['party_id'] != "") {
+				$condition .= " AND party_id = '" . $get['party_id'] . "'";
+			}
+			if ($get['contract_services_id'] != "") {
+				$condition .= " AND JSON_SEARCH(contract_services_id, 'one', '" . $get['contract_services_id'] . "') IS NOT NULL";
+			}
+			if ($get['typeofaggrements'] != "") {
+				$condition .= " AND typeofaggrements = '" . $get['typeofaggrements'] . "'";
+			}
+			if ($get['locations'] != "") {
+				$condition .= " AND JSON_SEARCH(locations, 'one', '" . $get['locations'] . "') IS NOT NULL";
+			}
+			if ($get['department_id'] != "") {
+				$condition .= " AND department_id = '" . $get['department_id'] . "'";
+			}
+			if ($get['type_of_contract_id'] != "") {
+				$condition .= " AND type_of_contract_id = '" . $get['type_of_contract_id'] . "'";
+			}
+			if ($get['contract_payment_terms'] != "") {
+				$condition .= " AND contract_payment_terms = '" . $get['contract_payment_terms'] . "'";
+			}
+			if ($get['transaction_no_and_name'] != "") {
+				$condition .= " AND (transaction_no LIKE '%" . $get['transaction_no_and_name'] . "%' OR contract_name LIKE '%" . $get['transaction_no_and_name'] . "%') ";
+			}
+			if ($get['is_amc_contract'] != "") {
+				$condition .= " AND is_amc_contract = '" . $get['is_amc_contract'] . "'";
+			}
+
+			$cntsql = "SELECT COUNT(id) as cnt FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0" . $condition . $admin_or_user_whr;
+			$cntres = $callConfig->getRow($cntsql);
+			$return['total_record_cnt'] = $cntres;
+			$respons_data_cnt = ($cntres->cnt != "" && $cntres->cnt != 0) ? $cntres->cnt : 0;
+			$divide_limit = $respons_data_cnt / $get['limit_select'];
+			$total_pages = ceil($respons_data_cnt / $get['limit_select']);
+			$current_page = isset($get['current_page']) ? (int) $get['current_page'] : 1;
+			$current_page = max(1, min($current_page, $total_pages));
+			$start_from = ($current_page - 1) * $get['limit_select'];
+			$return['total_pages'] = $total_pages;
+
+			$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0" . $condition . $admin_or_user_whr . " LIMIT " . $start_from . ", " . $get['limit_select'];
+			$contractsres = $callConfig->getAllRows($contractssql);
+			$return['contractssql'] = $contractssql;
+			$return['contracts'] = $contractsres;
+		} else {
+			$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0 " . $admin_or_user_whr . " ORDER BY id ASC";
+			$contractsres = $callConfig->getAllRows($contractssql);
+			$return['result'] = $contractsres;
+		}
+		return $return;
+	}
+	public function getEditContracts($get)
+	{
+		global $callConfig;
+		$return = array();
+		$rid = $get['rid'];
+		$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND id = '" . $rid . "' AND is_active = 0";
+		$contractsres = $callConfig->getRow($contractssql);
+		$return['result'] = $contractsres;
+		return $return;
+	}
+	public function getuserslistreact($get)
+	{
+		global $callConfig;
+		$return = array();
+		$userssql = "SELECT * FROM application_users WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY id ASC";
+		$useres = $callConfig->getAllRows($userssql);
+		$return['result'] = $useres;
+		return $return;
+	}
+	public function getdocumentlistreact($get)
+	{
+		global $callConfig;
+		$return = array();
+		$contractssql = "SELECT * FROM document_lists WHERE company_id =" . $get['company_id'] . " AND category_id = 5 AND is_active = 0 ORDER BY id ASC";
+		$contractsres = $callConfig->getAllRows($contractssql);
+		$return['result'] = $contractsres;
+		return $return;
+	}
+	public function insertdocumnentreact($get, $post, $files)
+	{
+		global $callConfig;
+		$return = [];
 		$return['get'] = $get;
 		$return['post'] = $post;
-		$return['files'] = $files;
-
-		$ridArray = [];
-		$docsWithoutRid = [];
-		$lastDocuments = [];
-
-		foreach ($post['documents'] as $index => $doc) {
-			$lastDocuments[$doc['document_list_id']] = [
-				'index' => $index,
-				'doc' => $doc
-			];
-		}
-
-		foreach ($lastDocuments as $document) {
-			$index = $document['index'];
-			$doc = $document['doc'];
-
-			if (isset($doc['Rid']) && $doc['Rid'] !== "") {
-				$ridArray[] = ['Rid' => $doc['Rid'], 'index' => $index, 'doc' => $doc];
-			} else {
-				$docsWithoutRid[] = ['index' => $index, 'doc' => $doc];
+		if (!empty($post['documents_meta'])) {
+			$documentsMeta = json_decode($post['documents_meta'], true);
+			if (json_last_error() !== JSON_ERROR_NONE) {
+				$return['error'] = "Invalid JSON in documents_meta";
+				return $return;
 			}
-		}
-
-		if (count($ridArray) > 0) {
-			foreach ($ridArray as $data) {
-				$index = $data['index'];
-				$rid = $data['Rid'];
-				$doc = $data['doc'];
-
-				if (isset($files['documents']['name'][$index]['file_name'])) {
-					$fileName = $files['documents']['name'][$index]['file_name'];
-					$tmpFile = $files['documents']['tmp_name'][$index]['file_name'];
-
-					$uploadDir = "./uploads/contracts/";
-					$filePath = $uploadDir . $fileName;
-
-					if (move_uploaded_file($tmpFile, $filePath)) {
-						$update_array = array(
-							'category_id' => $post['category_id'],
-							'comments' => $doc['comments'],
-							'document_list_id' => $doc['document_list_id'],
-							'contract_id' => $post['contract_id'],
-							'file_name' => $fileName,
+			$processedDocumentTypes = [];
+			if (!empty($post['processed_document_types'])) {
+				$processedDocumentTypes = json_decode($post['processed_document_types'], true) ?: [];
+			}
+			foreach ($processedDocumentTypes as $documentTypeId) {
+				$existingQuery = "SELECT id, file_name FROM contract_documents WHERE contract_id = '" . addslashes($post['contract_id']) . "' AND document_list_id = '" . addslashes($documentTypeId) . "' AND is_active = 0";
+				$existingDocs = $callConfig->getAllRows($existingQuery);
+				$keepDocIds = [];
+				foreach ($documentsMeta as $doc) {
+					if ($doc['document_list_id'] == $documentTypeId && !empty($doc['Rid'])) {
+						$keepDocIds[] = $doc['Rid'];
+					}
+				}
+				foreach ($existingDocs as $existingDoc) {
+					if (!in_array($existingDoc->id, $keepDocIds)) {
+						$deleteArray = [
+							'is_active' => null,
 							'updated_by' => $post['user_id'],
 							'updated_date' => date('Y-m-d H:i:s')
-						);
+						];
+						$deleteRes = $callConfig->updateRecord('contract_documents', $deleteArray, 'id', $existingDoc->id);
+						$return['deleted_results'][] = ['id' => $existingDoc->id, 'file_name' => $existingDoc->file_name, 'result' => $deleteRes];
 
-						$res = $callConfig->updateRecord('contract_documents', $update_array, 'id', $rid);
-						$return['update_results'][] = array('Rid' => $rid, 'result' => $res);
-					} else {
-						$return['update_failed'][] = "File upload failed for Rid: $rid";
+						$filePath = "./uploads/contracts/" . $existingDoc->file_name;
+						if (file_exists($filePath)) {
+							unlink($filePath);
+						}
 					}
 				}
 			}
-			$return['update_status'] = "success";
-		}
-
-		if (count($docsWithoutRid) > 0) {
-			foreach ($docsWithoutRid as $data) {
-				$index = $data['index'];
-				$doc = $data['doc'];
-
-				if (isset($files['documents']['name'][$index]['file_name'])) {
-					$fileName = $files['documents']['name'][$index]['file_name'];
-					$tmpFile = $files['documents']['tmp_name'][$index]['file_name'];
-
-					$uploadDir = "./uploads/contracts/";
-					$filePath = $uploadDir . $fileName;
-
-					if (move_uploaded_file($tmpFile, $filePath)) {
-						$insert_array = array(
-							'category_id' => $post['category_id'],
-							'comments' => $doc['comments'],
-							'document_list_id' => $doc['document_list_id'],
-							'contract_id' => $post['contract_id'],
-							'file_name' => $fileName,
-							'company_id' => $post['company_id'],
-							'is_active' => 0,
-							'created_by' => $post['user_id'],
-							'created_date' => date('Y-m-d H:i:s')
-						);
-
+			foreach ($documentsMeta as $index => $doc) {
+				$action = $doc['action'] ?? 'new_upload';
+				if ($action === 'keep_existing' && !empty($doc['Rid'])) {
+					$fileName = $doc['file_name'] ?? null;
+					if ($fileName) {
+						$update_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'updated_by' => $post['user_id'], 'updated_date' => date('Y-m-d H:i:s')];
+						$res = $callConfig->updateRecord('contract_documents', $update_array, 'id', $doc['Rid']);
+						$return['update_results'][] = ['Rid' => $doc['Rid'], 'result' => $res];
+					}
+				} elseif ($action === 'new_upload') {
+					$fileName = $doc['file_name'] ?? null;
+					if ($fileName) {
+						$insert_array = ['category_id' => $post['category_id'], 'comments' => $doc['comments'], 'document_list_id' => $doc['document_list_id'], 'contract_id' => $post['contract_id'], 'file_name' => $fileName, 'company_id' => $post['company_id'], 'is_active' => 0, 'created_by' => $post['user_id'], 'created_date' => date('Y-m-d H:i:s')];
 						$insert_data = $callConfig->insertRecord('contract_documents', $insert_array);
 						$return['insert_results'][] = $insert_data;
-					} else {
-						$return['insert_failed'][] = "File upload failed for new document.";
+
+						$activity_array = ['company_id' => $get['company_id'] ?? ($post['company_id'] ?? 0), 'activity' => 'Document Upload', 'contract_id' => $post['contract_id'] ?? 0, 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $get['user_id'] ?? ($post['user_id'] ?? 0), 'created_date' => date('Y-m-d H:i:s')];
+						$activityRes = $callConfig->insertRecord('contract_activity', $activity_array);
+						$return['activity_results'][] = $activityRes;
 					}
 				}
 			}
-			$return['insert_status'] = "success";
+		} else {
+			$return['error'] = "No documents_meta found in POST data";
+			return $return;
 		}
-
 		return $return;
-	}**/
+	}
+
+	/**
+		public function insertdocumnentreact($get, $post, $files)
+		{
+			global $callConfig;
+			$return = array();
+
+			$return['get'] = $get;
+			$return['post'] = $post;
+			$return['files'] = $files;
+
+			$ridArray = [];
+			$docsWithoutRid = [];
+			$lastDocuments = [];
+
+			foreach ($post['documents'] as $index => $doc) {
+				$lastDocuments[$doc['document_list_id']] = [
+					'index' => $index,
+					'doc' => $doc
+				];
+			}
+
+			foreach ($lastDocuments as $document) {
+				$index = $document['index'];
+				$doc = $document['doc'];
+
+				if (isset($doc['Rid']) && $doc['Rid'] !== "") {
+					$ridArray[] = ['Rid' => $doc['Rid'], 'index' => $index, 'doc' => $doc];
+				} else {
+					$docsWithoutRid[] = ['index' => $index, 'doc' => $doc];
+				}
+			}
+
+			if (count($ridArray) > 0) {
+				foreach ($ridArray as $data) {
+					$index = $data['index'];
+					$rid = $data['Rid'];
+					$doc = $data['doc'];
+
+					if (isset($files['documents']['name'][$index]['file_name'])) {
+						$fileName = $files['documents']['name'][$index]['file_name'];
+						$tmpFile = $files['documents']['tmp_name'][$index]['file_name'];
+
+						$uploadDir = "./uploads/contracts/";
+						$filePath = $uploadDir . $fileName;
+
+						if (move_uploaded_file($tmpFile, $filePath)) {
+							$update_array = array(
+								'category_id' => $post['category_id'],
+								'comments' => $doc['comments'],
+								'document_list_id' => $doc['document_list_id'],
+								'contract_id' => $post['contract_id'],
+								'file_name' => $fileName,
+								'updated_by' => $post['user_id'],
+								'updated_date' => date('Y-m-d H:i:s')
+							);
+
+							$res = $callConfig->updateRecord('contract_documents', $update_array, 'id', $rid);
+							$return['update_results'][] = array('Rid' => $rid, 'result' => $res);
+						} else {
+							$return['update_failed'][] = "File upload failed for Rid: $rid";
+						}
+					}
+				}
+				$return['update_status'] = "success";
+			}
+
+			if (count($docsWithoutRid) > 0) {
+				foreach ($docsWithoutRid as $data) {
+					$index = $data['index'];
+					$doc = $data['doc'];
+
+					if (isset($files['documents']['name'][$index]['file_name'])) {
+						$fileName = $files['documents']['name'][$index]['file_name'];
+						$tmpFile = $files['documents']['tmp_name'][$index]['file_name'];
+
+						$uploadDir = "./uploads/contracts/";
+						$filePath = $uploadDir . $fileName;
+
+						if (move_uploaded_file($tmpFile, $filePath)) {
+							$insert_array = array(
+								'category_id' => $post['category_id'],
+								'comments' => $doc['comments'],
+								'document_list_id' => $doc['document_list_id'],
+								'contract_id' => $post['contract_id'],
+								'file_name' => $fileName,
+								'company_id' => $post['company_id'],
+								'is_active' => 0,
+								'created_by' => $post['user_id'],
+								'created_date' => date('Y-m-d H:i:s')
+							);
+
+							$insert_data = $callConfig->insertRecord('contract_documents', $insert_array);
+							$return['insert_results'][] = $insert_data;
+						} else {
+							$return['insert_failed'][] = "File upload failed for new document.";
+						}
+					}
+				}
+				$return['insert_status'] = "success";
+			}
+
+			return $return;
+		}**/
 	public function insertworkflowreact($get, $post)
 	{
 		global $callConfig;
@@ -970,14 +995,14 @@ class reactClass extends userClass{
 				if (is_string($post['steps_permissions'])) {
 					$decoded = json_decode($post['steps_permissions'], true);
 					$stepsPermissionsValue = (json_last_error() === JSON_ERROR_NONE)
-					? $post['steps_permissions']
-					: json_encode($post['steps_permissions']);
+						? $post['steps_permissions']
+						: json_encode($post['steps_permissions']);
 				} else {
 					$stepsPermissionsValue = json_encode($post['steps_permissions']);
 				}
 			}
 
-			$workflow_array = array( 'contract_id' => $post['contract_id'] ?? null, 'workflow_steps' => $post['workflow_steps'] ?? null, 'steps_permissions' => $stepsPermissionsValue,);
+			$workflow_array = array('contract_id' => $post['contract_id'] ?? null, 'workflow_steps' => $post['workflow_steps'] ?? null, 'steps_permissions' => $stepsPermissionsValue, );
 
 			if (!empty($Rid)) {
 				$workflow_array['updated_by'] = $get['user_id'] ?? ($post['user_id'] ?? 459);
@@ -993,11 +1018,11 @@ class reactClass extends userClass{
 				$return['workflow_result'] = $res;
 			}
 
-			$version_array = array( 'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]), 'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]), 'documents' => isset($post['document_data']) ? json_encode($post['document_data']) : json_encode([]), 'contract_details' => isset($post['contract_data']) ? json_encode($post['contract_data']) : json_encode([]), 'version_id' => $post['version_id'] ?? 0, 'company_id' => $get['company_id'] ?? ($post['company_id'] ?? 0), 'contract_id' => $post['contract_id'] ?? 0, 'is_active' => 0, 'created_by' => $get['user_id'] ?? ($post['user_id'] ?? 0), 'created_date' => date('Y-m-d H:i:s') );
+			$version_array = array('permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]), 'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]), 'documents' => isset($post['document_data']) ? json_encode($post['document_data']) : json_encode([]), 'contract_details' => isset($post['contract_data']) ? json_encode($post['contract_data']) : json_encode([]), 'version_id' => $post['version_id'] ?? 0, 'company_id' => $get['company_id'] ?? ($post['company_id'] ?? 0), 'contract_id' => $post['contract_id'] ?? 0, 'is_active' => 0, 'created_by' => $get['user_id'] ?? ($post['user_id'] ?? 0), 'created_date' => date('Y-m-d H:i:s'));
 			$versionRes = $callConfig->insertRecord('contract_version', $version_array);
 			$return['version_result'] = $versionRes;
 
-			$activity_array = array( 'company_id' => $get['company_id'] ?? ($post['company_id'] ?? 0), 'activity' => 'workflow', 'contract_id' => $post['contract_id'] ?? 0, 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $get['user_id'] ?? ($post['user_id'] ?? 0), 'created_date' => date('Y-m-d H:i:s'));
+			$activity_array = array('company_id' => $get['company_id'] ?? ($post['company_id'] ?? 0), 'activity' => 'workflow', 'contract_id' => $post['contract_id'] ?? 0, 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $get['user_id'] ?? ($post['user_id'] ?? 0), 'created_date' => date('Y-m-d H:i:s'));
 			$activityRes = $callConfig->insertRecord('contract_activity', $activity_array);
 			$return['activity_result'] = $activityRes;
 
@@ -1020,7 +1045,8 @@ class reactClass extends userClass{
 		$return['result'] = $documnentres;
 		return $return;
 	}
-	public function getEditworkflowreact($get){
+	public function getEditworkflowreact($get)
+	{
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'];
@@ -1037,7 +1063,7 @@ class reactClass extends userClass{
 		$basic_permissions = json_encode($post['permissions']);
 		$document_permissions = json_encode($post['document_permissions']);
 
-		$insert_array = array( 'contract_id' => $post['contract_id'], 'user' => $post['user'], 'basic_permissions' => $basic_permissions, 'document_permissions' => $document_permissions );
+		$insert_array = array('contract_id' => $post['contract_id'], 'user' => $post['user'], 'basic_permissions' => $basic_permissions, 'document_permissions' => $document_permissions);
 
 		if (!empty($post['Rid'])) {
 			$insert_array['updated_by'] = $post['user_id'];
@@ -1053,11 +1079,11 @@ class reactClass extends userClass{
 			$return['permission_result'] = $insert_data;
 		}
 
-		$control_array = array( 'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]), 'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]), 'documents' => isset($post['document_data']) ? json_encode($post['document_data']) : json_encode([]), 'contract_details' => isset($post['contract_data']) ? json_encode($post['contract_data']) : json_encode([]), 'version_id' => $post['version_id'] ?? 0, 'company_id' => $post['company_id'] ?? 0, 'contract_id' => $post['contract_id'] ?? 0, 'is_active' => 0, 'created_by' => $post['user_id'] ?? 0, 'created_date' => date('Y-m-d H:i:s') );
+		$control_array = array('permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) : json_encode([]), 'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]), 'documents' => isset($post['document_data']) ? json_encode($post['document_data']) : json_encode([]), 'contract_details' => isset($post['contract_data']) ? json_encode($post['contract_data']) : json_encode([]), 'version_id' => $post['version_id'] ?? 0, 'company_id' => $post['company_id'] ?? 0, 'contract_id' => $post['contract_id'] ?? 0, 'is_active' => 0, 'created_by' => $post['user_id'] ?? 0, 'created_date' => date('Y-m-d H:i:s'));
 		$control_insert = $callConfig->insertRecord('contract_version', $control_array);
 		$return['control_version_result'] = $control_insert;
 
-		$activity_array = array( 'company_id' => $post['company_id'] ?? 0, 'activity' => $post['acitivity_data'] ?? 'permission', 'contract_id' => $post['contract_id'], 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $post['user_id'] ?? 0, 'created_date' => date('Y-m-d H:i:s'));
+		$activity_array = array('company_id' => $post['company_id'] ?? 0, 'activity' => $post['acitivity_data'] ?? 'permission', 'contract_id' => $post['contract_id'], 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $post['user_id'] ?? 0, 'created_date' => date('Y-m-d H:i:s'));
 		$activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
 		$return['activity_result'] = $activity_insert;
 
@@ -1159,7 +1185,8 @@ class reactClass extends userClass{
 		}
 		return $return;
 	}
-	public function insertactivityreact($get, $unusedPost){
+	public function insertactivityreact($get, $unusedPost)
+	{
 		global $callConfig;
 		$return = array();
 		$inputJSON = file_get_contents('php://input');
@@ -1231,7 +1258,7 @@ class reactClass extends userClass{
 			'first_name' => $firstName,
 			'middle_name' => $middleName,
 			'last_name' => $lastName,
-			'display_name' => $firstName . ' '. $lastName,
+			'display_name' => $firstName . ' ' . $lastName,
 			'email' => $post['email'] ?? '',
 			'phone' => $post['phone'] ?? '',
 			'billing_address' => $post['address'] ?? '',
@@ -1291,7 +1318,7 @@ class reactClass extends userClass{
 			'first_name' => $firstName,
 			'middle_name' => $middleName,
 			'last_name' => $lastName,
-			'display_name' => $firstName . ' '. $lastName,
+			'display_name' => $firstName . ' ' . $lastName,
 			'email' => $post['email'] ?? '',
 			'phone' => $post['phone'] ?? '',
 			'billing_address' => $post['address'] ?? '',
@@ -1320,7 +1347,8 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-	public function getcustomerlist($get){
+	public function getcustomerlist($get)
+	{
 		global $callConfig;
 		$return = array();
 		$activitysql = "SELECT * FROM customers WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
@@ -1328,7 +1356,8 @@ class reactClass extends userClass{
 		$return['result'] = $activityres;
 		return $return;
 	}
-	public function getvendorslist($get){
+	public function getvendorslist($get)
+	{
 		global $callConfig;
 		$return = array();
 		$activitysql = "SELECT * FROM vendors WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
@@ -1337,7 +1366,8 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	public function getcustomerdetailsreact($get){
+	public function getcustomerdetailsreact($get)
+	{
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'];
@@ -1347,7 +1377,8 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	public function getpermissiondetailsreact($get){
+	public function getpermissiondetailsreact($get)
+	{
 		global $callConfig;
 		$return = array();
 		$user_id = $get['user_id'];
@@ -1358,7 +1389,8 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	public function getfullpermissiondetailsreact($get){
+	public function getfullpermissiondetailsreact($get)
+	{
 		global $callConfig;
 		$return = array();
 		$user_id = $get['user_id'];
@@ -1367,7 +1399,8 @@ class reactClass extends userClass{
 		$return['result'] = $customerres;
 		return $return;
 	}
-	public function getdeleterowreact($get){
+	public function getdeleterowreact($get)
+	{
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'];
@@ -1382,29 +1415,29 @@ class reactClass extends userClass{
 	{
 		global $callConfig;
 		$return = array();
-		$hwr ="";
-		if($get['admin_type']!=1){
-			$hwr = " AND (originator = ".$get['user_id']." OR created_by = ".$get['user_id'].")";
+		$hwr = "";
+		if ($get['admin_type'] != 1) {
+			$hwr = " AND (originator = " . $get['user_id'] . " OR created_by = " . $get['user_id'] . ")";
 		}
 
-		$permisisql = "SELECT id, contract_id, basic_permissions FROM contract_permissions WHERE company_id =".$get['company_id']." AND user = ".$get['user_id']." AND is_active = 0";
+		$permisisql = "SELECT id, contract_id, basic_permissions FROM contract_permissions WHERE company_id =" . $get['company_id'] . " AND user = " . $get['user_id'] . " AND is_active = 0";
 		$permisires = $callConfig->getAllRows($permisisql);
 		$permision_contract_id = array();
-		foreach($permisires as $perms){
+		foreach ($permisires as $perms) {
 			$permision_contract_id[$perms->contract_id] = $perms->contract_id;
 		}
 
-		if(count((array)$permision_contract_id) != 0){
-			$expcanid = implode(',',$permision_contract_id);
-			if($get['admin_type']!=1){
-				$hwr = " AND (originator = ".$get['user_id']." OR created_by = ".$get['user_id']." OR id IN(".$expcanid."))";
+		if (count((array) $permision_contract_id) != 0) {
+			$expcanid = implode(',', $permision_contract_id);
+			if ($get['admin_type'] != 1) {
+				$hwr = " AND (originator = " . $get['user_id'] . " OR created_by = " . $get['user_id'] . " OR id IN(" . $expcanid . "))";
 			}
 		}
 
-		if($get['LOCID']!=''){
-			$hwr .= " AND JSON_SEARCH(locations, 'one', '".$get['LOCID']."') IS NOT NULL";
+		if ($get['LOCID'] != '') {
+			$hwr .= " AND JSON_SEARCH(locations, 'one', '" . $get['LOCID'] . "') IS NOT NULL";
 		}
-		$allcontractssql = "SELECT id, `originator`, `contract_name`, `transaction_no`, `party_type`, `party_id`, `parent_contract_id`, `start_date`, `end_date`, `description`, `additional_notes`, `contract_payment_terms`, `termination_condition`, `contract_status`, `auto_renew`, `renew_type`, `owner_user_id`, `contract_owner_name`, `contract_owner_email`, `contract_owner_number`, `rt_number`, `current_status`,  `created_date`, locations, contract_type, updated_date,is_amc_contract, cancel_status, typeofaggrements  FROM contracts WHERE company_id =" . $get['company_id'] . " ".$hwr." AND is_active = 0";
+		$allcontractssql = "SELECT id, `originator`, `contract_name`, `transaction_no`, `party_type`, `party_id`, `parent_contract_id`, `start_date`, `end_date`, `description`, `additional_notes`, `contract_payment_terms`, `termination_condition`, `contract_status`, `auto_renew`, `renew_type`, `owner_user_id`, `contract_owner_name`, `contract_owner_email`, `contract_owner_number`, `rt_number`, `current_status`,  `created_date`, locations, contract_type, updated_date,is_amc_contract, cancel_status, typeofaggrements  FROM contracts WHERE company_id =" . $get['company_id'] . " " . $hwr . " AND is_active = 0";
 		$allcontractsres = $callConfig->getAllRows($allcontractssql);
 		$return['allcontracts'] = $allcontractsres;
 		$return['allcontractssql'] = $allcontractssql;
@@ -1436,7 +1469,7 @@ class reactClass extends userClass{
 		$locationssql = "SELECT id, location_name FROM locations WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
 		$locationsres = $callConfig->getAllRows($locationssql);
 		$locations = array();
-		foreach($locationsres as $loc){
+		foreach ($locationsres as $loc) {
 			$locations[$loc->id] = $loc;
 		}
 		$return['locations'] = $locations;
@@ -1444,37 +1477,40 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-	public function getDocumentDetailsReact($get){
+	public function getDocumentDetailsReact($get)
+	{
 		global $callConfig;
 		$return = array();
 		$contract_id = $get['contract_id'];
-		$customersql = "SELECT * FROM contract_documents WHERE company_id ='".$get['company_id']."' AND contract_id = '".$contract_id."' AND is_active = 0";
+		$customersql = "SELECT * FROM contract_documents WHERE company_id ='" . $get['company_id'] . "' AND contract_id = '" . $contract_id . "' AND is_active = 0";
 		$customerres = $callConfig->getAllRows($customersql);
 		$return['result'] = $customerres;
 		return $return;
 	}
-	public function insertContractRechargeDetails($get,$post){
+	public function insertContractRechargeDetails($get, $post)
+	{
 		global $callConfig;
-		$return =array();
+		$return = array();
 		$return['post'] = $post;
-		$insert_array = array('contract_id'=>$post['contract_id'],'transaction_date'=>date('Y-m-d H:i:s'),'activation_date'=>$this->dateconvertdbformat($post['activation_date']),'recharge_date'=>$this->dateconvertdbformat($post['recharge_date']),'expiry_date'=>$this->dateconvertdbformat($post['expiry_date']),'plan_duration'=>$this->dateconvertdbformat($post['plan_duration']));
-		if($post['Rid']!=""){
-			$insert_array['updated_by']=$get['user_id'];
-			$insert_array['updated_date']=date('Y-m-d H:i:s');
-			$res=$callConfig->updateRecord('contract_recharge_details',$insert_array,'id',$post['Rid']);
+		$insert_array = array('contract_id' => $post['contract_id'], 'transaction_date' => date('Y-m-d H:i:s'), 'activation_date' => $this->dateconvertdbformat($post['activation_date']), 'recharge_date' => $this->dateconvertdbformat($post['recharge_date']), 'expiry_date' => $this->dateconvertdbformat($post['expiry_date']), 'plan_duration' => $this->dateconvertdbformat($post['plan_duration']));
+		if ($post['Rid'] != "") {
+			$insert_array['updated_by'] = $get['user_id'];
+			$insert_array['updated_date'] = date('Y-m-d H:i:s');
+			$res = $callConfig->updateRecord('contract_recharge_details', $insert_array, 'id', $post['Rid']);
 			$return['result'] = $res;
-		}else{
-			$insert_array['company_id']=$get['company_id'];
-			$insert_array['is_active']=0;
-			$insert_array['created_by']=$get['user_id'];
-			$insert_array['created_date']=date('Y-m-d H:i:s');
-			$insert_data=$callConfig->insertRecord('contract_recharge_details',$insert_array);
+		} else {
+			$insert_array['company_id'] = $get['company_id'];
+			$insert_array['is_active'] = 0;
+			$insert_array['created_by'] = $get['user_id'];
+			$insert_array['created_date'] = date('Y-m-d H:i:s');
+			$insert_data = $callConfig->insertRecord('contract_recharge_details', $insert_array);
 			$return['result'] = $insert_data;
 		}
 		return $return;
 	}
 
-	public function getcontractdetailsreactamc($get){
+	public function getcontractdetailsreactamc($get)
+	{
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'] ?? 0;
@@ -1483,7 +1519,7 @@ class reactClass extends userClass{
 		$displayattributesres = $callConfig->getRow($displayattributessql);
 		$return['displayattributesres'] = $displayattributesres;
 		$admin_or_user_whr = $this->adminOrUserOrFM($get);
-		$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ".$admin_or_user_whr." ORDER BY id ASC";
+		$contractssql = "SELECT * FROM contracts WHERE company_id =" . $get['company_id'] . " AND is_active = 0 " . $admin_or_user_whr . " ORDER BY id ASC";
 		$contractsres = $callConfig->getAllRows($contractssql);
 		$return['contractsres'] = $contractsres;
 
@@ -1542,7 +1578,7 @@ class reactClass extends userClass{
 
 		$gencsql = "SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY agreement_name ASC";
 		$gencres = $callConfig->getAllRows($gencsql);
-		if (count((array)$gencres) == 0) {
+		if (count((array) $gencres) == 0) {
 			$gencsql = "SELECT genc_detail_code, `genc_detail_name` FROM general_code_details WHERE company_id =" . $get['company_id'] . " AND genc_code = 'AGREEMENTS_TYPE' AND is_active = 0";
 			$gencres = $callConfig->getAllRows($gencsql);
 		}
@@ -1554,10 +1590,9 @@ class reactClass extends userClass{
 
 		$today = date('Y-m-d');
 		$contractsres['renewal_frequency'] = "quaterly";
-		switch (strtolower($contractsres['renewal_frequency']))
-		{
+		switch (strtolower($contractsres['renewal_frequency'])) {
 			case 'onday':
-			 	$reminderDays = 1;
+				$reminderDays = 1;
 				break;
 			case 'weekly':
 				$reminderDays = 7;
@@ -1576,38 +1611,35 @@ class reactClass extends userClass{
 		$expiringContracts = $callConfig->getAllRows($expirySql);
 		$return['expiringContracts'] = $expirySql;
 
-		if (!empty($expiringContracts)) {
-		}
+		if ($rid != "") {
+			$historySql = "SELECT contract_name,transaction_no, start_date, end_date, parent_contract ,  contract_amount FROM contracts WHERE company_id = " . $get['company_id'] . " AND parent_contract = $rid AND is_active = 0";
+			$historyContracts = $callConfig->getAllRows($historySql);
+			$return['historySql'] = $historySql;
+			$return['historycontractsres'] = $historyContracts;
 
- 		if($rid != ""){
-    		$historySql = "SELECT contract_name,transaction_no, start_date, end_date, parent_contract ,  contract_amount FROM contracts WHERE company_id = " . $get['company_id'] . " AND parent_contract = $rid AND is_active = 0";
-            $historyContracts = $callConfig->getAllRows($historySql);
-            $return['historySql'] = $historySql;
-            $return['historycontractsres'] = $historyContracts;
+			$childrenSql = "SELECT parent_contract FROM contracts WHERE company_id = " . $get['company_id'] . " AND id = " . $rid . " AND is_active = 0";
+			$childrenData = $callConfig->getRow($childrenSql);
+			$return['childrenData'] = $childrenData;
+			$parentId = $childrenData->parent_contract;
+			$return['parentId'] = $parentId;
 
-            $childrenSql = "SELECT parent_contract FROM contracts WHERE company_id = " . $get['company_id'] . " AND id = " . $rid . " AND is_active = 0";
-            $childrenData = $callConfig->getRow($childrenSql);
-            $return['childrenData'] = $childrenData;
-            $parentId = $childrenData->parent_contract;
-            $return['parentId'] = $parentId;
+			if (!empty($parentId) && intval($parentId) > 0) {
+				$parentSql = "SELECT * FROM contracts WHERE company_id = " . intval($get['company_id']) . " AND id = " . intval($parentId) . " AND is_active = 0";
+				$parentContracts = $callConfig->getAllRows($parentSql);
+				$return['parentSql'] = $parentSql;
+				$return['parentcontractsres'] = $parentContracts;
 
-            if (!empty($parentId) && intval($parentId) > 0) {
-                $parentSql = "SELECT * FROM contracts WHERE company_id = " . intval($get['company_id']) . " AND id = " . intval($parentId) . " AND is_active = 0";
-                $parentContracts = $callConfig->getAllRows($parentSql);
-                $return['parentSql'] = $parentSql;
-                $return['parentcontractsres'] = $parentContracts;
-
-            } else {
-                $return['parentcontractsres'] = [];
-            }
+			} else {
+				$return['parentcontractsres'] = [];
+			}
 		}
 
 		$sql = "SELECT id, department_name FROM departments WHERE company_id =" . $get['company_id'] . " AND is_active = 0";
-    $res = $callConfig->getAllRows($sql);
-    $return['departmentsres'] = $res;
+		$res = $callConfig->getAllRows($sql);
+		$return['departmentsres'] = $res;
 
 
-    $gencsql = "SELECT genc_detail_code, `genc_detail_name` FROM general_code_details WHERE company_id =" . $get['company_id'] . " AND genc_code = 'CONTRACT_TYPE' AND is_active = 0";
+		$gencsql = "SELECT genc_detail_code, `genc_detail_name` FROM general_code_details WHERE company_id =" . $get['company_id'] . " AND genc_code = 'CONTRACT_TYPE' AND is_active = 0";
 		$gencres = $callConfig->getAllRows($gencsql);
 		$return['contracttypesres'] = $gencres;
 
@@ -1618,7 +1650,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 	/**/
-		public function getAmcContractEditData($company_id, $contract_id)
+	public function getAmcContractEditData($company_id, $contract_id)
 	{
 		global $callConfig;
 		$return = array('details' => array(), 'locations' => array());
@@ -1630,9 +1662,6 @@ class reactClass extends userClass{
 		$detailsRow = $callConfig->getRow($detailsSql);
 		if ($detailsRow) {
 			$details = (array) $detailsRow;
-			$details['reminder_days'] = !empty($details['reminder_days']) ? (json_decode($details['reminder_days'], true) ?: array()) : array();
-			$details['completion_rules'] = !empty($details['completion_rules']) ? (json_decode($details['completion_rules'], true) ?: array()) : array();
-			$details['escalation_config'] = !empty($details['escalation_config']) ? (json_decode($details['escalation_config'], true) ?: array()) : array();
 			$details['reminder_days'] = !empty($details['reminder_days']) ? json_decode($details['reminder_days'], true) : array();
 			if (empty($details['reminder_days']) || !is_array($details['reminder_days'])) {
 				$details['reminder_days'] = array();
@@ -1673,7 +1702,6 @@ class reactClass extends userClass{
 					'visits_per_interval' => $asset['visits_per_interval'] ?? 1,
 					'service_start_date' => $asset['service_start_date'] ?? '',
 					'service_end_date' => $asset['service_end_date'] ?? '',
-					'service_slots' => !empty($asset['service_slots']) ? (json_decode($asset['service_slots'], true) ?: array()) : array(),
 					'service_slots' => $serviceSlots,
 				);
 			}
@@ -1694,10 +1722,11 @@ class reactClass extends userClass{
 
 		return $return;
 	}
-/***/
+	/***/
 
 
-	public function getcontractdetailsreact($get){
+	public function getcontractdetailsreact($get)
+	{
 		global $callConfig;
 		$return = array();
 		$rid = $get['rid'] ?? 0;
@@ -1764,32 +1793,28 @@ class reactClass extends userClass{
 
 		$today = date('Y-m-d');
 		$contractsres['renewal_frequency'] = "quaterly";
-		switch (strtolower($contractsres['renewal_frequency']))
-		{
+		switch (strtolower($contractsres['renewal_frequency'])) {
 			case 'onday':
-			$reminderDays = 1;
-			break;
+				$reminderDays = 1;
+				break;
 			case 'weekly':
-			$reminderDays = 7;
-			break;
+				$reminderDays = 7;
+				break;
 			case 'monthly':
-			$reminderDays = 30;
-			break;
+				$reminderDays = 30;
+				break;
 			case 'quarterly':
-			$reminderDays = 90;
-			break;
+				$reminderDays = 90;
+				break;
 			default:
-			$reminderDays = 90;
+				$reminderDays = 90;
 		}
 
 		$expirySql = "SELECT id, company_id, contract_name, end_date, originator FROM contracts WHERE company_id = " . $get['company_id'] . " AND is_active = 0 AND end_date IS NOT NULL AND DATEDIFF(end_date, '$today') BETWEEN 1 AND $reminderDays ";
 		$expiringContracts = $callConfig->getAllRows($expirySql);
 		$return['expiringContracts'] = $expirySql;
 
-		if (!empty($expiringContracts)) {
-		}
-
-		if($rid != ""){
+		if ($rid != "") {
 			$historySql = "SELECT contract_name,transaction_no, start_date, end_date, parent_contract ,  contract_amount FROM contracts WHERE company_id = " . $get['company_id'] . " AND parent_contract = $rid AND is_active = 0";
 			$historyContracts = $callConfig->getAllRows($historySql);
 			$return['historySql'] = $historySql;
@@ -1831,264 +1856,263 @@ class reactClass extends userClass{
 		$return['historycontractsres'] = $historyContracts;
 
 		if (empty($historyContracts)) {
-		    $parentSql = " SELECT contract_name, transaction_no FROM contracts WHERE company_id = " . intval($get['company_id']) . " AND parent_contract = " . intval($editcontractsres->parent_contract ?? 0) . " AND is_active = 0 ";
-		    $parentContracts = $callConfig->getAllRows($parentSql);
-		    $return['parentcontractsres'] = $parentContracts;
+			$parentSql = " SELECT contract_name, transaction_no FROM contracts WHERE company_id = " . intval($get['company_id']) . " AND parent_contract = " . intval($editcontractsres->parent_contract ?? 0) . " AND is_active = 0 ";
+			$parentContracts = $callConfig->getAllRows($parentSql);
+			$return['parentcontractsres'] = $parentContracts;
 		} else {
-		    $return['parentcontractsres'] = [];
+			$return['parentcontractsres'] = [];
 		  } **/
 
-		  return $return;
+		return $return;
+	}
+
+	public function renewcontractreact($get, $post)
+	{
+		global $callConfig;
+
+		$return = [];
+		$return['post'] = $post;
+		$return['get'] = $get;
+
+		$locations = '';
+		if (isset($post['locations']) && is_array($post['locations'])) {
+			$locations = json_encode($post['locations']);
 		}
 
-		public function renewcontractreact($get, $post)
-		{
-			global $callConfig;
+		$insert_array = array(
+			'contract_name' => $post['contract_name'],
+			'renewal_frequency' => $post['renewal_frequency'],
+			'parent_contract_id' => $post['parent_contract_id'],
+			'contract_type' => 'Renewal',
+			'transaction_no' => $this->toGetApplicationSerialNumber('contracts', $post),
+			'invoice_number' => $post['invoice_number'],
+			'rt_number' => $post['rt_number'],
+			'business_code' => $post['business_code'],
+			'party_type' => $post['party_type'],
+			'contract_owner_name' => $post['contract_owner_name'],
+			'contract_owner_email' => $post['contract_owner_email'],
+			'contract_owner_number' => $post['contract_owner_number'],
+			'party_id' => $post['party_id'],
+			'department_id' => $post['department_id'] ?? null,
+			'type_of_contract_id' => $post['type_of_contract_id'] ?? null,
+			'start_date' => $this->dateconvertdbformat($post['start_date']),
+			'end_date' => $this->dateconvertdbformat($post['end_date']),
+			'contract_amount' => $post['contract_amount'],
+			'description' => $post['description'],
+			'additional_notes' => $post['additional_notes'],
+			'termination_condition' => $post['termination_condition'],
+			'contract_status' => $post['contract_status'],
+			'current_status' => 0,
+			'auto_renew' => (isset($post['auto_renew']) && ($post['auto_renew'] == '1' || $post['auto_renew'] == 'on' || $post['auto_renew'] === true || $post['auto_renew'] == 'Y')) ? 'Y' : 'N',
+			'renew_type' => $post['renew_type'],
+			'state' => $post['state'],
+			'isp' => $post['isp'],
+			'paid_by' => $post['paid_by'],
+			'internet_charges' => $post['internet_charges'],
+			'hub_spoc_name' => $post['hub_spoc_name'],
+			'hub_spoc_number' => $post['hub_spoc_number'],
+			'wifi_pass' => $post['wifi_pass'],
+			'wifi_provider' => $post['wifi_provider'],
+			'additional_document' => $post['additional_document'],
+			'contract_payment_terms' => $post['contract_payment_terms'],
+			'typeofaggrements' => $post['typeofaggrements'],
+			'description_id' => $post['description_id'],
+			'locations' => $locations,
+			'parent_contract' => $post['Rid'],
+			'is_oem' => (isset($post['is_oem']) && ($post['is_oem'] == 'Yes' || $post['is_oem'] == 'Y')) ? 'Y' : 'N',
+			'oem_registration_number' => $post['oem_registration_number'] ?? '',
+			'oem_distributor_name' => $post['oem_distributor_name'] ?? '',
+			'oem_product_category' => $post['oem_product_category'] ?? '',
+			'cancel_status' => 'N'
+		);
 
-			$return = [];
-			$return['post'] = $post;
-			$return['get'] = $get;
+		$original_q = "SELECT * FROM contracts WHERE id = '" . $post['Rid'] . "'";
+		$original_data = (array) $callConfig->getRow($original_q);
 
-			$locations = '';
-			if (isset($post['locations']) && is_array($post['locations'])) {
-				$locations = json_encode($post['locations']);
+		$final_data = $original_data;
+		foreach ($insert_array as $key => $val) {
+			if ($val !== "" && $val !== null) {
+				$final_data[$key] = $val;
 			}
+		}
 
-			$insert_array = array(
-				'contract_name' => $post['contract_name'],
-				'renewal_frequency' => $post['renewal_frequency'],
-				'parent_contract_id' => $post['parent_contract_id'],
-				'contract_type' => 'Renewal',
-				'transaction_no' => $this->toGetApplicationSerialNumber('contracts', $post),
-				'invoice_number' => $post['invoice_number'],
-				'rt_number' => $post['rt_number'],
-				'business_code' => $post['business_code'],
-				'party_type' => $post['party_type'],
-				'contract_owner_name' => $post['contract_owner_name'],
-				'contract_owner_email' => $post['contract_owner_email'],
-				'contract_owner_number' => $post['contract_owner_number'],
-				'party_id' => $post['party_id'],
-				'department_id' => $post['department_id'] ?? null,
-				'type_of_contract_id' => $post['type_of_contract_id'] ?? null,
+		unset($final_data['id']);
+
+		$final_data['company_id'] = $get['company_id'];
+		$final_data['is_active'] = 0;
+		$final_data['created_by'] = $get['user_id'];
+		$final_data['originator'] = $get['user_id'];
+		$final_data['created_date'] = date('Y-m-d H:i:s');
+		$final_data['parent_contract_id'] = $post['Rid'];
+		$final_data['parent_contract'] = $post['Rid'];
+		$old_contract_type = $original_data['contract_type'] ?? 'Contract';
+		$new_contract_type = 'Renewal';
+		if ($old_contract_type == 'Contract' || $old_contract_type == 'Parent' || $old_contract_type == 'Contract+ Renewal') {
+			$new_contract_type = 'Contract+ Renewal';
+		} elseif ($old_contract_type == 'SOW' || $old_contract_type == 'associated' || $old_contract_type == 'SOW+ Renewal') {
+			$new_contract_type = 'SOW+ Renewal';
+		} elseif ($old_contract_type == 'Amendment' || $old_contract_type == 'Amendment+ Renewal') {
+			$new_contract_type = 'Amendment+ Renewal';
+		} elseif ($old_contract_type == 'Addendum' || $old_contract_type == 'Addendum+ Renewal') {
+			$new_contract_type = 'Addendum+ Renewal';
+		}
+
+		$final_data['contract_type'] = $new_contract_type;
+
+		foreach ($final_data as $key => $value) {
+			if ($value === "" || $value === null) {
+				if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'contract_payment_terms', 'current_status'])) {
+					$final_data[$key] = 0;
+				} elseif (in_array($key, ['contract_amount'])) {
+					$final_data[$key] = 0.00;
+				} elseif (in_array($key, ['start_date', 'end_date'])) {
+					$final_data[$key] = date('Y-m-d');
+				} else {
+					$final_data[$key] = $value ?? '';
+				}
+			}
+		}
+
+		$insert_data = $callConfig->insertRecord('contracts', $final_data);
+		$renew_id = $insert_data['LASTID'];
+		$return['contract_result'] = $insert_data;
+		$return['renew_id'] = $renew_id;
+
+		if (!empty($post['Rid'])) {
+			$rid = $post['Rid'];
+			$contract_query = "SELECT renew_data, contract_type FROM contracts WHERE id = '{$rid}'";
+
+			$contract_row = $callConfig->getRow($contract_query);
+
+			$new_renew_info = [
+				'renew_id' => $renew_id,
 				'start_date' => $this->dateconvertdbformat($post['start_date']),
-				'end_date' => $this->dateconvertdbformat($post['end_date']),
-				'contract_amount' => $post['contract_amount'],
-				'description' => $post['description'],
-				'additional_notes' => $post['additional_notes'],
-				'termination_condition' => $post['termination_condition'],
-				'contract_status' => $post['contract_status'],
-				'current_status' => 0,
-				'auto_renew' => (isset($post['auto_renew']) && ($post['auto_renew'] == '1' || $post['auto_renew'] == 'on' || $post['auto_renew'] === true || $post['auto_renew'] == 'Y')) ? 'Y' : 'N',
-				'renew_type' => $post['renew_type'],
-				'state' => $post['state'],
-				'isp' => $post['isp'],
-				'paid_by' => $post['paid_by'],
-				'internet_charges' => $post['internet_charges'],
-				'hub_spoc_name' => $post['hub_spoc_name'],
-				'hub_spoc_number' => $post['hub_spoc_number'],
-				'wifi_pass' => $post['wifi_pass'],
-				'wifi_provider' => $post['wifi_provider'],
-				'additional_document' => $post['additional_document'],
-				'contract_payment_terms' => $post['contract_payment_terms'],
-				'typeofaggrements' => $post['typeofaggrements'],
-				'description_id' => $post['description_id'],
-				'locations' => $locations,
-				'parent_contract' => $post['Rid'],
-				'is_oem' => (isset($post['is_oem']) && ($post['is_oem'] == 'Yes' || $post['is_oem'] == 'Y')) ? 'Y' : 'N',
-				'oem_registration_number' => $post['oem_registration_number'] ?? '',
-				'oem_distributor_name' => $post['oem_distributor_name'] ?? '',
-				'oem_product_category' => $post['oem_product_category'] ?? '',
-				'cancel_status' => 'N'
-			);
+				'end_date'
+				=> $this->dateconvertdbformat($post['end_date']),
+				'contract_amount' => $post['contract_amount']
+			];
 
-			$original_q = "SELECT * FROM contracts WHERE id = '" . $post['Rid'] . "'";
-			$original_data = (array) $callConfig->getRow($original_q);
+			$return['new_renew_info'] = $new_renew_info;
+			$return['contract_row'] = $contract_row;
 
-			$final_data = $original_data;
-			foreach ($insert_array as $key => $val) {
-				if ($val !== "" && $val !== null) {
-					$final_data[$key] = $val;
-				}
+			$renew_history = [];
+			if (!empty($contract_row->renew_data)) {
+				$decoded = json_decode($contract_row->renew_data, true);
+				if (is_array($decoded))
+					$renew_history = $decoded;
 			}
+			$renew_history[] = $new_renew_info;
 
-			unset($final_data['id']);
-
-			$final_data['company_id'] = $get['company_id'];
-			$final_data['is_active'] = 0;
-			$final_data['created_by'] = $get['user_id'];
-			$final_data['originator'] = $get['user_id'];
-			$final_data['created_date'] = date('Y-m-d H:i:s');
-			$final_data['parent_contract_id'] = $post['Rid'];
-			$final_data['parent_contract'] = $post['Rid'];
-			$old_contract_type = $original_data['contract_type'] ?? 'Contract';
-			$new_contract_type = 'Renewal';
-			if ($old_contract_type == 'Contract' || $old_contract_type == 'Parent' || $old_contract_type == 'Contract+ Renewal') {
-				$new_contract_type = 'Contract+ Renewal';
-			} elseif ($old_contract_type == 'SOW' || $old_contract_type == 'associated' || $old_contract_type == 'SOW+ Renewal') {
-				$new_contract_type = 'SOW+ Renewal';
-			} elseif ($old_contract_type == 'Amendment' || $old_contract_type == 'Amendment+ Renewal') {
-				$new_contract_type = 'Amendment+ Renewal';
-			} elseif ($old_contract_type == 'Addendum' || $old_contract_type == 'Addendum+ Renewal') {
-				$new_contract_type = 'Addendum+ Renewal';
-			}
-
-			$final_data['contract_type'] = $new_contract_type;
-
-			foreach ($final_data as $key => $value) {
-				if ($value === "" || $value === null) {
-					if (in_array($key, ['renewal_frequency', 'parent_contract_id', 'party_id', 'contract_payment_terms', 'current_status'])) {
-						$final_data[$key] = 0;
-					} elseif (in_array($key, ['contract_amount'])) {
-						$final_data[$key] = 0.00;
-					} elseif (in_array($key, ['start_date', 'end_date'])) {
-						$final_data[$key] = date('Y-m-d');
-					} else {
-						$final_data[$key] = $value ?? '';
-					}
-				}
-			}
-
-			$insert_data = $callConfig->insertRecord('contracts', $final_data);
-			$renew_id = $insert_data['LASTID'];
-			$return['contract_result'] = $insert_data;
-			$return['renew_id'] = $renew_id;
-
-			if (!empty($post['Rid'])) {
-				$rid = $post['Rid'];
-				$contract_query = "SELECT renew_data, contract_type FROM contracts WHERE id = '{$rid}'";
-
-				$contract_row = $callConfig->getRow($contract_query);
-
-				$new_renew_info = [
-					'renew_id' => $renew_id,
-					'start_date' => $this->dateconvertdbformat($post['start_date']),
-					'end_date'
-					=> $this->dateconvertdbformat($post['end_date']),
-					'contract_amount' => $post['contract_amount']
-				];
-
-				$return['new_renew_info'] = $new_renew_info;
-				$return['contract_row'] = $contract_row;
-
-				$renew_history = [];
-				if (!empty($contract_row->renew_data)) {
-					$decoded = json_decode($contract_row->renew_data, true);
-					if (is_array($decoded))
-						$renew_history = $decoded;
-				}
-				$renew_history[] = $new_renew_info;
-
-				$update_data = [
-					'renew_data' => json_encode($renew_history),
-					'updated_by' =>
+			$update_data = [
+				'renew_data' => json_encode($renew_history),
+				'updated_by' =>
 					$get['user_id'],
-					'updated_date' => date('Y-m-d H:i:s')
-				];
-				$callConfig->updateRecord('contracts', $update_data, 'id', $rid);
-			}
+				'updated_date' => date('Y-m-d H:i:s')
+			];
+			$callConfig->updateRecord('contracts', $update_data, 'id', $rid);
+		}
 
-			$related_tables = ['contract_documents', 'contract_permissions', 'contract_recharge_details', 'workflows_contract'];
+		$related_tables = ['contract_documents', 'contract_permissions', 'contract_recharge_details', 'workflows_contract'];
 
-			foreach ($related_tables as $table) {
-				$q = "SELECT * FROM {$table} WHERE contract_id = '" . $post['Rid'] . "'";
-				$rows = $callConfig->getAllRows($q);
-				if (!empty($rows)) {
-					foreach ($rows as $row) {
-						$row = (array) $row;
-						unset($row['id']);
-						$row['contract_id'] = $renew_id;
-						$row['created_date'] = date('Y-m-d H:i:s');
-						$row['created_by'] = $get['user_id'];
-						$callConfig->insertRecord($table, $row);
-					}
+		foreach ($related_tables as $table) {
+			$q = "SELECT * FROM {$table} WHERE contract_id = '" . $post['Rid'] . "'";
+			$rows = $callConfig->getAllRows($q);
+			if (!empty($rows)) {
+				foreach ($rows as $row) {
+					$row = (array) $row;
+					unset($row['id']);
+					$row['contract_id'] = $renew_id;
+					$row['created_date'] = date('Y-m-d H:i:s');
+					$row['created_by'] = $get['user_id'];
+					$callConfig->insertRecord($table, $row);
 				}
 			}
+		}
 
-			$control_array = array(
-				'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) :
+		$control_array = array(
+			'permissions' => isset($post['permission_data']) ? json_encode($post['permission_data']) :
 				json_encode([]),
-				'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]),
-				'documents' => isset($post['document_data']) ? json_encode($post['document_data']) : json_encode([]),
-				'contract_details'
-				=> json_encode($insert_array),
-				'version_id' => $post['version_id'] ?? 0,
-				'company_id' => $get['company_id'] ?? 0,
-				'contract_id' => $renew_id,
-				'is_active' => 0,
-				'created_by' => $get['user_id'] ?? 0,
-				'created_date' => date('Y-m-d
+			'workflow' => isset($post['workflow_data']) ? json_encode($post['workflow_data']) : json_encode([]),
+			'documents' => isset($post['document_data']) ? json_encode($post['document_data']) : json_encode([]),
+			'contract_details'
+			=> json_encode($insert_array),
+			'version_id' => $post['version_id'] ?? 0,
+			'company_id' => $get['company_id'] ?? 0,
+			'contract_id' => $renew_id,
+			'is_active' => 0,
+			'created_by' => $get['user_id'] ?? 0,
+			'created_date' => date('Y-m-d
 					H:i:s')
-			);
-			$control_insert = $callConfig->insertRecord('contract_version', $control_array);
-			$return['control_version_result'] = $control_insert;
+		);
+		$control_insert = $callConfig->insertRecord('contract_version', $control_array);
+		$return['control_version_result'] = $control_insert;
 
-			$endDate = !empty($post['end_date']) ? $post['end_date'] : 'N/A';
-			$activity_array = array(
-				'company_id' => $get['company_id'] ?? 0,
-				'activity' => "Contract Renewed (New End Date:
+		$endDate = !empty($post['end_date']) ? $post['end_date'] : 'N/A';
+		$activity_array = array(
+			'company_id' => $get['company_id'] ?? 0,
+			'activity' => "Contract Renewed (New End Date:
 				{$endDate})",
-				'contract_id' => $renew_id,
+			'contract_id' => $renew_id,
+			'activity_date' => date('Y-m-d H:i:s'),
+			'is_active' => 0,
+			'created_by' => $get['user_id'] ?? 0,
+			'created_date' =>
+				date('Y-m-d H:i:s')
+		);
+		$activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
+		$return['activity_result'] = $activity_insert;
+
+		if (!empty($post['Rid'])) {
+			$parent_activity = array(
+				'company_id' => $get['company_id'] ?? 0,
+				'activity' => "Contract Renewed (New Version Created,
+					New End Date: {$endDate})",
+				'contract_id' => $post['Rid'],
 				'activity_date' => date('Y-m-d H:i:s'),
 				'is_active' => 0,
 				'created_by' => $get['user_id'] ?? 0,
-				'created_date' =>
-				date('Y-m-d H:i:s')
+				'created_date' => date('Y-m-d H:i:s')
 			);
-			$activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
-			$return['activity_result'] = $activity_insert;
-
+			$callConfig->insertRecord('contract_activity', $parent_activity);
+		}
+		if (isset($post['milestones']) && is_array($post['milestones']) && count($post['milestones']) > 0) {
 			if (!empty($post['Rid'])) {
-				$parent_activity = array(
-					'company_id' => $get['company_id'] ?? 0,
-					'activity' => "Contract Renewed (New Version Created,
-					New End Date: {$endDate})",
-					'contract_id' => $post['Rid'],
-					'activity_date' => date('Y-m-d H:i:s'),
-					'is_active' => 0,
-					'created_by' => $get['user_id'] ?? 0,
-					'created_date' => date('Y-m-d H:i:s')
-				);
-				$callConfig->insertRecord('contract_activity', $parent_activity);
-			}
-			if (isset($post['milestones']) && is_array($post['milestones']) && count($post['milestones']) > 0) {
-				if (!empty($post['Rid'])) {
-					$updateQuery = "UPDATE contract_milestones SET is_active = NULL, updated_date = '" . date('Y-m-d H:i:s') . "',
+				$updateQuery = "UPDATE contract_milestones SET is_active = NULL, updated_date = '" . date('Y-m-d H:i:s') . "',
 					updated_by = '" . addslashes($get['user_id']) . "' WHERE transaction_id = '" . addslashes($renew_id) . "'";
-					$callConfig->executeQuery($updateQuery);
-				}
-				foreach ($post['milestones'] as $milestone) {
-					if (empty(trim($milestone['milestone_name'] ?? '')))
-						continue;
-					$milestoneData = [
-						'company_id' => $get['company_id'],
-						'transaction_id' => $renew_id,
-						'transaction_date' => date('Y-m-d H:i:s'),
-						'milestone' => trim($milestone['milestone_name']),
-						'milestone_date' => !empty($milestone['milestone_date']) ? $milestone['milestone_date'] : null,
-						'milestone_price' => !empty($milestone['milestone_price']) ? (float)  $milestone['milestone_price'] : 0,
-						'is_active' => 0,
-						'current_status' => 0,
-						'status_date' => date('Y-m-d H:i:s'),
-						'created_date' => date('Y-m-d H:i:s'),
-						'created_by' => $get['user_id'],
-						'updated_by' => $get['user_id'],
-						'updated_date' => date('Y-m-d H:i:s'),
-					];
-
-					$milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
-					$return['milestone_inserts'][] = $milestoneInsert;
-				}
-			} else {
-				$return['milestone_inserts'] = 'No milestones found in POST.';
+				$callConfig->executeQuery($updateQuery);
 			}
+			foreach ($post['milestones'] as $milestone) {
+				if (empty(trim($milestone['milestone_name'] ?? '')))
+					continue;
+				$milestoneData = [
+					'company_id' => $get['company_id'],
+					'transaction_id' => $renew_id,
+					'transaction_date' => date('Y-m-d H:i:s'),
+					'milestone' => trim($milestone['milestone_name']),
+					'milestone_date' => !empty($milestone['milestone_date']) ? $milestone['milestone_date'] : null,
+					'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0,
+					'is_active' => 0,
+					'current_status' => 0,
+					'status_date' => date('Y-m-d H:i:s'),
+					'created_date' => date('Y-m-d H:i:s'),
+					'created_by' => $get['user_id'],
+					'updated_by' => $get['user_id'],
+					'updated_date' => date('Y-m-d H:i:s'),
+				];
 
-			if (!empty($post['is_amc_contract']) && $post['is_amc_contract'] == 'Y' && !empty($renew_id)) {
-				$return['amc_contract_result'] = $this->saveAmcContractData($renew_id, $get, $post);
+				$milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
+				$return['milestone_inserts'][] = $milestoneInsert;
 			}
-
-			return $return;
+		} else {
+			$return['milestone_inserts'] = 'No milestones found in POST.';
 		}
 
+		if (!empty($post['is_amc_contract']) && $post['is_amc_contract'] == 'Y' && !empty($renew_id)) {
+			$return['amc_contract_result'] = $this->saveAmcContractData($renew_id, $get, $post);
+		}
+
+		return $return;
+	}
 
 
 
@@ -2112,23 +2136,24 @@ class reactClass extends userClass{
 
 
 
-		public function cancelcontractreact($get, $post)
-		{
-			global $callConfig;
 
-			$contract_id = $post['Rid'] ?? 0;
-			$reason = $post['cancel_reason'] ?? '';
+	public function cancelcontractreact($get, $post)
+	{
+		global $callConfig;
 
-			if (empty($contract_id)) {
-				return ['status' => 'error', 'message' => 'Contract ID is required'];
-			}
+		$contract_id = $post['Rid'] ?? 0;
+		$reason = $post['cancel_reason'] ?? '';
 
-			if (empty($reason)) {
-				return ['status' => 'error', 'message' => 'Cancellation reason is required'];
-			}
+		if (empty($contract_id)) {
+			return ['status' => 'error', 'message' => 'Contract ID is required'];
+		}
 
-    // Bypassing updateRecord due to broken action_log table columns in the core db.class.php
-			$sql = "UPDATE contracts SET
+		if (empty($reason)) {
+			return ['status' => 'error', 'message' => 'Cancellation reason is required'];
+		}
+
+		// Bypassing updateRecord due to broken action_log table columns in the core db.class.php
+		$sql = "UPDATE contracts SET
 			cancel_status = 'Y',
 			cancel_reason = '" . mysqli_real_escape_string($callConfig->con, $reason) . "',
 			cancel_date = '" . date('Y-m-d') . "',
@@ -2136,124 +2161,126 @@ class reactClass extends userClass{
 			updated_date = '" . date('Y-m-d H:i:s') . "'
 			WHERE id = '" . mysqli_real_escape_string($callConfig->con, $contract_id) . "'";
 
-			$res = $callConfig->executeQuery($sql);
+		$res = $callConfig->executeQuery($sql);
 
-			if (isset($res['status']) && ($res['status'] === 'sucess' || $res['status'] === 'success')) {
-				$activity_array = [
-					'company_id' => $get['company_id'] ?? 0,
-					'activity' => "Contract Cancelled (Reason: {$reason})",
-					'contract_id' => $contract_id,
-					'activity_date' => date('Y-m-d H:i:s'),
-					'is_active' => 0,
-					'created_by' => $get['user_id'] ?? 0,
-					'created_date' => date('Y-m-d H:i:s')
-				];
-				$callConfig->insertRecord('contract_activity', $activity_array);
-			}
-
-			return [
-				'status' => (isset($res['status']) && ($res['status'] === 'sucess' || $res['status'] === 'success')) ? 'success' :
-				'error',
-				'message' => (isset($res['status']) && ($res['status'] === 'sucess' || $res['status'] === 'success')) ? 'Contract
-				cancelled successfully' : 'Failed to cancel contract',
-				'result' => $res
+		if (isset($res['status']) && ($res['status'] === 'sucess' || $res['status'] === 'success')) {
+			$activity_array = [
+				'company_id' => $get['company_id'] ?? 0,
+				'activity' => "Contract Cancelled (Reason: {$reason})",
+				'contract_id' => $contract_id,
+				'activity_date' => date('Y-m-d H:i:s'),
+				'is_active' => 0,
+				'created_by' => $get['user_id'] ?? 0,
+				'created_date' => date('Y-m-d H:i:s')
 			];
+			$callConfig->insertRecord('contract_activity', $activity_array);
 		}
 
+		return [
+			'status' => (isset($res['status']) && ($res['status'] === 'sucess' || $res['status'] === 'success')) ? 'success' :
+				'error',
+			'message' => (isset($res['status']) && ($res['status'] === 'sucess' || $res['status'] === 'success')) ? 'Contract
+				cancelled successfully' : 'Failed to cancel contract',
+			'result' => $res
+		];
+	}
 
-		public function sendCronJobContractExpiryNotifications($get){
-			global $callConfig;
-			$startdate =  date('Y-m-d');
-			$enddate =  date('Y-m-d', strtotime('+3 months'));
-			$consql = "SELECT cn.contract_name, cn.transaction_no, cn.start_date, cn.end_date, cn.locations FROM contracts cn WHERE cn.company_id = '".$get['company_id']."' AND cn.end_date >= '".$startdate."' AND cn.end_date <= '".$enddate."' AND (cn.cancel_status = 'N' OR cn.cancel_status IS NULL) AND cn.is_active = 0";
-			$consres = $callConfig->getAllRows($consql);
 
-			$encoded = urlencode(json_encode((array)$consres));
-			$insert_array = array('company_id'=>$get['company_id'], 'start_date_time'=>date('Y-m-d h:i:s'), 'command'=> urlencode($consql), 'api_data'=> $encoded, 'is_active'=>'0', 'current_status'=>'0', 'created_date'=>date('Y-m-d h:i:s'));
-	 		$ccres = $callConfig->insertRecord('cron_jobs', $insert_array);
+	public function sendCronJobContractExpiryNotifications($get)
+	{
+		global $callConfig;
+		$startdate = date('Y-m-d');
+		$enddate = date('Y-m-d', strtotime('+3 months'));
+		$consql = "SELECT cn.contract_name, cn.transaction_no, cn.start_date, cn.end_date, cn.locations FROM contracts cn WHERE cn.company_id = '" . $get['company_id'] . "' AND cn.end_date >= '" . $startdate . "' AND cn.end_date <= '" . $enddate . "' AND (cn.cancel_status = 'N' OR cn.cancel_status IS NULL) AND cn.is_active = 0";
+		$consres = $callConfig->getAllRows($consql);
 
-	 		$locationssql = "SELECT `id`, `location_name` FROM locations WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY location_name ASC";
-			$locationsres = $callConfig->getAllRows($locationssql);
-			$locations = array();
-			foreach($locationsres as $red){
-				$locations[$red->id] = $red;
-			}
-			$todayContracts = array();
-			$weeklyContracts = array();
-			$monthlyContracts = array();
-			$quarterlyContracts = array();
-			$expiredContracts = array();
-			$email_body = "";
-	 		foreach ($consres as $contract) {
-	 			$locationsid = json_decode($contract->locations ,1);
-             	$locationnames = "";
-            	foreach($locationsid as $locid){
-            		if($locations[$locid]->location_name !=""){
-            			$locationnames .= $locations[$locid]->location_name.", ";
-            		}
-            	}
-            	$contract->location_name  = $locationnames;
-			    $days_remaining = floor((strtotime($contract->end_date) - strtotime($startdate)) / 86400);
-			    // Expiring Today
-			    if ($days_remaining == 0) {
-			        $todayContracts[] = $contract;
-			    }
-			    // Expiring in Next 7 Days
-			    if ($days_remaining > 0 && $days_remaining <= 7) {
-			        $weeklyContracts[] = $contract;
-			    }
-			    // Expiring in Next 30 Days
-			    if ($days_remaining > 0 && $days_remaining <= 30) {
-			        $monthlyContracts[] = $contract;
-			    }
-			    // Expiring in Next 90 Days
-			    if ($days_remaining > 0 && $days_remaining <= 90) {
-			        $quarterlyContracts[] = $contract;
-			    }
-			    // Already Expired
-			    if ($days_remaining < 0) {
-			        $expiredContracts[] = $contract;
-			    }
-			}
-			$email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Today', $todayContracts);
-			$email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 7 Days', $weeklyContracts);
-			$email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 1 Month', $monthlyContracts);
-			$email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 3 Months', $quarterlyContracts);
-			echo $email_body;
-			$conditins = " AND JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL";
-			$seluser = "SELECT id, company_id, user_email, display_name FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0".$conditins;
-			$return['seluser'] = $seluser;
-			$seluserres = $callConfig->getAllRows($seluser);
-			$post = array();
-			$emailuserdetails = array();
-			$sendnotification = array();
-			foreach($seluserres as $seluser){
-				$emailarray  = $post;
-				$emailarray['user_email_id'] = $seluser->user_email;
-				$emailarray['user_display_name'] = $seluser->display_name;
-				$emailarray['to_company_id'] = $seluser->company_id;
-				$emailarray['session_company_id'] = $seluser->company_id;
-				$emailarray['default_module_id'] = 40;
-				$emailarray['created_by'] = $get['user_id'];
-				$emailarray['extra_informations'] = $email_body;
-				$notarry = array();
-				$sendnotification[] =$this->sendNotificationAndEmails($notarry,$emailarray,76);
-			}
-			if($ccres['LASTID'] !=""){
-				$encoded = urlencode(json_encode((array)$sendnotification));
-			 	$update_array = array('end_date_time'=>date('Y-m-d h:i:s'),'result_data'=>$encoded,'updated_date'=>date('Y-m-d h:i:s'));
-				$wh = "id = '".$ccres['LASTID']."'";
-				$ccresupdate = $callConfig->updateRecord('cron_jobs',$update_array,'','',$wh);
-			}
-			return $get;
+		$encoded = urlencode(json_encode((array) $consres));
+		$insert_array = array('company_id' => $get['company_id'], 'start_date_time' => date('Y-m-d h:i:s'), 'command' => urlencode($consql), 'api_data' => $encoded, 'is_active' => '0', 'current_status' => '0', 'created_date' => date('Y-m-d h:i:s'));
+		$ccres = $callConfig->insertRecord('cron_jobs', $insert_array);
+
+		$locationssql = "SELECT `id`, `location_name` FROM locations WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY location_name ASC";
+		$locationsres = $callConfig->getAllRows($locationssql);
+		$locations = array();
+		foreach ($locationsres as $red) {
+			$locations[$red->id] = $red;
 		}
+		$todayContracts = array();
+		$weeklyContracts = array();
+		$monthlyContracts = array();
+		$quarterlyContracts = array();
+		$expiredContracts = array();
+		$email_body = "";
+		foreach ($consres as $contract) {
+			$locationsid = json_decode($contract->locations, 1);
+			$locationnames = "";
+			foreach ($locationsid as $locid) {
+				if ($locations[$locid]->location_name != "") {
+					$locationnames .= $locations[$locid]->location_name . ", ";
+				}
+			}
+			$contract->location_name = $locationnames;
+			$days_remaining = floor((strtotime($contract->end_date) - strtotime($startdate)) / 86400);
+			// Expiring Today
+			if ($days_remaining == 0) {
+				$todayContracts[] = $contract;
+			}
+			// Expiring in Next 7 Days
+			if ($days_remaining > 0 && $days_remaining <= 7) {
+				$weeklyContracts[] = $contract;
+			}
+			// Expiring in Next 30 Days
+			if ($days_remaining > 0 && $days_remaining <= 30) {
+				$monthlyContracts[] = $contract;
+			}
+			// Expiring in Next 90 Days
+			if ($days_remaining > 0 && $days_remaining <= 90) {
+				$quarterlyContracts[] = $contract;
+			}
+			// Already Expired
+			if ($days_remaining < 0) {
+				$expiredContracts[] = $contract;
+			}
+		}
+		$email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Today', $todayContracts);
+		$email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 7 Days', $weeklyContracts);
+		$email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 1 Month', $monthlyContracts);
+		$email_body .= $this->sendCronJobContractExpiryNotificationsExtrafuncall('Contracts Expiring Within 3 Months', $quarterlyContracts);
+		echo $email_body;
+		$conditins = " AND JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL";
+		$seluser = "SELECT id, company_id, user_email, display_name FROM application_users WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0" . $conditins;
+		$return['seluser'] = $seluser;
+		$seluserres = $callConfig->getAllRows($seluser);
+		$post = array();
+		$emailuserdetails = array();
+		$sendnotification = array();
+		foreach ($seluserres as $seluser) {
+			$emailarray = $post;
+			$emailarray['user_email_id'] = $seluser->user_email;
+			$emailarray['user_display_name'] = $seluser->display_name;
+			$emailarray['to_company_id'] = $seluser->company_id;
+			$emailarray['session_company_id'] = $seluser->company_id;
+			$emailarray['default_module_id'] = 40;
+			$emailarray['created_by'] = $get['user_id'];
+			$emailarray['extra_informations'] = $email_body;
+			$notarry = array();
+			$sendnotification[] = $this->sendNotificationAndEmails($notarry, $emailarray, 76);
+		}
+		if ($ccres['LASTID'] != "") {
+			$encoded = urlencode(json_encode((array) $sendnotification));
+			$update_array = array('end_date_time' => date('Y-m-d h:i:s'), 'result_data' => $encoded, 'updated_date' => date('Y-m-d h:i:s'));
+			$wh = "id = '" . $ccres['LASTID'] . "'";
+			$ccresupdate = $callConfig->updateRecord('cron_jobs', $update_array, '', '', $wh);
+		}
+		return $get;
+	}
 
-		public function sendCronJobContractExpiryNotificationsExtrafuncall($title, $contracts){
-		    $html = "<h3>{$title}</h3>";
-		    if (empty($contracts)) {
-		        return $html . "<p>No contracts found.</p>";
-		    }
-		    $html .= '<table border="1" cellpadding="5" cellspacing="0" width="100%">
+	public function sendCronJobContractExpiryNotificationsExtrafuncall($title, $contracts)
+	{
+		$html = "<h3>{$title}</h3>";
+		if (empty($contracts)) {
+			return $html . "<p>No contracts found.</p>";
+		}
+		$html .= '<table border="1" cellpadding="5" cellspacing="0" width="100%">
 		                <tr>
 		                	<th scope="col">Contract No</th>
 		                    <th scope="col">Contract Name</th>
@@ -2261,18 +2288,18 @@ class reactClass extends userClass{
 		                    <th scope="col">Start Date</th>
 		                    <th scope="col">End Date</th>
 		                </tr>';
-		    foreach ($contracts as $contract) {
-		        $html .= '<tr>
-		                    <td>'.$contract->transaction_no.'</td>
-		                    <td>'.$contract->contract_name.'</td>
-		                    <td>'.$contract->location_name.'</td>
-		                    <td>'.$contract->start_date.'</td>
-		                    <td>'.$contract->end_date.'</td>
+		foreach ($contracts as $contract) {
+			$html .= '<tr>
+		                    <td>' . $contract->transaction_no . '</td>
+		                    <td>' . $contract->contract_name . '</td>
+		                    <td>' . $contract->location_name . '</td>
+		                    <td>' . $contract->start_date . '</td>
+		                    <td>' . $contract->end_date . '</td>
 		                  </tr>';
-		    }
-		    $html .= '</table><br>';
-		    return $html;
 		}
+		$html .= '</table><br>';
+		return $html;
+	}
 
 
 
@@ -2285,9 +2312,10 @@ class reactClass extends userClass{
 
 
 
-		////////////// kotesss
+	////////////// kotesss
 
-	public function AMCInsertContractsReact($get, $post){
+	public function AMCInsertContractsReact($get, $post)
+	{
 		global $callConfig;
 
 		$return = [];
@@ -2306,7 +2334,7 @@ class reactClass extends userClass{
 		}
 
 		$contact_personsary = array();
-		if (isset($post['contact_persons']) && is_array($post['contact_persons']) && count((array)($post['contact_persons']['name'] ?? array())) > 0) {
+		if (isset($post['contact_persons']) && is_array($post['contact_persons']) && count((array) ($post['contact_persons']['name'] ?? array())) > 0) {
 			foreach ($post['contact_persons']['name'] as $key => $conpers) {
 				if ($post['contact_persons']['name'][$key] != "" && $post['contact_persons']['number'][$key] != "") {
 					$contact_personsary[] = array(
@@ -2421,17 +2449,17 @@ class reactClass extends userClass{
 				$return['contract_result'] = $insert_data;
 				$return['contract_result11'] = $insert_data;
 
-				if($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
-					$seluser = "SELECT id FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0 AND JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL";
+				if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
+					$seluser = "SELECT id FROM application_users WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0 AND JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL";
 					$return['seluser'] = $seluser;
 					$seluserres = $callConfig->getAllRows($seluser);
 					$notification_users = array();
 					$notification_users[] = $final_data['originator'];
-					foreach($seluserres as $seluser){
+					foreach ($seluserres as $seluser) {
 						$notification_users[] = $seluser->id;
 					}
-					$msg = "Contract ".$final_data['contract_name']." - ".$final_data['transaction_no']." has been created successfully.";
-					$notarry = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$contract_id,'application_table_name'=>'contracts','type'=>'INFORMATION', 'notification_users'=>$notification_users,'option'=>$option,'assigner_id'=>$get['user_id']);
+					$msg = "Contract " . $final_data['contract_name'] . " - " . $final_data['transaction_no'] . " has been created successfully.";
+					$notarry = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $contract_id, 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $notification_users, 'option' => $option, 'assigner_id' => $get['user_id']);
 					$sendnotification = $this->tosendnotifiations($notarry);
 					$return['tosendnotifiations'] = $notarry;
 				}
@@ -2498,64 +2526,64 @@ class reactClass extends userClass{
 			$contract_id = $insert_data['LASTID'];
 			$return['contract_result'] = $insert_data;
 
-			if($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
-					$selected_location_ids = array();
-					if(isset($post['amc_loc']) && count((array)$post['amc_loc']) > 0){
-						foreach($post['amc_loc'] as $locRow){
-							$locationId = (int)($locRow['location_id'] ?? 0);
-							if($locationId > 0){
-								$selected_location_ids[] = $locationId;
-							}
+			if ($insert_data['status'] === 'sucess' || $insert_data['status'] === 'success') {
+				$selected_location_ids = array();
+				if (isset($post['amc_loc']) && count((array) $post['amc_loc']) > 0) {
+					foreach ($post['amc_loc'] as $locRow) {
+						$locationId = (int) ($locRow['location_id'] ?? 0);
+						if ($locationId > 0) {
+							$selected_location_ids[] = $locationId;
 						}
 					}
-					$selected_location_ids = array_values(array_unique($selected_location_ids));
-					$admin_cond = "1=0";
-					if(count((array)$selected_location_ids) > 0){
-						$admin_cond = "(JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL AND location_id IN (".implode(',', $selected_location_ids)."))";
-					}
-					if($insert_array['originator'] !=""){
-						$conditins = " AND (".$admin_cond." OR id = '".$insert_array['originator']."')";
-					}else{
-						$conditins = " AND ".$admin_cond;
-					}
+				}
+				$selected_location_ids = array_values(array_unique($selected_location_ids));
+				$admin_cond = "1=0";
+				if (count((array) $selected_location_ids) > 0) {
+					$admin_cond = "(JSON_SEARCH(role_id, 'one', 'CONTRACT_ADMIN') IS NOT NULL AND location_id IN (" . implode(',', $selected_location_ids) . "))";
+				}
+				if ($insert_array['originator'] != "") {
+					$conditins = " AND (" . $admin_cond . " OR id = '" . $insert_array['originator'] . "')";
+				} else {
+					$conditins = " AND " . $admin_cond;
+				}
 
-					$seluser = "SELECT id, company_id, user_email FROM application_users WHERE company_id = '".$get['company_id']."' AND is_active = 0".$conditins;
-					$return['seluser'] = $seluser;
-					$seluserres = $callConfig->getAllRows($seluser);
-					$notification_users = array();
-					foreach($seluserres as $seluser){
-						if($seluser->id == $insert_array['originator']){
-								$originatordetailary = $seluser;
-						}
+				$seluser = "SELECT id, company_id, user_email FROM application_users WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0" . $conditins;
+				$return['seluser'] = $seluser;
+				$seluserres = $callConfig->getAllRows($seluser);
+				$notification_users = array();
+				foreach ($seluserres as $seluser) {
+					if ($seluser->id == $insert_array['originator']) {
+						$originatordetailary = $seluser;
 					}
-					foreach($seluserres as $seluser){
-						$notification_users[] = $seluser->id;
+				}
+				foreach ($seluserres as $seluser) {
+					$notification_users[] = $seluser->id;
 
 					//email part
-						$emailarray  = $post;
-						$emailarray['user_email_id'] = $seluser->user_email;
-						$emailarray['user_display_name'] = $seluser->display_name;
-						$emailarray['to_company_id'] = $seluser->company_id;
-						$emailarray['session_company_id'] = $seluser->company_id;
-						$emailarray['default_module_id'] = 40;
-						$emailarray['created_by'] = $get['user_id'];
+					$emailarray = $post;
+					$emailarray['user_email_id'] = $seluser->user_email;
+					$emailarray['user_display_name'] = $seluser->display_name;
+					$emailarray['to_company_id'] = $seluser->company_id;
+					$emailarray['session_company_id'] = $seluser->company_id;
+					$emailarray['default_module_id'] = 40;
+					$emailarray['created_by'] = $get['user_id'];
 
-						$emailarray['contract_creation_or_updation'] = "Inserted";
-						$emailarray['contract_vendor_name'] = "";
-						$emailarray['contract_name'] = $insert_array['contract_name'];
-						$emailarray['contract_number'] = $insert_array['transaction_no'];
-						$emailarray['contract_type'] = "";
-						$emailarray['contract_user_name'] = $originatordetailary->display_name;
-						$emailarray['contract_update_datetime'] = date('Y-m-d H:i:s');
+					$emailarray['contract_creation_or_updation'] = "Inserted";
+					$emailarray['contract_vendor_name'] = "";
+					$emailarray['contract_name'] = $insert_array['contract_name'];
+					$emailarray['contract_number'] = $insert_array['transaction_no'];
+					$emailarray['contract_type'] = "";
+					$emailarray['contract_user_name'] = $originatordetailary->display_name;
+					$emailarray['contract_update_datetime'] = date('Y-m-d H:i:s');
 
-						$sendnotification =$this->sendNotificationAndEmails($notarry,$emailarray,6);
-						//email part
+					$sendnotification = $this->sendNotificationAndEmails($notarry, $emailarray, 6);
+					//email part
 
-					}
-					$msg = "Contract ".$insert_array['contract_name']." - ".$insert_array['transaction_no']." has been created successfully.";
-					$notarry = array('company_id'=>$post['company_id'],'notification_message'=>$msg, 'id'=>$contract_id,'application_table_name'=>'contracts','type'=>'INFORMATION', 'notification_users'=>$notification_users,'option'=>$option,'assigner_id'=>$get['user_id']);
-					$sendnotification = $this->tosendnotifiations($notarry);
-					$return['tosendnotifiations'] = $notarry;
+				}
+				$msg = "Contract " . $insert_array['contract_name'] . " - " . $insert_array['transaction_no'] . " has been created successfully.";
+				$notarry = array('company_id' => $post['company_id'], 'notification_message' => $msg, 'id' => $contract_id, 'application_table_name' => 'contracts', 'type' => 'INFORMATION', 'notification_users' => $notification_users, 'option' => $option, 'assigner_id' => $get['user_id']);
+				$sendnotification = $this->tosendnotifiations($notarry);
+				$return['tosendnotifiations'] = $notarry;
 			}
 
 		}
@@ -2576,7 +2604,7 @@ class reactClass extends userClass{
 		$post['contract_version_res'] = $control_insert;
 		$return['control_version_result'] = $control_insert;
 		//return $return;
-				// ---- Contract Activity ----
+		// ---- Contract Activity ----
 		$endDate = !empty($post['end_date']) ? $post['end_date'] : 'N/A';
 		if (empty($post['Rid'])) {
 			$activity_text = "Contract Created (Valid until {$endDate})";
@@ -2599,7 +2627,7 @@ class reactClass extends userClass{
 		$activity_insert = $callConfig->insertRecord('contract_activity', $activity_array);
 		$return['activity_result'] = $activity_insert;
 
-				// Log on Parent Contract if it's an Amendment or Addendum
+		// Log on Parent Contract if it's an Amendment or Addendum
 		if (!empty($post['Rid']) && ($edit_option === 'Amendment' || $edit_option === 'Addendum')) {
 			$parent_msg = ($edit_option === 'Amendment') ? "Contract Amended (New Version Created, Valid until {$endDate})" : "Contract Addendum Added (New Version Created, Valid until {$endDate})";
 			$parent_activity = array('company_id' => $get['company_id'] ?? 0, 'activity' => $parent_msg, 'contract_id' => $post['Rid'], 'activity_date' => date('Y-m-d H:i:s'), 'is_active' => 0, 'created_by' => $get['user_id'] ?? 0, 'created_date' => date('Y-m-d H:i:s'));
@@ -2635,7 +2663,7 @@ class reactClass extends userClass{
 		return $return;
 	}
 
-		public function saveAmcContractData($contract_id, $get, $post)
+	public function saveAmcContractData($contract_id, $get, $post)
 	{
 		global $callConfig;
 		$return = array();
@@ -2722,7 +2750,7 @@ class reactClass extends userClass{
 					'service_start_date' => ($locStartYmd != '' && $locStartYmd != null) ? $locStartYmd : null,
 					'service_end_date' => ($locEndYmd != '' && $locEndYmd != null) ? $locEndYmd : null,
 					'is_active' => '0',
-					'current_status'=>'0',
+					'current_status' => '0',
 					'created_by' => $userId,
 					'created_date' => $now,
 					'updated_by' => $userId,
@@ -2833,7 +2861,7 @@ class reactClass extends userClass{
 			$deactivate('contract_amc_service_schedules');
 			foreach ($insertedAssetsForSchedule as $assetRow) {
 				$assetScheduleRows = $this->generateContractAmcSchedulesForAsset($contract_id, $companyId, $userId, $assetRow, $now);
-				if (count((array)$assetScheduleRows) > 0) {
+				if (count((array) $assetScheduleRows) > 0) {
 					foreach ($assetScheduleRows as $scheduleRow) {
 						if (($scheduleRow['status'] ?? '') == 'fail') {
 							$return['schedule_errors'][] = $scheduleRow['message'] ?? 'Schedule insert failed';
@@ -2847,7 +2875,7 @@ class reactClass extends userClass{
 			}
 		}
 		$return['schedule_count'] = 0;
-		if (count((array)$return['schedule_inserts']) > 0) {
+		if (count((array) $return['schedule_inserts']) > 0) {
 			foreach ($return['schedule_inserts'] as $scheduleRow) {
 				if (in_array($scheduleRow['status'] ?? '', array('sucess', 'success'))) {
 					$return['schedule_count']++;
@@ -2943,7 +2971,7 @@ class reactClass extends userClass{
 		}
 		return $inserted;
 	}
-		private function buildAmcPlannedVisits($frequency, $serviceStart, $serviceEnd, $visitsPerInterval, $serviceSlots)
+	private function buildAmcPlannedVisits($frequency, $serviceStart, $serviceEnd, $visitsPerInterval, $serviceSlots)
 	{
 		$freq = $this->normalizeAmcServiceOn($frequency);
 		if ($freq == '') {
@@ -2957,7 +2985,7 @@ class reactClass extends userClass{
 
 		if ($freq == 'custom') {
 			$visits = array();
-			if (count((array)$serviceSlots) > 0) {
+			if (count((array) $serviceSlots) > 0) {
 				foreach ($serviceSlots as $slot) {
 					$d = $this->amcParseDateYmd($slot) ?: trim((string) $slot);
 					if ($d == '') {
@@ -2994,8 +3022,8 @@ class reactClass extends userClass{
 			}, $this->amcBuildPlannedVisitDatesSequential($frequency, $serviceStart, $serviceEnd));
 		}
 
-		$slots = count((array)$serviceSlots) ? $serviceSlots : array();
-		if (count((array)$slots) == 0) {
+		$slots = count((array) $serviceSlots) ? $serviceSlots : array();
+		if (count((array) $slots) == 0) {
 			for ($i = 0; $i < $interval; $i++) {
 				$slots[] = $this->amcGetDefaultSlotValue($freq, $i, $interval, $startYmd);
 			}
@@ -3016,7 +3044,7 @@ class reactClass extends userClass{
 				break;
 			}
 			$periodAnchor = $nextAnchor;
-			if (count((array)$visits) > 10000) {
+			if (count((array) $visits) > 10000) {
 				break;
 			}
 		}
@@ -3077,7 +3105,7 @@ class reactClass extends userClass{
 		}
 		return $serviceOn;
 	}
-		private function amcBuildPlannedVisitDatesSequential($frequency, $serviceStart, $serviceEnd)
+	private function amcBuildPlannedVisitDatesSequential($frequency, $serviceStart, $serviceEnd)
 	{
 		$freq = $this->normalizeAmcServiceOn($frequency);
 		if ($freq == 'custom' || $freq == '') {
@@ -3097,13 +3125,13 @@ class reactClass extends userClass{
 				break;
 			}
 			$current = $next;
-			if (count((array)$dates) > 10000) {
+			if (count((array) $dates) > 10000) {
 				break;
 			}
 		}
 		return $dates;
 	}
-		private function amcGetDefaultSlotValue($freq, $slotIndex, $interval, $startYmd)
+	private function amcGetDefaultSlotValue($freq, $slotIndex, $interval, $startYmd)
 	{
 		$f = $this->normalizeAmcServiceOn($freq);
 		if ($f == 'daily') {
@@ -3382,7 +3410,7 @@ class reactClass extends userClass{
 		$where = "s.company_id = {$companyId} AND s.is_active = 0 AND cad.customer_connect_id IS NOT NULL AND cad.customer_connect_id > 0";
 		$parties = $this->resolvePortalPartyIds($get);
 		$customerIds = $parties['customer_ids'] ?? array();
-		if (count((array)$customerIds) == 0) {
+		if (count((array) $customerIds) == 0) {
 			$where .= " AND 1=0";
 			return $where;
 		}
@@ -3390,7 +3418,7 @@ class reactClass extends userClass{
 		$where .= " AND cad.customer_connect_id IN ({$idList})";
 		return $where;
 	}
-		public function getPartyContractsList($get, $party_type, $party_id)
+	public function getPartyContractsList($get, $party_type, $party_id)
 	{
 		global $callConfig;
 		$return = array();
@@ -3413,7 +3441,7 @@ class reactClass extends userClass{
 			ORDER BY id DESC";
 		$contractsres = $callConfig->getAllRows($contractssql);
 		$contractIds = array();
-		if (count((array)$contractsres) > 0) {
+		if (count((array) $contractsres) > 0) {
 			foreach ($contractsres as $contractrow) {
 				$row = (array) $contractrow;
 				$contractIds[] = $row['id'];
@@ -3421,7 +3449,7 @@ class reactClass extends userClass{
 		}
 		$rollups = $this->getContractAmcScheduleRollups($get['company_id'], $contractIds);
 
-		if (count((array)$contractsres) > 0) {
+		if (count((array) $contractsres) > 0) {
 			foreach ($contractsres as $contractrow) {
 				$row = (array) $contractrow;
 				$cancelled = ($row['cancel_status'] ?? '') == 'Y';
@@ -3438,8 +3466,8 @@ class reactClass extends userClass{
 			}
 		}
 
-		$return['active_count'] = count((array)$return['active_contracts']);
-		$return['inactive_count'] = count((array)$return['inactive_contracts']);
+		$return['active_count'] = count((array) $return['active_contracts']);
+		$return['inactive_count'] = count((array) $return['inactive_contracts']);
 
 		$status = strtolower($get['status'] ?? '');
 		if ($status == 'active') {
@@ -3459,7 +3487,7 @@ class reactClass extends userClass{
 		global $callConfig;
 		$rollups = array();
 		$ids = array();
-		if (count((array)$contract_ids) > 0) {
+		if (count((array) $contract_ids) > 0) {
 			foreach ($contract_ids as $cid) {
 				$cid = (int) $cid;
 				if ($cid > 0) {
@@ -3467,7 +3495,7 @@ class reactClass extends userClass{
 				}
 			}
 		}
-		if (count((array)$ids) == 0) {
+		if (count((array) $ids) == 0) {
 			return $rollups;
 		}
 		$idList = implode(',', $ids);
@@ -3484,7 +3512,7 @@ class reactClass extends userClass{
 			AND contract_id IN ({$idList})
 			GROUP BY contract_id";
 		$rows = $callConfig->getAllRows($sql);
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$r = is_array($row) ? $row : (array) $row;
 				$rollups[$r['contract_id']] = $r;
@@ -3494,7 +3522,7 @@ class reactClass extends userClass{
 	}
 	public function mergeContractRollupsIntoRows($rows, $rollups)
 	{
-		if (count((array)$rows) == 0) {
+		if (count((array) $rows) == 0) {
 			return $rows;
 		}
 		$merged = array();
@@ -3518,36 +3546,37 @@ class reactClass extends userClass{
 		return $merged;
 	}
 
-	public function insertContracts($get,$post){
+	public function insertContracts($get, $post)
+	{
 		global $callConfig;
-    	$return =array();
-    	$return['post'] = $post;
-	   $insert_array = array('contract_name'=>$post['contract_name'],'transaction_no'=>$post['transaction_no'],'party_id'=> $post['party_id'],'start_date'=>$post['start_date'],'end_date'=>$post['end_date'],'description'=>$post['description'],'additional_notes'=>$post['additional_notes'],'payment_term_id'=>$post['payment_term_id'],'termination_condition'=>$post['termination_condition'],'contract_status'=>$post['contract_status'],'rt_number'=>$post['rt_number']);
-	    if($post['Rid']!=""){
-    		$insert_array['updated_by']=$get['user_id'];
-    		$insert_array['updated_date']=date('Y-m-d H:i:s');
-    		$res=$callConfig->updateRecord('contracts',$insert_array,'id',$post['Rid']);
-    		$return['result'] = $res;
-    	}else{
-    		$insert_array['company_id']=$get['company_id'];
-    		$insert_array['is_active']=0;
-    		$insert_array['created_by']=$get['user_id'];
-    		$insert_array['created_date']=date('Y-m-d H:i:s');
-    		$insert_data=$callConfig->insertRecord('contracts',$insert_array);
-    		$return['result'] = $insert_data;
+		$return = array();
+		$return['post'] = $post;
+		$insert_array = array('contract_name' => $post['contract_name'], 'transaction_no' => $post['transaction_no'], 'party_id' => $post['party_id'], 'start_date' => $post['start_date'], 'end_date' => $post['end_date'], 'description' => $post['description'], 'additional_notes' => $post['additional_notes'], 'payment_term_id' => $post['payment_term_id'], 'termination_condition' => $post['termination_condition'], 'contract_status' => $post['contract_status'], 'rt_number' => $post['rt_number']);
+		if ($post['Rid'] != "") {
+			$insert_array['updated_by'] = $get['user_id'];
+			$insert_array['updated_date'] = date('Y-m-d H:i:s');
+			$res = $callConfig->updateRecord('contracts', $insert_array, 'id', $post['Rid']);
+			$return['result'] = $res;
+		} else {
+			$insert_array['company_id'] = $get['company_id'];
+			$insert_array['is_active'] = 0;
+			$insert_array['created_by'] = $get['user_id'];
+			$insert_array['created_date'] = date('Y-m-d H:i:s');
+			$insert_data = $callConfig->insertRecord('contracts', $insert_array);
+			$return['result'] = $insert_data;
 		}
 		return $return;
 	}
 	private function mergeAmcServiceFrequencyOptions($dbRows)
 	{
 		$canonical = array(
-			'daily'      => 'Daily',
-			'weekly'     => 'Weekly',
-			'monthly'    => 'Monthly',
-			'quarterly'  => 'Quarterly',
+			'daily' => 'Daily',
+			'weekly' => 'Weekly',
+			'monthly' => 'Monthly',
+			'quarterly' => 'Quarterly',
 			'halfyearly' => 'Halfyearly',
-			'yearly'     => 'Yearly',
-			'custom'     => 'Custom',
+			'yearly' => 'Yearly',
+			'custom' => 'Custom',
 		);
 		$legacyToSlug = array(
 			'0' => 'custom',
@@ -3557,10 +3586,10 @@ class reactClass extends userClass{
 			'4' => 'yearly',
 		);
 		$merged = array();
-		if (count((array)$dbRows) > 0) {
+		if (count((array) $dbRows) > 0) {
 			foreach ($dbRows as $row) {
 				$row = is_array($row) ? $row : json_decode(json_encode($row), true);
-				$code = strtolower(trim((string)($row['genc_detail_code'] ?? '')));
+				$code = strtolower(trim((string) ($row['genc_detail_code'] ?? '')));
 				if ($code == '') {
 					continue;
 				}
@@ -3583,7 +3612,7 @@ class reactClass extends userClass{
 			}
 		}
 		$list = array_values($merged);
-		if (count((array)$list) > 0) {
+		if (count((array) $list) > 0) {
 			usort($list, function ($a, $b) {
 				$nameA = strtolower($a['genc_detail_name'] ?? '');
 				$nameB = strtolower($b['genc_detail_name'] ?? '');
@@ -3613,23 +3642,6 @@ class reactClass extends userClass{
 	public function getCustomerContracts($get)
 	{
 		return $this->getPartyContractsList($get, 'customer', $get['customer_id'] ?? '');
-	}
-	private function sanitizeRowsForJson($rows)
-	{
-		if (empty($rows) || !is_array($rows)) {
-			return array();
-		}
-		$clean = array();
-		foreach ($rows as $row) {
-			$arr = is_array($row) ? $row : (array) $row;
-			foreach ($arr as $key => $value) {
-				if (is_string($value)) {
-					$arr[$key] = iconv('UTF-8', 'UTF-8//IGNORE', $value);
-				}
-			}
-			$clean[] = $arr;
-		}
-		return $clean;
 	}
 
 	public function getAmcScheduleStatusLabel($status)
@@ -3684,7 +3696,7 @@ class reactClass extends userClass{
 		$assetsByLoc = array();
 		$assetDefaults = array();
 		$assetEmployeeDefaults = array();
-		if (count((array)$assetRows) > 0) {
+		if (count((array) $assetRows) > 0) {
 			foreach ($assetRows as $ar) {
 				$a = is_array($ar) ? $ar : (array) $ar;
 				$locKey = $a['contract_amc_location_id'] ?? 0;
@@ -3707,7 +3719,7 @@ class reactClass extends userClass{
 			ORDER BY s.planned_service_datetime ASC";
 		$schedRows = $callConfig->getAllRows($schedSql);
 		$schedByAsset = array();
-		if (count((array)$schedRows) > 0) {
+		if (count((array) $schedRows) > 0) {
 			foreach ($schedRows as $sr) {
 				$s = is_array($sr) ? $sr : (array) $sr;
 				$assetKey = $s['contract_amc_asset_id'] ?? 0;
@@ -3742,7 +3754,7 @@ class reactClass extends userClass{
 				$s['repair_order_id'] = (int) ($repairBundle['repair_order']['id'] ?? 0);
 				$addedAmount = 0;
 				$repairLines = $repairBundle['repair_order_lines'] ?? array();
-				if (count((array)$repairLines) > 0) {
+				if (count((array) $repairLines) > 0) {
 					foreach ($repairLines as $repairLine) {
 						$repairLine = is_array($repairLine) ? $repairLine : (array) $repairLine;
 						$addedAmount += (float) ($repairLine['amount'] ?? 0);
@@ -3754,14 +3766,14 @@ class reactClass extends userClass{
 		}
 
 		$assetIds = array();
-		if (count((array)$assetRows) > 0) {
+		if (count((array) $assetRows) > 0) {
 			foreach ($assetRows as $ar) {
 				$a = is_array($ar) ? $ar : (array) $ar;
 				$assetIds[] = $a['id'];
 			}
 		}
 		$assetRollups = array();
-		if (count((array)$assetIds) > 0) {
+		if (count((array) $assetIds) > 0) {
 			$idList = implode(',', array_map('intval', $assetIds));
 			$rollupSql = "SELECT contract_amc_asset_id,
 				MIN(CASE WHEN current_status = 0 AND planned_service_datetime >= CURDATE() THEN planned_service_datetime END) AS next_visit,
@@ -3772,7 +3784,7 @@ class reactClass extends userClass{
 				WHERE company_id = {$companyId} AND is_active = 0 AND contract_amc_asset_id IN ({$idList})
 				GROUP BY contract_amc_asset_id";
 			$rollupRows = $callConfig->getAllRows($rollupSql);
-			if (count((array)$rollupRows) > 0) {
+			if (count((array) $rollupRows) > 0) {
 				foreach ($rollupRows as $rr) {
 					$r = is_array($rr) ? $rr : (array) $rr;
 					$assetRollups[$r['contract_amc_asset_id']] = $r;
@@ -3780,13 +3792,13 @@ class reactClass extends userClass{
 			}
 		}
 
-		if (count((array)$locRows) > 0) {
+		if (count((array) $locRows) > 0) {
 			foreach ($locRows as $lr) {
 				$loc = is_array($lr) ? $lr : (array) $lr;
 				$locId = $loc['id'] ?? 0;
 				$loc['assets'] = array();
 				$locAssets = $assetsByLoc[$locId] ?? array();
-				if (count((array)$locAssets) > 0) {
+				if (count((array) $locAssets) > 0) {
 					foreach ($locAssets as $asset) {
 						$aid = $asset['id'] ?? 0;
 						$asset['schedules'] = $schedByAsset[$aid] ?? array();
@@ -3918,7 +3930,7 @@ class reactClass extends userClass{
 		}
 		$sql .= " ORDER BY display_name ASC";
 		$rows = $callConfig->getAllRows($sql);
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$r = is_array($row) ? $row : (array) $row;
 				$label = trim(($r['display_name'] ?? '') . (!empty($r['emp_code']) ? ' (' . $r['emp_code'] . ')' : ''));
@@ -3947,7 +3959,7 @@ class reactClass extends userClass{
 			AND a.category_id = '" . addslashes($categoryId) . "'
 			ORDER BY a.asset_code ASC";
 		$rows = $callConfig->getAllRows($sql);
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$return['assets'][] = is_array($row) ? $row : (array) $row;
 			}
@@ -3961,7 +3973,7 @@ class reactClass extends userClass{
 		$list = array();
 		$sql = "SELECT id, account_name FROM amc_account_details WHERE company_id = '" . addslashes($company_id) . "' AND is_active = 0 ORDER BY account_name ASC";
 		$rows = $callConfig->getAllRows($sql);
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$r = is_array($row) ? $row : (array) $row;
 				$list[$r['id']] = $r['account_name'];
@@ -4006,7 +4018,7 @@ class reactClass extends userClass{
 
 		$name = '';
 		if ($effectiveId > 0) {
-			if (count((array)$techNameMap) > 0 && isset($techNameMap[$effectiveId])) {
+			if (count((array) $techNameMap) > 0 && isset($techNameMap[$effectiveId])) {
 				$name = $techNameMap[$effectiveId];
 			} elseif (!empty($schedule['technician_name']) && !$isOverride && $scheduleTechId == $effectiveId) {
 				$name = $schedule['technician_name'];
@@ -4080,7 +4092,7 @@ class reactClass extends userClass{
 
 		$name = '';
 		if ($effectiveId > 0) {
-			if (count((array)$empNameMap) > 0 && isset($empNameMap[$effectiveId])) {
+			if (count((array) $empNameMap) > 0 && isset($empNameMap[$effectiveId])) {
 				$name = $empNameMap[$effectiveId];
 			} elseif (!empty($schedule['employee_name']) && !$isOverride && $scheduleEmpId == $effectiveId) {
 				$name = $schedule['employee_name'];
@@ -4214,7 +4226,7 @@ class reactClass extends userClass{
 		$assetRows = $callConfig->getAllRows($assetSql);
 		$assetsByLoc = array();
 		$assetIds = array();
-		if (count((array)$assetRows) > 0) {
+		if (count((array) $assetRows) > 0) {
 			foreach ($assetRows as $ar) {
 				$a = is_array($ar) ? $ar : (array) $ar;
 				$locKey = $a['contract_amc_location_id'] ?? 0;
@@ -4227,7 +4239,7 @@ class reactClass extends userClass{
 		}
 
 		$assetRollups = array();
-		if (count((array)$assetIds) > 0) {
+		if (count((array) $assetIds) > 0) {
 			$idList = implode(',', array_map('intval', $assetIds));
 			$overrideCol = ($return['service_mode'] == 'inhouse') ? 'employee_is_override' : 'technician_is_override';
 			$rollupSql = "SELECT contract_amc_asset_id,
@@ -4237,7 +4249,7 @@ class reactClass extends userClass{
 				WHERE company_id = {$companyId} AND is_active = 0 AND contract_amc_asset_id IN ({$idList})
 				GROUP BY contract_amc_asset_id";
 			$rollupRows = $callConfig->getAllRows($rollupSql);
-			if (count((array)$rollupRows) > 0) {
+			if (count((array) $rollupRows) > 0) {
 				foreach ($rollupRows as $rr) {
 					$r = is_array($rr) ? $rr : (array) $rr;
 					$assetRollups[$r['contract_amc_asset_id']] = $r;
@@ -4245,13 +4257,13 @@ class reactClass extends userClass{
 			}
 		}
 
-		if (count((array)$locRows) > 0) {
+		if (count((array) $locRows) > 0) {
 			foreach ($locRows as $lr) {
 				$loc = is_array($lr) ? $lr : (array) $lr;
 				$locId = $loc['id'] ?? 0;
 				$loc['assets'] = array();
 				$locAssets = $assetsByLoc[$locId] ?? array();
-				if (count((array)$locAssets) > 0) {
+				if (count((array) $locAssets) > 0) {
 					foreach ($locAssets as $asset) {
 						$aid = $asset['id'] ?? 0;
 						$rollup = $assetRollups[$aid] ?? array();
@@ -4352,11 +4364,11 @@ class reactClass extends userClass{
 		}
 
 		$checklistItems = $post['checklist_items'] ?? array();
-		if (!is_array($checklistItems) || count((array)$checklistItems) == 0) {
+		if (!is_array($checklistItems) || count((array) $checklistItems) == 0) {
 			$return['message'] = 'At least one checklist item is required';
 			return $return;
 		}
-		if (count((array)$checklistItems) > 0) {
+		if (count((array) $checklistItems) > 0) {
 			foreach ($checklistItems as $fieldValue) {
 				if (trim((string) $fieldValue) == '') {
 					$return['message'] = 'Checklist item name cannot be empty';
@@ -4377,7 +4389,7 @@ class reactClass extends userClass{
 		}
 
 		$saved = 0;
-		if (count((array)$checklistItems) > 0) {
+		if (count((array) $checklistItems) > 0) {
 			foreach ($checklistItems as $i => $fieldValue) {
 				$fieldValue = trim((string) $fieldValue);
 				$checkId = $existingIds[$i] ?? '';
@@ -4457,7 +4469,7 @@ class reactClass extends userClass{
 		$assetAssignments = ($serviceMode == 'inhouse')
 			? ($post['asset_employees'] ?? array())
 			: ($post['asset_technicians'] ?? array());
-		if (!is_array($assetAssignments) || count((array)$assetAssignments) == 0) {
+		if (!is_array($assetAssignments) || count((array) $assetAssignments) == 0) {
 			$return['message'] = 'No asset assignments provided';
 			return $return;
 		}
@@ -4592,13 +4604,13 @@ class reactClass extends userClass{
 			WHERE company_id = '" . addslashes($company_id) . "' AND transaction_id = '" . addslashes($contract_id) . "'
 			AND application_tablename = 'contracts' AND is_active = 0";
 		$rows = $callConfig->getAllRows($sql);
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$r = is_array($row) ? $row : (array) $row;
 				$items[$r['id']] = $r['check_name'];
 			}
 		}
-		if (count((array)$items) == 0) {
+		if (count((array) $items) == 0) {
 			$defaults = array('Visual Inspection', 'Functional Test', 'Safety Check');
 			$idx = 1;
 			foreach ($defaults as $name) {
@@ -4673,7 +4685,7 @@ class reactClass extends userClass{
 		$check_list_status = array();
 		$dbByAppId = array();
 		$dbByName = array();
-		if (count((array)$checkRows) > 0) {
+		if (count((array) $checkRows) > 0) {
 			foreach ($checkRows as $cr) {
 				$c = is_array($cr) ? $cr : (array) $cr;
 				if ($c['application_check_list_id'] != '') {
@@ -4682,7 +4694,7 @@ class reactClass extends userClass{
 				$dbByName[$c['check_name']] = $c;
 			}
 		}
-		if (count((array)$return['checklist_items']) > 0) {
+		if (count((array) $return['checklist_items']) > 0) {
 			foreach ($return['checklist_items'] as $itemKey => $itemName) {
 				if (isset($dbByAppId[$itemKey])) {
 					$check_list_status[$itemKey] = $dbByAppId[$itemKey];
@@ -4708,7 +4720,7 @@ class reactClass extends userClass{
 	{
 		global $callConfig;
 		$items = $this->getDefaultContractAmcChecklistItems($company_id, $contract_id);
-		if (count((array)$items) == 0) {
+		if (count((array) $items) == 0) {
 			return false;
 		}
 		$checkSql = "SELECT application_check_list_id, check_name, check_status FROM contract_amc_check_list
@@ -4716,7 +4728,7 @@ class reactClass extends userClass{
 			AND company_id = '" . addslashes($company_id) . "' AND is_active = 0";
 		$checkRows = $callConfig->getAllRows($checkSql);
 		$saved = array();
-		if (count((array)$checkRows) > 0) {
+		if (count((array) $checkRows) > 0) {
 			foreach ($checkRows as $cr) {
 				$c = is_array($cr) ? $cr : (array) $cr;
 				$key = $c['application_check_list_id'] != '' ? $c['application_check_list_id'] : $c['check_name'];
@@ -4745,7 +4757,7 @@ class reactClass extends userClass{
 
 		$detail = $this->getContractAmcScheduleDetails(array_merge($get, array('schedule_id' => $scheduleId)));
 		$schedule = $detail['schedule'] ?? array();
-		if (count((array)$schedule) == 0) {
+		if (count((array) $schedule) == 0) {
 			$return['message'] = 'Schedule not found';
 			return $return;
 		}
@@ -4793,8 +4805,8 @@ class reactClass extends userClass{
 		}
 		$res = $callConfig->updateRecord('contract_amc_service_schedules', $update, 'id', $scheduleId);
 		$return['res'] = $res;
-		$return['resi_scheduleId'] =$scheduleId;
-		if (count((array)$post['checklist_items']) > 0) {
+		$return['resi_scheduleId'] = $scheduleId;
+		if (count((array) $post['checklist_items']) > 0) {
 			foreach ($post['checklist_items'] as $i => $fieldValue) {
 				$check_id = $post['existing_checklist_ids'][$i] ?? ($post['checklist_keys'][$i] ?? '');
 				$check_status = $post['checklist_status'][$check_id] ?? ($post['checklist_status'][$i] ?? '0');
@@ -4911,7 +4923,7 @@ class reactClass extends userClass{
 		global $callConfig;
 		$parties = $this->resolvePortalPartyIds($get);
 		$customerIds = $parties['customer_ids'] ?? array();
-		if (count((array)$customerIds) == 0) {
+		if (count((array) $customerIds) == 0) {
 			return false;
 		}
 		$companyId = (int) ($get['company_id'] ?? 0);
@@ -4991,7 +5003,7 @@ class reactClass extends userClass{
 			{$baseFrom} ORDER BY s.planned_service_datetime DESC LIMIT {$limit} OFFSET {$offset}";
 		$rows = $callConfig->getAllRows($select);
 		$list = array();
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$list[] = $this->enrichContractAmcFmVisitRow($row);
 			}
@@ -5068,7 +5080,7 @@ class reactClass extends userClass{
 	{
 		$scheduleId = (int) ($get['schedule_id'] ?? $get['id'] ?? 0);
 		$schedule = $this->getContractAmcFmScheduleRow($get, $scheduleId);
-		if (count((array)$schedule) == 0) {
+		if (count((array) $schedule) == 0) {
 			return array('schedule' => array(), 'can_confirm' => false);
 		}
 		return array(
@@ -5101,7 +5113,7 @@ class reactClass extends userClass{
 		}
 
 		$schedule = $this->getContractAmcFmScheduleRow($get, $scheduleId);
-		if (count((array)$schedule) == 0) {
+		if (count((array) $schedule) == 0) {
 			$return['message'] = 'Visit not found';
 			return $return;
 		}
@@ -5170,7 +5182,7 @@ class reactClass extends userClass{
 		}
 		$cSql = "SELECT id FROM customers WHERE company_id = {$companyId} AND user_id = {$userId} AND is_active = 0";
 		$cRows = $callConfig->getAllRows($cSql);
-		if (count((array)$cRows) > 0) {
+		if (count((array) $cRows) > 0) {
 			foreach ($cRows as $row) {
 				$r = is_array($row) ? $row : (array) $row;
 				$return['customer_ids'][] = $r['id'];
@@ -5178,7 +5190,7 @@ class reactClass extends userClass{
 		}
 		$vSql = "SELECT id FROM vendors WHERE company_id = {$companyId} AND user_id = {$userId} AND is_active = 0";
 		$vRows = $callConfig->getAllRows($vSql);
-		if (count((array)$vRows) > 0) {
+		if (count((array) $vRows) > 0) {
 			foreach ($vRows as $row) {
 				$r = is_array($row) ? $row : (array) $row;
 				$return['vendor_ids'][] = $r['id'];
@@ -5196,7 +5208,7 @@ class reactClass extends userClass{
 			'dashboard' => array(),
 		);
 
-		if (count((array)$parties['customer_ids']) > 0) {
+		if (count((array) $parties['customer_ids']) > 0) {
 			$allActive = array();
 			$allInactive = array();
 			foreach ($parties['customer_ids'] as $cid) {
@@ -5206,11 +5218,11 @@ class reactClass extends userClass{
 			}
 			$return['receive']['active_contracts'] = $allActive;
 			$return['receive']['inactive_contracts'] = $allInactive;
-			$return['receive']['active_count'] = count((array)$allActive);
-			$return['receive']['inactive_count'] = count((array)$allInactive);
+			$return['receive']['active_count'] = count((array) $allActive);
+			$return['receive']['inactive_count'] = count((array) $allInactive);
 		}
 
-		if (count((array)$parties['vendor_ids']) > 0) {
+		if (count((array) $parties['vendor_ids']) > 0) {
 			$allActive = array();
 			$allInactive = array();
 			foreach ($parties['vendor_ids'] as $vid) {
@@ -5220,8 +5232,8 @@ class reactClass extends userClass{
 			}
 			$return['provide']['active_contracts'] = $allActive;
 			$return['provide']['inactive_contracts'] = $allInactive;
-			$return['provide']['active_count'] = count((array)$allActive);
-			$return['provide']['inactive_count'] = count((array)$allInactive);
+			$return['provide']['active_count'] = count((array) $allActive);
+			$return['provide']['inactive_count'] = count((array) $allInactive);
 		}
 
 		$return['dashboard'] = $this->getContractAmcDashboardData($get);
@@ -5285,11 +5297,11 @@ class reactClass extends userClass{
 			WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.current_status = 0
 			AND DATE(s.planned_service_datetime) >= '{$today}'";
 		$rows = $callConfig->getAllRows($sql);
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$s = is_array($row) ? $row : (array) $row;
 				$days = json_decode($s['reminder_days'] ?? '[]', true);
-				if (!is_array($days) || count((array)$days) == 0) {
+				if (!is_array($days) || count((array) $days) == 0) {
 					$return['skipped']++;
 					continue;
 				}
@@ -5330,7 +5342,7 @@ class reactClass extends userClass{
 			WHERE s.company_id = {$companyId} AND s.is_active = 0 AND s.current_status = 0
 			AND s.planned_service_datetime < NOW() AND (s.actual_start_datetime IS NULL OR s.actual_start_datetime = '')";
 		$rows = $callConfig->getAllRows($sql);
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$s = is_array($row) ? $row : (array) $row;
 				$config = json_decode($s['escalation_config'] ?? '{}', true);
@@ -5391,7 +5403,7 @@ class reactClass extends userClass{
 			AND ac.category_description IS NOT NULL AND ac.category_description != ''
 			ORDER BY ac.category_description ASC";
 		$catRows = $callConfig->getAllRows($catSql);
-		if (count((array)$catRows) > 0) {
+		if (count((array) $catRows) > 0) {
 			foreach ($catRows as $catRow) {
 				$r = is_array($catRow) ? $catRow : (array) $catRow;
 				$return['filters']['categories'][] = array(
@@ -5408,7 +5420,7 @@ class reactClass extends userClass{
 			AND l.location_name IS NOT NULL AND l.location_name != ''
 			ORDER BY l.location_name ASC";
 		$locRows = $callConfig->getAllRows($locSql);
-		if (count((array)$locRows) > 0) {
+		if (count((array) $locRows) > 0) {
 			foreach ($locRows as $locRow) {
 				$r = is_array($locRow) ? $locRow : (array) $locRow;
 				$return['filters']['locations'][] = array(
@@ -5426,7 +5438,7 @@ class reactClass extends userClass{
 			ORDER BY yr DESC";
 		$yearRows = $callConfig->getAllRows($yearSql);
 		$years = array();
-		if (count((array)$yearRows) > 0) {
+		if (count((array) $yearRows) > 0) {
 			foreach ($yearRows as $yearRow) {
 				$r = is_array($yearRow) ? $yearRow : (array) $yearRow;
 				if (!empty($r['yr'])) {
@@ -5434,7 +5446,7 @@ class reactClass extends userClass{
 				}
 			}
 		}
-		if (count((array)$years) == 0) {
+		if (count((array) $years) == 0) {
 			$cur = (int) date('Y');
 			for ($y = 2019; $y <= ($cur + 1); $y++) {
 				$years[] = $y;
@@ -5471,7 +5483,7 @@ class reactClass extends userClass{
 		$scheduleRows = $callConfig->getAllRows($sql);
 
 		$grouped = array();
-		if (count((array)$scheduleRows) > 0) {
+		if (count((array) $scheduleRows) > 0) {
 			foreach ($scheduleRows as $scheduleRow) {
 				$row = is_array($scheduleRow) ? $scheduleRow : (array) $scheduleRow;
 				$assetKey = (int) ($row['contract_amc_asset_id'] ?? 0);
@@ -5552,7 +5564,7 @@ class reactClass extends userClass{
 			AND v.display_name IS NOT NULL AND v.display_name != ''
 			ORDER BY v.display_name ASC";
 		$vendorRows = $callConfig->getAllRows($vendorSql);
-		if (count((array)$vendorRows) > 0) {
+		if (count((array) $vendorRows) > 0) {
 			foreach ($vendorRows as $vendorRow) {
 				$r = is_array($vendorRow) ? $vendorRow : (array) $vendorRow;
 				$return['filters']['vendors'][] = array(
@@ -5575,7 +5587,7 @@ class reactClass extends userClass{
 			AND ac.category_description IS NOT NULL AND ac.category_description != ''
 			ORDER BY ac.category_description ASC";
 		$catRows = $callConfig->getAllRows($catSql);
-		if (count((array)$catRows) > 0) {
+		if (count((array) $catRows) > 0) {
 			foreach ($catRows as $catRow) {
 				$r = is_array($catRow) ? $catRow : (array) $catRow;
 				$return['filters']['categories'][] = array(
@@ -5596,7 +5608,7 @@ class reactClass extends userClass{
 			ORDER BY fy DESC";
 		$yearRows = $callConfig->getAllRows($yearSql);
 		$years = array();
-		if (count((array)$yearRows) > 0) {
+		if (count((array) $yearRows) > 0) {
 			foreach ($yearRows as $yearRow) {
 				$r = is_array($yearRow) ? $yearRow : (array) $yearRow;
 				if (!empty($r['fy'])) {
@@ -5604,7 +5616,7 @@ class reactClass extends userClass{
 				}
 			}
 		}
-		if (count((array)$years) == 0) {
+		if (count((array) $years) == 0) {
 			$cur = (int) date('Y');
 			for ($y = 2019; $y <= ($cur + 1); $y++) {
 				$years[] = $y;
@@ -5655,14 +5667,14 @@ class reactClass extends userClass{
 
 		$fiscalMonths = $this->vendorAmcTrackerFiscalMonthOrder();
 		$emptyMonths = array();
-		if (count((array)$fiscalMonths) > 0) {
+		if (count((array) $fiscalMonths) > 0) {
 			foreach ($fiscalMonths as $mk) {
 				$emptyMonths[$mk] = array('planned' => '', 'actual_start' => '');
 			}
 		}
 
 		$categoryMap = array();
-		if (count((array)$scheduleRows) > 0) {
+		if (count((array) $scheduleRows) > 0) {
 			foreach ($scheduleRows as $scheduleRow) {
 				$row = is_array($scheduleRow) ? $scheduleRow : (array) $scheduleRow;
 				$catId = (int) ($row['category_id'] ?? 0);
@@ -5729,19 +5741,19 @@ class reactClass extends userClass{
 		}
 
 		$categories = array();
-		if (count((array)$categoryMap) > 0) {
+		if (count((array) $categoryMap) > 0) {
 			foreach ($categoryMap as $catData) {
 				$blocks = array();
-				if (count((array)($catData['blocks'] ?? array())) > 0) {
+				if (count((array) ($catData['blocks'] ?? array())) > 0) {
 					foreach ($catData['blocks'] as $blockData) {
 						$assetRows = array_values($blockData['rows'] ?? array());
-						if (count((array)$assetRows) > 0) {
+						if (count((array) $assetRows) > 0) {
 							$blockData['rows'] = $assetRows;
 							$blocks[] = $blockData;
 						}
 					}
 				}
-				if (count((array)$blocks) > 1) {
+				if (count((array) $blocks) > 1) {
 					usort($blocks, function ($a, $b) {
 						$fyA = (int) ($a['fiscal_start_year'] ?? 0);
 						$fyB = (int) ($b['fiscal_start_year'] ?? 0);
@@ -5756,7 +5768,7 @@ class reactClass extends userClass{
 						return ($fyA > $fyB) ? -1 : 1;
 					});
 				}
-				if (count((array)$blocks) > 0) {
+				if (count((array) $blocks) > 0) {
 					$catData['blocks'] = $blocks;
 					$categories[] = $catData;
 				}
@@ -5779,7 +5791,7 @@ class reactClass extends userClass{
 			ORDER BY genc_detail_name ASC";
 		$rows = $callConfig->getAllRows($sql);
 		$merged = $this->mergeAmcServiceFrequencyOptions($rows);
-		if (count((array)$merged) > 0) {
+		if (count((array) $merged) > 0) {
 			foreach ($merged as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$code = $this->normalizeAmcServiceOn($row['genc_detail_code'] ?? '');
@@ -5794,11 +5806,11 @@ class reactClass extends userClass{
 	public function vendorAmcFrequencyLabel($frequency, $labelMap = array())
 	{
 		$freq = $this->normalizeAmcServiceOn($frequency);
-		if (count((array)$labelMap) > 0 && isset($labelMap[$freq]) && $labelMap[$freq] != '') {
+		if (count((array) $labelMap) > 0 && isset($labelMap[$freq]) && $labelMap[$freq] != '') {
 			return $labelMap[$freq];
 		}
 		$canonical = $this->mergeAmcServiceFrequencyOptions(array());
-		if (count((array)$canonical) > 0) {
+		if (count((array) $canonical) > 0) {
 			foreach ($canonical as $row) {
 				$code = $this->normalizeAmcServiceOn($row['genc_detail_code'] ?? '');
 				if ($code == $freq) {
@@ -5912,7 +5924,7 @@ class reactClass extends userClass{
 	public function vendorAmcScheduleBuildVisitColumnLayout($dateKeys)
 	{
 		$monthToDates = array();
-		if (count((array)$dateKeys) > 0) {
+		if (count((array) $dateKeys) > 0) {
 			foreach ($dateKeys as $dateKey) {
 				$dateKey = trim((string) $dateKey);
 				if ($dateKey == '') {
@@ -5932,13 +5944,13 @@ class reactClass extends userClass{
 
 		$monthGroups = array();
 		$visitColumns = array();
-		if (count((array)$monthToDates) > 0) {
+		if (count((array) $monthToDates) > 0) {
 			ksort($monthToDates);
 			foreach ($monthToDates as $monthKey => $datesMap) {
 				$dates = array_values($datesMap);
 				sort($dates);
 				$monthLabel = $this->vendorAmcScheduleMonthLabel($monthKey);
-				$visitCount = count((array)$dates);
+				$visitCount = count((array) $dates);
 				$monthGroups[] = array(
 					'month_key' => $monthKey,
 					'label' => $monthLabel,
@@ -5946,7 +5958,7 @@ class reactClass extends userClass{
 					'visit_count' => $visitCount,
 				);
 				$slot = 0;
-				if (count((array)$dates) > 0) {
+				if (count((array) $dates) > 0) {
 					foreach ($dates as $dateKey) {
 						$slot++;
 						$visitColumns[] = array(
@@ -6026,7 +6038,7 @@ class reactClass extends userClass{
 			AND display_name IS NOT NULL AND display_name != ''
 			ORDER BY display_name ASC";
 		$vendorRows = $callConfig->getAllRows($vendorSql);
-		if (count((array)$vendorRows) > 0) {
+		if (count((array) $vendorRows) > 0) {
 			foreach ($vendorRows as $vendorRow) {
 				$r = is_array($vendorRow) ? $vendorRow : (array) $vendorRow;
 				$return['filters']['vendors'][] = array(
@@ -6041,7 +6053,7 @@ class reactClass extends userClass{
 			AND category_description IS NOT NULL AND category_description != ''
 			ORDER BY category_description ASC";
 		$catRows = $callConfig->getAllRows($catSql);
-		if (count((array)$catRows) > 0) {
+		if (count((array) $catRows) > 0) {
 			foreach ($catRows as $catRow) {
 				$r = is_array($catRow) ? $catRow : (array) $catRow;
 				$return['filters']['categories'][] = array(
@@ -6084,7 +6096,7 @@ class reactClass extends userClass{
 		$freqLabelMap = $this->buildVendorAmcFrequencyLabelMap($companyId);
 
 		$categoryName = '';
-		if (count((array)($return['filters']['categories'] ?? array())) > 0) {
+		if (count((array) ($return['filters']['categories'] ?? array())) > 0) {
 			foreach ($return['filters']['categories'] as $catFilter) {
 				if ((int) ($catFilter['id'] ?? 0) == $categoryId) {
 					$categoryName = trim((string) ($catFilter['name'] ?? ''));
@@ -6115,7 +6127,7 @@ class reactClass extends userClass{
 
 		$visitDateKeys = array();
 		$grouped = array();
-		if (count((array)$scheduleRows) > 0) {
+		if (count((array) $scheduleRows) > 0) {
 			foreach ($scheduleRows as $scheduleRow) {
 				$row = is_array($scheduleRow) ? $scheduleRow : (array) $scheduleRow;
 				if ($categoryName == '') {
@@ -6191,7 +6203,7 @@ class reactClass extends userClass{
 	public function getScheduleRepairEligibility($scheduleRow, $repairOrderRow)
 	{
 		$phase = $this->getScheduleVisitPhase($scheduleRow);
-		$hasRepair = count((array)$repairOrderRow) > 0 && !empty($repairOrderRow['id']);
+		$hasRepair = count((array) $repairOrderRow) > 0 && !empty($repairOrderRow['id']);
 		if ($phase == 'pending') {
 			return 'hidden';
 		}
@@ -6224,7 +6236,7 @@ class reactClass extends userClass{
 			return array('ok' => false, 'message' => 'Job is closed; repair order cannot be modified.');
 		}
 		$existing = $this->getRepairOrderByScheduleId($companyId, $scheduleId);
-		if (count((array)$existing) > 0 && (int) ($existing['id'] ?? 0) != $repairOrderId) {
+		if (count((array) $existing) > 0 && (int) ($existing['id'] ?? 0) != $repairOrderId) {
 			return array('ok' => false, 'message' => 'A repair order already exists for this visit.');
 		}
 		return array('ok' => true, 'message' => '', 'schedule' => $schedule);
@@ -6264,7 +6276,7 @@ class reactClass extends userClass{
 		$assetId = (int) ($get['asset_id'] ?? 0);
 		$locationId = (int) ($get['location_id'] ?? 0);
 		$row = $this->resolveContractFromAssetLocation($get['company_id'], $assetId, $locationId);
-		return array('contract' => $row, 'found' => count((array)$row) > 0);
+		return array('contract' => $row, 'found' => count((array) $row) > 0);
 	}
 
 	public function getAmcContractSchedulesForAsset($get)
@@ -6285,7 +6297,7 @@ class reactClass extends userClass{
 			ORDER BY s.planned_service_datetime DESC LIMIT 50";
 		$rows = $callConfig->getAllRows($sql);
 		$list = array();
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $r) {
 				$row = is_array($r) ? $r : (array) $r;
 				$row['planned_display'] = $this->formatAmcScheduleDateTime($row['planned_service_datetime'] ?? '');
@@ -6334,7 +6346,7 @@ class reactClass extends userClass{
 			ORDER BY l.line_order ASC, l.id ASC";
 		$rows = $callConfig->getAllRows($sql);
 		$out = array();
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $r) {
 				$out[] = is_array($r) ? $r : (array) $r;
 			}
@@ -6346,7 +6358,7 @@ class reactClass extends userClass{
 	{
 		$repairOrder = $this->getRepairOrderByScheduleId($companyId, $scheduleId);
 		$lines = array();
-		if (count((array)$repairOrder) > 0) {
+		if (count((array) $repairOrder) > 0) {
 			$lines = $this->getRepairOrderLines($companyId, (int) $repairOrder['id']);
 		}
 		$eligibility = $this->getScheduleRepairEligibility($scheduleRow, $repairOrder);
@@ -6388,12 +6400,12 @@ class reactClass extends userClass{
 	{
 		$assets = $this->getAmcRepairOrderContractAssetsData($companyId, $contractId);
 		$allowedAssetIds = array();
-		if (count((array)($assets['assets'] ?? array())) > 0) {
+		if (count((array) ($assets['assets'] ?? array())) > 0) {
 			foreach ($assets['assets'] as $a) {
 				$allowedAssetIds[(int) ($a['asset_id'] ?? 0)] = true;
 			}
 		}
-		if (count((array)$lines) == 0) {
+		if (count((array) $lines) == 0) {
 			return array('ok' => true, 'message' => '');
 		}
 		foreach ($lines as $line) {
@@ -6411,14 +6423,14 @@ class reactClass extends userClass{
 		$allowedItemIds = array();
 		if ($companyId > 0) {
 			$rows = $callConfig->getAllRows("SELECT id FROM items WHERE company_id = {$companyId} AND is_active = 0 AND item_name != '' ");
-			if (count((array)$rows) > 0) {
+			if (count((array) $rows) > 0) {
 				foreach ($rows as $r) {
 					$row = is_array($r) ? $r : (array) $r;
 					$allowedItemIds[(int) ($row['id'] ?? 0)] = true;
 				}
 			}
 		}
-		if (count((array)$lines) == 0) {
+		if (count((array) $lines) == 0) {
 			return array('ok' => true, 'message' => '');
 		}
 		foreach ($lines as $line) {
@@ -6442,7 +6454,7 @@ class reactClass extends userClass{
 			ORDER BY item_name ASC";
 		$rows = $callConfig->getAllRows($sql);
 		$items = array();
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $r) {
 				$items[] = is_array($r) ? $r : (array) $r;
 			}
@@ -6471,7 +6483,7 @@ class reactClass extends userClass{
 		$rows = $callConfig->getAllRows($sql);
 		$assets = array();
 		$locations = array();
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $r) {
 				$row = is_array($r) ? $r : (array) $r;
 				$assets[] = $row;
@@ -6504,11 +6516,11 @@ class reactClass extends userClass{
 		if ($scheduleId <= 0 || $companyId <= 0) {
 			return array();
 		}
-		if (count((array)$schedule) == 0) {
+		if (count((array) $schedule) == 0) {
 			$detail = $this->getAmcRepairOrderScheduleDetailsGet($get, $scheduleId);
 			$schedule = $detail['schedule'] ?? array();
 		}
-		if (count((array)$schedule) == 0) {
+		if (count((array) $schedule) == 0) {
 			return array();
 		}
 		$locRow = $callConfig->getRow("SELECT cal.location_id, ca.asset_id, ca.asset_name,
@@ -6562,7 +6574,7 @@ class reactClass extends userClass{
 			'contracts' => array(),
 		);
 		$admin_or_user_whr = "";
-		if($get['admin_type'] != 1){
+		if ($get['admin_type'] != 1) {
 			$admin_or_user_whr = " AND c.created_by='{$get['user_id']}'";
 		}
 		$approved = defined('ST_APPROVED') ? (int) ST_APPROVED : 199;
@@ -6571,7 +6583,7 @@ class reactClass extends userClass{
 			FROM contracts c
 			LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0
 			WHERE c.company_id = {$companyId} AND c.is_active = 0 AND c.is_amc_contract = 'Y' AND c.current_status = {$approved}
-			AND (c.cancel_status IS NULL OR c.cancel_status != 'Y')".$admin_or_user_whr."
+			AND (c.cancel_status IS NULL OR c.cancel_status != 'Y')" . $admin_or_user_whr . "
 			ORDER BY c.contract_name ASC";
 		$return['contracts'] = $callConfig->getAllRows($cSql);
 
@@ -6604,7 +6616,7 @@ class reactClass extends userClass{
 		} elseif ($scheduleId > 0) {
 			$detail = $this->getAmcRepairOrderScheduleDetailsGet($get, $scheduleId);
 			$schedule = $detail['schedule'] ?? array();
-			if (count((array)$schedule) > 0) {
+			if (count((array) $schedule) > 0) {
 				$locRow = $callConfig->getRow("SELECT cal.location_id, cal.id AS contract_amc_location_id, ca.asset_id
 					FROM contract_amc_service_schedules s
 					LEFT JOIN contract_amc_locations cal ON cal.id = s.contract_amc_location_id AND cal.company_id = s.company_id
@@ -6613,7 +6625,7 @@ class reactClass extends userClass{
 				$loc = is_array($locRow) ? $locRow : (array) $locRow;
 				$contractId = (int) ($schedule['contract_id'] ?? 0);
 				$existing = $this->getRepairOrderByScheduleId($companyId, $scheduleId);
-				if (count((array)$existing) > 0) {
+				if (count((array) $existing) > 0) {
 					$return['repair_order'] = $existing;
 					$return['lines'] = $this->getRepairOrderLines($companyId, (int) $existing['id']);
 				} else {
@@ -6637,7 +6649,7 @@ class reactClass extends userClass{
 		if ($scheduleId > 0) {
 			$detail = $this->getAmcRepairOrderScheduleDetailsGet($get, $scheduleId);
 			$scheduleSummary = $this->buildAmcRepairOrderScheduleSummary($get, $scheduleId, $detail['schedule'] ?? array(), $detail);
-			if (count((array)$scheduleSummary) > 0) {
+			if (count((array) $scheduleSummary) > 0) {
 				$return['schedule'] = $scheduleSummary;
 			}
 			if (empty($return['repair_eligibility'])) {
@@ -6670,7 +6682,7 @@ class reactClass extends userClass{
 		global $callConfig;
 		$companyId = (int) ($get['company_id'] ?? 0);
 		$admin_or_user_whr = "";
-		if($get['admin_type'] != 1){
+		if ($get['admin_type'] != 1) {
 			$admin_or_user_whr = " AND ro.created_by='{$get['user_id']}'";
 		}
 		$sql = "SELECT ro.*, c.contract_name,
@@ -6680,7 +6692,7 @@ class reactClass extends userClass{
 			LEFT JOIN contracts c ON c.id = ro.contract_id AND c.company_id = ro.company_id
 			LEFT JOIN vendors v ON v.id = ro.vendor_id AND v.company_id = ro.company_id
 			LEFT JOIN status s ON s.name_value = ro.current_status AND s.company_id = ro.company_id
-			WHERE ro.company_id = {$companyId} AND ro.is_active = 0 ".$admin_or_user_whr."
+			WHERE ro.company_id = {$companyId} AND ro.is_active = 0 " . $admin_or_user_whr . "
 			ORDER BY ro.id DESC";
 		return array('rows' => $callConfig->getAllRows($sql));
 	}
@@ -6719,7 +6731,7 @@ class reactClass extends userClass{
 		$defaultPo = trim((string) ($post['default_po_number'] ?? ''));
 
 		$parsedLines = array();
-		if (count((array)$linesRaw) > 0) {
+		if (count((array) $linesRaw) > 0) {
 			$order = 0;
 			foreach ($linesRaw as $line) {
 				if (!is_array($line)) {
@@ -6816,7 +6828,7 @@ class reactClass extends userClass{
 		}
 
 		$keptLineIds = array();
-		if (count((array)$parsedLines) > 0) {
+		if (count((array) $parsedLines) > 0) {
 			foreach ($parsedLines as $line) {
 				$lineData = array(
 					'item_id' => $line['item_id'] > 0 ? $line['item_id'] : null,
@@ -6848,7 +6860,7 @@ class reactClass extends userClass{
 		}
 
 		$existingLines = $this->getRepairOrderLines($companyId, $repairOrderId);
-		if (count((array)$existingLines) > 0) {
+		if (count((array) $existingLines) > 0) {
 			foreach ($existingLines as $el) {
 				$lid = (int) ($el['id'] ?? 0);
 				if ($lid > 0 && !in_array($lid, $keptLineIds)) {
@@ -6877,7 +6889,7 @@ class reactClass extends userClass{
 		$buildings_details = $callConfig->getAllRows($buildings_details);
 		$buildings = array();
 		$i = 1;
-		if (count((array)$buildings_details) > 0) {
+		if (count((array) $buildings_details) > 0) {
 			foreach ($buildings_details as $row) {
 				$buildings[$i] = $row;
 				$i++;
@@ -6889,7 +6901,7 @@ class reactClass extends userClass{
 		$items_details = $callConfig->getAllRows($items_details);
 		$items = array();
 		$i = 1;
-		if (count((array)$items_details) > 0) {
+		if (count((array) $items_details) > 0) {
 			foreach ($items_details as $row) {
 				$items[$i] = $row;
 				$i++;
@@ -6901,7 +6913,7 @@ class reactClass extends userClass{
 		$assets_details = $callConfig->getAllRows($assets_details);
 		$assets = array();
 		$i = 1;
-		if (count((array)$assets_details) > 0) {
+		if (count((array) $assets_details) > 0) {
 			foreach ($assets_details as $row) {
 				$assets[$i] = $row;
 				$i++;
@@ -6912,7 +6924,7 @@ class reactClass extends userClass{
 		$locationsquery = "SELECT id, concat(short_name,'-',location_name) AS short_name FROM locations WHERE company_id = '" . $get['company_id'] . "' AND is_active = 0";
 		$return['locations'] = $callConfig->getAllRows($locationsquery);
 		$admin_or_user_whr = "";
-		if($get['admin_type'] != 1){
+		if ($get['admin_type'] != 1) {
 			$admin_or_user_whr = " AND c.created_by='{$get['user_id']}'";
 		}
 		$approved = defined('ST_APPROVED') ? (int) ST_APPROVED : 199;
@@ -6921,7 +6933,7 @@ class reactClass extends userClass{
 			FROM contracts c
 			LEFT JOIN vendors v ON v.id = c.party_id AND c.party_type = 'vendor' AND v.company_id = c.company_id AND v.is_active = 0
 			WHERE c.company_id = '" . $get['company_id'] . "' AND c.is_active = 0 AND c.is_amc_contract = 'Y'
-			AND c.current_status = {$approved} AND (c.cancel_status IS NULL OR c.cancel_status != 'Y') ".$admin_or_user_whr."
+			AND c.current_status = {$approved} AND (c.cancel_status IS NULL OR c.cancel_status != 'Y') " . $admin_or_user_whr . "
 			ORDER BY c.contract_name ASC";
 		$return['contracts'] = $callConfig->getAllRows($contractsSql);
 
@@ -6982,7 +6994,7 @@ class reactClass extends userClass{
 			$res = $callConfig->getAllRows($query);
 			$return['complaint_responses_data'] = $res;
 			$return['complaint_responses_images_data'] = array();
-			if (count((array)$res) > 0) {
+			if (count((array) $res) > 0) {
 				foreach ($res as $row) {
 					$query = "SELECT * FROM application_attachments
 						WHERE transaction_id = $row->id AND application_table_name = 'complaint_responses' AND company_id='{$get['company_id']}' AND is_active='0' ";
@@ -6994,7 +7006,7 @@ class reactClass extends userClass{
 			return $return;
 		}
 		$admin_or_user_whr = "";
-		if($get['admin_type'] != 1){
+		if ($get['admin_type'] != 1) {
 			$admin_or_user_whr = " AND c.created_by='{$get['user_id']}'";
 		}
 		$query = "SELECT c.id as id, c.user_id as user_id, c.complaint_name, c.complaint_type, c.complaint_priority, c.transaction_date,
@@ -7011,7 +7023,7 @@ class reactClass extends userClass{
 		LEFT JOIN vendors v ON v.id = ct.party_id AND ct.party_type = 'vendor' AND v.company_id = ct.company_id
 		LEFT JOIN locations l ON l.id = c.location_id AND l.company_id = c.company_id AND l.is_active = 0
 		LEFT JOIN contract_amc_service_schedules sch ON sch.id = c.schedule_id AND sch.company_id = c.company_id AND sch.is_active = 0
-		WHERE c.company_id={$get['company_id']} AND c.is_active='0' ".$admin_or_user_whr." ORDER BY id DESC";
+		WHERE c.company_id={$get['company_id']} AND c.is_active='0' " . $admin_or_user_whr . " ORDER BY id DESC";
 		$return['table'] = $callConfig->getAllRows($query);
 		return $return;
 	}
@@ -7083,7 +7095,7 @@ class reactClass extends userClass{
 
 
 		global $callConfig;
-		$emptyKpis = array('contracts' => 0, 'active' => 0, 'expired' => 0,'cancelcontract' => 0, 'customers' => 0, 'vendors' => 0);
+		$emptyKpis = array('contracts' => 0, 'active' => 0, 'expired' => 0, 'cancelcontract' => 0, 'customers' => 0, 'vendors' => 0);
 		$return = array(
 			'kpis' => $emptyKpis,
 			'yearly_chart' => array(),
@@ -7114,10 +7126,10 @@ class reactClass extends userClass{
 		$allcustomers = $dashboardData['allcustomers'] ?? array();
 		$allvendors = $dashboardData['allvendors'] ?? array();
 		$permissions = $this->amcLandingRowsToArray($dashboardData['permissions'] ?? array());
-		$return['dashboardData']=$dashboardData;
+		$return['dashboardData'] = $dashboardData;
 		$allowedContracts = $this->getAmcAdminLandingAllowedContracts($get, $allcontracts, $permissions);
 		$allowedContractIds = array();
-		if (count((array)$allowedContracts) > 0) {
+		if (count((array) $allowedContracts) > 0) {
 			foreach ($allowedContracts as $contract) {
 				$allowedContractIds[] = (int) ($contract['id'] ?? 0);
 			}
@@ -7126,18 +7138,18 @@ class reactClass extends userClass{
 
 		$split = $this->splitAmcAdminLandingActiveExpired($allowedContracts);
 		$return['kpis'] = array(
-			'contracts' => count((array)$allowedContracts),
+			'contracts' => count((array) $allowedContracts),
 			'active' => $split['active'],
 			'expired' => $split['expired'],
 			'cancelcontract' => $split['cancelcontract'],
-			'customers' => count((array)$allcustomers),
-			'vendors' => count((array)$allvendors),
+			'customers' => count((array) $allcustomers),
+			'vendors' => count((array) $allvendors),
 		);
 
 		$return['yearly_chart'] = $this->buildAmcAdminLandingYearlyChart($allowedContracts);
 		$return['locations'] = $this->buildAmcAdminLandingLocationsList($dashboardData['locations'] ?? array());
 		$partyTypes = array('customer', 'vendor', 'inhouse');
-		if (count((array)$partyTypes) > 0) {
+		if (count((array) $partyTypes) > 0) {
 			foreach ($partyTypes as $partyType) {
 				$return['contracts'][$partyType] = $this->buildAmcAdminLandingContractsByParty(
 					$allowedContracts,
@@ -7170,11 +7182,11 @@ class reactClass extends userClass{
 		);
 
 		$expiring = array();
-		if (count((array)$expiringSections) > 0) {
+		if (count((array) $expiringSections) > 0) {
 			foreach ($expiringSections as $section) {
 				$filtered = $this->filterAmcAdminLandingContractsByExpiryRange($contracts, $section['min'], $section['max']);
 				$rows = array();
-				if (count((array)$filtered) > 0) {
+				if (count((array) $filtered) > 0) {
 					foreach ($filtered as $contract) {
 						$rows[] = $this->mapAmcAdminLandingExpiryRow($contract, 'expiring');
 					}
@@ -7182,14 +7194,14 @@ class reactClass extends userClass{
 				$expiring[] = array(
 					'key' => $section['key'],
 					'title' => $section['title'],
-					'total' => count((array)$rows),
+					'total' => count((array) $rows),
 					'rows' => $rows,
 				);
 			}
 		}
 
 		$expired = array();
-		if (count((array)$expiredSections) > 0) {
+		if (count((array) $expiredSections) > 0) {
 			foreach ($expiredSections as $section) {
 				$filtered = $this->filterAmcAdminLandingContractsByExpiredRange(
 					$contracts,
@@ -7197,7 +7209,7 @@ class reactClass extends userClass{
 					$section['days']
 				);
 				$rows = array();
-				if (count((array)$filtered) > 0) {
+				if (count((array) $filtered) > 0) {
 					foreach ($filtered as $contract) {
 						$rows[] = $this->mapAmcAdminLandingExpiryRow($contract, 'expired');
 					}
@@ -7205,7 +7217,7 @@ class reactClass extends userClass{
 				$expired[] = array(
 					'key' => $section['key'],
 					'title' => $section['title'],
-					'total' => count((array)$rows),
+					'total' => count((array) $rows),
 					'rows' => $rows,
 				);
 			}
@@ -7219,7 +7231,7 @@ class reactClass extends userClass{
 		$today = new DateTime();
 		$today->setTime(0, 0, 0);
 		$filtered = array();
-		if (count((array)$contracts) > 0) {
+		if (count((array) $contracts) > 0) {
 			foreach ($contracts as $contract) {
 				$c = is_array($contract) ? $contract : (array) $contract;
 				$endDateRaw = $c['end_date'] ?? '';
@@ -7247,7 +7259,7 @@ class reactClass extends userClass{
 		$startDate = (clone $today)->modify('-' . (int) $startDays . ' days');
 		$pastDate = (clone $today)->modify('-' . (int) $days . ' days');
 		$filtered = array();
-		if (count((array)$contracts) > 0) {
+		if (count((array) $contracts) > 0) {
 			foreach ($contracts as $contract) {
 				$c = is_array($contract) ? $contract : (array) $contract;
 				$endDateRaw = $c['end_date'] ?? '';
@@ -7318,7 +7330,7 @@ class reactClass extends userClass{
 
 		$dashboardData = $this->getdashboardreact($get);
 		$allcontracts = $this->amcLandingRowsToArray($dashboardData['allcontracts'] ?? array());
-		$permissions =  array();  // contract_permissions not used for landing scope
+		$permissions = array();  // contract_permissions not used for landing scope
 		$allowedContracts = $this->getAmcAdminLandingAllowedContracts($get, $allcontracts, $permissions);
 
 		if ($type == 'amc') {
@@ -7328,9 +7340,9 @@ class reactClass extends userClass{
 		}
 
 		$rollups = array();
-		if ($type == 'amc' && count((array)$filtered) > 0) {
+		if ($type == 'amc' && count((array) $filtered) > 0) {
 			$contractIds = array();
-			if (count((array)$filtered) > 0) {
+			if (count((array) $filtered) > 0) {
 				foreach ($filtered as $contract) {
 					$c = is_array($contract) ? $contract : (array) $contract;
 					$contractIds[] = (int) ($c['id'] ?? 0);
@@ -7362,7 +7374,7 @@ class reactClass extends userClass{
 		}
 
 		$rows = array();
-		if (count((array)$filtered) > 0) {
+		if (count((array) $filtered) > 0) {
 			foreach ($filtered as $contract) {
 				$c = is_array($contract) ? $contract : (array) $contract;
 				$contractId = (int) ($c['id'] ?? 0);
@@ -7372,12 +7384,12 @@ class reactClass extends userClass{
 		}
 
 		$return['contracts'] = $rows;
-		$return['total'] = count((array)$rows);
+		$return['total'] = count((array) $rows);
 
 		$gencsql = "SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id =" . $get['company_id'] . " AND is_active = 0 ORDER BY agreement_name ASC";
-						$gencres = $callConfig->getAllRows($gencsql);
+		$gencres = $callConfig->getAllRows($gencsql);
 		$agreement_type = array();
-		foreach($gencres as $red){
+		foreach ($gencres as $red) {
 			$agreement_type[$red->genc_detail_code] = $red;
 		}
 		$return['agreement_type'] = $agreement_type;
@@ -7388,7 +7400,7 @@ class reactClass extends userClass{
 	private function filterAmcAdminLandingAmcContracts($contracts)
 	{
 		$filtered = array();
-		if (count((array)$contracts) > 0) {
+		if (count((array) $contracts) > 0) {
 			foreach ($contracts as $contract) {
 				$c = is_array($contract) ? $contract : (array) $contract;
 				if (strtoupper($c['is_amc_contract'] ?? 'N') == 'Y') {
@@ -7403,7 +7415,7 @@ class reactClass extends userClass{
 	{
 		global $callConfig;
 		$rollups = array();
-		if ($companyId <= 0 || count((array)$contractIds) == 0) {
+		if ($companyId <= 0 || count((array) $contractIds) == 0) {
 			return $rollups;
 		}
 
@@ -7420,7 +7432,7 @@ class reactClass extends userClass{
 			WHERE ca.company_id = {$companyId} AND ca.is_active = 0 AND ca.contract_id IN ({$idList})
 			GROUP BY ca.contract_id";
 		$countRows = $callConfig->getAllRows($countSql);
-		if (count((array)$countRows) > 0) {
+		if (count((array) $countRows) > 0) {
 			foreach ($countRows as $row) {
 				$r = is_array($row) ? $row : (array) $row;
 				$contractId = (int) ($r['contract_id'] ?? 0);
@@ -7456,7 +7468,7 @@ class reactClass extends userClass{
 			)";
 		$assigneeRows = $callConfig->getAllRows($assigneeSql);
 		$assigneesByContract = array();
-		if (count((array)$assigneeRows) > 0) {
+		if (count((array) $assigneeRows) > 0) {
 			foreach ($assigneeRows as $row) {
 				$r = is_array($row) ? $row : (array) $row;
 				$contractId = (int) ($r['contract_id'] ?? 0);
@@ -7474,7 +7486,7 @@ class reactClass extends userClass{
 			}
 		}
 
-		if (count((array)$contractIds) > 0) {
+		if (count((array) $contractIds) > 0) {
 			foreach ($contractIds as $contractId) {
 				$contractId = (int) $contractId;
 				if (!isset($rollups[$contractId])) {
@@ -7492,11 +7504,11 @@ class reactClass extends userClass{
 				}
 				$assigneeMap = $assigneesByContract[$contractId] ?? array();
 				$distinctIds = array_keys($assigneeMap);
-				if (count((array)$distinctIds) == 1) {
+				if (count((array) $distinctIds) == 1) {
 					$first = $assigneeMap[$distinctIds[0]];
 					$rollups[$contractId]['assignee_label'] = $first['name'] != '' ? $first['name'] : '—';
 					$rollups[$contractId]['assignee_type'] = $first['type'] ?? 'Technician';
-				} elseif (count((array)$distinctIds) > 1) {
+				} elseif (count((array) $distinctIds) > 1) {
 					$rollups[$contractId]['assignee_label'] = 'Multiple';
 					$first = reset($assigneeMap);
 					$rollups[$contractId]['assignee_type'] = $first['type'] ?? 'Technician';
@@ -7536,7 +7548,7 @@ class reactClass extends userClass{
 
 		$today = new DateTime();
 		$filtered = array();
-		if (count((array)$contracts) > 0) {
+		if (count((array) $contracts) > 0) {
 			foreach ($contracts as $contract) {
 				$c = is_array($contract) ? $contract : (array) $contract;
 				if (($c['is_active'] ?? 0) != 0) {
@@ -7573,7 +7585,7 @@ class reactClass extends userClass{
 			'typeofaggrements' => $c['typeofaggrements'],
 
 		);
-		if (count((array)$rollup) > 0) {
+		if (count((array) $rollup) > 0) {
 			$row['asset_total'] = (int) ($rollup['asset_total'] ?? 0);
 			$row['asset_assigned'] = (int) ($rollup['asset_assigned'] ?? 0);
 			$row['asset_unassigned'] = (int) ($rollup['asset_unassigned'] ?? 0);
@@ -7589,7 +7601,7 @@ class reactClass extends userClass{
 	private function amcLandingRowsToArray($rows)
 	{
 		$out = array();
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$out[] = is_array($row) ? $row : (array) $row;
 			}
@@ -7610,14 +7622,14 @@ class reactClass extends userClass{
 		$active = 0;
 		$expired = 0;
 		$cancelcontract = 0;
-		if (count((array)$contracts) > 0) {
+		if (count((array) $contracts) > 0) {
 			foreach ($contracts as $contract) {
 				$c = is_array($contract) ? $contract : (array) $contract;
 				if (($c['is_active'] ?? 0) != 0) {
 					continue;
 				}
 				$endDate = $c['end_date'] ?? '';
-				if($c['cancel_status'] == 'Y'){
+				if ($c['cancel_status'] == 'Y') {
 					$cancelcontract++;
 				}
 				if ($endDate != '' && new DateTime($endDate) < $today) {
@@ -7633,7 +7645,7 @@ class reactClass extends userClass{
 	private function buildAmcAdminLandingYearlyChart($contracts)
 	{
 		$contractsByYear = array();
-		if (count((array)$contracts) > 0) {
+		if (count((array) $contracts) > 0) {
 			foreach ($contracts as $contract) {
 				$c = is_array($contract) ? $contract : (array) $contract;
 				$dateValue = '';
@@ -7665,7 +7677,7 @@ class reactClass extends userClass{
 	private function buildAmcAdminLandingLocationsList($locations)
 	{
 		$list = array(array('id' => '', 'location_name' => 'All Locations'));
-		if (count((array)$locations) > 0) {
+		if (count((array) $locations) > 0) {
 			foreach ($locations as $loc) {
 				$l = is_array($loc) ? $loc : (array) $loc;
 				$list[] = array(
@@ -7747,7 +7759,7 @@ class reactClass extends userClass{
 	private function buildAmcAdminLandingContractsByParty($contracts, $partyType)
 	{
 		$filtered = array();
-		if (count((array)$contracts) > 0) {
+		if (count((array) $contracts) > 0) {
 			foreach ($contracts as $contract) {
 				$c = is_array($contract) ? $contract : (array) $contract;
 				if (strtolower(trim((string) ($c['party_type'] ?? ''))) == $partyType) {
@@ -7762,12 +7774,12 @@ class reactClass extends userClass{
 		});
 		$rows = array();
 		$slice = array_slice($filtered, 0, 5);
-		if (count((array)$slice) > 0) {
+		if (count((array) $slice) > 0) {
 			foreach ($slice as $contract) {
 				$rows[] = $this->mapAmcAdminLandingContractRow($contract);
 			}
 		}
-		return array('total' => count((array)$filtered), 'rows' => $rows);
+		return array('total' => count((array) $filtered), 'rows' => $rows);
 	}
 
 	private function buildAmcAdminLandingVisitJoin()
@@ -7806,7 +7818,7 @@ class reactClass extends userClass{
 
 	private function amcAdminLandingAllowedContractsWhere($allowedContractIds)
 	{
-		if (count((array)$allowedContractIds) == 0) {
+		if (count((array) $allowedContractIds) == 0) {
 			return ' AND 1=0';
 		}
 		$idList = implode(',', array_map('intval', $allowedContractIds));
@@ -7854,8 +7866,8 @@ class reactClass extends userClass{
 			return array('status_label' => 'Delayed', 'status_class' => 'bg-danger', 'action' => 'view');
 		}
 		if ($section == 'next_7_days') {
-		    $action = $this->amcAdminLandingVisitHasAssignee($r) ? 'view' : 'assign';
-		    return array('status_label' => 'Scheduled', 'status_class' => 'bg-info', 'action' => $action);
+			$action = $this->amcAdminLandingVisitHasAssignee($r) ? 'view' : 'assign';
+			return array('status_label' => 'Scheduled', 'status_class' => 'bg-info', 'action' => $action);
 		}
 		if (!$this->amcAdminLandingVisitHasAssignee($r)) {
 			return array('status_label' => 'Pending', 'status_class' => 'bg-primary', 'action' => 'assign');
@@ -7895,7 +7907,7 @@ class reactClass extends userClass{
 		);
 
 		$return = array();
-		if (count((array)$sections) > 0) {
+		if (count((array) $sections) > 0) {
 			foreach ($sections as $key => $filter) {
 				$countSql = "SELECT COUNT(*) AS c FROM contract_amc_service_schedules s {$join} WHERE {$baseWhere} AND {$filter}";
 				$countRow = $callConfig->getRow($countSql);
@@ -7903,7 +7915,7 @@ class reactClass extends userClass{
 				$listSql = $listSelect . $filter . " ORDER BY s.planned_service_datetime ASC LIMIT 5";
 				$dbRows = $callConfig->getAllRows($listSql);
 				$rows = array();
-				if (count((array)$dbRows) > 0) {
+				if (count((array) $dbRows) > 0) {
 					foreach ($dbRows as $dbRow) {
 						$rows[] = $this->mapAmcAdminLandingVisitRow($dbRow, $key);
 					}
@@ -7967,7 +7979,7 @@ class reactClass extends userClass{
 		$permissions = $this->amcLandingRowsToArray($dashboardData['permissions'] ?? array());
 		$allowedContracts = $this->getAmcAdminLandingAllowedContracts($get, $allcontracts, $permissions);
 		$allowedContractIds = array();
-		if (count((array)$allowedContracts) > 0) {
+		if (count((array) $allowedContracts) > 0) {
 			foreach ($allowedContracts as $contract) {
 				$allowedContractIds[] = (int) ($contract['id'] ?? 0);
 			}
@@ -8043,7 +8055,7 @@ class reactClass extends userClass{
 			LIMIT {$limit} OFFSET {$offset}";
 		$dbRows = $callConfig->getAllRows($listSql);
 		$rows = array();
-		if (count((array)$dbRows) > 0) {
+		if (count((array) $dbRows) > 0) {
 			foreach ($dbRows as $dbRow) {
 				$rows[] = $this->mapAmcAdminLandingVisitRow($dbRow, $section);
 			}
@@ -8113,7 +8125,7 @@ class reactClass extends userClass{
 			LIMIT 5";
 		$dbRows = $callConfig->getAllRows($sql);
 		$rows = array();
-		if (count((array)$dbRows) > 0) {
+		if (count((array) $dbRows) > 0) {
 			foreach ($dbRows as $dbRow) {
 				$r = is_array($dbRow) ? $dbRow : (array) $dbRow;
 				$sourceType = trim((string) ($r['source_type'] ?? ''));
@@ -8142,7 +8154,7 @@ class reactClass extends userClass{
 
 	private function resolveAmcAdminLandingSuggestedContractId($contracts)
 	{
-		if (count((array)$contracts) > 0) {
+		if (count((array) $contracts) > 0) {
 			foreach ($contracts as $contract) {
 				$c = is_array($contract) ? $contract : (array) $contract;
 				if (strtoupper($c['is_amc_contract'] ?? 'N') == 'Y' && (int) ($c['current_status'] ?? 0) == (int) ST_APPROVED) {
@@ -8170,12 +8182,12 @@ class reactClass extends userClass{
 
 		$contractHeaders = cex_contract_sheet_headers();
 		$sampleRow = array();
-		if (count((array)$contractHeaders) > 0) {
+		if (count((array) $contractHeaders) > 0) {
 			foreach ($contractHeaders as $h) {
 				$sampleRow[] = '';
 			}
 		}
-		if (count((array)$sampleRow) > 0) {
+		if (count((array) $sampleRow) > 0) {
 			$sampleRow[0] = 'C001';
 			$sampleRow[1] = 'amc';
 			$sampleRow[2] = 'Sample AMC Contract';
@@ -8206,7 +8218,7 @@ class reactClass extends userClass{
 		$freqSql = "SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = " . $companyId . " AND is_active = 0 AND genc_code = 'AMCSERVICE' ORDER BY genc_detail_name ASC";
 		$freqDb = $callConfig->getAllRows($freqSql);
 		$freqMerged = $this->mergeAmcServiceFrequencyOptions($freqDb);
-		if (count((array)$freqMerged) > 0) {
+		if (count((array) $freqMerged) > 0) {
 			foreach ($freqMerged as $freqRow) {
 				$freqRow = is_array($freqRow) ? $freqRow : (array) $freqRow;
 				$freqRows[] = array($freqRow['genc_detail_code'] ?? '', $freqRow['genc_detail_name'] ?? '');
@@ -8216,7 +8228,7 @@ class reactClass extends userClass{
 
 		$deptRows = array(array('id', 'department_name'));
 		$deptRes = $callConfig->getAllRows("SELECT id, department_name FROM departments WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY department_name ASC");
-		if (count((array)$deptRes) > 0) {
+		if (count((array) $deptRes) > 0) {
 			foreach ($deptRes as $deptRow) {
 				$deptRow = is_array($deptRow) ? $deptRow : (array) $deptRow;
 				$deptRows[] = array($deptRow['id'] ?? '', $deptRow['department_name'] ?? '');
@@ -8226,7 +8238,7 @@ class reactClass extends userClass{
 
 		$vendorRows = array(array('bp_code', 'company', 'display_name', 'id'));
 		$vendorRes = $callConfig->getAllRows("SELECT id, COALESCE(NULLIF(account_code,''), NULLIF(reference_vendor_code,''), NULLIF(short_name,''), CAST(id AS CHAR)) AS bp_code, company, display_name FROM vendors WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY company ASC");
-		if (count((array)$vendorRes) > 0) {
+		if (count((array) $vendorRes) > 0) {
 			foreach ($vendorRes as $vendorRow) {
 				$vendorRow = is_array($vendorRow) ? $vendorRow : (array) $vendorRow;
 				$vendorRows[] = array($vendorRow['bp_code'] ?? '', $vendorRow['company'] ?? '', $vendorRow['display_name'] ?? '', $vendorRow['id'] ?? '');
@@ -8236,7 +8248,7 @@ class reactClass extends userClass{
 
 		$customerRows = array(array('bp_code', 'company', 'display_name', 'id'));
 		$customerRes = $callConfig->getAllRows("SELECT id, COALESCE(NULLIF(account_code,''), CAST(id AS CHAR)) AS bp_code, company, display_name FROM customers WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY company ASC");
-		if (count((array)$customerRes) > 0) {
+		if (count((array) $customerRes) > 0) {
 			foreach ($customerRes as $customerRow) {
 				$customerRow = is_array($customerRow) ? $customerRow : (array) $customerRow;
 				$customerRows[] = array($customerRow['bp_code'] ?? '', $customerRow['company'] ?? '', $customerRow['display_name'] ?? '', $customerRow['id'] ?? '');
@@ -8246,7 +8258,7 @@ class reactClass extends userClass{
 
 		$locRows = array(array('id', 'location_name'));
 		$locRes = $callConfig->getAllRows("SELECT id, location_name FROM locations WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY location_name ASC");
-		if (count((array)$locRes) > 0) {
+		if (count((array) $locRes) > 0) {
 			foreach ($locRes as $locRow) {
 				$locRow = is_array($locRow) ? $locRow : (array) $locRow;
 				$locRows[] = array($locRow['id'] ?? '', $locRow['location_name'] ?? '');
@@ -8254,9 +8266,9 @@ class reactClass extends userClass{
 		}
 		$sheets[] = array('name' => 'Ref_Locations', 'rows' => $locRows);
 
-		$assetRows = array(array('location_name','asset_code', 'name'));
+		$assetRows = array(array('location_name', 'asset_code', 'name'));
 		$assetRes = $callConfig->getAllRows("SELECT a.asset_code, a.asset_description, l.location_name FROM assets a LEFT JOIN locations l ON l.id = a.asset_location AND l.company_id = a.company_id AND l.is_active = 0 WHERE a.company_id = " . $companyId . " AND a.is_active = 0 ORDER BY a.asset_description ASC");
-		if (count((array)$assetRes) > 0) {
+		if (count((array) $assetRes) > 0) {
 			foreach ($assetRes as $assetRow) {
 				$assetRow = is_array($assetRow) ? $assetRow : (array) $assetRow;
 				$assetRows[] = array($assetRow['location_name'] ?? '', $assetRow['asset_code'] ?? '', $assetRow['asset_description'] ?? '');
@@ -8266,7 +8278,7 @@ class reactClass extends userClass{
 
 		$catRows = array(array('code', 'name'));
 		$catRes = $callConfig->getAllRows("SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = " . $companyId . " AND is_active = 0 AND genc_code = 'CONTRACT_TYPE' ORDER BY genc_detail_name ASC");
-		if (count((array)$catRes) > 0) {
+		if (count((array) $catRes) > 0) {
 			foreach ($catRes as $catRow) {
 				$catRow = is_array($catRow) ? $catRow : (array) $catRow;
 				$catRows[] = array($catRow['genc_detail_code'] ?? '', $catRow['genc_detail_name'] ?? '');
@@ -8276,7 +8288,7 @@ class reactClass extends userClass{
 
 		$ptRows = array(array('id', 'payment_term_name'));
 		$ptRes = $callConfig->getAllRows("SELECT id, payment_term_name FROM payment_terms WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY payment_term_name ASC");
-		if (count((array)$ptRes) > 0) {
+		if (count((array) $ptRes) > 0) {
 			foreach ($ptRes as $ptRow) {
 				$ptRow = is_array($ptRow) ? $ptRow : (array) $ptRow;
 				$ptRows[] = array($ptRow['id'] ?? '', $ptRow['payment_term_name'] ?? '');
@@ -8286,10 +8298,10 @@ class reactClass extends userClass{
 
 		$agrRows = array(array('code', 'name'));
 		$agrRes = $callConfig->getAllRows("SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY agreement_name ASC");
-		if (count((array)$agrRes) == 0) {
+		if (count((array) $agrRes) == 0) {
 			$agrRes = $callConfig->getAllRows("SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = " . $companyId . " AND is_active = 0 AND genc_code = 'AGREEMENTS_TYPE' ORDER BY genc_detail_name ASC");
 		}
-		if (count((array)$agrRes) > 0) {
+		if (count((array) $agrRes) > 0) {
 			foreach ($agrRes as $agrRow) {
 				$agrRow = is_array($agrRow) ? $agrRow : (array) $agrRow;
 				$agrRows[] = array($agrRow['genc_detail_code'] ?? '', $agrRow['genc_detail_name'] ?? '');
@@ -8299,7 +8311,7 @@ class reactClass extends userClass{
 
 		$descRows = array(array('id', 'description_type', 'description'));
 		$descRes = $callConfig->getAllRows("SELECT id, description_type, description FROM description_contracts WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY description_type ASC");
-		if (count((array)$descRes) > 0) {
+		if (count((array) $descRes) > 0) {
 			foreach ($descRes as $descRow) {
 				$descRow = is_array($descRow) ? $descRow : (array) $descRow;
 				$descRows[] = array($descRow['id'] ?? '', $descRow['description_type'] ?? '', $descRow['description'] ?? '');
@@ -8309,7 +8321,7 @@ class reactClass extends userClass{
 
 		$svcRows = array(array('id', 'service_name'));
 		$svcRes = $callConfig->getAllRows("SELECT id, service_name FROM contract_services WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY service_name ASC");
-		if (count((array)$svcRes) > 0) {
+		if (count((array) $svcRes) > 0) {
 			foreach ($svcRes as $svcRow) {
 				$svcRow = is_array($svcRow) ? $svcRow : (array) $svcRow;
 				$svcRows[] = array($svcRow['id'] ?? '', $svcRow['service_name'] ?? '');
@@ -8319,7 +8331,7 @@ class reactClass extends userClass{
 
 		$userRows = array(array('id', 'display_name', 'user_email'));
 		$userRes = $callConfig->getAllRows("SELECT id, display_name, user_email FROM application_users WHERE company_id = " . $companyId . " AND is_active = 0 ORDER BY display_name ASC");
-		if (count((array)$userRes) > 0) {
+		if (count((array) $userRes) > 0) {
 			foreach ($userRes as $userRow) {
 				$userRow = is_array($userRow) ? $userRow : (array) $userRow;
 				$userRows[] = array($userRow['id'] ?? '', $userRow['display_name'] ?? '', $userRow['user_email'] ?? '');
@@ -8327,16 +8339,19 @@ class reactClass extends userClass{
 		}
 		$sheets[] = array('name' => 'Ref_Users', 'rows' => $userRows);
 
-		$sheets[] = array('name' => 'Instructions', 'rows' => array(
-			array('Contracts Excel Import — Instructions'),
-			array('1. Fill Contracts sheet: one row per contract. import_ref must be unique (e.g. C001).'),
-			array('2. contract_type: standard or amc. For amc, fill Locations and Assets sheets with matching import_ref.'),
-			array('3. party_type: vendor, customer, or inhouse. Resolve party via party_bp_code (account_code / vendor code / id) or party_name using Ref sheets.'),
-			array('4. payment_plan: billing_cycle (auto milestones) or milestones (fill Milestones sheet).'),
-			array('5. locations_csv (standard contracts): comma-separated location names or IDs from Ref_Locations.'),
-			array('6. services_csv: comma-separated service names from Ref_Services.'),
-			array('7. Delete sample row before import or replace with real data.'),
-		));
+		$sheets[] = array(
+			'name' => 'Instructions',
+			'rows' => array(
+				array('Contracts Excel Import — Instructions'),
+				array('1. Fill Contracts sheet: one row per contract. import_ref must be unique (e.g. C001).'),
+				array('2. contract_type: standard or amc. For amc, fill Locations and Assets sheets with matching import_ref.'),
+				array('3. party_type: vendor, customer, or inhouse. Resolve party via party_bp_code (account_code / vendor code / id) or party_name using Ref sheets.'),
+				array('4. payment_plan: billing_cycle (auto milestones) or milestones (fill Milestones sheet).'),
+				array('5. locations_csv (standard contracts): comma-separated location names or IDs from Ref_Locations.'),
+				array('6. services_csv: comma-separated service names from Ref_Services.'),
+				array('7. Delete sample row before import or replace with real data.'),
+			)
+		);
 
 		$fileName = 'contracts_import_template_' . $companyId . '_' . time() . '.xlsx';
 		$relPath = 'uploads/contracts/templates/' . $fileName;
@@ -8397,14 +8412,14 @@ class reactClass extends userClass{
 		$validation = $this->cexValidateContractsExcelData($contracts, $locations, $assets, $milestones, $lookups);
 
 		$batchStatus = 'validated';
-		if (count((array)$validation['errors']) > 0 && count((array)$validation['valid_import_refs']) == 0) {
+		if (count((array) $validation['errors']) > 0 && count((array) $validation['valid_import_refs']) == 0) {
 			$batchStatus = 'failed';
 		}
 		$summaryJson = json_encode(array(
 			'validation' => array(
-				'valid_count' => count((array)$validation['valid_import_refs']),
-				'error_count' => count((array)$validation['errors']),
-				'warning_count' => count((array)$validation['warnings']),
+				'valid_count' => count((array) $validation['valid_import_refs']),
+				'error_count' => count((array) $validation['errors']),
+				'warning_count' => count((array) $validation['warnings']),
 				'validated_at' => date('Y-m-d H:i:s'),
 			),
 		));
@@ -8426,138 +8441,138 @@ class reactClass extends userClass{
 		);
 	}
 	public function importInsertContractReact($get, $post)
-    {
-        global $callConfig;
-        $return = array();
-        $return['post'] = $post;
-        $return['get'] = $get;
-        $locations = '';
-        if (isset($post['locations']) && is_array($post['locations'])) {
-            $locations = json_encode($post['locations']);
-        }
+	{
+		global $callConfig;
+		$return = array();
+		$return['post'] = $post;
+		$return['get'] = $get;
+		$locations = '';
+		if (isset($post['locations']) && is_array($post['locations'])) {
+			$locations = json_encode($post['locations']);
+		}
 
-        $contract_services_id = '';
-        if (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) {
-            $contract_services_id = json_encode($post['contract_services_id']);
-        }
+		$contract_services_id = '';
+		if (isset($post['contract_services_id']) && is_array($post['contract_services_id'])) {
+			$contract_services_id = json_encode($post['contract_services_id']);
+		}
 
-        $contact_personsary = array();
-        if (isset($post['contact_persons']) && is_array($post['contact_persons']) && count((array)($post['contact_persons']['name'] ?? array())) > 0) {
-            foreach ($post['contact_persons']['name'] as $key => $conpers) {
-                if ($post['contact_persons']['name'][$key] != "" && $post['contact_persons']['number'][$key] != "") {
-                    $contact_personsary[] = array(
-                        'name' => $post['contact_persons']['name'][$key],
-                        'email' => $post['contact_persons']['email'][$key],
-                        'number' => $post['contact_persons']['number'][$key]
-                    );
-                }
-            }
-        }
-        $contact_persons = json_encode($contact_personsary);
+		$contact_personsary = array();
+		if (isset($post['contact_persons']) && is_array($post['contact_persons']) && count((array) ($post['contact_persons']['name'] ?? array())) > 0) {
+			foreach ($post['contact_persons']['name'] as $key => $conpers) {
+				if ($post['contact_persons']['name'][$key] != "" && $post['contact_persons']['number'][$key] != "") {
+					$contact_personsary[] = array(
+						'name' => $post['contact_persons']['name'][$key],
+						'email' => $post['contact_persons']['email'][$key],
+						'number' => $post['contact_persons']['number'][$key]
+					);
+				}
+			}
+		}
+		$contact_persons = json_encode($contact_personsary);
 
-        $contract_type = 'Contract';
-        if (!empty($post['parent_contract_id']) && $post['parent_contract_id'] != 0) {
-            $contract_type = 'SOW';
-        }
+		$contract_type = 'Contract';
+		if (!empty($post['parent_contract_id']) && $post['parent_contract_id'] != 0) {
+			$contract_type = 'SOW';
+		}
 
-        $isAmcContract = (!empty($post['is_amc_contract']) && in_array($post['is_amc_contract'], array('Y', 'Yes', '1', 1), true)) ? 'Y' : 'N';
+		$isAmcContract = (!empty($post['is_amc_contract']) && in_array($post['is_amc_contract'], array('Y', 'Yes', '1', 1), true)) ? 'Y' : 'N';
 
-        $insert_array = array(
-            'contract_name' => $post['contract_name'],
-            'renewal_frequency' => $post['renewal_frequency'],
-            'parent_contract_id' => $post['parent_contract_id'],
-            'contract_type' => $contract_type,
-            'invoice_number' => $post['invoice_number'],
-            'rt_number' => $post['rt_number'],
-            'business_code' => $post['business_code'],
-            'party_type' => $post['party_type'],
-            'contract_owner_name' => $post['contract_owner_name'],
-            'contract_owner_email' => $post['contract_owner_email'],
-            'contract_owner_number' => $post['contract_owner_number'],
-            'party_id' => $post['party_id'],
-            'department_id' => $post['department_id'],
-            'type_of_contract_id' => $post['type_of_contract_id'],
-            'start_date' => $this->dateconvertdbformat($post['start_date']),
-            'end_date' => $this->dateconvertdbformat($post['end_date']),
-            'contract_amount' => $post['contract_amount'],
-            'description' => $post['description'],
-            'additional_notes' => $post['additional_notes'],
-            'payment_term_id' => $post['payment_term_id'],
-            'termination_condition' => $post['termination_condition'],
-            'contract_status' => $post['contract_status'],
-            'current_status' => 0,
-            'auto_renew' => (isset($post['auto_renew']) && ($post['auto_renew'] == '1' || $post['auto_renew'] == 'on' || $post['auto_renew'] === true || $post['auto_renew'] == 'Y')) ? 'Y' : 'N',
-            'renew_type' => $post['renew_type'],
-            'state' => $post['state'],
-            'isp' => $post['isp'],
-            'paid_by' => $post['paid_by'],
-            'internet_charges' => $post['internet_charges'],
-            'hub_spoc_name' => $post['hub_spoc_name'],
-            'hub_spoc_number' => $post['hub_spoc_number'],
-            'wifi_pass' => $post['wifi_pass'],
-            'wifi_provider' => $post['wifi_provider'],
-            'additional_document' => $post['additional_document'],
-            'contract_payment_terms' => $post['contract_payment_terms'],
-            'typeofaggrements' => $post['typeofaggrements'],
-            'description_id' => $post['description_id'],
-            'locations' => $locations,
-            'is_oem' => (isset($post['is_oem']) && ($post['is_oem'] == 'Yes' || $post['is_oem'] == 'Y')) ? 'Y' : 'N',
-            'oem_registration_number' => $post['oem_registration_number'] ?? '',
-            'oem_distributor_name' => $post['oem_distributor_name'] ?? '',
-            'oem_product_category' => $post['oem_product_category'] ?? '',
-            'cancel_status' => 'N',
-            'is_amc_contract' => $isAmcContract,
-            'contract_services_id' => $contract_services_id,
-            'contact_persons' => $contact_persons,
-            'company_id' => $get['company_id'],
-            'is_active' => 0,
-            'transaction_no' => $this->toGetApplicationSerialNumber('contracts', $post),
-            'created_by' => $get['user_id'],
-            'originator' => $get['user_id'],
-            'created_date' => date('Y-m-d H:i:s'),
-        );
-        if (trim((string) ($insert_array['payment_term_id'] ?? '')) == '') {
-            unset($insert_array['payment_term_id']);
-        }
-        $insert_data = $callConfig->insertRecord('contracts', $insert_array);
-	$contract_id = $insert_data['LASTID'] ?? 0;
-        $return['contract_result'] = $insert_data;
+		$insert_array = array(
+			'contract_name' => $post['contract_name'],
+			'renewal_frequency' => $post['renewal_frequency'],
+			'parent_contract_id' => $post['parent_contract_id'],
+			'contract_type' => $contract_type,
+			'invoice_number' => $post['invoice_number'],
+			'rt_number' => $post['rt_number'],
+			'business_code' => $post['business_code'],
+			'party_type' => $post['party_type'],
+			'contract_owner_name' => $post['contract_owner_name'],
+			'contract_owner_email' => $post['contract_owner_email'],
+			'contract_owner_number' => $post['contract_owner_number'],
+			'party_id' => $post['party_id'],
+			'department_id' => $post['department_id'],
+			'type_of_contract_id' => $post['type_of_contract_id'],
+			'start_date' => $this->dateconvertdbformat($post['start_date']),
+			'end_date' => $this->dateconvertdbformat($post['end_date']),
+			'contract_amount' => $post['contract_amount'],
+			'description' => $post['description'],
+			'additional_notes' => $post['additional_notes'],
+			'payment_term_id' => $post['payment_term_id'],
+			'termination_condition' => $post['termination_condition'],
+			'contract_status' => $post['contract_status'],
+			'current_status' => 0,
+			'auto_renew' => (isset($post['auto_renew']) && ($post['auto_renew'] == '1' || $post['auto_renew'] == 'on' || $post['auto_renew'] === true || $post['auto_renew'] == 'Y')) ? 'Y' : 'N',
+			'renew_type' => $post['renew_type'],
+			'state' => $post['state'],
+			'isp' => $post['isp'],
+			'paid_by' => $post['paid_by'],
+			'internet_charges' => $post['internet_charges'],
+			'hub_spoc_name' => $post['hub_spoc_name'],
+			'hub_spoc_number' => $post['hub_spoc_number'],
+			'wifi_pass' => $post['wifi_pass'],
+			'wifi_provider' => $post['wifi_provider'],
+			'additional_document' => $post['additional_document'],
+			'contract_payment_terms' => $post['contract_payment_terms'],
+			'typeofaggrements' => $post['typeofaggrements'],
+			'description_id' => $post['description_id'],
+			'locations' => $locations,
+			'is_oem' => (isset($post['is_oem']) && ($post['is_oem'] == 'Yes' || $post['is_oem'] == 'Y')) ? 'Y' : 'N',
+			'oem_registration_number' => $post['oem_registration_number'] ?? '',
+			'oem_distributor_name' => $post['oem_distributor_name'] ?? '',
+			'oem_product_category' => $post['oem_product_category'] ?? '',
+			'cancel_status' => 'N',
+			'is_amc_contract' => $isAmcContract,
+			'contract_services_id' => $contract_services_id,
+			'contact_persons' => $contact_persons,
+			'company_id' => $get['company_id'],
+			'is_active' => 0,
+			'transaction_no' => $this->toGetApplicationSerialNumber('contracts', $post),
+			'created_by' => $get['user_id'],
+			'originator' => $get['user_id'],
+			'created_date' => date('Y-m-d H:i:s'),
+		);
+		if (trim((string) ($insert_array['payment_term_id'] ?? '')) == '') {
+			unset($insert_array['payment_term_id']);
+		}
+		$insert_data = $callConfig->insertRecord('contracts', $insert_array);
+		$contract_id = $insert_data['LASTID'] ?? 0;
+		$return['contract_result'] = $insert_data;
 
-        if (($insert_data['status'] ?? '') == 'sucess' || ($insert_data['status'] ?? '') == 'success') {
-            if (isset($post['milestones']) && is_array($post['milestones']) && count((array)$post['milestones']) > 0) {
-                foreach ($post['milestones'] as $milestone) {
-                    if (empty(trim($milestone['milestone_name'] ?? ''))) {
-                        continue;
-                    }
-                    $milestoneData = array(
-                        'company_id' => $get['company_id'],
-                        'transaction_id' => $contract_id,
-                        'transaction_date' => date('Y-m-d H:i:s'),
-                        'milestone' => trim($milestone['milestone_name']),
-                        'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null,
-                        'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0,
-                        'is_active' => 0,
-                        'current_status' => 0,
-                        'status_date' => date('Y-m-d H:i:s'),
-                        'created_date' => date('Y-m-d H:i:s'),
-                        'created_by' => $get['user_id'],
-                        'updated_by' => $get['user_id'],
-                        'updated_date' => date('Y-m-d H:i:s'),
-                    );
-                    $milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
-                    $return['milestone_inserts'][] = $milestoneInsert;
-                }
-            } else {
-                $return['milestone_inserts'] = 'No milestones found in POST.';
-            }
+		if (($insert_data['status'] ?? '') == 'sucess' || ($insert_data['status'] ?? '') == 'success') {
+			if (isset($post['milestones']) && is_array($post['milestones']) && count((array) $post['milestones']) > 0) {
+				foreach ($post['milestones'] as $milestone) {
+					if (empty(trim($milestone['milestone_name'] ?? ''))) {
+						continue;
+					}
+					$milestoneData = array(
+						'company_id' => $get['company_id'],
+						'transaction_id' => $contract_id,
+						'transaction_date' => date('Y-m-d H:i:s'),
+						'milestone' => trim($milestone['milestone_name']),
+						'milestone_date' => !empty($milestone['milestone_date']) ? $this->dateconvertdbformat($milestone['milestone_date']) : null,
+						'milestone_price' => !empty($milestone['milestone_price']) ? (float) $milestone['milestone_price'] : 0,
+						'is_active' => 0,
+						'current_status' => 0,
+						'status_date' => date('Y-m-d H:i:s'),
+						'created_date' => date('Y-m-d H:i:s'),
+						'created_by' => $get['user_id'],
+						'updated_by' => $get['user_id'],
+						'updated_date' => date('Y-m-d H:i:s'),
+					);
+					$milestoneInsert = $callConfig->insertRecord('contract_milestones', $milestoneData);
+					$return['milestone_inserts'][] = $milestoneInsert;
+				}
+			} else {
+				$return['milestone_inserts'] = 'No milestones found in POST.';
+			}
 
-            if ($isAmcContract == 'Y') {
-                $return['amc_contract_result'] = $this->saveAmcContractData($contract_id, $get, $post);
-            }
-        }
+			if ($isAmcContract == 'Y') {
+				$return['amc_contract_result'] = $this->saveAmcContractData($contract_id, $get, $post);
+			}
+		}
 
-        return $return;
-    }
+		return $return;
+	}
 	public function importContractsExcel($get, $post)
 	{
 		global $callConfig;
@@ -8587,7 +8602,7 @@ class reactClass extends userClass{
 		$summaryItems = array();
 		$successCount = 0;
 		$failCount = 0;
-		if (count((array)$validation['valid_import_refs']) > 0) {
+		if (count((array) $validation['valid_import_refs']) > 0) {
 			foreach ($validation['valid_import_refs'] as $importRef) {
 				$contractPreview = $validation['contracts_by_ref'][$importRef] ?? null;
 				if ($contractPreview == null || empty($contractPreview['ok'])) {
@@ -8695,7 +8710,7 @@ class reactClass extends userClass{
 		$milestones = $this->cexDecodeImportJsonField($post['milestones_data'] ?? ($post['parsed_milestones'] ?? array()));
 
 		$tempPath = trim((string) ($post['temp_xlsx'] ?? ($post['file_path'] ?? '')));
-		if ($tempPath != '' && count((array)$contracts) == 0) {
+		if ($tempPath != '' && count((array) $contracts) == 0) {
 			$absPath = $tempPath;
 			if (!file_exists($absPath)) {
 				$absPath = dirname(__DIR__) . '/' . ltrim(str_replace('\\', '/', $tempPath), '/');
@@ -8714,7 +8729,7 @@ class reactClass extends userClass{
 			}
 		}
 
-		if (count((array)$contracts) == 0) {
+		if (count((array) $contracts) == 0) {
 			return array('error' => 'No contract rows found in upload');
 		}
 
@@ -8756,7 +8771,7 @@ class reactClass extends userClass{
 		);
 
 		$deptRes = $callConfig->getAllRows("SELECT id, department_name FROM departments WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$deptRes) > 0) {
+		if (count((array) $deptRes) > 0) {
 			foreach ($deptRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$key = strtolower(trim((string) ($row['department_name'] ?? '')));
@@ -8768,12 +8783,12 @@ class reactClass extends userClass{
 		}
 
 		$vendorRes = $callConfig->getAllRows("SELECT id, account_code, reference_vendor_code, short_name, company, display_name FROM vendors WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$vendorRes) > 0) {
+		if (count((array) $vendorRes) > 0) {
 			foreach ($vendorRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$id = (int) ($row['id'] ?? 0);
 				$names = array($row['company'] ?? '', $row['display_name'] ?? '');
-				if (count((array)$names) > 0) {
+				if (count((array) $names) > 0) {
 					foreach ($names as $name) {
 						$key = strtolower(trim((string) $name));
 						if ($key != '') {
@@ -8782,7 +8797,7 @@ class reactClass extends userClass{
 					}
 				}
 				$bpCandidates = array($row['account_code'] ?? '', $row['reference_vendor_code'] ?? '', $row['short_name'] ?? '', (string) $id);
-				if (count((array)$bpCandidates) > 0) {
+				if (count((array) $bpCandidates) > 0) {
 					foreach ($bpCandidates as $bpRaw) {
 						$bp = strtolower(trim((string) $bpRaw));
 						if ($bp != '') {
@@ -8794,12 +8809,12 @@ class reactClass extends userClass{
 		}
 
 		$custRes = $callConfig->getAllRows("SELECT id, account_code, company, display_name FROM customers WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$custRes) > 0) {
+		if (count((array) $custRes) > 0) {
 			foreach ($custRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$id = (int) ($row['id'] ?? 0);
 				$names = array($row['company'] ?? '', $row['display_name'] ?? '');
-				if (count((array)$names) > 0) {
+				if (count((array) $names) > 0) {
 					foreach ($names as $name) {
 						$key = strtolower(trim((string) $name));
 						if ($key != '') {
@@ -8808,7 +8823,7 @@ class reactClass extends userClass{
 					}
 				}
 				$bpCandidates = array($row['account_code'] ?? '', (string) $id);
-				if (count((array)$bpCandidates) > 0) {
+				if (count((array) $bpCandidates) > 0) {
 					foreach ($bpCandidates as $bpRaw) {
 						$bp = strtolower(trim((string) $bpRaw));
 						if ($bp != '') {
@@ -8820,7 +8835,7 @@ class reactClass extends userClass{
 		}
 
 		$locRes = $callConfig->getAllRows("SELECT id, location_name FROM locations WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$locRes) > 0) {
+		if (count((array) $locRes) > 0) {
 			foreach ($locRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$id = (int) ($row['id'] ?? 0);
@@ -8833,7 +8848,7 @@ class reactClass extends userClass{
 		}
 
 		$assetRes = $callConfig->getAllRows("SELECT id, asset_code, asset_description FROM assets WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$assetRes) > 0) {
+		if (count((array) $assetRes) > 0) {
 			foreach ($assetRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$id = (int) ($row['id'] ?? 0);
@@ -8849,7 +8864,7 @@ class reactClass extends userClass{
 		}
 
 		$svcRes = $callConfig->getAllRows("SELECT id, service_name FROM contract_services WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$svcRes) > 0) {
+		if (count((array) $svcRes) > 0) {
 			foreach ($svcRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$id = (int) ($row['id'] ?? 0);
@@ -8862,7 +8877,7 @@ class reactClass extends userClass{
 		}
 
 		$ptRes = $callConfig->getAllRows("SELECT id, payment_term_name FROM payment_terms WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$ptRes) > 0) {
+		if (count((array) $ptRes) > 0) {
 			foreach ($ptRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$id = (int) ($row['id'] ?? 0);
@@ -8875,7 +8890,7 @@ class reactClass extends userClass{
 		}
 
 		$catRes = $callConfig->getAllRows("SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = " . $companyId . " AND is_active = 0 AND genc_code = 'CONTRACT_TYPE'");
-		if (count((array)$catRes) > 0) {
+		if (count((array) $catRes) > 0) {
 			foreach ($catRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$code = trim((string) ($row['genc_detail_code'] ?? ''));
@@ -8888,10 +8903,10 @@ class reactClass extends userClass{
 		}
 
 		$agrRes = $callConfig->getAllRows("SELECT id AS genc_detail_code, agreement_name AS genc_detail_name FROM contract_agreement_types WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$agrRes) == 0) {
+		if (count((array) $agrRes) == 0) {
 			$agrRes = $callConfig->getAllRows("SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = " . $companyId . " AND is_active = 0 AND genc_code = 'AGREEMENTS_TYPE'");
 		}
-		if (count((array)$agrRes) > 0) {
+		if (count((array) $agrRes) > 0) {
 			foreach ($agrRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$code = trim((string) ($row['genc_detail_code'] ?? ''));
@@ -8904,7 +8919,7 @@ class reactClass extends userClass{
 		}
 
 		$descRes = $callConfig->getAllRows("SELECT id, description_type, description FROM description_contracts WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$descRes) > 0) {
+		if (count((array) $descRes) > 0) {
 			foreach ($descRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$id = (int) ($row['id'] ?? 0);
@@ -8921,7 +8936,7 @@ class reactClass extends userClass{
 		}
 
 		$userRes = $callConfig->getAllRows("SELECT id, display_name, user_email FROM application_users WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$userRes) > 0) {
+		if (count((array) $userRes) > 0) {
 			foreach ($userRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$id = (int) ($row['id'] ?? 0);
@@ -8937,7 +8952,7 @@ class reactClass extends userClass{
 		}
 
 		$empRes = $callConfig->getAllRows("SELECT id, display_name, emp_code FROM employees WHERE company_id = " . $companyId . " AND is_active = 0");
-		if (count((array)$empRes) > 0) {
+		if (count((array) $empRes) > 0) {
 			foreach ($empRes as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$id = (int) ($row['id'] ?? 0);
@@ -8955,7 +8970,7 @@ class reactClass extends userClass{
 
 		$freqDb = $callConfig->getAllRows("SELECT genc_detail_code, genc_detail_name FROM general_code_details WHERE company_id = " . $companyId . " AND is_active = 0 AND genc_code = 'AMCSERVICE'");
 		$freqMerged = $this->mergeAmcServiceFrequencyOptions($freqDb);
-		if (count((array)$freqMerged) > 0) {
+		if (count((array) $freqMerged) > 0) {
 			foreach ($freqMerged as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$code = $this->normalizeAmcServiceOn($row['genc_detail_code'] ?? '');
@@ -8973,7 +8988,7 @@ class reactClass extends userClass{
 	private function cexGroupRowsByImportRef($rows)
 	{
 		$grouped = array();
-		if (count((array)$rows) > 0) {
+		if (count((array) $rows) > 0) {
 			foreach ($rows as $row) {
 				$row = is_array($row) ? $row : (array) $row;
 				$ref = trim((string) ($row['import_ref'] ?? ''));
@@ -9045,7 +9060,7 @@ class reactClass extends userClass{
 			return $items;
 		}
 		$parts = preg_split('/\s*,\s*/', $csv);
-		if (count((array)$parts) > 0) {
+		if (count((array) $parts) > 0) {
 			foreach ($parts as $part) {
 				$part = trim((string) $part);
 				if ($part != '') {
@@ -9070,7 +9085,7 @@ class reactClass extends userClass{
 		$milestonesByRef = $this->cexGroupRowsByImportRef($milestones);
 
 		$locationPreviews = array();
-		if (count((array)$locations) > 0) {
+		if (count((array) $locations) > 0) {
 			foreach ($locations as $locRow) {
 				$locRow = is_array($locRow) ? $locRow : (array) $locRow;
 				$locErrors = array();
@@ -9085,12 +9100,12 @@ class reactClass extends userClass{
 				} elseif ($locName != '') {
 					$locErrors[] = 'Unknown location: ' . $locName;
 				}
-				$locationPreviews[] = array('row' => $locRow, 'import_ref' => $ref, 'ok' => count((array)$locErrors) == 0, 'errors' => $locErrors, 'resolved' => array('location_id' => $locId));
+				$locationPreviews[] = array('row' => $locRow, 'import_ref' => $ref, 'ok' => count((array) $locErrors) == 0, 'errors' => $locErrors, 'resolved' => array('location_id' => $locId));
 			}
 		}
 
 		$assetPreviews = array();
-		if (count((array)$assets) > 0) {
+		if (count((array) $assets) > 0) {
 			foreach ($assets as $assetRow) {
 				$assetRow = is_array($assetRow) ? $assetRow : (array) $assetRow;
 				$assetErrors = array();
@@ -9113,7 +9128,7 @@ class reactClass extends userClass{
 				$assetPreviews[] = array(
 					'row' => $assetRow,
 					'import_ref' => $ref,
-					'ok' => count((array)$assetErrors) == 0,
+					'ok' => count((array) $assetErrors) == 0,
 					'errors' => $assetErrors,
 					'resolved' => array('asset_id' => $assetId, 'asset_name' => $assetName, 'service_frequency' => $freqCode),
 				);
@@ -9121,7 +9136,7 @@ class reactClass extends userClass{
 		}
 
 		$milestonePreviews = array();
-		if (count((array)$milestones) > 0) {
+		if (count((array) $milestones) > 0) {
 			foreach ($milestones as $msRow) {
 				$msRow = is_array($msRow) ? $msRow : (array) $msRow;
 				$msErrors = array();
@@ -9133,7 +9148,7 @@ class reactClass extends userClass{
 				$milestonePreviews[] = array(
 					'row' => $msRow,
 					'import_ref' => $ref,
-					'ok' => count((array)$msErrors) == 0,
+					'ok' => count((array) $msErrors) == 0,
 					'errors' => $msErrors,
 					'resolved' => array(
 						'milestone_name' => trim((string) ($msRow['milestone_name'] ?? '')),
@@ -9144,7 +9159,7 @@ class reactClass extends userClass{
 			}
 		}
 
-		if (count((array)$contracts) > 0) {
+		if (count((array) $contracts) > 0) {
 			foreach ($contracts as $contractRow) {
 				$contractRow = is_array($contractRow) ? $contractRow : (array) $contractRow;
 				$rowErrors = array();
@@ -9270,7 +9285,7 @@ class reactClass extends userClass{
 
 				$serviceIds = array();
 				$serviceParts = $this->cexParseCsvValues($contractRow['services_csv'] ?? '');
-				if (count((array)$serviceParts) > 0) {
+				if (count((array) $serviceParts) > 0) {
 					foreach ($serviceParts as $svcPart) {
 						$svcKey = strtolower(trim((string) $svcPart));
 						if (ctype_digit($svcPart) && isset($lookups['services_by_id'][(int) $svcPart])) {
@@ -9289,11 +9304,11 @@ class reactClass extends userClass{
 
 				if ($contractType == 'amc') {
 					$locRows = $locationsByRef[$importRef] ?? array();
-					if (count((array)$locRows) == 0) {
+					if (count((array) $locRows) == 0) {
 						$rowErrors[] = 'AMC contract requires at least one Locations sheet row';
 					} else {
 						$locIdx = 0;
-						if (count((array)$locRows) > 0) {
+						if (count((array) $locRows) > 0) {
 							foreach ($locRows as $locRow) {
 								$locName = trim((string) ($locRow['location_name'] ?? ''));
 								$locKey = strtolower($locName);
@@ -9318,7 +9333,7 @@ class reactClass extends userClass{
 
 								$amcAsset[$locIdx] = array();
 								$assetRowsForRef = $assetsByRef[$importRef] ?? array();
-								if (count((array)$assetRowsForRef) > 0) {
+								if (count((array) $assetRowsForRef) > 0) {
 									foreach ($assetRowsForRef as $assetRow) {
 										$assetLocName = trim((string) ($assetRow['location_name'] ?? ''));
 										if ($assetLocName != '' && strcasecmp($assetLocName, $locName) != 0) {
@@ -9348,9 +9363,9 @@ class reactClass extends userClass{
 						}
 					}
 					$hasAsset = false;
-					if (count((array)$amcAsset) > 0) {
+					if (count((array) $amcAsset) > 0) {
 						foreach ($amcAsset as $assetList) {
-							if (count((array)$assetList) > 0) {
+							if (count((array) $assetList) > 0) {
 								$hasAsset = true;
 								break;
 							}
@@ -9361,7 +9376,7 @@ class reactClass extends userClass{
 					}
 				} else {
 					$locParts = $this->cexParseCsvValues($contractRow['locations_csv'] ?? '');
-					if (count((array)$locParts) > 0) {
+					if (count((array) $locParts) > 0) {
 						foreach ($locParts as $locPart) {
 							$locKey = strtolower(trim((string) $locPart));
 							if (ctype_digit($locPart) && isset($lookups['locations_by_id'][(int) $locPart])) {
@@ -9378,11 +9393,11 @@ class reactClass extends userClass{
 				$resolvedMilestones = array();
 				if ($paymentPlan == 'milestones') {
 					$msRows = $milestonesByRef[$importRef] ?? array();
-					if (count((array)$msRows) == 0) {
+					if (count((array) $msRows) == 0) {
 						$rowErrors[] = 'payment_plan milestones requires Milestones sheet rows';
 					} else {
 						$msTotal = 0;
-						if (count((array)$msRows) > 0) {
+						if (count((array) $msRows) > 0) {
 							foreach ($msRows as $msRow) {
 								$msName = trim((string) ($msRow['milestone_name'] ?? ''));
 								if ($msName == '') {
@@ -9440,7 +9455,7 @@ class reactClass extends userClass{
 				$preview = array(
 					'row' => $contractRow,
 					'import_ref' => $importRef,
-					'ok' => count((array)$rowErrors) == 0,
+					'ok' => count((array) $rowErrors) == 0,
 					'errors' => $rowErrors,
 					'resolved' => array(
 						'contract_type' => $contractType,
@@ -9475,7 +9490,7 @@ class reactClass extends userClass{
 					if ($preview['ok']) {
 						$validImportRefs[] = $importRef;
 					} else {
-						if (count((array)$rowErrors) > 0) {
+						if (count((array) $rowErrors) > 0) {
 							foreach ($rowErrors as $errMsg) {
 								$errors[] = 'import_ref ' . $importRef . ': ' . $errMsg;
 							}
@@ -9646,6 +9661,6 @@ class reactClass extends userClass{
 	}
 
 
-	}
+}
 
 

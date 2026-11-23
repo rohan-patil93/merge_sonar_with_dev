@@ -2,7 +2,8 @@
 date_default_timezone_set('Asia/Kolkata');
 class SecurityClass
 {
-    public function getVisitorsReportData($get){
+    public function getVisitorsReportData($get)
+    {
         global $callConfig;
         $return = array();
         $date = $get['date'] ?? '';
@@ -25,7 +26,7 @@ class SecurityClass
             $whr .= " AND LOWER(visit_type) = '" . $callConfig->real_escape_string(strtolower($visit_type)) . "' ";
         }
 
-        $query = "SELECT * FROM visitor_logs WHERE company_id = " . (int)$get['company_id'] . " AND is_active = 0 " . $whr . " ORDER BY in_datetime DESC";
+        $query = "SELECT * FROM visitor_logs WHERE company_id = " . (int) $get['company_id'] . " AND is_active = 0 " . $whr . " ORDER BY in_datetime DESC";
         $return['query'] = $query;
         $data = $callConfig->getAllRows($query);
         $return['visitor_logs_res'] = $data;
@@ -33,42 +34,42 @@ class SecurityClass
     }
 
 
-   public function getVisitorsDashboardData($get)
-{
-    global $callConfig;
-    // ---------- Existing totals (unchanged) ----------
-    $location_id = '';
-    if (isset($get['location_id']) && $get['location_id'] > 0) {
-        $location_id = ' AND location_id=' . $get['location_id'];
-    }
+    public function getVisitorsDashboardData($get)
+    {
+        global $callConfig;
+        // ---------- Existing totals (unchanged) ----------
+        $location_id = '';
+        if (isset($get['location_id']) && $get['location_id'] > 0) {
+            $location_id = ' AND location_id=' . $get['location_id'];
+        }
 
-    $queryTotals = "SELECT
+        $queryTotals = "SELECT
                 COUNT(*) AS total_visitors,
                 SUM(in_datetime >= CURDATE() AND in_datetime < CURDATE() + INTERVAL 1 DAY) AS today_visitors,
                 SUM(in_datetime >= CURDATE() - INTERVAL 1 DAY AND in_datetime < CURDATE()) AS yesterday_visitors,
                 SUM(in_datetime >= CURDATE() - INTERVAL 7 DAY AND in_datetime < CURDATE() + INTERVAL 1 DAY) AS last_7days_visitors
             FROM visitor_logs
             WHERE company_id = {$get['company_id']} AND is_active = 0 $location_id";
-    $data = (array) $callConfig->getRow($queryTotals);
+        $data = (array) $callConfig->getRow($queryTotals);
 
-    $return = [];
-    $return['total_visitors'] = (int) ($data['total_visitors'] ?? 0);
-    $return['today_visitors'] = (int) ($data['today_visitors'] ?? 0);
-    $return['yesterday_visitors'] = (int) ($data['yesterday_visitors'] ?? 0);
-    $return['last_7days_visitors'] = (int) ($data['last_7days_visitors'] ?? 0);
+        $return = [];
+        $return['total_visitors'] = (int) ($data['total_visitors'] ?? 0);
+        $return['today_visitors'] = (int) ($data['today_visitors'] ?? 0);
+        $return['yesterday_visitors'] = (int) ($data['yesterday_visitors'] ?? 0);
+        $return['last_7days_visitors'] = (int) ($data['last_7days_visitors'] ?? 0);
 
-    // ---------- NEW: per-type breakdown for all 4 periods ----------
-    // Definitions:
-    // TOTAL   = arrivals (in_datetime) in that period
-    // OUT     = departures (out_datetime) in that period
-    // IN ONLY = people still inside now (out_datetime IS NULL) and (optionally) who entered in that period
-    // For clarity to users, we’ll count IN ONLY as:
-    //   - TODAY: in in [today..tomorrow) AND out IS NULL
-    //   - YESTERDAY: in in [yesterday..today) AND out IS NULL
-    //   - LAST7DAYS: in in [today-7d..tomorrow) AND out IS NULL
-    //   - ALL: out IS NULL (irrespective of in time)
+        // ---------- NEW: per-type breakdown for all 4 periods ----------
+        // Definitions:
+        // TOTAL   = arrivals (in_datetime) in that period
+        // OUT     = departures (out_datetime) in that period
+        // IN ONLY = people still inside now (out_datetime IS NULL) and (optionally) who entered in that period
+        // For clarity to users, we’ll count IN ONLY as:
+        //   - TODAY: in in [today..tomorrow) AND out IS NULL
+        //   - YESTERDAY: in in [yesterday..today) AND out IS NULL
+        //   - LAST7DAYS: in in [today-7d..tomorrow) AND out IS NULL
+        //   - ALL: out IS NULL (irrespective of in time)
 
-    $q = "SELECT
+        $q = "SELECT
                 LOWER(visit_type) AS vt,
                 -- TODAY
                 SUM((in_datetime >= CURDATE() AND in_datetime  < CURDATE() + INTERVAL 1 DAY) OR (out_datetime >= CURDATE() AND out_datetime < CURDATE() + INTERVAL 1 DAY)) AS t_total,
@@ -88,328 +89,329 @@ class SecurityClass
                 SUM(out_datetime IS NOT NULL) AS a_out
 
             FROM visitor_logs WHERE company_id = {$get['company_id']} AND is_active = 0 $location_id GROUP BY vt";
-    $rows = (array) $callConfig->getAllRows($q);
+        $rows = (array) $callConfig->getAllRows($q);
 
-    $types = ['visitor', 'delivery', 'service', 'employee', 'doctor', 'vendor_supplier', 'others'];
-    // seed empty buckets
-    $mk = function () {
-        return ['total' => 0, 'in_only' => 0, 'out' => 0];
-    };
-    $breakdown = [
-        'TODAY' => array_fill_keys($types, $mk()),
-        'YESTERDAY' => array_fill_keys($types, $mk()),
-        'LAST7DAYS' => array_fill_keys($types, $mk()),
-        'ALL' => array_fill_keys($types, $mk()),
-    ];
+        $types = ['visitor', 'delivery', 'service', 'employee', 'doctor', 'vendor_supplier', 'others'];
+        // seed empty buckets
+        $mk = function () {
+            return ['total' => 0, 'in_only' => 0, 'out' => 0];
+        };
+        $breakdown = [
+            'TODAY' => array_fill_keys($types, $mk()),
+            'YESTERDAY' => array_fill_keys($types, $mk()),
+            'LAST7DAYS' => array_fill_keys($types, $mk()),
+            'ALL' => array_fill_keys($types, $mk()),
+        ];
 
-    foreach ($rows as $r) {
-        $t = $r->vt ?? 'others';
-        if (!in_array($t, $types, true))
-            $t = 'others';
+        foreach ($rows as $r) {
+            $t = $r->vt ?? 'others';
+            if (!in_array($t, $types, true))
+                $t = 'others';
 
-        $breakdown['TODAY'][$t]['total'] = (int) $r->t_total;
-        $breakdown['TODAY'][$t]['out'] = (int) $r->t_out;
-        $breakdown['TODAY'][$t]['in_only'] = (int) $r->t_in_only;
+            $breakdown['TODAY'][$t]['total'] = (int) $r->t_total;
+            $breakdown['TODAY'][$t]['out'] = (int) $r->t_out;
+            $breakdown['TODAY'][$t]['in_only'] = (int) $r->t_in_only;
 
-        $breakdown['YESTERDAY'][$t]['total'] = (int) $r->y_total;
-        $breakdown['YESTERDAY'][$t]['out'] = (int) $r->y_out;
-        $breakdown['YESTERDAY'][$t]['in_only'] = (int) $r->y_in_only;
+            $breakdown['YESTERDAY'][$t]['total'] = (int) $r->y_total;
+            $breakdown['YESTERDAY'][$t]['out'] = (int) $r->y_out;
+            $breakdown['YESTERDAY'][$t]['in_only'] = (int) $r->y_in_only;
 
-        $breakdown['LAST7DAYS'][$t]['total'] = (int) $r->l7_total;
-        $breakdown['LAST7DAYS'][$t]['out'] = (int) $r->l7_out;
-        $breakdown['LAST7DAYS'][$t]['in_only'] = (int) $r->l7_in_only;
+            $breakdown['LAST7DAYS'][$t]['total'] = (int) $r->l7_total;
+            $breakdown['LAST7DAYS'][$t]['out'] = (int) $r->l7_out;
+            $breakdown['LAST7DAYS'][$t]['in_only'] = (int) $r->l7_in_only;
 
-        $breakdown['ALL'][$t]['total'] = (int) $r->a_total;
-        $breakdown['ALL'][$t]['out'] = (int) $r->a_out;
-        $breakdown['ALL'][$t]['in_only'] = (int) $r->a_in_only;
+            $breakdown['ALL'][$t]['total'] = (int) $r->a_total;
+            $breakdown['ALL'][$t]['out'] = (int) $r->a_out;
+            $breakdown['ALL'][$t]['in_only'] = (int) $r->a_in_only;
+        }
+
+        $return['breakdown'] = $breakdown;
+
+        // ---------- NEW (Requested): Recent 5 IN and Recent 5 OUT ----------
+        // Minimal, safe fields (you can add more columns if available: name, badge_no, gate_no, etc.)
+        $recentInSql = "SELECT id, visit_type, in_datetime, out_datetime, image_path, visitor_idcard_no, name, phone, email, whom_to_meet, service_company,  service_person, authorized_employee, employee_code, employee_department,  delivery_company_person, delivery_phone, deliver_to FROM visitor_logs WHERE company_id = {$get['company_id']} AND is_active = 0  AND out_datetime IS NULL AND current_Status != 10 AND current_Status != 199 $location_id ORDER BY in_datetime DESC LIMIT 10";
+        $recent_in_rows = $callConfig->getAllRows($recentInSql);
+        $return['recent_in'] = $recent_in_rows;
+
+        $recentOutSql = "SELECT id, visit_type, in_datetime, out_datetime, image_path, visitor_idcard_no, name, phone, email, whom_to_meet, service_company,  service_person, authorized_employee, employee_code, employee_department,  delivery_company_person, delivery_phone, deliver_to FROM visitor_logs WHERE company_id = {$get['company_id']} AND is_active = 0 AND out_datetime IS NOT NULL $location_id ORDER BY out_datetime DESC LIMIT 10";
+        $recent_out_rows = $callConfig->getAllRows($recentOutSql);
+        $return['recent_out'] = $recent_out_rows;
+
+        $emp_sql = "SELECT id, emp_code, display_name, phone, email_id FROM employees WHERE company_id = {$get['company_id']} AND is_active = 0 $location_id";
+        $recent_out_rows = $callConfig->getAllRows($emp_sql);
+        $emp_arr = array();
+        foreach ($recent_out_rows as $row) {
+            $emp_arr[$row->emp_code] = $row;
+            $emp_idname[$row->id] = $row->display_name;
+        }
+        $return['emp_arr'] = $emp_arr;
+        $return['emp_arr_name'] = $emp_idname;
+
+        return $return;
     }
-
-    $return['breakdown'] = $breakdown;
-
-    // ---------- NEW (Requested): Recent 5 IN and Recent 5 OUT ----------
-    // Minimal, safe fields (you can add more columns if available: name, badge_no, gate_no, etc.)
-    $recentInSql = "SELECT id, visit_type, in_datetime, out_datetime, image_path, visitor_idcard_no, name, phone, email, whom_to_meet, service_company,  service_person, authorized_employee, employee_code, employee_department,  delivery_company_person, delivery_phone, deliver_to FROM visitor_logs WHERE company_id = {$get['company_id']} AND is_active = 0  AND out_datetime IS NULL AND current_Status != 10 AND current_Status != 199 $location_id ORDER BY in_datetime DESC LIMIT 10";
-    $recent_in_rows = $callConfig->getAllRows($recentInSql);
-    $return['recent_in'] = $recent_in_rows;
-
-    $recentOutSql = "SELECT id, visit_type, in_datetime, out_datetime, image_path, visitor_idcard_no, name, phone, email, whom_to_meet, service_company,  service_person, authorized_employee, employee_code, employee_department,  delivery_company_person, delivery_phone, deliver_to FROM visitor_logs WHERE company_id = {$get['company_id']} AND is_active = 0 AND out_datetime IS NOT NULL $location_id ORDER BY out_datetime DESC LIMIT 10";
-    $recent_out_rows = $callConfig->getAllRows($recentOutSql);
-    $return['recent_out'] = $recent_out_rows;
-
-    $emp_sql = "SELECT id, emp_code, display_name, phone, email_id FROM employees WHERE company_id = {$get['company_id']} AND is_active = 0 $location_id";
-    $recent_out_rows = $callConfig->getAllRows($emp_sql);
-    $emp_arr = array();
-    foreach ($recent_out_rows as $row) {
-        $emp_arr[$row->emp_code] = $row;
-        $emp_idname[$row->id] = $row->display_name;
-    }
-    $return['emp_arr'] = $emp_arr;
-    $return['emp_arr_name'] = $emp_idname;
-
-    return $return;
-}
 
     // --- Add/replace your function with this compatible superset ---
-public function getVisitorsDataBasedOnDate($get)
-{
-    global $callConfig;
-    $return = array();
-
-    $cid = (int) ($get['company_id'] ?? 0);
-    $day_type = $get['in_datetime'] ?? 'TODAY';        // TODAY | YESTERDAY | LAST7DAYS | ALL
-    $q = trim($get['q'] ?? '');                 // search text
-    $offset = max(0, (int) ($get['offset'] ?? 0));    // start row
-    $limit = min(50, max(5, (int) ($get['limit'] ?? 10))); // default 10, max 50
-    $location_id = '';
-    if (isset($get['location_id']) && $get['location_id'] > 0) {
-        $location_id = ' AND location_id=' . $get['location_id'];
-    }
-
-    // ---------- Date filter ---------
-    $whr = '';
-    if ($day_type == 'TODAY') {
-        $whr = " AND in_datetime >= CURDATE() AND in_datetime < CURDATE() + INTERVAL 1 DAY ";
-    } elseif ($day_type == 'YESTERDAY') {
-        $whr = " AND in_datetime >= CURDATE() - INTERVAL 1 DAY AND in_datetime < CURDATE() ";
-    } elseif ($day_type == 'LAST7DAYS') {
-        $whr = " AND in_datetime >= CURDATE() - INTERVAL 7 DAY AND in_datetime < CURDATE() + INTERVAL 1 DAY ";
-    } elseif ($day_type == 'ALL') {
-        $whr = "";
-    }
-
-    $query = "SELECT * FROM visitor_logs WHERE company_id = " . $get['company_id'] . " AND is_active = 0 " . $whr . " $location_id ORDER BY out_datetime ASC, in_datetime ASC";
-    $data = $callConfig->getAllRows($query);
-    $return['visitor_logs_res'] = $data;
-
-    // Build luggage map keyed by visitor_log_id
-    $logIds = array_map(function ($r) {
-        return (int) $r->id;
-    }, $data);
-    $luggageMap = [];
-
-    if (!empty($logIds)) {
-        $idsCsv = implode(',', array_unique(array_filter($logIds)));
-        $lugSql = "SELECT * FROM visitor_luggages WHERE company_id = {$get['company_id']} AND is_active = 0 AND visitor_log_id IN ($idsCsv) ORDER BY visitor_log_id, id ";
-        $lugRows = $callConfig->getAllRows($lugSql);
-        foreach ($lugRows as $lr) {
-            $luggageMap[$lr->visitor_log_id][] = $lr;
-        }
-    }
-    $return['luggage_map'] = $luggageMap;
-
-
-    // ---------- Search ----------
-    $searchSql = '';
-    if ($q !== '') {
-        $like = addcslashes($q, '%_');
-        $like = '%' . $like . '%';
-        $like = $callConfig->real_escape_string($like);
-        $searchSql = " AND (name LIKE '$like'  OR email LIKE '$like'   OR visitor_idcard_no LIKE '$like'  OR employee_code LIKE '$like' OR visit_type LIKE '$like' OR service_person LIKE '$like' OR doctor_name LIKE '$like' OR emp_temp_name LIKE '$like' OR doctor_phone LIKE '$like' OR emp_temp_phone LIKE '$like' OR employee_name LIKE '$like' OR phone LIKE '$like' OR service_phone LIKE '$like' OR delivery_phone LIKE '$like' )";
-    }
-
-    // ---------- All Visitors ----------
-    $sqlAll = "SELECT *  FROM visitor_logs  WHERE company_id = $cid AND is_active = 0  $whr  $searchSql  $location_id ORDER BY out_datetime ASC, in_datetime ASC LIMIT $offset, $limit";
-    $allLogs = $callConfig->getAllRows($sqlAll);
-
-    // ---------- Pending Visitors (in but not out) ----------
-    $sqlPending = "SELECT * FROM visitor_logs  WHERE company_id = $cid  AND is_active = 0  AND in_datetime IS NOT NULL  AND out_datetime IS NULL AND current_Status != 10 AND current_Status != 199  $whr   $searchSql $location_id ORDER BY in_datetime ASC LIMIT $offset, $limit";
-    $pendingLogs = $callConfig->getAllRows($sqlPending);
-
-    // ---------- Completed Visitors (in and out) ----------
-    $sqlCompleted = "SELECT *  FROM visitor_logs WHERE company_id = $cid  AND is_active = 0  AND in_datetime IS NOT NULL  AND out_datetime IS NOT NULL  $whr  $searchSql $location_id ORDER BY out_datetime ASC LIMIT $offset, $limit";
-    $completedLogs = $callConfig->getAllRows($sqlCompleted);
-
-    $return['visitor_logs_all'] = $allLogs;
-    $return['visitor_logs_pending'] = $pendingLogs;
-    $return['visitor_logs_completed'] = $completedLogs;
-
-    $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='identity_card' AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $id_card_types_res = array();
-    foreach ($data as $row) {
-        $id_card_types_res[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['id_card_types_res'] = $id_card_types_res;
-
-    $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='delivery_company' AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $delivery_company_res = array();
-    foreach ($data as $row) {
-        $delivery_company_res[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['delivery_company_res'] = $delivery_company_res;
-
-    $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='service_company' AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $service_company_res = array();
-    foreach ($data as $row) {
-        $service_company_res[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['service_company_res'] = $service_company_res;
-
-    $emp_sql = "SELECT id, emp_code, display_name, phone, email_id FROM employees WHERE company_id = {$get['company_id']} AND is_active = 0";
-    $recent_out_rows = $callConfig->getAllRows($emp_sql);
-    $emp_arr = array();
-    $employees_map = array();
-    foreach ($recent_out_rows as $row) {
-        $emp_arr[$row->emp_code] = $row;
-        $employees_map[$row->id] = $row->display_name;
-    }
-    $return['emp_arr'] = $emp_arr;
-    $return['employees_map'] = $employees_map;
-
-    $user_map_sql = "SELECT id, display_name FROM application_users WHERE company_id = {$get['company_id']}";
-    $user_map_rows = $callConfig->getAllRows($user_map_sql);
-    $users_map = array();
-    foreach ($user_map_rows as $row) {
-        $users_map[$row->id] = $row->display_name;
-    }
-    $return['users_map'] = $users_map;
-
-    $query = "SELECT id, display_name AS name FROM vendors WHERE company_id = " . $get['company_id'] . " AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $vendors_res = array();
-    foreach ($data as $row) {
-        $vendors_res[$row->id] = $row->name;
-    }
-    $return['vendors_res'] = $vendors_res;
-
-    return $return;
-}
-   public function getVisitorPassDetails($get)
-{
-    global $callConfig;
-    $return = array();
-    $company_id = (int) ($get['company_id'] ?? 0);
-    $type = trim($get['type'] ?? '');   // visitor|delivery|service|employee|others
-    $searchId = trim($get['id'] ?? '');   // typed ID (ID card / employee id)
-    // -----------------------------
-    // 1) Build LIKE search on visitor_logs
-    // -----------------------------
-    $whr = " WHERE v.company_id = {$company_id} AND v.is_active = 0 AND v.current_Status = 0 ";  // only active (not yet out) visits
-    if ($type !== '') {
-        $safe_type = addslashes($type);
-        $whr .= " AND v.visit_type = '{$safe_type}' ";
-    }
-    if ($searchId !== '') {
-        $whr .= " AND v.id = '{$searchId}'";
-    }
-    $qMain = "SELECT * FROM visitor_logs v {$whr} ORDER BY v.id DESC LIMIT 1";
-    $row = $callConfig->getRow($qMain);
-    $return['visitor_logs_res'] = $row ?: array();
-
-    // -----------------------------
-    // 2) If a row is found → fetch luggages & badges by visitor_log_id
-    // -----------------------------
-    $visitor_log_id = (int) ($row->id ?? 0);
-    if ($visitor_log_id > 0) {
-        // Luggages
-        $qLug = "SELECT * FROM visitor_luggages WHERE company_id = {$company_id} AND visitor_log_id = {$visitor_log_id} AND is_active = 0 ORDER BY id ASC";
-        $return['visitor_luggages_res'] = $callConfig->getAllRows($qLug) ?: array();
-
-        // Badges (adjust table/columns if yours differ)
-        $qBadge = "SELECT * FROM visitor_badges WHERE company_id = {$company_id} AND visitor_log_id = {$visitor_log_id} AND is_active = 0
-                    ORDER BY id DESC";
-        $return['visitor_badges_res'] = $callConfig->getRow($qBadge) ?: array();
-
-    } else {
-        // No match
-        $return['visitor_luggages_res'] = array();
-        $return['visitor_badges_res'] = array();
-    }
-    // -----------------------------
-    // 3) If type = employee → also fetch employee details
-    // -----------------------------
-    $resolved_type = strtolower($type ?: ($row->visit_type ?? ''));
-    if ($resolved_type === 'employee') {
-
-        $emp = array();
-        // Try by employee_code = front-end ID
-        if ($row->employee_code != '') {
-
-            $employee_code = $row->employee_code;
-            $qEmpByCode = "SELECT id, emp_code, department_id, display_name  FROM employees WHERE company_id = {$company_id} AND is_active = 0 AND emp_code = '{$employee_code}' LIMIT 1";
-            $emp = $callConfig->getRow($qEmpByCode);
-
-        }
-        $return['employee_res'] = $emp ?: array();
-    }
-    // -----------------------------
-    // 4) Gates (direct)
-    // -----------------------------
-    $qGates = "SELECT id, name FROM building_gates WHERE company_id = {$company_id} AND is_active = 0";
-    $return['building_gates_res'] = $callConfig->getAllRows($qGates) ?: array();
-
-    $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='identity_card' AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $id_card_types_res = array();
-    foreach ($data as $row) {
-        $id_card_types_res[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['id_card_types_res'] = $id_card_types_res;
-
-    $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='delivery_company' AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $delivery_company_res = array();
-    foreach ($data as $row) {
-        $delivery_company_res[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['delivery_company_res'] = $delivery_company_res;
-
-    $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='service_company' AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $service_company_res = array();
-    foreach ($data as $row) {
-        $service_company_res[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['service_company_res'] = $service_company_res;
-
-
-    $venquery = "SELECT id, company, display_name FROM vendors WHERE company_id = " . $get['company_id'] . "  AND is_active = 0 ";
-    $venres = $callConfig->getAllRows($venquery);
-    $vendors = array();
-    foreach ($venres as $row) {
-        $vendors[$row->id] = $row;
-    }
-    $return['vendors'] = $vendors;
-
-    $depquery = "SELECT id, department_name AS display_name FROM departments WHERE company_id = " . $get['company_id'] . "  AND is_active = 0 ";
-    $depres = $callConfig->getAllRows($depquery);
-    $departments = array();
-    foreach ($depres as $row) {
-        $departments[$row->id] = $row;
-    }
-    $return['departments'] = $departments;
-
-    return $return;
-}
-
-    public function getVisitorInsertRelatedData($get){
+    public function getVisitorsDataBasedOnDate($get)
+    {
         global $callConfig;
         $return = array();
-        $rid        = trim($get['rid'] ?? '');
-        if($get['transaction_id']!="" && $get['transaction_table']!=""){
-            $userObj=new userClass();
+
+        $cid = (int) ($get['company_id'] ?? 0);
+        $day_type = $get['in_datetime'] ?? 'TODAY';        // TODAY | YESTERDAY | LAST7DAYS | ALL
+        $q = trim($get['q'] ?? '');                 // search text
+        $offset = max(0, (int) ($get['offset'] ?? 0));    // start row
+        $limit = min(50, max(5, (int) ($get['limit'] ?? 10))); // default 10, max 50
+        $location_id = '';
+        if (isset($get['location_id']) && $get['location_id'] > 0) {
+            $location_id = ' AND location_id=' . $get['location_id'];
+        }
+
+        // ---------- Date filter ---------
+        $whr = '';
+        if ($day_type == 'TODAY') {
+            $whr = " AND in_datetime >= CURDATE() AND in_datetime < CURDATE() + INTERVAL 1 DAY ";
+        } elseif ($day_type == 'YESTERDAY') {
+            $whr = " AND in_datetime >= CURDATE() - INTERVAL 1 DAY AND in_datetime < CURDATE() ";
+        } elseif ($day_type == 'LAST7DAYS') {
+            $whr = " AND in_datetime >= CURDATE() - INTERVAL 7 DAY AND in_datetime < CURDATE() + INTERVAL 1 DAY ";
+        } elseif ($day_type == 'ALL') {
+            $whr = "";
+        }
+
+        $query = "SELECT * FROM visitor_logs WHERE company_id = " . $get['company_id'] . " AND is_active = 0 " . $whr . " $location_id ORDER BY out_datetime ASC, in_datetime ASC";
+        $data = $callConfig->getAllRows($query);
+        $return['visitor_logs_res'] = $data;
+
+        // Build luggage map keyed by visitor_log_id
+        $logIds = array_map(function ($r) {
+            return (int) $r->id;
+        }, $data);
+        $luggageMap = [];
+
+        if (!empty($logIds)) {
+            $idsCsv = implode(',', array_unique(array_filter($logIds)));
+            $lugSql = "SELECT * FROM visitor_luggages WHERE company_id = {$get['company_id']} AND is_active = 0 AND visitor_log_id IN ($idsCsv) ORDER BY visitor_log_id, id ";
+            $lugRows = $callConfig->getAllRows($lugSql);
+            foreach ($lugRows as $lr) {
+                $luggageMap[$lr->visitor_log_id][] = $lr;
+            }
+        }
+        $return['luggage_map'] = $luggageMap;
+
+
+        // ---------- Search ----------
+        $searchSql = '';
+        if ($q !== '') {
+            $like = addcslashes($q, '%_');
+            $like = '%' . $like . '%';
+            $like = $callConfig->real_escape_string($like);
+            $searchSql = " AND (name LIKE '$like'  OR email LIKE '$like'   OR visitor_idcard_no LIKE '$like'  OR employee_code LIKE '$like' OR visit_type LIKE '$like' OR service_person LIKE '$like' OR doctor_name LIKE '$like' OR emp_temp_name LIKE '$like' OR doctor_phone LIKE '$like' OR emp_temp_phone LIKE '$like' OR employee_name LIKE '$like' OR phone LIKE '$like' OR service_phone LIKE '$like' OR delivery_phone LIKE '$like' )";
+        }
+
+        // ---------- All Visitors ----------
+        $sqlAll = "SELECT *  FROM visitor_logs  WHERE company_id = $cid AND is_active = 0  $whr  $searchSql  $location_id ORDER BY out_datetime ASC, in_datetime ASC LIMIT $offset, $limit";
+        $allLogs = $callConfig->getAllRows($sqlAll);
+
+        // ---------- Pending Visitors (in but not out) ----------
+        $sqlPending = "SELECT * FROM visitor_logs  WHERE company_id = $cid  AND is_active = 0  AND in_datetime IS NOT NULL  AND out_datetime IS NULL AND current_Status != 10 AND current_Status != 199  $whr   $searchSql $location_id ORDER BY in_datetime ASC LIMIT $offset, $limit";
+        $pendingLogs = $callConfig->getAllRows($sqlPending);
+
+        // ---------- Completed Visitors (in and out) ----------
+        $sqlCompleted = "SELECT *  FROM visitor_logs WHERE company_id = $cid  AND is_active = 0  AND in_datetime IS NOT NULL  AND out_datetime IS NOT NULL  $whr  $searchSql $location_id ORDER BY out_datetime ASC LIMIT $offset, $limit";
+        $completedLogs = $callConfig->getAllRows($sqlCompleted);
+
+        $return['visitor_logs_all'] = $allLogs;
+        $return['visitor_logs_pending'] = $pendingLogs;
+        $return['visitor_logs_completed'] = $completedLogs;
+
+        $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='identity_card' AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $id_card_types_res = array();
+        foreach ($data as $row) {
+            $id_card_types_res[$row->genc_detail_code] = $row->genc_detail_name;
+        }
+        $return['id_card_types_res'] = $id_card_types_res;
+
+        $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='delivery_company' AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $delivery_company_res = array();
+        foreach ($data as $row) {
+            $delivery_company_res[$row->genc_detail_code] = $row->genc_detail_name;
+        }
+        $return['delivery_company_res'] = $delivery_company_res;
+
+        $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='service_company' AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $service_company_res = array();
+        foreach ($data as $row) {
+            $service_company_res[$row->genc_detail_code] = $row->genc_detail_name;
+        }
+        $return['service_company_res'] = $service_company_res;
+
+        $emp_sql = "SELECT id, emp_code, display_name, phone, email_id FROM employees WHERE company_id = {$get['company_id']} AND is_active = 0";
+        $recent_out_rows = $callConfig->getAllRows($emp_sql);
+        $emp_arr = array();
+        $employees_map = array();
+        foreach ($recent_out_rows as $row) {
+            $emp_arr[$row->emp_code] = $row;
+            $employees_map[$row->id] = $row->display_name;
+        }
+        $return['emp_arr'] = $emp_arr;
+        $return['employees_map'] = $employees_map;
+
+        $user_map_sql = "SELECT id, display_name FROM application_users WHERE company_id = {$get['company_id']}";
+        $user_map_rows = $callConfig->getAllRows($user_map_sql);
+        $users_map = array();
+        foreach ($user_map_rows as $row) {
+            $users_map[$row->id] = $row->display_name;
+        }
+        $return['users_map'] = $users_map;
+
+        $query = "SELECT id, display_name AS name FROM vendors WHERE company_id = " . $get['company_id'] . " AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $vendors_res = array();
+        foreach ($data as $row) {
+            $vendors_res[$row->id] = $row->name;
+        }
+        $return['vendors_res'] = $vendors_res;
+
+        return $return;
+    }
+    public function getVisitorPassDetails($get)
+    {
+        global $callConfig;
+        $return = array();
+        $company_id = (int) ($get['company_id'] ?? 0);
+        $type = trim($get['type'] ?? '');   // visitor|delivery|service|employee|others
+        $searchId = trim($get['id'] ?? '');   // typed ID (ID card / employee id)
+        // -----------------------------
+        // 1) Build LIKE search on visitor_logs
+        // -----------------------------
+        $whr = " WHERE v.company_id = {$company_id} AND v.is_active = 0 AND v.current_Status = 0 ";  // only active (not yet out) visits
+        if ($type !== '') {
+            $safe_type = addslashes($type);
+            $whr .= " AND v.visit_type = '{$safe_type}' ";
+        }
+        if ($searchId !== '') {
+            $whr .= " AND v.id = '{$searchId}'";
+        }
+        $qMain = "SELECT * FROM visitor_logs v {$whr} ORDER BY v.id DESC LIMIT 1";
+        $row = $callConfig->getRow($qMain);
+        $return['visitor_logs_res'] = $row ?: array();
+
+        // -----------------------------
+        // 2) If a row is found → fetch luggages & badges by visitor_log_id
+        // -----------------------------
+        $visitor_log_id = (int) ($row->id ?? 0);
+        if ($visitor_log_id > 0) {
+            // Luggages
+            $qLug = "SELECT * FROM visitor_luggages WHERE company_id = {$company_id} AND visitor_log_id = {$visitor_log_id} AND is_active = 0 ORDER BY id ASC";
+            $return['visitor_luggages_res'] = $callConfig->getAllRows($qLug) ?: array();
+
+            // Badges (adjust table/columns if yours differ)
+            $qBadge = "SELECT * FROM visitor_badges WHERE company_id = {$company_id} AND visitor_log_id = {$visitor_log_id} AND is_active = 0
+                    ORDER BY id DESC";
+            $return['visitor_badges_res'] = $callConfig->getRow($qBadge) ?: array();
+
+        } else {
+            // No match
+            $return['visitor_luggages_res'] = array();
+            $return['visitor_badges_res'] = array();
+        }
+        // -----------------------------
+        // 3) If type = employee → also fetch employee details
+        // -----------------------------
+        $resolved_type = strtolower($type ?: ($row->visit_type ?? ''));
+        if ($resolved_type === 'employee') {
+
+            $emp = array();
+            // Try by employee_code = front-end ID
+            if ($row->employee_code != '') {
+
+                $employee_code = $row->employee_code;
+                $qEmpByCode = "SELECT id, emp_code, department_id, display_name  FROM employees WHERE company_id = {$company_id} AND is_active = 0 AND emp_code = '{$employee_code}' LIMIT 1";
+                $emp = $callConfig->getRow($qEmpByCode);
+
+            }
+            $return['employee_res'] = $emp ?: array();
+        }
+        // -----------------------------
+        // 4) Gates (direct)
+        // -----------------------------
+        $qGates = "SELECT id, name FROM building_gates WHERE company_id = {$company_id} AND is_active = 0";
+        $return['building_gates_res'] = $callConfig->getAllRows($qGates) ?: array();
+
+        $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='identity_card' AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $id_card_types_res = array();
+        foreach ($data as $row) {
+            $id_card_types_res[$row->genc_detail_code] = $row->genc_detail_name;
+        }
+        $return['id_card_types_res'] = $id_card_types_res;
+
+        $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='delivery_company' AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $delivery_company_res = array();
+        foreach ($data as $row) {
+            $delivery_company_res[$row->genc_detail_code] = $row->genc_detail_name;
+        }
+        $return['delivery_company_res'] = $delivery_company_res;
+
+        $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='service_company' AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $service_company_res = array();
+        foreach ($data as $row) {
+            $service_company_res[$row->genc_detail_code] = $row->genc_detail_name;
+        }
+        $return['service_company_res'] = $service_company_res;
+
+
+        $venquery = "SELECT id, company, display_name FROM vendors WHERE company_id = " . $get['company_id'] . "  AND is_active = 0 ";
+        $venres = $callConfig->getAllRows($venquery);
+        $vendors = array();
+        foreach ($venres as $row) {
+            $vendors[$row->id] = $row;
+        }
+        $return['vendors'] = $vendors;
+
+        $depquery = "SELECT id, department_name AS display_name FROM departments WHERE company_id = " . $get['company_id'] . "  AND is_active = 0 ";
+        $depres = $callConfig->getAllRows($depquery);
+        $departments = array();
+        foreach ($depres as $row) {
+            $departments[$row->id] = $row;
+        }
+        $return['departments'] = $departments;
+
+        return $return;
+    }
+
+    public function getVisitorInsertRelatedData($get)
+    {
+        global $callConfig;
+        $return = array();
+        $rid = trim($get['rid'] ?? '');
+        if ($get['transaction_id'] != "" && $get['transaction_table'] != "") {
+            $userObj = new userClass();
             $transaction_id = $get['transaction_id'];
             $transaction_table = $get['transaction_table'];
             $tables = $userObj->toGetInvoicetabledata($transaction_table);
 
-            $rental_invoicessql = "SELECT * FROM ".$transaction_table." WHERE company_id = '".$get['company_id']."' AND id = '".$transaction_id."'  AND is_active =0";
-            $rental_invoicesres=$callConfig->getRow($rental_invoicessql);
+            $rental_invoicessql = "SELECT * FROM " . $transaction_table . " WHERE company_id = '" . $get['company_id'] . "' AND id = '" . $transaction_id . "'  AND is_active =0";
+            $rental_invoicesres = $callConfig->getRow($rental_invoicessql);
             $return['transaction'] = $rental_invoicesres;
 
-            $transaction_itemssql = "SELECT * FROM ".$tables['item']." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$transaction_id."'  AND is_active =0";
-            $transaction_itemsres=$callConfig->getAllRows($transaction_itemssql);
+            $transaction_itemssql = "SELECT * FROM " . $tables['item'] . " WHERE company_id = '" . $get['company_id'] . "' AND transaction_id = '" . $transaction_id . "'  AND is_active =0";
+            $transaction_itemsres = $callConfig->getAllRows($transaction_itemssql);
             $return['transaction_items'] = $transaction_itemsres;
 
-            $transaction_item_taxessql = "SELECT * FROM ".$tables['tax']." WHERE company_id = '".$get['company_id']."' AND transaction_id = '".$transaction_id."'  AND is_active =0";
-            $transaction_item_taxesres=$callConfig->getAllRows($transaction_item_taxessql);
+            $transaction_item_taxessql = "SELECT * FROM " . $tables['tax'] . " WHERE company_id = '" . $get['company_id'] . "' AND transaction_id = '" . $transaction_id . "'  AND is_active =0";
+            $transaction_item_taxesres = $callConfig->getAllRows($transaction_item_taxessql);
             $return['transaction_item_taxes'] = $transaction_item_taxesres;
 
-            $unit_of_measurementssql = "SELECT id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id = '".$get['company_id']."' AND is_active =0";
-            $unit_of_measurementsres=$callConfig->getAllRows($unit_of_measurementssql);
+            $unit_of_measurementssql = "SELECT id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id = '" . $get['company_id'] . "' AND is_active =0";
+            $unit_of_measurementsres = $callConfig->getAllRows($unit_of_measurementssql);
             $unit_of_measurements = array();
-            foreach($unit_of_measurementsres as $uom){
+            foreach ($unit_of_measurementsres as $uom) {
                 $unit_of_measurements[$uom->id] = $uom;
             }
             $return['unit_of_measurements'] = $unit_of_measurements;
@@ -423,7 +425,7 @@ public function getVisitorsDataBasedOnDate($get)
 
         if ($rid !== '') {
             // existing visitor log – search by id only (company_id may be 0 for older records)
-            $rid_int = (int)$rid;
+            $rid_int = (int) $rid;
             $row = $callConfig->getRow("SELECT * FROM visitor_logs WHERE id={$rid_int} AND is_active=0");
             $return['visitor_logs_res'] = $row;
 
@@ -491,14 +493,14 @@ public function getVisitorsDataBasedOnDate($get)
         $data = $callConfig->getAllRows($query);
         $return['departments_res'] = $data;
 
-        if ($rid == '' && $get['gate_id'] != ''){
+        if ($rid == '' && $get['gate_id'] != '') {
             $return['next_badge'] = $this->getNextBadgeForGate($get);
         }
 
-        $unit_of_measurementssql = "SELECT id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id = '".$get['company_id']."' AND is_active =0";
-        $unit_of_measurementsres=$callConfig->getAllRows($unit_of_measurementssql);
+        $unit_of_measurementssql = "SELECT id, uom_short_code, uom_name FROM unit_of_measurements WHERE company_id = '" . $get['company_id'] . "' AND is_active =0";
+        $unit_of_measurementsres = $callConfig->getAllRows($unit_of_measurementssql);
         $return['unit_of_measurements'] = $unit_of_measurementsres;
-         $return['noref_uom_res'] = $unit_of_measurementsres;
+        $return['noref_uom_res'] = $unit_of_measurementsres;
 
         $query = "SELECT id, sku, item_name, purchase_uom  FROM items WHERE company_id = " . $get['company_id'] . " AND is_active = 0 ";
         $data = $callConfig->getAllRows($query);
@@ -506,28 +508,29 @@ public function getVisitorsDataBasedOnDate($get)
         $return['items'] = $data;
         return $return;
     }
-    public function getNextBadgeForGate($get) {
+    public function getNextBadgeForGate($get)
+    {
 
         global $callConfig;
         if ($get['gate_id'] <= 0) {
             return array('status' => 'error', 'message' => 'Missing company or gate');
         }
         $location_id = '';
-        if(isset($get['location_id']) && $get['location_id'] >0){
-            $location_id = ' AND location_id='.$get['location_id'];
+        if (isset($get['location_id']) && $get['location_id'] > 0) {
+            $location_id = ' AND location_id=' . $get['location_id'];
         }
         // load gate config
         $cfgSql = "SELECT visit_code, range_start, range_end, padding, is_active FROM gate_badge_configs WHERE company_id = {$get['company_id']} AND  gate_id = {$get['gate_id']}   LIMIT 1";
 
         $cfg = $callConfig->getRow($cfgSql);
-        $cfg = (array)$cfg;
-        if (!$cfg || (int)$cfg['is_active'] != 0) {
+        $cfg = (array) $cfg;
+        if (!$cfg || (int) $cfg['is_active'] != 0) {
             return array('status' => 'error', 'message' => 'Gate not configured or deactivated');
         }
 
-        $start   = (int)$cfg['range_start'];
-        $end     = (int)$cfg['range_end'];
-        $padding = (int)$cfg['padding'];
+        $start = (int) $cfg['range_start'];
+        $end = (int) $cfg['range_end'];
+        $padding = (int) $cfg['padding'];
         $visit_code = trim($cfg['visit_code']) != '' ? $cfg['visit_code'] : 'VISIT';
 
         // Find MAX numeric usage from visitor_badges.full_code for this gate.
@@ -535,41 +538,42 @@ public function getVisitorsDataBasedOnDate($get)
         $maxSql = "SELECT COALESCE(MAX(CAST(RIGHT(full_code, {$padding}) AS UNSIGNED)), " . ($start - 1) . ") AS maxnum
                 FROM visitor_badges WHERE company_id = {$get['company_id']} AND gate_id = {$get['gate_id']} AND badge_date = CURDATE()AND is_active=0 $location_id";
         $maxRow = $callConfig->getRow($maxSql);
-        $maxRow = (array)$maxRow;
-        $maxnum = isset($maxRow['maxnum']) ? (int)$maxRow['maxnum'] : ($start - 1);
+        $maxRow = (array) $maxRow;
+        $maxnum = isset($maxRow['maxnum']) ? (int) $maxRow['maxnum'] : ($start - 1);
 
         $nextNum = $maxnum + 1;
         if ($nextNum > $end) {
             return array(
-                'status'  => 'exhausted',
+                'status' => 'exhausted',
                 'message' => "All IDs used for gate {$get['gate_id']} ({$start}-{$end}).",
                 'gate_id' => $get['gate_id'],
                 'range_start' => $start,
-                'range_end'   => $end,
-                'padding'     => $padding
+                'range_end' => $end,
+                'padding' => $padding
             );
         }
         // Build full code like VISIT003 (prefix fixed as VISIT)
-        $fullCode = $visit_code . str_pad((string)$nextNum, $padding, '0', STR_PAD_LEFT);
+        $fullCode = $visit_code . str_pad((string) $nextNum, $padding, '0', STR_PAD_LEFT);
         return array(
-            'status'       => 'success',
-            'full_code'    => $fullCode,
-            'next_number'  => $nextNum,
-            'gate_id'      => $get['gate_id'],
-            'range_start'  => $start,
-            'range_end'    => $end,
-            'padding'      => $padding
+            'status' => 'success',
+            'full_code' => $fullCode,
+            'next_number' => $nextNum,
+            'gate_id' => $get['gate_id'],
+            'range_start' => $start,
+            'range_end' => $end,
+            'padding' => $padding
         );
     }
 
-    public function getEmployeePassDetails($get){
+    public function getEmployeePassDetails($get)
+    {
         global $callConfig;
         $return = array();
         $whr = '';
-        if (isset($get['emp_code']) &&  $get['emp_code'] != '') {
+        if (isset($get['emp_code']) && $get['emp_code'] != '') {
             $whr .= " AND emp_code = '" . urldecode($get['emp_code']) . "' ";
         }
-        if (isset($get['rid']) &&  $get['rid'] != '') {
+        if (isset($get['rid']) && $get['rid'] != '') {
             $whr .= " AND id = '" . $get['rid'] . "' ";
         }
         $query = "SELECT id, `display_name`, `phone`, `email_id`,  `emp_code`, address, is_active, current_Status FROM employees
@@ -584,13 +588,14 @@ public function getVisitorsDataBasedOnDate($get)
         return $return;
     }
 
-    public function getVisitorsByPhoneAndEmpCode($get){
+    public function getVisitorsByPhoneAndEmpCode($get)
+    {
         global $callConfig;
         $return = array();
         $phone = urldecode($get['phone']) ?? '';
         $location_id = '';
-        if(isset($get['location_id']) && $get['location_id'] >0){
-            $location_id = ' AND location_id='.$get['location_id'];
+        if (isset($get['location_id']) && $get['location_id'] > 0) {
+            $location_id = ' AND location_id=' . $get['location_id'];
         }
         if ($phone != '') {
             $query = "SELECT id, `name`, `phone`, `email`, `address`, `whom_to_meet`, `purpose`, `idcard_type`, `idcard_number`, `visit_type`, `image_path`, `visitor_idcard_no`, `in_gate_no`, `in_datetime`, `in_security_id`, `out_security_id`, `out_datetime`, `out_gate_no`, `remarks`, is_active, current_Status FROM visitor_logs
@@ -609,10 +614,11 @@ public function getVisitorsDataBasedOnDate($get)
         return $return;
     }
 
-    public function getVendorSupplierTransactionItems($get) {
+    public function getVendorSupplierTransactionItems($get)
+    {
         global $callConfig;
-        $company_id = (int)($get['company_id'] ?? 1);
-        $transaction_id = (int)($get['transaction_id'] ?? 0);
+        $company_id = (int) ($get['company_id'] ?? 1);
+        $transaction_id = (int) ($get['transaction_id'] ?? 0);
         $transaction_table = $get['transaction_table'] ?? '';
 
         $vendor_id = 0;
@@ -622,23 +628,23 @@ public function getVisitorsDataBasedOnDate($get)
             if ($transaction_table === 'purchase_orders') {
                 $row = $callConfig->getRow("SELECT party_id FROM purchase_orders WHERE id = {$transaction_id} AND company_id = {$company_id} AND is_active = 0");
                 if ($row) {
-                    $vendor_id = (int)($row->party_id ?? 0);
+                    $vendor_id = (int) ($row->party_id ?? 0);
                 }
                 $txnItemsRows = $callConfig->getAllRows("SELECT item_id, item_name, description, purchase_uom, item_quantity FROM po_items WHERE transaction_id = {$transaction_id} AND company_id = {$company_id} AND is_active = 0");
                 if (!empty($txnItemsRows)) {
                     foreach ($txnItemsRows as $row) {
-                        $txnItems[] = (array)$row;
+                        $txnItems[] = (array) $row;
                     }
                 }
             } elseif ($transaction_table === 'purchase_invoices') {
                 $row = $callConfig->getRow("SELECT party_id FROM purchase_invoices WHERE id = {$transaction_id} AND company_id = {$company_id} AND is_active = 0");
                 if ($row) {
-                    $vendor_id = (int)($row->party_id ?? 0);
+                    $vendor_id = (int) ($row->party_id ?? 0);
                 }
                 $txnItemsRows = $callConfig->getAllRows("SELECT item_id, item_name, description, purchase_uom, item_quantity FROM pi_items WHERE transaction_id = {$transaction_id} AND company_id = {$company_id} AND is_active = 0");
                 if (!empty($txnItemsRows)) {
                     foreach ($txnItemsRows as $row) {
-                        $txnItems[] = (array)$row;
+                        $txnItems[] = (array) $row;
                     }
                 }
             }
@@ -648,7 +654,7 @@ public function getVisitorsDataBasedOnDate($get)
         $allItemsRows = $callConfig->getAllRows("SELECT id, sku, item_name, purchase_uom FROM items WHERE company_id = {$company_id} AND is_active = 0");
         if (!empty($allItemsRows)) {
             foreach ($allItemsRows as $row) {
-                $allItems[] = (array)$row;
+                $allItems[] = (array) $row;
             }
         }
 
@@ -656,31 +662,33 @@ public function getVisitorsDataBasedOnDate($get)
         $allUomsRows = $callConfig->getAllRows("SELECT id, uom_name, uom_short_code FROM unit_of_measurements WHERE company_id = {$company_id} AND is_active = 0");
         if (!empty($allUomsRows)) {
             foreach ($allUomsRows as $row) {
-                $allUoms[] = (array)$row;
+                $allUoms[] = (array) $row;
             }
         }
 
         return [
             'vendor_id' => $vendor_id,
-            'txnItems'  => $txnItems,
-            'allItems'  => $allItems,
-            'allUoms'   => $allUoms,
+            'txnItems' => $txnItems,
+            'allItems' => $allItems,
+            'allUoms' => $allUoms,
         ];
     }
 
 
-    public function makeCode($name,$company_id){
+    public function makeCode($name, $company_id)
+    {
         global $callConfig;
         $row = $callConfig->getRow("SELECT genc_detail_code FROM general_code_details WHERE company_id={$company_id} AND genc_code='{$name}' AND is_active=0 ORDER BY genc_detail_code DESC LIMIT 1");
-        return $row->genc_detail_code ? (int)$row->genc_detail_code + 1 : 1;
+        return $row->genc_detail_code ? (int) $row->genc_detail_code + 1 : 1;
     }
-    public function insertVisitorBundle($get, $post) {
+    public function insertVisitorBundle($get, $post)
+    {
         global $callConfig;
-        $company_id = (int)($get['company_id'] ?? 0);
-        $user_id    = (int)($get['user_id'] ?? 0);
+        $company_id = (int) ($get['company_id'] ?? 0);
+        $user_id = (int) ($get['user_id'] ?? 0);
 
         // Are we updating?
-        $rid = (int)($post['rid'] ?? 0); // visitor_log_id if editing
+        $rid = (int) ($post['rid'] ?? 0); // visitor_log_id if editing
         $isUpdate = $rid > 0;
 
         // ---------- common mapper ----------
@@ -688,38 +696,20 @@ public function getVisitorsDataBasedOnDate($get)
 
         // -------- normalize "__new__" selections (Delivery / Service) --------
         // DELIVERY: delivery_company_person
-        if (($post['visit_type'] ?? '') === 'delivery') {
-            if (!empty($post['delivery_company_person']) && $post['delivery_company_person'] === '__new__') {
-                $newName = trim($post['new_delivery_company'] ?? '');
-                if ($newName !== '') {
-                    $ins = [
-                        'company_id'        => $company_id,
-                        'option_type'       => 'delivery_company',
-                        'option_value'      => $newName,
-                        'option_label'      => $newName,
-                        'is_active'         => 0,
-                        'created_date'      => date('Y-m-d H:i:s'),
-                        'created_by'        => $user_id ?: null,
-                    ];
-                    $res = $callConfig->insertRecord('visitor_options', $ins);
-                    $newId = (int)($res['LASTID'] ?? 0);
-                    if ($newId > 0) {
-                        $post['delivery_company_person'] = $newName; // use inserted value
-                    }
         if (($post['visit_type'] ?? '') === 'delivery' && !empty($post['delivery_company_person']) && $post['delivery_company_person'] === '__new__') {
             $newName = trim($post['new_delivery_company'] ?? '');
             if ($newName !== '') {
                 $ins = [
-                    'company_id'        => $company_id,
-                    'option_type'       => 'delivery_company',
-                    'option_value'      => $newName,
-                    'option_label'      => $newName,
-                    'is_active'         => 0,
-                    'created_date'      => date('Y-m-d H:i:s'),
-                    'created_by'        => $user_id ?: null,
+                    'company_id' => $company_id,
+                    'option_type' => 'delivery_company',
+                    'option_value' => $newName,
+                    'option_label' => $newName,
+                    'is_active' => 0,
+                    'created_date' => date('Y-m-d H:i:s'),
+                    'created_by' => $user_id ?: null,
                 ];
                 $res = $callConfig->insertRecord('visitor_options', $ins);
-                $newId = (int)($res['LASTID'] ?? 0);
+                $newId = (int) ($res['LASTID'] ?? 0);
                 if ($newId > 0) {
                     $post['delivery_company_person'] = $newName; // use inserted value
                 }
@@ -730,134 +720,119 @@ public function getVisitorsDataBasedOnDate($get)
         }
 
         // SERVICE: service_company
-        if (($post['visit_type'] ?? '') === 'service') {
-            if (!empty($post['service_company']) && $post['service_company'] === '__new__') {
-                $newName = trim($post['new_service_company'] ?? '');
-                if ($newName !== '') {
-                    $ins = [
-                        'company_id'        => $company_id,
-                        'option_type'       => 'service_company',
-                        'option_value'      => $newName,
-                        'option_label'      => $newName,
-                        'is_active'         => 0,
-                        'created_date'      => date('Y-m-d H:i:s'),
-                        'created_by'        => $user_id ?: null,
-                    ];
-                    $res = $callConfig->insertRecord('visitor_options', $ins);
         if (($post['visit_type'] ?? '') === 'service' && !empty($post['service_company']) && $post['service_company'] === '__new__') {
             $newName = trim($post['new_service_company'] ?? '');
             if ($newName !== '') {
                 $ins = [
-                    'company_id'        => $company_id,
-                    'option_type'       => 'service_company',
-                    'option_value'      => $newName,
-                    'option_label'      => $newName,
-                    'is_active'         => 0,
-                    'created_date'      => date('Y-m-d H:i:s'),
-                    'created_by'        => $user_id ?: null,
+                    'company_id' => $company_id,
+                    'option_type' => 'service_company',
+                    'option_value' => $newName,
+                    'option_label' => $newName,
+                    'is_active' => 0,
+                    'created_date' => date('Y-m-d H:i:s'),
+                    'created_by' => $user_id ?: null,
                 ];
                 $res = $callConfig->insertRecord('visitor_options', $ins);
-                    $newId = (int)($res['LASTID'] ?? 0);
-                    if ($newId > 0) {
-                        $post['service_company'] = $newName; // use inserted value
-                    }
+                $newId = (int) ($res['LASTID'] ?? 0);
+                if ($newId > 0) {
+                    $post['service_company'] = $newName; // use inserted value
                 }
             }
         }
 
         $logData = [
-            'company_id'            => $company_id,
-            'visit_type'            => $visit_type,
-            'location_id'           => $post['location_id'] ?? null,
-            'visit_type_other'      => $post['visit_type_other'] ?? null,
-            'name'                  => trim($post['name'])  ?? '' ?:  trim(($post['emp_temp_name'] ?? ''))  ?: null,
-            'phone'                 => ($post['phone'] ?? '')  ?:  ($post['emp_temp_phone'] ?? '') ?: null,
-            'email'                 => $post['email'] ?? null,
-            'address'               => $post['address'] ?? null,
-            'company_name'          => $post['company_name'] ?? null,
-            'whom_to_meet'          =>  (!empty($post['whom_to_meet']) && $post['whom_to_meet'] != '0')  ? (int)$post['whom_to_meet']  :  null,
-            'purpose'               => $post['purpose'] ?? null,        // official|personal|others
-            'purpose_other'         => $post['purpose_other'] ?? null,
-            'idcard_type'           => (!empty($post['idcard_type']) && $post['idcard_type'] != '0') ?  (int)$post['idcard_type']  :  null,
-            'idcard_number'         => ($post['idcard_number'] ?? "")  ?:  ($post['doctor_idcard_number'] ?? '') ?: null,
+            'company_id' => $company_id,
+            'visit_type' => $visit_type,
+            'location_id' => $post['location_id'] ?? null,
+            'visit_type_other' => $post['visit_type_other'] ?? null,
+            'name' => trim($post['name']) ?? '' ?: trim(($post['emp_temp_name'] ?? '')) ?: null,
+            'phone' => ($post['phone'] ?? '') ?: ($post['emp_temp_phone'] ?? '') ?: null,
+            'email' => $post['email'] ?? null,
+            'address' => $post['address'] ?? null,
+            'company_name' => $post['company_name'] ?? null,
+            'whom_to_meet' => (!empty($post['whom_to_meet']) && $post['whom_to_meet'] != '0') ? (int) $post['whom_to_meet'] : null,
+            'purpose' => $post['purpose'] ?? null,        // official|personal|others
+            'purpose_other' => $post['purpose_other'] ?? null,
+            'idcard_type' => (!empty($post['idcard_type']) && $post['idcard_type'] != '0') ? (int) $post['idcard_type'] : null,
+            'idcard_number' => ($post['idcard_number'] ?? "") ?: ($post['doctor_idcard_number'] ?? '') ?: null,
 
             // service
-            'idcard_type_service'   => ($post['idcard_type_service'] ?? '0') == '0' ? null : $post['idcard_type_service'],
+            'idcard_type_service' => ($post['idcard_type_service'] ?? '0') == '0' ? null : $post['idcard_type_service'],
             'idcard_number_service' => $post['idcard_number_service'] ?? null,
-            'service_company'       => $post['service_company'] ?? null,
-            'service_person'        => $post['service_person'] ?? null,
-            'service_phone'         => $post['service_phone'] ?? null,
-            'authorized_employee'   => empty($post['authorized_employee']) || $post['authorized_employee']=='0' ? null : (int)$post['authorized_employee'],
-            'service_tag_enable'    => !empty($post['service_tag_enable']) ? 1 : 0,    // NEW
-            'service_tag_count'     => (int)($post['service_tag_count'] ?? 0),         // NEW
-            'new_service_company'   => $post['new_service_company'] ?? null,
+            'service_company' => $post['service_company'] ?? null,
+            'service_person' => $post['service_person'] ?? null,
+            'service_phone' => $post['service_phone'] ?? null,
+            'authorized_employee' => empty($post['authorized_employee']) || $post['authorized_employee'] == '0' ? null : (int) $post['authorized_employee'],
+            'service_tag_enable' => !empty($post['service_tag_enable']) ? 1 : 0,    // NEW
+            'service_tag_count' => (int) ($post['service_tag_count'] ?? 0),         // NEW
+            'new_service_company' => $post['new_service_company'] ?? null,
 
             // delivery
             'delivery_company_person' => $post['delivery_company_person'] ?? null,
-            'delivery_phone'          => $post['delivery_phone'] ?? null,
-            'deliver_to'              => empty($post['deliver_to']) || $post['deliver_to']=='0' ? null : (int)$post['deliver_to'],
-            'delivery_awb_no'         => $post['delivery_awb_no'] ?? null,
-            'new_delivery_company'    => $post['new_delivery_company'] ?? null,
+            'delivery_phone' => $post['delivery_phone'] ?? null,
+            'deliver_to' => empty($post['deliver_to']) || $post['deliver_to'] == '0' ? null : (int) $post['deliver_to'],
+            'delivery_awb_no' => $post['delivery_awb_no'] ?? null,
+            'new_delivery_company' => $post['new_delivery_company'] ?? null,
 
             // employee
-            'employee_code'    => $post['employee_code'] ?? null,
-            'employee_name'    => $post['employee_name'] ?? null,
-            'employee_department'    => $post['employee_department'] ?? null,
+            'employee_code' => $post['employee_code'] ?? null,
+            'employee_name' => $post['employee_name'] ?? null,
+            'employee_department' => $post['employee_department'] ?? null,
 
-            'emp_temp_enable'    => $post['emp_temp_enable']  ? 1 : 0 ?? null,
-            'emp_temp_reason'    => $post['emp_temp_reason'] ?? null,
-            'emp_temp_name'    => $post['emp_temp_name'] ?? null,
-            'emp_temp_phone'    => $post['emp_temp_phone'] ?? null,
-            'emp_temp_whom_to_meet'    => (!empty($post['emp_temp_whom_to_meet']) && $post['emp_temp_whom_to_meet'] != '0') ? (int)$post['emp_temp_whom_to_meet'] : null,
+            'emp_temp_enable' => $post['emp_temp_enable'] ? 1 : 0 ?? null,
+            'emp_temp_reason' => $post['emp_temp_reason'] ?? null,
+            'emp_temp_name' => $post['emp_temp_name'] ?? null,
+            'emp_temp_phone' => $post['emp_temp_phone'] ?? null,
+            'emp_temp_whom_to_meet' => (!empty($post['emp_temp_whom_to_meet']) && $post['emp_temp_whom_to_meet'] != '0') ? (int) $post['emp_temp_whom_to_meet'] : null,
 
             //doctor
-            'doctor_name'    => $post['doctor_name'] ?? null,
-            'doctor_phone'    => $post['doctor_phone'] ?? null,
-            'doctor_idcard_type'    => (!empty($post['doctor_idcard_type']) && $post['doctor_idcard_type'] != '0') ? (int)$post['doctor_idcard_type'] : null,
-            'doctor_idcard_number'    => $post['doctor_idcard_number'] ?? null,
+            'doctor_name' => $post['doctor_name'] ?? null,
+            'doctor_phone' => $post['doctor_phone'] ?? null,
+            'doctor_idcard_type' => (!empty($post['doctor_idcard_type']) && $post['doctor_idcard_type'] != '0') ? (int) $post['doctor_idcard_type'] : null,
+            'doctor_idcard_number' => $post['doctor_idcard_number'] ?? null,
 
             // vendor_supplier
-            'vendor_supplier_transaction_no'      => $post['vendor_supplier_transaction_no'] ?? null,
-            'vendor_supplier_entry_type'          => $post['vendor_supplier_entry_type'] ?? null,
-            'vendor_supplier_vehicle_type'        => $post['vendor_supplier_vehicle_type'] ?? null,
-            'vendor_supplier_vehicle_number'      => $post['vendor_supplier_vehicle_number'] ?? null,
-            'vendor_supplier_driver_name'          => $post['vendor_supplier_driver_name'] ?? null,
-            'vendor_supplier_driver_mobile'        => $post['vendor_supplier_driver_mobile'] ?? null,
-            'vendor_supplier_purpose'              => $post['vendor_supplier_purpose'] ?? null,
-            'vendor_supplier_proof_type'           => $post['vendor_supplier_proof_type'] ?? null,
-            'vendor_supplier_proof_document_no'     => $post['vendor_supplier_proof_document_no'] ?? null,
-            'vendor_supplier_proof_document_file'   => $post['vendor_supplier_proof_document_file'] ?? null,
-            'vendor_supplier_document_type'        => $post['vendor_supplier_document_type'] ?? null,
-            'vendor_supplier_transaction_id'       => $post['vendor_supplier_transaction_id'] ?? null,
-            'vendor_supplier_document_file'         => $post['vendor_supplier_document_file'] ?? null,
-            'vendor_supplier_vendor_id'            => empty($post['vendor_supplier_vendor_id']) || $post['vendor_supplier_vendor_id'] == '0' ? null : (int)$post['vendor_supplier_vendor_id'],
-            'vendor_supplier_department_id'        => empty($post['vendor_supplier_department_id']) || $post['vendor_supplier_department_id'] == '0' ? null : (int)$post['vendor_supplier_department_id'],
-            'vendor_supplier_loading_start'        => !empty($post['vendor_supplier_loading_start']) ? str_replace('T', ' ', $post['vendor_supplier_loading_start']) : null,
-            'vendor_supplier_loading_end'          => !empty($post['vendor_supplier_loading_end']) ? str_replace('T', ' ', $post['vendor_supplier_loading_end']) : null,
-            'vendor_supplier_vehicle_status'       => $post['vendor_supplier_vehicle_status'] ?? null,
+            'vendor_supplier_transaction_no' => $post['vendor_supplier_transaction_no'] ?? null,
+            'vendor_supplier_entry_type' => $post['vendor_supplier_entry_type'] ?? null,
+            'vendor_supplier_vehicle_type' => $post['vendor_supplier_vehicle_type'] ?? null,
+            'vendor_supplier_vehicle_number' => $post['vendor_supplier_vehicle_number'] ?? null,
+            'vendor_supplier_driver_name' => $post['vendor_supplier_driver_name'] ?? null,
+            'vendor_supplier_driver_mobile' => $post['vendor_supplier_driver_mobile'] ?? null,
+            'vendor_supplier_purpose' => $post['vendor_supplier_purpose'] ?? null,
+            'vendor_supplier_proof_type' => $post['vendor_supplier_proof_type'] ?? null,
+            'vendor_supplier_proof_document_no' => $post['vendor_supplier_proof_document_no'] ?? null,
+            'vendor_supplier_proof_document_file' => $post['vendor_supplier_proof_document_file'] ?? null,
+            'vendor_supplier_document_type' => $post['vendor_supplier_document_type'] ?? null,
+            'vendor_supplier_transaction_id' => $post['vendor_supplier_transaction_id'] ?? null,
+            'vendor_supplier_document_file' => $post['vendor_supplier_document_file'] ?? null,
+            'vendor_supplier_vendor_id' => empty($post['vendor_supplier_vendor_id']) || $post['vendor_supplier_vendor_id'] == '0' ? null : (int) $post['vendor_supplier_vendor_id'],
+            'vendor_supplier_department_id' => empty($post['vendor_supplier_department_id']) || $post['vendor_supplier_department_id'] == '0' ? null : (int) $post['vendor_supplier_department_id'],
+            'vendor_supplier_loading_start' => !empty($post['vendor_supplier_loading_start']) ? str_replace('T', ' ', $post['vendor_supplier_loading_start']) : null,
+            'vendor_supplier_loading_end' => !empty($post['vendor_supplier_loading_end']) ? str_replace('T', ' ', $post['vendor_supplier_loading_end']) : null,
+            'vendor_supplier_vehicle_status' => $post['vendor_supplier_vehicle_status'] ?? null,
 
             // advanced fields
-            'gender'                 => $post['gender'] ?? null,
-            'expected_duration'      => $post['expected_duration'] ?? null,
-            'vehicle_number'         => ($visit_type === 'delivery') ? ($post['vehicle_number_delivery'] ?? null) : ($post['vehicle_number'] ?? null),
-            'vehicle_type'           => $post['vehicle_type'] ?? null,
-            'delivery_type'          => $post['delivery_type'] ?? null,
-            'package_count'          => isset($post['package_count']) ? (int)$post['package_count'] : 1,
-            'security_cleared'       => !empty($post['security_cleared']) ? 1 : 0,
-            'work_permit_no'         => $post['work_permit_no'] ?? null,
-            'safety_briefing'        => !empty($post['safety_briefing']) ? 1 : 0,
+            'gender' => $post['gender'] ?? null,
+            'expected_duration' => $post['expected_duration'] ?? null,
+            'vehicle_number' => ($visit_type === 'delivery') ? ($post['vehicle_number_delivery'] ?? null) : ($post['vehicle_number'] ?? null),
+            'vehicle_type' => $post['vehicle_type'] ?? null,
+            'delivery_type' => $post['delivery_type'] ?? null,
+            'package_count' => isset($post['package_count']) ? (int) $post['package_count'] : 1,
+            'security_cleared' => !empty($post['security_cleared']) ? 1 : 0,
+            'work_permit_no' => $post['work_permit_no'] ?? null,
+            'safety_briefing' => !empty($post['safety_briefing']) ? 1 : 0,
             'service_classification' => $post['service_classification'] ?? null,
-            'doctor_specialization'  => $post['doctor_specialization'] ?? null,
-            'is_emergency'           => !empty($post['is_emergency']) ? 1 : 0,
+            'doctor_specialization' => $post['doctor_specialization'] ?? null,
+            'is_emergency' => !empty($post['is_emergency']) ? 1 : 0,
 
             // common
-            'visitor_idcard_no'     => $post['visiting_company_id'] ?? null,
-            'visiting_company_id'   => $post['visiting_company_id'] ?? null,
-            'in_gate_no'            => empty($post['in_gate_no']) || $post['in_gate_no']=='0' ? null : (int)$post['in_gate_no'],
-            'image_path'            => $post['image_path'] ?? null,
-            'is_active'             => 0,
-            'current_Status'        => 0,
-            'location_id'           => $post['location_id'] ?? 1,
+            'visitor_idcard_no' => $post['visiting_company_id'] ?? null,
+            'visiting_company_id' => $post['visiting_company_id'] ?? null,
+            'in_gate_no' => empty($post['in_gate_no']) || $post['in_gate_no'] == '0' ? null : (int) $post['in_gate_no'],
+            'image_path' => $post['image_path'] ?? null,
+            'is_active' => 0,
+            'current_Status' => 0,
+            'location_id' => $post['location_id'] ?? 1,
         ];
 
 
@@ -883,8 +858,8 @@ public function getVisitorsDataBasedOnDate($get)
                 include_once "model/user.class.php";
             }
             $userObj = new userClass();
-            $generatedCode = $userObj->toGetApplicationSerialNumber('visitor_logs',$post);
-            $logData['visitor_idcard_no']   = $generatedCode;
+            $generatedCode = $userObj->toGetApplicationSerialNumber('visitor_logs', $post);
+            $logData['visitor_idcard_no'] = $generatedCode;
             $logData['visiting_company_id'] = $generatedCode;
             if ($visit_type === 'vendor_supplier') {
                 $logData['vendor_supplier_transaction_no'] = $generatedCode;
@@ -892,16 +867,16 @@ public function getVisitorsDataBasedOnDate($get)
             $post['visiting_company_id'] = $generatedCode; // needed for badge insert later
 
             $logData += [
-                'in_datetime'    => date('Y-m-d H:i:s'),
+                'in_datetime' => date('Y-m-d H:i:s'),
                 'in_security_id' => $user_id ?: null,
-                'status_date'    => date('Y-m-d H:i:s'),
-                'created_date'   => date('Y-m-d H:i:s'),
-                'created_by'     => $user_id ?: null,
+                'status_date' => date('Y-m-d H:i:s'),
+                'created_date' => date('Y-m-d H:i:s'),
+                'created_by' => $user_id ?: null,
             ];
             $resLog = $callConfig->insertRecord('visitor_logs', $logData);
             $visitor_log_id = $resLog['LASTID'] ?? 0;
             if (!$visitor_log_id) {
-                return ['status'=>'error','message'=>'Failed to insert visitor_logs','error'=>$resLog];
+                return ['status' => 'error', 'message' => 'Failed to insert visitor_logs', 'error' => $resLog];
             }
 
             // If approval is needed, send notification email to host
@@ -920,8 +895,6 @@ public function getVisitorsDataBasedOnDate($get)
                     $hostEmail = $hostRow->user_email;
                     $hostName = $hostRow->display_name;
 
-                    $visitTypeLabel = 'Visitor';
-                    $subjectName = $logData['name'] ?? 'Visitor';
                     $detailsHtml = '';
 
                     if ($visit_type === 'delivery') {
@@ -934,7 +907,7 @@ public function getVisitorsDataBasedOnDate($get)
                         $subjectName = $deliveryCompany;
                         $deliverToName = '—';
                         if (!empty($logData['deliver_to'])) {
-                            $empRow = $callConfig->getRow("SELECT display_name FROM employees WHERE id = " . (int)$logData['deliver_to']);
+                            $empRow = $callConfig->getRow("SELECT display_name FROM employees WHERE id = " . (int) $logData['deliver_to']);
                             if ($empRow) {
                                 $deliverToName = $empRow->display_name;
                             }
@@ -955,7 +928,7 @@ public function getVisitorsDataBasedOnDate($get)
                         $subjectName = $logData['service_person'] ?? $serviceCompany;
                         $authorizedEmpName = '—';
                         if (!empty($logData['authorized_employee'])) {
-                            $empRow = $callConfig->getRow("SELECT display_name FROM employees WHERE id = " . (int)$logData['authorized_employee']);
+                            $empRow = $callConfig->getRow("SELECT display_name FROM employees WHERE id = " . (int) $logData['authorized_employee']);
                             if ($empRow) {
                                 $authorizedEmpName = $empRow->display_name;
                             }
@@ -973,7 +946,7 @@ public function getVisitorsDataBasedOnDate($get)
                         $subjectName = $logData['employee_name'] ?? 'Employee';
                         $whomToMeetName = '—';
                         if (!empty($logData['emp_temp_whom_to_meet'])) {
-                            $empRow = $callConfig->getRow("SELECT display_name FROM employees WHERE id = " . (int)$logData['emp_temp_whom_to_meet']);
+                            $empRow = $callConfig->getRow("SELECT display_name FROM employees WHERE id = " . (int) $logData['emp_temp_whom_to_meet']);
                             if ($empRow) {
                                 $whomToMeetName = $empRow->display_name;
                             }
@@ -988,7 +961,7 @@ public function getVisitorsDataBasedOnDate($get)
                         $subjectName = $logData['doctor_name'] ?? 'Doctor';
                         $whomToMeetName = '—';
                         if (!empty($logData['whom_to_meet'])) {
-                            $empRow = $callConfig->getRow("SELECT display_name FROM employees WHERE id = " . (int)$logData['whom_to_meet']);
+                            $empRow = $callConfig->getRow("SELECT display_name FROM employees WHERE id = " . (int) $logData['whom_to_meet']);
                             if ($empRow) {
                                 $whomToMeetName = $empRow->display_name;
                             }
@@ -1002,7 +975,7 @@ public function getVisitorsDataBasedOnDate($get)
                         $visitTypeLabel = 'Vendor / Supplier';
                         $vendorName = '—';
                         if (!empty($logData['vendor_supplier_vendor_id'])) {
-                            $vendorRow = $callConfig->getRow("SELECT company, display_name FROM vendors WHERE id = " . (int)$logData['vendor_supplier_vendor_id']);
+                            $vendorRow = $callConfig->getRow("SELECT company, display_name FROM vendors WHERE id = " . (int) $logData['vendor_supplier_vendor_id']);
                             if ($vendorRow) {
                                 $vendorName = ($vendorRow->company ? $vendorRow->company . ' - ' : '') . $vendorRow->display_name;
                             }
@@ -1010,7 +983,7 @@ public function getVisitorsDataBasedOnDate($get)
                         $subjectName = $logData['vendor_supplier_driver_name'] ?? $vendorName;
                         $deptName = '—';
                         if (!empty($logData['vendor_supplier_department_id'])) {
-                            $deptRow = $callConfig->getRow("SELECT department_name FROM departments WHERE id = " . (int)$logData['vendor_supplier_department_id']);
+                            $deptRow = $callConfig->getRow("SELECT department_name FROM departments WHERE id = " . (int) $logData['vendor_supplier_department_id']);
                             if ($deptRow) {
                                 $deptName = $deptRow->department_name;
                             }
@@ -1046,11 +1019,11 @@ public function getVisitorsDataBasedOnDate($get)
                     // $approveUrl = $baseUrl . "?mode=approveVisitor&rid=" . $visitor_log_id . "&status=approve";
                     // $rejectUrl = $baseUrl . "?mode=approveVisitor&rid=" . $visitor_log_id . "&status=reject";
 
-                    $approveparam = array('mode'=>'approveVisitor','rid'=>$visitor_log_id,'status'=>'approve','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
-                    $rejectparam = array('mode'=>'approveVisitor','rid'=>$visitor_log_id,'status'=>'reject','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
-                    $baseUrl = SITEURL."/security_module_verification_page.php";
-                    $approveUrl = $baseUrl . "?param=".base64_encode(json_encode($approveparam));
-                    $rejectUrl  = $baseUrl . "?param=".base64_encode(json_encode($rejectparam));
+                    $approveparam = array('mode' => 'approveVisitor', 'rid' => $visitor_log_id, 'status' => 'approve', 'dbname' => $callConfig->dbname, 'company_id' => $callConfig->company_id);
+                    $rejectparam = array('mode' => 'approveVisitor', 'rid' => $visitor_log_id, 'status' => 'reject', 'dbname' => $callConfig->dbname, 'company_id' => $callConfig->company_id);
+                    $baseUrl = SITEURL . "/security_module_verification_page.php";
+                    $approveUrl = $baseUrl . "?param=" . base64_encode(json_encode($approveparam));
+                    $rejectUrl = $baseUrl . "?param=" . base64_encode(json_encode($rejectparam));
 
                     $subject = "Visitor Entry Approval Request [" . $visitTypeLabel . "]: " . $subjectName;
                     $emailBody = '<!DOCTYPE html>
@@ -1096,77 +1069,7 @@ public function getVisitorsDataBasedOnDate($get)
                     $emailResult = $userObj->sendmailwithsmtp($hostEmail, $subject, $emailBody, '', '');
                     error_log('[VMS Email] Attempted to: ' . $hostEmail . ' | Result: ' . ($emailResult['error_email_msg'] ?? 'unknown') . (!empty($emailResult['error_email_']) ? ' | Error: ' . $emailResult['error_email_'] : ''));
                 }
-/**
-                if (!empty($hostRow) && !empty($hostRow->user_email)) {
-                    $hostEmail = $hostRow->user_email;
-                    $hostName = $hostRow->display_name;
 
-                    $visitorName = trim($logData['name'] ?? 'Visitor');
-                    $visitorPhone = trim($logData['phone'] ?? '—');
-                    $purpose = trim($logData['purpose'] ?? '—');
-                    $vehicleType = trim($logData['vehicle_type'] ?? 'None');
-                    $vehicleNumber = trim($logData['vehicle_number'] ?? '—');
-
-                    // Build URLs
-                   // $host = SITEURL;
-                    // $baseUrl = SITEURL."/api.php";
-                    // $approveUrl = $baseUrl . "?mode=approveVisitor&rid=" . $visitor_log_id . "&status=approve";
-                    // $rejectUrl = $baseUrl . "?mode=approveVisitor&rid=" . $visitor_log_id . "&status=reject";
-
-                    $approveparam = array('mode'=>'approveVisitor','rid'=>$visitor_log_id,'status'=>'approve','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
-                    $rejectparam = array('mode'=>'approveVisitor','rid'=>$visitor_log_id,'status'=>'reject','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
-                    $baseUrl = SITEURL."/security_module_verification_page.php";
-                    $approveUrl = $baseUrl . "?param=".base64_encode(json_encode($approveparam));
-                    $rejectUrl  = $baseUrl . "?param=".base64_encode(json_encode($rejectparam));
-
-                    $subject = "Visitor Entry Approval Request: " . $visitorName;
-                    $emailBody = '<!DOCTYPE html>
-                            <html>
-                            <head>
-                                <style>
-                                    body { font-family: Arial, sans-serif; background-color: #f4f5f7; margin: 0; padding: 20px; }
-                                    .card { background-color: #ffffff; border-radius: 8px; padding: 24px; max-width: 600px; margin: 0 auto; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-                                    .header { border-bottom: 1px solid #e1e4e8; padding-bottom: 16px; margin-bottom: 20px; }
-                                    .title { color: #1e293b; font-size: 20px; font-weight: bold; }
-                                    .visitor-info { background-color: #f8fafc; border-radius: 6px; padding: 16px; margin-bottom: 24px; border: 1px solid #e2e8f0; }
-                                    .info-row { margin-bottom: 8px; font-size: 14px; color: #475569; }
-                                    .info-label { font-weight: bold; color: #1e293b; display: inline-block; width: 120px; }
-                                    .btn-container { text-align: center; margin-top: 24px; }
-                                    .btn { display: inline-block; padding: 12px 24px; border-radius: 6px; font-weight: bold; text-decoration: none; margin: 0 10px; font-size: 14px; }
-                                    .btn-approve { background-color: #10b981; color: #ffffff !important; }
-                                    .btn-reject { background-color: #ef4444; color: #ffffff !important; }
-                                </style>
-                            </head>
-                            <body>
-                                <div class="card">
-                                    <div class="header">
-                                        <div class="title">Visitor Authorization Request</div>
-                                    </div>
-                                    <p>Dear ' . htmlspecialchars($hostName) . ',</p>
-                                    <p>A visitor is waiting at the gate to meet you. Please review the details below and authorize their entry.</p>
-                                    <div class="visitor-info">
-                                        <div class="info-row"><span class="info-label">Visitor Name:</span> ' . htmlspecialchars($visitorName) . '</div>
-                                        <div class="info-row"><span class="info-label">Phone:</span> ' . htmlspecialchars($visitorPhone) . '</div>
-                                        <div class="info-row"><span class="info-label">Purpose:</span> ' . htmlspecialchars($purpose) . '</div>
-                                        <div class="info-row"><span class="info-label">Vehicle Type:</span> ' . htmlspecialchars($vehicleType) . '</div>
-                                        <div class="info-row"><span class="info-label">Vehicle No:</span> ' . htmlspecialchars($vehicleNumber) . '</div>
-                                    </div>
-                                    <p>Please click one of the buttons below to approve or reject this request:</p>
-                                    <div class="btn-container">
-                                        <a href="' . $approveUrl . '" class="btn btn-approve">Approve Entry</a>
-                                        <a href="' . $rejectUrl . '" class="btn btn-reject">Reject Entry</a>
-                                    </div>
-                                </div>
-                            </body>
-                            </html>';
-
-                    if (!class_exists('userClass')) {
-                        include_once("model/user.class.php");
-                    }
-                    $userObj = new userClass();
-                    $userObj->sendmailwithsmtp($hostEmail, $subject, $emailBody, '', '');
-                }
-            **/
 
 
 
@@ -1180,7 +1083,7 @@ public function getVisitorsDataBasedOnDate($get)
             $visitor_log_id = $rid;
             $logData += [
                 'updated_date' => date('Y-m-d H:i:s'),
-                'updated_by'   => $user_id ?: null,
+                'updated_by' => $user_id ?: null,
             ];
             $callConfig->updateRecord('visitor_logs', $logData, 'id', $visitor_log_id);
         }
@@ -1197,53 +1100,57 @@ public function getVisitorsDataBasedOnDate($get)
         $rows = $callConfig->getAllRows(
             "SELECT id FROM visitor_luggages WHERE company_id={$company_id} AND visitor_log_id={$visitor_log_id} AND is_active=0"
         );
-        foreach ($rows as $r) { $dbIds[] = (int)$r->id;
+        foreach ($rows as $r) {
+            $dbIds[] = (int) $r->id;
         }
 
         $submittedIds = []; // to know which ones to keep
         if (!empty($post['luggage']) && is_array($post['luggage'])) {
             foreach ($post['luggage'] as $row) {
                 // detect if row has an existing id
-                $rowId = isset($row['id']) ? (int)$row['id'] : 0;
+                $rowId = isset($row['id']) ? (int) $row['id'] : 0;
 
                 // Skip empty rows
                 $hasAny = false;
-                foreach (['item_key','item_name','brand_name','qty','serial_or_remarks','returnable','return_date','id'] as $k) {
-                    if (!empty($row[$k])) { $hasAny = true; break;
+                foreach (['item_key', 'item_name', 'brand_name', 'qty', 'serial_or_remarks', 'returnable', 'return_date', 'id'] as $k) {
+                    if (!empty($row[$k])) {
+                        $hasAny = true;
+                        break;
                     }
                 }
-                if (!$hasAny) continue;
+                if (!$hasAny)
+                    continue;
 
                 $brandName = trim($row['brand_name'] ?? '');
                 if ($brandName !== '' && $brandName !== 'Other') {
                     $chk = $callConfig->getRow("SELECT id FROM visitor_options WHERE company_id = {$company_id} AND option_type = 'luggage_brand' AND (option_value = '" . $callConfig->real_escape_string($brandName) . "' OR option_label = '" . $callConfig->real_escape_string($brandName) . "') AND is_active = 0");
                     if (!$chk) {
                         $insOpt = [
-                            'company_id'   => $company_id,
-                            'option_type'  => 'luggage_brand',
+                            'company_id' => $company_id,
+                            'option_type' => 'luggage_brand',
                             'option_value' => $brandName,
                             'option_label' => $brandName,
-                            'is_active'    => 0,
+                            'is_active' => 0,
                             'created_date' => date('Y-m-d H:i:s'),
-                            'created_by'   => $user_id ?: null,
+                            'created_by' => $user_id ?: null,
                         ];
                         $callConfig->insertRecord('visitor_options', $insOpt);
                     }
                 }
 
                 $lug = [
-                    'company_id'        => $company_id,
-                    'visitor_log_id'    => (int)$visitor_log_id,
-                    'item_key'          => $row['item_key'] ?? null,
-                    'item_name'         => $row['item_name'] ?? null,
-                    'brand_name'        => $row['brand_name'] ?? null,
-                    'qty'               => (int)($row['qty'] ?? 1),
+                    'company_id' => $company_id,
+                    'visitor_log_id' => (int) $visitor_log_id,
+                    'item_key' => $row['item_key'] ?? null,
+                    'item_name' => $row['item_name'] ?? null,
+                    'brand_name' => $row['brand_name'] ?? null,
+                    'qty' => (int) ($row['qty'] ?? 1),
                     'serial_or_remarks' => $row['serial_or_remarks'] ?? null,
-                    'returnable'        => (isset($row['returnable']) && $row['returnable'] === 'no') ? 0 : 1,
-                    'return_date'       => (!empty($row['return_date']) ? $row['return_date'] : null),
-                    'visitor_type'       => 'IN',
-                    'is_active'         => 0,
-                    'current_Status'    => 0,
+                    'returnable' => (isset($row['returnable']) && $row['returnable'] === 'no') ? 0 : 1,
+                    'return_date' => (!empty($row['return_date']) ? $row['return_date'] : null),
+                    'visitor_type' => 'IN',
+                    'is_active' => 0,
+                    'current_Status' => 0,
                 ];
 
                 if ($rowId > 0) {
@@ -1254,16 +1161,16 @@ public function getVisitorsDataBasedOnDate($get)
                     // update it here:
                     $lug += [
                         'updated_date' => date('Y-m-d H:i:s'),
-                        'updated_by'   => $user_id ?: null,
+                        'updated_by' => $user_id ?: null,
                     ];
                     $callConfig->updateRecord('visitor_luggages', $lug, 'id', $rowId);
 
                 } else {
                     // new row → insert
                     $lug += [
-                        'status_date'  => date('Y-m-d H:i:s'),
+                        'status_date' => date('Y-m-d H:i:s'),
                         'created_date' => date('Y-m-d H:i:s'),
-                        'created_by'   => $user_id ?: null,
+                        'created_by' => $user_id ?: null,
                     ];
                     $callConfig->insertRecord('visitor_luggages', $lug);
                 }
@@ -1275,13 +1182,13 @@ public function getVisitorsDataBasedOnDate($get)
             $toDelete = array_diff($dbIds, $submittedIds); // present in DB, not in POST
             if (!empty($toDelete)) {
                 foreach ($toDelete as $id) {
-                    $id = (int)$id;
+                    $id = (int) $id;
                     $lug = array(
-                        'is_active'    => 1,
+                        'is_active' => 1,
                         'updated_date' => date('Y-m-d H:i:s'),
-                        'updated_by'   => $user_id ?: null,
+                        'updated_by' => $user_id ?: null,
                     );
-                $callConfig->updateRecord('visitor_luggages', $lug, 'id', $id);
+                    $callConfig->updateRecord('visitor_luggages', $lug, 'id', $id);
                 }
             }
         }
@@ -1294,27 +1201,28 @@ public function getVisitorsDataBasedOnDate($get)
             }
             if (!empty($post['item_id']) && is_array($post['item_id'])) {
                 foreach ($post['item_id'] as $idx => $itemId) {
-                    if (empty($itemId)) continue;
+                    if (empty($itemId))
+                        continue;
                     $itemName = $post['item_name'][$idx] ?? '';
-                    $qty = (float)($post['received_qty'][$idx] ?? 0);
+                    $qty = (float) ($post['received_qty'][$idx] ?? 0);
                     $desc = $post['description'][$idx] ?? '';
                     $uom = $post['purchase_uom'][$idx] ?? '';
 
                     $lug = [
-                        'company_id'        => $company_id,
-                        'visitor_log_id'    => (int)$visitor_log_id,
-                        'item_key'          => $itemId,
-                        'item_name'         => $itemName,
-                        'brand_name'        => $uom, // store UOM in brand_name column
-                        'qty'               => $qty,
+                        'company_id' => $company_id,
+                        'visitor_log_id' => (int) $visitor_log_id,
+                        'item_key' => $itemId,
+                        'item_name' => $itemName,
+                        'brand_name' => $uom, // store UOM in brand_name column
+                        'qty' => $qty,
                         'serial_or_remarks' => $desc,
-                        'returnable'        => 0, // Inward material is not returnable by default
-                        'visitor_type'      => 'IN',
-                        'is_active'         => 0,
-                        'current_Status'    => 0,
-                        'status_date'       => date('Y-m-d H:i:s'),
-                        'created_date'      => date('Y-m-d H:i:s'),
-                        'created_by'        => $user_id ?: null,
+                        'returnable' => 0, // Inward material is not returnable by default
+                        'visitor_type' => 'IN',
+                        'is_active' => 0,
+                        'current_Status' => 0,
+                        'status_date' => date('Y-m-d H:i:s'),
+                        'created_date' => date('Y-m-d H:i:s'),
+                        'created_by' => $user_id ?: null,
                     ];
                     $callConfig->insertRecord('visitor_luggages', $lug);
                 }
@@ -1323,7 +1231,7 @@ public function getVisitorsDataBasedOnDate($get)
 
         // ========== BADGE ==========
         $full_code = trim($post['visiting_company_id'] ?? '');
-        $gate_id   = !empty($post['in_gate_no']) ? (int)$post['in_gate_no'] : 0;
+        $gate_id = !empty($post['in_gate_no']) ? (int) $post['in_gate_no'] : 0;
 
         // check if there’s already a badge for this visitor
         $oldBadge = $callConfig->getRow("SELECT id FROM visitor_badges WHERE company_id={$company_id} AND visitor_log_id={$visitor_log_id} AND is_active=0 LIMIT 1");
@@ -1332,28 +1240,28 @@ public function getVisitorsDataBasedOnDate($get)
             if (empty($oldBadge)) {
                 // insert new
                 $badge = [
-                    'company_id'     => $company_id,
-                    'gate_id'        => $gate_id,
-                    'badge_date'     => date('Y-m-d'),
-                    'visitor_log_id' => (int)$visitor_log_id,
-                    'full_code'      => $full_code,
-                    'issued_at'      => date('Y-m-d H:i:s'),
-                    'returned_at'    => null,
-                    'is_active'      => 0,
+                    'company_id' => $company_id,
+                    'gate_id' => $gate_id,
+                    'badge_date' => date('Y-m-d'),
+                    'visitor_log_id' => (int) $visitor_log_id,
+                    'full_code' => $full_code,
+                    'issued_at' => date('Y-m-d H:i:s'),
+                    'returned_at' => null,
+                    'is_active' => 0,
                     'current_status' => 0,
-                    'status_date'    => date('Y-m-d H:i:s'),
-                    'created_date'   => date('Y-m-d H:i:s'),
-                    'created_by'     => $user_id ?: null,
-                    'location_id'    => $post['location_id'] ?? 1,
+                    'status_date' => date('Y-m-d H:i:s'),
+                    'created_date' => date('Y-m-d H:i:s'),
+                    'created_by' => $user_id ?: null,
+                    'location_id' => $post['location_id'] ?? 1,
                 ];
                 $callConfig->insertRecord('visitor_badges', $badge);
             } else {
                 // update existing (if changed)
                 $upd = [
-                    'gate_id'      => $gate_id,
-                    'full_code'    => $full_code,
+                    'gate_id' => $gate_id,
+                    'full_code' => $full_code,
                     'updated_date' => date('Y-m-d H:i:s'),
-                    'updated_by'   => $user_id ?: null,
+                    'updated_by' => $user_id ?: null,
                 ];
                 $callConfig->updateRecord('visitor_badges', $upd, 'id', $oldBadge->id);
             }
@@ -1363,16 +1271,18 @@ public function getVisitorsDataBasedOnDate($get)
         if ($visit_type === 'service') {
             // Fetch existing active child tags (current state in DB)
             $existingRows = $callConfig->getAllRows(
-                "SELECT id, service_person, visiting_company_id, visitor_idcard_no FROM visitor_logs WHERE company_id={$company_id} AND tag_id={$visitor_log_id} AND is_active=0" );
+                "SELECT id, service_person, visiting_company_id, visitor_idcard_no FROM visitor_logs WHERE company_id={$company_id} AND tag_id={$visitor_log_id} AND is_active=0"
+            );
             $existingByCode = [];
             if (!empty($existingRows)) {
                 foreach ($existingRows as $r) {
                     // We store code in both columns; pick whichever is present
                     $code = $r->visiting_company_id ?: $r->visitor_idcard_no;
-                    if ($code === null) continue;
+                    if ($code === null)
+                        continue;
                     $existingByCode[$code] = [
-                        'id'   => (int)$r->id,
-                        'service_person' => (string)($r->service_person ?? '')
+                        'id' => (int) $r->id,
+                        'service_person' => (string) ($r->service_person ?? '')
                     ];
                 }
             }
@@ -1382,17 +1292,18 @@ public function getVisitorsDataBasedOnDate($get)
                 foreach ($post['service_tags'] as $t) {
                     $code = trim($t['visitor_id'] ?? '');
                     $name = trim($t['name'] ?? '');
-                    if ($code === '') continue;
+                    if ($code === '')
+                        continue;
                     $postedByCode[$code] = $name;
                 }
             }
             // Helper: soft-delete a child log and its badge
-            $softDeleteChild = function(int $childId) use ($callConfig, $company_id, $user_id) {
+            $softDeleteChild = function (int $childId) use ($callConfig, $company_id, $user_id) {
                 // child log
                 $callConfig->updateRecord('visitor_logs', [
-                    'is_active'    => 1,
+                    'is_active' => 1,
                     'updated_date' => date('Y-m-d H:i:s'),
-                    'updated_by'   => $user_id ?: null,
+                    'updated_by' => $user_id ?: null,
                 ], 'id', $childId);
 
                 // badge (if exists)
@@ -1401,10 +1312,10 @@ public function getVisitorsDataBasedOnDate($get)
                 );
                 if (!empty($cb)) {
                     $callConfig->updateRecord('visitor_badges', [
-                        'is_active'    => 1,
+                        'is_active' => 1,
                         'updated_date' => date('Y-m-d H:i:s'),
-                        'updated_by'   => $user_id ?: null,
-                    ], 'id', (int)$cb->id);
+                        'updated_by' => $user_id ?: null,
+                    ], 'id', (int) $cb->id);
                 }
             };
             if ($isUpdate && empty($post['service_tag_enable'])) {
@@ -1419,13 +1330,13 @@ public function getVisitorsDataBasedOnDate($get)
                 foreach ($postedByCode as $code => $name) {
                     if (isset($existingByCode[$code])) {
                         // Keep this child; update name if changed
-                        $cid  = $existingByCode[$code]['id'];
+                        $cid = $existingByCode[$code]['id'];
                         $prev = $existingByCode[$code]['service_person'];
                         if ($name !== '' && $name !== $prev) {
                             $callConfig->updateRecord('visitor_logs', [
                                 'service_person' => $name,
                                 'updated_date' => date('Y-m-d H:i:s'),
-                                'updated_by'   => $user_id ?: null,
+                                'updated_by' => $user_id ?: null,
                             ], 'id', $cid);
                         }
                         // mark as processed so it won't be deleted
@@ -1436,47 +1347,47 @@ public function getVisitorsDataBasedOnDate($get)
                         // $child = $logData; // copy fields prepared for main
                         unset($child['updated_date'], $child['updated_by']); // safety for update path
                         $child = [
-                            'company_id'            => $company_id,
-                            'visit_type'            => $visit_type,
-                            'idcard_type_service'   => ($post['idcard_type_service'] ?? '0') === '0' ? null : $post['idcard_type_service'],
+                            'company_id' => $company_id,
+                            'visit_type' => $visit_type,
+                            'idcard_type_service' => ($post['idcard_type_service'] ?? '0') === '0' ? null : $post['idcard_type_service'],
                             'idcard_number_service' => $post['idcard_number_service'] ?? null,
                             'service_company' => $post['service_company'] ?? null,
                             'service_phone' => $post['service_phone'] ?? null,
-                            'authorized_employee'   => empty($post['authorized_employee']) || $post['authorized_employee']=='0' ? null : (int)$post['authorized_employee'],
-                            'service_tag_enable'    => !empty($post['service_tag_enable']) ? 1 : 0,    // NEW
-                            'service_tag_count'     => (int)($post['service_tag_count'] ?? 0),         // NEW
-                            'new_service_company'    => $post['new_service_company'] ?? null,
-                            'service_person'       => $name,
-                            'visitor_idcard_no'    => $code,
-                            'visiting_company_id'  => $code,
-                            'tag_id'               => (int)$visitor_log_id,
-                            'in_datetime'          => date('Y-m-d H:i:s'),
-                            'in_security_id'       => $user_id ?: null,
-                            'status_date'          => date('Y-m-d H:i:s'),
-                            'created_date'         => date('Y-m-d H:i:s'),
-                            'created_by'           => $user_id ?: null,
-                            'is_active'            => 0,
-                            'current_Status'       => 0,
-                            'location_id'           => $post['location_id'] ?? 1,
+                            'authorized_employee' => empty($post['authorized_employee']) || $post['authorized_employee'] == '0' ? null : (int) $post['authorized_employee'],
+                            'service_tag_enable' => !empty($post['service_tag_enable']) ? 1 : 0,    // NEW
+                            'service_tag_count' => (int) ($post['service_tag_count'] ?? 0),         // NEW
+                            'new_service_company' => $post['new_service_company'] ?? null,
+                            'service_person' => $name,
+                            'visitor_idcard_no' => $code,
+                            'visiting_company_id' => $code,
+                            'tag_id' => (int) $visitor_log_id,
+                            'in_datetime' => date('Y-m-d H:i:s'),
+                            'in_security_id' => $user_id ?: null,
+                            'status_date' => date('Y-m-d H:i:s'),
+                            'created_date' => date('Y-m-d H:i:s'),
+                            'created_by' => $user_id ?: null,
+                            'is_active' => 0,
+                            'current_Status' => 0,
+                            'location_id' => $post['location_id'] ?? 1,
                         ];
 
                         $resChild = $callConfig->insertRecord('visitor_logs', $child);
-                        $child_id = (int)($resChild['LASTID'] ?? 0);
+                        $child_id = (int) ($resChild['LASTID'] ?? 0);
 
                         if ($child_id && $code !== '' && $gate_id > 0) {
                             $callConfig->insertRecord('visitor_badges', [
-                                'company_id'     => $company_id,
-                                'gate_id'        => $gate_id,
-                                'badge_date'     => date('Y-m-d'),
+                                'company_id' => $company_id,
+                                'gate_id' => $gate_id,
+                                'badge_date' => date('Y-m-d'),
                                 'visitor_log_id' => $child_id,
-                                'full_code'      => $code,
-                                'issued_at'      => date('Y-m-d H:i:s'),
-                                'returned_at'    => null,
-                                'is_active'      => 0,
+                                'full_code' => $code,
+                                'issued_at' => date('Y-m-d H:i:s'),
+                                'returned_at' => null,
+                                'is_active' => 0,
                                 'current_status' => 0,
-                                'status_date'    => date('Y-m-d H:i:s'),
-                                'created_date'   => date('Y-m-d H:i:s'),
-                                'created_by'     => $user_id ?: null,
+                                'status_date' => date('Y-m-d H:i:s'),
+                                'created_date' => date('Y-m-d H:i:s'),
+                                'created_by' => $user_id ?: null,
                             ]);
                         }
                     }
@@ -1492,10 +1403,10 @@ public function getVisitorsDataBasedOnDate($get)
         }
 
         return [
-            'status'  => 'success',
-            'id'      => (int)$visitor_log_id,
-            'LASTID'  => (int)$visitor_log_id,
-            'rid'     => (int)$visitor_log_id,
+            'status' => 'success',
+            'id' => (int) $visitor_log_id,
+            'LASTID' => (int) $visitor_log_id,
+            'rid' => (int) $visitor_log_id,
             'vendor_supplier_transaction_no' => $logData['vendor_supplier_transaction_no'] ?? null,
             'message' => $isUpdate
                 ? 'Updated visitor, luggage, badges, and service details (if any)'
@@ -1503,17 +1414,18 @@ public function getVisitorsDataBasedOnDate($get)
         ];
     }
 
-    public function saveVisitorOut($get, $post){
+    public function saveVisitorOut($get, $post)
+    {
         global $callConfig;
-        $company_id = (int)($get['company_id'] ?? 0);
-        $user_id    = (int)($get['user_id'] ?? 0);
+        $company_id = (int) ($get['company_id'] ?? 0);
+        $user_id = (int) ($get['user_id'] ?? 0);
         $nowDT = date('Y-m-d H:i:s');
         // ---------------------------
         // 1) Update visitor_logs
         // ---------------------------
-        $visitor_log_id = (int)($post['pass_return']['visitor_log_id'] ?? ($post['visitor_log_id'] ?? 0));
+        $visitor_log_id = (int) ($post['pass_return']['visitor_log_id'] ?? ($post['visitor_log_id'] ?? 0));
         if ($visitor_log_id <= 0) {
-            return array('status'=>'error','message'=>'Missing visitor_log_id');
+            return array('status' => 'error', 'message' => 'Missing visitor_log_id');
         }
 
         $out_datetime = !empty($post['out_datetime']) ? str_replace('T', ' ', $post['out_datetime']) : $nowDT;
@@ -1523,17 +1435,17 @@ public function getVisitorsDataBasedOnDate($get)
         }
 
         $logData = [
-            'out_datetime'    => $out_datetime,
-            'out_gate_no'     => (empty($post['out_gate_no']) || $post['out_gate_no']=='0') ? null : (int)$post['out_gate_no'],
+            'out_datetime' => $out_datetime,
+            'out_gate_no' => (empty($post['out_gate_no']) || $post['out_gate_no'] == '0') ? null : (int) $post['out_gate_no'],
             'out_security_id' => $user_id ?: null,
-            'remarks'         => $post['pass_return']['remarks'] ?? null,
-            'current_Status'  => 199, // OUT
-            'updated_date'    => $nowDT,
-            'updated_by'      => $user_id ?: null,
+            'remarks' => $post['pass_return']['remarks'] ?? null,
+            'current_Status' => 199, // OUT
+            'updated_date' => $nowDT,
+            'updated_by' => $user_id ?: null,
         ];
         if (($post['visit_type'] ?? '') === 'vendor_supplier') {
             $logData['vendor_supplier_loading_start'] = !empty($post['vendor_supplier_loading_start']) ? str_replace('T', ' ', $post['vendor_supplier_loading_start']) : null;
-            $logData['vendor_supplier_loading_end']   = !empty($post['vendor_supplier_loading_end']) ? str_replace('T', ' ', $post['vendor_supplier_loading_end']) : null;
+            $logData['vendor_supplier_loading_end'] = !empty($post['vendor_supplier_loading_end']) ? str_replace('T', ' ', $post['vendor_supplier_loading_end']) : null;
             $logData['vendor_supplier_vehicle_status'] = $post['vendor_supplier_vehicle_status'] ?? null;
         }
         $callConfig->updateRecord('visitor_logs', $logData, 'id', $visitor_log_id);
@@ -1545,18 +1457,19 @@ public function getVisitorsDataBasedOnDate($get)
         $inLugUpdated = 0;
         if (!empty($post['luggage']) && is_array($post['luggage'])) {
             foreach ($post['luggage'] as $lugId => $row) {
-                $lugId = (int)$lugId; // trust the key as id
-                $isReturnable = (int)($row['returnable'] ?? 0) === 1;
+                $lugId = (int) $lugId; // trust the key as id
+                $isReturnable = (int) ($row['returnable'] ?? 0) === 1;
                 $isReturned = !empty($row['returned_flag']);
-                if (!$isReturnable || !$isReturned || $lugId <= 0) continue;
+                if (!$isReturnable || !$isReturned || $lugId <= 0)
+                    continue;
 
                 // Build update for returned items
                 $upd = [
                     'actual_return_date' => !empty($row['returned_at']) ? $row['returned_at'] : date('Y-m-d'),
-                    'return_remarks'     => $row['return_remarks'] ?? null,
-                    'current_Status'     => 199, // OUT
-                    'updated_date'       => $nowDT,
-                    'updated_by'         => $user_id ?: null,
+                    'return_remarks' => $row['return_remarks'] ?? null,
+                    'current_Status' => 199, // OUT
+                    'updated_date' => $nowDT,
+                    'updated_by' => $user_id ?: null,
                 ];
                 $callConfig->updateRecord('visitor_luggages', $upd, 'id', $lugId);
                 $inLugUpdated++;
@@ -1568,16 +1481,17 @@ public function getVisitorsDataBasedOnDate($get)
         // ---------------------------
         if (!empty($post['vendor_supplier_luggage']) && is_array($post['vendor_supplier_luggage'])) {
             foreach ($post['vendor_supplier_luggage'] as $lugId => $row) {
-                $lugId = (int)$lugId;
-                if ($lugId <= 0) continue;
+                $lugId = (int) $lugId;
+                if ($lugId <= 0)
+                    continue;
                 $left_qty = $row['left_qty'] ?? '';
                 $left_remarks = $row['left_remarks'] ?? '';
                 $returnRemarks = "Left Qty: {$left_qty} | Details: {$left_remarks}";
                 $upd = [
                     'return_remarks' => $returnRemarks,
                     'current_Status' => 199,
-                    'updated_date'   => $nowDT,
-                    'updated_by'     => $user_id ?: null,
+                    'updated_date' => $nowDT,
+                    'updated_by' => $user_id ?: null,
                 ];
                 $callConfig->updateRecord('visitor_luggages', $upd, 'id', $lugId);
                 $inLugUpdated++;
@@ -1597,11 +1511,11 @@ public function getVisitorsDataBasedOnDate($get)
             }
 
             $badgeUpd = [
-                'returned_at'    => $returnedAt,
-                'return_notes'   => $pr['remarks'] ?? null,
+                'returned_at' => $returnedAt,
+                'return_notes' => $pr['remarks'] ?? null,
                 'current_status' => 199, // OUT - lowercase current_status in visitor_badges table
-                'updated_date'   => $nowDT,
-                'updated_by'     => $user_id ?: null,
+                'updated_date' => $nowDT,
+                'updated_by' => $user_id ?: null,
             ];
             // Update attempt:
             $callConfig->updateRecord('visitor_badges', $badgeUpd, 'visitor_log_id', $visitor_log_id);
@@ -1617,29 +1531,32 @@ public function getVisitorsDataBasedOnDate($get)
             foreach ($post['out_luggage'] as $row) {
                 // Skip empty rows
                 $hasAny = false;
-                foreach (['item_key','item_name','brand_name','qty','serial_or_remarks','returnable','return_date','id'] as $k) {
-                    if (!empty($row[$k])) { $hasAny = true; break;
+                foreach (['item_key', 'item_name', 'brand_name', 'qty', 'serial_or_remarks', 'returnable', 'return_date', 'id'] as $k) {
+                    if (!empty($row[$k])) {
+                        $hasAny = true;
+                        break;
                     }
                 }
-                if (!$hasAny) continue;
+                if (!$hasAny)
+                    continue;
 
 
                 $lug = [
-                    'company_id'        => $company_id,
-                    'visitor_log_id'    => (int)$visitor_log_id,
-                    'item_key'          => $row['item_key'] ?? null,
-                    'item_name'         => $row['item_name'] ?? null,
-                    'brand_name'        => $row['brand_name'] ?? null,
-                    'qty'               => (int)($row['qty'] ?? 1),
+                    'company_id' => $company_id,
+                    'visitor_log_id' => (int) $visitor_log_id,
+                    'item_key' => $row['item_key'] ?? null,
+                    'item_name' => $row['item_name'] ?? null,
+                    'brand_name' => $row['brand_name'] ?? null,
+                    'qty' => (int) ($row['qty'] ?? 1),
                     'serial_or_remarks' => $row['serial_or_remarks'] ?? null,
-                    'returnable'        => $row['returnable'] ?? 0,
-                    'return_date'       => (!empty($row['return_date']) ? $row['return_date'] : null),
-                    'visitor_type'      => $row['vistor_type'] ?? '',          // <-- OUT (not IN)
-                    'is_active'         => 0,              // mark as active row
-                    'current_Status'    => 0,              // keep as-is unless you have a specific code
-                    'status_date'       => $nowDT,
-                    'created_date'      => $nowDT,
-                    'created_by'        => $user_id ?: null,
+                    'returnable' => $row['returnable'] ?? 0,
+                    'return_date' => (!empty($row['return_date']) ? $row['return_date'] : null),
+                    'visitor_type' => $row['vistor_type'] ?? '',          // <-- OUT (not IN)
+                    'is_active' => 0,              // mark as active row
+                    'current_Status' => 0,              // keep as-is unless you have a specific code
+                    'status_date' => $nowDT,
+                    'created_date' => $nowDT,
+                    'created_by' => $user_id ?: null,
                 ];
 
                 $callConfig->insertRecord('visitor_luggages', $lug);
@@ -1651,27 +1568,28 @@ public function getVisitorsDataBasedOnDate($get)
         // 5) Done
         // ---------------------------
         return array(
-            'status'          => 'success',
-            'message'         => 'Visitor checked out',
-            'visitor_log_id'  => $visitor_log_id,
+            'status' => 'success',
+            'message' => 'Visitor checked out',
+            'visitor_log_id' => $visitor_log_id,
             'in_luggage_updated' => $inLugUpdated,
-            'badge_updated'      => $badgeUpdated ? 1 : 0,
-            'out_luggage_inserted'=> $outLugInserted
+            'badge_updated' => $badgeUpdated ? 1 : 0,
+            'out_luggage_inserted' => $outLugInserted
         );
     }
 
-    public function getVisitorsSearch($get){
+    public function getVisitorsSearch($get)
+    {
         global $callConfig;
         $out = ['visitor_logs_res' => []];
 
         // Company guard
-        $company_id = isset($get['company_id']) ? (int)$get['company_id'] : 0;
+        $company_id = isset($get['company_id']) ? (int) $get['company_id'] : 0;
         if ($company_id <= 0) {
             return $out;
         }
         $location_id = '';
-        if(isset($get['location_id']) && $get['location_id'] >0){
-            $location_id = ' AND location_id='.$get['location_id'];
+        if (isset($get['location_id']) && $get['location_id'] > 0) {
+            $location_id = ' AND location_id=' . $get['location_id'];
         }
 
         // Inputs
@@ -1686,10 +1604,10 @@ public function getVisitorsDataBasedOnDate($get)
 
         // Basic sanitization for LIKE (since project uses string concatenation)
         // If you have $callConfig->escape(), use that instead.
-        $like = function($s){
+        $like = function ($s) {
             $s = addslashes($s);
             // escape % and _ to avoid wildcard injection
-            $s = str_replace(['%', '_'], ['\%','\_'], $s);
+            $s = str_replace(['%', '_'], ['\%', '\_'], $s);
             return $s;
         };
 
@@ -1713,17 +1631,12 @@ public function getVisitorsDataBasedOnDate($get)
             $ors[] = "idcard_number LIKE '%{$t}%'";
             // if numeric, allow id exact
             if (ctype_digit($text)) {
-                $ors[] = "id = " . (int)$text;
+                $ors[] = "id = " . (int) $text;
             }
             $where[] = '(' . implode(' OR ', $ors) . ')';
         }
 
         // DATE filter (YYYY-MM-DD)
-        if ($date !== '') {
-            // basic date check
-            if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
-                $where[] = "DATE(in_datetime) = '{$date}'";
-            }
         if ($date !== '' && preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
             $where[] = "DATE(in_datetime) = '{$date}'";
         }
@@ -1738,188 +1651,189 @@ public function getVisitorsDataBasedOnDate($get)
     }
 
     public function getVisitorsList($get)
-{
-    global $callConfig;
-    $return = array();
-    $company_id = (int) ($get['company_id'] ?? 0);
-    $location_id = '';
-    if (isset($get['location_id']) && $get['location_id'] > 0) {
-        $location_id = ' AND vl.location_id=' . $get['location_id'];
-    }
-    // --- sanitize inputs (allowlists) ---
-    $period = strtoupper(trim($get['period'] ?? 'TODAY'));
-    $type = strtolower(trim($get['type'] ?? 'visitor'));
-    $bucket = strtolower(trim($get['bucket'] ?? 'total'));
-
-    $periodAllow = ['TODAY', 'YESTERDAY', 'LAST7DAYS', 'ALL'];
-    $typeAllow = ['visitor', 'delivery', 'service', 'employee', 'doctor', 'vendor_supplier', 'others'];
-    $bucketAllow = ['total', 'in_only', 'out'];
-
-    if (!in_array($period, $periodAllow, true))
-        $period = 'TODAY';
-    if (!in_array($type, $typeAllow, true))
-        $type = 'visitor';
-    if (!in_array($bucket, $bucketAllow, true))
-        $bucket = 'total';
-
-    $where = [];
-    $where[] = "vl.company_id = {$company_id}";
-    $where[] = "vl.is_active = 0";
-    $where[] = "vl.visit_type = '{$type}'";
-
-    $inWin = '';
-    $outWin = '';
-    if ($period === 'TODAY') {
-        $inWin = "vl.in_datetime  >= CURDATE() AND vl.in_datetime  < CURDATE() + INTERVAL 1 DAY";
-        $outWin = "vl.out_datetime >= CURDATE() AND vl.out_datetime < CURDATE() + INTERVAL 1 DAY";
-    } elseif ($period === 'YESTERDAY') {
-        $inWin = "vl.in_datetime  >= CURDATE() - INTERVAL 1 DAY AND vl.in_datetime  < CURDATE()";
-        $outWin = "vl.out_datetime >= CURDATE() - INTERVAL 1 DAY AND vl.out_datetime < CURDATE()";
-    } elseif ($period === 'LAST7DAYS') {
-        $inWin = "vl.in_datetime  >= CURDATE() - INTERVAL 7 DAY AND vl.in_datetime  < CURDATE() + INTERVAL 1 DAY";
-        $outWin = "vl.out_datetime >= CURDATE() - INTERVAL 7 DAY AND vl.out_datetime < CURDATE() + INTERVAL 1 DAY";
-    } else { // ALL
-        $inWin = ""; // all rows
-        $outWin = "";
-    }
-
-    $orderBy = "vl.in_datetime DESC";
-
-    if ($bucket === 'total') {
-        if ($period !== 'ALL')
-            $where[] = '(' . $inWin . ' OR ' . $outWin . ')'; // activity = IN or OUT
-        $orderBy = "vl.in_datetime DESC";
-    } elseif ($bucket === 'out') {
-        $where[] = "vl.out_datetime IS NOT NULL";
-        if ($period !== 'ALL')
-            $where[] = $outWin;
-        $orderBy = "vl.out_datetime DESC";
-    } else { // in_only
-        $where[] = "vl.out_datetime IS NULL AND vl.current_Status != 10 AND vl.current_Status != 199";
-        if ($period !== 'ALL')
-            $where[] = $inWin; // for ALL we include everyone still inside
-        $orderBy = "vl.in_datetime DESC";
-    }
-    $whereSql = $where ? ('WHERE ' . implode(' AND ', $where)) : '';
-
-    // --- main SELECT ---
-    // Join employees for whom_to_meet_name; join badges for full_code (active one)
-    $sql = "SELECT vl.* FROM visitor_logs vl $whereSql $location_id ORDER BY $orderBy ";
-    $rows = $callConfig->getAllRows($sql);
-    $return['list'] = $rows;
-
-    $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='delivery_company' AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $delivery_company_res = array();
-    foreach ($data as $row) {
-        $delivery_company_res[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['delivery_company_res'] = $delivery_company_res;
-
-    $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='service_company' AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $service_company_res = array();
-    foreach ($data as $row) {
-        $service_company_res[$row->genc_detail_code] = $row->genc_detail_name;
-    }
-    $return['service_company_res'] = $service_company_res;
-
-    $emp_sql = "SELECT id, emp_code, display_name, phone, email_id FROM employees WHERE company_id = {$get['company_id']} AND is_active = 0 ";
-    $recent_out_rows = $callConfig->getAllRows($emp_sql);
-    $emp_arr = array();
-    $employees_map = array();
-    foreach ($recent_out_rows as $row) {
-        $emp_arr[$row->emp_code] = $row;
-        $employees_map[$row->id] = $row->display_name;
-    }
-    $return['emp_arr'] = $emp_arr;
-    $return['employees_map'] = $employees_map;
-
-    $user_map_sql = "SELECT id, display_name FROM application_users WHERE company_id = {$get['company_id']}";
-    $user_map_rows = $callConfig->getAllRows($user_map_sql);
-    $users_map = array();
-    foreach ($user_map_rows as $row) {
-        $users_map[$row->id] = $row->display_name;
-    }
-    $return['users_map'] = $users_map;
-
-    $query = "SELECT id, display_name AS name FROM vendors WHERE company_id = " . $get['company_id'] . " AND is_active = 0 ";
-    $data = $callConfig->getAllRows($query);
-    $vendors_res = array();
-    foreach ($data as $row) {
-        $vendors_res[$row->id] = $row->name;
-    }
-    $return['vendors_res'] = $vendors_res;
-
-
-    return $return;
-}
-
-
-    public function getvisitormaterialgatepassdata($get){
+    {
         global $callConfig;
         $return = array();
-        if($get['rid'] != ''){
+        $company_id = (int) ($get['company_id'] ?? 0);
+        $location_id = '';
+        if (isset($get['location_id']) && $get['location_id'] > 0) {
+            $location_id = ' AND vl.location_id=' . $get['location_id'];
+        }
+        // --- sanitize inputs (allowlists) ---
+        $period = strtoupper(trim($get['period'] ?? 'TODAY'));
+        $type = strtolower(trim($get['type'] ?? 'visitor'));
+        $bucket = strtolower(trim($get['bucket'] ?? 'total'));
+
+        $periodAllow = ['TODAY', 'YESTERDAY', 'LAST7DAYS', 'ALL'];
+        $typeAllow = ['visitor', 'delivery', 'service', 'employee', 'doctor', 'vendor_supplier', 'others'];
+        $bucketAllow = ['total', 'in_only', 'out'];
+
+        if (!in_array($period, $periodAllow, true))
+            $period = 'TODAY';
+        if (!in_array($type, $typeAllow, true))
+            $type = 'visitor';
+        if (!in_array($bucket, $bucketAllow, true))
+            $bucket = 'total';
+
+        $where = [];
+        $where[] = "vl.company_id = {$company_id}";
+        $where[] = "vl.is_active = 0";
+        $where[] = "vl.visit_type = '{$type}'";
+
+        $inWin = '';
+        $outWin = '';
+        if ($period === 'TODAY') {
+            $inWin = "vl.in_datetime  >= CURDATE() AND vl.in_datetime  < CURDATE() + INTERVAL 1 DAY";
+            $outWin = "vl.out_datetime >= CURDATE() AND vl.out_datetime < CURDATE() + INTERVAL 1 DAY";
+        } elseif ($period === 'YESTERDAY') {
+            $inWin = "vl.in_datetime  >= CURDATE() - INTERVAL 1 DAY AND vl.in_datetime  < CURDATE()";
+            $outWin = "vl.out_datetime >= CURDATE() - INTERVAL 1 DAY AND vl.out_datetime < CURDATE()";
+        } elseif ($period === 'LAST7DAYS') {
+            $inWin = "vl.in_datetime  >= CURDATE() - INTERVAL 7 DAY AND vl.in_datetime  < CURDATE() + INTERVAL 1 DAY";
+            $outWin = "vl.out_datetime >= CURDATE() - INTERVAL 7 DAY AND vl.out_datetime < CURDATE() + INTERVAL 1 DAY";
+        } else { // ALL
+            $inWin = ""; // all rows
+            $outWin = "";
+        }
+
+        if ($bucket === 'total') {
+            if ($period !== 'ALL')
+                $where[] = '(' . $inWin . ' OR ' . $outWin . ')'; // activity = IN or OUT
+            $orderBy = "vl.in_datetime DESC";
+        } elseif ($bucket === 'out') {
+            $where[] = "vl.out_datetime IS NOT NULL";
+            if ($period !== 'ALL')
+                $where[] = $outWin;
+            $orderBy = "vl.out_datetime DESC";
+        } else { // in_only
+            $where[] = "vl.out_datetime IS NULL AND vl.current_Status != 10 AND vl.current_Status != 199";
+            if ($period !== 'ALL')
+                $where[] = $inWin; // for ALL we include everyone still inside
+            $orderBy = "vl.in_datetime DESC";
+        }
+        $whereSql = $where ? ('WHERE ' . implode(' AND ', $where)) : '';
+
+        // --- main SELECT ---
+        // Join employees for whom_to_meet_name; join badges for full_code (active one)
+        $sql = "SELECT vl.* FROM visitor_logs vl $whereSql $location_id ORDER BY $orderBy ";
+        $rows = $callConfig->getAllRows($sql);
+        $return['list'] = $rows;
+
+        $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='delivery_company' AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $delivery_company_res = array();
+        foreach ($data as $row) {
+            $delivery_company_res[$row->genc_detail_code] = $row->genc_detail_name;
+        }
+        $return['delivery_company_res'] = $delivery_company_res;
+
+        $query = "SELECT option_value AS genc_detail_code, option_label AS genc_detail_name FROM visitor_options WHERE company_id = " . $get['company_id'] . " AND option_type='service_company' AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $service_company_res = array();
+        foreach ($data as $row) {
+            $service_company_res[$row->genc_detail_code] = $row->genc_detail_name;
+        }
+        $return['service_company_res'] = $service_company_res;
+
+        $emp_sql = "SELECT id, emp_code, display_name, phone, email_id FROM employees WHERE company_id = {$get['company_id']} AND is_active = 0 ";
+        $recent_out_rows = $callConfig->getAllRows($emp_sql);
+        $emp_arr = array();
+        $employees_map = array();
+        foreach ($recent_out_rows as $row) {
+            $emp_arr[$row->emp_code] = $row;
+            $employees_map[$row->id] = $row->display_name;
+        }
+        $return['emp_arr'] = $emp_arr;
+        $return['employees_map'] = $employees_map;
+
+        $user_map_sql = "SELECT id, display_name FROM application_users WHERE company_id = {$get['company_id']}";
+        $user_map_rows = $callConfig->getAllRows($user_map_sql);
+        $users_map = array();
+        foreach ($user_map_rows as $row) {
+            $users_map[$row->id] = $row->display_name;
+        }
+        $return['users_map'] = $users_map;
+
+        $query = "SELECT id, display_name AS name FROM vendors WHERE company_id = " . $get['company_id'] . " AND is_active = 0 ";
+        $data = $callConfig->getAllRows($query);
+        $vendors_res = array();
+        foreach ($data as $row) {
+            $vendors_res[$row->id] = $row->name;
+        }
+        $return['vendors_res'] = $vendors_res;
+
+
+        return $return;
+    }
+
+
+    public function getvisitormaterialgatepassdata($get)
+    {
+        global $callConfig;
+        $return = array();
+        if ($get['rid'] != '') {
             $query = "SELECT * FROM visitor_logs WHERE id={$get['rid']} AND company_id = {$get['company_id']} AND is_active = 0 ";
             $res = $callConfig->getRow($query);
-            $return['visitor_data'] =  $res;
+            $return['visitor_data'] = $res;
 
 
             $query = "SELECT * FROM visitor_luggages WHERE visitor_log_id={$get['rid']} AND company_id = {$get['company_id']} AND is_active = 0 ";
             $res1 = $callConfig->getAllRows($query);
-            $return['visitor_luggage_data'] =  $res1;
+            $return['visitor_luggage_data'] = $res1;
 
             $emp_code = $res->employee_code ?? '';
-            if($emp_code != ''){
+            if ($emp_code != '') {
                 $query = "SELECT * FROM employees WHERE emp_code='{$emp_code}' AND company_id = {$get['company_id']} AND is_active = 0 ";
                 $res = $callConfig->getRow($query);
-                $return['employees_data'] =  $res;
+                $return['employees_data'] = $res;
             }
         }
         return $return;
     }
 
-    public function getvisitorworkpermitdata($get){
+    public function getvisitorworkpermitdata($get)
+    {
         global $callConfig;
         $return = array();
-        if($get['rid'] != ''){
+        if ($get['rid'] != '') {
             $query = "SELECT * FROM visitor_logs WHERE id={$get['rid']} AND company_id = {$get['company_id']} AND is_active = 0 ";
             $res = $callConfig->getRow($query);
 
             $query = "SELECT * FROM visitor_luggages WHERE visitor_log_id={$get['rid']} AND company_id = {$get['company_id']} AND is_active = 0 ";
             $res1 = $callConfig->getAllRows($query);
-            $return['visitor_luggage_data'] =  $res1;
+            $return['visitor_luggage_data'] = $res1;
 
             $tag_id = $res->id ?? 0;
-            if($tag_id != '' && $tag_id != 0){
+            if ($tag_id != '' && $tag_id != 0) {
                 $query = "SELECT * FROM visitor_logs WHERE tag_id={$tag_id} AND company_id = {$get['company_id']} AND is_active = 0 ";
                 $res2 = $callConfig->getAllRows($query);
-                $return['visitor_workers_data'] =  $res2;
+                $return['visitor_workers_data'] = $res2;
 
             }
 
             $location_id = $res->location_id ?? 0;
-            if($location_id != 0){
+            if ($location_id != 0) {
                 $query = "SELECT id,location_name FROM locations WHERE id={$location_id} AND company_id = {$get['company_id']} AND is_active = 0 ";
                 $res3 = $callConfig->getRow($query);
                 $res->location_name = $res3->location_name;
 
             }
             $service_company = $res->service_company ?? '';
-            if($service_company != ''){
+            if ($service_company != '') {
                 $query = "SELECT option_label AS genc_detail_name FROM visitor_options WHERE option_type='service_company' AND (option_value='" . $callConfig->real_escape_string($service_company) . "' OR id='" . $callConfig->real_escape_string($service_company) . "') AND company_id = {$get['company_id']} AND is_active = 0 ";
                 $res4 = $callConfig->getRow($query);
                 $res->service_company_name = $res4 ? $res4->genc_detail_name : $service_company;
             }
 
-            $return['visitor_data'] =  $res;
+            $return['visitor_data'] = $res;
         }
         return $return;
     }
 
-    public function approveVisitorByHost($rid, $status) {
+    public function approveVisitorByHost($rid, $status)
+    {
         global $callConfig;
-        $rid = (int)$rid;
+        $rid = (int) $rid;
         if ($rid <= 0) {
             return ['status' => 'error', 'message' => 'Invalid Request'];
         }
@@ -1940,46 +1854,48 @@ public function getVisitorsDataBasedOnDate($get)
         return $callConfig->updateRecord('visitor_logs', $upd, 'id', $rid);
     }
 
-    public function getVisitorStatus($rid) {
+    public function getVisitorStatus($rid)
+    {
         global $callConfig;
-        $rid = (int)$rid;
+        $rid = (int) $rid;
         $row = $callConfig->getRow("SELECT current_Status, whom_to_meet, emp_temp_whom_to_meet, deliver_to, authorized_employee FROM visitor_logs WHERE id = {$rid} AND is_active = 0");
         if (empty($row)) {
             return ['status' => 'error', 'message' => 'Not found'];
         }
 
         // Resolve host employee info
-        $hostId = (int)($row->whom_to_meet ?? $row->emp_temp_whom_to_meet ?? $row->deliver_to ?? $row->authorized_employee ?? 0);
+        $hostId = (int) ($row->whom_to_meet ?? $row->emp_temp_whom_to_meet ?? $row->deliver_to ?? $row->authorized_employee ?? 0);
         $hostInfo = ['name' => '', 'email' => '', 'phone' => ''];
         if ($hostId > 0) {
             $emp = $callConfig->getRow("SELECT display_name, email_id, phone FROM employees WHERE id = {$hostId} AND is_active = 0");
             if (!empty($emp)) {
-                $hostInfo['name']  = $emp->display_name ?? '';
+                $hostInfo['name'] = $emp->display_name ?? '';
                 $hostInfo['email'] = $emp->email_id ?? '';
                 $hostInfo['phone'] = $emp->phone ?? '';
             }
         }
 
         return [
-            'status'         => 'success',
-            'current_Status' => (int)$row->current_Status,
-            'host'           => $hostInfo
+            'status' => 'success',
+            'current_Status' => (int) $row->current_Status,
+            'host' => $hostInfo
         ];
     }
 
-    public function resendApprovalEmail($rid) {
+    public function resendApprovalEmail($rid)
+    {
         global $callConfig;
-        $rid = (int)$rid;
+        $rid = (int) $rid;
         $row = $callConfig->getRow("SELECT * FROM visitor_logs WHERE id = {$rid} AND is_active = 0");
         if (empty($row)) {
             return ['status' => 'error', 'message' => 'Visitor log not found'];
         }
-        if ((int)$row->current_Status !== 10) {
+        if ((int) $row->current_Status !== 10) {
             return ['status' => 'error', 'message' => 'Not in pending approval state'];
         }
 
         // Resolve host
-        $hostId = (int)($row->whom_to_meet ?? $row->emp_temp_whom_to_meet ?? $row->deliver_to ?? $row->authorized_employee ?? 0);
+        $hostId = (int) ($row->whom_to_meet ?? $row->emp_temp_whom_to_meet ?? $row->deliver_to ?? $row->authorized_employee ?? 0);
         if (!$hostId) {
             return ['status' => 'error', 'message' => 'No host assigned to this entry'];
         }
@@ -1990,22 +1906,22 @@ public function getVisitorsDataBasedOnDate($get)
         }
 
         $hostEmail = $hostRow->user_email;
-        $hostName  = $hostRow->display_name;
+        $hostName = $hostRow->display_name;
 
-        $visitorName  = trim($row->name ?? ($row->emp_temp_name ?? 'Visitor'));
+        $visitorName = trim($row->name ?? ($row->emp_temp_name ?? 'Visitor'));
         $visitorPhone = trim($row->phone ?? ($row->emp_temp_phone ?? '—'));
-        $purpose      = trim($row->purpose ?? '—');
-        $vehicleType  = trim($row->vehicle_type ?? 'None');
+        $purpose = trim($row->purpose ?? '—');
+        $vehicleType = trim($row->vehicle_type ?? 'None');
         $vehicleNumber = trim($row->vehicle_number ?? '—');
 
 
-        $approveparam = array('mode'=>'approveVisitor','rid'=>$rid,'status'=>'approve','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
-        $rejectparam = array('mode'=>'approveVisitor','rid'=>$rid,'status'=>'reject','dbname'=>$callConfig->dbname,'company_id'=>$callConfig->company_id);
-        $baseUrl = SITEURL."/security_module_verification_page.php";
-        $approveUrl = $baseUrl . "?param=".base64_encode(json_encode($approveparam));
-        $rejectUrl  = $baseUrl . "?param=".base64_encode(json_encode($rejectparam));
+        $approveparam = array('mode' => 'approveVisitor', 'rid' => $rid, 'status' => 'approve', 'dbname' => $callConfig->dbname, 'company_id' => $callConfig->company_id);
+        $rejectparam = array('mode' => 'approveVisitor', 'rid' => $rid, 'status' => 'reject', 'dbname' => $callConfig->dbname, 'company_id' => $callConfig->company_id);
+        $baseUrl = SITEURL . "/security_module_verification_page.php";
+        $approveUrl = $baseUrl . "?param=" . base64_encode(json_encode($approveparam));
+        $rejectUrl = $baseUrl . "?param=" . base64_encode(json_encode($rejectparam));
 
-        $subject   = "[Reminder] Visitor Entry Approval Request: " . $visitorName;
+        $subject = "[Reminder] Visitor Entry Approval Request: " . $visitorName;
         $emailBody = '<!DOCTYPE html>
 <html>
 <head>
@@ -2058,12 +1974,13 @@ public function getVisitorsDataBasedOnDate($get)
             return ['status' => 'error', 'message' => 'Email failed: ' . ($sent['error_email_'] ?? $sent['error_email_msg'] ?? 'Unknown error')];
         }
 
-        return ['status' => 'success', 'message' => 'Reminder email sent to ' . $hostEmail,'sent_log'=>$sent];
+        return ['status' => 'success', 'message' => 'Reminder email sent to ' . $hostEmail, 'sent_log' => $sent];
     }
 
-    public function manualConfirm($rid) {
+    public function manualConfirm($rid)
+    {
         global $callConfig;
-        $rid = (int)$rid;
+        $rid = (int) $rid;
         $row = $callConfig->getRow("SELECT current_Status FROM visitor_logs WHERE id = {$rid} AND is_active = 0");
         if (empty($row)) {
             return ['status' => 'error', 'message' => 'Request not found'];
@@ -2077,9 +1994,10 @@ public function getVisitorsDataBasedOnDate($get)
         return ['status' => 'success'];
     }
 
-    public function finalizeCheckin($rid, $gate_id, $company_id, $user_id, $location_id) {
+    public function finalizeCheckin($rid, $gate_id, $company_id, $user_id, $location_id)
+    {
         global $callConfig;
-        $rid = (int)$rid;
+        $rid = (int) $rid;
         $row = $callConfig->getRow("SELECT * FROM visitor_logs WHERE id = {$rid} AND is_active = 0");
         if (empty($row)) {
             return ['status' => 'error', 'message' => 'Request not found'];
@@ -2095,8 +2013,8 @@ public function getVisitorsDataBasedOnDate($get)
         }
 
         $userObj = new userClass();
-        $postary = array('company_id'=>$company_id,'user_id'=>$user_id);
-        $generatedCode = $userObj->toGetApplicationSerialNumber('visitor_logs',$postary);
+        $postary = array('company_id' => $company_id, 'user_id' => $user_id);
+        $generatedCode = $userObj->toGetApplicationSerialNumber('visitor_logs', $postary);
         if (empty($generatedCode)) {
             return ['status' => 'error', 'message' => 'Failed to generate serial number'];
         }
@@ -2115,26 +2033,102 @@ public function getVisitorsDataBasedOnDate($get)
         $callConfig->updateRecord('visitor_logs', $updLog, 'id', $rid);
 
         $badge = [
-            'company_id'     => $company_id,
-            'gate_id'        => $gate_id,
-            'badge_date'     => date('Y-m-d'),
+            'company_id' => $company_id,
+            'gate_id' => $gate_id,
+            'badge_date' => date('Y-m-d'),
             'visitor_log_id' => $rid,
-            'full_code'      => $generatedCode,
-            'issued_at'      => date('Y-m-d H:i:s'),
-            'returned_at'    => null,
-            'is_active'      => 0,
+            'full_code' => $generatedCode,
+            'issued_at' => date('Y-m-d H:i:s'),
+            'returned_at' => null,
+            'is_active' => 0,
             'current_status' => 0,
-            'status_date'    => date('Y-m-d H:i:s'),
-            'created_date'   => date('Y-m-d H:i:s'),
-            'created_by'     => $user_id ?: null,
-            'location_id'    => $location_id,
+            'status_date' => date('Y-m-d H:i:s'),
+            'created_date' => date('Y-m-d H:i:s'),
+            'created_by' => $user_id ?: null,
+            'location_id' => $location_id,
         ];
         $callConfig->insertRecord('visitor_badges', $badge);
 
         return ['status' => 'success', 'rid' => $rid, 'badge' => $generatedCode];
     }
-    /**
-        public function getVisitorDetails($get)
+
+    public function getReferenceTransactions($get)
+    {
+        global $callConfig;
+        $doc_type = $get['doc_type'] ?? '';
+        $company_id = (int) ($get['company_id'] ?? 0);
+        if ($company_id <= 0) {
+            return [];
+        }
+
+        $results = [];
+        if (in_array($doc_type, ['purchase_orders', 'purchase_invoices'])) {
+            $sql = "SELECT id, transaction_number FROM " . $doc_type . " WHERE company_id = '" . $company_id . "' AND is_active = 0 ORDER BY transaction_number ASC";
+            $res = $callConfig->getAllRows($sql);
+            if ($res) {
+                foreach ($res as $row) {
+                    $results[] = (array) $row;
+                }
+            }
+        }
+        return $results;
+    }
+
+    public function getHistoricalVisitorProfileSearch($get)
+    {
+        global $callConfig;
+        $query = isset($get['query']) ? trim($get['query']) : '';
+        $visit_type = isset($get['visit_type']) ? trim($get['visit_type']) : '';
+        $company_id = (int) ($get['company_id'] ?? 1);
+        $location_id = (int) ($get['location_id'] ?? 1);
+
+        $results = [];
+        if ($query !== '' && $visit_type !== '') {
+            $q = $callConfig->real_escape_string($query);
+            $q = str_replace(['%', '_'], ['\\%', '\\_'], $q);
+
+            $where = [];
+            $where[] = "company_id = " . $company_id;
+            $where[] = "is_active = 0";
+
+            // If searching for visitor, search visitor and others
+            // if ($visit_type === 'visitor') {
+            //     $where[] = "visit_type IN ('visitor', 'others')";
+            // } else {
+            //     $where[] = "visit_type = '" . $callConfig->real_escape_string($visit_type) . "'";
+            // }
+
+            if ($location_id > 0) {
+                $where[] = "location_id = " . $location_id;
+            }
+
+            $ors = [];
+            $ors[] = "name LIKE '%{$q}%'";
+            $ors[] = "phone LIKE '%{$q}%'";
+            $ors[] = "visitor_idcard_no LIKE '%{$q}%'";
+            $ors[] = "idcard_number LIKE '%{$q}%'";
+            $ors[] = "delivery_company_person LIKE '%{$q}%'";
+            $ors[] = "delivery_phone LIKE '%{$q}%'";
+            $ors[] = "service_person LIKE '%{$q}%'";
+            $ors[] = "service_phone LIKE '%{$q}%'";
+            $ors[] = "doctor_name LIKE '%{$q}%'";
+            $ors[] = "doctor_phone LIKE '%{$q}%'";
+            $ors[] = "vendor_supplier_driver_name LIKE '%{$q}%'";
+            $ors[] = "vendor_supplier_driver_mobile LIKE '%{$q}%'";
+            $ors[] = "vendor_supplier_vehicle_number LIKE '%{$q}%'";
+            $where[] = '(' . implode(' OR ', $ors) . ')';
+            $whereSql = implode(' AND ', $where);
+            $sql = "SELECT * FROM visitor_logs WHERE {$whereSql} ORDER BY id DESC LIMIT 15";
+            $res = $callConfig->getAllRows($sql);
+            if ($res) {
+                foreach ($res as $row) {
+                    $results[] = (array) $row;
+                }
+            }
+        }
+        return $results;
+    }
+    public function getVisitorDetails($get)
     {
         global $callConfig;
         $return = array();
@@ -2204,21 +2198,28 @@ public function getVisitorsDataBasedOnDate($get)
         $in_guard_name = '—';
         $in_security_id = (int) ($log->in_security_id ?? 0);
         if ($in_security_id > 0) {
-            $userRow = $callConfig->getRow("SELECT display_name, user_name FROM application_users WHERE id = " . $in_security_id);
-            $in_guard_name = $userRow ? ($userRow->display_name ?: $userRow->user_name) : '—';
+            $userRow = $callConfig->getRow("SELECT display_name, user_name FROM application_users WHERE id = " .
+                $in_security_id);
+            if ($userRow) {
+                $in_guard_name = !empty($userRow->display_name) ? $userRow->display_name : $userRow->user_name;
+            }
         }
         $return['in_guard_name'] = $in_guard_name;
 
         $out_guard_name = '—';
         $out_security_id = (int) ($log->out_security_id ?? 0);
         if ($out_security_id > 0) {
-            $userRow = $callConfig->getRow("SELECT display_name, user_name FROM application_users WHERE id = " . $out_security_id);
-            $out_guard_name = $userRow ? ($userRow->display_name ?: $userRow->user_name) : '—';
+            $userRow = $callConfig->getRow("SELECT display_name, user_name FROM application_users WHERE id = " .
+                $out_security_id);
+            if ($userRow) {
+                $out_guard_name = !empty($userRow->display_name) ? $userRow->display_name : $userRow->user_name;
+            }
         }
         $return['out_guard_name'] = $out_guard_name;
 
         // Fetch luggages/materials
-        $luggages = $callConfig->getAllRows("SELECT * FROM visitor_luggages WHERE visitor_log_id = $log_id AND is_active = 0");
+        $luggages = $callConfig->getAllRows("SELECT * FROM visitor_luggages WHERE visitor_log_id = $log_id AND is_active =
+    0");
         $return['luggages'] = $luggages ?: array();
 
         // Fetch UOMs mapping
@@ -2233,196 +2234,11 @@ public function getVisitorsDataBasedOnDate($get)
 
         return $return;
     }
-**/
-    public function getReferenceTransactions($get)
-    {
-        global $callConfig;
-        $doc_type = $get['doc_type'] ?? '';
-        $company_id = (int)($get['company_id'] ?? 0);
-        if ($company_id <= 0) {
-            return [];
-        }
-
-        $results = [];
-        if (in_array($doc_type, ['purchase_orders', 'purchase_invoices'])) {
-            $sql = "SELECT id, transaction_number FROM " . $doc_type . " WHERE company_id = '" . $company_id . "' AND is_active = 0 ORDER BY transaction_number ASC";
-            $res = $callConfig->getAllRows($sql);
-            if ($res) {
-                foreach ($res as $row) {
-                    $results[] = (array)$row;
-                }
-            }
-        }
-        return $results;
-    }
-
-    public function getHistoricalVisitorProfileSearch($get)
-    {
-        global $callConfig;
-        $query = isset($get['query']) ? trim($get['query']) : '';
-        $visit_type = isset($get['visit_type']) ? trim($get['visit_type']) : '';
-        $company_id = (int)($get['company_id'] ?? 1);
-        $location_id = (int)($get['location_id'] ?? 1);
-
-        $results = [];
-        if ($query !== '' && $visit_type !== '') {
-            $q = $callConfig->real_escape_string($query);
-            $q = str_replace(['%', '_'], ['\\%', '\\_'], $q);
-
-            $where = [];
-            $where[] = "company_id = " . $company_id;
-            $where[] = "is_active = 0";
-
-            // If searching for visitor, search visitor and others
-            // if ($visit_type === 'visitor') {
-            //     $where[] = "visit_type IN ('visitor', 'others')";
-            // } else {
-            //     $where[] = "visit_type = '" . $callConfig->real_escape_string($visit_type) . "'";
-            // }
-
-            if ($location_id > 0) {
-                $where[] = "location_id = " . $location_id;
-            }
-
-            $ors = [];
-            $ors[] = "name LIKE '%{$q}%'";
-            $ors[] = "phone LIKE '%{$q}%'";
-            $ors[] = "visitor_idcard_no LIKE '%{$q}%'";
-            $ors[] = "idcard_number LIKE '%{$q}%'";
-            $ors[] = "delivery_company_person LIKE '%{$q}%'";
-            $ors[] = "delivery_phone LIKE '%{$q}%'";
-            $ors[] = "service_person LIKE '%{$q}%'";
-            $ors[] = "service_phone LIKE '%{$q}%'";
-            $ors[] = "doctor_name LIKE '%{$q}%'";
-            $ors[] = "doctor_phone LIKE '%{$q}%'";
-            $ors[] = "vendor_supplier_driver_name LIKE '%{$q}%'";
-            $ors[] = "vendor_supplier_driver_mobile LIKE '%{$q}%'";
-            $ors[] = "vendor_supplier_vehicle_number LIKE '%{$q}%'";
-            $where[] = '(' . implode(' OR ', $ors) . ')';
-            $whereSql = implode(' AND ', $where);
-            $sql = "SELECT * FROM visitor_logs WHERE {$whereSql} ORDER BY id DESC LIMIT 15";
-            $res = $callConfig->getAllRows($sql);
-            if ($res) {
-                foreach ($res as $row) {
-                    $results[] = (array)$row;
-                }
-            }
-        }
-        return $results;
-    }
-    public function getVisitorDetails($get)
-{
-    global $callConfig;
-    $return = array();
-    $log_id = isset($get['id']) ? (int) $get['id'] : 0;
-    if ($log_id <= 0) {
-        return array('status' => 'error', 'message' => 'Invalid visitor log ID');
-    }
-
-    // Fetch visitor log record
-    $log = $callConfig->getRow("SELECT * FROM visitor_logs WHERE id = $log_id AND is_active = 0");
-    if (!$log) {
-        return array('status' => 'error', 'message' => 'Visitor log record not found');
-    }
-    $return['log'] = $log;
-
-    // Fetch employee host
-    $host_name = '—';
-    $whom_to_meet = (int) (($log->whom_to_meet > 0) ? $log->whom_to_meet : ($log->emp_temp_whom_to_meet ?? 0));
-    if ($whom_to_meet > 0) {
-        $hostRow = $callConfig->getRow("SELECT display_name FROM employees WHERE id = " . $whom_to_meet);
-        if ($hostRow) {
-            $host_name = $hostRow->display_name;
-        }
-    }
-    $return['host_name'] = $host_name;
-
-    // Fetch department
-    $dept_name = '—';
-    $dept_id = (int) ($log->vendor_supplier_department_id ?? 0);
-    if ($dept_id > 0) {
-        $deptRow = $callConfig->getRow("SELECT department_name FROM departments WHERE id = " . $dept_id);
-        if ($deptRow) {
-            $dept_name = $deptRow->department_name;
-        }
-    }
-    $return['dept_name'] = $dept_name;
-
-    // Fetch vendor
-    $vendor_name = '—';
-    $vendor_id = (int) ($log->vendor_supplier_vendor_id ?? 0);
-    if ($vendor_id > 0) {
-        $vendorRow = $callConfig->getRow("SELECT company, display_name FROM vendors WHERE id = " . $vendor_id);
-        if ($vendorRow) {
-            $vendor_name = ($vendorRow->company ? $vendorRow->company . ' - ' : '') . $vendorRow->display_name;
-        }
-    }
-    $return['vendor_name'] = $vendor_name;
-
-    // Fetch gates
-    $in_gate_name = '—';
-    $in_gate_no = (int) ($log->in_gate_no ?? 0);
-    if ($in_gate_no > 0) {
-        $gateRow = $callConfig->getRow("SELECT name FROM building_gates WHERE id = " . $in_gate_no);
-        $in_gate_name = $gateRow ? $gateRow->name : '—';
-    }
-    $return['in_gate_name'] = $in_gate_name;
-
-    $out_gate_name = '—';
-    $out_gate_no = (int) ($log->out_gate_no ?? 0);
-    if ($out_gate_no > 0) {
-        $gateRow = $callConfig->getRow("SELECT name FROM building_gates WHERE id = " . $out_gate_no);
-        $out_gate_name = $gateRow ? $gateRow->name : '—';
-    }
-    $return['out_gate_name'] = $out_gate_name;
-
-    // Fetch security guards
-    $in_guard_name = '—';
-    $in_security_id = (int) ($log->in_security_id ?? 0);
-    if ($in_security_id > 0) {
-        $userRow = $callConfig->getRow("SELECT display_name, user_name FROM application_users WHERE id = " .
-            $in_security_id);
-        $in_guard_name = $userRow ? ($userRow->display_name ?: $userRow->user_name) : '—';
-        if ($userRow) {
-            $in_guard_name = !empty($userRow->display_name) ? $userRow->display_name : $userRow->user_name;
-        }
-    }
-    $return['in_guard_name'] = $in_guard_name;
-
-    $out_guard_name = '—';
-    $out_security_id = (int) ($log->out_security_id ?? 0);
-    if ($out_security_id > 0) {
-        $userRow = $callConfig->getRow("SELECT display_name, user_name FROM application_users WHERE id = " .
-            $out_security_id);
-        $out_guard_name = $userRow ? ($userRow->display_name ?: $userRow->user_name) : '—';
-        if ($userRow) {
-            $out_guard_name = !empty($userRow->display_name) ? $userRow->display_name : $userRow->user_name;
-        }
-    }
-    $return['out_guard_name'] = $out_guard_name;
-
-    // Fetch luggages/materials
-    $luggages = $callConfig->getAllRows("SELECT * FROM visitor_luggages WHERE visitor_log_id = $log_id AND is_active =
-    0");
-    $return['luggages'] = $luggages ?: array();
-
-    // Fetch UOMs mapping
-    $uom_map = [];
-    $uoms = $callConfig->getAllRows("SELECT id, uom_name, uom_short_code FROM unit_of_measurements");
-    if ($uoms) {
-        foreach ($uoms as $u) {
-            $uom_map[$u->id] = $u->uom_name . ($u->uom_short_code ? ' (' . $u->uom_short_code . ')' : '');
-        }
-    }
-    $return['uom_map'] = $uom_map;
-
-    return $return;
-}
-public function getVisitorProfilesReportData($get)
+    public function getVisitorProfilesReportData($get)
     {
         global $callConfig;
         $return = array();
-        $company_id = (int)($get['company_id'] ?? 1);
+        $company_id = (int) ($get['company_id'] ?? 1);
         $visit_type = $get['visit_type'] ?? 'all';
         $search = $get['search'] ?? '';
 
@@ -2536,7 +2352,7 @@ public function getVisitorProfilesReportData($get)
 
         $processed = [];
         foreach ($rows as $row) {
-            $processed[] = (array)$row;
+            $processed[] = (array) $row;
         }
         $return['visitor_profiles'] = $processed;
         return $return;
@@ -2546,9 +2362,9 @@ public function getVisitorProfilesReportData($get)
     {
         global $callConfig;
         $return = array();
-        $company_id = (int)($get['company_id'] ?? 1);
+        $company_id = (int) ($get['company_id'] ?? 1);
         $phone = $get['phone'] ?? '';
-        $vendor_id = isset($get['vendor_id']) ? (int)$get['vendor_id'] : 0;
+        $vendor_id = isset($get['vendor_id']) ? (int) $get['vendor_id'] : 0;
 
         if ($phone === '' && $vendor_id <= 0) {
             return ['status' => 'error', 'message' => 'Invalid or empty phone number or vendor id'];
@@ -2589,8 +2405,8 @@ public function getVisitorProfilesReportData($get)
         $whomToMeetIds = [];
         $logIds = [];
         foreach ($logs as $log) {
-            $logIds[] = (int)$log->id;
-            $wtm = (int)($log->whom_to_meet > 0 ? $log->whom_to_meet : ($log->emp_temp_whom_to_meet ?? 0));
+            $logIds[] = (int) $log->id;
+            $wtm = (int) ($log->whom_to_meet > 0 ? $log->whom_to_meet : ($log->emp_temp_whom_to_meet ?? 0));
             if ($wtm > 0) {
                 $whomToMeetIds[] = $wtm;
             }
@@ -2601,13 +2417,13 @@ public function getVisitorProfilesReportData($get)
             $idsCsv = implode(',', array_unique($whomToMeetIds));
             $empRows = $callConfig->getAllRows("SELECT id, display_name FROM employees WHERE id IN ({$idsCsv}) AND is_active = 0") ?: [];
             foreach ($empRows as $emp) {
-                $employeesMap[(int)$emp->id] = $emp->display_name;
+                $employeesMap[(int) $emp->id] = $emp->display_name;
             }
         }
 
         $vendorIds = [];
         foreach ($logs as $log) {
-            $vId = (int)($log->vendor_supplier_vendor_id ?? 0);
+            $vId = (int) ($log->vendor_supplier_vendor_id ?? 0);
             if ($vId > 0) {
                 $vendorIds[] = $vId;
             }
@@ -2617,13 +2433,13 @@ public function getVisitorProfilesReportData($get)
             $vIdsCsv = implode(',', array_unique($vendorIds));
             $vRows = $callConfig->getAllRows("SELECT id, company, display_name FROM vendors WHERE id IN ({$vIdsCsv})") ?: [];
             foreach ($vRows as $v) {
-                $vendorsMap[(int)$v->id] = ($v->company ? $v->company . ' - ' : '') . $v->display_name;
+                $vendorsMap[(int) $v->id] = ($v->company ? $v->company . ' - ' : '') . $v->display_name;
             }
         }
 
         $deptIds = [];
         foreach ($logs as $log) {
-            $dId = (int)($log->vendor_supplier_department_id ?? 0);
+            $dId = (int) ($log->vendor_supplier_department_id ?? 0);
             if ($dId > 0) {
                 $deptIds[] = $dId;
             }
@@ -2633,7 +2449,7 @@ public function getVisitorProfilesReportData($get)
             $dIdsCsv = implode(',', array_unique($deptIds));
             $dRows = $callConfig->getAllRows("SELECT id, department_name FROM departments WHERE id IN ({$dIdsCsv})") ?: [];
             foreach ($dRows as $d) {
-                $deptsMap[(int)$d->id] = $d->department_name;
+                $deptsMap[(int) $d->id] = $d->department_name;
             }
         }
 
@@ -2653,33 +2469,33 @@ public function getVisitorProfilesReportData($get)
             $itemKeys = [];
             foreach ($luggagesList as $lug) {
                 if (empty($lug->item_name) && !empty($lug->item_key) && is_numeric($lug->item_key)) {
-                    $itemKeys[] = (int)$lug->item_key;
+                    $itemKeys[] = (int) $lug->item_key;
                 }
             }
             if (!empty($itemKeys)) {
                 $itemKeysCsv = implode(',', array_unique($itemKeys));
                 $itemRows = $callConfig->getAllRows("SELECT id, item_name FROM items WHERE id IN ({$itemKeysCsv})") ?: [];
                 foreach ($itemRows as $itm) {
-                    $itemsMap[(int)$itm->id] = $itm->item_name;
+                    $itemsMap[(int) $itm->id] = $itm->item_name;
                 }
             }
         }
 
         $logsCheckoutMap = [];
         foreach ($logs as $log) {
-            $logsCheckoutMap[(int)$log->id] = !empty($log->out_datetime) && $log->out_datetime !== '0000-00-00 00:00:00';
+            $logsCheckoutMap[(int) $log->id] = !empty($log->out_datetime) && $log->out_datetime !== '0000-00-00 00:00:00';
         }
 
         $luggagesByLog = [];
         $overallMaterials = [];
 
         foreach ($luggagesList as $lug) {
-            $lId = (int)$lug->visitor_log_id;
+            $lId = (int) $lug->visitor_log_id;
 
             // Apply resolved item name to object if resolved
             $itemName = trim($lug->item_name ?? '');
             if ($itemName === '' && !empty($lug->item_key) && is_numeric($lug->item_key)) {
-                $itemKeyInt = (int)$lug->item_key;
+                $itemKeyInt = (int) $lug->item_key;
                 if (isset($itemsMap[$itemKeyInt]) && trim($itemsMap[$itemKeyInt]) !== '') {
                     $itemName = trim($itemsMap[$itemKeyInt]);
                 }
@@ -2694,7 +2510,7 @@ public function getVisitorProfilesReportData($get)
             }
             $lug->item_name = $itemName;
 
-            $luggagesByLog[$lId][] = (array)$lug;
+            $luggagesByLog[$lId][] = (array) $lug;
 
             $brandOrUom = trim($lug->brand_name);
             $key = strtolower($itemName . '||' . $brandOrUom);
@@ -2708,7 +2524,7 @@ public function getVisitorProfilesReportData($get)
                 ];
             }
 
-            $qty = (float)$lug->qty;
+            $qty = (float) $lug->qty;
             if (strtoupper($lug->visitor_type) === 'IN') {
                 $overallMaterials[$key]['qty_in'] += $qty;
 
@@ -2717,7 +2533,7 @@ public function getVisitorProfilesReportData($get)
                 if ($has_checked_out) {
                     $remarks = $lug->return_remarks ?? '';
                     if (preg_match('/Left Qty:\s*([0-9.]+)/i', $remarks, $matches)) {
-                        $left_qty = (float)$matches[1];
+                        $left_qty = (float) $matches[1];
                         $taken_out = max(0.0, $qty - $left_qty);
                         $overallMaterials[$key]['qty_out'] += $taken_out;
                     } else {
@@ -2732,14 +2548,14 @@ public function getVisitorProfilesReportData($get)
 
         $logsList = [];
         foreach ($logs as $log) {
-            $lArr = (array)$log;
-            $wtm = (int)($log->whom_to_meet > 0 ? $log->whom_to_meet : ($log->emp_temp_whom_to_meet ?? 0));
+            $lArr = (array) $log;
+            $wtm = (int) ($log->whom_to_meet > 0 ? $log->whom_to_meet : ($log->emp_temp_whom_to_meet ?? 0));
             $lArr['host_name'] = $employeesMap[$wtm] ?? '—';
-            $vId = (int)($log->vendor_supplier_vendor_id ?? 0);
+            $vId = (int) ($log->vendor_supplier_vendor_id ?? 0);
             $lArr['vendor_name'] = $vendorsMap[$vId] ?? '—';
-            $dId = (int)($log->vendor_supplier_department_id ?? 0);
+            $dId = (int) ($log->vendor_supplier_department_id ?? 0);
             $lArr['department_name'] = $deptsMap[$dId] ?? '—';
-            $lArr['luggages'] = $luggagesByLog[(int)$log->id] ?? [];
+            $lArr['luggages'] = $luggagesByLog[(int) $log->id] ?? [];
             $logsList[] = $lArr;
         }
 

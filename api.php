@@ -78,13 +78,6 @@ if ($method == 'post') {
 		$res = $userObj->checkAdmin($data);
 		echo json_encode($res);
 	}
-	if ($mode == "infisuitejobcandedatesave") {
-		if ($_POST['extid'] != "") {
-			$res = $intiObj->infisuitejobcandedatesave($_POST, $_GET);
-			echo json_encode($res);
-			exit;
-		}
-
 	if ($mode == "infisuitejobcandedatesave" && ($_POST['extid'] ?? '') != "") {
 		$res = $intiObj->infisuitejobcandedatesave($_POST, $_GET);
 		echo json_encode($res);
@@ -507,8 +500,6 @@ if ($method == 'post') {
 			];
 			$token = JWT::encode($payload, JWT_SECRET_KEY, JWT_ALGORITHM);
 			$res->infi_token = $token;
-		} else {
-
 		}
 		if (ob_get_length()) {
 			ob_clean();
@@ -839,8 +830,8 @@ if ($method == 'post') {
 			if (move_uploaded_file($_FILES[$image]["tmp_name"], $file_uploads_path . $newfilename)) {
 				$res[$image] = $newfilename;
 			}/*else{
-			 echo "<br> Nooo";
-		 }*/
+			echo "<br> Nooo";
+		}*/
 		}
 		if (ob_get_length()) {
 			ob_clean();
@@ -1776,12 +1767,6 @@ if ($method == 'post') {
 		$details = $userObj->toGetApplicationSerialNumber($_GET['table'], $_GET);
 		echo json_encode($details);
 	}
-	if ($mode == "infisuitejobcandedatesave") {
-		if ($_POST['extid'] != "") {
-			$res = $intiObj->infisuitejobcandedatesave($_GET, $_GET);
-			echo json_encode($res);
-			exit;
-		}
 	if ($mode == "infisuitejobcandedatesave" && ($_POST['extid'] ?? '') != "") {
 		$res = $intiObj->infisuitejobcandedatesave($_GET, $_GET);
 		echo json_encode($res);

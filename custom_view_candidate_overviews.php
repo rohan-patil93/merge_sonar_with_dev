@@ -35,7 +35,7 @@ if (isset($_POST['submit_doc'])) {
         }
       }
     </script>
-  <?php 
+  <?php
   }
 }
 //request documents
@@ -53,7 +53,7 @@ if (isset($_POST['submitrequerd_docs'])) {
         }
       }
     </script>
-  <?php
+    <?php
   }
 }
 //request documents
@@ -359,12 +359,16 @@ $due_date_period_list = $result['period_list'];
         <div class="card-header">
           <h5>About</h5>
           <div class="card-header-right">
-            <i role="button" tabindex="0" aria-label="Edit" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-pencil"
+            <i role="button" tabindex="0" aria-label="Edit"
+              onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+              class="ti-pencil"
               onclick="editFormShow('contact_detailsL','contact_detailsT','edit_contact_details','save_contact_details','Edit')"
               id="edit_contact_details" data-bs-toggle="tooltip" data-placement="bottom" title=""
               data-bs-original-title="Edit"></i>
 
-            <i role="button" tabindex="0" aria-label="Cancel" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-back-left" data-bs-toggle="tooltip" id="save_contact_details_undo" data-placement="bottom"
+            <i role="button" tabindex="0" aria-label="Cancel"
+              onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+              class="ti-back-left" data-bs-toggle="tooltip" id="save_contact_details_undo" data-placement="bottom"
               title="" data-bs-original-title="Cancel"
               onclick="cancelChange('contact_detailsT','contact_detailsL','save_contact_details','edit_contact_details')"
               style="display: none"></i>
@@ -379,7 +383,8 @@ $due_date_period_list = $result['period_list'];
             <div class="mb-2 pb-2">
               <span class="f-w-600 form-label d-inline-block">Job Role</span>
               <p class="f-14 mb-0 contact_detailsL">
-                <?php echo $candidates['candidate_current_role'] != "" ? $candidates['candidate_current_role'] : "N/A"; ?></p>
+                <?php echo $candidates['candidate_current_role'] != "" ? $candidates['candidate_current_role'] : "N/A"; ?>
+              </p>
               <input class="form-control contact_detailsT" data-type="text" type="text" id="candidate_current_role"
                 name="candidate_current_role" value="<?php echo $candidates['candidate_current_role']; ?>"
                 style="display: none" aria-label="Candidate Current Role">
@@ -387,7 +392,8 @@ $due_date_period_list = $result['period_list'];
             <div class="mb-2 pb-2">
               <span class="f-w-600 form-label d-inline-block">Department</span>
               <p class="f-14 mb-0 contact_detailsL">
-                <?php echo $candidates['department_id'] != "" ? $job_titles[$candidates['department_id']] : "N/A"; ?></p>
+                <?php echo $candidates['department_id'] != "" ? $job_titles[$candidates['department_id']] : "N/A"; ?>
+              </p>
               <select class="form-select contact_detailsT" data-type="select" id="department_id" name="department_id"
                 style="display: none" aria-label="Department Id">
                 <?php foreach ($departments as $key4 => $department) { ?>
@@ -399,7 +405,8 @@ $due_date_period_list = $result['period_list'];
             <div class=" mb-2 pb-2">
               <span class="f-w-600 form-label d-inline-block">Designation</span>
               <p class="f-14 mb-0 contact_detailsL">
-                <?php echo $candidates['job_tittle_id'] != "" ? $job_titles[$candidates['job_tittle_id']] : "N/A"; ?></p>
+                <?php echo $candidates['job_tittle_id'] != "" ? $job_titles[$candidates['job_tittle_id']] : "N/A"; ?>
+              </p>
               <select class="form-select  contact_detailsT" data-type="select" id="job_tittle_id" name="job_tittle_id"
                 style="display: none" aria-label="Job Tittle Id">
                 <?php foreach ($job_titles as $key5 => $job_title) { ?>
@@ -415,11 +422,15 @@ $due_date_period_list = $result['period_list'];
         <div class="card-header">
           <h5>Key Contacts</h5>
           <div class="card-header-right">
-            <i role="button" tabindex="0" aria-label="Edit" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-pencil"
+            <i role="button" tabindex="0" aria-label="Edit"
+              onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+              class="ti-pencil"
               onclick="editFormShow('personal_detailsL','personal_detailsT','edit_personal_details','save_personal_details','Edit')"
               id="edit_personal_details" data-bs-toggle="tooltip" data-placement="bottom" title=""
               data-bs-original-title="Edit"></i>
-            <i role="button" tabindex="0" aria-label="Cancel" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-back-left" data-bs-toggle="tooltip" id="save_personal_details_undo" data-placement="bottom"
+            <i role="button" tabindex="0" aria-label="Cancel"
+              onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+              class="ti-back-left" data-bs-toggle="tooltip" id="save_personal_details_undo" data-placement="bottom"
               title="" data-bs-original-title="Cancel"
               onclick="cancelChange('personal_detailsT','personal_detailsL','save_personal_details','edit_personal_details')"
               style="display: none"></i>
@@ -442,12 +453,15 @@ $due_date_period_list = $result['period_list'];
             <div class=" mb-2 pb-2">
               <span class="f-w-600 form-label d-inline-block">HR Manager</span>
               <p class="f-14 mb-0 personal_detailsL">
-                <?php echo $candidates['hr_connect'] != "" ? $_SESSION['users'][$candidates['hr_connect']] : "N/A"; ?></p>
+                <?php echo $candidates['hr_connect'] != "" ? $_SESSION['users'][$candidates['hr_connect']] : "N/A"; ?>
+              </p>
               <select class="form-select  personal_detailsT" data-type="select" id="hr_connect" name="hr_connect"
                 style="display: none" aria-label="Hr Connect">
                 <?php foreach ($applicationusers as $key7 => $displayname) { ?>
-                  <option <?php if ($candidates['hr_connect'] == $key7) { ?> selected <?php } ?> value="<?php echo $key7; ?>">
-                    <?php echo $displayname; ?></option>
+                  <option <?php if ($candidates['hr_connect'] == $key7) { ?> selected <?php } ?>
+                    value="<?php echo $key7; ?>">
+                    <?php echo $displayname; ?>
+                  </option>
                 <?php } ?>
               </select>
             </div>
@@ -476,7 +490,6 @@ $due_date_period_list = $result['period_list'];
 
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Profile Readiness</a>
                 <div class="accordion-desc p-0">
-                  <table role="presentation" class="table table-hover table-md">
                   <table class="table table-hover table-md">
                     <tbody>
                       <?php foreach ($profilereadiness as $keylabel => $profilereadines) {
@@ -492,11 +505,13 @@ $due_date_period_list = $result['period_list'];
                         ?>
                         <tr>
                           <td>
-                            <h6 class="mb-0 f-14"><i role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-pencil"
+                            <h6 class="mb-0 f-14"><i role="button" tabindex="0"
+                                aria-label="<?= htmlspecialchars(__('Edit'), ENT_QUOTES, 'UTF-8'); ?>"
+                                onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+                                class="ti-pencil"
                                 onclick="window.open('index.php?option=COM_INSERT_CANDIDATE&ETYPE=<?php echo str_replace(" ", "_", $keylabel); ?>&Rid=<?php echo $_GET['Rid']; ?>', '_blank');"></i>
                               <?php echo $keylabel; ?></h6>
                           </td>
-                          <td align="right">
                           <td style="text-align: right;">
                             <div class="d-flex align-items-center w-100px w-sm-120px flex-column ">
                               <div class="d-flex justify-content-between w-100 mt-auto mb-2">
@@ -508,7 +523,8 @@ $due_date_period_list = $result['period_list'];
                                   <div
                                     class="progress-bar progress-bar-<?php echo round($percentage) >= 50 ? "success" : "danger"; ?>"
                                     role="progressbar" style="width:  <?php echo round($percentage); ?>%;"
-                                    aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    aria-valuenow="<?php echo round($percentage); ?>" aria-valuemin="0"
+                                    aria-valuemax="100"></div>
                                 </div>
                               </div>
                             </div>
@@ -522,171 +538,165 @@ $due_date_period_list = $result['period_list'];
                 </div>
 
                 <?php /** ?>
-          <a class="accordion-msg b-none waves-effect waves-light f-w-700">Documents <span class="float-end"><?php echo $totaldocuments['uploaded_cnt']
-       ;?> of <?php echo $totaldocuments['total'];?> Uploaded</span></a>
-           <div class="accordion-desc">
-               <div class="row">
+     <a class="accordion-msg b-none waves-effect waves-light f-w-700">Documents <span class="float-end"><?php echo $totaldocuments['uploaded_cnt']
+  ;?> of <?php echo $totaldocuments['total'];?> Uploaded</span></a>
+      <div class="accordion-desc">
+          <div class="row">
 
-                 <form method="post"  enctype="multipart/form-data">
-                   <div class="accordion-block color-accordion-block">
-           <div class="color-accordion" id="color-accordion-documents-commented">
-       <?php
-       $subbtn = 1;
-       foreach($parentdocumentslist as $parentdocuments){
-                 $docsdetails = $allvdata_details[$parentdocuments['id']];
-                 $vdata_details = $docsdetails;
-                 $candidateuserid = 6;
-                 $candidateuserid = $data['user_id'];
-                 if($candidateuserid == $_SESSION['userid']){
-                   $vdata_details= array();
-                       foreach ($docsdetails as $detail1){
-                           if($checkl[$detail1['id']]){
-                               $vdata_details[] = $detail1;
-                           }
-                       }
-                 }
-                  if(count((array)$vdata_details) != 0){
-                   ?>
-             <a class="accordion-msg b-none waves-effect waves-light f-w-700"><i class="fa fa-folder"></i> <?php echo ucwords(strtolower($parentdocuments['document_name'])); ?></a>
-             <div class="accordion-desc p-0">
-               <table role="presentation" class="table table-hover m-b-0 " style="font-size:13px;">
-               <table class="table table-hover m-b-0 " style="font-size:13px;">
-                 <tbody>
-                   <?php foreach ($vdata_details as $details){
-                     $candidatedocument = $checkl[$details['id']];
-                     if($candidatedocument['current_status'] ==""){
-                       $statucolorname = $stausresult[ST_ACTIVE];
-                       $candidatedocument['current_status'] = ST_ACTIVE;
-                     }else{
-                       $statucolorname = $stausresult[$candidatedocument['current_status']];
-                     }
-                      $displaydocuments = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$table_name."/".$candidate_id."/Documents/".$candidatedocument['document_shared'];
-                     ?>
-                      <tr id="custom-popup-docs-old">
-                       <td class="w-b-w-s">
+            <form method="post"  enctype="multipart/form-data">
+              <div class="accordion-block color-accordion-block">
+      <div class="color-accordion" id="color-accordion-documents-commented">
+  <?php
+  $subbtn = 1;
+  foreach($parentdocumentslist as $parentdocuments){
+            $docsdetails = $allvdata_details[$parentdocuments['id']];
+            $vdata_details = $docsdetails;
+            $candidateuserid = 6;
+            $candidateuserid = $data['user_id'];
+            if($candidateuserid == $_SESSION['userid']){
+              $vdata_details= array();
+                  foreach ($docsdetails as $detail1){
+                      if($checkl[$detail1['id']]){
+                          $vdata_details[] = $detail1;
+                      }
+                  }
+            }
+             if(count((array)$vdata_details) != 0){
+              ?>
+        <a class="accordion-msg b-none waves-effect waves-light f-w-700"><i class="fa fa-folder"></i> <?php echo ucwords(strtolower($parentdocuments['document_name'])); ?></a>
+        <div class="accordion-desc p-0">
+          <table class="table table-hover m-b-0 " style="font-size:13px;">
+            <tbody>
+              <?php foreach ($vdata_details as $details){
+                $candidatedocument = $checkl[$details['id']];
+                if($candidatedocument['current_status'] ==""){
+                  $statucolorname = $stausresult[ST_ACTIVE];
+                  $candidatedocument['current_status'] = ST_ACTIVE;
+                }else{
+                  $statucolorname = $stausresult[$candidatedocument['current_status']];
+                }
+                 $displaydocuments = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$table_name."/".$candidate_id."/Documents/".$candidatedocument['document_shared'];
+                ?>
+                 <tr id="custom-popup-docs-old">
+                  <td class="w-b-w-s">
 
-                           <?php if($candidatedocument['document_shared']!=""){  ?>
-                           <a class="text-primary text-capitalize f-14" href="<?php  echo $displaydocuments; ?>"  target="_blank" download>
-                       <?php } ?>
-                           <?php if($candidatedocument['document_shared']!=""){  ?>
-                                 <?php if($candidatedocument['current_status'] == ST_REJECTED){ ?>
-                                   <i class="fa fa-times text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Rejected"></i>
-                                 <?php }elseif($candidatedocument['current_status'] == ST_APPROVED){ ?>
-                                   <i class="fa fa-thumbs-up" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Approved"></i>
-                                 <?php }else{  ?>
-                                  <i class="fa fa-hourglass-half" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Pendding"></i>
-                                <?php } }else{ ?>
-                                 <i class="fa fa-upload" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Uploading Pendding"></i>
-                               <?php }
-                               echo ucwords($details['document_name']);
-                                  ?>
-                                </a>
-                       </td>
-                       <td id="docssatusbtn_<?php echo $details['id']; ?>">
-                           <span class="form-label label label-md d-inline-block fw-bold" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
-                           <span class="label label-md" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
-                       </td>
-                       <td align="right">
-                       <td style="text-align: right;">
-                         <div id="docssatusbtnemt_<?php echo $details['id']; ?>">
+                      <?php if($candidatedocument['document_shared']!=""){  ?>
+                      <a class="text-primary text-capitalize f-14" href="<?php  echo $displaydocuments; ?>"  target="_blank" download>
+                  <?php } ?>
+                      <?php if($candidatedocument['document_shared']!=""){  ?>
+                            <?php if($candidatedocument['current_status'] == ST_REJECTED){ ?>
+                              <i class="fa fa-times text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Rejected"></i>
+                            <?php }elseif($candidatedocument['current_status'] == ST_APPROVED){ ?>
+                              <i class="fa fa-thumbs-up" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Approved"></i>
+                            <?php }else{  ?>
+                             <i class="fa fa-hourglass-half" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Pendding"></i>
+                           <?php } }else{ ?>
+                            <i class="fa fa-upload" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Uploading Pendding"></i>
+                          <?php }
+                          echo ucwords($details['document_name']);
+                             ?>
+                           </a>
+                  </td>
+                  <td id="docssatusbtn_<?php echo $details['id']; ?>">
+                      <span class="form-label label label-md d-inline-block fw-bold" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
+                      <span class="label label-md" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusname[$candidatedocument['current_status']]; ?></span>
+                  </td>
+                  <td style="text-align: right;">
+                    <div id="docssatusbtnemt_<?php echo $details['id']; ?>">
 
-                         <?php if($candidatedocument['current_status'] =="" || $candidatedocument['current_status'] ==ST_ACTIVE){
-                           $statucolorname = $stausresult[ST_INPROGRESS];
-                           ?>
-                           <button onclick="yetToRequestDocs('<?php echo $details['id']; ?>')" class="btn btn-primary desktop-view text-capitalize" type="button" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusnameaction[ST_INPROGRESS]; ?></button>
-                         <?php }elseif($candidatedocument['current_status'] ==ST_INPROGRESS){ $subbtn = 0;?>
+                    <?php if($candidatedocument['current_status'] =="" || $candidatedocument['current_status'] ==ST_ACTIVE){
+                      $statucolorname = $stausresult[ST_INPROGRESS];
+                      ?>
+                      <button onclick="yetToRequestDocs('<?php echo $details['id']; ?>')" class="btn btn-primary desktop-view text-capitalize" type="button" style="color: <?php echo $statucolorname['color']; ?>;    background:  <?php echo $statucolorname['background_color']; ?>; border-color: <?php echo $statucolorname['background_color']; ?>;"><?php echo $candidatedocumentsstatusnameaction[ST_INPROGRESS]; ?></button>
+                    <?php }elseif($candidatedocument['current_status'] ==ST_INPROGRESS){ $subbtn = 0;?>
 
-                               <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5_old"  style=" height:0px; ">
-                                  <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
-                                    <i class="ti-clip" style="font-size: 20px;"></i>
-                                    <input type="file" name="image_<?php echo $candidatedocument['id']; ?>" onchange="fileselected('<?php echo $candidatedocument['id'] ?>',this.value)"/ aria-label="Input">
-                                    <input type="hidden" name="hidimage_<?php echo $candidatedocument['id']; ?>" value="<?php echo $candidatedocument['document_shared']; ?>"/>
-                                  </label>
-
-                               </div>
-                               <div class="text-right">
-                                 <span id="attchmentfilename_<?php echo $candidatedocument['id'] ?>" class="text-info f-12"></span>
-                               </div>
-
-                         <?php }elseif($candidatedocument['current_status'] ==ST_COMPLETE){ ?>
-
-                           <button class="btn btn-primary desktop-view text-capitalize" onclick="statsonlychange(<?php echo $candidatedocument['id'] ?>,<?php echo ST_APPROVED; ?>)"  name="status" id="status" value="<?php echo ST_APPROVED; ?>)" style="color: <?php echo $stausresult[ST_APPROVED]['color']; ?>;    background:  <?php echo $stausresult[ST_APPROVED]['background_color']; ?>; border-color: <?php echo $stausresult[ST_APPROVED]['background_color']; ?>;" >Approved</button>
-                           <button class="btn btn-primary desktop-view text-capitalize" onclick="statsonlychange(<?php echo $candidatedocument['id'] ?>,<?php echo ST_REJECTED; ?>)"  name="status" id="status" value="<?php echo ST_REJECTED; ?>)" style="color: <?php echo $stausresult[ST_REJECTED]['color']; ?>;    background:  <?php echo $stausresult[ST_REJECTED]['background_color']; ?>; border-color: <?php echo $stausresult[ST_REJECTED]['background_color']; ?>;">Rejected</button>
-
-                         <?php } ?>
+                          <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5_old"  style=" height:0px; ">
+                             <label class="btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
+                               <i class="ti-clip" style="font-size: 20px;"></i>
+                               <input type="file" name="image_<?php echo $candidatedocument['id']; ?>" onchange="fileselected('<?php echo $candidatedocument['id'] ?>',this.value)"/ aria-label="Input">
+                               <input type="hidden" name="hidimage_<?php echo $candidatedocument['id']; ?>" value="<?php echo $candidatedocument['document_shared']; ?>"/>
+                             </label>
 
                           </div>
-                     <?php if($candidatedocument['current_status'] =="" || $candidatedocument['current_status'] ==ST_ACTIVE){  ?>
-                           <div class="custom-popup-open custom-popup-slide-yettorequest_<?php echo $details['id']; ?> text-start" style="display: none;right: 0px;top: 55px; width: 50%;">
-                             <div class="card">
-                               <div class="card-header">
-                                 <h5><?php echo ucwords($details['document_name']); ?> Request</h5>
-                                 <div class="card-header-right">
-                                   <button type="button" class="ti-close border-0 bg-transparent p-0" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Close" aria-label="Close"></button>
-                                 </div>
-                               </div>
-                               <div class="card-body">
-                                 <div class="form-group">
-                                   <span class="form-label d-inline-block fw-bold">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
-                                   <span class="form-label d-block">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
-                                 </div>
-                                 <form id="docrequestform_<?php echo $details['id']; ?>">
-                                 <input type="hidden" name="category_id" value="<?php echo $parentdocuments['id']; ?>">
-                                 <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>">
-                                 <input type="hidden" name="document_id" value="<?php echo $details['id']; ?>">
-                                  <input type="hidden" name="reporting_date" value="<?php echo $data['reporting_date']; ?>">
-                                 <div class="row">
-                                   <div class="form-group col-lg-8 w-full">
-                                     <label for="before_or_after_<?php echo $details['id']; ?>" class="form-label d-block">Due Date</label>
-                                      <select name="before_or_after" id="before_or_after_<?php echo $details['id']; ?>" style="width:150px;" class="form-control form-select js-example-basic-single" aria-label="Before Or After">
-                                         <option value="AT">Any Time</option>
-                                         <?php foreach ($due_date_period_list as $due){  ?>
-                                           <option value="<?php echo $due['genc_detail_code'];?>" ><?php echo $due['genc_detail_name']." Joining";?></option>
-                                         <?php } ?>
-                                       </select>
-                                   </div>
-                                   <div class="form-group col-lg-4">
-                                     <label for="day_<?php echo $details['id']; ?>" class="form-label">Days</label>
-                                     <input type="text" name="day" id="day_<?php echo $details['id']; ?>" class="form-control" value="0"/ aria-label="Day">
-                                   </div>
-                                 </div>
-                               </form>
-                                 <!-- <div class="form-group">
-                                   <label class="form-label">Due Date : <span id="docduedate_<?php echo $details['id']; ?>"> - </span></label>
+                          <div class="text-right">
+                            <span id="attchmentfilename_<?php echo $candidatedocument['id'] ?>" class="text-info f-12"></span>
+                          </div>
 
-                                 </div> -->
-                               </div>
-                               <div class="card-footer" >
-                                   <button type="button" class="btn btn-primary" onclick="yetToSubmitBtn('<?php echo $details['id']; ?>')" >Request Document</button>
-                               </div>
-                             </div>
-                           </div>
-                          <?php } ?>
-                       </td>
-                     </tr>
-                     <?php }?>
-                 </tbody>
-               </table>
-             </div>
-        <?php } }?>
+                    <?php }elseif($candidatedocument['current_status'] ==ST_COMPLETE){ ?>
+
+                      <button class="btn btn-primary desktop-view text-capitalize" onclick="statsonlychange(<?php echo $candidatedocument['id'] ?>,<?php echo ST_APPROVED; ?>)"  name="status" id="status" value="<?php echo ST_APPROVED; ?>)" style="color: <?php echo $stausresult[ST_APPROVED]['color']; ?>;    background:  <?php echo $stausresult[ST_APPROVED]['background_color']; ?>; border-color: <?php echo $stausresult[ST_APPROVED]['background_color']; ?>;" >Approved</button>
+                      <button class="btn btn-primary desktop-view text-capitalize" onclick="statsonlychange(<?php echo $candidatedocument['id'] ?>,<?php echo ST_REJECTED; ?>)"  name="status" id="status" value="<?php echo ST_REJECTED; ?>)" style="color: <?php echo $stausresult[ST_REJECTED]['color']; ?>;    background:  <?php echo $stausresult[ST_REJECTED]['background_color']; ?>; border-color: <?php echo $stausresult[ST_REJECTED]['background_color']; ?>;">Rejected</button>
+
+                    <?php } ?>
+
+                     </div>
+                <?php if($candidatedocument['current_status'] =="" || $candidatedocument['current_status'] ==ST_ACTIVE){  ?>
+                      <div class="custom-popup-open custom-popup-slide-yettorequest_<?php echo $details['id']; ?> text-start" style="display: none;right: 0px;top: 55px; width: 50%;">
+                        <div class="card">
+                          <div class="card-header">
+                            <h5><?php echo ucwords($details['document_name']); ?> Request</h5>
+                            <div class="card-header-right">
+                              <button type="button" class="ti-close border-0 bg-transparent p-0" onclick="closeSmallPopUp()" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Close" aria-label="Close"></button>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <div class="form-group">
+                              <span class="form-label d-inline-block fw-bold">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
+                              <span class="form-label d-block">Joining Date : <?php echo fromDate($data['reporting_date']); ?></span>
+                            </div>
+                            <form id="docrequestform_<?php echo $details['id']; ?>">
+                            <input type="hidden" name="category_id" value="<?php echo $parentdocuments['id']; ?>">
+                            <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>">
+                            <input type="hidden" name="document_id" value="<?php echo $details['id']; ?>">
+                             <input type="hidden" name="reporting_date" value="<?php echo $data['reporting_date']; ?>">
+                            <div class="row">
+                              <div class="form-group col-lg-8 w-full">
+                                <label for="before_or_after_<?php echo $details['id']; ?>" class="form-label d-block">Due Date</label>
+                                 <select name="before_or_after" id="before_or_after_<?php echo $details['id']; ?>" style="width:150px;" class="form-control form-select js-example-basic-single" aria-label="Before Or After">
+                                    <option value="AT">Any Time</option>
+                                    <?php foreach ($due_date_period_list as $due){  ?>
+                                      <option value="<?php echo $due['genc_detail_code'];?>" ><?php echo $due['genc_detail_name']." Joining";?></option>
+                                    <?php } ?>
+                                  </select>
+                              </div>
+                              <div class="form-group col-lg-4">
+                                <label for="day_<?php echo $details['id']; ?>" class="form-label">Days</label>
+                                <input type="text" name="day" id="day_<?php echo $details['id']; ?>" class="form-control" value="0"/ aria-label="Day">
+                              </div>
+                            </div>
+                          </form>
+                          </div>
+                          <div class="card-footer" >
+                              <button type="button" class="btn btn-primary" onclick="yetToSubmitBtn('<?php echo $details['id']; ?>')" >Request Document</button>
+                          </div>
+                        </div>
+                      </div>
+                     <?php } ?>
+                  </td>
+                </tr>
+                <?php }?>
+            </tbody>
+          </table>
         </div>
-       </div>
-       <?php if($subbtn == 0 AND $candidateuserid == $_SESSION['userid']){ ?>
-        <div class="card-footer">
-           <div class="row">
-             <div class="col-lg-4">
-              <input type="hidden" name="candidate_id" value="<?php echo $candidate_id;  ?>" />
-              <input type="hidden" name="submit_doc" value="submit_doc" />
-              <button id="kt_login_signin_submit_old" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Submit</button>
-            </div>
-          </div>
-        </div>
-       <?php } ?>
-       </form>
+   <?php } }?>
+   </div>
+  </div>
+  <?php if($subbtn == 0 AND $candidateuserid == $_SESSION['userid']){ ?>
+   <div class="card-footer">
+      <div class="row">
+        <div class="col-lg-4">
+         <input type="hidden" name="candidate_id" value="<?php echo $candidate_id;  ?>" />
+         <input type="hidden" name="submit_doc" value="submit_doc" />
+         <button id="kt_login_signin_submit_old" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Submit</button>
        </div>
      </div>
+   </div>
+  <?php } ?>
+  </form>
+  </div>
+</div>
 
-     <?php **/ ?>
+<?php **/ ?>
 
 
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Task </a>
@@ -697,10 +707,10 @@ $due_date_period_list = $result['period_list'];
                         foreach ($transactionactivityschedule as $key1 => $transactionactivityschedule) { ?>
                           <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $taskscategories[$key1]; ?>
                             <span class="float-end"><?php echo $totaltask[$key1]
-                            ; ?> of <?php echo $complitedtask[$key1] != "" ? $complitedtask[$key1] : "0"; ?> Completed</span>
+                            ; ?> of <?php echo $complitedtask[$key1] != "" ? $complitedtask[$key1] : "0"; ?>
+                              Completed</span>
                           </a>
                           <div class="accordion-desc">
-                            <table role="presentation" class="table table-hover">
                             <table class="table table-hover">
                               <tbody>
                                 <?php foreach ($transactionactivityschedule as $tas) { ?>
@@ -714,11 +724,13 @@ $due_date_period_list = $result['period_list'];
                                           </h6>
                                         </a>
                                       <?php } else { ?>
-                                        <h6 class="mb-0 f-14"><button type="button" class="border-0 bg-transparent p-0 text-start" style="font:inherit;color:inherit;cursor:pointer;" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i
-                                            class="ti-check-box"></i> <?php echo $tas['task_name']; ?></button></h6>
+                                        <h6 class="mb-0 f-14"><button type="button"
+                                            class="border-0 bg-transparent p-0 text-start"
+                                            style="font:inherit;color:inherit;cursor:pointer;"
+                                            onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i
+                                              class="ti-check-box"></i> <?php echo $tas['task_name']; ?></button></h6>
                                       <?php } ?>
                                     </td>
-                                    <td align="center" class="statusid_<?php echo $tas['id']; ?>">
                                     <td style="text-align: center;" class="statusid_<?php echo $tas['id']; ?>">
                                       <?php $stausresultv = $stausresult[$tas['current_status']];
                                       ?>
@@ -733,12 +745,13 @@ $due_date_period_list = $result['period_list'];
                                             <div class="card-header">
                                               <h5>Task</h5>
                                               <div class="card-header-right">
-                                                <i role="button" tabindex="0" aria-label="Closed" onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}" class="ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip"
+                                                <i role="button" tabindex="0" aria-label="Closed"
+                                                  onkeydown="if(event.target===this&&(event.key==='Enter'||event.key===' ')){event.preventDefault();this.click();}"
+                                                  class="ti-close" onclick="closeSmallPopUp()" data-bs-toggle="tooltip"
                                                   data-placement="bottom" data-bs-original-title="Closed"></i>
                                               </div>
                                             </div>
                                             <div class="card-body">
-                                              <table role="presentation" width="100%">
                                               <table style="width: 100%;">
                                                 <tbody>
 
@@ -753,7 +766,6 @@ $due_date_period_list = $result['period_list'];
                                                     }
                                                     ?>
                                                     <tr>
-                                                      <td width="90%">
                                                       <td style="width: 90%;">
                                                         <div class="to-do-list">
                                                           <div class="checkbox-fade fade-in-primary"
@@ -761,7 +773,8 @@ $due_date_period_list = $result['period_list'];
                                                             <label
                                                               class="form-label check-task <?php echo $classcheck; ?> campliancecros_<?php echo $tas['id'] . "_" . $keyval; ?>">
                                                               <input type="checkbox" value="" <?php echo $checkboxcl; ?>
-                                                                class="checkcheckboxcopliance_<?php echo $tas['id'] . "_" . $keyval; ?>" aria-label="Input">
+                                                                class="checkcheckboxcopliance_<?php echo $tas['id'] . "_" . $keyval; ?>"
+                                                                aria-label="Input">
                                                               <span class="cr">
                                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                               </span>
@@ -774,7 +787,6 @@ $due_date_period_list = $result['period_list'];
 
                                                         </div>
                                                       </td>
-                                                      <td width="10%">
                                                       <td style="width: 10%;">
                                                         <span class="float_end">
                                                           <?php if ($list['downloadfile'] != "") { ?>
@@ -879,54 +891,50 @@ $due_date_period_list = $result['period_list'];
 
 
                 <?php /** ?>
-             <a class="accordion-msg b-none waves-effect waves-light f-w-700">Forms</a>
-             <div class="accordion-desc">
-              <?php if(count((array)$linktransactionactivityschedule) != 0){  foreach($linktransactionactivityschedule as $key1=>$transactionactivityschedule11){?>
-               <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $taskscategories[$key1];?>
-               <span class="float-end"><?php echo count((array)$linktransactionactivityschedule[$key1])
-               ;?> of <?php echo $linkcomplitedtask[$key1] !=""?$linkcomplitedtask[$key1]:"0";?> Completed</span>
-             </a>
-             <div class="accordion-desc">
-               <table role="presentation" class="table table-hover">
-               <table class="table table-hover">
-                 <tbody>
-                   <?php foreach($transactionactivityschedule11 as $tas){
-                     ?>
-                      <tr id="custom-popup-form-<?php echo $tas['id']; ?>" >
-                       <td class="w-b-w-s">
+        <a class="accordion-msg b-none waves-effect waves-light f-w-700">Forms</a>
+        <div class="accordion-desc">
+         <?php if(count((array)$linktransactionactivityschedule) != 0){  foreach($linktransactionactivityschedule as $key1=>$transactionactivityschedule11){?>
+          <a class="accordion-msg b-none waves-effect waves-light f-w-700"><?php echo $taskscategories[$key1];?>
+          <span class="float-end"><?php echo count((array)$linktransactionactivityschedule[$key1])
+          ;?> of <?php echo $linkcomplitedtask[$key1] !=""?$linkcomplitedtask[$key1]:"0";?> Completed</span>
+        </a>
+        <div class="accordion-desc">
+          <table class="table table-hover">
+            <tbody>
+              <?php foreach($transactionactivityschedule11 as $tas){
+                ?>
+                 <tr id="custom-popup-form-<?php echo $tas['id']; ?>" >
+                  <td class="w-b-w-s">
 
-                         <?php if($tas['link_page'] == '0'){?>
-                           <!--    <a href="<?php echo $tas['page_url']; ?>" target="_blank"><h6 class="mb-0 f-14" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i class="ti-new-window"></i> <?php echo $tas['task_name']; ?></h6></a> -->
-                           <a href="<?php echo $tas['page_url'];  ?>" target="_blank" onclick="UpdateTransactionActivitySchedule1('<?php echo $tas['id']; ?>')" class="text-primary"><h6 class="mb-0 f-14" ><i class="ti-new-window"></i> <?php echo $tas['task_name']; ?></h6></a>
-                         <?php  }else{ ?>
-                           <h6 class="mb-0 f-14"><button type="button" class="border-0 bg-transparent p-0 text-start" style="font:inherit;color:inherit;cursor:pointer;" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i class="ti-check-box"></i> <?php echo $tas['task_name']; ?></button></h6>
-                         <?php } ?>
-                       </td>
-                       <td align="center" class="statusid_<?php echo $tas['id']; ?>">
-                       <td style="text-align: center;" class="statusid_<?php echo $tas['id']; ?>">
-                        <?php $stausresultv = $stausresult[$tas['current_status']];
-                        ?>
-                        <span class="label label-success" style="color: <?php echo "#".$stausresultv['color']; ?>;    background:  <?php echo $stausresultv['background_color']; ?>; border-color: <?php echo $stausresultv['background_color']; ?>;" ><?php echo $stausresultv['name']; ?></span>
-                      </td>
-                    </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+                    <?php if($tas['link_page'] == '0'){?>
+                      <a href="<?php echo $tas['page_url'];  ?>" target="_blank" onclick="UpdateTransactionActivitySchedule1('<?php echo $tas['id']; ?>')" class="text-primary"><h6 class="mb-0 f-14" ><i class="ti-new-window"></i> <?php echo $tas['task_name']; ?></h6></a>
+                    <?php  }else{ ?>
+                      <h6 class="mb-0 f-14"><button type="button" class="border-0 bg-transparent p-0 text-start" style="font:inherit;color:inherit;cursor:pointer;" onclick="showUpdateChecklist('<?php echo $tas['id']; ?>')"><i class="ti-check-box"></i> <?php echo $tas['task_name']; ?></button></h6>
+                    <?php } ?>
+                  </td>
+                  <td style="text-align: center;" class="statusid_<?php echo $tas['id']; ?>">
+                   <?php $stausresultv = $stausresult[$tas['current_status']];
+                   ?>
+                   <span class="label label-success" style="color: <?php echo "#".$stausresultv['color']; ?>;    background:  <?php echo $stausresultv['background_color']; ?>; border-color: <?php echo $stausresultv['background_color']; ?>;" ><?php echo $stausresultv['name']; ?></span>
+                 </td>
+               </tr>
+             <?php } ?>
+           </tbody>
+         </table>
 
-            </div>
-          <?php }  }else{ ?>
-            <div class="card-px text-center py-20 mt-2">
-             <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
-             <div class="text-center px-4">
-               <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-             </div>
-           </div>
-         <?php } ?>
        </div>
-       <?php **/ ?>
+     <?php }  }else{ ?>
+       <div class="card-px text-center py-20 mt-2">
+        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Task </p>
+        <div class="text-center px-4">
+          <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+        </div>
+      </div>
+    <?php } ?>
+  </div>
+  <?php **/ ?>
                 <a class="accordion-msg b-none waves-effect waves-light f-w-700">Policies And Procedures</a>
                 <div class="accordion-desc">
-                  <table role="presentation" class="table table-hover">
                   <table class="table table-hover">
                     <tbody>
                       <tr>
@@ -934,8 +942,6 @@ $due_date_period_list = $result['period_list'];
                           <h6 class="mb-0 f-14">Drivers License</h6>
                           <p>Uploaded on 22 March 2023</p>
                         </td>
-                        <td align="right"><span class="label label-success">Completed</span></td>
-                        <td align="right">
                         <td style="text-align: right;"><span class="label label-success">Completed</span></td>
                         <td style="text-align: right;">
                           <div class="dropdown-primary dropdown open">
@@ -1127,173 +1133,76 @@ $due_date_period_list = $result['period_list'];
                     <div class="tab-pane active" id="uploaddocumentstab" role="tabpanel">
                       <form method="post" enctype="multipart/form-data" class="row">
                         <?php
-                        /*   if(count((array)$candidatedocumentlist)>=1){
-                             $displaydocuments = "uploads/".$_SESSION['DB_NAME']."/".$_SESSION['company_id']."/".$table_name."/".$candidate_id."/Documents/";
-                             foreach ($candidatedocumentlist as $parentkey => $parentdocuments){
-                               ?>
-                               <div class="col-md-6 col-sm-6 col-xs-12 mb-10">
-                                 <div class="pricing ui-ribbon-container">
-
-                                   <div class="title" style="height: 50px !important;border-radius: 5px;">
-                    count                <h6><?php echo ucwords($documentlist[$parentkey]); ?></h6>
+                        if (false) {
+                          foreach ([] as $parentdocuments) {
+                            foreach ([] as $value) {
+                              ?>
+                              <?php if ($value['document_shared'] != "" AND $_SESSION['user_type'] != '4') { ?>
+                                <div class="dropdown-primary dropdown open"
+                                  title="<?php if ($value['current_status'] == ST_REJECTED) {
+                                    echo "Rejected";
+                                  } elseif ($value['current_status'] == ST_APPROVED) {
+                                    echo "Approved";
+                                  } else {
+                                    echo "Active";
+                                  } ?>">
+                                  <button class="label label-sm label-success" style="height: 18px; border-radius: 30px;"
+                                    type="button" data-content="<?php echo $value[$current_status]['name']; ?>"></button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn"
+                                    data-dropdown-out="fadeOut">
+                                    <?php if ($value['current_status'] == 0) { ?>
+                                      <button type="button"
+                                        class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED ? "active" : ""; ?>"
+                                        onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)"
+                                        name="status" value="<?php echo ST_APPROVED; ?>">Approved</button>
+                                      <button type="button"
+                                        class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED ? "active" : ""; ?>"
+                                        onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)"
+                                        name="status" value="<?php echo ST_REJECTED; ?>">Rejected</button>
+                                    <?php } ?>
                                   </div>
-                                  <div class="x_content">
-                                   <div class="">
-                                     <div class="pricing_features">
-                                       <?php
-                                       foreach($parentdocuments as $value){ ?>
+                                </div>
 
-                                        <div style="min-height: 38px; box-shadow: 0px 1px 9px #cccccc; padding: 2px 10px 2px 10px;" class="alert alert-custom alert-white fade show" role="alert">
-                                         <div class="alert-text">
-                                          <div class="d-flex align-items-center mb-0">
-                                           <div class="symbol symbol-35 symbol-success mr-3 mt-1">
-                                             <?php if($value['document_shared']!=""){  ?>
+                              <?php } ?>
 
-                                               <?php if($value['current_status'] == ST_REJECTED){ ?>
-                                                 <i class="fa fa-times text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Rejected"></i>
-                                               <?php }elseif($value['current_status'] == ST_APPROVED){ ?>
-                                                 <i class="fa fa-thumbs-up" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Approved"></i>
-                                               <?php }else{  ?>
-                                                <i class="fa fa-hourglass-half" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Pendding"></i>
-                                              <?php } }else{ ?>
-                                               <i class="fa fa-upload" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="Uploading Pendding"></i>
-                                             <?php }     ?>
-                                           </div>
-                                           <div class="d-flex flex-column font-weight-bold w-100">
-                                            <a <?php if($value['document_shared']!=""){ ?> class=" nav-link text-active-primary me-6 active text-capitalize" href="<?php  echo $displaydocuments.$value['document_shared'];   ?>"  target="_blank" <?php }else{ echo "class='nav-link me-6 text-capitalize'"; } ?> >  <?php echo ucwords($documentlist[$value['document_list_id']]); ?></a>
-                                          </div>
-
-                                          <div class="d-flex font-weight-bold">
-                                            <?php if($value['current_status'] != ST_APPROVED){ ?>
-                                              <div class="image-input image-input-empty image-input-outline mr-10 mt-2" id="kt_image_5"  style=" height:0px; ">
-                                                <label class="btn-hover-text-primary mt-1 <?php //echo $value['document_shared']!=""?"mt-3":"mt-1"; ?>" data-action="change" data-toggle="tooltip" title="" data-original-title="Uploade File">
-                                                  <i class="ti-clip" style="font-size: 20px;"></i>
-                                                  <input type="file" name="image_<?php echo $value['id']; ?>" onchange="fileselected('<?php echo $value['id'] ?>',this.value)"/ aria-label="Input">
-                                                  <input type="hidden" name="hidimage_<?php echo $value['id']; ?>" value="<?php echo $value['document_shared']; ?>"/>
-                                                </label>
-
-                                              </div>
-
-                                            <?php } ?>
-                        if(false){
-                          foreach([] as $parentdocuments){
-                            foreach([] as $value){
-                        ?>
-                                            <?php if($value['document_shared']!="" AND $_SESSION['user_type']!='4'){ ?>
-                                             <div class="dropdown-primary dropdown open" title="<?php if($value['current_status'] == ST_REJECTED){  echo "Rejected"; }elseif($value['current_status'] == ST_APPROVED){ echo "Approved"; }else{  echo "Active"; } ?>">
-                                               <button class="label label-sm label-success" style="height: 18px; border-radius: 30px;"  type="button" data-content="<?php echo $value[$current_status]['name']; ?>"></button>
-                                               <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                                 <?php if($value['current_status'] == 0){ ?>
-                                                   <button type="button" class="dropdown-item <?php echo $value['current_status'] == ST_APPROVED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_APPROVED; ?>)" name="status" value="<?php echo ST_APPROVED; ?>">Approved</button>
-                                                   <button type="button" class="dropdown-item <?php echo $value['current_status'] == ST_REJECTED?"active":""; ?>" onclick="statsonlychange(<?php echo $value['id'] ?>,<?php echo ST_REJECTED; ?>)" name="status" value="<?php echo ST_REJECTED; ?>">Rejected</button>
-                                                 <?php } ?>
-                                               </div>
-                                             </div>
-
-                                           <?php } ?>
-
-                                         </div>
-                                       </div>
-                                       <div class="text-right">
-                                         <span id="attchmentfilename_<?php echo $value['id'] ?>" class="text-info"></span>
-                                       </div>
-                                     </div>
-                                   </div>
-
-                                 <?php } //} ?>
-                               </div>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                     <?php } ?>
-                       <div class="card-footer">
-                         <div class="row">
-                           <div class="col-lg-4">
-                            <input type="hidden" name="candidate_id" value="<?php echo $candidate_id;  ?>" />
-                            <input type="hidden" name="submit_doc" value="submit_doc" />
-                            <button id="kt_login_signin_submit" class="btn btn-primary mr-2"   name="submitto" value="exit"><i class="la la-check"></i>Submit</button>
                           </div>
+                        </div>
+                        <div class="text-right">
+                          <span id="attchmentfilename_<?php echo $value['id'] ?>" class="text-info"></span>
                         </div>
                       </div>
-                    <?php    }else{    ?>
-
-                      <div class="card-px text-center py-20 mt-2">
-                       <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Required Documents</p>
-                       <div class="text-center px-4">
-                         <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
-                       </div>
-                     </div>
-                   <?php   }  */ ?>
-                   <?php   }  ?>
-                        <form>
-
                     </div>
-                    <div class="tab-pane" id="reqquestdocumentstab" role="tabpanel">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                      <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()"
-                        name="myForm" enctype="multipart/form-data">
-                        <div class="">
-
-
-                          <div class="card-footer">
-                            <div class="row">
-                              <div class="col-lg-4">
-                                <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>" />
-                                <button id="kt_login_signin_submit_request" class="btn btn-primary mr-2"
-                                  name="submitrequerd_docs" value="exit"><i class="la la-check"></i>Submit</button>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
-
-                      </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                  </div>
+                  <?php } //} ?>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <?php } ?>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-lg-4">
+            <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>" />
+            <input type="hidden" name="submit_doc" value="submit_doc" />
+            <button id="kt_login_signin_submit" class="btn btn-primary mr-2" name="submitto" value="exit"><i
+                class="la la-check"></i>Submit</button>
+          </div>
+        </div>
+      </div>
+    <?php } else { ?>
 
+      <div class="card-px text-center py-20 mt-2">
+        <p class="text-muted f-16 fw-bold "><i class='ti-alert text-warning'></i> No Required Documents</p>
+        <div class="text-center px-4">
+          <img class="mw-100 mh-300px" alt="" src="assets/images/work.png" style="max-height: 300px!important;">
+        </div>
+      </div>
+    <?php } ?>
+    <form>
 
+  </div>
+  <div class="tab-pane" id="reqquestdocumentstab" role="tabpanel">
 
 
 
@@ -1308,10 +1217,24 @@ $due_date_period_list = $result['period_list'];
 
 
 
+    <form class="kt-form" id="kt_form" method="post" action="" onsubmit="return validateForm()" name="myForm"
+      enctype="multipart/form-data">
+      <div class="">
 
 
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-lg-4">
+              <input type="hidden" name="candidate_id" value="<?php echo $candidate_id; ?>" />
+              <button id="kt_login_signin_submit_request" class="btn btn-primary mr-2" name="submitrequerd_docs"
+                value="exit"><i class="la la-check"></i>Submit</button>
+            </div>
+          </div>
+        </div>
 
+      </div>
 
+    </form>
 
 
 
@@ -1339,6 +1262,9 @@ $due_date_period_list = $result['period_list'];
 
 
 
+  </div>
+</div>
+</div>
 
 
 
@@ -1373,193 +1299,240 @@ $due_date_period_list = $result['period_list'];
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-lg-3">
+  <div class="card latest-update-card">
+    <div class="card-header">
+      <h5>Onboarding Progress</h5>
+    </div>
+    <div class="card-block">
+      <div class="scroll-widget">
+        <div class="latest-update-box">
+
+          <?php foreach ($taskscategories as $taskscatekey => $taskscate) { ?>
+            <div class="row p-t-20 p-b-30">
+              <div class="col-auto text-end update-meta p-r-0">
+                <i class="b-primary update-icon ring"></i>
+              </div>
+              <div class="col p-l-5">
+                <a href="#!">
+                  <h6><?php echo $taskscate; ?></h6>
+                </a>
+                <p class="text-muted m-b-0">01 Mar 2023 18:47:34</p>
               </div>
             </div>
 
+          <?php } ?>
 
-          </div>
-
-        </div>
-
-
-
-
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="col-lg-3">
-      <div class="card latest-update-card">
-        <div class="card-header">
-          <h5>Onboarding Progress</h5>
-        </div>
-        <div class="card-block">
-          <div class="scroll-widget">
-            <div class="latest-update-box">
-
-              <?php foreach ($taskscategories as $taskscatekey => $taskscate) { ?>
-                <div class="row p-t-20 p-b-30">
-                  <div class="col-auto text-end update-meta p-r-0">
-                    <i class="b-primary update-icon ring"></i>
-                  </div>
-                  <div class="col p-l-5">
-                    <a href="#!">
-                      <h6><?php echo $taskscate; ?></h6>
-                    </a>
-                    <p class="text-muted m-b-0">01 Mar 2023 18:47:34</p>
-                  </div>
-                </div>
-
-              <?php } ?>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="card">
-        <div class="card-header">
-          <h5>Login Activity</h5>
-        </div>
-        <div class="card-block">
-          <div class="row">
-            <div class="col-lg-2"><i class="ti-mobile"></i></div>
-            <div class="col-lg-10">
-              <h5 class="f-w-600 f-14 mb-0">last login on mobile browser</h5>
-              <p><?php echo date("d M Y H:i:s"); ?></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-2"><i class="ti-apple"></i></div>
-            <div class="col-lg-10">
-              <h5 class="f-w-600 f-14 mb-0">last login on mobile App</h5>
-              <p><?php echo date("d M Y H:i:s"); ?></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-2"><i class="ti-desktop"></i></div>
-            <div class="col-lg-10">
-              <h5 class="f-w-600 f-14 mb-0">last login on mobile desktop</h5>
-              <p><?php echo date("d M Y H:i:s"); ?></p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
+
+
+
+  <div class="card">
+    <div class="card-header">
+      <h5>Login Activity</h5>
+    </div>
+    <div class="card-block">
+      <div class="row">
+        <div class="col-lg-2"><i class="ti-mobile"></i></div>
+        <div class="col-lg-10">
+          <h5 class="f-w-600 f-14 mb-0">last login on mobile browser</h5>
+          <p><?php echo date("d M Y H:i:s"); ?></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2"><i class="ti-apple"></i></div>
+        <div class="col-lg-10">
+          <h5 class="f-w-600 f-14 mb-0">last login on mobile App</h5>
+          <p><?php echo date("d M Y H:i:s"); ?></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2"><i class="ti-desktop"></i></div>
+        <div class="col-lg-10">
+          <h5 class="f-w-600 f-14 mb-0">last login on mobile desktop</h5>
+          <p><?php echo date("d M Y H:i:s"); ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 </div>
