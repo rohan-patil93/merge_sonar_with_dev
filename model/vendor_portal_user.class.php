@@ -335,6 +335,7 @@ class vendorPortelUserClass extends userClass
 			$emailarray['created_by'] = $post['user_id'];
 			$return['emailarray'] = $emailarray;
 			$emptyaray = array();
+			$emails = $this->sendNotificationAndEmails($emptyaray, $emailarray, 62);
 			$this->sendNotificationAndEmails($emptyaray, $emailarray, 62);
 		}
 		//Profile Verifications email Code End
@@ -346,6 +347,7 @@ class vendorPortelUserClass extends userClass
 		$inforid[$vendorres->user_id] = $vendorres->user_id;
 		$inforid[$post['user_id']] = $post['user_id'];
 		$notdataa['notification_users'] = $inforid;
+		$emails = $this->tosendnotifiations($notdataa);
 		$this->tosendnotifiations($notdataa);
 
 		$updateary = array('verification_profile_users' => json_encode($verification_profile_users), 'send_verification_profile_status' => 'Y', 'updated_by' => $post['user_id'], 'updated_date' => date("Y-m-d H:i:s"), 'current_status' => ST_INPROGRESS);

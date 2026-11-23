@@ -82,6 +82,8 @@ class userClass{
 
     	global $callConfig;
     	$user_email = $get['chrUserName'];
+    	$query = "SELECT * FROM ".MAINDB.".registered_groups WHERE id in (SELECT group_id FROM ".MAINDB.".user_registered_groups WHERE user_email = '?' AND is_active=0)";
+    	$data = $callConfig->getRowNew($query);
     	$query = "SELECT * FROM ".MAINDB.".registered_groups WHERE id in (SELECT group_id FROM ".MAINDB.".user_registered_groups WHERE user_email = ? AND is_active=0)";
     	$data = $callConfig->getRowNew($query, [$user_email]);
 
@@ -284,6 +286,8 @@ class userClass{
     	$return['setup_page_logs'] = $setup_page_logsres;
 
     	$today = date('Y-m-d');
+    	$query = "SELECT * FROM emp_clock_status WHERE  company_id =? AND user_id = ? AND  effective_from_date <= '?' AND effective_to_date >= '?' AND is_active = 0";
+		$return['emp_clock_status'] = $callConfig->getRowNew($query);
     	$query = "SELECT * FROM emp_clock_status WHERE  company_id =? AND user_id = ? AND  effective_from_date <= ? AND effective_to_date >= ? AND is_active = 0";
 		$return['emp_clock_status'] = $callConfig->getRowNew($query, [$get['company_id'], $get['user_id'], $today, $today]);
 		$return['emp_clock_status_query'] = $query;
