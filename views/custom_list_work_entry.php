@@ -51,15 +51,10 @@ $lastdate = array_slice((array)$dates,-1,1)[0];
 
    }
 
-//         url: "views/custom_insert_filters_attendance.php",
-//         data:'filter_id='+filter_id,
-//         type: "GET",
-
 function showpopup(){
-    var filter_id = document.getElementById('filtertbl_rowid').value;
+    const filter_id = document.getElementById('filtertbl_rowid').value;
    jQuery.ajax({
       url: "views/custom_insert_filters.php",
-//url: "views/custom_filter_bulktransfer.php",
 data:'filter_id='+filter_id+'&tablename=project_timesheets&tr_id=tr_id',
 type: "GET",
 success:function(data){
@@ -72,12 +67,12 @@ error:function (){}
 }
 
 function getnamelist(emplist){
-    var selectednames = emplist;
-    var attendancemonth = document.getElementById('att_month_year').value;
-    var monthstartday = document.getElementById('monthstartday').value;
-    var monyr = attendancemonth.split("-");
-    var att_year = monyr[0];
-    var att_month = monyr[1];
+    const selectednames = emplist;
+    const attendancemonth = document.getElementById('att_month_year').value;
+    const monthstartday = document.getElementById('monthstartday').value;
+    const monyr = attendancemonth.split("-");
+    const att_year = monyr[0];
+    const att_month = monyr[1];
 
     window.location = "index.php?option=COM_LIST_WORK_ENTRY&month="+att_month+"&year="+att_year;
     $('#formsubmit').submit();
@@ -160,7 +155,7 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
                 <?php
                 foreach ($key_details as $attname) {
                     ?>
-                    <button class="btn  waves-effect waves-light text-white" style="background-color: <?php echo strtolower($attname['color_code']);?>"><?php echo $attname['key_short_code'];?></button>
+                    <button type="button" class="btn  waves-effect waves-light text-white" style="background-color: <?php echo strtolower($attname['color_code']);?>"><?php echo $attname['key_short_code'];?></button>
                     <span class="m-r-20"><?php echo $attname['key_name'];?></span>
                 <?php } ?>
             </div>
@@ -177,7 +172,7 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
             </tr>
             <tr>
                 <?php foreach($dates as $date1){ ?>
-                    <td colspan=""><?php echo date('d',strtotime($date1)); ?></td>
+                    <td><?php echo date('d',strtotime($date1)); ?></td>
                 <?php } ?>
 
             </tr>
@@ -190,7 +185,7 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
 <?php if($elist['image']!=""){?>
                       <img src="uploads/all/<?php echo $elist['image']; ?>"   class="img-radius img-30 align-top m-r-15" alt="<?= htmlspecialchars(__('Attachment Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                     <?php } else { ?>
-                      <span  alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>" class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($elist['display_name']); ?></span>
+                      <span class="img-radius align-top m-r-10 custom_txt_workentry f-12 text-center" ><?php echo initials($elist['display_name']); ?></span>
                     <?php } ?>
                       <div class="d-inline-block">
                     <a href="#!"><?php echo $elist['display_name']; ?></a>
@@ -207,9 +202,8 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
                         $workingtypecolor = $workingday == 'W'?$partial_color:$timesheets[$keye][$date2]['color_code'];
                         $timesheetid = $timesheets[$keye][$date2]['timesheetid'];
                         ?>
-                        <td colspan="" class="text-white" <?php if($timesheetid!=""){ ?>onclick="edittimesheettime('<?php echo $timesheetid; ?>','<?php echo $date2; ?>','<?php echo $keye; ?>','<?php echo $workingentrys['min_working_hours_full']; ?>','<?php echo $elist['display_name']; ?>')"<?php
-} ?> align="center"
-                            style="background: linear-gradient(to right, rgb(46 216 182) <?php echo $workingper; ?>%, <?php echo $workingtypecolor;  ?> <?php echo $workingper-100; ?>%);" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}"><?php echo $workingday;  ?></td>
+                        <td class="text-white"
+                            style="background: linear-gradient(to right, rgb(46 216 182) <?php echo $workingper; ?>%, <?php echo $workingtypecolor;  ?> <?php echo $workingper-100; ?>%); text-align: center;"><?php if($timesheetid!=""){ ?><button type="button" class="btn btn-link text-white p-0 border-0 w-100" onclick="edittimesheettime('<?php echo $timesheetid; ?>','<?php echo $date2; ?>','<?php echo $keye; ?>','<?php echo $workingentrys['min_working_hours_full']; ?>','<?php echo $elist['display_name']; ?>')"><?php echo $workingday; ?></button><?php } else { echo $workingday; } ?></td>
                         <?php } ?>
                     </tr>
 
@@ -218,7 +212,7 @@ function edittimesheettime(id,timesheet_date,emp_id,workinghrs,emp_name){
         </div>
     </div>
     <div class="modal fade" id="timesheet_edit_modal" tabindex="-1" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content " id="workentrypop">
 
             </div>

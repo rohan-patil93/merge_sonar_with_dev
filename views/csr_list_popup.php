@@ -47,36 +47,20 @@ if($current_status != ''){
     $filtered = array();
     foreach ($data as $row) {
         $year = date('Y', strtotime($row['project_start_date'] ?? ''));
-        if ($currentYear == '') {
-            if ($status === 'total') {
-                $filtered[] = $row;
-            } elseif ($status === 'active' && $row[KEY_CURRENT_STATUS] == 0) {
-                $filtered[] = $row;
-            } elseif ($status === STATUS_PROGRESS && $row[KEY_CURRENT_STATUS] > 0 && $row[KEY_CURRENT_STATUS] < 199) {
-                $filtered[] = $row;
-            } elseif ($status === STATUS_APPROVED && $row[KEY_CURRENT_STATUS] == 199) {
-                $filtered[] = $row;
-            } elseif ($status === STATUS_TRACKING && $row[KEY_CURRENT_STATUS] == 199 && $row['tracking_status'] == 0) {
-                $filtered[] = $row;
-            } elseif ($status === STATUS_COMPLETED && $row[KEY_CURRENT_STATUS] == 199 && $row['tracking_status'] == 1) {
-                $filtered[] = $row;
-            }
+        $matchesYear = ($currentYear == '') || (isset($currentYear) && $currentYear != '' && $year == $currentYear);
+        if (!$matchesYear) {
+            continue;
         }
-        if (isset($currentYear) && $currentYear != '' && $year == $currentYear) {
-
-            if ($status === 'total') {
-                $filtered[] = $row;
-            } elseif ($status === 'active' && $row[KEY_CURRENT_STATUS] == 0) {
-                $filtered[] = $row;
-            } elseif ($status === STATUS_PROGRESS && $row[KEY_CURRENT_STATUS] > 0 && $row[KEY_CURRENT_STATUS] < 199) {
-                $filtered[] = $row;
-            } elseif ($status === STATUS_APPROVED && $row[KEY_CURRENT_STATUS] == 199) {
-                $filtered[] = $row;
-            } elseif ($status === STATUS_TRACKING && $row[KEY_CURRENT_STATUS] == 199 && $row['tracking_status'] == 0) {
-                $filtered[] = $row;
-            } elseif ($status === STATUS_COMPLETED && $row[KEY_CURRENT_STATUS] == 199 && $row['tracking_status'] == 1) {
-                $filtered[] = $row;
-            }
+        $cs = $row[KEY_CURRENT_STATUS] ?? null;
+        $ts = $row['tracking_status'] ?? null;
+        $matchesStatus = ($status === 'total')
+            || ($status === 'active' && $cs == 0)
+            || ($status === STATUS_PROGRESS && $cs > 0 && $cs < 199)
+            || ($status === STATUS_APPROVED && $cs == 199)
+            || ($status === STATUS_TRACKING && $cs == 199 && $ts == 0)
+            || ($status === STATUS_COMPLETED && $cs == 199 && $ts == 1);
+        if ($matchesStatus) {
+            $filtered[] = $row;
         }
     }
 }

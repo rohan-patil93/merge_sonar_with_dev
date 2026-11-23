@@ -366,9 +366,9 @@ function selectReviewOnCheck(){
                 </div>
                 <div class="row mt-2">
                   <div class="col-lg-6">
-                    <div class="checkbox-fade fade-in-primary  mt-4" onclick="selectReviewOnCheck()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                    <div class="checkbox-fade fade-in-primary  mt-4">
                       <label class="form-label">
-                        <input aria-label="<?= htmlspecialchars(__('Review'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="Y" name="review" id="reviewoncheck"  <?php echo $compliancedetail['review'] == "Y"?"checked":""; ?>>
+                        <input aria-label="<?= htmlspecialchars(__('Review'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="Y" name="review" id="reviewoncheck" onchange="selectReviewOnCheck()"  <?php echo $compliancedetail['review'] == "Y"?"checked":""; ?>>
                         <span class="cr">
                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                         </span>
@@ -393,9 +393,9 @@ function selectReviewOnCheck(){
                 </div>
                 <div class="row mt-2">
                   <div class="col-lg-6">
-                    <div class="checkbox-fade fade-in-primary  mt-4" onclick="selectEscalatiOnCheck()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                    <div class="checkbox-fade fade-in-primary  mt-4">
                       <label class="form-label">
-                        <input aria-label="<?= htmlspecialchars(__('Escalation'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="Y" name="escalation" id="escalationcheck" <?php echo $compliancedetail['escalation'] == "Y"?"checked":""; ?>>
+                        <input aria-label="<?= htmlspecialchars(__('Escalation'), ENT_QUOTES, 'UTF-8'); ?>" type="checkbox" value="Y" name="escalation" id="escalationcheck" onchange="selectEscalatiOnCheck()" <?php echo $compliancedetail['escalation'] == "Y"?"checked":""; ?>>
                         <span class="cr">
                           <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                         </span>
@@ -552,7 +552,7 @@ function selectReviewOnCheck(){
     </div>
   </div>
 
-<div id="kt_modal_dynamic_popup" class="modal fade" tabindex="-1" role="dialog">
+<div id="kt_modal_dynamic_popup" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content j-wrapper"  id="dynamic_popup1">
 
@@ -560,7 +560,7 @@ function selectReviewOnCheck(){
     </div>
 </div>
 
-<div id="kt_modal_dynamic_popup_task_setting" class="modal fade" role="dialog"  aria-hidden="true">
+<div id="kt_modal_dynamic_popup_task_setting" class="modal fade"  aria-hidden="true">
     <div class="modal-dialog modal-xl" >
         <div class="modal-content"  id="dynamic_popup_task_settings">
 

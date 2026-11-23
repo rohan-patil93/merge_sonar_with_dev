@@ -293,7 +293,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                             <h5><?= __('Request Header Parameters') ?></h5>
                         </div>
                         <div class="card-block">
-                            <table id="headers" width="100%">
+                            <table id="headers" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <th scope="col"><?= __('Name') ?></th>
@@ -318,7 +318,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                             <h5><?= __('Request Body POST Parameters') ?></h5>
                         </div>
                         <div class="card-block">
-                            <table id="postField" width="100%">
+                            <table id="postField" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <th scope="col"><?= __('Name') ?></th>
@@ -364,11 +364,10 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                             </div>
                             <div class="form-group">
                                 <span class="form-label d-inline-block fw-bold"><?= __('Response Mapping') ?></span>
-                                <table id="responseDetails" width="100%" class="mt-0">
+                                <table id="responseDetails" style="width: 100%;" class="mt-0">
                                     <thead>
                                         <tr>
                                             <th scope="col"><?= __('Name') ?></th>
-                                            <!-- <th scope="col"><?= __('Value') ?></th> -->
                                             <th scope="col"><?= __('Mapping Field') ?></th>
                                             <th scope="col"><?= __('Uniqueness') ?></th>
                                         </tr>
@@ -376,8 +375,7 @@ if($display_attributes_list_attributes['list_attributes'] !=""){
                                     <?php $sqo = 1; foreach(json_decode($details['api_response_details'], true) as $name => $value): ?>
                                         <tr>
                                             <td><input type="text" class="form-control responsedetailsrow" name="get_response_details_name[<?php echo $sqo; ?>]" value="<?php echo $name; ?>" id="get_response_details_name_<?php echo $sqo; ?>" <?php echo $details['api_type'] == 'S'?"readonly":""; ?> onkeypress="if (event.keyCode === 32) return false;" aria-label="<?= htmlspecialchars(__('Input'), ENT_QUOTES, 'UTF-8'); ?>"></td>
-                                            <!-- <td><input type="text" class="form-control" name="get_response_details_value[]" value="<?php ?>" readonly aria-label="Get Response Details Value"></td> -->
-                                            <td>
+                                                                                        <td>
                                                 <select name="get_response_details_value[<?php echo $sqo; ?>]" class="form-control js-example-basic-single application_table_fields" onchange="getMappingField('<?php echo $sqo; ?>')" id="get_response_details_value_<?php echo $sqo; ?>" aria-label="<?= htmlspecialchars(__('Select'), ENT_QUOTES, 'UTF-8'); ?>">
                                                     <option value="" ><?= __('Select Any One') ?></option>
                                                     <?php foreach($list_attributes as $feild=>$datr){ ?>

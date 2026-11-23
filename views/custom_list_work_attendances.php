@@ -25,13 +25,18 @@ if($_POST['recordtype']=="discrepancy"){
   $emplist=array_intersect_key((array)$emplist,(array)$discrepancy);
 }
 $dates = $workingentrys['date'];
-function worktyme_percentage($num_amount, $num_total) {
+function worktymePercentage($num_amount, $num_total) {
   if($num_total != 0 && $num_total !=""){
     $num_total = 1;
   }
   $count1 = $num_amount / $num_total;
   $count2 = $count1 * 100;
   return number_format($count2, 0);
+}
+if (!function_exists('worktyme_percentage')) {
+  function worktyme_percentage($num_amount, $num_total) {
+    return worktymePercentage($num_amount, $num_total);
+  }
 }
 
 $firstdate = array_slice((array)$dates,0,1)[0];
@@ -282,7 +287,7 @@ function getWorkAttendanceLogs(yearmonth){
               <?php
               foreach ($key_details as $attname) {
                 ?>
-                <button class="btn  waves-effect waves-light text-white mt-2" style="background-color: <?php echo strtolower($attname['color_code']);?>"><?php echo $attname['display_value'];?></button>
+                <button type="button" class="btn  waves-effect waves-light text-white mt-2" style="background-color: <?php echo strtolower($attname['color_code']);?>"><?php echo $attname['display_value'];?></button>
                 <span class="m-r-15"><?php echo $attname['key_name'];?></span>
               <?php } ?>
             </div>
@@ -374,8 +379,7 @@ function getWorkAttendanceLogs(yearmonth){
 
                 }
                 ?>
-                <td colspan="" class="position-relative LI-LO f-12 f-w-600 line-height26 empid<?php echo $keye; ?>date<?php echo $date2; ?>" onclick="edittimesheettime('<?php echo $timesheetid; ?>','<?php echo $date2; ?>','<?php echo $keye; ?>','<?php echo $workingentrys['min_working_hours_full']; ?>','<?php echo $elist['display_name']; ?>','<?php echo $valuedisplaytype; ?>','<?php echo $mnth; ?>')" align="center"
-                  style="<?php echo $workingtypecolor; ?>" role="button" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}">
+                <td colspan="" class="position-relative LI-LO f-12 f-w-600 line-height26 empid<?php echo $keye; ?>date<?php echo $date2; ?>" onclick="edittimesheettime('<?php echo $timesheetid; ?>','<?php echo $date2; ?>','<?php echo $keye; ?>','<?php echo $workingentrys['min_working_hours_full']; ?>','<?php echo $elist['display_name']; ?>','<?php echo $valuedisplaytype; ?>','<?php echo $mnth; ?>')" style="text-align: center; <?php echo $workingtypecolor; ?>">
                   <?php
                       echo $display_value;
                       $download[$mk][$dl] =$display_value;
@@ -394,7 +398,7 @@ function getWorkAttendanceLogs(yearmonth){
         </div>
       </div>
       <div class="modal fade" id="timesheet_edit_modal" tabindex="-1" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content " id="workentrypop">
 
           </div>

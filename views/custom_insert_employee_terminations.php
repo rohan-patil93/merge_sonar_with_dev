@@ -1,4 +1,7 @@
 <?php
+defined('PARAM_RID') || define('PARAM_RID', '&Rid=');
+defined('API_SAVE_TERM') || define('API_SAVE_TERM', '?mode=savetermination&rid=');
+defined('PARAM_METHOD_POST') || define('PARAM_METHOD_POST', '&method=post');
 defined('KEY_HR_USER_ID') || define('KEY_HR_USER_ID', 'hr_user_id');
 defined('KEY_CREATED_BY') || define('KEY_CREATED_BY', 'created_by');
 defined('KEY_NOTICE_PERIOD_REQ') || define('KEY_NOTICE_PERIOD_REQ', 'notice_period_required');
@@ -14,7 +17,7 @@ if($getrid!=""){
     $employee_id = $_SESSION['emp_id'];
 }
 $table_name = 'employee_terminations';
-$vurl = API."?mode=getterminatesettings&table=employee_terminations&employee_id=".$_SESSION['emp_id']."&Rid=".$rowid;
+$vurl = API."?mode=getterminatesettings&table=employee_terminations&employee_id=".$_SESSION['emp_id'].PARAM_RID.$rowid;
 $terminations = callAPI($vurl);
 $terminations = json_decode($terminations,1);
 $emp_termination_data = $terminations['employee_terminations'];
@@ -56,10 +59,10 @@ if(isset($_POST['submitform'])){
     $_POST[KEY_HR_USER_ID] = $hr_user_id;
     $_POST['finance_user_id'] = $finance_user_id;
     if($rowid!=""){
-        $row = "&Rid=".$getrid;
+        $row = PARAM_RID.$getrid;
         $_POST['updated_date'] = nowDate();
         $_POST['updated_by'] = $_SESSION['userid'];
-        $url = API."?mode=savetermination&rid=".$rowid."&method=post";
+        $url = API.API_SAVE_TERM.$rowid.PARAM_METHOD_POST;
         $response = file_post_contents($url, $_POST, 'update');
     }else{
         $data['status_date'] = nowDate();
@@ -90,7 +93,7 @@ if(isset($_POST['submitform'])){
     }
 }elseif(isset($_POST['submitmanagerform'])){
     if($rowid!=""){
-        $row = "&Rid=".$getrid;
+        $row = PARAM_RID.$getrid;
         $_POST['manager_review_date'] = str_replace('/', '-', $_POST['manager_review_date']);
         $datt['manager_review_date'] = date('Y-m-d',strtotime($_POST['manager_review_date']));
         $datt['remark_by_manager'] = $_POST['remark_by_manager'];
@@ -98,7 +101,7 @@ if(isset($_POST['submitform'])){
         $datt['releive_date'] =  date('Y-m-d', strtotime($_POST['releive_date']));
         $datt['updated_date'] = nowDate();
         $datt['updated_by'] = $_SESSION['userid'];
-        $url = API."?mode=savetermination&rid=".$rowid."&method=post";
+        $url = API.API_SAVE_TERM.$rowid.PARAM_METHOD_POST;
         $response = file_post_contents($url, $datt, 'update');
         $cemp_id = $emp_termination_data['emp_id'];
         $carray = array('date_of_leaving'=>$datt['releive_date']);
@@ -113,12 +116,12 @@ if(isset($_POST['submitform'])){
         $_POST['settle_on'];
         $_POST['settle_on'] = str_replace('/', '-', $_POST['settle_on']);
         $_POST['settle_on'] =  date('Y-m-d', strtotime($_POST['settle_on']));
-        $row = "&Rid=".$getrid ;
+        $row = PARAM_RID.$getrid ;
         unset($_POST['exitform']);
         unset($_POST['emp_id']);
         $_POST['updated_date'] = nowDate();
         $_POST['updated_by'] = $_SESSION['userid'];
-        $url = API."?mode=savetermination&rid=".$rowid."&method=post";
+        $url = API.API_SAVE_TERM.$rowid.PARAM_METHOD_POST;
         $response = file_post_contents($url, $_POST, 'update');
         header('Location:index.php?option='.$_GET['option'].$row);
     }
@@ -356,8 +359,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                 <div class="card-body">
                     <div class="row col-lg-12">
                         <?php
-                        if($emp_termination_data['current_status'] ==ST_DRAFT || $employee_leaves['current_status'] ==ST_ACTIVE || $emp_termination_data['current_status'] ==ST_SEND_BACK || $emp_termination_data['current_status'] ==ST_CALLBACK || $emp_termination_data['current_status']==""){
-}else{
+                        if(!($emp_termination_data['current_status'] ==ST_DRAFT || $employee_leaves['current_status'] ==ST_ACTIVE || $emp_termination_data['current_status'] ==ST_SEND_BACK || $emp_termination_data['current_status'] ==ST_CALLBACK || $emp_termination_data['current_status']=="")){
                             $disbalediv = 'style="pointer-events: none; opacity: 0.6;"';
                         }  ?>
                         <div class="col-lg-7 col-md-12 col-sm-12 col-12" <?php echo $disbalediv; ?>>
@@ -463,9 +465,9 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                                         </div>
                                     </div>
                                     <?php $disable = "";
-                                    if($_SESSION['user_id'] == $emp_termination_data[KEY_CREATED_BY] || $rowid =="" || $emp_termination_data['current_status']==ST_ACTIVE || $emp_termination_data['current_status']==ST_SEND_BACK){
-}else{ $disable = "disabled";
-}
+                                    if(!($_SESSION['user_id'] == $emp_termination_data[KEY_CREATED_BY] || $rowid =="" || $emp_termination_data['current_status']==ST_ACTIVE || $emp_termination_data['current_status']==ST_SEND_BACK)){
+                                        $disable = "disabled";
+                                    }
 
                                     ?>
                                     <div class="card-footer">
@@ -484,8 +486,7 @@ function statuspopupnew(id,table_name,status,transaction_id,workflow_id,type){
                         <?php if($_SESSION['userid']==$manager_user_id || $_SESSION['userid']!=$hr_user_id) { ?>
 
 <?php
-    $disbalediv = ""; if($emp_termination_data['current_status'] ==ST_APPROVED1 || $employee_leaves['current_status'] ==ST_APPROVED2 || $emp_termination_data['current_status'] ==ST_APPROVED3){
-}else{
+    $disbalediv = ""; if(!($emp_termination_data['current_status'] ==ST_APPROVED1 || $employee_leaves['current_status'] ==ST_APPROVED2 || $emp_termination_data['current_status'] ==ST_APPROVED3)){
         $disbalediv = 'style="pointer-events: none; opacity: 0.6;"';
     }  ?>
 

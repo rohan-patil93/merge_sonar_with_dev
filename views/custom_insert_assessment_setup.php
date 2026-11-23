@@ -288,7 +288,7 @@ function getnamelist(){
                                     <div class="col-lg-6">
                                         <input type='text' class="form-control datepicker" id="assessment_end_date" name="assessment_end_date" value="<?php echo $assessment_details['assessment_end_date']; ?>" aria-label="<?= htmlspecialchars(__('Assessment End Date'), ENT_QUOTES, 'UTF-8'); ?>">
                                     </div>
-                                 <!--  <input type='date' class="form-control"  name="assessment_date" placeholder="Select date &amp; time range" value="<?php echo $assessment_date; ?> " / aria-label="Select date &amp;amp; time range"> -->
+                                 
 
                                 </div>
                               </div>
@@ -337,7 +337,7 @@ function getnamelist(){
                                  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= __('Add Questions') ?></button>
                                  <div class="dropdown-menu">
                                     <?php  foreach ($qustion_types as $key => $value) {
-                              //$question_types[$value['genc_detail_code']]  = $value['genc_detail_code']; ?>
+                               ?>
                               <a href="#top" onclick="dynamiceditpopup('<?php echo $value['genc_detail_code']; ?>','<?php echo htmlspecialchars(__($value['genc_detail_name'] ?? '')); ?>')" class="dropdown-item">  <?php echo htmlspecialchars(__($value['genc_detail_name'] ?? '')); ?></a>
                            <?php } ?>
                         </div>
@@ -443,7 +443,7 @@ function getnamelist(){
 </div>
 
 </form>
-<div id="kt_modal_KTDatatable_setup" class="modal fade" role="dialog" aria-hidden="true">
+<div id="kt_modal_KTDatatable_setup" class="modal fade" aria-hidden="true">
    <div class="modal-dialog  modal-lg" >
       <div class="modal-content"  id="popup2">
       </div>

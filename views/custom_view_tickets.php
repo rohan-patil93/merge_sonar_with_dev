@@ -63,7 +63,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
     }
     function privateMessage() {
         if ($(".private_check").is(":checked")) {
-            var html = '<div class="input-group input-group-button"><select aria-label="<?= htmlspecialchars(__('Message Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-placeholder-multiple" name="message_type[]" required multiple><?php foreach ($publish_message_field as $pmfkey => $pmf) { ?><option value="<?php echo $pmfkey; ?>"><?php echo $pmf; ?></option> <?php
+            const html = '<div class="input-group input-group-button"><select aria-label="<?= htmlspecialchars(__('Message Type'), ENT_QUOTES, 'UTF-8'); ?>[]" class="form-control form-select js-example-placeholder-multiple" name="message_type[]" required multiple><?php foreach ($publish_message_field as $pmfkey => $pmf) { ?><option value="<?php echo $pmfkey; ?>"><?php echo $pmf; ?></option> <?php
 } ?></select></div>';
             $("#private_message_select").html(html);
             $(".js-example-placeholder-multiple").select2();
@@ -102,7 +102,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                             <img src="uploads/all/<?php echo $userdetails['user_photo']; ?>"
                                 class="img-radius img-50 align-top " data-onerror-src="uploads/all/no-image.jpg" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php } else { ?>
-                            <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>"
+                            <span
                                 class="img-radius img-50 align-top bg-primary custom_txt_round p-2 f-12 text-center"><?php echo initials($userdetails['display_name']); ?></span>
                         <?php } ?>
                         <div class="d-inline-block">
@@ -114,7 +114,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                     </div>
                 </div>
                 <div class="form-group col-lg-2 col-md-2 col-sm-6 col-12">
-                    <span class="f-w-700"><?= __('Ticket Number'); ?> </span> </br>
+                    <span class="f-w-700"><?= __('Ticket Number'); ?> </span> <br>
                     <span
                         class="form-label label label-md bg-primary"><?php echo $tasklist['tasklist']['ticket_id']; ?></span>
                 </div>
@@ -330,10 +330,11 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                     <div class="row m-b-20 send-chat">
                                                         <div class="col">
                                                             <div class="msg">
-                                                                <i class="fa fa-mail-forward float-left cursor-pointer"
+                                                                <button type="button" class="btn btn-link p-0 border-0 float-left cursor-pointer"
                                                                     data-container="body" data-toggle="tooltip" data-placement="bottom"
                                                                     title="<?= htmlspecialchars(__('Replay'), ENT_QUOTES, 'UTF-8'); ?>"
-                                                                    onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                                                    aria-label="<?= htmlspecialchars(__('Replay'), ENT_QUOTES, 'UTF-8'); ?>"
+                                                                    onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')"><i class="fa fa-mail-forward" aria-hidden="true"></i></button>
                                                                 <p class="m-b-0"><?php echo $datares['description']; ?></p>
                                                                 <?php
                                                                 if (count((array) $tasklist['logs']['attachment'][$ky]) != '0') { ?>
@@ -342,7 +343,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                                     <?php $im = 1;
                                                                     foreach ($tasklist['logs']['attachment'][$ky] as $attchmentt) { ?>
                                                                         <a href="uploads/attachments/<?php echo $attchmentt['actual_file_name']; ?>"
-                                                                            download><?php echo $im . ") " . $attchmentt['file_name']; ?></a></br>
+                                                                            download><?php echo $im . ") " . $attchmentt['file_name']; ?></a><br>
                                                                         <?php $im++;
                                                                     }
                                                                 } ?>
@@ -355,7 +356,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                                 <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"
                                                                     class="img-radius img-40" data-onerror-src="uploads/all/no-image.jpg" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php } else { ?>
-                                                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>"
+                                                                <span
                                                                     class="img-radius img-40 p-10"><?php echo initials($empdeails['display_name']); ?></span>
                                                             <?php } ?>
                                                         </div>
@@ -367,16 +368,17 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                                 <img src="uploads/all/<?php echo $empdeails['user_photo']; ?>"
                                                                     class="img-radius img-40" data-onerror-src="uploads/all/no-image.jpg" alt="<?= htmlspecialchars(__('User Profile'), ENT_QUOTES, 'UTF-8'); ?>">
                                                             <?php } else { ?>
-                                                                <span alt="<?= htmlspecialchars(__('user'), ENT_QUOTES, 'UTF-8'); ?>"
+                                                                <span
                                                                     class="img-radius img-40 p-10"><?php echo initials($empdeails['display_name']); ?></span>
                                                             <?php } ?>
                                                         </div>
                                                         <div class="col">
                                                             <div class="msg">
-                                                                <i class="fa fa-mail-forward float-right cursor-pointer"
+                                                                <button type="button" class="btn btn-link p-0 border-0 float-right cursor-pointer"
                                                                     data-container="body" data-toggle="tooltip" data-placement="bottom"
                                                                     title="<?= htmlspecialchars(__('Replay'), ENT_QUOTES, 'UTF-8'); ?>"
-                                                                    onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                                                    aria-label="<?= htmlspecialchars(__('Replay'), ENT_QUOTES, 'UTF-8'); ?>"
+                                                                    onclick="replayMessage('<?php echo $datares['id']; ?>','<?php echo $datares['description']; ?>','<?php echo urlencode($datares['message_type']); ?>')"><i class="fa fa-mail-forward" aria-hidden="true"></i></button>
                                                                 <p class="m-b-0"><?php echo $datares['description']; ?></p>
                                                                 <?php echo $replay_msg;
                                                                 if (count((array) $tasklist['logs']['attachment'][$ky]) != '0') { ?>
@@ -385,7 +387,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
                                                                     <?php $im = 1;
                                                                     foreach ($tasklist['logs']['attachment'][$ky] as $attchmentt) { ?>
                                                                         <a href="uploads/attachments/<?php echo $attchmentt['actual_file_name']; ?>"
-                                                                            download><?php echo $im . ") " . $attchmentt['file_name']; ?></a></br>
+                                                                            download><?php echo $im . ") " . $attchmentt['file_name']; ?></a><br>
                                                                         <?php $im++;
                                                                     }
                                                                 } ?>
@@ -475,9 +477,9 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
 </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="modal_follower" data-backdrop="static" tabindex="-1" role="dialog"
+<div class="modal fade" id="modal_follower" data-backdrop="static" tabindex="-1"
     aria-labelledby="staticBackdrop" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title modallabel" id="exampleModalLabel"><?= __('Followers'); ?> </h5>
@@ -516,7 +518,7 @@ $publish_message_field = array("client_id" => "Initiator", "follower_ids" => "Fo
 </div>
 <script>
     function submitFollowers() {
-        var forvalue = $("#insertfoolwersform").serialize();
+        const forvalue = $("#insertfoolwersform").serialize();
         $.ajax({
             type: 'post',
             url: 'https://localhost/infisuite/ticketing_two/ajax.php',

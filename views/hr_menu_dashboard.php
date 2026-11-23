@@ -1,11 +1,11 @@
 <?php
-
+defined('OPT_LIST_MYTASK') || define('OPT_LIST_MYTASK', 'COM_LIST_MYTASK');
 $disview_array['employee']['step1'] = array(
     array('name'=>'MY Information','icon'=>'ti-user','url'=>'COM_LIST_NEW_EMPLOYEE&NI=560'),
     array('name'=>'MY LEAVES','icon'=>'ti-car','url'=>'COM_LIST_NEW_EMPLOYEE&NI=566'),
     array('name'=>'MY Pay','icon'=>'ti-time','url'=>'COM_LIST_NEW_EMPLOYEE&NI=674'),
     array('name'=>'MY TIMESHEETs','icon'=>'ti-time','url'=>'COM_LIST_NEW_EMPLOYEE&NI=564'),
-    array('name'=>'MY Tasks','icon'=>'ti-time','url'=>'COM_LIST_MYTASK'),
+    array('name'=>'MY Tasks','icon'=>'ti-time','url'=>OPT_LIST_MYTASK),
     array('name'=>'MY Notes','icon'=>'ti-time','url'=>'COM_LIST_EMPLOYEE_NOTES'),
     array('name'=>'recognition','icon'=>'ti-time','url'=>'COM_LIST_NEW_EMPLOYEE&NI=679'),
      array('name'=>'Job Postings','icon'=>'ti-time','url'=>'COM_LIST_JOB_POSTING_CANDIDATES')
@@ -21,7 +21,7 @@ $disview_array['payroll']['step1'] = array(
     array('name'=>'MY LEAVES','icon'=>'ti-car','url'=>'COM_LIST_EMPLOYEE_LEAVES'),
     array('name'=>'MY Pay','icon'=>'ti-time','url'=>'COM_INSERT_PAYSLIP'),
     array('name'=>'MY TIMESHEETs','icon'=>'ti-time','url'=>'COM_INSERT_PROJECT_TIMESHEET_CALENDER'),
-    array('name'=>'MY Tasks','icon'=>'ti-time','url'=>'COM_LIST_MYTASK'),
+    array('name'=>'MY Tasks','icon'=>'ti-time','url'=>OPT_LIST_MYTASK),
     array('name'=>'MY Notes','icon'=>'ti-time','url'=>'COM_LIST_EMPLOYEE_NOTES'),
     array('name'=>'recognition','icon'=>'ti-time','url'=>'COM_INSERT_EMPLOYEE_RECOGNITION'),
      array('name'=>'Job Postings','icon'=>'ti-time','url'=>'COM_LIST_JOB_POSTING_CANDIDATES')
@@ -40,7 +40,7 @@ $disview_array['admin']['step1'] = array(
     array('name'=>'MY LEAVES','icon'=>'ti-car','url'=>'COM_LIST_EMPLOYEE_LEAVES'),
     array('name'=>'MY Pay','icon'=>'ti-time','url'=>'COM_INSERT_PAYSLIP'),
     array('name'=>'MY TIMESHEETs','icon'=>'ti-time','url'=>'COM_INSERT_PROJECT_TIMESHEET_CALENDER'),
-    array('name'=>'MY Tasks','icon'=>'ti-time','url'=>'COM_LIST_MYTASK'),
+    array('name'=>'MY Tasks','icon'=>'ti-time','url'=>OPT_LIST_MYTASK),
     array('name'=>'MY Notes','icon'=>'ti-time','url'=>'COM_LIST_EMPLOYEE_NOTES'),
     array('name'=>'recognition','icon'=>'ti-time','url'=>'COM_INSERT_EMPLOYEE_RECOGNITION'),
      array('name'=>'Job Postings','icon'=>'ti-time','url'=>'COM_LIST_JOB_POSTING_CANDIDATES')
@@ -126,7 +126,7 @@ $key_dis ="employee";
                                             </div>
                                             <div class="card-footer">
                                                 <a href="index.php?option=COM_LIST_NEW_EMPLOYEE&NI=555">
-                                                <button class="btn waves-effect waves-light btn-grd-info"><?= __('GO TO DASHBOARD'); ?></button></a>
+                                                <button type="button" class="btn waves-effect waves-light btn-grd-info"><?= __('GO TO DASHBOARD'); ?></button></a>
                                                 <img class="mw-100 mx-auto mb-lg-n18" src="assets\images\12.png" style="margin-bottom: -46px!important; height: 220px !important;z-index: 999999;" alt="<?= htmlspecialchars(__('Preview'), ENT_QUOTES, 'UTF-8'); ?>">
                                             </div>
 
@@ -161,7 +161,7 @@ $key_dis ="employee";
                                                             <div class="col">
                                                                 <h3 class="f-18 text-white f-w-800"><?= __('QUICK GUIDE'); ?></h3>
                                                                 <h6 class="f-14 text-white m-t-20"><?= __('Explore our powerful documentation'); ?></h6>
-                                                                <button class="btn waves-effect waves-light btn-grd-danger mt-4 btn-skew"><?= __('LEARN MORE'); ?></button>
+                                                                <button type="button" class="btn waves-effect waves-light btn-grd-danger mt-4 btn-skew"><?= __('LEARN MORE'); ?></button>
                                                             </div>
                                                         </div>
                                                     </div>

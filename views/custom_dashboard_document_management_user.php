@@ -156,32 +156,32 @@ $companyName = isset($_SESSION['config']['name'])   ? htmlspecialchars($_SESSION
             <!-- Summary cards -->
             <div class="row mb-4">
                 <div class="col-lg-3 col-md-6 mb-3">
-                    <div class="kpi-card kpi-blue" style="cursor:pointer;" id="dmCardAll" role="button" tabindex="0" aria-label="<?= __('Created Documents') ?>" onclick="loadDmTable('', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadDmTable('', this);}">
+                    <button type="button" class="kpi-card kpi-blue w-100 text-start border-0" style="cursor:pointer;" id="dmCardAll" aria-label="<?= __('Created Documents') ?>" onclick="loadDmTable('', this)">
                         <div class="fs-2 mb-2"><i class="icofont icofont-folder-open" aria-hidden="true"></i></div>
                         <div class="kpi-number"><?php echo $totalAll; ?></div>
-                        <div class="kpi-label"><?= __('Created') ?></div>
-                    </div>
+                        <div class="kpi-label"><?= __('Created') ?></button>
+</div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-3">
-                    <div class="kpi-card kpi-blue" style="cursor:pointer;" id="dmCardActive" role="button" tabindex="0" aria-label="<?= __('Active Documents') ?>" onclick="loadDmTable('0', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadDmTable('0', this);}">
+                    <button type="button" class="kpi-card kpi-blue w-100 text-start border-0" style="cursor:pointer;" id="dmCardActive" aria-label="<?= __('Active Documents') ?>" onclick="loadDmTable('0', this)">
                         <div class="fs-2 mb-2"><i class="icofont icofont-check-circled" aria-hidden="true"></i></div>
                         <div class="kpi-number"><?php echo $totalActive; ?></div>
-                        <div class="kpi-label"><?= __('Active') ?></div>
-                    </div>
+                        <div class="kpi-label"><?= __('Active') ?></button>
+</div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-3">
-                    <div class="kpi-card kpi-orange" style="cursor:pointer;" id="dmCardInprogress" role="button" tabindex="0" aria-label="<?= __('In Progress Documents') ?>" onclick="loadDmTable('inprogress', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadDmTable('inprogress', this);}">
+                    <button type="button" class="kpi-card kpi-orange w-100 text-start border-0" style="cursor:pointer;" id="dmCardInprogress" aria-label="<?= __('In Progress Documents') ?>" onclick="loadDmTable('inprogress', this)">
                         <div class="fs-2 mb-2"><i class="icofont icofont-clock-time" aria-hidden="true"></i></div>
                         <div class="kpi-number"><?php echo $totalInprogress; ?></div>
-                        <div class="kpi-label"><?= __('In Progress') ?></div>
-                    </div>
+                        <div class="kpi-label"><?= __('In Progress') ?></button>
+</div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-3">
-                    <div class="kpi-card kpi-green" style="cursor:pointer;" id="dmCardApproved" role="button" tabindex="0" aria-label="<?= __('Approved Documents') ?>" onclick="loadDmTable('199', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadDmTable('199', this);}">
+                    <button type="button" class="kpi-card kpi-green w-100 text-start border-0" style="cursor:pointer;" id="dmCardApproved" aria-label="<?= __('Approved Documents') ?>" onclick="loadDmTable('199', this)">
                         <div class="fs-2 mb-2"><i class="icofont icofont-badge" aria-hidden="true"></i></div>
                         <div class="kpi-number"><?php echo $totalApproved; ?></div>
-                        <div class="kpi-label"><?= __('Approved') ?></div>
-                    </div>
+                        <div class="kpi-label"><?= __('Approved') ?></button>
+</div>
                 </div>
             </div>
 

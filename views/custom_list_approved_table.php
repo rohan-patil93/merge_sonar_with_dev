@@ -4,16 +4,13 @@ include_once '../dbconfig.php';
 include_once '../comm.php';
 $_SESSION['apply_js']['table']= 1;
 $_SESSION['apply_js']['multiselest'] = '1';
-if (isset($_POST['submit'])){
-    if($_POST['submit'] == 'search'){
+if (isset($_POST['submit']) && $_POST['submit'] == 'search'){
         $array =  array('category_id', 'vendor_id', 'cost_center_id', 'location_id','opex_cpex','from','to');
         foreach ($array as  $value) {
             if($_POST[$value] != ''){
                 $ress[$value] = $_POST[$value];
             }
         }
-
-    }
 }
 $table_name = $_REQUEST['table'];
 if(!isset($_POST['from'])){
@@ -187,7 +184,7 @@ $get_option = $_REQUEST['option'];
             <form class="kt-form kt-form--fit kt-margin-b-20" action="" method="post" id="filterformid">
                 <div class="row kt-margin-b-20">
                     <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile mb-2">
-                        <!-- <label  class="form-label"><?php echo $cus_list['lable']; ?>:</label> -->
+                        
                         <select class="form-control form-select js-example-basic-single"  name="vendor_id" aria-label="<?= htmlspecialchars(__('Vendor Id'), ENT_QUOTES, 'UTF-8'); ?>">
                             <option value=""> <?= __('All'); ?> <?php echo $cus_list['lable']; ?> </option>
                             <?php foreach ($selectdata as $selectkey => $selectvalue) {  ?>
@@ -196,7 +193,7 @@ $get_option = $_REQUEST['option'];
                         </select>
                     </div>
                     <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile mb-2">
-                        <!-- <label  class="form-label"><?php ?>:</label> -->
+                        
                         <select class="form-control form-select js-example-basic-single" id="kt_select2_42" name="opex_cpex" aria-label="<?= htmlspecialchars(__('Opex Cpex'), ENT_QUOTES, 'UTF-8'); ?>">
                             <option value=""> <?= __('All CAPEX / OPEX'); ?> </option>
                             <?php foreach($capexopex as $selectcat){ ?>
@@ -204,14 +201,7 @@ $get_option = $_REQUEST['option'];
                             <?php } ?>
                         </select>
                     </div>
-                    <!-- <div class="col-lg-2 kt-margin-b-10-tablet-and-mobile mb-2">
-                        <select class="form-control form-select js-example-basic-single" id="kt_select2_43" name="cost_center_id" aria-label="Cost Center Id">
-                            <option value=""> All Cost Center </option>
-                            <?php foreach($datacost as $selectcost){ ?>
-                                <option   <?php if($ress['cost_center_id'] == $selectcost['id'] ){ ?> selected <?php } ?> value="<?php echo $selectcost['id']; ?>"><?php echo $selectcost['cost_center_name']; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div> -->
+                    
                 <?php /** ?>
                     <div class="col-lg-2">
                         <span class="form-label d-inline-block fw-bold">Start Date <span class="text-danger">*</span></span>

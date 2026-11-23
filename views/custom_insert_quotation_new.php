@@ -56,8 +56,7 @@ if (isset($_POST['submit1'])) {
         $url = API . "?mode=addinvoietype&table=" . $_POST['table_name'] . "&method=post&type=update";
         $response = file_post_contents($url, $_POST, 'update');
         $fddrfg = json_decode($response, 1);
-        if ($response) {
-        }
+
     } //update condition end
 } //submit button code end
 
@@ -473,26 +472,28 @@ if ($table_name == 'petty_cash' || $table_name == 'bills') {
 }
 $small_sub = 111;
 //////////////////////currency_id//////////////////////////////////
-if ($table1['currency_id'] != "" && $table1['currency_id'] != "0") {
-} elseif ($_SESSION['user']['default_currency_id'] != "" && $_SESSION['user']['default_currency_id'] != "0") {
-    $table1['currency_id'] = $_SESSION['user']['default_currency_id'];
-    $table1['originator_currency_id'] = $_SESSION['user']['default_currency_id'];
-} else {
-    $table1['currency_id'] = $_SESSION['config']['default_currency_id'];
-    $table1['originator_currency_id'] = $_SESSION['config']['default_currency_id'];
+if ($table1['currency_id'] == "" || $table1['currency_id'] == "0") {
+    if ($_SESSION['user']['default_currency_id'] != "" && $_SESSION['user']['default_currency_id'] != "0") {
+        $table1['currency_id'] = $_SESSION['user']['default_currency_id'];
+        $table1['originator_currency_id'] = $_SESSION['user']['default_currency_id'];
+    } else {
+        $table1['currency_id'] = $_SESSION['config']['default_currency_id'];
+        $table1['originator_currency_id'] = $_SESSION['config']['default_currency_id'];
+    }
 }
 //////////////////////currency_id//////////////////////////////////
 //////////////////////state//////////////////////////////////
-if ($table1['originator_state_id'] != "" && $table1['originator_state_id'] != "0") {
-} elseif ($_SESSION['user']['default_state_id'] != "" && $_SESSION['user']['default_state_id'] != "0") {
-    $table1['originator_state_id'] = $_SESSION['user']['default_state_id'];
+if ($table1['originator_state_id'] == "" || $table1['originator_state_id'] == "0") {
+    if ($_SESSION['user']['default_state_id'] != "" && $_SESSION['user']['default_state_id'] != "0") {
+        $table1['originator_state_id'] = $_SESSION['user']['default_state_id'];
 
-    if ($table1['supplier_state_id'] == "" || $table1['supplier_state_id'] == "0") {
-        $table1['supplier_state_id'] = $_SESSION['user']['default_state_id'];
+        if ($table1['supplier_state_id'] == "" || $table1['supplier_state_id'] == "0") {
+            $table1['supplier_state_id'] = $_SESSION['user']['default_state_id'];
+        }
+    } else {
+        $table1['originator_state_id'] = $_SESSION['user_company']['state'];
+        $table1['supplier_state_id'] = $_SESSION['user_company']['state'];
     }
-} else {
-    $table1['originator_state_id'] = $_SESSION['user_company']['state'];
-    $table1['supplier_state_id'] = $_SESSION['user_company']['state'];
 }
 $table1['currency_rate'] = ($table1['currency_rate'] != "" && $table1['currency_rate'] != "0") ? $table1['currency_rate'] : 1;
 //////////////////////state//////////////////////////////////
@@ -1982,7 +1983,7 @@ if ($qoriginatorCurrencyId != '' && $qoriginatorCurrencyId != '0' && $qcurrencyI
 
                     var rowid = "row_additional_charges_" + achargemxid;
 
-                    var html = '<tr id="' + rowid + '"><td class="amount text-start p-2" width="40%" style="width:40%"> <i class="ti-trash text-danger" onclick="removeAdditionalCharges(\'' + rowid + '\',\'' + additional_charges.id + '\')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Remove'); ?>"></i> ' + additional_charges.charge_name + '</td><td class="p-2 text-right" width="60%" style="width:40%">' + additional_charge_amount + ' (' + additional_charges.gst + '%)<input type="hidden" class="class_shipping_tax" data-id="' + achargemxid + '" name="shipping_tax_ac[]" id="shipping_tax_' + achargemxid + '" value="' + additional_charges.gst + '"><input type="hidden" name="shipping_amount_ac[]" id="shipping_amount_' + achargemxid + '" value="' + additional_charge_amount + '"><input type="hidden" name="shipping_tax_amount_ac[]" id="shipping_tax_amount_' + achargemxid + '" value=""><input type="hidden" name="charge_name_ac[]" value="' + additional_charges.charge_name + '"><input type="hidden" name="charge_id_ac[]" value="' + additional_charges.id + '"></td></tr>';
+                    var html = '<tr id="' + rowid + '"><td class="amount text-start p-2" style="width:40%"> <i class="ti-trash text-danger" onclick="removeAdditionalCharges(\'' + rowid + '\',\'' + additional_charges.id + '\')" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="<?php echo __('Remove'); ?>"></i> ' + additional_charges.charge_name + '</td><td class="p-2 text-right" style="width:40%">' + additional_charge_amount + ' (' + additional_charges.gst + '%)<input type="hidden" class="class_shipping_tax" data-id="' + achargemxid + '" name="shipping_tax_ac[]" id="shipping_tax_' + achargemxid + '" value="' + additional_charges.gst + '"><input type="hidden" name="shipping_amount_ac[]" id="shipping_amount_' + achargemxid + '" value="' + additional_charge_amount + '"><input type="hidden" name="shipping_tax_amount_ac[]" id="shipping_tax_amount_' + achargemxid + '" value=""><input type="hidden" name="charge_name_ac[]" value="' + additional_charges.charge_name + '"><input type="hidden" name="charge_id_ac[]" value="' + additional_charges.id + '"></td></tr>';
                     //console.log("additional_charge_amount "+additional_charge_amount+" - "+html);
                     $('#rowadditionalcharges').before(html);
                     $(".custom-popup-additionalcharges-open").hide();
@@ -2533,13 +2534,13 @@ if ($checktimeprint > 0) {
 
                                                 ?>
                                                 <?php
-                                                $printurl = "index.php?option=COM_QO_PRINT&rid=" . $rid . "&table=" . $table_name . "&title=" . urlencode($title);
+                                                $printurl = "index.php?option=COM_QO_PRINT&rid=" . $rid . PARAM_TABLE . $table_name . PARAM_TITLE . urlencode($title);
 
                                                 if ($table_name == "rental_invoices") {
-                                                    $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=" . $rid . "&table=" . $table_name . "&title=" . urlencode($title);
+                                                    $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=" . $rid . PARAM_TABLE . $table_name . PARAM_TITLE . urlencode($title);
                                                 }
                                                 if ($table_name == "utility_rental_invoices") {
-                                                    $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=" . $rid . "&table=" . $table_name . "&title=" . urlencode($title);
+                                                    $printurl = "index.php?option=COM_VIEW_RENTAL_INVOICES&rid=" . $rid . PARAM_TABLE . $table_name . PARAM_TITLE . urlencode($title);
                                                 }
                                                 ?>
                                                 <a target="_blank" href="<?php echo $printurl; ?>"
@@ -2549,8 +2550,7 @@ if ($checktimeprint > 0) {
 
                                                 <?php
 
-                                                if (($chartofacounterrer == '1' || $_GET['error_messages']) && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE)) {
-                                                } else {
+                                                if (!(($chartofacounterrer == '1' || $_GET['error_messages']) && ($table1['current_status'] == ST_DRAFT || $table1['current_status'] == ST_ACTIVE))) {
 
 
                                                     echo ($rtable_name == "" && (isset($table2[0]['item_id']))) ? $workflowsteps['workflow_btn'] : "";
@@ -2594,7 +2594,6 @@ if ($checktimeprint > 0) {
                                                 <?php } ?>
                                             <?php } ?>
                                             &nbsp; &nbsp;
-                                            <!-- <input type="hidden" name="status_values" id="status_values" value="<?php ?>"> -->
                                             <input type="hidden" name="status_values" id="status_values"
                                                 value="<?php echo ($table1['current_status'] != "" && $rtable_name == "") ? $table1['current_status'] : ST_DRAFT; ?>">
                                             <input type="hidden" name="status_old_value" id="status_old_value"
@@ -2914,10 +2913,10 @@ if ($checktimeprint > 0) {
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="col" class="amount text-start p-2"
-                                                                        width="40%" style="width:40%">
+                                                                        style="width:40%">
                                                                         <span><?php echo __('Sub Total'); ?></span>
                                                                     </th>
-                                                                    <th scope="col" class="p-2 text-right" width="60%"
+                                                                    <th scope="col" class="p-2 text-right"
                                                                         style="width:40%">
                                                                         <span id="dis_subTotalid">
                                                                             <?php echo customeummarmonyformateifine($table1['sub_total']); ?>
@@ -3001,7 +3000,7 @@ if ($checktimeprint > 0) {
                                                                         $rowid = "row_additional_charges_" . $mk;
                                                                         ?>
                                                                         <tr id="<?php echo $rowid; ?>">
-                                                                            <td class="amount text-start p-2" width="40%"
+                                                                            <td class="amount text-start p-2"
                                                                                 style="width:40%">
                                                                                 <i class="ti-trash text-danger"
                                                                                     onclick="removeAdditionalCharges('<?php echo $rowid; ?>','<?php echo $addchrg['charge_id']; ?>')"
@@ -3010,7 +3009,7 @@ if ($checktimeprint > 0) {
                                                                                     data-bs-original-title="<?php echo __('Remove'); ?>"></i>
                                                                                 <?php echo $addchrg['charge_name']; ?>
                                                                             </td>
-                                                                            <td class="p-2 text-right" width="60%"
+                                                                            <td class="p-2 text-right"
                                                                                 style="width:40%">
                                                                                 <?php echo $addchrg['shipping_amount'] . " (" . $addchrg['shipping_tax'] . "%)"; ?>
 
@@ -3594,8 +3593,7 @@ if ($checktimeprint > 0) {
                                             <input type="hidden" id="hid" name="hid" value="<?php echo $rid; ?>" />
                                             <input type="hidden" name="hid_itemds" value="<?php echo $item_ids; ?>" />
                                             <input type="hidden" name="submit1" value="Update" />
-                                            <!-- <button  id="btndisableck1" <?php echo $disable; ?> class="btn btn-primary mr-2"  ><i class="la la-check"></i>Update</button> -->
-                                            <button <?php echo $disable; ?> class="btn btn-primary mr-2"><i
+                                            <button type="submit" <?php echo $disable; ?> class="btn btn-primary mr-2"><i
                                                     class="la la-check"></i><?php echo __('Update'); ?></button>
                                             <button type="reset" class="btn btn-secondary"><i
                                                     class="la la-close"></i><?php echo __('Cancel'); ?></button>
@@ -3610,14 +3608,6 @@ if ($checktimeprint > 0) {
                                             <button type="button" class="btn btn-primary mr-2 mt-2"
                                                 onclick="submitTransactions('continue')" <?php echo $disable; ?>><i
                                                     class="la la-check-circle"></i><?php echo __('Save & continue'); ?></button>
-
-
-                                            <!-- <button class="btn btn-primary mr-2 mt-2"   name="submit_value" value="exit" <?php echo $disable; ?>><i class="la la-check" ></i>Save & exit</button>
-                                    <button  class="btn btn-primary mr-2 mt-2" name="submit_value" value="continue" <?php echo $disable; ?>><i class="la la-check-circle" ></i>Save & continue</button>
-                                     -->
-
-                                            <!-- <button id="btndisableck12" class="btn btn-primary mr-2 mt-2"   name="submit_value" value="exit" <?php echo $disable; ?>><i class="la la-check" ></i>Save & exit</button>
-                                    <button  class="btn btn-primary mr-2 mt-2" id="btndisableck1"  name="submit_value" value="continue" <?php echo $disable; ?>><i class="la la-check-circle" ></i>Save & continue</button> -->
                                             <button type="reset" class="btn btn-secondary mt-2"
                                                 onclick="location.href='index.php?option=<?php echo $list; ?>';"><i
                                                     class="la la-close"></i><?php echo __('Cancel'); ?></button>

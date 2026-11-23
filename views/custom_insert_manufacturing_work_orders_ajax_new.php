@@ -75,7 +75,7 @@ foreach ((array)$unit_of_measurements as $uom) {
                             <input type="hidden" id="rate_<?php echo $seq; ?>" name="rate[]" value="<?php echo $mbomi['rate'] != "" ? $mbomi['rate'] : 0; ?>">
                             <input type="hidden" id="amount_<?php echo $seq; ?>" name="amount[]" value="<?php echo $mbomi['amount'] != "" ? $mbomi['amount'] : 0; ?>">
                             <input type="hidden" id="scrap_<?php echo $seq; ?>" name="scrap[]" value="<?php echo $mbomi['scrap']; ?>">
-                            <input type="hidden" id="request_qty_<?php echo $seq; ?>" name="request_qty[]" value="<?php echo $rid != "" ? $mbomi['request_qty'] : ($workorderitemqty > 0 ? ($workorderitemqty * $mbomi['quantity']) : $mbomi['quantity']); ?>" data-original-qty="<?php echo $rid != "" ? $mbomi['bom_qty'] : $mbomi['quantity']; ?>">
+                            <input type="hidden" id="request_qty_<?php echo $seq; ?>" name="request_qty[]" value="<?php $bomCalcQty = $workorderitemqty > 0 ? ($workorderitemqty * $mbomi['quantity']) : $mbomi['quantity']; echo $rid != "" ? $mbomi['request_qty'] : $bomCalcQty; ?>" data-original-qty="<?php echo $rid != "" ? $mbomi['bom_qty'] : $mbomi['quantity']; ?>">
 
                             <!-- Product Name -->
                             <td class="p-1">
@@ -96,7 +96,7 @@ foreach ((array)$unit_of_measurements as $uom) {
 
                             <!-- Qty (request_qty updated by js) -->
                             <td class="p-1 text-right">
-                                <span id="request_qty_display_<?php echo $seq; ?>"><?php echo $rid != "" ? $mbomi['request_qty'] : ($workorderitemqty > 0 ? ($workorderitemqty * $mbomi['quantity']) : $mbomi['quantity']); ?></span>
+                                <span id="request_qty_display_<?php echo $seq; ?>"><?php $bomCalcQty = $workorderitemqty > 0 ? ($workorderitemqty * $mbomi['quantity']) : $mbomi['quantity']; echo $rid != "" ? $mbomi['request_qty'] : $bomCalcQty; ?></span>
                                 <span class="manufacturing-uom-badge"><?php echo $uom_name; ?></span>
                             </td>
 
@@ -204,9 +204,9 @@ foreach ((array)$unit_of_measurements as $uom) {
                                 <span><?php echo $uom_name; ?></span>
                             </td>
                             <td class="p-1 text-right">
-                                <span id="byitem_quantity_display_<?php echo $seqs; ?>"><?php echo $rid != "" ? $byitm['byitem_quantity'] : ($workorderitemqty > 0 ? ($workorderitemqty * $byitm['byitem_quantity']) : $byitm['byitem_quantity']); ?></span>
+                                <span id="byitem_quantity_display_<?php echo $seqs; ?>"><?php $byCalcQty = $workorderitemqty > 0 ? ($workorderitemqty * $byitm['byitem_quantity']) : $byitm['byitem_quantity']; echo $rid != "" ? $byitm['byitem_quantity'] : $byCalcQty; ?></span>
                                 <span class="manufacturing-uom-badge"><?php echo $uom_name; ?></span>
-                                <input type="hidden" id="byitem_quantity_<?php echo $seqs; ?>" name="byitem_quantity[]" value="<?php echo $rid != "" ? $byitm['byitem_quantity'] : ($workorderitemqty > 0 ? ($workorderitemqty * $byitm['byitem_quantity']) : $byitm['byitem_quantity']); ?>" data-original-qty="<?php echo $byitm['byitem_quantity']; ?>">
+                                <input type="hidden" id="byitem_quantity_<?php echo $seqs; ?>" name="byitem_quantity[]" value="<?php $byCalcQty = $workorderitemqty > 0 ? ($workorderitemqty * $byitm['byitem_quantity']) : $byitm['byitem_quantity']; echo $rid != "" ? $byitm['byitem_quantity'] : $byCalcQty; ?>" data-original-qty="<?php echo $byitm['byitem_quantity']; ?>">
                             </td>
                             <td class="p-1">
                                 <textarea aria-label="<?php echo __('Text area'); ?>" id="byitem_description_<?php echo $seqs; ?>" name="byitem_description[]" class="form-control" autocomplete="off"><?php echo $byitm['byitem_description']; ?></textarea>

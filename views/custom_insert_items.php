@@ -1,4 +1,5 @@
 <?php
+defined('DIR_UPLOADS_ALL') || define('DIR_UPLOADS_ALL', 'uploads/all/');
 $_SESSION['apply_js']['multiselest'] = 1;
 if (isset($_POST['submititem'])) {
     unset($_POST['submititem']);
@@ -287,7 +288,7 @@ foreach($categroylist as $catlist){
                                             </label>
                                             <input type="file" name="item_image" id="item_image" accept=".png, .jpg, .jpeg"
                                                 onchange="loadFile(event,this.id)" />
-                                            <img src="<?php echo "uploads/all/" . $items['item_image']; ?>"
+                                            <img src="<?php echo DIR_UPLOADS_ALL . $items['item_image']; ?>"
                                                 id="outputitem_image" width="200"  alt="<?php echo __('Attachment Preview'); ?>" />
                                             <input type="hidden" name="hid_item_image"
                                                 value="<?php echo $items['item_image']; ?>">
@@ -305,7 +306,7 @@ foreach($categroylist as $catlist){
                                             </label>
                                             <input type="file" name="item_image2" id="item_image2"
                                                 accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)" />
-                                            <img src="<?php echo "uploads/all/" . $items['item_image2']; ?>"
+                                            <img src="<?php echo DIR_UPLOADS_ALL . $items['item_image2']; ?>"
                                                 id="outputitem_image2" width="200"  alt="<?php echo __('Attachment Preview'); ?>" />
                                             <input type="hidden" name="hid_item_image2"
                                                 value="<?php echo $items['item_image2']; ?>">
@@ -323,7 +324,7 @@ foreach($categroylist as $catlist){
                                             </label>
                                             <input type="file" name="item_image3" id="item_image3"
                                                 accept=".png, .jpg, .jpeg" onchange="loadFile(event,this.id)" />
-                                            <img src="<?php echo "uploads/all/" . $items['item_image3']; ?>"
+                                            <img src="<?php echo DIR_UPLOADS_ALL . $items['item_image3']; ?>"
                                                 id="outputitem_image3" width="200"  alt="<?php echo __('Attachment Preview'); ?>" />
                                             <input type="hidden" name="hid_item_image3"
                                                 value="<?php echo $items['item_image3']; ?>">
@@ -1030,9 +1031,7 @@ foreach($categroylist as $catlist){
                                     </div>
                                     <div class="col-lg-2">
 
-                                        <i class="ti-trash float-end text-danger" data-bs-toggle="tooltip"
-                                            data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>"
-                                            onclick="deletRowjoinOwner('remove_attache_<?php echo $attchmentseq; ?>>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                        <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="deletRowjoinOwner('remove_attache_<?php echo $attchmentseq; ?>>')" aria-label="Remove"><i class="ti-trash float-end text-danger" data-bs-toggle="tooltip" data-placement="bottom" title="" data-bs-original-title="<?php echo __('Remove'); ?>"></i></button>
 
                                         <input type="hidden" name="old_attachment[]" class="form-control"
                                             value="<?php echo $attachment['attachment']; ?>">
@@ -1128,8 +1127,7 @@ foreach($categroylist as $catlist){
                                                     value="<?php echo $vi['vendor_part_name']; ?>">
                                             </div>
                                             <div class="col-lg-1">
-                                                <i class="ti-trash text-danger"
-                                                    onclick="removeItem('<?php echo $deletrowid; ?>>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="removeItem('<?php echo $deletrowid; ?>>')" aria-label="Remove"><i class="ti-trash text-danger"></i></button>
                                             </div>
                                         </div>
                                         <?php $mk++;
@@ -1200,8 +1198,7 @@ foreach($categroylist as $catlist){
                                                     value="<?php echo $vi['customer_part_name']; ?>">
                                             </div>
                                             <div class="col-lg-1">
-                                                <i class="ti-trash text-danger"
-                                                    onclick="removeItem('<?php echo $deletrowid; ?>>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"></i>
+                                                <button type="button" class="btn btn-link p-0 border-0 text-reset" onclick="removeItem('<?php echo $deletrowid; ?>>')" aria-label="Remove"><i class="ti-trash text-danger"></i></button>
                                             </div>
                                         </div>
                                         <?php $mks++;

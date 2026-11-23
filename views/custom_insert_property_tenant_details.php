@@ -1,4 +1,5 @@
 <?php
+defined('ATTR_DISPLAY_NONE_STYLE') || define('ATTR_DISPLAY_NONE_STYLE', "style='display:none'");
 if ($_GET['ajaxcall'] == 'Y') {
     include_once '../includes/session.php';
     include_once '../dbconfig.php';
@@ -615,9 +616,7 @@ foreach ($property_owners as $coa) {
 <?php } ?>
 <?php
 $check_array = array(ST_ACTIVE, ST_DRAFT, ST_SEND_BACK, ST_CALLBACK, '');
-if (in_array($property_tenant_details['current_status'], (array) $check_array) && $property_tenant_details['originator'] == $_SESSION['userid'] || $property_tenant_details['originator'] == "") {
-
-} else {
+if (!(in_array($property_tenant_details['current_status'], (array) $check_array) && $property_tenant_details['originator'] == $_SESSION['userid'] || $property_tenant_details['originator'] == "")) {
     $dyncss = 'style="pointer-events: none; opacity: 0.6;"';
 }
 if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['originator'] != "") {
@@ -705,7 +704,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         <div class="form-group col-lg-12" <?php echo $un_lockdyncss; ?>>
                             <div id="ownerpropertiesarea">
                                 <?php $podaajax = json_decode($property_tenant_details['property_owner_detail_areas'], 1); ?>
-                                <table class="table table-hover " width="100%">
+                                <table class="table table-hover " style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th scope="col"><?php echo __('Area Name/Area/Rate'); ?></th>
@@ -989,7 +988,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             </div>
                         </div>
                         <div class="col-lg-2 text-center"> </div>
-                        <div class="form-group  col-lg-5" id="checkgstadded_hsn_code" <?php echo $property_tenant_details['gst_added'] == '0' ? "" : "style='display:none'"; ?>>
+                        <div class="form-group  col-lg-5" id="checkgstadded_hsn_code" <?php echo $property_tenant_details['gst_added'] == '0' ? "" : ATTR_DISPLAY_NONE_STYLE; ?>>
                             <label for="hsn_and_sac_code_id" class="form-label d-block"><?php echo __('GST HSN Code'); ?> </label>
                             <select id="hsn_and_sac_code_id" name="hsn_and_sac_code_id" class="form-control js-data-example-ajax-hsncodes"
                                 data-tablename="hsn_and_sac_codes" data-fieldsname="code_description"
@@ -1010,17 +1009,6 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         </div>
                         <div class="col-lg-2 text-center"> </div>
                         <div class="form-group col-lg-5">
-                            <!-- <label class="form-label d-block">Bill To Be Raised </label>
-                        <div class="form-radio" style="/*pointer-events: none;*/">
-                        <?php foreach ($billtoberaisedtype as $rbr) { ?>
-                            <div class="radio radio-inline">
-                              <label class="form-label">
-                                <input type="radio" name="bill_to_be_raised" value="<?php echo $rbr['genc_detail_code']; ?>" <?php echo $property_tenant_details['bill_to_be_raised'] == $rbr['genc_detail_code'] || ($rbr['bill_to_be_raised'] == "" && $rbr['genc_detail_code'] == 'M') ? "checked" : ""; ?> >
-                                <i class="helper"></i><?php echo __($rbr['genc_detail_name']); ?>
-                              </label>
-                            </div>
-                        <?php } ?>
-                        </div> -->
                         </div>
 
                         <div class="col-lg-12 mb-3"> </div>
@@ -1045,7 +1033,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                             </div>
                         </div>
                         <div class="col-lg-2 text-center"> </div>
-                        <div class="col-lg-5 " id="checkrentalinvoiceraised_rental_stop_date" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == 'N') ? "" : "style='display:none'"; ?>>
+                        <div class="col-lg-5 " id="checkrentalinvoiceraised_rental_stop_date" <?php echo ($property_tenant_details['rental_invoice_to_be_raised'] == 'N') ? "" : ATTR_DISPLAY_NONE_STYLE; ?>>
                             <label for="rental_invoice_stoped_from" class="form-label d-block"><?php echo __('Rental Invoice Stoped From'); ?> </label>
                             <input type="month" class="form-control" name="rental_invoice_stoped_from"
                                 value="<?php echo $property_tenant_details['rental_invoice_stoped_from'] != "" ? $property_tenant_details['rental_invoice_stoped_from'] : date('Y-m'); ?>"
@@ -1083,7 +1071,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                 </div>
                             </div>
                             <div class="form-group col-lg-8">
-                                <div id="divhideshow_<?php echo $rbt['id']; ?>" <?php echo $rbtyp['status'] == '0' ? "" : "style='display:none'"; ?>>
+                                <div id="divhideshow_<?php echo $rbt['id']; ?>" <?php echo $rbtyp['status'] == '0' ? "" : ATTR_DISPLAY_NONE_STYLE; ?>>
                                     <div class="form-radio">
                                         <div class="radio radio-inline">
                                             <label class="form-label">
@@ -1116,16 +1104,16 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                         <?php } ?>
                                     </div>
                                     <table class="table table-hover m-b-0"
-                                        id="utility_bill_manual_amount_<?php echo $rbt['id']; ?>" <?php echo $rbtyp['utility_bill_auto_and_fix'] == 'M' ? "" : "style='display:none'"; ?>>
+                                        id="utility_bill_manual_amount_<?php echo $rbt['id']; ?>" <?php echo $rbtyp['utility_bill_auto_and_fix'] == 'M' ? "" : ATTR_DISPLAY_NONE_STYLE; ?>>
 
                                         <head>
                                             <tr>
-                                                <th width="5%"></th>
-                                                <th width="40%"><?php echo __('Particulars'); ?></th>
-                                                <th class="text-right" width="20%"><?php echo __('Qty'); ?></th>
-                                                <th class="text-right" width="10%"><?php echo __('Opr'); ?></th>
-                                                <th class="text-right" width="20%"><?php echo __('Rate'); ?></th>
-                                                <th width="10%"><?php echo __('UOM'); ?></th>
+                                                <th style="width: 5%;"></th>
+                                                <th style="width: 40%;"><?php echo __('Particulars'); ?></th>
+                                                <th class="text-right" style="width: 20%;"><?php echo __('Qty'); ?></th>
+                                                <th class="text-right" style="width: 10%;"><?php echo __('Opr'); ?></th>
+                                                <th class="text-right" style="width: 20%;"><?php echo __('Rate'); ?></th>
+                                                <th style="width: 10%;"><?php echo __('UOM'); ?></th>
                                             </tr>
                                         </head>
                                         <?php foreach ($rental_bill_sub_types[$rbt['id']] as $rudetail) { ?>
@@ -1193,7 +1181,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                                     </table>
                                     <input type="number" name="utility_bill_amount[<?php echo $rbt['id']; ?>]"
                                         class="form-control text-right" id="utility_bill_amount_<?php echo $rbt['id']; ?>"
-                                        value="<?php echo $rbtyp['utility_bill_amount']; ?>" <?php echo $rbtyp['utility_bill_auto_and_fix'] == 'F' ? "" : "readonly"; ?>     <?php echo $rbtyp['utility_bill_auto_and_fix'] == 'M' ? "style='display:none'" : ""; ?>>
+                                        value="<?php echo $rbtyp['utility_bill_amount']; ?>" <?php echo $rbtyp['utility_bill_auto_and_fix'] == 'F' ? "" : "readonly"; ?>     <?php echo $rbtyp['utility_bill_auto_and_fix'] == 'M' ? ATTR_DISPLAY_NONE_STYLE : ""; ?>>
                                 </div>
                             </div>
                         <?php  /**if($mc == 1 || $mc == 3 || $mc == 5 || $mc == 7){ echo "<div class='col-lg-2'></div>"; } $mc++;**/
@@ -1354,8 +1342,7 @@ if ($property_tenant_details['parent_id'] != "0" && $property_tenant_details['or
                         <button type="button"
                             class="input-group-text addon-style cursor-pointer float-left btn btn-primary"
                             onclick="formSubmitTenantDetails()"> <?php echo $rid != "" ? "Update" : "Submit"; ?></button>
-                        <!--  <button type="submit" class="input-group-text addon-style cursor-pointer float-left btn btn-primary" name="submittenantdetails"  onclick="submitdetails()"> <?php echo $rid != "" ? "Update" : "Submit"; ?></button> -->
-                    </div>
+                                            </div>
 
                 </div>
             </div>

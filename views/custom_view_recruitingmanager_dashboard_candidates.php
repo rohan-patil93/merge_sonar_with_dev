@@ -108,7 +108,7 @@ function SynchCandidateFolder(){
                 <div class="row ">
                     <div class="col-lg-4">
                         <div class="card prod-p-card card-primary mb-0">
-                            <div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['total_candidate_ids']; ?>')">
+                            <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 card-body" onclick="getCandidateList('<?php echo $candidate_dashboard['total_candidate_ids']; ?>')">
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h7 class="m-b-5 text-white"><?= __('Total Candidate'); ?></h7>
@@ -116,15 +116,15 @@ function SynchCandidateFolder(){
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-money-bill-alt text-c-blue f-18" style="width:30px;height:30px;padding:9px 0;font-size:12px;"></i>
-                                    </div>
-                                </div>
+                                    </button>
+</div>
                             </div>
                         </div>
                         <button type="button" class="btn btn-success btn-sm  mt-2" onclick="AddCandidate()"> <i class="icofont icofont-plus icon-white"></i> <?= __('Candidate'); ?> </button>
                     </div>
                     <div class="col-lg-4">
                         <div class="card prod-p-card card-success mb-0">
-                            <div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['linked_candidate_ids']; ?>')">
+                            <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 card-body" onclick="getCandidateList('<?php echo $candidate_dashboard['linked_candidate_ids']; ?>')">
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h7 class="m-b-5 text-white"><?= __('Linked Job Postings'); ?></h7>
@@ -132,15 +132,15 @@ function SynchCandidateFolder(){
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-money-bill-alt text-c-blue f-18" style="width:30px;height:30px;padding:9px 0;font-size:12px;"></i>
-                                    </div>
-                                </div>
+                                    </button>
+</div>
                             </div>
                         </div>
                         <a href="index.php?option=COM_LIST_CANDIDATES" class="btn btn-warning btn-sm  mt-2"> <i class="ti ti-timer icon-white"></i><?= __('History'); ?></a>
                     </div>
                     <div class="col-lg-4">
                         <div class="card prod-p-card card-danger mb-0">
-                            <div class="card-body" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['unlinked_candidate_ids']; ?>')">
+                            <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 card-body" onclick="getCandidateList('<?php echo $candidate_dashboard['unlinked_candidate_ids']; ?>')">
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h7 class="m-b-5 text-white"><?= __('Un-link Job Posting'); ?></h7>
@@ -148,8 +148,8 @@ function SynchCandidateFolder(){
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-money-bill-alt text-c-blue f-18" style="width:30px;height:30px;padding:9px 0;font-size:12px;"></i>
-                                    </div>
-                                </div>
+                                    </button>
+</div>
                             </div>
                         </div>
                         <button type="button" class="btn btn-success btn-sm mt-2" onclick="SynchCandidateFolder()"> <i class="icofont icofont-plus icon-white"></i> <span id="ai_synch_candidate_folder"><?= __('Synch Resume Fld'); ?></span></button>
@@ -165,9 +165,9 @@ function SynchCandidateFolder(){
                 <div class="card-header-right table-card-header ">
                 <div class="input-group input-icon-right input-group-button datepickershow_hr_detailT" style="">
                       <input class="form-control width1" type="file" id="resumes_files" name="resumes_files[]" accept="image/*" multiple aria-label="<?= htmlspecialchars(__('Resume files'), ENT_QUOTES, 'UTF-8'); ?>">
-                    <span class="input-group-text addon-style" role="button" tabindex="0" aria-label="<?= htmlspecialchars(__('Upload resumes'), ENT_QUOTES, 'UTF-8'); ?>" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="submitResumeFiles()">
+                    <button type="button" class="input-group-text addon-style border-0" aria-label="<?= htmlspecialchars(__('Upload resumes'), ENT_QUOTES, 'UTF-8'); ?>" onclick="submitResumeFiles()">
                         <i class="ti-upload"></i>
-                      </span>
+                      </button>
                 </div>
             </div>
             </div>
@@ -232,48 +232,48 @@ function SynchCandidateFolder(){
             </div>
             <div class="card-body">
                 <div class="row mt-4">
-                    <div class="col-2 text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['total_candidate_ids']; ?>')">
+                    <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 col-2 text-center cursor-pointer" onclick="getCandidateList('<?php echo $candidate_dashboard['total_candidate_ids']; ?>')">
                         <div class="s-caption  text-primary"><i class="ti-list f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['total_candidates']; ?></h5>
                             <p class="m-b-0 f-12"><?= __('Total'); ?></p>
-                        </div>
-                    </div>
-                    <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['screening_started_ids']; ?>')">
+                        </button>
+</div>
+                    <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 col-2 b-l-default text-center cursor-pointer" onclick="getCandidateList('<?php echo $candidate_dashboard['screening_started_ids']; ?>')">
                         <div class="s-caption  text-danger"><i class="ti-time f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['screening_started']; ?></h5>
                             <p class="m-b-0 f-12"><?= __('Screening Started'); ?></p>
-                        </div>
-                    </div>
-                    <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['screening_not_started_ids']; ?>')">
+                        </button>
+</div>
+                    <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 col-2 b-l-default text-center cursor-pointer" onclick="getCandidateList('<?php echo $candidate_dashboard['screening_not_started_ids']; ?>')">
                         <div class="s-caption  text-info"><i class="ti-timer f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['screening_not_started']; ?></h5>
                             <p class="m-b-0  f-12"><?= __('Screening Not Started'); ?></p>
-                        </div>
-                    </div>
-                    <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['proceed_candidate_ids']; ?>')">
+                        </button>
+</div>
+                    <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 col-2 b-l-default text-center cursor-pointer" onclick="getCandidateList('<?php echo $candidate_dashboard['proceed_candidate_ids']; ?>')">
                         <div class="s-caption  text-info"><i class="ti-write f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['proceed_count']; ?></h5>
                             <p class="m-b-0 f-12"><?= __('AI Approved'); ?></p>
-                        </div>
-                    </div>
-                    <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['reject_candidate_ids']; ?>')">
+                        </button>
+</div>
+                    <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 col-2 b-l-default text-center cursor-pointer" onclick="getCandidateList('<?php echo $candidate_dashboard['reject_candidate_ids']; ?>')">
                         <div class="s-caption  text-success"><i class="ti-check-box f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['reject_count']; ?></h5>
                             <p class="m-b-0 f-12"><?= __('AI Rejected'); ?></p>
-                        </div>
-                    </div>
-                     <div class="col-2 b-l-default text-center cursor-pointer" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="getCandidateList('<?php echo $candidate_dashboard['hold_candidate_ids']; ?>')">
+                        </button>
+</div>
+                     <button type="button" class="btn text-left bg-transparent border-0 p-0 w-100 col-2 b-l-default text-center cursor-pointer" onclick="getCandidateList('<?php echo $candidate_dashboard['hold_candidate_ids']; ?>')">
                         <div class="s-caption  text-success"><i class="ti-check-box f-20"></i></div>
                         <div class="s-cont d-inline-block">
                             <h5 class="f-w-700 m-b-0"><?php echo $candidate_dashboard['hold_count']; ?></h5>
                             <p class="m-b-0 f-12"><?= __('Decision Pending'); ?></p>
-                        </div>
-                    </div>
+                        </button>
+</div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <?php
 defined('PARAM_YEAR') || define('PARAM_YEAR', '&year=');
-defined('LAC_LABEL_SUFFIX') || define('LAC_LABEL_SUFFIX', LAC_LABEL_SUFFIX);
+defined('LAC_LABEL_SUFFIX') || define('LAC_LABEL_SUFFIX', " L'");
 if($_GET['PAY_MONTH']==''){ $_GET['PAY_MONTH'] = date('m');
 }
 if($_GET['PAY_YEAR']==''){ $_GET['PAY_YEAR'] = date('Y');
@@ -497,7 +497,6 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
                                                 </div>
                                                 <div class="col p-l-0">
                                                     <h6 class="m-b-5"><?= __('Utilization Vs Approved'); ?></h6>
-                                                <!--    <h6 class="m-b-0 text-c-yellow"> <?php echo customeummarmonyformate($ttcount/100000); ?> L  Vs <?php echo customeummarmonyformate($apv_billable_amount/100000); ?> L</h6> -->
                                                 <h6 class="m-b-0 text-c-yellow">
                  <button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Utilization',<?php echo "'".customeummarmonyformate($ttcount/100000).LAC_LABEL_SUFFIX; ?>,'ut_list')" >
                 <?php echo customeummarmonyformate($ttcount/100000); ?> L </button> <?= __('Vs'); ?><button type="button" class="p-0 border-0 bg-transparent align-baseline" style="font:inherit;color:inherit;cursor:pointer;" onclick="cvppopup('Approved',<?php echo "'".customeummarmonyformate($apv_billable_amount/100000).LAC_LABEL_SUFFIX; ?>,'ut_list')" >   <?php echo $apv_billable_amount!="0"?customeummarmonyformate($apv_billable_amount/100000):0; ?> L </button></h6>
@@ -607,12 +606,9 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
                             <div class="radio-inline float-right infisuite_tab">
                                 <?php $billist =""; if($_GET['PAY_YEAR']!=""){ $billist = "&PAY_YEAR=".$_GET['PAY_YEAR']."&PAY_MONTH=".$_GET['PAY_MONTH'];
                                 } ?>
-                                <span class="radio nav-item d-inline-block" style="margin-bottom:5px" name="all_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?php if($gtnvk==2){ echo 'active';
-                                } ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo __("All"); ?></a> </span>
-                                <span class="radio nav-item d-inline-block" style="margin-bottom:5px" name="billale_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-warning waves-effect waves-light <?php if($gtnvk==1){ echo 'active';
-                                } ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Billable"); ?></a> </span>
-                                <span class="radio nav-item d-inline-block" style="margin-bottom:5px" name="nonbillable_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?php if($gtnvk==0){ echo 'active';
-                                } ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Non-billable"); ?></a> </span>
+                                <span class="radio nav-item d-inline-block" style="margin-bottom:5px" name="all_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist; ?>" class="btn btn-info waves-effect waves-light  <?= ($gtnvk == 2) ? 'active' : ''; ?>"><?php if($gtnvk==2){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?> <?php echo __("All"); ?></a> </span>
+                                <span class="radio nav-item d-inline-block" style="margin-bottom:5px" name="billale_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=1"; ?>" class="btn btn-warning waves-effect waves-light <?= ($gtnvk == 1) ? 'active' : ''; ?>"><?php if($gtnvk==1){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Billable"); ?></a> </span>
+                                <span class="radio nav-item d-inline-block" style="margin-bottom:5px" name="nonbillable_tab"><a href="index.php?option=COM_BULK_HR_PROJECT_TIMESHEET<?php echo $billist."&TNVAL=0"; ?>" class="btn btn-danger waves-effect waves-light <?= ($gtnvk == 0) ? 'active' : ''; ?>"><?php if($gtnvk==0){ ?> <i class="icofont icofont-check-circled"></i> <?php } ?><?php echo __("Non-billable"); ?></a> </span>
                             </div>
                         </div>
                     </div>
@@ -626,7 +622,7 @@ $total_vs_p = (($lmonth['billable_amount'] ?? 0) + ($lmonth['nonbillable_amount'
                                 <?php if($apv_count>0){ ?>
                     <div class="col-lg-12">
                     <div class="col-lg-2 float-right">
-                        <button class="btn btn-primary font-size-sm float-right" onclick="projecttimesheetsubmittofinace()" ><?php echo $statu_progress['103']['name']; ?></button>
+                        <button type="button" class="btn btn-primary font-size-sm float-right" onclick="projecttimesheetsubmittofinace()" ><?php echo $statu_progress['103']['name']; ?></button>
                     </div> </div>
                     <?php } ?>
                                 <div class="table-responsive">

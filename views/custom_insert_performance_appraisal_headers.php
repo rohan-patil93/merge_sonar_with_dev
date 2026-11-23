@@ -234,12 +234,12 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                 </div>
                             </a>
                             <div class="accordion-desc">
-                                <p class="dynamic_page_Y_<?php echo $paheaders['id']; ?>" <?php if($paheaders['dynamic_page']=='0'){
-}else{ echo ATTR_DISPLAY_NONE_STYLE;
-} ?>><?php echo __('Page URL'); ?></p>
-                                <div class="table-responsive dynamic_page_N_<?php echo $paheaders['id']; ?>" <?php if($paheaders['dynamic_page']=='1'){
-}else{ echo ATTR_DISPLAY_NONE_STYLE;
-} ?>>
+                                <p class="dynamic_page_Y_<?php echo $paheaders['id']; ?>" <?php if($paheaders['dynamic_page']!='0'){
+                                    echo ATTR_DISPLAY_NONE_STYLE;
+                                } ?>><?php echo __('Page URL'); ?></p>
+                                <div class="table-responsive dynamic_page_N_<?php echo $paheaders['id']; ?>" <?php if($paheaders['dynamic_page']!='1'){
+                                    echo ATTR_DISPLAY_NONE_STYLE;
+                                } ?>>
                                         <table class="table table-bordered" id="dinamictable_<?php echo $paheaders['id']; ?>">
                                             <thead>
                                                 <tr>
@@ -250,9 +250,9 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                                     <?php $fildcnt++;
 }  ?>
 
-                                                        <th scope="col" class="addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders[KEY_SUB_HEADER_ADDMORE]=='0'){
-}else{ echo ATTR_DISPLAY_NONE_STYLE;
-} ?>><?php echo __('Action'); ?></th>
+                                                        <th scope="col" class="addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders[KEY_SUB_HEADER_ADDMORE]!='0'){
+                                    echo ATTR_DISPLAY_NONE_STYLE;
+                                } ?>><?php echo __('Action'); ?></th>
 
                                                 </tr>
                                             </thead>
@@ -281,9 +281,9 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                                         <?php  $fieldcnt++;
 } ?>
 
-                                                            <td class="addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders[KEY_SUB_HEADER_ADDMORE]=='0'){
-}else{ echo ATTR_DISPLAY_NONE_STYLE;
-} ?>>
+                                                            <td class="addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders[KEY_SUB_HEADER_ADDMORE]!='0'){
+                                    echo ATTR_DISPLAY_NONE_STYLE;
+                                } ?>>
                                                                 <button type="button" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger btn-primary" >
                                                                     <i class="fa fa-trash"></i><?php echo __('Delete'); ?>
                                                                 </button>
@@ -295,9 +295,9 @@ if(isset($_POST['performanace_appraiser_header_sbt'])){
                                                 </tbody>
                                             </table>
 
-                                                <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders[KEY_SUB_HEADER_ADDMORE]=='0'){
-}else{ echo ATTR_DISPLAY_NONE_STYLE;
-} ?>>
+                                                <button type="button" class="btn btn-sm font-weight-bolder btn-light-primary btn-primary addemorebutton_<?php echo $paheaders['id']; ?>" <?php if($paheaders[KEY_SUB_HEADER_ADDMORE]!='0'){
+                                    echo ATTR_DISPLAY_NONE_STYLE;
+                                } ?>>
                                                     <i class="fa fa-plus"></i><?php echo __('Add'); ?>
                                                 </button>
 

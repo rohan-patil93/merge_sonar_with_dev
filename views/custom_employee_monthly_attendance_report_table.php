@@ -1,4 +1,5 @@
 <?php
+defined('TIME_ZERO') || define('TIME_ZERO', '00:00:00');
 if($_POST['page_ajax']=='Y'){
 
 
@@ -124,7 +125,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                 <span class="text-muted m-l-5">
                     <i class="fa fa-clock-o"></i>
                     <?= $shift_info['shift_name'] ?? 'N/A'; ?>
-                    (<?= $shift_info['clock_in'] ?? '00:00:00'; ?> - <?= $shift_info['clock_out'] ?? '00:00:00'; ?>)
+                    (<?= $shift_info['clock_in'] ?? TIME_ZERO; ?> - <?= $shift_info['clock_out'] ?? TIME_ZERO; ?>)
                 </span>
             <?php endif; ?>
             <span class=" m-l-5"><?= __('Designation') ?> : </span>
@@ -157,7 +158,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" width="5%"><?= __('S.No') ?></th>
+                            <th scope="col" style="width: 5%;"><?= __('S.No') ?></th>
                             <th scope="col"><?= __('Attendance Date') ?></th>
                             <th scope="col"><?= __('Clock In') ?></th>
                             <th scope="col"><?= __('Clock Out') ?></th>
@@ -191,7 +192,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                         if (isset($attendance_map[$date])) {
                             $clock_in  = $attendance_map[$date]['clock_in'] ?? '-';
                             $clock_out = $attendance_map[$date]['clock_out'] ?? '-';
-                            if($clock_out=='00:00:00'){ $clock_out = '-';
+                            if($clock_out==TIME_ZERO){ $clock_out = '-';
                             }
                             $timesheet_id = $attendance_map[$date]['timesheet_id'];
                             $employee_id = $attendance_map[$date]['employee_id'];
@@ -251,7 +252,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
                                 $show = 'A';
                             }
                         }
-                        $is_editable = in_array($status, $edit_keys) || strpos($status, 'Leave') != false;
+                        $is_editable = in_array($status, $edit_keys) || str_contains((string)$status, 'Leave');
                          $current_key = '';
                         if (!empty($attendance_map[$date]['leave_type_id'])) {
                             // If leave_type_id exists (4, 6, 9), use it
@@ -357,7 +358,7 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
     </div>
 </div>
 <div class="modal fade" id="timesheet_edit_modal" tabindex="-1" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content " id="workentrypop">
 
           </div>

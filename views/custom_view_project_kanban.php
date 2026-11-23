@@ -229,12 +229,12 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                             </div>
                         </div>
                         <div class="m-l-10 d-inline-block position-relative mob-p-re">
-                            <div onclick="filterbtn()" id="filterbtn" class="filterbtn text-start w-100" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><span class="ti-filter m-r-10"></span> <?= __('Filter'); ?></div>
+                            <button type="button" onclick="filterbtn()" id="filterbtn" class="btn text-start w-100 border-0 bg-transparent p-0 filterbtn"><span class="ti-filter m-r-10"></span> <?= __('Filter'); ?></button>
                             <div id="filter_dropdown" class="filter_dropdown p-3 custom-scroll" style="max-height: 500px;">
                                 <div class="">
                                     <div class="card-header p-1 mb-4">
                                         <h5><?= __('Filter'); ?></h5>
-                                        <div class="card-header-right filter-close" onclick="filterclose()" style="top:0;cursor:pointer;" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                        <div class="card-header-right filter-close" onclick="filterclose()" style="top:0;cursor:pointer;">
                                             <span class="ti-close"></span>
                                         </div>
                                     </div>
@@ -373,7 +373,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                                 $counttask[$pts['assigen_id']][$progress['status']] = $counttask[$pts['assigen_id']][$progress['status']]+1;
                                 $counttask[$pts['assigen_id']]['total'] = $counttask[$pts['assigen_id']]['total']+1;
                             ?>
-                                <div class="todo p-2" id="tsakid_<?php echo $pts['id']; ?>" draggable="true"   onclick="taskdetailspopup(<?php echo $pts['id']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                <div class="todo p-2" id="tsakid_<?php echo $pts['id']; ?>" draggable="true"   onclick="taskdetailspopup(<?php echo $pts['id']; ?>)">
                                     <i class="ti-pencil float-end f-12"></i>
                                     <div class="col-lg-12" id="clc_<?php echo $cl; ?>" >
                                         <?php foreach((array)$colors as $color){ ?>
@@ -455,7 +455,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                                     <button class="btn btn-primary" type="button" onclick="submitaddcard(<?php echo $progress['status'].",".$project_id; ?>)"> <?= __('Save'); ?> </button>
                                 </div>
                             </div>
-                            <div class="text-primary p-2 float-right" onclick="addcard(<?php echo $progress['status']; ?>)" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                            <div class="text-primary p-2 float-right" onclick="addcard(<?php echo $progress['status']; ?>)">
                                 <i class="ti-plus "></i> &nbsp; <?= __('Add a Card'); ?>
                             </div>
                         </div>
@@ -465,7 +465,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
             <div class="box">
                <div class="card p-2">
                 <div class="todo pt-3 pb-3 mb-3  m-l-0 col-lg-12 row" id="addlist" style="display: none;">
-                    <div class="close mb-1" onclick="closelist()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button"><i class="ti-close float-end"> </i></div>
+                    <button type="button" class="close mb-1 btn border-0 bg-transparent p-0" onclick="closelist()" aria-label="Close"><i class="ti-close float-end"> </i></button>
                     <div class="col-lg-12">
                         <input aria-label="<?= htmlspecialchars(__('Enter List Name'), ENT_QUOTES, 'UTF-8'); ?>" class="form-control" id="listname" placeholder="<?= htmlspecialchars(__('Enter List Name'), ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
@@ -481,7 +481,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                         <button class="btn btn-primary cursor-pointer" type="button" onclick="submitaddlist(<?php echo $project_id; ?>)"> <?= __('Save'); ?> </button>
                     </div>
                 </div>
-                <div class="text-primary p-2 float-right" onclick="addlist()" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                <div class="text-primary p-2 float-right" onclick="addlist()">
                    <i class="ti-plus "></i> &nbsp; <?= __('Add another list'); ?>
                </div>
             </div>
@@ -499,7 +499,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                     ?>
                         <h6 class="f-14 f-w-600"><?php echo $progress['name']; ?></h6>
                         <div class="progress mb-3 progress-xs">
-                            <div class="progress-bar progress-bar-primary" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo "Number of Task : ".$counttask['total'][$progress['status']]; ?>"  style="background-color: <?php echo $_SESSION['status'][$progress['status']]['color']; ?>; width: <?php echo $sval; ?>%;" role="progressbar"  aria-valuenow="<?php echo $sval; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-primary" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo "Number of Task : ".$counttask['total'][$progress['status']]; ?>"  style="background-color: <?php echo $_SESSION['status'][$progress['status']]['color']; ?>; width: <?php echo $sval; ?>%;"></div>
                         </div>
                     <?php } ?>
                     <?php } ?>
@@ -515,7 +515,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                         <?php foreach((array)$counttask as $emp_key => $employee){
                             if($emp_key != 'total'){ ?>
                                 <div class="mt-3">
-                                    <div class=" row col-lg-12" style="cursor: pointer;" onclick="shwgraph('<?php echo $emp_key; ?>')" tabindex="0" onkeypress="if(event.key==='Enter'||event.key===' '){this.click();}" role="button">
+                                    <div class=" row col-lg-12" style="cursor: pointer;" onclick="shwgraph('<?php echo $emp_key; ?>')">
                                         <input type="hidden" name="" id="shoegraphval_<?php echo $emp_key; ?>" value="0">
                                         <div class="col-lg-3">
                                             <span class="user-name ">
@@ -531,7 +531,7 @@ $change_words = array(0 => '', 1 => 'One', 2 => 'Two',
                                             ?>
                                             <h6 class="f-14 f-w-600"><?php echo $progress['name']; ?></h6>
                                             <div class="progress mb-3 progress-xs">
-                                                <div class="progress-bar progress-bar-primary" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo "Number of Task : ".$counttask[$emp_key][$progress['status']]; ?>" style="background-color: <?php echo $_SESSION['status'][$progress['status']]['color']; ?>; width: <?php echo $sval; ?>%;" role="progressbar"  aria-valuenow="<?php echo $sval; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar progress-bar-primary" data-bs-toggle="tooltip" data-placement="bottom" title="<?php echo "Number of Task : ".$counttask[$emp_key][$progress['status']]; ?>" style="background-color: <?php echo $_SESSION['status'][$progress['status']]['color']; ?>; width: <?php echo $sval; ?>%;"></div>
                                             </div>
                                         <?php } ?>
                                     </div>

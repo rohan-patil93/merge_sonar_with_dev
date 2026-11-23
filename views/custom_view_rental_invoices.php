@@ -273,9 +273,8 @@ function emptyCheck($valu){
                     </table>
                 </div>
             </div>
-            <table role="presentation" style="width:100%;margin-top: 5px;">
-                <tr>
-                    <td class="" style="width:50%;">
+            <div style="display: flex; width: 100%; margin-top: 5px;">
+                <div style="width: 50%;">
                         <div class="" style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
                             <span style="color: #333333;font-size: 12px;font-weight: 500;"><?= __('Billed to'); ?></span>
                             <p style="font-size: 12px;margin:5px 0 0 0;"><?php echo $transaction['party_name']; ?></p>
@@ -291,8 +290,8 @@ function emptyCheck($valu){
                                 </tr>
                             </table>
                         </div>
-                    </td>
-                    <td class="" style="width:50%;">
+                    </div>
+                    <div style="width: 50%;">
                         <div class="" style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
                             <span style="color: #333333;font-size: 12px;font-weight: 500;"><?= __('Shipped to'); ?></span>
                             <p style="font-size: 12px;margin:5px 0 0 0;"><?php echo $transaction['party_name']; ?></p>
@@ -308,9 +307,8 @@ function emptyCheck($valu){
                                 </tr>
                             </table>
                         </div>
-                    </td>
-                <tr>
-            </table>
+                    </div>
+            </div>
 
 
             <table style="width:99%;margin:10px 0 0 0;">
@@ -345,7 +343,7 @@ function emptyCheck($valu){
                             </tr>
                             <tr style="border: 1px solid #cccccc;">
                                 <td colspan="3">
-                                    <table role="presentation" style="width:65%;margin:10px  10px 10px;">
+                                    <table style="width:65%;margin:10px  10px 10px;">
                                         <?php foreach($valu['CHILD'] as $ta){ ?>
                                         <tr style="border: 1px solid #cccccc;">
                                             <td style="padding:5px;font-size: 12px; word-break: break-word; white-space: initial;     font-weight: 100;"><?php print_r($perentchieldary); echo $ta['item_name']; ?></td>
@@ -392,9 +390,9 @@ function emptyCheck($valu){
             </table>
 
 
-            <table role="presentation" style="width:99%;margin-top:5px;">
-                <tr>
-                    <td style="width:60%;vertical-align: top;">
+            <div style="width: 99%; margin-top: 5px;">
+                <div style="display: flex; width: 100%;">
+                    <div style="width: 60%; vertical-align: top;">
                         <div class="" style="background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right:10px;">
                             <h3 style="font-size: 12px;color:#333333;margin: 0;"><?= __('Bank Detail'); ?></h3>
                             <table style="width: 100%; margin:10px 0 0 0;">
@@ -423,8 +421,8 @@ function emptyCheck($valu){
                                 </tr>
                             </table>
                         </div>
-                    </td>
-                    <td style="width:40%;vertical-align: top;">
+                    </div>
+                    <div style="width: 40%; vertical-align: top;">
                         <table style="width: 100%; margin:10px 0 0 0;">
                             <?php ?>
                             <tr>
@@ -479,32 +477,32 @@ function emptyCheck($valu){
                             <span style="font-size: 12px; color: #333333;font-weight: 600;"><?= __('Invoice total in words'); ?></span>
                             <p style="font-size: 12px; color: #333333; margin-top: 10px;white-space:initial;"><?php numberToWordFormate(round($transaction['total_amount']));?> </p>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:60%;vertical-align: top;">
+                    </div>
+                </div>
+                <div style="display: flex; width: 100%;">
+                    <div style="width: 60%; vertical-align: top;">
                         <div class="" style="display: block; box-sizing:border-box;background:#eeeeee;border:1px solid #cccccc;border-radius: 10px;padding: 10px; margin-right: 10px; margin-top:10px;">
                                 <h3 style="font-size: 12px;color:#333333;margin: 0;font-weight:bold;"><?= __('Additional Notes'); ?></h3>
                                 <p style="font-size:12px;color:#333333;"><?php echo emptyCheck($transaction['printing_notes']); ?></p>
                         </div>
-                    </td>
-                    <td style="width:40%;">
+                    </div>
+                    <div style="width: 40%;">
                         <div style="vertical-align: top;">
                             <span style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500;"><?= __('For'); ?> <?php echo $owner_additional_details['owner_company_name']!=""?ucwords($owner_additional_details['owner_company_name']):ucwords($config['name']); ?></span>
                             <p style="background: #eeeeee;height:45px;margin-bottom: 0px;margin-top: 0;"></p>
                             <span style="font-size: 12px;color:#333333;display: block;text-align: center;font-weight: 500;"><?= __('Authorised Signature'); ?></span>
                         </div>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <?php if($callapi !='Y'){ ?>
     </div>
     <div class="invoice-btn-section clearfix d-print-none">
-        <button class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printDiv');">
+        <button type="button" class="btn waves-effect waves-light btn-grd-success" onclick="printDiv('printDiv');">
             <i class="fa fa-print"></i> &nbsp <?= __('Print Invoice'); ?>
         </button>
-        <button class="btn waves-effect waves-light btn-grd-info"  onclick="convertHTMLToPDF();">
+        <button type="button" class="btn waves-effect waves-light btn-grd-info"  onclick="convertHTMLToPDF();">
             <i class="fa fa-download"></i> &nbsp <?= __('Download Invoice'); ?>
         </button>
     </div>

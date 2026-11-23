@@ -387,21 +387,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
         });
     }
 </script>
-<!-- <ul class="nav md-tabs infisuite_tab mb-3" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link f-w-600 f-12 active" data-bs-toggle="tab" href="#itemcategory" role="tab" aria-selected="true"><?= __('Leads'); ?><label class="form-label label label-xs label-success m-l-10"><?php echo count((array)$crm_leadslist); ?></label></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#itemlocation" role="tab" aria-selected="true"><?= __('Deals'); ?><label class="form-label label label-xs label-success m-l-10">0</label></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true"><?= __('Contact'); ?><label class="form-label label label-xs label-success m-l-10">0</label></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link f-w-600 f-12" data-bs-toggle="tab" href="#costcenter" role="tab" aria-selected="true"><?= __('Companies'); ?><label class="form-label label label-xs label-success m-l-10">0</label></a>
-    </li>
-</ul>
- -->
+
 
 <?php
 
@@ -433,28 +419,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                       <img src="../uploads/all/<?php echo $_SESSION['employee']['gender'].".png"; ?>" class="img-120 " alt="" data-onerror-src="uploads/all/no-image.jpg"/>
                     </div>
                   <?php } ?>
-                    <!-- <div class="d-flex align-items-center w-100px w-sm-120px flex-column mt-3 ">
-                        <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                          <span class="f-12 f-w-600"><?= __('Leads'); ?></span>
-                          <span class="f-12 f-w-600"><?php echo $totaltaskper; ?>%</span>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:<?php echo $totaltaskper; ?>%;" aria-valuenow=" " aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center w-100px w-sm-120px flex-column mt-3 ">
-                        <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                          <span class="f-12 f-w-600"><?= __('Contacts'); ?></span>
-                          <span class="f-12 f-w-600"><?php echo $totaltaskper; ?>%</span>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:<?php echo $totaltaskper; ?>%;" aria-valuenow=" " aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                    </div> -->
+                    
                 </div>
                 <div class="flex-grow-1">
                     <div class="d-flex justify-content-between flex-wrap mt-1">
@@ -566,22 +531,13 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 <a class="nav-link f-w-600 f-12 active_crm_home active active_all_class" data-bs-toggle="tab" href="#home-tab" role="tab" aria-selected="true" onclick="viewAllListPage('home')"><?= __('Home'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active_crm_leads active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_leads')"><?= __('Leads'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
+                <a class="nav-link f-w-600 f-12 active_crm_leads active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_leads')"><?= __('Leads'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active_crm_contacts active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_contacts')"><?= __('Contacts'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
+                <a class="nav-link f-w-600 f-12 active_crm_companies active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_companies')"><?= __('Companies'); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active_crm_companies active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_companies')"><?= __('Companies'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active_crm_deals active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_deals')"><?= __('Deals'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active_crm_campaigns active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_campaigns')"> <?= __('Campaign'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link f-w-600 f-12 active_crm_projects active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_projects')"><?= __('Projects'); ?><!-- <label class="form-label label label-xs label-success m-l-10"><?php ?></label> --></a>
+                <a class="nav-link f-w-600 f-12 active_crm_campaigns active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_campaigns')"> <?= __('Campaign'); ?></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link f-w-600 f-12 active_crm_feasibilities active_all_class" data-bs-toggle="tab" href="#lead-tab" role="tab" aria-selected="true" onclick="getCRMListDashboard('crm_feasibilities')"><?= __('Feasibility'); ?></a>
@@ -600,7 +556,7 @@ foreach ($feasibility_requirements_expiry_days as $item) {
                 <input aria-label="<?= htmlspecialchars(__('To date'), ENT_QUOTES, 'UTF-8'); ?>" type="text" class="form-control filterdynamic datepicker" name="to_date" id="to_date" value="<?php echo $to_date; ?>">
             </div>
             <div class="col-lg-2">
-                <button class="btn btn-primary mt-4 desktop-view" onclick="getCRMListDashboard()"><span class="ti-search mt-2"></span></button>
+                <button type="button" class="btn btn-primary mt-4 desktop-view" onclick="getCRMListDashboard()"><span class="ti-search mt-2"></span></button>
             </div>
         </div>
         <div class="row mb-2 datepickerselection" style="display: none">

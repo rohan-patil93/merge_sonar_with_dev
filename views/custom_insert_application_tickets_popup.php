@@ -77,8 +77,8 @@ $status = array("0" => "In Progress", "1" => "In Working", "40" => "Cancel", "19
                             <td class="p-2"><?php echo $at['transaction_number']; ?></td>
                             <td class="w-b-w-s p-2"><?php echo $at['issue_name']; ?></td>
                             <td class="p-2"><?php echo fromDate($at['request_datetime']); ?></td>
-                            <!-- <td class="p-2"><?php echo $at['response_datetime'] != "" ? fromDate($at['response_datetime']) : "-"; ?></td> -->
-                            <!-- <td class="p-2"><?php echo $at['completion_datetime'] != "" ? fromDate($at['completion_datetime']) : "-"; ?></td> -->
+                            
+                            
                             <td class="p-2 text-center">
                                 <?php if ($at['attachment'] != "") { ?>
                                     <button type="button" class="border-0 bg-transparent p-0" style="color:inherit;cursor:pointer;"
@@ -94,19 +94,7 @@ $status = array("0" => "In Progress", "1" => "In Working", "40" => "Cancel", "19
                             <td class="p-2">
                                 <span class="label label-md label-primary"><?php echo $status[$at['current_status']]; ?></span>
                             </td>
-                            <!-- <td class="p-2 text-center">
-                    <div class="dropdown-primary dropdown cursor-pointer">
-                        <span class="" id="dropdown-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="ti-settings"></i></span>
-                        <div class="dropdown-menu" aria-labelledby="dropdown-2" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                            <?php if ($at['current_status'] == '0') { ?>
-                            <a class="dropdown-item waves-light waves-effect"  onclick="updateApplicationTickets('<?php echo $at['id']; ?>','1')">Start To Wrok</a>
-                        <?php } else { ?>
-
-                        <?php } ?>
-                            <a class="dropdown-item waves-light waves-effect"  onclick="updateApplicationTickets('<?php echo $at['id']; ?>','<?php echo ST_CANCEL; ?>')">Cancel</a>
-                        </div>
-                    </div>
-                </td> -->
+                            
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -147,7 +135,7 @@ $status = array("0" => "In Progress", "1" => "In Working", "40" => "Cancel", "19
                             <td class="p-2"><?php echo $at['transaction_number']; ?></td>
                             <td class="w-b-w-s p-2"><?php echo $at['issue_name']; ?></td>
                             <td class="p-2"><?php echo fromDate($at['request_datetime']); ?></td>
-                            <!-- <td class="p-2"><?php echo $at['completion_datetime'] != "" ? fromDate($at['completion_datetime']) : "-"; ?></td> -->
+                            
                             <td class="p-2 text-center">
                                 <?php if ($at['attachment'] != "") { ?>
                                     <button type="button" class="border-0 bg-transparent p-0" style="color:inherit;cursor:pointer;"

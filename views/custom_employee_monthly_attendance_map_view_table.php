@@ -71,7 +71,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" width="5%"><?= __('S.No') ?></th>
+                            <th scope="col" style="width: 5%;"><?= __('S.No') ?></th>
                             <th scope="col"><?= __('Attendance Date') ?></th>
                             <th scope="col"><?= __('Clock In') ?></th>
                             <th scope="col"><?= __('Clock Out') ?></th>
@@ -160,7 +160,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                                 $show = 'A';
                             }
                         }
-                        $is_editable = in_array($status, $edit_keys) || strpos($status, 'Leave') != false;
+                        $is_editable = in_array($status, $edit_keys) || str_contains((string)$status, 'Leave');
                         ?>
 
                         <?php
@@ -172,8 +172,6 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
                             <td><?= date('d-m-Y', strtotime($date)); ?></td>
                             <td><?= $clock_in; ?></td>
                             <td><?= $clock_out; ?></td>
-                            <?php /* ?> <td > <?php echo isset($calculated_hours[$date]) ? $calculated_hours[$date]['ot_string'].' Hrs' : '-'; ?> </td>
-                            <td> <?php echo isset($calculated_hours[$date]) ? $calculated_hours[$date]['ut_string'].' Hrs' : '-'; ?> </td> <?php */ ?>
                             <td><?= $show; ?>
 
                             </td>
@@ -203,7 +201,7 @@ $only_month = str_pad($only_month, 2, '0', STR_PAD_LEFT);
     </div>
 </div>
 <div class="modal fade" id="attendanceLocationModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"><?= __('Attendance Location Map') ?></h5>

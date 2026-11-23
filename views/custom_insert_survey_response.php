@@ -331,7 +331,7 @@ function submitsurvey(){
                   <a href="#top" id="previous_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-left"><i class="fas fa-chevron-left"> </i><?php echo __('Previous'); ?> </a>
                 <?php } ?>
 
-                <!-- <a href="#" id="clear" onclick="callclear('<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn btn-light-success font-weight-bold float-left">Clear Response</a> -->
+                
                 <?php if ($questionid!=1 && $total_q!=$questionid){ ?>
                   <a href="#top" id="previous_nav_<?php echo $questionid;?>" onclick="callnext('<?php echo $questionid-1;?>','<?php echo $questionid;?>','<?php echo $display_questions[$questionid]['options_display_type']; ?>')" class="btn-previous btn btn-success font-weight-bold float-right"><i class="fas fa-chevron-left"> </i><?php echo __('Previous'); ?> </a>
                 <?php } ?>
